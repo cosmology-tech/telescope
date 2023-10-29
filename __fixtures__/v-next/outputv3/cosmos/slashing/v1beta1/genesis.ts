@@ -36,10 +36,6 @@ export interface GenesisStateAmino {
    */
   missed_blocks: ValidatorMissedBlocksAmino[];
 }
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the slashing module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -63,10 +59,6 @@ export interface SigningInfoAmino {
   address: string;
   /** validator_signing_info represents the signing info of this validator. */
   validator_signing_info?: ValidatorSigningInfoAmino;
-}
-export interface SigningInfoAminoMsg {
-  type: "cosmos-sdk/SigningInfo";
-  value: SigningInfoAmino;
 }
 /** SigningInfo stores validator signing info of corresponding address. */
 export interface SigningInfoSDKType {
@@ -97,10 +89,6 @@ export interface ValidatorMissedBlocksAmino {
   /** missed_blocks is an array of missed blocks by the validator. */
   missed_blocks: MissedBlockAmino[];
 }
-export interface ValidatorMissedBlocksAminoMsg {
-  type: "cosmos-sdk/ValidatorMissedBlocks";
-  value: ValidatorMissedBlocksAmino;
-}
 /**
  * ValidatorMissedBlocks contains array of missed blocks of corresponding
  * address.
@@ -126,10 +114,6 @@ export interface MissedBlockAmino {
   index: string;
   /** missed is the missed status. */
   missed: boolean;
-}
-export interface MissedBlockAminoMsg {
-  type: "cosmos-sdk/MissedBlock";
-  value: MissedBlockAmino;
 }
 /** MissedBlock contains height and missed status as boolean. */
 export interface MissedBlockSDKType {
@@ -256,15 +240,6 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
-  },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
   },
@@ -359,15 +334,6 @@ export const SigningInfo = {
     obj.address = message.address;
     obj.validator_signing_info = message.validatorSigningInfo ? ValidatorSigningInfo.toAmino(message.validatorSigningInfo) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: SigningInfoAminoMsg): SigningInfo {
-    return SigningInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: SigningInfo): SigningInfoAminoMsg {
-    return {
-      type: "cosmos-sdk/SigningInfo",
-      value: SigningInfo.toAmino(message)
-    };
   },
   fromProtoMsg(message: SigningInfoProtoMsg): SigningInfo {
     return SigningInfo.decode(message.value);
@@ -474,15 +440,6 @@ export const ValidatorMissedBlocks = {
     }
     return obj;
   },
-  fromAminoMsg(object: ValidatorMissedBlocksAminoMsg): ValidatorMissedBlocks {
-    return ValidatorMissedBlocks.fromAmino(object.value);
-  },
-  toAminoMsg(message: ValidatorMissedBlocks): ValidatorMissedBlocksAminoMsg {
-    return {
-      type: "cosmos-sdk/ValidatorMissedBlocks",
-      value: ValidatorMissedBlocks.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ValidatorMissedBlocksProtoMsg): ValidatorMissedBlocks {
     return ValidatorMissedBlocks.decode(message.value);
   },
@@ -577,15 +534,6 @@ export const MissedBlock = {
     obj.index = message.index ? message.index.toString() : undefined;
     obj.missed = message.missed;
     return obj;
-  },
-  fromAminoMsg(object: MissedBlockAminoMsg): MissedBlock {
-    return MissedBlock.fromAmino(object.value);
-  },
-  toAminoMsg(message: MissedBlock): MissedBlockAminoMsg {
-    return {
-      type: "cosmos-sdk/MissedBlock",
-      value: MissedBlock.toAmino(message)
-    };
   },
   fromProtoMsg(message: MissedBlockProtoMsg): MissedBlock {
     return MissedBlock.decode(message.value);

@@ -11,10 +11,6 @@ export interface NodeProtoMsg {
 export interface NodeAmino {
   children: ChildAmino[];
 }
-export interface NodeAminoMsg {
-  type: "osmosis/store/node";
-  value: NodeAmino;
-}
 export interface NodeSDKType {
   children: ChildSDKType[];
 }
@@ -30,10 +26,6 @@ export interface ChildAmino {
   index: Uint8Array;
   accumulation: string;
 }
-export interface ChildAminoMsg {
-  type: "osmosis/store/child";
-  value: ChildAmino;
-}
 export interface ChildSDKType {
   index: Uint8Array;
   accumulation: string;
@@ -47,10 +39,6 @@ export interface LeafProtoMsg {
 }
 export interface LeafAmino {
   leaf?: ChildAmino;
-}
-export interface LeafAminoMsg {
-  type: "osmosis/store/leaf";
-  value: LeafAmino;
 }
 export interface LeafSDKType {
   leaf?: ChildSDKType;
@@ -132,15 +120,6 @@ export const Node = {
       obj.children = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: NodeAminoMsg): Node {
-    return Node.fromAmino(object.value);
-  },
-  toAminoMsg(message: Node): NodeAminoMsg {
-    return {
-      type: "osmosis/store/node",
-      value: Node.toAmino(message)
-    };
   },
   fromProtoMsg(message: NodeProtoMsg): Node {
     return Node.decode(message.value);
@@ -235,15 +214,6 @@ export const Child = {
     obj.accumulation = message.accumulation;
     return obj;
   },
-  fromAminoMsg(object: ChildAminoMsg): Child {
-    return Child.fromAmino(object.value);
-  },
-  toAminoMsg(message: Child): ChildAminoMsg {
-    return {
-      type: "osmosis/store/child",
-      value: Child.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ChildProtoMsg): Child {
     return Child.decode(message.value);
   },
@@ -324,15 +294,6 @@ export const Leaf = {
     const obj: any = {};
     obj.leaf = message.leaf ? Child.toAmino(message.leaf) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: LeafAminoMsg): Leaf {
-    return Leaf.fromAmino(object.value);
-  },
-  toAminoMsg(message: Leaf): LeafAminoMsg {
-    return {
-      type: "osmosis/store/leaf",
-      value: Leaf.toAmino(message)
-    };
   },
   fromProtoMsg(message: LeafProtoMsg): Leaf {
     return Leaf.decode(message.value);

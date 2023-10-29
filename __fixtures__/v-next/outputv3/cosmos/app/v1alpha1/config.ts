@@ -32,10 +32,6 @@ export interface ConfigAmino {
   /** modules are the module configurations for the app. */
   modules: ModuleConfigAmino[];
 }
-export interface ConfigAminoMsg {
-  type: "cosmos-sdk/Config";
-  value: ConfigAmino;
-}
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
  * It is intended that all state machine logic including the version of
@@ -93,10 +89,6 @@ export interface ModuleConfigAmino {
    * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
    */
   config?: AnyAmino;
-}
-export interface ModuleConfigAminoMsg {
-  type: "cosmos-sdk/ModuleConfig";
-  value: ModuleConfigAmino;
 }
 /** ModuleConfig is a module configuration for an app. */
 export interface ModuleConfigSDKType {
@@ -180,15 +172,6 @@ export const Config = {
       obj.modules = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ConfigAminoMsg): Config {
-    return Config.fromAmino(object.value);
-  },
-  toAminoMsg(message: Config): ConfigAminoMsg {
-    return {
-      type: "cosmos-sdk/Config",
-      value: Config.toAmino(message)
-    };
   },
   fromProtoMsg(message: ConfigProtoMsg): Config {
     return Config.decode(message.value);
@@ -284,15 +267,6 @@ export const ModuleConfig = {
     obj.name = message.name;
     obj.config = message.config ? Any.toAmino(message.config) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: ModuleConfigAminoMsg): ModuleConfig {
-    return ModuleConfig.fromAmino(object.value);
-  },
-  toAminoMsg(message: ModuleConfig): ModuleConfigAminoMsg {
-    return {
-      type: "cosmos-sdk/ModuleConfig",
-      value: ModuleConfig.toAmino(message)
-    };
   },
   fromProtoMsg(message: ModuleConfigProtoMsg): ModuleConfig {
     return ModuleConfig.decode(message.value);

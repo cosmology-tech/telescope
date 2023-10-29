@@ -17,10 +17,6 @@ export interface GroupIDAmino {
   dseq: string;
   gseq: number;
 }
-export interface GroupIDAminoMsg {
-  type: "/akash.deployment.v1beta2.GroupID";
-  value: GroupIDAmino;
-}
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDSDKType {
   owner: string;
@@ -121,9 +117,6 @@ export const GroupID = {
     obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     obj.gseq = message.gseq;
     return obj;
-  },
-  fromAminoMsg(object: GroupIDAminoMsg): GroupID {
-    return GroupID.fromAmino(object.value);
   },
   fromProtoMsg(message: GroupIDProtoMsg): GroupID {
     return GroupID.decode(message.value);

@@ -84,10 +84,6 @@ export interface OperationAmino {
    */
   response?: AnyAmino;
 }
-export interface OperationAminoMsg {
-  type: "/google.longrunning.Operation";
-  value: OperationAmino;
-}
 /**
  * This resource represents a long-running operation that is the result of a
  * network API call.
@@ -112,10 +108,6 @@ export interface GetOperationRequestProtoMsg {
 export interface GetOperationRequestAmino {
   /** The name of the operation resource. */
   name: string;
-}
-export interface GetOperationRequestAminoMsg {
-  type: "/google.longrunning.GetOperationRequest";
-  value: GetOperationRequestAmino;
 }
 /** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
 export interface GetOperationRequestSDKType {
@@ -147,10 +139,6 @@ export interface ListOperationsRequestAmino {
   /** The standard list page token. */
   page_token: string;
 }
-export interface ListOperationsRequestAminoMsg {
-  type: "/google.longrunning.ListOperationsRequest";
-  value: ListOperationsRequestAmino;
-}
 /** The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsRequestSDKType {
   name: string;
@@ -176,10 +164,6 @@ export interface ListOperationsResponseAmino {
   /** The standard List next-page token. */
   next_page_token: string;
 }
-export interface ListOperationsResponseAminoMsg {
-  type: "/google.longrunning.ListOperationsResponse";
-  value: ListOperationsResponseAmino;
-}
 /** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsResponseSDKType {
   operations: OperationSDKType[];
@@ -199,10 +183,6 @@ export interface CancelOperationRequestAmino {
   /** The name of the operation resource to be cancelled. */
   name: string;
 }
-export interface CancelOperationRequestAminoMsg {
-  type: "/google.longrunning.CancelOperationRequest";
-  value: CancelOperationRequestAmino;
-}
 /** The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]. */
 export interface CancelOperationRequestSDKType {
   name: string;
@@ -220,10 +200,6 @@ export interface DeleteOperationRequestProtoMsg {
 export interface DeleteOperationRequestAmino {
   /** The name of the operation resource to be deleted. */
   name: string;
-}
-export interface DeleteOperationRequestAminoMsg {
-  type: "/google.longrunning.DeleteOperationRequest";
-  value: DeleteOperationRequestAmino;
 }
 /** The request message for [Operations.DeleteOperation][google.longrunning.Operations.DeleteOperation]. */
 export interface DeleteOperationRequestSDKType {
@@ -254,10 +230,6 @@ export interface WaitOperationRequestAmino {
    * If RPC context deadline is also specified, the shorter one will be used.
    */
   timeout?: DurationAmino;
-}
-export interface WaitOperationRequestAminoMsg {
-  type: "/google.longrunning.WaitOperationRequest";
-  value: WaitOperationRequestAmino;
 }
 /** The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]. */
 export interface WaitOperationRequestSDKType {
@@ -339,10 +311,6 @@ export interface OperationInfoAmino {
    * Note: Altering this value constitutes a breaking change.
    */
   metadata_type: string;
-}
-export interface OperationInfoAminoMsg {
-  type: "/google.longrunning.OperationInfo";
-  value: OperationInfoAmino;
 }
 /**
  * A message representing the message types used by a long-running operation.
@@ -488,9 +456,6 @@ export const Operation = {
     obj.response = message.response ? Any.toAmino(message.response) : undefined;
     return obj;
   },
-  fromAminoMsg(object: OperationAminoMsg): Operation {
-    return Operation.fromAmino(object.value);
-  },
   fromProtoMsg(message: OperationProtoMsg): Operation {
     return Operation.decode(message.value);
   },
@@ -568,9 +533,6 @@ export const GetOperationRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAminoMsg(object: GetOperationRequestAminoMsg): GetOperationRequest {
-    return GetOperationRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GetOperationRequestProtoMsg): GetOperationRequest {
     return GetOperationRequest.decode(message.value);
@@ -692,9 +654,6 @@ export const ListOperationsRequest = {
     obj.page_token = message.pageToken;
     return obj;
   },
-  fromAminoMsg(object: ListOperationsRequestAminoMsg): ListOperationsRequest {
-    return ListOperationsRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListOperationsRequestProtoMsg): ListOperationsRequest {
     return ListOperationsRequest.decode(message.value);
   },
@@ -799,9 +758,6 @@ export const ListOperationsResponse = {
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromAminoMsg(object: ListOperationsResponseAminoMsg): ListOperationsResponse {
-    return ListOperationsResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListOperationsResponseProtoMsg): ListOperationsResponse {
     return ListOperationsResponse.decode(message.value);
   },
@@ -880,9 +836,6 @@ export const CancelOperationRequest = {
     obj.name = message.name;
     return obj;
   },
-  fromAminoMsg(object: CancelOperationRequestAminoMsg): CancelOperationRequest {
-    return CancelOperationRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: CancelOperationRequestProtoMsg): CancelOperationRequest {
     return CancelOperationRequest.decode(message.value);
   },
@@ -960,9 +913,6 @@ export const DeleteOperationRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAminoMsg(object: DeleteOperationRequestAminoMsg): DeleteOperationRequest {
-    return DeleteOperationRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: DeleteOperationRequestProtoMsg): DeleteOperationRequest {
     return DeleteOperationRequest.decode(message.value);
@@ -1058,9 +1008,6 @@ export const WaitOperationRequest = {
     obj.timeout = message.timeout ? Duration.toAmino(message.timeout) : undefined;
     return obj;
   },
-  fromAminoMsg(object: WaitOperationRequestAminoMsg): WaitOperationRequest {
-    return WaitOperationRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: WaitOperationRequestProtoMsg): WaitOperationRequest {
     return WaitOperationRequest.decode(message.value);
   },
@@ -1152,9 +1099,6 @@ export const OperationInfo = {
     obj.response_type = message.responseType;
     obj.metadata_type = message.metadataType;
     return obj;
-  },
-  fromAminoMsg(object: OperationInfoAminoMsg): OperationInfo {
-    return OperationInfo.fromAmino(object.value);
   },
   fromProtoMsg(message: OperationInfoProtoMsg): OperationInfo {
     return OperationInfo.decode(message.value);

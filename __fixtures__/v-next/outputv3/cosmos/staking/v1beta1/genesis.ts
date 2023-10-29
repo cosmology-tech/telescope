@@ -54,10 +54,6 @@ export interface GenesisStateAmino {
   redelegations: RedelegationAmino[];
   exported: boolean;
 }
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the staking module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -86,10 +82,6 @@ export interface LastValidatorPowerAmino {
   address: string;
   /** power defines the power of the validator. */
   power: string;
-}
-export interface LastValidatorPowerAminoMsg {
-  type: "cosmos-sdk/LastValidatorPower";
-  value: LastValidatorPowerAmino;
 }
 /** LastValidatorPower required for validator set update logic. */
 export interface LastValidatorPowerSDKType {
@@ -322,15 +314,6 @@ export const GenesisState = {
     obj.exported = message.exported;
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
-  },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
   },
@@ -425,15 +408,6 @@ export const LastValidatorPower = {
     obj.address = message.address;
     obj.power = message.power ? message.power.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: LastValidatorPowerAminoMsg): LastValidatorPower {
-    return LastValidatorPower.fromAmino(object.value);
-  },
-  toAminoMsg(message: LastValidatorPower): LastValidatorPowerAminoMsg {
-    return {
-      type: "cosmos-sdk/LastValidatorPower",
-      value: LastValidatorPower.toAmino(message)
-    };
   },
   fromProtoMsg(message: LastValidatorPowerProtoMsg): LastValidatorPower {
     return LastValidatorPower.decode(message.value);

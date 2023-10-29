@@ -18,10 +18,6 @@ export interface ProviderAmino {
   auditor: string;
   attributes: AttributeAmino[];
 }
-export interface ProviderAminoMsg {
-  type: "/akash.audit.v1beta2.Provider";
-  value: ProviderAmino;
-}
 /** Provider stores owner auditor and attributes details */
 export interface ProviderSDKType {
   owner: string;
@@ -44,10 +40,6 @@ export interface AuditedAttributesAmino {
   auditor: string;
   attributes: AttributeAmino[];
 }
-export interface AuditedAttributesAminoMsg {
-  type: "/akash.audit.v1beta2.AuditedAttributes";
-  value: AuditedAttributesAmino;
-}
 /** Attributes */
 export interface AuditedAttributesSDKType {
   owner: string;
@@ -66,10 +58,6 @@ export interface AttributesResponseProtoMsg {
 export interface AttributesResponseAmino {
   attributes: AuditedAttributesAmino[];
 }
-export interface AttributesResponseAminoMsg {
-  type: "/akash.audit.v1beta2.AttributesResponse";
-  value: AttributesResponseAmino;
-}
 /** AttributesResponse represents details of deployment along with group details */
 export interface AttributesResponseSDKType {
   attributes: AuditedAttributesSDKType[];
@@ -87,10 +75,6 @@ export interface AttributesFiltersProtoMsg {
 export interface AttributesFiltersAmino {
   auditors: string[];
   owners: string[];
-}
-export interface AttributesFiltersAminoMsg {
-  type: "/akash.audit.v1beta2.AttributesFilters";
-  value: AttributesFiltersAmino;
 }
 /** AttributesFilters defines filters used to filter deployments */
 export interface AttributesFiltersSDKType {
@@ -113,10 +97,6 @@ export interface MsgSignProviderAttributesAmino {
   auditor: string;
   attributes: AttributeAmino[];
 }
-export interface MsgSignProviderAttributesAminoMsg {
-  type: "/akash.audit.v1beta2.MsgSignProviderAttributes";
-  value: MsgSignProviderAttributesAmino;
-}
 /** MsgSignProviderAttributes defines an SDK message for signing a provider attributes */
 export interface MsgSignProviderAttributesSDKType {
   owner: string;
@@ -131,10 +111,6 @@ export interface MsgSignProviderAttributesResponseProtoMsg {
 }
 /** MsgSignProviderAttributesResponse defines the Msg/CreateProvider response type. */
 export interface MsgSignProviderAttributesResponseAmino {}
-export interface MsgSignProviderAttributesResponseAminoMsg {
-  type: "/akash.audit.v1beta2.MsgSignProviderAttributesResponse";
-  value: MsgSignProviderAttributesResponseAmino;
-}
 /** MsgSignProviderAttributesResponse defines the Msg/CreateProvider response type. */
 export interface MsgSignProviderAttributesResponseSDKType {}
 /** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
@@ -153,10 +129,6 @@ export interface MsgDeleteProviderAttributesAmino {
   auditor: string;
   keys: string[];
 }
-export interface MsgDeleteProviderAttributesAminoMsg {
-  type: "/akash.audit.v1beta2.MsgDeleteProviderAttributes";
-  value: MsgDeleteProviderAttributesAmino;
-}
 /** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
 export interface MsgDeleteProviderAttributesSDKType {
   owner: string;
@@ -171,10 +143,6 @@ export interface MsgDeleteProviderAttributesResponseProtoMsg {
 }
 /** MsgDeleteProviderAttributesResponse defines the Msg/ProviderAttributes response type. */
 export interface MsgDeleteProviderAttributesResponseAmino {}
-export interface MsgDeleteProviderAttributesResponseAminoMsg {
-  type: "/akash.audit.v1beta2.MsgDeleteProviderAttributesResponse";
-  value: MsgDeleteProviderAttributesResponseAmino;
-}
 /** MsgDeleteProviderAttributesResponse defines the Msg/ProviderAttributes response type. */
 export interface MsgDeleteProviderAttributesResponseSDKType {}
 function createBaseProvider(): Provider {
@@ -281,9 +249,6 @@ export const Provider = {
       obj.attributes = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ProviderAminoMsg): Provider {
-    return Provider.fromAmino(object.value);
   },
   fromProtoMsg(message: ProviderProtoMsg): Provider {
     return Provider.decode(message.value);
@@ -403,9 +368,6 @@ export const AuditedAttributes = {
     }
     return obj;
   },
-  fromAminoMsg(object: AuditedAttributesAminoMsg): AuditedAttributes {
-    return AuditedAttributes.fromAmino(object.value);
-  },
   fromProtoMsg(message: AuditedAttributesProtoMsg): AuditedAttributes {
     return AuditedAttributes.decode(message.value);
   },
@@ -495,9 +457,6 @@ export const AttributesResponse = {
       obj.attributes = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: AttributesResponseAminoMsg): AttributesResponse {
-    return AttributesResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: AttributesResponseProtoMsg): AttributesResponse {
     return AttributesResponse.decode(message.value);
@@ -614,9 +573,6 @@ export const AttributesFilters = {
       obj.owners = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: AttributesFiltersAminoMsg): AttributesFilters {
-    return AttributesFilters.fromAmino(object.value);
   },
   fromProtoMsg(message: AttributesFiltersProtoMsg): AttributesFilters {
     return AttributesFilters.decode(message.value);
@@ -736,9 +692,6 @@ export const MsgSignProviderAttributes = {
     }
     return obj;
   },
-  fromAminoMsg(object: MsgSignProviderAttributesAminoMsg): MsgSignProviderAttributes {
-    return MsgSignProviderAttributes.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgSignProviderAttributesProtoMsg): MsgSignProviderAttributes {
     return MsgSignProviderAttributes.decode(message.value);
   },
@@ -799,9 +752,6 @@ export const MsgSignProviderAttributesResponse = {
   toAmino(_: MsgSignProviderAttributesResponse): MsgSignProviderAttributesResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgSignProviderAttributesResponseAminoMsg): MsgSignProviderAttributesResponse {
-    return MsgSignProviderAttributesResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgSignProviderAttributesResponseProtoMsg): MsgSignProviderAttributesResponse {
     return MsgSignProviderAttributesResponse.decode(message.value);
@@ -921,9 +871,6 @@ export const MsgDeleteProviderAttributes = {
     }
     return obj;
   },
-  fromAminoMsg(object: MsgDeleteProviderAttributesAminoMsg): MsgDeleteProviderAttributes {
-    return MsgDeleteProviderAttributes.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgDeleteProviderAttributesProtoMsg): MsgDeleteProviderAttributes {
     return MsgDeleteProviderAttributes.decode(message.value);
   },
@@ -984,9 +931,6 @@ export const MsgDeleteProviderAttributesResponse = {
   toAmino(_: MsgDeleteProviderAttributesResponse): MsgDeleteProviderAttributesResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgDeleteProviderAttributesResponseAminoMsg): MsgDeleteProviderAttributesResponse {
-    return MsgDeleteProviderAttributesResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgDeleteProviderAttributesResponseProtoMsg): MsgDeleteProviderAttributesResponse {
     return MsgDeleteProviderAttributesResponse.decode(message.value);

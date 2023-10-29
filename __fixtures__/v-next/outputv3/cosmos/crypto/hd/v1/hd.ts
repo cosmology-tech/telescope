@@ -37,10 +37,6 @@ export interface BIP44ParamsAmino {
   /** address_index is used as child index in BIP32 derivation */
   address_index: number;
 }
-export interface BIP44ParamsAminoMsg {
-  type: "cosmos-sdk/BIP44Params";
-  value: BIP44ParamsAmino;
-}
 /** BIP44Params is used as path field in ledger item in Record. */
 export interface BIP44ParamsSDKType {
   purpose: number;
@@ -170,15 +166,6 @@ export const BIP44Params = {
     obj.change = message.change;
     obj.address_index = message.addressIndex;
     return obj;
-  },
-  fromAminoMsg(object: BIP44ParamsAminoMsg): BIP44Params {
-    return BIP44Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: BIP44Params): BIP44ParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/BIP44Params",
-      value: BIP44Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: BIP44ParamsProtoMsg): BIP44Params {
     return BIP44Params.decode(message.value);

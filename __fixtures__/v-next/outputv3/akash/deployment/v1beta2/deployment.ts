@@ -57,10 +57,6 @@ export interface DeploymentIDAmino {
   owner: string;
   dseq: string;
 }
-export interface DeploymentIDAminoMsg {
-  type: "/akash.deployment.v1beta2.DeploymentID";
-  value: DeploymentIDAmino;
-}
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDSDKType {
   owner: string;
@@ -84,10 +80,6 @@ export interface DeploymentAmino {
   version: Uint8Array;
   created_at: string;
 }
-export interface DeploymentAminoMsg {
-  type: "/akash.deployment.v1beta2.Deployment";
-  value: DeploymentAmino;
-}
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
   deployment_id: DeploymentIDSDKType;
@@ -110,10 +102,6 @@ export interface DeploymentFiltersAmino {
   owner: string;
   dseq: string;
   state: string;
-}
-export interface DeploymentFiltersAminoMsg {
-  type: "/akash.deployment.v1beta2.DeploymentFilters";
-  value: DeploymentFiltersAmino;
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersSDKType {
@@ -201,9 +189,6 @@ export const DeploymentID = {
     obj.owner = message.owner;
     obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: DeploymentIDAminoMsg): DeploymentID {
-    return DeploymentID.fromAmino(object.value);
   },
   fromProtoMsg(message: DeploymentIDProtoMsg): DeploymentID {
     return DeploymentID.decode(message.value);
@@ -329,9 +314,6 @@ export const Deployment = {
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: DeploymentAminoMsg): Deployment {
-    return Deployment.fromAmino(object.value);
-  },
   fromProtoMsg(message: DeploymentProtoMsg): Deployment {
     return Deployment.decode(message.value);
   },
@@ -439,9 +421,6 @@ export const DeploymentFilters = {
     obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     obj.state = message.state;
     return obj;
-  },
-  fromAminoMsg(object: DeploymentFiltersAminoMsg): DeploymentFilters {
-    return DeploymentFilters.fromAmino(object.value);
   },
   fromProtoMsg(message: DeploymentFiltersProtoMsg): DeploymentFilters {
     return DeploymentFilters.decode(message.value);

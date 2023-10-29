@@ -25,10 +25,6 @@ export interface EpochInfoAmino {
   epoch_counting_started: boolean;
   current_epoch_start_height: string;
 }
-export interface EpochInfoAminoMsg {
-  type: "/evmos.epochs.v1.EpochInfo";
-  value: EpochInfoAmino;
-}
 export interface EpochInfoSDKType {
   identifier: string;
   start_time: Date;
@@ -49,10 +45,6 @@ export interface GenesisStateProtoMsg {
 /** GenesisState defines the epochs module's genesis state. */
 export interface GenesisStateAmino {
   epochs: EpochInfoAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "/evmos.epochs.v1.GenesisState";
-  value: GenesisStateAmino;
 }
 /** GenesisState defines the epochs module's genesis state. */
 export interface GenesisStateSDKType {
@@ -213,9 +205,6 @@ export const EpochInfo = {
     obj.current_epoch_start_height = message.currentEpochStartHeight ? message.currentEpochStartHeight.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: EpochInfoAminoMsg): EpochInfo {
-    return EpochInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: EpochInfoProtoMsg): EpochInfo {
     return EpochInfo.decode(message.value);
   },
@@ -305,9 +294,6 @@ export const GenesisState = {
       obj.epochs = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

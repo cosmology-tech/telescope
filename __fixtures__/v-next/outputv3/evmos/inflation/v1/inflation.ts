@@ -58,10 +58,6 @@ export interface InflationDistributionAmino {
    */
   community_pool: string;
 }
-export interface InflationDistributionAminoMsg {
-  type: "/evmos.inflation.v1.InflationDistribution";
-  value: InflationDistributionAmino;
-}
 /**
  * InflationDistribution defines the distribution in which inflation is
  * allocated through minting on each epoch (staking, incentives, community). It
@@ -117,10 +113,6 @@ export interface ExponentialCalculationAmino {
   bonding_target: string;
   /** max variance */
   max_variance: string;
-}
-export interface ExponentialCalculationAminoMsg {
-  type: "/evmos.inflation.v1.ExponentialCalculation";
-  value: ExponentialCalculationAmino;
 }
 /**
  * ExponentialCalculation holds factors to calculate exponential inflation on
@@ -228,9 +220,6 @@ export const InflationDistribution = {
     obj.usage_incentives = message.usageIncentives;
     obj.community_pool = message.communityPool;
     return obj;
-  },
-  fromAminoMsg(object: InflationDistributionAminoMsg): InflationDistribution {
-    return InflationDistribution.fromAmino(object.value);
   },
   fromProtoMsg(message: InflationDistributionProtoMsg): InflationDistribution {
     return InflationDistribution.decode(message.value);
@@ -365,9 +354,6 @@ export const ExponentialCalculation = {
     obj.bonding_target = message.bondingTarget;
     obj.max_variance = message.maxVariance;
     return obj;
-  },
-  fromAminoMsg(object: ExponentialCalculationAminoMsg): ExponentialCalculation {
-    return ExponentialCalculation.fromAmino(object.value);
   },
   fromProtoMsg(message: ExponentialCalculationProtoMsg): ExponentialCalculation {
     return ExponentialCalculation.decode(message.value);

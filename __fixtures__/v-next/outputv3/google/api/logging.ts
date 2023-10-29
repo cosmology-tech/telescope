@@ -99,10 +99,6 @@ export interface LoggingAmino {
    */
   consumer_destinations: Logging_LoggingDestinationAmino[];
 }
-export interface LoggingAminoMsg {
-  type: "/google.api.Logging";
-  value: LoggingAmino;
-}
 /**
  * Logging configuration of the service.
  * 
@@ -177,10 +173,6 @@ export interface Logging_LoggingDestinationAmino {
    * the service name followed by "/".
    */
   logs: string[];
-}
-export interface Logging_LoggingDestinationAminoMsg {
-  type: "/google.api.LoggingDestination";
-  value: Logging_LoggingDestinationAmino;
 }
 /**
  * Configuration of a specific logging destination (the producer project
@@ -293,9 +285,6 @@ export const Logging = {
     }
     return obj;
   },
-  fromAminoMsg(object: LoggingAminoMsg): Logging {
-    return Logging.fromAmino(object.value);
-  },
   fromProtoMsg(message: LoggingProtoMsg): Logging {
     return Logging.decode(message.value);
   },
@@ -399,9 +388,6 @@ export const Logging_LoggingDestination = {
       obj.logs = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: Logging_LoggingDestinationAminoMsg): Logging_LoggingDestination {
-    return Logging_LoggingDestination.fromAmino(object.value);
   },
   fromProtoMsg(message: Logging_LoggingDestinationProtoMsg): Logging_LoggingDestination {
     return Logging_LoggingDestination.decode(message.value);

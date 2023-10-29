@@ -61,10 +61,6 @@ export interface MsgTransferAmino {
    */
   timeout_timestamp: string;
 }
-export interface MsgTransferAminoMsg {
-  type: "cosmos-sdk/MsgTransfer";
-  value: MsgTransferAmino;
-}
 /**
  * MsgTransfer defines a msg to transfer fungible tokens (i.e Coins) between
  * ICS20 enabled chains. See ICS Spec here:
@@ -87,10 +83,6 @@ export interface MsgTransferResponseProtoMsg {
 }
 /** MsgTransferResponse defines the Msg/Transfer response type. */
 export interface MsgTransferResponseAmino {}
-export interface MsgTransferResponseAminoMsg {
-  type: "cosmos-sdk/MsgTransferResponse";
-  value: MsgTransferResponseAmino;
-}
 /** MsgTransferResponse defines the Msg/Transfer response type. */
 export interface MsgTransferResponseSDKType {}
 function createBaseMsgTransfer(): MsgTransfer {
@@ -249,15 +241,6 @@ export const MsgTransfer = {
     obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgTransferAminoMsg): MsgTransfer {
-    return MsgTransfer.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgTransfer): MsgTransferAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgTransfer",
-      value: MsgTransfer.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgTransferProtoMsg): MsgTransfer {
     return MsgTransfer.decode(message.value);
   },
@@ -319,15 +302,6 @@ export const MsgTransferResponse = {
   toAmino(_: MsgTransferResponse): MsgTransferResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgTransferResponseAminoMsg): MsgTransferResponse {
-    return MsgTransferResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgTransferResponse): MsgTransferResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgTransferResponse",
-      value: MsgTransferResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgTransferResponseProtoMsg): MsgTransferResponse {
     return MsgTransferResponse.decode(message.value);

@@ -69,10 +69,6 @@ export interface UsageAmino {
    */
   producer_notification_channel: string;
 }
-export interface UsageAminoMsg {
-  type: "/google.api.Usage";
-  value: UsageAmino;
-}
 /** Configuration controlling usage of a service. */
 export interface UsageSDKType {
   requirements: string[];
@@ -178,10 +174,6 @@ export interface UsageRuleAmino {
    * methods, such as service health check methods.
    */
   skip_service_control: boolean;
-}
-export interface UsageRuleAminoMsg {
-  type: "/google.api.UsageRule";
-  value: UsageRuleAmino;
 }
 /**
  * Usage configuration rules for the service.
@@ -332,9 +324,6 @@ export const Usage = {
     obj.producer_notification_channel = message.producerNotificationChannel;
     return obj;
   },
-  fromAminoMsg(object: UsageAminoMsg): Usage {
-    return Usage.fromAmino(object.value);
-  },
   fromProtoMsg(message: UsageProtoMsg): Usage {
     return Usage.decode(message.value);
   },
@@ -440,9 +429,6 @@ export const UsageRule = {
     obj.allow_unregistered_calls = message.allowUnregisteredCalls;
     obj.skip_service_control = message.skipServiceControl;
     return obj;
-  },
-  fromAminoMsg(object: UsageRuleAminoMsg): UsageRule {
-    return UsageRule.fromAmino(object.value);
   },
   fromProtoMsg(message: UsageRuleProtoMsg): UsageRule {
     return UsageRule.decode(message.value);

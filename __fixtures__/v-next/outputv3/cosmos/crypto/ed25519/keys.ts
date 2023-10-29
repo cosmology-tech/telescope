@@ -25,10 +25,6 @@ export interface PubKeyProtoMsg {
 export interface PubKeyAmino {
   key: Uint8Array;
 }
-export interface PubKeyAminoMsg {
-  type: "cosmos-sdk/PubKey";
-  value: PubKeyAmino;
-}
 /**
  * PubKey is an ed25519 public key for handling Tendermint keys in SDK.
  * It's needed for Any serialization and SDK compatibility.
@@ -56,10 +52,6 @@ export interface PrivKeyProtoMsg {
  */
 export interface PrivKeyAmino {
   key: Uint8Array;
-}
-export interface PrivKeyAminoMsg {
-  type: "cosmos-sdk/PrivKey";
-  value: PrivKeyAmino;
 }
 /**
  * Deprecated: PrivKey defines a ed25519 private key.
@@ -133,15 +125,6 @@ export const PubKey = {
     const obj: any = {};
     obj.key = message.key;
     return obj;
-  },
-  fromAminoMsg(object: PubKeyAminoMsg): PubKey {
-    return PubKey.fromAmino(object.value);
-  },
-  toAminoMsg(message: PubKey): PubKeyAminoMsg {
-    return {
-      type: "cosmos-sdk/PubKey",
-      value: PubKey.toAmino(message)
-    };
   },
   fromProtoMsg(message: PubKeyProtoMsg): PubKey {
     return PubKey.decode(message.value);
@@ -221,15 +204,6 @@ export const PrivKey = {
     const obj: any = {};
     obj.key = message.key;
     return obj;
-  },
-  fromAminoMsg(object: PrivKeyAminoMsg): PrivKey {
-    return PrivKey.fromAmino(object.value);
-  },
-  toAminoMsg(message: PrivKey): PrivKeyAminoMsg {
-    return {
-      type: "cosmos-sdk/PrivKey",
-      value: PrivKey.toAmino(message)
-    };
   },
   fromProtoMsg(message: PrivKeyProtoMsg): PrivKey {
     return PrivKey.decode(message.value);

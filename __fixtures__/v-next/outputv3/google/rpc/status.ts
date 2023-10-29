@@ -54,10 +54,6 @@ export interface StatusAmino {
    */
   details: AnyAmino[];
 }
-export interface StatusAminoMsg {
-  type: "/google.rpc.Status";
-  value: StatusAmino;
-}
 /**
  * The `Status` type defines a logical error model that is suitable for
  * different programming environments, including REST APIs and RPC APIs. It is
@@ -176,9 +172,6 @@ export const Status = {
       obj.details = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: StatusAminoMsg): Status {
-    return Status.fromAmino(object.value);
   },
   fromProtoMsg(message: StatusProtoMsg): Status {
     return Status.decode(message.value);

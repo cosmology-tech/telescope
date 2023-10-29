@@ -22,10 +22,6 @@ export interface GenesisStateAmino {
   /** list of claim records with the corresponding airdrop recipient */
   claims_records: ClaimsRecordAddressAmino[];
 }
-export interface GenesisStateAminoMsg {
-  type: "/evmos.claims.v1.GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState define the claims module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -74,10 +70,6 @@ export interface ParamsAmino {
   authorized_channels: string[];
   /** list of channel identifiers from EVM compatible chains */
   evm_channels: string[];
-}
-export interface ParamsAminoMsg {
-  type: "/evmos.claims.v1.Params";
-  value: ParamsAmino;
 }
 /** Params defines the claims module's parameters. */
 export interface ParamsSDKType {
@@ -181,9 +173,6 @@ export const GenesisState = {
       obj.claims_records = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
@@ -374,9 +363,6 @@ export const Params = {
       obj.evm_channels = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

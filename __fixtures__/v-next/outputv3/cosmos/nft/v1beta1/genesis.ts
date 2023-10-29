@@ -18,10 +18,6 @@ export interface GenesisStateAmino {
   classes: ClassAmino[];
   entries: EntryAmino[];
 }
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the nft module's genesis state. */
 export interface GenesisStateSDKType {
   classes: ClassSDKType[];
@@ -44,10 +40,6 @@ export interface EntryAmino {
   owner: string;
   /** nfts is a group of nfts of the same owner */
   nfts: NFTAmino[];
-}
-export interface EntryAminoMsg {
-  type: "cosmos-sdk/Entry";
-  value: EntryAmino;
 }
 /** Entry Defines all nft owned by a person */
 export interface EntrySDKType {
@@ -158,15 +150,6 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
-  },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
   },
@@ -271,15 +254,6 @@ export const Entry = {
       obj.nfts = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: EntryAminoMsg): Entry {
-    return Entry.fromAmino(object.value);
-  },
-  toAminoMsg(message: Entry): EntryAminoMsg {
-    return {
-      type: "cosmos-sdk/Entry",
-      value: Entry.toAmino(message)
-    };
   },
   fromProtoMsg(message: EntryProtoMsg): Entry {
     return Entry.decode(message.value);

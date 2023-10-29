@@ -149,10 +149,6 @@ export interface DistributionAmino {
   /** Must be in increasing order of `value` field. */
   exemplars: Distribution_ExemplarAmino[];
 }
-export interface DistributionAminoMsg {
-  type: "/google.api.Distribution";
-  value: DistributionAmino;
-}
 /**
  * `Distribution` contains summary statistics for a population of values. It
  * optionally contains a histogram representing the distribution of those values
@@ -195,10 +191,6 @@ export interface Distribution_RangeAmino {
   min: number;
   /** The maximum of the population values. */
   max: number;
-}
-export interface Distribution_RangeAminoMsg {
-  type: "/google.api.Range";
-  value: Distribution_RangeAmino;
 }
 /** The range of the population values. */
 export interface Distribution_RangeSDKType {
@@ -258,10 +250,6 @@ export interface Distribution_BucketOptionsAmino {
   exponential_buckets?: Distribution_BucketOptions_ExponentialAmino;
   /** The explicit buckets. */
   explicit_buckets?: Distribution_BucketOptions_ExplicitAmino;
-}
-export interface Distribution_BucketOptionsAminoMsg {
-  type: "/google.api.BucketOptions";
-  value: Distribution_BucketOptionsAmino;
 }
 /**
  * `BucketOptions` describes the bucket boundaries used to create a histogram
@@ -327,10 +315,6 @@ export interface Distribution_BucketOptions_LinearAmino {
   /** Lower bound of the first bucket. */
   offset: number;
 }
-export interface Distribution_BucketOptions_LinearAminoMsg {
-  type: "/google.api.Linear";
-  value: Distribution_BucketOptions_LinearAmino;
-}
 /**
  * Specifies a linear sequence of buckets that all have the same width
  * (except overflow and underflow). Each bucket represents a constant
@@ -389,10 +373,6 @@ export interface Distribution_BucketOptions_ExponentialAmino {
   /** Must be greater than 0. */
   scale: number;
 }
-export interface Distribution_BucketOptions_ExponentialAminoMsg {
-  type: "/google.api.Exponential";
-  value: Distribution_BucketOptions_ExponentialAmino;
-}
 /**
  * Specifies an exponential sequence of buckets that have a width that is
  * proportional to the value of the lower bound. Each bucket represents a
@@ -446,10 +426,6 @@ export interface Distribution_BucketOptions_ExplicitProtoMsg {
 export interface Distribution_BucketOptions_ExplicitAmino {
   /** The values must be monotonically increasing. */
   bounds: number[];
-}
-export interface Distribution_BucketOptions_ExplicitAminoMsg {
-  type: "/google.api.Explicit";
-  value: Distribution_BucketOptions_ExplicitAmino;
 }
 /**
  * Specifies a set of buckets with arbitrary widths.
@@ -530,10 +506,6 @@ export interface Distribution_ExemplarAmino {
    * single exemplar, and this is enforced by the system.
    */
   attachments: AnyAmino[];
-}
-export interface Distribution_ExemplarAminoMsg {
-  type: "/google.api.Exemplar";
-  value: Distribution_ExemplarAmino;
 }
 /**
  * Exemplars are example points that may be used to annotate aggregated
@@ -735,9 +707,6 @@ export const Distribution = {
     }
     return obj;
   },
-  fromAminoMsg(object: DistributionAminoMsg): Distribution {
-    return Distribution.fromAmino(object.value);
-  },
   fromProtoMsg(message: DistributionProtoMsg): Distribution {
     return Distribution.decode(message.value);
   },
@@ -829,9 +798,6 @@ export const Distribution_Range = {
     obj.min = message.min;
     obj.max = message.max;
     return obj;
-  },
-  fromAminoMsg(object: Distribution_RangeAminoMsg): Distribution_Range {
-    return Distribution_Range.fromAmino(object.value);
   },
   fromProtoMsg(message: Distribution_RangeProtoMsg): Distribution_Range {
     return Distribution_Range.decode(message.value);
@@ -945,9 +911,6 @@ export const Distribution_BucketOptions = {
     obj.explicit_buckets = message.explicitBuckets ? Distribution_BucketOptions_Explicit.toAmino(message.explicitBuckets) : undefined;
     return obj;
   },
-  fromAminoMsg(object: Distribution_BucketOptionsAminoMsg): Distribution_BucketOptions {
-    return Distribution_BucketOptions.fromAmino(object.value);
-  },
   fromProtoMsg(message: Distribution_BucketOptionsProtoMsg): Distribution_BucketOptions {
     return Distribution_BucketOptions.decode(message.value);
   },
@@ -1053,9 +1016,6 @@ export const Distribution_BucketOptions_Linear = {
     obj.width = message.width;
     obj.offset = message.offset;
     return obj;
-  },
-  fromAminoMsg(object: Distribution_BucketOptions_LinearAminoMsg): Distribution_BucketOptions_Linear {
-    return Distribution_BucketOptions_Linear.fromAmino(object.value);
   },
   fromProtoMsg(message: Distribution_BucketOptions_LinearProtoMsg): Distribution_BucketOptions_Linear {
     return Distribution_BucketOptions_Linear.decode(message.value);
@@ -1163,9 +1123,6 @@ export const Distribution_BucketOptions_Exponential = {
     obj.scale = message.scale;
     return obj;
   },
-  fromAminoMsg(object: Distribution_BucketOptions_ExponentialAminoMsg): Distribution_BucketOptions_Exponential {
-    return Distribution_BucketOptions_Exponential.fromAmino(object.value);
-  },
   fromProtoMsg(message: Distribution_BucketOptions_ExponentialProtoMsg): Distribution_BucketOptions_Exponential {
     return Distribution_BucketOptions_Exponential.decode(message.value);
   },
@@ -1264,9 +1221,6 @@ export const Distribution_BucketOptions_Explicit = {
       obj.bounds = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: Distribution_BucketOptions_ExplicitAminoMsg): Distribution_BucketOptions_Explicit {
-    return Distribution_BucketOptions_Explicit.fromAmino(object.value);
   },
   fromProtoMsg(message: Distribution_BucketOptions_ExplicitProtoMsg): Distribution_BucketOptions_Explicit {
     return Distribution_BucketOptions_Explicit.decode(message.value);
@@ -1385,9 +1339,6 @@ export const Distribution_Exemplar = {
       obj.attachments = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: Distribution_ExemplarAminoMsg): Distribution_Exemplar {
-    return Distribution_Exemplar.fromAmino(object.value);
   },
   fromProtoMsg(message: Distribution_ExemplarProtoMsg): Distribution_Exemplar {
     return Distribution_Exemplar.decode(message.value);

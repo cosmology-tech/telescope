@@ -31,10 +31,6 @@ export interface DenomTraceAmino {
   /** base denomination of the relayed fungible token. */
   base_denom: string;
 }
-export interface DenomTraceAminoMsg {
-  type: "cosmos-sdk/DenomTrace";
-  value: DenomTraceAmino;
-}
 /**
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
  * source tracing information path.
@@ -82,10 +78,6 @@ export interface ParamsAmino {
    * chain.
    */
   receive_enabled: boolean;
-}
-export interface ParamsAminoMsg {
-  type: "cosmos-sdk/Params";
-  value: ParamsAmino;
 }
 /**
  * Params defines the set of IBC transfer parameters.
@@ -176,15 +168,6 @@ export const DenomTrace = {
     obj.path = message.path;
     obj.base_denom = message.baseDenom;
     return obj;
-  },
-  fromAminoMsg(object: DenomTraceAminoMsg): DenomTrace {
-    return DenomTrace.fromAmino(object.value);
-  },
-  toAminoMsg(message: DenomTrace): DenomTraceAminoMsg {
-    return {
-      type: "cosmos-sdk/DenomTrace",
-      value: DenomTrace.toAmino(message)
-    };
   },
   fromProtoMsg(message: DenomTraceProtoMsg): DenomTrace {
     return DenomTrace.decode(message.value);
@@ -278,15 +261,6 @@ export const Params = {
     obj.send_enabled = message.sendEnabled;
     obj.receive_enabled = message.receiveEnabled;
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/Params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

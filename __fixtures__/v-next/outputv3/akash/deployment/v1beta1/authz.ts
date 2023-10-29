@@ -29,10 +29,6 @@ export interface DepositDeploymentAuthorizationAmino {
    */
   spend_limit?: CoinAmino;
 }
-export interface DepositDeploymentAuthorizationAminoMsg {
-  type: "/akash.deployment.v1beta1.DepositDeploymentAuthorization";
-  value: DepositDeploymentAuthorizationAmino;
-}
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
  * the granter's account for a deployment.
@@ -108,9 +104,6 @@ export const DepositDeploymentAuthorization = {
     const obj: any = {};
     obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: DepositDeploymentAuthorizationAminoMsg): DepositDeploymentAuthorization {
-    return DepositDeploymentAuthorization.fromAmino(object.value);
   },
   fromProtoMsg(message: DepositDeploymentAuthorizationProtoMsg): DepositDeploymentAuthorization {
     return DepositDeploymentAuthorization.decode(message.value);

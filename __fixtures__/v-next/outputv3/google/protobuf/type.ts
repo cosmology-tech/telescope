@@ -275,10 +275,6 @@ export interface TypeAmino {
   /** The source syntax. */
   syntax: Syntax;
 }
-export interface TypeAminoMsg {
-  type: "/google.protobuf.Type";
-  value: TypeAmino;
-}
 /** A protocol buffer message type. */
 export interface TypeSDKType {
   name: string;
@@ -350,10 +346,6 @@ export interface FieldAmino {
   /** The string value of the default value of this field. Proto2 syntax only. */
   default_value: string;
 }
-export interface FieldAminoMsg {
-  type: "/google.protobuf.Field";
-  value: FieldAmino;
-}
 /** A single field of a message type. */
 export interface FieldSDKType {
   kind: Field_Kind;
@@ -397,10 +389,6 @@ export interface EnumAmino {
   /** The source syntax. */
   syntax: Syntax;
 }
-export interface EnumAminoMsg {
-  type: "/google.protobuf.Enum";
-  value: EnumAmino;
-}
 /** Enum type definition. */
 export interface EnumSDKType {
   name: string;
@@ -430,10 +418,6 @@ export interface EnumValueAmino {
   number: number;
   /** Protocol buffer options. */
   options: OptionAmino[];
-}
-export interface EnumValueAminoMsg {
-  type: "/google.protobuf.EnumValue";
-  value: EnumValueAmino;
 }
 /** Enum value definition. */
 export interface EnumValueSDKType {
@@ -484,10 +468,6 @@ export interface OptionAmino {
    * value using the google.protobuf.Int32Value type.
    */
   value?: AnyAmino;
-}
-export interface OptionAminoMsg {
-  type: "/google.protobuf.Option";
-  value: OptionAmino;
 }
 /**
  * A protocol buffer option, which can be attached to a message, field,
@@ -669,9 +649,6 @@ export const Type = {
     obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined;
     obj.syntax = message.syntax;
     return obj;
-  },
-  fromAminoMsg(object: TypeAminoMsg): Type {
-    return Type.fromAmino(object.value);
   },
   fromProtoMsg(message: TypeProtoMsg): Type {
     return Type.decode(message.value);
@@ -889,9 +866,6 @@ export const Field = {
     obj.default_value = message.defaultValue;
     return obj;
   },
-  fromAminoMsg(object: FieldAminoMsg): Field {
-    return Field.fromAmino(object.value);
-  },
   fromProtoMsg(message: FieldProtoMsg): Field {
     return Field.decode(message.value);
   },
@@ -1052,9 +1026,6 @@ export const Enum = {
     obj.syntax = message.syntax;
     return obj;
   },
-  fromAminoMsg(object: EnumAminoMsg): Enum {
-    return Enum.fromAmino(object.value);
-  },
   fromProtoMsg(message: EnumProtoMsg): Enum {
     return Enum.decode(message.value);
   },
@@ -1173,9 +1144,6 @@ export const EnumValue = {
     }
     return obj;
   },
-  fromAminoMsg(object: EnumValueAminoMsg): EnumValue {
-    return EnumValue.fromAmino(object.value);
-  },
   fromProtoMsg(message: EnumValueProtoMsg): EnumValue {
     return EnumValue.decode(message.value);
   },
@@ -1269,9 +1237,6 @@ export const Option = {
     obj.name = message.name;
     obj.value = message.value ? Any.toAmino(message.value) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: OptionAminoMsg): Option {
-    return Option.fromAmino(object.value);
   },
   fromProtoMsg(message: OptionProtoMsg): Option {
     return Option.decode(message.value);

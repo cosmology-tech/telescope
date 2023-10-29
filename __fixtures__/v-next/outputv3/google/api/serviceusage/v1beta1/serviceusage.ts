@@ -79,10 +79,6 @@ export interface EnableServiceRequestAmino {
    */
   name: string;
 }
-export interface EnableServiceRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.EnableServiceRequest";
-  value: EnableServiceRequestAmino;
-}
 /** Request message for the `EnableService` method. */
 export interface EnableServiceRequestSDKType {
   name: string;
@@ -117,10 +113,6 @@ export interface DisableServiceRequestAmino {
    */
   name: string;
 }
-export interface DisableServiceRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.DisableServiceRequest";
-  value: DisableServiceRequestAmino;
-}
 /** Request message for the `DisableService` method. */
 export interface DisableServiceRequestSDKType {
   name: string;
@@ -150,10 +142,6 @@ export interface GetServiceRequestAmino {
    * where `123` is the project number (not project ID).
    */
   name: string;
-}
-export interface GetServiceRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.GetServiceRequest";
-  value: GetServiceRequestAmino;
 }
 /** Request message for the `GetService` method. */
 export interface GetServiceRequestSDKType {
@@ -217,10 +205,6 @@ export interface ListServicesRequestAmino {
    */
   filter: string;
 }
-export interface ListServicesRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ListServicesRequest";
-  value: ListServicesRequestAmino;
-}
 /** Request message for the `ListServices` method. */
 export interface ListServicesRequestSDKType {
   parent: string;
@@ -251,10 +235,6 @@ export interface ListServicesResponseAmino {
    * query.
    */
   next_page_token: string;
-}
-export interface ListServicesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ListServicesResponse";
-  value: ListServicesResponseAmino;
 }
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponseSDKType {
@@ -325,10 +305,6 @@ export interface BatchEnableServicesRequestAmino {
    */
   service_ids: string[];
 }
-export interface BatchEnableServicesRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.BatchEnableServicesRequest";
-  value: BatchEnableServicesRequestAmino;
-}
 /** Request message for the `BatchEnableServices` method. */
 export interface BatchEnableServicesRequestSDKType {
   parent: string;
@@ -380,10 +356,6 @@ export interface ListConsumerQuotaMetricsRequestAmino {
   /** Specifies the level of detail for quota information in the response. */
   view: QuotaView;
 }
-export interface ListConsumerQuotaMetricsRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest";
-  value: ListConsumerQuotaMetricsRequestAmino;
-}
 /** Request message for ListConsumerQuotaMetrics */
 export interface ListConsumerQuotaMetricsRequestSDKType {
   parent: string;
@@ -414,10 +386,6 @@ export interface ListConsumerQuotaMetricsResponseAmino {
    * call.
    */
   next_page_token: string;
-}
-export interface ListConsumerQuotaMetricsResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsResponse";
-  value: ListConsumerQuotaMetricsResponseAmino;
 }
 /** Response message for ListConsumerQuotaMetrics */
 export interface ListConsumerQuotaMetricsResponseSDKType {
@@ -452,10 +420,6 @@ export interface GetConsumerQuotaMetricRequestAmino {
   /** Specifies the level of detail for quota information in the response. */
   view: QuotaView;
 }
-export interface GetConsumerQuotaMetricRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest";
-  value: GetConsumerQuotaMetricRequestAmino;
-}
 /** Request message for GetConsumerQuotaMetric */
 export interface GetConsumerQuotaMetricRequestSDKType {
   name: string;
@@ -488,10 +452,6 @@ export interface GetConsumerQuotaLimitRequestAmino {
   name: string;
   /** Specifies the level of detail for quota information in the response. */
   view: QuotaView;
-}
-export interface GetConsumerQuotaLimitRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest";
-  value: GetConsumerQuotaLimitRequestAmino;
 }
 /** Request message for GetConsumerQuotaLimit */
 export interface GetConsumerQuotaLimitRequestSDKType {
@@ -553,10 +513,6 @@ export interface CreateAdminOverrideRequestAmino {
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
   force_only: QuotaSafetyCheck[];
-}
-export interface CreateAdminOverrideRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.CreateAdminOverrideRequest";
-  value: CreateAdminOverrideRequestAmino;
 }
 /** Request message for CreateAdminOverride. */
 export interface CreateAdminOverrideRequestSDKType {
@@ -635,10 +591,6 @@ export interface UpdateAdminOverrideRequestAmino {
    */
   force_only: QuotaSafetyCheck[];
 }
-export interface UpdateAdminOverrideRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest";
-  value: UpdateAdminOverrideRequestAmino;
-}
 /** Request message for UpdateAdminOverride. */
 export interface UpdateAdminOverrideRequestSDKType {
   name: string;
@@ -697,10 +649,6 @@ export interface DeleteAdminOverrideRequestAmino {
    */
   force_only: QuotaSafetyCheck[];
 }
-export interface DeleteAdminOverrideRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest";
-  value: DeleteAdminOverrideRequestAmino;
-}
 /** Request message for DeleteAdminOverride. */
 export interface DeleteAdminOverrideRequestSDKType {
   name: string;
@@ -747,10 +695,6 @@ export interface ListAdminOverridesRequestAmino {
    */
   page_token: string;
 }
-export interface ListAdminOverridesRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ListAdminOverridesRequest";
-  value: ListAdminOverridesRequestAmino;
-}
 /** Request message for ListAdminOverrides */
 export interface ListAdminOverridesRequestSDKType {
   parent: string;
@@ -781,10 +725,6 @@ export interface ListAdminOverridesResponseAmino {
    */
   next_page_token: string;
 }
-export interface ListAdminOverridesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ListAdminOverridesResponse";
-  value: ListAdminOverridesResponseAmino;
-}
 /** Response message for ListAdminOverrides. */
 export interface ListAdminOverridesResponseSDKType {
   overrides: QuotaOverrideSDKType[];
@@ -803,10 +743,6 @@ export interface BatchCreateAdminOverridesResponseProtoMsg {
 export interface BatchCreateAdminOverridesResponseAmino {
   /** The overrides that were created. */
   overrides: QuotaOverrideAmino[];
-}
-export interface BatchCreateAdminOverridesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.BatchCreateAdminOverridesResponse";
-  value: BatchCreateAdminOverridesResponseAmino;
 }
 /** Response message for BatchCreateAdminOverrides */
 export interface BatchCreateAdminOverridesResponseSDKType {
@@ -866,10 +802,6 @@ export interface ImportAdminOverridesRequestAmino {
    */
   force_only: QuotaSafetyCheck[];
 }
-export interface ImportAdminOverridesRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ImportAdminOverridesRequest";
-  value: ImportAdminOverridesRequestAmino;
-}
 /** Request message for ImportAdminOverrides */
 export interface ImportAdminOverridesRequestSDKType {
   parent: string;
@@ -891,10 +823,6 @@ export interface ImportAdminOverridesResponseAmino {
   /** The overrides that were created from the imported data. */
   overrides: QuotaOverrideAmino[];
 }
-export interface ImportAdminOverridesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ImportAdminOverridesResponse";
-  value: ImportAdminOverridesResponseAmino;
-}
 /** Response message for ImportAdminOverrides */
 export interface ImportAdminOverridesResponseSDKType {
   overrides: QuotaOverrideSDKType[];
@@ -915,10 +843,6 @@ export interface ImportAdminOverridesMetadataProtoMsg {
  * of LRO returned by ImportAdminOverrides.
  */
 export interface ImportAdminOverridesMetadataAmino {}
-export interface ImportAdminOverridesMetadataAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ImportAdminOverridesMetadata";
-  value: ImportAdminOverridesMetadataAmino;
-}
 /**
  * Metadata message that provides information such as progress,
  * partial failures, and similar information on each GetOperation call
@@ -980,10 +904,6 @@ export interface CreateConsumerOverrideRequestAmino {
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
   force_only: QuotaSafetyCheck[];
-}
-export interface CreateConsumerOverrideRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest";
-  value: CreateConsumerOverrideRequestAmino;
 }
 /** Request message for CreateConsumerOverride. */
 export interface CreateConsumerOverrideRequestSDKType {
@@ -1062,10 +982,6 @@ export interface UpdateConsumerOverrideRequestAmino {
    */
   force_only: QuotaSafetyCheck[];
 }
-export interface UpdateConsumerOverrideRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest";
-  value: UpdateConsumerOverrideRequestAmino;
-}
 /** Request message for UpdateConsumerOverride. */
 export interface UpdateConsumerOverrideRequestSDKType {
   name: string;
@@ -1124,10 +1040,6 @@ export interface DeleteConsumerOverrideRequestAmino {
    */
   force_only: QuotaSafetyCheck[];
 }
-export interface DeleteConsumerOverrideRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest";
-  value: DeleteConsumerOverrideRequestAmino;
-}
 /** Request message for DeleteConsumerOverride. */
 export interface DeleteConsumerOverrideRequestSDKType {
   name: string;
@@ -1174,10 +1086,6 @@ export interface ListConsumerOverridesRequestAmino {
    */
   page_token: string;
 }
-export interface ListConsumerOverridesRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ListConsumerOverridesRequest";
-  value: ListConsumerOverridesRequestAmino;
-}
 /** Request message for ListConsumerOverrides */
 export interface ListConsumerOverridesRequestSDKType {
   parent: string;
@@ -1208,10 +1116,6 @@ export interface ListConsumerOverridesResponseAmino {
    */
   next_page_token: string;
 }
-export interface ListConsumerOverridesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ListConsumerOverridesResponse";
-  value: ListConsumerOverridesResponseAmino;
-}
 /** Response message for ListConsumerOverrides. */
 export interface ListConsumerOverridesResponseSDKType {
   overrides: QuotaOverrideSDKType[];
@@ -1230,10 +1134,6 @@ export interface BatchCreateConsumerOverridesResponseProtoMsg {
 export interface BatchCreateConsumerOverridesResponseAmino {
   /** The overrides that were created. */
   overrides: QuotaOverrideAmino[];
-}
-export interface BatchCreateConsumerOverridesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.BatchCreateConsumerOverridesResponse";
-  value: BatchCreateConsumerOverridesResponseAmino;
 }
 /** Response message for BatchCreateConsumerOverrides */
 export interface BatchCreateConsumerOverridesResponseSDKType {
@@ -1293,10 +1193,6 @@ export interface ImportConsumerOverridesRequestAmino {
    */
   force_only: QuotaSafetyCheck[];
 }
-export interface ImportConsumerOverridesRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest";
-  value: ImportConsumerOverridesRequestAmino;
-}
 /** Request message for ImportConsumerOverrides */
 export interface ImportConsumerOverridesRequestSDKType {
   parent: string;
@@ -1318,10 +1214,6 @@ export interface ImportConsumerOverridesResponseAmino {
   /** The overrides that were created from the imported data. */
   overrides: QuotaOverrideAmino[];
 }
-export interface ImportConsumerOverridesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesResponse";
-  value: ImportConsumerOverridesResponseAmino;
-}
 /** Response message for ImportConsumerOverrides */
 export interface ImportConsumerOverridesResponseSDKType {
   overrides: QuotaOverrideSDKType[];
@@ -1342,10 +1234,6 @@ export interface ImportConsumerOverridesMetadataProtoMsg {
  * of LRO returned by ImportConsumerOverrides.
  */
 export interface ImportConsumerOverridesMetadataAmino {}
-export interface ImportConsumerOverridesMetadataAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesMetadata";
-  value: ImportConsumerOverridesMetadataAmino;
-}
 /**
  * Metadata message that provides information such as progress,
  * partial failures, and similar information on each GetOperation call
@@ -1365,10 +1253,6 @@ export interface ImportAdminQuotaPoliciesResponseProtoMsg {
 export interface ImportAdminQuotaPoliciesResponseAmino {
   /** The policies that were created from the imported data. */
   policies: AdminQuotaPolicyAmino[];
-}
-export interface ImportAdminQuotaPoliciesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesResponse";
-  value: ImportAdminQuotaPoliciesResponseAmino;
 }
 /** Response message for ImportAdminQuotaPolicies */
 export interface ImportAdminQuotaPoliciesResponseSDKType {
@@ -1390,10 +1274,6 @@ export interface ImportAdminQuotaPoliciesMetadataProtoMsg {
  * of LRO returned by ImportAdminQuotaPolicies.
  */
 export interface ImportAdminQuotaPoliciesMetadataAmino {}
-export interface ImportAdminQuotaPoliciesMetadataAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesMetadata";
-  value: ImportAdminQuotaPoliciesMetadataAmino;
-}
 /**
  * Metadata message that provides information such as progress,
  * partial failures, and similar information on each GetOperation call
@@ -1416,10 +1296,6 @@ export interface CreateAdminQuotaPolicyMetadataProtoMsg {
  * of LRO returned by CreateAdminQuotaPolicy.
  */
 export interface CreateAdminQuotaPolicyMetadataAmino {}
-export interface CreateAdminQuotaPolicyMetadataAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.CreateAdminQuotaPolicyMetadata";
-  value: CreateAdminQuotaPolicyMetadataAmino;
-}
 /**
  * Metadata message that provides information such as progress,
  * partial failures, and similar information on each GetOperation call
@@ -1442,10 +1318,6 @@ export interface UpdateAdminQuotaPolicyMetadataProtoMsg {
  * of LRO returned by UpdateAdminQuotaPolicy.
  */
 export interface UpdateAdminQuotaPolicyMetadataAmino {}
-export interface UpdateAdminQuotaPolicyMetadataAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.UpdateAdminQuotaPolicyMetadata";
-  value: UpdateAdminQuotaPolicyMetadataAmino;
-}
 /**
  * Metadata message that provides information such as progress,
  * partial failures, and similar information on each GetOperation call
@@ -1468,10 +1340,6 @@ export interface DeleteAdminQuotaPolicyMetadataProtoMsg {
  * of LRO returned by DeleteAdminQuotaPolicy.
  */
 export interface DeleteAdminQuotaPolicyMetadataAmino {}
-export interface DeleteAdminQuotaPolicyMetadataAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.DeleteAdminQuotaPolicyMetadata";
-  value: DeleteAdminQuotaPolicyMetadataAmino;
-}
 /**
  * Metadata message that provides information such as progress,
  * partial failures, and similar information on each GetOperation call
@@ -1508,10 +1376,6 @@ export interface GenerateServiceIdentityRequestAmino {
    */
   parent: string;
 }
-export interface GenerateServiceIdentityRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest";
-  value: GenerateServiceIdentityRequestAmino;
-}
 /** Request message for generating service identity. */
 export interface GenerateServiceIdentityRequestSDKType {
   parent: string;
@@ -1542,10 +1406,6 @@ export interface GetServiceIdentityResponseAmino {
   /** Service identity state. */
   state: GetServiceIdentityResponse_IdentityState;
 }
-export interface GetServiceIdentityResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.GetServiceIdentityResponse";
-  value: GetServiceIdentityResponseAmino;
-}
 /** Response message for getting service identity. */
 export interface GetServiceIdentityResponseSDKType {
   identity?: ServiceIdentitySDKType;
@@ -1559,10 +1419,6 @@ export interface GetServiceIdentityMetadataProtoMsg {
 }
 /** Metadata for the `GetServiceIdentity` method. */
 export interface GetServiceIdentityMetadataAmino {}
-export interface GetServiceIdentityMetadataAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.GetServiceIdentityMetadata";
-  value: GetServiceIdentityMetadataAmino;
-}
 /** Metadata for the `GetServiceIdentity` method. */
 export interface GetServiceIdentityMetadataSDKType {}
 function createBaseEnableServiceRequest(): EnableServiceRequest {
@@ -1629,9 +1485,6 @@ export const EnableServiceRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAminoMsg(object: EnableServiceRequestAminoMsg): EnableServiceRequest {
-    return EnableServiceRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: EnableServiceRequestProtoMsg): EnableServiceRequest {
     return EnableServiceRequest.decode(message.value);
@@ -1711,9 +1564,6 @@ export const DisableServiceRequest = {
     obj.name = message.name;
     return obj;
   },
-  fromAminoMsg(object: DisableServiceRequestAminoMsg): DisableServiceRequest {
-    return DisableServiceRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: DisableServiceRequestProtoMsg): DisableServiceRequest {
     return DisableServiceRequest.decode(message.value);
   },
@@ -1791,9 +1641,6 @@ export const GetServiceRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAminoMsg(object: GetServiceRequestAminoMsg): GetServiceRequest {
-    return GetServiceRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GetServiceRequestProtoMsg): GetServiceRequest {
     return GetServiceRequest.decode(message.value);
@@ -1915,9 +1762,6 @@ export const ListServicesRequest = {
     obj.filter = message.filter;
     return obj;
   },
-  fromAminoMsg(object: ListServicesRequestAminoMsg): ListServicesRequest {
-    return ListServicesRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListServicesRequestProtoMsg): ListServicesRequest {
     return ListServicesRequest.decode(message.value);
   },
@@ -2022,9 +1866,6 @@ export const ListServicesResponse = {
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromAminoMsg(object: ListServicesResponseAminoMsg): ListServicesResponse {
-    return ListServicesResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListServicesResponseProtoMsg): ListServicesResponse {
     return ListServicesResponse.decode(message.value);
   },
@@ -2128,9 +1969,6 @@ export const BatchEnableServicesRequest = {
       obj.service_ids = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: BatchEnableServicesRequestAminoMsg): BatchEnableServicesRequest {
-    return BatchEnableServicesRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: BatchEnableServicesRequestProtoMsg): BatchEnableServicesRequest {
     return BatchEnableServicesRequest.decode(message.value);
@@ -2252,9 +2090,6 @@ export const ListConsumerQuotaMetricsRequest = {
     obj.view = message.view;
     return obj;
   },
-  fromAminoMsg(object: ListConsumerQuotaMetricsRequestAminoMsg): ListConsumerQuotaMetricsRequest {
-    return ListConsumerQuotaMetricsRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListConsumerQuotaMetricsRequestProtoMsg): ListConsumerQuotaMetricsRequest {
     return ListConsumerQuotaMetricsRequest.decode(message.value);
   },
@@ -2359,9 +2194,6 @@ export const ListConsumerQuotaMetricsResponse = {
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromAminoMsg(object: ListConsumerQuotaMetricsResponseAminoMsg): ListConsumerQuotaMetricsResponse {
-    return ListConsumerQuotaMetricsResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListConsumerQuotaMetricsResponseProtoMsg): ListConsumerQuotaMetricsResponse {
     return ListConsumerQuotaMetricsResponse.decode(message.value);
   },
@@ -2454,9 +2286,6 @@ export const GetConsumerQuotaMetricRequest = {
     obj.view = message.view;
     return obj;
   },
-  fromAminoMsg(object: GetConsumerQuotaMetricRequestAminoMsg): GetConsumerQuotaMetricRequest {
-    return GetConsumerQuotaMetricRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: GetConsumerQuotaMetricRequestProtoMsg): GetConsumerQuotaMetricRequest {
     return GetConsumerQuotaMetricRequest.decode(message.value);
   },
@@ -2548,9 +2377,6 @@ export const GetConsumerQuotaLimitRequest = {
     obj.name = message.name;
     obj.view = message.view;
     return obj;
-  },
-  fromAminoMsg(object: GetConsumerQuotaLimitRequestAminoMsg): GetConsumerQuotaLimitRequest {
-    return GetConsumerQuotaLimitRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GetConsumerQuotaLimitRequestProtoMsg): GetConsumerQuotaLimitRequest {
     return GetConsumerQuotaLimitRequest.decode(message.value);
@@ -2694,9 +2520,6 @@ export const CreateAdminOverrideRequest = {
       obj.force_only = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: CreateAdminOverrideRequestAminoMsg): CreateAdminOverrideRequest {
-    return CreateAdminOverrideRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: CreateAdminOverrideRequestProtoMsg): CreateAdminOverrideRequest {
     return CreateAdminOverrideRequest.decode(message.value);
@@ -2857,9 +2680,6 @@ export const UpdateAdminOverrideRequest = {
     }
     return obj;
   },
-  fromAminoMsg(object: UpdateAdminOverrideRequestAminoMsg): UpdateAdminOverrideRequest {
-    return UpdateAdminOverrideRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: UpdateAdminOverrideRequestProtoMsg): UpdateAdminOverrideRequest {
     return UpdateAdminOverrideRequest.decode(message.value);
   },
@@ -2987,9 +2807,6 @@ export const DeleteAdminOverrideRequest = {
     }
     return obj;
   },
-  fromAminoMsg(object: DeleteAdminOverrideRequestAminoMsg): DeleteAdminOverrideRequest {
-    return DeleteAdminOverrideRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: DeleteAdminOverrideRequestProtoMsg): DeleteAdminOverrideRequest {
     return DeleteAdminOverrideRequest.decode(message.value);
   },
@@ -3096,9 +2913,6 @@ export const ListAdminOverridesRequest = {
     obj.page_token = message.pageToken;
     return obj;
   },
-  fromAminoMsg(object: ListAdminOverridesRequestAminoMsg): ListAdminOverridesRequest {
-    return ListAdminOverridesRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListAdminOverridesRequestProtoMsg): ListAdminOverridesRequest {
     return ListAdminOverridesRequest.decode(message.value);
   },
@@ -3203,9 +3017,6 @@ export const ListAdminOverridesResponse = {
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromAminoMsg(object: ListAdminOverridesResponseAminoMsg): ListAdminOverridesResponse {
-    return ListAdminOverridesResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListAdminOverridesResponseProtoMsg): ListAdminOverridesResponse {
     return ListAdminOverridesResponse.decode(message.value);
   },
@@ -3295,9 +3106,6 @@ export const BatchCreateAdminOverridesResponse = {
       obj.overrides = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: BatchCreateAdminOverridesResponseAminoMsg): BatchCreateAdminOverridesResponse {
-    return BatchCreateAdminOverridesResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: BatchCreateAdminOverridesResponseProtoMsg): BatchCreateAdminOverridesResponse {
     return BatchCreateAdminOverridesResponse.decode(message.value);
@@ -3442,9 +3250,6 @@ export const ImportAdminOverridesRequest = {
     }
     return obj;
   },
-  fromAminoMsg(object: ImportAdminOverridesRequestAminoMsg): ImportAdminOverridesRequest {
-    return ImportAdminOverridesRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ImportAdminOverridesRequestProtoMsg): ImportAdminOverridesRequest {
     return ImportAdminOverridesRequest.decode(message.value);
   },
@@ -3535,9 +3340,6 @@ export const ImportAdminOverridesResponse = {
     }
     return obj;
   },
-  fromAminoMsg(object: ImportAdminOverridesResponseAminoMsg): ImportAdminOverridesResponse {
-    return ImportAdminOverridesResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ImportAdminOverridesResponseProtoMsg): ImportAdminOverridesResponse {
     return ImportAdminOverridesResponse.decode(message.value);
   },
@@ -3598,9 +3400,6 @@ export const ImportAdminOverridesMetadata = {
   toAmino(_: ImportAdminOverridesMetadata): ImportAdminOverridesMetadataAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: ImportAdminOverridesMetadataAminoMsg): ImportAdminOverridesMetadata {
-    return ImportAdminOverridesMetadata.fromAmino(object.value);
   },
   fromProtoMsg(message: ImportAdminOverridesMetadataProtoMsg): ImportAdminOverridesMetadata {
     return ImportAdminOverridesMetadata.decode(message.value);
@@ -3744,9 +3543,6 @@ export const CreateConsumerOverrideRequest = {
       obj.force_only = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: CreateConsumerOverrideRequestAminoMsg): CreateConsumerOverrideRequest {
-    return CreateConsumerOverrideRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: CreateConsumerOverrideRequestProtoMsg): CreateConsumerOverrideRequest {
     return CreateConsumerOverrideRequest.decode(message.value);
@@ -3907,9 +3703,6 @@ export const UpdateConsumerOverrideRequest = {
     }
     return obj;
   },
-  fromAminoMsg(object: UpdateConsumerOverrideRequestAminoMsg): UpdateConsumerOverrideRequest {
-    return UpdateConsumerOverrideRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: UpdateConsumerOverrideRequestProtoMsg): UpdateConsumerOverrideRequest {
     return UpdateConsumerOverrideRequest.decode(message.value);
   },
@@ -4037,9 +3830,6 @@ export const DeleteConsumerOverrideRequest = {
     }
     return obj;
   },
-  fromAminoMsg(object: DeleteConsumerOverrideRequestAminoMsg): DeleteConsumerOverrideRequest {
-    return DeleteConsumerOverrideRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: DeleteConsumerOverrideRequestProtoMsg): DeleteConsumerOverrideRequest {
     return DeleteConsumerOverrideRequest.decode(message.value);
   },
@@ -4146,9 +3936,6 @@ export const ListConsumerOverridesRequest = {
     obj.page_token = message.pageToken;
     return obj;
   },
-  fromAminoMsg(object: ListConsumerOverridesRequestAminoMsg): ListConsumerOverridesRequest {
-    return ListConsumerOverridesRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListConsumerOverridesRequestProtoMsg): ListConsumerOverridesRequest {
     return ListConsumerOverridesRequest.decode(message.value);
   },
@@ -4253,9 +4040,6 @@ export const ListConsumerOverridesResponse = {
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromAminoMsg(object: ListConsumerOverridesResponseAminoMsg): ListConsumerOverridesResponse {
-    return ListConsumerOverridesResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListConsumerOverridesResponseProtoMsg): ListConsumerOverridesResponse {
     return ListConsumerOverridesResponse.decode(message.value);
   },
@@ -4345,9 +4129,6 @@ export const BatchCreateConsumerOverridesResponse = {
       obj.overrides = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: BatchCreateConsumerOverridesResponseAminoMsg): BatchCreateConsumerOverridesResponse {
-    return BatchCreateConsumerOverridesResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: BatchCreateConsumerOverridesResponseProtoMsg): BatchCreateConsumerOverridesResponse {
     return BatchCreateConsumerOverridesResponse.decode(message.value);
@@ -4492,9 +4273,6 @@ export const ImportConsumerOverridesRequest = {
     }
     return obj;
   },
-  fromAminoMsg(object: ImportConsumerOverridesRequestAminoMsg): ImportConsumerOverridesRequest {
-    return ImportConsumerOverridesRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ImportConsumerOverridesRequestProtoMsg): ImportConsumerOverridesRequest {
     return ImportConsumerOverridesRequest.decode(message.value);
   },
@@ -4585,9 +4363,6 @@ export const ImportConsumerOverridesResponse = {
     }
     return obj;
   },
-  fromAminoMsg(object: ImportConsumerOverridesResponseAminoMsg): ImportConsumerOverridesResponse {
-    return ImportConsumerOverridesResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ImportConsumerOverridesResponseProtoMsg): ImportConsumerOverridesResponse {
     return ImportConsumerOverridesResponse.decode(message.value);
   },
@@ -4648,9 +4423,6 @@ export const ImportConsumerOverridesMetadata = {
   toAmino(_: ImportConsumerOverridesMetadata): ImportConsumerOverridesMetadataAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: ImportConsumerOverridesMetadataAminoMsg): ImportConsumerOverridesMetadata {
-    return ImportConsumerOverridesMetadata.fromAmino(object.value);
   },
   fromProtoMsg(message: ImportConsumerOverridesMetadataProtoMsg): ImportConsumerOverridesMetadata {
     return ImportConsumerOverridesMetadata.decode(message.value);
@@ -4742,9 +4514,6 @@ export const ImportAdminQuotaPoliciesResponse = {
     }
     return obj;
   },
-  fromAminoMsg(object: ImportAdminQuotaPoliciesResponseAminoMsg): ImportAdminQuotaPoliciesResponse {
-    return ImportAdminQuotaPoliciesResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ImportAdminQuotaPoliciesResponseProtoMsg): ImportAdminQuotaPoliciesResponse {
     return ImportAdminQuotaPoliciesResponse.decode(message.value);
   },
@@ -4805,9 +4574,6 @@ export const ImportAdminQuotaPoliciesMetadata = {
   toAmino(_: ImportAdminQuotaPoliciesMetadata): ImportAdminQuotaPoliciesMetadataAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: ImportAdminQuotaPoliciesMetadataAminoMsg): ImportAdminQuotaPoliciesMetadata {
-    return ImportAdminQuotaPoliciesMetadata.fromAmino(object.value);
   },
   fromProtoMsg(message: ImportAdminQuotaPoliciesMetadataProtoMsg): ImportAdminQuotaPoliciesMetadata {
     return ImportAdminQuotaPoliciesMetadata.decode(message.value);
@@ -4870,9 +4636,6 @@ export const CreateAdminQuotaPolicyMetadata = {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: CreateAdminQuotaPolicyMetadataAminoMsg): CreateAdminQuotaPolicyMetadata {
-    return CreateAdminQuotaPolicyMetadata.fromAmino(object.value);
-  },
   fromProtoMsg(message: CreateAdminQuotaPolicyMetadataProtoMsg): CreateAdminQuotaPolicyMetadata {
     return CreateAdminQuotaPolicyMetadata.decode(message.value);
   },
@@ -4934,9 +4697,6 @@ export const UpdateAdminQuotaPolicyMetadata = {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: UpdateAdminQuotaPolicyMetadataAminoMsg): UpdateAdminQuotaPolicyMetadata {
-    return UpdateAdminQuotaPolicyMetadata.fromAmino(object.value);
-  },
   fromProtoMsg(message: UpdateAdminQuotaPolicyMetadataProtoMsg): UpdateAdminQuotaPolicyMetadata {
     return UpdateAdminQuotaPolicyMetadata.decode(message.value);
   },
@@ -4997,9 +4757,6 @@ export const DeleteAdminQuotaPolicyMetadata = {
   toAmino(_: DeleteAdminQuotaPolicyMetadata): DeleteAdminQuotaPolicyMetadataAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: DeleteAdminQuotaPolicyMetadataAminoMsg): DeleteAdminQuotaPolicyMetadata {
-    return DeleteAdminQuotaPolicyMetadata.fromAmino(object.value);
   },
   fromProtoMsg(message: DeleteAdminQuotaPolicyMetadataProtoMsg): DeleteAdminQuotaPolicyMetadata {
     return DeleteAdminQuotaPolicyMetadata.decode(message.value);
@@ -5078,9 +4835,6 @@ export const GenerateServiceIdentityRequest = {
     const obj: any = {};
     obj.parent = message.parent;
     return obj;
-  },
-  fromAminoMsg(object: GenerateServiceIdentityRequestAminoMsg): GenerateServiceIdentityRequest {
-    return GenerateServiceIdentityRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GenerateServiceIdentityRequestProtoMsg): GenerateServiceIdentityRequest {
     return GenerateServiceIdentityRequest.decode(message.value);
@@ -5176,9 +4930,6 @@ export const GetServiceIdentityResponse = {
     obj.state = message.state;
     return obj;
   },
-  fromAminoMsg(object: GetServiceIdentityResponseAminoMsg): GetServiceIdentityResponse {
-    return GetServiceIdentityResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: GetServiceIdentityResponseProtoMsg): GetServiceIdentityResponse {
     return GetServiceIdentityResponse.decode(message.value);
   },
@@ -5239,9 +4990,6 @@ export const GetServiceIdentityMetadata = {
   toAmino(_: GetServiceIdentityMetadata): GetServiceIdentityMetadataAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: GetServiceIdentityMetadataAminoMsg): GetServiceIdentityMetadata {
-    return GetServiceIdentityMetadata.fromAmino(object.value);
   },
   fromProtoMsg(message: GetServiceIdentityMetadataProtoMsg): GetServiceIdentityMetadata {
     return GetServiceIdentityMetadata.decode(message.value);

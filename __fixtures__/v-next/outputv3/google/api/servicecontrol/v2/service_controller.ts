@@ -55,10 +55,6 @@ export interface CheckRequestAmino {
   /** Optional. Contains a comma-separated list of flags. */
   flags: string;
 }
-export interface CheckRequestAminoMsg {
-  type: "/google.api.servicecontrol.v2.CheckRequest";
-  value: CheckRequestAmino;
-}
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
   service_name: string;
@@ -129,10 +125,6 @@ export interface ResourceInfoAmino {
    */
   location: string;
 }
-export interface ResourceInfoAminoMsg {
-  type: "/google.api.servicecontrol.v2.ResourceInfo";
-  value: ResourceInfoAmino;
-}
 /** Describes a resource referenced in the request. */
 export interface ResourceInfoSDKType {
   name: string;
@@ -152,10 +144,6 @@ export interface CheckResponse_HeadersEntryProtoMsg {
 export interface CheckResponse_HeadersEntryAmino {
   key: string;
   value: string;
-}
-export interface CheckResponse_HeadersEntryAminoMsg {
-  type: string;
-  value: CheckResponse_HeadersEntryAmino;
 }
 export interface CheckResponse_HeadersEntrySDKType {
   key: string;
@@ -190,10 +178,6 @@ export interface CheckResponseAmino {
   headers: {
     [key: string]: string;
   };
-}
-export interface CheckResponseAminoMsg {
-  type: "/google.api.servicecontrol.v2.CheckResponse";
-  value: CheckResponseAmino;
 }
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
@@ -254,10 +238,6 @@ export interface ReportRequestAmino {
    */
   operations: AttributeContextAmino[];
 }
-export interface ReportRequestAminoMsg {
-  type: "/google.api.servicecontrol.v2.ReportRequest";
-  value: ReportRequestAmino;
-}
 /** Request message for the Report method. */
 export interface ReportRequestSDKType {
   service_name: string;
@@ -278,10 +258,6 @@ export interface ReportResponseProtoMsg {
  * If the request contains any invalid data, the server returns an RPC error.
  */
 export interface ReportResponseAmino {}
-export interface ReportResponseAminoMsg {
-  type: "/google.api.servicecontrol.v2.ReportResponse";
-  value: ReportResponseAmino;
-}
 /**
  * Response message for the Report method.
  * If the request contains any invalid data, the server returns an RPC error.
@@ -422,9 +398,6 @@ export const CheckRequest = {
     obj.flags = message.flags;
     return obj;
   },
-  fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
-    return CheckRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: CheckRequestProtoMsg): CheckRequest {
     return CheckRequest.decode(message.value);
   },
@@ -559,9 +532,6 @@ export const ResourceInfo = {
     obj.location = message.location;
     return obj;
   },
-  fromAminoMsg(object: ResourceInfoAminoMsg): ResourceInfo {
-    return ResourceInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: ResourceInfoProtoMsg): ResourceInfo {
     return ResourceInfo.decode(message.value);
   },
@@ -652,9 +622,6 @@ export const CheckResponse_HeadersEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: CheckResponse_HeadersEntryAminoMsg): CheckResponse_HeadersEntry {
-    return CheckResponse_HeadersEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: CheckResponse_HeadersEntryProtoMsg): CheckResponse_HeadersEntry {
     return CheckResponse_HeadersEntry.decode(message.value);
@@ -787,9 +754,6 @@ export const CheckResponse = {
     }
     return obj;
   },
-  fromAminoMsg(object: CheckResponseAminoMsg): CheckResponse {
-    return CheckResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: CheckResponseProtoMsg): CheckResponse {
     return CheckResponse.decode(message.value);
   },
@@ -908,9 +872,6 @@ export const ReportRequest = {
     }
     return obj;
   },
-  fromAminoMsg(object: ReportRequestAminoMsg): ReportRequest {
-    return ReportRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ReportRequestProtoMsg): ReportRequest {
     return ReportRequest.decode(message.value);
   },
@@ -971,9 +932,6 @@ export const ReportResponse = {
   toAmino(_: ReportResponse): ReportResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: ReportResponseAminoMsg): ReportResponse {
-    return ReportResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: ReportResponseProtoMsg): ReportResponse {
     return ReportResponse.decode(message.value);

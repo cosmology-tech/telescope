@@ -25,10 +25,6 @@ export interface ParsedExprAmino {
   /** The syntax version of the source, e.g. `cel1`. */
   syntax_version: string;
 }
-export interface ParsedExprAminoMsg {
-  type: "/google.api.expr.v1beta1.ParsedExpr";
-  value: ParsedExprAmino;
-}
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExprSDKType {
   expr?: ExprSDKType;
@@ -117,10 +113,6 @@ export interface ExprAmino {
   /** A comprehension expression. */
   comprehension_expr?: Expr_ComprehensionAmino;
 }
-export interface ExprAminoMsg {
-  type: "/google.api.expr.v1beta1.Expr";
-  value: ExprAmino;
-}
 /**
  * An abstract representation of a common expression.
  * 
@@ -171,10 +163,6 @@ export interface Expr_IdentAmino {
    * Qualified names are represented by the [Expr.Select][google.api.expr.v1beta1.Expr.Select] expression.
    */
   name: string;
-}
-export interface Expr_IdentAminoMsg {
-  type: "/google.api.expr.v1beta1.Ident";
-  value: Expr_IdentAmino;
 }
 /** An identifier expression. e.g. `request`. */
 export interface Expr_IdentSDKType {
@@ -230,10 +218,6 @@ export interface Expr_SelectAmino {
    */
   test_only: boolean;
 }
-export interface Expr_SelectAminoMsg {
-  type: "/google.api.expr.v1beta1.Select";
-  value: Expr_SelectAmino;
-}
 /** A field selection expression. e.g. `request.auth`. */
 export interface Expr_SelectSDKType {
   operand?: ExprSDKType;
@@ -276,10 +260,6 @@ export interface Expr_CallAmino {
   /** The arguments. */
   args: ExprAmino[];
 }
-export interface Expr_CallAminoMsg {
-  type: "/google.api.expr.v1beta1.Call";
-  value: Expr_CallAmino;
-}
 /**
  * A call expression, including calls to predefined functions and operators.
  * 
@@ -313,10 +293,6 @@ export interface Expr_CreateListProtoMsg {
 export interface Expr_CreateListAmino {
   /** The elements part of the list. */
   elements: ExprAmino[];
-}
-export interface Expr_CreateListAminoMsg {
-  type: "/google.api.expr.v1beta1.CreateList";
-  value: Expr_CreateListAmino;
 }
 /**
  * A list creation expression.
@@ -363,10 +339,6 @@ export interface Expr_CreateStructAmino {
   /** The entries in the creation expression. */
   entries: Expr_CreateStruct_EntryAmino[];
 }
-export interface Expr_CreateStructAminoMsg {
-  type: "/google.api.expr.v1beta1.CreateStruct";
-  value: Expr_CreateStructAmino;
-}
 /**
  * A map or message creation expression.
  * 
@@ -411,10 +383,6 @@ export interface Expr_CreateStruct_EntryAmino {
   map_key?: ExprAmino;
   /** Required. The value assigned to the key. */
   value?: ExprAmino;
-}
-export interface Expr_CreateStruct_EntryAminoMsg {
-  type: "/google.api.expr.v1beta1.Entry";
-  value: Expr_CreateStruct_EntryAmino;
 }
 /** Represents an entry. */
 export interface Expr_CreateStruct_EntrySDKType {
@@ -541,10 +509,6 @@ export interface Expr_ComprehensionAmino {
    */
   result?: ExprAmino;
 }
-export interface Expr_ComprehensionAminoMsg {
-  type: "/google.api.expr.v1beta1.Comprehension";
-  value: Expr_ComprehensionAmino;
-}
 /**
  * A comprehension expression applied to a list or map.
  * 
@@ -643,10 +607,6 @@ export interface LiteralAmino {
   string_value?: string;
   /** bytes value. */
   bytes_value?: Uint8Array;
-}
-export interface LiteralAminoMsg {
-  type: "/google.api.expr.v1beta1.Literal";
-  value: LiteralAmino;
 }
 /**
  * Represents a primitive literal.
@@ -766,9 +726,6 @@ export const ParsedExpr = {
     obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined;
     obj.syntax_version = message.syntaxVersion;
     return obj;
-  },
-  fromAminoMsg(object: ParsedExprAminoMsg): ParsedExpr {
-    return ParsedExpr.fromAmino(object.value);
   },
   fromProtoMsg(message: ParsedExprProtoMsg): ParsedExpr {
     return ParsedExpr.decode(message.value);
@@ -960,9 +917,6 @@ export const Expr = {
     obj.comprehension_expr = message.comprehensionExpr ? Expr_Comprehension.toAmino(message.comprehensionExpr) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ExprAminoMsg): Expr {
-    return Expr.fromAmino(object.value);
-  },
   fromProtoMsg(message: ExprProtoMsg): Expr {
     return Expr.decode(message.value);
   },
@@ -1040,9 +994,6 @@ export const Expr_Ident = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAminoMsg(object: Expr_IdentAminoMsg): Expr_Ident {
-    return Expr_Ident.fromAmino(object.value);
   },
   fromProtoMsg(message: Expr_IdentProtoMsg): Expr_Ident {
     return Expr_Ident.decode(message.value);
@@ -1151,9 +1102,6 @@ export const Expr_Select = {
     obj.field = message.field;
     obj.test_only = message.testOnly;
     return obj;
-  },
-  fromAminoMsg(object: Expr_SelectAminoMsg): Expr_Select {
-    return Expr_Select.fromAmino(object.value);
   },
   fromProtoMsg(message: Expr_SelectProtoMsg): Expr_Select {
     return Expr_Select.decode(message.value);
@@ -1275,9 +1223,6 @@ export const Expr_Call = {
     }
     return obj;
   },
-  fromAminoMsg(object: Expr_CallAminoMsg): Expr_Call {
-    return Expr_Call.fromAmino(object.value);
-  },
   fromProtoMsg(message: Expr_CallProtoMsg): Expr_Call {
     return Expr_Call.decode(message.value);
   },
@@ -1367,9 +1312,6 @@ export const Expr_CreateList = {
       obj.elements = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: Expr_CreateListAminoMsg): Expr_CreateList {
-    return Expr_CreateList.fromAmino(object.value);
   },
   fromProtoMsg(message: Expr_CreateListProtoMsg): Expr_CreateList {
     return Expr_CreateList.decode(message.value);
@@ -1474,9 +1416,6 @@ export const Expr_CreateStruct = {
       obj.entries = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: Expr_CreateStructAminoMsg): Expr_CreateStruct {
-    return Expr_CreateStruct.fromAmino(object.value);
   },
   fromProtoMsg(message: Expr_CreateStructProtoMsg): Expr_CreateStruct {
     return Expr_CreateStruct.decode(message.value);
@@ -1601,9 +1540,6 @@ export const Expr_CreateStruct_Entry = {
     obj.map_key = message.mapKey ? Expr.toAmino(message.mapKey) : undefined;
     obj.value = message.value ? Expr.toAmino(message.value) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: Expr_CreateStruct_EntryAminoMsg): Expr_CreateStruct_Entry {
-    return Expr_CreateStruct_Entry.fromAmino(object.value);
   },
   fromProtoMsg(message: Expr_CreateStruct_EntryProtoMsg): Expr_CreateStruct_Entry {
     return Expr_CreateStruct_Entry.decode(message.value);
@@ -1777,9 +1713,6 @@ export const Expr_Comprehension = {
     obj.result = message.result ? Expr.toAmino(message.result) : undefined;
     return obj;
   },
-  fromAminoMsg(object: Expr_ComprehensionAminoMsg): Expr_Comprehension {
-    return Expr_Comprehension.fromAmino(object.value);
-  },
   fromProtoMsg(message: Expr_ComprehensionProtoMsg): Expr_Comprehension {
     return Expr_Comprehension.decode(message.value);
   },
@@ -1949,9 +1882,6 @@ export const Literal = {
     obj.string_value = message.stringValue;
     obj.bytes_value = message.bytesValue;
     return obj;
-  },
-  fromAminoMsg(object: LiteralAminoMsg): Literal {
-    return Literal.fromAmino(object.value);
   },
   fromProtoMsg(message: LiteralProtoMsg): Literal {
     return Literal.decode(message.value);

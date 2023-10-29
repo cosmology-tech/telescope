@@ -42,7 +42,8 @@ const options: TelescopeOptions = {
     },
     aminoEncoding: {
         enabled: true,
-        useLegacyInlineEncoding: false
+        useLegacyInlineEncoding: false,
+        disableMsgTypes: true
     },
     prototypes: {
         enabled: true,

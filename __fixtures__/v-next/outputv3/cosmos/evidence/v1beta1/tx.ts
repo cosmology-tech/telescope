@@ -25,10 +25,6 @@ export interface MsgSubmitEvidenceAmino {
   submitter: string;
   evidence?: AnyAmino;
 }
-export interface MsgSubmitEvidenceAminoMsg {
-  type: "cosmos-sdk/MsgSubmitEvidence";
-  value: MsgSubmitEvidenceAmino;
-}
 /**
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
  * Evidence of misbehavior such as equivocation or counterfactual signing.
@@ -50,10 +46,6 @@ export interface MsgSubmitEvidenceResponseProtoMsg {
 export interface MsgSubmitEvidenceResponseAmino {
   /** hash defines the hash of the evidence. */
   hash: Uint8Array;
-}
-export interface MsgSubmitEvidenceResponseAminoMsg {
-  type: "cosmos-sdk/MsgSubmitEvidenceResponse";
-  value: MsgSubmitEvidenceResponseAmino;
 }
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponseSDKType {
@@ -141,15 +133,6 @@ export const MsgSubmitEvidence = {
     obj.evidence = message.evidence ? Evidence_ToAmino((message.evidence as Any)) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgSubmitEvidenceAminoMsg): MsgSubmitEvidence {
-    return MsgSubmitEvidence.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSubmitEvidence): MsgSubmitEvidenceAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSubmitEvidence",
-      value: MsgSubmitEvidence.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgSubmitEvidenceProtoMsg): MsgSubmitEvidence {
     return MsgSubmitEvidence.decode(message.value);
   },
@@ -228,15 +211,6 @@ export const MsgSubmitEvidenceResponse = {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
-  },
-  fromAminoMsg(object: MsgSubmitEvidenceResponseAminoMsg): MsgSubmitEvidenceResponse {
-    return MsgSubmitEvidenceResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSubmitEvidenceResponse",
-      value: MsgSubmitEvidenceResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgSubmitEvidenceResponseProtoMsg): MsgSubmitEvidenceResponse {
     return MsgSubmitEvidenceResponse.decode(message.value);

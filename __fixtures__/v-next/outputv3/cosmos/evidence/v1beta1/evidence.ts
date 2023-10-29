@@ -26,10 +26,6 @@ export interface EquivocationAmino {
   power: string;
   consensus_address: string;
 }
-export interface EquivocationAminoMsg {
-  type: "cosmos-sdk/Equivocation";
-  value: EquivocationAmino;
-}
 /**
  * Equivocation implements the Evidence interface and defines evidence of double
  * signing misbehavior.
@@ -151,15 +147,6 @@ export const Equivocation = {
     obj.power = message.power ? message.power.toString() : undefined;
     obj.consensus_address = message.consensusAddress;
     return obj;
-  },
-  fromAminoMsg(object: EquivocationAminoMsg): Equivocation {
-    return Equivocation.fromAmino(object.value);
-  },
-  toAminoMsg(message: Equivocation): EquivocationAminoMsg {
-    return {
-      type: "cosmos-sdk/Equivocation",
-      value: Equivocation.toAmino(message)
-    };
   },
   fromProtoMsg(message: EquivocationProtoMsg): Equivocation {
     return Equivocation.decode(message.value);

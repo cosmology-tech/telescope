@@ -19,10 +19,6 @@ export interface CapabilityProtoMsg {
 export interface CapabilityAmino {
   index: string;
 }
-export interface CapabilityAminoMsg {
-  type: "cosmos-sdk/Capability";
-  value: CapabilityAmino;
-}
 /**
  * Capability defines an implementation of an object capability. The index
  * provided to a Capability must be globally unique.
@@ -50,10 +46,6 @@ export interface OwnerAmino {
   module: string;
   name: string;
 }
-export interface OwnerAminoMsg {
-  type: "cosmos-sdk/Owner";
-  value: OwnerAmino;
-}
 /**
  * Owner defines a single capability owner. An owner is defined by the name of
  * capability and the module name.
@@ -79,10 +71,6 @@ export interface CapabilityOwnersProtoMsg {
  */
 export interface CapabilityOwnersAmino {
   owners: OwnerAmino[];
-}
-export interface CapabilityOwnersAminoMsg {
-  type: "cosmos-sdk/CapabilityOwners";
-  value: CapabilityOwnersAmino;
 }
 /**
  * CapabilityOwners defines a set of owners of a single Capability. The set of
@@ -158,15 +146,6 @@ export const Capability = {
     const obj: any = {};
     obj.index = message.index ? message.index.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: CapabilityAminoMsg): Capability {
-    return Capability.fromAmino(object.value);
-  },
-  toAminoMsg(message: Capability): CapabilityAminoMsg {
-    return {
-      type: "cosmos-sdk/Capability",
-      value: Capability.toAmino(message)
-    };
   },
   fromProtoMsg(message: CapabilityProtoMsg): Capability {
     return Capability.decode(message.value);
@@ -261,15 +240,6 @@ export const Owner = {
     obj.name = message.name;
     return obj;
   },
-  fromAminoMsg(object: OwnerAminoMsg): Owner {
-    return Owner.fromAmino(object.value);
-  },
-  toAminoMsg(message: Owner): OwnerAminoMsg {
-    return {
-      type: "cosmos-sdk/Owner",
-      value: Owner.toAmino(message)
-    };
-  },
   fromProtoMsg(message: OwnerProtoMsg): Owner {
     return Owner.decode(message.value);
   },
@@ -360,15 +330,6 @@ export const CapabilityOwners = {
       obj.owners = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: CapabilityOwnersAminoMsg): CapabilityOwners {
-    return CapabilityOwners.fromAmino(object.value);
-  },
-  toAminoMsg(message: CapabilityOwners): CapabilityOwnersAminoMsg {
-    return {
-      type: "cosmos-sdk/CapabilityOwners",
-      value: CapabilityOwners.toAmino(message)
-    };
   },
   fromProtoMsg(message: CapabilityOwnersProtoMsg): CapabilityOwners {
     return CapabilityOwners.decode(message.value);

@@ -76,10 +76,6 @@ export interface LogDescriptorAmino {
    */
   display_name: string;
 }
-export interface LogDescriptorAminoMsg {
-  type: "/google.api.LogDescriptor";
-  value: LogDescriptorAmino;
-}
 /**
  * A description of a log type. Example in YAML format:
  * 
@@ -214,9 +210,6 @@ export const LogDescriptor = {
     obj.description = message.description;
     obj.display_name = message.displayName;
     return obj;
-  },
-  fromAminoMsg(object: LogDescriptorAminoMsg): LogDescriptor {
-    return LogDescriptor.fromAmino(object.value);
   },
   fromProtoMsg(message: LogDescriptorProtoMsg): LogDescriptor {
     return LogDescriptor.decode(message.value);

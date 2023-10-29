@@ -69,10 +69,6 @@ export interface OrderIDAmino {
   gseq: number;
   oseq: number;
 }
-export interface OrderIDAminoMsg {
-  type: "/akash.market.v1beta2.OrderID";
-  value: OrderIDAmino;
-}
 /** OrderID stores owner and all other seq numbers */
 export interface OrderIDSDKType {
   owner: string;
@@ -97,10 +93,6 @@ export interface OrderAmino {
   state: Order_State;
   spec?: GroupSpecAmino;
   created_at: string;
-}
-export interface OrderAminoMsg {
-  type: "/akash.market.v1beta2.Order";
-  value: OrderAmino;
 }
 /** Order stores orderID, state of order and other details */
 export interface OrderSDKType {
@@ -128,10 +120,6 @@ export interface OrderFiltersAmino {
   gseq: number;
   oseq: number;
   state: string;
-}
-export interface OrderFiltersAminoMsg {
-  type: "/akash.market.v1beta2.OrderFilters";
-  value: OrderFiltersAmino;
 }
 /** OrderFilters defines flags for order list filter */
 export interface OrderFiltersSDKType {
@@ -249,9 +237,6 @@ export const OrderID = {
     obj.gseq = message.gseq;
     obj.oseq = message.oseq;
     return obj;
-  },
-  fromAminoMsg(object: OrderIDAminoMsg): OrderID {
-    return OrderID.fromAmino(object.value);
   },
   fromProtoMsg(message: OrderIDProtoMsg): OrderID {
     return OrderID.decode(message.value);
@@ -378,9 +363,6 @@ export const Order = {
     obj.spec = message.spec ? GroupSpec.toAmino(message.spec) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: OrderAminoMsg): Order {
-    return Order.fromAmino(object.value);
   },
   fromProtoMsg(message: OrderProtoMsg): Order {
     return Order.decode(message.value);
@@ -517,9 +499,6 @@ export const OrderFilters = {
     obj.oseq = message.oseq;
     obj.state = message.state;
     return obj;
-  },
-  fromAminoMsg(object: OrderFiltersAminoMsg): OrderFilters {
-    return OrderFilters.fromAmino(object.value);
   },
   fromProtoMsg(message: OrderFiltersProtoMsg): OrderFilters {
     return OrderFilters.decode(message.value);

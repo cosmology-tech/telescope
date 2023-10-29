@@ -77,10 +77,6 @@ export interface MsgCreateBidAmino {
   price?: DecCoinAmino;
   deposit?: CoinAmino;
 }
-export interface MsgCreateBidAminoMsg {
-  type: "/akash.market.v1beta2.MsgCreateBid";
-  value: MsgCreateBidAmino;
-}
 /** MsgCreateBid defines an SDK message for creating Bid */
 export interface MsgCreateBidSDKType {
   order: OrderIDSDKType;
@@ -96,10 +92,6 @@ export interface MsgCreateBidResponseProtoMsg {
 }
 /** MsgCreateBidResponse defines the Msg/CreateBid response type. */
 export interface MsgCreateBidResponseAmino {}
-export interface MsgCreateBidResponseAminoMsg {
-  type: "/akash.market.v1beta2.MsgCreateBidResponse";
-  value: MsgCreateBidResponseAmino;
-}
 /** MsgCreateBidResponse defines the Msg/CreateBid response type. */
 export interface MsgCreateBidResponseSDKType {}
 /** MsgCloseBid defines an SDK message for closing bid */
@@ -114,10 +106,6 @@ export interface MsgCloseBidProtoMsg {
 export interface MsgCloseBidAmino {
   bid_id?: BidIDAmino;
 }
-export interface MsgCloseBidAminoMsg {
-  type: "/akash.market.v1beta2.MsgCloseBid";
-  value: MsgCloseBidAmino;
-}
 /** MsgCloseBid defines an SDK message for closing bid */
 export interface MsgCloseBidSDKType {
   bid_id: BidIDSDKType;
@@ -130,10 +118,6 @@ export interface MsgCloseBidResponseProtoMsg {
 }
 /** MsgCloseBidResponse defines the Msg/CloseBid response type. */
 export interface MsgCloseBidResponseAmino {}
-export interface MsgCloseBidResponseAminoMsg {
-  type: "/akash.market.v1beta2.MsgCloseBidResponse";
-  value: MsgCloseBidResponseAmino;
-}
 /** MsgCloseBidResponse defines the Msg/CloseBid response type. */
 export interface MsgCloseBidResponseSDKType {}
 /**
@@ -161,10 +145,6 @@ export interface BidIDAmino {
   gseq: number;
   oseq: number;
   provider: string;
-}
-export interface BidIDAminoMsg {
-  type: "/akash.market.v1beta2.BidID";
-  value: BidIDAmino;
 }
 /**
  * BidID stores owner and all other seq numbers
@@ -195,10 +175,6 @@ export interface BidAmino {
   price?: DecCoinAmino;
   created_at: string;
 }
-export interface BidAminoMsg {
-  type: "/akash.market.v1beta2.Bid";
-  value: BidAmino;
-}
 /** Bid stores BidID, state of bid and price */
 export interface BidSDKType {
   bid_id: BidIDSDKType;
@@ -227,10 +203,6 @@ export interface BidFiltersAmino {
   oseq: number;
   provider: string;
   state: string;
-}
-export interface BidFiltersAminoMsg {
-  type: "/akash.market.v1beta2.BidFilters";
-  value: BidFiltersAmino;
 }
 /** BidFilters defines flags for bid list filter */
 export interface BidFiltersSDKType {
@@ -354,9 +326,6 @@ export const MsgCreateBid = {
     obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgCreateBidAminoMsg): MsgCreateBid {
-    return MsgCreateBid.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgCreateBidProtoMsg): MsgCreateBid {
     return MsgCreateBid.decode(message.value);
   },
@@ -417,9 +386,6 @@ export const MsgCreateBidResponse = {
   toAmino(_: MsgCreateBidResponse): MsgCreateBidResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgCreateBidResponseAminoMsg): MsgCreateBidResponse {
-    return MsgCreateBidResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgCreateBidResponseProtoMsg): MsgCreateBidResponse {
     return MsgCreateBidResponse.decode(message.value);
@@ -501,9 +467,6 @@ export const MsgCloseBid = {
     obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgCloseBidAminoMsg): MsgCloseBid {
-    return MsgCloseBid.fromAmino(object.value);
-  },
   fromProtoMsg(message: MsgCloseBidProtoMsg): MsgCloseBid {
     return MsgCloseBid.decode(message.value);
   },
@@ -564,9 +527,6 @@ export const MsgCloseBidResponse = {
   toAmino(_: MsgCloseBidResponse): MsgCloseBidResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgCloseBidResponseAminoMsg): MsgCloseBidResponse {
-    return MsgCloseBidResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgCloseBidResponseProtoMsg): MsgCloseBidResponse {
     return MsgCloseBidResponse.decode(message.value);
@@ -704,9 +664,6 @@ export const BidID = {
     obj.provider = message.provider;
     return obj;
   },
-  fromAminoMsg(object: BidIDAminoMsg): BidID {
-    return BidID.fromAmino(object.value);
-  },
   fromProtoMsg(message: BidIDProtoMsg): BidID {
     return BidID.decode(message.value);
   },
@@ -832,9 +789,6 @@ export const Bid = {
     obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: BidAminoMsg): Bid {
-    return Bid.fromAmino(object.value);
   },
   fromProtoMsg(message: BidProtoMsg): Bid {
     return Bid.decode(message.value);
@@ -985,9 +939,6 @@ export const BidFilters = {
     obj.provider = message.provider;
     obj.state = message.state;
     return obj;
-  },
-  fromAminoMsg(object: BidFiltersAminoMsg): BidFilters {
-    return BidFilters.fromAmino(object.value);
   },
   fromProtoMsg(message: BidFiltersProtoMsg): BidFilters {
     return BidFilters.decode(message.value);

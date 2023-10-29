@@ -25,10 +25,6 @@ export interface QueryConnectionRequestAmino {
   /** connection unique identifier */
   connection_id: string;
 }
-export interface QueryConnectionRequestAminoMsg {
-  type: "cosmos-sdk/QueryConnectionRequest";
-  value: QueryConnectionRequestAmino;
-}
 /**
  * QueryConnectionRequest is the request type for the Query/Connection RPC
  * method
@@ -66,10 +62,6 @@ export interface QueryConnectionResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
-export interface QueryConnectionResponseAminoMsg {
-  type: "cosmos-sdk/QueryConnectionResponse";
-  value: QueryConnectionResponseAmino;
-}
 /**
  * QueryConnectionResponse is the response type for the Query/Connection RPC
  * method. Besides the connection end, it includes a proof and the height from
@@ -97,10 +89,6 @@ export interface QueryConnectionsRequestProtoMsg {
  */
 export interface QueryConnectionsRequestAmino {
   pagination?: PageRequestAmino;
-}
-export interface QueryConnectionsRequestAminoMsg {
-  type: "cosmos-sdk/QueryConnectionsRequest";
-  value: QueryConnectionsRequestAmino;
 }
 /**
  * QueryConnectionsRequest is the request type for the Query/Connections RPC
@@ -137,10 +125,6 @@ export interface QueryConnectionsResponseAmino {
   /** query block height */
   height?: HeightAmino;
 }
-export interface QueryConnectionsResponseAminoMsg {
-  type: "cosmos-sdk/QueryConnectionsResponse";
-  value: QueryConnectionsResponseAmino;
-}
 /**
  * QueryConnectionsResponse is the response type for the Query/Connections RPC
  * method.
@@ -169,10 +153,6 @@ export interface QueryClientConnectionsRequestProtoMsg {
 export interface QueryClientConnectionsRequestAmino {
   /** client identifier associated with a connection */
   client_id: string;
-}
-export interface QueryClientConnectionsRequestAminoMsg {
-  type: "cosmos-sdk/QueryClientConnectionsRequest";
-  value: QueryClientConnectionsRequestAmino;
 }
 /**
  * QueryClientConnectionsRequest is the request type for the
@@ -209,10 +189,6 @@ export interface QueryClientConnectionsResponseAmino {
   /** height at which the proof was generated */
   proof_height?: HeightAmino;
 }
-export interface QueryClientConnectionsResponseAminoMsg {
-  type: "cosmos-sdk/QueryClientConnectionsResponse";
-  value: QueryClientConnectionsResponseAmino;
-}
 /**
  * QueryClientConnectionsResponse is the response type for the
  * Query/ClientConnections RPC method
@@ -241,10 +217,6 @@ export interface QueryConnectionClientStateRequestProtoMsg {
 export interface QueryConnectionClientStateRequestAmino {
   /** connection identifier */
   connection_id: string;
-}
-export interface QueryConnectionClientStateRequestAminoMsg {
-  type: "cosmos-sdk/QueryConnectionClientStateRequest";
-  value: QueryConnectionClientStateRequestAmino;
 }
 /**
  * QueryConnectionClientStateRequest is the request type for the
@@ -281,10 +253,6 @@ export interface QueryConnectionClientStateResponseAmino {
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
-export interface QueryConnectionClientStateResponseAminoMsg {
-  type: "cosmos-sdk/QueryConnectionClientStateResponse";
-  value: QueryConnectionClientStateResponseAmino;
-}
 /**
  * QueryConnectionClientStateResponse is the response type for the
  * Query/ConnectionClientState RPC method
@@ -317,10 +285,6 @@ export interface QueryConnectionConsensusStateRequestAmino {
   connection_id: string;
   revision_number: string;
   revision_height: string;
-}
-export interface QueryConnectionConsensusStateRequestAminoMsg {
-  type: "cosmos-sdk/QueryConnectionConsensusStateRequest";
-  value: QueryConnectionConsensusStateRequestAmino;
 }
 /**
  * QueryConnectionConsensusStateRequest is the request type for the
@@ -362,10 +326,6 @@ export interface QueryConnectionConsensusStateResponseAmino {
   proof: Uint8Array;
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
-}
-export interface QueryConnectionConsensusStateResponseAminoMsg {
-  type: "cosmos-sdk/QueryConnectionConsensusStateResponse";
-  value: QueryConnectionConsensusStateResponseAmino;
 }
 /**
  * QueryConnectionConsensusStateResponse is the response type for the
@@ -442,15 +402,6 @@ export const QueryConnectionRequest = {
     const obj: any = {};
     obj.connection_id = message.connectionId;
     return obj;
-  },
-  fromAminoMsg(object: QueryConnectionRequestAminoMsg): QueryConnectionRequest {
-    return QueryConnectionRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConnectionRequest): QueryConnectionRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConnectionRequest",
-      value: QueryConnectionRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryConnectionRequestProtoMsg): QueryConnectionRequest {
     return QueryConnectionRequest.decode(message.value);
@@ -563,15 +514,6 @@ export const QueryConnectionResponse = {
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
-  fromAminoMsg(object: QueryConnectionResponseAminoMsg): QueryConnectionResponse {
-    return QueryConnectionResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConnectionResponse): QueryConnectionResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConnectionResponse",
-      value: QueryConnectionResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryConnectionResponseProtoMsg): QueryConnectionResponse {
     return QueryConnectionResponse.decode(message.value);
   },
@@ -652,15 +594,6 @@ export const QueryConnectionsRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryConnectionsRequestAminoMsg): QueryConnectionsRequest {
-    return QueryConnectionsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConnectionsRequest): QueryConnectionsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConnectionsRequest",
-      value: QueryConnectionsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryConnectionsRequestProtoMsg): QueryConnectionsRequest {
     return QueryConnectionsRequest.decode(message.value);
@@ -785,15 +718,6 @@ export const QueryConnectionsResponse = {
     obj.height = message.height ? Height.toAmino(message.height) : {};
     return obj;
   },
-  fromAminoMsg(object: QueryConnectionsResponseAminoMsg): QueryConnectionsResponse {
-    return QueryConnectionsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConnectionsResponse): QueryConnectionsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConnectionsResponse",
-      value: QueryConnectionsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryConnectionsResponseProtoMsg): QueryConnectionsResponse {
     return QueryConnectionsResponse.decode(message.value);
   },
@@ -872,15 +796,6 @@ export const QueryClientConnectionsRequest = {
     const obj: any = {};
     obj.client_id = message.clientId;
     return obj;
-  },
-  fromAminoMsg(object: QueryClientConnectionsRequestAminoMsg): QueryClientConnectionsRequest {
-    return QueryClientConnectionsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClientConnectionsRequest): QueryClientConnectionsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryClientConnectionsRequest",
-      value: QueryClientConnectionsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryClientConnectionsRequestProtoMsg): QueryClientConnectionsRequest {
     return QueryClientConnectionsRequest.decode(message.value);
@@ -1003,15 +918,6 @@ export const QueryClientConnectionsResponse = {
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
-  fromAminoMsg(object: QueryClientConnectionsResponseAminoMsg): QueryClientConnectionsResponse {
-    return QueryClientConnectionsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClientConnectionsResponse): QueryClientConnectionsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryClientConnectionsResponse",
-      value: QueryClientConnectionsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryClientConnectionsResponseProtoMsg): QueryClientConnectionsResponse {
     return QueryClientConnectionsResponse.decode(message.value);
   },
@@ -1090,15 +996,6 @@ export const QueryConnectionClientStateRequest = {
     const obj: any = {};
     obj.connection_id = message.connectionId;
     return obj;
-  },
-  fromAminoMsg(object: QueryConnectionClientStateRequestAminoMsg): QueryConnectionClientStateRequest {
-    return QueryConnectionClientStateRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConnectionClientStateRequest): QueryConnectionClientStateRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConnectionClientStateRequest",
-      value: QueryConnectionClientStateRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryConnectionClientStateRequestProtoMsg): QueryConnectionClientStateRequest {
     return QueryConnectionClientStateRequest.decode(message.value);
@@ -1211,15 +1108,6 @@ export const QueryConnectionClientStateResponse = {
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
-  fromAminoMsg(object: QueryConnectionClientStateResponseAminoMsg): QueryConnectionClientStateResponse {
-    return QueryConnectionClientStateResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConnectionClientStateResponse): QueryConnectionClientStateResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConnectionClientStateResponse",
-      value: QueryConnectionClientStateResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryConnectionClientStateResponseProtoMsg): QueryConnectionClientStateResponse {
     return QueryConnectionClientStateResponse.decode(message.value);
   },
@@ -1330,15 +1218,6 @@ export const QueryConnectionConsensusStateRequest = {
     obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
     obj.revision_height = message.revisionHeight ? message.revisionHeight.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryConnectionConsensusStateRequestAminoMsg): QueryConnectionConsensusStateRequest {
-    return QueryConnectionConsensusStateRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConnectionConsensusStateRequest): QueryConnectionConsensusStateRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConnectionConsensusStateRequest",
-      value: QueryConnectionConsensusStateRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryConnectionConsensusStateRequestProtoMsg): QueryConnectionConsensusStateRequest {
     return QueryConnectionConsensusStateRequest.decode(message.value);
@@ -1464,15 +1343,6 @@ export const QueryConnectionConsensusStateResponse = {
     obj.proof = message.proof;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
-  },
-  fromAminoMsg(object: QueryConnectionConsensusStateResponseAminoMsg): QueryConnectionConsensusStateResponse {
-    return QueryConnectionConsensusStateResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryConnectionConsensusStateResponse): QueryConnectionConsensusStateResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryConnectionConsensusStateResponse",
-      value: QueryConnectionConsensusStateResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryConnectionConsensusStateResponseProtoMsg): QueryConnectionConsensusStateResponse {
     return QueryConnectionConsensusStateResponse.decode(message.value);

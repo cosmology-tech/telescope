@@ -17,10 +17,6 @@ export interface QueryBalanceRequestAmino {
   class_id: string;
   owner: string;
 }
-export interface QueryBalanceRequestAminoMsg {
-  type: "cosmos-sdk/QueryBalanceRequest";
-  value: QueryBalanceRequestAmino;
-}
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method */
 export interface QueryBalanceRequestSDKType {
   class_id: string;
@@ -37,10 +33,6 @@ export interface QueryBalanceResponseProtoMsg {
 /** QueryBalanceResponse is the response type for the Query/Balance RPC method */
 export interface QueryBalanceResponseAmino {
   amount: string;
-}
-export interface QueryBalanceResponseAminoMsg {
-  type: "cosmos-sdk/QueryBalanceResponse";
-  value: QueryBalanceResponseAmino;
 }
 /** QueryBalanceResponse is the response type for the Query/Balance RPC method */
 export interface QueryBalanceResponseSDKType {
@@ -60,10 +52,6 @@ export interface QueryOwnerRequestAmino {
   class_id: string;
   id: string;
 }
-export interface QueryOwnerRequestAminoMsg {
-  type: "cosmos-sdk/QueryOwnerRequest";
-  value: QueryOwnerRequestAmino;
-}
 /** QueryOwnerRequest is the request type for the Query/Owner RPC method */
 export interface QueryOwnerRequestSDKType {
   class_id: string;
@@ -81,10 +69,6 @@ export interface QueryOwnerResponseProtoMsg {
 export interface QueryOwnerResponseAmino {
   owner: string;
 }
-export interface QueryOwnerResponseAminoMsg {
-  type: "cosmos-sdk/QueryOwnerResponse";
-  value: QueryOwnerResponseAmino;
-}
 /** QueryOwnerResponse is the response type for the Query/Owner RPC method */
 export interface QueryOwnerResponseSDKType {
   owner: string;
@@ -101,10 +85,6 @@ export interface QuerySupplyRequestProtoMsg {
 export interface QuerySupplyRequestAmino {
   class_id: string;
 }
-export interface QuerySupplyRequestAminoMsg {
-  type: "cosmos-sdk/QuerySupplyRequest";
-  value: QuerySupplyRequestAmino;
-}
 /** QuerySupplyRequest is the request type for the Query/Supply RPC method */
 export interface QuerySupplyRequestSDKType {
   class_id: string;
@@ -120,10 +100,6 @@ export interface QuerySupplyResponseProtoMsg {
 /** QuerySupplyResponse is the response type for the Query/Supply RPC method */
 export interface QuerySupplyResponseAmino {
   amount: string;
-}
-export interface QuerySupplyResponseAminoMsg {
-  type: "cosmos-sdk/QuerySupplyResponse";
-  value: QuerySupplyResponseAmino;
 }
 /** QuerySupplyResponse is the response type for the Query/Supply RPC method */
 export interface QuerySupplyResponseSDKType {
@@ -145,10 +121,6 @@ export interface QueryNFTsRequestAmino {
   owner: string;
   pagination?: PageRequestAmino;
 }
-export interface QueryNFTsRequestAminoMsg {
-  type: "cosmos-sdk/QueryNFTsRequest";
-  value: QueryNFTsRequestAmino;
-}
 /** QueryNFTstRequest is the request type for the Query/NFTs RPC method */
 export interface QueryNFTsRequestSDKType {
   class_id: string;
@@ -169,10 +141,6 @@ export interface QueryNFTsResponseAmino {
   nfts: NFTAmino[];
   pagination?: PageResponseAmino;
 }
-export interface QueryNFTsResponseAminoMsg {
-  type: "cosmos-sdk/QueryNFTsResponse";
-  value: QueryNFTsResponseAmino;
-}
 /** QueryNFTsResponse is the response type for the Query/NFTs RPC methods */
 export interface QueryNFTsResponseSDKType {
   nfts: NFTSDKType[];
@@ -192,10 +160,6 @@ export interface QueryNFTRequestAmino {
   class_id: string;
   id: string;
 }
-export interface QueryNFTRequestAminoMsg {
-  type: "cosmos-sdk/QueryNFTRequest";
-  value: QueryNFTRequestAmino;
-}
 /** QueryNFTRequest is the request type for the Query/NFT RPC method */
 export interface QueryNFTRequestSDKType {
   class_id: string;
@@ -213,10 +177,6 @@ export interface QueryNFTResponseProtoMsg {
 export interface QueryNFTResponseAmino {
   nft?: NFTAmino;
 }
-export interface QueryNFTResponseAminoMsg {
-  type: "cosmos-sdk/QueryNFTResponse";
-  value: QueryNFTResponseAmino;
-}
 /** QueryNFTResponse is the response type for the Query/NFT RPC method */
 export interface QueryNFTResponseSDKType {
   nft?: NFTSDKType;
@@ -233,10 +193,6 @@ export interface QueryClassRequestProtoMsg {
 export interface QueryClassRequestAmino {
   class_id: string;
 }
-export interface QueryClassRequestAminoMsg {
-  type: "cosmos-sdk/QueryClassRequest";
-  value: QueryClassRequestAmino;
-}
 /** QueryClassRequest is the request type for the Query/Class RPC method */
 export interface QueryClassRequestSDKType {
   class_id: string;
@@ -252,10 +208,6 @@ export interface QueryClassResponseProtoMsg {
 /** QueryClassResponse is the response type for the Query/Class RPC method */
 export interface QueryClassResponseAmino {
   class?: ClassAmino;
-}
-export interface QueryClassResponseAminoMsg {
-  type: "cosmos-sdk/QueryClassResponse";
-  value: QueryClassResponseAmino;
 }
 /** QueryClassResponse is the response type for the Query/Class RPC method */
 export interface QueryClassResponseSDKType {
@@ -275,10 +227,6 @@ export interface QueryClassesRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface QueryClassesRequestAminoMsg {
-  type: "cosmos-sdk/QueryClassesRequest";
-  value: QueryClassesRequestAmino;
-}
 /** QueryClassesRequest is the request type for the Query/Classes RPC method */
 export interface QueryClassesRequestSDKType {
   pagination?: PageRequestSDKType;
@@ -296,10 +244,6 @@ export interface QueryClassesResponseProtoMsg {
 export interface QueryClassesResponseAmino {
   classes: ClassAmino[];
   pagination?: PageResponseAmino;
-}
-export interface QueryClassesResponseAminoMsg {
-  type: "cosmos-sdk/QueryClassesResponse";
-  value: QueryClassesResponseAmino;
 }
 /** QueryClassesResponse is the response type for the Query/Classes RPC method */
 export interface QueryClassesResponseSDKType {
@@ -386,15 +330,6 @@ export const QueryBalanceRequest = {
     obj.owner = message.owner;
     return obj;
   },
-  fromAminoMsg(object: QueryBalanceRequestAminoMsg): QueryBalanceRequest {
-    return QueryBalanceRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryBalanceRequest): QueryBalanceRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryBalanceRequest",
-      value: QueryBalanceRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryBalanceRequestProtoMsg): QueryBalanceRequest {
     return QueryBalanceRequest.decode(message.value);
   },
@@ -475,15 +410,6 @@ export const QueryBalanceResponse = {
     const obj: any = {};
     obj.amount = message.amount ? message.amount.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryBalanceResponseAminoMsg): QueryBalanceResponse {
-    return QueryBalanceResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryBalanceResponse): QueryBalanceResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryBalanceResponse",
-      value: QueryBalanceResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryBalanceResponseProtoMsg): QueryBalanceResponse {
     return QueryBalanceResponse.decode(message.value);
@@ -578,15 +504,6 @@ export const QueryOwnerRequest = {
     obj.id = message.id;
     return obj;
   },
-  fromAminoMsg(object: QueryOwnerRequestAminoMsg): QueryOwnerRequest {
-    return QueryOwnerRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryOwnerRequest): QueryOwnerRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryOwnerRequest",
-      value: QueryOwnerRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryOwnerRequestProtoMsg): QueryOwnerRequest {
     return QueryOwnerRequest.decode(message.value);
   },
@@ -666,15 +583,6 @@ export const QueryOwnerResponse = {
     obj.owner = message.owner;
     return obj;
   },
-  fromAminoMsg(object: QueryOwnerResponseAminoMsg): QueryOwnerResponse {
-    return QueryOwnerResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryOwnerResponse): QueryOwnerResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryOwnerResponse",
-      value: QueryOwnerResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryOwnerResponseProtoMsg): QueryOwnerResponse {
     return QueryOwnerResponse.decode(message.value);
   },
@@ -753,15 +661,6 @@ export const QuerySupplyRequest = {
     const obj: any = {};
     obj.class_id = message.classId;
     return obj;
-  },
-  fromAminoMsg(object: QuerySupplyRequestAminoMsg): QuerySupplyRequest {
-    return QuerySupplyRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySupplyRequest): QuerySupplyRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QuerySupplyRequest",
-      value: QuerySupplyRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QuerySupplyRequestProtoMsg): QuerySupplyRequest {
     return QuerySupplyRequest.decode(message.value);
@@ -843,15 +742,6 @@ export const QuerySupplyResponse = {
     const obj: any = {};
     obj.amount = message.amount ? message.amount.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QuerySupplyResponseAminoMsg): QuerySupplyResponse {
-    return QuerySupplyResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySupplyResponse): QuerySupplyResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QuerySupplyResponse",
-      value: QuerySupplyResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QuerySupplyResponseProtoMsg): QuerySupplyResponse {
     return QuerySupplyResponse.decode(message.value);
@@ -962,15 +852,6 @@ export const QueryNFTsRequest = {
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryNFTsRequestAminoMsg): QueryNFTsRequest {
-    return QueryNFTsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryNFTsRequest): QueryNFTsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryNFTsRequest",
-      value: QueryNFTsRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryNFTsRequestProtoMsg): QueryNFTsRequest {
     return QueryNFTsRequest.decode(message.value);
   },
@@ -1078,15 +959,6 @@ export const QueryNFTsResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryNFTsResponseAminoMsg): QueryNFTsResponse {
-    return QueryNFTsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryNFTsResponse): QueryNFTsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryNFTsResponse",
-      value: QueryNFTsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryNFTsResponseProtoMsg): QueryNFTsResponse {
     return QueryNFTsResponse.decode(message.value);
   },
@@ -1180,15 +1052,6 @@ export const QueryNFTRequest = {
     obj.id = message.id;
     return obj;
   },
-  fromAminoMsg(object: QueryNFTRequestAminoMsg): QueryNFTRequest {
-    return QueryNFTRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryNFTRequest): QueryNFTRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryNFTRequest",
-      value: QueryNFTRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryNFTRequestProtoMsg): QueryNFTRequest {
     return QueryNFTRequest.decode(message.value);
   },
@@ -1270,15 +1133,6 @@ export const QueryNFTResponse = {
     obj.nft = message.nft ? NFT.toAmino(message.nft) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryNFTResponseAminoMsg): QueryNFTResponse {
-    return QueryNFTResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryNFTResponse): QueryNFTResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryNFTResponse",
-      value: QueryNFTResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryNFTResponseProtoMsg): QueryNFTResponse {
     return QueryNFTResponse.decode(message.value);
   },
@@ -1357,15 +1211,6 @@ export const QueryClassRequest = {
     const obj: any = {};
     obj.class_id = message.classId;
     return obj;
-  },
-  fromAminoMsg(object: QueryClassRequestAminoMsg): QueryClassRequest {
-    return QueryClassRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClassRequest): QueryClassRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryClassRequest",
-      value: QueryClassRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryClassRequestProtoMsg): QueryClassRequest {
     return QueryClassRequest.decode(message.value);
@@ -1448,15 +1293,6 @@ export const QueryClassResponse = {
     obj.class = message.class ? Class.toAmino(message.class) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryClassResponseAminoMsg): QueryClassResponse {
-    return QueryClassResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClassResponse): QueryClassResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryClassResponse",
-      value: QueryClassResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryClassResponseProtoMsg): QueryClassResponse {
     return QueryClassResponse.decode(message.value);
   },
@@ -1537,15 +1373,6 @@ export const QueryClassesRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryClassesRequestAminoMsg): QueryClassesRequest {
-    return QueryClassesRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClassesRequest): QueryClassesRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryClassesRequest",
-      value: QueryClassesRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryClassesRequestProtoMsg): QueryClassesRequest {
     return QueryClassesRequest.decode(message.value);
@@ -1653,15 +1480,6 @@ export const QueryClassesResponse = {
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryClassesResponseAminoMsg): QueryClassesResponse {
-    return QueryClassesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryClassesResponse): QueryClassesResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryClassesResponse",
-      value: QueryClassesResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryClassesResponseProtoMsg): QueryClassesResponse {
     return QueryClassesResponse.decode(message.value);

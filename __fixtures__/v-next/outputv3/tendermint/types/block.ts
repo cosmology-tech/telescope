@@ -19,10 +19,6 @@ export interface BlockAmino {
   evidence?: EvidenceListAmino;
   last_commit?: CommitAmino;
 }
-export interface BlockAminoMsg {
-  type: "/tendermint.types.Block";
-  value: BlockAmino;
-}
 export interface BlockSDKType {
   header: HeaderSDKType;
   data: DataSDKType;
@@ -143,9 +139,6 @@ export const Block = {
     obj.evidence = message.evidence ? EvidenceList.toAmino(message.evidence) : undefined;
     obj.last_commit = message.lastCommit ? Commit.toAmino(message.lastCommit) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: BlockAminoMsg): Block {
-    return Block.fromAmino(object.value);
   },
   fromProtoMsg(message: BlockProtoMsg): Block {
     return Block.decode(message.value);

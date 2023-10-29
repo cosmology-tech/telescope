@@ -74,10 +74,6 @@ export interface ClaimRecordAmino {
    */
   action_completed: boolean[];
 }
-export interface ClaimRecordAminoMsg {
-  type: "osmosis/claim/claim-record";
-  value: ClaimRecordAmino;
-}
 /** A Claim Records is the metadata of claim data per address */
 export interface ClaimRecordSDKType {
   address: string;
@@ -210,15 +206,6 @@ export const ClaimRecord = {
       obj.action_completed = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ClaimRecordAminoMsg): ClaimRecord {
-    return ClaimRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: ClaimRecord): ClaimRecordAminoMsg {
-    return {
-      type: "osmosis/claim/claim-record",
-      value: ClaimRecord.toAmino(message)
-    };
   },
   fromProtoMsg(message: ClaimRecordProtoMsg): ClaimRecord {
     return ClaimRecord.decode(message.value);

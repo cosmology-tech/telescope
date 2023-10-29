@@ -97,10 +97,6 @@ export interface DeleteLogRequestAmino {
    */
   log_name: string;
 }
-export interface DeleteLogRequestAminoMsg {
-  type: "/google.logging.v2.DeleteLogRequest";
-  value: DeleteLogRequestAmino;
-}
 /** The parameters to DeleteLog. */
 export interface DeleteLogRequestSDKType {
   log_name: string;
@@ -116,10 +112,6 @@ export interface WriteLogEntriesRequest_LabelsEntryProtoMsg {
 export interface WriteLogEntriesRequest_LabelsEntryAmino {
   key: string;
   value: string;
-}
-export interface WriteLogEntriesRequest_LabelsEntryAminoMsg {
-  type: string;
-  value: WriteLogEntriesRequest_LabelsEntryAmino;
 }
 export interface WriteLogEntriesRequest_LabelsEntrySDKType {
   key: string;
@@ -297,10 +289,6 @@ export interface WriteLogEntriesRequestAmino {
    */
   dry_run: boolean;
 }
-export interface WriteLogEntriesRequestAminoMsg {
-  type: "/google.logging.v2.WriteLogEntriesRequest";
-  value: WriteLogEntriesRequestAmino;
-}
 /** The parameters to WriteLogEntries. */
 export interface WriteLogEntriesRequestSDKType {
   log_name: string;
@@ -320,10 +308,6 @@ export interface WriteLogEntriesResponseProtoMsg {
 }
 /** Result returned from WriteLogEntries. */
 export interface WriteLogEntriesResponseAmino {}
-export interface WriteLogEntriesResponseAminoMsg {
-  type: "/google.logging.v2.WriteLogEntriesResponse";
-  value: WriteLogEntriesResponseAmino;
-}
 /** Result returned from WriteLogEntries. */
 export interface WriteLogEntriesResponseSDKType {}
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
@@ -337,10 +321,6 @@ export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntryProtoMsg {
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntryAmino {
   key: number;
   value?: StatusAmino;
-}
-export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntryAminoMsg {
-  type: string;
-  value: WriteLogEntriesPartialErrors_LogEntryErrorsEntryAmino;
 }
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType {
   key: number;
@@ -377,10 +357,6 @@ export interface WriteLogEntriesPartialErrorsAmino {
   log_entry_errors?: {
     [key: number]: StatusAmino;
   };
-}
-export interface WriteLogEntriesPartialErrorsAminoMsg {
-  type: "/google.logging.v2.WriteLogEntriesPartialErrors";
-  value: WriteLogEntriesPartialErrorsAmino;
 }
 /** Error details for WriteLogEntries with partial success. */
 export interface WriteLogEntriesPartialErrorsSDKType {
@@ -502,10 +478,6 @@ export interface ListLogEntriesRequestAmino {
    */
   page_token: string;
 }
-export interface ListLogEntriesRequestAminoMsg {
-  type: "/google.logging.v2.ListLogEntriesRequest";
-  value: ListLogEntriesRequestAmino;
-}
 /** The parameters to `ListLogEntries`. */
 export interface ListLogEntriesRequestSDKType {
   resource_names: string[];
@@ -562,10 +534,6 @@ export interface ListLogEntriesResponseAmino {
    */
   next_page_token: string;
 }
-export interface ListLogEntriesResponseAminoMsg {
-  type: "/google.logging.v2.ListLogEntriesResponse";
-  value: ListLogEntriesResponseAmino;
-}
 /** Result returned from `ListLogEntries`. */
 export interface ListLogEntriesResponseSDKType {
   entries: LogEntrySDKType[];
@@ -607,10 +575,6 @@ export interface ListMonitoredResourceDescriptorsRequestAmino {
    */
   page_token: string;
 }
-export interface ListMonitoredResourceDescriptorsRequestAminoMsg {
-  type: "/google.logging.v2.ListMonitoredResourceDescriptorsRequest";
-  value: ListMonitoredResourceDescriptorsRequestAmino;
-}
 /** The parameters to ListMonitoredResourceDescriptors */
 export interface ListMonitoredResourceDescriptorsRequestSDKType {
   page_size: number;
@@ -641,10 +605,6 @@ export interface ListMonitoredResourceDescriptorsResponseAmino {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   next_page_token: string;
-}
-export interface ListMonitoredResourceDescriptorsResponseAminoMsg {
-  type: "/google.logging.v2.ListMonitoredResourceDescriptorsResponse";
-  value: ListMonitoredResourceDescriptorsResponseAmino;
 }
 /** Result returned from ListMonitoredResourceDescriptors. */
 export interface ListMonitoredResourceDescriptorsResponseSDKType {
@@ -737,10 +697,6 @@ export interface ListLogsRequestAmino {
    */
   resource_names: string[];
 }
-export interface ListLogsRequestAminoMsg {
-  type: "/google.logging.v2.ListLogsRequest";
-  value: ListLogsRequestAmino;
-}
 /** The parameters to ListLogs. */
 export interface ListLogsRequestSDKType {
   parent: string;
@@ -781,10 +737,6 @@ export interface ListLogsResponseAmino {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   next_page_token: string;
-}
-export interface ListLogsResponseAminoMsg {
-  type: "/google.logging.v2.ListLogsResponse";
-  value: ListLogsResponseAmino;
 }
 /** Result returned from ListLogs. */
 export interface ListLogsResponseSDKType {
@@ -867,10 +819,6 @@ export interface TailLogEntriesRequestAmino {
    */
   buffer_window?: DurationAmino;
 }
-export interface TailLogEntriesRequestAminoMsg {
-  type: "/google.logging.v2.TailLogEntriesRequest";
-  value: TailLogEntriesRequestAmino;
-}
 /** The parameters to `TailLogEntries`. */
 export interface TailLogEntriesRequestSDKType {
   resource_names: string[];
@@ -915,10 +863,6 @@ export interface TailLogEntriesResponseAmino {
    */
   suppression_info: TailLogEntriesResponse_SuppressionInfoAmino[];
 }
-export interface TailLogEntriesResponseAminoMsg {
-  type: "/google.logging.v2.TailLogEntriesResponse";
-  value: TailLogEntriesResponseAmino;
-}
 /** Result returned from `TailLogEntries`. */
 export interface TailLogEntriesResponseSDKType {
   entries: LogEntrySDKType[];
@@ -941,10 +885,6 @@ export interface TailLogEntriesResponse_SuppressionInfoAmino {
   reason: TailLogEntriesResponse_SuppressionInfo_Reason;
   /** A lower bound on the count of entries omitted due to `reason`. */
   suppressed_count: number;
-}
-export interface TailLogEntriesResponse_SuppressionInfoAminoMsg {
-  type: "/google.logging.v2.SuppressionInfo";
-  value: TailLogEntriesResponse_SuppressionInfoAmino;
 }
 /** Information about entries that were omitted from the session. */
 export interface TailLogEntriesResponse_SuppressionInfoSDKType {
@@ -1015,9 +955,6 @@ export const DeleteLogRequest = {
     const obj: any = {};
     obj.log_name = message.logName;
     return obj;
-  },
-  fromAminoMsg(object: DeleteLogRequestAminoMsg): DeleteLogRequest {
-    return DeleteLogRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: DeleteLogRequestProtoMsg): DeleteLogRequest {
     return DeleteLogRequest.decode(message.value);
@@ -1109,9 +1046,6 @@ export const WriteLogEntriesRequest_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: WriteLogEntriesRequest_LabelsEntryAminoMsg): WriteLogEntriesRequest_LabelsEntry {
-    return WriteLogEntriesRequest_LabelsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: WriteLogEntriesRequest_LabelsEntryProtoMsg): WriteLogEntriesRequest_LabelsEntry {
     return WriteLogEntriesRequest_LabelsEntry.decode(message.value);
@@ -1312,9 +1246,6 @@ export const WriteLogEntriesRequest = {
     obj.dry_run = message.dryRun;
     return obj;
   },
-  fromAminoMsg(object: WriteLogEntriesRequestAminoMsg): WriteLogEntriesRequest {
-    return WriteLogEntriesRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: WriteLogEntriesRequestProtoMsg): WriteLogEntriesRequest {
     return WriteLogEntriesRequest.decode(message.value);
   },
@@ -1375,9 +1306,6 @@ export const WriteLogEntriesResponse = {
   toAmino(_: WriteLogEntriesResponse): WriteLogEntriesResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: WriteLogEntriesResponseAminoMsg): WriteLogEntriesResponse {
-    return WriteLogEntriesResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: WriteLogEntriesResponseProtoMsg): WriteLogEntriesResponse {
     return WriteLogEntriesResponse.decode(message.value);
@@ -1471,9 +1399,6 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
     obj.key = message.key;
     obj.value = message.value ? Status.toAmino(message.value) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: WriteLogEntriesPartialErrors_LogEntryErrorsEntryAminoMsg): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
-    return WriteLogEntriesPartialErrors_LogEntryErrorsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntryProtoMsg): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
     return WriteLogEntriesPartialErrors_LogEntryErrorsEntry.decode(message.value);
@@ -1589,9 +1514,6 @@ export const WriteLogEntriesPartialErrors = {
       });
     }
     return obj;
-  },
-  fromAminoMsg(object: WriteLogEntriesPartialErrorsAminoMsg): WriteLogEntriesPartialErrors {
-    return WriteLogEntriesPartialErrors.fromAmino(object.value);
   },
   fromProtoMsg(message: WriteLogEntriesPartialErrorsProtoMsg): WriteLogEntriesPartialErrors {
     return WriteLogEntriesPartialErrors.decode(message.value);
@@ -1739,9 +1661,6 @@ export const ListLogEntriesRequest = {
     obj.page_token = message.pageToken;
     return obj;
   },
-  fromAminoMsg(object: ListLogEntriesRequestAminoMsg): ListLogEntriesRequest {
-    return ListLogEntriesRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListLogEntriesRequestProtoMsg): ListLogEntriesRequest {
     return ListLogEntriesRequest.decode(message.value);
   },
@@ -1846,9 +1765,6 @@ export const ListLogEntriesResponse = {
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromAminoMsg(object: ListLogEntriesResponseAminoMsg): ListLogEntriesResponse {
-    return ListLogEntriesResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListLogEntriesResponseProtoMsg): ListLogEntriesResponse {
     return ListLogEntriesResponse.decode(message.value);
   },
@@ -1940,9 +1856,6 @@ export const ListMonitoredResourceDescriptorsRequest = {
     obj.page_size = message.pageSize;
     obj.page_token = message.pageToken;
     return obj;
-  },
-  fromAminoMsg(object: ListMonitoredResourceDescriptorsRequestAminoMsg): ListMonitoredResourceDescriptorsRequest {
-    return ListMonitoredResourceDescriptorsRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: ListMonitoredResourceDescriptorsRequestProtoMsg): ListMonitoredResourceDescriptorsRequest {
     return ListMonitoredResourceDescriptorsRequest.decode(message.value);
@@ -2047,9 +1960,6 @@ export const ListMonitoredResourceDescriptorsResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
-  },
-  fromAminoMsg(object: ListMonitoredResourceDescriptorsResponseAminoMsg): ListMonitoredResourceDescriptorsResponse {
-    return ListMonitoredResourceDescriptorsResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: ListMonitoredResourceDescriptorsResponseProtoMsg): ListMonitoredResourceDescriptorsResponse {
     return ListMonitoredResourceDescriptorsResponse.decode(message.value);
@@ -2183,9 +2093,6 @@ export const ListLogsRequest = {
     }
     return obj;
   },
-  fromAminoMsg(object: ListLogsRequestAminoMsg): ListLogsRequest {
-    return ListLogsRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListLogsRequestProtoMsg): ListLogsRequest {
     return ListLogsRequest.decode(message.value);
   },
@@ -2289,9 +2196,6 @@ export const ListLogsResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
-  },
-  fromAminoMsg(object: ListLogsResponseAminoMsg): ListLogsResponse {
-    return ListLogsResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: ListLogsResponseProtoMsg): ListLogsResponse {
     return ListLogsResponse.decode(message.value);
@@ -2413,9 +2317,6 @@ export const TailLogEntriesRequest = {
     obj.buffer_window = message.bufferWindow ? Duration.toAmino(message.bufferWindow) : undefined;
     return obj;
   },
-  fromAminoMsg(object: TailLogEntriesRequestAminoMsg): TailLogEntriesRequest {
-    return TailLogEntriesRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: TailLogEntriesRequestProtoMsg): TailLogEntriesRequest {
     return TailLogEntriesRequest.decode(message.value);
   },
@@ -2532,9 +2433,6 @@ export const TailLogEntriesResponse = {
     }
     return obj;
   },
-  fromAminoMsg(object: TailLogEntriesResponseAminoMsg): TailLogEntriesResponse {
-    return TailLogEntriesResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: TailLogEntriesResponseProtoMsg): TailLogEntriesResponse {
     return TailLogEntriesResponse.decode(message.value);
   },
@@ -2626,9 +2524,6 @@ export const TailLogEntriesResponse_SuppressionInfo = {
     obj.reason = message.reason;
     obj.suppressed_count = message.suppressedCount;
     return obj;
-  },
-  fromAminoMsg(object: TailLogEntriesResponse_SuppressionInfoAminoMsg): TailLogEntriesResponse_SuppressionInfo {
-    return TailLogEntriesResponse_SuppressionInfo.fromAmino(object.value);
   },
   fromProtoMsg(message: TailLogEntriesResponse_SuppressionInfoProtoMsg): TailLogEntriesResponse_SuppressionInfo {
     return TailLogEntriesResponse_SuppressionInfo.decode(message.value);

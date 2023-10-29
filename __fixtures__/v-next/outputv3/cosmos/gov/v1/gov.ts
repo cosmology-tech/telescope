@@ -153,10 +153,6 @@ export interface WeightedVoteOptionAmino {
   option: VoteOption;
   weight: string;
 }
-export interface WeightedVoteOptionAminoMsg {
-  type: "cosmos-sdk/v1/WeightedVoteOption";
-  value: WeightedVoteOptionAmino;
-}
 /** WeightedVoteOption defines a unit of vote for vote split. */
 export interface WeightedVoteOptionSDKType {
   option: VoteOption;
@@ -183,10 +179,6 @@ export interface DepositAmino {
   proposal_id: string;
   depositor: string;
   amount: CoinAmino[];
-}
-export interface DepositAminoMsg {
-  type: "cosmos-sdk/v1/Deposit";
-  value: DepositAmino;
 }
 /**
  * Deposit defines an amount deposited by an account address to an active
@@ -239,10 +231,6 @@ export interface ProposalAmino {
   /** metadata is any arbitrary metadata attached to the proposal. */
   metadata: string;
 }
-export interface ProposalAminoMsg {
-  type: "cosmos-sdk/v1/Proposal";
-  value: ProposalAmino;
-}
 /** Proposal defines the core field members of a governance proposal. */
 export interface ProposalSDKType {
   id: bigint;
@@ -273,10 +261,6 @@ export interface TallyResultAmino {
   abstain_count: string;
   no_count: string;
   no_with_veto_count: string;
-}
-export interface TallyResultAminoMsg {
-  type: "cosmos-sdk/v1/TallyResult";
-  value: TallyResultAmino;
 }
 /** TallyResult defines a standard tally for a governance proposal. */
 export interface TallyResultSDKType {
@@ -310,10 +294,6 @@ export interface VoteAmino {
   options: WeightedVoteOptionAmino[];
   /** metadata is any  arbitrary metadata to attached to the vote. */
   metadata: string;
-}
-export interface VoteAminoMsg {
-  type: "cosmos-sdk/v1/Vote";
-  value: VoteAmino;
 }
 /**
  * Vote defines a vote on a governance proposal.
@@ -349,10 +329,6 @@ export interface DepositParamsAmino {
    */
   max_deposit_period?: DurationAmino;
 }
-export interface DepositParamsAminoMsg {
-  type: "cosmos-sdk/v1/DepositParams";
-  value: DepositParamsAmino;
-}
 /** DepositParams defines the params for deposits on governance proposals. */
 export interface DepositParamsSDKType {
   min_deposit: CoinSDKType[];
@@ -371,10 +347,6 @@ export interface VotingParamsProtoMsg {
 export interface VotingParamsAmino {
   /** Length of the voting period. */
   voting_period?: DurationAmino;
-}
-export interface VotingParamsAminoMsg {
-  type: "cosmos-sdk/v1/VotingParams";
-  value: VotingParamsAmino;
 }
 /** VotingParams defines the params for voting on governance proposals. */
 export interface VotingParamsSDKType {
@@ -413,10 +385,6 @@ export interface TallyParamsAmino {
    *  vetoed. Default value: 1/3.
    */
   veto_threshold: string;
-}
-export interface TallyParamsAminoMsg {
-  type: "cosmos-sdk/v1/TallyParams";
-  value: TallyParamsAmino;
 }
 /** TallyParams defines the params for tallying votes on governance proposals. */
 export interface TallyParamsSDKType {
@@ -503,15 +471,6 @@ export const WeightedVoteOption = {
     obj.option = message.option;
     obj.weight = message.weight;
     return obj;
-  },
-  fromAminoMsg(object: WeightedVoteOptionAminoMsg): WeightedVoteOption {
-    return WeightedVoteOption.fromAmino(object.value);
-  },
-  toAminoMsg(message: WeightedVoteOption): WeightedVoteOptionAminoMsg {
-    return {
-      type: "cosmos-sdk/v1/WeightedVoteOption",
-      value: WeightedVoteOption.toAmino(message)
-    };
   },
   fromProtoMsg(message: WeightedVoteOptionProtoMsg): WeightedVoteOption {
     return WeightedVoteOption.decode(message.value);
@@ -633,15 +592,6 @@ export const Deposit = {
       obj.amount = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: DepositAminoMsg): Deposit {
-    return Deposit.fromAmino(object.value);
-  },
-  toAminoMsg(message: Deposit): DepositAminoMsg {
-    return {
-      type: "cosmos-sdk/v1/Deposit",
-      value: Deposit.toAmino(message)
-    };
   },
   fromProtoMsg(message: DepositProtoMsg): Deposit {
     return Deposit.decode(message.value);
@@ -876,15 +826,6 @@ export const Proposal = {
     obj.metadata = message.metadata;
     return obj;
   },
-  fromAminoMsg(object: ProposalAminoMsg): Proposal {
-    return Proposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: Proposal): ProposalAminoMsg {
-    return {
-      type: "cosmos-sdk/v1/Proposal",
-      value: Proposal.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ProposalProtoMsg): Proposal {
     return Proposal.decode(message.value);
   },
@@ -1005,15 +946,6 @@ export const TallyResult = {
     obj.no_count = message.noCount;
     obj.no_with_veto_count = message.noWithVetoCount;
     return obj;
-  },
-  fromAminoMsg(object: TallyResultAminoMsg): TallyResult {
-    return TallyResult.fromAmino(object.value);
-  },
-  toAminoMsg(message: TallyResult): TallyResultAminoMsg {
-    return {
-      type: "cosmos-sdk/v1/TallyResult",
-      value: TallyResult.toAmino(message)
-    };
   },
   fromProtoMsg(message: TallyResultProtoMsg): TallyResult {
     return TallyResult.decode(message.value);
@@ -1150,15 +1082,6 @@ export const Vote = {
     obj.metadata = message.metadata;
     return obj;
   },
-  fromAminoMsg(object: VoteAminoMsg): Vote {
-    return Vote.fromAmino(object.value);
-  },
-  toAminoMsg(message: Vote): VoteAminoMsg {
-    return {
-      type: "cosmos-sdk/v1/Vote",
-      value: Vote.toAmino(message)
-    };
-  },
   fromProtoMsg(message: VoteProtoMsg): Vote {
     return Vote.decode(message.value);
   },
@@ -1266,15 +1189,6 @@ export const DepositParams = {
     obj.max_deposit_period = message.maxDepositPeriod ? Duration.toAmino(message.maxDepositPeriod) : undefined;
     return obj;
   },
-  fromAminoMsg(object: DepositParamsAminoMsg): DepositParams {
-    return DepositParams.fromAmino(object.value);
-  },
-  toAminoMsg(message: DepositParams): DepositParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/v1/DepositParams",
-      value: DepositParams.toAmino(message)
-    };
-  },
   fromProtoMsg(message: DepositParamsProtoMsg): DepositParams {
     return DepositParams.decode(message.value);
   },
@@ -1355,15 +1269,6 @@ export const VotingParams = {
     const obj: any = {};
     obj.voting_period = message.votingPeriod ? Duration.toAmino(message.votingPeriod) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: VotingParamsAminoMsg): VotingParams {
-    return VotingParams.fromAmino(object.value);
-  },
-  toAminoMsg(message: VotingParams): VotingParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/v1/VotingParams",
-      value: VotingParams.toAmino(message)
-    };
   },
   fromProtoMsg(message: VotingParamsProtoMsg): VotingParams {
     return VotingParams.decode(message.value);
@@ -1471,15 +1376,6 @@ export const TallyParams = {
     obj.threshold = message.threshold;
     obj.veto_threshold = message.vetoThreshold;
     return obj;
-  },
-  fromAminoMsg(object: TallyParamsAminoMsg): TallyParams {
-    return TallyParams.fromAmino(object.value);
-  },
-  toAminoMsg(message: TallyParams): TallyParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/v1/TallyParams",
-      value: TallyParams.toAmino(message)
-    };
   },
   fromProtoMsg(message: TallyParamsProtoMsg): TallyParams {
     return TallyParams.decode(message.value);

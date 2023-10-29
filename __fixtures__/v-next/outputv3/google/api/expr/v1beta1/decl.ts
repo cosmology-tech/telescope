@@ -32,10 +32,6 @@ export interface DeclAmino {
   /** A function declaration. */
   function?: FunctionDeclAmino;
 }
-export interface DeclAminoMsg {
-  type: "/google.api.expr.v1beta1.Decl";
-  value: DeclAmino;
-}
 /** A declaration. */
 export interface DeclSDKType {
   id: number;
@@ -82,10 +78,6 @@ export interface DeclTypeAmino {
    */
   type_params: DeclTypeAmino[];
 }
-export interface DeclTypeAminoMsg {
-  type: "/google.api.expr.v1beta1.DeclType";
-  value: DeclTypeAmino;
-}
 /**
  * The declared type of a variable.
  * 
@@ -115,10 +107,6 @@ export interface IdentDeclAmino {
   /** Optional value of the identifier. */
   value?: ExprAmino;
 }
-export interface IdentDeclAminoMsg {
-  type: "/google.api.expr.v1beta1.IdentDecl";
-  value: IdentDeclAmino;
-}
 /** An identifier declaration. */
 export interface IdentDeclSDKType {
   type?: DeclTypeSDKType;
@@ -145,10 +133,6 @@ export interface FunctionDeclAmino {
   return_type?: DeclTypeAmino;
   /** If the first argument of the function is the receiver. */
   receiver_function: boolean;
-}
-export interface FunctionDeclAminoMsg {
-  type: "/google.api.expr.v1beta1.FunctionDecl";
-  value: FunctionDeclAmino;
 }
 /** A function declaration. */
 export interface FunctionDeclSDKType {
@@ -281,9 +265,6 @@ export const Decl = {
     obj.function = message.function ? FunctionDecl.toAmino(message.function) : undefined;
     return obj;
   },
-  fromAminoMsg(object: DeclAminoMsg): Decl {
-    return Decl.fromAmino(object.value);
-  },
   fromProtoMsg(message: DeclProtoMsg): Decl {
     return Decl.decode(message.value);
   },
@@ -402,9 +383,6 @@ export const DeclType = {
     }
     return obj;
   },
-  fromAminoMsg(object: DeclTypeAminoMsg): DeclType {
-    return DeclType.fromAmino(object.value);
-  },
   fromProtoMsg(message: DeclTypeProtoMsg): DeclType {
     return DeclType.decode(message.value);
   },
@@ -500,9 +478,6 @@ export const IdentDecl = {
     obj.type = message.type ? DeclType.toAmino(message.type) : undefined;
     obj.value = message.value ? Expr.toAmino(message.value) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: IdentDeclAminoMsg): IdentDecl {
-    return IdentDecl.fromAmino(object.value);
   },
   fromProtoMsg(message: IdentDeclProtoMsg): IdentDecl {
     return IdentDecl.decode(message.value);
@@ -623,9 +598,6 @@ export const FunctionDecl = {
     obj.return_type = message.returnType ? DeclType.toAmino(message.returnType) : undefined;
     obj.receiver_function = message.receiverFunction;
     return obj;
-  },
-  fromAminoMsg(object: FunctionDeclAminoMsg): FunctionDecl {
-    return FunctionDecl.fromAmino(object.value);
   },
   fromProtoMsg(message: FunctionDeclProtoMsg): FunctionDecl {
     return FunctionDecl.decode(message.value);

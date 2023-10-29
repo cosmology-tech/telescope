@@ -16,10 +16,6 @@ export interface GenesisStateAmino {
   /** params defines all the paramaters of the module. */
   params?: ParamsAmino;
 }
-export interface GenesisStateAminoMsg {
-  type: "/evmos.recovery.v1.GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the recovery module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -41,10 +37,6 @@ export interface ParamsAmino {
   enable_recovery: boolean;
   /** duration added to timeout timestamp for balances recovered via IBC packets */
   packet_timeout_duration?: DurationAmino;
-}
-export interface ParamsAminoMsg {
-  type: "/evmos.recovery.v1.Params";
-  value: ParamsAmino;
 }
 /** Params holds parameters for the recovery module */
 export interface ParamsSDKType {
@@ -117,9 +109,6 @@ export const GenesisState = {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
@@ -214,9 +203,6 @@ export const Params = {
     obj.enable_recovery = message.enableRecovery;
     obj.packet_timeout_duration = message.packetTimeoutDuration ? Duration.toAmino(message.packetTimeoutDuration) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

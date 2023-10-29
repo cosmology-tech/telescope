@@ -27,10 +27,6 @@ export interface MsgSendAmino {
   /** receiver is the receiver address of nft */
   receiver: string;
 }
-export interface MsgSendAminoMsg {
-  type: "cosmos-sdk/MsgNFTSend";
-  value: MsgSendAmino;
-}
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSendSDKType {
   class_id: string;
@@ -46,10 +42,6 @@ export interface MsgSendResponseProtoMsg {
 }
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponseAmino {}
-export interface MsgSendResponseAminoMsg {
-  type: "cosmos-sdk/MsgSendResponse";
-  value: MsgSendResponseAmino;
-}
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponseSDKType {}
 function createBaseMsgSend(): MsgSend {
@@ -160,15 +152,6 @@ export const MsgSend = {
     obj.receiver = message.receiver;
     return obj;
   },
-  fromAminoMsg(object: MsgSendAminoMsg): MsgSend {
-    return MsgSend.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSend): MsgSendAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgNFTSend",
-      value: MsgSend.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgSendProtoMsg): MsgSend {
     return MsgSend.decode(message.value);
   },
@@ -230,15 +213,6 @@ export const MsgSendResponse = {
   toAmino(_: MsgSendResponse): MsgSendResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgSendResponseAminoMsg): MsgSendResponse {
-    return MsgSendResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSendResponse): MsgSendResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSendResponse",
-      value: MsgSendResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgSendResponseProtoMsg): MsgSendResponse {
     return MsgSendResponse.decode(message.value);

@@ -116,10 +116,6 @@ export interface BackendAmino {
    */
   rules: BackendRuleAmino[];
 }
-export interface BackendAminoMsg {
-  type: "/google.api.Backend";
-  value: BackendAmino;
-}
 /** `Backend` defines the backend configuration for a service. */
 export interface BackendSDKType {
   rules: BackendRuleSDKType[];
@@ -298,10 +294,6 @@ export interface BackendRuleAmino {
    */
   protocol: string;
 }
-export interface BackendRuleAminoMsg {
-  type: "/google.api.BackendRule";
-  value: BackendRuleAmino;
-}
 /** A backend rule provides configuration for an individual API element. */
 export interface BackendRuleSDKType {
   selector: string;
@@ -390,9 +382,6 @@ export const Backend = {
       obj.rules = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: BackendAminoMsg): Backend {
-    return Backend.fromAmino(object.value);
   },
   fromProtoMsg(message: BackendProtoMsg): Backend {
     return Backend.decode(message.value);
@@ -583,9 +572,6 @@ export const BackendRule = {
     obj.disable_auth = message.disableAuth;
     obj.protocol = message.protocol;
     return obj;
-  },
-  fromAminoMsg(object: BackendRuleAminoMsg): BackendRule {
-    return BackendRule.fromAmino(object.value);
   },
   fromProtoMsg(message: BackendRuleProtoMsg): BackendRule {
     return BackendRule.decode(message.value);

@@ -19,10 +19,6 @@ export interface QueryDeploymentsRequestAmino {
   filters?: DeploymentFiltersAmino;
   pagination?: PageRequestAmino;
 }
-export interface QueryDeploymentsRequestAminoMsg {
-  type: "/akash.deployment.v1beta1.QueryDeploymentsRequest";
-  value: QueryDeploymentsRequestAmino;
-}
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequestSDKType {
   filters: DeploymentFiltersSDKType;
@@ -42,10 +38,6 @@ export interface QueryDeploymentsResponseAmino {
   deployments: QueryDeploymentResponseAmino[];
   pagination?: PageResponseAmino;
 }
-export interface QueryDeploymentsResponseAminoMsg {
-  type: "/akash.deployment.v1beta1.QueryDeploymentsResponse";
-  value: QueryDeploymentsResponseAmino;
-}
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponseSDKType {
   deployments: QueryDeploymentResponseSDKType[];
@@ -62,10 +54,6 @@ export interface QueryDeploymentRequestProtoMsg {
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequestAmino {
   id?: DeploymentIDAmino;
-}
-export interface QueryDeploymentRequestAminoMsg {
-  type: "/akash.deployment.v1beta1.QueryDeploymentRequest";
-  value: QueryDeploymentRequestAmino;
 }
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequestSDKType {
@@ -87,10 +75,6 @@ export interface QueryDeploymentResponseAmino {
   groups: GroupAmino[];
   escrow_account?: AccountAmino;
 }
-export interface QueryDeploymentResponseAminoMsg {
-  type: "/akash.deployment.v1beta1.QueryDeploymentResponse";
-  value: QueryDeploymentResponseAmino;
-}
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponseSDKType {
   deployment: DeploymentSDKType;
@@ -109,10 +93,6 @@ export interface QueryGroupRequestProtoMsg {
 export interface QueryGroupRequestAmino {
   id?: GroupIDAmino;
 }
-export interface QueryGroupRequestAminoMsg {
-  type: "/akash.deployment.v1beta1.QueryGroupRequest";
-  value: QueryGroupRequestAmino;
-}
 /** QueryGroupRequest is request type for the Query/Group RPC method */
 export interface QueryGroupRequestSDKType {
   id: GroupIDSDKType;
@@ -128,10 +108,6 @@ export interface QueryGroupResponseProtoMsg {
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponseAmino {
   group?: GroupAmino;
-}
-export interface QueryGroupResponseAminoMsg {
-  type: "/akash.deployment.v1beta1.QueryGroupResponse";
-  value: QueryGroupResponseAmino;
 }
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponseSDKType {
@@ -219,9 +195,6 @@ export const QueryDeploymentsRequest = {
     obj.filters = message.filters ? DeploymentFilters.toAmino(message.filters) : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryDeploymentsRequestAminoMsg): QueryDeploymentsRequest {
-    return QueryDeploymentsRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryDeploymentsRequestProtoMsg): QueryDeploymentsRequest {
     return QueryDeploymentsRequest.decode(message.value);
@@ -329,9 +302,6 @@ export const QueryDeploymentsResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryDeploymentsResponseAminoMsg): QueryDeploymentsResponse {
-    return QueryDeploymentsResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryDeploymentsResponseProtoMsg): QueryDeploymentsResponse {
     return QueryDeploymentsResponse.decode(message.value);
   },
@@ -411,9 +381,6 @@ export const QueryDeploymentRequest = {
     const obj: any = {};
     obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryDeploymentRequestAminoMsg): QueryDeploymentRequest {
-    return QueryDeploymentRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryDeploymentRequestProtoMsg): QueryDeploymentRequest {
     return QueryDeploymentRequest.decode(message.value);
@@ -537,9 +504,6 @@ export const QueryDeploymentResponse = {
     obj.escrow_account = message.escrowAccount ? Account.toAmino(message.escrowAccount) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryDeploymentResponseAminoMsg): QueryDeploymentResponse {
-    return QueryDeploymentResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryDeploymentResponseProtoMsg): QueryDeploymentResponse {
     return QueryDeploymentResponse.decode(message.value);
   },
@@ -620,9 +584,6 @@ export const QueryGroupRequest = {
     obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryGroupRequestAminoMsg): QueryGroupRequest {
-    return QueryGroupRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryGroupRequestProtoMsg): QueryGroupRequest {
     return QueryGroupRequest.decode(message.value);
   },
@@ -702,9 +663,6 @@ export const QueryGroupResponse = {
     const obj: any = {};
     obj.group = message.group ? Group.toAmino(message.group) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryGroupResponseAminoMsg): QueryGroupResponse {
-    return QueryGroupResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryGroupResponseProtoMsg): QueryGroupResponse {
     return QueryGroupResponse.decode(message.value);

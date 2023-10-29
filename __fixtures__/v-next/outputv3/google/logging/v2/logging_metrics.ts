@@ -51,10 +51,6 @@ export interface LogMetric_LabelExtractorsEntryAmino {
   key: string;
   value: string;
 }
-export interface LogMetric_LabelExtractorsEntryAminoMsg {
-  type: string;
-  value: LogMetric_LabelExtractorsEntryAmino;
-}
 export interface LogMetric_LabelExtractorsEntrySDKType {
   key: string;
   value: string;
@@ -335,10 +331,6 @@ export interface LogMetricAmino {
   /** @deprecated */
   version: LogMetric_ApiVersion;
 }
-export interface LogMetricAminoMsg {
-  type: "/google.logging.v2.LogMetric";
-  value: LogMetricAmino;
-}
 /**
  * Describes a logs-based metric. The value of the metric is the number of log
  * entries that match a logs filter in a given time interval.
@@ -412,10 +404,6 @@ export interface ListLogMetricsRequestAmino {
    */
   page_size: number;
 }
-export interface ListLogMetricsRequestAminoMsg {
-  type: "/google.logging.v2.ListLogMetricsRequest";
-  value: ListLogMetricsRequestAmino;
-}
 /** The parameters to ListLogMetrics. */
 export interface ListLogMetricsRequestSDKType {
   parent: string;
@@ -448,10 +436,6 @@ export interface ListLogMetricsResponseAmino {
    */
   next_page_token: string;
 }
-export interface ListLogMetricsResponseAminoMsg {
-  type: "/google.logging.v2.ListLogMetricsResponse";
-  value: ListLogMetricsResponseAmino;
-}
 /** Result returned from ListLogMetrics. */
 export interface ListLogMetricsResponseSDKType {
   metrics: LogMetricSDKType[];
@@ -478,10 +462,6 @@ export interface GetLogMetricRequestAmino {
    *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
   metric_name: string;
-}
-export interface GetLogMetricRequestAminoMsg {
-  type: "/google.logging.v2.GetLogMetricRequest";
-  value: GetLogMetricRequestAmino;
 }
 /** The parameters to GetLogMetric. */
 export interface GetLogMetricRequestSDKType {
@@ -523,10 +503,6 @@ export interface CreateLogMetricRequestAmino {
    */
   metric?: LogMetricAmino;
 }
-export interface CreateLogMetricRequestAminoMsg {
-  type: "/google.logging.v2.CreateLogMetricRequest";
-  value: CreateLogMetricRequestAmino;
-}
 /** The parameters to CreateLogMetric. */
 export interface CreateLogMetricRequestSDKType {
   parent: string;
@@ -566,10 +542,6 @@ export interface UpdateLogMetricRequestAmino {
   /** Required. The updated metric. */
   metric?: LogMetricAmino;
 }
-export interface UpdateLogMetricRequestAminoMsg {
-  type: "/google.logging.v2.UpdateLogMetricRequest";
-  value: UpdateLogMetricRequestAmino;
-}
 /** The parameters to UpdateLogMetric. */
 export interface UpdateLogMetricRequestSDKType {
   metric_name: string;
@@ -596,10 +568,6 @@ export interface DeleteLogMetricRequestAmino {
    *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
   metric_name: string;
-}
-export interface DeleteLogMetricRequestAminoMsg {
-  type: "/google.logging.v2.DeleteLogMetricRequest";
-  value: DeleteLogMetricRequestAmino;
 }
 /** The parameters to DeleteLogMetric. */
 export interface DeleteLogMetricRequestSDKType {
@@ -682,9 +650,6 @@ export const LogMetric_LabelExtractorsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: LogMetric_LabelExtractorsEntryAminoMsg): LogMetric_LabelExtractorsEntry {
-    return LogMetric_LabelExtractorsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: LogMetric_LabelExtractorsEntryProtoMsg): LogMetric_LabelExtractorsEntry {
     return LogMetric_LabelExtractorsEntry.decode(message.value);
@@ -945,9 +910,6 @@ export const LogMetric = {
     obj.version = message.version;
     return obj;
   },
-  fromAminoMsg(object: LogMetricAminoMsg): LogMetric {
-    return LogMetric.fromAmino(object.value);
-  },
   fromProtoMsg(message: LogMetricProtoMsg): LogMetric {
     return LogMetric.decode(message.value);
   },
@@ -1054,9 +1016,6 @@ export const ListLogMetricsRequest = {
     obj.page_size = message.pageSize;
     return obj;
   },
-  fromAminoMsg(object: ListLogMetricsRequestAminoMsg): ListLogMetricsRequest {
-    return ListLogMetricsRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListLogMetricsRequestProtoMsg): ListLogMetricsRequest {
     return ListLogMetricsRequest.decode(message.value);
   },
@@ -1161,9 +1120,6 @@ export const ListLogMetricsResponse = {
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromAminoMsg(object: ListLogMetricsResponseAminoMsg): ListLogMetricsResponse {
-    return ListLogMetricsResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListLogMetricsResponseProtoMsg): ListLogMetricsResponse {
     return ListLogMetricsResponse.decode(message.value);
   },
@@ -1241,9 +1197,6 @@ export const GetLogMetricRequest = {
     const obj: any = {};
     obj.metric_name = message.metricName;
     return obj;
-  },
-  fromAminoMsg(object: GetLogMetricRequestAminoMsg): GetLogMetricRequest {
-    return GetLogMetricRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GetLogMetricRequestProtoMsg): GetLogMetricRequest {
     return GetLogMetricRequest.decode(message.value);
@@ -1339,9 +1292,6 @@ export const CreateLogMetricRequest = {
     obj.metric = message.metric ? LogMetric.toAmino(message.metric) : undefined;
     return obj;
   },
-  fromAminoMsg(object: CreateLogMetricRequestAminoMsg): CreateLogMetricRequest {
-    return CreateLogMetricRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: CreateLogMetricRequestProtoMsg): CreateLogMetricRequest {
     return CreateLogMetricRequest.decode(message.value);
   },
@@ -1436,9 +1386,6 @@ export const UpdateLogMetricRequest = {
     obj.metric = message.metric ? LogMetric.toAmino(message.metric) : undefined;
     return obj;
   },
-  fromAminoMsg(object: UpdateLogMetricRequestAminoMsg): UpdateLogMetricRequest {
-    return UpdateLogMetricRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: UpdateLogMetricRequestProtoMsg): UpdateLogMetricRequest {
     return UpdateLogMetricRequest.decode(message.value);
   },
@@ -1516,9 +1463,6 @@ export const DeleteLogMetricRequest = {
     const obj: any = {};
     obj.metric_name = message.metricName;
     return obj;
-  },
-  fromAminoMsg(object: DeleteLogMetricRequestAminoMsg): DeleteLogMetricRequest {
-    return DeleteLogMetricRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: DeleteLogMetricRequestProtoMsg): DeleteLogMetricRequest {
     return DeleteLogMetricRequest.decode(message.value);

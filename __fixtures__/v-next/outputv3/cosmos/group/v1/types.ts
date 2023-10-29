@@ -249,10 +249,6 @@ export interface MemberAmino {
   /** added_at is a timestamp specifying when a member was added. */
   added_at?: Date;
 }
-export interface MemberAminoMsg {
-  type: "cosmos-sdk/Member";
-  value: MemberAmino;
-}
 /**
  * Member represents a group member with an account address,
  * non-zero weight and metadata.
@@ -277,10 +273,6 @@ export interface MembersAmino {
   /** members is the list of members. */
   members: MemberAmino[];
 }
-export interface MembersAminoMsg {
-  type: "cosmos-sdk/Members";
-  value: MembersAmino;
-}
 /** Members defines a repeated slice of Member objects. */
 export interface MembersSDKType {
   members: MemberSDKType[];
@@ -303,10 +295,6 @@ export interface ThresholdDecisionPolicyAmino {
   threshold: string;
   /** windows defines the different windows for voting and execution. */
   windows?: DecisionPolicyWindowsAmino;
-}
-export interface ThresholdDecisionPolicyAminoMsg {
-  type: "cosmos-sdk/ThresholdDecisionPolicy";
-  value: ThresholdDecisionPolicyAmino;
 }
 /** ThresholdDecisionPolicy implements the DecisionPolicy interface */
 export interface ThresholdDecisionPolicySDKType {
@@ -332,10 +320,6 @@ export interface PercentageDecisionPolicyAmino {
   percentage: string;
   /** windows defines the different windows for voting and execution. */
   windows?: DecisionPolicyWindowsAmino;
-}
-export interface PercentageDecisionPolicyAminoMsg {
-  type: "cosmos-sdk/PercentageDecisionPolicy";
-  value: PercentageDecisionPolicyAmino;
 }
 /** PercentageDecisionPolicy implements the DecisionPolicy interface */
 export interface PercentageDecisionPolicySDKType {
@@ -391,10 +375,6 @@ export interface DecisionPolicyWindowsAmino {
    */
   min_execution_period?: DurationAmino;
 }
-export interface DecisionPolicyWindowsAminoMsg {
-  type: "cosmos-sdk/DecisionPolicyWindows";
-  value: DecisionPolicyWindowsAmino;
-}
 /** DecisionPolicyWindows defines the different windows for voting and execution. */
 export interface DecisionPolicyWindowsSDKType {
   voting_period: DurationSDKType;
@@ -444,10 +424,6 @@ export interface GroupInfoAmino {
   /** created_at is a timestamp specifying when a group was created. */
   created_at?: Date;
 }
-export interface GroupInfoAminoMsg {
-  type: "cosmos-sdk/GroupInfo";
-  value: GroupInfoAmino;
-}
 /** GroupInfo represents the high-level on-chain information for a group. */
 export interface GroupInfoSDKType {
   id: bigint;
@@ -474,10 +450,6 @@ export interface GroupMemberAmino {
   group_id: string;
   /** member is the member data. */
   member?: MemberAmino;
-}
-export interface GroupMemberAminoMsg {
-  type: "cosmos-sdk/GroupMember";
-  value: GroupMemberAmino;
 }
 /** GroupMember represents the relationship between a group and a member. */
 export interface GroupMemberSDKType {
@@ -530,10 +502,6 @@ export interface GroupPolicyInfoAmino {
   decision_policy?: AnyAmino;
   /** created_at is a timestamp specifying when a group policy was created. */
   created_at?: Date;
-}
-export interface GroupPolicyInfoAminoMsg {
-  type: "cosmos-sdk/GroupPolicyInfo";
-  value: GroupPolicyInfoAmino;
 }
 /** GroupPolicyInfo represents the high-level on-chain information for a group policy. */
 export interface GroupPolicyInfoSDKType {
@@ -657,10 +625,6 @@ export interface ProposalAmino {
   /** messages is a list of Msgs that will be executed if the proposal passes. */
   messages: AnyAmino[];
 }
-export interface ProposalAminoMsg {
-  type: "cosmos-sdk/Proposal";
-  value: ProposalAmino;
-}
 /**
  * Proposal defines a group proposal. Any member of a group can submit a proposal
  * for a group policy to decide upon.
@@ -708,10 +672,6 @@ export interface TallyResultAmino {
   /** no_with_veto_count is the weighted sum of veto. */
   no_with_veto_count: string;
 }
-export interface TallyResultAminoMsg {
-  type: "cosmos-sdk/TallyResult";
-  value: TallyResultAmino;
-}
 /** TallyResult represents the sum of weighted votes for each vote option. */
 export interface TallyResultSDKType {
   yes_count: string;
@@ -748,10 +708,6 @@ export interface VoteAmino {
   metadata: string;
   /** submit_time is the timestamp when the vote was submitted. */
   submit_time?: Date;
-}
-export interface VoteAminoMsg {
-  type: "cosmos-sdk/Vote";
-  value: VoteAmino;
 }
 /** Vote represents a vote for a proposal. */
 export interface VoteSDKType {
@@ -869,15 +825,6 @@ export const Member = {
     obj.added_at = message.addedAt;
     return obj;
   },
-  fromAminoMsg(object: MemberAminoMsg): Member {
-    return Member.fromAmino(object.value);
-  },
-  toAminoMsg(message: Member): MemberAminoMsg {
-    return {
-      type: "cosmos-sdk/Member",
-      value: Member.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MemberProtoMsg): Member {
     return Member.decode(message.value);
   },
@@ -968,15 +915,6 @@ export const Members = {
       obj.members = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: MembersAminoMsg): Members {
-    return Members.fromAmino(object.value);
-  },
-  toAminoMsg(message: Members): MembersAminoMsg {
-    return {
-      type: "cosmos-sdk/Members",
-      value: Members.toAmino(message)
-    };
   },
   fromProtoMsg(message: MembersProtoMsg): Members {
     return Members.decode(message.value);
@@ -1074,15 +1012,6 @@ export const ThresholdDecisionPolicy = {
     obj.windows = message.windows ? DecisionPolicyWindows.toAmino(message.windows) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ThresholdDecisionPolicyAminoMsg): ThresholdDecisionPolicy {
-    return ThresholdDecisionPolicy.fromAmino(object.value);
-  },
-  toAminoMsg(message: ThresholdDecisionPolicy): ThresholdDecisionPolicyAminoMsg {
-    return {
-      type: "cosmos-sdk/ThresholdDecisionPolicy",
-      value: ThresholdDecisionPolicy.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ThresholdDecisionPolicyProtoMsg): ThresholdDecisionPolicy {
     return ThresholdDecisionPolicy.decode(message.value);
   },
@@ -1178,15 +1107,6 @@ export const PercentageDecisionPolicy = {
     obj.percentage = message.percentage;
     obj.windows = message.windows ? DecisionPolicyWindows.toAmino(message.windows) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: PercentageDecisionPolicyAminoMsg): PercentageDecisionPolicy {
-    return PercentageDecisionPolicy.fromAmino(object.value);
-  },
-  toAminoMsg(message: PercentageDecisionPolicy): PercentageDecisionPolicyAminoMsg {
-    return {
-      type: "cosmos-sdk/PercentageDecisionPolicy",
-      value: PercentageDecisionPolicy.toAmino(message)
-    };
   },
   fromProtoMsg(message: PercentageDecisionPolicyProtoMsg): PercentageDecisionPolicy {
     return PercentageDecisionPolicy.decode(message.value);
@@ -1284,15 +1204,6 @@ export const DecisionPolicyWindows = {
     obj.voting_period = message.votingPeriod ? Duration.toAmino(message.votingPeriod) : undefined;
     obj.min_execution_period = message.minExecutionPeriod ? Duration.toAmino(message.minExecutionPeriod) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: DecisionPolicyWindowsAminoMsg): DecisionPolicyWindows {
-    return DecisionPolicyWindows.fromAmino(object.value);
-  },
-  toAminoMsg(message: DecisionPolicyWindows): DecisionPolicyWindowsAminoMsg {
-    return {
-      type: "cosmos-sdk/DecisionPolicyWindows",
-      value: DecisionPolicyWindows.toAmino(message)
-    };
   },
   fromProtoMsg(message: DecisionPolicyWindowsProtoMsg): DecisionPolicyWindows {
     return DecisionPolicyWindows.decode(message.value);
@@ -1447,15 +1358,6 @@ export const GroupInfo = {
     obj.created_at = message.createdAt;
     return obj;
   },
-  fromAminoMsg(object: GroupInfoAminoMsg): GroupInfo {
-    return GroupInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: GroupInfo): GroupInfoAminoMsg {
-    return {
-      type: "cosmos-sdk/GroupInfo",
-      value: GroupInfo.toAmino(message)
-    };
-  },
   fromProtoMsg(message: GroupInfoProtoMsg): GroupInfo {
     return GroupInfo.decode(message.value);
   },
@@ -1552,15 +1454,6 @@ export const GroupMember = {
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
     obj.member = message.member ? Member.toAmino(message.member) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GroupMemberAminoMsg): GroupMember {
-    return GroupMember.fromAmino(object.value);
-  },
-  toAminoMsg(message: GroupMember): GroupMemberAminoMsg {
-    return {
-      type: "cosmos-sdk/GroupMember",
-      value: GroupMember.toAmino(message)
-    };
   },
   fromProtoMsg(message: GroupMemberProtoMsg): GroupMember {
     return GroupMember.decode(message.value);
@@ -1730,15 +1623,6 @@ export const GroupPolicyInfo = {
     obj.decision_policy = message.decisionPolicy ? DecisionPolicy_ToAmino((message.decisionPolicy as Any)) : undefined;
     obj.created_at = message.createdAt;
     return obj;
-  },
-  fromAminoMsg(object: GroupPolicyInfoAminoMsg): GroupPolicyInfo {
-    return GroupPolicyInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: GroupPolicyInfo): GroupPolicyInfoAminoMsg {
-    return {
-      type: "cosmos-sdk/GroupPolicyInfo",
-      value: GroupPolicyInfo.toAmino(message)
-    };
   },
   fromProtoMsg(message: GroupPolicyInfoProtoMsg): GroupPolicyInfo {
     return GroupPolicyInfo.decode(message.value);
@@ -2019,15 +1903,6 @@ export const Proposal = {
     }
     return obj;
   },
-  fromAminoMsg(object: ProposalAminoMsg): Proposal {
-    return Proposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: Proposal): ProposalAminoMsg {
-    return {
-      type: "cosmos-sdk/Proposal",
-      value: Proposal.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ProposalProtoMsg): Proposal {
     return Proposal.decode(message.value);
   },
@@ -2148,15 +2023,6 @@ export const TallyResult = {
     obj.no_count = message.noCount;
     obj.no_with_veto_count = message.noWithVetoCount;
     return obj;
-  },
-  fromAminoMsg(object: TallyResultAminoMsg): TallyResult {
-    return TallyResult.fromAmino(object.value);
-  },
-  toAminoMsg(message: TallyResult): TallyResultAminoMsg {
-    return {
-      type: "cosmos-sdk/TallyResult",
-      value: TallyResult.toAmino(message)
-    };
   },
   fromProtoMsg(message: TallyResultProtoMsg): TallyResult {
     return TallyResult.decode(message.value);
@@ -2294,15 +2160,6 @@ export const Vote = {
     obj.metadata = message.metadata;
     obj.submit_time = message.submitTime;
     return obj;
-  },
-  fromAminoMsg(object: VoteAminoMsg): Vote {
-    return Vote.fromAmino(object.value);
-  },
-  toAminoMsg(message: Vote): VoteAminoMsg {
-    return {
-      type: "cosmos-sdk/Vote",
-      value: Vote.toAmino(message)
-    };
   },
   fromProtoMsg(message: VoteProtoMsg): Vote {
     return Vote.decode(message.value);

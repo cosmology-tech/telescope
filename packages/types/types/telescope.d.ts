@@ -106,6 +106,7 @@ interface TelescopeOpts {
     };
     aminoEncoding?: {
         enabled: boolean;
+        disableMsgTypes?: boolean;
         casingFn?: Function;
         exceptions?: AminoExceptions;
         typeUrlToAmino?: (typeUrl: string) => string | undefined;

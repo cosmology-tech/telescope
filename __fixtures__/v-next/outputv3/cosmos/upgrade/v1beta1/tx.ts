@@ -28,10 +28,6 @@ export interface MsgSoftwareUpgradeAmino {
   /** plan is the upgrade plan. */
   plan?: PlanAmino;
 }
-export interface MsgSoftwareUpgradeAminoMsg {
-  type: "cosmos-sdk/MsgSoftwareUpgrade";
-  value: MsgSoftwareUpgradeAmino;
-}
 /**
  * MsgSoftwareUpgrade is the Msg/SoftwareUpgrade request type.
  * 
@@ -57,10 +53,6 @@ export interface MsgSoftwareUpgradeResponseProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface MsgSoftwareUpgradeResponseAmino {}
-export interface MsgSoftwareUpgradeResponseAminoMsg {
-  type: "cosmos-sdk/MsgSoftwareUpgradeResponse";
-  value: MsgSoftwareUpgradeResponseAmino;
-}
 /**
  * MsgSoftwareUpgradeResponse is the Msg/SoftwareUpgrade response type.
  * 
@@ -89,10 +81,6 @@ export interface MsgCancelUpgradeAmino {
   /** authority is the address of the governance account. */
   authority: string;
 }
-export interface MsgCancelUpgradeAminoMsg {
-  type: "cosmos-sdk/MsgCancelUpgrade";
-  value: MsgCancelUpgradeAmino;
-}
 /**
  * MsgCancelUpgrade is the Msg/CancelUpgrade request type.
  * 
@@ -117,10 +105,6 @@ export interface MsgCancelUpgradeResponseProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface MsgCancelUpgradeResponseAmino {}
-export interface MsgCancelUpgradeResponseAminoMsg {
-  type: "cosmos-sdk/MsgCancelUpgradeResponse";
-  value: MsgCancelUpgradeResponseAmino;
-}
 /**
  * MsgCancelUpgradeResponse is the Msg/CancelUpgrade response type.
  * 
@@ -209,15 +193,6 @@ export const MsgSoftwareUpgrade = {
     obj.plan = message.plan ? Plan.toAmino(message.plan) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgSoftwareUpgradeAminoMsg): MsgSoftwareUpgrade {
-    return MsgSoftwareUpgrade.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSoftwareUpgrade): MsgSoftwareUpgradeAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSoftwareUpgrade",
-      value: MsgSoftwareUpgrade.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgSoftwareUpgradeProtoMsg): MsgSoftwareUpgrade {
     return MsgSoftwareUpgrade.decode(message.value);
   },
@@ -279,15 +254,6 @@ export const MsgSoftwareUpgradeResponse = {
   toAmino(_: MsgSoftwareUpgradeResponse): MsgSoftwareUpgradeResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgSoftwareUpgradeResponseAminoMsg): MsgSoftwareUpgradeResponse {
-    return MsgSoftwareUpgradeResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSoftwareUpgradeResponse): MsgSoftwareUpgradeResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSoftwareUpgradeResponse",
-      value: MsgSoftwareUpgradeResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgSoftwareUpgradeResponseProtoMsg): MsgSoftwareUpgradeResponse {
     return MsgSoftwareUpgradeResponse.decode(message.value);
@@ -368,15 +334,6 @@ export const MsgCancelUpgrade = {
     obj.authority = message.authority;
     return obj;
   },
-  fromAminoMsg(object: MsgCancelUpgradeAminoMsg): MsgCancelUpgrade {
-    return MsgCancelUpgrade.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCancelUpgrade): MsgCancelUpgradeAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgCancelUpgrade",
-      value: MsgCancelUpgrade.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgCancelUpgradeProtoMsg): MsgCancelUpgrade {
     return MsgCancelUpgrade.decode(message.value);
   },
@@ -438,15 +395,6 @@ export const MsgCancelUpgradeResponse = {
   toAmino(_: MsgCancelUpgradeResponse): MsgCancelUpgradeResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgCancelUpgradeResponseAminoMsg): MsgCancelUpgradeResponse {
-    return MsgCancelUpgradeResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCancelUpgradeResponse): MsgCancelUpgradeResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgCancelUpgradeResponse",
-      value: MsgCancelUpgradeResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgCancelUpgradeResponseProtoMsg): MsgCancelUpgradeResponse {
     return MsgCancelUpgradeResponse.decode(message.value);

@@ -123,10 +123,6 @@ export interface EpochInfoAmino {
    */
   current_epoch_start_height: string;
 }
-export interface EpochInfoAminoMsg {
-  type: "osmosis/epochs/epoch-info";
-  value: EpochInfoAmino;
-}
 /**
  * EpochInfo is a struct that describes the data going into
  * a timer defined by the x/epochs module.
@@ -151,10 +147,6 @@ export interface GenesisStateProtoMsg {
 /** GenesisState defines the epochs module's genesis state. */
 export interface GenesisStateAmino {
   epochs: EpochInfoAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "osmosis/epochs/genesis-state";
-  value: GenesisStateAmino;
 }
 /** GenesisState defines the epochs module's genesis state. */
 export interface GenesisStateSDKType {
@@ -316,15 +308,6 @@ export const EpochInfo = {
     obj.current_epoch_start_height = message.currentEpochStartHeight ? message.currentEpochStartHeight.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: EpochInfoAminoMsg): EpochInfo {
-    return EpochInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: EpochInfo): EpochInfoAminoMsg {
-    return {
-      type: "osmosis/epochs/epoch-info",
-      value: EpochInfo.toAmino(message)
-    };
-  },
   fromProtoMsg(message: EpochInfoProtoMsg): EpochInfo {
     return EpochInfo.decode(message.value);
   },
@@ -415,15 +398,6 @@ export const GenesisState = {
       obj.epochs = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "osmosis/epochs/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

@@ -21,10 +21,6 @@ export interface GenesisStateAmino {
   /** accounts are the accounts present at genesis. */
   accounts: AnyAmino[];
 }
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the auth module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -123,15 +119,6 @@ export const GenesisState = {
       obj.accounts = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

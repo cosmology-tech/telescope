@@ -35,10 +35,6 @@ export interface FungibleTokenPacketDataAmino {
   /** the recipient address on the destination chain */
   receiver: string;
 }
-export interface FungibleTokenPacketDataAminoMsg {
-  type: "cosmos-sdk/FungibleTokenPacketData";
-  value: FungibleTokenPacketDataAmino;
-}
 /**
  * FungibleTokenPacketData defines a struct for the packet payload
  * See FungibleTokenPacketData spec:
@@ -157,15 +153,6 @@ export const FungibleTokenPacketData = {
     obj.sender = message.sender;
     obj.receiver = message.receiver;
     return obj;
-  },
-  fromAminoMsg(object: FungibleTokenPacketDataAminoMsg): FungibleTokenPacketData {
-    return FungibleTokenPacketData.fromAmino(object.value);
-  },
-  toAminoMsg(message: FungibleTokenPacketData): FungibleTokenPacketDataAminoMsg {
-    return {
-      type: "cosmos-sdk/FungibleTokenPacketData",
-      value: FungibleTokenPacketData.toAmino(message)
-    };
   },
   fromProtoMsg(message: FungibleTokenPacketDataProtoMsg): FungibleTokenPacketData {
     return FungibleTokenPacketData.decode(message.value);

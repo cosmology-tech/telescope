@@ -98,10 +98,6 @@ export interface ClientStateAmino {
    */
   allow_update_after_misbehaviour: boolean;
 }
-export interface ClientStateAminoMsg {
-  type: "cosmos-sdk/ClientState";
-  value: ClientStateAmino;
-}
 /**
  * ClientState from Tendermint tracks the current validator set, latest height,
  * and a possible frozen height.
@@ -145,10 +141,6 @@ export interface ConsensusStateAmino {
   root?: MerkleRootAmino;
   next_validators_hash: Uint8Array;
 }
-export interface ConsensusStateAminoMsg {
-  type: "cosmos-sdk/ConsensusState";
-  value: ConsensusStateAmino;
-}
 /** ConsensusState defines the consensus state from Tendermint. */
 export interface ConsensusStateSDKType {
   timestamp: Date;
@@ -176,10 +168,6 @@ export interface MisbehaviourAmino {
   client_id: string;
   header_1?: HeaderAmino;
   header_2?: HeaderAmino;
-}
-export interface MisbehaviourAminoMsg {
-  type: "cosmos-sdk/Misbehaviour";
-  value: MisbehaviourAmino;
 }
 /**
  * Misbehaviour is a wrapper over two conflicting Headers
@@ -234,10 +222,6 @@ export interface HeaderAmino {
   trusted_height?: HeightAmino;
   trusted_validators?: ValidatorSetAmino;
 }
-export interface HeaderAminoMsg {
-  type: "cosmos-sdk/Header";
-  value: HeaderAmino;
-}
 /**
  * Header defines the Tendermint client consensus Header.
  * It encapsulates all the information necessary to update from a trusted
@@ -277,10 +261,6 @@ export interface FractionProtoMsg {
 export interface FractionAmino {
   numerator: string;
   denominator: string;
-}
-export interface FractionAminoMsg {
-  type: "cosmos-sdk/Fraction";
-  value: FractionAmino;
 }
 /**
  * Fraction defines the protobuf message type for tmmath.Fraction that only
@@ -532,15 +512,6 @@ export const ClientState = {
     obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour;
     return obj;
   },
-  fromAminoMsg(object: ClientStateAminoMsg): ClientState {
-    return ClientState.fromAmino(object.value);
-  },
-  toAminoMsg(message: ClientState): ClientStateAminoMsg {
-    return {
-      type: "cosmos-sdk/ClientState",
-      value: ClientState.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ClientStateProtoMsg): ClientState {
     return ClientState.decode(message.value);
   },
@@ -649,15 +620,6 @@ export const ConsensusState = {
     obj.root = message.root ? MerkleRoot.toAmino(message.root) : undefined;
     obj.next_validators_hash = message.nextValidatorsHash;
     return obj;
-  },
-  fromAminoMsg(object: ConsensusStateAminoMsg): ConsensusState {
-    return ConsensusState.fromAmino(object.value);
-  },
-  toAminoMsg(message: ConsensusState): ConsensusStateAminoMsg {
-    return {
-      type: "cosmos-sdk/ConsensusState",
-      value: ConsensusState.toAmino(message)
-    };
   },
   fromProtoMsg(message: ConsensusStateProtoMsg): ConsensusState {
     return ConsensusState.decode(message.value);
@@ -769,15 +731,6 @@ export const Misbehaviour = {
     obj.header_1 = message.header1 ? Header.toAmino(message.header1) : undefined;
     obj.header_2 = message.header2 ? Header.toAmino(message.header2) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: MisbehaviourAminoMsg): Misbehaviour {
-    return Misbehaviour.fromAmino(object.value);
-  },
-  toAminoMsg(message: Misbehaviour): MisbehaviourAminoMsg {
-    return {
-      type: "cosmos-sdk/Misbehaviour",
-      value: Misbehaviour.toAmino(message)
-    };
   },
   fromProtoMsg(message: MisbehaviourProtoMsg): Misbehaviour {
     return Misbehaviour.decode(message.value);
@@ -908,15 +861,6 @@ export const Header = {
     obj.trusted_validators = message.trustedValidators ? ValidatorSet.toAmino(message.trustedValidators) : undefined;
     return obj;
   },
-  fromAminoMsg(object: HeaderAminoMsg): Header {
-    return Header.fromAmino(object.value);
-  },
-  toAminoMsg(message: Header): HeaderAminoMsg {
-    return {
-      type: "cosmos-sdk/Header",
-      value: Header.toAmino(message)
-    };
-  },
   fromProtoMsg(message: HeaderProtoMsg): Header {
     return Header.decode(message.value);
   },
@@ -1013,15 +957,6 @@ export const Fraction = {
     obj.numerator = message.numerator ? message.numerator.toString() : undefined;
     obj.denominator = message.denominator ? message.denominator.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: FractionAminoMsg): Fraction {
-    return Fraction.fromAmino(object.value);
-  },
-  toAminoMsg(message: Fraction): FractionAminoMsg {
-    return {
-      type: "cosmos-sdk/Fraction",
-      value: Fraction.toAmino(message)
-    };
   },
   fromProtoMsg(message: FractionProtoMsg): Fraction {
     return Fraction.decode(message.value);

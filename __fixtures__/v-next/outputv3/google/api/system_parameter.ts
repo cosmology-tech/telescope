@@ -89,10 +89,6 @@ export interface SystemParametersAmino {
    */
   rules: SystemParameterRuleAmino[];
 }
-export interface SystemParametersAminoMsg {
-  type: "/google.api.SystemParameters";
-  value: SystemParametersAmino;
-}
 /**
  * ### System parameter configuration
  * 
@@ -150,10 +146,6 @@ export interface SystemParameterRuleAmino {
    */
   parameters: SystemParameterAmino[];
 }
-export interface SystemParameterRuleAminoMsg {
-  type: "/google.api.SystemParameterRule";
-  value: SystemParameterRuleAmino;
-}
 /**
  * Define a system parameter rule mapping system parameter definitions to
  * methods.
@@ -203,10 +195,6 @@ export interface SystemParameterAmino {
    * sensitive.
    */
   url_query_parameter: string;
-}
-export interface SystemParameterAminoMsg {
-  type: "/google.api.SystemParameter";
-  value: SystemParameterAmino;
 }
 /**
  * Define a parameter's name and location. The parameter may be passed as either
@@ -294,9 +282,6 @@ export const SystemParameters = {
       obj.rules = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: SystemParametersAminoMsg): SystemParameters {
-    return SystemParameters.fromAmino(object.value);
   },
   fromProtoMsg(message: SystemParametersProtoMsg): SystemParameters {
     return SystemParameters.decode(message.value);
@@ -401,9 +386,6 @@ export const SystemParameterRule = {
       obj.parameters = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: SystemParameterRuleAminoMsg): SystemParameterRule {
-    return SystemParameterRule.fromAmino(object.value);
   },
   fromProtoMsg(message: SystemParameterRuleProtoMsg): SystemParameterRule {
     return SystemParameterRule.decode(message.value);
@@ -510,9 +492,6 @@ export const SystemParameter = {
     obj.http_header = message.httpHeader;
     obj.url_query_parameter = message.urlQueryParameter;
     return obj;
-  },
-  fromAminoMsg(object: SystemParameterAminoMsg): SystemParameter {
-    return SystemParameter.fromAmino(object.value);
   },
   fromProtoMsg(message: SystemParameterProtoMsg): SystemParameter {
     return SystemParameter.decode(message.value);

@@ -20,10 +20,6 @@ export interface MerkleRootProtoMsg {
 export interface MerkleRootAmino {
   hash: Uint8Array;
 }
-export interface MerkleRootAminoMsg {
-  type: "cosmos-sdk/MerkleRoot";
-  value: MerkleRootAmino;
-}
 /**
  * MerkleRoot defines a merkle root hash.
  * In the Cosmos SDK, the AppHash of a block header becomes the root.
@@ -50,10 +46,6 @@ export interface MerklePrefixProtoMsg {
  */
 export interface MerklePrefixAmino {
   key_prefix: Uint8Array;
-}
-export interface MerklePrefixAminoMsg {
-  type: "cosmos-sdk/MerklePrefix";
-  value: MerklePrefixAmino;
 }
 /**
  * MerklePrefix is merkle path prefixed to the key.
@@ -82,10 +74,6 @@ export interface MerklePathProtoMsg {
  */
 export interface MerklePathAmino {
   key_path: string[];
-}
-export interface MerklePathAminoMsg {
-  type: "cosmos-sdk/MerklePath";
-  value: MerklePathAmino;
 }
 /**
  * MerklePath is the path used to verify commitment proofs, which can be an
@@ -118,10 +106,6 @@ export interface MerkleProofProtoMsg {
  */
 export interface MerkleProofAmino {
   proofs: CommitmentProofAmino[];
-}
-export interface MerkleProofAminoMsg {
-  type: "cosmos-sdk/MerkleProof";
-  value: MerkleProofAmino;
 }
 /**
  * MerkleProof is a wrapper type over a chain of CommitmentProofs.
@@ -198,15 +182,6 @@ export const MerkleRoot = {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
-  },
-  fromAminoMsg(object: MerkleRootAminoMsg): MerkleRoot {
-    return MerkleRoot.fromAmino(object.value);
-  },
-  toAminoMsg(message: MerkleRoot): MerkleRootAminoMsg {
-    return {
-      type: "cosmos-sdk/MerkleRoot",
-      value: MerkleRoot.toAmino(message)
-    };
   },
   fromProtoMsg(message: MerkleRootProtoMsg): MerkleRoot {
     return MerkleRoot.decode(message.value);
@@ -286,15 +261,6 @@ export const MerklePrefix = {
     const obj: any = {};
     obj.key_prefix = message.keyPrefix;
     return obj;
-  },
-  fromAminoMsg(object: MerklePrefixAminoMsg): MerklePrefix {
-    return MerklePrefix.fromAmino(object.value);
-  },
-  toAminoMsg(message: MerklePrefix): MerklePrefixAminoMsg {
-    return {
-      type: "cosmos-sdk/MerklePrefix",
-      value: MerklePrefix.toAmino(message)
-    };
   },
   fromProtoMsg(message: MerklePrefixProtoMsg): MerklePrefix {
     return MerklePrefix.decode(message.value);
@@ -387,15 +353,6 @@ export const MerklePath = {
     }
     return obj;
   },
-  fromAminoMsg(object: MerklePathAminoMsg): MerklePath {
-    return MerklePath.fromAmino(object.value);
-  },
-  toAminoMsg(message: MerklePath): MerklePathAminoMsg {
-    return {
-      type: "cosmos-sdk/MerklePath",
-      value: MerklePath.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MerklePathProtoMsg): MerklePath {
     return MerklePath.decode(message.value);
   },
@@ -486,15 +443,6 @@ export const MerkleProof = {
       obj.proofs = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: MerkleProofAminoMsg): MerkleProof {
-    return MerkleProof.fromAmino(object.value);
-  },
-  toAminoMsg(message: MerkleProof): MerkleProofAminoMsg {
-    return {
-      type: "cosmos-sdk/MerkleProof",
-      value: MerkleProof.toAmino(message)
-    };
   },
   fromProtoMsg(message: MerkleProofProtoMsg): MerkleProof {
     return MerkleProof.decode(message.value);

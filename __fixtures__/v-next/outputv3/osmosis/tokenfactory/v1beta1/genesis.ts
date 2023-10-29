@@ -19,10 +19,6 @@ export interface GenesisStateAmino {
   params?: ParamsAmino;
   factory_denoms: GenesisDenomAmino[];
 }
-export interface GenesisStateAminoMsg {
-  type: "osmosis/tokenfactory/genesis-state";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the tokenfactory module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -49,10 +45,6 @@ export interface GenesisDenomProtoMsg {
 export interface GenesisDenomAmino {
   denom: string;
   authority_metadata?: DenomAuthorityMetadataAmino;
-}
-export interface GenesisDenomAminoMsg {
-  type: "osmosis/tokenfactory/genesis-denom";
-  value: GenesisDenomAmino;
 }
 /**
  * GenesisDenom defines a tokenfactory denom that is defined within genesis
@@ -157,15 +149,6 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
-  },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
   },
@@ -260,15 +243,6 @@ export const GenesisDenom = {
     obj.denom = message.denom;
     obj.authority_metadata = message.authorityMetadata ? DenomAuthorityMetadata.toAmino(message.authorityMetadata) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GenesisDenomAminoMsg): GenesisDenom {
-    return GenesisDenom.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisDenom): GenesisDenomAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/genesis-denom",
-      value: GenesisDenom.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisDenomProtoMsg): GenesisDenom {
     return GenesisDenom.decode(message.value);

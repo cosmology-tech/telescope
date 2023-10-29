@@ -11,10 +11,6 @@ export interface ParamsProtoMsg {
 export interface ParamsAmino {
   force_unlock_allowed_addresses: string[];
 }
-export interface ParamsAminoMsg {
-  type: "osmosis/lockup/params";
-  value: ParamsAmino;
-}
 export interface ParamsSDKType {
   force_unlock_allowed_addresses: string[];
 }
@@ -95,15 +91,6 @@ export const Params = {
       obj.force_unlock_allowed_addresses = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/lockup/params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

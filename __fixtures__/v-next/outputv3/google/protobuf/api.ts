@@ -113,10 +113,6 @@ export interface ApiAmino {
   /** The source syntax of the service. */
   syntax: Syntax;
 }
-export interface ApiAminoMsg {
-  type: "/google.protobuf.Api";
-  value: ApiAmino;
-}
 /**
  * Api is a light-weight descriptor for an API Interface.
  * 
@@ -174,10 +170,6 @@ export interface MethodAmino {
   options: OptionAmino[];
   /** The source syntax of this method. */
   syntax: Syntax;
-}
-export interface MethodAminoMsg {
-  type: "/google.protobuf.Method";
-  value: MethodAmino;
 }
 /** Method represents a method of an API interface. */
 export interface MethodSDKType {
@@ -370,10 +362,6 @@ export interface MixinAmino {
    * are rooted.
    */
   root: string;
-}
-export interface MixinAminoMsg {
-  type: "/google.protobuf.Mixin";
-  value: MixinAmino;
 }
 /**
  * Declares an API Interface to be included in this interface. The including
@@ -646,9 +634,6 @@ export const Api = {
     obj.syntax = message.syntax;
     return obj;
   },
-  fromAminoMsg(object: ApiAminoMsg): Api {
-    return Api.fromAmino(object.value);
-  },
   fromProtoMsg(message: ApiProtoMsg): Api {
     return Api.decode(message.value);
   },
@@ -823,9 +808,6 @@ export const Method = {
     obj.syntax = message.syntax;
     return obj;
   },
-  fromAminoMsg(object: MethodAminoMsg): Method {
-    return Method.fromAmino(object.value);
-  },
   fromProtoMsg(message: MethodProtoMsg): Method {
     return Method.decode(message.value);
   },
@@ -917,9 +899,6 @@ export const Mixin = {
     obj.name = message.name;
     obj.root = message.root;
     return obj;
-  },
-  fromAminoMsg(object: MixinAminoMsg): Mixin {
-    return Mixin.fromAmino(object.value);
   },
   fromProtoMsg(message: MixinProtoMsg): Mixin {
     return Mixin.decode(message.value);

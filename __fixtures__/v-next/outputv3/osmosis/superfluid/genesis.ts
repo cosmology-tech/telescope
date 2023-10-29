@@ -47,10 +47,6 @@ export interface GenesisStateAmino {
   intermediary_accounts: SuperfluidIntermediaryAccountAmino[];
   intemediary_account_connections: LockIdIntermediaryAccountConnectionAmino[];
 }
-export interface GenesisStateAminoMsg {
-  type: "osmosis/genesis-state";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -230,15 +226,6 @@ export const GenesisState = {
       obj.intemediary_account_connections = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "osmosis/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

@@ -749,10 +749,6 @@ export interface RoutingRuleAmino {
    */
   routing_parameters: RoutingParameterAmino[];
 }
-export interface RoutingRuleAminoMsg {
-  type: "/google.api.RoutingRule";
-  value: RoutingRuleAmino;
-}
 /**
  * Specifies the routing information that should be sent along with the request
  * in the form of routing header.
@@ -1245,10 +1241,6 @@ export interface RoutingParameterAmino {
    */
   path_template: string;
 }
-export interface RoutingParameterAminoMsg {
-  type: "/google.api.RoutingParameter";
-  value: RoutingParameterAmino;
-}
 /** A projection from an input message to the GRPC or REST header. */
 export interface RoutingParameterSDKType {
   field: string;
@@ -1330,9 +1322,6 @@ export const RoutingRule = {
       obj.routing_parameters = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: RoutingRuleAminoMsg): RoutingRule {
-    return RoutingRule.fromAmino(object.value);
   },
   fromProtoMsg(message: RoutingRuleProtoMsg): RoutingRule {
     return RoutingRule.decode(message.value);
@@ -1425,9 +1414,6 @@ export const RoutingParameter = {
     obj.field = message.field;
     obj.path_template = message.pathTemplate;
     return obj;
-  },
-  fromAminoMsg(object: RoutingParameterAminoMsg): RoutingParameter {
-    return RoutingParameter.fromAmino(object.value);
   },
   fromProtoMsg(message: RoutingParameterProtoMsg): RoutingParameter {
     return RoutingParameter.decode(message.value);

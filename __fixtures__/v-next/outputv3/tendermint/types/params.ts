@@ -26,10 +26,6 @@ export interface ConsensusParamsAmino {
   validator?: ValidatorParamsAmino;
   version?: VersionParamsAmino;
 }
-export interface ConsensusParamsAminoMsg {
-  type: "/tendermint.types.ConsensusParams";
-  value: ConsensusParamsAmino;
-}
 /**
  * ConsensusParams contains consensus critical parameters that determine the
  * validity of blocks.
@@ -83,10 +79,6 @@ export interface BlockParamsAmino {
    * Not exposed to the application.
    */
   time_iota_ms: string;
-}
-export interface BlockParamsAminoMsg {
-  type: "/tendermint.types.BlockParams";
-  value: BlockParamsAmino;
 }
 /** BlockParams contains limits on the block size. */
 export interface BlockParamsSDKType {
@@ -146,10 +138,6 @@ export interface EvidenceParamsAmino {
    */
   max_bytes: string;
 }
-export interface EvidenceParamsAminoMsg {
-  type: "/tendermint.types.EvidenceParams";
-  value: EvidenceParamsAmino;
-}
 /** EvidenceParams determine how we handle evidence of malfeasance. */
 export interface EvidenceParamsSDKType {
   max_age_num_blocks: bigint;
@@ -174,10 +162,6 @@ export interface ValidatorParamsProtoMsg {
 export interface ValidatorParamsAmino {
   pub_key_types: string[];
 }
-export interface ValidatorParamsAminoMsg {
-  type: "/tendermint.types.ValidatorParams";
-  value: ValidatorParamsAmino;
-}
 /**
  * ValidatorParams restrict the public key types validators can use.
  * NOTE: uses ABCI pubkey naming, not Amino names.
@@ -196,10 +180,6 @@ export interface VersionParamsProtoMsg {
 /** VersionParams contains the ABCI application version. */
 export interface VersionParamsAmino {
   app_version: string;
-}
-export interface VersionParamsAminoMsg {
-  type: "/tendermint.types.VersionParams";
-  value: VersionParamsAmino;
 }
 /** VersionParams contains the ABCI application version. */
 export interface VersionParamsSDKType {
@@ -226,10 +206,6 @@ export interface HashedParamsProtoMsg {
 export interface HashedParamsAmino {
   block_max_bytes: string;
   block_max_gas: string;
-}
-export interface HashedParamsAminoMsg {
-  type: "/tendermint.types.HashedParams";
-  value: HashedParamsAmino;
 }
 /**
  * HashedParams is a subset of ConsensusParams.
@@ -355,9 +331,6 @@ export const ConsensusParams = {
     obj.version = message.version ? VersionParams.toAmino(message.version) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ConsensusParamsAminoMsg): ConsensusParams {
-    return ConsensusParams.fromAmino(object.value);
-  },
   fromProtoMsg(message: ConsensusParamsProtoMsg): ConsensusParams {
     return ConsensusParams.decode(message.value);
   },
@@ -469,9 +442,6 @@ export const BlockParams = {
     obj.max_gas = message.maxGas ? message.maxGas.toString() : undefined;
     obj.time_iota_ms = message.timeIotaMs ? message.timeIotaMs.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: BlockParamsAminoMsg): BlockParams {
-    return BlockParams.fromAmino(object.value);
   },
   fromProtoMsg(message: BlockParamsProtoMsg): BlockParams {
     return BlockParams.decode(message.value);
@@ -585,9 +555,6 @@ export const EvidenceParams = {
     obj.max_bytes = message.maxBytes ? message.maxBytes.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: EvidenceParamsAminoMsg): EvidenceParams {
-    return EvidenceParams.fromAmino(object.value);
-  },
   fromProtoMsg(message: EvidenceParamsProtoMsg): EvidenceParams {
     return EvidenceParams.decode(message.value);
   },
@@ -678,9 +645,6 @@ export const ValidatorParams = {
     }
     return obj;
   },
-  fromAminoMsg(object: ValidatorParamsAminoMsg): ValidatorParams {
-    return ValidatorParams.fromAmino(object.value);
-  },
   fromProtoMsg(message: ValidatorParamsProtoMsg): ValidatorParams {
     return ValidatorParams.decode(message.value);
   },
@@ -760,9 +724,6 @@ export const VersionParams = {
     const obj: any = {};
     obj.app_version = message.appVersion ? message.appVersion.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: VersionParamsAminoMsg): VersionParams {
-    return VersionParams.fromAmino(object.value);
   },
   fromProtoMsg(message: VersionParamsProtoMsg): VersionParams {
     return VersionParams.decode(message.value);
@@ -859,9 +820,6 @@ export const HashedParams = {
     obj.block_max_bytes = message.blockMaxBytes ? message.blockMaxBytes.toString() : undefined;
     obj.block_max_gas = message.blockMaxGas ? message.blockMaxGas.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: HashedParamsAminoMsg): HashedParams {
-    return HashedParams.fromAmino(object.value);
   },
   fromProtoMsg(message: HashedParamsProtoMsg): HashedParams {
     return HashedParams.decode(message.value);

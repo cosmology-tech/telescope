@@ -71,10 +71,6 @@ export interface ValueAmino {
   /** Type value. */
   type_value?: string;
 }
-export interface ValueAminoMsg {
-  type: "/google.api.expr.v1alpha1.Value";
-  value: ValueAmino;
-}
 /**
  * Represents a CEL value.
  * 
@@ -113,10 +109,6 @@ export interface EnumValueAmino {
   /** The value of the enum. */
   value: number;
 }
-export interface EnumValueAminoMsg {
-  type: "/google.api.expr.v1alpha1.EnumValue";
-  value: EnumValueAmino;
-}
 /** An enum value. */
 export interface EnumValueSDKType {
   type: string;
@@ -145,10 +137,6 @@ export interface ListValueProtoMsg {
 export interface ListValueAmino {
   /** The ordered values in the list. */
   values: ValueAmino[];
-}
-export interface ListValueAminoMsg {
-  type: "/google.api.expr.v1alpha1.ListValue";
-  value: ListValueAmino;
 }
 /**
  * A list.
@@ -193,10 +181,6 @@ export interface MapValueAmino {
    */
   entries: MapValue_EntryAmino[];
 }
-export interface MapValueAminoMsg {
-  type: "/google.api.expr.v1alpha1.MapValue";
-  value: MapValueAmino;
-}
 /**
  * A map.
  * 
@@ -233,10 +217,6 @@ export interface MapValue_EntryAmino {
   key?: ValueAmino;
   /** The value. */
   value?: ValueAmino;
-}
-export interface MapValue_EntryAminoMsg {
-  type: "/google.api.expr.v1alpha1.Entry";
-  value: MapValue_EntryAmino;
 }
 /** An entry in the map. */
 export interface MapValue_EntrySDKType {
@@ -478,9 +458,6 @@ export const Value = {
     obj.type_value = message.typeValue;
     return obj;
   },
-  fromAminoMsg(object: ValueAminoMsg): Value {
-    return Value.fromAmino(object.value);
-  },
   fromProtoMsg(message: ValueProtoMsg): Value {
     return Value.decode(message.value);
   },
@@ -573,9 +550,6 @@ export const EnumValue = {
     obj.value = message.value;
     return obj;
   },
-  fromAminoMsg(object: EnumValueAminoMsg): EnumValue {
-    return EnumValue.fromAmino(object.value);
-  },
   fromProtoMsg(message: EnumValueProtoMsg): EnumValue {
     return EnumValue.decode(message.value);
   },
@@ -666,9 +640,6 @@ export const ListValue = {
     }
     return obj;
   },
-  fromAminoMsg(object: ListValueAminoMsg): ListValue {
-    return ListValue.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListValueProtoMsg): ListValue {
     return ListValue.decode(message.value);
   },
@@ -758,9 +729,6 @@ export const MapValue = {
       obj.entries = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: MapValueAminoMsg): MapValue {
-    return MapValue.fromAmino(object.value);
   },
   fromProtoMsg(message: MapValueProtoMsg): MapValue {
     return MapValue.decode(message.value);
@@ -857,9 +825,6 @@ export const MapValue_Entry = {
     obj.key = message.key ? Value.toAmino(message.key) : undefined;
     obj.value = message.value ? Value.toAmino(message.value) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: MapValue_EntryAminoMsg): MapValue_Entry {
-    return MapValue_Entry.fromAmino(object.value);
   },
   fromProtoMsg(message: MapValue_EntryProtoMsg): MapValue_Entry {
     return MapValue_Entry.decode(message.value);

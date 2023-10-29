@@ -59,10 +59,6 @@ export interface Operation_LabelsEntryAmino {
   key: string;
   value: string;
 }
-export interface Operation_LabelsEntryAminoMsg {
-  type: string;
-  value: Operation_LabelsEntryAmino;
-}
 export interface Operation_LabelsEntrySDKType {
   key: string;
   value: string;
@@ -235,10 +231,6 @@ export interface OperationAmino {
   /** Unimplemented. */
   extensions: AnyAmino[];
 }
-export interface OperationAminoMsg {
-  type: "/google.api.servicecontrol.v1.Operation";
-  value: OperationAmino;
-}
 /** Represents information regarding an operation. */
 export interface OperationSDKType {
   operation_id: string;
@@ -331,9 +323,6 @@ export const Operation_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: Operation_LabelsEntryAminoMsg): Operation_LabelsEntry {
-    return Operation_LabelsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: Operation_LabelsEntryProtoMsg): Operation_LabelsEntry {
     return Operation_LabelsEntry.decode(message.value);
@@ -611,9 +600,6 @@ export const Operation = {
       obj.extensions = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: OperationAminoMsg): Operation {
-    return Operation.fromAmino(object.value);
   },
   fromProtoMsg(message: OperationProtoMsg): Operation {
     return Operation.decode(message.value);

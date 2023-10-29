@@ -16,10 +16,6 @@ export interface ParamsAmino {
   send_enabled: SendEnabledAmino[];
   default_send_enabled: boolean;
 }
-export interface ParamsAminoMsg {
-  type: "cosmos-sdk/Params";
-  value: ParamsAmino;
-}
 /** Params defines the parameters for the bank module. */
 export interface ParamsSDKType {
   send_enabled: SendEnabledSDKType[];
@@ -45,10 +41,6 @@ export interface SendEnabledAmino {
   denom: string;
   enabled: boolean;
 }
-export interface SendEnabledAminoMsg {
-  type: "cosmos-sdk/SendEnabled";
-  value: SendEnabledAmino;
-}
 /**
  * SendEnabled maps coin denom to a send_enabled status (whether a denom is
  * sendable).
@@ -71,10 +63,6 @@ export interface InputAmino {
   address: string;
   coins: CoinAmino[];
 }
-export interface InputAminoMsg {
-  type: "cosmos-sdk/Input";
-  value: InputAmino;
-}
 /** Input models transaction input. */
 export interface InputSDKType {
   address: string;
@@ -93,10 +81,6 @@ export interface OutputProtoMsg {
 export interface OutputAmino {
   address: string;
   coins: CoinAmino[];
-}
-export interface OutputAminoMsg {
-  type: "cosmos-sdk/Output";
-  value: OutputAmino;
 }
 /** Output models transaction outputs. */
 export interface OutputSDKType {
@@ -125,10 +109,6 @@ export interface SupplyProtoMsg {
 /** @deprecated */
 export interface SupplyAmino {
   total: CoinAmino[];
-}
-export interface SupplyAminoMsg {
-  type: "cosmos-sdk/Supply";
-  value: SupplyAmino;
 }
 /**
  * Supply represents a struct that passively keeps track of the total supply
@@ -179,10 +159,6 @@ export interface DenomUnitAmino {
   exponent: number;
   /** aliases is a list of string aliases for the given denom */
   aliases: string[];
-}
-export interface DenomUnitAminoMsg {
-  type: "cosmos-sdk/DenomUnit";
-  value: DenomUnitAmino;
 }
 /**
  * DenomUnit represents a struct that describes a given
@@ -280,10 +256,6 @@ export interface MetadataAmino {
    * Since: cosmos-sdk 0.46
    */
   uri_hash: string;
-}
-export interface MetadataAminoMsg {
-  type: "cosmos-sdk/Metadata";
-  value: MetadataAmino;
 }
 /**
  * Metadata represents a struct that describes
@@ -391,15 +363,6 @@ export const Params = {
     obj.default_send_enabled = message.defaultSendEnabled;
     return obj;
   },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/Params",
-      value: Params.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);
   },
@@ -492,15 +455,6 @@ export const SendEnabled = {
     obj.denom = message.denom;
     obj.enabled = message.enabled;
     return obj;
-  },
-  fromAminoMsg(object: SendEnabledAminoMsg): SendEnabled {
-    return SendEnabled.fromAmino(object.value);
-  },
-  toAminoMsg(message: SendEnabled): SendEnabledAminoMsg {
-    return {
-      type: "cosmos-sdk/SendEnabled",
-      value: SendEnabled.toAmino(message)
-    };
   },
   fromProtoMsg(message: SendEnabledProtoMsg): SendEnabled {
     return SendEnabled.decode(message.value);
@@ -607,15 +561,6 @@ export const Input = {
     }
     return obj;
   },
-  fromAminoMsg(object: InputAminoMsg): Input {
-    return Input.fromAmino(object.value);
-  },
-  toAminoMsg(message: Input): InputAminoMsg {
-    return {
-      type: "cosmos-sdk/Input",
-      value: Input.toAmino(message)
-    };
-  },
   fromProtoMsg(message: InputProtoMsg): Input {
     return Input.decode(message.value);
   },
@@ -721,15 +666,6 @@ export const Output = {
     }
     return obj;
   },
-  fromAminoMsg(object: OutputAminoMsg): Output {
-    return Output.fromAmino(object.value);
-  },
-  toAminoMsg(message: Output): OutputAminoMsg {
-    return {
-      type: "cosmos-sdk/Output",
-      value: Output.toAmino(message)
-    };
-  },
   fromProtoMsg(message: OutputProtoMsg): Output {
     return Output.decode(message.value);
   },
@@ -821,15 +757,6 @@ export const Supply = {
       obj.total = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: SupplyAminoMsg): Supply {
-    return Supply.fromAmino(object.value);
-  },
-  toAminoMsg(message: Supply): SupplyAminoMsg {
-    return {
-      type: "cosmos-sdk/Supply",
-      value: Supply.toAmino(message)
-    };
   },
   fromProtoMsg(message: SupplyProtoMsg): Supply {
     return Supply.decode(message.value);
@@ -949,15 +876,6 @@ export const DenomUnit = {
       obj.aliases = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: DenomUnitAminoMsg): DenomUnit {
-    return DenomUnit.fromAmino(object.value);
-  },
-  toAminoMsg(message: DenomUnit): DenomUnitAminoMsg {
-    return {
-      type: "cosmos-sdk/DenomUnit",
-      value: DenomUnit.toAmino(message)
-    };
   },
   fromProtoMsg(message: DenomUnitProtoMsg): DenomUnit {
     return DenomUnit.decode(message.value);
@@ -1147,15 +1065,6 @@ export const Metadata = {
     obj.uri = message.uri;
     obj.uri_hash = message.uriHash;
     return obj;
-  },
-  fromAminoMsg(object: MetadataAminoMsg): Metadata {
-    return Metadata.fromAmino(object.value);
-  },
-  toAminoMsg(message: Metadata): MetadataAminoMsg {
-    return {
-      type: "cosmos-sdk/Metadata",
-      value: Metadata.toAmino(message)
-    };
   },
   fromProtoMsg(message: MetadataProtoMsg): Metadata {
     return Metadata.decode(message.value);

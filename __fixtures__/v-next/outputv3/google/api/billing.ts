@@ -91,10 +91,6 @@ export interface BillingAmino {
    */
   consumer_destinations: Billing_BillingDestinationAmino[];
 }
-export interface BillingAminoMsg {
-  type: "/google.api.Billing";
-  value: BillingAmino;
-}
 /**
  * Billing related configuration of the service.
  * 
@@ -167,10 +163,6 @@ export interface Billing_BillingDestinationAmino {
    * Each name must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
   metrics: string[];
-}
-export interface Billing_BillingDestinationAminoMsg {
-  type: "/google.api.BillingDestination";
-  value: Billing_BillingDestinationAmino;
 }
 /**
  * Configuration of a specific billing destination (Currently only support
@@ -256,9 +248,6 @@ export const Billing = {
       obj.consumer_destinations = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: BillingAminoMsg): Billing {
-    return Billing.fromAmino(object.value);
   },
   fromProtoMsg(message: BillingProtoMsg): Billing {
     return Billing.decode(message.value);
@@ -363,9 +352,6 @@ export const Billing_BillingDestination = {
       obj.metrics = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: Billing_BillingDestinationAminoMsg): Billing_BillingDestination {
-    return Billing_BillingDestination.fromAmino(object.value);
   },
   fromProtoMsg(message: Billing_BillingDestinationProtoMsg): Billing_BillingDestination {
     return Billing_BillingDestination.decode(message.value);

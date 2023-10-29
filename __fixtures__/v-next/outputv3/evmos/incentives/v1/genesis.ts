@@ -25,10 +25,6 @@ export interface GenesisStateAmino {
   /** active Gasmeters */
   gas_meters: GasMeterAmino[];
 }
-export interface GenesisStateAminoMsg {
-  type: "/evmos.incentives.v1.GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -60,10 +56,6 @@ export interface ParamsAmino {
   incentives_epoch_identifier: string;
   /** scaling factor for capping rewards */
   reward_scaler: string;
-}
-export interface ParamsAminoMsg {
-  type: "/evmos.incentives.v1.Params";
-  value: ParamsAmino;
 }
 /** Params defines the incentives module params */
 export interface ParamsSDKType {
@@ -191,9 +183,6 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
   },
@@ -313,9 +302,6 @@ export const Params = {
     obj.incentives_epoch_identifier = message.incentivesEpochIdentifier;
     obj.reward_scaler = message.rewardScaler;
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

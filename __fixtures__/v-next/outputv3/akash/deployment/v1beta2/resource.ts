@@ -19,10 +19,6 @@ export interface ResourceAmino {
   count: number;
   price?: DecCoinAmino;
 }
-export interface ResourceAminoMsg {
-  type: "/akash.deployment.v1beta2.Resource";
-  value: ResourceAmino;
-}
 /** Resource stores unit, total count and price of resource */
 export interface ResourceSDKType {
   resources: ResourceUnitsSDKType;
@@ -125,9 +121,6 @@ export const Resource = {
     obj.count = message.count;
     obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: ResourceAminoMsg): Resource {
-    return Resource.fromAmino(object.value);
   },
   fromProtoMsg(message: ResourceProtoMsg): Resource {
     return Resource.decode(message.value);

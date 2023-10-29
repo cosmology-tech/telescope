@@ -23,10 +23,6 @@ export interface ParamsAmino {
   /** denom of claimable asset */
   claim_denom: string;
 }
-export interface ParamsAminoMsg {
-  type: "osmosis/claim/params";
-  value: ParamsAmino;
-}
 /** Params defines the claim module's parameters. */
 export interface ParamsSDKType {
   airdrop_start_time: Date;
@@ -145,15 +141,6 @@ export const Params = {
     obj.duration_of_decay = message.durationOfDecay ? Duration.toAmino(message.durationOfDecay) : undefined;
     obj.claim_denom = message.claimDenom;
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/claim/params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

@@ -16,10 +16,6 @@ export interface EvidenceAmino {
   duplicate_vote_evidence?: DuplicateVoteEvidenceAmino;
   light_client_attack_evidence?: LightClientAttackEvidenceAmino;
 }
-export interface EvidenceAminoMsg {
-  type: "/tendermint.types.Evidence";
-  value: EvidenceAmino;
-}
 export interface EvidenceSDKType {
   duplicate_vote_evidence?: DuplicateVoteEvidenceSDKType;
   light_client_attack_evidence?: LightClientAttackEvidenceSDKType;
@@ -43,10 +39,6 @@ export interface DuplicateVoteEvidenceAmino {
   total_voting_power: string;
   validator_power: string;
   timestamp?: Date;
-}
-export interface DuplicateVoteEvidenceAminoMsg {
-  type: "/tendermint.types.DuplicateVoteEvidence";
-  value: DuplicateVoteEvidenceAmino;
 }
 /** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
 export interface DuplicateVoteEvidenceSDKType {
@@ -76,10 +68,6 @@ export interface LightClientAttackEvidenceAmino {
   total_voting_power: string;
   timestamp?: Date;
 }
-export interface LightClientAttackEvidenceAminoMsg {
-  type: "/tendermint.types.LightClientAttackEvidence";
-  value: LightClientAttackEvidenceAmino;
-}
 /** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
 export interface LightClientAttackEvidenceSDKType {
   conflicting_block?: LightBlockSDKType;
@@ -97,10 +85,6 @@ export interface EvidenceListProtoMsg {
 }
 export interface EvidenceListAmino {
   evidence: EvidenceAmino[];
-}
-export interface EvidenceListAminoMsg {
-  type: "/tendermint.types.EvidenceList";
-  value: EvidenceListAmino;
 }
 export interface EvidenceListSDKType {
   evidence: EvidenceSDKType[];
@@ -187,9 +171,6 @@ export const Evidence = {
     obj.duplicate_vote_evidence = message.duplicateVoteEvidence ? DuplicateVoteEvidence.toAmino(message.duplicateVoteEvidence) : undefined;
     obj.light_client_attack_evidence = message.lightClientAttackEvidence ? LightClientAttackEvidence.toAmino(message.lightClientAttackEvidence) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: EvidenceAminoMsg): Evidence {
-    return Evidence.fromAmino(object.value);
   },
   fromProtoMsg(message: EvidenceProtoMsg): Evidence {
     return Evidence.decode(message.value);
@@ -332,9 +313,6 @@ export const DuplicateVoteEvidence = {
     obj.validator_power = message.validatorPower ? message.validatorPower.toString() : undefined;
     obj.timestamp = message.timestamp;
     return obj;
-  },
-  fromAminoMsg(object: DuplicateVoteEvidenceAminoMsg): DuplicateVoteEvidence {
-    return DuplicateVoteEvidence.fromAmino(object.value);
   },
   fromProtoMsg(message: DuplicateVoteEvidenceProtoMsg): DuplicateVoteEvidence {
     return DuplicateVoteEvidence.decode(message.value);
@@ -488,9 +466,6 @@ export const LightClientAttackEvidence = {
     obj.timestamp = message.timestamp;
     return obj;
   },
-  fromAminoMsg(object: LightClientAttackEvidenceAminoMsg): LightClientAttackEvidence {
-    return LightClientAttackEvidence.fromAmino(object.value);
-  },
   fromProtoMsg(message: LightClientAttackEvidenceProtoMsg): LightClientAttackEvidence {
     return LightClientAttackEvidence.decode(message.value);
   },
@@ -580,9 +555,6 @@ export const EvidenceList = {
       obj.evidence = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: EvidenceListAminoMsg): EvidenceList {
-    return EvidenceList.fromAmino(object.value);
   },
   fromProtoMsg(message: EvidenceListProtoMsg): EvidenceList {
     return EvidenceList.decode(message.value);

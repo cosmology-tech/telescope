@@ -27,10 +27,6 @@ export interface SourceContextAmino {
    */
   file_name: string;
 }
-export interface SourceContextAminoMsg {
-  type: "/google.protobuf.SourceContext";
-  value: SourceContextAmino;
-}
 /**
  * `SourceContext` represents information about the source of a
  * protobuf element, like the file in which it is defined.
@@ -102,9 +98,6 @@ export const SourceContext = {
     const obj: any = {};
     obj.file_name = message.fileName;
     return obj;
-  },
-  fromAminoMsg(object: SourceContextAminoMsg): SourceContext {
-    return SourceContext.fromAmino(object.value);
   },
   fromProtoMsg(message: SourceContextProtoMsg): SourceContext {
     return SourceContext.decode(message.value);

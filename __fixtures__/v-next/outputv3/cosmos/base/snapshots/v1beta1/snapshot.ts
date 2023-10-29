@@ -21,10 +21,6 @@ export interface SnapshotAmino {
   hash: Uint8Array;
   metadata?: MetadataAmino;
 }
-export interface SnapshotAminoMsg {
-  type: "cosmos-sdk/Snapshot";
-  value: SnapshotAmino;
-}
 /** Snapshot contains Tendermint state sync snapshot info. */
 export interface SnapshotSDKType {
   height: bigint;
@@ -46,10 +42,6 @@ export interface MetadataProtoMsg {
 export interface MetadataAmino {
   /** SHA-256 chunk hashes */
   chunk_hashes: Uint8Array[];
-}
-export interface MetadataAminoMsg {
-  type: "cosmos-sdk/Metadata";
-  value: MetadataAmino;
 }
 /** Metadata contains SDK-specific snapshot metadata. */
 export interface MetadataSDKType {
@@ -77,10 +69,6 @@ export interface SnapshotItemAmino {
   kv?: SnapshotKVItemAmino;
   schema?: SnapshotSchemaAmino;
 }
-export interface SnapshotItemAminoMsg {
-  type: "cosmos-sdk/SnapshotItem";
-  value: SnapshotItemAmino;
-}
 /** SnapshotItem is an item contained in a rootmulti.Store snapshot. */
 export interface SnapshotItemSDKType {
   store?: SnapshotStoreItemSDKType;
@@ -101,10 +89,6 @@ export interface SnapshotStoreItemProtoMsg {
 /** SnapshotStoreItem contains metadata about a snapshotted store. */
 export interface SnapshotStoreItemAmino {
   name: string;
-}
-export interface SnapshotStoreItemAminoMsg {
-  type: "cosmos-sdk/SnapshotStoreItem";
-  value: SnapshotStoreItemAmino;
 }
 /** SnapshotStoreItem contains metadata about a snapshotted store. */
 export interface SnapshotStoreItemSDKType {
@@ -132,10 +116,6 @@ export interface SnapshotIAVLItemAmino {
   /** height is depth of the tree. */
   height: number;
 }
-export interface SnapshotIAVLItemAminoMsg {
-  type: "cosmos-sdk/SnapshotIAVLItem";
-  value: SnapshotIAVLItemAmino;
-}
 /** SnapshotIAVLItem is an exported IAVL node. */
 export interface SnapshotIAVLItemSDKType {
   key: Uint8Array;
@@ -157,10 +137,6 @@ export interface SnapshotExtensionMetaAmino {
   name: string;
   format: number;
 }
-export interface SnapshotExtensionMetaAminoMsg {
-  type: "cosmos-sdk/SnapshotExtensionMeta";
-  value: SnapshotExtensionMetaAmino;
-}
 /** SnapshotExtensionMeta contains metadata about an external snapshotter. */
 export interface SnapshotExtensionMetaSDKType {
   name: string;
@@ -177,10 +153,6 @@ export interface SnapshotExtensionPayloadProtoMsg {
 /** SnapshotExtensionPayload contains payloads of an external snapshotter. */
 export interface SnapshotExtensionPayloadAmino {
   payload: Uint8Array;
-}
-export interface SnapshotExtensionPayloadAminoMsg {
-  type: "cosmos-sdk/SnapshotExtensionPayload";
-  value: SnapshotExtensionPayloadAmino;
 }
 /** SnapshotExtensionPayload contains payloads of an external snapshotter. */
 export interface SnapshotExtensionPayloadSDKType {
@@ -200,10 +172,6 @@ export interface SnapshotKVItemAmino {
   key: Uint8Array;
   value: Uint8Array;
 }
-export interface SnapshotKVItemAminoMsg {
-  type: "cosmos-sdk/SnapshotKVItem";
-  value: SnapshotKVItemAmino;
-}
 /** SnapshotKVItem is an exported Key/Value Pair */
 export interface SnapshotKVItemSDKType {
   key: Uint8Array;
@@ -220,10 +188,6 @@ export interface SnapshotSchemaProtoMsg {
 /** SnapshotSchema is an exported schema of smt store */
 export interface SnapshotSchemaAmino {
   keys: Uint8Array[];
-}
-export interface SnapshotSchemaAminoMsg {
-  type: "cosmos-sdk/SnapshotSchema";
-  value: SnapshotSchemaAmino;
 }
 /** SnapshotSchema is an exported schema of smt store */
 export interface SnapshotSchemaSDKType {
@@ -355,15 +319,6 @@ export const Snapshot = {
     obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined;
     return obj;
   },
-  fromAminoMsg(object: SnapshotAminoMsg): Snapshot {
-    return Snapshot.fromAmino(object.value);
-  },
-  toAminoMsg(message: Snapshot): SnapshotAminoMsg {
-    return {
-      type: "cosmos-sdk/Snapshot",
-      value: Snapshot.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SnapshotProtoMsg): Snapshot {
     return Snapshot.decode(message.value);
   },
@@ -454,15 +409,6 @@ export const Metadata = {
       obj.chunk_hashes = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: MetadataAminoMsg): Metadata {
-    return Metadata.fromAmino(object.value);
-  },
-  toAminoMsg(message: Metadata): MetadataAminoMsg {
-    return {
-      type: "cosmos-sdk/Metadata",
-      value: Metadata.toAmino(message)
-    };
   },
   fromProtoMsg(message: MetadataProtoMsg): Metadata {
     return Metadata.decode(message.value);
@@ -625,15 +571,6 @@ export const SnapshotItem = {
     obj.schema = message.schema ? SnapshotSchema.toAmino(message.schema) : undefined;
     return obj;
   },
-  fromAminoMsg(object: SnapshotItemAminoMsg): SnapshotItem {
-    return SnapshotItem.fromAmino(object.value);
-  },
-  toAminoMsg(message: SnapshotItem): SnapshotItemAminoMsg {
-    return {
-      type: "cosmos-sdk/SnapshotItem",
-      value: SnapshotItem.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SnapshotItemProtoMsg): SnapshotItem {
     return SnapshotItem.decode(message.value);
   },
@@ -712,15 +649,6 @@ export const SnapshotStoreItem = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAminoMsg(object: SnapshotStoreItemAminoMsg): SnapshotStoreItem {
-    return SnapshotStoreItem.fromAmino(object.value);
-  },
-  toAminoMsg(message: SnapshotStoreItem): SnapshotStoreItemAminoMsg {
-    return {
-      type: "cosmos-sdk/SnapshotStoreItem",
-      value: SnapshotStoreItem.toAmino(message)
-    };
   },
   fromProtoMsg(message: SnapshotStoreItemProtoMsg): SnapshotStoreItem {
     return SnapshotStoreItem.decode(message.value);
@@ -845,15 +773,6 @@ export const SnapshotIAVLItem = {
     obj.height = message.height;
     return obj;
   },
-  fromAminoMsg(object: SnapshotIAVLItemAminoMsg): SnapshotIAVLItem {
-    return SnapshotIAVLItem.fromAmino(object.value);
-  },
-  toAminoMsg(message: SnapshotIAVLItem): SnapshotIAVLItemAminoMsg {
-    return {
-      type: "cosmos-sdk/SnapshotIAVLItem",
-      value: SnapshotIAVLItem.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SnapshotIAVLItemProtoMsg): SnapshotIAVLItem {
     return SnapshotIAVLItem.decode(message.value);
   },
@@ -947,15 +866,6 @@ export const SnapshotExtensionMeta = {
     obj.format = message.format;
     return obj;
   },
-  fromAminoMsg(object: SnapshotExtensionMetaAminoMsg): SnapshotExtensionMeta {
-    return SnapshotExtensionMeta.fromAmino(object.value);
-  },
-  toAminoMsg(message: SnapshotExtensionMeta): SnapshotExtensionMetaAminoMsg {
-    return {
-      type: "cosmos-sdk/SnapshotExtensionMeta",
-      value: SnapshotExtensionMeta.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SnapshotExtensionMetaProtoMsg): SnapshotExtensionMeta {
     return SnapshotExtensionMeta.decode(message.value);
   },
@@ -1034,15 +944,6 @@ export const SnapshotExtensionPayload = {
     const obj: any = {};
     obj.payload = message.payload;
     return obj;
-  },
-  fromAminoMsg(object: SnapshotExtensionPayloadAminoMsg): SnapshotExtensionPayload {
-    return SnapshotExtensionPayload.fromAmino(object.value);
-  },
-  toAminoMsg(message: SnapshotExtensionPayload): SnapshotExtensionPayloadAminoMsg {
-    return {
-      type: "cosmos-sdk/SnapshotExtensionPayload",
-      value: SnapshotExtensionPayload.toAmino(message)
-    };
   },
   fromProtoMsg(message: SnapshotExtensionPayloadProtoMsg): SnapshotExtensionPayload {
     return SnapshotExtensionPayload.decode(message.value);
@@ -1137,15 +1038,6 @@ export const SnapshotKVItem = {
     obj.value = message.value;
     return obj;
   },
-  fromAminoMsg(object: SnapshotKVItemAminoMsg): SnapshotKVItem {
-    return SnapshotKVItem.fromAmino(object.value);
-  },
-  toAminoMsg(message: SnapshotKVItem): SnapshotKVItemAminoMsg {
-    return {
-      type: "cosmos-sdk/SnapshotKVItem",
-      value: SnapshotKVItem.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SnapshotKVItemProtoMsg): SnapshotKVItem {
     return SnapshotKVItem.decode(message.value);
   },
@@ -1236,15 +1128,6 @@ export const SnapshotSchema = {
       obj.keys = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: SnapshotSchemaAminoMsg): SnapshotSchema {
-    return SnapshotSchema.fromAmino(object.value);
-  },
-  toAminoMsg(message: SnapshotSchema): SnapshotSchemaAminoMsg {
-    return {
-      type: "cosmos-sdk/SnapshotSchema",
-      value: SnapshotSchema.toAmino(message)
-    };
   },
   fromProtoMsg(message: SnapshotSchemaProtoMsg): SnapshotSchema {
     return SnapshotSchema.decode(message.value);

@@ -473,10 +473,6 @@ export interface MetricDescriptorAmino {
    */
   monitored_resource_types: string[];
 }
-export interface MetricDescriptorAminoMsg {
-  type: "/google.api.MetricDescriptor";
-  value: MetricDescriptorAmino;
-}
 /**
  * Defines a metric type and its schema. Once a metric descriptor is created,
  * deleting or altering it stops data collection and makes the metric type's
@@ -537,10 +533,6 @@ export interface MetricDescriptor_MetricDescriptorMetadataAmino {
    */
   ingest_delay?: DurationAmino;
 }
-export interface MetricDescriptor_MetricDescriptorMetadataAminoMsg {
-  type: "/google.api.MetricDescriptorMetadata";
-  value: MetricDescriptor_MetricDescriptorMetadataAmino;
-}
 /** Additional annotations that can be used to guide the usage of a metric. */
 export interface MetricDescriptor_MetricDescriptorMetadataSDKType {
   /** @deprecated */
@@ -559,10 +551,6 @@ export interface Metric_LabelsEntryProtoMsg {
 export interface Metric_LabelsEntryAmino {
   key: string;
   value: string;
-}
-export interface Metric_LabelsEntryAminoMsg {
-  type: string;
-  value: Metric_LabelsEntryAmino;
 }
 export interface Metric_LabelsEntrySDKType {
   key: string;
@@ -607,10 +595,6 @@ export interface MetricAmino {
   labels: {
     [key: string]: string;
   };
-}
-export interface MetricAminoMsg {
-  type: "/google.api.Metric";
-  value: MetricAmino;
 }
 /**
  * A specific metric, identified by specifying values for all of the
@@ -853,9 +837,6 @@ export const MetricDescriptor = {
     }
     return obj;
   },
-  fromAminoMsg(object: MetricDescriptorAminoMsg): MetricDescriptor {
-    return MetricDescriptor.fromAmino(object.value);
-  },
   fromProtoMsg(message: MetricDescriptorProtoMsg): MetricDescriptor {
     return MetricDescriptor.decode(message.value);
   },
@@ -966,9 +947,6 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
     obj.ingest_delay = message.ingestDelay ? Duration.toAmino(message.ingestDelay) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MetricDescriptor_MetricDescriptorMetadataAminoMsg): MetricDescriptor_MetricDescriptorMetadata {
-    return MetricDescriptor_MetricDescriptorMetadata.fromAmino(object.value);
-  },
   fromProtoMsg(message: MetricDescriptor_MetricDescriptorMetadataProtoMsg): MetricDescriptor_MetricDescriptorMetadata {
     return MetricDescriptor_MetricDescriptorMetadata.decode(message.value);
   },
@@ -1059,9 +1037,6 @@ export const Metric_LabelsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: Metric_LabelsEntryAminoMsg): Metric_LabelsEntry {
-    return Metric_LabelsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: Metric_LabelsEntryProtoMsg): Metric_LabelsEntry {
     return Metric_LabelsEntry.decode(message.value);
@@ -1191,9 +1166,6 @@ export const Metric = {
       });
     }
     return obj;
-  },
-  fromAminoMsg(object: MetricAminoMsg): Metric {
-    return Metric.fromAmino(object.value);
   },
   fromProtoMsg(message: MetricProtoMsg): Metric {
     return Metric.decode(message.value);

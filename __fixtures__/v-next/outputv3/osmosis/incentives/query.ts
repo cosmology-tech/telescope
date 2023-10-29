@@ -11,10 +11,6 @@ export interface ModuleToDistributeCoinsRequestProtoMsg {
   value: Uint8Array;
 }
 export interface ModuleToDistributeCoinsRequestAmino {}
-export interface ModuleToDistributeCoinsRequestAminoMsg {
-  type: "osmosis/incentives/module-to-distribute-coins-request";
-  value: ModuleToDistributeCoinsRequestAmino;
-}
 export interface ModuleToDistributeCoinsRequestSDKType {}
 export interface ModuleToDistributeCoinsResponse {
   /** Coins that have yet to be distributed */
@@ -27,10 +23,6 @@ export interface ModuleToDistributeCoinsResponseProtoMsg {
 export interface ModuleToDistributeCoinsResponseAmino {
   /** Coins that have yet to be distributed */
   coins: CoinAmino[];
-}
-export interface ModuleToDistributeCoinsResponseAminoMsg {
-  type: "osmosis/incentives/module-to-distribute-coins-response";
-  value: ModuleToDistributeCoinsResponseAmino;
 }
 export interface ModuleToDistributeCoinsResponseSDKType {
   coins: CoinSDKType[];
@@ -47,10 +39,6 @@ export interface GaugeByIDRequestAmino {
   /** Gague ID being queried */
   id: string;
 }
-export interface GaugeByIDRequestAminoMsg {
-  type: "osmosis/incentives/gauge-by-id-request";
-  value: GaugeByIDRequestAmino;
-}
 export interface GaugeByIDRequestSDKType {
   id: bigint;
 }
@@ -66,10 +54,6 @@ export interface GaugeByIDResponseAmino {
   /** Gauge that corresponds to provided gague ID */
   gauge?: GaugeAmino;
 }
-export interface GaugeByIDResponseAminoMsg {
-  type: "osmosis/incentives/gauge-by-id-response";
-  value: GaugeByIDResponseAmino;
-}
 export interface GaugeByIDResponseSDKType {
   gauge?: GaugeSDKType;
 }
@@ -84,10 +68,6 @@ export interface GaugesRequestProtoMsg {
 export interface GaugesRequestAmino {
   /** Pagination defines pagination for the request */
   pagination?: PageRequestAmino;
-}
-export interface GaugesRequestAminoMsg {
-  type: "osmosis/incentives/gauges-request";
-  value: GaugesRequestAmino;
 }
 export interface GaugesRequestSDKType {
   pagination?: PageRequestSDKType;
@@ -108,10 +88,6 @@ export interface GaugesResponseAmino {
   /** Pagination defines pagination for the response */
   pagination?: PageResponseAmino;
 }
-export interface GaugesResponseAminoMsg {
-  type: "osmosis/incentives/gauges-response";
-  value: GaugesResponseAmino;
-}
 export interface GaugesResponseSDKType {
   data: GaugeSDKType[];
   pagination?: PageResponseSDKType;
@@ -127,10 +103,6 @@ export interface ActiveGaugesRequestProtoMsg {
 export interface ActiveGaugesRequestAmino {
   /** Pagination defines pagination for the request */
   pagination?: PageRequestAmino;
-}
-export interface ActiveGaugesRequestAminoMsg {
-  type: "osmosis/incentives/active-gauges-request";
-  value: ActiveGaugesRequestAmino;
 }
 export interface ActiveGaugesRequestSDKType {
   pagination?: PageRequestSDKType;
@@ -150,10 +122,6 @@ export interface ActiveGaugesResponseAmino {
   data: GaugeAmino[];
   /** Pagination defines pagination for the response */
   pagination?: PageResponseAmino;
-}
-export interface ActiveGaugesResponseAminoMsg {
-  type: "osmosis/incentives/active-gauges-response";
-  value: ActiveGaugesResponseAmino;
 }
 export interface ActiveGaugesResponseSDKType {
   data: GaugeSDKType[];
@@ -175,10 +143,6 @@ export interface ActiveGaugesPerDenomRequestAmino {
   /** Pagination defines pagination for the request */
   pagination?: PageRequestAmino;
 }
-export interface ActiveGaugesPerDenomRequestAminoMsg {
-  type: "osmosis/incentives/active-gauges-per-denom-request";
-  value: ActiveGaugesPerDenomRequestAmino;
-}
 export interface ActiveGaugesPerDenomRequestSDKType {
   denom: string;
   pagination?: PageRequestSDKType;
@@ -199,10 +163,6 @@ export interface ActiveGaugesPerDenomResponseAmino {
   /** Pagination defines pagination for the response */
   pagination?: PageResponseAmino;
 }
-export interface ActiveGaugesPerDenomResponseAminoMsg {
-  type: "osmosis/incentives/active-gauges-per-denom-response";
-  value: ActiveGaugesPerDenomResponseAmino;
-}
 export interface ActiveGaugesPerDenomResponseSDKType {
   data: GaugeSDKType[];
   pagination?: PageResponseSDKType;
@@ -218,10 +178,6 @@ export interface UpcomingGaugesRequestProtoMsg {
 export interface UpcomingGaugesRequestAmino {
   /** Pagination defines pagination for the request */
   pagination?: PageRequestAmino;
-}
-export interface UpcomingGaugesRequestAminoMsg {
-  type: "osmosis/incentives/upcoming-gauges-request";
-  value: UpcomingGaugesRequestAmino;
 }
 export interface UpcomingGaugesRequestSDKType {
   pagination?: PageRequestSDKType;
@@ -241,10 +197,6 @@ export interface UpcomingGaugesResponseAmino {
   data: GaugeAmino[];
   /** Pagination defines pagination for the response */
   pagination?: PageResponseAmino;
-}
-export interface UpcomingGaugesResponseAminoMsg {
-  type: "osmosis/incentives/upcoming-gauges-response";
-  value: UpcomingGaugesResponseAmino;
 }
 export interface UpcomingGaugesResponseSDKType {
   data: GaugeSDKType[];
@@ -266,10 +218,6 @@ export interface UpcomingGaugesPerDenomRequestAmino {
   /** Pagination defines pagination for the request */
   pagination?: PageRequestAmino;
 }
-export interface UpcomingGaugesPerDenomRequestAminoMsg {
-  type: "osmosis/incentives/upcoming-gauges-per-denom-request";
-  value: UpcomingGaugesPerDenomRequestAmino;
-}
 export interface UpcomingGaugesPerDenomRequestSDKType {
   denom: string;
   pagination?: PageRequestSDKType;
@@ -289,10 +237,6 @@ export interface UpcomingGaugesPerDenomResponseAmino {
   upcoming_gauges: GaugeAmino[];
   /** Pagination defines pagination for the response */
   pagination?: PageResponseAmino;
-}
-export interface UpcomingGaugesPerDenomResponseAminoMsg {
-  type: "osmosis/incentives/upcoming-gauges-per-denom-response";
-  value: UpcomingGaugesPerDenomResponseAmino;
 }
 export interface UpcomingGaugesPerDenomResponseSDKType {
   upcoming_gauges: GaugeSDKType[];
@@ -324,10 +268,6 @@ export interface RewardsEstRequestAmino {
    */
   end_epoch: string;
 }
-export interface RewardsEstRequestAminoMsg {
-  type: "osmosis/incentives/rewards-est-request";
-  value: RewardsEstRequestAmino;
-}
 export interface RewardsEstRequestSDKType {
   owner: string;
   lock_ids: bigint[];
@@ -351,10 +291,6 @@ export interface RewardsEstResponseAmino {
    */
   coins: CoinAmino[];
 }
-export interface RewardsEstResponseAminoMsg {
-  type: "osmosis/incentives/rewards-est-response";
-  value: RewardsEstResponseAmino;
-}
 export interface RewardsEstResponseSDKType {
   coins: CoinSDKType[];
 }
@@ -364,10 +300,6 @@ export interface QueryLockableDurationsRequestProtoMsg {
   value: Uint8Array;
 }
 export interface QueryLockableDurationsRequestAmino {}
-export interface QueryLockableDurationsRequestAminoMsg {
-  type: "osmosis/incentives/query-lockable-durations-request";
-  value: QueryLockableDurationsRequestAmino;
-}
 export interface QueryLockableDurationsRequestSDKType {}
 export interface QueryLockableDurationsResponse {
   /** Time durations that users can lock coins for in order to recieve rewards */
@@ -380,10 +312,6 @@ export interface QueryLockableDurationsResponseProtoMsg {
 export interface QueryLockableDurationsResponseAmino {
   /** Time durations that users can lock coins for in order to recieve rewards */
   lockable_durations: DurationAmino[];
-}
-export interface QueryLockableDurationsResponseAminoMsg {
-  type: "osmosis/incentives/query-lockable-durations-response";
-  value: QueryLockableDurationsResponseAmino;
 }
 export interface QueryLockableDurationsResponseSDKType {
   lockable_durations: DurationSDKType[];
@@ -436,15 +364,6 @@ export const ModuleToDistributeCoinsRequest = {
   toAmino(_: ModuleToDistributeCoinsRequest): ModuleToDistributeCoinsRequestAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: ModuleToDistributeCoinsRequestAminoMsg): ModuleToDistributeCoinsRequest {
-    return ModuleToDistributeCoinsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: ModuleToDistributeCoinsRequest): ModuleToDistributeCoinsRequestAminoMsg {
-    return {
-      type: "osmosis/incentives/module-to-distribute-coins-request",
-      value: ModuleToDistributeCoinsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: ModuleToDistributeCoinsRequestProtoMsg): ModuleToDistributeCoinsRequest {
     return ModuleToDistributeCoinsRequest.decode(message.value);
@@ -537,15 +456,6 @@ export const ModuleToDistributeCoinsResponse = {
     }
     return obj;
   },
-  fromAminoMsg(object: ModuleToDistributeCoinsResponseAminoMsg): ModuleToDistributeCoinsResponse {
-    return ModuleToDistributeCoinsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: ModuleToDistributeCoinsResponse): ModuleToDistributeCoinsResponseAminoMsg {
-    return {
-      type: "osmosis/incentives/module-to-distribute-coins-response",
-      value: ModuleToDistributeCoinsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ModuleToDistributeCoinsResponseProtoMsg): ModuleToDistributeCoinsResponse {
     return ModuleToDistributeCoinsResponse.decode(message.value);
   },
@@ -626,15 +536,6 @@ export const GaugeByIDRequest = {
     const obj: any = {};
     obj.id = message.id ? message.id.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GaugeByIDRequestAminoMsg): GaugeByIDRequest {
-    return GaugeByIDRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: GaugeByIDRequest): GaugeByIDRequestAminoMsg {
-    return {
-      type: "osmosis/incentives/gauge-by-id-request",
-      value: GaugeByIDRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: GaugeByIDRequestProtoMsg): GaugeByIDRequest {
     return GaugeByIDRequest.decode(message.value);
@@ -717,15 +618,6 @@ export const GaugeByIDResponse = {
     obj.gauge = message.gauge ? Gauge.toAmino(message.gauge) : undefined;
     return obj;
   },
-  fromAminoMsg(object: GaugeByIDResponseAminoMsg): GaugeByIDResponse {
-    return GaugeByIDResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: GaugeByIDResponse): GaugeByIDResponseAminoMsg {
-    return {
-      type: "osmosis/incentives/gauge-by-id-response",
-      value: GaugeByIDResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: GaugeByIDResponseProtoMsg): GaugeByIDResponse {
     return GaugeByIDResponse.decode(message.value);
   },
@@ -806,15 +698,6 @@ export const GaugesRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GaugesRequestAminoMsg): GaugesRequest {
-    return GaugesRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: GaugesRequest): GaugesRequestAminoMsg {
-    return {
-      type: "osmosis/incentives/gauges-request",
-      value: GaugesRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: GaugesRequestProtoMsg): GaugesRequest {
     return GaugesRequest.decode(message.value);
@@ -923,15 +806,6 @@ export const GaugesResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: GaugesResponseAminoMsg): GaugesResponse {
-    return GaugesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: GaugesResponse): GaugesResponseAminoMsg {
-    return {
-      type: "osmosis/incentives/gauges-response",
-      value: GaugesResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: GaugesResponseProtoMsg): GaugesResponse {
     return GaugesResponse.decode(message.value);
   },
@@ -1012,15 +886,6 @@ export const ActiveGaugesRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: ActiveGaugesRequestAminoMsg): ActiveGaugesRequest {
-    return ActiveGaugesRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: ActiveGaugesRequest): ActiveGaugesRequestAminoMsg {
-    return {
-      type: "osmosis/incentives/active-gauges-request",
-      value: ActiveGaugesRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: ActiveGaugesRequestProtoMsg): ActiveGaugesRequest {
     return ActiveGaugesRequest.decode(message.value);
@@ -1129,15 +994,6 @@ export const ActiveGaugesResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ActiveGaugesResponseAminoMsg): ActiveGaugesResponse {
-    return ActiveGaugesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: ActiveGaugesResponse): ActiveGaugesResponseAminoMsg {
-    return {
-      type: "osmosis/incentives/active-gauges-response",
-      value: ActiveGaugesResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ActiveGaugesResponseProtoMsg): ActiveGaugesResponse {
     return ActiveGaugesResponse.decode(message.value);
   },
@@ -1232,15 +1088,6 @@ export const ActiveGaugesPerDenomRequest = {
     obj.denom = message.denom;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: ActiveGaugesPerDenomRequestAminoMsg): ActiveGaugesPerDenomRequest {
-    return ActiveGaugesPerDenomRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: ActiveGaugesPerDenomRequest): ActiveGaugesPerDenomRequestAminoMsg {
-    return {
-      type: "osmosis/incentives/active-gauges-per-denom-request",
-      value: ActiveGaugesPerDenomRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: ActiveGaugesPerDenomRequestProtoMsg): ActiveGaugesPerDenomRequest {
     return ActiveGaugesPerDenomRequest.decode(message.value);
@@ -1349,15 +1196,6 @@ export const ActiveGaugesPerDenomResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ActiveGaugesPerDenomResponseAminoMsg): ActiveGaugesPerDenomResponse {
-    return ActiveGaugesPerDenomResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: ActiveGaugesPerDenomResponse): ActiveGaugesPerDenomResponseAminoMsg {
-    return {
-      type: "osmosis/incentives/active-gauges-per-denom-response",
-      value: ActiveGaugesPerDenomResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ActiveGaugesPerDenomResponseProtoMsg): ActiveGaugesPerDenomResponse {
     return ActiveGaugesPerDenomResponse.decode(message.value);
   },
@@ -1438,15 +1276,6 @@ export const UpcomingGaugesRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: UpcomingGaugesRequestAminoMsg): UpcomingGaugesRequest {
-    return UpcomingGaugesRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: UpcomingGaugesRequest): UpcomingGaugesRequestAminoMsg {
-    return {
-      type: "osmosis/incentives/upcoming-gauges-request",
-      value: UpcomingGaugesRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: UpcomingGaugesRequestProtoMsg): UpcomingGaugesRequest {
     return UpcomingGaugesRequest.decode(message.value);
@@ -1555,15 +1384,6 @@ export const UpcomingGaugesResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: UpcomingGaugesResponseAminoMsg): UpcomingGaugesResponse {
-    return UpcomingGaugesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: UpcomingGaugesResponse): UpcomingGaugesResponseAminoMsg {
-    return {
-      type: "osmosis/incentives/upcoming-gauges-response",
-      value: UpcomingGaugesResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: UpcomingGaugesResponseProtoMsg): UpcomingGaugesResponse {
     return UpcomingGaugesResponse.decode(message.value);
   },
@@ -1658,15 +1478,6 @@ export const UpcomingGaugesPerDenomRequest = {
     obj.denom = message.denom;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: UpcomingGaugesPerDenomRequestAminoMsg): UpcomingGaugesPerDenomRequest {
-    return UpcomingGaugesPerDenomRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: UpcomingGaugesPerDenomRequest): UpcomingGaugesPerDenomRequestAminoMsg {
-    return {
-      type: "osmosis/incentives/upcoming-gauges-per-denom-request",
-      value: UpcomingGaugesPerDenomRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: UpcomingGaugesPerDenomRequestProtoMsg): UpcomingGaugesPerDenomRequest {
     return UpcomingGaugesPerDenomRequest.decode(message.value);
@@ -1774,15 +1585,6 @@ export const UpcomingGaugesPerDenomResponse = {
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: UpcomingGaugesPerDenomResponseAminoMsg): UpcomingGaugesPerDenomResponse {
-    return UpcomingGaugesPerDenomResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: UpcomingGaugesPerDenomResponse): UpcomingGaugesPerDenomResponseAminoMsg {
-    return {
-      type: "osmosis/incentives/upcoming-gauges-per-denom-response",
-      value: UpcomingGaugesPerDenomResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: UpcomingGaugesPerDenomResponseProtoMsg): UpcomingGaugesPerDenomResponse {
     return UpcomingGaugesPerDenomResponse.decode(message.value);
@@ -1914,15 +1716,6 @@ export const RewardsEstRequest = {
     obj.end_epoch = message.endEpoch ? message.endEpoch.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: RewardsEstRequestAminoMsg): RewardsEstRequest {
-    return RewardsEstRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: RewardsEstRequest): RewardsEstRequestAminoMsg {
-    return {
-      type: "osmosis/incentives/rewards-est-request",
-      value: RewardsEstRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: RewardsEstRequestProtoMsg): RewardsEstRequest {
     return RewardsEstRequest.decode(message.value);
   },
@@ -2014,15 +1807,6 @@ export const RewardsEstResponse = {
     }
     return obj;
   },
-  fromAminoMsg(object: RewardsEstResponseAminoMsg): RewardsEstResponse {
-    return RewardsEstResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: RewardsEstResponse): RewardsEstResponseAminoMsg {
-    return {
-      type: "osmosis/incentives/rewards-est-response",
-      value: RewardsEstResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: RewardsEstResponseProtoMsg): RewardsEstResponse {
     return RewardsEstResponse.decode(message.value);
   },
@@ -2084,15 +1868,6 @@ export const QueryLockableDurationsRequest = {
   toAmino(_: QueryLockableDurationsRequest): QueryLockableDurationsRequestAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: QueryLockableDurationsRequestAminoMsg): QueryLockableDurationsRequest {
-    return QueryLockableDurationsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryLockableDurationsRequest): QueryLockableDurationsRequestAminoMsg {
-    return {
-      type: "osmosis/incentives/query-lockable-durations-request",
-      value: QueryLockableDurationsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryLockableDurationsRequestProtoMsg): QueryLockableDurationsRequest {
     return QueryLockableDurationsRequest.decode(message.value);
@@ -2184,15 +1959,6 @@ export const QueryLockableDurationsResponse = {
       obj.lockable_durations = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: QueryLockableDurationsResponseAminoMsg): QueryLockableDurationsResponse {
-    return QueryLockableDurationsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryLockableDurationsResponse): QueryLockableDurationsResponseAminoMsg {
-    return {
-      type: "osmosis/incentives/query-lockable-durations-response",
-      value: QueryLockableDurationsResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryLockableDurationsResponseProtoMsg): QueryLockableDurationsResponse {
     return QueryLockableDurationsResponse.decode(message.value);

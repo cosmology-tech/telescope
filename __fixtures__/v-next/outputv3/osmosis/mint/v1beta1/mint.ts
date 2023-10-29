@@ -16,10 +16,6 @@ export interface MinterAmino {
   /** epoch_provisions represent rewards for the current epoch. */
   epoch_provisions: string;
 }
-export interface MinterAminoMsg {
-  type: "osmosis/mint/minter";
-  value: MinterAmino;
-}
 /** Minter represents the minting state. */
 export interface MinterSDKType {
   epoch_provisions: string;
@@ -45,10 +41,6 @@ export interface WeightedAddressProtoMsg {
 export interface WeightedAddressAmino {
   address: string;
   weight: string;
-}
-export interface WeightedAddressAminoMsg {
-  type: "osmosis/mint/weighted-address";
-  value: WeightedAddressAmino;
 }
 /**
  * WeightedAddress represents an address with a weight assigned to it.
@@ -116,10 +108,6 @@ export interface DistributionProportionsAmino {
    * to be allocated to the community pool.
    */
   community_pool: string;
-}
-export interface DistributionProportionsAminoMsg {
-  type: "osmosis/mint/distribution-proportions";
-  value: DistributionProportionsAmino;
 }
 /**
  * DistributionProportions defines the distribution proportions of the minted
@@ -210,10 +198,6 @@ export interface ParamsAmino {
    */
   minting_rewards_distribution_start_epoch: string;
 }
-export interface ParamsAminoMsg {
-  type: "osmosis/mint/params";
-  value: ParamsAmino;
-}
 /** Params holds parameters for the x/mint module. */
 export interface ParamsSDKType {
   mint_denom: string;
@@ -290,15 +274,6 @@ export const Minter = {
     const obj: any = {};
     obj.epoch_provisions = message.epochProvisions;
     return obj;
-  },
-  fromAminoMsg(object: MinterAminoMsg): Minter {
-    return Minter.fromAmino(object.value);
-  },
-  toAminoMsg(message: Minter): MinterAminoMsg {
-    return {
-      type: "osmosis/mint/minter",
-      value: Minter.toAmino(message)
-    };
   },
   fromProtoMsg(message: MinterProtoMsg): Minter {
     return Minter.decode(message.value);
@@ -392,15 +367,6 @@ export const WeightedAddress = {
     obj.address = message.address;
     obj.weight = message.weight;
     return obj;
-  },
-  fromAminoMsg(object: WeightedAddressAminoMsg): WeightedAddress {
-    return WeightedAddress.fromAmino(object.value);
-  },
-  toAminoMsg(message: WeightedAddress): WeightedAddressAminoMsg {
-    return {
-      type: "osmosis/mint/weighted-address",
-      value: WeightedAddress.toAmino(message)
-    };
   },
   fromProtoMsg(message: WeightedAddressProtoMsg): WeightedAddress {
     return WeightedAddress.decode(message.value);
@@ -522,15 +488,6 @@ export const DistributionProportions = {
     obj.developer_rewards = message.developerRewards;
     obj.community_pool = message.communityPool;
     return obj;
-  },
-  fromAminoMsg(object: DistributionProportionsAminoMsg): DistributionProportions {
-    return DistributionProportions.fromAmino(object.value);
-  },
-  toAminoMsg(message: DistributionProportions): DistributionProportionsAminoMsg {
-    return {
-      type: "osmosis/mint/distribution-proportions",
-      value: DistributionProportions.toAmino(message)
-    };
   },
   fromProtoMsg(message: DistributionProportionsProtoMsg): DistributionProportions {
     return DistributionProportions.decode(message.value);
@@ -726,15 +683,6 @@ export const Params = {
     }
     obj.minting_rewards_distribution_start_epoch = message.mintingRewardsDistributionStartEpoch ? message.mintingRewardsDistributionStartEpoch.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/mint/params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

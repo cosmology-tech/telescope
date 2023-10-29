@@ -105,10 +105,6 @@ export interface EndpointAmino {
    */
   allow_cors: boolean;
 }
-export interface EndpointAminoMsg {
-  type: "/google.api.Endpoint";
-  value: EndpointAmino;
-}
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of
  * APIs. It is commonly known as a service endpoint. A service may expose
@@ -252,9 +248,6 @@ export const Endpoint = {
     obj.target = message.target;
     obj.allow_cors = message.allowCors;
     return obj;
-  },
-  fromAminoMsg(object: EndpointAminoMsg): Endpoint {
-    return Endpoint.fromAmino(object.value);
   },
   fromProtoMsg(message: EndpointProtoMsg): Endpoint {
     return Endpoint.decode(message.value);

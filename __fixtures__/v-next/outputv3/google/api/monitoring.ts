@@ -153,10 +153,6 @@ export interface MonitoringAmino {
    */
   consumer_destinations: Monitoring_MonitoringDestinationAmino[];
 }
-export interface MonitoringAminoMsg {
-  type: "/google.api.Monitoring";
-  value: MonitoringAmino;
-}
 /**
  * Monitoring configuration of the service.
  * 
@@ -250,10 +246,6 @@ export interface Monitoring_MonitoringDestinationAmino {
    * Each type must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
   metrics: string[];
-}
-export interface Monitoring_MonitoringDestinationAminoMsg {
-  type: "/google.api.MonitoringDestination";
-  value: Monitoring_MonitoringDestinationAmino;
 }
 /**
  * Configuration of a specific monitoring destination (the producer project
@@ -366,9 +358,6 @@ export const Monitoring = {
     }
     return obj;
   },
-  fromAminoMsg(object: MonitoringAminoMsg): Monitoring {
-    return Monitoring.fromAmino(object.value);
-  },
   fromProtoMsg(message: MonitoringProtoMsg): Monitoring {
     return Monitoring.decode(message.value);
   },
@@ -472,9 +461,6 @@ export const Monitoring_MonitoringDestination = {
       obj.metrics = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: Monitoring_MonitoringDestinationAminoMsg): Monitoring_MonitoringDestination {
-    return Monitoring_MonitoringDestination.fromAmino(object.value);
   },
   fromProtoMsg(message: Monitoring_MonitoringDestinationProtoMsg): Monitoring_MonitoringDestination {
     return Monitoring_MonitoringDestination.decode(message.value);

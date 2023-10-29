@@ -297,10 +297,6 @@ export interface LogBucketAmino {
    */
   cmek_settings?: CmekSettingsAmino;
 }
-export interface LogBucketAminoMsg {
-  type: "/google.logging.v2.LogBucket";
-  value: LogBucketAmino;
-}
 /** Describes a repository in which log entries are stored. */
 export interface LogBucketSDKType {
   name: string;
@@ -384,10 +380,6 @@ export interface LogViewAmino {
    *                                AND LOG_ID("stdout")
    */
   filter: string;
-}
-export interface LogViewAminoMsg {
-  type: "/google.logging.v2.LogView";
-  value: LogViewAmino;
 }
 /** Describes a view over log entries in a bucket. */
 export interface LogViewSDKType {
@@ -637,10 +629,6 @@ export interface LogSinkAmino {
    */
   update_time?: Date;
 }
-export interface LogSinkAminoMsg {
-  type: "/google.logging.v2.LogSink";
-  value: LogSinkAmino;
-}
 /**
  * Describes a sink used to export log entries to one of the following
  * destinations in any project: a Cloud Storage bucket, a BigQuery dataset, a
@@ -715,10 +703,6 @@ export interface BigQueryOptionsAmino {
    */
   uses_timestamp_column_partitioning: boolean;
 }
-export interface BigQueryOptionsAminoMsg {
-  type: "/google.logging.v2.BigQueryOptions";
-  value: BigQueryOptionsAmino;
-}
 /** Options that change functionality of a sink exporting data to BigQuery. */
 export interface BigQueryOptionsSDKType {
   use_partitioned_tables: boolean;
@@ -786,10 +770,6 @@ export interface ListBucketsRequestAmino {
    */
   page_size: number;
 }
-export interface ListBucketsRequestAminoMsg {
-  type: "/google.logging.v2.ListBucketsRequest";
-  value: ListBucketsRequestAmino;
-}
 /** The parameters to `ListBuckets`. */
 export interface ListBucketsRequestSDKType {
   parent: string;
@@ -821,10 +801,6 @@ export interface ListBucketsResponseAmino {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   next_page_token: string;
-}
-export interface ListBucketsResponseAminoMsg {
-  type: "/google.logging.v2.ListBucketsResponse";
-  value: ListBucketsResponseAmino;
 }
 /** The response from ListBuckets. */
 export interface ListBucketsResponseSDKType {
@@ -884,10 +860,6 @@ export interface CreateBucketRequestAmino {
    * ignored.
    */
   bucket?: LogBucketAmino;
-}
-export interface CreateBucketRequestAminoMsg {
-  type: "/google.logging.v2.CreateBucketRequest";
-  value: CreateBucketRequestAmino;
 }
 /** The parameters to `CreateBucket`. */
 export interface CreateBucketRequestSDKType {
@@ -957,10 +929,6 @@ export interface UpdateBucketRequestAmino {
    */
   update_mask?: FieldMaskAmino;
 }
-export interface UpdateBucketRequestAminoMsg {
-  type: "/google.logging.v2.UpdateBucketRequest";
-  value: UpdateBucketRequestAmino;
-}
 /** The parameters to `UpdateBucket`. */
 export interface UpdateBucketRequestSDKType {
   name: string;
@@ -1003,10 +971,6 @@ export interface GetBucketRequestAmino {
    */
   name: string;
 }
-export interface GetBucketRequestAminoMsg {
-  type: "/google.logging.v2.GetBucketRequest";
-  value: GetBucketRequestAmino;
-}
 /** The parameters to `GetBucket`. */
 export interface GetBucketRequestSDKType {
   name: string;
@@ -1047,10 +1011,6 @@ export interface DeleteBucketRequestAmino {
    */
   name: string;
 }
-export interface DeleteBucketRequestAminoMsg {
-  type: "/google.logging.v2.DeleteBucketRequest";
-  value: DeleteBucketRequestAmino;
-}
 /** The parameters to `DeleteBucket`. */
 export interface DeleteBucketRequestSDKType {
   name: string;
@@ -1090,10 +1050,6 @@ export interface UndeleteBucketRequestAmino {
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
   name: string;
-}
-export interface UndeleteBucketRequestAminoMsg {
-  type: "/google.logging.v2.UndeleteBucketRequest";
-  value: UndeleteBucketRequestAmino;
 }
 /** The parameters to `UndeleteBucket`. */
 export interface UndeleteBucketRequestSDKType {
@@ -1149,10 +1105,6 @@ export interface ListViewsRequestAmino {
    */
   page_size: number;
 }
-export interface ListViewsRequestAminoMsg {
-  type: "/google.logging.v2.ListViewsRequest";
-  value: ListViewsRequestAmino;
-}
 /** The parameters to `ListViews`. */
 export interface ListViewsRequestSDKType {
   parent: string;
@@ -1184,10 +1136,6 @@ export interface ListViewsResponseAmino {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   next_page_token: string;
-}
-export interface ListViewsResponseAminoMsg {
-  type: "/google.logging.v2.ListViewsResponse";
-  value: ListViewsResponseAmino;
 }
 /** The response from ListViews. */
 export interface ListViewsResponseSDKType {
@@ -1231,10 +1179,6 @@ export interface CreateViewRequestAmino {
   view_id: string;
   /** Required. The new view. */
   view?: LogViewAmino;
-}
-export interface CreateViewRequestAminoMsg {
-  type: "/google.logging.v2.CreateViewRequest";
-  value: CreateViewRequestAmino;
 }
 /** The parameters to `CreateView`. */
 export interface CreateViewRequestSDKType {
@@ -1298,10 +1242,6 @@ export interface UpdateViewRequestAmino {
    */
   update_mask?: FieldMaskAmino;
 }
-export interface UpdateViewRequestAminoMsg {
-  type: "/google.logging.v2.UpdateViewRequest";
-  value: UpdateViewRequestAmino;
-}
 /** The parameters to `UpdateView`. */
 export interface UpdateViewRequestSDKType {
   name: string;
@@ -1338,10 +1278,6 @@ export interface GetViewRequestAmino {
    */
   name: string;
 }
-export interface GetViewRequestAminoMsg {
-  type: "/google.logging.v2.GetViewRequest";
-  value: GetViewRequestAmino;
-}
 /** The parameters to `GetView`. */
 export interface GetViewRequestSDKType {
   name: string;
@@ -1375,10 +1311,6 @@ export interface DeleteViewRequestAmino {
    *    `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
    */
   name: string;
-}
-export interface DeleteViewRequestAminoMsg {
-  type: "/google.logging.v2.DeleteViewRequest";
-  value: DeleteViewRequestAmino;
 }
 /** The parameters to `DeleteView`. */
 export interface DeleteViewRequestSDKType {
@@ -1438,10 +1370,6 @@ export interface ListSinksRequestAmino {
    */
   page_size: number;
 }
-export interface ListSinksRequestAminoMsg {
-  type: "/google.logging.v2.ListSinksRequest";
-  value: ListSinksRequestAmino;
-}
 /** The parameters to `ListSinks`. */
 export interface ListSinksRequestSDKType {
   parent: string;
@@ -1473,10 +1401,6 @@ export interface ListSinksResponseAmino {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   next_page_token: string;
-}
-export interface ListSinksResponseAminoMsg {
-  type: "/google.logging.v2.ListSinksResponse";
-  value: ListSinksResponseAmino;
 }
 /** Result returned from `ListSinks`. */
 export interface ListSinksResponseSDKType {
@@ -1518,10 +1442,6 @@ export interface GetSinkRequestAmino {
    *   `"projects/my-project/sinks/my-sink"`
    */
   sink_name: string;
-}
-export interface GetSinkRequestAminoMsg {
-  type: "/google.logging.v2.GetSinkRequest";
-  value: GetSinkRequestAmino;
 }
 /** The parameters to `GetSink`. */
 export interface GetSinkRequestSDKType {
@@ -1602,10 +1522,6 @@ export interface CreateSinkRequestAmino {
    * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
    */
   unique_writer_identity: boolean;
-}
-export interface CreateSinkRequestAminoMsg {
-  type: "/google.logging.v2.CreateSinkRequest";
-  value: CreateSinkRequestAmino;
 }
 /** The parameters to `CreateSink`. */
 export interface CreateSinkRequestSDKType {
@@ -1727,10 +1643,6 @@ export interface UpdateSinkRequestAmino {
    */
   update_mask?: FieldMaskAmino;
 }
-export interface UpdateSinkRequestAminoMsg {
-  type: "/google.logging.v2.UpdateSinkRequest";
-  value: UpdateSinkRequestAmino;
-}
 /** The parameters to `UpdateSink`. */
 export interface UpdateSinkRequestSDKType {
   sink_name: string;
@@ -1775,10 +1687,6 @@ export interface DeleteSinkRequestAmino {
    *   `"projects/my-project/sinks/my-sink"`
    */
   sink_name: string;
-}
-export interface DeleteSinkRequestAminoMsg {
-  type: "/google.logging.v2.DeleteSinkRequest";
-  value: DeleteSinkRequestAmino;
 }
 /** The parameters to `DeleteSink`. */
 export interface DeleteSinkRequestSDKType {
@@ -1888,10 +1796,6 @@ export interface LogExclusionAmino {
    */
   update_time?: Date;
 }
-export interface LogExclusionAminoMsg {
-  type: "/google.logging.v2.LogExclusion";
-  value: LogExclusionAmino;
-}
 /**
  * Specifies a set of log entries that are filtered out by a sink. If
  * your Google Cloud resource receives a large volume of log entries, you can
@@ -1961,10 +1865,6 @@ export interface ListExclusionsRequestAmino {
    */
   page_size: number;
 }
-export interface ListExclusionsRequestAminoMsg {
-  type: "/google.logging.v2.ListExclusionsRequest";
-  value: ListExclusionsRequestAmino;
-}
 /** The parameters to `ListExclusions`. */
 export interface ListExclusionsRequestSDKType {
   parent: string;
@@ -1996,10 +1896,6 @@ export interface ListExclusionsResponseAmino {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   next_page_token: string;
-}
-export interface ListExclusionsResponseAminoMsg {
-  type: "/google.logging.v2.ListExclusionsResponse";
-  value: ListExclusionsResponseAmino;
 }
 /** Result returned from `ListExclusions`. */
 export interface ListExclusionsResponseSDKType {
@@ -2041,10 +1937,6 @@ export interface GetExclusionRequestAmino {
    *   `"projects/my-project/exclusions/my-exclusion"`
    */
   name: string;
-}
-export interface GetExclusionRequestAminoMsg {
-  type: "/google.logging.v2.GetExclusionRequest";
-  value: GetExclusionRequestAmino;
 }
 /** The parameters to `GetExclusion`. */
 export interface GetExclusionRequestSDKType {
@@ -2097,10 +1989,6 @@ export interface CreateExclusionRequestAmino {
    * that is not already used in the parent resource.
    */
   exclusion?: LogExclusionAmino;
-}
-export interface CreateExclusionRequestAminoMsg {
-  type: "/google.logging.v2.CreateExclusionRequest";
-  value: CreateExclusionRequestAmino;
 }
 /** The parameters to `CreateExclusion`. */
 export interface CreateExclusionRequestSDKType {
@@ -2173,10 +2061,6 @@ export interface UpdateExclusionRequestAmino {
    */
   update_mask?: FieldMaskAmino;
 }
-export interface UpdateExclusionRequestAminoMsg {
-  type: "/google.logging.v2.UpdateExclusionRequest";
-  value: UpdateExclusionRequestAmino;
-}
 /** The parameters to `UpdateExclusion`. */
 export interface UpdateExclusionRequestSDKType {
   name: string;
@@ -2218,10 +2102,6 @@ export interface DeleteExclusionRequestAmino {
    *   `"projects/my-project/exclusions/my-exclusion"`
    */
   name: string;
-}
-export interface DeleteExclusionRequestAminoMsg {
-  type: "/google.logging.v2.DeleteExclusionRequest";
-  value: DeleteExclusionRequestAmino;
 }
 /** The parameters to `DeleteExclusion`. */
 export interface DeleteExclusionRequestSDKType {
@@ -2286,10 +2166,6 @@ export interface GetCmekSettingsRequestAmino {
    * organization.
    */
   name: string;
-}
-export interface GetCmekSettingsRequestAminoMsg {
-  type: "/google.logging.v2.GetCmekSettingsRequest";
-  value: GetCmekSettingsRequestAmino;
 }
 /**
  * The parameters to
@@ -2395,10 +2271,6 @@ export interface UpdateCmekSettingsRequestAmino {
    * For example: `"updateMask=kmsKeyName"`
    */
   update_mask?: FieldMaskAmino;
-}
-export interface UpdateCmekSettingsRequestAminoMsg {
-  type: "/google.logging.v2.UpdateCmekSettingsRequest";
-  value: UpdateCmekSettingsRequestAmino;
 }
 /**
  * The parameters to
@@ -2541,10 +2413,6 @@ export interface CmekSettingsAmino {
    */
   service_account_id: string;
 }
-export interface CmekSettingsAminoMsg {
-  type: "/google.logging.v2.CmekSettings";
-  value: CmekSettingsAmino;
-}
 /**
  * Describes the customer-managed encryption key (CMEK) settings associated with
  * a project, folder, organization, billing account, or flexible resource.
@@ -2621,10 +2489,6 @@ export interface GetSettingsRequestAmino {
    * applies to all projects and folders in the Google Cloud organization.
    */
   name: string;
-}
-export interface GetSettingsRequestAminoMsg {
-  type: "/google.logging.v2.GetSettingsRequest";
-  value: GetSettingsRequestAmino;
 }
 /**
  * The parameters to
@@ -2724,10 +2588,6 @@ export interface UpdateSettingsRequestAmino {
    * For example: `"updateMask=kmsKeyName"`
    */
   update_mask?: FieldMaskAmino;
-}
-export interface UpdateSettingsRequestAminoMsg {
-  type: "/google.logging.v2.UpdateSettingsRequest";
-  value: UpdateSettingsRequestAmino;
 }
 /**
  * The parameters to
@@ -2878,10 +2738,6 @@ export interface SettingsAmino {
    */
   disable_default_sink: boolean;
 }
-export interface SettingsAminoMsg {
-  type: "/google.logging.v2.Settings";
-  value: SettingsAmino;
-}
 /**
  * Describes the settings associated with a project, folder, organization,
  * billing account, or flexible resource.
@@ -2932,10 +2788,6 @@ export interface CopyLogEntriesRequestAmino {
   filter: string;
   /** Required. Destination to which to copy log entries. */
   destination: string;
-}
-export interface CopyLogEntriesRequestAminoMsg {
-  type: "/google.logging.v2.CopyLogEntriesRequest";
-  value: CopyLogEntriesRequestAmino;
 }
 /** The parameters to CopyLogEntries. */
 export interface CopyLogEntriesRequestSDKType {
@@ -2997,10 +2849,6 @@ export interface CopyLogEntriesMetadataAmino {
    */
   writer_identity: string;
 }
-export interface CopyLogEntriesMetadataAminoMsg {
-  type: "/google.logging.v2.CopyLogEntriesMetadata";
-  value: CopyLogEntriesMetadataAmino;
-}
 /** Metadata for CopyLogEntries long running operations. */
 export interface CopyLogEntriesMetadataSDKType {
   start_time?: Date;
@@ -3024,10 +2872,6 @@ export interface CopyLogEntriesResponseProtoMsg {
 export interface CopyLogEntriesResponseAmino {
   /** Number of log entries copied. */
   log_entries_copied_count: string;
-}
-export interface CopyLogEntriesResponseAminoMsg {
-  type: "/google.logging.v2.CopyLogEntriesResponse";
-  value: CopyLogEntriesResponseAmino;
 }
 /** Response type for CopyLogEntries long running operations. */
 export interface CopyLogEntriesResponseSDKType {
@@ -3224,9 +3068,6 @@ export const LogBucket = {
     obj.cmek_settings = message.cmekSettings ? CmekSettings.toAmino(message.cmekSettings) : undefined;
     return obj;
   },
-  fromAminoMsg(object: LogBucketAminoMsg): LogBucket {
-    return LogBucket.fromAmino(object.value);
-  },
   fromProtoMsg(message: LogBucketProtoMsg): LogBucket {
     return LogBucket.decode(message.value);
   },
@@ -3360,9 +3201,6 @@ export const LogView = {
     obj.update_time = message.updateTime;
     obj.filter = message.filter;
     return obj;
-  },
-  fromAminoMsg(object: LogViewAminoMsg): LogView {
-    return LogView.fromAmino(object.value);
   },
   fromProtoMsg(message: LogViewProtoMsg): LogView {
     return LogView.decode(message.value);
@@ -3610,9 +3448,6 @@ export const LogSink = {
     obj.update_time = message.updateTime;
     return obj;
   },
-  fromAminoMsg(object: LogSinkAminoMsg): LogSink {
-    return LogSink.fromAmino(object.value);
-  },
   fromProtoMsg(message: LogSinkProtoMsg): LogSink {
     return LogSink.decode(message.value);
   },
@@ -3704,9 +3539,6 @@ export const BigQueryOptions = {
     obj.use_partitioned_tables = message.usePartitionedTables;
     obj.uses_timestamp_column_partitioning = message.usesTimestampColumnPartitioning;
     return obj;
-  },
-  fromAminoMsg(object: BigQueryOptionsAminoMsg): BigQueryOptions {
-    return BigQueryOptions.fromAmino(object.value);
   },
   fromProtoMsg(message: BigQueryOptionsProtoMsg): BigQueryOptions {
     return BigQueryOptions.decode(message.value);
@@ -3814,9 +3646,6 @@ export const ListBucketsRequest = {
     obj.page_size = message.pageSize;
     return obj;
   },
-  fromAminoMsg(object: ListBucketsRequestAminoMsg): ListBucketsRequest {
-    return ListBucketsRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListBucketsRequestProtoMsg): ListBucketsRequest {
     return ListBucketsRequest.decode(message.value);
   },
@@ -3920,9 +3749,6 @@ export const ListBucketsResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
-  },
-  fromAminoMsg(object: ListBucketsResponseAminoMsg): ListBucketsResponse {
-    return ListBucketsResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: ListBucketsResponseProtoMsg): ListBucketsResponse {
     return ListBucketsResponse.decode(message.value);
@@ -4031,9 +3857,6 @@ export const CreateBucketRequest = {
     obj.bucket_id = message.bucketId;
     obj.bucket = message.bucket ? LogBucket.toAmino(message.bucket) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: CreateBucketRequestAminoMsg): CreateBucketRequest {
-    return CreateBucketRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: CreateBucketRequestProtoMsg): CreateBucketRequest {
     return CreateBucketRequest.decode(message.value);
@@ -4145,9 +3968,6 @@ export const UpdateBucketRequest = {
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     return obj;
   },
-  fromAminoMsg(object: UpdateBucketRequestAminoMsg): UpdateBucketRequest {
-    return UpdateBucketRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: UpdateBucketRequestProtoMsg): UpdateBucketRequest {
     return UpdateBucketRequest.decode(message.value);
   },
@@ -4225,9 +4045,6 @@ export const GetBucketRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAminoMsg(object: GetBucketRequestAminoMsg): GetBucketRequest {
-    return GetBucketRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GetBucketRequestProtoMsg): GetBucketRequest {
     return GetBucketRequest.decode(message.value);
@@ -4307,9 +4124,6 @@ export const DeleteBucketRequest = {
     obj.name = message.name;
     return obj;
   },
-  fromAminoMsg(object: DeleteBucketRequestAminoMsg): DeleteBucketRequest {
-    return DeleteBucketRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: DeleteBucketRequestProtoMsg): DeleteBucketRequest {
     return DeleteBucketRequest.decode(message.value);
   },
@@ -4387,9 +4201,6 @@ export const UndeleteBucketRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAminoMsg(object: UndeleteBucketRequestAminoMsg): UndeleteBucketRequest {
-    return UndeleteBucketRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: UndeleteBucketRequestProtoMsg): UndeleteBucketRequest {
     return UndeleteBucketRequest.decode(message.value);
@@ -4497,9 +4308,6 @@ export const ListViewsRequest = {
     obj.page_size = message.pageSize;
     return obj;
   },
-  fromAminoMsg(object: ListViewsRequestAminoMsg): ListViewsRequest {
-    return ListViewsRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListViewsRequestProtoMsg): ListViewsRequest {
     return ListViewsRequest.decode(message.value);
   },
@@ -4603,9 +4411,6 @@ export const ListViewsResponse = {
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
-  },
-  fromAminoMsg(object: ListViewsResponseAminoMsg): ListViewsResponse {
-    return ListViewsResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: ListViewsResponseProtoMsg): ListViewsResponse {
     return ListViewsResponse.decode(message.value);
@@ -4714,9 +4519,6 @@ export const CreateViewRequest = {
     obj.view_id = message.viewId;
     obj.view = message.view ? LogView.toAmino(message.view) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: CreateViewRequestAminoMsg): CreateViewRequest {
-    return CreateViewRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: CreateViewRequestProtoMsg): CreateViewRequest {
     return CreateViewRequest.decode(message.value);
@@ -4828,9 +4630,6 @@ export const UpdateViewRequest = {
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     return obj;
   },
-  fromAminoMsg(object: UpdateViewRequestAminoMsg): UpdateViewRequest {
-    return UpdateViewRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: UpdateViewRequestProtoMsg): UpdateViewRequest {
     return UpdateViewRequest.decode(message.value);
   },
@@ -4909,9 +4708,6 @@ export const GetViewRequest = {
     obj.name = message.name;
     return obj;
   },
-  fromAminoMsg(object: GetViewRequestAminoMsg): GetViewRequest {
-    return GetViewRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: GetViewRequestProtoMsg): GetViewRequest {
     return GetViewRequest.decode(message.value);
   },
@@ -4989,9 +4785,6 @@ export const DeleteViewRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAminoMsg(object: DeleteViewRequestAminoMsg): DeleteViewRequest {
-    return DeleteViewRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: DeleteViewRequestProtoMsg): DeleteViewRequest {
     return DeleteViewRequest.decode(message.value);
@@ -5099,9 +4892,6 @@ export const ListSinksRequest = {
     obj.page_size = message.pageSize;
     return obj;
   },
-  fromAminoMsg(object: ListSinksRequestAminoMsg): ListSinksRequest {
-    return ListSinksRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListSinksRequestProtoMsg): ListSinksRequest {
     return ListSinksRequest.decode(message.value);
   },
@@ -5206,9 +4996,6 @@ export const ListSinksResponse = {
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromAminoMsg(object: ListSinksResponseAminoMsg): ListSinksResponse {
-    return ListSinksResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListSinksResponseProtoMsg): ListSinksResponse {
     return ListSinksResponse.decode(message.value);
   },
@@ -5286,9 +5073,6 @@ export const GetSinkRequest = {
     const obj: any = {};
     obj.sink_name = message.sinkName;
     return obj;
-  },
-  fromAminoMsg(object: GetSinkRequestAminoMsg): GetSinkRequest {
-    return GetSinkRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GetSinkRequestProtoMsg): GetSinkRequest {
     return GetSinkRequest.decode(message.value);
@@ -5397,9 +5181,6 @@ export const CreateSinkRequest = {
     obj.sink = message.sink ? LogSink.toAmino(message.sink) : undefined;
     obj.unique_writer_identity = message.uniqueWriterIdentity;
     return obj;
-  },
-  fromAminoMsg(object: CreateSinkRequestAminoMsg): CreateSinkRequest {
-    return CreateSinkRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: CreateSinkRequestProtoMsg): CreateSinkRequest {
     return CreateSinkRequest.decode(message.value);
@@ -5525,9 +5306,6 @@ export const UpdateSinkRequest = {
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     return obj;
   },
-  fromAminoMsg(object: UpdateSinkRequestAminoMsg): UpdateSinkRequest {
-    return UpdateSinkRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: UpdateSinkRequestProtoMsg): UpdateSinkRequest {
     return UpdateSinkRequest.decode(message.value);
   },
@@ -5605,9 +5383,6 @@ export const DeleteSinkRequest = {
     const obj: any = {};
     obj.sink_name = message.sinkName;
     return obj;
-  },
-  fromAminoMsg(object: DeleteSinkRequestAminoMsg): DeleteSinkRequest {
-    return DeleteSinkRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: DeleteSinkRequestProtoMsg): DeleteSinkRequest {
     return DeleteSinkRequest.decode(message.value);
@@ -5757,9 +5532,6 @@ export const LogExclusion = {
     obj.update_time = message.updateTime;
     return obj;
   },
-  fromAminoMsg(object: LogExclusionAminoMsg): LogExclusion {
-    return LogExclusion.fromAmino(object.value);
-  },
   fromProtoMsg(message: LogExclusionProtoMsg): LogExclusion {
     return LogExclusion.decode(message.value);
   },
@@ -5866,9 +5638,6 @@ export const ListExclusionsRequest = {
     obj.page_size = message.pageSize;
     return obj;
   },
-  fromAminoMsg(object: ListExclusionsRequestAminoMsg): ListExclusionsRequest {
-    return ListExclusionsRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListExclusionsRequestProtoMsg): ListExclusionsRequest {
     return ListExclusionsRequest.decode(message.value);
   },
@@ -5973,9 +5742,6 @@ export const ListExclusionsResponse = {
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromAminoMsg(object: ListExclusionsResponseAminoMsg): ListExclusionsResponse {
-    return ListExclusionsResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListExclusionsResponseProtoMsg): ListExclusionsResponse {
     return ListExclusionsResponse.decode(message.value);
   },
@@ -6053,9 +5819,6 @@ export const GetExclusionRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAminoMsg(object: GetExclusionRequestAminoMsg): GetExclusionRequest {
-    return GetExclusionRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GetExclusionRequestProtoMsg): GetExclusionRequest {
     return GetExclusionRequest.decode(message.value);
@@ -6150,9 +5913,6 @@ export const CreateExclusionRequest = {
     obj.parent = message.parent;
     obj.exclusion = message.exclusion ? LogExclusion.toAmino(message.exclusion) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: CreateExclusionRequestAminoMsg): CreateExclusionRequest {
-    return CreateExclusionRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: CreateExclusionRequestProtoMsg): CreateExclusionRequest {
     return CreateExclusionRequest.decode(message.value);
@@ -6264,9 +6024,6 @@ export const UpdateExclusionRequest = {
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     return obj;
   },
-  fromAminoMsg(object: UpdateExclusionRequestAminoMsg): UpdateExclusionRequest {
-    return UpdateExclusionRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: UpdateExclusionRequestProtoMsg): UpdateExclusionRequest {
     return UpdateExclusionRequest.decode(message.value);
   },
@@ -6345,9 +6102,6 @@ export const DeleteExclusionRequest = {
     obj.name = message.name;
     return obj;
   },
-  fromAminoMsg(object: DeleteExclusionRequestAminoMsg): DeleteExclusionRequest {
-    return DeleteExclusionRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: DeleteExclusionRequestProtoMsg): DeleteExclusionRequest {
     return DeleteExclusionRequest.decode(message.value);
   },
@@ -6425,9 +6179,6 @@ export const GetCmekSettingsRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAminoMsg(object: GetCmekSettingsRequestAminoMsg): GetCmekSettingsRequest {
-    return GetCmekSettingsRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GetCmekSettingsRequestProtoMsg): GetCmekSettingsRequest {
     return GetCmekSettingsRequest.decode(message.value);
@@ -6539,9 +6290,6 @@ export const UpdateCmekSettingsRequest = {
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     return obj;
   },
-  fromAminoMsg(object: UpdateCmekSettingsRequestAminoMsg): UpdateCmekSettingsRequest {
-    return UpdateCmekSettingsRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: UpdateCmekSettingsRequestProtoMsg): UpdateCmekSettingsRequest {
     return UpdateCmekSettingsRequest.decode(message.value);
   },
@@ -6648,9 +6396,6 @@ export const CmekSettings = {
     obj.service_account_id = message.serviceAccountId;
     return obj;
   },
-  fromAminoMsg(object: CmekSettingsAminoMsg): CmekSettings {
-    return CmekSettings.fromAmino(object.value);
-  },
   fromProtoMsg(message: CmekSettingsProtoMsg): CmekSettings {
     return CmekSettings.decode(message.value);
   },
@@ -6728,9 +6473,6 @@ export const GetSettingsRequest = {
     const obj: any = {};
     obj.name = message.name;
     return obj;
-  },
-  fromAminoMsg(object: GetSettingsRequestAminoMsg): GetSettingsRequest {
-    return GetSettingsRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GetSettingsRequestProtoMsg): GetSettingsRequest {
     return GetSettingsRequest.decode(message.value);
@@ -6841,9 +6583,6 @@ export const UpdateSettingsRequest = {
     obj.settings = message.settings ? Settings.toAmino(message.settings) : undefined;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: UpdateSettingsRequestAminoMsg): UpdateSettingsRequest {
-    return UpdateSettingsRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: UpdateSettingsRequestProtoMsg): UpdateSettingsRequest {
     return UpdateSettingsRequest.decode(message.value);
@@ -6979,9 +6718,6 @@ export const Settings = {
     obj.disable_default_sink = message.disableDefaultSink;
     return obj;
   },
-  fromAminoMsg(object: SettingsAminoMsg): Settings {
-    return Settings.fromAmino(object.value);
-  },
   fromProtoMsg(message: SettingsProtoMsg): Settings {
     return Settings.decode(message.value);
   },
@@ -7087,9 +6823,6 @@ export const CopyLogEntriesRequest = {
     obj.filter = message.filter;
     obj.destination = message.destination;
     return obj;
-  },
-  fromAminoMsg(object: CopyLogEntriesRequestAminoMsg): CopyLogEntriesRequest {
-    return CopyLogEntriesRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: CopyLogEntriesRequestProtoMsg): CopyLogEntriesRequest {
     return CopyLogEntriesRequest.decode(message.value);
@@ -7255,9 +6988,6 @@ export const CopyLogEntriesMetadata = {
     obj.writer_identity = message.writerIdentity;
     return obj;
   },
-  fromAminoMsg(object: CopyLogEntriesMetadataAminoMsg): CopyLogEntriesMetadata {
-    return CopyLogEntriesMetadata.fromAmino(object.value);
-  },
   fromProtoMsg(message: CopyLogEntriesMetadataProtoMsg): CopyLogEntriesMetadata {
     return CopyLogEntriesMetadata.decode(message.value);
   },
@@ -7337,9 +7067,6 @@ export const CopyLogEntriesResponse = {
     const obj: any = {};
     obj.log_entries_copied_count = message.logEntriesCopiedCount ? message.logEntriesCopiedCount.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: CopyLogEntriesResponseAminoMsg): CopyLogEntriesResponse {
-    return CopyLogEntriesResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: CopyLogEntriesResponseProtoMsg): CopyLogEntriesResponse {
     return CopyLogEntriesResponse.decode(message.value);

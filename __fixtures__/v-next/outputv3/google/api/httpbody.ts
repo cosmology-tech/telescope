@@ -118,10 +118,6 @@ export interface HttpBodyAmino {
    */
   extensions: AnyAmino[];
 }
-export interface HttpBodyAminoMsg {
-  type: "/google.api.HttpBody";
-  value: HttpBodyAmino;
-}
 /**
  * Message that represents an arbitrary HTTP body. It should only be used for
  * payload formats that can't be represented as JSON, such as raw binary or
@@ -276,9 +272,6 @@ export const HttpBody = {
       obj.extensions = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: HttpBodyAminoMsg): HttpBody {
-    return HttpBody.fromAmino(object.value);
   },
   fromProtoMsg(message: HttpBodyProtoMsg): HttpBody {
     return HttpBody.decode(message.value);

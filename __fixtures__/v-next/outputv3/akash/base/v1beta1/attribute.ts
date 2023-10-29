@@ -15,10 +15,6 @@ export interface AttributeAmino {
   key: string;
   value: string;
 }
-export interface AttributeAminoMsg {
-  type: "/akash.base.v1beta1.Attribute";
-  value: AttributeAmino;
-}
 /** Attribute represents key value pair */
 export interface AttributeSDKType {
   key: string;
@@ -52,10 +48,6 @@ export interface SignedByAmino {
   /** any_of at least of of the keys from the list must have signed attributes */
   any_of: string[];
 }
-export interface SignedByAminoMsg {
-  type: "/akash.base.v1beta1.SignedBy";
-  value: SignedByAmino;
-}
 /**
  * SignedBy represents validation accounts that tenant expects signatures for provider attributes
  * AllOf has precedence i.e. if there is at least one entry AnyOf is ignored regardless to how many
@@ -83,10 +75,6 @@ export interface PlacementRequirementsAmino {
   signed_by?: SignedByAmino;
   /** Attribute list of attributes tenant expects from the provider */
   attributes: AttributeAmino[];
-}
-export interface PlacementRequirementsAminoMsg {
-  type: "/akash.base.v1beta1.PlacementRequirements";
-  value: PlacementRequirementsAmino;
 }
 /** PlacementRequirements */
 export interface PlacementRequirementsSDKType {
@@ -171,9 +159,6 @@ export const Attribute = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: AttributeAminoMsg): Attribute {
-    return Attribute.fromAmino(object.value);
   },
   fromProtoMsg(message: AttributeProtoMsg): Attribute {
     return Attribute.decode(message.value);
@@ -291,9 +276,6 @@ export const SignedBy = {
     }
     return obj;
   },
-  fromAminoMsg(object: SignedByAminoMsg): SignedBy {
-    return SignedBy.fromAmino(object.value);
-  },
   fromProtoMsg(message: SignedByProtoMsg): SignedBy {
     return SignedBy.decode(message.value);
   },
@@ -399,9 +381,6 @@ export const PlacementRequirements = {
       obj.attributes = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: PlacementRequirementsAminoMsg): PlacementRequirements {
-    return PlacementRequirements.fromAmino(object.value);
   },
   fromProtoMsg(message: PlacementRequirementsProtoMsg): PlacementRequirements {
     return PlacementRequirements.decode(message.value);

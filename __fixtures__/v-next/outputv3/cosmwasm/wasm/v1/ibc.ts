@@ -45,10 +45,6 @@ export interface MsgIBCSendAmino {
    */
   data: Uint8Array;
 }
-export interface MsgIBCSendAminoMsg {
-  type: "wasm/MsgIBCSend";
-  value: MsgIBCSendAmino;
-}
 /** MsgIBCSend */
 export interface MsgIBCSendSDKType {
   channel: string;
@@ -67,10 +63,6 @@ export interface MsgIBCCloseChannelProtoMsg {
 /** MsgIBCCloseChannel port and channel need to be owned by the contract */
 export interface MsgIBCCloseChannelAmino {
   channel: string;
-}
-export interface MsgIBCCloseChannelAminoMsg {
-  type: "wasm/MsgIBCCloseChannel";
-  value: MsgIBCCloseChannelAmino;
 }
 /** MsgIBCCloseChannel port and channel need to be owned by the contract */
 export interface MsgIBCCloseChannelSDKType {
@@ -188,15 +180,6 @@ export const MsgIBCSend = {
     obj.data = message.data;
     return obj;
   },
-  fromAminoMsg(object: MsgIBCSendAminoMsg): MsgIBCSend {
-    return MsgIBCSend.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgIBCSend): MsgIBCSendAminoMsg {
-    return {
-      type: "wasm/MsgIBCSend",
-      value: MsgIBCSend.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgIBCSendProtoMsg): MsgIBCSend {
     return MsgIBCSend.decode(message.value);
   },
@@ -275,15 +258,6 @@ export const MsgIBCCloseChannel = {
     const obj: any = {};
     obj.channel = message.channel;
     return obj;
-  },
-  fromAminoMsg(object: MsgIBCCloseChannelAminoMsg): MsgIBCCloseChannel {
-    return MsgIBCCloseChannel.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgIBCCloseChannel): MsgIBCCloseChannelAminoMsg {
-    return {
-      type: "wasm/MsgIBCCloseChannel",
-      value: MsgIBCCloseChannel.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgIBCCloseChannelProtoMsg): MsgIBCCloseChannel {
     return MsgIBCCloseChannel.decode(message.value);

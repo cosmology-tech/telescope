@@ -16,10 +16,6 @@ export interface GenesisCertificateAmino {
   owner: string;
   certificate?: CertificateAmino;
 }
-export interface GenesisCertificateAminoMsg {
-  type: "/akash.cert.v1beta2.GenesisCertificate";
-  value: GenesisCertificateAmino;
-}
 /** GenesisCertificate defines certificate entry at genesis */
 export interface GenesisCertificateSDKType {
   owner: string;
@@ -36,10 +32,6 @@ export interface GenesisStateProtoMsg {
 /** GenesisState defines the basic genesis state used by cert module */
 export interface GenesisStateAmino {
   certificates: GenesisCertificateAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "/akash.cert.v1beta2.GenesisState";
-  value: GenesisStateAmino;
 }
 /** GenesisState defines the basic genesis state used by cert module */
 export interface GenesisStateSDKType {
@@ -125,9 +117,6 @@ export const GenesisCertificate = {
     obj.owner = message.owner;
     obj.certificate = message.certificate ? Certificate.toAmino(message.certificate) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GenesisCertificateAminoMsg): GenesisCertificate {
-    return GenesisCertificate.fromAmino(object.value);
   },
   fromProtoMsg(message: GenesisCertificateProtoMsg): GenesisCertificate {
     return GenesisCertificate.decode(message.value);
@@ -218,9 +207,6 @@ export const GenesisState = {
       obj.certificates = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

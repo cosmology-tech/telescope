@@ -217,10 +217,6 @@ export interface ServiceAmino {
   /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
 }
-export interface ServiceAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.Service";
-  value: ServiceAmino;
-}
 /** A service that is available for use by the consumer. */
 export interface ServiceSDKType {
   name: string;
@@ -318,10 +314,6 @@ export interface ServiceConfigAmino {
    */
   monitoring?: MonitoringAmino;
 }
-export interface ServiceConfigAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ServiceConfig";
-  value: ServiceConfigAmino;
-}
 /** The configuration of the service. */
 export interface ServiceConfigSDKType {
   name: string;
@@ -354,10 +346,6 @@ export interface OperationMetadataAmino {
    * associated with.
    */
   resource_names: string[];
-}
-export interface OperationMetadataAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.OperationMetadata";
-  value: OperationMetadataAmino;
 }
 /** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadataSDKType {
@@ -453,10 +441,6 @@ export interface ConsumerQuotaMetricAmino {
   /** The units in which the metric value is reported. */
   unit: string;
 }
-export interface ConsumerQuotaMetricAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ConsumerQuotaMetric";
-  value: ConsumerQuotaMetricAmino;
-}
 /** Consumer quota settings for a quota metric. */
 export interface ConsumerQuotaMetricSDKType {
   name: string;
@@ -548,10 +532,6 @@ export interface ConsumerQuotaLimitAmino {
    */
   quota_buckets: QuotaBucketAmino[];
 }
-export interface ConsumerQuotaLimitAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ConsumerQuotaLimit";
-  value: ConsumerQuotaLimitAmino;
-}
 /** Consumer quota settings for a quota limit. */
 export interface ConsumerQuotaLimitSDKType {
   name: string;
@@ -572,10 +552,6 @@ export interface QuotaBucket_DimensionsEntryProtoMsg {
 export interface QuotaBucket_DimensionsEntryAmino {
   key: string;
   value: string;
-}
-export interface QuotaBucket_DimensionsEntryAminoMsg {
-  type: string;
-  value: QuotaBucket_DimensionsEntryAmino;
 }
 export interface QuotaBucket_DimensionsEntrySDKType {
   key: string;
@@ -655,10 +631,6 @@ export interface QuotaBucketAmino {
     [key: string]: string;
   };
 }
-export interface QuotaBucketAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.QuotaBucket";
-  value: QuotaBucketAmino;
-}
 /** A quota bucket is a quota provisioning unit for a specific set of dimensions. */
 export interface QuotaBucketSDKType {
   effective_limit: bigint;
@@ -681,10 +653,6 @@ export interface QuotaOverride_DimensionsEntryProtoMsg {
 export interface QuotaOverride_DimensionsEntryAmino {
   key: string;
   value: string;
-}
-export interface QuotaOverride_DimensionsEntryAminoMsg {
-  type: string;
-  value: QuotaOverride_DimensionsEntryAmino;
 }
 export interface QuotaOverride_DimensionsEntrySDKType {
   key: string;
@@ -832,10 +800,6 @@ export interface QuotaOverrideAmino {
    */
   admin_override_ancestor: string;
 }
-export interface QuotaOverrideAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.QuotaOverride";
-  value: QuotaOverrideAmino;
-}
 /** A quota override */
 export interface QuotaOverrideSDKType {
   name: string;
@@ -871,10 +835,6 @@ export interface OverrideInlineSourceAmino {
    */
   overrides: QuotaOverrideAmino[];
 }
-export interface OverrideInlineSourceAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.OverrideInlineSource";
-  value: OverrideInlineSourceAmino;
-}
 /** Import data embedded in the request message */
 export interface OverrideInlineSourceSDKType {
   overrides: QuotaOverrideSDKType[];
@@ -890,10 +850,6 @@ export interface AdminQuotaPolicy_DimensionsEntryProtoMsg {
 export interface AdminQuotaPolicy_DimensionsEntryAmino {
   key: string;
   value: string;
-}
-export interface AdminQuotaPolicy_DimensionsEntryAminoMsg {
-  type: string;
-  value: AdminQuotaPolicy_DimensionsEntryAmino;
 }
 export interface AdminQuotaPolicy_DimensionsEntrySDKType {
   key: string;
@@ -1011,10 +967,6 @@ export interface AdminQuotaPolicyAmino {
    */
   container: string;
 }
-export interface AdminQuotaPolicyAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.AdminQuotaPolicy";
-  value: AdminQuotaPolicyAmino;
-}
 /** Quota policy created by quota administrator. */
 export interface AdminQuotaPolicySDKType {
   name: string;
@@ -1061,10 +1013,6 @@ export interface ServiceIdentityAmino {
    * https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts#ServiceAccount
    */
   unique_id: string;
-}
-export interface ServiceIdentityAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ServiceIdentity";
-  value: ServiceIdentityAmino;
 }
 /**
  * Service identity for a service. This is the identity that service producer
@@ -1182,9 +1130,6 @@ export const Service = {
     obj.config = message.config ? ServiceConfig.toAmino(message.config) : undefined;
     obj.state = message.state;
     return obj;
-  },
-  fromAminoMsg(object: ServiceAminoMsg): Service {
-    return Service.fromAmino(object.value);
   },
   fromProtoMsg(message: ServiceProtoMsg): Service {
     return Service.decode(message.value);
@@ -1436,9 +1381,6 @@ export const ServiceConfig = {
     obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ServiceConfigAminoMsg): ServiceConfig {
-    return ServiceConfig.fromAmino(object.value);
-  },
   fromProtoMsg(message: ServiceConfigProtoMsg): ServiceConfig {
     return ServiceConfig.decode(message.value);
   },
@@ -1528,9 +1470,6 @@ export const OperationMetadata = {
       obj.resource_names = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: OperationMetadataAminoMsg): OperationMetadata {
-    return OperationMetadata.fromAmino(object.value);
   },
   fromProtoMsg(message: OperationMetadataProtoMsg): OperationMetadata {
     return OperationMetadata.decode(message.value);
@@ -1704,9 +1643,6 @@ export const ConsumerQuotaMetric = {
     obj.unit = message.unit;
     return obj;
   },
-  fromAminoMsg(object: ConsumerQuotaMetricAminoMsg): ConsumerQuotaMetric {
-    return ConsumerQuotaMetric.fromAmino(object.value);
-  },
   fromProtoMsg(message: ConsumerQuotaMetricProtoMsg): ConsumerQuotaMetric {
     return ConsumerQuotaMetric.decode(message.value);
   },
@@ -1867,9 +1803,6 @@ export const ConsumerQuotaLimit = {
     }
     return obj;
   },
-  fromAminoMsg(object: ConsumerQuotaLimitAminoMsg): ConsumerQuotaLimit {
-    return ConsumerQuotaLimit.fromAmino(object.value);
-  },
   fromProtoMsg(message: ConsumerQuotaLimitProtoMsg): ConsumerQuotaLimit {
     return ConsumerQuotaLimit.decode(message.value);
   },
@@ -1960,9 +1893,6 @@ export const QuotaBucket_DimensionsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: QuotaBucket_DimensionsEntryAminoMsg): QuotaBucket_DimensionsEntry {
-    return QuotaBucket_DimensionsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: QuotaBucket_DimensionsEntryProtoMsg): QuotaBucket_DimensionsEntry {
     return QuotaBucket_DimensionsEntry.decode(message.value);
@@ -2159,9 +2089,6 @@ export const QuotaBucket = {
     }
     return obj;
   },
-  fromAminoMsg(object: QuotaBucketAminoMsg): QuotaBucket {
-    return QuotaBucket.fromAmino(object.value);
-  },
   fromProtoMsg(message: QuotaBucketProtoMsg): QuotaBucket {
     return QuotaBucket.decode(message.value);
   },
@@ -2252,9 +2179,6 @@ export const QuotaOverride_DimensionsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: QuotaOverride_DimensionsEntryAminoMsg): QuotaOverride_DimensionsEntry {
-    return QuotaOverride_DimensionsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: QuotaOverride_DimensionsEntryProtoMsg): QuotaOverride_DimensionsEntry {
     return QuotaOverride_DimensionsEntry.decode(message.value);
@@ -2443,9 +2367,6 @@ export const QuotaOverride = {
     obj.admin_override_ancestor = message.adminOverrideAncestor;
     return obj;
   },
-  fromAminoMsg(object: QuotaOverrideAminoMsg): QuotaOverride {
-    return QuotaOverride.fromAmino(object.value);
-  },
   fromProtoMsg(message: QuotaOverrideProtoMsg): QuotaOverride {
     return QuotaOverride.decode(message.value);
   },
@@ -2535,9 +2456,6 @@ export const OverrideInlineSource = {
       obj.overrides = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: OverrideInlineSourceAminoMsg): OverrideInlineSource {
-    return OverrideInlineSource.fromAmino(object.value);
   },
   fromProtoMsg(message: OverrideInlineSourceProtoMsg): OverrideInlineSource {
     return OverrideInlineSource.decode(message.value);
@@ -2629,9 +2547,6 @@ export const AdminQuotaPolicy_DimensionsEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: AdminQuotaPolicy_DimensionsEntryAminoMsg): AdminQuotaPolicy_DimensionsEntry {
-    return AdminQuotaPolicy_DimensionsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: AdminQuotaPolicy_DimensionsEntryProtoMsg): AdminQuotaPolicy_DimensionsEntry {
     return AdminQuotaPolicy_DimensionsEntry.decode(message.value);
@@ -2820,9 +2735,6 @@ export const AdminQuotaPolicy = {
     obj.container = message.container;
     return obj;
   },
-  fromAminoMsg(object: AdminQuotaPolicyAminoMsg): AdminQuotaPolicy {
-    return AdminQuotaPolicy.fromAmino(object.value);
-  },
   fromProtoMsg(message: AdminQuotaPolicyProtoMsg): AdminQuotaPolicy {
     return AdminQuotaPolicy.decode(message.value);
   },
@@ -2914,9 +2826,6 @@ export const ServiceIdentity = {
     obj.email = message.email;
     obj.unique_id = message.uniqueId;
     return obj;
-  },
-  fromAminoMsg(object: ServiceIdentityAminoMsg): ServiceIdentity {
-    return ServiceIdentity.fromAmino(object.value);
   },
   fromProtoMsg(message: ServiceIdentityProtoMsg): ServiceIdentity {
     return ServiceIdentity.decode(message.value);

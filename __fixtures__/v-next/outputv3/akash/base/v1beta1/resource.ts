@@ -18,10 +18,6 @@ export interface CPUAmino {
   units?: ResourceValueAmino;
   attributes: AttributeAmino[];
 }
-export interface CPUAminoMsg {
-  type: "/akash.base.v1beta1.CPU";
-  value: CPUAmino;
-}
 /** CPU stores resource units and cpu config attributes */
 export interface CPUSDKType {
   units: ResourceValueSDKType;
@@ -41,10 +37,6 @@ export interface MemoryAmino {
   quantity?: ResourceValueAmino;
   attributes: AttributeAmino[];
 }
-export interface MemoryAminoMsg {
-  type: "/akash.base.v1beta1.Memory";
-  value: MemoryAmino;
-}
 /** Memory stores resource quantity and memory attributes */
 export interface MemorySDKType {
   quantity: ResourceValueSDKType;
@@ -63,10 +55,6 @@ export interface StorageProtoMsg {
 export interface StorageAmino {
   quantity?: ResourceValueAmino;
   attributes: AttributeAmino[];
-}
-export interface StorageAminoMsg {
-  type: "/akash.base.v1beta1.Storage";
-  value: StorageAmino;
 }
 /** Storage stores resource quantity and storage attributes */
 export interface StorageSDKType {
@@ -96,10 +84,6 @@ export interface ResourceUnitsAmino {
   memory?: MemoryAmino;
   storage?: StorageAmino;
   endpoints: EndpointAmino[];
-}
-export interface ResourceUnitsAminoMsg {
-  type: "/akash.base.v1beta1.ResourceUnits";
-  value: ResourceUnitsAmino;
 }
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
@@ -203,9 +187,6 @@ export const CPU = {
       obj.attributes = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: CPUAminoMsg): CPU {
-    return CPU.fromAmino(object.value);
   },
   fromProtoMsg(message: CPUProtoMsg): CPU {
     return CPU.decode(message.value);
@@ -313,9 +294,6 @@ export const Memory = {
     }
     return obj;
   },
-  fromAminoMsg(object: MemoryAminoMsg): Memory {
-    return Memory.fromAmino(object.value);
-  },
   fromProtoMsg(message: MemoryProtoMsg): Memory {
     return Memory.decode(message.value);
   },
@@ -421,9 +399,6 @@ export const Storage = {
       obj.attributes = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: StorageAminoMsg): Storage {
-    return Storage.fromAmino(object.value);
   },
   fromProtoMsg(message: StorageProtoMsg): Storage {
     return Storage.decode(message.value);
@@ -562,9 +537,6 @@ export const ResourceUnits = {
       obj.endpoints = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: ResourceUnitsAminoMsg): ResourceUnits {
-    return ResourceUnits.fromAmino(object.value);
   },
   fromProtoMsg(message: ResourceUnitsProtoMsg): ResourceUnits {
     return ResourceUnits.decode(message.value);

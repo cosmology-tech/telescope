@@ -32,10 +32,6 @@ export interface GenericAuthorizationAmino {
   /** Msg, identified by it's type URL, to grant unrestricted permissions to execute */
   msg: string;
 }
-export interface GenericAuthorizationAminoMsg {
-  type: "cosmos-sdk/GenericAuthorization";
-  value: GenericAuthorizationAmino;
-}
 /**
  * GenericAuthorization gives the grantee unrestricted permissions to execute
  * the provided method on behalf of the granter's account.
@@ -77,10 +73,6 @@ export interface GrantAmino {
    */
   expiration?: Date;
 }
-export interface GrantAminoMsg {
-  type: "cosmos-sdk/Grant";
-  value: GrantAmino;
-}
 /**
  * Grant gives permissions to execute
  * the provide method with expiration time.
@@ -116,10 +108,6 @@ export interface GrantAuthorizationAmino {
   authorization?: AnyAmino;
   expiration?: Date;
 }
-export interface GrantAuthorizationAminoMsg {
-  type: "cosmos-sdk/GrantAuthorization";
-  value: GrantAuthorizationAmino;
-}
 /**
  * GrantAuthorization extends a grant with both the addresses of the grantee and granter.
  * It is used in genesis.proto and query.proto
@@ -143,10 +131,6 @@ export interface GrantQueueItemProtoMsg {
 export interface GrantQueueItemAmino {
   /** msg_type_urls contains the list of TypeURL of a sdk.Msg. */
   msg_type_urls: string[];
-}
-export interface GrantQueueItemAminoMsg {
-  type: "cosmos-sdk/GrantQueueItem";
-  value: GrantQueueItemAmino;
 }
 /** GrantQueueItem contains the list of TypeURL of a sdk.Msg. */
 export interface GrantQueueItemSDKType {
@@ -218,15 +202,6 @@ export const GenericAuthorization = {
     const obj: any = {};
     obj.msg = message.msg;
     return obj;
-  },
-  fromAminoMsg(object: GenericAuthorizationAminoMsg): GenericAuthorization {
-    return GenericAuthorization.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenericAuthorization): GenericAuthorizationAminoMsg {
-    return {
-      type: "cosmos-sdk/GenericAuthorization",
-      value: GenericAuthorization.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenericAuthorizationProtoMsg): GenericAuthorization {
     return GenericAuthorization.decode(message.value);
@@ -322,15 +297,6 @@ export const Grant = {
     obj.authorization = message.authorization ? Authorization_ToAmino((message.authorization as Any)) : undefined;
     obj.expiration = message.expiration;
     return obj;
-  },
-  fromAminoMsg(object: GrantAminoMsg): Grant {
-    return Grant.fromAmino(object.value);
-  },
-  toAminoMsg(message: Grant): GrantAminoMsg {
-    return {
-      type: "cosmos-sdk/Grant",
-      value: Grant.toAmino(message)
-    };
   },
   fromProtoMsg(message: GrantProtoMsg): Grant {
     return Grant.decode(message.value);
@@ -455,15 +421,6 @@ export const GrantAuthorization = {
     obj.expiration = message.expiration;
     return obj;
   },
-  fromAminoMsg(object: GrantAuthorizationAminoMsg): GrantAuthorization {
-    return GrantAuthorization.fromAmino(object.value);
-  },
-  toAminoMsg(message: GrantAuthorization): GrantAuthorizationAminoMsg {
-    return {
-      type: "cosmos-sdk/GrantAuthorization",
-      value: GrantAuthorization.toAmino(message)
-    };
-  },
   fromProtoMsg(message: GrantAuthorizationProtoMsg): GrantAuthorization {
     return GrantAuthorization.decode(message.value);
   },
@@ -554,15 +511,6 @@ export const GrantQueueItem = {
       obj.msg_type_urls = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: GrantQueueItemAminoMsg): GrantQueueItem {
-    return GrantQueueItem.fromAmino(object.value);
-  },
-  toAminoMsg(message: GrantQueueItem): GrantQueueItemAminoMsg {
-    return {
-      type: "cosmos-sdk/GrantQueueItem",
-      value: GrantQueueItem.toAmino(message)
-    };
   },
   fromProtoMsg(message: GrantQueueItemProtoMsg): GrantQueueItem {
     return GrantQueueItem.decode(message.value);

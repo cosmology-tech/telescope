@@ -48,10 +48,6 @@ export interface EndpointProtoMsg {
 export interface EndpointAmino {
   kind: Endpoint_Kind;
 }
-export interface EndpointAminoMsg {
-  type: "/akash.base.v1beta1.Endpoint";
-  value: EndpointAmino;
-}
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointSDKType {
   kind: Endpoint_Kind;
@@ -120,9 +116,6 @@ export const Endpoint = {
     const obj: any = {};
     obj.kind = message.kind;
     return obj;
-  },
-  fromAminoMsg(object: EndpointAminoMsg): Endpoint {
-    return Endpoint.fromAmino(object.value);
   },
   fromProtoMsg(message: EndpointProtoMsg): Endpoint {
     return Endpoint.decode(message.value);

@@ -11,10 +11,6 @@ export interface QueryParamsRequestProtoMsg {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method */
 export interface QueryParamsRequestAmino {}
-export interface QueryParamsRequestAminoMsg {
-  type: "cosmos-sdk/QueryParamsRequest";
-  value: QueryParamsRequestAmino;
-}
 /** QueryParamsRequest is the request type for the Query/Params RPC method */
 export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method */
@@ -28,10 +24,6 @@ export interface QueryParamsResponseProtoMsg {
 /** QueryParamsResponse is the response type for the Query/Params RPC method */
 export interface QueryParamsResponseAmino {
   params?: ParamsAmino;
-}
-export interface QueryParamsResponseAminoMsg {
-  type: "cosmos-sdk/QueryParamsResponse";
-  value: QueryParamsResponseAmino;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method */
 export interface QueryParamsResponseSDKType {
@@ -56,10 +48,6 @@ export interface QuerySigningInfoRequestProtoMsg {
 export interface QuerySigningInfoRequestAmino {
   /** cons_address is the address to query signing info of */
   cons_address: string;
-}
-export interface QuerySigningInfoRequestAminoMsg {
-  type: "cosmos-sdk/QuerySigningInfoRequest";
-  value: QuerySigningInfoRequestAmino;
 }
 /**
  * QuerySigningInfoRequest is the request type for the Query/SigningInfo RPC
@@ -88,10 +76,6 @@ export interface QuerySigningInfoResponseAmino {
   /** val_signing_info is the signing info of requested val cons address */
   val_signing_info?: ValidatorSigningInfoAmino;
 }
-export interface QuerySigningInfoResponseAminoMsg {
-  type: "cosmos-sdk/QuerySigningInfoResponse";
-  value: QuerySigningInfoResponseAmino;
-}
 /**
  * QuerySigningInfoResponse is the response type for the Query/SigningInfo RPC
  * method
@@ -116,10 +100,6 @@ export interface QuerySigningInfosRequestProtoMsg {
  */
 export interface QuerySigningInfosRequestAmino {
   pagination?: PageRequestAmino;
-}
-export interface QuerySigningInfosRequestAminoMsg {
-  type: "cosmos-sdk/QuerySigningInfosRequest";
-  value: QuerySigningInfosRequestAmino;
 }
 /**
  * QuerySigningInfosRequest is the request type for the Query/SigningInfos RPC
@@ -149,10 +129,6 @@ export interface QuerySigningInfosResponseAmino {
   /** info is the signing info of all validators */
   info: ValidatorSigningInfoAmino[];
   pagination?: PageResponseAmino;
-}
-export interface QuerySigningInfosResponseAminoMsg {
-  type: "cosmos-sdk/QuerySigningInfosResponse";
-  value: QuerySigningInfosResponseAmino;
 }
 /**
  * QuerySigningInfosResponse is the response type for the Query/SigningInfos RPC
@@ -210,15 +186,6 @@ export const QueryParamsRequest = {
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryParamsRequest",
-      value: QueryParamsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value);
@@ -301,15 +268,6 @@ export const QueryParamsResponse = {
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryParamsResponse",
-      value: QueryParamsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value);
   },
@@ -388,15 +346,6 @@ export const QuerySigningInfoRequest = {
     const obj: any = {};
     obj.cons_address = message.consAddress;
     return obj;
-  },
-  fromAminoMsg(object: QuerySigningInfoRequestAminoMsg): QuerySigningInfoRequest {
-    return QuerySigningInfoRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySigningInfoRequest): QuerySigningInfoRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QuerySigningInfoRequest",
-      value: QuerySigningInfoRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QuerySigningInfoRequestProtoMsg): QuerySigningInfoRequest {
     return QuerySigningInfoRequest.decode(message.value);
@@ -479,15 +428,6 @@ export const QuerySigningInfoResponse = {
     obj.val_signing_info = message.valSigningInfo ? ValidatorSigningInfo.toAmino(message.valSigningInfo) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QuerySigningInfoResponseAminoMsg): QuerySigningInfoResponse {
-    return QuerySigningInfoResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySigningInfoResponse): QuerySigningInfoResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QuerySigningInfoResponse",
-      value: QuerySigningInfoResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QuerySigningInfoResponseProtoMsg): QuerySigningInfoResponse {
     return QuerySigningInfoResponse.decode(message.value);
   },
@@ -568,15 +508,6 @@ export const QuerySigningInfosRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QuerySigningInfosRequestAminoMsg): QuerySigningInfosRequest {
-    return QuerySigningInfosRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySigningInfosRequest): QuerySigningInfosRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QuerySigningInfosRequest",
-      value: QuerySigningInfosRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QuerySigningInfosRequestProtoMsg): QuerySigningInfosRequest {
     return QuerySigningInfosRequest.decode(message.value);
@@ -684,15 +615,6 @@ export const QuerySigningInfosResponse = {
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QuerySigningInfosResponseAminoMsg): QuerySigningInfosResponse {
-    return QuerySigningInfosResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySigningInfosResponse): QuerySigningInfosResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QuerySigningInfosResponse",
-      value: QuerySigningInfosResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QuerySigningInfosResponseProtoMsg): QuerySigningInfosResponse {
     return QuerySigningInfosResponse.decode(message.value);

@@ -23,10 +23,6 @@ export interface DoubleValueAmino {
   /** The double value. */
   value: number;
 }
-export interface DoubleValueAminoMsg {
-  type: "/google.protobuf.DoubleValue";
-  value: DoubleValueAmino;
-}
 /**
  * Wrapper message for `double`.
  * 
@@ -56,10 +52,6 @@ export interface FloatValueProtoMsg {
 export interface FloatValueAmino {
   /** The float value. */
   value: number;
-}
-export interface FloatValueAminoMsg {
-  type: "/google.protobuf.FloatValue";
-  value: FloatValueAmino;
 }
 /**
  * Wrapper message for `float`.
@@ -91,10 +83,6 @@ export interface Int64ValueAmino {
   /** The int64 value. */
   value: string;
 }
-export interface Int64ValueAminoMsg {
-  type: "/google.protobuf.Int64Value";
-  value: Int64ValueAmino;
-}
 /**
  * Wrapper message for `int64`.
  * 
@@ -124,10 +112,6 @@ export interface UInt64ValueProtoMsg {
 export interface UInt64ValueAmino {
   /** The uint64 value. */
   value: string;
-}
-export interface UInt64ValueAminoMsg {
-  type: "/google.protobuf.UInt64Value";
-  value: UInt64ValueAmino;
 }
 /**
  * Wrapper message for `uint64`.
@@ -159,10 +143,6 @@ export interface Int32ValueAmino {
   /** The int32 value. */
   value: number;
 }
-export interface Int32ValueAminoMsg {
-  type: "/google.protobuf.Int32Value";
-  value: Int32ValueAmino;
-}
 /**
  * Wrapper message for `int32`.
  * 
@@ -192,10 +172,6 @@ export interface UInt32ValueProtoMsg {
 export interface UInt32ValueAmino {
   /** The uint32 value. */
   value: number;
-}
-export interface UInt32ValueAminoMsg {
-  type: "/google.protobuf.UInt32Value";
-  value: UInt32ValueAmino;
 }
 /**
  * Wrapper message for `uint32`.
@@ -227,10 +203,6 @@ export interface BoolValueAmino {
   /** The bool value. */
   value: boolean;
 }
-export interface BoolValueAminoMsg {
-  type: "/google.protobuf.BoolValue";
-  value: BoolValueAmino;
-}
 /**
  * Wrapper message for `bool`.
  * 
@@ -261,10 +233,6 @@ export interface StringValueAmino {
   /** The string value. */
   value: string;
 }
-export interface StringValueAminoMsg {
-  type: "/google.protobuf.StringValue";
-  value: StringValueAmino;
-}
 /**
  * Wrapper message for `string`.
  * 
@@ -294,10 +262,6 @@ export interface BytesValueProtoMsg {
 export interface BytesValueAmino {
   /** The bytes value. */
   value: Uint8Array;
-}
-export interface BytesValueAminoMsg {
-  type: "/google.protobuf.BytesValue";
-  value: BytesValueAmino;
 }
 /**
  * Wrapper message for `bytes`.
@@ -371,9 +335,6 @@ export const DoubleValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: DoubleValueAminoMsg): DoubleValue {
-    return DoubleValue.fromAmino(object.value);
   },
   fromProtoMsg(message: DoubleValueProtoMsg): DoubleValue {
     return DoubleValue.decode(message.value);
@@ -452,9 +413,6 @@ export const FloatValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: FloatValueAminoMsg): FloatValue {
-    return FloatValue.fromAmino(object.value);
   },
   fromProtoMsg(message: FloatValueProtoMsg): FloatValue {
     return FloatValue.decode(message.value);
@@ -536,9 +494,6 @@ export const Int64Value = {
     obj.value = message.value ? message.value.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: Int64ValueAminoMsg): Int64Value {
-    return Int64Value.fromAmino(object.value);
-  },
   fromProtoMsg(message: Int64ValueProtoMsg): Int64Value {
     return Int64Value.decode(message.value);
   },
@@ -619,9 +574,6 @@ export const UInt64Value = {
     obj.value = message.value ? message.value.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: UInt64ValueAminoMsg): UInt64Value {
-    return UInt64Value.fromAmino(object.value);
-  },
   fromProtoMsg(message: UInt64ValueProtoMsg): UInt64Value {
     return UInt64Value.decode(message.value);
   },
@@ -699,9 +651,6 @@ export const Int32Value = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: Int32ValueAminoMsg): Int32Value {
-    return Int32Value.fromAmino(object.value);
   },
   fromProtoMsg(message: Int32ValueProtoMsg): Int32Value {
     return Int32Value.decode(message.value);
@@ -781,9 +730,6 @@ export const UInt32Value = {
     obj.value = message.value;
     return obj;
   },
-  fromAminoMsg(object: UInt32ValueAminoMsg): UInt32Value {
-    return UInt32Value.fromAmino(object.value);
-  },
   fromProtoMsg(message: UInt32ValueProtoMsg): UInt32Value {
     return UInt32Value.decode(message.value);
   },
@@ -861,9 +807,6 @@ export const BoolValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: BoolValueAminoMsg): BoolValue {
-    return BoolValue.fromAmino(object.value);
   },
   fromProtoMsg(message: BoolValueProtoMsg): BoolValue {
     return BoolValue.decode(message.value);
@@ -943,9 +886,6 @@ export const StringValue = {
     obj.value = message.value;
     return obj;
   },
-  fromAminoMsg(object: StringValueAminoMsg): StringValue {
-    return StringValue.fromAmino(object.value);
-  },
   fromProtoMsg(message: StringValueProtoMsg): StringValue {
     return StringValue.decode(message.value);
   },
@@ -1023,9 +963,6 @@ export const BytesValue = {
     const obj: any = {};
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: BytesValueAminoMsg): BytesValue {
-    return BytesValue.fromAmino(object.value);
   },
   fromProtoMsg(message: BytesValueProtoMsg): BytesValue {
     return BytesValue.decode(message.value);

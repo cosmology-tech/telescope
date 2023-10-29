@@ -69,10 +69,6 @@ export interface VisibilityAmino {
    */
   rules: VisibilityRuleAmino[];
 }
-export interface VisibilityAminoMsg {
-  type: "/google.api.Visibility";
-  value: VisibilityAmino;
-}
 /**
  * `Visibility` defines restrictions for the visibility of service
  * elements.  Restrictions are specified using visibility labels
@@ -164,10 +160,6 @@ export interface VisibilityRuleAmino {
    */
   restriction: string;
 }
-export interface VisibilityRuleAminoMsg {
-  type: "/google.api.VisibilityRule";
-  value: VisibilityRuleAmino;
-}
 /**
  * A visibility rule provides visibility configuration for an individual API
  * element.
@@ -252,9 +244,6 @@ export const Visibility = {
       obj.rules = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: VisibilityAminoMsg): Visibility {
-    return Visibility.fromAmino(object.value);
   },
   fromProtoMsg(message: VisibilityProtoMsg): Visibility {
     return Visibility.decode(message.value);
@@ -347,9 +336,6 @@ export const VisibilityRule = {
     obj.selector = message.selector;
     obj.restriction = message.restriction;
     return obj;
-  },
-  fromAminoMsg(object: VisibilityRuleAminoMsg): VisibilityRule {
-    return VisibilityRule.fromAmino(object.value);
   },
   fromProtoMsg(message: VisibilityRuleProtoMsg): VisibilityRule {
     return VisibilityRule.decode(message.value);

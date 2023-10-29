@@ -102,10 +102,6 @@ export interface SignatureDescriptorsAmino {
   /** signatures are the signature descriptors */
   signatures: SignatureDescriptorAmino[];
 }
-export interface SignatureDescriptorsAminoMsg {
-  type: "cosmos-sdk/SignatureDescriptors";
-  value: SignatureDescriptorsAmino;
-}
 /** SignatureDescriptors wraps multiple SignatureDescriptor's. */
 export interface SignatureDescriptorsSDKType {
   signatures: SignatureDescriptorSDKType[];
@@ -148,10 +144,6 @@ export interface SignatureDescriptorAmino {
    */
   sequence: string;
 }
-export interface SignatureDescriptorAminoMsg {
-  type: "cosmos-sdk/SignatureDescriptor";
-  value: SignatureDescriptorAmino;
-}
 /**
  * SignatureDescriptor is a convenience type which represents the full data for
  * a signature including the public key of the signer, signing modes and the
@@ -181,10 +173,6 @@ export interface SignatureDescriptor_DataAmino {
   /** multi represents a multisig signer */
   multi?: SignatureDescriptor_Data_MultiAmino;
 }
-export interface SignatureDescriptor_DataAminoMsg {
-  type: "cosmos-sdk/Data";
-  value: SignatureDescriptor_DataAmino;
-}
 /** Data represents signature data */
 export interface SignatureDescriptor_DataSDKType {
   single?: SignatureDescriptor_Data_SingleSDKType;
@@ -208,10 +196,6 @@ export interface SignatureDescriptor_Data_SingleAmino {
   /** signature is the raw signature bytes */
   signature: Uint8Array;
 }
-export interface SignatureDescriptor_Data_SingleAminoMsg {
-  type: "cosmos-sdk/Single";
-  value: SignatureDescriptor_Data_SingleAmino;
-}
 /** Single is the signature data for a single signer */
 export interface SignatureDescriptor_Data_SingleSDKType {
   mode: SignMode;
@@ -234,10 +218,6 @@ export interface SignatureDescriptor_Data_MultiAmino {
   bitarray?: CompactBitArrayAmino;
   /** signatures is the signatures of the multi-signature */
   signatures: SignatureDescriptor_DataAmino[];
-}
-export interface SignatureDescriptor_Data_MultiAminoMsg {
-  type: "cosmos-sdk/Multi";
-  value: SignatureDescriptor_Data_MultiAmino;
 }
 /** Multi is the signature data for a multisig public key */
 export interface SignatureDescriptor_Data_MultiSDKType {
@@ -321,15 +301,6 @@ export const SignatureDescriptors = {
       obj.signatures = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: SignatureDescriptorsAminoMsg): SignatureDescriptors {
-    return SignatureDescriptors.fromAmino(object.value);
-  },
-  toAminoMsg(message: SignatureDescriptors): SignatureDescriptorsAminoMsg {
-    return {
-      type: "cosmos-sdk/SignatureDescriptors",
-      value: SignatureDescriptors.toAmino(message)
-    };
   },
   fromProtoMsg(message: SignatureDescriptorsProtoMsg): SignatureDescriptors {
     return SignatureDescriptors.decode(message.value);
@@ -444,15 +415,6 @@ export const SignatureDescriptor = {
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: SignatureDescriptorAminoMsg): SignatureDescriptor {
-    return SignatureDescriptor.fromAmino(object.value);
-  },
-  toAminoMsg(message: SignatureDescriptor): SignatureDescriptorAminoMsg {
-    return {
-      type: "cosmos-sdk/SignatureDescriptor",
-      value: SignatureDescriptor.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SignatureDescriptorProtoMsg): SignatureDescriptor {
     return SignatureDescriptor.decode(message.value);
   },
@@ -550,15 +512,6 @@ export const SignatureDescriptor_Data = {
     obj.multi = message.multi ? SignatureDescriptor_Data_Multi.toAmino(message.multi) : undefined;
     return obj;
   },
-  fromAminoMsg(object: SignatureDescriptor_DataAminoMsg): SignatureDescriptor_Data {
-    return SignatureDescriptor_Data.fromAmino(object.value);
-  },
-  toAminoMsg(message: SignatureDescriptor_Data): SignatureDescriptor_DataAminoMsg {
-    return {
-      type: "cosmos-sdk/Data",
-      value: SignatureDescriptor_Data.toAmino(message)
-    };
-  },
   fromProtoMsg(message: SignatureDescriptor_DataProtoMsg): SignatureDescriptor_Data {
     return SignatureDescriptor_Data.decode(message.value);
   },
@@ -651,15 +604,6 @@ export const SignatureDescriptor_Data_Single = {
     obj.mode = message.mode;
     obj.signature = message.signature;
     return obj;
-  },
-  fromAminoMsg(object: SignatureDescriptor_Data_SingleAminoMsg): SignatureDescriptor_Data_Single {
-    return SignatureDescriptor_Data_Single.fromAmino(object.value);
-  },
-  toAminoMsg(message: SignatureDescriptor_Data_Single): SignatureDescriptor_Data_SingleAminoMsg {
-    return {
-      type: "cosmos-sdk/Single",
-      value: SignatureDescriptor_Data_Single.toAmino(message)
-    };
   },
   fromProtoMsg(message: SignatureDescriptor_Data_SingleProtoMsg): SignatureDescriptor_Data_Single {
     return SignatureDescriptor_Data_Single.decode(message.value);
@@ -767,15 +711,6 @@ export const SignatureDescriptor_Data_Multi = {
       obj.signatures = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: SignatureDescriptor_Data_MultiAminoMsg): SignatureDescriptor_Data_Multi {
-    return SignatureDescriptor_Data_Multi.fromAmino(object.value);
-  },
-  toAminoMsg(message: SignatureDescriptor_Data_Multi): SignatureDescriptor_Data_MultiAminoMsg {
-    return {
-      type: "cosmos-sdk/Multi",
-      value: SignatureDescriptor_Data_Multi.toAmino(message)
-    };
   },
   fromProtoMsg(message: SignatureDescriptor_Data_MultiProtoMsg): SignatureDescriptor_Data_Multi {
     return SignatureDescriptor_Data_Multi.decode(message.value);

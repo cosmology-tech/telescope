@@ -25,10 +25,6 @@ export interface MsgCreateStableswapPoolAmino {
   future_pool_governor: string;
   scaling_factor_controller: string;
 }
-export interface MsgCreateStableswapPoolAminoMsg {
-  type: "osmosis/gamm/create-stableswap-pool";
-  value: MsgCreateStableswapPoolAmino;
-}
 /** ===================== MsgCreatePool */
 export interface MsgCreateStableswapPoolSDKType {
   sender: string;
@@ -49,10 +45,6 @@ export interface MsgCreateStableswapPoolResponseProtoMsg {
 /** Returns a poolID with custom poolName. */
 export interface MsgCreateStableswapPoolResponseAmino {
   pool_id: string;
-}
-export interface MsgCreateStableswapPoolResponseAminoMsg {
-  type: "osmosis/gamm/create-stableswap-pool-response";
-  value: MsgCreateStableswapPoolResponseAmino;
 }
 /** Returns a poolID with custom poolName. */
 export interface MsgCreateStableswapPoolResponseSDKType {
@@ -80,10 +72,6 @@ export interface MsgStableSwapAdjustScalingFactorsAmino {
   pool_id: string;
   scaling_factors: string[];
 }
-export interface MsgStableSwapAdjustScalingFactorsAminoMsg {
-  type: "osmosis/gamm/stable-swap-adjust-scaling-factors";
-  value: MsgStableSwapAdjustScalingFactorsAmino;
-}
 /**
  * Sender must be the pool's scaling_factor_governor in order for the tx to
  * succeed. Adjusts stableswap scaling factors.
@@ -99,10 +87,6 @@ export interface MsgStableSwapAdjustScalingFactorsResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgStableSwapAdjustScalingFactorsResponseAmino {}
-export interface MsgStableSwapAdjustScalingFactorsResponseAminoMsg {
-  type: "osmosis/gamm/stable-swap-adjust-scaling-factors-response";
-  value: MsgStableSwapAdjustScalingFactorsResponseAmino;
-}
 export interface MsgStableSwapAdjustScalingFactorsResponseSDKType {}
 function createBaseMsgCreateStableswapPool(): MsgCreateStableswapPool {
   return {
@@ -275,15 +259,6 @@ export const MsgCreateStableswapPool = {
     obj.scaling_factor_controller = message.scalingFactorController;
     return obj;
   },
-  fromAminoMsg(object: MsgCreateStableswapPoolAminoMsg): MsgCreateStableswapPool {
-    return MsgCreateStableswapPool.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateStableswapPool): MsgCreateStableswapPoolAminoMsg {
-    return {
-      type: "osmosis/gamm/create-stableswap-pool",
-      value: MsgCreateStableswapPool.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgCreateStableswapPoolProtoMsg): MsgCreateStableswapPool {
     return MsgCreateStableswapPool.decode(message.value);
   },
@@ -364,15 +339,6 @@ export const MsgCreateStableswapPoolResponse = {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: MsgCreateStableswapPoolResponseAminoMsg): MsgCreateStableswapPoolResponse {
-    return MsgCreateStableswapPoolResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateStableswapPoolResponse): MsgCreateStableswapPoolResponseAminoMsg {
-    return {
-      type: "osmosis/gamm/create-stableswap-pool-response",
-      value: MsgCreateStableswapPoolResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgCreateStableswapPoolResponseProtoMsg): MsgCreateStableswapPoolResponse {
     return MsgCreateStableswapPoolResponse.decode(message.value);
@@ -504,15 +470,6 @@ export const MsgStableSwapAdjustScalingFactors = {
     }
     return obj;
   },
-  fromAminoMsg(object: MsgStableSwapAdjustScalingFactorsAminoMsg): MsgStableSwapAdjustScalingFactors {
-    return MsgStableSwapAdjustScalingFactors.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgStableSwapAdjustScalingFactors): MsgStableSwapAdjustScalingFactorsAminoMsg {
-    return {
-      type: "osmosis/gamm/stable-swap-adjust-scaling-factors",
-      value: MsgStableSwapAdjustScalingFactors.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgStableSwapAdjustScalingFactorsProtoMsg): MsgStableSwapAdjustScalingFactors {
     return MsgStableSwapAdjustScalingFactors.decode(message.value);
   },
@@ -574,15 +531,6 @@ export const MsgStableSwapAdjustScalingFactorsResponse = {
   toAmino(_: MsgStableSwapAdjustScalingFactorsResponse): MsgStableSwapAdjustScalingFactorsResponseAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: MsgStableSwapAdjustScalingFactorsResponseAminoMsg): MsgStableSwapAdjustScalingFactorsResponse {
-    return MsgStableSwapAdjustScalingFactorsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgStableSwapAdjustScalingFactorsResponse): MsgStableSwapAdjustScalingFactorsResponseAminoMsg {
-    return {
-      type: "osmosis/gamm/stable-swap-adjust-scaling-factors-response",
-      value: MsgStableSwapAdjustScalingFactorsResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgStableSwapAdjustScalingFactorsResponseProtoMsg): MsgStableSwapAdjustScalingFactorsResponse {
     return MsgStableSwapAdjustScalingFactorsResponse.decode(message.value);

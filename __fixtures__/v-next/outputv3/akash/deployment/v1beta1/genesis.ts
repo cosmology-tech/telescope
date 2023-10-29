@@ -18,10 +18,6 @@ export interface GenesisDeploymentAmino {
   deployment?: DeploymentAmino;
   groups: GroupAmino[];
 }
-export interface GenesisDeploymentAminoMsg {
-  type: "/akash.deployment.v1beta1.GenesisDeployment";
-  value: GenesisDeploymentAmino;
-}
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeploymentSDKType {
   deployment: DeploymentSDKType;
@@ -40,10 +36,6 @@ export interface GenesisStateProtoMsg {
 export interface GenesisStateAmino {
   deployments: GenesisDeploymentAmino[];
   params?: ParamsAmino;
-}
-export interface GenesisStateAminoMsg {
-  type: "/akash.deployment.v1beta1.GenesisState";
-  value: GenesisStateAmino;
 }
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateSDKType {
@@ -142,9 +134,6 @@ export const GenesisDeployment = {
       obj.groups = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: GenesisDeploymentAminoMsg): GenesisDeployment {
-    return GenesisDeployment.fromAmino(object.value);
   },
   fromProtoMsg(message: GenesisDeploymentProtoMsg): GenesisDeployment {
     return GenesisDeployment.decode(message.value);
@@ -251,9 +240,6 @@ export const GenesisState = {
     }
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

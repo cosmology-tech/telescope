@@ -13,10 +13,6 @@ export interface QueryEpochsInfoRequestProtoMsg {
 export interface QueryEpochsInfoRequestAmino {
   pagination?: PageRequestAmino;
 }
-export interface QueryEpochsInfoRequestAminoMsg {
-  type: "/evmos.epochs.v1.QueryEpochsInfoRequest";
-  value: QueryEpochsInfoRequestAmino;
-}
 export interface QueryEpochsInfoRequestSDKType {
   pagination?: PageRequestSDKType;
 }
@@ -32,10 +28,6 @@ export interface QueryEpochsInfoResponseAmino {
   epochs: EpochInfoAmino[];
   pagination?: PageResponseAmino;
 }
-export interface QueryEpochsInfoResponseAminoMsg {
-  type: "/evmos.epochs.v1.QueryEpochsInfoResponse";
-  value: QueryEpochsInfoResponseAmino;
-}
 export interface QueryEpochsInfoResponseSDKType {
   epochs: EpochInfoSDKType[];
   pagination?: PageResponseSDKType;
@@ -50,10 +42,6 @@ export interface QueryCurrentEpochRequestProtoMsg {
 export interface QueryCurrentEpochRequestAmino {
   identifier: string;
 }
-export interface QueryCurrentEpochRequestAminoMsg {
-  type: "/evmos.epochs.v1.QueryCurrentEpochRequest";
-  value: QueryCurrentEpochRequestAmino;
-}
 export interface QueryCurrentEpochRequestSDKType {
   identifier: string;
 }
@@ -66,10 +54,6 @@ export interface QueryCurrentEpochResponseProtoMsg {
 }
 export interface QueryCurrentEpochResponseAmino {
   current_epoch: string;
-}
-export interface QueryCurrentEpochResponseAminoMsg {
-  type: "/evmos.epochs.v1.QueryCurrentEpochResponse";
-  value: QueryCurrentEpochResponseAmino;
 }
 export interface QueryCurrentEpochResponseSDKType {
   current_epoch: bigint;
@@ -140,9 +124,6 @@ export const QueryEpochsInfoRequest = {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryEpochsInfoRequestAminoMsg): QueryEpochsInfoRequest {
-    return QueryEpochsInfoRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryEpochsInfoRequestProtoMsg): QueryEpochsInfoRequest {
     return QueryEpochsInfoRequest.decode(message.value);
@@ -250,9 +231,6 @@ export const QueryEpochsInfoResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryEpochsInfoResponseAminoMsg): QueryEpochsInfoResponse {
-    return QueryEpochsInfoResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryEpochsInfoResponseProtoMsg): QueryEpochsInfoResponse {
     return QueryEpochsInfoResponse.decode(message.value);
   },
@@ -330,9 +308,6 @@ export const QueryCurrentEpochRequest = {
     const obj: any = {};
     obj.identifier = message.identifier;
     return obj;
-  },
-  fromAminoMsg(object: QueryCurrentEpochRequestAminoMsg): QueryCurrentEpochRequest {
-    return QueryCurrentEpochRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryCurrentEpochRequestProtoMsg): QueryCurrentEpochRequest {
     return QueryCurrentEpochRequest.decode(message.value);
@@ -413,9 +388,6 @@ export const QueryCurrentEpochResponse = {
     const obj: any = {};
     obj.current_epoch = message.currentEpoch ? message.currentEpoch.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryCurrentEpochResponseAminoMsg): QueryCurrentEpochResponse {
-    return QueryCurrentEpochResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryCurrentEpochResponseProtoMsg): QueryCurrentEpochResponse {
     return QueryCurrentEpochResponse.decode(message.value);

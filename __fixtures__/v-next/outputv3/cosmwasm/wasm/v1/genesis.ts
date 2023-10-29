@@ -23,10 +23,6 @@ export interface GenesisStateAmino {
   sequences: SequenceAmino[];
   gen_msgs: GenesisState_GenMsgsAmino[];
 }
-export interface GenesisStateAminoMsg {
-  type: "wasm/GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -57,10 +53,6 @@ export interface GenesisState_GenMsgsAmino {
   instantiate_contract?: MsgInstantiateContractAmino;
   execute_contract?: MsgExecuteContractAmino;
 }
-export interface GenesisState_GenMsgsAminoMsg {
-  type: "wasm/GenMsgs";
-  value: GenesisState_GenMsgsAmino;
-}
 /**
  * GenMsgs define the messages that can be executed during genesis phase in
  * order. The intention is to have more human readable data that is auditable.
@@ -90,10 +82,6 @@ export interface CodeAmino {
   /** Pinned to wasmvm cache */
   pinned: boolean;
 }
-export interface CodeAminoMsg {
-  type: "wasm/Code";
-  value: CodeAmino;
-}
 /** Code struct encompasses CodeInfo and CodeBytes */
 export interface CodeSDKType {
   code_id: bigint;
@@ -117,10 +105,6 @@ export interface ContractAmino {
   contract_info?: ContractInfoAmino;
   contract_state: ModelAmino[];
 }
-export interface ContractAminoMsg {
-  type: "wasm/Contract";
-  value: ContractAmino;
-}
 /** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
 export interface ContractSDKType {
   contract_address: string;
@@ -140,10 +124,6 @@ export interface SequenceProtoMsg {
 export interface SequenceAmino {
   id_key: Uint8Array;
   value: string;
-}
-export interface SequenceAminoMsg {
-  type: "wasm/Sequence";
-  value: SequenceAmino;
 }
 /** Sequence key and value of an id generation counter */
 export interface SequenceSDKType {
@@ -322,15 +302,6 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "wasm/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
-  },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
   },
@@ -443,15 +414,6 @@ export const GenesisState_GenMsgs = {
     obj.instantiate_contract = message.instantiateContract ? MsgInstantiateContract.toAmino(message.instantiateContract) : undefined;
     obj.execute_contract = message.executeContract ? MsgExecuteContract.toAmino(message.executeContract) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GenesisState_GenMsgsAminoMsg): GenesisState_GenMsgs {
-    return GenesisState_GenMsgs.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState_GenMsgs): GenesisState_GenMsgsAminoMsg {
-    return {
-      type: "wasm/GenMsgs",
-      value: GenesisState_GenMsgs.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisState_GenMsgsProtoMsg): GenesisState_GenMsgs {
     return GenesisState_GenMsgs.decode(message.value);
@@ -578,15 +540,6 @@ export const Code = {
     obj.pinned = message.pinned;
     return obj;
   },
-  fromAminoMsg(object: CodeAminoMsg): Code {
-    return Code.fromAmino(object.value);
-  },
-  toAminoMsg(message: Code): CodeAminoMsg {
-    return {
-      type: "wasm/Code",
-      value: Code.toAmino(message)
-    };
-  },
   fromProtoMsg(message: CodeProtoMsg): Code {
     return Code.decode(message.value);
   },
@@ -708,15 +661,6 @@ export const Contract = {
     }
     return obj;
   },
-  fromAminoMsg(object: ContractAminoMsg): Contract {
-    return Contract.fromAmino(object.value);
-  },
-  toAminoMsg(message: Contract): ContractAminoMsg {
-    return {
-      type: "wasm/Contract",
-      value: Contract.toAmino(message)
-    };
-  },
   fromProtoMsg(message: ContractProtoMsg): Contract {
     return Contract.decode(message.value);
   },
@@ -811,15 +755,6 @@ export const Sequence = {
     obj.id_key = message.idKey;
     obj.value = message.value ? message.value.toString() : undefined;
     return obj;
-  },
-  fromAminoMsg(object: SequenceAminoMsg): Sequence {
-    return Sequence.fromAmino(object.value);
-  },
-  toAminoMsg(message: Sequence): SequenceAminoMsg {
-    return {
-      type: "wasm/Sequence",
-      value: Sequence.toAmino(message)
-    };
   },
   fromProtoMsg(message: SequenceProtoMsg): Sequence {
     return Sequence.decode(message.value);

@@ -110,10 +110,6 @@ export interface DistributionAmino {
   /** Example points. Must be in increasing order of `value` field. */
   exemplars: Distribution_ExemplarAmino[];
 }
-export interface DistributionAminoMsg {
-  type: "/google.api.servicecontrol.v1.Distribution";
-  value: DistributionAmino;
-}
 /**
  * Distribution represents a frequency distribution of double-valued sample
  * points. It contains the size of the population of sample points plus
@@ -184,10 +180,6 @@ export interface Distribution_LinearBucketsAmino {
    */
   offset: number;
 }
-export interface Distribution_LinearBucketsAminoMsg {
-  type: "/google.api.servicecontrol.v1.LinearBuckets";
-  value: Distribution_LinearBucketsAmino;
-}
 /** Describing buckets with constant width. */
 export interface Distribution_LinearBucketsSDKType {
   num_finite_buckets: number;
@@ -244,10 +236,6 @@ export interface Distribution_ExponentialBucketsAmino {
    */
   scale: number;
 }
-export interface Distribution_ExponentialBucketsAminoMsg {
-  type: "/google.api.servicecontrol.v1.ExponentialBuckets";
-  value: Distribution_ExponentialBucketsAmino;
-}
 /** Describing buckets with exponentially growing width. */
 export interface Distribution_ExponentialBucketsSDKType {
   num_finite_buckets: number;
@@ -299,10 +287,6 @@ export interface Distribution_ExplicitBucketsAmino {
    *  i == bound_size() (overflow)    bound[i-1]     +inf
    */
   bounds: number[];
-}
-export interface Distribution_ExplicitBucketsAminoMsg {
-  type: "/google.api.servicecontrol.v1.ExplicitBuckets";
-  value: Distribution_ExplicitBucketsAmino;
 }
 /** Describing buckets with arbitrary user-provided width. */
 export interface Distribution_ExplicitBucketsSDKType {
@@ -540,9 +524,6 @@ export const Distribution = {
     }
     return obj;
   },
-  fromAminoMsg(object: DistributionAminoMsg): Distribution {
-    return Distribution.fromAmino(object.value);
-  },
   fromProtoMsg(message: DistributionProtoMsg): Distribution {
     return Distribution.decode(message.value);
   },
@@ -648,9 +629,6 @@ export const Distribution_LinearBuckets = {
     obj.width = message.width;
     obj.offset = message.offset;
     return obj;
-  },
-  fromAminoMsg(object: Distribution_LinearBucketsAminoMsg): Distribution_LinearBuckets {
-    return Distribution_LinearBuckets.fromAmino(object.value);
   },
   fromProtoMsg(message: Distribution_LinearBucketsProtoMsg): Distribution_LinearBuckets {
     return Distribution_LinearBuckets.decode(message.value);
@@ -758,9 +736,6 @@ export const Distribution_ExponentialBuckets = {
     obj.scale = message.scale;
     return obj;
   },
-  fromAminoMsg(object: Distribution_ExponentialBucketsAminoMsg): Distribution_ExponentialBuckets {
-    return Distribution_ExponentialBuckets.fromAmino(object.value);
-  },
   fromProtoMsg(message: Distribution_ExponentialBucketsProtoMsg): Distribution_ExponentialBuckets {
     return Distribution_ExponentialBuckets.decode(message.value);
   },
@@ -859,9 +834,6 @@ export const Distribution_ExplicitBuckets = {
       obj.bounds = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: Distribution_ExplicitBucketsAminoMsg): Distribution_ExplicitBuckets {
-    return Distribution_ExplicitBuckets.fromAmino(object.value);
   },
   fromProtoMsg(message: Distribution_ExplicitBucketsProtoMsg): Distribution_ExplicitBuckets {
     return Distribution_ExplicitBuckets.decode(message.value);

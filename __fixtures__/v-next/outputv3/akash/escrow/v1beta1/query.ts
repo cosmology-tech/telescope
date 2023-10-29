@@ -23,10 +23,6 @@ export interface QueryAccountsRequestAmino {
   state: string;
   pagination?: PageRequestAmino;
 }
-export interface QueryAccountsRequestAminoMsg {
-  type: "/akash.escrow.v1beta1.QueryAccountsRequest";
-  value: QueryAccountsRequestAmino;
-}
 /** QueryAccountRequest is request type for the Query/Account RPC method */
 export interface QueryAccountsRequestSDKType {
   scope: string;
@@ -48,10 +44,6 @@ export interface QueryAccountsResponseProtoMsg {
 export interface QueryAccountsResponseAmino {
   accounts: AccountAmino[];
   pagination?: PageResponseAmino;
-}
-export interface QueryAccountsResponseAminoMsg {
-  type: "/akash.escrow.v1beta1.QueryAccountsResponse";
-  value: QueryAccountsResponseAmino;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryAccountsResponseSDKType {
@@ -80,10 +72,6 @@ export interface QueryPaymentsRequestAmino {
   state: string;
   pagination?: PageRequestAmino;
 }
-export interface QueryPaymentsRequestAminoMsg {
-  type: "/akash.escrow.v1beta1.QueryPaymentsRequest";
-  value: QueryPaymentsRequestAmino;
-}
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
 export interface QueryPaymentsRequestSDKType {
   scope: string;
@@ -106,10 +94,6 @@ export interface QueryPaymentsResponseProtoMsg {
 export interface QueryPaymentsResponseAmino {
   payments: PaymentAmino[];
   pagination?: PageResponseAmino;
-}
-export interface QueryPaymentsResponseAminoMsg {
-  type: "/akash.escrow.v1beta1.QueryPaymentsResponse";
-  value: QueryPaymentsResponseAmino;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryPaymentsResponseSDKType {
@@ -239,9 +223,6 @@ export const QueryAccountsRequest = {
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryAccountsRequestAminoMsg): QueryAccountsRequest {
-    return QueryAccountsRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryAccountsRequestProtoMsg): QueryAccountsRequest {
     return QueryAccountsRequest.decode(message.value);
   },
@@ -347,9 +328,6 @@ export const QueryAccountsResponse = {
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryAccountsResponseAminoMsg): QueryAccountsResponse {
-    return QueryAccountsResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryAccountsResponseProtoMsg): QueryAccountsResponse {
     return QueryAccountsResponse.decode(message.value);
@@ -501,9 +479,6 @@ export const QueryPaymentsRequest = {
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryPaymentsRequestAminoMsg): QueryPaymentsRequest {
-    return QueryPaymentsRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: QueryPaymentsRequestProtoMsg): QueryPaymentsRequest {
     return QueryPaymentsRequest.decode(message.value);
   },
@@ -609,9 +584,6 @@ export const QueryPaymentsResponse = {
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryPaymentsResponseAminoMsg): QueryPaymentsResponse {
-    return QueryPaymentsResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryPaymentsResponseProtoMsg): QueryPaymentsResponse {
     return QueryPaymentsResponse.decode(message.value);

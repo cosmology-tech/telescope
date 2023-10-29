@@ -20,10 +20,6 @@ export interface GenesisStateAmino {
   /** registered token pairs */
   token_pairs: TokenPairAmino[];
 }
-export interface GenesisStateAminoMsg {
-  type: "/evmos.erc20.v1.GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -54,10 +50,6 @@ export interface ParamsAmino {
    * ModuleAddress Ethereum address.
    */
   enable_evm_hook: boolean;
-}
-export interface ParamsAminoMsg {
-  type: "/evmos.erc20.v1.Params";
-  value: ParamsAmino;
 }
 /** Params defines the erc20 module params */
 export interface ParamsSDKType {
@@ -157,9 +149,6 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
   },
@@ -251,9 +240,6 @@ export const Params = {
     obj.enable_erc20 = message.enableErc20;
     obj.enable_evm_hook = message.enableEvmHook;
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

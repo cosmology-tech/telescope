@@ -17,10 +17,6 @@ export interface ParamsAmino {
   prune_epoch_identifier: string;
   record_history_keep_period?: DurationAmino;
 }
-export interface ParamsAminoMsg {
-  type: "osmosis/twap/params";
-  value: ParamsAmino;
-}
 /** Params holds parameters for the twap module */
 export interface ParamsSDKType {
   prune_epoch_identifier: string;
@@ -43,10 +39,6 @@ export interface GenesisStateAmino {
   twaps: TwapRecordAmino[];
   /** params is the container of twap parameters. */
   params?: ParamsAmino;
-}
-export interface GenesisStateAminoMsg {
-  type: "osmosis/twap/genesis-state";
-  value: GenesisStateAmino;
 }
 /** GenesisState defines the twap module's genesis state. */
 export interface GenesisStateSDKType {
@@ -134,15 +126,6 @@ export const Params = {
     obj.prune_epoch_identifier = message.pruneEpochIdentifier;
     obj.record_history_keep_period = message.recordHistoryKeepPeriod ? Duration.toAmino(message.recordHistoryKeepPeriod) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/twap/params",
-      value: Params.toAmino(message)
-    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);
@@ -250,15 +233,6 @@ export const GenesisState = {
     }
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "osmosis/twap/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

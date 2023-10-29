@@ -12,10 +12,6 @@ export interface QueryParamsRequestProtoMsg {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
-export interface QueryParamsRequestAminoMsg {
-  type: "cosmos-sdk/QueryParamsRequest";
-  value: QueryParamsRequestAmino;
-}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
@@ -31,10 +27,6 @@ export interface QueryParamsResponseProtoMsg {
 export interface QueryParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
-}
-export interface QueryParamsResponseAminoMsg {
-  type: "cosmos-sdk/QueryParamsResponse";
-  value: QueryParamsResponseAmino;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
@@ -60,10 +52,6 @@ export interface QueryValidatorOutstandingRewardsRequestAmino {
   /** validator_address defines the validator address to query for. */
   validator_address: string;
 }
-export interface QueryValidatorOutstandingRewardsRequestAminoMsg {
-  type: "cosmos-sdk/QueryValidatorOutstandingRewardsRequest";
-  value: QueryValidatorOutstandingRewardsRequestAmino;
-}
 /**
  * QueryValidatorOutstandingRewardsRequest is the request type for the
  * Query/ValidatorOutstandingRewards RPC method.
@@ -88,10 +76,6 @@ export interface QueryValidatorOutstandingRewardsResponseProtoMsg {
  */
 export interface QueryValidatorOutstandingRewardsResponseAmino {
   rewards?: ValidatorOutstandingRewardsAmino;
-}
-export interface QueryValidatorOutstandingRewardsResponseAminoMsg {
-  type: "cosmos-sdk/QueryValidatorOutstandingRewardsResponse";
-  value: QueryValidatorOutstandingRewardsResponseAmino;
 }
 /**
  * QueryValidatorOutstandingRewardsResponse is the response type for the
@@ -120,10 +104,6 @@ export interface QueryValidatorCommissionRequestAmino {
   /** validator_address defines the validator address to query for. */
   validator_address: string;
 }
-export interface QueryValidatorCommissionRequestAminoMsg {
-  type: "cosmos-sdk/QueryValidatorCommissionRequest";
-  value: QueryValidatorCommissionRequestAmino;
-}
 /**
  * QueryValidatorCommissionRequest is the request type for the
  * Query/ValidatorCommission RPC method
@@ -150,10 +130,6 @@ export interface QueryValidatorCommissionResponseProtoMsg {
 export interface QueryValidatorCommissionResponseAmino {
   /** commission defines the commision the validator received. */
   commission?: ValidatorAccumulatedCommissionAmino;
-}
-export interface QueryValidatorCommissionResponseAminoMsg {
-  type: "cosmos-sdk/QueryValidatorCommissionResponse";
-  value: QueryValidatorCommissionResponseAmino;
 }
 /**
  * QueryValidatorCommissionResponse is the response type for the
@@ -194,10 +170,6 @@ export interface QueryValidatorSlashesRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface QueryValidatorSlashesRequestAminoMsg {
-  type: "cosmos-sdk/QueryValidatorSlashesRequest";
-  value: QueryValidatorSlashesRequestAmino;
-}
 /**
  * QueryValidatorSlashesRequest is the request type for the
  * Query/ValidatorSlashes RPC method
@@ -232,10 +204,6 @@ export interface QueryValidatorSlashesResponseAmino {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
-export interface QueryValidatorSlashesResponseAminoMsg {
-  type: "cosmos-sdk/QueryValidatorSlashesResponse";
-  value: QueryValidatorSlashesResponseAmino;
-}
 /**
  * QueryValidatorSlashesResponse is the response type for the
  * Query/ValidatorSlashes RPC method.
@@ -268,10 +236,6 @@ export interface QueryDelegationRewardsRequestAmino {
   /** validator_address defines the validator address to query for. */
   validator_address: string;
 }
-export interface QueryDelegationRewardsRequestAminoMsg {
-  type: "cosmos-sdk/QueryDelegationRewardsRequest";
-  value: QueryDelegationRewardsRequestAmino;
-}
 /**
  * QueryDelegationRewardsRequest is the request type for the
  * Query/DelegationRewards RPC method.
@@ -300,10 +264,6 @@ export interface QueryDelegationRewardsResponseAmino {
   /** rewards defines the rewards accrued by a delegation. */
   rewards: DecCoinAmino[];
 }
-export interface QueryDelegationRewardsResponseAminoMsg {
-  type: "cosmos-sdk/QueryDelegationRewardsResponse";
-  value: QueryDelegationRewardsResponseAmino;
-}
 /**
  * QueryDelegationRewardsResponse is the response type for the
  * Query/DelegationRewards RPC method.
@@ -330,10 +290,6 @@ export interface QueryDelegationTotalRewardsRequestProtoMsg {
 export interface QueryDelegationTotalRewardsRequestAmino {
   /** delegator_address defines the delegator address to query for. */
   delegator_address: string;
-}
-export interface QueryDelegationTotalRewardsRequestAminoMsg {
-  type: "cosmos-sdk/QueryDelegationTotalRewardsRequest";
-  value: QueryDelegationTotalRewardsRequestAmino;
 }
 /**
  * QueryDelegationTotalRewardsRequest is the request type for the
@@ -366,10 +322,6 @@ export interface QueryDelegationTotalRewardsResponseAmino {
   /** total defines the sum of all the rewards. */
   total: DecCoinAmino[];
 }
-export interface QueryDelegationTotalRewardsResponseAminoMsg {
-  type: "cosmos-sdk/QueryDelegationTotalRewardsResponse";
-  value: QueryDelegationTotalRewardsResponseAmino;
-}
 /**
  * QueryDelegationTotalRewardsResponse is the response type for the
  * Query/DelegationTotalRewards RPC method.
@@ -398,10 +350,6 @@ export interface QueryDelegatorValidatorsRequestAmino {
   /** delegator_address defines the delegator address to query for. */
   delegator_address: string;
 }
-export interface QueryDelegatorValidatorsRequestAminoMsg {
-  type: "cosmos-sdk/QueryDelegatorValidatorsRequest";
-  value: QueryDelegatorValidatorsRequestAmino;
-}
 /**
  * QueryDelegatorValidatorsRequest is the request type for the
  * Query/DelegatorValidators RPC method.
@@ -428,10 +376,6 @@ export interface QueryDelegatorValidatorsResponseProtoMsg {
 export interface QueryDelegatorValidatorsResponseAmino {
   /** validators defines the validators a delegator is delegating for. */
   validators: string[];
-}
-export interface QueryDelegatorValidatorsResponseAminoMsg {
-  type: "cosmos-sdk/QueryDelegatorValidatorsResponse";
-  value: QueryDelegatorValidatorsResponseAmino;
 }
 /**
  * QueryDelegatorValidatorsResponse is the response type for the
@@ -460,10 +404,6 @@ export interface QueryDelegatorWithdrawAddressRequestAmino {
   /** delegator_address defines the delegator address to query for. */
   delegator_address: string;
 }
-export interface QueryDelegatorWithdrawAddressRequestAminoMsg {
-  type: "cosmos-sdk/QueryDelegatorWithdrawAddressRequest";
-  value: QueryDelegatorWithdrawAddressRequestAmino;
-}
 /**
  * QueryDelegatorWithdrawAddressRequest is the request type for the
  * Query/DelegatorWithdrawAddress RPC method.
@@ -491,10 +431,6 @@ export interface QueryDelegatorWithdrawAddressResponseAmino {
   /** withdraw_address defines the delegator address to query for. */
   withdraw_address: string;
 }
-export interface QueryDelegatorWithdrawAddressResponseAminoMsg {
-  type: "cosmos-sdk/QueryDelegatorWithdrawAddressResponse";
-  value: QueryDelegatorWithdrawAddressResponseAmino;
-}
 /**
  * QueryDelegatorWithdrawAddressResponse is the response type for the
  * Query/DelegatorWithdrawAddress RPC method.
@@ -516,10 +452,6 @@ export interface QueryCommunityPoolRequestProtoMsg {
  * method.
  */
 export interface QueryCommunityPoolRequestAmino {}
-export interface QueryCommunityPoolRequestAminoMsg {
-  type: "cosmos-sdk/QueryCommunityPoolRequest";
-  value: QueryCommunityPoolRequestAmino;
-}
 /**
  * QueryCommunityPoolRequest is the request type for the Query/CommunityPool RPC
  * method.
@@ -544,10 +476,6 @@ export interface QueryCommunityPoolResponseProtoMsg {
 export interface QueryCommunityPoolResponseAmino {
   /** pool defines community pool's coins. */
   pool: DecCoinAmino[];
-}
-export interface QueryCommunityPoolResponseAminoMsg {
-  type: "cosmos-sdk/QueryCommunityPoolResponse";
-  value: QueryCommunityPoolResponseAmino;
 }
 /**
  * QueryCommunityPoolResponse is the response type for the Query/CommunityPool
@@ -604,15 +532,6 @@ export const QueryParamsRequest = {
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryParamsRequest",
-      value: QueryParamsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value);
@@ -695,15 +614,6 @@ export const QueryParamsResponse = {
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryParamsResponse",
-      value: QueryParamsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value);
   },
@@ -782,15 +692,6 @@ export const QueryValidatorOutstandingRewardsRequest = {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
     return obj;
-  },
-  fromAminoMsg(object: QueryValidatorOutstandingRewardsRequestAminoMsg): QueryValidatorOutstandingRewardsRequest {
-    return QueryValidatorOutstandingRewardsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryValidatorOutstandingRewardsRequest): QueryValidatorOutstandingRewardsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryValidatorOutstandingRewardsRequest",
-      value: QueryValidatorOutstandingRewardsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryValidatorOutstandingRewardsRequestProtoMsg): QueryValidatorOutstandingRewardsRequest {
     return QueryValidatorOutstandingRewardsRequest.decode(message.value);
@@ -873,15 +774,6 @@ export const QueryValidatorOutstandingRewardsResponse = {
     obj.rewards = message.rewards ? ValidatorOutstandingRewards.toAmino(message.rewards) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryValidatorOutstandingRewardsResponseAminoMsg): QueryValidatorOutstandingRewardsResponse {
-    return QueryValidatorOutstandingRewardsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryValidatorOutstandingRewardsResponse): QueryValidatorOutstandingRewardsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryValidatorOutstandingRewardsResponse",
-      value: QueryValidatorOutstandingRewardsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryValidatorOutstandingRewardsResponseProtoMsg): QueryValidatorOutstandingRewardsResponse {
     return QueryValidatorOutstandingRewardsResponse.decode(message.value);
   },
@@ -960,15 +852,6 @@ export const QueryValidatorCommissionRequest = {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
     return obj;
-  },
-  fromAminoMsg(object: QueryValidatorCommissionRequestAminoMsg): QueryValidatorCommissionRequest {
-    return QueryValidatorCommissionRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryValidatorCommissionRequest): QueryValidatorCommissionRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryValidatorCommissionRequest",
-      value: QueryValidatorCommissionRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryValidatorCommissionRequestProtoMsg): QueryValidatorCommissionRequest {
     return QueryValidatorCommissionRequest.decode(message.value);
@@ -1050,15 +933,6 @@ export const QueryValidatorCommissionResponse = {
     const obj: any = {};
     obj.commission = message.commission ? ValidatorAccumulatedCommission.toAmino(message.commission) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: QueryValidatorCommissionResponseAminoMsg): QueryValidatorCommissionResponse {
-    return QueryValidatorCommissionResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryValidatorCommissionResponse): QueryValidatorCommissionResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryValidatorCommissionResponse",
-      value: QueryValidatorCommissionResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryValidatorCommissionResponseProtoMsg): QueryValidatorCommissionResponse {
     return QueryValidatorCommissionResponse.decode(message.value);
@@ -1187,15 +1061,6 @@ export const QueryValidatorSlashesRequest = {
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryValidatorSlashesRequestAminoMsg): QueryValidatorSlashesRequest {
-    return QueryValidatorSlashesRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryValidatorSlashesRequest): QueryValidatorSlashesRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryValidatorSlashesRequest",
-      value: QueryValidatorSlashesRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryValidatorSlashesRequestProtoMsg): QueryValidatorSlashesRequest {
     return QueryValidatorSlashesRequest.decode(message.value);
   },
@@ -1303,15 +1168,6 @@ export const QueryValidatorSlashesResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryValidatorSlashesResponseAminoMsg): QueryValidatorSlashesResponse {
-    return QueryValidatorSlashesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryValidatorSlashesResponse): QueryValidatorSlashesResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryValidatorSlashesResponse",
-      value: QueryValidatorSlashesResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryValidatorSlashesResponseProtoMsg): QueryValidatorSlashesResponse {
     return QueryValidatorSlashesResponse.decode(message.value);
   },
@@ -1405,15 +1261,6 @@ export const QueryDelegationRewardsRequest = {
     obj.validator_address = message.validatorAddress;
     return obj;
   },
-  fromAminoMsg(object: QueryDelegationRewardsRequestAminoMsg): QueryDelegationRewardsRequest {
-    return QueryDelegationRewardsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDelegationRewardsRequest): QueryDelegationRewardsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDelegationRewardsRequest",
-      value: QueryDelegationRewardsRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryDelegationRewardsRequestProtoMsg): QueryDelegationRewardsRequest {
     return QueryDelegationRewardsRequest.decode(message.value);
   },
@@ -1505,15 +1352,6 @@ export const QueryDelegationRewardsResponse = {
     }
     return obj;
   },
-  fromAminoMsg(object: QueryDelegationRewardsResponseAminoMsg): QueryDelegationRewardsResponse {
-    return QueryDelegationRewardsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDelegationRewardsResponse): QueryDelegationRewardsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDelegationRewardsResponse",
-      value: QueryDelegationRewardsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryDelegationRewardsResponseProtoMsg): QueryDelegationRewardsResponse {
     return QueryDelegationRewardsResponse.decode(message.value);
   },
@@ -1592,15 +1430,6 @@ export const QueryDelegationTotalRewardsRequest = {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     return obj;
-  },
-  fromAminoMsg(object: QueryDelegationTotalRewardsRequestAminoMsg): QueryDelegationTotalRewardsRequest {
-    return QueryDelegationTotalRewardsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDelegationTotalRewardsRequest): QueryDelegationTotalRewardsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDelegationTotalRewardsRequest",
-      value: QueryDelegationTotalRewardsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryDelegationTotalRewardsRequestProtoMsg): QueryDelegationTotalRewardsRequest {
     return QueryDelegationTotalRewardsRequest.decode(message.value);
@@ -1719,15 +1548,6 @@ export const QueryDelegationTotalRewardsResponse = {
     }
     return obj;
   },
-  fromAminoMsg(object: QueryDelegationTotalRewardsResponseAminoMsg): QueryDelegationTotalRewardsResponse {
-    return QueryDelegationTotalRewardsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDelegationTotalRewardsResponse): QueryDelegationTotalRewardsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDelegationTotalRewardsResponse",
-      value: QueryDelegationTotalRewardsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryDelegationTotalRewardsResponseProtoMsg): QueryDelegationTotalRewardsResponse {
     return QueryDelegationTotalRewardsResponse.decode(message.value);
   },
@@ -1806,15 +1626,6 @@ export const QueryDelegatorValidatorsRequest = {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     return obj;
-  },
-  fromAminoMsg(object: QueryDelegatorValidatorsRequestAminoMsg): QueryDelegatorValidatorsRequest {
-    return QueryDelegatorValidatorsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDelegatorValidatorsRequest): QueryDelegatorValidatorsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDelegatorValidatorsRequest",
-      value: QueryDelegatorValidatorsRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryDelegatorValidatorsRequestProtoMsg): QueryDelegatorValidatorsRequest {
     return QueryDelegatorValidatorsRequest.decode(message.value);
@@ -1907,15 +1718,6 @@ export const QueryDelegatorValidatorsResponse = {
     }
     return obj;
   },
-  fromAminoMsg(object: QueryDelegatorValidatorsResponseAminoMsg): QueryDelegatorValidatorsResponse {
-    return QueryDelegatorValidatorsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDelegatorValidatorsResponse): QueryDelegatorValidatorsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDelegatorValidatorsResponse",
-      value: QueryDelegatorValidatorsResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryDelegatorValidatorsResponseProtoMsg): QueryDelegatorValidatorsResponse {
     return QueryDelegatorValidatorsResponse.decode(message.value);
   },
@@ -1994,15 +1796,6 @@ export const QueryDelegatorWithdrawAddressRequest = {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     return obj;
-  },
-  fromAminoMsg(object: QueryDelegatorWithdrawAddressRequestAminoMsg): QueryDelegatorWithdrawAddressRequest {
-    return QueryDelegatorWithdrawAddressRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDelegatorWithdrawAddressRequest): QueryDelegatorWithdrawAddressRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDelegatorWithdrawAddressRequest",
-      value: QueryDelegatorWithdrawAddressRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryDelegatorWithdrawAddressRequestProtoMsg): QueryDelegatorWithdrawAddressRequest {
     return QueryDelegatorWithdrawAddressRequest.decode(message.value);
@@ -2083,15 +1876,6 @@ export const QueryDelegatorWithdrawAddressResponse = {
     obj.withdraw_address = message.withdrawAddress;
     return obj;
   },
-  fromAminoMsg(object: QueryDelegatorWithdrawAddressResponseAminoMsg): QueryDelegatorWithdrawAddressResponse {
-    return QueryDelegatorWithdrawAddressResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryDelegatorWithdrawAddressResponse): QueryDelegatorWithdrawAddressResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryDelegatorWithdrawAddressResponse",
-      value: QueryDelegatorWithdrawAddressResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QueryDelegatorWithdrawAddressResponseProtoMsg): QueryDelegatorWithdrawAddressResponse {
     return QueryDelegatorWithdrawAddressResponse.decode(message.value);
   },
@@ -2153,15 +1937,6 @@ export const QueryCommunityPoolRequest = {
   toAmino(_: QueryCommunityPoolRequest): QueryCommunityPoolRequestAmino {
     const obj: any = {};
     return obj;
-  },
-  fromAminoMsg(object: QueryCommunityPoolRequestAminoMsg): QueryCommunityPoolRequest {
-    return QueryCommunityPoolRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryCommunityPoolRequest): QueryCommunityPoolRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryCommunityPoolRequest",
-      value: QueryCommunityPoolRequest.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryCommunityPoolRequestProtoMsg): QueryCommunityPoolRequest {
     return QueryCommunityPoolRequest.decode(message.value);
@@ -2253,15 +2028,6 @@ export const QueryCommunityPoolResponse = {
       obj.pool = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: QueryCommunityPoolResponseAminoMsg): QueryCommunityPoolResponse {
-    return QueryCommunityPoolResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryCommunityPoolResponse): QueryCommunityPoolResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryCommunityPoolResponse",
-      value: QueryCommunityPoolResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QueryCommunityPoolResponseProtoMsg): QueryCommunityPoolResponse {
     return QueryCommunityPoolResponse.decode(message.value);

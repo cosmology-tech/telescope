@@ -25,10 +25,6 @@ export interface SendAuthorizationProtoMsg {
 export interface SendAuthorizationAmino {
   spend_limit: CoinAmino[];
 }
-export interface SendAuthorizationAminoMsg {
-  type: "cosmos-sdk/SendAuthorization";
-  value: SendAuthorizationAmino;
-}
 /**
  * SendAuthorization allows the grantee to spend up to spend_limit coins from
  * the granter's account.
@@ -117,15 +113,6 @@ export const SendAuthorization = {
       obj.spend_limit = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: SendAuthorizationAminoMsg): SendAuthorization {
-    return SendAuthorization.fromAmino(object.value);
-  },
-  toAminoMsg(message: SendAuthorization): SendAuthorizationAminoMsg {
-    return {
-      type: "cosmos-sdk/SendAuthorization",
-      value: SendAuthorization.toAmino(message)
-    };
   },
   fromProtoMsg(message: SendAuthorizationProtoMsg): SendAuthorization {
     return SendAuthorization.decode(message.value);

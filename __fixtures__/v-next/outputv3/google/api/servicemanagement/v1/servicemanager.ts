@@ -95,10 +95,6 @@ export interface ListServicesRequestAmino {
   /** @deprecated */
   consumer_id: string;
 }
-export interface ListServicesRequestAminoMsg {
-  type: "/google.api.servicemanagement.v1.ListServicesRequest";
-  value: ListServicesRequestAmino;
-}
 /** Request message for `ListServices` method. */
 export interface ListServicesRequestSDKType {
   producer_project_id: string;
@@ -125,10 +121,6 @@ export interface ListServicesResponseAmino {
   /** Token that can be passed to `ListServices` to resume a paginated query. */
   next_page_token: string;
 }
-export interface ListServicesResponseAminoMsg {
-  type: "/google.api.servicemanagement.v1.ListServicesResponse";
-  value: ListServicesResponseAmino;
-}
 /** Response message for `ListServices` method. */
 export interface ListServicesResponseSDKType {
   services: ManagedServiceSDKType[];
@@ -154,10 +146,6 @@ export interface GetServiceRequestAmino {
    */
   service_name: string;
 }
-export interface GetServiceRequestAminoMsg {
-  type: "/google.api.servicemanagement.v1.GetServiceRequest";
-  value: GetServiceRequestAmino;
-}
 /** Request message for `GetService` method. */
 export interface GetServiceRequestSDKType {
   service_name: string;
@@ -175,10 +163,6 @@ export interface CreateServiceRequestProtoMsg {
 export interface CreateServiceRequestAmino {
   /** Required. Initial values for the service resource. */
   service?: ManagedServiceAmino;
-}
-export interface CreateServiceRequestAminoMsg {
-  type: "/google.api.servicemanagement.v1.CreateServiceRequest";
-  value: CreateServiceRequestAmino;
 }
 /** Request message for CreateService method. */
 export interface CreateServiceRequestSDKType {
@@ -204,10 +188,6 @@ export interface DeleteServiceRequestAmino {
    */
   service_name: string;
 }
-export interface DeleteServiceRequestAminoMsg {
-  type: "/google.api.servicemanagement.v1.DeleteServiceRequest";
-  value: DeleteServiceRequestAmino;
-}
 /** Request message for DeleteService method. */
 export interface DeleteServiceRequestSDKType {
   service_name: string;
@@ -232,10 +212,6 @@ export interface UndeleteServiceRequestAmino {
    */
   service_name: string;
 }
-export interface UndeleteServiceRequestAminoMsg {
-  type: "/google.api.servicemanagement.v1.UndeleteServiceRequest";
-  value: UndeleteServiceRequestAmino;
-}
 /** Request message for UndeleteService method. */
 export interface UndeleteServiceRequestSDKType {
   service_name: string;
@@ -253,10 +229,6 @@ export interface UndeleteServiceResponseProtoMsg {
 export interface UndeleteServiceResponseAmino {
   /** Revived service resource. */
   service?: ManagedServiceAmino;
-}
-export interface UndeleteServiceResponseAminoMsg {
-  type: "/google.api.servicemanagement.v1.UndeleteServiceResponse";
-  value: UndeleteServiceResponseAmino;
 }
 /** Response message for UndeleteService method. */
 export interface UndeleteServiceResponseSDKType {
@@ -306,10 +278,6 @@ export interface GetServiceConfigRequestAmino {
    */
   view: GetServiceConfigRequest_ConfigView;
 }
-export interface GetServiceConfigRequestAminoMsg {
-  type: "/google.api.servicemanagement.v1.GetServiceConfigRequest";
-  value: GetServiceConfigRequestAmino;
-}
 /** Request message for GetServiceConfig method. */
 export interface GetServiceConfigRequestSDKType {
   service_name: string;
@@ -350,10 +318,6 @@ export interface ListServiceConfigsRequestAmino {
    */
   page_size: number;
 }
-export interface ListServiceConfigsRequestAminoMsg {
-  type: "/google.api.servicemanagement.v1.ListServiceConfigsRequest";
-  value: ListServiceConfigsRequestAmino;
-}
 /** Request message for ListServiceConfigs method. */
 export interface ListServiceConfigsRequestSDKType {
   service_name: string;
@@ -377,10 +341,6 @@ export interface ListServiceConfigsResponseAmino {
   service_configs: ServiceAmino[];
   /** The token of the next page of results. */
   next_page_token: string;
-}
-export interface ListServiceConfigsResponseAminoMsg {
-  type: "/google.api.servicemanagement.v1.ListServiceConfigsResponse";
-  value: ListServiceConfigsResponseAmino;
 }
 /** Response message for ListServiceConfigs method. */
 export interface ListServiceConfigsResponseSDKType {
@@ -410,10 +370,6 @@ export interface CreateServiceConfigRequestAmino {
   service_name: string;
   /** Required. The service configuration resource. */
   service_config?: ServiceAmino;
-}
-export interface CreateServiceConfigRequestAminoMsg {
-  type: "/google.api.servicemanagement.v1.CreateServiceConfigRequest";
-  value: CreateServiceConfigRequestAmino;
 }
 /** Request message for CreateServiceConfig method. */
 export interface CreateServiceConfigRequestSDKType {
@@ -456,10 +412,6 @@ export interface SubmitConfigSourceRequestAmino {
    */
   validate_only: boolean;
 }
-export interface SubmitConfigSourceRequestAminoMsg {
-  type: "/google.api.servicemanagement.v1.SubmitConfigSourceRequest";
-  value: SubmitConfigSourceRequestAmino;
-}
 /** Request message for SubmitConfigSource method. */
 export interface SubmitConfigSourceRequestSDKType {
   service_name: string;
@@ -479,10 +431,6 @@ export interface SubmitConfigSourceResponseProtoMsg {
 export interface SubmitConfigSourceResponseAmino {
   /** The generated service configuration. */
   service_config?: ServiceAmino;
-}
-export interface SubmitConfigSourceResponseAminoMsg {
-  type: "/google.api.servicemanagement.v1.SubmitConfigSourceResponse";
-  value: SubmitConfigSourceResponseAmino;
 }
 /** Response message for SubmitConfigSource method. */
 export interface SubmitConfigSourceResponseSDKType {
@@ -511,10 +459,6 @@ export interface CreateServiceRolloutRequestAmino {
   service_name: string;
   /** Required. The rollout resource. The `service_name` field is output only. */
   rollout?: RolloutAmino;
-}
-export interface CreateServiceRolloutRequestAminoMsg {
-  type: "/google.api.servicemanagement.v1.CreateServiceRolloutRequest";
-  value: CreateServiceRolloutRequestAmino;
 }
 /** Request message for 'CreateServiceRollout' */
 export interface CreateServiceRolloutRequestSDKType {
@@ -577,10 +521,6 @@ export interface ListServiceRolloutsRequestAmino {
    */
   filter: string;
 }
-export interface ListServiceRolloutsRequestAminoMsg {
-  type: "/google.api.servicemanagement.v1.ListServiceRolloutsRequest";
-  value: ListServiceRolloutsRequestAmino;
-}
 /** Request message for 'ListServiceRollouts' */
 export interface ListServiceRolloutsRequestSDKType {
   service_name: string;
@@ -605,10 +545,6 @@ export interface ListServiceRolloutsResponseAmino {
   rollouts: RolloutAmino[];
   /** The token of the next page of results. */
   next_page_token: string;
-}
-export interface ListServiceRolloutsResponseAminoMsg {
-  type: "/google.api.servicemanagement.v1.ListServiceRolloutsResponse";
-  value: ListServiceRolloutsResponseAmino;
 }
 /** Response message for ListServiceRollouts method. */
 export interface ListServiceRolloutsResponseSDKType {
@@ -638,10 +574,6 @@ export interface GetServiceRolloutRequestAmino {
   service_name: string;
   /** Required. The id of the rollout resource. */
   rollout_id: string;
-}
-export interface GetServiceRolloutRequestAminoMsg {
-  type: "/google.api.servicemanagement.v1.GetServiceRolloutRequest";
-  value: GetServiceRolloutRequestAmino;
 }
 /** Request message for GetServiceRollout method. */
 export interface GetServiceRolloutRequestSDKType {
@@ -690,10 +622,6 @@ export interface GenerateConfigReportRequestAmino {
    */
   old_config?: AnyAmino;
 }
-export interface GenerateConfigReportRequestAminoMsg {
-  type: "/google.api.servicemanagement.v1.GenerateConfigReportRequest";
-  value: GenerateConfigReportRequestAmino;
-}
 /** Request message for GenerateConfigReport method. */
 export interface GenerateConfigReportRequestSDKType {
   new_config?: AnySDKType;
@@ -738,10 +666,6 @@ export interface GenerateConfigReportResponseAmino {
    * belongs to.
    */
   diagnostics: DiagnosticAmino[];
-}
-export interface GenerateConfigReportResponseAminoMsg {
-  type: "/google.api.servicemanagement.v1.GenerateConfigReportResponse";
-  value: GenerateConfigReportResponseAmino;
 }
 /** Response message for GenerateConfigReport method. */
 export interface GenerateConfigReportResponseSDKType {
@@ -857,9 +781,6 @@ export const ListServicesRequest = {
     obj.consumer_id = message.consumerId;
     return obj;
   },
-  fromAminoMsg(object: ListServicesRequestAminoMsg): ListServicesRequest {
-    return ListServicesRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListServicesRequestProtoMsg): ListServicesRequest {
     return ListServicesRequest.decode(message.value);
   },
@@ -964,9 +885,6 @@ export const ListServicesResponse = {
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromAminoMsg(object: ListServicesResponseAminoMsg): ListServicesResponse {
-    return ListServicesResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListServicesResponseProtoMsg): ListServicesResponse {
     return ListServicesResponse.decode(message.value);
   },
@@ -1044,9 +962,6 @@ export const GetServiceRequest = {
     const obj: any = {};
     obj.service_name = message.serviceName;
     return obj;
-  },
-  fromAminoMsg(object: GetServiceRequestAminoMsg): GetServiceRequest {
-    return GetServiceRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GetServiceRequestProtoMsg): GetServiceRequest {
     return GetServiceRequest.decode(message.value);
@@ -1128,9 +1043,6 @@ export const CreateServiceRequest = {
     obj.service = message.service ? ManagedService.toAmino(message.service) : undefined;
     return obj;
   },
-  fromAminoMsg(object: CreateServiceRequestAminoMsg): CreateServiceRequest {
-    return CreateServiceRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: CreateServiceRequestProtoMsg): CreateServiceRequest {
     return CreateServiceRequest.decode(message.value);
   },
@@ -1209,9 +1121,6 @@ export const DeleteServiceRequest = {
     obj.service_name = message.serviceName;
     return obj;
   },
-  fromAminoMsg(object: DeleteServiceRequestAminoMsg): DeleteServiceRequest {
-    return DeleteServiceRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: DeleteServiceRequestProtoMsg): DeleteServiceRequest {
     return DeleteServiceRequest.decode(message.value);
   },
@@ -1289,9 +1198,6 @@ export const UndeleteServiceRequest = {
     const obj: any = {};
     obj.service_name = message.serviceName;
     return obj;
-  },
-  fromAminoMsg(object: UndeleteServiceRequestAminoMsg): UndeleteServiceRequest {
-    return UndeleteServiceRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: UndeleteServiceRequestProtoMsg): UndeleteServiceRequest {
     return UndeleteServiceRequest.decode(message.value);
@@ -1372,9 +1278,6 @@ export const UndeleteServiceResponse = {
     const obj: any = {};
     obj.service = message.service ? ManagedService.toAmino(message.service) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: UndeleteServiceResponseAminoMsg): UndeleteServiceResponse {
-    return UndeleteServiceResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: UndeleteServiceResponseProtoMsg): UndeleteServiceResponse {
     return UndeleteServiceResponse.decode(message.value);
@@ -1482,9 +1385,6 @@ export const GetServiceConfigRequest = {
     obj.view = message.view;
     return obj;
   },
-  fromAminoMsg(object: GetServiceConfigRequestAminoMsg): GetServiceConfigRequest {
-    return GetServiceConfigRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: GetServiceConfigRequestProtoMsg): GetServiceConfigRequest {
     return GetServiceConfigRequest.decode(message.value);
   },
@@ -1591,9 +1491,6 @@ export const ListServiceConfigsRequest = {
     obj.page_size = message.pageSize;
     return obj;
   },
-  fromAminoMsg(object: ListServiceConfigsRequestAminoMsg): ListServiceConfigsRequest {
-    return ListServiceConfigsRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListServiceConfigsRequestProtoMsg): ListServiceConfigsRequest {
     return ListServiceConfigsRequest.decode(message.value);
   },
@@ -1698,9 +1595,6 @@ export const ListServiceConfigsResponse = {
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromAminoMsg(object: ListServiceConfigsResponseAminoMsg): ListServiceConfigsResponse {
-    return ListServiceConfigsResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListServiceConfigsResponseProtoMsg): ListServiceConfigsResponse {
     return ListServiceConfigsResponse.decode(message.value);
   },
@@ -1794,9 +1688,6 @@ export const CreateServiceConfigRequest = {
     obj.service_name = message.serviceName;
     obj.service_config = message.serviceConfig ? Service.toAmino(message.serviceConfig) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: CreateServiceConfigRequestAminoMsg): CreateServiceConfigRequest {
-    return CreateServiceConfigRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: CreateServiceConfigRequestProtoMsg): CreateServiceConfigRequest {
     return CreateServiceConfigRequest.decode(message.value);
@@ -1906,9 +1797,6 @@ export const SubmitConfigSourceRequest = {
     obj.validate_only = message.validateOnly;
     return obj;
   },
-  fromAminoMsg(object: SubmitConfigSourceRequestAminoMsg): SubmitConfigSourceRequest {
-    return SubmitConfigSourceRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: SubmitConfigSourceRequestProtoMsg): SubmitConfigSourceRequest {
     return SubmitConfigSourceRequest.decode(message.value);
   },
@@ -1988,9 +1876,6 @@ export const SubmitConfigSourceResponse = {
     const obj: any = {};
     obj.service_config = message.serviceConfig ? Service.toAmino(message.serviceConfig) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: SubmitConfigSourceResponseAminoMsg): SubmitConfigSourceResponse {
-    return SubmitConfigSourceResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: SubmitConfigSourceResponseProtoMsg): SubmitConfigSourceResponse {
     return SubmitConfigSourceResponse.decode(message.value);
@@ -2085,9 +1970,6 @@ export const CreateServiceRolloutRequest = {
     obj.service_name = message.serviceName;
     obj.rollout = message.rollout ? Rollout.toAmino(message.rollout) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: CreateServiceRolloutRequestAminoMsg): CreateServiceRolloutRequest {
-    return CreateServiceRolloutRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: CreateServiceRolloutRequestProtoMsg): CreateServiceRolloutRequest {
     return CreateServiceRolloutRequest.decode(message.value);
@@ -2209,9 +2091,6 @@ export const ListServiceRolloutsRequest = {
     obj.filter = message.filter;
     return obj;
   },
-  fromAminoMsg(object: ListServiceRolloutsRequestAminoMsg): ListServiceRolloutsRequest {
-    return ListServiceRolloutsRequest.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListServiceRolloutsRequestProtoMsg): ListServiceRolloutsRequest {
     return ListServiceRolloutsRequest.decode(message.value);
   },
@@ -2316,9 +2195,6 @@ export const ListServiceRolloutsResponse = {
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromAminoMsg(object: ListServiceRolloutsResponseAminoMsg): ListServiceRolloutsResponse {
-    return ListServiceRolloutsResponse.fromAmino(object.value);
-  },
   fromProtoMsg(message: ListServiceRolloutsResponseProtoMsg): ListServiceRolloutsResponse {
     return ListServiceRolloutsResponse.decode(message.value);
   },
@@ -2410,9 +2286,6 @@ export const GetServiceRolloutRequest = {
     obj.service_name = message.serviceName;
     obj.rollout_id = message.rolloutId;
     return obj;
-  },
-  fromAminoMsg(object: GetServiceRolloutRequestAminoMsg): GetServiceRolloutRequest {
-    return GetServiceRolloutRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GetServiceRolloutRequestProtoMsg): GetServiceRolloutRequest {
     return GetServiceRolloutRequest.decode(message.value);
@@ -2509,9 +2382,6 @@ export const GenerateConfigReportRequest = {
     obj.new_config = message.newConfig ? Any.toAmino(message.newConfig) : undefined;
     obj.old_config = message.oldConfig ? Any.toAmino(message.oldConfig) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GenerateConfigReportRequestAminoMsg): GenerateConfigReportRequest {
-    return GenerateConfigReportRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GenerateConfigReportRequestProtoMsg): GenerateConfigReportRequest {
     return GenerateConfigReportRequest.decode(message.value);
@@ -2656,9 +2526,6 @@ export const GenerateConfigReportResponse = {
       obj.diagnostics = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: GenerateConfigReportResponseAminoMsg): GenerateConfigReportResponse {
-    return GenerateConfigReportResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: GenerateConfigReportResponseProtoMsg): GenerateConfigReportResponse {
     return GenerateConfigReportResponse.decode(message.value);

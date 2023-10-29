@@ -40,10 +40,6 @@ export interface GenesisStateAmino {
   /** params defines all the paramaters of related to tally. */
   tally_params?: TallyParamsAmino;
 }
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/v1/GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the gov module's genesis state. */
 export interface GenesisStateSDKType {
   starting_proposal_id: bigint;
@@ -247,15 +243,6 @@ export const GenesisState = {
     obj.voting_params = message.votingParams ? VotingParams.toAmino(message.votingParams) : undefined;
     obj.tally_params = message.tallyParams ? TallyParams.toAmino(message.tallyParams) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/v1/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

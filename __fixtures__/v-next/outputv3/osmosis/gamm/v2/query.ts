@@ -23,10 +23,6 @@ export interface QuerySpotPriceRequestAmino {
   base_asset_denom: string;
   quote_asset_denom: string;
 }
-export interface QuerySpotPriceRequestAminoMsg {
-  type: "osmosis/gamm/v2/query-spot-price-request";
-  value: QuerySpotPriceRequestAmino;
-}
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
  * query.
@@ -55,10 +51,6 @@ export interface QuerySpotPriceResponseProtoMsg {
 export interface QuerySpotPriceResponseAmino {
   /** String of the Dec. Ex) 10.203uatom */
   spot_price: string;
-}
-export interface QuerySpotPriceResponseAminoMsg {
-  type: "osmosis/gamm/v2/query-spot-price-response";
-  value: QuerySpotPriceResponseAmino;
 }
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
@@ -163,15 +155,6 @@ export const QuerySpotPriceRequest = {
     obj.quote_asset_denom = message.quoteAssetDenom;
     return obj;
   },
-  fromAminoMsg(object: QuerySpotPriceRequestAminoMsg): QuerySpotPriceRequest {
-    return QuerySpotPriceRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySpotPriceRequest): QuerySpotPriceRequestAminoMsg {
-    return {
-      type: "osmosis/gamm/v2/query-spot-price-request",
-      value: QuerySpotPriceRequest.toAmino(message)
-    };
-  },
   fromProtoMsg(message: QuerySpotPriceRequestProtoMsg): QuerySpotPriceRequest {
     return QuerySpotPriceRequest.decode(message.value);
   },
@@ -250,15 +233,6 @@ export const QuerySpotPriceResponse = {
     const obj: any = {};
     obj.spot_price = message.spotPrice;
     return obj;
-  },
-  fromAminoMsg(object: QuerySpotPriceResponseAminoMsg): QuerySpotPriceResponse {
-    return QuerySpotPriceResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySpotPriceResponse): QuerySpotPriceResponseAminoMsg {
-    return {
-      type: "osmosis/gamm/v2/query-spot-price-response",
-      value: QuerySpotPriceResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: QuerySpotPriceResponseProtoMsg): QuerySpotPriceResponse {
     return QuerySpotPriceResponse.decode(message.value);

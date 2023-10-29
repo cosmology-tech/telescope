@@ -18,10 +18,6 @@ export interface MsgLockTokensAmino {
   duration?: DurationAmino;
   coins: CoinAmino[];
 }
-export interface MsgLockTokensAminoMsg {
-  type: "osmosis/lockup/lock-tokens";
-  value: MsgLockTokensAmino;
-}
 export interface MsgLockTokensSDKType {
   owner: string;
   duration: DurationSDKType;
@@ -37,10 +33,6 @@ export interface MsgLockTokensResponseProtoMsg {
 export interface MsgLockTokensResponseAmino {
   ID: string;
 }
-export interface MsgLockTokensResponseAminoMsg {
-  type: "osmosis/lockup/lock-tokens-response";
-  value: MsgLockTokensResponseAmino;
-}
 export interface MsgLockTokensResponseSDKType {
   ID: bigint;
 }
@@ -54,10 +46,6 @@ export interface MsgBeginUnlockingAllProtoMsg {
 export interface MsgBeginUnlockingAllAmino {
   owner: string;
 }
-export interface MsgBeginUnlockingAllAminoMsg {
-  type: "osmosis/lockup/begin-unlock-tokens";
-  value: MsgBeginUnlockingAllAmino;
-}
 export interface MsgBeginUnlockingAllSDKType {
   owner: string;
 }
@@ -70,10 +58,6 @@ export interface MsgBeginUnlockingAllResponseProtoMsg {
 }
 export interface MsgBeginUnlockingAllResponseAmino {
   unlocks: PeriodLockAmino[];
-}
-export interface MsgBeginUnlockingAllResponseAminoMsg {
-  type: "osmosis/lockup/begin-unlocking-all-response";
-  value: MsgBeginUnlockingAllResponseAmino;
 }
 export interface MsgBeginUnlockingAllResponseSDKType {
   unlocks: PeriodLockSDKType[];
@@ -94,10 +78,6 @@ export interface MsgBeginUnlockingAmino {
   /** Amount of unlocking coins. Unlock all if not set. */
   coins: CoinAmino[];
 }
-export interface MsgBeginUnlockingAminoMsg {
-  type: "osmosis/lockup/begin-unlock-period-lock";
-  value: MsgBeginUnlockingAmino;
-}
 export interface MsgBeginUnlockingSDKType {
   owner: string;
   ID: bigint;
@@ -112,10 +92,6 @@ export interface MsgBeginUnlockingResponseProtoMsg {
 }
 export interface MsgBeginUnlockingResponseAmino {
   success: boolean;
-}
-export interface MsgBeginUnlockingResponseAminoMsg {
-  type: "osmosis/lockup/begin-unlocking-response";
-  value: MsgBeginUnlockingResponseAmino;
 }
 export interface MsgBeginUnlockingResponseSDKType {
   success: boolean;
@@ -150,10 +126,6 @@ export interface MsgExtendLockupAmino {
    */
   duration?: DurationAmino;
 }
-export interface MsgExtendLockupAminoMsg {
-  type: "osmosis/lockup/extend-lockup";
-  value: MsgExtendLockupAmino;
-}
 /**
  * MsgExtendLockup extends the existing lockup's duration.
  * The new duration is longer than the original.
@@ -172,10 +144,6 @@ export interface MsgExtendLockupResponseProtoMsg {
 }
 export interface MsgExtendLockupResponseAmino {
   success: boolean;
-}
-export interface MsgExtendLockupResponseAminoMsg {
-  type: "osmosis/lockup/extend-lockup-response";
-  value: MsgExtendLockupResponseAmino;
 }
 export interface MsgExtendLockupResponseSDKType {
   success: boolean;
@@ -204,10 +172,6 @@ export interface MsgForceUnlockAmino {
   /** Amount of unlocking coins. Unlock all if not set. */
   coins: CoinAmino[];
 }
-export interface MsgForceUnlockAminoMsg {
-  type: "osmosis/lockup/force-unlock";
-  value: MsgForceUnlockAmino;
-}
 /**
  * MsgForceUnlock unlocks locks immediately for
  * addresses registered via governance.
@@ -226,10 +190,6 @@ export interface MsgForceUnlockResponseProtoMsg {
 }
 export interface MsgForceUnlockResponseAmino {
   success: boolean;
-}
-export interface MsgForceUnlockResponseAminoMsg {
-  type: "osmosis/lockup/force-unlock-response";
-  value: MsgForceUnlockResponseAmino;
 }
 export interface MsgForceUnlockResponseSDKType {
   success: boolean;
@@ -342,15 +302,6 @@ export const MsgLockTokens = {
     }
     return obj;
   },
-  fromAminoMsg(object: MsgLockTokensAminoMsg): MsgLockTokens {
-    return MsgLockTokens.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgLockTokens): MsgLockTokensAminoMsg {
-    return {
-      type: "osmosis/lockup/lock-tokens",
-      value: MsgLockTokens.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgLockTokensProtoMsg): MsgLockTokens {
     return MsgLockTokens.decode(message.value);
   },
@@ -432,15 +383,6 @@ export const MsgLockTokensResponse = {
     obj.ID = message.ID ? message.ID.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgLockTokensResponseAminoMsg): MsgLockTokensResponse {
-    return MsgLockTokensResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgLockTokensResponse): MsgLockTokensResponseAminoMsg {
-    return {
-      type: "osmosis/lockup/lock-tokens-response",
-      value: MsgLockTokensResponse.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgLockTokensResponseProtoMsg): MsgLockTokensResponse {
     return MsgLockTokensResponse.decode(message.value);
   },
@@ -519,15 +461,6 @@ export const MsgBeginUnlockingAll = {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
-  },
-  fromAminoMsg(object: MsgBeginUnlockingAllAminoMsg): MsgBeginUnlockingAll {
-    return MsgBeginUnlockingAll.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgBeginUnlockingAll): MsgBeginUnlockingAllAminoMsg {
-    return {
-      type: "osmosis/lockup/begin-unlock-tokens",
-      value: MsgBeginUnlockingAll.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgBeginUnlockingAllProtoMsg): MsgBeginUnlockingAll {
     return MsgBeginUnlockingAll.decode(message.value);
@@ -619,15 +552,6 @@ export const MsgBeginUnlockingAllResponse = {
       obj.unlocks = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: MsgBeginUnlockingAllResponseAminoMsg): MsgBeginUnlockingAllResponse {
-    return MsgBeginUnlockingAllResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgBeginUnlockingAllResponse): MsgBeginUnlockingAllResponseAminoMsg {
-    return {
-      type: "osmosis/lockup/begin-unlocking-all-response",
-      value: MsgBeginUnlockingAllResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgBeginUnlockingAllResponseProtoMsg): MsgBeginUnlockingAllResponse {
     return MsgBeginUnlockingAllResponse.decode(message.value);
@@ -750,15 +674,6 @@ export const MsgBeginUnlocking = {
     }
     return obj;
   },
-  fromAminoMsg(object: MsgBeginUnlockingAminoMsg): MsgBeginUnlocking {
-    return MsgBeginUnlocking.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgBeginUnlocking): MsgBeginUnlockingAminoMsg {
-    return {
-      type: "osmosis/lockup/begin-unlock-period-lock",
-      value: MsgBeginUnlocking.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgBeginUnlockingProtoMsg): MsgBeginUnlocking {
     return MsgBeginUnlocking.decode(message.value);
   },
@@ -837,15 +752,6 @@ export const MsgBeginUnlockingResponse = {
     const obj: any = {};
     obj.success = message.success;
     return obj;
-  },
-  fromAminoMsg(object: MsgBeginUnlockingResponseAminoMsg): MsgBeginUnlockingResponse {
-    return MsgBeginUnlockingResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgBeginUnlockingResponse): MsgBeginUnlockingResponseAminoMsg {
-    return {
-      type: "osmosis/lockup/begin-unlocking-response",
-      value: MsgBeginUnlockingResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgBeginUnlockingResponseProtoMsg): MsgBeginUnlockingResponse {
     return MsgBeginUnlockingResponse.decode(message.value);
@@ -958,15 +864,6 @@ export const MsgExtendLockup = {
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgExtendLockupAminoMsg): MsgExtendLockup {
-    return MsgExtendLockup.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgExtendLockup): MsgExtendLockupAminoMsg {
-    return {
-      type: "osmosis/lockup/extend-lockup",
-      value: MsgExtendLockup.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgExtendLockupProtoMsg): MsgExtendLockup {
     return MsgExtendLockup.decode(message.value);
   },
@@ -1045,15 +942,6 @@ export const MsgExtendLockupResponse = {
     const obj: any = {};
     obj.success = message.success;
     return obj;
-  },
-  fromAminoMsg(object: MsgExtendLockupResponseAminoMsg): MsgExtendLockupResponse {
-    return MsgExtendLockupResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgExtendLockupResponse): MsgExtendLockupResponseAminoMsg {
-    return {
-      type: "osmosis/lockup/extend-lockup-response",
-      value: MsgExtendLockupResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgExtendLockupResponseProtoMsg): MsgExtendLockupResponse {
     return MsgExtendLockupResponse.decode(message.value);
@@ -1176,15 +1064,6 @@ export const MsgForceUnlock = {
     }
     return obj;
   },
-  fromAminoMsg(object: MsgForceUnlockAminoMsg): MsgForceUnlock {
-    return MsgForceUnlock.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgForceUnlock): MsgForceUnlockAminoMsg {
-    return {
-      type: "osmosis/lockup/force-unlock",
-      value: MsgForceUnlock.toAmino(message)
-    };
-  },
   fromProtoMsg(message: MsgForceUnlockProtoMsg): MsgForceUnlock {
     return MsgForceUnlock.decode(message.value);
   },
@@ -1263,15 +1142,6 @@ export const MsgForceUnlockResponse = {
     const obj: any = {};
     obj.success = message.success;
     return obj;
-  },
-  fromAminoMsg(object: MsgForceUnlockResponseAminoMsg): MsgForceUnlockResponse {
-    return MsgForceUnlockResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgForceUnlockResponse): MsgForceUnlockResponseAminoMsg {
-    return {
-      type: "osmosis/lockup/force-unlock-response",
-      value: MsgForceUnlockResponse.toAmino(message)
-    };
   },
   fromProtoMsg(message: MsgForceUnlockResponseProtoMsg): MsgForceUnlockResponse {
     return MsgForceUnlockResponse.decode(message.value);

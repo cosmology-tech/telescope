@@ -44,10 +44,6 @@ export interface RetryInfoAmino {
   /** Clients should wait at least this long between retrying the same request. */
   retry_delay?: DurationAmino;
 }
-export interface RetryInfoAminoMsg {
-  type: "/google.rpc.RetryInfo";
-  value: RetryInfoAmino;
-}
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
  * the recommendation here or retry when this information is missing from error
@@ -83,10 +79,6 @@ export interface DebugInfoAmino {
   stack_entries: string[];
   /** Additional debugging information provided by the server. */
   detail: string;
-}
-export interface DebugInfoAminoMsg {
-  type: "/google.rpc.DebugInfo";
-  value: DebugInfoAmino;
 }
 /** Describes additional debugging info. */
 export interface DebugInfoSDKType {
@@ -130,10 +122,6 @@ export interface QuotaFailureProtoMsg {
 export interface QuotaFailureAmino {
   /** Describes all quota violations. */
   violations: QuotaFailure_ViolationAmino[];
-}
-export interface QuotaFailureAminoMsg {
-  type: "/google.rpc.QuotaFailure";
-  value: QuotaFailureAmino;
 }
 /**
  * Describes how a quota check failed.
@@ -199,10 +187,6 @@ export interface QuotaFailure_ViolationAmino {
    */
   description: string;
 }
-export interface QuotaFailure_ViolationAminoMsg {
-  type: "/google.rpc.Violation";
-  value: QuotaFailure_ViolationAmino;
-}
 /**
  * A message type used to describe a single quota violation.  For example, a
  * daily quota or a custom quota that was exceeded.
@@ -222,10 +206,6 @@ export interface ErrorInfo_MetadataEntryProtoMsg {
 export interface ErrorInfo_MetadataEntryAmino {
   key: string;
   value: string;
-}
-export interface ErrorInfo_MetadataEntryAminoMsg {
-  type: string;
-  value: ErrorInfo_MetadataEntryAmino;
 }
 export interface ErrorInfo_MetadataEntrySDKType {
   key: string;
@@ -349,10 +329,6 @@ export interface ErrorInfoAmino {
     [key: string]: string;
   };
 }
-export interface ErrorInfoAminoMsg {
-  type: "/google.rpc.ErrorInfo";
-  value: ErrorInfoAmino;
-}
 /**
  * Describes the cause of the error with structured details.
  * 
@@ -412,10 +388,6 @@ export interface PreconditionFailureAmino {
   /** Describes all precondition violations. */
   violations: PreconditionFailure_ViolationAmino[];
 }
-export interface PreconditionFailureAminoMsg {
-  type: "/google.rpc.PreconditionFailure";
-  value: PreconditionFailureAmino;
-}
 /**
  * Describes what preconditions have failed.
  * 
@@ -474,10 +446,6 @@ export interface PreconditionFailure_ViolationAmino {
    */
   description: string;
 }
-export interface PreconditionFailure_ViolationAminoMsg {
-  type: "/google.rpc.Violation";
-  value: PreconditionFailure_ViolationAmino;
-}
 /** A message type used to describe a single precondition failure. */
 export interface PreconditionFailure_ViolationSDKType {
   type: string;
@@ -503,10 +471,6 @@ export interface BadRequestProtoMsg {
 export interface BadRequestAmino {
   /** Describes all violations in a client request. */
   field_violations: BadRequest_FieldViolationAmino[];
-}
-export interface BadRequestAminoMsg {
-  type: "/google.rpc.BadRequest";
-  value: BadRequestAmino;
 }
 /**
  * Describes violations in a client request. This error type focuses on the
@@ -540,10 +504,6 @@ export interface BadRequest_FieldViolationAmino {
   field: string;
   /** A description of why the request element is bad. */
   description: string;
-}
-export interface BadRequest_FieldViolationAminoMsg {
-  type: "/google.rpc.FieldViolation";
-  value: BadRequest_FieldViolationAmino;
 }
 /** A message type used to describe a single bad request field. */
 export interface BadRequest_FieldViolationSDKType {
@@ -585,10 +545,6 @@ export interface RequestInfoAmino {
    * stack trace that can be sent back to the service provider for debugging.
    */
   serving_data: string;
-}
-export interface RequestInfoAminoMsg {
-  type: "/google.rpc.RequestInfo";
-  value: RequestInfoAmino;
 }
 /**
  * Contains metadata about the request that clients can attach when filing a bug
@@ -656,10 +612,6 @@ export interface ResourceInfoAmino {
    */
   description: string;
 }
-export interface ResourceInfoAminoMsg {
-  type: "/google.rpc.ResourceInfo";
-  value: ResourceInfoAmino;
-}
 /** Describes the resource that is being accessed. */
 export interface ResourceInfoSDKType {
   resource_type: string;
@@ -693,10 +645,6 @@ export interface HelpAmino {
   /** URL(s) pointing to additional information on handling the current error. */
   links: Help_LinkAmino[];
 }
-export interface HelpAminoMsg {
-  type: "/google.rpc.Help";
-  value: HelpAmino;
-}
 /**
  * Provides links to documentation or for performing an out of band action.
  * 
@@ -724,10 +672,6 @@ export interface Help_LinkAmino {
   description: string;
   /** The URL of the link. */
   url: string;
-}
-export interface Help_LinkAminoMsg {
-  type: "/google.rpc.Link";
-  value: Help_LinkAmino;
 }
 /** Describes a URL link. */
 export interface Help_LinkSDKType {
@@ -765,10 +709,6 @@ export interface LocalizedMessageAmino {
   locale: string;
   /** The localized error message in the above locale. */
   message: string;
-}
-export interface LocalizedMessageAminoMsg {
-  type: "/google.rpc.LocalizedMessage";
-  value: LocalizedMessageAmino;
 }
 /**
  * Provides a localized error message that is safe to return to the user
@@ -844,9 +784,6 @@ export const RetryInfo = {
     const obj: any = {};
     obj.retry_delay = message.retryDelay ? Duration.toAmino(message.retryDelay) : undefined;
     return obj;
-  },
-  fromAminoMsg(object: RetryInfoAminoMsg): RetryInfo {
-    return RetryInfo.fromAmino(object.value);
   },
   fromProtoMsg(message: RetryInfoProtoMsg): RetryInfo {
     return RetryInfo.decode(message.value);
@@ -952,9 +889,6 @@ export const DebugInfo = {
     obj.detail = message.detail;
     return obj;
   },
-  fromAminoMsg(object: DebugInfoAminoMsg): DebugInfo {
-    return DebugInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: DebugInfoProtoMsg): DebugInfo {
     return DebugInfo.decode(message.value);
   },
@@ -1044,9 +978,6 @@ export const QuotaFailure = {
       obj.violations = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: QuotaFailureAminoMsg): QuotaFailure {
-    return QuotaFailure.fromAmino(object.value);
   },
   fromProtoMsg(message: QuotaFailureProtoMsg): QuotaFailure {
     return QuotaFailure.decode(message.value);
@@ -1140,9 +1071,6 @@ export const QuotaFailure_Violation = {
     obj.description = message.description;
     return obj;
   },
-  fromAminoMsg(object: QuotaFailure_ViolationAminoMsg): QuotaFailure_Violation {
-    return QuotaFailure_Violation.fromAmino(object.value);
-  },
   fromProtoMsg(message: QuotaFailure_ViolationProtoMsg): QuotaFailure_Violation {
     return QuotaFailure_Violation.decode(message.value);
   },
@@ -1233,9 +1161,6 @@ export const ErrorInfo_MetadataEntry = {
     obj.key = message.key;
     obj.value = message.value;
     return obj;
-  },
-  fromAminoMsg(object: ErrorInfo_MetadataEntryAminoMsg): ErrorInfo_MetadataEntry {
-    return ErrorInfo_MetadataEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: ErrorInfo_MetadataEntryProtoMsg): ErrorInfo_MetadataEntry {
     return ErrorInfo_MetadataEntry.decode(message.value);
@@ -1380,9 +1305,6 @@ export const ErrorInfo = {
     }
     return obj;
   },
-  fromAminoMsg(object: ErrorInfoAminoMsg): ErrorInfo {
-    return ErrorInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: ErrorInfoProtoMsg): ErrorInfo {
     return ErrorInfo.decode(message.value);
   },
@@ -1472,9 +1394,6 @@ export const PreconditionFailure = {
       obj.violations = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: PreconditionFailureAminoMsg): PreconditionFailure {
-    return PreconditionFailure.fromAmino(object.value);
   },
   fromProtoMsg(message: PreconditionFailureProtoMsg): PreconditionFailure {
     return PreconditionFailure.decode(message.value);
@@ -1582,9 +1501,6 @@ export const PreconditionFailure_Violation = {
     obj.description = message.description;
     return obj;
   },
-  fromAminoMsg(object: PreconditionFailure_ViolationAminoMsg): PreconditionFailure_Violation {
-    return PreconditionFailure_Violation.fromAmino(object.value);
-  },
   fromProtoMsg(message: PreconditionFailure_ViolationProtoMsg): PreconditionFailure_Violation {
     return PreconditionFailure_Violation.decode(message.value);
   },
@@ -1674,9 +1590,6 @@ export const BadRequest = {
       obj.field_violations = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: BadRequestAminoMsg): BadRequest {
-    return BadRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: BadRequestProtoMsg): BadRequest {
     return BadRequest.decode(message.value);
@@ -1770,9 +1683,6 @@ export const BadRequest_FieldViolation = {
     obj.description = message.description;
     return obj;
   },
-  fromAminoMsg(object: BadRequest_FieldViolationAminoMsg): BadRequest_FieldViolation {
-    return BadRequest_FieldViolation.fromAmino(object.value);
-  },
   fromProtoMsg(message: BadRequest_FieldViolationProtoMsg): BadRequest_FieldViolation {
     return BadRequest_FieldViolation.decode(message.value);
   },
@@ -1864,9 +1774,6 @@ export const RequestInfo = {
     obj.request_id = message.requestId;
     obj.serving_data = message.servingData;
     return obj;
-  },
-  fromAminoMsg(object: RequestInfoAminoMsg): RequestInfo {
-    return RequestInfo.fromAmino(object.value);
   },
   fromProtoMsg(message: RequestInfoProtoMsg): RequestInfo {
     return RequestInfo.decode(message.value);
@@ -1988,9 +1895,6 @@ export const ResourceInfo = {
     obj.description = message.description;
     return obj;
   },
-  fromAminoMsg(object: ResourceInfoAminoMsg): ResourceInfo {
-    return ResourceInfo.fromAmino(object.value);
-  },
   fromProtoMsg(message: ResourceInfoProtoMsg): ResourceInfo {
     return ResourceInfo.decode(message.value);
   },
@@ -2080,9 +1984,6 @@ export const Help = {
       obj.links = [];
     }
     return obj;
-  },
-  fromAminoMsg(object: HelpAminoMsg): Help {
-    return Help.fromAmino(object.value);
   },
   fromProtoMsg(message: HelpProtoMsg): Help {
     return Help.decode(message.value);
@@ -2176,9 +2077,6 @@ export const Help_Link = {
     obj.url = message.url;
     return obj;
   },
-  fromAminoMsg(object: Help_LinkAminoMsg): Help_Link {
-    return Help_Link.fromAmino(object.value);
-  },
   fromProtoMsg(message: Help_LinkProtoMsg): Help_Link {
     return Help_Link.decode(message.value);
   },
@@ -2270,9 +2168,6 @@ export const LocalizedMessage = {
     obj.locale = message.locale;
     obj.message = message.message;
     return obj;
-  },
-  fromAminoMsg(object: LocalizedMessageAminoMsg): LocalizedMessage {
-    return LocalizedMessage.fromAmino(object.value);
   },
   fromProtoMsg(message: LocalizedMessageProtoMsg): LocalizedMessage {
     return LocalizedMessage.decode(message.value);
