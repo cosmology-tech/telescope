@@ -16,10 +16,6 @@ export interface ConsensusParamsProtoMsg {
   typeUrl: "/tendermint.types.ConsensusParams";
   value: Uint8Array;
 }
-export interface ConsensusParamsProtoMsg {
-  typeUrl: "/tendermint.types.ConsensusParams";
-  value: Uint8Array;
-}
 /**
  * ConsensusParams contains consensus critical parameters that determine the
  * validity of blocks.
@@ -63,10 +59,6 @@ export interface BlockParams {
    * Not exposed to the application.
    */
   timeIotaMs: bigint;
-}
-export interface BlockParamsProtoMsg {
-  typeUrl: "/tendermint.types.BlockParams";
-  value: Uint8Array;
 }
 export interface BlockParamsProtoMsg {
   typeUrl: "/tendermint.types.BlockParams";
@@ -130,10 +122,6 @@ export interface EvidenceParamsProtoMsg {
   typeUrl: "/tendermint.types.EvidenceParams";
   value: Uint8Array;
 }
-export interface EvidenceParamsProtoMsg {
-  typeUrl: "/tendermint.types.EvidenceParams";
-  value: Uint8Array;
-}
 /** EvidenceParams determine how we handle evidence of malfeasance. */
 export interface EvidenceParamsAmino {
   /**
@@ -179,10 +167,6 @@ export interface ValidatorParamsProtoMsg {
   typeUrl: "/tendermint.types.ValidatorParams";
   value: Uint8Array;
 }
-export interface ValidatorParamsProtoMsg {
-  typeUrl: "/tendermint.types.ValidatorParams";
-  value: Uint8Array;
-}
 /**
  * ValidatorParams restrict the public key types validators can use.
  * NOTE: uses ABCI pubkey naming, not Amino names.
@@ -209,10 +193,6 @@ export interface VersionParamsProtoMsg {
   typeUrl: "/tendermint.types.VersionParams";
   value: Uint8Array;
 }
-export interface VersionParamsProtoMsg {
-  typeUrl: "/tendermint.types.VersionParams";
-  value: Uint8Array;
-}
 /** VersionParams contains the ABCI application version. */
 export interface VersionParamsAmino {
   app_version: string;
@@ -233,10 +213,6 @@ export interface VersionParamsSDKType {
 export interface HashedParams {
   blockMaxBytes: bigint;
   blockMaxGas: bigint;
-}
-export interface HashedParamsProtoMsg {
-  typeUrl: "/tendermint.types.HashedParams";
-  value: Uint8Array;
 }
 export interface HashedParamsProtoMsg {
   typeUrl: "/tendermint.types.HashedParams";

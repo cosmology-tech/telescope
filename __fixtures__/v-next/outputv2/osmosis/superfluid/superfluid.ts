@@ -52,10 +52,6 @@ export interface SuperfluidAssetProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidAsset";
   value: Uint8Array;
 }
-export interface SuperfluidAssetProtoMsg {
-  typeUrl: "/osmosis.superfluid.SuperfluidAsset";
-  value: Uint8Array;
-}
 /** SuperfluidAsset stores the pair of superfluid asset type and denom pair */
 export interface SuperfluidAssetAmino {
   denom: string;
@@ -85,10 +81,6 @@ export interface SuperfluidIntermediaryAccount {
   valAddr: string;
   /** perpetual gauge for rewards distribution */
   gaugeId: bigint;
-}
-export interface SuperfluidIntermediaryAccountProtoMsg {
-  typeUrl: "/osmosis.superfluid.SuperfluidIntermediaryAccount";
-  value: Uint8Array;
 }
 export interface SuperfluidIntermediaryAccountProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidIntermediaryAccount";
@@ -134,10 +126,6 @@ export interface OsmoEquivalentMultiplierRecord {
   /** superfluid asset denom, can be LP token or native token */
   denom: string;
   multiplier: string;
-}
-export interface OsmoEquivalentMultiplierRecordProtoMsg {
-  typeUrl: "/osmosis.superfluid.OsmoEquivalentMultiplierRecord";
-  value: Uint8Array;
 }
 export interface OsmoEquivalentMultiplierRecordProtoMsg {
   typeUrl: "/osmosis.superfluid.OsmoEquivalentMultiplierRecord";
@@ -190,10 +178,6 @@ export interface SuperfluidDelegationRecordProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidDelegationRecord";
   value: Uint8Array;
 }
-export interface SuperfluidDelegationRecordProtoMsg {
-  typeUrl: "/osmosis.superfluid.SuperfluidDelegationRecord";
-  value: Uint8Array;
-}
 /**
  * SuperfluidDelegationRecord is a struct used to indicate superfluid
  * delegations of an account in the state machine in a user friendly form.
@@ -231,10 +215,6 @@ export interface LockIdIntermediaryAccountConnectionProtoMsg {
   typeUrl: "/osmosis.superfluid.LockIdIntermediaryAccountConnection";
   value: Uint8Array;
 }
-export interface LockIdIntermediaryAccountConnectionProtoMsg {
-  typeUrl: "/osmosis.superfluid.LockIdIntermediaryAccountConnection";
-  value: Uint8Array;
-}
 /**
  * LockIdIntermediaryAccountConnection is a struct used to indicate the
  * relationship between the underlying lock id and superfluid delegation done
@@ -259,10 +239,6 @@ export interface LockIdIntermediaryAccountConnectionSDKType {
 }
 export interface UnpoolWhitelistedPools {
   ids: bigint[];
-}
-export interface UnpoolWhitelistedPoolsProtoMsg {
-  typeUrl: "/osmosis.superfluid.UnpoolWhitelistedPools";
-  value: Uint8Array;
 }
 export interface UnpoolWhitelistedPoolsProtoMsg {
   typeUrl: "/osmosis.superfluid.UnpoolWhitelistedPools";

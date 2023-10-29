@@ -15,10 +15,6 @@ export interface ParamsProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.Params";
   value: Uint8Array;
 }
-export interface ParamsProtoMsg {
-  typeUrl: "/osmosis.poolincentives.v1beta1.Params";
-  value: Uint8Array;
-}
 export interface ParamsAmino {
   /**
    * minted_denom is the denomination of the coin expected to be minted by the
@@ -42,10 +38,6 @@ export interface LockableDurationsInfoProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.LockableDurationsInfo";
   value: Uint8Array;
 }
-export interface LockableDurationsInfoProtoMsg {
-  typeUrl: "/osmosis.poolincentives.v1beta1.LockableDurationsInfo";
-  value: Uint8Array;
-}
 export interface LockableDurationsInfoAmino {
   lockable_durations: DurationAmino[];
 }
@@ -59,10 +51,6 @@ export interface LockableDurationsInfoSDKType {
 export interface DistrInfo {
   totalWeight: string;
   records: DistrRecord[];
-}
-export interface DistrInfoProtoMsg {
-  typeUrl: "/osmosis.poolincentives.v1beta1.DistrInfo";
-  value: Uint8Array;
 }
 export interface DistrInfoProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.DistrInfo";
@@ -83,10 +71,6 @@ export interface DistrInfoSDKType {
 export interface DistrRecord {
   gaugeId: bigint;
   weight: string;
-}
-export interface DistrRecordProtoMsg {
-  typeUrl: "/osmosis.poolincentives.v1beta1.DistrRecord";
-  value: Uint8Array;
 }
 export interface DistrRecordProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.DistrRecord";
@@ -113,10 +97,6 @@ export interface PoolToGaugeProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauge";
   value: Uint8Array;
 }
-export interface PoolToGaugeProtoMsg {
-  typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauge";
-  value: Uint8Array;
-}
 export interface PoolToGaugeAmino {
   pool_id: string;
   gauge_id: string;
@@ -133,10 +113,6 @@ export interface PoolToGaugeSDKType {
 }
 export interface PoolToGauges {
   poolToGauge: PoolToGauge[];
-}
-export interface PoolToGaugesProtoMsg {
-  typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauges";
-  value: Uint8Array;
 }
 export interface PoolToGaugesProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauges";

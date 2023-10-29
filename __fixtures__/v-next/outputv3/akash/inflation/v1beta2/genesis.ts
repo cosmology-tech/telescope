@@ -10,10 +10,6 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/akash.inflation.v1beta2.GenesisState";
   value: Uint8Array;
 }
-export interface GenesisStateProtoMsg {
-  typeUrl: "/akash.inflation.v1beta2.GenesisState";
-  value: Uint8Array;
-}
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateAmino {
   params?: ParamsAmino;

@@ -10,10 +10,6 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/akash.provider.v1beta2.GenesisState";
   value: Uint8Array;
 }
-export interface GenesisStateProtoMsg {
-  typeUrl: "/akash.provider.v1beta2.GenesisState";
-  value: Uint8Array;
-}
 /** GenesisState defines the basic genesis state used by provider module */
 export interface GenesisStateAmino {
   providers: ProviderAmino[];

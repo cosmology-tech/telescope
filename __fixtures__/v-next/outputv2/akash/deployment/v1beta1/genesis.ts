@@ -13,10 +13,6 @@ export interface GenesisDeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.GenesisDeployment";
   value: Uint8Array;
 }
-export interface GenesisDeploymentProtoMsg {
-  typeUrl: "/akash.deployment.v1beta1.GenesisDeployment";
-  value: Uint8Array;
-}
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeploymentAmino {
   deployment?: DeploymentAmino;
@@ -35,10 +31,6 @@ export interface GenesisDeploymentSDKType {
 export interface GenesisState {
   deployments: GenesisDeployment[];
   params: Params;
-}
-export interface GenesisStateProtoMsg {
-  typeUrl: "/akash.deployment.v1beta1.GenesisState";
-  value: Uint8Array;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.GenesisState";

@@ -9,10 +9,6 @@ export interface ParamsProtoMsg {
   typeUrl: "/osmosis.ibcratelimit.v1beta1.Params";
   value: Uint8Array;
 }
-export interface ParamsProtoMsg {
-  typeUrl: "/osmosis.ibcratelimit.v1beta1.Params";
-  value: Uint8Array;
-}
 /** Params defines the parameters for the ibc-rate-limit module. */
 export interface ParamsAmino {
   contract_address: string;

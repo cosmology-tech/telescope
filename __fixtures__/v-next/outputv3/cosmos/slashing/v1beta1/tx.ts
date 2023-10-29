@@ -9,10 +9,6 @@ export interface MsgUnjailProtoMsg {
   typeUrl: "/cosmos.slashing.v1beta1.MsgUnjail";
   value: Uint8Array;
 }
-export interface MsgUnjailProtoMsg {
-  typeUrl: "/cosmos.slashing.v1beta1.MsgUnjail";
-  value: Uint8Array;
-}
 /** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjailAmino {
   validator_addr: string;
@@ -27,10 +23,6 @@ export interface MsgUnjailSDKType {
 }
 /** MsgUnjailResponse defines the Msg/Unjail response type */
 export interface MsgUnjailResponse {}
-export interface MsgUnjailResponseProtoMsg {
-  typeUrl: "/cosmos.slashing.v1beta1.MsgUnjailResponse";
-  value: Uint8Array;
-}
 export interface MsgUnjailResponseProtoMsg {
   typeUrl: "/cosmos.slashing.v1beta1.MsgUnjailResponse";
   value: Uint8Array;

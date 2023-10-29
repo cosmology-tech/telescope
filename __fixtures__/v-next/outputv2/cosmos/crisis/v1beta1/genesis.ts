@@ -14,10 +14,6 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.crisis.v1beta1.GenesisState";
   value: Uint8Array;
 }
-export interface GenesisStateProtoMsg {
-  typeUrl: "/cosmos.crisis.v1beta1.GenesisState";
-  value: Uint8Array;
-}
 /** GenesisState defines the crisis module's genesis state. */
 export interface GenesisStateAmino {
   /**

@@ -47,10 +47,6 @@ export interface SmoothWeightChangeParamsProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.SmoothWeightChangeParams";
   value: Uint8Array;
 }
-export interface SmoothWeightChangeParamsProtoMsg {
-  typeUrl: "/osmosis.gamm.v1beta1.SmoothWeightChangeParams";
-  value: Uint8Array;
-}
 /**
  * Parameters for changing the weights in a balancer pool smoothly from
  * a start weight and end weight over a period of time.
@@ -127,10 +123,6 @@ export interface PoolParamsProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.PoolParams";
   value: Uint8Array;
 }
-export interface PoolParamsProtoMsg {
-  typeUrl: "/osmosis.gamm.v1beta1.PoolParams";
-  value: Uint8Array;
-}
 /**
  * PoolParams defined the parameters that will be managed by the pool
  * governance in the future. This params are not managed by the chain
@@ -171,10 +163,6 @@ export interface PoolAsset {
   token: Coin;
   /** Weight that is not normalized. This weight must be less than 2^50 */
   weight: string;
-}
-export interface PoolAssetProtoMsg {
-  typeUrl: "/osmosis.gamm.v1beta1.PoolAsset";
-  value: Uint8Array;
 }
 export interface PoolAssetProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.PoolAsset";
@@ -235,10 +223,6 @@ export interface Pool {
   poolAssets: PoolAsset[];
   /** sum of all non-normalized pool weights */
   totalWeight: string;
-}
-export interface PoolProtoMsg {
-  typeUrl: "/osmosis.gamm.v1beta1.Pool";
-  value: Uint8Array;
 }
 export interface PoolProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.Pool";

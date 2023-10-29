@@ -14,10 +14,6 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.fees.v1.GenesisState";
   value: Uint8Array;
 }
-export interface GenesisStateProtoMsg {
-  typeUrl: "/evmos.fees.v1.GenesisState";
-  value: Uint8Array;
-}
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateAmino {
   /** module parameters */
@@ -55,10 +51,6 @@ export interface Params {
   addrDerivationCostCreate: bigint;
   /** min_gas_price defines the minimum gas price value for cosmos and eth transactions */
   minGasPrice: string;
-}
-export interface ParamsProtoMsg {
-  typeUrl: "/evmos.fees.v1.Params";
-  value: Uint8Array;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/evmos.fees.v1.Params";

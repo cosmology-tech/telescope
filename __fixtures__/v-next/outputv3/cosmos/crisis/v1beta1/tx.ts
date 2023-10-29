@@ -11,10 +11,6 @@ export interface MsgVerifyInvariantProtoMsg {
   typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariant";
   value: Uint8Array;
 }
-export interface MsgVerifyInvariantProtoMsg {
-  typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariant";
-  value: Uint8Array;
-}
 /** MsgVerifyInvariant represents a message to verify a particular invariance. */
 export interface MsgVerifyInvariantAmino {
   sender: string;
@@ -33,10 +29,6 @@ export interface MsgVerifyInvariantSDKType {
 }
 /** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
 export interface MsgVerifyInvariantResponse {}
-export interface MsgVerifyInvariantResponseProtoMsg {
-  typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariantResponse";
-  value: Uint8Array;
-}
 export interface MsgVerifyInvariantResponseProtoMsg {
   typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariantResponse";
   value: Uint8Array;

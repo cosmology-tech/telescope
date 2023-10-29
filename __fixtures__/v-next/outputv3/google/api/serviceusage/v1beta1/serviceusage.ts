@@ -62,10 +62,6 @@ export interface EnableServiceRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.EnableServiceRequest";
   value: Uint8Array;
 }
-export interface EnableServiceRequestProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.EnableServiceRequest";
-  value: Uint8Array;
-}
 /** Request message for the `EnableService` method. */
 export interface EnableServiceRequestAmino {
   /**
@@ -108,10 +104,6 @@ export interface DisableServiceRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.DisableServiceRequest";
   value: Uint8Array;
 }
-export interface DisableServiceRequestProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.DisableServiceRequest";
-  value: Uint8Array;
-}
 /** Request message for the `DisableService` method. */
 export interface DisableServiceRequestAmino {
   /**
@@ -143,10 +135,6 @@ export interface GetServiceRequest {
    * where `123` is the project number (not project ID).
    */
   name: string;
-}
-export interface GetServiceRequestProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.GetServiceRequest";
-  value: Uint8Array;
 }
 export interface GetServiceRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.GetServiceRequest";
@@ -197,10 +185,6 @@ export interface ListServicesRequest {
    * The allowed filter strings are `state:ENABLED` and `state:DISABLED`.
    */
   filter: string;
-}
-export interface ListServicesRequestProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.ListServicesRequest";
-  value: Uint8Array;
 }
 export interface ListServicesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListServicesRequest";
@@ -258,10 +242,6 @@ export interface ListServicesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListServicesResponse";
   value: Uint8Array;
 }
-export interface ListServicesResponseProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.ListServicesResponse";
-  value: Uint8Array;
-}
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponseAmino {
   /** The available services for the requested project. */
@@ -310,10 +290,6 @@ export interface BatchEnableServicesRequest {
    * will occur.
    */
   serviceIds: string[];
-}
-export interface BatchEnableServicesRequestProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.BatchEnableServicesRequest";
-  value: Uint8Array;
 }
 export interface BatchEnableServicesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.BatchEnableServicesRequest";
@@ -383,10 +359,6 @@ export interface ListConsumerQuotaMetricsRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest";
   value: Uint8Array;
 }
-export interface ListConsumerQuotaMetricsRequestProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest";
-  value: Uint8Array;
-}
 /** Request message for ListConsumerQuotaMetrics */
 export interface ListConsumerQuotaMetricsRequestAmino {
   /**
@@ -433,10 +405,6 @@ export interface ListConsumerQuotaMetricsResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsResponse";
   value: Uint8Array;
 }
-export interface ListConsumerQuotaMetricsResponseProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsResponse";
-  value: Uint8Array;
-}
 /** Response message for ListConsumerQuotaMetrics */
 export interface ListConsumerQuotaMetricsResponseAmino {
   /** Quota settings for the consumer, organized by quota metric. */
@@ -467,10 +435,6 @@ export interface GetConsumerQuotaMetricRequest {
   name: string;
   /** Specifies the level of detail for quota information in the response. */
   view: QuotaView;
-}
-export interface GetConsumerQuotaMetricRequestProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest";
-  value: Uint8Array;
 }
 export interface GetConsumerQuotaMetricRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest";
@@ -508,10 +472,6 @@ export interface GetConsumerQuotaLimitRequest {
   name: string;
   /** Specifies the level of detail for quota information in the response. */
   view: QuotaView;
-}
-export interface GetConsumerQuotaLimitRequestProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest";
-  value: Uint8Array;
 }
 export interface GetConsumerQuotaLimitRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest";
@@ -563,10 +523,6 @@ export interface CreateAdminOverrideRequest {
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
   forceOnly: QuotaSafetyCheck[];
-}
-export interface CreateAdminOverrideRequestProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.CreateAdminOverrideRequest";
-  value: Uint8Array;
 }
 export interface CreateAdminOverrideRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.CreateAdminOverrideRequest";
@@ -646,10 +602,6 @@ export interface UpdateAdminOverrideRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest";
   value: Uint8Array;
 }
-export interface UpdateAdminOverrideRequestProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest";
-  value: Uint8Array;
-}
 /** Request message for UpdateAdminOverride. */
 export interface UpdateAdminOverrideRequestAmino {
   /**
@@ -722,10 +674,6 @@ export interface DeleteAdminOverrideRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest";
   value: Uint8Array;
 }
-export interface DeleteAdminOverrideRequestProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest";
-  value: Uint8Array;
-}
 /** Request message for DeleteAdminOverride. */
 export interface DeleteAdminOverrideRequestAmino {
   /**
@@ -781,10 +729,6 @@ export interface ListAdminOverridesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListAdminOverridesRequest";
   value: Uint8Array;
 }
-export interface ListAdminOverridesRequestProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.ListAdminOverridesRequest";
-  value: Uint8Array;
-}
 /** Request message for ListAdminOverrides */
 export interface ListAdminOverridesRequestAmino {
   /**
@@ -827,10 +771,6 @@ export interface ListAdminOverridesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListAdminOverridesResponse";
   value: Uint8Array;
 }
-export interface ListAdminOverridesResponseProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.ListAdminOverridesResponse";
-  value: Uint8Array;
-}
 /** Response message for ListAdminOverrides. */
 export interface ListAdminOverridesResponseAmino {
   /** Admin overrides on this limit. */
@@ -854,10 +794,6 @@ export interface ListAdminOverridesResponseSDKType {
 export interface BatchCreateAdminOverridesResponse {
   /** The overrides that were created. */
   overrides: QuotaOverride[];
-}
-export interface BatchCreateAdminOverridesResponseProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.BatchCreateAdminOverridesResponse";
-  value: Uint8Array;
 }
 export interface BatchCreateAdminOverridesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.BatchCreateAdminOverridesResponse";
@@ -900,10 +836,6 @@ export interface ImportAdminOverridesRequest {
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
   forceOnly: QuotaSafetyCheck[];
-}
-export interface ImportAdminOverridesRequestProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesRequest";
-  value: Uint8Array;
 }
 export interface ImportAdminOverridesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesRequest";
@@ -954,10 +886,6 @@ export interface ImportAdminOverridesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesResponse";
   value: Uint8Array;
 }
-export interface ImportAdminOverridesResponseProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesResponse";
-  value: Uint8Array;
-}
 /** Response message for ImportAdminOverrides */
 export interface ImportAdminOverridesResponseAmino {
   /** The overrides that were created from the imported data. */
@@ -977,10 +905,6 @@ export interface ImportAdminOverridesResponseSDKType {
  * of LRO returned by ImportAdminOverrides.
  */
 export interface ImportAdminOverridesMetadata {}
-export interface ImportAdminOverridesMetadataProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesMetadata";
-  value: Uint8Array;
-}
 export interface ImportAdminOverridesMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesMetadata";
   value: Uint8Array;
@@ -1026,10 +950,6 @@ export interface CreateConsumerOverrideRequest {
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
   forceOnly: QuotaSafetyCheck[];
-}
-export interface CreateConsumerOverrideRequestProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest";
-  value: Uint8Array;
 }
 export interface CreateConsumerOverrideRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest";
@@ -1109,10 +1029,6 @@ export interface UpdateConsumerOverrideRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest";
   value: Uint8Array;
 }
-export interface UpdateConsumerOverrideRequestProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest";
-  value: Uint8Array;
-}
 /** Request message for UpdateConsumerOverride. */
 export interface UpdateConsumerOverrideRequestAmino {
   /**
@@ -1185,10 +1101,6 @@ export interface DeleteConsumerOverrideRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest";
   value: Uint8Array;
 }
-export interface DeleteConsumerOverrideRequestProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest";
-  value: Uint8Array;
-}
 /** Request message for DeleteConsumerOverride. */
 export interface DeleteConsumerOverrideRequestAmino {
   /**
@@ -1244,10 +1156,6 @@ export interface ListConsumerOverridesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerOverridesRequest";
   value: Uint8Array;
 }
-export interface ListConsumerOverridesRequestProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerOverridesRequest";
-  value: Uint8Array;
-}
 /** Request message for ListConsumerOverrides */
 export interface ListConsumerOverridesRequestAmino {
   /**
@@ -1290,10 +1198,6 @@ export interface ListConsumerOverridesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerOverridesResponse";
   value: Uint8Array;
 }
-export interface ListConsumerOverridesResponseProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerOverridesResponse";
-  value: Uint8Array;
-}
 /** Response message for ListConsumerOverrides. */
 export interface ListConsumerOverridesResponseAmino {
   /** Consumer overrides on this limit. */
@@ -1317,10 +1221,6 @@ export interface ListConsumerOverridesResponseSDKType {
 export interface BatchCreateConsumerOverridesResponse {
   /** The overrides that were created. */
   overrides: QuotaOverride[];
-}
-export interface BatchCreateConsumerOverridesResponseProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.BatchCreateConsumerOverridesResponse";
-  value: Uint8Array;
 }
 export interface BatchCreateConsumerOverridesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.BatchCreateConsumerOverridesResponse";
@@ -1363,10 +1263,6 @@ export interface ImportConsumerOverridesRequest {
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
   forceOnly: QuotaSafetyCheck[];
-}
-export interface ImportConsumerOverridesRequestProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest";
-  value: Uint8Array;
 }
 export interface ImportConsumerOverridesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest";
@@ -1417,10 +1313,6 @@ export interface ImportConsumerOverridesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesResponse";
   value: Uint8Array;
 }
-export interface ImportConsumerOverridesResponseProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesResponse";
-  value: Uint8Array;
-}
 /** Response message for ImportConsumerOverrides */
 export interface ImportConsumerOverridesResponseAmino {
   /** The overrides that were created from the imported data. */
@@ -1440,10 +1332,6 @@ export interface ImportConsumerOverridesResponseSDKType {
  * of LRO returned by ImportConsumerOverrides.
  */
 export interface ImportConsumerOverridesMetadata {}
-export interface ImportConsumerOverridesMetadataProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesMetadata";
-  value: Uint8Array;
-}
 export interface ImportConsumerOverridesMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesMetadata";
   value: Uint8Array;
@@ -1473,10 +1361,6 @@ export interface ImportAdminQuotaPoliciesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesResponse";
   value: Uint8Array;
 }
-export interface ImportAdminQuotaPoliciesResponseProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesResponse";
-  value: Uint8Array;
-}
 /** Response message for ImportAdminQuotaPolicies */
 export interface ImportAdminQuotaPoliciesResponseAmino {
   /** The policies that were created from the imported data. */
@@ -1496,10 +1380,6 @@ export interface ImportAdminQuotaPoliciesResponseSDKType {
  * of LRO returned by ImportAdminQuotaPolicies.
  */
 export interface ImportAdminQuotaPoliciesMetadata {}
-export interface ImportAdminQuotaPoliciesMetadataProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesMetadata";
-  value: Uint8Array;
-}
 export interface ImportAdminQuotaPoliciesMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesMetadata";
   value: Uint8Array;
@@ -1530,10 +1410,6 @@ export interface CreateAdminQuotaPolicyMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.CreateAdminQuotaPolicyMetadata";
   value: Uint8Array;
 }
-export interface CreateAdminQuotaPolicyMetadataProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.CreateAdminQuotaPolicyMetadata";
-  value: Uint8Array;
-}
 /**
  * Metadata message that provides information such as progress,
  * partial failures, and similar information on each GetOperation call
@@ -1560,10 +1436,6 @@ export interface UpdateAdminQuotaPolicyMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.UpdateAdminQuotaPolicyMetadata";
   value: Uint8Array;
 }
-export interface UpdateAdminQuotaPolicyMetadataProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.UpdateAdminQuotaPolicyMetadata";
-  value: Uint8Array;
-}
 /**
  * Metadata message that provides information such as progress,
  * partial failures, and similar information on each GetOperation call
@@ -1586,10 +1458,6 @@ export interface UpdateAdminQuotaPolicyMetadataSDKType {}
  * of LRO returned by DeleteAdminQuotaPolicy.
  */
 export interface DeleteAdminQuotaPolicyMetadata {}
-export interface DeleteAdminQuotaPolicyMetadataProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.DeleteAdminQuotaPolicyMetadata";
-  value: Uint8Array;
-}
 export interface DeleteAdminQuotaPolicyMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.DeleteAdminQuotaPolicyMetadata";
   value: Uint8Array;
@@ -1622,10 +1490,6 @@ export interface GenerateServiceIdentityRequest {
    * project number.
    */
   parent: string;
-}
-export interface GenerateServiceIdentityRequestProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest";
-  value: Uint8Array;
 }
 export interface GenerateServiceIdentityRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest";
@@ -1667,10 +1531,6 @@ export interface GetServiceIdentityResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.GetServiceIdentityResponse";
   value: Uint8Array;
 }
-export interface GetServiceIdentityResponseProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.GetServiceIdentityResponse";
-  value: Uint8Array;
-}
 /** Response message for getting service identity. */
 export interface GetServiceIdentityResponseAmino {
   /**
@@ -1693,10 +1553,6 @@ export interface GetServiceIdentityResponseSDKType {
 }
 /** Metadata for the `GetServiceIdentity` method. */
 export interface GetServiceIdentityMetadata {}
-export interface GetServiceIdentityMetadataProtoMsg {
-  typeUrl: "/google.api.serviceusage.v1beta1.GetServiceIdentityMetadata";
-  value: Uint8Array;
-}
 export interface GetServiceIdentityMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.GetServiceIdentityMetadata";
   value: Uint8Array;

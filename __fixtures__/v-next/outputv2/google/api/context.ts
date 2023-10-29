@@ -51,10 +51,6 @@ export interface ContextProtoMsg {
   typeUrl: "/google.api.Context";
   value: Uint8Array;
 }
-export interface ContextProtoMsg {
-  typeUrl: "/google.api.Context";
-  value: Uint8Array;
-}
 /**
  * `Context` defines which contexts an API requests.
  * 
@@ -171,10 +167,6 @@ export interface ContextRule {
    * side channel from backend to client.
    */
   allowedResponseExtensions: string[];
-}
-export interface ContextRuleProtoMsg {
-  typeUrl: "/google.api.ContextRule";
-  value: Uint8Array;
 }
 export interface ContextRuleProtoMsg {
   typeUrl: "/google.api.ContextRule";

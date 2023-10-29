@@ -9,10 +9,6 @@ export interface ExprValueProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ExprValue";
   value: Uint8Array;
 }
-export interface ExprValueProtoMsg {
-  typeUrl: "/google.api.expr.v1alpha1.ExprValue";
-  value: Uint8Array;
-}
 export interface ExprValueAmino {
   /** The ids of the expressions with unknown values. */
   exprs: IdRefAmino[];
@@ -27,10 +23,6 @@ export interface ExprValueSDKType {
 export interface IdRef {
   /** The expression id. */
   id: number;
-}
-export interface IdRefProtoMsg {
-  typeUrl: "/google.api.expr.v1alpha1.IdRef";
-  value: Uint8Array;
 }
 export interface IdRefProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.IdRef";

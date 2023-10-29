@@ -8,10 +8,6 @@ export interface QueryConfigRequestProtoMsg {
   typeUrl: "/cosmos.app.v1alpha1.QueryConfigRequest";
   value: Uint8Array;
 }
-export interface QueryConfigRequestProtoMsg {
-  typeUrl: "/cosmos.app.v1alpha1.QueryConfigRequest";
-  value: Uint8Array;
-}
 /** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequestAmino {}
 export interface QueryConfigRequestAminoMsg {
@@ -24,10 +20,6 @@ export interface QueryConfigRequestSDKType {}
 export interface QueryConfigResponse {
   /** config is the current app config. */
   config?: Config;
-}
-export interface QueryConfigResponseProtoMsg {
-  typeUrl: "/cosmos.app.v1alpha1.QueryConfigResponse";
-  value: Uint8Array;
 }
 export interface QueryConfigResponseProtoMsg {
   typeUrl: "/cosmos.app.v1alpha1.QueryConfigResponse";

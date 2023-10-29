@@ -55,10 +55,6 @@ export interface MonitoredResourceDescriptorProtoMsg {
   typeUrl: "/google.api.MonitoredResourceDescriptor";
   value: Uint8Array;
 }
-export interface MonitoredResourceDescriptorProtoMsg {
-  typeUrl: "/google.api.MonitoredResourceDescriptor";
-  value: Uint8Array;
-}
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
  * type name and a set of labels.  For example, the monitored resource
@@ -137,10 +133,6 @@ export interface MonitoredResource_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
-export interface MonitoredResource_LabelsEntryProtoMsg {
-  typeUrl: string;
-  value: Uint8Array;
-}
 export interface MonitoredResource_LabelsEntryAmino {
   key: string;
   value: string;
@@ -183,10 +175,6 @@ export interface MonitoredResource {
   labels: {
     [key: string]: string;
   };
-}
-export interface MonitoredResourceProtoMsg {
-  typeUrl: "/google.api.MonitoredResource";
-  value: Uint8Array;
 }
 export interface MonitoredResourceProtoMsg {
   typeUrl: "/google.api.MonitoredResource";
@@ -256,10 +244,6 @@ export interface MonitoredResourceMetadata_UserLabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
-export interface MonitoredResourceMetadata_UserLabelsEntryProtoMsg {
-  typeUrl: string;
-  value: Uint8Array;
-}
 export interface MonitoredResourceMetadata_UserLabelsEntryAmino {
   key: string;
   value: string;
@@ -298,10 +282,6 @@ export interface MonitoredResourceMetadata {
   userLabels: {
     [key: string]: string;
   };
-}
-export interface MonitoredResourceMetadataProtoMsg {
-  typeUrl: "/google.api.MonitoredResourceMetadata";
-  value: Uint8Array;
 }
 export interface MonitoredResourceMetadataProtoMsg {
   typeUrl: "/google.api.MonitoredResourceMetadata";

@@ -19,10 +19,6 @@ export interface MsgGrantAllowanceProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowance";
   value: Uint8Array;
 }
-export interface MsgGrantAllowanceProtoMsg {
-  typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowance";
-  value: Uint8Array;
-}
 export type MsgGrantAllowanceEncoded = Omit<MsgGrantAllowance, "allowance"> & {
   /** allowance can be any of basic, periodic, allowed fee allowance. */allowance?: BasicAllowanceProtoMsg | PeriodicAllowanceProtoMsg | AllowedMsgAllowanceProtoMsg | AnyProtoMsg | undefined;
 };
@@ -57,10 +53,6 @@ export interface MsgGrantAllowanceResponseProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowanceResponse";
   value: Uint8Array;
 }
-export interface MsgGrantAllowanceResponseProtoMsg {
-  typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowanceResponse";
-  value: Uint8Array;
-}
 /** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
 export interface MsgGrantAllowanceResponseAmino {}
 export interface MsgGrantAllowanceResponseAminoMsg {
@@ -75,10 +67,6 @@ export interface MsgRevokeAllowance {
   granter: string;
   /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
-}
-export interface MsgRevokeAllowanceProtoMsg {
-  typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowance";
-  value: Uint8Array;
 }
 export interface MsgRevokeAllowanceProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowance";
@@ -102,10 +90,6 @@ export interface MsgRevokeAllowanceSDKType {
 }
 /** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
 export interface MsgRevokeAllowanceResponse {}
-export interface MsgRevokeAllowanceResponseProtoMsg {
-  typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowanceResponse";
-  value: Uint8Array;
-}
 export interface MsgRevokeAllowanceResponseProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowanceResponse";
   value: Uint8Array;

@@ -11,10 +11,6 @@ export interface MetricValue_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
-export interface MetricValue_LabelsEntryProtoMsg {
-  typeUrl: string;
-  value: Uint8Array;
-}
 export interface MetricValue_LabelsEntryAmino {
   key: string;
   value: string;
@@ -62,10 +58,6 @@ export interface MetricValue {
   stringValue?: string;
   /** A distribution value. */
   distributionValue?: Distribution;
-}
-export interface MetricValueProtoMsg {
-  typeUrl: "/google.api.servicecontrol.v1.MetricValue";
-  value: Uint8Array;
 }
 export interface MetricValueProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.MetricValue";
@@ -134,10 +126,6 @@ export interface MetricValueSet {
   metricName: string;
   /** The values in this metric. */
   metricValues: MetricValue[];
-}
-export interface MetricValueSetProtoMsg {
-  typeUrl: "/google.api.servicecontrol.v1.MetricValueSet";
-  value: Uint8Array;
 }
 export interface MetricValueSetProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.MetricValueSet";

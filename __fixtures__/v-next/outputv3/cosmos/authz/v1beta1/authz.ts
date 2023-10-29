@@ -24,10 +24,6 @@ export interface GenericAuthorizationProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization";
   value: Uint8Array;
 }
-export interface GenericAuthorizationProtoMsg {
-  typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization";
-  value: Uint8Array;
-}
 /**
  * GenericAuthorization gives the grantee unrestricted permissions to execute
  * the provided method on behalf of the granter's account.
@@ -60,10 +56,6 @@ export interface Grant {
    * may apply to invalidate the grant)
    */
   expiration?: Date;
-}
-export interface GrantProtoMsg {
-  typeUrl: "/cosmos.authz.v1beta1.Grant";
-  value: Uint8Array;
 }
 export interface GrantProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.Grant";
@@ -111,10 +103,6 @@ export interface GrantAuthorizationProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.GrantAuthorization";
   value: Uint8Array;
 }
-export interface GrantAuthorizationProtoMsg {
-  typeUrl: "/cosmos.authz.v1beta1.GrantAuthorization";
-  value: Uint8Array;
-}
 export type GrantAuthorizationEncoded = Omit<GrantAuthorization, "authorization"> & {
   authorization?: GenericAuthorizationProtoMsg | DepositDeploymentAuthorization1ProtoMsg | DepositDeploymentAuthorization2ProtoMsg | SendAuthorizationProtoMsg | StakeAuthorizationProtoMsg | AnyProtoMsg | undefined;
 };
@@ -146,10 +134,6 @@ export interface GrantAuthorizationSDKType {
 export interface GrantQueueItem {
   /** msg_type_urls contains the list of TypeURL of a sdk.Msg. */
   msgTypeUrls: string[];
-}
-export interface GrantQueueItemProtoMsg {
-  typeUrl: "/cosmos.authz.v1beta1.GrantQueueItem";
-  value: Uint8Array;
 }
 export interface GrantQueueItemProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.GrantQueueItem";

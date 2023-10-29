@@ -13,10 +13,6 @@ export interface GenesisOwnersProtoMsg {
   typeUrl: "/cosmos.capability.v1beta1.GenesisOwners";
   value: Uint8Array;
 }
-export interface GenesisOwnersProtoMsg {
-  typeUrl: "/cosmos.capability.v1beta1.GenesisOwners";
-  value: Uint8Array;
-}
 /** GenesisOwners defines the capability owners with their corresponding index. */
 export interface GenesisOwnersAmino {
   /** index is the index of the capability owner. */
@@ -42,10 +38,6 @@ export interface GenesisState {
    * index key is string to allow amino marshalling.
    */
   owners: GenesisOwners[];
-}
-export interface GenesisStateProtoMsg {
-  typeUrl: "/cosmos.capability.v1beta1.GenesisState";
-  value: Uint8Array;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.capability.v1beta1.GenesisState";

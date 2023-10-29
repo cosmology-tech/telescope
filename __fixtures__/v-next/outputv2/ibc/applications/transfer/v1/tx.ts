@@ -34,10 +34,6 @@ export interface MsgTransferProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.MsgTransfer";
   value: Uint8Array;
 }
-export interface MsgTransferProtoMsg {
-  typeUrl: "/ibc.applications.transfer.v1.MsgTransfer";
-  value: Uint8Array;
-}
 /**
  * MsgTransfer defines a msg to transfer fungible tokens (i.e Coins) between
  * ICS20 enabled chains. See ICS Spec here:
@@ -85,10 +81,6 @@ export interface MsgTransferSDKType {
 }
 /** MsgTransferResponse defines the Msg/Transfer response type. */
 export interface MsgTransferResponse {}
-export interface MsgTransferResponseProtoMsg {
-  typeUrl: "/ibc.applications.transfer.v1.MsgTransferResponse";
-  value: Uint8Array;
-}
 export interface MsgTransferResponseProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.MsgTransferResponse";
   value: Uint8Array;

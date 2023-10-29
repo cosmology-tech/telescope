@@ -11,10 +11,6 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.GenesisState";
   value: Uint8Array;
 }
-export interface GenesisStateProtoMsg {
-  typeUrl: "/osmosis.txfees.v1beta1.GenesisState";
-  value: Uint8Array;
-}
 /** GenesisState defines the txfees module's genesis state. */
 export interface GenesisStateAmino {
   basedenom: string;

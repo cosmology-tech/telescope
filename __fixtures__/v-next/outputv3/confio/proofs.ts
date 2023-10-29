@@ -179,10 +179,6 @@ export interface ExistenceProofProtoMsg {
   typeUrl: "/ics23.ExistenceProof";
   value: Uint8Array;
 }
-export interface ExistenceProofProtoMsg {
-  typeUrl: "/ics23.ExistenceProof";
-  value: Uint8Array;
-}
 /**
  * ExistenceProof takes a key and a value and a set of steps to perform on it.
  * The result of peforming all these steps will provide a "root hash", which can
@@ -256,10 +252,6 @@ export interface NonExistenceProofProtoMsg {
   typeUrl: "/ics23.NonExistenceProof";
   value: Uint8Array;
 }
-export interface NonExistenceProofProtoMsg {
-  typeUrl: "/ics23.NonExistenceProof";
-  value: Uint8Array;
-}
 /**
  * NonExistenceProof takes a proof of two neighbors, one left of the desired key,
  * one right of the desired key. If both proofs are valid AND they are neighbors,
@@ -291,10 +283,6 @@ export interface CommitmentProof {
   nonexist?: NonExistenceProof;
   batch?: BatchProof;
   compressed?: CompressedBatchProof;
-}
-export interface CommitmentProofProtoMsg {
-  typeUrl: "/ics23.CommitmentProof";
-  value: Uint8Array;
 }
 export interface CommitmentProofProtoMsg {
   typeUrl: "/ics23.CommitmentProof";
@@ -344,10 +332,6 @@ export interface LeafOp {
    * a leaf node from an inner node.
    */
   prefix: Uint8Array;
-}
-export interface LeafOpProtoMsg {
-  typeUrl: "/ics23.LeafOp";
-  value: Uint8Array;
 }
 export interface LeafOpProtoMsg {
   typeUrl: "/ics23.LeafOp";
@@ -433,10 +417,6 @@ export interface InnerOpProtoMsg {
   typeUrl: "/ics23.InnerOp";
   value: Uint8Array;
 }
-export interface InnerOpProtoMsg {
-  typeUrl: "/ics23.InnerOp";
-  value: Uint8Array;
-}
 /**
  * InnerOp represents a merkle-proof step that is not a leaf.
  * It represents concatenating two children and hashing them to provide the next result.
@@ -508,10 +488,6 @@ export interface ProofSpec {
   maxDepth: number;
   /** min_depth (if > 0) is the minimum number of InnerOps allowed (mainly for fixed-depth tries) */
   minDepth: number;
-}
-export interface ProofSpecProtoMsg {
-  typeUrl: "/ics23.ProofSpec";
-  value: Uint8Array;
 }
 export interface ProofSpecProtoMsg {
   typeUrl: "/ics23.ProofSpec";
@@ -592,10 +568,6 @@ export interface InnerSpecProtoMsg {
   typeUrl: "/ics23.InnerSpec";
   value: Uint8Array;
 }
-export interface InnerSpecProtoMsg {
-  typeUrl: "/ics23.InnerSpec";
-  value: Uint8Array;
-}
 /**
  * InnerSpec contains all store-specific structure info to determine if two proofs from a
  * given store are neighbors.
@@ -651,10 +623,6 @@ export interface BatchProofProtoMsg {
   typeUrl: "/ics23.BatchProof";
   value: Uint8Array;
 }
-export interface BatchProofProtoMsg {
-  typeUrl: "/ics23.BatchProof";
-  value: Uint8Array;
-}
 /** BatchProof is a group of multiple proof types than can be compressed */
 export interface BatchProofAmino {
   entries: BatchEntryAmino[];
@@ -671,10 +639,6 @@ export interface BatchProofSDKType {
 export interface BatchEntry {
   exist?: ExistenceProof;
   nonexist?: NonExistenceProof;
-}
-export interface BatchEntryProtoMsg {
-  typeUrl: "/ics23.BatchEntry";
-  value: Uint8Array;
 }
 export interface BatchEntryProtoMsg {
   typeUrl: "/ics23.BatchEntry";
@@ -702,10 +666,6 @@ export interface CompressedBatchProofProtoMsg {
   typeUrl: "/ics23.CompressedBatchProof";
   value: Uint8Array;
 }
-export interface CompressedBatchProofProtoMsg {
-  typeUrl: "/ics23.CompressedBatchProof";
-  value: Uint8Array;
-}
 export interface CompressedBatchProofAmino {
   entries: CompressedBatchEntryAmino[];
   lookup_inners: InnerOpAmino[];
@@ -722,10 +682,6 @@ export interface CompressedBatchProofSDKType {
 export interface CompressedBatchEntry {
   exist?: CompressedExistenceProof;
   nonexist?: CompressedNonExistenceProof;
-}
-export interface CompressedBatchEntryProtoMsg {
-  typeUrl: "/ics23.CompressedBatchEntry";
-  value: Uint8Array;
 }
 export interface CompressedBatchEntryProtoMsg {
   typeUrl: "/ics23.CompressedBatchEntry";
@@ -756,10 +712,6 @@ export interface CompressedExistenceProofProtoMsg {
   typeUrl: "/ics23.CompressedExistenceProof";
   value: Uint8Array;
 }
-export interface CompressedExistenceProofProtoMsg {
-  typeUrl: "/ics23.CompressedExistenceProof";
-  value: Uint8Array;
-}
 export interface CompressedExistenceProofAmino {
   key: Uint8Array;
   value: Uint8Array;
@@ -782,10 +734,6 @@ export interface CompressedNonExistenceProof {
   key: Uint8Array;
   left?: CompressedExistenceProof;
   right?: CompressedExistenceProof;
-}
-export interface CompressedNonExistenceProofProtoMsg {
-  typeUrl: "/ics23.CompressedNonExistenceProof";
-  value: Uint8Array;
 }
 export interface CompressedNonExistenceProofProtoMsg {
   typeUrl: "/ics23.CompressedNonExistenceProof";

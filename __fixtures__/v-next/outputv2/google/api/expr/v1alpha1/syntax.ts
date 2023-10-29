@@ -15,10 +15,6 @@ export interface ParsedExprProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ParsedExpr";
   value: Uint8Array;
 }
-export interface ParsedExprProtoMsg {
-  typeUrl: "/google.api.expr.v1alpha1.ParsedExpr";
-  value: Uint8Array;
-}
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExprAmino {
   /** The parsed expression. */
@@ -73,10 +69,6 @@ export interface Expr {
   structExpr?: Expr_CreateStruct;
   /** A comprehension expression. */
   comprehensionExpr?: Expr_Comprehension;
-}
-export interface ExprProtoMsg {
-  typeUrl: "/google.api.expr.v1alpha1.Expr";
-  value: Uint8Array;
 }
 export interface ExprProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Expr";
@@ -166,10 +158,6 @@ export interface Expr_IdentProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Ident";
   value: Uint8Array;
 }
-export interface Expr_IdentProtoMsg {
-  typeUrl: "/google.api.expr.v1alpha1.Ident";
-  value: Uint8Array;
-}
 /** An identifier expression. e.g. `request`. */
 export interface Expr_IdentAmino {
   /**
@@ -210,10 +198,6 @@ export interface Expr_Select {
    * This results from the macro `has(request.auth)`.
    */
   testOnly: boolean;
-}
-export interface Expr_SelectProtoMsg {
-  typeUrl: "/google.api.expr.v1alpha1.Select";
-  value: Uint8Array;
 }
 export interface Expr_SelectProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Select";
@@ -272,10 +256,6 @@ export interface Expr_CallProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Call";
   value: Uint8Array;
 }
-export interface Expr_CallProtoMsg {
-  typeUrl: "/google.api.expr.v1alpha1.Call";
-  value: Uint8Array;
-}
 /**
  * A call expression, including calls to predefined functions and operators.
  * 
@@ -320,10 +300,6 @@ export interface Expr_CreateListProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.CreateList";
   value: Uint8Array;
 }
-export interface Expr_CreateListProtoMsg {
-  typeUrl: "/google.api.expr.v1alpha1.CreateList";
-  value: Uint8Array;
-}
 /**
  * A list creation expression.
  * 
@@ -362,10 +338,6 @@ export interface Expr_CreateStruct {
   messageName: string;
   /** The entries in the creation expression. */
   entries: Expr_CreateStruct_Entry[];
-}
-export interface Expr_CreateStructProtoMsg {
-  typeUrl: "/google.api.expr.v1alpha1.CreateStruct";
-  value: Uint8Array;
 }
 export interface Expr_CreateStructProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.CreateStruct";
@@ -416,10 +388,6 @@ export interface Expr_CreateStruct_Entry {
   mapKey?: Expr;
   /** Required. The value assigned to the key. */
   value?: Expr;
-}
-export interface Expr_CreateStruct_EntryProtoMsg {
-  typeUrl: "/google.api.expr.v1alpha1.Entry";
-  value: Uint8Array;
 }
 export interface Expr_CreateStruct_EntryProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Entry";
@@ -507,10 +475,6 @@ export interface Expr_Comprehension {
    * Computes the result.
    */
   result?: Expr;
-}
-export interface Expr_ComprehensionProtoMsg {
-  typeUrl: "/google.api.expr.v1alpha1.Comprehension";
-  value: Uint8Array;
 }
 export interface Expr_ComprehensionProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Comprehension";
@@ -663,10 +627,6 @@ export interface ConstantProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Constant";
   value: Uint8Array;
 }
-export interface ConstantProtoMsg {
-  typeUrl: "/google.api.expr.v1alpha1.Constant";
-  value: Uint8Array;
-}
 /**
  * Represents a primitive literal.
  * 
@@ -752,10 +712,6 @@ export interface SourceInfo_PositionsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
-export interface SourceInfo_PositionsEntryProtoMsg {
-  typeUrl: string;
-  value: Uint8Array;
-}
 export interface SourceInfo_PositionsEntryAmino {
   key: string;
   value: number;
@@ -771,10 +727,6 @@ export interface SourceInfo_PositionsEntrySDKType {
 export interface SourceInfo_MacroCallsEntry {
   key: bigint;
   value?: Expr;
-}
-export interface SourceInfo_MacroCallsEntryProtoMsg {
-  typeUrl: string;
-  value: Uint8Array;
 }
 export interface SourceInfo_MacroCallsEntryProtoMsg {
   typeUrl: string;
@@ -833,10 +785,6 @@ export interface SourceInfo {
   macroCalls: {
     [key: bigint]: Expr;
   };
-}
-export interface SourceInfoProtoMsg {
-  typeUrl: "/google.api.expr.v1alpha1.SourceInfo";
-  value: Uint8Array;
 }
 export interface SourceInfoProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.SourceInfo";
@@ -916,10 +864,6 @@ export interface SourcePosition {
    * where the issue occurs.  Only meaningful if line is nonzero.
    */
   column: number;
-}
-export interface SourcePositionProtoMsg {
-  typeUrl: "/google.api.expr.v1alpha1.SourcePosition";
-  value: Uint8Array;
 }
 export interface SourcePositionProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.SourcePosition";

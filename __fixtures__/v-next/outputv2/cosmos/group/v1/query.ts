@@ -12,10 +12,6 @@ export interface QueryGroupInfoRequestProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryGroupInfoRequest";
   value: Uint8Array;
 }
-export interface QueryGroupInfoRequestProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryGroupInfoRequest";
-  value: Uint8Array;
-}
 /** QueryGroupInfoRequest is the Query/GroupInfo request type. */
 export interface QueryGroupInfoRequestAmino {
   /** group_id is the unique ID of the group. */
@@ -33,10 +29,6 @@ export interface QueryGroupInfoRequestSDKType {
 export interface QueryGroupInfoResponse {
   /** info is the GroupInfo for the group. */
   info?: GroupInfo;
-}
-export interface QueryGroupInfoResponseProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryGroupInfoResponse";
-  value: Uint8Array;
 }
 export interface QueryGroupInfoResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryGroupInfoResponse";
@@ -64,10 +56,6 @@ export interface QueryGroupPolicyInfoRequestProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryGroupPolicyInfoRequest";
   value: Uint8Array;
 }
-export interface QueryGroupPolicyInfoRequestProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryGroupPolicyInfoRequest";
-  value: Uint8Array;
-}
 /** QueryGroupPolicyInfoRequest is the Query/GroupPolicyInfo request type. */
 export interface QueryGroupPolicyInfoRequestAmino {
   /** address is the account address of the group policy. */
@@ -85,10 +73,6 @@ export interface QueryGroupPolicyInfoRequestSDKType {
 export interface QueryGroupPolicyInfoResponse {
   /** info is the GroupPolicyInfo for the group policy. */
   info?: GroupPolicyInfo;
-}
-export interface QueryGroupPolicyInfoResponseProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryGroupPolicyInfoResponse";
-  value: Uint8Array;
 }
 export interface QueryGroupPolicyInfoResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryGroupPolicyInfoResponse";
@@ -113,10 +97,6 @@ export interface QueryGroupMembersRequest {
   groupId: bigint;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
-}
-export interface QueryGroupMembersRequestProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryGroupMembersRequest";
-  value: Uint8Array;
 }
 export interface QueryGroupMembersRequestProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryGroupMembersRequest";
@@ -149,10 +129,6 @@ export interface QueryGroupMembersResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryGroupMembersResponse";
   value: Uint8Array;
 }
-export interface QueryGroupMembersResponseProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryGroupMembersResponse";
-  value: Uint8Array;
-}
 /** QueryGroupMembersResponse is the Query/GroupMembersResponse response type. */
 export interface QueryGroupMembersResponseAmino {
   /** members are the members of the group with given group_id. */
@@ -175,10 +151,6 @@ export interface QueryGroupsByAdminRequest {
   admin: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
-}
-export interface QueryGroupsByAdminRequestProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryGroupsByAdminRequest";
-  value: Uint8Array;
 }
 export interface QueryGroupsByAdminRequestProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryGroupsByAdminRequest";
@@ -211,10 +183,6 @@ export interface QueryGroupsByAdminResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryGroupsByAdminResponse";
   value: Uint8Array;
 }
-export interface QueryGroupsByAdminResponseProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryGroupsByAdminResponse";
-  value: Uint8Array;
-}
 /** QueryGroupsByAdminResponse is the Query/GroupsByAdminResponse response type. */
 export interface QueryGroupsByAdminResponseAmino {
   /** groups are the groups info with the provided admin. */
@@ -237,10 +205,6 @@ export interface QueryGroupPoliciesByGroupRequest {
   groupId: bigint;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
-}
-export interface QueryGroupPoliciesByGroupRequestProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryGroupPoliciesByGroupRequest";
-  value: Uint8Array;
 }
 export interface QueryGroupPoliciesByGroupRequestProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryGroupPoliciesByGroupRequest";
@@ -273,10 +237,6 @@ export interface QueryGroupPoliciesByGroupResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryGroupPoliciesByGroupResponse";
   value: Uint8Array;
 }
-export interface QueryGroupPoliciesByGroupResponseProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryGroupPoliciesByGroupResponse";
-  value: Uint8Array;
-}
 /** QueryGroupPoliciesByGroupResponse is the Query/GroupPoliciesByGroup response type. */
 export interface QueryGroupPoliciesByGroupResponseAmino {
   /** group_policies are the group policies info associated with the provided group. */
@@ -299,10 +259,6 @@ export interface QueryGroupPoliciesByAdminRequest {
   admin: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
-}
-export interface QueryGroupPoliciesByAdminRequestProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryGroupPoliciesByAdminRequest";
-  value: Uint8Array;
 }
 export interface QueryGroupPoliciesByAdminRequestProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryGroupPoliciesByAdminRequest";
@@ -335,10 +291,6 @@ export interface QueryGroupPoliciesByAdminResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryGroupPoliciesByAdminResponse";
   value: Uint8Array;
 }
-export interface QueryGroupPoliciesByAdminResponseProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryGroupPoliciesByAdminResponse";
-  value: Uint8Array;
-}
 /** QueryGroupPoliciesByAdminResponse is the Query/GroupPoliciesByAdmin response type. */
 export interface QueryGroupPoliciesByAdminResponseAmino {
   /** group_policies are the group policies info with provided admin. */
@@ -359,10 +311,6 @@ export interface QueryGroupPoliciesByAdminResponseSDKType {
 export interface QueryProposalRequest {
   /** proposal_id is the unique ID of a proposal. */
   proposalId: bigint;
-}
-export interface QueryProposalRequestProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryProposalRequest";
-  value: Uint8Array;
 }
 export interface QueryProposalRequestProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryProposalRequest";
@@ -390,10 +338,6 @@ export interface QueryProposalResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryProposalResponse";
   value: Uint8Array;
 }
-export interface QueryProposalResponseProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryProposalResponse";
-  value: Uint8Array;
-}
 /** QueryProposalResponse is the Query/Proposal response type. */
 export interface QueryProposalResponseAmino {
   /** proposal is the proposal info. */
@@ -413,10 +357,6 @@ export interface QueryProposalsByGroupPolicyRequest {
   address: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
-}
-export interface QueryProposalsByGroupPolicyRequestProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryProposalsByGroupPolicyRequest";
-  value: Uint8Array;
 }
 export interface QueryProposalsByGroupPolicyRequestProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryProposalsByGroupPolicyRequest";
@@ -449,10 +389,6 @@ export interface QueryProposalsByGroupPolicyResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryProposalsByGroupPolicyResponse";
   value: Uint8Array;
 }
-export interface QueryProposalsByGroupPolicyResponseProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryProposalsByGroupPolicyResponse";
-  value: Uint8Array;
-}
 /** QueryProposalsByGroupPolicyResponse is the Query/ProposalByGroupPolicy response type. */
 export interface QueryProposalsByGroupPolicyResponseAmino {
   /** proposals are the proposals with given group policy. */
@@ -475,10 +411,6 @@ export interface QueryVoteByProposalVoterRequest {
   proposalId: bigint;
   /** voter is a proposal voter account address. */
   voter: string;
-}
-export interface QueryVoteByProposalVoterRequestProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryVoteByProposalVoterRequest";
-  value: Uint8Array;
 }
 export interface QueryVoteByProposalVoterRequestProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryVoteByProposalVoterRequest";
@@ -509,10 +441,6 @@ export interface QueryVoteByProposalVoterResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryVoteByProposalVoterResponse";
   value: Uint8Array;
 }
-export interface QueryVoteByProposalVoterResponseProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryVoteByProposalVoterResponse";
-  value: Uint8Array;
-}
 /** QueryVoteByProposalVoterResponse is the Query/VoteByProposalVoter response type. */
 export interface QueryVoteByProposalVoterResponseAmino {
   /** vote is the vote with given proposal_id and voter. */
@@ -532,10 +460,6 @@ export interface QueryVotesByProposalRequest {
   proposalId: bigint;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
-}
-export interface QueryVotesByProposalRequestProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryVotesByProposalRequest";
-  value: Uint8Array;
 }
 export interface QueryVotesByProposalRequestProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryVotesByProposalRequest";
@@ -568,10 +492,6 @@ export interface QueryVotesByProposalResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryVotesByProposalResponse";
   value: Uint8Array;
 }
-export interface QueryVotesByProposalResponseProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryVotesByProposalResponse";
-  value: Uint8Array;
-}
 /** QueryVotesByProposalResponse is the Query/VotesByProposal response type. */
 export interface QueryVotesByProposalResponseAmino {
   /** votes are the list of votes for given proposal_id. */
@@ -594,10 +514,6 @@ export interface QueryVotesByVoterRequest {
   voter: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
-}
-export interface QueryVotesByVoterRequestProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryVotesByVoterRequest";
-  value: Uint8Array;
 }
 export interface QueryVotesByVoterRequestProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryVotesByVoterRequest";
@@ -630,10 +546,6 @@ export interface QueryVotesByVoterResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryVotesByVoterResponse";
   value: Uint8Array;
 }
-export interface QueryVotesByVoterResponseProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryVotesByVoterResponse";
-  value: Uint8Array;
-}
 /** QueryVotesByVoterResponse is the Query/VotesByVoter response type. */
 export interface QueryVotesByVoterResponseAmino {
   /** votes are the list of votes by given voter. */
@@ -656,10 +568,6 @@ export interface QueryGroupsByMemberRequest {
   address: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
-}
-export interface QueryGroupsByMemberRequestProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryGroupsByMemberRequest";
-  value: Uint8Array;
 }
 export interface QueryGroupsByMemberRequestProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryGroupsByMemberRequest";
@@ -692,10 +600,6 @@ export interface QueryGroupsByMemberResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryGroupsByMemberResponse";
   value: Uint8Array;
 }
-export interface QueryGroupsByMemberResponseProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryGroupsByMemberResponse";
-  value: Uint8Array;
-}
 /** QueryGroupsByMemberResponse is the Query/GroupsByMember response type. */
 export interface QueryGroupsByMemberResponseAmino {
   /** groups are the groups info with the provided group member. */
@@ -721,10 +625,6 @@ export interface QueryTallyResultRequestProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryTallyResultRequest";
   value: Uint8Array;
 }
-export interface QueryTallyResultRequestProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryTallyResultRequest";
-  value: Uint8Array;
-}
 /** QueryTallyResultRequest is the Query/TallyResult request type. */
 export interface QueryTallyResultRequestAmino {
   /** proposal_id is the unique id of a proposal. */
@@ -742,10 +642,6 @@ export interface QueryTallyResultRequestSDKType {
 export interface QueryTallyResultResponse {
   /** tally defines the requested tally. */
   tally: TallyResult;
-}
-export interface QueryTallyResultResponseProtoMsg {
-  typeUrl: "/cosmos.group.v1.QueryTallyResultResponse";
-  value: Uint8Array;
 }
 export interface QueryTallyResultResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.QueryTallyResultResponse";

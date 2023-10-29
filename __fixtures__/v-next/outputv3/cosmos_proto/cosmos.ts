@@ -61,10 +61,6 @@ export interface InterfaceDescriptorProtoMsg {
   typeUrl: "/cosmos_proto.InterfaceDescriptor";
   value: Uint8Array;
 }
-export interface InterfaceDescriptorProtoMsg {
-  typeUrl: "/cosmos_proto.InterfaceDescriptor";
-  value: Uint8Array;
-}
 /**
  * InterfaceDescriptor describes an interface type to be used with
  * accepts_interface and implements_interface and declared by declare_interface.
@@ -125,10 +121,6 @@ export interface ScalarDescriptor {
    * bytes fields are supported for scalars.
    */
   fieldType: ScalarType[];
-}
-export interface ScalarDescriptorProtoMsg {
-  typeUrl: "/cosmos_proto.ScalarDescriptor";
-  value: Uint8Array;
 }
 export interface ScalarDescriptorProtoMsg {
   typeUrl: "/cosmos_proto.ScalarDescriptor";

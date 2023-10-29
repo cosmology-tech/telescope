@@ -55,10 +55,6 @@ export interface ClientStateProtoMsg {
   typeUrl: "/ibc.lightclients.tendermint.v1.ClientState";
   value: Uint8Array;
 }
-export interface ClientStateProtoMsg {
-  typeUrl: "/ibc.lightclients.tendermint.v1.ClientState";
-  value: Uint8Array;
-}
 /**
  * ClientState from Tendermint tracks the current validator set, latest height,
  * and a possible frozen height.
@@ -138,10 +134,6 @@ export interface ConsensusStateProtoMsg {
   typeUrl: "/ibc.lightclients.tendermint.v1.ConsensusState";
   value: Uint8Array;
 }
-export interface ConsensusStateProtoMsg {
-  typeUrl: "/ibc.lightclients.tendermint.v1.ConsensusState";
-  value: Uint8Array;
-}
 /** ConsensusState defines the consensus state from Tendermint. */
 export interface ConsensusStateAmino {
   /**
@@ -171,10 +163,6 @@ export interface Misbehaviour {
   clientId: string;
   header1?: Header;
   header2?: Header;
-}
-export interface MisbehaviourProtoMsg {
-  typeUrl: "/ibc.lightclients.tendermint.v1.Misbehaviour";
-  value: Uint8Array;
 }
 export interface MisbehaviourProtoMsg {
   typeUrl: "/ibc.lightclients.tendermint.v1.Misbehaviour";
@@ -221,10 +209,6 @@ export interface Header {
   validatorSet?: ValidatorSet;
   trustedHeight: Height;
   trustedValidators?: ValidatorSet;
-}
-export interface HeaderProtoMsg {
-  typeUrl: "/ibc.lightclients.tendermint.v1.Header";
-  value: Uint8Array;
 }
 export interface HeaderProtoMsg {
   typeUrl: "/ibc.lightclients.tendermint.v1.Header";
@@ -281,10 +265,6 @@ export interface HeaderSDKType {
 export interface Fraction {
   numerator: bigint;
   denominator: bigint;
-}
-export interface FractionProtoMsg {
-  typeUrl: "/ibc.lightclients.tendermint.v1.Fraction";
-  value: Uint8Array;
 }
 export interface FractionProtoMsg {
   typeUrl: "/ibc.lightclients.tendermint.v1.Fraction";

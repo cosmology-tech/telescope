@@ -14,10 +14,6 @@ export interface DoubleValueProtoMsg {
   typeUrl: "/google.protobuf.DoubleValue";
   value: Uint8Array;
 }
-export interface DoubleValueProtoMsg {
-  typeUrl: "/google.protobuf.DoubleValue";
-  value: Uint8Array;
-}
 /**
  * Wrapper message for `double`.
  * 
@@ -47,10 +43,6 @@ export interface DoubleValueSDKType {
 export interface FloatValue {
   /** The float value. */
   value: number;
-}
-export interface FloatValueProtoMsg {
-  typeUrl: "/google.protobuf.FloatValue";
-  value: Uint8Array;
 }
 export interface FloatValueProtoMsg {
   typeUrl: "/google.protobuf.FloatValue";
@@ -90,10 +82,6 @@ export interface Int64ValueProtoMsg {
   typeUrl: "/google.protobuf.Int64Value";
   value: Uint8Array;
 }
-export interface Int64ValueProtoMsg {
-  typeUrl: "/google.protobuf.Int64Value";
-  value: Uint8Array;
-}
 /**
  * Wrapper message for `int64`.
  * 
@@ -123,10 +111,6 @@ export interface Int64ValueSDKType {
 export interface UInt64Value {
   /** The uint64 value. */
   value: bigint;
-}
-export interface UInt64ValueProtoMsg {
-  typeUrl: "/google.protobuf.UInt64Value";
-  value: Uint8Array;
 }
 export interface UInt64ValueProtoMsg {
   typeUrl: "/google.protobuf.UInt64Value";
@@ -166,10 +150,6 @@ export interface Int32ValueProtoMsg {
   typeUrl: "/google.protobuf.Int32Value";
   value: Uint8Array;
 }
-export interface Int32ValueProtoMsg {
-  typeUrl: "/google.protobuf.Int32Value";
-  value: Uint8Array;
-}
 /**
  * Wrapper message for `int32`.
  * 
@@ -199,10 +179,6 @@ export interface Int32ValueSDKType {
 export interface UInt32Value {
   /** The uint32 value. */
   value: number;
-}
-export interface UInt32ValueProtoMsg {
-  typeUrl: "/google.protobuf.UInt32Value";
-  value: Uint8Array;
 }
 export interface UInt32ValueProtoMsg {
   typeUrl: "/google.protobuf.UInt32Value";
@@ -242,10 +218,6 @@ export interface BoolValueProtoMsg {
   typeUrl: "/google.protobuf.BoolValue";
   value: Uint8Array;
 }
-export interface BoolValueProtoMsg {
-  typeUrl: "/google.protobuf.BoolValue";
-  value: Uint8Array;
-}
 /**
  * Wrapper message for `bool`.
  * 
@@ -280,10 +252,6 @@ export interface StringValueProtoMsg {
   typeUrl: "/google.protobuf.StringValue";
   value: Uint8Array;
 }
-export interface StringValueProtoMsg {
-  typeUrl: "/google.protobuf.StringValue";
-  value: Uint8Array;
-}
 /**
  * Wrapper message for `string`.
  * 
@@ -312,10 +280,6 @@ export interface StringValueSDKType {
  */
 export interface BytesValue {
   /** The bytes value. */
-  value: Uint8Array;
-}
-export interface BytesValueProtoMsg {
-  typeUrl: "/google.protobuf.BytesValue";
   value: Uint8Array;
 }
 export interface BytesValueProtoMsg {

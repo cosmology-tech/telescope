@@ -118,10 +118,6 @@ export interface ClientStateProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.ClientState";
   value: Uint8Array;
 }
-export interface ClientStateProtoMsg {
-  typeUrl: "/ibc.lightclients.solomachine.v2.ClientState";
-  value: Uint8Array;
-}
 /**
  * ClientState defines a solo machine client that tracks the current consensus
  * state and if the client is frozen.
@@ -172,10 +168,6 @@ export interface ConsensusStateProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.ConsensusState";
   value: Uint8Array;
 }
-export interface ConsensusStateProtoMsg {
-  typeUrl: "/ibc.lightclients.solomachine.v2.ConsensusState";
-  value: Uint8Array;
-}
 /**
  * ConsensusState defines a solo machine consensus state. The sequence of a
  * consensus state is contained in the "height" key used in storing the
@@ -219,10 +211,6 @@ export interface HeaderProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.Header";
   value: Uint8Array;
 }
-export interface HeaderProtoMsg {
-  typeUrl: "/ibc.lightclients.solomachine.v2.Header";
-  value: Uint8Array;
-}
 /** Header defines a solo machine consensus header */
 export interface HeaderAmino {
   /** sequence to update solo machine public key at */
@@ -253,10 +241,6 @@ export interface Misbehaviour {
   sequence: bigint;
   signatureOne?: SignatureAndData;
   signatureTwo?: SignatureAndData;
-}
-export interface MisbehaviourProtoMsg {
-  typeUrl: "/ibc.lightclients.solomachine.v2.Misbehaviour";
-  value: Uint8Array;
 }
 export interface MisbehaviourProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.Misbehaviour";
@@ -300,10 +284,6 @@ export interface SignatureAndDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.SignatureAndData";
   value: Uint8Array;
 }
-export interface SignatureAndDataProtoMsg {
-  typeUrl: "/ibc.lightclients.solomachine.v2.SignatureAndData";
-  value: Uint8Array;
-}
 /**
  * SignatureAndData contains a signature and the data signed over to create that
  * signature.
@@ -335,10 +315,6 @@ export interface SignatureAndDataSDKType {
 export interface TimestampedSignatureData {
   signatureData: Uint8Array;
   timestamp: bigint;
-}
-export interface TimestampedSignatureDataProtoMsg {
-  typeUrl: "/ibc.lightclients.solomachine.v2.TimestampedSignatureData";
-  value: Uint8Array;
 }
 export interface TimestampedSignatureDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.TimestampedSignatureData";
@@ -378,10 +354,6 @@ export interface SignBytesProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.SignBytes";
   value: Uint8Array;
 }
-export interface SignBytesProtoMsg {
-  typeUrl: "/ibc.lightclients.solomachine.v2.SignBytes";
-  value: Uint8Array;
-}
 /** SignBytes defines the signed bytes used for signature verification. */
 export interface SignBytesAmino {
   sequence: string;
@@ -415,10 +387,6 @@ export interface HeaderDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.HeaderData";
   value: Uint8Array;
 }
-export interface HeaderDataProtoMsg {
-  typeUrl: "/ibc.lightclients.solomachine.v2.HeaderData";
-  value: Uint8Array;
-}
 /** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderDataAmino {
   /** header public key */
@@ -439,10 +407,6 @@ export interface HeaderDataSDKType {
 export interface ClientStateData {
   path: Uint8Array;
   clientState?: Any;
-}
-export interface ClientStateDataProtoMsg {
-  typeUrl: "/ibc.lightclients.solomachine.v2.ClientStateData";
-  value: Uint8Array;
 }
 export interface ClientStateDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.ClientStateData";
@@ -469,10 +433,6 @@ export interface ClientStateDataSDKType {
 export interface ConsensusStateData {
   path: Uint8Array;
   consensusState?: Any;
-}
-export interface ConsensusStateDataProtoMsg {
-  typeUrl: "/ibc.lightclients.solomachine.v2.ConsensusStateData";
-  value: Uint8Array;
 }
 export interface ConsensusStateDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.ConsensusStateData";
@@ -510,10 +470,6 @@ export interface ConnectionStateDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.ConnectionStateData";
   value: Uint8Array;
 }
-export interface ConnectionStateDataProtoMsg {
-  typeUrl: "/ibc.lightclients.solomachine.v2.ConnectionStateData";
-  value: Uint8Array;
-}
 /**
  * ConnectionStateData returns the SignBytes data for connection state
  * verification.
@@ -541,10 +497,6 @@ export interface ConnectionStateDataSDKType {
 export interface ChannelStateData {
   path: Uint8Array;
   channel?: Channel;
-}
-export interface ChannelStateDataProtoMsg {
-  typeUrl: "/ibc.lightclients.solomachine.v2.ChannelStateData";
-  value: Uint8Array;
 }
 export interface ChannelStateDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.ChannelStateData";
@@ -582,10 +534,6 @@ export interface PacketCommitmentDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.PacketCommitmentData";
   value: Uint8Array;
 }
-export interface PacketCommitmentDataProtoMsg {
-  typeUrl: "/ibc.lightclients.solomachine.v2.PacketCommitmentData";
-  value: Uint8Array;
-}
 /**
  * PacketCommitmentData returns the SignBytes data for packet commitment
  * verification.
@@ -613,10 +561,6 @@ export interface PacketCommitmentDataSDKType {
 export interface PacketAcknowledgementData {
   path: Uint8Array;
   acknowledgement: Uint8Array;
-}
-export interface PacketAcknowledgementDataProtoMsg {
-  typeUrl: "/ibc.lightclients.solomachine.v2.PacketAcknowledgementData";
-  value: Uint8Array;
 }
 export interface PacketAcknowledgementDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.PacketAcknowledgementData";
@@ -653,10 +597,6 @@ export interface PacketReceiptAbsenceDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.PacketReceiptAbsenceData";
   value: Uint8Array;
 }
-export interface PacketReceiptAbsenceDataProtoMsg {
-  typeUrl: "/ibc.lightclients.solomachine.v2.PacketReceiptAbsenceData";
-  value: Uint8Array;
-}
 /**
  * PacketReceiptAbsenceData returns the SignBytes data for
  * packet receipt absence verification.
@@ -682,10 +622,6 @@ export interface PacketReceiptAbsenceDataSDKType {
 export interface NextSequenceRecvData {
   path: Uint8Array;
   nextSeqRecv: bigint;
-}
-export interface NextSequenceRecvDataProtoMsg {
-  typeUrl: "/ibc.lightclients.solomachine.v2.NextSequenceRecvData";
-  value: Uint8Array;
 }
 export interface NextSequenceRecvDataProtoMsg {
   typeUrl: "/ibc.lightclients.solomachine.v2.NextSequenceRecvData";

@@ -19,10 +19,6 @@ export interface DeclProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Decl";
   value: Uint8Array;
 }
-export interface DeclProtoMsg {
-  typeUrl: "/google.api.expr.v1beta1.Decl";
-  value: Uint8Array;
-}
 /** A declaration. */
 export interface DeclAmino {
   /** The id of the declaration. */
@@ -64,10 +60,6 @@ export interface DeclType {
    * Only applies to a subset of types, e.g. `map`, `list`.
    */
   typeParams: DeclType[];
-}
-export interface DeclTypeProtoMsg {
-  typeUrl: "/google.api.expr.v1beta1.DeclType";
-  value: Uint8Array;
 }
 export interface DeclTypeProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.DeclType";
@@ -116,10 +108,6 @@ export interface IdentDeclProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.IdentDecl";
   value: Uint8Array;
 }
-export interface IdentDeclProtoMsg {
-  typeUrl: "/google.api.expr.v1beta1.IdentDecl";
-  value: Uint8Array;
-}
 /** An identifier declaration. */
 export interface IdentDeclAmino {
   /** Optional type of the identifier. */
@@ -144,10 +132,6 @@ export interface FunctionDecl {
   returnType?: DeclType;
   /** If the first argument of the function is the receiver. */
   receiverFunction: boolean;
-}
-export interface FunctionDeclProtoMsg {
-  typeUrl: "/google.api.expr.v1beta1.FunctionDecl";
-  value: Uint8Array;
 }
 export interface FunctionDeclProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.FunctionDecl";

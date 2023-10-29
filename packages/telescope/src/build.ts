@@ -67,11 +67,10 @@ export const buildBaseTypeScriptInterface = (
     context.body.push(createProtoType(context.proto, name, obj));
 
     if (context.options.aminoEncoding?.enabled && !context.options.aminoEncoding?.useLegacyInlineEncoding || context.options.prototypes?.methods?.fromProto || context.options.prototypes?.methods?.toProto) {
-      context.body.push(createProtoTypeType(context.proto, name, obj));
+        context.body.push(createProtoTypeType(context.proto, name, obj));
     }
 
     if (context.options.aminoEncoding?.enabled && !context.options.aminoEncoding?.useLegacyInlineEncoding) {
-        context.body.push(createProtoTypeType(context.proto, name, obj));
         // conditional type
         const interfaceType = createProtoInterfaceEncodedType(context.proto, name, obj);
         if (interfaceType) {

@@ -55,10 +55,6 @@ export interface Operation_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
-export interface Operation_LabelsEntryProtoMsg {
-  typeUrl: string;
-  value: Uint8Array;
-}
 export interface Operation_LabelsEntryAmino {
   key: string;
   value: string;
@@ -152,10 +148,6 @@ export interface Operation {
   importance: Operation_Importance;
   /** Unimplemented. */
   extensions: Any[];
-}
-export interface OperationProtoMsg {
-  typeUrl: "/google.api.servicecontrol.v1.Operation";
-  value: Uint8Array;
 }
 export interface OperationProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.Operation";

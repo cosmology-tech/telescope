@@ -47,10 +47,6 @@ export interface LogMetric_LabelExtractorsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
-export interface LogMetric_LabelExtractorsEntryProtoMsg {
-  typeUrl: string;
-  value: Uint8Array;
-}
 export interface LogMetric_LabelExtractorsEntryAmino {
   key: string;
   value: string;
@@ -198,10 +194,6 @@ export interface LogMetric {
    */
   /** @deprecated */
   version: LogMetric_ApiVersion;
-}
-export interface LogMetricProtoMsg {
-  typeUrl: "/google.logging.v2.LogMetric";
-  value: Uint8Array;
 }
 export interface LogMetricProtoMsg {
   typeUrl: "/google.logging.v2.LogMetric";
@@ -398,10 +390,6 @@ export interface ListLogMetricsRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListLogMetricsRequest";
   value: Uint8Array;
 }
-export interface ListLogMetricsRequestProtoMsg {
-  typeUrl: "/google.logging.v2.ListLogMetricsRequest";
-  value: Uint8Array;
-}
 /** The parameters to ListLogMetrics. */
 export interface ListLogMetricsRequestAmino {
   /**
@@ -449,10 +437,6 @@ export interface ListLogMetricsResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListLogMetricsResponse";
   value: Uint8Array;
 }
-export interface ListLogMetricsResponseProtoMsg {
-  typeUrl: "/google.logging.v2.ListLogMetricsResponse";
-  value: Uint8Array;
-}
 /** Result returned from ListLogMetrics. */
 export interface ListLogMetricsResponseAmino {
   /** A list of logs-based metrics. */
@@ -481,10 +465,6 @@ export interface GetLogMetricRequest {
    *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
   metricName: string;
-}
-export interface GetLogMetricRequestProtoMsg {
-  typeUrl: "/google.logging.v2.GetLogMetricRequest";
-  value: Uint8Array;
 }
 export interface GetLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetLogMetricRequest";
@@ -522,10 +502,6 @@ export interface CreateLogMetricRequest {
    * already exists.
    */
   metric?: LogMetric;
-}
-export interface CreateLogMetricRequestProtoMsg {
-  typeUrl: "/google.logging.v2.CreateLogMetricRequest";
-  value: Uint8Array;
 }
 export interface CreateLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateLogMetricRequest";
@@ -575,10 +551,6 @@ export interface UpdateLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateLogMetricRequest";
   value: Uint8Array;
 }
-export interface UpdateLogMetricRequestProtoMsg {
-  typeUrl: "/google.logging.v2.UpdateLogMetricRequest";
-  value: Uint8Array;
-}
 /** The parameters to UpdateLogMetric. */
 export interface UpdateLogMetricRequestAmino {
   /**
@@ -611,10 +583,6 @@ export interface DeleteLogMetricRequest {
    *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
   metricName: string;
-}
-export interface DeleteLogMetricRequestProtoMsg {
-  typeUrl: "/google.logging.v2.DeleteLogMetricRequest";
-  value: Uint8Array;
 }
 export interface DeleteLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.DeleteLogMetricRequest";

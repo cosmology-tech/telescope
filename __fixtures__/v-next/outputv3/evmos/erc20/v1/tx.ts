@@ -18,10 +18,6 @@ export interface MsgConvertCoinProtoMsg {
   typeUrl: "/evmos.erc20.v1.MsgConvertCoin";
   value: Uint8Array;
 }
-export interface MsgConvertCoinProtoMsg {
-  typeUrl: "/evmos.erc20.v1.MsgConvertCoin";
-  value: Uint8Array;
-}
 /** MsgConvertCoin defines a Msg to convert a native Cosmos coin to a ERC20 token */
 export interface MsgConvertCoinAmino {
   /**
@@ -50,10 +46,6 @@ export interface MsgConvertCoinResponseProtoMsg {
   typeUrl: "/evmos.erc20.v1.MsgConvertCoinResponse";
   value: Uint8Array;
 }
-export interface MsgConvertCoinResponseProtoMsg {
-  typeUrl: "/evmos.erc20.v1.MsgConvertCoinResponse";
-  value: Uint8Array;
-}
 /** MsgConvertCoinResponse returns no fields */
 export interface MsgConvertCoinResponseAmino {}
 export interface MsgConvertCoinResponseAminoMsg {
@@ -75,10 +67,6 @@ export interface MsgConvertERC20 {
   receiver: string;
   /** sender hex address from the owner of the given ERC20 tokens */
   sender: string;
-}
-export interface MsgConvertERC20ProtoMsg {
-  typeUrl: "/evmos.erc20.v1.MsgConvertERC20";
-  value: Uint8Array;
 }
 export interface MsgConvertERC20ProtoMsg {
   typeUrl: "/evmos.erc20.v1.MsgConvertERC20";
@@ -114,10 +102,6 @@ export interface MsgConvertERC20SDKType {
 }
 /** MsgConvertERC20Response returns no fields */
 export interface MsgConvertERC20Response {}
-export interface MsgConvertERC20ResponseProtoMsg {
-  typeUrl: "/evmos.erc20.v1.MsgConvertERC20Response";
-  value: Uint8Array;
-}
 export interface MsgConvertERC20ResponseProtoMsg {
   typeUrl: "/evmos.erc20.v1.MsgConvertERC20Response";
   value: Uint8Array;

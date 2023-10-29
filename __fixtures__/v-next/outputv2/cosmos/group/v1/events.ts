@@ -11,10 +11,6 @@ export interface EventCreateGroupProtoMsg {
   typeUrl: "/cosmos.group.v1.EventCreateGroup";
   value: Uint8Array;
 }
-export interface EventCreateGroupProtoMsg {
-  typeUrl: "/cosmos.group.v1.EventCreateGroup";
-  value: Uint8Array;
-}
 /** EventCreateGroup is an event emitted when a group is created. */
 export interface EventCreateGroupAmino {
   /** group_id is the unique ID of the group. */
@@ -32,10 +28,6 @@ export interface EventCreateGroupSDKType {
 export interface EventUpdateGroup {
   /** group_id is the unique ID of the group. */
   groupId: bigint;
-}
-export interface EventUpdateGroupProtoMsg {
-  typeUrl: "/cosmos.group.v1.EventUpdateGroup";
-  value: Uint8Array;
 }
 export interface EventUpdateGroupProtoMsg {
   typeUrl: "/cosmos.group.v1.EventUpdateGroup";
@@ -63,10 +55,6 @@ export interface EventCreateGroupPolicyProtoMsg {
   typeUrl: "/cosmos.group.v1.EventCreateGroupPolicy";
   value: Uint8Array;
 }
-export interface EventCreateGroupPolicyProtoMsg {
-  typeUrl: "/cosmos.group.v1.EventCreateGroupPolicy";
-  value: Uint8Array;
-}
 /** EventCreateGroupPolicy is an event emitted when a group policy is created. */
 export interface EventCreateGroupPolicyAmino {
   /** address is the account address of the group policy. */
@@ -84,10 +72,6 @@ export interface EventCreateGroupPolicySDKType {
 export interface EventUpdateGroupPolicy {
   /** address is the account address of the group policy. */
   address: string;
-}
-export interface EventUpdateGroupPolicyProtoMsg {
-  typeUrl: "/cosmos.group.v1.EventUpdateGroupPolicy";
-  value: Uint8Array;
 }
 export interface EventUpdateGroupPolicyProtoMsg {
   typeUrl: "/cosmos.group.v1.EventUpdateGroupPolicy";
@@ -115,10 +99,6 @@ export interface EventSubmitProposalProtoMsg {
   typeUrl: "/cosmos.group.v1.EventSubmitProposal";
   value: Uint8Array;
 }
-export interface EventSubmitProposalProtoMsg {
-  typeUrl: "/cosmos.group.v1.EventSubmitProposal";
-  value: Uint8Array;
-}
 /** EventSubmitProposal is an event emitted when a proposal is created. */
 export interface EventSubmitProposalAmino {
   /** proposal_id is the unique ID of the proposal. */
@@ -141,10 +121,6 @@ export interface EventWithdrawProposalProtoMsg {
   typeUrl: "/cosmos.group.v1.EventWithdrawProposal";
   value: Uint8Array;
 }
-export interface EventWithdrawProposalProtoMsg {
-  typeUrl: "/cosmos.group.v1.EventWithdrawProposal";
-  value: Uint8Array;
-}
 /** EventWithdrawProposal is an event emitted when a proposal is withdrawn. */
 export interface EventWithdrawProposalAmino {
   /** proposal_id is the unique ID of the proposal. */
@@ -162,10 +138,6 @@ export interface EventWithdrawProposalSDKType {
 export interface EventVote {
   /** proposal_id is the unique ID of the proposal. */
   proposalId: bigint;
-}
-export interface EventVoteProtoMsg {
-  typeUrl: "/cosmos.group.v1.EventVote";
-  value: Uint8Array;
 }
 export interface EventVoteProtoMsg {
   typeUrl: "/cosmos.group.v1.EventVote";
@@ -195,10 +167,6 @@ export interface EventExecProtoMsg {
   typeUrl: "/cosmos.group.v1.EventExec";
   value: Uint8Array;
 }
-export interface EventExecProtoMsg {
-  typeUrl: "/cosmos.group.v1.EventExec";
-  value: Uint8Array;
-}
 /** EventExec is an event emitted when a proposal is executed. */
 export interface EventExecAmino {
   /** proposal_id is the unique ID of the proposal. */
@@ -221,10 +189,6 @@ export interface EventLeaveGroup {
   groupId: bigint;
   /** address is the account address of the group member. */
   address: string;
-}
-export interface EventLeaveGroupProtoMsg {
-  typeUrl: "/cosmos.group.v1.EventLeaveGroup";
-  value: Uint8Array;
 }
 export interface EventLeaveGroupProtoMsg {
   typeUrl: "/cosmos.group.v1.EventLeaveGroup";

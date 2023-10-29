@@ -21,10 +21,6 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.GenesisState";
   value: Uint8Array;
 }
-export interface GenesisStateProtoMsg {
-  typeUrl: "/cosmos.bank.v1beta1.GenesisState";
-  value: Uint8Array;
-}
 /** GenesisState defines the bank module's genesis state. */
 export interface GenesisStateAmino {
   /** params defines all the paramaters of the module. */
@@ -59,10 +55,6 @@ export interface Balance {
   address: string;
   /** coins defines the different coins this balance holds. */
   coins: Coin[];
-}
-export interface BalanceProtoMsg {
-  typeUrl: "/cosmos.bank.v1beta1.Balance";
-  value: Uint8Array;
 }
 export interface BalanceProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.Balance";

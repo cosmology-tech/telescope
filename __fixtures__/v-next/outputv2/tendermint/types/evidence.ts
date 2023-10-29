@@ -12,10 +12,6 @@ export interface EvidenceProtoMsg {
   typeUrl: "/tendermint.types.Evidence";
   value: Uint8Array;
 }
-export interface EvidenceProtoMsg {
-  typeUrl: "/tendermint.types.Evidence";
-  value: Uint8Array;
-}
 export interface EvidenceAmino {
   duplicate_vote_evidence?: DuplicateVoteEvidenceAmino;
   light_client_attack_evidence?: LightClientAttackEvidenceAmino;
@@ -35,10 +31,6 @@ export interface DuplicateVoteEvidence {
   totalVotingPower: bigint;
   validatorPower: bigint;
   timestamp: Date;
-}
-export interface DuplicateVoteEvidenceProtoMsg {
-  typeUrl: "/tendermint.types.DuplicateVoteEvidence";
-  value: Uint8Array;
 }
 export interface DuplicateVoteEvidenceProtoMsg {
   typeUrl: "/tendermint.types.DuplicateVoteEvidence";
@@ -76,10 +68,6 @@ export interface LightClientAttackEvidenceProtoMsg {
   typeUrl: "/tendermint.types.LightClientAttackEvidence";
   value: Uint8Array;
 }
-export interface LightClientAttackEvidenceProtoMsg {
-  typeUrl: "/tendermint.types.LightClientAttackEvidence";
-  value: Uint8Array;
-}
 /** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
 export interface LightClientAttackEvidenceAmino {
   conflicting_block?: LightBlockAmino;
@@ -102,10 +90,6 @@ export interface LightClientAttackEvidenceSDKType {
 }
 export interface EvidenceList {
   evidence: Evidence[];
-}
-export interface EvidenceListProtoMsg {
-  typeUrl: "/tendermint.types.EvidenceList";
-  value: Uint8Array;
 }
 export interface EvidenceListProtoMsg {
   typeUrl: "/tendermint.types.EvidenceList";

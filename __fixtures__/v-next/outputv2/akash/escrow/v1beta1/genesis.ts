@@ -11,10 +11,6 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/akash.escrow.v1beta1.GenesisState";
   value: Uint8Array;
 }
-export interface GenesisStateProtoMsg {
-  typeUrl: "/akash.escrow.v1beta1.GenesisState";
-  value: Uint8Array;
-}
 /** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisStateAmino {
   accounts: AccountAmino[];

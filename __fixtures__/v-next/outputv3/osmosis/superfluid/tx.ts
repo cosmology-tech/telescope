@@ -11,10 +11,6 @@ export interface MsgSuperfluidDelegateProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgSuperfluidDelegate";
   value: Uint8Array;
 }
-export interface MsgSuperfluidDelegateProtoMsg {
-  typeUrl: "/osmosis.superfluid.MsgSuperfluidDelegate";
-  value: Uint8Array;
-}
 export interface MsgSuperfluidDelegateAmino {
   sender: string;
   lock_id: string;
@@ -34,10 +30,6 @@ export interface MsgSuperfluidDelegateResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgSuperfluidDelegateResponse";
   value: Uint8Array;
 }
-export interface MsgSuperfluidDelegateResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.MsgSuperfluidDelegateResponse";
-  value: Uint8Array;
-}
 export interface MsgSuperfluidDelegateResponseAmino {}
 export interface MsgSuperfluidDelegateResponseAminoMsg {
   type: "osmosis/superfluid-delegate-response";
@@ -47,10 +39,6 @@ export interface MsgSuperfluidDelegateResponseSDKType {}
 export interface MsgSuperfluidUndelegate {
   sender: string;
   lockId: bigint;
-}
-export interface MsgSuperfluidUndelegateProtoMsg {
-  typeUrl: "/osmosis.superfluid.MsgSuperfluidUndelegate";
-  value: Uint8Array;
 }
 export interface MsgSuperfluidUndelegateProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgSuperfluidUndelegate";
@@ -73,10 +61,6 @@ export interface MsgSuperfluidUndelegateResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgSuperfluidUndelegateResponse";
   value: Uint8Array;
 }
-export interface MsgSuperfluidUndelegateResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.MsgSuperfluidUndelegateResponse";
-  value: Uint8Array;
-}
 export interface MsgSuperfluidUndelegateResponseAmino {}
 export interface MsgSuperfluidUndelegateResponseAminoMsg {
   type: "osmosis/superfluid-undelegate-response";
@@ -86,10 +70,6 @@ export interface MsgSuperfluidUndelegateResponseSDKType {}
 export interface MsgSuperfluidUnbondLock {
   sender: string;
   lockId: bigint;
-}
-export interface MsgSuperfluidUnbondLockProtoMsg {
-  typeUrl: "/osmosis.superfluid.MsgSuperfluidUnbondLock";
-  value: Uint8Array;
 }
 export interface MsgSuperfluidUnbondLockProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgSuperfluidUnbondLock";
@@ -112,10 +92,6 @@ export interface MsgSuperfluidUnbondLockResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgSuperfluidUnbondLockResponse";
   value: Uint8Array;
 }
-export interface MsgSuperfluidUnbondLockResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.MsgSuperfluidUnbondLockResponse";
-  value: Uint8Array;
-}
 export interface MsgSuperfluidUnbondLockResponseAmino {}
 export interface MsgSuperfluidUnbondLockResponseAminoMsg {
   type: "osmosis/superfluid-unbond-lock-response";
@@ -131,10 +107,6 @@ export interface MsgLockAndSuperfluidDelegate {
   sender: string;
   coins: Coin[];
   valAddr: string;
-}
-export interface MsgLockAndSuperfluidDelegateProtoMsg {
-  typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegate";
-  value: Uint8Array;
 }
 export interface MsgLockAndSuperfluidDelegateProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegate";
@@ -171,10 +143,6 @@ export interface MsgLockAndSuperfluidDelegateResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegateResponse";
   value: Uint8Array;
 }
-export interface MsgLockAndSuperfluidDelegateResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegateResponse";
-  value: Uint8Array;
-}
 export interface MsgLockAndSuperfluidDelegateResponseAmino {
   ID: string;
 }
@@ -198,10 +166,6 @@ export interface MsgLockAndSuperfluidDelegateResponseSDKType {
 export interface MsgUnPoolWhitelistedPool {
   sender: string;
   poolId: bigint;
-}
-export interface MsgUnPoolWhitelistedPoolProtoMsg {
-  typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPool";
-  value: Uint8Array;
 }
 export interface MsgUnPoolWhitelistedPoolProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPool";
@@ -241,10 +205,6 @@ export interface MsgUnPoolWhitelistedPoolSDKType {
 }
 export interface MsgUnPoolWhitelistedPoolResponse {
   exitedLockIds: bigint[];
-}
-export interface MsgUnPoolWhitelistedPoolResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPoolResponse";
-  value: Uint8Array;
 }
 export interface MsgUnPoolWhitelistedPoolResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPoolResponse";

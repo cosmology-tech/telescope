@@ -78,10 +78,6 @@ export interface DistributionProtoMsg {
   typeUrl: "/google.api.Distribution";
   value: Uint8Array;
 }
-export interface DistributionProtoMsg {
-  typeUrl: "/google.api.Distribution";
-  value: Uint8Array;
-}
 /**
  * `Distribution` contains summary statistics for a population of values. It
  * optionally contains a histogram representing the distribution of those values
@@ -193,10 +189,6 @@ export interface Distribution_RangeProtoMsg {
   typeUrl: "/google.api.Range";
   value: Uint8Array;
 }
-export interface Distribution_RangeProtoMsg {
-  typeUrl: "/google.api.Range";
-  value: Uint8Array;
-}
 /** The range of the population values. */
 export interface Distribution_RangeAmino {
   /** The minimum of the population values. */
@@ -237,10 +229,6 @@ export interface Distribution_BucketOptions {
   exponentialBuckets?: Distribution_BucketOptions_Exponential;
   /** The explicit buckets. */
   explicitBuckets?: Distribution_BucketOptions_Explicit;
-}
-export interface Distribution_BucketOptionsProtoMsg {
-  typeUrl: "/google.api.BucketOptions";
-  value: Uint8Array;
 }
 export interface Distribution_BucketOptionsProtoMsg {
   typeUrl: "/google.api.BucketOptions";
@@ -320,10 +308,6 @@ export interface Distribution_BucketOptions_LinearProtoMsg {
   typeUrl: "/google.api.Linear";
   value: Uint8Array;
 }
-export interface Distribution_BucketOptions_LinearProtoMsg {
-  typeUrl: "/google.api.Linear";
-  value: Uint8Array;
-}
 /**
  * Specifies a linear sequence of buckets that all have the same width
  * (except overflow and underflow). Each bucket represents a constant
@@ -386,10 +370,6 @@ export interface Distribution_BucketOptions_ExponentialProtoMsg {
   typeUrl: "/google.api.Exponential";
   value: Uint8Array;
 }
-export interface Distribution_BucketOptions_ExponentialProtoMsg {
-  typeUrl: "/google.api.Exponential";
-  value: Uint8Array;
-}
 /**
  * Specifies an exponential sequence of buckets that have a width that is
  * proportional to the value of the lower bound. Each bucket represents a
@@ -445,10 +425,6 @@ export interface Distribution_BucketOptions_ExponentialSDKType {
 export interface Distribution_BucketOptions_Explicit {
   /** The values must be monotonically increasing. */
   bounds: number[];
-}
-export interface Distribution_BucketOptions_ExplicitProtoMsg {
-  typeUrl: "/google.api.Explicit";
-  value: Uint8Array;
 }
 export interface Distribution_BucketOptions_ExplicitProtoMsg {
   typeUrl: "/google.api.Explicit";
@@ -520,10 +496,6 @@ export interface Distribution_Exemplar {
    * single exemplar, and this is enforced by the system.
    */
   attachments: Any[];
-}
-export interface Distribution_ExemplarProtoMsg {
-  typeUrl: "/google.api.Exemplar";
-  value: Uint8Array;
 }
 export interface Distribution_ExemplarProtoMsg {
   typeUrl: "/google.api.Exemplar";

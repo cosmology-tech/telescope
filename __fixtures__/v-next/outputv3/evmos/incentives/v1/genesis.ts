@@ -16,10 +16,6 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.incentives.v1.GenesisState";
   value: Uint8Array;
 }
-export interface GenesisStateProtoMsg {
-  typeUrl: "/evmos.incentives.v1.GenesisState";
-  value: Uint8Array;
-}
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateAmino {
   /** module parameters */
@@ -49,10 +45,6 @@ export interface Params {
   incentivesEpochIdentifier: string;
   /** scaling factor for capping rewards */
   rewardScaler: string;
-}
-export interface ParamsProtoMsg {
-  typeUrl: "/evmos.incentives.v1.Params";
-  value: Uint8Array;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/evmos.incentives.v1.Params";

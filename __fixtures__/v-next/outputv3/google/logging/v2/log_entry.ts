@@ -15,10 +15,6 @@ export interface LogEntry_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
-export interface LogEntry_LabelsEntryProtoMsg {
-  typeUrl: string;
-  value: Uint8Array;
-}
 export interface LogEntry_LabelsEntryAmino {
   key: string;
   value: string;
@@ -178,10 +174,6 @@ export interface LogEntry {
    * entries split from a single LogEntry.
    */
   split?: LogSplit;
-}
-export interface LogEntryProtoMsg {
-  typeUrl: "/google.logging.v2.LogEntry";
-  value: Uint8Array;
 }
 export interface LogEntryProtoMsg {
   typeUrl: "/google.logging.v2.LogEntry";
@@ -386,10 +378,6 @@ export interface LogEntryOperationProtoMsg {
   typeUrl: "/google.logging.v2.LogEntryOperation";
   value: Uint8Array;
 }
-export interface LogEntryOperationProtoMsg {
-  typeUrl: "/google.logging.v2.LogEntryOperation";
-  value: Uint8Array;
-}
 /**
  * Additional information about a potentially long-running operation with which
  * a log entry is associated.
@@ -454,10 +442,6 @@ export interface LogEntrySourceLocationProtoMsg {
   typeUrl: "/google.logging.v2.LogEntrySourceLocation";
   value: Uint8Array;
 }
-export interface LogEntrySourceLocationProtoMsg {
-  typeUrl: "/google.logging.v2.LogEntrySourceLocation";
-  value: Uint8Array;
-}
 /**
  * Additional information about the source code location that produced the log
  * entry.
@@ -516,10 +500,6 @@ export interface LogSplit {
   index: number;
   /** The total number of log entries that the original LogEntry was split into. */
   totalSplits: number;
-}
-export interface LogSplitProtoMsg {
-  typeUrl: "/google.logging.v2.LogSplit";
-  value: Uint8Array;
 }
 export interface LogSplitProtoMsg {
   typeUrl: "/google.logging.v2.LogSplit";

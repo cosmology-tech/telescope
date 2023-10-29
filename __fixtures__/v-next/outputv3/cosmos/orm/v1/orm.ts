@@ -18,10 +18,6 @@ export interface TableDescriptorProtoMsg {
   typeUrl: "/cosmos.orm.v1.TableDescriptor";
   value: Uint8Array;
 }
-export interface TableDescriptorProtoMsg {
-  typeUrl: "/cosmos.orm.v1.TableDescriptor";
-  value: Uint8Array;
-}
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptorAmino {
   /** primary_key defines the primary key for the table. */
@@ -86,10 +82,6 @@ export interface PrimaryKeyDescriptor {
    * contain one field of that is of type uint64.
    */
   autoIncrement: boolean;
-}
-export interface PrimaryKeyDescriptorProtoMsg {
-  typeUrl: "/cosmos.orm.v1.PrimaryKeyDescriptor";
-  value: Uint8Array;
 }
 export interface PrimaryKeyDescriptorProtoMsg {
   typeUrl: "/cosmos.orm.v1.PrimaryKeyDescriptor";
@@ -173,10 +165,6 @@ export interface SecondaryIndexDescriptorProtoMsg {
   typeUrl: "/cosmos.orm.v1.SecondaryIndexDescriptor";
   value: Uint8Array;
 }
-export interface SecondaryIndexDescriptorProtoMsg {
-  typeUrl: "/cosmos.orm.v1.SecondaryIndexDescriptor";
-  value: Uint8Array;
-}
 /** PrimaryKeyDescriptor describes a table secondary index. */
 export interface SecondaryIndexDescriptorAmino {
   /**
@@ -218,10 +206,6 @@ export interface SingletonDescriptor {
    * can be auto-generated.
    */
   id: number;
-}
-export interface SingletonDescriptorProtoMsg {
-  typeUrl: "/cosmos.orm.v1.SingletonDescriptor";
-  value: Uint8Array;
 }
 export interface SingletonDescriptorProtoMsg {
   typeUrl: "/cosmos.orm.v1.SingletonDescriptor";

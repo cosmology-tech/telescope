@@ -35,10 +35,6 @@ export interface AuthenticationProtoMsg {
   typeUrl: "/google.api.Authentication";
   value: Uint8Array;
 }
-export interface AuthenticationProtoMsg {
-  typeUrl: "/google.api.Authentication";
-  value: Uint8Array;
-}
 /**
  * `Authentication` defines the authentication configuration for API methods
  * provided by an API service.
@@ -129,10 +125,6 @@ export interface AuthenticationRuleProtoMsg {
   typeUrl: "/google.api.AuthenticationRule";
   value: Uint8Array;
 }
-export interface AuthenticationRuleProtoMsg {
-  typeUrl: "/google.api.AuthenticationRule";
-  value: Uint8Array;
-}
 /**
  * Authentication rules for the service.
  * 
@@ -199,10 +191,6 @@ export interface JwtLocation {
    * value_prefix="Bearer " with a space at the end.
    */
   valuePrefix: string;
-}
-export interface JwtLocationProtoMsg {
-  typeUrl: "/google.api.JwtLocation";
-  value: Uint8Array;
 }
 export interface JwtLocationProtoMsg {
   typeUrl: "/google.api.JwtLocation";
@@ -318,10 +306,6 @@ export interface AuthProvider {
    *    - query: access_token
    */
   jwtLocations: JwtLocation[];
-}
-export interface AuthProviderProtoMsg {
-  typeUrl: "/google.api.AuthProvider";
-  value: Uint8Array;
 }
 export interface AuthProviderProtoMsg {
   typeUrl: "/google.api.AuthProvider";
@@ -463,10 +447,6 @@ export interface OAuthRequirementsProtoMsg {
   typeUrl: "/google.api.OAuthRequirements";
   value: Uint8Array;
 }
-export interface OAuthRequirementsProtoMsg {
-  typeUrl: "/google.api.OAuthRequirements";
-  value: Uint8Array;
-}
 /**
  * OAuth scopes are a way to define data and permissions on data. For example,
  * there are scopes defined for "Read-only access to Google Calendar" and
@@ -559,10 +539,6 @@ export interface AuthRequirement {
    *                bookstore_web.apps.googleusercontent.com
    */
   audiences: string;
-}
-export interface AuthRequirementProtoMsg {
-  typeUrl: "/google.api.AuthRequirement";
-  value: Uint8Array;
 }
 export interface AuthRequirementProtoMsg {
   typeUrl: "/google.api.AuthRequirement";

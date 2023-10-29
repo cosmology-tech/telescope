@@ -8,10 +8,6 @@ export interface QueryParamsRequestProtoMsg {
   typeUrl: "/evmos.recovery.v1.QueryParamsRequest";
   value: Uint8Array;
 }
-export interface QueryParamsRequestProtoMsg {
-  typeUrl: "/evmos.recovery.v1.QueryParamsRequest";
-  value: Uint8Array;
-}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
 export interface QueryParamsRequestAminoMsg {
@@ -24,10 +20,6 @@ export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
-}
-export interface QueryParamsResponseProtoMsg {
-  typeUrl: "/evmos.recovery.v1.QueryParamsResponse";
-  value: Uint8Array;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/evmos.recovery.v1.QueryParamsResponse";

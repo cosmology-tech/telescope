@@ -32,10 +32,6 @@ export interface InflationDistributionProtoMsg {
   typeUrl: "/evmos.inflation.v1.InflationDistribution";
   value: Uint8Array;
 }
-export interface InflationDistributionProtoMsg {
-  typeUrl: "/evmos.inflation.v1.InflationDistribution";
-  value: Uint8Array;
-}
 /**
  * InflationDistribution defines the distribution in which inflation is
  * allocated through minting on each epoch (staking, incentives, community). It
@@ -98,10 +94,6 @@ export interface ExponentialCalculation {
   bondingTarget: string;
   /** max variance */
   maxVariance: string;
-}
-export interface ExponentialCalculationProtoMsg {
-  typeUrl: "/evmos.inflation.v1.ExponentialCalculation";
-  value: Uint8Array;
 }
 export interface ExponentialCalculationProtoMsg {
   typeUrl: "/evmos.inflation.v1.ExponentialCalculation";

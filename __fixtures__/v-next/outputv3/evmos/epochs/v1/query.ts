@@ -10,10 +10,6 @@ export interface QueryEpochsInfoRequestProtoMsg {
   typeUrl: "/evmos.epochs.v1.QueryEpochsInfoRequest";
   value: Uint8Array;
 }
-export interface QueryEpochsInfoRequestProtoMsg {
-  typeUrl: "/evmos.epochs.v1.QueryEpochsInfoRequest";
-  value: Uint8Array;
-}
 export interface QueryEpochsInfoRequestAmino {
   pagination?: PageRequestAmino;
 }
@@ -27,10 +23,6 @@ export interface QueryEpochsInfoRequestSDKType {
 export interface QueryEpochsInfoResponse {
   epochs: EpochInfo[];
   pagination?: PageResponse;
-}
-export interface QueryEpochsInfoResponseProtoMsg {
-  typeUrl: "/evmos.epochs.v1.QueryEpochsInfoResponse";
-  value: Uint8Array;
 }
 export interface QueryEpochsInfoResponseProtoMsg {
   typeUrl: "/evmos.epochs.v1.QueryEpochsInfoResponse";
@@ -55,10 +47,6 @@ export interface QueryCurrentEpochRequestProtoMsg {
   typeUrl: "/evmos.epochs.v1.QueryCurrentEpochRequest";
   value: Uint8Array;
 }
-export interface QueryCurrentEpochRequestProtoMsg {
-  typeUrl: "/evmos.epochs.v1.QueryCurrentEpochRequest";
-  value: Uint8Array;
-}
 export interface QueryCurrentEpochRequestAmino {
   identifier: string;
 }
@@ -71,10 +59,6 @@ export interface QueryCurrentEpochRequestSDKType {
 }
 export interface QueryCurrentEpochResponse {
   currentEpoch: bigint;
-}
-export interface QueryCurrentEpochResponseProtoMsg {
-  typeUrl: "/evmos.epochs.v1.QueryCurrentEpochResponse";
-  value: Uint8Array;
 }
 export interface QueryCurrentEpochResponseProtoMsg {
   typeUrl: "/evmos.epochs.v1.QueryCurrentEpochResponse";

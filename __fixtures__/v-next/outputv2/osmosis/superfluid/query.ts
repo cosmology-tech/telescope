@@ -12,10 +12,6 @@ export interface QueryParamsRequestProtoMsg {
   typeUrl: "/osmosis.superfluid.QueryParamsRequest";
   value: Uint8Array;
 }
-export interface QueryParamsRequestProtoMsg {
-  typeUrl: "/osmosis.superfluid.QueryParamsRequest";
-  value: Uint8Array;
-}
 export interface QueryParamsRequestAmino {}
 export interface QueryParamsRequestAminoMsg {
   type: "osmosis/query-params-request";
@@ -25,10 +21,6 @@ export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
-}
-export interface QueryParamsResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.QueryParamsResponse";
-  value: Uint8Array;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.QueryParamsResponse";
@@ -52,10 +44,6 @@ export interface AssetTypeRequestProtoMsg {
   typeUrl: "/osmosis.superfluid.AssetTypeRequest";
   value: Uint8Array;
 }
-export interface AssetTypeRequestProtoMsg {
-  typeUrl: "/osmosis.superfluid.AssetTypeRequest";
-  value: Uint8Array;
-}
 export interface AssetTypeRequestAmino {
   denom: string;
 }
@@ -68,10 +56,6 @@ export interface AssetTypeRequestSDKType {
 }
 export interface AssetTypeResponse {
   assetType: SuperfluidAssetType;
-}
-export interface AssetTypeResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.AssetTypeResponse";
-  value: Uint8Array;
 }
 export interface AssetTypeResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.AssetTypeResponse";
@@ -92,10 +76,6 @@ export interface AllAssetsRequestProtoMsg {
   typeUrl: "/osmosis.superfluid.AllAssetsRequest";
   value: Uint8Array;
 }
-export interface AllAssetsRequestProtoMsg {
-  typeUrl: "/osmosis.superfluid.AllAssetsRequest";
-  value: Uint8Array;
-}
 export interface AllAssetsRequestAmino {}
 export interface AllAssetsRequestAminoMsg {
   type: "osmosis/all-assets-request";
@@ -104,10 +84,6 @@ export interface AllAssetsRequestAminoMsg {
 export interface AllAssetsRequestSDKType {}
 export interface AllAssetsResponse {
   assets: SuperfluidAsset[];
-}
-export interface AllAssetsResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.AllAssetsResponse";
-  value: Uint8Array;
 }
 export interface AllAssetsResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.AllAssetsResponse";
@@ -130,10 +106,6 @@ export interface AssetMultiplierRequestProtoMsg {
   typeUrl: "/osmosis.superfluid.AssetMultiplierRequest";
   value: Uint8Array;
 }
-export interface AssetMultiplierRequestProtoMsg {
-  typeUrl: "/osmosis.superfluid.AssetMultiplierRequest";
-  value: Uint8Array;
-}
 export interface AssetMultiplierRequestAmino {
   denom: string;
 }
@@ -146,10 +118,6 @@ export interface AssetMultiplierRequestSDKType {
 }
 export interface AssetMultiplierResponse {
   osmoEquivalentMultiplier?: OsmoEquivalentMultiplierRecord;
-}
-export interface AssetMultiplierResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.AssetMultiplierResponse";
-  value: Uint8Array;
 }
 export interface AssetMultiplierResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.AssetMultiplierResponse";
@@ -170,10 +138,6 @@ export interface SuperfluidIntermediaryAccountInfo {
   valAddr: string;
   gaugeId: bigint;
   address: string;
-}
-export interface SuperfluidIntermediaryAccountInfoProtoMsg {
-  typeUrl: "/osmosis.superfluid.SuperfluidIntermediaryAccountInfo";
-  value: Uint8Array;
 }
 export interface SuperfluidIntermediaryAccountInfoProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidIntermediaryAccountInfo";
@@ -202,10 +166,6 @@ export interface AllIntermediaryAccountsRequestProtoMsg {
   typeUrl: "/osmosis.superfluid.AllIntermediaryAccountsRequest";
   value: Uint8Array;
 }
-export interface AllIntermediaryAccountsRequestProtoMsg {
-  typeUrl: "/osmosis.superfluid.AllIntermediaryAccountsRequest";
-  value: Uint8Array;
-}
 export interface AllIntermediaryAccountsRequestAmino {
   pagination?: PageRequestAmino;
 }
@@ -219,10 +179,6 @@ export interface AllIntermediaryAccountsRequestSDKType {
 export interface AllIntermediaryAccountsResponse {
   accounts: SuperfluidIntermediaryAccountInfo[];
   pagination?: PageResponse;
-}
-export interface AllIntermediaryAccountsResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.AllIntermediaryAccountsResponse";
-  value: Uint8Array;
 }
 export interface AllIntermediaryAccountsResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.AllIntermediaryAccountsResponse";
@@ -247,10 +203,6 @@ export interface ConnectedIntermediaryAccountRequestProtoMsg {
   typeUrl: "/osmosis.superfluid.ConnectedIntermediaryAccountRequest";
   value: Uint8Array;
 }
-export interface ConnectedIntermediaryAccountRequestProtoMsg {
-  typeUrl: "/osmosis.superfluid.ConnectedIntermediaryAccountRequest";
-  value: Uint8Array;
-}
 export interface ConnectedIntermediaryAccountRequestAmino {
   lock_id: string;
 }
@@ -263,10 +215,6 @@ export interface ConnectedIntermediaryAccountRequestSDKType {
 }
 export interface ConnectedIntermediaryAccountResponse {
   account?: SuperfluidIntermediaryAccountInfo;
-}
-export interface ConnectedIntermediaryAccountResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.ConnectedIntermediaryAccountResponse";
-  value: Uint8Array;
 }
 export interface ConnectedIntermediaryAccountResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.ConnectedIntermediaryAccountResponse";
@@ -289,10 +237,6 @@ export interface QueryTotalDelegationByValidatorForDenomRequestProtoMsg {
   typeUrl: "/osmosis.superfluid.QueryTotalDelegationByValidatorForDenomRequest";
   value: Uint8Array;
 }
-export interface QueryTotalDelegationByValidatorForDenomRequestProtoMsg {
-  typeUrl: "/osmosis.superfluid.QueryTotalDelegationByValidatorForDenomRequest";
-  value: Uint8Array;
-}
 export interface QueryTotalDelegationByValidatorForDenomRequestAmino {
   denom: string;
 }
@@ -305,10 +249,6 @@ export interface QueryTotalDelegationByValidatorForDenomRequestSDKType {
 }
 export interface QueryTotalDelegationByValidatorForDenomResponse {
   assets: Delegations[];
-}
-export interface QueryTotalDelegationByValidatorForDenomResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.QueryTotalDelegationByValidatorForDenomResponse";
-  value: Uint8Array;
 }
 export interface QueryTotalDelegationByValidatorForDenomResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.QueryTotalDelegationByValidatorForDenomResponse";
@@ -333,10 +273,6 @@ export interface DelegationsProtoMsg {
   typeUrl: "/osmosis.superfluid.Delegations";
   value: Uint8Array;
 }
-export interface DelegationsProtoMsg {
-  typeUrl: "/osmosis.superfluid.Delegations";
-  value: Uint8Array;
-}
 export interface DelegationsAmino {
   val_addr: string;
   amount_sfsd: string;
@@ -356,10 +292,6 @@ export interface TotalSuperfluidDelegationsRequestProtoMsg {
   typeUrl: "/osmosis.superfluid.TotalSuperfluidDelegationsRequest";
   value: Uint8Array;
 }
-export interface TotalSuperfluidDelegationsRequestProtoMsg {
-  typeUrl: "/osmosis.superfluid.TotalSuperfluidDelegationsRequest";
-  value: Uint8Array;
-}
 export interface TotalSuperfluidDelegationsRequestAmino {}
 export interface TotalSuperfluidDelegationsRequestAminoMsg {
   type: "osmosis/total-superfluid-delegations-request";
@@ -368,10 +300,6 @@ export interface TotalSuperfluidDelegationsRequestAminoMsg {
 export interface TotalSuperfluidDelegationsRequestSDKType {}
 export interface TotalSuperfluidDelegationsResponse {
   totalDelegations: string;
-}
-export interface TotalSuperfluidDelegationsResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.TotalSuperfluidDelegationsResponse";
-  value: Uint8Array;
 }
 export interface TotalSuperfluidDelegationsResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.TotalSuperfluidDelegationsResponse";
@@ -391,10 +319,6 @@ export interface SuperfluidDelegationAmountRequest {
   delegatorAddress: string;
   validatorAddress: string;
   denom: string;
-}
-export interface SuperfluidDelegationAmountRequestProtoMsg {
-  typeUrl: "/osmosis.superfluid.SuperfluidDelegationAmountRequest";
-  value: Uint8Array;
 }
 export interface SuperfluidDelegationAmountRequestProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidDelegationAmountRequest";
@@ -421,10 +345,6 @@ export interface SuperfluidDelegationAmountResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidDelegationAmountResponse";
   value: Uint8Array;
 }
-export interface SuperfluidDelegationAmountResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.SuperfluidDelegationAmountResponse";
-  value: Uint8Array;
-}
 export interface SuperfluidDelegationAmountResponseAmino {
   amount: CoinAmino[];
 }
@@ -437,10 +357,6 @@ export interface SuperfluidDelegationAmountResponseSDKType {
 }
 export interface SuperfluidDelegationsByDelegatorRequest {
   delegatorAddress: string;
-}
-export interface SuperfluidDelegationsByDelegatorRequestProtoMsg {
-  typeUrl: "/osmosis.superfluid.SuperfluidDelegationsByDelegatorRequest";
-  value: Uint8Array;
 }
 export interface SuperfluidDelegationsByDelegatorRequestProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidDelegationsByDelegatorRequest";
@@ -460,10 +376,6 @@ export interface SuperfluidDelegationsByDelegatorResponse {
   superfluidDelegationRecords: SuperfluidDelegationRecord[];
   totalDelegatedCoins: Coin[];
   totalEquivalentStakedAmount: Coin;
-}
-export interface SuperfluidDelegationsByDelegatorResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.SuperfluidDelegationsByDelegatorResponse";
-  value: Uint8Array;
 }
 export interface SuperfluidDelegationsByDelegatorResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidDelegationsByDelegatorResponse";
@@ -491,10 +403,6 @@ export interface SuperfluidUndelegationsByDelegatorRequestProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidUndelegationsByDelegatorRequest";
   value: Uint8Array;
 }
-export interface SuperfluidUndelegationsByDelegatorRequestProtoMsg {
-  typeUrl: "/osmosis.superfluid.SuperfluidUndelegationsByDelegatorRequest";
-  value: Uint8Array;
-}
 export interface SuperfluidUndelegationsByDelegatorRequestAmino {
   delegator_address: string;
   denom: string;
@@ -511,10 +419,6 @@ export interface SuperfluidUndelegationsByDelegatorResponse {
   superfluidDelegationRecords: SuperfluidDelegationRecord[];
   totalUndelegatedCoins: Coin[];
   syntheticLocks: SyntheticLock[];
-}
-export interface SuperfluidUndelegationsByDelegatorResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.SuperfluidUndelegationsByDelegatorResponse";
-  value: Uint8Array;
 }
 export interface SuperfluidUndelegationsByDelegatorResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidUndelegationsByDelegatorResponse";
@@ -542,10 +446,6 @@ export interface SuperfluidDelegationsByValidatorDenomRequestProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidDelegationsByValidatorDenomRequest";
   value: Uint8Array;
 }
-export interface SuperfluidDelegationsByValidatorDenomRequestProtoMsg {
-  typeUrl: "/osmosis.superfluid.SuperfluidDelegationsByValidatorDenomRequest";
-  value: Uint8Array;
-}
 export interface SuperfluidDelegationsByValidatorDenomRequestAmino {
   validator_address: string;
   denom: string;
@@ -565,10 +465,6 @@ export interface SuperfluidDelegationsByValidatorDenomResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidDelegationsByValidatorDenomResponse";
   value: Uint8Array;
 }
-export interface SuperfluidDelegationsByValidatorDenomResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.SuperfluidDelegationsByValidatorDenomResponse";
-  value: Uint8Array;
-}
 export interface SuperfluidDelegationsByValidatorDenomResponseAmino {
   superfluid_delegation_records: SuperfluidDelegationRecordAmino[];
 }
@@ -582,10 +478,6 @@ export interface SuperfluidDelegationsByValidatorDenomResponseSDKType {
 export interface EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
   validatorAddress: string;
   denom: string;
-}
-export interface EstimateSuperfluidDelegatedAmountByValidatorDenomRequestProtoMsg {
-  typeUrl: "/osmosis.superfluid.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest";
-  value: Uint8Array;
 }
 export interface EstimateSuperfluidDelegatedAmountByValidatorDenomRequestProtoMsg {
   typeUrl: "/osmosis.superfluid.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest";
@@ -610,10 +502,6 @@ export interface EstimateSuperfluidDelegatedAmountByValidatorDenomResponseProtoM
   typeUrl: "/osmosis.superfluid.EstimateSuperfluidDelegatedAmountByValidatorDenomResponse";
   value: Uint8Array;
 }
-export interface EstimateSuperfluidDelegatedAmountByValidatorDenomResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.EstimateSuperfluidDelegatedAmountByValidatorDenomResponse";
-  value: Uint8Array;
-}
 export interface EstimateSuperfluidDelegatedAmountByValidatorDenomResponseAmino {
   total_delegated_coins: CoinAmino[];
 }
@@ -626,10 +514,6 @@ export interface EstimateSuperfluidDelegatedAmountByValidatorDenomResponseSDKTyp
 }
 export interface QueryTotalDelegationByDelegatorRequest {
   delegatorAddress: string;
-}
-export interface QueryTotalDelegationByDelegatorRequestProtoMsg {
-  typeUrl: "/osmosis.superfluid.QueryTotalDelegationByDelegatorRequest";
-  value: Uint8Array;
 }
 export interface QueryTotalDelegationByDelegatorRequestProtoMsg {
   typeUrl: "/osmosis.superfluid.QueryTotalDelegationByDelegatorRequest";
@@ -650,10 +534,6 @@ export interface QueryTotalDelegationByDelegatorResponse {
   delegationResponse: DelegationResponse[];
   totalDelegatedCoins: Coin[];
   totalEquivalentStakedAmount: Coin;
-}
-export interface QueryTotalDelegationByDelegatorResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.QueryTotalDelegationByDelegatorResponse";
-  value: Uint8Array;
 }
 export interface QueryTotalDelegationByDelegatorResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.QueryTotalDelegationByDelegatorResponse";
@@ -680,10 +560,6 @@ export interface QueryUnpoolWhitelistRequestProtoMsg {
   typeUrl: "/osmosis.superfluid.QueryUnpoolWhitelistRequest";
   value: Uint8Array;
 }
-export interface QueryUnpoolWhitelistRequestProtoMsg {
-  typeUrl: "/osmosis.superfluid.QueryUnpoolWhitelistRequest";
-  value: Uint8Array;
-}
 export interface QueryUnpoolWhitelistRequestAmino {}
 export interface QueryUnpoolWhitelistRequestAminoMsg {
   type: "osmosis/query-unpool-whitelist-request";
@@ -692,10 +568,6 @@ export interface QueryUnpoolWhitelistRequestAminoMsg {
 export interface QueryUnpoolWhitelistRequestSDKType {}
 export interface QueryUnpoolWhitelistResponse {
   poolIds: bigint[];
-}
-export interface QueryUnpoolWhitelistResponseProtoMsg {
-  typeUrl: "/osmosis.superfluid.QueryUnpoolWhitelistResponse";
-  value: Uint8Array;
 }
 export interface QueryUnpoolWhitelistResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.QueryUnpoolWhitelistResponse";

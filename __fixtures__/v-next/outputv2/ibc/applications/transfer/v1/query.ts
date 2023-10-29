@@ -15,10 +15,6 @@ export interface QueryDenomTraceRequestProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceRequest";
   value: Uint8Array;
 }
-export interface QueryDenomTraceRequestProtoMsg {
-  typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceRequest";
-  value: Uint8Array;
-}
 /**
  * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC
  * method
@@ -50,10 +46,6 @@ export interface QueryDenomTraceResponseProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceResponse";
   value: Uint8Array;
 }
-export interface QueryDenomTraceResponseProtoMsg {
-  typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceResponse";
-  value: Uint8Array;
-}
 /**
  * QueryDenomTraceResponse is the response type for the Query/DenomTrace RPC
  * method.
@@ -80,10 +72,6 @@ export interface QueryDenomTraceResponseSDKType {
 export interface QueryDenomTracesRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
-}
-export interface QueryDenomTracesRequestProtoMsg {
-  typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesRequest";
-  value: Uint8Array;
 }
 export interface QueryDenomTracesRequestProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesRequest";
@@ -122,10 +110,6 @@ export interface QueryDenomTracesResponseProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesResponse";
   value: Uint8Array;
 }
-export interface QueryDenomTracesResponseProtoMsg {
-  typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesResponse";
-  value: Uint8Array;
-}
 /**
  * QueryConnectionsResponse is the response type for the Query/DenomTraces RPC
  * method.
@@ -154,10 +138,6 @@ export interface QueryParamsRequestProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryParamsRequest";
   value: Uint8Array;
 }
-export interface QueryParamsRequestProtoMsg {
-  typeUrl: "/ibc.applications.transfer.v1.QueryParamsRequest";
-  value: Uint8Array;
-}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
 export interface QueryParamsRequestAminoMsg {
@@ -170,10 +150,6 @@ export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params?: Params;
-}
-export interface QueryParamsResponseProtoMsg {
-  typeUrl: "/ibc.applications.transfer.v1.QueryParamsResponse";
-  value: Uint8Array;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryParamsResponse";

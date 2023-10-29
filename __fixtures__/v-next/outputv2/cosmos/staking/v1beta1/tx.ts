@@ -21,10 +21,6 @@ export interface MsgCreateValidatorProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.MsgCreateValidator";
   value: Uint8Array;
 }
-export interface MsgCreateValidatorProtoMsg {
-  typeUrl: "/cosmos.staking.v1beta1.MsgCreateValidator";
-  value: Uint8Array;
-}
 export type MsgCreateValidatorEncoded = Omit<MsgCreateValidator, "pubkey"> & {
   pubkey?: AnyProtoMsg | undefined;
 };
@@ -58,10 +54,6 @@ export interface MsgCreateValidatorResponseProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.MsgCreateValidatorResponse";
   value: Uint8Array;
 }
-export interface MsgCreateValidatorResponseProtoMsg {
-  typeUrl: "/cosmos.staking.v1beta1.MsgCreateValidatorResponse";
-  value: Uint8Array;
-}
 /** MsgCreateValidatorResponse defines the Msg/CreateValidator response type. */
 export interface MsgCreateValidatorResponseAmino {}
 export interface MsgCreateValidatorResponseAminoMsg {
@@ -82,10 +74,6 @@ export interface MsgEditValidator {
    */
   commissionRate: string;
   minSelfDelegation: string;
-}
-export interface MsgEditValidatorProtoMsg {
-  typeUrl: "/cosmos.staking.v1beta1.MsgEditValidator";
-  value: Uint8Array;
 }
 export interface MsgEditValidatorProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.MsgEditValidator";
@@ -121,10 +109,6 @@ export interface MsgEditValidatorResponseProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.MsgEditValidatorResponse";
   value: Uint8Array;
 }
-export interface MsgEditValidatorResponseProtoMsg {
-  typeUrl: "/cosmos.staking.v1beta1.MsgEditValidatorResponse";
-  value: Uint8Array;
-}
 /** MsgEditValidatorResponse defines the Msg/EditValidator response type. */
 export interface MsgEditValidatorResponseAmino {}
 export interface MsgEditValidatorResponseAminoMsg {
@@ -141,10 +125,6 @@ export interface MsgDelegate {
   delegatorAddress: string;
   validatorAddress: string;
   amount: Coin;
-}
-export interface MsgDelegateProtoMsg {
-  typeUrl: "/cosmos.staking.v1beta1.MsgDelegate";
-  value: Uint8Array;
 }
 export interface MsgDelegateProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.MsgDelegate";
@@ -178,10 +158,6 @@ export interface MsgDelegateResponseProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.MsgDelegateResponse";
   value: Uint8Array;
 }
-export interface MsgDelegateResponseProtoMsg {
-  typeUrl: "/cosmos.staking.v1beta1.MsgDelegateResponse";
-  value: Uint8Array;
-}
 /** MsgDelegateResponse defines the Msg/Delegate response type. */
 export interface MsgDelegateResponseAmino {}
 export interface MsgDelegateResponseAminoMsg {
@@ -199,10 +175,6 @@ export interface MsgBeginRedelegate {
   validatorSrcAddress: string;
   validatorDstAddress: string;
   amount: Coin;
-}
-export interface MsgBeginRedelegateProtoMsg {
-  typeUrl: "/cosmos.staking.v1beta1.MsgBeginRedelegate";
-  value: Uint8Array;
 }
 export interface MsgBeginRedelegateProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.MsgBeginRedelegate";
@@ -240,10 +212,6 @@ export interface MsgBeginRedelegateResponseProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.MsgBeginRedelegateResponse";
   value: Uint8Array;
 }
-export interface MsgBeginRedelegateResponseProtoMsg {
-  typeUrl: "/cosmos.staking.v1beta1.MsgBeginRedelegateResponse";
-  value: Uint8Array;
-}
 /** MsgBeginRedelegateResponse defines the Msg/BeginRedelegate response type. */
 export interface MsgBeginRedelegateResponseAmino {
   completion_time?: Date;
@@ -264,10 +232,6 @@ export interface MsgUndelegate {
   delegatorAddress: string;
   validatorAddress: string;
   amount: Coin;
-}
-export interface MsgUndelegateProtoMsg {
-  typeUrl: "/cosmos.staking.v1beta1.MsgUndelegate";
-  value: Uint8Array;
 }
 export interface MsgUndelegateProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.MsgUndelegate";
@@ -298,10 +262,6 @@ export interface MsgUndelegateSDKType {
 /** MsgUndelegateResponse defines the Msg/Undelegate response type. */
 export interface MsgUndelegateResponse {
   completionTime: Date;
-}
-export interface MsgUndelegateResponseProtoMsg {
-  typeUrl: "/cosmos.staking.v1beta1.MsgUndelegateResponse";
-  value: Uint8Array;
 }
 export interface MsgUndelegateResponseProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.MsgUndelegateResponse";
