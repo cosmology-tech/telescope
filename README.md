@@ -260,6 +260,7 @@ telescope({
 | option                         | description                                                     | defaults   |
 | ------------------------------ | --------------------------------------------------------------  | ---------- |
 | `aminoEncoding.enabled`        | generate amino types and amino converters                       | `true`     |
+| `aminoEncoding.disableMsgTypes`        | disable generating AminoMsg types                | `false`     |
 | `aminoEncoding.casingFn`       | set the amino-casing function for a project                     | `snake()`  |
 | `aminoEncoding.exceptions`     | set specific aminoType name exceptions                          | see code   |
 | `aminoEncoding.typeUrlToAmino` | create functions for aminoType name exceptions                  | `undefined`|
