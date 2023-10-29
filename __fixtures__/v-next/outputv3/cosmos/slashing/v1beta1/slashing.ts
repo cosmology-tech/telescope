@@ -34,10 +34,6 @@ export interface ValidatorSigningInfoProtoMsg {
   typeUrl: "/cosmos.slashing.v1beta1.ValidatorSigningInfo";
   value: Uint8Array;
 }
-export interface ValidatorSigningInfoProtoMsg {
-  typeUrl: "/cosmos.slashing.v1beta1.ValidatorSigningInfo";
-  value: Uint8Array;
-}
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
  * liveness activity.
@@ -88,10 +84,6 @@ export interface Params {
   downtimeJailDuration: Duration;
   slashFractionDoubleSign: Uint8Array;
   slashFractionDowntime: Uint8Array;
-}
-export interface ParamsProtoMsg {
-  typeUrl: "/cosmos.slashing.v1beta1.Params";
-  value: Uint8Array;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/cosmos.slashing.v1beta1.Params";

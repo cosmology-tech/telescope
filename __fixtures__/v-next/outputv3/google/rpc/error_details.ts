@@ -25,10 +25,6 @@ export interface RetryInfoProtoMsg {
   typeUrl: "/google.rpc.RetryInfo";
   value: Uint8Array;
 }
-export interface RetryInfoProtoMsg {
-  typeUrl: "/google.rpc.RetryInfo";
-  value: Uint8Array;
-}
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
  * the recommendation here or retry when this information is missing from error
@@ -81,10 +77,6 @@ export interface DebugInfoProtoMsg {
   typeUrl: "/google.rpc.DebugInfo";
   value: Uint8Array;
 }
-export interface DebugInfoProtoMsg {
-  typeUrl: "/google.rpc.DebugInfo";
-  value: Uint8Array;
-}
 /** Describes additional debugging info. */
 export interface DebugInfoAmino {
   /** The stack trace entries indicating where the error occurred. */
@@ -117,10 +109,6 @@ export interface DebugInfoSDKType {
 export interface QuotaFailure {
   /** Describes all quota violations. */
   violations: QuotaFailure_Violation[];
-}
-export interface QuotaFailureProtoMsg {
-  typeUrl: "/google.rpc.QuotaFailure";
-  value: Uint8Array;
 }
 export interface QuotaFailureProtoMsg {
   typeUrl: "/google.rpc.QuotaFailure";
@@ -189,10 +177,6 @@ export interface QuotaFailure_ViolationProtoMsg {
   typeUrl: "/google.rpc.Violation";
   value: Uint8Array;
 }
-export interface QuotaFailure_ViolationProtoMsg {
-  typeUrl: "/google.rpc.Violation";
-  value: Uint8Array;
-}
 /**
  * A message type used to describe a single quota violation.  For example, a
  * daily quota or a custom quota that was exceeded.
@@ -230,10 +214,6 @@ export interface QuotaFailure_ViolationSDKType {
 export interface ErrorInfo_MetadataEntry {
   key: string;
   value: string;
-}
-export interface ErrorInfo_MetadataEntryProtoMsg {
-  typeUrl: string;
-  value: Uint8Array;
 }
 export interface ErrorInfo_MetadataEntryProtoMsg {
   typeUrl: string;
@@ -307,10 +287,6 @@ export interface ErrorInfo {
   metadata: {
     [key: string]: string;
   };
-}
-export interface ErrorInfoProtoMsg {
-  typeUrl: "/google.rpc.ErrorInfo";
-  value: Uint8Array;
 }
 export interface ErrorInfoProtoMsg {
   typeUrl: "/google.rpc.ErrorInfo";
@@ -425,10 +401,6 @@ export interface PreconditionFailureProtoMsg {
   typeUrl: "/google.rpc.PreconditionFailure";
   value: Uint8Array;
 }
-export interface PreconditionFailureProtoMsg {
-  typeUrl: "/google.rpc.PreconditionFailure";
-  value: Uint8Array;
-}
 /**
  * Describes what preconditions have failed.
  * 
@@ -480,10 +452,6 @@ export interface PreconditionFailure_ViolationProtoMsg {
   typeUrl: "/google.rpc.Violation";
   value: Uint8Array;
 }
-export interface PreconditionFailure_ViolationProtoMsg {
-  typeUrl: "/google.rpc.Violation";
-  value: Uint8Array;
-}
 /** A message type used to describe a single precondition failure. */
 export interface PreconditionFailure_ViolationAmino {
   /**
@@ -528,10 +496,6 @@ export interface BadRequestProtoMsg {
   typeUrl: "/google.rpc.BadRequest";
   value: Uint8Array;
 }
-export interface BadRequestProtoMsg {
-  typeUrl: "/google.rpc.BadRequest";
-  value: Uint8Array;
-}
 /**
  * Describes violations in a client request. This error type focuses on the
  * syntactic aspects of the request.
@@ -561,10 +525,6 @@ export interface BadRequest_FieldViolation {
   field: string;
   /** A description of why the request element is bad. */
   description: string;
-}
-export interface BadRequest_FieldViolationProtoMsg {
-  typeUrl: "/google.rpc.FieldViolation";
-  value: Uint8Array;
 }
 export interface BadRequest_FieldViolationProtoMsg {
   typeUrl: "/google.rpc.FieldViolation";
@@ -605,10 +565,6 @@ export interface RequestInfo {
    * stack trace that can be sent back to the service provider for debugging.
    */
   servingData: string;
-}
-export interface RequestInfoProtoMsg {
-  typeUrl: "/google.rpc.RequestInfo";
-  value: Uint8Array;
 }
 export interface RequestInfoProtoMsg {
   typeUrl: "/google.rpc.RequestInfo";
@@ -673,10 +629,6 @@ export interface ResourceInfoProtoMsg {
   typeUrl: "/google.rpc.ResourceInfo";
   value: Uint8Array;
 }
-export interface ResourceInfoProtoMsg {
-  typeUrl: "/google.rpc.ResourceInfo";
-  value: Uint8Array;
-}
 /** Describes the resource that is being accessed. */
 export interface ResourceInfoAmino {
   /**
@@ -730,10 +682,6 @@ export interface HelpProtoMsg {
   typeUrl: "/google.rpc.Help";
   value: Uint8Array;
 }
-export interface HelpProtoMsg {
-  typeUrl: "/google.rpc.Help";
-  value: Uint8Array;
-}
 /**
  * Provides links to documentation or for performing an out of band action.
  * 
@@ -770,10 +718,6 @@ export interface Help_LinkProtoMsg {
   typeUrl: "/google.rpc.Link";
   value: Uint8Array;
 }
-export interface Help_LinkProtoMsg {
-  typeUrl: "/google.rpc.Link";
-  value: Uint8Array;
-}
 /** Describes a URL link. */
 export interface Help_LinkAmino {
   /** Describes what the link offers. */
@@ -803,10 +747,6 @@ export interface LocalizedMessage {
   locale: string;
   /** The localized error message in the above locale. */
   message: string;
-}
-export interface LocalizedMessageProtoMsg {
-  typeUrl: "/google.rpc.LocalizedMessage";
-  value: Uint8Array;
 }
 export interface LocalizedMessageProtoMsg {
   typeUrl: "/google.rpc.LocalizedMessage";

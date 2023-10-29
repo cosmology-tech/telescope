@@ -16,10 +16,6 @@ export interface ClientStateProtoMsg {
   typeUrl: "/ibc.lightclients.localhost.v1.ClientState";
   value: Uint8Array;
 }
-export interface ClientStateProtoMsg {
-  typeUrl: "/ibc.lightclients.localhost.v1.ClientState";
-  value: Uint8Array;
-}
 /**
  * ClientState defines a loopback (localhost) client. It requires (read-only)
  * access to keys outside the client prefix.

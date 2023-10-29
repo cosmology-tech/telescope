@@ -44,10 +44,6 @@ export interface PlanProtoMsg {
   typeUrl: "/cosmos.upgrade.v1beta1.Plan";
   value: Uint8Array;
 }
-export interface PlanProtoMsg {
-  typeUrl: "/cosmos.upgrade.v1beta1.Plan";
-  value: Uint8Array;
-}
 /** Plan specifies information about a planned upgrade and when it should occur. */
 export interface PlanAmino {
   /**
@@ -115,10 +111,6 @@ export interface SoftwareUpgradeProposalProtoMsg {
   typeUrl: "/cosmos.upgrade.v1beta1.SoftwareUpgradeProposal";
   value: Uint8Array;
 }
-export interface SoftwareUpgradeProposalProtoMsg {
-  typeUrl: "/cosmos.upgrade.v1beta1.SoftwareUpgradeProposal";
-  value: Uint8Array;
-}
 /**
  * SoftwareUpgradeProposal is a gov Content type for initiating a software
  * upgrade.
@@ -162,10 +154,6 @@ export interface CancelSoftwareUpgradeProposalProtoMsg {
   typeUrl: "/cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal";
   value: Uint8Array;
 }
-export interface CancelSoftwareUpgradeProposalProtoMsg {
-  typeUrl: "/cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal";
-  value: Uint8Array;
-}
 /**
  * CancelSoftwareUpgradeProposal is a gov Content type for cancelling a software
  * upgrade.
@@ -202,10 +190,6 @@ export interface ModuleVersion {
   name: string;
   /** consensus version of the app module */
   version: bigint;
-}
-export interface ModuleVersionProtoMsg {
-  typeUrl: "/cosmos.upgrade.v1beta1.ModuleVersion";
-  value: Uint8Array;
 }
 export interface ModuleVersionProtoMsg {
   typeUrl: "/cosmos.upgrade.v1beta1.ModuleVersion";

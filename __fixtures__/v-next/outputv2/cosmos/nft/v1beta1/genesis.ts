@@ -12,10 +12,6 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.GenesisState";
   value: Uint8Array;
 }
-export interface GenesisStateProtoMsg {
-  typeUrl: "/cosmos.nft.v1beta1.GenesisState";
-  value: Uint8Array;
-}
 /** GenesisState defines the nft module's genesis state. */
 export interface GenesisStateAmino {
   /** class defines the class of the nft type. */
@@ -37,10 +33,6 @@ export interface Entry {
   owner: string;
   /** nfts is a group of nfts of the same owner */
   nfts: NFT[];
-}
-export interface EntryProtoMsg {
-  typeUrl: "/cosmos.nft.v1beta1.Entry";
-  value: Uint8Array;
 }
 export interface EntryProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.Entry";

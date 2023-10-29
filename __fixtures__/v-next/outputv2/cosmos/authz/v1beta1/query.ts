@@ -16,10 +16,6 @@ export interface QueryGrantsRequestProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.QueryGrantsRequest";
   value: Uint8Array;
 }
-export interface QueryGrantsRequestProtoMsg {
-  typeUrl: "/cosmos.authz.v1beta1.QueryGrantsRequest";
-  value: Uint8Array;
-}
 /** QueryGrantsRequest is the request type for the Query/Grants RPC method. */
 export interface QueryGrantsRequestAmino {
   granter: string;
@@ -51,10 +47,6 @@ export interface QueryGrantsResponseProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.QueryGrantsResponse";
   value: Uint8Array;
 }
-export interface QueryGrantsResponseProtoMsg {
-  typeUrl: "/cosmos.authz.v1beta1.QueryGrantsResponse";
-  value: Uint8Array;
-}
 /** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
 export interface QueryGrantsResponseAmino {
   /** authorizations is a list of grants granted for grantee by granter. */
@@ -76,10 +68,6 @@ export interface QueryGranterGrantsRequest {
   granter: string;
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
-}
-export interface QueryGranterGrantsRequestProtoMsg {
-  typeUrl: "/cosmos.authz.v1beta1.QueryGranterGrantsRequest";
-  value: Uint8Array;
 }
 export interface QueryGranterGrantsRequestProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.QueryGranterGrantsRequest";
@@ -111,10 +99,6 @@ export interface QueryGranterGrantsResponseProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.QueryGranterGrantsResponse";
   value: Uint8Array;
 }
-export interface QueryGranterGrantsResponseProtoMsg {
-  typeUrl: "/cosmos.authz.v1beta1.QueryGranterGrantsResponse";
-  value: Uint8Array;
-}
 /** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsResponseAmino {
   /** grants is a list of grants granted by the granter. */
@@ -141,10 +125,6 @@ export interface QueryGranteeGrantsRequestProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.QueryGranteeGrantsRequest";
   value: Uint8Array;
 }
-export interface QueryGranteeGrantsRequestProtoMsg {
-  typeUrl: "/cosmos.authz.v1beta1.QueryGranteeGrantsRequest";
-  value: Uint8Array;
-}
 /** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
 export interface QueryGranteeGrantsRequestAmino {
   grantee: string;
@@ -166,10 +146,6 @@ export interface QueryGranteeGrantsResponse {
   grants: GrantAuthorization[];
   /** pagination defines an pagination for the response. */
   pagination?: PageResponse;
-}
-export interface QueryGranteeGrantsResponseProtoMsg {
-  typeUrl: "/cosmos.authz.v1beta1.QueryGranteeGrantsResponse";
-  value: Uint8Array;
 }
 export interface QueryGranteeGrantsResponseProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.QueryGranteeGrantsResponse";

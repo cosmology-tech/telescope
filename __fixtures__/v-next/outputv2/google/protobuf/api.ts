@@ -60,10 +60,6 @@ export interface ApiProtoMsg {
   typeUrl: "/google.protobuf.Api";
   value: Uint8Array;
 }
-export interface ApiProtoMsg {
-  typeUrl: "/google.protobuf.Api";
-  value: Uint8Array;
-}
 /**
  * Api is a light-weight descriptor for an API Interface.
  * 
@@ -157,10 +153,6 @@ export interface Method {
   options: Option[];
   /** The source syntax of this method. */
   syntax: Syntax;
-}
-export interface MethodProtoMsg {
-  typeUrl: "/google.protobuf.Method";
-  value: Uint8Array;
 }
 export interface MethodProtoMsg {
   typeUrl: "/google.protobuf.Method";
@@ -285,10 +277,6 @@ export interface Mixin {
    * are rooted.
    */
   root: string;
-}
-export interface MixinProtoMsg {
-  typeUrl: "/google.protobuf.Mixin";
-  value: Uint8Array;
 }
 export interface MixinProtoMsg {
   typeUrl: "/google.protobuf.Mixin";

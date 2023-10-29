@@ -107,10 +107,6 @@ export interface BackendProtoMsg {
   typeUrl: "/google.api.Backend";
   value: Uint8Array;
 }
-export interface BackendProtoMsg {
-  typeUrl: "/google.api.Backend";
-  value: Uint8Array;
-}
 /** `Backend` defines the backend configuration for a service. */
 export interface BackendAmino {
   /**
@@ -212,10 +208,6 @@ export interface BackendRule {
    * for more details on the supported values.
    */
   protocol: string;
-}
-export interface BackendRuleProtoMsg {
-  typeUrl: "/google.api.BackendRule";
-  value: Uint8Array;
 }
 export interface BackendRuleProtoMsg {
   typeUrl: "/google.api.BackendRule";

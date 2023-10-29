@@ -12,10 +12,6 @@ export interface CapabilityProtoMsg {
   typeUrl: "/cosmos.capability.v1beta1.Capability";
   value: Uint8Array;
 }
-export interface CapabilityProtoMsg {
-  typeUrl: "/cosmos.capability.v1beta1.Capability";
-  value: Uint8Array;
-}
 /**
  * Capability defines an implementation of an object capability. The index
  * provided to a Capability must be globally unique.
@@ -41,10 +37,6 @@ export interface CapabilitySDKType {
 export interface Owner {
   module: string;
   name: string;
-}
-export interface OwnerProtoMsg {
-  typeUrl: "/cosmos.capability.v1beta1.Owner";
-  value: Uint8Array;
 }
 export interface OwnerProtoMsg {
   typeUrl: "/cosmos.capability.v1beta1.Owner";
@@ -76,10 +68,6 @@ export interface OwnerSDKType {
  */
 export interface CapabilityOwners {
   owners: Owner[];
-}
-export interface CapabilityOwnersProtoMsg {
-  typeUrl: "/cosmos.capability.v1beta1.CapabilityOwners";
-  value: Uint8Array;
 }
 export interface CapabilityOwnersProtoMsg {
   typeUrl: "/cosmos.capability.v1beta1.CapabilityOwners";

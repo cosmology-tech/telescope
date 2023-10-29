@@ -16,10 +16,6 @@ export interface SetSuperfluidAssetsProposalProtoMsg {
   typeUrl: "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal";
   value: Uint8Array;
 }
-export interface SetSuperfluidAssetsProposalProtoMsg {
-  typeUrl: "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal";
-  value: Uint8Array;
-}
 /**
  * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid
  * assets
@@ -52,10 +48,6 @@ export interface RemoveSuperfluidAssetsProposal {
   title: string;
   description: string;
   superfluidAssetDenoms: string[];
-}
-export interface RemoveSuperfluidAssetsProposalProtoMsg {
-  typeUrl: "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal";
-  value: Uint8Array;
 }
 export interface RemoveSuperfluidAssetsProposalProtoMsg {
   typeUrl: "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal";
@@ -94,10 +86,6 @@ export interface UpdateUnpoolWhiteListProposal {
   description: string;
   ids: bigint[];
   isOverwrite: boolean;
-}
-export interface UpdateUnpoolWhiteListProposalProtoMsg {
-  typeUrl: "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal";
-  value: Uint8Array;
 }
 export interface UpdateUnpoolWhiteListProposalProtoMsg {
   typeUrl: "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal";

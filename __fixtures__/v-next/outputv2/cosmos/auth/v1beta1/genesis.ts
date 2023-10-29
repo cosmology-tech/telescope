@@ -14,10 +14,6 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.auth.v1beta1.GenesisState";
   value: Uint8Array;
 }
-export interface GenesisStateProtoMsg {
-  typeUrl: "/cosmos.auth.v1beta1.GenesisState";
-  value: Uint8Array;
-}
 /** GenesisState defines the auth module's genesis state. */
 export interface GenesisStateAmino {
   /** params defines all the paramaters of the module. */

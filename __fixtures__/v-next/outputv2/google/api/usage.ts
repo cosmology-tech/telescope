@@ -37,10 +37,6 @@ export interface UsageProtoMsg {
   typeUrl: "/google.api.Usage";
   value: Uint8Array;
 }
-export interface UsageProtoMsg {
-  typeUrl: "/google.api.Usage";
-  value: Uint8Array;
-}
 /** Configuration controlling usage of a service. */
 export interface UsageAmino {
   /**
@@ -130,10 +126,6 @@ export interface UsageRule {
    * methods, such as service health check methods.
    */
   skipServiceControl: boolean;
-}
-export interface UsageRuleProtoMsg {
-  typeUrl: "/google.api.UsageRule";
-  value: Uint8Array;
 }
 export interface UsageRuleProtoMsg {
   typeUrl: "/google.api.UsageRule";

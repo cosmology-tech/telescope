@@ -50,10 +50,6 @@ export interface GaugeProtoMsg {
   typeUrl: "/osmosis.incentives.Gauge";
   value: Uint8Array;
 }
-export interface GaugeProtoMsg {
-  typeUrl: "/osmosis.incentives.Gauge";
-  value: Uint8Array;
-}
 /**
  * Gauge is an object that stores and distributes yields to recipients who
  * satisfy certain conditions. Currently gauges support conditions around the
@@ -117,10 +113,6 @@ export interface GaugeSDKType {
 export interface LockableDurationsInfo {
   /** List of incentivised durations that gauges will pay out to */
   lockableDurations: Duration[];
-}
-export interface LockableDurationsInfoProtoMsg {
-  typeUrl: "/osmosis.incentives.LockableDurationsInfo";
-  value: Uint8Array;
 }
 export interface LockableDurationsInfoProtoMsg {
   typeUrl: "/osmosis.incentives.LockableDurationsInfo";

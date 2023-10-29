@@ -28,10 +28,6 @@ export interface ExplainProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Explain";
   value: Uint8Array;
 }
-export interface ExplainProtoMsg {
-  typeUrl: "/google.api.expr.v1alpha1.Explain";
-  value: Uint8Array;
-}
 /**
  * Values of intermediate expressions produced when evaluating expression.
  * Deprecated, use `EvalState` instead.
@@ -73,10 +69,6 @@ export interface Explain_ExprStep {
   id: bigint;
   /** Index of the value in the values list. */
   valueIndex: number;
-}
-export interface Explain_ExprStepProtoMsg {
-  typeUrl: "/google.api.expr.v1alpha1.ExprStep";
-  value: Uint8Array;
 }
 export interface Explain_ExprStepProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ExprStep";

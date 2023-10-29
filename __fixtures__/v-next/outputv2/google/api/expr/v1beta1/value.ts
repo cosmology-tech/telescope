@@ -39,10 +39,6 @@ export interface ValueProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Value";
   value: Uint8Array;
 }
-export interface ValueProtoMsg {
-  typeUrl: "/google.api.expr.v1beta1.Value";
-  value: Uint8Array;
-}
 /**
  * Represents a CEL value.
  * 
@@ -110,10 +106,6 @@ export interface EnumValueProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.EnumValue";
   value: Uint8Array;
 }
-export interface EnumValueProtoMsg {
-  typeUrl: "/google.api.expr.v1beta1.EnumValue";
-  value: Uint8Array;
-}
 /** An enum value. */
 export interface EnumValueAmino {
   /** The fully qualified name of the enum type. */
@@ -139,10 +131,6 @@ export interface EnumValueSDKType {
 export interface ListValue {
   /** The ordered values in the list. */
   values: Value[];
-}
-export interface ListValueProtoMsg {
-  typeUrl: "/google.api.expr.v1beta1.ListValue";
-  value: Uint8Array;
 }
 export interface ListValueProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.ListValue";
@@ -190,10 +178,6 @@ export interface MapValueProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.MapValue";
   value: Uint8Array;
 }
-export interface MapValueProtoMsg {
-  typeUrl: "/google.api.expr.v1beta1.MapValue";
-  value: Uint8Array;
-}
 /**
  * A map.
  * 
@@ -233,10 +217,6 @@ export interface MapValue_Entry {
   key?: Value;
   /** The value. */
   value?: Value;
-}
-export interface MapValue_EntryProtoMsg {
-  typeUrl: "/google.api.expr.v1beta1.Entry";
-  value: Uint8Array;
 }
 export interface MapValue_EntryProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Entry";

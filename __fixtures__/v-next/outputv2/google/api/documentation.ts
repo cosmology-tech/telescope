@@ -102,10 +102,6 @@ export interface DocumentationProtoMsg {
   typeUrl: "/google.api.Documentation";
   value: Uint8Array;
 }
-export interface DocumentationProtoMsg {
-  typeUrl: "/google.api.Documentation";
-  value: Uint8Array;
-}
 /**
  * `Documentation` provides the information for describing a service.
  * 
@@ -295,10 +291,6 @@ export interface DocumentationRuleProtoMsg {
   typeUrl: "/google.api.DocumentationRule";
   value: Uint8Array;
 }
-export interface DocumentationRuleProtoMsg {
-  typeUrl: "/google.api.DocumentationRule";
-  value: Uint8Array;
-}
 /** A documentation rule provides information about individual API elements. */
 export interface DocumentationRuleAmino {
   /**
@@ -360,10 +352,6 @@ export interface Page {
    * honored in the generated docset.
    */
   subpages: Page[];
-}
-export interface PageProtoMsg {
-  typeUrl: "/google.api.Page";
-  value: Uint8Array;
 }
 export interface PageProtoMsg {
   typeUrl: "/google.api.Page";

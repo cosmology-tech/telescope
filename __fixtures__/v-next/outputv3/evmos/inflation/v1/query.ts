@@ -10,10 +10,6 @@ export interface QueryPeriodRequestProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryPeriodRequest";
   value: Uint8Array;
 }
-export interface QueryPeriodRequestProtoMsg {
-  typeUrl: "/evmos.inflation.v1.QueryPeriodRequest";
-  value: Uint8Array;
-}
 /** QueryPeriodRequest is the request type for the Query/Period RPC method. */
 export interface QueryPeriodRequestAmino {}
 export interface QueryPeriodRequestAminoMsg {
@@ -26,10 +22,6 @@ export interface QueryPeriodRequestSDKType {}
 export interface QueryPeriodResponse {
   /** period is the current minting per epoch provision value. */
   period: bigint;
-}
-export interface QueryPeriodResponseProtoMsg {
-  typeUrl: "/evmos.inflation.v1.QueryPeriodResponse";
-  value: Uint8Array;
 }
 export interface QueryPeriodResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryPeriodResponse";
@@ -57,10 +49,6 @@ export interface QueryEpochMintProvisionRequestProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionRequest";
   value: Uint8Array;
 }
-export interface QueryEpochMintProvisionRequestProtoMsg {
-  typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionRequest";
-  value: Uint8Array;
-}
 /**
  * QueryEpochMintProvisionRequest is the request type for the
  * Query/EpochMintProvision RPC method.
@@ -82,10 +70,6 @@ export interface QueryEpochMintProvisionRequestSDKType {}
 export interface QueryEpochMintProvisionResponse {
   /** epoch_mint_provision is the current minting per epoch provision value. */
   epochMintProvision: DecCoin;
-}
-export interface QueryEpochMintProvisionResponseProtoMsg {
-  typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionResponse";
-  value: Uint8Array;
 }
 export interface QueryEpochMintProvisionResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionResponse";
@@ -119,10 +103,6 @@ export interface QuerySkippedEpochsRequestProtoMsg {
   typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsRequest";
   value: Uint8Array;
 }
-export interface QuerySkippedEpochsRequestProtoMsg {
-  typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsRequest";
-  value: Uint8Array;
-}
 /**
  * QuerySkippedEpochsRequest is the request type for the Query/SkippedEpochs RPC
  * method.
@@ -144,10 +124,6 @@ export interface QuerySkippedEpochsRequestSDKType {}
 export interface QuerySkippedEpochsResponse {
   /** number of epochs that the inflation module has been disabled. */
   skippedEpochs: bigint;
-}
-export interface QuerySkippedEpochsResponseProtoMsg {
-  typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsResponse";
-  value: Uint8Array;
 }
 export interface QuerySkippedEpochsResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsResponse";
@@ -181,10 +157,6 @@ export interface QueryCirculatingSupplyRequestProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyRequest";
   value: Uint8Array;
 }
-export interface QueryCirculatingSupplyRequestProtoMsg {
-  typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyRequest";
-  value: Uint8Array;
-}
 /**
  * QueryCirculatingSupplyRequest is the request type for the
  * Query/CirculatingSupply RPC method.
@@ -206,10 +178,6 @@ export interface QueryCirculatingSupplyRequestSDKType {}
 export interface QueryCirculatingSupplyResponse {
   /** total amount of coins in circulation */
   circulatingSupply: DecCoin;
-}
-export interface QueryCirculatingSupplyResponseProtoMsg {
-  typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyResponse";
-  value: Uint8Array;
 }
 export interface QueryCirculatingSupplyResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyResponse";
@@ -243,10 +211,6 @@ export interface QueryInflationRateRequestProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryInflationRateRequest";
   value: Uint8Array;
 }
-export interface QueryInflationRateRequestProtoMsg {
-  typeUrl: "/evmos.inflation.v1.QueryInflationRateRequest";
-  value: Uint8Array;
-}
 /**
  * QueryInflationRateRequest is the request type for the Query/InflationRate RPC
  * method.
@@ -268,10 +232,6 @@ export interface QueryInflationRateRequestSDKType {}
 export interface QueryInflationRateResponse {
   /** rate by which the total supply increases within one period */
   inflationRate: string;
-}
-export interface QueryInflationRateResponseProtoMsg {
-  typeUrl: "/evmos.inflation.v1.QueryInflationRateResponse";
-  value: Uint8Array;
 }
 export interface QueryInflationRateResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryInflationRateResponse";
@@ -302,10 +262,6 @@ export interface QueryParamsRequestProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryParamsRequest";
   value: Uint8Array;
 }
-export interface QueryParamsRequestProtoMsg {
-  typeUrl: "/evmos.inflation.v1.QueryParamsRequest";
-  value: Uint8Array;
-}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
 export interface QueryParamsRequestAminoMsg {
@@ -318,10 +274,6 @@ export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
-}
-export interface QueryParamsResponseProtoMsg {
-  typeUrl: "/evmos.inflation.v1.QueryParamsResponse";
-  value: Uint8Array;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryParamsResponse";

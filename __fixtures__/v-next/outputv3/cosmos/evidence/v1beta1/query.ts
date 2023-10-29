@@ -12,10 +12,6 @@ export interface QueryEvidenceRequestProtoMsg {
   typeUrl: "/cosmos.evidence.v1beta1.QueryEvidenceRequest";
   value: Uint8Array;
 }
-export interface QueryEvidenceRequestProtoMsg {
-  typeUrl: "/cosmos.evidence.v1beta1.QueryEvidenceRequest";
-  value: Uint8Array;
-}
 /** QueryEvidenceRequest is the request type for the Query/Evidence RPC method. */
 export interface QueryEvidenceRequestAmino {
   /** evidence_hash defines the hash of the requested evidence. */
@@ -33,10 +29,6 @@ export interface QueryEvidenceRequestSDKType {
 export interface QueryEvidenceResponse {
   /** evidence returns the requested evidence. */
   evidence?: Any;
-}
-export interface QueryEvidenceResponseProtoMsg {
-  typeUrl: "/cosmos.evidence.v1beta1.QueryEvidenceResponse";
-  value: Uint8Array;
 }
 export interface QueryEvidenceResponseProtoMsg {
   typeUrl: "/cosmos.evidence.v1beta1.QueryEvidenceResponse";
@@ -62,10 +54,6 @@ export interface QueryEvidenceResponseSDKType {
 export interface QueryAllEvidenceRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
-}
-export interface QueryAllEvidenceRequestProtoMsg {
-  typeUrl: "/cosmos.evidence.v1beta1.QueryAllEvidenceRequest";
-  value: Uint8Array;
 }
 export interface QueryAllEvidenceRequestProtoMsg {
   typeUrl: "/cosmos.evidence.v1beta1.QueryAllEvidenceRequest";
@@ -99,10 +87,6 @@ export interface QueryAllEvidenceResponse {
   evidence: Any[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
-}
-export interface QueryAllEvidenceResponseProtoMsg {
-  typeUrl: "/cosmos.evidence.v1beta1.QueryAllEvidenceResponse";
-  value: Uint8Array;
 }
 export interface QueryAllEvidenceResponseProtoMsg {
   typeUrl: "/cosmos.evidence.v1beta1.QueryAllEvidenceResponse";

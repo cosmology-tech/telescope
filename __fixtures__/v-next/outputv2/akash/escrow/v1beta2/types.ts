@@ -109,10 +109,6 @@ export interface AccountIDProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.AccountID";
   value: Uint8Array;
 }
-export interface AccountIDProtoMsg {
-  typeUrl: "/akash.escrow.v1beta2.AccountID";
-  value: Uint8Array;
-}
 /** AccountID is the account identifier */
 export interface AccountIDAmino {
   scope: string;
@@ -152,10 +148,6 @@ export interface Account {
    * If there are any funds, they should be spent before spending the Balance.
    */
   funds: DecCoin;
-}
-export interface AccountProtoMsg {
-  typeUrl: "/akash.escrow.v1beta2.Account";
-  value: Uint8Array;
 }
 export interface AccountProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.Account";
@@ -211,10 +203,6 @@ export interface FractionalPayment {
   rate: DecCoin;
   balance: DecCoin;
   withdrawn: Coin;
-}
-export interface FractionalPaymentProtoMsg {
-  typeUrl: "/akash.escrow.v1beta2.FractionalPayment";
-  value: Uint8Array;
 }
 export interface FractionalPaymentProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.FractionalPayment";

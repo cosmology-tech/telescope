@@ -158,10 +158,6 @@ export interface WeightedVoteOptionProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.WeightedVoteOption";
   value: Uint8Array;
 }
-export interface WeightedVoteOptionProtoMsg {
-  typeUrl: "/cosmos.gov.v1beta1.WeightedVoteOption";
-  value: Uint8Array;
-}
 /**
  * WeightedVoteOption defines a unit of vote for vote split.
  * 
@@ -197,10 +193,6 @@ export interface TextProposalProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.TextProposal";
   value: Uint8Array;
 }
-export interface TextProposalProtoMsg {
-  typeUrl: "/cosmos.gov.v1beta1.TextProposal";
-  value: Uint8Array;
-}
 /**
  * TextProposal defines a standard text proposal whose changes need to be
  * manually updated in case of approval.
@@ -230,10 +222,6 @@ export interface Deposit {
   proposalId: bigint;
   depositor: string;
   amount: Coin[];
-}
-export interface DepositProtoMsg {
-  typeUrl: "/cosmos.gov.v1beta1.Deposit";
-  value: Uint8Array;
 }
 export interface DepositProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.Deposit";
@@ -277,10 +265,6 @@ export interface Proposal {
   totalDeposit: Coin[];
   votingStartTime: Date;
   votingEndTime: Date;
-}
-export interface ProposalProtoMsg {
-  typeUrl: "/cosmos.gov.v1beta1.Proposal";
-  value: Uint8Array;
 }
 export interface ProposalProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.Proposal";
@@ -333,10 +317,6 @@ export interface TallyResultProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.TallyResult";
   value: Uint8Array;
 }
-export interface TallyResultProtoMsg {
-  typeUrl: "/cosmos.gov.v1beta1.TallyResult";
-  value: Uint8Array;
-}
 /** TallyResult defines a standard tally for a governance proposal. */
 export interface TallyResultAmino {
   yes: string;
@@ -371,10 +351,6 @@ export interface Vote {
   option: VoteOption;
   /** Since: cosmos-sdk 0.43 */
   options: WeightedVoteOption[];
-}
-export interface VoteProtoMsg {
-  typeUrl: "/cosmos.gov.v1beta1.Vote";
-  value: Uint8Array;
 }
 export interface VoteProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.Vote";
@@ -426,10 +402,6 @@ export interface DepositParamsProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.DepositParams";
   value: Uint8Array;
 }
-export interface DepositParamsProtoMsg {
-  typeUrl: "/cosmos.gov.v1beta1.DepositParams";
-  value: Uint8Array;
-}
 /** DepositParams defines the params for deposits on governance proposals. */
 export interface DepositParamsAmino {
   /** Minimum deposit for a proposal to enter voting period. */
@@ -453,10 +425,6 @@ export interface DepositParamsSDKType {
 export interface VotingParams {
   /** Length of the voting period. */
   votingPeriod: Duration;
-}
-export interface VotingParamsProtoMsg {
-  typeUrl: "/cosmos.gov.v1beta1.VotingParams";
-  value: Uint8Array;
 }
 export interface VotingParamsProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.VotingParams";
@@ -489,10 +457,6 @@ export interface TallyParams {
    *  vetoed. Default value: 1/3.
    */
   vetoThreshold: Uint8Array;
-}
-export interface TallyParamsProtoMsg {
-  typeUrl: "/cosmos.gov.v1beta1.TallyParams";
-  value: Uint8Array;
 }
 export interface TallyParamsProtoMsg {
   typeUrl: "/cosmos.gov.v1beta1.TallyParams";

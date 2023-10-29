@@ -65,10 +65,6 @@ export interface QuotaProtoMsg {
   typeUrl: "/google.api.Quota";
   value: Uint8Array;
 }
-export interface QuotaProtoMsg {
-  typeUrl: "/google.api.Quota";
-  value: Uint8Array;
-}
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
  * usage.
@@ -196,10 +192,6 @@ export interface MetricRule_MetricCostsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
-export interface MetricRule_MetricCostsEntryProtoMsg {
-  typeUrl: string;
-  value: Uint8Array;
-}
 export interface MetricRule_MetricCostsEntryAmino {
   key: string;
   value: string;
@@ -234,10 +226,6 @@ export interface MetricRule {
   metricCosts: {
     [key: string]: bigint;
   };
-}
-export interface MetricRuleProtoMsg {
-  typeUrl: "/google.api.MetricRule";
-  value: Uint8Array;
 }
 export interface MetricRuleProtoMsg {
   typeUrl: "/google.api.MetricRule";
@@ -283,10 +271,6 @@ export interface MetricRuleSDKType {
 export interface QuotaLimit_ValuesEntry {
   key: string;
   value: bigint;
-}
-export interface QuotaLimit_ValuesEntryProtoMsg {
-  typeUrl: string;
-  value: Uint8Array;
 }
 export interface QuotaLimit_ValuesEntryProtoMsg {
   typeUrl: string;
@@ -400,10 +384,6 @@ export interface QuotaLimit {
    * display name generated from the configuration.
    */
   displayName: string;
-}
-export interface QuotaLimitProtoMsg {
-  typeUrl: "/google.api.QuotaLimit";
-  value: Uint8Array;
 }
 export interface QuotaLimitProtoMsg {
   typeUrl: "/google.api.QuotaLimit";

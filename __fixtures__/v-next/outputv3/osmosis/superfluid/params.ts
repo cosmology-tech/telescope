@@ -16,10 +16,6 @@ export interface ParamsProtoMsg {
   typeUrl: "/osmosis.superfluid.Params";
   value: Uint8Array;
 }
-export interface ParamsProtoMsg {
-  typeUrl: "/osmosis.superfluid.Params";
-  value: Uint8Array;
-}
 /** Params holds parameters for the superfluid module */
 export interface ParamsAmino {
   /**

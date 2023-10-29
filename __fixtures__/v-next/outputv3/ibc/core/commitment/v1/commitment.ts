@@ -13,10 +13,6 @@ export interface MerkleRootProtoMsg {
   typeUrl: "/ibc.core.commitment.v1.MerkleRoot";
   value: Uint8Array;
 }
-export interface MerkleRootProtoMsg {
-  typeUrl: "/ibc.core.commitment.v1.MerkleRoot";
-  value: Uint8Array;
-}
 /**
  * MerkleRoot defines a merkle root hash.
  * In the Cosmos SDK, the AppHash of a block header becomes the root.
@@ -42,10 +38,6 @@ export interface MerkleRootSDKType {
  */
 export interface MerklePrefix {
   keyPrefix: Uint8Array;
-}
-export interface MerklePrefixProtoMsg {
-  typeUrl: "/ibc.core.commitment.v1.MerklePrefix";
-  value: Uint8Array;
 }
 export interface MerklePrefixProtoMsg {
   typeUrl: "/ibc.core.commitment.v1.MerklePrefix";
@@ -83,10 +75,6 @@ export interface MerklePathProtoMsg {
   typeUrl: "/ibc.core.commitment.v1.MerklePath";
   value: Uint8Array;
 }
-export interface MerklePathProtoMsg {
-  typeUrl: "/ibc.core.commitment.v1.MerklePath";
-  value: Uint8Array;
-}
 /**
  * MerklePath is the path used to verify commitment proofs, which can be an
  * arbitrary structured object (defined by a commitment type).
@@ -116,10 +104,6 @@ export interface MerklePathSDKType {
  */
 export interface MerkleProof {
   proofs: CommitmentProof[];
-}
-export interface MerkleProofProtoMsg {
-  typeUrl: "/ibc.core.commitment.v1.MerkleProof";
-  value: Uint8Array;
 }
 export interface MerkleProofProtoMsg {
   typeUrl: "/ibc.core.commitment.v1.MerkleProof";

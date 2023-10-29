@@ -86,10 +86,6 @@ export interface ConnectionEndProtoMsg {
   typeUrl: "/ibc.core.connection.v1.ConnectionEnd";
   value: Uint8Array;
 }
-export interface ConnectionEndProtoMsg {
-  typeUrl: "/ibc.core.connection.v1.ConnectionEnd";
-  value: Uint8Array;
-}
 /**
  * ConnectionEnd defines a stateful object on a chain connected to another
  * separate one.
@@ -157,10 +153,6 @@ export interface IdentifiedConnectionProtoMsg {
   typeUrl: "/ibc.core.connection.v1.IdentifiedConnection";
   value: Uint8Array;
 }
-export interface IdentifiedConnectionProtoMsg {
-  typeUrl: "/ibc.core.connection.v1.IdentifiedConnection";
-  value: Uint8Array;
-}
 /**
  * IdentifiedConnection defines a connection with additional connection
  * identifier field.
@@ -217,10 +209,6 @@ export interface CounterpartyProtoMsg {
   typeUrl: "/ibc.core.connection.v1.Counterparty";
   value: Uint8Array;
 }
-export interface CounterpartyProtoMsg {
-  typeUrl: "/ibc.core.connection.v1.Counterparty";
-  value: Uint8Array;
-}
 /** Counterparty defines the counterparty chain associated with a connection end. */
 export interface CounterpartyAmino {
   /**
@@ -255,10 +243,6 @@ export interface ClientPathsProtoMsg {
   typeUrl: "/ibc.core.connection.v1.ClientPaths";
   value: Uint8Array;
 }
-export interface ClientPathsProtoMsg {
-  typeUrl: "/ibc.core.connection.v1.ClientPaths";
-  value: Uint8Array;
-}
 /** ClientPaths define all the connection paths for a client state. */
 export interface ClientPathsAmino {
   /** list of connection paths */
@@ -278,10 +262,6 @@ export interface ConnectionPaths {
   clientId: string;
   /** list of connection paths */
   paths: string[];
-}
-export interface ConnectionPathsProtoMsg {
-  typeUrl: "/ibc.core.connection.v1.ConnectionPaths";
-  value: Uint8Array;
 }
 export interface ConnectionPathsProtoMsg {
   typeUrl: "/ibc.core.connection.v1.ConnectionPaths";
@@ -317,10 +297,6 @@ export interface VersionProtoMsg {
   typeUrl: "/ibc.core.connection.v1.Version";
   value: Uint8Array;
 }
-export interface VersionProtoMsg {
-  typeUrl: "/ibc.core.connection.v1.Version";
-  value: Uint8Array;
-}
 /**
  * Version defines the versioning scheme used to negotiate the IBC verison in
  * the connection handshake.
@@ -351,10 +327,6 @@ export interface Params {
    * conditions. A safe choice is 3-5x the expected time per block.
    */
   maxExpectedTimePerBlock: bigint;
-}
-export interface ParamsProtoMsg {
-  typeUrl: "/ibc.core.connection.v1.Params";
-  value: Uint8Array;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/ibc.core.connection.v1.Params";

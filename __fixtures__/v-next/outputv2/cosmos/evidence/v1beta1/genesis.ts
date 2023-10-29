@@ -11,10 +11,6 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.evidence.v1beta1.GenesisState";
   value: Uint8Array;
 }
-export interface GenesisStateProtoMsg {
-  typeUrl: "/cosmos.evidence.v1beta1.GenesisState";
-  value: Uint8Array;
-}
 /** GenesisState defines the evidence module's genesis state. */
 export interface GenesisStateAmino {
   /** evidence defines all the evidence at genesis. */

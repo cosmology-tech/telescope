@@ -14,10 +14,6 @@ export interface DenomAuthorityMetadataProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.DenomAuthorityMetadata";
   value: Uint8Array;
 }
-export interface DenomAuthorityMetadataProtoMsg {
-  typeUrl: "/osmosis.tokenfactory.v1beta1.DenomAuthorityMetadata";
-  value: Uint8Array;
-}
 /**
  * DenomAuthorityMetadata specifies metadata for addresses that have specific
  * capabilities over a token factory denom. Right now there is only one Admin

@@ -62,10 +62,6 @@ export interface OrderIDProtoMsg {
   typeUrl: "/akash.market.v1beta2.OrderID";
   value: Uint8Array;
 }
-export interface OrderIDProtoMsg {
-  typeUrl: "/akash.market.v1beta2.OrderID";
-  value: Uint8Array;
-}
 /** OrderID stores owner and all other seq numbers */
 export interface OrderIDAmino {
   owner: string;
@@ -90,10 +86,6 @@ export interface Order {
   state: Order_State;
   spec: GroupSpec;
   createdAt: bigint;
-}
-export interface OrderProtoMsg {
-  typeUrl: "/akash.market.v1beta2.Order";
-  value: Uint8Array;
 }
 export interface OrderProtoMsg {
   typeUrl: "/akash.market.v1beta2.Order";
@@ -124,10 +116,6 @@ export interface OrderFilters {
   gseq: number;
   oseq: number;
   state: string;
-}
-export interface OrderFiltersProtoMsg {
-  typeUrl: "/akash.market.v1beta2.OrderFilters";
-  value: Uint8Array;
 }
 export interface OrderFiltersProtoMsg {
   typeUrl: "/akash.market.v1beta2.OrderFilters";

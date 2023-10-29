@@ -16,10 +16,6 @@ export interface MsgSendProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.MsgSend";
   value: Uint8Array;
 }
-export interface MsgSendProtoMsg {
-  typeUrl: "/cosmos.nft.v1beta1.MsgSend";
-  value: Uint8Array;
-}
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSendAmino {
   /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
@@ -44,10 +40,6 @@ export interface MsgSendSDKType {
 }
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponse {}
-export interface MsgSendResponseProtoMsg {
-  typeUrl: "/cosmos.nft.v1beta1.MsgSendResponse";
-  value: Uint8Array;
-}
 export interface MsgSendResponseProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.MsgSendResponse";
   value: Uint8Array;

@@ -27,10 +27,6 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.superfluid.GenesisState";
   value: Uint8Array;
 }
-export interface GenesisStateProtoMsg {
-  typeUrl: "/osmosis.superfluid.GenesisState";
-  value: Uint8Array;
-}
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateAmino {
   params?: ParamsAmino;

@@ -21,10 +21,6 @@ export interface StoreCodeProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.StoreCodeProposal";
   value: Uint8Array;
 }
-export interface StoreCodeProposalProtoMsg {
-  typeUrl: "/cosmwasm.wasm.v1.StoreCodeProposal";
-  value: Uint8Array;
-}
 /** StoreCodeProposal gov proposal content type to submit WASM code to the system */
 export interface StoreCodeProposalAmino {
   /** Title is a short summary */
@@ -71,10 +67,6 @@ export interface InstantiateContractProposal {
   msg: Uint8Array;
   /** Funds coins that are transferred to the contract on instantiation */
   funds: Coin[];
-}
-export interface InstantiateContractProposalProtoMsg {
-  typeUrl: "/cosmwasm.wasm.v1.InstantiateContractProposal";
-  value: Uint8Array;
 }
 export interface InstantiateContractProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.InstantiateContractProposal";
@@ -137,10 +129,6 @@ export interface MigrateContractProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.MigrateContractProposal";
   value: Uint8Array;
 }
-export interface MigrateContractProposalProtoMsg {
-  typeUrl: "/cosmwasm.wasm.v1.MigrateContractProposal";
-  value: Uint8Array;
-}
 /** MigrateContractProposal gov proposal content type to migrate a contract. */
 export interface MigrateContractProposalAmino {
   /** Title is a short summary */
@@ -176,10 +164,6 @@ export interface SudoContractProposal {
   contract: string;
   /** Msg json encoded message to be passed to the contract as sudo */
   msg: Uint8Array;
-}
-export interface SudoContractProposalProtoMsg {
-  typeUrl: "/cosmwasm.wasm.v1.SudoContractProposal";
-  value: Uint8Array;
 }
 export interface SudoContractProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.SudoContractProposal";
@@ -224,10 +208,6 @@ export interface ExecuteContractProposal {
   msg: Uint8Array;
   /** Funds coins that are transferred to the contract on instantiation */
   funds: Coin[];
-}
-export interface ExecuteContractProposalProtoMsg {
-  typeUrl: "/cosmwasm.wasm.v1.ExecuteContractProposal";
-  value: Uint8Array;
 }
 export interface ExecuteContractProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.ExecuteContractProposal";
@@ -282,10 +262,6 @@ export interface UpdateAdminProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.UpdateAdminProposal";
   value: Uint8Array;
 }
-export interface UpdateAdminProposalProtoMsg {
-  typeUrl: "/cosmwasm.wasm.v1.UpdateAdminProposal";
-  value: Uint8Array;
-}
 /** UpdateAdminProposal gov proposal content type to set an admin for a contract. */
 export interface UpdateAdminProposalAmino {
   /** Title is a short summary */
@@ -319,10 +295,6 @@ export interface ClearAdminProposal {
   description: string;
   /** Contract is the address of the smart contract */
   contract: string;
-}
-export interface ClearAdminProposalProtoMsg {
-  typeUrl: "/cosmwasm.wasm.v1.ClearAdminProposal";
-  value: Uint8Array;
 }
 export interface ClearAdminProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.ClearAdminProposal";
@@ -369,10 +341,6 @@ export interface PinCodesProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.PinCodesProposal";
   value: Uint8Array;
 }
-export interface PinCodesProposalProtoMsg {
-  typeUrl: "/cosmwasm.wasm.v1.PinCodesProposal";
-  value: Uint8Array;
-}
 /**
  * PinCodesProposal gov proposal content type to pin a set of code ids in the
  * wasmvm cache.
@@ -409,10 +377,6 @@ export interface UnpinCodesProposal {
   description: string;
   /** CodeIDs references the WASM codes */
   codeIds: bigint[];
-}
-export interface UnpinCodesProposalProtoMsg {
-  typeUrl: "/cosmwasm.wasm.v1.UnpinCodesProposal";
-  value: Uint8Array;
 }
 export interface UnpinCodesProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.UnpinCodesProposal";

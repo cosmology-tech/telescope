@@ -235,10 +235,6 @@ export interface MemberProtoMsg {
   typeUrl: "/cosmos.group.v1.Member";
   value: Uint8Array;
 }
-export interface MemberProtoMsg {
-  typeUrl: "/cosmos.group.v1.Member";
-  value: Uint8Array;
-}
 /**
  * Member represents a group member with an account address,
  * non-zero weight and metadata.
@@ -276,10 +272,6 @@ export interface MembersProtoMsg {
   typeUrl: "/cosmos.group.v1.Members";
   value: Uint8Array;
 }
-export interface MembersProtoMsg {
-  typeUrl: "/cosmos.group.v1.Members";
-  value: Uint8Array;
-}
 /** Members defines a repeated slice of Member objects. */
 export interface MembersAmino {
   /** members is the list of members. */
@@ -300,10 +292,6 @@ export interface ThresholdDecisionPolicy {
   threshold: string;
   /** windows defines the different windows for voting and execution. */
   windows?: DecisionPolicyWindows;
-}
-export interface ThresholdDecisionPolicyProtoMsg {
-  typeUrl: "/cosmos.group.v1.ThresholdDecisionPolicy";
-  value: Uint8Array;
 }
 export interface ThresholdDecisionPolicyProtoMsg {
   typeUrl: "/cosmos.group.v1.ThresholdDecisionPolicy";
@@ -333,10 +321,6 @@ export interface PercentageDecisionPolicy {
   percentage: string;
   /** windows defines the different windows for voting and execution. */
   windows?: DecisionPolicyWindows;
-}
-export interface PercentageDecisionPolicyProtoMsg {
-  typeUrl: "/cosmos.group.v1.PercentageDecisionPolicy";
-  value: Uint8Array;
 }
 export interface PercentageDecisionPolicyProtoMsg {
   typeUrl: "/cosmos.group.v1.PercentageDecisionPolicy";
@@ -380,10 +364,6 @@ export interface DecisionPolicyWindows {
    * won't be able to be executed.
    */
   minExecutionPeriod: Duration;
-}
-export interface DecisionPolicyWindowsProtoMsg {
-  typeUrl: "/cosmos.group.v1.DecisionPolicyWindows";
-  value: Uint8Array;
 }
 export interface DecisionPolicyWindowsProtoMsg {
   typeUrl: "/cosmos.group.v1.DecisionPolicyWindows";
@@ -444,10 +424,6 @@ export interface GroupInfoProtoMsg {
   typeUrl: "/cosmos.group.v1.GroupInfo";
   value: Uint8Array;
 }
-export interface GroupInfoProtoMsg {
-  typeUrl: "/cosmos.group.v1.GroupInfo";
-  value: Uint8Array;
-}
 /** GroupInfo represents the high-level on-chain information for a group. */
 export interface GroupInfoAmino {
   /** id is the unique ID of the group. */
@@ -492,10 +468,6 @@ export interface GroupMemberProtoMsg {
   typeUrl: "/cosmos.group.v1.GroupMember";
   value: Uint8Array;
 }
-export interface GroupMemberProtoMsg {
-  typeUrl: "/cosmos.group.v1.GroupMember";
-  value: Uint8Array;
-}
 /** GroupMember represents the relationship between a group and a member. */
 export interface GroupMemberAmino {
   /** group_id is the unique ID of the group. */
@@ -531,10 +503,6 @@ export interface GroupPolicyInfo {
   decisionPolicy?: ThresholdDecisionPolicy | PercentageDecisionPolicy | Any | undefined;
   /** created_at is a timestamp specifying when a group policy was created. */
   createdAt: Date;
-}
-export interface GroupPolicyInfoProtoMsg {
-  typeUrl: "/cosmos.group.v1.GroupPolicyInfo";
-  value: Uint8Array;
 }
 export interface GroupPolicyInfoProtoMsg {
   typeUrl: "/cosmos.group.v1.GroupPolicyInfo";
@@ -635,10 +603,6 @@ export interface ProposalProtoMsg {
   typeUrl: "/cosmos.group.v1.Proposal";
   value: Uint8Array;
 }
-export interface ProposalProtoMsg {
-  typeUrl: "/cosmos.group.v1.Proposal";
-  value: Uint8Array;
-}
 /**
  * Proposal defines a group proposal. Any member of a group can submit a proposal
  * for a group policy to decide upon.
@@ -733,10 +697,6 @@ export interface TallyResultProtoMsg {
   typeUrl: "/cosmos.group.v1.TallyResult";
   value: Uint8Array;
 }
-export interface TallyResultProtoMsg {
-  typeUrl: "/cosmos.group.v1.TallyResult";
-  value: Uint8Array;
-}
 /** TallyResult represents the sum of weighted votes for each vote option. */
 export interface TallyResultAmino {
   /** yes_count is the weighted sum of yes votes. */
@@ -771,10 +731,6 @@ export interface Vote {
   metadata: string;
   /** submit_time is the timestamp when the vote was submitted. */
   submitTime: Date;
-}
-export interface VoteProtoMsg {
-  typeUrl: "/cosmos.group.v1.Vote";
-  value: Uint8Array;
 }
 export interface VoteProtoMsg {
   typeUrl: "/cosmos.group.v1.Vote";

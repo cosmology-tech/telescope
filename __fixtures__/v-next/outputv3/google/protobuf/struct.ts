@@ -42,10 +42,6 @@ export interface Struct_FieldsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
-export interface Struct_FieldsEntryProtoMsg {
-  typeUrl: string;
-  value: Uint8Array;
-}
 export interface Struct_FieldsEntryAmino {
   key: string;
   value?: ValueAmino;
@@ -73,10 +69,6 @@ export interface Struct {
   fields: {
     [key: string]: Value;
   };
-}
-export interface StructProtoMsg {
-  typeUrl: "/google.protobuf.Struct";
-  value: Uint8Array;
 }
 export interface StructProtoMsg {
   typeUrl: "/google.protobuf.Struct";
@@ -143,10 +135,6 @@ export interface ValueProtoMsg {
   typeUrl: "/google.protobuf.Value";
   value: Uint8Array;
 }
-export interface ValueProtoMsg {
-  typeUrl: "/google.protobuf.Value";
-  value: Uint8Array;
-}
 /**
  * `Value` represents a dynamically typed value which can be either
  * null, a number, a string, a boolean, a recursive struct value, or a
@@ -197,10 +185,6 @@ export interface ValueSDKType {
 export interface ListValue {
   /** Repeated field of dynamically typed values. */
   values: Value[];
-}
-export interface ListValueProtoMsg {
-  typeUrl: "/google.protobuf.ListValue";
-  value: Uint8Array;
 }
 export interface ListValueProtoMsg {
   typeUrl: "/google.protobuf.ListValue";

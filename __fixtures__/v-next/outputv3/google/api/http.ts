@@ -27,10 +27,6 @@ export interface HttpProtoMsg {
   typeUrl: "/google.api.Http";
   value: Uint8Array;
 }
-export interface HttpProtoMsg {
-  typeUrl: "/google.api.Http";
-  value: Uint8Array;
-}
 /**
  * Defines the HTTP configuration for an API service. It contains a list of
  * [HttpRule][google.api.HttpRule], each specifying the mapping of an RPC method
@@ -388,10 +384,6 @@ export interface HttpRule {
    * the nesting may only be one level deep).
    */
   additionalBindings: HttpRule[];
-}
-export interface HttpRuleProtoMsg {
-  typeUrl: "/google.api.HttpRule";
-  value: Uint8Array;
 }
 export interface HttpRuleProtoMsg {
   typeUrl: "/google.api.HttpRule";
@@ -1013,10 +1005,6 @@ export interface CustomHttpPattern {
   kind: string;
   /** The path matched by this custom verb. */
   path: string;
-}
-export interface CustomHttpPatternProtoMsg {
-  typeUrl: "/google.api.CustomHttpPattern";
-  value: Uint8Array;
 }
 export interface CustomHttpPatternProtoMsg {
   typeUrl: "/google.api.CustomHttpPattern";
