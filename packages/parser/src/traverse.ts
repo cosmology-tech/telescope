@@ -599,7 +599,7 @@ export const recursiveTraversal = (
                 nested: {}
             });
         } else {
-            throw new Error('recursiveTraversal() [Root] cannot find protobufjs Type')
+            throw new Error(`recursiveTraversal() [Root] cannot find protobufjs Type in file: ${ref.filename}`)
         }
     }
     if (obj instanceof Namespace) {
@@ -612,7 +612,7 @@ export const recursiveTraversal = (
                 nested: {}
             });
         } else {
-            throw new Error('recursiveTraversal() [Namespace] cannot find protobufjs Type')
+            throw new Error(`recursiveTraversal() [Namespace] cannot find protobufjs Type in file: ${ref.filename}`)
         }
     }
     throw new Error('recursiveTraversal() cannot find protobufjs Type')
