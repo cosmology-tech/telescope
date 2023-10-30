@@ -17,6 +17,7 @@ import google_field_mask from './native/field_mask';
 import google_struct from './native/struct';
 import google_wrappers from './native/wrappers';
 import { ProtoResolver } from './resolver';
+import * as os from "os";
 
 const GOOGLE_PROTOS = [
     ['google/protobuf/any.proto', google_any],
@@ -112,14 +113,18 @@ export class ProtoStore implements IProtoStore {
 
     getProtos(): ProtoRef[] {
         if (this.protos) return this.protos;
+        const isWin = os.platform() === 'win32'
         const contents = this.protoDirs.reduce((m, protoDir) => {
-            const protoSplat = join(protoDir, '/**/*.proto');
-            const protoFiles = glob(protoSplat);
-            const contents = protoFiles.map(filename => ({
-                absolute: filename,
-                filename: filename.split(protoDir)[1].replace(/^\//, ''),
-                content: readFileSync(filename, 'utf-8')
-            }));
+            const protoSplat = join(protoDir, '**', '*.proto');
+            const protoFiles = glob(isWin ?  protoSplat.replace(/\\/g, '/'): protoSplat);
+            const contents = protoFiles.map(filename => {
+                const processedFilename = isWin ? filename.replace(/\//g, '\\') : filename
+                return ({
+                    absolute: processedFilename,
+                    filename: processedFilename.split(protoDir)[1].replace(/^\//, ''),
+                    content: readFileSync(processedFilename, 'utf-8')
+                })
+            });
             return [...m, ...contents];
         }, []);
 
