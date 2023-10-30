@@ -173,7 +173,7 @@ export class ProtoStore implements IProtoStore {
         // LONGEST strings first, for better matching
         this.packages = this.packages.sort((a, b) => {
             return b.length - a.length;
-        })
+        }).filter(Boolean);
         return this.packages;
     }
 
