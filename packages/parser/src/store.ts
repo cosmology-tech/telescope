@@ -17,7 +17,7 @@ import google_field_mask from './native/field_mask';
 import google_struct from './native/struct';
 import google_wrappers from './native/wrappers';
 import { ProtoResolver } from './resolver';
-import * as os from "os";
+import os from "os";
 
 const GOOGLE_PROTOS = [
     ['google/protobuf/any.proto', google_any],
