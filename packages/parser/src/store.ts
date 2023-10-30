@@ -121,7 +121,7 @@ export class ProtoStore implements IProtoStore {
                 const processedFilename = isWin ? filename.replace(/\//g, '\\') : filename
                 return ({
                     absolute: processedFilename,
-                    filename: processedFilename.split(protoDir)[1].replace(/^\//, ''),
+                    filename: filename.split(protoDir.replace(/\\/g, '/'))[1].replace(/^\//, ''),
                     content: readFileSync(processedFilename, 'utf-8')
                 })
             });
