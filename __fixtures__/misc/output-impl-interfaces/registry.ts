@@ -21,10 +21,12 @@ export class GlobalDecoderRegistry {
   static register<T>(key: string, decoder: TelescopeGeneratedType<T>) {
     GlobalDecoderRegistry.registry[key] = decoder;
   }
-  static getDecoder(key: string): unknown {
+  static getDecoder<T>(key: string): TelescopeGeneratedType<T> {
     return GlobalDecoderRegistry.registry[key];
   }
-  static getDecoderByInstance(obj: unknown): unknown {
+  static getDecoderByInstance<T>(
+    obj: unknown
+  ): TelescopeGeneratedType<T> | null {
     for (const key in GlobalDecoderRegistry.registry) {
       if (
         Object.prototype.hasOwnProperty.call(
@@ -41,5 +43,28 @@ export class GlobalDecoderRegistry {
     }
 
     return null;
+  }
+  static wrapAny(obj: unknown): Any {
+    const decoder = GlobalDecoderRegistry.getDecoderByInstance(obj);
+
+    if (!decoder) {
+      throw new Error(`There's no encoder for the instance ${obj}`);
+    }
+
+    return decoder.toProtoMsg(obj);
+  }
+  static unwrapAny<T>(input: BinaryReader | Uint8Array) {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+
+    const data = Any.decode(reader, reader.uint32());
+
+    const decoder = GlobalDecoderRegistry.getDecoder<T>(data.typeUrl);
+
+    if (!decoder) {
+      return data;
+    }
+
+    return decoder.decode(data.value);
   }
 }
