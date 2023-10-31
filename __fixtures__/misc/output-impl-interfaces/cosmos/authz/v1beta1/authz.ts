@@ -245,6 +245,12 @@ export const Grant = {
           | DepositDeploymentAuthorization
           | SendAuthorization
           | Any;
+      } else {
+        message.authorization = object.authorization as
+          | GenericAuthorization
+          | DepositDeploymentAuthorization
+          | SendAuthorization
+          | Any;
       }
     }
     message.expiration = object.expiration ?? undefined;
