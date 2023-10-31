@@ -341,4 +341,41 @@ describe("misc", () => {
 
     await telescope.build();
   });
+
+  it("generates implements interface test code", async () => {
+    const testFolder = "/output-impl-interfaces";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto-impl-interfaces"],
+      options: deepmerge(options, {
+        interfaces: {
+          enabled: true,
+          useUnionTypes: true,
+        },
+
+        useSDKTypes:false,
+
+        prototypes: {
+          addTypeUrlToDecoders: false,
+          methods: {
+            toSDK: false,
+            fromSDK: false,
+            fromSDKJSON: false,
+            toAmino: false,
+            fromAmino: false,
+            toProto: true,
+            fromProto: true,
+          },
+        },
+
+        aminoEncoding: {
+          enabled: false,
+          useLegacyInlineEncoding: false,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
 });
