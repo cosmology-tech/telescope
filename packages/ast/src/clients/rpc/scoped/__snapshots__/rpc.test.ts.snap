@@ -28,8 +28,8 @@ exports[`createScopedRpcTmFactory 1`] = `
 }: {
   rpcEndpoint: string | HttpEndpoint;
 }) => {
-  const tmClient = await Tendermint34Client.connect(rpcEndpoint);
-  const client = new QueryClient(tmClient);
+  const cometClient = await connectComet(rpcEndpoint);
+  const client = new QueryClient(cometClient);
   return {
     cosmos: {
       bank: {

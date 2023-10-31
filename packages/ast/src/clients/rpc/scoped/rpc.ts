@@ -188,7 +188,7 @@ export const createScopedRpcTmFactory = (
     identifier: string
 ) => {
 
-    context.addUtil('Tendermint34Client');
+    context.addUtil('connectComet');
     context.addUtil('HttpEndpoint');
     context.addUtil('QueryClient');
 
@@ -228,16 +228,13 @@ export const createScopedRpcTmFactory = (
 
                             t.variableDeclaration('const', [
                                 t.variableDeclarator(
-                                    t.identifier('tmClient'),
+                                    t.identifier('cometClient'),
                                     t.awaitExpression(
-                                        t.callExpression(
-                                            t.memberExpression(
-                                                t.identifier('Tendermint34Client'),
-                                                t.identifier('connect')
-                                            ),
-                                            [
-                                                t.identifier('rpcEndpoint')
-                                            ]
+                                            t.callExpression(
+                                                t.identifier('connectComet'),      
+                                                [
+                                                    t.identifier('rpcEndpoint')
+                                                ]
                                         )
                                     )
                                 )
@@ -249,7 +246,7 @@ export const createScopedRpcTmFactory = (
                                     t.newExpression(
                                         t.identifier('QueryClient'),
                                         [
-                                            t.identifier('tmClient')
+                                            t.identifier('cometClient')
                                         ]
                                     )
                                 )
