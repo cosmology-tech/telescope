@@ -176,11 +176,11 @@ telescope transpile --config .telescope.json --config .telescope-ext.json
 
 ### Build
 
-Finally, run `install` and `buidl` to generate the JS and types for publishing your module to npm.
+Finally, run `install` and `build` to generate the JS and types for publishing your module to npm.
 
 ```sh
 yarn install
-yarn buidl
+yarn build
 ```
 
 Now you should have code inside of your `./src` folder, ready for publshing via `npm publish`. Or, if you used the defaults, you can start developing and your code can be imported from `./src/codegen`;
