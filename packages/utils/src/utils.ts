@@ -6,6 +6,7 @@ import {
   ImportUsage,
 } from "@cosmology/types";
 import * as dotty from "dotty";
+import os from 'os';
 
 /**
  * swap the key and value of the input object
@@ -80,7 +81,17 @@ export const getTypeNameFromFieldName = (
   }
 
   return importedAs;
-};
+}
+
+export const convertIfWinPath = (reg: RegExp, replaceValue: string, path: string): string => {
+  if (os.platform() === 'win32') {
+    return path.replace(reg, replaceValue)
+  }
+  return path
+}
+
+export const ToUnixPath = /\\/g
+export const ToWindowsPath = /\//g
 
 export const buildImports = (imports: ImportUsage[]) => {
   return imports.map((item) => {

@@ -1,6 +1,7 @@
 import { ProtoRoot, ProtoRef } from '@cosmology/types';
 import { relative, dirname, extname } from 'path';
 import { ImportObj } from '../types';
+import { convertIfWinPath, ToUnixPath } from '@cosmology/utils';
 
 export const getRoot = (ref: ProtoRef): ProtoRoot => {
   if (ref.traversed) return ref.traversed;
@@ -117,7 +118,7 @@ export const getRelativePath = (f1: string, f2: string) => {
   const rel = relative(dirname(f1), f2);
   let importPath = rel.replace(extname(rel), '');
   if (!/^\./.test(importPath)) importPath = `./${importPath}`;
-  return importPath;
+  return convertIfWinPath(ToUnixPath, '/', importPath);
 }
 
 export * from './common-create-bundle';

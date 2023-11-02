@@ -5,6 +5,7 @@ import { TelescopeBuilder } from './index';
 import { join, relative, dirname } from 'path';
 import { TelescopeParseContext } from './build';
 import { TelescopeOptions } from '@cosmology/types';
+import { convertIfWinPath, ToUnixPath } from '@cosmology/utils';
 
 // TODO move to store
 export const getPackages = (store: ProtoStore) => {
@@ -153,7 +154,7 @@ export const createFileBundle = (
     let rel = relative(dirname(bundleFile), filename);
     if (!rel.startsWith('.')) rel = `./${rel}`;
     const variable = `_${counter++}`;
-    importPaths.push(importNamespace(variable, rel));
+    importPaths.push(importNamespace(variable, convertIfWinPath(ToUnixPath, '/', rel));
     dotty.put(bundleVariables, pkg + '.__export', true);
     dotty.put(bundleVariables, pkg + '.' + variable, true);
 }

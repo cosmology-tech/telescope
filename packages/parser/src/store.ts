@@ -17,7 +17,7 @@ import google_field_mask from './native/field_mask';
 import google_struct from './native/struct';
 import google_wrappers from './native/wrappers';
 import { ProtoResolver } from './resolver';
-import os from "os";
+import { ToUnixPath, ToWindowsPath, convertIfWinPath } from '@cosmology/utils';
 
 const GOOGLE_PROTOS = [
     ['google/protobuf/any.proto', google_any],
@@ -113,15 +113,14 @@ export class ProtoStore implements IProtoStore {
 
     getProtos(): ProtoRef[] {
         if (this.protos) return this.protos;
-        const isWin = os.platform() === 'win32'
         const contents = this.protoDirs.reduce((m, protoDir) => {
             const protoSplat = join(protoDir, '**', '*.proto');
-            const protoFiles = glob(isWin ?  protoSplat.replace(/\\/g, '/'): protoSplat);
+            const protoFiles = glob(convertIfWinPath(ToUnixPath, '/', protoSplat));
             const contents = protoFiles.map(filename => {
-                const processedFilename = isWin ? filename.replace(/\//g, '\\') : filename
+                const processedFilename = convertIfWinPath(ToWindowsPath, '\\', filename)
                 return ({
                     absolute: processedFilename,
-                    filename: filename.split(protoDir.replace(/\\/g, '/'))[1].replace(/^\//, ''),
+                    filename: filename.split(convertIfWinPath(ToUnixPath, '/', protoDir))[1].replace(/^\//, ''),
                     content: readFileSync(processedFilename, 'utf-8')
                 })
             });
