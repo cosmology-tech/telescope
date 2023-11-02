@@ -207,7 +207,7 @@ export const Grant = {
           `There's no decoder for the instance ${object.authorization}`
         );
       }
-      obj.authorization = decoder.fromJSON(object.authorization) as
+      obj.authorization = decoder.fromJSON!(object.authorization) as
         | GenericAuthorization
         | DepositDeploymentAuthorization
         | SendAuthorization
@@ -227,7 +227,7 @@ export const Grant = {
           `There's no decoder for the instance ${message.authorization}`
         );
       }
-      obj.authorization = decoder.toJSON(message.authorization);
+      obj.authorization = decoder.toJSON!(message.authorization);
     }
     message.expiration !== undefined &&
       (obj.expiration = message.expiration.toISOString());
@@ -269,14 +269,6 @@ export const Grant = {
     };
   },
 };
-function createBaseGrantAuthorization(): GrantAuthorization {
-  return {
-    granter: "",
-    grantee: "",
-    authorization: undefined,
-    expiration: undefined,
-  };
-}
 function createBaseGrantQueueItem(): GrantQueueItem {
   return {
     msgTypeUrls: [],
@@ -343,25 +335,4 @@ export const GrantQueueItem = {
       value: GrantQueueItem.encode(message).finish(),
     };
   },
-};
-export const Authorization_InterfaceDecoder = (
-  input: BinaryReader | Uint8Array
-):
-  | DepositDeploymentAuthorization
-  | GenericAuthorization
-  | SendAuthorization
-  | Any => {
-  const reader =
-    input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32());
-  switch (data.typeUrl) {
-    case "/akash.deployment.v1beta1.DepositDeploymentAuthorization":
-      return DepositDeploymentAuthorization.decode(data.value);
-    case "/cosmos.authz.v1beta1.GenericAuthorization":
-      return GenericAuthorization.decode(data.value);
-    case "/cosmos.bank.v1beta1.SendAuthorization":
-      return SendAuthorization.decode(data.value);
-    default:
-      return data;
-  }
 };

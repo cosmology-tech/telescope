@@ -1,17 +1,19 @@
 import { BinaryReader, BinaryWriter } from "./binary";
 import { Any } from "./google/protobuf/any";
 
+type ProtoMsg = Omit<Any, "typeUrl"> & { typeUrl: any };
+
 export interface TelescopeGeneratedType<T> {
   readonly typeUrl: string;
   is(o: unknown): o is T;
   encode: (message: T, writer?: BinaryWriter) => BinaryWriter;
   decode: (input: BinaryReader | Uint8Array, length?: number) => T;
   fromPartial: (object: any) => T;
-  fromJSON: (object: unknown) => T;
-  toJSON(message: T): unknown;
-  toProto(message: T): Uint8Array;
-  fromProtoMsg(message: Any): T;
-  toProtoMsg(message: T): Any;
+  fromJSON?: (object: unknown) => T;
+  toJSON?: (message: T) => unknown;
+  toProto?: (message: T) => Uint8Array;
+  fromProtoMsg?: (message: ProtoMsg) => T;
+  toProtoMsg?: (message: T) => Any;
 }
 
 export class GlobalDecoderRegistry {
@@ -51,7 +53,10 @@ export class GlobalDecoderRegistry {
       throw new Error(`There's no encoder for the instance ${obj}`);
     }
 
-    return decoder.toProtoMsg(obj);
+    return {
+      typeUrl: decoder.typeUrl,
+      value: decoder.encode(obj).finish(),
+    };
   }
   static unwrapAny<T>(input: BinaryReader | Uint8Array) {
     const reader =
