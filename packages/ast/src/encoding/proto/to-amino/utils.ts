@@ -238,7 +238,62 @@ export const toAminoJSON = {
     },
 
     timestamp(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
+        let timestampFormat = args.context.pluginValue(
+            'prototypes.typingsFormat.timestamp'
+        );
+        const env = args.context.pluginValue(
+            'env'
+        );
+        if (!env || env == 'default') {
+            timestampFormat = 'timestamp';
+        }
+        switch (timestampFormat) {
+            case 'timestamp':
+                return toAminoJSON.type(args);
+            case 'date':
+            default:
+                args.context.addUtil('toTimestamp');
+                return toAminoJSON.timestampDate(args);
+        }
+    },
+
+    timestampDate(args: ToAminoJSONMethod) {
+        const { propName, origName } = getFieldNames(args.field);
+        args.context.addUtil('toTimestamp');
+
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.conditionalExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    ),
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('Timestamp'),
+                            t.identifier('toAmino')
+                        ),
+                        [
+                            t.callExpression(
+                                t.identifier('toTimestamp'),
+                                [
+                                    t.memberExpression(
+                                        t.identifier('message'),
+                                        t.identifier(propName)
+                                    )
+                                ]
+                            )
+                        ]
+                    ),
+                    t.identifier('undefined')
+                )
+            )
+        );
     },
 
     pubkey(args: ToAminoJSONMethod) {
@@ -694,7 +749,7 @@ export const toAminoMessages = {
                         t.identifier('fromTimestamp'),
                         [t.identifier('message')]
                     ),
-                    t.identifier('toString')
+                    t.identifier('toISOString')
                 ),
                 []
             )

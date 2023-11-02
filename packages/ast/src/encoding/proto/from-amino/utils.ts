@@ -327,7 +327,48 @@ export const fromAminoJSON = {
     },
 
     timestamp(args: FromAminoJSONMethod) {
-        return fromAminoJSON.scalar(args);
+        let timestampFormat = args.context.pluginValue(
+            'prototypes.typingsFormat.timestamp'
+        );
+        const env = args.context.pluginValue(
+            'env'
+        );
+        if (!env || env == 'default') {
+            timestampFormat = 'timestamp';
+        }
+        switch (timestampFormat) {
+            case 'timestamp':
+                return fromAminoJSON.type(args);
+            case 'date':
+            default:
+                return fromAminoJSON.timestampDate(args);
+        }
+    },
+
+    timestampDate(args: FromAminoJSONMethod) {
+        const { origName } = getFieldNames(args.field);
+        args.context.addUtil('isSet');
+        args.context.addUtil('fromTimestamp');
+
+        const callExpr = t.callExpression(
+            t.identifier('fromTimestamp'),
+            [
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier('Timestamp'),
+                        t.identifier('fromAmino')
+                    ),
+                    [
+                        t.memberExpression(
+                            t.identifier('object'),
+                            t.identifier(origName)
+                        )
+                    ]
+                )
+            ]
+        );
+    
+        return setProp(args, callExpr);
     },
 
     //  labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{

@@ -30,6 +30,7 @@ export declare const fromAminoJSON: {
     bytes(args: FromAminoJSONMethod): t.ObjectProperty;
     duration(args: FromAminoJSONMethod): t.ObjectProperty;
     timestamp(args: FromAminoJSONMethod): t.ObjectProperty;
+    timestampDate(args: FromAminoJSONMethod): t.ObjectProperty;
     keyHash(args: FromAminoJSONMethod): t.ObjectProperty;
     array(args: FromAminoJSONMethod, expr: t.Expression): t.ObjectProperty;
 };
