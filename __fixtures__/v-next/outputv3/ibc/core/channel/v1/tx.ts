@@ -485,7 +485,7 @@ export const MsgChannelOpenInit = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgChannelOpenInit {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgChannelOpenInit {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenInit();
@@ -552,14 +552,14 @@ export const MsgChannelOpenInit = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgChannelOpenInit, useInterfaces: boolean = false): MsgChannelOpenInitAmino {
+  toAmino(message: MsgChannelOpenInit, useInterfaces: boolean = true): MsgChannelOpenInitAmino {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.channel = message.channel ? Channel.toAmino(message.channel, useInterfaces) : undefined;
     obj.signer = message.signer;
     return obj;
   },
-  fromProtoMsg(message: MsgChannelOpenInitProtoMsg, useInterfaces: boolean = false): MsgChannelOpenInit {
+  fromProtoMsg(message: MsgChannelOpenInitProtoMsg, useInterfaces: boolean = true): MsgChannelOpenInit {
     return MsgChannelOpenInit.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgChannelOpenInit): Uint8Array {
@@ -581,7 +581,7 @@ export const MsgChannelOpenInitResponse = {
   encode(_: MsgChannelOpenInitResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgChannelOpenInitResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgChannelOpenInitResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenInitResponse();
@@ -617,11 +617,11 @@ export const MsgChannelOpenInitResponse = {
   fromAmino(_: MsgChannelOpenInitResponseAmino): MsgChannelOpenInitResponse {
     return {};
   },
-  toAmino(_: MsgChannelOpenInitResponse, useInterfaces: boolean = false): MsgChannelOpenInitResponseAmino {
+  toAmino(_: MsgChannelOpenInitResponse, useInterfaces: boolean = true): MsgChannelOpenInitResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgChannelOpenInitResponseProtoMsg, useInterfaces: boolean = false): MsgChannelOpenInitResponse {
+  fromProtoMsg(message: MsgChannelOpenInitResponseProtoMsg, useInterfaces: boolean = true): MsgChannelOpenInitResponse {
     return MsgChannelOpenInitResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgChannelOpenInitResponse): Uint8Array {
@@ -672,7 +672,7 @@ export const MsgChannelOpenTry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgChannelOpenTry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgChannelOpenTry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenTry();
@@ -777,7 +777,7 @@ export const MsgChannelOpenTry = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgChannelOpenTry, useInterfaces: boolean = false): MsgChannelOpenTryAmino {
+  toAmino(message: MsgChannelOpenTry, useInterfaces: boolean = true): MsgChannelOpenTryAmino {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.previous_channel_id = message.previousChannelId;
@@ -788,7 +788,7 @@ export const MsgChannelOpenTry = {
     obj.signer = message.signer;
     return obj;
   },
-  fromProtoMsg(message: MsgChannelOpenTryProtoMsg, useInterfaces: boolean = false): MsgChannelOpenTry {
+  fromProtoMsg(message: MsgChannelOpenTryProtoMsg, useInterfaces: boolean = true): MsgChannelOpenTry {
     return MsgChannelOpenTry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgChannelOpenTry): Uint8Array {
@@ -810,7 +810,7 @@ export const MsgChannelOpenTryResponse = {
   encode(_: MsgChannelOpenTryResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgChannelOpenTryResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgChannelOpenTryResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenTryResponse();
@@ -846,11 +846,11 @@ export const MsgChannelOpenTryResponse = {
   fromAmino(_: MsgChannelOpenTryResponseAmino): MsgChannelOpenTryResponse {
     return {};
   },
-  toAmino(_: MsgChannelOpenTryResponse, useInterfaces: boolean = false): MsgChannelOpenTryResponseAmino {
+  toAmino(_: MsgChannelOpenTryResponse, useInterfaces: boolean = true): MsgChannelOpenTryResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgChannelOpenTryResponseProtoMsg, useInterfaces: boolean = false): MsgChannelOpenTryResponse {
+  fromProtoMsg(message: MsgChannelOpenTryResponseProtoMsg, useInterfaces: boolean = true): MsgChannelOpenTryResponse {
     return MsgChannelOpenTryResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgChannelOpenTryResponse): Uint8Array {
@@ -901,7 +901,7 @@ export const MsgChannelOpenAck = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgChannelOpenAck {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgChannelOpenAck {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenAck();
@@ -1004,7 +1004,7 @@ export const MsgChannelOpenAck = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgChannelOpenAck, useInterfaces: boolean = false): MsgChannelOpenAckAmino {
+  toAmino(message: MsgChannelOpenAck, useInterfaces: boolean = true): MsgChannelOpenAckAmino {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
@@ -1015,7 +1015,7 @@ export const MsgChannelOpenAck = {
     obj.signer = message.signer;
     return obj;
   },
-  fromProtoMsg(message: MsgChannelOpenAckProtoMsg, useInterfaces: boolean = false): MsgChannelOpenAck {
+  fromProtoMsg(message: MsgChannelOpenAckProtoMsg, useInterfaces: boolean = true): MsgChannelOpenAck {
     return MsgChannelOpenAck.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgChannelOpenAck): Uint8Array {
@@ -1037,7 +1037,7 @@ export const MsgChannelOpenAckResponse = {
   encode(_: MsgChannelOpenAckResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgChannelOpenAckResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgChannelOpenAckResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenAckResponse();
@@ -1073,11 +1073,11 @@ export const MsgChannelOpenAckResponse = {
   fromAmino(_: MsgChannelOpenAckResponseAmino): MsgChannelOpenAckResponse {
     return {};
   },
-  toAmino(_: MsgChannelOpenAckResponse, useInterfaces: boolean = false): MsgChannelOpenAckResponseAmino {
+  toAmino(_: MsgChannelOpenAckResponse, useInterfaces: boolean = true): MsgChannelOpenAckResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgChannelOpenAckResponseProtoMsg, useInterfaces: boolean = false): MsgChannelOpenAckResponse {
+  fromProtoMsg(message: MsgChannelOpenAckResponseProtoMsg, useInterfaces: boolean = true): MsgChannelOpenAckResponse {
     return MsgChannelOpenAckResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgChannelOpenAckResponse): Uint8Array {
@@ -1120,7 +1120,7 @@ export const MsgChannelOpenConfirm = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgChannelOpenConfirm {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgChannelOpenConfirm {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenConfirm();
@@ -1205,7 +1205,7 @@ export const MsgChannelOpenConfirm = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgChannelOpenConfirm, useInterfaces: boolean = false): MsgChannelOpenConfirmAmino {
+  toAmino(message: MsgChannelOpenConfirm, useInterfaces: boolean = true): MsgChannelOpenConfirmAmino {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
@@ -1214,7 +1214,7 @@ export const MsgChannelOpenConfirm = {
     obj.signer = message.signer;
     return obj;
   },
-  fromProtoMsg(message: MsgChannelOpenConfirmProtoMsg, useInterfaces: boolean = false): MsgChannelOpenConfirm {
+  fromProtoMsg(message: MsgChannelOpenConfirmProtoMsg, useInterfaces: boolean = true): MsgChannelOpenConfirm {
     return MsgChannelOpenConfirm.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgChannelOpenConfirm): Uint8Array {
@@ -1236,7 +1236,7 @@ export const MsgChannelOpenConfirmResponse = {
   encode(_: MsgChannelOpenConfirmResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgChannelOpenConfirmResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgChannelOpenConfirmResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelOpenConfirmResponse();
@@ -1272,11 +1272,11 @@ export const MsgChannelOpenConfirmResponse = {
   fromAmino(_: MsgChannelOpenConfirmResponseAmino): MsgChannelOpenConfirmResponse {
     return {};
   },
-  toAmino(_: MsgChannelOpenConfirmResponse, useInterfaces: boolean = false): MsgChannelOpenConfirmResponseAmino {
+  toAmino(_: MsgChannelOpenConfirmResponse, useInterfaces: boolean = true): MsgChannelOpenConfirmResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgChannelOpenConfirmResponseProtoMsg, useInterfaces: boolean = false): MsgChannelOpenConfirmResponse {
+  fromProtoMsg(message: MsgChannelOpenConfirmResponseProtoMsg, useInterfaces: boolean = true): MsgChannelOpenConfirmResponse {
     return MsgChannelOpenConfirmResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgChannelOpenConfirmResponse): Uint8Array {
@@ -1311,7 +1311,7 @@ export const MsgChannelCloseInit = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgChannelCloseInit {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgChannelCloseInit {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelCloseInit();
@@ -1376,14 +1376,14 @@ export const MsgChannelCloseInit = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgChannelCloseInit, useInterfaces: boolean = false): MsgChannelCloseInitAmino {
+  toAmino(message: MsgChannelCloseInit, useInterfaces: boolean = true): MsgChannelCloseInitAmino {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
     obj.signer = message.signer;
     return obj;
   },
-  fromProtoMsg(message: MsgChannelCloseInitProtoMsg, useInterfaces: boolean = false): MsgChannelCloseInit {
+  fromProtoMsg(message: MsgChannelCloseInitProtoMsg, useInterfaces: boolean = true): MsgChannelCloseInit {
     return MsgChannelCloseInit.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgChannelCloseInit): Uint8Array {
@@ -1405,7 +1405,7 @@ export const MsgChannelCloseInitResponse = {
   encode(_: MsgChannelCloseInitResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgChannelCloseInitResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgChannelCloseInitResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelCloseInitResponse();
@@ -1441,11 +1441,11 @@ export const MsgChannelCloseInitResponse = {
   fromAmino(_: MsgChannelCloseInitResponseAmino): MsgChannelCloseInitResponse {
     return {};
   },
-  toAmino(_: MsgChannelCloseInitResponse, useInterfaces: boolean = false): MsgChannelCloseInitResponseAmino {
+  toAmino(_: MsgChannelCloseInitResponse, useInterfaces: boolean = true): MsgChannelCloseInitResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgChannelCloseInitResponseProtoMsg, useInterfaces: boolean = false): MsgChannelCloseInitResponse {
+  fromProtoMsg(message: MsgChannelCloseInitResponseProtoMsg, useInterfaces: boolean = true): MsgChannelCloseInitResponse {
     return MsgChannelCloseInitResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgChannelCloseInitResponse): Uint8Array {
@@ -1488,7 +1488,7 @@ export const MsgChannelCloseConfirm = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgChannelCloseConfirm {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgChannelCloseConfirm {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelCloseConfirm();
@@ -1573,7 +1573,7 @@ export const MsgChannelCloseConfirm = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgChannelCloseConfirm, useInterfaces: boolean = false): MsgChannelCloseConfirmAmino {
+  toAmino(message: MsgChannelCloseConfirm, useInterfaces: boolean = true): MsgChannelCloseConfirmAmino {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
@@ -1582,7 +1582,7 @@ export const MsgChannelCloseConfirm = {
     obj.signer = message.signer;
     return obj;
   },
-  fromProtoMsg(message: MsgChannelCloseConfirmProtoMsg, useInterfaces: boolean = false): MsgChannelCloseConfirm {
+  fromProtoMsg(message: MsgChannelCloseConfirmProtoMsg, useInterfaces: boolean = true): MsgChannelCloseConfirm {
     return MsgChannelCloseConfirm.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgChannelCloseConfirm): Uint8Array {
@@ -1604,7 +1604,7 @@ export const MsgChannelCloseConfirmResponse = {
   encode(_: MsgChannelCloseConfirmResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgChannelCloseConfirmResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgChannelCloseConfirmResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChannelCloseConfirmResponse();
@@ -1640,11 +1640,11 @@ export const MsgChannelCloseConfirmResponse = {
   fromAmino(_: MsgChannelCloseConfirmResponseAmino): MsgChannelCloseConfirmResponse {
     return {};
   },
-  toAmino(_: MsgChannelCloseConfirmResponse, useInterfaces: boolean = false): MsgChannelCloseConfirmResponseAmino {
+  toAmino(_: MsgChannelCloseConfirmResponse, useInterfaces: boolean = true): MsgChannelCloseConfirmResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgChannelCloseConfirmResponseProtoMsg, useInterfaces: boolean = false): MsgChannelCloseConfirmResponse {
+  fromProtoMsg(message: MsgChannelCloseConfirmResponseProtoMsg, useInterfaces: boolean = true): MsgChannelCloseConfirmResponse {
     return MsgChannelCloseConfirmResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgChannelCloseConfirmResponse): Uint8Array {
@@ -1683,7 +1683,7 @@ export const MsgRecvPacket = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgRecvPacket {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgRecvPacket {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRecvPacket();
@@ -1761,7 +1761,7 @@ export const MsgRecvPacket = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgRecvPacket, useInterfaces: boolean = false): MsgRecvPacketAmino {
+  toAmino(message: MsgRecvPacket, useInterfaces: boolean = true): MsgRecvPacketAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet, useInterfaces) : undefined;
     obj.proof_commitment = message.proofCommitment;
@@ -1769,7 +1769,7 @@ export const MsgRecvPacket = {
     obj.signer = message.signer;
     return obj;
   },
-  fromProtoMsg(message: MsgRecvPacketProtoMsg, useInterfaces: boolean = false): MsgRecvPacket {
+  fromProtoMsg(message: MsgRecvPacketProtoMsg, useInterfaces: boolean = true): MsgRecvPacket {
     return MsgRecvPacket.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgRecvPacket): Uint8Array {
@@ -1791,7 +1791,7 @@ export const MsgRecvPacketResponse = {
   encode(_: MsgRecvPacketResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgRecvPacketResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgRecvPacketResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRecvPacketResponse();
@@ -1827,11 +1827,11 @@ export const MsgRecvPacketResponse = {
   fromAmino(_: MsgRecvPacketResponseAmino): MsgRecvPacketResponse {
     return {};
   },
-  toAmino(_: MsgRecvPacketResponse, useInterfaces: boolean = false): MsgRecvPacketResponseAmino {
+  toAmino(_: MsgRecvPacketResponse, useInterfaces: boolean = true): MsgRecvPacketResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgRecvPacketResponseProtoMsg, useInterfaces: boolean = false): MsgRecvPacketResponse {
+  fromProtoMsg(message: MsgRecvPacketResponseProtoMsg, useInterfaces: boolean = true): MsgRecvPacketResponse {
     return MsgRecvPacketResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgRecvPacketResponse): Uint8Array {
@@ -1874,7 +1874,7 @@ export const MsgTimeout = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgTimeout {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgTimeout {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTimeout();
@@ -1963,7 +1963,7 @@ export const MsgTimeout = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgTimeout, useInterfaces: boolean = false): MsgTimeoutAmino {
+  toAmino(message: MsgTimeout, useInterfaces: boolean = true): MsgTimeoutAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet, useInterfaces) : undefined;
     obj.proof_unreceived = message.proofUnreceived;
@@ -1972,7 +1972,7 @@ export const MsgTimeout = {
     obj.signer = message.signer;
     return obj;
   },
-  fromProtoMsg(message: MsgTimeoutProtoMsg, useInterfaces: boolean = false): MsgTimeout {
+  fromProtoMsg(message: MsgTimeoutProtoMsg, useInterfaces: boolean = true): MsgTimeout {
     return MsgTimeout.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgTimeout): Uint8Array {
@@ -1994,7 +1994,7 @@ export const MsgTimeoutResponse = {
   encode(_: MsgTimeoutResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgTimeoutResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgTimeoutResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTimeoutResponse();
@@ -2030,11 +2030,11 @@ export const MsgTimeoutResponse = {
   fromAmino(_: MsgTimeoutResponseAmino): MsgTimeoutResponse {
     return {};
   },
-  toAmino(_: MsgTimeoutResponse, useInterfaces: boolean = false): MsgTimeoutResponseAmino {
+  toAmino(_: MsgTimeoutResponse, useInterfaces: boolean = true): MsgTimeoutResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgTimeoutResponseProtoMsg, useInterfaces: boolean = false): MsgTimeoutResponse {
+  fromProtoMsg(message: MsgTimeoutResponseProtoMsg, useInterfaces: boolean = true): MsgTimeoutResponse {
     return MsgTimeoutResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgTimeoutResponse): Uint8Array {
@@ -2081,7 +2081,7 @@ export const MsgTimeoutOnClose = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgTimeoutOnClose {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgTimeoutOnClose {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTimeoutOnClose();
@@ -2179,7 +2179,7 @@ export const MsgTimeoutOnClose = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgTimeoutOnClose, useInterfaces: boolean = false): MsgTimeoutOnCloseAmino {
+  toAmino(message: MsgTimeoutOnClose, useInterfaces: boolean = true): MsgTimeoutOnCloseAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet, useInterfaces) : undefined;
     obj.proof_unreceived = message.proofUnreceived;
@@ -2189,7 +2189,7 @@ export const MsgTimeoutOnClose = {
     obj.signer = message.signer;
     return obj;
   },
-  fromProtoMsg(message: MsgTimeoutOnCloseProtoMsg, useInterfaces: boolean = false): MsgTimeoutOnClose {
+  fromProtoMsg(message: MsgTimeoutOnCloseProtoMsg, useInterfaces: boolean = true): MsgTimeoutOnClose {
     return MsgTimeoutOnClose.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgTimeoutOnClose): Uint8Array {
@@ -2211,7 +2211,7 @@ export const MsgTimeoutOnCloseResponse = {
   encode(_: MsgTimeoutOnCloseResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgTimeoutOnCloseResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgTimeoutOnCloseResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTimeoutOnCloseResponse();
@@ -2247,11 +2247,11 @@ export const MsgTimeoutOnCloseResponse = {
   fromAmino(_: MsgTimeoutOnCloseResponseAmino): MsgTimeoutOnCloseResponse {
     return {};
   },
-  toAmino(_: MsgTimeoutOnCloseResponse, useInterfaces: boolean = false): MsgTimeoutOnCloseResponseAmino {
+  toAmino(_: MsgTimeoutOnCloseResponse, useInterfaces: boolean = true): MsgTimeoutOnCloseResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgTimeoutOnCloseResponseProtoMsg, useInterfaces: boolean = false): MsgTimeoutOnCloseResponse {
+  fromProtoMsg(message: MsgTimeoutOnCloseResponseProtoMsg, useInterfaces: boolean = true): MsgTimeoutOnCloseResponse {
     return MsgTimeoutOnCloseResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgTimeoutOnCloseResponse): Uint8Array {
@@ -2294,7 +2294,7 @@ export const MsgAcknowledgement = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgAcknowledgement {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgAcknowledgement {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAcknowledgement();
@@ -2381,7 +2381,7 @@ export const MsgAcknowledgement = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgAcknowledgement, useInterfaces: boolean = false): MsgAcknowledgementAmino {
+  toAmino(message: MsgAcknowledgement, useInterfaces: boolean = true): MsgAcknowledgementAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet, useInterfaces) : undefined;
     obj.acknowledgement = message.acknowledgement;
@@ -2390,7 +2390,7 @@ export const MsgAcknowledgement = {
     obj.signer = message.signer;
     return obj;
   },
-  fromProtoMsg(message: MsgAcknowledgementProtoMsg, useInterfaces: boolean = false): MsgAcknowledgement {
+  fromProtoMsg(message: MsgAcknowledgementProtoMsg, useInterfaces: boolean = true): MsgAcknowledgement {
     return MsgAcknowledgement.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgAcknowledgement): Uint8Array {
@@ -2412,7 +2412,7 @@ export const MsgAcknowledgementResponse = {
   encode(_: MsgAcknowledgementResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgAcknowledgementResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgAcknowledgementResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAcknowledgementResponse();
@@ -2448,11 +2448,11 @@ export const MsgAcknowledgementResponse = {
   fromAmino(_: MsgAcknowledgementResponseAmino): MsgAcknowledgementResponse {
     return {};
   },
-  toAmino(_: MsgAcknowledgementResponse, useInterfaces: boolean = false): MsgAcknowledgementResponseAmino {
+  toAmino(_: MsgAcknowledgementResponse, useInterfaces: boolean = true): MsgAcknowledgementResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgAcknowledgementResponseProtoMsg, useInterfaces: boolean = false): MsgAcknowledgementResponse {
+  fromProtoMsg(message: MsgAcknowledgementResponseProtoMsg, useInterfaces: boolean = true): MsgAcknowledgementResponse {
     return MsgAcknowledgementResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgAcknowledgementResponse): Uint8Array {

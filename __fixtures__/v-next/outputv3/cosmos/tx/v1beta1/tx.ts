@@ -728,7 +728,7 @@ export const Tx = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Tx {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Tx {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTx();
@@ -805,7 +805,7 @@ export const Tx = {
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
     };
   },
-  toAmino(message: Tx, useInterfaces: boolean = false): TxAmino {
+  toAmino(message: Tx, useInterfaces: boolean = true): TxAmino {
     const obj: any = {};
     obj.body = message.body ? TxBody.toAmino(message.body, useInterfaces) : undefined;
     obj.auth_info = message.authInfo ? AuthInfo.toAmino(message.authInfo, useInterfaces) : undefined;
@@ -816,7 +816,7 @@ export const Tx = {
     }
     return obj;
   },
-  fromProtoMsg(message: TxProtoMsg, useInterfaces: boolean = false): Tx {
+  fromProtoMsg(message: TxProtoMsg, useInterfaces: boolean = true): Tx {
     return Tx.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Tx): Uint8Array {
@@ -851,7 +851,7 @@ export const TxRaw = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): TxRaw {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): TxRaw {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxRaw();
@@ -924,7 +924,7 @@ export const TxRaw = {
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
     };
   },
-  toAmino(message: TxRaw, useInterfaces: boolean = false): TxRawAmino {
+  toAmino(message: TxRaw, useInterfaces: boolean = true): TxRawAmino {
     const obj: any = {};
     obj.body_bytes = message.bodyBytes;
     obj.auth_info_bytes = message.authInfoBytes;
@@ -935,7 +935,7 @@ export const TxRaw = {
     }
     return obj;
   },
-  fromProtoMsg(message: TxRawProtoMsg, useInterfaces: boolean = false): TxRaw {
+  fromProtoMsg(message: TxRawProtoMsg, useInterfaces: boolean = true): TxRaw {
     return TxRaw.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: TxRaw): Uint8Array {
@@ -974,7 +974,7 @@ export const SignDoc = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SignDoc {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SignDoc {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignDoc();
@@ -1050,7 +1050,7 @@ export const SignDoc = {
       accountNumber: BigInt(object.account_number)
     };
   },
-  toAmino(message: SignDoc, useInterfaces: boolean = false): SignDocAmino {
+  toAmino(message: SignDoc, useInterfaces: boolean = true): SignDocAmino {
     const obj: any = {};
     obj.body_bytes = message.bodyBytes;
     obj.auth_info_bytes = message.authInfoBytes;
@@ -1058,7 +1058,7 @@ export const SignDoc = {
     obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: SignDocProtoMsg, useInterfaces: boolean = false): SignDoc {
+  fromProtoMsg(message: SignDocProtoMsg, useInterfaces: boolean = true): SignDoc {
     return SignDoc.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SignDoc): Uint8Array {
@@ -1105,7 +1105,7 @@ export const SignDocDirectAux = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SignDocDirectAux {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SignDocDirectAux {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignDocDirectAux();
@@ -1205,7 +1205,7 @@ export const SignDocDirectAux = {
       tip: object?.tip ? Tip.fromAmino(object.tip) : undefined
     };
   },
-  toAmino(message: SignDocDirectAux, useInterfaces: boolean = false): SignDocDirectAuxAmino {
+  toAmino(message: SignDocDirectAux, useInterfaces: boolean = true): SignDocDirectAuxAmino {
     const obj: any = {};
     obj.body_bytes = message.bodyBytes;
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey, useInterfaces) : undefined;
@@ -1215,7 +1215,7 @@ export const SignDocDirectAux = {
     obj.tip = message.tip ? Tip.toAmino(message.tip, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: SignDocDirectAuxProtoMsg, useInterfaces: boolean = false): SignDocDirectAux {
+  fromProtoMsg(message: SignDocDirectAuxProtoMsg, useInterfaces: boolean = true): SignDocDirectAux {
     return SignDocDirectAux.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SignDocDirectAux): Uint8Array {
@@ -1258,7 +1258,7 @@ export const TxBody = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): TxBody {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): TxBody {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxBody();
@@ -1367,7 +1367,7 @@ export const TxBody = {
       nonCriticalExtensionOptions: Array.isArray(object?.non_critical_extension_options) ? object.non_critical_extension_options.map((e: any) => Any.fromAmino(e)) : []
     };
   },
-  toAmino(message: TxBody, useInterfaces: boolean = false): TxBodyAmino {
+  toAmino(message: TxBody, useInterfaces: boolean = true): TxBodyAmino {
     const obj: any = {};
     if (message.messages) {
       obj.messages = message.messages.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
@@ -1388,7 +1388,7 @@ export const TxBody = {
     }
     return obj;
   },
-  fromProtoMsg(message: TxBodyProtoMsg, useInterfaces: boolean = false): TxBody {
+  fromProtoMsg(message: TxBodyProtoMsg, useInterfaces: boolean = true): TxBody {
     return TxBody.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: TxBody): Uint8Array {
@@ -1423,7 +1423,7 @@ export const AuthInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AuthInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AuthInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthInfo();
@@ -1500,7 +1500,7 @@ export const AuthInfo = {
       tip: object?.tip ? Tip.fromAmino(object.tip) : undefined
     };
   },
-  toAmino(message: AuthInfo, useInterfaces: boolean = false): AuthInfoAmino {
+  toAmino(message: AuthInfo, useInterfaces: boolean = true): AuthInfoAmino {
     const obj: any = {};
     if (message.signerInfos) {
       obj.signer_infos = message.signerInfos.map(e => e ? SignerInfo.toAmino(e, useInterfaces) : undefined);
@@ -1511,7 +1511,7 @@ export const AuthInfo = {
     obj.tip = message.tip ? Tip.toAmino(message.tip, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: AuthInfoProtoMsg, useInterfaces: boolean = false): AuthInfo {
+  fromProtoMsg(message: AuthInfoProtoMsg, useInterfaces: boolean = true): AuthInfo {
     return AuthInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AuthInfo): Uint8Array {
@@ -1546,7 +1546,7 @@ export const SignerInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SignerInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SignerInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignerInfo();
@@ -1617,14 +1617,14 @@ export const SignerInfo = {
       sequence: BigInt(object.sequence)
     };
   },
-  toAmino(message: SignerInfo, useInterfaces: boolean = false): SignerInfoAmino {
+  toAmino(message: SignerInfo, useInterfaces: boolean = true): SignerInfoAmino {
     const obj: any = {};
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey, useInterfaces) : undefined;
     obj.mode_info = message.modeInfo ? ModeInfo.toAmino(message.modeInfo, useInterfaces) : undefined;
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: SignerInfoProtoMsg, useInterfaces: boolean = false): SignerInfo {
+  fromProtoMsg(message: SignerInfoProtoMsg, useInterfaces: boolean = true): SignerInfo {
     return SignerInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SignerInfo): Uint8Array {
@@ -1655,7 +1655,7 @@ export const ModeInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ModeInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModeInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModeInfo();
@@ -1715,13 +1715,13 @@ export const ModeInfo = {
       multi: object?.multi ? ModeInfo_Multi.fromAmino(object.multi) : undefined
     };
   },
-  toAmino(message: ModeInfo, useInterfaces: boolean = false): ModeInfoAmino {
+  toAmino(message: ModeInfo, useInterfaces: boolean = true): ModeInfoAmino {
     const obj: any = {};
     obj.single = message.single ? ModeInfo_Single.toAmino(message.single, useInterfaces) : undefined;
     obj.multi = message.multi ? ModeInfo_Multi.toAmino(message.multi, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: ModeInfoProtoMsg, useInterfaces: boolean = false): ModeInfo {
+  fromProtoMsg(message: ModeInfoProtoMsg, useInterfaces: boolean = true): ModeInfo {
     return ModeInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ModeInfo): Uint8Array {
@@ -1748,7 +1748,7 @@ export const ModeInfo_Single = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ModeInfo_Single {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModeInfo_Single {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModeInfo_Single();
@@ -1795,12 +1795,12 @@ export const ModeInfo_Single = {
       mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1
     };
   },
-  toAmino(message: ModeInfo_Single, useInterfaces: boolean = false): ModeInfo_SingleAmino {
+  toAmino(message: ModeInfo_Single, useInterfaces: boolean = true): ModeInfo_SingleAmino {
     const obj: any = {};
     obj.mode = message.mode;
     return obj;
   },
-  fromProtoMsg(message: ModeInfo_SingleProtoMsg, useInterfaces: boolean = false): ModeInfo_Single {
+  fromProtoMsg(message: ModeInfo_SingleProtoMsg, useInterfaces: boolean = true): ModeInfo_Single {
     return ModeInfo_Single.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ModeInfo_Single): Uint8Array {
@@ -1831,7 +1831,7 @@ export const ModeInfo_Multi = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ModeInfo_Multi {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModeInfo_Multi {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModeInfo_Multi();
@@ -1897,7 +1897,7 @@ export const ModeInfo_Multi = {
       modeInfos: Array.isArray(object?.mode_infos) ? object.mode_infos.map((e: any) => ModeInfo.fromAmino(e)) : []
     };
   },
-  toAmino(message: ModeInfo_Multi, useInterfaces: boolean = false): ModeInfo_MultiAmino {
+  toAmino(message: ModeInfo_Multi, useInterfaces: boolean = true): ModeInfo_MultiAmino {
     const obj: any = {};
     obj.bitarray = message.bitarray ? CompactBitArray.toAmino(message.bitarray, useInterfaces) : undefined;
     if (message.modeInfos) {
@@ -1907,7 +1907,7 @@ export const ModeInfo_Multi = {
     }
     return obj;
   },
-  fromProtoMsg(message: ModeInfo_MultiProtoMsg, useInterfaces: boolean = false): ModeInfo_Multi {
+  fromProtoMsg(message: ModeInfo_MultiProtoMsg, useInterfaces: boolean = true): ModeInfo_Multi {
     return ModeInfo_Multi.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ModeInfo_Multi): Uint8Array {
@@ -1946,7 +1946,7 @@ export const Fee = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Fee {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Fee {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFee();
@@ -2030,7 +2030,7 @@ export const Fee = {
       granter: object.granter
     };
   },
-  toAmino(message: Fee, useInterfaces: boolean = false): FeeAmino {
+  toAmino(message: Fee, useInterfaces: boolean = true): FeeAmino {
     const obj: any = {};
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
@@ -2042,7 +2042,7 @@ export const Fee = {
     obj.granter = message.granter;
     return obj;
   },
-  fromProtoMsg(message: FeeProtoMsg, useInterfaces: boolean = false): Fee {
+  fromProtoMsg(message: FeeProtoMsg, useInterfaces: boolean = true): Fee {
     return Fee.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Fee): Uint8Array {
@@ -2073,7 +2073,7 @@ export const Tip = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Tip {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Tip {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTip();
@@ -2137,7 +2137,7 @@ export const Tip = {
       tipper: object.tipper
     };
   },
-  toAmino(message: Tip, useInterfaces: boolean = false): TipAmino {
+  toAmino(message: Tip, useInterfaces: boolean = true): TipAmino {
     const obj: any = {};
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
@@ -2147,7 +2147,7 @@ export const Tip = {
     obj.tipper = message.tipper;
     return obj;
   },
-  fromProtoMsg(message: TipProtoMsg, useInterfaces: boolean = false): Tip {
+  fromProtoMsg(message: TipProtoMsg, useInterfaces: boolean = true): Tip {
     return Tip.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Tip): Uint8Array {
@@ -2186,7 +2186,7 @@ export const AuxSignerData = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AuxSignerData {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AuxSignerData {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuxSignerData();
@@ -2262,7 +2262,7 @@ export const AuxSignerData = {
       sig: object.sig
     };
   },
-  toAmino(message: AuxSignerData, useInterfaces: boolean = false): AuxSignerDataAmino {
+  toAmino(message: AuxSignerData, useInterfaces: boolean = true): AuxSignerDataAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.sign_doc = message.signDoc ? SignDocDirectAux.toAmino(message.signDoc, useInterfaces) : undefined;
@@ -2270,7 +2270,7 @@ export const AuxSignerData = {
     obj.sig = message.sig;
     return obj;
   },
-  fromProtoMsg(message: AuxSignerDataProtoMsg, useInterfaces: boolean = false): AuxSignerData {
+  fromProtoMsg(message: AuxSignerDataProtoMsg, useInterfaces: boolean = true): AuxSignerData {
     return AuxSignerData.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AuxSignerData): Uint8Array {

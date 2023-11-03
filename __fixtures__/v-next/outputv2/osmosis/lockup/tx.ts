@@ -256,7 +256,7 @@ export const MsgLockTokens = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgLockTokens {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgLockTokens {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLockTokens();
@@ -331,7 +331,7 @@ export const MsgLockTokens = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgLockTokens, useInterfaces: boolean = false): MsgLockTokensAmino {
+  toAmino(message: MsgLockTokens, useInterfaces: boolean = true): MsgLockTokensAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
@@ -345,13 +345,13 @@ export const MsgLockTokens = {
   fromAminoMsg(object: MsgLockTokensAminoMsg): MsgLockTokens {
     return MsgLockTokens.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgLockTokens, useInterfaces: boolean = false): MsgLockTokensAminoMsg {
+  toAminoMsg(message: MsgLockTokens, useInterfaces: boolean = true): MsgLockTokensAminoMsg {
     return {
       type: "osmosis/lockup/lock-tokens",
       value: MsgLockTokens.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgLockTokensProtoMsg, useInterfaces: boolean = false): MsgLockTokens {
+  fromProtoMsg(message: MsgLockTokensProtoMsg, useInterfaces: boolean = true): MsgLockTokens {
     return MsgLockTokens.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgLockTokens): Uint8Array {
@@ -378,7 +378,7 @@ export const MsgLockTokensResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgLockTokensResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgLockTokensResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLockTokensResponse();
@@ -427,7 +427,7 @@ export const MsgLockTokensResponse = {
       ID: BigInt(object.ID)
     };
   },
-  toAmino(message: MsgLockTokensResponse, useInterfaces: boolean = false): MsgLockTokensResponseAmino {
+  toAmino(message: MsgLockTokensResponse, useInterfaces: boolean = true): MsgLockTokensResponseAmino {
     const obj: any = {};
     obj.ID = message.ID ? message.ID.toString() : undefined;
     return obj;
@@ -435,13 +435,13 @@ export const MsgLockTokensResponse = {
   fromAminoMsg(object: MsgLockTokensResponseAminoMsg): MsgLockTokensResponse {
     return MsgLockTokensResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgLockTokensResponse, useInterfaces: boolean = false): MsgLockTokensResponseAminoMsg {
+  toAminoMsg(message: MsgLockTokensResponse, useInterfaces: boolean = true): MsgLockTokensResponseAminoMsg {
     return {
       type: "osmosis/lockup/lock-tokens-response",
       value: MsgLockTokensResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgLockTokensResponseProtoMsg, useInterfaces: boolean = false): MsgLockTokensResponse {
+  fromProtoMsg(message: MsgLockTokensResponseProtoMsg, useInterfaces: boolean = true): MsgLockTokensResponse {
     return MsgLockTokensResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgLockTokensResponse): Uint8Array {
@@ -468,7 +468,7 @@ export const MsgBeginUnlockingAll = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgBeginUnlockingAll {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgBeginUnlockingAll {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBeginUnlockingAll();
@@ -515,7 +515,7 @@ export const MsgBeginUnlockingAll = {
       owner: object.owner
     };
   },
-  toAmino(message: MsgBeginUnlockingAll, useInterfaces: boolean = false): MsgBeginUnlockingAllAmino {
+  toAmino(message: MsgBeginUnlockingAll, useInterfaces: boolean = true): MsgBeginUnlockingAllAmino {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
@@ -523,13 +523,13 @@ export const MsgBeginUnlockingAll = {
   fromAminoMsg(object: MsgBeginUnlockingAllAminoMsg): MsgBeginUnlockingAll {
     return MsgBeginUnlockingAll.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgBeginUnlockingAll, useInterfaces: boolean = false): MsgBeginUnlockingAllAminoMsg {
+  toAminoMsg(message: MsgBeginUnlockingAll, useInterfaces: boolean = true): MsgBeginUnlockingAllAminoMsg {
     return {
       type: "osmosis/lockup/begin-unlock-tokens",
       value: MsgBeginUnlockingAll.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgBeginUnlockingAllProtoMsg, useInterfaces: boolean = false): MsgBeginUnlockingAll {
+  fromProtoMsg(message: MsgBeginUnlockingAllProtoMsg, useInterfaces: boolean = true): MsgBeginUnlockingAll {
     return MsgBeginUnlockingAll.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgBeginUnlockingAll): Uint8Array {
@@ -556,7 +556,7 @@ export const MsgBeginUnlockingAllResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgBeginUnlockingAllResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgBeginUnlockingAllResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBeginUnlockingAllResponse();
@@ -611,7 +611,7 @@ export const MsgBeginUnlockingAllResponse = {
       unlocks: Array.isArray(object?.unlocks) ? object.unlocks.map((e: any) => PeriodLock.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgBeginUnlockingAllResponse, useInterfaces: boolean = false): MsgBeginUnlockingAllResponseAmino {
+  toAmino(message: MsgBeginUnlockingAllResponse, useInterfaces: boolean = true): MsgBeginUnlockingAllResponseAmino {
     const obj: any = {};
     if (message.unlocks) {
       obj.unlocks = message.unlocks.map(e => e ? PeriodLock.toAmino(e, useInterfaces) : undefined);
@@ -623,13 +623,13 @@ export const MsgBeginUnlockingAllResponse = {
   fromAminoMsg(object: MsgBeginUnlockingAllResponseAminoMsg): MsgBeginUnlockingAllResponse {
     return MsgBeginUnlockingAllResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgBeginUnlockingAllResponse, useInterfaces: boolean = false): MsgBeginUnlockingAllResponseAminoMsg {
+  toAminoMsg(message: MsgBeginUnlockingAllResponse, useInterfaces: boolean = true): MsgBeginUnlockingAllResponseAminoMsg {
     return {
       type: "osmosis/lockup/begin-unlocking-all-response",
       value: MsgBeginUnlockingAllResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgBeginUnlockingAllResponseProtoMsg, useInterfaces: boolean = false): MsgBeginUnlockingAllResponse {
+  fromProtoMsg(message: MsgBeginUnlockingAllResponseProtoMsg, useInterfaces: boolean = true): MsgBeginUnlockingAllResponse {
     return MsgBeginUnlockingAllResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgBeginUnlockingAllResponse): Uint8Array {
@@ -664,7 +664,7 @@ export const MsgBeginUnlocking = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgBeginUnlocking {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgBeginUnlocking {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBeginUnlocking();
@@ -739,7 +739,7 @@ export const MsgBeginUnlocking = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgBeginUnlocking, useInterfaces: boolean = false): MsgBeginUnlockingAmino {
+  toAmino(message: MsgBeginUnlocking, useInterfaces: boolean = true): MsgBeginUnlockingAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.ID = message.ID ? message.ID.toString() : undefined;
@@ -753,13 +753,13 @@ export const MsgBeginUnlocking = {
   fromAminoMsg(object: MsgBeginUnlockingAminoMsg): MsgBeginUnlocking {
     return MsgBeginUnlocking.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgBeginUnlocking, useInterfaces: boolean = false): MsgBeginUnlockingAminoMsg {
+  toAminoMsg(message: MsgBeginUnlocking, useInterfaces: boolean = true): MsgBeginUnlockingAminoMsg {
     return {
       type: "osmosis/lockup/begin-unlock-period-lock",
       value: MsgBeginUnlocking.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgBeginUnlockingProtoMsg, useInterfaces: boolean = false): MsgBeginUnlocking {
+  fromProtoMsg(message: MsgBeginUnlockingProtoMsg, useInterfaces: boolean = true): MsgBeginUnlocking {
     return MsgBeginUnlocking.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgBeginUnlocking): Uint8Array {
@@ -786,7 +786,7 @@ export const MsgBeginUnlockingResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgBeginUnlockingResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgBeginUnlockingResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBeginUnlockingResponse();
@@ -833,7 +833,7 @@ export const MsgBeginUnlockingResponse = {
       success: object.success
     };
   },
-  toAmino(message: MsgBeginUnlockingResponse, useInterfaces: boolean = false): MsgBeginUnlockingResponseAmino {
+  toAmino(message: MsgBeginUnlockingResponse, useInterfaces: boolean = true): MsgBeginUnlockingResponseAmino {
     const obj: any = {};
     obj.success = message.success;
     return obj;
@@ -841,13 +841,13 @@ export const MsgBeginUnlockingResponse = {
   fromAminoMsg(object: MsgBeginUnlockingResponseAminoMsg): MsgBeginUnlockingResponse {
     return MsgBeginUnlockingResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgBeginUnlockingResponse, useInterfaces: boolean = false): MsgBeginUnlockingResponseAminoMsg {
+  toAminoMsg(message: MsgBeginUnlockingResponse, useInterfaces: boolean = true): MsgBeginUnlockingResponseAminoMsg {
     return {
       type: "osmosis/lockup/begin-unlocking-response",
       value: MsgBeginUnlockingResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgBeginUnlockingResponseProtoMsg, useInterfaces: boolean = false): MsgBeginUnlockingResponse {
+  fromProtoMsg(message: MsgBeginUnlockingResponseProtoMsg, useInterfaces: boolean = true): MsgBeginUnlockingResponse {
     return MsgBeginUnlockingResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgBeginUnlockingResponse): Uint8Array {
@@ -882,7 +882,7 @@ export const MsgExtendLockup = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgExtendLockup {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgExtendLockup {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExtendLockup();
@@ -951,7 +951,7 @@ export const MsgExtendLockup = {
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
     };
   },
-  toAmino(message: MsgExtendLockup, useInterfaces: boolean = false): MsgExtendLockupAmino {
+  toAmino(message: MsgExtendLockup, useInterfaces: boolean = true): MsgExtendLockupAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.ID = message.ID ? message.ID.toString() : undefined;
@@ -961,13 +961,13 @@ export const MsgExtendLockup = {
   fromAminoMsg(object: MsgExtendLockupAminoMsg): MsgExtendLockup {
     return MsgExtendLockup.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgExtendLockup, useInterfaces: boolean = false): MsgExtendLockupAminoMsg {
+  toAminoMsg(message: MsgExtendLockup, useInterfaces: boolean = true): MsgExtendLockupAminoMsg {
     return {
       type: "osmosis/lockup/extend-lockup",
       value: MsgExtendLockup.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgExtendLockupProtoMsg, useInterfaces: boolean = false): MsgExtendLockup {
+  fromProtoMsg(message: MsgExtendLockupProtoMsg, useInterfaces: boolean = true): MsgExtendLockup {
     return MsgExtendLockup.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgExtendLockup): Uint8Array {
@@ -994,7 +994,7 @@ export const MsgExtendLockupResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgExtendLockupResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgExtendLockupResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExtendLockupResponse();
@@ -1041,7 +1041,7 @@ export const MsgExtendLockupResponse = {
       success: object.success
     };
   },
-  toAmino(message: MsgExtendLockupResponse, useInterfaces: boolean = false): MsgExtendLockupResponseAmino {
+  toAmino(message: MsgExtendLockupResponse, useInterfaces: boolean = true): MsgExtendLockupResponseAmino {
     const obj: any = {};
     obj.success = message.success;
     return obj;
@@ -1049,13 +1049,13 @@ export const MsgExtendLockupResponse = {
   fromAminoMsg(object: MsgExtendLockupResponseAminoMsg): MsgExtendLockupResponse {
     return MsgExtendLockupResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgExtendLockupResponse, useInterfaces: boolean = false): MsgExtendLockupResponseAminoMsg {
+  toAminoMsg(message: MsgExtendLockupResponse, useInterfaces: boolean = true): MsgExtendLockupResponseAminoMsg {
     return {
       type: "osmosis/lockup/extend-lockup-response",
       value: MsgExtendLockupResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgExtendLockupResponseProtoMsg, useInterfaces: boolean = false): MsgExtendLockupResponse {
+  fromProtoMsg(message: MsgExtendLockupResponseProtoMsg, useInterfaces: boolean = true): MsgExtendLockupResponse {
     return MsgExtendLockupResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgExtendLockupResponse): Uint8Array {
@@ -1090,7 +1090,7 @@ export const MsgForceUnlock = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgForceUnlock {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgForceUnlock {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgForceUnlock();
@@ -1165,7 +1165,7 @@ export const MsgForceUnlock = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgForceUnlock, useInterfaces: boolean = false): MsgForceUnlockAmino {
+  toAmino(message: MsgForceUnlock, useInterfaces: boolean = true): MsgForceUnlockAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.ID = message.ID ? message.ID.toString() : undefined;
@@ -1179,13 +1179,13 @@ export const MsgForceUnlock = {
   fromAminoMsg(object: MsgForceUnlockAminoMsg): MsgForceUnlock {
     return MsgForceUnlock.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgForceUnlock, useInterfaces: boolean = false): MsgForceUnlockAminoMsg {
+  toAminoMsg(message: MsgForceUnlock, useInterfaces: boolean = true): MsgForceUnlockAminoMsg {
     return {
       type: "osmosis/lockup/force-unlock",
       value: MsgForceUnlock.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgForceUnlockProtoMsg, useInterfaces: boolean = false): MsgForceUnlock {
+  fromProtoMsg(message: MsgForceUnlockProtoMsg, useInterfaces: boolean = true): MsgForceUnlock {
     return MsgForceUnlock.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgForceUnlock): Uint8Array {
@@ -1212,7 +1212,7 @@ export const MsgForceUnlockResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgForceUnlockResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgForceUnlockResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgForceUnlockResponse();
@@ -1259,7 +1259,7 @@ export const MsgForceUnlockResponse = {
       success: object.success
     };
   },
-  toAmino(message: MsgForceUnlockResponse, useInterfaces: boolean = false): MsgForceUnlockResponseAmino {
+  toAmino(message: MsgForceUnlockResponse, useInterfaces: boolean = true): MsgForceUnlockResponseAmino {
     const obj: any = {};
     obj.success = message.success;
     return obj;
@@ -1267,13 +1267,13 @@ export const MsgForceUnlockResponse = {
   fromAminoMsg(object: MsgForceUnlockResponseAminoMsg): MsgForceUnlockResponse {
     return MsgForceUnlockResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgForceUnlockResponse, useInterfaces: boolean = false): MsgForceUnlockResponseAminoMsg {
+  toAminoMsg(message: MsgForceUnlockResponse, useInterfaces: boolean = true): MsgForceUnlockResponseAminoMsg {
     return {
       type: "osmosis/lockup/force-unlock-response",
       value: MsgForceUnlockResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgForceUnlockResponseProtoMsg, useInterfaces: boolean = false): MsgForceUnlockResponse {
+  fromProtoMsg(message: MsgForceUnlockResponseProtoMsg, useInterfaces: boolean = true): MsgForceUnlockResponse {
     return MsgForceUnlockResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgForceUnlockResponse): Uint8Array {

@@ -110,7 +110,7 @@ export const Attribute = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Attribute {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Attribute {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttribute();
@@ -166,7 +166,7 @@ export const Attribute = {
       value: object.value
     };
   },
-  toAmino(message: Attribute, useInterfaces: boolean = false): AttributeAmino {
+  toAmino(message: Attribute, useInterfaces: boolean = true): AttributeAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -175,7 +175,7 @@ export const Attribute = {
   fromAminoMsg(object: AttributeAminoMsg): Attribute {
     return Attribute.fromAmino(object.value);
   },
-  fromProtoMsg(message: AttributeProtoMsg, useInterfaces: boolean = false): Attribute {
+  fromProtoMsg(message: AttributeProtoMsg, useInterfaces: boolean = true): Attribute {
     return Attribute.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Attribute): Uint8Array {
@@ -205,7 +205,7 @@ export const SignedBy = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SignedBy {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SignedBy {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignedBy();
@@ -277,7 +277,7 @@ export const SignedBy = {
       anyOf: Array.isArray(object?.any_of) ? object.any_of.map((e: any) => e) : []
     };
   },
-  toAmino(message: SignedBy, useInterfaces: boolean = false): SignedByAmino {
+  toAmino(message: SignedBy, useInterfaces: boolean = true): SignedByAmino {
     const obj: any = {};
     if (message.allOf) {
       obj.all_of = message.allOf.map(e => e);
@@ -294,7 +294,7 @@ export const SignedBy = {
   fromAminoMsg(object: SignedByAminoMsg): SignedBy {
     return SignedBy.fromAmino(object.value);
   },
-  fromProtoMsg(message: SignedByProtoMsg, useInterfaces: boolean = false): SignedBy {
+  fromProtoMsg(message: SignedByProtoMsg, useInterfaces: boolean = true): SignedBy {
     return SignedBy.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SignedBy): Uint8Array {
@@ -324,7 +324,7 @@ export const PlacementRequirements = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): PlacementRequirements {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PlacementRequirements {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlacementRequirements();
@@ -390,7 +390,7 @@ export const PlacementRequirements = {
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
     };
   },
-  toAmino(message: PlacementRequirements, useInterfaces: boolean = false): PlacementRequirementsAmino {
+  toAmino(message: PlacementRequirements, useInterfaces: boolean = true): PlacementRequirementsAmino {
     const obj: any = {};
     obj.signed_by = message.signedBy ? SignedBy.toAmino(message.signedBy, useInterfaces) : undefined;
     if (message.attributes) {
@@ -403,7 +403,7 @@ export const PlacementRequirements = {
   fromAminoMsg(object: PlacementRequirementsAminoMsg): PlacementRequirements {
     return PlacementRequirements.fromAmino(object.value);
   },
-  fromProtoMsg(message: PlacementRequirementsProtoMsg, useInterfaces: boolean = false): PlacementRequirements {
+  fromProtoMsg(message: PlacementRequirementsProtoMsg, useInterfaces: boolean = true): PlacementRequirements {
     return PlacementRequirements.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PlacementRequirements): Uint8Array {

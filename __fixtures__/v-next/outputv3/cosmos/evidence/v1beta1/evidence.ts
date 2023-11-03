@@ -62,7 +62,7 @@ export const Equivocation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Equivocation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Equivocation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEquivocation();
@@ -140,7 +140,7 @@ export const Equivocation = {
       consensusAddress: object.consensus_address
     };
   },
-  toAmino(message: Equivocation, useInterfaces: boolean = false): EquivocationAmino {
+  toAmino(message: Equivocation, useInterfaces: boolean = true): EquivocationAmino {
     const obj: any = {};
     obj.height = message.height ? message.height.toString() : undefined;
     obj.time = message.time;
@@ -148,7 +148,7 @@ export const Equivocation = {
     obj.consensus_address = message.consensusAddress;
     return obj;
   },
-  fromProtoMsg(message: EquivocationProtoMsg, useInterfaces: boolean = false): Equivocation {
+  fromProtoMsg(message: EquivocationProtoMsg, useInterfaces: boolean = true): Equivocation {
     return Equivocation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Equivocation): Uint8Array {

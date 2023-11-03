@@ -78,7 +78,7 @@ export const StoreKVPair = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): StoreKVPair {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): StoreKVPair {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStoreKVPair();
@@ -152,7 +152,7 @@ export const StoreKVPair = {
       value: object.value
     };
   },
-  toAmino(message: StoreKVPair, useInterfaces: boolean = false): StoreKVPairAmino {
+  toAmino(message: StoreKVPair, useInterfaces: boolean = true): StoreKVPairAmino {
     const obj: any = {};
     obj.store_key = message.storeKey;
     obj.delete = message.delete;
@@ -163,13 +163,13 @@ export const StoreKVPair = {
   fromAminoMsg(object: StoreKVPairAminoMsg): StoreKVPair {
     return StoreKVPair.fromAmino(object.value);
   },
-  toAminoMsg(message: StoreKVPair, useInterfaces: boolean = false): StoreKVPairAminoMsg {
+  toAminoMsg(message: StoreKVPair, useInterfaces: boolean = true): StoreKVPairAminoMsg {
     return {
       type: "cosmos-sdk/StoreKVPair",
       value: StoreKVPair.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: StoreKVPairProtoMsg, useInterfaces: boolean = false): StoreKVPair {
+  fromProtoMsg(message: StoreKVPairProtoMsg, useInterfaces: boolean = true): StoreKVPair {
     return StoreKVPair.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: StoreKVPair): Uint8Array {

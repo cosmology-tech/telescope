@@ -221,7 +221,7 @@ export const ConfigChange = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ConfigChange {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ConfigChange {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfigChange();
@@ -312,7 +312,7 @@ export const ConfigChange = {
       advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromAmino(e)) : []
     };
   },
-  toAmino(message: ConfigChange, useInterfaces: boolean = false): ConfigChangeAmino {
+  toAmino(message: ConfigChange, useInterfaces: boolean = true): ConfigChangeAmino {
     const obj: any = {};
     obj.element = message.element;
     obj.old_value = message.oldValue;
@@ -325,7 +325,7 @@ export const ConfigChange = {
     }
     return obj;
   },
-  fromProtoMsg(message: ConfigChangeProtoMsg, useInterfaces: boolean = false): ConfigChange {
+  fromProtoMsg(message: ConfigChangeProtoMsg, useInterfaces: boolean = true): ConfigChange {
     return ConfigChange.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ConfigChange): Uint8Array {
@@ -351,7 +351,7 @@ export const Advice = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Advice {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Advice {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAdvice();
@@ -398,12 +398,12 @@ export const Advice = {
       description: object.description
     };
   },
-  toAmino(message: Advice, useInterfaces: boolean = false): AdviceAmino {
+  toAmino(message: Advice, useInterfaces: boolean = true): AdviceAmino {
     const obj: any = {};
     obj.description = message.description;
     return obj;
   },
-  fromProtoMsg(message: AdviceProtoMsg, useInterfaces: boolean = false): Advice {
+  fromProtoMsg(message: AdviceProtoMsg, useInterfaces: boolean = true): Advice {
     return Advice.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Advice): Uint8Array {

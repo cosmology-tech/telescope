@@ -1267,7 +1267,7 @@ export const RoutingRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): RoutingRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): RoutingRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRoutingRule();
@@ -1322,7 +1322,7 @@ export const RoutingRule = {
       routingParameters: Array.isArray(object?.routing_parameters) ? object.routing_parameters.map((e: any) => RoutingParameter.fromAmino(e)) : []
     };
   },
-  toAmino(message: RoutingRule, useInterfaces: boolean = false): RoutingRuleAmino {
+  toAmino(message: RoutingRule, useInterfaces: boolean = true): RoutingRuleAmino {
     const obj: any = {};
     if (message.routingParameters) {
       obj.routing_parameters = message.routingParameters.map(e => e ? RoutingParameter.toAmino(e, useInterfaces) : undefined);
@@ -1334,7 +1334,7 @@ export const RoutingRule = {
   fromAminoMsg(object: RoutingRuleAminoMsg): RoutingRule {
     return RoutingRule.fromAmino(object.value);
   },
-  fromProtoMsg(message: RoutingRuleProtoMsg, useInterfaces: boolean = false): RoutingRule {
+  fromProtoMsg(message: RoutingRuleProtoMsg, useInterfaces: boolean = true): RoutingRule {
     return RoutingRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: RoutingRule): Uint8Array {
@@ -1364,7 +1364,7 @@ export const RoutingParameter = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): RoutingParameter {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): RoutingParameter {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRoutingParameter();
@@ -1420,7 +1420,7 @@ export const RoutingParameter = {
       pathTemplate: object.path_template
     };
   },
-  toAmino(message: RoutingParameter, useInterfaces: boolean = false): RoutingParameterAmino {
+  toAmino(message: RoutingParameter, useInterfaces: boolean = true): RoutingParameterAmino {
     const obj: any = {};
     obj.field = message.field;
     obj.path_template = message.pathTemplate;
@@ -1429,7 +1429,7 @@ export const RoutingParameter = {
   fromAminoMsg(object: RoutingParameterAminoMsg): RoutingParameter {
     return RoutingParameter.fromAmino(object.value);
   },
-  fromProtoMsg(message: RoutingParameterProtoMsg, useInterfaces: boolean = false): RoutingParameter {
+  fromProtoMsg(message: RoutingParameterProtoMsg, useInterfaces: boolean = true): RoutingParameter {
     return RoutingParameter.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: RoutingParameter): Uint8Array {

@@ -156,7 +156,7 @@ export const TwapRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): TwapRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): TwapRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTwapRecord();
@@ -288,7 +288,7 @@ export const TwapRecord = {
       lastErrorTime: object.last_error_time
     };
   },
-  toAmino(message: TwapRecord, useInterfaces: boolean = false): TwapRecordAmino {
+  toAmino(message: TwapRecord, useInterfaces: boolean = true): TwapRecordAmino {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     obj.asset0_denom = message.asset0Denom;
@@ -305,13 +305,13 @@ export const TwapRecord = {
   fromAminoMsg(object: TwapRecordAminoMsg): TwapRecord {
     return TwapRecord.fromAmino(object.value);
   },
-  toAminoMsg(message: TwapRecord, useInterfaces: boolean = false): TwapRecordAminoMsg {
+  toAminoMsg(message: TwapRecord, useInterfaces: boolean = true): TwapRecordAminoMsg {
     return {
       type: "osmosis/twap/twap-record",
       value: TwapRecord.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: TwapRecordProtoMsg, useInterfaces: boolean = false): TwapRecord {
+  fromProtoMsg(message: TwapRecordProtoMsg, useInterfaces: boolean = true): TwapRecord {
     return TwapRecord.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: TwapRecord): Uint8Array {

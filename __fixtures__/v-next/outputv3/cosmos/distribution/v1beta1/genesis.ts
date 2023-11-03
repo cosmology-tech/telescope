@@ -295,7 +295,7 @@ export const DelegatorWithdrawInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DelegatorWithdrawInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DelegatorWithdrawInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegatorWithdrawInfo();
@@ -351,13 +351,13 @@ export const DelegatorWithdrawInfo = {
       withdrawAddress: object.withdraw_address
     };
   },
-  toAmino(message: DelegatorWithdrawInfo, useInterfaces: boolean = false): DelegatorWithdrawInfoAmino {
+  toAmino(message: DelegatorWithdrawInfo, useInterfaces: boolean = true): DelegatorWithdrawInfoAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     obj.withdraw_address = message.withdrawAddress;
     return obj;
   },
-  fromProtoMsg(message: DelegatorWithdrawInfoProtoMsg, useInterfaces: boolean = false): DelegatorWithdrawInfo {
+  fromProtoMsg(message: DelegatorWithdrawInfoProtoMsg, useInterfaces: boolean = true): DelegatorWithdrawInfo {
     return DelegatorWithdrawInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DelegatorWithdrawInfo): Uint8Array {
@@ -388,7 +388,7 @@ export const ValidatorOutstandingRewardsRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ValidatorOutstandingRewardsRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorOutstandingRewardsRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorOutstandingRewardsRecord();
@@ -452,7 +452,7 @@ export const ValidatorOutstandingRewardsRecord = {
       outstandingRewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => DecCoin.fromAmino(e)) : []
     };
   },
-  toAmino(message: ValidatorOutstandingRewardsRecord, useInterfaces: boolean = false): ValidatorOutstandingRewardsRecordAmino {
+  toAmino(message: ValidatorOutstandingRewardsRecord, useInterfaces: boolean = true): ValidatorOutstandingRewardsRecordAmino {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
     if (message.outstandingRewards) {
@@ -462,7 +462,7 @@ export const ValidatorOutstandingRewardsRecord = {
     }
     return obj;
   },
-  fromProtoMsg(message: ValidatorOutstandingRewardsRecordProtoMsg, useInterfaces: boolean = false): ValidatorOutstandingRewardsRecord {
+  fromProtoMsg(message: ValidatorOutstandingRewardsRecordProtoMsg, useInterfaces: boolean = true): ValidatorOutstandingRewardsRecord {
     return ValidatorOutstandingRewardsRecord.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorOutstandingRewardsRecord): Uint8Array {
@@ -493,7 +493,7 @@ export const ValidatorAccumulatedCommissionRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ValidatorAccumulatedCommissionRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorAccumulatedCommissionRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorAccumulatedCommissionRecord();
@@ -551,13 +551,13 @@ export const ValidatorAccumulatedCommissionRecord = {
       accumulated: object?.accumulated ? ValidatorAccumulatedCommission.fromAmino(object.accumulated) : undefined
     };
   },
-  toAmino(message: ValidatorAccumulatedCommissionRecord, useInterfaces: boolean = false): ValidatorAccumulatedCommissionRecordAmino {
+  toAmino(message: ValidatorAccumulatedCommissionRecord, useInterfaces: boolean = true): ValidatorAccumulatedCommissionRecordAmino {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
     obj.accumulated = message.accumulated ? ValidatorAccumulatedCommission.toAmino(message.accumulated, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: ValidatorAccumulatedCommissionRecordProtoMsg, useInterfaces: boolean = false): ValidatorAccumulatedCommissionRecord {
+  fromProtoMsg(message: ValidatorAccumulatedCommissionRecordProtoMsg, useInterfaces: boolean = true): ValidatorAccumulatedCommissionRecord {
     return ValidatorAccumulatedCommissionRecord.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorAccumulatedCommissionRecord): Uint8Array {
@@ -592,7 +592,7 @@ export const ValidatorHistoricalRewardsRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ValidatorHistoricalRewardsRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorHistoricalRewardsRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorHistoricalRewardsRecord();
@@ -661,14 +661,14 @@ export const ValidatorHistoricalRewardsRecord = {
       rewards: object?.rewards ? ValidatorHistoricalRewards.fromAmino(object.rewards) : undefined
     };
   },
-  toAmino(message: ValidatorHistoricalRewardsRecord, useInterfaces: boolean = false): ValidatorHistoricalRewardsRecordAmino {
+  toAmino(message: ValidatorHistoricalRewardsRecord, useInterfaces: boolean = true): ValidatorHistoricalRewardsRecordAmino {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
     obj.period = message.period ? message.period.toString() : undefined;
     obj.rewards = message.rewards ? ValidatorHistoricalRewards.toAmino(message.rewards, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: ValidatorHistoricalRewardsRecordProtoMsg, useInterfaces: boolean = false): ValidatorHistoricalRewardsRecord {
+  fromProtoMsg(message: ValidatorHistoricalRewardsRecordProtoMsg, useInterfaces: boolean = true): ValidatorHistoricalRewardsRecord {
     return ValidatorHistoricalRewardsRecord.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorHistoricalRewardsRecord): Uint8Array {
@@ -699,7 +699,7 @@ export const ValidatorCurrentRewardsRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ValidatorCurrentRewardsRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorCurrentRewardsRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorCurrentRewardsRecord();
@@ -757,13 +757,13 @@ export const ValidatorCurrentRewardsRecord = {
       rewards: object?.rewards ? ValidatorCurrentRewards.fromAmino(object.rewards) : undefined
     };
   },
-  toAmino(message: ValidatorCurrentRewardsRecord, useInterfaces: boolean = false): ValidatorCurrentRewardsRecordAmino {
+  toAmino(message: ValidatorCurrentRewardsRecord, useInterfaces: boolean = true): ValidatorCurrentRewardsRecordAmino {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
     obj.rewards = message.rewards ? ValidatorCurrentRewards.toAmino(message.rewards, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: ValidatorCurrentRewardsRecordProtoMsg, useInterfaces: boolean = false): ValidatorCurrentRewardsRecord {
+  fromProtoMsg(message: ValidatorCurrentRewardsRecordProtoMsg, useInterfaces: boolean = true): ValidatorCurrentRewardsRecord {
     return ValidatorCurrentRewardsRecord.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorCurrentRewardsRecord): Uint8Array {
@@ -798,7 +798,7 @@ export const DelegatorStartingInfoRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DelegatorStartingInfoRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DelegatorStartingInfoRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegatorStartingInfoRecord();
@@ -865,14 +865,14 @@ export const DelegatorStartingInfoRecord = {
       startingInfo: object?.starting_info ? DelegatorStartingInfo.fromAmino(object.starting_info) : undefined
     };
   },
-  toAmino(message: DelegatorStartingInfoRecord, useInterfaces: boolean = false): DelegatorStartingInfoRecordAmino {
+  toAmino(message: DelegatorStartingInfoRecord, useInterfaces: boolean = true): DelegatorStartingInfoRecordAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     obj.validator_address = message.validatorAddress;
     obj.starting_info = message.startingInfo ? DelegatorStartingInfo.toAmino(message.startingInfo, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: DelegatorStartingInfoRecordProtoMsg, useInterfaces: boolean = false): DelegatorStartingInfoRecord {
+  fromProtoMsg(message: DelegatorStartingInfoRecordProtoMsg, useInterfaces: boolean = true): DelegatorStartingInfoRecord {
     return DelegatorStartingInfoRecord.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DelegatorStartingInfoRecord): Uint8Array {
@@ -911,7 +911,7 @@ export const ValidatorSlashEventRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ValidatorSlashEventRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorSlashEventRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorSlashEventRecord();
@@ -991,7 +991,7 @@ export const ValidatorSlashEventRecord = {
       validatorSlashEvent: object?.validator_slash_event ? ValidatorSlashEvent.fromAmino(object.validator_slash_event) : undefined
     };
   },
-  toAmino(message: ValidatorSlashEventRecord, useInterfaces: boolean = false): ValidatorSlashEventRecordAmino {
+  toAmino(message: ValidatorSlashEventRecord, useInterfaces: boolean = true): ValidatorSlashEventRecordAmino {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
     obj.height = message.height ? message.height.toString() : undefined;
@@ -999,7 +999,7 @@ export const ValidatorSlashEventRecord = {
     obj.validator_slash_event = message.validatorSlashEvent ? ValidatorSlashEvent.toAmino(message.validatorSlashEvent, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: ValidatorSlashEventRecordProtoMsg, useInterfaces: boolean = false): ValidatorSlashEventRecord {
+  fromProtoMsg(message: ValidatorSlashEventRecordProtoMsg, useInterfaces: boolean = true): ValidatorSlashEventRecord {
     return ValidatorSlashEventRecord.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorSlashEventRecord): Uint8Array {
@@ -1062,7 +1062,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -1250,7 +1250,7 @@ export const GenesisState = {
       validatorSlashEvents: Array.isArray(object?.validator_slash_events) ? object.validator_slash_events.map((e: any) => ValidatorSlashEventRecord.fromAmino(e)) : []
     };
   },
-  toAmino(message: GenesisState, useInterfaces: boolean = false): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     obj.fee_pool = message.feePool ? FeePool.toAmino(message.feePool, useInterfaces) : undefined;
@@ -1292,7 +1292,7 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = false): GenesisState {
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
     return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {

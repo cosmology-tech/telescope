@@ -287,7 +287,7 @@ export const PeriodLock = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): PeriodLock {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PeriodLock {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeriodLock();
@@ -382,7 +382,7 @@ export const PeriodLock = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: PeriodLock, useInterfaces: boolean = false): PeriodLockAmino {
+  toAmino(message: PeriodLock, useInterfaces: boolean = true): PeriodLockAmino {
     const obj: any = {};
     obj.ID = message.ID ? message.ID.toString() : undefined;
     obj.owner = message.owner;
@@ -395,7 +395,7 @@ export const PeriodLock = {
     }
     return obj;
   },
-  fromProtoMsg(message: PeriodLockProtoMsg, useInterfaces: boolean = false): PeriodLock {
+  fromProtoMsg(message: PeriodLockProtoMsg, useInterfaces: boolean = true): PeriodLock {
     return PeriodLock.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PeriodLock): Uint8Array {
@@ -434,7 +434,7 @@ export const QueryCondition = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryCondition {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryCondition {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCondition();
@@ -510,7 +510,7 @@ export const QueryCondition = {
       timestamp: object.timestamp
     };
   },
-  toAmino(message: QueryCondition, useInterfaces: boolean = false): QueryConditionAmino {
+  toAmino(message: QueryCondition, useInterfaces: boolean = true): QueryConditionAmino {
     const obj: any = {};
     obj.lock_query_type = message.lockQueryType;
     obj.denom = message.denom;
@@ -518,7 +518,7 @@ export const QueryCondition = {
     obj.timestamp = message.timestamp;
     return obj;
   },
-  fromProtoMsg(message: QueryConditionProtoMsg, useInterfaces: boolean = false): QueryCondition {
+  fromProtoMsg(message: QueryConditionProtoMsg, useInterfaces: boolean = true): QueryCondition {
     return QueryCondition.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryCondition): Uint8Array {
@@ -557,7 +557,7 @@ export const SyntheticLock = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SyntheticLock {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SyntheticLock {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSyntheticLock();
@@ -635,7 +635,7 @@ export const SyntheticLock = {
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
     };
   },
-  toAmino(message: SyntheticLock, useInterfaces: boolean = false): SyntheticLockAmino {
+  toAmino(message: SyntheticLock, useInterfaces: boolean = true): SyntheticLockAmino {
     const obj: any = {};
     obj.underlying_lock_id = message.underlyingLockId ? message.underlyingLockId.toString() : undefined;
     obj.synth_denom = message.synthDenom;
@@ -643,7 +643,7 @@ export const SyntheticLock = {
     obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: SyntheticLockProtoMsg, useInterfaces: boolean = false): SyntheticLock {
+  fromProtoMsg(message: SyntheticLockProtoMsg, useInterfaces: boolean = true): SyntheticLock {
     return SyntheticLock.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SyntheticLock): Uint8Array {

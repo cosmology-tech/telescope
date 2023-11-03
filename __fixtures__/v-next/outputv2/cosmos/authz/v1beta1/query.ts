@@ -193,7 +193,7 @@ export const QueryGrantsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryGrantsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGrantsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGrantsRequest();
@@ -269,7 +269,7 @@ export const QueryGrantsRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryGrantsRequest, useInterfaces: boolean = false): QueryGrantsRequestAmino {
+  toAmino(message: QueryGrantsRequest, useInterfaces: boolean = true): QueryGrantsRequestAmino {
     const obj: any = {};
     obj.granter = message.granter;
     obj.grantee = message.grantee;
@@ -280,13 +280,13 @@ export const QueryGrantsRequest = {
   fromAminoMsg(object: QueryGrantsRequestAminoMsg): QueryGrantsRequest {
     return QueryGrantsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGrantsRequest, useInterfaces: boolean = false): QueryGrantsRequestAminoMsg {
+  toAminoMsg(message: QueryGrantsRequest, useInterfaces: boolean = true): QueryGrantsRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryGrantsRequest",
       value: QueryGrantsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryGrantsRequestProtoMsg, useInterfaces: boolean = false): QueryGrantsRequest {
+  fromProtoMsg(message: QueryGrantsRequestProtoMsg, useInterfaces: boolean = true): QueryGrantsRequest {
     return QueryGrantsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGrantsRequest): Uint8Array {
@@ -317,7 +317,7 @@ export const QueryGrantsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryGrantsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGrantsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGrantsResponse();
@@ -383,7 +383,7 @@ export const QueryGrantsResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryGrantsResponse, useInterfaces: boolean = false): QueryGrantsResponseAmino {
+  toAmino(message: QueryGrantsResponse, useInterfaces: boolean = true): QueryGrantsResponseAmino {
     const obj: any = {};
     if (message.grants) {
       obj.grants = message.grants.map(e => e ? Grant.toAmino(e, useInterfaces) : undefined);
@@ -396,13 +396,13 @@ export const QueryGrantsResponse = {
   fromAminoMsg(object: QueryGrantsResponseAminoMsg): QueryGrantsResponse {
     return QueryGrantsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGrantsResponse, useInterfaces: boolean = false): QueryGrantsResponseAminoMsg {
+  toAminoMsg(message: QueryGrantsResponse, useInterfaces: boolean = true): QueryGrantsResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryGrantsResponse",
       value: QueryGrantsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryGrantsResponseProtoMsg, useInterfaces: boolean = false): QueryGrantsResponse {
+  fromProtoMsg(message: QueryGrantsResponseProtoMsg, useInterfaces: boolean = true): QueryGrantsResponse {
     return QueryGrantsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGrantsResponse): Uint8Array {
@@ -433,7 +433,7 @@ export const QueryGranterGrantsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryGranterGrantsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGranterGrantsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGranterGrantsRequest();
@@ -491,7 +491,7 @@ export const QueryGranterGrantsRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryGranterGrantsRequest, useInterfaces: boolean = false): QueryGranterGrantsRequestAmino {
+  toAmino(message: QueryGranterGrantsRequest, useInterfaces: boolean = true): QueryGranterGrantsRequestAmino {
     const obj: any = {};
     obj.granter = message.granter;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
@@ -500,13 +500,13 @@ export const QueryGranterGrantsRequest = {
   fromAminoMsg(object: QueryGranterGrantsRequestAminoMsg): QueryGranterGrantsRequest {
     return QueryGranterGrantsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGranterGrantsRequest, useInterfaces: boolean = false): QueryGranterGrantsRequestAminoMsg {
+  toAminoMsg(message: QueryGranterGrantsRequest, useInterfaces: boolean = true): QueryGranterGrantsRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryGranterGrantsRequest",
       value: QueryGranterGrantsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryGranterGrantsRequestProtoMsg, useInterfaces: boolean = false): QueryGranterGrantsRequest {
+  fromProtoMsg(message: QueryGranterGrantsRequestProtoMsg, useInterfaces: boolean = true): QueryGranterGrantsRequest {
     return QueryGranterGrantsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGranterGrantsRequest): Uint8Array {
@@ -537,7 +537,7 @@ export const QueryGranterGrantsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryGranterGrantsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGranterGrantsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGranterGrantsResponse();
@@ -603,7 +603,7 @@ export const QueryGranterGrantsResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryGranterGrantsResponse, useInterfaces: boolean = false): QueryGranterGrantsResponseAmino {
+  toAmino(message: QueryGranterGrantsResponse, useInterfaces: boolean = true): QueryGranterGrantsResponseAmino {
     const obj: any = {};
     if (message.grants) {
       obj.grants = message.grants.map(e => e ? GrantAuthorization.toAmino(e, useInterfaces) : undefined);
@@ -616,13 +616,13 @@ export const QueryGranterGrantsResponse = {
   fromAminoMsg(object: QueryGranterGrantsResponseAminoMsg): QueryGranterGrantsResponse {
     return QueryGranterGrantsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGranterGrantsResponse, useInterfaces: boolean = false): QueryGranterGrantsResponseAminoMsg {
+  toAminoMsg(message: QueryGranterGrantsResponse, useInterfaces: boolean = true): QueryGranterGrantsResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryGranterGrantsResponse",
       value: QueryGranterGrantsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryGranterGrantsResponseProtoMsg, useInterfaces: boolean = false): QueryGranterGrantsResponse {
+  fromProtoMsg(message: QueryGranterGrantsResponseProtoMsg, useInterfaces: boolean = true): QueryGranterGrantsResponse {
     return QueryGranterGrantsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGranterGrantsResponse): Uint8Array {
@@ -653,7 +653,7 @@ export const QueryGranteeGrantsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryGranteeGrantsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGranteeGrantsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGranteeGrantsRequest();
@@ -711,7 +711,7 @@ export const QueryGranteeGrantsRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryGranteeGrantsRequest, useInterfaces: boolean = false): QueryGranteeGrantsRequestAmino {
+  toAmino(message: QueryGranteeGrantsRequest, useInterfaces: boolean = true): QueryGranteeGrantsRequestAmino {
     const obj: any = {};
     obj.grantee = message.grantee;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
@@ -720,13 +720,13 @@ export const QueryGranteeGrantsRequest = {
   fromAminoMsg(object: QueryGranteeGrantsRequestAminoMsg): QueryGranteeGrantsRequest {
     return QueryGranteeGrantsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGranteeGrantsRequest, useInterfaces: boolean = false): QueryGranteeGrantsRequestAminoMsg {
+  toAminoMsg(message: QueryGranteeGrantsRequest, useInterfaces: boolean = true): QueryGranteeGrantsRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryGranteeGrantsRequest",
       value: QueryGranteeGrantsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryGranteeGrantsRequestProtoMsg, useInterfaces: boolean = false): QueryGranteeGrantsRequest {
+  fromProtoMsg(message: QueryGranteeGrantsRequestProtoMsg, useInterfaces: boolean = true): QueryGranteeGrantsRequest {
     return QueryGranteeGrantsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGranteeGrantsRequest): Uint8Array {
@@ -757,7 +757,7 @@ export const QueryGranteeGrantsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryGranteeGrantsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGranteeGrantsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGranteeGrantsResponse();
@@ -823,7 +823,7 @@ export const QueryGranteeGrantsResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryGranteeGrantsResponse, useInterfaces: boolean = false): QueryGranteeGrantsResponseAmino {
+  toAmino(message: QueryGranteeGrantsResponse, useInterfaces: boolean = true): QueryGranteeGrantsResponseAmino {
     const obj: any = {};
     if (message.grants) {
       obj.grants = message.grants.map(e => e ? GrantAuthorization.toAmino(e, useInterfaces) : undefined);
@@ -836,13 +836,13 @@ export const QueryGranteeGrantsResponse = {
   fromAminoMsg(object: QueryGranteeGrantsResponseAminoMsg): QueryGranteeGrantsResponse {
     return QueryGranteeGrantsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGranteeGrantsResponse, useInterfaces: boolean = false): QueryGranteeGrantsResponseAminoMsg {
+  toAminoMsg(message: QueryGranteeGrantsResponse, useInterfaces: boolean = true): QueryGranteeGrantsResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryGranteeGrantsResponse",
       value: QueryGranteeGrantsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryGranteeGrantsResponseProtoMsg, useInterfaces: boolean = false): QueryGranteeGrantsResponse {
+  fromProtoMsg(message: QueryGranteeGrantsResponseProtoMsg, useInterfaces: boolean = true): QueryGranteeGrantsResponse {
     return QueryGranteeGrantsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGranteeGrantsResponse): Uint8Array {

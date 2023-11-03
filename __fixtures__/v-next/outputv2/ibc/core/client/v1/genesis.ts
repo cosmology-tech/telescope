@@ -149,7 +149,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -269,7 +269,7 @@ export const GenesisState = {
       nextClientSequence: BigInt(object.next_client_sequence)
     };
   },
-  toAmino(message: GenesisState, useInterfaces: boolean = false): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     if (message.clients) {
       obj.clients = message.clients.map(e => e ? IdentifiedClientState.toAmino(e, useInterfaces) : undefined);
@@ -294,13 +294,13 @@ export const GenesisState = {
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
   },
-  toAminoMsg(message: GenesisState, useInterfaces: boolean = false): GenesisStateAminoMsg {
+  toAminoMsg(message: GenesisState, useInterfaces: boolean = true): GenesisStateAminoMsg {
     return {
       type: "cosmos-sdk/GenesisState",
       value: GenesisState.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = false): GenesisState {
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
     return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
@@ -331,7 +331,7 @@ export const GenesisMetadata = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisMetadata();
@@ -387,7 +387,7 @@ export const GenesisMetadata = {
       value: object.value
     };
   },
-  toAmino(message: GenesisMetadata, useInterfaces: boolean = false): GenesisMetadataAmino {
+  toAmino(message: GenesisMetadata, useInterfaces: boolean = true): GenesisMetadataAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -396,13 +396,13 @@ export const GenesisMetadata = {
   fromAminoMsg(object: GenesisMetadataAminoMsg): GenesisMetadata {
     return GenesisMetadata.fromAmino(object.value);
   },
-  toAminoMsg(message: GenesisMetadata, useInterfaces: boolean = false): GenesisMetadataAminoMsg {
+  toAminoMsg(message: GenesisMetadata, useInterfaces: boolean = true): GenesisMetadataAminoMsg {
     return {
       type: "cosmos-sdk/GenesisMetadata",
       value: GenesisMetadata.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GenesisMetadataProtoMsg, useInterfaces: boolean = false): GenesisMetadata {
+  fromProtoMsg(message: GenesisMetadataProtoMsg, useInterfaces: boolean = true): GenesisMetadata {
     return GenesisMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisMetadata): Uint8Array {
@@ -433,7 +433,7 @@ export const IdentifiedGenesisMetadata = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): IdentifiedGenesisMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): IdentifiedGenesisMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdentifiedGenesisMetadata();
@@ -497,7 +497,7 @@ export const IdentifiedGenesisMetadata = {
       clientMetadata: Array.isArray(object?.client_metadata) ? object.client_metadata.map((e: any) => GenesisMetadata.fromAmino(e)) : []
     };
   },
-  toAmino(message: IdentifiedGenesisMetadata, useInterfaces: boolean = false): IdentifiedGenesisMetadataAmino {
+  toAmino(message: IdentifiedGenesisMetadata, useInterfaces: boolean = true): IdentifiedGenesisMetadataAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
     if (message.clientMetadata) {
@@ -510,13 +510,13 @@ export const IdentifiedGenesisMetadata = {
   fromAminoMsg(object: IdentifiedGenesisMetadataAminoMsg): IdentifiedGenesisMetadata {
     return IdentifiedGenesisMetadata.fromAmino(object.value);
   },
-  toAminoMsg(message: IdentifiedGenesisMetadata, useInterfaces: boolean = false): IdentifiedGenesisMetadataAminoMsg {
+  toAminoMsg(message: IdentifiedGenesisMetadata, useInterfaces: boolean = true): IdentifiedGenesisMetadataAminoMsg {
     return {
       type: "cosmos-sdk/IdentifiedGenesisMetadata",
       value: IdentifiedGenesisMetadata.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: IdentifiedGenesisMetadataProtoMsg, useInterfaces: boolean = false): IdentifiedGenesisMetadata {
+  fromProtoMsg(message: IdentifiedGenesisMetadataProtoMsg, useInterfaces: boolean = true): IdentifiedGenesisMetadata {
     return IdentifiedGenesisMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: IdentifiedGenesisMetadata): Uint8Array {

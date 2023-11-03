@@ -238,7 +238,7 @@ export const QueryGaugeIdsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryGaugeIdsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGaugeIdsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGaugeIdsRequest();
@@ -287,7 +287,7 @@ export const QueryGaugeIdsRequest = {
       poolId: BigInt(object.pool_id)
     };
   },
-  toAmino(message: QueryGaugeIdsRequest, useInterfaces: boolean = false): QueryGaugeIdsRequestAmino {
+  toAmino(message: QueryGaugeIdsRequest, useInterfaces: boolean = true): QueryGaugeIdsRequestAmino {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     return obj;
@@ -295,13 +295,13 @@ export const QueryGaugeIdsRequest = {
   fromAminoMsg(object: QueryGaugeIdsRequestAminoMsg): QueryGaugeIdsRequest {
     return QueryGaugeIdsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGaugeIdsRequest, useInterfaces: boolean = false): QueryGaugeIdsRequestAminoMsg {
+  toAminoMsg(message: QueryGaugeIdsRequest, useInterfaces: boolean = true): QueryGaugeIdsRequestAminoMsg {
     return {
       type: "osmosis/poolincentives/query-gauge-ids-request",
       value: QueryGaugeIdsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryGaugeIdsRequestProtoMsg, useInterfaces: boolean = false): QueryGaugeIdsRequest {
+  fromProtoMsg(message: QueryGaugeIdsRequestProtoMsg, useInterfaces: boolean = true): QueryGaugeIdsRequest {
     return QueryGaugeIdsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGaugeIdsRequest): Uint8Array {
@@ -328,7 +328,7 @@ export const QueryGaugeIdsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryGaugeIdsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGaugeIdsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGaugeIdsResponse();
@@ -383,7 +383,7 @@ export const QueryGaugeIdsResponse = {
       gaugeIdsWithDuration: Array.isArray(object?.gauge_ids_with_duration) ? object.gauge_ids_with_duration.map((e: any) => QueryGaugeIdsResponse_GaugeIdWithDuration.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryGaugeIdsResponse, useInterfaces: boolean = false): QueryGaugeIdsResponseAmino {
+  toAmino(message: QueryGaugeIdsResponse, useInterfaces: boolean = true): QueryGaugeIdsResponseAmino {
     const obj: any = {};
     if (message.gaugeIdsWithDuration) {
       obj.gauge_ids_with_duration = message.gaugeIdsWithDuration.map(e => e ? QueryGaugeIdsResponse_GaugeIdWithDuration.toAmino(e, useInterfaces) : undefined);
@@ -395,13 +395,13 @@ export const QueryGaugeIdsResponse = {
   fromAminoMsg(object: QueryGaugeIdsResponseAminoMsg): QueryGaugeIdsResponse {
     return QueryGaugeIdsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGaugeIdsResponse, useInterfaces: boolean = false): QueryGaugeIdsResponseAminoMsg {
+  toAminoMsg(message: QueryGaugeIdsResponse, useInterfaces: boolean = true): QueryGaugeIdsResponseAminoMsg {
     return {
       type: "osmosis/poolincentives/query-gauge-ids-response",
       value: QueryGaugeIdsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryGaugeIdsResponseProtoMsg, useInterfaces: boolean = false): QueryGaugeIdsResponse {
+  fromProtoMsg(message: QueryGaugeIdsResponseProtoMsg, useInterfaces: boolean = true): QueryGaugeIdsResponse {
     return QueryGaugeIdsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGaugeIdsResponse): Uint8Array {
@@ -436,7 +436,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryGaugeIdsResponse_GaugeIdWithDuration {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGaugeIdsResponse_GaugeIdWithDuration {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGaugeIdsResponse_GaugeIdWithDuration();
@@ -505,7 +505,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
       gaugeIncentivePercentage: object.gauge_incentive_percentage
     };
   },
-  toAmino(message: QueryGaugeIdsResponse_GaugeIdWithDuration, useInterfaces: boolean = false): QueryGaugeIdsResponse_GaugeIdWithDurationAmino {
+  toAmino(message: QueryGaugeIdsResponse_GaugeIdWithDuration, useInterfaces: boolean = true): QueryGaugeIdsResponse_GaugeIdWithDurationAmino {
     const obj: any = {};
     obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
     obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
@@ -515,13 +515,13 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   fromAminoMsg(object: QueryGaugeIdsResponse_GaugeIdWithDurationAminoMsg): QueryGaugeIdsResponse_GaugeIdWithDuration {
     return QueryGaugeIdsResponse_GaugeIdWithDuration.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGaugeIdsResponse_GaugeIdWithDuration, useInterfaces: boolean = false): QueryGaugeIdsResponse_GaugeIdWithDurationAminoMsg {
+  toAminoMsg(message: QueryGaugeIdsResponse_GaugeIdWithDuration, useInterfaces: boolean = true): QueryGaugeIdsResponse_GaugeIdWithDurationAminoMsg {
     return {
       type: "osmosis/poolincentives/gauge-id-with-duration",
       value: QueryGaugeIdsResponse_GaugeIdWithDuration.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryGaugeIdsResponse_GaugeIdWithDurationProtoMsg, useInterfaces: boolean = false): QueryGaugeIdsResponse_GaugeIdWithDuration {
+  fromProtoMsg(message: QueryGaugeIdsResponse_GaugeIdWithDurationProtoMsg, useInterfaces: boolean = true): QueryGaugeIdsResponse_GaugeIdWithDuration {
     return QueryGaugeIdsResponse_GaugeIdWithDuration.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGaugeIdsResponse_GaugeIdWithDuration): Uint8Array {
@@ -543,7 +543,7 @@ export const QueryDistrInfoRequest = {
   encode(_: QueryDistrInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDistrInfoRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDistrInfoRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDistrInfoRequest();
@@ -579,20 +579,20 @@ export const QueryDistrInfoRequest = {
   fromAmino(_: QueryDistrInfoRequestAmino): QueryDistrInfoRequest {
     return {};
   },
-  toAmino(_: QueryDistrInfoRequest, useInterfaces: boolean = false): QueryDistrInfoRequestAmino {
+  toAmino(_: QueryDistrInfoRequest, useInterfaces: boolean = true): QueryDistrInfoRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryDistrInfoRequestAminoMsg): QueryDistrInfoRequest {
     return QueryDistrInfoRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDistrInfoRequest, useInterfaces: boolean = false): QueryDistrInfoRequestAminoMsg {
+  toAminoMsg(message: QueryDistrInfoRequest, useInterfaces: boolean = true): QueryDistrInfoRequestAminoMsg {
     return {
       type: "osmosis/poolincentives/query-distr-info-request",
       value: QueryDistrInfoRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDistrInfoRequestProtoMsg, useInterfaces: boolean = false): QueryDistrInfoRequest {
+  fromProtoMsg(message: QueryDistrInfoRequestProtoMsg, useInterfaces: boolean = true): QueryDistrInfoRequest {
     return QueryDistrInfoRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDistrInfoRequest): Uint8Array {
@@ -619,7 +619,7 @@ export const QueryDistrInfoResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDistrInfoResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDistrInfoResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDistrInfoResponse();
@@ -668,7 +668,7 @@ export const QueryDistrInfoResponse = {
       distrInfo: object?.distr_info ? DistrInfo.fromAmino(object.distr_info) : undefined
     };
   },
-  toAmino(message: QueryDistrInfoResponse, useInterfaces: boolean = false): QueryDistrInfoResponseAmino {
+  toAmino(message: QueryDistrInfoResponse, useInterfaces: boolean = true): QueryDistrInfoResponseAmino {
     const obj: any = {};
     obj.distr_info = message.distrInfo ? DistrInfo.toAmino(message.distrInfo, useInterfaces) : undefined;
     return obj;
@@ -676,13 +676,13 @@ export const QueryDistrInfoResponse = {
   fromAminoMsg(object: QueryDistrInfoResponseAminoMsg): QueryDistrInfoResponse {
     return QueryDistrInfoResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDistrInfoResponse, useInterfaces: boolean = false): QueryDistrInfoResponseAminoMsg {
+  toAminoMsg(message: QueryDistrInfoResponse, useInterfaces: boolean = true): QueryDistrInfoResponseAminoMsg {
     return {
       type: "osmosis/poolincentives/query-distr-info-response",
       value: QueryDistrInfoResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDistrInfoResponseProtoMsg, useInterfaces: boolean = false): QueryDistrInfoResponse {
+  fromProtoMsg(message: QueryDistrInfoResponseProtoMsg, useInterfaces: boolean = true): QueryDistrInfoResponse {
     return QueryDistrInfoResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDistrInfoResponse): Uint8Array {
@@ -704,7 +704,7 @@ export const QueryParamsRequest = {
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -740,20 +740,20 @@ export const QueryParamsRequest = {
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
-  toAmino(_: QueryParamsRequest, useInterfaces: boolean = false): QueryParamsRequestAmino {
+  toAmino(_: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
     return QueryParamsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryParamsRequest, useInterfaces: boolean = false): QueryParamsRequestAminoMsg {
+  toAminoMsg(message: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAminoMsg {
     return {
       type: "osmosis/poolincentives/query-params-request",
       value: QueryParamsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = false): QueryParamsRequest {
+  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = true): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsRequest): Uint8Array {
@@ -780,7 +780,7 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -829,7 +829,7 @@ export const QueryParamsResponse = {
       params: object?.params ? Params.fromAmino(object.params) : undefined
     };
   },
-  toAmino(message: QueryParamsResponse, useInterfaces: boolean = false): QueryParamsResponseAmino {
+  toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     return obj;
@@ -837,13 +837,13 @@ export const QueryParamsResponse = {
   fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
     return QueryParamsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryParamsResponse, useInterfaces: boolean = false): QueryParamsResponseAminoMsg {
+  toAminoMsg(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAminoMsg {
     return {
       type: "osmosis/poolincentives/query-params-response",
       value: QueryParamsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = false): QueryParamsResponse {
+  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = true): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsResponse): Uint8Array {
@@ -865,7 +865,7 @@ export const QueryLockableDurationsRequest = {
   encode(_: QueryLockableDurationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryLockableDurationsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryLockableDurationsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryLockableDurationsRequest();
@@ -901,20 +901,20 @@ export const QueryLockableDurationsRequest = {
   fromAmino(_: QueryLockableDurationsRequestAmino): QueryLockableDurationsRequest {
     return {};
   },
-  toAmino(_: QueryLockableDurationsRequest, useInterfaces: boolean = false): QueryLockableDurationsRequestAmino {
+  toAmino(_: QueryLockableDurationsRequest, useInterfaces: boolean = true): QueryLockableDurationsRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryLockableDurationsRequestAminoMsg): QueryLockableDurationsRequest {
     return QueryLockableDurationsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryLockableDurationsRequest, useInterfaces: boolean = false): QueryLockableDurationsRequestAminoMsg {
+  toAminoMsg(message: QueryLockableDurationsRequest, useInterfaces: boolean = true): QueryLockableDurationsRequestAminoMsg {
     return {
       type: "osmosis/poolincentives/query-lockable-durations-request",
       value: QueryLockableDurationsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryLockableDurationsRequestProtoMsg, useInterfaces: boolean = false): QueryLockableDurationsRequest {
+  fromProtoMsg(message: QueryLockableDurationsRequestProtoMsg, useInterfaces: boolean = true): QueryLockableDurationsRequest {
     return QueryLockableDurationsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryLockableDurationsRequest): Uint8Array {
@@ -941,7 +941,7 @@ export const QueryLockableDurationsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryLockableDurationsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryLockableDurationsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryLockableDurationsResponse();
@@ -996,7 +996,7 @@ export const QueryLockableDurationsResponse = {
       lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryLockableDurationsResponse, useInterfaces: boolean = false): QueryLockableDurationsResponseAmino {
+  toAmino(message: QueryLockableDurationsResponse, useInterfaces: boolean = true): QueryLockableDurationsResponseAmino {
     const obj: any = {};
     if (message.lockableDurations) {
       obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e, useInterfaces) : undefined);
@@ -1008,13 +1008,13 @@ export const QueryLockableDurationsResponse = {
   fromAminoMsg(object: QueryLockableDurationsResponseAminoMsg): QueryLockableDurationsResponse {
     return QueryLockableDurationsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryLockableDurationsResponse, useInterfaces: boolean = false): QueryLockableDurationsResponseAminoMsg {
+  toAminoMsg(message: QueryLockableDurationsResponse, useInterfaces: boolean = true): QueryLockableDurationsResponseAminoMsg {
     return {
       type: "osmosis/poolincentives/query-lockable-durations-response",
       value: QueryLockableDurationsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryLockableDurationsResponseProtoMsg, useInterfaces: boolean = false): QueryLockableDurationsResponse {
+  fromProtoMsg(message: QueryLockableDurationsResponseProtoMsg, useInterfaces: boolean = true): QueryLockableDurationsResponse {
     return QueryLockableDurationsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryLockableDurationsResponse): Uint8Array {
@@ -1036,7 +1036,7 @@ export const QueryIncentivizedPoolsRequest = {
   encode(_: QueryIncentivizedPoolsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryIncentivizedPoolsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryIncentivizedPoolsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentivizedPoolsRequest();
@@ -1072,20 +1072,20 @@ export const QueryIncentivizedPoolsRequest = {
   fromAmino(_: QueryIncentivizedPoolsRequestAmino): QueryIncentivizedPoolsRequest {
     return {};
   },
-  toAmino(_: QueryIncentivizedPoolsRequest, useInterfaces: boolean = false): QueryIncentivizedPoolsRequestAmino {
+  toAmino(_: QueryIncentivizedPoolsRequest, useInterfaces: boolean = true): QueryIncentivizedPoolsRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryIncentivizedPoolsRequestAminoMsg): QueryIncentivizedPoolsRequest {
     return QueryIncentivizedPoolsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryIncentivizedPoolsRequest, useInterfaces: boolean = false): QueryIncentivizedPoolsRequestAminoMsg {
+  toAminoMsg(message: QueryIncentivizedPoolsRequest, useInterfaces: boolean = true): QueryIncentivizedPoolsRequestAminoMsg {
     return {
       type: "osmosis/poolincentives/query-incentivized-pools-request",
       value: QueryIncentivizedPoolsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryIncentivizedPoolsRequestProtoMsg, useInterfaces: boolean = false): QueryIncentivizedPoolsRequest {
+  fromProtoMsg(message: QueryIncentivizedPoolsRequestProtoMsg, useInterfaces: boolean = true): QueryIncentivizedPoolsRequest {
     return QueryIncentivizedPoolsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryIncentivizedPoolsRequest): Uint8Array {
@@ -1120,7 +1120,7 @@ export const IncentivizedPool = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): IncentivizedPool {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): IncentivizedPool {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIncentivizedPool();
@@ -1191,7 +1191,7 @@ export const IncentivizedPool = {
       gaugeId: BigInt(object.gauge_id)
     };
   },
-  toAmino(message: IncentivizedPool, useInterfaces: boolean = false): IncentivizedPoolAmino {
+  toAmino(message: IncentivizedPool, useInterfaces: boolean = true): IncentivizedPoolAmino {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     obj.lockable_duration = message.lockableDuration ? Duration.toAmino(message.lockableDuration, useInterfaces) : undefined;
@@ -1201,13 +1201,13 @@ export const IncentivizedPool = {
   fromAminoMsg(object: IncentivizedPoolAminoMsg): IncentivizedPool {
     return IncentivizedPool.fromAmino(object.value);
   },
-  toAminoMsg(message: IncentivizedPool, useInterfaces: boolean = false): IncentivizedPoolAminoMsg {
+  toAminoMsg(message: IncentivizedPool, useInterfaces: boolean = true): IncentivizedPoolAminoMsg {
     return {
       type: "osmosis/poolincentives/incentivized-pool",
       value: IncentivizedPool.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: IncentivizedPoolProtoMsg, useInterfaces: boolean = false): IncentivizedPool {
+  fromProtoMsg(message: IncentivizedPoolProtoMsg, useInterfaces: boolean = true): IncentivizedPool {
     return IncentivizedPool.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: IncentivizedPool): Uint8Array {
@@ -1234,7 +1234,7 @@ export const QueryIncentivizedPoolsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryIncentivizedPoolsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryIncentivizedPoolsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentivizedPoolsResponse();
@@ -1289,7 +1289,7 @@ export const QueryIncentivizedPoolsResponse = {
       incentivizedPools: Array.isArray(object?.incentivized_pools) ? object.incentivized_pools.map((e: any) => IncentivizedPool.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryIncentivizedPoolsResponse, useInterfaces: boolean = false): QueryIncentivizedPoolsResponseAmino {
+  toAmino(message: QueryIncentivizedPoolsResponse, useInterfaces: boolean = true): QueryIncentivizedPoolsResponseAmino {
     const obj: any = {};
     if (message.incentivizedPools) {
       obj.incentivized_pools = message.incentivizedPools.map(e => e ? IncentivizedPool.toAmino(e, useInterfaces) : undefined);
@@ -1301,13 +1301,13 @@ export const QueryIncentivizedPoolsResponse = {
   fromAminoMsg(object: QueryIncentivizedPoolsResponseAminoMsg): QueryIncentivizedPoolsResponse {
     return QueryIncentivizedPoolsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryIncentivizedPoolsResponse, useInterfaces: boolean = false): QueryIncentivizedPoolsResponseAminoMsg {
+  toAminoMsg(message: QueryIncentivizedPoolsResponse, useInterfaces: boolean = true): QueryIncentivizedPoolsResponseAminoMsg {
     return {
       type: "osmosis/poolincentives/query-incentivized-pools-response",
       value: QueryIncentivizedPoolsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryIncentivizedPoolsResponseProtoMsg, useInterfaces: boolean = false): QueryIncentivizedPoolsResponse {
+  fromProtoMsg(message: QueryIncentivizedPoolsResponseProtoMsg, useInterfaces: boolean = true): QueryIncentivizedPoolsResponse {
     return QueryIncentivizedPoolsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryIncentivizedPoolsResponse): Uint8Array {
@@ -1329,7 +1329,7 @@ export const QueryExternalIncentiveGaugesRequest = {
   encode(_: QueryExternalIncentiveGaugesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryExternalIncentiveGaugesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryExternalIncentiveGaugesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryExternalIncentiveGaugesRequest();
@@ -1365,20 +1365,20 @@ export const QueryExternalIncentiveGaugesRequest = {
   fromAmino(_: QueryExternalIncentiveGaugesRequestAmino): QueryExternalIncentiveGaugesRequest {
     return {};
   },
-  toAmino(_: QueryExternalIncentiveGaugesRequest, useInterfaces: boolean = false): QueryExternalIncentiveGaugesRequestAmino {
+  toAmino(_: QueryExternalIncentiveGaugesRequest, useInterfaces: boolean = true): QueryExternalIncentiveGaugesRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryExternalIncentiveGaugesRequestAminoMsg): QueryExternalIncentiveGaugesRequest {
     return QueryExternalIncentiveGaugesRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryExternalIncentiveGaugesRequest, useInterfaces: boolean = false): QueryExternalIncentiveGaugesRequestAminoMsg {
+  toAminoMsg(message: QueryExternalIncentiveGaugesRequest, useInterfaces: boolean = true): QueryExternalIncentiveGaugesRequestAminoMsg {
     return {
       type: "osmosis/poolincentives/query-external-incentive-gauges-request",
       value: QueryExternalIncentiveGaugesRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryExternalIncentiveGaugesRequestProtoMsg, useInterfaces: boolean = false): QueryExternalIncentiveGaugesRequest {
+  fromProtoMsg(message: QueryExternalIncentiveGaugesRequestProtoMsg, useInterfaces: boolean = true): QueryExternalIncentiveGaugesRequest {
     return QueryExternalIncentiveGaugesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryExternalIncentiveGaugesRequest): Uint8Array {
@@ -1405,7 +1405,7 @@ export const QueryExternalIncentiveGaugesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryExternalIncentiveGaugesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryExternalIncentiveGaugesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryExternalIncentiveGaugesResponse();
@@ -1460,7 +1460,7 @@ export const QueryExternalIncentiveGaugesResponse = {
       data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryExternalIncentiveGaugesResponse, useInterfaces: boolean = false): QueryExternalIncentiveGaugesResponseAmino {
+  toAmino(message: QueryExternalIncentiveGaugesResponse, useInterfaces: boolean = true): QueryExternalIncentiveGaugesResponseAmino {
     const obj: any = {};
     if (message.data) {
       obj.data = message.data.map(e => e ? Gauge.toAmino(e, useInterfaces) : undefined);
@@ -1472,13 +1472,13 @@ export const QueryExternalIncentiveGaugesResponse = {
   fromAminoMsg(object: QueryExternalIncentiveGaugesResponseAminoMsg): QueryExternalIncentiveGaugesResponse {
     return QueryExternalIncentiveGaugesResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryExternalIncentiveGaugesResponse, useInterfaces: boolean = false): QueryExternalIncentiveGaugesResponseAminoMsg {
+  toAminoMsg(message: QueryExternalIncentiveGaugesResponse, useInterfaces: boolean = true): QueryExternalIncentiveGaugesResponseAminoMsg {
     return {
       type: "osmosis/poolincentives/query-external-incentive-gauges-response",
       value: QueryExternalIncentiveGaugesResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryExternalIncentiveGaugesResponseProtoMsg, useInterfaces: boolean = false): QueryExternalIncentiveGaugesResponse {
+  fromProtoMsg(message: QueryExternalIncentiveGaugesResponseProtoMsg, useInterfaces: boolean = true): QueryExternalIncentiveGaugesResponse {
     return QueryExternalIncentiveGaugesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryExternalIncentiveGaugesResponse): Uint8Array {

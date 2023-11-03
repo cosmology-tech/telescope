@@ -181,7 +181,7 @@ export const MsgSetWithdrawAddress = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSetWithdrawAddress {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSetWithdrawAddress {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetWithdrawAddress();
@@ -237,13 +237,13 @@ export const MsgSetWithdrawAddress = {
       withdrawAddress: object.withdraw_address
     };
   },
-  toAmino(message: MsgSetWithdrawAddress, useInterfaces: boolean = false): MsgSetWithdrawAddressAmino {
+  toAmino(message: MsgSetWithdrawAddress, useInterfaces: boolean = true): MsgSetWithdrawAddressAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     obj.withdraw_address = message.withdrawAddress;
     return obj;
   },
-  fromProtoMsg(message: MsgSetWithdrawAddressProtoMsg, useInterfaces: boolean = false): MsgSetWithdrawAddress {
+  fromProtoMsg(message: MsgSetWithdrawAddressProtoMsg, useInterfaces: boolean = true): MsgSetWithdrawAddress {
     return MsgSetWithdrawAddress.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSetWithdrawAddress): Uint8Array {
@@ -265,7 +265,7 @@ export const MsgSetWithdrawAddressResponse = {
   encode(_: MsgSetWithdrawAddressResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSetWithdrawAddressResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSetWithdrawAddressResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetWithdrawAddressResponse();
@@ -301,11 +301,11 @@ export const MsgSetWithdrawAddressResponse = {
   fromAmino(_: MsgSetWithdrawAddressResponseAmino): MsgSetWithdrawAddressResponse {
     return {};
   },
-  toAmino(_: MsgSetWithdrawAddressResponse, useInterfaces: boolean = false): MsgSetWithdrawAddressResponseAmino {
+  toAmino(_: MsgSetWithdrawAddressResponse, useInterfaces: boolean = true): MsgSetWithdrawAddressResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgSetWithdrawAddressResponseProtoMsg, useInterfaces: boolean = false): MsgSetWithdrawAddressResponse {
+  fromProtoMsg(message: MsgSetWithdrawAddressResponseProtoMsg, useInterfaces: boolean = true): MsgSetWithdrawAddressResponse {
     return MsgSetWithdrawAddressResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSetWithdrawAddressResponse): Uint8Array {
@@ -336,7 +336,7 @@ export const MsgWithdrawDelegatorReward = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgWithdrawDelegatorReward {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgWithdrawDelegatorReward {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawDelegatorReward();
@@ -392,13 +392,13 @@ export const MsgWithdrawDelegatorReward = {
       validatorAddress: object.validator_address
     };
   },
-  toAmino(message: MsgWithdrawDelegatorReward, useInterfaces: boolean = false): MsgWithdrawDelegatorRewardAmino {
+  toAmino(message: MsgWithdrawDelegatorReward, useInterfaces: boolean = true): MsgWithdrawDelegatorRewardAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     obj.validator_address = message.validatorAddress;
     return obj;
   },
-  fromProtoMsg(message: MsgWithdrawDelegatorRewardProtoMsg, useInterfaces: boolean = false): MsgWithdrawDelegatorReward {
+  fromProtoMsg(message: MsgWithdrawDelegatorRewardProtoMsg, useInterfaces: boolean = true): MsgWithdrawDelegatorReward {
     return MsgWithdrawDelegatorReward.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgWithdrawDelegatorReward): Uint8Array {
@@ -425,7 +425,7 @@ export const MsgWithdrawDelegatorRewardResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgWithdrawDelegatorRewardResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgWithdrawDelegatorRewardResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawDelegatorRewardResponse();
@@ -480,7 +480,7 @@ export const MsgWithdrawDelegatorRewardResponse = {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgWithdrawDelegatorRewardResponse, useInterfaces: boolean = false): MsgWithdrawDelegatorRewardResponseAmino {
+  toAmino(message: MsgWithdrawDelegatorRewardResponse, useInterfaces: boolean = true): MsgWithdrawDelegatorRewardResponseAmino {
     const obj: any = {};
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
@@ -489,7 +489,7 @@ export const MsgWithdrawDelegatorRewardResponse = {
     }
     return obj;
   },
-  fromProtoMsg(message: MsgWithdrawDelegatorRewardResponseProtoMsg, useInterfaces: boolean = false): MsgWithdrawDelegatorRewardResponse {
+  fromProtoMsg(message: MsgWithdrawDelegatorRewardResponseProtoMsg, useInterfaces: boolean = true): MsgWithdrawDelegatorRewardResponse {
     return MsgWithdrawDelegatorRewardResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgWithdrawDelegatorRewardResponse): Uint8Array {
@@ -516,7 +516,7 @@ export const MsgWithdrawValidatorCommission = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgWithdrawValidatorCommission {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgWithdrawValidatorCommission {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawValidatorCommission();
@@ -563,12 +563,12 @@ export const MsgWithdrawValidatorCommission = {
       validatorAddress: object.validator_address
     };
   },
-  toAmino(message: MsgWithdrawValidatorCommission, useInterfaces: boolean = false): MsgWithdrawValidatorCommissionAmino {
+  toAmino(message: MsgWithdrawValidatorCommission, useInterfaces: boolean = true): MsgWithdrawValidatorCommissionAmino {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
     return obj;
   },
-  fromProtoMsg(message: MsgWithdrawValidatorCommissionProtoMsg, useInterfaces: boolean = false): MsgWithdrawValidatorCommission {
+  fromProtoMsg(message: MsgWithdrawValidatorCommissionProtoMsg, useInterfaces: boolean = true): MsgWithdrawValidatorCommission {
     return MsgWithdrawValidatorCommission.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgWithdrawValidatorCommission): Uint8Array {
@@ -595,7 +595,7 @@ export const MsgWithdrawValidatorCommissionResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgWithdrawValidatorCommissionResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgWithdrawValidatorCommissionResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawValidatorCommissionResponse();
@@ -650,7 +650,7 @@ export const MsgWithdrawValidatorCommissionResponse = {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgWithdrawValidatorCommissionResponse, useInterfaces: boolean = false): MsgWithdrawValidatorCommissionResponseAmino {
+  toAmino(message: MsgWithdrawValidatorCommissionResponse, useInterfaces: boolean = true): MsgWithdrawValidatorCommissionResponseAmino {
     const obj: any = {};
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
@@ -659,7 +659,7 @@ export const MsgWithdrawValidatorCommissionResponse = {
     }
     return obj;
   },
-  fromProtoMsg(message: MsgWithdrawValidatorCommissionResponseProtoMsg, useInterfaces: boolean = false): MsgWithdrawValidatorCommissionResponse {
+  fromProtoMsg(message: MsgWithdrawValidatorCommissionResponseProtoMsg, useInterfaces: boolean = true): MsgWithdrawValidatorCommissionResponse {
     return MsgWithdrawValidatorCommissionResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgWithdrawValidatorCommissionResponse): Uint8Array {
@@ -690,7 +690,7 @@ export const MsgFundCommunityPool = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgFundCommunityPool {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgFundCommunityPool {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgFundCommunityPool();
@@ -754,7 +754,7 @@ export const MsgFundCommunityPool = {
       depositor: object.depositor
     };
   },
-  toAmino(message: MsgFundCommunityPool, useInterfaces: boolean = false): MsgFundCommunityPoolAmino {
+  toAmino(message: MsgFundCommunityPool, useInterfaces: boolean = true): MsgFundCommunityPoolAmino {
     const obj: any = {};
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
@@ -764,7 +764,7 @@ export const MsgFundCommunityPool = {
     obj.depositor = message.depositor;
     return obj;
   },
-  fromProtoMsg(message: MsgFundCommunityPoolProtoMsg, useInterfaces: boolean = false): MsgFundCommunityPool {
+  fromProtoMsg(message: MsgFundCommunityPoolProtoMsg, useInterfaces: boolean = true): MsgFundCommunityPool {
     return MsgFundCommunityPool.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgFundCommunityPool): Uint8Array {
@@ -786,7 +786,7 @@ export const MsgFundCommunityPoolResponse = {
   encode(_: MsgFundCommunityPoolResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgFundCommunityPoolResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgFundCommunityPoolResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgFundCommunityPoolResponse();
@@ -822,11 +822,11 @@ export const MsgFundCommunityPoolResponse = {
   fromAmino(_: MsgFundCommunityPoolResponseAmino): MsgFundCommunityPoolResponse {
     return {};
   },
-  toAmino(_: MsgFundCommunityPoolResponse, useInterfaces: boolean = false): MsgFundCommunityPoolResponseAmino {
+  toAmino(_: MsgFundCommunityPoolResponse, useInterfaces: boolean = true): MsgFundCommunityPoolResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgFundCommunityPoolResponseProtoMsg, useInterfaces: boolean = false): MsgFundCommunityPoolResponse {
+  fromProtoMsg(message: MsgFundCommunityPoolResponseProtoMsg, useInterfaces: boolean = true): MsgFundCommunityPoolResponse {
     return MsgFundCommunityPoolResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgFundCommunityPoolResponse): Uint8Array {

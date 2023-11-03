@@ -105,7 +105,7 @@ export const Capability = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Capability {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Capability {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCapability();
@@ -154,7 +154,7 @@ export const Capability = {
       index: BigInt(object.index)
     };
   },
-  toAmino(message: Capability, useInterfaces: boolean = false): CapabilityAmino {
+  toAmino(message: Capability, useInterfaces: boolean = true): CapabilityAmino {
     const obj: any = {};
     obj.index = message.index ? message.index.toString() : undefined;
     return obj;
@@ -162,13 +162,13 @@ export const Capability = {
   fromAminoMsg(object: CapabilityAminoMsg): Capability {
     return Capability.fromAmino(object.value);
   },
-  toAminoMsg(message: Capability, useInterfaces: boolean = false): CapabilityAminoMsg {
+  toAminoMsg(message: Capability, useInterfaces: boolean = true): CapabilityAminoMsg {
     return {
       type: "cosmos-sdk/Capability",
       value: Capability.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: CapabilityProtoMsg, useInterfaces: boolean = false): Capability {
+  fromProtoMsg(message: CapabilityProtoMsg, useInterfaces: boolean = true): Capability {
     return Capability.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Capability): Uint8Array {
@@ -199,7 +199,7 @@ export const Owner = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Owner {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Owner {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOwner();
@@ -255,7 +255,7 @@ export const Owner = {
       name: object.name
     };
   },
-  toAmino(message: Owner, useInterfaces: boolean = false): OwnerAmino {
+  toAmino(message: Owner, useInterfaces: boolean = true): OwnerAmino {
     const obj: any = {};
     obj.module = message.module;
     obj.name = message.name;
@@ -264,13 +264,13 @@ export const Owner = {
   fromAminoMsg(object: OwnerAminoMsg): Owner {
     return Owner.fromAmino(object.value);
   },
-  toAminoMsg(message: Owner, useInterfaces: boolean = false): OwnerAminoMsg {
+  toAminoMsg(message: Owner, useInterfaces: boolean = true): OwnerAminoMsg {
     return {
       type: "cosmos-sdk/Owner",
       value: Owner.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: OwnerProtoMsg, useInterfaces: boolean = false): Owner {
+  fromProtoMsg(message: OwnerProtoMsg, useInterfaces: boolean = true): Owner {
     return Owner.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Owner): Uint8Array {
@@ -297,7 +297,7 @@ export const CapabilityOwners = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CapabilityOwners {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CapabilityOwners {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCapabilityOwners();
@@ -352,7 +352,7 @@ export const CapabilityOwners = {
       owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromAmino(e)) : []
     };
   },
-  toAmino(message: CapabilityOwners, useInterfaces: boolean = false): CapabilityOwnersAmino {
+  toAmino(message: CapabilityOwners, useInterfaces: boolean = true): CapabilityOwnersAmino {
     const obj: any = {};
     if (message.owners) {
       obj.owners = message.owners.map(e => e ? Owner.toAmino(e, useInterfaces) : undefined);
@@ -364,13 +364,13 @@ export const CapabilityOwners = {
   fromAminoMsg(object: CapabilityOwnersAminoMsg): CapabilityOwners {
     return CapabilityOwners.fromAmino(object.value);
   },
-  toAminoMsg(message: CapabilityOwners, useInterfaces: boolean = false): CapabilityOwnersAminoMsg {
+  toAminoMsg(message: CapabilityOwners, useInterfaces: boolean = true): CapabilityOwnersAminoMsg {
     return {
       type: "cosmos-sdk/CapabilityOwners",
       value: CapabilityOwners.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: CapabilityOwnersProtoMsg, useInterfaces: boolean = false): CapabilityOwners {
+  fromProtoMsg(message: CapabilityOwnersProtoMsg, useInterfaces: boolean = true): CapabilityOwners {
     return CapabilityOwners.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CapabilityOwners): Uint8Array {

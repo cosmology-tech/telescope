@@ -67,7 +67,7 @@ export const UpdateFeeTokenProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): UpdateFeeTokenProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpdateFeeTokenProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateFeeTokenProposal();
@@ -134,14 +134,14 @@ export const UpdateFeeTokenProposal = {
       feetoken: object?.feetoken ? FeeToken.fromAmino(object.feetoken) : undefined
     };
   },
-  toAmino(message: UpdateFeeTokenProposal, useInterfaces: boolean = false): UpdateFeeTokenProposalAmino {
+  toAmino(message: UpdateFeeTokenProposal, useInterfaces: boolean = true): UpdateFeeTokenProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
     obj.feetoken = message.feetoken ? FeeToken.toAmino(message.feetoken, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: UpdateFeeTokenProposalProtoMsg, useInterfaces: boolean = false): UpdateFeeTokenProposal {
+  fromProtoMsg(message: UpdateFeeTokenProposalProtoMsg, useInterfaces: boolean = true): UpdateFeeTokenProposal {
     return UpdateFeeTokenProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpdateFeeTokenProposal): Uint8Array {

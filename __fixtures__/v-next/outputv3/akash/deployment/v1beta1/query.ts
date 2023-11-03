@@ -130,7 +130,7 @@ export const QueryDeploymentsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDeploymentsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDeploymentsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDeploymentsRequest();
@@ -190,13 +190,13 @@ export const QueryDeploymentsRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryDeploymentsRequest, useInterfaces: boolean = false): QueryDeploymentsRequestAmino {
+  toAmino(message: QueryDeploymentsRequest, useInterfaces: boolean = true): QueryDeploymentsRequestAmino {
     const obj: any = {};
     obj.filters = message.filters ? DeploymentFilters.toAmino(message.filters, useInterfaces) : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryDeploymentsRequestProtoMsg, useInterfaces: boolean = false): QueryDeploymentsRequest {
+  fromProtoMsg(message: QueryDeploymentsRequestProtoMsg, useInterfaces: boolean = true): QueryDeploymentsRequest {
     return QueryDeploymentsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDeploymentsRequest): Uint8Array {
@@ -226,7 +226,7 @@ export const QueryDeploymentsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDeploymentsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDeploymentsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDeploymentsResponse();
@@ -292,7 +292,7 @@ export const QueryDeploymentsResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryDeploymentsResponse, useInterfaces: boolean = false): QueryDeploymentsResponseAmino {
+  toAmino(message: QueryDeploymentsResponse, useInterfaces: boolean = true): QueryDeploymentsResponseAmino {
     const obj: any = {};
     if (message.deployments) {
       obj.deployments = message.deployments.map(e => e ? QueryDeploymentResponse.toAmino(e, useInterfaces) : undefined);
@@ -302,7 +302,7 @@ export const QueryDeploymentsResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryDeploymentsResponseProtoMsg, useInterfaces: boolean = false): QueryDeploymentsResponse {
+  fromProtoMsg(message: QueryDeploymentsResponseProtoMsg, useInterfaces: boolean = true): QueryDeploymentsResponse {
     return QueryDeploymentsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDeploymentsResponse): Uint8Array {
@@ -328,7 +328,7 @@ export const QueryDeploymentRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDeploymentRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDeploymentRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDeploymentRequest();
@@ -377,12 +377,12 @@ export const QueryDeploymentRequest = {
       id: object?.id ? DeploymentID.fromAmino(object.id) : undefined
     };
   },
-  toAmino(message: QueryDeploymentRequest, useInterfaces: boolean = false): QueryDeploymentRequestAmino {
+  toAmino(message: QueryDeploymentRequest, useInterfaces: boolean = true): QueryDeploymentRequestAmino {
     const obj: any = {};
     obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryDeploymentRequestProtoMsg, useInterfaces: boolean = false): QueryDeploymentRequest {
+  fromProtoMsg(message: QueryDeploymentRequestProtoMsg, useInterfaces: boolean = true): QueryDeploymentRequest {
     return QueryDeploymentRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDeploymentRequest): Uint8Array {
@@ -416,7 +416,7 @@ export const QueryDeploymentResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDeploymentResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDeploymentResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDeploymentResponse();
@@ -493,7 +493,7 @@ export const QueryDeploymentResponse = {
       escrowAccount: object?.escrow_account ? Account.fromAmino(object.escrow_account) : undefined
     };
   },
-  toAmino(message: QueryDeploymentResponse, useInterfaces: boolean = false): QueryDeploymentResponseAmino {
+  toAmino(message: QueryDeploymentResponse, useInterfaces: boolean = true): QueryDeploymentResponseAmino {
     const obj: any = {};
     obj.deployment = message.deployment ? Deployment.toAmino(message.deployment, useInterfaces) : undefined;
     if (message.groups) {
@@ -504,7 +504,7 @@ export const QueryDeploymentResponse = {
     obj.escrow_account = message.escrowAccount ? Account.toAmino(message.escrowAccount, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryDeploymentResponseProtoMsg, useInterfaces: boolean = false): QueryDeploymentResponse {
+  fromProtoMsg(message: QueryDeploymentResponseProtoMsg, useInterfaces: boolean = true): QueryDeploymentResponse {
     return QueryDeploymentResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDeploymentResponse): Uint8Array {
@@ -530,7 +530,7 @@ export const QueryGroupRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryGroupRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGroupRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupRequest();
@@ -579,12 +579,12 @@ export const QueryGroupRequest = {
       id: object?.id ? GroupID.fromAmino(object.id) : undefined
     };
   },
-  toAmino(message: QueryGroupRequest, useInterfaces: boolean = false): QueryGroupRequestAmino {
+  toAmino(message: QueryGroupRequest, useInterfaces: boolean = true): QueryGroupRequestAmino {
     const obj: any = {};
     obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryGroupRequestProtoMsg, useInterfaces: boolean = false): QueryGroupRequest {
+  fromProtoMsg(message: QueryGroupRequestProtoMsg, useInterfaces: boolean = true): QueryGroupRequest {
     return QueryGroupRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGroupRequest): Uint8Array {
@@ -610,7 +610,7 @@ export const QueryGroupResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryGroupResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGroupResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupResponse();
@@ -659,12 +659,12 @@ export const QueryGroupResponse = {
       group: object?.group ? Group.fromAmino(object.group) : undefined
     };
   },
-  toAmino(message: QueryGroupResponse, useInterfaces: boolean = false): QueryGroupResponseAmino {
+  toAmino(message: QueryGroupResponse, useInterfaces: boolean = true): QueryGroupResponseAmino {
     const obj: any = {};
     obj.group = message.group ? Group.toAmino(message.group, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryGroupResponseProtoMsg, useInterfaces: boolean = false): QueryGroupResponse {
+  fromProtoMsg(message: QueryGroupResponseProtoMsg, useInterfaces: boolean = true): QueryGroupResponse {
     return QueryGroupResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGroupResponse): Uint8Array {

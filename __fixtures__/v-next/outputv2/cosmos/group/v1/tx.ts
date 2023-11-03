@@ -809,7 +809,7 @@ export const MsgCreateGroup = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCreateGroup {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateGroup {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroup();
@@ -882,7 +882,7 @@ export const MsgCreateGroup = {
       metadata: object.metadata
     };
   },
-  toAmino(message: MsgCreateGroup, useInterfaces: boolean = false): MsgCreateGroupAmino {
+  toAmino(message: MsgCreateGroup, useInterfaces: boolean = true): MsgCreateGroupAmino {
     const obj: any = {};
     obj.admin = message.admin;
     if (message.members) {
@@ -896,13 +896,13 @@ export const MsgCreateGroup = {
   fromAminoMsg(object: MsgCreateGroupAminoMsg): MsgCreateGroup {
     return MsgCreateGroup.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreateGroup, useInterfaces: boolean = false): MsgCreateGroupAminoMsg {
+  toAminoMsg(message: MsgCreateGroup, useInterfaces: boolean = true): MsgCreateGroupAminoMsg {
     return {
       type: "cosmos-sdk/MsgCreateGroup",
       value: MsgCreateGroup.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgCreateGroupProtoMsg, useInterfaces: boolean = false): MsgCreateGroup {
+  fromProtoMsg(message: MsgCreateGroupProtoMsg, useInterfaces: boolean = true): MsgCreateGroup {
     return MsgCreateGroup.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateGroup): Uint8Array {
@@ -929,7 +929,7 @@ export const MsgCreateGroupResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCreateGroupResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateGroupResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupResponse();
@@ -978,7 +978,7 @@ export const MsgCreateGroupResponse = {
       groupId: BigInt(object.group_id)
     };
   },
-  toAmino(message: MsgCreateGroupResponse, useInterfaces: boolean = false): MsgCreateGroupResponseAmino {
+  toAmino(message: MsgCreateGroupResponse, useInterfaces: boolean = true): MsgCreateGroupResponseAmino {
     const obj: any = {};
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
     return obj;
@@ -986,13 +986,13 @@ export const MsgCreateGroupResponse = {
   fromAminoMsg(object: MsgCreateGroupResponseAminoMsg): MsgCreateGroupResponse {
     return MsgCreateGroupResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreateGroupResponse, useInterfaces: boolean = false): MsgCreateGroupResponseAminoMsg {
+  toAminoMsg(message: MsgCreateGroupResponse, useInterfaces: boolean = true): MsgCreateGroupResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgCreateGroupResponse",
       value: MsgCreateGroupResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgCreateGroupResponseProtoMsg, useInterfaces: boolean = false): MsgCreateGroupResponse {
+  fromProtoMsg(message: MsgCreateGroupResponseProtoMsg, useInterfaces: boolean = true): MsgCreateGroupResponse {
     return MsgCreateGroupResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateGroupResponse): Uint8Array {
@@ -1027,7 +1027,7 @@ export const MsgUpdateGroupMembers = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgUpdateGroupMembers {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateGroupMembers {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupMembers();
@@ -1102,7 +1102,7 @@ export const MsgUpdateGroupMembers = {
       memberUpdates: Array.isArray(object?.member_updates) ? object.member_updates.map((e: any) => Member.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgUpdateGroupMembers, useInterfaces: boolean = false): MsgUpdateGroupMembersAmino {
+  toAmino(message: MsgUpdateGroupMembers, useInterfaces: boolean = true): MsgUpdateGroupMembersAmino {
     const obj: any = {};
     obj.admin = message.admin;
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
@@ -1116,13 +1116,13 @@ export const MsgUpdateGroupMembers = {
   fromAminoMsg(object: MsgUpdateGroupMembersAminoMsg): MsgUpdateGroupMembers {
     return MsgUpdateGroupMembers.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUpdateGroupMembers, useInterfaces: boolean = false): MsgUpdateGroupMembersAminoMsg {
+  toAminoMsg(message: MsgUpdateGroupMembers, useInterfaces: boolean = true): MsgUpdateGroupMembersAminoMsg {
     return {
       type: "cosmos-sdk/MsgUpdateGroupMembers",
       value: MsgUpdateGroupMembers.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgUpdateGroupMembersProtoMsg, useInterfaces: boolean = false): MsgUpdateGroupMembers {
+  fromProtoMsg(message: MsgUpdateGroupMembersProtoMsg, useInterfaces: boolean = true): MsgUpdateGroupMembers {
     return MsgUpdateGroupMembers.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateGroupMembers): Uint8Array {
@@ -1144,7 +1144,7 @@ export const MsgUpdateGroupMembersResponse = {
   encode(_: MsgUpdateGroupMembersResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgUpdateGroupMembersResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateGroupMembersResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupMembersResponse();
@@ -1180,20 +1180,20 @@ export const MsgUpdateGroupMembersResponse = {
   fromAmino(_: MsgUpdateGroupMembersResponseAmino): MsgUpdateGroupMembersResponse {
     return {};
   },
-  toAmino(_: MsgUpdateGroupMembersResponse, useInterfaces: boolean = false): MsgUpdateGroupMembersResponseAmino {
+  toAmino(_: MsgUpdateGroupMembersResponse, useInterfaces: boolean = true): MsgUpdateGroupMembersResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgUpdateGroupMembersResponseAminoMsg): MsgUpdateGroupMembersResponse {
     return MsgUpdateGroupMembersResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUpdateGroupMembersResponse, useInterfaces: boolean = false): MsgUpdateGroupMembersResponseAminoMsg {
+  toAminoMsg(message: MsgUpdateGroupMembersResponse, useInterfaces: boolean = true): MsgUpdateGroupMembersResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgUpdateGroupMembersResponse",
       value: MsgUpdateGroupMembersResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgUpdateGroupMembersResponseProtoMsg, useInterfaces: boolean = false): MsgUpdateGroupMembersResponse {
+  fromProtoMsg(message: MsgUpdateGroupMembersResponseProtoMsg, useInterfaces: boolean = true): MsgUpdateGroupMembersResponse {
     return MsgUpdateGroupMembersResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateGroupMembersResponse): Uint8Array {
@@ -1228,7 +1228,7 @@ export const MsgUpdateGroupAdmin = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgUpdateGroupAdmin {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateGroupAdmin {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupAdmin();
@@ -1295,7 +1295,7 @@ export const MsgUpdateGroupAdmin = {
       newAdmin: object.new_admin
     };
   },
-  toAmino(message: MsgUpdateGroupAdmin, useInterfaces: boolean = false): MsgUpdateGroupAdminAmino {
+  toAmino(message: MsgUpdateGroupAdmin, useInterfaces: boolean = true): MsgUpdateGroupAdminAmino {
     const obj: any = {};
     obj.admin = message.admin;
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
@@ -1305,13 +1305,13 @@ export const MsgUpdateGroupAdmin = {
   fromAminoMsg(object: MsgUpdateGroupAdminAminoMsg): MsgUpdateGroupAdmin {
     return MsgUpdateGroupAdmin.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUpdateGroupAdmin, useInterfaces: boolean = false): MsgUpdateGroupAdminAminoMsg {
+  toAminoMsg(message: MsgUpdateGroupAdmin, useInterfaces: boolean = true): MsgUpdateGroupAdminAminoMsg {
     return {
       type: "cosmos-sdk/MsgUpdateGroupAdmin",
       value: MsgUpdateGroupAdmin.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgUpdateGroupAdminProtoMsg, useInterfaces: boolean = false): MsgUpdateGroupAdmin {
+  fromProtoMsg(message: MsgUpdateGroupAdminProtoMsg, useInterfaces: boolean = true): MsgUpdateGroupAdmin {
     return MsgUpdateGroupAdmin.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateGroupAdmin): Uint8Array {
@@ -1333,7 +1333,7 @@ export const MsgUpdateGroupAdminResponse = {
   encode(_: MsgUpdateGroupAdminResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgUpdateGroupAdminResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateGroupAdminResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupAdminResponse();
@@ -1369,20 +1369,20 @@ export const MsgUpdateGroupAdminResponse = {
   fromAmino(_: MsgUpdateGroupAdminResponseAmino): MsgUpdateGroupAdminResponse {
     return {};
   },
-  toAmino(_: MsgUpdateGroupAdminResponse, useInterfaces: boolean = false): MsgUpdateGroupAdminResponseAmino {
+  toAmino(_: MsgUpdateGroupAdminResponse, useInterfaces: boolean = true): MsgUpdateGroupAdminResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgUpdateGroupAdminResponseAminoMsg): MsgUpdateGroupAdminResponse {
     return MsgUpdateGroupAdminResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUpdateGroupAdminResponse, useInterfaces: boolean = false): MsgUpdateGroupAdminResponseAminoMsg {
+  toAminoMsg(message: MsgUpdateGroupAdminResponse, useInterfaces: boolean = true): MsgUpdateGroupAdminResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgUpdateGroupAdminResponse",
       value: MsgUpdateGroupAdminResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgUpdateGroupAdminResponseProtoMsg, useInterfaces: boolean = false): MsgUpdateGroupAdminResponse {
+  fromProtoMsg(message: MsgUpdateGroupAdminResponseProtoMsg, useInterfaces: boolean = true): MsgUpdateGroupAdminResponse {
     return MsgUpdateGroupAdminResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateGroupAdminResponse): Uint8Array {
@@ -1417,7 +1417,7 @@ export const MsgUpdateGroupMetadata = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgUpdateGroupMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateGroupMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupMetadata();
@@ -1484,7 +1484,7 @@ export const MsgUpdateGroupMetadata = {
       metadata: object.metadata
     };
   },
-  toAmino(message: MsgUpdateGroupMetadata, useInterfaces: boolean = false): MsgUpdateGroupMetadataAmino {
+  toAmino(message: MsgUpdateGroupMetadata, useInterfaces: boolean = true): MsgUpdateGroupMetadataAmino {
     const obj: any = {};
     obj.admin = message.admin;
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
@@ -1494,13 +1494,13 @@ export const MsgUpdateGroupMetadata = {
   fromAminoMsg(object: MsgUpdateGroupMetadataAminoMsg): MsgUpdateGroupMetadata {
     return MsgUpdateGroupMetadata.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUpdateGroupMetadata, useInterfaces: boolean = false): MsgUpdateGroupMetadataAminoMsg {
+  toAminoMsg(message: MsgUpdateGroupMetadata, useInterfaces: boolean = true): MsgUpdateGroupMetadataAminoMsg {
     return {
       type: "cosmos-sdk/MsgUpdateGroupMetadata",
       value: MsgUpdateGroupMetadata.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgUpdateGroupMetadataProtoMsg, useInterfaces: boolean = false): MsgUpdateGroupMetadata {
+  fromProtoMsg(message: MsgUpdateGroupMetadataProtoMsg, useInterfaces: boolean = true): MsgUpdateGroupMetadata {
     return MsgUpdateGroupMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateGroupMetadata): Uint8Array {
@@ -1522,7 +1522,7 @@ export const MsgUpdateGroupMetadataResponse = {
   encode(_: MsgUpdateGroupMetadataResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgUpdateGroupMetadataResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateGroupMetadataResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupMetadataResponse();
@@ -1558,20 +1558,20 @@ export const MsgUpdateGroupMetadataResponse = {
   fromAmino(_: MsgUpdateGroupMetadataResponseAmino): MsgUpdateGroupMetadataResponse {
     return {};
   },
-  toAmino(_: MsgUpdateGroupMetadataResponse, useInterfaces: boolean = false): MsgUpdateGroupMetadataResponseAmino {
+  toAmino(_: MsgUpdateGroupMetadataResponse, useInterfaces: boolean = true): MsgUpdateGroupMetadataResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgUpdateGroupMetadataResponseAminoMsg): MsgUpdateGroupMetadataResponse {
     return MsgUpdateGroupMetadataResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUpdateGroupMetadataResponse, useInterfaces: boolean = false): MsgUpdateGroupMetadataResponseAminoMsg {
+  toAminoMsg(message: MsgUpdateGroupMetadataResponse, useInterfaces: boolean = true): MsgUpdateGroupMetadataResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgUpdateGroupMetadataResponse",
       value: MsgUpdateGroupMetadataResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgUpdateGroupMetadataResponseProtoMsg, useInterfaces: boolean = false): MsgUpdateGroupMetadataResponse {
+  fromProtoMsg(message: MsgUpdateGroupMetadataResponseProtoMsg, useInterfaces: boolean = true): MsgUpdateGroupMetadataResponse {
     return MsgUpdateGroupMetadataResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateGroupMetadataResponse): Uint8Array {
@@ -1610,7 +1610,7 @@ export const MsgCreateGroupPolicy = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCreateGroupPolicy {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateGroupPolicy {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupPolicy();
@@ -1688,7 +1688,7 @@ export const MsgCreateGroupPolicy = {
       decisionPolicy: object?.decision_policy ? DecisionPolicy_FromAmino(object.decision_policy) : undefined
     };
   },
-  toAmino(message: MsgCreateGroupPolicy, useInterfaces: boolean = false): MsgCreateGroupPolicyAmino {
+  toAmino(message: MsgCreateGroupPolicy, useInterfaces: boolean = true): MsgCreateGroupPolicyAmino {
     const obj: any = {};
     obj.admin = message.admin;
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
@@ -1699,13 +1699,13 @@ export const MsgCreateGroupPolicy = {
   fromAminoMsg(object: MsgCreateGroupPolicyAminoMsg): MsgCreateGroupPolicy {
     return MsgCreateGroupPolicy.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreateGroupPolicy, useInterfaces: boolean = false): MsgCreateGroupPolicyAminoMsg {
+  toAminoMsg(message: MsgCreateGroupPolicy, useInterfaces: boolean = true): MsgCreateGroupPolicyAminoMsg {
     return {
       type: "cosmos-sdk/MsgCreateGroupPolicy",
       value: MsgCreateGroupPolicy.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgCreateGroupPolicyProtoMsg, useInterfaces: boolean = false): MsgCreateGroupPolicy {
+  fromProtoMsg(message: MsgCreateGroupPolicyProtoMsg, useInterfaces: boolean = true): MsgCreateGroupPolicy {
     return MsgCreateGroupPolicy.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateGroupPolicy): Uint8Array {
@@ -1732,7 +1732,7 @@ export const MsgCreateGroupPolicyResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCreateGroupPolicyResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateGroupPolicyResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupPolicyResponse();
@@ -1779,7 +1779,7 @@ export const MsgCreateGroupPolicyResponse = {
       address: object.address
     };
   },
-  toAmino(message: MsgCreateGroupPolicyResponse, useInterfaces: boolean = false): MsgCreateGroupPolicyResponseAmino {
+  toAmino(message: MsgCreateGroupPolicyResponse, useInterfaces: boolean = true): MsgCreateGroupPolicyResponseAmino {
     const obj: any = {};
     obj.address = message.address;
     return obj;
@@ -1787,13 +1787,13 @@ export const MsgCreateGroupPolicyResponse = {
   fromAminoMsg(object: MsgCreateGroupPolicyResponseAminoMsg): MsgCreateGroupPolicyResponse {
     return MsgCreateGroupPolicyResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreateGroupPolicyResponse, useInterfaces: boolean = false): MsgCreateGroupPolicyResponseAminoMsg {
+  toAminoMsg(message: MsgCreateGroupPolicyResponse, useInterfaces: boolean = true): MsgCreateGroupPolicyResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgCreateGroupPolicyResponse",
       value: MsgCreateGroupPolicyResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgCreateGroupPolicyResponseProtoMsg, useInterfaces: boolean = false): MsgCreateGroupPolicyResponse {
+  fromProtoMsg(message: MsgCreateGroupPolicyResponseProtoMsg, useInterfaces: boolean = true): MsgCreateGroupPolicyResponse {
     return MsgCreateGroupPolicyResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateGroupPolicyResponse): Uint8Array {
@@ -1828,7 +1828,7 @@ export const MsgUpdateGroupPolicyAdmin = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgUpdateGroupPolicyAdmin {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateGroupPolicyAdmin {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyAdmin();
@@ -1893,7 +1893,7 @@ export const MsgUpdateGroupPolicyAdmin = {
       newAdmin: object.new_admin
     };
   },
-  toAmino(message: MsgUpdateGroupPolicyAdmin, useInterfaces: boolean = false): MsgUpdateGroupPolicyAdminAmino {
+  toAmino(message: MsgUpdateGroupPolicyAdmin, useInterfaces: boolean = true): MsgUpdateGroupPolicyAdminAmino {
     const obj: any = {};
     obj.admin = message.admin;
     obj.address = message.address;
@@ -1903,13 +1903,13 @@ export const MsgUpdateGroupPolicyAdmin = {
   fromAminoMsg(object: MsgUpdateGroupPolicyAdminAminoMsg): MsgUpdateGroupPolicyAdmin {
     return MsgUpdateGroupPolicyAdmin.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUpdateGroupPolicyAdmin, useInterfaces: boolean = false): MsgUpdateGroupPolicyAdminAminoMsg {
+  toAminoMsg(message: MsgUpdateGroupPolicyAdmin, useInterfaces: boolean = true): MsgUpdateGroupPolicyAdminAminoMsg {
     return {
       type: "cosmos-sdk/MsgUpdateGroupPolicyAdmin",
       value: MsgUpdateGroupPolicyAdmin.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgUpdateGroupPolicyAdminProtoMsg, useInterfaces: boolean = false): MsgUpdateGroupPolicyAdmin {
+  fromProtoMsg(message: MsgUpdateGroupPolicyAdminProtoMsg, useInterfaces: boolean = true): MsgUpdateGroupPolicyAdmin {
     return MsgUpdateGroupPolicyAdmin.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateGroupPolicyAdmin): Uint8Array {
@@ -1956,7 +1956,7 @@ export const MsgCreateGroupWithPolicy = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCreateGroupWithPolicy {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateGroupWithPolicy {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupWithPolicy();
@@ -2058,7 +2058,7 @@ export const MsgCreateGroupWithPolicy = {
       decisionPolicy: object?.decision_policy ? DecisionPolicy_FromAmino(object.decision_policy) : undefined
     };
   },
-  toAmino(message: MsgCreateGroupWithPolicy, useInterfaces: boolean = false): MsgCreateGroupWithPolicyAmino {
+  toAmino(message: MsgCreateGroupWithPolicy, useInterfaces: boolean = true): MsgCreateGroupWithPolicyAmino {
     const obj: any = {};
     obj.admin = message.admin;
     if (message.members) {
@@ -2075,13 +2075,13 @@ export const MsgCreateGroupWithPolicy = {
   fromAminoMsg(object: MsgCreateGroupWithPolicyAminoMsg): MsgCreateGroupWithPolicy {
     return MsgCreateGroupWithPolicy.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreateGroupWithPolicy, useInterfaces: boolean = false): MsgCreateGroupWithPolicyAminoMsg {
+  toAminoMsg(message: MsgCreateGroupWithPolicy, useInterfaces: boolean = true): MsgCreateGroupWithPolicyAminoMsg {
     return {
       type: "cosmos-sdk/MsgCreateGroupWithPolicy",
       value: MsgCreateGroupWithPolicy.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgCreateGroupWithPolicyProtoMsg, useInterfaces: boolean = false): MsgCreateGroupWithPolicy {
+  fromProtoMsg(message: MsgCreateGroupWithPolicyProtoMsg, useInterfaces: boolean = true): MsgCreateGroupWithPolicy {
     return MsgCreateGroupWithPolicy.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateGroupWithPolicy): Uint8Array {
@@ -2112,7 +2112,7 @@ export const MsgCreateGroupWithPolicyResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCreateGroupWithPolicyResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateGroupWithPolicyResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupWithPolicyResponse();
@@ -2170,7 +2170,7 @@ export const MsgCreateGroupWithPolicyResponse = {
       groupPolicyAddress: object.group_policy_address
     };
   },
-  toAmino(message: MsgCreateGroupWithPolicyResponse, useInterfaces: boolean = false): MsgCreateGroupWithPolicyResponseAmino {
+  toAmino(message: MsgCreateGroupWithPolicyResponse, useInterfaces: boolean = true): MsgCreateGroupWithPolicyResponseAmino {
     const obj: any = {};
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
     obj.group_policy_address = message.groupPolicyAddress;
@@ -2179,13 +2179,13 @@ export const MsgCreateGroupWithPolicyResponse = {
   fromAminoMsg(object: MsgCreateGroupWithPolicyResponseAminoMsg): MsgCreateGroupWithPolicyResponse {
     return MsgCreateGroupWithPolicyResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreateGroupWithPolicyResponse, useInterfaces: boolean = false): MsgCreateGroupWithPolicyResponseAminoMsg {
+  toAminoMsg(message: MsgCreateGroupWithPolicyResponse, useInterfaces: boolean = true): MsgCreateGroupWithPolicyResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgCreateGroupWithPolicyResponse",
       value: MsgCreateGroupWithPolicyResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgCreateGroupWithPolicyResponseProtoMsg, useInterfaces: boolean = false): MsgCreateGroupWithPolicyResponse {
+  fromProtoMsg(message: MsgCreateGroupWithPolicyResponseProtoMsg, useInterfaces: boolean = true): MsgCreateGroupWithPolicyResponse {
     return MsgCreateGroupWithPolicyResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateGroupWithPolicyResponse): Uint8Array {
@@ -2207,7 +2207,7 @@ export const MsgUpdateGroupPolicyAdminResponse = {
   encode(_: MsgUpdateGroupPolicyAdminResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgUpdateGroupPolicyAdminResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateGroupPolicyAdminResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyAdminResponse();
@@ -2243,20 +2243,20 @@ export const MsgUpdateGroupPolicyAdminResponse = {
   fromAmino(_: MsgUpdateGroupPolicyAdminResponseAmino): MsgUpdateGroupPolicyAdminResponse {
     return {};
   },
-  toAmino(_: MsgUpdateGroupPolicyAdminResponse, useInterfaces: boolean = false): MsgUpdateGroupPolicyAdminResponseAmino {
+  toAmino(_: MsgUpdateGroupPolicyAdminResponse, useInterfaces: boolean = true): MsgUpdateGroupPolicyAdminResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgUpdateGroupPolicyAdminResponseAminoMsg): MsgUpdateGroupPolicyAdminResponse {
     return MsgUpdateGroupPolicyAdminResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUpdateGroupPolicyAdminResponse, useInterfaces: boolean = false): MsgUpdateGroupPolicyAdminResponseAminoMsg {
+  toAminoMsg(message: MsgUpdateGroupPolicyAdminResponse, useInterfaces: boolean = true): MsgUpdateGroupPolicyAdminResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgUpdateGroupPolicyAdminResponse",
       value: MsgUpdateGroupPolicyAdminResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgUpdateGroupPolicyAdminResponseProtoMsg, useInterfaces: boolean = false): MsgUpdateGroupPolicyAdminResponse {
+  fromProtoMsg(message: MsgUpdateGroupPolicyAdminResponseProtoMsg, useInterfaces: boolean = true): MsgUpdateGroupPolicyAdminResponse {
     return MsgUpdateGroupPolicyAdminResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateGroupPolicyAdminResponse): Uint8Array {
@@ -2291,7 +2291,7 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgUpdateGroupPolicyDecisionPolicy {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateGroupPolicyDecisionPolicy {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyDecisionPolicy();
@@ -2358,7 +2358,7 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
       decisionPolicy: object?.decision_policy ? DecisionPolicy_FromAmino(object.decision_policy) : undefined
     };
   },
-  toAmino(message: MsgUpdateGroupPolicyDecisionPolicy, useInterfaces: boolean = false): MsgUpdateGroupPolicyDecisionPolicyAmino {
+  toAmino(message: MsgUpdateGroupPolicyDecisionPolicy, useInterfaces: boolean = true): MsgUpdateGroupPolicyDecisionPolicyAmino {
     const obj: any = {};
     obj.admin = message.admin;
     obj.address = message.address;
@@ -2368,13 +2368,13 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
   fromAminoMsg(object: MsgUpdateGroupPolicyDecisionPolicyAminoMsg): MsgUpdateGroupPolicyDecisionPolicy {
     return MsgUpdateGroupPolicyDecisionPolicy.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUpdateGroupPolicyDecisionPolicy, useInterfaces: boolean = false): MsgUpdateGroupPolicyDecisionPolicyAminoMsg {
+  toAminoMsg(message: MsgUpdateGroupPolicyDecisionPolicy, useInterfaces: boolean = true): MsgUpdateGroupPolicyDecisionPolicyAminoMsg {
     return {
       type: "cosmos-sdk/MsgUpdateGroupPolicyDecisionPolicy",
       value: MsgUpdateGroupPolicyDecisionPolicy.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgUpdateGroupPolicyDecisionPolicyProtoMsg, useInterfaces: boolean = false): MsgUpdateGroupPolicyDecisionPolicy {
+  fromProtoMsg(message: MsgUpdateGroupPolicyDecisionPolicyProtoMsg, useInterfaces: boolean = true): MsgUpdateGroupPolicyDecisionPolicy {
     return MsgUpdateGroupPolicyDecisionPolicy.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateGroupPolicyDecisionPolicy): Uint8Array {
@@ -2396,7 +2396,7 @@ export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
   encode(_: MsgUpdateGroupPolicyDecisionPolicyResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgUpdateGroupPolicyDecisionPolicyResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateGroupPolicyDecisionPolicyResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyDecisionPolicyResponse();
@@ -2432,20 +2432,20 @@ export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
   fromAmino(_: MsgUpdateGroupPolicyDecisionPolicyResponseAmino): MsgUpdateGroupPolicyDecisionPolicyResponse {
     return {};
   },
-  toAmino(_: MsgUpdateGroupPolicyDecisionPolicyResponse, useInterfaces: boolean = false): MsgUpdateGroupPolicyDecisionPolicyResponseAmino {
+  toAmino(_: MsgUpdateGroupPolicyDecisionPolicyResponse, useInterfaces: boolean = true): MsgUpdateGroupPolicyDecisionPolicyResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgUpdateGroupPolicyDecisionPolicyResponseAminoMsg): MsgUpdateGroupPolicyDecisionPolicyResponse {
     return MsgUpdateGroupPolicyDecisionPolicyResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUpdateGroupPolicyDecisionPolicyResponse, useInterfaces: boolean = false): MsgUpdateGroupPolicyDecisionPolicyResponseAminoMsg {
+  toAminoMsg(message: MsgUpdateGroupPolicyDecisionPolicyResponse, useInterfaces: boolean = true): MsgUpdateGroupPolicyDecisionPolicyResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgUpdateGroupPolicyDecisionPolicyResponse",
       value: MsgUpdateGroupPolicyDecisionPolicyResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgUpdateGroupPolicyDecisionPolicyResponseProtoMsg, useInterfaces: boolean = false): MsgUpdateGroupPolicyDecisionPolicyResponse {
+  fromProtoMsg(message: MsgUpdateGroupPolicyDecisionPolicyResponseProtoMsg, useInterfaces: boolean = true): MsgUpdateGroupPolicyDecisionPolicyResponse {
     return MsgUpdateGroupPolicyDecisionPolicyResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateGroupPolicyDecisionPolicyResponse): Uint8Array {
@@ -2480,7 +2480,7 @@ export const MsgUpdateGroupPolicyMetadata = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgUpdateGroupPolicyMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateGroupPolicyMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyMetadata();
@@ -2545,7 +2545,7 @@ export const MsgUpdateGroupPolicyMetadata = {
       metadata: object.metadata
     };
   },
-  toAmino(message: MsgUpdateGroupPolicyMetadata, useInterfaces: boolean = false): MsgUpdateGroupPolicyMetadataAmino {
+  toAmino(message: MsgUpdateGroupPolicyMetadata, useInterfaces: boolean = true): MsgUpdateGroupPolicyMetadataAmino {
     const obj: any = {};
     obj.admin = message.admin;
     obj.address = message.address;
@@ -2555,13 +2555,13 @@ export const MsgUpdateGroupPolicyMetadata = {
   fromAminoMsg(object: MsgUpdateGroupPolicyMetadataAminoMsg): MsgUpdateGroupPolicyMetadata {
     return MsgUpdateGroupPolicyMetadata.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUpdateGroupPolicyMetadata, useInterfaces: boolean = false): MsgUpdateGroupPolicyMetadataAminoMsg {
+  toAminoMsg(message: MsgUpdateGroupPolicyMetadata, useInterfaces: boolean = true): MsgUpdateGroupPolicyMetadataAminoMsg {
     return {
       type: "cosmos-sdk/MsgUpdateGroupPolicyMetadata",
       value: MsgUpdateGroupPolicyMetadata.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgUpdateGroupPolicyMetadataProtoMsg, useInterfaces: boolean = false): MsgUpdateGroupPolicyMetadata {
+  fromProtoMsg(message: MsgUpdateGroupPolicyMetadataProtoMsg, useInterfaces: boolean = true): MsgUpdateGroupPolicyMetadata {
     return MsgUpdateGroupPolicyMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateGroupPolicyMetadata): Uint8Array {
@@ -2583,7 +2583,7 @@ export const MsgUpdateGroupPolicyMetadataResponse = {
   encode(_: MsgUpdateGroupPolicyMetadataResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgUpdateGroupPolicyMetadataResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateGroupPolicyMetadataResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyMetadataResponse();
@@ -2619,20 +2619,20 @@ export const MsgUpdateGroupPolicyMetadataResponse = {
   fromAmino(_: MsgUpdateGroupPolicyMetadataResponseAmino): MsgUpdateGroupPolicyMetadataResponse {
     return {};
   },
-  toAmino(_: MsgUpdateGroupPolicyMetadataResponse, useInterfaces: boolean = false): MsgUpdateGroupPolicyMetadataResponseAmino {
+  toAmino(_: MsgUpdateGroupPolicyMetadataResponse, useInterfaces: boolean = true): MsgUpdateGroupPolicyMetadataResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgUpdateGroupPolicyMetadataResponseAminoMsg): MsgUpdateGroupPolicyMetadataResponse {
     return MsgUpdateGroupPolicyMetadataResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUpdateGroupPolicyMetadataResponse, useInterfaces: boolean = false): MsgUpdateGroupPolicyMetadataResponseAminoMsg {
+  toAminoMsg(message: MsgUpdateGroupPolicyMetadataResponse, useInterfaces: boolean = true): MsgUpdateGroupPolicyMetadataResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgUpdateGroupPolicyMetadataResponse",
       value: MsgUpdateGroupPolicyMetadataResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgUpdateGroupPolicyMetadataResponseProtoMsg, useInterfaces: boolean = false): MsgUpdateGroupPolicyMetadataResponse {
+  fromProtoMsg(message: MsgUpdateGroupPolicyMetadataResponseProtoMsg, useInterfaces: boolean = true): MsgUpdateGroupPolicyMetadataResponse {
     return MsgUpdateGroupPolicyMetadataResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateGroupPolicyMetadataResponse): Uint8Array {
@@ -2675,7 +2675,7 @@ export const MsgSubmitProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSubmitProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSubmitProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitProposal();
@@ -2774,7 +2774,7 @@ export const MsgSubmitProposal = {
       exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
     };
   },
-  toAmino(message: MsgSubmitProposal, useInterfaces: boolean = false): MsgSubmitProposalAmino {
+  toAmino(message: MsgSubmitProposal, useInterfaces: boolean = true): MsgSubmitProposalAmino {
     const obj: any = {};
     obj.address = message.address;
     if (message.proposers) {
@@ -2794,13 +2794,13 @@ export const MsgSubmitProposal = {
   fromAminoMsg(object: MsgSubmitProposalAminoMsg): MsgSubmitProposal {
     return MsgSubmitProposal.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgSubmitProposal, useInterfaces: boolean = false): MsgSubmitProposalAminoMsg {
+  toAminoMsg(message: MsgSubmitProposal, useInterfaces: boolean = true): MsgSubmitProposalAminoMsg {
     return {
       type: "cosmos-sdk/group/MsgSubmitProposal",
       value: MsgSubmitProposal.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgSubmitProposalProtoMsg, useInterfaces: boolean = false): MsgSubmitProposal {
+  fromProtoMsg(message: MsgSubmitProposalProtoMsg, useInterfaces: boolean = true): MsgSubmitProposal {
     return MsgSubmitProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSubmitProposal): Uint8Array {
@@ -2827,7 +2827,7 @@ export const MsgSubmitProposalResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSubmitProposalResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSubmitProposalResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitProposalResponse();
@@ -2876,7 +2876,7 @@ export const MsgSubmitProposalResponse = {
       proposalId: BigInt(object.proposal_id)
     };
   },
-  toAmino(message: MsgSubmitProposalResponse, useInterfaces: boolean = false): MsgSubmitProposalResponseAmino {
+  toAmino(message: MsgSubmitProposalResponse, useInterfaces: boolean = true): MsgSubmitProposalResponseAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     return obj;
@@ -2884,13 +2884,13 @@ export const MsgSubmitProposalResponse = {
   fromAminoMsg(object: MsgSubmitProposalResponseAminoMsg): MsgSubmitProposalResponse {
     return MsgSubmitProposalResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgSubmitProposalResponse, useInterfaces: boolean = false): MsgSubmitProposalResponseAminoMsg {
+  toAminoMsg(message: MsgSubmitProposalResponse, useInterfaces: boolean = true): MsgSubmitProposalResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgSubmitProposalResponse",
       value: MsgSubmitProposalResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgSubmitProposalResponseProtoMsg, useInterfaces: boolean = false): MsgSubmitProposalResponse {
+  fromProtoMsg(message: MsgSubmitProposalResponseProtoMsg, useInterfaces: boolean = true): MsgSubmitProposalResponse {
     return MsgSubmitProposalResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSubmitProposalResponse): Uint8Array {
@@ -2921,7 +2921,7 @@ export const MsgWithdrawProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgWithdrawProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgWithdrawProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawProposal();
@@ -2979,7 +2979,7 @@ export const MsgWithdrawProposal = {
       address: object.address
     };
   },
-  toAmino(message: MsgWithdrawProposal, useInterfaces: boolean = false): MsgWithdrawProposalAmino {
+  toAmino(message: MsgWithdrawProposal, useInterfaces: boolean = true): MsgWithdrawProposalAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     obj.address = message.address;
@@ -2988,13 +2988,13 @@ export const MsgWithdrawProposal = {
   fromAminoMsg(object: MsgWithdrawProposalAminoMsg): MsgWithdrawProposal {
     return MsgWithdrawProposal.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgWithdrawProposal, useInterfaces: boolean = false): MsgWithdrawProposalAminoMsg {
+  toAminoMsg(message: MsgWithdrawProposal, useInterfaces: boolean = true): MsgWithdrawProposalAminoMsg {
     return {
       type: "cosmos-sdk/group/MsgWithdrawProposal",
       value: MsgWithdrawProposal.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgWithdrawProposalProtoMsg, useInterfaces: boolean = false): MsgWithdrawProposal {
+  fromProtoMsg(message: MsgWithdrawProposalProtoMsg, useInterfaces: boolean = true): MsgWithdrawProposal {
     return MsgWithdrawProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgWithdrawProposal): Uint8Array {
@@ -3016,7 +3016,7 @@ export const MsgWithdrawProposalResponse = {
   encode(_: MsgWithdrawProposalResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgWithdrawProposalResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgWithdrawProposalResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawProposalResponse();
@@ -3052,20 +3052,20 @@ export const MsgWithdrawProposalResponse = {
   fromAmino(_: MsgWithdrawProposalResponseAmino): MsgWithdrawProposalResponse {
     return {};
   },
-  toAmino(_: MsgWithdrawProposalResponse, useInterfaces: boolean = false): MsgWithdrawProposalResponseAmino {
+  toAmino(_: MsgWithdrawProposalResponse, useInterfaces: boolean = true): MsgWithdrawProposalResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgWithdrawProposalResponseAminoMsg): MsgWithdrawProposalResponse {
     return MsgWithdrawProposalResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgWithdrawProposalResponse, useInterfaces: boolean = false): MsgWithdrawProposalResponseAminoMsg {
+  toAminoMsg(message: MsgWithdrawProposalResponse, useInterfaces: boolean = true): MsgWithdrawProposalResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgWithdrawProposalResponse",
       value: MsgWithdrawProposalResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgWithdrawProposalResponseProtoMsg, useInterfaces: boolean = false): MsgWithdrawProposalResponse {
+  fromProtoMsg(message: MsgWithdrawProposalResponseProtoMsg, useInterfaces: boolean = true): MsgWithdrawProposalResponse {
     return MsgWithdrawProposalResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgWithdrawProposalResponse): Uint8Array {
@@ -3108,7 +3108,7 @@ export const MsgVote = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgVote {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgVote {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVote();
@@ -3193,7 +3193,7 @@ export const MsgVote = {
       exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
     };
   },
-  toAmino(message: MsgVote, useInterfaces: boolean = false): MsgVoteAmino {
+  toAmino(message: MsgVote, useInterfaces: boolean = true): MsgVoteAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     obj.voter = message.voter;
@@ -3205,13 +3205,13 @@ export const MsgVote = {
   fromAminoMsg(object: MsgVoteAminoMsg): MsgVote {
     return MsgVote.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgVote, useInterfaces: boolean = false): MsgVoteAminoMsg {
+  toAminoMsg(message: MsgVote, useInterfaces: boolean = true): MsgVoteAminoMsg {
     return {
       type: "cosmos-sdk/group/MsgVote",
       value: MsgVote.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgVoteProtoMsg, useInterfaces: boolean = false): MsgVote {
+  fromProtoMsg(message: MsgVoteProtoMsg, useInterfaces: boolean = true): MsgVote {
     return MsgVote.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgVote): Uint8Array {
@@ -3233,7 +3233,7 @@ export const MsgVoteResponse = {
   encode(_: MsgVoteResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgVoteResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgVoteResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVoteResponse();
@@ -3269,20 +3269,20 @@ export const MsgVoteResponse = {
   fromAmino(_: MsgVoteResponseAmino): MsgVoteResponse {
     return {};
   },
-  toAmino(_: MsgVoteResponse, useInterfaces: boolean = false): MsgVoteResponseAmino {
+  toAmino(_: MsgVoteResponse, useInterfaces: boolean = true): MsgVoteResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgVoteResponseAminoMsg): MsgVoteResponse {
     return MsgVoteResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgVoteResponse, useInterfaces: boolean = false): MsgVoteResponseAminoMsg {
+  toAminoMsg(message: MsgVoteResponse, useInterfaces: boolean = true): MsgVoteResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgVoteResponse",
       value: MsgVoteResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgVoteResponseProtoMsg, useInterfaces: boolean = false): MsgVoteResponse {
+  fromProtoMsg(message: MsgVoteResponseProtoMsg, useInterfaces: boolean = true): MsgVoteResponse {
     return MsgVoteResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgVoteResponse): Uint8Array {
@@ -3313,7 +3313,7 @@ export const MsgExec = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgExec {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgExec {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExec();
@@ -3371,7 +3371,7 @@ export const MsgExec = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgExec, useInterfaces: boolean = false): MsgExecAmino {
+  toAmino(message: MsgExec, useInterfaces: boolean = true): MsgExecAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     obj.signer = message.signer;
@@ -3380,13 +3380,13 @@ export const MsgExec = {
   fromAminoMsg(object: MsgExecAminoMsg): MsgExec {
     return MsgExec.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgExec, useInterfaces: boolean = false): MsgExecAminoMsg {
+  toAminoMsg(message: MsgExec, useInterfaces: boolean = true): MsgExecAminoMsg {
     return {
       type: "cosmos-sdk/group/MsgExec",
       value: MsgExec.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgExecProtoMsg, useInterfaces: boolean = false): MsgExec {
+  fromProtoMsg(message: MsgExecProtoMsg, useInterfaces: boolean = true): MsgExec {
     return MsgExec.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgExec): Uint8Array {
@@ -3408,7 +3408,7 @@ export const MsgExecResponse = {
   encode(_: MsgExecResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgExecResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgExecResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExecResponse();
@@ -3444,20 +3444,20 @@ export const MsgExecResponse = {
   fromAmino(_: MsgExecResponseAmino): MsgExecResponse {
     return {};
   },
-  toAmino(_: MsgExecResponse, useInterfaces: boolean = false): MsgExecResponseAmino {
+  toAmino(_: MsgExecResponse, useInterfaces: boolean = true): MsgExecResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgExecResponseAminoMsg): MsgExecResponse {
     return MsgExecResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgExecResponse, useInterfaces: boolean = false): MsgExecResponseAminoMsg {
+  toAminoMsg(message: MsgExecResponse, useInterfaces: boolean = true): MsgExecResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgExecResponse",
       value: MsgExecResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgExecResponseProtoMsg, useInterfaces: boolean = false): MsgExecResponse {
+  fromProtoMsg(message: MsgExecResponseProtoMsg, useInterfaces: boolean = true): MsgExecResponse {
     return MsgExecResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgExecResponse): Uint8Array {
@@ -3488,7 +3488,7 @@ export const MsgLeaveGroup = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgLeaveGroup {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgLeaveGroup {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLeaveGroup();
@@ -3546,7 +3546,7 @@ export const MsgLeaveGroup = {
       groupId: BigInt(object.group_id)
     };
   },
-  toAmino(message: MsgLeaveGroup, useInterfaces: boolean = false): MsgLeaveGroupAmino {
+  toAmino(message: MsgLeaveGroup, useInterfaces: boolean = true): MsgLeaveGroupAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
@@ -3555,13 +3555,13 @@ export const MsgLeaveGroup = {
   fromAminoMsg(object: MsgLeaveGroupAminoMsg): MsgLeaveGroup {
     return MsgLeaveGroup.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgLeaveGroup, useInterfaces: boolean = false): MsgLeaveGroupAminoMsg {
+  toAminoMsg(message: MsgLeaveGroup, useInterfaces: boolean = true): MsgLeaveGroupAminoMsg {
     return {
       type: "cosmos-sdk/group/MsgLeaveGroup",
       value: MsgLeaveGroup.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgLeaveGroupProtoMsg, useInterfaces: boolean = false): MsgLeaveGroup {
+  fromProtoMsg(message: MsgLeaveGroupProtoMsg, useInterfaces: boolean = true): MsgLeaveGroup {
     return MsgLeaveGroup.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgLeaveGroup): Uint8Array {
@@ -3583,7 +3583,7 @@ export const MsgLeaveGroupResponse = {
   encode(_: MsgLeaveGroupResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgLeaveGroupResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgLeaveGroupResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLeaveGroupResponse();
@@ -3619,20 +3619,20 @@ export const MsgLeaveGroupResponse = {
   fromAmino(_: MsgLeaveGroupResponseAmino): MsgLeaveGroupResponse {
     return {};
   },
-  toAmino(_: MsgLeaveGroupResponse, useInterfaces: boolean = false): MsgLeaveGroupResponseAmino {
+  toAmino(_: MsgLeaveGroupResponse, useInterfaces: boolean = true): MsgLeaveGroupResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgLeaveGroupResponseAminoMsg): MsgLeaveGroupResponse {
     return MsgLeaveGroupResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgLeaveGroupResponse, useInterfaces: boolean = false): MsgLeaveGroupResponseAminoMsg {
+  toAminoMsg(message: MsgLeaveGroupResponse, useInterfaces: boolean = true): MsgLeaveGroupResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgLeaveGroupResponse",
       value: MsgLeaveGroupResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgLeaveGroupResponseProtoMsg, useInterfaces: boolean = false): MsgLeaveGroupResponse {
+  fromProtoMsg(message: MsgLeaveGroupResponseProtoMsg, useInterfaces: boolean = true): MsgLeaveGroupResponse {
     return MsgLeaveGroupResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgLeaveGroupResponse): Uint8Array {
@@ -3673,7 +3673,7 @@ export const DecisionPolicy_FromAmino = (content: AnyAmino) => {
       return Any.fromAmino(content);
   }
 };
-export const DecisionPolicy_ToAmino = (content: Any, useInterfaces: boolean = false) => {
+export const DecisionPolicy_ToAmino = (content: Any, useInterfaces: boolean = true) => {
   switch (content.typeUrl) {
     case "/cosmos.group.v1.ThresholdDecisionPolicy":
       return {

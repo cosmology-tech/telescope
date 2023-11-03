@@ -60,7 +60,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -131,14 +131,14 @@ export const GenesisState = {
       channelGenesis: object?.channel_genesis ? GenesisState3.fromAmino(object.channel_genesis) : undefined
     };
   },
-  toAmino(message: GenesisState, useInterfaces: boolean = false): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     obj.client_genesis = message.clientGenesis ? GenesisState1.toAmino(message.clientGenesis, useInterfaces) : undefined;
     obj.connection_genesis = message.connectionGenesis ? GenesisState2.toAmino(message.connectionGenesis, useInterfaces) : undefined;
     obj.channel_genesis = message.channelGenesis ? GenesisState3.toAmino(message.channelGenesis, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = false): GenesisState {
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
     return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {

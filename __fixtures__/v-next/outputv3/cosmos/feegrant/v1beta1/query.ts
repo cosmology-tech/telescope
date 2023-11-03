@@ -150,7 +150,7 @@ export const QueryAllowanceRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAllowanceRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAllowanceRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowanceRequest();
@@ -206,13 +206,13 @@ export const QueryAllowanceRequest = {
       grantee: object.grantee
     };
   },
-  toAmino(message: QueryAllowanceRequest, useInterfaces: boolean = false): QueryAllowanceRequestAmino {
+  toAmino(message: QueryAllowanceRequest, useInterfaces: boolean = true): QueryAllowanceRequestAmino {
     const obj: any = {};
     obj.granter = message.granter;
     obj.grantee = message.grantee;
     return obj;
   },
-  fromProtoMsg(message: QueryAllowanceRequestProtoMsg, useInterfaces: boolean = false): QueryAllowanceRequest {
+  fromProtoMsg(message: QueryAllowanceRequestProtoMsg, useInterfaces: boolean = true): QueryAllowanceRequest {
     return QueryAllowanceRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAllowanceRequest): Uint8Array {
@@ -239,7 +239,7 @@ export const QueryAllowanceResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAllowanceResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAllowanceResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowanceResponse();
@@ -288,12 +288,12 @@ export const QueryAllowanceResponse = {
       allowance: object?.allowance ? Grant.fromAmino(object.allowance) : undefined
     };
   },
-  toAmino(message: QueryAllowanceResponse, useInterfaces: boolean = false): QueryAllowanceResponseAmino {
+  toAmino(message: QueryAllowanceResponse, useInterfaces: boolean = true): QueryAllowanceResponseAmino {
     const obj: any = {};
     obj.allowance = message.allowance ? Grant.toAmino(message.allowance, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryAllowanceResponseProtoMsg, useInterfaces: boolean = false): QueryAllowanceResponse {
+  fromProtoMsg(message: QueryAllowanceResponseProtoMsg, useInterfaces: boolean = true): QueryAllowanceResponse {
     return QueryAllowanceResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAllowanceResponse): Uint8Array {
@@ -324,7 +324,7 @@ export const QueryAllowancesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAllowancesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAllowancesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowancesRequest();
@@ -382,13 +382,13 @@ export const QueryAllowancesRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryAllowancesRequest, useInterfaces: boolean = false): QueryAllowancesRequestAmino {
+  toAmino(message: QueryAllowancesRequest, useInterfaces: boolean = true): QueryAllowancesRequestAmino {
     const obj: any = {};
     obj.grantee = message.grantee;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryAllowancesRequestProtoMsg, useInterfaces: boolean = false): QueryAllowancesRequest {
+  fromProtoMsg(message: QueryAllowancesRequestProtoMsg, useInterfaces: boolean = true): QueryAllowancesRequest {
     return QueryAllowancesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAllowancesRequest): Uint8Array {
@@ -419,7 +419,7 @@ export const QueryAllowancesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAllowancesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAllowancesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowancesResponse();
@@ -485,7 +485,7 @@ export const QueryAllowancesResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryAllowancesResponse, useInterfaces: boolean = false): QueryAllowancesResponseAmino {
+  toAmino(message: QueryAllowancesResponse, useInterfaces: boolean = true): QueryAllowancesResponseAmino {
     const obj: any = {};
     if (message.allowances) {
       obj.allowances = message.allowances.map(e => e ? Grant.toAmino(e, useInterfaces) : undefined);
@@ -495,7 +495,7 @@ export const QueryAllowancesResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryAllowancesResponseProtoMsg, useInterfaces: boolean = false): QueryAllowancesResponse {
+  fromProtoMsg(message: QueryAllowancesResponseProtoMsg, useInterfaces: boolean = true): QueryAllowancesResponse {
     return QueryAllowancesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAllowancesResponse): Uint8Array {
@@ -526,7 +526,7 @@ export const QueryAllowancesByGranterRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAllowancesByGranterRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAllowancesByGranterRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowancesByGranterRequest();
@@ -584,13 +584,13 @@ export const QueryAllowancesByGranterRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryAllowancesByGranterRequest, useInterfaces: boolean = false): QueryAllowancesByGranterRequestAmino {
+  toAmino(message: QueryAllowancesByGranterRequest, useInterfaces: boolean = true): QueryAllowancesByGranterRequestAmino {
     const obj: any = {};
     obj.granter = message.granter;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryAllowancesByGranterRequestProtoMsg, useInterfaces: boolean = false): QueryAllowancesByGranterRequest {
+  fromProtoMsg(message: QueryAllowancesByGranterRequestProtoMsg, useInterfaces: boolean = true): QueryAllowancesByGranterRequest {
     return QueryAllowancesByGranterRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAllowancesByGranterRequest): Uint8Array {
@@ -621,7 +621,7 @@ export const QueryAllowancesByGranterResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAllowancesByGranterResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAllowancesByGranterResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowancesByGranterResponse();
@@ -687,7 +687,7 @@ export const QueryAllowancesByGranterResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryAllowancesByGranterResponse, useInterfaces: boolean = false): QueryAllowancesByGranterResponseAmino {
+  toAmino(message: QueryAllowancesByGranterResponse, useInterfaces: boolean = true): QueryAllowancesByGranterResponseAmino {
     const obj: any = {};
     if (message.allowances) {
       obj.allowances = message.allowances.map(e => e ? Grant.toAmino(e, useInterfaces) : undefined);
@@ -697,7 +697,7 @@ export const QueryAllowancesByGranterResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryAllowancesByGranterResponseProtoMsg, useInterfaces: boolean = false): QueryAllowancesByGranterResponse {
+  fromProtoMsg(message: QueryAllowancesByGranterResponseProtoMsg, useInterfaces: boolean = true): QueryAllowancesByGranterResponse {
     return QueryAllowancesByGranterResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAllowancesByGranterResponse): Uint8Array {

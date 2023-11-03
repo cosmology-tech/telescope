@@ -497,7 +497,7 @@ export const AllocateQuotaRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AllocateQuotaRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AllocateQuotaRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllocateQuotaRequest();
@@ -564,14 +564,14 @@ export const AllocateQuotaRequest = {
       serviceConfigId: object.service_config_id
     };
   },
-  toAmino(message: AllocateQuotaRequest, useInterfaces: boolean = false): AllocateQuotaRequestAmino {
+  toAmino(message: AllocateQuotaRequest, useInterfaces: boolean = true): AllocateQuotaRequestAmino {
     const obj: any = {};
     obj.service_name = message.serviceName;
     obj.allocate_operation = message.allocateOperation ? QuotaOperation.toAmino(message.allocateOperation, useInterfaces) : undefined;
     obj.service_config_id = message.serviceConfigId;
     return obj;
   },
-  fromProtoMsg(message: AllocateQuotaRequestProtoMsg, useInterfaces: boolean = false): AllocateQuotaRequest {
+  fromProtoMsg(message: AllocateQuotaRequestProtoMsg, useInterfaces: boolean = true): AllocateQuotaRequest {
     return AllocateQuotaRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AllocateQuotaRequest): Uint8Array {
@@ -600,7 +600,7 @@ export const QuotaOperation_LabelsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QuotaOperation_LabelsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuotaOperation_LabelsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaOperation_LabelsEntry();
@@ -656,13 +656,13 @@ export const QuotaOperation_LabelsEntry = {
       value: object.value
     };
   },
-  toAmino(message: QuotaOperation_LabelsEntry, useInterfaces: boolean = false): QuotaOperation_LabelsEntryAmino {
+  toAmino(message: QuotaOperation_LabelsEntry, useInterfaces: boolean = true): QuotaOperation_LabelsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
     return obj;
   },
-  fromProtoMsg(message: QuotaOperation_LabelsEntryProtoMsg, useInterfaces: boolean = false): QuotaOperation_LabelsEntry {
+  fromProtoMsg(message: QuotaOperation_LabelsEntryProtoMsg, useInterfaces: boolean = true): QuotaOperation_LabelsEntry {
     return QuotaOperation_LabelsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuotaOperation_LabelsEntry): Uint8Array {
@@ -705,7 +705,7 @@ export const QuotaOperation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QuotaOperation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuotaOperation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaOperation();
@@ -840,7 +840,7 @@ export const QuotaOperation = {
       quotaMode: isSet(object.quota_mode) ? quotaOperation_QuotaModeFromJSON(object.quota_mode) : -1
     };
   },
-  toAmino(message: QuotaOperation, useInterfaces: boolean = false): QuotaOperationAmino {
+  toAmino(message: QuotaOperation, useInterfaces: boolean = true): QuotaOperationAmino {
     const obj: any = {};
     obj.operation_id = message.operationId;
     obj.method_name = message.methodName;
@@ -859,7 +859,7 @@ export const QuotaOperation = {
     obj.quota_mode = message.quotaMode;
     return obj;
   },
-  fromProtoMsg(message: QuotaOperationProtoMsg, useInterfaces: boolean = false): QuotaOperation {
+  fromProtoMsg(message: QuotaOperationProtoMsg, useInterfaces: boolean = true): QuotaOperation {
     return QuotaOperation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuotaOperation): Uint8Array {
@@ -897,7 +897,7 @@ export const AllocateQuotaResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AllocateQuotaResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AllocateQuotaResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllocateQuotaResponse();
@@ -987,7 +987,7 @@ export const AllocateQuotaResponse = {
       serviceConfigId: object.service_config_id
     };
   },
-  toAmino(message: AllocateQuotaResponse, useInterfaces: boolean = false): AllocateQuotaResponseAmino {
+  toAmino(message: AllocateQuotaResponse, useInterfaces: boolean = true): AllocateQuotaResponseAmino {
     const obj: any = {};
     obj.operation_id = message.operationId;
     if (message.allocateErrors) {
@@ -1003,7 +1003,7 @@ export const AllocateQuotaResponse = {
     obj.service_config_id = message.serviceConfigId;
     return obj;
   },
-  fromProtoMsg(message: AllocateQuotaResponseProtoMsg, useInterfaces: boolean = false): AllocateQuotaResponse {
+  fromProtoMsg(message: AllocateQuotaResponseProtoMsg, useInterfaces: boolean = true): AllocateQuotaResponse {
     return AllocateQuotaResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AllocateQuotaResponse): Uint8Array {
@@ -1041,7 +1041,7 @@ export const QuotaError = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QuotaError {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuotaError {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaError();
@@ -1117,7 +1117,7 @@ export const QuotaError = {
       status: object?.status ? Status.fromAmino(object.status) : undefined
     };
   },
-  toAmino(message: QuotaError, useInterfaces: boolean = false): QuotaErrorAmino {
+  toAmino(message: QuotaError, useInterfaces: boolean = true): QuotaErrorAmino {
     const obj: any = {};
     obj.code = message.code;
     obj.subject = message.subject;
@@ -1125,7 +1125,7 @@ export const QuotaError = {
     obj.status = message.status ? Status.toAmino(message.status, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QuotaErrorProtoMsg, useInterfaces: boolean = false): QuotaError {
+  fromProtoMsg(message: QuotaErrorProtoMsg, useInterfaces: boolean = true): QuotaError {
     return QuotaError.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuotaError): Uint8Array {

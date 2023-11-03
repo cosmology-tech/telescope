@@ -137,7 +137,7 @@ export const Proof = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Proof {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Proof {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProof();
@@ -223,7 +223,7 @@ export const Proof = {
       aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => e) : []
     };
   },
-  toAmino(message: Proof, useInterfaces: boolean = false): ProofAmino {
+  toAmino(message: Proof, useInterfaces: boolean = true): ProofAmino {
     const obj: any = {};
     obj.total = message.total ? message.total.toString() : undefined;
     obj.index = message.index ? message.index.toString() : undefined;
@@ -235,7 +235,7 @@ export const Proof = {
     }
     return obj;
   },
-  fromProtoMsg(message: ProofProtoMsg, useInterfaces: boolean = false): Proof {
+  fromProtoMsg(message: ProofProtoMsg, useInterfaces: boolean = true): Proof {
     return Proof.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Proof): Uint8Array {
@@ -265,7 +265,7 @@ export const ValueOp = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ValueOp {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValueOp {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValueOp();
@@ -323,13 +323,13 @@ export const ValueOp = {
       proof: object?.proof ? Proof.fromAmino(object.proof) : undefined
     };
   },
-  toAmino(message: ValueOp, useInterfaces: boolean = false): ValueOpAmino {
+  toAmino(message: ValueOp, useInterfaces: boolean = true): ValueOpAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.proof = message.proof ? Proof.toAmino(message.proof, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: ValueOpProtoMsg, useInterfaces: boolean = false): ValueOp {
+  fromProtoMsg(message: ValueOpProtoMsg, useInterfaces: boolean = true): ValueOp {
     return ValueOp.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValueOp): Uint8Array {
@@ -363,7 +363,7 @@ export const DominoOp = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DominoOp {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DominoOp {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDominoOp();
@@ -428,14 +428,14 @@ export const DominoOp = {
       output: object.output
     };
   },
-  toAmino(message: DominoOp, useInterfaces: boolean = false): DominoOpAmino {
+  toAmino(message: DominoOp, useInterfaces: boolean = true): DominoOpAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.input = message.input;
     obj.output = message.output;
     return obj;
   },
-  fromProtoMsg(message: DominoOpProtoMsg, useInterfaces: boolean = false): DominoOp {
+  fromProtoMsg(message: DominoOpProtoMsg, useInterfaces: boolean = true): DominoOp {
     return DominoOp.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DominoOp): Uint8Array {
@@ -469,7 +469,7 @@ export const ProofOp = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ProofOp {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ProofOp {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProofOp();
@@ -534,14 +534,14 @@ export const ProofOp = {
       data: object.data
     };
   },
-  toAmino(message: ProofOp, useInterfaces: boolean = false): ProofOpAmino {
+  toAmino(message: ProofOp, useInterfaces: boolean = true): ProofOpAmino {
     const obj: any = {};
     obj.type = message.type;
     obj.key = message.key;
     obj.data = message.data;
     return obj;
   },
-  fromProtoMsg(message: ProofOpProtoMsg, useInterfaces: boolean = false): ProofOp {
+  fromProtoMsg(message: ProofOpProtoMsg, useInterfaces: boolean = true): ProofOp {
     return ProofOp.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ProofOp): Uint8Array {
@@ -567,7 +567,7 @@ export const ProofOps = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ProofOps {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ProofOps {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProofOps();
@@ -622,7 +622,7 @@ export const ProofOps = {
       ops: Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromAmino(e)) : []
     };
   },
-  toAmino(message: ProofOps, useInterfaces: boolean = false): ProofOpsAmino {
+  toAmino(message: ProofOps, useInterfaces: boolean = true): ProofOpsAmino {
     const obj: any = {};
     if (message.ops) {
       obj.ops = message.ops.map(e => e ? ProofOp.toAmino(e, useInterfaces) : undefined);
@@ -631,7 +631,7 @@ export const ProofOps = {
     }
     return obj;
   },
-  fromProtoMsg(message: ProofOpsProtoMsg, useInterfaces: boolean = false): ProofOps {
+  fromProtoMsg(message: ProofOpsProtoMsg, useInterfaces: boolean = true): ProofOps {
     return ProofOps.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ProofOps): Uint8Array {

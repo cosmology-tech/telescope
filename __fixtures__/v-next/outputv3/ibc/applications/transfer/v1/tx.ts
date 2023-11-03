@@ -123,7 +123,7 @@ export const MsgTransfer = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgTransfer {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgTransfer {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTransfer();
@@ -230,7 +230,7 @@ export const MsgTransfer = {
       timeoutTimestamp: BigInt(object.timeout_timestamp)
     };
   },
-  toAmino(message: MsgTransfer, useInterfaces: boolean = false): MsgTransferAmino {
+  toAmino(message: MsgTransfer, useInterfaces: boolean = true): MsgTransferAmino {
     const obj: any = {};
     obj.source_port = message.sourcePort;
     obj.source_channel = message.sourceChannel;
@@ -241,7 +241,7 @@ export const MsgTransfer = {
     obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: MsgTransferProtoMsg, useInterfaces: boolean = false): MsgTransfer {
+  fromProtoMsg(message: MsgTransferProtoMsg, useInterfaces: boolean = true): MsgTransfer {
     return MsgTransfer.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgTransfer): Uint8Array {
@@ -263,7 +263,7 @@ export const MsgTransferResponse = {
   encode(_: MsgTransferResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgTransferResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgTransferResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTransferResponse();
@@ -299,11 +299,11 @@ export const MsgTransferResponse = {
   fromAmino(_: MsgTransferResponseAmino): MsgTransferResponse {
     return {};
   },
-  toAmino(_: MsgTransferResponse, useInterfaces: boolean = false): MsgTransferResponseAmino {
+  toAmino(_: MsgTransferResponse, useInterfaces: boolean = true): MsgTransferResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgTransferResponseProtoMsg, useInterfaces: boolean = false): MsgTransferResponse {
+  fromProtoMsg(message: MsgTransferResponseProtoMsg, useInterfaces: boolean = true): MsgTransferResponse {
     return MsgTransferResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgTransferResponse): Uint8Array {

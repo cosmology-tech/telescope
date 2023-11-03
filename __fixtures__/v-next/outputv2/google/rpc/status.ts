@@ -93,7 +93,7 @@ export const Status = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Status {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Status {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStatus();
@@ -166,7 +166,7 @@ export const Status = {
       details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromAmino(e)) : []
     };
   },
-  toAmino(message: Status, useInterfaces: boolean = false): StatusAmino {
+  toAmino(message: Status, useInterfaces: boolean = true): StatusAmino {
     const obj: any = {};
     obj.code = message.code;
     obj.message = message.message;
@@ -180,7 +180,7 @@ export const Status = {
   fromAminoMsg(object: StatusAminoMsg): Status {
     return Status.fromAmino(object.value);
   },
-  fromProtoMsg(message: StatusProtoMsg, useInterfaces: boolean = false): Status {
+  fromProtoMsg(message: StatusProtoMsg, useInterfaces: boolean = true): Status {
     return Status.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Status): Uint8Array {

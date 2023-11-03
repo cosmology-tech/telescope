@@ -319,7 +319,7 @@ export const Backend = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Backend {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Backend {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBackend();
@@ -374,7 +374,7 @@ export const Backend = {
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => BackendRule.fromAmino(e)) : []
     };
   },
-  toAmino(message: Backend, useInterfaces: boolean = false): BackendAmino {
+  toAmino(message: Backend, useInterfaces: boolean = true): BackendAmino {
     const obj: any = {};
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? BackendRule.toAmino(e, useInterfaces) : undefined);
@@ -383,7 +383,7 @@ export const Backend = {
     }
     return obj;
   },
-  fromProtoMsg(message: BackendProtoMsg, useInterfaces: boolean = false): Backend {
+  fromProtoMsg(message: BackendProtoMsg, useInterfaces: boolean = true): Backend {
     return Backend.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Backend): Uint8Array {
@@ -441,7 +441,7 @@ export const BackendRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): BackendRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BackendRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBackendRule();
@@ -560,7 +560,7 @@ export const BackendRule = {
       protocol: object.protocol
     };
   },
-  toAmino(message: BackendRule, useInterfaces: boolean = false): BackendRuleAmino {
+  toAmino(message: BackendRule, useInterfaces: boolean = true): BackendRuleAmino {
     const obj: any = {};
     obj.selector = message.selector;
     obj.address = message.address;
@@ -573,7 +573,7 @@ export const BackendRule = {
     obj.protocol = message.protocol;
     return obj;
   },
-  fromProtoMsg(message: BackendRuleProtoMsg, useInterfaces: boolean = false): BackendRule {
+  fromProtoMsg(message: BackendRuleProtoMsg, useInterfaces: boolean = true): BackendRule {
     return BackendRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BackendRule): Uint8Array {

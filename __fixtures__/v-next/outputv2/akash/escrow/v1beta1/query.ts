@@ -145,7 +145,7 @@ export const QueryAccountsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAccountsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAccountsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountsRequest();
@@ -230,7 +230,7 @@ export const QueryAccountsRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryAccountsRequest, useInterfaces: boolean = false): QueryAccountsRequestAmino {
+  toAmino(message: QueryAccountsRequest, useInterfaces: boolean = true): QueryAccountsRequestAmino {
     const obj: any = {};
     obj.scope = message.scope;
     obj.xid = message.xid;
@@ -242,7 +242,7 @@ export const QueryAccountsRequest = {
   fromAminoMsg(object: QueryAccountsRequestAminoMsg): QueryAccountsRequest {
     return QueryAccountsRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryAccountsRequestProtoMsg, useInterfaces: boolean = false): QueryAccountsRequest {
+  fromProtoMsg(message: QueryAccountsRequestProtoMsg, useInterfaces: boolean = true): QueryAccountsRequest {
     return QueryAccountsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAccountsRequest): Uint8Array {
@@ -272,7 +272,7 @@ export const QueryAccountsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAccountsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAccountsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountsResponse();
@@ -338,7 +338,7 @@ export const QueryAccountsResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryAccountsResponse, useInterfaces: boolean = false): QueryAccountsResponseAmino {
+  toAmino(message: QueryAccountsResponse, useInterfaces: boolean = true): QueryAccountsResponseAmino {
     const obj: any = {};
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? Account.toAmino(e, useInterfaces) : undefined);
@@ -351,7 +351,7 @@ export const QueryAccountsResponse = {
   fromAminoMsg(object: QueryAccountsResponseAminoMsg): QueryAccountsResponse {
     return QueryAccountsResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryAccountsResponseProtoMsg, useInterfaces: boolean = false): QueryAccountsResponse {
+  fromProtoMsg(message: QueryAccountsResponseProtoMsg, useInterfaces: boolean = true): QueryAccountsResponse {
     return QueryAccountsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAccountsResponse): Uint8Array {
@@ -397,7 +397,7 @@ export const QueryPaymentsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryPaymentsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryPaymentsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPaymentsRequest();
@@ -491,7 +491,7 @@ export const QueryPaymentsRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryPaymentsRequest, useInterfaces: boolean = false): QueryPaymentsRequestAmino {
+  toAmino(message: QueryPaymentsRequest, useInterfaces: boolean = true): QueryPaymentsRequestAmino {
     const obj: any = {};
     obj.scope = message.scope;
     obj.xid = message.xid;
@@ -504,7 +504,7 @@ export const QueryPaymentsRequest = {
   fromAminoMsg(object: QueryPaymentsRequestAminoMsg): QueryPaymentsRequest {
     return QueryPaymentsRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryPaymentsRequestProtoMsg, useInterfaces: boolean = false): QueryPaymentsRequest {
+  fromProtoMsg(message: QueryPaymentsRequestProtoMsg, useInterfaces: boolean = true): QueryPaymentsRequest {
     return QueryPaymentsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryPaymentsRequest): Uint8Array {
@@ -534,7 +534,7 @@ export const QueryPaymentsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryPaymentsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryPaymentsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPaymentsResponse();
@@ -600,7 +600,7 @@ export const QueryPaymentsResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryPaymentsResponse, useInterfaces: boolean = false): QueryPaymentsResponseAmino {
+  toAmino(message: QueryPaymentsResponse, useInterfaces: boolean = true): QueryPaymentsResponseAmino {
     const obj: any = {};
     if (message.payments) {
       obj.payments = message.payments.map(e => e ? Payment.toAmino(e, useInterfaces) : undefined);
@@ -613,7 +613,7 @@ export const QueryPaymentsResponse = {
   fromAminoMsg(object: QueryPaymentsResponseAminoMsg): QueryPaymentsResponse {
     return QueryPaymentsResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryPaymentsResponseProtoMsg, useInterfaces: boolean = false): QueryPaymentsResponse {
+  fromProtoMsg(message: QueryPaymentsResponseProtoMsg, useInterfaces: boolean = true): QueryPaymentsResponse {
     return QueryPaymentsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryPaymentsResponse): Uint8Array {

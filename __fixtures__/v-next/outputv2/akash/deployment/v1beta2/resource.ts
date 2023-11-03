@@ -50,7 +50,7 @@ export const Resource = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Resource {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Resource {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResource();
@@ -119,7 +119,7 @@ export const Resource = {
       price: object?.price ? DecCoin.fromAmino(object.price) : undefined
     };
   },
-  toAmino(message: Resource, useInterfaces: boolean = false): ResourceAmino {
+  toAmino(message: Resource, useInterfaces: boolean = true): ResourceAmino {
     const obj: any = {};
     obj.resources = message.resources ? ResourceUnits.toAmino(message.resources, useInterfaces) : undefined;
     obj.count = message.count;
@@ -129,7 +129,7 @@ export const Resource = {
   fromAminoMsg(object: ResourceAminoMsg): Resource {
     return Resource.fromAmino(object.value);
   },
-  fromProtoMsg(message: ResourceProtoMsg, useInterfaces: boolean = false): Resource {
+  fromProtoMsg(message: ResourceProtoMsg, useInterfaces: boolean = true): Resource {
     return Resource.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Resource): Uint8Array {

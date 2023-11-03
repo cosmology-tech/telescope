@@ -327,7 +327,7 @@ export const IdentifiedClientState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): IdentifiedClientState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): IdentifiedClientState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdentifiedClientState();
@@ -385,7 +385,7 @@ export const IdentifiedClientState = {
       clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined
     };
   },
-  toAmino(message: IdentifiedClientState, useInterfaces: boolean = false): IdentifiedClientStateAmino {
+  toAmino(message: IdentifiedClientState, useInterfaces: boolean = true): IdentifiedClientStateAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
     obj.client_state = message.clientState ? Any.toAmino(message.clientState, useInterfaces) : undefined;
@@ -394,13 +394,13 @@ export const IdentifiedClientState = {
   fromAminoMsg(object: IdentifiedClientStateAminoMsg): IdentifiedClientState {
     return IdentifiedClientState.fromAmino(object.value);
   },
-  toAminoMsg(message: IdentifiedClientState, useInterfaces: boolean = false): IdentifiedClientStateAminoMsg {
+  toAminoMsg(message: IdentifiedClientState, useInterfaces: boolean = true): IdentifiedClientStateAminoMsg {
     return {
       type: "cosmos-sdk/IdentifiedClientState",
       value: IdentifiedClientState.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: IdentifiedClientStateProtoMsg, useInterfaces: boolean = false): IdentifiedClientState {
+  fromProtoMsg(message: IdentifiedClientStateProtoMsg, useInterfaces: boolean = true): IdentifiedClientState {
     return IdentifiedClientState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: IdentifiedClientState): Uint8Array {
@@ -431,7 +431,7 @@ export const ConsensusStateWithHeight = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ConsensusStateWithHeight {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ConsensusStateWithHeight {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensusStateWithHeight();
@@ -491,7 +491,7 @@ export const ConsensusStateWithHeight = {
       consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined
     };
   },
-  toAmino(message: ConsensusStateWithHeight, useInterfaces: boolean = false): ConsensusStateWithHeightAmino {
+  toAmino(message: ConsensusStateWithHeight, useInterfaces: boolean = true): ConsensusStateWithHeightAmino {
     const obj: any = {};
     obj.height = message.height ? Height.toAmino(message.height, useInterfaces) : undefined;
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState, useInterfaces) : undefined;
@@ -500,13 +500,13 @@ export const ConsensusStateWithHeight = {
   fromAminoMsg(object: ConsensusStateWithHeightAminoMsg): ConsensusStateWithHeight {
     return ConsensusStateWithHeight.fromAmino(object.value);
   },
-  toAminoMsg(message: ConsensusStateWithHeight, useInterfaces: boolean = false): ConsensusStateWithHeightAminoMsg {
+  toAminoMsg(message: ConsensusStateWithHeight, useInterfaces: boolean = true): ConsensusStateWithHeightAminoMsg {
     return {
       type: "cosmos-sdk/ConsensusStateWithHeight",
       value: ConsensusStateWithHeight.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ConsensusStateWithHeightProtoMsg, useInterfaces: boolean = false): ConsensusStateWithHeight {
+  fromProtoMsg(message: ConsensusStateWithHeightProtoMsg, useInterfaces: boolean = true): ConsensusStateWithHeight {
     return ConsensusStateWithHeight.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ConsensusStateWithHeight): Uint8Array {
@@ -537,7 +537,7 @@ export const ClientConsensusStates = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ClientConsensusStates {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ClientConsensusStates {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientConsensusStates();
@@ -601,7 +601,7 @@ export const ClientConsensusStates = {
       consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromAmino(e)) : []
     };
   },
-  toAmino(message: ClientConsensusStates, useInterfaces: boolean = false): ClientConsensusStatesAmino {
+  toAmino(message: ClientConsensusStates, useInterfaces: boolean = true): ClientConsensusStatesAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
     if (message.consensusStates) {
@@ -614,13 +614,13 @@ export const ClientConsensusStates = {
   fromAminoMsg(object: ClientConsensusStatesAminoMsg): ClientConsensusStates {
     return ClientConsensusStates.fromAmino(object.value);
   },
-  toAminoMsg(message: ClientConsensusStates, useInterfaces: boolean = false): ClientConsensusStatesAminoMsg {
+  toAminoMsg(message: ClientConsensusStates, useInterfaces: boolean = true): ClientConsensusStatesAminoMsg {
     return {
       type: "cosmos-sdk/ClientConsensusStates",
       value: ClientConsensusStates.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ClientConsensusStatesProtoMsg, useInterfaces: boolean = false): ClientConsensusStates {
+  fromProtoMsg(message: ClientConsensusStatesProtoMsg, useInterfaces: boolean = true): ClientConsensusStates {
     return ClientConsensusStates.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ClientConsensusStates): Uint8Array {
@@ -660,7 +660,7 @@ export const ClientUpdateProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ClientUpdateProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ClientUpdateProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientUpdateProposal();
@@ -734,7 +734,7 @@ export const ClientUpdateProposal = {
       substituteClientId: object.substitute_client_id
     };
   },
-  toAmino(message: ClientUpdateProposal, useInterfaces: boolean = false): ClientUpdateProposalAmino {
+  toAmino(message: ClientUpdateProposal, useInterfaces: boolean = true): ClientUpdateProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -745,13 +745,13 @@ export const ClientUpdateProposal = {
   fromAminoMsg(object: ClientUpdateProposalAminoMsg): ClientUpdateProposal {
     return ClientUpdateProposal.fromAmino(object.value);
   },
-  toAminoMsg(message: ClientUpdateProposal, useInterfaces: boolean = false): ClientUpdateProposalAminoMsg {
+  toAminoMsg(message: ClientUpdateProposal, useInterfaces: boolean = true): ClientUpdateProposalAminoMsg {
     return {
       type: "cosmos-sdk/ClientUpdateProposal",
       value: ClientUpdateProposal.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ClientUpdateProposalProtoMsg, useInterfaces: boolean = false): ClientUpdateProposal {
+  fromProtoMsg(message: ClientUpdateProposalProtoMsg, useInterfaces: boolean = true): ClientUpdateProposal {
     return ClientUpdateProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ClientUpdateProposal): Uint8Array {
@@ -791,7 +791,7 @@ export const UpgradeProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): UpgradeProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpgradeProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpgradeProposal();
@@ -869,7 +869,7 @@ export const UpgradeProposal = {
       upgradedClientState: object?.upgraded_client_state ? Any.fromAmino(object.upgraded_client_state) : undefined
     };
   },
-  toAmino(message: UpgradeProposal, useInterfaces: boolean = false): UpgradeProposalAmino {
+  toAmino(message: UpgradeProposal, useInterfaces: boolean = true): UpgradeProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -880,13 +880,13 @@ export const UpgradeProposal = {
   fromAminoMsg(object: UpgradeProposalAminoMsg): UpgradeProposal {
     return UpgradeProposal.fromAmino(object.value);
   },
-  toAminoMsg(message: UpgradeProposal, useInterfaces: boolean = false): UpgradeProposalAminoMsg {
+  toAminoMsg(message: UpgradeProposal, useInterfaces: boolean = true): UpgradeProposalAminoMsg {
     return {
       type: "cosmos-sdk/UpgradeProposal",
       value: UpgradeProposal.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: UpgradeProposalProtoMsg, useInterfaces: boolean = false): UpgradeProposal {
+  fromProtoMsg(message: UpgradeProposalProtoMsg, useInterfaces: boolean = true): UpgradeProposal {
     return UpgradeProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpgradeProposal): Uint8Array {
@@ -917,7 +917,7 @@ export const Height = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Height {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Height {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHeight();
@@ -977,7 +977,7 @@ export const Height = {
       revisionHeight: BigInt(object.revision_height || "0")
     };
   },
-  toAmino(message: Height, useInterfaces: boolean = false): HeightAmino {
+  toAmino(message: Height, useInterfaces: boolean = true): HeightAmino {
     const obj: any = {};
     obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
     obj.revision_height = message.revisionHeight ? message.revisionHeight.toString() : undefined;
@@ -986,13 +986,13 @@ export const Height = {
   fromAminoMsg(object: HeightAminoMsg): Height {
     return Height.fromAmino(object.value);
   },
-  toAminoMsg(message: Height, useInterfaces: boolean = false): HeightAminoMsg {
+  toAminoMsg(message: Height, useInterfaces: boolean = true): HeightAminoMsg {
     return {
       type: "cosmos-sdk/Height",
       value: Height.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: HeightProtoMsg, useInterfaces: boolean = false): Height {
+  fromProtoMsg(message: HeightProtoMsg, useInterfaces: boolean = true): Height {
     return Height.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Height): Uint8Array {
@@ -1019,7 +1019,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -1074,7 +1074,7 @@ export const Params = {
       allowedClients: Array.isArray(object?.allowed_clients) ? object.allowed_clients.map((e: any) => e) : []
     };
   },
-  toAmino(message: Params, useInterfaces: boolean = false): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
     if (message.allowedClients) {
       obj.allowed_clients = message.allowedClients.map(e => e);
@@ -1086,13 +1086,13 @@ export const Params = {
   fromAminoMsg(object: ParamsAminoMsg): Params {
     return Params.fromAmino(object.value);
   },
-  toAminoMsg(message: Params, useInterfaces: boolean = false): ParamsAminoMsg {
+  toAminoMsg(message: Params, useInterfaces: boolean = true): ParamsAminoMsg {
     return {
       type: "cosmos-sdk/Params",
       value: Params.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = false): Params {
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
     return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {

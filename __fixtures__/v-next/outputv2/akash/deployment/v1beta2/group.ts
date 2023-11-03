@@ -113,7 +113,7 @@ export const Group = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Group {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Group {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGroup();
@@ -193,7 +193,7 @@ export const Group = {
       createdAt: BigInt(object.created_at)
     };
   },
-  toAmino(message: Group, useInterfaces: boolean = false): GroupAmino {
+  toAmino(message: Group, useInterfaces: boolean = true): GroupAmino {
     const obj: any = {};
     obj.group_id = message.groupId ? GroupID.toAmino(message.groupId, useInterfaces) : undefined;
     obj.state = message.state;
@@ -204,7 +204,7 @@ export const Group = {
   fromAminoMsg(object: GroupAminoMsg): Group {
     return Group.fromAmino(object.value);
   },
-  fromProtoMsg(message: GroupProtoMsg, useInterfaces: boolean = false): Group {
+  fromProtoMsg(message: GroupProtoMsg, useInterfaces: boolean = true): Group {
     return Group.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Group): Uint8Array {

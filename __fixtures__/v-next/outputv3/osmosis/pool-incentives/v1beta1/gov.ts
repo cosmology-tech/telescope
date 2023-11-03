@@ -121,7 +121,7 @@ export const ReplacePoolIncentivesProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ReplacePoolIncentivesProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ReplacePoolIncentivesProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReplacePoolIncentivesProposal();
@@ -194,7 +194,7 @@ export const ReplacePoolIncentivesProposal = {
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
     };
   },
-  toAmino(message: ReplacePoolIncentivesProposal, useInterfaces: boolean = false): ReplacePoolIncentivesProposalAmino {
+  toAmino(message: ReplacePoolIncentivesProposal, useInterfaces: boolean = true): ReplacePoolIncentivesProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -205,7 +205,7 @@ export const ReplacePoolIncentivesProposal = {
     }
     return obj;
   },
-  fromProtoMsg(message: ReplacePoolIncentivesProposalProtoMsg, useInterfaces: boolean = false): ReplacePoolIncentivesProposal {
+  fromProtoMsg(message: ReplacePoolIncentivesProposalProtoMsg, useInterfaces: boolean = true): ReplacePoolIncentivesProposal {
     return ReplacePoolIncentivesProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ReplacePoolIncentivesProposal): Uint8Array {
@@ -241,7 +241,7 @@ export const UpdatePoolIncentivesProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): UpdatePoolIncentivesProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpdatePoolIncentivesProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdatePoolIncentivesProposal();
@@ -314,7 +314,7 @@ export const UpdatePoolIncentivesProposal = {
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
     };
   },
-  toAmino(message: UpdatePoolIncentivesProposal, useInterfaces: boolean = false): UpdatePoolIncentivesProposalAmino {
+  toAmino(message: UpdatePoolIncentivesProposal, useInterfaces: boolean = true): UpdatePoolIncentivesProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -325,7 +325,7 @@ export const UpdatePoolIncentivesProposal = {
     }
     return obj;
   },
-  fromProtoMsg(message: UpdatePoolIncentivesProposalProtoMsg, useInterfaces: boolean = false): UpdatePoolIncentivesProposal {
+  fromProtoMsg(message: UpdatePoolIncentivesProposalProtoMsg, useInterfaces: boolean = true): UpdatePoolIncentivesProposal {
     return UpdatePoolIncentivesProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpdatePoolIncentivesProposal): Uint8Array {

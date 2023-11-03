@@ -201,7 +201,7 @@ export const MsgSubmitProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSubmitProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSubmitProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitProposal();
@@ -276,7 +276,7 @@ export const MsgSubmitProposal = {
       proposer: object.proposer
     };
   },
-  toAmino(message: MsgSubmitProposal, useInterfaces: boolean = false): MsgSubmitProposalAmino {
+  toAmino(message: MsgSubmitProposal, useInterfaces: boolean = true): MsgSubmitProposalAmino {
     const obj: any = {};
     obj.content = message.content ? ProposalContentI_ToAmino((message.content as Any), useInterfaces) : undefined;
     if (message.initialDeposit) {
@@ -287,7 +287,7 @@ export const MsgSubmitProposal = {
     obj.proposer = message.proposer;
     return obj;
   },
-  fromProtoMsg(message: MsgSubmitProposalProtoMsg, useInterfaces: boolean = false): MsgSubmitProposal {
+  fromProtoMsg(message: MsgSubmitProposalProtoMsg, useInterfaces: boolean = true): MsgSubmitProposal {
     return MsgSubmitProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSubmitProposal): Uint8Array {
@@ -314,7 +314,7 @@ export const MsgSubmitProposalResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSubmitProposalResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSubmitProposalResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitProposalResponse();
@@ -363,12 +363,12 @@ export const MsgSubmitProposalResponse = {
       proposalId: BigInt(object.proposal_id)
     };
   },
-  toAmino(message: MsgSubmitProposalResponse, useInterfaces: boolean = false): MsgSubmitProposalResponseAmino {
+  toAmino(message: MsgSubmitProposalResponse, useInterfaces: boolean = true): MsgSubmitProposalResponseAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: MsgSubmitProposalResponseProtoMsg, useInterfaces: boolean = false): MsgSubmitProposalResponse {
+  fromProtoMsg(message: MsgSubmitProposalResponseProtoMsg, useInterfaces: boolean = true): MsgSubmitProposalResponse {
     return MsgSubmitProposalResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSubmitProposalResponse): Uint8Array {
@@ -403,7 +403,7 @@ export const MsgVote = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgVote {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgVote {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVote();
@@ -470,14 +470,14 @@ export const MsgVote = {
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1
     };
   },
-  toAmino(message: MsgVote, useInterfaces: boolean = false): MsgVoteAmino {
+  toAmino(message: MsgVote, useInterfaces: boolean = true): MsgVoteAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     obj.voter = message.voter;
     obj.option = message.option;
     return obj;
   },
-  fromProtoMsg(message: MsgVoteProtoMsg, useInterfaces: boolean = false): MsgVote {
+  fromProtoMsg(message: MsgVoteProtoMsg, useInterfaces: boolean = true): MsgVote {
     return MsgVote.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgVote): Uint8Array {
@@ -499,7 +499,7 @@ export const MsgVoteResponse = {
   encode(_: MsgVoteResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgVoteResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgVoteResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVoteResponse();
@@ -535,11 +535,11 @@ export const MsgVoteResponse = {
   fromAmino(_: MsgVoteResponseAmino): MsgVoteResponse {
     return {};
   },
-  toAmino(_: MsgVoteResponse, useInterfaces: boolean = false): MsgVoteResponseAmino {
+  toAmino(_: MsgVoteResponse, useInterfaces: boolean = true): MsgVoteResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgVoteResponseProtoMsg, useInterfaces: boolean = false): MsgVoteResponse {
+  fromProtoMsg(message: MsgVoteResponseProtoMsg, useInterfaces: boolean = true): MsgVoteResponse {
     return MsgVoteResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgVoteResponse): Uint8Array {
@@ -574,7 +574,7 @@ export const MsgVoteWeighted = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgVoteWeighted {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgVoteWeighted {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVoteWeighted();
@@ -649,7 +649,7 @@ export const MsgVoteWeighted = {
       options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgVoteWeighted, useInterfaces: boolean = false): MsgVoteWeightedAmino {
+  toAmino(message: MsgVoteWeighted, useInterfaces: boolean = true): MsgVoteWeightedAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     obj.voter = message.voter;
@@ -660,7 +660,7 @@ export const MsgVoteWeighted = {
     }
     return obj;
   },
-  fromProtoMsg(message: MsgVoteWeightedProtoMsg, useInterfaces: boolean = false): MsgVoteWeighted {
+  fromProtoMsg(message: MsgVoteWeightedProtoMsg, useInterfaces: boolean = true): MsgVoteWeighted {
     return MsgVoteWeighted.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgVoteWeighted): Uint8Array {
@@ -682,7 +682,7 @@ export const MsgVoteWeightedResponse = {
   encode(_: MsgVoteWeightedResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgVoteWeightedResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgVoteWeightedResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVoteWeightedResponse();
@@ -718,11 +718,11 @@ export const MsgVoteWeightedResponse = {
   fromAmino(_: MsgVoteWeightedResponseAmino): MsgVoteWeightedResponse {
     return {};
   },
-  toAmino(_: MsgVoteWeightedResponse, useInterfaces: boolean = false): MsgVoteWeightedResponseAmino {
+  toAmino(_: MsgVoteWeightedResponse, useInterfaces: boolean = true): MsgVoteWeightedResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgVoteWeightedResponseProtoMsg, useInterfaces: boolean = false): MsgVoteWeightedResponse {
+  fromProtoMsg(message: MsgVoteWeightedResponseProtoMsg, useInterfaces: boolean = true): MsgVoteWeightedResponse {
     return MsgVoteWeightedResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgVoteWeightedResponse): Uint8Array {
@@ -757,7 +757,7 @@ export const MsgDeposit = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgDeposit {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgDeposit {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeposit();
@@ -832,7 +832,7 @@ export const MsgDeposit = {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgDeposit, useInterfaces: boolean = false): MsgDepositAmino {
+  toAmino(message: MsgDeposit, useInterfaces: boolean = true): MsgDepositAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     obj.depositor = message.depositor;
@@ -843,7 +843,7 @@ export const MsgDeposit = {
     }
     return obj;
   },
-  fromProtoMsg(message: MsgDepositProtoMsg, useInterfaces: boolean = false): MsgDeposit {
+  fromProtoMsg(message: MsgDepositProtoMsg, useInterfaces: boolean = true): MsgDeposit {
     return MsgDeposit.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgDeposit): Uint8Array {
@@ -865,7 +865,7 @@ export const MsgDepositResponse = {
   encode(_: MsgDepositResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgDepositResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgDepositResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDepositResponse();
@@ -901,11 +901,11 @@ export const MsgDepositResponse = {
   fromAmino(_: MsgDepositResponseAmino): MsgDepositResponse {
     return {};
   },
-  toAmino(_: MsgDepositResponse, useInterfaces: boolean = false): MsgDepositResponseAmino {
+  toAmino(_: MsgDepositResponse, useInterfaces: boolean = true): MsgDepositResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgDepositResponseProtoMsg, useInterfaces: boolean = false): MsgDepositResponse {
+  fromProtoMsg(message: MsgDepositResponseProtoMsg, useInterfaces: boolean = true): MsgDepositResponse {
     return MsgDepositResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgDepositResponse): Uint8Array {
@@ -1002,7 +1002,7 @@ export const ProposalContentI_FromAmino = (content: AnyAmino) => {
       return Any.fromAmino(content);
   }
 };
-export const ProposalContentI_ToAmino = (content: Any, useInterfaces: boolean = false) => {
+export const ProposalContentI_ToAmino = (content: Any, useInterfaces: boolean = true) => {
   switch (content.typeUrl) {
     case "/cosmos.gov.v1beta1.TextProposal":
       return {

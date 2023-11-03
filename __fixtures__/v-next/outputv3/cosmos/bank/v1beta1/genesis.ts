@@ -100,7 +100,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -200,7 +200,7 @@ export const GenesisState = {
       denomMetadata: Array.isArray(object?.denom_metadata) ? object.denom_metadata.map((e: any) => Metadata.fromAmino(e)) : []
     };
   },
-  toAmino(message: GenesisState, useInterfaces: boolean = false): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     if (message.balances) {
@@ -220,7 +220,7 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = false): GenesisState {
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
     return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
@@ -251,7 +251,7 @@ export const Balance = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Balance {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Balance {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBalance();
@@ -315,7 +315,7 @@ export const Balance = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: Balance, useInterfaces: boolean = false): BalanceAmino {
+  toAmino(message: Balance, useInterfaces: boolean = true): BalanceAmino {
     const obj: any = {};
     obj.address = message.address;
     if (message.coins) {
@@ -325,7 +325,7 @@ export const Balance = {
     }
     return obj;
   },
-  fromProtoMsg(message: BalanceProtoMsg, useInterfaces: boolean = false): Balance {
+  fromProtoMsg(message: BalanceProtoMsg, useInterfaces: boolean = true): Balance {
     return Balance.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Balance): Uint8Array {

@@ -280,7 +280,7 @@ export const CheckError = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CheckError {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CheckError {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckError();
@@ -356,7 +356,7 @@ export const CheckError = {
       status: object?.status ? Status.fromAmino(object.status) : undefined
     };
   },
-  toAmino(message: CheckError, useInterfaces: boolean = false): CheckErrorAmino {
+  toAmino(message: CheckError, useInterfaces: boolean = true): CheckErrorAmino {
     const obj: any = {};
     obj.code = message.code;
     obj.subject = message.subject;
@@ -364,7 +364,7 @@ export const CheckError = {
     obj.status = message.status ? Status.toAmino(message.status, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: CheckErrorProtoMsg, useInterfaces: boolean = false): CheckError {
+  fromProtoMsg(message: CheckErrorProtoMsg, useInterfaces: boolean = true): CheckError {
     return CheckError.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CheckError): Uint8Array {

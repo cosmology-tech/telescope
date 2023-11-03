@@ -80,7 +80,7 @@ export const App = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): App {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): App {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseApp();
@@ -138,13 +138,13 @@ export const App = {
       software: object.software
     };
   },
-  toAmino(message: App, useInterfaces: boolean = false): AppAmino {
+  toAmino(message: App, useInterfaces: boolean = true): AppAmino {
     const obj: any = {};
     obj.protocol = message.protocol ? message.protocol.toString() : undefined;
     obj.software = message.software;
     return obj;
   },
-  fromProtoMsg(message: AppProtoMsg, useInterfaces: boolean = false): App {
+  fromProtoMsg(message: AppProtoMsg, useInterfaces: boolean = true): App {
     return App.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: App): Uint8Array {
@@ -174,7 +174,7 @@ export const Consensus = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Consensus {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Consensus {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensus();
@@ -234,13 +234,13 @@ export const Consensus = {
       app: BigInt(object.app)
     };
   },
-  toAmino(message: Consensus, useInterfaces: boolean = false): ConsensusAmino {
+  toAmino(message: Consensus, useInterfaces: boolean = true): ConsensusAmino {
     const obj: any = {};
     obj.block = message.block ? message.block.toString() : undefined;
     obj.app = message.app ? message.app.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: ConsensusProtoMsg, useInterfaces: boolean = false): Consensus {
+  fromProtoMsg(message: ConsensusProtoMsg, useInterfaces: boolean = true): Consensus {
     return Consensus.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Consensus): Uint8Array {

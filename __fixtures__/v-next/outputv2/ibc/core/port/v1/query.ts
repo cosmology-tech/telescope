@@ -101,7 +101,7 @@ export const QueryAppVersionRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAppVersionRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAppVersionRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAppVersionRequest();
@@ -186,7 +186,7 @@ export const QueryAppVersionRequest = {
       proposedVersion: object.proposed_version
     };
   },
-  toAmino(message: QueryAppVersionRequest, useInterfaces: boolean = false): QueryAppVersionRequestAmino {
+  toAmino(message: QueryAppVersionRequest, useInterfaces: boolean = true): QueryAppVersionRequestAmino {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.connection_id = message.connectionId;
@@ -198,13 +198,13 @@ export const QueryAppVersionRequest = {
   fromAminoMsg(object: QueryAppVersionRequestAminoMsg): QueryAppVersionRequest {
     return QueryAppVersionRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryAppVersionRequest, useInterfaces: boolean = false): QueryAppVersionRequestAminoMsg {
+  toAminoMsg(message: QueryAppVersionRequest, useInterfaces: boolean = true): QueryAppVersionRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryAppVersionRequest",
       value: QueryAppVersionRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryAppVersionRequestProtoMsg, useInterfaces: boolean = false): QueryAppVersionRequest {
+  fromProtoMsg(message: QueryAppVersionRequestProtoMsg, useInterfaces: boolean = true): QueryAppVersionRequest {
     return QueryAppVersionRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAppVersionRequest): Uint8Array {
@@ -235,7 +235,7 @@ export const QueryAppVersionResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAppVersionResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAppVersionResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAppVersionResponse();
@@ -291,7 +291,7 @@ export const QueryAppVersionResponse = {
       version: object.version
     };
   },
-  toAmino(message: QueryAppVersionResponse, useInterfaces: boolean = false): QueryAppVersionResponseAmino {
+  toAmino(message: QueryAppVersionResponse, useInterfaces: boolean = true): QueryAppVersionResponseAmino {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.version = message.version;
@@ -300,13 +300,13 @@ export const QueryAppVersionResponse = {
   fromAminoMsg(object: QueryAppVersionResponseAminoMsg): QueryAppVersionResponse {
     return QueryAppVersionResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryAppVersionResponse, useInterfaces: boolean = false): QueryAppVersionResponseAminoMsg {
+  toAminoMsg(message: QueryAppVersionResponse, useInterfaces: boolean = true): QueryAppVersionResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryAppVersionResponse",
       value: QueryAppVersionResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryAppVersionResponseProtoMsg, useInterfaces: boolean = false): QueryAppVersionResponse {
+  fromProtoMsg(message: QueryAppVersionResponseProtoMsg, useInterfaces: boolean = true): QueryAppVersionResponse {
     return QueryAppVersionResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAppVersionResponse): Uint8Array {

@@ -226,7 +226,7 @@ export const Context = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Context {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Context {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContext();
@@ -281,7 +281,7 @@ export const Context = {
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => ContextRule.fromAmino(e)) : []
     };
   },
-  toAmino(message: Context, useInterfaces: boolean = false): ContextAmino {
+  toAmino(message: Context, useInterfaces: boolean = true): ContextAmino {
     const obj: any = {};
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? ContextRule.toAmino(e, useInterfaces) : undefined);
@@ -293,7 +293,7 @@ export const Context = {
   fromAminoMsg(object: ContextAminoMsg): Context {
     return Context.fromAmino(object.value);
   },
-  fromProtoMsg(message: ContextProtoMsg, useInterfaces: boolean = false): Context {
+  fromProtoMsg(message: ContextProtoMsg, useInterfaces: boolean = true): Context {
     return Context.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Context): Uint8Array {
@@ -335,7 +335,7 @@ export const ContextRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ContextRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ContextRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContextRule();
@@ -450,7 +450,7 @@ export const ContextRule = {
       allowedResponseExtensions: Array.isArray(object?.allowed_response_extensions) ? object.allowed_response_extensions.map((e: any) => e) : []
     };
   },
-  toAmino(message: ContextRule, useInterfaces: boolean = false): ContextRuleAmino {
+  toAmino(message: ContextRule, useInterfaces: boolean = true): ContextRuleAmino {
     const obj: any = {};
     obj.selector = message.selector;
     if (message.requested) {
@@ -478,7 +478,7 @@ export const ContextRule = {
   fromAminoMsg(object: ContextRuleAminoMsg): ContextRule {
     return ContextRule.fromAmino(object.value);
   },
-  fromProtoMsg(message: ContextRuleProtoMsg, useInterfaces: boolean = false): ContextRule {
+  fromProtoMsg(message: ContextRuleProtoMsg, useInterfaces: boolean = true): ContextRule {
     return ContextRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ContextRule): Uint8Array {

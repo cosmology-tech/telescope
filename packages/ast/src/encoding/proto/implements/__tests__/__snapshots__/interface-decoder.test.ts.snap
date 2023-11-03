@@ -42,7 +42,7 @@ exports[`PoolI objects 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryPoolsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryPoolsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolsResponse();
@@ -106,7 +106,7 @@ exports[`PoolI objects 1`] = `
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryPoolsResponse, useInterfaces: boolean = false): QueryPoolsResponseAmino {
+  toAmino(message: QueryPoolsResponse, useInterfaces: boolean = true): QueryPoolsResponseAmino {
     const obj: any = {};
     if (message.pools) {
       obj.pools = message.pools.map(e => e ? PoolI_ToAmino((e as Any), useInterfaces) : undefined);
@@ -119,13 +119,13 @@ exports[`PoolI objects 1`] = `
   fromAminoMsg(object: QueryPoolsResponseAminoMsg): QueryPoolsResponse {
     return QueryPoolsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryPoolsResponse, useInterfaces: boolean = false): QueryPoolsResponseAminoMsg {
+  toAminoMsg(message: QueryPoolsResponse, useInterfaces: boolean = true): QueryPoolsResponseAminoMsg {
     return {
       type: "osmosis/gamm/query-pools-response",
       value: QueryPoolsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryPoolsResponseProtoMsg, useInterfaces: boolean = false): QueryPoolsResponse {
+  fromProtoMsg(message: QueryPoolsResponseProtoMsg, useInterfaces: boolean = true): QueryPoolsResponse {
     return QueryPoolsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryPoolsResponse): Uint8Array {

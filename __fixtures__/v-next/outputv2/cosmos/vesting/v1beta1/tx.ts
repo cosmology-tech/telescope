@@ -198,7 +198,7 @@ export const MsgCreateVestingAccount = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCreateVestingAccount {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateVestingAccount {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateVestingAccount();
@@ -291,7 +291,7 @@ export const MsgCreateVestingAccount = {
       delayed: object.delayed
     };
   },
-  toAmino(message: MsgCreateVestingAccount, useInterfaces: boolean = false): MsgCreateVestingAccountAmino {
+  toAmino(message: MsgCreateVestingAccount, useInterfaces: boolean = true): MsgCreateVestingAccountAmino {
     const obj: any = {};
     obj.from_address = message.fromAddress;
     obj.to_address = message.toAddress;
@@ -307,13 +307,13 @@ export const MsgCreateVestingAccount = {
   fromAminoMsg(object: MsgCreateVestingAccountAminoMsg): MsgCreateVestingAccount {
     return MsgCreateVestingAccount.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreateVestingAccount, useInterfaces: boolean = false): MsgCreateVestingAccountAminoMsg {
+  toAminoMsg(message: MsgCreateVestingAccount, useInterfaces: boolean = true): MsgCreateVestingAccountAminoMsg {
     return {
       type: "cosmos-sdk/MsgCreateVestingAccount",
       value: MsgCreateVestingAccount.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgCreateVestingAccountProtoMsg, useInterfaces: boolean = false): MsgCreateVestingAccount {
+  fromProtoMsg(message: MsgCreateVestingAccountProtoMsg, useInterfaces: boolean = true): MsgCreateVestingAccount {
     return MsgCreateVestingAccount.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateVestingAccount): Uint8Array {
@@ -335,7 +335,7 @@ export const MsgCreateVestingAccountResponse = {
   encode(_: MsgCreateVestingAccountResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCreateVestingAccountResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateVestingAccountResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateVestingAccountResponse();
@@ -371,20 +371,20 @@ export const MsgCreateVestingAccountResponse = {
   fromAmino(_: MsgCreateVestingAccountResponseAmino): MsgCreateVestingAccountResponse {
     return {};
   },
-  toAmino(_: MsgCreateVestingAccountResponse, useInterfaces: boolean = false): MsgCreateVestingAccountResponseAmino {
+  toAmino(_: MsgCreateVestingAccountResponse, useInterfaces: boolean = true): MsgCreateVestingAccountResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgCreateVestingAccountResponseAminoMsg): MsgCreateVestingAccountResponse {
     return MsgCreateVestingAccountResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreateVestingAccountResponse, useInterfaces: boolean = false): MsgCreateVestingAccountResponseAminoMsg {
+  toAminoMsg(message: MsgCreateVestingAccountResponse, useInterfaces: boolean = true): MsgCreateVestingAccountResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgCreateVestingAccountResponse",
       value: MsgCreateVestingAccountResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgCreateVestingAccountResponseProtoMsg, useInterfaces: boolean = false): MsgCreateVestingAccountResponse {
+  fromProtoMsg(message: MsgCreateVestingAccountResponseProtoMsg, useInterfaces: boolean = true): MsgCreateVestingAccountResponse {
     return MsgCreateVestingAccountResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateVestingAccountResponse): Uint8Array {
@@ -419,7 +419,7 @@ export const MsgCreatePermanentLockedAccount = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCreatePermanentLockedAccount {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreatePermanentLockedAccount {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreatePermanentLockedAccount();
@@ -492,7 +492,7 @@ export const MsgCreatePermanentLockedAccount = {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgCreatePermanentLockedAccount, useInterfaces: boolean = false): MsgCreatePermanentLockedAccountAmino {
+  toAmino(message: MsgCreatePermanentLockedAccount, useInterfaces: boolean = true): MsgCreatePermanentLockedAccountAmino {
     const obj: any = {};
     obj.from_address = message.fromAddress;
     obj.to_address = message.toAddress;
@@ -506,13 +506,13 @@ export const MsgCreatePermanentLockedAccount = {
   fromAminoMsg(object: MsgCreatePermanentLockedAccountAminoMsg): MsgCreatePermanentLockedAccount {
     return MsgCreatePermanentLockedAccount.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreatePermanentLockedAccount, useInterfaces: boolean = false): MsgCreatePermanentLockedAccountAminoMsg {
+  toAminoMsg(message: MsgCreatePermanentLockedAccount, useInterfaces: boolean = true): MsgCreatePermanentLockedAccountAminoMsg {
     return {
       type: "cosmos-sdk/MsgCreatePermanentLockedAccount",
       value: MsgCreatePermanentLockedAccount.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgCreatePermanentLockedAccountProtoMsg, useInterfaces: boolean = false): MsgCreatePermanentLockedAccount {
+  fromProtoMsg(message: MsgCreatePermanentLockedAccountProtoMsg, useInterfaces: boolean = true): MsgCreatePermanentLockedAccount {
     return MsgCreatePermanentLockedAccount.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreatePermanentLockedAccount): Uint8Array {
@@ -534,7 +534,7 @@ export const MsgCreatePermanentLockedAccountResponse = {
   encode(_: MsgCreatePermanentLockedAccountResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCreatePermanentLockedAccountResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreatePermanentLockedAccountResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreatePermanentLockedAccountResponse();
@@ -570,20 +570,20 @@ export const MsgCreatePermanentLockedAccountResponse = {
   fromAmino(_: MsgCreatePermanentLockedAccountResponseAmino): MsgCreatePermanentLockedAccountResponse {
     return {};
   },
-  toAmino(_: MsgCreatePermanentLockedAccountResponse, useInterfaces: boolean = false): MsgCreatePermanentLockedAccountResponseAmino {
+  toAmino(_: MsgCreatePermanentLockedAccountResponse, useInterfaces: boolean = true): MsgCreatePermanentLockedAccountResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgCreatePermanentLockedAccountResponseAminoMsg): MsgCreatePermanentLockedAccountResponse {
     return MsgCreatePermanentLockedAccountResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreatePermanentLockedAccountResponse, useInterfaces: boolean = false): MsgCreatePermanentLockedAccountResponseAminoMsg {
+  toAminoMsg(message: MsgCreatePermanentLockedAccountResponse, useInterfaces: boolean = true): MsgCreatePermanentLockedAccountResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgCreatePermanentLockedAccountResponse",
       value: MsgCreatePermanentLockedAccountResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgCreatePermanentLockedAccountResponseProtoMsg, useInterfaces: boolean = false): MsgCreatePermanentLockedAccountResponse {
+  fromProtoMsg(message: MsgCreatePermanentLockedAccountResponseProtoMsg, useInterfaces: boolean = true): MsgCreatePermanentLockedAccountResponse {
     return MsgCreatePermanentLockedAccountResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreatePermanentLockedAccountResponse): Uint8Array {
@@ -622,7 +622,7 @@ export const MsgCreatePeriodicVestingAccount = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCreatePeriodicVestingAccount {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreatePeriodicVestingAccount {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreatePeriodicVestingAccount();
@@ -706,7 +706,7 @@ export const MsgCreatePeriodicVestingAccount = {
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgCreatePeriodicVestingAccount, useInterfaces: boolean = false): MsgCreatePeriodicVestingAccountAmino {
+  toAmino(message: MsgCreatePeriodicVestingAccount, useInterfaces: boolean = true): MsgCreatePeriodicVestingAccountAmino {
     const obj: any = {};
     obj.from_address = message.fromAddress;
     obj.to_address = message.toAddress;
@@ -721,13 +721,13 @@ export const MsgCreatePeriodicVestingAccount = {
   fromAminoMsg(object: MsgCreatePeriodicVestingAccountAminoMsg): MsgCreatePeriodicVestingAccount {
     return MsgCreatePeriodicVestingAccount.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreatePeriodicVestingAccount, useInterfaces: boolean = false): MsgCreatePeriodicVestingAccountAminoMsg {
+  toAminoMsg(message: MsgCreatePeriodicVestingAccount, useInterfaces: boolean = true): MsgCreatePeriodicVestingAccountAminoMsg {
     return {
       type: "cosmos-sdk/MsgCreatePeriodicVestingAccount",
       value: MsgCreatePeriodicVestingAccount.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgCreatePeriodicVestingAccountProtoMsg, useInterfaces: boolean = false): MsgCreatePeriodicVestingAccount {
+  fromProtoMsg(message: MsgCreatePeriodicVestingAccountProtoMsg, useInterfaces: boolean = true): MsgCreatePeriodicVestingAccount {
     return MsgCreatePeriodicVestingAccount.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreatePeriodicVestingAccount): Uint8Array {
@@ -749,7 +749,7 @@ export const MsgCreatePeriodicVestingAccountResponse = {
   encode(_: MsgCreatePeriodicVestingAccountResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCreatePeriodicVestingAccountResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreatePeriodicVestingAccountResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreatePeriodicVestingAccountResponse();
@@ -785,20 +785,20 @@ export const MsgCreatePeriodicVestingAccountResponse = {
   fromAmino(_: MsgCreatePeriodicVestingAccountResponseAmino): MsgCreatePeriodicVestingAccountResponse {
     return {};
   },
-  toAmino(_: MsgCreatePeriodicVestingAccountResponse, useInterfaces: boolean = false): MsgCreatePeriodicVestingAccountResponseAmino {
+  toAmino(_: MsgCreatePeriodicVestingAccountResponse, useInterfaces: boolean = true): MsgCreatePeriodicVestingAccountResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgCreatePeriodicVestingAccountResponseAminoMsg): MsgCreatePeriodicVestingAccountResponse {
     return MsgCreatePeriodicVestingAccountResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreatePeriodicVestingAccountResponse, useInterfaces: boolean = false): MsgCreatePeriodicVestingAccountResponseAminoMsg {
+  toAminoMsg(message: MsgCreatePeriodicVestingAccountResponse, useInterfaces: boolean = true): MsgCreatePeriodicVestingAccountResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgCreatePeriodicVestingAccountResponse",
       value: MsgCreatePeriodicVestingAccountResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgCreatePeriodicVestingAccountResponseProtoMsg, useInterfaces: boolean = false): MsgCreatePeriodicVestingAccountResponse {
+  fromProtoMsg(message: MsgCreatePeriodicVestingAccountResponseProtoMsg, useInterfaces: boolean = true): MsgCreatePeriodicVestingAccountResponse {
     return MsgCreatePeriodicVestingAccountResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreatePeriodicVestingAccountResponse): Uint8Array {

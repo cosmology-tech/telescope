@@ -198,7 +198,7 @@ export const Provider = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Provider {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Provider {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProvider();
@@ -271,7 +271,7 @@ export const Provider = {
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
     };
   },
-  toAmino(message: Provider, useInterfaces: boolean = false): ProviderAmino {
+  toAmino(message: Provider, useInterfaces: boolean = true): ProviderAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.auditor = message.auditor;
@@ -285,7 +285,7 @@ export const Provider = {
   fromAminoMsg(object: ProviderAminoMsg): Provider {
     return Provider.fromAmino(object.value);
   },
-  fromProtoMsg(message: ProviderProtoMsg, useInterfaces: boolean = false): Provider {
+  fromProtoMsg(message: ProviderProtoMsg, useInterfaces: boolean = true): Provider {
     return Provider.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Provider): Uint8Array {
@@ -319,7 +319,7 @@ export const AuditedAttributes = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AuditedAttributes {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AuditedAttributes {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuditedAttributes();
@@ -392,7 +392,7 @@ export const AuditedAttributes = {
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
     };
   },
-  toAmino(message: AuditedAttributes, useInterfaces: boolean = false): AuditedAttributesAmino {
+  toAmino(message: AuditedAttributes, useInterfaces: boolean = true): AuditedAttributesAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.auditor = message.auditor;
@@ -406,7 +406,7 @@ export const AuditedAttributes = {
   fromAminoMsg(object: AuditedAttributesAminoMsg): AuditedAttributes {
     return AuditedAttributes.fromAmino(object.value);
   },
-  fromProtoMsg(message: AuditedAttributesProtoMsg, useInterfaces: boolean = false): AuditedAttributes {
+  fromProtoMsg(message: AuditedAttributesProtoMsg, useInterfaces: boolean = true): AuditedAttributes {
     return AuditedAttributes.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AuditedAttributes): Uint8Array {
@@ -432,7 +432,7 @@ export const AttributesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AttributesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AttributesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributesResponse();
@@ -487,7 +487,7 @@ export const AttributesResponse = {
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromAmino(e)) : []
     };
   },
-  toAmino(message: AttributesResponse, useInterfaces: boolean = false): AttributesResponseAmino {
+  toAmino(message: AttributesResponse, useInterfaces: boolean = true): AttributesResponseAmino {
     const obj: any = {};
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toAmino(e, useInterfaces) : undefined);
@@ -499,7 +499,7 @@ export const AttributesResponse = {
   fromAminoMsg(object: AttributesResponseAminoMsg): AttributesResponse {
     return AttributesResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: AttributesResponseProtoMsg, useInterfaces: boolean = false): AttributesResponse {
+  fromProtoMsg(message: AttributesResponseProtoMsg, useInterfaces: boolean = true): AttributesResponse {
     return AttributesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AttributesResponse): Uint8Array {
@@ -529,7 +529,7 @@ export const AttributesFilters = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AttributesFilters {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AttributesFilters {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributesFilters();
@@ -601,7 +601,7 @@ export const AttributesFilters = {
       owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => e) : []
     };
   },
-  toAmino(message: AttributesFilters, useInterfaces: boolean = false): AttributesFiltersAmino {
+  toAmino(message: AttributesFilters, useInterfaces: boolean = true): AttributesFiltersAmino {
     const obj: any = {};
     if (message.auditors) {
       obj.auditors = message.auditors.map(e => e);
@@ -618,7 +618,7 @@ export const AttributesFilters = {
   fromAminoMsg(object: AttributesFiltersAminoMsg): AttributesFilters {
     return AttributesFilters.fromAmino(object.value);
   },
-  fromProtoMsg(message: AttributesFiltersProtoMsg, useInterfaces: boolean = false): AttributesFilters {
+  fromProtoMsg(message: AttributesFiltersProtoMsg, useInterfaces: boolean = true): AttributesFilters {
     return AttributesFilters.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AttributesFilters): Uint8Array {
@@ -652,7 +652,7 @@ export const MsgSignProviderAttributes = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSignProviderAttributes {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSignProviderAttributes {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSignProviderAttributes();
@@ -725,7 +725,7 @@ export const MsgSignProviderAttributes = {
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgSignProviderAttributes, useInterfaces: boolean = false): MsgSignProviderAttributesAmino {
+  toAmino(message: MsgSignProviderAttributes, useInterfaces: boolean = true): MsgSignProviderAttributesAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.auditor = message.auditor;
@@ -739,7 +739,7 @@ export const MsgSignProviderAttributes = {
   fromAminoMsg(object: MsgSignProviderAttributesAminoMsg): MsgSignProviderAttributes {
     return MsgSignProviderAttributes.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgSignProviderAttributesProtoMsg, useInterfaces: boolean = false): MsgSignProviderAttributes {
+  fromProtoMsg(message: MsgSignProviderAttributesProtoMsg, useInterfaces: boolean = true): MsgSignProviderAttributes {
     return MsgSignProviderAttributes.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSignProviderAttributes): Uint8Array {
@@ -760,7 +760,7 @@ export const MsgSignProviderAttributesResponse = {
   encode(_: MsgSignProviderAttributesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSignProviderAttributesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSignProviderAttributesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSignProviderAttributesResponse();
@@ -796,14 +796,14 @@ export const MsgSignProviderAttributesResponse = {
   fromAmino(_: MsgSignProviderAttributesResponseAmino): MsgSignProviderAttributesResponse {
     return {};
   },
-  toAmino(_: MsgSignProviderAttributesResponse, useInterfaces: boolean = false): MsgSignProviderAttributesResponseAmino {
+  toAmino(_: MsgSignProviderAttributesResponse, useInterfaces: boolean = true): MsgSignProviderAttributesResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgSignProviderAttributesResponseAminoMsg): MsgSignProviderAttributesResponse {
     return MsgSignProviderAttributesResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgSignProviderAttributesResponseProtoMsg, useInterfaces: boolean = false): MsgSignProviderAttributesResponse {
+  fromProtoMsg(message: MsgSignProviderAttributesResponseProtoMsg, useInterfaces: boolean = true): MsgSignProviderAttributesResponse {
     return MsgSignProviderAttributesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSignProviderAttributesResponse): Uint8Array {
@@ -837,7 +837,7 @@ export const MsgDeleteProviderAttributes = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgDeleteProviderAttributes {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgDeleteProviderAttributes {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeleteProviderAttributes();
@@ -910,7 +910,7 @@ export const MsgDeleteProviderAttributes = {
       keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
     };
   },
-  toAmino(message: MsgDeleteProviderAttributes, useInterfaces: boolean = false): MsgDeleteProviderAttributesAmino {
+  toAmino(message: MsgDeleteProviderAttributes, useInterfaces: boolean = true): MsgDeleteProviderAttributesAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.auditor = message.auditor;
@@ -924,7 +924,7 @@ export const MsgDeleteProviderAttributes = {
   fromAminoMsg(object: MsgDeleteProviderAttributesAminoMsg): MsgDeleteProviderAttributes {
     return MsgDeleteProviderAttributes.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgDeleteProviderAttributesProtoMsg, useInterfaces: boolean = false): MsgDeleteProviderAttributes {
+  fromProtoMsg(message: MsgDeleteProviderAttributesProtoMsg, useInterfaces: boolean = true): MsgDeleteProviderAttributes {
     return MsgDeleteProviderAttributes.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgDeleteProviderAttributes): Uint8Array {
@@ -945,7 +945,7 @@ export const MsgDeleteProviderAttributesResponse = {
   encode(_: MsgDeleteProviderAttributesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgDeleteProviderAttributesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgDeleteProviderAttributesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeleteProviderAttributesResponse();
@@ -981,14 +981,14 @@ export const MsgDeleteProviderAttributesResponse = {
   fromAmino(_: MsgDeleteProviderAttributesResponseAmino): MsgDeleteProviderAttributesResponse {
     return {};
   },
-  toAmino(_: MsgDeleteProviderAttributesResponse, useInterfaces: boolean = false): MsgDeleteProviderAttributesResponseAmino {
+  toAmino(_: MsgDeleteProviderAttributesResponse, useInterfaces: boolean = true): MsgDeleteProviderAttributesResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgDeleteProviderAttributesResponseAminoMsg): MsgDeleteProviderAttributesResponse {
     return MsgDeleteProviderAttributesResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgDeleteProviderAttributesResponseProtoMsg, useInterfaces: boolean = false): MsgDeleteProviderAttributesResponse {
+  fromProtoMsg(message: MsgDeleteProviderAttributesResponseProtoMsg, useInterfaces: boolean = true): MsgDeleteProviderAttributesResponse {
     return MsgDeleteProviderAttributesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgDeleteProviderAttributesResponse): Uint8Array {

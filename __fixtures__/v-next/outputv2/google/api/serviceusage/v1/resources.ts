@@ -285,7 +285,7 @@ export const Service = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Service {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Service {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseService();
@@ -361,7 +361,7 @@ export const Service = {
       state: isSet(object.state) ? stateFromJSON(object.state) : -1
     };
   },
-  toAmino(message: Service, useInterfaces: boolean = false): ServiceAmino {
+  toAmino(message: Service, useInterfaces: boolean = true): ServiceAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.parent = message.parent;
@@ -372,7 +372,7 @@ export const Service = {
   fromAminoMsg(object: ServiceAminoMsg): Service {
     return Service.fromAmino(object.value);
   },
-  fromProtoMsg(message: ServiceProtoMsg, useInterfaces: boolean = false): Service {
+  fromProtoMsg(message: ServiceProtoMsg, useInterfaces: boolean = true): Service {
     return Service.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Service): Uint8Array {
@@ -434,7 +434,7 @@ export const ServiceConfig = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ServiceConfig {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ServiceConfig {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServiceConfig();
@@ -596,7 +596,7 @@ export const ServiceConfig = {
       monitoring: object?.monitoring ? Monitoring.fromAmino(object.monitoring) : undefined
     };
   },
-  toAmino(message: ServiceConfig, useInterfaces: boolean = false): ServiceConfigAmino {
+  toAmino(message: ServiceConfig, useInterfaces: boolean = true): ServiceConfigAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.title = message.title;
@@ -625,7 +625,7 @@ export const ServiceConfig = {
   fromAminoMsg(object: ServiceConfigAminoMsg): ServiceConfig {
     return ServiceConfig.fromAmino(object.value);
   },
-  fromProtoMsg(message: ServiceConfigProtoMsg, useInterfaces: boolean = false): ServiceConfig {
+  fromProtoMsg(message: ServiceConfigProtoMsg, useInterfaces: boolean = true): ServiceConfig {
     return ServiceConfig.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ServiceConfig): Uint8Array {
@@ -651,7 +651,7 @@ export const OperationMetadata = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): OperationMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): OperationMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperationMetadata();
@@ -706,7 +706,7 @@ export const OperationMetadata = {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
     };
   },
-  toAmino(message: OperationMetadata, useInterfaces: boolean = false): OperationMetadataAmino {
+  toAmino(message: OperationMetadata, useInterfaces: boolean = true): OperationMetadataAmino {
     const obj: any = {};
     if (message.resourceNames) {
       obj.resource_names = message.resourceNames.map(e => e);
@@ -718,7 +718,7 @@ export const OperationMetadata = {
   fromAminoMsg(object: OperationMetadataAminoMsg): OperationMetadata {
     return OperationMetadata.fromAmino(object.value);
   },
-  fromProtoMsg(message: OperationMetadataProtoMsg, useInterfaces: boolean = false): OperationMetadata {
+  fromProtoMsg(message: OperationMetadataProtoMsg, useInterfaces: boolean = true): OperationMetadata {
     return OperationMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: OperationMetadata): Uint8Array {

@@ -159,7 +159,7 @@ export const Endpoint = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Endpoint {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Endpoint {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEndpoint();
@@ -241,7 +241,7 @@ export const Endpoint = {
       allowCors: object.allow_cors
     };
   },
-  toAmino(message: Endpoint, useInterfaces: boolean = false): EndpointAmino {
+  toAmino(message: Endpoint, useInterfaces: boolean = true): EndpointAmino {
     const obj: any = {};
     obj.name = message.name;
     if (message.aliases) {
@@ -256,7 +256,7 @@ export const Endpoint = {
   fromAminoMsg(object: EndpointAminoMsg): Endpoint {
     return Endpoint.fromAmino(object.value);
   },
-  fromProtoMsg(message: EndpointProtoMsg, useInterfaces: boolean = false): Endpoint {
+  fromProtoMsg(message: EndpointProtoMsg, useInterfaces: boolean = true): Endpoint {
     return Endpoint.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Endpoint): Uint8Array {

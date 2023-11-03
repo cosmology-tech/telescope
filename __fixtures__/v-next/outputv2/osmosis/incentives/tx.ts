@@ -163,7 +163,7 @@ export const MsgCreateGauge = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCreateGauge {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateGauge {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGauge();
@@ -267,7 +267,7 @@ export const MsgCreateGauge = {
       numEpochsPaidOver: BigInt(object.num_epochs_paid_over)
     };
   },
-  toAmino(message: MsgCreateGauge, useInterfaces: boolean = false): MsgCreateGaugeAmino {
+  toAmino(message: MsgCreateGauge, useInterfaces: boolean = true): MsgCreateGaugeAmino {
     const obj: any = {};
     obj.is_perpetual = message.isPerpetual;
     obj.owner = message.owner;
@@ -284,13 +284,13 @@ export const MsgCreateGauge = {
   fromAminoMsg(object: MsgCreateGaugeAminoMsg): MsgCreateGauge {
     return MsgCreateGauge.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreateGauge, useInterfaces: boolean = false): MsgCreateGaugeAminoMsg {
+  toAminoMsg(message: MsgCreateGauge, useInterfaces: boolean = true): MsgCreateGaugeAminoMsg {
     return {
       type: "osmosis/incentives/create-gauge",
       value: MsgCreateGauge.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgCreateGaugeProtoMsg, useInterfaces: boolean = false): MsgCreateGauge {
+  fromProtoMsg(message: MsgCreateGaugeProtoMsg, useInterfaces: boolean = true): MsgCreateGauge {
     return MsgCreateGauge.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateGauge): Uint8Array {
@@ -312,7 +312,7 @@ export const MsgCreateGaugeResponse = {
   encode(_: MsgCreateGaugeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCreateGaugeResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateGaugeResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGaugeResponse();
@@ -348,20 +348,20 @@ export const MsgCreateGaugeResponse = {
   fromAmino(_: MsgCreateGaugeResponseAmino): MsgCreateGaugeResponse {
     return {};
   },
-  toAmino(_: MsgCreateGaugeResponse, useInterfaces: boolean = false): MsgCreateGaugeResponseAmino {
+  toAmino(_: MsgCreateGaugeResponse, useInterfaces: boolean = true): MsgCreateGaugeResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgCreateGaugeResponseAminoMsg): MsgCreateGaugeResponse {
     return MsgCreateGaugeResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreateGaugeResponse, useInterfaces: boolean = false): MsgCreateGaugeResponseAminoMsg {
+  toAminoMsg(message: MsgCreateGaugeResponse, useInterfaces: boolean = true): MsgCreateGaugeResponseAminoMsg {
     return {
       type: "osmosis/incentives/create-gauge-response",
       value: MsgCreateGaugeResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgCreateGaugeResponseProtoMsg, useInterfaces: boolean = false): MsgCreateGaugeResponse {
+  fromProtoMsg(message: MsgCreateGaugeResponseProtoMsg, useInterfaces: boolean = true): MsgCreateGaugeResponse {
     return MsgCreateGaugeResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateGaugeResponse): Uint8Array {
@@ -396,7 +396,7 @@ export const MsgAddToGauge = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgAddToGauge {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgAddToGauge {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddToGauge();
@@ -471,7 +471,7 @@ export const MsgAddToGauge = {
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgAddToGauge, useInterfaces: boolean = false): MsgAddToGaugeAmino {
+  toAmino(message: MsgAddToGauge, useInterfaces: boolean = true): MsgAddToGaugeAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
@@ -485,13 +485,13 @@ export const MsgAddToGauge = {
   fromAminoMsg(object: MsgAddToGaugeAminoMsg): MsgAddToGauge {
     return MsgAddToGauge.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgAddToGauge, useInterfaces: boolean = false): MsgAddToGaugeAminoMsg {
+  toAminoMsg(message: MsgAddToGauge, useInterfaces: boolean = true): MsgAddToGaugeAminoMsg {
     return {
       type: "osmosis/incentives/add-to-gauge",
       value: MsgAddToGauge.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgAddToGaugeProtoMsg, useInterfaces: boolean = false): MsgAddToGauge {
+  fromProtoMsg(message: MsgAddToGaugeProtoMsg, useInterfaces: boolean = true): MsgAddToGauge {
     return MsgAddToGauge.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgAddToGauge): Uint8Array {
@@ -513,7 +513,7 @@ export const MsgAddToGaugeResponse = {
   encode(_: MsgAddToGaugeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgAddToGaugeResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgAddToGaugeResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddToGaugeResponse();
@@ -549,20 +549,20 @@ export const MsgAddToGaugeResponse = {
   fromAmino(_: MsgAddToGaugeResponseAmino): MsgAddToGaugeResponse {
     return {};
   },
-  toAmino(_: MsgAddToGaugeResponse, useInterfaces: boolean = false): MsgAddToGaugeResponseAmino {
+  toAmino(_: MsgAddToGaugeResponse, useInterfaces: boolean = true): MsgAddToGaugeResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgAddToGaugeResponseAminoMsg): MsgAddToGaugeResponse {
     return MsgAddToGaugeResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgAddToGaugeResponse, useInterfaces: boolean = false): MsgAddToGaugeResponseAminoMsg {
+  toAminoMsg(message: MsgAddToGaugeResponse, useInterfaces: boolean = true): MsgAddToGaugeResponseAminoMsg {
     return {
       type: "osmosis/incentives/add-to-gauge-response",
       value: MsgAddToGaugeResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgAddToGaugeResponseProtoMsg, useInterfaces: boolean = false): MsgAddToGaugeResponse {
+  fromProtoMsg(message: MsgAddToGaugeResponseProtoMsg, useInterfaces: boolean = true): MsgAddToGaugeResponse {
     return MsgAddToGaugeResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgAddToGaugeResponse): Uint8Array {

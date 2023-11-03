@@ -142,7 +142,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -189,7 +189,7 @@ export const Params = {
       mintedDenom: object.minted_denom
     };
   },
-  toAmino(message: Params, useInterfaces: boolean = false): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
     obj.minted_denom = message.mintedDenom;
     return obj;
@@ -197,13 +197,13 @@ export const Params = {
   fromAminoMsg(object: ParamsAminoMsg): Params {
     return Params.fromAmino(object.value);
   },
-  toAminoMsg(message: Params, useInterfaces: boolean = false): ParamsAminoMsg {
+  toAminoMsg(message: Params, useInterfaces: boolean = true): ParamsAminoMsg {
     return {
       type: "osmosis/poolincentives/params",
       value: Params.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = false): Params {
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
     return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
@@ -230,7 +230,7 @@ export const LockableDurationsInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): LockableDurationsInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LockableDurationsInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockableDurationsInfo();
@@ -285,7 +285,7 @@ export const LockableDurationsInfo = {
       lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : []
     };
   },
-  toAmino(message: LockableDurationsInfo, useInterfaces: boolean = false): LockableDurationsInfoAmino {
+  toAmino(message: LockableDurationsInfo, useInterfaces: boolean = true): LockableDurationsInfoAmino {
     const obj: any = {};
     if (message.lockableDurations) {
       obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e, useInterfaces) : undefined);
@@ -297,13 +297,13 @@ export const LockableDurationsInfo = {
   fromAminoMsg(object: LockableDurationsInfoAminoMsg): LockableDurationsInfo {
     return LockableDurationsInfo.fromAmino(object.value);
   },
-  toAminoMsg(message: LockableDurationsInfo, useInterfaces: boolean = false): LockableDurationsInfoAminoMsg {
+  toAminoMsg(message: LockableDurationsInfo, useInterfaces: boolean = true): LockableDurationsInfoAminoMsg {
     return {
       type: "osmosis/poolincentives/lockable-durations-info",
       value: LockableDurationsInfo.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: LockableDurationsInfoProtoMsg, useInterfaces: boolean = false): LockableDurationsInfo {
+  fromProtoMsg(message: LockableDurationsInfoProtoMsg, useInterfaces: boolean = true): LockableDurationsInfo {
     return LockableDurationsInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LockableDurationsInfo): Uint8Array {
@@ -334,7 +334,7 @@ export const DistrInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DistrInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DistrInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistrInfo();
@@ -398,7 +398,7 @@ export const DistrInfo = {
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
     };
   },
-  toAmino(message: DistrInfo, useInterfaces: boolean = false): DistrInfoAmino {
+  toAmino(message: DistrInfo, useInterfaces: boolean = true): DistrInfoAmino {
     const obj: any = {};
     obj.total_weight = message.totalWeight;
     if (message.records) {
@@ -411,13 +411,13 @@ export const DistrInfo = {
   fromAminoMsg(object: DistrInfoAminoMsg): DistrInfo {
     return DistrInfo.fromAmino(object.value);
   },
-  toAminoMsg(message: DistrInfo, useInterfaces: boolean = false): DistrInfoAminoMsg {
+  toAminoMsg(message: DistrInfo, useInterfaces: boolean = true): DistrInfoAminoMsg {
     return {
       type: "osmosis/poolincentives/distr-info",
       value: DistrInfo.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: DistrInfoProtoMsg, useInterfaces: boolean = false): DistrInfo {
+  fromProtoMsg(message: DistrInfoProtoMsg, useInterfaces: boolean = true): DistrInfo {
     return DistrInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DistrInfo): Uint8Array {
@@ -448,7 +448,7 @@ export const DistrRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DistrRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DistrRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistrRecord();
@@ -506,7 +506,7 @@ export const DistrRecord = {
       weight: object.weight
     };
   },
-  toAmino(message: DistrRecord, useInterfaces: boolean = false): DistrRecordAmino {
+  toAmino(message: DistrRecord, useInterfaces: boolean = true): DistrRecordAmino {
     const obj: any = {};
     obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
     obj.weight = message.weight;
@@ -515,13 +515,13 @@ export const DistrRecord = {
   fromAminoMsg(object: DistrRecordAminoMsg): DistrRecord {
     return DistrRecord.fromAmino(object.value);
   },
-  toAminoMsg(message: DistrRecord, useInterfaces: boolean = false): DistrRecordAminoMsg {
+  toAminoMsg(message: DistrRecord, useInterfaces: boolean = true): DistrRecordAminoMsg {
     return {
       type: "osmosis/poolincentives/distr-record",
       value: DistrRecord.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: DistrRecordProtoMsg, useInterfaces: boolean = false): DistrRecord {
+  fromProtoMsg(message: DistrRecordProtoMsg, useInterfaces: boolean = true): DistrRecord {
     return DistrRecord.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DistrRecord): Uint8Array {
@@ -556,7 +556,7 @@ export const PoolToGauge = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): PoolToGauge {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PoolToGauge {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolToGauge();
@@ -627,7 +627,7 @@ export const PoolToGauge = {
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
     };
   },
-  toAmino(message: PoolToGauge, useInterfaces: boolean = false): PoolToGaugeAmino {
+  toAmino(message: PoolToGauge, useInterfaces: boolean = true): PoolToGaugeAmino {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
@@ -637,13 +637,13 @@ export const PoolToGauge = {
   fromAminoMsg(object: PoolToGaugeAminoMsg): PoolToGauge {
     return PoolToGauge.fromAmino(object.value);
   },
-  toAminoMsg(message: PoolToGauge, useInterfaces: boolean = false): PoolToGaugeAminoMsg {
+  toAminoMsg(message: PoolToGauge, useInterfaces: boolean = true): PoolToGaugeAminoMsg {
     return {
       type: "osmosis/poolincentives/pool-to-gauge",
       value: PoolToGauge.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: PoolToGaugeProtoMsg, useInterfaces: boolean = false): PoolToGauge {
+  fromProtoMsg(message: PoolToGaugeProtoMsg, useInterfaces: boolean = true): PoolToGauge {
     return PoolToGauge.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PoolToGauge): Uint8Array {
@@ -670,7 +670,7 @@ export const PoolToGauges = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): PoolToGauges {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PoolToGauges {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolToGauges();
@@ -725,7 +725,7 @@ export const PoolToGauges = {
       poolToGauge: Array.isArray(object?.pool_to_gauge) ? object.pool_to_gauge.map((e: any) => PoolToGauge.fromAmino(e)) : []
     };
   },
-  toAmino(message: PoolToGauges, useInterfaces: boolean = false): PoolToGaugesAmino {
+  toAmino(message: PoolToGauges, useInterfaces: boolean = true): PoolToGaugesAmino {
     const obj: any = {};
     if (message.poolToGauge) {
       obj.pool_to_gauge = message.poolToGauge.map(e => e ? PoolToGauge.toAmino(e, useInterfaces) : undefined);
@@ -737,13 +737,13 @@ export const PoolToGauges = {
   fromAminoMsg(object: PoolToGaugesAminoMsg): PoolToGauges {
     return PoolToGauges.fromAmino(object.value);
   },
-  toAminoMsg(message: PoolToGauges, useInterfaces: boolean = false): PoolToGaugesAminoMsg {
+  toAminoMsg(message: PoolToGauges, useInterfaces: boolean = true): PoolToGaugesAminoMsg {
     return {
       type: "osmosis/poolincentives/pool-to-gauges",
       value: PoolToGauges.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: PoolToGaugesProtoMsg, useInterfaces: boolean = false): PoolToGauges {
+  fromProtoMsg(message: PoolToGaugesProtoMsg, useInterfaces: boolean = true): PoolToGauges {
     return PoolToGauges.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PoolToGauges): Uint8Array {

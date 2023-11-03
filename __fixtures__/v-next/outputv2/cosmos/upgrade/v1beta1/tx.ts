@@ -145,7 +145,7 @@ export const MsgSoftwareUpgrade = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSoftwareUpgrade {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSoftwareUpgrade {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSoftwareUpgrade();
@@ -203,7 +203,7 @@ export const MsgSoftwareUpgrade = {
       plan: object?.plan ? Plan.fromAmino(object.plan) : undefined
     };
   },
-  toAmino(message: MsgSoftwareUpgrade, useInterfaces: boolean = false): MsgSoftwareUpgradeAmino {
+  toAmino(message: MsgSoftwareUpgrade, useInterfaces: boolean = true): MsgSoftwareUpgradeAmino {
     const obj: any = {};
     obj.authority = message.authority;
     obj.plan = message.plan ? Plan.toAmino(message.plan, useInterfaces) : undefined;
@@ -212,13 +212,13 @@ export const MsgSoftwareUpgrade = {
   fromAminoMsg(object: MsgSoftwareUpgradeAminoMsg): MsgSoftwareUpgrade {
     return MsgSoftwareUpgrade.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgSoftwareUpgrade, useInterfaces: boolean = false): MsgSoftwareUpgradeAminoMsg {
+  toAminoMsg(message: MsgSoftwareUpgrade, useInterfaces: boolean = true): MsgSoftwareUpgradeAminoMsg {
     return {
       type: "cosmos-sdk/MsgSoftwareUpgrade",
       value: MsgSoftwareUpgrade.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgSoftwareUpgradeProtoMsg, useInterfaces: boolean = false): MsgSoftwareUpgrade {
+  fromProtoMsg(message: MsgSoftwareUpgradeProtoMsg, useInterfaces: boolean = true): MsgSoftwareUpgrade {
     return MsgSoftwareUpgrade.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSoftwareUpgrade): Uint8Array {
@@ -240,7 +240,7 @@ export const MsgSoftwareUpgradeResponse = {
   encode(_: MsgSoftwareUpgradeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSoftwareUpgradeResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSoftwareUpgradeResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSoftwareUpgradeResponse();
@@ -276,20 +276,20 @@ export const MsgSoftwareUpgradeResponse = {
   fromAmino(_: MsgSoftwareUpgradeResponseAmino): MsgSoftwareUpgradeResponse {
     return {};
   },
-  toAmino(_: MsgSoftwareUpgradeResponse, useInterfaces: boolean = false): MsgSoftwareUpgradeResponseAmino {
+  toAmino(_: MsgSoftwareUpgradeResponse, useInterfaces: boolean = true): MsgSoftwareUpgradeResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgSoftwareUpgradeResponseAminoMsg): MsgSoftwareUpgradeResponse {
     return MsgSoftwareUpgradeResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgSoftwareUpgradeResponse, useInterfaces: boolean = false): MsgSoftwareUpgradeResponseAminoMsg {
+  toAminoMsg(message: MsgSoftwareUpgradeResponse, useInterfaces: boolean = true): MsgSoftwareUpgradeResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgSoftwareUpgradeResponse",
       value: MsgSoftwareUpgradeResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgSoftwareUpgradeResponseProtoMsg, useInterfaces: boolean = false): MsgSoftwareUpgradeResponse {
+  fromProtoMsg(message: MsgSoftwareUpgradeResponseProtoMsg, useInterfaces: boolean = true): MsgSoftwareUpgradeResponse {
     return MsgSoftwareUpgradeResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSoftwareUpgradeResponse): Uint8Array {
@@ -316,7 +316,7 @@ export const MsgCancelUpgrade = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCancelUpgrade {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCancelUpgrade {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelUpgrade();
@@ -363,7 +363,7 @@ export const MsgCancelUpgrade = {
       authority: object.authority
     };
   },
-  toAmino(message: MsgCancelUpgrade, useInterfaces: boolean = false): MsgCancelUpgradeAmino {
+  toAmino(message: MsgCancelUpgrade, useInterfaces: boolean = true): MsgCancelUpgradeAmino {
     const obj: any = {};
     obj.authority = message.authority;
     return obj;
@@ -371,13 +371,13 @@ export const MsgCancelUpgrade = {
   fromAminoMsg(object: MsgCancelUpgradeAminoMsg): MsgCancelUpgrade {
     return MsgCancelUpgrade.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCancelUpgrade, useInterfaces: boolean = false): MsgCancelUpgradeAminoMsg {
+  toAminoMsg(message: MsgCancelUpgrade, useInterfaces: boolean = true): MsgCancelUpgradeAminoMsg {
     return {
       type: "cosmos-sdk/MsgCancelUpgrade",
       value: MsgCancelUpgrade.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgCancelUpgradeProtoMsg, useInterfaces: boolean = false): MsgCancelUpgrade {
+  fromProtoMsg(message: MsgCancelUpgradeProtoMsg, useInterfaces: boolean = true): MsgCancelUpgrade {
     return MsgCancelUpgrade.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCancelUpgrade): Uint8Array {
@@ -399,7 +399,7 @@ export const MsgCancelUpgradeResponse = {
   encode(_: MsgCancelUpgradeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCancelUpgradeResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCancelUpgradeResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelUpgradeResponse();
@@ -435,20 +435,20 @@ export const MsgCancelUpgradeResponse = {
   fromAmino(_: MsgCancelUpgradeResponseAmino): MsgCancelUpgradeResponse {
     return {};
   },
-  toAmino(_: MsgCancelUpgradeResponse, useInterfaces: boolean = false): MsgCancelUpgradeResponseAmino {
+  toAmino(_: MsgCancelUpgradeResponse, useInterfaces: boolean = true): MsgCancelUpgradeResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgCancelUpgradeResponseAminoMsg): MsgCancelUpgradeResponse {
     return MsgCancelUpgradeResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCancelUpgradeResponse, useInterfaces: boolean = false): MsgCancelUpgradeResponseAminoMsg {
+  toAminoMsg(message: MsgCancelUpgradeResponse, useInterfaces: boolean = true): MsgCancelUpgradeResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgCancelUpgradeResponse",
       value: MsgCancelUpgradeResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgCancelUpgradeResponseProtoMsg, useInterfaces: boolean = false): MsgCancelUpgradeResponse {
+  fromProtoMsg(message: MsgCancelUpgradeResponseProtoMsg, useInterfaces: boolean = true): MsgCancelUpgradeResponse {
     return MsgCancelUpgradeResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCancelUpgradeResponse): Uint8Array {

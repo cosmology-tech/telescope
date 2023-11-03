@@ -104,7 +104,7 @@ export const ClaimRecord = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ClaimRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ClaimRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClaimRecord();
@@ -192,7 +192,7 @@ export const ClaimRecord = {
       actionCompleted: Array.isArray(object?.action_completed) ? object.action_completed.map((e: any) => e) : []
     };
   },
-  toAmino(message: ClaimRecord, useInterfaces: boolean = false): ClaimRecordAmino {
+  toAmino(message: ClaimRecord, useInterfaces: boolean = true): ClaimRecordAmino {
     const obj: any = {};
     obj.address = message.address;
     if (message.initialClaimableAmount) {
@@ -207,7 +207,7 @@ export const ClaimRecord = {
     }
     return obj;
   },
-  fromProtoMsg(message: ClaimRecordProtoMsg, useInterfaces: boolean = false): ClaimRecord {
+  fromProtoMsg(message: ClaimRecordProtoMsg, useInterfaces: boolean = true): ClaimRecord {
     return ClaimRecord.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ClaimRecord): Uint8Array {

@@ -341,7 +341,7 @@ export const QueryCurrentPlanRequest = {
   encode(_: QueryCurrentPlanRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryCurrentPlanRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryCurrentPlanRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCurrentPlanRequest();
@@ -377,20 +377,20 @@ export const QueryCurrentPlanRequest = {
   fromAmino(_: QueryCurrentPlanRequestAmino): QueryCurrentPlanRequest {
     return {};
   },
-  toAmino(_: QueryCurrentPlanRequest, useInterfaces: boolean = false): QueryCurrentPlanRequestAmino {
+  toAmino(_: QueryCurrentPlanRequest, useInterfaces: boolean = true): QueryCurrentPlanRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryCurrentPlanRequestAminoMsg): QueryCurrentPlanRequest {
     return QueryCurrentPlanRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryCurrentPlanRequest, useInterfaces: boolean = false): QueryCurrentPlanRequestAminoMsg {
+  toAminoMsg(message: QueryCurrentPlanRequest, useInterfaces: boolean = true): QueryCurrentPlanRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryCurrentPlanRequest",
       value: QueryCurrentPlanRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryCurrentPlanRequestProtoMsg, useInterfaces: boolean = false): QueryCurrentPlanRequest {
+  fromProtoMsg(message: QueryCurrentPlanRequestProtoMsg, useInterfaces: boolean = true): QueryCurrentPlanRequest {
     return QueryCurrentPlanRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryCurrentPlanRequest): Uint8Array {
@@ -417,7 +417,7 @@ export const QueryCurrentPlanResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryCurrentPlanResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryCurrentPlanResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCurrentPlanResponse();
@@ -466,7 +466,7 @@ export const QueryCurrentPlanResponse = {
       plan: object?.plan ? Plan.fromAmino(object.plan) : undefined
     };
   },
-  toAmino(message: QueryCurrentPlanResponse, useInterfaces: boolean = false): QueryCurrentPlanResponseAmino {
+  toAmino(message: QueryCurrentPlanResponse, useInterfaces: boolean = true): QueryCurrentPlanResponseAmino {
     const obj: any = {};
     obj.plan = message.plan ? Plan.toAmino(message.plan, useInterfaces) : undefined;
     return obj;
@@ -474,13 +474,13 @@ export const QueryCurrentPlanResponse = {
   fromAminoMsg(object: QueryCurrentPlanResponseAminoMsg): QueryCurrentPlanResponse {
     return QueryCurrentPlanResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryCurrentPlanResponse, useInterfaces: boolean = false): QueryCurrentPlanResponseAminoMsg {
+  toAminoMsg(message: QueryCurrentPlanResponse, useInterfaces: boolean = true): QueryCurrentPlanResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryCurrentPlanResponse",
       value: QueryCurrentPlanResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryCurrentPlanResponseProtoMsg, useInterfaces: boolean = false): QueryCurrentPlanResponse {
+  fromProtoMsg(message: QueryCurrentPlanResponseProtoMsg, useInterfaces: boolean = true): QueryCurrentPlanResponse {
     return QueryCurrentPlanResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryCurrentPlanResponse): Uint8Array {
@@ -507,7 +507,7 @@ export const QueryAppliedPlanRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAppliedPlanRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAppliedPlanRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAppliedPlanRequest();
@@ -554,7 +554,7 @@ export const QueryAppliedPlanRequest = {
       name: object.name
     };
   },
-  toAmino(message: QueryAppliedPlanRequest, useInterfaces: boolean = false): QueryAppliedPlanRequestAmino {
+  toAmino(message: QueryAppliedPlanRequest, useInterfaces: boolean = true): QueryAppliedPlanRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -562,13 +562,13 @@ export const QueryAppliedPlanRequest = {
   fromAminoMsg(object: QueryAppliedPlanRequestAminoMsg): QueryAppliedPlanRequest {
     return QueryAppliedPlanRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryAppliedPlanRequest, useInterfaces: boolean = false): QueryAppliedPlanRequestAminoMsg {
+  toAminoMsg(message: QueryAppliedPlanRequest, useInterfaces: boolean = true): QueryAppliedPlanRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryAppliedPlanRequest",
       value: QueryAppliedPlanRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryAppliedPlanRequestProtoMsg, useInterfaces: boolean = false): QueryAppliedPlanRequest {
+  fromProtoMsg(message: QueryAppliedPlanRequestProtoMsg, useInterfaces: boolean = true): QueryAppliedPlanRequest {
     return QueryAppliedPlanRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAppliedPlanRequest): Uint8Array {
@@ -595,7 +595,7 @@ export const QueryAppliedPlanResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAppliedPlanResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAppliedPlanResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAppliedPlanResponse();
@@ -644,7 +644,7 @@ export const QueryAppliedPlanResponse = {
       height: BigInt(object.height)
     };
   },
-  toAmino(message: QueryAppliedPlanResponse, useInterfaces: boolean = false): QueryAppliedPlanResponseAmino {
+  toAmino(message: QueryAppliedPlanResponse, useInterfaces: boolean = true): QueryAppliedPlanResponseAmino {
     const obj: any = {};
     obj.height = message.height ? message.height.toString() : undefined;
     return obj;
@@ -652,13 +652,13 @@ export const QueryAppliedPlanResponse = {
   fromAminoMsg(object: QueryAppliedPlanResponseAminoMsg): QueryAppliedPlanResponse {
     return QueryAppliedPlanResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryAppliedPlanResponse, useInterfaces: boolean = false): QueryAppliedPlanResponseAminoMsg {
+  toAminoMsg(message: QueryAppliedPlanResponse, useInterfaces: boolean = true): QueryAppliedPlanResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryAppliedPlanResponse",
       value: QueryAppliedPlanResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryAppliedPlanResponseProtoMsg, useInterfaces: boolean = false): QueryAppliedPlanResponse {
+  fromProtoMsg(message: QueryAppliedPlanResponseProtoMsg, useInterfaces: boolean = true): QueryAppliedPlanResponse {
     return QueryAppliedPlanResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAppliedPlanResponse): Uint8Array {
@@ -685,7 +685,7 @@ export const QueryUpgradedConsensusStateRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryUpgradedConsensusStateRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryUpgradedConsensusStateRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUpgradedConsensusStateRequest();
@@ -734,7 +734,7 @@ export const QueryUpgradedConsensusStateRequest = {
       lastHeight: BigInt(object.last_height)
     };
   },
-  toAmino(message: QueryUpgradedConsensusStateRequest, useInterfaces: boolean = false): QueryUpgradedConsensusStateRequestAmino {
+  toAmino(message: QueryUpgradedConsensusStateRequest, useInterfaces: boolean = true): QueryUpgradedConsensusStateRequestAmino {
     const obj: any = {};
     obj.last_height = message.lastHeight ? message.lastHeight.toString() : undefined;
     return obj;
@@ -742,13 +742,13 @@ export const QueryUpgradedConsensusStateRequest = {
   fromAminoMsg(object: QueryUpgradedConsensusStateRequestAminoMsg): QueryUpgradedConsensusStateRequest {
     return QueryUpgradedConsensusStateRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryUpgradedConsensusStateRequest, useInterfaces: boolean = false): QueryUpgradedConsensusStateRequestAminoMsg {
+  toAminoMsg(message: QueryUpgradedConsensusStateRequest, useInterfaces: boolean = true): QueryUpgradedConsensusStateRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryUpgradedConsensusStateRequest",
       value: QueryUpgradedConsensusStateRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryUpgradedConsensusStateRequestProtoMsg, useInterfaces: boolean = false): QueryUpgradedConsensusStateRequest {
+  fromProtoMsg(message: QueryUpgradedConsensusStateRequestProtoMsg, useInterfaces: boolean = true): QueryUpgradedConsensusStateRequest {
     return QueryUpgradedConsensusStateRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryUpgradedConsensusStateRequest): Uint8Array {
@@ -775,7 +775,7 @@ export const QueryUpgradedConsensusStateResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryUpgradedConsensusStateResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryUpgradedConsensusStateResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUpgradedConsensusStateResponse();
@@ -822,7 +822,7 @@ export const QueryUpgradedConsensusStateResponse = {
       upgradedConsensusState: object.upgraded_consensus_state
     };
   },
-  toAmino(message: QueryUpgradedConsensusStateResponse, useInterfaces: boolean = false): QueryUpgradedConsensusStateResponseAmino {
+  toAmino(message: QueryUpgradedConsensusStateResponse, useInterfaces: boolean = true): QueryUpgradedConsensusStateResponseAmino {
     const obj: any = {};
     obj.upgraded_consensus_state = message.upgradedConsensusState;
     return obj;
@@ -830,13 +830,13 @@ export const QueryUpgradedConsensusStateResponse = {
   fromAminoMsg(object: QueryUpgradedConsensusStateResponseAminoMsg): QueryUpgradedConsensusStateResponse {
     return QueryUpgradedConsensusStateResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryUpgradedConsensusStateResponse, useInterfaces: boolean = false): QueryUpgradedConsensusStateResponseAminoMsg {
+  toAminoMsg(message: QueryUpgradedConsensusStateResponse, useInterfaces: boolean = true): QueryUpgradedConsensusStateResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryUpgradedConsensusStateResponse",
       value: QueryUpgradedConsensusStateResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryUpgradedConsensusStateResponseProtoMsg, useInterfaces: boolean = false): QueryUpgradedConsensusStateResponse {
+  fromProtoMsg(message: QueryUpgradedConsensusStateResponseProtoMsg, useInterfaces: boolean = true): QueryUpgradedConsensusStateResponse {
     return QueryUpgradedConsensusStateResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryUpgradedConsensusStateResponse): Uint8Array {
@@ -863,7 +863,7 @@ export const QueryModuleVersionsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryModuleVersionsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryModuleVersionsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleVersionsRequest();
@@ -910,7 +910,7 @@ export const QueryModuleVersionsRequest = {
       moduleName: object.module_name
     };
   },
-  toAmino(message: QueryModuleVersionsRequest, useInterfaces: boolean = false): QueryModuleVersionsRequestAmino {
+  toAmino(message: QueryModuleVersionsRequest, useInterfaces: boolean = true): QueryModuleVersionsRequestAmino {
     const obj: any = {};
     obj.module_name = message.moduleName;
     return obj;
@@ -918,13 +918,13 @@ export const QueryModuleVersionsRequest = {
   fromAminoMsg(object: QueryModuleVersionsRequestAminoMsg): QueryModuleVersionsRequest {
     return QueryModuleVersionsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryModuleVersionsRequest, useInterfaces: boolean = false): QueryModuleVersionsRequestAminoMsg {
+  toAminoMsg(message: QueryModuleVersionsRequest, useInterfaces: boolean = true): QueryModuleVersionsRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryModuleVersionsRequest",
       value: QueryModuleVersionsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryModuleVersionsRequestProtoMsg, useInterfaces: boolean = false): QueryModuleVersionsRequest {
+  fromProtoMsg(message: QueryModuleVersionsRequestProtoMsg, useInterfaces: boolean = true): QueryModuleVersionsRequest {
     return QueryModuleVersionsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryModuleVersionsRequest): Uint8Array {
@@ -951,7 +951,7 @@ export const QueryModuleVersionsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryModuleVersionsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryModuleVersionsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleVersionsResponse();
@@ -1006,7 +1006,7 @@ export const QueryModuleVersionsResponse = {
       moduleVersions: Array.isArray(object?.module_versions) ? object.module_versions.map((e: any) => ModuleVersion.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryModuleVersionsResponse, useInterfaces: boolean = false): QueryModuleVersionsResponseAmino {
+  toAmino(message: QueryModuleVersionsResponse, useInterfaces: boolean = true): QueryModuleVersionsResponseAmino {
     const obj: any = {};
     if (message.moduleVersions) {
       obj.module_versions = message.moduleVersions.map(e => e ? ModuleVersion.toAmino(e, useInterfaces) : undefined);
@@ -1018,13 +1018,13 @@ export const QueryModuleVersionsResponse = {
   fromAminoMsg(object: QueryModuleVersionsResponseAminoMsg): QueryModuleVersionsResponse {
     return QueryModuleVersionsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryModuleVersionsResponse, useInterfaces: boolean = false): QueryModuleVersionsResponseAminoMsg {
+  toAminoMsg(message: QueryModuleVersionsResponse, useInterfaces: boolean = true): QueryModuleVersionsResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryModuleVersionsResponse",
       value: QueryModuleVersionsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryModuleVersionsResponseProtoMsg, useInterfaces: boolean = false): QueryModuleVersionsResponse {
+  fromProtoMsg(message: QueryModuleVersionsResponseProtoMsg, useInterfaces: boolean = true): QueryModuleVersionsResponse {
     return QueryModuleVersionsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryModuleVersionsResponse): Uint8Array {
@@ -1046,7 +1046,7 @@ export const QueryAuthorityRequest = {
   encode(_: QueryAuthorityRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAuthorityRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAuthorityRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAuthorityRequest();
@@ -1082,20 +1082,20 @@ export const QueryAuthorityRequest = {
   fromAmino(_: QueryAuthorityRequestAmino): QueryAuthorityRequest {
     return {};
   },
-  toAmino(_: QueryAuthorityRequest, useInterfaces: boolean = false): QueryAuthorityRequestAmino {
+  toAmino(_: QueryAuthorityRequest, useInterfaces: boolean = true): QueryAuthorityRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryAuthorityRequestAminoMsg): QueryAuthorityRequest {
     return QueryAuthorityRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryAuthorityRequest, useInterfaces: boolean = false): QueryAuthorityRequestAminoMsg {
+  toAminoMsg(message: QueryAuthorityRequest, useInterfaces: boolean = true): QueryAuthorityRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryAuthorityRequest",
       value: QueryAuthorityRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryAuthorityRequestProtoMsg, useInterfaces: boolean = false): QueryAuthorityRequest {
+  fromProtoMsg(message: QueryAuthorityRequestProtoMsg, useInterfaces: boolean = true): QueryAuthorityRequest {
     return QueryAuthorityRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAuthorityRequest): Uint8Array {
@@ -1122,7 +1122,7 @@ export const QueryAuthorityResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAuthorityResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAuthorityResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAuthorityResponse();
@@ -1169,7 +1169,7 @@ export const QueryAuthorityResponse = {
       address: object.address
     };
   },
-  toAmino(message: QueryAuthorityResponse, useInterfaces: boolean = false): QueryAuthorityResponseAmino {
+  toAmino(message: QueryAuthorityResponse, useInterfaces: boolean = true): QueryAuthorityResponseAmino {
     const obj: any = {};
     obj.address = message.address;
     return obj;
@@ -1177,13 +1177,13 @@ export const QueryAuthorityResponse = {
   fromAminoMsg(object: QueryAuthorityResponseAminoMsg): QueryAuthorityResponse {
     return QueryAuthorityResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryAuthorityResponse, useInterfaces: boolean = false): QueryAuthorityResponseAminoMsg {
+  toAminoMsg(message: QueryAuthorityResponse, useInterfaces: boolean = true): QueryAuthorityResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryAuthorityResponse",
       value: QueryAuthorityResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryAuthorityResponseProtoMsg, useInterfaces: boolean = false): QueryAuthorityResponse {
+  fromProtoMsg(message: QueryAuthorityResponseProtoMsg, useInterfaces: boolean = true): QueryAuthorityResponse {
     return QueryAuthorityResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAuthorityResponse): Uint8Array {

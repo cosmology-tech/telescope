@@ -862,7 +862,7 @@ export const CheckedExpr_ReferenceMapEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CheckedExpr_ReferenceMapEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CheckedExpr_ReferenceMapEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckedExpr_ReferenceMapEntry();
@@ -922,13 +922,13 @@ export const CheckedExpr_ReferenceMapEntry = {
       value: object?.value ? Reference.fromAmino(object.value) : undefined
     };
   },
-  toAmino(message: CheckedExpr_ReferenceMapEntry, useInterfaces: boolean = false): CheckedExpr_ReferenceMapEntryAmino {
+  toAmino(message: CheckedExpr_ReferenceMapEntry, useInterfaces: boolean = true): CheckedExpr_ReferenceMapEntryAmino {
     const obj: any = {};
     obj.key = message.key ? message.key.toString() : undefined;
     obj.value = message.value ? Reference.toAmino(message.value, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: CheckedExpr_ReferenceMapEntryProtoMsg, useInterfaces: boolean = false): CheckedExpr_ReferenceMapEntry {
+  fromProtoMsg(message: CheckedExpr_ReferenceMapEntryProtoMsg, useInterfaces: boolean = true): CheckedExpr_ReferenceMapEntry {
     return CheckedExpr_ReferenceMapEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CheckedExpr_ReferenceMapEntry): Uint8Array {
@@ -951,7 +951,7 @@ export const CheckedExpr_TypeMapEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CheckedExpr_TypeMapEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CheckedExpr_TypeMapEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckedExpr_TypeMapEntry();
@@ -1011,13 +1011,13 @@ export const CheckedExpr_TypeMapEntry = {
       value: object?.value ? Type.fromAmino(object.value) : undefined
     };
   },
-  toAmino(message: CheckedExpr_TypeMapEntry, useInterfaces: boolean = false): CheckedExpr_TypeMapEntryAmino {
+  toAmino(message: CheckedExpr_TypeMapEntry, useInterfaces: boolean = true): CheckedExpr_TypeMapEntryAmino {
     const obj: any = {};
     obj.key = message.key ? message.key.toString() : undefined;
     obj.value = message.value ? Type.toAmino(message.value, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: CheckedExpr_TypeMapEntryProtoMsg, useInterfaces: boolean = false): CheckedExpr_TypeMapEntry {
+  fromProtoMsg(message: CheckedExpr_TypeMapEntryProtoMsg, useInterfaces: boolean = true): CheckedExpr_TypeMapEntry {
     return CheckedExpr_TypeMapEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CheckedExpr_TypeMapEntry): Uint8Array {
@@ -1059,7 +1059,7 @@ export const CheckedExpr = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CheckedExpr {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CheckedExpr {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckedExpr();
@@ -1216,7 +1216,7 @@ export const CheckedExpr = {
       expr: object?.expr ? Expr.fromAmino(object.expr) : undefined
     };
   },
-  toAmino(message: CheckedExpr, useInterfaces: boolean = false): CheckedExprAmino {
+  toAmino(message: CheckedExpr, useInterfaces: boolean = true): CheckedExprAmino {
     const obj: any = {};
     obj.reference_map = {};
     if (message.referenceMap) {
@@ -1235,7 +1235,7 @@ export const CheckedExpr = {
     obj.expr = message.expr ? Expr.toAmino(message.expr, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: CheckedExprProtoMsg, useInterfaces: boolean = false): CheckedExpr {
+  fromProtoMsg(message: CheckedExprProtoMsg, useInterfaces: boolean = true): CheckedExpr {
     return CheckedExpr.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CheckedExpr): Uint8Array {
@@ -1309,7 +1309,7 @@ export const Type = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Type {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Type {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType();
@@ -1478,7 +1478,7 @@ export const Type = {
       abstractType: object?.abstract_type ? Type_AbstractType.fromAmino(object.abstract_type) : undefined
     };
   },
-  toAmino(message: Type, useInterfaces: boolean = false): TypeAmino {
+  toAmino(message: Type, useInterfaces: boolean = true): TypeAmino {
     const obj: any = {};
     obj.dyn = message.dyn ? Empty.toAmino(message.dyn, useInterfaces) : undefined;
     obj.null = message.null;
@@ -1495,7 +1495,7 @@ export const Type = {
     obj.abstract_type = message.abstractType ? Type_AbstractType.toAmino(message.abstractType, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: TypeProtoMsg, useInterfaces: boolean = false): Type {
+  fromProtoMsg(message: TypeProtoMsg, useInterfaces: boolean = true): Type {
     return Type.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Type): Uint8Array {
@@ -1521,7 +1521,7 @@ export const Type_ListType = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Type_ListType {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Type_ListType {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_ListType();
@@ -1570,12 +1570,12 @@ export const Type_ListType = {
       elemType: object?.elem_type ? Type.fromAmino(object.elem_type) : undefined
     };
   },
-  toAmino(message: Type_ListType, useInterfaces: boolean = false): Type_ListTypeAmino {
+  toAmino(message: Type_ListType, useInterfaces: boolean = true): Type_ListTypeAmino {
     const obj: any = {};
     obj.elem_type = message.elemType ? Type.toAmino(message.elemType, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: Type_ListTypeProtoMsg, useInterfaces: boolean = false): Type_ListType {
+  fromProtoMsg(message: Type_ListTypeProtoMsg, useInterfaces: boolean = true): Type_ListType {
     return Type_ListType.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Type_ListType): Uint8Array {
@@ -1605,7 +1605,7 @@ export const Type_MapType = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Type_MapType {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Type_MapType {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_MapType();
@@ -1665,13 +1665,13 @@ export const Type_MapType = {
       valueType: object?.value_type ? Type.fromAmino(object.value_type) : undefined
     };
   },
-  toAmino(message: Type_MapType, useInterfaces: boolean = false): Type_MapTypeAmino {
+  toAmino(message: Type_MapType, useInterfaces: boolean = true): Type_MapTypeAmino {
     const obj: any = {};
     obj.key_type = message.keyType ? Type.toAmino(message.keyType, useInterfaces) : undefined;
     obj.value_type = message.valueType ? Type.toAmino(message.valueType, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: Type_MapTypeProtoMsg, useInterfaces: boolean = false): Type_MapType {
+  fromProtoMsg(message: Type_MapTypeProtoMsg, useInterfaces: boolean = true): Type_MapType {
     return Type_MapType.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Type_MapType): Uint8Array {
@@ -1701,7 +1701,7 @@ export const Type_FunctionType = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Type_FunctionType {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Type_FunctionType {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_FunctionType();
@@ -1767,7 +1767,7 @@ export const Type_FunctionType = {
       argTypes: Array.isArray(object?.arg_types) ? object.arg_types.map((e: any) => Type.fromAmino(e)) : []
     };
   },
-  toAmino(message: Type_FunctionType, useInterfaces: boolean = false): Type_FunctionTypeAmino {
+  toAmino(message: Type_FunctionType, useInterfaces: boolean = true): Type_FunctionTypeAmino {
     const obj: any = {};
     obj.result_type = message.resultType ? Type.toAmino(message.resultType, useInterfaces) : undefined;
     if (message.argTypes) {
@@ -1777,7 +1777,7 @@ export const Type_FunctionType = {
     }
     return obj;
   },
-  fromProtoMsg(message: Type_FunctionTypeProtoMsg, useInterfaces: boolean = false): Type_FunctionType {
+  fromProtoMsg(message: Type_FunctionTypeProtoMsg, useInterfaces: boolean = true): Type_FunctionType {
     return Type_FunctionType.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Type_FunctionType): Uint8Array {
@@ -1807,7 +1807,7 @@ export const Type_AbstractType = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Type_AbstractType {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Type_AbstractType {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_AbstractType();
@@ -1871,7 +1871,7 @@ export const Type_AbstractType = {
       parameterTypes: Array.isArray(object?.parameter_types) ? object.parameter_types.map((e: any) => Type.fromAmino(e)) : []
     };
   },
-  toAmino(message: Type_AbstractType, useInterfaces: boolean = false): Type_AbstractTypeAmino {
+  toAmino(message: Type_AbstractType, useInterfaces: boolean = true): Type_AbstractTypeAmino {
     const obj: any = {};
     obj.name = message.name;
     if (message.parameterTypes) {
@@ -1881,7 +1881,7 @@ export const Type_AbstractType = {
     }
     return obj;
   },
-  fromProtoMsg(message: Type_AbstractTypeProtoMsg, useInterfaces: boolean = false): Type_AbstractType {
+  fromProtoMsg(message: Type_AbstractTypeProtoMsg, useInterfaces: boolean = true): Type_AbstractType {
     return Type_AbstractType.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Type_AbstractType): Uint8Array {
@@ -1915,7 +1915,7 @@ export const Decl = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Decl {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Decl {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl();
@@ -1984,14 +1984,14 @@ export const Decl = {
       function: object?.function ? Decl_FunctionDecl.fromAmino(object.function) : undefined
     };
   },
-  toAmino(message: Decl, useInterfaces: boolean = false): DeclAmino {
+  toAmino(message: Decl, useInterfaces: boolean = true): DeclAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.ident = message.ident ? Decl_IdentDecl.toAmino(message.ident, useInterfaces) : undefined;
     obj.function = message.function ? Decl_FunctionDecl.toAmino(message.function, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: DeclProtoMsg, useInterfaces: boolean = false): Decl {
+  fromProtoMsg(message: DeclProtoMsg, useInterfaces: boolean = true): Decl {
     return Decl.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Decl): Uint8Array {
@@ -2025,7 +2025,7 @@ export const Decl_IdentDecl = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Decl_IdentDecl {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Decl_IdentDecl {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl_IdentDecl();
@@ -2094,14 +2094,14 @@ export const Decl_IdentDecl = {
       doc: object.doc
     };
   },
-  toAmino(message: Decl_IdentDecl, useInterfaces: boolean = false): Decl_IdentDeclAmino {
+  toAmino(message: Decl_IdentDecl, useInterfaces: boolean = true): Decl_IdentDeclAmino {
     const obj: any = {};
     obj.type = message.type ? Type.toAmino(message.type, useInterfaces) : undefined;
     obj.value = message.value ? Constant.toAmino(message.value, useInterfaces) : undefined;
     obj.doc = message.doc;
     return obj;
   },
-  fromProtoMsg(message: Decl_IdentDeclProtoMsg, useInterfaces: boolean = false): Decl_IdentDecl {
+  fromProtoMsg(message: Decl_IdentDeclProtoMsg, useInterfaces: boolean = true): Decl_IdentDecl {
     return Decl_IdentDecl.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Decl_IdentDecl): Uint8Array {
@@ -2127,7 +2127,7 @@ export const Decl_FunctionDecl = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Decl_FunctionDecl {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Decl_FunctionDecl {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl_FunctionDecl();
@@ -2182,7 +2182,7 @@ export const Decl_FunctionDecl = {
       overloads: Array.isArray(object?.overloads) ? object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromAmino(e)) : []
     };
   },
-  toAmino(message: Decl_FunctionDecl, useInterfaces: boolean = false): Decl_FunctionDeclAmino {
+  toAmino(message: Decl_FunctionDecl, useInterfaces: boolean = true): Decl_FunctionDeclAmino {
     const obj: any = {};
     if (message.overloads) {
       obj.overloads = message.overloads.map(e => e ? Decl_FunctionDecl_Overload.toAmino(e, useInterfaces) : undefined);
@@ -2191,7 +2191,7 @@ export const Decl_FunctionDecl = {
     }
     return obj;
   },
-  fromProtoMsg(message: Decl_FunctionDeclProtoMsg, useInterfaces: boolean = false): Decl_FunctionDecl {
+  fromProtoMsg(message: Decl_FunctionDeclProtoMsg, useInterfaces: boolean = true): Decl_FunctionDecl {
     return Decl_FunctionDecl.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Decl_FunctionDecl): Uint8Array {
@@ -2237,7 +2237,7 @@ export const Decl_FunctionDecl_Overload = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Decl_FunctionDecl_Overload {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Decl_FunctionDecl_Overload {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl_FunctionDecl_Overload();
@@ -2347,7 +2347,7 @@ export const Decl_FunctionDecl_Overload = {
       doc: object.doc
     };
   },
-  toAmino(message: Decl_FunctionDecl_Overload, useInterfaces: boolean = false): Decl_FunctionDecl_OverloadAmino {
+  toAmino(message: Decl_FunctionDecl_Overload, useInterfaces: boolean = true): Decl_FunctionDecl_OverloadAmino {
     const obj: any = {};
     obj.overload_id = message.overloadId;
     if (message.params) {
@@ -2365,7 +2365,7 @@ export const Decl_FunctionDecl_Overload = {
     obj.doc = message.doc;
     return obj;
   },
-  fromProtoMsg(message: Decl_FunctionDecl_OverloadProtoMsg, useInterfaces: boolean = false): Decl_FunctionDecl_Overload {
+  fromProtoMsg(message: Decl_FunctionDecl_OverloadProtoMsg, useInterfaces: boolean = true): Decl_FunctionDecl_Overload {
     return Decl_FunctionDecl_Overload.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Decl_FunctionDecl_Overload): Uint8Array {
@@ -2399,7 +2399,7 @@ export const Reference = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Reference {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Reference {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReference();
@@ -2474,7 +2474,7 @@ export const Reference = {
       value: object?.value ? Constant.fromAmino(object.value) : undefined
     };
   },
-  toAmino(message: Reference, useInterfaces: boolean = false): ReferenceAmino {
+  toAmino(message: Reference, useInterfaces: boolean = true): ReferenceAmino {
     const obj: any = {};
     obj.name = message.name;
     if (message.overloadId) {
@@ -2485,7 +2485,7 @@ export const Reference = {
     obj.value = message.value ? Constant.toAmino(message.value, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: ReferenceProtoMsg, useInterfaces: boolean = false): Reference {
+  fromProtoMsg(message: ReferenceProtoMsg, useInterfaces: boolean = true): Reference {
     return Reference.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Reference): Uint8Array {

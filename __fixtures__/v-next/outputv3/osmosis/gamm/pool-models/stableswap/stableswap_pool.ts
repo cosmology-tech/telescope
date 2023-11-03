@@ -122,7 +122,7 @@ export const PoolParams = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): PoolParams {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PoolParams {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolParams();
@@ -178,13 +178,13 @@ export const PoolParams = {
       exitFee: object.exit_fee
     };
   },
-  toAmino(message: PoolParams, useInterfaces: boolean = false): PoolParamsAmino {
+  toAmino(message: PoolParams, useInterfaces: boolean = true): PoolParamsAmino {
     const obj: any = {};
     obj.swap_fee = message.swapFee;
     obj.exit_fee = message.exitFee;
     return obj;
   },
-  fromProtoMsg(message: PoolParamsProtoMsg, useInterfaces: boolean = false): PoolParams {
+  fromProtoMsg(message: PoolParamsProtoMsg, useInterfaces: boolean = true): PoolParams {
     return PoolParams.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PoolParams): Uint8Array {
@@ -242,7 +242,7 @@ export const Pool = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Pool {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Pool {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePool();
@@ -381,7 +381,7 @@ export const Pool = {
       scalingFactorController: object.scaling_factor_controller
     };
   },
-  toAmino(message: Pool, useInterfaces: boolean = false): PoolAmino {
+  toAmino(message: Pool, useInterfaces: boolean = true): PoolAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.id = message.id ? message.id.toString() : undefined;
@@ -401,7 +401,7 @@ export const Pool = {
     obj.scaling_factor_controller = message.scalingFactorController;
     return obj;
   },
-  fromProtoMsg(message: PoolProtoMsg, useInterfaces: boolean = false): Pool {
+  fromProtoMsg(message: PoolProtoMsg, useInterfaces: boolean = true): Pool {
     return Pool.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Pool): Uint8Array {

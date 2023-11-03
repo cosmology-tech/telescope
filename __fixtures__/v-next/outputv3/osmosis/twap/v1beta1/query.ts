@@ -127,7 +127,7 @@ export const ArithmeticTwapRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ArithmeticTwapRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ArithmeticTwapRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseArithmeticTwapRequest();
@@ -212,7 +212,7 @@ export const ArithmeticTwapRequest = {
       endTime: object?.end_time
     };
   },
-  toAmino(message: ArithmeticTwapRequest, useInterfaces: boolean = false): ArithmeticTwapRequestAmino {
+  toAmino(message: ArithmeticTwapRequest, useInterfaces: boolean = true): ArithmeticTwapRequestAmino {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     obj.base_asset = message.baseAsset;
@@ -221,7 +221,7 @@ export const ArithmeticTwapRequest = {
     obj.end_time = message.endTime;
     return obj;
   },
-  fromProtoMsg(message: ArithmeticTwapRequestProtoMsg, useInterfaces: boolean = false): ArithmeticTwapRequest {
+  fromProtoMsg(message: ArithmeticTwapRequestProtoMsg, useInterfaces: boolean = true): ArithmeticTwapRequest {
     return ArithmeticTwapRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ArithmeticTwapRequest): Uint8Array {
@@ -248,7 +248,7 @@ export const ArithmeticTwapResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ArithmeticTwapResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ArithmeticTwapResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseArithmeticTwapResponse();
@@ -295,12 +295,12 @@ export const ArithmeticTwapResponse = {
       arithmeticTwap: object.arithmetic_twap
     };
   },
-  toAmino(message: ArithmeticTwapResponse, useInterfaces: boolean = false): ArithmeticTwapResponseAmino {
+  toAmino(message: ArithmeticTwapResponse, useInterfaces: boolean = true): ArithmeticTwapResponseAmino {
     const obj: any = {};
     obj.arithmetic_twap = message.arithmeticTwap;
     return obj;
   },
-  fromProtoMsg(message: ArithmeticTwapResponseProtoMsg, useInterfaces: boolean = false): ArithmeticTwapResponse {
+  fromProtoMsg(message: ArithmeticTwapResponseProtoMsg, useInterfaces: boolean = true): ArithmeticTwapResponse {
     return ArithmeticTwapResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ArithmeticTwapResponse): Uint8Array {
@@ -339,7 +339,7 @@ export const ArithmeticTwapToNowRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ArithmeticTwapToNowRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ArithmeticTwapToNowRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseArithmeticTwapToNowRequest();
@@ -415,7 +415,7 @@ export const ArithmeticTwapToNowRequest = {
       startTime: object.start_time
     };
   },
-  toAmino(message: ArithmeticTwapToNowRequest, useInterfaces: boolean = false): ArithmeticTwapToNowRequestAmino {
+  toAmino(message: ArithmeticTwapToNowRequest, useInterfaces: boolean = true): ArithmeticTwapToNowRequestAmino {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     obj.base_asset = message.baseAsset;
@@ -423,7 +423,7 @@ export const ArithmeticTwapToNowRequest = {
     obj.start_time = message.startTime;
     return obj;
   },
-  fromProtoMsg(message: ArithmeticTwapToNowRequestProtoMsg, useInterfaces: boolean = false): ArithmeticTwapToNowRequest {
+  fromProtoMsg(message: ArithmeticTwapToNowRequestProtoMsg, useInterfaces: boolean = true): ArithmeticTwapToNowRequest {
     return ArithmeticTwapToNowRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ArithmeticTwapToNowRequest): Uint8Array {
@@ -450,7 +450,7 @@ export const ArithmeticTwapToNowResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ArithmeticTwapToNowResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ArithmeticTwapToNowResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseArithmeticTwapToNowResponse();
@@ -497,12 +497,12 @@ export const ArithmeticTwapToNowResponse = {
       arithmeticTwap: object.arithmetic_twap
     };
   },
-  toAmino(message: ArithmeticTwapToNowResponse, useInterfaces: boolean = false): ArithmeticTwapToNowResponseAmino {
+  toAmino(message: ArithmeticTwapToNowResponse, useInterfaces: boolean = true): ArithmeticTwapToNowResponseAmino {
     const obj: any = {};
     obj.arithmetic_twap = message.arithmeticTwap;
     return obj;
   },
-  fromProtoMsg(message: ArithmeticTwapToNowResponseProtoMsg, useInterfaces: boolean = false): ArithmeticTwapToNowResponse {
+  fromProtoMsg(message: ArithmeticTwapToNowResponseProtoMsg, useInterfaces: boolean = true): ArithmeticTwapToNowResponse {
     return ArithmeticTwapToNowResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ArithmeticTwapToNowResponse): Uint8Array {
@@ -524,7 +524,7 @@ export const ParamsRequest = {
   encode(_: ParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParamsRequest();
@@ -560,11 +560,11 @@ export const ParamsRequest = {
   fromAmino(_: ParamsRequestAmino): ParamsRequest {
     return {};
   },
-  toAmino(_: ParamsRequest, useInterfaces: boolean = false): ParamsRequestAmino {
+  toAmino(_: ParamsRequest, useInterfaces: boolean = true): ParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: ParamsRequestProtoMsg, useInterfaces: boolean = false): ParamsRequest {
+  fromProtoMsg(message: ParamsRequestProtoMsg, useInterfaces: boolean = true): ParamsRequest {
     return ParamsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ParamsRequest): Uint8Array {
@@ -591,7 +591,7 @@ export const ParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParamsResponse();
@@ -640,12 +640,12 @@ export const ParamsResponse = {
       params: object?.params ? Params.fromAmino(object.params) : undefined
     };
   },
-  toAmino(message: ParamsResponse, useInterfaces: boolean = false): ParamsResponseAmino {
+  toAmino(message: ParamsResponse, useInterfaces: boolean = true): ParamsResponseAmino {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: ParamsResponseProtoMsg, useInterfaces: boolean = false): ParamsResponse {
+  fromProtoMsg(message: ParamsResponseProtoMsg, useInterfaces: boolean = true): ParamsResponse {
     return ParamsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ParamsResponse): Uint8Array {

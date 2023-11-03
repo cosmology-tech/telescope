@@ -1043,7 +1043,7 @@ export const Http = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Http {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Http {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHttp();
@@ -1107,7 +1107,7 @@ export const Http = {
       fullyDecodeReservedExpansion: object.fully_decode_reserved_expansion
     };
   },
-  toAmino(message: Http, useInterfaces: boolean = false): HttpAmino {
+  toAmino(message: Http, useInterfaces: boolean = true): HttpAmino {
     const obj: any = {};
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? HttpRule.toAmino(e, useInterfaces) : undefined);
@@ -1120,7 +1120,7 @@ export const Http = {
   fromAminoMsg(object: HttpAminoMsg): Http {
     return Http.fromAmino(object.value);
   },
-  fromProtoMsg(message: HttpProtoMsg, useInterfaces: boolean = false): Http {
+  fromProtoMsg(message: HttpProtoMsg, useInterfaces: boolean = true): Http {
     return Http.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Http): Uint8Array {
@@ -1182,7 +1182,7 @@ export const HttpRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): HttpRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): HttpRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHttpRule();
@@ -1320,7 +1320,7 @@ export const HttpRule = {
       additionalBindings: Array.isArray(object?.additional_bindings) ? object.additional_bindings.map((e: any) => HttpRule.fromAmino(e)) : []
     };
   },
-  toAmino(message: HttpRule, useInterfaces: boolean = false): HttpRuleAmino {
+  toAmino(message: HttpRule, useInterfaces: boolean = true): HttpRuleAmino {
     const obj: any = {};
     obj.selector = message.selector;
     obj.get = message.get;
@@ -1341,7 +1341,7 @@ export const HttpRule = {
   fromAminoMsg(object: HttpRuleAminoMsg): HttpRule {
     return HttpRule.fromAmino(object.value);
   },
-  fromProtoMsg(message: HttpRuleProtoMsg, useInterfaces: boolean = false): HttpRule {
+  fromProtoMsg(message: HttpRuleProtoMsg, useInterfaces: boolean = true): HttpRule {
     return HttpRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: HttpRule): Uint8Array {
@@ -1371,7 +1371,7 @@ export const CustomHttpPattern = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CustomHttpPattern {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CustomHttpPattern {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCustomHttpPattern();
@@ -1427,7 +1427,7 @@ export const CustomHttpPattern = {
       path: object.path
     };
   },
-  toAmino(message: CustomHttpPattern, useInterfaces: boolean = false): CustomHttpPatternAmino {
+  toAmino(message: CustomHttpPattern, useInterfaces: boolean = true): CustomHttpPatternAmino {
     const obj: any = {};
     obj.kind = message.kind;
     obj.path = message.path;
@@ -1436,7 +1436,7 @@ export const CustomHttpPattern = {
   fromAminoMsg(object: CustomHttpPatternAminoMsg): CustomHttpPattern {
     return CustomHttpPattern.fromAmino(object.value);
   },
-  fromProtoMsg(message: CustomHttpPatternProtoMsg, useInterfaces: boolean = false): CustomHttpPattern {
+  fromProtoMsg(message: CustomHttpPatternProtoMsg, useInterfaces: boolean = true): CustomHttpPattern {
     return CustomHttpPattern.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CustomHttpPattern): Uint8Array {

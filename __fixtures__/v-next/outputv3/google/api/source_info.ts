@@ -33,7 +33,7 @@ export const SourceInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SourceInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SourceInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo();
@@ -88,7 +88,7 @@ export const SourceInfo = {
       sourceFiles: Array.isArray(object?.source_files) ? object.source_files.map((e: any) => Any.fromAmino(e)) : []
     };
   },
-  toAmino(message: SourceInfo, useInterfaces: boolean = false): SourceInfoAmino {
+  toAmino(message: SourceInfo, useInterfaces: boolean = true): SourceInfoAmino {
     const obj: any = {};
     if (message.sourceFiles) {
       obj.source_files = message.sourceFiles.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
@@ -97,7 +97,7 @@ export const SourceInfo = {
     }
     return obj;
   },
-  fromProtoMsg(message: SourceInfoProtoMsg, useInterfaces: boolean = false): SourceInfo {
+  fromProtoMsg(message: SourceInfoProtoMsg, useInterfaces: boolean = true): SourceInfo {
     return SourceInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SourceInfo): Uint8Array {

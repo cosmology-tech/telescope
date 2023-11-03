@@ -194,7 +194,7 @@ export const PageRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): PageRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PageRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePageRequest();
@@ -281,7 +281,7 @@ export const PageRequest = {
       reverse: object.reverse
     };
   },
-  toAmino(message: PageRequest, useInterfaces: boolean = false): PageRequestAmino {
+  toAmino(message: PageRequest, useInterfaces: boolean = true): PageRequestAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.offset = message.offset ? message.offset.toString() : undefined;
@@ -290,7 +290,7 @@ export const PageRequest = {
     obj.reverse = message.reverse;
     return obj;
   },
-  fromProtoMsg(message: PageRequestProtoMsg, useInterfaces: boolean = false): PageRequest {
+  fromProtoMsg(message: PageRequestProtoMsg, useInterfaces: boolean = true): PageRequest {
     return PageRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PageRequest): Uint8Array {
@@ -321,7 +321,7 @@ export const PageResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): PageResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PageResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePageResponse();
@@ -379,13 +379,13 @@ export const PageResponse = {
       total: BigInt(object.total)
     };
   },
-  toAmino(message: PageResponse, useInterfaces: boolean = false): PageResponseAmino {
+  toAmino(message: PageResponse, useInterfaces: boolean = true): PageResponseAmino {
     const obj: any = {};
     obj.next_key = message.nextKey;
     obj.total = message.total ? message.total.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: PageResponseProtoMsg, useInterfaces: boolean = false): PageResponse {
+  fromProtoMsg(message: PageResponseProtoMsg, useInterfaces: boolean = true): PageResponse {
     return PageResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PageResponse): Uint8Array {

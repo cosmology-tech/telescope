@@ -127,7 +127,7 @@ export const SetSuperfluidAssetsProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SetSuperfluidAssetsProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SetSuperfluidAssetsProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSetSuperfluidAssetsProposal();
@@ -200,7 +200,7 @@ export const SetSuperfluidAssetsProposal = {
       assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => SuperfluidAsset.fromAmino(e)) : []
     };
   },
-  toAmino(message: SetSuperfluidAssetsProposal, useInterfaces: boolean = false): SetSuperfluidAssetsProposalAmino {
+  toAmino(message: SetSuperfluidAssetsProposal, useInterfaces: boolean = true): SetSuperfluidAssetsProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -211,7 +211,7 @@ export const SetSuperfluidAssetsProposal = {
     }
     return obj;
   },
-  fromProtoMsg(message: SetSuperfluidAssetsProposalProtoMsg, useInterfaces: boolean = false): SetSuperfluidAssetsProposal {
+  fromProtoMsg(message: SetSuperfluidAssetsProposalProtoMsg, useInterfaces: boolean = true): SetSuperfluidAssetsProposal {
     return SetSuperfluidAssetsProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SetSuperfluidAssetsProposal): Uint8Array {
@@ -247,7 +247,7 @@ export const RemoveSuperfluidAssetsProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): RemoveSuperfluidAssetsProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): RemoveSuperfluidAssetsProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRemoveSuperfluidAssetsProposal();
@@ -320,7 +320,7 @@ export const RemoveSuperfluidAssetsProposal = {
       superfluidAssetDenoms: Array.isArray(object?.superfluid_asset_denoms) ? object.superfluid_asset_denoms.map((e: any) => e) : []
     };
   },
-  toAmino(message: RemoveSuperfluidAssetsProposal, useInterfaces: boolean = false): RemoveSuperfluidAssetsProposalAmino {
+  toAmino(message: RemoveSuperfluidAssetsProposal, useInterfaces: boolean = true): RemoveSuperfluidAssetsProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -331,7 +331,7 @@ export const RemoveSuperfluidAssetsProposal = {
     }
     return obj;
   },
-  fromProtoMsg(message: RemoveSuperfluidAssetsProposalProtoMsg, useInterfaces: boolean = false): RemoveSuperfluidAssetsProposal {
+  fromProtoMsg(message: RemoveSuperfluidAssetsProposalProtoMsg, useInterfaces: boolean = true): RemoveSuperfluidAssetsProposal {
     return RemoveSuperfluidAssetsProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: RemoveSuperfluidAssetsProposal): Uint8Array {
@@ -373,7 +373,7 @@ export const UpdateUnpoolWhiteListProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): UpdateUnpoolWhiteListProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpdateUnpoolWhiteListProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateUnpoolWhiteListProposal();
@@ -462,7 +462,7 @@ export const UpdateUnpoolWhiteListProposal = {
       isOverwrite: object.is_overwrite
     };
   },
-  toAmino(message: UpdateUnpoolWhiteListProposal, useInterfaces: boolean = false): UpdateUnpoolWhiteListProposalAmino {
+  toAmino(message: UpdateUnpoolWhiteListProposal, useInterfaces: boolean = true): UpdateUnpoolWhiteListProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -474,7 +474,7 @@ export const UpdateUnpoolWhiteListProposal = {
     obj.is_overwrite = message.isOverwrite;
     return obj;
   },
-  fromProtoMsg(message: UpdateUnpoolWhiteListProposalProtoMsg, useInterfaces: boolean = false): UpdateUnpoolWhiteListProposal {
+  fromProtoMsg(message: UpdateUnpoolWhiteListProposalProtoMsg, useInterfaces: boolean = true): UpdateUnpoolWhiteListProposal {
     return UpdateUnpoolWhiteListProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpdateUnpoolWhiteListProposal): Uint8Array {

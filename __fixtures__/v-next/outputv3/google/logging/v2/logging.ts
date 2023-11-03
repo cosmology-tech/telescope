@@ -904,7 +904,7 @@ export const DeleteLogRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DeleteLogRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DeleteLogRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteLogRequest();
@@ -951,12 +951,12 @@ export const DeleteLogRequest = {
       logName: object.log_name
     };
   },
-  toAmino(message: DeleteLogRequest, useInterfaces: boolean = false): DeleteLogRequestAmino {
+  toAmino(message: DeleteLogRequest, useInterfaces: boolean = true): DeleteLogRequestAmino {
     const obj: any = {};
     obj.log_name = message.logName;
     return obj;
   },
-  fromProtoMsg(message: DeleteLogRequestProtoMsg, useInterfaces: boolean = false): DeleteLogRequest {
+  fromProtoMsg(message: DeleteLogRequestProtoMsg, useInterfaces: boolean = true): DeleteLogRequest {
     return DeleteLogRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DeleteLogRequest): Uint8Array {
@@ -985,7 +985,7 @@ export const WriteLogEntriesRequest_LabelsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): WriteLogEntriesRequest_LabelsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): WriteLogEntriesRequest_LabelsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWriteLogEntriesRequest_LabelsEntry();
@@ -1041,13 +1041,13 @@ export const WriteLogEntriesRequest_LabelsEntry = {
       value: object.value
     };
   },
-  toAmino(message: WriteLogEntriesRequest_LabelsEntry, useInterfaces: boolean = false): WriteLogEntriesRequest_LabelsEntryAmino {
+  toAmino(message: WriteLogEntriesRequest_LabelsEntry, useInterfaces: boolean = true): WriteLogEntriesRequest_LabelsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
     return obj;
   },
-  fromProtoMsg(message: WriteLogEntriesRequest_LabelsEntryProtoMsg, useInterfaces: boolean = false): WriteLogEntriesRequest_LabelsEntry {
+  fromProtoMsg(message: WriteLogEntriesRequest_LabelsEntryProtoMsg, useInterfaces: boolean = true): WriteLogEntriesRequest_LabelsEntry {
     return WriteLogEntriesRequest_LabelsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: WriteLogEntriesRequest_LabelsEntry): Uint8Array {
@@ -1090,7 +1090,7 @@ export const WriteLogEntriesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): WriteLogEntriesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): WriteLogEntriesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWriteLogEntriesRequest();
@@ -1227,7 +1227,7 @@ export const WriteLogEntriesRequest = {
       dryRun: object.dry_run
     };
   },
-  toAmino(message: WriteLogEntriesRequest, useInterfaces: boolean = false): WriteLogEntriesRequestAmino {
+  toAmino(message: WriteLogEntriesRequest, useInterfaces: boolean = true): WriteLogEntriesRequestAmino {
     const obj: any = {};
     obj.log_name = message.logName;
     obj.resource = message.resource ? MonitoredResource.toAmino(message.resource, useInterfaces) : undefined;
@@ -1246,7 +1246,7 @@ export const WriteLogEntriesRequest = {
     obj.dry_run = message.dryRun;
     return obj;
   },
-  fromProtoMsg(message: WriteLogEntriesRequestProtoMsg, useInterfaces: boolean = false): WriteLogEntriesRequest {
+  fromProtoMsg(message: WriteLogEntriesRequestProtoMsg, useInterfaces: boolean = true): WriteLogEntriesRequest {
     return WriteLogEntriesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: WriteLogEntriesRequest): Uint8Array {
@@ -1267,7 +1267,7 @@ export const WriteLogEntriesResponse = {
   encode(_: WriteLogEntriesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): WriteLogEntriesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): WriteLogEntriesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWriteLogEntriesResponse();
@@ -1303,11 +1303,11 @@ export const WriteLogEntriesResponse = {
   fromAmino(_: WriteLogEntriesResponseAmino): WriteLogEntriesResponse {
     return {};
   },
-  toAmino(_: WriteLogEntriesResponse, useInterfaces: boolean = false): WriteLogEntriesResponseAmino {
+  toAmino(_: WriteLogEntriesResponse, useInterfaces: boolean = true): WriteLogEntriesResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: WriteLogEntriesResponseProtoMsg, useInterfaces: boolean = false): WriteLogEntriesResponse {
+  fromProtoMsg(message: WriteLogEntriesResponseProtoMsg, useInterfaces: boolean = true): WriteLogEntriesResponse {
     return WriteLogEntriesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: WriteLogEntriesResponse): Uint8Array {
@@ -1336,7 +1336,7 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry();
@@ -1394,13 +1394,13 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
       value: object?.value ? Status.fromAmino(object.value) : undefined
     };
   },
-  toAmino(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry, useInterfaces: boolean = false): WriteLogEntriesPartialErrors_LogEntryErrorsEntryAmino {
+  toAmino(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry, useInterfaces: boolean = true): WriteLogEntriesPartialErrors_LogEntryErrorsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value ? Status.toAmino(message.value, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntryProtoMsg, useInterfaces: boolean = false): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
+  fromProtoMsg(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntryProtoMsg, useInterfaces: boolean = true): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
     return WriteLogEntriesPartialErrors_LogEntryErrorsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry): Uint8Array {
@@ -1423,7 +1423,7 @@ export const WriteLogEntriesPartialErrors = {
     });
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): WriteLogEntriesPartialErrors {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): WriteLogEntriesPartialErrors {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWriteLogEntriesPartialErrors();
@@ -1505,7 +1505,7 @@ export const WriteLogEntriesPartialErrors = {
       }, {}) : {}
     };
   },
-  toAmino(message: WriteLogEntriesPartialErrors, useInterfaces: boolean = false): WriteLogEntriesPartialErrorsAmino {
+  toAmino(message: WriteLogEntriesPartialErrors, useInterfaces: boolean = true): WriteLogEntriesPartialErrorsAmino {
     const obj: any = {};
     obj.log_entry_errors = {};
     if (message.logEntryErrors) {
@@ -1515,7 +1515,7 @@ export const WriteLogEntriesPartialErrors = {
     }
     return obj;
   },
-  fromProtoMsg(message: WriteLogEntriesPartialErrorsProtoMsg, useInterfaces: boolean = false): WriteLogEntriesPartialErrors {
+  fromProtoMsg(message: WriteLogEntriesPartialErrorsProtoMsg, useInterfaces: boolean = true): WriteLogEntriesPartialErrors {
     return WriteLogEntriesPartialErrors.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: WriteLogEntriesPartialErrors): Uint8Array {
@@ -1557,7 +1557,7 @@ export const ListLogEntriesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListLogEntriesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListLogEntriesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogEntriesRequest();
@@ -1648,7 +1648,7 @@ export const ListLogEntriesRequest = {
       pageToken: object.page_token
     };
   },
-  toAmino(message: ListLogEntriesRequest, useInterfaces: boolean = false): ListLogEntriesRequestAmino {
+  toAmino(message: ListLogEntriesRequest, useInterfaces: boolean = true): ListLogEntriesRequestAmino {
     const obj: any = {};
     if (message.resourceNames) {
       obj.resource_names = message.resourceNames.map(e => e);
@@ -1661,7 +1661,7 @@ export const ListLogEntriesRequest = {
     obj.page_token = message.pageToken;
     return obj;
   },
-  fromProtoMsg(message: ListLogEntriesRequestProtoMsg, useInterfaces: boolean = false): ListLogEntriesRequest {
+  fromProtoMsg(message: ListLogEntriesRequestProtoMsg, useInterfaces: boolean = true): ListLogEntriesRequest {
     return ListLogEntriesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListLogEntriesRequest): Uint8Array {
@@ -1691,7 +1691,7 @@ export const ListLogEntriesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListLogEntriesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListLogEntriesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogEntriesResponse();
@@ -1755,7 +1755,7 @@ export const ListLogEntriesResponse = {
       nextPageToken: object.next_page_token
     };
   },
-  toAmino(message: ListLogEntriesResponse, useInterfaces: boolean = false): ListLogEntriesResponseAmino {
+  toAmino(message: ListLogEntriesResponse, useInterfaces: boolean = true): ListLogEntriesResponseAmino {
     const obj: any = {};
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? LogEntry.toAmino(e, useInterfaces) : undefined);
@@ -1765,7 +1765,7 @@ export const ListLogEntriesResponse = {
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromProtoMsg(message: ListLogEntriesResponseProtoMsg, useInterfaces: boolean = false): ListLogEntriesResponse {
+  fromProtoMsg(message: ListLogEntriesResponseProtoMsg, useInterfaces: boolean = true): ListLogEntriesResponse {
     return ListLogEntriesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListLogEntriesResponse): Uint8Array {
@@ -1795,7 +1795,7 @@ export const ListMonitoredResourceDescriptorsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListMonitoredResourceDescriptorsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListMonitoredResourceDescriptorsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListMonitoredResourceDescriptorsRequest();
@@ -1851,13 +1851,13 @@ export const ListMonitoredResourceDescriptorsRequest = {
       pageToken: object.page_token
     };
   },
-  toAmino(message: ListMonitoredResourceDescriptorsRequest, useInterfaces: boolean = false): ListMonitoredResourceDescriptorsRequestAmino {
+  toAmino(message: ListMonitoredResourceDescriptorsRequest, useInterfaces: boolean = true): ListMonitoredResourceDescriptorsRequestAmino {
     const obj: any = {};
     obj.page_size = message.pageSize;
     obj.page_token = message.pageToken;
     return obj;
   },
-  fromProtoMsg(message: ListMonitoredResourceDescriptorsRequestProtoMsg, useInterfaces: boolean = false): ListMonitoredResourceDescriptorsRequest {
+  fromProtoMsg(message: ListMonitoredResourceDescriptorsRequestProtoMsg, useInterfaces: boolean = true): ListMonitoredResourceDescriptorsRequest {
     return ListMonitoredResourceDescriptorsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListMonitoredResourceDescriptorsRequest): Uint8Array {
@@ -1887,7 +1887,7 @@ export const ListMonitoredResourceDescriptorsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListMonitoredResourceDescriptorsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListMonitoredResourceDescriptorsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListMonitoredResourceDescriptorsResponse();
@@ -1951,7 +1951,7 @@ export const ListMonitoredResourceDescriptorsResponse = {
       nextPageToken: object.next_page_token
     };
   },
-  toAmino(message: ListMonitoredResourceDescriptorsResponse, useInterfaces: boolean = false): ListMonitoredResourceDescriptorsResponseAmino {
+  toAmino(message: ListMonitoredResourceDescriptorsResponse, useInterfaces: boolean = true): ListMonitoredResourceDescriptorsResponseAmino {
     const obj: any = {};
     if (message.resourceDescriptors) {
       obj.resource_descriptors = message.resourceDescriptors.map(e => e ? MonitoredResourceDescriptor.toAmino(e, useInterfaces) : undefined);
@@ -1961,7 +1961,7 @@ export const ListMonitoredResourceDescriptorsResponse = {
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromProtoMsg(message: ListMonitoredResourceDescriptorsResponseProtoMsg, useInterfaces: boolean = false): ListMonitoredResourceDescriptorsResponse {
+  fromProtoMsg(message: ListMonitoredResourceDescriptorsResponseProtoMsg, useInterfaces: boolean = true): ListMonitoredResourceDescriptorsResponse {
     return ListMonitoredResourceDescriptorsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListMonitoredResourceDescriptorsResponse): Uint8Array {
@@ -1999,7 +1999,7 @@ export const ListLogsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListLogsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListLogsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogsRequest();
@@ -2081,7 +2081,7 @@ export const ListLogsRequest = {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
     };
   },
-  toAmino(message: ListLogsRequest, useInterfaces: boolean = false): ListLogsRequestAmino {
+  toAmino(message: ListLogsRequest, useInterfaces: boolean = true): ListLogsRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
     obj.page_size = message.pageSize;
@@ -2093,7 +2093,7 @@ export const ListLogsRequest = {
     }
     return obj;
   },
-  fromProtoMsg(message: ListLogsRequestProtoMsg, useInterfaces: boolean = false): ListLogsRequest {
+  fromProtoMsg(message: ListLogsRequestProtoMsg, useInterfaces: boolean = true): ListLogsRequest {
     return ListLogsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListLogsRequest): Uint8Array {
@@ -2123,7 +2123,7 @@ export const ListLogsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListLogsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListLogsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogsResponse();
@@ -2187,7 +2187,7 @@ export const ListLogsResponse = {
       nextPageToken: object.next_page_token
     };
   },
-  toAmino(message: ListLogsResponse, useInterfaces: boolean = false): ListLogsResponseAmino {
+  toAmino(message: ListLogsResponse, useInterfaces: boolean = true): ListLogsResponseAmino {
     const obj: any = {};
     if (message.logNames) {
       obj.log_names = message.logNames.map(e => e);
@@ -2197,7 +2197,7 @@ export const ListLogsResponse = {
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromProtoMsg(message: ListLogsResponseProtoMsg, useInterfaces: boolean = false): ListLogsResponse {
+  fromProtoMsg(message: ListLogsResponseProtoMsg, useInterfaces: boolean = true): ListLogsResponse {
     return ListLogsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListLogsResponse): Uint8Array {
@@ -2231,7 +2231,7 @@ export const TailLogEntriesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): TailLogEntriesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): TailLogEntriesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTailLogEntriesRequest();
@@ -2306,7 +2306,7 @@ export const TailLogEntriesRequest = {
       bufferWindow: object?.buffer_window ? Duration.fromAmino(object.buffer_window) : undefined
     };
   },
-  toAmino(message: TailLogEntriesRequest, useInterfaces: boolean = false): TailLogEntriesRequestAmino {
+  toAmino(message: TailLogEntriesRequest, useInterfaces: boolean = true): TailLogEntriesRequestAmino {
     const obj: any = {};
     if (message.resourceNames) {
       obj.resource_names = message.resourceNames.map(e => e);
@@ -2317,7 +2317,7 @@ export const TailLogEntriesRequest = {
     obj.buffer_window = message.bufferWindow ? Duration.toAmino(message.bufferWindow, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: TailLogEntriesRequestProtoMsg, useInterfaces: boolean = false): TailLogEntriesRequest {
+  fromProtoMsg(message: TailLogEntriesRequestProtoMsg, useInterfaces: boolean = true): TailLogEntriesRequest {
     return TailLogEntriesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: TailLogEntriesRequest): Uint8Array {
@@ -2347,7 +2347,7 @@ export const TailLogEntriesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): TailLogEntriesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): TailLogEntriesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTailLogEntriesResponse();
@@ -2419,7 +2419,7 @@ export const TailLogEntriesResponse = {
       suppressionInfo: Array.isArray(object?.suppression_info) ? object.suppression_info.map((e: any) => TailLogEntriesResponse_SuppressionInfo.fromAmino(e)) : []
     };
   },
-  toAmino(message: TailLogEntriesResponse, useInterfaces: boolean = false): TailLogEntriesResponseAmino {
+  toAmino(message: TailLogEntriesResponse, useInterfaces: boolean = true): TailLogEntriesResponseAmino {
     const obj: any = {};
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? LogEntry.toAmino(e, useInterfaces) : undefined);
@@ -2433,7 +2433,7 @@ export const TailLogEntriesResponse = {
     }
     return obj;
   },
-  fromProtoMsg(message: TailLogEntriesResponseProtoMsg, useInterfaces: boolean = false): TailLogEntriesResponse {
+  fromProtoMsg(message: TailLogEntriesResponseProtoMsg, useInterfaces: boolean = true): TailLogEntriesResponse {
     return TailLogEntriesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: TailLogEntriesResponse): Uint8Array {
@@ -2463,7 +2463,7 @@ export const TailLogEntriesResponse_SuppressionInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): TailLogEntriesResponse_SuppressionInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): TailLogEntriesResponse_SuppressionInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTailLogEntriesResponse_SuppressionInfo();
@@ -2519,13 +2519,13 @@ export const TailLogEntriesResponse_SuppressionInfo = {
       suppressedCount: object.suppressed_count
     };
   },
-  toAmino(message: TailLogEntriesResponse_SuppressionInfo, useInterfaces: boolean = false): TailLogEntriesResponse_SuppressionInfoAmino {
+  toAmino(message: TailLogEntriesResponse_SuppressionInfo, useInterfaces: boolean = true): TailLogEntriesResponse_SuppressionInfoAmino {
     const obj: any = {};
     obj.reason = message.reason;
     obj.suppressed_count = message.suppressedCount;
     return obj;
   },
-  fromProtoMsg(message: TailLogEntriesResponse_SuppressionInfoProtoMsg, useInterfaces: boolean = false): TailLogEntriesResponse_SuppressionInfo {
+  fromProtoMsg(message: TailLogEntriesResponse_SuppressionInfoProtoMsg, useInterfaces: boolean = true): TailLogEntriesResponse_SuppressionInfo {
     return TailLogEntriesResponse_SuppressionInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: TailLogEntriesResponse_SuppressionInfo): Uint8Array {

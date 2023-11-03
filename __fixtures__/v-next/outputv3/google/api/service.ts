@@ -430,7 +430,7 @@ export const Service = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Service {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Service {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseService();
@@ -777,7 +777,7 @@ export const Service = {
       configVersion: object?.config_version ? UInt32Value.fromAmino(object.config_version) : undefined
     };
   },
-  toAmino(message: Service, useInterfaces: boolean = false): ServiceAmino {
+  toAmino(message: Service, useInterfaces: boolean = true): ServiceAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.title = message.title;
@@ -834,7 +834,7 @@ export const Service = {
     obj.config_version = message.configVersion ? UInt32Value.toAmino(message.configVersion, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: ServiceProtoMsg, useInterfaces: boolean = false): Service {
+  fromProtoMsg(message: ServiceProtoMsg, useInterfaces: boolean = true): Service {
     return Service.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Service): Uint8Array {

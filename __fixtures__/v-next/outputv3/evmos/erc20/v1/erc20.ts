@@ -228,7 +228,7 @@ export const TokenPair = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): TokenPair {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): TokenPair {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTokenPair();
@@ -302,7 +302,7 @@ export const TokenPair = {
       contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : -1
     };
   },
-  toAmino(message: TokenPair, useInterfaces: boolean = false): TokenPairAmino {
+  toAmino(message: TokenPair, useInterfaces: boolean = true): TokenPairAmino {
     const obj: any = {};
     obj.erc20_address = message.erc20Address;
     obj.denom = message.denom;
@@ -310,7 +310,7 @@ export const TokenPair = {
     obj.contract_owner = message.contractOwner;
     return obj;
   },
-  fromProtoMsg(message: TokenPairProtoMsg, useInterfaces: boolean = false): TokenPair {
+  fromProtoMsg(message: TokenPairProtoMsg, useInterfaces: boolean = true): TokenPair {
     return TokenPair.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: TokenPair): Uint8Array {
@@ -344,7 +344,7 @@ export const RegisterCoinProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): RegisterCoinProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): RegisterCoinProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRegisterCoinProposal();
@@ -411,14 +411,14 @@ export const RegisterCoinProposal = {
       metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : undefined
     };
   },
-  toAmino(message: RegisterCoinProposal, useInterfaces: boolean = false): RegisterCoinProposalAmino {
+  toAmino(message: RegisterCoinProposal, useInterfaces: boolean = true): RegisterCoinProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
     obj.metadata = message.metadata ? Metadata.toAmino(message.metadata, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: RegisterCoinProposalProtoMsg, useInterfaces: boolean = false): RegisterCoinProposal {
+  fromProtoMsg(message: RegisterCoinProposalProtoMsg, useInterfaces: boolean = true): RegisterCoinProposal {
     return RegisterCoinProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: RegisterCoinProposal): Uint8Array {
@@ -452,7 +452,7 @@ export const RegisterERC20Proposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): RegisterERC20Proposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): RegisterERC20Proposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRegisterERC20Proposal();
@@ -517,14 +517,14 @@ export const RegisterERC20Proposal = {
       erc20address: object.erc20address
     };
   },
-  toAmino(message: RegisterERC20Proposal, useInterfaces: boolean = false): RegisterERC20ProposalAmino {
+  toAmino(message: RegisterERC20Proposal, useInterfaces: boolean = true): RegisterERC20ProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
     obj.erc20address = message.erc20address;
     return obj;
   },
-  fromProtoMsg(message: RegisterERC20ProposalProtoMsg, useInterfaces: boolean = false): RegisterERC20Proposal {
+  fromProtoMsg(message: RegisterERC20ProposalProtoMsg, useInterfaces: boolean = true): RegisterERC20Proposal {
     return RegisterERC20Proposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: RegisterERC20Proposal): Uint8Array {
@@ -558,7 +558,7 @@ export const ToggleTokenConversionProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ToggleTokenConversionProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ToggleTokenConversionProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseToggleTokenConversionProposal();
@@ -623,14 +623,14 @@ export const ToggleTokenConversionProposal = {
       token: object.token
     };
   },
-  toAmino(message: ToggleTokenConversionProposal, useInterfaces: boolean = false): ToggleTokenConversionProposalAmino {
+  toAmino(message: ToggleTokenConversionProposal, useInterfaces: boolean = true): ToggleTokenConversionProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
     obj.token = message.token;
     return obj;
   },
-  fromProtoMsg(message: ToggleTokenConversionProposalProtoMsg, useInterfaces: boolean = false): ToggleTokenConversionProposal {
+  fromProtoMsg(message: ToggleTokenConversionProposalProtoMsg, useInterfaces: boolean = true): ToggleTokenConversionProposal {
     return ToggleTokenConversionProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ToggleTokenConversionProposal): Uint8Array {

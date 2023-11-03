@@ -236,7 +236,7 @@ export const Usage = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Usage {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Usage {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUsage();
@@ -317,7 +317,7 @@ export const Usage = {
       producerNotificationChannel: object.producer_notification_channel
     };
   },
-  toAmino(message: Usage, useInterfaces: boolean = false): UsageAmino {
+  toAmino(message: Usage, useInterfaces: boolean = true): UsageAmino {
     const obj: any = {};
     if (message.requirements) {
       obj.requirements = message.requirements.map(e => e);
@@ -335,7 +335,7 @@ export const Usage = {
   fromAminoMsg(object: UsageAminoMsg): Usage {
     return Usage.fromAmino(object.value);
   },
-  fromProtoMsg(message: UsageProtoMsg, useInterfaces: boolean = false): Usage {
+  fromProtoMsg(message: UsageProtoMsg, useInterfaces: boolean = true): Usage {
     return Usage.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Usage): Uint8Array {
@@ -369,7 +369,7 @@ export const UsageRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): UsageRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UsageRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUsageRule();
@@ -434,7 +434,7 @@ export const UsageRule = {
       skipServiceControl: object.skip_service_control
     };
   },
-  toAmino(message: UsageRule, useInterfaces: boolean = false): UsageRuleAmino {
+  toAmino(message: UsageRule, useInterfaces: boolean = true): UsageRuleAmino {
     const obj: any = {};
     obj.selector = message.selector;
     obj.allow_unregistered_calls = message.allowUnregisteredCalls;
@@ -444,7 +444,7 @@ export const UsageRule = {
   fromAminoMsg(object: UsageRuleAminoMsg): UsageRule {
     return UsageRule.fromAmino(object.value);
   },
-  fromProtoMsg(message: UsageRuleProtoMsg, useInterfaces: boolean = false): UsageRule {
+  fromProtoMsg(message: UsageRuleProtoMsg, useInterfaces: boolean = true): UsageRule {
     return UsageRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UsageRule): Uint8Array {

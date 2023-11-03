@@ -272,7 +272,7 @@ export const Monitoring = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Monitoring {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Monitoring {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoring();
@@ -344,7 +344,7 @@ export const Monitoring = {
       consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromAmino(e)) : []
     };
   },
-  toAmino(message: Monitoring, useInterfaces: boolean = false): MonitoringAmino {
+  toAmino(message: Monitoring, useInterfaces: boolean = true): MonitoringAmino {
     const obj: any = {};
     if (message.producerDestinations) {
       obj.producer_destinations = message.producerDestinations.map(e => e ? Monitoring_MonitoringDestination.toAmino(e, useInterfaces) : undefined);
@@ -358,7 +358,7 @@ export const Monitoring = {
     }
     return obj;
   },
-  fromProtoMsg(message: MonitoringProtoMsg, useInterfaces: boolean = false): Monitoring {
+  fromProtoMsg(message: MonitoringProtoMsg, useInterfaces: boolean = true): Monitoring {
     return Monitoring.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Monitoring): Uint8Array {
@@ -388,7 +388,7 @@ export const Monitoring_MonitoringDestination = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Monitoring_MonitoringDestination {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Monitoring_MonitoringDestination {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoring_MonitoringDestination();
@@ -452,7 +452,7 @@ export const Monitoring_MonitoringDestination = {
       metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
     };
   },
-  toAmino(message: Monitoring_MonitoringDestination, useInterfaces: boolean = false): Monitoring_MonitoringDestinationAmino {
+  toAmino(message: Monitoring_MonitoringDestination, useInterfaces: boolean = true): Monitoring_MonitoringDestinationAmino {
     const obj: any = {};
     obj.monitored_resource = message.monitoredResource;
     if (message.metrics) {
@@ -462,7 +462,7 @@ export const Monitoring_MonitoringDestination = {
     }
     return obj;
   },
-  fromProtoMsg(message: Monitoring_MonitoringDestinationProtoMsg, useInterfaces: boolean = false): Monitoring_MonitoringDestination {
+  fromProtoMsg(message: Monitoring_MonitoringDestinationProtoMsg, useInterfaces: boolean = true): Monitoring_MonitoringDestination {
     return Monitoring_MonitoringDestination.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Monitoring_MonitoringDestination): Uint8Array {

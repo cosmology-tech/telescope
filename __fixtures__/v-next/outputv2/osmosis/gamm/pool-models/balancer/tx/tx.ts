@@ -77,7 +77,7 @@ export const MsgCreateBalancerPool = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCreateBalancerPool {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateBalancerPool {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBalancerPool();
@@ -161,7 +161,7 @@ export const MsgCreateBalancerPool = {
       futurePoolGovernor: object.future_pool_governor
     };
   },
-  toAmino(message: MsgCreateBalancerPool, useInterfaces: boolean = false): MsgCreateBalancerPoolAmino {
+  toAmino(message: MsgCreateBalancerPool, useInterfaces: boolean = true): MsgCreateBalancerPoolAmino {
     const obj: any = {};
     obj.sender = message.sender;
     obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams, useInterfaces) : undefined;
@@ -176,13 +176,13 @@ export const MsgCreateBalancerPool = {
   fromAminoMsg(object: MsgCreateBalancerPoolAminoMsg): MsgCreateBalancerPool {
     return MsgCreateBalancerPool.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreateBalancerPool, useInterfaces: boolean = false): MsgCreateBalancerPoolAminoMsg {
+  toAminoMsg(message: MsgCreateBalancerPool, useInterfaces: boolean = true): MsgCreateBalancerPoolAminoMsg {
     return {
       type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool",
       value: MsgCreateBalancerPool.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgCreateBalancerPoolProtoMsg, useInterfaces: boolean = false): MsgCreateBalancerPool {
+  fromProtoMsg(message: MsgCreateBalancerPoolProtoMsg, useInterfaces: boolean = true): MsgCreateBalancerPool {
     return MsgCreateBalancerPool.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateBalancerPool): Uint8Array {
@@ -209,7 +209,7 @@ export const MsgCreateBalancerPoolResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCreateBalancerPoolResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateBalancerPoolResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBalancerPoolResponse();
@@ -258,7 +258,7 @@ export const MsgCreateBalancerPoolResponse = {
       poolId: BigInt(object.pool_id)
     };
   },
-  toAmino(message: MsgCreateBalancerPoolResponse, useInterfaces: boolean = false): MsgCreateBalancerPoolResponseAmino {
+  toAmino(message: MsgCreateBalancerPoolResponse, useInterfaces: boolean = true): MsgCreateBalancerPoolResponseAmino {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     return obj;
@@ -266,13 +266,13 @@ export const MsgCreateBalancerPoolResponse = {
   fromAminoMsg(object: MsgCreateBalancerPoolResponseAminoMsg): MsgCreateBalancerPoolResponse {
     return MsgCreateBalancerPoolResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreateBalancerPoolResponse, useInterfaces: boolean = false): MsgCreateBalancerPoolResponseAminoMsg {
+  toAminoMsg(message: MsgCreateBalancerPoolResponse, useInterfaces: boolean = true): MsgCreateBalancerPoolResponseAminoMsg {
     return {
       type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool-response",
       value: MsgCreateBalancerPoolResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgCreateBalancerPoolResponseProtoMsg, useInterfaces: boolean = false): MsgCreateBalancerPoolResponse {
+  fromProtoMsg(message: MsgCreateBalancerPoolResponseProtoMsg, useInterfaces: boolean = true): MsgCreateBalancerPoolResponse {
     return MsgCreateBalancerPoolResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateBalancerPoolResponse): Uint8Array {

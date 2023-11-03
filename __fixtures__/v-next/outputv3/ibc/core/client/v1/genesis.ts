@@ -137,7 +137,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -257,7 +257,7 @@ export const GenesisState = {
       nextClientSequence: BigInt(object.next_client_sequence)
     };
   },
-  toAmino(message: GenesisState, useInterfaces: boolean = false): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     if (message.clients) {
       obj.clients = message.clients.map(e => e ? IdentifiedClientState.toAmino(e, useInterfaces) : undefined);
@@ -279,7 +279,7 @@ export const GenesisState = {
     obj.next_client_sequence = message.nextClientSequence ? message.nextClientSequence.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = false): GenesisState {
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
     return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
@@ -310,7 +310,7 @@ export const GenesisMetadata = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisMetadata();
@@ -366,13 +366,13 @@ export const GenesisMetadata = {
       value: object.value
     };
   },
-  toAmino(message: GenesisMetadata, useInterfaces: boolean = false): GenesisMetadataAmino {
+  toAmino(message: GenesisMetadata, useInterfaces: boolean = true): GenesisMetadataAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
     return obj;
   },
-  fromProtoMsg(message: GenesisMetadataProtoMsg, useInterfaces: boolean = false): GenesisMetadata {
+  fromProtoMsg(message: GenesisMetadataProtoMsg, useInterfaces: boolean = true): GenesisMetadata {
     return GenesisMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisMetadata): Uint8Array {
@@ -403,7 +403,7 @@ export const IdentifiedGenesisMetadata = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): IdentifiedGenesisMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): IdentifiedGenesisMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdentifiedGenesisMetadata();
@@ -467,7 +467,7 @@ export const IdentifiedGenesisMetadata = {
       clientMetadata: Array.isArray(object?.client_metadata) ? object.client_metadata.map((e: any) => GenesisMetadata.fromAmino(e)) : []
     };
   },
-  toAmino(message: IdentifiedGenesisMetadata, useInterfaces: boolean = false): IdentifiedGenesisMetadataAmino {
+  toAmino(message: IdentifiedGenesisMetadata, useInterfaces: boolean = true): IdentifiedGenesisMetadataAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
     if (message.clientMetadata) {
@@ -477,7 +477,7 @@ export const IdentifiedGenesisMetadata = {
     }
     return obj;
   },
-  fromProtoMsg(message: IdentifiedGenesisMetadataProtoMsg, useInterfaces: boolean = false): IdentifiedGenesisMetadata {
+  fromProtoMsg(message: IdentifiedGenesisMetadataProtoMsg, useInterfaces: boolean = true): IdentifiedGenesisMetadata {
     return IdentifiedGenesisMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: IdentifiedGenesisMetadata): Uint8Array {

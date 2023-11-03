@@ -106,7 +106,7 @@ export const Evidence = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Evidence {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Evidence {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvidence();
@@ -166,13 +166,13 @@ export const Evidence = {
       lightClientAttackEvidence: object?.light_client_attack_evidence ? LightClientAttackEvidence.fromAmino(object.light_client_attack_evidence) : undefined
     };
   },
-  toAmino(message: Evidence, useInterfaces: boolean = false): EvidenceAmino {
+  toAmino(message: Evidence, useInterfaces: boolean = true): EvidenceAmino {
     const obj: any = {};
     obj.duplicate_vote_evidence = message.duplicateVoteEvidence ? DuplicateVoteEvidence.toAmino(message.duplicateVoteEvidence, useInterfaces) : undefined;
     obj.light_client_attack_evidence = message.lightClientAttackEvidence ? LightClientAttackEvidence.toAmino(message.lightClientAttackEvidence, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: EvidenceProtoMsg, useInterfaces: boolean = false): Evidence {
+  fromProtoMsg(message: EvidenceProtoMsg, useInterfaces: boolean = true): Evidence {
     return Evidence.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Evidence): Uint8Array {
@@ -214,7 +214,7 @@ export const DuplicateVoteEvidence = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DuplicateVoteEvidence {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DuplicateVoteEvidence {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDuplicateVoteEvidence();
@@ -305,7 +305,7 @@ export const DuplicateVoteEvidence = {
       timestamp: object.timestamp
     };
   },
-  toAmino(message: DuplicateVoteEvidence, useInterfaces: boolean = false): DuplicateVoteEvidenceAmino {
+  toAmino(message: DuplicateVoteEvidence, useInterfaces: boolean = true): DuplicateVoteEvidenceAmino {
     const obj: any = {};
     obj.vote_a = message.voteA ? Vote.toAmino(message.voteA, useInterfaces) : undefined;
     obj.vote_b = message.voteB ? Vote.toAmino(message.voteB, useInterfaces) : undefined;
@@ -314,7 +314,7 @@ export const DuplicateVoteEvidence = {
     obj.timestamp = message.timestamp;
     return obj;
   },
-  fromProtoMsg(message: DuplicateVoteEvidenceProtoMsg, useInterfaces: boolean = false): DuplicateVoteEvidence {
+  fromProtoMsg(message: DuplicateVoteEvidenceProtoMsg, useInterfaces: boolean = true): DuplicateVoteEvidence {
     return DuplicateVoteEvidence.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DuplicateVoteEvidence): Uint8Array {
@@ -356,7 +356,7 @@ export const LightClientAttackEvidence = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): LightClientAttackEvidence {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LightClientAttackEvidence {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLightClientAttackEvidence();
@@ -453,7 +453,7 @@ export const LightClientAttackEvidence = {
       timestamp: object.timestamp
     };
   },
-  toAmino(message: LightClientAttackEvidence, useInterfaces: boolean = false): LightClientAttackEvidenceAmino {
+  toAmino(message: LightClientAttackEvidence, useInterfaces: boolean = true): LightClientAttackEvidenceAmino {
     const obj: any = {};
     obj.conflicting_block = message.conflictingBlock ? LightBlock.toAmino(message.conflictingBlock, useInterfaces) : undefined;
     obj.common_height = message.commonHeight ? message.commonHeight.toString() : undefined;
@@ -466,7 +466,7 @@ export const LightClientAttackEvidence = {
     obj.timestamp = message.timestamp;
     return obj;
   },
-  fromProtoMsg(message: LightClientAttackEvidenceProtoMsg, useInterfaces: boolean = false): LightClientAttackEvidence {
+  fromProtoMsg(message: LightClientAttackEvidenceProtoMsg, useInterfaces: boolean = true): LightClientAttackEvidence {
     return LightClientAttackEvidence.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LightClientAttackEvidence): Uint8Array {
@@ -492,7 +492,7 @@ export const EvidenceList = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): EvidenceList {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EvidenceList {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvidenceList();
@@ -547,7 +547,7 @@ export const EvidenceList = {
       evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Evidence.fromAmino(e)) : []
     };
   },
-  toAmino(message: EvidenceList, useInterfaces: boolean = false): EvidenceListAmino {
+  toAmino(message: EvidenceList, useInterfaces: boolean = true): EvidenceListAmino {
     const obj: any = {};
     if (message.evidence) {
       obj.evidence = message.evidence.map(e => e ? Evidence.toAmino(e, useInterfaces) : undefined);
@@ -556,7 +556,7 @@ export const EvidenceList = {
     }
     return obj;
   },
-  fromProtoMsg(message: EvidenceListProtoMsg, useInterfaces: boolean = false): EvidenceList {
+  fromProtoMsg(message: EvidenceListProtoMsg, useInterfaces: boolean = true): EvidenceList {
     return EvidenceList.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EvidenceList): Uint8Array {

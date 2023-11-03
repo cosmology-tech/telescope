@@ -266,7 +266,7 @@ export const MsgCreateBid = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCreateBid {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateBid {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBid();
@@ -346,7 +346,7 @@ export const MsgCreateBid = {
       deposit: object?.deposit ? Coin.fromAmino(object.deposit) : undefined
     };
   },
-  toAmino(message: MsgCreateBid, useInterfaces: boolean = false): MsgCreateBidAmino {
+  toAmino(message: MsgCreateBid, useInterfaces: boolean = true): MsgCreateBidAmino {
     const obj: any = {};
     obj.order = message.order ? OrderID.toAmino(message.order, useInterfaces) : undefined;
     obj.provider = message.provider;
@@ -357,7 +357,7 @@ export const MsgCreateBid = {
   fromAminoMsg(object: MsgCreateBidAminoMsg): MsgCreateBid {
     return MsgCreateBid.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgCreateBidProtoMsg, useInterfaces: boolean = false): MsgCreateBid {
+  fromProtoMsg(message: MsgCreateBidProtoMsg, useInterfaces: boolean = true): MsgCreateBid {
     return MsgCreateBid.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateBid): Uint8Array {
@@ -378,7 +378,7 @@ export const MsgCreateBidResponse = {
   encode(_: MsgCreateBidResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCreateBidResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateBidResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBidResponse();
@@ -414,14 +414,14 @@ export const MsgCreateBidResponse = {
   fromAmino(_: MsgCreateBidResponseAmino): MsgCreateBidResponse {
     return {};
   },
-  toAmino(_: MsgCreateBidResponse, useInterfaces: boolean = false): MsgCreateBidResponseAmino {
+  toAmino(_: MsgCreateBidResponse, useInterfaces: boolean = true): MsgCreateBidResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgCreateBidResponseAminoMsg): MsgCreateBidResponse {
     return MsgCreateBidResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgCreateBidResponseProtoMsg, useInterfaces: boolean = false): MsgCreateBidResponse {
+  fromProtoMsg(message: MsgCreateBidResponseProtoMsg, useInterfaces: boolean = true): MsgCreateBidResponse {
     return MsgCreateBidResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateBidResponse): Uint8Array {
@@ -447,7 +447,7 @@ export const MsgCloseBid = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCloseBid {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCloseBid {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseBid();
@@ -496,7 +496,7 @@ export const MsgCloseBid = {
       bidId: object?.bid_id ? BidID.fromAmino(object.bid_id) : undefined
     };
   },
-  toAmino(message: MsgCloseBid, useInterfaces: boolean = false): MsgCloseBidAmino {
+  toAmino(message: MsgCloseBid, useInterfaces: boolean = true): MsgCloseBidAmino {
     const obj: any = {};
     obj.bid_id = message.bidId ? BidID.toAmino(message.bidId, useInterfaces) : undefined;
     return obj;
@@ -504,7 +504,7 @@ export const MsgCloseBid = {
   fromAminoMsg(object: MsgCloseBidAminoMsg): MsgCloseBid {
     return MsgCloseBid.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgCloseBidProtoMsg, useInterfaces: boolean = false): MsgCloseBid {
+  fromProtoMsg(message: MsgCloseBidProtoMsg, useInterfaces: boolean = true): MsgCloseBid {
     return MsgCloseBid.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCloseBid): Uint8Array {
@@ -525,7 +525,7 @@ export const MsgCloseBidResponse = {
   encode(_: MsgCloseBidResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCloseBidResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCloseBidResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseBidResponse();
@@ -561,14 +561,14 @@ export const MsgCloseBidResponse = {
   fromAmino(_: MsgCloseBidResponseAmino): MsgCloseBidResponse {
     return {};
   },
-  toAmino(_: MsgCloseBidResponse, useInterfaces: boolean = false): MsgCloseBidResponseAmino {
+  toAmino(_: MsgCloseBidResponse, useInterfaces: boolean = true): MsgCloseBidResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgCloseBidResponseAminoMsg): MsgCloseBidResponse {
     return MsgCloseBidResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgCloseBidResponseProtoMsg, useInterfaces: boolean = false): MsgCloseBidResponse {
+  fromProtoMsg(message: MsgCloseBidResponseProtoMsg, useInterfaces: boolean = true): MsgCloseBidResponse {
     return MsgCloseBidResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCloseBidResponse): Uint8Array {
@@ -610,7 +610,7 @@ export const BidID = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): BidID {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BidID {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBidID();
@@ -695,7 +695,7 @@ export const BidID = {
       provider: object.provider
     };
   },
-  toAmino(message: BidID, useInterfaces: boolean = false): BidIDAmino {
+  toAmino(message: BidID, useInterfaces: boolean = true): BidIDAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.dseq = message.dseq ? message.dseq.toString() : undefined;
@@ -707,7 +707,7 @@ export const BidID = {
   fromAminoMsg(object: BidIDAminoMsg): BidID {
     return BidID.fromAmino(object.value);
   },
-  fromProtoMsg(message: BidIDProtoMsg, useInterfaces: boolean = false): BidID {
+  fromProtoMsg(message: BidIDProtoMsg, useInterfaces: boolean = true): BidID {
     return BidID.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BidID): Uint8Array {
@@ -745,7 +745,7 @@ export const Bid = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Bid {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Bid {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBid();
@@ -825,7 +825,7 @@ export const Bid = {
       createdAt: BigInt(object.created_at)
     };
   },
-  toAmino(message: Bid, useInterfaces: boolean = false): BidAmino {
+  toAmino(message: Bid, useInterfaces: boolean = true): BidAmino {
     const obj: any = {};
     obj.bid_id = message.bidId ? BidID.toAmino(message.bidId, useInterfaces) : undefined;
     obj.state = message.state;
@@ -836,7 +836,7 @@ export const Bid = {
   fromAminoMsg(object: BidAminoMsg): Bid {
     return Bid.fromAmino(object.value);
   },
-  fromProtoMsg(message: BidProtoMsg, useInterfaces: boolean = false): Bid {
+  fromProtoMsg(message: BidProtoMsg, useInterfaces: boolean = true): Bid {
     return Bid.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Bid): Uint8Array {
@@ -882,7 +882,7 @@ export const BidFilters = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): BidFilters {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BidFilters {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBidFilters();
@@ -976,7 +976,7 @@ export const BidFilters = {
       state: object.state
     };
   },
-  toAmino(message: BidFilters, useInterfaces: boolean = false): BidFiltersAmino {
+  toAmino(message: BidFilters, useInterfaces: boolean = true): BidFiltersAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.dseq = message.dseq ? message.dseq.toString() : undefined;
@@ -989,7 +989,7 @@ export const BidFilters = {
   fromAminoMsg(object: BidFiltersAminoMsg): BidFilters {
     return BidFilters.fromAmino(object.value);
   },
-  fromProtoMsg(message: BidFiltersProtoMsg, useInterfaces: boolean = false): BidFilters {
+  fromProtoMsg(message: BidFiltersProtoMsg, useInterfaces: boolean = true): BidFilters {
     return BidFilters.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BidFilters): Uint8Array {

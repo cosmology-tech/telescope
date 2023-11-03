@@ -219,7 +219,7 @@ export const SystemParameters = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SystemParameters {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SystemParameters {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSystemParameters();
@@ -274,7 +274,7 @@ export const SystemParameters = {
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => SystemParameterRule.fromAmino(e)) : []
     };
   },
-  toAmino(message: SystemParameters, useInterfaces: boolean = false): SystemParametersAmino {
+  toAmino(message: SystemParameters, useInterfaces: boolean = true): SystemParametersAmino {
     const obj: any = {};
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? SystemParameterRule.toAmino(e, useInterfaces) : undefined);
@@ -283,7 +283,7 @@ export const SystemParameters = {
     }
     return obj;
   },
-  fromProtoMsg(message: SystemParametersProtoMsg, useInterfaces: boolean = false): SystemParameters {
+  fromProtoMsg(message: SystemParametersProtoMsg, useInterfaces: boolean = true): SystemParameters {
     return SystemParameters.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SystemParameters): Uint8Array {
@@ -313,7 +313,7 @@ export const SystemParameterRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SystemParameterRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SystemParameterRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSystemParameterRule();
@@ -377,7 +377,7 @@ export const SystemParameterRule = {
       parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromAmino(e)) : []
     };
   },
-  toAmino(message: SystemParameterRule, useInterfaces: boolean = false): SystemParameterRuleAmino {
+  toAmino(message: SystemParameterRule, useInterfaces: boolean = true): SystemParameterRuleAmino {
     const obj: any = {};
     obj.selector = message.selector;
     if (message.parameters) {
@@ -387,7 +387,7 @@ export const SystemParameterRule = {
     }
     return obj;
   },
-  fromProtoMsg(message: SystemParameterRuleProtoMsg, useInterfaces: boolean = false): SystemParameterRule {
+  fromProtoMsg(message: SystemParameterRuleProtoMsg, useInterfaces: boolean = true): SystemParameterRule {
     return SystemParameterRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SystemParameterRule): Uint8Array {
@@ -421,7 +421,7 @@ export const SystemParameter = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SystemParameter {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SystemParameter {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSystemParameter();
@@ -486,14 +486,14 @@ export const SystemParameter = {
       urlQueryParameter: object.url_query_parameter
     };
   },
-  toAmino(message: SystemParameter, useInterfaces: boolean = false): SystemParameterAmino {
+  toAmino(message: SystemParameter, useInterfaces: boolean = true): SystemParameterAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.http_header = message.httpHeader;
     obj.url_query_parameter = message.urlQueryParameter;
     return obj;
   },
-  fromProtoMsg(message: SystemParameterProtoMsg, useInterfaces: boolean = false): SystemParameter {
+  fromProtoMsg(message: SystemParameterProtoMsg, useInterfaces: boolean = true): SystemParameter {
     return SystemParameter.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SystemParameter): Uint8Array {

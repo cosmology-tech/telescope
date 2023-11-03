@@ -39,7 +39,7 @@ export const QueryConfigRequest = {
   encode(_: QueryConfigRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConfigRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryConfigRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConfigRequest();
@@ -75,11 +75,11 @@ export const QueryConfigRequest = {
   fromAmino(_: QueryConfigRequestAmino): QueryConfigRequest {
     return {};
   },
-  toAmino(_: QueryConfigRequest, useInterfaces: boolean = false): QueryConfigRequestAmino {
+  toAmino(_: QueryConfigRequest, useInterfaces: boolean = true): QueryConfigRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: QueryConfigRequestProtoMsg, useInterfaces: boolean = false): QueryConfigRequest {
+  fromProtoMsg(message: QueryConfigRequestProtoMsg, useInterfaces: boolean = true): QueryConfigRequest {
     return QueryConfigRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConfigRequest): Uint8Array {
@@ -106,7 +106,7 @@ export const QueryConfigResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConfigResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryConfigResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConfigResponse();
@@ -155,12 +155,12 @@ export const QueryConfigResponse = {
       config: object?.config ? Config.fromAmino(object.config) : undefined
     };
   },
-  toAmino(message: QueryConfigResponse, useInterfaces: boolean = false): QueryConfigResponseAmino {
+  toAmino(message: QueryConfigResponse, useInterfaces: boolean = true): QueryConfigResponseAmino {
     const obj: any = {};
     obj.config = message.config ? Config.toAmino(message.config, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryConfigResponseProtoMsg, useInterfaces: boolean = false): QueryConfigResponse {
+  fromProtoMsg(message: QueryConfigResponseProtoMsg, useInterfaces: boolean = true): QueryConfigResponse {
     return QueryConfigResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConfigResponse): Uint8Array {

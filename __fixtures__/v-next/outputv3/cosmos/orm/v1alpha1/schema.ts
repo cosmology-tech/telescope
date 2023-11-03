@@ -181,7 +181,7 @@ export const ModuleSchemaDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ModuleSchemaDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModuleSchemaDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleSchemaDescriptor();
@@ -245,7 +245,7 @@ export const ModuleSchemaDescriptor = {
       prefix: object.prefix
     };
   },
-  toAmino(message: ModuleSchemaDescriptor, useInterfaces: boolean = false): ModuleSchemaDescriptorAmino {
+  toAmino(message: ModuleSchemaDescriptor, useInterfaces: boolean = true): ModuleSchemaDescriptorAmino {
     const obj: any = {};
     if (message.schemaFile) {
       obj.schema_file = message.schemaFile.map(e => e ? ModuleSchemaDescriptor_FileEntry.toAmino(e, useInterfaces) : undefined);
@@ -255,7 +255,7 @@ export const ModuleSchemaDescriptor = {
     obj.prefix = message.prefix;
     return obj;
   },
-  fromProtoMsg(message: ModuleSchemaDescriptorProtoMsg, useInterfaces: boolean = false): ModuleSchemaDescriptor {
+  fromProtoMsg(message: ModuleSchemaDescriptorProtoMsg, useInterfaces: boolean = true): ModuleSchemaDescriptor {
     return ModuleSchemaDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ModuleSchemaDescriptor): Uint8Array {
@@ -290,7 +290,7 @@ export const ModuleSchemaDescriptor_FileEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ModuleSchemaDescriptor_FileEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModuleSchemaDescriptor_FileEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleSchemaDescriptor_FileEntry();
@@ -355,14 +355,14 @@ export const ModuleSchemaDescriptor_FileEntry = {
       storageType: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : -1
     };
   },
-  toAmino(message: ModuleSchemaDescriptor_FileEntry, useInterfaces: boolean = false): ModuleSchemaDescriptor_FileEntryAmino {
+  toAmino(message: ModuleSchemaDescriptor_FileEntry, useInterfaces: boolean = true): ModuleSchemaDescriptor_FileEntryAmino {
     const obj: any = {};
     obj.id = message.id;
     obj.proto_file_name = message.protoFileName;
     obj.storage_type = message.storageType;
     return obj;
   },
-  fromProtoMsg(message: ModuleSchemaDescriptor_FileEntryProtoMsg, useInterfaces: boolean = false): ModuleSchemaDescriptor_FileEntry {
+  fromProtoMsg(message: ModuleSchemaDescriptor_FileEntryProtoMsg, useInterfaces: boolean = true): ModuleSchemaDescriptor_FileEntry {
     return ModuleSchemaDescriptor_FileEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ModuleSchemaDescriptor_FileEntry): Uint8Array {

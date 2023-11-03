@@ -149,7 +149,7 @@ export const InflationDistribution = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): InflationDistribution {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): InflationDistribution {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInflationDistribution();
@@ -214,14 +214,14 @@ export const InflationDistribution = {
       communityPool: object.community_pool
     };
   },
-  toAmino(message: InflationDistribution, useInterfaces: boolean = false): InflationDistributionAmino {
+  toAmino(message: InflationDistribution, useInterfaces: boolean = true): InflationDistributionAmino {
     const obj: any = {};
     obj.staking_rewards = message.stakingRewards;
     obj.usage_incentives = message.usageIncentives;
     obj.community_pool = message.communityPool;
     return obj;
   },
-  fromProtoMsg(message: InflationDistributionProtoMsg, useInterfaces: boolean = false): InflationDistribution {
+  fromProtoMsg(message: InflationDistributionProtoMsg, useInterfaces: boolean = true): InflationDistribution {
     return InflationDistribution.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: InflationDistribution): Uint8Array {
@@ -263,7 +263,7 @@ export const ExponentialCalculation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ExponentialCalculation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ExponentialCalculation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExponentialCalculation();
@@ -346,7 +346,7 @@ export const ExponentialCalculation = {
       maxVariance: object.max_variance
     };
   },
-  toAmino(message: ExponentialCalculation, useInterfaces: boolean = false): ExponentialCalculationAmino {
+  toAmino(message: ExponentialCalculation, useInterfaces: boolean = true): ExponentialCalculationAmino {
     const obj: any = {};
     obj.a = message.a;
     obj.r = message.r;
@@ -355,7 +355,7 @@ export const ExponentialCalculation = {
     obj.max_variance = message.maxVariance;
     return obj;
   },
-  fromProtoMsg(message: ExponentialCalculationProtoMsg, useInterfaces: boolean = false): ExponentialCalculation {
+  fromProtoMsg(message: ExponentialCalculationProtoMsg, useInterfaces: boolean = true): ExponentialCalculation {
     return ExponentialCalculation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ExponentialCalculation): Uint8Array {

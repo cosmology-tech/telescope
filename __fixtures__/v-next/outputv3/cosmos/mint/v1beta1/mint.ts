@@ -86,7 +86,7 @@ export const Minter = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Minter {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Minter {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMinter();
@@ -142,13 +142,13 @@ export const Minter = {
       annualProvisions: object.annual_provisions
     };
   },
-  toAmino(message: Minter, useInterfaces: boolean = false): MinterAmino {
+  toAmino(message: Minter, useInterfaces: boolean = true): MinterAmino {
     const obj: any = {};
     obj.inflation = message.inflation;
     obj.annual_provisions = message.annualProvisions;
     return obj;
   },
-  fromProtoMsg(message: MinterProtoMsg, useInterfaces: boolean = false): Minter {
+  fromProtoMsg(message: MinterProtoMsg, useInterfaces: boolean = true): Minter {
     return Minter.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Minter): Uint8Array {
@@ -195,7 +195,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -289,7 +289,7 @@ export const Params = {
       blocksPerYear: BigInt(object.blocks_per_year)
     };
   },
-  toAmino(message: Params, useInterfaces: boolean = false): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
     obj.mint_denom = message.mintDenom;
     obj.inflation_rate_change = message.inflationRateChange;
@@ -299,7 +299,7 @@ export const Params = {
     obj.blocks_per_year = message.blocksPerYear ? message.blocksPerYear.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = false): Params {
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
     return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {

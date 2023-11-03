@@ -51,7 +51,7 @@ export const LegacyAminoPubKey = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): LegacyAminoPubKey {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LegacyAminoPubKey {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLegacyAminoPubKey();
@@ -115,7 +115,7 @@ export const LegacyAminoPubKey = {
       publicKeys: Array.isArray(object?.public_keys) ? object.public_keys.map((e: any) => Any.fromAmino(e)) : []
     };
   },
-  toAmino(message: LegacyAminoPubKey, useInterfaces: boolean = false): LegacyAminoPubKeyAmino {
+  toAmino(message: LegacyAminoPubKey, useInterfaces: boolean = true): LegacyAminoPubKeyAmino {
     const obj: any = {};
     obj.threshold = message.threshold;
     if (message.publicKeys) {
@@ -125,7 +125,7 @@ export const LegacyAminoPubKey = {
     }
     return obj;
   },
-  fromProtoMsg(message: LegacyAminoPubKeyProtoMsg, useInterfaces: boolean = false): LegacyAminoPubKey {
+  fromProtoMsg(message: LegacyAminoPubKeyProtoMsg, useInterfaces: boolean = true): LegacyAminoPubKey {
     return LegacyAminoPubKey.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LegacyAminoPubKey): Uint8Array {

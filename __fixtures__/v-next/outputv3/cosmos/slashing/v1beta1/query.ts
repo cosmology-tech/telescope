@@ -147,7 +147,7 @@ export const QueryParamsRequest = {
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -183,11 +183,11 @@ export const QueryParamsRequest = {
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
-  toAmino(_: QueryParamsRequest, useInterfaces: boolean = false): QueryParamsRequestAmino {
+  toAmino(_: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = false): QueryParamsRequest {
+  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = true): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsRequest): Uint8Array {
@@ -214,7 +214,7 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -263,12 +263,12 @@ export const QueryParamsResponse = {
       params: object?.params ? Params.fromAmino(object.params) : undefined
     };
   },
-  toAmino(message: QueryParamsResponse, useInterfaces: boolean = false): QueryParamsResponseAmino {
+  toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = false): QueryParamsResponse {
+  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = true): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsResponse): Uint8Array {
@@ -295,7 +295,7 @@ export const QuerySigningInfoRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QuerySigningInfoRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuerySigningInfoRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySigningInfoRequest();
@@ -342,12 +342,12 @@ export const QuerySigningInfoRequest = {
       consAddress: object.cons_address
     };
   },
-  toAmino(message: QuerySigningInfoRequest, useInterfaces: boolean = false): QuerySigningInfoRequestAmino {
+  toAmino(message: QuerySigningInfoRequest, useInterfaces: boolean = true): QuerySigningInfoRequestAmino {
     const obj: any = {};
     obj.cons_address = message.consAddress;
     return obj;
   },
-  fromProtoMsg(message: QuerySigningInfoRequestProtoMsg, useInterfaces: boolean = false): QuerySigningInfoRequest {
+  fromProtoMsg(message: QuerySigningInfoRequestProtoMsg, useInterfaces: boolean = true): QuerySigningInfoRequest {
     return QuerySigningInfoRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuerySigningInfoRequest): Uint8Array {
@@ -374,7 +374,7 @@ export const QuerySigningInfoResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QuerySigningInfoResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuerySigningInfoResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySigningInfoResponse();
@@ -423,12 +423,12 @@ export const QuerySigningInfoResponse = {
       valSigningInfo: object?.val_signing_info ? ValidatorSigningInfo.fromAmino(object.val_signing_info) : undefined
     };
   },
-  toAmino(message: QuerySigningInfoResponse, useInterfaces: boolean = false): QuerySigningInfoResponseAmino {
+  toAmino(message: QuerySigningInfoResponse, useInterfaces: boolean = true): QuerySigningInfoResponseAmino {
     const obj: any = {};
     obj.val_signing_info = message.valSigningInfo ? ValidatorSigningInfo.toAmino(message.valSigningInfo, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QuerySigningInfoResponseProtoMsg, useInterfaces: boolean = false): QuerySigningInfoResponse {
+  fromProtoMsg(message: QuerySigningInfoResponseProtoMsg, useInterfaces: boolean = true): QuerySigningInfoResponse {
     return QuerySigningInfoResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuerySigningInfoResponse): Uint8Array {
@@ -455,7 +455,7 @@ export const QuerySigningInfosRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QuerySigningInfosRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuerySigningInfosRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySigningInfosRequest();
@@ -504,12 +504,12 @@ export const QuerySigningInfosRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QuerySigningInfosRequest, useInterfaces: boolean = false): QuerySigningInfosRequestAmino {
+  toAmino(message: QuerySigningInfosRequest, useInterfaces: boolean = true): QuerySigningInfosRequestAmino {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QuerySigningInfosRequestProtoMsg, useInterfaces: boolean = false): QuerySigningInfosRequest {
+  fromProtoMsg(message: QuerySigningInfosRequestProtoMsg, useInterfaces: boolean = true): QuerySigningInfosRequest {
     return QuerySigningInfosRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuerySigningInfosRequest): Uint8Array {
@@ -540,7 +540,7 @@ export const QuerySigningInfosResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QuerySigningInfosResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuerySigningInfosResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySigningInfosResponse();
@@ -606,7 +606,7 @@ export const QuerySigningInfosResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QuerySigningInfosResponse, useInterfaces: boolean = false): QuerySigningInfosResponseAmino {
+  toAmino(message: QuerySigningInfosResponse, useInterfaces: boolean = true): QuerySigningInfosResponseAmino {
     const obj: any = {};
     if (message.info) {
       obj.info = message.info.map(e => e ? ValidatorSigningInfo.toAmino(e, useInterfaces) : undefined);
@@ -616,7 +616,7 @@ export const QuerySigningInfosResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QuerySigningInfosResponseProtoMsg, useInterfaces: boolean = false): QuerySigningInfosResponse {
+  fromProtoMsg(message: QuerySigningInfosResponseProtoMsg, useInterfaces: boolean = true): QuerySigningInfosResponse {
     return QuerySigningInfosResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuerySigningInfosResponse): Uint8Array {

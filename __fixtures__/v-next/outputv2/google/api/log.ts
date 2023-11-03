@@ -121,7 +121,7 @@ export const LogDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): LogDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LogDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogDescriptor();
@@ -203,7 +203,7 @@ export const LogDescriptor = {
       displayName: object.display_name
     };
   },
-  toAmino(message: LogDescriptor, useInterfaces: boolean = false): LogDescriptorAmino {
+  toAmino(message: LogDescriptor, useInterfaces: boolean = true): LogDescriptorAmino {
     const obj: any = {};
     obj.name = message.name;
     if (message.labels) {
@@ -218,7 +218,7 @@ export const LogDescriptor = {
   fromAminoMsg(object: LogDescriptorAminoMsg): LogDescriptor {
     return LogDescriptor.fromAmino(object.value);
   },
-  fromProtoMsg(message: LogDescriptorProtoMsg, useInterfaces: boolean = false): LogDescriptor {
+  fromProtoMsg(message: LogDescriptorProtoMsg, useInterfaces: boolean = true): LogDescriptor {
     return LogDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LogDescriptor): Uint8Array {

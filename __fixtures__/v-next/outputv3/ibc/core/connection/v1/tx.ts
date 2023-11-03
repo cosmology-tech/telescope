@@ -307,7 +307,7 @@ export const MsgConnectionOpenInit = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConnectionOpenInit {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgConnectionOpenInit {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenInit();
@@ -396,7 +396,7 @@ export const MsgConnectionOpenInit = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgConnectionOpenInit, useInterfaces: boolean = false): MsgConnectionOpenInitAmino {
+  toAmino(message: MsgConnectionOpenInit, useInterfaces: boolean = true): MsgConnectionOpenInitAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty, useInterfaces) : undefined;
@@ -405,7 +405,7 @@ export const MsgConnectionOpenInit = {
     obj.signer = message.signer;
     return obj;
   },
-  fromProtoMsg(message: MsgConnectionOpenInitProtoMsg, useInterfaces: boolean = false): MsgConnectionOpenInit {
+  fromProtoMsg(message: MsgConnectionOpenInitProtoMsg, useInterfaces: boolean = true): MsgConnectionOpenInit {
     return MsgConnectionOpenInit.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConnectionOpenInit): Uint8Array {
@@ -427,7 +427,7 @@ export const MsgConnectionOpenInitResponse = {
   encode(_: MsgConnectionOpenInitResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConnectionOpenInitResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgConnectionOpenInitResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenInitResponse();
@@ -463,11 +463,11 @@ export const MsgConnectionOpenInitResponse = {
   fromAmino(_: MsgConnectionOpenInitResponseAmino): MsgConnectionOpenInitResponse {
     return {};
   },
-  toAmino(_: MsgConnectionOpenInitResponse, useInterfaces: boolean = false): MsgConnectionOpenInitResponseAmino {
+  toAmino(_: MsgConnectionOpenInitResponse, useInterfaces: boolean = true): MsgConnectionOpenInitResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgConnectionOpenInitResponseProtoMsg, useInterfaces: boolean = false): MsgConnectionOpenInitResponse {
+  fromProtoMsg(message: MsgConnectionOpenInitResponseProtoMsg, useInterfaces: boolean = true): MsgConnectionOpenInitResponse {
     return MsgConnectionOpenInitResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConnectionOpenInitResponse): Uint8Array {
@@ -538,7 +538,7 @@ export const MsgConnectionOpenTry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConnectionOpenTry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgConnectionOpenTry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenTry();
@@ -702,7 +702,7 @@ export const MsgConnectionOpenTry = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgConnectionOpenTry, useInterfaces: boolean = false): MsgConnectionOpenTryAmino {
+  toAmino(message: MsgConnectionOpenTry, useInterfaces: boolean = true): MsgConnectionOpenTryAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
     obj.previous_connection_id = message.previousConnectionId;
@@ -722,7 +722,7 @@ export const MsgConnectionOpenTry = {
     obj.signer = message.signer;
     return obj;
   },
-  fromProtoMsg(message: MsgConnectionOpenTryProtoMsg, useInterfaces: boolean = false): MsgConnectionOpenTry {
+  fromProtoMsg(message: MsgConnectionOpenTryProtoMsg, useInterfaces: boolean = true): MsgConnectionOpenTry {
     return MsgConnectionOpenTry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConnectionOpenTry): Uint8Array {
@@ -744,7 +744,7 @@ export const MsgConnectionOpenTryResponse = {
   encode(_: MsgConnectionOpenTryResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConnectionOpenTryResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgConnectionOpenTryResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenTryResponse();
@@ -780,11 +780,11 @@ export const MsgConnectionOpenTryResponse = {
   fromAmino(_: MsgConnectionOpenTryResponseAmino): MsgConnectionOpenTryResponse {
     return {};
   },
-  toAmino(_: MsgConnectionOpenTryResponse, useInterfaces: boolean = false): MsgConnectionOpenTryResponseAmino {
+  toAmino(_: MsgConnectionOpenTryResponse, useInterfaces: boolean = true): MsgConnectionOpenTryResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgConnectionOpenTryResponseProtoMsg, useInterfaces: boolean = false): MsgConnectionOpenTryResponse {
+  fromProtoMsg(message: MsgConnectionOpenTryResponseProtoMsg, useInterfaces: boolean = true): MsgConnectionOpenTryResponse {
     return MsgConnectionOpenTryResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConnectionOpenTryResponse): Uint8Array {
@@ -847,7 +847,7 @@ export const MsgConnectionOpenAck = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConnectionOpenAck {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgConnectionOpenAck {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenAck();
@@ -983,7 +983,7 @@ export const MsgConnectionOpenAck = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgConnectionOpenAck, useInterfaces: boolean = false): MsgConnectionOpenAckAmino {
+  toAmino(message: MsgConnectionOpenAck, useInterfaces: boolean = true): MsgConnectionOpenAckAmino {
     const obj: any = {};
     obj.connection_id = message.connectionId;
     obj.counterparty_connection_id = message.counterpartyConnectionId;
@@ -997,7 +997,7 @@ export const MsgConnectionOpenAck = {
     obj.signer = message.signer;
     return obj;
   },
-  fromProtoMsg(message: MsgConnectionOpenAckProtoMsg, useInterfaces: boolean = false): MsgConnectionOpenAck {
+  fromProtoMsg(message: MsgConnectionOpenAckProtoMsg, useInterfaces: boolean = true): MsgConnectionOpenAck {
     return MsgConnectionOpenAck.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConnectionOpenAck): Uint8Array {
@@ -1019,7 +1019,7 @@ export const MsgConnectionOpenAckResponse = {
   encode(_: MsgConnectionOpenAckResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConnectionOpenAckResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgConnectionOpenAckResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenAckResponse();
@@ -1055,11 +1055,11 @@ export const MsgConnectionOpenAckResponse = {
   fromAmino(_: MsgConnectionOpenAckResponseAmino): MsgConnectionOpenAckResponse {
     return {};
   },
-  toAmino(_: MsgConnectionOpenAckResponse, useInterfaces: boolean = false): MsgConnectionOpenAckResponseAmino {
+  toAmino(_: MsgConnectionOpenAckResponse, useInterfaces: boolean = true): MsgConnectionOpenAckResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgConnectionOpenAckResponseProtoMsg, useInterfaces: boolean = false): MsgConnectionOpenAckResponse {
+  fromProtoMsg(message: MsgConnectionOpenAckResponseProtoMsg, useInterfaces: boolean = true): MsgConnectionOpenAckResponse {
     return MsgConnectionOpenAckResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConnectionOpenAckResponse): Uint8Array {
@@ -1098,7 +1098,7 @@ export const MsgConnectionOpenConfirm = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConnectionOpenConfirm {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgConnectionOpenConfirm {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenConfirm();
@@ -1174,7 +1174,7 @@ export const MsgConnectionOpenConfirm = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgConnectionOpenConfirm, useInterfaces: boolean = false): MsgConnectionOpenConfirmAmino {
+  toAmino(message: MsgConnectionOpenConfirm, useInterfaces: boolean = true): MsgConnectionOpenConfirmAmino {
     const obj: any = {};
     obj.connection_id = message.connectionId;
     obj.proof_ack = message.proofAck;
@@ -1182,7 +1182,7 @@ export const MsgConnectionOpenConfirm = {
     obj.signer = message.signer;
     return obj;
   },
-  fromProtoMsg(message: MsgConnectionOpenConfirmProtoMsg, useInterfaces: boolean = false): MsgConnectionOpenConfirm {
+  fromProtoMsg(message: MsgConnectionOpenConfirmProtoMsg, useInterfaces: boolean = true): MsgConnectionOpenConfirm {
     return MsgConnectionOpenConfirm.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConnectionOpenConfirm): Uint8Array {
@@ -1204,7 +1204,7 @@ export const MsgConnectionOpenConfirmResponse = {
   encode(_: MsgConnectionOpenConfirmResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConnectionOpenConfirmResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgConnectionOpenConfirmResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenConfirmResponse();
@@ -1240,11 +1240,11 @@ export const MsgConnectionOpenConfirmResponse = {
   fromAmino(_: MsgConnectionOpenConfirmResponseAmino): MsgConnectionOpenConfirmResponse {
     return {};
   },
-  toAmino(_: MsgConnectionOpenConfirmResponse, useInterfaces: boolean = false): MsgConnectionOpenConfirmResponseAmino {
+  toAmino(_: MsgConnectionOpenConfirmResponse, useInterfaces: boolean = true): MsgConnectionOpenConfirmResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgConnectionOpenConfirmResponseProtoMsg, useInterfaces: boolean = false): MsgConnectionOpenConfirmResponse {
+  fromProtoMsg(message: MsgConnectionOpenConfirmResponseProtoMsg, useInterfaces: boolean = true): MsgConnectionOpenConfirmResponse {
     return MsgConnectionOpenConfirmResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConnectionOpenConfirmResponse): Uint8Array {

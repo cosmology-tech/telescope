@@ -69,7 +69,7 @@ export const Node = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Node {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Node {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNode();
@@ -124,7 +124,7 @@ export const Node = {
       children: Array.isArray(object?.children) ? object.children.map((e: any) => Child.fromAmino(e)) : []
     };
   },
-  toAmino(message: Node, useInterfaces: boolean = false): NodeAmino {
+  toAmino(message: Node, useInterfaces: boolean = true): NodeAmino {
     const obj: any = {};
     if (message.children) {
       obj.children = message.children.map(e => e ? Child.toAmino(e, useInterfaces) : undefined);
@@ -136,13 +136,13 @@ export const Node = {
   fromAminoMsg(object: NodeAminoMsg): Node {
     return Node.fromAmino(object.value);
   },
-  toAminoMsg(message: Node, useInterfaces: boolean = false): NodeAminoMsg {
+  toAminoMsg(message: Node, useInterfaces: boolean = true): NodeAminoMsg {
     return {
       type: "osmosis/store/node",
       value: Node.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: NodeProtoMsg, useInterfaces: boolean = false): Node {
+  fromProtoMsg(message: NodeProtoMsg, useInterfaces: boolean = true): Node {
     return Node.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Node): Uint8Array {
@@ -173,7 +173,7 @@ export const Child = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Child {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Child {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChild();
@@ -229,7 +229,7 @@ export const Child = {
       accumulation: object.accumulation
     };
   },
-  toAmino(message: Child, useInterfaces: boolean = false): ChildAmino {
+  toAmino(message: Child, useInterfaces: boolean = true): ChildAmino {
     const obj: any = {};
     obj.index = message.index;
     obj.accumulation = message.accumulation;
@@ -238,13 +238,13 @@ export const Child = {
   fromAminoMsg(object: ChildAminoMsg): Child {
     return Child.fromAmino(object.value);
   },
-  toAminoMsg(message: Child, useInterfaces: boolean = false): ChildAminoMsg {
+  toAminoMsg(message: Child, useInterfaces: boolean = true): ChildAminoMsg {
     return {
       type: "osmosis/store/child",
       value: Child.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ChildProtoMsg, useInterfaces: boolean = false): Child {
+  fromProtoMsg(message: ChildProtoMsg, useInterfaces: boolean = true): Child {
     return Child.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Child): Uint8Array {
@@ -271,7 +271,7 @@ export const Leaf = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Leaf {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Leaf {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLeaf();
@@ -320,7 +320,7 @@ export const Leaf = {
       leaf: object?.leaf ? Child.fromAmino(object.leaf) : undefined
     };
   },
-  toAmino(message: Leaf, useInterfaces: boolean = false): LeafAmino {
+  toAmino(message: Leaf, useInterfaces: boolean = true): LeafAmino {
     const obj: any = {};
     obj.leaf = message.leaf ? Child.toAmino(message.leaf, useInterfaces) : undefined;
     return obj;
@@ -328,13 +328,13 @@ export const Leaf = {
   fromAminoMsg(object: LeafAminoMsg): Leaf {
     return Leaf.fromAmino(object.value);
   },
-  toAminoMsg(message: Leaf, useInterfaces: boolean = false): LeafAminoMsg {
+  toAminoMsg(message: Leaf, useInterfaces: boolean = true): LeafAminoMsg {
     return {
       type: "osmosis/store/leaf",
       value: Leaf.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: LeafProtoMsg, useInterfaces: boolean = false): Leaf {
+  fromProtoMsg(message: LeafProtoMsg, useInterfaces: boolean = true): Leaf {
     return Leaf.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Leaf): Uint8Array {

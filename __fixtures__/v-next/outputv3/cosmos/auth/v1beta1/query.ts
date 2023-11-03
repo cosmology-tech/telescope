@@ -272,7 +272,7 @@ export const QueryAccountsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAccountsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAccountsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountsRequest();
@@ -321,12 +321,12 @@ export const QueryAccountsRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryAccountsRequest, useInterfaces: boolean = false): QueryAccountsRequestAmino {
+  toAmino(message: QueryAccountsRequest, useInterfaces: boolean = true): QueryAccountsRequestAmino {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryAccountsRequestProtoMsg, useInterfaces: boolean = false): QueryAccountsRequest {
+  fromProtoMsg(message: QueryAccountsRequestProtoMsg, useInterfaces: boolean = true): QueryAccountsRequest {
     return QueryAccountsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAccountsRequest): Uint8Array {
@@ -357,7 +357,7 @@ export const QueryAccountsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAccountsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAccountsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountsResponse();
@@ -423,7 +423,7 @@ export const QueryAccountsResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryAccountsResponse, useInterfaces: boolean = false): QueryAccountsResponseAmino {
+  toAmino(message: QueryAccountsResponse, useInterfaces: boolean = true): QueryAccountsResponseAmino {
     const obj: any = {};
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? AccountI_ToAmino((e as Any), useInterfaces) : undefined);
@@ -433,7 +433,7 @@ export const QueryAccountsResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryAccountsResponseProtoMsg, useInterfaces: boolean = false): QueryAccountsResponse {
+  fromProtoMsg(message: QueryAccountsResponseProtoMsg, useInterfaces: boolean = true): QueryAccountsResponse {
     return QueryAccountsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAccountsResponse): Uint8Array {
@@ -460,7 +460,7 @@ export const QueryAccountRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAccountRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAccountRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountRequest();
@@ -507,12 +507,12 @@ export const QueryAccountRequest = {
       address: object.address
     };
   },
-  toAmino(message: QueryAccountRequest, useInterfaces: boolean = false): QueryAccountRequestAmino {
+  toAmino(message: QueryAccountRequest, useInterfaces: boolean = true): QueryAccountRequestAmino {
     const obj: any = {};
     obj.address = message.address;
     return obj;
   },
-  fromProtoMsg(message: QueryAccountRequestProtoMsg, useInterfaces: boolean = false): QueryAccountRequest {
+  fromProtoMsg(message: QueryAccountRequestProtoMsg, useInterfaces: boolean = true): QueryAccountRequest {
     return QueryAccountRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAccountRequest): Uint8Array {
@@ -534,7 +534,7 @@ export const QueryModuleAccountsRequest = {
   encode(_: QueryModuleAccountsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryModuleAccountsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryModuleAccountsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountsRequest();
@@ -570,11 +570,11 @@ export const QueryModuleAccountsRequest = {
   fromAmino(_: QueryModuleAccountsRequestAmino): QueryModuleAccountsRequest {
     return {};
   },
-  toAmino(_: QueryModuleAccountsRequest, useInterfaces: boolean = false): QueryModuleAccountsRequestAmino {
+  toAmino(_: QueryModuleAccountsRequest, useInterfaces: boolean = true): QueryModuleAccountsRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: QueryModuleAccountsRequestProtoMsg, useInterfaces: boolean = false): QueryModuleAccountsRequest {
+  fromProtoMsg(message: QueryModuleAccountsRequestProtoMsg, useInterfaces: boolean = true): QueryModuleAccountsRequest {
     return QueryModuleAccountsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryModuleAccountsRequest): Uint8Array {
@@ -601,7 +601,7 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -650,12 +650,12 @@ export const QueryParamsResponse = {
       params: object?.params ? Params.fromAmino(object.params) : undefined
     };
   },
-  toAmino(message: QueryParamsResponse, useInterfaces: boolean = false): QueryParamsResponseAmino {
+  toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = false): QueryParamsResponse {
+  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = true): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsResponse): Uint8Array {
@@ -682,7 +682,7 @@ export const QueryAccountResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAccountResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAccountResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountResponse();
@@ -731,12 +731,12 @@ export const QueryAccountResponse = {
       account: object?.account ? AccountI_FromAmino(object.account) : undefined
     };
   },
-  toAmino(message: QueryAccountResponse, useInterfaces: boolean = false): QueryAccountResponseAmino {
+  toAmino(message: QueryAccountResponse, useInterfaces: boolean = true): QueryAccountResponseAmino {
     const obj: any = {};
     obj.account = message.account ? AccountI_ToAmino((message.account as Any), useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryAccountResponseProtoMsg, useInterfaces: boolean = false): QueryAccountResponse {
+  fromProtoMsg(message: QueryAccountResponseProtoMsg, useInterfaces: boolean = true): QueryAccountResponse {
     return QueryAccountResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAccountResponse): Uint8Array {
@@ -758,7 +758,7 @@ export const QueryParamsRequest = {
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -794,11 +794,11 @@ export const QueryParamsRequest = {
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
-  toAmino(_: QueryParamsRequest, useInterfaces: boolean = false): QueryParamsRequestAmino {
+  toAmino(_: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = false): QueryParamsRequest {
+  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = true): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsRequest): Uint8Array {
@@ -825,7 +825,7 @@ export const QueryModuleAccountsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryModuleAccountsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryModuleAccountsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountsResponse();
@@ -880,7 +880,7 @@ export const QueryModuleAccountsResponse = {
       accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => ModuleAccountI_FromAmino(e)) : []
     };
   },
-  toAmino(message: QueryModuleAccountsResponse, useInterfaces: boolean = false): QueryModuleAccountsResponseAmino {
+  toAmino(message: QueryModuleAccountsResponse, useInterfaces: boolean = true): QueryModuleAccountsResponseAmino {
     const obj: any = {};
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? ModuleAccountI_ToAmino((e as Any), useInterfaces) : undefined);
@@ -889,7 +889,7 @@ export const QueryModuleAccountsResponse = {
     }
     return obj;
   },
-  fromProtoMsg(message: QueryModuleAccountsResponseProtoMsg, useInterfaces: boolean = false): QueryModuleAccountsResponse {
+  fromProtoMsg(message: QueryModuleAccountsResponseProtoMsg, useInterfaces: boolean = true): QueryModuleAccountsResponse {
     return QueryModuleAccountsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryModuleAccountsResponse): Uint8Array {
@@ -911,7 +911,7 @@ export const Bech32PrefixRequest = {
   encode(_: Bech32PrefixRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Bech32PrefixRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Bech32PrefixRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBech32PrefixRequest();
@@ -947,11 +947,11 @@ export const Bech32PrefixRequest = {
   fromAmino(_: Bech32PrefixRequestAmino): Bech32PrefixRequest {
     return {};
   },
-  toAmino(_: Bech32PrefixRequest, useInterfaces: boolean = false): Bech32PrefixRequestAmino {
+  toAmino(_: Bech32PrefixRequest, useInterfaces: boolean = true): Bech32PrefixRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: Bech32PrefixRequestProtoMsg, useInterfaces: boolean = false): Bech32PrefixRequest {
+  fromProtoMsg(message: Bech32PrefixRequestProtoMsg, useInterfaces: boolean = true): Bech32PrefixRequest {
     return Bech32PrefixRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Bech32PrefixRequest): Uint8Array {
@@ -978,7 +978,7 @@ export const Bech32PrefixResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Bech32PrefixResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Bech32PrefixResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBech32PrefixResponse();
@@ -1025,12 +1025,12 @@ export const Bech32PrefixResponse = {
       bech32Prefix: object.bech32_prefix
     };
   },
-  toAmino(message: Bech32PrefixResponse, useInterfaces: boolean = false): Bech32PrefixResponseAmino {
+  toAmino(message: Bech32PrefixResponse, useInterfaces: boolean = true): Bech32PrefixResponseAmino {
     const obj: any = {};
     obj.bech32_prefix = message.bech32Prefix;
     return obj;
   },
-  fromProtoMsg(message: Bech32PrefixResponseProtoMsg, useInterfaces: boolean = false): Bech32PrefixResponse {
+  fromProtoMsg(message: Bech32PrefixResponseProtoMsg, useInterfaces: boolean = true): Bech32PrefixResponse {
     return Bech32PrefixResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Bech32PrefixResponse): Uint8Array {
@@ -1057,7 +1057,7 @@ export const AddressBytesToStringRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AddressBytesToStringRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AddressBytesToStringRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressBytesToStringRequest();
@@ -1104,12 +1104,12 @@ export const AddressBytesToStringRequest = {
       addressBytes: object.address_bytes
     };
   },
-  toAmino(message: AddressBytesToStringRequest, useInterfaces: boolean = false): AddressBytesToStringRequestAmino {
+  toAmino(message: AddressBytesToStringRequest, useInterfaces: boolean = true): AddressBytesToStringRequestAmino {
     const obj: any = {};
     obj.address_bytes = message.addressBytes;
     return obj;
   },
-  fromProtoMsg(message: AddressBytesToStringRequestProtoMsg, useInterfaces: boolean = false): AddressBytesToStringRequest {
+  fromProtoMsg(message: AddressBytesToStringRequestProtoMsg, useInterfaces: boolean = true): AddressBytesToStringRequest {
     return AddressBytesToStringRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AddressBytesToStringRequest): Uint8Array {
@@ -1136,7 +1136,7 @@ export const AddressBytesToStringResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AddressBytesToStringResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AddressBytesToStringResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressBytesToStringResponse();
@@ -1183,12 +1183,12 @@ export const AddressBytesToStringResponse = {
       addressString: object.address_string
     };
   },
-  toAmino(message: AddressBytesToStringResponse, useInterfaces: boolean = false): AddressBytesToStringResponseAmino {
+  toAmino(message: AddressBytesToStringResponse, useInterfaces: boolean = true): AddressBytesToStringResponseAmino {
     const obj: any = {};
     obj.address_string = message.addressString;
     return obj;
   },
-  fromProtoMsg(message: AddressBytesToStringResponseProtoMsg, useInterfaces: boolean = false): AddressBytesToStringResponse {
+  fromProtoMsg(message: AddressBytesToStringResponseProtoMsg, useInterfaces: boolean = true): AddressBytesToStringResponse {
     return AddressBytesToStringResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AddressBytesToStringResponse): Uint8Array {
@@ -1215,7 +1215,7 @@ export const AddressStringToBytesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AddressStringToBytesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AddressStringToBytesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressStringToBytesRequest();
@@ -1262,12 +1262,12 @@ export const AddressStringToBytesRequest = {
       addressString: object.address_string
     };
   },
-  toAmino(message: AddressStringToBytesRequest, useInterfaces: boolean = false): AddressStringToBytesRequestAmino {
+  toAmino(message: AddressStringToBytesRequest, useInterfaces: boolean = true): AddressStringToBytesRequestAmino {
     const obj: any = {};
     obj.address_string = message.addressString;
     return obj;
   },
-  fromProtoMsg(message: AddressStringToBytesRequestProtoMsg, useInterfaces: boolean = false): AddressStringToBytesRequest {
+  fromProtoMsg(message: AddressStringToBytesRequestProtoMsg, useInterfaces: boolean = true): AddressStringToBytesRequest {
     return AddressStringToBytesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AddressStringToBytesRequest): Uint8Array {
@@ -1294,7 +1294,7 @@ export const AddressStringToBytesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AddressStringToBytesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AddressStringToBytesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressStringToBytesResponse();
@@ -1341,12 +1341,12 @@ export const AddressStringToBytesResponse = {
       addressBytes: object.address_bytes
     };
   },
-  toAmino(message: AddressStringToBytesResponse, useInterfaces: boolean = false): AddressStringToBytesResponseAmino {
+  toAmino(message: AddressStringToBytesResponse, useInterfaces: boolean = true): AddressStringToBytesResponseAmino {
     const obj: any = {};
     obj.address_bytes = message.addressBytes;
     return obj;
   },
-  fromProtoMsg(message: AddressStringToBytesResponseProtoMsg, useInterfaces: boolean = false): AddressStringToBytesResponse {
+  fromProtoMsg(message: AddressStringToBytesResponseProtoMsg, useInterfaces: boolean = true): AddressStringToBytesResponse {
     return AddressStringToBytesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AddressStringToBytesResponse): Uint8Array {
@@ -1380,7 +1380,7 @@ export const AccountI_FromAmino = (content: AnyAmino) => {
       return Any.fromAmino(content);
   }
 };
-export const AccountI_ToAmino = (content: Any, useInterfaces: boolean = false) => {
+export const AccountI_ToAmino = (content: Any, useInterfaces: boolean = true) => {
   switch (content.typeUrl) {
     case "/cosmos.auth.v1beta1.BaseAccount":
       return {
@@ -1412,7 +1412,7 @@ export const ModuleAccountI_FromAmino = (content: AnyAmino) => {
       return Any.fromAmino(content);
   }
 };
-export const ModuleAccountI_ToAmino = (content: Any, useInterfaces: boolean = false) => {
+export const ModuleAccountI_ToAmino = (content: Any, useInterfaces: boolean = true) => {
   switch (content.typeUrl) {
     case "/cosmos.auth.v1beta1.ModuleAccount":
       return {

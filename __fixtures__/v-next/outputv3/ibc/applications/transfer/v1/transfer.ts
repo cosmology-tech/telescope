@@ -107,7 +107,7 @@ export const DenomTrace = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DenomTrace {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DenomTrace {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDenomTrace();
@@ -163,13 +163,13 @@ export const DenomTrace = {
       baseDenom: object.base_denom
     };
   },
-  toAmino(message: DenomTrace, useInterfaces: boolean = false): DenomTraceAmino {
+  toAmino(message: DenomTrace, useInterfaces: boolean = true): DenomTraceAmino {
     const obj: any = {};
     obj.path = message.path;
     obj.base_denom = message.baseDenom;
     return obj;
   },
-  fromProtoMsg(message: DenomTraceProtoMsg, useInterfaces: boolean = false): DenomTrace {
+  fromProtoMsg(message: DenomTraceProtoMsg, useInterfaces: boolean = true): DenomTrace {
     return DenomTrace.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DenomTrace): Uint8Array {
@@ -200,7 +200,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -256,13 +256,13 @@ export const Params = {
       receiveEnabled: object.receive_enabled
     };
   },
-  toAmino(message: Params, useInterfaces: boolean = false): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
     obj.send_enabled = message.sendEnabled;
     obj.receive_enabled = message.receiveEnabled;
     return obj;
   },
-  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = false): Params {
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
     return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {

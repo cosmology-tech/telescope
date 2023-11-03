@@ -65,7 +65,7 @@ export const PubKey = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): PubKey {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PubKey {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePubKey();
@@ -112,12 +112,12 @@ export const PubKey = {
       key: object.key
     };
   },
-  toAmino(message: PubKey, useInterfaces: boolean = false): PubKeyAmino {
+  toAmino(message: PubKey, useInterfaces: boolean = true): PubKeyAmino {
     const obj: any = {};
     obj.key = message.key;
     return obj;
   },
-  fromProtoMsg(message: PubKeyProtoMsg, useInterfaces: boolean = false): PubKey {
+  fromProtoMsg(message: PubKeyProtoMsg, useInterfaces: boolean = true): PubKey {
     return PubKey.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PubKey): Uint8Array {
@@ -144,7 +144,7 @@ export const PrivKey = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): PrivKey {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PrivKey {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrivKey();
@@ -191,12 +191,12 @@ export const PrivKey = {
       key: object.key
     };
   },
-  toAmino(message: PrivKey, useInterfaces: boolean = false): PrivKeyAmino {
+  toAmino(message: PrivKey, useInterfaces: boolean = true): PrivKeyAmino {
     const obj: any = {};
     obj.key = message.key;
     return obj;
   },
-  fromProtoMsg(message: PrivKeyProtoMsg, useInterfaces: boolean = false): PrivKey {
+  fromProtoMsg(message: PrivKeyProtoMsg, useInterfaces: boolean = true): PrivKey {
     return PrivKey.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PrivKey): Uint8Array {

@@ -49,7 +49,7 @@ export const DenomAuthorityMetadata = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DenomAuthorityMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DenomAuthorityMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDenomAuthorityMetadata();
@@ -96,7 +96,7 @@ export const DenomAuthorityMetadata = {
       admin: object.admin
     };
   },
-  toAmino(message: DenomAuthorityMetadata, useInterfaces: boolean = false): DenomAuthorityMetadataAmino {
+  toAmino(message: DenomAuthorityMetadata, useInterfaces: boolean = true): DenomAuthorityMetadataAmino {
     const obj: any = {};
     obj.admin = message.admin;
     return obj;
@@ -104,13 +104,13 @@ export const DenomAuthorityMetadata = {
   fromAminoMsg(object: DenomAuthorityMetadataAminoMsg): DenomAuthorityMetadata {
     return DenomAuthorityMetadata.fromAmino(object.value);
   },
-  toAminoMsg(message: DenomAuthorityMetadata, useInterfaces: boolean = false): DenomAuthorityMetadataAminoMsg {
+  toAminoMsg(message: DenomAuthorityMetadata, useInterfaces: boolean = true): DenomAuthorityMetadataAminoMsg {
     return {
       type: "osmosis/tokenfactory/denom-authority-metadata",
       value: DenomAuthorityMetadata.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: DenomAuthorityMetadataProtoMsg, useInterfaces: boolean = false): DenomAuthorityMetadata {
+  fromProtoMsg(message: DenomAuthorityMetadataProtoMsg, useInterfaces: boolean = true): DenomAuthorityMetadata {
     return DenomAuthorityMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DenomAuthorityMetadata): Uint8Array {

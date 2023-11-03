@@ -189,7 +189,7 @@ export const HttpBody = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): HttpBody {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): HttpBody {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHttpBody();
@@ -262,7 +262,7 @@ export const HttpBody = {
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
     };
   },
-  toAmino(message: HttpBody, useInterfaces: boolean = false): HttpBodyAmino {
+  toAmino(message: HttpBody, useInterfaces: boolean = true): HttpBodyAmino {
     const obj: any = {};
     obj.content_type = message.contentType;
     obj.data = message.data;
@@ -273,7 +273,7 @@ export const HttpBody = {
     }
     return obj;
   },
-  fromProtoMsg(message: HttpBodyProtoMsg, useInterfaces: boolean = false): HttpBody {
+  fromProtoMsg(message: HttpBodyProtoMsg, useInterfaces: boolean = true): HttpBody {
     return HttpBody.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: HttpBody): Uint8Array {

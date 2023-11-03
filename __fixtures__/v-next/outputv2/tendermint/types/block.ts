@@ -54,7 +54,7 @@ export const Block = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Block {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Block {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBlock();
@@ -136,7 +136,7 @@ export const Block = {
       lastCommit: object?.last_commit ? Commit.fromAmino(object.last_commit) : undefined
     };
   },
-  toAmino(message: Block, useInterfaces: boolean = false): BlockAmino {
+  toAmino(message: Block, useInterfaces: boolean = true): BlockAmino {
     const obj: any = {};
     obj.header = message.header ? Header.toAmino(message.header, useInterfaces) : undefined;
     obj.data = message.data ? Data.toAmino(message.data, useInterfaces) : undefined;
@@ -147,7 +147,7 @@ export const Block = {
   fromAminoMsg(object: BlockAminoMsg): Block {
     return Block.fromAmino(object.value);
   },
-  fromProtoMsg(message: BlockProtoMsg, useInterfaces: boolean = false): Block {
+  fromProtoMsg(message: BlockProtoMsg, useInterfaces: boolean = true): Block {
     return Block.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Block): Uint8Array {

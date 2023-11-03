@@ -208,7 +208,7 @@ export const ProjectProperties = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ProjectProperties {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ProjectProperties {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProjectProperties();
@@ -263,7 +263,7 @@ export const ProjectProperties = {
       properties: Array.isArray(object?.properties) ? object.properties.map((e: any) => Property.fromAmino(e)) : []
     };
   },
-  toAmino(message: ProjectProperties, useInterfaces: boolean = false): ProjectPropertiesAmino {
+  toAmino(message: ProjectProperties, useInterfaces: boolean = true): ProjectPropertiesAmino {
     const obj: any = {};
     if (message.properties) {
       obj.properties = message.properties.map(e => e ? Property.toAmino(e, useInterfaces) : undefined);
@@ -275,7 +275,7 @@ export const ProjectProperties = {
   fromAminoMsg(object: ProjectPropertiesAminoMsg): ProjectProperties {
     return ProjectProperties.fromAmino(object.value);
   },
-  fromProtoMsg(message: ProjectPropertiesProtoMsg, useInterfaces: boolean = false): ProjectProperties {
+  fromProtoMsg(message: ProjectPropertiesProtoMsg, useInterfaces: boolean = true): ProjectProperties {
     return ProjectProperties.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ProjectProperties): Uint8Array {
@@ -309,7 +309,7 @@ export const Property = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Property {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Property {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProperty();
@@ -374,7 +374,7 @@ export const Property = {
       description: object.description
     };
   },
-  toAmino(message: Property, useInterfaces: boolean = false): PropertyAmino {
+  toAmino(message: Property, useInterfaces: boolean = true): PropertyAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.type = message.type;
@@ -384,7 +384,7 @@ export const Property = {
   fromAminoMsg(object: PropertyAminoMsg): Property {
     return Property.fromAmino(object.value);
   },
-  fromProtoMsg(message: PropertyProtoMsg, useInterfaces: boolean = false): Property {
+  fromProtoMsg(message: PropertyProtoMsg, useInterfaces: boolean = true): Property {
     return Property.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Property): Uint8Array {

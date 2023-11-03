@@ -324,7 +324,7 @@ export const ClientState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ClientState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ClientState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientState();
@@ -489,7 +489,7 @@ export const ClientState = {
       allowUpdateAfterMisbehaviour: object.allow_update_after_misbehaviour
     };
   },
-  toAmino(message: ClientState, useInterfaces: boolean = false): ClientStateAmino {
+  toAmino(message: ClientState, useInterfaces: boolean = true): ClientStateAmino {
     const obj: any = {};
     obj.chain_id = message.chainId;
     obj.trust_level = message.trustLevel ? Fraction.toAmino(message.trustLevel, useInterfaces) : undefined;
@@ -512,7 +512,7 @@ export const ClientState = {
     obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour;
     return obj;
   },
-  fromProtoMsg(message: ClientStateProtoMsg, useInterfaces: boolean = false): ClientState {
+  fromProtoMsg(message: ClientStateProtoMsg, useInterfaces: boolean = true): ClientState {
     return ClientState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ClientState): Uint8Array {
@@ -547,7 +547,7 @@ export const ConsensusState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ConsensusState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ConsensusState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensusState();
@@ -614,14 +614,14 @@ export const ConsensusState = {
       nextValidatorsHash: object.next_validators_hash
     };
   },
-  toAmino(message: ConsensusState, useInterfaces: boolean = false): ConsensusStateAmino {
+  toAmino(message: ConsensusState, useInterfaces: boolean = true): ConsensusStateAmino {
     const obj: any = {};
     obj.timestamp = message.timestamp;
     obj.root = message.root ? MerkleRoot.toAmino(message.root, useInterfaces) : undefined;
     obj.next_validators_hash = message.nextValidatorsHash;
     return obj;
   },
-  fromProtoMsg(message: ConsensusStateProtoMsg, useInterfaces: boolean = false): ConsensusState {
+  fromProtoMsg(message: ConsensusStateProtoMsg, useInterfaces: boolean = true): ConsensusState {
     return ConsensusState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ConsensusState): Uint8Array {
@@ -656,7 +656,7 @@ export const Misbehaviour = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Misbehaviour {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Misbehaviour {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMisbehaviour();
@@ -725,14 +725,14 @@ export const Misbehaviour = {
       header2: object?.header_2 ? Header.fromAmino(object.header_2) : undefined
     };
   },
-  toAmino(message: Misbehaviour, useInterfaces: boolean = false): MisbehaviourAmino {
+  toAmino(message: Misbehaviour, useInterfaces: boolean = true): MisbehaviourAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
     obj.header_1 = message.header1 ? Header.toAmino(message.header1, useInterfaces) : undefined;
     obj.header_2 = message.header2 ? Header.toAmino(message.header2, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: MisbehaviourProtoMsg, useInterfaces: boolean = false): Misbehaviour {
+  fromProtoMsg(message: MisbehaviourProtoMsg, useInterfaces: boolean = true): Misbehaviour {
     return Misbehaviour.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Misbehaviour): Uint8Array {
@@ -771,7 +771,7 @@ export const Header = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Header {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Header {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHeader();
@@ -853,7 +853,7 @@ export const Header = {
       trustedValidators: object?.trusted_validators ? ValidatorSet.fromAmino(object.trusted_validators) : undefined
     };
   },
-  toAmino(message: Header, useInterfaces: boolean = false): HeaderAmino {
+  toAmino(message: Header, useInterfaces: boolean = true): HeaderAmino {
     const obj: any = {};
     obj.signed_header = message.signedHeader ? SignedHeader.toAmino(message.signedHeader, useInterfaces) : undefined;
     obj.validator_set = message.validatorSet ? ValidatorSet.toAmino(message.validatorSet, useInterfaces) : undefined;
@@ -861,7 +861,7 @@ export const Header = {
     obj.trusted_validators = message.trustedValidators ? ValidatorSet.toAmino(message.trustedValidators, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: HeaderProtoMsg, useInterfaces: boolean = false): Header {
+  fromProtoMsg(message: HeaderProtoMsg, useInterfaces: boolean = true): Header {
     return Header.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Header): Uint8Array {
@@ -892,7 +892,7 @@ export const Fraction = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Fraction {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Fraction {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFraction();
@@ -952,13 +952,13 @@ export const Fraction = {
       denominator: BigInt(object.denominator)
     };
   },
-  toAmino(message: Fraction, useInterfaces: boolean = false): FractionAmino {
+  toAmino(message: Fraction, useInterfaces: boolean = true): FractionAmino {
     const obj: any = {};
     obj.numerator = message.numerator ? message.numerator.toString() : undefined;
     obj.denominator = message.denominator ? message.denominator.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: FractionProtoMsg, useInterfaces: boolean = false): Fraction {
+  fromProtoMsg(message: FractionProtoMsg, useInterfaces: boolean = true): Fraction {
     return Fraction.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Fraction): Uint8Array {

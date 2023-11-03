@@ -62,7 +62,7 @@ export const ResourceUnits = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ResourceUnits {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ResourceUnits {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceUnits();
@@ -156,7 +156,7 @@ export const ResourceUnits = {
       endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : []
     };
   },
-  toAmino(message: ResourceUnits, useInterfaces: boolean = false): ResourceUnitsAmino {
+  toAmino(message: ResourceUnits, useInterfaces: boolean = true): ResourceUnitsAmino {
     const obj: any = {};
     obj.cpu = message.cpu ? CPU.toAmino(message.cpu, useInterfaces) : undefined;
     obj.memory = message.memory ? Memory.toAmino(message.memory, useInterfaces) : undefined;
@@ -172,7 +172,7 @@ export const ResourceUnits = {
     }
     return obj;
   },
-  fromProtoMsg(message: ResourceUnitsProtoMsg, useInterfaces: boolean = false): ResourceUnits {
+  fromProtoMsg(message: ResourceUnitsProtoMsg, useInterfaces: boolean = true): ResourceUnits {
     return ResourceUnits.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ResourceUnits): Uint8Array {

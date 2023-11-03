@@ -53,7 +53,7 @@ export const Empty = {
   encode(_: Empty, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Empty {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Empty {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEmpty();
@@ -89,14 +89,14 @@ export const Empty = {
   fromAmino(_: EmptyAmino): Empty {
     return {};
   },
-  toAmino(_: Empty, useInterfaces: boolean = false): EmptyAmino {
+  toAmino(_: Empty, useInterfaces: boolean = true): EmptyAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: EmptyAminoMsg): Empty {
     return Empty.fromAmino(object.value);
   },
-  fromProtoMsg(message: EmptyProtoMsg, useInterfaces: boolean = false): Empty {
+  fromProtoMsg(message: EmptyProtoMsg, useInterfaces: boolean = true): Empty {
     return Empty.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Empty): Uint8Array {

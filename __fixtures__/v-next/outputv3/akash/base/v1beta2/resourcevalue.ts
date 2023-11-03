@@ -30,7 +30,7 @@ export const ResourceValue = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ResourceValue {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ResourceValue {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceValue();
@@ -77,12 +77,12 @@ export const ResourceValue = {
       val: object.val
     };
   },
-  toAmino(message: ResourceValue, useInterfaces: boolean = false): ResourceValueAmino {
+  toAmino(message: ResourceValue, useInterfaces: boolean = true): ResourceValueAmino {
     const obj: any = {};
     obj.val = message.val;
     return obj;
   },
-  fromProtoMsg(message: ResourceValueProtoMsg, useInterfaces: boolean = false): ResourceValue {
+  fromProtoMsg(message: ResourceValueProtoMsg, useInterfaces: boolean = true): ResourceValue {
     return ResourceValue.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ResourceValue): Uint8Array {

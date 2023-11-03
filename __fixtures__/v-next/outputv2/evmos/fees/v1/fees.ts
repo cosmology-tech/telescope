@@ -69,7 +69,7 @@ export const DevFeeInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DevFeeInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DevFeeInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDevFeeInfo();
@@ -134,7 +134,7 @@ export const DevFeeInfo = {
       withdrawAddress: object.withdraw_address
     };
   },
-  toAmino(message: DevFeeInfo, useInterfaces: boolean = false): DevFeeInfoAmino {
+  toAmino(message: DevFeeInfo, useInterfaces: boolean = true): DevFeeInfoAmino {
     const obj: any = {};
     obj.contract_address = message.contractAddress;
     obj.deployer_address = message.deployerAddress;
@@ -144,7 +144,7 @@ export const DevFeeInfo = {
   fromAminoMsg(object: DevFeeInfoAminoMsg): DevFeeInfo {
     return DevFeeInfo.fromAmino(object.value);
   },
-  fromProtoMsg(message: DevFeeInfoProtoMsg, useInterfaces: boolean = false): DevFeeInfo {
+  fromProtoMsg(message: DevFeeInfoProtoMsg, useInterfaces: boolean = true): DevFeeInfo {
     return DevFeeInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DevFeeInfo): Uint8Array {

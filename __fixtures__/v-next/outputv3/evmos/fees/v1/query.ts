@@ -223,7 +223,7 @@ export const QueryDevFeeInfosRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDevFeeInfosRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDevFeeInfosRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDevFeeInfosRequest();
@@ -272,12 +272,12 @@ export const QueryDevFeeInfosRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryDevFeeInfosRequest, useInterfaces: boolean = false): QueryDevFeeInfosRequestAmino {
+  toAmino(message: QueryDevFeeInfosRequest, useInterfaces: boolean = true): QueryDevFeeInfosRequestAmino {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryDevFeeInfosRequestProtoMsg, useInterfaces: boolean = false): QueryDevFeeInfosRequest {
+  fromProtoMsg(message: QueryDevFeeInfosRequestProtoMsg, useInterfaces: boolean = true): QueryDevFeeInfosRequest {
     return QueryDevFeeInfosRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDevFeeInfosRequest): Uint8Array {
@@ -307,7 +307,7 @@ export const QueryDevFeeInfosResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDevFeeInfosResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDevFeeInfosResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDevFeeInfosResponse();
@@ -373,7 +373,7 @@ export const QueryDevFeeInfosResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryDevFeeInfosResponse, useInterfaces: boolean = false): QueryDevFeeInfosResponseAmino {
+  toAmino(message: QueryDevFeeInfosResponse, useInterfaces: boolean = true): QueryDevFeeInfosResponseAmino {
     const obj: any = {};
     if (message.fees) {
       obj.fees = message.fees.map(e => e ? DevFeeInfo.toAmino(e, useInterfaces) : undefined);
@@ -383,7 +383,7 @@ export const QueryDevFeeInfosResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryDevFeeInfosResponseProtoMsg, useInterfaces: boolean = false): QueryDevFeeInfosResponse {
+  fromProtoMsg(message: QueryDevFeeInfosResponseProtoMsg, useInterfaces: boolean = true): QueryDevFeeInfosResponse {
     return QueryDevFeeInfosResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDevFeeInfosResponse): Uint8Array {
@@ -409,7 +409,7 @@ export const QueryDevFeeInfoRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDevFeeInfoRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDevFeeInfoRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDevFeeInfoRequest();
@@ -456,12 +456,12 @@ export const QueryDevFeeInfoRequest = {
       contractAddress: object.contract_address
     };
   },
-  toAmino(message: QueryDevFeeInfoRequest, useInterfaces: boolean = false): QueryDevFeeInfoRequestAmino {
+  toAmino(message: QueryDevFeeInfoRequest, useInterfaces: boolean = true): QueryDevFeeInfoRequestAmino {
     const obj: any = {};
     obj.contract_address = message.contractAddress;
     return obj;
   },
-  fromProtoMsg(message: QueryDevFeeInfoRequestProtoMsg, useInterfaces: boolean = false): QueryDevFeeInfoRequest {
+  fromProtoMsg(message: QueryDevFeeInfoRequestProtoMsg, useInterfaces: boolean = true): QueryDevFeeInfoRequest {
     return QueryDevFeeInfoRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDevFeeInfoRequest): Uint8Array {
@@ -487,7 +487,7 @@ export const QueryDevFeeInfoResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDevFeeInfoResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDevFeeInfoResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDevFeeInfoResponse();
@@ -536,12 +536,12 @@ export const QueryDevFeeInfoResponse = {
       fee: object?.fee ? DevFeeInfo.fromAmino(object.fee) : undefined
     };
   },
-  toAmino(message: QueryDevFeeInfoResponse, useInterfaces: boolean = false): QueryDevFeeInfoResponseAmino {
+  toAmino(message: QueryDevFeeInfoResponse, useInterfaces: boolean = true): QueryDevFeeInfoResponseAmino {
     const obj: any = {};
     obj.fee = message.fee ? DevFeeInfo.toAmino(message.fee, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryDevFeeInfoResponseProtoMsg, useInterfaces: boolean = false): QueryDevFeeInfoResponse {
+  fromProtoMsg(message: QueryDevFeeInfoResponseProtoMsg, useInterfaces: boolean = true): QueryDevFeeInfoResponse {
     return QueryDevFeeInfoResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDevFeeInfoResponse): Uint8Array {
@@ -562,7 +562,7 @@ export const QueryParamsRequest = {
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -598,11 +598,11 @@ export const QueryParamsRequest = {
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
-  toAmino(_: QueryParamsRequest, useInterfaces: boolean = false): QueryParamsRequestAmino {
+  toAmino(_: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = false): QueryParamsRequest {
+  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = true): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsRequest): Uint8Array {
@@ -628,7 +628,7 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -677,12 +677,12 @@ export const QueryParamsResponse = {
       params: object?.params ? Params.fromAmino(object.params) : undefined
     };
   },
-  toAmino(message: QueryParamsResponse, useInterfaces: boolean = false): QueryParamsResponseAmino {
+  toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = false): QueryParamsResponse {
+  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = true): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsResponse): Uint8Array {
@@ -712,7 +712,7 @@ export const QueryDevFeeInfosPerDeployerRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDevFeeInfosPerDeployerRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDevFeeInfosPerDeployerRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDevFeeInfosPerDeployerRequest();
@@ -770,13 +770,13 @@ export const QueryDevFeeInfosPerDeployerRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryDevFeeInfosPerDeployerRequest, useInterfaces: boolean = false): QueryDevFeeInfosPerDeployerRequestAmino {
+  toAmino(message: QueryDevFeeInfosPerDeployerRequest, useInterfaces: boolean = true): QueryDevFeeInfosPerDeployerRequestAmino {
     const obj: any = {};
     obj.deployer_address = message.deployerAddress;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryDevFeeInfosPerDeployerRequestProtoMsg, useInterfaces: boolean = false): QueryDevFeeInfosPerDeployerRequest {
+  fromProtoMsg(message: QueryDevFeeInfosPerDeployerRequestProtoMsg, useInterfaces: boolean = true): QueryDevFeeInfosPerDeployerRequest {
     return QueryDevFeeInfosPerDeployerRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDevFeeInfosPerDeployerRequest): Uint8Array {
@@ -806,7 +806,7 @@ export const QueryDevFeeInfosPerDeployerResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDevFeeInfosPerDeployerResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDevFeeInfosPerDeployerResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDevFeeInfosPerDeployerResponse();
@@ -872,7 +872,7 @@ export const QueryDevFeeInfosPerDeployerResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryDevFeeInfosPerDeployerResponse, useInterfaces: boolean = false): QueryDevFeeInfosPerDeployerResponseAmino {
+  toAmino(message: QueryDevFeeInfosPerDeployerResponse, useInterfaces: boolean = true): QueryDevFeeInfosPerDeployerResponseAmino {
     const obj: any = {};
     if (message.fees) {
       obj.fees = message.fees.map(e => e ? DevFeeInfo.toAmino(e, useInterfaces) : undefined);
@@ -882,7 +882,7 @@ export const QueryDevFeeInfosPerDeployerResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryDevFeeInfosPerDeployerResponseProtoMsg, useInterfaces: boolean = false): QueryDevFeeInfosPerDeployerResponse {
+  fromProtoMsg(message: QueryDevFeeInfosPerDeployerResponseProtoMsg, useInterfaces: boolean = true): QueryDevFeeInfosPerDeployerResponse {
     return QueryDevFeeInfosPerDeployerResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDevFeeInfosPerDeployerResponse): Uint8Array {

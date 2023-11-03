@@ -91,7 +91,7 @@ export const ClawbackVestingAccount = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ClawbackVestingAccount {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ClawbackVestingAccount {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClawbackVestingAccount();
@@ -192,7 +192,7 @@ export const ClawbackVestingAccount = {
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : []
     };
   },
-  toAmino(message: ClawbackVestingAccount, useInterfaces: boolean = false): ClawbackVestingAccountAmino {
+  toAmino(message: ClawbackVestingAccount, useInterfaces: boolean = true): ClawbackVestingAccountAmino {
     const obj: any = {};
     obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount, useInterfaces) : undefined;
     obj.funder_address = message.funderAddress;
@@ -209,7 +209,7 @@ export const ClawbackVestingAccount = {
     }
     return obj;
   },
-  fromProtoMsg(message: ClawbackVestingAccountProtoMsg, useInterfaces: boolean = false): ClawbackVestingAccount {
+  fromProtoMsg(message: ClawbackVestingAccountProtoMsg, useInterfaces: boolean = true): ClawbackVestingAccount {
     return ClawbackVestingAccount.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ClawbackVestingAccount): Uint8Array {

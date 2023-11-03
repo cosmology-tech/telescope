@@ -169,7 +169,7 @@ export const Decl = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Decl {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Decl {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl();
@@ -256,7 +256,7 @@ export const Decl = {
       function: object?.function ? FunctionDecl.fromAmino(object.function) : undefined
     };
   },
-  toAmino(message: Decl, useInterfaces: boolean = false): DeclAmino {
+  toAmino(message: Decl, useInterfaces: boolean = true): DeclAmino {
     const obj: any = {};
     obj.id = message.id;
     obj.name = message.name;
@@ -265,7 +265,7 @@ export const Decl = {
     obj.function = message.function ? FunctionDecl.toAmino(message.function, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: DeclProtoMsg, useInterfaces: boolean = false): Decl {
+  fromProtoMsg(message: DeclProtoMsg, useInterfaces: boolean = true): Decl {
     return Decl.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Decl): Uint8Array {
@@ -299,7 +299,7 @@ export const DeclType = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DeclType {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DeclType {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeclType();
@@ -372,7 +372,7 @@ export const DeclType = {
       typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => DeclType.fromAmino(e)) : []
     };
   },
-  toAmino(message: DeclType, useInterfaces: boolean = false): DeclTypeAmino {
+  toAmino(message: DeclType, useInterfaces: boolean = true): DeclTypeAmino {
     const obj: any = {};
     obj.id = message.id;
     obj.type = message.type;
@@ -383,7 +383,7 @@ export const DeclType = {
     }
     return obj;
   },
-  fromProtoMsg(message: DeclTypeProtoMsg, useInterfaces: boolean = false): DeclType {
+  fromProtoMsg(message: DeclTypeProtoMsg, useInterfaces: boolean = true): DeclType {
     return DeclType.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DeclType): Uint8Array {
@@ -413,7 +413,7 @@ export const IdentDecl = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): IdentDecl {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): IdentDecl {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdentDecl();
@@ -473,13 +473,13 @@ export const IdentDecl = {
       value: object?.value ? Expr.fromAmino(object.value) : undefined
     };
   },
-  toAmino(message: IdentDecl, useInterfaces: boolean = false): IdentDeclAmino {
+  toAmino(message: IdentDecl, useInterfaces: boolean = true): IdentDeclAmino {
     const obj: any = {};
     obj.type = message.type ? DeclType.toAmino(message.type, useInterfaces) : undefined;
     obj.value = message.value ? Expr.toAmino(message.value, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: IdentDeclProtoMsg, useInterfaces: boolean = false): IdentDecl {
+  fromProtoMsg(message: IdentDeclProtoMsg, useInterfaces: boolean = true): IdentDecl {
     return IdentDecl.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: IdentDecl): Uint8Array {
@@ -513,7 +513,7 @@ export const FunctionDecl = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): FunctionDecl {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): FunctionDecl {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFunctionDecl();
@@ -588,7 +588,7 @@ export const FunctionDecl = {
       receiverFunction: object.receiver_function
     };
   },
-  toAmino(message: FunctionDecl, useInterfaces: boolean = false): FunctionDeclAmino {
+  toAmino(message: FunctionDecl, useInterfaces: boolean = true): FunctionDeclAmino {
     const obj: any = {};
     if (message.args) {
       obj.args = message.args.map(e => e ? IdentDecl.toAmino(e, useInterfaces) : undefined);
@@ -599,7 +599,7 @@ export const FunctionDecl = {
     obj.receiver_function = message.receiverFunction;
     return obj;
   },
-  fromProtoMsg(message: FunctionDeclProtoMsg, useInterfaces: boolean = false): FunctionDecl {
+  fromProtoMsg(message: FunctionDeclProtoMsg, useInterfaces: boolean = true): FunctionDecl {
     return FunctionDecl.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: FunctionDecl): Uint8Array {

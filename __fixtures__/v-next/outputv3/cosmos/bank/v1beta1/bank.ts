@@ -289,7 +289,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -353,7 +353,7 @@ export const Params = {
       defaultSendEnabled: object.default_send_enabled
     };
   },
-  toAmino(message: Params, useInterfaces: boolean = false): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
     if (message.sendEnabled) {
       obj.send_enabled = message.sendEnabled.map(e => e ? SendEnabled.toAmino(e, useInterfaces) : undefined);
@@ -363,7 +363,7 @@ export const Params = {
     obj.default_send_enabled = message.defaultSendEnabled;
     return obj;
   },
-  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = false): Params {
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
     return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
@@ -394,7 +394,7 @@ export const SendEnabled = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SendEnabled {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SendEnabled {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSendEnabled();
@@ -450,13 +450,13 @@ export const SendEnabled = {
       enabled: object.enabled
     };
   },
-  toAmino(message: SendEnabled, useInterfaces: boolean = false): SendEnabledAmino {
+  toAmino(message: SendEnabled, useInterfaces: boolean = true): SendEnabledAmino {
     const obj: any = {};
     obj.denom = message.denom;
     obj.enabled = message.enabled;
     return obj;
   },
-  fromProtoMsg(message: SendEnabledProtoMsg, useInterfaces: boolean = false): SendEnabled {
+  fromProtoMsg(message: SendEnabledProtoMsg, useInterfaces: boolean = true): SendEnabled {
     return SendEnabled.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SendEnabled): Uint8Array {
@@ -487,7 +487,7 @@ export const Input = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Input {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Input {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInput();
@@ -551,7 +551,7 @@ export const Input = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: Input, useInterfaces: boolean = false): InputAmino {
+  toAmino(message: Input, useInterfaces: boolean = true): InputAmino {
     const obj: any = {};
     obj.address = message.address;
     if (message.coins) {
@@ -561,7 +561,7 @@ export const Input = {
     }
     return obj;
   },
-  fromProtoMsg(message: InputProtoMsg, useInterfaces: boolean = false): Input {
+  fromProtoMsg(message: InputProtoMsg, useInterfaces: boolean = true): Input {
     return Input.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Input): Uint8Array {
@@ -592,7 +592,7 @@ export const Output = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Output {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Output {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOutput();
@@ -656,7 +656,7 @@ export const Output = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: Output, useInterfaces: boolean = false): OutputAmino {
+  toAmino(message: Output, useInterfaces: boolean = true): OutputAmino {
     const obj: any = {};
     obj.address = message.address;
     if (message.coins) {
@@ -666,7 +666,7 @@ export const Output = {
     }
     return obj;
   },
-  fromProtoMsg(message: OutputProtoMsg, useInterfaces: boolean = false): Output {
+  fromProtoMsg(message: OutputProtoMsg, useInterfaces: boolean = true): Output {
     return Output.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Output): Uint8Array {
@@ -694,7 +694,7 @@ export const Supply = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Supply {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Supply {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSupply();
@@ -749,7 +749,7 @@ export const Supply = {
       total: Array.isArray(object?.total) ? object.total.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: Supply, useInterfaces: boolean = false): SupplyAmino {
+  toAmino(message: Supply, useInterfaces: boolean = true): SupplyAmino {
     const obj: any = {};
     if (message.total) {
       obj.total = message.total.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
@@ -758,7 +758,7 @@ export const Supply = {
     }
     return obj;
   },
-  fromProtoMsg(message: SupplyProtoMsg, useInterfaces: boolean = false): Supply {
+  fromProtoMsg(message: SupplyProtoMsg, useInterfaces: boolean = true): Supply {
     return Supply.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Supply): Uint8Array {
@@ -793,7 +793,7 @@ export const DenomUnit = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DenomUnit {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DenomUnit {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDenomUnit();
@@ -866,7 +866,7 @@ export const DenomUnit = {
       aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => e) : []
     };
   },
-  toAmino(message: DenomUnit, useInterfaces: boolean = false): DenomUnitAmino {
+  toAmino(message: DenomUnit, useInterfaces: boolean = true): DenomUnitAmino {
     const obj: any = {};
     obj.denom = message.denom;
     obj.exponent = message.exponent;
@@ -877,7 +877,7 @@ export const DenomUnit = {
     }
     return obj;
   },
-  fromProtoMsg(message: DenomUnitProtoMsg, useInterfaces: boolean = false): DenomUnit {
+  fromProtoMsg(message: DenomUnitProtoMsg, useInterfaces: boolean = true): DenomUnit {
     return DenomUnit.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DenomUnit): Uint8Array {
@@ -932,7 +932,7 @@ export const Metadata = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Metadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Metadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetadata();
@@ -1050,7 +1050,7 @@ export const Metadata = {
       uriHash: object.uri_hash
     };
   },
-  toAmino(message: Metadata, useInterfaces: boolean = false): MetadataAmino {
+  toAmino(message: Metadata, useInterfaces: boolean = true): MetadataAmino {
     const obj: any = {};
     obj.description = message.description;
     if (message.denomUnits) {
@@ -1066,7 +1066,7 @@ export const Metadata = {
     obj.uri_hash = message.uriHash;
     return obj;
   },
-  fromProtoMsg(message: MetadataProtoMsg, useInterfaces: boolean = false): Metadata {
+  fromProtoMsg(message: MetadataProtoMsg, useInterfaces: boolean = true): Metadata {
     return Metadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Metadata): Uint8Array {

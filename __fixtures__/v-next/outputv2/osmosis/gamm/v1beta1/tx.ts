@@ -463,7 +463,7 @@ export const MsgJoinPool = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgJoinPool {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgJoinPool {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgJoinPool();
@@ -547,7 +547,7 @@ export const MsgJoinPool = {
       tokenInMaxs: Array.isArray(object?.token_in_maxs) ? object.token_in_maxs.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgJoinPool, useInterfaces: boolean = false): MsgJoinPoolAmino {
+  toAmino(message: MsgJoinPool, useInterfaces: boolean = true): MsgJoinPoolAmino {
     const obj: any = {};
     obj.sender = message.sender;
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
@@ -562,13 +562,13 @@ export const MsgJoinPool = {
   fromAminoMsg(object: MsgJoinPoolAminoMsg): MsgJoinPool {
     return MsgJoinPool.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgJoinPool, useInterfaces: boolean = false): MsgJoinPoolAminoMsg {
+  toAminoMsg(message: MsgJoinPool, useInterfaces: boolean = true): MsgJoinPoolAminoMsg {
     return {
       type: "osmosis/gamm/join-pool",
       value: MsgJoinPool.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgJoinPoolProtoMsg, useInterfaces: boolean = false): MsgJoinPool {
+  fromProtoMsg(message: MsgJoinPoolProtoMsg, useInterfaces: boolean = true): MsgJoinPool {
     return MsgJoinPool.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgJoinPool): Uint8Array {
@@ -599,7 +599,7 @@ export const MsgJoinPoolResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgJoinPoolResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgJoinPoolResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgJoinPoolResponse();
@@ -663,7 +663,7 @@ export const MsgJoinPoolResponse = {
       tokenIn: Array.isArray(object?.token_in) ? object.token_in.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgJoinPoolResponse, useInterfaces: boolean = false): MsgJoinPoolResponseAmino {
+  toAmino(message: MsgJoinPoolResponse, useInterfaces: boolean = true): MsgJoinPoolResponseAmino {
     const obj: any = {};
     obj.share_out_amount = message.shareOutAmount;
     if (message.tokenIn) {
@@ -676,13 +676,13 @@ export const MsgJoinPoolResponse = {
   fromAminoMsg(object: MsgJoinPoolResponseAminoMsg): MsgJoinPoolResponse {
     return MsgJoinPoolResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgJoinPoolResponse, useInterfaces: boolean = false): MsgJoinPoolResponseAminoMsg {
+  toAminoMsg(message: MsgJoinPoolResponse, useInterfaces: boolean = true): MsgJoinPoolResponseAminoMsg {
     return {
       type: "osmosis/gamm/join-pool-response",
       value: MsgJoinPoolResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgJoinPoolResponseProtoMsg, useInterfaces: boolean = false): MsgJoinPoolResponse {
+  fromProtoMsg(message: MsgJoinPoolResponseProtoMsg, useInterfaces: boolean = true): MsgJoinPoolResponse {
     return MsgJoinPoolResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgJoinPoolResponse): Uint8Array {
@@ -721,7 +721,7 @@ export const MsgExitPool = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgExitPool {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgExitPool {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExitPool();
@@ -805,7 +805,7 @@ export const MsgExitPool = {
       tokenOutMins: Array.isArray(object?.token_out_mins) ? object.token_out_mins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgExitPool, useInterfaces: boolean = false): MsgExitPoolAmino {
+  toAmino(message: MsgExitPool, useInterfaces: boolean = true): MsgExitPoolAmino {
     const obj: any = {};
     obj.sender = message.sender;
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
@@ -820,13 +820,13 @@ export const MsgExitPool = {
   fromAminoMsg(object: MsgExitPoolAminoMsg): MsgExitPool {
     return MsgExitPool.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgExitPool, useInterfaces: boolean = false): MsgExitPoolAminoMsg {
+  toAminoMsg(message: MsgExitPool, useInterfaces: boolean = true): MsgExitPoolAminoMsg {
     return {
       type: "osmosis/gamm/exit-pool",
       value: MsgExitPool.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgExitPoolProtoMsg, useInterfaces: boolean = false): MsgExitPool {
+  fromProtoMsg(message: MsgExitPoolProtoMsg, useInterfaces: boolean = true): MsgExitPool {
     return MsgExitPool.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgExitPool): Uint8Array {
@@ -853,7 +853,7 @@ export const MsgExitPoolResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgExitPoolResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgExitPoolResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExitPoolResponse();
@@ -908,7 +908,7 @@ export const MsgExitPoolResponse = {
       tokenOut: Array.isArray(object?.token_out) ? object.token_out.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgExitPoolResponse, useInterfaces: boolean = false): MsgExitPoolResponseAmino {
+  toAmino(message: MsgExitPoolResponse, useInterfaces: boolean = true): MsgExitPoolResponseAmino {
     const obj: any = {};
     if (message.tokenOut) {
       obj.token_out = message.tokenOut.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
@@ -920,13 +920,13 @@ export const MsgExitPoolResponse = {
   fromAminoMsg(object: MsgExitPoolResponseAminoMsg): MsgExitPoolResponse {
     return MsgExitPoolResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgExitPoolResponse, useInterfaces: boolean = false): MsgExitPoolResponseAminoMsg {
+  toAminoMsg(message: MsgExitPoolResponse, useInterfaces: boolean = true): MsgExitPoolResponseAminoMsg {
     return {
       type: "osmosis/gamm/exit-pool-response",
       value: MsgExitPoolResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgExitPoolResponseProtoMsg, useInterfaces: boolean = false): MsgExitPoolResponse {
+  fromProtoMsg(message: MsgExitPoolResponseProtoMsg, useInterfaces: boolean = true): MsgExitPoolResponse {
     return MsgExitPoolResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgExitPoolResponse): Uint8Array {
@@ -957,7 +957,7 @@ export const SwapAmountInRoute = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SwapAmountInRoute {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SwapAmountInRoute {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSwapAmountInRoute();
@@ -1015,7 +1015,7 @@ export const SwapAmountInRoute = {
       tokenOutDenom: object.token_out_denom
     };
   },
-  toAmino(message: SwapAmountInRoute, useInterfaces: boolean = false): SwapAmountInRouteAmino {
+  toAmino(message: SwapAmountInRoute, useInterfaces: boolean = true): SwapAmountInRouteAmino {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     obj.token_out_denom = message.tokenOutDenom;
@@ -1024,13 +1024,13 @@ export const SwapAmountInRoute = {
   fromAminoMsg(object: SwapAmountInRouteAminoMsg): SwapAmountInRoute {
     return SwapAmountInRoute.fromAmino(object.value);
   },
-  toAminoMsg(message: SwapAmountInRoute, useInterfaces: boolean = false): SwapAmountInRouteAminoMsg {
+  toAminoMsg(message: SwapAmountInRoute, useInterfaces: boolean = true): SwapAmountInRouteAminoMsg {
     return {
       type: "osmosis/gamm/swap-amount-in-route",
       value: SwapAmountInRoute.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: SwapAmountInRouteProtoMsg, useInterfaces: boolean = false): SwapAmountInRoute {
+  fromProtoMsg(message: SwapAmountInRouteProtoMsg, useInterfaces: boolean = true): SwapAmountInRoute {
     return SwapAmountInRoute.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SwapAmountInRoute): Uint8Array {
@@ -1069,7 +1069,7 @@ export const MsgSwapExactAmountIn = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSwapExactAmountIn {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSwapExactAmountIn {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSwapExactAmountIn();
@@ -1153,7 +1153,7 @@ export const MsgSwapExactAmountIn = {
       tokenOutMinAmount: object.token_out_min_amount
     };
   },
-  toAmino(message: MsgSwapExactAmountIn, useInterfaces: boolean = false): MsgSwapExactAmountInAmino {
+  toAmino(message: MsgSwapExactAmountIn, useInterfaces: boolean = true): MsgSwapExactAmountInAmino {
     const obj: any = {};
     obj.sender = message.sender;
     if (message.routes) {
@@ -1168,13 +1168,13 @@ export const MsgSwapExactAmountIn = {
   fromAminoMsg(object: MsgSwapExactAmountInAminoMsg): MsgSwapExactAmountIn {
     return MsgSwapExactAmountIn.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgSwapExactAmountIn, useInterfaces: boolean = false): MsgSwapExactAmountInAminoMsg {
+  toAminoMsg(message: MsgSwapExactAmountIn, useInterfaces: boolean = true): MsgSwapExactAmountInAminoMsg {
     return {
       type: "osmosis/gamm/swap-exact-amount-in",
       value: MsgSwapExactAmountIn.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgSwapExactAmountInProtoMsg, useInterfaces: boolean = false): MsgSwapExactAmountIn {
+  fromProtoMsg(message: MsgSwapExactAmountInProtoMsg, useInterfaces: boolean = true): MsgSwapExactAmountIn {
     return MsgSwapExactAmountIn.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSwapExactAmountIn): Uint8Array {
@@ -1201,7 +1201,7 @@ export const MsgSwapExactAmountInResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSwapExactAmountInResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSwapExactAmountInResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSwapExactAmountInResponse();
@@ -1248,7 +1248,7 @@ export const MsgSwapExactAmountInResponse = {
       tokenOutAmount: object.token_out_amount
     };
   },
-  toAmino(message: MsgSwapExactAmountInResponse, useInterfaces: boolean = false): MsgSwapExactAmountInResponseAmino {
+  toAmino(message: MsgSwapExactAmountInResponse, useInterfaces: boolean = true): MsgSwapExactAmountInResponseAmino {
     const obj: any = {};
     obj.token_out_amount = message.tokenOutAmount;
     return obj;
@@ -1256,13 +1256,13 @@ export const MsgSwapExactAmountInResponse = {
   fromAminoMsg(object: MsgSwapExactAmountInResponseAminoMsg): MsgSwapExactAmountInResponse {
     return MsgSwapExactAmountInResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgSwapExactAmountInResponse, useInterfaces: boolean = false): MsgSwapExactAmountInResponseAminoMsg {
+  toAminoMsg(message: MsgSwapExactAmountInResponse, useInterfaces: boolean = true): MsgSwapExactAmountInResponseAminoMsg {
     return {
       type: "osmosis/gamm/swap-exact-amount-in-response",
       value: MsgSwapExactAmountInResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgSwapExactAmountInResponseProtoMsg, useInterfaces: boolean = false): MsgSwapExactAmountInResponse {
+  fromProtoMsg(message: MsgSwapExactAmountInResponseProtoMsg, useInterfaces: boolean = true): MsgSwapExactAmountInResponse {
     return MsgSwapExactAmountInResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSwapExactAmountInResponse): Uint8Array {
@@ -1293,7 +1293,7 @@ export const SwapAmountOutRoute = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SwapAmountOutRoute {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SwapAmountOutRoute {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSwapAmountOutRoute();
@@ -1351,7 +1351,7 @@ export const SwapAmountOutRoute = {
       tokenInDenom: object.token_in_denom
     };
   },
-  toAmino(message: SwapAmountOutRoute, useInterfaces: boolean = false): SwapAmountOutRouteAmino {
+  toAmino(message: SwapAmountOutRoute, useInterfaces: boolean = true): SwapAmountOutRouteAmino {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     obj.token_in_denom = message.tokenInDenom;
@@ -1360,13 +1360,13 @@ export const SwapAmountOutRoute = {
   fromAminoMsg(object: SwapAmountOutRouteAminoMsg): SwapAmountOutRoute {
     return SwapAmountOutRoute.fromAmino(object.value);
   },
-  toAminoMsg(message: SwapAmountOutRoute, useInterfaces: boolean = false): SwapAmountOutRouteAminoMsg {
+  toAminoMsg(message: SwapAmountOutRoute, useInterfaces: boolean = true): SwapAmountOutRouteAminoMsg {
     return {
       type: "osmosis/gamm/swap-amount-out-route",
       value: SwapAmountOutRoute.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: SwapAmountOutRouteProtoMsg, useInterfaces: boolean = false): SwapAmountOutRoute {
+  fromProtoMsg(message: SwapAmountOutRouteProtoMsg, useInterfaces: boolean = true): SwapAmountOutRoute {
     return SwapAmountOutRoute.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SwapAmountOutRoute): Uint8Array {
@@ -1405,7 +1405,7 @@ export const MsgSwapExactAmountOut = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSwapExactAmountOut {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSwapExactAmountOut {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSwapExactAmountOut();
@@ -1489,7 +1489,7 @@ export const MsgSwapExactAmountOut = {
       tokenOut: object?.token_out ? Coin.fromAmino(object.token_out) : undefined
     };
   },
-  toAmino(message: MsgSwapExactAmountOut, useInterfaces: boolean = false): MsgSwapExactAmountOutAmino {
+  toAmino(message: MsgSwapExactAmountOut, useInterfaces: boolean = true): MsgSwapExactAmountOutAmino {
     const obj: any = {};
     obj.sender = message.sender;
     if (message.routes) {
@@ -1504,13 +1504,13 @@ export const MsgSwapExactAmountOut = {
   fromAminoMsg(object: MsgSwapExactAmountOutAminoMsg): MsgSwapExactAmountOut {
     return MsgSwapExactAmountOut.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgSwapExactAmountOut, useInterfaces: boolean = false): MsgSwapExactAmountOutAminoMsg {
+  toAminoMsg(message: MsgSwapExactAmountOut, useInterfaces: boolean = true): MsgSwapExactAmountOutAminoMsg {
     return {
       type: "osmosis/gamm/swap-exact-amount-out",
       value: MsgSwapExactAmountOut.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgSwapExactAmountOutProtoMsg, useInterfaces: boolean = false): MsgSwapExactAmountOut {
+  fromProtoMsg(message: MsgSwapExactAmountOutProtoMsg, useInterfaces: boolean = true): MsgSwapExactAmountOut {
     return MsgSwapExactAmountOut.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSwapExactAmountOut): Uint8Array {
@@ -1537,7 +1537,7 @@ export const MsgSwapExactAmountOutResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSwapExactAmountOutResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSwapExactAmountOutResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSwapExactAmountOutResponse();
@@ -1584,7 +1584,7 @@ export const MsgSwapExactAmountOutResponse = {
       tokenInAmount: object.token_in_amount
     };
   },
-  toAmino(message: MsgSwapExactAmountOutResponse, useInterfaces: boolean = false): MsgSwapExactAmountOutResponseAmino {
+  toAmino(message: MsgSwapExactAmountOutResponse, useInterfaces: boolean = true): MsgSwapExactAmountOutResponseAmino {
     const obj: any = {};
     obj.token_in_amount = message.tokenInAmount;
     return obj;
@@ -1592,13 +1592,13 @@ export const MsgSwapExactAmountOutResponse = {
   fromAminoMsg(object: MsgSwapExactAmountOutResponseAminoMsg): MsgSwapExactAmountOutResponse {
     return MsgSwapExactAmountOutResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgSwapExactAmountOutResponse, useInterfaces: boolean = false): MsgSwapExactAmountOutResponseAminoMsg {
+  toAminoMsg(message: MsgSwapExactAmountOutResponse, useInterfaces: boolean = true): MsgSwapExactAmountOutResponseAminoMsg {
     return {
       type: "osmosis/gamm/swap-exact-amount-out-response",
       value: MsgSwapExactAmountOutResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgSwapExactAmountOutResponseProtoMsg, useInterfaces: boolean = false): MsgSwapExactAmountOutResponse {
+  fromProtoMsg(message: MsgSwapExactAmountOutResponseProtoMsg, useInterfaces: boolean = true): MsgSwapExactAmountOutResponse {
     return MsgSwapExactAmountOutResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSwapExactAmountOutResponse): Uint8Array {
@@ -1637,7 +1637,7 @@ export const MsgJoinSwapExternAmountIn = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgJoinSwapExternAmountIn {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgJoinSwapExternAmountIn {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgJoinSwapExternAmountIn();
@@ -1715,7 +1715,7 @@ export const MsgJoinSwapExternAmountIn = {
       shareOutMinAmount: object.share_out_min_amount
     };
   },
-  toAmino(message: MsgJoinSwapExternAmountIn, useInterfaces: boolean = false): MsgJoinSwapExternAmountInAmino {
+  toAmino(message: MsgJoinSwapExternAmountIn, useInterfaces: boolean = true): MsgJoinSwapExternAmountInAmino {
     const obj: any = {};
     obj.sender = message.sender;
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
@@ -1726,13 +1726,13 @@ export const MsgJoinSwapExternAmountIn = {
   fromAminoMsg(object: MsgJoinSwapExternAmountInAminoMsg): MsgJoinSwapExternAmountIn {
     return MsgJoinSwapExternAmountIn.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgJoinSwapExternAmountIn, useInterfaces: boolean = false): MsgJoinSwapExternAmountInAminoMsg {
+  toAminoMsg(message: MsgJoinSwapExternAmountIn, useInterfaces: boolean = true): MsgJoinSwapExternAmountInAminoMsg {
     return {
       type: "osmosis/gamm/join-swap-extern-amount-in",
       value: MsgJoinSwapExternAmountIn.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgJoinSwapExternAmountInProtoMsg, useInterfaces: boolean = false): MsgJoinSwapExternAmountIn {
+  fromProtoMsg(message: MsgJoinSwapExternAmountInProtoMsg, useInterfaces: boolean = true): MsgJoinSwapExternAmountIn {
     return MsgJoinSwapExternAmountIn.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgJoinSwapExternAmountIn): Uint8Array {
@@ -1759,7 +1759,7 @@ export const MsgJoinSwapExternAmountInResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgJoinSwapExternAmountInResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgJoinSwapExternAmountInResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgJoinSwapExternAmountInResponse();
@@ -1806,7 +1806,7 @@ export const MsgJoinSwapExternAmountInResponse = {
       shareOutAmount: object.share_out_amount
     };
   },
-  toAmino(message: MsgJoinSwapExternAmountInResponse, useInterfaces: boolean = false): MsgJoinSwapExternAmountInResponseAmino {
+  toAmino(message: MsgJoinSwapExternAmountInResponse, useInterfaces: boolean = true): MsgJoinSwapExternAmountInResponseAmino {
     const obj: any = {};
     obj.share_out_amount = message.shareOutAmount;
     return obj;
@@ -1814,13 +1814,13 @@ export const MsgJoinSwapExternAmountInResponse = {
   fromAminoMsg(object: MsgJoinSwapExternAmountInResponseAminoMsg): MsgJoinSwapExternAmountInResponse {
     return MsgJoinSwapExternAmountInResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgJoinSwapExternAmountInResponse, useInterfaces: boolean = false): MsgJoinSwapExternAmountInResponseAminoMsg {
+  toAminoMsg(message: MsgJoinSwapExternAmountInResponse, useInterfaces: boolean = true): MsgJoinSwapExternAmountInResponseAminoMsg {
     return {
       type: "osmosis/gamm/join-swap-extern-amount-in-response",
       value: MsgJoinSwapExternAmountInResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgJoinSwapExternAmountInResponseProtoMsg, useInterfaces: boolean = false): MsgJoinSwapExternAmountInResponse {
+  fromProtoMsg(message: MsgJoinSwapExternAmountInResponseProtoMsg, useInterfaces: boolean = true): MsgJoinSwapExternAmountInResponse {
     return MsgJoinSwapExternAmountInResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgJoinSwapExternAmountInResponse): Uint8Array {
@@ -1863,7 +1863,7 @@ export const MsgJoinSwapShareAmountOut = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgJoinSwapShareAmountOut {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgJoinSwapShareAmountOut {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgJoinSwapShareAmountOut();
@@ -1948,7 +1948,7 @@ export const MsgJoinSwapShareAmountOut = {
       tokenInMaxAmount: object.token_in_max_amount
     };
   },
-  toAmino(message: MsgJoinSwapShareAmountOut, useInterfaces: boolean = false): MsgJoinSwapShareAmountOutAmino {
+  toAmino(message: MsgJoinSwapShareAmountOut, useInterfaces: boolean = true): MsgJoinSwapShareAmountOutAmino {
     const obj: any = {};
     obj.sender = message.sender;
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
@@ -1960,13 +1960,13 @@ export const MsgJoinSwapShareAmountOut = {
   fromAminoMsg(object: MsgJoinSwapShareAmountOutAminoMsg): MsgJoinSwapShareAmountOut {
     return MsgJoinSwapShareAmountOut.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgJoinSwapShareAmountOut, useInterfaces: boolean = false): MsgJoinSwapShareAmountOutAminoMsg {
+  toAminoMsg(message: MsgJoinSwapShareAmountOut, useInterfaces: boolean = true): MsgJoinSwapShareAmountOutAminoMsg {
     return {
       type: "osmosis/gamm/join-swap-share-amount-out",
       value: MsgJoinSwapShareAmountOut.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgJoinSwapShareAmountOutProtoMsg, useInterfaces: boolean = false): MsgJoinSwapShareAmountOut {
+  fromProtoMsg(message: MsgJoinSwapShareAmountOutProtoMsg, useInterfaces: boolean = true): MsgJoinSwapShareAmountOut {
     return MsgJoinSwapShareAmountOut.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgJoinSwapShareAmountOut): Uint8Array {
@@ -1993,7 +1993,7 @@ export const MsgJoinSwapShareAmountOutResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgJoinSwapShareAmountOutResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgJoinSwapShareAmountOutResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgJoinSwapShareAmountOutResponse();
@@ -2040,7 +2040,7 @@ export const MsgJoinSwapShareAmountOutResponse = {
       tokenInAmount: object.token_in_amount
     };
   },
-  toAmino(message: MsgJoinSwapShareAmountOutResponse, useInterfaces: boolean = false): MsgJoinSwapShareAmountOutResponseAmino {
+  toAmino(message: MsgJoinSwapShareAmountOutResponse, useInterfaces: boolean = true): MsgJoinSwapShareAmountOutResponseAmino {
     const obj: any = {};
     obj.token_in_amount = message.tokenInAmount;
     return obj;
@@ -2048,13 +2048,13 @@ export const MsgJoinSwapShareAmountOutResponse = {
   fromAminoMsg(object: MsgJoinSwapShareAmountOutResponseAminoMsg): MsgJoinSwapShareAmountOutResponse {
     return MsgJoinSwapShareAmountOutResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgJoinSwapShareAmountOutResponse, useInterfaces: boolean = false): MsgJoinSwapShareAmountOutResponseAminoMsg {
+  toAminoMsg(message: MsgJoinSwapShareAmountOutResponse, useInterfaces: boolean = true): MsgJoinSwapShareAmountOutResponseAminoMsg {
     return {
       type: "osmosis/gamm/join-swap-share-amount-out-response",
       value: MsgJoinSwapShareAmountOutResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgJoinSwapShareAmountOutResponseProtoMsg, useInterfaces: boolean = false): MsgJoinSwapShareAmountOutResponse {
+  fromProtoMsg(message: MsgJoinSwapShareAmountOutResponseProtoMsg, useInterfaces: boolean = true): MsgJoinSwapShareAmountOutResponse {
     return MsgJoinSwapShareAmountOutResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgJoinSwapShareAmountOutResponse): Uint8Array {
@@ -2097,7 +2097,7 @@ export const MsgExitSwapShareAmountIn = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgExitSwapShareAmountIn {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgExitSwapShareAmountIn {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExitSwapShareAmountIn();
@@ -2182,7 +2182,7 @@ export const MsgExitSwapShareAmountIn = {
       tokenOutMinAmount: object.token_out_min_amount
     };
   },
-  toAmino(message: MsgExitSwapShareAmountIn, useInterfaces: boolean = false): MsgExitSwapShareAmountInAmino {
+  toAmino(message: MsgExitSwapShareAmountIn, useInterfaces: boolean = true): MsgExitSwapShareAmountInAmino {
     const obj: any = {};
     obj.sender = message.sender;
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
@@ -2194,13 +2194,13 @@ export const MsgExitSwapShareAmountIn = {
   fromAminoMsg(object: MsgExitSwapShareAmountInAminoMsg): MsgExitSwapShareAmountIn {
     return MsgExitSwapShareAmountIn.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgExitSwapShareAmountIn, useInterfaces: boolean = false): MsgExitSwapShareAmountInAminoMsg {
+  toAminoMsg(message: MsgExitSwapShareAmountIn, useInterfaces: boolean = true): MsgExitSwapShareAmountInAminoMsg {
     return {
       type: "osmosis/gamm/exit-swap-share-amount-in",
       value: MsgExitSwapShareAmountIn.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgExitSwapShareAmountInProtoMsg, useInterfaces: boolean = false): MsgExitSwapShareAmountIn {
+  fromProtoMsg(message: MsgExitSwapShareAmountInProtoMsg, useInterfaces: boolean = true): MsgExitSwapShareAmountIn {
     return MsgExitSwapShareAmountIn.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgExitSwapShareAmountIn): Uint8Array {
@@ -2227,7 +2227,7 @@ export const MsgExitSwapShareAmountInResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgExitSwapShareAmountInResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgExitSwapShareAmountInResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExitSwapShareAmountInResponse();
@@ -2274,7 +2274,7 @@ export const MsgExitSwapShareAmountInResponse = {
       tokenOutAmount: object.token_out_amount
     };
   },
-  toAmino(message: MsgExitSwapShareAmountInResponse, useInterfaces: boolean = false): MsgExitSwapShareAmountInResponseAmino {
+  toAmino(message: MsgExitSwapShareAmountInResponse, useInterfaces: boolean = true): MsgExitSwapShareAmountInResponseAmino {
     const obj: any = {};
     obj.token_out_amount = message.tokenOutAmount;
     return obj;
@@ -2282,13 +2282,13 @@ export const MsgExitSwapShareAmountInResponse = {
   fromAminoMsg(object: MsgExitSwapShareAmountInResponseAminoMsg): MsgExitSwapShareAmountInResponse {
     return MsgExitSwapShareAmountInResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgExitSwapShareAmountInResponse, useInterfaces: boolean = false): MsgExitSwapShareAmountInResponseAminoMsg {
+  toAminoMsg(message: MsgExitSwapShareAmountInResponse, useInterfaces: boolean = true): MsgExitSwapShareAmountInResponseAminoMsg {
     return {
       type: "osmosis/gamm/exit-swap-share-amount-in-response",
       value: MsgExitSwapShareAmountInResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgExitSwapShareAmountInResponseProtoMsg, useInterfaces: boolean = false): MsgExitSwapShareAmountInResponse {
+  fromProtoMsg(message: MsgExitSwapShareAmountInResponseProtoMsg, useInterfaces: boolean = true): MsgExitSwapShareAmountInResponse {
     return MsgExitSwapShareAmountInResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgExitSwapShareAmountInResponse): Uint8Array {
@@ -2327,7 +2327,7 @@ export const MsgExitSwapExternAmountOut = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgExitSwapExternAmountOut {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgExitSwapExternAmountOut {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExitSwapExternAmountOut();
@@ -2405,7 +2405,7 @@ export const MsgExitSwapExternAmountOut = {
       shareInMaxAmount: object.share_in_max_amount
     };
   },
-  toAmino(message: MsgExitSwapExternAmountOut, useInterfaces: boolean = false): MsgExitSwapExternAmountOutAmino {
+  toAmino(message: MsgExitSwapExternAmountOut, useInterfaces: boolean = true): MsgExitSwapExternAmountOutAmino {
     const obj: any = {};
     obj.sender = message.sender;
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
@@ -2416,13 +2416,13 @@ export const MsgExitSwapExternAmountOut = {
   fromAminoMsg(object: MsgExitSwapExternAmountOutAminoMsg): MsgExitSwapExternAmountOut {
     return MsgExitSwapExternAmountOut.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgExitSwapExternAmountOut, useInterfaces: boolean = false): MsgExitSwapExternAmountOutAminoMsg {
+  toAminoMsg(message: MsgExitSwapExternAmountOut, useInterfaces: boolean = true): MsgExitSwapExternAmountOutAminoMsg {
     return {
       type: "osmosis/gamm/exit-swap-extern-amount-out",
       value: MsgExitSwapExternAmountOut.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgExitSwapExternAmountOutProtoMsg, useInterfaces: boolean = false): MsgExitSwapExternAmountOut {
+  fromProtoMsg(message: MsgExitSwapExternAmountOutProtoMsg, useInterfaces: boolean = true): MsgExitSwapExternAmountOut {
     return MsgExitSwapExternAmountOut.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgExitSwapExternAmountOut): Uint8Array {
@@ -2449,7 +2449,7 @@ export const MsgExitSwapExternAmountOutResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgExitSwapExternAmountOutResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgExitSwapExternAmountOutResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExitSwapExternAmountOutResponse();
@@ -2496,7 +2496,7 @@ export const MsgExitSwapExternAmountOutResponse = {
       shareInAmount: object.share_in_amount
     };
   },
-  toAmino(message: MsgExitSwapExternAmountOutResponse, useInterfaces: boolean = false): MsgExitSwapExternAmountOutResponseAmino {
+  toAmino(message: MsgExitSwapExternAmountOutResponse, useInterfaces: boolean = true): MsgExitSwapExternAmountOutResponseAmino {
     const obj: any = {};
     obj.share_in_amount = message.shareInAmount;
     return obj;
@@ -2504,13 +2504,13 @@ export const MsgExitSwapExternAmountOutResponse = {
   fromAminoMsg(object: MsgExitSwapExternAmountOutResponseAminoMsg): MsgExitSwapExternAmountOutResponse {
     return MsgExitSwapExternAmountOutResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgExitSwapExternAmountOutResponse, useInterfaces: boolean = false): MsgExitSwapExternAmountOutResponseAminoMsg {
+  toAminoMsg(message: MsgExitSwapExternAmountOutResponse, useInterfaces: boolean = true): MsgExitSwapExternAmountOutResponseAminoMsg {
     return {
       type: "osmosis/gamm/exit-swap-extern-amount-out-response",
       value: MsgExitSwapExternAmountOutResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgExitSwapExternAmountOutResponseProtoMsg, useInterfaces: boolean = false): MsgExitSwapExternAmountOutResponse {
+  fromProtoMsg(message: MsgExitSwapExternAmountOutResponseProtoMsg, useInterfaces: boolean = true): MsgExitSwapExternAmountOutResponse {
     return MsgExitSwapExternAmountOutResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgExitSwapExternAmountOutResponse): Uint8Array {

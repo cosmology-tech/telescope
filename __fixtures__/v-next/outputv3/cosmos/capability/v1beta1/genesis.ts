@@ -72,7 +72,7 @@ export const GenesisOwners = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisOwners {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisOwners {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisOwners();
@@ -132,13 +132,13 @@ export const GenesisOwners = {
       indexOwners: object?.index_owners ? CapabilityOwners.fromAmino(object.index_owners) : undefined
     };
   },
-  toAmino(message: GenesisOwners, useInterfaces: boolean = false): GenesisOwnersAmino {
+  toAmino(message: GenesisOwners, useInterfaces: boolean = true): GenesisOwnersAmino {
     const obj: any = {};
     obj.index = message.index ? message.index.toString() : undefined;
     obj.index_owners = message.indexOwners ? CapabilityOwners.toAmino(message.indexOwners, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GenesisOwnersProtoMsg, useInterfaces: boolean = false): GenesisOwners {
+  fromProtoMsg(message: GenesisOwnersProtoMsg, useInterfaces: boolean = true): GenesisOwners {
     return GenesisOwners.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisOwners): Uint8Array {
@@ -169,7 +169,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -235,7 +235,7 @@ export const GenesisState = {
       owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromAmino(e)) : []
     };
   },
-  toAmino(message: GenesisState, useInterfaces: boolean = false): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     obj.index = message.index ? message.index.toString() : undefined;
     if (message.owners) {
@@ -245,7 +245,7 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = false): GenesisState {
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
     return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {

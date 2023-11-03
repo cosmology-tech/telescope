@@ -391,7 +391,7 @@ export const QueryConnectionRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConnectionRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryConnectionRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionRequest();
@@ -438,7 +438,7 @@ export const QueryConnectionRequest = {
       connectionId: object.connection_id
     };
   },
-  toAmino(message: QueryConnectionRequest, useInterfaces: boolean = false): QueryConnectionRequestAmino {
+  toAmino(message: QueryConnectionRequest, useInterfaces: boolean = true): QueryConnectionRequestAmino {
     const obj: any = {};
     obj.connection_id = message.connectionId;
     return obj;
@@ -446,13 +446,13 @@ export const QueryConnectionRequest = {
   fromAminoMsg(object: QueryConnectionRequestAminoMsg): QueryConnectionRequest {
     return QueryConnectionRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryConnectionRequest, useInterfaces: boolean = false): QueryConnectionRequestAminoMsg {
+  toAminoMsg(message: QueryConnectionRequest, useInterfaces: boolean = true): QueryConnectionRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryConnectionRequest",
       value: QueryConnectionRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryConnectionRequestProtoMsg, useInterfaces: boolean = false): QueryConnectionRequest {
+  fromProtoMsg(message: QueryConnectionRequestProtoMsg, useInterfaces: boolean = true): QueryConnectionRequest {
     return QueryConnectionRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConnectionRequest): Uint8Array {
@@ -487,7 +487,7 @@ export const QueryConnectionResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConnectionResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryConnectionResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionResponse();
@@ -556,7 +556,7 @@ export const QueryConnectionResponse = {
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
     };
   },
-  toAmino(message: QueryConnectionResponse, useInterfaces: boolean = false): QueryConnectionResponseAmino {
+  toAmino(message: QueryConnectionResponse, useInterfaces: boolean = true): QueryConnectionResponseAmino {
     const obj: any = {};
     obj.connection = message.connection ? ConnectionEnd.toAmino(message.connection, useInterfaces) : undefined;
     obj.proof = message.proof;
@@ -566,13 +566,13 @@ export const QueryConnectionResponse = {
   fromAminoMsg(object: QueryConnectionResponseAminoMsg): QueryConnectionResponse {
     return QueryConnectionResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryConnectionResponse, useInterfaces: boolean = false): QueryConnectionResponseAminoMsg {
+  toAminoMsg(message: QueryConnectionResponse, useInterfaces: boolean = true): QueryConnectionResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryConnectionResponse",
       value: QueryConnectionResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryConnectionResponseProtoMsg, useInterfaces: boolean = false): QueryConnectionResponse {
+  fromProtoMsg(message: QueryConnectionResponseProtoMsg, useInterfaces: boolean = true): QueryConnectionResponse {
     return QueryConnectionResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConnectionResponse): Uint8Array {
@@ -599,7 +599,7 @@ export const QueryConnectionsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConnectionsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryConnectionsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionsRequest();
@@ -648,7 +648,7 @@ export const QueryConnectionsRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryConnectionsRequest, useInterfaces: boolean = false): QueryConnectionsRequestAmino {
+  toAmino(message: QueryConnectionsRequest, useInterfaces: boolean = true): QueryConnectionsRequestAmino {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
@@ -656,13 +656,13 @@ export const QueryConnectionsRequest = {
   fromAminoMsg(object: QueryConnectionsRequestAminoMsg): QueryConnectionsRequest {
     return QueryConnectionsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryConnectionsRequest, useInterfaces: boolean = false): QueryConnectionsRequestAminoMsg {
+  toAminoMsg(message: QueryConnectionsRequest, useInterfaces: boolean = true): QueryConnectionsRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryConnectionsRequest",
       value: QueryConnectionsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryConnectionsRequestProtoMsg, useInterfaces: boolean = false): QueryConnectionsRequest {
+  fromProtoMsg(message: QueryConnectionsRequestProtoMsg, useInterfaces: boolean = true): QueryConnectionsRequest {
     return QueryConnectionsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConnectionsRequest): Uint8Array {
@@ -697,7 +697,7 @@ export const QueryConnectionsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConnectionsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryConnectionsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionsResponse();
@@ -774,7 +774,7 @@ export const QueryConnectionsResponse = {
       height: object?.height ? Height.fromAmino(object.height) : undefined
     };
   },
-  toAmino(message: QueryConnectionsResponse, useInterfaces: boolean = false): QueryConnectionsResponseAmino {
+  toAmino(message: QueryConnectionsResponse, useInterfaces: boolean = true): QueryConnectionsResponseAmino {
     const obj: any = {};
     if (message.connections) {
       obj.connections = message.connections.map(e => e ? IdentifiedConnection.toAmino(e, useInterfaces) : undefined);
@@ -788,13 +788,13 @@ export const QueryConnectionsResponse = {
   fromAminoMsg(object: QueryConnectionsResponseAminoMsg): QueryConnectionsResponse {
     return QueryConnectionsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryConnectionsResponse, useInterfaces: boolean = false): QueryConnectionsResponseAminoMsg {
+  toAminoMsg(message: QueryConnectionsResponse, useInterfaces: boolean = true): QueryConnectionsResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryConnectionsResponse",
       value: QueryConnectionsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryConnectionsResponseProtoMsg, useInterfaces: boolean = false): QueryConnectionsResponse {
+  fromProtoMsg(message: QueryConnectionsResponseProtoMsg, useInterfaces: boolean = true): QueryConnectionsResponse {
     return QueryConnectionsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConnectionsResponse): Uint8Array {
@@ -821,7 +821,7 @@ export const QueryClientConnectionsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryClientConnectionsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryClientConnectionsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientConnectionsRequest();
@@ -868,7 +868,7 @@ export const QueryClientConnectionsRequest = {
       clientId: object.client_id
     };
   },
-  toAmino(message: QueryClientConnectionsRequest, useInterfaces: boolean = false): QueryClientConnectionsRequestAmino {
+  toAmino(message: QueryClientConnectionsRequest, useInterfaces: boolean = true): QueryClientConnectionsRequestAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
     return obj;
@@ -876,13 +876,13 @@ export const QueryClientConnectionsRequest = {
   fromAminoMsg(object: QueryClientConnectionsRequestAminoMsg): QueryClientConnectionsRequest {
     return QueryClientConnectionsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryClientConnectionsRequest, useInterfaces: boolean = false): QueryClientConnectionsRequestAminoMsg {
+  toAminoMsg(message: QueryClientConnectionsRequest, useInterfaces: boolean = true): QueryClientConnectionsRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryClientConnectionsRequest",
       value: QueryClientConnectionsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryClientConnectionsRequestProtoMsg, useInterfaces: boolean = false): QueryClientConnectionsRequest {
+  fromProtoMsg(message: QueryClientConnectionsRequestProtoMsg, useInterfaces: boolean = true): QueryClientConnectionsRequest {
     return QueryClientConnectionsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryClientConnectionsRequest): Uint8Array {
@@ -917,7 +917,7 @@ export const QueryClientConnectionsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryClientConnectionsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryClientConnectionsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientConnectionsResponse();
@@ -992,7 +992,7 @@ export const QueryClientConnectionsResponse = {
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
     };
   },
-  toAmino(message: QueryClientConnectionsResponse, useInterfaces: boolean = false): QueryClientConnectionsResponseAmino {
+  toAmino(message: QueryClientConnectionsResponse, useInterfaces: boolean = true): QueryClientConnectionsResponseAmino {
     const obj: any = {};
     if (message.connectionPaths) {
       obj.connection_paths = message.connectionPaths.map(e => e);
@@ -1006,13 +1006,13 @@ export const QueryClientConnectionsResponse = {
   fromAminoMsg(object: QueryClientConnectionsResponseAminoMsg): QueryClientConnectionsResponse {
     return QueryClientConnectionsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryClientConnectionsResponse, useInterfaces: boolean = false): QueryClientConnectionsResponseAminoMsg {
+  toAminoMsg(message: QueryClientConnectionsResponse, useInterfaces: boolean = true): QueryClientConnectionsResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryClientConnectionsResponse",
       value: QueryClientConnectionsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryClientConnectionsResponseProtoMsg, useInterfaces: boolean = false): QueryClientConnectionsResponse {
+  fromProtoMsg(message: QueryClientConnectionsResponseProtoMsg, useInterfaces: boolean = true): QueryClientConnectionsResponse {
     return QueryClientConnectionsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryClientConnectionsResponse): Uint8Array {
@@ -1039,7 +1039,7 @@ export const QueryConnectionClientStateRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConnectionClientStateRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryConnectionClientStateRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionClientStateRequest();
@@ -1086,7 +1086,7 @@ export const QueryConnectionClientStateRequest = {
       connectionId: object.connection_id
     };
   },
-  toAmino(message: QueryConnectionClientStateRequest, useInterfaces: boolean = false): QueryConnectionClientStateRequestAmino {
+  toAmino(message: QueryConnectionClientStateRequest, useInterfaces: boolean = true): QueryConnectionClientStateRequestAmino {
     const obj: any = {};
     obj.connection_id = message.connectionId;
     return obj;
@@ -1094,13 +1094,13 @@ export const QueryConnectionClientStateRequest = {
   fromAminoMsg(object: QueryConnectionClientStateRequestAminoMsg): QueryConnectionClientStateRequest {
     return QueryConnectionClientStateRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryConnectionClientStateRequest, useInterfaces: boolean = false): QueryConnectionClientStateRequestAminoMsg {
+  toAminoMsg(message: QueryConnectionClientStateRequest, useInterfaces: boolean = true): QueryConnectionClientStateRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryConnectionClientStateRequest",
       value: QueryConnectionClientStateRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryConnectionClientStateRequestProtoMsg, useInterfaces: boolean = false): QueryConnectionClientStateRequest {
+  fromProtoMsg(message: QueryConnectionClientStateRequestProtoMsg, useInterfaces: boolean = true): QueryConnectionClientStateRequest {
     return QueryConnectionClientStateRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConnectionClientStateRequest): Uint8Array {
@@ -1135,7 +1135,7 @@ export const QueryConnectionClientStateResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConnectionClientStateResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryConnectionClientStateResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionClientStateResponse();
@@ -1204,7 +1204,7 @@ export const QueryConnectionClientStateResponse = {
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
     };
   },
-  toAmino(message: QueryConnectionClientStateResponse, useInterfaces: boolean = false): QueryConnectionClientStateResponseAmino {
+  toAmino(message: QueryConnectionClientStateResponse, useInterfaces: boolean = true): QueryConnectionClientStateResponseAmino {
     const obj: any = {};
     obj.identified_client_state = message.identifiedClientState ? IdentifiedClientState.toAmino(message.identifiedClientState, useInterfaces) : undefined;
     obj.proof = message.proof;
@@ -1214,13 +1214,13 @@ export const QueryConnectionClientStateResponse = {
   fromAminoMsg(object: QueryConnectionClientStateResponseAminoMsg): QueryConnectionClientStateResponse {
     return QueryConnectionClientStateResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryConnectionClientStateResponse, useInterfaces: boolean = false): QueryConnectionClientStateResponseAminoMsg {
+  toAminoMsg(message: QueryConnectionClientStateResponse, useInterfaces: boolean = true): QueryConnectionClientStateResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryConnectionClientStateResponse",
       value: QueryConnectionClientStateResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryConnectionClientStateResponseProtoMsg, useInterfaces: boolean = false): QueryConnectionClientStateResponse {
+  fromProtoMsg(message: QueryConnectionClientStateResponseProtoMsg, useInterfaces: boolean = true): QueryConnectionClientStateResponse {
     return QueryConnectionClientStateResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConnectionClientStateResponse): Uint8Array {
@@ -1255,7 +1255,7 @@ export const QueryConnectionConsensusStateRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConnectionConsensusStateRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryConnectionConsensusStateRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionConsensusStateRequest();
@@ -1324,7 +1324,7 @@ export const QueryConnectionConsensusStateRequest = {
       revisionHeight: BigInt(object.revision_height)
     };
   },
-  toAmino(message: QueryConnectionConsensusStateRequest, useInterfaces: boolean = false): QueryConnectionConsensusStateRequestAmino {
+  toAmino(message: QueryConnectionConsensusStateRequest, useInterfaces: boolean = true): QueryConnectionConsensusStateRequestAmino {
     const obj: any = {};
     obj.connection_id = message.connectionId;
     obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
@@ -1334,13 +1334,13 @@ export const QueryConnectionConsensusStateRequest = {
   fromAminoMsg(object: QueryConnectionConsensusStateRequestAminoMsg): QueryConnectionConsensusStateRequest {
     return QueryConnectionConsensusStateRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryConnectionConsensusStateRequest, useInterfaces: boolean = false): QueryConnectionConsensusStateRequestAminoMsg {
+  toAminoMsg(message: QueryConnectionConsensusStateRequest, useInterfaces: boolean = true): QueryConnectionConsensusStateRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryConnectionConsensusStateRequest",
       value: QueryConnectionConsensusStateRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryConnectionConsensusStateRequestProtoMsg, useInterfaces: boolean = false): QueryConnectionConsensusStateRequest {
+  fromProtoMsg(message: QueryConnectionConsensusStateRequestProtoMsg, useInterfaces: boolean = true): QueryConnectionConsensusStateRequest {
     return QueryConnectionConsensusStateRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConnectionConsensusStateRequest): Uint8Array {
@@ -1379,7 +1379,7 @@ export const QueryConnectionConsensusStateResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConnectionConsensusStateResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryConnectionConsensusStateResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionConsensusStateResponse();
@@ -1457,7 +1457,7 @@ export const QueryConnectionConsensusStateResponse = {
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
     };
   },
-  toAmino(message: QueryConnectionConsensusStateResponse, useInterfaces: boolean = false): QueryConnectionConsensusStateResponseAmino {
+  toAmino(message: QueryConnectionConsensusStateResponse, useInterfaces: boolean = true): QueryConnectionConsensusStateResponseAmino {
     const obj: any = {};
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState, useInterfaces) : undefined;
     obj.client_id = message.clientId;
@@ -1468,13 +1468,13 @@ export const QueryConnectionConsensusStateResponse = {
   fromAminoMsg(object: QueryConnectionConsensusStateResponseAminoMsg): QueryConnectionConsensusStateResponse {
     return QueryConnectionConsensusStateResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryConnectionConsensusStateResponse, useInterfaces: boolean = false): QueryConnectionConsensusStateResponseAminoMsg {
+  toAminoMsg(message: QueryConnectionConsensusStateResponse, useInterfaces: boolean = true): QueryConnectionConsensusStateResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryConnectionConsensusStateResponse",
       value: QueryConnectionConsensusStateResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryConnectionConsensusStateResponseProtoMsg, useInterfaces: boolean = false): QueryConnectionConsensusStateResponse {
+  fromProtoMsg(message: QueryConnectionConsensusStateResponseProtoMsg, useInterfaces: boolean = true): QueryConnectionConsensusStateResponse {
     return QueryConnectionConsensusStateResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConnectionConsensusStateResponse): Uint8Array {

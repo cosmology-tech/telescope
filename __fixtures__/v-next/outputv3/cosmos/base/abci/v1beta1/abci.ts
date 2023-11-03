@@ -494,7 +494,7 @@ export const TxResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): TxResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): TxResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxResponse();
@@ -673,7 +673,7 @@ export const TxResponse = {
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromAmino(e)) : []
     };
   },
-  toAmino(message: TxResponse, useInterfaces: boolean = false): TxResponseAmino {
+  toAmino(message: TxResponse, useInterfaces: boolean = true): TxResponseAmino {
     const obj: any = {};
     obj.height = message.height ? message.height.toString() : undefined;
     obj.txhash = message.txhash;
@@ -698,7 +698,7 @@ export const TxResponse = {
     }
     return obj;
   },
-  fromProtoMsg(message: TxResponseProtoMsg, useInterfaces: boolean = false): TxResponse {
+  fromProtoMsg(message: TxResponseProtoMsg, useInterfaces: boolean = true): TxResponse {
     return TxResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: TxResponse): Uint8Array {
@@ -733,7 +733,7 @@ export const ABCIMessageLog = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ABCIMessageLog {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ABCIMessageLog {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseABCIMessageLog();
@@ -806,7 +806,7 @@ export const ABCIMessageLog = {
       events: Array.isArray(object?.events) ? object.events.map((e: any) => StringEvent.fromAmino(e)) : []
     };
   },
-  toAmino(message: ABCIMessageLog, useInterfaces: boolean = false): ABCIMessageLogAmino {
+  toAmino(message: ABCIMessageLog, useInterfaces: boolean = true): ABCIMessageLogAmino {
     const obj: any = {};
     obj.msg_index = message.msgIndex;
     obj.log = message.log;
@@ -817,7 +817,7 @@ export const ABCIMessageLog = {
     }
     return obj;
   },
-  fromProtoMsg(message: ABCIMessageLogProtoMsg, useInterfaces: boolean = false): ABCIMessageLog {
+  fromProtoMsg(message: ABCIMessageLogProtoMsg, useInterfaces: boolean = true): ABCIMessageLog {
     return ABCIMessageLog.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ABCIMessageLog): Uint8Array {
@@ -848,7 +848,7 @@ export const StringEvent = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): StringEvent {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): StringEvent {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStringEvent();
@@ -912,7 +912,7 @@ export const StringEvent = {
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
     };
   },
-  toAmino(message: StringEvent, useInterfaces: boolean = false): StringEventAmino {
+  toAmino(message: StringEvent, useInterfaces: boolean = true): StringEventAmino {
     const obj: any = {};
     obj.type = message.type;
     if (message.attributes) {
@@ -922,7 +922,7 @@ export const StringEvent = {
     }
     return obj;
   },
-  fromProtoMsg(message: StringEventProtoMsg, useInterfaces: boolean = false): StringEvent {
+  fromProtoMsg(message: StringEventProtoMsg, useInterfaces: boolean = true): StringEvent {
     return StringEvent.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: StringEvent): Uint8Array {
@@ -953,7 +953,7 @@ export const Attribute = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Attribute {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Attribute {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttribute();
@@ -1009,13 +1009,13 @@ export const Attribute = {
       value: object.value
     };
   },
-  toAmino(message: Attribute, useInterfaces: boolean = false): AttributeAmino {
+  toAmino(message: Attribute, useInterfaces: boolean = true): AttributeAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
     return obj;
   },
-  fromProtoMsg(message: AttributeProtoMsg, useInterfaces: boolean = false): Attribute {
+  fromProtoMsg(message: AttributeProtoMsg, useInterfaces: boolean = true): Attribute {
     return Attribute.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Attribute): Uint8Array {
@@ -1046,7 +1046,7 @@ export const GasInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GasInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GasInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGasInfo();
@@ -1106,13 +1106,13 @@ export const GasInfo = {
       gasUsed: BigInt(object.gas_used)
     };
   },
-  toAmino(message: GasInfo, useInterfaces: boolean = false): GasInfoAmino {
+  toAmino(message: GasInfo, useInterfaces: boolean = true): GasInfoAmino {
     const obj: any = {};
     obj.gas_wanted = message.gasWanted ? message.gasWanted.toString() : undefined;
     obj.gas_used = message.gasUsed ? message.gasUsed.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: GasInfoProtoMsg, useInterfaces: boolean = false): GasInfo {
+  fromProtoMsg(message: GasInfoProtoMsg, useInterfaces: boolean = true): GasInfo {
     return GasInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GasInfo): Uint8Array {
@@ -1151,7 +1151,7 @@ export const Result = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Result {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Result {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResult();
@@ -1241,7 +1241,7 @@ export const Result = {
       msgResponses: Array.isArray(object?.msg_responses) ? object.msg_responses.map((e: any) => Any.fromAmino(e)) : []
     };
   },
-  toAmino(message: Result, useInterfaces: boolean = false): ResultAmino {
+  toAmino(message: Result, useInterfaces: boolean = true): ResultAmino {
     const obj: any = {};
     obj.data = message.data;
     obj.log = message.log;
@@ -1257,7 +1257,7 @@ export const Result = {
     }
     return obj;
   },
-  fromProtoMsg(message: ResultProtoMsg, useInterfaces: boolean = false): Result {
+  fromProtoMsg(message: ResultProtoMsg, useInterfaces: boolean = true): Result {
     return Result.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Result): Uint8Array {
@@ -1288,7 +1288,7 @@ export const SimulationResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SimulationResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SimulationResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSimulationResponse();
@@ -1348,13 +1348,13 @@ export const SimulationResponse = {
       result: object?.result ? Result.fromAmino(object.result) : undefined
     };
   },
-  toAmino(message: SimulationResponse, useInterfaces: boolean = false): SimulationResponseAmino {
+  toAmino(message: SimulationResponse, useInterfaces: boolean = true): SimulationResponseAmino {
     const obj: any = {};
     obj.gas_info = message.gasInfo ? GasInfo.toAmino(message.gasInfo, useInterfaces) : undefined;
     obj.result = message.result ? Result.toAmino(message.result, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: SimulationResponseProtoMsg, useInterfaces: boolean = false): SimulationResponse {
+  fromProtoMsg(message: SimulationResponseProtoMsg, useInterfaces: boolean = true): SimulationResponse {
     return SimulationResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SimulationResponse): Uint8Array {
@@ -1385,7 +1385,7 @@ export const MsgData = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgData {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgData {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgData();
@@ -1441,13 +1441,13 @@ export const MsgData = {
       data: object.data
     };
   },
-  toAmino(message: MsgData, useInterfaces: boolean = false): MsgDataAmino {
+  toAmino(message: MsgData, useInterfaces: boolean = true): MsgDataAmino {
     const obj: any = {};
     obj.msg_type = message.msgType;
     obj.data = message.data;
     return obj;
   },
-  fromProtoMsg(message: MsgDataProtoMsg, useInterfaces: boolean = false): MsgData {
+  fromProtoMsg(message: MsgDataProtoMsg, useInterfaces: boolean = true): MsgData {
     return MsgData.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgData): Uint8Array {
@@ -1478,7 +1478,7 @@ export const TxMsgData = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): TxMsgData {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): TxMsgData {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxMsgData();
@@ -1550,7 +1550,7 @@ export const TxMsgData = {
       msgResponses: Array.isArray(object?.msg_responses) ? object.msg_responses.map((e: any) => Any.fromAmino(e)) : []
     };
   },
-  toAmino(message: TxMsgData, useInterfaces: boolean = false): TxMsgDataAmino {
+  toAmino(message: TxMsgData, useInterfaces: boolean = true): TxMsgDataAmino {
     const obj: any = {};
     if (message.data) {
       obj.data = message.data.map(e => e ? MsgData.toAmino(e, useInterfaces) : undefined);
@@ -1564,7 +1564,7 @@ export const TxMsgData = {
     }
     return obj;
   },
-  fromProtoMsg(message: TxMsgDataProtoMsg, useInterfaces: boolean = false): TxMsgData {
+  fromProtoMsg(message: TxMsgDataProtoMsg, useInterfaces: boolean = true): TxMsgData {
     return TxMsgData.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: TxMsgData): Uint8Array {
@@ -1611,7 +1611,7 @@ export const SearchTxsResult = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SearchTxsResult {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SearchTxsResult {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSearchTxsResult();
@@ -1721,7 +1721,7 @@ export const SearchTxsResult = {
       txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => TxResponse.fromAmino(e)) : []
     };
   },
-  toAmino(message: SearchTxsResult, useInterfaces: boolean = false): SearchTxsResultAmino {
+  toAmino(message: SearchTxsResult, useInterfaces: boolean = true): SearchTxsResultAmino {
     const obj: any = {};
     obj.total_count = message.totalCount ? message.totalCount.toString() : undefined;
     obj.count = message.count ? message.count.toString() : undefined;
@@ -1735,7 +1735,7 @@ export const SearchTxsResult = {
     }
     return obj;
   },
-  fromProtoMsg(message: SearchTxsResultProtoMsg, useInterfaces: boolean = false): SearchTxsResult {
+  fromProtoMsg(message: SearchTxsResultProtoMsg, useInterfaces: boolean = true): SearchTxsResult {
     return SearchTxsResult.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SearchTxsResult): Uint8Array {

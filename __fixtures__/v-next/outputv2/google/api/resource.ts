@@ -568,7 +568,7 @@ export const ResourceDescriptor = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ResourceDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ResourceDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceDescriptor();
@@ -692,7 +692,7 @@ export const ResourceDescriptor = {
       style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
     };
   },
-  toAmino(message: ResourceDescriptor, useInterfaces: boolean = false): ResourceDescriptorAmino {
+  toAmino(message: ResourceDescriptor, useInterfaces: boolean = true): ResourceDescriptorAmino {
     const obj: any = {};
     obj.type = message.type;
     if (message.pattern) {
@@ -714,7 +714,7 @@ export const ResourceDescriptor = {
   fromAminoMsg(object: ResourceDescriptorAminoMsg): ResourceDescriptor {
     return ResourceDescriptor.fromAmino(object.value);
   },
-  fromProtoMsg(message: ResourceDescriptorProtoMsg, useInterfaces: boolean = false): ResourceDescriptor {
+  fromProtoMsg(message: ResourceDescriptorProtoMsg, useInterfaces: boolean = true): ResourceDescriptor {
     return ResourceDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ResourceDescriptor): Uint8Array {
@@ -744,7 +744,7 @@ export const ResourceReference = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ResourceReference {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ResourceReference {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceReference();
@@ -800,7 +800,7 @@ export const ResourceReference = {
       childType: object.child_type
     };
   },
-  toAmino(message: ResourceReference, useInterfaces: boolean = false): ResourceReferenceAmino {
+  toAmino(message: ResourceReference, useInterfaces: boolean = true): ResourceReferenceAmino {
     const obj: any = {};
     obj.type = message.type;
     obj.child_type = message.childType;
@@ -809,7 +809,7 @@ export const ResourceReference = {
   fromAminoMsg(object: ResourceReferenceAminoMsg): ResourceReference {
     return ResourceReference.fromAmino(object.value);
   },
-  fromProtoMsg(message: ResourceReferenceProtoMsg, useInterfaces: boolean = false): ResourceReference {
+  fromProtoMsg(message: ResourceReferenceProtoMsg, useInterfaces: boolean = true): ResourceReference {
     return ResourceReference.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ResourceReference): Uint8Array {

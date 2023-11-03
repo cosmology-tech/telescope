@@ -67,7 +67,7 @@ export const GenesisDeployment = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisDeployment {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisDeployment {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisDeployment();
@@ -133,7 +133,7 @@ export const GenesisDeployment = {
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromAmino(e)) : []
     };
   },
-  toAmino(message: GenesisDeployment, useInterfaces: boolean = false): GenesisDeploymentAmino {
+  toAmino(message: GenesisDeployment, useInterfaces: boolean = true): GenesisDeploymentAmino {
     const obj: any = {};
     obj.deployment = message.deployment ? Deployment.toAmino(message.deployment, useInterfaces) : undefined;
     if (message.groups) {
@@ -146,7 +146,7 @@ export const GenesisDeployment = {
   fromAminoMsg(object: GenesisDeploymentAminoMsg): GenesisDeployment {
     return GenesisDeployment.fromAmino(object.value);
   },
-  fromProtoMsg(message: GenesisDeploymentProtoMsg, useInterfaces: boolean = false): GenesisDeployment {
+  fromProtoMsg(message: GenesisDeploymentProtoMsg, useInterfaces: boolean = true): GenesisDeployment {
     return GenesisDeployment.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisDeployment): Uint8Array {
@@ -176,7 +176,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -242,7 +242,7 @@ export const GenesisState = {
       params: object?.params ? Params.fromAmino(object.params) : undefined
     };
   },
-  toAmino(message: GenesisState, useInterfaces: boolean = false): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     if (message.deployments) {
       obj.deployments = message.deployments.map(e => e ? GenesisDeployment.toAmino(e, useInterfaces) : undefined);
@@ -255,7 +255,7 @@ export const GenesisState = {
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
   },
-  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = false): GenesisState {
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
     return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {

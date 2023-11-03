@@ -134,7 +134,7 @@ export const Class = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Class {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Class {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClass();
@@ -237,7 +237,7 @@ export const Class = {
       data: object?.data ? Any.fromAmino(object.data) : undefined
     };
   },
-  toAmino(message: Class, useInterfaces: boolean = false): ClassAmino {
+  toAmino(message: Class, useInterfaces: boolean = true): ClassAmino {
     const obj: any = {};
     obj.id = message.id;
     obj.name = message.name;
@@ -251,13 +251,13 @@ export const Class = {
   fromAminoMsg(object: ClassAminoMsg): Class {
     return Class.fromAmino(object.value);
   },
-  toAminoMsg(message: Class, useInterfaces: boolean = false): ClassAminoMsg {
+  toAminoMsg(message: Class, useInterfaces: boolean = true): ClassAminoMsg {
     return {
       type: "cosmos-sdk/Class",
       value: Class.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ClassProtoMsg, useInterfaces: boolean = false): Class {
+  fromProtoMsg(message: ClassProtoMsg, useInterfaces: boolean = true): Class {
     return Class.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Class): Uint8Array {
@@ -300,7 +300,7 @@ export const NFT = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): NFT {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): NFT {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNFT();
@@ -385,7 +385,7 @@ export const NFT = {
       data: object?.data ? Any.fromAmino(object.data) : undefined
     };
   },
-  toAmino(message: NFT, useInterfaces: boolean = false): NFTAmino {
+  toAmino(message: NFT, useInterfaces: boolean = true): NFTAmino {
     const obj: any = {};
     obj.class_id = message.classId;
     obj.id = message.id;
@@ -397,13 +397,13 @@ export const NFT = {
   fromAminoMsg(object: NFTAminoMsg): NFT {
     return NFT.fromAmino(object.value);
   },
-  toAminoMsg(message: NFT, useInterfaces: boolean = false): NFTAminoMsg {
+  toAminoMsg(message: NFT, useInterfaces: boolean = true): NFTAminoMsg {
     return {
       type: "cosmos-sdk/NFT",
       value: NFT.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: NFTProtoMsg, useInterfaces: boolean = false): NFT {
+  fromProtoMsg(message: NFTProtoMsg, useInterfaces: boolean = true): NFT {
     return NFT.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: NFT): Uint8Array {

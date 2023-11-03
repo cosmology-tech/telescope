@@ -140,7 +140,7 @@ export const QueryParamsRequest = {
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -176,11 +176,11 @@ export const QueryParamsRequest = {
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
-  toAmino(_: QueryParamsRequest, useInterfaces: boolean = false): QueryParamsRequestAmino {
+  toAmino(_: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = false): QueryParamsRequest {
+  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = true): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsRequest): Uint8Array {
@@ -207,7 +207,7 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -256,12 +256,12 @@ export const QueryParamsResponse = {
       params: object?.params ? Params.fromAmino(object.params) : undefined
     };
   },
-  toAmino(message: QueryParamsResponse, useInterfaces: boolean = false): QueryParamsResponseAmino {
+  toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = false): QueryParamsResponse {
+  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = true): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsResponse): Uint8Array {
@@ -288,7 +288,7 @@ export const QueryDenomAuthorityMetadataRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDenomAuthorityMetadataRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDenomAuthorityMetadataRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomAuthorityMetadataRequest();
@@ -335,12 +335,12 @@ export const QueryDenomAuthorityMetadataRequest = {
       denom: object.denom
     };
   },
-  toAmino(message: QueryDenomAuthorityMetadataRequest, useInterfaces: boolean = false): QueryDenomAuthorityMetadataRequestAmino {
+  toAmino(message: QueryDenomAuthorityMetadataRequest, useInterfaces: boolean = true): QueryDenomAuthorityMetadataRequestAmino {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
   },
-  fromProtoMsg(message: QueryDenomAuthorityMetadataRequestProtoMsg, useInterfaces: boolean = false): QueryDenomAuthorityMetadataRequest {
+  fromProtoMsg(message: QueryDenomAuthorityMetadataRequestProtoMsg, useInterfaces: boolean = true): QueryDenomAuthorityMetadataRequest {
     return QueryDenomAuthorityMetadataRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDenomAuthorityMetadataRequest): Uint8Array {
@@ -367,7 +367,7 @@ export const QueryDenomAuthorityMetadataResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDenomAuthorityMetadataResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDenomAuthorityMetadataResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomAuthorityMetadataResponse();
@@ -416,12 +416,12 @@ export const QueryDenomAuthorityMetadataResponse = {
       authorityMetadata: object?.authority_metadata ? DenomAuthorityMetadata.fromAmino(object.authority_metadata) : undefined
     };
   },
-  toAmino(message: QueryDenomAuthorityMetadataResponse, useInterfaces: boolean = false): QueryDenomAuthorityMetadataResponseAmino {
+  toAmino(message: QueryDenomAuthorityMetadataResponse, useInterfaces: boolean = true): QueryDenomAuthorityMetadataResponseAmino {
     const obj: any = {};
     obj.authority_metadata = message.authorityMetadata ? DenomAuthorityMetadata.toAmino(message.authorityMetadata, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryDenomAuthorityMetadataResponseProtoMsg, useInterfaces: boolean = false): QueryDenomAuthorityMetadataResponse {
+  fromProtoMsg(message: QueryDenomAuthorityMetadataResponseProtoMsg, useInterfaces: boolean = true): QueryDenomAuthorityMetadataResponse {
     return QueryDenomAuthorityMetadataResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDenomAuthorityMetadataResponse): Uint8Array {
@@ -448,7 +448,7 @@ export const QueryDenomsFromCreatorRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDenomsFromCreatorRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDenomsFromCreatorRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomsFromCreatorRequest();
@@ -495,12 +495,12 @@ export const QueryDenomsFromCreatorRequest = {
       creator: object.creator
     };
   },
-  toAmino(message: QueryDenomsFromCreatorRequest, useInterfaces: boolean = false): QueryDenomsFromCreatorRequestAmino {
+  toAmino(message: QueryDenomsFromCreatorRequest, useInterfaces: boolean = true): QueryDenomsFromCreatorRequestAmino {
     const obj: any = {};
     obj.creator = message.creator;
     return obj;
   },
-  fromProtoMsg(message: QueryDenomsFromCreatorRequestProtoMsg, useInterfaces: boolean = false): QueryDenomsFromCreatorRequest {
+  fromProtoMsg(message: QueryDenomsFromCreatorRequestProtoMsg, useInterfaces: boolean = true): QueryDenomsFromCreatorRequest {
     return QueryDenomsFromCreatorRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDenomsFromCreatorRequest): Uint8Array {
@@ -527,7 +527,7 @@ export const QueryDenomsFromCreatorResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDenomsFromCreatorResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDenomsFromCreatorResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomsFromCreatorResponse();
@@ -582,7 +582,7 @@ export const QueryDenomsFromCreatorResponse = {
       denoms: Array.isArray(object?.denoms) ? object.denoms.map((e: any) => e) : []
     };
   },
-  toAmino(message: QueryDenomsFromCreatorResponse, useInterfaces: boolean = false): QueryDenomsFromCreatorResponseAmino {
+  toAmino(message: QueryDenomsFromCreatorResponse, useInterfaces: boolean = true): QueryDenomsFromCreatorResponseAmino {
     const obj: any = {};
     if (message.denoms) {
       obj.denoms = message.denoms.map(e => e);
@@ -591,7 +591,7 @@ export const QueryDenomsFromCreatorResponse = {
     }
     return obj;
   },
-  fromProtoMsg(message: QueryDenomsFromCreatorResponseProtoMsg, useInterfaces: boolean = false): QueryDenomsFromCreatorResponse {
+  fromProtoMsg(message: QueryDenomsFromCreatorResponseProtoMsg, useInterfaces: boolean = true): QueryDenomsFromCreatorResponse {
     return QueryDenomsFromCreatorResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDenomsFromCreatorResponse): Uint8Array {

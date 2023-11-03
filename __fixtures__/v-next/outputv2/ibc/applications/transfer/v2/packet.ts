@@ -76,7 +76,7 @@ export const FungibleTokenPacketData = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): FungibleTokenPacketData {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): FungibleTokenPacketData {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFungibleTokenPacketData();
@@ -150,7 +150,7 @@ export const FungibleTokenPacketData = {
       receiver: object.receiver
     };
   },
-  toAmino(message: FungibleTokenPacketData, useInterfaces: boolean = false): FungibleTokenPacketDataAmino {
+  toAmino(message: FungibleTokenPacketData, useInterfaces: boolean = true): FungibleTokenPacketDataAmino {
     const obj: any = {};
     obj.denom = message.denom;
     obj.amount = message.amount;
@@ -161,13 +161,13 @@ export const FungibleTokenPacketData = {
   fromAminoMsg(object: FungibleTokenPacketDataAminoMsg): FungibleTokenPacketData {
     return FungibleTokenPacketData.fromAmino(object.value);
   },
-  toAminoMsg(message: FungibleTokenPacketData, useInterfaces: boolean = false): FungibleTokenPacketDataAminoMsg {
+  toAminoMsg(message: FungibleTokenPacketData, useInterfaces: boolean = true): FungibleTokenPacketDataAminoMsg {
     return {
       type: "cosmos-sdk/FungibleTokenPacketData",
       value: FungibleTokenPacketData.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: FungibleTokenPacketDataProtoMsg, useInterfaces: boolean = false): FungibleTokenPacketData {
+  fromProtoMsg(message: FungibleTokenPacketDataProtoMsg, useInterfaces: boolean = true): FungibleTokenPacketData {
     return FungibleTokenPacketData.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: FungibleTokenPacketData): Uint8Array {

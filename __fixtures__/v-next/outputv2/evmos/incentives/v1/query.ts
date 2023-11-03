@@ -436,7 +436,7 @@ export const QueryIncentivesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryIncentivesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryIncentivesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentivesRequest();
@@ -485,7 +485,7 @@ export const QueryIncentivesRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryIncentivesRequest, useInterfaces: boolean = false): QueryIncentivesRequestAmino {
+  toAmino(message: QueryIncentivesRequest, useInterfaces: boolean = true): QueryIncentivesRequestAmino {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
@@ -493,7 +493,7 @@ export const QueryIncentivesRequest = {
   fromAminoMsg(object: QueryIncentivesRequestAminoMsg): QueryIncentivesRequest {
     return QueryIncentivesRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryIncentivesRequestProtoMsg, useInterfaces: boolean = false): QueryIncentivesRequest {
+  fromProtoMsg(message: QueryIncentivesRequestProtoMsg, useInterfaces: boolean = true): QueryIncentivesRequest {
     return QueryIncentivesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryIncentivesRequest): Uint8Array {
@@ -523,7 +523,7 @@ export const QueryIncentivesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryIncentivesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryIncentivesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentivesResponse();
@@ -589,7 +589,7 @@ export const QueryIncentivesResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryIncentivesResponse, useInterfaces: boolean = false): QueryIncentivesResponseAmino {
+  toAmino(message: QueryIncentivesResponse, useInterfaces: boolean = true): QueryIncentivesResponseAmino {
     const obj: any = {};
     if (message.incentives) {
       obj.incentives = message.incentives.map(e => e ? Incentive.toAmino(e, useInterfaces) : undefined);
@@ -602,7 +602,7 @@ export const QueryIncentivesResponse = {
   fromAminoMsg(object: QueryIncentivesResponseAminoMsg): QueryIncentivesResponse {
     return QueryIncentivesResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryIncentivesResponseProtoMsg, useInterfaces: boolean = false): QueryIncentivesResponse {
+  fromProtoMsg(message: QueryIncentivesResponseProtoMsg, useInterfaces: boolean = true): QueryIncentivesResponse {
     return QueryIncentivesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryIncentivesResponse): Uint8Array {
@@ -628,7 +628,7 @@ export const QueryIncentiveRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryIncentiveRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryIncentiveRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentiveRequest();
@@ -675,7 +675,7 @@ export const QueryIncentiveRequest = {
       contract: object.contract
     };
   },
-  toAmino(message: QueryIncentiveRequest, useInterfaces: boolean = false): QueryIncentiveRequestAmino {
+  toAmino(message: QueryIncentiveRequest, useInterfaces: boolean = true): QueryIncentiveRequestAmino {
     const obj: any = {};
     obj.contract = message.contract;
     return obj;
@@ -683,7 +683,7 @@ export const QueryIncentiveRequest = {
   fromAminoMsg(object: QueryIncentiveRequestAminoMsg): QueryIncentiveRequest {
     return QueryIncentiveRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryIncentiveRequestProtoMsg, useInterfaces: boolean = false): QueryIncentiveRequest {
+  fromProtoMsg(message: QueryIncentiveRequestProtoMsg, useInterfaces: boolean = true): QueryIncentiveRequest {
     return QueryIncentiveRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryIncentiveRequest): Uint8Array {
@@ -709,7 +709,7 @@ export const QueryIncentiveResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryIncentiveResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryIncentiveResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentiveResponse();
@@ -758,7 +758,7 @@ export const QueryIncentiveResponse = {
       incentive: object?.incentive ? Incentive.fromAmino(object.incentive) : undefined
     };
   },
-  toAmino(message: QueryIncentiveResponse, useInterfaces: boolean = false): QueryIncentiveResponseAmino {
+  toAmino(message: QueryIncentiveResponse, useInterfaces: boolean = true): QueryIncentiveResponseAmino {
     const obj: any = {};
     obj.incentive = message.incentive ? Incentive.toAmino(message.incentive, useInterfaces) : undefined;
     return obj;
@@ -766,7 +766,7 @@ export const QueryIncentiveResponse = {
   fromAminoMsg(object: QueryIncentiveResponseAminoMsg): QueryIncentiveResponse {
     return QueryIncentiveResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryIncentiveResponseProtoMsg, useInterfaces: boolean = false): QueryIncentiveResponse {
+  fromProtoMsg(message: QueryIncentiveResponseProtoMsg, useInterfaces: boolean = true): QueryIncentiveResponse {
     return QueryIncentiveResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryIncentiveResponse): Uint8Array {
@@ -796,7 +796,7 @@ export const QueryGasMetersRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryGasMetersRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGasMetersRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGasMetersRequest();
@@ -854,7 +854,7 @@ export const QueryGasMetersRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryGasMetersRequest, useInterfaces: boolean = false): QueryGasMetersRequestAmino {
+  toAmino(message: QueryGasMetersRequest, useInterfaces: boolean = true): QueryGasMetersRequestAmino {
     const obj: any = {};
     obj.contract = message.contract;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
@@ -863,7 +863,7 @@ export const QueryGasMetersRequest = {
   fromAminoMsg(object: QueryGasMetersRequestAminoMsg): QueryGasMetersRequest {
     return QueryGasMetersRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryGasMetersRequestProtoMsg, useInterfaces: boolean = false): QueryGasMetersRequest {
+  fromProtoMsg(message: QueryGasMetersRequestProtoMsg, useInterfaces: boolean = true): QueryGasMetersRequest {
     return QueryGasMetersRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGasMetersRequest): Uint8Array {
@@ -893,7 +893,7 @@ export const QueryGasMetersResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryGasMetersResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGasMetersResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGasMetersResponse();
@@ -959,7 +959,7 @@ export const QueryGasMetersResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryGasMetersResponse, useInterfaces: boolean = false): QueryGasMetersResponseAmino {
+  toAmino(message: QueryGasMetersResponse, useInterfaces: boolean = true): QueryGasMetersResponseAmino {
     const obj: any = {};
     if (message.gasMeters) {
       obj.gas_meters = message.gasMeters.map(e => e ? GasMeter.toAmino(e, useInterfaces) : undefined);
@@ -972,7 +972,7 @@ export const QueryGasMetersResponse = {
   fromAminoMsg(object: QueryGasMetersResponseAminoMsg): QueryGasMetersResponse {
     return QueryGasMetersResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryGasMetersResponseProtoMsg, useInterfaces: boolean = false): QueryGasMetersResponse {
+  fromProtoMsg(message: QueryGasMetersResponseProtoMsg, useInterfaces: boolean = true): QueryGasMetersResponse {
     return QueryGasMetersResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGasMetersResponse): Uint8Array {
@@ -1002,7 +1002,7 @@ export const QueryGasMeterRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryGasMeterRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGasMeterRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGasMeterRequest();
@@ -1058,7 +1058,7 @@ export const QueryGasMeterRequest = {
       participant: object.participant
     };
   },
-  toAmino(message: QueryGasMeterRequest, useInterfaces: boolean = false): QueryGasMeterRequestAmino {
+  toAmino(message: QueryGasMeterRequest, useInterfaces: boolean = true): QueryGasMeterRequestAmino {
     const obj: any = {};
     obj.contract = message.contract;
     obj.participant = message.participant;
@@ -1067,7 +1067,7 @@ export const QueryGasMeterRequest = {
   fromAminoMsg(object: QueryGasMeterRequestAminoMsg): QueryGasMeterRequest {
     return QueryGasMeterRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryGasMeterRequestProtoMsg, useInterfaces: boolean = false): QueryGasMeterRequest {
+  fromProtoMsg(message: QueryGasMeterRequestProtoMsg, useInterfaces: boolean = true): QueryGasMeterRequest {
     return QueryGasMeterRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGasMeterRequest): Uint8Array {
@@ -1093,7 +1093,7 @@ export const QueryGasMeterResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryGasMeterResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGasMeterResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGasMeterResponse();
@@ -1142,7 +1142,7 @@ export const QueryGasMeterResponse = {
       gasMeter: BigInt(object.gas_meter)
     };
   },
-  toAmino(message: QueryGasMeterResponse, useInterfaces: boolean = false): QueryGasMeterResponseAmino {
+  toAmino(message: QueryGasMeterResponse, useInterfaces: boolean = true): QueryGasMeterResponseAmino {
     const obj: any = {};
     obj.gas_meter = message.gasMeter ? message.gasMeter.toString() : undefined;
     return obj;
@@ -1150,7 +1150,7 @@ export const QueryGasMeterResponse = {
   fromAminoMsg(object: QueryGasMeterResponseAminoMsg): QueryGasMeterResponse {
     return QueryGasMeterResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryGasMeterResponseProtoMsg, useInterfaces: boolean = false): QueryGasMeterResponse {
+  fromProtoMsg(message: QueryGasMeterResponseProtoMsg, useInterfaces: boolean = true): QueryGasMeterResponse {
     return QueryGasMeterResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGasMeterResponse): Uint8Array {
@@ -1176,7 +1176,7 @@ export const QueryAllocationMetersRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAllocationMetersRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAllocationMetersRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllocationMetersRequest();
@@ -1225,7 +1225,7 @@ export const QueryAllocationMetersRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryAllocationMetersRequest, useInterfaces: boolean = false): QueryAllocationMetersRequestAmino {
+  toAmino(message: QueryAllocationMetersRequest, useInterfaces: boolean = true): QueryAllocationMetersRequestAmino {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
@@ -1233,7 +1233,7 @@ export const QueryAllocationMetersRequest = {
   fromAminoMsg(object: QueryAllocationMetersRequestAminoMsg): QueryAllocationMetersRequest {
     return QueryAllocationMetersRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryAllocationMetersRequestProtoMsg, useInterfaces: boolean = false): QueryAllocationMetersRequest {
+  fromProtoMsg(message: QueryAllocationMetersRequestProtoMsg, useInterfaces: boolean = true): QueryAllocationMetersRequest {
     return QueryAllocationMetersRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAllocationMetersRequest): Uint8Array {
@@ -1263,7 +1263,7 @@ export const QueryAllocationMetersResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAllocationMetersResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAllocationMetersResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllocationMetersResponse();
@@ -1329,7 +1329,7 @@ export const QueryAllocationMetersResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryAllocationMetersResponse, useInterfaces: boolean = false): QueryAllocationMetersResponseAmino {
+  toAmino(message: QueryAllocationMetersResponse, useInterfaces: boolean = true): QueryAllocationMetersResponseAmino {
     const obj: any = {};
     if (message.allocationMeters) {
       obj.allocation_meters = message.allocationMeters.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
@@ -1342,7 +1342,7 @@ export const QueryAllocationMetersResponse = {
   fromAminoMsg(object: QueryAllocationMetersResponseAminoMsg): QueryAllocationMetersResponse {
     return QueryAllocationMetersResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryAllocationMetersResponseProtoMsg, useInterfaces: boolean = false): QueryAllocationMetersResponse {
+  fromProtoMsg(message: QueryAllocationMetersResponseProtoMsg, useInterfaces: boolean = true): QueryAllocationMetersResponse {
     return QueryAllocationMetersResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAllocationMetersResponse): Uint8Array {
@@ -1368,7 +1368,7 @@ export const QueryAllocationMeterRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAllocationMeterRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAllocationMeterRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllocationMeterRequest();
@@ -1415,7 +1415,7 @@ export const QueryAllocationMeterRequest = {
       denom: object.denom
     };
   },
-  toAmino(message: QueryAllocationMeterRequest, useInterfaces: boolean = false): QueryAllocationMeterRequestAmino {
+  toAmino(message: QueryAllocationMeterRequest, useInterfaces: boolean = true): QueryAllocationMeterRequestAmino {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
@@ -1423,7 +1423,7 @@ export const QueryAllocationMeterRequest = {
   fromAminoMsg(object: QueryAllocationMeterRequestAminoMsg): QueryAllocationMeterRequest {
     return QueryAllocationMeterRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryAllocationMeterRequestProtoMsg, useInterfaces: boolean = false): QueryAllocationMeterRequest {
+  fromProtoMsg(message: QueryAllocationMeterRequestProtoMsg, useInterfaces: boolean = true): QueryAllocationMeterRequest {
     return QueryAllocationMeterRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAllocationMeterRequest): Uint8Array {
@@ -1449,7 +1449,7 @@ export const QueryAllocationMeterResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAllocationMeterResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAllocationMeterResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllocationMeterResponse();
@@ -1498,7 +1498,7 @@ export const QueryAllocationMeterResponse = {
       allocationMeter: object?.allocation_meter ? DecCoin.fromAmino(object.allocation_meter) : undefined
     };
   },
-  toAmino(message: QueryAllocationMeterResponse, useInterfaces: boolean = false): QueryAllocationMeterResponseAmino {
+  toAmino(message: QueryAllocationMeterResponse, useInterfaces: boolean = true): QueryAllocationMeterResponseAmino {
     const obj: any = {};
     obj.allocation_meter = message.allocationMeter ? DecCoin.toAmino(message.allocationMeter, useInterfaces) : undefined;
     return obj;
@@ -1506,7 +1506,7 @@ export const QueryAllocationMeterResponse = {
   fromAminoMsg(object: QueryAllocationMeterResponseAminoMsg): QueryAllocationMeterResponse {
     return QueryAllocationMeterResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryAllocationMeterResponseProtoMsg, useInterfaces: boolean = false): QueryAllocationMeterResponse {
+  fromProtoMsg(message: QueryAllocationMeterResponseProtoMsg, useInterfaces: boolean = true): QueryAllocationMeterResponse {
     return QueryAllocationMeterResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAllocationMeterResponse): Uint8Array {
@@ -1527,7 +1527,7 @@ export const QueryParamsRequest = {
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -1563,14 +1563,14 @@ export const QueryParamsRequest = {
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
-  toAmino(_: QueryParamsRequest, useInterfaces: boolean = false): QueryParamsRequestAmino {
+  toAmino(_: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
     return QueryParamsRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = false): QueryParamsRequest {
+  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = true): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsRequest): Uint8Array {
@@ -1596,7 +1596,7 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -1645,7 +1645,7 @@ export const QueryParamsResponse = {
       params: object?.params ? Params.fromAmino(object.params) : undefined
     };
   },
-  toAmino(message: QueryParamsResponse, useInterfaces: boolean = false): QueryParamsResponseAmino {
+  toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     return obj;
@@ -1653,7 +1653,7 @@ export const QueryParamsResponse = {
   fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
     return QueryParamsResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = false): QueryParamsResponse {
+  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = true): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsResponse): Uint8Array {

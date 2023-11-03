@@ -298,7 +298,7 @@ export const Version = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Version {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Version {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVersion();
@@ -372,7 +372,7 @@ export const Version = {
       suffix: object.suffix
     };
   },
-  toAmino(message: Version, useInterfaces: boolean = false): VersionAmino {
+  toAmino(message: Version, useInterfaces: boolean = true): VersionAmino {
     const obj: any = {};
     obj.major = message.major;
     obj.minor = message.minor;
@@ -380,7 +380,7 @@ export const Version = {
     obj.suffix = message.suffix;
     return obj;
   },
-  fromProtoMsg(message: VersionProtoMsg, useInterfaces: boolean = false): Version {
+  fromProtoMsg(message: VersionProtoMsg, useInterfaces: boolean = true): Version {
     return Version.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Version): Uint8Array {
@@ -418,7 +418,7 @@ export const CodeGeneratorRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CodeGeneratorRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CodeGeneratorRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCodeGeneratorRequest();
@@ -510,7 +510,7 @@ export const CodeGeneratorRequest = {
       compilerVersion: object?.compiler_version ? Version.fromAmino(object.compiler_version) : undefined
     };
   },
-  toAmino(message: CodeGeneratorRequest, useInterfaces: boolean = false): CodeGeneratorRequestAmino {
+  toAmino(message: CodeGeneratorRequest, useInterfaces: boolean = true): CodeGeneratorRequestAmino {
     const obj: any = {};
     if (message.fileToGenerate) {
       obj.file_to_generate = message.fileToGenerate.map(e => e);
@@ -526,7 +526,7 @@ export const CodeGeneratorRequest = {
     obj.compiler_version = message.compilerVersion ? Version.toAmino(message.compilerVersion, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: CodeGeneratorRequestProtoMsg, useInterfaces: boolean = false): CodeGeneratorRequest {
+  fromProtoMsg(message: CodeGeneratorRequestProtoMsg, useInterfaces: boolean = true): CodeGeneratorRequest {
     return CodeGeneratorRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CodeGeneratorRequest): Uint8Array {
@@ -556,7 +556,7 @@ export const CodeGeneratorResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CodeGeneratorResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CodeGeneratorResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCodeGeneratorResponse();
@@ -620,7 +620,7 @@ export const CodeGeneratorResponse = {
       file: Array.isArray(object?.file) ? object.file.map((e: any) => CodeGeneratorResponse_File.fromAmino(e)) : []
     };
   },
-  toAmino(message: CodeGeneratorResponse, useInterfaces: boolean = false): CodeGeneratorResponseAmino {
+  toAmino(message: CodeGeneratorResponse, useInterfaces: boolean = true): CodeGeneratorResponseAmino {
     const obj: any = {};
     obj.error = message.error;
     if (message.file) {
@@ -630,7 +630,7 @@ export const CodeGeneratorResponse = {
     }
     return obj;
   },
-  fromProtoMsg(message: CodeGeneratorResponseProtoMsg, useInterfaces: boolean = false): CodeGeneratorResponse {
+  fromProtoMsg(message: CodeGeneratorResponseProtoMsg, useInterfaces: boolean = true): CodeGeneratorResponse {
     return CodeGeneratorResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CodeGeneratorResponse): Uint8Array {
@@ -664,7 +664,7 @@ export const CodeGeneratorResponse_File = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CodeGeneratorResponse_File {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CodeGeneratorResponse_File {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCodeGeneratorResponse_File();
@@ -729,14 +729,14 @@ export const CodeGeneratorResponse_File = {
       content: object.content
     };
   },
-  toAmino(message: CodeGeneratorResponse_File, useInterfaces: boolean = false): CodeGeneratorResponse_FileAmino {
+  toAmino(message: CodeGeneratorResponse_File, useInterfaces: boolean = true): CodeGeneratorResponse_FileAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.insertion_point = message.insertionPoint;
     obj.content = message.content;
     return obj;
   },
-  fromProtoMsg(message: CodeGeneratorResponse_FileProtoMsg, useInterfaces: boolean = false): CodeGeneratorResponse_File {
+  fromProtoMsg(message: CodeGeneratorResponse_FileProtoMsg, useInterfaces: boolean = true): CodeGeneratorResponse_File {
     return CodeGeneratorResponse_File.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CodeGeneratorResponse_File): Uint8Array {

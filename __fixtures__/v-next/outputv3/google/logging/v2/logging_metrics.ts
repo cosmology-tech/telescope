@@ -589,7 +589,7 @@ export const LogMetric_LabelExtractorsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): LogMetric_LabelExtractorsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LogMetric_LabelExtractorsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogMetric_LabelExtractorsEntry();
@@ -645,13 +645,13 @@ export const LogMetric_LabelExtractorsEntry = {
       value: object.value
     };
   },
-  toAmino(message: LogMetric_LabelExtractorsEntry, useInterfaces: boolean = false): LogMetric_LabelExtractorsEntryAmino {
+  toAmino(message: LogMetric_LabelExtractorsEntry, useInterfaces: boolean = true): LogMetric_LabelExtractorsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
     return obj;
   },
-  fromProtoMsg(message: LogMetric_LabelExtractorsEntryProtoMsg, useInterfaces: boolean = false): LogMetric_LabelExtractorsEntry {
+  fromProtoMsg(message: LogMetric_LabelExtractorsEntryProtoMsg, useInterfaces: boolean = true): LogMetric_LabelExtractorsEntry {
     return LogMetric_LabelExtractorsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LogMetric_LabelExtractorsEntry): Uint8Array {
@@ -714,7 +714,7 @@ export const LogMetric = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): LogMetric {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LogMetric {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogMetric();
@@ -890,7 +890,7 @@ export const LogMetric = {
       version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
     };
   },
-  toAmino(message: LogMetric, useInterfaces: boolean = false): LogMetricAmino {
+  toAmino(message: LogMetric, useInterfaces: boolean = true): LogMetricAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.description = message.description;
@@ -910,7 +910,7 @@ export const LogMetric = {
     obj.version = message.version;
     return obj;
   },
-  fromProtoMsg(message: LogMetricProtoMsg, useInterfaces: boolean = false): LogMetric {
+  fromProtoMsg(message: LogMetricProtoMsg, useInterfaces: boolean = true): LogMetric {
     return LogMetric.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LogMetric): Uint8Array {
@@ -944,7 +944,7 @@ export const ListLogMetricsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListLogMetricsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListLogMetricsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogMetricsRequest();
@@ -1009,14 +1009,14 @@ export const ListLogMetricsRequest = {
       pageSize: object.page_size
     };
   },
-  toAmino(message: ListLogMetricsRequest, useInterfaces: boolean = false): ListLogMetricsRequestAmino {
+  toAmino(message: ListLogMetricsRequest, useInterfaces: boolean = true): ListLogMetricsRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
     obj.page_token = message.pageToken;
     obj.page_size = message.pageSize;
     return obj;
   },
-  fromProtoMsg(message: ListLogMetricsRequestProtoMsg, useInterfaces: boolean = false): ListLogMetricsRequest {
+  fromProtoMsg(message: ListLogMetricsRequestProtoMsg, useInterfaces: boolean = true): ListLogMetricsRequest {
     return ListLogMetricsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListLogMetricsRequest): Uint8Array {
@@ -1046,7 +1046,7 @@ export const ListLogMetricsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListLogMetricsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListLogMetricsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogMetricsResponse();
@@ -1110,7 +1110,7 @@ export const ListLogMetricsResponse = {
       nextPageToken: object.next_page_token
     };
   },
-  toAmino(message: ListLogMetricsResponse, useInterfaces: boolean = false): ListLogMetricsResponseAmino {
+  toAmino(message: ListLogMetricsResponse, useInterfaces: boolean = true): ListLogMetricsResponseAmino {
     const obj: any = {};
     if (message.metrics) {
       obj.metrics = message.metrics.map(e => e ? LogMetric.toAmino(e, useInterfaces) : undefined);
@@ -1120,7 +1120,7 @@ export const ListLogMetricsResponse = {
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromProtoMsg(message: ListLogMetricsResponseProtoMsg, useInterfaces: boolean = false): ListLogMetricsResponse {
+  fromProtoMsg(message: ListLogMetricsResponseProtoMsg, useInterfaces: boolean = true): ListLogMetricsResponse {
     return ListLogMetricsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListLogMetricsResponse): Uint8Array {
@@ -1146,7 +1146,7 @@ export const GetLogMetricRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetLogMetricRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetLogMetricRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLogMetricRequest();
@@ -1193,12 +1193,12 @@ export const GetLogMetricRequest = {
       metricName: object.metric_name
     };
   },
-  toAmino(message: GetLogMetricRequest, useInterfaces: boolean = false): GetLogMetricRequestAmino {
+  toAmino(message: GetLogMetricRequest, useInterfaces: boolean = true): GetLogMetricRequestAmino {
     const obj: any = {};
     obj.metric_name = message.metricName;
     return obj;
   },
-  fromProtoMsg(message: GetLogMetricRequestProtoMsg, useInterfaces: boolean = false): GetLogMetricRequest {
+  fromProtoMsg(message: GetLogMetricRequestProtoMsg, useInterfaces: boolean = true): GetLogMetricRequest {
     return GetLogMetricRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetLogMetricRequest): Uint8Array {
@@ -1228,7 +1228,7 @@ export const CreateLogMetricRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CreateLogMetricRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CreateLogMetricRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateLogMetricRequest();
@@ -1286,13 +1286,13 @@ export const CreateLogMetricRequest = {
       metric: object?.metric ? LogMetric.fromAmino(object.metric) : undefined
     };
   },
-  toAmino(message: CreateLogMetricRequest, useInterfaces: boolean = false): CreateLogMetricRequestAmino {
+  toAmino(message: CreateLogMetricRequest, useInterfaces: boolean = true): CreateLogMetricRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
     obj.metric = message.metric ? LogMetric.toAmino(message.metric, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: CreateLogMetricRequestProtoMsg, useInterfaces: boolean = false): CreateLogMetricRequest {
+  fromProtoMsg(message: CreateLogMetricRequestProtoMsg, useInterfaces: boolean = true): CreateLogMetricRequest {
     return CreateLogMetricRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CreateLogMetricRequest): Uint8Array {
@@ -1322,7 +1322,7 @@ export const UpdateLogMetricRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): UpdateLogMetricRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpdateLogMetricRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateLogMetricRequest();
@@ -1380,13 +1380,13 @@ export const UpdateLogMetricRequest = {
       metric: object?.metric ? LogMetric.fromAmino(object.metric) : undefined
     };
   },
-  toAmino(message: UpdateLogMetricRequest, useInterfaces: boolean = false): UpdateLogMetricRequestAmino {
+  toAmino(message: UpdateLogMetricRequest, useInterfaces: boolean = true): UpdateLogMetricRequestAmino {
     const obj: any = {};
     obj.metric_name = message.metricName;
     obj.metric = message.metric ? LogMetric.toAmino(message.metric, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: UpdateLogMetricRequestProtoMsg, useInterfaces: boolean = false): UpdateLogMetricRequest {
+  fromProtoMsg(message: UpdateLogMetricRequestProtoMsg, useInterfaces: boolean = true): UpdateLogMetricRequest {
     return UpdateLogMetricRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpdateLogMetricRequest): Uint8Array {
@@ -1412,7 +1412,7 @@ export const DeleteLogMetricRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DeleteLogMetricRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DeleteLogMetricRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteLogMetricRequest();
@@ -1459,12 +1459,12 @@ export const DeleteLogMetricRequest = {
       metricName: object.metric_name
     };
   },
-  toAmino(message: DeleteLogMetricRequest, useInterfaces: boolean = false): DeleteLogMetricRequestAmino {
+  toAmino(message: DeleteLogMetricRequest, useInterfaces: boolean = true): DeleteLogMetricRequestAmino {
     const obj: any = {};
     obj.metric_name = message.metricName;
     return obj;
   },
-  fromProtoMsg(message: DeleteLogMetricRequestProtoMsg, useInterfaces: boolean = false): DeleteLogMetricRequest {
+  fromProtoMsg(message: DeleteLogMetricRequestProtoMsg, useInterfaces: boolean = true): DeleteLogMetricRequest {
     return DeleteLogMetricRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DeleteLogMetricRequest): Uint8Array {

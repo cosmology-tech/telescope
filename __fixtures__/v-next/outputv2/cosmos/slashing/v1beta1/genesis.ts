@@ -158,7 +158,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -241,7 +241,7 @@ export const GenesisState = {
       missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => ValidatorMissedBlocks.fromAmino(e)) : []
     };
   },
-  toAmino(message: GenesisState, useInterfaces: boolean = false): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     if (message.signingInfos) {
@@ -259,13 +259,13 @@ export const GenesisState = {
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
   },
-  toAminoMsg(message: GenesisState, useInterfaces: boolean = false): GenesisStateAminoMsg {
+  toAminoMsg(message: GenesisState, useInterfaces: boolean = true): GenesisStateAminoMsg {
     return {
       type: "cosmos-sdk/GenesisState",
       value: GenesisState.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = false): GenesisState {
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
     return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
@@ -296,7 +296,7 @@ export const SigningInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SigningInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SigningInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSigningInfo();
@@ -354,7 +354,7 @@ export const SigningInfo = {
       validatorSigningInfo: object?.validator_signing_info ? ValidatorSigningInfo.fromAmino(object.validator_signing_info) : undefined
     };
   },
-  toAmino(message: SigningInfo, useInterfaces: boolean = false): SigningInfoAmino {
+  toAmino(message: SigningInfo, useInterfaces: boolean = true): SigningInfoAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.validator_signing_info = message.validatorSigningInfo ? ValidatorSigningInfo.toAmino(message.validatorSigningInfo, useInterfaces) : undefined;
@@ -363,13 +363,13 @@ export const SigningInfo = {
   fromAminoMsg(object: SigningInfoAminoMsg): SigningInfo {
     return SigningInfo.fromAmino(object.value);
   },
-  toAminoMsg(message: SigningInfo, useInterfaces: boolean = false): SigningInfoAminoMsg {
+  toAminoMsg(message: SigningInfo, useInterfaces: boolean = true): SigningInfoAminoMsg {
     return {
       type: "cosmos-sdk/SigningInfo",
       value: SigningInfo.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: SigningInfoProtoMsg, useInterfaces: boolean = false): SigningInfo {
+  fromProtoMsg(message: SigningInfoProtoMsg, useInterfaces: boolean = true): SigningInfo {
     return SigningInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SigningInfo): Uint8Array {
@@ -400,7 +400,7 @@ export const ValidatorMissedBlocks = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ValidatorMissedBlocks {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorMissedBlocks {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorMissedBlocks();
@@ -464,7 +464,7 @@ export const ValidatorMissedBlocks = {
       missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => MissedBlock.fromAmino(e)) : []
     };
   },
-  toAmino(message: ValidatorMissedBlocks, useInterfaces: boolean = false): ValidatorMissedBlocksAmino {
+  toAmino(message: ValidatorMissedBlocks, useInterfaces: boolean = true): ValidatorMissedBlocksAmino {
     const obj: any = {};
     obj.address = message.address;
     if (message.missedBlocks) {
@@ -477,13 +477,13 @@ export const ValidatorMissedBlocks = {
   fromAminoMsg(object: ValidatorMissedBlocksAminoMsg): ValidatorMissedBlocks {
     return ValidatorMissedBlocks.fromAmino(object.value);
   },
-  toAminoMsg(message: ValidatorMissedBlocks, useInterfaces: boolean = false): ValidatorMissedBlocksAminoMsg {
+  toAminoMsg(message: ValidatorMissedBlocks, useInterfaces: boolean = true): ValidatorMissedBlocksAminoMsg {
     return {
       type: "cosmos-sdk/ValidatorMissedBlocks",
       value: ValidatorMissedBlocks.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ValidatorMissedBlocksProtoMsg, useInterfaces: boolean = false): ValidatorMissedBlocks {
+  fromProtoMsg(message: ValidatorMissedBlocksProtoMsg, useInterfaces: boolean = true): ValidatorMissedBlocks {
     return ValidatorMissedBlocks.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorMissedBlocks): Uint8Array {
@@ -514,7 +514,7 @@ export const MissedBlock = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MissedBlock {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MissedBlock {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMissedBlock();
@@ -572,7 +572,7 @@ export const MissedBlock = {
       missed: object.missed
     };
   },
-  toAmino(message: MissedBlock, useInterfaces: boolean = false): MissedBlockAmino {
+  toAmino(message: MissedBlock, useInterfaces: boolean = true): MissedBlockAmino {
     const obj: any = {};
     obj.index = message.index ? message.index.toString() : undefined;
     obj.missed = message.missed;
@@ -581,13 +581,13 @@ export const MissedBlock = {
   fromAminoMsg(object: MissedBlockAminoMsg): MissedBlock {
     return MissedBlock.fromAmino(object.value);
   },
-  toAminoMsg(message: MissedBlock, useInterfaces: boolean = false): MissedBlockAminoMsg {
+  toAminoMsg(message: MissedBlock, useInterfaces: boolean = true): MissedBlockAminoMsg {
     return {
       type: "cosmos-sdk/MissedBlock",
       value: MissedBlock.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MissedBlockProtoMsg, useInterfaces: boolean = false): MissedBlock {
+  fromProtoMsg(message: MissedBlockProtoMsg, useInterfaces: boolean = true): MissedBlock {
     return MissedBlock.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MissedBlock): Uint8Array {

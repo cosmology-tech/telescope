@@ -359,7 +359,7 @@ export const Distribution = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Distribution {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Distribution {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution();
@@ -518,7 +518,7 @@ export const Distribution = {
       exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromAmino(e)) : []
     };
   },
-  toAmino(message: Distribution, useInterfaces: boolean = false): DistributionAmino {
+  toAmino(message: Distribution, useInterfaces: boolean = true): DistributionAmino {
     const obj: any = {};
     obj.count = message.count ? message.count.toString() : undefined;
     obj.mean = message.mean;
@@ -543,7 +543,7 @@ export const Distribution = {
   fromAminoMsg(object: DistributionAminoMsg): Distribution {
     return Distribution.fromAmino(object.value);
   },
-  fromProtoMsg(message: DistributionProtoMsg, useInterfaces: boolean = false): Distribution {
+  fromProtoMsg(message: DistributionProtoMsg, useInterfaces: boolean = true): Distribution {
     return Distribution.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Distribution): Uint8Array {
@@ -577,7 +577,7 @@ export const Distribution_LinearBuckets = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Distribution_LinearBuckets {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Distribution_LinearBuckets {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_LinearBuckets();
@@ -642,7 +642,7 @@ export const Distribution_LinearBuckets = {
       offset: object.offset
     };
   },
-  toAmino(message: Distribution_LinearBuckets, useInterfaces: boolean = false): Distribution_LinearBucketsAmino {
+  toAmino(message: Distribution_LinearBuckets, useInterfaces: boolean = true): Distribution_LinearBucketsAmino {
     const obj: any = {};
     obj.num_finite_buckets = message.numFiniteBuckets;
     obj.width = message.width;
@@ -652,7 +652,7 @@ export const Distribution_LinearBuckets = {
   fromAminoMsg(object: Distribution_LinearBucketsAminoMsg): Distribution_LinearBuckets {
     return Distribution_LinearBuckets.fromAmino(object.value);
   },
-  fromProtoMsg(message: Distribution_LinearBucketsProtoMsg, useInterfaces: boolean = false): Distribution_LinearBuckets {
+  fromProtoMsg(message: Distribution_LinearBucketsProtoMsg, useInterfaces: boolean = true): Distribution_LinearBuckets {
     return Distribution_LinearBuckets.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Distribution_LinearBuckets): Uint8Array {
@@ -686,7 +686,7 @@ export const Distribution_ExponentialBuckets = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Distribution_ExponentialBuckets {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Distribution_ExponentialBuckets {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_ExponentialBuckets();
@@ -751,7 +751,7 @@ export const Distribution_ExponentialBuckets = {
       scale: object.scale
     };
   },
-  toAmino(message: Distribution_ExponentialBuckets, useInterfaces: boolean = false): Distribution_ExponentialBucketsAmino {
+  toAmino(message: Distribution_ExponentialBuckets, useInterfaces: boolean = true): Distribution_ExponentialBucketsAmino {
     const obj: any = {};
     obj.num_finite_buckets = message.numFiniteBuckets;
     obj.growth_factor = message.growthFactor;
@@ -761,7 +761,7 @@ export const Distribution_ExponentialBuckets = {
   fromAminoMsg(object: Distribution_ExponentialBucketsAminoMsg): Distribution_ExponentialBuckets {
     return Distribution_ExponentialBuckets.fromAmino(object.value);
   },
-  fromProtoMsg(message: Distribution_ExponentialBucketsProtoMsg, useInterfaces: boolean = false): Distribution_ExponentialBuckets {
+  fromProtoMsg(message: Distribution_ExponentialBucketsProtoMsg, useInterfaces: boolean = true): Distribution_ExponentialBuckets {
     return Distribution_ExponentialBuckets.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Distribution_ExponentialBuckets): Uint8Array {
@@ -789,7 +789,7 @@ export const Distribution_ExplicitBuckets = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Distribution_ExplicitBuckets {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Distribution_ExplicitBuckets {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistribution_ExplicitBuckets();
@@ -851,7 +851,7 @@ export const Distribution_ExplicitBuckets = {
       bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => e) : []
     };
   },
-  toAmino(message: Distribution_ExplicitBuckets, useInterfaces: boolean = false): Distribution_ExplicitBucketsAmino {
+  toAmino(message: Distribution_ExplicitBuckets, useInterfaces: boolean = true): Distribution_ExplicitBucketsAmino {
     const obj: any = {};
     if (message.bounds) {
       obj.bounds = message.bounds.map(e => e);
@@ -863,7 +863,7 @@ export const Distribution_ExplicitBuckets = {
   fromAminoMsg(object: Distribution_ExplicitBucketsAminoMsg): Distribution_ExplicitBuckets {
     return Distribution_ExplicitBuckets.fromAmino(object.value);
   },
-  fromProtoMsg(message: Distribution_ExplicitBucketsProtoMsg, useInterfaces: boolean = false): Distribution_ExplicitBuckets {
+  fromProtoMsg(message: Distribution_ExplicitBucketsProtoMsg, useInterfaces: boolean = true): Distribution_ExplicitBuckets {
     return Distribution_ExplicitBuckets.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Distribution_ExplicitBuckets): Uint8Array {

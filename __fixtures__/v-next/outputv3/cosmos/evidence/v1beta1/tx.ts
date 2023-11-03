@@ -69,7 +69,7 @@ export const MsgSubmitEvidence = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSubmitEvidence {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSubmitEvidence {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitEvidence();
@@ -127,13 +127,13 @@ export const MsgSubmitEvidence = {
       evidence: object?.evidence ? Evidence_FromAmino(object.evidence) : undefined
     };
   },
-  toAmino(message: MsgSubmitEvidence, useInterfaces: boolean = false): MsgSubmitEvidenceAmino {
+  toAmino(message: MsgSubmitEvidence, useInterfaces: boolean = true): MsgSubmitEvidenceAmino {
     const obj: any = {};
     obj.submitter = message.submitter;
     obj.evidence = message.evidence ? Evidence_ToAmino((message.evidence as Any), useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: MsgSubmitEvidenceProtoMsg, useInterfaces: boolean = false): MsgSubmitEvidence {
+  fromProtoMsg(message: MsgSubmitEvidenceProtoMsg, useInterfaces: boolean = true): MsgSubmitEvidence {
     return MsgSubmitEvidence.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSubmitEvidence): Uint8Array {
@@ -160,7 +160,7 @@ export const MsgSubmitEvidenceResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSubmitEvidenceResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSubmitEvidenceResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitEvidenceResponse();
@@ -207,12 +207,12 @@ export const MsgSubmitEvidenceResponse = {
       hash: object.hash
     };
   },
-  toAmino(message: MsgSubmitEvidenceResponse, useInterfaces: boolean = false): MsgSubmitEvidenceResponseAmino {
+  toAmino(message: MsgSubmitEvidenceResponse, useInterfaces: boolean = true): MsgSubmitEvidenceResponseAmino {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
   },
-  fromProtoMsg(message: MsgSubmitEvidenceResponseProtoMsg, useInterfaces: boolean = false): MsgSubmitEvidenceResponse {
+  fromProtoMsg(message: MsgSubmitEvidenceResponseProtoMsg, useInterfaces: boolean = true): MsgSubmitEvidenceResponse {
     return MsgSubmitEvidenceResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSubmitEvidenceResponse): Uint8Array {
@@ -236,6 +236,6 @@ export const Evidence_InterfaceDecoder = (input: BinaryReader | Uint8Array): Any
 export const Evidence_FromAmino = (content: AnyAmino) => {
   return Any.fromAmino(content);
 };
-export const Evidence_ToAmino = (content: Any, useInterfaces: boolean = false) => {
+export const Evidence_ToAmino = (content: Any, useInterfaces: boolean = true) => {
   return Any.toAmino(content, useInterfaces);
 };

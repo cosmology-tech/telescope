@@ -101,7 +101,7 @@ export const QueryParamsRequest = {
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -137,20 +137,20 @@ export const QueryParamsRequest = {
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
-  toAmino(_: QueryParamsRequest, useInterfaces: boolean = false): QueryParamsRequestAmino {
+  toAmino(_: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
     return QueryParamsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryParamsRequest, useInterfaces: boolean = false): QueryParamsRequestAminoMsg {
+  toAminoMsg(message: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAminoMsg {
     return {
       type: "osmosis/mint/query-params-request",
       value: QueryParamsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = false): QueryParamsRequest {
+  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = true): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsRequest): Uint8Array {
@@ -177,7 +177,7 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -226,7 +226,7 @@ export const QueryParamsResponse = {
       params: object?.params ? Params.fromAmino(object.params) : undefined
     };
   },
-  toAmino(message: QueryParamsResponse, useInterfaces: boolean = false): QueryParamsResponseAmino {
+  toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     return obj;
@@ -234,13 +234,13 @@ export const QueryParamsResponse = {
   fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
     return QueryParamsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryParamsResponse, useInterfaces: boolean = false): QueryParamsResponseAminoMsg {
+  toAminoMsg(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAminoMsg {
     return {
       type: "osmosis/mint/query-params-response",
       value: QueryParamsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = false): QueryParamsResponse {
+  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = true): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsResponse): Uint8Array {
@@ -262,7 +262,7 @@ export const QueryEpochProvisionsRequest = {
   encode(_: QueryEpochProvisionsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryEpochProvisionsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryEpochProvisionsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEpochProvisionsRequest();
@@ -298,20 +298,20 @@ export const QueryEpochProvisionsRequest = {
   fromAmino(_: QueryEpochProvisionsRequestAmino): QueryEpochProvisionsRequest {
     return {};
   },
-  toAmino(_: QueryEpochProvisionsRequest, useInterfaces: boolean = false): QueryEpochProvisionsRequestAmino {
+  toAmino(_: QueryEpochProvisionsRequest, useInterfaces: boolean = true): QueryEpochProvisionsRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryEpochProvisionsRequestAminoMsg): QueryEpochProvisionsRequest {
     return QueryEpochProvisionsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryEpochProvisionsRequest, useInterfaces: boolean = false): QueryEpochProvisionsRequestAminoMsg {
+  toAminoMsg(message: QueryEpochProvisionsRequest, useInterfaces: boolean = true): QueryEpochProvisionsRequestAminoMsg {
     return {
       type: "osmosis/mint/query-epoch-provisions-request",
       value: QueryEpochProvisionsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryEpochProvisionsRequestProtoMsg, useInterfaces: boolean = false): QueryEpochProvisionsRequest {
+  fromProtoMsg(message: QueryEpochProvisionsRequestProtoMsg, useInterfaces: boolean = true): QueryEpochProvisionsRequest {
     return QueryEpochProvisionsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryEpochProvisionsRequest): Uint8Array {
@@ -338,7 +338,7 @@ export const QueryEpochProvisionsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryEpochProvisionsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryEpochProvisionsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEpochProvisionsResponse();
@@ -385,7 +385,7 @@ export const QueryEpochProvisionsResponse = {
       epochProvisions: object.epoch_provisions
     };
   },
-  toAmino(message: QueryEpochProvisionsResponse, useInterfaces: boolean = false): QueryEpochProvisionsResponseAmino {
+  toAmino(message: QueryEpochProvisionsResponse, useInterfaces: boolean = true): QueryEpochProvisionsResponseAmino {
     const obj: any = {};
     obj.epoch_provisions = message.epochProvisions;
     return obj;
@@ -393,13 +393,13 @@ export const QueryEpochProvisionsResponse = {
   fromAminoMsg(object: QueryEpochProvisionsResponseAminoMsg): QueryEpochProvisionsResponse {
     return QueryEpochProvisionsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryEpochProvisionsResponse, useInterfaces: boolean = false): QueryEpochProvisionsResponseAminoMsg {
+  toAminoMsg(message: QueryEpochProvisionsResponse, useInterfaces: boolean = true): QueryEpochProvisionsResponseAminoMsg {
     return {
       type: "osmosis/mint/query-epoch-provisions-response",
       value: QueryEpochProvisionsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryEpochProvisionsResponseProtoMsg, useInterfaces: boolean = false): QueryEpochProvisionsResponse {
+  fromProtoMsg(message: QueryEpochProvisionsResponseProtoMsg, useInterfaces: boolean = true): QueryEpochProvisionsResponse {
     return QueryEpochProvisionsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryEpochProvisionsResponse): Uint8Array {

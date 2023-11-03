@@ -53,7 +53,7 @@ export const FeeToken = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): FeeToken {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): FeeToken {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFeeToken();
@@ -111,13 +111,13 @@ export const FeeToken = {
       poolID: BigInt(object.poolID)
     };
   },
-  toAmino(message: FeeToken, useInterfaces: boolean = false): FeeTokenAmino {
+  toAmino(message: FeeToken, useInterfaces: boolean = true): FeeTokenAmino {
     const obj: any = {};
     obj.denom = message.denom;
     obj.poolID = message.poolID ? message.poolID.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: FeeTokenProtoMsg, useInterfaces: boolean = false): FeeToken {
+  fromProtoMsg(message: FeeTokenProtoMsg, useInterfaces: boolean = true): FeeToken {
     return FeeToken.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: FeeToken): Uint8Array {

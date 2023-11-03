@@ -119,7 +119,7 @@ export const MsgConvertCoin = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConvertCoin {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgConvertCoin {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConvertCoin();
@@ -186,14 +186,14 @@ export const MsgConvertCoin = {
       sender: object.sender
     };
   },
-  toAmino(message: MsgConvertCoin, useInterfaces: boolean = false): MsgConvertCoinAmino {
+  toAmino(message: MsgConvertCoin, useInterfaces: boolean = true): MsgConvertCoinAmino {
     const obj: any = {};
     obj.coin = message.coin ? Coin.toAmino(message.coin, useInterfaces) : undefined;
     obj.receiver = message.receiver;
     obj.sender = message.sender;
     return obj;
   },
-  fromProtoMsg(message: MsgConvertCoinProtoMsg, useInterfaces: boolean = false): MsgConvertCoin {
+  fromProtoMsg(message: MsgConvertCoinProtoMsg, useInterfaces: boolean = true): MsgConvertCoin {
     return MsgConvertCoin.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConvertCoin): Uint8Array {
@@ -214,7 +214,7 @@ export const MsgConvertCoinResponse = {
   encode(_: MsgConvertCoinResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConvertCoinResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgConvertCoinResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConvertCoinResponse();
@@ -250,11 +250,11 @@ export const MsgConvertCoinResponse = {
   fromAmino(_: MsgConvertCoinResponseAmino): MsgConvertCoinResponse {
     return {};
   },
-  toAmino(_: MsgConvertCoinResponse, useInterfaces: boolean = false): MsgConvertCoinResponseAmino {
+  toAmino(_: MsgConvertCoinResponse, useInterfaces: boolean = true): MsgConvertCoinResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgConvertCoinResponseProtoMsg, useInterfaces: boolean = false): MsgConvertCoinResponse {
+  fromProtoMsg(message: MsgConvertCoinResponseProtoMsg, useInterfaces: boolean = true): MsgConvertCoinResponse {
     return MsgConvertCoinResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConvertCoinResponse): Uint8Array {
@@ -292,7 +292,7 @@ export const MsgConvertERC20 = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConvertERC20 {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgConvertERC20 {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConvertERC20();
@@ -366,7 +366,7 @@ export const MsgConvertERC20 = {
       sender: object.sender
     };
   },
-  toAmino(message: MsgConvertERC20, useInterfaces: boolean = false): MsgConvertERC20Amino {
+  toAmino(message: MsgConvertERC20, useInterfaces: boolean = true): MsgConvertERC20Amino {
     const obj: any = {};
     obj.contract_address = message.contractAddress;
     obj.amount = message.amount;
@@ -374,7 +374,7 @@ export const MsgConvertERC20 = {
     obj.sender = message.sender;
     return obj;
   },
-  fromProtoMsg(message: MsgConvertERC20ProtoMsg, useInterfaces: boolean = false): MsgConvertERC20 {
+  fromProtoMsg(message: MsgConvertERC20ProtoMsg, useInterfaces: boolean = true): MsgConvertERC20 {
     return MsgConvertERC20.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConvertERC20): Uint8Array {
@@ -395,7 +395,7 @@ export const MsgConvertERC20Response = {
   encode(_: MsgConvertERC20Response, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConvertERC20Response {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgConvertERC20Response {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConvertERC20Response();
@@ -431,11 +431,11 @@ export const MsgConvertERC20Response = {
   fromAmino(_: MsgConvertERC20ResponseAmino): MsgConvertERC20Response {
     return {};
   },
-  toAmino(_: MsgConvertERC20Response, useInterfaces: boolean = false): MsgConvertERC20ResponseAmino {
+  toAmino(_: MsgConvertERC20Response, useInterfaces: boolean = true): MsgConvertERC20ResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgConvertERC20ResponseProtoMsg, useInterfaces: boolean = false): MsgConvertERC20Response {
+  fromProtoMsg(message: MsgConvertERC20ResponseProtoMsg, useInterfaces: boolean = true): MsgConvertERC20Response {
     return MsgConvertERC20Response.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConvertERC20Response): Uint8Array {

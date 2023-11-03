@@ -46,7 +46,7 @@ export const GroupSpec = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GroupSpec {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GroupSpec {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGroupSpec();
@@ -121,7 +121,7 @@ export const GroupSpec = {
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromAmino(e)) : []
     };
   },
-  toAmino(message: GroupSpec, useInterfaces: boolean = false): GroupSpecAmino {
+  toAmino(message: GroupSpec, useInterfaces: boolean = true): GroupSpecAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements, useInterfaces) : undefined;
@@ -132,7 +132,7 @@ export const GroupSpec = {
     }
     return obj;
   },
-  fromProtoMsg(message: GroupSpecProtoMsg, useInterfaces: boolean = false): GroupSpec {
+  fromProtoMsg(message: GroupSpecProtoMsg, useInterfaces: boolean = true): GroupSpec {
     return GroupSpec.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GroupSpec): Uint8Array {

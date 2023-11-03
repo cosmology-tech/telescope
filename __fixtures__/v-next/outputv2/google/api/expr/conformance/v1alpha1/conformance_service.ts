@@ -382,7 +382,7 @@ export const ParseRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ParseRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ParseRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParseRequest();
@@ -456,7 +456,7 @@ export const ParseRequest = {
       disableMacros: object.disable_macros
     };
   },
-  toAmino(message: ParseRequest, useInterfaces: boolean = false): ParseRequestAmino {
+  toAmino(message: ParseRequest, useInterfaces: boolean = true): ParseRequestAmino {
     const obj: any = {};
     obj.cel_source = message.celSource;
     obj.syntax_version = message.syntaxVersion;
@@ -467,7 +467,7 @@ export const ParseRequest = {
   fromAminoMsg(object: ParseRequestAminoMsg): ParseRequest {
     return ParseRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: ParseRequestProtoMsg, useInterfaces: boolean = false): ParseRequest {
+  fromProtoMsg(message: ParseRequestProtoMsg, useInterfaces: boolean = true): ParseRequest {
     return ParseRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ParseRequest): Uint8Array {
@@ -497,7 +497,7 @@ export const ParseResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ParseResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ParseResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParseResponse();
@@ -563,7 +563,7 @@ export const ParseResponse = {
       issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromAmino(e)) : []
     };
   },
-  toAmino(message: ParseResponse, useInterfaces: boolean = false): ParseResponseAmino {
+  toAmino(message: ParseResponse, useInterfaces: boolean = true): ParseResponseAmino {
     const obj: any = {};
     obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr, useInterfaces) : undefined;
     if (message.issues) {
@@ -576,7 +576,7 @@ export const ParseResponse = {
   fromAminoMsg(object: ParseResponseAminoMsg): ParseResponse {
     return ParseResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: ParseResponseProtoMsg, useInterfaces: boolean = false): ParseResponse {
+  fromProtoMsg(message: ParseResponseProtoMsg, useInterfaces: boolean = true): ParseResponse {
     return ParseResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ParseResponse): Uint8Array {
@@ -614,7 +614,7 @@ export const CheckRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CheckRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CheckRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckRequest();
@@ -698,7 +698,7 @@ export const CheckRequest = {
       noStdEnv: object.no_std_env
     };
   },
-  toAmino(message: CheckRequest, useInterfaces: boolean = false): CheckRequestAmino {
+  toAmino(message: CheckRequest, useInterfaces: boolean = true): CheckRequestAmino {
     const obj: any = {};
     obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr, useInterfaces) : undefined;
     if (message.typeEnv) {
@@ -713,7 +713,7 @@ export const CheckRequest = {
   fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
     return CheckRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: CheckRequestProtoMsg, useInterfaces: boolean = false): CheckRequest {
+  fromProtoMsg(message: CheckRequestProtoMsg, useInterfaces: boolean = true): CheckRequest {
     return CheckRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CheckRequest): Uint8Array {
@@ -743,7 +743,7 @@ export const CheckResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CheckResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CheckResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResponse();
@@ -809,7 +809,7 @@ export const CheckResponse = {
       issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromAmino(e)) : []
     };
   },
-  toAmino(message: CheckResponse, useInterfaces: boolean = false): CheckResponseAmino {
+  toAmino(message: CheckResponse, useInterfaces: boolean = true): CheckResponseAmino {
     const obj: any = {};
     obj.checked_expr = message.checkedExpr ? CheckedExpr.toAmino(message.checkedExpr, useInterfaces) : undefined;
     if (message.issues) {
@@ -822,7 +822,7 @@ export const CheckResponse = {
   fromAminoMsg(object: CheckResponseAminoMsg): CheckResponse {
     return CheckResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: CheckResponseProtoMsg, useInterfaces: boolean = false): CheckResponse {
+  fromProtoMsg(message: CheckResponseProtoMsg, useInterfaces: boolean = true): CheckResponse {
     return CheckResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CheckResponse): Uint8Array {
@@ -851,7 +851,7 @@ export const EvalRequest_BindingsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): EvalRequest_BindingsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EvalRequest_BindingsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalRequest_BindingsEntry();
@@ -909,7 +909,7 @@ export const EvalRequest_BindingsEntry = {
       value: object?.value ? ExprValue.fromAmino(object.value) : undefined
     };
   },
-  toAmino(message: EvalRequest_BindingsEntry, useInterfaces: boolean = false): EvalRequest_BindingsEntryAmino {
+  toAmino(message: EvalRequest_BindingsEntry, useInterfaces: boolean = true): EvalRequest_BindingsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value ? ExprValue.toAmino(message.value, useInterfaces) : undefined;
@@ -918,7 +918,7 @@ export const EvalRequest_BindingsEntry = {
   fromAminoMsg(object: EvalRequest_BindingsEntryAminoMsg): EvalRequest_BindingsEntry {
     return EvalRequest_BindingsEntry.fromAmino(object.value);
   },
-  fromProtoMsg(message: EvalRequest_BindingsEntryProtoMsg, useInterfaces: boolean = false): EvalRequest_BindingsEntry {
+  fromProtoMsg(message: EvalRequest_BindingsEntryProtoMsg, useInterfaces: boolean = true): EvalRequest_BindingsEntry {
     return EvalRequest_BindingsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EvalRequest_BindingsEntry): Uint8Array {
@@ -953,7 +953,7 @@ export const EvalRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): EvalRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EvalRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalRequest();
@@ -1066,7 +1066,7 @@ export const EvalRequest = {
       container: object.container
     };
   },
-  toAmino(message: EvalRequest, useInterfaces: boolean = false): EvalRequestAmino {
+  toAmino(message: EvalRequest, useInterfaces: boolean = true): EvalRequestAmino {
     const obj: any = {};
     obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr, useInterfaces) : undefined;
     obj.checked_expr = message.checkedExpr ? CheckedExpr.toAmino(message.checkedExpr, useInterfaces) : undefined;
@@ -1082,7 +1082,7 @@ export const EvalRequest = {
   fromAminoMsg(object: EvalRequestAminoMsg): EvalRequest {
     return EvalRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: EvalRequestProtoMsg, useInterfaces: boolean = false): EvalRequest {
+  fromProtoMsg(message: EvalRequestProtoMsg, useInterfaces: boolean = true): EvalRequest {
     return EvalRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EvalRequest): Uint8Array {
@@ -1112,7 +1112,7 @@ export const EvalResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): EvalResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EvalResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalResponse();
@@ -1178,7 +1178,7 @@ export const EvalResponse = {
       issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromAmino(e)) : []
     };
   },
-  toAmino(message: EvalResponse, useInterfaces: boolean = false): EvalResponseAmino {
+  toAmino(message: EvalResponse, useInterfaces: boolean = true): EvalResponseAmino {
     const obj: any = {};
     obj.result = message.result ? ExprValue.toAmino(message.result, useInterfaces) : undefined;
     if (message.issues) {
@@ -1191,7 +1191,7 @@ export const EvalResponse = {
   fromAminoMsg(object: EvalResponseAminoMsg): EvalResponse {
     return EvalResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: EvalResponseProtoMsg, useInterfaces: boolean = false): EvalResponse {
+  fromProtoMsg(message: EvalResponseProtoMsg, useInterfaces: boolean = true): EvalResponse {
     return EvalResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EvalResponse): Uint8Array {
@@ -1225,7 +1225,7 @@ export const IssueDetails = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): IssueDetails {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): IssueDetails {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIssueDetails();
@@ -1294,7 +1294,7 @@ export const IssueDetails = {
       id: BigInt(object.id)
     };
   },
-  toAmino(message: IssueDetails, useInterfaces: boolean = false): IssueDetailsAmino {
+  toAmino(message: IssueDetails, useInterfaces: boolean = true): IssueDetailsAmino {
     const obj: any = {};
     obj.severity = message.severity;
     obj.position = message.position ? SourcePosition.toAmino(message.position, useInterfaces) : undefined;
@@ -1304,7 +1304,7 @@ export const IssueDetails = {
   fromAminoMsg(object: IssueDetailsAminoMsg): IssueDetails {
     return IssueDetails.fromAmino(object.value);
   },
-  fromProtoMsg(message: IssueDetailsProtoMsg, useInterfaces: boolean = false): IssueDetails {
+  fromProtoMsg(message: IssueDetailsProtoMsg, useInterfaces: boolean = true): IssueDetails {
     return IssueDetails.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: IssueDetails): Uint8Array {

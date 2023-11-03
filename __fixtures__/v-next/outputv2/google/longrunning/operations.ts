@@ -390,7 +390,7 @@ export const Operation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Operation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Operation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation();
@@ -479,7 +479,7 @@ export const Operation = {
       response: object?.response ? Any.fromAmino(object.response) : undefined
     };
   },
-  toAmino(message: Operation, useInterfaces: boolean = false): OperationAmino {
+  toAmino(message: Operation, useInterfaces: boolean = true): OperationAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.metadata = message.metadata ? Any.toAmino(message.metadata, useInterfaces) : undefined;
@@ -491,7 +491,7 @@ export const Operation = {
   fromAminoMsg(object: OperationAminoMsg): Operation {
     return Operation.fromAmino(object.value);
   },
-  fromProtoMsg(message: OperationProtoMsg, useInterfaces: boolean = false): Operation {
+  fromProtoMsg(message: OperationProtoMsg, useInterfaces: boolean = true): Operation {
     return Operation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Operation): Uint8Array {
@@ -517,7 +517,7 @@ export const GetOperationRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetOperationRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetOperationRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetOperationRequest();
@@ -564,7 +564,7 @@ export const GetOperationRequest = {
       name: object.name
     };
   },
-  toAmino(message: GetOperationRequest, useInterfaces: boolean = false): GetOperationRequestAmino {
+  toAmino(message: GetOperationRequest, useInterfaces: boolean = true): GetOperationRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -572,7 +572,7 @@ export const GetOperationRequest = {
   fromAminoMsg(object: GetOperationRequestAminoMsg): GetOperationRequest {
     return GetOperationRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: GetOperationRequestProtoMsg, useInterfaces: boolean = false): GetOperationRequest {
+  fromProtoMsg(message: GetOperationRequestProtoMsg, useInterfaces: boolean = true): GetOperationRequest {
     return GetOperationRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetOperationRequest): Uint8Array {
@@ -610,7 +610,7 @@ export const ListOperationsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListOperationsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListOperationsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListOperationsRequest();
@@ -684,7 +684,7 @@ export const ListOperationsRequest = {
       pageToken: object.page_token
     };
   },
-  toAmino(message: ListOperationsRequest, useInterfaces: boolean = false): ListOperationsRequestAmino {
+  toAmino(message: ListOperationsRequest, useInterfaces: boolean = true): ListOperationsRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.filter = message.filter;
@@ -695,7 +695,7 @@ export const ListOperationsRequest = {
   fromAminoMsg(object: ListOperationsRequestAminoMsg): ListOperationsRequest {
     return ListOperationsRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: ListOperationsRequestProtoMsg, useInterfaces: boolean = false): ListOperationsRequest {
+  fromProtoMsg(message: ListOperationsRequestProtoMsg, useInterfaces: boolean = true): ListOperationsRequest {
     return ListOperationsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListOperationsRequest): Uint8Array {
@@ -725,7 +725,7 @@ export const ListOperationsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListOperationsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListOperationsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListOperationsResponse();
@@ -789,7 +789,7 @@ export const ListOperationsResponse = {
       nextPageToken: object.next_page_token
     };
   },
-  toAmino(message: ListOperationsResponse, useInterfaces: boolean = false): ListOperationsResponseAmino {
+  toAmino(message: ListOperationsResponse, useInterfaces: boolean = true): ListOperationsResponseAmino {
     const obj: any = {};
     if (message.operations) {
       obj.operations = message.operations.map(e => e ? Operation.toAmino(e, useInterfaces) : undefined);
@@ -802,7 +802,7 @@ export const ListOperationsResponse = {
   fromAminoMsg(object: ListOperationsResponseAminoMsg): ListOperationsResponse {
     return ListOperationsResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: ListOperationsResponseProtoMsg, useInterfaces: boolean = false): ListOperationsResponse {
+  fromProtoMsg(message: ListOperationsResponseProtoMsg, useInterfaces: boolean = true): ListOperationsResponse {
     return ListOperationsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListOperationsResponse): Uint8Array {
@@ -828,7 +828,7 @@ export const CancelOperationRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CancelOperationRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CancelOperationRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCancelOperationRequest();
@@ -875,7 +875,7 @@ export const CancelOperationRequest = {
       name: object.name
     };
   },
-  toAmino(message: CancelOperationRequest, useInterfaces: boolean = false): CancelOperationRequestAmino {
+  toAmino(message: CancelOperationRequest, useInterfaces: boolean = true): CancelOperationRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -883,7 +883,7 @@ export const CancelOperationRequest = {
   fromAminoMsg(object: CancelOperationRequestAminoMsg): CancelOperationRequest {
     return CancelOperationRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: CancelOperationRequestProtoMsg, useInterfaces: boolean = false): CancelOperationRequest {
+  fromProtoMsg(message: CancelOperationRequestProtoMsg, useInterfaces: boolean = true): CancelOperationRequest {
     return CancelOperationRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CancelOperationRequest): Uint8Array {
@@ -909,7 +909,7 @@ export const DeleteOperationRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DeleteOperationRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DeleteOperationRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteOperationRequest();
@@ -956,7 +956,7 @@ export const DeleteOperationRequest = {
       name: object.name
     };
   },
-  toAmino(message: DeleteOperationRequest, useInterfaces: boolean = false): DeleteOperationRequestAmino {
+  toAmino(message: DeleteOperationRequest, useInterfaces: boolean = true): DeleteOperationRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -964,7 +964,7 @@ export const DeleteOperationRequest = {
   fromAminoMsg(object: DeleteOperationRequestAminoMsg): DeleteOperationRequest {
     return DeleteOperationRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: DeleteOperationRequestProtoMsg, useInterfaces: boolean = false): DeleteOperationRequest {
+  fromProtoMsg(message: DeleteOperationRequestProtoMsg, useInterfaces: boolean = true): DeleteOperationRequest {
     return DeleteOperationRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DeleteOperationRequest): Uint8Array {
@@ -994,7 +994,7 @@ export const WaitOperationRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): WaitOperationRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): WaitOperationRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWaitOperationRequest();
@@ -1052,7 +1052,7 @@ export const WaitOperationRequest = {
       timeout: object?.timeout ? Duration.fromAmino(object.timeout) : undefined
     };
   },
-  toAmino(message: WaitOperationRequest, useInterfaces: boolean = false): WaitOperationRequestAmino {
+  toAmino(message: WaitOperationRequest, useInterfaces: boolean = true): WaitOperationRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.timeout = message.timeout ? Duration.toAmino(message.timeout, useInterfaces) : undefined;
@@ -1061,7 +1061,7 @@ export const WaitOperationRequest = {
   fromAminoMsg(object: WaitOperationRequestAminoMsg): WaitOperationRequest {
     return WaitOperationRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: WaitOperationRequestProtoMsg, useInterfaces: boolean = false): WaitOperationRequest {
+  fromProtoMsg(message: WaitOperationRequestProtoMsg, useInterfaces: boolean = true): WaitOperationRequest {
     return WaitOperationRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: WaitOperationRequest): Uint8Array {
@@ -1091,7 +1091,7 @@ export const OperationInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): OperationInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): OperationInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperationInfo();
@@ -1147,7 +1147,7 @@ export const OperationInfo = {
       metadataType: object.metadata_type
     };
   },
-  toAmino(message: OperationInfo, useInterfaces: boolean = false): OperationInfoAmino {
+  toAmino(message: OperationInfo, useInterfaces: boolean = true): OperationInfoAmino {
     const obj: any = {};
     obj.response_type = message.responseType;
     obj.metadata_type = message.metadataType;
@@ -1156,7 +1156,7 @@ export const OperationInfo = {
   fromAminoMsg(object: OperationInfoAminoMsg): OperationInfo {
     return OperationInfo.fromAmino(object.value);
   },
-  fromProtoMsg(message: OperationInfoProtoMsg, useInterfaces: boolean = false): OperationInfo {
+  fromProtoMsg(message: OperationInfoProtoMsg, useInterfaces: boolean = true): OperationInfo {
     return OperationInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: OperationInfo): Uint8Array {

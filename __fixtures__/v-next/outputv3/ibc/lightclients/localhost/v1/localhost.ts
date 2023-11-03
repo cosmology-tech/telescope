@@ -52,7 +52,7 @@ export const ClientState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ClientState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ClientState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientState();
@@ -110,13 +110,13 @@ export const ClientState = {
       height: object?.height ? Height.fromAmino(object.height) : undefined
     };
   },
-  toAmino(message: ClientState, useInterfaces: boolean = false): ClientStateAmino {
+  toAmino(message: ClientState, useInterfaces: boolean = true): ClientStateAmino {
     const obj: any = {};
     obj.chain_id = message.chainId;
     obj.height = message.height ? Height.toAmino(message.height, useInterfaces) : {};
     return obj;
   },
-  fromProtoMsg(message: ClientStateProtoMsg, useInterfaces: boolean = false): ClientState {
+  fromProtoMsg(message: ClientStateProtoMsg, useInterfaces: boolean = true): ClientState {
     return ClientState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ClientState): Uint8Array {

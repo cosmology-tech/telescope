@@ -584,7 +584,7 @@ export const Authentication = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Authentication {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Authentication {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthentication();
@@ -656,7 +656,7 @@ export const Authentication = {
       providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => AuthProvider.fromAmino(e)) : []
     };
   },
-  toAmino(message: Authentication, useInterfaces: boolean = false): AuthenticationAmino {
+  toAmino(message: Authentication, useInterfaces: boolean = true): AuthenticationAmino {
     const obj: any = {};
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? AuthenticationRule.toAmino(e, useInterfaces) : undefined);
@@ -670,7 +670,7 @@ export const Authentication = {
     }
     return obj;
   },
-  fromProtoMsg(message: AuthenticationProtoMsg, useInterfaces: boolean = false): Authentication {
+  fromProtoMsg(message: AuthenticationProtoMsg, useInterfaces: boolean = true): Authentication {
     return Authentication.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Authentication): Uint8Array {
@@ -708,7 +708,7 @@ export const AuthenticationRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AuthenticationRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AuthenticationRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthenticationRule();
@@ -792,7 +792,7 @@ export const AuthenticationRule = {
       requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => AuthRequirement.fromAmino(e)) : []
     };
   },
-  toAmino(message: AuthenticationRule, useInterfaces: boolean = false): AuthenticationRuleAmino {
+  toAmino(message: AuthenticationRule, useInterfaces: boolean = true): AuthenticationRuleAmino {
     const obj: any = {};
     obj.selector = message.selector;
     obj.oauth = message.oauth ? OAuthRequirements.toAmino(message.oauth, useInterfaces) : undefined;
@@ -804,7 +804,7 @@ export const AuthenticationRule = {
     }
     return obj;
   },
-  fromProtoMsg(message: AuthenticationRuleProtoMsg, useInterfaces: boolean = false): AuthenticationRule {
+  fromProtoMsg(message: AuthenticationRuleProtoMsg, useInterfaces: boolean = true): AuthenticationRule {
     return AuthenticationRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AuthenticationRule): Uint8Array {
@@ -838,7 +838,7 @@ export const JwtLocation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): JwtLocation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): JwtLocation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseJwtLocation();
@@ -903,14 +903,14 @@ export const JwtLocation = {
       valuePrefix: object.value_prefix
     };
   },
-  toAmino(message: JwtLocation, useInterfaces: boolean = false): JwtLocationAmino {
+  toAmino(message: JwtLocation, useInterfaces: boolean = true): JwtLocationAmino {
     const obj: any = {};
     obj.header = message.header;
     obj.query = message.query;
     obj.value_prefix = message.valuePrefix;
     return obj;
   },
-  fromProtoMsg(message: JwtLocationProtoMsg, useInterfaces: boolean = false): JwtLocation {
+  fromProtoMsg(message: JwtLocationProtoMsg, useInterfaces: boolean = true): JwtLocation {
     return JwtLocation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: JwtLocation): Uint8Array {
@@ -956,7 +956,7 @@ export const AuthProvider = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AuthProvider {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AuthProvider {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthProvider();
@@ -1056,7 +1056,7 @@ export const AuthProvider = {
       jwtLocations: Array.isArray(object?.jwt_locations) ? object.jwt_locations.map((e: any) => JwtLocation.fromAmino(e)) : []
     };
   },
-  toAmino(message: AuthProvider, useInterfaces: boolean = false): AuthProviderAmino {
+  toAmino(message: AuthProvider, useInterfaces: boolean = true): AuthProviderAmino {
     const obj: any = {};
     obj.id = message.id;
     obj.issuer = message.issuer;
@@ -1070,7 +1070,7 @@ export const AuthProvider = {
     }
     return obj;
   },
-  fromProtoMsg(message: AuthProviderProtoMsg, useInterfaces: boolean = false): AuthProvider {
+  fromProtoMsg(message: AuthProviderProtoMsg, useInterfaces: boolean = true): AuthProvider {
     return AuthProvider.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AuthProvider): Uint8Array {
@@ -1096,7 +1096,7 @@ export const OAuthRequirements = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): OAuthRequirements {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): OAuthRequirements {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOAuthRequirements();
@@ -1143,12 +1143,12 @@ export const OAuthRequirements = {
       canonicalScopes: object.canonical_scopes
     };
   },
-  toAmino(message: OAuthRequirements, useInterfaces: boolean = false): OAuthRequirementsAmino {
+  toAmino(message: OAuthRequirements, useInterfaces: boolean = true): OAuthRequirementsAmino {
     const obj: any = {};
     obj.canonical_scopes = message.canonicalScopes;
     return obj;
   },
-  fromProtoMsg(message: OAuthRequirementsProtoMsg, useInterfaces: boolean = false): OAuthRequirements {
+  fromProtoMsg(message: OAuthRequirementsProtoMsg, useInterfaces: boolean = true): OAuthRequirements {
     return OAuthRequirements.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: OAuthRequirements): Uint8Array {
@@ -1178,7 +1178,7 @@ export const AuthRequirement = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AuthRequirement {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AuthRequirement {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthRequirement();
@@ -1234,13 +1234,13 @@ export const AuthRequirement = {
       audiences: object.audiences
     };
   },
-  toAmino(message: AuthRequirement, useInterfaces: boolean = false): AuthRequirementAmino {
+  toAmino(message: AuthRequirement, useInterfaces: boolean = true): AuthRequirementAmino {
     const obj: any = {};
     obj.provider_id = message.providerId;
     obj.audiences = message.audiences;
     return obj;
   },
-  fromProtoMsg(message: AuthRequirementProtoMsg, useInterfaces: boolean = false): AuthRequirement {
+  fromProtoMsg(message: AuthRequirementProtoMsg, useInterfaces: boolean = true): AuthRequirement {
     return AuthRequirement.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AuthRequirement): Uint8Array {

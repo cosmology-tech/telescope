@@ -506,7 +506,7 @@ export const Quota = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Quota {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Quota {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuota();
@@ -578,7 +578,7 @@ export const Quota = {
       metricRules: Array.isArray(object?.metric_rules) ? object.metric_rules.map((e: any) => MetricRule.fromAmino(e)) : []
     };
   },
-  toAmino(message: Quota, useInterfaces: boolean = false): QuotaAmino {
+  toAmino(message: Quota, useInterfaces: boolean = true): QuotaAmino {
     const obj: any = {};
     if (message.limits) {
       obj.limits = message.limits.map(e => e ? QuotaLimit.toAmino(e, useInterfaces) : undefined);
@@ -592,7 +592,7 @@ export const Quota = {
     }
     return obj;
   },
-  fromProtoMsg(message: QuotaProtoMsg, useInterfaces: boolean = false): Quota {
+  fromProtoMsg(message: QuotaProtoMsg, useInterfaces: boolean = true): Quota {
     return Quota.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Quota): Uint8Array {
@@ -621,7 +621,7 @@ export const MetricRule_MetricCostsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MetricRule_MetricCostsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MetricRule_MetricCostsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricRule_MetricCostsEntry();
@@ -679,13 +679,13 @@ export const MetricRule_MetricCostsEntry = {
       value: BigInt(object.value)
     };
   },
-  toAmino(message: MetricRule_MetricCostsEntry, useInterfaces: boolean = false): MetricRule_MetricCostsEntryAmino {
+  toAmino(message: MetricRule_MetricCostsEntry, useInterfaces: boolean = true): MetricRule_MetricCostsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value ? message.value.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: MetricRule_MetricCostsEntryProtoMsg, useInterfaces: boolean = false): MetricRule_MetricCostsEntry {
+  fromProtoMsg(message: MetricRule_MetricCostsEntryProtoMsg, useInterfaces: boolean = true): MetricRule_MetricCostsEntry {
     return MetricRule_MetricCostsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MetricRule_MetricCostsEntry): Uint8Array {
@@ -712,7 +712,7 @@ export const MetricRule = {
     });
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MetricRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MetricRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricRule();
@@ -803,7 +803,7 @@ export const MetricRule = {
       }, {}) : {}
     };
   },
-  toAmino(message: MetricRule, useInterfaces: boolean = false): MetricRuleAmino {
+  toAmino(message: MetricRule, useInterfaces: boolean = true): MetricRuleAmino {
     const obj: any = {};
     obj.selector = message.selector;
     obj.metric_costs = {};
@@ -814,7 +814,7 @@ export const MetricRule = {
     }
     return obj;
   },
-  fromProtoMsg(message: MetricRuleProtoMsg, useInterfaces: boolean = false): MetricRule {
+  fromProtoMsg(message: MetricRuleProtoMsg, useInterfaces: boolean = true): MetricRule {
     return MetricRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MetricRule): Uint8Array {
@@ -843,7 +843,7 @@ export const QuotaLimit_ValuesEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QuotaLimit_ValuesEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuotaLimit_ValuesEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaLimit_ValuesEntry();
@@ -901,13 +901,13 @@ export const QuotaLimit_ValuesEntry = {
       value: BigInt(object.value)
     };
   },
-  toAmino(message: QuotaLimit_ValuesEntry, useInterfaces: boolean = false): QuotaLimit_ValuesEntryAmino {
+  toAmino(message: QuotaLimit_ValuesEntry, useInterfaces: boolean = true): QuotaLimit_ValuesEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value ? message.value.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: QuotaLimit_ValuesEntryProtoMsg, useInterfaces: boolean = false): QuotaLimit_ValuesEntry {
+  fromProtoMsg(message: QuotaLimit_ValuesEntryProtoMsg, useInterfaces: boolean = true): QuotaLimit_ValuesEntry {
     return QuotaLimit_ValuesEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuotaLimit_ValuesEntry): Uint8Array {
@@ -966,7 +966,7 @@ export const QuotaLimit = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QuotaLimit {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuotaLimit {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaLimit();
@@ -1135,7 +1135,7 @@ export const QuotaLimit = {
       displayName: object.display_name
     };
   },
-  toAmino(message: QuotaLimit, useInterfaces: boolean = false): QuotaLimitAmino {
+  toAmino(message: QuotaLimit, useInterfaces: boolean = true): QuotaLimitAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.description = message.description;
@@ -1154,7 +1154,7 @@ export const QuotaLimit = {
     obj.display_name = message.displayName;
     return obj;
   },
-  fromProtoMsg(message: QuotaLimitProtoMsg, useInterfaces: boolean = false): QuotaLimit {
+  fromProtoMsg(message: QuotaLimitProtoMsg, useInterfaces: boolean = true): QuotaLimit {
     return QuotaLimit.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuotaLimit): Uint8Array {

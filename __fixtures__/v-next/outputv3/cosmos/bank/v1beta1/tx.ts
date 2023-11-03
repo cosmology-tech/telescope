@@ -86,7 +86,7 @@ export const MsgSend = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSend {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSend {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSend();
@@ -159,7 +159,7 @@ export const MsgSend = {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgSend, useInterfaces: boolean = false): MsgSendAmino {
+  toAmino(message: MsgSend, useInterfaces: boolean = true): MsgSendAmino {
     const obj: any = {};
     obj.from_address = message.fromAddress;
     obj.to_address = message.toAddress;
@@ -170,7 +170,7 @@ export const MsgSend = {
     }
     return obj;
   },
-  fromProtoMsg(message: MsgSendProtoMsg, useInterfaces: boolean = false): MsgSend {
+  fromProtoMsg(message: MsgSendProtoMsg, useInterfaces: boolean = true): MsgSend {
     return MsgSend.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSend): Uint8Array {
@@ -192,7 +192,7 @@ export const MsgSendResponse = {
   encode(_: MsgSendResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSendResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSendResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSendResponse();
@@ -228,11 +228,11 @@ export const MsgSendResponse = {
   fromAmino(_: MsgSendResponseAmino): MsgSendResponse {
     return {};
   },
-  toAmino(_: MsgSendResponse, useInterfaces: boolean = false): MsgSendResponseAmino {
+  toAmino(_: MsgSendResponse, useInterfaces: boolean = true): MsgSendResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgSendResponseProtoMsg, useInterfaces: boolean = false): MsgSendResponse {
+  fromProtoMsg(message: MsgSendResponseProtoMsg, useInterfaces: boolean = true): MsgSendResponse {
     return MsgSendResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSendResponse): Uint8Array {
@@ -263,7 +263,7 @@ export const MsgMultiSend = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgMultiSend {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgMultiSend {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgMultiSend();
@@ -335,7 +335,7 @@ export const MsgMultiSend = {
       outputs: Array.isArray(object?.outputs) ? object.outputs.map((e: any) => Output.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgMultiSend, useInterfaces: boolean = false): MsgMultiSendAmino {
+  toAmino(message: MsgMultiSend, useInterfaces: boolean = true): MsgMultiSendAmino {
     const obj: any = {};
     if (message.inputs) {
       obj.inputs = message.inputs.map(e => e ? Input.toAmino(e, useInterfaces) : undefined);
@@ -349,7 +349,7 @@ export const MsgMultiSend = {
     }
     return obj;
   },
-  fromProtoMsg(message: MsgMultiSendProtoMsg, useInterfaces: boolean = false): MsgMultiSend {
+  fromProtoMsg(message: MsgMultiSendProtoMsg, useInterfaces: boolean = true): MsgMultiSend {
     return MsgMultiSend.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgMultiSend): Uint8Array {
@@ -371,7 +371,7 @@ export const MsgMultiSendResponse = {
   encode(_: MsgMultiSendResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgMultiSendResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgMultiSendResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgMultiSendResponse();
@@ -407,11 +407,11 @@ export const MsgMultiSendResponse = {
   fromAmino(_: MsgMultiSendResponseAmino): MsgMultiSendResponse {
     return {};
   },
-  toAmino(_: MsgMultiSendResponse, useInterfaces: boolean = false): MsgMultiSendResponseAmino {
+  toAmino(_: MsgMultiSendResponse, useInterfaces: boolean = true): MsgMultiSendResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgMultiSendResponseProtoMsg, useInterfaces: boolean = false): MsgMultiSendResponse {
+  fromProtoMsg(message: MsgMultiSendResponseProtoMsg, useInterfaces: boolean = true): MsgMultiSendResponse {
     return MsgMultiSendResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgMultiSendResponse): Uint8Array {

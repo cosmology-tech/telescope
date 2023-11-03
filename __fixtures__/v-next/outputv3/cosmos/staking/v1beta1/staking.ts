@@ -767,7 +767,7 @@ export const HistoricalInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): HistoricalInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): HistoricalInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHistoricalInfo();
@@ -833,7 +833,7 @@ export const HistoricalInfo = {
       valset: Array.isArray(object?.valset) ? object.valset.map((e: any) => Validator.fromAmino(e)) : []
     };
   },
-  toAmino(message: HistoricalInfo, useInterfaces: boolean = false): HistoricalInfoAmino {
+  toAmino(message: HistoricalInfo, useInterfaces: boolean = true): HistoricalInfoAmino {
     const obj: any = {};
     obj.header = message.header ? Header.toAmino(message.header, useInterfaces) : undefined;
     if (message.valset) {
@@ -843,7 +843,7 @@ export const HistoricalInfo = {
     }
     return obj;
   },
-  fromProtoMsg(message: HistoricalInfoProtoMsg, useInterfaces: boolean = false): HistoricalInfo {
+  fromProtoMsg(message: HistoricalInfoProtoMsg, useInterfaces: boolean = true): HistoricalInfo {
     return HistoricalInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: HistoricalInfo): Uint8Array {
@@ -878,7 +878,7 @@ export const CommissionRates = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CommissionRates {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CommissionRates {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCommissionRates();
@@ -943,14 +943,14 @@ export const CommissionRates = {
       maxChangeRate: object.max_change_rate
     };
   },
-  toAmino(message: CommissionRates, useInterfaces: boolean = false): CommissionRatesAmino {
+  toAmino(message: CommissionRates, useInterfaces: boolean = true): CommissionRatesAmino {
     const obj: any = {};
     obj.rate = message.rate;
     obj.max_rate = message.maxRate;
     obj.max_change_rate = message.maxChangeRate;
     return obj;
   },
-  fromProtoMsg(message: CommissionRatesProtoMsg, useInterfaces: boolean = false): CommissionRates {
+  fromProtoMsg(message: CommissionRatesProtoMsg, useInterfaces: boolean = true): CommissionRates {
     return CommissionRates.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CommissionRates): Uint8Array {
@@ -981,7 +981,7 @@ export const Commission = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Commission {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Commission {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCommission();
@@ -1039,13 +1039,13 @@ export const Commission = {
       updateTime: object.update_time
     };
   },
-  toAmino(message: Commission, useInterfaces: boolean = false): CommissionAmino {
+  toAmino(message: Commission, useInterfaces: boolean = true): CommissionAmino {
     const obj: any = {};
     obj.commission_rates = message.commissionRates ? CommissionRates.toAmino(message.commissionRates, useInterfaces) : undefined;
     obj.update_time = message.updateTime;
     return obj;
   },
-  fromProtoMsg(message: CommissionProtoMsg, useInterfaces: boolean = false): Commission {
+  fromProtoMsg(message: CommissionProtoMsg, useInterfaces: boolean = true): Commission {
     return Commission.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Commission): Uint8Array {
@@ -1088,7 +1088,7 @@ export const Description = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Description {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Description {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDescription();
@@ -1171,7 +1171,7 @@ export const Description = {
       details: object.details
     };
   },
-  toAmino(message: Description, useInterfaces: boolean = false): DescriptionAmino {
+  toAmino(message: Description, useInterfaces: boolean = true): DescriptionAmino {
     const obj: any = {};
     obj.moniker = message.moniker;
     obj.identity = message.identity;
@@ -1180,7 +1180,7 @@ export const Description = {
     obj.details = message.details;
     return obj;
   },
-  fromProtoMsg(message: DescriptionProtoMsg, useInterfaces: boolean = false): Description {
+  fromProtoMsg(message: DescriptionProtoMsg, useInterfaces: boolean = true): Description {
     return Description.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Description): Uint8Array {
@@ -1247,7 +1247,7 @@ export const Validator = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Validator {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Validator {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidator();
@@ -1392,7 +1392,7 @@ export const Validator = {
       minSelfDelegation: object.min_self_delegation
     };
   },
-  toAmino(message: Validator, useInterfaces: boolean = false): ValidatorAmino {
+  toAmino(message: Validator, useInterfaces: boolean = true): ValidatorAmino {
     const obj: any = {};
     obj.operator_address = message.operatorAddress;
     obj.consensus_pubkey = message.consensusPubkey ? decodePubkey(message.consensusPubkey) : undefined;
@@ -1407,7 +1407,7 @@ export const Validator = {
     obj.min_self_delegation = message.minSelfDelegation;
     return obj;
   },
-  fromProtoMsg(message: ValidatorProtoMsg, useInterfaces: boolean = false): Validator {
+  fromProtoMsg(message: ValidatorProtoMsg, useInterfaces: boolean = true): Validator {
     return Validator.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Validator): Uint8Array {
@@ -1434,7 +1434,7 @@ export const ValAddresses = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ValAddresses {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValAddresses {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValAddresses();
@@ -1489,7 +1489,7 @@ export const ValAddresses = {
       addresses: Array.isArray(object?.addresses) ? object.addresses.map((e: any) => e) : []
     };
   },
-  toAmino(message: ValAddresses, useInterfaces: boolean = false): ValAddressesAmino {
+  toAmino(message: ValAddresses, useInterfaces: boolean = true): ValAddressesAmino {
     const obj: any = {};
     if (message.addresses) {
       obj.addresses = message.addresses.map(e => e);
@@ -1498,7 +1498,7 @@ export const ValAddresses = {
     }
     return obj;
   },
-  fromProtoMsg(message: ValAddressesProtoMsg, useInterfaces: boolean = false): ValAddresses {
+  fromProtoMsg(message: ValAddressesProtoMsg, useInterfaces: boolean = true): ValAddresses {
     return ValAddresses.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValAddresses): Uint8Array {
@@ -1529,7 +1529,7 @@ export const DVPair = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DVPair {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DVPair {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDVPair();
@@ -1585,13 +1585,13 @@ export const DVPair = {
       validatorAddress: object.validator_address
     };
   },
-  toAmino(message: DVPair, useInterfaces: boolean = false): DVPairAmino {
+  toAmino(message: DVPair, useInterfaces: boolean = true): DVPairAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     obj.validator_address = message.validatorAddress;
     return obj;
   },
-  fromProtoMsg(message: DVPairProtoMsg, useInterfaces: boolean = false): DVPair {
+  fromProtoMsg(message: DVPairProtoMsg, useInterfaces: boolean = true): DVPair {
     return DVPair.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DVPair): Uint8Array {
@@ -1618,7 +1618,7 @@ export const DVPairs = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DVPairs {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DVPairs {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDVPairs();
@@ -1673,7 +1673,7 @@ export const DVPairs = {
       pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => DVPair.fromAmino(e)) : []
     };
   },
-  toAmino(message: DVPairs, useInterfaces: boolean = false): DVPairsAmino {
+  toAmino(message: DVPairs, useInterfaces: boolean = true): DVPairsAmino {
     const obj: any = {};
     if (message.pairs) {
       obj.pairs = message.pairs.map(e => e ? DVPair.toAmino(e, useInterfaces) : undefined);
@@ -1682,7 +1682,7 @@ export const DVPairs = {
     }
     return obj;
   },
-  fromProtoMsg(message: DVPairsProtoMsg, useInterfaces: boolean = false): DVPairs {
+  fromProtoMsg(message: DVPairsProtoMsg, useInterfaces: boolean = true): DVPairs {
     return DVPairs.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DVPairs): Uint8Array {
@@ -1717,7 +1717,7 @@ export const DVVTriplet = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DVVTriplet {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DVVTriplet {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDVVTriplet();
@@ -1782,14 +1782,14 @@ export const DVVTriplet = {
       validatorDstAddress: object.validator_dst_address
     };
   },
-  toAmino(message: DVVTriplet, useInterfaces: boolean = false): DVVTripletAmino {
+  toAmino(message: DVVTriplet, useInterfaces: boolean = true): DVVTripletAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     obj.validator_src_address = message.validatorSrcAddress;
     obj.validator_dst_address = message.validatorDstAddress;
     return obj;
   },
-  fromProtoMsg(message: DVVTripletProtoMsg, useInterfaces: boolean = false): DVVTriplet {
+  fromProtoMsg(message: DVVTripletProtoMsg, useInterfaces: boolean = true): DVVTriplet {
     return DVVTriplet.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DVVTriplet): Uint8Array {
@@ -1816,7 +1816,7 @@ export const DVVTriplets = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DVVTriplets {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DVVTriplets {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDVVTriplets();
@@ -1871,7 +1871,7 @@ export const DVVTriplets = {
       triplets: Array.isArray(object?.triplets) ? object.triplets.map((e: any) => DVVTriplet.fromAmino(e)) : []
     };
   },
-  toAmino(message: DVVTriplets, useInterfaces: boolean = false): DVVTripletsAmino {
+  toAmino(message: DVVTriplets, useInterfaces: boolean = true): DVVTripletsAmino {
     const obj: any = {};
     if (message.triplets) {
       obj.triplets = message.triplets.map(e => e ? DVVTriplet.toAmino(e, useInterfaces) : undefined);
@@ -1880,7 +1880,7 @@ export const DVVTriplets = {
     }
     return obj;
   },
-  fromProtoMsg(message: DVVTripletsProtoMsg, useInterfaces: boolean = false): DVVTriplets {
+  fromProtoMsg(message: DVVTripletsProtoMsg, useInterfaces: boolean = true): DVVTriplets {
     return DVVTriplets.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DVVTriplets): Uint8Array {
@@ -1915,7 +1915,7 @@ export const Delegation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Delegation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Delegation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegation();
@@ -1980,14 +1980,14 @@ export const Delegation = {
       shares: object.shares
     };
   },
-  toAmino(message: Delegation, useInterfaces: boolean = false): DelegationAmino {
+  toAmino(message: Delegation, useInterfaces: boolean = true): DelegationAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     obj.validator_address = message.validatorAddress;
     obj.shares = message.shares;
     return obj;
   },
-  fromProtoMsg(message: DelegationProtoMsg, useInterfaces: boolean = false): Delegation {
+  fromProtoMsg(message: DelegationProtoMsg, useInterfaces: boolean = true): Delegation {
     return Delegation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Delegation): Uint8Array {
@@ -2022,7 +2022,7 @@ export const UnbondingDelegation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): UnbondingDelegation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UnbondingDelegation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUnbondingDelegation();
@@ -2095,7 +2095,7 @@ export const UnbondingDelegation = {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => UnbondingDelegationEntry.fromAmino(e)) : []
     };
   },
-  toAmino(message: UnbondingDelegation, useInterfaces: boolean = false): UnbondingDelegationAmino {
+  toAmino(message: UnbondingDelegation, useInterfaces: boolean = true): UnbondingDelegationAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     obj.validator_address = message.validatorAddress;
@@ -2106,7 +2106,7 @@ export const UnbondingDelegation = {
     }
     return obj;
   },
-  fromProtoMsg(message: UnbondingDelegationProtoMsg, useInterfaces: boolean = false): UnbondingDelegation {
+  fromProtoMsg(message: UnbondingDelegationProtoMsg, useInterfaces: boolean = true): UnbondingDelegation {
     return UnbondingDelegation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UnbondingDelegation): Uint8Array {
@@ -2145,7 +2145,7 @@ export const UnbondingDelegationEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): UnbondingDelegationEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UnbondingDelegationEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUnbondingDelegationEntry();
@@ -2221,7 +2221,7 @@ export const UnbondingDelegationEntry = {
       balance: object.balance
     };
   },
-  toAmino(message: UnbondingDelegationEntry, useInterfaces: boolean = false): UnbondingDelegationEntryAmino {
+  toAmino(message: UnbondingDelegationEntry, useInterfaces: boolean = true): UnbondingDelegationEntryAmino {
     const obj: any = {};
     obj.creation_height = message.creationHeight ? message.creationHeight.toString() : undefined;
     obj.completion_time = message.completionTime;
@@ -2229,7 +2229,7 @@ export const UnbondingDelegationEntry = {
     obj.balance = message.balance;
     return obj;
   },
-  fromProtoMsg(message: UnbondingDelegationEntryProtoMsg, useInterfaces: boolean = false): UnbondingDelegationEntry {
+  fromProtoMsg(message: UnbondingDelegationEntryProtoMsg, useInterfaces: boolean = true): UnbondingDelegationEntry {
     return UnbondingDelegationEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UnbondingDelegationEntry): Uint8Array {
@@ -2268,7 +2268,7 @@ export const RedelegationEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): RedelegationEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): RedelegationEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRedelegationEntry();
@@ -2344,7 +2344,7 @@ export const RedelegationEntry = {
       sharesDst: object.shares_dst
     };
   },
-  toAmino(message: RedelegationEntry, useInterfaces: boolean = false): RedelegationEntryAmino {
+  toAmino(message: RedelegationEntry, useInterfaces: boolean = true): RedelegationEntryAmino {
     const obj: any = {};
     obj.creation_height = message.creationHeight ? message.creationHeight.toString() : undefined;
     obj.completion_time = message.completionTime;
@@ -2352,7 +2352,7 @@ export const RedelegationEntry = {
     obj.shares_dst = message.sharesDst;
     return obj;
   },
-  fromProtoMsg(message: RedelegationEntryProtoMsg, useInterfaces: boolean = false): RedelegationEntry {
+  fromProtoMsg(message: RedelegationEntryProtoMsg, useInterfaces: boolean = true): RedelegationEntry {
     return RedelegationEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: RedelegationEntry): Uint8Array {
@@ -2391,7 +2391,7 @@ export const Redelegation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Redelegation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Redelegation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRedelegation();
@@ -2473,7 +2473,7 @@ export const Redelegation = {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntry.fromAmino(e)) : []
     };
   },
-  toAmino(message: Redelegation, useInterfaces: boolean = false): RedelegationAmino {
+  toAmino(message: Redelegation, useInterfaces: boolean = true): RedelegationAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     obj.validator_src_address = message.validatorSrcAddress;
@@ -2485,7 +2485,7 @@ export const Redelegation = {
     }
     return obj;
   },
-  fromProtoMsg(message: RedelegationProtoMsg, useInterfaces: boolean = false): Redelegation {
+  fromProtoMsg(message: RedelegationProtoMsg, useInterfaces: boolean = true): Redelegation {
     return Redelegation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Redelegation): Uint8Array {
@@ -2532,7 +2532,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -2626,7 +2626,7 @@ export const Params = {
       minCommissionRate: object.min_commission_rate
     };
   },
-  toAmino(message: Params, useInterfaces: boolean = false): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
     obj.unbonding_time = message.unbondingTime ? Duration.toAmino(message.unbondingTime, useInterfaces) : undefined;
     obj.max_validators = message.maxValidators;
@@ -2636,7 +2636,7 @@ export const Params = {
     obj.min_commission_rate = message.minCommissionRate;
     return obj;
   },
-  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = false): Params {
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
     return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
@@ -2667,7 +2667,7 @@ export const DelegationResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DelegationResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DelegationResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegationResponse();
@@ -2727,13 +2727,13 @@ export const DelegationResponse = {
       balance: object?.balance ? Coin.fromAmino(object.balance) : undefined
     };
   },
-  toAmino(message: DelegationResponse, useInterfaces: boolean = false): DelegationResponseAmino {
+  toAmino(message: DelegationResponse, useInterfaces: boolean = true): DelegationResponseAmino {
     const obj: any = {};
     obj.delegation = message.delegation ? Delegation.toAmino(message.delegation, useInterfaces) : undefined;
     obj.balance = message.balance ? Coin.toAmino(message.balance, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: DelegationResponseProtoMsg, useInterfaces: boolean = false): DelegationResponse {
+  fromProtoMsg(message: DelegationResponseProtoMsg, useInterfaces: boolean = true): DelegationResponse {
     return DelegationResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DelegationResponse): Uint8Array {
@@ -2764,7 +2764,7 @@ export const RedelegationEntryResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): RedelegationEntryResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): RedelegationEntryResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRedelegationEntryResponse();
@@ -2822,13 +2822,13 @@ export const RedelegationEntryResponse = {
       balance: object.balance
     };
   },
-  toAmino(message: RedelegationEntryResponse, useInterfaces: boolean = false): RedelegationEntryResponseAmino {
+  toAmino(message: RedelegationEntryResponse, useInterfaces: boolean = true): RedelegationEntryResponseAmino {
     const obj: any = {};
     obj.redelegation_entry = message.redelegationEntry ? RedelegationEntry.toAmino(message.redelegationEntry, useInterfaces) : undefined;
     obj.balance = message.balance;
     return obj;
   },
-  fromProtoMsg(message: RedelegationEntryResponseProtoMsg, useInterfaces: boolean = false): RedelegationEntryResponse {
+  fromProtoMsg(message: RedelegationEntryResponseProtoMsg, useInterfaces: boolean = true): RedelegationEntryResponse {
     return RedelegationEntryResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: RedelegationEntryResponse): Uint8Array {
@@ -2859,7 +2859,7 @@ export const RedelegationResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): RedelegationResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): RedelegationResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRedelegationResponse();
@@ -2925,7 +2925,7 @@ export const RedelegationResponse = {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntryResponse.fromAmino(e)) : []
     };
   },
-  toAmino(message: RedelegationResponse, useInterfaces: boolean = false): RedelegationResponseAmino {
+  toAmino(message: RedelegationResponse, useInterfaces: boolean = true): RedelegationResponseAmino {
     const obj: any = {};
     obj.redelegation = message.redelegation ? Redelegation.toAmino(message.redelegation, useInterfaces) : undefined;
     if (message.entries) {
@@ -2935,7 +2935,7 @@ export const RedelegationResponse = {
     }
     return obj;
   },
-  fromProtoMsg(message: RedelegationResponseProtoMsg, useInterfaces: boolean = false): RedelegationResponse {
+  fromProtoMsg(message: RedelegationResponseProtoMsg, useInterfaces: boolean = true): RedelegationResponse {
     return RedelegationResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: RedelegationResponse): Uint8Array {
@@ -2966,7 +2966,7 @@ export const Pool = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Pool {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Pool {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePool();
@@ -3022,13 +3022,13 @@ export const Pool = {
       bondedTokens: object.bonded_tokens
     };
   },
-  toAmino(message: Pool, useInterfaces: boolean = false): PoolAmino {
+  toAmino(message: Pool, useInterfaces: boolean = true): PoolAmino {
     const obj: any = {};
     obj.not_bonded_tokens = message.notBondedTokens;
     obj.bonded_tokens = message.bondedTokens;
     return obj;
   },
-  fromProtoMsg(message: PoolProtoMsg, useInterfaces: boolean = false): Pool {
+  fromProtoMsg(message: PoolProtoMsg, useInterfaces: boolean = true): Pool {
     return Pool.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Pool): Uint8Array {
@@ -3052,6 +3052,6 @@ export const Cosmos_cryptoPubKey_InterfaceDecoder = (input: BinaryReader | Uint8
 export const Cosmos_cryptoPubKey_FromAmino = (content: AnyAmino) => {
   return encodePubkey(content);
 };
-export const Cosmos_cryptoPubKey_ToAmino = (content: Any, useInterfaces: boolean = false) => {
+export const Cosmos_cryptoPubKey_ToAmino = (content: Any, useInterfaces: boolean = true) => {
   return decodePubkey(content);
 };

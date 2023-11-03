@@ -133,7 +133,7 @@ export const QueryParamsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -189,13 +189,13 @@ export const QueryParamsRequest = {
       key: object.key
     };
   },
-  toAmino(message: QueryParamsRequest, useInterfaces: boolean = false): QueryParamsRequestAmino {
+  toAmino(message: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
     const obj: any = {};
     obj.subspace = message.subspace;
     obj.key = message.key;
     return obj;
   },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = false): QueryParamsRequest {
+  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = true): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsRequest): Uint8Array {
@@ -222,7 +222,7 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -271,12 +271,12 @@ export const QueryParamsResponse = {
       param: object?.param ? ParamChange.fromAmino(object.param) : undefined
     };
   },
-  toAmino(message: QueryParamsResponse, useInterfaces: boolean = false): QueryParamsResponseAmino {
+  toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
     const obj: any = {};
     obj.param = message.param ? ParamChange.toAmino(message.param, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = false): QueryParamsResponse {
+  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = true): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsResponse): Uint8Array {
@@ -298,7 +298,7 @@ export const QuerySubspacesRequest = {
   encode(_: QuerySubspacesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QuerySubspacesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuerySubspacesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySubspacesRequest();
@@ -334,11 +334,11 @@ export const QuerySubspacesRequest = {
   fromAmino(_: QuerySubspacesRequestAmino): QuerySubspacesRequest {
     return {};
   },
-  toAmino(_: QuerySubspacesRequest, useInterfaces: boolean = false): QuerySubspacesRequestAmino {
+  toAmino(_: QuerySubspacesRequest, useInterfaces: boolean = true): QuerySubspacesRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: QuerySubspacesRequestProtoMsg, useInterfaces: boolean = false): QuerySubspacesRequest {
+  fromProtoMsg(message: QuerySubspacesRequestProtoMsg, useInterfaces: boolean = true): QuerySubspacesRequest {
     return QuerySubspacesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuerySubspacesRequest): Uint8Array {
@@ -365,7 +365,7 @@ export const QuerySubspacesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QuerySubspacesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuerySubspacesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySubspacesResponse();
@@ -420,7 +420,7 @@ export const QuerySubspacesResponse = {
       subspaces: Array.isArray(object?.subspaces) ? object.subspaces.map((e: any) => Subspace.fromAmino(e)) : []
     };
   },
-  toAmino(message: QuerySubspacesResponse, useInterfaces: boolean = false): QuerySubspacesResponseAmino {
+  toAmino(message: QuerySubspacesResponse, useInterfaces: boolean = true): QuerySubspacesResponseAmino {
     const obj: any = {};
     if (message.subspaces) {
       obj.subspaces = message.subspaces.map(e => e ? Subspace.toAmino(e, useInterfaces) : undefined);
@@ -429,7 +429,7 @@ export const QuerySubspacesResponse = {
     }
     return obj;
   },
-  fromProtoMsg(message: QuerySubspacesResponseProtoMsg, useInterfaces: boolean = false): QuerySubspacesResponse {
+  fromProtoMsg(message: QuerySubspacesResponseProtoMsg, useInterfaces: boolean = true): QuerySubspacesResponse {
     return QuerySubspacesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuerySubspacesResponse): Uint8Array {
@@ -460,7 +460,7 @@ export const Subspace = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Subspace {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Subspace {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubspace();
@@ -524,7 +524,7 @@ export const Subspace = {
       keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
     };
   },
-  toAmino(message: Subspace, useInterfaces: boolean = false): SubspaceAmino {
+  toAmino(message: Subspace, useInterfaces: boolean = true): SubspaceAmino {
     const obj: any = {};
     obj.subspace = message.subspace;
     if (message.keys) {
@@ -534,7 +534,7 @@ export const Subspace = {
     }
     return obj;
   },
-  fromProtoMsg(message: SubspaceProtoMsg, useInterfaces: boolean = false): Subspace {
+  fromProtoMsg(message: SubspaceProtoMsg, useInterfaces: boolean = true): Subspace {
     return Subspace.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Subspace): Uint8Array {

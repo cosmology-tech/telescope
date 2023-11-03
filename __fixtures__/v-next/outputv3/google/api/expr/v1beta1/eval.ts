@@ -278,7 +278,7 @@ export const EvalState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): EvalState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EvalState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalState();
@@ -350,7 +350,7 @@ export const EvalState = {
       results: Array.isArray(object?.results) ? object.results.map((e: any) => EvalState_Result.fromAmino(e)) : []
     };
   },
-  toAmino(message: EvalState, useInterfaces: boolean = false): EvalStateAmino {
+  toAmino(message: EvalState, useInterfaces: boolean = true): EvalStateAmino {
     const obj: any = {};
     if (message.values) {
       obj.values = message.values.map(e => e ? ExprValue.toAmino(e, useInterfaces) : undefined);
@@ -364,7 +364,7 @@ export const EvalState = {
     }
     return obj;
   },
-  fromProtoMsg(message: EvalStateProtoMsg, useInterfaces: boolean = false): EvalState {
+  fromProtoMsg(message: EvalStateProtoMsg, useInterfaces: boolean = true): EvalState {
     return EvalState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EvalState): Uint8Array {
@@ -394,7 +394,7 @@ export const EvalState_Result = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): EvalState_Result {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EvalState_Result {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalState_Result();
@@ -452,13 +452,13 @@ export const EvalState_Result = {
       value: object.value
     };
   },
-  toAmino(message: EvalState_Result, useInterfaces: boolean = false): EvalState_ResultAmino {
+  toAmino(message: EvalState_Result, useInterfaces: boolean = true): EvalState_ResultAmino {
     const obj: any = {};
     obj.expr = message.expr ? IdRef.toAmino(message.expr, useInterfaces) : undefined;
     obj.value = message.value;
     return obj;
   },
-  fromProtoMsg(message: EvalState_ResultProtoMsg, useInterfaces: boolean = false): EvalState_Result {
+  fromProtoMsg(message: EvalState_ResultProtoMsg, useInterfaces: boolean = true): EvalState_Result {
     return EvalState_Result.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EvalState_Result): Uint8Array {
@@ -492,7 +492,7 @@ export const ExprValue = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ExprValue {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ExprValue {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExprValue();
@@ -563,14 +563,14 @@ export const ExprValue = {
       unknown: object?.unknown ? UnknownSet.fromAmino(object.unknown) : undefined
     };
   },
-  toAmino(message: ExprValue, useInterfaces: boolean = false): ExprValueAmino {
+  toAmino(message: ExprValue, useInterfaces: boolean = true): ExprValueAmino {
     const obj: any = {};
     obj.value = message.value ? Value.toAmino(message.value, useInterfaces) : undefined;
     obj.error = message.error ? ErrorSet.toAmino(message.error, useInterfaces) : undefined;
     obj.unknown = message.unknown ? UnknownSet.toAmino(message.unknown, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: ExprValueProtoMsg, useInterfaces: boolean = false): ExprValue {
+  fromProtoMsg(message: ExprValueProtoMsg, useInterfaces: boolean = true): ExprValue {
     return ExprValue.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ExprValue): Uint8Array {
@@ -596,7 +596,7 @@ export const ErrorSet = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ErrorSet {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ErrorSet {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseErrorSet();
@@ -651,7 +651,7 @@ export const ErrorSet = {
       errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromAmino(e)) : []
     };
   },
-  toAmino(message: ErrorSet, useInterfaces: boolean = false): ErrorSetAmino {
+  toAmino(message: ErrorSet, useInterfaces: boolean = true): ErrorSetAmino {
     const obj: any = {};
     if (message.errors) {
       obj.errors = message.errors.map(e => e ? Status.toAmino(e, useInterfaces) : undefined);
@@ -660,7 +660,7 @@ export const ErrorSet = {
     }
     return obj;
   },
-  fromProtoMsg(message: ErrorSetProtoMsg, useInterfaces: boolean = false): ErrorSet {
+  fromProtoMsg(message: ErrorSetProtoMsg, useInterfaces: boolean = true): ErrorSet {
     return ErrorSet.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ErrorSet): Uint8Array {
@@ -686,7 +686,7 @@ export const UnknownSet = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): UnknownSet {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UnknownSet {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUnknownSet();
@@ -741,7 +741,7 @@ export const UnknownSet = {
       exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => IdRef.fromAmino(e)) : []
     };
   },
-  toAmino(message: UnknownSet, useInterfaces: boolean = false): UnknownSetAmino {
+  toAmino(message: UnknownSet, useInterfaces: boolean = true): UnknownSetAmino {
     const obj: any = {};
     if (message.exprs) {
       obj.exprs = message.exprs.map(e => e ? IdRef.toAmino(e, useInterfaces) : undefined);
@@ -750,7 +750,7 @@ export const UnknownSet = {
     }
     return obj;
   },
-  fromProtoMsg(message: UnknownSetProtoMsg, useInterfaces: boolean = false): UnknownSet {
+  fromProtoMsg(message: UnknownSetProtoMsg, useInterfaces: boolean = true): UnknownSet {
     return UnknownSet.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UnknownSet): Uint8Array {
@@ -776,7 +776,7 @@ export const IdRef = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): IdRef {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): IdRef {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdRef();
@@ -823,12 +823,12 @@ export const IdRef = {
       id: object.id
     };
   },
-  toAmino(message: IdRef, useInterfaces: boolean = false): IdRefAmino {
+  toAmino(message: IdRef, useInterfaces: boolean = true): IdRefAmino {
     const obj: any = {};
     obj.id = message.id;
     return obj;
   },
-  fromProtoMsg(message: IdRefProtoMsg, useInterfaces: boolean = false): IdRef {
+  fromProtoMsg(message: IdRefProtoMsg, useInterfaces: boolean = true): IdRef {
     return IdRef.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: IdRef): Uint8Array {

@@ -147,7 +147,7 @@ export const MerkleRoot = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MerkleRoot {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MerkleRoot {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMerkleRoot();
@@ -194,7 +194,7 @@ export const MerkleRoot = {
       hash: object.hash
     };
   },
-  toAmino(message: MerkleRoot, useInterfaces: boolean = false): MerkleRootAmino {
+  toAmino(message: MerkleRoot, useInterfaces: boolean = true): MerkleRootAmino {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
@@ -202,13 +202,13 @@ export const MerkleRoot = {
   fromAminoMsg(object: MerkleRootAminoMsg): MerkleRoot {
     return MerkleRoot.fromAmino(object.value);
   },
-  toAminoMsg(message: MerkleRoot, useInterfaces: boolean = false): MerkleRootAminoMsg {
+  toAminoMsg(message: MerkleRoot, useInterfaces: boolean = true): MerkleRootAminoMsg {
     return {
       type: "cosmos-sdk/MerkleRoot",
       value: MerkleRoot.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MerkleRootProtoMsg, useInterfaces: boolean = false): MerkleRoot {
+  fromProtoMsg(message: MerkleRootProtoMsg, useInterfaces: boolean = true): MerkleRoot {
     return MerkleRoot.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MerkleRoot): Uint8Array {
@@ -235,7 +235,7 @@ export const MerklePrefix = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MerklePrefix {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MerklePrefix {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMerklePrefix();
@@ -282,7 +282,7 @@ export const MerklePrefix = {
       keyPrefix: object.key_prefix
     };
   },
-  toAmino(message: MerklePrefix, useInterfaces: boolean = false): MerklePrefixAmino {
+  toAmino(message: MerklePrefix, useInterfaces: boolean = true): MerklePrefixAmino {
     const obj: any = {};
     obj.key_prefix = message.keyPrefix;
     return obj;
@@ -290,13 +290,13 @@ export const MerklePrefix = {
   fromAminoMsg(object: MerklePrefixAminoMsg): MerklePrefix {
     return MerklePrefix.fromAmino(object.value);
   },
-  toAminoMsg(message: MerklePrefix, useInterfaces: boolean = false): MerklePrefixAminoMsg {
+  toAminoMsg(message: MerklePrefix, useInterfaces: boolean = true): MerklePrefixAminoMsg {
     return {
       type: "cosmos-sdk/MerklePrefix",
       value: MerklePrefix.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MerklePrefixProtoMsg, useInterfaces: boolean = false): MerklePrefix {
+  fromProtoMsg(message: MerklePrefixProtoMsg, useInterfaces: boolean = true): MerklePrefix {
     return MerklePrefix.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MerklePrefix): Uint8Array {
@@ -323,7 +323,7 @@ export const MerklePath = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MerklePath {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MerklePath {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMerklePath();
@@ -378,7 +378,7 @@ export const MerklePath = {
       keyPath: Array.isArray(object?.key_path) ? object.key_path.map((e: any) => e) : []
     };
   },
-  toAmino(message: MerklePath, useInterfaces: boolean = false): MerklePathAmino {
+  toAmino(message: MerklePath, useInterfaces: boolean = true): MerklePathAmino {
     const obj: any = {};
     if (message.keyPath) {
       obj.key_path = message.keyPath.map(e => e);
@@ -390,13 +390,13 @@ export const MerklePath = {
   fromAminoMsg(object: MerklePathAminoMsg): MerklePath {
     return MerklePath.fromAmino(object.value);
   },
-  toAminoMsg(message: MerklePath, useInterfaces: boolean = false): MerklePathAminoMsg {
+  toAminoMsg(message: MerklePath, useInterfaces: boolean = true): MerklePathAminoMsg {
     return {
       type: "cosmos-sdk/MerklePath",
       value: MerklePath.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MerklePathProtoMsg, useInterfaces: boolean = false): MerklePath {
+  fromProtoMsg(message: MerklePathProtoMsg, useInterfaces: boolean = true): MerklePath {
     return MerklePath.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MerklePath): Uint8Array {
@@ -423,7 +423,7 @@ export const MerkleProof = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MerkleProof {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MerkleProof {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMerkleProof();
@@ -478,7 +478,7 @@ export const MerkleProof = {
       proofs: Array.isArray(object?.proofs) ? object.proofs.map((e: any) => CommitmentProof.fromAmino(e)) : []
     };
   },
-  toAmino(message: MerkleProof, useInterfaces: boolean = false): MerkleProofAmino {
+  toAmino(message: MerkleProof, useInterfaces: boolean = true): MerkleProofAmino {
     const obj: any = {};
     if (message.proofs) {
       obj.proofs = message.proofs.map(e => e ? CommitmentProof.toAmino(e, useInterfaces) : undefined);
@@ -490,13 +490,13 @@ export const MerkleProof = {
   fromAminoMsg(object: MerkleProofAminoMsg): MerkleProof {
     return MerkleProof.fromAmino(object.value);
   },
-  toAminoMsg(message: MerkleProof, useInterfaces: boolean = false): MerkleProofAminoMsg {
+  toAminoMsg(message: MerkleProof, useInterfaces: boolean = true): MerkleProofAminoMsg {
     return {
       type: "cosmos-sdk/MerkleProof",
       value: MerkleProof.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MerkleProofProtoMsg, useInterfaces: boolean = false): MerkleProof {
+  fromProtoMsg(message: MerkleProofProtoMsg, useInterfaces: boolean = true): MerkleProof {
     return MerkleProof.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MerkleProof): Uint8Array {

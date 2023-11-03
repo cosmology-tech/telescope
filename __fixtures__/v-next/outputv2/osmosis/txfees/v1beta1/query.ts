@@ -163,7 +163,7 @@ export const QueryFeeTokensRequest = {
   encode(_: QueryFeeTokensRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryFeeTokensRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryFeeTokensRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryFeeTokensRequest();
@@ -199,20 +199,20 @@ export const QueryFeeTokensRequest = {
   fromAmino(_: QueryFeeTokensRequestAmino): QueryFeeTokensRequest {
     return {};
   },
-  toAmino(_: QueryFeeTokensRequest, useInterfaces: boolean = false): QueryFeeTokensRequestAmino {
+  toAmino(_: QueryFeeTokensRequest, useInterfaces: boolean = true): QueryFeeTokensRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryFeeTokensRequestAminoMsg): QueryFeeTokensRequest {
     return QueryFeeTokensRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryFeeTokensRequest, useInterfaces: boolean = false): QueryFeeTokensRequestAminoMsg {
+  toAminoMsg(message: QueryFeeTokensRequest, useInterfaces: boolean = true): QueryFeeTokensRequestAminoMsg {
     return {
       type: "osmosis/txfees/query-fee-tokens-request",
       value: QueryFeeTokensRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryFeeTokensRequestProtoMsg, useInterfaces: boolean = false): QueryFeeTokensRequest {
+  fromProtoMsg(message: QueryFeeTokensRequestProtoMsg, useInterfaces: boolean = true): QueryFeeTokensRequest {
     return QueryFeeTokensRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryFeeTokensRequest): Uint8Array {
@@ -239,7 +239,7 @@ export const QueryFeeTokensResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryFeeTokensResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryFeeTokensResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryFeeTokensResponse();
@@ -294,7 +294,7 @@ export const QueryFeeTokensResponse = {
       feeTokens: Array.isArray(object?.fee_tokens) ? object.fee_tokens.map((e: any) => FeeToken.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryFeeTokensResponse, useInterfaces: boolean = false): QueryFeeTokensResponseAmino {
+  toAmino(message: QueryFeeTokensResponse, useInterfaces: boolean = true): QueryFeeTokensResponseAmino {
     const obj: any = {};
     if (message.feeTokens) {
       obj.fee_tokens = message.feeTokens.map(e => e ? FeeToken.toAmino(e, useInterfaces) : undefined);
@@ -306,13 +306,13 @@ export const QueryFeeTokensResponse = {
   fromAminoMsg(object: QueryFeeTokensResponseAminoMsg): QueryFeeTokensResponse {
     return QueryFeeTokensResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryFeeTokensResponse, useInterfaces: boolean = false): QueryFeeTokensResponseAminoMsg {
+  toAminoMsg(message: QueryFeeTokensResponse, useInterfaces: boolean = true): QueryFeeTokensResponseAminoMsg {
     return {
       type: "osmosis/txfees/query-fee-tokens-response",
       value: QueryFeeTokensResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryFeeTokensResponseProtoMsg, useInterfaces: boolean = false): QueryFeeTokensResponse {
+  fromProtoMsg(message: QueryFeeTokensResponseProtoMsg, useInterfaces: boolean = true): QueryFeeTokensResponse {
     return QueryFeeTokensResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryFeeTokensResponse): Uint8Array {
@@ -339,7 +339,7 @@ export const QueryDenomSpotPriceRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDenomSpotPriceRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDenomSpotPriceRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomSpotPriceRequest();
@@ -386,7 +386,7 @@ export const QueryDenomSpotPriceRequest = {
       denom: object.denom
     };
   },
-  toAmino(message: QueryDenomSpotPriceRequest, useInterfaces: boolean = false): QueryDenomSpotPriceRequestAmino {
+  toAmino(message: QueryDenomSpotPriceRequest, useInterfaces: boolean = true): QueryDenomSpotPriceRequestAmino {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
@@ -394,13 +394,13 @@ export const QueryDenomSpotPriceRequest = {
   fromAminoMsg(object: QueryDenomSpotPriceRequestAminoMsg): QueryDenomSpotPriceRequest {
     return QueryDenomSpotPriceRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDenomSpotPriceRequest, useInterfaces: boolean = false): QueryDenomSpotPriceRequestAminoMsg {
+  toAminoMsg(message: QueryDenomSpotPriceRequest, useInterfaces: boolean = true): QueryDenomSpotPriceRequestAminoMsg {
     return {
       type: "osmosis/txfees/query-denom-spot-price-request",
       value: QueryDenomSpotPriceRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDenomSpotPriceRequestProtoMsg, useInterfaces: boolean = false): QueryDenomSpotPriceRequest {
+  fromProtoMsg(message: QueryDenomSpotPriceRequestProtoMsg, useInterfaces: boolean = true): QueryDenomSpotPriceRequest {
     return QueryDenomSpotPriceRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDenomSpotPriceRequest): Uint8Array {
@@ -431,7 +431,7 @@ export const QueryDenomSpotPriceResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDenomSpotPriceResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDenomSpotPriceResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomSpotPriceResponse();
@@ -489,7 +489,7 @@ export const QueryDenomSpotPriceResponse = {
       spotPrice: object.spot_price
     };
   },
-  toAmino(message: QueryDenomSpotPriceResponse, useInterfaces: boolean = false): QueryDenomSpotPriceResponseAmino {
+  toAmino(message: QueryDenomSpotPriceResponse, useInterfaces: boolean = true): QueryDenomSpotPriceResponseAmino {
     const obj: any = {};
     obj.poolID = message.poolID ? message.poolID.toString() : undefined;
     obj.spot_price = message.spotPrice;
@@ -498,13 +498,13 @@ export const QueryDenomSpotPriceResponse = {
   fromAminoMsg(object: QueryDenomSpotPriceResponseAminoMsg): QueryDenomSpotPriceResponse {
     return QueryDenomSpotPriceResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDenomSpotPriceResponse, useInterfaces: boolean = false): QueryDenomSpotPriceResponseAminoMsg {
+  toAminoMsg(message: QueryDenomSpotPriceResponse, useInterfaces: boolean = true): QueryDenomSpotPriceResponseAminoMsg {
     return {
       type: "osmosis/txfees/query-denom-spot-price-response",
       value: QueryDenomSpotPriceResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDenomSpotPriceResponseProtoMsg, useInterfaces: boolean = false): QueryDenomSpotPriceResponse {
+  fromProtoMsg(message: QueryDenomSpotPriceResponseProtoMsg, useInterfaces: boolean = true): QueryDenomSpotPriceResponse {
     return QueryDenomSpotPriceResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDenomSpotPriceResponse): Uint8Array {
@@ -531,7 +531,7 @@ export const QueryDenomPoolIdRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDenomPoolIdRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDenomPoolIdRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomPoolIdRequest();
@@ -578,7 +578,7 @@ export const QueryDenomPoolIdRequest = {
       denom: object.denom
     };
   },
-  toAmino(message: QueryDenomPoolIdRequest, useInterfaces: boolean = false): QueryDenomPoolIdRequestAmino {
+  toAmino(message: QueryDenomPoolIdRequest, useInterfaces: boolean = true): QueryDenomPoolIdRequestAmino {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
@@ -586,13 +586,13 @@ export const QueryDenomPoolIdRequest = {
   fromAminoMsg(object: QueryDenomPoolIdRequestAminoMsg): QueryDenomPoolIdRequest {
     return QueryDenomPoolIdRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDenomPoolIdRequest, useInterfaces: boolean = false): QueryDenomPoolIdRequestAminoMsg {
+  toAminoMsg(message: QueryDenomPoolIdRequest, useInterfaces: boolean = true): QueryDenomPoolIdRequestAminoMsg {
     return {
       type: "osmosis/txfees/query-denom-pool-id-request",
       value: QueryDenomPoolIdRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDenomPoolIdRequestProtoMsg, useInterfaces: boolean = false): QueryDenomPoolIdRequest {
+  fromProtoMsg(message: QueryDenomPoolIdRequestProtoMsg, useInterfaces: boolean = true): QueryDenomPoolIdRequest {
     return QueryDenomPoolIdRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDenomPoolIdRequest): Uint8Array {
@@ -619,7 +619,7 @@ export const QueryDenomPoolIdResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDenomPoolIdResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDenomPoolIdResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomPoolIdResponse();
@@ -668,7 +668,7 @@ export const QueryDenomPoolIdResponse = {
       poolID: BigInt(object.poolID)
     };
   },
-  toAmino(message: QueryDenomPoolIdResponse, useInterfaces: boolean = false): QueryDenomPoolIdResponseAmino {
+  toAmino(message: QueryDenomPoolIdResponse, useInterfaces: boolean = true): QueryDenomPoolIdResponseAmino {
     const obj: any = {};
     obj.poolID = message.poolID ? message.poolID.toString() : undefined;
     return obj;
@@ -676,13 +676,13 @@ export const QueryDenomPoolIdResponse = {
   fromAminoMsg(object: QueryDenomPoolIdResponseAminoMsg): QueryDenomPoolIdResponse {
     return QueryDenomPoolIdResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDenomPoolIdResponse, useInterfaces: boolean = false): QueryDenomPoolIdResponseAminoMsg {
+  toAminoMsg(message: QueryDenomPoolIdResponse, useInterfaces: boolean = true): QueryDenomPoolIdResponseAminoMsg {
     return {
       type: "osmosis/txfees/query-denom-pool-id-response",
       value: QueryDenomPoolIdResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDenomPoolIdResponseProtoMsg, useInterfaces: boolean = false): QueryDenomPoolIdResponse {
+  fromProtoMsg(message: QueryDenomPoolIdResponseProtoMsg, useInterfaces: boolean = true): QueryDenomPoolIdResponse {
     return QueryDenomPoolIdResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDenomPoolIdResponse): Uint8Array {
@@ -704,7 +704,7 @@ export const QueryBaseDenomRequest = {
   encode(_: QueryBaseDenomRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryBaseDenomRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryBaseDenomRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBaseDenomRequest();
@@ -740,20 +740,20 @@ export const QueryBaseDenomRequest = {
   fromAmino(_: QueryBaseDenomRequestAmino): QueryBaseDenomRequest {
     return {};
   },
-  toAmino(_: QueryBaseDenomRequest, useInterfaces: boolean = false): QueryBaseDenomRequestAmino {
+  toAmino(_: QueryBaseDenomRequest, useInterfaces: boolean = true): QueryBaseDenomRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryBaseDenomRequestAminoMsg): QueryBaseDenomRequest {
     return QueryBaseDenomRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryBaseDenomRequest, useInterfaces: boolean = false): QueryBaseDenomRequestAminoMsg {
+  toAminoMsg(message: QueryBaseDenomRequest, useInterfaces: boolean = true): QueryBaseDenomRequestAminoMsg {
     return {
       type: "osmosis/txfees/query-base-denom-request",
       value: QueryBaseDenomRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryBaseDenomRequestProtoMsg, useInterfaces: boolean = false): QueryBaseDenomRequest {
+  fromProtoMsg(message: QueryBaseDenomRequestProtoMsg, useInterfaces: boolean = true): QueryBaseDenomRequest {
     return QueryBaseDenomRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryBaseDenomRequest): Uint8Array {
@@ -780,7 +780,7 @@ export const QueryBaseDenomResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryBaseDenomResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryBaseDenomResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBaseDenomResponse();
@@ -827,7 +827,7 @@ export const QueryBaseDenomResponse = {
       baseDenom: object.base_denom
     };
   },
-  toAmino(message: QueryBaseDenomResponse, useInterfaces: boolean = false): QueryBaseDenomResponseAmino {
+  toAmino(message: QueryBaseDenomResponse, useInterfaces: boolean = true): QueryBaseDenomResponseAmino {
     const obj: any = {};
     obj.base_denom = message.baseDenom;
     return obj;
@@ -835,13 +835,13 @@ export const QueryBaseDenomResponse = {
   fromAminoMsg(object: QueryBaseDenomResponseAminoMsg): QueryBaseDenomResponse {
     return QueryBaseDenomResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryBaseDenomResponse, useInterfaces: boolean = false): QueryBaseDenomResponseAminoMsg {
+  toAminoMsg(message: QueryBaseDenomResponse, useInterfaces: boolean = true): QueryBaseDenomResponseAminoMsg {
     return {
       type: "osmosis/txfees/query-base-denom-response",
       value: QueryBaseDenomResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryBaseDenomResponseProtoMsg, useInterfaces: boolean = false): QueryBaseDenomResponse {
+  fromProtoMsg(message: QueryBaseDenomResponseProtoMsg, useInterfaces: boolean = true): QueryBaseDenomResponse {
     return QueryBaseDenomResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryBaseDenomResponse): Uint8Array {

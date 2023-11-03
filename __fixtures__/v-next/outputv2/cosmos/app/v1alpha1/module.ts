@@ -229,7 +229,7 @@ export const ModuleDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ModuleDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModuleDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleDescriptor();
@@ -310,7 +310,7 @@ export const ModuleDescriptor = {
       canMigrateFrom: Array.isArray(object?.can_migrate_from) ? object.can_migrate_from.map((e: any) => MigrateFromInfo.fromAmino(e)) : []
     };
   },
-  toAmino(message: ModuleDescriptor, useInterfaces: boolean = false): ModuleDescriptorAmino {
+  toAmino(message: ModuleDescriptor, useInterfaces: boolean = true): ModuleDescriptorAmino {
     const obj: any = {};
     obj.go_import = message.goImport;
     if (message.usePackage) {
@@ -328,13 +328,13 @@ export const ModuleDescriptor = {
   fromAminoMsg(object: ModuleDescriptorAminoMsg): ModuleDescriptor {
     return ModuleDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: ModuleDescriptor, useInterfaces: boolean = false): ModuleDescriptorAminoMsg {
+  toAminoMsg(message: ModuleDescriptor, useInterfaces: boolean = true): ModuleDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/ModuleDescriptor",
       value: ModuleDescriptor.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ModuleDescriptorProtoMsg, useInterfaces: boolean = false): ModuleDescriptor {
+  fromProtoMsg(message: ModuleDescriptorProtoMsg, useInterfaces: boolean = true): ModuleDescriptor {
     return ModuleDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ModuleDescriptor): Uint8Array {
@@ -365,7 +365,7 @@ export const PackageReference = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): PackageReference {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PackageReference {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePackageReference();
@@ -421,7 +421,7 @@ export const PackageReference = {
       revision: object.revision
     };
   },
-  toAmino(message: PackageReference, useInterfaces: boolean = false): PackageReferenceAmino {
+  toAmino(message: PackageReference, useInterfaces: boolean = true): PackageReferenceAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.revision = message.revision;
@@ -430,13 +430,13 @@ export const PackageReference = {
   fromAminoMsg(object: PackageReferenceAminoMsg): PackageReference {
     return PackageReference.fromAmino(object.value);
   },
-  toAminoMsg(message: PackageReference, useInterfaces: boolean = false): PackageReferenceAminoMsg {
+  toAminoMsg(message: PackageReference, useInterfaces: boolean = true): PackageReferenceAminoMsg {
     return {
       type: "cosmos-sdk/PackageReference",
       value: PackageReference.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: PackageReferenceProtoMsg, useInterfaces: boolean = false): PackageReference {
+  fromProtoMsg(message: PackageReferenceProtoMsg, useInterfaces: boolean = true): PackageReference {
     return PackageReference.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PackageReference): Uint8Array {
@@ -463,7 +463,7 @@ export const MigrateFromInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MigrateFromInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MigrateFromInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMigrateFromInfo();
@@ -510,7 +510,7 @@ export const MigrateFromInfo = {
       module: object.module
     };
   },
-  toAmino(message: MigrateFromInfo, useInterfaces: boolean = false): MigrateFromInfoAmino {
+  toAmino(message: MigrateFromInfo, useInterfaces: boolean = true): MigrateFromInfoAmino {
     const obj: any = {};
     obj.module = message.module;
     return obj;
@@ -518,13 +518,13 @@ export const MigrateFromInfo = {
   fromAminoMsg(object: MigrateFromInfoAminoMsg): MigrateFromInfo {
     return MigrateFromInfo.fromAmino(object.value);
   },
-  toAminoMsg(message: MigrateFromInfo, useInterfaces: boolean = false): MigrateFromInfoAminoMsg {
+  toAminoMsg(message: MigrateFromInfo, useInterfaces: boolean = true): MigrateFromInfoAminoMsg {
     return {
       type: "cosmos-sdk/MigrateFromInfo",
       value: MigrateFromInfo.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MigrateFromInfoProtoMsg, useInterfaces: boolean = false): MigrateFromInfo {
+  fromProtoMsg(message: MigrateFromInfoProtoMsg, useInterfaces: boolean = true): MigrateFromInfo {
     return MigrateFromInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MigrateFromInfo): Uint8Array {

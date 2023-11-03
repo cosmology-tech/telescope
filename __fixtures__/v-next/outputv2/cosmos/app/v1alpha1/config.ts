@@ -117,7 +117,7 @@ export const Config = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Config {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Config {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfig();
@@ -172,7 +172,7 @@ export const Config = {
       modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => ModuleConfig.fromAmino(e)) : []
     };
   },
-  toAmino(message: Config, useInterfaces: boolean = false): ConfigAmino {
+  toAmino(message: Config, useInterfaces: boolean = true): ConfigAmino {
     const obj: any = {};
     if (message.modules) {
       obj.modules = message.modules.map(e => e ? ModuleConfig.toAmino(e, useInterfaces) : undefined);
@@ -184,13 +184,13 @@ export const Config = {
   fromAminoMsg(object: ConfigAminoMsg): Config {
     return Config.fromAmino(object.value);
   },
-  toAminoMsg(message: Config, useInterfaces: boolean = false): ConfigAminoMsg {
+  toAminoMsg(message: Config, useInterfaces: boolean = true): ConfigAminoMsg {
     return {
       type: "cosmos-sdk/Config",
       value: Config.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ConfigProtoMsg, useInterfaces: boolean = false): Config {
+  fromProtoMsg(message: ConfigProtoMsg, useInterfaces: boolean = true): Config {
     return Config.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Config): Uint8Array {
@@ -221,7 +221,7 @@ export const ModuleConfig = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ModuleConfig {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModuleConfig {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleConfig();
@@ -279,7 +279,7 @@ export const ModuleConfig = {
       config: object?.config ? Any.fromAmino(object.config) : undefined
     };
   },
-  toAmino(message: ModuleConfig, useInterfaces: boolean = false): ModuleConfigAmino {
+  toAmino(message: ModuleConfig, useInterfaces: boolean = true): ModuleConfigAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.config = message.config ? Any.toAmino(message.config, useInterfaces) : undefined;
@@ -288,13 +288,13 @@ export const ModuleConfig = {
   fromAminoMsg(object: ModuleConfigAminoMsg): ModuleConfig {
     return ModuleConfig.fromAmino(object.value);
   },
-  toAminoMsg(message: ModuleConfig, useInterfaces: boolean = false): ModuleConfigAminoMsg {
+  toAminoMsg(message: ModuleConfig, useInterfaces: boolean = true): ModuleConfigAminoMsg {
     return {
       type: "cosmos-sdk/ModuleConfig",
       value: ModuleConfig.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ModuleConfigProtoMsg, useInterfaces: boolean = false): ModuleConfig {
+  fromProtoMsg(message: ModuleConfigProtoMsg, useInterfaces: boolean = true): ModuleConfig {
     return ModuleConfig.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ModuleConfig): Uint8Array {

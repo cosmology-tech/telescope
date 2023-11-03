@@ -248,7 +248,7 @@ export const SuperfluidAsset = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SuperfluidAsset {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SuperfluidAsset {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidAsset();
@@ -304,13 +304,13 @@ export const SuperfluidAsset = {
       assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : -1
     };
   },
-  toAmino(message: SuperfluidAsset, useInterfaces: boolean = false): SuperfluidAssetAmino {
+  toAmino(message: SuperfluidAsset, useInterfaces: boolean = true): SuperfluidAssetAmino {
     const obj: any = {};
     obj.denom = message.denom;
     obj.asset_type = message.assetType;
     return obj;
   },
-  fromProtoMsg(message: SuperfluidAssetProtoMsg, useInterfaces: boolean = false): SuperfluidAsset {
+  fromProtoMsg(message: SuperfluidAssetProtoMsg, useInterfaces: boolean = true): SuperfluidAsset {
     return SuperfluidAsset.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SuperfluidAsset): Uint8Array {
@@ -345,7 +345,7 @@ export const SuperfluidIntermediaryAccount = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SuperfluidIntermediaryAccount {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SuperfluidIntermediaryAccount {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidIntermediaryAccount();
@@ -412,14 +412,14 @@ export const SuperfluidIntermediaryAccount = {
       gaugeId: BigInt(object.gauge_id)
     };
   },
-  toAmino(message: SuperfluidIntermediaryAccount, useInterfaces: boolean = false): SuperfluidIntermediaryAccountAmino {
+  toAmino(message: SuperfluidIntermediaryAccount, useInterfaces: boolean = true): SuperfluidIntermediaryAccountAmino {
     const obj: any = {};
     obj.denom = message.denom;
     obj.val_addr = message.valAddr;
     obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: SuperfluidIntermediaryAccountProtoMsg, useInterfaces: boolean = false): SuperfluidIntermediaryAccount {
+  fromProtoMsg(message: SuperfluidIntermediaryAccountProtoMsg, useInterfaces: boolean = true): SuperfluidIntermediaryAccount {
     return SuperfluidIntermediaryAccount.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SuperfluidIntermediaryAccount): Uint8Array {
@@ -454,7 +454,7 @@ export const OsmoEquivalentMultiplierRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): OsmoEquivalentMultiplierRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): OsmoEquivalentMultiplierRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOsmoEquivalentMultiplierRecord();
@@ -521,14 +521,14 @@ export const OsmoEquivalentMultiplierRecord = {
       multiplier: object.multiplier
     };
   },
-  toAmino(message: OsmoEquivalentMultiplierRecord, useInterfaces: boolean = false): OsmoEquivalentMultiplierRecordAmino {
+  toAmino(message: OsmoEquivalentMultiplierRecord, useInterfaces: boolean = true): OsmoEquivalentMultiplierRecordAmino {
     const obj: any = {};
     obj.epoch_number = message.epochNumber ? message.epochNumber.toString() : undefined;
     obj.denom = message.denom;
     obj.multiplier = message.multiplier;
     return obj;
   },
-  fromProtoMsg(message: OsmoEquivalentMultiplierRecordProtoMsg, useInterfaces: boolean = false): OsmoEquivalentMultiplierRecord {
+  fromProtoMsg(message: OsmoEquivalentMultiplierRecordProtoMsg, useInterfaces: boolean = true): OsmoEquivalentMultiplierRecord {
     return OsmoEquivalentMultiplierRecord.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: OsmoEquivalentMultiplierRecord): Uint8Array {
@@ -567,7 +567,7 @@ export const SuperfluidDelegationRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SuperfluidDelegationRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SuperfluidDelegationRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidDelegationRecord();
@@ -645,7 +645,7 @@ export const SuperfluidDelegationRecord = {
       equivalentStakedAmount: object?.equivalent_staked_amount ? Coin.fromAmino(object.equivalent_staked_amount) : undefined
     };
   },
-  toAmino(message: SuperfluidDelegationRecord, useInterfaces: boolean = false): SuperfluidDelegationRecordAmino {
+  toAmino(message: SuperfluidDelegationRecord, useInterfaces: boolean = true): SuperfluidDelegationRecordAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     obj.validator_address = message.validatorAddress;
@@ -653,7 +653,7 @@ export const SuperfluidDelegationRecord = {
     obj.equivalent_staked_amount = message.equivalentStakedAmount ? Coin.toAmino(message.equivalentStakedAmount, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: SuperfluidDelegationRecordProtoMsg, useInterfaces: boolean = false): SuperfluidDelegationRecord {
+  fromProtoMsg(message: SuperfluidDelegationRecordProtoMsg, useInterfaces: boolean = true): SuperfluidDelegationRecord {
     return SuperfluidDelegationRecord.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SuperfluidDelegationRecord): Uint8Array {
@@ -684,7 +684,7 @@ export const LockIdIntermediaryAccountConnection = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): LockIdIntermediaryAccountConnection {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LockIdIntermediaryAccountConnection {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockIdIntermediaryAccountConnection();
@@ -742,13 +742,13 @@ export const LockIdIntermediaryAccountConnection = {
       intermediaryAccount: object.intermediary_account
     };
   },
-  toAmino(message: LockIdIntermediaryAccountConnection, useInterfaces: boolean = false): LockIdIntermediaryAccountConnectionAmino {
+  toAmino(message: LockIdIntermediaryAccountConnection, useInterfaces: boolean = true): LockIdIntermediaryAccountConnectionAmino {
     const obj: any = {};
     obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
     obj.intermediary_account = message.intermediaryAccount;
     return obj;
   },
-  fromProtoMsg(message: LockIdIntermediaryAccountConnectionProtoMsg, useInterfaces: boolean = false): LockIdIntermediaryAccountConnection {
+  fromProtoMsg(message: LockIdIntermediaryAccountConnectionProtoMsg, useInterfaces: boolean = true): LockIdIntermediaryAccountConnection {
     return LockIdIntermediaryAccountConnection.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LockIdIntermediaryAccountConnection): Uint8Array {
@@ -777,7 +777,7 @@ export const UnpoolWhitelistedPools = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): UnpoolWhitelistedPools {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UnpoolWhitelistedPools {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUnpoolWhitelistedPools();
@@ -839,7 +839,7 @@ export const UnpoolWhitelistedPools = {
       ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => BigInt(e)) : []
     };
   },
-  toAmino(message: UnpoolWhitelistedPools, useInterfaces: boolean = false): UnpoolWhitelistedPoolsAmino {
+  toAmino(message: UnpoolWhitelistedPools, useInterfaces: boolean = true): UnpoolWhitelistedPoolsAmino {
     const obj: any = {};
     if (message.ids) {
       obj.ids = message.ids.map(e => e.toString());
@@ -848,7 +848,7 @@ export const UnpoolWhitelistedPools = {
     }
     return obj;
   },
-  fromProtoMsg(message: UnpoolWhitelistedPoolsProtoMsg, useInterfaces: boolean = false): UnpoolWhitelistedPools {
+  fromProtoMsg(message: UnpoolWhitelistedPoolsProtoMsg, useInterfaces: boolean = true): UnpoolWhitelistedPools {
     return UnpoolWhitelistedPools.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UnpoolWhitelistedPools): Uint8Array {

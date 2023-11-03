@@ -117,7 +117,7 @@ export const MsgCloseGroup = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCloseGroup {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCloseGroup {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseGroup();
@@ -166,7 +166,7 @@ export const MsgCloseGroup = {
       id: object?.id ? GroupID.fromAmino(object.id) : undefined
     };
   },
-  toAmino(message: MsgCloseGroup, useInterfaces: boolean = false): MsgCloseGroupAmino {
+  toAmino(message: MsgCloseGroup, useInterfaces: boolean = true): MsgCloseGroupAmino {
     const obj: any = {};
     obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : undefined;
     return obj;
@@ -174,7 +174,7 @@ export const MsgCloseGroup = {
   fromAminoMsg(object: MsgCloseGroupAminoMsg): MsgCloseGroup {
     return MsgCloseGroup.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgCloseGroupProtoMsg, useInterfaces: boolean = false): MsgCloseGroup {
+  fromProtoMsg(message: MsgCloseGroupProtoMsg, useInterfaces: boolean = true): MsgCloseGroup {
     return MsgCloseGroup.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCloseGroup): Uint8Array {
@@ -195,7 +195,7 @@ export const MsgCloseGroupResponse = {
   encode(_: MsgCloseGroupResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgCloseGroupResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCloseGroupResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseGroupResponse();
@@ -231,14 +231,14 @@ export const MsgCloseGroupResponse = {
   fromAmino(_: MsgCloseGroupResponseAmino): MsgCloseGroupResponse {
     return {};
   },
-  toAmino(_: MsgCloseGroupResponse, useInterfaces: boolean = false): MsgCloseGroupResponseAmino {
+  toAmino(_: MsgCloseGroupResponse, useInterfaces: boolean = true): MsgCloseGroupResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgCloseGroupResponseAminoMsg): MsgCloseGroupResponse {
     return MsgCloseGroupResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgCloseGroupResponseProtoMsg, useInterfaces: boolean = false): MsgCloseGroupResponse {
+  fromProtoMsg(message: MsgCloseGroupResponseProtoMsg, useInterfaces: boolean = true): MsgCloseGroupResponse {
     return MsgCloseGroupResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCloseGroupResponse): Uint8Array {
@@ -264,7 +264,7 @@ export const MsgPauseGroup = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgPauseGroup {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgPauseGroup {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgPauseGroup();
@@ -313,7 +313,7 @@ export const MsgPauseGroup = {
       id: object?.id ? GroupID.fromAmino(object.id) : undefined
     };
   },
-  toAmino(message: MsgPauseGroup, useInterfaces: boolean = false): MsgPauseGroupAmino {
+  toAmino(message: MsgPauseGroup, useInterfaces: boolean = true): MsgPauseGroupAmino {
     const obj: any = {};
     obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : undefined;
     return obj;
@@ -321,7 +321,7 @@ export const MsgPauseGroup = {
   fromAminoMsg(object: MsgPauseGroupAminoMsg): MsgPauseGroup {
     return MsgPauseGroup.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgPauseGroupProtoMsg, useInterfaces: boolean = false): MsgPauseGroup {
+  fromProtoMsg(message: MsgPauseGroupProtoMsg, useInterfaces: boolean = true): MsgPauseGroup {
     return MsgPauseGroup.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgPauseGroup): Uint8Array {
@@ -342,7 +342,7 @@ export const MsgPauseGroupResponse = {
   encode(_: MsgPauseGroupResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgPauseGroupResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgPauseGroupResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgPauseGroupResponse();
@@ -378,14 +378,14 @@ export const MsgPauseGroupResponse = {
   fromAmino(_: MsgPauseGroupResponseAmino): MsgPauseGroupResponse {
     return {};
   },
-  toAmino(_: MsgPauseGroupResponse, useInterfaces: boolean = false): MsgPauseGroupResponseAmino {
+  toAmino(_: MsgPauseGroupResponse, useInterfaces: boolean = true): MsgPauseGroupResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgPauseGroupResponseAminoMsg): MsgPauseGroupResponse {
     return MsgPauseGroupResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgPauseGroupResponseProtoMsg, useInterfaces: boolean = false): MsgPauseGroupResponse {
+  fromProtoMsg(message: MsgPauseGroupResponseProtoMsg, useInterfaces: boolean = true): MsgPauseGroupResponse {
     return MsgPauseGroupResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgPauseGroupResponse): Uint8Array {
@@ -411,7 +411,7 @@ export const MsgStartGroup = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgStartGroup {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgStartGroup {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgStartGroup();
@@ -460,7 +460,7 @@ export const MsgStartGroup = {
       id: object?.id ? GroupID.fromAmino(object.id) : undefined
     };
   },
-  toAmino(message: MsgStartGroup, useInterfaces: boolean = false): MsgStartGroupAmino {
+  toAmino(message: MsgStartGroup, useInterfaces: boolean = true): MsgStartGroupAmino {
     const obj: any = {};
     obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : undefined;
     return obj;
@@ -468,7 +468,7 @@ export const MsgStartGroup = {
   fromAminoMsg(object: MsgStartGroupAminoMsg): MsgStartGroup {
     return MsgStartGroup.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgStartGroupProtoMsg, useInterfaces: boolean = false): MsgStartGroup {
+  fromProtoMsg(message: MsgStartGroupProtoMsg, useInterfaces: boolean = true): MsgStartGroup {
     return MsgStartGroup.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgStartGroup): Uint8Array {
@@ -489,7 +489,7 @@ export const MsgStartGroupResponse = {
   encode(_: MsgStartGroupResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgStartGroupResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgStartGroupResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgStartGroupResponse();
@@ -525,14 +525,14 @@ export const MsgStartGroupResponse = {
   fromAmino(_: MsgStartGroupResponseAmino): MsgStartGroupResponse {
     return {};
   },
-  toAmino(_: MsgStartGroupResponse, useInterfaces: boolean = false): MsgStartGroupResponseAmino {
+  toAmino(_: MsgStartGroupResponse, useInterfaces: boolean = true): MsgStartGroupResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgStartGroupResponseAminoMsg): MsgStartGroupResponse {
     return MsgStartGroupResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgStartGroupResponseProtoMsg, useInterfaces: boolean = false): MsgStartGroupResponse {
+  fromProtoMsg(message: MsgStartGroupResponseProtoMsg, useInterfaces: boolean = true): MsgStartGroupResponse {
     return MsgStartGroupResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgStartGroupResponse): Uint8Array {

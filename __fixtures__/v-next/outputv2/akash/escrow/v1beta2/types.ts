@@ -249,7 +249,7 @@ export const AccountID = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AccountID {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountID {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountID();
@@ -305,7 +305,7 @@ export const AccountID = {
       xid: object.xid
     };
   },
-  toAmino(message: AccountID, useInterfaces: boolean = false): AccountIDAmino {
+  toAmino(message: AccountID, useInterfaces: boolean = true): AccountIDAmino {
     const obj: any = {};
     obj.scope = message.scope;
     obj.xid = message.xid;
@@ -314,7 +314,7 @@ export const AccountID = {
   fromAminoMsg(object: AccountIDAminoMsg): AccountID {
     return AccountID.fromAmino(object.value);
   },
-  fromProtoMsg(message: AccountIDProtoMsg, useInterfaces: boolean = false): AccountID {
+  fromProtoMsg(message: AccountIDProtoMsg, useInterfaces: boolean = true): AccountID {
     return AccountID.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AccountID): Uint8Array {
@@ -368,7 +368,7 @@ export const Account = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Account {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Account {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccount();
@@ -488,7 +488,7 @@ export const Account = {
       funds: object?.funds ? DecCoin.fromAmino(object.funds) : undefined
     };
   },
-  toAmino(message: Account, useInterfaces: boolean = false): AccountAmino {
+  toAmino(message: Account, useInterfaces: boolean = true): AccountAmino {
     const obj: any = {};
     obj.id = message.id ? AccountID.toAmino(message.id, useInterfaces) : undefined;
     obj.owner = message.owner;
@@ -503,7 +503,7 @@ export const Account = {
   fromAminoMsg(object: AccountAminoMsg): Account {
     return Account.fromAmino(object.value);
   },
-  fromProtoMsg(message: AccountProtoMsg, useInterfaces: boolean = false): Account {
+  fromProtoMsg(message: AccountProtoMsg, useInterfaces: boolean = true): Account {
     return Account.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Account): Uint8Array {
@@ -553,7 +553,7 @@ export const FractionalPayment = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): FractionalPayment {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): FractionalPayment {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFractionalPayment();
@@ -662,7 +662,7 @@ export const FractionalPayment = {
       withdrawn: object?.withdrawn ? Coin.fromAmino(object.withdrawn) : undefined
     };
   },
-  toAmino(message: FractionalPayment, useInterfaces: boolean = false): FractionalPaymentAmino {
+  toAmino(message: FractionalPayment, useInterfaces: boolean = true): FractionalPaymentAmino {
     const obj: any = {};
     obj.account_id = message.accountId ? AccountID.toAmino(message.accountId, useInterfaces) : undefined;
     obj.payment_id = message.paymentId;
@@ -676,7 +676,7 @@ export const FractionalPayment = {
   fromAminoMsg(object: FractionalPaymentAminoMsg): FractionalPayment {
     return FractionalPayment.fromAmino(object.value);
   },
-  fromProtoMsg(message: FractionalPaymentProtoMsg, useInterfaces: boolean = false): FractionalPayment {
+  fromProtoMsg(message: FractionalPaymentProtoMsg, useInterfaces: boolean = true): FractionalPayment {
     return FractionalPayment.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: FractionalPayment): Uint8Array {

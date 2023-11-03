@@ -175,7 +175,7 @@ export const Incentive = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Incentive {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Incentive {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIncentive();
@@ -268,7 +268,7 @@ export const Incentive = {
       totalGas: BigInt(object.total_gas)
     };
   },
-  toAmino(message: Incentive, useInterfaces: boolean = false): IncentiveAmino {
+  toAmino(message: Incentive, useInterfaces: boolean = true): IncentiveAmino {
     const obj: any = {};
     obj.contract = message.contract;
     if (message.allocations) {
@@ -281,7 +281,7 @@ export const Incentive = {
     obj.total_gas = message.totalGas ? message.totalGas.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: IncentiveProtoMsg, useInterfaces: boolean = false): Incentive {
+  fromProtoMsg(message: IncentiveProtoMsg, useInterfaces: boolean = true): Incentive {
     return Incentive.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Incentive): Uint8Array {
@@ -315,7 +315,7 @@ export const GasMeter = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GasMeter {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GasMeter {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGasMeter();
@@ -382,14 +382,14 @@ export const GasMeter = {
       cumulativeGas: BigInt(object.cumulative_gas)
     };
   },
-  toAmino(message: GasMeter, useInterfaces: boolean = false): GasMeterAmino {
+  toAmino(message: GasMeter, useInterfaces: boolean = true): GasMeterAmino {
     const obj: any = {};
     obj.contract = message.contract;
     obj.participant = message.participant;
     obj.cumulative_gas = message.cumulativeGas ? message.cumulativeGas.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: GasMeterProtoMsg, useInterfaces: boolean = false): GasMeter {
+  fromProtoMsg(message: GasMeterProtoMsg, useInterfaces: boolean = true): GasMeter {
     return GasMeter.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GasMeter): Uint8Array {
@@ -432,7 +432,7 @@ export const RegisterIncentiveProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): RegisterIncentiveProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): RegisterIncentiveProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRegisterIncentiveProposal();
@@ -523,7 +523,7 @@ export const RegisterIncentiveProposal = {
       epochs: object.epochs
     };
   },
-  toAmino(message: RegisterIncentiveProposal, useInterfaces: boolean = false): RegisterIncentiveProposalAmino {
+  toAmino(message: RegisterIncentiveProposal, useInterfaces: boolean = true): RegisterIncentiveProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -536,7 +536,7 @@ export const RegisterIncentiveProposal = {
     obj.epochs = message.epochs;
     return obj;
   },
-  fromProtoMsg(message: RegisterIncentiveProposalProtoMsg, useInterfaces: boolean = false): RegisterIncentiveProposal {
+  fromProtoMsg(message: RegisterIncentiveProposalProtoMsg, useInterfaces: boolean = true): RegisterIncentiveProposal {
     return RegisterIncentiveProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: RegisterIncentiveProposal): Uint8Array {
@@ -570,7 +570,7 @@ export const CancelIncentiveProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CancelIncentiveProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CancelIncentiveProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCancelIncentiveProposal();
@@ -635,14 +635,14 @@ export const CancelIncentiveProposal = {
       contract: object.contract
     };
   },
-  toAmino(message: CancelIncentiveProposal, useInterfaces: boolean = false): CancelIncentiveProposalAmino {
+  toAmino(message: CancelIncentiveProposal, useInterfaces: boolean = true): CancelIncentiveProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
     obj.contract = message.contract;
     return obj;
   },
-  fromProtoMsg(message: CancelIncentiveProposalProtoMsg, useInterfaces: boolean = false): CancelIncentiveProposal {
+  fromProtoMsg(message: CancelIncentiveProposalProtoMsg, useInterfaces: boolean = true): CancelIncentiveProposal {
     return CancelIncentiveProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CancelIncentiveProposal): Uint8Array {

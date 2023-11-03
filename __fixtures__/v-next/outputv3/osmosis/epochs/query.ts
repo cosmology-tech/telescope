@@ -57,7 +57,7 @@ export const QueryEpochsInfoRequest = {
   encode(_: QueryEpochsInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryEpochsInfoRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryEpochsInfoRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEpochsInfoRequest();
@@ -93,11 +93,11 @@ export const QueryEpochsInfoRequest = {
   fromAmino(_: QueryEpochsInfoRequestAmino): QueryEpochsInfoRequest {
     return {};
   },
-  toAmino(_: QueryEpochsInfoRequest, useInterfaces: boolean = false): QueryEpochsInfoRequestAmino {
+  toAmino(_: QueryEpochsInfoRequest, useInterfaces: boolean = true): QueryEpochsInfoRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: QueryEpochsInfoRequestProtoMsg, useInterfaces: boolean = false): QueryEpochsInfoRequest {
+  fromProtoMsg(message: QueryEpochsInfoRequestProtoMsg, useInterfaces: boolean = true): QueryEpochsInfoRequest {
     return QueryEpochsInfoRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryEpochsInfoRequest): Uint8Array {
@@ -124,7 +124,7 @@ export const QueryEpochsInfoResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryEpochsInfoResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryEpochsInfoResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEpochsInfoResponse();
@@ -179,7 +179,7 @@ export const QueryEpochsInfoResponse = {
       epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryEpochsInfoResponse, useInterfaces: boolean = false): QueryEpochsInfoResponseAmino {
+  toAmino(message: QueryEpochsInfoResponse, useInterfaces: boolean = true): QueryEpochsInfoResponseAmino {
     const obj: any = {};
     if (message.epochs) {
       obj.epochs = message.epochs.map(e => e ? EpochInfo.toAmino(e, useInterfaces) : undefined);
@@ -188,7 +188,7 @@ export const QueryEpochsInfoResponse = {
     }
     return obj;
   },
-  fromProtoMsg(message: QueryEpochsInfoResponseProtoMsg, useInterfaces: boolean = false): QueryEpochsInfoResponse {
+  fromProtoMsg(message: QueryEpochsInfoResponseProtoMsg, useInterfaces: boolean = true): QueryEpochsInfoResponse {
     return QueryEpochsInfoResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryEpochsInfoResponse): Uint8Array {
@@ -215,7 +215,7 @@ export const QueryCurrentEpochRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryCurrentEpochRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryCurrentEpochRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCurrentEpochRequest();
@@ -262,12 +262,12 @@ export const QueryCurrentEpochRequest = {
       identifier: object.identifier
     };
   },
-  toAmino(message: QueryCurrentEpochRequest, useInterfaces: boolean = false): QueryCurrentEpochRequestAmino {
+  toAmino(message: QueryCurrentEpochRequest, useInterfaces: boolean = true): QueryCurrentEpochRequestAmino {
     const obj: any = {};
     obj.identifier = message.identifier;
     return obj;
   },
-  fromProtoMsg(message: QueryCurrentEpochRequestProtoMsg, useInterfaces: boolean = false): QueryCurrentEpochRequest {
+  fromProtoMsg(message: QueryCurrentEpochRequestProtoMsg, useInterfaces: boolean = true): QueryCurrentEpochRequest {
     return QueryCurrentEpochRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryCurrentEpochRequest): Uint8Array {
@@ -294,7 +294,7 @@ export const QueryCurrentEpochResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryCurrentEpochResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryCurrentEpochResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCurrentEpochResponse();
@@ -343,12 +343,12 @@ export const QueryCurrentEpochResponse = {
       currentEpoch: BigInt(object.current_epoch)
     };
   },
-  toAmino(message: QueryCurrentEpochResponse, useInterfaces: boolean = false): QueryCurrentEpochResponseAmino {
+  toAmino(message: QueryCurrentEpochResponse, useInterfaces: boolean = true): QueryCurrentEpochResponseAmino {
     const obj: any = {};
     obj.current_epoch = message.currentEpoch ? message.currentEpoch.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryCurrentEpochResponseProtoMsg, useInterfaces: boolean = false): QueryCurrentEpochResponse {
+  fromProtoMsg(message: QueryCurrentEpochResponseProtoMsg, useInterfaces: boolean = true): QueryCurrentEpochResponse {
     return QueryCurrentEpochResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryCurrentEpochResponse): Uint8Array {

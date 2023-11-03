@@ -154,7 +154,7 @@ export const SourceInfo_PositionsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SourceInfo_PositionsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SourceInfo_PositionsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo_PositionsEntry();
@@ -210,7 +210,7 @@ export const SourceInfo_PositionsEntry = {
       value: object.value
     };
   },
-  toAmino(message: SourceInfo_PositionsEntry, useInterfaces: boolean = false): SourceInfo_PositionsEntryAmino {
+  toAmino(message: SourceInfo_PositionsEntry, useInterfaces: boolean = true): SourceInfo_PositionsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -219,7 +219,7 @@ export const SourceInfo_PositionsEntry = {
   fromAminoMsg(object: SourceInfo_PositionsEntryAminoMsg): SourceInfo_PositionsEntry {
     return SourceInfo_PositionsEntry.fromAmino(object.value);
   },
-  fromProtoMsg(message: SourceInfo_PositionsEntryProtoMsg, useInterfaces: boolean = false): SourceInfo_PositionsEntry {
+  fromProtoMsg(message: SourceInfo_PositionsEntryProtoMsg, useInterfaces: boolean = true): SourceInfo_PositionsEntry {
     return SourceInfo_PositionsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SourceInfo_PositionsEntry): Uint8Array {
@@ -252,7 +252,7 @@ export const SourceInfo = {
     });
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SourceInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SourceInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo();
@@ -367,7 +367,7 @@ export const SourceInfo = {
       }, {}) : {}
     };
   },
-  toAmino(message: SourceInfo, useInterfaces: boolean = false): SourceInfoAmino {
+  toAmino(message: SourceInfo, useInterfaces: boolean = true): SourceInfoAmino {
     const obj: any = {};
     obj.location = message.location;
     if (message.lineOffsets) {
@@ -386,7 +386,7 @@ export const SourceInfo = {
   fromAminoMsg(object: SourceInfoAminoMsg): SourceInfo {
     return SourceInfo.fromAmino(object.value);
   },
-  fromProtoMsg(message: SourceInfoProtoMsg, useInterfaces: boolean = false): SourceInfo {
+  fromProtoMsg(message: SourceInfoProtoMsg, useInterfaces: boolean = true): SourceInfo {
     return SourceInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SourceInfo): Uint8Array {
@@ -424,7 +424,7 @@ export const SourcePosition = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SourcePosition {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SourcePosition {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourcePosition();
@@ -498,7 +498,7 @@ export const SourcePosition = {
       column: object.column
     };
   },
-  toAmino(message: SourcePosition, useInterfaces: boolean = false): SourcePositionAmino {
+  toAmino(message: SourcePosition, useInterfaces: boolean = true): SourcePositionAmino {
     const obj: any = {};
     obj.location = message.location;
     obj.offset = message.offset;
@@ -509,7 +509,7 @@ export const SourcePosition = {
   fromAminoMsg(object: SourcePositionAminoMsg): SourcePosition {
     return SourcePosition.fromAmino(object.value);
   },
-  fromProtoMsg(message: SourcePositionProtoMsg, useInterfaces: boolean = false): SourcePosition {
+  fromProtoMsg(message: SourcePositionProtoMsg, useInterfaces: boolean = true): SourcePosition {
     return SourcePosition.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SourcePosition): Uint8Array {

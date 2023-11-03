@@ -484,7 +484,7 @@ export const Api = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Api {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Api {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseApi();
@@ -611,7 +611,7 @@ export const Api = {
       syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
     };
   },
-  toAmino(message: Api, useInterfaces: boolean = false): ApiAmino {
+  toAmino(message: Api, useInterfaces: boolean = true): ApiAmino {
     const obj: any = {};
     obj.name = message.name;
     if (message.methods) {
@@ -634,7 +634,7 @@ export const Api = {
     obj.syntax = message.syntax;
     return obj;
   },
-  fromProtoMsg(message: ApiProtoMsg, useInterfaces: boolean = false): Api {
+  fromProtoMsg(message: ApiProtoMsg, useInterfaces: boolean = true): Api {
     return Api.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Api): Uint8Array {
@@ -684,7 +684,7 @@ export const Method = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Method {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Method {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMethod();
@@ -793,7 +793,7 @@ export const Method = {
       syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
     };
   },
-  toAmino(message: Method, useInterfaces: boolean = false): MethodAmino {
+  toAmino(message: Method, useInterfaces: boolean = true): MethodAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.request_type_url = message.requestTypeUrl;
@@ -808,7 +808,7 @@ export const Method = {
     obj.syntax = message.syntax;
     return obj;
   },
-  fromProtoMsg(message: MethodProtoMsg, useInterfaces: boolean = false): Method {
+  fromProtoMsg(message: MethodProtoMsg, useInterfaces: boolean = true): Method {
     return Method.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Method): Uint8Array {
@@ -838,7 +838,7 @@ export const Mixin = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Mixin {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Mixin {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMixin();
@@ -894,13 +894,13 @@ export const Mixin = {
       root: object.root
     };
   },
-  toAmino(message: Mixin, useInterfaces: boolean = false): MixinAmino {
+  toAmino(message: Mixin, useInterfaces: boolean = true): MixinAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.root = message.root;
     return obj;
   },
-  fromProtoMsg(message: MixinProtoMsg, useInterfaces: boolean = false): Mixin {
+  fromProtoMsg(message: MixinProtoMsg, useInterfaces: boolean = true): Mixin {
     return Mixin.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Mixin): Uint8Array {

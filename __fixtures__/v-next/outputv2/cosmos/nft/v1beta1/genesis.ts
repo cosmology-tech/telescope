@@ -72,7 +72,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -144,7 +144,7 @@ export const GenesisState = {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Entry.fromAmino(e)) : []
     };
   },
-  toAmino(message: GenesisState, useInterfaces: boolean = false): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     if (message.classes) {
       obj.classes = message.classes.map(e => e ? Class.toAmino(e, useInterfaces) : undefined);
@@ -161,13 +161,13 @@ export const GenesisState = {
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
   },
-  toAminoMsg(message: GenesisState, useInterfaces: boolean = false): GenesisStateAminoMsg {
+  toAminoMsg(message: GenesisState, useInterfaces: boolean = true): GenesisStateAminoMsg {
     return {
       type: "cosmos-sdk/GenesisState",
       value: GenesisState.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = false): GenesisState {
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
     return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
@@ -198,7 +198,7 @@ export const Entry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Entry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Entry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEntry();
@@ -262,7 +262,7 @@ export const Entry = {
       nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromAmino(e)) : []
     };
   },
-  toAmino(message: Entry, useInterfaces: boolean = false): EntryAmino {
+  toAmino(message: Entry, useInterfaces: boolean = true): EntryAmino {
     const obj: any = {};
     obj.owner = message.owner;
     if (message.nfts) {
@@ -275,13 +275,13 @@ export const Entry = {
   fromAminoMsg(object: EntryAminoMsg): Entry {
     return Entry.fromAmino(object.value);
   },
-  toAminoMsg(message: Entry, useInterfaces: boolean = false): EntryAminoMsg {
+  toAminoMsg(message: Entry, useInterfaces: boolean = true): EntryAminoMsg {
     return {
       type: "cosmos-sdk/Entry",
       value: Entry.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: EntryProtoMsg, useInterfaces: boolean = false): Entry {
+  fromProtoMsg(message: EntryProtoMsg, useInterfaces: boolean = true): Entry {
     return Entry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Entry): Uint8Array {

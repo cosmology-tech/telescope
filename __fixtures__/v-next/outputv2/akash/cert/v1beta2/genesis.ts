@@ -62,7 +62,7 @@ export const GenesisCertificate = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisCertificate {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisCertificate {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisCertificate();
@@ -120,7 +120,7 @@ export const GenesisCertificate = {
       certificate: object?.certificate ? Certificate.fromAmino(object.certificate) : undefined
     };
   },
-  toAmino(message: GenesisCertificate, useInterfaces: boolean = false): GenesisCertificateAmino {
+  toAmino(message: GenesisCertificate, useInterfaces: boolean = true): GenesisCertificateAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.certificate = message.certificate ? Certificate.toAmino(message.certificate, useInterfaces) : undefined;
@@ -129,7 +129,7 @@ export const GenesisCertificate = {
   fromAminoMsg(object: GenesisCertificateAminoMsg): GenesisCertificate {
     return GenesisCertificate.fromAmino(object.value);
   },
-  fromProtoMsg(message: GenesisCertificateProtoMsg, useInterfaces: boolean = false): GenesisCertificate {
+  fromProtoMsg(message: GenesisCertificateProtoMsg, useInterfaces: boolean = true): GenesisCertificate {
     return GenesisCertificate.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisCertificate): Uint8Array {
@@ -155,7 +155,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -210,7 +210,7 @@ export const GenesisState = {
       certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => GenesisCertificate.fromAmino(e)) : []
     };
   },
-  toAmino(message: GenesisState, useInterfaces: boolean = false): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     if (message.certificates) {
       obj.certificates = message.certificates.map(e => e ? GenesisCertificate.toAmino(e, useInterfaces) : undefined);
@@ -222,7 +222,7 @@ export const GenesisState = {
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
   },
-  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = false): GenesisState {
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
     return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {

@@ -89,7 +89,7 @@ export const CertificateResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CertificateResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CertificateResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCertificateResponse();
@@ -147,7 +147,7 @@ export const CertificateResponse = {
       serial: object.serial
     };
   },
-  toAmino(message: CertificateResponse, useInterfaces: boolean = false): CertificateResponseAmino {
+  toAmino(message: CertificateResponse, useInterfaces: boolean = true): CertificateResponseAmino {
     const obj: any = {};
     obj.certificate = message.certificate ? Certificate.toAmino(message.certificate, useInterfaces) : undefined;
     obj.serial = message.serial;
@@ -156,7 +156,7 @@ export const CertificateResponse = {
   fromAminoMsg(object: CertificateResponseAminoMsg): CertificateResponse {
     return CertificateResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: CertificateResponseProtoMsg, useInterfaces: boolean = false): CertificateResponse {
+  fromProtoMsg(message: CertificateResponseProtoMsg, useInterfaces: boolean = true): CertificateResponse {
     return CertificateResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CertificateResponse): Uint8Array {
@@ -186,7 +186,7 @@ export const QueryCertificatesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryCertificatesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryCertificatesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCertificatesRequest();
@@ -246,7 +246,7 @@ export const QueryCertificatesRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryCertificatesRequest, useInterfaces: boolean = false): QueryCertificatesRequestAmino {
+  toAmino(message: QueryCertificatesRequest, useInterfaces: boolean = true): QueryCertificatesRequestAmino {
     const obj: any = {};
     obj.filter = message.filter ? CertificateFilter.toAmino(message.filter, useInterfaces) : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
@@ -255,7 +255,7 @@ export const QueryCertificatesRequest = {
   fromAminoMsg(object: QueryCertificatesRequestAminoMsg): QueryCertificatesRequest {
     return QueryCertificatesRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryCertificatesRequestProtoMsg, useInterfaces: boolean = false): QueryCertificatesRequest {
+  fromProtoMsg(message: QueryCertificatesRequestProtoMsg, useInterfaces: boolean = true): QueryCertificatesRequest {
     return QueryCertificatesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryCertificatesRequest): Uint8Array {
@@ -285,7 +285,7 @@ export const QueryCertificatesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryCertificatesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryCertificatesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCertificatesResponse();
@@ -351,7 +351,7 @@ export const QueryCertificatesResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryCertificatesResponse, useInterfaces: boolean = false): QueryCertificatesResponseAmino {
+  toAmino(message: QueryCertificatesResponse, useInterfaces: boolean = true): QueryCertificatesResponseAmino {
     const obj: any = {};
     if (message.certificates) {
       obj.certificates = message.certificates.map(e => e ? CertificateResponse.toAmino(e, useInterfaces) : undefined);
@@ -364,7 +364,7 @@ export const QueryCertificatesResponse = {
   fromAminoMsg(object: QueryCertificatesResponseAminoMsg): QueryCertificatesResponse {
     return QueryCertificatesResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryCertificatesResponseProtoMsg, useInterfaces: boolean = false): QueryCertificatesResponse {
+  fromProtoMsg(message: QueryCertificatesResponseProtoMsg, useInterfaces: boolean = true): QueryCertificatesResponse {
     return QueryCertificatesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryCertificatesResponse): Uint8Array {

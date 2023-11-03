@@ -32,7 +32,7 @@ export const Module = {
   encode(_: Module, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Module {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Module {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModule();
@@ -68,11 +68,11 @@ export const Module = {
   fromAmino(_: ModuleAmino): Module {
     return {};
   },
-  toAmino(_: Module, useInterfaces: boolean = false): ModuleAmino {
+  toAmino(_: Module, useInterfaces: boolean = true): ModuleAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: ModuleProtoMsg, useInterfaces: boolean = false): Module {
+  fromProtoMsg(message: ModuleProtoMsg, useInterfaces: boolean = true): Module {
     return Module.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Module): Uint8Array {

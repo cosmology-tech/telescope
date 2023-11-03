@@ -49,7 +49,7 @@ export const MsgUnjail = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgUnjail {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUnjail {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUnjail();
@@ -96,7 +96,7 @@ export const MsgUnjail = {
       validatorAddr: object.validator_addr
     };
   },
-  toAmino(message: MsgUnjail, useInterfaces: boolean = false): MsgUnjailAmino {
+  toAmino(message: MsgUnjail, useInterfaces: boolean = true): MsgUnjailAmino {
     const obj: any = {};
     obj.validator_addr = message.validatorAddr;
     return obj;
@@ -104,13 +104,13 @@ export const MsgUnjail = {
   fromAminoMsg(object: MsgUnjailAminoMsg): MsgUnjail {
     return MsgUnjail.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUnjail, useInterfaces: boolean = false): MsgUnjailAminoMsg {
+  toAminoMsg(message: MsgUnjail, useInterfaces: boolean = true): MsgUnjailAminoMsg {
     return {
       type: "cosmos-sdk/MsgUnjail",
       value: MsgUnjail.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgUnjailProtoMsg, useInterfaces: boolean = false): MsgUnjail {
+  fromProtoMsg(message: MsgUnjailProtoMsg, useInterfaces: boolean = true): MsgUnjail {
     return MsgUnjail.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUnjail): Uint8Array {
@@ -132,7 +132,7 @@ export const MsgUnjailResponse = {
   encode(_: MsgUnjailResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgUnjailResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUnjailResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUnjailResponse();
@@ -168,20 +168,20 @@ export const MsgUnjailResponse = {
   fromAmino(_: MsgUnjailResponseAmino): MsgUnjailResponse {
     return {};
   },
-  toAmino(_: MsgUnjailResponse, useInterfaces: boolean = false): MsgUnjailResponseAmino {
+  toAmino(_: MsgUnjailResponse, useInterfaces: boolean = true): MsgUnjailResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgUnjailResponseAminoMsg): MsgUnjailResponse {
     return MsgUnjailResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUnjailResponse, useInterfaces: boolean = false): MsgUnjailResponseAminoMsg {
+  toAminoMsg(message: MsgUnjailResponse, useInterfaces: boolean = true): MsgUnjailResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgUnjailResponse",
       value: MsgUnjailResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgUnjailResponseProtoMsg, useInterfaces: boolean = false): MsgUnjailResponse {
+  fromProtoMsg(message: MsgUnjailResponseProtoMsg, useInterfaces: boolean = true): MsgUnjailResponse {
     return MsgUnjailResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUnjailResponse): Uint8Array {

@@ -153,7 +153,7 @@ export const ProtocolVersion = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ProtocolVersion {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ProtocolVersion {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProtocolVersion();
@@ -224,7 +224,7 @@ export const ProtocolVersion = {
       app: BigInt(object.app)
     };
   },
-  toAmino(message: ProtocolVersion, useInterfaces: boolean = false): ProtocolVersionAmino {
+  toAmino(message: ProtocolVersion, useInterfaces: boolean = true): ProtocolVersionAmino {
     const obj: any = {};
     obj.p2p = message.p2p ? message.p2p.toString() : undefined;
     obj.block = message.block ? message.block.toString() : undefined;
@@ -234,7 +234,7 @@ export const ProtocolVersion = {
   fromAminoMsg(object: ProtocolVersionAminoMsg): ProtocolVersion {
     return ProtocolVersion.fromAmino(object.value);
   },
-  fromProtoMsg(message: ProtocolVersionProtoMsg, useInterfaces: boolean = false): ProtocolVersion {
+  fromProtoMsg(message: ProtocolVersionProtoMsg, useInterfaces: boolean = true): ProtocolVersion {
     return ProtocolVersion.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ProtocolVersion): Uint8Array {
@@ -288,7 +288,7 @@ export const NodeInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): NodeInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): NodeInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNodeInfo();
@@ -402,7 +402,7 @@ export const NodeInfo = {
       other: object?.other ? NodeInfoOther.fromAmino(object.other) : undefined
     };
   },
-  toAmino(message: NodeInfo, useInterfaces: boolean = false): NodeInfoAmino {
+  toAmino(message: NodeInfo, useInterfaces: boolean = true): NodeInfoAmino {
     const obj: any = {};
     obj.protocol_version = message.protocolVersion ? ProtocolVersion.toAmino(message.protocolVersion, useInterfaces) : undefined;
     obj.node_id = message.nodeId;
@@ -417,7 +417,7 @@ export const NodeInfo = {
   fromAminoMsg(object: NodeInfoAminoMsg): NodeInfo {
     return NodeInfo.fromAmino(object.value);
   },
-  fromProtoMsg(message: NodeInfoProtoMsg, useInterfaces: boolean = false): NodeInfo {
+  fromProtoMsg(message: NodeInfoProtoMsg, useInterfaces: boolean = true): NodeInfo {
     return NodeInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: NodeInfo): Uint8Array {
@@ -447,7 +447,7 @@ export const NodeInfoOther = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): NodeInfoOther {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): NodeInfoOther {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNodeInfoOther();
@@ -503,7 +503,7 @@ export const NodeInfoOther = {
       rpcAddress: object.rpc_address
     };
   },
-  toAmino(message: NodeInfoOther, useInterfaces: boolean = false): NodeInfoOtherAmino {
+  toAmino(message: NodeInfoOther, useInterfaces: boolean = true): NodeInfoOtherAmino {
     const obj: any = {};
     obj.tx_index = message.txIndex;
     obj.rpc_address = message.rpcAddress;
@@ -512,7 +512,7 @@ export const NodeInfoOther = {
   fromAminoMsg(object: NodeInfoOtherAminoMsg): NodeInfoOther {
     return NodeInfoOther.fromAmino(object.value);
   },
-  fromProtoMsg(message: NodeInfoOtherProtoMsg, useInterfaces: boolean = false): NodeInfoOther {
+  fromProtoMsg(message: NodeInfoOtherProtoMsg, useInterfaces: boolean = true): NodeInfoOther {
     return NodeInfoOther.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: NodeInfoOther): Uint8Array {
@@ -546,7 +546,7 @@ export const PeerInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): PeerInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PeerInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeerInfo();
@@ -619,7 +619,7 @@ export const PeerInfo = {
       lastConnected: object?.last_connected
     };
   },
-  toAmino(message: PeerInfo, useInterfaces: boolean = false): PeerInfoAmino {
+  toAmino(message: PeerInfo, useInterfaces: boolean = true): PeerInfoAmino {
     const obj: any = {};
     obj.id = message.id;
     if (message.addressInfo) {
@@ -633,7 +633,7 @@ export const PeerInfo = {
   fromAminoMsg(object: PeerInfoAminoMsg): PeerInfo {
     return PeerInfo.fromAmino(object.value);
   },
-  fromProtoMsg(message: PeerInfoProtoMsg, useInterfaces: boolean = false): PeerInfo {
+  fromProtoMsg(message: PeerInfoProtoMsg, useInterfaces: boolean = true): PeerInfo {
     return PeerInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PeerInfo): Uint8Array {
@@ -671,7 +671,7 @@ export const PeerAddressInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): PeerAddressInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PeerAddressInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeerAddressInfo();
@@ -745,7 +745,7 @@ export const PeerAddressInfo = {
       dialFailures: object.dial_failures
     };
   },
-  toAmino(message: PeerAddressInfo, useInterfaces: boolean = false): PeerAddressInfoAmino {
+  toAmino(message: PeerAddressInfo, useInterfaces: boolean = true): PeerAddressInfoAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.last_dial_success = message.lastDialSuccess;
@@ -756,7 +756,7 @@ export const PeerAddressInfo = {
   fromAminoMsg(object: PeerAddressInfoAminoMsg): PeerAddressInfo {
     return PeerAddressInfo.fromAmino(object.value);
   },
-  fromProtoMsg(message: PeerAddressInfoProtoMsg, useInterfaces: boolean = false): PeerAddressInfo {
+  fromProtoMsg(message: PeerAddressInfoProtoMsg, useInterfaces: boolean = true): PeerAddressInfo {
     return PeerAddressInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PeerAddressInfo): Uint8Array {

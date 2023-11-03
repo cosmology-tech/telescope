@@ -238,7 +238,7 @@ export const SignatureDescriptors = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SignatureDescriptors {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SignatureDescriptors {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignatureDescriptors();
@@ -293,7 +293,7 @@ export const SignatureDescriptors = {
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor.fromAmino(e)) : []
     };
   },
-  toAmino(message: SignatureDescriptors, useInterfaces: boolean = false): SignatureDescriptorsAmino {
+  toAmino(message: SignatureDescriptors, useInterfaces: boolean = true): SignatureDescriptorsAmino {
     const obj: any = {};
     if (message.signatures) {
       obj.signatures = message.signatures.map(e => e ? SignatureDescriptor.toAmino(e, useInterfaces) : undefined);
@@ -302,7 +302,7 @@ export const SignatureDescriptors = {
     }
     return obj;
   },
-  fromProtoMsg(message: SignatureDescriptorsProtoMsg, useInterfaces: boolean = false): SignatureDescriptors {
+  fromProtoMsg(message: SignatureDescriptorsProtoMsg, useInterfaces: boolean = true): SignatureDescriptors {
     return SignatureDescriptors.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SignatureDescriptors): Uint8Array {
@@ -337,7 +337,7 @@ export const SignatureDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SignatureDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SignatureDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignatureDescriptor();
@@ -408,14 +408,14 @@ export const SignatureDescriptor = {
       sequence: BigInt(object.sequence)
     };
   },
-  toAmino(message: SignatureDescriptor, useInterfaces: boolean = false): SignatureDescriptorAmino {
+  toAmino(message: SignatureDescriptor, useInterfaces: boolean = true): SignatureDescriptorAmino {
     const obj: any = {};
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey, useInterfaces) : undefined;
     obj.data = message.data ? SignatureDescriptor_Data.toAmino(message.data, useInterfaces) : undefined;
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: SignatureDescriptorProtoMsg, useInterfaces: boolean = false): SignatureDescriptor {
+  fromProtoMsg(message: SignatureDescriptorProtoMsg, useInterfaces: boolean = true): SignatureDescriptor {
     return SignatureDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SignatureDescriptor): Uint8Array {
@@ -446,7 +446,7 @@ export const SignatureDescriptor_Data = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SignatureDescriptor_Data {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SignatureDescriptor_Data {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignatureDescriptor_Data();
@@ -506,13 +506,13 @@ export const SignatureDescriptor_Data = {
       multi: object?.multi ? SignatureDescriptor_Data_Multi.fromAmino(object.multi) : undefined
     };
   },
-  toAmino(message: SignatureDescriptor_Data, useInterfaces: boolean = false): SignatureDescriptor_DataAmino {
+  toAmino(message: SignatureDescriptor_Data, useInterfaces: boolean = true): SignatureDescriptor_DataAmino {
     const obj: any = {};
     obj.single = message.single ? SignatureDescriptor_Data_Single.toAmino(message.single, useInterfaces) : undefined;
     obj.multi = message.multi ? SignatureDescriptor_Data_Multi.toAmino(message.multi, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: SignatureDescriptor_DataProtoMsg, useInterfaces: boolean = false): SignatureDescriptor_Data {
+  fromProtoMsg(message: SignatureDescriptor_DataProtoMsg, useInterfaces: boolean = true): SignatureDescriptor_Data {
     return SignatureDescriptor_Data.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SignatureDescriptor_Data): Uint8Array {
@@ -543,7 +543,7 @@ export const SignatureDescriptor_Data_Single = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SignatureDescriptor_Data_Single {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SignatureDescriptor_Data_Single {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignatureDescriptor_Data_Single();
@@ -599,13 +599,13 @@ export const SignatureDescriptor_Data_Single = {
       signature: object.signature
     };
   },
-  toAmino(message: SignatureDescriptor_Data_Single, useInterfaces: boolean = false): SignatureDescriptor_Data_SingleAmino {
+  toAmino(message: SignatureDescriptor_Data_Single, useInterfaces: boolean = true): SignatureDescriptor_Data_SingleAmino {
     const obj: any = {};
     obj.mode = message.mode;
     obj.signature = message.signature;
     return obj;
   },
-  fromProtoMsg(message: SignatureDescriptor_Data_SingleProtoMsg, useInterfaces: boolean = false): SignatureDescriptor_Data_Single {
+  fromProtoMsg(message: SignatureDescriptor_Data_SingleProtoMsg, useInterfaces: boolean = true): SignatureDescriptor_Data_Single {
     return SignatureDescriptor_Data_Single.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SignatureDescriptor_Data_Single): Uint8Array {
@@ -636,7 +636,7 @@ export const SignatureDescriptor_Data_Multi = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SignatureDescriptor_Data_Multi {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SignatureDescriptor_Data_Multi {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignatureDescriptor_Data_Multi();
@@ -702,7 +702,7 @@ export const SignatureDescriptor_Data_Multi = {
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor_Data.fromAmino(e)) : []
     };
   },
-  toAmino(message: SignatureDescriptor_Data_Multi, useInterfaces: boolean = false): SignatureDescriptor_Data_MultiAmino {
+  toAmino(message: SignatureDescriptor_Data_Multi, useInterfaces: boolean = true): SignatureDescriptor_Data_MultiAmino {
     const obj: any = {};
     obj.bitarray = message.bitarray ? CompactBitArray.toAmino(message.bitarray, useInterfaces) : undefined;
     if (message.signatures) {
@@ -712,7 +712,7 @@ export const SignatureDescriptor_Data_Multi = {
     }
     return obj;
   },
-  fromProtoMsg(message: SignatureDescriptor_Data_MultiProtoMsg, useInterfaces: boolean = false): SignatureDescriptor_Data_Multi {
+  fromProtoMsg(message: SignatureDescriptor_Data_MultiProtoMsg, useInterfaces: boolean = true): SignatureDescriptor_Data_Multi {
     return SignatureDescriptor_Data_Multi.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SignatureDescriptor_Data_Multi): Uint8Array {

@@ -299,7 +299,7 @@ export const IdentifiedClientState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): IdentifiedClientState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): IdentifiedClientState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdentifiedClientState();
@@ -357,13 +357,13 @@ export const IdentifiedClientState = {
       clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined
     };
   },
-  toAmino(message: IdentifiedClientState, useInterfaces: boolean = false): IdentifiedClientStateAmino {
+  toAmino(message: IdentifiedClientState, useInterfaces: boolean = true): IdentifiedClientStateAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
     obj.client_state = message.clientState ? Any.toAmino(message.clientState, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: IdentifiedClientStateProtoMsg, useInterfaces: boolean = false): IdentifiedClientState {
+  fromProtoMsg(message: IdentifiedClientStateProtoMsg, useInterfaces: boolean = true): IdentifiedClientState {
     return IdentifiedClientState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: IdentifiedClientState): Uint8Array {
@@ -394,7 +394,7 @@ export const ConsensusStateWithHeight = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ConsensusStateWithHeight {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ConsensusStateWithHeight {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensusStateWithHeight();
@@ -454,13 +454,13 @@ export const ConsensusStateWithHeight = {
       consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined
     };
   },
-  toAmino(message: ConsensusStateWithHeight, useInterfaces: boolean = false): ConsensusStateWithHeightAmino {
+  toAmino(message: ConsensusStateWithHeight, useInterfaces: boolean = true): ConsensusStateWithHeightAmino {
     const obj: any = {};
     obj.height = message.height ? Height.toAmino(message.height, useInterfaces) : undefined;
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: ConsensusStateWithHeightProtoMsg, useInterfaces: boolean = false): ConsensusStateWithHeight {
+  fromProtoMsg(message: ConsensusStateWithHeightProtoMsg, useInterfaces: boolean = true): ConsensusStateWithHeight {
     return ConsensusStateWithHeight.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ConsensusStateWithHeight): Uint8Array {
@@ -491,7 +491,7 @@ export const ClientConsensusStates = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ClientConsensusStates {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ClientConsensusStates {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientConsensusStates();
@@ -555,7 +555,7 @@ export const ClientConsensusStates = {
       consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromAmino(e)) : []
     };
   },
-  toAmino(message: ClientConsensusStates, useInterfaces: boolean = false): ClientConsensusStatesAmino {
+  toAmino(message: ClientConsensusStates, useInterfaces: boolean = true): ClientConsensusStatesAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
     if (message.consensusStates) {
@@ -565,7 +565,7 @@ export const ClientConsensusStates = {
     }
     return obj;
   },
-  fromProtoMsg(message: ClientConsensusStatesProtoMsg, useInterfaces: boolean = false): ClientConsensusStates {
+  fromProtoMsg(message: ClientConsensusStatesProtoMsg, useInterfaces: boolean = true): ClientConsensusStates {
     return ClientConsensusStates.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ClientConsensusStates): Uint8Array {
@@ -605,7 +605,7 @@ export const ClientUpdateProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ClientUpdateProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ClientUpdateProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientUpdateProposal();
@@ -679,7 +679,7 @@ export const ClientUpdateProposal = {
       substituteClientId: object.substitute_client_id
     };
   },
-  toAmino(message: ClientUpdateProposal, useInterfaces: boolean = false): ClientUpdateProposalAmino {
+  toAmino(message: ClientUpdateProposal, useInterfaces: boolean = true): ClientUpdateProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -687,7 +687,7 @@ export const ClientUpdateProposal = {
     obj.substitute_client_id = message.substituteClientId;
     return obj;
   },
-  fromProtoMsg(message: ClientUpdateProposalProtoMsg, useInterfaces: boolean = false): ClientUpdateProposal {
+  fromProtoMsg(message: ClientUpdateProposalProtoMsg, useInterfaces: boolean = true): ClientUpdateProposal {
     return ClientUpdateProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ClientUpdateProposal): Uint8Array {
@@ -727,7 +727,7 @@ export const UpgradeProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): UpgradeProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpgradeProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpgradeProposal();
@@ -805,7 +805,7 @@ export const UpgradeProposal = {
       upgradedClientState: object?.upgraded_client_state ? Any.fromAmino(object.upgraded_client_state) : undefined
     };
   },
-  toAmino(message: UpgradeProposal, useInterfaces: boolean = false): UpgradeProposalAmino {
+  toAmino(message: UpgradeProposal, useInterfaces: boolean = true): UpgradeProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -813,7 +813,7 @@ export const UpgradeProposal = {
     obj.upgraded_client_state = message.upgradedClientState ? Any.toAmino(message.upgradedClientState, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: UpgradeProposalProtoMsg, useInterfaces: boolean = false): UpgradeProposal {
+  fromProtoMsg(message: UpgradeProposalProtoMsg, useInterfaces: boolean = true): UpgradeProposal {
     return UpgradeProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpgradeProposal): Uint8Array {
@@ -844,7 +844,7 @@ export const Height = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Height {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Height {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHeight();
@@ -904,13 +904,13 @@ export const Height = {
       revisionHeight: BigInt(object.revision_height || "0")
     };
   },
-  toAmino(message: Height, useInterfaces: boolean = false): HeightAmino {
+  toAmino(message: Height, useInterfaces: boolean = true): HeightAmino {
     const obj: any = {};
     obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
     obj.revision_height = message.revisionHeight ? message.revisionHeight.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: HeightProtoMsg, useInterfaces: boolean = false): Height {
+  fromProtoMsg(message: HeightProtoMsg, useInterfaces: boolean = true): Height {
     return Height.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Height): Uint8Array {
@@ -937,7 +937,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -992,7 +992,7 @@ export const Params = {
       allowedClients: Array.isArray(object?.allowed_clients) ? object.allowed_clients.map((e: any) => e) : []
     };
   },
-  toAmino(message: Params, useInterfaces: boolean = false): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
     if (message.allowedClients) {
       obj.allowed_clients = message.allowedClients.map(e => e);
@@ -1001,7 +1001,7 @@ export const Params = {
     }
     return obj;
   },
-  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = false): Params {
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
     return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {

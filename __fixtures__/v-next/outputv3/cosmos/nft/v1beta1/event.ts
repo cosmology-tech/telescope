@@ -96,7 +96,7 @@ export const EventSend = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): EventSend {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EventSend {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventSend();
@@ -170,7 +170,7 @@ export const EventSend = {
       receiver: object.receiver
     };
   },
-  toAmino(message: EventSend, useInterfaces: boolean = false): EventSendAmino {
+  toAmino(message: EventSend, useInterfaces: boolean = true): EventSendAmino {
     const obj: any = {};
     obj.class_id = message.classId;
     obj.id = message.id;
@@ -178,7 +178,7 @@ export const EventSend = {
     obj.receiver = message.receiver;
     return obj;
   },
-  fromProtoMsg(message: EventSendProtoMsg, useInterfaces: boolean = false): EventSend {
+  fromProtoMsg(message: EventSendProtoMsg, useInterfaces: boolean = true): EventSend {
     return EventSend.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EventSend): Uint8Array {
@@ -213,7 +213,7 @@ export const EventMint = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): EventMint {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EventMint {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventMint();
@@ -278,14 +278,14 @@ export const EventMint = {
       owner: object.owner
     };
   },
-  toAmino(message: EventMint, useInterfaces: boolean = false): EventMintAmino {
+  toAmino(message: EventMint, useInterfaces: boolean = true): EventMintAmino {
     const obj: any = {};
     obj.class_id = message.classId;
     obj.id = message.id;
     obj.owner = message.owner;
     return obj;
   },
-  fromProtoMsg(message: EventMintProtoMsg, useInterfaces: boolean = false): EventMint {
+  fromProtoMsg(message: EventMintProtoMsg, useInterfaces: boolean = true): EventMint {
     return EventMint.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EventMint): Uint8Array {
@@ -320,7 +320,7 @@ export const EventBurn = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): EventBurn {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EventBurn {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventBurn();
@@ -385,14 +385,14 @@ export const EventBurn = {
       owner: object.owner
     };
   },
-  toAmino(message: EventBurn, useInterfaces: boolean = false): EventBurnAmino {
+  toAmino(message: EventBurn, useInterfaces: boolean = true): EventBurnAmino {
     const obj: any = {};
     obj.class_id = message.classId;
     obj.id = message.id;
     obj.owner = message.owner;
     return obj;
   },
-  fromProtoMsg(message: EventBurnProtoMsg, useInterfaces: boolean = false): EventBurn {
+  fromProtoMsg(message: EventBurnProtoMsg, useInterfaces: boolean = true): EventBurn {
     return EventBurn.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EventBurn): Uint8Array {

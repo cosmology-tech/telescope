@@ -92,7 +92,7 @@ export const ValidatorSet = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ValidatorSet {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorSet {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorSet();
@@ -169,7 +169,7 @@ export const ValidatorSet = {
       totalVotingPower: BigInt(object.total_voting_power)
     };
   },
-  toAmino(message: ValidatorSet, useInterfaces: boolean = false): ValidatorSetAmino {
+  toAmino(message: ValidatorSet, useInterfaces: boolean = true): ValidatorSetAmino {
     const obj: any = {};
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toAmino(e, useInterfaces) : undefined);
@@ -183,7 +183,7 @@ export const ValidatorSet = {
   fromAminoMsg(object: ValidatorSetAminoMsg): ValidatorSet {
     return ValidatorSet.fromAmino(object.value);
   },
-  fromProtoMsg(message: ValidatorSetProtoMsg, useInterfaces: boolean = false): ValidatorSet {
+  fromProtoMsg(message: ValidatorSetProtoMsg, useInterfaces: boolean = true): ValidatorSet {
     return ValidatorSet.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorSet): Uint8Array {
@@ -221,7 +221,7 @@ export const Validator = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Validator {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Validator {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidator();
@@ -301,7 +301,7 @@ export const Validator = {
       proposerPriority: BigInt(object.proposer_priority)
     };
   },
-  toAmino(message: Validator, useInterfaces: boolean = false): ValidatorAmino {
+  toAmino(message: Validator, useInterfaces: boolean = true): ValidatorAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey, useInterfaces) : undefined;
@@ -312,7 +312,7 @@ export const Validator = {
   fromAminoMsg(object: ValidatorAminoMsg): Validator {
     return Validator.fromAmino(object.value);
   },
-  fromProtoMsg(message: ValidatorProtoMsg, useInterfaces: boolean = false): Validator {
+  fromProtoMsg(message: ValidatorProtoMsg, useInterfaces: boolean = true): Validator {
     return Validator.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Validator): Uint8Array {
@@ -342,7 +342,7 @@ export const SimpleValidator = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SimpleValidator {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SimpleValidator {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSimpleValidator();
@@ -402,7 +402,7 @@ export const SimpleValidator = {
       votingPower: BigInt(object.voting_power)
     };
   },
-  toAmino(message: SimpleValidator, useInterfaces: boolean = false): SimpleValidatorAmino {
+  toAmino(message: SimpleValidator, useInterfaces: boolean = true): SimpleValidatorAmino {
     const obj: any = {};
     obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey, useInterfaces) : undefined;
     obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
@@ -411,7 +411,7 @@ export const SimpleValidator = {
   fromAminoMsg(object: SimpleValidatorAminoMsg): SimpleValidator {
     return SimpleValidator.fromAmino(object.value);
   },
-  fromProtoMsg(message: SimpleValidatorProtoMsg, useInterfaces: boolean = false): SimpleValidator {
+  fromProtoMsg(message: SimpleValidatorProtoMsg, useInterfaces: boolean = true): SimpleValidator {
     return SimpleValidator.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SimpleValidator): Uint8Array {

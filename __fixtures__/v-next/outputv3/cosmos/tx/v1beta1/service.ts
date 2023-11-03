@@ -467,7 +467,7 @@ export const GetTxsEventRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetTxsEventRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetTxsEventRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxsEventRequest();
@@ -542,7 +542,7 @@ export const GetTxsEventRequest = {
       orderBy: isSet(object.order_by) ? orderByFromJSON(object.order_by) : -1
     };
   },
-  toAmino(message: GetTxsEventRequest, useInterfaces: boolean = false): GetTxsEventRequestAmino {
+  toAmino(message: GetTxsEventRequest, useInterfaces: boolean = true): GetTxsEventRequestAmino {
     const obj: any = {};
     if (message.events) {
       obj.events = message.events.map(e => e);
@@ -553,7 +553,7 @@ export const GetTxsEventRequest = {
     obj.order_by = message.orderBy;
     return obj;
   },
-  fromProtoMsg(message: GetTxsEventRequestProtoMsg, useInterfaces: boolean = false): GetTxsEventRequest {
+  fromProtoMsg(message: GetTxsEventRequestProtoMsg, useInterfaces: boolean = true): GetTxsEventRequest {
     return GetTxsEventRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetTxsEventRequest): Uint8Array {
@@ -588,7 +588,7 @@ export const GetTxsEventResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetTxsEventResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetTxsEventResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxsEventResponse();
@@ -671,7 +671,7 @@ export const GetTxsEventResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: GetTxsEventResponse, useInterfaces: boolean = false): GetTxsEventResponseAmino {
+  toAmino(message: GetTxsEventResponse, useInterfaces: boolean = true): GetTxsEventResponseAmino {
     const obj: any = {};
     if (message.txs) {
       obj.txs = message.txs.map(e => e ? Tx.toAmino(e, useInterfaces) : undefined);
@@ -686,7 +686,7 @@ export const GetTxsEventResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GetTxsEventResponseProtoMsg, useInterfaces: boolean = false): GetTxsEventResponse {
+  fromProtoMsg(message: GetTxsEventResponseProtoMsg, useInterfaces: boolean = true): GetTxsEventResponse {
     return GetTxsEventResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetTxsEventResponse): Uint8Array {
@@ -717,7 +717,7 @@ export const BroadcastTxRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): BroadcastTxRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BroadcastTxRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBroadcastTxRequest();
@@ -773,13 +773,13 @@ export const BroadcastTxRequest = {
       mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : -1
     };
   },
-  toAmino(message: BroadcastTxRequest, useInterfaces: boolean = false): BroadcastTxRequestAmino {
+  toAmino(message: BroadcastTxRequest, useInterfaces: boolean = true): BroadcastTxRequestAmino {
     const obj: any = {};
     obj.tx_bytes = message.txBytes;
     obj.mode = message.mode;
     return obj;
   },
-  fromProtoMsg(message: BroadcastTxRequestProtoMsg, useInterfaces: boolean = false): BroadcastTxRequest {
+  fromProtoMsg(message: BroadcastTxRequestProtoMsg, useInterfaces: boolean = true): BroadcastTxRequest {
     return BroadcastTxRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BroadcastTxRequest): Uint8Array {
@@ -806,7 +806,7 @@ export const BroadcastTxResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): BroadcastTxResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BroadcastTxResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBroadcastTxResponse();
@@ -855,12 +855,12 @@ export const BroadcastTxResponse = {
       txResponse: object?.tx_response ? TxResponse.fromAmino(object.tx_response) : undefined
     };
   },
-  toAmino(message: BroadcastTxResponse, useInterfaces: boolean = false): BroadcastTxResponseAmino {
+  toAmino(message: BroadcastTxResponse, useInterfaces: boolean = true): BroadcastTxResponseAmino {
     const obj: any = {};
     obj.tx_response = message.txResponse ? TxResponse.toAmino(message.txResponse, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: BroadcastTxResponseProtoMsg, useInterfaces: boolean = false): BroadcastTxResponse {
+  fromProtoMsg(message: BroadcastTxResponseProtoMsg, useInterfaces: boolean = true): BroadcastTxResponse {
     return BroadcastTxResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BroadcastTxResponse): Uint8Array {
@@ -891,7 +891,7 @@ export const SimulateRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SimulateRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SimulateRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSimulateRequest();
@@ -949,13 +949,13 @@ export const SimulateRequest = {
       txBytes: object.tx_bytes
     };
   },
-  toAmino(message: SimulateRequest, useInterfaces: boolean = false): SimulateRequestAmino {
+  toAmino(message: SimulateRequest, useInterfaces: boolean = true): SimulateRequestAmino {
     const obj: any = {};
     obj.tx = message.tx ? Tx.toAmino(message.tx, useInterfaces) : undefined;
     obj.tx_bytes = message.txBytes;
     return obj;
   },
-  fromProtoMsg(message: SimulateRequestProtoMsg, useInterfaces: boolean = false): SimulateRequest {
+  fromProtoMsg(message: SimulateRequestProtoMsg, useInterfaces: boolean = true): SimulateRequest {
     return SimulateRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SimulateRequest): Uint8Array {
@@ -986,7 +986,7 @@ export const SimulateResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SimulateResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SimulateResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSimulateResponse();
@@ -1046,13 +1046,13 @@ export const SimulateResponse = {
       result: object?.result ? Result.fromAmino(object.result) : undefined
     };
   },
-  toAmino(message: SimulateResponse, useInterfaces: boolean = false): SimulateResponseAmino {
+  toAmino(message: SimulateResponse, useInterfaces: boolean = true): SimulateResponseAmino {
     const obj: any = {};
     obj.gas_info = message.gasInfo ? GasInfo.toAmino(message.gasInfo, useInterfaces) : undefined;
     obj.result = message.result ? Result.toAmino(message.result, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: SimulateResponseProtoMsg, useInterfaces: boolean = false): SimulateResponse {
+  fromProtoMsg(message: SimulateResponseProtoMsg, useInterfaces: boolean = true): SimulateResponse {
     return SimulateResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SimulateResponse): Uint8Array {
@@ -1079,7 +1079,7 @@ export const GetTxRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetTxRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetTxRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxRequest();
@@ -1126,12 +1126,12 @@ export const GetTxRequest = {
       hash: object.hash
     };
   },
-  toAmino(message: GetTxRequest, useInterfaces: boolean = false): GetTxRequestAmino {
+  toAmino(message: GetTxRequest, useInterfaces: boolean = true): GetTxRequestAmino {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
   },
-  fromProtoMsg(message: GetTxRequestProtoMsg, useInterfaces: boolean = false): GetTxRequest {
+  fromProtoMsg(message: GetTxRequestProtoMsg, useInterfaces: boolean = true): GetTxRequest {
     return GetTxRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetTxRequest): Uint8Array {
@@ -1162,7 +1162,7 @@ export const GetTxResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetTxResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetTxResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxResponse();
@@ -1222,13 +1222,13 @@ export const GetTxResponse = {
       txResponse: object?.tx_response ? TxResponse.fromAmino(object.tx_response) : undefined
     };
   },
-  toAmino(message: GetTxResponse, useInterfaces: boolean = false): GetTxResponseAmino {
+  toAmino(message: GetTxResponse, useInterfaces: boolean = true): GetTxResponseAmino {
     const obj: any = {};
     obj.tx = message.tx ? Tx.toAmino(message.tx, useInterfaces) : undefined;
     obj.tx_response = message.txResponse ? TxResponse.toAmino(message.txResponse, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GetTxResponseProtoMsg, useInterfaces: boolean = false): GetTxResponse {
+  fromProtoMsg(message: GetTxResponseProtoMsg, useInterfaces: boolean = true): GetTxResponse {
     return GetTxResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetTxResponse): Uint8Array {
@@ -1259,7 +1259,7 @@ export const GetBlockWithTxsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetBlockWithTxsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetBlockWithTxsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBlockWithTxsRequest();
@@ -1319,13 +1319,13 @@ export const GetBlockWithTxsRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: GetBlockWithTxsRequest, useInterfaces: boolean = false): GetBlockWithTxsRequestAmino {
+  toAmino(message: GetBlockWithTxsRequest, useInterfaces: boolean = true): GetBlockWithTxsRequestAmino {
     const obj: any = {};
     obj.height = message.height ? message.height.toString() : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GetBlockWithTxsRequestProtoMsg, useInterfaces: boolean = false): GetBlockWithTxsRequest {
+  fromProtoMsg(message: GetBlockWithTxsRequestProtoMsg, useInterfaces: boolean = true): GetBlockWithTxsRequest {
     return GetBlockWithTxsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetBlockWithTxsRequest): Uint8Array {
@@ -1364,7 +1364,7 @@ export const GetBlockWithTxsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetBlockWithTxsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetBlockWithTxsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBlockWithTxsResponse();
@@ -1452,7 +1452,7 @@ export const GetBlockWithTxsResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: GetBlockWithTxsResponse, useInterfaces: boolean = false): GetBlockWithTxsResponseAmino {
+  toAmino(message: GetBlockWithTxsResponse, useInterfaces: boolean = true): GetBlockWithTxsResponseAmino {
     const obj: any = {};
     if (message.txs) {
       obj.txs = message.txs.map(e => e ? Tx.toAmino(e, useInterfaces) : undefined);
@@ -1464,7 +1464,7 @@ export const GetBlockWithTxsResponse = {
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GetBlockWithTxsResponseProtoMsg, useInterfaces: boolean = false): GetBlockWithTxsResponse {
+  fromProtoMsg(message: GetBlockWithTxsResponseProtoMsg, useInterfaces: boolean = true): GetBlockWithTxsResponse {
     return GetBlockWithTxsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetBlockWithTxsResponse): Uint8Array {

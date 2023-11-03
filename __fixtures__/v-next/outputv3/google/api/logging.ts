@@ -199,7 +199,7 @@ export const Logging = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Logging {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Logging {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogging();
@@ -271,7 +271,7 @@ export const Logging = {
       consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Logging_LoggingDestination.fromAmino(e)) : []
     };
   },
-  toAmino(message: Logging, useInterfaces: boolean = false): LoggingAmino {
+  toAmino(message: Logging, useInterfaces: boolean = true): LoggingAmino {
     const obj: any = {};
     if (message.producerDestinations) {
       obj.producer_destinations = message.producerDestinations.map(e => e ? Logging_LoggingDestination.toAmino(e, useInterfaces) : undefined);
@@ -285,7 +285,7 @@ export const Logging = {
     }
     return obj;
   },
-  fromProtoMsg(message: LoggingProtoMsg, useInterfaces: boolean = false): Logging {
+  fromProtoMsg(message: LoggingProtoMsg, useInterfaces: boolean = true): Logging {
     return Logging.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Logging): Uint8Array {
@@ -315,7 +315,7 @@ export const Logging_LoggingDestination = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Logging_LoggingDestination {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Logging_LoggingDestination {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogging_LoggingDestination();
@@ -379,7 +379,7 @@ export const Logging_LoggingDestination = {
       logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => e) : []
     };
   },
-  toAmino(message: Logging_LoggingDestination, useInterfaces: boolean = false): Logging_LoggingDestinationAmino {
+  toAmino(message: Logging_LoggingDestination, useInterfaces: boolean = true): Logging_LoggingDestinationAmino {
     const obj: any = {};
     obj.monitored_resource = message.monitoredResource;
     if (message.logs) {
@@ -389,7 +389,7 @@ export const Logging_LoggingDestination = {
     }
     return obj;
   },
-  fromProtoMsg(message: Logging_LoggingDestinationProtoMsg, useInterfaces: boolean = false): Logging_LoggingDestination {
+  fromProtoMsg(message: Logging_LoggingDestinationProtoMsg, useInterfaces: boolean = true): Logging_LoggingDestination {
     return Logging_LoggingDestination.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Logging_LoggingDestination): Uint8Array {

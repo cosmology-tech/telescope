@@ -401,7 +401,7 @@ export const StoreCodeProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): StoreCodeProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): StoreCodeProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStoreCodeProposal();
@@ -486,7 +486,7 @@ export const StoreCodeProposal = {
       instantiatePermission: object?.instantiate_permission ? AccessConfig.fromAmino(object.instantiate_permission) : undefined
     };
   },
-  toAmino(message: StoreCodeProposal, useInterfaces: boolean = false): StoreCodeProposalAmino {
+  toAmino(message: StoreCodeProposal, useInterfaces: boolean = true): StoreCodeProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -495,7 +495,7 @@ export const StoreCodeProposal = {
     obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: StoreCodeProposalProtoMsg, useInterfaces: boolean = false): StoreCodeProposal {
+  fromProtoMsg(message: StoreCodeProposalProtoMsg, useInterfaces: boolean = true): StoreCodeProposal {
     return StoreCodeProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: StoreCodeProposal): Uint8Array {
@@ -550,7 +550,7 @@ export const InstantiateContractProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): InstantiateContractProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): InstantiateContractProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInstantiateContractProposal();
@@ -670,7 +670,7 @@ export const InstantiateContractProposal = {
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: InstantiateContractProposal, useInterfaces: boolean = false): InstantiateContractProposalAmino {
+  toAmino(message: InstantiateContractProposal, useInterfaces: boolean = true): InstantiateContractProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -686,7 +686,7 @@ export const InstantiateContractProposal = {
     }
     return obj;
   },
-  fromProtoMsg(message: InstantiateContractProposalProtoMsg, useInterfaces: boolean = false): InstantiateContractProposal {
+  fromProtoMsg(message: InstantiateContractProposalProtoMsg, useInterfaces: boolean = true): InstantiateContractProposal {
     return InstantiateContractProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: InstantiateContractProposal): Uint8Array {
@@ -729,7 +729,7 @@ export const MigrateContractProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MigrateContractProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MigrateContractProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMigrateContractProposal();
@@ -814,7 +814,7 @@ export const MigrateContractProposal = {
       msg: toUtf8(JSON.stringify(object.msg))
     };
   },
-  toAmino(message: MigrateContractProposal, useInterfaces: boolean = false): MigrateContractProposalAmino {
+  toAmino(message: MigrateContractProposal, useInterfaces: boolean = true): MigrateContractProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -823,7 +823,7 @@ export const MigrateContractProposal = {
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     return obj;
   },
-  fromProtoMsg(message: MigrateContractProposalProtoMsg, useInterfaces: boolean = false): MigrateContractProposal {
+  fromProtoMsg(message: MigrateContractProposalProtoMsg, useInterfaces: boolean = true): MigrateContractProposal {
     return MigrateContractProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MigrateContractProposal): Uint8Array {
@@ -862,7 +862,7 @@ export const SudoContractProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SudoContractProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SudoContractProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSudoContractProposal();
@@ -936,7 +936,7 @@ export const SudoContractProposal = {
       msg: toUtf8(JSON.stringify(object.msg))
     };
   },
-  toAmino(message: SudoContractProposal, useInterfaces: boolean = false): SudoContractProposalAmino {
+  toAmino(message: SudoContractProposal, useInterfaces: boolean = true): SudoContractProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -944,7 +944,7 @@ export const SudoContractProposal = {
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     return obj;
   },
-  fromProtoMsg(message: SudoContractProposalProtoMsg, useInterfaces: boolean = false): SudoContractProposal {
+  fromProtoMsg(message: SudoContractProposalProtoMsg, useInterfaces: boolean = true): SudoContractProposal {
     return SudoContractProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SudoContractProposal): Uint8Array {
@@ -991,7 +991,7 @@ export const ExecuteContractProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ExecuteContractProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ExecuteContractProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExecuteContractProposal();
@@ -1091,7 +1091,7 @@ export const ExecuteContractProposal = {
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: ExecuteContractProposal, useInterfaces: boolean = false): ExecuteContractProposalAmino {
+  toAmino(message: ExecuteContractProposal, useInterfaces: boolean = true): ExecuteContractProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -1105,7 +1105,7 @@ export const ExecuteContractProposal = {
     }
     return obj;
   },
-  fromProtoMsg(message: ExecuteContractProposalProtoMsg, useInterfaces: boolean = false): ExecuteContractProposal {
+  fromProtoMsg(message: ExecuteContractProposalProtoMsg, useInterfaces: boolean = true): ExecuteContractProposal {
     return ExecuteContractProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ExecuteContractProposal): Uint8Array {
@@ -1144,7 +1144,7 @@ export const UpdateAdminProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): UpdateAdminProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpdateAdminProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateAdminProposal();
@@ -1218,7 +1218,7 @@ export const UpdateAdminProposal = {
       contract: object.contract
     };
   },
-  toAmino(message: UpdateAdminProposal, useInterfaces: boolean = false): UpdateAdminProposalAmino {
+  toAmino(message: UpdateAdminProposal, useInterfaces: boolean = true): UpdateAdminProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -1226,7 +1226,7 @@ export const UpdateAdminProposal = {
     obj.contract = message.contract;
     return obj;
   },
-  fromProtoMsg(message: UpdateAdminProposalProtoMsg, useInterfaces: boolean = false): UpdateAdminProposal {
+  fromProtoMsg(message: UpdateAdminProposalProtoMsg, useInterfaces: boolean = true): UpdateAdminProposal {
     return UpdateAdminProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpdateAdminProposal): Uint8Array {
@@ -1261,7 +1261,7 @@ export const ClearAdminProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ClearAdminProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ClearAdminProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClearAdminProposal();
@@ -1326,14 +1326,14 @@ export const ClearAdminProposal = {
       contract: object.contract
     };
   },
-  toAmino(message: ClearAdminProposal, useInterfaces: boolean = false): ClearAdminProposalAmino {
+  toAmino(message: ClearAdminProposal, useInterfaces: boolean = true): ClearAdminProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
     obj.contract = message.contract;
     return obj;
   },
-  fromProtoMsg(message: ClearAdminProposalProtoMsg, useInterfaces: boolean = false): ClearAdminProposal {
+  fromProtoMsg(message: ClearAdminProposalProtoMsg, useInterfaces: boolean = true): ClearAdminProposal {
     return ClearAdminProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ClearAdminProposal): Uint8Array {
@@ -1370,7 +1370,7 @@ export const PinCodesProposal = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): PinCodesProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PinCodesProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePinCodesProposal();
@@ -1450,7 +1450,7 @@ export const PinCodesProposal = {
       codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => BigInt(e)) : []
     };
   },
-  toAmino(message: PinCodesProposal, useInterfaces: boolean = false): PinCodesProposalAmino {
+  toAmino(message: PinCodesProposal, useInterfaces: boolean = true): PinCodesProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -1461,7 +1461,7 @@ export const PinCodesProposal = {
     }
     return obj;
   },
-  fromProtoMsg(message: PinCodesProposalProtoMsg, useInterfaces: boolean = false): PinCodesProposal {
+  fromProtoMsg(message: PinCodesProposalProtoMsg, useInterfaces: boolean = true): PinCodesProposal {
     return PinCodesProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PinCodesProposal): Uint8Array {
@@ -1498,7 +1498,7 @@ export const UnpinCodesProposal = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): UnpinCodesProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UnpinCodesProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUnpinCodesProposal();
@@ -1578,7 +1578,7 @@ export const UnpinCodesProposal = {
       codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => BigInt(e)) : []
     };
   },
-  toAmino(message: UnpinCodesProposal, useInterfaces: boolean = false): UnpinCodesProposalAmino {
+  toAmino(message: UnpinCodesProposal, useInterfaces: boolean = true): UnpinCodesProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -1589,7 +1589,7 @@ export const UnpinCodesProposal = {
     }
     return obj;
   },
-  fromProtoMsg(message: UnpinCodesProposalProtoMsg, useInterfaces: boolean = false): UnpinCodesProposal {
+  fromProtoMsg(message: UnpinCodesProposalProtoMsg, useInterfaces: boolean = true): UnpinCodesProposal {
     return UnpinCodesProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UnpinCodesProposal): Uint8Array {

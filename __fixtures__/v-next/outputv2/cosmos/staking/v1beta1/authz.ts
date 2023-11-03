@@ -165,7 +165,7 @@ export const StakeAuthorization = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): StakeAuthorization {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): StakeAuthorization {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStakeAuthorization();
@@ -245,7 +245,7 @@ export const StakeAuthorization = {
       authorizationType: isSet(object.authorization_type) ? authorizationTypeFromJSON(object.authorization_type) : -1
     };
   },
-  toAmino(message: StakeAuthorization, useInterfaces: boolean = false): StakeAuthorizationAmino {
+  toAmino(message: StakeAuthorization, useInterfaces: boolean = true): StakeAuthorizationAmino {
     const obj: any = {};
     obj.max_tokens = message.maxTokens ? Coin.toAmino(message.maxTokens, useInterfaces) : undefined;
     obj.allow_list = message.allowList ? StakeAuthorization_Validators.toAmino(message.allowList, useInterfaces) : undefined;
@@ -256,13 +256,13 @@ export const StakeAuthorization = {
   fromAminoMsg(object: StakeAuthorizationAminoMsg): StakeAuthorization {
     return StakeAuthorization.fromAmino(object.value);
   },
-  toAminoMsg(message: StakeAuthorization, useInterfaces: boolean = false): StakeAuthorizationAminoMsg {
+  toAminoMsg(message: StakeAuthorization, useInterfaces: boolean = true): StakeAuthorizationAminoMsg {
     return {
       type: "cosmos-sdk/StakeAuthorization",
       value: StakeAuthorization.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: StakeAuthorizationProtoMsg, useInterfaces: boolean = false): StakeAuthorization {
+  fromProtoMsg(message: StakeAuthorizationProtoMsg, useInterfaces: boolean = true): StakeAuthorization {
     return StakeAuthorization.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: StakeAuthorization): Uint8Array {
@@ -289,7 +289,7 @@ export const StakeAuthorization_Validators = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): StakeAuthorization_Validators {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): StakeAuthorization_Validators {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStakeAuthorization_Validators();
@@ -344,7 +344,7 @@ export const StakeAuthorization_Validators = {
       address: Array.isArray(object?.address) ? object.address.map((e: any) => e) : []
     };
   },
-  toAmino(message: StakeAuthorization_Validators, useInterfaces: boolean = false): StakeAuthorization_ValidatorsAmino {
+  toAmino(message: StakeAuthorization_Validators, useInterfaces: boolean = true): StakeAuthorization_ValidatorsAmino {
     const obj: any = {};
     if (message.address) {
       obj.address = message.address.map(e => e);
@@ -356,13 +356,13 @@ export const StakeAuthorization_Validators = {
   fromAminoMsg(object: StakeAuthorization_ValidatorsAminoMsg): StakeAuthorization_Validators {
     return StakeAuthorization_Validators.fromAmino(object.value);
   },
-  toAminoMsg(message: StakeAuthorization_Validators, useInterfaces: boolean = false): StakeAuthorization_ValidatorsAminoMsg {
+  toAminoMsg(message: StakeAuthorization_Validators, useInterfaces: boolean = true): StakeAuthorization_ValidatorsAminoMsg {
     return {
       type: "cosmos-sdk/Validators",
       value: StakeAuthorization_Validators.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: StakeAuthorization_ValidatorsProtoMsg, useInterfaces: boolean = false): StakeAuthorization_Validators {
+  fromProtoMsg(message: StakeAuthorization_ValidatorsProtoMsg, useInterfaces: boolean = true): StakeAuthorization_Validators {
     return StakeAuthorization_Validators.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: StakeAuthorization_Validators): Uint8Array {

@@ -28,7 +28,7 @@ exports[`cosmos/authz/v1beta1/authz date 2`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Grant {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Grant {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGrant();
@@ -84,7 +84,7 @@ exports[`cosmos/authz/v1beta1/authz date 2`] = `
       expiration: object?.expiration
     };
   },
-  toAmino(message: Grant, useInterfaces: boolean = false): GrantAmino {
+  toAmino(message: Grant, useInterfaces: boolean = true): GrantAmino {
     const obj: any = {};
     obj.authorization = message.authorization ? Any.toAmino(message.authorization, useInterfaces) : undefined;
     obj.expiration = message.expiration;
@@ -93,13 +93,13 @@ exports[`cosmos/authz/v1beta1/authz date 2`] = `
   fromAminoMsg(object: GrantAminoMsg): Grant {
     return Grant.fromAmino(object.value);
   },
-  toAminoMsg(message: Grant, useInterfaces: boolean = false): GrantAminoMsg {
+  toAminoMsg(message: Grant, useInterfaces: boolean = true): GrantAminoMsg {
     return {
       type: "cosmos-sdk/Grant",
       value: Grant.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GrantProtoMsg, useInterfaces: boolean = false): Grant {
+  fromProtoMsg(message: GrantProtoMsg, useInterfaces: boolean = true): Grant {
     return Grant.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Grant): Uint8Array {
@@ -190,7 +190,7 @@ exports[`cosmos/authz/v1beta1/authz timestamp 2`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Grant {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Grant {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGrant();
@@ -246,7 +246,7 @@ exports[`cosmos/authz/v1beta1/authz timestamp 2`] = `
       expiration: object?.expiration
     };
   },
-  toAmino(message: Grant, useInterfaces: boolean = false): GrantAmino {
+  toAmino(message: Grant, useInterfaces: boolean = true): GrantAmino {
     const obj: any = {};
     obj.authorization = message.authorization ? Any.toAmino(message.authorization, useInterfaces) : undefined;
     obj.expiration = message.expiration;
@@ -255,13 +255,13 @@ exports[`cosmos/authz/v1beta1/authz timestamp 2`] = `
   fromAminoMsg(object: GrantAminoMsg): Grant {
     return Grant.fromAmino(object.value);
   },
-  toAminoMsg(message: Grant, useInterfaces: boolean = false): GrantAminoMsg {
+  toAminoMsg(message: Grant, useInterfaces: boolean = true): GrantAminoMsg {
     return {
       type: "cosmos-sdk/Grant",
       value: Grant.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GrantProtoMsg, useInterfaces: boolean = false): Grant {
+  fromProtoMsg(message: GrantProtoMsg, useInterfaces: boolean = true): Grant {
     return Grant.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Grant): Uint8Array {

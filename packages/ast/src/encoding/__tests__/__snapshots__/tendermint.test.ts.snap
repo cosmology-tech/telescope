@@ -85,7 +85,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ClientState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ClientState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientState();
@@ -238,7 +238,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
       allowUpdateAfterMisbehaviour: object.allow_update_after_misbehaviour
     };
   },
-  toAmino(message: ClientState, useInterfaces: boolean = false): ClientStateAmino {
+  toAmino(message: ClientState, useInterfaces: boolean = true): ClientStateAmino {
     const obj: any = {};
     obj.chain_id = message.chainId;
     obj.trust_level = message.trustLevel ? Fraction.toAmino(message.trustLevel, useInterfaces) : undefined;
@@ -264,13 +264,13 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
   fromAminoMsg(object: ClientStateAminoMsg): ClientState {
     return ClientState.fromAmino(object.value);
   },
-  toAminoMsg(message: ClientState, useInterfaces: boolean = false): ClientStateAminoMsg {
+  toAminoMsg(message: ClientState, useInterfaces: boolean = true): ClientStateAminoMsg {
     return {
       type: "cosmos-sdk/ClientState",
       value: ClientState.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ClientStateProtoMsg, useInterfaces: boolean = false): ClientState {
+  fromProtoMsg(message: ClientStateProtoMsg, useInterfaces: boolean = true): ClientState {
     return ClientState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ClientState): Uint8Array {
@@ -544,7 +544,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ClientState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ClientState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientState();
@@ -697,7 +697,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
       allowUpdateAfterMisbehaviour: object.allow_update_after_misbehaviour
     };
   },
-  toAmino(message: ClientState, useInterfaces: boolean = false): ClientStateAmino {
+  toAmino(message: ClientState, useInterfaces: boolean = true): ClientStateAmino {
     const obj: any = {};
     obj.chain_id = message.chainId;
     obj.trust_level = message.trustLevel ? Fraction.toAmino(message.trustLevel, useInterfaces) : undefined;
@@ -723,13 +723,13 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
   fromAminoMsg(object: ClientStateAminoMsg): ClientState {
     return ClientState.fromAmino(object.value);
   },
-  toAminoMsg(message: ClientState, useInterfaces: boolean = false): ClientStateAminoMsg {
+  toAminoMsg(message: ClientState, useInterfaces: boolean = true): ClientStateAminoMsg {
     return {
       type: "cosmos-sdk/ClientState",
       value: ClientState.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ClientStateProtoMsg, useInterfaces: boolean = false): ClientState {
+  fromProtoMsg(message: ClientStateProtoMsg, useInterfaces: boolean = true): ClientState {
     return ClientState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ClientState): Uint8Array {

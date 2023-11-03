@@ -194,7 +194,7 @@ export const BasicAllowance = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): BasicAllowance {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BasicAllowance {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBasicAllowance();
@@ -258,7 +258,7 @@ export const BasicAllowance = {
       expiration: object?.expiration
     };
   },
-  toAmino(message: BasicAllowance, useInterfaces: boolean = false): BasicAllowanceAmino {
+  toAmino(message: BasicAllowance, useInterfaces: boolean = true): BasicAllowanceAmino {
     const obj: any = {};
     if (message.spendLimit) {
       obj.spend_limit = message.spendLimit.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
@@ -268,7 +268,7 @@ export const BasicAllowance = {
     obj.expiration = message.expiration;
     return obj;
   },
-  fromProtoMsg(message: BasicAllowanceProtoMsg, useInterfaces: boolean = false): BasicAllowance {
+  fromProtoMsg(message: BasicAllowanceProtoMsg, useInterfaces: boolean = true): BasicAllowance {
     return BasicAllowance.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BasicAllowance): Uint8Array {
@@ -312,7 +312,7 @@ export const PeriodicAllowance = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): PeriodicAllowance {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PeriodicAllowance {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeriodicAllowance();
@@ -415,7 +415,7 @@ export const PeriodicAllowance = {
       periodReset: object.period_reset
     };
   },
-  toAmino(message: PeriodicAllowance, useInterfaces: boolean = false): PeriodicAllowanceAmino {
+  toAmino(message: PeriodicAllowance, useInterfaces: boolean = true): PeriodicAllowanceAmino {
     const obj: any = {};
     obj.basic = message.basic ? BasicAllowance.toAmino(message.basic, useInterfaces) : undefined;
     obj.period = message.period ? Duration.toAmino(message.period, useInterfaces) : undefined;
@@ -432,7 +432,7 @@ export const PeriodicAllowance = {
     obj.period_reset = message.periodReset;
     return obj;
   },
-  fromProtoMsg(message: PeriodicAllowanceProtoMsg, useInterfaces: boolean = false): PeriodicAllowance {
+  fromProtoMsg(message: PeriodicAllowanceProtoMsg, useInterfaces: boolean = true): PeriodicAllowance {
     return PeriodicAllowance.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PeriodicAllowance): Uint8Array {
@@ -464,7 +464,7 @@ export const AllowedMsgAllowance = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AllowedMsgAllowance {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AllowedMsgAllowance {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllowedMsgAllowance();
@@ -530,7 +530,7 @@ export const AllowedMsgAllowance = {
       allowedMessages: Array.isArray(object?.allowed_messages) ? object.allowed_messages.map((e: any) => e) : []
     };
   },
-  toAmino(message: AllowedMsgAllowance, useInterfaces: boolean = false): AllowedMsgAllowanceAmino {
+  toAmino(message: AllowedMsgAllowance, useInterfaces: boolean = true): AllowedMsgAllowanceAmino {
     const obj: any = {};
     obj.allowance = message.allowance ? FeeAllowanceI_ToAmino((message.allowance as Any), useInterfaces) : undefined;
     if (message.allowedMessages) {
@@ -540,7 +540,7 @@ export const AllowedMsgAllowance = {
     }
     return obj;
   },
-  fromProtoMsg(message: AllowedMsgAllowanceProtoMsg, useInterfaces: boolean = false): AllowedMsgAllowance {
+  fromProtoMsg(message: AllowedMsgAllowanceProtoMsg, useInterfaces: boolean = true): AllowedMsgAllowance {
     return AllowedMsgAllowance.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AllowedMsgAllowance): Uint8Array {
@@ -575,7 +575,7 @@ export const Grant = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Grant {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Grant {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGrant();
@@ -642,14 +642,14 @@ export const Grant = {
       allowance: object?.allowance ? FeeAllowanceI_FromAmino(object.allowance) : undefined
     };
   },
-  toAmino(message: Grant, useInterfaces: boolean = false): GrantAmino {
+  toAmino(message: Grant, useInterfaces: boolean = true): GrantAmino {
     const obj: any = {};
     obj.granter = message.granter;
     obj.grantee = message.grantee;
     obj.allowance = message.allowance ? FeeAllowanceI_ToAmino((message.allowance as Any), useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GrantProtoMsg, useInterfaces: boolean = false): Grant {
+  fromProtoMsg(message: GrantProtoMsg, useInterfaces: boolean = true): Grant {
     return Grant.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Grant): Uint8Array {
@@ -697,7 +697,7 @@ export const FeeAllowanceI_FromAmino = (content: AnyAmino) => {
       return Any.fromAmino(content);
   }
 };
-export const FeeAllowanceI_ToAmino = (content: Any, useInterfaces: boolean = false) => {
+export const FeeAllowanceI_ToAmino = (content: Any, useInterfaces: boolean = true) => {
   switch (content.typeUrl) {
     case "/cosmos.feegrant.v1beta1.BasicAllowance":
       return {

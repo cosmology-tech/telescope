@@ -50,7 +50,7 @@ export const SendAuthorization = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SendAuthorization {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SendAuthorization {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSendAuthorization();
@@ -105,7 +105,7 @@ export const SendAuthorization = {
       spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: SendAuthorization, useInterfaces: boolean = false): SendAuthorizationAmino {
+  toAmino(message: SendAuthorization, useInterfaces: boolean = true): SendAuthorizationAmino {
     const obj: any = {};
     if (message.spendLimit) {
       obj.spend_limit = message.spendLimit.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
@@ -114,7 +114,7 @@ export const SendAuthorization = {
     }
     return obj;
   },
-  fromProtoMsg(message: SendAuthorizationProtoMsg, useInterfaces: boolean = false): SendAuthorization {
+  fromProtoMsg(message: SendAuthorizationProtoMsg, useInterfaces: boolean = true): SendAuthorization {
     return SendAuthorization.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SendAuthorization): Uint8Array {

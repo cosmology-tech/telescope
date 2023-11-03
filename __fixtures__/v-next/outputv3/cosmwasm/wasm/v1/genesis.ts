@@ -160,7 +160,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -277,7 +277,7 @@ export const GenesisState = {
       genMsgs: Array.isArray(object?.gen_msgs) ? object.gen_msgs.map((e: any) => GenesisState_GenMsgs.fromAmino(e)) : []
     };
   },
-  toAmino(message: GenesisState, useInterfaces: boolean = false): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     if (message.codes) {
@@ -302,7 +302,7 @@ export const GenesisState = {
     }
     return obj;
   },
-  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = false): GenesisState {
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
     return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
@@ -337,7 +337,7 @@ export const GenesisState_GenMsgs = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisState_GenMsgs {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState_GenMsgs {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState_GenMsgs();
@@ -408,14 +408,14 @@ export const GenesisState_GenMsgs = {
       executeContract: object?.execute_contract ? MsgExecuteContract.fromAmino(object.execute_contract) : undefined
     };
   },
-  toAmino(message: GenesisState_GenMsgs, useInterfaces: boolean = false): GenesisState_GenMsgsAmino {
+  toAmino(message: GenesisState_GenMsgs, useInterfaces: boolean = true): GenesisState_GenMsgsAmino {
     const obj: any = {};
     obj.store_code = message.storeCode ? MsgStoreCode.toAmino(message.storeCode, useInterfaces) : undefined;
     obj.instantiate_contract = message.instantiateContract ? MsgInstantiateContract.toAmino(message.instantiateContract, useInterfaces) : undefined;
     obj.execute_contract = message.executeContract ? MsgExecuteContract.toAmino(message.executeContract, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GenesisState_GenMsgsProtoMsg, useInterfaces: boolean = false): GenesisState_GenMsgs {
+  fromProtoMsg(message: GenesisState_GenMsgsProtoMsg, useInterfaces: boolean = true): GenesisState_GenMsgs {
     return GenesisState_GenMsgs.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState_GenMsgs): Uint8Array {
@@ -454,7 +454,7 @@ export const Code = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Code {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Code {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCode();
@@ -532,7 +532,7 @@ export const Code = {
       pinned: object.pinned
     };
   },
-  toAmino(message: Code, useInterfaces: boolean = false): CodeAmino {
+  toAmino(message: Code, useInterfaces: boolean = true): CodeAmino {
     const obj: any = {};
     obj.code_id = message.codeId ? message.codeId.toString() : undefined;
     obj.code_info = message.codeInfo ? CodeInfo.toAmino(message.codeInfo, useInterfaces) : undefined;
@@ -540,7 +540,7 @@ export const Code = {
     obj.pinned = message.pinned;
     return obj;
   },
-  fromProtoMsg(message: CodeProtoMsg, useInterfaces: boolean = false): Code {
+  fromProtoMsg(message: CodeProtoMsg, useInterfaces: boolean = true): Code {
     return Code.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Code): Uint8Array {
@@ -575,7 +575,7 @@ export const Contract = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Contract {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Contract {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContract();
@@ -650,7 +650,7 @@ export const Contract = {
       contractState: Array.isArray(object?.contract_state) ? object.contract_state.map((e: any) => Model.fromAmino(e)) : []
     };
   },
-  toAmino(message: Contract, useInterfaces: boolean = false): ContractAmino {
+  toAmino(message: Contract, useInterfaces: boolean = true): ContractAmino {
     const obj: any = {};
     obj.contract_address = message.contractAddress;
     obj.contract_info = message.contractInfo ? ContractInfo.toAmino(message.contractInfo, useInterfaces) : undefined;
@@ -661,7 +661,7 @@ export const Contract = {
     }
     return obj;
   },
-  fromProtoMsg(message: ContractProtoMsg, useInterfaces: boolean = false): Contract {
+  fromProtoMsg(message: ContractProtoMsg, useInterfaces: boolean = true): Contract {
     return Contract.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Contract): Uint8Array {
@@ -692,7 +692,7 @@ export const Sequence = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Sequence {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Sequence {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSequence();
@@ -750,13 +750,13 @@ export const Sequence = {
       value: BigInt(object.value)
     };
   },
-  toAmino(message: Sequence, useInterfaces: boolean = false): SequenceAmino {
+  toAmino(message: Sequence, useInterfaces: boolean = true): SequenceAmino {
     const obj: any = {};
     obj.id_key = message.idKey;
     obj.value = message.value ? message.value.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: SequenceProtoMsg, useInterfaces: boolean = false): Sequence {
+  fromProtoMsg(message: SequenceProtoMsg, useInterfaces: boolean = true): Sequence {
     return Sequence.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Sequence): Uint8Array {

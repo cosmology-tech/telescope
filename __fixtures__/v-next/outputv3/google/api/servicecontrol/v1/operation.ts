@@ -262,7 +262,7 @@ export const Operation_LabelsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Operation_LabelsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Operation_LabelsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation_LabelsEntry();
@@ -318,13 +318,13 @@ export const Operation_LabelsEntry = {
       value: object.value
     };
   },
-  toAmino(message: Operation_LabelsEntry, useInterfaces: boolean = false): Operation_LabelsEntryAmino {
+  toAmino(message: Operation_LabelsEntry, useInterfaces: boolean = true): Operation_LabelsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
     return obj;
   },
-  fromProtoMsg(message: Operation_LabelsEntryProtoMsg, useInterfaces: boolean = false): Operation_LabelsEntry {
+  fromProtoMsg(message: Operation_LabelsEntryProtoMsg, useInterfaces: boolean = true): Operation_LabelsEntry {
     return Operation_LabelsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Operation_LabelsEntry): Uint8Array {
@@ -383,7 +383,7 @@ export const Operation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Operation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Operation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation();
@@ -570,7 +570,7 @@ export const Operation = {
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
     };
   },
-  toAmino(message: Operation, useInterfaces: boolean = false): OperationAmino {
+  toAmino(message: Operation, useInterfaces: boolean = true): OperationAmino {
     const obj: any = {};
     obj.operation_id = message.operationId;
     obj.operation_name = message.operationName;
@@ -601,7 +601,7 @@ export const Operation = {
     }
     return obj;
   },
-  fromProtoMsg(message: OperationProtoMsg, useInterfaces: boolean = false): Operation {
+  fromProtoMsg(message: OperationProtoMsg, useInterfaces: boolean = true): Operation {
     return Operation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Operation): Uint8Array {

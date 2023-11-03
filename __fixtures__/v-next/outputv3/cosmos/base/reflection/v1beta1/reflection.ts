@@ -90,7 +90,7 @@ export const ListAllInterfacesRequest = {
   encode(_: ListAllInterfacesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListAllInterfacesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListAllInterfacesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAllInterfacesRequest();
@@ -126,11 +126,11 @@ export const ListAllInterfacesRequest = {
   fromAmino(_: ListAllInterfacesRequestAmino): ListAllInterfacesRequest {
     return {};
   },
-  toAmino(_: ListAllInterfacesRequest, useInterfaces: boolean = false): ListAllInterfacesRequestAmino {
+  toAmino(_: ListAllInterfacesRequest, useInterfaces: boolean = true): ListAllInterfacesRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: ListAllInterfacesRequestProtoMsg, useInterfaces: boolean = false): ListAllInterfacesRequest {
+  fromProtoMsg(message: ListAllInterfacesRequestProtoMsg, useInterfaces: boolean = true): ListAllInterfacesRequest {
     return ListAllInterfacesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListAllInterfacesRequest): Uint8Array {
@@ -157,7 +157,7 @@ export const ListAllInterfacesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListAllInterfacesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListAllInterfacesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAllInterfacesResponse();
@@ -212,7 +212,7 @@ export const ListAllInterfacesResponse = {
       interfaceNames: Array.isArray(object?.interface_names) ? object.interface_names.map((e: any) => e) : []
     };
   },
-  toAmino(message: ListAllInterfacesResponse, useInterfaces: boolean = false): ListAllInterfacesResponseAmino {
+  toAmino(message: ListAllInterfacesResponse, useInterfaces: boolean = true): ListAllInterfacesResponseAmino {
     const obj: any = {};
     if (message.interfaceNames) {
       obj.interface_names = message.interfaceNames.map(e => e);
@@ -221,7 +221,7 @@ export const ListAllInterfacesResponse = {
     }
     return obj;
   },
-  fromProtoMsg(message: ListAllInterfacesResponseProtoMsg, useInterfaces: boolean = false): ListAllInterfacesResponse {
+  fromProtoMsg(message: ListAllInterfacesResponseProtoMsg, useInterfaces: boolean = true): ListAllInterfacesResponse {
     return ListAllInterfacesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListAllInterfacesResponse): Uint8Array {
@@ -248,7 +248,7 @@ export const ListImplementationsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListImplementationsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListImplementationsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListImplementationsRequest();
@@ -295,12 +295,12 @@ export const ListImplementationsRequest = {
       interfaceName: object.interface_name
     };
   },
-  toAmino(message: ListImplementationsRequest, useInterfaces: boolean = false): ListImplementationsRequestAmino {
+  toAmino(message: ListImplementationsRequest, useInterfaces: boolean = true): ListImplementationsRequestAmino {
     const obj: any = {};
     obj.interface_name = message.interfaceName;
     return obj;
   },
-  fromProtoMsg(message: ListImplementationsRequestProtoMsg, useInterfaces: boolean = false): ListImplementationsRequest {
+  fromProtoMsg(message: ListImplementationsRequestProtoMsg, useInterfaces: boolean = true): ListImplementationsRequest {
     return ListImplementationsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListImplementationsRequest): Uint8Array {
@@ -327,7 +327,7 @@ export const ListImplementationsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListImplementationsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListImplementationsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListImplementationsResponse();
@@ -382,7 +382,7 @@ export const ListImplementationsResponse = {
       implementationMessageNames: Array.isArray(object?.implementation_message_names) ? object.implementation_message_names.map((e: any) => e) : []
     };
   },
-  toAmino(message: ListImplementationsResponse, useInterfaces: boolean = false): ListImplementationsResponseAmino {
+  toAmino(message: ListImplementationsResponse, useInterfaces: boolean = true): ListImplementationsResponseAmino {
     const obj: any = {};
     if (message.implementationMessageNames) {
       obj.implementation_message_names = message.implementationMessageNames.map(e => e);
@@ -391,7 +391,7 @@ export const ListImplementationsResponse = {
     }
     return obj;
   },
-  fromProtoMsg(message: ListImplementationsResponseProtoMsg, useInterfaces: boolean = false): ListImplementationsResponse {
+  fromProtoMsg(message: ListImplementationsResponseProtoMsg, useInterfaces: boolean = true): ListImplementationsResponse {
     return ListImplementationsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListImplementationsResponse): Uint8Array {

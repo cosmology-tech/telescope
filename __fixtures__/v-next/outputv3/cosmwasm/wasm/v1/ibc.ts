@@ -94,7 +94,7 @@ export const MsgIBCSend = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgIBCSend {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgIBCSend {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgIBCSend();
@@ -172,7 +172,7 @@ export const MsgIBCSend = {
       data: object.data
     };
   },
-  toAmino(message: MsgIBCSend, useInterfaces: boolean = false): MsgIBCSendAmino {
+  toAmino(message: MsgIBCSend, useInterfaces: boolean = true): MsgIBCSendAmino {
     const obj: any = {};
     obj.channel = message.channel;
     obj.timeout_height = message.timeoutHeight ? message.timeoutHeight.toString() : undefined;
@@ -180,7 +180,7 @@ export const MsgIBCSend = {
     obj.data = message.data;
     return obj;
   },
-  fromProtoMsg(message: MsgIBCSendProtoMsg, useInterfaces: boolean = false): MsgIBCSend {
+  fromProtoMsg(message: MsgIBCSendProtoMsg, useInterfaces: boolean = true): MsgIBCSend {
     return MsgIBCSend.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgIBCSend): Uint8Array {
@@ -207,7 +207,7 @@ export const MsgIBCCloseChannel = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgIBCCloseChannel {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgIBCCloseChannel {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgIBCCloseChannel();
@@ -254,12 +254,12 @@ export const MsgIBCCloseChannel = {
       channel: object.channel
     };
   },
-  toAmino(message: MsgIBCCloseChannel, useInterfaces: boolean = false): MsgIBCCloseChannelAmino {
+  toAmino(message: MsgIBCCloseChannel, useInterfaces: boolean = true): MsgIBCCloseChannelAmino {
     const obj: any = {};
     obj.channel = message.channel;
     return obj;
   },
-  fromProtoMsg(message: MsgIBCCloseChannelProtoMsg, useInterfaces: boolean = false): MsgIBCCloseChannel {
+  fromProtoMsg(message: MsgIBCCloseChannelProtoMsg, useInterfaces: boolean = true): MsgIBCCloseChannel {
     return MsgIBCCloseChannel.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgIBCCloseChannel): Uint8Array {

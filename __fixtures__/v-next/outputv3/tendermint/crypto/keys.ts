@@ -37,7 +37,7 @@ export const PublicKey = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): PublicKey {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PublicKey {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePublicKey();
@@ -93,13 +93,13 @@ export const PublicKey = {
       secp256k1: object?.secp256k1
     };
   },
-  toAmino(message: PublicKey, useInterfaces: boolean = false): PublicKeyAmino {
+  toAmino(message: PublicKey, useInterfaces: boolean = true): PublicKeyAmino {
     const obj: any = {};
     obj.ed25519 = message.ed25519;
     obj.secp256k1 = message.secp256k1;
     return obj;
   },
-  fromProtoMsg(message: PublicKeyProtoMsg, useInterfaces: boolean = false): PublicKey {
+  fromProtoMsg(message: PublicKeyProtoMsg, useInterfaces: boolean = true): PublicKey {
     return PublicKey.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PublicKey): Uint8Array {

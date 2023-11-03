@@ -171,7 +171,7 @@ export const Gauge = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Gauge {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Gauge {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGauge();
@@ -305,7 +305,7 @@ export const Gauge = {
       distributedCoins: Array.isArray(object?.distributed_coins) ? object.distributed_coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: Gauge, useInterfaces: boolean = false): GaugeAmino {
+  toAmino(message: Gauge, useInterfaces: boolean = true): GaugeAmino {
     const obj: any = {};
     obj.id = message.id ? message.id.toString() : undefined;
     obj.is_perpetual = message.isPerpetual;
@@ -328,13 +328,13 @@ export const Gauge = {
   fromAminoMsg(object: GaugeAminoMsg): Gauge {
     return Gauge.fromAmino(object.value);
   },
-  toAminoMsg(message: Gauge, useInterfaces: boolean = false): GaugeAminoMsg {
+  toAminoMsg(message: Gauge, useInterfaces: boolean = true): GaugeAminoMsg {
     return {
       type: "osmosis/incentives/gauge",
       value: Gauge.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GaugeProtoMsg, useInterfaces: boolean = false): Gauge {
+  fromProtoMsg(message: GaugeProtoMsg, useInterfaces: boolean = true): Gauge {
     return Gauge.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Gauge): Uint8Array {
@@ -361,7 +361,7 @@ export const LockableDurationsInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): LockableDurationsInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LockableDurationsInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockableDurationsInfo();
@@ -416,7 +416,7 @@ export const LockableDurationsInfo = {
       lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : []
     };
   },
-  toAmino(message: LockableDurationsInfo, useInterfaces: boolean = false): LockableDurationsInfoAmino {
+  toAmino(message: LockableDurationsInfo, useInterfaces: boolean = true): LockableDurationsInfoAmino {
     const obj: any = {};
     if (message.lockableDurations) {
       obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e, useInterfaces) : undefined);
@@ -428,13 +428,13 @@ export const LockableDurationsInfo = {
   fromAminoMsg(object: LockableDurationsInfoAminoMsg): LockableDurationsInfo {
     return LockableDurationsInfo.fromAmino(object.value);
   },
-  toAminoMsg(message: LockableDurationsInfo, useInterfaces: boolean = false): LockableDurationsInfoAminoMsg {
+  toAminoMsg(message: LockableDurationsInfo, useInterfaces: boolean = true): LockableDurationsInfoAminoMsg {
     return {
       type: "osmosis/incentives/lockable-durations-info",
       value: LockableDurationsInfo.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: LockableDurationsInfoProtoMsg, useInterfaces: boolean = false): LockableDurationsInfo {
+  fromProtoMsg(message: LockableDurationsInfoProtoMsg, useInterfaces: boolean = true): LockableDurationsInfo {
     return LockableDurationsInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LockableDurationsInfo): Uint8Array {

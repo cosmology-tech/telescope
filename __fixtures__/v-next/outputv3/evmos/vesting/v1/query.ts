@@ -70,7 +70,7 @@ export const QueryBalancesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryBalancesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryBalancesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBalancesRequest();
@@ -117,12 +117,12 @@ export const QueryBalancesRequest = {
       address: object.address
     };
   },
-  toAmino(message: QueryBalancesRequest, useInterfaces: boolean = false): QueryBalancesRequestAmino {
+  toAmino(message: QueryBalancesRequest, useInterfaces: boolean = true): QueryBalancesRequestAmino {
     const obj: any = {};
     obj.address = message.address;
     return obj;
   },
-  fromProtoMsg(message: QueryBalancesRequestProtoMsg, useInterfaces: boolean = false): QueryBalancesRequest {
+  fromProtoMsg(message: QueryBalancesRequestProtoMsg, useInterfaces: boolean = true): QueryBalancesRequest {
     return QueryBalancesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryBalancesRequest): Uint8Array {
@@ -156,7 +156,7 @@ export const QueryBalancesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryBalancesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryBalancesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBalancesResponse();
@@ -245,7 +245,7 @@ export const QueryBalancesResponse = {
       vested: Array.isArray(object?.vested) ? object.vested.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryBalancesResponse, useInterfaces: boolean = false): QueryBalancesResponseAmino {
+  toAmino(message: QueryBalancesResponse, useInterfaces: boolean = true): QueryBalancesResponseAmino {
     const obj: any = {};
     if (message.locked) {
       obj.locked = message.locked.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
@@ -264,7 +264,7 @@ export const QueryBalancesResponse = {
     }
     return obj;
   },
-  fromProtoMsg(message: QueryBalancesResponseProtoMsg, useInterfaces: boolean = false): QueryBalancesResponse {
+  fromProtoMsg(message: QueryBalancesResponseProtoMsg, useInterfaces: boolean = true): QueryBalancesResponse {
     return QueryBalancesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryBalancesResponse): Uint8Array {
