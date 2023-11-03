@@ -9,4 +9,4 @@ export * from './pinia-endpoint';
 export * from './varint';
 export * from './utf8-helper';
 export * from './binary-coder';
-export * from './types';
+export * from './types-helper';
