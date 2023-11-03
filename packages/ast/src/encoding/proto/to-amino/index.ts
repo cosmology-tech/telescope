@@ -234,7 +234,16 @@ export const toAminoJSONMethod = (context: ProtoParseContext, name: string, prot
                         t.identifier(name)
                     )
                 )
-            )
+            ),
+            ...(context.options.interfaces.enabled ? [
+                t.assignmentPattern(
+                    identifier(
+                        'useInterfaces',
+                        t.tsTypeAnnotation(t.tsBooleanKeyword())
+                    ),
+                    t.identifier('false')
+                )
+            ] : []),
         ],
         t.blockStatement(body),
         false,
@@ -275,7 +284,10 @@ export const toAminoMsgMethod = (context: ProtoParseContext, name: string, proto
                             t.identifier('toAmino')
                         ),
                         [
-                            t.identifier(varName)
+                            t.identifier(varName),
+                            ...(context.options.interfaces.enabled ? [
+                                t.identifier('useInterfaces')
+                            ] : []),
                         ]
                     )
                 )
@@ -293,7 +305,16 @@ export const toAminoMsgMethod = (context: ProtoParseContext, name: string, proto
                         t.identifier(TypeName)
                     )
                 )
-            )
+            ),
+            ...(context.options.interfaces.enabled ? [
+                t.assignmentPattern(
+                    identifier(
+                        'useInterfaces',
+                        t.tsTypeAnnotation(t.tsBooleanKeyword())
+                    ),
+                    t.identifier('false')
+                )
+            ] : []),
         ],
         t.blockStatement(body),
         false,
