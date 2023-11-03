@@ -16,6 +16,7 @@ interface TelescopeOpts {
     logLevel?: TelescopeLogLevel;
     interfaces?: {
         enabled?: boolean;
+        useByDefault?: boolean;
         useUnionTypes?: boolean;
     };
     prototypes?: {

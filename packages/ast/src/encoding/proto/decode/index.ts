@@ -170,7 +170,9 @@ export const decodeMethod = (context: ProtoParseContext, name: string, proto: Pr
                         'useInterfaces',
                         t.tsTypeAnnotation(t.tsBooleanKeyword())
                     ),
-                    t.identifier('false')
+                    t.identifier(
+                        (context.pluginValue('interfaces.useByDefault') ?? true).toString()
+                    )
                 )
             ] : []),
         ],

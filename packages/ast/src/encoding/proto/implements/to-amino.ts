@@ -66,7 +66,9 @@ const makeFunctionWrapper = (
                                     'useInterfaces',
                                     t.tsTypeAnnotation(t.tsBooleanKeyword())
                                 ),
-                                t.identifier('false')
+                                t.identifier(
+                                    (context.pluginValue('interfaces.useByDefault') ?? true).toString()
+                                )
                             )
                         ],
                         t.blockStatement([

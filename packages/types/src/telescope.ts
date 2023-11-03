@@ -21,6 +21,7 @@ interface TelescopeOpts {
 
     interfaces?: {
         enabled?: boolean;
+        useByDefault?: boolean,
         useUnionTypes?: boolean;
     },
 
@@ -245,6 +246,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
 
     interfaces: {
         enabled: true,
+        useByDefault: true,
         useUnionTypes: false,
     },
 

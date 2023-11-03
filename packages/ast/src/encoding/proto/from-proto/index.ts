@@ -52,7 +52,9 @@ export const fromProtoMsgMethod = (context: ProtoParseContext, name: string, pro
                         'useInterfaces',
                         t.tsTypeAnnotation(t.tsBooleanKeyword())
                     ),
-                    t.identifier('false')
+                    t.identifier(
+                        (context.pluginValue('interfaces.useByDefault') ?? true).toString()
+                    )
                 )
             ] : []),
         ],

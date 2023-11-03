@@ -241,7 +241,9 @@ export const toAminoJSONMethod = (context: ProtoParseContext, name: string, prot
                         'useInterfaces',
                         t.tsTypeAnnotation(t.tsBooleanKeyword())
                     ),
-                    t.identifier('false')
+                    t.identifier(
+                        (context.pluginValue('interfaces.useByDefault') ?? true).toString()
+                    )
                 )
             ] : []),
         ],
@@ -312,7 +314,9 @@ export const toAminoMsgMethod = (context: ProtoParseContext, name: string, proto
                         'useInterfaces',
                         t.tsTypeAnnotation(t.tsBooleanKeyword())
                     ),
-                    t.identifier('false')
+                    t.identifier(
+                        (context.pluginValue('interfaces.useByDefault') ?? true).toString()
+                    )
                 )
             ] : []),
         ],
