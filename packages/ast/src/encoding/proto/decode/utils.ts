@@ -154,7 +154,8 @@ export const decode = {
             return switchAnyTypeArray(
                 num,
                 prop,
-                interfaceFnName
+                name,
+                interfaceFnName,
             );
         }
         return switchProtoTypeArray(
@@ -398,7 +399,7 @@ export const baseTypes = {
                 )
             ),
             baseTypes.protoType(args)
-        )
+        );
     },
 
     type(args: DecodeMethod) {
@@ -666,38 +667,40 @@ export const switchProtoTypeArray = (
     )
 };
 
-export const switchAnyTypeArray = (num: number, prop: string, name: string) => {
-    return t.switchCase(
-        t.numericLiteral(num),
-        [
-            t.expressionStatement(
+export const switchAnyTypeArray = (num: number, prop: string, typeName: string, interfaceName: string) => {
+    return switchArray(num, prop,
+        t.conditionalExpression(
+            t.identifier('useInterfaces'),
+            t.tsAsExpression(
                 t.callExpression(
-                    t.memberExpression(
-                        t.memberExpression(
-                            t.identifier('message'),
-                            t.identifier(prop)
-                        ),
-                        t.identifier('push')
-                    ),
+                    t.identifier(interfaceName),
                     [
-                        t.tsAsExpression(
-                            t.callExpression(
-                                t.identifier(name),
-                                [
-                                    t.identifier('reader')
-                                ]
-                            ),
-                            t.tsTypeReference(
-                                t.identifier('Any')
-                            )
-                        )
-
+                        t.identifier('reader')
                     ]
+                ),
+                t.tsTypeReference(
+                    t.identifier('Any')
                 )
             ),
-            t.breakStatement()
-        ]
-    )
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier(typeName),
+                    t.identifier('decode')
+                ),
+                [
+                    t.identifier('reader'),
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('reader'),
+                            t.identifier('uint32')
+                        ),
+                        []
+                    ),
+                    t.identifier('useInterfaces'),
+                ]
+            )
+        )
+    );
 };
 
 // if ((tag & 7) === 2) {

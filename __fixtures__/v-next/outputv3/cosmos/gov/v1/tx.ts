@@ -246,7 +246,7 @@ export const MsgSubmitProposal = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.messages.push((ProposalContentI_InterfaceDecoder(reader) as Any));
+          message.messages.push(useInterfaces ? (ProposalContentI_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.initialDeposit.push(Coin.decode(reader, reader.uint32(), useInterfaces));

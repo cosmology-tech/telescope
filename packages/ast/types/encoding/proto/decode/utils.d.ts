@@ -54,6 +54,6 @@ export declare const baseTypes: {
 export declare const switchOnTag: (num: number, prop: string, expr: t.Expression) => t.SwitchCase;
 export declare const switchOnTagTakesArray: (num: number, prop: string, expr: t.Statement[]) => t.SwitchCase;
 export declare const switchProtoTypeArray: (args: DecodeMethod, num: number, prop: string, name: string) => t.SwitchCase;
-export declare const switchAnyTypeArray: (num: number, prop: string, name: string) => t.SwitchCase;
+export declare const switchAnyTypeArray: (num: number, prop: string, typeName: string, interfaceName: string) => t.SwitchCase;
 export declare const switchTagDelimArray: (num: number, prop: string, expr: t.Expression) => t.SwitchCase;
 export declare const switchArray: (num: number, prop: string, expr: t.Expression) => t.SwitchCase;

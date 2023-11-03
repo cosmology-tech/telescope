@@ -379,7 +379,7 @@ export const MsgExec = {
           message.grantee = reader.string();
           break;
         case 2:
-          message.msgs.push((Sdk_MsgauthzAuthorization_InterfaceDecoder(reader) as Any));
+          message.msgs.push(useInterfaces ? (Sdk_MsgauthzAuthorization_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);

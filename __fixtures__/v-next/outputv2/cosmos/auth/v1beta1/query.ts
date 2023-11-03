@@ -430,7 +430,7 @@ export const QueryAccountsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.accounts.push((AccountI_InterfaceDecoder(reader) as Any));
+          message.accounts.push(useInterfaces ? (AccountI_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
@@ -952,7 +952,7 @@ export const QueryModuleAccountsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.accounts.push((ModuleAccountI_InterfaceDecoder(reader) as Any));
+          message.accounts.push(useInterfaces ? (ModuleAccountI_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
