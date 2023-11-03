@@ -346,28 +346,38 @@ export const fromAminoJSON = {
     },
 
     timestampDate(args: FromAminoJSONMethod) {
-        const { origName } = getFieldNames(args.field);
+        const { propName, origName } = getFieldNames(args.field);
         args.context.addUtil('fromTimestamp');
 
-        const callExpr = t.callExpression(
-            t.identifier('fromTimestamp'),
-            [
+        return t.objectProperty(
+            t.identifier(propName),
+            t.conditionalExpression(
+                t.optionalMemberExpression(
+                    t.identifier('object'),
+                    t.identifier(origName),
+                    false,
+                    true
+                ),
                 t.callExpression(
-                    t.memberExpression(
-                        t.identifier('Timestamp'),
-                        t.identifier('fromAmino')
-                    ),
+                    t.identifier('fromTimestamp'),
                     [
-                        t.memberExpression(
-                            t.identifier('object'),
-                            t.identifier(origName)
+                        t.callExpression(
+                            t.memberExpression(
+                                t.identifier('Timestamp'),
+                                t.identifier('fromAmino')
+                            ),
+                            [
+                                t.memberExpression(
+                                    t.identifier('object'),
+                                    t.identifier(origName)
+                                )
+                            ]
                         )
                     ]
-                )
-            ]
+                ),
+                t.identifier('undefined')
+            )
         );
-    
-        return setProp(args, callExpr);
     },
 
     //  labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
