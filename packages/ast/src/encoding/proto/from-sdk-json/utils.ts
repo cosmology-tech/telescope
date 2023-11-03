@@ -231,7 +231,6 @@ export const fromSDKJSON = {
         return fromSDKJSON.timestampTimestamp(args);
       case 'date':
       default:
-        args.context.addUtil('toTimestamp');
         return fromSDKJSON.timestampDate(args);
     }
   },

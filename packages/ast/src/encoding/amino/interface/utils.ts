@@ -49,14 +49,7 @@ export const aminoInterface = {
         }
     },
     timestamp(args: RenderAminoField) {
-        const timestampFormat = args.context.pluginValue('prototypes.typingsFormat.timestamp');
-        switch (timestampFormat) {
-            case 'date':
-                return aminoInterface.string(args);
-            case 'timestamp':
-            default:
-                return aminoInterface.type(args);
-        }
+        return aminoInterface.string(args);
     },
     enum(args: RenderAminoField) {
         return t.tsPropertySignature(

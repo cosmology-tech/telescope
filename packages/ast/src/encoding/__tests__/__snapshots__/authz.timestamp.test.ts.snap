@@ -281,10 +281,7 @@ exports[`cosmos/authz/v1beta1/authz timestamp 3`] = `
       type_url: string;
       value: Uint8Array;
     };
-    expiration: {
-      seconds: string;
-      nanos: number;
-    };
+    expiration: string;
   };
 }"
 `;

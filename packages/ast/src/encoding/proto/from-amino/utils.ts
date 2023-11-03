@@ -347,7 +347,6 @@ export const fromAminoJSON = {
 
     timestampDate(args: FromAminoJSONMethod) {
         const { origName } = getFieldNames(args.field);
-        args.context.addUtil('isSet');
         args.context.addUtil('fromTimestamp');
 
         const callExpr = t.callExpression(

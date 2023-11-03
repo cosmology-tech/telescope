@@ -252,7 +252,6 @@ export const toAminoJSON = {
                 return toAminoJSON.type(args);
             case 'date':
             default:
-                args.context.addUtil('toTimestamp');
                 return toAminoJSON.timestampDate(args);
         }
     },
