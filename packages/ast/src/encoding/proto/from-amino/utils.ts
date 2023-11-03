@@ -327,15 +327,9 @@ export const fromAminoJSON = {
     },
 
     timestamp(args: FromAminoJSONMethod) {
-        let timestampFormat = args.context.pluginValue(
+        const timestampFormat = args.context.pluginValue(
             'prototypes.typingsFormat.timestamp'
         );
-        const env = args.context.pluginValue(
-            'env'
-        );
-        if (!env || env == 'default') {
-            timestampFormat = 'timestamp';
-        }
         switch (timestampFormat) {
             case 'timestamp':
                 return fromAminoJSON.type(args);
