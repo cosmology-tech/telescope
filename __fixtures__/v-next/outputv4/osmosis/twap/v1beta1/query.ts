@@ -193,8 +193,8 @@ export const ArithmeticTwapRequest = {
       poolId: BigInt(object.pool_id),
       baseAsset: object.base_asset,
       quoteAsset: object.quote_asset,
-      startTime: object.start_time,
-      endTime: object?.end_time
+      startTime: fromTimestamp(Timestamp.fromAmino(object.start_time)),
+      endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : undefined
     };
   },
   toAmino(message: ArithmeticTwapRequest): ArithmeticTwapRequestAmino {
@@ -202,8 +202,8 @@ export const ArithmeticTwapRequest = {
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     obj.base_asset = message.baseAsset;
     obj.quote_asset = message.quoteAsset;
-    obj.start_time = message.startTime;
-    obj.end_time = message.endTime;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
+    obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
     return obj;
   },
   fromAminoMsg(object: ArithmeticTwapRequestAminoMsg): ArithmeticTwapRequest {
@@ -426,7 +426,7 @@ export const ArithmeticTwapToNowRequest = {
       poolId: BigInt(object.pool_id),
       baseAsset: object.base_asset,
       quoteAsset: object.quote_asset,
-      startTime: object.start_time
+      startTime: fromTimestamp(Timestamp.fromAmino(object.start_time))
     };
   },
   toAmino(message: ArithmeticTwapToNowRequest): ArithmeticTwapToNowRequestAmino {
@@ -434,7 +434,7 @@ export const ArithmeticTwapToNowRequest = {
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     obj.base_asset = message.baseAsset;
     obj.quote_asset = message.quoteAsset;
-    obj.start_time = message.startTime;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     return obj;
   },
   fromAminoMsg(object: ArithmeticTwapToNowRequestAminoMsg): ArithmeticTwapToNowRequest {

@@ -1044,12 +1044,12 @@ export const MsgBeginRedelegateResponse = {
   },
   fromAmino(object: MsgBeginRedelegateResponseAmino): MsgBeginRedelegateResponse {
     return {
-      completionTime: object.completion_time
+      completionTime: fromTimestamp(Timestamp.fromAmino(object.completion_time))
     };
   },
   toAmino(message: MsgBeginRedelegateResponse): MsgBeginRedelegateResponseAmino {
     const obj: any = {};
-    obj.completion_time = message.completionTime;
+    obj.completion_time = message.completionTime ? Timestamp.toAmino(toTimestamp(message.completionTime)) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgBeginRedelegateResponseAminoMsg): MsgBeginRedelegateResponse {
@@ -1260,12 +1260,12 @@ export const MsgUndelegateResponse = {
   },
   fromAmino(object: MsgUndelegateResponseAmino): MsgUndelegateResponse {
     return {
-      completionTime: object.completion_time
+      completionTime: fromTimestamp(Timestamp.fromAmino(object.completion_time))
     };
   },
   toAmino(message: MsgUndelegateResponse): MsgUndelegateResponseAmino {
     const obj: any = {};
-    obj.completion_time = message.completionTime;
+    obj.completion_time = message.completionTime ? Timestamp.toAmino(toTimestamp(message.completionTime)) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgUndelegateResponseAminoMsg): MsgUndelegateResponse {

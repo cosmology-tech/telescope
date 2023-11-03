@@ -2026,7 +2026,7 @@ export const AttributeContext_Request = {
       host: object.host,
       scheme: object.scheme,
       query: object.query,
-      time: object?.time,
+      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
       size: BigInt(object.size),
       protocol: object.protocol,
       reason: object.reason,
@@ -2047,7 +2047,7 @@ export const AttributeContext_Request = {
     obj.host = message.host;
     obj.scheme = message.scheme;
     obj.query = message.query;
-    obj.time = message.time;
+    obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
     obj.size = message.size ? message.size.toString() : undefined;
     obj.protocol = message.protocol;
     obj.reason = message.reason;
@@ -2304,7 +2304,7 @@ export const AttributeContext_Response = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      time: object?.time,
+      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
       backendLatency: object?.backend_latency ? Duration.fromAmino(object.backend_latency) : undefined
     };
   },
@@ -2318,7 +2318,7 @@ export const AttributeContext_Response = {
         obj.headers[k] = v;
       });
     }
-    obj.time = message.time;
+    obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
     obj.backend_latency = message.backendLatency ? Duration.toAmino(message.backendLatency) : undefined;
     return obj;
   },
@@ -2777,9 +2777,9 @@ export const AttributeContext_Resource = {
         return acc;
       }, {}) : {},
       displayName: object.display_name,
-      createTime: object?.create_time,
-      updateTime: object?.update_time,
-      deleteTime: object?.delete_time,
+      createTime: object?.create_time ? fromTimestamp(Timestamp.fromAmino(object.create_time)) : undefined,
+      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined,
+      deleteTime: object?.delete_time ? fromTimestamp(Timestamp.fromAmino(object.delete_time)) : undefined,
       etag: object.etag,
       location: object.location
     };
@@ -2803,9 +2803,9 @@ export const AttributeContext_Resource = {
       });
     }
     obj.display_name = message.displayName;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
-    obj.delete_time = message.deleteTime;
+    obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
+    obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
+    obj.delete_time = message.deleteTime ? Timestamp.toAmino(toTimestamp(message.deleteTime)) : undefined;
     obj.etag = message.etag;
     obj.location = message.location;
     return obj;

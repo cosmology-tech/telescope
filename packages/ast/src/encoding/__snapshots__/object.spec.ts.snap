@@ -2025,7 +2025,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
       stringValue: object?.string_value,
       bytesValue: object?.bytes_value,
       durationValue: object?.duration_value ? Duration.fromAmino(object.duration_value) : undefined,
-      timestampValue: object?.timestamp_value
+      timestampValue: object?.timestamp_value ? Timestamp.fromAmino(object.timestamp_value) : undefined
     };
   },
   toAmino(message: Constant): ConstantAmino {
@@ -2038,7 +2038,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     obj.string_value = message.stringValue;
     obj.bytes_value = message.bytesValue;
     obj.duration_value = message.durationValue ? Duration.toAmino(message.durationValue) : undefined;
-    obj.timestamp_value = message.timestampValue;
+    obj.timestamp_value = message.timestampValue ? Timestamp.toAmino(message.timestampValue) : undefined;
     return obj;
   },
   fromAminoMsg(object: ConstantAminoMsg): Constant {
@@ -2760,7 +2760,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
   fromAmino(object: LogEntryAmino): LogEntry {
     return {
       name: object.name,
-      timestamp: object?.timestamp,
+      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       httpRequest: object?.http_request ? HttpRequest.fromAmino(object.http_request) : undefined,
       trace: object.trace,
@@ -2781,7 +2781,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
   toAmino(message: LogEntry): LogEntryAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.timestamp = message.timestamp;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
     obj.severity = message.severity;
     obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined;
     obj.trace = message.trace;

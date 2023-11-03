@@ -906,8 +906,8 @@ export const LogEntry = {
       protoPayload: object?.proto_payload ? Any.fromAmino(object.proto_payload) : undefined,
       textPayload: object?.text_payload,
       jsonPayload: object?.json_payload ? Struct.fromAmino(object.json_payload) : undefined,
-      timestamp: object?.timestamp,
-      receiveTimestamp: object?.receive_timestamp,
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined,
+      receiveTimestamp: object?.receive_timestamp ? fromTimestamp(Timestamp.fromAmino(object.receive_timestamp)) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       insertId: object.insert_id,
       httpRequest: object?.http_request ? HttpRequest.fromAmino(object.http_request) : undefined,
@@ -932,8 +932,8 @@ export const LogEntry = {
     obj.proto_payload = message.protoPayload ? Any.toAmino(message.protoPayload) : undefined;
     obj.text_payload = message.textPayload;
     obj.json_payload = message.jsonPayload ? Struct.toAmino(message.jsonPayload) : undefined;
-    obj.timestamp = message.timestamp;
-    obj.receive_timestamp = message.receiveTimestamp;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
+    obj.receive_timestamp = message.receiveTimestamp ? Timestamp.toAmino(toTimestamp(message.receiveTimestamp)) : undefined;
     obj.severity = message.severity;
     obj.insert_id = message.insertId;
     obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined;

@@ -848,13 +848,13 @@ export const Commission = {
   fromAmino(object: CommissionAmino): Commission {
     return {
       commissionRates: object?.commission_rates ? CommissionRates.fromAmino(object.commission_rates) : undefined,
-      updateTime: object.update_time
+      updateTime: fromTimestamp(Timestamp.fromAmino(object.update_time))
     };
   },
   toAmino(message: Commission): CommissionAmino {
     const obj: any = {};
     obj.commission_rates = message.commissionRates ? CommissionRates.toAmino(message.commissionRates) : undefined;
-    obj.update_time = message.updateTime;
+    obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
     return obj;
   },
   fromAminoMsg(object: CommissionAminoMsg): Commission {
@@ -1239,7 +1239,7 @@ export const Validator = {
       delegatorShares: object.delegator_shares,
       description: object?.description ? Description.fromAmino(object.description) : undefined,
       unbondingHeight: BigInt(object.unbonding_height),
-      unbondingTime: object.unbonding_time,
+      unbondingTime: fromTimestamp(Timestamp.fromAmino(object.unbonding_time)),
       commission: object?.commission ? Commission.fromAmino(object.commission) : undefined,
       minSelfDelegation: object.min_self_delegation
     };
@@ -1254,7 +1254,7 @@ export const Validator = {
     obj.delegator_shares = message.delegatorShares;
     obj.description = message.description ? Description.toAmino(message.description) : undefined;
     obj.unbonding_height = message.unbondingHeight ? message.unbondingHeight.toString() : undefined;
-    obj.unbonding_time = message.unbondingTime;
+    obj.unbonding_time = message.unbondingTime ? Timestamp.toAmino(toTimestamp(message.unbondingTime)) : undefined;
     obj.commission = message.commission ? Commission.toAmino(message.commission) : undefined;
     obj.min_self_delegation = message.minSelfDelegation;
     return obj;
@@ -2182,7 +2182,7 @@ export const UnbondingDelegationEntry = {
   fromAmino(object: UnbondingDelegationEntryAmino): UnbondingDelegationEntry {
     return {
       creationHeight: BigInt(object.creation_height),
-      completionTime: object.completion_time,
+      completionTime: fromTimestamp(Timestamp.fromAmino(object.completion_time)),
       initialBalance: object.initial_balance,
       balance: object.balance
     };
@@ -2190,7 +2190,7 @@ export const UnbondingDelegationEntry = {
   toAmino(message: UnbondingDelegationEntry): UnbondingDelegationEntryAmino {
     const obj: any = {};
     obj.creation_height = message.creationHeight ? message.creationHeight.toString() : undefined;
-    obj.completion_time = message.completionTime;
+    obj.completion_time = message.completionTime ? Timestamp.toAmino(toTimestamp(message.completionTime)) : undefined;
     obj.initial_balance = message.initialBalance;
     obj.balance = message.balance;
     return obj;
@@ -2321,7 +2321,7 @@ export const RedelegationEntry = {
   fromAmino(object: RedelegationEntryAmino): RedelegationEntry {
     return {
       creationHeight: BigInt(object.creation_height),
-      completionTime: object.completion_time,
+      completionTime: fromTimestamp(Timestamp.fromAmino(object.completion_time)),
       initialBalance: object.initial_balance,
       sharesDst: object.shares_dst
     };
@@ -2329,7 +2329,7 @@ export const RedelegationEntry = {
   toAmino(message: RedelegationEntry): RedelegationEntryAmino {
     const obj: any = {};
     obj.creation_height = message.creationHeight ? message.creationHeight.toString() : undefined;
-    obj.completion_time = message.completionTime;
+    obj.completion_time = message.completionTime ? Timestamp.toAmino(toTimestamp(message.completionTime)) : undefined;
     obj.initial_balance = message.initialBalance;
     obj.shares_dst = message.sharesDst;
     return obj;

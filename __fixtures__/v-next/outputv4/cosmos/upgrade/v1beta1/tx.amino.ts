@@ -1,6 +1,5 @@
 import { Plan, PlanSDKType } from "./upgrade";
 import { AminoMsg } from "@cosmjs/amino";
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { MsgSoftwareUpgrade, MsgSoftwareUpgradeSDKType, MsgCancelUpgrade, MsgCancelUpgradeSDKType } from "./tx";
 export interface MsgSoftwareUpgradeAminoType extends AminoMsg {
@@ -9,10 +8,7 @@ export interface MsgSoftwareUpgradeAminoType extends AminoMsg {
     authority: string;
     plan: {
       name: string;
-      time: {
-        seconds: string;
-        nanos: number;
-      };
+      time: string;
       height: string;
       info: string;
       upgraded_client_state: {

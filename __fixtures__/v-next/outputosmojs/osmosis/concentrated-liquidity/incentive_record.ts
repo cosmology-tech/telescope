@@ -316,14 +316,14 @@ export const IncentiveRecordBody = {
     return {
       remainingAmount: object.remaining_amount,
       emissionRate: object.emission_rate,
-      startTime: object.start_time
+      startTime: fromTimestamp(Timestamp.fromAmino(object.start_time))
     };
   },
   toAmino(message: IncentiveRecordBody): IncentiveRecordBodyAmino {
     const obj: any = {};
     obj.remaining_amount = message.remainingAmount;
     obj.emission_rate = message.emissionRate;
-    obj.start_time = message.startTime;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     return obj;
   },
   fromAminoMsg(object: IncentiveRecordBodyAminoMsg): IncentiveRecordBody {

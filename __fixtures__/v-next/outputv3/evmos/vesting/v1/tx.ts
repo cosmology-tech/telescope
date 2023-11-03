@@ -273,7 +273,7 @@ export const MsgCreateClawbackVestingAccount = {
     return {
       fromAddress: object.from_address,
       toAddress: object.to_address,
-      startTime: object.start_time,
+      startTime: fromTimestamp(Timestamp.fromAmino(object.start_time)),
       lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromAmino(e)) : [],
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : [],
       merge: object.merge
@@ -283,7 +283,7 @@ export const MsgCreateClawbackVestingAccount = {
     const obj: any = {};
     obj.from_address = message.fromAddress;
     obj.to_address = message.toAddress;
-    obj.start_time = message.startTime;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     if (message.lockupPeriods) {
       obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e) : undefined);
     } else {

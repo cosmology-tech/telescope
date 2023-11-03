@@ -1,7 +1,6 @@
 import { Grant, GrantSDKType } from "./authz";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { AminoMsg } from "@cosmjs/amino";
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { MsgGrant, MsgGrantSDKType, MsgExec, MsgExecSDKType, MsgRevoke, MsgRevokeSDKType } from "./tx";
 export interface MsgGrantAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgGrant";
@@ -13,10 +12,7 @@ export interface MsgGrantAminoType extends AminoMsg {
         type_url: string;
         value: Uint8Array;
       };
-      expiration: {
-        seconds: string;
-        nanos: number;
-      };
+      expiration: string;
     };
   };
 }

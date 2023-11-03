@@ -299,7 +299,7 @@ export const Gauge = {
       isPerpetual: object.is_perpetual,
       distributeTo: object?.distribute_to ? QueryCondition.fromAmino(object.distribute_to) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : [],
-      startTime: object.start_time,
+      startTime: fromTimestamp(Timestamp.fromAmino(object.start_time)),
       numEpochsPaidOver: BigInt(object.num_epochs_paid_over),
       filledEpochs: BigInt(object.filled_epochs),
       distributedCoins: Array.isArray(object?.distributed_coins) ? object.distributed_coins.map((e: any) => Coin.fromAmino(e)) : []
@@ -315,7 +315,7 @@ export const Gauge = {
     } else {
       obj.coins = [];
     }
-    obj.start_time = message.startTime;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.num_epochs_paid_over = message.numEpochsPaidOver ? message.numEpochsPaidOver.toString() : undefined;
     obj.filled_epochs = message.filledEpochs ? message.filledEpochs.toString() : undefined;
     if (message.distributedCoins) {

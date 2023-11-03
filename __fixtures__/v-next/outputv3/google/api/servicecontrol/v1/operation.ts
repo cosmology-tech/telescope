@@ -556,8 +556,8 @@ export const Operation = {
       operationId: object.operation_id,
       operationName: object.operation_name,
       consumerId: object.consumer_id,
-      startTime: object?.start_time,
-      endTime: object?.end_time,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
+      endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -575,8 +575,8 @@ export const Operation = {
     obj.operation_id = message.operationId;
     obj.operation_name = message.operationName;
     obj.consumer_id = message.consumerId;
-    obj.start_time = message.startTime;
-    obj.end_time = message.endTime;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
+    obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
     obj.labels = {};
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {

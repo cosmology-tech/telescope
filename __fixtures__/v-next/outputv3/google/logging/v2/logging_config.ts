@@ -3042,8 +3042,8 @@ export const LogBucket = {
     return {
       name: object.name,
       description: object.description,
-      createTime: object?.create_time,
-      updateTime: object?.update_time,
+      createTime: object?.create_time ? fromTimestamp(Timestamp.fromAmino(object.create_time)) : undefined,
+      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined,
       retentionDays: object.retention_days,
       locked: object.locked,
       lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : -1,
@@ -3055,8 +3055,8 @@ export const LogBucket = {
     const obj: any = {};
     obj.name = message.name;
     obj.description = message.description;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
+    obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
+    obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
     obj.retention_days = message.retentionDays;
     obj.locked = message.locked;
     obj.lifecycle_state = message.lifecycleState;
@@ -3188,8 +3188,8 @@ export const LogView = {
     return {
       name: object.name,
       description: object.description,
-      createTime: object?.create_time,
-      updateTime: object?.update_time,
+      createTime: object?.create_time ? fromTimestamp(Timestamp.fromAmino(object.create_time)) : undefined,
+      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined,
       filter: object.filter
     };
   },
@@ -3197,8 +3197,8 @@ export const LogView = {
     const obj: any = {};
     obj.name = message.name;
     obj.description = message.description;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
+    obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
+    obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
     obj.filter = message.filter;
     return obj;
   },
@@ -3424,8 +3424,8 @@ export const LogSink = {
       writerIdentity: object.writer_identity,
       includeChildren: object.include_children,
       bigqueryOptions: object?.bigquery_options ? BigQueryOptions.fromAmino(object.bigquery_options) : undefined,
-      createTime: object?.create_time,
-      updateTime: object?.update_time
+      createTime: object?.create_time ? fromTimestamp(Timestamp.fromAmino(object.create_time)) : undefined,
+      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined
     };
   },
   toAmino(message: LogSink): LogSinkAmino {
@@ -3444,8 +3444,8 @@ export const LogSink = {
     obj.writer_identity = message.writerIdentity;
     obj.include_children = message.includeChildren;
     obj.bigquery_options = message.bigqueryOptions ? BigQueryOptions.toAmino(message.bigqueryOptions) : undefined;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
+    obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
+    obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
     return obj;
   },
   fromProtoMsg(message: LogSinkProtoMsg): LogSink {
@@ -5518,8 +5518,8 @@ export const LogExclusion = {
       description: object.description,
       filter: object.filter,
       disabled: object.disabled,
-      createTime: object?.create_time,
-      updateTime: object?.update_time
+      createTime: object?.create_time ? fromTimestamp(Timestamp.fromAmino(object.create_time)) : undefined,
+      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined
     };
   },
   toAmino(message: LogExclusion): LogExclusionAmino {
@@ -5528,8 +5528,8 @@ export const LogExclusion = {
     obj.description = message.description;
     obj.filter = message.filter;
     obj.disabled = message.disabled;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
+    obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
+    obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
     return obj;
   },
   fromProtoMsg(message: LogExclusionProtoMsg): LogExclusion {
@@ -6968,8 +6968,8 @@ export const CopyLogEntriesMetadata = {
   },
   fromAmino(object: CopyLogEntriesMetadataAmino): CopyLogEntriesMetadata {
     return {
-      startTime: object?.start_time,
-      endTime: object?.end_time,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
+      endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : undefined,
       state: isSet(object.state) ? operationStateFromJSON(object.state) : -1,
       cancellationRequested: object.cancellation_requested,
       request: object?.request ? CopyLogEntriesRequest.fromAmino(object.request) : undefined,
@@ -6979,8 +6979,8 @@ export const CopyLogEntriesMetadata = {
   },
   toAmino(message: CopyLogEntriesMetadata): CopyLogEntriesMetadataAmino {
     const obj: any = {};
-    obj.start_time = message.startTime;
-    obj.end_time = message.endTime;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
+    obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
     obj.state = message.state;
     obj.cancellation_requested = message.cancellationRequested;
     obj.request = message.request ? CopyLogEntriesRequest.toAmino(message.request) : undefined;
