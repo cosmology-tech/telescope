@@ -144,7 +144,7 @@ export const Record = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Record {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Record {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRecord();
@@ -155,19 +155,19 @@ export const Record = {
           message.name = reader.string();
           break;
         case 2:
-          message.pubKey = Any.decode(reader, reader.uint32());
+          message.pubKey = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.local = Record_Local.decode(reader, reader.uint32());
+          message.local = Record_Local.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
-          message.ledger = Record_Ledger.decode(reader, reader.uint32());
+          message.ledger = Record_Ledger.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
-          message.multi = Record_Multi.decode(reader, reader.uint32());
+          message.multi = Record_Multi.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 6:
-          message.offline = Record_Offline.decode(reader, reader.uint32());
+          message.offline = Record_Offline.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -246,18 +246,18 @@ export const Record = {
       offline: object?.offline ? Record_Offline.fromAmino(object.offline) : undefined
     };
   },
-  toAmino(message: Record): RecordAmino {
+  toAmino(message: Record, useInterfaces: boolean = false): RecordAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey) : undefined;
-    obj.local = message.local ? Record_Local.toAmino(message.local) : undefined;
-    obj.ledger = message.ledger ? Record_Ledger.toAmino(message.ledger) : undefined;
-    obj.multi = message.multi ? Record_Multi.toAmino(message.multi) : undefined;
-    obj.offline = message.offline ? Record_Offline.toAmino(message.offline) : undefined;
+    obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey, useInterfaces) : undefined;
+    obj.local = message.local ? Record_Local.toAmino(message.local, useInterfaces) : undefined;
+    obj.ledger = message.ledger ? Record_Ledger.toAmino(message.ledger, useInterfaces) : undefined;
+    obj.multi = message.multi ? Record_Multi.toAmino(message.multi, useInterfaces) : undefined;
+    obj.offline = message.offline ? Record_Offline.toAmino(message.offline, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: RecordProtoMsg): Record {
-    return Record.decode(message.value);
+  fromProtoMsg(message: RecordProtoMsg, useInterfaces: boolean = false): Record {
+    return Record.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Record): Uint8Array {
     return Record.encode(message).finish();
@@ -287,7 +287,7 @@ export const Record_Local = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Record_Local {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Record_Local {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRecord_Local();
@@ -295,7 +295,7 @@ export const Record_Local = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.privKey = Any.decode(reader, reader.uint32());
+          message.privKey = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.privKeyType = reader.string();
@@ -345,14 +345,14 @@ export const Record_Local = {
       privKeyType: object.priv_key_type
     };
   },
-  toAmino(message: Record_Local): Record_LocalAmino {
+  toAmino(message: Record_Local, useInterfaces: boolean = false): Record_LocalAmino {
     const obj: any = {};
-    obj.priv_key = message.privKey ? Any.toAmino(message.privKey) : undefined;
+    obj.priv_key = message.privKey ? Any.toAmino(message.privKey, useInterfaces) : undefined;
     obj.priv_key_type = message.privKeyType;
     return obj;
   },
-  fromProtoMsg(message: Record_LocalProtoMsg): Record_Local {
-    return Record_Local.decode(message.value);
+  fromProtoMsg(message: Record_LocalProtoMsg, useInterfaces: boolean = false): Record_Local {
+    return Record_Local.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Record_Local): Uint8Array {
     return Record_Local.encode(message).finish();
@@ -378,7 +378,7 @@ export const Record_Ledger = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Record_Ledger {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Record_Ledger {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRecord_Ledger();
@@ -386,7 +386,7 @@ export const Record_Ledger = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.path = BIP44Params.decode(reader, reader.uint32());
+          message.path = BIP44Params.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -427,13 +427,13 @@ export const Record_Ledger = {
       path: object?.path ? BIP44Params.fromAmino(object.path) : undefined
     };
   },
-  toAmino(message: Record_Ledger): Record_LedgerAmino {
+  toAmino(message: Record_Ledger, useInterfaces: boolean = false): Record_LedgerAmino {
     const obj: any = {};
-    obj.path = message.path ? BIP44Params.toAmino(message.path) : undefined;
+    obj.path = message.path ? BIP44Params.toAmino(message.path, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: Record_LedgerProtoMsg): Record_Ledger {
-    return Record_Ledger.decode(message.value);
+  fromProtoMsg(message: Record_LedgerProtoMsg, useInterfaces: boolean = false): Record_Ledger {
+    return Record_Ledger.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Record_Ledger): Uint8Array {
     return Record_Ledger.encode(message).finish();
@@ -454,7 +454,7 @@ export const Record_Multi = {
   encode(_: Record_Multi, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Record_Multi {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Record_Multi {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRecord_Multi();
@@ -490,12 +490,12 @@ export const Record_Multi = {
   fromAmino(_: Record_MultiAmino): Record_Multi {
     return {};
   },
-  toAmino(_: Record_Multi): Record_MultiAmino {
+  toAmino(_: Record_Multi, useInterfaces: boolean = false): Record_MultiAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: Record_MultiProtoMsg): Record_Multi {
-    return Record_Multi.decode(message.value);
+  fromProtoMsg(message: Record_MultiProtoMsg, useInterfaces: boolean = false): Record_Multi {
+    return Record_Multi.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Record_Multi): Uint8Array {
     return Record_Multi.encode(message).finish();
@@ -516,7 +516,7 @@ export const Record_Offline = {
   encode(_: Record_Offline, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Record_Offline {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Record_Offline {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRecord_Offline();
@@ -552,12 +552,12 @@ export const Record_Offline = {
   fromAmino(_: Record_OfflineAmino): Record_Offline {
     return {};
   },
-  toAmino(_: Record_Offline): Record_OfflineAmino {
+  toAmino(_: Record_Offline, useInterfaces: boolean = false): Record_OfflineAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: Record_OfflineProtoMsg): Record_Offline {
-    return Record_Offline.decode(message.value);
+  fromProtoMsg(message: Record_OfflineProtoMsg, useInterfaces: boolean = false): Record_Offline {
+    return Record_Offline.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Record_Offline): Uint8Array {
     return Record_Offline.encode(message).finish();

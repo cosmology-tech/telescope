@@ -108,7 +108,7 @@ export const ClaimRecord = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ClaimRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ClaimRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClaimRecord();
@@ -119,7 +119,7 @@ export const ClaimRecord = {
           message.address = reader.string();
           break;
         case 2:
-          message.initialClaimableAmount.push(Coin.decode(reader, reader.uint32()));
+          message.initialClaimableAmount.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
           if ((tag & 7) === 2) {
@@ -196,11 +196,11 @@ export const ClaimRecord = {
       actionCompleted: Array.isArray(object?.action_completed) ? object.action_completed.map((e: any) => e) : []
     };
   },
-  toAmino(message: ClaimRecord): ClaimRecordAmino {
+  toAmino(message: ClaimRecord, useInterfaces: boolean = false): ClaimRecordAmino {
     const obj: any = {};
     obj.address = message.address;
     if (message.initialClaimableAmount) {
-      obj.initial_claimable_amount = message.initialClaimableAmount.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.initial_claimable_amount = message.initialClaimableAmount.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.initial_claimable_amount = [];
     }
@@ -214,14 +214,14 @@ export const ClaimRecord = {
   fromAminoMsg(object: ClaimRecordAminoMsg): ClaimRecord {
     return ClaimRecord.fromAmino(object.value);
   },
-  toAminoMsg(message: ClaimRecord): ClaimRecordAminoMsg {
+  toAminoMsg(message: ClaimRecord, useInterfaces: boolean = false): ClaimRecordAminoMsg {
     return {
       type: "osmosis/claim/claim-record",
-      value: ClaimRecord.toAmino(message)
+      value: ClaimRecord.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ClaimRecordProtoMsg): ClaimRecord {
-    return ClaimRecord.decode(message.value);
+  fromProtoMsg(message: ClaimRecordProtoMsg, useInterfaces: boolean = false): ClaimRecord {
+    return ClaimRecord.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ClaimRecord): Uint8Array {
     return ClaimRecord.encode(message).finish();

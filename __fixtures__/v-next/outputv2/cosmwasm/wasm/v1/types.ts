@@ -389,7 +389,7 @@ export const AccessTypeParam = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AccessTypeParam {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AccessTypeParam {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccessTypeParam();
@@ -436,7 +436,7 @@ export const AccessTypeParam = {
       value: isSet(object.value) ? accessTypeFromJSON(object.value) : -1
     };
   },
-  toAmino(message: AccessTypeParam): AccessTypeParamAmino {
+  toAmino(message: AccessTypeParam, useInterfaces: boolean = false): AccessTypeParamAmino {
     const obj: any = {};
     obj.value = message.value;
     return obj;
@@ -444,14 +444,14 @@ export const AccessTypeParam = {
   fromAminoMsg(object: AccessTypeParamAminoMsg): AccessTypeParam {
     return AccessTypeParam.fromAmino(object.value);
   },
-  toAminoMsg(message: AccessTypeParam): AccessTypeParamAminoMsg {
+  toAminoMsg(message: AccessTypeParam, useInterfaces: boolean = false): AccessTypeParamAminoMsg {
     return {
       type: "wasm/AccessTypeParam",
-      value: AccessTypeParam.toAmino(message)
+      value: AccessTypeParam.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: AccessTypeParamProtoMsg): AccessTypeParam {
-    return AccessTypeParam.decode(message.value);
+  fromProtoMsg(message: AccessTypeParamProtoMsg, useInterfaces: boolean = false): AccessTypeParam {
+    return AccessTypeParam.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AccessTypeParam): Uint8Array {
     return AccessTypeParam.encode(message).finish();
@@ -481,7 +481,7 @@ export const AccessConfig = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AccessConfig {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AccessConfig {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccessConfig();
@@ -537,7 +537,7 @@ export const AccessConfig = {
       address: object.address
     };
   },
-  toAmino(message: AccessConfig): AccessConfigAmino {
+  toAmino(message: AccessConfig, useInterfaces: boolean = false): AccessConfigAmino {
     const obj: any = {};
     obj.permission = message.permission;
     obj.address = message.address;
@@ -546,14 +546,14 @@ export const AccessConfig = {
   fromAminoMsg(object: AccessConfigAminoMsg): AccessConfig {
     return AccessConfig.fromAmino(object.value);
   },
-  toAminoMsg(message: AccessConfig): AccessConfigAminoMsg {
+  toAminoMsg(message: AccessConfig, useInterfaces: boolean = false): AccessConfigAminoMsg {
     return {
       type: "wasm/AccessConfig",
-      value: AccessConfig.toAmino(message)
+      value: AccessConfig.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: AccessConfigProtoMsg): AccessConfig {
-    return AccessConfig.decode(message.value);
+  fromProtoMsg(message: AccessConfigProtoMsg, useInterfaces: boolean = false): AccessConfig {
+    return AccessConfig.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AccessConfig): Uint8Array {
     return AccessConfig.encode(message).finish();
@@ -587,7 +587,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -595,7 +595,7 @@ export const Params = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.codeUploadAccess = AccessConfig.decode(reader, reader.uint32());
+          message.codeUploadAccess = AccessConfig.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.instantiateDefaultPermission = (reader.int32() as any);
@@ -656,9 +656,9 @@ export const Params = {
       maxWasmCodeSize: BigInt(object.max_wasm_code_size)
     };
   },
-  toAmino(message: Params): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = false): ParamsAmino {
     const obj: any = {};
-    obj.code_upload_access = message.codeUploadAccess ? AccessConfig.toAmino(message.codeUploadAccess) : undefined;
+    obj.code_upload_access = message.codeUploadAccess ? AccessConfig.toAmino(message.codeUploadAccess, useInterfaces) : undefined;
     obj.instantiate_default_permission = message.instantiateDefaultPermission;
     obj.max_wasm_code_size = message.maxWasmCodeSize ? message.maxWasmCodeSize.toString() : undefined;
     return obj;
@@ -666,14 +666,14 @@ export const Params = {
   fromAminoMsg(object: ParamsAminoMsg): Params {
     return Params.fromAmino(object.value);
   },
-  toAminoMsg(message: Params): ParamsAminoMsg {
+  toAminoMsg(message: Params, useInterfaces: boolean = false): ParamsAminoMsg {
     return {
       type: "wasm/Params",
-      value: Params.toAmino(message)
+      value: Params.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = false): Params {
+    return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();
@@ -707,7 +707,7 @@ export const CodeInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CodeInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CodeInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCodeInfo();
@@ -721,7 +721,7 @@ export const CodeInfo = {
           message.creator = reader.string();
           break;
         case 5:
-          message.instantiateConfig = AccessConfig.decode(reader, reader.uint32());
+          message.instantiateConfig = AccessConfig.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -774,24 +774,24 @@ export const CodeInfo = {
       instantiateConfig: object?.instantiate_config ? AccessConfig.fromAmino(object.instantiate_config) : undefined
     };
   },
-  toAmino(message: CodeInfo): CodeInfoAmino {
+  toAmino(message: CodeInfo, useInterfaces: boolean = false): CodeInfoAmino {
     const obj: any = {};
     obj.code_hash = message.codeHash;
     obj.creator = message.creator;
-    obj.instantiate_config = message.instantiateConfig ? AccessConfig.toAmino(message.instantiateConfig) : undefined;
+    obj.instantiate_config = message.instantiateConfig ? AccessConfig.toAmino(message.instantiateConfig, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: CodeInfoAminoMsg): CodeInfo {
     return CodeInfo.fromAmino(object.value);
   },
-  toAminoMsg(message: CodeInfo): CodeInfoAminoMsg {
+  toAminoMsg(message: CodeInfo, useInterfaces: boolean = false): CodeInfoAminoMsg {
     return {
       type: "wasm/CodeInfo",
-      value: CodeInfo.toAmino(message)
+      value: CodeInfo.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: CodeInfoProtoMsg): CodeInfo {
-    return CodeInfo.decode(message.value);
+  fromProtoMsg(message: CodeInfoProtoMsg, useInterfaces: boolean = false): CodeInfo {
+    return CodeInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CodeInfo): Uint8Array {
     return CodeInfo.encode(message).finish();
@@ -841,7 +841,7 @@ export const ContractInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ContractInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ContractInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContractInfo();
@@ -861,13 +861,13 @@ export const ContractInfo = {
           message.label = reader.string();
           break;
         case 5:
-          message.created = AbsoluteTxPosition.decode(reader, reader.uint32());
+          message.created = AbsoluteTxPosition.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 6:
           message.ibcPortId = reader.string();
           break;
         case 7:
-          message.extension = (ContractInfoExtension_InterfaceDecoder(reader) as Any);
+          message.extension = useInterfaces ? (ContractInfoExtension_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -948,28 +948,28 @@ export const ContractInfo = {
       extension: object?.extension ? ContractInfoExtension_FromAmino(object.extension) : undefined
     };
   },
-  toAmino(message: ContractInfo): ContractInfoAmino {
+  toAmino(message: ContractInfo, useInterfaces: boolean = false): ContractInfoAmino {
     const obj: any = {};
     obj.code_id = message.codeId ? message.codeId.toString() : undefined;
     obj.creator = message.creator;
     obj.admin = message.admin;
     obj.label = message.label;
-    obj.created = message.created ? AbsoluteTxPosition.toAmino(message.created) : undefined;
+    obj.created = message.created ? AbsoluteTxPosition.toAmino(message.created, useInterfaces) : undefined;
     obj.ibc_port_id = message.ibcPortId;
-    obj.extension = message.extension ? ContractInfoExtension_ToAmino((message.extension as Any)) : undefined;
+    obj.extension = message.extension ? ContractInfoExtension_ToAmino((message.extension as Any), useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: ContractInfoAminoMsg): ContractInfo {
     return ContractInfo.fromAmino(object.value);
   },
-  toAminoMsg(message: ContractInfo): ContractInfoAminoMsg {
+  toAminoMsg(message: ContractInfo, useInterfaces: boolean = false): ContractInfoAminoMsg {
     return {
       type: "wasm/ContractInfo",
-      value: ContractInfo.toAmino(message)
+      value: ContractInfo.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ContractInfoProtoMsg): ContractInfo {
-    return ContractInfo.decode(message.value);
+  fromProtoMsg(message: ContractInfoProtoMsg, useInterfaces: boolean = false): ContractInfo {
+    return ContractInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ContractInfo): Uint8Array {
     return ContractInfo.encode(message).finish();
@@ -1007,7 +1007,7 @@ export const ContractCodeHistoryEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ContractCodeHistoryEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ContractCodeHistoryEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContractCodeHistoryEntry();
@@ -1021,7 +1021,7 @@ export const ContractCodeHistoryEntry = {
           message.codeId = reader.uint64();
           break;
         case 3:
-          message.updated = AbsoluteTxPosition.decode(reader, reader.uint32());
+          message.updated = AbsoluteTxPosition.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
           message.msg = reader.bytes();
@@ -1085,25 +1085,25 @@ export const ContractCodeHistoryEntry = {
       msg: toUtf8(JSON.stringify(object.msg))
     };
   },
-  toAmino(message: ContractCodeHistoryEntry): ContractCodeHistoryEntryAmino {
+  toAmino(message: ContractCodeHistoryEntry, useInterfaces: boolean = false): ContractCodeHistoryEntryAmino {
     const obj: any = {};
     obj.operation = message.operation;
     obj.code_id = message.codeId ? message.codeId.toString() : undefined;
-    obj.updated = message.updated ? AbsoluteTxPosition.toAmino(message.updated) : undefined;
+    obj.updated = message.updated ? AbsoluteTxPosition.toAmino(message.updated, useInterfaces) : undefined;
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     return obj;
   },
   fromAminoMsg(object: ContractCodeHistoryEntryAminoMsg): ContractCodeHistoryEntry {
     return ContractCodeHistoryEntry.fromAmino(object.value);
   },
-  toAminoMsg(message: ContractCodeHistoryEntry): ContractCodeHistoryEntryAminoMsg {
+  toAminoMsg(message: ContractCodeHistoryEntry, useInterfaces: boolean = false): ContractCodeHistoryEntryAminoMsg {
     return {
       type: "wasm/ContractCodeHistoryEntry",
-      value: ContractCodeHistoryEntry.toAmino(message)
+      value: ContractCodeHistoryEntry.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ContractCodeHistoryEntryProtoMsg): ContractCodeHistoryEntry {
-    return ContractCodeHistoryEntry.decode(message.value);
+  fromProtoMsg(message: ContractCodeHistoryEntryProtoMsg, useInterfaces: boolean = false): ContractCodeHistoryEntry {
+    return ContractCodeHistoryEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ContractCodeHistoryEntry): Uint8Array {
     return ContractCodeHistoryEntry.encode(message).finish();
@@ -1133,7 +1133,7 @@ export const AbsoluteTxPosition = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AbsoluteTxPosition {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AbsoluteTxPosition {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAbsoluteTxPosition();
@@ -1193,7 +1193,7 @@ export const AbsoluteTxPosition = {
       txIndex: BigInt(object.tx_index)
     };
   },
-  toAmino(message: AbsoluteTxPosition): AbsoluteTxPositionAmino {
+  toAmino(message: AbsoluteTxPosition, useInterfaces: boolean = false): AbsoluteTxPositionAmino {
     const obj: any = {};
     obj.block_height = message.blockHeight ? message.blockHeight.toString() : undefined;
     obj.tx_index = message.txIndex ? message.txIndex.toString() : undefined;
@@ -1202,14 +1202,14 @@ export const AbsoluteTxPosition = {
   fromAminoMsg(object: AbsoluteTxPositionAminoMsg): AbsoluteTxPosition {
     return AbsoluteTxPosition.fromAmino(object.value);
   },
-  toAminoMsg(message: AbsoluteTxPosition): AbsoluteTxPositionAminoMsg {
+  toAminoMsg(message: AbsoluteTxPosition, useInterfaces: boolean = false): AbsoluteTxPositionAminoMsg {
     return {
       type: "wasm/AbsoluteTxPosition",
-      value: AbsoluteTxPosition.toAmino(message)
+      value: AbsoluteTxPosition.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: AbsoluteTxPositionProtoMsg): AbsoluteTxPosition {
-    return AbsoluteTxPosition.decode(message.value);
+  fromProtoMsg(message: AbsoluteTxPositionProtoMsg, useInterfaces: boolean = false): AbsoluteTxPosition {
+    return AbsoluteTxPosition.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AbsoluteTxPosition): Uint8Array {
     return AbsoluteTxPosition.encode(message).finish();
@@ -1239,7 +1239,7 @@ export const Model = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Model {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Model {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModel();
@@ -1295,7 +1295,7 @@ export const Model = {
       value: object.value
     };
   },
-  toAmino(message: Model): ModelAmino {
+  toAmino(message: Model, useInterfaces: boolean = false): ModelAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -1304,14 +1304,14 @@ export const Model = {
   fromAminoMsg(object: ModelAminoMsg): Model {
     return Model.fromAmino(object.value);
   },
-  toAminoMsg(message: Model): ModelAminoMsg {
+  toAminoMsg(message: Model, useInterfaces: boolean = false): ModelAminoMsg {
     return {
       type: "wasm/Model",
-      value: Model.toAmino(message)
+      value: Model.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ModelProtoMsg): Model {
-    return Model.decode(message.value);
+  fromProtoMsg(message: ModelProtoMsg, useInterfaces: boolean = false): Model {
+    return Model.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Model): Uint8Array {
     return Model.encode(message).finish();
@@ -1325,7 +1325,7 @@ export const Model = {
 };
 export const ContractInfoExtension_InterfaceDecoder = (input: BinaryReader | Uint8Array): Any => {
   const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32());
+  const data = Any.decode(reader, reader.uint32(), undefined, true);
   switch (data.typeUrl) {
     default:
       return data;
@@ -1334,6 +1334,6 @@ export const ContractInfoExtension_InterfaceDecoder = (input: BinaryReader | Uin
 export const ContractInfoExtension_FromAmino = (content: AnyAmino) => {
   return Any.fromAmino(content);
 };
-export const ContractInfoExtension_ToAmino = (content: Any) => {
-  return Any.toAmino(content);
+export const ContractInfoExtension_ToAmino = (content: Any, useInterfaces: boolean = false) => {
+  return Any.toAmino(content, useInterfaces);
 };

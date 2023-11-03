@@ -121,7 +121,7 @@ export const ReplacePoolIncentivesProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ReplacePoolIncentivesProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ReplacePoolIncentivesProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReplacePoolIncentivesProposal();
@@ -135,7 +135,7 @@ export const ReplacePoolIncentivesProposal = {
           message.description = reader.string();
           break;
         case 3:
-          message.records.push(DistrRecord.decode(reader, reader.uint32()));
+          message.records.push(DistrRecord.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -194,19 +194,19 @@ export const ReplacePoolIncentivesProposal = {
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
     };
   },
-  toAmino(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalAmino {
+  toAmino(message: ReplacePoolIncentivesProposal, useInterfaces: boolean = false): ReplacePoolIncentivesProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
     if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
+      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.records = [];
     }
     return obj;
   },
-  fromProtoMsg(message: ReplacePoolIncentivesProposalProtoMsg): ReplacePoolIncentivesProposal {
-    return ReplacePoolIncentivesProposal.decode(message.value);
+  fromProtoMsg(message: ReplacePoolIncentivesProposalProtoMsg, useInterfaces: boolean = false): ReplacePoolIncentivesProposal {
+    return ReplacePoolIncentivesProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ReplacePoolIncentivesProposal): Uint8Array {
     return ReplacePoolIncentivesProposal.encode(message).finish();
@@ -241,7 +241,7 @@ export const UpdatePoolIncentivesProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdatePoolIncentivesProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): UpdatePoolIncentivesProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdatePoolIncentivesProposal();
@@ -255,7 +255,7 @@ export const UpdatePoolIncentivesProposal = {
           message.description = reader.string();
           break;
         case 3:
-          message.records.push(DistrRecord.decode(reader, reader.uint32()));
+          message.records.push(DistrRecord.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -314,19 +314,19 @@ export const UpdatePoolIncentivesProposal = {
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
     };
   },
-  toAmino(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalAmino {
+  toAmino(message: UpdatePoolIncentivesProposal, useInterfaces: boolean = false): UpdatePoolIncentivesProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
     if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
+      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.records = [];
     }
     return obj;
   },
-  fromProtoMsg(message: UpdatePoolIncentivesProposalProtoMsg): UpdatePoolIncentivesProposal {
-    return UpdatePoolIncentivesProposal.decode(message.value);
+  fromProtoMsg(message: UpdatePoolIncentivesProposalProtoMsg, useInterfaces: boolean = false): UpdatePoolIncentivesProposal {
+    return UpdatePoolIncentivesProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpdatePoolIncentivesProposal): Uint8Array {
     return UpdatePoolIncentivesProposal.encode(message).finish();

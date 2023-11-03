@@ -108,7 +108,7 @@ export const EventSend = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EventSend {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): EventSend {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventSend();
@@ -182,7 +182,7 @@ export const EventSend = {
       receiver: object.receiver
     };
   },
-  toAmino(message: EventSend): EventSendAmino {
+  toAmino(message: EventSend, useInterfaces: boolean = false): EventSendAmino {
     const obj: any = {};
     obj.class_id = message.classId;
     obj.id = message.id;
@@ -193,14 +193,14 @@ export const EventSend = {
   fromAminoMsg(object: EventSendAminoMsg): EventSend {
     return EventSend.fromAmino(object.value);
   },
-  toAminoMsg(message: EventSend): EventSendAminoMsg {
+  toAminoMsg(message: EventSend, useInterfaces: boolean = false): EventSendAminoMsg {
     return {
       type: "cosmos-sdk/EventSend",
-      value: EventSend.toAmino(message)
+      value: EventSend.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: EventSendProtoMsg): EventSend {
-    return EventSend.decode(message.value);
+  fromProtoMsg(message: EventSendProtoMsg, useInterfaces: boolean = false): EventSend {
+    return EventSend.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EventSend): Uint8Array {
     return EventSend.encode(message).finish();
@@ -234,7 +234,7 @@ export const EventMint = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EventMint {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): EventMint {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventMint();
@@ -299,7 +299,7 @@ export const EventMint = {
       owner: object.owner
     };
   },
-  toAmino(message: EventMint): EventMintAmino {
+  toAmino(message: EventMint, useInterfaces: boolean = false): EventMintAmino {
     const obj: any = {};
     obj.class_id = message.classId;
     obj.id = message.id;
@@ -309,14 +309,14 @@ export const EventMint = {
   fromAminoMsg(object: EventMintAminoMsg): EventMint {
     return EventMint.fromAmino(object.value);
   },
-  toAminoMsg(message: EventMint): EventMintAminoMsg {
+  toAminoMsg(message: EventMint, useInterfaces: boolean = false): EventMintAminoMsg {
     return {
       type: "cosmos-sdk/EventMint",
-      value: EventMint.toAmino(message)
+      value: EventMint.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: EventMintProtoMsg): EventMint {
-    return EventMint.decode(message.value);
+  fromProtoMsg(message: EventMintProtoMsg, useInterfaces: boolean = false): EventMint {
+    return EventMint.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EventMint): Uint8Array {
     return EventMint.encode(message).finish();
@@ -350,7 +350,7 @@ export const EventBurn = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EventBurn {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): EventBurn {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventBurn();
@@ -415,7 +415,7 @@ export const EventBurn = {
       owner: object.owner
     };
   },
-  toAmino(message: EventBurn): EventBurnAmino {
+  toAmino(message: EventBurn, useInterfaces: boolean = false): EventBurnAmino {
     const obj: any = {};
     obj.class_id = message.classId;
     obj.id = message.id;
@@ -425,14 +425,14 @@ export const EventBurn = {
   fromAminoMsg(object: EventBurnAminoMsg): EventBurn {
     return EventBurn.fromAmino(object.value);
   },
-  toAminoMsg(message: EventBurn): EventBurnAminoMsg {
+  toAminoMsg(message: EventBurn, useInterfaces: boolean = false): EventBurnAminoMsg {
     return {
       type: "cosmos-sdk/EventBurn",
-      value: EventBurn.toAmino(message)
+      value: EventBurn.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: EventBurnProtoMsg): EventBurn {
-    return EventBurn.decode(message.value);
+  fromProtoMsg(message: EventBurnProtoMsg, useInterfaces: boolean = false): EventBurn {
+    return EventBurn.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EventBurn): Uint8Array {
     return EventBurn.encode(message).finish();

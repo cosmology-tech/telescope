@@ -135,7 +135,7 @@ export const ValidatorSigningInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorSigningInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ValidatorSigningInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorSigningInfo();
@@ -233,7 +233,7 @@ export const ValidatorSigningInfo = {
       missedBlocksCounter: BigInt(object.missed_blocks_counter)
     };
   },
-  toAmino(message: ValidatorSigningInfo): ValidatorSigningInfoAmino {
+  toAmino(message: ValidatorSigningInfo, useInterfaces: boolean = false): ValidatorSigningInfoAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.start_height = message.startHeight ? message.startHeight.toString() : undefined;
@@ -243,8 +243,8 @@ export const ValidatorSigningInfo = {
     obj.missed_blocks_counter = message.missedBlocksCounter ? message.missedBlocksCounter.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: ValidatorSigningInfoProtoMsg): ValidatorSigningInfo {
-    return ValidatorSigningInfo.decode(message.value);
+  fromProtoMsg(message: ValidatorSigningInfoProtoMsg, useInterfaces: boolean = false): ValidatorSigningInfo {
+    return ValidatorSigningInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorSigningInfo): Uint8Array {
     return ValidatorSigningInfo.encode(message).finish();
@@ -286,7 +286,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -300,7 +300,7 @@ export const Params = {
           message.minSignedPerWindow = reader.bytes();
           break;
         case 3:
-          message.downtimeJailDuration = Duration.decode(reader, reader.uint32());
+          message.downtimeJailDuration = Duration.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
           message.slashFractionDoubleSign = reader.bytes();
@@ -373,17 +373,17 @@ export const Params = {
       slashFractionDowntime: object.slash_fraction_downtime
     };
   },
-  toAmino(message: Params): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = false): ParamsAmino {
     const obj: any = {};
     obj.signed_blocks_window = message.signedBlocksWindow ? message.signedBlocksWindow.toString() : undefined;
     obj.min_signed_per_window = message.minSignedPerWindow;
-    obj.downtime_jail_duration = message.downtimeJailDuration ? Duration.toAmino(message.downtimeJailDuration) : undefined;
+    obj.downtime_jail_duration = message.downtimeJailDuration ? Duration.toAmino(message.downtimeJailDuration, useInterfaces) : undefined;
     obj.slash_fraction_double_sign = message.slashFractionDoubleSign;
     obj.slash_fraction_downtime = message.slashFractionDowntime;
     return obj;
   },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = false): Params {
+    return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();

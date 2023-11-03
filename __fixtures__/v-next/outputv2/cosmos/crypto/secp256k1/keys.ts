@@ -73,7 +73,7 @@ export const PubKey = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): PubKey {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): PubKey {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePubKey();
@@ -120,7 +120,7 @@ export const PubKey = {
       key: object.key
     };
   },
-  toAmino(message: PubKey): PubKeyAmino {
+  toAmino(message: PubKey, useInterfaces: boolean = false): PubKeyAmino {
     const obj: any = {};
     obj.key = message.key;
     return obj;
@@ -128,14 +128,14 @@ export const PubKey = {
   fromAminoMsg(object: PubKeyAminoMsg): PubKey {
     return PubKey.fromAmino(object.value);
   },
-  toAminoMsg(message: PubKey): PubKeyAminoMsg {
+  toAminoMsg(message: PubKey, useInterfaces: boolean = false): PubKeyAminoMsg {
     return {
       type: "cosmos-sdk/PubKey",
-      value: PubKey.toAmino(message)
+      value: PubKey.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: PubKeyProtoMsg): PubKey {
-    return PubKey.decode(message.value);
+  fromProtoMsg(message: PubKeyProtoMsg, useInterfaces: boolean = false): PubKey {
+    return PubKey.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PubKey): Uint8Array {
     return PubKey.encode(message).finish();
@@ -161,7 +161,7 @@ export const PrivKey = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): PrivKey {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): PrivKey {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrivKey();
@@ -208,7 +208,7 @@ export const PrivKey = {
       key: object.key
     };
   },
-  toAmino(message: PrivKey): PrivKeyAmino {
+  toAmino(message: PrivKey, useInterfaces: boolean = false): PrivKeyAmino {
     const obj: any = {};
     obj.key = message.key;
     return obj;
@@ -216,14 +216,14 @@ export const PrivKey = {
   fromAminoMsg(object: PrivKeyAminoMsg): PrivKey {
     return PrivKey.fromAmino(object.value);
   },
-  toAminoMsg(message: PrivKey): PrivKeyAminoMsg {
+  toAminoMsg(message: PrivKey, useInterfaces: boolean = false): PrivKeyAminoMsg {
     return {
       type: "cosmos-sdk/PrivKey",
-      value: PrivKey.toAmino(message)
+      value: PrivKey.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: PrivKeyProtoMsg): PrivKey {
-    return PrivKey.decode(message.value);
+  fromProtoMsg(message: PrivKeyProtoMsg, useInterfaces: boolean = false): PrivKey {
+    return PrivKey.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PrivKey): Uint8Array {
     return PrivKey.encode(message).finish();

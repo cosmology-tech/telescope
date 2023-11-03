@@ -699,7 +699,7 @@ export const ListServicesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListServicesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListServicesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServicesRequest();
@@ -773,7 +773,7 @@ export const ListServicesRequest = {
       consumerId: object.consumer_id
     };
   },
-  toAmino(message: ListServicesRequest): ListServicesRequestAmino {
+  toAmino(message: ListServicesRequest, useInterfaces: boolean = false): ListServicesRequestAmino {
     const obj: any = {};
     obj.producer_project_id = message.producerProjectId;
     obj.page_size = message.pageSize;
@@ -781,8 +781,8 @@ export const ListServicesRequest = {
     obj.consumer_id = message.consumerId;
     return obj;
   },
-  fromProtoMsg(message: ListServicesRequestProtoMsg): ListServicesRequest {
-    return ListServicesRequest.decode(message.value);
+  fromProtoMsg(message: ListServicesRequestProtoMsg, useInterfaces: boolean = false): ListServicesRequest {
+    return ListServicesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListServicesRequest): Uint8Array {
     return ListServicesRequest.encode(message).finish();
@@ -811,7 +811,7 @@ export const ListServicesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListServicesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListServicesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServicesResponse();
@@ -819,7 +819,7 @@ export const ListServicesResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.services.push(ManagedService.decode(reader, reader.uint32()));
+          message.services.push(ManagedService.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.nextPageToken = reader.string();
@@ -875,18 +875,18 @@ export const ListServicesResponse = {
       nextPageToken: object.next_page_token
     };
   },
-  toAmino(message: ListServicesResponse): ListServicesResponseAmino {
+  toAmino(message: ListServicesResponse, useInterfaces: boolean = false): ListServicesResponseAmino {
     const obj: any = {};
     if (message.services) {
-      obj.services = message.services.map(e => e ? ManagedService.toAmino(e) : undefined);
+      obj.services = message.services.map(e => e ? ManagedService.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.services = [];
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromProtoMsg(message: ListServicesResponseProtoMsg): ListServicesResponse {
-    return ListServicesResponse.decode(message.value);
+  fromProtoMsg(message: ListServicesResponseProtoMsg, useInterfaces: boolean = false): ListServicesResponse {
+    return ListServicesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListServicesResponse): Uint8Array {
     return ListServicesResponse.encode(message).finish();
@@ -911,7 +911,7 @@ export const GetServiceRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetServiceRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetServiceRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetServiceRequest();
@@ -958,13 +958,13 @@ export const GetServiceRequest = {
       serviceName: object.service_name
     };
   },
-  toAmino(message: GetServiceRequest): GetServiceRequestAmino {
+  toAmino(message: GetServiceRequest, useInterfaces: boolean = false): GetServiceRequestAmino {
     const obj: any = {};
     obj.service_name = message.serviceName;
     return obj;
   },
-  fromProtoMsg(message: GetServiceRequestProtoMsg): GetServiceRequest {
-    return GetServiceRequest.decode(message.value);
+  fromProtoMsg(message: GetServiceRequestProtoMsg, useInterfaces: boolean = false): GetServiceRequest {
+    return GetServiceRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetServiceRequest): Uint8Array {
     return GetServiceRequest.encode(message).finish();
@@ -989,7 +989,7 @@ export const CreateServiceRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CreateServiceRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CreateServiceRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateServiceRequest();
@@ -997,7 +997,7 @@ export const CreateServiceRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.service = ManagedService.decode(reader, reader.uint32());
+          message.service = ManagedService.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1038,13 +1038,13 @@ export const CreateServiceRequest = {
       service: object?.service ? ManagedService.fromAmino(object.service) : undefined
     };
   },
-  toAmino(message: CreateServiceRequest): CreateServiceRequestAmino {
+  toAmino(message: CreateServiceRequest, useInterfaces: boolean = false): CreateServiceRequestAmino {
     const obj: any = {};
-    obj.service = message.service ? ManagedService.toAmino(message.service) : undefined;
+    obj.service = message.service ? ManagedService.toAmino(message.service, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: CreateServiceRequestProtoMsg): CreateServiceRequest {
-    return CreateServiceRequest.decode(message.value);
+  fromProtoMsg(message: CreateServiceRequestProtoMsg, useInterfaces: boolean = false): CreateServiceRequest {
+    return CreateServiceRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CreateServiceRequest): Uint8Array {
     return CreateServiceRequest.encode(message).finish();
@@ -1069,7 +1069,7 @@ export const DeleteServiceRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DeleteServiceRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DeleteServiceRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteServiceRequest();
@@ -1116,13 +1116,13 @@ export const DeleteServiceRequest = {
       serviceName: object.service_name
     };
   },
-  toAmino(message: DeleteServiceRequest): DeleteServiceRequestAmino {
+  toAmino(message: DeleteServiceRequest, useInterfaces: boolean = false): DeleteServiceRequestAmino {
     const obj: any = {};
     obj.service_name = message.serviceName;
     return obj;
   },
-  fromProtoMsg(message: DeleteServiceRequestProtoMsg): DeleteServiceRequest {
-    return DeleteServiceRequest.decode(message.value);
+  fromProtoMsg(message: DeleteServiceRequestProtoMsg, useInterfaces: boolean = false): DeleteServiceRequest {
+    return DeleteServiceRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DeleteServiceRequest): Uint8Array {
     return DeleteServiceRequest.encode(message).finish();
@@ -1147,7 +1147,7 @@ export const UndeleteServiceRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UndeleteServiceRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): UndeleteServiceRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUndeleteServiceRequest();
@@ -1194,13 +1194,13 @@ export const UndeleteServiceRequest = {
       serviceName: object.service_name
     };
   },
-  toAmino(message: UndeleteServiceRequest): UndeleteServiceRequestAmino {
+  toAmino(message: UndeleteServiceRequest, useInterfaces: boolean = false): UndeleteServiceRequestAmino {
     const obj: any = {};
     obj.service_name = message.serviceName;
     return obj;
   },
-  fromProtoMsg(message: UndeleteServiceRequestProtoMsg): UndeleteServiceRequest {
-    return UndeleteServiceRequest.decode(message.value);
+  fromProtoMsg(message: UndeleteServiceRequestProtoMsg, useInterfaces: boolean = false): UndeleteServiceRequest {
+    return UndeleteServiceRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UndeleteServiceRequest): Uint8Array {
     return UndeleteServiceRequest.encode(message).finish();
@@ -1225,7 +1225,7 @@ export const UndeleteServiceResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UndeleteServiceResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): UndeleteServiceResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUndeleteServiceResponse();
@@ -1233,7 +1233,7 @@ export const UndeleteServiceResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.service = ManagedService.decode(reader, reader.uint32());
+          message.service = ManagedService.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1274,13 +1274,13 @@ export const UndeleteServiceResponse = {
       service: object?.service ? ManagedService.fromAmino(object.service) : undefined
     };
   },
-  toAmino(message: UndeleteServiceResponse): UndeleteServiceResponseAmino {
+  toAmino(message: UndeleteServiceResponse, useInterfaces: boolean = false): UndeleteServiceResponseAmino {
     const obj: any = {};
-    obj.service = message.service ? ManagedService.toAmino(message.service) : undefined;
+    obj.service = message.service ? ManagedService.toAmino(message.service, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: UndeleteServiceResponseProtoMsg): UndeleteServiceResponse {
-    return UndeleteServiceResponse.decode(message.value);
+  fromProtoMsg(message: UndeleteServiceResponseProtoMsg, useInterfaces: boolean = false): UndeleteServiceResponse {
+    return UndeleteServiceResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UndeleteServiceResponse): Uint8Array {
     return UndeleteServiceResponse.encode(message).finish();
@@ -1313,7 +1313,7 @@ export const GetServiceConfigRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetServiceConfigRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetServiceConfigRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetServiceConfigRequest();
@@ -1378,15 +1378,15 @@ export const GetServiceConfigRequest = {
       view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : -1
     };
   },
-  toAmino(message: GetServiceConfigRequest): GetServiceConfigRequestAmino {
+  toAmino(message: GetServiceConfigRequest, useInterfaces: boolean = false): GetServiceConfigRequestAmino {
     const obj: any = {};
     obj.service_name = message.serviceName;
     obj.config_id = message.configId;
     obj.view = message.view;
     return obj;
   },
-  fromProtoMsg(message: GetServiceConfigRequestProtoMsg): GetServiceConfigRequest {
-    return GetServiceConfigRequest.decode(message.value);
+  fromProtoMsg(message: GetServiceConfigRequestProtoMsg, useInterfaces: boolean = false): GetServiceConfigRequest {
+    return GetServiceConfigRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetServiceConfigRequest): Uint8Array {
     return GetServiceConfigRequest.encode(message).finish();
@@ -1419,7 +1419,7 @@ export const ListServiceConfigsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListServiceConfigsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListServiceConfigsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServiceConfigsRequest();
@@ -1484,15 +1484,15 @@ export const ListServiceConfigsRequest = {
       pageSize: object.page_size
     };
   },
-  toAmino(message: ListServiceConfigsRequest): ListServiceConfigsRequestAmino {
+  toAmino(message: ListServiceConfigsRequest, useInterfaces: boolean = false): ListServiceConfigsRequestAmino {
     const obj: any = {};
     obj.service_name = message.serviceName;
     obj.page_token = message.pageToken;
     obj.page_size = message.pageSize;
     return obj;
   },
-  fromProtoMsg(message: ListServiceConfigsRequestProtoMsg): ListServiceConfigsRequest {
-    return ListServiceConfigsRequest.decode(message.value);
+  fromProtoMsg(message: ListServiceConfigsRequestProtoMsg, useInterfaces: boolean = false): ListServiceConfigsRequest {
+    return ListServiceConfigsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListServiceConfigsRequest): Uint8Array {
     return ListServiceConfigsRequest.encode(message).finish();
@@ -1521,7 +1521,7 @@ export const ListServiceConfigsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListServiceConfigsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListServiceConfigsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServiceConfigsResponse();
@@ -1529,7 +1529,7 @@ export const ListServiceConfigsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.serviceConfigs.push(Service.decode(reader, reader.uint32()));
+          message.serviceConfigs.push(Service.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.nextPageToken = reader.string();
@@ -1585,18 +1585,18 @@ export const ListServiceConfigsResponse = {
       nextPageToken: object.next_page_token
     };
   },
-  toAmino(message: ListServiceConfigsResponse): ListServiceConfigsResponseAmino {
+  toAmino(message: ListServiceConfigsResponse, useInterfaces: boolean = false): ListServiceConfigsResponseAmino {
     const obj: any = {};
     if (message.serviceConfigs) {
-      obj.service_configs = message.serviceConfigs.map(e => e ? Service.toAmino(e) : undefined);
+      obj.service_configs = message.serviceConfigs.map(e => e ? Service.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.service_configs = [];
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromProtoMsg(message: ListServiceConfigsResponseProtoMsg): ListServiceConfigsResponse {
-    return ListServiceConfigsResponse.decode(message.value);
+  fromProtoMsg(message: ListServiceConfigsResponseProtoMsg, useInterfaces: boolean = false): ListServiceConfigsResponse {
+    return ListServiceConfigsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListServiceConfigsResponse): Uint8Array {
     return ListServiceConfigsResponse.encode(message).finish();
@@ -1625,7 +1625,7 @@ export const CreateServiceConfigRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CreateServiceConfigRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CreateServiceConfigRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateServiceConfigRequest();
@@ -1636,7 +1636,7 @@ export const CreateServiceConfigRequest = {
           message.serviceName = reader.string();
           break;
         case 2:
-          message.serviceConfig = Service.decode(reader, reader.uint32());
+          message.serviceConfig = Service.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1683,14 +1683,14 @@ export const CreateServiceConfigRequest = {
       serviceConfig: object?.service_config ? Service.fromAmino(object.service_config) : undefined
     };
   },
-  toAmino(message: CreateServiceConfigRequest): CreateServiceConfigRequestAmino {
+  toAmino(message: CreateServiceConfigRequest, useInterfaces: boolean = false): CreateServiceConfigRequestAmino {
     const obj: any = {};
     obj.service_name = message.serviceName;
-    obj.service_config = message.serviceConfig ? Service.toAmino(message.serviceConfig) : undefined;
+    obj.service_config = message.serviceConfig ? Service.toAmino(message.serviceConfig, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: CreateServiceConfigRequestProtoMsg): CreateServiceConfigRequest {
-    return CreateServiceConfigRequest.decode(message.value);
+  fromProtoMsg(message: CreateServiceConfigRequestProtoMsg, useInterfaces: boolean = false): CreateServiceConfigRequest {
+    return CreateServiceConfigRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CreateServiceConfigRequest): Uint8Array {
     return CreateServiceConfigRequest.encode(message).finish();
@@ -1723,7 +1723,7 @@ export const SubmitConfigSourceRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SubmitConfigSourceRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SubmitConfigSourceRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubmitConfigSourceRequest();
@@ -1734,7 +1734,7 @@ export const SubmitConfigSourceRequest = {
           message.serviceName = reader.string();
           break;
         case 2:
-          message.configSource = ConfigSource.decode(reader, reader.uint32());
+          message.configSource = ConfigSource.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.validateOnly = reader.bool();
@@ -1790,15 +1790,15 @@ export const SubmitConfigSourceRequest = {
       validateOnly: object.validate_only
     };
   },
-  toAmino(message: SubmitConfigSourceRequest): SubmitConfigSourceRequestAmino {
+  toAmino(message: SubmitConfigSourceRequest, useInterfaces: boolean = false): SubmitConfigSourceRequestAmino {
     const obj: any = {};
     obj.service_name = message.serviceName;
-    obj.config_source = message.configSource ? ConfigSource.toAmino(message.configSource) : undefined;
+    obj.config_source = message.configSource ? ConfigSource.toAmino(message.configSource, useInterfaces) : undefined;
     obj.validate_only = message.validateOnly;
     return obj;
   },
-  fromProtoMsg(message: SubmitConfigSourceRequestProtoMsg): SubmitConfigSourceRequest {
-    return SubmitConfigSourceRequest.decode(message.value);
+  fromProtoMsg(message: SubmitConfigSourceRequestProtoMsg, useInterfaces: boolean = false): SubmitConfigSourceRequest {
+    return SubmitConfigSourceRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SubmitConfigSourceRequest): Uint8Array {
     return SubmitConfigSourceRequest.encode(message).finish();
@@ -1823,7 +1823,7 @@ export const SubmitConfigSourceResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SubmitConfigSourceResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SubmitConfigSourceResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubmitConfigSourceResponse();
@@ -1831,7 +1831,7 @@ export const SubmitConfigSourceResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.serviceConfig = Service.decode(reader, reader.uint32());
+          message.serviceConfig = Service.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1872,13 +1872,13 @@ export const SubmitConfigSourceResponse = {
       serviceConfig: object?.service_config ? Service.fromAmino(object.service_config) : undefined
     };
   },
-  toAmino(message: SubmitConfigSourceResponse): SubmitConfigSourceResponseAmino {
+  toAmino(message: SubmitConfigSourceResponse, useInterfaces: boolean = false): SubmitConfigSourceResponseAmino {
     const obj: any = {};
-    obj.service_config = message.serviceConfig ? Service.toAmino(message.serviceConfig) : undefined;
+    obj.service_config = message.serviceConfig ? Service.toAmino(message.serviceConfig, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: SubmitConfigSourceResponseProtoMsg): SubmitConfigSourceResponse {
-    return SubmitConfigSourceResponse.decode(message.value);
+  fromProtoMsg(message: SubmitConfigSourceResponseProtoMsg, useInterfaces: boolean = false): SubmitConfigSourceResponse {
+    return SubmitConfigSourceResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SubmitConfigSourceResponse): Uint8Array {
     return SubmitConfigSourceResponse.encode(message).finish();
@@ -1907,7 +1907,7 @@ export const CreateServiceRolloutRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CreateServiceRolloutRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CreateServiceRolloutRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateServiceRolloutRequest();
@@ -1918,7 +1918,7 @@ export const CreateServiceRolloutRequest = {
           message.serviceName = reader.string();
           break;
         case 2:
-          message.rollout = Rollout.decode(reader, reader.uint32());
+          message.rollout = Rollout.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1965,14 +1965,14 @@ export const CreateServiceRolloutRequest = {
       rollout: object?.rollout ? Rollout.fromAmino(object.rollout) : undefined
     };
   },
-  toAmino(message: CreateServiceRolloutRequest): CreateServiceRolloutRequestAmino {
+  toAmino(message: CreateServiceRolloutRequest, useInterfaces: boolean = false): CreateServiceRolloutRequestAmino {
     const obj: any = {};
     obj.service_name = message.serviceName;
-    obj.rollout = message.rollout ? Rollout.toAmino(message.rollout) : undefined;
+    obj.rollout = message.rollout ? Rollout.toAmino(message.rollout, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: CreateServiceRolloutRequestProtoMsg): CreateServiceRolloutRequest {
-    return CreateServiceRolloutRequest.decode(message.value);
+  fromProtoMsg(message: CreateServiceRolloutRequestProtoMsg, useInterfaces: boolean = false): CreateServiceRolloutRequest {
+    return CreateServiceRolloutRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CreateServiceRolloutRequest): Uint8Array {
     return CreateServiceRolloutRequest.encode(message).finish();
@@ -2009,7 +2009,7 @@ export const ListServiceRolloutsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListServiceRolloutsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListServiceRolloutsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServiceRolloutsRequest();
@@ -2083,7 +2083,7 @@ export const ListServiceRolloutsRequest = {
       filter: object.filter
     };
   },
-  toAmino(message: ListServiceRolloutsRequest): ListServiceRolloutsRequestAmino {
+  toAmino(message: ListServiceRolloutsRequest, useInterfaces: boolean = false): ListServiceRolloutsRequestAmino {
     const obj: any = {};
     obj.service_name = message.serviceName;
     obj.page_token = message.pageToken;
@@ -2091,8 +2091,8 @@ export const ListServiceRolloutsRequest = {
     obj.filter = message.filter;
     return obj;
   },
-  fromProtoMsg(message: ListServiceRolloutsRequestProtoMsg): ListServiceRolloutsRequest {
-    return ListServiceRolloutsRequest.decode(message.value);
+  fromProtoMsg(message: ListServiceRolloutsRequestProtoMsg, useInterfaces: boolean = false): ListServiceRolloutsRequest {
+    return ListServiceRolloutsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListServiceRolloutsRequest): Uint8Array {
     return ListServiceRolloutsRequest.encode(message).finish();
@@ -2121,7 +2121,7 @@ export const ListServiceRolloutsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListServiceRolloutsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListServiceRolloutsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServiceRolloutsResponse();
@@ -2129,7 +2129,7 @@ export const ListServiceRolloutsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.rollouts.push(Rollout.decode(reader, reader.uint32()));
+          message.rollouts.push(Rollout.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.nextPageToken = reader.string();
@@ -2185,18 +2185,18 @@ export const ListServiceRolloutsResponse = {
       nextPageToken: object.next_page_token
     };
   },
-  toAmino(message: ListServiceRolloutsResponse): ListServiceRolloutsResponseAmino {
+  toAmino(message: ListServiceRolloutsResponse, useInterfaces: boolean = false): ListServiceRolloutsResponseAmino {
     const obj: any = {};
     if (message.rollouts) {
-      obj.rollouts = message.rollouts.map(e => e ? Rollout.toAmino(e) : undefined);
+      obj.rollouts = message.rollouts.map(e => e ? Rollout.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.rollouts = [];
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromProtoMsg(message: ListServiceRolloutsResponseProtoMsg): ListServiceRolloutsResponse {
-    return ListServiceRolloutsResponse.decode(message.value);
+  fromProtoMsg(message: ListServiceRolloutsResponseProtoMsg, useInterfaces: boolean = false): ListServiceRolloutsResponse {
+    return ListServiceRolloutsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListServiceRolloutsResponse): Uint8Array {
     return ListServiceRolloutsResponse.encode(message).finish();
@@ -2225,7 +2225,7 @@ export const GetServiceRolloutRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetServiceRolloutRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetServiceRolloutRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetServiceRolloutRequest();
@@ -2281,14 +2281,14 @@ export const GetServiceRolloutRequest = {
       rolloutId: object.rollout_id
     };
   },
-  toAmino(message: GetServiceRolloutRequest): GetServiceRolloutRequestAmino {
+  toAmino(message: GetServiceRolloutRequest, useInterfaces: boolean = false): GetServiceRolloutRequestAmino {
     const obj: any = {};
     obj.service_name = message.serviceName;
     obj.rollout_id = message.rolloutId;
     return obj;
   },
-  fromProtoMsg(message: GetServiceRolloutRequestProtoMsg): GetServiceRolloutRequest {
-    return GetServiceRolloutRequest.decode(message.value);
+  fromProtoMsg(message: GetServiceRolloutRequestProtoMsg, useInterfaces: boolean = false): GetServiceRolloutRequest {
+    return GetServiceRolloutRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetServiceRolloutRequest): Uint8Array {
     return GetServiceRolloutRequest.encode(message).finish();
@@ -2317,7 +2317,7 @@ export const GenerateConfigReportRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenerateConfigReportRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenerateConfigReportRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenerateConfigReportRequest();
@@ -2325,10 +2325,10 @@ export const GenerateConfigReportRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.newConfig = Any.decode(reader, reader.uint32());
+          message.newConfig = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.oldConfig = Any.decode(reader, reader.uint32());
+          message.oldConfig = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2377,14 +2377,14 @@ export const GenerateConfigReportRequest = {
       oldConfig: object?.old_config ? Any.fromAmino(object.old_config) : undefined
     };
   },
-  toAmino(message: GenerateConfigReportRequest): GenerateConfigReportRequestAmino {
+  toAmino(message: GenerateConfigReportRequest, useInterfaces: boolean = false): GenerateConfigReportRequestAmino {
     const obj: any = {};
-    obj.new_config = message.newConfig ? Any.toAmino(message.newConfig) : undefined;
-    obj.old_config = message.oldConfig ? Any.toAmino(message.oldConfig) : undefined;
+    obj.new_config = message.newConfig ? Any.toAmino(message.newConfig, useInterfaces) : undefined;
+    obj.old_config = message.oldConfig ? Any.toAmino(message.oldConfig, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GenerateConfigReportRequestProtoMsg): GenerateConfigReportRequest {
-    return GenerateConfigReportRequest.decode(message.value);
+  fromProtoMsg(message: GenerateConfigReportRequestProtoMsg, useInterfaces: boolean = false): GenerateConfigReportRequest {
+    return GenerateConfigReportRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenerateConfigReportRequest): Uint8Array {
     return GenerateConfigReportRequest.encode(message).finish();
@@ -2421,7 +2421,7 @@ export const GenerateConfigReportResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenerateConfigReportResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenerateConfigReportResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenerateConfigReportResponse();
@@ -2435,10 +2435,10 @@ export const GenerateConfigReportResponse = {
           message.id = reader.string();
           break;
         case 3:
-          message.changeReports.push(ChangeReport.decode(reader, reader.uint32()));
+          message.changeReports.push(ChangeReport.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 4:
-          message.diagnostics.push(Diagnostic.decode(reader, reader.uint32()));
+          message.diagnostics.push(Diagnostic.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2511,24 +2511,24 @@ export const GenerateConfigReportResponse = {
       diagnostics: Array.isArray(object?.diagnostics) ? object.diagnostics.map((e: any) => Diagnostic.fromAmino(e)) : []
     };
   },
-  toAmino(message: GenerateConfigReportResponse): GenerateConfigReportResponseAmino {
+  toAmino(message: GenerateConfigReportResponse, useInterfaces: boolean = false): GenerateConfigReportResponseAmino {
     const obj: any = {};
     obj.service_name = message.serviceName;
     obj.id = message.id;
     if (message.changeReports) {
-      obj.change_reports = message.changeReports.map(e => e ? ChangeReport.toAmino(e) : undefined);
+      obj.change_reports = message.changeReports.map(e => e ? ChangeReport.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.change_reports = [];
     }
     if (message.diagnostics) {
-      obj.diagnostics = message.diagnostics.map(e => e ? Diagnostic.toAmino(e) : undefined);
+      obj.diagnostics = message.diagnostics.map(e => e ? Diagnostic.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.diagnostics = [];
     }
     return obj;
   },
-  fromProtoMsg(message: GenerateConfigReportResponseProtoMsg): GenerateConfigReportResponse {
-    return GenerateConfigReportResponse.decode(message.value);
+  fromProtoMsg(message: GenerateConfigReportResponseProtoMsg, useInterfaces: boolean = false): GenerateConfigReportResponse {
+    return GenerateConfigReportResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenerateConfigReportResponse): Uint8Array {
     return GenerateConfigReportResponse.encode(message).finish();

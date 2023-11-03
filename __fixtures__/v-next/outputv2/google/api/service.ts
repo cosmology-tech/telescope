@@ -434,7 +434,7 @@ export const Service = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Service {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Service {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseService();
@@ -454,67 +454,67 @@ export const Service = {
           message.id = reader.string();
           break;
         case 3:
-          message.apis.push(Api.decode(reader, reader.uint32()));
+          message.apis.push(Api.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 4:
-          message.types.push(Type.decode(reader, reader.uint32()));
+          message.types.push(Type.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 5:
-          message.enums.push(Enum.decode(reader, reader.uint32()));
+          message.enums.push(Enum.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 6:
-          message.documentation = Documentation.decode(reader, reader.uint32());
+          message.documentation = Documentation.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 8:
-          message.backend = Backend.decode(reader, reader.uint32());
+          message.backend = Backend.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 9:
-          message.http = Http.decode(reader, reader.uint32());
+          message.http = Http.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 10:
-          message.quota = Quota.decode(reader, reader.uint32());
+          message.quota = Quota.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 11:
-          message.authentication = Authentication.decode(reader, reader.uint32());
+          message.authentication = Authentication.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 12:
-          message.context = Context.decode(reader, reader.uint32());
+          message.context = Context.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 15:
-          message.usage = Usage.decode(reader, reader.uint32());
+          message.usage = Usage.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 18:
-          message.endpoints.push(Endpoint.decode(reader, reader.uint32()));
+          message.endpoints.push(Endpoint.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 21:
-          message.control = Control.decode(reader, reader.uint32());
+          message.control = Control.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 23:
-          message.logs.push(LogDescriptor.decode(reader, reader.uint32()));
+          message.logs.push(LogDescriptor.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 24:
-          message.metrics.push(MetricDescriptor.decode(reader, reader.uint32()));
+          message.metrics.push(MetricDescriptor.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 25:
-          message.monitoredResources.push(MonitoredResourceDescriptor.decode(reader, reader.uint32()));
+          message.monitoredResources.push(MonitoredResourceDescriptor.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 26:
-          message.billing = Billing.decode(reader, reader.uint32());
+          message.billing = Billing.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 27:
-          message.logging = Logging.decode(reader, reader.uint32());
+          message.logging = Logging.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 28:
-          message.monitoring = Monitoring.decode(reader, reader.uint32());
+          message.monitoring = Monitoring.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 29:
-          message.systemParameters = SystemParameters.decode(reader, reader.uint32());
+          message.systemParameters = SystemParameters.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 37:
-          message.sourceInfo = SourceInfo.decode(reader, reader.uint32());
+          message.sourceInfo = SourceInfo.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 20:
-          message.configVersion = UInt32Value.decode(reader, reader.uint32());
+          message.configVersion = UInt32Value.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -781,68 +781,68 @@ export const Service = {
       configVersion: object?.config_version ? UInt32Value.fromAmino(object.config_version) : undefined
     };
   },
-  toAmino(message: Service): ServiceAmino {
+  toAmino(message: Service, useInterfaces: boolean = false): ServiceAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.title = message.title;
     obj.producer_project_id = message.producerProjectId;
     obj.id = message.id;
     if (message.apis) {
-      obj.apis = message.apis.map(e => e ? Api.toAmino(e) : undefined);
+      obj.apis = message.apis.map(e => e ? Api.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.apis = [];
     }
     if (message.types) {
-      obj.types = message.types.map(e => e ? Type.toAmino(e) : undefined);
+      obj.types = message.types.map(e => e ? Type.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.types = [];
     }
     if (message.enums) {
-      obj.enums = message.enums.map(e => e ? Enum.toAmino(e) : undefined);
+      obj.enums = message.enums.map(e => e ? Enum.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.enums = [];
     }
-    obj.documentation = message.documentation ? Documentation.toAmino(message.documentation) : undefined;
-    obj.backend = message.backend ? Backend.toAmino(message.backend) : undefined;
-    obj.http = message.http ? Http.toAmino(message.http) : undefined;
-    obj.quota = message.quota ? Quota.toAmino(message.quota) : undefined;
-    obj.authentication = message.authentication ? Authentication.toAmino(message.authentication) : undefined;
-    obj.context = message.context ? Context.toAmino(message.context) : undefined;
-    obj.usage = message.usage ? Usage.toAmino(message.usage) : undefined;
+    obj.documentation = message.documentation ? Documentation.toAmino(message.documentation, useInterfaces) : undefined;
+    obj.backend = message.backend ? Backend.toAmino(message.backend, useInterfaces) : undefined;
+    obj.http = message.http ? Http.toAmino(message.http, useInterfaces) : undefined;
+    obj.quota = message.quota ? Quota.toAmino(message.quota, useInterfaces) : undefined;
+    obj.authentication = message.authentication ? Authentication.toAmino(message.authentication, useInterfaces) : undefined;
+    obj.context = message.context ? Context.toAmino(message.context, useInterfaces) : undefined;
+    obj.usage = message.usage ? Usage.toAmino(message.usage, useInterfaces) : undefined;
     if (message.endpoints) {
-      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
+      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.endpoints = [];
     }
-    obj.control = message.control ? Control.toAmino(message.control) : undefined;
+    obj.control = message.control ? Control.toAmino(message.control, useInterfaces) : undefined;
     if (message.logs) {
-      obj.logs = message.logs.map(e => e ? LogDescriptor.toAmino(e) : undefined);
+      obj.logs = message.logs.map(e => e ? LogDescriptor.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.logs = [];
     }
     if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e ? MetricDescriptor.toAmino(e) : undefined);
+      obj.metrics = message.metrics.map(e => e ? MetricDescriptor.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.metrics = [];
     }
     if (message.monitoredResources) {
-      obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toAmino(e) : undefined);
+      obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.monitored_resources = [];
     }
-    obj.billing = message.billing ? Billing.toAmino(message.billing) : undefined;
-    obj.logging = message.logging ? Logging.toAmino(message.logging) : undefined;
-    obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring) : undefined;
-    obj.system_parameters = message.systemParameters ? SystemParameters.toAmino(message.systemParameters) : undefined;
-    obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined;
-    obj.config_version = message.configVersion ? UInt32Value.toAmino(message.configVersion) : undefined;
+    obj.billing = message.billing ? Billing.toAmino(message.billing, useInterfaces) : undefined;
+    obj.logging = message.logging ? Logging.toAmino(message.logging, useInterfaces) : undefined;
+    obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring, useInterfaces) : undefined;
+    obj.system_parameters = message.systemParameters ? SystemParameters.toAmino(message.systemParameters, useInterfaces) : undefined;
+    obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo, useInterfaces) : undefined;
+    obj.config_version = message.configVersion ? UInt32Value.toAmino(message.configVersion, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: ServiceAminoMsg): Service {
     return Service.fromAmino(object.value);
   },
-  fromProtoMsg(message: ServiceProtoMsg): Service {
-    return Service.decode(message.value);
+  fromProtoMsg(message: ServiceProtoMsg, useInterfaces: boolean = false): Service {
+    return Service.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Service): Uint8Array {
     return Service.encode(message).finish();

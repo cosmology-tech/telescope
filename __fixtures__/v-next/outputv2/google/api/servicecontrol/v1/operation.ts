@@ -270,7 +270,7 @@ export const Operation_LabelsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Operation_LabelsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Operation_LabelsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation_LabelsEntry();
@@ -326,7 +326,7 @@ export const Operation_LabelsEntry = {
       value: object.value
     };
   },
-  toAmino(message: Operation_LabelsEntry): Operation_LabelsEntryAmino {
+  toAmino(message: Operation_LabelsEntry, useInterfaces: boolean = false): Operation_LabelsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -335,8 +335,8 @@ export const Operation_LabelsEntry = {
   fromAminoMsg(object: Operation_LabelsEntryAminoMsg): Operation_LabelsEntry {
     return Operation_LabelsEntry.fromAmino(object.value);
   },
-  fromProtoMsg(message: Operation_LabelsEntryProtoMsg): Operation_LabelsEntry {
-    return Operation_LabelsEntry.decode(message.value);
+  fromProtoMsg(message: Operation_LabelsEntryProtoMsg, useInterfaces: boolean = false): Operation_LabelsEntry {
+    return Operation_LabelsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Operation_LabelsEntry): Uint8Array {
     return Operation_LabelsEntry.encode(message).finish();
@@ -394,7 +394,7 @@ export const Operation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Operation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Operation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation();
@@ -423,16 +423,16 @@ export const Operation = {
           }
           break;
         case 7:
-          message.metricValueSets.push(MetricValueSet.decode(reader, reader.uint32()));
+          message.metricValueSets.push(MetricValueSet.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 8:
-          message.logEntries.push(LogEntry.decode(reader, reader.uint32()));
+          message.logEntries.push(LogEntry.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 11:
           message.importance = (reader.int32() as any);
           break;
         case 16:
-          message.extensions.push(Any.decode(reader, reader.uint32()));
+          message.extensions.push(Any.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -581,7 +581,7 @@ export const Operation = {
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
     };
   },
-  toAmino(message: Operation): OperationAmino {
+  toAmino(message: Operation, useInterfaces: boolean = false): OperationAmino {
     const obj: any = {};
     obj.operation_id = message.operationId;
     obj.operation_name = message.operationName;
@@ -595,18 +595,18 @@ export const Operation = {
       });
     }
     if (message.metricValueSets) {
-      obj.metric_value_sets = message.metricValueSets.map(e => e ? MetricValueSet.toAmino(e) : undefined);
+      obj.metric_value_sets = message.metricValueSets.map(e => e ? MetricValueSet.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.metric_value_sets = [];
     }
     if (message.logEntries) {
-      obj.log_entries = message.logEntries.map(e => e ? LogEntry.toAmino(e) : undefined);
+      obj.log_entries = message.logEntries.map(e => e ? LogEntry.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.log_entries = [];
     }
     obj.importance = message.importance;
     if (message.extensions) {
-      obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
+      obj.extensions = message.extensions.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.extensions = [];
     }
@@ -615,8 +615,8 @@ export const Operation = {
   fromAminoMsg(object: OperationAminoMsg): Operation {
     return Operation.fromAmino(object.value);
   },
-  fromProtoMsg(message: OperationProtoMsg): Operation {
-    return Operation.decode(message.value);
+  fromProtoMsg(message: OperationProtoMsg, useInterfaces: boolean = false): Operation {
+    return Operation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Operation): Uint8Array {
     return Operation.encode(message).finish();

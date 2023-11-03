@@ -301,7 +301,7 @@ export const QueryCurrentPlanRequest = {
   encode(_: QueryCurrentPlanRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryCurrentPlanRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryCurrentPlanRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCurrentPlanRequest();
@@ -337,12 +337,12 @@ export const QueryCurrentPlanRequest = {
   fromAmino(_: QueryCurrentPlanRequestAmino): QueryCurrentPlanRequest {
     return {};
   },
-  toAmino(_: QueryCurrentPlanRequest): QueryCurrentPlanRequestAmino {
+  toAmino(_: QueryCurrentPlanRequest, useInterfaces: boolean = false): QueryCurrentPlanRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: QueryCurrentPlanRequestProtoMsg): QueryCurrentPlanRequest {
-    return QueryCurrentPlanRequest.decode(message.value);
+  fromProtoMsg(message: QueryCurrentPlanRequestProtoMsg, useInterfaces: boolean = false): QueryCurrentPlanRequest {
+    return QueryCurrentPlanRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryCurrentPlanRequest): Uint8Array {
     return QueryCurrentPlanRequest.encode(message).finish();
@@ -368,7 +368,7 @@ export const QueryCurrentPlanResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryCurrentPlanResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryCurrentPlanResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCurrentPlanResponse();
@@ -376,7 +376,7 @@ export const QueryCurrentPlanResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.plan = Plan.decode(reader, reader.uint32());
+          message.plan = Plan.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -417,13 +417,13 @@ export const QueryCurrentPlanResponse = {
       plan: object?.plan ? Plan.fromAmino(object.plan) : undefined
     };
   },
-  toAmino(message: QueryCurrentPlanResponse): QueryCurrentPlanResponseAmino {
+  toAmino(message: QueryCurrentPlanResponse, useInterfaces: boolean = false): QueryCurrentPlanResponseAmino {
     const obj: any = {};
-    obj.plan = message.plan ? Plan.toAmino(message.plan) : undefined;
+    obj.plan = message.plan ? Plan.toAmino(message.plan, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryCurrentPlanResponseProtoMsg): QueryCurrentPlanResponse {
-    return QueryCurrentPlanResponse.decode(message.value);
+  fromProtoMsg(message: QueryCurrentPlanResponseProtoMsg, useInterfaces: boolean = false): QueryCurrentPlanResponse {
+    return QueryCurrentPlanResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryCurrentPlanResponse): Uint8Array {
     return QueryCurrentPlanResponse.encode(message).finish();
@@ -449,7 +449,7 @@ export const QueryAppliedPlanRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAppliedPlanRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAppliedPlanRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAppliedPlanRequest();
@@ -496,13 +496,13 @@ export const QueryAppliedPlanRequest = {
       name: object.name
     };
   },
-  toAmino(message: QueryAppliedPlanRequest): QueryAppliedPlanRequestAmino {
+  toAmino(message: QueryAppliedPlanRequest, useInterfaces: boolean = false): QueryAppliedPlanRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
   },
-  fromProtoMsg(message: QueryAppliedPlanRequestProtoMsg): QueryAppliedPlanRequest {
-    return QueryAppliedPlanRequest.decode(message.value);
+  fromProtoMsg(message: QueryAppliedPlanRequestProtoMsg, useInterfaces: boolean = false): QueryAppliedPlanRequest {
+    return QueryAppliedPlanRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAppliedPlanRequest): Uint8Array {
     return QueryAppliedPlanRequest.encode(message).finish();
@@ -528,7 +528,7 @@ export const QueryAppliedPlanResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAppliedPlanResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAppliedPlanResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAppliedPlanResponse();
@@ -577,13 +577,13 @@ export const QueryAppliedPlanResponse = {
       height: BigInt(object.height)
     };
   },
-  toAmino(message: QueryAppliedPlanResponse): QueryAppliedPlanResponseAmino {
+  toAmino(message: QueryAppliedPlanResponse, useInterfaces: boolean = false): QueryAppliedPlanResponseAmino {
     const obj: any = {};
     obj.height = message.height ? message.height.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryAppliedPlanResponseProtoMsg): QueryAppliedPlanResponse {
-    return QueryAppliedPlanResponse.decode(message.value);
+  fromProtoMsg(message: QueryAppliedPlanResponseProtoMsg, useInterfaces: boolean = false): QueryAppliedPlanResponse {
+    return QueryAppliedPlanResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAppliedPlanResponse): Uint8Array {
     return QueryAppliedPlanResponse.encode(message).finish();
@@ -609,7 +609,7 @@ export const QueryUpgradedConsensusStateRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryUpgradedConsensusStateRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryUpgradedConsensusStateRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUpgradedConsensusStateRequest();
@@ -658,13 +658,13 @@ export const QueryUpgradedConsensusStateRequest = {
       lastHeight: BigInt(object.last_height)
     };
   },
-  toAmino(message: QueryUpgradedConsensusStateRequest): QueryUpgradedConsensusStateRequestAmino {
+  toAmino(message: QueryUpgradedConsensusStateRequest, useInterfaces: boolean = false): QueryUpgradedConsensusStateRequestAmino {
     const obj: any = {};
     obj.last_height = message.lastHeight ? message.lastHeight.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryUpgradedConsensusStateRequestProtoMsg): QueryUpgradedConsensusStateRequest {
-    return QueryUpgradedConsensusStateRequest.decode(message.value);
+  fromProtoMsg(message: QueryUpgradedConsensusStateRequestProtoMsg, useInterfaces: boolean = false): QueryUpgradedConsensusStateRequest {
+    return QueryUpgradedConsensusStateRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryUpgradedConsensusStateRequest): Uint8Array {
     return QueryUpgradedConsensusStateRequest.encode(message).finish();
@@ -690,7 +690,7 @@ export const QueryUpgradedConsensusStateResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryUpgradedConsensusStateResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryUpgradedConsensusStateResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUpgradedConsensusStateResponse();
@@ -737,13 +737,13 @@ export const QueryUpgradedConsensusStateResponse = {
       upgradedConsensusState: object.upgraded_consensus_state
     };
   },
-  toAmino(message: QueryUpgradedConsensusStateResponse): QueryUpgradedConsensusStateResponseAmino {
+  toAmino(message: QueryUpgradedConsensusStateResponse, useInterfaces: boolean = false): QueryUpgradedConsensusStateResponseAmino {
     const obj: any = {};
     obj.upgraded_consensus_state = message.upgradedConsensusState;
     return obj;
   },
-  fromProtoMsg(message: QueryUpgradedConsensusStateResponseProtoMsg): QueryUpgradedConsensusStateResponse {
-    return QueryUpgradedConsensusStateResponse.decode(message.value);
+  fromProtoMsg(message: QueryUpgradedConsensusStateResponseProtoMsg, useInterfaces: boolean = false): QueryUpgradedConsensusStateResponse {
+    return QueryUpgradedConsensusStateResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryUpgradedConsensusStateResponse): Uint8Array {
     return QueryUpgradedConsensusStateResponse.encode(message).finish();
@@ -769,7 +769,7 @@ export const QueryModuleVersionsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryModuleVersionsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryModuleVersionsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleVersionsRequest();
@@ -816,13 +816,13 @@ export const QueryModuleVersionsRequest = {
       moduleName: object.module_name
     };
   },
-  toAmino(message: QueryModuleVersionsRequest): QueryModuleVersionsRequestAmino {
+  toAmino(message: QueryModuleVersionsRequest, useInterfaces: boolean = false): QueryModuleVersionsRequestAmino {
     const obj: any = {};
     obj.module_name = message.moduleName;
     return obj;
   },
-  fromProtoMsg(message: QueryModuleVersionsRequestProtoMsg): QueryModuleVersionsRequest {
-    return QueryModuleVersionsRequest.decode(message.value);
+  fromProtoMsg(message: QueryModuleVersionsRequestProtoMsg, useInterfaces: boolean = false): QueryModuleVersionsRequest {
+    return QueryModuleVersionsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryModuleVersionsRequest): Uint8Array {
     return QueryModuleVersionsRequest.encode(message).finish();
@@ -848,7 +848,7 @@ export const QueryModuleVersionsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryModuleVersionsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryModuleVersionsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleVersionsResponse();
@@ -856,7 +856,7 @@ export const QueryModuleVersionsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.moduleVersions.push(ModuleVersion.decode(reader, reader.uint32()));
+          message.moduleVersions.push(ModuleVersion.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -903,17 +903,17 @@ export const QueryModuleVersionsResponse = {
       moduleVersions: Array.isArray(object?.module_versions) ? object.module_versions.map((e: any) => ModuleVersion.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryModuleVersionsResponse): QueryModuleVersionsResponseAmino {
+  toAmino(message: QueryModuleVersionsResponse, useInterfaces: boolean = false): QueryModuleVersionsResponseAmino {
     const obj: any = {};
     if (message.moduleVersions) {
-      obj.module_versions = message.moduleVersions.map(e => e ? ModuleVersion.toAmino(e) : undefined);
+      obj.module_versions = message.moduleVersions.map(e => e ? ModuleVersion.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.module_versions = [];
     }
     return obj;
   },
-  fromProtoMsg(message: QueryModuleVersionsResponseProtoMsg): QueryModuleVersionsResponse {
-    return QueryModuleVersionsResponse.decode(message.value);
+  fromProtoMsg(message: QueryModuleVersionsResponseProtoMsg, useInterfaces: boolean = false): QueryModuleVersionsResponse {
+    return QueryModuleVersionsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryModuleVersionsResponse): Uint8Array {
     return QueryModuleVersionsResponse.encode(message).finish();
@@ -934,7 +934,7 @@ export const QueryAuthorityRequest = {
   encode(_: QueryAuthorityRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAuthorityRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAuthorityRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAuthorityRequest();
@@ -970,12 +970,12 @@ export const QueryAuthorityRequest = {
   fromAmino(_: QueryAuthorityRequestAmino): QueryAuthorityRequest {
     return {};
   },
-  toAmino(_: QueryAuthorityRequest): QueryAuthorityRequestAmino {
+  toAmino(_: QueryAuthorityRequest, useInterfaces: boolean = false): QueryAuthorityRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: QueryAuthorityRequestProtoMsg): QueryAuthorityRequest {
-    return QueryAuthorityRequest.decode(message.value);
+  fromProtoMsg(message: QueryAuthorityRequestProtoMsg, useInterfaces: boolean = false): QueryAuthorityRequest {
+    return QueryAuthorityRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAuthorityRequest): Uint8Array {
     return QueryAuthorityRequest.encode(message).finish();
@@ -1001,7 +1001,7 @@ export const QueryAuthorityResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAuthorityResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAuthorityResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAuthorityResponse();
@@ -1048,13 +1048,13 @@ export const QueryAuthorityResponse = {
       address: object.address
     };
   },
-  toAmino(message: QueryAuthorityResponse): QueryAuthorityResponseAmino {
+  toAmino(message: QueryAuthorityResponse, useInterfaces: boolean = false): QueryAuthorityResponseAmino {
     const obj: any = {};
     obj.address = message.address;
     return obj;
   },
-  fromProtoMsg(message: QueryAuthorityResponseProtoMsg): QueryAuthorityResponse {
-    return QueryAuthorityResponse.decode(message.value);
+  fromProtoMsg(message: QueryAuthorityResponseProtoMsg, useInterfaces: boolean = false): QueryAuthorityResponse {
+    return QueryAuthorityResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAuthorityResponse): Uint8Array {
     return QueryAuthorityResponse.encode(message).finish();

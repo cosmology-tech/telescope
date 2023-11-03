@@ -81,7 +81,7 @@ export const QuerySpotPriceRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotPriceRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QuerySpotPriceRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySpotPriceRequest();
@@ -148,15 +148,15 @@ export const QuerySpotPriceRequest = {
       quoteAssetDenom: object.quote_asset_denom
     };
   },
-  toAmino(message: QuerySpotPriceRequest): QuerySpotPriceRequestAmino {
+  toAmino(message: QuerySpotPriceRequest, useInterfaces: boolean = false): QuerySpotPriceRequestAmino {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     obj.base_asset_denom = message.baseAssetDenom;
     obj.quote_asset_denom = message.quoteAssetDenom;
     return obj;
   },
-  fromProtoMsg(message: QuerySpotPriceRequestProtoMsg): QuerySpotPriceRequest {
-    return QuerySpotPriceRequest.decode(message.value);
+  fromProtoMsg(message: QuerySpotPriceRequestProtoMsg, useInterfaces: boolean = false): QuerySpotPriceRequest {
+    return QuerySpotPriceRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuerySpotPriceRequest): Uint8Array {
     return QuerySpotPriceRequest.encode(message).finish();
@@ -182,7 +182,7 @@ export const QuerySpotPriceResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotPriceResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QuerySpotPriceResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySpotPriceResponse();
@@ -229,13 +229,13 @@ export const QuerySpotPriceResponse = {
       spotPrice: object.spot_price
     };
   },
-  toAmino(message: QuerySpotPriceResponse): QuerySpotPriceResponseAmino {
+  toAmino(message: QuerySpotPriceResponse, useInterfaces: boolean = false): QuerySpotPriceResponseAmino {
     const obj: any = {};
     obj.spot_price = message.spotPrice;
     return obj;
   },
-  fromProtoMsg(message: QuerySpotPriceResponseProtoMsg): QuerySpotPriceResponse {
-    return QuerySpotPriceResponse.decode(message.value);
+  fromProtoMsg(message: QuerySpotPriceResponseProtoMsg, useInterfaces: boolean = false): QuerySpotPriceResponse {
+    return QuerySpotPriceResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuerySpotPriceResponse): Uint8Array {
     return QuerySpotPriceResponse.encode(message).finish();

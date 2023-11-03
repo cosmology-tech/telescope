@@ -163,7 +163,7 @@ export const Gauge = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Gauge {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Gauge {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGauge();
@@ -177,10 +177,10 @@ export const Gauge = {
           message.isPerpetual = reader.bool();
           break;
         case 3:
-          message.distributeTo = QueryCondition.decode(reader, reader.uint32());
+          message.distributeTo = QueryCondition.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
-          message.coins.push(Coin.decode(reader, reader.uint32()));
+          message.coins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 5:
           message.startTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
@@ -192,7 +192,7 @@ export const Gauge = {
           message.filledEpochs = reader.uint64();
           break;
         case 8:
-          message.distributedCoins.push(Coin.decode(reader, reader.uint32()));
+          message.distributedCoins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -297,13 +297,13 @@ export const Gauge = {
       distributedCoins: Array.isArray(object?.distributed_coins) ? object.distributed_coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: Gauge): GaugeAmino {
+  toAmino(message: Gauge, useInterfaces: boolean = false): GaugeAmino {
     const obj: any = {};
     obj.id = message.id ? message.id.toString() : undefined;
     obj.is_perpetual = message.isPerpetual;
-    obj.distribute_to = message.distributeTo ? QueryCondition.toAmino(message.distributeTo) : undefined;
+    obj.distribute_to = message.distributeTo ? QueryCondition.toAmino(message.distributeTo, useInterfaces) : undefined;
     if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.coins = [];
     }
@@ -311,14 +311,14 @@ export const Gauge = {
     obj.num_epochs_paid_over = message.numEpochsPaidOver ? message.numEpochsPaidOver.toString() : undefined;
     obj.filled_epochs = message.filledEpochs ? message.filledEpochs.toString() : undefined;
     if (message.distributedCoins) {
-      obj.distributed_coins = message.distributedCoins.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.distributed_coins = message.distributedCoins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.distributed_coins = [];
     }
     return obj;
   },
-  fromProtoMsg(message: GaugeProtoMsg): Gauge {
-    return Gauge.decode(message.value);
+  fromProtoMsg(message: GaugeProtoMsg, useInterfaces: boolean = false): Gauge {
+    return Gauge.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Gauge): Uint8Array {
     return Gauge.encode(message).finish();
@@ -344,7 +344,7 @@ export const LockableDurationsInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): LockableDurationsInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): LockableDurationsInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockableDurationsInfo();
@@ -352,7 +352,7 @@ export const LockableDurationsInfo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.lockableDurations.push(Duration.decode(reader, reader.uint32()));
+          message.lockableDurations.push(Duration.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -399,17 +399,17 @@ export const LockableDurationsInfo = {
       lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : []
     };
   },
-  toAmino(message: LockableDurationsInfo): LockableDurationsInfoAmino {
+  toAmino(message: LockableDurationsInfo, useInterfaces: boolean = false): LockableDurationsInfoAmino {
     const obj: any = {};
     if (message.lockableDurations) {
-      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e) : undefined);
+      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.lockable_durations = [];
     }
     return obj;
   },
-  fromProtoMsg(message: LockableDurationsInfoProtoMsg): LockableDurationsInfo {
-    return LockableDurationsInfo.decode(message.value);
+  fromProtoMsg(message: LockableDurationsInfoProtoMsg, useInterfaces: boolean = false): LockableDurationsInfo {
+    return LockableDurationsInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LockableDurationsInfo): Uint8Array {
     return LockableDurationsInfo.encode(message).finish();

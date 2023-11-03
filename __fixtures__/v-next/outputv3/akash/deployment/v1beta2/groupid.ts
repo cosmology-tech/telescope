@@ -44,7 +44,7 @@ export const GroupID = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GroupID {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GroupID {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGroupID();
@@ -111,15 +111,15 @@ export const GroupID = {
       gseq: object.gseq
     };
   },
-  toAmino(message: GroupID): GroupIDAmino {
+  toAmino(message: GroupID, useInterfaces: boolean = false): GroupIDAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     obj.gseq = message.gseq;
     return obj;
   },
-  fromProtoMsg(message: GroupIDProtoMsg): GroupID {
-    return GroupID.decode(message.value);
+  fromProtoMsg(message: GroupIDProtoMsg, useInterfaces: boolean = false): GroupID {
+    return GroupID.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GroupID): Uint8Array {
     return GroupID.encode(message).finish();

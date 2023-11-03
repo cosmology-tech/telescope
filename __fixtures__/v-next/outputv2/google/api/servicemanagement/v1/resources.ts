@@ -850,7 +850,7 @@ export const ManagedService = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ManagedService {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ManagedService {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseManagedService();
@@ -906,7 +906,7 @@ export const ManagedService = {
       producerProjectId: object.producer_project_id
     };
   },
-  toAmino(message: ManagedService): ManagedServiceAmino {
+  toAmino(message: ManagedService, useInterfaces: boolean = false): ManagedServiceAmino {
     const obj: any = {};
     obj.service_name = message.serviceName;
     obj.producer_project_id = message.producerProjectId;
@@ -915,8 +915,8 @@ export const ManagedService = {
   fromAminoMsg(object: ManagedServiceAminoMsg): ManagedService {
     return ManagedService.fromAmino(object.value);
   },
-  fromProtoMsg(message: ManagedServiceProtoMsg): ManagedService {
-    return ManagedService.decode(message.value);
+  fromProtoMsg(message: ManagedServiceProtoMsg, useInterfaces: boolean = false): ManagedService {
+    return ManagedService.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ManagedService): Uint8Array {
     return ManagedService.encode(message).finish();
@@ -953,7 +953,7 @@ export const OperationMetadata = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): OperationMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): OperationMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperationMetadata();
@@ -964,7 +964,7 @@ export const OperationMetadata = {
           message.resourceNames.push(reader.string());
           break;
         case 2:
-          message.steps.push(OperationMetadata_Step.decode(reader, reader.uint32()));
+          message.steps.push(OperationMetadata_Step.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
           message.progressPercentage = reader.int32();
@@ -1043,7 +1043,7 @@ export const OperationMetadata = {
       startTime: object?.start_time
     };
   },
-  toAmino(message: OperationMetadata): OperationMetadataAmino {
+  toAmino(message: OperationMetadata, useInterfaces: boolean = false): OperationMetadataAmino {
     const obj: any = {};
     if (message.resourceNames) {
       obj.resource_names = message.resourceNames.map(e => e);
@@ -1051,7 +1051,7 @@ export const OperationMetadata = {
       obj.resource_names = [];
     }
     if (message.steps) {
-      obj.steps = message.steps.map(e => e ? OperationMetadata_Step.toAmino(e) : undefined);
+      obj.steps = message.steps.map(e => e ? OperationMetadata_Step.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.steps = [];
     }
@@ -1062,8 +1062,8 @@ export const OperationMetadata = {
   fromAminoMsg(object: OperationMetadataAminoMsg): OperationMetadata {
     return OperationMetadata.fromAmino(object.value);
   },
-  fromProtoMsg(message: OperationMetadataProtoMsg): OperationMetadata {
-    return OperationMetadata.decode(message.value);
+  fromProtoMsg(message: OperationMetadataProtoMsg, useInterfaces: boolean = false): OperationMetadata {
+    return OperationMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: OperationMetadata): Uint8Array {
     return OperationMetadata.encode(message).finish();
@@ -1092,7 +1092,7 @@ export const OperationMetadata_Step = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): OperationMetadata_Step {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): OperationMetadata_Step {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperationMetadata_Step();
@@ -1148,7 +1148,7 @@ export const OperationMetadata_Step = {
       status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : -1
     };
   },
-  toAmino(message: OperationMetadata_Step): OperationMetadata_StepAmino {
+  toAmino(message: OperationMetadata_Step, useInterfaces: boolean = false): OperationMetadata_StepAmino {
     const obj: any = {};
     obj.description = message.description;
     obj.status = message.status;
@@ -1157,8 +1157,8 @@ export const OperationMetadata_Step = {
   fromAminoMsg(object: OperationMetadata_StepAminoMsg): OperationMetadata_Step {
     return OperationMetadata_Step.fromAmino(object.value);
   },
-  fromProtoMsg(message: OperationMetadata_StepProtoMsg): OperationMetadata_Step {
-    return OperationMetadata_Step.decode(message.value);
+  fromProtoMsg(message: OperationMetadata_StepProtoMsg, useInterfaces: boolean = false): OperationMetadata_Step {
+    return OperationMetadata_Step.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: OperationMetadata_Step): Uint8Array {
     return OperationMetadata_Step.encode(message).finish();
@@ -1191,7 +1191,7 @@ export const Diagnostic = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Diagnostic {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Diagnostic {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDiagnostic();
@@ -1256,7 +1256,7 @@ export const Diagnostic = {
       message: object.message
     };
   },
-  toAmino(message: Diagnostic): DiagnosticAmino {
+  toAmino(message: Diagnostic, useInterfaces: boolean = false): DiagnosticAmino {
     const obj: any = {};
     obj.location = message.location;
     obj.kind = message.kind;
@@ -1266,8 +1266,8 @@ export const Diagnostic = {
   fromAminoMsg(object: DiagnosticAminoMsg): Diagnostic {
     return Diagnostic.fromAmino(object.value);
   },
-  fromProtoMsg(message: DiagnosticProtoMsg): Diagnostic {
-    return Diagnostic.decode(message.value);
+  fromProtoMsg(message: DiagnosticProtoMsg, useInterfaces: boolean = false): Diagnostic {
+    return Diagnostic.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Diagnostic): Uint8Array {
     return Diagnostic.encode(message).finish();
@@ -1296,7 +1296,7 @@ export const ConfigSource = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ConfigSource {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ConfigSource {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfigSource();
@@ -1307,7 +1307,7 @@ export const ConfigSource = {
           message.id = reader.string();
           break;
         case 2:
-          message.files.push(ConfigFile.decode(reader, reader.uint32()));
+          message.files.push(ConfigFile.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1360,11 +1360,11 @@ export const ConfigSource = {
       files: Array.isArray(object?.files) ? object.files.map((e: any) => ConfigFile.fromAmino(e)) : []
     };
   },
-  toAmino(message: ConfigSource): ConfigSourceAmino {
+  toAmino(message: ConfigSource, useInterfaces: boolean = false): ConfigSourceAmino {
     const obj: any = {};
     obj.id = message.id;
     if (message.files) {
-      obj.files = message.files.map(e => e ? ConfigFile.toAmino(e) : undefined);
+      obj.files = message.files.map(e => e ? ConfigFile.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.files = [];
     }
@@ -1373,8 +1373,8 @@ export const ConfigSource = {
   fromAminoMsg(object: ConfigSourceAminoMsg): ConfigSource {
     return ConfigSource.fromAmino(object.value);
   },
-  fromProtoMsg(message: ConfigSourceProtoMsg): ConfigSource {
-    return ConfigSource.decode(message.value);
+  fromProtoMsg(message: ConfigSourceProtoMsg, useInterfaces: boolean = false): ConfigSource {
+    return ConfigSource.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ConfigSource): Uint8Array {
     return ConfigSource.encode(message).finish();
@@ -1407,7 +1407,7 @@ export const ConfigFile = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ConfigFile {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ConfigFile {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfigFile();
@@ -1472,7 +1472,7 @@ export const ConfigFile = {
       fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : -1
     };
   },
-  toAmino(message: ConfigFile): ConfigFileAmino {
+  toAmino(message: ConfigFile, useInterfaces: boolean = false): ConfigFileAmino {
     const obj: any = {};
     obj.file_path = message.filePath;
     obj.file_contents = message.fileContents;
@@ -1482,8 +1482,8 @@ export const ConfigFile = {
   fromAminoMsg(object: ConfigFileAminoMsg): ConfigFile {
     return ConfigFile.fromAmino(object.value);
   },
-  fromProtoMsg(message: ConfigFileProtoMsg): ConfigFile {
-    return ConfigFile.decode(message.value);
+  fromProtoMsg(message: ConfigFileProtoMsg, useInterfaces: boolean = false): ConfigFile {
+    return ConfigFile.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ConfigFile): Uint8Array {
     return ConfigFile.encode(message).finish();
@@ -1508,7 +1508,7 @@ export const ConfigRef = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ConfigRef {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ConfigRef {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfigRef();
@@ -1555,7 +1555,7 @@ export const ConfigRef = {
       name: object.name
     };
   },
-  toAmino(message: ConfigRef): ConfigRefAmino {
+  toAmino(message: ConfigRef, useInterfaces: boolean = false): ConfigRefAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -1563,8 +1563,8 @@ export const ConfigRef = {
   fromAminoMsg(object: ConfigRefAminoMsg): ConfigRef {
     return ConfigRef.fromAmino(object.value);
   },
-  fromProtoMsg(message: ConfigRefProtoMsg): ConfigRef {
-    return ConfigRef.decode(message.value);
+  fromProtoMsg(message: ConfigRefProtoMsg, useInterfaces: boolean = false): ConfigRef {
+    return ConfigRef.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ConfigRef): Uint8Array {
     return ConfigRef.encode(message).finish();
@@ -1589,7 +1589,7 @@ export const ChangeReport = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ChangeReport {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ChangeReport {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChangeReport();
@@ -1597,7 +1597,7 @@ export const ChangeReport = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.configChanges.push(ConfigChange.decode(reader, reader.uint32()));
+          message.configChanges.push(ConfigChange.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1644,10 +1644,10 @@ export const ChangeReport = {
       configChanges: Array.isArray(object?.config_changes) ? object.config_changes.map((e: any) => ConfigChange.fromAmino(e)) : []
     };
   },
-  toAmino(message: ChangeReport): ChangeReportAmino {
+  toAmino(message: ChangeReport, useInterfaces: boolean = false): ChangeReportAmino {
     const obj: any = {};
     if (message.configChanges) {
-      obj.config_changes = message.configChanges.map(e => e ? ConfigChange.toAmino(e) : undefined);
+      obj.config_changes = message.configChanges.map(e => e ? ConfigChange.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.config_changes = [];
     }
@@ -1656,8 +1656,8 @@ export const ChangeReport = {
   fromAminoMsg(object: ChangeReportAminoMsg): ChangeReport {
     return ChangeReport.fromAmino(object.value);
   },
-  fromProtoMsg(message: ChangeReportProtoMsg): ChangeReport {
-    return ChangeReport.decode(message.value);
+  fromProtoMsg(message: ChangeReportProtoMsg, useInterfaces: boolean = false): ChangeReport {
+    return ChangeReport.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ChangeReport): Uint8Array {
     return ChangeReport.encode(message).finish();
@@ -1706,7 +1706,7 @@ export const Rollout = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Rollout {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Rollout {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRollout();
@@ -1726,10 +1726,10 @@ export const Rollout = {
           message.status = (reader.int32() as any);
           break;
         case 5:
-          message.trafficPercentStrategy = Rollout_TrafficPercentStrategy.decode(reader, reader.uint32());
+          message.trafficPercentStrategy = Rollout_TrafficPercentStrategy.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 200:
-          message.deleteServiceStrategy = Rollout_DeleteServiceStrategy.decode(reader, reader.uint32());
+          message.deleteServiceStrategy = Rollout_DeleteServiceStrategy.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 8:
           message.serviceName = reader.string();
@@ -1811,22 +1811,22 @@ export const Rollout = {
       serviceName: object.service_name
     };
   },
-  toAmino(message: Rollout): RolloutAmino {
+  toAmino(message: Rollout, useInterfaces: boolean = false): RolloutAmino {
     const obj: any = {};
     obj.rollout_id = message.rolloutId;
     obj.create_time = message.createTime;
     obj.created_by = message.createdBy;
     obj.status = message.status;
-    obj.traffic_percent_strategy = message.trafficPercentStrategy ? Rollout_TrafficPercentStrategy.toAmino(message.trafficPercentStrategy) : undefined;
-    obj.delete_service_strategy = message.deleteServiceStrategy ? Rollout_DeleteServiceStrategy.toAmino(message.deleteServiceStrategy) : undefined;
+    obj.traffic_percent_strategy = message.trafficPercentStrategy ? Rollout_TrafficPercentStrategy.toAmino(message.trafficPercentStrategy, useInterfaces) : undefined;
+    obj.delete_service_strategy = message.deleteServiceStrategy ? Rollout_DeleteServiceStrategy.toAmino(message.deleteServiceStrategy, useInterfaces) : undefined;
     obj.service_name = message.serviceName;
     return obj;
   },
   fromAminoMsg(object: RolloutAminoMsg): Rollout {
     return Rollout.fromAmino(object.value);
   },
-  fromProtoMsg(message: RolloutProtoMsg): Rollout {
-    return Rollout.decode(message.value);
+  fromProtoMsg(message: RolloutProtoMsg, useInterfaces: boolean = false): Rollout {
+    return Rollout.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Rollout): Uint8Array {
     return Rollout.encode(message).finish();
@@ -1854,7 +1854,7 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Rollout_TrafficPercentStrategy_PercentagesEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Rollout_TrafficPercentStrategy_PercentagesEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRollout_TrafficPercentStrategy_PercentagesEntry();
@@ -1910,7 +1910,7 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
       value: object.value
     };
   },
-  toAmino(message: Rollout_TrafficPercentStrategy_PercentagesEntry): Rollout_TrafficPercentStrategy_PercentagesEntryAmino {
+  toAmino(message: Rollout_TrafficPercentStrategy_PercentagesEntry, useInterfaces: boolean = false): Rollout_TrafficPercentStrategy_PercentagesEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -1919,8 +1919,8 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
   fromAminoMsg(object: Rollout_TrafficPercentStrategy_PercentagesEntryAminoMsg): Rollout_TrafficPercentStrategy_PercentagesEntry {
     return Rollout_TrafficPercentStrategy_PercentagesEntry.fromAmino(object.value);
   },
-  fromProtoMsg(message: Rollout_TrafficPercentStrategy_PercentagesEntryProtoMsg): Rollout_TrafficPercentStrategy_PercentagesEntry {
-    return Rollout_TrafficPercentStrategy_PercentagesEntry.decode(message.value);
+  fromProtoMsg(message: Rollout_TrafficPercentStrategy_PercentagesEntryProtoMsg, useInterfaces: boolean = false): Rollout_TrafficPercentStrategy_PercentagesEntry {
+    return Rollout_TrafficPercentStrategy_PercentagesEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Rollout_TrafficPercentStrategy_PercentagesEntry): Uint8Array {
     return Rollout_TrafficPercentStrategy_PercentagesEntry.encode(message).finish();
@@ -1942,7 +1942,7 @@ export const Rollout_TrafficPercentStrategy = {
     });
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Rollout_TrafficPercentStrategy {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Rollout_TrafficPercentStrategy {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRollout_TrafficPercentStrategy();
@@ -2024,7 +2024,7 @@ export const Rollout_TrafficPercentStrategy = {
       }, {}) : {}
     };
   },
-  toAmino(message: Rollout_TrafficPercentStrategy): Rollout_TrafficPercentStrategyAmino {
+  toAmino(message: Rollout_TrafficPercentStrategy, useInterfaces: boolean = false): Rollout_TrafficPercentStrategyAmino {
     const obj: any = {};
     obj.percentages = {};
     if (message.percentages) {
@@ -2037,8 +2037,8 @@ export const Rollout_TrafficPercentStrategy = {
   fromAminoMsg(object: Rollout_TrafficPercentStrategyAminoMsg): Rollout_TrafficPercentStrategy {
     return Rollout_TrafficPercentStrategy.fromAmino(object.value);
   },
-  fromProtoMsg(message: Rollout_TrafficPercentStrategyProtoMsg): Rollout_TrafficPercentStrategy {
-    return Rollout_TrafficPercentStrategy.decode(message.value);
+  fromProtoMsg(message: Rollout_TrafficPercentStrategyProtoMsg, useInterfaces: boolean = false): Rollout_TrafficPercentStrategy {
+    return Rollout_TrafficPercentStrategy.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Rollout_TrafficPercentStrategy): Uint8Array {
     return Rollout_TrafficPercentStrategy.encode(message).finish();
@@ -2058,7 +2058,7 @@ export const Rollout_DeleteServiceStrategy = {
   encode(_: Rollout_DeleteServiceStrategy, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Rollout_DeleteServiceStrategy {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Rollout_DeleteServiceStrategy {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRollout_DeleteServiceStrategy();
@@ -2094,15 +2094,15 @@ export const Rollout_DeleteServiceStrategy = {
   fromAmino(_: Rollout_DeleteServiceStrategyAmino): Rollout_DeleteServiceStrategy {
     return {};
   },
-  toAmino(_: Rollout_DeleteServiceStrategy): Rollout_DeleteServiceStrategyAmino {
+  toAmino(_: Rollout_DeleteServiceStrategy, useInterfaces: boolean = false): Rollout_DeleteServiceStrategyAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: Rollout_DeleteServiceStrategyAminoMsg): Rollout_DeleteServiceStrategy {
     return Rollout_DeleteServiceStrategy.fromAmino(object.value);
   },
-  fromProtoMsg(message: Rollout_DeleteServiceStrategyProtoMsg): Rollout_DeleteServiceStrategy {
-    return Rollout_DeleteServiceStrategy.decode(message.value);
+  fromProtoMsg(message: Rollout_DeleteServiceStrategyProtoMsg, useInterfaces: boolean = false): Rollout_DeleteServiceStrategy {
+    return Rollout_DeleteServiceStrategy.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Rollout_DeleteServiceStrategy): Uint8Array {
     return Rollout_DeleteServiceStrategy.encode(message).finish();

@@ -150,7 +150,7 @@ export const QueryModuleAccountBalanceRequest = {
   encode(_: QueryModuleAccountBalanceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryModuleAccountBalanceRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryModuleAccountBalanceRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountBalanceRequest();
@@ -186,12 +186,12 @@ export const QueryModuleAccountBalanceRequest = {
   fromAmino(_: QueryModuleAccountBalanceRequestAmino): QueryModuleAccountBalanceRequest {
     return {};
   },
-  toAmino(_: QueryModuleAccountBalanceRequest): QueryModuleAccountBalanceRequestAmino {
+  toAmino(_: QueryModuleAccountBalanceRequest, useInterfaces: boolean = false): QueryModuleAccountBalanceRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: QueryModuleAccountBalanceRequestProtoMsg): QueryModuleAccountBalanceRequest {
-    return QueryModuleAccountBalanceRequest.decode(message.value);
+  fromProtoMsg(message: QueryModuleAccountBalanceRequestProtoMsg, useInterfaces: boolean = false): QueryModuleAccountBalanceRequest {
+    return QueryModuleAccountBalanceRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryModuleAccountBalanceRequest): Uint8Array {
     return QueryModuleAccountBalanceRequest.encode(message).finish();
@@ -217,7 +217,7 @@ export const QueryModuleAccountBalanceResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryModuleAccountBalanceResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryModuleAccountBalanceResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountBalanceResponse();
@@ -225,7 +225,7 @@ export const QueryModuleAccountBalanceResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.moduleAccountBalance.push(Coin.decode(reader, reader.uint32()));
+          message.moduleAccountBalance.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -272,17 +272,17 @@ export const QueryModuleAccountBalanceResponse = {
       moduleAccountBalance: Array.isArray(object?.moduleAccountBalance) ? object.moduleAccountBalance.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryModuleAccountBalanceResponse): QueryModuleAccountBalanceResponseAmino {
+  toAmino(message: QueryModuleAccountBalanceResponse, useInterfaces: boolean = false): QueryModuleAccountBalanceResponseAmino {
     const obj: any = {};
     if (message.moduleAccountBalance) {
-      obj.moduleAccountBalance = message.moduleAccountBalance.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.moduleAccountBalance = message.moduleAccountBalance.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.moduleAccountBalance = [];
     }
     return obj;
   },
-  fromProtoMsg(message: QueryModuleAccountBalanceResponseProtoMsg): QueryModuleAccountBalanceResponse {
-    return QueryModuleAccountBalanceResponse.decode(message.value);
+  fromProtoMsg(message: QueryModuleAccountBalanceResponseProtoMsg, useInterfaces: boolean = false): QueryModuleAccountBalanceResponse {
+    return QueryModuleAccountBalanceResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryModuleAccountBalanceResponse): Uint8Array {
     return QueryModuleAccountBalanceResponse.encode(message).finish();
@@ -303,7 +303,7 @@ export const QueryParamsRequest = {
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -339,12 +339,12 @@ export const QueryParamsRequest = {
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
-  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
+  toAmino(_: QueryParamsRequest, useInterfaces: boolean = false): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
-    return QueryParamsRequest.decode(message.value);
+  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = false): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsRequest): Uint8Array {
     return QueryParamsRequest.encode(message).finish();
@@ -370,7 +370,7 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -378,7 +378,7 @@ export const QueryParamsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32());
+          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -419,13 +419,13 @@ export const QueryParamsResponse = {
       params: object?.params ? Params.fromAmino(object.params) : undefined
     };
   },
-  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+  toAmino(message: QueryParamsResponse, useInterfaces: boolean = false): QueryParamsResponseAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
-    return QueryParamsResponse.decode(message.value);
+  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = false): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsResponse): Uint8Array {
     return QueryParamsResponse.encode(message).finish();
@@ -451,7 +451,7 @@ export const QueryClaimRecordRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryClaimRecordRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryClaimRecordRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimRecordRequest();
@@ -498,13 +498,13 @@ export const QueryClaimRecordRequest = {
       address: object.address
     };
   },
-  toAmino(message: QueryClaimRecordRequest): QueryClaimRecordRequestAmino {
+  toAmino(message: QueryClaimRecordRequest, useInterfaces: boolean = false): QueryClaimRecordRequestAmino {
     const obj: any = {};
     obj.address = message.address;
     return obj;
   },
-  fromProtoMsg(message: QueryClaimRecordRequestProtoMsg): QueryClaimRecordRequest {
-    return QueryClaimRecordRequest.decode(message.value);
+  fromProtoMsg(message: QueryClaimRecordRequestProtoMsg, useInterfaces: boolean = false): QueryClaimRecordRequest {
+    return QueryClaimRecordRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryClaimRecordRequest): Uint8Array {
     return QueryClaimRecordRequest.encode(message).finish();
@@ -530,7 +530,7 @@ export const QueryClaimRecordResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryClaimRecordResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryClaimRecordResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimRecordResponse();
@@ -538,7 +538,7 @@ export const QueryClaimRecordResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.claimRecord = ClaimRecord.decode(reader, reader.uint32());
+          message.claimRecord = ClaimRecord.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -579,13 +579,13 @@ export const QueryClaimRecordResponse = {
       claimRecord: object?.claim_record ? ClaimRecord.fromAmino(object.claim_record) : undefined
     };
   },
-  toAmino(message: QueryClaimRecordResponse): QueryClaimRecordResponseAmino {
+  toAmino(message: QueryClaimRecordResponse, useInterfaces: boolean = false): QueryClaimRecordResponseAmino {
     const obj: any = {};
-    obj.claim_record = message.claimRecord ? ClaimRecord.toAmino(message.claimRecord) : undefined;
+    obj.claim_record = message.claimRecord ? ClaimRecord.toAmino(message.claimRecord, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryClaimRecordResponseProtoMsg): QueryClaimRecordResponse {
-    return QueryClaimRecordResponse.decode(message.value);
+  fromProtoMsg(message: QueryClaimRecordResponseProtoMsg, useInterfaces: boolean = false): QueryClaimRecordResponse {
+    return QueryClaimRecordResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryClaimRecordResponse): Uint8Array {
     return QueryClaimRecordResponse.encode(message).finish();
@@ -615,7 +615,7 @@ export const QueryClaimableForActionRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryClaimableForActionRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryClaimableForActionRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimableForActionRequest();
@@ -671,14 +671,14 @@ export const QueryClaimableForActionRequest = {
       action: isSet(object.action) ? actionFromJSON(object.action) : -1
     };
   },
-  toAmino(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestAmino {
+  toAmino(message: QueryClaimableForActionRequest, useInterfaces: boolean = false): QueryClaimableForActionRequestAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.action = message.action;
     return obj;
   },
-  fromProtoMsg(message: QueryClaimableForActionRequestProtoMsg): QueryClaimableForActionRequest {
-    return QueryClaimableForActionRequest.decode(message.value);
+  fromProtoMsg(message: QueryClaimableForActionRequestProtoMsg, useInterfaces: boolean = false): QueryClaimableForActionRequest {
+    return QueryClaimableForActionRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryClaimableForActionRequest): Uint8Array {
     return QueryClaimableForActionRequest.encode(message).finish();
@@ -704,7 +704,7 @@ export const QueryClaimableForActionResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryClaimableForActionResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryClaimableForActionResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimableForActionResponse();
@@ -712,7 +712,7 @@ export const QueryClaimableForActionResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.coins.push(Coin.decode(reader, reader.uint32()));
+          message.coins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -759,17 +759,17 @@ export const QueryClaimableForActionResponse = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryClaimableForActionResponse): QueryClaimableForActionResponseAmino {
+  toAmino(message: QueryClaimableForActionResponse, useInterfaces: boolean = false): QueryClaimableForActionResponseAmino {
     const obj: any = {};
     if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.coins = [];
     }
     return obj;
   },
-  fromProtoMsg(message: QueryClaimableForActionResponseProtoMsg): QueryClaimableForActionResponse {
-    return QueryClaimableForActionResponse.decode(message.value);
+  fromProtoMsg(message: QueryClaimableForActionResponseProtoMsg, useInterfaces: boolean = false): QueryClaimableForActionResponse {
+    return QueryClaimableForActionResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryClaimableForActionResponse): Uint8Array {
     return QueryClaimableForActionResponse.encode(message).finish();
@@ -795,7 +795,7 @@ export const QueryTotalClaimableRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalClaimableRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryTotalClaimableRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalClaimableRequest();
@@ -842,13 +842,13 @@ export const QueryTotalClaimableRequest = {
       address: object.address
     };
   },
-  toAmino(message: QueryTotalClaimableRequest): QueryTotalClaimableRequestAmino {
+  toAmino(message: QueryTotalClaimableRequest, useInterfaces: boolean = false): QueryTotalClaimableRequestAmino {
     const obj: any = {};
     obj.address = message.address;
     return obj;
   },
-  fromProtoMsg(message: QueryTotalClaimableRequestProtoMsg): QueryTotalClaimableRequest {
-    return QueryTotalClaimableRequest.decode(message.value);
+  fromProtoMsg(message: QueryTotalClaimableRequestProtoMsg, useInterfaces: boolean = false): QueryTotalClaimableRequest {
+    return QueryTotalClaimableRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryTotalClaimableRequest): Uint8Array {
     return QueryTotalClaimableRequest.encode(message).finish();
@@ -874,7 +874,7 @@ export const QueryTotalClaimableResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalClaimableResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryTotalClaimableResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalClaimableResponse();
@@ -882,7 +882,7 @@ export const QueryTotalClaimableResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.coins.push(Coin.decode(reader, reader.uint32()));
+          message.coins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -929,17 +929,17 @@ export const QueryTotalClaimableResponse = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryTotalClaimableResponse): QueryTotalClaimableResponseAmino {
+  toAmino(message: QueryTotalClaimableResponse, useInterfaces: boolean = false): QueryTotalClaimableResponseAmino {
     const obj: any = {};
     if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.coins = [];
     }
     return obj;
   },
-  fromProtoMsg(message: QueryTotalClaimableResponseProtoMsg): QueryTotalClaimableResponse {
-    return QueryTotalClaimableResponse.decode(message.value);
+  fromProtoMsg(message: QueryTotalClaimableResponseProtoMsg, useInterfaces: boolean = false): QueryTotalClaimableResponse {
+    return QueryTotalClaimableResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryTotalClaimableResponse): Uint8Array {
     return QueryTotalClaimableResponse.encode(message).finish();

@@ -164,7 +164,7 @@ export const QueryParamsRequest = {
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -200,21 +200,21 @@ export const QueryParamsRequest = {
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
-  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
+  toAmino(_: QueryParamsRequest, useInterfaces: boolean = false): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
     return QueryParamsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
+  toAminoMsg(message: QueryParamsRequest, useInterfaces: boolean = false): QueryParamsRequestAminoMsg {
     return {
       type: "osmosis/tokenfactory/query-params-request",
-      value: QueryParamsRequest.toAmino(message)
+      value: QueryParamsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
-    return QueryParamsRequest.decode(message.value);
+  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = false): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsRequest): Uint8Array {
     return QueryParamsRequest.encode(message).finish();
@@ -240,7 +240,7 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -248,7 +248,7 @@ export const QueryParamsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32());
+          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -289,22 +289,22 @@ export const QueryParamsResponse = {
       params: object?.params ? Params.fromAmino(object.params) : undefined
     };
   },
-  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+  toAmino(message: QueryParamsResponse, useInterfaces: boolean = false): QueryParamsResponseAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
     return QueryParamsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
+  toAminoMsg(message: QueryParamsResponse, useInterfaces: boolean = false): QueryParamsResponseAminoMsg {
     return {
       type: "osmosis/tokenfactory/query-params-response",
-      value: QueryParamsResponse.toAmino(message)
+      value: QueryParamsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
-    return QueryParamsResponse.decode(message.value);
+  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = false): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsResponse): Uint8Array {
     return QueryParamsResponse.encode(message).finish();
@@ -330,7 +330,7 @@ export const QueryDenomAuthorityMetadataRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomAuthorityMetadataRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDenomAuthorityMetadataRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomAuthorityMetadataRequest();
@@ -377,7 +377,7 @@ export const QueryDenomAuthorityMetadataRequest = {
       denom: object.denom
     };
   },
-  toAmino(message: QueryDenomAuthorityMetadataRequest): QueryDenomAuthorityMetadataRequestAmino {
+  toAmino(message: QueryDenomAuthorityMetadataRequest, useInterfaces: boolean = false): QueryDenomAuthorityMetadataRequestAmino {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
@@ -385,14 +385,14 @@ export const QueryDenomAuthorityMetadataRequest = {
   fromAminoMsg(object: QueryDenomAuthorityMetadataRequestAminoMsg): QueryDenomAuthorityMetadataRequest {
     return QueryDenomAuthorityMetadataRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDenomAuthorityMetadataRequest): QueryDenomAuthorityMetadataRequestAminoMsg {
+  toAminoMsg(message: QueryDenomAuthorityMetadataRequest, useInterfaces: boolean = false): QueryDenomAuthorityMetadataRequestAminoMsg {
     return {
       type: "osmosis/tokenfactory/query-denom-authority-metadata-request",
-      value: QueryDenomAuthorityMetadataRequest.toAmino(message)
+      value: QueryDenomAuthorityMetadataRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDenomAuthorityMetadataRequestProtoMsg): QueryDenomAuthorityMetadataRequest {
-    return QueryDenomAuthorityMetadataRequest.decode(message.value);
+  fromProtoMsg(message: QueryDenomAuthorityMetadataRequestProtoMsg, useInterfaces: boolean = false): QueryDenomAuthorityMetadataRequest {
+    return QueryDenomAuthorityMetadataRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDenomAuthorityMetadataRequest): Uint8Array {
     return QueryDenomAuthorityMetadataRequest.encode(message).finish();
@@ -418,7 +418,7 @@ export const QueryDenomAuthorityMetadataResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomAuthorityMetadataResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDenomAuthorityMetadataResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomAuthorityMetadataResponse();
@@ -426,7 +426,7 @@ export const QueryDenomAuthorityMetadataResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.authorityMetadata = DenomAuthorityMetadata.decode(reader, reader.uint32());
+          message.authorityMetadata = DenomAuthorityMetadata.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -467,22 +467,22 @@ export const QueryDenomAuthorityMetadataResponse = {
       authorityMetadata: object?.authority_metadata ? DenomAuthorityMetadata.fromAmino(object.authority_metadata) : undefined
     };
   },
-  toAmino(message: QueryDenomAuthorityMetadataResponse): QueryDenomAuthorityMetadataResponseAmino {
+  toAmino(message: QueryDenomAuthorityMetadataResponse, useInterfaces: boolean = false): QueryDenomAuthorityMetadataResponseAmino {
     const obj: any = {};
-    obj.authority_metadata = message.authorityMetadata ? DenomAuthorityMetadata.toAmino(message.authorityMetadata) : undefined;
+    obj.authority_metadata = message.authorityMetadata ? DenomAuthorityMetadata.toAmino(message.authorityMetadata, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryDenomAuthorityMetadataResponseAminoMsg): QueryDenomAuthorityMetadataResponse {
     return QueryDenomAuthorityMetadataResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDenomAuthorityMetadataResponse): QueryDenomAuthorityMetadataResponseAminoMsg {
+  toAminoMsg(message: QueryDenomAuthorityMetadataResponse, useInterfaces: boolean = false): QueryDenomAuthorityMetadataResponseAminoMsg {
     return {
       type: "osmosis/tokenfactory/query-denom-authority-metadata-response",
-      value: QueryDenomAuthorityMetadataResponse.toAmino(message)
+      value: QueryDenomAuthorityMetadataResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDenomAuthorityMetadataResponseProtoMsg): QueryDenomAuthorityMetadataResponse {
-    return QueryDenomAuthorityMetadataResponse.decode(message.value);
+  fromProtoMsg(message: QueryDenomAuthorityMetadataResponseProtoMsg, useInterfaces: boolean = false): QueryDenomAuthorityMetadataResponse {
+    return QueryDenomAuthorityMetadataResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDenomAuthorityMetadataResponse): Uint8Array {
     return QueryDenomAuthorityMetadataResponse.encode(message).finish();
@@ -508,7 +508,7 @@ export const QueryDenomsFromCreatorRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomsFromCreatorRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDenomsFromCreatorRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomsFromCreatorRequest();
@@ -555,7 +555,7 @@ export const QueryDenomsFromCreatorRequest = {
       creator: object.creator
     };
   },
-  toAmino(message: QueryDenomsFromCreatorRequest): QueryDenomsFromCreatorRequestAmino {
+  toAmino(message: QueryDenomsFromCreatorRequest, useInterfaces: boolean = false): QueryDenomsFromCreatorRequestAmino {
     const obj: any = {};
     obj.creator = message.creator;
     return obj;
@@ -563,14 +563,14 @@ export const QueryDenomsFromCreatorRequest = {
   fromAminoMsg(object: QueryDenomsFromCreatorRequestAminoMsg): QueryDenomsFromCreatorRequest {
     return QueryDenomsFromCreatorRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDenomsFromCreatorRequest): QueryDenomsFromCreatorRequestAminoMsg {
+  toAminoMsg(message: QueryDenomsFromCreatorRequest, useInterfaces: boolean = false): QueryDenomsFromCreatorRequestAminoMsg {
     return {
       type: "osmosis/tokenfactory/query-denoms-from-creator-request",
-      value: QueryDenomsFromCreatorRequest.toAmino(message)
+      value: QueryDenomsFromCreatorRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDenomsFromCreatorRequestProtoMsg): QueryDenomsFromCreatorRequest {
-    return QueryDenomsFromCreatorRequest.decode(message.value);
+  fromProtoMsg(message: QueryDenomsFromCreatorRequestProtoMsg, useInterfaces: boolean = false): QueryDenomsFromCreatorRequest {
+    return QueryDenomsFromCreatorRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDenomsFromCreatorRequest): Uint8Array {
     return QueryDenomsFromCreatorRequest.encode(message).finish();
@@ -596,7 +596,7 @@ export const QueryDenomsFromCreatorResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomsFromCreatorResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDenomsFromCreatorResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomsFromCreatorResponse();
@@ -651,7 +651,7 @@ export const QueryDenomsFromCreatorResponse = {
       denoms: Array.isArray(object?.denoms) ? object.denoms.map((e: any) => e) : []
     };
   },
-  toAmino(message: QueryDenomsFromCreatorResponse): QueryDenomsFromCreatorResponseAmino {
+  toAmino(message: QueryDenomsFromCreatorResponse, useInterfaces: boolean = false): QueryDenomsFromCreatorResponseAmino {
     const obj: any = {};
     if (message.denoms) {
       obj.denoms = message.denoms.map(e => e);
@@ -663,14 +663,14 @@ export const QueryDenomsFromCreatorResponse = {
   fromAminoMsg(object: QueryDenomsFromCreatorResponseAminoMsg): QueryDenomsFromCreatorResponse {
     return QueryDenomsFromCreatorResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDenomsFromCreatorResponse): QueryDenomsFromCreatorResponseAminoMsg {
+  toAminoMsg(message: QueryDenomsFromCreatorResponse, useInterfaces: boolean = false): QueryDenomsFromCreatorResponseAminoMsg {
     return {
       type: "osmosis/tokenfactory/query-denoms-from-creator-response",
-      value: QueryDenomsFromCreatorResponse.toAmino(message)
+      value: QueryDenomsFromCreatorResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDenomsFromCreatorResponseProtoMsg): QueryDenomsFromCreatorResponse {
-    return QueryDenomsFromCreatorResponse.decode(message.value);
+  fromProtoMsg(message: QueryDenomsFromCreatorResponseProtoMsg, useInterfaces: boolean = false): QueryDenomsFromCreatorResponse {
+    return QueryDenomsFromCreatorResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDenomsFromCreatorResponse): Uint8Array {
     return QueryDenomsFromCreatorResponse.encode(message).finish();

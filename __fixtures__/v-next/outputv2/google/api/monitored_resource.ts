@@ -365,7 +365,7 @@ export const MonitoredResourceDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MonitoredResourceDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MonitoredResourceDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoredResourceDescriptor();
@@ -385,7 +385,7 @@ export const MonitoredResourceDescriptor = {
           message.description = reader.string();
           break;
         case 4:
-          message.labels.push(LabelDescriptor.decode(reader, reader.uint32()));
+          message.labels.push(LabelDescriptor.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 7:
           message.launchStage = (reader.int32() as any);
@@ -465,14 +465,14 @@ export const MonitoredResourceDescriptor = {
       launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1
     };
   },
-  toAmino(message: MonitoredResourceDescriptor): MonitoredResourceDescriptorAmino {
+  toAmino(message: MonitoredResourceDescriptor, useInterfaces: boolean = false): MonitoredResourceDescriptorAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.type = message.type;
     obj.display_name = message.displayName;
     obj.description = message.description;
     if (message.labels) {
-      obj.labels = message.labels.map(e => e ? LabelDescriptor.toAmino(e) : undefined);
+      obj.labels = message.labels.map(e => e ? LabelDescriptor.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.labels = [];
     }
@@ -482,8 +482,8 @@ export const MonitoredResourceDescriptor = {
   fromAminoMsg(object: MonitoredResourceDescriptorAminoMsg): MonitoredResourceDescriptor {
     return MonitoredResourceDescriptor.fromAmino(object.value);
   },
-  fromProtoMsg(message: MonitoredResourceDescriptorProtoMsg): MonitoredResourceDescriptor {
-    return MonitoredResourceDescriptor.decode(message.value);
+  fromProtoMsg(message: MonitoredResourceDescriptorProtoMsg, useInterfaces: boolean = false): MonitoredResourceDescriptor {
+    return MonitoredResourceDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MonitoredResourceDescriptor): Uint8Array {
     return MonitoredResourceDescriptor.encode(message).finish();
@@ -511,7 +511,7 @@ export const MonitoredResource_LabelsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MonitoredResource_LabelsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MonitoredResource_LabelsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoredResource_LabelsEntry();
@@ -567,7 +567,7 @@ export const MonitoredResource_LabelsEntry = {
       value: object.value
     };
   },
-  toAmino(message: MonitoredResource_LabelsEntry): MonitoredResource_LabelsEntryAmino {
+  toAmino(message: MonitoredResource_LabelsEntry, useInterfaces: boolean = false): MonitoredResource_LabelsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -576,8 +576,8 @@ export const MonitoredResource_LabelsEntry = {
   fromAminoMsg(object: MonitoredResource_LabelsEntryAminoMsg): MonitoredResource_LabelsEntry {
     return MonitoredResource_LabelsEntry.fromAmino(object.value);
   },
-  fromProtoMsg(message: MonitoredResource_LabelsEntryProtoMsg): MonitoredResource_LabelsEntry {
-    return MonitoredResource_LabelsEntry.decode(message.value);
+  fromProtoMsg(message: MonitoredResource_LabelsEntryProtoMsg, useInterfaces: boolean = false): MonitoredResource_LabelsEntry {
+    return MonitoredResource_LabelsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MonitoredResource_LabelsEntry): Uint8Array {
     return MonitoredResource_LabelsEntry.encode(message).finish();
@@ -603,7 +603,7 @@ export const MonitoredResource = {
     });
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MonitoredResource {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MonitoredResource {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoredResource();
@@ -694,7 +694,7 @@ export const MonitoredResource = {
       }, {}) : {}
     };
   },
-  toAmino(message: MonitoredResource): MonitoredResourceAmino {
+  toAmino(message: MonitoredResource, useInterfaces: boolean = false): MonitoredResourceAmino {
     const obj: any = {};
     obj.type = message.type;
     obj.labels = {};
@@ -708,8 +708,8 @@ export const MonitoredResource = {
   fromAminoMsg(object: MonitoredResourceAminoMsg): MonitoredResource {
     return MonitoredResource.fromAmino(object.value);
   },
-  fromProtoMsg(message: MonitoredResourceProtoMsg): MonitoredResource {
-    return MonitoredResource.decode(message.value);
+  fromProtoMsg(message: MonitoredResourceProtoMsg, useInterfaces: boolean = false): MonitoredResource {
+    return MonitoredResource.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MonitoredResource): Uint8Array {
     return MonitoredResource.encode(message).finish();
@@ -737,7 +737,7 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MonitoredResourceMetadata_UserLabelsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MonitoredResourceMetadata_UserLabelsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoredResourceMetadata_UserLabelsEntry();
@@ -793,7 +793,7 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
       value: object.value
     };
   },
-  toAmino(message: MonitoredResourceMetadata_UserLabelsEntry): MonitoredResourceMetadata_UserLabelsEntryAmino {
+  toAmino(message: MonitoredResourceMetadata_UserLabelsEntry, useInterfaces: boolean = false): MonitoredResourceMetadata_UserLabelsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -802,8 +802,8 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
   fromAminoMsg(object: MonitoredResourceMetadata_UserLabelsEntryAminoMsg): MonitoredResourceMetadata_UserLabelsEntry {
     return MonitoredResourceMetadata_UserLabelsEntry.fromAmino(object.value);
   },
-  fromProtoMsg(message: MonitoredResourceMetadata_UserLabelsEntryProtoMsg): MonitoredResourceMetadata_UserLabelsEntry {
-    return MonitoredResourceMetadata_UserLabelsEntry.decode(message.value);
+  fromProtoMsg(message: MonitoredResourceMetadata_UserLabelsEntryProtoMsg, useInterfaces: boolean = false): MonitoredResourceMetadata_UserLabelsEntry {
+    return MonitoredResourceMetadata_UserLabelsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MonitoredResourceMetadata_UserLabelsEntry): Uint8Array {
     return MonitoredResourceMetadata_UserLabelsEntry.encode(message).finish();
@@ -829,7 +829,7 @@ export const MonitoredResourceMetadata = {
     });
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MonitoredResourceMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MonitoredResourceMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoredResourceMetadata();
@@ -837,7 +837,7 @@ export const MonitoredResourceMetadata = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.systemLabels = Struct.decode(reader, reader.uint32());
+          message.systemLabels = Struct.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           const entry2 = MonitoredResourceMetadata_UserLabelsEntry.decode(reader, reader.uint32());
@@ -922,9 +922,9 @@ export const MonitoredResourceMetadata = {
       }, {}) : {}
     };
   },
-  toAmino(message: MonitoredResourceMetadata): MonitoredResourceMetadataAmino {
+  toAmino(message: MonitoredResourceMetadata, useInterfaces: boolean = false): MonitoredResourceMetadataAmino {
     const obj: any = {};
-    obj.system_labels = message.systemLabels ? Struct.toAmino(message.systemLabels) : undefined;
+    obj.system_labels = message.systemLabels ? Struct.toAmino(message.systemLabels, useInterfaces) : undefined;
     obj.user_labels = {};
     if (message.userLabels) {
       Object.entries(message.userLabels).forEach(([k, v]) => {
@@ -936,8 +936,8 @@ export const MonitoredResourceMetadata = {
   fromAminoMsg(object: MonitoredResourceMetadataAminoMsg): MonitoredResourceMetadata {
     return MonitoredResourceMetadata.fromAmino(object.value);
   },
-  fromProtoMsg(message: MonitoredResourceMetadataProtoMsg): MonitoredResourceMetadata {
-    return MonitoredResourceMetadata.decode(message.value);
+  fromProtoMsg(message: MonitoredResourceMetadataProtoMsg, useInterfaces: boolean = false): MonitoredResourceMetadata {
+    return MonitoredResourceMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MonitoredResourceMetadata): Uint8Array {
     return MonitoredResourceMetadata.encode(message).finish();

@@ -307,7 +307,7 @@ export const MsgConnectionOpenInit = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgConnectionOpenInit {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConnectionOpenInit {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenInit();
@@ -318,10 +318,10 @@ export const MsgConnectionOpenInit = {
           message.clientId = reader.string();
           break;
         case 2:
-          message.counterparty = Counterparty.decode(reader, reader.uint32());
+          message.counterparty = Counterparty.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.version = Version.decode(reader, reader.uint32());
+          message.version = Version.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
           message.delayPeriod = reader.uint64();
@@ -396,17 +396,17 @@ export const MsgConnectionOpenInit = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgConnectionOpenInit): MsgConnectionOpenInitAmino {
+  toAmino(message: MsgConnectionOpenInit, useInterfaces: boolean = false): MsgConnectionOpenInitAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
-    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
-    obj.version = message.version ? Version.toAmino(message.version) : undefined;
+    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty, useInterfaces) : undefined;
+    obj.version = message.version ? Version.toAmino(message.version, useInterfaces) : undefined;
     obj.delay_period = message.delayPeriod ? message.delayPeriod.toString() : undefined;
     obj.signer = message.signer;
     return obj;
   },
-  fromProtoMsg(message: MsgConnectionOpenInitProtoMsg): MsgConnectionOpenInit {
-    return MsgConnectionOpenInit.decode(message.value);
+  fromProtoMsg(message: MsgConnectionOpenInitProtoMsg, useInterfaces: boolean = false): MsgConnectionOpenInit {
+    return MsgConnectionOpenInit.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConnectionOpenInit): Uint8Array {
     return MsgConnectionOpenInit.encode(message).finish();
@@ -427,7 +427,7 @@ export const MsgConnectionOpenInitResponse = {
   encode(_: MsgConnectionOpenInitResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgConnectionOpenInitResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConnectionOpenInitResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenInitResponse();
@@ -463,12 +463,12 @@ export const MsgConnectionOpenInitResponse = {
   fromAmino(_: MsgConnectionOpenInitResponseAmino): MsgConnectionOpenInitResponse {
     return {};
   },
-  toAmino(_: MsgConnectionOpenInitResponse): MsgConnectionOpenInitResponseAmino {
+  toAmino(_: MsgConnectionOpenInitResponse, useInterfaces: boolean = false): MsgConnectionOpenInitResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgConnectionOpenInitResponseProtoMsg): MsgConnectionOpenInitResponse {
-    return MsgConnectionOpenInitResponse.decode(message.value);
+  fromProtoMsg(message: MsgConnectionOpenInitResponseProtoMsg, useInterfaces: boolean = false): MsgConnectionOpenInitResponse {
+    return MsgConnectionOpenInitResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConnectionOpenInitResponse): Uint8Array {
     return MsgConnectionOpenInitResponse.encode(message).finish();
@@ -538,7 +538,7 @@ export const MsgConnectionOpenTry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgConnectionOpenTry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConnectionOpenTry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenTry();
@@ -552,19 +552,19 @@ export const MsgConnectionOpenTry = {
           message.previousConnectionId = reader.string();
           break;
         case 3:
-          message.clientState = Any.decode(reader, reader.uint32());
+          message.clientState = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
-          message.counterparty = Counterparty.decode(reader, reader.uint32());
+          message.counterparty = Counterparty.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
           message.delayPeriod = reader.uint64();
           break;
         case 6:
-          message.counterpartyVersions.push(Version.decode(reader, reader.uint32()));
+          message.counterpartyVersions.push(Version.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 7:
-          message.proofHeight = Height.decode(reader, reader.uint32());
+          message.proofHeight = Height.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 8:
           message.proofInit = reader.bytes();
@@ -576,7 +576,7 @@ export const MsgConnectionOpenTry = {
           message.proofConsensus = reader.bytes();
           break;
         case 11:
-          message.consensusHeight = Height.decode(reader, reader.uint32());
+          message.consensusHeight = Height.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 12:
           message.signer = reader.string();
@@ -702,28 +702,28 @@ export const MsgConnectionOpenTry = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgConnectionOpenTry): MsgConnectionOpenTryAmino {
+  toAmino(message: MsgConnectionOpenTry, useInterfaces: boolean = false): MsgConnectionOpenTryAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
     obj.previous_connection_id = message.previousConnectionId;
-    obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
-    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
+    obj.client_state = message.clientState ? Any.toAmino(message.clientState, useInterfaces) : undefined;
+    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty, useInterfaces) : undefined;
     obj.delay_period = message.delayPeriod ? message.delayPeriod.toString() : undefined;
     if (message.counterpartyVersions) {
-      obj.counterparty_versions = message.counterpartyVersions.map(e => e ? Version.toAmino(e) : undefined);
+      obj.counterparty_versions = message.counterpartyVersions.map(e => e ? Version.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.counterparty_versions = [];
     }
-    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.proof_init = message.proofInit;
     obj.proof_client = message.proofClient;
     obj.proof_consensus = message.proofConsensus;
-    obj.consensus_height = message.consensusHeight ? Height.toAmino(message.consensusHeight) : {};
+    obj.consensus_height = message.consensusHeight ? Height.toAmino(message.consensusHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;
   },
-  fromProtoMsg(message: MsgConnectionOpenTryProtoMsg): MsgConnectionOpenTry {
-    return MsgConnectionOpenTry.decode(message.value);
+  fromProtoMsg(message: MsgConnectionOpenTryProtoMsg, useInterfaces: boolean = false): MsgConnectionOpenTry {
+    return MsgConnectionOpenTry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConnectionOpenTry): Uint8Array {
     return MsgConnectionOpenTry.encode(message).finish();
@@ -744,7 +744,7 @@ export const MsgConnectionOpenTryResponse = {
   encode(_: MsgConnectionOpenTryResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgConnectionOpenTryResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConnectionOpenTryResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenTryResponse();
@@ -780,12 +780,12 @@ export const MsgConnectionOpenTryResponse = {
   fromAmino(_: MsgConnectionOpenTryResponseAmino): MsgConnectionOpenTryResponse {
     return {};
   },
-  toAmino(_: MsgConnectionOpenTryResponse): MsgConnectionOpenTryResponseAmino {
+  toAmino(_: MsgConnectionOpenTryResponse, useInterfaces: boolean = false): MsgConnectionOpenTryResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgConnectionOpenTryResponseProtoMsg): MsgConnectionOpenTryResponse {
-    return MsgConnectionOpenTryResponse.decode(message.value);
+  fromProtoMsg(message: MsgConnectionOpenTryResponseProtoMsg, useInterfaces: boolean = false): MsgConnectionOpenTryResponse {
+    return MsgConnectionOpenTryResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConnectionOpenTryResponse): Uint8Array {
     return MsgConnectionOpenTryResponse.encode(message).finish();
@@ -847,7 +847,7 @@ export const MsgConnectionOpenAck = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgConnectionOpenAck {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConnectionOpenAck {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenAck();
@@ -861,13 +861,13 @@ export const MsgConnectionOpenAck = {
           message.counterpartyConnectionId = reader.string();
           break;
         case 3:
-          message.version = Version.decode(reader, reader.uint32());
+          message.version = Version.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
-          message.clientState = Any.decode(reader, reader.uint32());
+          message.clientState = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
-          message.proofHeight = Height.decode(reader, reader.uint32());
+          message.proofHeight = Height.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 6:
           message.proofTry = reader.bytes();
@@ -879,7 +879,7 @@ export const MsgConnectionOpenAck = {
           message.proofConsensus = reader.bytes();
           break;
         case 9:
-          message.consensusHeight = Height.decode(reader, reader.uint32());
+          message.consensusHeight = Height.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 10:
           message.signer = reader.string();
@@ -983,22 +983,22 @@ export const MsgConnectionOpenAck = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgConnectionOpenAck): MsgConnectionOpenAckAmino {
+  toAmino(message: MsgConnectionOpenAck, useInterfaces: boolean = false): MsgConnectionOpenAckAmino {
     const obj: any = {};
     obj.connection_id = message.connectionId;
     obj.counterparty_connection_id = message.counterpartyConnectionId;
-    obj.version = message.version ? Version.toAmino(message.version) : undefined;
-    obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
-    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    obj.version = message.version ? Version.toAmino(message.version, useInterfaces) : undefined;
+    obj.client_state = message.clientState ? Any.toAmino(message.clientState, useInterfaces) : undefined;
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.proof_try = message.proofTry;
     obj.proof_client = message.proofClient;
     obj.proof_consensus = message.proofConsensus;
-    obj.consensus_height = message.consensusHeight ? Height.toAmino(message.consensusHeight) : {};
+    obj.consensus_height = message.consensusHeight ? Height.toAmino(message.consensusHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;
   },
-  fromProtoMsg(message: MsgConnectionOpenAckProtoMsg): MsgConnectionOpenAck {
-    return MsgConnectionOpenAck.decode(message.value);
+  fromProtoMsg(message: MsgConnectionOpenAckProtoMsg, useInterfaces: boolean = false): MsgConnectionOpenAck {
+    return MsgConnectionOpenAck.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConnectionOpenAck): Uint8Array {
     return MsgConnectionOpenAck.encode(message).finish();
@@ -1019,7 +1019,7 @@ export const MsgConnectionOpenAckResponse = {
   encode(_: MsgConnectionOpenAckResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgConnectionOpenAckResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConnectionOpenAckResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenAckResponse();
@@ -1055,12 +1055,12 @@ export const MsgConnectionOpenAckResponse = {
   fromAmino(_: MsgConnectionOpenAckResponseAmino): MsgConnectionOpenAckResponse {
     return {};
   },
-  toAmino(_: MsgConnectionOpenAckResponse): MsgConnectionOpenAckResponseAmino {
+  toAmino(_: MsgConnectionOpenAckResponse, useInterfaces: boolean = false): MsgConnectionOpenAckResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgConnectionOpenAckResponseProtoMsg): MsgConnectionOpenAckResponse {
-    return MsgConnectionOpenAckResponse.decode(message.value);
+  fromProtoMsg(message: MsgConnectionOpenAckResponseProtoMsg, useInterfaces: boolean = false): MsgConnectionOpenAckResponse {
+    return MsgConnectionOpenAckResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConnectionOpenAckResponse): Uint8Array {
     return MsgConnectionOpenAckResponse.encode(message).finish();
@@ -1098,7 +1098,7 @@ export const MsgConnectionOpenConfirm = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgConnectionOpenConfirm {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConnectionOpenConfirm {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenConfirm();
@@ -1112,7 +1112,7 @@ export const MsgConnectionOpenConfirm = {
           message.proofAck = reader.bytes();
           break;
         case 3:
-          message.proofHeight = Height.decode(reader, reader.uint32());
+          message.proofHeight = Height.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
           message.signer = reader.string();
@@ -1174,16 +1174,16 @@ export const MsgConnectionOpenConfirm = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgConnectionOpenConfirm): MsgConnectionOpenConfirmAmino {
+  toAmino(message: MsgConnectionOpenConfirm, useInterfaces: boolean = false): MsgConnectionOpenConfirmAmino {
     const obj: any = {};
     obj.connection_id = message.connectionId;
     obj.proof_ack = message.proofAck;
-    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;
   },
-  fromProtoMsg(message: MsgConnectionOpenConfirmProtoMsg): MsgConnectionOpenConfirm {
-    return MsgConnectionOpenConfirm.decode(message.value);
+  fromProtoMsg(message: MsgConnectionOpenConfirmProtoMsg, useInterfaces: boolean = false): MsgConnectionOpenConfirm {
+    return MsgConnectionOpenConfirm.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConnectionOpenConfirm): Uint8Array {
     return MsgConnectionOpenConfirm.encode(message).finish();
@@ -1204,7 +1204,7 @@ export const MsgConnectionOpenConfirmResponse = {
   encode(_: MsgConnectionOpenConfirmResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgConnectionOpenConfirmResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgConnectionOpenConfirmResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgConnectionOpenConfirmResponse();
@@ -1240,12 +1240,12 @@ export const MsgConnectionOpenConfirmResponse = {
   fromAmino(_: MsgConnectionOpenConfirmResponseAmino): MsgConnectionOpenConfirmResponse {
     return {};
   },
-  toAmino(_: MsgConnectionOpenConfirmResponse): MsgConnectionOpenConfirmResponseAmino {
+  toAmino(_: MsgConnectionOpenConfirmResponse, useInterfaces: boolean = false): MsgConnectionOpenConfirmResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgConnectionOpenConfirmResponseProtoMsg): MsgConnectionOpenConfirmResponse {
-    return MsgConnectionOpenConfirmResponse.decode(message.value);
+  fromProtoMsg(message: MsgConnectionOpenConfirmResponseProtoMsg, useInterfaces: boolean = false): MsgConnectionOpenConfirmResponse {
+    return MsgConnectionOpenConfirmResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgConnectionOpenConfirmResponse): Uint8Array {
     return MsgConnectionOpenConfirmResponse.encode(message).finish();

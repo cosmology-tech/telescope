@@ -39,7 +39,7 @@ export const QueryConfigRequest = {
   encode(_: QueryConfigRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryConfigRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConfigRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConfigRequest();
@@ -75,12 +75,12 @@ export const QueryConfigRequest = {
   fromAmino(_: QueryConfigRequestAmino): QueryConfigRequest {
     return {};
   },
-  toAmino(_: QueryConfigRequest): QueryConfigRequestAmino {
+  toAmino(_: QueryConfigRequest, useInterfaces: boolean = false): QueryConfigRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: QueryConfigRequestProtoMsg): QueryConfigRequest {
-    return QueryConfigRequest.decode(message.value);
+  fromProtoMsg(message: QueryConfigRequestProtoMsg, useInterfaces: boolean = false): QueryConfigRequest {
+    return QueryConfigRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConfigRequest): Uint8Array {
     return QueryConfigRequest.encode(message).finish();
@@ -106,7 +106,7 @@ export const QueryConfigResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryConfigResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConfigResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConfigResponse();
@@ -114,7 +114,7 @@ export const QueryConfigResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.config = Config.decode(reader, reader.uint32());
+          message.config = Config.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -155,13 +155,13 @@ export const QueryConfigResponse = {
       config: object?.config ? Config.fromAmino(object.config) : undefined
     };
   },
-  toAmino(message: QueryConfigResponse): QueryConfigResponseAmino {
+  toAmino(message: QueryConfigResponse, useInterfaces: boolean = false): QueryConfigResponseAmino {
     const obj: any = {};
-    obj.config = message.config ? Config.toAmino(message.config) : undefined;
+    obj.config = message.config ? Config.toAmino(message.config, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryConfigResponseProtoMsg): QueryConfigResponse {
-    return QueryConfigResponse.decode(message.value);
+  fromProtoMsg(message: QueryConfigResponseProtoMsg, useInterfaces: boolean = false): QueryConfigResponse {
+    return QueryConfigResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConfigResponse): Uint8Array {
     return QueryConfigResponse.encode(message).finish();

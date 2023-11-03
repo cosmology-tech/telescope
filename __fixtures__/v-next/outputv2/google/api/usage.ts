@@ -236,7 +236,7 @@ export const Usage = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Usage {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Usage {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUsage();
@@ -247,7 +247,7 @@ export const Usage = {
           message.requirements.push(reader.string());
           break;
         case 6:
-          message.rules.push(UsageRule.decode(reader, reader.uint32()));
+          message.rules.push(UsageRule.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 7:
           message.producerNotificationChannel = reader.string();
@@ -317,7 +317,7 @@ export const Usage = {
       producerNotificationChannel: object.producer_notification_channel
     };
   },
-  toAmino(message: Usage): UsageAmino {
+  toAmino(message: Usage, useInterfaces: boolean = false): UsageAmino {
     const obj: any = {};
     if (message.requirements) {
       obj.requirements = message.requirements.map(e => e);
@@ -325,7 +325,7 @@ export const Usage = {
       obj.requirements = [];
     }
     if (message.rules) {
-      obj.rules = message.rules.map(e => e ? UsageRule.toAmino(e) : undefined);
+      obj.rules = message.rules.map(e => e ? UsageRule.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.rules = [];
     }
@@ -335,8 +335,8 @@ export const Usage = {
   fromAminoMsg(object: UsageAminoMsg): Usage {
     return Usage.fromAmino(object.value);
   },
-  fromProtoMsg(message: UsageProtoMsg): Usage {
-    return Usage.decode(message.value);
+  fromProtoMsg(message: UsageProtoMsg, useInterfaces: boolean = false): Usage {
+    return Usage.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Usage): Uint8Array {
     return Usage.encode(message).finish();
@@ -369,7 +369,7 @@ export const UsageRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UsageRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): UsageRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUsageRule();
@@ -434,7 +434,7 @@ export const UsageRule = {
       skipServiceControl: object.skip_service_control
     };
   },
-  toAmino(message: UsageRule): UsageRuleAmino {
+  toAmino(message: UsageRule, useInterfaces: boolean = false): UsageRuleAmino {
     const obj: any = {};
     obj.selector = message.selector;
     obj.allow_unregistered_calls = message.allowUnregisteredCalls;
@@ -444,8 +444,8 @@ export const UsageRule = {
   fromAminoMsg(object: UsageRuleAminoMsg): UsageRule {
     return UsageRule.fromAmino(object.value);
   },
-  fromProtoMsg(message: UsageRuleProtoMsg): UsageRule {
-    return UsageRule.decode(message.value);
+  fromProtoMsg(message: UsageRuleProtoMsg, useInterfaces: boolean = false): UsageRule {
+    return UsageRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UsageRule): Uint8Array {
     return UsageRule.encode(message).finish();

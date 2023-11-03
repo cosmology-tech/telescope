@@ -36,7 +36,7 @@ export const BitArray = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): BitArray {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): BitArray {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBitArray();
@@ -109,7 +109,7 @@ export const BitArray = {
       elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => BigInt(e)) : []
     };
   },
-  toAmino(message: BitArray): BitArrayAmino {
+  toAmino(message: BitArray, useInterfaces: boolean = false): BitArrayAmino {
     const obj: any = {};
     obj.bits = message.bits ? message.bits.toString() : undefined;
     if (message.elems) {
@@ -119,8 +119,8 @@ export const BitArray = {
     }
     return obj;
   },
-  fromProtoMsg(message: BitArrayProtoMsg): BitArray {
-    return BitArray.decode(message.value);
+  fromProtoMsg(message: BitArrayProtoMsg, useInterfaces: boolean = false): BitArray {
+    return BitArray.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BitArray): Uint8Array {
     return BitArray.encode(message).finish();

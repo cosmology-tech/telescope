@@ -223,7 +223,7 @@ export const Minter = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Minter {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Minter {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMinter();
@@ -270,13 +270,13 @@ export const Minter = {
       epochProvisions: object.epoch_provisions
     };
   },
-  toAmino(message: Minter): MinterAmino {
+  toAmino(message: Minter, useInterfaces: boolean = false): MinterAmino {
     const obj: any = {};
     obj.epoch_provisions = message.epochProvisions;
     return obj;
   },
-  fromProtoMsg(message: MinterProtoMsg): Minter {
-    return Minter.decode(message.value);
+  fromProtoMsg(message: MinterProtoMsg, useInterfaces: boolean = false): Minter {
+    return Minter.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Minter): Uint8Array {
     return Minter.encode(message).finish();
@@ -306,7 +306,7 @@ export const WeightedAddress = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): WeightedAddress {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): WeightedAddress {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWeightedAddress();
@@ -362,14 +362,14 @@ export const WeightedAddress = {
       weight: object.weight
     };
   },
-  toAmino(message: WeightedAddress): WeightedAddressAmino {
+  toAmino(message: WeightedAddress, useInterfaces: boolean = false): WeightedAddressAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.weight = message.weight;
     return obj;
   },
-  fromProtoMsg(message: WeightedAddressProtoMsg): WeightedAddress {
-    return WeightedAddress.decode(message.value);
+  fromProtoMsg(message: WeightedAddressProtoMsg, useInterfaces: boolean = false): WeightedAddress {
+    return WeightedAddress.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: WeightedAddress): Uint8Array {
     return WeightedAddress.encode(message).finish();
@@ -407,7 +407,7 @@ export const DistributionProportions = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DistributionProportions {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DistributionProportions {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistributionProportions();
@@ -481,7 +481,7 @@ export const DistributionProportions = {
       communityPool: object.community_pool
     };
   },
-  toAmino(message: DistributionProportions): DistributionProportionsAmino {
+  toAmino(message: DistributionProportions, useInterfaces: boolean = false): DistributionProportionsAmino {
     const obj: any = {};
     obj.staking = message.staking;
     obj.pool_incentives = message.poolIncentives;
@@ -489,8 +489,8 @@ export const DistributionProportions = {
     obj.community_pool = message.communityPool;
     return obj;
   },
-  fromProtoMsg(message: DistributionProportionsProtoMsg): DistributionProportions {
-    return DistributionProportions.decode(message.value);
+  fromProtoMsg(message: DistributionProportionsProtoMsg, useInterfaces: boolean = false): DistributionProportions {
+    return DistributionProportions.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DistributionProportions): Uint8Array {
     return DistributionProportions.encode(message).finish();
@@ -544,7 +544,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -567,10 +567,10 @@ export const Params = {
           message.reductionFactor = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 6:
-          message.distributionProportions = DistributionProportions.decode(reader, reader.uint32());
+          message.distributionProportions = DistributionProportions.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 7:
-          message.weightedDeveloperRewardsReceivers.push(WeightedAddress.decode(reader, reader.uint32()));
+          message.weightedDeveloperRewardsReceivers.push(WeightedAddress.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 8:
           message.mintingRewardsDistributionStartEpoch = reader.int64();
@@ -668,24 +668,24 @@ export const Params = {
       mintingRewardsDistributionStartEpoch: BigInt(object.minting_rewards_distribution_start_epoch)
     };
   },
-  toAmino(message: Params): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = false): ParamsAmino {
     const obj: any = {};
     obj.mint_denom = message.mintDenom;
     obj.genesis_epoch_provisions = message.genesisEpochProvisions;
     obj.epoch_identifier = message.epochIdentifier;
     obj.reduction_period_in_epochs = message.reductionPeriodInEpochs ? message.reductionPeriodInEpochs.toString() : undefined;
     obj.reduction_factor = message.reductionFactor;
-    obj.distribution_proportions = message.distributionProportions ? DistributionProportions.toAmino(message.distributionProportions) : undefined;
+    obj.distribution_proportions = message.distributionProportions ? DistributionProportions.toAmino(message.distributionProportions, useInterfaces) : undefined;
     if (message.weightedDeveloperRewardsReceivers) {
-      obj.weighted_developer_rewards_receivers = message.weightedDeveloperRewardsReceivers.map(e => e ? WeightedAddress.toAmino(e) : undefined);
+      obj.weighted_developer_rewards_receivers = message.weightedDeveloperRewardsReceivers.map(e => e ? WeightedAddress.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.weighted_developer_rewards_receivers = [];
     }
     obj.minting_rewards_distribution_start_epoch = message.mintingRewardsDistributionStartEpoch ? message.mintingRewardsDistributionStartEpoch.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = false): Params {
+    return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();

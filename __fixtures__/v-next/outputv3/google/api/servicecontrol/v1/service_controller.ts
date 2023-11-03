@@ -467,7 +467,7 @@ export const CheckRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CheckRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CheckRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckRequest();
@@ -478,7 +478,7 @@ export const CheckRequest = {
           message.serviceName = reader.string();
           break;
         case 2:
-          message.operation = Operation.decode(reader, reader.uint32());
+          message.operation = Operation.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
           message.serviceConfigId = reader.string();
@@ -534,15 +534,15 @@ export const CheckRequest = {
       serviceConfigId: object.service_config_id
     };
   },
-  toAmino(message: CheckRequest): CheckRequestAmino {
+  toAmino(message: CheckRequest, useInterfaces: boolean = false): CheckRequestAmino {
     const obj: any = {};
     obj.service_name = message.serviceName;
-    obj.operation = message.operation ? Operation.toAmino(message.operation) : undefined;
+    obj.operation = message.operation ? Operation.toAmino(message.operation, useInterfaces) : undefined;
     obj.service_config_id = message.serviceConfigId;
     return obj;
   },
-  fromProtoMsg(message: CheckRequestProtoMsg): CheckRequest {
-    return CheckRequest.decode(message.value);
+  fromProtoMsg(message: CheckRequestProtoMsg, useInterfaces: boolean = false): CheckRequest {
+    return CheckRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CheckRequest): Uint8Array {
     return CheckRequest.encode(message).finish();
@@ -583,7 +583,7 @@ export const CheckResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CheckResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CheckResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResponse();
@@ -594,7 +594,7 @@ export const CheckResponse = {
           message.operationId = reader.string();
           break;
         case 2:
-          message.checkErrors.push(CheckError.decode(reader, reader.uint32()));
+          message.checkErrors.push(CheckError.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 5:
           message.serviceConfigId = reader.string();
@@ -603,7 +603,7 @@ export const CheckResponse = {
           message.serviceRolloutId = reader.string();
           break;
         case 6:
-          message.checkInfo = CheckResponse_CheckInfo.decode(reader, reader.uint32());
+          message.checkInfo = CheckResponse_CheckInfo.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -676,21 +676,21 @@ export const CheckResponse = {
       checkInfo: object?.check_info ? CheckResponse_CheckInfo.fromAmino(object.check_info) : undefined
     };
   },
-  toAmino(message: CheckResponse): CheckResponseAmino {
+  toAmino(message: CheckResponse, useInterfaces: boolean = false): CheckResponseAmino {
     const obj: any = {};
     obj.operation_id = message.operationId;
     if (message.checkErrors) {
-      obj.check_errors = message.checkErrors.map(e => e ? CheckError.toAmino(e) : undefined);
+      obj.check_errors = message.checkErrors.map(e => e ? CheckError.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.check_errors = [];
     }
     obj.service_config_id = message.serviceConfigId;
     obj.service_rollout_id = message.serviceRolloutId;
-    obj.check_info = message.checkInfo ? CheckResponse_CheckInfo.toAmino(message.checkInfo) : undefined;
+    obj.check_info = message.checkInfo ? CheckResponse_CheckInfo.toAmino(message.checkInfo, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: CheckResponseProtoMsg): CheckResponse {
-    return CheckResponse.decode(message.value);
+  fromProtoMsg(message: CheckResponseProtoMsg, useInterfaces: boolean = false): CheckResponse {
+    return CheckResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CheckResponse): Uint8Array {
     return CheckResponse.encode(message).finish();
@@ -719,7 +719,7 @@ export const CheckResponse_CheckInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CheckResponse_CheckInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CheckResponse_CheckInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResponse_CheckInfo();
@@ -730,7 +730,7 @@ export const CheckResponse_CheckInfo = {
           message.unusedArguments.push(reader.string());
           break;
         case 2:
-          message.consumerInfo = CheckResponse_ConsumerInfo.decode(reader, reader.uint32());
+          message.consumerInfo = CheckResponse_ConsumerInfo.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -785,18 +785,18 @@ export const CheckResponse_CheckInfo = {
       consumerInfo: object?.consumer_info ? CheckResponse_ConsumerInfo.fromAmino(object.consumer_info) : undefined
     };
   },
-  toAmino(message: CheckResponse_CheckInfo): CheckResponse_CheckInfoAmino {
+  toAmino(message: CheckResponse_CheckInfo, useInterfaces: boolean = false): CheckResponse_CheckInfoAmino {
     const obj: any = {};
     if (message.unusedArguments) {
       obj.unused_arguments = message.unusedArguments.map(e => e);
     } else {
       obj.unused_arguments = [];
     }
-    obj.consumer_info = message.consumerInfo ? CheckResponse_ConsumerInfo.toAmino(message.consumerInfo) : undefined;
+    obj.consumer_info = message.consumerInfo ? CheckResponse_ConsumerInfo.toAmino(message.consumerInfo, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: CheckResponse_CheckInfoProtoMsg): CheckResponse_CheckInfo {
-    return CheckResponse_CheckInfo.decode(message.value);
+  fromProtoMsg(message: CheckResponse_CheckInfoProtoMsg, useInterfaces: boolean = false): CheckResponse_CheckInfo {
+    return CheckResponse_CheckInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CheckResponse_CheckInfo): Uint8Array {
     return CheckResponse_CheckInfo.encode(message).finish();
@@ -829,7 +829,7 @@ export const CheckResponse_ConsumerInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CheckResponse_ConsumerInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CheckResponse_ConsumerInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResponse_ConsumerInfo();
@@ -898,15 +898,15 @@ export const CheckResponse_ConsumerInfo = {
       consumerNumber: BigInt(object.consumer_number)
     };
   },
-  toAmino(message: CheckResponse_ConsumerInfo): CheckResponse_ConsumerInfoAmino {
+  toAmino(message: CheckResponse_ConsumerInfo, useInterfaces: boolean = false): CheckResponse_ConsumerInfoAmino {
     const obj: any = {};
     obj.project_number = message.projectNumber ? message.projectNumber.toString() : undefined;
     obj.type = message.type;
     obj.consumer_number = message.consumerNumber ? message.consumerNumber.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: CheckResponse_ConsumerInfoProtoMsg): CheckResponse_ConsumerInfo {
-    return CheckResponse_ConsumerInfo.decode(message.value);
+  fromProtoMsg(message: CheckResponse_ConsumerInfoProtoMsg, useInterfaces: boolean = false): CheckResponse_ConsumerInfo {
+    return CheckResponse_ConsumerInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CheckResponse_ConsumerInfo): Uint8Array {
     return CheckResponse_ConsumerInfo.encode(message).finish();
@@ -939,7 +939,7 @@ export const ReportRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ReportRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ReportRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReportRequest();
@@ -950,7 +950,7 @@ export const ReportRequest = {
           message.serviceName = reader.string();
           break;
         case 2:
-          message.operations.push(Operation.decode(reader, reader.uint32()));
+          message.operations.push(Operation.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
           message.serviceConfigId = reader.string();
@@ -1012,19 +1012,19 @@ export const ReportRequest = {
       serviceConfigId: object.service_config_id
     };
   },
-  toAmino(message: ReportRequest): ReportRequestAmino {
+  toAmino(message: ReportRequest, useInterfaces: boolean = false): ReportRequestAmino {
     const obj: any = {};
     obj.service_name = message.serviceName;
     if (message.operations) {
-      obj.operations = message.operations.map(e => e ? Operation.toAmino(e) : undefined);
+      obj.operations = message.operations.map(e => e ? Operation.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.operations = [];
     }
     obj.service_config_id = message.serviceConfigId;
     return obj;
   },
-  fromProtoMsg(message: ReportRequestProtoMsg): ReportRequest {
-    return ReportRequest.decode(message.value);
+  fromProtoMsg(message: ReportRequestProtoMsg, useInterfaces: boolean = false): ReportRequest {
+    return ReportRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ReportRequest): Uint8Array {
     return ReportRequest.encode(message).finish();
@@ -1057,7 +1057,7 @@ export const ReportResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ReportResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ReportResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReportResponse();
@@ -1065,7 +1065,7 @@ export const ReportResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.reportErrors.push(ReportResponse_ReportError.decode(reader, reader.uint32()));
+          message.reportErrors.push(ReportResponse_ReportError.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.serviceConfigId = reader.string();
@@ -1130,10 +1130,10 @@ export const ReportResponse = {
       serviceRolloutId: object.service_rollout_id
     };
   },
-  toAmino(message: ReportResponse): ReportResponseAmino {
+  toAmino(message: ReportResponse, useInterfaces: boolean = false): ReportResponseAmino {
     const obj: any = {};
     if (message.reportErrors) {
-      obj.report_errors = message.reportErrors.map(e => e ? ReportResponse_ReportError.toAmino(e) : undefined);
+      obj.report_errors = message.reportErrors.map(e => e ? ReportResponse_ReportError.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.report_errors = [];
     }
@@ -1141,8 +1141,8 @@ export const ReportResponse = {
     obj.service_rollout_id = message.serviceRolloutId;
     return obj;
   },
-  fromProtoMsg(message: ReportResponseProtoMsg): ReportResponse {
-    return ReportResponse.decode(message.value);
+  fromProtoMsg(message: ReportResponseProtoMsg, useInterfaces: boolean = false): ReportResponse {
+    return ReportResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ReportResponse): Uint8Array {
     return ReportResponse.encode(message).finish();
@@ -1171,7 +1171,7 @@ export const ReportResponse_ReportError = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ReportResponse_ReportError {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ReportResponse_ReportError {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReportResponse_ReportError();
@@ -1182,7 +1182,7 @@ export const ReportResponse_ReportError = {
           message.operationId = reader.string();
           break;
         case 2:
-          message.status = Status.decode(reader, reader.uint32());
+          message.status = Status.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1229,14 +1229,14 @@ export const ReportResponse_ReportError = {
       status: object?.status ? Status.fromAmino(object.status) : undefined
     };
   },
-  toAmino(message: ReportResponse_ReportError): ReportResponse_ReportErrorAmino {
+  toAmino(message: ReportResponse_ReportError, useInterfaces: boolean = false): ReportResponse_ReportErrorAmino {
     const obj: any = {};
     obj.operation_id = message.operationId;
-    obj.status = message.status ? Status.toAmino(message.status) : undefined;
+    obj.status = message.status ? Status.toAmino(message.status, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: ReportResponse_ReportErrorProtoMsg): ReportResponse_ReportError {
-    return ReportResponse_ReportError.decode(message.value);
+  fromProtoMsg(message: ReportResponse_ReportErrorProtoMsg, useInterfaces: boolean = false): ReportResponse_ReportError {
+    return ReportResponse_ReportError.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ReportResponse_ReportError): Uint8Array {
     return ReportResponse_ReportError.encode(message).finish();

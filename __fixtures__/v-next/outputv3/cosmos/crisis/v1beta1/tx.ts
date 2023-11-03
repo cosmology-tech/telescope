@@ -55,7 +55,7 @@ export const MsgVerifyInvariant = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgVerifyInvariant {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgVerifyInvariant {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVerifyInvariant();
@@ -120,15 +120,15 @@ export const MsgVerifyInvariant = {
       invariantRoute: object.invariant_route
     };
   },
-  toAmino(message: MsgVerifyInvariant): MsgVerifyInvariantAmino {
+  toAmino(message: MsgVerifyInvariant, useInterfaces: boolean = false): MsgVerifyInvariantAmino {
     const obj: any = {};
     obj.sender = message.sender;
     obj.invariant_module_name = message.invariantModuleName;
     obj.invariant_route = message.invariantRoute;
     return obj;
   },
-  fromProtoMsg(message: MsgVerifyInvariantProtoMsg): MsgVerifyInvariant {
-    return MsgVerifyInvariant.decode(message.value);
+  fromProtoMsg(message: MsgVerifyInvariantProtoMsg, useInterfaces: boolean = false): MsgVerifyInvariant {
+    return MsgVerifyInvariant.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgVerifyInvariant): Uint8Array {
     return MsgVerifyInvariant.encode(message).finish();
@@ -149,7 +149,7 @@ export const MsgVerifyInvariantResponse = {
   encode(_: MsgVerifyInvariantResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgVerifyInvariantResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgVerifyInvariantResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVerifyInvariantResponse();
@@ -185,12 +185,12 @@ export const MsgVerifyInvariantResponse = {
   fromAmino(_: MsgVerifyInvariantResponseAmino): MsgVerifyInvariantResponse {
     return {};
   },
-  toAmino(_: MsgVerifyInvariantResponse): MsgVerifyInvariantResponseAmino {
+  toAmino(_: MsgVerifyInvariantResponse, useInterfaces: boolean = false): MsgVerifyInvariantResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgVerifyInvariantResponseProtoMsg): MsgVerifyInvariantResponse {
-    return MsgVerifyInvariantResponse.decode(message.value);
+  fromProtoMsg(message: MsgVerifyInvariantResponseProtoMsg, useInterfaces: boolean = false): MsgVerifyInvariantResponse {
+    return MsgVerifyInvariantResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgVerifyInvariantResponse): Uint8Array {
     return MsgVerifyInvariantResponse.encode(message).finish();

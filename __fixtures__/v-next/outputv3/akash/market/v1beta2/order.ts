@@ -154,7 +154,7 @@ export const OrderID = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): OrderID {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): OrderID {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrderID();
@@ -230,7 +230,7 @@ export const OrderID = {
       oseq: object.oseq
     };
   },
-  toAmino(message: OrderID): OrderIDAmino {
+  toAmino(message: OrderID, useInterfaces: boolean = false): OrderIDAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.dseq = message.dseq ? message.dseq.toString() : undefined;
@@ -238,8 +238,8 @@ export const OrderID = {
     obj.oseq = message.oseq;
     return obj;
   },
-  fromProtoMsg(message: OrderIDProtoMsg): OrderID {
-    return OrderID.decode(message.value);
+  fromProtoMsg(message: OrderIDProtoMsg, useInterfaces: boolean = false): OrderID {
+    return OrderID.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: OrderID): Uint8Array {
     return OrderID.encode(message).finish();
@@ -276,7 +276,7 @@ export const Order = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Order {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Order {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrder();
@@ -284,13 +284,13 @@ export const Order = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.orderId = OrderID.decode(reader, reader.uint32());
+          message.orderId = OrderID.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.state = (reader.int32() as any);
           break;
         case 3:
-          message.spec = GroupSpec.decode(reader, reader.uint32());
+          message.spec = GroupSpec.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
           message.createdAt = reader.int64();
@@ -356,16 +356,16 @@ export const Order = {
       createdAt: BigInt(object.created_at)
     };
   },
-  toAmino(message: Order): OrderAmino {
+  toAmino(message: Order, useInterfaces: boolean = false): OrderAmino {
     const obj: any = {};
-    obj.order_id = message.orderId ? OrderID.toAmino(message.orderId) : undefined;
+    obj.order_id = message.orderId ? OrderID.toAmino(message.orderId, useInterfaces) : undefined;
     obj.state = message.state;
-    obj.spec = message.spec ? GroupSpec.toAmino(message.spec) : undefined;
+    obj.spec = message.spec ? GroupSpec.toAmino(message.spec, useInterfaces) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: OrderProtoMsg): Order {
-    return Order.decode(message.value);
+  fromProtoMsg(message: OrderProtoMsg, useInterfaces: boolean = false): Order {
+    return Order.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Order): Uint8Array {
     return Order.encode(message).finish();
@@ -406,7 +406,7 @@ export const OrderFilters = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): OrderFilters {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): OrderFilters {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOrderFilters();
@@ -491,7 +491,7 @@ export const OrderFilters = {
       state: object.state
     };
   },
-  toAmino(message: OrderFilters): OrderFiltersAmino {
+  toAmino(message: OrderFilters, useInterfaces: boolean = false): OrderFiltersAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.dseq = message.dseq ? message.dseq.toString() : undefined;
@@ -500,8 +500,8 @@ export const OrderFilters = {
     obj.state = message.state;
     return obj;
   },
-  fromProtoMsg(message: OrderFiltersProtoMsg): OrderFilters {
-    return OrderFilters.decode(message.value);
+  fromProtoMsg(message: OrderFiltersProtoMsg, useInterfaces: boolean = false): OrderFilters {
+    return OrderFilters.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: OrderFilters): Uint8Array {
     return OrderFilters.encode(message).finish();

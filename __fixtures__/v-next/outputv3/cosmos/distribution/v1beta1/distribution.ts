@@ -404,7 +404,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -478,7 +478,7 @@ export const Params = {
       withdrawAddrEnabled: object.withdraw_addr_enabled
     };
   },
-  toAmino(message: Params): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = false): ParamsAmino {
     const obj: any = {};
     obj.community_tax = message.communityTax;
     obj.base_proposer_reward = message.baseProposerReward;
@@ -486,8 +486,8 @@ export const Params = {
     obj.withdraw_addr_enabled = message.withdrawAddrEnabled;
     return obj;
   },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = false): Params {
+    return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();
@@ -517,7 +517,7 @@ export const ValidatorHistoricalRewards = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorHistoricalRewards {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ValidatorHistoricalRewards {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorHistoricalRewards();
@@ -525,7 +525,7 @@ export const ValidatorHistoricalRewards = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.cumulativeRewardRatio.push(DecCoin.decode(reader, reader.uint32()));
+          message.cumulativeRewardRatio.push(DecCoin.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.referenceCount = reader.uint32();
@@ -581,18 +581,18 @@ export const ValidatorHistoricalRewards = {
       referenceCount: object.reference_count
     };
   },
-  toAmino(message: ValidatorHistoricalRewards): ValidatorHistoricalRewardsAmino {
+  toAmino(message: ValidatorHistoricalRewards, useInterfaces: boolean = false): ValidatorHistoricalRewardsAmino {
     const obj: any = {};
     if (message.cumulativeRewardRatio) {
-      obj.cumulative_reward_ratio = message.cumulativeRewardRatio.map(e => e ? DecCoin.toAmino(e) : undefined);
+      obj.cumulative_reward_ratio = message.cumulativeRewardRatio.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.cumulative_reward_ratio = [];
     }
     obj.reference_count = message.referenceCount;
     return obj;
   },
-  fromProtoMsg(message: ValidatorHistoricalRewardsProtoMsg): ValidatorHistoricalRewards {
-    return ValidatorHistoricalRewards.decode(message.value);
+  fromProtoMsg(message: ValidatorHistoricalRewardsProtoMsg, useInterfaces: boolean = false): ValidatorHistoricalRewards {
+    return ValidatorHistoricalRewards.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorHistoricalRewards): Uint8Array {
     return ValidatorHistoricalRewards.encode(message).finish();
@@ -622,7 +622,7 @@ export const ValidatorCurrentRewards = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorCurrentRewards {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ValidatorCurrentRewards {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorCurrentRewards();
@@ -630,7 +630,7 @@ export const ValidatorCurrentRewards = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.rewards.push(DecCoin.decode(reader, reader.uint32()));
+          message.rewards.push(DecCoin.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.period = reader.uint64();
@@ -688,18 +688,18 @@ export const ValidatorCurrentRewards = {
       period: BigInt(object.period)
     };
   },
-  toAmino(message: ValidatorCurrentRewards): ValidatorCurrentRewardsAmino {
+  toAmino(message: ValidatorCurrentRewards, useInterfaces: boolean = false): ValidatorCurrentRewardsAmino {
     const obj: any = {};
     if (message.rewards) {
-      obj.rewards = message.rewards.map(e => e ? DecCoin.toAmino(e) : undefined);
+      obj.rewards = message.rewards.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.rewards = [];
     }
     obj.period = message.period ? message.period.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: ValidatorCurrentRewardsProtoMsg): ValidatorCurrentRewards {
-    return ValidatorCurrentRewards.decode(message.value);
+  fromProtoMsg(message: ValidatorCurrentRewardsProtoMsg, useInterfaces: boolean = false): ValidatorCurrentRewards {
+    return ValidatorCurrentRewards.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorCurrentRewards): Uint8Array {
     return ValidatorCurrentRewards.encode(message).finish();
@@ -725,7 +725,7 @@ export const ValidatorAccumulatedCommission = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorAccumulatedCommission {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ValidatorAccumulatedCommission {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorAccumulatedCommission();
@@ -733,7 +733,7 @@ export const ValidatorAccumulatedCommission = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.commission.push(DecCoin.decode(reader, reader.uint32()));
+          message.commission.push(DecCoin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -780,17 +780,17 @@ export const ValidatorAccumulatedCommission = {
       commission: Array.isArray(object?.commission) ? object.commission.map((e: any) => DecCoin.fromAmino(e)) : []
     };
   },
-  toAmino(message: ValidatorAccumulatedCommission): ValidatorAccumulatedCommissionAmino {
+  toAmino(message: ValidatorAccumulatedCommission, useInterfaces: boolean = false): ValidatorAccumulatedCommissionAmino {
     const obj: any = {};
     if (message.commission) {
-      obj.commission = message.commission.map(e => e ? DecCoin.toAmino(e) : undefined);
+      obj.commission = message.commission.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.commission = [];
     }
     return obj;
   },
-  fromProtoMsg(message: ValidatorAccumulatedCommissionProtoMsg): ValidatorAccumulatedCommission {
-    return ValidatorAccumulatedCommission.decode(message.value);
+  fromProtoMsg(message: ValidatorAccumulatedCommissionProtoMsg, useInterfaces: boolean = false): ValidatorAccumulatedCommission {
+    return ValidatorAccumulatedCommission.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorAccumulatedCommission): Uint8Array {
     return ValidatorAccumulatedCommission.encode(message).finish();
@@ -816,7 +816,7 @@ export const ValidatorOutstandingRewards = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorOutstandingRewards {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ValidatorOutstandingRewards {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorOutstandingRewards();
@@ -824,7 +824,7 @@ export const ValidatorOutstandingRewards = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.rewards.push(DecCoin.decode(reader, reader.uint32()));
+          message.rewards.push(DecCoin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -871,17 +871,17 @@ export const ValidatorOutstandingRewards = {
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromAmino(e)) : []
     };
   },
-  toAmino(message: ValidatorOutstandingRewards): ValidatorOutstandingRewardsAmino {
+  toAmino(message: ValidatorOutstandingRewards, useInterfaces: boolean = false): ValidatorOutstandingRewardsAmino {
     const obj: any = {};
     if (message.rewards) {
-      obj.rewards = message.rewards.map(e => e ? DecCoin.toAmino(e) : undefined);
+      obj.rewards = message.rewards.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.rewards = [];
     }
     return obj;
   },
-  fromProtoMsg(message: ValidatorOutstandingRewardsProtoMsg): ValidatorOutstandingRewards {
-    return ValidatorOutstandingRewards.decode(message.value);
+  fromProtoMsg(message: ValidatorOutstandingRewardsProtoMsg, useInterfaces: boolean = false): ValidatorOutstandingRewards {
+    return ValidatorOutstandingRewards.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorOutstandingRewards): Uint8Array {
     return ValidatorOutstandingRewards.encode(message).finish();
@@ -911,7 +911,7 @@ export const ValidatorSlashEvent = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorSlashEvent {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ValidatorSlashEvent {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorSlashEvent();
@@ -969,14 +969,14 @@ export const ValidatorSlashEvent = {
       fraction: object.fraction
     };
   },
-  toAmino(message: ValidatorSlashEvent): ValidatorSlashEventAmino {
+  toAmino(message: ValidatorSlashEvent, useInterfaces: boolean = false): ValidatorSlashEventAmino {
     const obj: any = {};
     obj.validator_period = message.validatorPeriod ? message.validatorPeriod.toString() : undefined;
     obj.fraction = message.fraction;
     return obj;
   },
-  fromProtoMsg(message: ValidatorSlashEventProtoMsg): ValidatorSlashEvent {
-    return ValidatorSlashEvent.decode(message.value);
+  fromProtoMsg(message: ValidatorSlashEventProtoMsg, useInterfaces: boolean = false): ValidatorSlashEvent {
+    return ValidatorSlashEvent.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorSlashEvent): Uint8Array {
     return ValidatorSlashEvent.encode(message).finish();
@@ -1002,7 +1002,7 @@ export const ValidatorSlashEvents = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorSlashEvents {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ValidatorSlashEvents {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorSlashEvents();
@@ -1010,7 +1010,7 @@ export const ValidatorSlashEvents = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.validatorSlashEvents.push(ValidatorSlashEvent.decode(reader, reader.uint32()));
+          message.validatorSlashEvents.push(ValidatorSlashEvent.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1057,17 +1057,17 @@ export const ValidatorSlashEvents = {
       validatorSlashEvents: Array.isArray(object?.validator_slash_events) ? object.validator_slash_events.map((e: any) => ValidatorSlashEvent.fromAmino(e)) : []
     };
   },
-  toAmino(message: ValidatorSlashEvents): ValidatorSlashEventsAmino {
+  toAmino(message: ValidatorSlashEvents, useInterfaces: boolean = false): ValidatorSlashEventsAmino {
     const obj: any = {};
     if (message.validatorSlashEvents) {
-      obj.validator_slash_events = message.validatorSlashEvents.map(e => e ? ValidatorSlashEvent.toAmino(e) : undefined);
+      obj.validator_slash_events = message.validatorSlashEvents.map(e => e ? ValidatorSlashEvent.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.validator_slash_events = [];
     }
     return obj;
   },
-  fromProtoMsg(message: ValidatorSlashEventsProtoMsg): ValidatorSlashEvents {
-    return ValidatorSlashEvents.decode(message.value);
+  fromProtoMsg(message: ValidatorSlashEventsProtoMsg, useInterfaces: boolean = false): ValidatorSlashEvents {
+    return ValidatorSlashEvents.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorSlashEvents): Uint8Array {
     return ValidatorSlashEvents.encode(message).finish();
@@ -1093,7 +1093,7 @@ export const FeePool = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): FeePool {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): FeePool {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFeePool();
@@ -1101,7 +1101,7 @@ export const FeePool = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.communityPool.push(DecCoin.decode(reader, reader.uint32()));
+          message.communityPool.push(DecCoin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1148,17 +1148,17 @@ export const FeePool = {
       communityPool: Array.isArray(object?.community_pool) ? object.community_pool.map((e: any) => DecCoin.fromAmino(e)) : []
     };
   },
-  toAmino(message: FeePool): FeePoolAmino {
+  toAmino(message: FeePool, useInterfaces: boolean = false): FeePoolAmino {
     const obj: any = {};
     if (message.communityPool) {
-      obj.community_pool = message.communityPool.map(e => e ? DecCoin.toAmino(e) : undefined);
+      obj.community_pool = message.communityPool.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.community_pool = [];
     }
     return obj;
   },
-  fromProtoMsg(message: FeePoolProtoMsg): FeePool {
-    return FeePool.decode(message.value);
+  fromProtoMsg(message: FeePoolProtoMsg, useInterfaces: boolean = false): FeePool {
+    return FeePool.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: FeePool): Uint8Array {
     return FeePool.encode(message).finish();
@@ -1196,7 +1196,7 @@ export const CommunityPoolSpendProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CommunityPoolSpendProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CommunityPoolSpendProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCommunityPoolSpendProposal();
@@ -1213,7 +1213,7 @@ export const CommunityPoolSpendProposal = {
           message.recipient = reader.string();
           break;
         case 4:
-          message.amount.push(Coin.decode(reader, reader.uint32()));
+          message.amount.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1278,20 +1278,20 @@ export const CommunityPoolSpendProposal = {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: CommunityPoolSpendProposal): CommunityPoolSpendProposalAmino {
+  toAmino(message: CommunityPoolSpendProposal, useInterfaces: boolean = false): CommunityPoolSpendProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
     obj.recipient = message.recipient;
     if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.amount = message.amount.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.amount = [];
     }
     return obj;
   },
-  fromProtoMsg(message: CommunityPoolSpendProposalProtoMsg): CommunityPoolSpendProposal {
-    return CommunityPoolSpendProposal.decode(message.value);
+  fromProtoMsg(message: CommunityPoolSpendProposalProtoMsg, useInterfaces: boolean = false): CommunityPoolSpendProposal {
+    return CommunityPoolSpendProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CommunityPoolSpendProposal): Uint8Array {
     return CommunityPoolSpendProposal.encode(message).finish();
@@ -1325,7 +1325,7 @@ export const DelegatorStartingInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DelegatorStartingInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DelegatorStartingInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegatorStartingInfo();
@@ -1394,15 +1394,15 @@ export const DelegatorStartingInfo = {
       height: BigInt(object.height)
     };
   },
-  toAmino(message: DelegatorStartingInfo): DelegatorStartingInfoAmino {
+  toAmino(message: DelegatorStartingInfo, useInterfaces: boolean = false): DelegatorStartingInfoAmino {
     const obj: any = {};
     obj.previous_period = message.previousPeriod ? message.previousPeriod.toString() : undefined;
     obj.stake = message.stake;
     obj.height = message.height ? message.height.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: DelegatorStartingInfoProtoMsg): DelegatorStartingInfo {
-    return DelegatorStartingInfo.decode(message.value);
+  fromProtoMsg(message: DelegatorStartingInfoProtoMsg, useInterfaces: boolean = false): DelegatorStartingInfo {
+    return DelegatorStartingInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DelegatorStartingInfo): Uint8Array {
     return DelegatorStartingInfo.encode(message).finish();
@@ -1432,7 +1432,7 @@ export const DelegationDelegatorReward = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DelegationDelegatorReward {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DelegationDelegatorReward {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegationDelegatorReward();
@@ -1443,7 +1443,7 @@ export const DelegationDelegatorReward = {
           message.validatorAddress = reader.string();
           break;
         case 2:
-          message.reward.push(DecCoin.decode(reader, reader.uint32()));
+          message.reward.push(DecCoin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1496,18 +1496,18 @@ export const DelegationDelegatorReward = {
       reward: Array.isArray(object?.reward) ? object.reward.map((e: any) => DecCoin.fromAmino(e)) : []
     };
   },
-  toAmino(message: DelegationDelegatorReward): DelegationDelegatorRewardAmino {
+  toAmino(message: DelegationDelegatorReward, useInterfaces: boolean = false): DelegationDelegatorRewardAmino {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
     if (message.reward) {
-      obj.reward = message.reward.map(e => e ? DecCoin.toAmino(e) : undefined);
+      obj.reward = message.reward.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.reward = [];
     }
     return obj;
   },
-  fromProtoMsg(message: DelegationDelegatorRewardProtoMsg): DelegationDelegatorReward {
-    return DelegationDelegatorReward.decode(message.value);
+  fromProtoMsg(message: DelegationDelegatorRewardProtoMsg, useInterfaces: boolean = false): DelegationDelegatorReward {
+    return DelegationDelegatorReward.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DelegationDelegatorReward): Uint8Array {
     return DelegationDelegatorReward.encode(message).finish();
@@ -1549,7 +1549,7 @@ export const CommunityPoolSpendProposalWithDeposit = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CommunityPoolSpendProposalWithDeposit {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CommunityPoolSpendProposalWithDeposit {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCommunityPoolSpendProposalWithDeposit();
@@ -1632,7 +1632,7 @@ export const CommunityPoolSpendProposalWithDeposit = {
       deposit: object.deposit
     };
   },
-  toAmino(message: CommunityPoolSpendProposalWithDeposit): CommunityPoolSpendProposalWithDepositAmino {
+  toAmino(message: CommunityPoolSpendProposalWithDeposit, useInterfaces: boolean = false): CommunityPoolSpendProposalWithDepositAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -1641,8 +1641,8 @@ export const CommunityPoolSpendProposalWithDeposit = {
     obj.deposit = message.deposit;
     return obj;
   },
-  fromProtoMsg(message: CommunityPoolSpendProposalWithDepositProtoMsg): CommunityPoolSpendProposalWithDeposit {
-    return CommunityPoolSpendProposalWithDeposit.decode(message.value);
+  fromProtoMsg(message: CommunityPoolSpendProposalWithDepositProtoMsg, useInterfaces: boolean = false): CommunityPoolSpendProposalWithDeposit {
+    return CommunityPoolSpendProposalWithDeposit.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CommunityPoolSpendProposalWithDeposit): Uint8Array {
     return CommunityPoolSpendProposalWithDeposit.encode(message).finish();

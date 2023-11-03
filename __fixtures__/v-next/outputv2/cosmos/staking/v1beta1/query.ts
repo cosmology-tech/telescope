@@ -870,7 +870,7 @@ export const QueryValidatorsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryValidatorsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryValidatorsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorsRequest();
@@ -881,7 +881,7 @@ export const QueryValidatorsRequest = {
           message.status = reader.string();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -928,23 +928,23 @@ export const QueryValidatorsRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryValidatorsRequest): QueryValidatorsRequestAmino {
+  toAmino(message: QueryValidatorsRequest, useInterfaces: boolean = false): QueryValidatorsRequestAmino {
     const obj: any = {};
     obj.status = message.status;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryValidatorsRequestAminoMsg): QueryValidatorsRequest {
     return QueryValidatorsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryValidatorsRequest): QueryValidatorsRequestAminoMsg {
+  toAminoMsg(message: QueryValidatorsRequest, useInterfaces: boolean = false): QueryValidatorsRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryValidatorsRequest",
-      value: QueryValidatorsRequest.toAmino(message)
+      value: QueryValidatorsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryValidatorsRequestProtoMsg): QueryValidatorsRequest {
-    return QueryValidatorsRequest.decode(message.value);
+  fromProtoMsg(message: QueryValidatorsRequestProtoMsg, useInterfaces: boolean = false): QueryValidatorsRequest {
+    return QueryValidatorsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryValidatorsRequest): Uint8Array {
     return QueryValidatorsRequest.encode(message).finish();
@@ -974,7 +974,7 @@ export const QueryValidatorsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryValidatorsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryValidatorsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorsResponse();
@@ -982,10 +982,10 @@ export const QueryValidatorsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.validators.push(Validator.decode(reader, reader.uint32()));
+          message.validators.push(Validator.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1040,27 +1040,27 @@ export const QueryValidatorsResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryValidatorsResponse): QueryValidatorsResponseAmino {
+  toAmino(message: QueryValidatorsResponse, useInterfaces: boolean = false): QueryValidatorsResponseAmino {
     const obj: any = {};
     if (message.validators) {
-      obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
+      obj.validators = message.validators.map(e => e ? Validator.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.validators = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryValidatorsResponseAminoMsg): QueryValidatorsResponse {
     return QueryValidatorsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryValidatorsResponse): QueryValidatorsResponseAminoMsg {
+  toAminoMsg(message: QueryValidatorsResponse, useInterfaces: boolean = false): QueryValidatorsResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryValidatorsResponse",
-      value: QueryValidatorsResponse.toAmino(message)
+      value: QueryValidatorsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryValidatorsResponseProtoMsg): QueryValidatorsResponse {
-    return QueryValidatorsResponse.decode(message.value);
+  fromProtoMsg(message: QueryValidatorsResponseProtoMsg, useInterfaces: boolean = false): QueryValidatorsResponse {
+    return QueryValidatorsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryValidatorsResponse): Uint8Array {
     return QueryValidatorsResponse.encode(message).finish();
@@ -1086,7 +1086,7 @@ export const QueryValidatorRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryValidatorRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryValidatorRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorRequest();
@@ -1133,7 +1133,7 @@ export const QueryValidatorRequest = {
       validatorAddr: object.validator_addr
     };
   },
-  toAmino(message: QueryValidatorRequest): QueryValidatorRequestAmino {
+  toAmino(message: QueryValidatorRequest, useInterfaces: boolean = false): QueryValidatorRequestAmino {
     const obj: any = {};
     obj.validator_addr = message.validatorAddr;
     return obj;
@@ -1141,14 +1141,14 @@ export const QueryValidatorRequest = {
   fromAminoMsg(object: QueryValidatorRequestAminoMsg): QueryValidatorRequest {
     return QueryValidatorRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryValidatorRequest): QueryValidatorRequestAminoMsg {
+  toAminoMsg(message: QueryValidatorRequest, useInterfaces: boolean = false): QueryValidatorRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryValidatorRequest",
-      value: QueryValidatorRequest.toAmino(message)
+      value: QueryValidatorRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryValidatorRequestProtoMsg): QueryValidatorRequest {
-    return QueryValidatorRequest.decode(message.value);
+  fromProtoMsg(message: QueryValidatorRequestProtoMsg, useInterfaces: boolean = false): QueryValidatorRequest {
+    return QueryValidatorRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryValidatorRequest): Uint8Array {
     return QueryValidatorRequest.encode(message).finish();
@@ -1174,7 +1174,7 @@ export const QueryValidatorResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryValidatorResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryValidatorResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorResponse();
@@ -1182,7 +1182,7 @@ export const QueryValidatorResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.validator = Validator.decode(reader, reader.uint32());
+          message.validator = Validator.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1223,22 +1223,22 @@ export const QueryValidatorResponse = {
       validator: object?.validator ? Validator.fromAmino(object.validator) : undefined
     };
   },
-  toAmino(message: QueryValidatorResponse): QueryValidatorResponseAmino {
+  toAmino(message: QueryValidatorResponse, useInterfaces: boolean = false): QueryValidatorResponseAmino {
     const obj: any = {};
-    obj.validator = message.validator ? Validator.toAmino(message.validator) : undefined;
+    obj.validator = message.validator ? Validator.toAmino(message.validator, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryValidatorResponseAminoMsg): QueryValidatorResponse {
     return QueryValidatorResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryValidatorResponse): QueryValidatorResponseAminoMsg {
+  toAminoMsg(message: QueryValidatorResponse, useInterfaces: boolean = false): QueryValidatorResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryValidatorResponse",
-      value: QueryValidatorResponse.toAmino(message)
+      value: QueryValidatorResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryValidatorResponseProtoMsg): QueryValidatorResponse {
-    return QueryValidatorResponse.decode(message.value);
+  fromProtoMsg(message: QueryValidatorResponseProtoMsg, useInterfaces: boolean = false): QueryValidatorResponse {
+    return QueryValidatorResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryValidatorResponse): Uint8Array {
     return QueryValidatorResponse.encode(message).finish();
@@ -1268,7 +1268,7 @@ export const QueryValidatorDelegationsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryValidatorDelegationsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryValidatorDelegationsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorDelegationsRequest();
@@ -1279,7 +1279,7 @@ export const QueryValidatorDelegationsRequest = {
           message.validatorAddr = reader.string();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1326,23 +1326,23 @@ export const QueryValidatorDelegationsRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryValidatorDelegationsRequest): QueryValidatorDelegationsRequestAmino {
+  toAmino(message: QueryValidatorDelegationsRequest, useInterfaces: boolean = false): QueryValidatorDelegationsRequestAmino {
     const obj: any = {};
     obj.validator_addr = message.validatorAddr;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryValidatorDelegationsRequestAminoMsg): QueryValidatorDelegationsRequest {
     return QueryValidatorDelegationsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryValidatorDelegationsRequest): QueryValidatorDelegationsRequestAminoMsg {
+  toAminoMsg(message: QueryValidatorDelegationsRequest, useInterfaces: boolean = false): QueryValidatorDelegationsRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryValidatorDelegationsRequest",
-      value: QueryValidatorDelegationsRequest.toAmino(message)
+      value: QueryValidatorDelegationsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryValidatorDelegationsRequestProtoMsg): QueryValidatorDelegationsRequest {
-    return QueryValidatorDelegationsRequest.decode(message.value);
+  fromProtoMsg(message: QueryValidatorDelegationsRequestProtoMsg, useInterfaces: boolean = false): QueryValidatorDelegationsRequest {
+    return QueryValidatorDelegationsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryValidatorDelegationsRequest): Uint8Array {
     return QueryValidatorDelegationsRequest.encode(message).finish();
@@ -1372,7 +1372,7 @@ export const QueryValidatorDelegationsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryValidatorDelegationsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryValidatorDelegationsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorDelegationsResponse();
@@ -1380,10 +1380,10 @@ export const QueryValidatorDelegationsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.delegationResponses.push(DelegationResponse.decode(reader, reader.uint32()));
+          message.delegationResponses.push(DelegationResponse.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1438,27 +1438,27 @@ export const QueryValidatorDelegationsResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryValidatorDelegationsResponse): QueryValidatorDelegationsResponseAmino {
+  toAmino(message: QueryValidatorDelegationsResponse, useInterfaces: boolean = false): QueryValidatorDelegationsResponseAmino {
     const obj: any = {};
     if (message.delegationResponses) {
-      obj.delegation_responses = message.delegationResponses.map(e => e ? DelegationResponse.toAmino(e) : undefined);
+      obj.delegation_responses = message.delegationResponses.map(e => e ? DelegationResponse.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.delegation_responses = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryValidatorDelegationsResponseAminoMsg): QueryValidatorDelegationsResponse {
     return QueryValidatorDelegationsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryValidatorDelegationsResponse): QueryValidatorDelegationsResponseAminoMsg {
+  toAminoMsg(message: QueryValidatorDelegationsResponse, useInterfaces: boolean = false): QueryValidatorDelegationsResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryValidatorDelegationsResponse",
-      value: QueryValidatorDelegationsResponse.toAmino(message)
+      value: QueryValidatorDelegationsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryValidatorDelegationsResponseProtoMsg): QueryValidatorDelegationsResponse {
-    return QueryValidatorDelegationsResponse.decode(message.value);
+  fromProtoMsg(message: QueryValidatorDelegationsResponseProtoMsg, useInterfaces: boolean = false): QueryValidatorDelegationsResponse {
+    return QueryValidatorDelegationsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryValidatorDelegationsResponse): Uint8Array {
     return QueryValidatorDelegationsResponse.encode(message).finish();
@@ -1488,7 +1488,7 @@ export const QueryValidatorUnbondingDelegationsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryValidatorUnbondingDelegationsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryValidatorUnbondingDelegationsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorUnbondingDelegationsRequest();
@@ -1499,7 +1499,7 @@ export const QueryValidatorUnbondingDelegationsRequest = {
           message.validatorAddr = reader.string();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1546,23 +1546,23 @@ export const QueryValidatorUnbondingDelegationsRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryValidatorUnbondingDelegationsRequest): QueryValidatorUnbondingDelegationsRequestAmino {
+  toAmino(message: QueryValidatorUnbondingDelegationsRequest, useInterfaces: boolean = false): QueryValidatorUnbondingDelegationsRequestAmino {
     const obj: any = {};
     obj.validator_addr = message.validatorAddr;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryValidatorUnbondingDelegationsRequestAminoMsg): QueryValidatorUnbondingDelegationsRequest {
     return QueryValidatorUnbondingDelegationsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryValidatorUnbondingDelegationsRequest): QueryValidatorUnbondingDelegationsRequestAminoMsg {
+  toAminoMsg(message: QueryValidatorUnbondingDelegationsRequest, useInterfaces: boolean = false): QueryValidatorUnbondingDelegationsRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryValidatorUnbondingDelegationsRequest",
-      value: QueryValidatorUnbondingDelegationsRequest.toAmino(message)
+      value: QueryValidatorUnbondingDelegationsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryValidatorUnbondingDelegationsRequestProtoMsg): QueryValidatorUnbondingDelegationsRequest {
-    return QueryValidatorUnbondingDelegationsRequest.decode(message.value);
+  fromProtoMsg(message: QueryValidatorUnbondingDelegationsRequestProtoMsg, useInterfaces: boolean = false): QueryValidatorUnbondingDelegationsRequest {
+    return QueryValidatorUnbondingDelegationsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryValidatorUnbondingDelegationsRequest): Uint8Array {
     return QueryValidatorUnbondingDelegationsRequest.encode(message).finish();
@@ -1592,7 +1592,7 @@ export const QueryValidatorUnbondingDelegationsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryValidatorUnbondingDelegationsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryValidatorUnbondingDelegationsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryValidatorUnbondingDelegationsResponse();
@@ -1600,10 +1600,10 @@ export const QueryValidatorUnbondingDelegationsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.unbondingResponses.push(UnbondingDelegation.decode(reader, reader.uint32()));
+          message.unbondingResponses.push(UnbondingDelegation.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1658,27 +1658,27 @@ export const QueryValidatorUnbondingDelegationsResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryValidatorUnbondingDelegationsResponse): QueryValidatorUnbondingDelegationsResponseAmino {
+  toAmino(message: QueryValidatorUnbondingDelegationsResponse, useInterfaces: boolean = false): QueryValidatorUnbondingDelegationsResponseAmino {
     const obj: any = {};
     if (message.unbondingResponses) {
-      obj.unbonding_responses = message.unbondingResponses.map(e => e ? UnbondingDelegation.toAmino(e) : undefined);
+      obj.unbonding_responses = message.unbondingResponses.map(e => e ? UnbondingDelegation.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.unbonding_responses = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryValidatorUnbondingDelegationsResponseAminoMsg): QueryValidatorUnbondingDelegationsResponse {
     return QueryValidatorUnbondingDelegationsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryValidatorUnbondingDelegationsResponse): QueryValidatorUnbondingDelegationsResponseAminoMsg {
+  toAminoMsg(message: QueryValidatorUnbondingDelegationsResponse, useInterfaces: boolean = false): QueryValidatorUnbondingDelegationsResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryValidatorUnbondingDelegationsResponse",
-      value: QueryValidatorUnbondingDelegationsResponse.toAmino(message)
+      value: QueryValidatorUnbondingDelegationsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryValidatorUnbondingDelegationsResponseProtoMsg): QueryValidatorUnbondingDelegationsResponse {
-    return QueryValidatorUnbondingDelegationsResponse.decode(message.value);
+  fromProtoMsg(message: QueryValidatorUnbondingDelegationsResponseProtoMsg, useInterfaces: boolean = false): QueryValidatorUnbondingDelegationsResponse {
+    return QueryValidatorUnbondingDelegationsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryValidatorUnbondingDelegationsResponse): Uint8Array {
     return QueryValidatorUnbondingDelegationsResponse.encode(message).finish();
@@ -1708,7 +1708,7 @@ export const QueryDelegationRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDelegationRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDelegationRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegationRequest();
@@ -1764,7 +1764,7 @@ export const QueryDelegationRequest = {
       validatorAddr: object.validator_addr
     };
   },
-  toAmino(message: QueryDelegationRequest): QueryDelegationRequestAmino {
+  toAmino(message: QueryDelegationRequest, useInterfaces: boolean = false): QueryDelegationRequestAmino {
     const obj: any = {};
     obj.delegator_addr = message.delegatorAddr;
     obj.validator_addr = message.validatorAddr;
@@ -1773,14 +1773,14 @@ export const QueryDelegationRequest = {
   fromAminoMsg(object: QueryDelegationRequestAminoMsg): QueryDelegationRequest {
     return QueryDelegationRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDelegationRequest): QueryDelegationRequestAminoMsg {
+  toAminoMsg(message: QueryDelegationRequest, useInterfaces: boolean = false): QueryDelegationRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryDelegationRequest",
-      value: QueryDelegationRequest.toAmino(message)
+      value: QueryDelegationRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDelegationRequestProtoMsg): QueryDelegationRequest {
-    return QueryDelegationRequest.decode(message.value);
+  fromProtoMsg(message: QueryDelegationRequestProtoMsg, useInterfaces: boolean = false): QueryDelegationRequest {
+    return QueryDelegationRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDelegationRequest): Uint8Array {
     return QueryDelegationRequest.encode(message).finish();
@@ -1806,7 +1806,7 @@ export const QueryDelegationResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDelegationResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDelegationResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegationResponse();
@@ -1814,7 +1814,7 @@ export const QueryDelegationResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.delegationResponse = DelegationResponse.decode(reader, reader.uint32());
+          message.delegationResponse = DelegationResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1855,22 +1855,22 @@ export const QueryDelegationResponse = {
       delegationResponse: object?.delegation_response ? DelegationResponse.fromAmino(object.delegation_response) : undefined
     };
   },
-  toAmino(message: QueryDelegationResponse): QueryDelegationResponseAmino {
+  toAmino(message: QueryDelegationResponse, useInterfaces: boolean = false): QueryDelegationResponseAmino {
     const obj: any = {};
-    obj.delegation_response = message.delegationResponse ? DelegationResponse.toAmino(message.delegationResponse) : undefined;
+    obj.delegation_response = message.delegationResponse ? DelegationResponse.toAmino(message.delegationResponse, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryDelegationResponseAminoMsg): QueryDelegationResponse {
     return QueryDelegationResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDelegationResponse): QueryDelegationResponseAminoMsg {
+  toAminoMsg(message: QueryDelegationResponse, useInterfaces: boolean = false): QueryDelegationResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryDelegationResponse",
-      value: QueryDelegationResponse.toAmino(message)
+      value: QueryDelegationResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDelegationResponseProtoMsg): QueryDelegationResponse {
-    return QueryDelegationResponse.decode(message.value);
+  fromProtoMsg(message: QueryDelegationResponseProtoMsg, useInterfaces: boolean = false): QueryDelegationResponse {
+    return QueryDelegationResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDelegationResponse): Uint8Array {
     return QueryDelegationResponse.encode(message).finish();
@@ -1900,7 +1900,7 @@ export const QueryUnbondingDelegationRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryUnbondingDelegationRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryUnbondingDelegationRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUnbondingDelegationRequest();
@@ -1956,7 +1956,7 @@ export const QueryUnbondingDelegationRequest = {
       validatorAddr: object.validator_addr
     };
   },
-  toAmino(message: QueryUnbondingDelegationRequest): QueryUnbondingDelegationRequestAmino {
+  toAmino(message: QueryUnbondingDelegationRequest, useInterfaces: boolean = false): QueryUnbondingDelegationRequestAmino {
     const obj: any = {};
     obj.delegator_addr = message.delegatorAddr;
     obj.validator_addr = message.validatorAddr;
@@ -1965,14 +1965,14 @@ export const QueryUnbondingDelegationRequest = {
   fromAminoMsg(object: QueryUnbondingDelegationRequestAminoMsg): QueryUnbondingDelegationRequest {
     return QueryUnbondingDelegationRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryUnbondingDelegationRequest): QueryUnbondingDelegationRequestAminoMsg {
+  toAminoMsg(message: QueryUnbondingDelegationRequest, useInterfaces: boolean = false): QueryUnbondingDelegationRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryUnbondingDelegationRequest",
-      value: QueryUnbondingDelegationRequest.toAmino(message)
+      value: QueryUnbondingDelegationRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryUnbondingDelegationRequestProtoMsg): QueryUnbondingDelegationRequest {
-    return QueryUnbondingDelegationRequest.decode(message.value);
+  fromProtoMsg(message: QueryUnbondingDelegationRequestProtoMsg, useInterfaces: boolean = false): QueryUnbondingDelegationRequest {
+    return QueryUnbondingDelegationRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryUnbondingDelegationRequest): Uint8Array {
     return QueryUnbondingDelegationRequest.encode(message).finish();
@@ -1998,7 +1998,7 @@ export const QueryUnbondingDelegationResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryUnbondingDelegationResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryUnbondingDelegationResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUnbondingDelegationResponse();
@@ -2006,7 +2006,7 @@ export const QueryUnbondingDelegationResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.unbond = UnbondingDelegation.decode(reader, reader.uint32());
+          message.unbond = UnbondingDelegation.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2047,22 +2047,22 @@ export const QueryUnbondingDelegationResponse = {
       unbond: object?.unbond ? UnbondingDelegation.fromAmino(object.unbond) : undefined
     };
   },
-  toAmino(message: QueryUnbondingDelegationResponse): QueryUnbondingDelegationResponseAmino {
+  toAmino(message: QueryUnbondingDelegationResponse, useInterfaces: boolean = false): QueryUnbondingDelegationResponseAmino {
     const obj: any = {};
-    obj.unbond = message.unbond ? UnbondingDelegation.toAmino(message.unbond) : undefined;
+    obj.unbond = message.unbond ? UnbondingDelegation.toAmino(message.unbond, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryUnbondingDelegationResponseAminoMsg): QueryUnbondingDelegationResponse {
     return QueryUnbondingDelegationResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryUnbondingDelegationResponse): QueryUnbondingDelegationResponseAminoMsg {
+  toAminoMsg(message: QueryUnbondingDelegationResponse, useInterfaces: boolean = false): QueryUnbondingDelegationResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryUnbondingDelegationResponse",
-      value: QueryUnbondingDelegationResponse.toAmino(message)
+      value: QueryUnbondingDelegationResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryUnbondingDelegationResponseProtoMsg): QueryUnbondingDelegationResponse {
-    return QueryUnbondingDelegationResponse.decode(message.value);
+  fromProtoMsg(message: QueryUnbondingDelegationResponseProtoMsg, useInterfaces: boolean = false): QueryUnbondingDelegationResponse {
+    return QueryUnbondingDelegationResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryUnbondingDelegationResponse): Uint8Array {
     return QueryUnbondingDelegationResponse.encode(message).finish();
@@ -2092,7 +2092,7 @@ export const QueryDelegatorDelegationsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDelegatorDelegationsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDelegatorDelegationsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorDelegationsRequest();
@@ -2103,7 +2103,7 @@ export const QueryDelegatorDelegationsRequest = {
           message.delegatorAddr = reader.string();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2150,23 +2150,23 @@ export const QueryDelegatorDelegationsRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryDelegatorDelegationsRequest): QueryDelegatorDelegationsRequestAmino {
+  toAmino(message: QueryDelegatorDelegationsRequest, useInterfaces: boolean = false): QueryDelegatorDelegationsRequestAmino {
     const obj: any = {};
     obj.delegator_addr = message.delegatorAddr;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryDelegatorDelegationsRequestAminoMsg): QueryDelegatorDelegationsRequest {
     return QueryDelegatorDelegationsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDelegatorDelegationsRequest): QueryDelegatorDelegationsRequestAminoMsg {
+  toAminoMsg(message: QueryDelegatorDelegationsRequest, useInterfaces: boolean = false): QueryDelegatorDelegationsRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryDelegatorDelegationsRequest",
-      value: QueryDelegatorDelegationsRequest.toAmino(message)
+      value: QueryDelegatorDelegationsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDelegatorDelegationsRequestProtoMsg): QueryDelegatorDelegationsRequest {
-    return QueryDelegatorDelegationsRequest.decode(message.value);
+  fromProtoMsg(message: QueryDelegatorDelegationsRequestProtoMsg, useInterfaces: boolean = false): QueryDelegatorDelegationsRequest {
+    return QueryDelegatorDelegationsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDelegatorDelegationsRequest): Uint8Array {
     return QueryDelegatorDelegationsRequest.encode(message).finish();
@@ -2196,7 +2196,7 @@ export const QueryDelegatorDelegationsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDelegatorDelegationsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDelegatorDelegationsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorDelegationsResponse();
@@ -2204,10 +2204,10 @@ export const QueryDelegatorDelegationsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.delegationResponses.push(DelegationResponse.decode(reader, reader.uint32()));
+          message.delegationResponses.push(DelegationResponse.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2262,27 +2262,27 @@ export const QueryDelegatorDelegationsResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryDelegatorDelegationsResponse): QueryDelegatorDelegationsResponseAmino {
+  toAmino(message: QueryDelegatorDelegationsResponse, useInterfaces: boolean = false): QueryDelegatorDelegationsResponseAmino {
     const obj: any = {};
     if (message.delegationResponses) {
-      obj.delegation_responses = message.delegationResponses.map(e => e ? DelegationResponse.toAmino(e) : undefined);
+      obj.delegation_responses = message.delegationResponses.map(e => e ? DelegationResponse.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.delegation_responses = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryDelegatorDelegationsResponseAminoMsg): QueryDelegatorDelegationsResponse {
     return QueryDelegatorDelegationsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDelegatorDelegationsResponse): QueryDelegatorDelegationsResponseAminoMsg {
+  toAminoMsg(message: QueryDelegatorDelegationsResponse, useInterfaces: boolean = false): QueryDelegatorDelegationsResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryDelegatorDelegationsResponse",
-      value: QueryDelegatorDelegationsResponse.toAmino(message)
+      value: QueryDelegatorDelegationsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDelegatorDelegationsResponseProtoMsg): QueryDelegatorDelegationsResponse {
-    return QueryDelegatorDelegationsResponse.decode(message.value);
+  fromProtoMsg(message: QueryDelegatorDelegationsResponseProtoMsg, useInterfaces: boolean = false): QueryDelegatorDelegationsResponse {
+    return QueryDelegatorDelegationsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDelegatorDelegationsResponse): Uint8Array {
     return QueryDelegatorDelegationsResponse.encode(message).finish();
@@ -2312,7 +2312,7 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDelegatorUnbondingDelegationsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDelegatorUnbondingDelegationsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorUnbondingDelegationsRequest();
@@ -2323,7 +2323,7 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
           message.delegatorAddr = reader.string();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2370,23 +2370,23 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryDelegatorUnbondingDelegationsRequest): QueryDelegatorUnbondingDelegationsRequestAmino {
+  toAmino(message: QueryDelegatorUnbondingDelegationsRequest, useInterfaces: boolean = false): QueryDelegatorUnbondingDelegationsRequestAmino {
     const obj: any = {};
     obj.delegator_addr = message.delegatorAddr;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryDelegatorUnbondingDelegationsRequestAminoMsg): QueryDelegatorUnbondingDelegationsRequest {
     return QueryDelegatorUnbondingDelegationsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDelegatorUnbondingDelegationsRequest): QueryDelegatorUnbondingDelegationsRequestAminoMsg {
+  toAminoMsg(message: QueryDelegatorUnbondingDelegationsRequest, useInterfaces: boolean = false): QueryDelegatorUnbondingDelegationsRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryDelegatorUnbondingDelegationsRequest",
-      value: QueryDelegatorUnbondingDelegationsRequest.toAmino(message)
+      value: QueryDelegatorUnbondingDelegationsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDelegatorUnbondingDelegationsRequestProtoMsg): QueryDelegatorUnbondingDelegationsRequest {
-    return QueryDelegatorUnbondingDelegationsRequest.decode(message.value);
+  fromProtoMsg(message: QueryDelegatorUnbondingDelegationsRequestProtoMsg, useInterfaces: boolean = false): QueryDelegatorUnbondingDelegationsRequest {
+    return QueryDelegatorUnbondingDelegationsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDelegatorUnbondingDelegationsRequest): Uint8Array {
     return QueryDelegatorUnbondingDelegationsRequest.encode(message).finish();
@@ -2416,7 +2416,7 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDelegatorUnbondingDelegationsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDelegatorUnbondingDelegationsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorUnbondingDelegationsResponse();
@@ -2424,10 +2424,10 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.unbondingResponses.push(UnbondingDelegation.decode(reader, reader.uint32()));
+          message.unbondingResponses.push(UnbondingDelegation.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2482,27 +2482,27 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryDelegatorUnbondingDelegationsResponse): QueryDelegatorUnbondingDelegationsResponseAmino {
+  toAmino(message: QueryDelegatorUnbondingDelegationsResponse, useInterfaces: boolean = false): QueryDelegatorUnbondingDelegationsResponseAmino {
     const obj: any = {};
     if (message.unbondingResponses) {
-      obj.unbonding_responses = message.unbondingResponses.map(e => e ? UnbondingDelegation.toAmino(e) : undefined);
+      obj.unbonding_responses = message.unbondingResponses.map(e => e ? UnbondingDelegation.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.unbonding_responses = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryDelegatorUnbondingDelegationsResponseAminoMsg): QueryDelegatorUnbondingDelegationsResponse {
     return QueryDelegatorUnbondingDelegationsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDelegatorUnbondingDelegationsResponse): QueryDelegatorUnbondingDelegationsResponseAminoMsg {
+  toAminoMsg(message: QueryDelegatorUnbondingDelegationsResponse, useInterfaces: boolean = false): QueryDelegatorUnbondingDelegationsResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryDelegatorUnbondingDelegationsResponse",
-      value: QueryDelegatorUnbondingDelegationsResponse.toAmino(message)
+      value: QueryDelegatorUnbondingDelegationsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDelegatorUnbondingDelegationsResponseProtoMsg): QueryDelegatorUnbondingDelegationsResponse {
-    return QueryDelegatorUnbondingDelegationsResponse.decode(message.value);
+  fromProtoMsg(message: QueryDelegatorUnbondingDelegationsResponseProtoMsg, useInterfaces: boolean = false): QueryDelegatorUnbondingDelegationsResponse {
+    return QueryDelegatorUnbondingDelegationsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDelegatorUnbondingDelegationsResponse): Uint8Array {
     return QueryDelegatorUnbondingDelegationsResponse.encode(message).finish();
@@ -2540,7 +2540,7 @@ export const QueryRedelegationsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryRedelegationsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryRedelegationsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRedelegationsRequest();
@@ -2557,7 +2557,7 @@ export const QueryRedelegationsRequest = {
           message.dstValidatorAddr = reader.string();
           break;
         case 4:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2616,25 +2616,25 @@ export const QueryRedelegationsRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryRedelegationsRequest): QueryRedelegationsRequestAmino {
+  toAmino(message: QueryRedelegationsRequest, useInterfaces: boolean = false): QueryRedelegationsRequestAmino {
     const obj: any = {};
     obj.delegator_addr = message.delegatorAddr;
     obj.src_validator_addr = message.srcValidatorAddr;
     obj.dst_validator_addr = message.dstValidatorAddr;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryRedelegationsRequestAminoMsg): QueryRedelegationsRequest {
     return QueryRedelegationsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryRedelegationsRequest): QueryRedelegationsRequestAminoMsg {
+  toAminoMsg(message: QueryRedelegationsRequest, useInterfaces: boolean = false): QueryRedelegationsRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryRedelegationsRequest",
-      value: QueryRedelegationsRequest.toAmino(message)
+      value: QueryRedelegationsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryRedelegationsRequestProtoMsg): QueryRedelegationsRequest {
-    return QueryRedelegationsRequest.decode(message.value);
+  fromProtoMsg(message: QueryRedelegationsRequestProtoMsg, useInterfaces: boolean = false): QueryRedelegationsRequest {
+    return QueryRedelegationsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryRedelegationsRequest): Uint8Array {
     return QueryRedelegationsRequest.encode(message).finish();
@@ -2664,7 +2664,7 @@ export const QueryRedelegationsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryRedelegationsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryRedelegationsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRedelegationsResponse();
@@ -2672,10 +2672,10 @@ export const QueryRedelegationsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.redelegationResponses.push(RedelegationResponse.decode(reader, reader.uint32()));
+          message.redelegationResponses.push(RedelegationResponse.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2730,27 +2730,27 @@ export const QueryRedelegationsResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryRedelegationsResponse): QueryRedelegationsResponseAmino {
+  toAmino(message: QueryRedelegationsResponse, useInterfaces: boolean = false): QueryRedelegationsResponseAmino {
     const obj: any = {};
     if (message.redelegationResponses) {
-      obj.redelegation_responses = message.redelegationResponses.map(e => e ? RedelegationResponse.toAmino(e) : undefined);
+      obj.redelegation_responses = message.redelegationResponses.map(e => e ? RedelegationResponse.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.redelegation_responses = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryRedelegationsResponseAminoMsg): QueryRedelegationsResponse {
     return QueryRedelegationsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryRedelegationsResponse): QueryRedelegationsResponseAminoMsg {
+  toAminoMsg(message: QueryRedelegationsResponse, useInterfaces: boolean = false): QueryRedelegationsResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryRedelegationsResponse",
-      value: QueryRedelegationsResponse.toAmino(message)
+      value: QueryRedelegationsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryRedelegationsResponseProtoMsg): QueryRedelegationsResponse {
-    return QueryRedelegationsResponse.decode(message.value);
+  fromProtoMsg(message: QueryRedelegationsResponseProtoMsg, useInterfaces: boolean = false): QueryRedelegationsResponse {
+    return QueryRedelegationsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryRedelegationsResponse): Uint8Array {
     return QueryRedelegationsResponse.encode(message).finish();
@@ -2780,7 +2780,7 @@ export const QueryDelegatorValidatorsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDelegatorValidatorsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDelegatorValidatorsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorValidatorsRequest();
@@ -2791,7 +2791,7 @@ export const QueryDelegatorValidatorsRequest = {
           message.delegatorAddr = reader.string();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2838,23 +2838,23 @@ export const QueryDelegatorValidatorsRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryDelegatorValidatorsRequest): QueryDelegatorValidatorsRequestAmino {
+  toAmino(message: QueryDelegatorValidatorsRequest, useInterfaces: boolean = false): QueryDelegatorValidatorsRequestAmino {
     const obj: any = {};
     obj.delegator_addr = message.delegatorAddr;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryDelegatorValidatorsRequestAminoMsg): QueryDelegatorValidatorsRequest {
     return QueryDelegatorValidatorsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDelegatorValidatorsRequest): QueryDelegatorValidatorsRequestAminoMsg {
+  toAminoMsg(message: QueryDelegatorValidatorsRequest, useInterfaces: boolean = false): QueryDelegatorValidatorsRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryDelegatorValidatorsRequest",
-      value: QueryDelegatorValidatorsRequest.toAmino(message)
+      value: QueryDelegatorValidatorsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDelegatorValidatorsRequestProtoMsg): QueryDelegatorValidatorsRequest {
-    return QueryDelegatorValidatorsRequest.decode(message.value);
+  fromProtoMsg(message: QueryDelegatorValidatorsRequestProtoMsg, useInterfaces: boolean = false): QueryDelegatorValidatorsRequest {
+    return QueryDelegatorValidatorsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDelegatorValidatorsRequest): Uint8Array {
     return QueryDelegatorValidatorsRequest.encode(message).finish();
@@ -2884,7 +2884,7 @@ export const QueryDelegatorValidatorsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDelegatorValidatorsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDelegatorValidatorsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorValidatorsResponse();
@@ -2892,10 +2892,10 @@ export const QueryDelegatorValidatorsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.validators.push(Validator.decode(reader, reader.uint32()));
+          message.validators.push(Validator.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2950,27 +2950,27 @@ export const QueryDelegatorValidatorsResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryDelegatorValidatorsResponse): QueryDelegatorValidatorsResponseAmino {
+  toAmino(message: QueryDelegatorValidatorsResponse, useInterfaces: boolean = false): QueryDelegatorValidatorsResponseAmino {
     const obj: any = {};
     if (message.validators) {
-      obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
+      obj.validators = message.validators.map(e => e ? Validator.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.validators = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryDelegatorValidatorsResponseAminoMsg): QueryDelegatorValidatorsResponse {
     return QueryDelegatorValidatorsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDelegatorValidatorsResponse): QueryDelegatorValidatorsResponseAminoMsg {
+  toAminoMsg(message: QueryDelegatorValidatorsResponse, useInterfaces: boolean = false): QueryDelegatorValidatorsResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryDelegatorValidatorsResponse",
-      value: QueryDelegatorValidatorsResponse.toAmino(message)
+      value: QueryDelegatorValidatorsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDelegatorValidatorsResponseProtoMsg): QueryDelegatorValidatorsResponse {
-    return QueryDelegatorValidatorsResponse.decode(message.value);
+  fromProtoMsg(message: QueryDelegatorValidatorsResponseProtoMsg, useInterfaces: boolean = false): QueryDelegatorValidatorsResponse {
+    return QueryDelegatorValidatorsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDelegatorValidatorsResponse): Uint8Array {
     return QueryDelegatorValidatorsResponse.encode(message).finish();
@@ -3000,7 +3000,7 @@ export const QueryDelegatorValidatorRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDelegatorValidatorRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDelegatorValidatorRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorValidatorRequest();
@@ -3056,7 +3056,7 @@ export const QueryDelegatorValidatorRequest = {
       validatorAddr: object.validator_addr
     };
   },
-  toAmino(message: QueryDelegatorValidatorRequest): QueryDelegatorValidatorRequestAmino {
+  toAmino(message: QueryDelegatorValidatorRequest, useInterfaces: boolean = false): QueryDelegatorValidatorRequestAmino {
     const obj: any = {};
     obj.delegator_addr = message.delegatorAddr;
     obj.validator_addr = message.validatorAddr;
@@ -3065,14 +3065,14 @@ export const QueryDelegatorValidatorRequest = {
   fromAminoMsg(object: QueryDelegatorValidatorRequestAminoMsg): QueryDelegatorValidatorRequest {
     return QueryDelegatorValidatorRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDelegatorValidatorRequest): QueryDelegatorValidatorRequestAminoMsg {
+  toAminoMsg(message: QueryDelegatorValidatorRequest, useInterfaces: boolean = false): QueryDelegatorValidatorRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryDelegatorValidatorRequest",
-      value: QueryDelegatorValidatorRequest.toAmino(message)
+      value: QueryDelegatorValidatorRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDelegatorValidatorRequestProtoMsg): QueryDelegatorValidatorRequest {
-    return QueryDelegatorValidatorRequest.decode(message.value);
+  fromProtoMsg(message: QueryDelegatorValidatorRequestProtoMsg, useInterfaces: boolean = false): QueryDelegatorValidatorRequest {
+    return QueryDelegatorValidatorRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDelegatorValidatorRequest): Uint8Array {
     return QueryDelegatorValidatorRequest.encode(message).finish();
@@ -3098,7 +3098,7 @@ export const QueryDelegatorValidatorResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDelegatorValidatorResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryDelegatorValidatorResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDelegatorValidatorResponse();
@@ -3106,7 +3106,7 @@ export const QueryDelegatorValidatorResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.validator = Validator.decode(reader, reader.uint32());
+          message.validator = Validator.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -3147,22 +3147,22 @@ export const QueryDelegatorValidatorResponse = {
       validator: object?.validator ? Validator.fromAmino(object.validator) : undefined
     };
   },
-  toAmino(message: QueryDelegatorValidatorResponse): QueryDelegatorValidatorResponseAmino {
+  toAmino(message: QueryDelegatorValidatorResponse, useInterfaces: boolean = false): QueryDelegatorValidatorResponseAmino {
     const obj: any = {};
-    obj.validator = message.validator ? Validator.toAmino(message.validator) : undefined;
+    obj.validator = message.validator ? Validator.toAmino(message.validator, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryDelegatorValidatorResponseAminoMsg): QueryDelegatorValidatorResponse {
     return QueryDelegatorValidatorResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDelegatorValidatorResponse): QueryDelegatorValidatorResponseAminoMsg {
+  toAminoMsg(message: QueryDelegatorValidatorResponse, useInterfaces: boolean = false): QueryDelegatorValidatorResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryDelegatorValidatorResponse",
-      value: QueryDelegatorValidatorResponse.toAmino(message)
+      value: QueryDelegatorValidatorResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryDelegatorValidatorResponseProtoMsg): QueryDelegatorValidatorResponse {
-    return QueryDelegatorValidatorResponse.decode(message.value);
+  fromProtoMsg(message: QueryDelegatorValidatorResponseProtoMsg, useInterfaces: boolean = false): QueryDelegatorValidatorResponse {
+    return QueryDelegatorValidatorResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDelegatorValidatorResponse): Uint8Array {
     return QueryDelegatorValidatorResponse.encode(message).finish();
@@ -3188,7 +3188,7 @@ export const QueryHistoricalInfoRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryHistoricalInfoRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryHistoricalInfoRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryHistoricalInfoRequest();
@@ -3237,7 +3237,7 @@ export const QueryHistoricalInfoRequest = {
       height: BigInt(object.height)
     };
   },
-  toAmino(message: QueryHistoricalInfoRequest): QueryHistoricalInfoRequestAmino {
+  toAmino(message: QueryHistoricalInfoRequest, useInterfaces: boolean = false): QueryHistoricalInfoRequestAmino {
     const obj: any = {};
     obj.height = message.height ? message.height.toString() : undefined;
     return obj;
@@ -3245,14 +3245,14 @@ export const QueryHistoricalInfoRequest = {
   fromAminoMsg(object: QueryHistoricalInfoRequestAminoMsg): QueryHistoricalInfoRequest {
     return QueryHistoricalInfoRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryHistoricalInfoRequest): QueryHistoricalInfoRequestAminoMsg {
+  toAminoMsg(message: QueryHistoricalInfoRequest, useInterfaces: boolean = false): QueryHistoricalInfoRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryHistoricalInfoRequest",
-      value: QueryHistoricalInfoRequest.toAmino(message)
+      value: QueryHistoricalInfoRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryHistoricalInfoRequestProtoMsg): QueryHistoricalInfoRequest {
-    return QueryHistoricalInfoRequest.decode(message.value);
+  fromProtoMsg(message: QueryHistoricalInfoRequestProtoMsg, useInterfaces: boolean = false): QueryHistoricalInfoRequest {
+    return QueryHistoricalInfoRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryHistoricalInfoRequest): Uint8Array {
     return QueryHistoricalInfoRequest.encode(message).finish();
@@ -3278,7 +3278,7 @@ export const QueryHistoricalInfoResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryHistoricalInfoResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryHistoricalInfoResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryHistoricalInfoResponse();
@@ -3286,7 +3286,7 @@ export const QueryHistoricalInfoResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.hist = HistoricalInfo.decode(reader, reader.uint32());
+          message.hist = HistoricalInfo.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -3327,22 +3327,22 @@ export const QueryHistoricalInfoResponse = {
       hist: object?.hist ? HistoricalInfo.fromAmino(object.hist) : undefined
     };
   },
-  toAmino(message: QueryHistoricalInfoResponse): QueryHistoricalInfoResponseAmino {
+  toAmino(message: QueryHistoricalInfoResponse, useInterfaces: boolean = false): QueryHistoricalInfoResponseAmino {
     const obj: any = {};
-    obj.hist = message.hist ? HistoricalInfo.toAmino(message.hist) : undefined;
+    obj.hist = message.hist ? HistoricalInfo.toAmino(message.hist, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryHistoricalInfoResponseAminoMsg): QueryHistoricalInfoResponse {
     return QueryHistoricalInfoResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryHistoricalInfoResponse): QueryHistoricalInfoResponseAminoMsg {
+  toAminoMsg(message: QueryHistoricalInfoResponse, useInterfaces: boolean = false): QueryHistoricalInfoResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryHistoricalInfoResponse",
-      value: QueryHistoricalInfoResponse.toAmino(message)
+      value: QueryHistoricalInfoResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryHistoricalInfoResponseProtoMsg): QueryHistoricalInfoResponse {
-    return QueryHistoricalInfoResponse.decode(message.value);
+  fromProtoMsg(message: QueryHistoricalInfoResponseProtoMsg, useInterfaces: boolean = false): QueryHistoricalInfoResponse {
+    return QueryHistoricalInfoResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryHistoricalInfoResponse): Uint8Array {
     return QueryHistoricalInfoResponse.encode(message).finish();
@@ -3363,7 +3363,7 @@ export const QueryPoolRequest = {
   encode(_: QueryPoolRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryPoolRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolRequest();
@@ -3399,21 +3399,21 @@ export const QueryPoolRequest = {
   fromAmino(_: QueryPoolRequestAmino): QueryPoolRequest {
     return {};
   },
-  toAmino(_: QueryPoolRequest): QueryPoolRequestAmino {
+  toAmino(_: QueryPoolRequest, useInterfaces: boolean = false): QueryPoolRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryPoolRequestAminoMsg): QueryPoolRequest {
     return QueryPoolRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryPoolRequest): QueryPoolRequestAminoMsg {
+  toAminoMsg(message: QueryPoolRequest, useInterfaces: boolean = false): QueryPoolRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryPoolRequest",
-      value: QueryPoolRequest.toAmino(message)
+      value: QueryPoolRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryPoolRequestProtoMsg): QueryPoolRequest {
-    return QueryPoolRequest.decode(message.value);
+  fromProtoMsg(message: QueryPoolRequestProtoMsg, useInterfaces: boolean = false): QueryPoolRequest {
+    return QueryPoolRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryPoolRequest): Uint8Array {
     return QueryPoolRequest.encode(message).finish();
@@ -3439,7 +3439,7 @@ export const QueryPoolResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryPoolResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolResponse();
@@ -3447,7 +3447,7 @@ export const QueryPoolResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pool = Pool.decode(reader, reader.uint32());
+          message.pool = Pool.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -3488,22 +3488,22 @@ export const QueryPoolResponse = {
       pool: object?.pool ? Pool.fromAmino(object.pool) : undefined
     };
   },
-  toAmino(message: QueryPoolResponse): QueryPoolResponseAmino {
+  toAmino(message: QueryPoolResponse, useInterfaces: boolean = false): QueryPoolResponseAmino {
     const obj: any = {};
-    obj.pool = message.pool ? Pool.toAmino(message.pool) : undefined;
+    obj.pool = message.pool ? Pool.toAmino(message.pool, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryPoolResponseAminoMsg): QueryPoolResponse {
     return QueryPoolResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryPoolResponse): QueryPoolResponseAminoMsg {
+  toAminoMsg(message: QueryPoolResponse, useInterfaces: boolean = false): QueryPoolResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryPoolResponse",
-      value: QueryPoolResponse.toAmino(message)
+      value: QueryPoolResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryPoolResponseProtoMsg): QueryPoolResponse {
-    return QueryPoolResponse.decode(message.value);
+  fromProtoMsg(message: QueryPoolResponseProtoMsg, useInterfaces: boolean = false): QueryPoolResponse {
+    return QueryPoolResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryPoolResponse): Uint8Array {
     return QueryPoolResponse.encode(message).finish();
@@ -3524,7 +3524,7 @@ export const QueryParamsRequest = {
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -3560,21 +3560,21 @@ export const QueryParamsRequest = {
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
-  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
+  toAmino(_: QueryParamsRequest, useInterfaces: boolean = false): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
     return QueryParamsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
+  toAminoMsg(message: QueryParamsRequest, useInterfaces: boolean = false): QueryParamsRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryParamsRequest",
-      value: QueryParamsRequest.toAmino(message)
+      value: QueryParamsRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
-    return QueryParamsRequest.decode(message.value);
+  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = false): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsRequest): Uint8Array {
     return QueryParamsRequest.encode(message).finish();
@@ -3600,7 +3600,7 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -3608,7 +3608,7 @@ export const QueryParamsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32());
+          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -3649,22 +3649,22 @@ export const QueryParamsResponse = {
       params: object?.params ? Params.fromAmino(object.params) : undefined
     };
   },
-  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+  toAmino(message: QueryParamsResponse, useInterfaces: boolean = false): QueryParamsResponseAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
     return QueryParamsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
+  toAminoMsg(message: QueryParamsResponse, useInterfaces: boolean = false): QueryParamsResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryParamsResponse",
-      value: QueryParamsResponse.toAmino(message)
+      value: QueryParamsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
-    return QueryParamsResponse.decode(message.value);
+  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = false): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsResponse): Uint8Array {
     return QueryParamsResponse.encode(message).finish();

@@ -322,7 +322,7 @@ export const GetValidatorSetByHeightRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetValidatorSetByHeightRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetValidatorSetByHeightRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetValidatorSetByHeightRequest();
@@ -333,7 +333,7 @@ export const GetValidatorSetByHeightRequest = {
           message.height = reader.int64();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -382,14 +382,14 @@ export const GetValidatorSetByHeightRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: GetValidatorSetByHeightRequest): GetValidatorSetByHeightRequestAmino {
+  toAmino(message: GetValidatorSetByHeightRequest, useInterfaces: boolean = false): GetValidatorSetByHeightRequestAmino {
     const obj: any = {};
     obj.height = message.height ? message.height.toString() : undefined;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GetValidatorSetByHeightRequestProtoMsg): GetValidatorSetByHeightRequest {
-    return GetValidatorSetByHeightRequest.decode(message.value);
+  fromProtoMsg(message: GetValidatorSetByHeightRequestProtoMsg, useInterfaces: boolean = false): GetValidatorSetByHeightRequest {
+    return GetValidatorSetByHeightRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetValidatorSetByHeightRequest): Uint8Array {
     return GetValidatorSetByHeightRequest.encode(message).finish();
@@ -423,7 +423,7 @@ export const GetValidatorSetByHeightResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetValidatorSetByHeightResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetValidatorSetByHeightResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetValidatorSetByHeightResponse();
@@ -434,10 +434,10 @@ export const GetValidatorSetByHeightResponse = {
           message.blockHeight = reader.int64();
           break;
         case 2:
-          message.validators.push(Validator.decode(reader, reader.uint32()));
+          message.validators.push(Validator.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -500,19 +500,19 @@ export const GetValidatorSetByHeightResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: GetValidatorSetByHeightResponse): GetValidatorSetByHeightResponseAmino {
+  toAmino(message: GetValidatorSetByHeightResponse, useInterfaces: boolean = false): GetValidatorSetByHeightResponseAmino {
     const obj: any = {};
     obj.block_height = message.blockHeight ? message.blockHeight.toString() : undefined;
     if (message.validators) {
-      obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
+      obj.validators = message.validators.map(e => e ? Validator.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.validators = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GetValidatorSetByHeightResponseProtoMsg): GetValidatorSetByHeightResponse {
-    return GetValidatorSetByHeightResponse.decode(message.value);
+  fromProtoMsg(message: GetValidatorSetByHeightResponseProtoMsg, useInterfaces: boolean = false): GetValidatorSetByHeightResponse {
+    return GetValidatorSetByHeightResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetValidatorSetByHeightResponse): Uint8Array {
     return GetValidatorSetByHeightResponse.encode(message).finish();
@@ -538,7 +538,7 @@ export const GetLatestValidatorSetRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetLatestValidatorSetRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetLatestValidatorSetRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLatestValidatorSetRequest();
@@ -546,7 +546,7 @@ export const GetLatestValidatorSetRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -587,13 +587,13 @@ export const GetLatestValidatorSetRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: GetLatestValidatorSetRequest): GetLatestValidatorSetRequestAmino {
+  toAmino(message: GetLatestValidatorSetRequest, useInterfaces: boolean = false): GetLatestValidatorSetRequestAmino {
     const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GetLatestValidatorSetRequestProtoMsg): GetLatestValidatorSetRequest {
-    return GetLatestValidatorSetRequest.decode(message.value);
+  fromProtoMsg(message: GetLatestValidatorSetRequestProtoMsg, useInterfaces: boolean = false): GetLatestValidatorSetRequest {
+    return GetLatestValidatorSetRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetLatestValidatorSetRequest): Uint8Array {
     return GetLatestValidatorSetRequest.encode(message).finish();
@@ -627,7 +627,7 @@ export const GetLatestValidatorSetResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetLatestValidatorSetResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetLatestValidatorSetResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLatestValidatorSetResponse();
@@ -638,10 +638,10 @@ export const GetLatestValidatorSetResponse = {
           message.blockHeight = reader.int64();
           break;
         case 2:
-          message.validators.push(Validator.decode(reader, reader.uint32()));
+          message.validators.push(Validator.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -704,19 +704,19 @@ export const GetLatestValidatorSetResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: GetLatestValidatorSetResponse): GetLatestValidatorSetResponseAmino {
+  toAmino(message: GetLatestValidatorSetResponse, useInterfaces: boolean = false): GetLatestValidatorSetResponseAmino {
     const obj: any = {};
     obj.block_height = message.blockHeight ? message.blockHeight.toString() : undefined;
     if (message.validators) {
-      obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
+      obj.validators = message.validators.map(e => e ? Validator.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.validators = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GetLatestValidatorSetResponseProtoMsg): GetLatestValidatorSetResponse {
-    return GetLatestValidatorSetResponse.decode(message.value);
+  fromProtoMsg(message: GetLatestValidatorSetResponseProtoMsg, useInterfaces: boolean = false): GetLatestValidatorSetResponse {
+    return GetLatestValidatorSetResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetLatestValidatorSetResponse): Uint8Array {
     return GetLatestValidatorSetResponse.encode(message).finish();
@@ -754,7 +754,7 @@ export const Validator = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Validator {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Validator {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidator();
@@ -765,7 +765,7 @@ export const Validator = {
           message.address = reader.string();
           break;
         case 2:
-          message.pubKey = Any.decode(reader, reader.uint32());
+          message.pubKey = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.votingPower = reader.int64();
@@ -834,16 +834,16 @@ export const Validator = {
       proposerPriority: BigInt(object.proposer_priority)
     };
   },
-  toAmino(message: Validator): ValidatorAmino {
+  toAmino(message: Validator, useInterfaces: boolean = false): ValidatorAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey) : undefined;
+    obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey, useInterfaces) : undefined;
     obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
     obj.proposer_priority = message.proposerPriority ? message.proposerPriority.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: ValidatorProtoMsg): Validator {
-    return Validator.decode(message.value);
+  fromProtoMsg(message: ValidatorProtoMsg, useInterfaces: boolean = false): Validator {
+    return Validator.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Validator): Uint8Array {
     return Validator.encode(message).finish();
@@ -869,7 +869,7 @@ export const GetBlockByHeightRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetBlockByHeightRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetBlockByHeightRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBlockByHeightRequest();
@@ -918,13 +918,13 @@ export const GetBlockByHeightRequest = {
       height: BigInt(object.height)
     };
   },
-  toAmino(message: GetBlockByHeightRequest): GetBlockByHeightRequestAmino {
+  toAmino(message: GetBlockByHeightRequest, useInterfaces: boolean = false): GetBlockByHeightRequestAmino {
     const obj: any = {};
     obj.height = message.height ? message.height.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: GetBlockByHeightRequestProtoMsg): GetBlockByHeightRequest {
-    return GetBlockByHeightRequest.decode(message.value);
+  fromProtoMsg(message: GetBlockByHeightRequestProtoMsg, useInterfaces: boolean = false): GetBlockByHeightRequest {
+    return GetBlockByHeightRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetBlockByHeightRequest): Uint8Array {
     return GetBlockByHeightRequest.encode(message).finish();
@@ -954,7 +954,7 @@ export const GetBlockByHeightResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetBlockByHeightResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetBlockByHeightResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBlockByHeightResponse();
@@ -962,10 +962,10 @@ export const GetBlockByHeightResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.blockId = BlockID.decode(reader, reader.uint32());
+          message.blockId = BlockID.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.block = Block.decode(reader, reader.uint32());
+          message.block = Block.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1014,14 +1014,14 @@ export const GetBlockByHeightResponse = {
       block: object?.block ? Block.fromAmino(object.block) : undefined
     };
   },
-  toAmino(message: GetBlockByHeightResponse): GetBlockByHeightResponseAmino {
+  toAmino(message: GetBlockByHeightResponse, useInterfaces: boolean = false): GetBlockByHeightResponseAmino {
     const obj: any = {};
-    obj.block_id = message.blockId ? BlockID.toAmino(message.blockId) : undefined;
-    obj.block = message.block ? Block.toAmino(message.block) : undefined;
+    obj.block_id = message.blockId ? BlockID.toAmino(message.blockId, useInterfaces) : undefined;
+    obj.block = message.block ? Block.toAmino(message.block, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GetBlockByHeightResponseProtoMsg): GetBlockByHeightResponse {
-    return GetBlockByHeightResponse.decode(message.value);
+  fromProtoMsg(message: GetBlockByHeightResponseProtoMsg, useInterfaces: boolean = false): GetBlockByHeightResponse {
+    return GetBlockByHeightResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetBlockByHeightResponse): Uint8Array {
     return GetBlockByHeightResponse.encode(message).finish();
@@ -1042,7 +1042,7 @@ export const GetLatestBlockRequest = {
   encode(_: GetLatestBlockRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetLatestBlockRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetLatestBlockRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLatestBlockRequest();
@@ -1078,12 +1078,12 @@ export const GetLatestBlockRequest = {
   fromAmino(_: GetLatestBlockRequestAmino): GetLatestBlockRequest {
     return {};
   },
-  toAmino(_: GetLatestBlockRequest): GetLatestBlockRequestAmino {
+  toAmino(_: GetLatestBlockRequest, useInterfaces: boolean = false): GetLatestBlockRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: GetLatestBlockRequestProtoMsg): GetLatestBlockRequest {
-    return GetLatestBlockRequest.decode(message.value);
+  fromProtoMsg(message: GetLatestBlockRequestProtoMsg, useInterfaces: boolean = false): GetLatestBlockRequest {
+    return GetLatestBlockRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetLatestBlockRequest): Uint8Array {
     return GetLatestBlockRequest.encode(message).finish();
@@ -1113,7 +1113,7 @@ export const GetLatestBlockResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetLatestBlockResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetLatestBlockResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLatestBlockResponse();
@@ -1121,10 +1121,10 @@ export const GetLatestBlockResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.blockId = BlockID.decode(reader, reader.uint32());
+          message.blockId = BlockID.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.block = Block.decode(reader, reader.uint32());
+          message.block = Block.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1173,14 +1173,14 @@ export const GetLatestBlockResponse = {
       block: object?.block ? Block.fromAmino(object.block) : undefined
     };
   },
-  toAmino(message: GetLatestBlockResponse): GetLatestBlockResponseAmino {
+  toAmino(message: GetLatestBlockResponse, useInterfaces: boolean = false): GetLatestBlockResponseAmino {
     const obj: any = {};
-    obj.block_id = message.blockId ? BlockID.toAmino(message.blockId) : undefined;
-    obj.block = message.block ? Block.toAmino(message.block) : undefined;
+    obj.block_id = message.blockId ? BlockID.toAmino(message.blockId, useInterfaces) : undefined;
+    obj.block = message.block ? Block.toAmino(message.block, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GetLatestBlockResponseProtoMsg): GetLatestBlockResponse {
-    return GetLatestBlockResponse.decode(message.value);
+  fromProtoMsg(message: GetLatestBlockResponseProtoMsg, useInterfaces: boolean = false): GetLatestBlockResponse {
+    return GetLatestBlockResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetLatestBlockResponse): Uint8Array {
     return GetLatestBlockResponse.encode(message).finish();
@@ -1201,7 +1201,7 @@ export const GetSyncingRequest = {
   encode(_: GetSyncingRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetSyncingRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetSyncingRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSyncingRequest();
@@ -1237,12 +1237,12 @@ export const GetSyncingRequest = {
   fromAmino(_: GetSyncingRequestAmino): GetSyncingRequest {
     return {};
   },
-  toAmino(_: GetSyncingRequest): GetSyncingRequestAmino {
+  toAmino(_: GetSyncingRequest, useInterfaces: boolean = false): GetSyncingRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: GetSyncingRequestProtoMsg): GetSyncingRequest {
-    return GetSyncingRequest.decode(message.value);
+  fromProtoMsg(message: GetSyncingRequestProtoMsg, useInterfaces: boolean = false): GetSyncingRequest {
+    return GetSyncingRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetSyncingRequest): Uint8Array {
     return GetSyncingRequest.encode(message).finish();
@@ -1268,7 +1268,7 @@ export const GetSyncingResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetSyncingResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetSyncingResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSyncingResponse();
@@ -1315,13 +1315,13 @@ export const GetSyncingResponse = {
       syncing: object.syncing
     };
   },
-  toAmino(message: GetSyncingResponse): GetSyncingResponseAmino {
+  toAmino(message: GetSyncingResponse, useInterfaces: boolean = false): GetSyncingResponseAmino {
     const obj: any = {};
     obj.syncing = message.syncing;
     return obj;
   },
-  fromProtoMsg(message: GetSyncingResponseProtoMsg): GetSyncingResponse {
-    return GetSyncingResponse.decode(message.value);
+  fromProtoMsg(message: GetSyncingResponseProtoMsg, useInterfaces: boolean = false): GetSyncingResponse {
+    return GetSyncingResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetSyncingResponse): Uint8Array {
     return GetSyncingResponse.encode(message).finish();
@@ -1342,7 +1342,7 @@ export const GetNodeInfoRequest = {
   encode(_: GetNodeInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetNodeInfoRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetNodeInfoRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetNodeInfoRequest();
@@ -1378,12 +1378,12 @@ export const GetNodeInfoRequest = {
   fromAmino(_: GetNodeInfoRequestAmino): GetNodeInfoRequest {
     return {};
   },
-  toAmino(_: GetNodeInfoRequest): GetNodeInfoRequestAmino {
+  toAmino(_: GetNodeInfoRequest, useInterfaces: boolean = false): GetNodeInfoRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: GetNodeInfoRequestProtoMsg): GetNodeInfoRequest {
-    return GetNodeInfoRequest.decode(message.value);
+  fromProtoMsg(message: GetNodeInfoRequestProtoMsg, useInterfaces: boolean = false): GetNodeInfoRequest {
+    return GetNodeInfoRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetNodeInfoRequest): Uint8Array {
     return GetNodeInfoRequest.encode(message).finish();
@@ -1413,7 +1413,7 @@ export const GetNodeInfoResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetNodeInfoResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetNodeInfoResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetNodeInfoResponse();
@@ -1421,10 +1421,10 @@ export const GetNodeInfoResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.nodeInfo = NodeInfo.decode(reader, reader.uint32());
+          message.nodeInfo = NodeInfo.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.applicationVersion = VersionInfo.decode(reader, reader.uint32());
+          message.applicationVersion = VersionInfo.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1473,14 +1473,14 @@ export const GetNodeInfoResponse = {
       applicationVersion: object?.application_version ? VersionInfo.fromAmino(object.application_version) : undefined
     };
   },
-  toAmino(message: GetNodeInfoResponse): GetNodeInfoResponseAmino {
+  toAmino(message: GetNodeInfoResponse, useInterfaces: boolean = false): GetNodeInfoResponseAmino {
     const obj: any = {};
-    obj.node_info = message.nodeInfo ? NodeInfo.toAmino(message.nodeInfo) : undefined;
-    obj.application_version = message.applicationVersion ? VersionInfo.toAmino(message.applicationVersion) : undefined;
+    obj.node_info = message.nodeInfo ? NodeInfo.toAmino(message.nodeInfo, useInterfaces) : undefined;
+    obj.application_version = message.applicationVersion ? VersionInfo.toAmino(message.applicationVersion, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GetNodeInfoResponseProtoMsg): GetNodeInfoResponse {
-    return GetNodeInfoResponse.decode(message.value);
+  fromProtoMsg(message: GetNodeInfoResponseProtoMsg, useInterfaces: boolean = false): GetNodeInfoResponse {
+    return GetNodeInfoResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetNodeInfoResponse): Uint8Array {
     return GetNodeInfoResponse.encode(message).finish();
@@ -1534,7 +1534,7 @@ export const VersionInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): VersionInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): VersionInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVersionInfo();
@@ -1560,7 +1560,7 @@ export const VersionInfo = {
           message.goVersion = reader.string();
           break;
         case 7:
-          message.buildDeps.push(Module.decode(reader, reader.uint32()));
+          message.buildDeps.push(Module.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 8:
           message.cosmosSdkVersion = reader.string();
@@ -1652,7 +1652,7 @@ export const VersionInfo = {
       cosmosSdkVersion: object.cosmos_sdk_version
     };
   },
-  toAmino(message: VersionInfo): VersionInfoAmino {
+  toAmino(message: VersionInfo, useInterfaces: boolean = false): VersionInfoAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.app_name = message.appName;
@@ -1661,15 +1661,15 @@ export const VersionInfo = {
     obj.build_tags = message.buildTags;
     obj.go_version = message.goVersion;
     if (message.buildDeps) {
-      obj.build_deps = message.buildDeps.map(e => e ? Module.toAmino(e) : undefined);
+      obj.build_deps = message.buildDeps.map(e => e ? Module.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.build_deps = [];
     }
     obj.cosmos_sdk_version = message.cosmosSdkVersion;
     return obj;
   },
-  fromProtoMsg(message: VersionInfoProtoMsg): VersionInfo {
-    return VersionInfo.decode(message.value);
+  fromProtoMsg(message: VersionInfoProtoMsg, useInterfaces: boolean = false): VersionInfo {
+    return VersionInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: VersionInfo): Uint8Array {
     return VersionInfo.encode(message).finish();
@@ -1703,7 +1703,7 @@ export const Module = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Module {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Module {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModule();
@@ -1768,15 +1768,15 @@ export const Module = {
       sum: object.sum
     };
   },
-  toAmino(message: Module): ModuleAmino {
+  toAmino(message: Module, useInterfaces: boolean = false): ModuleAmino {
     const obj: any = {};
     obj.path = message.path;
     obj.version = message.version;
     obj.sum = message.sum;
     return obj;
   },
-  fromProtoMsg(message: ModuleProtoMsg): Module {
-    return Module.decode(message.value);
+  fromProtoMsg(message: ModuleProtoMsg, useInterfaces: boolean = false): Module {
+    return Module.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Module): Uint8Array {
     return Module.encode(message).finish();

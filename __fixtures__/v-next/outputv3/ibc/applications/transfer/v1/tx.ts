@@ -123,7 +123,7 @@ export const MsgTransfer = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgTransfer {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgTransfer {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTransfer();
@@ -137,7 +137,7 @@ export const MsgTransfer = {
           message.sourceChannel = reader.string();
           break;
         case 3:
-          message.token = Coin.decode(reader, reader.uint32());
+          message.token = Coin.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
           message.sender = reader.string();
@@ -146,7 +146,7 @@ export const MsgTransfer = {
           message.receiver = reader.string();
           break;
         case 6:
-          message.timeoutHeight = Height.decode(reader, reader.uint32());
+          message.timeoutHeight = Height.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 7:
           message.timeoutTimestamp = reader.uint64();
@@ -230,19 +230,19 @@ export const MsgTransfer = {
       timeoutTimestamp: BigInt(object.timeout_timestamp)
     };
   },
-  toAmino(message: MsgTransfer): MsgTransferAmino {
+  toAmino(message: MsgTransfer, useInterfaces: boolean = false): MsgTransferAmino {
     const obj: any = {};
     obj.source_port = message.sourcePort;
     obj.source_channel = message.sourceChannel;
-    obj.token = message.token ? Coin.toAmino(message.token) : undefined;
+    obj.token = message.token ? Coin.toAmino(message.token, useInterfaces) : undefined;
     obj.sender = message.sender;
     obj.receiver = message.receiver;
-    obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : {};
+    obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight, useInterfaces) : {};
     obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: MsgTransferProtoMsg): MsgTransfer {
-    return MsgTransfer.decode(message.value);
+  fromProtoMsg(message: MsgTransferProtoMsg, useInterfaces: boolean = false): MsgTransfer {
+    return MsgTransfer.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgTransfer): Uint8Array {
     return MsgTransfer.encode(message).finish();
@@ -263,7 +263,7 @@ export const MsgTransferResponse = {
   encode(_: MsgTransferResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgTransferResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgTransferResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTransferResponse();
@@ -299,12 +299,12 @@ export const MsgTransferResponse = {
   fromAmino(_: MsgTransferResponseAmino): MsgTransferResponse {
     return {};
   },
-  toAmino(_: MsgTransferResponse): MsgTransferResponseAmino {
+  toAmino(_: MsgTransferResponse, useInterfaces: boolean = false): MsgTransferResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgTransferResponseProtoMsg): MsgTransferResponse {
-    return MsgTransferResponse.decode(message.value);
+  fromProtoMsg(message: MsgTransferResponseProtoMsg, useInterfaces: boolean = false): MsgTransferResponse {
+    return MsgTransferResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgTransferResponse): Uint8Array {
     return MsgTransferResponse.encode(message).finish();

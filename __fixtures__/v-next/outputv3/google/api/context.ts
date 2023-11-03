@@ -218,7 +218,7 @@ export const Context = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Context {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Context {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContext();
@@ -226,7 +226,7 @@ export const Context = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.rules.push(ContextRule.decode(reader, reader.uint32()));
+          message.rules.push(ContextRule.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -273,17 +273,17 @@ export const Context = {
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => ContextRule.fromAmino(e)) : []
     };
   },
-  toAmino(message: Context): ContextAmino {
+  toAmino(message: Context, useInterfaces: boolean = false): ContextAmino {
     const obj: any = {};
     if (message.rules) {
-      obj.rules = message.rules.map(e => e ? ContextRule.toAmino(e) : undefined);
+      obj.rules = message.rules.map(e => e ? ContextRule.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.rules = [];
     }
     return obj;
   },
-  fromProtoMsg(message: ContextProtoMsg): Context {
-    return Context.decode(message.value);
+  fromProtoMsg(message: ContextProtoMsg, useInterfaces: boolean = false): Context {
+    return Context.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Context): Uint8Array {
     return Context.encode(message).finish();
@@ -324,7 +324,7 @@ export const ContextRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ContextRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ContextRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContextRule();
@@ -439,7 +439,7 @@ export const ContextRule = {
       allowedResponseExtensions: Array.isArray(object?.allowed_response_extensions) ? object.allowed_response_extensions.map((e: any) => e) : []
     };
   },
-  toAmino(message: ContextRule): ContextRuleAmino {
+  toAmino(message: ContextRule, useInterfaces: boolean = false): ContextRuleAmino {
     const obj: any = {};
     obj.selector = message.selector;
     if (message.requested) {
@@ -464,8 +464,8 @@ export const ContextRule = {
     }
     return obj;
   },
-  fromProtoMsg(message: ContextRuleProtoMsg): ContextRule {
-    return ContextRule.decode(message.value);
+  fromProtoMsg(message: ContextRuleProtoMsg, useInterfaces: boolean = false): ContextRule {
+    return ContextRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ContextRule): Uint8Array {
     return ContextRule.encode(message).finish();

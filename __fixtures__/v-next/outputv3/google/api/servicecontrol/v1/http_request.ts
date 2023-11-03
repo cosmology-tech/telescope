@@ -251,7 +251,7 @@ export const HttpRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): HttpRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): HttpRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHttpRequest();
@@ -286,7 +286,7 @@ export const HttpRequest = {
           message.referer = reader.string();
           break;
         case 14:
-          message.latency = Duration.decode(reader, reader.uint32());
+          message.latency = Duration.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 11:
           message.cacheLookup = reader.bool();
@@ -432,7 +432,7 @@ export const HttpRequest = {
       protocol: object.protocol
     };
   },
-  toAmino(message: HttpRequest): HttpRequestAmino {
+  toAmino(message: HttpRequest, useInterfaces: boolean = false): HttpRequestAmino {
     const obj: any = {};
     obj.request_method = message.requestMethod;
     obj.request_url = message.requestUrl;
@@ -443,7 +443,7 @@ export const HttpRequest = {
     obj.remote_ip = message.remoteIp;
     obj.server_ip = message.serverIp;
     obj.referer = message.referer;
-    obj.latency = message.latency ? Duration.toAmino(message.latency) : undefined;
+    obj.latency = message.latency ? Duration.toAmino(message.latency, useInterfaces) : undefined;
     obj.cache_lookup = message.cacheLookup;
     obj.cache_hit = message.cacheHit;
     obj.cache_validated_with_origin_server = message.cacheValidatedWithOriginServer;
@@ -451,8 +451,8 @@ export const HttpRequest = {
     obj.protocol = message.protocol;
     return obj;
   },
-  fromProtoMsg(message: HttpRequestProtoMsg): HttpRequest {
-    return HttpRequest.decode(message.value);
+  fromProtoMsg(message: HttpRequestProtoMsg, useInterfaces: boolean = false): HttpRequest {
+    return HttpRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: HttpRequest): Uint8Array {
     return HttpRequest.encode(message).finish();

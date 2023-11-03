@@ -41,7 +41,7 @@ export const MsgUnjail = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUnjail {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgUnjail {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUnjail();
@@ -88,13 +88,13 @@ export const MsgUnjail = {
       validatorAddr: object.validator_addr
     };
   },
-  toAmino(message: MsgUnjail): MsgUnjailAmino {
+  toAmino(message: MsgUnjail, useInterfaces: boolean = false): MsgUnjailAmino {
     const obj: any = {};
     obj.validator_addr = message.validatorAddr;
     return obj;
   },
-  fromProtoMsg(message: MsgUnjailProtoMsg): MsgUnjail {
-    return MsgUnjail.decode(message.value);
+  fromProtoMsg(message: MsgUnjailProtoMsg, useInterfaces: boolean = false): MsgUnjail {
+    return MsgUnjail.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUnjail): Uint8Array {
     return MsgUnjail.encode(message).finish();
@@ -115,7 +115,7 @@ export const MsgUnjailResponse = {
   encode(_: MsgUnjailResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUnjailResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgUnjailResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUnjailResponse();
@@ -151,12 +151,12 @@ export const MsgUnjailResponse = {
   fromAmino(_: MsgUnjailResponseAmino): MsgUnjailResponse {
     return {};
   },
-  toAmino(_: MsgUnjailResponse): MsgUnjailResponseAmino {
+  toAmino(_: MsgUnjailResponse, useInterfaces: boolean = false): MsgUnjailResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgUnjailResponseProtoMsg): MsgUnjailResponse {
-    return MsgUnjailResponse.decode(message.value);
+  fromProtoMsg(message: MsgUnjailResponseProtoMsg, useInterfaces: boolean = false): MsgUnjailResponse {
+    return MsgUnjailResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUnjailResponse): Uint8Array {
     return MsgUnjailResponse.encode(message).finish();

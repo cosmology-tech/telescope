@@ -72,7 +72,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -80,10 +80,10 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.classes.push(Class.decode(reader, reader.uint32()));
+          message.classes.push(Class.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.entries.push(Entry.decode(reader, reader.uint32()));
+          message.entries.push(Entry.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -144,15 +144,15 @@ export const GenesisState = {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Entry.fromAmino(e)) : []
     };
   },
-  toAmino(message: GenesisState): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = false): GenesisStateAmino {
     const obj: any = {};
     if (message.classes) {
-      obj.classes = message.classes.map(e => e ? Class.toAmino(e) : undefined);
+      obj.classes = message.classes.map(e => e ? Class.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.classes = [];
     }
     if (message.entries) {
-      obj.entries = message.entries.map(e => e ? Entry.toAmino(e) : undefined);
+      obj.entries = message.entries.map(e => e ? Entry.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.entries = [];
     }
@@ -161,14 +161,14 @@ export const GenesisState = {
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
   },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+  toAminoMsg(message: GenesisState, useInterfaces: boolean = false): GenesisStateAminoMsg {
     return {
       type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
+      value: GenesisState.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = false): GenesisState {
+    return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();
@@ -198,7 +198,7 @@ export const Entry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Entry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Entry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEntry();
@@ -209,7 +209,7 @@ export const Entry = {
           message.owner = reader.string();
           break;
         case 2:
-          message.nfts.push(NFT.decode(reader, reader.uint32()));
+          message.nfts.push(NFT.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -262,11 +262,11 @@ export const Entry = {
       nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromAmino(e)) : []
     };
   },
-  toAmino(message: Entry): EntryAmino {
+  toAmino(message: Entry, useInterfaces: boolean = false): EntryAmino {
     const obj: any = {};
     obj.owner = message.owner;
     if (message.nfts) {
-      obj.nfts = message.nfts.map(e => e ? NFT.toAmino(e) : undefined);
+      obj.nfts = message.nfts.map(e => e ? NFT.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.nfts = [];
     }
@@ -275,14 +275,14 @@ export const Entry = {
   fromAminoMsg(object: EntryAminoMsg): Entry {
     return Entry.fromAmino(object.value);
   },
-  toAminoMsg(message: Entry): EntryAminoMsg {
+  toAminoMsg(message: Entry, useInterfaces: boolean = false): EntryAminoMsg {
     return {
       type: "cosmos-sdk/Entry",
-      value: Entry.toAmino(message)
+      value: Entry.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: EntryProtoMsg): Entry {
-    return Entry.decode(message.value);
+  fromProtoMsg(message: EntryProtoMsg, useInterfaces: boolean = false): Entry {
+    return Entry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Entry): Uint8Array {
     return Entry.encode(message).finish();

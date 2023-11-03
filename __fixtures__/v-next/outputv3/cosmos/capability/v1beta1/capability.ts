@@ -93,7 +93,7 @@ export const Capability = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Capability {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Capability {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCapability();
@@ -142,13 +142,13 @@ export const Capability = {
       index: BigInt(object.index)
     };
   },
-  toAmino(message: Capability): CapabilityAmino {
+  toAmino(message: Capability, useInterfaces: boolean = false): CapabilityAmino {
     const obj: any = {};
     obj.index = message.index ? message.index.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: CapabilityProtoMsg): Capability {
-    return Capability.decode(message.value);
+  fromProtoMsg(message: CapabilityProtoMsg, useInterfaces: boolean = false): Capability {
+    return Capability.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Capability): Uint8Array {
     return Capability.encode(message).finish();
@@ -178,7 +178,7 @@ export const Owner = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Owner {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Owner {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOwner();
@@ -234,14 +234,14 @@ export const Owner = {
       name: object.name
     };
   },
-  toAmino(message: Owner): OwnerAmino {
+  toAmino(message: Owner, useInterfaces: boolean = false): OwnerAmino {
     const obj: any = {};
     obj.module = message.module;
     obj.name = message.name;
     return obj;
   },
-  fromProtoMsg(message: OwnerProtoMsg): Owner {
-    return Owner.decode(message.value);
+  fromProtoMsg(message: OwnerProtoMsg, useInterfaces: boolean = false): Owner {
+    return Owner.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Owner): Uint8Array {
     return Owner.encode(message).finish();
@@ -267,7 +267,7 @@ export const CapabilityOwners = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CapabilityOwners {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CapabilityOwners {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCapabilityOwners();
@@ -275,7 +275,7 @@ export const CapabilityOwners = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.owners.push(Owner.decode(reader, reader.uint32()));
+          message.owners.push(Owner.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -322,17 +322,17 @@ export const CapabilityOwners = {
       owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromAmino(e)) : []
     };
   },
-  toAmino(message: CapabilityOwners): CapabilityOwnersAmino {
+  toAmino(message: CapabilityOwners, useInterfaces: boolean = false): CapabilityOwnersAmino {
     const obj: any = {};
     if (message.owners) {
-      obj.owners = message.owners.map(e => e ? Owner.toAmino(e) : undefined);
+      obj.owners = message.owners.map(e => e ? Owner.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.owners = [];
     }
     return obj;
   },
-  fromProtoMsg(message: CapabilityOwnersProtoMsg): CapabilityOwners {
-    return CapabilityOwners.decode(message.value);
+  fromProtoMsg(message: CapabilityOwnersProtoMsg, useInterfaces: boolean = false): CapabilityOwners {
+    return CapabilityOwners.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CapabilityOwners): Uint8Array {
     return CapabilityOwners.encode(message).finish();

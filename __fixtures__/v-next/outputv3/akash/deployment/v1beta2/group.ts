@@ -109,7 +109,7 @@ export const Group = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Group {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Group {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGroup();
@@ -117,13 +117,13 @@ export const Group = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.groupId = GroupID.decode(reader, reader.uint32());
+          message.groupId = GroupID.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.state = (reader.int32() as any);
           break;
         case 3:
-          message.groupSpec = GroupSpec.decode(reader, reader.uint32());
+          message.groupSpec = GroupSpec.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
           message.createdAt = reader.int64();
@@ -189,16 +189,16 @@ export const Group = {
       createdAt: BigInt(object.created_at)
     };
   },
-  toAmino(message: Group): GroupAmino {
+  toAmino(message: Group, useInterfaces: boolean = false): GroupAmino {
     const obj: any = {};
-    obj.group_id = message.groupId ? GroupID.toAmino(message.groupId) : undefined;
+    obj.group_id = message.groupId ? GroupID.toAmino(message.groupId, useInterfaces) : undefined;
     obj.state = message.state;
-    obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec) : undefined;
+    obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec, useInterfaces) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: GroupProtoMsg): Group {
-    return Group.decode(message.value);
+  fromProtoMsg(message: GroupProtoMsg, useInterfaces: boolean = false): Group {
+    return Group.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Group): Uint8Array {
     return Group.encode(message).finish();

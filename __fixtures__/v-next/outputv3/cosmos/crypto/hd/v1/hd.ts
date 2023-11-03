@@ -75,7 +75,7 @@ export const BIP44Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): BIP44Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): BIP44Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBIP44Params();
@@ -158,7 +158,7 @@ export const BIP44Params = {
       addressIndex: object.address_index
     };
   },
-  toAmino(message: BIP44Params): BIP44ParamsAmino {
+  toAmino(message: BIP44Params, useInterfaces: boolean = false): BIP44ParamsAmino {
     const obj: any = {};
     obj.purpose = message.purpose;
     obj.coin_type = message.coinType;
@@ -167,8 +167,8 @@ export const BIP44Params = {
     obj.address_index = message.addressIndex;
     return obj;
   },
-  fromProtoMsg(message: BIP44ParamsProtoMsg): BIP44Params {
-    return BIP44Params.decode(message.value);
+  fromProtoMsg(message: BIP44ParamsProtoMsg, useInterfaces: boolean = false): BIP44Params {
+    return BIP44Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BIP44Params): Uint8Array {
     return BIP44Params.encode(message).finish();

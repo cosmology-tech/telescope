@@ -158,7 +158,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -166,13 +166,13 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32());
+          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.signingInfos.push(SigningInfo.decode(reader, reader.uint32()));
+          message.signingInfos.push(SigningInfo.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.missedBlocks.push(ValidatorMissedBlocks.decode(reader, reader.uint32()));
+          message.missedBlocks.push(ValidatorMissedBlocks.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -241,16 +241,16 @@ export const GenesisState = {
       missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => ValidatorMissedBlocks.fromAmino(e)) : []
     };
   },
-  toAmino(message: GenesisState): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = false): GenesisStateAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     if (message.signingInfos) {
-      obj.signing_infos = message.signingInfos.map(e => e ? SigningInfo.toAmino(e) : undefined);
+      obj.signing_infos = message.signingInfos.map(e => e ? SigningInfo.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.signing_infos = [];
     }
     if (message.missedBlocks) {
-      obj.missed_blocks = message.missedBlocks.map(e => e ? ValidatorMissedBlocks.toAmino(e) : undefined);
+      obj.missed_blocks = message.missedBlocks.map(e => e ? ValidatorMissedBlocks.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.missed_blocks = [];
     }
@@ -259,14 +259,14 @@ export const GenesisState = {
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
   },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+  toAminoMsg(message: GenesisState, useInterfaces: boolean = false): GenesisStateAminoMsg {
     return {
       type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
+      value: GenesisState.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = false): GenesisState {
+    return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();
@@ -296,7 +296,7 @@ export const SigningInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SigningInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SigningInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSigningInfo();
@@ -307,7 +307,7 @@ export const SigningInfo = {
           message.address = reader.string();
           break;
         case 2:
-          message.validatorSigningInfo = ValidatorSigningInfo.decode(reader, reader.uint32());
+          message.validatorSigningInfo = ValidatorSigningInfo.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -354,23 +354,23 @@ export const SigningInfo = {
       validatorSigningInfo: object?.validator_signing_info ? ValidatorSigningInfo.fromAmino(object.validator_signing_info) : undefined
     };
   },
-  toAmino(message: SigningInfo): SigningInfoAmino {
+  toAmino(message: SigningInfo, useInterfaces: boolean = false): SigningInfoAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.validator_signing_info = message.validatorSigningInfo ? ValidatorSigningInfo.toAmino(message.validatorSigningInfo) : undefined;
+    obj.validator_signing_info = message.validatorSigningInfo ? ValidatorSigningInfo.toAmino(message.validatorSigningInfo, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: SigningInfoAminoMsg): SigningInfo {
     return SigningInfo.fromAmino(object.value);
   },
-  toAminoMsg(message: SigningInfo): SigningInfoAminoMsg {
+  toAminoMsg(message: SigningInfo, useInterfaces: boolean = false): SigningInfoAminoMsg {
     return {
       type: "cosmos-sdk/SigningInfo",
-      value: SigningInfo.toAmino(message)
+      value: SigningInfo.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: SigningInfoProtoMsg): SigningInfo {
-    return SigningInfo.decode(message.value);
+  fromProtoMsg(message: SigningInfoProtoMsg, useInterfaces: boolean = false): SigningInfo {
+    return SigningInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SigningInfo): Uint8Array {
     return SigningInfo.encode(message).finish();
@@ -400,7 +400,7 @@ export const ValidatorMissedBlocks = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorMissedBlocks {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ValidatorMissedBlocks {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorMissedBlocks();
@@ -411,7 +411,7 @@ export const ValidatorMissedBlocks = {
           message.address = reader.string();
           break;
         case 2:
-          message.missedBlocks.push(MissedBlock.decode(reader, reader.uint32()));
+          message.missedBlocks.push(MissedBlock.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -464,11 +464,11 @@ export const ValidatorMissedBlocks = {
       missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => MissedBlock.fromAmino(e)) : []
     };
   },
-  toAmino(message: ValidatorMissedBlocks): ValidatorMissedBlocksAmino {
+  toAmino(message: ValidatorMissedBlocks, useInterfaces: boolean = false): ValidatorMissedBlocksAmino {
     const obj: any = {};
     obj.address = message.address;
     if (message.missedBlocks) {
-      obj.missed_blocks = message.missedBlocks.map(e => e ? MissedBlock.toAmino(e) : undefined);
+      obj.missed_blocks = message.missedBlocks.map(e => e ? MissedBlock.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.missed_blocks = [];
     }
@@ -477,14 +477,14 @@ export const ValidatorMissedBlocks = {
   fromAminoMsg(object: ValidatorMissedBlocksAminoMsg): ValidatorMissedBlocks {
     return ValidatorMissedBlocks.fromAmino(object.value);
   },
-  toAminoMsg(message: ValidatorMissedBlocks): ValidatorMissedBlocksAminoMsg {
+  toAminoMsg(message: ValidatorMissedBlocks, useInterfaces: boolean = false): ValidatorMissedBlocksAminoMsg {
     return {
       type: "cosmos-sdk/ValidatorMissedBlocks",
-      value: ValidatorMissedBlocks.toAmino(message)
+      value: ValidatorMissedBlocks.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ValidatorMissedBlocksProtoMsg): ValidatorMissedBlocks {
-    return ValidatorMissedBlocks.decode(message.value);
+  fromProtoMsg(message: ValidatorMissedBlocksProtoMsg, useInterfaces: boolean = false): ValidatorMissedBlocks {
+    return ValidatorMissedBlocks.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorMissedBlocks): Uint8Array {
     return ValidatorMissedBlocks.encode(message).finish();
@@ -514,7 +514,7 @@ export const MissedBlock = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MissedBlock {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MissedBlock {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMissedBlock();
@@ -572,7 +572,7 @@ export const MissedBlock = {
       missed: object.missed
     };
   },
-  toAmino(message: MissedBlock): MissedBlockAmino {
+  toAmino(message: MissedBlock, useInterfaces: boolean = false): MissedBlockAmino {
     const obj: any = {};
     obj.index = message.index ? message.index.toString() : undefined;
     obj.missed = message.missed;
@@ -581,14 +581,14 @@ export const MissedBlock = {
   fromAminoMsg(object: MissedBlockAminoMsg): MissedBlock {
     return MissedBlock.fromAmino(object.value);
   },
-  toAminoMsg(message: MissedBlock): MissedBlockAminoMsg {
+  toAminoMsg(message: MissedBlock, useInterfaces: boolean = false): MissedBlockAminoMsg {
     return {
       type: "cosmos-sdk/MissedBlock",
-      value: MissedBlock.toAmino(message)
+      value: MissedBlock.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MissedBlockProtoMsg): MissedBlock {
-    return MissedBlock.decode(message.value);
+  fromProtoMsg(message: MissedBlockProtoMsg, useInterfaces: boolean = false): MissedBlock {
+    return MissedBlock.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MissedBlock): Uint8Array {
     return MissedBlock.encode(message).finish();

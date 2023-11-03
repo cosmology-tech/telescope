@@ -181,7 +181,7 @@ export const Visibility = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Visibility {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Visibility {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVisibility();
@@ -189,7 +189,7 @@ export const Visibility = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.rules.push(VisibilityRule.decode(reader, reader.uint32()));
+          message.rules.push(VisibilityRule.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -236,17 +236,17 @@ export const Visibility = {
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => VisibilityRule.fromAmino(e)) : []
     };
   },
-  toAmino(message: Visibility): VisibilityAmino {
+  toAmino(message: Visibility, useInterfaces: boolean = false): VisibilityAmino {
     const obj: any = {};
     if (message.rules) {
-      obj.rules = message.rules.map(e => e ? VisibilityRule.toAmino(e) : undefined);
+      obj.rules = message.rules.map(e => e ? VisibilityRule.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.rules = [];
     }
     return obj;
   },
-  fromProtoMsg(message: VisibilityProtoMsg): Visibility {
-    return Visibility.decode(message.value);
+  fromProtoMsg(message: VisibilityProtoMsg, useInterfaces: boolean = false): Visibility {
+    return Visibility.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Visibility): Uint8Array {
     return Visibility.encode(message).finish();
@@ -275,7 +275,7 @@ export const VisibilityRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): VisibilityRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): VisibilityRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVisibilityRule();
@@ -331,14 +331,14 @@ export const VisibilityRule = {
       restriction: object.restriction
     };
   },
-  toAmino(message: VisibilityRule): VisibilityRuleAmino {
+  toAmino(message: VisibilityRule, useInterfaces: boolean = false): VisibilityRuleAmino {
     const obj: any = {};
     obj.selector = message.selector;
     obj.restriction = message.restriction;
     return obj;
   },
-  fromProtoMsg(message: VisibilityRuleProtoMsg): VisibilityRule {
-    return VisibilityRule.decode(message.value);
+  fromProtoMsg(message: VisibilityRuleProtoMsg, useInterfaces: boolean = false): VisibilityRule {
+    return VisibilityRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: VisibilityRule): Uint8Array {
     return VisibilityRule.encode(message).finish();

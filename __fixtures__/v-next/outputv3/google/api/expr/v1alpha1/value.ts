@@ -280,7 +280,7 @@ export const Value = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Value {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Value {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValue();
@@ -309,16 +309,16 @@ export const Value = {
           message.bytesValue = reader.bytes();
           break;
         case 9:
-          message.enumValue = EnumValue.decode(reader, reader.uint32());
+          message.enumValue = EnumValue.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 10:
-          message.objectValue = Any.decode(reader, reader.uint32());
+          message.objectValue = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 11:
-          message.mapValue = MapValue.decode(reader, reader.uint32());
+          message.mapValue = MapValue.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 12:
-          message.listValue = ListValue.decode(reader, reader.uint32());
+          message.listValue = ListValue.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 15:
           message.typeValue = reader.string();
@@ -442,7 +442,7 @@ export const Value = {
       typeValue: object?.type_value
     };
   },
-  toAmino(message: Value): ValueAmino {
+  toAmino(message: Value, useInterfaces: boolean = false): ValueAmino {
     const obj: any = {};
     obj.null_value = message.nullValue;
     obj.bool_value = message.boolValue;
@@ -451,15 +451,15 @@ export const Value = {
     obj.double_value = message.doubleValue;
     obj.string_value = message.stringValue;
     obj.bytes_value = message.bytesValue;
-    obj.enum_value = message.enumValue ? EnumValue.toAmino(message.enumValue) : undefined;
-    obj.object_value = message.objectValue ? Any.toAmino(message.objectValue) : undefined;
-    obj.map_value = message.mapValue ? MapValue.toAmino(message.mapValue) : undefined;
-    obj.list_value = message.listValue ? ListValue.toAmino(message.listValue) : undefined;
+    obj.enum_value = message.enumValue ? EnumValue.toAmino(message.enumValue, useInterfaces) : undefined;
+    obj.object_value = message.objectValue ? Any.toAmino(message.objectValue, useInterfaces) : undefined;
+    obj.map_value = message.mapValue ? MapValue.toAmino(message.mapValue, useInterfaces) : undefined;
+    obj.list_value = message.listValue ? ListValue.toAmino(message.listValue, useInterfaces) : undefined;
     obj.type_value = message.typeValue;
     return obj;
   },
-  fromProtoMsg(message: ValueProtoMsg): Value {
-    return Value.decode(message.value);
+  fromProtoMsg(message: ValueProtoMsg, useInterfaces: boolean = false): Value {
+    return Value.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Value): Uint8Array {
     return Value.encode(message).finish();
@@ -488,7 +488,7 @@ export const EnumValue = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EnumValue {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): EnumValue {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumValue();
@@ -544,14 +544,14 @@ export const EnumValue = {
       value: object.value
     };
   },
-  toAmino(message: EnumValue): EnumValueAmino {
+  toAmino(message: EnumValue, useInterfaces: boolean = false): EnumValueAmino {
     const obj: any = {};
     obj.type = message.type;
     obj.value = message.value;
     return obj;
   },
-  fromProtoMsg(message: EnumValueProtoMsg): EnumValue {
-    return EnumValue.decode(message.value);
+  fromProtoMsg(message: EnumValueProtoMsg, useInterfaces: boolean = false): EnumValue {
+    return EnumValue.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EnumValue): Uint8Array {
     return EnumValue.encode(message).finish();
@@ -576,7 +576,7 @@ export const ListValue = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListValue {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ListValue {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListValue();
@@ -584,7 +584,7 @@ export const ListValue = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.values.push(Value.decode(reader, reader.uint32()));
+          message.values.push(Value.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -631,17 +631,17 @@ export const ListValue = {
       values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromAmino(e)) : []
     };
   },
-  toAmino(message: ListValue): ListValueAmino {
+  toAmino(message: ListValue, useInterfaces: boolean = false): ListValueAmino {
     const obj: any = {};
     if (message.values) {
-      obj.values = message.values.map(e => e ? Value.toAmino(e) : undefined);
+      obj.values = message.values.map(e => e ? Value.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.values = [];
     }
     return obj;
   },
-  fromProtoMsg(message: ListValueProtoMsg): ListValue {
-    return ListValue.decode(message.value);
+  fromProtoMsg(message: ListValueProtoMsg, useInterfaces: boolean = false): ListValue {
+    return ListValue.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListValue): Uint8Array {
     return ListValue.encode(message).finish();
@@ -666,7 +666,7 @@ export const MapValue = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MapValue {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MapValue {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMapValue();
@@ -674,7 +674,7 @@ export const MapValue = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.entries.push(MapValue_Entry.decode(reader, reader.uint32()));
+          message.entries.push(MapValue_Entry.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -721,17 +721,17 @@ export const MapValue = {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromAmino(e)) : []
     };
   },
-  toAmino(message: MapValue): MapValueAmino {
+  toAmino(message: MapValue, useInterfaces: boolean = false): MapValueAmino {
     const obj: any = {};
     if (message.entries) {
-      obj.entries = message.entries.map(e => e ? MapValue_Entry.toAmino(e) : undefined);
+      obj.entries = message.entries.map(e => e ? MapValue_Entry.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.entries = [];
     }
     return obj;
   },
-  fromProtoMsg(message: MapValueProtoMsg): MapValue {
-    return MapValue.decode(message.value);
+  fromProtoMsg(message: MapValueProtoMsg, useInterfaces: boolean = false): MapValue {
+    return MapValue.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MapValue): Uint8Array {
     return MapValue.encode(message).finish();
@@ -760,7 +760,7 @@ export const MapValue_Entry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MapValue_Entry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MapValue_Entry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMapValue_Entry();
@@ -768,10 +768,10 @@ export const MapValue_Entry = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.key = Value.decode(reader, reader.uint32());
+          message.key = Value.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.value = Value.decode(reader, reader.uint32());
+          message.value = Value.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -820,14 +820,14 @@ export const MapValue_Entry = {
       value: object?.value ? Value.fromAmino(object.value) : undefined
     };
   },
-  toAmino(message: MapValue_Entry): MapValue_EntryAmino {
+  toAmino(message: MapValue_Entry, useInterfaces: boolean = false): MapValue_EntryAmino {
     const obj: any = {};
-    obj.key = message.key ? Value.toAmino(message.key) : undefined;
-    obj.value = message.value ? Value.toAmino(message.value) : undefined;
+    obj.key = message.key ? Value.toAmino(message.key, useInterfaces) : undefined;
+    obj.value = message.value ? Value.toAmino(message.value, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: MapValue_EntryProtoMsg): MapValue_Entry {
-    return MapValue_Entry.decode(message.value);
+  fromProtoMsg(message: MapValue_EntryProtoMsg, useInterfaces: boolean = false): MapValue_Entry {
+    return MapValue_Entry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MapValue_Entry): Uint8Array {
     return MapValue_Entry.encode(message).finish();

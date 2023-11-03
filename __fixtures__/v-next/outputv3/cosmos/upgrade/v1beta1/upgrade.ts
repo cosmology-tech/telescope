@@ -233,7 +233,7 @@ export const Plan = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Plan {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Plan {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlan();
@@ -253,7 +253,7 @@ export const Plan = {
           message.info = reader.string();
           break;
         case 5:
-          message.upgradedClientState = Any.decode(reader, reader.uint32());
+          message.upgradedClientState = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -320,17 +320,17 @@ export const Plan = {
       upgradedClientState: object?.upgraded_client_state ? Any.fromAmino(object.upgraded_client_state) : undefined
     };
   },
-  toAmino(message: Plan): PlanAmino {
+  toAmino(message: Plan, useInterfaces: boolean = false): PlanAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.time = message.time;
     obj.height = message.height ? message.height.toString() : undefined;
     obj.info = message.info;
-    obj.upgraded_client_state = message.upgradedClientState ? Any.toAmino(message.upgradedClientState) : undefined;
+    obj.upgraded_client_state = message.upgradedClientState ? Any.toAmino(message.upgradedClientState, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: PlanProtoMsg): Plan {
-    return Plan.decode(message.value);
+  fromProtoMsg(message: PlanProtoMsg, useInterfaces: boolean = false): Plan {
+    return Plan.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Plan): Uint8Array {
     return Plan.encode(message).finish();
@@ -364,7 +364,7 @@ export const SoftwareUpgradeProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SoftwareUpgradeProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SoftwareUpgradeProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSoftwareUpgradeProposal();
@@ -378,7 +378,7 @@ export const SoftwareUpgradeProposal = {
           message.description = reader.string();
           break;
         case 3:
-          message.plan = Plan.decode(reader, reader.uint32());
+          message.plan = Plan.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -431,15 +431,15 @@ export const SoftwareUpgradeProposal = {
       plan: object?.plan ? Plan.fromAmino(object.plan) : undefined
     };
   },
-  toAmino(message: SoftwareUpgradeProposal): SoftwareUpgradeProposalAmino {
+  toAmino(message: SoftwareUpgradeProposal, useInterfaces: boolean = false): SoftwareUpgradeProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
-    obj.plan = message.plan ? Plan.toAmino(message.plan) : undefined;
+    obj.plan = message.plan ? Plan.toAmino(message.plan, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: SoftwareUpgradeProposalProtoMsg): SoftwareUpgradeProposal {
-    return SoftwareUpgradeProposal.decode(message.value);
+  fromProtoMsg(message: SoftwareUpgradeProposalProtoMsg, useInterfaces: boolean = false): SoftwareUpgradeProposal {
+    return SoftwareUpgradeProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SoftwareUpgradeProposal): Uint8Array {
     return SoftwareUpgradeProposal.encode(message).finish();
@@ -469,7 +469,7 @@ export const CancelSoftwareUpgradeProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CancelSoftwareUpgradeProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CancelSoftwareUpgradeProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCancelSoftwareUpgradeProposal();
@@ -525,14 +525,14 @@ export const CancelSoftwareUpgradeProposal = {
       description: object.description
     };
   },
-  toAmino(message: CancelSoftwareUpgradeProposal): CancelSoftwareUpgradeProposalAmino {
+  toAmino(message: CancelSoftwareUpgradeProposal, useInterfaces: boolean = false): CancelSoftwareUpgradeProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
     return obj;
   },
-  fromProtoMsg(message: CancelSoftwareUpgradeProposalProtoMsg): CancelSoftwareUpgradeProposal {
-    return CancelSoftwareUpgradeProposal.decode(message.value);
+  fromProtoMsg(message: CancelSoftwareUpgradeProposalProtoMsg, useInterfaces: boolean = false): CancelSoftwareUpgradeProposal {
+    return CancelSoftwareUpgradeProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CancelSoftwareUpgradeProposal): Uint8Array {
     return CancelSoftwareUpgradeProposal.encode(message).finish();
@@ -562,7 +562,7 @@ export const ModuleVersion = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ModuleVersion {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ModuleVersion {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleVersion();
@@ -620,14 +620,14 @@ export const ModuleVersion = {
       version: BigInt(object.version)
     };
   },
-  toAmino(message: ModuleVersion): ModuleVersionAmino {
+  toAmino(message: ModuleVersion, useInterfaces: boolean = false): ModuleVersionAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.version = message.version ? message.version.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: ModuleVersionProtoMsg): ModuleVersion {
-    return ModuleVersion.decode(message.value);
+  fromProtoMsg(message: ModuleVersionProtoMsg, useInterfaces: boolean = false): ModuleVersion {
+    return ModuleVersion.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ModuleVersion): Uint8Array {
     return ModuleVersion.encode(message).finish();

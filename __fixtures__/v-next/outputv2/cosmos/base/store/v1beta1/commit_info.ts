@@ -115,7 +115,7 @@ export const CommitInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CommitInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CommitInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCommitInfo();
@@ -126,7 +126,7 @@ export const CommitInfo = {
           message.version = reader.int64();
           break;
         case 2:
-          message.storeInfos.push(StoreInfo.decode(reader, reader.uint32()));
+          message.storeInfos.push(StoreInfo.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -181,11 +181,11 @@ export const CommitInfo = {
       storeInfos: Array.isArray(object?.store_infos) ? object.store_infos.map((e: any) => StoreInfo.fromAmino(e)) : []
     };
   },
-  toAmino(message: CommitInfo): CommitInfoAmino {
+  toAmino(message: CommitInfo, useInterfaces: boolean = false): CommitInfoAmino {
     const obj: any = {};
     obj.version = message.version ? message.version.toString() : undefined;
     if (message.storeInfos) {
-      obj.store_infos = message.storeInfos.map(e => e ? StoreInfo.toAmino(e) : undefined);
+      obj.store_infos = message.storeInfos.map(e => e ? StoreInfo.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.store_infos = [];
     }
@@ -194,14 +194,14 @@ export const CommitInfo = {
   fromAminoMsg(object: CommitInfoAminoMsg): CommitInfo {
     return CommitInfo.fromAmino(object.value);
   },
-  toAminoMsg(message: CommitInfo): CommitInfoAminoMsg {
+  toAminoMsg(message: CommitInfo, useInterfaces: boolean = false): CommitInfoAminoMsg {
     return {
       type: "cosmos-sdk/CommitInfo",
-      value: CommitInfo.toAmino(message)
+      value: CommitInfo.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: CommitInfoProtoMsg): CommitInfo {
-    return CommitInfo.decode(message.value);
+  fromProtoMsg(message: CommitInfoProtoMsg, useInterfaces: boolean = false): CommitInfo {
+    return CommitInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CommitInfo): Uint8Array {
     return CommitInfo.encode(message).finish();
@@ -231,7 +231,7 @@ export const StoreInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): StoreInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): StoreInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStoreInfo();
@@ -242,7 +242,7 @@ export const StoreInfo = {
           message.name = reader.string();
           break;
         case 2:
-          message.commitId = CommitID.decode(reader, reader.uint32());
+          message.commitId = CommitID.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -289,23 +289,23 @@ export const StoreInfo = {
       commitId: object?.commit_id ? CommitID.fromAmino(object.commit_id) : undefined
     };
   },
-  toAmino(message: StoreInfo): StoreInfoAmino {
+  toAmino(message: StoreInfo, useInterfaces: boolean = false): StoreInfoAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.commit_id = message.commitId ? CommitID.toAmino(message.commitId) : undefined;
+    obj.commit_id = message.commitId ? CommitID.toAmino(message.commitId, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: StoreInfoAminoMsg): StoreInfo {
     return StoreInfo.fromAmino(object.value);
   },
-  toAminoMsg(message: StoreInfo): StoreInfoAminoMsg {
+  toAminoMsg(message: StoreInfo, useInterfaces: boolean = false): StoreInfoAminoMsg {
     return {
       type: "cosmos-sdk/StoreInfo",
-      value: StoreInfo.toAmino(message)
+      value: StoreInfo.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: StoreInfoProtoMsg): StoreInfo {
-    return StoreInfo.decode(message.value);
+  fromProtoMsg(message: StoreInfoProtoMsg, useInterfaces: boolean = false): StoreInfo {
+    return StoreInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: StoreInfo): Uint8Array {
     return StoreInfo.encode(message).finish();
@@ -335,7 +335,7 @@ export const CommitID = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CommitID {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CommitID {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCommitID();
@@ -393,7 +393,7 @@ export const CommitID = {
       hash: object.hash
     };
   },
-  toAmino(message: CommitID): CommitIDAmino {
+  toAmino(message: CommitID, useInterfaces: boolean = false): CommitIDAmino {
     const obj: any = {};
     obj.version = message.version ? message.version.toString() : undefined;
     obj.hash = message.hash;
@@ -402,14 +402,14 @@ export const CommitID = {
   fromAminoMsg(object: CommitIDAminoMsg): CommitID {
     return CommitID.fromAmino(object.value);
   },
-  toAminoMsg(message: CommitID): CommitIDAminoMsg {
+  toAminoMsg(message: CommitID, useInterfaces: boolean = false): CommitIDAminoMsg {
     return {
       type: "cosmos-sdk/CommitID",
-      value: CommitID.toAmino(message)
+      value: CommitID.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: CommitIDProtoMsg): CommitID {
-    return CommitID.decode(message.value);
+  fromProtoMsg(message: CommitIDProtoMsg, useInterfaces: boolean = false): CommitID {
+    return CommitID.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CommitID): Uint8Array {
     return CommitID.encode(message).finish();

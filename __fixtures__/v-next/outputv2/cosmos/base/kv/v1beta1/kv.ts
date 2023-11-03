@@ -58,7 +58,7 @@ export const Pairs = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Pairs {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Pairs {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePairs();
@@ -66,7 +66,7 @@ export const Pairs = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pairs.push(Pair.decode(reader, reader.uint32()));
+          message.pairs.push(Pair.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -113,10 +113,10 @@ export const Pairs = {
       pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => Pair.fromAmino(e)) : []
     };
   },
-  toAmino(message: Pairs): PairsAmino {
+  toAmino(message: Pairs, useInterfaces: boolean = false): PairsAmino {
     const obj: any = {};
     if (message.pairs) {
-      obj.pairs = message.pairs.map(e => e ? Pair.toAmino(e) : undefined);
+      obj.pairs = message.pairs.map(e => e ? Pair.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.pairs = [];
     }
@@ -125,14 +125,14 @@ export const Pairs = {
   fromAminoMsg(object: PairsAminoMsg): Pairs {
     return Pairs.fromAmino(object.value);
   },
-  toAminoMsg(message: Pairs): PairsAminoMsg {
+  toAminoMsg(message: Pairs, useInterfaces: boolean = false): PairsAminoMsg {
     return {
       type: "cosmos-sdk/Pairs",
-      value: Pairs.toAmino(message)
+      value: Pairs.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: PairsProtoMsg): Pairs {
-    return Pairs.decode(message.value);
+  fromProtoMsg(message: PairsProtoMsg, useInterfaces: boolean = false): Pairs {
+    return Pairs.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Pairs): Uint8Array {
     return Pairs.encode(message).finish();
@@ -162,7 +162,7 @@ export const Pair = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Pair {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Pair {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePair();
@@ -218,7 +218,7 @@ export const Pair = {
       value: object.value
     };
   },
-  toAmino(message: Pair): PairAmino {
+  toAmino(message: Pair, useInterfaces: boolean = false): PairAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -227,14 +227,14 @@ export const Pair = {
   fromAminoMsg(object: PairAminoMsg): Pair {
     return Pair.fromAmino(object.value);
   },
-  toAminoMsg(message: Pair): PairAminoMsg {
+  toAminoMsg(message: Pair, useInterfaces: boolean = false): PairAminoMsg {
     return {
       type: "cosmos-sdk/Pair",
-      value: Pair.toAmino(message)
+      value: Pair.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: PairProtoMsg): Pair {
-    return Pair.decode(message.value);
+  fromProtoMsg(message: PairProtoMsg, useInterfaces: boolean = false): Pair {
+    return Pair.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Pair): Uint8Array {
     return Pair.encode(message).finish();

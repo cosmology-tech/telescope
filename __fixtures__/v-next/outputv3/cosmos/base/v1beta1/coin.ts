@@ -119,7 +119,7 @@ export const Coin = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Coin {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Coin {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCoin();
@@ -175,14 +175,14 @@ export const Coin = {
       amount: object.amount
     };
   },
-  toAmino(message: Coin): CoinAmino {
+  toAmino(message: Coin, useInterfaces: boolean = false): CoinAmino {
     const obj: any = {};
     obj.denom = message.denom;
     obj.amount = message.amount;
     return obj;
   },
-  fromProtoMsg(message: CoinProtoMsg): Coin {
-    return Coin.decode(message.value);
+  fromProtoMsg(message: CoinProtoMsg, useInterfaces: boolean = false): Coin {
+    return Coin.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Coin): Uint8Array {
     return Coin.encode(message).finish();
@@ -212,7 +212,7 @@ export const DecCoin = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DecCoin {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DecCoin {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecCoin();
@@ -268,14 +268,14 @@ export const DecCoin = {
       amount: object.amount
     };
   },
-  toAmino(message: DecCoin): DecCoinAmino {
+  toAmino(message: DecCoin, useInterfaces: boolean = false): DecCoinAmino {
     const obj: any = {};
     obj.denom = message.denom;
     obj.amount = message.amount;
     return obj;
   },
-  fromProtoMsg(message: DecCoinProtoMsg): DecCoin {
-    return DecCoin.decode(message.value);
+  fromProtoMsg(message: DecCoinProtoMsg, useInterfaces: boolean = false): DecCoin {
+    return DecCoin.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DecCoin): Uint8Array {
     return DecCoin.encode(message).finish();
@@ -301,7 +301,7 @@ export const IntProto = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): IntProto {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): IntProto {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIntProto();
@@ -348,13 +348,13 @@ export const IntProto = {
       int: object.int
     };
   },
-  toAmino(message: IntProto): IntProtoAmino {
+  toAmino(message: IntProto, useInterfaces: boolean = false): IntProtoAmino {
     const obj: any = {};
     obj.int = message.int;
     return obj;
   },
-  fromProtoMsg(message: IntProtoProtoMsg): IntProto {
-    return IntProto.decode(message.value);
+  fromProtoMsg(message: IntProtoProtoMsg, useInterfaces: boolean = false): IntProto {
+    return IntProto.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: IntProto): Uint8Array {
     return IntProto.encode(message).finish();
@@ -380,7 +380,7 @@ export const DecProto = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DecProto {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DecProto {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecProto();
@@ -427,13 +427,13 @@ export const DecProto = {
       dec: object.dec
     };
   },
-  toAmino(message: DecProto): DecProtoAmino {
+  toAmino(message: DecProto, useInterfaces: boolean = false): DecProtoAmino {
     const obj: any = {};
     obj.dec = message.dec;
     return obj;
   },
-  fromProtoMsg(message: DecProtoProtoMsg): DecProto {
-    return DecProto.decode(message.value);
+  fromProtoMsg(message: DecProtoProtoMsg, useInterfaces: boolean = false): DecProto {
+    return DecProto.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DecProto): Uint8Array {
     return DecProto.encode(message).finish();

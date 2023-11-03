@@ -208,7 +208,7 @@ export const ProjectProperties = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ProjectProperties {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ProjectProperties {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProjectProperties();
@@ -216,7 +216,7 @@ export const ProjectProperties = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.properties.push(Property.decode(reader, reader.uint32()));
+          message.properties.push(Property.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -263,10 +263,10 @@ export const ProjectProperties = {
       properties: Array.isArray(object?.properties) ? object.properties.map((e: any) => Property.fromAmino(e)) : []
     };
   },
-  toAmino(message: ProjectProperties): ProjectPropertiesAmino {
+  toAmino(message: ProjectProperties, useInterfaces: boolean = false): ProjectPropertiesAmino {
     const obj: any = {};
     if (message.properties) {
-      obj.properties = message.properties.map(e => e ? Property.toAmino(e) : undefined);
+      obj.properties = message.properties.map(e => e ? Property.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.properties = [];
     }
@@ -275,8 +275,8 @@ export const ProjectProperties = {
   fromAminoMsg(object: ProjectPropertiesAminoMsg): ProjectProperties {
     return ProjectProperties.fromAmino(object.value);
   },
-  fromProtoMsg(message: ProjectPropertiesProtoMsg): ProjectProperties {
-    return ProjectProperties.decode(message.value);
+  fromProtoMsg(message: ProjectPropertiesProtoMsg, useInterfaces: boolean = false): ProjectProperties {
+    return ProjectProperties.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ProjectProperties): Uint8Array {
     return ProjectProperties.encode(message).finish();
@@ -309,7 +309,7 @@ export const Property = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Property {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Property {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProperty();
@@ -374,7 +374,7 @@ export const Property = {
       description: object.description
     };
   },
-  toAmino(message: Property): PropertyAmino {
+  toAmino(message: Property, useInterfaces: boolean = false): PropertyAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.type = message.type;
@@ -384,8 +384,8 @@ export const Property = {
   fromAminoMsg(object: PropertyAminoMsg): Property {
     return Property.fromAmino(object.value);
   },
-  fromProtoMsg(message: PropertyProtoMsg): Property {
-    return Property.decode(message.value);
+  fromProtoMsg(message: PropertyProtoMsg, useInterfaces: boolean = false): Property {
+    return Property.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Property): Uint8Array {
     return Property.encode(message).finish();

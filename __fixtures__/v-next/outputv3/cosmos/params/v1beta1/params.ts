@@ -76,7 +76,7 @@ export const ParameterChangeProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ParameterChangeProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ParameterChangeProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParameterChangeProposal();
@@ -90,7 +90,7 @@ export const ParameterChangeProposal = {
           message.description = reader.string();
           break;
         case 3:
-          message.changes.push(ParamChange.decode(reader, reader.uint32()));
+          message.changes.push(ParamChange.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -149,19 +149,19 @@ export const ParameterChangeProposal = {
       changes: Array.isArray(object?.changes) ? object.changes.map((e: any) => ParamChange.fromAmino(e)) : []
     };
   },
-  toAmino(message: ParameterChangeProposal): ParameterChangeProposalAmino {
+  toAmino(message: ParameterChangeProposal, useInterfaces: boolean = false): ParameterChangeProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
     if (message.changes) {
-      obj.changes = message.changes.map(e => e ? ParamChange.toAmino(e) : undefined);
+      obj.changes = message.changes.map(e => e ? ParamChange.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.changes = [];
     }
     return obj;
   },
-  fromProtoMsg(message: ParameterChangeProposalProtoMsg): ParameterChangeProposal {
-    return ParameterChangeProposal.decode(message.value);
+  fromProtoMsg(message: ParameterChangeProposalProtoMsg, useInterfaces: boolean = false): ParameterChangeProposal {
+    return ParameterChangeProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ParameterChangeProposal): Uint8Array {
     return ParameterChangeProposal.encode(message).finish();
@@ -195,7 +195,7 @@ export const ParamChange = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ParamChange {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ParamChange {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParamChange();
@@ -260,15 +260,15 @@ export const ParamChange = {
       value: object.value
     };
   },
-  toAmino(message: ParamChange): ParamChangeAmino {
+  toAmino(message: ParamChange, useInterfaces: boolean = false): ParamChangeAmino {
     const obj: any = {};
     obj.subspace = message.subspace;
     obj.key = message.key;
     obj.value = message.value;
     return obj;
   },
-  fromProtoMsg(message: ParamChangeProtoMsg): ParamChange {
-    return ParamChange.decode(message.value);
+  fromProtoMsg(message: ParamChangeProtoMsg, useInterfaces: boolean = false): ParamChange {
+    return ParamChange.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ParamChange): Uint8Array {
     return ParamChange.encode(message).finish();

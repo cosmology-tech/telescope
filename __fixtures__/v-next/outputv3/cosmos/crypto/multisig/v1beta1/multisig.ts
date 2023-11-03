@@ -77,7 +77,7 @@ export const MultiSignature = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MultiSignature {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MultiSignature {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMultiSignature();
@@ -132,7 +132,7 @@ export const MultiSignature = {
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
     };
   },
-  toAmino(message: MultiSignature): MultiSignatureAmino {
+  toAmino(message: MultiSignature, useInterfaces: boolean = false): MultiSignatureAmino {
     const obj: any = {};
     if (message.signatures) {
       obj.signatures = message.signatures.map(e => e);
@@ -141,8 +141,8 @@ export const MultiSignature = {
     }
     return obj;
   },
-  fromProtoMsg(message: MultiSignatureProtoMsg): MultiSignature {
-    return MultiSignature.decode(message.value);
+  fromProtoMsg(message: MultiSignatureProtoMsg, useInterfaces: boolean = false): MultiSignature {
+    return MultiSignature.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MultiSignature): Uint8Array {
     return MultiSignature.encode(message).finish();
@@ -172,7 +172,7 @@ export const CompactBitArray = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CompactBitArray {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CompactBitArray {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCompactBitArray();
@@ -228,14 +228,14 @@ export const CompactBitArray = {
       elems: object.elems
     };
   },
-  toAmino(message: CompactBitArray): CompactBitArrayAmino {
+  toAmino(message: CompactBitArray, useInterfaces: boolean = false): CompactBitArrayAmino {
     const obj: any = {};
     obj.extra_bits_stored = message.extraBitsStored;
     obj.elems = message.elems;
     return obj;
   },
-  fromProtoMsg(message: CompactBitArrayProtoMsg): CompactBitArray {
-    return CompactBitArray.decode(message.value);
+  fromProtoMsg(message: CompactBitArrayProtoMsg, useInterfaces: boolean = false): CompactBitArray {
+    return CompactBitArray.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CompactBitArray): Uint8Array {
     return CompactBitArray.encode(message).finish();

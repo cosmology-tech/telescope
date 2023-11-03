@@ -229,7 +229,7 @@ export const ConfigChange = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ConfigChange {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ConfigChange {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfigChange();
@@ -249,7 +249,7 @@ export const ConfigChange = {
           message.changeType = (reader.int32() as any);
           break;
         case 5:
-          message.advices.push(Advice.decode(reader, reader.uint32()));
+          message.advices.push(Advice.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -320,14 +320,14 @@ export const ConfigChange = {
       advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromAmino(e)) : []
     };
   },
-  toAmino(message: ConfigChange): ConfigChangeAmino {
+  toAmino(message: ConfigChange, useInterfaces: boolean = false): ConfigChangeAmino {
     const obj: any = {};
     obj.element = message.element;
     obj.old_value = message.oldValue;
     obj.new_value = message.newValue;
     obj.change_type = message.changeType;
     if (message.advices) {
-      obj.advices = message.advices.map(e => e ? Advice.toAmino(e) : undefined);
+      obj.advices = message.advices.map(e => e ? Advice.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.advices = [];
     }
@@ -336,8 +336,8 @@ export const ConfigChange = {
   fromAminoMsg(object: ConfigChangeAminoMsg): ConfigChange {
     return ConfigChange.fromAmino(object.value);
   },
-  fromProtoMsg(message: ConfigChangeProtoMsg): ConfigChange {
-    return ConfigChange.decode(message.value);
+  fromProtoMsg(message: ConfigChangeProtoMsg, useInterfaces: boolean = false): ConfigChange {
+    return ConfigChange.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ConfigChange): Uint8Array {
     return ConfigChange.encode(message).finish();
@@ -362,7 +362,7 @@ export const Advice = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Advice {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Advice {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAdvice();
@@ -409,7 +409,7 @@ export const Advice = {
       description: object.description
     };
   },
-  toAmino(message: Advice): AdviceAmino {
+  toAmino(message: Advice, useInterfaces: boolean = false): AdviceAmino {
     const obj: any = {};
     obj.description = message.description;
     return obj;
@@ -417,8 +417,8 @@ export const Advice = {
   fromAminoMsg(object: AdviceAminoMsg): Advice {
     return Advice.fromAmino(object.value);
   },
-  fromProtoMsg(message: AdviceProtoMsg): Advice {
-    return Advice.decode(message.value);
+  fromProtoMsg(message: AdviceProtoMsg, useInterfaces: boolean = false): Advice {
+    return Advice.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Advice): Uint8Array {
     return Advice.encode(message).finish();

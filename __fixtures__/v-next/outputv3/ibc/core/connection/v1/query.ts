@@ -351,7 +351,7 @@ export const QueryConnectionRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryConnectionRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConnectionRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionRequest();
@@ -398,13 +398,13 @@ export const QueryConnectionRequest = {
       connectionId: object.connection_id
     };
   },
-  toAmino(message: QueryConnectionRequest): QueryConnectionRequestAmino {
+  toAmino(message: QueryConnectionRequest, useInterfaces: boolean = false): QueryConnectionRequestAmino {
     const obj: any = {};
     obj.connection_id = message.connectionId;
     return obj;
   },
-  fromProtoMsg(message: QueryConnectionRequestProtoMsg): QueryConnectionRequest {
-    return QueryConnectionRequest.decode(message.value);
+  fromProtoMsg(message: QueryConnectionRequestProtoMsg, useInterfaces: boolean = false): QueryConnectionRequest {
+    return QueryConnectionRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConnectionRequest): Uint8Array {
     return QueryConnectionRequest.encode(message).finish();
@@ -438,7 +438,7 @@ export const QueryConnectionResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryConnectionResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConnectionResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionResponse();
@@ -446,13 +446,13 @@ export const QueryConnectionResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.connection = ConnectionEnd.decode(reader, reader.uint32());
+          message.connection = ConnectionEnd.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.proof = reader.bytes();
           break;
         case 3:
-          message.proofHeight = Height.decode(reader, reader.uint32());
+          message.proofHeight = Height.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -507,15 +507,15 @@ export const QueryConnectionResponse = {
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
     };
   },
-  toAmino(message: QueryConnectionResponse): QueryConnectionResponseAmino {
+  toAmino(message: QueryConnectionResponse, useInterfaces: boolean = false): QueryConnectionResponseAmino {
     const obj: any = {};
-    obj.connection = message.connection ? ConnectionEnd.toAmino(message.connection) : undefined;
+    obj.connection = message.connection ? ConnectionEnd.toAmino(message.connection, useInterfaces) : undefined;
     obj.proof = message.proof;
-    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     return obj;
   },
-  fromProtoMsg(message: QueryConnectionResponseProtoMsg): QueryConnectionResponse {
-    return QueryConnectionResponse.decode(message.value);
+  fromProtoMsg(message: QueryConnectionResponseProtoMsg, useInterfaces: boolean = false): QueryConnectionResponse {
+    return QueryConnectionResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConnectionResponse): Uint8Array {
     return QueryConnectionResponse.encode(message).finish();
@@ -541,7 +541,7 @@ export const QueryConnectionsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryConnectionsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConnectionsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionsRequest();
@@ -549,7 +549,7 @@ export const QueryConnectionsRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -590,13 +590,13 @@ export const QueryConnectionsRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryConnectionsRequest): QueryConnectionsRequestAmino {
+  toAmino(message: QueryConnectionsRequest, useInterfaces: boolean = false): QueryConnectionsRequestAmino {
     const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryConnectionsRequestProtoMsg): QueryConnectionsRequest {
-    return QueryConnectionsRequest.decode(message.value);
+  fromProtoMsg(message: QueryConnectionsRequestProtoMsg, useInterfaces: boolean = false): QueryConnectionsRequest {
+    return QueryConnectionsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConnectionsRequest): Uint8Array {
     return QueryConnectionsRequest.encode(message).finish();
@@ -630,7 +630,7 @@ export const QueryConnectionsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryConnectionsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConnectionsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionsResponse();
@@ -638,13 +638,13 @@ export const QueryConnectionsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.connections.push(IdentifiedConnection.decode(reader, reader.uint32()));
+          message.connections.push(IdentifiedConnection.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.height = Height.decode(reader, reader.uint32());
+          message.height = Height.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -707,19 +707,19 @@ export const QueryConnectionsResponse = {
       height: object?.height ? Height.fromAmino(object.height) : undefined
     };
   },
-  toAmino(message: QueryConnectionsResponse): QueryConnectionsResponseAmino {
+  toAmino(message: QueryConnectionsResponse, useInterfaces: boolean = false): QueryConnectionsResponseAmino {
     const obj: any = {};
     if (message.connections) {
-      obj.connections = message.connections.map(e => e ? IdentifiedConnection.toAmino(e) : undefined);
+      obj.connections = message.connections.map(e => e ? IdentifiedConnection.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.connections = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
-    obj.height = message.height ? Height.toAmino(message.height) : {};
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.height = message.height ? Height.toAmino(message.height, useInterfaces) : {};
     return obj;
   },
-  fromProtoMsg(message: QueryConnectionsResponseProtoMsg): QueryConnectionsResponse {
-    return QueryConnectionsResponse.decode(message.value);
+  fromProtoMsg(message: QueryConnectionsResponseProtoMsg, useInterfaces: boolean = false): QueryConnectionsResponse {
+    return QueryConnectionsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConnectionsResponse): Uint8Array {
     return QueryConnectionsResponse.encode(message).finish();
@@ -745,7 +745,7 @@ export const QueryClientConnectionsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryClientConnectionsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryClientConnectionsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientConnectionsRequest();
@@ -792,13 +792,13 @@ export const QueryClientConnectionsRequest = {
       clientId: object.client_id
     };
   },
-  toAmino(message: QueryClientConnectionsRequest): QueryClientConnectionsRequestAmino {
+  toAmino(message: QueryClientConnectionsRequest, useInterfaces: boolean = false): QueryClientConnectionsRequestAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
     return obj;
   },
-  fromProtoMsg(message: QueryClientConnectionsRequestProtoMsg): QueryClientConnectionsRequest {
-    return QueryClientConnectionsRequest.decode(message.value);
+  fromProtoMsg(message: QueryClientConnectionsRequestProtoMsg, useInterfaces: boolean = false): QueryClientConnectionsRequest {
+    return QueryClientConnectionsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryClientConnectionsRequest): Uint8Array {
     return QueryClientConnectionsRequest.encode(message).finish();
@@ -832,7 +832,7 @@ export const QueryClientConnectionsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryClientConnectionsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryClientConnectionsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClientConnectionsResponse();
@@ -846,7 +846,7 @@ export const QueryClientConnectionsResponse = {
           message.proof = reader.bytes();
           break;
         case 3:
-          message.proofHeight = Height.decode(reader, reader.uint32());
+          message.proofHeight = Height.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -907,7 +907,7 @@ export const QueryClientConnectionsResponse = {
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
     };
   },
-  toAmino(message: QueryClientConnectionsResponse): QueryClientConnectionsResponseAmino {
+  toAmino(message: QueryClientConnectionsResponse, useInterfaces: boolean = false): QueryClientConnectionsResponseAmino {
     const obj: any = {};
     if (message.connectionPaths) {
       obj.connection_paths = message.connectionPaths.map(e => e);
@@ -915,11 +915,11 @@ export const QueryClientConnectionsResponse = {
       obj.connection_paths = [];
     }
     obj.proof = message.proof;
-    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     return obj;
   },
-  fromProtoMsg(message: QueryClientConnectionsResponseProtoMsg): QueryClientConnectionsResponse {
-    return QueryClientConnectionsResponse.decode(message.value);
+  fromProtoMsg(message: QueryClientConnectionsResponseProtoMsg, useInterfaces: boolean = false): QueryClientConnectionsResponse {
+    return QueryClientConnectionsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryClientConnectionsResponse): Uint8Array {
     return QueryClientConnectionsResponse.encode(message).finish();
@@ -945,7 +945,7 @@ export const QueryConnectionClientStateRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryConnectionClientStateRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConnectionClientStateRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionClientStateRequest();
@@ -992,13 +992,13 @@ export const QueryConnectionClientStateRequest = {
       connectionId: object.connection_id
     };
   },
-  toAmino(message: QueryConnectionClientStateRequest): QueryConnectionClientStateRequestAmino {
+  toAmino(message: QueryConnectionClientStateRequest, useInterfaces: boolean = false): QueryConnectionClientStateRequestAmino {
     const obj: any = {};
     obj.connection_id = message.connectionId;
     return obj;
   },
-  fromProtoMsg(message: QueryConnectionClientStateRequestProtoMsg): QueryConnectionClientStateRequest {
-    return QueryConnectionClientStateRequest.decode(message.value);
+  fromProtoMsg(message: QueryConnectionClientStateRequestProtoMsg, useInterfaces: boolean = false): QueryConnectionClientStateRequest {
+    return QueryConnectionClientStateRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConnectionClientStateRequest): Uint8Array {
     return QueryConnectionClientStateRequest.encode(message).finish();
@@ -1032,7 +1032,7 @@ export const QueryConnectionClientStateResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryConnectionClientStateResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConnectionClientStateResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionClientStateResponse();
@@ -1040,13 +1040,13 @@ export const QueryConnectionClientStateResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.identifiedClientState = IdentifiedClientState.decode(reader, reader.uint32());
+          message.identifiedClientState = IdentifiedClientState.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.proof = reader.bytes();
           break;
         case 3:
-          message.proofHeight = Height.decode(reader, reader.uint32());
+          message.proofHeight = Height.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1101,15 +1101,15 @@ export const QueryConnectionClientStateResponse = {
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
     };
   },
-  toAmino(message: QueryConnectionClientStateResponse): QueryConnectionClientStateResponseAmino {
+  toAmino(message: QueryConnectionClientStateResponse, useInterfaces: boolean = false): QueryConnectionClientStateResponseAmino {
     const obj: any = {};
-    obj.identified_client_state = message.identifiedClientState ? IdentifiedClientState.toAmino(message.identifiedClientState) : undefined;
+    obj.identified_client_state = message.identifiedClientState ? IdentifiedClientState.toAmino(message.identifiedClientState, useInterfaces) : undefined;
     obj.proof = message.proof;
-    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     return obj;
   },
-  fromProtoMsg(message: QueryConnectionClientStateResponseProtoMsg): QueryConnectionClientStateResponse {
-    return QueryConnectionClientStateResponse.decode(message.value);
+  fromProtoMsg(message: QueryConnectionClientStateResponseProtoMsg, useInterfaces: boolean = false): QueryConnectionClientStateResponse {
+    return QueryConnectionClientStateResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConnectionClientStateResponse): Uint8Array {
     return QueryConnectionClientStateResponse.encode(message).finish();
@@ -1143,7 +1143,7 @@ export const QueryConnectionConsensusStateRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryConnectionConsensusStateRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConnectionConsensusStateRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionConsensusStateRequest();
@@ -1212,15 +1212,15 @@ export const QueryConnectionConsensusStateRequest = {
       revisionHeight: BigInt(object.revision_height)
     };
   },
-  toAmino(message: QueryConnectionConsensusStateRequest): QueryConnectionConsensusStateRequestAmino {
+  toAmino(message: QueryConnectionConsensusStateRequest, useInterfaces: boolean = false): QueryConnectionConsensusStateRequestAmino {
     const obj: any = {};
     obj.connection_id = message.connectionId;
     obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
     obj.revision_height = message.revisionHeight ? message.revisionHeight.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryConnectionConsensusStateRequestProtoMsg): QueryConnectionConsensusStateRequest {
-    return QueryConnectionConsensusStateRequest.decode(message.value);
+  fromProtoMsg(message: QueryConnectionConsensusStateRequestProtoMsg, useInterfaces: boolean = false): QueryConnectionConsensusStateRequest {
+    return QueryConnectionConsensusStateRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConnectionConsensusStateRequest): Uint8Array {
     return QueryConnectionConsensusStateRequest.encode(message).finish();
@@ -1258,7 +1258,7 @@ export const QueryConnectionConsensusStateResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryConnectionConsensusStateResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryConnectionConsensusStateResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConnectionConsensusStateResponse();
@@ -1266,7 +1266,7 @@ export const QueryConnectionConsensusStateResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.consensusState = Any.decode(reader, reader.uint32());
+          message.consensusState = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.clientId = reader.string();
@@ -1275,7 +1275,7 @@ export const QueryConnectionConsensusStateResponse = {
           message.proof = reader.bytes();
           break;
         case 4:
-          message.proofHeight = Height.decode(reader, reader.uint32());
+          message.proofHeight = Height.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1336,16 +1336,16 @@ export const QueryConnectionConsensusStateResponse = {
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
     };
   },
-  toAmino(message: QueryConnectionConsensusStateResponse): QueryConnectionConsensusStateResponseAmino {
+  toAmino(message: QueryConnectionConsensusStateResponse, useInterfaces: boolean = false): QueryConnectionConsensusStateResponseAmino {
     const obj: any = {};
-    obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
+    obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState, useInterfaces) : undefined;
     obj.client_id = message.clientId;
     obj.proof = message.proof;
-    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
+    obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     return obj;
   },
-  fromProtoMsg(message: QueryConnectionConsensusStateResponseProtoMsg): QueryConnectionConsensusStateResponse {
-    return QueryConnectionConsensusStateResponse.decode(message.value);
+  fromProtoMsg(message: QueryConnectionConsensusStateResponseProtoMsg, useInterfaces: boolean = false): QueryConnectionConsensusStateResponse {
+    return QueryConnectionConsensusStateResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryConnectionConsensusStateResponse): Uint8Array {
     return QueryConnectionConsensusStateResponse.encode(message).finish();

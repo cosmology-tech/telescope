@@ -467,7 +467,7 @@ export const GetTxsEventRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetTxsEventRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetTxsEventRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxsEventRequest();
@@ -478,7 +478,7 @@ export const GetTxsEventRequest = {
           message.events.push(reader.string());
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.orderBy = (reader.int32() as any);
@@ -542,19 +542,19 @@ export const GetTxsEventRequest = {
       orderBy: isSet(object.order_by) ? orderByFromJSON(object.order_by) : -1
     };
   },
-  toAmino(message: GetTxsEventRequest): GetTxsEventRequestAmino {
+  toAmino(message: GetTxsEventRequest, useInterfaces: boolean = false): GetTxsEventRequestAmino {
     const obj: any = {};
     if (message.events) {
       obj.events = message.events.map(e => e);
     } else {
       obj.events = [];
     }
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     obj.order_by = message.orderBy;
     return obj;
   },
-  fromProtoMsg(message: GetTxsEventRequestProtoMsg): GetTxsEventRequest {
-    return GetTxsEventRequest.decode(message.value);
+  fromProtoMsg(message: GetTxsEventRequestProtoMsg, useInterfaces: boolean = false): GetTxsEventRequest {
+    return GetTxsEventRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetTxsEventRequest): Uint8Array {
     return GetTxsEventRequest.encode(message).finish();
@@ -588,7 +588,7 @@ export const GetTxsEventResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetTxsEventResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetTxsEventResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxsEventResponse();
@@ -596,13 +596,13 @@ export const GetTxsEventResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.txs.push(Tx.decode(reader, reader.uint32()));
+          message.txs.push(Tx.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.txResponses.push(TxResponse.decode(reader, reader.uint32()));
+          message.txResponses.push(TxResponse.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -671,23 +671,23 @@ export const GetTxsEventResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: GetTxsEventResponse): GetTxsEventResponseAmino {
+  toAmino(message: GetTxsEventResponse, useInterfaces: boolean = false): GetTxsEventResponseAmino {
     const obj: any = {};
     if (message.txs) {
-      obj.txs = message.txs.map(e => e ? Tx.toAmino(e) : undefined);
+      obj.txs = message.txs.map(e => e ? Tx.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.txs = [];
     }
     if (message.txResponses) {
-      obj.tx_responses = message.txResponses.map(e => e ? TxResponse.toAmino(e) : undefined);
+      obj.tx_responses = message.txResponses.map(e => e ? TxResponse.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.tx_responses = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GetTxsEventResponseProtoMsg): GetTxsEventResponse {
-    return GetTxsEventResponse.decode(message.value);
+  fromProtoMsg(message: GetTxsEventResponseProtoMsg, useInterfaces: boolean = false): GetTxsEventResponse {
+    return GetTxsEventResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetTxsEventResponse): Uint8Array {
     return GetTxsEventResponse.encode(message).finish();
@@ -717,7 +717,7 @@ export const BroadcastTxRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): BroadcastTxRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): BroadcastTxRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBroadcastTxRequest();
@@ -773,14 +773,14 @@ export const BroadcastTxRequest = {
       mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : -1
     };
   },
-  toAmino(message: BroadcastTxRequest): BroadcastTxRequestAmino {
+  toAmino(message: BroadcastTxRequest, useInterfaces: boolean = false): BroadcastTxRequestAmino {
     const obj: any = {};
     obj.tx_bytes = message.txBytes;
     obj.mode = message.mode;
     return obj;
   },
-  fromProtoMsg(message: BroadcastTxRequestProtoMsg): BroadcastTxRequest {
-    return BroadcastTxRequest.decode(message.value);
+  fromProtoMsg(message: BroadcastTxRequestProtoMsg, useInterfaces: boolean = false): BroadcastTxRequest {
+    return BroadcastTxRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BroadcastTxRequest): Uint8Array {
     return BroadcastTxRequest.encode(message).finish();
@@ -806,7 +806,7 @@ export const BroadcastTxResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): BroadcastTxResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): BroadcastTxResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBroadcastTxResponse();
@@ -814,7 +814,7 @@ export const BroadcastTxResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.txResponse = TxResponse.decode(reader, reader.uint32());
+          message.txResponse = TxResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -855,13 +855,13 @@ export const BroadcastTxResponse = {
       txResponse: object?.tx_response ? TxResponse.fromAmino(object.tx_response) : undefined
     };
   },
-  toAmino(message: BroadcastTxResponse): BroadcastTxResponseAmino {
+  toAmino(message: BroadcastTxResponse, useInterfaces: boolean = false): BroadcastTxResponseAmino {
     const obj: any = {};
-    obj.tx_response = message.txResponse ? TxResponse.toAmino(message.txResponse) : undefined;
+    obj.tx_response = message.txResponse ? TxResponse.toAmino(message.txResponse, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: BroadcastTxResponseProtoMsg): BroadcastTxResponse {
-    return BroadcastTxResponse.decode(message.value);
+  fromProtoMsg(message: BroadcastTxResponseProtoMsg, useInterfaces: boolean = false): BroadcastTxResponse {
+    return BroadcastTxResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BroadcastTxResponse): Uint8Array {
     return BroadcastTxResponse.encode(message).finish();
@@ -891,7 +891,7 @@ export const SimulateRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SimulateRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SimulateRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSimulateRequest();
@@ -899,7 +899,7 @@ export const SimulateRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.tx = Tx.decode(reader, reader.uint32());
+          message.tx = Tx.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.txBytes = reader.bytes();
@@ -949,14 +949,14 @@ export const SimulateRequest = {
       txBytes: object.tx_bytes
     };
   },
-  toAmino(message: SimulateRequest): SimulateRequestAmino {
+  toAmino(message: SimulateRequest, useInterfaces: boolean = false): SimulateRequestAmino {
     const obj: any = {};
-    obj.tx = message.tx ? Tx.toAmino(message.tx) : undefined;
+    obj.tx = message.tx ? Tx.toAmino(message.tx, useInterfaces) : undefined;
     obj.tx_bytes = message.txBytes;
     return obj;
   },
-  fromProtoMsg(message: SimulateRequestProtoMsg): SimulateRequest {
-    return SimulateRequest.decode(message.value);
+  fromProtoMsg(message: SimulateRequestProtoMsg, useInterfaces: boolean = false): SimulateRequest {
+    return SimulateRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SimulateRequest): Uint8Array {
     return SimulateRequest.encode(message).finish();
@@ -986,7 +986,7 @@ export const SimulateResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SimulateResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SimulateResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSimulateResponse();
@@ -994,10 +994,10 @@ export const SimulateResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.gasInfo = GasInfo.decode(reader, reader.uint32());
+          message.gasInfo = GasInfo.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.result = Result.decode(reader, reader.uint32());
+          message.result = Result.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1046,14 +1046,14 @@ export const SimulateResponse = {
       result: object?.result ? Result.fromAmino(object.result) : undefined
     };
   },
-  toAmino(message: SimulateResponse): SimulateResponseAmino {
+  toAmino(message: SimulateResponse, useInterfaces: boolean = false): SimulateResponseAmino {
     const obj: any = {};
-    obj.gas_info = message.gasInfo ? GasInfo.toAmino(message.gasInfo) : undefined;
-    obj.result = message.result ? Result.toAmino(message.result) : undefined;
+    obj.gas_info = message.gasInfo ? GasInfo.toAmino(message.gasInfo, useInterfaces) : undefined;
+    obj.result = message.result ? Result.toAmino(message.result, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: SimulateResponseProtoMsg): SimulateResponse {
-    return SimulateResponse.decode(message.value);
+  fromProtoMsg(message: SimulateResponseProtoMsg, useInterfaces: boolean = false): SimulateResponse {
+    return SimulateResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SimulateResponse): Uint8Array {
     return SimulateResponse.encode(message).finish();
@@ -1079,7 +1079,7 @@ export const GetTxRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetTxRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetTxRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxRequest();
@@ -1126,13 +1126,13 @@ export const GetTxRequest = {
       hash: object.hash
     };
   },
-  toAmino(message: GetTxRequest): GetTxRequestAmino {
+  toAmino(message: GetTxRequest, useInterfaces: boolean = false): GetTxRequestAmino {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
   },
-  fromProtoMsg(message: GetTxRequestProtoMsg): GetTxRequest {
-    return GetTxRequest.decode(message.value);
+  fromProtoMsg(message: GetTxRequestProtoMsg, useInterfaces: boolean = false): GetTxRequest {
+    return GetTxRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetTxRequest): Uint8Array {
     return GetTxRequest.encode(message).finish();
@@ -1162,7 +1162,7 @@ export const GetTxResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetTxResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetTxResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxResponse();
@@ -1170,10 +1170,10 @@ export const GetTxResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.tx = Tx.decode(reader, reader.uint32());
+          message.tx = Tx.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.txResponse = TxResponse.decode(reader, reader.uint32());
+          message.txResponse = TxResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1222,14 +1222,14 @@ export const GetTxResponse = {
       txResponse: object?.tx_response ? TxResponse.fromAmino(object.tx_response) : undefined
     };
   },
-  toAmino(message: GetTxResponse): GetTxResponseAmino {
+  toAmino(message: GetTxResponse, useInterfaces: boolean = false): GetTxResponseAmino {
     const obj: any = {};
-    obj.tx = message.tx ? Tx.toAmino(message.tx) : undefined;
-    obj.tx_response = message.txResponse ? TxResponse.toAmino(message.txResponse) : undefined;
+    obj.tx = message.tx ? Tx.toAmino(message.tx, useInterfaces) : undefined;
+    obj.tx_response = message.txResponse ? TxResponse.toAmino(message.txResponse, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GetTxResponseProtoMsg): GetTxResponse {
-    return GetTxResponse.decode(message.value);
+  fromProtoMsg(message: GetTxResponseProtoMsg, useInterfaces: boolean = false): GetTxResponse {
+    return GetTxResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetTxResponse): Uint8Array {
     return GetTxResponse.encode(message).finish();
@@ -1259,7 +1259,7 @@ export const GetBlockWithTxsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetBlockWithTxsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetBlockWithTxsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBlockWithTxsRequest();
@@ -1270,7 +1270,7 @@ export const GetBlockWithTxsRequest = {
           message.height = reader.int64();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1319,14 +1319,14 @@ export const GetBlockWithTxsRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: GetBlockWithTxsRequest): GetBlockWithTxsRequestAmino {
+  toAmino(message: GetBlockWithTxsRequest, useInterfaces: boolean = false): GetBlockWithTxsRequestAmino {
     const obj: any = {};
     obj.height = message.height ? message.height.toString() : undefined;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GetBlockWithTxsRequestProtoMsg): GetBlockWithTxsRequest {
-    return GetBlockWithTxsRequest.decode(message.value);
+  fromProtoMsg(message: GetBlockWithTxsRequestProtoMsg, useInterfaces: boolean = false): GetBlockWithTxsRequest {
+    return GetBlockWithTxsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetBlockWithTxsRequest): Uint8Array {
     return GetBlockWithTxsRequest.encode(message).finish();
@@ -1364,7 +1364,7 @@ export const GetBlockWithTxsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetBlockWithTxsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GetBlockWithTxsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBlockWithTxsResponse();
@@ -1372,16 +1372,16 @@ export const GetBlockWithTxsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.txs.push(Tx.decode(reader, reader.uint32()));
+          message.txs.push(Tx.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.blockId = BlockID.decode(reader, reader.uint32());
+          message.blockId = BlockID.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.block = Block.decode(reader, reader.uint32());
+          message.block = Block.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1452,20 +1452,20 @@ export const GetBlockWithTxsResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: GetBlockWithTxsResponse): GetBlockWithTxsResponseAmino {
+  toAmino(message: GetBlockWithTxsResponse, useInterfaces: boolean = false): GetBlockWithTxsResponseAmino {
     const obj: any = {};
     if (message.txs) {
-      obj.txs = message.txs.map(e => e ? Tx.toAmino(e) : undefined);
+      obj.txs = message.txs.map(e => e ? Tx.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.txs = [];
     }
-    obj.block_id = message.blockId ? BlockID.toAmino(message.blockId) : undefined;
-    obj.block = message.block ? Block.toAmino(message.block) : undefined;
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.block_id = message.blockId ? BlockID.toAmino(message.blockId, useInterfaces) : undefined;
+    obj.block = message.block ? Block.toAmino(message.block, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GetBlockWithTxsResponseProtoMsg): GetBlockWithTxsResponse {
-    return GetBlockWithTxsResponse.decode(message.value);
+  fromProtoMsg(message: GetBlockWithTxsResponseProtoMsg, useInterfaces: boolean = false): GetBlockWithTxsResponse {
+    return GetBlockWithTxsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetBlockWithTxsResponse): Uint8Array {
     return GetBlockWithTxsResponse.encode(message).finish();
