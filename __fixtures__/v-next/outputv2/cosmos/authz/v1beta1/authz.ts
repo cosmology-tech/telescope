@@ -579,7 +579,7 @@ export const GrantQueueItem = {
 };
 export const Authorization_InterfaceDecoder = (input: BinaryReader | Uint8Array): DepositDeploymentAuthorization1 | DepositDeploymentAuthorization2 | GenericAuthorization | SendAuthorization | StakeAuthorization | Any => {
   const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32(), undefined, true);
+  const data = Any.decode(reader, reader.uint32(), true);
   switch (data.typeUrl) {
     case "/akash.deployment.v1beta1.DepositDeploymentAuthorization":
       return DepositDeploymentAuthorization1.decode(data.value, undefined, true);
