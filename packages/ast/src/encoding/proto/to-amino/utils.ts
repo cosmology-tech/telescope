@@ -746,12 +746,21 @@ export const toAminoMessages = {
             t.callExpression(
                 t.memberExpression(
                     t.callExpression(
-                        t.identifier('fromTimestamp'),
-                        [t.identifier('message')]
+                        t.memberExpression(
+                            t.callExpression(
+                                t.identifier('fromTimestamp'),
+                                [t.identifier('message')]
+                            ),
+                            t.identifier('toISOString')
+                        ),
+                        []
                     ),
-                    t.identifier('toISOString')
+                    t.identifier('replace')
                 ),
-                []
+                [
+                    t.regExpLiteral('\\.\\d+Z$'),
+                    t.stringLiteral('Z')
+                ]
             )
         )
     },
