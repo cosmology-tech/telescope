@@ -126,7 +126,6 @@ export const createInterfaceDecoderHelper = (
                       ),
                       []
                     ),
-                    t.identifier('undefined'),
                     t.booleanLiteral(true)
                   ]
                 )
