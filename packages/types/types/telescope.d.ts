@@ -17,6 +17,7 @@ interface TelescopeOpts {
     interfaces?: {
         enabled?: boolean;
         useByDefault?: boolean;
+        useByDefaultRpc?: boolean;
         useUnionTypes?: boolean;
     };
     prototypes?: {
