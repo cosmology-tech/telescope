@@ -17,7 +17,7 @@ export interface ParamsProtoMsg {
 }
 /** Params defines the claim module's parameters. */
 export interface ParamsAmino {
-  airdrop_start_time?: Date;
+  airdrop_start_time?: string;
   duration_until_decay?: DurationAmino;
   duration_of_decay?: DurationAmino;
   /** denom of claimable asset */
@@ -132,7 +132,7 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      airdropStartTime: fromTimestamp(Timestamp.fromAmino(object.airdrop_start_time)),
+      airdropStartTime: object?.airdrop_start_time ? fromTimestamp(Timestamp.fromAmino(object.airdrop_start_time)) : undefined,
       durationUntilDecay: object?.duration_until_decay ? Duration.fromAmino(object.duration_until_decay) : undefined,
       durationOfDecay: object?.duration_of_decay ? Duration.fromAmino(object.duration_of_decay) : undefined,
       claimDenom: object.claim_denom

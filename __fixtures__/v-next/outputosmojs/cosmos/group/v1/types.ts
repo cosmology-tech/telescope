@@ -630,7 +630,7 @@ export const Member = {
       address: object.address,
       weight: object.weight,
       metadata: object.metadata,
-      addedAt: fromTimestamp(Timestamp.fromAmino(object.added_at))
+      addedAt: object?.added_at ? fromTimestamp(Timestamp.fromAmino(object.added_at)) : undefined
     };
   },
   toAmino(message: Member): MemberAmino {
@@ -1220,7 +1220,7 @@ export const GroupInfo = {
       metadata: object.metadata,
       version: BigInt(object.version),
       totalWeight: object.total_weight,
-      createdAt: fromTimestamp(Timestamp.fromAmino(object.created_at))
+      createdAt: object?.created_at ? fromTimestamp(Timestamp.fromAmino(object.created_at)) : undefined
     };
   },
   toAmino(message: GroupInfo): GroupInfoAmino {
@@ -1508,7 +1508,7 @@ export const GroupPolicyInfo = {
       metadata: object.metadata,
       version: BigInt(object.version),
       decisionPolicy: object?.decision_policy ? Any.fromAmino(object.decision_policy) : undefined,
-      createdAt: fromTimestamp(Timestamp.fromAmino(object.created_at))
+      createdAt: object?.created_at ? fromTimestamp(Timestamp.fromAmino(object.created_at)) : undefined
     };
   },
   toAmino(message: GroupPolicyInfo): GroupPolicyInfoAmino {
@@ -1782,13 +1782,13 @@ export const Proposal = {
       address: object.address,
       metadata: object.metadata,
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => e) : [],
-      submitTime: fromTimestamp(Timestamp.fromAmino(object.submit_time)),
+      submitTime: object?.submit_time ? fromTimestamp(Timestamp.fromAmino(object.submit_time)) : undefined,
       groupVersion: BigInt(object.group_version),
       groupPolicyVersion: BigInt(object.group_policy_version),
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
       result: isSet(object.result) ? proposalResultFromJSON(object.result) : -1,
       finalTallyResult: object?.final_tally_result ? TallyResult.fromAmino(object.final_tally_result) : undefined,
-      votingPeriodEnd: fromTimestamp(Timestamp.fromAmino(object.voting_period_end)),
+      votingPeriodEnd: object?.voting_period_end ? fromTimestamp(Timestamp.fromAmino(object.voting_period_end)) : undefined,
       executorResult: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : -1,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : []
     };
@@ -2095,7 +2095,7 @@ export const Vote = {
       voter: object.voter,
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: object.metadata,
-      submitTime: fromTimestamp(Timestamp.fromAmino(object.submit_time))
+      submitTime: object?.submit_time ? fromTimestamp(Timestamp.fromAmino(object.submit_time)) : undefined
     };
   },
   toAmino(message: Vote): VoteAmino {

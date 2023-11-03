@@ -259,9 +259,9 @@ export interface LogBucketAmino {
    * Output only. The creation timestamp of the bucket. This is not set for any of the
    * default buckets.
    */
-  create_time?: Date;
+  create_time?: string;
   /** Output only. The last update timestamp of the bucket. */
-  update_time?: Date;
+  update_time?: string;
   /**
    * Logs will be retained by default for this amount of time, after which they
    * will automatically be deleted. The minimum retention period is 1 day. If
@@ -364,9 +364,9 @@ export interface LogViewAmino {
   /** Describes this view. */
   description: string;
   /** Output only. The creation timestamp of the view. */
-  create_time?: Date;
+  create_time?: string;
   /** Output only. The last update timestamp of the view. */
-  update_time?: Date;
+  update_time?: string;
   /**
    * Filter that restricts which log entries in a bucket are visible in this
    * view.
@@ -629,13 +629,13 @@ export interface LogSinkAmino {
    * 
    * This field may not be present for older sinks.
    */
-  create_time?: Date;
+  create_time?: string;
   /**
    * Output only. The last update timestamp of the sink.
    * 
    * This field may not be present for older sinks.
    */
-  update_time?: Date;
+  update_time?: string;
 }
 export interface LogSinkAminoMsg {
   type: "/google.logging.v2.LogSink";
@@ -1880,13 +1880,13 @@ export interface LogExclusionAmino {
    * 
    * This field may not be present for older exclusions.
    */
-  create_time?: Date;
+  create_time?: string;
   /**
    * Output only. The last update timestamp of the exclusion.
    * 
    * This field may not be present for older exclusions.
    */
-  update_time?: Date;
+  update_time?: string;
 }
 export interface LogExclusionAminoMsg {
   type: "/google.logging.v2.LogExclusion";
@@ -2975,9 +2975,9 @@ export interface CopyLogEntriesMetadataProtoMsg {
 /** Metadata for CopyLogEntries long running operations. */
 export interface CopyLogEntriesMetadataAmino {
   /** The create time of an operation. */
-  start_time?: Date;
+  start_time?: string;
   /** The end time of an operation. */
-  end_time?: Date;
+  end_time?: string;
   /** State of an operation. */
   state: OperationState;
   /** Identifies whether the user has requested cancellation of the operation. */

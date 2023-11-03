@@ -83,7 +83,7 @@ export interface PeerInfoProtoMsg {
 export interface PeerInfoAmino {
   id: string;
   address_info: PeerAddressInfoAmino[];
-  last_connected?: Date;
+  last_connected?: string;
 }
 export interface PeerInfoSDKType {
   id: string;
@@ -102,8 +102,8 @@ export interface PeerAddressInfoProtoMsg {
 }
 export interface PeerAddressInfoAmino {
   address: string;
-  last_dial_success?: Date;
-  last_dial_failure?: Date;
+  last_dial_success?: string;
+  last_dial_failure?: string;
   dial_failures: number;
 }
 export interface PeerAddressInfoSDKType {

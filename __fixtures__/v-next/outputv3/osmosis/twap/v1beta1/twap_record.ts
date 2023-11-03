@@ -65,7 +65,7 @@ export interface TwapRecordAmino {
    * This field should only exist until we have a global registry in the state
    * machine, mapping prior block heights within {TIME RANGE} to times.
    */
-  time?: Date;
+  time?: string;
   /**
    * We store the last spot prices in the struct, so that we can interpolate
    * accumulator values for times between when accumulator records are stored.
@@ -79,7 +79,7 @@ export interface TwapRecordAmino {
    * It is used to alert the caller if they are getting a potentially erroneous
    * TWAP, due to an unforeseen underlying error.
    */
-  last_error_time?: Date;
+  last_error_time?: string;
 }
 /**
  * A TWAP record should be indexed in state by pool_id, (asset pair), timestamp
@@ -276,12 +276,12 @@ export const TwapRecord = {
       asset0Denom: object.asset0_denom,
       asset1Denom: object.asset1_denom,
       height: BigInt(object.height),
-      time: fromTimestamp(Timestamp.fromAmino(object.time)),
+      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
       p0LastSpotPrice: object.p0_last_spot_price,
       p1LastSpotPrice: object.p1_last_spot_price,
       p0ArithmeticTwapAccumulator: object.p0_arithmetic_twap_accumulator,
       p1ArithmeticTwapAccumulator: object.p1_arithmetic_twap_accumulator,
-      lastErrorTime: fromTimestamp(Timestamp.fromAmino(object.last_error_time))
+      lastErrorTime: object?.last_error_time ? fromTimestamp(Timestamp.fromAmino(object.last_error_time)) : undefined
     };
   },
   toAmino(message: TwapRecord): TwapRecordAmino {

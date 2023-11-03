@@ -19,8 +19,8 @@ export interface ArithmeticTwapRequestAmino {
   pool_id: string;
   base_asset: string;
   quote_asset: string;
-  start_time?: Date;
-  end_time?: Date;
+  start_time?: string;
+  end_time?: string;
 }
 export interface ArithmeticTwapRequestAminoMsg {
   type: "osmosis/twap/arithmetic-twap-request";
@@ -64,7 +64,7 @@ export interface ArithmeticTwapToNowRequestAmino {
   pool_id: string;
   base_asset: string;
   quote_asset: string;
-  start_time?: Date;
+  start_time?: string;
 }
 export interface ArithmeticTwapToNowRequestAminoMsg {
   type: "osmosis/twap/arithmetic-twap-to-now-request";
@@ -232,7 +232,7 @@ export const ArithmeticTwapRequest = {
       poolId: BigInt(object.pool_id),
       baseAsset: object.base_asset,
       quoteAsset: object.quote_asset,
-      startTime: fromTimestamp(Timestamp.fromAmino(object.start_time)),
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
       endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : undefined
     };
   },
@@ -454,7 +454,7 @@ export const ArithmeticTwapToNowRequest = {
       poolId: BigInt(object.pool_id),
       baseAsset: object.base_asset,
       quoteAsset: object.quote_asset,
-      startTime: fromTimestamp(Timestamp.fromAmino(object.start_time))
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined
     };
   },
   toAmino(message: ArithmeticTwapToNowRequest): ArithmeticTwapToNowRequestAmino {

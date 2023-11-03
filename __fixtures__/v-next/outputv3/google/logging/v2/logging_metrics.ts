@@ -317,13 +317,13 @@ export interface LogMetricAmino {
    * 
    * This field may not be present for older metrics.
    */
-  create_time?: Date;
+  create_time?: string;
   /**
    * Output only. The last update timestamp of the metric.
    * 
    * This field may not be present for older metrics.
    */
-  update_time?: Date;
+  update_time?: string;
   /**
    * Deprecated. The API version that created or updated this metric.
    * The v2 format is used by default and cannot be changed.

@@ -272,11 +272,11 @@ export interface ProposalAmino {
    * proposal's voting period has ended.
    */
   final_tally_result?: TallyResultAmino;
-  submit_time?: Date;
-  deposit_end_time?: Date;
+  submit_time?: string;
+  deposit_end_time?: string;
   total_deposit: CoinAmino[];
-  voting_start_time?: Date;
-  voting_end_time?: Date;
+  voting_start_time?: string;
+  voting_end_time?: string;
 }
 /** Proposal defines the core field members of a governance proposal. */
 export interface ProposalSDKType {
@@ -931,11 +931,11 @@ export const Proposal = {
       content: object?.content ? ProposalContentI_FromAmino(object.content) : undefined,
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
       finalTallyResult: object?.final_tally_result ? TallyResult.fromAmino(object.final_tally_result) : undefined,
-      submitTime: fromTimestamp(Timestamp.fromAmino(object.submit_time)),
-      depositEndTime: fromTimestamp(Timestamp.fromAmino(object.deposit_end_time)),
+      submitTime: object?.submit_time ? fromTimestamp(Timestamp.fromAmino(object.submit_time)) : undefined,
+      depositEndTime: object?.deposit_end_time ? fromTimestamp(Timestamp.fromAmino(object.deposit_end_time)) : undefined,
       totalDeposit: Array.isArray(object?.total_deposit) ? object.total_deposit.map((e: any) => Coin.fromAmino(e)) : [],
-      votingStartTime: fromTimestamp(Timestamp.fromAmino(object.voting_start_time)),
-      votingEndTime: fromTimestamp(Timestamp.fromAmino(object.voting_end_time))
+      votingStartTime: object?.voting_start_time ? fromTimestamp(Timestamp.fromAmino(object.voting_start_time)) : undefined,
+      votingEndTime: object?.voting_end_time ? fromTimestamp(Timestamp.fromAmino(object.voting_end_time)) : undefined
     };
   },
   toAmino(message: Proposal): ProposalAmino {

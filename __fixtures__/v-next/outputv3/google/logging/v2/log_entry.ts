@@ -242,9 +242,9 @@ export interface LogEntryAmino {
    * the past, and that don't exceed 24 hours in the future. Log entries outside
    * those time boundaries aren't ingested by Logging.
    */
-  timestamp?: Date;
+  timestamp?: string;
   /** Output only. The time the log entry was received by Logging. */
-  receive_timestamp?: Date;
+  receive_timestamp?: string;
   /** Optional. The severity of the log entry. The default value is `LogSeverity.DEFAULT`. */
   severity: LogSeverity;
   /**

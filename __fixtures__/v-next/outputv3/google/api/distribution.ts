@@ -491,7 +491,7 @@ export interface Distribution_ExemplarAmino {
    */
   value: number;
   /** The observation (sampling) time of the above value. */
-  timestamp?: Date;
+  timestamp?: string;
   /**
    * Contextual information about the example value. Examples are:
    * 

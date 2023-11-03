@@ -105,7 +105,7 @@ export const GenesisDowntimeEntry = {
   fromAmino(object: GenesisDowntimeEntryAmino): GenesisDowntimeEntry {
     return {
       duration: isSet(object.duration) ? downtimeFromJSON(object.duration) : -1,
-      lastDowntime: fromTimestamp(Timestamp.fromAmino(object.last_downtime))
+      lastDowntime: object?.last_downtime ? fromTimestamp(Timestamp.fromAmino(object.last_downtime)) : undefined
     };
   },
   toAmino(message: GenesisDowntimeEntry): GenesisDowntimeEntryAmino {
@@ -220,7 +220,7 @@ export const GenesisState = {
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
       downtimes: Array.isArray(object?.downtimes) ? object.downtimes.map((e: any) => GenesisDowntimeEntry.fromAmino(e)) : [],
-      lastBlockTime: fromTimestamp(Timestamp.fromAmino(object.last_block_time))
+      lastBlockTime: object?.last_block_time ? fromTimestamp(Timestamp.fromAmino(object.last_block_time)) : undefined
     };
   },
   toAmino(message: GenesisState): GenesisStateAmino {

@@ -505,7 +505,7 @@ export const MsgCreatePositionResponse = {
       positionId: BigInt(object.position_id),
       amount0: object.amount0,
       amount1: object.amount1,
-      joinTime: fromTimestamp(Timestamp.fromAmino(object.join_time)),
+      joinTime: object?.join_time ? fromTimestamp(Timestamp.fromAmino(object.join_time)) : undefined,
       liquidityCreated: object.liquidity_created
     };
   },
@@ -1378,7 +1378,7 @@ export const MsgCreateIncentive = {
       incentiveDenom: object.incentive_denom,
       incentiveAmount: object.incentive_amount,
       emissionRate: object.emission_rate,
-      startTime: fromTimestamp(Timestamp.fromAmino(object.start_time)),
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
       minUptime: object?.min_uptime ? Duration.fromAmino(object.min_uptime) : undefined
     };
   },
@@ -1532,7 +1532,7 @@ export const MsgCreateIncentiveResponse = {
       incentiveDenom: object.incentive_denom,
       incentiveAmount: object.incentive_amount,
       emissionRate: object.emission_rate,
-      startTime: fromTimestamp(Timestamp.fromAmino(object.start_time)),
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
       minUptime: object?.min_uptime ? Duration.fromAmino(object.min_uptime) : undefined
     };
   },

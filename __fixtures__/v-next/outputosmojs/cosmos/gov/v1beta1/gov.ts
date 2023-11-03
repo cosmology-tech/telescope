@@ -868,11 +868,11 @@ export const Proposal = {
       content: object?.content ? Any.fromAmino(object.content) : undefined,
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
       finalTallyResult: object?.final_tally_result ? TallyResult.fromAmino(object.final_tally_result) : undefined,
-      submitTime: fromTimestamp(Timestamp.fromAmino(object.submit_time)),
-      depositEndTime: fromTimestamp(Timestamp.fromAmino(object.deposit_end_time)),
+      submitTime: object?.submit_time ? fromTimestamp(Timestamp.fromAmino(object.submit_time)) : undefined,
+      depositEndTime: object?.deposit_end_time ? fromTimestamp(Timestamp.fromAmino(object.deposit_end_time)) : undefined,
       totalDeposit: Array.isArray(object?.total_deposit) ? object.total_deposit.map((e: any) => Coin.fromAmino(e)) : [],
-      votingStartTime: fromTimestamp(Timestamp.fromAmino(object.voting_start_time)),
-      votingEndTime: fromTimestamp(Timestamp.fromAmino(object.voting_end_time))
+      votingStartTime: object?.voting_start_time ? fromTimestamp(Timestamp.fromAmino(object.voting_start_time)) : undefined,
+      votingEndTime: object?.voting_end_time ? fromTimestamp(Timestamp.fromAmino(object.voting_end_time)) : undefined
     };
   },
   toAmino(message: Proposal): ProposalAmino {

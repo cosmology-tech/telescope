@@ -285,7 +285,7 @@ export const DuplicateVoteEvidence = {
       voteB: object?.vote_b ? Vote.fromAmino(object.vote_b) : undefined,
       totalVotingPower: BigInt(object.total_voting_power),
       validatorPower: BigInt(object.validator_power),
-      timestamp: fromTimestamp(Timestamp.fromAmino(object.timestamp))
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
     };
   },
   toAmino(message: DuplicateVoteEvidence): DuplicateVoteEvidenceAmino {
@@ -439,7 +439,7 @@ export const LightClientAttackEvidence = {
       commonHeight: BigInt(object.common_height),
       byzantineValidators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Validator.fromAmino(e)) : [],
       totalVotingPower: BigInt(object.total_voting_power),
-      timestamp: fromTimestamp(Timestamp.fromAmino(object.timestamp))
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
     };
   },
   toAmino(message: LightClientAttackEvidence): LightClientAttackEvidenceAmino {

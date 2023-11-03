@@ -346,7 +346,7 @@ export interface RequestInitChainProtoMsg {
   value: Uint8Array;
 }
 export interface RequestInitChainAmino {
-  time?: Date;
+  time?: string;
   chain_id: string;
   consensus_params?: ConsensusParamsAmino;
   validators: ValidatorUpdateAmino[];
@@ -1328,7 +1328,7 @@ export interface EvidenceAmino {
   /** The height when the offense occurred */
   height: string;
   /** The corresponding time where the offense occurred */
-  time?: Date;
+  time?: string;
   /**
    * Total voting power of the validator set in case the ABCI application does
    * not store historical validators.
@@ -2175,7 +2175,7 @@ export const RequestInitChain = {
   },
   fromAmino(object: RequestInitChainAmino): RequestInitChain {
     return {
-      time: fromTimestamp(Timestamp.fromAmino(object.time)),
+      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
       chainId: object.chain_id,
       consensusParams: object?.consensus_params ? ConsensusParams.fromAmino(object.consensus_params) : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromAmino(e)) : [],
@@ -6501,7 +6501,7 @@ export const Evidence = {
       type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : -1,
       validator: object?.validator ? Validator.fromAmino(object.validator) : undefined,
       height: BigInt(object.height),
-      time: fromTimestamp(Timestamp.fromAmino(object.time)),
+      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
       totalVotingPower: BigInt(object.total_voting_power)
     };
   },

@@ -81,13 +81,13 @@ export interface MetricValueAmino {
    * documentation in the service configuration for details. If not specified,
    * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
    */
-  start_time?: Date;
+  start_time?: string;
   /**
    * The end of the time period over which this metric value's measurement
    * applies.  If not specified,
    * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
    */
-  end_time?: Date;
+  end_time?: string;
   /** A boolean value. */
   bool_value?: boolean;
   /** A signed 64-bit integer value. */

@@ -202,7 +202,7 @@ export const ValidatorSigningInfo = {
       address: object.address,
       startHeight: BigInt(object.start_height),
       indexOffset: BigInt(object.index_offset),
-      jailedUntil: fromTimestamp(Timestamp.fromAmino(object.jailed_until)),
+      jailedUntil: object?.jailed_until ? fromTimestamp(Timestamp.fromAmino(object.jailed_until)) : undefined,
       tombstoned: object.tombstoned,
       missedBlocksCounter: BigInt(object.missed_blocks_counter)
     };

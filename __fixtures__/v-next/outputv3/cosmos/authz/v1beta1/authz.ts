@@ -71,7 +71,7 @@ export interface GrantAmino {
    * doesn't have a time expiration (other conditions  in `authorization`
    * may apply to invalidate the grant)
    */
-  expiration?: Date;
+  expiration?: string;
 }
 /**
  * Grant gives permissions to execute
@@ -106,7 +106,7 @@ export interface GrantAuthorizationAmino {
   granter: string;
   grantee: string;
   authorization?: AnyAmino;
-  expiration?: Date;
+  expiration?: string;
 }
 /**
  * GrantAuthorization extends a grant with both the addresses of the grantee and granter.

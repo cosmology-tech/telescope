@@ -279,7 +279,7 @@ export const SmoothWeightChangeParams = {
   },
   fromAmino(object: SmoothWeightChangeParamsAmino): SmoothWeightChangeParams {
     return {
-      startTime: fromTimestamp(Timestamp.fromAmino(object.start_time)),
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
       initialPoolWeights: Array.isArray(object?.initial_pool_weights) ? object.initial_pool_weights.map((e: any) => PoolAsset.fromAmino(e)) : [],
       targetPoolWeights: Array.isArray(object?.target_pool_weights) ? object.target_pool_weights.map((e: any) => PoolAsset.fromAmino(e)) : []

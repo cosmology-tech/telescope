@@ -106,7 +106,7 @@ export interface PeriodLockAmino {
    * This value is first initialized when an unlock has started for the lock,
    * end time being block time + duration.
    */
-  end_time?: Date;
+  end_time?: string;
   /** Coins are the tokens locked within the lock, kept in the module account. */
   coins: CoinAmino[];
 }
@@ -172,7 +172,7 @@ export interface QueryConditionAmino {
    * Timestamp field must not be nil when the lock query type is `ByLockTime`.
    * Querying locks with timestamp is currently not implemented.
    */
-  timestamp?: Date;
+  timestamp?: string;
 }
 /**
  * QueryCondition is a struct used for querying locks upon different conditions.
@@ -238,7 +238,7 @@ export interface SyntheticLockAmino {
    * used for unbonding synthetic lockups, for active synthetic lockups, this
    * value is set to uninitialized value
    */
-  end_time?: Date;
+  end_time?: string;
   /**
    * Duration is the duration for a synthetic lock to mature
    * at the point of unbonding has started.
@@ -378,7 +378,7 @@ export const PeriodLock = {
       ID: BigInt(object.ID),
       owner: object.owner,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      endTime: fromTimestamp(Timestamp.fromAmino(object.end_time)),
+      endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
@@ -507,7 +507,7 @@ export const QueryCondition = {
       lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : -1,
       denom: object.denom,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      timestamp: fromTimestamp(Timestamp.fromAmino(object.timestamp))
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
     };
   },
   toAmino(message: QueryCondition): QueryConditionAmino {
@@ -631,7 +631,7 @@ export const SyntheticLock = {
     return {
       underlyingLockId: BigInt(object.underlying_lock_id),
       synthDenom: object.synth_denom,
-      endTime: fromTimestamp(Timestamp.fromAmino(object.end_time)),
+      endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : undefined,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
     };
   },

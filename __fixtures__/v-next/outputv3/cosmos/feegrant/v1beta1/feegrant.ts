@@ -36,7 +36,7 @@ export interface BasicAllowanceAmino {
    */
   spend_limit: CoinAmino[];
   /** expiration specifies an optional time when this allowance expires */
-  expiration?: Date;
+  expiration?: string;
 }
 /**
  * BasicAllowance implements Allowance with a one-time grant of tokens
@@ -102,7 +102,7 @@ export interface PeriodicAllowanceAmino {
    * it is calculated from the start time of the first transaction after the
    * last period ended
    */
-  period_reset?: Date;
+  period_reset?: string;
 }
 /**
  * PeriodicAllowance extends Allowance to allow for both a maximum cap,
@@ -412,7 +412,7 @@ export const PeriodicAllowance = {
       period: object?.period ? Duration.fromAmino(object.period) : undefined,
       periodSpendLimit: Array.isArray(object?.period_spend_limit) ? object.period_spend_limit.map((e: any) => Coin.fromAmino(e)) : [],
       periodCanSpend: Array.isArray(object?.period_can_spend) ? object.period_can_spend.map((e: any) => Coin.fromAmino(e)) : [],
-      periodReset: fromTimestamp(Timestamp.fromAmino(object.period_reset))
+      periodReset: object?.period_reset ? fromTimestamp(Timestamp.fromAmino(object.period_reset)) : undefined
     };
   },
   toAmino(message: PeriodicAllowance): PeriodicAllowanceAmino {

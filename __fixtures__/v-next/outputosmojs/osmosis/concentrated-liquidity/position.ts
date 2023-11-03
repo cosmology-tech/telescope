@@ -193,7 +193,7 @@ export const Position = {
       poolId: BigInt(object.pool_id),
       lowerTick: BigInt(object.lower_tick),
       upperTick: BigInt(object.upper_tick),
-      joinTime: fromTimestamp(Timestamp.fromAmino(object.join_time)),
+      joinTime: object?.join_time ? fromTimestamp(Timestamp.fromAmino(object.join_time)) : undefined,
       liquidity: object.liquidity
     };
   },

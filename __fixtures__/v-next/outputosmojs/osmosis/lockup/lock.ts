@@ -297,7 +297,7 @@ export const PeriodLock = {
       ID: BigInt(object.ID),
       owner: object.owner,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      endTime: fromTimestamp(Timestamp.fromAmino(object.end_time)),
+      endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
@@ -440,7 +440,7 @@ export const QueryCondition = {
       lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : -1,
       denom: object.denom,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      timestamp: fromTimestamp(Timestamp.fromAmino(object.timestamp))
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
     };
   },
   toAmino(message: QueryCondition): QueryConditionAmino {
@@ -576,7 +576,7 @@ export const SyntheticLock = {
     return {
       underlyingLockId: BigInt(object.underlying_lock_id),
       synthDenom: object.synth_denom,
-      endTime: fromTimestamp(Timestamp.fromAmino(object.end_time)),
+      endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : undefined,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
     };
   },

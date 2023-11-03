@@ -324,7 +324,7 @@ export interface OperationMetadataAmino {
   /** Percentage of completion of this operation, ranging from 0 to 100. */
   progress_percentage: number;
   /** The start time of the operation. */
-  start_time?: Date;
+  start_time?: string;
 }
 /** The metadata associated with a long running operation resource. */
 export interface OperationMetadataSDKType {
@@ -589,7 +589,7 @@ export interface RolloutAmino {
    */
   rollout_id: string;
   /** Creation time of the rollout. Readonly. */
-  create_time?: Date;
+  create_time?: string;
   /** The user who created the Rollout. Readonly. */
   created_by: string;
   /**

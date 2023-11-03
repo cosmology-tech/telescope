@@ -670,7 +670,7 @@ export interface ConstantAmino {
    * Deprecated: timestamp is no longer considered a builtin cel type.
    */
   /** @deprecated */
-  timestamp_value?: Date;
+  timestamp_value?: string;
 }
 export interface ConstantAminoMsg {
   type: "/google.api.expr.v1alpha1.Constant";

@@ -1717,7 +1717,7 @@ export const RequestInitChain = {
   },
   fromAmino(object: RequestInitChainAmino): RequestInitChain {
     return {
-      time: fromTimestamp(Timestamp.fromAmino(object.time)),
+      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
       chainId: object.chain_id,
       consensusParams: object?.consensus_params ? ConsensusParams.fromAmino(object.consensus_params) : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromAmino(e)) : [],
@@ -6201,7 +6201,7 @@ export const Evidence = {
       type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : -1,
       validator: object?.validator ? Validator.fromAmino(object.validator) : undefined,
       height: BigInt(object.height),
-      time: fromTimestamp(Timestamp.fromAmino(object.time)),
+      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
       totalVotingPower: BigInt(object.total_voting_power)
     };
   },

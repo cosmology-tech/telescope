@@ -547,7 +547,7 @@ export const ConsensusState = {
   },
   fromAmino(object: ConsensusStateAmino): ConsensusState {
     return {
-      timestamp: fromTimestamp(Timestamp.fromAmino(object.timestamp)),
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined,
       root: object?.root ? MerkleRoot.fromAmino(object.root) : undefined,
       nextValidatorsHash: object.next_validators_hash
     };

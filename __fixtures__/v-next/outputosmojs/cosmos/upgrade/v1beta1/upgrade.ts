@@ -247,7 +247,7 @@ export const Plan = {
   fromAmino(object: PlanAmino): Plan {
     return {
       name: object.name,
-      time: fromTimestamp(Timestamp.fromAmino(object.time)),
+      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
       height: BigInt(object.height),
       info: object.info,
       upgradedClientState: object?.upgraded_client_state ? Any.fromAmino(object.upgraded_client_state) : undefined

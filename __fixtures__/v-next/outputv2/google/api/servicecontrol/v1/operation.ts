@@ -185,7 +185,7 @@ export interface OperationAmino {
    */
   consumer_id: string;
   /** Required. Start time of the operation. */
-  start_time?: Date;
+  start_time?: string;
   /**
    * End time of the operation.
    * Required when the operation is used in
@@ -193,7 +193,7 @@ export interface OperationAmino {
    * but optional when the operation is used in
    * [ServiceController.Check][google.api.servicecontrol.v1.ServiceController.Check].
    */
-  end_time?: Date;
+  end_time?: string;
   /**
    * Labels describing the operation. Only the following labels are allowed:
    * 

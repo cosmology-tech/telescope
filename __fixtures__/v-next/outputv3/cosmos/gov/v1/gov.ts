@@ -223,11 +223,11 @@ export interface ProposalAmino {
    * proposal's voting period has ended.
    */
   final_tally_result?: TallyResultAmino;
-  submit_time?: Date;
-  deposit_end_time?: Date;
+  submit_time?: string;
+  deposit_end_time?: string;
   total_deposit: CoinAmino[];
-  voting_start_time?: Date;
-  voting_end_time?: Date;
+  voting_start_time?: string;
+  voting_end_time?: string;
   /** metadata is any arbitrary metadata attached to the proposal. */
   metadata: string;
 }

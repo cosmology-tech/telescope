@@ -316,7 +316,7 @@ export const IncentiveRecordBody = {
     return {
       remainingAmount: object.remaining_amount,
       emissionRate: object.emission_rate,
-      startTime: fromTimestamp(Timestamp.fromAmino(object.start_time))
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined
     };
   },
   toAmino(message: IncentiveRecordBody): IncentiveRecordBodyAmino {

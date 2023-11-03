@@ -597,7 +597,7 @@ export interface AttributeContext_RequestAmino {
    * The timestamp when the `destination` service receives the last byte of
    * the request.
    */
-  time?: Date;
+  time?: string;
   /** The HTTP request size in bytes. If unknown, it must be -1. */
   size: string;
   /**
@@ -718,7 +718,7 @@ export interface AttributeContext_ResponseAmino {
    * The timestamp when the `destination` service sends the last byte of
    * the response.
    */
-  time?: Date;
+  time?: string;
   /**
    * The length of time it takes the backend service to fully respond to a
    * request. Measured from when the destination service starts to send the
@@ -948,18 +948,18 @@ export interface AttributeContext_ResourceAmino {
    * Output only. The timestamp when the resource was created. This may
    * be either the time creation was initiated or when it was completed.
    */
-  create_time?: Date;
+  create_time?: string;
   /**
    * Output only. The timestamp when the resource was last updated. Any
    * change to the resource made by users must refresh this value.
    * Changes to a resource made by the service should refresh this value.
    */
-  update_time?: Date;
+  update_time?: string;
   /**
    * Output only. The timestamp when the resource was deleted.
    * If the resource is not deleted, this must be empty.
    */
-  delete_time?: Date;
+  delete_time?: string;
   /**
    * Output only. An opaque value that uniquely identifies a version or
    * generation of a resource. It can be used to confirm that the client

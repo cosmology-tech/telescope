@@ -1374,7 +1374,7 @@ export const AccountLockedPastTimeRequest = {
   fromAmino(object: AccountLockedPastTimeRequestAmino): AccountLockedPastTimeRequest {
     return {
       owner: object.owner,
-      timestamp: fromTimestamp(Timestamp.fromAmino(object.timestamp))
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
     };
   },
   toAmino(message: AccountLockedPastTimeRequest): AccountLockedPastTimeRequestAmino {
@@ -1585,7 +1585,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
   fromAmino(object: AccountLockedPastTimeNotUnlockingOnlyRequestAmino): AccountLockedPastTimeNotUnlockingOnlyRequest {
     return {
       owner: object.owner,
-      timestamp: fromTimestamp(Timestamp.fromAmino(object.timestamp))
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
     };
   },
   toAmino(message: AccountLockedPastTimeNotUnlockingOnlyRequest): AccountLockedPastTimeNotUnlockingOnlyRequestAmino {
@@ -1796,7 +1796,7 @@ export const AccountUnlockedBeforeTimeRequest = {
   fromAmino(object: AccountUnlockedBeforeTimeRequestAmino): AccountUnlockedBeforeTimeRequest {
     return {
       owner: object.owner,
-      timestamp: fromTimestamp(Timestamp.fromAmino(object.timestamp))
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
     };
   },
   toAmino(message: AccountUnlockedBeforeTimeRequest): AccountUnlockedBeforeTimeRequestAmino {
@@ -2020,7 +2020,7 @@ export const AccountLockedPastTimeDenomRequest = {
   fromAmino(object: AccountLockedPastTimeDenomRequestAmino): AccountLockedPastTimeDenomRequest {
     return {
       owner: object.owner,
-      timestamp: fromTimestamp(Timestamp.fromAmino(object.timestamp)),
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined,
       denom: object.denom
     };
   },

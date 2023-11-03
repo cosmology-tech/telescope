@@ -848,7 +848,7 @@ export const Commission = {
   fromAmino(object: CommissionAmino): Commission {
     return {
       commissionRates: object?.commission_rates ? CommissionRates.fromAmino(object.commission_rates) : undefined,
-      updateTime: fromTimestamp(Timestamp.fromAmino(object.update_time))
+      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined
     };
   },
   toAmino(message: Commission): CommissionAmino {
@@ -1239,7 +1239,7 @@ export const Validator = {
       delegatorShares: object.delegator_shares,
       description: object?.description ? Description.fromAmino(object.description) : undefined,
       unbondingHeight: BigInt(object.unbonding_height),
-      unbondingTime: fromTimestamp(Timestamp.fromAmino(object.unbonding_time)),
+      unbondingTime: object?.unbonding_time ? fromTimestamp(Timestamp.fromAmino(object.unbonding_time)) : undefined,
       commission: object?.commission ? Commission.fromAmino(object.commission) : undefined,
       minSelfDelegation: object.min_self_delegation
     };
@@ -2182,7 +2182,7 @@ export const UnbondingDelegationEntry = {
   fromAmino(object: UnbondingDelegationEntryAmino): UnbondingDelegationEntry {
     return {
       creationHeight: BigInt(object.creation_height),
-      completionTime: fromTimestamp(Timestamp.fromAmino(object.completion_time)),
+      completionTime: object?.completion_time ? fromTimestamp(Timestamp.fromAmino(object.completion_time)) : undefined,
       initialBalance: object.initial_balance,
       balance: object.balance
     };
@@ -2321,7 +2321,7 @@ export const RedelegationEntry = {
   fromAmino(object: RedelegationEntryAmino): RedelegationEntry {
     return {
       creationHeight: BigInt(object.creation_height),
-      completionTime: fromTimestamp(Timestamp.fromAmino(object.completion_time)),
+      completionTime: object?.completion_time ? fromTimestamp(Timestamp.fromAmino(object.completion_time)) : undefined,
       initialBalance: object.initial_balance,
       sharesDst: object.shares_dst
     };

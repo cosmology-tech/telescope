@@ -106,7 +106,7 @@ export interface LogEntryAmino {
    * The time the event described by the log entry occurred. If
    * omitted, defaults to operation start time.
    */
-  timestamp?: Date;
+  timestamp?: string;
   /**
    * The severity of the log entry. The default value is
    * `LogSeverity.DEFAULT`.

@@ -191,7 +191,7 @@ export const ArithmeticTwapRequest = {
       poolId: BigInt(object.pool_id),
       baseAsset: object.base_asset,
       quoteAsset: object.quote_asset,
-      startTime: fromTimestamp(Timestamp.fromAmino(object.start_time)),
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
       endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : undefined
     };
   },
@@ -422,7 +422,7 @@ export const ArithmeticTwapToNowRequest = {
       poolId: BigInt(object.pool_id),
       baseAsset: object.base_asset,
       quoteAsset: object.quote_asset,
-      startTime: fromTimestamp(Timestamp.fromAmino(object.start_time))
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined
     };
   },
   toAmino(message: ArithmeticTwapToNowRequest): ArithmeticTwapToNowRequestAmino {

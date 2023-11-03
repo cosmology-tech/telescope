@@ -152,7 +152,7 @@ export interface CommissionAmino {
   /** commission_rates defines the initial commission rates to be used for creating a validator. */
   commission_rates?: CommissionRatesAmino;
   /** update_time is the last time the commission rate was changed. */
-  update_time?: Date;
+  update_time?: string;
 }
 export interface CommissionAminoMsg {
   type: "cosmos-sdk/Commission";
@@ -274,7 +274,7 @@ export interface ValidatorAmino {
   /** unbonding_height defines, if unbonding, the height at which this validator has begun unbonding. */
   unbonding_height: string;
   /** unbonding_time defines, if unbonding, the min time for the validator to complete unbonding. */
-  unbonding_time?: Date;
+  unbonding_time?: string;
   /** commission defines the commission parameters. */
   commission?: CommissionAmino;
   /** min_self_delegation is the validator's self declared minimum self delegation. */
@@ -548,7 +548,7 @@ export interface UnbondingDelegationEntryAmino {
   /** creation_height is the height which the unbonding took place. */
   creation_height: string;
   /** completion_time is the unix time for unbonding completion. */
-  completion_time?: Date;
+  completion_time?: string;
   /** initial_balance defines the tokens initially scheduled to receive at completion. */
   initial_balance: string;
   /** balance defines the tokens to receive at completion. */
@@ -585,7 +585,7 @@ export interface RedelegationEntryAmino {
   /** creation_height  defines the height which the redelegation took place. */
   creation_height: string;
   /** completion_time defines the unix time for redelegation completion. */
-  completion_time?: Date;
+  completion_time?: string;
   /** initial_balance defines the initial balance when redelegation started. */
   initial_balance: string;
   /** shares_dst is the amount of destination-validator shares created by redelegation. */
@@ -1134,7 +1134,7 @@ export const Commission = {
   fromAmino(object: CommissionAmino): Commission {
     return {
       commissionRates: object?.commission_rates ? CommissionRates.fromAmino(object.commission_rates) : undefined,
-      updateTime: fromTimestamp(Timestamp.fromAmino(object.update_time))
+      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined
     };
   },
   toAmino(message: Commission): CommissionAmino {
@@ -1503,7 +1503,7 @@ export const Validator = {
       delegatorShares: object.delegator_shares,
       description: object?.description ? Description.fromAmino(object.description) : undefined,
       unbondingHeight: BigInt(object.unbonding_height),
-      unbondingTime: fromTimestamp(Timestamp.fromAmino(object.unbonding_time)),
+      unbondingTime: object?.unbonding_time ? fromTimestamp(Timestamp.fromAmino(object.unbonding_time)) : undefined,
       commission: object?.commission ? Commission.fromAmino(object.commission) : undefined,
       minSelfDelegation: object.min_self_delegation
     };
@@ -2404,7 +2404,7 @@ export const UnbondingDelegationEntry = {
   fromAmino(object: UnbondingDelegationEntryAmino): UnbondingDelegationEntry {
     return {
       creationHeight: BigInt(object.creation_height),
-      completionTime: fromTimestamp(Timestamp.fromAmino(object.completion_time)),
+      completionTime: object?.completion_time ? fromTimestamp(Timestamp.fromAmino(object.completion_time)) : undefined,
       initialBalance: object.initial_balance,
       balance: object.balance
     };
@@ -2536,7 +2536,7 @@ export const RedelegationEntry = {
   fromAmino(object: RedelegationEntryAmino): RedelegationEntry {
     return {
       creationHeight: BigInt(object.creation_height),
-      completionTime: fromTimestamp(Timestamp.fromAmino(object.completion_time)),
+      completionTime: object?.completion_time ? fromTimestamp(Timestamp.fromAmino(object.completion_time)) : undefined,
       initialBalance: object.initial_balance,
       sharesDst: object.shares_dst
     };
