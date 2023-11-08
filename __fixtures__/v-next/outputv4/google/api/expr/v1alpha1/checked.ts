@@ -583,7 +583,7 @@ function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntr
 }
 export const CheckedExpr_ReferenceMapEntry = {
   encode(message: CheckedExpr_ReferenceMapEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== BigInt(0)) {
+    if (message.key !== undefined) {
       writer.uint32(8).int64(message.key);
     }
     if (message.value !== undefined) {
@@ -681,7 +681,7 @@ function createBaseCheckedExpr_TypeMapEntry(): CheckedExpr_TypeMapEntry {
 }
 export const CheckedExpr_TypeMapEntry = {
   encode(message: CheckedExpr_TypeMapEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== BigInt(0)) {
+    if (message.key !== undefined) {
       writer.uint32(8).int64(message.key);
     }
     if (message.value !== undefined) {
@@ -798,7 +798,7 @@ export const CheckedExpr = {
     if (message.sourceInfo !== undefined) {
       SourceInfo.encode(message.sourceInfo, writer.uint32(42).fork()).ldelim();
     }
-    if (message.exprVersion !== "") {
+    if (message.exprVersion !== undefined) {
       writer.uint32(50).string(message.exprVersion);
     }
     if (message.expr !== undefined) {
@@ -1614,7 +1614,7 @@ function createBaseType_AbstractType(): Type_AbstractType {
 export const Type_AbstractType = {
   typeUrl: "/google.api.expr.v1alpha1.AbstractType",
   encode(message: Type_AbstractType, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.parameterTypes) {
@@ -1728,7 +1728,7 @@ function createBaseDecl(): Decl {
 export const Decl = {
   typeUrl: "/google.api.expr.v1alpha1.Decl",
   encode(message: Decl, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.ident !== undefined) {
@@ -1854,7 +1854,7 @@ export const Decl_IdentDecl = {
     if (message.value !== undefined) {
       Constant.encode(message.value, writer.uint32(18).fork()).ldelim();
     }
-    if (message.doc !== "") {
+    if (message.doc !== undefined) {
       writer.uint32(26).string(message.doc);
     }
     return writer;
@@ -2069,7 +2069,7 @@ function createBaseDecl_FunctionDecl_Overload(): Decl_FunctionDecl_Overload {
 export const Decl_FunctionDecl_Overload = {
   typeUrl: "/google.api.expr.v1alpha1.Overload",
   encode(message: Decl_FunctionDecl_Overload, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.overloadId !== "") {
+    if (message.overloadId !== undefined) {
       writer.uint32(10).string(message.overloadId);
     }
     for (const v of message.params) {
@@ -2081,10 +2081,10 @@ export const Decl_FunctionDecl_Overload = {
     if (message.resultType !== undefined) {
       Type.encode(message.resultType, writer.uint32(34).fork()).ldelim();
     }
-    if (message.isInstanceFunction === true) {
+    if (message.isInstanceFunction !== undefined) {
       writer.uint32(40).bool(message.isInstanceFunction);
     }
-    if (message.doc !== "") {
+    if (message.doc !== undefined) {
       writer.uint32(50).string(message.doc);
     }
     return writer;
@@ -2253,7 +2253,7 @@ function createBaseReference(): Reference {
 export const Reference = {
   typeUrl: "/google.api.expr.v1alpha1.Reference",
   encode(message: Reference, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.overloadId) {

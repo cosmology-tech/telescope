@@ -82,31 +82,31 @@ function createBaseTwapRecord(): TwapRecord {
 export const TwapRecord = {
   typeUrl: "/osmosis.twap.v1beta1.TwapRecord",
   encode(message: TwapRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
-    if (message.asset0Denom !== "") {
+    if (message.asset0Denom !== undefined) {
       writer.uint32(18).string(message.asset0Denom);
     }
-    if (message.asset1Denom !== "") {
+    if (message.asset1Denom !== undefined) {
       writer.uint32(26).string(message.asset1Denom);
     }
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(32).int64(message.height);
     }
     if (message.time !== undefined) {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(42).fork()).ldelim();
     }
-    if (message.p0LastSpotPrice !== "") {
+    if (message.p0LastSpotPrice !== undefined) {
       writer.uint32(50).string(Decimal.fromUserInput(message.p0LastSpotPrice, 18).atomics);
     }
-    if (message.p1LastSpotPrice !== "") {
+    if (message.p1LastSpotPrice !== undefined) {
       writer.uint32(58).string(Decimal.fromUserInput(message.p1LastSpotPrice, 18).atomics);
     }
-    if (message.p0ArithmeticTwapAccumulator !== "") {
+    if (message.p0ArithmeticTwapAccumulator !== undefined) {
       writer.uint32(66).string(Decimal.fromUserInput(message.p0ArithmeticTwapAccumulator, 18).atomics);
     }
-    if (message.p1ArithmeticTwapAccumulator !== "") {
+    if (message.p1ArithmeticTwapAccumulator !== undefined) {
       writer.uint32(74).string(Decimal.fromUserInput(message.p1ArithmeticTwapAccumulator, 18).atomics);
     }
     if (message.lastErrorTime !== undefined) {

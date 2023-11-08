@@ -123,7 +123,7 @@ function createBaseModuleDescriptor(): ModuleDescriptor {
 export const ModuleDescriptor = {
   typeUrl: "/cosmos.app.v1alpha1.ModuleDescriptor",
   encode(message: ModuleDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.goImport !== "") {
+    if (message.goImport !== undefined) {
       writer.uint32(10).string(message.goImport);
     }
     for (const v of message.usePackage) {
@@ -268,10 +268,10 @@ function createBasePackageReference(): PackageReference {
 export const PackageReference = {
   typeUrl: "/cosmos.app.v1alpha1.PackageReference",
   encode(message: PackageReference, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.revision !== 0) {
+    if (message.revision !== undefined) {
       writer.uint32(16).uint32(message.revision);
     }
     return writer;
@@ -374,7 +374,7 @@ function createBaseMigrateFromInfo(): MigrateFromInfo {
 export const MigrateFromInfo = {
   typeUrl: "/cosmos.app.v1alpha1.MigrateFromInfo",
   encode(message: MigrateFromInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.module !== "") {
+    if (message.module !== undefined) {
       writer.uint32(10).string(message.module);
     }
     return writer;

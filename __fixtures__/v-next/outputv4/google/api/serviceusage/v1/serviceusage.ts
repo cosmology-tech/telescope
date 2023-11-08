@@ -353,7 +353,7 @@ function createBaseEnableServiceRequest(): EnableServiceRequest {
 export const EnableServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1.EnableServiceRequest",
   encode(message: EnableServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -529,10 +529,10 @@ function createBaseDisableServiceRequest(): DisableServiceRequest {
 export const DisableServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1.DisableServiceRequest",
   encode(message: DisableServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.disableDependentServices === true) {
+    if (message.disableDependentServices !== undefined) {
       writer.uint32(16).bool(message.disableDependentServices);
     }
     if (message.checkIfServiceHasUsage !== 0) {
@@ -731,7 +731,7 @@ function createBaseGetServiceRequest(): GetServiceRequest {
 export const GetServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1.GetServiceRequest",
   encode(message: GetServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -820,16 +820,16 @@ function createBaseListServicesRequest(): ListServicesRequest {
 export const ListServicesRequest = {
   typeUrl: "/google.api.serviceusage.v1.ListServicesRequest",
   encode(message: ListServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(16).int32(message.pageSize);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(26).string(message.pageToken);
     }
-    if (message.filter !== "") {
+    if (message.filter !== undefined) {
       writer.uint32(34).string(message.filter);
     }
     return writer;
@@ -952,7 +952,7 @@ export const ListServicesResponse = {
     for (const v of message.services) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -1062,7 +1062,7 @@ function createBaseBatchEnableServicesRequest(): BatchEnableServicesRequest {
 export const BatchEnableServicesRequest = {
   typeUrl: "/google.api.serviceusage.v1.BatchEnableServicesRequest",
   encode(message: BatchEnableServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
     for (const v of message.serviceIds) {
@@ -1300,10 +1300,10 @@ function createBaseBatchEnableServicesResponse_EnableFailure(): BatchEnableServi
 export const BatchEnableServicesResponse_EnableFailure = {
   typeUrl: "/google.api.serviceusage.v1.EnableFailure",
   encode(message: BatchEnableServicesResponse_EnableFailure, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceId !== "") {
+    if (message.serviceId !== undefined) {
       writer.uint32(10).string(message.serviceId);
     }
-    if (message.errorMessage !== "") {
+    if (message.errorMessage !== undefined) {
       writer.uint32(18).string(message.errorMessage);
     }
     return writer;
@@ -1401,7 +1401,7 @@ function createBaseBatchGetServicesRequest(): BatchGetServicesRequest {
 export const BatchGetServicesRequest = {
   typeUrl: "/google.api.serviceusage.v1.BatchGetServicesRequest",
   encode(message: BatchGetServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
     for (const v of message.names) {

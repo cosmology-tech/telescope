@@ -220,7 +220,7 @@ function createBaseBilling_BillingDestination(): Billing_BillingDestination {
 export const Billing_BillingDestination = {
   typeUrl: "/google.api.BillingDestination",
   encode(message: Billing_BillingDestination, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.monitoredResource !== "") {
+    if (message.monitoredResource !== undefined) {
       writer.uint32(10).string(message.monitoredResource);
     }
     for (const v of message.metrics) {

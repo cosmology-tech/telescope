@@ -180,7 +180,7 @@ function createBaseSuperfluidAsset(): SuperfluidAsset {
 export const SuperfluidAsset = {
   typeUrl: "/osmosis.superfluid.SuperfluidAsset",
   encode(message: SuperfluidAsset, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
     }
     if (message.assetType !== 0) {
@@ -288,13 +288,13 @@ function createBaseSuperfluidIntermediaryAccount(): SuperfluidIntermediaryAccoun
 export const SuperfluidIntermediaryAccount = {
   typeUrl: "/osmosis.superfluid.SuperfluidIntermediaryAccount",
   encode(message: SuperfluidIntermediaryAccount, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
     }
-    if (message.valAddr !== "") {
+    if (message.valAddr !== undefined) {
       writer.uint32(18).string(message.valAddr);
     }
-    if (message.gaugeId !== BigInt(0)) {
+    if (message.gaugeId !== undefined) {
       writer.uint32(24).uint64(message.gaugeId);
     }
     return writer;
@@ -412,13 +412,13 @@ function createBaseOsmoEquivalentMultiplierRecord(): OsmoEquivalentMultiplierRec
 export const OsmoEquivalentMultiplierRecord = {
   typeUrl: "/osmosis.superfluid.OsmoEquivalentMultiplierRecord",
   encode(message: OsmoEquivalentMultiplierRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.epochNumber !== BigInt(0)) {
+    if (message.epochNumber !== undefined) {
       writer.uint32(8).int64(message.epochNumber);
     }
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(18).string(message.denom);
     }
-    if (message.multiplier !== "") {
+    if (message.multiplier !== undefined) {
       writer.uint32(26).string(Decimal.fromUserInput(message.multiplier, 18).atomics);
     }
     return writer;
@@ -537,10 +537,10 @@ function createBaseSuperfluidDelegationRecord(): SuperfluidDelegationRecord {
 export const SuperfluidDelegationRecord = {
   typeUrl: "/osmosis.superfluid.SuperfluidDelegationRecord",
   encode(message: SuperfluidDelegationRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddress !== "") {
+    if (message.delegatorAddress !== undefined) {
       writer.uint32(10).string(message.delegatorAddress);
     }
-    if (message.validatorAddress !== "") {
+    if (message.validatorAddress !== undefined) {
       writer.uint32(18).string(message.validatorAddress);
     }
     if (message.delegationAmount !== undefined) {
@@ -676,10 +676,10 @@ function createBaseLockIdIntermediaryAccountConnection(): LockIdIntermediaryAcco
 export const LockIdIntermediaryAccountConnection = {
   typeUrl: "/osmosis.superfluid.LockIdIntermediaryAccountConnection",
   encode(message: LockIdIntermediaryAccountConnection, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.lockId !== BigInt(0)) {
+    if (message.lockId !== undefined) {
       writer.uint32(8).uint64(message.lockId);
     }
-    if (message.intermediaryAccount !== "") {
+    if (message.intermediaryAccount !== undefined) {
       writer.uint32(18).string(message.intermediaryAccount);
     }
     return writer;

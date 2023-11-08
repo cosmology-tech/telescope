@@ -93,7 +93,7 @@ export const GenesisState = {
     for (const v of message.redelegations) {
       Redelegation.encode(v!, writer.uint32(58).fork()).ldelim();
     }
-    if (message.exported === true) {
+    if (message.exported !== undefined) {
       writer.uint32(64).bool(message.exported);
     }
     return writer;
@@ -325,10 +325,10 @@ function createBaseLastValidatorPower(): LastValidatorPower {
 export const LastValidatorPower = {
   typeUrl: "/cosmos.staking.v1beta1.LastValidatorPower",
   encode(message: LastValidatorPower, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
-    if (message.power !== BigInt(0)) {
+    if (message.power !== undefined) {
       writer.uint32(16).int64(message.power);
     }
     return writer;

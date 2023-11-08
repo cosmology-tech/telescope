@@ -160,13 +160,13 @@ function createBaseTokenPair(): TokenPair {
 export const TokenPair = {
   typeUrl: "/evmos.erc20.v1.TokenPair",
   encode(message: TokenPair, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.erc20Address !== "") {
+    if (message.erc20Address !== undefined) {
       writer.uint32(10).string(message.erc20Address);
     }
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(18).string(message.denom);
     }
-    if (message.enabled === true) {
+    if (message.enabled !== undefined) {
       writer.uint32(24).bool(message.enabled);
     }
     if (message.contractOwner !== 0) {
@@ -290,10 +290,10 @@ function createBaseRegisterCoinProposal(): RegisterCoinProposal {
 export const RegisterCoinProposal = {
   typeUrl: "/evmos.erc20.v1.RegisterCoinProposal",
   encode(message: RegisterCoinProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     if (message.metadata !== undefined) {
@@ -408,13 +408,13 @@ function createBaseRegisterERC20Proposal(): RegisterERC20Proposal {
 export const RegisterERC20Proposal = {
   typeUrl: "/evmos.erc20.v1.RegisterERC20Proposal",
   encode(message: RegisterERC20Proposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
-    if (message.erc20address !== "") {
+    if (message.erc20address !== undefined) {
       writer.uint32(26).string(message.erc20address);
     }
     return writer;
@@ -524,13 +524,13 @@ function createBaseToggleTokenConversionProposal(): ToggleTokenConversionProposa
 export const ToggleTokenConversionProposal = {
   typeUrl: "/evmos.erc20.v1.ToggleTokenConversionProposal",
   encode(message: ToggleTokenConversionProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
-    if (message.token !== "") {
+    if (message.token !== undefined) {
       writer.uint32(26).string(message.token);
     }
     return writer;

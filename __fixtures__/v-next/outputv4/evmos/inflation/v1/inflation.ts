@@ -93,13 +93,13 @@ function createBaseInflationDistribution(): InflationDistribution {
 export const InflationDistribution = {
   typeUrl: "/evmos.inflation.v1.InflationDistribution",
   encode(message: InflationDistribution, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.stakingRewards !== "") {
+    if (message.stakingRewards !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.stakingRewards, 18).atomics);
     }
-    if (message.usageIncentives !== "") {
+    if (message.usageIncentives !== undefined) {
       writer.uint32(18).string(Decimal.fromUserInput(message.usageIncentives, 18).atomics);
     }
-    if (message.communityPool !== "") {
+    if (message.communityPool !== undefined) {
       writer.uint32(26).string(Decimal.fromUserInput(message.communityPool, 18).atomics);
     }
     return writer;
@@ -211,19 +211,19 @@ function createBaseExponentialCalculation(): ExponentialCalculation {
 export const ExponentialCalculation = {
   typeUrl: "/evmos.inflation.v1.ExponentialCalculation",
   encode(message: ExponentialCalculation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.a !== "") {
+    if (message.a !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.a, 18).atomics);
     }
-    if (message.r !== "") {
+    if (message.r !== undefined) {
       writer.uint32(18).string(Decimal.fromUserInput(message.r, 18).atomics);
     }
-    if (message.c !== "") {
+    if (message.c !== undefined) {
       writer.uint32(26).string(Decimal.fromUserInput(message.c, 18).atomics);
     }
-    if (message.bondingTarget !== "") {
+    if (message.bondingTarget !== undefined) {
       writer.uint32(34).string(Decimal.fromUserInput(message.bondingTarget, 18).atomics);
     }
-    if (message.maxVariance !== "") {
+    if (message.maxVariance !== undefined) {
       writer.uint32(42).string(Decimal.fromUserInput(message.maxVariance, 18).atomics);
     }
     return writer;

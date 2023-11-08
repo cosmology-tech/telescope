@@ -87,7 +87,7 @@ export const GenesisState = {
     for (const v of message.ackSequences) {
       PacketSequence.encode(v!, writer.uint32(58).fork()).ldelim();
     }
-    if (message.nextChannelSequence !== BigInt(0)) {
+    if (message.nextChannelSequence !== undefined) {
       writer.uint32(64).uint64(message.nextChannelSequence);
     }
     return writer;
@@ -344,13 +344,13 @@ function createBasePacketSequence(): PacketSequence {
 export const PacketSequence = {
   typeUrl: "/ibc.core.channel.v1.PacketSequence",
   encode(message: PacketSequence, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.portId !== "") {
+    if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
     }
-    if (message.channelId !== "") {
+    if (message.channelId !== undefined) {
       writer.uint32(18).string(message.channelId);
     }
-    if (message.sequence !== BigInt(0)) {
+    if (message.sequence !== undefined) {
       writer.uint32(24).uint64(message.sequence);
     }
     return writer;

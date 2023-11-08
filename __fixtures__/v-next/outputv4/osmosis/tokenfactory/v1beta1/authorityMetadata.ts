@@ -30,7 +30,7 @@ function createBaseDenomAuthorityMetadata(): DenomAuthorityMetadata {
 export const DenomAuthorityMetadata = {
   typeUrl: "/osmosis.tokenfactory.v1beta1.DenomAuthorityMetadata",
   encode(message: DenomAuthorityMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.admin !== "") {
+    if (message.admin !== undefined) {
       writer.uint32(10).string(message.admin);
     }
     return writer;

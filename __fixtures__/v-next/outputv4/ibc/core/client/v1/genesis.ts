@@ -96,10 +96,10 @@ export const GenesisState = {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(34).fork()).ldelim();
     }
-    if (message.createLocalhost === true) {
+    if (message.createLocalhost !== undefined) {
       writer.uint32(40).bool(message.createLocalhost);
     }
-    if (message.nextClientSequence !== BigInt(0)) {
+    if (message.nextClientSequence !== undefined) {
       writer.uint32(48).uint64(message.nextClientSequence);
     }
     return writer;
@@ -394,7 +394,7 @@ function createBaseIdentifiedGenesisMetadata(): IdentifiedGenesisMetadata {
 export const IdentifiedGenesisMetadata = {
   typeUrl: "/ibc.core.client.v1.IdentifiedGenesisMetadata",
   encode(message: IdentifiedGenesisMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
     for (const v of message.clientMetadata) {

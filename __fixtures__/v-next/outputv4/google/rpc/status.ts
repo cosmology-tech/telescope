@@ -54,10 +54,10 @@ function createBaseStatus(): Status {
 export const Status = {
   typeUrl: "/google.rpc.Status",
   encode(message: Status, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.code !== 0) {
+    if (message.code !== undefined) {
       writer.uint32(8).int32(message.code);
     }
-    if (message.message !== "") {
+    if (message.message !== undefined) {
       writer.uint32(18).string(message.message);
     }
     for (const v of message.details) {

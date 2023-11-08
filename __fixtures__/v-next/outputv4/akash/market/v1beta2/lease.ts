@@ -185,19 +185,19 @@ function createBaseLeaseID(): LeaseID {
 export const LeaseID = {
   typeUrl: "/akash.market.v1beta2.LeaseID",
   encode(message: LeaseID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.dseq !== BigInt(0)) {
+    if (message.dseq !== undefined) {
       writer.uint32(16).uint64(message.dseq);
     }
-    if (message.gseq !== 0) {
+    if (message.gseq !== undefined) {
       writer.uint32(24).uint32(message.gseq);
     }
-    if (message.oseq !== 0) {
+    if (message.oseq !== undefined) {
       writer.uint32(32).uint32(message.oseq);
     }
-    if (message.provider !== "") {
+    if (message.provider !== undefined) {
       writer.uint32(42).string(message.provider);
     }
     return writer;
@@ -348,10 +348,10 @@ export const Lease = {
     if (message.price !== undefined) {
       DecCoin.encode(message.price, writer.uint32(26).fork()).ldelim();
     }
-    if (message.createdAt !== BigInt(0)) {
+    if (message.createdAt !== undefined) {
       writer.uint32(32).int64(message.createdAt);
     }
-    if (message.closedOn !== BigInt(0)) {
+    if (message.closedOn !== undefined) {
       writer.uint32(40).int64(message.closedOn);
     }
     return writer;
@@ -500,22 +500,22 @@ function createBaseLeaseFilters(): LeaseFilters {
 export const LeaseFilters = {
   typeUrl: "/akash.market.v1beta2.LeaseFilters",
   encode(message: LeaseFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.dseq !== BigInt(0)) {
+    if (message.dseq !== undefined) {
       writer.uint32(16).uint64(message.dseq);
     }
-    if (message.gseq !== 0) {
+    if (message.gseq !== undefined) {
       writer.uint32(24).uint32(message.gseq);
     }
-    if (message.oseq !== 0) {
+    if (message.oseq !== undefined) {
       writer.uint32(32).uint32(message.oseq);
     }
-    if (message.provider !== "") {
+    if (message.provider !== undefined) {
       writer.uint32(42).string(message.provider);
     }
-    if (message.state !== "") {
+    if (message.state !== undefined) {
       writer.uint32(50).string(message.state);
     }
     return writer;

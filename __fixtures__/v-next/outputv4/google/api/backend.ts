@@ -325,19 +325,19 @@ function createBaseBackendRule(): BackendRule {
 export const BackendRule = {
   typeUrl: "/google.api.BackendRule",
   encode(message: BackendRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(18).string(message.address);
     }
-    if (message.deadline !== 0) {
+    if (message.deadline !== undefined) {
       writer.uint32(25).double(message.deadline);
     }
-    if (message.minDeadline !== 0) {
+    if (message.minDeadline !== undefined) {
       writer.uint32(33).double(message.minDeadline);
     }
-    if (message.operationDeadline !== 0) {
+    if (message.operationDeadline !== undefined) {
       writer.uint32(41).double(message.operationDeadline);
     }
     if (message.pathTranslation !== 0) {
@@ -349,7 +349,7 @@ export const BackendRule = {
     if (message.disableAuth !== undefined) {
       writer.uint32(64).bool(message.disableAuth);
     }
-    if (message.protocol !== "") {
+    if (message.protocol !== undefined) {
       writer.uint32(74).string(message.protocol);
     }
     return writer;

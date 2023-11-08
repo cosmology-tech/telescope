@@ -434,10 +434,10 @@ function createBaseMetricRule_MetricCostsEntry(): MetricRule_MetricCostsEntry {
 }
 export const MetricRule_MetricCostsEntry = {
   encode(message: MetricRule_MetricCostsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== BigInt(0)) {
+    if (message.value !== undefined) {
       writer.uint32(16).int64(message.value);
     }
     return writer;
@@ -531,7 +531,7 @@ function createBaseMetricRule(): MetricRule {
 export const MetricRule = {
   typeUrl: "/google.api.MetricRule",
   encode(message: MetricRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
     Object.entries(message.metricCosts).forEach(([key, value]) => {
@@ -679,10 +679,10 @@ function createBaseQuotaLimit_ValuesEntry(): QuotaLimit_ValuesEntry {
 }
 export const QuotaLimit_ValuesEntry = {
   encode(message: QuotaLimit_ValuesEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== BigInt(0)) {
+    if (message.value !== undefined) {
       writer.uint32(16).int64(message.value);
     }
     return writer;
@@ -784,28 +784,28 @@ function createBaseQuotaLimit(): QuotaLimit {
 export const QuotaLimit = {
   typeUrl: "/google.api.QuotaLimit",
   encode(message: QuotaLimit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(50).string(message.name);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
-    if (message.defaultLimit !== BigInt(0)) {
+    if (message.defaultLimit !== undefined) {
       writer.uint32(24).int64(message.defaultLimit);
     }
-    if (message.maxLimit !== BigInt(0)) {
+    if (message.maxLimit !== undefined) {
       writer.uint32(32).int64(message.maxLimit);
     }
-    if (message.freeTier !== BigInt(0)) {
+    if (message.freeTier !== undefined) {
       writer.uint32(56).int64(message.freeTier);
     }
-    if (message.duration !== "") {
+    if (message.duration !== undefined) {
       writer.uint32(42).string(message.duration);
     }
-    if (message.metric !== "") {
+    if (message.metric !== undefined) {
       writer.uint32(66).string(message.metric);
     }
-    if (message.unit !== "") {
+    if (message.unit !== undefined) {
       writer.uint32(74).string(message.unit);
     }
     Object.entries(message.values).forEach(([key, value]) => {
@@ -814,7 +814,7 @@ export const QuotaLimit = {
         value
       }, writer.uint32(80).fork()).ldelim();
     });
-    if (message.displayName !== "") {
+    if (message.displayName !== undefined) {
       writer.uint32(98).string(message.displayName);
     }
     return writer;

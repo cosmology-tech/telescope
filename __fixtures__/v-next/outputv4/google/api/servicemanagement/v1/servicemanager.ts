@@ -456,16 +456,16 @@ function createBaseListServicesRequest(): ListServicesRequest {
 export const ListServicesRequest = {
   typeUrl: "/google.api.servicemanagement.v1.ListServicesRequest",
   encode(message: ListServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.producerProjectId !== "") {
+    if (message.producerProjectId !== undefined) {
       writer.uint32(10).string(message.producerProjectId);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(40).int32(message.pageSize);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(50).string(message.pageToken);
     }
-    if (message.consumerId !== "") {
+    if (message.consumerId !== undefined) {
       writer.uint32(58).string(message.consumerId);
     }
     return writer;
@@ -588,7 +588,7 @@ export const ListServicesResponse = {
     for (const v of message.services) {
       ManagedService.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -697,7 +697,7 @@ function createBaseGetServiceRequest(): GetServiceRequest {
 export const GetServiceRequest = {
   typeUrl: "/google.api.servicemanagement.v1.GetServiceRequest",
   encode(message: GetServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
     }
     return writer;
@@ -871,7 +871,7 @@ function createBaseDeleteServiceRequest(): DeleteServiceRequest {
 export const DeleteServiceRequest = {
   typeUrl: "/google.api.servicemanagement.v1.DeleteServiceRequest",
   encode(message: DeleteServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
     }
     return writer;
@@ -957,7 +957,7 @@ function createBaseUndeleteServiceRequest(): UndeleteServiceRequest {
 export const UndeleteServiceRequest = {
   typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceRequest",
   encode(message: UndeleteServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
     }
     return writer;
@@ -1133,10 +1133,10 @@ function createBaseGetServiceConfigRequest(): GetServiceConfigRequest {
 export const GetServiceConfigRequest = {
   typeUrl: "/google.api.servicemanagement.v1.GetServiceConfigRequest",
   encode(message: GetServiceConfigRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
     }
-    if (message.configId !== "") {
+    if (message.configId !== undefined) {
       writer.uint32(18).string(message.configId);
     }
     if (message.view !== 0) {
@@ -1249,13 +1249,13 @@ function createBaseListServiceConfigsRequest(): ListServiceConfigsRequest {
 export const ListServiceConfigsRequest = {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsRequest",
   encode(message: ListServiceConfigsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(18).string(message.pageToken);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(24).int32(message.pageSize);
     }
     return writer;
@@ -1367,7 +1367,7 @@ export const ListServiceConfigsResponse = {
     for (const v of message.serviceConfigs) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -1477,7 +1477,7 @@ function createBaseCreateServiceConfigRequest(): CreateServiceConfigRequest {
 export const CreateServiceConfigRequest = {
   typeUrl: "/google.api.servicemanagement.v1.CreateServiceConfigRequest",
   encode(message: CreateServiceConfigRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
     }
     if (message.serviceConfig !== undefined) {
@@ -1581,13 +1581,13 @@ function createBaseSubmitConfigSourceRequest(): SubmitConfigSourceRequest {
 export const SubmitConfigSourceRequest = {
   typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceRequest",
   encode(message: SubmitConfigSourceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
     }
     if (message.configSource !== undefined) {
       ConfigSource.encode(message.configSource, writer.uint32(18).fork()).ldelim();
     }
-    if (message.validateOnly === true) {
+    if (message.validateOnly !== undefined) {
       writer.uint32(24).bool(message.validateOnly);
     }
     return writer;
@@ -1786,7 +1786,7 @@ function createBaseCreateServiceRolloutRequest(): CreateServiceRolloutRequest {
 export const CreateServiceRolloutRequest = {
   typeUrl: "/google.api.servicemanagement.v1.CreateServiceRolloutRequest",
   encode(message: CreateServiceRolloutRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
     }
     if (message.rollout !== undefined) {
@@ -1891,16 +1891,16 @@ function createBaseListServiceRolloutsRequest(): ListServiceRolloutsRequest {
 export const ListServiceRolloutsRequest = {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsRequest",
   encode(message: ListServiceRolloutsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(18).string(message.pageToken);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(24).int32(message.pageSize);
     }
-    if (message.filter !== "") {
+    if (message.filter !== undefined) {
       writer.uint32(34).string(message.filter);
     }
     return writer;
@@ -2023,7 +2023,7 @@ export const ListServiceRolloutsResponse = {
     for (const v of message.rollouts) {
       Rollout.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -2133,10 +2133,10 @@ function createBaseGetServiceRolloutRequest(): GetServiceRolloutRequest {
 export const GetServiceRolloutRequest = {
   typeUrl: "/google.api.servicemanagement.v1.GetServiceRolloutRequest",
   encode(message: GetServiceRolloutRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
     }
-    if (message.rolloutId !== "") {
+    if (message.rolloutId !== undefined) {
       writer.uint32(18).string(message.rolloutId);
     }
     return writer;
@@ -2341,10 +2341,10 @@ function createBaseGenerateConfigReportResponse(): GenerateConfigReportResponse 
 export const GenerateConfigReportResponse = {
   typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportResponse",
   encode(message: GenerateConfigReportResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(18).string(message.id);
     }
     for (const v of message.changeReports) {

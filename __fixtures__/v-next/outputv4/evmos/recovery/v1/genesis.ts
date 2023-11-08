@@ -128,7 +128,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/evmos.recovery.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.enableRecovery === true) {
+    if (message.enableRecovery !== undefined) {
       writer.uint32(8).bool(message.enableRecovery);
     }
     if (message.packetTimeoutDuration !== undefined) {

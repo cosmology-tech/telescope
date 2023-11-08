@@ -71,13 +71,13 @@ function createBaseLabelDescriptor(): LabelDescriptor {
 export const LabelDescriptor = {
   typeUrl: "/google.api.LabelDescriptor",
   encode(message: LabelDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
     if (message.valueType !== 0) {
       writer.uint32(16).int32(message.valueType);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(26).string(message.description);
     }
     return writer;

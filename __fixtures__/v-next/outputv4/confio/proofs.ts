@@ -1209,10 +1209,10 @@ export const ProofSpec = {
     if (message.innerSpec !== undefined) {
       InnerSpec.encode(message.innerSpec, writer.uint32(18).fork()).ldelim();
     }
-    if (message.maxDepth !== 0) {
+    if (message.maxDepth !== undefined) {
       writer.uint32(24).int32(message.maxDepth);
     }
-    if (message.minDepth !== 0) {
+    if (message.minDepth !== undefined) {
       writer.uint32(32).int32(message.minDepth);
     }
     return writer;
@@ -1345,13 +1345,13 @@ export const InnerSpec = {
       writer.int32(v);
     }
     writer.ldelim();
-    if (message.childSize !== 0) {
+    if (message.childSize !== undefined) {
       writer.uint32(16).int32(message.childSize);
     }
-    if (message.minPrefixLength !== 0) {
+    if (message.minPrefixLength !== undefined) {
       writer.uint32(24).int32(message.minPrefixLength);
     }
-    if (message.maxPrefixLength !== 0) {
+    if (message.maxPrefixLength !== undefined) {
       writer.uint32(32).int32(message.maxPrefixLength);
     }
     if (message.emptyChild.length !== 0) {

@@ -196,7 +196,7 @@ function createBaseIdentifiedClientState(): IdentifiedClientState {
 export const IdentifiedClientState = {
   typeUrl: "/ibc.core.client.v1.IdentifiedClientState",
   encode(message: IdentifiedClientState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
     if (message.clientState !== undefined) {
@@ -416,7 +416,7 @@ function createBaseClientConsensusStates(): ClientConsensusStates {
 export const ClientConsensusStates = {
   typeUrl: "/ibc.core.client.v1.ClientConsensusStates",
   encode(message: ClientConsensusStates, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
     for (const v of message.consensusStates) {
@@ -537,16 +537,16 @@ function createBaseClientUpdateProposal(): ClientUpdateProposal {
 export const ClientUpdateProposal = {
   typeUrl: "/ibc.core.client.v1.ClientUpdateProposal",
   encode(message: ClientUpdateProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
-    if (message.subjectClientId !== "") {
+    if (message.subjectClientId !== undefined) {
       writer.uint32(26).string(message.subjectClientId);
     }
-    if (message.substituteClientId !== "") {
+    if (message.substituteClientId !== undefined) {
       writer.uint32(34).string(message.substituteClientId);
     }
     return writer;
@@ -674,10 +674,10 @@ function createBaseUpgradeProposal(): UpgradeProposal {
 export const UpgradeProposal = {
   typeUrl: "/ibc.core.client.v1.UpgradeProposal",
   encode(message: UpgradeProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     if (message.plan !== undefined) {
@@ -813,10 +813,10 @@ function createBaseHeight(): Height {
 export const Height = {
   typeUrl: "/ibc.core.client.v1.Height",
   encode(message: Height, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.revisionNumber !== BigInt(0)) {
+    if (message.revisionNumber !== undefined) {
       writer.uint32(8).uint64(message.revisionNumber);
     }
-    if (message.revisionHeight !== BigInt(0)) {
+    if (message.revisionHeight !== undefined) {
       writer.uint32(16).uint64(message.revisionHeight);
     }
     return writer;

@@ -183,7 +183,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/evmos.claims.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.enableClaims === true) {
+    if (message.enableClaims !== undefined) {
       writer.uint32(8).bool(message.enableClaims);
     }
     if (message.airdropStartTime !== undefined) {
@@ -195,7 +195,7 @@ export const Params = {
     if (message.durationOfDecay !== undefined) {
       Duration.encode(message.durationOfDecay, writer.uint32(34).fork()).ldelim();
     }
-    if (message.claimsDenom !== "") {
+    if (message.claimsDenom !== undefined) {
       writer.uint32(42).string(message.claimsDenom);
     }
     for (const v of message.authorizedChannels) {

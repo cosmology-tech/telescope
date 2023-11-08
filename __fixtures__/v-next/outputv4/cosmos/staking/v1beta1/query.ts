@@ -527,7 +527,7 @@ function createBaseQueryValidatorsRequest(): QueryValidatorsRequest {
 export const QueryValidatorsRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryValidatorsRequest",
   encode(message: QueryValidatorsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.status !== "") {
+    if (message.status !== undefined) {
       writer.uint32(10).string(message.status);
     }
     if (message.pagination !== undefined) {
@@ -756,7 +756,7 @@ function createBaseQueryValidatorRequest(): QueryValidatorRequest {
 export const QueryValidatorRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryValidatorRequest",
   encode(message: QueryValidatorRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.validatorAddr !== "") {
+    if (message.validatorAddr !== undefined) {
       writer.uint32(10).string(message.validatorAddr);
     }
     return writer;
@@ -943,7 +943,7 @@ function createBaseQueryValidatorDelegationsRequest(): QueryValidatorDelegations
 export const QueryValidatorDelegationsRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryValidatorDelegationsRequest",
   encode(message: QueryValidatorDelegationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.validatorAddr !== "") {
+    if (message.validatorAddr !== undefined) {
       writer.uint32(10).string(message.validatorAddr);
     }
     if (message.pagination !== undefined) {
@@ -1173,7 +1173,7 @@ function createBaseQueryValidatorUnbondingDelegationsRequest(): QueryValidatorUn
 export const QueryValidatorUnbondingDelegationsRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryValidatorUnbondingDelegationsRequest",
   encode(message: QueryValidatorUnbondingDelegationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.validatorAddr !== "") {
+    if (message.validatorAddr !== undefined) {
       writer.uint32(10).string(message.validatorAddr);
     }
     if (message.pagination !== undefined) {
@@ -1403,10 +1403,10 @@ function createBaseQueryDelegationRequest(): QueryDelegationRequest {
 export const QueryDelegationRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegationRequest",
   encode(message: QueryDelegationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddr !== "") {
+    if (message.delegatorAddr !== undefined) {
       writer.uint32(10).string(message.delegatorAddr);
     }
-    if (message.validatorAddr !== "") {
+    if (message.validatorAddr !== undefined) {
       writer.uint32(18).string(message.validatorAddr);
     }
     return writer;
@@ -1604,10 +1604,10 @@ function createBaseQueryUnbondingDelegationRequest(): QueryUnbondingDelegationRe
 export const QueryUnbondingDelegationRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryUnbondingDelegationRequest",
   encode(message: QueryUnbondingDelegationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddr !== "") {
+    if (message.delegatorAddr !== undefined) {
       writer.uint32(10).string(message.delegatorAddr);
     }
-    if (message.validatorAddr !== "") {
+    if (message.validatorAddr !== undefined) {
       writer.uint32(18).string(message.validatorAddr);
     }
     return writer;
@@ -1805,7 +1805,7 @@ function createBaseQueryDelegatorDelegationsRequest(): QueryDelegatorDelegations
 export const QueryDelegatorDelegationsRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorDelegationsRequest",
   encode(message: QueryDelegatorDelegationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddr !== "") {
+    if (message.delegatorAddr !== undefined) {
       writer.uint32(10).string(message.delegatorAddr);
     }
     if (message.pagination !== undefined) {
@@ -2035,7 +2035,7 @@ function createBaseQueryDelegatorUnbondingDelegationsRequest(): QueryDelegatorUn
 export const QueryDelegatorUnbondingDelegationsRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorUnbondingDelegationsRequest",
   encode(message: QueryDelegatorUnbondingDelegationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddr !== "") {
+    if (message.delegatorAddr !== undefined) {
       writer.uint32(10).string(message.delegatorAddr);
     }
     if (message.pagination !== undefined) {
@@ -2267,13 +2267,13 @@ function createBaseQueryRedelegationsRequest(): QueryRedelegationsRequest {
 export const QueryRedelegationsRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryRedelegationsRequest",
   encode(message: QueryRedelegationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddr !== "") {
+    if (message.delegatorAddr !== undefined) {
       writer.uint32(10).string(message.delegatorAddr);
     }
-    if (message.srcValidatorAddr !== "") {
+    if (message.srcValidatorAddr !== undefined) {
       writer.uint32(18).string(message.srcValidatorAddr);
     }
-    if (message.dstValidatorAddr !== "") {
+    if (message.dstValidatorAddr !== undefined) {
       writer.uint32(26).string(message.dstValidatorAddr);
     }
     if (message.pagination !== undefined) {
@@ -2525,7 +2525,7 @@ function createBaseQueryDelegatorValidatorsRequest(): QueryDelegatorValidatorsRe
 export const QueryDelegatorValidatorsRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorValidatorsRequest",
   encode(message: QueryDelegatorValidatorsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddr !== "") {
+    if (message.delegatorAddr !== undefined) {
       writer.uint32(10).string(message.delegatorAddr);
     }
     if (message.pagination !== undefined) {
@@ -2755,10 +2755,10 @@ function createBaseQueryDelegatorValidatorRequest(): QueryDelegatorValidatorRequ
 export const QueryDelegatorValidatorRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorValidatorRequest",
   encode(message: QueryDelegatorValidatorRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddr !== "") {
+    if (message.delegatorAddr !== undefined) {
       writer.uint32(10).string(message.delegatorAddr);
     }
-    if (message.validatorAddr !== "") {
+    if (message.validatorAddr !== undefined) {
       writer.uint32(18).string(message.validatorAddr);
     }
     return writer;
@@ -2955,7 +2955,7 @@ function createBaseQueryHistoricalInfoRequest(): QueryHistoricalInfoRequest {
 export const QueryHistoricalInfoRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryHistoricalInfoRequest",
   encode(message: QueryHistoricalInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(8).int64(message.height);
     }
     return writer;

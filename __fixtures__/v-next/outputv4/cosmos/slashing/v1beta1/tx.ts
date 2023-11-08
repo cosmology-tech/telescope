@@ -29,7 +29,7 @@ function createBaseMsgUnjail(): MsgUnjail {
 export const MsgUnjail = {
   typeUrl: "/cosmos.slashing.v1beta1.MsgUnjail",
   encode(message: MsgUnjail, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.validatorAddr !== "") {
+    if (message.validatorAddr !== undefined) {
       writer.uint32(10).string(message.validatorAddr);
     }
     return writer;

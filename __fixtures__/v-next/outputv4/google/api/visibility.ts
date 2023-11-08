@@ -213,10 +213,10 @@ function createBaseVisibilityRule(): VisibilityRule {
 export const VisibilityRule = {
   typeUrl: "/google.api.VisibilityRule",
   encode(message: VisibilityRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
-    if (message.restriction !== "") {
+    if (message.restriction !== undefined) {
       writer.uint32(18).string(message.restriction);
     }
     return writer;

@@ -106,13 +106,13 @@ function createBaseDecl(): Decl {
 export const Decl = {
   typeUrl: "/google.api.expr.v1beta1.Decl",
   encode(message: Decl, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== 0) {
+    if (message.id !== undefined) {
       writer.uint32(8).int32(message.id);
     }
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(18).string(message.name);
     }
-    if (message.doc !== "") {
+    if (message.doc !== undefined) {
       writer.uint32(26).string(message.doc);
     }
     if (message.ident !== undefined) {
@@ -254,10 +254,10 @@ function createBaseDeclType(): DeclType {
 export const DeclType = {
   typeUrl: "/google.api.expr.v1beta1.DeclType",
   encode(message: DeclType, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== 0) {
+    if (message.id !== undefined) {
       writer.uint32(8).int32(message.id);
     }
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(18).string(message.type);
     }
     for (const v of message.typeParams) {
@@ -493,7 +493,7 @@ export const FunctionDecl = {
     if (message.returnType !== undefined) {
       DeclType.encode(message.returnType, writer.uint32(18).fork()).ldelim();
     }
-    if (message.receiverFunction === true) {
+    if (message.receiverFunction !== undefined) {
       writer.uint32(24).bool(message.receiverFunction);
     }
     return writer;

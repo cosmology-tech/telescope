@@ -42,7 +42,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/osmosis.twap.v1beta1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.pruneEpochIdentifier !== "") {
+    if (message.pruneEpochIdentifier !== undefined) {
       writer.uint32(10).string(message.pruneEpochIdentifier);
     }
     if (message.recordHistoryKeepPeriod !== undefined) {

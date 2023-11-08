@@ -223,13 +223,13 @@ function createBaseOperation(): Operation {
 export const Operation = {
   typeUrl: "/google.longrunning.Operation",
   encode(message: Operation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.metadata !== undefined) {
       Any.encode(message.metadata, writer.uint32(18).fork()).ldelim();
     }
-    if (message.done === true) {
+    if (message.done !== undefined) {
       writer.uint32(24).bool(message.done);
     }
     if (message.error !== undefined) {
@@ -371,7 +371,7 @@ function createBaseGetOperationRequest(): GetOperationRequest {
 export const GetOperationRequest = {
   typeUrl: "/google.longrunning.GetOperationRequest",
   encode(message: GetOperationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -460,16 +460,16 @@ function createBaseListOperationsRequest(): ListOperationsRequest {
 export const ListOperationsRequest = {
   typeUrl: "/google.longrunning.ListOperationsRequest",
   encode(message: ListOperationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(34).string(message.name);
     }
-    if (message.filter !== "") {
+    if (message.filter !== undefined) {
       writer.uint32(10).string(message.filter);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(16).int32(message.pageSize);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(26).string(message.pageToken);
     }
     return writer;
@@ -592,7 +592,7 @@ export const ListOperationsResponse = {
     for (const v of message.operations) {
       Operation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -701,7 +701,7 @@ function createBaseCancelOperationRequest(): CancelOperationRequest {
 export const CancelOperationRequest = {
   typeUrl: "/google.longrunning.CancelOperationRequest",
   encode(message: CancelOperationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -787,7 +787,7 @@ function createBaseDeleteOperationRequest(): DeleteOperationRequest {
 export const DeleteOperationRequest = {
   typeUrl: "/google.longrunning.DeleteOperationRequest",
   encode(message: DeleteOperationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -874,7 +874,7 @@ function createBaseWaitOperationRequest(): WaitOperationRequest {
 export const WaitOperationRequest = {
   typeUrl: "/google.longrunning.WaitOperationRequest",
   encode(message: WaitOperationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.timeout !== undefined) {
@@ -977,10 +977,10 @@ function createBaseOperationInfo(): OperationInfo {
 export const OperationInfo = {
   typeUrl: "/google.longrunning.OperationInfo",
   encode(message: OperationInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.responseType !== "") {
+    if (message.responseType !== undefined) {
       writer.uint32(10).string(message.responseType);
     }
-    if (message.metadataType !== "") {
+    if (message.metadataType !== undefined) {
       writer.uint32(18).string(message.metadataType);
     }
     return writer;

@@ -606,10 +606,10 @@ function createBaseManagedService(): ManagedService {
 export const ManagedService = {
   typeUrl: "/google.api.servicemanagement.v1.ManagedService",
   encode(message: ManagedService, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(18).string(message.serviceName);
     }
-    if (message.producerProjectId !== "") {
+    if (message.producerProjectId !== undefined) {
       writer.uint32(26).string(message.producerProjectId);
     }
     return writer;
@@ -715,7 +715,7 @@ export const OperationMetadata = {
     for (const v of message.steps) {
       OperationMetadata_Step.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.progressPercentage !== 0) {
+    if (message.progressPercentage !== undefined) {
       writer.uint32(24).int32(message.progressPercentage);
     }
     if (message.startTime !== undefined) {
@@ -862,7 +862,7 @@ function createBaseOperationMetadata_Step(): OperationMetadata_Step {
 export const OperationMetadata_Step = {
   typeUrl: "/google.api.servicemanagement.v1.Step",
   encode(message: OperationMetadata_Step, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     if (message.status !== 0) {
@@ -964,13 +964,13 @@ function createBaseDiagnostic(): Diagnostic {
 export const Diagnostic = {
   typeUrl: "/google.api.servicemanagement.v1.Diagnostic",
   encode(message: Diagnostic, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.location !== "") {
+    if (message.location !== undefined) {
       writer.uint32(10).string(message.location);
     }
     if (message.kind !== 0) {
       writer.uint32(16).int32(message.kind);
     }
-    if (message.message !== "") {
+    if (message.message !== undefined) {
       writer.uint32(26).string(message.message);
     }
     return writer;
@@ -1079,7 +1079,7 @@ function createBaseConfigSource(): ConfigSource {
 export const ConfigSource = {
   typeUrl: "/google.api.servicemanagement.v1.ConfigSource",
   encode(message: ConfigSource, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(42).string(message.id);
     }
     for (const v of message.files) {
@@ -1193,7 +1193,7 @@ function createBaseConfigFile(): ConfigFile {
 export const ConfigFile = {
   typeUrl: "/google.api.servicemanagement.v1.ConfigFile",
   encode(message: ConfigFile, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.filePath !== "") {
+    if (message.filePath !== undefined) {
       writer.uint32(10).string(message.filePath);
     }
     if (message.fileContents.length !== 0) {
@@ -1307,7 +1307,7 @@ function createBaseConfigRef(): ConfigRef {
 export const ConfigRef = {
   typeUrl: "/google.api.servicemanagement.v1.ConfigRef",
   encode(message: ConfigRef, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -1497,13 +1497,13 @@ function createBaseRollout(): Rollout {
 export const Rollout = {
   typeUrl: "/google.api.servicemanagement.v1.Rollout",
   encode(message: Rollout, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.rolloutId !== "") {
+    if (message.rolloutId !== undefined) {
       writer.uint32(10).string(message.rolloutId);
     }
     if (message.createTime !== undefined) {
       Timestamp.encode(toTimestamp(message.createTime), writer.uint32(18).fork()).ldelim();
     }
-    if (message.createdBy !== "") {
+    if (message.createdBy !== undefined) {
       writer.uint32(26).string(message.createdBy);
     }
     if (message.status !== 0) {
@@ -1515,7 +1515,7 @@ export const Rollout = {
     if (message.deleteServiceStrategy !== undefined) {
       Rollout_DeleteServiceStrategy.encode(message.deleteServiceStrategy, writer.uint32(1602).fork()).ldelim();
     }
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(66).string(message.serviceName);
     }
     return writer;
@@ -1671,10 +1671,10 @@ function createBaseRollout_TrafficPercentStrategy_PercentagesEntry(): Rollout_Tr
 }
 export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
   encode(message: Rollout_TrafficPercentStrategy_PercentagesEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(17).double(message.value);
     }
     return writer;

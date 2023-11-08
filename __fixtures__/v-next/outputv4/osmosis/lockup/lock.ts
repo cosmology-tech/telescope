@@ -184,10 +184,10 @@ function createBasePeriodLock(): PeriodLock {
 export const PeriodLock = {
   typeUrl: "/osmosis.lockup.PeriodLock",
   encode(message: PeriodLock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.ID !== BigInt(0)) {
+    if (message.ID !== undefined) {
       writer.uint32(8).uint64(message.ID);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(18).string(message.owner);
     }
     if (message.duration !== undefined) {
@@ -354,7 +354,7 @@ export const QueryCondition = {
     if (message.lockQueryType !== 0) {
       writer.uint32(8).int32(message.lockQueryType);
     }
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(18).string(message.denom);
     }
     if (message.duration !== undefined) {
@@ -490,10 +490,10 @@ function createBaseSyntheticLock(): SyntheticLock {
 export const SyntheticLock = {
   typeUrl: "/osmosis.lockup.SyntheticLock",
   encode(message: SyntheticLock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.underlyingLockId !== BigInt(0)) {
+    if (message.underlyingLockId !== undefined) {
       writer.uint32(8).uint64(message.underlyingLockId);
     }
-    if (message.synthDenom !== "") {
+    if (message.synthDenom !== undefined) {
       writer.uint32(18).string(message.synthDenom);
     }
     if (message.endTime !== undefined) {

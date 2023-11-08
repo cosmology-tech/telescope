@@ -802,10 +802,10 @@ function createBaseAttributeContext_Peer_LabelsEntry(): AttributeContext_Peer_La
 }
 export const AttributeContext_Peer_LabelsEntry = {
   encode(message: AttributeContext_Peer_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -900,10 +900,10 @@ function createBaseAttributeContext_Peer(): AttributeContext_Peer {
 export const AttributeContext_Peer = {
   typeUrl: "/google.rpc.context.Peer",
   encode(message: AttributeContext_Peer, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.ip !== "") {
+    if (message.ip !== undefined) {
       writer.uint32(10).string(message.ip);
     }
-    if (message.port !== BigInt(0)) {
+    if (message.port !== undefined) {
       writer.uint32(16).int64(message.port);
     }
     Object.entries(message.labels).forEach(([key, value]) => {
@@ -912,10 +912,10 @@ export const AttributeContext_Peer = {
         value
       }, writer.uint32(50).fork()).ldelim();
     });
-    if (message.principal !== "") {
+    if (message.principal !== undefined) {
       writer.uint32(58).string(message.principal);
     }
-    if (message.regionCode !== "") {
+    if (message.regionCode !== undefined) {
       writer.uint32(66).string(message.regionCode);
     }
     return writer;
@@ -1095,16 +1095,16 @@ function createBaseAttributeContext_Api(): AttributeContext_Api {
 export const AttributeContext_Api = {
   typeUrl: "/google.rpc.context.Api",
   encode(message: AttributeContext_Api, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.service !== "") {
+    if (message.service !== undefined) {
       writer.uint32(10).string(message.service);
     }
-    if (message.operation !== "") {
+    if (message.operation !== undefined) {
       writer.uint32(18).string(message.operation);
     }
-    if (message.protocol !== "") {
+    if (message.protocol !== undefined) {
       writer.uint32(26).string(message.protocol);
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       writer.uint32(34).string(message.version);
     }
     return writer;
@@ -1227,13 +1227,13 @@ function createBaseAttributeContext_Auth(): AttributeContext_Auth {
 export const AttributeContext_Auth = {
   typeUrl: "/google.rpc.context.Auth",
   encode(message: AttributeContext_Auth, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.principal !== "") {
+    if (message.principal !== undefined) {
       writer.uint32(10).string(message.principal);
     }
     for (const v of message.audiences) {
       writer.uint32(18).string(v!);
     }
-    if (message.presenter !== "") {
+    if (message.presenter !== undefined) {
       writer.uint32(26).string(message.presenter);
     }
     if (message.claims !== undefined) {
@@ -1395,10 +1395,10 @@ function createBaseAttributeContext_Request_HeadersEntry(): AttributeContext_Req
 }
 export const AttributeContext_Request_HeadersEntry = {
   encode(message: AttributeContext_Request_HeadersEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -1500,10 +1500,10 @@ function createBaseAttributeContext_Request(): AttributeContext_Request {
 export const AttributeContext_Request = {
   typeUrl: "/google.rpc.context.Request",
   encode(message: AttributeContext_Request, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(10).string(message.id);
     }
-    if (message.method !== "") {
+    if (message.method !== undefined) {
       writer.uint32(18).string(message.method);
     }
     Object.entries(message.headers).forEach(([key, value]) => {
@@ -1512,28 +1512,28 @@ export const AttributeContext_Request = {
         value
       }, writer.uint32(26).fork()).ldelim();
     });
-    if (message.path !== "") {
+    if (message.path !== undefined) {
       writer.uint32(34).string(message.path);
     }
-    if (message.host !== "") {
+    if (message.host !== undefined) {
       writer.uint32(42).string(message.host);
     }
-    if (message.scheme !== "") {
+    if (message.scheme !== undefined) {
       writer.uint32(50).string(message.scheme);
     }
-    if (message.query !== "") {
+    if (message.query !== undefined) {
       writer.uint32(58).string(message.query);
     }
     if (message.time !== undefined) {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(74).fork()).ldelim();
     }
-    if (message.size !== BigInt(0)) {
+    if (message.size !== undefined) {
       writer.uint32(80).int64(message.size);
     }
-    if (message.protocol !== "") {
+    if (message.protocol !== undefined) {
       writer.uint32(90).string(message.protocol);
     }
-    if (message.reason !== "") {
+    if (message.reason !== undefined) {
       writer.uint32(98).string(message.reason);
     }
     if (message.auth !== undefined) {
@@ -1792,10 +1792,10 @@ function createBaseAttributeContext_Response_HeadersEntry(): AttributeContext_Re
 }
 export const AttributeContext_Response_HeadersEntry = {
   encode(message: AttributeContext_Response_HeadersEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -1890,10 +1890,10 @@ function createBaseAttributeContext_Response(): AttributeContext_Response {
 export const AttributeContext_Response = {
   typeUrl: "/google.rpc.context.Response",
   encode(message: AttributeContext_Response, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.code !== BigInt(0)) {
+    if (message.code !== undefined) {
       writer.uint32(8).int64(message.code);
     }
-    if (message.size !== BigInt(0)) {
+    if (message.size !== undefined) {
       writer.uint32(16).int64(message.size);
     }
     Object.entries(message.headers).forEach(([key, value]) => {
@@ -2086,10 +2086,10 @@ function createBaseAttributeContext_Resource_LabelsEntry(): AttributeContext_Res
 }
 export const AttributeContext_Resource_LabelsEntry = {
   encode(message: AttributeContext_Resource_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -2180,10 +2180,10 @@ function createBaseAttributeContext_Resource_AnnotationsEntry(): AttributeContex
 }
 export const AttributeContext_Resource_AnnotationsEntry = {
   encode(message: AttributeContext_Resource_AnnotationsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -2285,13 +2285,13 @@ function createBaseAttributeContext_Resource(): AttributeContext_Resource {
 export const AttributeContext_Resource = {
   typeUrl: "/google.rpc.context.Resource",
   encode(message: AttributeContext_Resource, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.service !== "") {
+    if (message.service !== undefined) {
       writer.uint32(10).string(message.service);
     }
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(18).string(message.name);
     }
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(26).string(message.type);
     }
     Object.entries(message.labels).forEach(([key, value]) => {
@@ -2300,7 +2300,7 @@ export const AttributeContext_Resource = {
         value
       }, writer.uint32(34).fork()).ldelim();
     });
-    if (message.uid !== "") {
+    if (message.uid !== undefined) {
       writer.uint32(42).string(message.uid);
     }
     Object.entries(message.annotations).forEach(([key, value]) => {
@@ -2309,7 +2309,7 @@ export const AttributeContext_Resource = {
         value
       }, writer.uint32(50).fork()).ldelim();
     });
-    if (message.displayName !== "") {
+    if (message.displayName !== undefined) {
       writer.uint32(58).string(message.displayName);
     }
     if (message.createTime !== undefined) {
@@ -2321,10 +2321,10 @@ export const AttributeContext_Resource = {
     if (message.deleteTime !== undefined) {
       Timestamp.encode(toTimestamp(message.deleteTime), writer.uint32(82).fork()).ldelim();
     }
-    if (message.etag !== "") {
+    if (message.etag !== undefined) {
       writer.uint32(90).string(message.etag);
     }
-    if (message.location !== "") {
+    if (message.location !== undefined) {
       writer.uint32(98).string(message.location);
     }
     return writer;

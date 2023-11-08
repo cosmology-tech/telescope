@@ -58,7 +58,7 @@ export const GenesisState = {
     for (const v of message.lockableDurations) {
       Duration.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.lastGaugeId !== BigInt(0)) {
+    if (message.lastGaugeId !== undefined) {
       writer.uint32(32).uint64(message.lastGaugeId);
     }
     return writer;

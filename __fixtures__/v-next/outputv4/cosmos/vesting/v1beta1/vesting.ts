@@ -153,7 +153,7 @@ export const BaseVestingAccount = {
     for (const v of message.delegatedVesting) {
       Coin.encode(v!, writer.uint32(34).fork()).ldelim();
     }
-    if (message.endTime !== BigInt(0)) {
+    if (message.endTime !== undefined) {
       writer.uint32(40).int64(message.endTime);
     }
     return writer;
@@ -333,7 +333,7 @@ export const ContinuousVestingAccount = {
     if (message.baseVestingAccount !== undefined) {
       BaseVestingAccount.encode(message.baseVestingAccount, writer.uint32(10).fork()).ldelim();
     }
-    if (message.startTime !== BigInt(0)) {
+    if (message.startTime !== undefined) {
       writer.uint32(16).int64(message.startTime);
     }
     return writer;
@@ -535,7 +535,7 @@ function createBasePeriod(): Period {
 export const Period = {
   typeUrl: "/cosmos.vesting.v1beta1.Period",
   encode(message: Period, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.length !== BigInt(0)) {
+    if (message.length !== undefined) {
       writer.uint32(8).int64(message.length);
     }
     for (const v of message.amount) {
@@ -660,7 +660,7 @@ export const PeriodicVestingAccount = {
     if (message.baseVestingAccount !== undefined) {
       BaseVestingAccount.encode(message.baseVestingAccount, writer.uint32(10).fork()).ldelim();
     }
-    if (message.startTime !== BigInt(0)) {
+    if (message.startTime !== undefined) {
       writer.uint32(16).int64(message.startTime);
     }
     for (const v of message.vestingPeriods) {

@@ -169,16 +169,16 @@ function createBaseVersion(): Version {
 export const Version = {
   typeUrl: "/google.protobuf.compiler.Version",
   encode(message: Version, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.major !== 0) {
+    if (message.major !== undefined) {
       writer.uint32(8).int32(message.major);
     }
-    if (message.minor !== 0) {
+    if (message.minor !== undefined) {
       writer.uint32(16).int32(message.minor);
     }
-    if (message.patch !== 0) {
+    if (message.patch !== undefined) {
       writer.uint32(24).int32(message.patch);
     }
-    if (message.suffix !== "") {
+    if (message.suffix !== undefined) {
       writer.uint32(34).string(message.suffix);
     }
     return writer;
@@ -303,7 +303,7 @@ export const CodeGeneratorRequest = {
     for (const v of message.fileToGenerate) {
       writer.uint32(10).string(v!);
     }
-    if (message.parameter !== "") {
+    if (message.parameter !== undefined) {
       writer.uint32(18).string(message.parameter);
     }
     for (const v of message.protoFile) {
@@ -455,7 +455,7 @@ function createBaseCodeGeneratorResponse(): CodeGeneratorResponse {
 export const CodeGeneratorResponse = {
   typeUrl: "/google.protobuf.compiler.CodeGeneratorResponse",
   encode(message: CodeGeneratorResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.error !== "") {
+    if (message.error !== undefined) {
       writer.uint32(10).string(message.error);
     }
     for (const v of message.file) {
@@ -569,13 +569,13 @@ function createBaseCodeGeneratorResponse_File(): CodeGeneratorResponse_File {
 export const CodeGeneratorResponse_File = {
   typeUrl: "/google.protobuf.compiler.File",
   encode(message: CodeGeneratorResponse_File, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.insertionPoint !== "") {
+    if (message.insertionPoint !== undefined) {
       writer.uint32(18).string(message.insertionPoint);
     }
-    if (message.content !== "") {
+    if (message.content !== undefined) {
       writer.uint32(122).string(message.content);
     }
     return writer;

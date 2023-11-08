@@ -60,7 +60,7 @@ export const ValidatorSet = {
     if (message.proposer !== undefined) {
       Validator.encode(message.proposer, writer.uint32(18).fork()).ldelim();
     }
-    if (message.totalVotingPower !== BigInt(0)) {
+    if (message.totalVotingPower !== undefined) {
       writer.uint32(24).int64(message.totalVotingPower);
     }
     return writer;
@@ -193,10 +193,10 @@ export const Validator = {
     if (message.pubKey !== undefined) {
       PublicKey.encode(message.pubKey, writer.uint32(18).fork()).ldelim();
     }
-    if (message.votingPower !== BigInt(0)) {
+    if (message.votingPower !== undefined) {
       writer.uint32(24).int64(message.votingPower);
     }
-    if (message.proposerPriority !== BigInt(0)) {
+    if (message.proposerPriority !== undefined) {
       writer.uint32(32).int64(message.proposerPriority);
     }
     return writer;
@@ -325,7 +325,7 @@ export const SimpleValidator = {
     if (message.pubKey !== undefined) {
       PublicKey.encode(message.pubKey, writer.uint32(10).fork()).ldelim();
     }
-    if (message.votingPower !== BigInt(0)) {
+    if (message.votingPower !== undefined) {
       writer.uint32(16).int64(message.votingPower);
     }
     return writer;

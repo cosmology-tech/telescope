@@ -37,13 +37,13 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/akash.inflation.v1beta2.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.inflationDecayFactor !== "") {
+    if (message.inflationDecayFactor !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.inflationDecayFactor, 18).atomics);
     }
-    if (message.initialInflation !== "") {
+    if (message.initialInflation !== undefined) {
       writer.uint32(18).string(Decimal.fromUserInput(message.initialInflation, 18).atomics);
     }
-    if (message.variance !== "") {
+    if (message.variance !== undefined) {
       writer.uint32(26).string(Decimal.fromUserInput(message.variance, 18).atomics);
     }
     return writer;

@@ -92,13 +92,13 @@ function createBaseProtocolVersion(): ProtocolVersion {
 export const ProtocolVersion = {
   typeUrl: "/tendermint.p2p.ProtocolVersion",
   encode(message: ProtocolVersion, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.p2p !== BigInt(0)) {
+    if (message.p2p !== undefined) {
       writer.uint32(8).uint64(message.p2p);
     }
-    if (message.block !== BigInt(0)) {
+    if (message.block !== undefined) {
       writer.uint32(16).uint64(message.block);
     }
-    if (message.app !== BigInt(0)) {
+    if (message.app !== undefined) {
       writer.uint32(24).uint64(message.app);
     }
     return writer;
@@ -222,22 +222,22 @@ export const NodeInfo = {
     if (message.protocolVersion !== undefined) {
       ProtocolVersion.encode(message.protocolVersion, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nodeId !== "") {
+    if (message.nodeId !== undefined) {
       writer.uint32(18).string(message.nodeId);
     }
-    if (message.listenAddr !== "") {
+    if (message.listenAddr !== undefined) {
       writer.uint32(26).string(message.listenAddr);
     }
-    if (message.network !== "") {
+    if (message.network !== undefined) {
       writer.uint32(34).string(message.network);
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       writer.uint32(42).string(message.version);
     }
     if (message.channels.length !== 0) {
       writer.uint32(50).bytes(message.channels);
     }
-    if (message.moniker !== "") {
+    if (message.moniker !== undefined) {
       writer.uint32(58).string(message.moniker);
     }
     if (message.other !== undefined) {
@@ -408,10 +408,10 @@ function createBaseNodeInfoOther(): NodeInfoOther {
 export const NodeInfoOther = {
   typeUrl: "/tendermint.p2p.NodeInfoOther",
   encode(message: NodeInfoOther, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.txIndex !== "") {
+    if (message.txIndex !== undefined) {
       writer.uint32(10).string(message.txIndex);
     }
-    if (message.rpcAddress !== "") {
+    if (message.rpcAddress !== undefined) {
       writer.uint32(18).string(message.rpcAddress);
     }
     return writer;
@@ -510,7 +510,7 @@ function createBasePeerInfo(): PeerInfo {
 export const PeerInfo = {
   typeUrl: "/tendermint.p2p.PeerInfo",
   encode(message: PeerInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(10).string(message.id);
     }
     for (const v of message.addressInfo) {
@@ -639,7 +639,7 @@ function createBasePeerAddressInfo(): PeerAddressInfo {
 export const PeerAddressInfo = {
   typeUrl: "/tendermint.p2p.PeerAddressInfo",
   encode(message: PeerAddressInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     if (message.lastDialSuccess !== undefined) {
@@ -648,7 +648,7 @@ export const PeerAddressInfo = {
     if (message.lastDialFailure !== undefined) {
       Timestamp.encode(toTimestamp(message.lastDialFailure), writer.uint32(26).fork()).ldelim();
     }
-    if (message.dialFailures !== 0) {
+    if (message.dialFailures !== undefined) {
       writer.uint32(32).uint32(message.dialFailures);
     }
     return writer;

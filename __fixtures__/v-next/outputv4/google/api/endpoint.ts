@@ -91,16 +91,16 @@ function createBaseEndpoint(): Endpoint {
 export const Endpoint = {
   typeUrl: "/google.api.Endpoint",
   encode(message: Endpoint, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.aliases) {
       writer.uint32(18).string(v!);
     }
-    if (message.target !== "") {
+    if (message.target !== undefined) {
       writer.uint32(810).string(message.target);
     }
-    if (message.allowCors === true) {
+    if (message.allowCors !== undefined) {
       writer.uint32(40).bool(message.allowCors);
     }
     return writer;

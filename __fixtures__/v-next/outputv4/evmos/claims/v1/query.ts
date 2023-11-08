@@ -672,7 +672,7 @@ function createBaseQueryClaimsRecordRequest(): QueryClaimsRecordRequest {
 export const QueryClaimsRecordRequest = {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordRequest",
   encode(message: QueryClaimsRecordRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     return writer;
@@ -759,7 +759,7 @@ function createBaseQueryClaimsRecordResponse(): QueryClaimsRecordResponse {
 export const QueryClaimsRecordResponse = {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordResponse",
   encode(message: QueryClaimsRecordResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.initialClaimableAmount !== "") {
+    if (message.initialClaimableAmount !== undefined) {
       writer.uint32(10).string(message.initialClaimableAmount);
     }
     for (const v of message.claims) {

@@ -44,7 +44,7 @@ function createBaseMsgSubmitEvidence(): MsgSubmitEvidence {
 export const MsgSubmitEvidence = {
   typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidence",
   encode(message: MsgSubmitEvidence, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.submitter !== "") {
+    if (message.submitter !== undefined) {
       writer.uint32(10).string(message.submitter);
     }
     if (message.evidence !== undefined) {

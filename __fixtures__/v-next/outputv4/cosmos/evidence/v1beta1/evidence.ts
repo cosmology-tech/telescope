@@ -37,16 +37,16 @@ function createBaseEquivocation(): Equivocation {
 export const Equivocation = {
   typeUrl: "/cosmos.evidence.v1beta1.Equivocation",
   encode(message: Equivocation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(8).int64(message.height);
     }
     if (message.time !== undefined) {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(18).fork()).ldelim();
     }
-    if (message.power !== BigInt(0)) {
+    if (message.power !== undefined) {
       writer.uint32(24).int64(message.power);
     }
-    if (message.consensusAddress !== "") {
+    if (message.consensusAddress !== undefined) {
       writer.uint32(34).string(message.consensusAddress);
     }
     return writer;

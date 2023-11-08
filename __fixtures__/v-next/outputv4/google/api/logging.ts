@@ -251,7 +251,7 @@ function createBaseLogging_LoggingDestination(): Logging_LoggingDestination {
 export const Logging_LoggingDestination = {
   typeUrl: "/google.api.LoggingDestination",
   encode(message: Logging_LoggingDestination, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.monitoredResource !== "") {
+    if (message.monitoredResource !== undefined) {
       writer.uint32(26).string(message.monitoredResource);
     }
     for (const v of message.logs) {

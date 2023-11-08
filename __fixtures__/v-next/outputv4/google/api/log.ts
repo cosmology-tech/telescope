@@ -68,16 +68,16 @@ function createBaseLogDescriptor(): LogDescriptor {
 export const LogDescriptor = {
   typeUrl: "/google.api.LogDescriptor",
   encode(message: LogDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.labels) {
       LabelDescriptor.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(26).string(message.description);
     }
-    if (message.displayName !== "") {
+    if (message.displayName !== undefined) {
       writer.uint32(34).string(message.displayName);
     }
     return writer;

@@ -315,7 +315,7 @@ function createBaseQueryTokenPairRequest(): QueryTokenPairRequest {
 export const QueryTokenPairRequest = {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairRequest",
   encode(message: QueryTokenPairRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.token !== "") {
+    if (message.token !== undefined) {
       writer.uint32(10).string(message.token);
     }
     return writer;

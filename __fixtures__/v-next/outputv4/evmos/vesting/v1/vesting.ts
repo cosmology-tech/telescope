@@ -56,7 +56,7 @@ export const ClawbackVestingAccount = {
     if (message.baseVestingAccount !== undefined) {
       BaseVestingAccount.encode(message.baseVestingAccount, writer.uint32(10).fork()).ldelim();
     }
-    if (message.funderAddress !== "") {
+    if (message.funderAddress !== undefined) {
       writer.uint32(18).string(message.funderAddress);
     }
     if (message.startTime !== undefined) {

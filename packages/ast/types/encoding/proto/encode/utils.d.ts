@@ -29,19 +29,19 @@ export declare const encode: {
 };
 export declare const types: {
     string(num: number, prop: string, isOptional: boolean, args: EncodeMethod): t.IfStatement;
-    double(num: number, prop: string, isOptional: boolean): t.IfStatement;
-    float(num: number, prop: string, isOptional: boolean): t.IfStatement;
-    int32(num: number, prop: string, isOptional: boolean): t.IfStatement;
-    sint32(num: number, prop: string, isOptional: boolean): t.IfStatement;
-    uint32(num: number, prop: string, isOptional: boolean): t.IfStatement;
-    fixed32(num: number, prop: string, isOptional: boolean): t.IfStatement;
-    sfixed32(num: number, prop: string, isOptional: boolean): t.IfStatement;
+    double(num: number, prop: string, isOptional: boolean, args?: EncodeMethod): t.IfStatement;
+    float(num: number, prop: string, isOptional: boolean, args?: EncodeMethod): t.IfStatement;
+    int32(num: number, prop: string, isOptional: boolean, args?: EncodeMethod): t.IfStatement;
+    sint32(num: number, prop: string, isOptional: boolean, args?: EncodeMethod): t.IfStatement;
+    uint32(num: number, prop: string, isOptional: boolean, args?: EncodeMethod): t.IfStatement;
+    fixed32(num: number, prop: string, isOptional: boolean, args?: EncodeMethod): t.IfStatement;
+    sfixed32(num: number, prop: string, isOptional: boolean, args?: EncodeMethod): t.IfStatement;
     int64(num: number, prop: string, isOptional: boolean, args: EncodeMethod): t.IfStatement;
     sint64(num: number, prop: string, isOptional: boolean, args: EncodeMethod): t.IfStatement;
     uint64(num: number, prop: string, isOptional: boolean, args: EncodeMethod): t.IfStatement;
     fixed64(num: number, prop: string, isOptional: boolean, args: EncodeMethod): t.IfStatement;
     sfixed64(num: number, prop: string, isOptional: boolean, args: EncodeMethod): t.IfStatement;
-    bool(num: number, prop: string, isOptional: boolean): t.IfStatement;
+    bool(num: number, prop: string, isOptional: boolean, args?: EncodeMethod): t.IfStatement;
     type(num: number, prop: string, name: string, isAnyType: boolean): t.IfStatement;
     enum(context: ProtoParseContext, num: number, field: ProtoField, isOptional: boolean, isOneOf: boolean): t.IfStatement;
     bytes(num: number, prop: string, isOptional: boolean): t.IfStatement;

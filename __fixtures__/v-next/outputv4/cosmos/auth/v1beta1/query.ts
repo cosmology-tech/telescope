@@ -407,7 +407,7 @@ function createBaseQueryAccountRequest(): QueryAccountRequest {
 export const QueryAccountRequest = {
   typeUrl: "/cosmos.auth.v1beta1.QueryAccountRequest",
   encode(message: QueryAccountRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     return writer;
@@ -1010,7 +1010,7 @@ function createBaseBech32PrefixResponse(): Bech32PrefixResponse {
 export const Bech32PrefixResponse = {
   typeUrl: "/cosmos.auth.v1beta1.Bech32PrefixResponse",
   encode(message: Bech32PrefixResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.bech32Prefix !== "") {
+    if (message.bech32Prefix !== undefined) {
       writer.uint32(10).string(message.bech32Prefix);
     }
     return writer;
@@ -1194,7 +1194,7 @@ function createBaseAddressBytesToStringResponse(): AddressBytesToStringResponse 
 export const AddressBytesToStringResponse = {
   typeUrl: "/cosmos.auth.v1beta1.AddressBytesToStringResponse",
   encode(message: AddressBytesToStringResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.addressString !== "") {
+    if (message.addressString !== undefined) {
       writer.uint32(10).string(message.addressString);
     }
     return writer;
@@ -1286,7 +1286,7 @@ function createBaseAddressStringToBytesRequest(): AddressStringToBytesRequest {
 export const AddressStringToBytesRequest = {
   typeUrl: "/cosmos.auth.v1beta1.AddressStringToBytesRequest",
   encode(message: AddressStringToBytesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.addressString !== "") {
+    if (message.addressString !== undefined) {
       writer.uint32(10).string(message.addressString);
     }
     return writer;

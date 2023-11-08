@@ -141,10 +141,10 @@ function createBaseCertificateID(): CertificateID {
 export const CertificateID = {
   typeUrl: "/akash.cert.v1beta2.CertificateID",
   encode(message: CertificateID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.serial !== "") {
+    if (message.serial !== undefined) {
       writer.uint32(18).string(message.serial);
     }
     return writer;
@@ -371,13 +371,13 @@ function createBaseCertificateFilter(): CertificateFilter {
 export const CertificateFilter = {
   typeUrl: "/akash.cert.v1beta2.CertificateFilter",
   encode(message: CertificateFilter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.serial !== "") {
+    if (message.serial !== undefined) {
       writer.uint32(18).string(message.serial);
     }
-    if (message.state !== "") {
+    if (message.state !== undefined) {
       writer.uint32(26).string(message.state);
     }
     return writer;
@@ -493,7 +493,7 @@ function createBaseMsgCreateCertificate(): MsgCreateCertificate {
 export const MsgCreateCertificate = {
   typeUrl: "/akash.cert.v1beta2.MsgCreateCertificate",
   encode(message: MsgCreateCertificate, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     if (message.cert.length !== 0) {
