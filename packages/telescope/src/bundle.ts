@@ -154,7 +154,7 @@ export const createFileBundle = (
     let rel = relative(dirname(bundleFile), filename);
     if (!rel.startsWith('.')) rel = `./${rel}`;
     const variable = `_${counter++}`;
-    importPaths.push(importNamespace(variable, convertIfWinPath(ToUnixPath, '/', rel));
+    importPaths.push(importNamespace(variable, convertIfWinPath(ToUnixPath, '/', rel)));
     dotty.put(bundleVariables, pkg + '.__export', true);
     dotty.put(bundleVariables, pkg + '.' + variable, true);
 }
