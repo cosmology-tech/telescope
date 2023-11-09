@@ -58,7 +58,9 @@ describe("implements interface works", () => {
         authorization: auth as unknown as Any,
         expiration: new Date(),
       });
-    }).toThrowError(`There's no encoder for the instance ${auth}`);
+    }).toThrowError(
+      `There's no encoder for the instance ${JSON.stringify(auth)}`
+    );
   });
 
   it("toJson for extended interface", () => {

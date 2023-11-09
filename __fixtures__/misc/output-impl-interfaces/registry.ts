@@ -29,6 +29,9 @@ export class GlobalDecoderRegistry {
   static getDecoderByInstance<T>(
     obj: unknown
   ): TelescopeGeneratedType<T> | null {
+    if (obj === undefined || obj === null) {
+      return null;
+    }
     for (const key in GlobalDecoderRegistry.registry) {
       if (
         Object.prototype.hasOwnProperty.call(
@@ -50,7 +53,9 @@ export class GlobalDecoderRegistry {
     const decoder = GlobalDecoderRegistry.getDecoderByInstance(obj);
 
     if (!decoder) {
-      throw new Error(`There's no encoder for the instance ${obj}`);
+      throw new Error(
+        `There's no encoder for the instance ${JSON.stringify(obj)}`
+      );
     }
 
     return {
@@ -71,5 +76,27 @@ export class GlobalDecoderRegistry {
     }
 
     return decoder.decode(data.value);
+  }
+  static fromJSON(object: any): unknown {
+    const decoder = GlobalDecoderRegistry.getDecoderByInstance(object);
+    if (!decoder) {
+      throw new Error(
+        `There's no decoder for the instance ${JSON.stringify(object)}`
+      );
+    }
+    return decoder.fromJSON!(object);
+  }
+  static toJSON(message: unknown): any {
+    const decoder = GlobalDecoderRegistry.getDecoderByInstance(message);
+    if (!decoder) {
+      throw new Error(
+        `There's no decoder for the instance ${JSON.stringify(message)}`
+      );
+    }
+    return decoder.toJSON!(message);
+  }
+  static fromPartial(object: unknown): unknown {
+    const decoder = GlobalDecoderRegistry.getDecoderByInstance(object);
+    return decoder ? decoder.fromPartial(object) : object;
   }
 }

@@ -199,15 +199,9 @@ export const Grant = {
   fromJSON(object: any): Grant {
     const obj = createBaseGrant();
     if (isSet(object.authorization)) {
-      const decoder = GlobalDecoderRegistry.getDecoderByInstance(
+      obj.authorization = GlobalDecoderRegistry.fromJSON(
         object.authorization
-      );
-      if (!decoder) {
-        throw new Error(
-          `There's no decoder for the instance ${object.authorization}`
-        );
-      }
-      obj.authorization = decoder.fromJSON!(object.authorization) as
+      ) as
         | GenericAuthorization
         | DepositDeploymentAuthorization
         | SendAuthorization
@@ -219,15 +213,7 @@ export const Grant = {
   toJSON(message: Grant): unknown {
     const obj: any = {};
     if (message.authorization) {
-      const decoder = GlobalDecoderRegistry.getDecoderByInstance(
-        message.authorization
-      );
-      if (!decoder) {
-        throw new Error(
-          `There's no decoder for the instance ${message.authorization}`
-        );
-      }
-      obj.authorization = decoder.toJSON!(message.authorization);
+      obj.authorization = GlobalDecoderRegistry.toJSON(message.authorization);
     }
     message.expiration !== undefined &&
       (obj.expiration = message.expiration.toISOString());
@@ -236,22 +222,13 @@ export const Grant = {
   fromPartial(object: DeepPartial<Grant>): Grant {
     const message = createBaseGrant();
     if (object.authorization !== undefined && object.authorization !== null) {
-      const decoder = GlobalDecoderRegistry.getDecoderByInstance(
+      message.authorization = GlobalDecoderRegistry.fromPartial(
         object.authorization
-      );
-      if (decoder) {
-        message.authorization = decoder.fromPartial(object.authorization) as
-          | GenericAuthorization
-          | DepositDeploymentAuthorization
-          | SendAuthorization
-          | Any;
-      } else {
-        message.authorization = object.authorization as
-          | GenericAuthorization
-          | DepositDeploymentAuthorization
-          | SendAuthorization
-          | Any;
-      }
+      ) as
+        | GenericAuthorization
+        | DepositDeploymentAuthorization
+        | SendAuthorization
+        | Any;
     }
     message.expiration = object.expiration ?? undefined;
     return message;
