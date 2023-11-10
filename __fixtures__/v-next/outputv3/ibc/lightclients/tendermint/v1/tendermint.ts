@@ -136,7 +136,7 @@ export interface ConsensusStateAmino {
    * timestamp that corresponds to the block height in which the ConsensusState
    * was stored.
    */
-  timestamp?: Date;
+  timestamp?: string;
   /** commitment root (i.e app hash) */
   root?: MerkleRootAmino;
   next_validators_hash: Uint8Array;
@@ -609,14 +609,14 @@ export const ConsensusState = {
   },
   fromAmino(object: ConsensusStateAmino): ConsensusState {
     return {
-      timestamp: object.timestamp,
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined,
       root: object?.root ? MerkleRoot.fromAmino(object.root) : undefined,
       nextValidatorsHash: object.next_validators_hash
     };
   },
   toAmino(message: ConsensusState, useInterfaces: boolean = true): ConsensusStateAmino {
     const obj: any = {};
-    obj.timestamp = message.timestamp;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     obj.root = message.root ? MerkleRoot.toAmino(message.root, useInterfaces) : undefined;
     obj.next_validators_hash = message.nextValidatorsHash;
     return obj;

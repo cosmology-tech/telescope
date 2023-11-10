@@ -32,7 +32,7 @@ exports[`MsgExecuteContract interface 2`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgExecuteContract {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgExecuteContract {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExecuteContract();
@@ -114,7 +114,7 @@ exports[`MsgExecuteContract interface 2`] = `
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgExecuteContract, useInterfaces: boolean = true): MsgExecuteContractAmino {
+  toAmino(message: MsgExecuteContract, useInterfaces: boolean = false): MsgExecuteContractAmino {
     const obj: any = {};
     obj.sender = message.sender;
     obj.contract = message.contract;
@@ -129,13 +129,13 @@ exports[`MsgExecuteContract interface 2`] = `
   fromAminoMsg(object: MsgExecuteContractAminoMsg): MsgExecuteContract {
     return MsgExecuteContract.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgExecuteContract, useInterfaces: boolean = true): MsgExecuteContractAminoMsg {
+  toAminoMsg(message: MsgExecuteContract, useInterfaces: boolean = false): MsgExecuteContractAminoMsg {
     return {
       type: "wasm/MsgExecuteContract",
       value: MsgExecuteContract.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgExecuteContractProtoMsg, useInterfaces: boolean = true): MsgExecuteContract {
+  fromProtoMsg(message: MsgExecuteContractProtoMsg, useInterfaces: boolean = false): MsgExecuteContract {
     return MsgExecuteContract.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgExecuteContract): Uint8Array {

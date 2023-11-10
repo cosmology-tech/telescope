@@ -161,7 +161,6 @@ export const fromSDK = {
           return fromSDK.type(args);
         case 'date':
         default:
-          args.context.addUtil('toTimestamp');
           return fromSDK.timestampDate(args);
       }
     },

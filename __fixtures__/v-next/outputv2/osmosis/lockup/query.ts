@@ -174,7 +174,7 @@ export interface AccountLockedPastTimeRequestProtoMsg {
 }
 export interface AccountLockedPastTimeRequestAmino {
   owner: string;
-  timestamp?: Date;
+  timestamp?: string;
 }
 export interface AccountLockedPastTimeRequestAminoMsg {
   type: "osmosis/lockup/account-locked-past-time-request";
@@ -211,7 +211,7 @@ export interface AccountLockedPastTimeNotUnlockingOnlyRequestProtoMsg {
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyRequestAmino {
   owner: string;
-  timestamp?: Date;
+  timestamp?: string;
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyRequestAminoMsg {
   type: "osmosis/lockup/account-locked-past-time-not-unlocking-only-request";
@@ -248,7 +248,7 @@ export interface AccountUnlockedBeforeTimeRequestProtoMsg {
 }
 export interface AccountUnlockedBeforeTimeRequestAmino {
   owner: string;
-  timestamp?: Date;
+  timestamp?: string;
 }
 export interface AccountUnlockedBeforeTimeRequestAminoMsg {
   type: "osmosis/lockup/account-unlocked-before-time-request";
@@ -286,7 +286,7 @@ export interface AccountLockedPastTimeDenomRequestProtoMsg {
 }
 export interface AccountLockedPastTimeDenomRequestAmino {
   owner: string;
-  timestamp?: Date;
+  timestamp?: string;
   denom: string;
 }
 export interface AccountLockedPastTimeDenomRequestAminoMsg {
@@ -1576,13 +1576,13 @@ export const AccountLockedPastTimeRequest = {
   fromAmino(object: AccountLockedPastTimeRequestAmino): AccountLockedPastTimeRequest {
     return {
       owner: object.owner,
-      timestamp: object.timestamp
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
     };
   },
   toAmino(message: AccountLockedPastTimeRequest, useInterfaces: boolean = true): AccountLockedPastTimeRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.timestamp = message.timestamp;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     return obj;
   },
   fromAminoMsg(object: AccountLockedPastTimeRequestAminoMsg): AccountLockedPastTimeRequest {
@@ -1778,13 +1778,13 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
   fromAmino(object: AccountLockedPastTimeNotUnlockingOnlyRequestAmino): AccountLockedPastTimeNotUnlockingOnlyRequest {
     return {
       owner: object.owner,
-      timestamp: object.timestamp
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
     };
   },
   toAmino(message: AccountLockedPastTimeNotUnlockingOnlyRequest, useInterfaces: boolean = true): AccountLockedPastTimeNotUnlockingOnlyRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.timestamp = message.timestamp;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     return obj;
   },
   fromAminoMsg(object: AccountLockedPastTimeNotUnlockingOnlyRequestAminoMsg): AccountLockedPastTimeNotUnlockingOnlyRequest {
@@ -1980,13 +1980,13 @@ export const AccountUnlockedBeforeTimeRequest = {
   fromAmino(object: AccountUnlockedBeforeTimeRequestAmino): AccountUnlockedBeforeTimeRequest {
     return {
       owner: object.owner,
-      timestamp: object.timestamp
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
     };
   },
   toAmino(message: AccountUnlockedBeforeTimeRequest, useInterfaces: boolean = true): AccountUnlockedBeforeTimeRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.timestamp = message.timestamp;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     return obj;
   },
   fromAminoMsg(object: AccountUnlockedBeforeTimeRequestAminoMsg): AccountUnlockedBeforeTimeRequest {
@@ -2194,14 +2194,14 @@ export const AccountLockedPastTimeDenomRequest = {
   fromAmino(object: AccountLockedPastTimeDenomRequestAmino): AccountLockedPastTimeDenomRequest {
     return {
       owner: object.owner,
-      timestamp: object.timestamp,
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined,
       denom: object.denom
     };
   },
   toAmino(message: AccountLockedPastTimeDenomRequest, useInterfaces: boolean = true): AccountLockedPastTimeDenomRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.timestamp = message.timestamp;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     obj.denom = message.denom;
     return obj;
   },

@@ -634,7 +634,7 @@ export interface ConstantAmino {
    * Deprecated: timestamp is no longer considered a builtin cel type.
    */
   /** @deprecated */
-  timestamp_value?: Date;
+  timestamp_value?: string;
 }
 /**
  * Represents a primitive literal.
@@ -2098,7 +2098,7 @@ export const Constant = {
       stringValue: object?.string_value,
       bytesValue: object?.bytes_value,
       durationValue: object?.duration_value ? Duration.fromAmino(object.duration_value) : undefined,
-      timestampValue: object?.timestamp_value
+      timestampValue: object?.timestamp_value ? fromTimestamp(Timestamp.fromAmino(object.timestamp_value)) : undefined
     };
   },
   toAmino(message: Constant, useInterfaces: boolean = true): ConstantAmino {
@@ -2111,7 +2111,7 @@ export const Constant = {
     obj.string_value = message.stringValue;
     obj.bytes_value = message.bytesValue;
     obj.duration_value = message.durationValue ? Duration.toAmino(message.durationValue, useInterfaces) : undefined;
-    obj.timestamp_value = message.timestampValue;
+    obj.timestamp_value = message.timestampValue ? Timestamp.toAmino(toTimestamp(message.timestampValue)) : undefined;
     return obj;
   },
   fromProtoMsg(message: ConstantProtoMsg, useInterfaces: boolean = true): Constant {

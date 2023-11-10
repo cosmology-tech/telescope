@@ -43,7 +43,7 @@ export interface ClawbackVestingAccountAmino {
   /** funder_address specifies the account which can perform clawback */
   funder_address: string;
   /** start_time defines the time at which the vesting period begins */
-  start_time?: Date;
+  start_time?: string;
   /** lockup_periods defines the unlocking schedule relative to the start_time */
   lockup_periods: PeriodAmino[];
   /** vesting_periods defines the vesting schedule relative to the start_time */
@@ -191,7 +191,7 @@ export const ClawbackVestingAccount = {
     return {
       baseVestingAccount: object?.base_vesting_account ? BaseVestingAccount.fromAmino(object.base_vesting_account) : undefined,
       funderAddress: object.funder_address,
-      startTime: object.start_time,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
       lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromAmino(e)) : [],
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : []
     };
@@ -200,7 +200,7 @@ export const ClawbackVestingAccount = {
     const obj: any = {};
     obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount, useInterfaces) : undefined;
     obj.funder_address = message.funderAddress;
-    obj.start_time = message.startTime;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     if (message.lockupPeriods) {
       obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e, useInterfaces) : undefined);
     } else {

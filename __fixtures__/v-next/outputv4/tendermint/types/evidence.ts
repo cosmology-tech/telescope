@@ -297,7 +297,7 @@ export const DuplicateVoteEvidence = {
       voteB: object?.vote_b ? Vote.fromAmino(object.vote_b) : undefined,
       totalVotingPower: BigInt(object.total_voting_power),
       validatorPower: BigInt(object.validator_power),
-      timestamp: object.timestamp
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
     };
   },
   toAmino(message: DuplicateVoteEvidence): DuplicateVoteEvidenceAmino {
@@ -306,7 +306,7 @@ export const DuplicateVoteEvidence = {
     obj.vote_b = message.voteB ? Vote.toAmino(message.voteB) : undefined;
     obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
     obj.validator_power = message.validatorPower ? message.validatorPower.toString() : undefined;
-    obj.timestamp = message.timestamp;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     return obj;
   },
   fromAminoMsg(object: DuplicateVoteEvidenceAminoMsg): DuplicateVoteEvidence {
@@ -457,7 +457,7 @@ export const LightClientAttackEvidence = {
       commonHeight: BigInt(object.common_height),
       byzantineValidators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Validator.fromAmino(e)) : [],
       totalVotingPower: BigInt(object.total_voting_power),
-      timestamp: object.timestamp
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
     };
   },
   toAmino(message: LightClientAttackEvidence): LightClientAttackEvidenceAmino {
@@ -470,7 +470,7 @@ export const LightClientAttackEvidence = {
       obj.byzantine_validators = [];
     }
     obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
-    obj.timestamp = message.timestamp;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     return obj;
   },
   fromAminoMsg(object: LightClientAttackEvidenceAminoMsg): LightClientAttackEvidence {

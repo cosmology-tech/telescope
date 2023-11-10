@@ -23,7 +23,6 @@ const options: TelescopeOptions = {
     },
     interfaces: {
         enabled: false,
-        useByDefault: false,
         useUnionTypes: false
     },
     prototypes: {

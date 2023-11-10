@@ -49,7 +49,7 @@ export interface ValidatorSigningInfoAmino {
    */
   index_offset: string;
   /** Timestamp until which the validator is jailed due to liveness downtime. */
-  jailed_until?: Date;
+  jailed_until?: string;
   /**
    * Whether or not a validator has been tombstoned (killed out of validator set). It is set
    * once the validator commits an equivocation or for any other configured misbehiavor.
@@ -228,7 +228,7 @@ export const ValidatorSigningInfo = {
       address: object.address,
       startHeight: BigInt(object.start_height),
       indexOffset: BigInt(object.index_offset),
-      jailedUntil: object.jailed_until,
+      jailedUntil: object?.jailed_until ? fromTimestamp(Timestamp.fromAmino(object.jailed_until)) : undefined,
       tombstoned: object.tombstoned,
       missedBlocksCounter: BigInt(object.missed_blocks_counter)
     };
@@ -238,7 +238,7 @@ export const ValidatorSigningInfo = {
     obj.address = message.address;
     obj.start_height = message.startHeight ? message.startHeight.toString() : undefined;
     obj.index_offset = message.indexOffset ? message.indexOffset.toString() : undefined;
-    obj.jailed_until = message.jailedUntil;
+    obj.jailed_until = message.jailedUntil ? Timestamp.toAmino(toTimestamp(message.jailedUntil)) : undefined;
     obj.tombstoned = message.tombstoned;
     obj.missed_blocks_counter = message.missedBlocksCounter ? message.missedBlocksCounter.toString() : undefined;
     return obj;

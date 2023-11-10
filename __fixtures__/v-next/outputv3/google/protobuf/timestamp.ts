@@ -350,7 +350,7 @@ export const Timestamp = {
     return fromJsonTimestamp(object);
   },
   toAmino(message: Timestamp, useInterfaces: boolean = true): TimestampAmino {
-    return fromTimestamp(message).toString();
+    return fromTimestamp(message).toISOString().replace(/\.\d+Z$/, "Z");
   },
   fromProtoMsg(message: TimestampProtoMsg, useInterfaces: boolean = true): Timestamp {
     return Timestamp.decode(message.value, undefined, useInterfaces);

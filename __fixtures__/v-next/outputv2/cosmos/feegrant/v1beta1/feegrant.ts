@@ -36,7 +36,7 @@ export interface BasicAllowanceAmino {
    */
   spend_limit: CoinAmino[];
   /** expiration specifies an optional time when this allowance expires */
-  expiration?: Date;
+  expiration?: string;
 }
 export interface BasicAllowanceAminoMsg {
   type: "cosmos-sdk/BasicAllowance";
@@ -106,7 +106,7 @@ export interface PeriodicAllowanceAmino {
    * it is calculated from the start time of the first transaction after the
    * last period ended
    */
-  period_reset?: Date;
+  period_reset?: string;
 }
 export interface PeriodicAllowanceAminoMsg {
   type: "cosmos-sdk/PeriodicAllowance";
@@ -271,7 +271,7 @@ export const BasicAllowance = {
   fromAmino(object: BasicAllowanceAmino): BasicAllowance {
     return {
       spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromAmino(e)) : [],
-      expiration: object?.expiration
+      expiration: object?.expiration ? fromTimestamp(Timestamp.fromAmino(object.expiration)) : undefined
     };
   },
   toAmino(message: BasicAllowance, useInterfaces: boolean = true): BasicAllowanceAmino {
@@ -281,7 +281,7 @@ export const BasicAllowance = {
     } else {
       obj.spend_limit = [];
     }
-    obj.expiration = message.expiration;
+    obj.expiration = message.expiration ? Timestamp.toAmino(toTimestamp(message.expiration)) : undefined;
     return obj;
   },
   fromAminoMsg(object: BasicAllowanceAminoMsg): BasicAllowance {
@@ -437,7 +437,7 @@ export const PeriodicAllowance = {
       period: object?.period ? Duration.fromAmino(object.period) : undefined,
       periodSpendLimit: Array.isArray(object?.period_spend_limit) ? object.period_spend_limit.map((e: any) => Coin.fromAmino(e)) : [],
       periodCanSpend: Array.isArray(object?.period_can_spend) ? object.period_can_spend.map((e: any) => Coin.fromAmino(e)) : [],
-      periodReset: object.period_reset
+      periodReset: object?.period_reset ? fromTimestamp(Timestamp.fromAmino(object.period_reset)) : undefined
     };
   },
   toAmino(message: PeriodicAllowance, useInterfaces: boolean = true): PeriodicAllowanceAmino {
@@ -454,7 +454,7 @@ export const PeriodicAllowance = {
     } else {
       obj.period_can_spend = [];
     }
-    obj.period_reset = message.periodReset;
+    obj.period_reset = message.periodReset ? Timestamp.toAmino(toTimestamp(message.periodReset)) : undefined;
     return obj;
   },
   fromAminoMsg(object: PeriodicAllowanceAminoMsg): PeriodicAllowance {

@@ -247,7 +247,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
 
     interfaces: {
         enabled: true,
-        useByDefault: true,
+        useByDefault: false,
         useUnionTypes: false,
     },
 

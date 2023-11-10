@@ -83,7 +83,7 @@ export interface PeerInfoProtoMsg {
 export interface PeerInfoAmino {
   id: string;
   address_info: PeerAddressInfoAmino[];
-  last_connected?: Date;
+  last_connected?: string;
 }
 export interface PeerInfoSDKType {
   id: string;
@@ -102,8 +102,8 @@ export interface PeerAddressInfoProtoMsg {
 }
 export interface PeerAddressInfoAmino {
   address: string;
-  last_dial_success?: Date;
-  last_dial_failure?: Date;
+  last_dial_success?: string;
+  last_dial_failure?: string;
   dial_failures: number;
 }
 export interface PeerAddressInfoSDKType {
@@ -587,7 +587,7 @@ export const PeerInfo = {
     return {
       id: object.id,
       addressInfo: Array.isArray(object?.address_info) ? object.address_info.map((e: any) => PeerAddressInfo.fromAmino(e)) : [],
-      lastConnected: object?.last_connected
+      lastConnected: object?.last_connected ? fromTimestamp(Timestamp.fromAmino(object.last_connected)) : undefined
     };
   },
   toAmino(message: PeerInfo, useInterfaces: boolean = true): PeerInfoAmino {
@@ -598,7 +598,7 @@ export const PeerInfo = {
     } else {
       obj.address_info = [];
     }
-    obj.last_connected = message.lastConnected;
+    obj.last_connected = message.lastConnected ? Timestamp.toAmino(toTimestamp(message.lastConnected)) : undefined;
     return obj;
   },
   fromProtoMsg(message: PeerInfoProtoMsg, useInterfaces: boolean = true): PeerInfo {
@@ -708,16 +708,16 @@ export const PeerAddressInfo = {
   fromAmino(object: PeerAddressInfoAmino): PeerAddressInfo {
     return {
       address: object.address,
-      lastDialSuccess: object?.last_dial_success,
-      lastDialFailure: object?.last_dial_failure,
+      lastDialSuccess: object?.last_dial_success ? fromTimestamp(Timestamp.fromAmino(object.last_dial_success)) : undefined,
+      lastDialFailure: object?.last_dial_failure ? fromTimestamp(Timestamp.fromAmino(object.last_dial_failure)) : undefined,
       dialFailures: object.dial_failures
     };
   },
   toAmino(message: PeerAddressInfo, useInterfaces: boolean = true): PeerAddressInfoAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.last_dial_success = message.lastDialSuccess;
-    obj.last_dial_failure = message.lastDialFailure;
+    obj.last_dial_success = message.lastDialSuccess ? Timestamp.toAmino(toTimestamp(message.lastDialSuccess)) : undefined;
+    obj.last_dial_failure = message.lastDialFailure ? Timestamp.toAmino(toTimestamp(message.lastDialFailure)) : undefined;
     obj.dial_failures = message.dialFailures;
     return obj;
   },

@@ -505,7 +505,7 @@ export const MsgCreatePositionResponse = {
       positionId: BigInt(object.position_id),
       amount0: object.amount0,
       amount1: object.amount1,
-      joinTime: object.join_time,
+      joinTime: object?.join_time ? fromTimestamp(Timestamp.fromAmino(object.join_time)) : undefined,
       liquidityCreated: object.liquidity_created
     };
   },
@@ -514,7 +514,7 @@ export const MsgCreatePositionResponse = {
     obj.position_id = message.positionId ? message.positionId.toString() : undefined;
     obj.amount0 = message.amount0;
     obj.amount1 = message.amount1;
-    obj.join_time = message.joinTime;
+    obj.join_time = message.joinTime ? Timestamp.toAmino(toTimestamp(message.joinTime)) : undefined;
     obj.liquidity_created = message.liquidityCreated;
     return obj;
   },
@@ -1378,7 +1378,7 @@ export const MsgCreateIncentive = {
       incentiveDenom: object.incentive_denom,
       incentiveAmount: object.incentive_amount,
       emissionRate: object.emission_rate,
-      startTime: object.start_time,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
       minUptime: object?.min_uptime ? Duration.fromAmino(object.min_uptime) : undefined
     };
   },
@@ -1389,7 +1389,7 @@ export const MsgCreateIncentive = {
     obj.incentive_denom = message.incentiveDenom;
     obj.incentive_amount = message.incentiveAmount;
     obj.emission_rate = message.emissionRate;
-    obj.start_time = message.startTime;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.min_uptime = message.minUptime ? Duration.toAmino(message.minUptime) : undefined;
     return obj;
   },
@@ -1532,7 +1532,7 @@ export const MsgCreateIncentiveResponse = {
       incentiveDenom: object.incentive_denom,
       incentiveAmount: object.incentive_amount,
       emissionRate: object.emission_rate,
-      startTime: object.start_time,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
       minUptime: object?.min_uptime ? Duration.fromAmino(object.min_uptime) : undefined
     };
   },
@@ -1541,7 +1541,7 @@ export const MsgCreateIncentiveResponse = {
     obj.incentive_denom = message.incentiveDenom;
     obj.incentive_amount = message.incentiveAmount;
     obj.emission_rate = message.emissionRate;
-    obj.start_time = message.startTime;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.min_uptime = message.minUptime ? Duration.toAmino(message.minUptime) : undefined;
     return obj;
   },

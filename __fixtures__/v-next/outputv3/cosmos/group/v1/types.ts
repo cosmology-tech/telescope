@@ -247,7 +247,7 @@ export interface MemberAmino {
   /** metadata is any arbitrary metadata to attached to the member. */
   metadata: string;
   /** added_at is a timestamp specifying when a member was added. */
-  added_at?: Date;
+  added_at?: string;
 }
 /**
  * Member represents a group member with an account address,
@@ -422,7 +422,7 @@ export interface GroupInfoAmino {
   /** total_weight is the sum of the group members' weights. */
   total_weight: string;
   /** created_at is a timestamp specifying when a group was created. */
-  created_at?: Date;
+  created_at?: string;
 }
 /** GroupInfo represents the high-level on-chain information for a group. */
 export interface GroupInfoSDKType {
@@ -501,7 +501,7 @@ export interface GroupPolicyInfoAmino {
   /** decision_policy specifies the group policy's decision policy. */
   decision_policy?: AnyAmino;
   /** created_at is a timestamp specifying when a group policy was created. */
-  created_at?: Date;
+  created_at?: string;
 }
 /** GroupPolicyInfo represents the high-level on-chain information for a group policy. */
 export interface GroupPolicyInfoSDKType {
@@ -587,7 +587,7 @@ export interface ProposalAmino {
   /** proposers are the account addresses of the proposers. */
   proposers: string[];
   /** submit_time is a timestamp specifying when a proposal was submitted. */
-  submit_time?: Date;
+  submit_time?: string;
   /**
    * group_version tracks the version of the group that this proposal corresponds to.
    * When group membership is changed, existing proposals from previous group versions will become invalid.
@@ -619,7 +619,7 @@ export interface ProposalAmino {
    * at this point, and the `final_tally_result`, as well
    * as `status` and `result` fields will be accordingly updated.
    */
-  voting_period_end?: Date;
+  voting_period_end?: string;
   /** executor_result is the final result based on the votes and election rule. Initial value is NotRun. */
   executor_result: ProposalExecutorResult;
   /** messages is a list of Msgs that will be executed if the proposal passes. */
@@ -707,7 +707,7 @@ export interface VoteAmino {
   /** metadata is any arbitrary metadata to attached to the vote. */
   metadata: string;
   /** submit_time is the timestamp when the vote was submitted. */
-  submit_time?: Date;
+  submit_time?: string;
 }
 /** Vote represents a vote for a proposal. */
 export interface VoteSDKType {
@@ -814,7 +814,7 @@ export const Member = {
       address: object.address,
       weight: object.weight,
       metadata: object.metadata,
-      addedAt: object.added_at
+      addedAt: object?.added_at ? fromTimestamp(Timestamp.fromAmino(object.added_at)) : undefined
     };
   },
   toAmino(message: Member, useInterfaces: boolean = true): MemberAmino {
@@ -822,7 +822,7 @@ export const Member = {
     obj.address = message.address;
     obj.weight = message.weight;
     obj.metadata = message.metadata;
-    obj.added_at = message.addedAt;
+    obj.added_at = message.addedAt ? Timestamp.toAmino(toTimestamp(message.addedAt)) : undefined;
     return obj;
   },
   fromProtoMsg(message: MemberProtoMsg, useInterfaces: boolean = true): Member {
@@ -1345,7 +1345,7 @@ export const GroupInfo = {
       metadata: object.metadata,
       version: BigInt(object.version),
       totalWeight: object.total_weight,
-      createdAt: object.created_at
+      createdAt: object?.created_at ? fromTimestamp(Timestamp.fromAmino(object.created_at)) : undefined
     };
   },
   toAmino(message: GroupInfo, useInterfaces: boolean = true): GroupInfoAmino {
@@ -1355,7 +1355,7 @@ export const GroupInfo = {
     obj.metadata = message.metadata;
     obj.version = message.version ? message.version.toString() : undefined;
     obj.total_weight = message.totalWeight;
-    obj.created_at = message.createdAt;
+    obj.created_at = message.createdAt ? Timestamp.toAmino(toTimestamp(message.createdAt)) : undefined;
     return obj;
   },
   fromProtoMsg(message: GroupInfoProtoMsg, useInterfaces: boolean = true): GroupInfo {
@@ -1610,7 +1610,7 @@ export const GroupPolicyInfo = {
       metadata: object.metadata,
       version: BigInt(object.version),
       decisionPolicy: object?.decision_policy ? DecisionPolicy_FromAmino(object.decision_policy) : undefined,
-      createdAt: object.created_at
+      createdAt: object?.created_at ? fromTimestamp(Timestamp.fromAmino(object.created_at)) : undefined
     };
   },
   toAmino(message: GroupPolicyInfo, useInterfaces: boolean = true): GroupPolicyInfoAmino {
@@ -1621,7 +1621,7 @@ export const GroupPolicyInfo = {
     obj.metadata = message.metadata;
     obj.version = message.version ? message.version.toString() : undefined;
     obj.decision_policy = message.decisionPolicy ? DecisionPolicy_ToAmino((message.decisionPolicy as Any), useInterfaces) : undefined;
-    obj.created_at = message.createdAt;
+    obj.created_at = message.createdAt ? Timestamp.toAmino(toTimestamp(message.createdAt)) : undefined;
     return obj;
   },
   fromProtoMsg(message: GroupPolicyInfoProtoMsg, useInterfaces: boolean = true): GroupPolicyInfo {
@@ -1867,13 +1867,13 @@ export const Proposal = {
       address: object.address,
       metadata: object.metadata,
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => e) : [],
-      submitTime: object.submit_time,
+      submitTime: object?.submit_time ? fromTimestamp(Timestamp.fromAmino(object.submit_time)) : undefined,
       groupVersion: BigInt(object.group_version),
       groupPolicyVersion: BigInt(object.group_policy_version),
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
       result: isSet(object.result) ? proposalResultFromJSON(object.result) : -1,
       finalTallyResult: object?.final_tally_result ? TallyResult.fromAmino(object.final_tally_result) : undefined,
-      votingPeriodEnd: object.voting_period_end,
+      votingPeriodEnd: object?.voting_period_end ? fromTimestamp(Timestamp.fromAmino(object.voting_period_end)) : undefined,
       executorResult: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : -1,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : []
     };
@@ -1888,13 +1888,13 @@ export const Proposal = {
     } else {
       obj.proposers = [];
     }
-    obj.submit_time = message.submitTime;
+    obj.submit_time = message.submitTime ? Timestamp.toAmino(toTimestamp(message.submitTime)) : undefined;
     obj.group_version = message.groupVersion ? message.groupVersion.toString() : undefined;
     obj.group_policy_version = message.groupPolicyVersion ? message.groupPolicyVersion.toString() : undefined;
     obj.status = message.status;
     obj.result = message.result;
     obj.final_tally_result = message.finalTallyResult ? TallyResult.toAmino(message.finalTallyResult, useInterfaces) : undefined;
-    obj.voting_period_end = message.votingPeriodEnd;
+    obj.voting_period_end = message.votingPeriodEnd ? Timestamp.toAmino(toTimestamp(message.votingPeriodEnd)) : undefined;
     obj.executor_result = message.executorResult;
     if (message.messages) {
       obj.messages = message.messages.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
@@ -2149,7 +2149,7 @@ export const Vote = {
       voter: object.voter,
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: object.metadata,
-      submitTime: object.submit_time
+      submitTime: object?.submit_time ? fromTimestamp(Timestamp.fromAmino(object.submit_time)) : undefined
     };
   },
   toAmino(message: Vote, useInterfaces: boolean = true): VoteAmino {
@@ -2158,7 +2158,7 @@ export const Vote = {
     obj.voter = message.voter;
     obj.option = message.option;
     obj.metadata = message.metadata;
-    obj.submit_time = message.submitTime;
+    obj.submit_time = message.submitTime ? Timestamp.toAmino(toTimestamp(message.submitTime)) : undefined;
     return obj;
   },
   fromProtoMsg(message: VoteProtoMsg, useInterfaces: boolean = true): Vote {

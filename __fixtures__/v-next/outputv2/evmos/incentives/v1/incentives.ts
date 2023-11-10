@@ -35,7 +35,7 @@ export interface IncentiveAmino {
   /** number of remaining epochs */
   epochs: number;
   /** distribution start time */
-  start_time?: Date;
+  start_time?: string;
   /** cumulative gas spent by all gasmeters of the incentive during the epoch */
   total_gas: string;
 }
@@ -280,7 +280,7 @@ export const Incentive = {
       contract: object.contract,
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromAmino(e)) : [],
       epochs: object.epochs,
-      startTime: object.start_time,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
       totalGas: BigInt(object.total_gas)
     };
   },
@@ -293,7 +293,7 @@ export const Incentive = {
       obj.allocations = [];
     }
     obj.epochs = message.epochs;
-    obj.start_time = message.startTime;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.total_gas = message.totalGas ? message.totalGas.toString() : undefined;
     return obj;
   },

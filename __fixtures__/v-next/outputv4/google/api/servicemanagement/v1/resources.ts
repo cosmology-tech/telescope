@@ -818,7 +818,7 @@ export const OperationMetadata = {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
       steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromAmino(e)) : [],
       progressPercentage: object.progress_percentage,
-      startTime: object?.start_time
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined
     };
   },
   toAmino(message: OperationMetadata): OperationMetadataAmino {
@@ -834,7 +834,7 @@ export const OperationMetadata = {
       obj.steps = [];
     }
     obj.progress_percentage = message.progressPercentage;
-    obj.start_time = message.startTime;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     return obj;
   },
   fromAminoMsg(object: OperationMetadataAminoMsg): OperationMetadata {
@@ -1628,7 +1628,7 @@ export const Rollout = {
   fromAmino(object: RolloutAmino): Rollout {
     return {
       rolloutId: object.rollout_id,
-      createTime: object?.create_time,
+      createTime: object?.create_time ? fromTimestamp(Timestamp.fromAmino(object.create_time)) : undefined,
       createdBy: object.created_by,
       status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : -1,
       trafficPercentStrategy: object?.traffic_percent_strategy ? Rollout_TrafficPercentStrategy.fromAmino(object.traffic_percent_strategy) : undefined,
@@ -1639,7 +1639,7 @@ export const Rollout = {
   toAmino(message: Rollout): RolloutAmino {
     const obj: any = {};
     obj.rollout_id = message.rolloutId;
-    obj.create_time = message.createTime;
+    obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
     obj.created_by = message.createdBy;
     obj.status = message.status;
     obj.traffic_percent_strategy = message.trafficPercentStrategy ? Rollout_TrafficPercentStrategy.toAmino(message.trafficPercentStrategy) : undefined;

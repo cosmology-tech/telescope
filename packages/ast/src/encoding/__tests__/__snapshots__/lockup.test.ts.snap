@@ -23,7 +23,7 @@ exports[`osmosis/lockup/tx duration 2`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgLockTokens {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgLockTokens {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLockTokens();
@@ -96,7 +96,7 @@ exports[`osmosis/lockup/tx duration 2`] = `
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgLockTokens, useInterfaces: boolean = true): MsgLockTokensAmino {
+  toAmino(message: MsgLockTokens, useInterfaces: boolean = false): MsgLockTokensAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
@@ -110,13 +110,13 @@ exports[`osmosis/lockup/tx duration 2`] = `
   fromAminoMsg(object: MsgLockTokensAminoMsg): MsgLockTokens {
     return MsgLockTokens.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgLockTokens, useInterfaces: boolean = true): MsgLockTokensAminoMsg {
+  toAminoMsg(message: MsgLockTokens, useInterfaces: boolean = false): MsgLockTokensAminoMsg {
     return {
       type: "osmosis/lockup/lock-tokens",
       value: MsgLockTokens.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgLockTokensProtoMsg, useInterfaces: boolean = true): MsgLockTokens {
+  fromProtoMsg(message: MsgLockTokensProtoMsg, useInterfaces: boolean = false): MsgLockTokens {
     return MsgLockTokens.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgLockTokens): Uint8Array {
@@ -210,7 +210,7 @@ exports[`osmosis/lockup/tx string 2`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgLockTokens {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgLockTokens {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLockTokens();
@@ -283,7 +283,7 @@ exports[`osmosis/lockup/tx string 2`] = `
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgLockTokens, useInterfaces: boolean = true): MsgLockTokensAmino {
+  toAmino(message: MsgLockTokens, useInterfaces: boolean = false): MsgLockTokensAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
@@ -297,13 +297,13 @@ exports[`osmosis/lockup/tx string 2`] = `
   fromAminoMsg(object: MsgLockTokensAminoMsg): MsgLockTokens {
     return MsgLockTokens.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgLockTokens, useInterfaces: boolean = true): MsgLockTokensAminoMsg {
+  toAminoMsg(message: MsgLockTokens, useInterfaces: boolean = false): MsgLockTokensAminoMsg {
     return {
       type: "osmosis/lockup/lock-tokens",
       value: MsgLockTokens.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgLockTokensProtoMsg, useInterfaces: boolean = true): MsgLockTokens {
+  fromProtoMsg(message: MsgLockTokensProtoMsg, useInterfaces: boolean = false): MsgLockTokens {
     return MsgLockTokens.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgLockTokens): Uint8Array {
