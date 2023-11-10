@@ -210,7 +210,7 @@ export const BaseVestingAccount = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): BaseVestingAccount {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BaseVestingAccount {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBaseVestingAccount();
@@ -218,16 +218,16 @@ export const BaseVestingAccount = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.baseAccount = BaseAccount.decode(reader, reader.uint32());
+          message.baseAccount = BaseAccount.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.originalVesting.push(Coin.decode(reader, reader.uint32()));
+          message.originalVesting.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.delegatedFree.push(Coin.decode(reader, reader.uint32()));
+          message.delegatedFree.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 4:
-          message.delegatedVesting.push(Coin.decode(reader, reader.uint32()));
+          message.delegatedVesting.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 5:
           message.endTime = reader.int64();
@@ -321,29 +321,29 @@ export const BaseVestingAccount = {
       endTime: BigInt(object.end_time)
     };
   },
-  toAmino(message: BaseVestingAccount): BaseVestingAccountAmino {
+  toAmino(message: BaseVestingAccount, useInterfaces: boolean = true): BaseVestingAccountAmino {
     const obj: any = {};
-    obj.base_account = message.baseAccount ? BaseAccount.toAmino(message.baseAccount) : undefined;
+    obj.base_account = message.baseAccount ? BaseAccount.toAmino(message.baseAccount, useInterfaces) : undefined;
     if (message.originalVesting) {
-      obj.original_vesting = message.originalVesting.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.original_vesting = message.originalVesting.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.original_vesting = [];
     }
     if (message.delegatedFree) {
-      obj.delegated_free = message.delegatedFree.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.delegated_free = message.delegatedFree.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.delegated_free = [];
     }
     if (message.delegatedVesting) {
-      obj.delegated_vesting = message.delegatedVesting.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.delegated_vesting = message.delegatedVesting.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.delegated_vesting = [];
     }
     obj.end_time = message.endTime ? message.endTime.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: BaseVestingAccountProtoMsg): BaseVestingAccount {
-    return BaseVestingAccount.decode(message.value);
+  fromProtoMsg(message: BaseVestingAccountProtoMsg, useInterfaces: boolean = true): BaseVestingAccount {
+    return BaseVestingAccount.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BaseVestingAccount): Uint8Array {
     return BaseVestingAccount.encode(message).finish();
@@ -373,7 +373,7 @@ export const ContinuousVestingAccount = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ContinuousVestingAccount {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ContinuousVestingAccount {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContinuousVestingAccount();
@@ -381,7 +381,7 @@ export const ContinuousVestingAccount = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.baseVestingAccount = BaseVestingAccount.decode(reader, reader.uint32());
+          message.baseVestingAccount = BaseVestingAccount.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.startTime = reader.int64();
@@ -433,14 +433,14 @@ export const ContinuousVestingAccount = {
       startTime: BigInt(object.start_time)
     };
   },
-  toAmino(message: ContinuousVestingAccount): ContinuousVestingAccountAmino {
+  toAmino(message: ContinuousVestingAccount, useInterfaces: boolean = true): ContinuousVestingAccountAmino {
     const obj: any = {};
-    obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount) : undefined;
+    obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount, useInterfaces) : undefined;
     obj.start_time = message.startTime ? message.startTime.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: ContinuousVestingAccountProtoMsg): ContinuousVestingAccount {
-    return ContinuousVestingAccount.decode(message.value);
+  fromProtoMsg(message: ContinuousVestingAccountProtoMsg, useInterfaces: boolean = true): ContinuousVestingAccount {
+    return ContinuousVestingAccount.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ContinuousVestingAccount): Uint8Array {
     return ContinuousVestingAccount.encode(message).finish();
@@ -466,7 +466,7 @@ export const DelayedVestingAccount = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DelayedVestingAccount {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DelayedVestingAccount {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelayedVestingAccount();
@@ -474,7 +474,7 @@ export const DelayedVestingAccount = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.baseVestingAccount = BaseVestingAccount.decode(reader, reader.uint32());
+          message.baseVestingAccount = BaseVestingAccount.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -515,13 +515,13 @@ export const DelayedVestingAccount = {
       baseVestingAccount: object?.base_vesting_account ? BaseVestingAccount.fromAmino(object.base_vesting_account) : undefined
     };
   },
-  toAmino(message: DelayedVestingAccount): DelayedVestingAccountAmino {
+  toAmino(message: DelayedVestingAccount, useInterfaces: boolean = true): DelayedVestingAccountAmino {
     const obj: any = {};
-    obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount) : undefined;
+    obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: DelayedVestingAccountProtoMsg): DelayedVestingAccount {
-    return DelayedVestingAccount.decode(message.value);
+  fromProtoMsg(message: DelayedVestingAccountProtoMsg, useInterfaces: boolean = true): DelayedVestingAccount {
+    return DelayedVestingAccount.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DelayedVestingAccount): Uint8Array {
     return DelayedVestingAccount.encode(message).finish();
@@ -551,7 +551,7 @@ export const Period = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Period {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Period {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeriod();
@@ -562,7 +562,7 @@ export const Period = {
           message.length = reader.int64();
           break;
         case 2:
-          message.amount.push(Coin.decode(reader, reader.uint32()));
+          message.amount.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -617,18 +617,18 @@ export const Period = {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: Period): PeriodAmino {
+  toAmino(message: Period, useInterfaces: boolean = true): PeriodAmino {
     const obj: any = {};
     obj.length = message.length ? message.length.toString() : undefined;
     if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.amount = message.amount.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.amount = [];
     }
     return obj;
   },
-  fromProtoMsg(message: PeriodProtoMsg): Period {
-    return Period.decode(message.value);
+  fromProtoMsg(message: PeriodProtoMsg, useInterfaces: boolean = true): Period {
+    return Period.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Period): Uint8Array {
     return Period.encode(message).finish();
@@ -662,7 +662,7 @@ export const PeriodicVestingAccount = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): PeriodicVestingAccount {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PeriodicVestingAccount {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeriodicVestingAccount();
@@ -670,13 +670,13 @@ export const PeriodicVestingAccount = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.baseVestingAccount = BaseVestingAccount.decode(reader, reader.uint32());
+          message.baseVestingAccount = BaseVestingAccount.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.startTime = reader.int64();
           break;
         case 3:
-          message.vestingPeriods.push(Period.decode(reader, reader.uint32()));
+          message.vestingPeriods.push(Period.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -739,19 +739,19 @@ export const PeriodicVestingAccount = {
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : []
     };
   },
-  toAmino(message: PeriodicVestingAccount): PeriodicVestingAccountAmino {
+  toAmino(message: PeriodicVestingAccount, useInterfaces: boolean = true): PeriodicVestingAccountAmino {
     const obj: any = {};
-    obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount) : undefined;
+    obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount, useInterfaces) : undefined;
     obj.start_time = message.startTime ? message.startTime.toString() : undefined;
     if (message.vestingPeriods) {
-      obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e) : undefined);
+      obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.vesting_periods = [];
     }
     return obj;
   },
-  fromProtoMsg(message: PeriodicVestingAccountProtoMsg): PeriodicVestingAccount {
-    return PeriodicVestingAccount.decode(message.value);
+  fromProtoMsg(message: PeriodicVestingAccountProtoMsg, useInterfaces: boolean = true): PeriodicVestingAccount {
+    return PeriodicVestingAccount.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PeriodicVestingAccount): Uint8Array {
     return PeriodicVestingAccount.encode(message).finish();
@@ -777,7 +777,7 @@ export const PermanentLockedAccount = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): PermanentLockedAccount {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PermanentLockedAccount {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePermanentLockedAccount();
@@ -785,7 +785,7 @@ export const PermanentLockedAccount = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.baseVestingAccount = BaseVestingAccount.decode(reader, reader.uint32());
+          message.baseVestingAccount = BaseVestingAccount.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -826,13 +826,13 @@ export const PermanentLockedAccount = {
       baseVestingAccount: object?.base_vesting_account ? BaseVestingAccount.fromAmino(object.base_vesting_account) : undefined
     };
   },
-  toAmino(message: PermanentLockedAccount): PermanentLockedAccountAmino {
+  toAmino(message: PermanentLockedAccount, useInterfaces: boolean = true): PermanentLockedAccountAmino {
     const obj: any = {};
-    obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount) : undefined;
+    obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: PermanentLockedAccountProtoMsg): PermanentLockedAccount {
-    return PermanentLockedAccount.decode(message.value);
+  fromProtoMsg(message: PermanentLockedAccountProtoMsg, useInterfaces: boolean = true): PermanentLockedAccount {
+    return PermanentLockedAccount.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PermanentLockedAccount): Uint8Array {
     return PermanentLockedAccount.encode(message).finish();

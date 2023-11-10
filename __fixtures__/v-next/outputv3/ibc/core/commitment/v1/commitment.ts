@@ -131,7 +131,7 @@ export const MerkleRoot = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MerkleRoot {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MerkleRoot {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMerkleRoot();
@@ -178,13 +178,13 @@ export const MerkleRoot = {
       hash: object.hash
     };
   },
-  toAmino(message: MerkleRoot): MerkleRootAmino {
+  toAmino(message: MerkleRoot, useInterfaces: boolean = true): MerkleRootAmino {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
   },
-  fromProtoMsg(message: MerkleRootProtoMsg): MerkleRoot {
-    return MerkleRoot.decode(message.value);
+  fromProtoMsg(message: MerkleRootProtoMsg, useInterfaces: boolean = true): MerkleRoot {
+    return MerkleRoot.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MerkleRoot): Uint8Array {
     return MerkleRoot.encode(message).finish();
@@ -210,7 +210,7 @@ export const MerklePrefix = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MerklePrefix {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MerklePrefix {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMerklePrefix();
@@ -257,13 +257,13 @@ export const MerklePrefix = {
       keyPrefix: object.key_prefix
     };
   },
-  toAmino(message: MerklePrefix): MerklePrefixAmino {
+  toAmino(message: MerklePrefix, useInterfaces: boolean = true): MerklePrefixAmino {
     const obj: any = {};
     obj.key_prefix = message.keyPrefix;
     return obj;
   },
-  fromProtoMsg(message: MerklePrefixProtoMsg): MerklePrefix {
-    return MerklePrefix.decode(message.value);
+  fromProtoMsg(message: MerklePrefixProtoMsg, useInterfaces: boolean = true): MerklePrefix {
+    return MerklePrefix.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MerklePrefix): Uint8Array {
     return MerklePrefix.encode(message).finish();
@@ -289,7 +289,7 @@ export const MerklePath = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MerklePath {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MerklePath {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMerklePath();
@@ -344,7 +344,7 @@ export const MerklePath = {
       keyPath: Array.isArray(object?.key_path) ? object.key_path.map((e: any) => e) : []
     };
   },
-  toAmino(message: MerklePath): MerklePathAmino {
+  toAmino(message: MerklePath, useInterfaces: boolean = true): MerklePathAmino {
     const obj: any = {};
     if (message.keyPath) {
       obj.key_path = message.keyPath.map(e => e);
@@ -353,8 +353,8 @@ export const MerklePath = {
     }
     return obj;
   },
-  fromProtoMsg(message: MerklePathProtoMsg): MerklePath {
-    return MerklePath.decode(message.value);
+  fromProtoMsg(message: MerklePathProtoMsg, useInterfaces: boolean = true): MerklePath {
+    return MerklePath.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MerklePath): Uint8Array {
     return MerklePath.encode(message).finish();
@@ -380,7 +380,7 @@ export const MerkleProof = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MerkleProof {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MerkleProof {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMerkleProof();
@@ -388,7 +388,7 @@ export const MerkleProof = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proofs.push(CommitmentProof.decode(reader, reader.uint32()));
+          message.proofs.push(CommitmentProof.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -435,17 +435,17 @@ export const MerkleProof = {
       proofs: Array.isArray(object?.proofs) ? object.proofs.map((e: any) => CommitmentProof.fromAmino(e)) : []
     };
   },
-  toAmino(message: MerkleProof): MerkleProofAmino {
+  toAmino(message: MerkleProof, useInterfaces: boolean = true): MerkleProofAmino {
     const obj: any = {};
     if (message.proofs) {
-      obj.proofs = message.proofs.map(e => e ? CommitmentProof.toAmino(e) : undefined);
+      obj.proofs = message.proofs.map(e => e ? CommitmentProof.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.proofs = [];
     }
     return obj;
   },
-  fromProtoMsg(message: MerkleProofProtoMsg): MerkleProof {
-    return MerkleProof.decode(message.value);
+  fromProtoMsg(message: MerkleProofProtoMsg, useInterfaces: boolean = true): MerkleProof {
+    return MerkleProof.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MerkleProof): Uint8Array {
     return MerkleProof.encode(message).finish();

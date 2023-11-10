@@ -129,7 +129,7 @@ export const MsgSoftwareUpgrade = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSoftwareUpgrade {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSoftwareUpgrade {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSoftwareUpgrade();
@@ -140,7 +140,7 @@ export const MsgSoftwareUpgrade = {
           message.authority = reader.string();
           break;
         case 2:
-          message.plan = Plan.decode(reader, reader.uint32());
+          message.plan = Plan.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -187,14 +187,14 @@ export const MsgSoftwareUpgrade = {
       plan: object?.plan ? Plan.fromAmino(object.plan) : undefined
     };
   },
-  toAmino(message: MsgSoftwareUpgrade): MsgSoftwareUpgradeAmino {
+  toAmino(message: MsgSoftwareUpgrade, useInterfaces: boolean = true): MsgSoftwareUpgradeAmino {
     const obj: any = {};
     obj.authority = message.authority;
-    obj.plan = message.plan ? Plan.toAmino(message.plan) : undefined;
+    obj.plan = message.plan ? Plan.toAmino(message.plan, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: MsgSoftwareUpgradeProtoMsg): MsgSoftwareUpgrade {
-    return MsgSoftwareUpgrade.decode(message.value);
+  fromProtoMsg(message: MsgSoftwareUpgradeProtoMsg, useInterfaces: boolean = true): MsgSoftwareUpgrade {
+    return MsgSoftwareUpgrade.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSoftwareUpgrade): Uint8Array {
     return MsgSoftwareUpgrade.encode(message).finish();
@@ -215,7 +215,7 @@ export const MsgSoftwareUpgradeResponse = {
   encode(_: MsgSoftwareUpgradeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSoftwareUpgradeResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSoftwareUpgradeResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSoftwareUpgradeResponse();
@@ -251,12 +251,12 @@ export const MsgSoftwareUpgradeResponse = {
   fromAmino(_: MsgSoftwareUpgradeResponseAmino): MsgSoftwareUpgradeResponse {
     return {};
   },
-  toAmino(_: MsgSoftwareUpgradeResponse): MsgSoftwareUpgradeResponseAmino {
+  toAmino(_: MsgSoftwareUpgradeResponse, useInterfaces: boolean = true): MsgSoftwareUpgradeResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgSoftwareUpgradeResponseProtoMsg): MsgSoftwareUpgradeResponse {
-    return MsgSoftwareUpgradeResponse.decode(message.value);
+  fromProtoMsg(message: MsgSoftwareUpgradeResponseProtoMsg, useInterfaces: boolean = true): MsgSoftwareUpgradeResponse {
+    return MsgSoftwareUpgradeResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSoftwareUpgradeResponse): Uint8Array {
     return MsgSoftwareUpgradeResponse.encode(message).finish();
@@ -282,7 +282,7 @@ export const MsgCancelUpgrade = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelUpgrade {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCancelUpgrade {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelUpgrade();
@@ -329,13 +329,13 @@ export const MsgCancelUpgrade = {
       authority: object.authority
     };
   },
-  toAmino(message: MsgCancelUpgrade): MsgCancelUpgradeAmino {
+  toAmino(message: MsgCancelUpgrade, useInterfaces: boolean = true): MsgCancelUpgradeAmino {
     const obj: any = {};
     obj.authority = message.authority;
     return obj;
   },
-  fromProtoMsg(message: MsgCancelUpgradeProtoMsg): MsgCancelUpgrade {
-    return MsgCancelUpgrade.decode(message.value);
+  fromProtoMsg(message: MsgCancelUpgradeProtoMsg, useInterfaces: boolean = true): MsgCancelUpgrade {
+    return MsgCancelUpgrade.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCancelUpgrade): Uint8Array {
     return MsgCancelUpgrade.encode(message).finish();
@@ -356,7 +356,7 @@ export const MsgCancelUpgradeResponse = {
   encode(_: MsgCancelUpgradeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelUpgradeResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCancelUpgradeResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelUpgradeResponse();
@@ -392,12 +392,12 @@ export const MsgCancelUpgradeResponse = {
   fromAmino(_: MsgCancelUpgradeResponseAmino): MsgCancelUpgradeResponse {
     return {};
   },
-  toAmino(_: MsgCancelUpgradeResponse): MsgCancelUpgradeResponseAmino {
+  toAmino(_: MsgCancelUpgradeResponse, useInterfaces: boolean = true): MsgCancelUpgradeResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgCancelUpgradeResponseProtoMsg): MsgCancelUpgradeResponse {
-    return MsgCancelUpgradeResponse.decode(message.value);
+  fromProtoMsg(message: MsgCancelUpgradeResponseProtoMsg, useInterfaces: boolean = true): MsgCancelUpgradeResponse {
+    return MsgCancelUpgradeResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCancelUpgradeResponse): Uint8Array {
     return MsgCancelUpgradeResponse.encode(message).finish();

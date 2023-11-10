@@ -78,7 +78,7 @@ export const QueryBalancesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryBalancesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryBalancesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBalancesRequest();
@@ -125,7 +125,7 @@ export const QueryBalancesRequest = {
       address: object.address
     };
   },
-  toAmino(message: QueryBalancesRequest): QueryBalancesRequestAmino {
+  toAmino(message: QueryBalancesRequest, useInterfaces: boolean = true): QueryBalancesRequestAmino {
     const obj: any = {};
     obj.address = message.address;
     return obj;
@@ -133,8 +133,8 @@ export const QueryBalancesRequest = {
   fromAminoMsg(object: QueryBalancesRequestAminoMsg): QueryBalancesRequest {
     return QueryBalancesRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryBalancesRequestProtoMsg): QueryBalancesRequest {
-    return QueryBalancesRequest.decode(message.value);
+  fromProtoMsg(message: QueryBalancesRequestProtoMsg, useInterfaces: boolean = true): QueryBalancesRequest {
+    return QueryBalancesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryBalancesRequest): Uint8Array {
     return QueryBalancesRequest.encode(message).finish();
@@ -167,7 +167,7 @@ export const QueryBalancesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryBalancesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryBalancesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBalancesResponse();
@@ -175,13 +175,13 @@ export const QueryBalancesResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.locked.push(Coin.decode(reader, reader.uint32()));
+          message.locked.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.unvested.push(Coin.decode(reader, reader.uint32()));
+          message.unvested.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.vested.push(Coin.decode(reader, reader.uint32()));
+          message.vested.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -256,20 +256,20 @@ export const QueryBalancesResponse = {
       vested: Array.isArray(object?.vested) ? object.vested.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryBalancesResponse): QueryBalancesResponseAmino {
+  toAmino(message: QueryBalancesResponse, useInterfaces: boolean = true): QueryBalancesResponseAmino {
     const obj: any = {};
     if (message.locked) {
-      obj.locked = message.locked.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.locked = message.locked.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.locked = [];
     }
     if (message.unvested) {
-      obj.unvested = message.unvested.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.unvested = message.unvested.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.unvested = [];
     }
     if (message.vested) {
-      obj.vested = message.vested.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.vested = message.vested.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.vested = [];
     }
@@ -278,8 +278,8 @@ export const QueryBalancesResponse = {
   fromAminoMsg(object: QueryBalancesResponseAminoMsg): QueryBalancesResponse {
     return QueryBalancesResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryBalancesResponseProtoMsg): QueryBalancesResponse {
-    return QueryBalancesResponse.decode(message.value);
+  fromProtoMsg(message: QueryBalancesResponseProtoMsg, useInterfaces: boolean = true): QueryBalancesResponse {
+    return QueryBalancesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryBalancesResponse): Uint8Array {
     return QueryBalancesResponse.encode(message).finish();

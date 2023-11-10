@@ -77,7 +77,7 @@ export const CertificateResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CertificateResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CertificateResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCertificateResponse();
@@ -85,7 +85,7 @@ export const CertificateResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.certificate = Certificate.decode(reader, reader.uint32());
+          message.certificate = Certificate.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.serial = reader.string();
@@ -135,14 +135,14 @@ export const CertificateResponse = {
       serial: object.serial
     };
   },
-  toAmino(message: CertificateResponse): CertificateResponseAmino {
+  toAmino(message: CertificateResponse, useInterfaces: boolean = true): CertificateResponseAmino {
     const obj: any = {};
-    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate) : undefined;
+    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate, useInterfaces) : undefined;
     obj.serial = message.serial;
     return obj;
   },
-  fromProtoMsg(message: CertificateResponseProtoMsg): CertificateResponse {
-    return CertificateResponse.decode(message.value);
+  fromProtoMsg(message: CertificateResponseProtoMsg, useInterfaces: boolean = true): CertificateResponse {
+    return CertificateResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CertificateResponse): Uint8Array {
     return CertificateResponse.encode(message).finish();
@@ -171,7 +171,7 @@ export const QueryCertificatesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryCertificatesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryCertificatesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCertificatesRequest();
@@ -179,10 +179,10 @@ export const QueryCertificatesRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.filter = CertificateFilter.decode(reader, reader.uint32());
+          message.filter = CertificateFilter.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -231,14 +231,14 @@ export const QueryCertificatesRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryCertificatesRequest): QueryCertificatesRequestAmino {
+  toAmino(message: QueryCertificatesRequest, useInterfaces: boolean = true): QueryCertificatesRequestAmino {
     const obj: any = {};
-    obj.filter = message.filter ? CertificateFilter.toAmino(message.filter) : undefined;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.filter = message.filter ? CertificateFilter.toAmino(message.filter, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryCertificatesRequestProtoMsg): QueryCertificatesRequest {
-    return QueryCertificatesRequest.decode(message.value);
+  fromProtoMsg(message: QueryCertificatesRequestProtoMsg, useInterfaces: boolean = true): QueryCertificatesRequest {
+    return QueryCertificatesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryCertificatesRequest): Uint8Array {
     return QueryCertificatesRequest.encode(message).finish();
@@ -267,7 +267,7 @@ export const QueryCertificatesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryCertificatesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryCertificatesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCertificatesResponse();
@@ -275,10 +275,10 @@ export const QueryCertificatesResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.certificates.push(CertificateResponse.decode(reader, reader.uint32()));
+          message.certificates.push(CertificateResponse.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -333,18 +333,18 @@ export const QueryCertificatesResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryCertificatesResponse): QueryCertificatesResponseAmino {
+  toAmino(message: QueryCertificatesResponse, useInterfaces: boolean = true): QueryCertificatesResponseAmino {
     const obj: any = {};
     if (message.certificates) {
-      obj.certificates = message.certificates.map(e => e ? CertificateResponse.toAmino(e) : undefined);
+      obj.certificates = message.certificates.map(e => e ? CertificateResponse.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.certificates = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: QueryCertificatesResponseProtoMsg): QueryCertificatesResponse {
-    return QueryCertificatesResponse.decode(message.value);
+  fromProtoMsg(message: QueryCertificatesResponseProtoMsg, useInterfaces: boolean = true): QueryCertificatesResponse {
+    return QueryCertificatesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryCertificatesResponse): Uint8Array {
     return QueryCertificatesResponse.encode(message).finish();

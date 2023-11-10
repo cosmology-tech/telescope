@@ -231,7 +231,7 @@ export const SystemParameters = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SystemParameters {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SystemParameters {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSystemParameters();
@@ -239,7 +239,7 @@ export const SystemParameters = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.rules.push(SystemParameterRule.decode(reader, reader.uint32()));
+          message.rules.push(SystemParameterRule.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -286,10 +286,10 @@ export const SystemParameters = {
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => SystemParameterRule.fromAmino(e)) : []
     };
   },
-  toAmino(message: SystemParameters): SystemParametersAmino {
+  toAmino(message: SystemParameters, useInterfaces: boolean = true): SystemParametersAmino {
     const obj: any = {};
     if (message.rules) {
-      obj.rules = message.rules.map(e => e ? SystemParameterRule.toAmino(e) : undefined);
+      obj.rules = message.rules.map(e => e ? SystemParameterRule.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.rules = [];
     }
@@ -298,8 +298,8 @@ export const SystemParameters = {
   fromAminoMsg(object: SystemParametersAminoMsg): SystemParameters {
     return SystemParameters.fromAmino(object.value);
   },
-  fromProtoMsg(message: SystemParametersProtoMsg): SystemParameters {
-    return SystemParameters.decode(message.value);
+  fromProtoMsg(message: SystemParametersProtoMsg, useInterfaces: boolean = true): SystemParameters {
+    return SystemParameters.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SystemParameters): Uint8Array {
     return SystemParameters.encode(message).finish();
@@ -328,7 +328,7 @@ export const SystemParameterRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SystemParameterRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SystemParameterRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSystemParameterRule();
@@ -339,7 +339,7 @@ export const SystemParameterRule = {
           message.selector = reader.string();
           break;
         case 2:
-          message.parameters.push(SystemParameter.decode(reader, reader.uint32()));
+          message.parameters.push(SystemParameter.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -392,11 +392,11 @@ export const SystemParameterRule = {
       parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromAmino(e)) : []
     };
   },
-  toAmino(message: SystemParameterRule): SystemParameterRuleAmino {
+  toAmino(message: SystemParameterRule, useInterfaces: boolean = true): SystemParameterRuleAmino {
     const obj: any = {};
     obj.selector = message.selector;
     if (message.parameters) {
-      obj.parameters = message.parameters.map(e => e ? SystemParameter.toAmino(e) : undefined);
+      obj.parameters = message.parameters.map(e => e ? SystemParameter.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.parameters = [];
     }
@@ -405,8 +405,8 @@ export const SystemParameterRule = {
   fromAminoMsg(object: SystemParameterRuleAminoMsg): SystemParameterRule {
     return SystemParameterRule.fromAmino(object.value);
   },
-  fromProtoMsg(message: SystemParameterRuleProtoMsg): SystemParameterRule {
-    return SystemParameterRule.decode(message.value);
+  fromProtoMsg(message: SystemParameterRuleProtoMsg, useInterfaces: boolean = true): SystemParameterRule {
+    return SystemParameterRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SystemParameterRule): Uint8Array {
     return SystemParameterRule.encode(message).finish();
@@ -439,7 +439,7 @@ export const SystemParameter = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SystemParameter {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SystemParameter {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSystemParameter();
@@ -504,7 +504,7 @@ export const SystemParameter = {
       urlQueryParameter: object.url_query_parameter
     };
   },
-  toAmino(message: SystemParameter): SystemParameterAmino {
+  toAmino(message: SystemParameter, useInterfaces: boolean = true): SystemParameterAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.http_header = message.httpHeader;
@@ -514,8 +514,8 @@ export const SystemParameter = {
   fromAminoMsg(object: SystemParameterAminoMsg): SystemParameter {
     return SystemParameter.fromAmino(object.value);
   },
-  fromProtoMsg(message: SystemParameterProtoMsg): SystemParameter {
-    return SystemParameter.decode(message.value);
+  fromProtoMsg(message: SystemParameterProtoMsg, useInterfaces: boolean = true): SystemParameter {
+    return SystemParameter.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SystemParameter): Uint8Array {
     return SystemParameter.encode(message).finish();

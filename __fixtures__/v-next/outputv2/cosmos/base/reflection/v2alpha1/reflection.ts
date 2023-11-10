@@ -735,7 +735,7 @@ export const AppDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AppDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AppDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAppDescriptor();
@@ -743,22 +743,22 @@ export const AppDescriptor = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.authn = AuthnDescriptor.decode(reader, reader.uint32());
+          message.authn = AuthnDescriptor.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.chain = ChainDescriptor.decode(reader, reader.uint32());
+          message.chain = ChainDescriptor.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.codec = CodecDescriptor.decode(reader, reader.uint32());
+          message.codec = CodecDescriptor.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
-          message.configuration = ConfigurationDescriptor.decode(reader, reader.uint32());
+          message.configuration = ConfigurationDescriptor.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
-          message.queryServices = QueryServicesDescriptor.decode(reader, reader.uint32());
+          message.queryServices = QueryServicesDescriptor.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 6:
-          message.tx = TxDescriptor.decode(reader, reader.uint32());
+          message.tx = TxDescriptor.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -839,27 +839,27 @@ export const AppDescriptor = {
       tx: object?.tx ? TxDescriptor.fromAmino(object.tx) : undefined
     };
   },
-  toAmino(message: AppDescriptor): AppDescriptorAmino {
+  toAmino(message: AppDescriptor, useInterfaces: boolean = true): AppDescriptorAmino {
     const obj: any = {};
-    obj.authn = message.authn ? AuthnDescriptor.toAmino(message.authn) : undefined;
-    obj.chain = message.chain ? ChainDescriptor.toAmino(message.chain) : undefined;
-    obj.codec = message.codec ? CodecDescriptor.toAmino(message.codec) : undefined;
-    obj.configuration = message.configuration ? ConfigurationDescriptor.toAmino(message.configuration) : undefined;
-    obj.query_services = message.queryServices ? QueryServicesDescriptor.toAmino(message.queryServices) : undefined;
-    obj.tx = message.tx ? TxDescriptor.toAmino(message.tx) : undefined;
+    obj.authn = message.authn ? AuthnDescriptor.toAmino(message.authn, useInterfaces) : undefined;
+    obj.chain = message.chain ? ChainDescriptor.toAmino(message.chain, useInterfaces) : undefined;
+    obj.codec = message.codec ? CodecDescriptor.toAmino(message.codec, useInterfaces) : undefined;
+    obj.configuration = message.configuration ? ConfigurationDescriptor.toAmino(message.configuration, useInterfaces) : undefined;
+    obj.query_services = message.queryServices ? QueryServicesDescriptor.toAmino(message.queryServices, useInterfaces) : undefined;
+    obj.tx = message.tx ? TxDescriptor.toAmino(message.tx, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: AppDescriptorAminoMsg): AppDescriptor {
     return AppDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: AppDescriptor): AppDescriptorAminoMsg {
+  toAminoMsg(message: AppDescriptor, useInterfaces: boolean = true): AppDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/AppDescriptor",
-      value: AppDescriptor.toAmino(message)
+      value: AppDescriptor.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: AppDescriptorProtoMsg): AppDescriptor {
-    return AppDescriptor.decode(message.value);
+  fromProtoMsg(message: AppDescriptorProtoMsg, useInterfaces: boolean = true): AppDescriptor {
+    return AppDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AppDescriptor): Uint8Array {
     return AppDescriptor.encode(message).finish();
@@ -889,7 +889,7 @@ export const TxDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): TxDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): TxDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTxDescriptor();
@@ -900,7 +900,7 @@ export const TxDescriptor = {
           message.fullname = reader.string();
           break;
         case 2:
-          message.msgs.push(MsgDescriptor.decode(reader, reader.uint32()));
+          message.msgs.push(MsgDescriptor.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -953,11 +953,11 @@ export const TxDescriptor = {
       msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => MsgDescriptor.fromAmino(e)) : []
     };
   },
-  toAmino(message: TxDescriptor): TxDescriptorAmino {
+  toAmino(message: TxDescriptor, useInterfaces: boolean = true): TxDescriptorAmino {
     const obj: any = {};
     obj.fullname = message.fullname;
     if (message.msgs) {
-      obj.msgs = message.msgs.map(e => e ? MsgDescriptor.toAmino(e) : undefined);
+      obj.msgs = message.msgs.map(e => e ? MsgDescriptor.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.msgs = [];
     }
@@ -966,14 +966,14 @@ export const TxDescriptor = {
   fromAminoMsg(object: TxDescriptorAminoMsg): TxDescriptor {
     return TxDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: TxDescriptor): TxDescriptorAminoMsg {
+  toAminoMsg(message: TxDescriptor, useInterfaces: boolean = true): TxDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/TxDescriptor",
-      value: TxDescriptor.toAmino(message)
+      value: TxDescriptor.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: TxDescriptorProtoMsg): TxDescriptor {
-    return TxDescriptor.decode(message.value);
+  fromProtoMsg(message: TxDescriptorProtoMsg, useInterfaces: boolean = true): TxDescriptor {
+    return TxDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: TxDescriptor): Uint8Array {
     return TxDescriptor.encode(message).finish();
@@ -999,7 +999,7 @@ export const AuthnDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AuthnDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AuthnDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthnDescriptor();
@@ -1007,7 +1007,7 @@ export const AuthnDescriptor = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.signModes.push(SigningModeDescriptor.decode(reader, reader.uint32()));
+          message.signModes.push(SigningModeDescriptor.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1054,10 +1054,10 @@ export const AuthnDescriptor = {
       signModes: Array.isArray(object?.sign_modes) ? object.sign_modes.map((e: any) => SigningModeDescriptor.fromAmino(e)) : []
     };
   },
-  toAmino(message: AuthnDescriptor): AuthnDescriptorAmino {
+  toAmino(message: AuthnDescriptor, useInterfaces: boolean = true): AuthnDescriptorAmino {
     const obj: any = {};
     if (message.signModes) {
-      obj.sign_modes = message.signModes.map(e => e ? SigningModeDescriptor.toAmino(e) : undefined);
+      obj.sign_modes = message.signModes.map(e => e ? SigningModeDescriptor.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.sign_modes = [];
     }
@@ -1066,14 +1066,14 @@ export const AuthnDescriptor = {
   fromAminoMsg(object: AuthnDescriptorAminoMsg): AuthnDescriptor {
     return AuthnDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: AuthnDescriptor): AuthnDescriptorAminoMsg {
+  toAminoMsg(message: AuthnDescriptor, useInterfaces: boolean = true): AuthnDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/AuthnDescriptor",
-      value: AuthnDescriptor.toAmino(message)
+      value: AuthnDescriptor.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: AuthnDescriptorProtoMsg): AuthnDescriptor {
-    return AuthnDescriptor.decode(message.value);
+  fromProtoMsg(message: AuthnDescriptorProtoMsg, useInterfaces: boolean = true): AuthnDescriptor {
+    return AuthnDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AuthnDescriptor): Uint8Array {
     return AuthnDescriptor.encode(message).finish();
@@ -1107,7 +1107,7 @@ export const SigningModeDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SigningModeDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SigningModeDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSigningModeDescriptor();
@@ -1172,7 +1172,7 @@ export const SigningModeDescriptor = {
       authnInfoProviderMethodFullname: object.authn_info_provider_method_fullname
     };
   },
-  toAmino(message: SigningModeDescriptor): SigningModeDescriptorAmino {
+  toAmino(message: SigningModeDescriptor, useInterfaces: boolean = true): SigningModeDescriptorAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.number = message.number;
@@ -1182,14 +1182,14 @@ export const SigningModeDescriptor = {
   fromAminoMsg(object: SigningModeDescriptorAminoMsg): SigningModeDescriptor {
     return SigningModeDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: SigningModeDescriptor): SigningModeDescriptorAminoMsg {
+  toAminoMsg(message: SigningModeDescriptor, useInterfaces: boolean = true): SigningModeDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/SigningModeDescriptor",
-      value: SigningModeDescriptor.toAmino(message)
+      value: SigningModeDescriptor.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: SigningModeDescriptorProtoMsg): SigningModeDescriptor {
-    return SigningModeDescriptor.decode(message.value);
+  fromProtoMsg(message: SigningModeDescriptorProtoMsg, useInterfaces: boolean = true): SigningModeDescriptor {
+    return SigningModeDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SigningModeDescriptor): Uint8Array {
     return SigningModeDescriptor.encode(message).finish();
@@ -1215,7 +1215,7 @@ export const ChainDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ChainDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ChainDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChainDescriptor();
@@ -1262,7 +1262,7 @@ export const ChainDescriptor = {
       id: object.id
     };
   },
-  toAmino(message: ChainDescriptor): ChainDescriptorAmino {
+  toAmino(message: ChainDescriptor, useInterfaces: boolean = true): ChainDescriptorAmino {
     const obj: any = {};
     obj.id = message.id;
     return obj;
@@ -1270,14 +1270,14 @@ export const ChainDescriptor = {
   fromAminoMsg(object: ChainDescriptorAminoMsg): ChainDescriptor {
     return ChainDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: ChainDescriptor): ChainDescriptorAminoMsg {
+  toAminoMsg(message: ChainDescriptor, useInterfaces: boolean = true): ChainDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/ChainDescriptor",
-      value: ChainDescriptor.toAmino(message)
+      value: ChainDescriptor.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ChainDescriptorProtoMsg): ChainDescriptor {
-    return ChainDescriptor.decode(message.value);
+  fromProtoMsg(message: ChainDescriptorProtoMsg, useInterfaces: boolean = true): ChainDescriptor {
+    return ChainDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ChainDescriptor): Uint8Array {
     return ChainDescriptor.encode(message).finish();
@@ -1303,7 +1303,7 @@ export const CodecDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CodecDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CodecDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCodecDescriptor();
@@ -1311,7 +1311,7 @@ export const CodecDescriptor = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.interfaces.push(InterfaceDescriptor.decode(reader, reader.uint32()));
+          message.interfaces.push(InterfaceDescriptor.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1358,10 +1358,10 @@ export const CodecDescriptor = {
       interfaces: Array.isArray(object?.interfaces) ? object.interfaces.map((e: any) => InterfaceDescriptor.fromAmino(e)) : []
     };
   },
-  toAmino(message: CodecDescriptor): CodecDescriptorAmino {
+  toAmino(message: CodecDescriptor, useInterfaces: boolean = true): CodecDescriptorAmino {
     const obj: any = {};
     if (message.interfaces) {
-      obj.interfaces = message.interfaces.map(e => e ? InterfaceDescriptor.toAmino(e) : undefined);
+      obj.interfaces = message.interfaces.map(e => e ? InterfaceDescriptor.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.interfaces = [];
     }
@@ -1370,14 +1370,14 @@ export const CodecDescriptor = {
   fromAminoMsg(object: CodecDescriptorAminoMsg): CodecDescriptor {
     return CodecDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: CodecDescriptor): CodecDescriptorAminoMsg {
+  toAminoMsg(message: CodecDescriptor, useInterfaces: boolean = true): CodecDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/CodecDescriptor",
-      value: CodecDescriptor.toAmino(message)
+      value: CodecDescriptor.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: CodecDescriptorProtoMsg): CodecDescriptor {
-    return CodecDescriptor.decode(message.value);
+  fromProtoMsg(message: CodecDescriptorProtoMsg, useInterfaces: boolean = true): CodecDescriptor {
+    return CodecDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CodecDescriptor): Uint8Array {
     return CodecDescriptor.encode(message).finish();
@@ -1411,7 +1411,7 @@ export const InterfaceDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): InterfaceDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): InterfaceDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInterfaceDescriptor();
@@ -1422,10 +1422,10 @@ export const InterfaceDescriptor = {
           message.fullname = reader.string();
           break;
         case 2:
-          message.interfaceAcceptingMessages.push(InterfaceAcceptingMessageDescriptor.decode(reader, reader.uint32()));
+          message.interfaceAcceptingMessages.push(InterfaceAcceptingMessageDescriptor.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.interfaceImplementers.push(InterfaceImplementerDescriptor.decode(reader, reader.uint32()));
+          message.interfaceImplementers.push(InterfaceImplementerDescriptor.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1492,16 +1492,16 @@ export const InterfaceDescriptor = {
       interfaceImplementers: Array.isArray(object?.interface_implementers) ? object.interface_implementers.map((e: any) => InterfaceImplementerDescriptor.fromAmino(e)) : []
     };
   },
-  toAmino(message: InterfaceDescriptor): InterfaceDescriptorAmino {
+  toAmino(message: InterfaceDescriptor, useInterfaces: boolean = true): InterfaceDescriptorAmino {
     const obj: any = {};
     obj.fullname = message.fullname;
     if (message.interfaceAcceptingMessages) {
-      obj.interface_accepting_messages = message.interfaceAcceptingMessages.map(e => e ? InterfaceAcceptingMessageDescriptor.toAmino(e) : undefined);
+      obj.interface_accepting_messages = message.interfaceAcceptingMessages.map(e => e ? InterfaceAcceptingMessageDescriptor.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.interface_accepting_messages = [];
     }
     if (message.interfaceImplementers) {
-      obj.interface_implementers = message.interfaceImplementers.map(e => e ? InterfaceImplementerDescriptor.toAmino(e) : undefined);
+      obj.interface_implementers = message.interfaceImplementers.map(e => e ? InterfaceImplementerDescriptor.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.interface_implementers = [];
     }
@@ -1510,14 +1510,14 @@ export const InterfaceDescriptor = {
   fromAminoMsg(object: InterfaceDescriptorAminoMsg): InterfaceDescriptor {
     return InterfaceDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: InterfaceDescriptor): InterfaceDescriptorAminoMsg {
+  toAminoMsg(message: InterfaceDescriptor, useInterfaces: boolean = true): InterfaceDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/InterfaceDescriptor",
-      value: InterfaceDescriptor.toAmino(message)
+      value: InterfaceDescriptor.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: InterfaceDescriptorProtoMsg): InterfaceDescriptor {
-    return InterfaceDescriptor.decode(message.value);
+  fromProtoMsg(message: InterfaceDescriptorProtoMsg, useInterfaces: boolean = true): InterfaceDescriptor {
+    return InterfaceDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: InterfaceDescriptor): Uint8Array {
     return InterfaceDescriptor.encode(message).finish();
@@ -1547,7 +1547,7 @@ export const InterfaceImplementerDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): InterfaceImplementerDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): InterfaceImplementerDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInterfaceImplementerDescriptor();
@@ -1603,7 +1603,7 @@ export const InterfaceImplementerDescriptor = {
       typeUrl: object.type_url
     };
   },
-  toAmino(message: InterfaceImplementerDescriptor): InterfaceImplementerDescriptorAmino {
+  toAmino(message: InterfaceImplementerDescriptor, useInterfaces: boolean = true): InterfaceImplementerDescriptorAmino {
     const obj: any = {};
     obj.fullname = message.fullname;
     obj.type_url = message.typeUrl;
@@ -1612,14 +1612,14 @@ export const InterfaceImplementerDescriptor = {
   fromAminoMsg(object: InterfaceImplementerDescriptorAminoMsg): InterfaceImplementerDescriptor {
     return InterfaceImplementerDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: InterfaceImplementerDescriptor): InterfaceImplementerDescriptorAminoMsg {
+  toAminoMsg(message: InterfaceImplementerDescriptor, useInterfaces: boolean = true): InterfaceImplementerDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/InterfaceImplementerDescriptor",
-      value: InterfaceImplementerDescriptor.toAmino(message)
+      value: InterfaceImplementerDescriptor.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: InterfaceImplementerDescriptorProtoMsg): InterfaceImplementerDescriptor {
-    return InterfaceImplementerDescriptor.decode(message.value);
+  fromProtoMsg(message: InterfaceImplementerDescriptorProtoMsg, useInterfaces: boolean = true): InterfaceImplementerDescriptor {
+    return InterfaceImplementerDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: InterfaceImplementerDescriptor): Uint8Array {
     return InterfaceImplementerDescriptor.encode(message).finish();
@@ -1649,7 +1649,7 @@ export const InterfaceAcceptingMessageDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): InterfaceAcceptingMessageDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): InterfaceAcceptingMessageDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInterfaceAcceptingMessageDescriptor();
@@ -1713,7 +1713,7 @@ export const InterfaceAcceptingMessageDescriptor = {
       fieldDescriptorNames: Array.isArray(object?.field_descriptor_names) ? object.field_descriptor_names.map((e: any) => e) : []
     };
   },
-  toAmino(message: InterfaceAcceptingMessageDescriptor): InterfaceAcceptingMessageDescriptorAmino {
+  toAmino(message: InterfaceAcceptingMessageDescriptor, useInterfaces: boolean = true): InterfaceAcceptingMessageDescriptorAmino {
     const obj: any = {};
     obj.fullname = message.fullname;
     if (message.fieldDescriptorNames) {
@@ -1726,14 +1726,14 @@ export const InterfaceAcceptingMessageDescriptor = {
   fromAminoMsg(object: InterfaceAcceptingMessageDescriptorAminoMsg): InterfaceAcceptingMessageDescriptor {
     return InterfaceAcceptingMessageDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: InterfaceAcceptingMessageDescriptor): InterfaceAcceptingMessageDescriptorAminoMsg {
+  toAminoMsg(message: InterfaceAcceptingMessageDescriptor, useInterfaces: boolean = true): InterfaceAcceptingMessageDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/InterfaceAcceptingMessageDescriptor",
-      value: InterfaceAcceptingMessageDescriptor.toAmino(message)
+      value: InterfaceAcceptingMessageDescriptor.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: InterfaceAcceptingMessageDescriptorProtoMsg): InterfaceAcceptingMessageDescriptor {
-    return InterfaceAcceptingMessageDescriptor.decode(message.value);
+  fromProtoMsg(message: InterfaceAcceptingMessageDescriptorProtoMsg, useInterfaces: boolean = true): InterfaceAcceptingMessageDescriptor {
+    return InterfaceAcceptingMessageDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: InterfaceAcceptingMessageDescriptor): Uint8Array {
     return InterfaceAcceptingMessageDescriptor.encode(message).finish();
@@ -1759,7 +1759,7 @@ export const ConfigurationDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ConfigurationDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ConfigurationDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfigurationDescriptor();
@@ -1806,7 +1806,7 @@ export const ConfigurationDescriptor = {
       bech32AccountAddressPrefix: object.bech32_account_address_prefix
     };
   },
-  toAmino(message: ConfigurationDescriptor): ConfigurationDescriptorAmino {
+  toAmino(message: ConfigurationDescriptor, useInterfaces: boolean = true): ConfigurationDescriptorAmino {
     const obj: any = {};
     obj.bech32_account_address_prefix = message.bech32AccountAddressPrefix;
     return obj;
@@ -1814,14 +1814,14 @@ export const ConfigurationDescriptor = {
   fromAminoMsg(object: ConfigurationDescriptorAminoMsg): ConfigurationDescriptor {
     return ConfigurationDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: ConfigurationDescriptor): ConfigurationDescriptorAminoMsg {
+  toAminoMsg(message: ConfigurationDescriptor, useInterfaces: boolean = true): ConfigurationDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/ConfigurationDescriptor",
-      value: ConfigurationDescriptor.toAmino(message)
+      value: ConfigurationDescriptor.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ConfigurationDescriptorProtoMsg): ConfigurationDescriptor {
-    return ConfigurationDescriptor.decode(message.value);
+  fromProtoMsg(message: ConfigurationDescriptorProtoMsg, useInterfaces: boolean = true): ConfigurationDescriptor {
+    return ConfigurationDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ConfigurationDescriptor): Uint8Array {
     return ConfigurationDescriptor.encode(message).finish();
@@ -1847,7 +1847,7 @@ export const MsgDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDescriptor();
@@ -1894,7 +1894,7 @@ export const MsgDescriptor = {
       msgTypeUrl: object.msg_type_url
     };
   },
-  toAmino(message: MsgDescriptor): MsgDescriptorAmino {
+  toAmino(message: MsgDescriptor, useInterfaces: boolean = true): MsgDescriptorAmino {
     const obj: any = {};
     obj.msg_type_url = message.msgTypeUrl;
     return obj;
@@ -1902,14 +1902,14 @@ export const MsgDescriptor = {
   fromAminoMsg(object: MsgDescriptorAminoMsg): MsgDescriptor {
     return MsgDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgDescriptor): MsgDescriptorAminoMsg {
+  toAminoMsg(message: MsgDescriptor, useInterfaces: boolean = true): MsgDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/MsgDescriptor",
-      value: MsgDescriptor.toAmino(message)
+      value: MsgDescriptor.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgDescriptorProtoMsg): MsgDescriptor {
-    return MsgDescriptor.decode(message.value);
+  fromProtoMsg(message: MsgDescriptorProtoMsg, useInterfaces: boolean = true): MsgDescriptor {
+    return MsgDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgDescriptor): Uint8Array {
     return MsgDescriptor.encode(message).finish();
@@ -1930,7 +1930,7 @@ export const GetAuthnDescriptorRequest = {
   encode(_: GetAuthnDescriptorRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetAuthnDescriptorRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetAuthnDescriptorRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetAuthnDescriptorRequest();
@@ -1966,21 +1966,21 @@ export const GetAuthnDescriptorRequest = {
   fromAmino(_: GetAuthnDescriptorRequestAmino): GetAuthnDescriptorRequest {
     return {};
   },
-  toAmino(_: GetAuthnDescriptorRequest): GetAuthnDescriptorRequestAmino {
+  toAmino(_: GetAuthnDescriptorRequest, useInterfaces: boolean = true): GetAuthnDescriptorRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: GetAuthnDescriptorRequestAminoMsg): GetAuthnDescriptorRequest {
     return GetAuthnDescriptorRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: GetAuthnDescriptorRequest): GetAuthnDescriptorRequestAminoMsg {
+  toAminoMsg(message: GetAuthnDescriptorRequest, useInterfaces: boolean = true): GetAuthnDescriptorRequestAminoMsg {
     return {
       type: "cosmos-sdk/GetAuthnDescriptorRequest",
-      value: GetAuthnDescriptorRequest.toAmino(message)
+      value: GetAuthnDescriptorRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GetAuthnDescriptorRequestProtoMsg): GetAuthnDescriptorRequest {
-    return GetAuthnDescriptorRequest.decode(message.value);
+  fromProtoMsg(message: GetAuthnDescriptorRequestProtoMsg, useInterfaces: boolean = true): GetAuthnDescriptorRequest {
+    return GetAuthnDescriptorRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetAuthnDescriptorRequest): Uint8Array {
     return GetAuthnDescriptorRequest.encode(message).finish();
@@ -2006,7 +2006,7 @@ export const GetAuthnDescriptorResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetAuthnDescriptorResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetAuthnDescriptorResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetAuthnDescriptorResponse();
@@ -2014,7 +2014,7 @@ export const GetAuthnDescriptorResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.authn = AuthnDescriptor.decode(reader, reader.uint32());
+          message.authn = AuthnDescriptor.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2055,22 +2055,22 @@ export const GetAuthnDescriptorResponse = {
       authn: object?.authn ? AuthnDescriptor.fromAmino(object.authn) : undefined
     };
   },
-  toAmino(message: GetAuthnDescriptorResponse): GetAuthnDescriptorResponseAmino {
+  toAmino(message: GetAuthnDescriptorResponse, useInterfaces: boolean = true): GetAuthnDescriptorResponseAmino {
     const obj: any = {};
-    obj.authn = message.authn ? AuthnDescriptor.toAmino(message.authn) : undefined;
+    obj.authn = message.authn ? AuthnDescriptor.toAmino(message.authn, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: GetAuthnDescriptorResponseAminoMsg): GetAuthnDescriptorResponse {
     return GetAuthnDescriptorResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: GetAuthnDescriptorResponse): GetAuthnDescriptorResponseAminoMsg {
+  toAminoMsg(message: GetAuthnDescriptorResponse, useInterfaces: boolean = true): GetAuthnDescriptorResponseAminoMsg {
     return {
       type: "cosmos-sdk/GetAuthnDescriptorResponse",
-      value: GetAuthnDescriptorResponse.toAmino(message)
+      value: GetAuthnDescriptorResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GetAuthnDescriptorResponseProtoMsg): GetAuthnDescriptorResponse {
-    return GetAuthnDescriptorResponse.decode(message.value);
+  fromProtoMsg(message: GetAuthnDescriptorResponseProtoMsg, useInterfaces: boolean = true): GetAuthnDescriptorResponse {
+    return GetAuthnDescriptorResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetAuthnDescriptorResponse): Uint8Array {
     return GetAuthnDescriptorResponse.encode(message).finish();
@@ -2091,7 +2091,7 @@ export const GetChainDescriptorRequest = {
   encode(_: GetChainDescriptorRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetChainDescriptorRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetChainDescriptorRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetChainDescriptorRequest();
@@ -2127,21 +2127,21 @@ export const GetChainDescriptorRequest = {
   fromAmino(_: GetChainDescriptorRequestAmino): GetChainDescriptorRequest {
     return {};
   },
-  toAmino(_: GetChainDescriptorRequest): GetChainDescriptorRequestAmino {
+  toAmino(_: GetChainDescriptorRequest, useInterfaces: boolean = true): GetChainDescriptorRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: GetChainDescriptorRequestAminoMsg): GetChainDescriptorRequest {
     return GetChainDescriptorRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: GetChainDescriptorRequest): GetChainDescriptorRequestAminoMsg {
+  toAminoMsg(message: GetChainDescriptorRequest, useInterfaces: boolean = true): GetChainDescriptorRequestAminoMsg {
     return {
       type: "cosmos-sdk/GetChainDescriptorRequest",
-      value: GetChainDescriptorRequest.toAmino(message)
+      value: GetChainDescriptorRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GetChainDescriptorRequestProtoMsg): GetChainDescriptorRequest {
-    return GetChainDescriptorRequest.decode(message.value);
+  fromProtoMsg(message: GetChainDescriptorRequestProtoMsg, useInterfaces: boolean = true): GetChainDescriptorRequest {
+    return GetChainDescriptorRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetChainDescriptorRequest): Uint8Array {
     return GetChainDescriptorRequest.encode(message).finish();
@@ -2167,7 +2167,7 @@ export const GetChainDescriptorResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetChainDescriptorResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetChainDescriptorResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetChainDescriptorResponse();
@@ -2175,7 +2175,7 @@ export const GetChainDescriptorResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.chain = ChainDescriptor.decode(reader, reader.uint32());
+          message.chain = ChainDescriptor.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2216,22 +2216,22 @@ export const GetChainDescriptorResponse = {
       chain: object?.chain ? ChainDescriptor.fromAmino(object.chain) : undefined
     };
   },
-  toAmino(message: GetChainDescriptorResponse): GetChainDescriptorResponseAmino {
+  toAmino(message: GetChainDescriptorResponse, useInterfaces: boolean = true): GetChainDescriptorResponseAmino {
     const obj: any = {};
-    obj.chain = message.chain ? ChainDescriptor.toAmino(message.chain) : undefined;
+    obj.chain = message.chain ? ChainDescriptor.toAmino(message.chain, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: GetChainDescriptorResponseAminoMsg): GetChainDescriptorResponse {
     return GetChainDescriptorResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: GetChainDescriptorResponse): GetChainDescriptorResponseAminoMsg {
+  toAminoMsg(message: GetChainDescriptorResponse, useInterfaces: boolean = true): GetChainDescriptorResponseAminoMsg {
     return {
       type: "cosmos-sdk/GetChainDescriptorResponse",
-      value: GetChainDescriptorResponse.toAmino(message)
+      value: GetChainDescriptorResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GetChainDescriptorResponseProtoMsg): GetChainDescriptorResponse {
-    return GetChainDescriptorResponse.decode(message.value);
+  fromProtoMsg(message: GetChainDescriptorResponseProtoMsg, useInterfaces: boolean = true): GetChainDescriptorResponse {
+    return GetChainDescriptorResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetChainDescriptorResponse): Uint8Array {
     return GetChainDescriptorResponse.encode(message).finish();
@@ -2252,7 +2252,7 @@ export const GetCodecDescriptorRequest = {
   encode(_: GetCodecDescriptorRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetCodecDescriptorRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetCodecDescriptorRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetCodecDescriptorRequest();
@@ -2288,21 +2288,21 @@ export const GetCodecDescriptorRequest = {
   fromAmino(_: GetCodecDescriptorRequestAmino): GetCodecDescriptorRequest {
     return {};
   },
-  toAmino(_: GetCodecDescriptorRequest): GetCodecDescriptorRequestAmino {
+  toAmino(_: GetCodecDescriptorRequest, useInterfaces: boolean = true): GetCodecDescriptorRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: GetCodecDescriptorRequestAminoMsg): GetCodecDescriptorRequest {
     return GetCodecDescriptorRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: GetCodecDescriptorRequest): GetCodecDescriptorRequestAminoMsg {
+  toAminoMsg(message: GetCodecDescriptorRequest, useInterfaces: boolean = true): GetCodecDescriptorRequestAminoMsg {
     return {
       type: "cosmos-sdk/GetCodecDescriptorRequest",
-      value: GetCodecDescriptorRequest.toAmino(message)
+      value: GetCodecDescriptorRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GetCodecDescriptorRequestProtoMsg): GetCodecDescriptorRequest {
-    return GetCodecDescriptorRequest.decode(message.value);
+  fromProtoMsg(message: GetCodecDescriptorRequestProtoMsg, useInterfaces: boolean = true): GetCodecDescriptorRequest {
+    return GetCodecDescriptorRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetCodecDescriptorRequest): Uint8Array {
     return GetCodecDescriptorRequest.encode(message).finish();
@@ -2328,7 +2328,7 @@ export const GetCodecDescriptorResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetCodecDescriptorResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetCodecDescriptorResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetCodecDescriptorResponse();
@@ -2336,7 +2336,7 @@ export const GetCodecDescriptorResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.codec = CodecDescriptor.decode(reader, reader.uint32());
+          message.codec = CodecDescriptor.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2377,22 +2377,22 @@ export const GetCodecDescriptorResponse = {
       codec: object?.codec ? CodecDescriptor.fromAmino(object.codec) : undefined
     };
   },
-  toAmino(message: GetCodecDescriptorResponse): GetCodecDescriptorResponseAmino {
+  toAmino(message: GetCodecDescriptorResponse, useInterfaces: boolean = true): GetCodecDescriptorResponseAmino {
     const obj: any = {};
-    obj.codec = message.codec ? CodecDescriptor.toAmino(message.codec) : undefined;
+    obj.codec = message.codec ? CodecDescriptor.toAmino(message.codec, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: GetCodecDescriptorResponseAminoMsg): GetCodecDescriptorResponse {
     return GetCodecDescriptorResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: GetCodecDescriptorResponse): GetCodecDescriptorResponseAminoMsg {
+  toAminoMsg(message: GetCodecDescriptorResponse, useInterfaces: boolean = true): GetCodecDescriptorResponseAminoMsg {
     return {
       type: "cosmos-sdk/GetCodecDescriptorResponse",
-      value: GetCodecDescriptorResponse.toAmino(message)
+      value: GetCodecDescriptorResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GetCodecDescriptorResponseProtoMsg): GetCodecDescriptorResponse {
-    return GetCodecDescriptorResponse.decode(message.value);
+  fromProtoMsg(message: GetCodecDescriptorResponseProtoMsg, useInterfaces: boolean = true): GetCodecDescriptorResponse {
+    return GetCodecDescriptorResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetCodecDescriptorResponse): Uint8Array {
     return GetCodecDescriptorResponse.encode(message).finish();
@@ -2413,7 +2413,7 @@ export const GetConfigurationDescriptorRequest = {
   encode(_: GetConfigurationDescriptorRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetConfigurationDescriptorRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetConfigurationDescriptorRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetConfigurationDescriptorRequest();
@@ -2449,21 +2449,21 @@ export const GetConfigurationDescriptorRequest = {
   fromAmino(_: GetConfigurationDescriptorRequestAmino): GetConfigurationDescriptorRequest {
     return {};
   },
-  toAmino(_: GetConfigurationDescriptorRequest): GetConfigurationDescriptorRequestAmino {
+  toAmino(_: GetConfigurationDescriptorRequest, useInterfaces: boolean = true): GetConfigurationDescriptorRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: GetConfigurationDescriptorRequestAminoMsg): GetConfigurationDescriptorRequest {
     return GetConfigurationDescriptorRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: GetConfigurationDescriptorRequest): GetConfigurationDescriptorRequestAminoMsg {
+  toAminoMsg(message: GetConfigurationDescriptorRequest, useInterfaces: boolean = true): GetConfigurationDescriptorRequestAminoMsg {
     return {
       type: "cosmos-sdk/GetConfigurationDescriptorRequest",
-      value: GetConfigurationDescriptorRequest.toAmino(message)
+      value: GetConfigurationDescriptorRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GetConfigurationDescriptorRequestProtoMsg): GetConfigurationDescriptorRequest {
-    return GetConfigurationDescriptorRequest.decode(message.value);
+  fromProtoMsg(message: GetConfigurationDescriptorRequestProtoMsg, useInterfaces: boolean = true): GetConfigurationDescriptorRequest {
+    return GetConfigurationDescriptorRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetConfigurationDescriptorRequest): Uint8Array {
     return GetConfigurationDescriptorRequest.encode(message).finish();
@@ -2489,7 +2489,7 @@ export const GetConfigurationDescriptorResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetConfigurationDescriptorResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetConfigurationDescriptorResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetConfigurationDescriptorResponse();
@@ -2497,7 +2497,7 @@ export const GetConfigurationDescriptorResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.config = ConfigurationDescriptor.decode(reader, reader.uint32());
+          message.config = ConfigurationDescriptor.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2538,22 +2538,22 @@ export const GetConfigurationDescriptorResponse = {
       config: object?.config ? ConfigurationDescriptor.fromAmino(object.config) : undefined
     };
   },
-  toAmino(message: GetConfigurationDescriptorResponse): GetConfigurationDescriptorResponseAmino {
+  toAmino(message: GetConfigurationDescriptorResponse, useInterfaces: boolean = true): GetConfigurationDescriptorResponseAmino {
     const obj: any = {};
-    obj.config = message.config ? ConfigurationDescriptor.toAmino(message.config) : undefined;
+    obj.config = message.config ? ConfigurationDescriptor.toAmino(message.config, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: GetConfigurationDescriptorResponseAminoMsg): GetConfigurationDescriptorResponse {
     return GetConfigurationDescriptorResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: GetConfigurationDescriptorResponse): GetConfigurationDescriptorResponseAminoMsg {
+  toAminoMsg(message: GetConfigurationDescriptorResponse, useInterfaces: boolean = true): GetConfigurationDescriptorResponseAminoMsg {
     return {
       type: "cosmos-sdk/GetConfigurationDescriptorResponse",
-      value: GetConfigurationDescriptorResponse.toAmino(message)
+      value: GetConfigurationDescriptorResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GetConfigurationDescriptorResponseProtoMsg): GetConfigurationDescriptorResponse {
-    return GetConfigurationDescriptorResponse.decode(message.value);
+  fromProtoMsg(message: GetConfigurationDescriptorResponseProtoMsg, useInterfaces: boolean = true): GetConfigurationDescriptorResponse {
+    return GetConfigurationDescriptorResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetConfigurationDescriptorResponse): Uint8Array {
     return GetConfigurationDescriptorResponse.encode(message).finish();
@@ -2574,7 +2574,7 @@ export const GetQueryServicesDescriptorRequest = {
   encode(_: GetQueryServicesDescriptorRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetQueryServicesDescriptorRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetQueryServicesDescriptorRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetQueryServicesDescriptorRequest();
@@ -2610,21 +2610,21 @@ export const GetQueryServicesDescriptorRequest = {
   fromAmino(_: GetQueryServicesDescriptorRequestAmino): GetQueryServicesDescriptorRequest {
     return {};
   },
-  toAmino(_: GetQueryServicesDescriptorRequest): GetQueryServicesDescriptorRequestAmino {
+  toAmino(_: GetQueryServicesDescriptorRequest, useInterfaces: boolean = true): GetQueryServicesDescriptorRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: GetQueryServicesDescriptorRequestAminoMsg): GetQueryServicesDescriptorRequest {
     return GetQueryServicesDescriptorRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: GetQueryServicesDescriptorRequest): GetQueryServicesDescriptorRequestAminoMsg {
+  toAminoMsg(message: GetQueryServicesDescriptorRequest, useInterfaces: boolean = true): GetQueryServicesDescriptorRequestAminoMsg {
     return {
       type: "cosmos-sdk/GetQueryServicesDescriptorRequest",
-      value: GetQueryServicesDescriptorRequest.toAmino(message)
+      value: GetQueryServicesDescriptorRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GetQueryServicesDescriptorRequestProtoMsg): GetQueryServicesDescriptorRequest {
-    return GetQueryServicesDescriptorRequest.decode(message.value);
+  fromProtoMsg(message: GetQueryServicesDescriptorRequestProtoMsg, useInterfaces: boolean = true): GetQueryServicesDescriptorRequest {
+    return GetQueryServicesDescriptorRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetQueryServicesDescriptorRequest): Uint8Array {
     return GetQueryServicesDescriptorRequest.encode(message).finish();
@@ -2650,7 +2650,7 @@ export const GetQueryServicesDescriptorResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetQueryServicesDescriptorResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetQueryServicesDescriptorResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetQueryServicesDescriptorResponse();
@@ -2658,7 +2658,7 @@ export const GetQueryServicesDescriptorResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.queries = QueryServicesDescriptor.decode(reader, reader.uint32());
+          message.queries = QueryServicesDescriptor.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2699,22 +2699,22 @@ export const GetQueryServicesDescriptorResponse = {
       queries: object?.queries ? QueryServicesDescriptor.fromAmino(object.queries) : undefined
     };
   },
-  toAmino(message: GetQueryServicesDescriptorResponse): GetQueryServicesDescriptorResponseAmino {
+  toAmino(message: GetQueryServicesDescriptorResponse, useInterfaces: boolean = true): GetQueryServicesDescriptorResponseAmino {
     const obj: any = {};
-    obj.queries = message.queries ? QueryServicesDescriptor.toAmino(message.queries) : undefined;
+    obj.queries = message.queries ? QueryServicesDescriptor.toAmino(message.queries, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: GetQueryServicesDescriptorResponseAminoMsg): GetQueryServicesDescriptorResponse {
     return GetQueryServicesDescriptorResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: GetQueryServicesDescriptorResponse): GetQueryServicesDescriptorResponseAminoMsg {
+  toAminoMsg(message: GetQueryServicesDescriptorResponse, useInterfaces: boolean = true): GetQueryServicesDescriptorResponseAminoMsg {
     return {
       type: "cosmos-sdk/GetQueryServicesDescriptorResponse",
-      value: GetQueryServicesDescriptorResponse.toAmino(message)
+      value: GetQueryServicesDescriptorResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GetQueryServicesDescriptorResponseProtoMsg): GetQueryServicesDescriptorResponse {
-    return GetQueryServicesDescriptorResponse.decode(message.value);
+  fromProtoMsg(message: GetQueryServicesDescriptorResponseProtoMsg, useInterfaces: boolean = true): GetQueryServicesDescriptorResponse {
+    return GetQueryServicesDescriptorResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetQueryServicesDescriptorResponse): Uint8Array {
     return GetQueryServicesDescriptorResponse.encode(message).finish();
@@ -2735,7 +2735,7 @@ export const GetTxDescriptorRequest = {
   encode(_: GetTxDescriptorRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetTxDescriptorRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetTxDescriptorRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxDescriptorRequest();
@@ -2771,21 +2771,21 @@ export const GetTxDescriptorRequest = {
   fromAmino(_: GetTxDescriptorRequestAmino): GetTxDescriptorRequest {
     return {};
   },
-  toAmino(_: GetTxDescriptorRequest): GetTxDescriptorRequestAmino {
+  toAmino(_: GetTxDescriptorRequest, useInterfaces: boolean = true): GetTxDescriptorRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: GetTxDescriptorRequestAminoMsg): GetTxDescriptorRequest {
     return GetTxDescriptorRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: GetTxDescriptorRequest): GetTxDescriptorRequestAminoMsg {
+  toAminoMsg(message: GetTxDescriptorRequest, useInterfaces: boolean = true): GetTxDescriptorRequestAminoMsg {
     return {
       type: "cosmos-sdk/GetTxDescriptorRequest",
-      value: GetTxDescriptorRequest.toAmino(message)
+      value: GetTxDescriptorRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GetTxDescriptorRequestProtoMsg): GetTxDescriptorRequest {
-    return GetTxDescriptorRequest.decode(message.value);
+  fromProtoMsg(message: GetTxDescriptorRequestProtoMsg, useInterfaces: boolean = true): GetTxDescriptorRequest {
+    return GetTxDescriptorRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetTxDescriptorRequest): Uint8Array {
     return GetTxDescriptorRequest.encode(message).finish();
@@ -2811,7 +2811,7 @@ export const GetTxDescriptorResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetTxDescriptorResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetTxDescriptorResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxDescriptorResponse();
@@ -2819,7 +2819,7 @@ export const GetTxDescriptorResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.tx = TxDescriptor.decode(reader, reader.uint32());
+          message.tx = TxDescriptor.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2860,22 +2860,22 @@ export const GetTxDescriptorResponse = {
       tx: object?.tx ? TxDescriptor.fromAmino(object.tx) : undefined
     };
   },
-  toAmino(message: GetTxDescriptorResponse): GetTxDescriptorResponseAmino {
+  toAmino(message: GetTxDescriptorResponse, useInterfaces: boolean = true): GetTxDescriptorResponseAmino {
     const obj: any = {};
-    obj.tx = message.tx ? TxDescriptor.toAmino(message.tx) : undefined;
+    obj.tx = message.tx ? TxDescriptor.toAmino(message.tx, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: GetTxDescriptorResponseAminoMsg): GetTxDescriptorResponse {
     return GetTxDescriptorResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: GetTxDescriptorResponse): GetTxDescriptorResponseAminoMsg {
+  toAminoMsg(message: GetTxDescriptorResponse, useInterfaces: boolean = true): GetTxDescriptorResponseAminoMsg {
     return {
       type: "cosmos-sdk/GetTxDescriptorResponse",
-      value: GetTxDescriptorResponse.toAmino(message)
+      value: GetTxDescriptorResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GetTxDescriptorResponseProtoMsg): GetTxDescriptorResponse {
-    return GetTxDescriptorResponse.decode(message.value);
+  fromProtoMsg(message: GetTxDescriptorResponseProtoMsg, useInterfaces: boolean = true): GetTxDescriptorResponse {
+    return GetTxDescriptorResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetTxDescriptorResponse): Uint8Array {
     return GetTxDescriptorResponse.encode(message).finish();
@@ -2901,7 +2901,7 @@ export const QueryServicesDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryServicesDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryServicesDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryServicesDescriptor();
@@ -2909,7 +2909,7 @@ export const QueryServicesDescriptor = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.queryServices.push(QueryServiceDescriptor.decode(reader, reader.uint32()));
+          message.queryServices.push(QueryServiceDescriptor.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2956,10 +2956,10 @@ export const QueryServicesDescriptor = {
       queryServices: Array.isArray(object?.query_services) ? object.query_services.map((e: any) => QueryServiceDescriptor.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryServicesDescriptor): QueryServicesDescriptorAmino {
+  toAmino(message: QueryServicesDescriptor, useInterfaces: boolean = true): QueryServicesDescriptorAmino {
     const obj: any = {};
     if (message.queryServices) {
-      obj.query_services = message.queryServices.map(e => e ? QueryServiceDescriptor.toAmino(e) : undefined);
+      obj.query_services = message.queryServices.map(e => e ? QueryServiceDescriptor.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.query_services = [];
     }
@@ -2968,14 +2968,14 @@ export const QueryServicesDescriptor = {
   fromAminoMsg(object: QueryServicesDescriptorAminoMsg): QueryServicesDescriptor {
     return QueryServicesDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryServicesDescriptor): QueryServicesDescriptorAminoMsg {
+  toAminoMsg(message: QueryServicesDescriptor, useInterfaces: boolean = true): QueryServicesDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/QueryServicesDescriptor",
-      value: QueryServicesDescriptor.toAmino(message)
+      value: QueryServicesDescriptor.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryServicesDescriptorProtoMsg): QueryServicesDescriptor {
-    return QueryServicesDescriptor.decode(message.value);
+  fromProtoMsg(message: QueryServicesDescriptorProtoMsg, useInterfaces: boolean = true): QueryServicesDescriptor {
+    return QueryServicesDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryServicesDescriptor): Uint8Array {
     return QueryServicesDescriptor.encode(message).finish();
@@ -3009,7 +3009,7 @@ export const QueryServiceDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryServiceDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryServiceDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryServiceDescriptor();
@@ -3023,7 +3023,7 @@ export const QueryServiceDescriptor = {
           message.isModule = reader.bool();
           break;
         case 3:
-          message.methods.push(QueryMethodDescriptor.decode(reader, reader.uint32()));
+          message.methods.push(QueryMethodDescriptor.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -3082,12 +3082,12 @@ export const QueryServiceDescriptor = {
       methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => QueryMethodDescriptor.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryServiceDescriptor): QueryServiceDescriptorAmino {
+  toAmino(message: QueryServiceDescriptor, useInterfaces: boolean = true): QueryServiceDescriptorAmino {
     const obj: any = {};
     obj.fullname = message.fullname;
     obj.is_module = message.isModule;
     if (message.methods) {
-      obj.methods = message.methods.map(e => e ? QueryMethodDescriptor.toAmino(e) : undefined);
+      obj.methods = message.methods.map(e => e ? QueryMethodDescriptor.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.methods = [];
     }
@@ -3096,14 +3096,14 @@ export const QueryServiceDescriptor = {
   fromAminoMsg(object: QueryServiceDescriptorAminoMsg): QueryServiceDescriptor {
     return QueryServiceDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryServiceDescriptor): QueryServiceDescriptorAminoMsg {
+  toAminoMsg(message: QueryServiceDescriptor, useInterfaces: boolean = true): QueryServiceDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/QueryServiceDescriptor",
-      value: QueryServiceDescriptor.toAmino(message)
+      value: QueryServiceDescriptor.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryServiceDescriptorProtoMsg): QueryServiceDescriptor {
-    return QueryServiceDescriptor.decode(message.value);
+  fromProtoMsg(message: QueryServiceDescriptorProtoMsg, useInterfaces: boolean = true): QueryServiceDescriptor {
+    return QueryServiceDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryServiceDescriptor): Uint8Array {
     return QueryServiceDescriptor.encode(message).finish();
@@ -3133,7 +3133,7 @@ export const QueryMethodDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryMethodDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryMethodDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryMethodDescriptor();
@@ -3189,7 +3189,7 @@ export const QueryMethodDescriptor = {
       fullQueryPath: object.full_query_path
     };
   },
-  toAmino(message: QueryMethodDescriptor): QueryMethodDescriptorAmino {
+  toAmino(message: QueryMethodDescriptor, useInterfaces: boolean = true): QueryMethodDescriptorAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.full_query_path = message.fullQueryPath;
@@ -3198,14 +3198,14 @@ export const QueryMethodDescriptor = {
   fromAminoMsg(object: QueryMethodDescriptorAminoMsg): QueryMethodDescriptor {
     return QueryMethodDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryMethodDescriptor): QueryMethodDescriptorAminoMsg {
+  toAminoMsg(message: QueryMethodDescriptor, useInterfaces: boolean = true): QueryMethodDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/QueryMethodDescriptor",
-      value: QueryMethodDescriptor.toAmino(message)
+      value: QueryMethodDescriptor.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryMethodDescriptorProtoMsg): QueryMethodDescriptor {
-    return QueryMethodDescriptor.decode(message.value);
+  fromProtoMsg(message: QueryMethodDescriptorProtoMsg, useInterfaces: boolean = true): QueryMethodDescriptor {
+    return QueryMethodDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryMethodDescriptor): Uint8Array {
     return QueryMethodDescriptor.encode(message).finish();

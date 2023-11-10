@@ -54,7 +54,7 @@ export const Block = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Block {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Block {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBlock();
@@ -62,16 +62,16 @@ export const Block = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.header = Header.decode(reader, reader.uint32());
+          message.header = Header.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.data = Data.decode(reader, reader.uint32());
+          message.data = Data.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.evidence = EvidenceList.decode(reader, reader.uint32());
+          message.evidence = EvidenceList.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
-          message.lastCommit = Commit.decode(reader, reader.uint32());
+          message.lastCommit = Commit.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -136,19 +136,19 @@ export const Block = {
       lastCommit: object?.last_commit ? Commit.fromAmino(object.last_commit) : undefined
     };
   },
-  toAmino(message: Block): BlockAmino {
+  toAmino(message: Block, useInterfaces: boolean = true): BlockAmino {
     const obj: any = {};
-    obj.header = message.header ? Header.toAmino(message.header) : undefined;
-    obj.data = message.data ? Data.toAmino(message.data) : undefined;
-    obj.evidence = message.evidence ? EvidenceList.toAmino(message.evidence) : undefined;
-    obj.last_commit = message.lastCommit ? Commit.toAmino(message.lastCommit) : undefined;
+    obj.header = message.header ? Header.toAmino(message.header, useInterfaces) : undefined;
+    obj.data = message.data ? Data.toAmino(message.data, useInterfaces) : undefined;
+    obj.evidence = message.evidence ? EvidenceList.toAmino(message.evidence, useInterfaces) : undefined;
+    obj.last_commit = message.lastCommit ? Commit.toAmino(message.lastCommit, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: BlockAminoMsg): Block {
     return Block.fromAmino(object.value);
   },
-  fromProtoMsg(message: BlockProtoMsg): Block {
-    return Block.decode(message.value);
+  fromProtoMsg(message: BlockProtoMsg, useInterfaces: boolean = true): Block {
+    return Block.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Block): Uint8Array {
     return Block.encode(message).finish();

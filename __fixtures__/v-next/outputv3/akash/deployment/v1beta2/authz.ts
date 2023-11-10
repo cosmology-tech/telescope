@@ -51,7 +51,7 @@ export const DepositDeploymentAuthorization = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DepositDeploymentAuthorization {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DepositDeploymentAuthorization {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDepositDeploymentAuthorization();
@@ -59,7 +59,7 @@ export const DepositDeploymentAuthorization = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.spendLimit = Coin.decode(reader, reader.uint32());
+          message.spendLimit = Coin.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -100,13 +100,13 @@ export const DepositDeploymentAuthorization = {
       spendLimit: object?.spend_limit ? Coin.fromAmino(object.spend_limit) : undefined
     };
   },
-  toAmino(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationAmino {
+  toAmino(message: DepositDeploymentAuthorization, useInterfaces: boolean = true): DepositDeploymentAuthorizationAmino {
     const obj: any = {};
-    obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit) : undefined;
+    obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: DepositDeploymentAuthorizationProtoMsg): DepositDeploymentAuthorization {
-    return DepositDeploymentAuthorization.decode(message.value);
+  fromProtoMsg(message: DepositDeploymentAuthorizationProtoMsg, useInterfaces: boolean = true): DepositDeploymentAuthorization {
+    return DepositDeploymentAuthorization.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DepositDeploymentAuthorization): Uint8Array {
     return DepositDeploymentAuthorization.encode(message).finish();

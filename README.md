@@ -272,7 +272,9 @@ telescope({
 | option                                    | description                                                     | defaults   |
 | ----------------------------------------- | --------------------------------------------------------------  | ---------- |
 | `interfaces.enabled`                      | enables converters convert between Any type and specific implemented interfaces.                | `true`     |
-| `interfaces.useUnionTypes`                      | Generate Any type as union types(TextProposal \| RegisterIncentiveProposal) instead of intersection types(TextProposal & RegisterIncentiveProposal).                | `false`     |
+| `interfaces.useByDefault`                 | decides if interface decoders are used by default (default for `useInterfaces` argument to `decode` and `toAmino` functions).                | `true`     |
+| `interfaces.useByDefaultRpc`                 | decides if interface decoders are used by default by the RPC clients.                | `true`     |
+| `interfaces.useUnionTypes`                | Generate Any type as union types(TextProposal \| RegisterIncentiveProposal) instead of intersection types(TextProposal & RegisterIncentiveProposal).                | `false`     |
 
 ### Prototypes Options
 

@@ -108,7 +108,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -116,16 +116,16 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32());
+          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.balances.push(Balance.decode(reader, reader.uint32()));
+          message.balances.push(Balance.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.supply.push(Coin.decode(reader, reader.uint32()));
+          message.supply.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 4:
-          message.denomMetadata.push(Metadata.decode(reader, reader.uint32()));
+          message.denomMetadata.push(Metadata.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -208,21 +208,21 @@ export const GenesisState = {
       denomMetadata: Array.isArray(object?.denom_metadata) ? object.denom_metadata.map((e: any) => Metadata.fromAmino(e)) : []
     };
   },
-  toAmino(message: GenesisState): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     if (message.balances) {
-      obj.balances = message.balances.map(e => e ? Balance.toAmino(e) : undefined);
+      obj.balances = message.balances.map(e => e ? Balance.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.balances = [];
     }
     if (message.supply) {
-      obj.supply = message.supply.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.supply = message.supply.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.supply = [];
     }
     if (message.denomMetadata) {
-      obj.denom_metadata = message.denomMetadata.map(e => e ? Metadata.toAmino(e) : undefined);
+      obj.denom_metadata = message.denomMetadata.map(e => e ? Metadata.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.denom_metadata = [];
     }
@@ -231,14 +231,14 @@ export const GenesisState = {
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
   },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+  toAminoMsg(message: GenesisState, useInterfaces: boolean = true): GenesisStateAminoMsg {
     return {
       type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
+      value: GenesisState.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
+    return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();
@@ -268,7 +268,7 @@ export const Balance = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Balance {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Balance {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBalance();
@@ -279,7 +279,7 @@ export const Balance = {
           message.address = reader.string();
           break;
         case 2:
-          message.coins.push(Coin.decode(reader, reader.uint32()));
+          message.coins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -332,11 +332,11 @@ export const Balance = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: Balance): BalanceAmino {
+  toAmino(message: Balance, useInterfaces: boolean = true): BalanceAmino {
     const obj: any = {};
     obj.address = message.address;
     if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.coins = [];
     }
@@ -345,14 +345,14 @@ export const Balance = {
   fromAminoMsg(object: BalanceAminoMsg): Balance {
     return Balance.fromAmino(object.value);
   },
-  toAminoMsg(message: Balance): BalanceAminoMsg {
+  toAminoMsg(message: Balance, useInterfaces: boolean = true): BalanceAminoMsg {
     return {
       type: "cosmos-sdk/Balance",
-      value: Balance.toAmino(message)
+      value: Balance.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: BalanceProtoMsg): Balance {
-    return Balance.decode(message.value);
+  fromProtoMsg(message: BalanceProtoMsg, useInterfaces: boolean = true): Balance {
+    return Balance.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Balance): Uint8Array {
     return Balance.encode(message).finish();

@@ -50,7 +50,7 @@ export const Resource = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Resource {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Resource {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResource();
@@ -58,13 +58,13 @@ export const Resource = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.resources = ResourceUnits.decode(reader, reader.uint32());
+          message.resources = ResourceUnits.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.count = reader.uint32();
           break;
         case 3:
-          message.price = DecCoin.decode(reader, reader.uint32());
+          message.price = DecCoin.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -119,18 +119,18 @@ export const Resource = {
       price: object?.price ? DecCoin.fromAmino(object.price) : undefined
     };
   },
-  toAmino(message: Resource): ResourceAmino {
+  toAmino(message: Resource, useInterfaces: boolean = true): ResourceAmino {
     const obj: any = {};
-    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources) : undefined;
+    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources, useInterfaces) : undefined;
     obj.count = message.count;
-    obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
+    obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: ResourceAminoMsg): Resource {
     return Resource.fromAmino(object.value);
   },
-  fromProtoMsg(message: ResourceProtoMsg): Resource {
-    return Resource.decode(message.value);
+  fromProtoMsg(message: ResourceProtoMsg, useInterfaces: boolean = true): Resource {
+    return Resource.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Resource): Uint8Array {
     return Resource.encode(message).finish();

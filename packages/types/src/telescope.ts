@@ -21,6 +21,8 @@ interface TelescopeOpts {
 
     interfaces?: {
         enabled?: boolean;
+        useByDefault?: boolean,
+        useByDefaultRpc?: boolean,
         useUnionTypes?: boolean;
     },
 
@@ -195,10 +197,10 @@ interface TelescopeOpts {
         },
         instantExport?: {
             include: {
-              patterns?: string[];
+                patterns?: string[];
             },
-            nameMapping?:{
-              [key: string]: string;
+            nameMapping?: {
+                [key: string]: string;
             }
         }
     };
@@ -245,7 +247,9 @@ export const defaultTelescopeOptions: TelescopeOptions = {
 
     interfaces: {
         enabled: true,
-        useUnionTypes: false,
+        useByDefault: false,
+        useByDefaultRpc: false,
+        useUnionTypes: false
     },
 
     prototypes: {
@@ -287,7 +291,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
 
         typingsFormat: {
             customTypes: {
-              useCosmosSDKDec: true
+                useCosmosSDKDec: true
             },
             num64: 'bigint',
             useDeepPartial: false,

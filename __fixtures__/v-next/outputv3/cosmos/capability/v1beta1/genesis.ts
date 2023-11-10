@@ -72,7 +72,7 @@ export const GenesisOwners = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisOwners {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisOwners {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisOwners();
@@ -83,7 +83,7 @@ export const GenesisOwners = {
           message.index = reader.uint64();
           break;
         case 2:
-          message.indexOwners = CapabilityOwners.decode(reader, reader.uint32());
+          message.indexOwners = CapabilityOwners.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -132,14 +132,14 @@ export const GenesisOwners = {
       indexOwners: object?.index_owners ? CapabilityOwners.fromAmino(object.index_owners) : undefined
     };
   },
-  toAmino(message: GenesisOwners): GenesisOwnersAmino {
+  toAmino(message: GenesisOwners, useInterfaces: boolean = true): GenesisOwnersAmino {
     const obj: any = {};
     obj.index = message.index ? message.index.toString() : undefined;
-    obj.index_owners = message.indexOwners ? CapabilityOwners.toAmino(message.indexOwners) : undefined;
+    obj.index_owners = message.indexOwners ? CapabilityOwners.toAmino(message.indexOwners, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GenesisOwnersProtoMsg): GenesisOwners {
-    return GenesisOwners.decode(message.value);
+  fromProtoMsg(message: GenesisOwnersProtoMsg, useInterfaces: boolean = true): GenesisOwners {
+    return GenesisOwners.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisOwners): Uint8Array {
     return GenesisOwners.encode(message).finish();
@@ -169,7 +169,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -180,7 +180,7 @@ export const GenesisState = {
           message.index = reader.uint64();
           break;
         case 2:
-          message.owners.push(GenesisOwners.decode(reader, reader.uint32()));
+          message.owners.push(GenesisOwners.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -235,18 +235,18 @@ export const GenesisState = {
       owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromAmino(e)) : []
     };
   },
-  toAmino(message: GenesisState): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     obj.index = message.index ? message.index.toString() : undefined;
     if (message.owners) {
-      obj.owners = message.owners.map(e => e ? GenesisOwners.toAmino(e) : undefined);
+      obj.owners = message.owners.map(e => e ? GenesisOwners.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.owners = [];
     }
     return obj;
   },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
+    return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();
