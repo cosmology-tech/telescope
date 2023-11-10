@@ -12,7 +12,7 @@ export interface IProtoType {
   $typeUrl?: any;
 }
 
-export interface TelescopeGeneratedType<
+export interface TelescopeGeneratedDecoder<
   T = unknown,
   SDK = unknown,
   Amino = unknown
@@ -41,22 +41,22 @@ export interface TelescopeGeneratedType<
 
 export class GlobalDecoderRegistry {
   static registry: {
-    [key: string]: TelescopeGeneratedType<any, any, any>;
+    [key: string]: TelescopeGeneratedDecoder<any, any, any>;
   } = {};
   static register<T, SDK, Amino>(
     key: string,
-    decoder: TelescopeGeneratedType<T, SDK, Amino>
+    decoder: TelescopeGeneratedDecoder<T, SDK, Amino>
   ) {
     GlobalDecoderRegistry.registry[key] = decoder;
   }
   static getDecoder<T, SDK, Amino>(
     key: string
-  ): TelescopeGeneratedType<T, SDK, Amino> {
+  ): TelescopeGeneratedDecoder<T, SDK, Amino> {
     return GlobalDecoderRegistry.registry[key];
   }
   static getDecoderByInstance<T, SDK, Amino>(
     obj: unknown
-  ): TelescopeGeneratedType<T, SDK, Amino> | null {
+  ): TelescopeGeneratedDecoder<T, SDK, Amino> | null {
     if (obj === undefined || obj === null) {
       return null;
     }
@@ -139,7 +139,6 @@ export class GlobalDecoderRegistry {
     const decoder = getDecoderByInstance<T, SDK>(object);
     return decoder.toSDK!(object);
   }
-
   static fromAmino<T = unknown, Amino = unknown>(object: Amino): T {
     const decoder = getDecoderByInstance<T, unknown, Amino>(object);
     return decoder.fromAmino!(object);
@@ -152,7 +151,7 @@ export class GlobalDecoderRegistry {
 
 function getDecoderByInstance<T = unknown, SDK = unknown, Amino = unknown>(
   obj: unknown
-): TelescopeGeneratedType<T, SDK, Amino> {
+): TelescopeGeneratedDecoder<T, SDK, Amino> {
   const decoder = GlobalDecoderRegistry.getDecoderByInstance<T, SDK, Amino>(
     obj
   );
