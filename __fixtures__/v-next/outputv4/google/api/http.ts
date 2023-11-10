@@ -674,7 +674,7 @@ export const Http = {
     for (const v of message.rules) {
       HttpRule.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.fullyDecodeReservedExpansion === true) {
+    if (message.fullyDecodeReservedExpansion !== undefined) {
       writer.uint32(16).bool(message.fullyDecodeReservedExpansion);
     }
     return writer;
@@ -792,7 +792,7 @@ function createBaseHttpRule(): HttpRule {
 export const HttpRule = {
   typeUrl: "/google.api.HttpRule",
   encode(message: HttpRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
     if (message.get !== undefined) {
@@ -813,10 +813,10 @@ export const HttpRule = {
     if (message.custom !== undefined) {
       CustomHttpPattern.encode(message.custom, writer.uint32(66).fork()).ldelim();
     }
-    if (message.body !== "") {
+    if (message.body !== undefined) {
       writer.uint32(58).string(message.body);
     }
-    if (message.responseBody !== "") {
+    if (message.responseBody !== undefined) {
       writer.uint32(98).string(message.responseBody);
     }
     for (const v of message.additionalBindings) {
@@ -1019,10 +1019,10 @@ function createBaseCustomHttpPattern(): CustomHttpPattern {
 export const CustomHttpPattern = {
   typeUrl: "/google.api.CustomHttpPattern",
   encode(message: CustomHttpPattern, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.kind !== "") {
+    if (message.kind !== undefined) {
       writer.uint32(10).string(message.kind);
     }
-    if (message.path !== "") {
+    if (message.path !== undefined) {
       writer.uint32(18).string(message.path);
     }
     return writer;

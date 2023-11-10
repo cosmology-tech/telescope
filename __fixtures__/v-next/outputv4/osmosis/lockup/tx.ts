@@ -152,7 +152,7 @@ function createBaseMsgLockTokens(): MsgLockTokens {
 export const MsgLockTokens = {
   typeUrl: "/osmosis.lockup.MsgLockTokens",
   encode(message: MsgLockTokens, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     if (message.duration !== undefined) {
@@ -286,7 +286,7 @@ function createBaseMsgLockTokensResponse(): MsgLockTokensResponse {
 export const MsgLockTokensResponse = {
   typeUrl: "/osmosis.lockup.MsgLockTokensResponse",
   encode(message: MsgLockTokensResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.ID !== BigInt(0)) {
+    if (message.ID !== undefined) {
       writer.uint32(8).uint64(message.ID);
     }
     return writer;
@@ -380,7 +380,7 @@ function createBaseMsgBeginUnlockingAll(): MsgBeginUnlockingAll {
 export const MsgBeginUnlockingAll = {
   typeUrl: "/osmosis.lockup.MsgBeginUnlockingAll",
   encode(message: MsgBeginUnlockingAll, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     return writer;
@@ -578,10 +578,10 @@ function createBaseMsgBeginUnlocking(): MsgBeginUnlocking {
 export const MsgBeginUnlocking = {
   typeUrl: "/osmosis.lockup.MsgBeginUnlocking",
   encode(message: MsgBeginUnlocking, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.ID !== BigInt(0)) {
+    if (message.ID !== undefined) {
       writer.uint32(16).uint64(message.ID);
     }
     for (const v of message.coins) {
@@ -712,7 +712,7 @@ function createBaseMsgBeginUnlockingResponse(): MsgBeginUnlockingResponse {
 export const MsgBeginUnlockingResponse = {
   typeUrl: "/osmosis.lockup.MsgBeginUnlockingResponse",
   encode(message: MsgBeginUnlockingResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.success === true) {
+    if (message.success !== undefined) {
       writer.uint32(8).bool(message.success);
     }
     return writer;
@@ -806,10 +806,10 @@ function createBaseMsgExtendLockup(): MsgExtendLockup {
 export const MsgExtendLockup = {
   typeUrl: "/osmosis.lockup.MsgExtendLockup",
   encode(message: MsgExtendLockup, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.ID !== BigInt(0)) {
+    if (message.ID !== undefined) {
       writer.uint32(16).uint64(message.ID);
     }
     if (message.duration !== undefined) {
@@ -930,7 +930,7 @@ function createBaseMsgExtendLockupResponse(): MsgExtendLockupResponse {
 export const MsgExtendLockupResponse = {
   typeUrl: "/osmosis.lockup.MsgExtendLockupResponse",
   encode(message: MsgExtendLockupResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.success === true) {
+    if (message.success !== undefined) {
       writer.uint32(8).bool(message.success);
     }
     return writer;
@@ -1024,10 +1024,10 @@ function createBaseMsgForceUnlock(): MsgForceUnlock {
 export const MsgForceUnlock = {
   typeUrl: "/osmosis.lockup.MsgForceUnlock",
   encode(message: MsgForceUnlock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.ID !== BigInt(0)) {
+    if (message.ID !== undefined) {
       writer.uint32(16).uint64(message.ID);
     }
     for (const v of message.coins) {
@@ -1158,7 +1158,7 @@ function createBaseMsgForceUnlockResponse(): MsgForceUnlockResponse {
 export const MsgForceUnlockResponse = {
   typeUrl: "/osmosis.lockup.MsgForceUnlockResponse",
   encode(message: MsgForceUnlockResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.success === true) {
+    if (message.success !== undefined) {
       writer.uint32(8).bool(message.success);
     }
     return writer;

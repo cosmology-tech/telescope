@@ -302,7 +302,7 @@ function createBaseApi(): Api {
 export const Api = {
   typeUrl: "/google.protobuf.Api",
   encode(message: Api, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.methods) {
@@ -311,7 +311,7 @@ export const Api = {
     for (const v of message.options) {
       Option.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       writer.uint32(34).string(message.version);
     }
     if (message.sourceContext !== undefined) {
@@ -516,19 +516,19 @@ function createBaseMethod(): Method {
 export const Method = {
   typeUrl: "/google.protobuf.Method",
   encode(message: Method, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.requestTypeUrl !== "") {
+    if (message.requestTypeUrl !== undefined) {
       writer.uint32(18).string(message.requestTypeUrl);
     }
-    if (message.requestStreaming === true) {
+    if (message.requestStreaming !== undefined) {
       writer.uint32(24).bool(message.requestStreaming);
     }
-    if (message.responseTypeUrl !== "") {
+    if (message.responseTypeUrl !== undefined) {
       writer.uint32(34).string(message.responseTypeUrl);
     }
-    if (message.responseStreaming === true) {
+    if (message.responseStreaming !== undefined) {
       writer.uint32(40).bool(message.responseStreaming);
     }
     for (const v of message.options) {
@@ -699,10 +699,10 @@ function createBaseMixin(): Mixin {
 export const Mixin = {
   typeUrl: "/google.protobuf.Mixin",
   encode(message: Mixin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.root !== "") {
+    if (message.root !== undefined) {
       writer.uint32(18).string(message.root);
     }
     return writer;

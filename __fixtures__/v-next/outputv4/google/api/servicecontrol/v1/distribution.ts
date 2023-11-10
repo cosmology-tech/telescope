@@ -191,19 +191,19 @@ function createBaseDistribution(): Distribution {
 export const Distribution = {
   typeUrl: "/google.api.servicecontrol.v1.Distribution",
   encode(message: Distribution, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.count !== BigInt(0)) {
+    if (message.count !== undefined) {
       writer.uint32(8).int64(message.count);
     }
-    if (message.mean !== 0) {
+    if (message.mean !== undefined) {
       writer.uint32(17).double(message.mean);
     }
-    if (message.minimum !== 0) {
+    if (message.minimum !== undefined) {
       writer.uint32(25).double(message.minimum);
     }
-    if (message.maximum !== 0) {
+    if (message.maximum !== undefined) {
       writer.uint32(33).double(message.maximum);
     }
-    if (message.sumOfSquaredDeviation !== 0) {
+    if (message.sumOfSquaredDeviation !== undefined) {
       writer.uint32(41).double(message.sumOfSquaredDeviation);
     }
     writer.uint32(50).fork();
@@ -446,13 +446,13 @@ function createBaseDistribution_LinearBuckets(): Distribution_LinearBuckets {
 export const Distribution_LinearBuckets = {
   typeUrl: "/google.api.servicecontrol.v1.LinearBuckets",
   encode(message: Distribution_LinearBuckets, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.numFiniteBuckets !== 0) {
+    if (message.numFiniteBuckets !== undefined) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
-    if (message.width !== 0) {
+    if (message.width !== undefined) {
       writer.uint32(17).double(message.width);
     }
-    if (message.offset !== 0) {
+    if (message.offset !== undefined) {
       writer.uint32(25).double(message.offset);
     }
     return writer;
@@ -562,13 +562,13 @@ function createBaseDistribution_ExponentialBuckets(): Distribution_ExponentialBu
 export const Distribution_ExponentialBuckets = {
   typeUrl: "/google.api.servicecontrol.v1.ExponentialBuckets",
   encode(message: Distribution_ExponentialBuckets, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.numFiniteBuckets !== 0) {
+    if (message.numFiniteBuckets !== undefined) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
-    if (message.growthFactor !== 0) {
+    if (message.growthFactor !== undefined) {
       writer.uint32(17).double(message.growthFactor);
     }
-    if (message.scale !== 0) {
+    if (message.scale !== undefined) {
       writer.uint32(25).double(message.scale);
     }
     return writer;

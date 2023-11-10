@@ -675,10 +675,10 @@ function createBaseService(): Service {
 export const Service = {
   typeUrl: "/google.api.serviceusage.v1beta1.Service",
   encode(message: Service, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(42).string(message.parent);
     }
     if (message.config !== undefined) {
@@ -814,10 +814,10 @@ function createBaseServiceConfig(): ServiceConfig {
 export const ServiceConfig = {
   typeUrl: "/google.api.serviceusage.v1beta1.ServiceConfig",
   encode(message: ServiceConfig, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(18).string(message.title);
     }
     for (const v of message.apis) {
@@ -1175,13 +1175,13 @@ function createBaseConsumerQuotaMetric(): ConsumerQuotaMetric {
 export const ConsumerQuotaMetric = {
   typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaMetric",
   encode(message: ConsumerQuotaMetric, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.metric !== "") {
+    if (message.metric !== undefined) {
       writer.uint32(34).string(message.metric);
     }
-    if (message.displayName !== "") {
+    if (message.displayName !== undefined) {
       writer.uint32(18).string(message.displayName);
     }
     for (const v of message.consumerQuotaLimits) {
@@ -1190,7 +1190,7 @@ export const ConsumerQuotaMetric = {
     for (const v of message.descendantConsumerQuotaLimits) {
       ConsumerQuotaLimit.encode(v!, writer.uint32(50).fork()).ldelim();
     }
-    if (message.unit !== "") {
+    if (message.unit !== undefined) {
       writer.uint32(42).string(message.unit);
     }
     return writer;
@@ -1360,19 +1360,19 @@ function createBaseConsumerQuotaLimit(): ConsumerQuotaLimit {
 export const ConsumerQuotaLimit = {
   typeUrl: "/google.api.serviceusage.v1beta1.ConsumerQuotaLimit",
   encode(message: ConsumerQuotaLimit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.metric !== "") {
+    if (message.metric !== undefined) {
       writer.uint32(66).string(message.metric);
     }
-    if (message.unit !== "") {
+    if (message.unit !== undefined) {
       writer.uint32(18).string(message.unit);
     }
-    if (message.isPrecise === true) {
+    if (message.isPrecise !== undefined) {
       writer.uint32(24).bool(message.isPrecise);
     }
-    if (message.allowsAdminOverrides === true) {
+    if (message.allowsAdminOverrides !== undefined) {
       writer.uint32(56).bool(message.allowsAdminOverrides);
     }
     for (const v of message.quotaBuckets) {
@@ -1528,10 +1528,10 @@ function createBaseQuotaBucket_DimensionsEntry(): QuotaBucket_DimensionsEntry {
 }
 export const QuotaBucket_DimensionsEntry = {
   encode(message: QuotaBucket_DimensionsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -1627,10 +1627,10 @@ function createBaseQuotaBucket(): QuotaBucket {
 export const QuotaBucket = {
   typeUrl: "/google.api.serviceusage.v1beta1.QuotaBucket",
   encode(message: QuotaBucket, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.effectiveLimit !== BigInt(0)) {
+    if (message.effectiveLimit !== undefined) {
       writer.uint32(8).int64(message.effectiveLimit);
     }
-    if (message.defaultLimit !== BigInt(0)) {
+    if (message.defaultLimit !== undefined) {
       writer.uint32(16).int64(message.defaultLimit);
     }
     if (message.producerOverride !== undefined) {
@@ -1841,10 +1841,10 @@ function createBaseQuotaOverride_DimensionsEntry(): QuotaOverride_DimensionsEntr
 }
 export const QuotaOverride_DimensionsEntry = {
   encode(message: QuotaOverride_DimensionsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -1940,10 +1940,10 @@ function createBaseQuotaOverride(): QuotaOverride {
 export const QuotaOverride = {
   typeUrl: "/google.api.serviceusage.v1beta1.QuotaOverride",
   encode(message: QuotaOverride, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.overrideValue !== BigInt(0)) {
+    if (message.overrideValue !== undefined) {
       writer.uint32(16).int64(message.overrideValue);
     }
     Object.entries(message.dimensions).forEach(([key, value]) => {
@@ -1952,13 +1952,13 @@ export const QuotaOverride = {
         value
       }, writer.uint32(26).fork()).ldelim();
     });
-    if (message.metric !== "") {
+    if (message.metric !== undefined) {
       writer.uint32(34).string(message.metric);
     }
-    if (message.unit !== "") {
+    if (message.unit !== undefined) {
       writer.uint32(42).string(message.unit);
     }
-    if (message.adminOverrideAncestor !== "") {
+    if (message.adminOverrideAncestor !== undefined) {
       writer.uint32(50).string(message.adminOverrideAncestor);
     }
     return writer;
@@ -2244,10 +2244,10 @@ function createBaseAdminQuotaPolicy_DimensionsEntry(): AdminQuotaPolicy_Dimensio
 }
 export const AdminQuotaPolicy_DimensionsEntry = {
   encode(message: AdminQuotaPolicy_DimensionsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -2343,10 +2343,10 @@ function createBaseAdminQuotaPolicy(): AdminQuotaPolicy {
 export const AdminQuotaPolicy = {
   typeUrl: "/google.api.serviceusage.v1beta1.AdminQuotaPolicy",
   encode(message: AdminQuotaPolicy, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.policyValue !== BigInt(0)) {
+    if (message.policyValue !== undefined) {
       writer.uint32(16).int64(message.policyValue);
     }
     Object.entries(message.dimensions).forEach(([key, value]) => {
@@ -2355,13 +2355,13 @@ export const AdminQuotaPolicy = {
         value
       }, writer.uint32(26).fork()).ldelim();
     });
-    if (message.metric !== "") {
+    if (message.metric !== undefined) {
       writer.uint32(34).string(message.metric);
     }
-    if (message.unit !== "") {
+    if (message.unit !== undefined) {
       writer.uint32(42).string(message.unit);
     }
-    if (message.container !== "") {
+    if (message.container !== undefined) {
       writer.uint32(50).string(message.container);
     }
     return writer;
@@ -2550,10 +2550,10 @@ function createBaseServiceIdentity(): ServiceIdentity {
 export const ServiceIdentity = {
   typeUrl: "/google.api.serviceusage.v1beta1.ServiceIdentity",
   encode(message: ServiceIdentity, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.email !== "") {
+    if (message.email !== undefined) {
       writer.uint32(10).string(message.email);
     }
-    if (message.uniqueId !== "") {
+    if (message.uniqueId !== undefined) {
       writer.uint32(18).string(message.uniqueId);
     }
     return writer;

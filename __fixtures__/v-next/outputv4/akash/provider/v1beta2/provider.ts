@@ -115,10 +115,10 @@ function createBaseProviderInfo(): ProviderInfo {
 export const ProviderInfo = {
   typeUrl: "/akash.provider.v1beta2.ProviderInfo",
   encode(message: ProviderInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.email !== "") {
+    if (message.email !== undefined) {
       writer.uint32(10).string(message.email);
     }
-    if (message.website !== "") {
+    if (message.website !== undefined) {
       writer.uint32(18).string(message.website);
     }
     return writer;
@@ -224,10 +224,10 @@ function createBaseMsgCreateProvider(): MsgCreateProvider {
 export const MsgCreateProvider = {
   typeUrl: "/akash.provider.v1beta2.MsgCreateProvider",
   encode(message: MsgCreateProvider, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.hostUri !== "") {
+    if (message.hostUri !== undefined) {
       writer.uint32(18).string(message.hostUri);
     }
     for (const v of message.attributes) {
@@ -448,10 +448,10 @@ function createBaseMsgUpdateProvider(): MsgUpdateProvider {
 export const MsgUpdateProvider = {
   typeUrl: "/akash.provider.v1beta2.MsgUpdateProvider",
   encode(message: MsgUpdateProvider, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.hostUri !== "") {
+    if (message.hostUri !== undefined) {
       writer.uint32(18).string(message.hostUri);
     }
     for (const v of message.attributes) {
@@ -669,7 +669,7 @@ function createBaseMsgDeleteProvider(): MsgDeleteProvider {
 export const MsgDeleteProvider = {
   typeUrl: "/akash.provider.v1beta2.MsgDeleteProvider",
   encode(message: MsgDeleteProvider, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     return writer;
@@ -837,10 +837,10 @@ function createBaseProvider(): Provider {
 export const Provider = {
   typeUrl: "/akash.provider.v1beta2.Provider",
   encode(message: Provider, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.hostUri !== "") {
+    if (message.hostUri !== undefined) {
       writer.uint32(18).string(message.hostUri);
     }
     for (const v of message.attributes) {

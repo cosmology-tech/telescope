@@ -244,7 +244,7 @@ function createBaseListImplementationsRequest(): ListImplementationsRequest {
 export const ListImplementationsRequest = {
   typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsRequest",
   encode(message: ListImplementationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.interfaceName !== "") {
+    if (message.interfaceName !== undefined) {
       writer.uint32(10).string(message.interfaceName);
     }
     return writer;

@@ -55,10 +55,10 @@ function createBaseQueryAppVersionRequest(): QueryAppVersionRequest {
 export const QueryAppVersionRequest = {
   typeUrl: "/ibc.core.port.v1.QueryAppVersionRequest",
   encode(message: QueryAppVersionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.portId !== "") {
+    if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
     }
-    if (message.connectionId !== "") {
+    if (message.connectionId !== undefined) {
       writer.uint32(18).string(message.connectionId);
     }
     if (message.ordering !== 0) {
@@ -67,7 +67,7 @@ export const QueryAppVersionRequest = {
     if (message.counterparty !== undefined) {
       Counterparty.encode(message.counterparty, writer.uint32(34).fork()).ldelim();
     }
-    if (message.proposedVersion !== "") {
+    if (message.proposedVersion !== undefined) {
       writer.uint32(42).string(message.proposedVersion);
     }
     return writer;
@@ -206,10 +206,10 @@ function createBaseQueryAppVersionResponse(): QueryAppVersionResponse {
 export const QueryAppVersionResponse = {
   typeUrl: "/ibc.core.port.v1.QueryAppVersionResponse",
   encode(message: QueryAppVersionResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.portId !== "") {
+    if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       writer.uint32(18).string(message.version);
     }
     return writer;

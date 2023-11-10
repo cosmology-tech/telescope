@@ -358,22 +358,22 @@ function createBaseResourceDescriptor(): ResourceDescriptor {
 export const ResourceDescriptor = {
   typeUrl: "/google.api.ResourceDescriptor",
   encode(message: ResourceDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(10).string(message.type);
     }
     for (const v of message.pattern) {
       writer.uint32(18).string(v!);
     }
-    if (message.nameField !== "") {
+    if (message.nameField !== undefined) {
       writer.uint32(26).string(message.nameField);
     }
     if (message.history !== 0) {
       writer.uint32(32).int32(message.history);
     }
-    if (message.plural !== "") {
+    if (message.plural !== undefined) {
       writer.uint32(42).string(message.plural);
     }
-    if (message.singular !== "") {
+    if (message.singular !== undefined) {
       writer.uint32(50).string(message.singular);
     }
     writer.uint32(82).fork();
@@ -562,10 +562,10 @@ function createBaseResourceReference(): ResourceReference {
 export const ResourceReference = {
   typeUrl: "/google.api.ResourceReference",
   encode(message: ResourceReference, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(10).string(message.type);
     }
-    if (message.childType !== "") {
+    if (message.childType !== undefined) {
       writer.uint32(18).string(message.childType);
     }
     return writer;

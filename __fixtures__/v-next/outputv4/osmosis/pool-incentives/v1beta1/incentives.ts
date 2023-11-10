@@ -84,7 +84,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/osmosis.poolincentives.v1beta1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.mintedDenom !== "") {
+    if (message.mintedDenom !== undefined) {
       writer.uint32(10).string(message.mintedDenom);
     }
     return writer;
@@ -281,7 +281,7 @@ function createBaseDistrInfo(): DistrInfo {
 export const DistrInfo = {
   typeUrl: "/osmosis.poolincentives.v1beta1.DistrInfo",
   encode(message: DistrInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.totalWeight !== "") {
+    if (message.totalWeight !== undefined) {
       writer.uint32(10).string(message.totalWeight);
     }
     for (const v of message.records) {
@@ -400,10 +400,10 @@ function createBaseDistrRecord(): DistrRecord {
 export const DistrRecord = {
   typeUrl: "/osmosis.poolincentives.v1beta1.DistrRecord",
   encode(message: DistrRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.gaugeId !== BigInt(0)) {
+    if (message.gaugeId !== undefined) {
       writer.uint32(8).uint64(message.gaugeId);
     }
-    if (message.weight !== "") {
+    if (message.weight !== undefined) {
       writer.uint32(18).string(message.weight);
     }
     return writer;
@@ -510,10 +510,10 @@ function createBasePoolToGauge(): PoolToGauge {
 export const PoolToGauge = {
   typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauge",
   encode(message: PoolToGauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
-    if (message.gaugeId !== BigInt(0)) {
+    if (message.gaugeId !== undefined) {
       writer.uint32(16).uint64(message.gaugeId);
     }
     if (message.duration !== undefined) {

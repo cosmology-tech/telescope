@@ -471,7 +471,7 @@ function createBaseQueryIncentiveRequest(): QueryIncentiveRequest {
 export const QueryIncentiveRequest = {
   typeUrl: "/evmos.incentives.v1.QueryIncentiveRequest",
   encode(message: QueryIncentiveRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contract !== "") {
+    if (message.contract !== undefined) {
       writer.uint32(10).string(message.contract);
     }
     return writer;
@@ -646,7 +646,7 @@ function createBaseQueryGasMetersRequest(): QueryGasMetersRequest {
 export const QueryGasMetersRequest = {
   typeUrl: "/evmos.incentives.v1.QueryGasMetersRequest",
   encode(message: QueryGasMetersRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contract !== "") {
+    if (message.contract !== undefined) {
       writer.uint32(10).string(message.contract);
     }
     if (message.pagination !== undefined) {
@@ -864,10 +864,10 @@ function createBaseQueryGasMeterRequest(): QueryGasMeterRequest {
 export const QueryGasMeterRequest = {
   typeUrl: "/evmos.incentives.v1.QueryGasMeterRequest",
   encode(message: QueryGasMeterRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contract !== "") {
+    if (message.contract !== undefined) {
       writer.uint32(10).string(message.contract);
     }
-    if (message.participant !== "") {
+    if (message.participant !== undefined) {
       writer.uint32(18).string(message.participant);
     }
     return writer;
@@ -964,7 +964,7 @@ function createBaseQueryGasMeterResponse(): QueryGasMeterResponse {
 export const QueryGasMeterResponse = {
   typeUrl: "/evmos.incentives.v1.QueryGasMeterResponse",
   encode(message: QueryGasMeterResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.gasMeter !== BigInt(0)) {
+    if (message.gasMeter !== undefined) {
       writer.uint32(8).uint64(message.gasMeter);
     }
     return writer;
@@ -1255,7 +1255,7 @@ function createBaseQueryAllocationMeterRequest(): QueryAllocationMeterRequest {
 export const QueryAllocationMeterRequest = {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMeterRequest",
   encode(message: QueryAllocationMeterRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
     }
     return writer;

@@ -28,7 +28,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/osmosis.superfluid.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.minimumRiskFactor !== "") {
+    if (message.minimumRiskFactor !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.minimumRiskFactor, 18).atomics);
     }
     return writer;

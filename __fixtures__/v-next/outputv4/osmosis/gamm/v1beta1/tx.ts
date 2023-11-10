@@ -279,13 +279,13 @@ function createBaseMsgJoinPool(): MsgJoinPool {
 export const MsgJoinPool = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgJoinPool",
   encode(message: MsgJoinPool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(16).uint64(message.poolId);
     }
-    if (message.shareOutAmount !== "") {
+    if (message.shareOutAmount !== undefined) {
       writer.uint32(26).string(message.shareOutAmount);
     }
     for (const v of message.tokenInMaxs) {
@@ -428,7 +428,7 @@ function createBaseMsgJoinPoolResponse(): MsgJoinPoolResponse {
 export const MsgJoinPoolResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgJoinPoolResponse",
   encode(message: MsgJoinPoolResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.shareOutAmount !== "") {
+    if (message.shareOutAmount !== undefined) {
       writer.uint32(10).string(message.shareOutAmount);
     }
     for (const v of message.tokenIn) {
@@ -549,13 +549,13 @@ function createBaseMsgExitPool(): MsgExitPool {
 export const MsgExitPool = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgExitPool",
   encode(message: MsgExitPool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(16).uint64(message.poolId);
     }
-    if (message.shareInAmount !== "") {
+    if (message.shareInAmount !== undefined) {
       writer.uint32(26).string(message.shareInAmount);
     }
     for (const v of message.tokenOutMins) {
@@ -802,10 +802,10 @@ function createBaseSwapAmountInRoute(): SwapAmountInRoute {
 export const SwapAmountInRoute = {
   typeUrl: "/osmosis.gamm.v1beta1.SwapAmountInRoute",
   encode(message: SwapAmountInRoute, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
-    if (message.tokenOutDenom !== "") {
+    if (message.tokenOutDenom !== undefined) {
       writer.uint32(18).string(message.tokenOutDenom);
     }
     return writer;
@@ -913,7 +913,7 @@ function createBaseMsgSwapExactAmountIn(): MsgSwapExactAmountIn {
 export const MsgSwapExactAmountIn = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn",
   encode(message: MsgSwapExactAmountIn, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
     for (const v of message.routes) {
@@ -922,7 +922,7 @@ export const MsgSwapExactAmountIn = {
     if (message.tokenIn !== undefined) {
       Coin.encode(message.tokenIn, writer.uint32(26).fork()).ldelim();
     }
-    if (message.tokenOutMinAmount !== "") {
+    if (message.tokenOutMinAmount !== undefined) {
       writer.uint32(34).string(message.tokenOutMinAmount);
     }
     return writer;
@@ -1061,7 +1061,7 @@ function createBaseMsgSwapExactAmountInResponse(): MsgSwapExactAmountInResponse 
 export const MsgSwapExactAmountInResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountInResponse",
   encode(message: MsgSwapExactAmountInResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.tokenOutAmount !== "") {
+    if (message.tokenOutAmount !== undefined) {
       writer.uint32(10).string(message.tokenOutAmount);
     }
     return writer;
@@ -1154,10 +1154,10 @@ function createBaseSwapAmountOutRoute(): SwapAmountOutRoute {
 export const SwapAmountOutRoute = {
   typeUrl: "/osmosis.gamm.v1beta1.SwapAmountOutRoute",
   encode(message: SwapAmountOutRoute, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
-    if (message.tokenInDenom !== "") {
+    if (message.tokenInDenom !== undefined) {
       writer.uint32(18).string(message.tokenInDenom);
     }
     return writer;
@@ -1265,13 +1265,13 @@ function createBaseMsgSwapExactAmountOut(): MsgSwapExactAmountOut {
 export const MsgSwapExactAmountOut = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountOut",
   encode(message: MsgSwapExactAmountOut, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
     for (const v of message.routes) {
       SwapAmountOutRoute.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.tokenInMaxAmount !== "") {
+    if (message.tokenInMaxAmount !== undefined) {
       writer.uint32(26).string(message.tokenInMaxAmount);
     }
     if (message.tokenOut !== undefined) {
@@ -1413,7 +1413,7 @@ function createBaseMsgSwapExactAmountOutResponse(): MsgSwapExactAmountOutRespons
 export const MsgSwapExactAmountOutResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountOutResponse",
   encode(message: MsgSwapExactAmountOutResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.tokenInAmount !== "") {
+    if (message.tokenInAmount !== undefined) {
       writer.uint32(10).string(message.tokenInAmount);
     }
     return writer;
@@ -1508,16 +1508,16 @@ function createBaseMsgJoinSwapExternAmountIn(): MsgJoinSwapExternAmountIn {
 export const MsgJoinSwapExternAmountIn = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountIn",
   encode(message: MsgJoinSwapExternAmountIn, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(16).uint64(message.poolId);
     }
     if (message.tokenIn !== undefined) {
       Coin.encode(message.tokenIn, writer.uint32(26).fork()).ldelim();
     }
-    if (message.shareOutMinAmount !== "") {
+    if (message.shareOutMinAmount !== undefined) {
       writer.uint32(34).string(message.shareOutMinAmount);
     }
     return writer;
@@ -1646,7 +1646,7 @@ function createBaseMsgJoinSwapExternAmountInResponse(): MsgJoinSwapExternAmountI
 export const MsgJoinSwapExternAmountInResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountInResponse",
   encode(message: MsgJoinSwapExternAmountInResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.shareOutAmount !== "") {
+    if (message.shareOutAmount !== undefined) {
       writer.uint32(10).string(message.shareOutAmount);
     }
     return writer;
@@ -1742,19 +1742,19 @@ function createBaseMsgJoinSwapShareAmountOut(): MsgJoinSwapShareAmountOut {
 export const MsgJoinSwapShareAmountOut = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOut",
   encode(message: MsgJoinSwapShareAmountOut, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(16).uint64(message.poolId);
     }
-    if (message.tokenInDenom !== "") {
+    if (message.tokenInDenom !== undefined) {
       writer.uint32(26).string(message.tokenInDenom);
     }
-    if (message.shareOutAmount !== "") {
+    if (message.shareOutAmount !== undefined) {
       writer.uint32(34).string(message.shareOutAmount);
     }
-    if (message.tokenInMaxAmount !== "") {
+    if (message.tokenInMaxAmount !== undefined) {
       writer.uint32(42).string(message.tokenInMaxAmount);
     }
     return writer;
@@ -1892,7 +1892,7 @@ function createBaseMsgJoinSwapShareAmountOutResponse(): MsgJoinSwapShareAmountOu
 export const MsgJoinSwapShareAmountOutResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOutResponse",
   encode(message: MsgJoinSwapShareAmountOutResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.tokenInAmount !== "") {
+    if (message.tokenInAmount !== undefined) {
       writer.uint32(10).string(message.tokenInAmount);
     }
     return writer;
@@ -1988,19 +1988,19 @@ function createBaseMsgExitSwapShareAmountIn(): MsgExitSwapShareAmountIn {
 export const MsgExitSwapShareAmountIn = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountIn",
   encode(message: MsgExitSwapShareAmountIn, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(16).uint64(message.poolId);
     }
-    if (message.tokenOutDenom !== "") {
+    if (message.tokenOutDenom !== undefined) {
       writer.uint32(26).string(message.tokenOutDenom);
     }
-    if (message.shareInAmount !== "") {
+    if (message.shareInAmount !== undefined) {
       writer.uint32(34).string(message.shareInAmount);
     }
-    if (message.tokenOutMinAmount !== "") {
+    if (message.tokenOutMinAmount !== undefined) {
       writer.uint32(42).string(message.tokenOutMinAmount);
     }
     return writer;
@@ -2138,7 +2138,7 @@ function createBaseMsgExitSwapShareAmountInResponse(): MsgExitSwapShareAmountInR
 export const MsgExitSwapShareAmountInResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountInResponse",
   encode(message: MsgExitSwapShareAmountInResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.tokenOutAmount !== "") {
+    if (message.tokenOutAmount !== undefined) {
       writer.uint32(10).string(message.tokenOutAmount);
     }
     return writer;
@@ -2233,16 +2233,16 @@ function createBaseMsgExitSwapExternAmountOut(): MsgExitSwapExternAmountOut {
 export const MsgExitSwapExternAmountOut = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOut",
   encode(message: MsgExitSwapExternAmountOut, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(16).uint64(message.poolId);
     }
     if (message.tokenOut !== undefined) {
       Coin.encode(message.tokenOut, writer.uint32(26).fork()).ldelim();
     }
-    if (message.shareInMaxAmount !== "") {
+    if (message.shareInMaxAmount !== undefined) {
       writer.uint32(34).string(message.shareInMaxAmount);
     }
     return writer;
@@ -2371,7 +2371,7 @@ function createBaseMsgExitSwapExternAmountOutResponse(): MsgExitSwapExternAmount
 export const MsgExitSwapExternAmountOutResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOutResponse",
   encode(message: MsgExitSwapExternAmountOutResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.shareInAmount !== "") {
+    if (message.shareInAmount !== undefined) {
       writer.uint32(10).string(message.shareInAmount);
     }
     return writer;

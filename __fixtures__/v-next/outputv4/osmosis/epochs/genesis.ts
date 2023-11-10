@@ -104,7 +104,7 @@ function createBaseEpochInfo(): EpochInfo {
 export const EpochInfo = {
   typeUrl: "/osmosis.epochs.v1beta1.EpochInfo",
   encode(message: EpochInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.identifier !== "") {
+    if (message.identifier !== undefined) {
       writer.uint32(10).string(message.identifier);
     }
     if (message.startTime !== undefined) {
@@ -113,16 +113,16 @@ export const EpochInfo = {
     if (message.duration !== undefined) {
       Duration.encode(message.duration, writer.uint32(26).fork()).ldelim();
     }
-    if (message.currentEpoch !== BigInt(0)) {
+    if (message.currentEpoch !== undefined) {
       writer.uint32(32).int64(message.currentEpoch);
     }
     if (message.currentEpochStartTime !== undefined) {
       Timestamp.encode(toTimestamp(message.currentEpochStartTime), writer.uint32(42).fork()).ldelim();
     }
-    if (message.epochCountingStarted === true) {
+    if (message.epochCountingStarted !== undefined) {
       writer.uint32(48).bool(message.epochCountingStarted);
     }
-    if (message.currentEpochStartHeight !== BigInt(0)) {
+    if (message.currentEpochStartHeight !== undefined) {
       writer.uint32(64).int64(message.currentEpochStartHeight);
     }
     return writer;

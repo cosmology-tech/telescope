@@ -88,10 +88,10 @@ function createBaseMsgCreateGauge(): MsgCreateGauge {
 export const MsgCreateGauge = {
   typeUrl: "/osmosis.incentives.MsgCreateGauge",
   encode(message: MsgCreateGauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.isPerpetual === true) {
+    if (message.isPerpetual !== undefined) {
       writer.uint32(8).bool(message.isPerpetual);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(18).string(message.owner);
     }
     if (message.distributeTo !== undefined) {
@@ -103,7 +103,7 @@ export const MsgCreateGauge = {
     if (message.startTime !== undefined) {
       Timestamp.encode(toTimestamp(message.startTime), writer.uint32(42).fork()).ldelim();
     }
-    if (message.numEpochsPaidOver !== BigInt(0)) {
+    if (message.numEpochsPaidOver !== undefined) {
       writer.uint32(48).uint64(message.numEpochsPaidOver);
     }
     return writer;
@@ -341,10 +341,10 @@ function createBaseMsgAddToGauge(): MsgAddToGauge {
 export const MsgAddToGauge = {
   typeUrl: "/osmosis.incentives.MsgAddToGauge",
   encode(message: MsgAddToGauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.gaugeId !== BigInt(0)) {
+    if (message.gaugeId !== undefined) {
       writer.uint32(16).uint64(message.gaugeId);
     }
     for (const v of message.rewards) {

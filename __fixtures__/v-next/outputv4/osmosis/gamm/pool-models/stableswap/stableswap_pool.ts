@@ -76,10 +76,10 @@ function createBasePoolParams(): PoolParams {
 export const PoolParams = {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.PoolParams",
   encode(message: PoolParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.swapFee !== "") {
+    if (message.swapFee !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.swapFee, 18).atomics);
     }
-    if (message.exitFee !== "") {
+    if (message.exitFee !== undefined) {
       writer.uint32(18).string(Decimal.fromUserInput(message.exitFee, 18).atomics);
     }
     return writer;
@@ -189,16 +189,16 @@ function createBasePool(): Pool {
 export const Pool = {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool",
   encode(message: Pool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
-    if (message.id !== BigInt(0)) {
+    if (message.id !== undefined) {
       writer.uint32(16).uint64(message.id);
     }
     if (message.poolParams !== undefined) {
       PoolParams.encode(message.poolParams, writer.uint32(26).fork()).ldelim();
     }
-    if (message.futurePoolGovernor !== "") {
+    if (message.futurePoolGovernor !== undefined) {
       writer.uint32(34).string(message.futurePoolGovernor);
     }
     if (message.totalShares !== undefined) {
@@ -212,7 +212,7 @@ export const Pool = {
       writer.uint64(v);
     }
     writer.ldelim();
-    if (message.scalingFactorController !== "") {
+    if (message.scalingFactorController !== undefined) {
       writer.uint32(66).string(message.scalingFactorController);
     }
     return writer;

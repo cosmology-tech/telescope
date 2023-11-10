@@ -1757,10 +1757,10 @@ function createBaseLogBucket(): LogBucket {
 export const LogBucket = {
   typeUrl: "/google.logging.v2.LogBucket",
   encode(message: LogBucket, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(26).string(message.description);
     }
     if (message.createTime !== undefined) {
@@ -1769,10 +1769,10 @@ export const LogBucket = {
     if (message.updateTime !== undefined) {
       Timestamp.encode(toTimestamp(message.updateTime), writer.uint32(42).fork()).ldelim();
     }
-    if (message.retentionDays !== 0) {
+    if (message.retentionDays !== undefined) {
       writer.uint32(88).int32(message.retentionDays);
     }
-    if (message.locked === true) {
+    if (message.locked !== undefined) {
       writer.uint32(72).bool(message.locked);
     }
     if (message.lifecycleState !== 0) {
@@ -1973,10 +1973,10 @@ function createBaseLogView(): LogView {
 export const LogView = {
   typeUrl: "/google.logging.v2.LogView",
   encode(message: LogView, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(26).string(message.description);
     }
     if (message.createTime !== undefined) {
@@ -1985,7 +1985,7 @@ export const LogView = {
     if (message.updateTime !== undefined) {
       Timestamp.encode(toTimestamp(message.updateTime), writer.uint32(42).fork()).ldelim();
     }
-    if (message.filter !== "") {
+    if (message.filter !== undefined) {
       writer.uint32(58).string(message.filter);
     }
     return writer;
@@ -2126,19 +2126,19 @@ function createBaseLogSink(): LogSink {
 export const LogSink = {
   typeUrl: "/google.logging.v2.LogSink",
   encode(message: LogSink, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.destination !== "") {
+    if (message.destination !== undefined) {
       writer.uint32(26).string(message.destination);
     }
-    if (message.filter !== "") {
+    if (message.filter !== undefined) {
       writer.uint32(42).string(message.filter);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(146).string(message.description);
     }
-    if (message.disabled === true) {
+    if (message.disabled !== undefined) {
       writer.uint32(152).bool(message.disabled);
     }
     for (const v of message.exclusions) {
@@ -2147,10 +2147,10 @@ export const LogSink = {
     if (message.outputVersionFormat !== 0) {
       writer.uint32(48).int32(message.outputVersionFormat);
     }
-    if (message.writerIdentity !== "") {
+    if (message.writerIdentity !== undefined) {
       writer.uint32(66).string(message.writerIdentity);
     }
-    if (message.includeChildren === true) {
+    if (message.includeChildren !== undefined) {
       writer.uint32(72).bool(message.includeChildren);
     }
     if (message.bigqueryOptions !== undefined) {
@@ -2381,10 +2381,10 @@ function createBaseBigQueryOptions(): BigQueryOptions {
 export const BigQueryOptions = {
   typeUrl: "/google.logging.v2.BigQueryOptions",
   encode(message: BigQueryOptions, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.usePartitionedTables === true) {
+    if (message.usePartitionedTables !== undefined) {
       writer.uint32(8).bool(message.usePartitionedTables);
     }
-    if (message.usesTimestampColumnPartitioning === true) {
+    if (message.usesTimestampColumnPartitioning !== undefined) {
       writer.uint32(24).bool(message.usesTimestampColumnPartitioning);
     }
     return writer;
@@ -2483,13 +2483,13 @@ function createBaseListBucketsRequest(): ListBucketsRequest {
 export const ListBucketsRequest = {
   typeUrl: "/google.logging.v2.ListBucketsRequest",
   encode(message: ListBucketsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(18).string(message.pageToken);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(24).int32(message.pageSize);
     }
     return writer;
@@ -2601,7 +2601,7 @@ export const ListBucketsResponse = {
     for (const v of message.buckets) {
       LogBucket.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -2712,10 +2712,10 @@ function createBaseCreateBucketRequest(): CreateBucketRequest {
 export const CreateBucketRequest = {
   typeUrl: "/google.logging.v2.CreateBucketRequest",
   encode(message: CreateBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.bucketId !== "") {
+    if (message.bucketId !== undefined) {
       writer.uint32(18).string(message.bucketId);
     }
     if (message.bucket !== undefined) {
@@ -2830,7 +2830,7 @@ function createBaseUpdateBucketRequest(): UpdateBucketRequest {
 export const UpdateBucketRequest = {
   typeUrl: "/google.logging.v2.UpdateBucketRequest",
   encode(message: UpdateBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.bucket !== undefined) {
@@ -2948,7 +2948,7 @@ function createBaseGetBucketRequest(): GetBucketRequest {
 export const GetBucketRequest = {
   typeUrl: "/google.logging.v2.GetBucketRequest",
   encode(message: GetBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -3034,7 +3034,7 @@ function createBaseDeleteBucketRequest(): DeleteBucketRequest {
 export const DeleteBucketRequest = {
   typeUrl: "/google.logging.v2.DeleteBucketRequest",
   encode(message: DeleteBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -3120,7 +3120,7 @@ function createBaseUndeleteBucketRequest(): UndeleteBucketRequest {
 export const UndeleteBucketRequest = {
   typeUrl: "/google.logging.v2.UndeleteBucketRequest",
   encode(message: UndeleteBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -3208,13 +3208,13 @@ function createBaseListViewsRequest(): ListViewsRequest {
 export const ListViewsRequest = {
   typeUrl: "/google.logging.v2.ListViewsRequest",
   encode(message: ListViewsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(18).string(message.pageToken);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(24).int32(message.pageSize);
     }
     return writer;
@@ -3326,7 +3326,7 @@ export const ListViewsResponse = {
     for (const v of message.views) {
       LogView.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -3437,10 +3437,10 @@ function createBaseCreateViewRequest(): CreateViewRequest {
 export const CreateViewRequest = {
   typeUrl: "/google.logging.v2.CreateViewRequest",
   encode(message: CreateViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.viewId !== "") {
+    if (message.viewId !== undefined) {
       writer.uint32(18).string(message.viewId);
     }
     if (message.view !== undefined) {
@@ -3555,7 +3555,7 @@ function createBaseUpdateViewRequest(): UpdateViewRequest {
 export const UpdateViewRequest = {
   typeUrl: "/google.logging.v2.UpdateViewRequest",
   encode(message: UpdateViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.view !== undefined) {
@@ -3673,7 +3673,7 @@ function createBaseGetViewRequest(): GetViewRequest {
 export const GetViewRequest = {
   typeUrl: "/google.logging.v2.GetViewRequest",
   encode(message: GetViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -3759,7 +3759,7 @@ function createBaseDeleteViewRequest(): DeleteViewRequest {
 export const DeleteViewRequest = {
   typeUrl: "/google.logging.v2.DeleteViewRequest",
   encode(message: DeleteViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -3847,13 +3847,13 @@ function createBaseListSinksRequest(): ListSinksRequest {
 export const ListSinksRequest = {
   typeUrl: "/google.logging.v2.ListSinksRequest",
   encode(message: ListSinksRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(18).string(message.pageToken);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(24).int32(message.pageSize);
     }
     return writer;
@@ -3965,7 +3965,7 @@ export const ListSinksResponse = {
     for (const v of message.sinks) {
       LogSink.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -4074,7 +4074,7 @@ function createBaseGetSinkRequest(): GetSinkRequest {
 export const GetSinkRequest = {
   typeUrl: "/google.logging.v2.GetSinkRequest",
   encode(message: GetSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sinkName !== "") {
+    if (message.sinkName !== undefined) {
       writer.uint32(10).string(message.sinkName);
     }
     return writer;
@@ -4162,13 +4162,13 @@ function createBaseCreateSinkRequest(): CreateSinkRequest {
 export const CreateSinkRequest = {
   typeUrl: "/google.logging.v2.CreateSinkRequest",
   encode(message: CreateSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
     if (message.sink !== undefined) {
       LogSink.encode(message.sink, writer.uint32(18).fork()).ldelim();
     }
-    if (message.uniqueWriterIdentity === true) {
+    if (message.uniqueWriterIdentity !== undefined) {
       writer.uint32(24).bool(message.uniqueWriterIdentity);
     }
     return writer;
@@ -4281,13 +4281,13 @@ function createBaseUpdateSinkRequest(): UpdateSinkRequest {
 export const UpdateSinkRequest = {
   typeUrl: "/google.logging.v2.UpdateSinkRequest",
   encode(message: UpdateSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sinkName !== "") {
+    if (message.sinkName !== undefined) {
       writer.uint32(10).string(message.sinkName);
     }
     if (message.sink !== undefined) {
       LogSink.encode(message.sink, writer.uint32(18).fork()).ldelim();
     }
-    if (message.uniqueWriterIdentity === true) {
+    if (message.uniqueWriterIdentity !== undefined) {
       writer.uint32(24).bool(message.uniqueWriterIdentity);
     }
     if (message.updateMask !== undefined) {
@@ -4413,7 +4413,7 @@ function createBaseDeleteSinkRequest(): DeleteSinkRequest {
 export const DeleteSinkRequest = {
   typeUrl: "/google.logging.v2.DeleteSinkRequest",
   encode(message: DeleteSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sinkName !== "") {
+    if (message.sinkName !== undefined) {
       writer.uint32(10).string(message.sinkName);
     }
     return writer;
@@ -4504,16 +4504,16 @@ function createBaseLogExclusion(): LogExclusion {
 export const LogExclusion = {
   typeUrl: "/google.logging.v2.LogExclusion",
   encode(message: LogExclusion, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
-    if (message.filter !== "") {
+    if (message.filter !== undefined) {
       writer.uint32(26).string(message.filter);
     }
-    if (message.disabled === true) {
+    if (message.disabled !== undefined) {
       writer.uint32(32).bool(message.disabled);
     }
     if (message.createTime !== undefined) {
@@ -4662,13 +4662,13 @@ function createBaseListExclusionsRequest(): ListExclusionsRequest {
 export const ListExclusionsRequest = {
   typeUrl: "/google.logging.v2.ListExclusionsRequest",
   encode(message: ListExclusionsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(18).string(message.pageToken);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(24).int32(message.pageSize);
     }
     return writer;
@@ -4780,7 +4780,7 @@ export const ListExclusionsResponse = {
     for (const v of message.exclusions) {
       LogExclusion.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -4889,7 +4889,7 @@ function createBaseGetExclusionRequest(): GetExclusionRequest {
 export const GetExclusionRequest = {
   typeUrl: "/google.logging.v2.GetExclusionRequest",
   encode(message: GetExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -4976,7 +4976,7 @@ function createBaseCreateExclusionRequest(): CreateExclusionRequest {
 export const CreateExclusionRequest = {
   typeUrl: "/google.logging.v2.CreateExclusionRequest",
   encode(message: CreateExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
     if (message.exclusion !== undefined) {
@@ -5080,7 +5080,7 @@ function createBaseUpdateExclusionRequest(): UpdateExclusionRequest {
 export const UpdateExclusionRequest = {
   typeUrl: "/google.logging.v2.UpdateExclusionRequest",
   encode(message: UpdateExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.exclusion !== undefined) {
@@ -5198,7 +5198,7 @@ function createBaseDeleteExclusionRequest(): DeleteExclusionRequest {
 export const DeleteExclusionRequest = {
   typeUrl: "/google.logging.v2.DeleteExclusionRequest",
   encode(message: DeleteExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -5284,7 +5284,7 @@ function createBaseGetCmekSettingsRequest(): GetCmekSettingsRequest {
 export const GetCmekSettingsRequest = {
   typeUrl: "/google.logging.v2.GetCmekSettingsRequest",
   encode(message: GetCmekSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -5372,7 +5372,7 @@ function createBaseUpdateCmekSettingsRequest(): UpdateCmekSettingsRequest {
 export const UpdateCmekSettingsRequest = {
   typeUrl: "/google.logging.v2.UpdateCmekSettingsRequest",
   encode(message: UpdateCmekSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.cmekSettings !== undefined) {
@@ -5492,13 +5492,13 @@ function createBaseCmekSettings(): CmekSettings {
 export const CmekSettings = {
   typeUrl: "/google.logging.v2.CmekSettings",
   encode(message: CmekSettings, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.kmsKeyName !== "") {
+    if (message.kmsKeyName !== undefined) {
       writer.uint32(18).string(message.kmsKeyName);
     }
-    if (message.serviceAccountId !== "") {
+    if (message.serviceAccountId !== undefined) {
       writer.uint32(26).string(message.serviceAccountId);
     }
     return writer;
@@ -5606,7 +5606,7 @@ function createBaseGetSettingsRequest(): GetSettingsRequest {
 export const GetSettingsRequest = {
   typeUrl: "/google.logging.v2.GetSettingsRequest",
   encode(message: GetSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -5694,7 +5694,7 @@ function createBaseUpdateSettingsRequest(): UpdateSettingsRequest {
 export const UpdateSettingsRequest = {
   typeUrl: "/google.logging.v2.UpdateSettingsRequest",
   encode(message: UpdateSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.settings !== undefined) {
@@ -5816,19 +5816,19 @@ function createBaseSettings(): Settings {
 export const Settings = {
   typeUrl: "/google.logging.v2.Settings",
   encode(message: Settings, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.kmsKeyName !== "") {
+    if (message.kmsKeyName !== undefined) {
       writer.uint32(18).string(message.kmsKeyName);
     }
-    if (message.kmsServiceAccountId !== "") {
+    if (message.kmsServiceAccountId !== undefined) {
       writer.uint32(26).string(message.kmsServiceAccountId);
     }
-    if (message.storageLocation !== "") {
+    if (message.storageLocation !== undefined) {
       writer.uint32(34).string(message.storageLocation);
     }
-    if (message.disableDefaultSink === true) {
+    if (message.disableDefaultSink !== undefined) {
       writer.uint32(40).bool(message.disableDefaultSink);
     }
     return writer;
@@ -5960,13 +5960,13 @@ function createBaseCopyLogEntriesRequest(): CopyLogEntriesRequest {
 export const CopyLogEntriesRequest = {
   typeUrl: "/google.logging.v2.CopyLogEntriesRequest",
   encode(message: CopyLogEntriesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.filter !== "") {
+    if (message.filter !== undefined) {
       writer.uint32(26).string(message.filter);
     }
-    if (message.destination !== "") {
+    if (message.destination !== undefined) {
       writer.uint32(34).string(message.destination);
     }
     return writer;
@@ -6089,16 +6089,16 @@ export const CopyLogEntriesMetadata = {
     if (message.state !== 0) {
       writer.uint32(24).int32(message.state);
     }
-    if (message.cancellationRequested === true) {
+    if (message.cancellationRequested !== undefined) {
       writer.uint32(32).bool(message.cancellationRequested);
     }
     if (message.request !== undefined) {
       CopyLogEntriesRequest.encode(message.request, writer.uint32(42).fork()).ldelim();
     }
-    if (message.progress !== 0) {
+    if (message.progress !== undefined) {
       writer.uint32(48).int32(message.progress);
     }
-    if (message.writerIdentity !== "") {
+    if (message.writerIdentity !== undefined) {
       writer.uint32(58).string(message.writerIdentity);
     }
     return writer;
@@ -6252,7 +6252,7 @@ function createBaseCopyLogEntriesResponse(): CopyLogEntriesResponse {
 export const CopyLogEntriesResponse = {
   typeUrl: "/google.logging.v2.CopyLogEntriesResponse",
   encode(message: CopyLogEntriesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.logEntriesCopiedCount !== BigInt(0)) {
+    if (message.logEntriesCopiedCount !== undefined) {
       writer.uint32(8).int64(message.logEntriesCopiedCount);
     }
     return writer;

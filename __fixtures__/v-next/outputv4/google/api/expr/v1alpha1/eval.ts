@@ -285,10 +285,10 @@ function createBaseEvalState_Result(): EvalState_Result {
 export const EvalState_Result = {
   typeUrl: "/google.api.expr.v1alpha1.Result",
   encode(message: EvalState_Result, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.expr !== BigInt(0)) {
+    if (message.expr !== undefined) {
       writer.uint32(8).int64(message.expr);
     }
-    if (message.value !== BigInt(0)) {
+    if (message.value !== undefined) {
       writer.uint32(16).int64(message.value);
     }
     return writer;

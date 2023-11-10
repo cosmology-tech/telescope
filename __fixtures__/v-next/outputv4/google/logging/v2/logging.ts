@@ -551,7 +551,7 @@ function createBaseDeleteLogRequest(): DeleteLogRequest {
 export const DeleteLogRequest = {
   typeUrl: "/google.logging.v2.DeleteLogRequest",
   encode(message: DeleteLogRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.logName !== "") {
+    if (message.logName !== undefined) {
       writer.uint32(10).string(message.logName);
     }
     return writer;
@@ -637,10 +637,10 @@ function createBaseWriteLogEntriesRequest_LabelsEntry(): WriteLogEntriesRequest_
 }
 export const WriteLogEntriesRequest_LabelsEntry = {
   encode(message: WriteLogEntriesRequest_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -736,7 +736,7 @@ function createBaseWriteLogEntriesRequest(): WriteLogEntriesRequest {
 export const WriteLogEntriesRequest = {
   typeUrl: "/google.logging.v2.WriteLogEntriesRequest",
   encode(message: WriteLogEntriesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.logName !== "") {
+    if (message.logName !== undefined) {
       writer.uint32(10).string(message.logName);
     }
     if (message.resource !== undefined) {
@@ -751,10 +751,10 @@ export const WriteLogEntriesRequest = {
     for (const v of message.entries) {
       LogEntry.encode(v!, writer.uint32(34).fork()).ldelim();
     }
-    if (message.partialSuccess === true) {
+    if (message.partialSuccess !== undefined) {
       writer.uint32(40).bool(message.partialSuccess);
     }
-    if (message.dryRun === true) {
+    if (message.dryRun !== undefined) {
       writer.uint32(48).bool(message.dryRun);
     }
     return writer;
@@ -1021,7 +1021,7 @@ function createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry(): WriteLogE
 }
 export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
   encode(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== 0) {
+    if (message.key !== undefined) {
       writer.uint32(8).int32(message.key);
     }
     if (message.value !== undefined) {
@@ -1258,16 +1258,16 @@ export const ListLogEntriesRequest = {
     for (const v of message.resourceNames) {
       writer.uint32(66).string(v!);
     }
-    if (message.filter !== "") {
+    if (message.filter !== undefined) {
       writer.uint32(18).string(message.filter);
     }
-    if (message.orderBy !== "") {
+    if (message.orderBy !== undefined) {
       writer.uint32(26).string(message.orderBy);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(32).int32(message.pageSize);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(42).string(message.pageToken);
     }
     return writer;
@@ -1413,7 +1413,7 @@ export const ListLogEntriesResponse = {
     for (const v of message.entries) {
       LogEntry.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -1523,10 +1523,10 @@ function createBaseListMonitoredResourceDescriptorsRequest(): ListMonitoredResou
 export const ListMonitoredResourceDescriptorsRequest = {
   typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsRequest",
   encode(message: ListMonitoredResourceDescriptorsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(8).int32(message.pageSize);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(18).string(message.pageToken);
     }
     return writer;
@@ -1627,7 +1627,7 @@ export const ListMonitoredResourceDescriptorsResponse = {
     for (const v of message.resourceDescriptors) {
       MonitoredResourceDescriptor.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -1739,13 +1739,13 @@ function createBaseListLogsRequest(): ListLogsRequest {
 export const ListLogsRequest = {
   typeUrl: "/google.logging.v2.ListLogsRequest",
   encode(message: ListLogsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(16).int32(message.pageSize);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(26).string(message.pageToken);
     }
     for (const v of message.resourceNames) {
@@ -1883,7 +1883,7 @@ export const ListLogsResponse = {
     for (const v of message.logNames) {
       writer.uint32(26).string(v!);
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -1997,7 +1997,7 @@ export const TailLogEntriesRequest = {
     for (const v of message.resourceNames) {
       writer.uint32(10).string(v!);
     }
-    if (message.filter !== "") {
+    if (message.filter !== undefined) {
       writer.uint32(18).string(message.filter);
     }
     if (message.bufferWindow !== undefined) {
@@ -2251,7 +2251,7 @@ export const TailLogEntriesResponse_SuppressionInfo = {
     if (message.reason !== 0) {
       writer.uint32(8).int32(message.reason);
     }
-    if (message.suppressedCount !== 0) {
+    if (message.suppressedCount !== undefined) {
       writer.uint32(16).int32(message.suppressedCount);
     }
     return writer;

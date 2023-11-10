@@ -291,13 +291,13 @@ function createBaseBlockParams(): BlockParams {
 export const BlockParams = {
   typeUrl: "/tendermint.types.BlockParams",
   encode(message: BlockParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.maxBytes !== BigInt(0)) {
+    if (message.maxBytes !== undefined) {
       writer.uint32(8).int64(message.maxBytes);
     }
-    if (message.maxGas !== BigInt(0)) {
+    if (message.maxGas !== undefined) {
       writer.uint32(16).int64(message.maxGas);
     }
-    if (message.timeIotaMs !== BigInt(0)) {
+    if (message.timeIotaMs !== undefined) {
       writer.uint32(24).int64(message.timeIotaMs);
     }
     return writer;
@@ -413,13 +413,13 @@ function createBaseEvidenceParams(): EvidenceParams {
 export const EvidenceParams = {
   typeUrl: "/tendermint.types.EvidenceParams",
   encode(message: EvidenceParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.maxAgeNumBlocks !== BigInt(0)) {
+    if (message.maxAgeNumBlocks !== undefined) {
       writer.uint32(8).int64(message.maxAgeNumBlocks);
     }
     if (message.maxAgeDuration !== undefined) {
       Duration.encode(message.maxAgeDuration, writer.uint32(18).fork()).ldelim();
     }
-    if (message.maxBytes !== BigInt(0)) {
+    if (message.maxBytes !== undefined) {
       writer.uint32(24).int64(message.maxBytes);
     }
     return writer;
@@ -631,7 +631,7 @@ function createBaseVersionParams(): VersionParams {
 export const VersionParams = {
   typeUrl: "/tendermint.types.VersionParams",
   encode(message: VersionParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.appVersion !== BigInt(0)) {
+    if (message.appVersion !== undefined) {
       writer.uint32(8).uint64(message.appVersion);
     }
     return writer;
@@ -720,10 +720,10 @@ function createBaseHashedParams(): HashedParams {
 export const HashedParams = {
   typeUrl: "/tendermint.types.HashedParams",
   encode(message: HashedParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.blockMaxBytes !== BigInt(0)) {
+    if (message.blockMaxBytes !== undefined) {
       writer.uint32(8).int64(message.blockMaxBytes);
     }
-    if (message.blockMaxGas !== BigInt(0)) {
+    if (message.blockMaxGas !== undefined) {
       writer.uint32(16).int64(message.blockMaxGas);
     }
     return writer;

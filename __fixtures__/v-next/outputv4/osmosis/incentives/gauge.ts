@@ -91,10 +91,10 @@ function createBaseGauge(): Gauge {
 export const Gauge = {
   typeUrl: "/osmosis.incentives.Gauge",
   encode(message: Gauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== BigInt(0)) {
+    if (message.id !== undefined) {
       writer.uint32(8).uint64(message.id);
     }
-    if (message.isPerpetual === true) {
+    if (message.isPerpetual !== undefined) {
       writer.uint32(16).bool(message.isPerpetual);
     }
     if (message.distributeTo !== undefined) {
@@ -106,10 +106,10 @@ export const Gauge = {
     if (message.startTime !== undefined) {
       Timestamp.encode(toTimestamp(message.startTime), writer.uint32(42).fork()).ldelim();
     }
-    if (message.numEpochsPaidOver !== BigInt(0)) {
+    if (message.numEpochsPaidOver !== undefined) {
       writer.uint32(48).uint64(message.numEpochsPaidOver);
     }
-    if (message.filledEpochs !== BigInt(0)) {
+    if (message.filledEpochs !== undefined) {
       writer.uint32(56).uint64(message.filledEpochs);
     }
     for (const v of message.distributedCoins) {

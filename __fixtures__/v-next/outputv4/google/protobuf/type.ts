@@ -401,7 +401,7 @@ function createBaseType(): Type {
 export const Type = {
   typeUrl: "/google.protobuf.Type",
   encode(message: Type, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.fields) {
@@ -610,28 +610,28 @@ export const Field = {
     if (message.cardinality !== 0) {
       writer.uint32(16).int32(message.cardinality);
     }
-    if (message.number !== 0) {
+    if (message.number !== undefined) {
       writer.uint32(24).int32(message.number);
     }
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(34).string(message.name);
     }
-    if (message.typeUrl !== "") {
+    if (message.typeUrl !== undefined) {
       writer.uint32(50).string(message.typeUrl);
     }
-    if (message.oneofIndex !== 0) {
+    if (message.oneofIndex !== undefined) {
       writer.uint32(56).int32(message.oneofIndex);
     }
-    if (message.packed === true) {
+    if (message.packed !== undefined) {
       writer.uint32(64).bool(message.packed);
     }
     for (const v of message.options) {
       Option.encode(v!, writer.uint32(74).fork()).ldelim();
     }
-    if (message.jsonName !== "") {
+    if (message.jsonName !== undefined) {
       writer.uint32(82).string(message.jsonName);
     }
-    if (message.defaultValue !== "") {
+    if (message.defaultValue !== undefined) {
       writer.uint32(90).string(message.defaultValue);
     }
     return writer;
@@ -832,7 +832,7 @@ function createBaseEnum(): Enum {
 export const Enum = {
   typeUrl: "/google.protobuf.Enum",
   encode(message: Enum, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.enumvalue) {
@@ -1002,10 +1002,10 @@ function createBaseEnumValue(): EnumValue {
 export const EnumValue = {
   typeUrl: "/google.protobuf.EnumValue",
   encode(message: EnumValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.number !== 0) {
+    if (message.number !== undefined) {
       writer.uint32(16).int32(message.number);
     }
     for (const v of message.options) {
@@ -1129,7 +1129,7 @@ function createBaseOption(): Option {
 export const Option = {
   typeUrl: "/google.protobuf.Option",
   encode(message: Option, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.value !== undefined) {

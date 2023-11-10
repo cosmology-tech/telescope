@@ -65,7 +65,7 @@ function createBaseCapability(): Capability {
 export const Capability = {
   typeUrl: "/cosmos.capability.v1beta1.Capability",
   encode(message: Capability, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.index !== BigInt(0)) {
+    if (message.index !== undefined) {
       writer.uint32(8).uint64(message.index);
     }
     return writer;
@@ -160,10 +160,10 @@ function createBaseOwner(): Owner {
 export const Owner = {
   typeUrl: "/cosmos.capability.v1beta1.Owner",
   encode(message: Owner, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.module !== "") {
+    if (message.module !== undefined) {
       writer.uint32(10).string(message.module);
     }
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(18).string(message.name);
     }
     return writer;

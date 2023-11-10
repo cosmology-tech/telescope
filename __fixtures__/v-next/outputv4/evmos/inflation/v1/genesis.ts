@@ -64,16 +64,16 @@ export const GenesisState = {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
-    if (message.period !== BigInt(0)) {
+    if (message.period !== undefined) {
       writer.uint32(16).uint64(message.period);
     }
-    if (message.epochIdentifier !== "") {
+    if (message.epochIdentifier !== undefined) {
       writer.uint32(26).string(message.epochIdentifier);
     }
-    if (message.epochsPerPeriod !== BigInt(0)) {
+    if (message.epochsPerPeriod !== undefined) {
       writer.uint32(32).int64(message.epochsPerPeriod);
     }
-    if (message.skippedEpochs !== BigInt(0)) {
+    if (message.skippedEpochs !== undefined) {
       writer.uint32(40).uint64(message.skippedEpochs);
     }
     return writer;
@@ -214,7 +214,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/evmos.inflation.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.mintDenom !== "") {
+    if (message.mintDenom !== undefined) {
       writer.uint32(10).string(message.mintDenom);
     }
     if (message.exponentialCalculation !== undefined) {
@@ -223,7 +223,7 @@ export const Params = {
     if (message.inflationDistribution !== undefined) {
       InflationDistribution.encode(message.inflationDistribution, writer.uint32(26).fork()).ldelim();
     }
-    if (message.enableInflation === true) {
+    if (message.enableInflation !== undefined) {
       writer.uint32(32).bool(message.enableInflation);
     }
     return writer;

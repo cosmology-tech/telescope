@@ -85,16 +85,16 @@ function createBaseQueryAccountsRequest(): QueryAccountsRequest {
 export const QueryAccountsRequest = {
   typeUrl: "/akash.escrow.v1beta2.QueryAccountsRequest",
   encode(message: QueryAccountsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.scope !== "") {
+    if (message.scope !== undefined) {
       writer.uint32(10).string(message.scope);
     }
-    if (message.xid !== "") {
+    if (message.xid !== undefined) {
       writer.uint32(18).string(message.xid);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(26).string(message.owner);
     }
-    if (message.state !== "") {
+    if (message.state !== undefined) {
       writer.uint32(34).string(message.state);
     }
     if (message.pagination !== undefined) {
@@ -361,19 +361,19 @@ function createBaseQueryPaymentsRequest(): QueryPaymentsRequest {
 export const QueryPaymentsRequest = {
   typeUrl: "/akash.escrow.v1beta2.QueryPaymentsRequest",
   encode(message: QueryPaymentsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.scope !== "") {
+    if (message.scope !== undefined) {
       writer.uint32(10).string(message.scope);
     }
-    if (message.xid !== "") {
+    if (message.xid !== undefined) {
       writer.uint32(18).string(message.xid);
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(26).string(message.id);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(34).string(message.owner);
     }
-    if (message.state !== "") {
+    if (message.state !== undefined) {
       writer.uint32(42).string(message.state);
     }
     if (message.pagination !== undefined) {

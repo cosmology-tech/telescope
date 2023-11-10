@@ -151,7 +151,7 @@ function createBaseStruct_FieldsEntry(): Struct_FieldsEntry {
 }
 export const Struct_FieldsEntry = {
   encode(message: Struct_FieldsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
