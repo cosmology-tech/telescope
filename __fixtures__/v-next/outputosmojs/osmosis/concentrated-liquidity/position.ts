@@ -193,7 +193,7 @@ export const Position = {
       poolId: BigInt(object.pool_id),
       lowerTick: BigInt(object.lower_tick),
       upperTick: BigInt(object.upper_tick),
-      joinTime: object.join_time,
+      joinTime: object?.join_time ? fromTimestamp(Timestamp.fromAmino(object.join_time)) : undefined,
       liquidity: object.liquidity
     };
   },
@@ -204,7 +204,7 @@ export const Position = {
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     obj.lower_tick = message.lowerTick ? message.lowerTick.toString() : undefined;
     obj.upper_tick = message.upperTick ? message.upperTick.toString() : undefined;
-    obj.join_time = message.joinTime;
+    obj.join_time = message.joinTime ? Timestamp.toAmino(toTimestamp(message.joinTime)) : undefined;
     obj.liquidity = message.liquidity;
     return obj;
   },

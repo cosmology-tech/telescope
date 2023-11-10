@@ -49,20 +49,7 @@ export const aminoInterface = {
         }
     },
     timestamp(args: RenderAminoField) {
-        const timestampFormat = args.context.pluginValue('prototypes.typingsFormat.timestamp');
-        switch (timestampFormat) {
-            case 'date':
-            // TODO check is date is Date for amino?
-            // return t.tsPropertySignature(
-            //     t.identifier(args.context.aminoCaseField(args.field)),
-            //     t.tsTypeAnnotation(
-            //         t.tsTypeReference(t.identifier('Date'))
-            //     )
-            // );
-            case 'timestamp':
-            default:
-                return aminoInterface.type(args);
-        }
+        return aminoInterface.string(args);
     },
     enum(args: RenderAminoField) {
         return t.tsPropertySignature(

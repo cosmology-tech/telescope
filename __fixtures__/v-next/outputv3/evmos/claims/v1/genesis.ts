@@ -56,7 +56,7 @@ export interface ParamsAmino {
   /** enable claiming process */
   enable_claims: boolean;
   /** timestamp of the airdrop start */
-  airdrop_start_time?: Date;
+  airdrop_start_time?: string;
   /** duration until decay of claimable tokens begin */
   duration_until_decay?: DurationAmino;
   /** duration of the token claim decay period */
@@ -337,7 +337,7 @@ export const Params = {
   fromAmino(object: ParamsAmino): Params {
     return {
       enableClaims: object.enable_claims,
-      airdropStartTime: object.airdrop_start_time,
+      airdropStartTime: object?.airdrop_start_time ? fromTimestamp(Timestamp.fromAmino(object.airdrop_start_time)) : undefined,
       durationUntilDecay: object?.duration_until_decay ? Duration.fromAmino(object.duration_until_decay) : undefined,
       durationOfDecay: object?.duration_of_decay ? Duration.fromAmino(object.duration_of_decay) : undefined,
       claimsDenom: object.claims_denom,
@@ -348,7 +348,7 @@ export const Params = {
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     obj.enable_claims = message.enableClaims;
-    obj.airdrop_start_time = message.airdropStartTime;
+    obj.airdrop_start_time = message.airdropStartTime ? Timestamp.toAmino(toTimestamp(message.airdropStartTime)) : undefined;
     obj.duration_until_decay = message.durationUntilDecay ? Duration.toAmino(message.durationUntilDecay) : undefined;
     obj.duration_of_decay = message.durationOfDecay ? Duration.toAmino(message.durationOfDecay) : undefined;
     obj.claims_denom = message.claimsDenom;

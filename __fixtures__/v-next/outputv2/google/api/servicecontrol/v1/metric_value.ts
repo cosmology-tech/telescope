@@ -81,13 +81,13 @@ export interface MetricValueAmino {
    * documentation in the service configuration for details. If not specified,
    * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
    */
-  start_time?: Date;
+  start_time?: string;
   /**
    * The end of the time period over which this metric value's measurement
    * applies.  If not specified,
    * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
    */
-  end_time?: Date;
+  end_time?: string;
   /** A boolean value. */
   bool_value?: boolean;
   /** A signed 64-bit integer value. */
@@ -429,8 +429,8 @@ export const MetricValue = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      startTime: object?.start_time,
-      endTime: object?.end_time,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
+      endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : undefined,
       boolValue: object?.bool_value,
       int64Value: object?.int64_value ? BigInt(object.int64_value) : undefined,
       doubleValue: object?.double_value,
@@ -446,8 +446,8 @@ export const MetricValue = {
         obj.labels[k] = v;
       });
     }
-    obj.start_time = message.startTime;
-    obj.end_time = message.endTime;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
+    obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
     obj.bool_value = message.boolValue;
     obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
     obj.double_value = message.doubleValue;

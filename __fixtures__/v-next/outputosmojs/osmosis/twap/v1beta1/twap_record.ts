@@ -248,12 +248,12 @@ export const TwapRecord = {
       asset0Denom: object.asset0_denom,
       asset1Denom: object.asset1_denom,
       height: BigInt(object.height),
-      time: object.time,
+      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
       p0LastSpotPrice: object.p0_last_spot_price,
       p1LastSpotPrice: object.p1_last_spot_price,
       p0ArithmeticTwapAccumulator: object.p0_arithmetic_twap_accumulator,
       p1ArithmeticTwapAccumulator: object.p1_arithmetic_twap_accumulator,
-      lastErrorTime: object.last_error_time
+      lastErrorTime: object?.last_error_time ? fromTimestamp(Timestamp.fromAmino(object.last_error_time)) : undefined
     };
   },
   toAmino(message: TwapRecord): TwapRecordAmino {
@@ -262,12 +262,12 @@ export const TwapRecord = {
     obj.asset0_denom = message.asset0Denom;
     obj.asset1_denom = message.asset1Denom;
     obj.height = message.height ? message.height.toString() : undefined;
-    obj.time = message.time;
+    obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
     obj.p0_last_spot_price = message.p0LastSpotPrice;
     obj.p1_last_spot_price = message.p1LastSpotPrice;
     obj.p0_arithmetic_twap_accumulator = message.p0ArithmeticTwapAccumulator;
     obj.p1_arithmetic_twap_accumulator = message.p1ArithmeticTwapAccumulator;
-    obj.last_error_time = message.lastErrorTime;
+    obj.last_error_time = message.lastErrorTime ? Timestamp.toAmino(toTimestamp(message.lastErrorTime)) : undefined;
     return obj;
   },
   fromAminoMsg(object: TwapRecordAminoMsg): TwapRecord {

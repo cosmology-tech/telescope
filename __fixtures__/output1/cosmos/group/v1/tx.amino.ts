@@ -2,7 +2,6 @@ import { Member, MemberSDKType, VoteOption, VoteOptionSDKType, voteOptionFromJSO
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../helpers";
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { execFromJSON, MsgCreateGroup, MsgCreateGroupSDKType, MsgUpdateGroupMembers, MsgUpdateGroupMembersSDKType, MsgUpdateGroupAdmin, MsgUpdateGroupAdminSDKType, MsgUpdateGroupMetadata, MsgUpdateGroupMetadataSDKType, MsgCreateGroupPolicy, MsgCreateGroupPolicySDKType, MsgCreateGroupWithPolicy, MsgCreateGroupWithPolicySDKType, MsgUpdateGroupPolicyAdmin, MsgUpdateGroupPolicyAdminSDKType, MsgUpdateGroupPolicyDecisionPolicy, MsgUpdateGroupPolicyDecisionPolicySDKType, MsgUpdateGroupPolicyMetadata, MsgUpdateGroupPolicyMetadataSDKType, MsgSubmitProposal, MsgSubmitProposalSDKType, MsgWithdrawProposal, MsgWithdrawProposalSDKType, MsgVote, MsgVoteSDKType, MsgExec, MsgExecSDKType, MsgLeaveGroup, MsgLeaveGroupSDKType } from "./tx";
 export interface MsgCreateGroupAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgCreateGroup";
@@ -12,10 +11,7 @@ export interface MsgCreateGroupAminoType extends AminoMsg {
       address: string;
       weight: string;
       metadata: string;
-      added_at: {
-        seconds: string;
-        nanos: number;
-      };
+      added_at: string;
     }[];
     metadata: string;
   };
@@ -29,10 +25,7 @@ export interface MsgUpdateGroupMembersAminoType extends AminoMsg {
       address: string;
       weight: string;
       metadata: string;
-      added_at: {
-        seconds: string;
-        nanos: number;
-      };
+      added_at: string;
     }[];
   };
 }
@@ -72,10 +65,7 @@ export interface MsgCreateGroupWithPolicyAminoType extends AminoMsg {
       address: string;
       weight: string;
       metadata: string;
-      added_at: {
-        seconds: string;
-        nanos: number;
-      };
+      added_at: string;
     }[];
     group_metadata: string;
     group_policy_metadata: string;

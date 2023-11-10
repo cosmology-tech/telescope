@@ -491,7 +491,7 @@ export interface Distribution_ExemplarAmino {
    */
   value: number;
   /** The observation (sampling) time of the above value. */
-  timestamp?: Date;
+  timestamp?: string;
   /**
    * Contextual information about the example value. Examples are:
    * 
@@ -1325,14 +1325,14 @@ export const Distribution_Exemplar = {
   fromAmino(object: Distribution_ExemplarAmino): Distribution_Exemplar {
     return {
       value: object.value,
-      timestamp: object?.timestamp,
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined,
       attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromAmino(e)) : []
     };
   },
   toAmino(message: Distribution_Exemplar): Distribution_ExemplarAmino {
     const obj: any = {};
     obj.value = message.value;
-    obj.timestamp = message.timestamp;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     if (message.attachments) {
       obj.attachments = message.attachments.map(e => e ? Any.toAmino(e) : undefined);
     } else {

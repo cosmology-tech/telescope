@@ -1717,7 +1717,7 @@ export const RequestInitChain = {
   },
   fromAmino(object: RequestInitChainAmino): RequestInitChain {
     return {
-      time: object.time,
+      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
       chainId: object.chain_id,
       consensusParams: object?.consensus_params ? ConsensusParams.fromAmino(object.consensus_params) : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromAmino(e)) : [],
@@ -1727,7 +1727,7 @@ export const RequestInitChain = {
   },
   toAmino(message: RequestInitChain): RequestInitChainAmino {
     const obj: any = {};
-    obj.time = message.time;
+    obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
     obj.chain_id = message.chainId;
     obj.consensus_params = message.consensusParams ? ConsensusParams.toAmino(message.consensusParams) : undefined;
     if (message.validators) {
@@ -6201,7 +6201,7 @@ export const Evidence = {
       type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : -1,
       validator: object?.validator ? Validator.fromAmino(object.validator) : undefined,
       height: BigInt(object.height),
-      time: object.time,
+      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
       totalVotingPower: BigInt(object.total_voting_power)
     };
   },
@@ -6210,7 +6210,7 @@ export const Evidence = {
     obj.type = message.type;
     obj.validator = message.validator ? Validator.toAmino(message.validator) : undefined;
     obj.height = message.height ? message.height.toString() : undefined;
-    obj.time = message.time;
+    obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
     obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
     return obj;
   },

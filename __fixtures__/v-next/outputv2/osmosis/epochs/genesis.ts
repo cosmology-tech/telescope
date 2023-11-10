@@ -77,7 +77,7 @@ export interface EpochInfoAmino {
    * If start_time is in the future, the epoch will not begin until the start
    * time.
    */
-  start_time?: Date;
+  start_time?: string;
   /**
    * duration is the time in between epoch ticks.
    * In order for intended behavior to be met, duration should
@@ -111,7 +111,7 @@ export interface EpochInfoAmino {
    * * The t=34 block will start the epoch for (30, 35]
    * * The **t=36** block will start the epoch for (35, 40]
    */
-  current_epoch_start_time?: Date;
+  current_epoch_start_time?: string;
   /**
    * epoch_counting_started is a boolean, that indicates whether this
    * epoch timer has began yet.
@@ -297,10 +297,10 @@ export const EpochInfo = {
   fromAmino(object: EpochInfoAmino): EpochInfo {
     return {
       identifier: object.identifier,
-      startTime: object.start_time,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
       currentEpoch: BigInt(object.current_epoch),
-      currentEpochStartTime: object.current_epoch_start_time,
+      currentEpochStartTime: object?.current_epoch_start_time ? fromTimestamp(Timestamp.fromAmino(object.current_epoch_start_time)) : undefined,
       epochCountingStarted: object.epoch_counting_started,
       currentEpochStartHeight: BigInt(object.current_epoch_start_height)
     };
@@ -308,10 +308,10 @@ export const EpochInfo = {
   toAmino(message: EpochInfo): EpochInfoAmino {
     const obj: any = {};
     obj.identifier = message.identifier;
-    obj.start_time = message.startTime;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     obj.current_epoch = message.currentEpoch ? message.currentEpoch.toString() : undefined;
-    obj.current_epoch_start_time = message.currentEpochStartTime;
+    obj.current_epoch_start_time = message.currentEpochStartTime ? Timestamp.toAmino(toTimestamp(message.currentEpochStartTime)) : undefined;
     obj.epoch_counting_started = message.epochCountingStarted;
     obj.current_epoch_start_height = message.currentEpochStartHeight ? message.currentEpochStartHeight.toString() : undefined;
     return obj;

@@ -317,13 +317,13 @@ export interface LogMetricAmino {
    * 
    * This field may not be present for older metrics.
    */
-  create_time?: Date;
+  create_time?: string;
   /**
    * Output only. The last update timestamp of the metric.
    * 
    * This field may not be present for older metrics.
    */
-  update_time?: Date;
+  update_time?: string;
   /**
    * Deprecated. The API version that created or updated this metric.
    * The v2 format is used by default and cannot be changed.
@@ -885,8 +885,8 @@ export const LogMetric = {
         return acc;
       }, {}) : {},
       bucketOptions: object?.bucket_options ? Distribution_BucketOptions.fromAmino(object.bucket_options) : undefined,
-      createTime: object?.create_time,
-      updateTime: object?.update_time,
+      createTime: object?.create_time ? fromTimestamp(Timestamp.fromAmino(object.create_time)) : undefined,
+      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined,
       version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
     };
   },
@@ -905,8 +905,8 @@ export const LogMetric = {
       });
     }
     obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toAmino(message.bucketOptions) : undefined;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
+    obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
+    obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
     obj.version = message.version;
     return obj;
   },
