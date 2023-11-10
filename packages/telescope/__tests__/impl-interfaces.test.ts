@@ -59,7 +59,7 @@ describe("implements interface works", () => {
         expiration: new Date(),
       });
     }).toThrowError(
-      `There's no encoder for the instance ${JSON.stringify(auth)}`
+      `There's no decoder for the instance ${JSON.stringify(auth)}`
     );
   });
 
@@ -115,6 +115,46 @@ describe("implements interface works", () => {
     } else {
       throw new Error("auth can't be empty");
     }
+  });
+
+  it("fromJSON for extended interface with $typeUrl", () => {
+    const message = Grant.fromJSON({
+      authorization: {
+        $typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization",
+        msg: "pass",
+      },
+      expiration: new Date("2020-01-01"),
+    });
+
+    const data = Grant.encode(message).finish();
+
+    const decodedMessage = Grant.decode(data);
+
+    if (decodedMessage.authorization) {
+      if (GenericAuthorization.is(decodedMessage.authorization)) {
+        expect(decodedMessage.authorization.msg).toBe("pass");
+      } else {
+        throw new Error("should be GenericAuthorization");
+      }
+    } else {
+      throw new Error("auth can't be empty");
+    }
+  });
+
+  it("fromJSON for extended interface with wrong $typeUrl", () => {
+    const auth = {
+      $typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization.wrong",
+      msg: "pass",
+    };
+
+    expect(() => {
+      Grant.fromJSON({
+        authorization: auth,
+        expiration: new Date("2020-01-01"),
+      });
+    }).toThrowError(
+      `There's no decoder for the instance ${JSON.stringify(auth)}`
+    );
   });
 
   it("fromJSON for Any", () => {
