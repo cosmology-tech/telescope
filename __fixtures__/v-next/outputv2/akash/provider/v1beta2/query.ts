@@ -99,7 +99,7 @@ export const QueryProvidersRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryProvidersRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryProvidersRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProvidersRequest();
@@ -107,7 +107,7 @@ export const QueryProvidersRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -148,16 +148,16 @@ export const QueryProvidersRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryProvidersRequest): QueryProvidersRequestAmino {
+  toAmino(message: QueryProvidersRequest, useInterfaces: boolean = true): QueryProvidersRequestAmino {
     const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryProvidersRequestAminoMsg): QueryProvidersRequest {
     return QueryProvidersRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryProvidersRequestProtoMsg): QueryProvidersRequest {
-    return QueryProvidersRequest.decode(message.value);
+  fromProtoMsg(message: QueryProvidersRequestProtoMsg, useInterfaces: boolean = true): QueryProvidersRequest {
+    return QueryProvidersRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryProvidersRequest): Uint8Array {
     return QueryProvidersRequest.encode(message).finish();
@@ -186,7 +186,7 @@ export const QueryProvidersResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryProvidersResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryProvidersResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProvidersResponse();
@@ -194,10 +194,10 @@ export const QueryProvidersResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.providers.push(Provider.decode(reader, reader.uint32()));
+          message.providers.push(Provider.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -252,21 +252,21 @@ export const QueryProvidersResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryProvidersResponse): QueryProvidersResponseAmino {
+  toAmino(message: QueryProvidersResponse, useInterfaces: boolean = true): QueryProvidersResponseAmino {
     const obj: any = {};
     if (message.providers) {
-      obj.providers = message.providers.map(e => e ? Provider.toAmino(e) : undefined);
+      obj.providers = message.providers.map(e => e ? Provider.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.providers = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryProvidersResponseAminoMsg): QueryProvidersResponse {
     return QueryProvidersResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryProvidersResponseProtoMsg): QueryProvidersResponse {
-    return QueryProvidersResponse.decode(message.value);
+  fromProtoMsg(message: QueryProvidersResponseProtoMsg, useInterfaces: boolean = true): QueryProvidersResponse {
+    return QueryProvidersResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryProvidersResponse): Uint8Array {
     return QueryProvidersResponse.encode(message).finish();
@@ -291,7 +291,7 @@ export const QueryProviderRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryProviderRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryProviderRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProviderRequest();
@@ -338,7 +338,7 @@ export const QueryProviderRequest = {
       owner: object.owner
     };
   },
-  toAmino(message: QueryProviderRequest): QueryProviderRequestAmino {
+  toAmino(message: QueryProviderRequest, useInterfaces: boolean = true): QueryProviderRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
@@ -346,8 +346,8 @@ export const QueryProviderRequest = {
   fromAminoMsg(object: QueryProviderRequestAminoMsg): QueryProviderRequest {
     return QueryProviderRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryProviderRequestProtoMsg): QueryProviderRequest {
-    return QueryProviderRequest.decode(message.value);
+  fromProtoMsg(message: QueryProviderRequestProtoMsg, useInterfaces: boolean = true): QueryProviderRequest {
+    return QueryProviderRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryProviderRequest): Uint8Array {
     return QueryProviderRequest.encode(message).finish();
@@ -372,7 +372,7 @@ export const QueryProviderResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryProviderResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryProviderResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProviderResponse();
@@ -380,7 +380,7 @@ export const QueryProviderResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.provider = Provider.decode(reader, reader.uint32());
+          message.provider = Provider.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -421,16 +421,16 @@ export const QueryProviderResponse = {
       provider: object?.provider ? Provider.fromAmino(object.provider) : undefined
     };
   },
-  toAmino(message: QueryProviderResponse): QueryProviderResponseAmino {
+  toAmino(message: QueryProviderResponse, useInterfaces: boolean = true): QueryProviderResponseAmino {
     const obj: any = {};
-    obj.provider = message.provider ? Provider.toAmino(message.provider) : undefined;
+    obj.provider = message.provider ? Provider.toAmino(message.provider, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryProviderResponseAminoMsg): QueryProviderResponse {
     return QueryProviderResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: QueryProviderResponseProtoMsg): QueryProviderResponse {
-    return QueryProviderResponse.decode(message.value);
+  fromProtoMsg(message: QueryProviderResponseProtoMsg, useInterfaces: boolean = true): QueryProviderResponse {
+    return QueryProviderResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryProviderResponse): Uint8Array {
     return QueryProviderResponse.encode(message).finish();

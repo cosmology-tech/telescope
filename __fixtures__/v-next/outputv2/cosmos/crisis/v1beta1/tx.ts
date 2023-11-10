@@ -63,7 +63,7 @@ export const MsgVerifyInvariant = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgVerifyInvariant {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgVerifyInvariant {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVerifyInvariant();
@@ -128,7 +128,7 @@ export const MsgVerifyInvariant = {
       invariantRoute: object.invariant_route
     };
   },
-  toAmino(message: MsgVerifyInvariant): MsgVerifyInvariantAmino {
+  toAmino(message: MsgVerifyInvariant, useInterfaces: boolean = true): MsgVerifyInvariantAmino {
     const obj: any = {};
     obj.sender = message.sender;
     obj.invariant_module_name = message.invariantModuleName;
@@ -138,14 +138,14 @@ export const MsgVerifyInvariant = {
   fromAminoMsg(object: MsgVerifyInvariantAminoMsg): MsgVerifyInvariant {
     return MsgVerifyInvariant.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgVerifyInvariant): MsgVerifyInvariantAminoMsg {
+  toAminoMsg(message: MsgVerifyInvariant, useInterfaces: boolean = true): MsgVerifyInvariantAminoMsg {
     return {
       type: "cosmos-sdk/MsgVerifyInvariant",
-      value: MsgVerifyInvariant.toAmino(message)
+      value: MsgVerifyInvariant.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgVerifyInvariantProtoMsg): MsgVerifyInvariant {
-    return MsgVerifyInvariant.decode(message.value);
+  fromProtoMsg(message: MsgVerifyInvariantProtoMsg, useInterfaces: boolean = true): MsgVerifyInvariant {
+    return MsgVerifyInvariant.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgVerifyInvariant): Uint8Array {
     return MsgVerifyInvariant.encode(message).finish();
@@ -166,7 +166,7 @@ export const MsgVerifyInvariantResponse = {
   encode(_: MsgVerifyInvariantResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgVerifyInvariantResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgVerifyInvariantResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVerifyInvariantResponse();
@@ -202,21 +202,21 @@ export const MsgVerifyInvariantResponse = {
   fromAmino(_: MsgVerifyInvariantResponseAmino): MsgVerifyInvariantResponse {
     return {};
   },
-  toAmino(_: MsgVerifyInvariantResponse): MsgVerifyInvariantResponseAmino {
+  toAmino(_: MsgVerifyInvariantResponse, useInterfaces: boolean = true): MsgVerifyInvariantResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgVerifyInvariantResponseAminoMsg): MsgVerifyInvariantResponse {
     return MsgVerifyInvariantResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgVerifyInvariantResponse): MsgVerifyInvariantResponseAminoMsg {
+  toAminoMsg(message: MsgVerifyInvariantResponse, useInterfaces: boolean = true): MsgVerifyInvariantResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgVerifyInvariantResponse",
-      value: MsgVerifyInvariantResponse.toAmino(message)
+      value: MsgVerifyInvariantResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgVerifyInvariantResponseProtoMsg): MsgVerifyInvariantResponse {
-    return MsgVerifyInvariantResponse.decode(message.value);
+  fromProtoMsg(message: MsgVerifyInvariantResponseProtoMsg, useInterfaces: boolean = true): MsgVerifyInvariantResponse {
+    return MsgVerifyInvariantResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgVerifyInvariantResponse): Uint8Array {
     return MsgVerifyInvariantResponse.encode(message).finish();

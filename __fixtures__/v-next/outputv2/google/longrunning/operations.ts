@@ -390,7 +390,7 @@ export const Operation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Operation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Operation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperation();
@@ -401,16 +401,16 @@ export const Operation = {
           message.name = reader.string();
           break;
         case 2:
-          message.metadata = Any.decode(reader, reader.uint32());
+          message.metadata = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.done = reader.bool();
           break;
         case 4:
-          message.error = Status.decode(reader, reader.uint32());
+          message.error = Status.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
-          message.response = Any.decode(reader, reader.uint32());
+          message.response = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -479,20 +479,20 @@ export const Operation = {
       response: object?.response ? Any.fromAmino(object.response) : undefined
     };
   },
-  toAmino(message: Operation): OperationAmino {
+  toAmino(message: Operation, useInterfaces: boolean = true): OperationAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.metadata = message.metadata ? Any.toAmino(message.metadata) : undefined;
+    obj.metadata = message.metadata ? Any.toAmino(message.metadata, useInterfaces) : undefined;
     obj.done = message.done;
-    obj.error = message.error ? Status.toAmino(message.error) : undefined;
-    obj.response = message.response ? Any.toAmino(message.response) : undefined;
+    obj.error = message.error ? Status.toAmino(message.error, useInterfaces) : undefined;
+    obj.response = message.response ? Any.toAmino(message.response, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: OperationAminoMsg): Operation {
     return Operation.fromAmino(object.value);
   },
-  fromProtoMsg(message: OperationProtoMsg): Operation {
-    return Operation.decode(message.value);
+  fromProtoMsg(message: OperationProtoMsg, useInterfaces: boolean = true): Operation {
+    return Operation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Operation): Uint8Array {
     return Operation.encode(message).finish();
@@ -517,7 +517,7 @@ export const GetOperationRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetOperationRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetOperationRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetOperationRequest();
@@ -564,7 +564,7 @@ export const GetOperationRequest = {
       name: object.name
     };
   },
-  toAmino(message: GetOperationRequest): GetOperationRequestAmino {
+  toAmino(message: GetOperationRequest, useInterfaces: boolean = true): GetOperationRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -572,8 +572,8 @@ export const GetOperationRequest = {
   fromAminoMsg(object: GetOperationRequestAminoMsg): GetOperationRequest {
     return GetOperationRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: GetOperationRequestProtoMsg): GetOperationRequest {
-    return GetOperationRequest.decode(message.value);
+  fromProtoMsg(message: GetOperationRequestProtoMsg, useInterfaces: boolean = true): GetOperationRequest {
+    return GetOperationRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetOperationRequest): Uint8Array {
     return GetOperationRequest.encode(message).finish();
@@ -610,7 +610,7 @@ export const ListOperationsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListOperationsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListOperationsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListOperationsRequest();
@@ -684,7 +684,7 @@ export const ListOperationsRequest = {
       pageToken: object.page_token
     };
   },
-  toAmino(message: ListOperationsRequest): ListOperationsRequestAmino {
+  toAmino(message: ListOperationsRequest, useInterfaces: boolean = true): ListOperationsRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.filter = message.filter;
@@ -695,8 +695,8 @@ export const ListOperationsRequest = {
   fromAminoMsg(object: ListOperationsRequestAminoMsg): ListOperationsRequest {
     return ListOperationsRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: ListOperationsRequestProtoMsg): ListOperationsRequest {
-    return ListOperationsRequest.decode(message.value);
+  fromProtoMsg(message: ListOperationsRequestProtoMsg, useInterfaces: boolean = true): ListOperationsRequest {
+    return ListOperationsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListOperationsRequest): Uint8Array {
     return ListOperationsRequest.encode(message).finish();
@@ -725,7 +725,7 @@ export const ListOperationsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListOperationsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListOperationsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListOperationsResponse();
@@ -733,7 +733,7 @@ export const ListOperationsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.operations.push(Operation.decode(reader, reader.uint32()));
+          message.operations.push(Operation.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.nextPageToken = reader.string();
@@ -789,10 +789,10 @@ export const ListOperationsResponse = {
       nextPageToken: object.next_page_token
     };
   },
-  toAmino(message: ListOperationsResponse): ListOperationsResponseAmino {
+  toAmino(message: ListOperationsResponse, useInterfaces: boolean = true): ListOperationsResponseAmino {
     const obj: any = {};
     if (message.operations) {
-      obj.operations = message.operations.map(e => e ? Operation.toAmino(e) : undefined);
+      obj.operations = message.operations.map(e => e ? Operation.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.operations = [];
     }
@@ -802,8 +802,8 @@ export const ListOperationsResponse = {
   fromAminoMsg(object: ListOperationsResponseAminoMsg): ListOperationsResponse {
     return ListOperationsResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: ListOperationsResponseProtoMsg): ListOperationsResponse {
-    return ListOperationsResponse.decode(message.value);
+  fromProtoMsg(message: ListOperationsResponseProtoMsg, useInterfaces: boolean = true): ListOperationsResponse {
+    return ListOperationsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListOperationsResponse): Uint8Array {
     return ListOperationsResponse.encode(message).finish();
@@ -828,7 +828,7 @@ export const CancelOperationRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CancelOperationRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CancelOperationRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCancelOperationRequest();
@@ -875,7 +875,7 @@ export const CancelOperationRequest = {
       name: object.name
     };
   },
-  toAmino(message: CancelOperationRequest): CancelOperationRequestAmino {
+  toAmino(message: CancelOperationRequest, useInterfaces: boolean = true): CancelOperationRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -883,8 +883,8 @@ export const CancelOperationRequest = {
   fromAminoMsg(object: CancelOperationRequestAminoMsg): CancelOperationRequest {
     return CancelOperationRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: CancelOperationRequestProtoMsg): CancelOperationRequest {
-    return CancelOperationRequest.decode(message.value);
+  fromProtoMsg(message: CancelOperationRequestProtoMsg, useInterfaces: boolean = true): CancelOperationRequest {
+    return CancelOperationRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CancelOperationRequest): Uint8Array {
     return CancelOperationRequest.encode(message).finish();
@@ -909,7 +909,7 @@ export const DeleteOperationRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DeleteOperationRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DeleteOperationRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteOperationRequest();
@@ -956,7 +956,7 @@ export const DeleteOperationRequest = {
       name: object.name
     };
   },
-  toAmino(message: DeleteOperationRequest): DeleteOperationRequestAmino {
+  toAmino(message: DeleteOperationRequest, useInterfaces: boolean = true): DeleteOperationRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -964,8 +964,8 @@ export const DeleteOperationRequest = {
   fromAminoMsg(object: DeleteOperationRequestAminoMsg): DeleteOperationRequest {
     return DeleteOperationRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: DeleteOperationRequestProtoMsg): DeleteOperationRequest {
-    return DeleteOperationRequest.decode(message.value);
+  fromProtoMsg(message: DeleteOperationRequestProtoMsg, useInterfaces: boolean = true): DeleteOperationRequest {
+    return DeleteOperationRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DeleteOperationRequest): Uint8Array {
     return DeleteOperationRequest.encode(message).finish();
@@ -994,7 +994,7 @@ export const WaitOperationRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): WaitOperationRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): WaitOperationRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWaitOperationRequest();
@@ -1005,7 +1005,7 @@ export const WaitOperationRequest = {
           message.name = reader.string();
           break;
         case 2:
-          message.timeout = Duration.decode(reader, reader.uint32());
+          message.timeout = Duration.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1052,17 +1052,17 @@ export const WaitOperationRequest = {
       timeout: object?.timeout ? Duration.fromAmino(object.timeout) : undefined
     };
   },
-  toAmino(message: WaitOperationRequest): WaitOperationRequestAmino {
+  toAmino(message: WaitOperationRequest, useInterfaces: boolean = true): WaitOperationRequestAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.timeout = message.timeout ? Duration.toAmino(message.timeout) : undefined;
+    obj.timeout = message.timeout ? Duration.toAmino(message.timeout, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: WaitOperationRequestAminoMsg): WaitOperationRequest {
     return WaitOperationRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: WaitOperationRequestProtoMsg): WaitOperationRequest {
-    return WaitOperationRequest.decode(message.value);
+  fromProtoMsg(message: WaitOperationRequestProtoMsg, useInterfaces: boolean = true): WaitOperationRequest {
+    return WaitOperationRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: WaitOperationRequest): Uint8Array {
     return WaitOperationRequest.encode(message).finish();
@@ -1091,7 +1091,7 @@ export const OperationInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): OperationInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): OperationInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperationInfo();
@@ -1147,7 +1147,7 @@ export const OperationInfo = {
       metadataType: object.metadata_type
     };
   },
-  toAmino(message: OperationInfo): OperationInfoAmino {
+  toAmino(message: OperationInfo, useInterfaces: boolean = true): OperationInfoAmino {
     const obj: any = {};
     obj.response_type = message.responseType;
     obj.metadata_type = message.metadataType;
@@ -1156,8 +1156,8 @@ export const OperationInfo = {
   fromAminoMsg(object: OperationInfoAminoMsg): OperationInfo {
     return OperationInfo.fromAmino(object.value);
   },
-  fromProtoMsg(message: OperationInfoProtoMsg): OperationInfo {
-    return OperationInfo.decode(message.value);
+  fromProtoMsg(message: OperationInfoProtoMsg, useInterfaces: boolean = true): OperationInfo {
+    return OperationInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: OperationInfo): Uint8Array {
     return OperationInfo.encode(message).finish();

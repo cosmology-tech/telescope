@@ -154,10 +154,13 @@ export const decode = {
             return switchAnyTypeArray(
                 num,
                 prop,
-                interfaceFnName
+                name,
+                interfaceFnName,
             );
         }
-        return switchProtoTypeArray(num,
+        return switchProtoTypeArray(
+            args,
+            num,
             prop,
             name
         );
@@ -366,7 +369,10 @@ export const baseTypes = {
                         t.identifier('uint32')
                     ),
                     []
-                )
+                ),
+                ...(args.context.options.interfaces.enabled ? [
+                    t.identifier('useInterfaces'),
+                ] : []),
             ]
         )
     },
@@ -379,18 +385,21 @@ export const baseTypes = {
         const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
         const interfaceFnName = getInterfaceDecoderName(interfaceName)
 
-        return t.tsAsExpression(
-            t.callExpression(
-                t.identifier(interfaceFnName),
-                [
-                    t.identifier('reader')
-                ]
+        return t.conditionalExpression(
+            t.identifier('useInterfaces'),
+            t.tsAsExpression(
+                t.callExpression(
+                    t.identifier(interfaceFnName),
+                    [
+                        t.identifier('reader')
+                    ]
+                ),
+                t.tsTypeReference(
+                    t.identifier('Any')
+                )
             ),
-            t.tsTypeReference(
-                t.identifier('Any')
-            )
-        )
-
+            baseTypes.protoType(args)
+        );
     },
 
     type(args: DecodeMethod) {
@@ -612,7 +621,12 @@ export const switchOnTagTakesArray = (num: number, prop: string, expr: t.Stateme
 };
 
 //    message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
-export const switchProtoTypeArray = (num: number, prop: string, name: string) => {
+export const switchProtoTypeArray = (
+    args: DecodeMethod,
+    num: number,
+    prop: string,
+    name: string
+) => {
     return t.switchCase(
         t.numericLiteral(num),
         [
@@ -639,7 +653,10 @@ export const switchProtoTypeArray = (num: number, prop: string, name: string) =>
                                         t.identifier('uint32')
                                     ),
                                     []
-                                )
+                                ),
+                                ...(args.context.options.interfaces.enabled ? [
+                                    t.identifier('useInterfaces'),
+                                ] : []),
                             ]
                         )
                     ]
@@ -650,38 +667,40 @@ export const switchProtoTypeArray = (num: number, prop: string, name: string) =>
     )
 };
 
-export const switchAnyTypeArray = (num: number, prop: string, name: string) => {
-    return t.switchCase(
-        t.numericLiteral(num),
-        [
-            t.expressionStatement(
+export const switchAnyTypeArray = (num: number, prop: string, typeName: string, interfaceName: string) => {
+    return switchArray(num, prop,
+        t.conditionalExpression(
+            t.identifier('useInterfaces'),
+            t.tsAsExpression(
                 t.callExpression(
-                    t.memberExpression(
-                        t.memberExpression(
-                            t.identifier('message'),
-                            t.identifier(prop)
-                        ),
-                        t.identifier('push')
-                    ),
+                    t.identifier(interfaceName),
                     [
-                        t.tsAsExpression(
-                            t.callExpression(
-                                t.identifier(name),
-                                [
-                                    t.identifier('reader')
-                                ]
-                            ),
-                            t.tsTypeReference(
-                                t.identifier('Any')
-                            )
-                        )
-
+                        t.identifier('reader')
                     ]
+                ),
+                t.tsTypeReference(
+                    t.identifier('Any')
                 )
             ),
-            t.breakStatement()
-        ]
-    )
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier(typeName),
+                    t.identifier('decode')
+                ),
+                [
+                    t.identifier('reader'),
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('reader'),
+                            t.identifier('uint32')
+                        ),
+                        []
+                    ),
+                    t.identifier('useInterfaces'),
+                ]
+            )
+        )
+    );
 };
 
 // if ((tag & 7) === 2) {

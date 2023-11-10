@@ -191,7 +191,7 @@ export const ProviderInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ProviderInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ProviderInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProviderInfo();
@@ -247,7 +247,7 @@ export const ProviderInfo = {
       website: object.website
     };
   },
-  toAmino(message: ProviderInfo): ProviderInfoAmino {
+  toAmino(message: ProviderInfo, useInterfaces: boolean = true): ProviderInfoAmino {
     const obj: any = {};
     obj.email = message.email;
     obj.website = message.website;
@@ -256,8 +256,8 @@ export const ProviderInfo = {
   fromAminoMsg(object: ProviderInfoAminoMsg): ProviderInfo {
     return ProviderInfo.fromAmino(object.value);
   },
-  fromProtoMsg(message: ProviderInfoProtoMsg): ProviderInfo {
-    return ProviderInfo.decode(message.value);
+  fromProtoMsg(message: ProviderInfoProtoMsg, useInterfaces: boolean = true): ProviderInfo {
+    return ProviderInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ProviderInfo): Uint8Array {
     return ProviderInfo.encode(message).finish();
@@ -294,7 +294,7 @@ export const MsgCreateProvider = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateProvider {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateProvider {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateProvider();
@@ -308,10 +308,10 @@ export const MsgCreateProvider = {
           message.hostUri = reader.string();
           break;
         case 3:
-          message.attributes.push(Attribute.decode(reader, reader.uint32()));
+          message.attributes.push(Attribute.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 4:
-          message.info = ProviderInfo.decode(reader, reader.uint32());
+          message.info = ProviderInfo.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -378,23 +378,23 @@ export const MsgCreateProvider = {
       info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
     };
   },
-  toAmino(message: MsgCreateProvider): MsgCreateProviderAmino {
+  toAmino(message: MsgCreateProvider, useInterfaces: boolean = true): MsgCreateProviderAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.host_uri = message.hostUri;
     if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.attributes = [];
     }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined;
+    obj.info = message.info ? ProviderInfo.toAmino(message.info, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgCreateProviderAminoMsg): MsgCreateProvider {
     return MsgCreateProvider.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgCreateProviderProtoMsg): MsgCreateProvider {
-    return MsgCreateProvider.decode(message.value);
+  fromProtoMsg(message: MsgCreateProviderProtoMsg, useInterfaces: boolean = true): MsgCreateProvider {
+    return MsgCreateProvider.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateProvider): Uint8Array {
     return MsgCreateProvider.encode(message).finish();
@@ -414,7 +414,7 @@ export const MsgCreateProviderResponse = {
   encode(_: MsgCreateProviderResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateProviderResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateProviderResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateProviderResponse();
@@ -450,15 +450,15 @@ export const MsgCreateProviderResponse = {
   fromAmino(_: MsgCreateProviderResponseAmino): MsgCreateProviderResponse {
     return {};
   },
-  toAmino(_: MsgCreateProviderResponse): MsgCreateProviderResponseAmino {
+  toAmino(_: MsgCreateProviderResponse, useInterfaces: boolean = true): MsgCreateProviderResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgCreateProviderResponseAminoMsg): MsgCreateProviderResponse {
     return MsgCreateProviderResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgCreateProviderResponseProtoMsg): MsgCreateProviderResponse {
-    return MsgCreateProviderResponse.decode(message.value);
+  fromProtoMsg(message: MsgCreateProviderResponseProtoMsg, useInterfaces: boolean = true): MsgCreateProviderResponse {
+    return MsgCreateProviderResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateProviderResponse): Uint8Array {
     return MsgCreateProviderResponse.encode(message).finish();
@@ -495,7 +495,7 @@ export const MsgUpdateProvider = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateProvider {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateProvider {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateProvider();
@@ -509,10 +509,10 @@ export const MsgUpdateProvider = {
           message.hostUri = reader.string();
           break;
         case 3:
-          message.attributes.push(Attribute.decode(reader, reader.uint32()));
+          message.attributes.push(Attribute.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 4:
-          message.info = ProviderInfo.decode(reader, reader.uint32());
+          message.info = ProviderInfo.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -579,23 +579,23 @@ export const MsgUpdateProvider = {
       info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
     };
   },
-  toAmino(message: MsgUpdateProvider): MsgUpdateProviderAmino {
+  toAmino(message: MsgUpdateProvider, useInterfaces: boolean = true): MsgUpdateProviderAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.host_uri = message.hostUri;
     if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.attributes = [];
     }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined;
+    obj.info = message.info ? ProviderInfo.toAmino(message.info, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgUpdateProviderAminoMsg): MsgUpdateProvider {
     return MsgUpdateProvider.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgUpdateProviderProtoMsg): MsgUpdateProvider {
-    return MsgUpdateProvider.decode(message.value);
+  fromProtoMsg(message: MsgUpdateProviderProtoMsg, useInterfaces: boolean = true): MsgUpdateProvider {
+    return MsgUpdateProvider.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateProvider): Uint8Array {
     return MsgUpdateProvider.encode(message).finish();
@@ -615,7 +615,7 @@ export const MsgUpdateProviderResponse = {
   encode(_: MsgUpdateProviderResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateProviderResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateProviderResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateProviderResponse();
@@ -651,15 +651,15 @@ export const MsgUpdateProviderResponse = {
   fromAmino(_: MsgUpdateProviderResponseAmino): MsgUpdateProviderResponse {
     return {};
   },
-  toAmino(_: MsgUpdateProviderResponse): MsgUpdateProviderResponseAmino {
+  toAmino(_: MsgUpdateProviderResponse, useInterfaces: boolean = true): MsgUpdateProviderResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgUpdateProviderResponseAminoMsg): MsgUpdateProviderResponse {
     return MsgUpdateProviderResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgUpdateProviderResponseProtoMsg): MsgUpdateProviderResponse {
-    return MsgUpdateProviderResponse.decode(message.value);
+  fromProtoMsg(message: MsgUpdateProviderResponseProtoMsg, useInterfaces: boolean = true): MsgUpdateProviderResponse {
+    return MsgUpdateProviderResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateProviderResponse): Uint8Array {
     return MsgUpdateProviderResponse.encode(message).finish();
@@ -684,7 +684,7 @@ export const MsgDeleteProvider = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgDeleteProvider {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgDeleteProvider {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeleteProvider();
@@ -731,7 +731,7 @@ export const MsgDeleteProvider = {
       owner: object.owner
     };
   },
-  toAmino(message: MsgDeleteProvider): MsgDeleteProviderAmino {
+  toAmino(message: MsgDeleteProvider, useInterfaces: boolean = true): MsgDeleteProviderAmino {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
@@ -739,8 +739,8 @@ export const MsgDeleteProvider = {
   fromAminoMsg(object: MsgDeleteProviderAminoMsg): MsgDeleteProvider {
     return MsgDeleteProvider.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgDeleteProviderProtoMsg): MsgDeleteProvider {
-    return MsgDeleteProvider.decode(message.value);
+  fromProtoMsg(message: MsgDeleteProviderProtoMsg, useInterfaces: boolean = true): MsgDeleteProvider {
+    return MsgDeleteProvider.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgDeleteProvider): Uint8Array {
     return MsgDeleteProvider.encode(message).finish();
@@ -760,7 +760,7 @@ export const MsgDeleteProviderResponse = {
   encode(_: MsgDeleteProviderResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgDeleteProviderResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgDeleteProviderResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeleteProviderResponse();
@@ -796,15 +796,15 @@ export const MsgDeleteProviderResponse = {
   fromAmino(_: MsgDeleteProviderResponseAmino): MsgDeleteProviderResponse {
     return {};
   },
-  toAmino(_: MsgDeleteProviderResponse): MsgDeleteProviderResponseAmino {
+  toAmino(_: MsgDeleteProviderResponse, useInterfaces: boolean = true): MsgDeleteProviderResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgDeleteProviderResponseAminoMsg): MsgDeleteProviderResponse {
     return MsgDeleteProviderResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgDeleteProviderResponseProtoMsg): MsgDeleteProviderResponse {
-    return MsgDeleteProviderResponse.decode(message.value);
+  fromProtoMsg(message: MsgDeleteProviderResponseProtoMsg, useInterfaces: boolean = true): MsgDeleteProviderResponse {
+    return MsgDeleteProviderResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgDeleteProviderResponse): Uint8Array {
     return MsgDeleteProviderResponse.encode(message).finish();
@@ -841,7 +841,7 @@ export const Provider = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Provider {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Provider {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProvider();
@@ -855,10 +855,10 @@ export const Provider = {
           message.hostUri = reader.string();
           break;
         case 3:
-          message.attributes.push(Attribute.decode(reader, reader.uint32()));
+          message.attributes.push(Attribute.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 4:
-          message.info = ProviderInfo.decode(reader, reader.uint32());
+          message.info = ProviderInfo.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -925,23 +925,23 @@ export const Provider = {
       info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
     };
   },
-  toAmino(message: Provider): ProviderAmino {
+  toAmino(message: Provider, useInterfaces: boolean = true): ProviderAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.host_uri = message.hostUri;
     if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.attributes = [];
     }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined;
+    obj.info = message.info ? ProviderInfo.toAmino(message.info, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: ProviderAminoMsg): Provider {
     return Provider.fromAmino(object.value);
   },
-  fromProtoMsg(message: ProviderProtoMsg): Provider {
-    return Provider.decode(message.value);
+  fromProtoMsg(message: ProviderProtoMsg, useInterfaces: boolean = true): Provider {
+    return Provider.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Provider): Uint8Array {
     return Provider.encode(message).finish();

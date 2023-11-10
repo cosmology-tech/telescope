@@ -172,7 +172,7 @@ export const MsgGrant = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgGrant {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgGrant {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgGrant();
@@ -186,7 +186,7 @@ export const MsgGrant = {
           message.grantee = reader.string();
           break;
         case 3:
-          message.grant = Grant.decode(reader, reader.uint32());
+          message.grant = Grant.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -239,15 +239,15 @@ export const MsgGrant = {
       grant: object?.grant ? Grant.fromAmino(object.grant) : undefined
     };
   },
-  toAmino(message: MsgGrant): MsgGrantAmino {
+  toAmino(message: MsgGrant, useInterfaces: boolean = true): MsgGrantAmino {
     const obj: any = {};
     obj.granter = message.granter;
     obj.grantee = message.grantee;
-    obj.grant = message.grant ? Grant.toAmino(message.grant) : undefined;
+    obj.grant = message.grant ? Grant.toAmino(message.grant, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: MsgGrantProtoMsg): MsgGrant {
-    return MsgGrant.decode(message.value);
+  fromProtoMsg(message: MsgGrantProtoMsg, useInterfaces: boolean = true): MsgGrant {
+    return MsgGrant.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgGrant): Uint8Array {
     return MsgGrant.encode(message).finish();
@@ -273,7 +273,7 @@ export const MsgExecResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgExecResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgExecResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExecResponse();
@@ -328,7 +328,7 @@ export const MsgExecResponse = {
       results: Array.isArray(object?.results) ? object.results.map((e: any) => e) : []
     };
   },
-  toAmino(message: MsgExecResponse): MsgExecResponseAmino {
+  toAmino(message: MsgExecResponse, useInterfaces: boolean = true): MsgExecResponseAmino {
     const obj: any = {};
     if (message.results) {
       obj.results = message.results.map(e => e);
@@ -337,8 +337,8 @@ export const MsgExecResponse = {
     }
     return obj;
   },
-  fromProtoMsg(message: MsgExecResponseProtoMsg): MsgExecResponse {
-    return MsgExecResponse.decode(message.value);
+  fromProtoMsg(message: MsgExecResponseProtoMsg, useInterfaces: boolean = true): MsgExecResponse {
+    return MsgExecResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgExecResponse): Uint8Array {
     return MsgExecResponse.encode(message).finish();
@@ -368,7 +368,7 @@ export const MsgExec = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgExec {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgExec {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExec();
@@ -379,7 +379,7 @@ export const MsgExec = {
           message.grantee = reader.string();
           break;
         case 2:
-          message.msgs.push((Sdk_MsgauthzAuthorization_InterfaceDecoder(reader) as Any));
+          message.msgs.push(useInterfaces ? (Sdk_MsgauthzAuthorization_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -432,18 +432,18 @@ export const MsgExec = {
       msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => Sdk_MsgauthzAuthorization_FromAmino(e)) : []
     };
   },
-  toAmino(message: MsgExec): MsgExecAmino {
+  toAmino(message: MsgExec, useInterfaces: boolean = true): MsgExecAmino {
     const obj: any = {};
     obj.grantee = message.grantee;
     if (message.msgs) {
-      obj.msgs = message.msgs.map(e => e ? Sdk_MsgauthzAuthorization_ToAmino((e as Any)) : undefined);
+      obj.msgs = message.msgs.map(e => e ? Sdk_MsgauthzAuthorization_ToAmino((e as Any), useInterfaces) : undefined);
     } else {
       obj.msgs = [];
     }
     return obj;
   },
-  fromProtoMsg(message: MsgExecProtoMsg): MsgExec {
-    return MsgExec.decode(message.value);
+  fromProtoMsg(message: MsgExecProtoMsg, useInterfaces: boolean = true): MsgExec {
+    return MsgExec.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgExec): Uint8Array {
     return MsgExec.encode(message).finish();
@@ -464,7 +464,7 @@ export const MsgGrantResponse = {
   encode(_: MsgGrantResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgGrantResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgGrantResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgGrantResponse();
@@ -500,12 +500,12 @@ export const MsgGrantResponse = {
   fromAmino(_: MsgGrantResponseAmino): MsgGrantResponse {
     return {};
   },
-  toAmino(_: MsgGrantResponse): MsgGrantResponseAmino {
+  toAmino(_: MsgGrantResponse, useInterfaces: boolean = true): MsgGrantResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgGrantResponseProtoMsg): MsgGrantResponse {
-    return MsgGrantResponse.decode(message.value);
+  fromProtoMsg(message: MsgGrantResponseProtoMsg, useInterfaces: boolean = true): MsgGrantResponse {
+    return MsgGrantResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgGrantResponse): Uint8Array {
     return MsgGrantResponse.encode(message).finish();
@@ -539,7 +539,7 @@ export const MsgRevoke = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgRevoke {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgRevoke {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRevoke();
@@ -604,15 +604,15 @@ export const MsgRevoke = {
       msgTypeUrl: object.msg_type_url
     };
   },
-  toAmino(message: MsgRevoke): MsgRevokeAmino {
+  toAmino(message: MsgRevoke, useInterfaces: boolean = true): MsgRevokeAmino {
     const obj: any = {};
     obj.granter = message.granter;
     obj.grantee = message.grantee;
     obj.msg_type_url = message.msgTypeUrl;
     return obj;
   },
-  fromProtoMsg(message: MsgRevokeProtoMsg): MsgRevoke {
-    return MsgRevoke.decode(message.value);
+  fromProtoMsg(message: MsgRevokeProtoMsg, useInterfaces: boolean = true): MsgRevoke {
+    return MsgRevoke.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgRevoke): Uint8Array {
     return MsgRevoke.encode(message).finish();
@@ -633,7 +633,7 @@ export const MsgRevokeResponse = {
   encode(_: MsgRevokeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgRevokeResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgRevokeResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRevokeResponse();
@@ -669,12 +669,12 @@ export const MsgRevokeResponse = {
   fromAmino(_: MsgRevokeResponseAmino): MsgRevokeResponse {
     return {};
   },
-  toAmino(_: MsgRevokeResponse): MsgRevokeResponseAmino {
+  toAmino(_: MsgRevokeResponse, useInterfaces: boolean = true): MsgRevokeResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgRevokeResponseProtoMsg): MsgRevokeResponse {
-    return MsgRevokeResponse.decode(message.value);
+  fromProtoMsg(message: MsgRevokeResponseProtoMsg, useInterfaces: boolean = true): MsgRevokeResponse {
+    return MsgRevokeResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgRevokeResponse): Uint8Array {
     return MsgRevokeResponse.encode(message).finish();
@@ -688,7 +688,7 @@ export const MsgRevokeResponse = {
 };
 export const Sdk_Msg_InterfaceDecoder = (input: BinaryReader | Uint8Array): Any => {
   const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32());
+  const data = Any.decode(reader, reader.uint32(), true);
   switch (data.typeUrl) {
     default:
       return data;
@@ -697,12 +697,12 @@ export const Sdk_Msg_InterfaceDecoder = (input: BinaryReader | Uint8Array): Any 
 export const Sdk_Msg_FromAmino = (content: AnyAmino) => {
   return Any.fromAmino(content);
 };
-export const Sdk_Msg_ToAmino = (content: Any) => {
-  return Any.toAmino(content);
+export const Sdk_Msg_ToAmino = (content: Any, useInterfaces: boolean = true) => {
+  return Any.toAmino(content, useInterfaces);
 };
 export const Authz_Authorization_InterfaceDecoder = (input: BinaryReader | Uint8Array): Any => {
   const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32());
+  const data = Any.decode(reader, reader.uint32(), true);
   switch (data.typeUrl) {
     default:
       return data;
@@ -711,6 +711,6 @@ export const Authz_Authorization_InterfaceDecoder = (input: BinaryReader | Uint8
 export const Authz_Authorization_FromAmino = (content: AnyAmino) => {
   return Any.fromAmino(content);
 };
-export const Authz_Authorization_ToAmino = (content: Any) => {
-  return Any.toAmino(content);
+export const Authz_Authorization_ToAmino = (content: Any, useInterfaces: boolean = true) => {
+  return Any.toAmino(content, useInterfaces);
 };

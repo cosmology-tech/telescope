@@ -224,7 +224,7 @@ export const Duration = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Duration {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Duration {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDuration();
@@ -283,11 +283,11 @@ export const Duration = {
       nanos: Number(value % BigInt("1000000000"))
     };
   },
-  toAmino(message: Duration): DurationAmino {
+  toAmino(message: Duration, useInterfaces: boolean = true): DurationAmino {
     return (message.seconds * BigInt("1000000000") + BigInt(message.nanos)).toString();
   },
-  fromProtoMsg(message: DurationProtoMsg): Duration {
-    return Duration.decode(message.value);
+  fromProtoMsg(message: DurationProtoMsg, useInterfaces: boolean = true): Duration {
+    return Duration.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Duration): Uint8Array {
     return Duration.encode(message).finish();

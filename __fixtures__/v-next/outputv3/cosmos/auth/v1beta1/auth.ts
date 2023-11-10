@@ -120,7 +120,7 @@ export const BaseAccount = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): BaseAccount {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BaseAccount {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBaseAccount();
@@ -131,7 +131,7 @@ export const BaseAccount = {
           message.address = reader.string();
           break;
         case 2:
-          message.pubKey = Any.decode(reader, reader.uint32());
+          message.pubKey = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.accountNumber = reader.uint64();
@@ -200,16 +200,16 @@ export const BaseAccount = {
       sequence: BigInt(object.sequence)
     };
   },
-  toAmino(message: BaseAccount): BaseAccountAmino {
+  toAmino(message: BaseAccount, useInterfaces: boolean = true): BaseAccountAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey) : undefined;
+    obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey, useInterfaces) : undefined;
     obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: BaseAccountProtoMsg): BaseAccount {
-    return BaseAccount.decode(message.value);
+  fromProtoMsg(message: BaseAccountProtoMsg, useInterfaces: boolean = true): BaseAccount {
+    return BaseAccount.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BaseAccount): Uint8Array {
     return BaseAccount.encode(message).finish();
@@ -244,7 +244,7 @@ export const ModuleAccount = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ModuleAccount {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModuleAccount {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleAccount();
@@ -252,7 +252,7 @@ export const ModuleAccount = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.baseAccount = BaseAccount.decode(reader, reader.uint32());
+          message.baseAccount = BaseAccount.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.name = reader.string();
@@ -319,9 +319,9 @@ export const ModuleAccount = {
       permissions: Array.isArray(object?.permissions) ? object.permissions.map((e: any) => e) : []
     };
   },
-  toAmino(message: ModuleAccount): ModuleAccountAmino {
+  toAmino(message: ModuleAccount, useInterfaces: boolean = true): ModuleAccountAmino {
     const obj: any = {};
-    obj.base_account = message.baseAccount ? BaseAccount.toAmino(message.baseAccount) : undefined;
+    obj.base_account = message.baseAccount ? BaseAccount.toAmino(message.baseAccount, useInterfaces) : undefined;
     obj.name = message.name;
     if (message.permissions) {
       obj.permissions = message.permissions.map(e => e);
@@ -330,8 +330,8 @@ export const ModuleAccount = {
     }
     return obj;
   },
-  fromProtoMsg(message: ModuleAccountProtoMsg): ModuleAccount {
-    return ModuleAccount.decode(message.value);
+  fromProtoMsg(message: ModuleAccountProtoMsg, useInterfaces: boolean = true): ModuleAccount {
+    return ModuleAccount.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ModuleAccount): Uint8Array {
     return ModuleAccount.encode(message).finish();
@@ -373,7 +373,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -466,7 +466,7 @@ export const Params = {
       sigVerifyCostSecp256k1: BigInt(object.sig_verify_cost_secp256k1)
     };
   },
-  toAmino(message: Params): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
     obj.max_memo_characters = message.maxMemoCharacters ? message.maxMemoCharacters.toString() : undefined;
     obj.tx_sig_limit = message.txSigLimit ? message.txSigLimit.toString() : undefined;
@@ -475,8 +475,8 @@ export const Params = {
     obj.sig_verify_cost_secp256k1 = message.sigVerifyCostSecp256k1 ? message.sigVerifyCostSecp256k1.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
+    return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();

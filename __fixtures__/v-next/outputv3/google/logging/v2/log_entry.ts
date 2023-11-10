@@ -536,7 +536,7 @@ export const LogEntry_LabelsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): LogEntry_LabelsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LogEntry_LabelsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogEntry_LabelsEntry();
@@ -592,14 +592,14 @@ export const LogEntry_LabelsEntry = {
       value: object.value
     };
   },
-  toAmino(message: LogEntry_LabelsEntry): LogEntry_LabelsEntryAmino {
+  toAmino(message: LogEntry_LabelsEntry, useInterfaces: boolean = true): LogEntry_LabelsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
     return obj;
   },
-  fromProtoMsg(message: LogEntry_LabelsEntryProtoMsg): LogEntry_LabelsEntry {
-    return LogEntry_LabelsEntry.decode(message.value);
+  fromProtoMsg(message: LogEntry_LabelsEntryProtoMsg, useInterfaces: boolean = true): LogEntry_LabelsEntry {
+    return LogEntry_LabelsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LogEntry_LabelsEntry): Uint8Array {
     return LogEntry_LabelsEntry.encode(message).finish();
@@ -685,7 +685,7 @@ export const LogEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): LogEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LogEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogEntry();
@@ -696,16 +696,16 @@ export const LogEntry = {
           message.logName = reader.string();
           break;
         case 8:
-          message.resource = MonitoredResource.decode(reader, reader.uint32());
+          message.resource = MonitoredResource.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.protoPayload = Any.decode(reader, reader.uint32());
+          message.protoPayload = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.textPayload = reader.string();
           break;
         case 6:
-          message.jsonPayload = Struct.decode(reader, reader.uint32());
+          message.jsonPayload = Struct.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 9:
           message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
@@ -720,7 +720,7 @@ export const LogEntry = {
           message.insertId = reader.string();
           break;
         case 7:
-          message.httpRequest = HttpRequest.decode(reader, reader.uint32());
+          message.httpRequest = HttpRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 11:
           const entry11 = LogEntry_LabelsEntry.decode(reader, reader.uint32());
@@ -729,7 +729,7 @@ export const LogEntry = {
           }
           break;
         case 15:
-          message.operation = LogEntryOperation.decode(reader, reader.uint32());
+          message.operation = LogEntryOperation.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 22:
           message.trace = reader.string();
@@ -741,10 +741,10 @@ export const LogEntry = {
           message.traceSampled = reader.bool();
           break;
         case 23:
-          message.sourceLocation = LogEntrySourceLocation.decode(reader, reader.uint32());
+          message.sourceLocation = LogEntrySourceLocation.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 35:
-          message.split = LogSplit.decode(reader, reader.uint32());
+          message.split = LogSplit.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -925,34 +925,34 @@ export const LogEntry = {
       split: object?.split ? LogSplit.fromAmino(object.split) : undefined
     };
   },
-  toAmino(message: LogEntry): LogEntryAmino {
+  toAmino(message: LogEntry, useInterfaces: boolean = true): LogEntryAmino {
     const obj: any = {};
     obj.log_name = message.logName;
-    obj.resource = message.resource ? MonitoredResource.toAmino(message.resource) : undefined;
-    obj.proto_payload = message.protoPayload ? Any.toAmino(message.protoPayload) : undefined;
+    obj.resource = message.resource ? MonitoredResource.toAmino(message.resource, useInterfaces) : undefined;
+    obj.proto_payload = message.protoPayload ? Any.toAmino(message.protoPayload, useInterfaces) : undefined;
     obj.text_payload = message.textPayload;
-    obj.json_payload = message.jsonPayload ? Struct.toAmino(message.jsonPayload) : undefined;
+    obj.json_payload = message.jsonPayload ? Struct.toAmino(message.jsonPayload, useInterfaces) : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     obj.receive_timestamp = message.receiveTimestamp ? Timestamp.toAmino(toTimestamp(message.receiveTimestamp)) : undefined;
     obj.severity = message.severity;
     obj.insert_id = message.insertId;
-    obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined;
+    obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest, useInterfaces) : undefined;
     obj.labels = {};
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {
         obj.labels[k] = v;
       });
     }
-    obj.operation = message.operation ? LogEntryOperation.toAmino(message.operation) : undefined;
+    obj.operation = message.operation ? LogEntryOperation.toAmino(message.operation, useInterfaces) : undefined;
     obj.trace = message.trace;
     obj.span_id = message.spanId;
     obj.trace_sampled = message.traceSampled;
-    obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toAmino(message.sourceLocation) : undefined;
-    obj.split = message.split ? LogSplit.toAmino(message.split) : undefined;
+    obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toAmino(message.sourceLocation, useInterfaces) : undefined;
+    obj.split = message.split ? LogSplit.toAmino(message.split, useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: LogEntryProtoMsg): LogEntry {
-    return LogEntry.decode(message.value);
+  fromProtoMsg(message: LogEntryProtoMsg, useInterfaces: boolean = true): LogEntry {
+    return LogEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LogEntry): Uint8Array {
     return LogEntry.encode(message).finish();
@@ -989,7 +989,7 @@ export const LogEntryOperation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): LogEntryOperation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LogEntryOperation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogEntryOperation();
@@ -1063,7 +1063,7 @@ export const LogEntryOperation = {
       last: object.last
     };
   },
-  toAmino(message: LogEntryOperation): LogEntryOperationAmino {
+  toAmino(message: LogEntryOperation, useInterfaces: boolean = true): LogEntryOperationAmino {
     const obj: any = {};
     obj.id = message.id;
     obj.producer = message.producer;
@@ -1071,8 +1071,8 @@ export const LogEntryOperation = {
     obj.last = message.last;
     return obj;
   },
-  fromProtoMsg(message: LogEntryOperationProtoMsg): LogEntryOperation {
-    return LogEntryOperation.decode(message.value);
+  fromProtoMsg(message: LogEntryOperationProtoMsg, useInterfaces: boolean = true): LogEntryOperation {
+    return LogEntryOperation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LogEntryOperation): Uint8Array {
     return LogEntryOperation.encode(message).finish();
@@ -1105,7 +1105,7 @@ export const LogEntrySourceLocation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): LogEntrySourceLocation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LogEntrySourceLocation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogEntrySourceLocation();
@@ -1172,15 +1172,15 @@ export const LogEntrySourceLocation = {
       function: object.function
     };
   },
-  toAmino(message: LogEntrySourceLocation): LogEntrySourceLocationAmino {
+  toAmino(message: LogEntrySourceLocation, useInterfaces: boolean = true): LogEntrySourceLocationAmino {
     const obj: any = {};
     obj.file = message.file;
     obj.line = message.line ? message.line.toString() : undefined;
     obj.function = message.function;
     return obj;
   },
-  fromProtoMsg(message: LogEntrySourceLocationProtoMsg): LogEntrySourceLocation {
-    return LogEntrySourceLocation.decode(message.value);
+  fromProtoMsg(message: LogEntrySourceLocationProtoMsg, useInterfaces: boolean = true): LogEntrySourceLocation {
+    return LogEntrySourceLocation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LogEntrySourceLocation): Uint8Array {
     return LogEntrySourceLocation.encode(message).finish();
@@ -1213,7 +1213,7 @@ export const LogSplit = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): LogSplit {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LogSplit {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogSplit();
@@ -1278,15 +1278,15 @@ export const LogSplit = {
       totalSplits: object.total_splits
     };
   },
-  toAmino(message: LogSplit): LogSplitAmino {
+  toAmino(message: LogSplit, useInterfaces: boolean = true): LogSplitAmino {
     const obj: any = {};
     obj.uid = message.uid;
     obj.index = message.index;
     obj.total_splits = message.totalSplits;
     return obj;
   },
-  fromProtoMsg(message: LogSplitProtoMsg): LogSplit {
-    return LogSplit.decode(message.value);
+  fromProtoMsg(message: LogSplitProtoMsg, useInterfaces: boolean = true): LogSplit {
+    return LogSplit.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LogSplit): Uint8Array {
     return LogSplit.encode(message).finish();
