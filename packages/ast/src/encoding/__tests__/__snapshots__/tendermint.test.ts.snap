@@ -85,7 +85,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ClientState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ClientState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientState();
@@ -96,25 +96,25 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
           message.chainId = reader.string();
           break;
         case 2:
-          message.trustLevel = Fraction.decode(reader, reader.uint32());
+          message.trustLevel = Fraction.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.trustingPeriod = Duration.decode(reader, reader.uint32());
+          message.trustingPeriod = Duration.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
-          message.unbondingPeriod = Duration.decode(reader, reader.uint32());
+          message.unbondingPeriod = Duration.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
-          message.maxClockDrift = Duration.decode(reader, reader.uint32());
+          message.maxClockDrift = Duration.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 6:
-          message.frozenHeight = Height.decode(reader, reader.uint32());
+          message.frozenHeight = Height.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 7:
-          message.latestHeight = Height.decode(reader, reader.uint32());
+          message.latestHeight = Height.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 8:
-          message.proofSpecs.push(ProofSpec.decode(reader, reader.uint32()));
+          message.proofSpecs.push(ProofSpec.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 9:
           message.upgradePath.push(reader.string());
@@ -238,17 +238,17 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
       allowUpdateAfterMisbehaviour: object.allow_update_after_misbehaviour
     };
   },
-  toAmino(message: ClientState): ClientStateAmino {
+  toAmino(message: ClientState, useInterfaces: boolean = false): ClientStateAmino {
     const obj: any = {};
     obj.chain_id = message.chainId;
-    obj.trust_level = message.trustLevel ? Fraction.toAmino(message.trustLevel) : undefined;
-    obj.trusting_period = message.trustingPeriod ? Duration.toAmino(message.trustingPeriod) : undefined;
-    obj.unbonding_period = message.unbondingPeriod ? Duration.toAmino(message.unbondingPeriod) : undefined;
-    obj.max_clock_drift = message.maxClockDrift ? Duration.toAmino(message.maxClockDrift) : undefined;
-    obj.frozen_height = message.frozenHeight ? Height.toAmino(message.frozenHeight) : {};
-    obj.latest_height = message.latestHeight ? Height.toAmino(message.latestHeight) : {};
+    obj.trust_level = message.trustLevel ? Fraction.toAmino(message.trustLevel, useInterfaces) : undefined;
+    obj.trusting_period = message.trustingPeriod ? Duration.toAmino(message.trustingPeriod, useInterfaces) : undefined;
+    obj.unbonding_period = message.unbondingPeriod ? Duration.toAmino(message.unbondingPeriod, useInterfaces) : undefined;
+    obj.max_clock_drift = message.maxClockDrift ? Duration.toAmino(message.maxClockDrift, useInterfaces) : undefined;
+    obj.frozen_height = message.frozenHeight ? Height.toAmino(message.frozenHeight, useInterfaces) : {};
+    obj.latest_height = message.latestHeight ? Height.toAmino(message.latestHeight, useInterfaces) : {};
     if (message.proofSpecs) {
-      obj.proof_specs = message.proofSpecs.map(e => e ? ProofSpec.toAmino(e) : undefined);
+      obj.proof_specs = message.proofSpecs.map(e => e ? ProofSpec.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.proof_specs = [];
     }
@@ -264,14 +264,14 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
   fromAminoMsg(object: ClientStateAminoMsg): ClientState {
     return ClientState.fromAmino(object.value);
   },
-  toAminoMsg(message: ClientState): ClientStateAminoMsg {
+  toAminoMsg(message: ClientState, useInterfaces: boolean = false): ClientStateAminoMsg {
     return {
       type: "cosmos-sdk/ClientState",
-      value: ClientState.toAmino(message)
+      value: ClientState.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ClientStateProtoMsg): ClientState {
-    return ClientState.decode(message.value);
+  fromProtoMsg(message: ClientStateProtoMsg, useInterfaces: boolean = false): ClientState {
+    return ClientState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ClientState): Uint8Array {
     return ClientState.encode(message).finish();
@@ -544,7 +544,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ClientState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ClientState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientState();
@@ -555,7 +555,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
           message.chainId = reader.string();
           break;
         case 2:
-          message.trustLevel = Fraction.decode(reader, reader.uint32());
+          message.trustLevel = Fraction.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.trustingPeriod = fromDuration(Duration.decode(reader, reader.uint32()));
@@ -567,13 +567,13 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
           message.maxClockDrift = fromDuration(Duration.decode(reader, reader.uint32()));
           break;
         case 6:
-          message.frozenHeight = Height.decode(reader, reader.uint32());
+          message.frozenHeight = Height.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 7:
-          message.latestHeight = Height.decode(reader, reader.uint32());
+          message.latestHeight = Height.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 8:
-          message.proofSpecs.push(ProofSpec.decode(reader, reader.uint32()));
+          message.proofSpecs.push(ProofSpec.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 9:
           message.upgradePath.push(reader.string());
@@ -697,17 +697,17 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
       allowUpdateAfterMisbehaviour: object.allow_update_after_misbehaviour
     };
   },
-  toAmino(message: ClientState): ClientStateAmino {
+  toAmino(message: ClientState, useInterfaces: boolean = false): ClientStateAmino {
     const obj: any = {};
     obj.chain_id = message.chainId;
-    obj.trust_level = message.trustLevel ? Fraction.toAmino(message.trustLevel) : undefined;
-    obj.trusting_period = message.trustingPeriod ? Duration.toAmino(message.trustingPeriod) : undefined;
-    obj.unbonding_period = message.unbondingPeriod ? Duration.toAmino(message.unbondingPeriod) : undefined;
-    obj.max_clock_drift = message.maxClockDrift ? Duration.toAmino(message.maxClockDrift) : undefined;
-    obj.frozen_height = message.frozenHeight ? Height.toAmino(message.frozenHeight) : {};
-    obj.latest_height = message.latestHeight ? Height.toAmino(message.latestHeight) : {};
+    obj.trust_level = message.trustLevel ? Fraction.toAmino(message.trustLevel, useInterfaces) : undefined;
+    obj.trusting_period = message.trustingPeriod ? Duration.toAmino(message.trustingPeriod, useInterfaces) : undefined;
+    obj.unbonding_period = message.unbondingPeriod ? Duration.toAmino(message.unbondingPeriod, useInterfaces) : undefined;
+    obj.max_clock_drift = message.maxClockDrift ? Duration.toAmino(message.maxClockDrift, useInterfaces) : undefined;
+    obj.frozen_height = message.frozenHeight ? Height.toAmino(message.frozenHeight, useInterfaces) : {};
+    obj.latest_height = message.latestHeight ? Height.toAmino(message.latestHeight, useInterfaces) : {};
     if (message.proofSpecs) {
-      obj.proof_specs = message.proofSpecs.map(e => e ? ProofSpec.toAmino(e) : undefined);
+      obj.proof_specs = message.proofSpecs.map(e => e ? ProofSpec.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.proof_specs = [];
     }
@@ -723,14 +723,14 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
   fromAminoMsg(object: ClientStateAminoMsg): ClientState {
     return ClientState.fromAmino(object.value);
   },
-  toAminoMsg(message: ClientState): ClientStateAminoMsg {
+  toAminoMsg(message: ClientState, useInterfaces: boolean = false): ClientStateAminoMsg {
     return {
       type: "cosmos-sdk/ClientState",
-      value: ClientState.toAmino(message)
+      value: ClientState.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ClientStateProtoMsg): ClientState {
-    return ClientState.decode(message.value);
+  fromProtoMsg(message: ClientStateProtoMsg, useInterfaces: boolean = false): ClientState {
+    return ClientState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ClientState): Uint8Array {
     return ClientState.encode(message).finish();

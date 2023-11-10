@@ -157,7 +157,7 @@ export const StakeAuthorization = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): StakeAuthorization {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): StakeAuthorization {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStakeAuthorization();
@@ -165,13 +165,13 @@ export const StakeAuthorization = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.maxTokens = Coin.decode(reader, reader.uint32());
+          message.maxTokens = Coin.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.allowList = StakeAuthorization_Validators.decode(reader, reader.uint32());
+          message.allowList = StakeAuthorization_Validators.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.denyList = StakeAuthorization_Validators.decode(reader, reader.uint32());
+          message.denyList = StakeAuthorization_Validators.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
           message.authorizationType = (reader.int32() as any);
@@ -237,16 +237,16 @@ export const StakeAuthorization = {
       authorizationType: isSet(object.authorization_type) ? authorizationTypeFromJSON(object.authorization_type) : -1
     };
   },
-  toAmino(message: StakeAuthorization): StakeAuthorizationAmino {
+  toAmino(message: StakeAuthorization, useInterfaces: boolean = true): StakeAuthorizationAmino {
     const obj: any = {};
-    obj.max_tokens = message.maxTokens ? Coin.toAmino(message.maxTokens) : undefined;
-    obj.allow_list = message.allowList ? StakeAuthorization_Validators.toAmino(message.allowList) : undefined;
-    obj.deny_list = message.denyList ? StakeAuthorization_Validators.toAmino(message.denyList) : undefined;
+    obj.max_tokens = message.maxTokens ? Coin.toAmino(message.maxTokens, useInterfaces) : undefined;
+    obj.allow_list = message.allowList ? StakeAuthorization_Validators.toAmino(message.allowList, useInterfaces) : undefined;
+    obj.deny_list = message.denyList ? StakeAuthorization_Validators.toAmino(message.denyList, useInterfaces) : undefined;
     obj.authorization_type = message.authorizationType;
     return obj;
   },
-  fromProtoMsg(message: StakeAuthorizationProtoMsg): StakeAuthorization {
-    return StakeAuthorization.decode(message.value);
+  fromProtoMsg(message: StakeAuthorizationProtoMsg, useInterfaces: boolean = true): StakeAuthorization {
+    return StakeAuthorization.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: StakeAuthorization): Uint8Array {
     return StakeAuthorization.encode(message).finish();
@@ -272,7 +272,7 @@ export const StakeAuthorization_Validators = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): StakeAuthorization_Validators {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): StakeAuthorization_Validators {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStakeAuthorization_Validators();
@@ -327,7 +327,7 @@ export const StakeAuthorization_Validators = {
       address: Array.isArray(object?.address) ? object.address.map((e: any) => e) : []
     };
   },
-  toAmino(message: StakeAuthorization_Validators): StakeAuthorization_ValidatorsAmino {
+  toAmino(message: StakeAuthorization_Validators, useInterfaces: boolean = true): StakeAuthorization_ValidatorsAmino {
     const obj: any = {};
     if (message.address) {
       obj.address = message.address.map(e => e);
@@ -336,8 +336,8 @@ export const StakeAuthorization_Validators = {
     }
     return obj;
   },
-  fromProtoMsg(message: StakeAuthorization_ValidatorsProtoMsg): StakeAuthorization_Validators {
-    return StakeAuthorization_Validators.decode(message.value);
+  fromProtoMsg(message: StakeAuthorization_ValidatorsProtoMsg, useInterfaces: boolean = true): StakeAuthorization_Validators {
+    return StakeAuthorization_Validators.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: StakeAuthorization_Validators): Uint8Array {
     return StakeAuthorization_Validators.encode(message).finish();

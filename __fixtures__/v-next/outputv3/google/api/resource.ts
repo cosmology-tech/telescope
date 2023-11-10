@@ -560,7 +560,7 @@ export const ResourceDescriptor = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ResourceDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ResourceDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceDescriptor();
@@ -684,7 +684,7 @@ export const ResourceDescriptor = {
       style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
     };
   },
-  toAmino(message: ResourceDescriptor): ResourceDescriptorAmino {
+  toAmino(message: ResourceDescriptor, useInterfaces: boolean = true): ResourceDescriptorAmino {
     const obj: any = {};
     obj.type = message.type;
     if (message.pattern) {
@@ -703,8 +703,8 @@ export const ResourceDescriptor = {
     }
     return obj;
   },
-  fromProtoMsg(message: ResourceDescriptorProtoMsg): ResourceDescriptor {
-    return ResourceDescriptor.decode(message.value);
+  fromProtoMsg(message: ResourceDescriptorProtoMsg, useInterfaces: boolean = true): ResourceDescriptor {
+    return ResourceDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ResourceDescriptor): Uint8Array {
     return ResourceDescriptor.encode(message).finish();
@@ -733,7 +733,7 @@ export const ResourceReference = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ResourceReference {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ResourceReference {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceReference();
@@ -789,14 +789,14 @@ export const ResourceReference = {
       childType: object.child_type
     };
   },
-  toAmino(message: ResourceReference): ResourceReferenceAmino {
+  toAmino(message: ResourceReference, useInterfaces: boolean = true): ResourceReferenceAmino {
     const obj: any = {};
     obj.type = message.type;
     obj.child_type = message.childType;
     return obj;
   },
-  fromProtoMsg(message: ResourceReferenceProtoMsg): ResourceReference {
-    return ResourceReference.decode(message.value);
+  fromProtoMsg(message: ResourceReferenceProtoMsg, useInterfaces: boolean = true): ResourceReference {
+    return ResourceReference.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ResourceReference): Uint8Array {
     return ResourceReference.encode(message).finish();

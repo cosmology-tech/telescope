@@ -787,7 +787,7 @@ export const Member = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Member {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Member {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMember();
@@ -861,7 +861,7 @@ export const Member = {
       addedAt: object?.added_at ? fromTimestamp(Timestamp.fromAmino(object.added_at)) : undefined
     };
   },
-  toAmino(message: Member): MemberAmino {
+  toAmino(message: Member, useInterfaces: boolean = true): MemberAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.weight = message.weight;
@@ -872,14 +872,14 @@ export const Member = {
   fromAminoMsg(object: MemberAminoMsg): Member {
     return Member.fromAmino(object.value);
   },
-  toAminoMsg(message: Member): MemberAminoMsg {
+  toAminoMsg(message: Member, useInterfaces: boolean = true): MemberAminoMsg {
     return {
       type: "cosmos-sdk/Member",
-      value: Member.toAmino(message)
+      value: Member.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MemberProtoMsg): Member {
-    return Member.decode(message.value);
+  fromProtoMsg(message: MemberProtoMsg, useInterfaces: boolean = true): Member {
+    return Member.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Member): Uint8Array {
     return Member.encode(message).finish();
@@ -905,7 +905,7 @@ export const Members = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Members {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Members {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMembers();
@@ -913,7 +913,7 @@ export const Members = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.members.push(Member.decode(reader, reader.uint32()));
+          message.members.push(Member.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -960,10 +960,10 @@ export const Members = {
       members: Array.isArray(object?.members) ? object.members.map((e: any) => Member.fromAmino(e)) : []
     };
   },
-  toAmino(message: Members): MembersAmino {
+  toAmino(message: Members, useInterfaces: boolean = true): MembersAmino {
     const obj: any = {};
     if (message.members) {
-      obj.members = message.members.map(e => e ? Member.toAmino(e) : undefined);
+      obj.members = message.members.map(e => e ? Member.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.members = [];
     }
@@ -972,14 +972,14 @@ export const Members = {
   fromAminoMsg(object: MembersAminoMsg): Members {
     return Members.fromAmino(object.value);
   },
-  toAminoMsg(message: Members): MembersAminoMsg {
+  toAminoMsg(message: Members, useInterfaces: boolean = true): MembersAminoMsg {
     return {
       type: "cosmos-sdk/Members",
-      value: Members.toAmino(message)
+      value: Members.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MembersProtoMsg): Members {
-    return Members.decode(message.value);
+  fromProtoMsg(message: MembersProtoMsg, useInterfaces: boolean = true): Members {
+    return Members.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Members): Uint8Array {
     return Members.encode(message).finish();
@@ -1010,7 +1010,7 @@ export const ThresholdDecisionPolicy = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ThresholdDecisionPolicy {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ThresholdDecisionPolicy {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseThresholdDecisionPolicy();
@@ -1021,7 +1021,7 @@ export const ThresholdDecisionPolicy = {
           message.threshold = reader.string();
           break;
         case 2:
-          message.windows = DecisionPolicyWindows.decode(reader, reader.uint32());
+          message.windows = DecisionPolicyWindows.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1068,23 +1068,23 @@ export const ThresholdDecisionPolicy = {
       windows: object?.windows ? DecisionPolicyWindows.fromAmino(object.windows) : undefined
     };
   },
-  toAmino(message: ThresholdDecisionPolicy): ThresholdDecisionPolicyAmino {
+  toAmino(message: ThresholdDecisionPolicy, useInterfaces: boolean = true): ThresholdDecisionPolicyAmino {
     const obj: any = {};
     obj.threshold = message.threshold;
-    obj.windows = message.windows ? DecisionPolicyWindows.toAmino(message.windows) : undefined;
+    obj.windows = message.windows ? DecisionPolicyWindows.toAmino(message.windows, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: ThresholdDecisionPolicyAminoMsg): ThresholdDecisionPolicy {
     return ThresholdDecisionPolicy.fromAmino(object.value);
   },
-  toAminoMsg(message: ThresholdDecisionPolicy): ThresholdDecisionPolicyAminoMsg {
+  toAminoMsg(message: ThresholdDecisionPolicy, useInterfaces: boolean = true): ThresholdDecisionPolicyAminoMsg {
     return {
       type: "cosmos-sdk/ThresholdDecisionPolicy",
-      value: ThresholdDecisionPolicy.toAmino(message)
+      value: ThresholdDecisionPolicy.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ThresholdDecisionPolicyProtoMsg): ThresholdDecisionPolicy {
-    return ThresholdDecisionPolicy.decode(message.value);
+  fromProtoMsg(message: ThresholdDecisionPolicyProtoMsg, useInterfaces: boolean = true): ThresholdDecisionPolicy {
+    return ThresholdDecisionPolicy.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ThresholdDecisionPolicy): Uint8Array {
     return ThresholdDecisionPolicy.encode(message).finish();
@@ -1115,7 +1115,7 @@ export const PercentageDecisionPolicy = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): PercentageDecisionPolicy {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PercentageDecisionPolicy {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePercentageDecisionPolicy();
@@ -1126,7 +1126,7 @@ export const PercentageDecisionPolicy = {
           message.percentage = reader.string();
           break;
         case 2:
-          message.windows = DecisionPolicyWindows.decode(reader, reader.uint32());
+          message.windows = DecisionPolicyWindows.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1173,23 +1173,23 @@ export const PercentageDecisionPolicy = {
       windows: object?.windows ? DecisionPolicyWindows.fromAmino(object.windows) : undefined
     };
   },
-  toAmino(message: PercentageDecisionPolicy): PercentageDecisionPolicyAmino {
+  toAmino(message: PercentageDecisionPolicy, useInterfaces: boolean = true): PercentageDecisionPolicyAmino {
     const obj: any = {};
     obj.percentage = message.percentage;
-    obj.windows = message.windows ? DecisionPolicyWindows.toAmino(message.windows) : undefined;
+    obj.windows = message.windows ? DecisionPolicyWindows.toAmino(message.windows, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: PercentageDecisionPolicyAminoMsg): PercentageDecisionPolicy {
     return PercentageDecisionPolicy.fromAmino(object.value);
   },
-  toAminoMsg(message: PercentageDecisionPolicy): PercentageDecisionPolicyAminoMsg {
+  toAminoMsg(message: PercentageDecisionPolicy, useInterfaces: boolean = true): PercentageDecisionPolicyAminoMsg {
     return {
       type: "cosmos-sdk/PercentageDecisionPolicy",
-      value: PercentageDecisionPolicy.toAmino(message)
+      value: PercentageDecisionPolicy.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: PercentageDecisionPolicyProtoMsg): PercentageDecisionPolicy {
-    return PercentageDecisionPolicy.decode(message.value);
+  fromProtoMsg(message: PercentageDecisionPolicyProtoMsg, useInterfaces: boolean = true): PercentageDecisionPolicy {
+    return PercentageDecisionPolicy.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PercentageDecisionPolicy): Uint8Array {
     return PercentageDecisionPolicy.encode(message).finish();
@@ -1219,7 +1219,7 @@ export const DecisionPolicyWindows = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DecisionPolicyWindows {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DecisionPolicyWindows {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecisionPolicyWindows();
@@ -1227,10 +1227,10 @@ export const DecisionPolicyWindows = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.votingPeriod = Duration.decode(reader, reader.uint32());
+          message.votingPeriod = Duration.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.minExecutionPeriod = Duration.decode(reader, reader.uint32());
+          message.minExecutionPeriod = Duration.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1279,23 +1279,23 @@ export const DecisionPolicyWindows = {
       minExecutionPeriod: object?.min_execution_period ? Duration.fromAmino(object.min_execution_period) : undefined
     };
   },
-  toAmino(message: DecisionPolicyWindows): DecisionPolicyWindowsAmino {
+  toAmino(message: DecisionPolicyWindows, useInterfaces: boolean = true): DecisionPolicyWindowsAmino {
     const obj: any = {};
-    obj.voting_period = message.votingPeriod ? Duration.toAmino(message.votingPeriod) : undefined;
-    obj.min_execution_period = message.minExecutionPeriod ? Duration.toAmino(message.minExecutionPeriod) : undefined;
+    obj.voting_period = message.votingPeriod ? Duration.toAmino(message.votingPeriod, useInterfaces) : undefined;
+    obj.min_execution_period = message.minExecutionPeriod ? Duration.toAmino(message.minExecutionPeriod, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: DecisionPolicyWindowsAminoMsg): DecisionPolicyWindows {
     return DecisionPolicyWindows.fromAmino(object.value);
   },
-  toAminoMsg(message: DecisionPolicyWindows): DecisionPolicyWindowsAminoMsg {
+  toAminoMsg(message: DecisionPolicyWindows, useInterfaces: boolean = true): DecisionPolicyWindowsAminoMsg {
     return {
       type: "cosmos-sdk/DecisionPolicyWindows",
-      value: DecisionPolicyWindows.toAmino(message)
+      value: DecisionPolicyWindows.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: DecisionPolicyWindowsProtoMsg): DecisionPolicyWindows {
-    return DecisionPolicyWindows.decode(message.value);
+  fromProtoMsg(message: DecisionPolicyWindowsProtoMsg, useInterfaces: boolean = true): DecisionPolicyWindows {
+    return DecisionPolicyWindows.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DecisionPolicyWindows): Uint8Array {
     return DecisionPolicyWindows.encode(message).finish();
@@ -1341,7 +1341,7 @@ export const GroupInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GroupInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GroupInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGroupInfo();
@@ -1437,7 +1437,7 @@ export const GroupInfo = {
       createdAt: object?.created_at ? fromTimestamp(Timestamp.fromAmino(object.created_at)) : undefined
     };
   },
-  toAmino(message: GroupInfo): GroupInfoAmino {
+  toAmino(message: GroupInfo, useInterfaces: boolean = true): GroupInfoAmino {
     const obj: any = {};
     obj.id = message.id ? message.id.toString() : undefined;
     obj.admin = message.admin;
@@ -1450,14 +1450,14 @@ export const GroupInfo = {
   fromAminoMsg(object: GroupInfoAminoMsg): GroupInfo {
     return GroupInfo.fromAmino(object.value);
   },
-  toAminoMsg(message: GroupInfo): GroupInfoAminoMsg {
+  toAminoMsg(message: GroupInfo, useInterfaces: boolean = true): GroupInfoAminoMsg {
     return {
       type: "cosmos-sdk/GroupInfo",
-      value: GroupInfo.toAmino(message)
+      value: GroupInfo.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GroupInfoProtoMsg): GroupInfo {
-    return GroupInfo.decode(message.value);
+  fromProtoMsg(message: GroupInfoProtoMsg, useInterfaces: boolean = true): GroupInfo {
+    return GroupInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GroupInfo): Uint8Array {
     return GroupInfo.encode(message).finish();
@@ -1487,7 +1487,7 @@ export const GroupMember = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GroupMember {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GroupMember {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGroupMember();
@@ -1498,7 +1498,7 @@ export const GroupMember = {
           message.groupId = reader.uint64();
           break;
         case 2:
-          message.member = Member.decode(reader, reader.uint32());
+          message.member = Member.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1547,23 +1547,23 @@ export const GroupMember = {
       member: object?.member ? Member.fromAmino(object.member) : undefined
     };
   },
-  toAmino(message: GroupMember): GroupMemberAmino {
+  toAmino(message: GroupMember, useInterfaces: boolean = true): GroupMemberAmino {
     const obj: any = {};
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
-    obj.member = message.member ? Member.toAmino(message.member) : undefined;
+    obj.member = message.member ? Member.toAmino(message.member, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: GroupMemberAminoMsg): GroupMember {
     return GroupMember.fromAmino(object.value);
   },
-  toAminoMsg(message: GroupMember): GroupMemberAminoMsg {
+  toAminoMsg(message: GroupMember, useInterfaces: boolean = true): GroupMemberAminoMsg {
     return {
       type: "cosmos-sdk/GroupMember",
-      value: GroupMember.toAmino(message)
+      value: GroupMember.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GroupMemberProtoMsg): GroupMember {
-    return GroupMember.decode(message.value);
+  fromProtoMsg(message: GroupMemberProtoMsg, useInterfaces: boolean = true): GroupMember {
+    return GroupMember.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GroupMember): Uint8Array {
     return GroupMember.encode(message).finish();
@@ -1613,7 +1613,7 @@ export const GroupPolicyInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GroupPolicyInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GroupPolicyInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGroupPolicyInfo();
@@ -1636,7 +1636,7 @@ export const GroupPolicyInfo = {
           message.version = reader.uint64();
           break;
         case 6:
-          message.decisionPolicy = (DecisionPolicy_InterfaceDecoder(reader) as Any);
+          message.decisionPolicy = useInterfaces ? (DecisionPolicy_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 7:
           message.createdAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
@@ -1720,28 +1720,28 @@ export const GroupPolicyInfo = {
       createdAt: object?.created_at ? fromTimestamp(Timestamp.fromAmino(object.created_at)) : undefined
     };
   },
-  toAmino(message: GroupPolicyInfo): GroupPolicyInfoAmino {
+  toAmino(message: GroupPolicyInfo, useInterfaces: boolean = true): GroupPolicyInfoAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
     obj.admin = message.admin;
     obj.metadata = message.metadata;
     obj.version = message.version ? message.version.toString() : undefined;
-    obj.decision_policy = message.decisionPolicy ? DecisionPolicy_ToAmino((message.decisionPolicy as Any)) : undefined;
+    obj.decision_policy = message.decisionPolicy ? DecisionPolicy_ToAmino((message.decisionPolicy as Any), useInterfaces) : undefined;
     obj.created_at = message.createdAt ? Timestamp.toAmino(toTimestamp(message.createdAt)) : undefined;
     return obj;
   },
   fromAminoMsg(object: GroupPolicyInfoAminoMsg): GroupPolicyInfo {
     return GroupPolicyInfo.fromAmino(object.value);
   },
-  toAminoMsg(message: GroupPolicyInfo): GroupPolicyInfoAminoMsg {
+  toAminoMsg(message: GroupPolicyInfo, useInterfaces: boolean = true): GroupPolicyInfoAminoMsg {
     return {
       type: "cosmos-sdk/GroupPolicyInfo",
-      value: GroupPolicyInfo.toAmino(message)
+      value: GroupPolicyInfo.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GroupPolicyInfoProtoMsg): GroupPolicyInfo {
-    return GroupPolicyInfo.decode(message.value);
+  fromProtoMsg(message: GroupPolicyInfoProtoMsg, useInterfaces: boolean = true): GroupPolicyInfo {
+    return GroupPolicyInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GroupPolicyInfo): Uint8Array {
     return GroupPolicyInfo.encode(message).finish();
@@ -1815,7 +1815,7 @@ export const Proposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Proposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Proposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProposal();
@@ -1850,7 +1850,7 @@ export const Proposal = {
           message.result = (reader.int32() as any);
           break;
         case 10:
-          message.finalTallyResult = TallyResult.decode(reader, reader.uint32());
+          message.finalTallyResult = TallyResult.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 11:
           message.votingPeriodEnd = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
@@ -1859,7 +1859,7 @@ export const Proposal = {
           message.executorResult = (reader.int32() as any);
           break;
         case 13:
-          message.messages.push(Any.decode(reader, reader.uint32()));
+          message.messages.push(Any.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1994,7 +1994,7 @@ export const Proposal = {
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : []
     };
   },
-  toAmino(message: Proposal): ProposalAmino {
+  toAmino(message: Proposal, useInterfaces: boolean = true): ProposalAmino {
     const obj: any = {};
     obj.id = message.id ? message.id.toString() : undefined;
     obj.address = message.address;
@@ -2009,11 +2009,11 @@ export const Proposal = {
     obj.group_policy_version = message.groupPolicyVersion ? message.groupPolicyVersion.toString() : undefined;
     obj.status = message.status;
     obj.result = message.result;
-    obj.final_tally_result = message.finalTallyResult ? TallyResult.toAmino(message.finalTallyResult) : undefined;
+    obj.final_tally_result = message.finalTallyResult ? TallyResult.toAmino(message.finalTallyResult, useInterfaces) : undefined;
     obj.voting_period_end = message.votingPeriodEnd ? Timestamp.toAmino(toTimestamp(message.votingPeriodEnd)) : undefined;
     obj.executor_result = message.executorResult;
     if (message.messages) {
-      obj.messages = message.messages.map(e => e ? Any.toAmino(e) : undefined);
+      obj.messages = message.messages.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.messages = [];
     }
@@ -2022,14 +2022,14 @@ export const Proposal = {
   fromAminoMsg(object: ProposalAminoMsg): Proposal {
     return Proposal.fromAmino(object.value);
   },
-  toAminoMsg(message: Proposal): ProposalAminoMsg {
+  toAminoMsg(message: Proposal, useInterfaces: boolean = true): ProposalAminoMsg {
     return {
       type: "cosmos-sdk/Proposal",
-      value: Proposal.toAmino(message)
+      value: Proposal.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ProposalProtoMsg): Proposal {
-    return Proposal.decode(message.value);
+  fromProtoMsg(message: ProposalProtoMsg, useInterfaces: boolean = true): Proposal {
+    return Proposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Proposal): Uint8Array {
     return Proposal.encode(message).finish();
@@ -2067,7 +2067,7 @@ export const TallyResult = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): TallyResult {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): TallyResult {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTallyResult();
@@ -2141,7 +2141,7 @@ export const TallyResult = {
       noWithVetoCount: object.no_with_veto_count
     };
   },
-  toAmino(message: TallyResult): TallyResultAmino {
+  toAmino(message: TallyResult, useInterfaces: boolean = true): TallyResultAmino {
     const obj: any = {};
     obj.yes_count = message.yesCount;
     obj.abstain_count = message.abstainCount;
@@ -2152,14 +2152,14 @@ export const TallyResult = {
   fromAminoMsg(object: TallyResultAminoMsg): TallyResult {
     return TallyResult.fromAmino(object.value);
   },
-  toAminoMsg(message: TallyResult): TallyResultAminoMsg {
+  toAminoMsg(message: TallyResult, useInterfaces: boolean = true): TallyResultAminoMsg {
     return {
       type: "cosmos-sdk/TallyResult",
-      value: TallyResult.toAmino(message)
+      value: TallyResult.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: TallyResultProtoMsg): TallyResult {
-    return TallyResult.decode(message.value);
+  fromProtoMsg(message: TallyResultProtoMsg, useInterfaces: boolean = true): TallyResult {
+    return TallyResult.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: TallyResult): Uint8Array {
     return TallyResult.encode(message).finish();
@@ -2201,7 +2201,7 @@ export const Vote = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Vote {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Vote {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVote();
@@ -2286,7 +2286,7 @@ export const Vote = {
       submitTime: object?.submit_time ? fromTimestamp(Timestamp.fromAmino(object.submit_time)) : undefined
     };
   },
-  toAmino(message: Vote): VoteAmino {
+  toAmino(message: Vote, useInterfaces: boolean = true): VoteAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     obj.voter = message.voter;
@@ -2298,14 +2298,14 @@ export const Vote = {
   fromAminoMsg(object: VoteAminoMsg): Vote {
     return Vote.fromAmino(object.value);
   },
-  toAminoMsg(message: Vote): VoteAminoMsg {
+  toAminoMsg(message: Vote, useInterfaces: boolean = true): VoteAminoMsg {
     return {
       type: "cosmos-sdk/Vote",
-      value: Vote.toAmino(message)
+      value: Vote.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: VoteProtoMsg): Vote {
-    return Vote.decode(message.value);
+  fromProtoMsg(message: VoteProtoMsg, useInterfaces: boolean = true): Vote {
+    return Vote.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Vote): Uint8Array {
     return Vote.encode(message).finish();
@@ -2319,12 +2319,12 @@ export const Vote = {
 };
 export const DecisionPolicy_InterfaceDecoder = (input: BinaryReader | Uint8Array): ThresholdDecisionPolicy | PercentageDecisionPolicy | Any => {
   const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32());
+  const data = Any.decode(reader, reader.uint32(), true);
   switch (data.typeUrl) {
     case "/cosmos.group.v1.ThresholdDecisionPolicy":
-      return ThresholdDecisionPolicy.decode(data.value);
+      return ThresholdDecisionPolicy.decode(data.value, undefined, true);
     case "/cosmos.group.v1.PercentageDecisionPolicy":
-      return PercentageDecisionPolicy.decode(data.value);
+      return PercentageDecisionPolicy.decode(data.value, undefined, true);
     default:
       return data;
   }
@@ -2345,19 +2345,19 @@ export const DecisionPolicy_FromAmino = (content: AnyAmino) => {
       return Any.fromAmino(content);
   }
 };
-export const DecisionPolicy_ToAmino = (content: Any) => {
+export const DecisionPolicy_ToAmino = (content: Any, useInterfaces: boolean = true) => {
   switch (content.typeUrl) {
     case "/cosmos.group.v1.ThresholdDecisionPolicy":
       return {
         type: "cosmos-sdk/ThresholdDecisionPolicy",
-        value: ThresholdDecisionPolicy.toAmino(ThresholdDecisionPolicy.decode(content.value))
+        value: ThresholdDecisionPolicy.toAmino(ThresholdDecisionPolicy.decode(content.value, undefined, useInterfaces), useInterfaces)
       };
     case "/cosmos.group.v1.PercentageDecisionPolicy":
       return {
         type: "cosmos-sdk/PercentageDecisionPolicy",
-        value: PercentageDecisionPolicy.toAmino(PercentageDecisionPolicy.decode(content.value))
+        value: PercentageDecisionPolicy.toAmino(PercentageDecisionPolicy.decode(content.value, undefined, useInterfaces), useInterfaces)
       };
     default:
-      return Any.toAmino(content);
+      return Any.toAmino(content, useInterfaces);
   }
 };

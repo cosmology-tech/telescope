@@ -128,7 +128,7 @@ export const QueryEvidenceRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryEvidenceRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryEvidenceRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEvidenceRequest();
@@ -175,7 +175,7 @@ export const QueryEvidenceRequest = {
       evidenceHash: object.evidence_hash
     };
   },
-  toAmino(message: QueryEvidenceRequest): QueryEvidenceRequestAmino {
+  toAmino(message: QueryEvidenceRequest, useInterfaces: boolean = true): QueryEvidenceRequestAmino {
     const obj: any = {};
     obj.evidence_hash = message.evidenceHash;
     return obj;
@@ -183,14 +183,14 @@ export const QueryEvidenceRequest = {
   fromAminoMsg(object: QueryEvidenceRequestAminoMsg): QueryEvidenceRequest {
     return QueryEvidenceRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryEvidenceRequest): QueryEvidenceRequestAminoMsg {
+  toAminoMsg(message: QueryEvidenceRequest, useInterfaces: boolean = true): QueryEvidenceRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryEvidenceRequest",
-      value: QueryEvidenceRequest.toAmino(message)
+      value: QueryEvidenceRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryEvidenceRequestProtoMsg): QueryEvidenceRequest {
-    return QueryEvidenceRequest.decode(message.value);
+  fromProtoMsg(message: QueryEvidenceRequestProtoMsg, useInterfaces: boolean = true): QueryEvidenceRequest {
+    return QueryEvidenceRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryEvidenceRequest): Uint8Array {
     return QueryEvidenceRequest.encode(message).finish();
@@ -216,7 +216,7 @@ export const QueryEvidenceResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryEvidenceResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryEvidenceResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEvidenceResponse();
@@ -224,7 +224,7 @@ export const QueryEvidenceResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.evidence = Any.decode(reader, reader.uint32());
+          message.evidence = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -265,22 +265,22 @@ export const QueryEvidenceResponse = {
       evidence: object?.evidence ? Any.fromAmino(object.evidence) : undefined
     };
   },
-  toAmino(message: QueryEvidenceResponse): QueryEvidenceResponseAmino {
+  toAmino(message: QueryEvidenceResponse, useInterfaces: boolean = true): QueryEvidenceResponseAmino {
     const obj: any = {};
-    obj.evidence = message.evidence ? Any.toAmino(message.evidence) : undefined;
+    obj.evidence = message.evidence ? Any.toAmino(message.evidence, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryEvidenceResponseAminoMsg): QueryEvidenceResponse {
     return QueryEvidenceResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryEvidenceResponse): QueryEvidenceResponseAminoMsg {
+  toAminoMsg(message: QueryEvidenceResponse, useInterfaces: boolean = true): QueryEvidenceResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryEvidenceResponse",
-      value: QueryEvidenceResponse.toAmino(message)
+      value: QueryEvidenceResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryEvidenceResponseProtoMsg): QueryEvidenceResponse {
-    return QueryEvidenceResponse.decode(message.value);
+  fromProtoMsg(message: QueryEvidenceResponseProtoMsg, useInterfaces: boolean = true): QueryEvidenceResponse {
+    return QueryEvidenceResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryEvidenceResponse): Uint8Array {
     return QueryEvidenceResponse.encode(message).finish();
@@ -306,7 +306,7 @@ export const QueryAllEvidenceRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAllEvidenceRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAllEvidenceRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllEvidenceRequest();
@@ -314,7 +314,7 @@ export const QueryAllEvidenceRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -355,22 +355,22 @@ export const QueryAllEvidenceRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryAllEvidenceRequest): QueryAllEvidenceRequestAmino {
+  toAmino(message: QueryAllEvidenceRequest, useInterfaces: boolean = true): QueryAllEvidenceRequestAmino {
     const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryAllEvidenceRequestAminoMsg): QueryAllEvidenceRequest {
     return QueryAllEvidenceRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryAllEvidenceRequest): QueryAllEvidenceRequestAminoMsg {
+  toAminoMsg(message: QueryAllEvidenceRequest, useInterfaces: boolean = true): QueryAllEvidenceRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryAllEvidenceRequest",
-      value: QueryAllEvidenceRequest.toAmino(message)
+      value: QueryAllEvidenceRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryAllEvidenceRequestProtoMsg): QueryAllEvidenceRequest {
-    return QueryAllEvidenceRequest.decode(message.value);
+  fromProtoMsg(message: QueryAllEvidenceRequestProtoMsg, useInterfaces: boolean = true): QueryAllEvidenceRequest {
+    return QueryAllEvidenceRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAllEvidenceRequest): Uint8Array {
     return QueryAllEvidenceRequest.encode(message).finish();
@@ -400,7 +400,7 @@ export const QueryAllEvidenceResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAllEvidenceResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAllEvidenceResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllEvidenceResponse();
@@ -408,10 +408,10 @@ export const QueryAllEvidenceResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.evidence.push(Any.decode(reader, reader.uint32()));
+          message.evidence.push(Any.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -466,27 +466,27 @@ export const QueryAllEvidenceResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryAllEvidenceResponse): QueryAllEvidenceResponseAmino {
+  toAmino(message: QueryAllEvidenceResponse, useInterfaces: boolean = true): QueryAllEvidenceResponseAmino {
     const obj: any = {};
     if (message.evidence) {
-      obj.evidence = message.evidence.map(e => e ? Any.toAmino(e) : undefined);
+      obj.evidence = message.evidence.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.evidence = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryAllEvidenceResponseAminoMsg): QueryAllEvidenceResponse {
     return QueryAllEvidenceResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryAllEvidenceResponse): QueryAllEvidenceResponseAminoMsg {
+  toAminoMsg(message: QueryAllEvidenceResponse, useInterfaces: boolean = true): QueryAllEvidenceResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryAllEvidenceResponse",
-      value: QueryAllEvidenceResponse.toAmino(message)
+      value: QueryAllEvidenceResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryAllEvidenceResponseProtoMsg): QueryAllEvidenceResponse {
-    return QueryAllEvidenceResponse.decode(message.value);
+  fromProtoMsg(message: QueryAllEvidenceResponseProtoMsg, useInterfaces: boolean = true): QueryAllEvidenceResponse {
+    return QueryAllEvidenceResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAllEvidenceResponse): Uint8Array {
     return QueryAllEvidenceResponse.encode(message).finish();

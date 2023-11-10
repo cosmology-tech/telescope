@@ -61,7 +61,11 @@ export const createInterfaceDecoderHelper = (
       t.returnStatement(
         t.callExpression(
           t.memberExpression(t.identifier(returnType), t.identifier('decode')),
-          [t.memberExpression(t.identifier('data'), t.identifier('value'))]
+          [
+            t.memberExpression(t.identifier('data'), t.identifier('value')),
+            t.identifier('undefined'),
+            t.booleanLiteral(true)
+          ]
         )
       )
     ]);
@@ -121,7 +125,8 @@ export const createInterfaceDecoderHelper = (
                         t.identifier('uint32') // NOTE is it always uint32?
                       ),
                       []
-                    )
+                    ),
+                    t.booleanLiteral(true)
                   ]
                 )
               )

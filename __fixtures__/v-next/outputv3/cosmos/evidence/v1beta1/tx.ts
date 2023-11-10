@@ -69,7 +69,7 @@ export const MsgSubmitEvidence = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSubmitEvidence {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSubmitEvidence {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitEvidence();
@@ -80,7 +80,7 @@ export const MsgSubmitEvidence = {
           message.submitter = reader.string();
           break;
         case 2:
-          message.evidence = (Evidence_InterfaceDecoder(reader) as Any);
+          message.evidence = useInterfaces ? (Evidence_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -127,14 +127,14 @@ export const MsgSubmitEvidence = {
       evidence: object?.evidence ? Evidence_FromAmino(object.evidence) : undefined
     };
   },
-  toAmino(message: MsgSubmitEvidence): MsgSubmitEvidenceAmino {
+  toAmino(message: MsgSubmitEvidence, useInterfaces: boolean = true): MsgSubmitEvidenceAmino {
     const obj: any = {};
     obj.submitter = message.submitter;
-    obj.evidence = message.evidence ? Evidence_ToAmino((message.evidence as Any)) : undefined;
+    obj.evidence = message.evidence ? Evidence_ToAmino((message.evidence as Any), useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: MsgSubmitEvidenceProtoMsg): MsgSubmitEvidence {
-    return MsgSubmitEvidence.decode(message.value);
+  fromProtoMsg(message: MsgSubmitEvidenceProtoMsg, useInterfaces: boolean = true): MsgSubmitEvidence {
+    return MsgSubmitEvidence.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSubmitEvidence): Uint8Array {
     return MsgSubmitEvidence.encode(message).finish();
@@ -160,7 +160,7 @@ export const MsgSubmitEvidenceResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSubmitEvidenceResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSubmitEvidenceResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitEvidenceResponse();
@@ -207,13 +207,13 @@ export const MsgSubmitEvidenceResponse = {
       hash: object.hash
     };
   },
-  toAmino(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseAmino {
+  toAmino(message: MsgSubmitEvidenceResponse, useInterfaces: boolean = true): MsgSubmitEvidenceResponseAmino {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
   },
-  fromProtoMsg(message: MsgSubmitEvidenceResponseProtoMsg): MsgSubmitEvidenceResponse {
-    return MsgSubmitEvidenceResponse.decode(message.value);
+  fromProtoMsg(message: MsgSubmitEvidenceResponseProtoMsg, useInterfaces: boolean = true): MsgSubmitEvidenceResponse {
+    return MsgSubmitEvidenceResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSubmitEvidenceResponse): Uint8Array {
     return MsgSubmitEvidenceResponse.encode(message).finish();
@@ -227,7 +227,7 @@ export const MsgSubmitEvidenceResponse = {
 };
 export const Evidence_InterfaceDecoder = (input: BinaryReader | Uint8Array): Any => {
   const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32());
+  const data = Any.decode(reader, reader.uint32(), true);
   switch (data.typeUrl) {
     default:
       return data;
@@ -236,6 +236,6 @@ export const Evidence_InterfaceDecoder = (input: BinaryReader | Uint8Array): Any
 export const Evidence_FromAmino = (content: AnyAmino) => {
   return Any.fromAmino(content);
 };
-export const Evidence_ToAmino = (content: Any) => {
-  return Any.toAmino(content);
+export const Evidence_ToAmino = (content: Any, useInterfaces: boolean = true) => {
+  return Any.toAmino(content, useInterfaces);
 };

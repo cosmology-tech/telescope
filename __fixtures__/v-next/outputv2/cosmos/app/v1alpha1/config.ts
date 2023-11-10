@@ -117,7 +117,7 @@ export const Config = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Config {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Config {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfig();
@@ -125,7 +125,7 @@ export const Config = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.modules.push(ModuleConfig.decode(reader, reader.uint32()));
+          message.modules.push(ModuleConfig.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -172,10 +172,10 @@ export const Config = {
       modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => ModuleConfig.fromAmino(e)) : []
     };
   },
-  toAmino(message: Config): ConfigAmino {
+  toAmino(message: Config, useInterfaces: boolean = true): ConfigAmino {
     const obj: any = {};
     if (message.modules) {
-      obj.modules = message.modules.map(e => e ? ModuleConfig.toAmino(e) : undefined);
+      obj.modules = message.modules.map(e => e ? ModuleConfig.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.modules = [];
     }
@@ -184,14 +184,14 @@ export const Config = {
   fromAminoMsg(object: ConfigAminoMsg): Config {
     return Config.fromAmino(object.value);
   },
-  toAminoMsg(message: Config): ConfigAminoMsg {
+  toAminoMsg(message: Config, useInterfaces: boolean = true): ConfigAminoMsg {
     return {
       type: "cosmos-sdk/Config",
-      value: Config.toAmino(message)
+      value: Config.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ConfigProtoMsg): Config {
-    return Config.decode(message.value);
+  fromProtoMsg(message: ConfigProtoMsg, useInterfaces: boolean = true): Config {
+    return Config.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Config): Uint8Array {
     return Config.encode(message).finish();
@@ -221,7 +221,7 @@ export const ModuleConfig = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ModuleConfig {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModuleConfig {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleConfig();
@@ -232,7 +232,7 @@ export const ModuleConfig = {
           message.name = reader.string();
           break;
         case 2:
-          message.config = Any.decode(reader, reader.uint32());
+          message.config = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -279,23 +279,23 @@ export const ModuleConfig = {
       config: object?.config ? Any.fromAmino(object.config) : undefined
     };
   },
-  toAmino(message: ModuleConfig): ModuleConfigAmino {
+  toAmino(message: ModuleConfig, useInterfaces: boolean = true): ModuleConfigAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.config = message.config ? Any.toAmino(message.config) : undefined;
+    obj.config = message.config ? Any.toAmino(message.config, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: ModuleConfigAminoMsg): ModuleConfig {
     return ModuleConfig.fromAmino(object.value);
   },
-  toAminoMsg(message: ModuleConfig): ModuleConfigAminoMsg {
+  toAminoMsg(message: ModuleConfig, useInterfaces: boolean = true): ModuleConfigAminoMsg {
     return {
       type: "cosmos-sdk/ModuleConfig",
-      value: ModuleConfig.toAmino(message)
+      value: ModuleConfig.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ModuleConfigProtoMsg): ModuleConfig {
-    return ModuleConfig.decode(message.value);
+  fromProtoMsg(message: ModuleConfigProtoMsg, useInterfaces: boolean = true): ModuleConfig {
+    return ModuleConfig.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ModuleConfig): Uint8Array {
     return ModuleConfig.encode(message).finish();

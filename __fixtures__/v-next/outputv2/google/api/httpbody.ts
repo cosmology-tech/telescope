@@ -193,7 +193,7 @@ export const HttpBody = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): HttpBody {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): HttpBody {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHttpBody();
@@ -207,7 +207,7 @@ export const HttpBody = {
           message.data = reader.bytes();
           break;
         case 3:
-          message.extensions.push(Any.decode(reader, reader.uint32()));
+          message.extensions.push(Any.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -266,12 +266,12 @@ export const HttpBody = {
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
     };
   },
-  toAmino(message: HttpBody): HttpBodyAmino {
+  toAmino(message: HttpBody, useInterfaces: boolean = true): HttpBodyAmino {
     const obj: any = {};
     obj.content_type = message.contentType;
     obj.data = message.data;
     if (message.extensions) {
-      obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
+      obj.extensions = message.extensions.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.extensions = [];
     }
@@ -280,8 +280,8 @@ export const HttpBody = {
   fromAminoMsg(object: HttpBodyAminoMsg): HttpBody {
     return HttpBody.fromAmino(object.value);
   },
-  fromProtoMsg(message: HttpBodyProtoMsg): HttpBody {
-    return HttpBody.decode(message.value);
+  fromProtoMsg(message: HttpBodyProtoMsg, useInterfaces: boolean = true): HttpBody {
+    return HttpBody.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: HttpBody): Uint8Array {
     return HttpBody.encode(message).finish();

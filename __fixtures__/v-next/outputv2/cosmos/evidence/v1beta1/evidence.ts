@@ -66,7 +66,7 @@ export const Equivocation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Equivocation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Equivocation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEquivocation();
@@ -144,7 +144,7 @@ export const Equivocation = {
       consensusAddress: object.consensus_address
     };
   },
-  toAmino(message: Equivocation): EquivocationAmino {
+  toAmino(message: Equivocation, useInterfaces: boolean = true): EquivocationAmino {
     const obj: any = {};
     obj.height = message.height ? message.height.toString() : undefined;
     obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
@@ -155,14 +155,14 @@ export const Equivocation = {
   fromAminoMsg(object: EquivocationAminoMsg): Equivocation {
     return Equivocation.fromAmino(object.value);
   },
-  toAminoMsg(message: Equivocation): EquivocationAminoMsg {
+  toAminoMsg(message: Equivocation, useInterfaces: boolean = true): EquivocationAminoMsg {
     return {
       type: "cosmos-sdk/Equivocation",
-      value: Equivocation.toAmino(message)
+      value: Equivocation.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: EquivocationProtoMsg): Equivocation {
-    return Equivocation.decode(message.value);
+  fromProtoMsg(message: EquivocationProtoMsg, useInterfaces: boolean = true): Equivocation {
+    return Equivocation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Equivocation): Uint8Array {
     return Equivocation.encode(message).finish();

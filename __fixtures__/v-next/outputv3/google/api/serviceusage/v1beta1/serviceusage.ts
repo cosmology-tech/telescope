@@ -1434,7 +1434,7 @@ export const EnableServiceRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EnableServiceRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EnableServiceRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnableServiceRequest();
@@ -1481,13 +1481,13 @@ export const EnableServiceRequest = {
       name: object.name
     };
   },
-  toAmino(message: EnableServiceRequest): EnableServiceRequestAmino {
+  toAmino(message: EnableServiceRequest, useInterfaces: boolean = true): EnableServiceRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
   },
-  fromProtoMsg(message: EnableServiceRequestProtoMsg): EnableServiceRequest {
-    return EnableServiceRequest.decode(message.value);
+  fromProtoMsg(message: EnableServiceRequestProtoMsg, useInterfaces: boolean = true): EnableServiceRequest {
+    return EnableServiceRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EnableServiceRequest): Uint8Array {
     return EnableServiceRequest.encode(message).finish();
@@ -1512,7 +1512,7 @@ export const DisableServiceRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DisableServiceRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DisableServiceRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDisableServiceRequest();
@@ -1559,13 +1559,13 @@ export const DisableServiceRequest = {
       name: object.name
     };
   },
-  toAmino(message: DisableServiceRequest): DisableServiceRequestAmino {
+  toAmino(message: DisableServiceRequest, useInterfaces: boolean = true): DisableServiceRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
   },
-  fromProtoMsg(message: DisableServiceRequestProtoMsg): DisableServiceRequest {
-    return DisableServiceRequest.decode(message.value);
+  fromProtoMsg(message: DisableServiceRequestProtoMsg, useInterfaces: boolean = true): DisableServiceRequest {
+    return DisableServiceRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DisableServiceRequest): Uint8Array {
     return DisableServiceRequest.encode(message).finish();
@@ -1590,7 +1590,7 @@ export const GetServiceRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetServiceRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetServiceRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetServiceRequest();
@@ -1637,13 +1637,13 @@ export const GetServiceRequest = {
       name: object.name
     };
   },
-  toAmino(message: GetServiceRequest): GetServiceRequestAmino {
+  toAmino(message: GetServiceRequest, useInterfaces: boolean = true): GetServiceRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
   },
-  fromProtoMsg(message: GetServiceRequestProtoMsg): GetServiceRequest {
-    return GetServiceRequest.decode(message.value);
+  fromProtoMsg(message: GetServiceRequestProtoMsg, useInterfaces: boolean = true): GetServiceRequest {
+    return GetServiceRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetServiceRequest): Uint8Array {
     return GetServiceRequest.encode(message).finish();
@@ -1680,7 +1680,7 @@ export const ListServicesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListServicesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListServicesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServicesRequest();
@@ -1754,7 +1754,7 @@ export const ListServicesRequest = {
       filter: object.filter
     };
   },
-  toAmino(message: ListServicesRequest): ListServicesRequestAmino {
+  toAmino(message: ListServicesRequest, useInterfaces: boolean = true): ListServicesRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
     obj.page_size = message.pageSize;
@@ -1762,8 +1762,8 @@ export const ListServicesRequest = {
     obj.filter = message.filter;
     return obj;
   },
-  fromProtoMsg(message: ListServicesRequestProtoMsg): ListServicesRequest {
-    return ListServicesRequest.decode(message.value);
+  fromProtoMsg(message: ListServicesRequestProtoMsg, useInterfaces: boolean = true): ListServicesRequest {
+    return ListServicesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListServicesRequest): Uint8Array {
     return ListServicesRequest.encode(message).finish();
@@ -1792,7 +1792,7 @@ export const ListServicesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListServicesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListServicesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListServicesResponse();
@@ -1800,7 +1800,7 @@ export const ListServicesResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.services.push(Service.decode(reader, reader.uint32()));
+          message.services.push(Service.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.nextPageToken = reader.string();
@@ -1856,18 +1856,18 @@ export const ListServicesResponse = {
       nextPageToken: object.next_page_token
     };
   },
-  toAmino(message: ListServicesResponse): ListServicesResponseAmino {
+  toAmino(message: ListServicesResponse, useInterfaces: boolean = true): ListServicesResponseAmino {
     const obj: any = {};
     if (message.services) {
-      obj.services = message.services.map(e => e ? Service.toAmino(e) : undefined);
+      obj.services = message.services.map(e => e ? Service.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.services = [];
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromProtoMsg(message: ListServicesResponseProtoMsg): ListServicesResponse {
-    return ListServicesResponse.decode(message.value);
+  fromProtoMsg(message: ListServicesResponseProtoMsg, useInterfaces: boolean = true): ListServicesResponse {
+    return ListServicesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListServicesResponse): Uint8Array {
     return ListServicesResponse.encode(message).finish();
@@ -1896,7 +1896,7 @@ export const BatchEnableServicesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): BatchEnableServicesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BatchEnableServicesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatchEnableServicesRequest();
@@ -1960,7 +1960,7 @@ export const BatchEnableServicesRequest = {
       serviceIds: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => e) : []
     };
   },
-  toAmino(message: BatchEnableServicesRequest): BatchEnableServicesRequestAmino {
+  toAmino(message: BatchEnableServicesRequest, useInterfaces: boolean = true): BatchEnableServicesRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
     if (message.serviceIds) {
@@ -1970,8 +1970,8 @@ export const BatchEnableServicesRequest = {
     }
     return obj;
   },
-  fromProtoMsg(message: BatchEnableServicesRequestProtoMsg): BatchEnableServicesRequest {
-    return BatchEnableServicesRequest.decode(message.value);
+  fromProtoMsg(message: BatchEnableServicesRequestProtoMsg, useInterfaces: boolean = true): BatchEnableServicesRequest {
+    return BatchEnableServicesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BatchEnableServicesRequest): Uint8Array {
     return BatchEnableServicesRequest.encode(message).finish();
@@ -2008,7 +2008,7 @@ export const ListConsumerQuotaMetricsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListConsumerQuotaMetricsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListConsumerQuotaMetricsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListConsumerQuotaMetricsRequest();
@@ -2082,7 +2082,7 @@ export const ListConsumerQuotaMetricsRequest = {
       view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
-  toAmino(message: ListConsumerQuotaMetricsRequest): ListConsumerQuotaMetricsRequestAmino {
+  toAmino(message: ListConsumerQuotaMetricsRequest, useInterfaces: boolean = true): ListConsumerQuotaMetricsRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
     obj.page_size = message.pageSize;
@@ -2090,8 +2090,8 @@ export const ListConsumerQuotaMetricsRequest = {
     obj.view = message.view;
     return obj;
   },
-  fromProtoMsg(message: ListConsumerQuotaMetricsRequestProtoMsg): ListConsumerQuotaMetricsRequest {
-    return ListConsumerQuotaMetricsRequest.decode(message.value);
+  fromProtoMsg(message: ListConsumerQuotaMetricsRequestProtoMsg, useInterfaces: boolean = true): ListConsumerQuotaMetricsRequest {
+    return ListConsumerQuotaMetricsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListConsumerQuotaMetricsRequest): Uint8Array {
     return ListConsumerQuotaMetricsRequest.encode(message).finish();
@@ -2120,7 +2120,7 @@ export const ListConsumerQuotaMetricsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListConsumerQuotaMetricsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListConsumerQuotaMetricsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListConsumerQuotaMetricsResponse();
@@ -2128,7 +2128,7 @@ export const ListConsumerQuotaMetricsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.metrics.push(ConsumerQuotaMetric.decode(reader, reader.uint32()));
+          message.metrics.push(ConsumerQuotaMetric.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.nextPageToken = reader.string();
@@ -2184,18 +2184,18 @@ export const ListConsumerQuotaMetricsResponse = {
       nextPageToken: object.next_page_token
     };
   },
-  toAmino(message: ListConsumerQuotaMetricsResponse): ListConsumerQuotaMetricsResponseAmino {
+  toAmino(message: ListConsumerQuotaMetricsResponse, useInterfaces: boolean = true): ListConsumerQuotaMetricsResponseAmino {
     const obj: any = {};
     if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e ? ConsumerQuotaMetric.toAmino(e) : undefined);
+      obj.metrics = message.metrics.map(e => e ? ConsumerQuotaMetric.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.metrics = [];
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromProtoMsg(message: ListConsumerQuotaMetricsResponseProtoMsg): ListConsumerQuotaMetricsResponse {
-    return ListConsumerQuotaMetricsResponse.decode(message.value);
+  fromProtoMsg(message: ListConsumerQuotaMetricsResponseProtoMsg, useInterfaces: boolean = true): ListConsumerQuotaMetricsResponse {
+    return ListConsumerQuotaMetricsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListConsumerQuotaMetricsResponse): Uint8Array {
     return ListConsumerQuotaMetricsResponse.encode(message).finish();
@@ -2224,7 +2224,7 @@ export const GetConsumerQuotaMetricRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetConsumerQuotaMetricRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetConsumerQuotaMetricRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetConsumerQuotaMetricRequest();
@@ -2280,14 +2280,14 @@ export const GetConsumerQuotaMetricRequest = {
       view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
-  toAmino(message: GetConsumerQuotaMetricRequest): GetConsumerQuotaMetricRequestAmino {
+  toAmino(message: GetConsumerQuotaMetricRequest, useInterfaces: boolean = true): GetConsumerQuotaMetricRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.view = message.view;
     return obj;
   },
-  fromProtoMsg(message: GetConsumerQuotaMetricRequestProtoMsg): GetConsumerQuotaMetricRequest {
-    return GetConsumerQuotaMetricRequest.decode(message.value);
+  fromProtoMsg(message: GetConsumerQuotaMetricRequestProtoMsg, useInterfaces: boolean = true): GetConsumerQuotaMetricRequest {
+    return GetConsumerQuotaMetricRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetConsumerQuotaMetricRequest): Uint8Array {
     return GetConsumerQuotaMetricRequest.encode(message).finish();
@@ -2316,7 +2316,7 @@ export const GetConsumerQuotaLimitRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetConsumerQuotaLimitRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetConsumerQuotaLimitRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetConsumerQuotaLimitRequest();
@@ -2372,14 +2372,14 @@ export const GetConsumerQuotaLimitRequest = {
       view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
     };
   },
-  toAmino(message: GetConsumerQuotaLimitRequest): GetConsumerQuotaLimitRequestAmino {
+  toAmino(message: GetConsumerQuotaLimitRequest, useInterfaces: boolean = true): GetConsumerQuotaLimitRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.view = message.view;
     return obj;
   },
-  fromProtoMsg(message: GetConsumerQuotaLimitRequestProtoMsg): GetConsumerQuotaLimitRequest {
-    return GetConsumerQuotaLimitRequest.decode(message.value);
+  fromProtoMsg(message: GetConsumerQuotaLimitRequestProtoMsg, useInterfaces: boolean = true): GetConsumerQuotaLimitRequest {
+    return GetConsumerQuotaLimitRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetConsumerQuotaLimitRequest): Uint8Array {
     return GetConsumerQuotaLimitRequest.encode(message).finish();
@@ -2418,7 +2418,7 @@ export const CreateAdminOverrideRequest = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CreateAdminOverrideRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CreateAdminOverrideRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateAdminOverrideRequest();
@@ -2429,7 +2429,7 @@ export const CreateAdminOverrideRequest = {
           message.parent = reader.string();
           break;
         case 2:
-          message.override = QuotaOverride.decode(reader, reader.uint32());
+          message.override = QuotaOverride.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.force = reader.bool();
@@ -2509,10 +2509,10 @@ export const CreateAdminOverrideRequest = {
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
-  toAmino(message: CreateAdminOverrideRequest): CreateAdminOverrideRequestAmino {
+  toAmino(message: CreateAdminOverrideRequest, useInterfaces: boolean = true): CreateAdminOverrideRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
-    obj.override = message.override ? QuotaOverride.toAmino(message.override) : undefined;
+    obj.override = message.override ? QuotaOverride.toAmino(message.override, useInterfaces) : undefined;
     obj.force = message.force;
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
@@ -2521,8 +2521,8 @@ export const CreateAdminOverrideRequest = {
     }
     return obj;
   },
-  fromProtoMsg(message: CreateAdminOverrideRequestProtoMsg): CreateAdminOverrideRequest {
-    return CreateAdminOverrideRequest.decode(message.value);
+  fromProtoMsg(message: CreateAdminOverrideRequestProtoMsg, useInterfaces: boolean = true): CreateAdminOverrideRequest {
+    return CreateAdminOverrideRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CreateAdminOverrideRequest): Uint8Array {
     return CreateAdminOverrideRequest.encode(message).finish();
@@ -2565,7 +2565,7 @@ export const UpdateAdminOverrideRequest = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdateAdminOverrideRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpdateAdminOverrideRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateAdminOverrideRequest();
@@ -2576,13 +2576,13 @@ export const UpdateAdminOverrideRequest = {
           message.name = reader.string();
           break;
         case 2:
-          message.override = QuotaOverride.decode(reader, reader.uint32());
+          message.override = QuotaOverride.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.force = reader.bool();
           break;
         case 4:
-          message.updateMask = FieldMask.decode(reader, reader.uint32());
+          message.updateMask = FieldMask.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
           if ((tag & 7) === 2) {
@@ -2667,12 +2667,12 @@ export const UpdateAdminOverrideRequest = {
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
-  toAmino(message: UpdateAdminOverrideRequest): UpdateAdminOverrideRequestAmino {
+  toAmino(message: UpdateAdminOverrideRequest, useInterfaces: boolean = true): UpdateAdminOverrideRequestAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.override = message.override ? QuotaOverride.toAmino(message.override) : undefined;
+    obj.override = message.override ? QuotaOverride.toAmino(message.override, useInterfaces) : undefined;
     obj.force = message.force;
-    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
+    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask, useInterfaces) : undefined;
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
     } else {
@@ -2680,8 +2680,8 @@ export const UpdateAdminOverrideRequest = {
     }
     return obj;
   },
-  fromProtoMsg(message: UpdateAdminOverrideRequestProtoMsg): UpdateAdminOverrideRequest {
-    return UpdateAdminOverrideRequest.decode(message.value);
+  fromProtoMsg(message: UpdateAdminOverrideRequestProtoMsg, useInterfaces: boolean = true): UpdateAdminOverrideRequest {
+    return UpdateAdminOverrideRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpdateAdminOverrideRequest): Uint8Array {
     return UpdateAdminOverrideRequest.encode(message).finish();
@@ -2716,7 +2716,7 @@ export const DeleteAdminOverrideRequest = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DeleteAdminOverrideRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DeleteAdminOverrideRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteAdminOverrideRequest();
@@ -2796,7 +2796,7 @@ export const DeleteAdminOverrideRequest = {
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
-  toAmino(message: DeleteAdminOverrideRequest): DeleteAdminOverrideRequestAmino {
+  toAmino(message: DeleteAdminOverrideRequest, useInterfaces: boolean = true): DeleteAdminOverrideRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.force = message.force;
@@ -2807,8 +2807,8 @@ export const DeleteAdminOverrideRequest = {
     }
     return obj;
   },
-  fromProtoMsg(message: DeleteAdminOverrideRequestProtoMsg): DeleteAdminOverrideRequest {
-    return DeleteAdminOverrideRequest.decode(message.value);
+  fromProtoMsg(message: DeleteAdminOverrideRequestProtoMsg, useInterfaces: boolean = true): DeleteAdminOverrideRequest {
+    return DeleteAdminOverrideRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DeleteAdminOverrideRequest): Uint8Array {
     return DeleteAdminOverrideRequest.encode(message).finish();
@@ -2841,7 +2841,7 @@ export const ListAdminOverridesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListAdminOverridesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListAdminOverridesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAdminOverridesRequest();
@@ -2906,15 +2906,15 @@ export const ListAdminOverridesRequest = {
       pageToken: object.page_token
     };
   },
-  toAmino(message: ListAdminOverridesRequest): ListAdminOverridesRequestAmino {
+  toAmino(message: ListAdminOverridesRequest, useInterfaces: boolean = true): ListAdminOverridesRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
     obj.page_size = message.pageSize;
     obj.page_token = message.pageToken;
     return obj;
   },
-  fromProtoMsg(message: ListAdminOverridesRequestProtoMsg): ListAdminOverridesRequest {
-    return ListAdminOverridesRequest.decode(message.value);
+  fromProtoMsg(message: ListAdminOverridesRequestProtoMsg, useInterfaces: boolean = true): ListAdminOverridesRequest {
+    return ListAdminOverridesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListAdminOverridesRequest): Uint8Array {
     return ListAdminOverridesRequest.encode(message).finish();
@@ -2943,7 +2943,7 @@ export const ListAdminOverridesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListAdminOverridesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListAdminOverridesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAdminOverridesResponse();
@@ -2951,7 +2951,7 @@ export const ListAdminOverridesResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.overrides.push(QuotaOverride.decode(reader, reader.uint32()));
+          message.overrides.push(QuotaOverride.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.nextPageToken = reader.string();
@@ -3007,18 +3007,18 @@ export const ListAdminOverridesResponse = {
       nextPageToken: object.next_page_token
     };
   },
-  toAmino(message: ListAdminOverridesResponse): ListAdminOverridesResponseAmino {
+  toAmino(message: ListAdminOverridesResponse, useInterfaces: boolean = true): ListAdminOverridesResponseAmino {
     const obj: any = {};
     if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.overrides = [];
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromProtoMsg(message: ListAdminOverridesResponseProtoMsg): ListAdminOverridesResponse {
-    return ListAdminOverridesResponse.decode(message.value);
+  fromProtoMsg(message: ListAdminOverridesResponseProtoMsg, useInterfaces: boolean = true): ListAdminOverridesResponse {
+    return ListAdminOverridesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListAdminOverridesResponse): Uint8Array {
     return ListAdminOverridesResponse.encode(message).finish();
@@ -3043,7 +3043,7 @@ export const BatchCreateAdminOverridesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): BatchCreateAdminOverridesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BatchCreateAdminOverridesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatchCreateAdminOverridesResponse();
@@ -3051,7 +3051,7 @@ export const BatchCreateAdminOverridesResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.overrides.push(QuotaOverride.decode(reader, reader.uint32()));
+          message.overrides.push(QuotaOverride.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -3098,17 +3098,17 @@ export const BatchCreateAdminOverridesResponse = {
       overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
     };
   },
-  toAmino(message: BatchCreateAdminOverridesResponse): BatchCreateAdminOverridesResponseAmino {
+  toAmino(message: BatchCreateAdminOverridesResponse, useInterfaces: boolean = true): BatchCreateAdminOverridesResponseAmino {
     const obj: any = {};
     if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.overrides = [];
     }
     return obj;
   },
-  fromProtoMsg(message: BatchCreateAdminOverridesResponseProtoMsg): BatchCreateAdminOverridesResponse {
-    return BatchCreateAdminOverridesResponse.decode(message.value);
+  fromProtoMsg(message: BatchCreateAdminOverridesResponseProtoMsg, useInterfaces: boolean = true): BatchCreateAdminOverridesResponse {
+    return BatchCreateAdminOverridesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BatchCreateAdminOverridesResponse): Uint8Array {
     return BatchCreateAdminOverridesResponse.encode(message).finish();
@@ -3147,7 +3147,7 @@ export const ImportAdminOverridesRequest = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ImportAdminOverridesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ImportAdminOverridesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseImportAdminOverridesRequest();
@@ -3158,7 +3158,7 @@ export const ImportAdminOverridesRequest = {
           message.parent = reader.string();
           break;
         case 2:
-          message.inlineSource = OverrideInlineSource.decode(reader, reader.uint32());
+          message.inlineSource = OverrideInlineSource.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.force = reader.bool();
@@ -3238,10 +3238,10 @@ export const ImportAdminOverridesRequest = {
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
-  toAmino(message: ImportAdminOverridesRequest): ImportAdminOverridesRequestAmino {
+  toAmino(message: ImportAdminOverridesRequest, useInterfaces: boolean = true): ImportAdminOverridesRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
-    obj.inline_source = message.inlineSource ? OverrideInlineSource.toAmino(message.inlineSource) : undefined;
+    obj.inline_source = message.inlineSource ? OverrideInlineSource.toAmino(message.inlineSource, useInterfaces) : undefined;
     obj.force = message.force;
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
@@ -3250,8 +3250,8 @@ export const ImportAdminOverridesRequest = {
     }
     return obj;
   },
-  fromProtoMsg(message: ImportAdminOverridesRequestProtoMsg): ImportAdminOverridesRequest {
-    return ImportAdminOverridesRequest.decode(message.value);
+  fromProtoMsg(message: ImportAdminOverridesRequestProtoMsg, useInterfaces: boolean = true): ImportAdminOverridesRequest {
+    return ImportAdminOverridesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ImportAdminOverridesRequest): Uint8Array {
     return ImportAdminOverridesRequest.encode(message).finish();
@@ -3276,7 +3276,7 @@ export const ImportAdminOverridesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ImportAdminOverridesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ImportAdminOverridesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseImportAdminOverridesResponse();
@@ -3284,7 +3284,7 @@ export const ImportAdminOverridesResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.overrides.push(QuotaOverride.decode(reader, reader.uint32()));
+          message.overrides.push(QuotaOverride.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -3331,17 +3331,17 @@ export const ImportAdminOverridesResponse = {
       overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
     };
   },
-  toAmino(message: ImportAdminOverridesResponse): ImportAdminOverridesResponseAmino {
+  toAmino(message: ImportAdminOverridesResponse, useInterfaces: boolean = true): ImportAdminOverridesResponseAmino {
     const obj: any = {};
     if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.overrides = [];
     }
     return obj;
   },
-  fromProtoMsg(message: ImportAdminOverridesResponseProtoMsg): ImportAdminOverridesResponse {
-    return ImportAdminOverridesResponse.decode(message.value);
+  fromProtoMsg(message: ImportAdminOverridesResponseProtoMsg, useInterfaces: boolean = true): ImportAdminOverridesResponse {
+    return ImportAdminOverridesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ImportAdminOverridesResponse): Uint8Array {
     return ImportAdminOverridesResponse.encode(message).finish();
@@ -3361,7 +3361,7 @@ export const ImportAdminOverridesMetadata = {
   encode(_: ImportAdminOverridesMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ImportAdminOverridesMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ImportAdminOverridesMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseImportAdminOverridesMetadata();
@@ -3397,12 +3397,12 @@ export const ImportAdminOverridesMetadata = {
   fromAmino(_: ImportAdminOverridesMetadataAmino): ImportAdminOverridesMetadata {
     return {};
   },
-  toAmino(_: ImportAdminOverridesMetadata): ImportAdminOverridesMetadataAmino {
+  toAmino(_: ImportAdminOverridesMetadata, useInterfaces: boolean = true): ImportAdminOverridesMetadataAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: ImportAdminOverridesMetadataProtoMsg): ImportAdminOverridesMetadata {
-    return ImportAdminOverridesMetadata.decode(message.value);
+  fromProtoMsg(message: ImportAdminOverridesMetadataProtoMsg, useInterfaces: boolean = true): ImportAdminOverridesMetadata {
+    return ImportAdminOverridesMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ImportAdminOverridesMetadata): Uint8Array {
     return ImportAdminOverridesMetadata.encode(message).finish();
@@ -3441,7 +3441,7 @@ export const CreateConsumerOverrideRequest = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CreateConsumerOverrideRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CreateConsumerOverrideRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateConsumerOverrideRequest();
@@ -3452,7 +3452,7 @@ export const CreateConsumerOverrideRequest = {
           message.parent = reader.string();
           break;
         case 2:
-          message.override = QuotaOverride.decode(reader, reader.uint32());
+          message.override = QuotaOverride.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.force = reader.bool();
@@ -3532,10 +3532,10 @@ export const CreateConsumerOverrideRequest = {
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
-  toAmino(message: CreateConsumerOverrideRequest): CreateConsumerOverrideRequestAmino {
+  toAmino(message: CreateConsumerOverrideRequest, useInterfaces: boolean = true): CreateConsumerOverrideRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
-    obj.override = message.override ? QuotaOverride.toAmino(message.override) : undefined;
+    obj.override = message.override ? QuotaOverride.toAmino(message.override, useInterfaces) : undefined;
     obj.force = message.force;
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
@@ -3544,8 +3544,8 @@ export const CreateConsumerOverrideRequest = {
     }
     return obj;
   },
-  fromProtoMsg(message: CreateConsumerOverrideRequestProtoMsg): CreateConsumerOverrideRequest {
-    return CreateConsumerOverrideRequest.decode(message.value);
+  fromProtoMsg(message: CreateConsumerOverrideRequestProtoMsg, useInterfaces: boolean = true): CreateConsumerOverrideRequest {
+    return CreateConsumerOverrideRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CreateConsumerOverrideRequest): Uint8Array {
     return CreateConsumerOverrideRequest.encode(message).finish();
@@ -3588,7 +3588,7 @@ export const UpdateConsumerOverrideRequest = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdateConsumerOverrideRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpdateConsumerOverrideRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateConsumerOverrideRequest();
@@ -3599,13 +3599,13 @@ export const UpdateConsumerOverrideRequest = {
           message.name = reader.string();
           break;
         case 2:
-          message.override = QuotaOverride.decode(reader, reader.uint32());
+          message.override = QuotaOverride.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.force = reader.bool();
           break;
         case 4:
-          message.updateMask = FieldMask.decode(reader, reader.uint32());
+          message.updateMask = FieldMask.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
           if ((tag & 7) === 2) {
@@ -3690,12 +3690,12 @@ export const UpdateConsumerOverrideRequest = {
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
-  toAmino(message: UpdateConsumerOverrideRequest): UpdateConsumerOverrideRequestAmino {
+  toAmino(message: UpdateConsumerOverrideRequest, useInterfaces: boolean = true): UpdateConsumerOverrideRequestAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.override = message.override ? QuotaOverride.toAmino(message.override) : undefined;
+    obj.override = message.override ? QuotaOverride.toAmino(message.override, useInterfaces) : undefined;
     obj.force = message.force;
-    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
+    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask, useInterfaces) : undefined;
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
     } else {
@@ -3703,8 +3703,8 @@ export const UpdateConsumerOverrideRequest = {
     }
     return obj;
   },
-  fromProtoMsg(message: UpdateConsumerOverrideRequestProtoMsg): UpdateConsumerOverrideRequest {
-    return UpdateConsumerOverrideRequest.decode(message.value);
+  fromProtoMsg(message: UpdateConsumerOverrideRequestProtoMsg, useInterfaces: boolean = true): UpdateConsumerOverrideRequest {
+    return UpdateConsumerOverrideRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpdateConsumerOverrideRequest): Uint8Array {
     return UpdateConsumerOverrideRequest.encode(message).finish();
@@ -3739,7 +3739,7 @@ export const DeleteConsumerOverrideRequest = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DeleteConsumerOverrideRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DeleteConsumerOverrideRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteConsumerOverrideRequest();
@@ -3819,7 +3819,7 @@ export const DeleteConsumerOverrideRequest = {
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
-  toAmino(message: DeleteConsumerOverrideRequest): DeleteConsumerOverrideRequestAmino {
+  toAmino(message: DeleteConsumerOverrideRequest, useInterfaces: boolean = true): DeleteConsumerOverrideRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.force = message.force;
@@ -3830,8 +3830,8 @@ export const DeleteConsumerOverrideRequest = {
     }
     return obj;
   },
-  fromProtoMsg(message: DeleteConsumerOverrideRequestProtoMsg): DeleteConsumerOverrideRequest {
-    return DeleteConsumerOverrideRequest.decode(message.value);
+  fromProtoMsg(message: DeleteConsumerOverrideRequestProtoMsg, useInterfaces: boolean = true): DeleteConsumerOverrideRequest {
+    return DeleteConsumerOverrideRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DeleteConsumerOverrideRequest): Uint8Array {
     return DeleteConsumerOverrideRequest.encode(message).finish();
@@ -3864,7 +3864,7 @@ export const ListConsumerOverridesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListConsumerOverridesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListConsumerOverridesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListConsumerOverridesRequest();
@@ -3929,15 +3929,15 @@ export const ListConsumerOverridesRequest = {
       pageToken: object.page_token
     };
   },
-  toAmino(message: ListConsumerOverridesRequest): ListConsumerOverridesRequestAmino {
+  toAmino(message: ListConsumerOverridesRequest, useInterfaces: boolean = true): ListConsumerOverridesRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
     obj.page_size = message.pageSize;
     obj.page_token = message.pageToken;
     return obj;
   },
-  fromProtoMsg(message: ListConsumerOverridesRequestProtoMsg): ListConsumerOverridesRequest {
-    return ListConsumerOverridesRequest.decode(message.value);
+  fromProtoMsg(message: ListConsumerOverridesRequestProtoMsg, useInterfaces: boolean = true): ListConsumerOverridesRequest {
+    return ListConsumerOverridesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListConsumerOverridesRequest): Uint8Array {
     return ListConsumerOverridesRequest.encode(message).finish();
@@ -3966,7 +3966,7 @@ export const ListConsumerOverridesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListConsumerOverridesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListConsumerOverridesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListConsumerOverridesResponse();
@@ -3974,7 +3974,7 @@ export const ListConsumerOverridesResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.overrides.push(QuotaOverride.decode(reader, reader.uint32()));
+          message.overrides.push(QuotaOverride.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.nextPageToken = reader.string();
@@ -4030,18 +4030,18 @@ export const ListConsumerOverridesResponse = {
       nextPageToken: object.next_page_token
     };
   },
-  toAmino(message: ListConsumerOverridesResponse): ListConsumerOverridesResponseAmino {
+  toAmino(message: ListConsumerOverridesResponse, useInterfaces: boolean = true): ListConsumerOverridesResponseAmino {
     const obj: any = {};
     if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.overrides = [];
     }
     obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromProtoMsg(message: ListConsumerOverridesResponseProtoMsg): ListConsumerOverridesResponse {
-    return ListConsumerOverridesResponse.decode(message.value);
+  fromProtoMsg(message: ListConsumerOverridesResponseProtoMsg, useInterfaces: boolean = true): ListConsumerOverridesResponse {
+    return ListConsumerOverridesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListConsumerOverridesResponse): Uint8Array {
     return ListConsumerOverridesResponse.encode(message).finish();
@@ -4066,7 +4066,7 @@ export const BatchCreateConsumerOverridesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): BatchCreateConsumerOverridesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BatchCreateConsumerOverridesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatchCreateConsumerOverridesResponse();
@@ -4074,7 +4074,7 @@ export const BatchCreateConsumerOverridesResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.overrides.push(QuotaOverride.decode(reader, reader.uint32()));
+          message.overrides.push(QuotaOverride.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -4121,17 +4121,17 @@ export const BatchCreateConsumerOverridesResponse = {
       overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
     };
   },
-  toAmino(message: BatchCreateConsumerOverridesResponse): BatchCreateConsumerOverridesResponseAmino {
+  toAmino(message: BatchCreateConsumerOverridesResponse, useInterfaces: boolean = true): BatchCreateConsumerOverridesResponseAmino {
     const obj: any = {};
     if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.overrides = [];
     }
     return obj;
   },
-  fromProtoMsg(message: BatchCreateConsumerOverridesResponseProtoMsg): BatchCreateConsumerOverridesResponse {
-    return BatchCreateConsumerOverridesResponse.decode(message.value);
+  fromProtoMsg(message: BatchCreateConsumerOverridesResponseProtoMsg, useInterfaces: boolean = true): BatchCreateConsumerOverridesResponse {
+    return BatchCreateConsumerOverridesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BatchCreateConsumerOverridesResponse): Uint8Array {
     return BatchCreateConsumerOverridesResponse.encode(message).finish();
@@ -4170,7 +4170,7 @@ export const ImportConsumerOverridesRequest = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ImportConsumerOverridesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ImportConsumerOverridesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseImportConsumerOverridesRequest();
@@ -4181,7 +4181,7 @@ export const ImportConsumerOverridesRequest = {
           message.parent = reader.string();
           break;
         case 2:
-          message.inlineSource = OverrideInlineSource.decode(reader, reader.uint32());
+          message.inlineSource = OverrideInlineSource.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.force = reader.bool();
@@ -4261,10 +4261,10 @@ export const ImportConsumerOverridesRequest = {
       forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
     };
   },
-  toAmino(message: ImportConsumerOverridesRequest): ImportConsumerOverridesRequestAmino {
+  toAmino(message: ImportConsumerOverridesRequest, useInterfaces: boolean = true): ImportConsumerOverridesRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
-    obj.inline_source = message.inlineSource ? OverrideInlineSource.toAmino(message.inlineSource) : undefined;
+    obj.inline_source = message.inlineSource ? OverrideInlineSource.toAmino(message.inlineSource, useInterfaces) : undefined;
     obj.force = message.force;
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
@@ -4273,8 +4273,8 @@ export const ImportConsumerOverridesRequest = {
     }
     return obj;
   },
-  fromProtoMsg(message: ImportConsumerOverridesRequestProtoMsg): ImportConsumerOverridesRequest {
-    return ImportConsumerOverridesRequest.decode(message.value);
+  fromProtoMsg(message: ImportConsumerOverridesRequestProtoMsg, useInterfaces: boolean = true): ImportConsumerOverridesRequest {
+    return ImportConsumerOverridesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ImportConsumerOverridesRequest): Uint8Array {
     return ImportConsumerOverridesRequest.encode(message).finish();
@@ -4299,7 +4299,7 @@ export const ImportConsumerOverridesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ImportConsumerOverridesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ImportConsumerOverridesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseImportConsumerOverridesResponse();
@@ -4307,7 +4307,7 @@ export const ImportConsumerOverridesResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.overrides.push(QuotaOverride.decode(reader, reader.uint32()));
+          message.overrides.push(QuotaOverride.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -4354,17 +4354,17 @@ export const ImportConsumerOverridesResponse = {
       overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
     };
   },
-  toAmino(message: ImportConsumerOverridesResponse): ImportConsumerOverridesResponseAmino {
+  toAmino(message: ImportConsumerOverridesResponse, useInterfaces: boolean = true): ImportConsumerOverridesResponseAmino {
     const obj: any = {};
     if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.overrides = [];
     }
     return obj;
   },
-  fromProtoMsg(message: ImportConsumerOverridesResponseProtoMsg): ImportConsumerOverridesResponse {
-    return ImportConsumerOverridesResponse.decode(message.value);
+  fromProtoMsg(message: ImportConsumerOverridesResponseProtoMsg, useInterfaces: boolean = true): ImportConsumerOverridesResponse {
+    return ImportConsumerOverridesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ImportConsumerOverridesResponse): Uint8Array {
     return ImportConsumerOverridesResponse.encode(message).finish();
@@ -4384,7 +4384,7 @@ export const ImportConsumerOverridesMetadata = {
   encode(_: ImportConsumerOverridesMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ImportConsumerOverridesMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ImportConsumerOverridesMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseImportConsumerOverridesMetadata();
@@ -4420,12 +4420,12 @@ export const ImportConsumerOverridesMetadata = {
   fromAmino(_: ImportConsumerOverridesMetadataAmino): ImportConsumerOverridesMetadata {
     return {};
   },
-  toAmino(_: ImportConsumerOverridesMetadata): ImportConsumerOverridesMetadataAmino {
+  toAmino(_: ImportConsumerOverridesMetadata, useInterfaces: boolean = true): ImportConsumerOverridesMetadataAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: ImportConsumerOverridesMetadataProtoMsg): ImportConsumerOverridesMetadata {
-    return ImportConsumerOverridesMetadata.decode(message.value);
+  fromProtoMsg(message: ImportConsumerOverridesMetadataProtoMsg, useInterfaces: boolean = true): ImportConsumerOverridesMetadata {
+    return ImportConsumerOverridesMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ImportConsumerOverridesMetadata): Uint8Array {
     return ImportConsumerOverridesMetadata.encode(message).finish();
@@ -4450,7 +4450,7 @@ export const ImportAdminQuotaPoliciesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ImportAdminQuotaPoliciesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ImportAdminQuotaPoliciesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseImportAdminQuotaPoliciesResponse();
@@ -4458,7 +4458,7 @@ export const ImportAdminQuotaPoliciesResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.policies.push(AdminQuotaPolicy.decode(reader, reader.uint32()));
+          message.policies.push(AdminQuotaPolicy.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -4505,17 +4505,17 @@ export const ImportAdminQuotaPoliciesResponse = {
       policies: Array.isArray(object?.policies) ? object.policies.map((e: any) => AdminQuotaPolicy.fromAmino(e)) : []
     };
   },
-  toAmino(message: ImportAdminQuotaPoliciesResponse): ImportAdminQuotaPoliciesResponseAmino {
+  toAmino(message: ImportAdminQuotaPoliciesResponse, useInterfaces: boolean = true): ImportAdminQuotaPoliciesResponseAmino {
     const obj: any = {};
     if (message.policies) {
-      obj.policies = message.policies.map(e => e ? AdminQuotaPolicy.toAmino(e) : undefined);
+      obj.policies = message.policies.map(e => e ? AdminQuotaPolicy.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.policies = [];
     }
     return obj;
   },
-  fromProtoMsg(message: ImportAdminQuotaPoliciesResponseProtoMsg): ImportAdminQuotaPoliciesResponse {
-    return ImportAdminQuotaPoliciesResponse.decode(message.value);
+  fromProtoMsg(message: ImportAdminQuotaPoliciesResponseProtoMsg, useInterfaces: boolean = true): ImportAdminQuotaPoliciesResponse {
+    return ImportAdminQuotaPoliciesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ImportAdminQuotaPoliciesResponse): Uint8Array {
     return ImportAdminQuotaPoliciesResponse.encode(message).finish();
@@ -4535,7 +4535,7 @@ export const ImportAdminQuotaPoliciesMetadata = {
   encode(_: ImportAdminQuotaPoliciesMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ImportAdminQuotaPoliciesMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ImportAdminQuotaPoliciesMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseImportAdminQuotaPoliciesMetadata();
@@ -4571,12 +4571,12 @@ export const ImportAdminQuotaPoliciesMetadata = {
   fromAmino(_: ImportAdminQuotaPoliciesMetadataAmino): ImportAdminQuotaPoliciesMetadata {
     return {};
   },
-  toAmino(_: ImportAdminQuotaPoliciesMetadata): ImportAdminQuotaPoliciesMetadataAmino {
+  toAmino(_: ImportAdminQuotaPoliciesMetadata, useInterfaces: boolean = true): ImportAdminQuotaPoliciesMetadataAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: ImportAdminQuotaPoliciesMetadataProtoMsg): ImportAdminQuotaPoliciesMetadata {
-    return ImportAdminQuotaPoliciesMetadata.decode(message.value);
+  fromProtoMsg(message: ImportAdminQuotaPoliciesMetadataProtoMsg, useInterfaces: boolean = true): ImportAdminQuotaPoliciesMetadata {
+    return ImportAdminQuotaPoliciesMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ImportAdminQuotaPoliciesMetadata): Uint8Array {
     return ImportAdminQuotaPoliciesMetadata.encode(message).finish();
@@ -4596,7 +4596,7 @@ export const CreateAdminQuotaPolicyMetadata = {
   encode(_: CreateAdminQuotaPolicyMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CreateAdminQuotaPolicyMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CreateAdminQuotaPolicyMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateAdminQuotaPolicyMetadata();
@@ -4632,12 +4632,12 @@ export const CreateAdminQuotaPolicyMetadata = {
   fromAmino(_: CreateAdminQuotaPolicyMetadataAmino): CreateAdminQuotaPolicyMetadata {
     return {};
   },
-  toAmino(_: CreateAdminQuotaPolicyMetadata): CreateAdminQuotaPolicyMetadataAmino {
+  toAmino(_: CreateAdminQuotaPolicyMetadata, useInterfaces: boolean = true): CreateAdminQuotaPolicyMetadataAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: CreateAdminQuotaPolicyMetadataProtoMsg): CreateAdminQuotaPolicyMetadata {
-    return CreateAdminQuotaPolicyMetadata.decode(message.value);
+  fromProtoMsg(message: CreateAdminQuotaPolicyMetadataProtoMsg, useInterfaces: boolean = true): CreateAdminQuotaPolicyMetadata {
+    return CreateAdminQuotaPolicyMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CreateAdminQuotaPolicyMetadata): Uint8Array {
     return CreateAdminQuotaPolicyMetadata.encode(message).finish();
@@ -4657,7 +4657,7 @@ export const UpdateAdminQuotaPolicyMetadata = {
   encode(_: UpdateAdminQuotaPolicyMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdateAdminQuotaPolicyMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpdateAdminQuotaPolicyMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateAdminQuotaPolicyMetadata();
@@ -4693,12 +4693,12 @@ export const UpdateAdminQuotaPolicyMetadata = {
   fromAmino(_: UpdateAdminQuotaPolicyMetadataAmino): UpdateAdminQuotaPolicyMetadata {
     return {};
   },
-  toAmino(_: UpdateAdminQuotaPolicyMetadata): UpdateAdminQuotaPolicyMetadataAmino {
+  toAmino(_: UpdateAdminQuotaPolicyMetadata, useInterfaces: boolean = true): UpdateAdminQuotaPolicyMetadataAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: UpdateAdminQuotaPolicyMetadataProtoMsg): UpdateAdminQuotaPolicyMetadata {
-    return UpdateAdminQuotaPolicyMetadata.decode(message.value);
+  fromProtoMsg(message: UpdateAdminQuotaPolicyMetadataProtoMsg, useInterfaces: boolean = true): UpdateAdminQuotaPolicyMetadata {
+    return UpdateAdminQuotaPolicyMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpdateAdminQuotaPolicyMetadata): Uint8Array {
     return UpdateAdminQuotaPolicyMetadata.encode(message).finish();
@@ -4718,7 +4718,7 @@ export const DeleteAdminQuotaPolicyMetadata = {
   encode(_: DeleteAdminQuotaPolicyMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DeleteAdminQuotaPolicyMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DeleteAdminQuotaPolicyMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteAdminQuotaPolicyMetadata();
@@ -4754,12 +4754,12 @@ export const DeleteAdminQuotaPolicyMetadata = {
   fromAmino(_: DeleteAdminQuotaPolicyMetadataAmino): DeleteAdminQuotaPolicyMetadata {
     return {};
   },
-  toAmino(_: DeleteAdminQuotaPolicyMetadata): DeleteAdminQuotaPolicyMetadataAmino {
+  toAmino(_: DeleteAdminQuotaPolicyMetadata, useInterfaces: boolean = true): DeleteAdminQuotaPolicyMetadataAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: DeleteAdminQuotaPolicyMetadataProtoMsg): DeleteAdminQuotaPolicyMetadata {
-    return DeleteAdminQuotaPolicyMetadata.decode(message.value);
+  fromProtoMsg(message: DeleteAdminQuotaPolicyMetadataProtoMsg, useInterfaces: boolean = true): DeleteAdminQuotaPolicyMetadata {
+    return DeleteAdminQuotaPolicyMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DeleteAdminQuotaPolicyMetadata): Uint8Array {
     return DeleteAdminQuotaPolicyMetadata.encode(message).finish();
@@ -4784,7 +4784,7 @@ export const GenerateServiceIdentityRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenerateServiceIdentityRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenerateServiceIdentityRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenerateServiceIdentityRequest();
@@ -4831,13 +4831,13 @@ export const GenerateServiceIdentityRequest = {
       parent: object.parent
     };
   },
-  toAmino(message: GenerateServiceIdentityRequest): GenerateServiceIdentityRequestAmino {
+  toAmino(message: GenerateServiceIdentityRequest, useInterfaces: boolean = true): GenerateServiceIdentityRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
     return obj;
   },
-  fromProtoMsg(message: GenerateServiceIdentityRequestProtoMsg): GenerateServiceIdentityRequest {
-    return GenerateServiceIdentityRequest.decode(message.value);
+  fromProtoMsg(message: GenerateServiceIdentityRequestProtoMsg, useInterfaces: boolean = true): GenerateServiceIdentityRequest {
+    return GenerateServiceIdentityRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenerateServiceIdentityRequest): Uint8Array {
     return GenerateServiceIdentityRequest.encode(message).finish();
@@ -4866,7 +4866,7 @@ export const GetServiceIdentityResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetServiceIdentityResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetServiceIdentityResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetServiceIdentityResponse();
@@ -4874,7 +4874,7 @@ export const GetServiceIdentityResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.identity = ServiceIdentity.decode(reader, reader.uint32());
+          message.identity = ServiceIdentity.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.state = (reader.int32() as any);
@@ -4924,14 +4924,14 @@ export const GetServiceIdentityResponse = {
       state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : -1
     };
   },
-  toAmino(message: GetServiceIdentityResponse): GetServiceIdentityResponseAmino {
+  toAmino(message: GetServiceIdentityResponse, useInterfaces: boolean = true): GetServiceIdentityResponseAmino {
     const obj: any = {};
-    obj.identity = message.identity ? ServiceIdentity.toAmino(message.identity) : undefined;
+    obj.identity = message.identity ? ServiceIdentity.toAmino(message.identity, useInterfaces) : undefined;
     obj.state = message.state;
     return obj;
   },
-  fromProtoMsg(message: GetServiceIdentityResponseProtoMsg): GetServiceIdentityResponse {
-    return GetServiceIdentityResponse.decode(message.value);
+  fromProtoMsg(message: GetServiceIdentityResponseProtoMsg, useInterfaces: boolean = true): GetServiceIdentityResponse {
+    return GetServiceIdentityResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetServiceIdentityResponse): Uint8Array {
     return GetServiceIdentityResponse.encode(message).finish();
@@ -4951,7 +4951,7 @@ export const GetServiceIdentityMetadata = {
   encode(_: GetServiceIdentityMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetServiceIdentityMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetServiceIdentityMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetServiceIdentityMetadata();
@@ -4987,12 +4987,12 @@ export const GetServiceIdentityMetadata = {
   fromAmino(_: GetServiceIdentityMetadataAmino): GetServiceIdentityMetadata {
     return {};
   },
-  toAmino(_: GetServiceIdentityMetadata): GetServiceIdentityMetadataAmino {
+  toAmino(_: GetServiceIdentityMetadata, useInterfaces: boolean = true): GetServiceIdentityMetadataAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: GetServiceIdentityMetadataProtoMsg): GetServiceIdentityMetadata {
-    return GetServiceIdentityMetadata.decode(message.value);
+  fromProtoMsg(message: GetServiceIdentityMetadataProtoMsg, useInterfaces: boolean = true): GetServiceIdentityMetadata {
+    return GetServiceIdentityMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetServiceIdentityMetadata): Uint8Array {
     return GetServiceIdentityMetadata.encode(message).finish();

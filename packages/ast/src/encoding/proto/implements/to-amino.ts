@@ -20,7 +20,7 @@ export const createInterfaceToAmino = (
         context.addUtil('decodePubkey');
         const functionName = getInterfaceToAminoName(interfaceName);
 
-        return makeFunctionWrapper(functionName, t.returnStatement(
+        return makeFunctionWrapper(context, functionName, t.returnStatement(
             t.callExpression(
                 t.identifier('decodePubkey'),
                 [
@@ -40,7 +40,11 @@ export const createInterfaceToAmino = (
     );
 };
 
-const makeFunctionWrapper = (functionName: string, stmt: t.Statement) => {
+const makeFunctionWrapper = (
+    context: ProtoParseContext,
+    functionName: string,
+    stmt: t.Statement
+) => {
     return t.exportNamedDeclaration(
         t.variableDeclaration(
             'const',
@@ -55,6 +59,15 @@ const makeFunctionWrapper = (functionName: string, stmt: t.Statement) => {
                                     t.tsTypeReference(
                                         t.identifier('Any')
                                     )
+                                )
+                            ),
+                            t.assignmentPattern(
+                                identifier(
+                                    'useInterfaces',
+                                    t.tsTypeAnnotation(t.tsBooleanKeyword())
+                                ),
+                                t.identifier(
+                                    (context.pluginValue('interfaces.useByDefault') ?? true).toString()
                                 )
                             )
                         ],
@@ -109,9 +122,12 @@ export const createInterfaceToAminoHelper = (
                                             t.memberExpression(
                                                 t.identifier('content'),
                                                 t.identifier('value')
-                                            )
+                                            ),
+                                            t.identifier('undefined'),
+                                            t.identifier('useInterfaces'),
                                         ]
-                                    )
+                                    ),
+                                    t.identifier('useInterfaces')
                                 ]
                             )
                         )
@@ -130,7 +146,8 @@ export const createInterfaceToAminoHelper = (
                     t.identifier('toAmino')
                 ),
                 [
-                    t.identifier('content')
+                    t.identifier('content'),
+                    t.identifier('useInterfaces')
                 ]
             )
         );
@@ -153,7 +170,8 @@ export const createInterfaceToAminoHelper = (
                                     t.identifier('toAmino')
                                 ),
                                 [
-                                    t.identifier('content')
+                                    t.identifier('content'),
+                                    t.identifier('useInterfaces')
                                 ]
                             )
                         )
@@ -163,5 +181,5 @@ export const createInterfaceToAminoHelper = (
         );
     }
 
-    return makeFunctionWrapper(functionName, ast);
+    return makeFunctionWrapper(context, functionName, ast);
 };

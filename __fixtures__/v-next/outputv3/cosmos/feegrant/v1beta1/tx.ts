@@ -108,7 +108,7 @@ export const MsgGrantAllowance = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgGrantAllowance {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgGrantAllowance {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgGrantAllowance();
@@ -122,7 +122,7 @@ export const MsgGrantAllowance = {
           message.grantee = reader.string();
           break;
         case 3:
-          message.allowance = (FeeAllowanceI_InterfaceDecoder(reader) as Any);
+          message.allowance = useInterfaces ? (FeeAllowanceI_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -175,15 +175,15 @@ export const MsgGrantAllowance = {
       allowance: object?.allowance ? FeeAllowanceI_FromAmino(object.allowance) : undefined
     };
   },
-  toAmino(message: MsgGrantAllowance): MsgGrantAllowanceAmino {
+  toAmino(message: MsgGrantAllowance, useInterfaces: boolean = true): MsgGrantAllowanceAmino {
     const obj: any = {};
     obj.granter = message.granter;
     obj.grantee = message.grantee;
-    obj.allowance = message.allowance ? FeeAllowanceI_ToAmino((message.allowance as Any)) : undefined;
+    obj.allowance = message.allowance ? FeeAllowanceI_ToAmino((message.allowance as Any), useInterfaces) : undefined;
     return obj;
   },
-  fromProtoMsg(message: MsgGrantAllowanceProtoMsg): MsgGrantAllowance {
-    return MsgGrantAllowance.decode(message.value);
+  fromProtoMsg(message: MsgGrantAllowanceProtoMsg, useInterfaces: boolean = true): MsgGrantAllowance {
+    return MsgGrantAllowance.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgGrantAllowance): Uint8Array {
     return MsgGrantAllowance.encode(message).finish();
@@ -204,7 +204,7 @@ export const MsgGrantAllowanceResponse = {
   encode(_: MsgGrantAllowanceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgGrantAllowanceResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgGrantAllowanceResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgGrantAllowanceResponse();
@@ -240,12 +240,12 @@ export const MsgGrantAllowanceResponse = {
   fromAmino(_: MsgGrantAllowanceResponseAmino): MsgGrantAllowanceResponse {
     return {};
   },
-  toAmino(_: MsgGrantAllowanceResponse): MsgGrantAllowanceResponseAmino {
+  toAmino(_: MsgGrantAllowanceResponse, useInterfaces: boolean = true): MsgGrantAllowanceResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgGrantAllowanceResponseProtoMsg): MsgGrantAllowanceResponse {
-    return MsgGrantAllowanceResponse.decode(message.value);
+  fromProtoMsg(message: MsgGrantAllowanceResponseProtoMsg, useInterfaces: boolean = true): MsgGrantAllowanceResponse {
+    return MsgGrantAllowanceResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgGrantAllowanceResponse): Uint8Array {
     return MsgGrantAllowanceResponse.encode(message).finish();
@@ -275,7 +275,7 @@ export const MsgRevokeAllowance = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgRevokeAllowance {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgRevokeAllowance {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRevokeAllowance();
@@ -331,14 +331,14 @@ export const MsgRevokeAllowance = {
       grantee: object.grantee
     };
   },
-  toAmino(message: MsgRevokeAllowance): MsgRevokeAllowanceAmino {
+  toAmino(message: MsgRevokeAllowance, useInterfaces: boolean = true): MsgRevokeAllowanceAmino {
     const obj: any = {};
     obj.granter = message.granter;
     obj.grantee = message.grantee;
     return obj;
   },
-  fromProtoMsg(message: MsgRevokeAllowanceProtoMsg): MsgRevokeAllowance {
-    return MsgRevokeAllowance.decode(message.value);
+  fromProtoMsg(message: MsgRevokeAllowanceProtoMsg, useInterfaces: boolean = true): MsgRevokeAllowance {
+    return MsgRevokeAllowance.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgRevokeAllowance): Uint8Array {
     return MsgRevokeAllowance.encode(message).finish();
@@ -359,7 +359,7 @@ export const MsgRevokeAllowanceResponse = {
   encode(_: MsgRevokeAllowanceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgRevokeAllowanceResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgRevokeAllowanceResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRevokeAllowanceResponse();
@@ -395,12 +395,12 @@ export const MsgRevokeAllowanceResponse = {
   fromAmino(_: MsgRevokeAllowanceResponseAmino): MsgRevokeAllowanceResponse {
     return {};
   },
-  toAmino(_: MsgRevokeAllowanceResponse): MsgRevokeAllowanceResponseAmino {
+  toAmino(_: MsgRevokeAllowanceResponse, useInterfaces: boolean = true): MsgRevokeAllowanceResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgRevokeAllowanceResponseProtoMsg): MsgRevokeAllowanceResponse {
-    return MsgRevokeAllowanceResponse.decode(message.value);
+  fromProtoMsg(message: MsgRevokeAllowanceResponseProtoMsg, useInterfaces: boolean = true): MsgRevokeAllowanceResponse {
+    return MsgRevokeAllowanceResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgRevokeAllowanceResponse): Uint8Array {
     return MsgRevokeAllowanceResponse.encode(message).finish();
@@ -414,14 +414,14 @@ export const MsgRevokeAllowanceResponse = {
 };
 export const FeeAllowanceI_InterfaceDecoder = (input: BinaryReader | Uint8Array): BasicAllowance | PeriodicAllowance | AllowedMsgAllowance | Any => {
   const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32());
+  const data = Any.decode(reader, reader.uint32(), true);
   switch (data.typeUrl) {
     case "/cosmos.feegrant.v1beta1.BasicAllowance":
-      return BasicAllowance.decode(data.value);
+      return BasicAllowance.decode(data.value, undefined, true);
     case "/cosmos.feegrant.v1beta1.PeriodicAllowance":
-      return PeriodicAllowance.decode(data.value);
+      return PeriodicAllowance.decode(data.value, undefined, true);
     case "/cosmos.feegrant.v1beta1.AllowedMsgAllowance":
-      return AllowedMsgAllowance.decode(data.value);
+      return AllowedMsgAllowance.decode(data.value, undefined, true);
     default:
       return data;
   }
@@ -447,24 +447,24 @@ export const FeeAllowanceI_FromAmino = (content: AnyAmino) => {
       return Any.fromAmino(content);
   }
 };
-export const FeeAllowanceI_ToAmino = (content: Any) => {
+export const FeeAllowanceI_ToAmino = (content: Any, useInterfaces: boolean = true) => {
   switch (content.typeUrl) {
     case "/cosmos.feegrant.v1beta1.BasicAllowance":
       return {
         type: "cosmos-sdk/BasicAllowance",
-        value: BasicAllowance.toAmino(BasicAllowance.decode(content.value))
+        value: BasicAllowance.toAmino(BasicAllowance.decode(content.value, undefined, useInterfaces), useInterfaces)
       };
     case "/cosmos.feegrant.v1beta1.PeriodicAllowance":
       return {
         type: "cosmos-sdk/PeriodicAllowance",
-        value: PeriodicAllowance.toAmino(PeriodicAllowance.decode(content.value))
+        value: PeriodicAllowance.toAmino(PeriodicAllowance.decode(content.value, undefined, useInterfaces), useInterfaces)
       };
     case "/cosmos.feegrant.v1beta1.AllowedMsgAllowance":
       return {
         type: "cosmos-sdk/AllowedMsgAllowance",
-        value: AllowedMsgAllowance.toAmino(AllowedMsgAllowance.decode(content.value))
+        value: AllowedMsgAllowance.toAmino(AllowedMsgAllowance.decode(content.value, undefined, useInterfaces), useInterfaces)
       };
     default:
-      return Any.toAmino(content);
+      return Any.toAmino(content, useInterfaces);
   }
 };

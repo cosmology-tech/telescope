@@ -207,7 +207,7 @@ export const Logging = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Logging {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Logging {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogging();
@@ -215,10 +215,10 @@ export const Logging = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.producerDestinations.push(Logging_LoggingDestination.decode(reader, reader.uint32()));
+          message.producerDestinations.push(Logging_LoggingDestination.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.consumerDestinations.push(Logging_LoggingDestination.decode(reader, reader.uint32()));
+          message.consumerDestinations.push(Logging_LoggingDestination.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -279,15 +279,15 @@ export const Logging = {
       consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Logging_LoggingDestination.fromAmino(e)) : []
     };
   },
-  toAmino(message: Logging): LoggingAmino {
+  toAmino(message: Logging, useInterfaces: boolean = true): LoggingAmino {
     const obj: any = {};
     if (message.producerDestinations) {
-      obj.producer_destinations = message.producerDestinations.map(e => e ? Logging_LoggingDestination.toAmino(e) : undefined);
+      obj.producer_destinations = message.producerDestinations.map(e => e ? Logging_LoggingDestination.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.producer_destinations = [];
     }
     if (message.consumerDestinations) {
-      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Logging_LoggingDestination.toAmino(e) : undefined);
+      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Logging_LoggingDestination.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.consumer_destinations = [];
     }
@@ -296,8 +296,8 @@ export const Logging = {
   fromAminoMsg(object: LoggingAminoMsg): Logging {
     return Logging.fromAmino(object.value);
   },
-  fromProtoMsg(message: LoggingProtoMsg): Logging {
-    return Logging.decode(message.value);
+  fromProtoMsg(message: LoggingProtoMsg, useInterfaces: boolean = true): Logging {
+    return Logging.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Logging): Uint8Array {
     return Logging.encode(message).finish();
@@ -326,7 +326,7 @@ export const Logging_LoggingDestination = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Logging_LoggingDestination {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Logging_LoggingDestination {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogging_LoggingDestination();
@@ -390,7 +390,7 @@ export const Logging_LoggingDestination = {
       logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => e) : []
     };
   },
-  toAmino(message: Logging_LoggingDestination): Logging_LoggingDestinationAmino {
+  toAmino(message: Logging_LoggingDestination, useInterfaces: boolean = true): Logging_LoggingDestinationAmino {
     const obj: any = {};
     obj.monitored_resource = message.monitoredResource;
     if (message.logs) {
@@ -403,8 +403,8 @@ export const Logging_LoggingDestination = {
   fromAminoMsg(object: Logging_LoggingDestinationAminoMsg): Logging_LoggingDestination {
     return Logging_LoggingDestination.fromAmino(object.value);
   },
-  fromProtoMsg(message: Logging_LoggingDestinationProtoMsg): Logging_LoggingDestination {
-    return Logging_LoggingDestination.decode(message.value);
+  fromProtoMsg(message: Logging_LoggingDestinationProtoMsg, useInterfaces: boolean = true): Logging_LoggingDestination {
+    return Logging_LoggingDestination.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Logging_LoggingDestination): Uint8Array {
     return Logging_LoggingDestination.encode(message).finish();

@@ -25,7 +25,11 @@ export const fromProtoMsgMethod = (context: ProtoParseContext, name: string, pro
                     t.memberExpression(
                         t.identifier(varName),
                         t.identifier('value')
-                    )
+                    ),
+                    ...(context.options.interfaces.enabled ? [
+                        t.identifier('undefined'),
+                        t.identifier('useInterfaces')
+                    ] : []),
                 ]
             )
         )
@@ -41,7 +45,18 @@ export const fromProtoMsgMethod = (context: ProtoParseContext, name: string, pro
                         t.identifier(ProtoMsgName)
                     )
                 )
-            )
+            ),
+            ...(context.options.interfaces.enabled ? [
+                t.assignmentPattern(
+                    identifier(
+                        'useInterfaces',
+                        t.tsTypeAnnotation(t.tsBooleanKeyword())
+                    ),
+                    t.identifier(
+                        (context.pluginValue('interfaces.useByDefault') ?? true).toString()
+                    )
+                )
+            ] : []),
         ],
         t.blockStatement(body),
         false,

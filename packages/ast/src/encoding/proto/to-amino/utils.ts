@@ -162,7 +162,10 @@ export const toAminoJSON = {
                             t.memberExpression(
                                 t.identifier('message'),
                                 t.identifier(propName)
-                            )
+                            ),
+                            ...(args.context.options.interfaces.enabled ? [
+                                t.identifier('useInterfaces')
+                            ] : []),
                         ]
                     ),
                     defaultValue
@@ -202,7 +205,10 @@ export const toAminoJSON = {
                                 t.tsTypeReference(
                                     t.identifier('Any')
                                 )
-                            )
+                            ),
+                            ...(args.context.options.interfaces.enabled ? [
+                                t.identifier('useInterfaces')
+                            ] : []),
                         ]
                     ),
                     t.identifier('undefined')
@@ -652,7 +658,10 @@ export const arrayTypes = {
                         t.tsTypeReference(
                             t.identifier('Any')
                         )
-                    )
+                    ),
+                    ...(args.context.options.interfaces.enabled ? [
+                        t.identifier('useInterfaces')
+                    ] : []),
                 ]
             ),
             t.identifier('undefined')
@@ -668,7 +677,10 @@ export const arrayTypes = {
                     t.identifier('toAmino')
                 ),
                 [
-                    t.identifier('e')
+                    t.identifier('e'),
+                    ...(args.context.options.interfaces.enabled ? [
+                        t.identifier('useInterfaces')
+                    ] : []),
                 ]
             ),
             t.identifier('undefined')
