@@ -386,7 +386,6 @@ export const fromJSON = {
                 return fromJSON.timestampTimestamp(args);
             case 'date':
             default:
-                args.context.addUtil('toTimestamp');
                 return fromJSON.timestampDate(args);
         }
     },

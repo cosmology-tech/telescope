@@ -351,6 +351,10 @@ export const getTSTypeFromGoogleType = (
 
     switch (type) {
         case 'google.protobuf.Timestamp':
+            if (options === 'Amino' || options === 'AminoMsg') {
+                return t.tsStringKeyword();
+            }
+
             switch (context.pluginValue('prototypes.typingsFormat.timestamp')) {
                 case 'timestamp':
                     return t.tsTypeReference(identifier('Timestamp'));

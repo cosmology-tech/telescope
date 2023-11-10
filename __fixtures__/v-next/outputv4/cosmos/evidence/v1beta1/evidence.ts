@@ -132,7 +132,7 @@ export const Equivocation = {
   fromAmino(object: EquivocationAmino): Equivocation {
     return {
       height: BigInt(object.height),
-      time: object.time,
+      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
       power: BigInt(object.power),
       consensusAddress: object.consensus_address
     };
@@ -140,7 +140,7 @@ export const Equivocation = {
   toAmino(message: Equivocation): EquivocationAmino {
     const obj: any = {};
     obj.height = message.height ? message.height.toString() : undefined;
-    obj.time = message.time;
+    obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
     obj.power = message.power ? message.power.toString() : undefined;
     obj.consensus_address = message.consensusAddress;
     return obj;

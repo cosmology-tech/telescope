@@ -670,7 +670,7 @@ export interface ConstantAmino {
    * Deprecated: timestamp is no longer considered a builtin cel type.
    */
   /** @deprecated */
-  timestamp_value?: Date;
+  timestamp_value?: string;
 }
 export interface ConstantAminoMsg {
   type: "/google.api.expr.v1alpha1.Constant";
@@ -2181,7 +2181,7 @@ export const Constant = {
       stringValue: object?.string_value,
       bytesValue: object?.bytes_value,
       durationValue: object?.duration_value ? Duration.fromAmino(object.duration_value) : undefined,
-      timestampValue: object?.timestamp_value
+      timestampValue: object?.timestamp_value ? fromTimestamp(Timestamp.fromAmino(object.timestamp_value)) : undefined
     };
   },
   toAmino(message: Constant): ConstantAmino {
@@ -2194,7 +2194,7 @@ export const Constant = {
     obj.string_value = message.stringValue;
     obj.bytes_value = message.bytesValue;
     obj.duration_value = message.durationValue ? Duration.toAmino(message.durationValue) : undefined;
-    obj.timestamp_value = message.timestampValue;
+    obj.timestamp_value = message.timestampValue ? Timestamp.toAmino(toTimestamp(message.timestampValue)) : undefined;
     return obj;
   },
   fromAminoMsg(object: ConstantAminoMsg): Constant {

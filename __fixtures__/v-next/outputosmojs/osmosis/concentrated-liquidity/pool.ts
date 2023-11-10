@@ -263,7 +263,7 @@ export const Pool = {
       tickSpacing: BigInt(object.tick_spacing),
       exponentAtPriceOne: object.exponent_at_price_one,
       swapFee: object.swap_fee,
-      lastLiquidityUpdate: object.last_liquidity_update
+      lastLiquidityUpdate: object?.last_liquidity_update ? fromTimestamp(Timestamp.fromAmino(object.last_liquidity_update)) : undefined
     };
   },
   toAmino(message: Pool): PoolAmino {
@@ -279,7 +279,7 @@ export const Pool = {
     obj.tick_spacing = message.tickSpacing ? message.tickSpacing.toString() : undefined;
     obj.exponent_at_price_one = message.exponentAtPriceOne;
     obj.swap_fee = message.swapFee;
-    obj.last_liquidity_update = message.lastLiquidityUpdate;
+    obj.last_liquidity_update = message.lastLiquidityUpdate ? Timestamp.toAmino(toTimestamp(message.lastLiquidityUpdate)) : undefined;
     return obj;
   },
   fromAminoMsg(object: PoolAminoMsg): Pool {

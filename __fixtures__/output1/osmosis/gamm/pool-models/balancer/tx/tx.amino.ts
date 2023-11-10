@@ -2,7 +2,6 @@
 import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType, SmoothWeightChangeParams, SmoothWeightChangeParamsSDKType } from "../balancerPool";
 import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../../../helpers";
-import { Timestamp, TimestampSDKType } from "../../../../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../../../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../../../../cosmos/base/v1beta1/coin";
 import { MsgCreateBalancerPool, MsgCreateBalancerPoolSDKType } from "./tx";
@@ -14,10 +13,7 @@ export interface MsgCreateBalancerPoolAminoType extends AminoMsg {
       swap_fee: string;
       exit_fee: string;
       smooth_weight_change_params: {
-        start_time: {
-          seconds: string;
-          nanos: number;
-        };
+        start_time: string;
         duration: {
           seconds: string;
           nanos: number;

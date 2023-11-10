@@ -27,6 +27,7 @@ export declare const toAminoJSON: {
     bytes(args: ToAminoJSONMethod): t.ExpressionStatement;
     duration(args: ToAminoJSONMethod): t.ExpressionStatement;
     timestamp(args: ToAminoJSONMethod): t.ExpressionStatement;
+    timestampDate(args: ToAminoJSONMethod): t.ExpressionStatement;
     pubkey(args: ToAminoJSONMethod): t.ExpressionStatement;
     rawBytes(args: ToAminoJSONMethod): t.ExpressionStatement;
     wasmByteCode(args: ToAminoJSONMethod): t.ExpressionStatement;
