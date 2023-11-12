@@ -397,7 +397,7 @@ export const ModuleToDistributeCoinsRequest = {
   encode(_: ModuleToDistributeCoinsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModuleToDistributeCoinsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): ModuleToDistributeCoinsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleToDistributeCoinsRequest();
@@ -433,21 +433,21 @@ export const ModuleToDistributeCoinsRequest = {
   fromAmino(_: ModuleToDistributeCoinsRequestAmino): ModuleToDistributeCoinsRequest {
     return {};
   },
-  toAmino(_: ModuleToDistributeCoinsRequest, useInterfaces: boolean = true): ModuleToDistributeCoinsRequestAmino {
+  toAmino(_: ModuleToDistributeCoinsRequest): ModuleToDistributeCoinsRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: ModuleToDistributeCoinsRequestAminoMsg): ModuleToDistributeCoinsRequest {
     return ModuleToDistributeCoinsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: ModuleToDistributeCoinsRequest, useInterfaces: boolean = true): ModuleToDistributeCoinsRequestAminoMsg {
+  toAminoMsg(message: ModuleToDistributeCoinsRequest): ModuleToDistributeCoinsRequestAminoMsg {
     return {
       type: "osmosis/incentives/module-to-distribute-coins-request",
-      value: ModuleToDistributeCoinsRequest.toAmino(message, useInterfaces)
+      value: ModuleToDistributeCoinsRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: ModuleToDistributeCoinsRequestProtoMsg, useInterfaces: boolean = true): ModuleToDistributeCoinsRequest {
-    return ModuleToDistributeCoinsRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ModuleToDistributeCoinsRequestProtoMsg): ModuleToDistributeCoinsRequest {
+    return ModuleToDistributeCoinsRequest.decode(message.value);
   },
   toProto(message: ModuleToDistributeCoinsRequest): Uint8Array {
     return ModuleToDistributeCoinsRequest.encode(message).finish();
@@ -473,7 +473,7 @@ export const ModuleToDistributeCoinsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModuleToDistributeCoinsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): ModuleToDistributeCoinsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleToDistributeCoinsResponse();
@@ -481,7 +481,7 @@ export const ModuleToDistributeCoinsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.coins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.coins.push(Coin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -528,10 +528,10 @@ export const ModuleToDistributeCoinsResponse = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: ModuleToDistributeCoinsResponse, useInterfaces: boolean = true): ModuleToDistributeCoinsResponseAmino {
+  toAmino(message: ModuleToDistributeCoinsResponse): ModuleToDistributeCoinsResponseAmino {
     const obj: any = {};
     if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.coins = [];
     }
@@ -540,14 +540,14 @@ export const ModuleToDistributeCoinsResponse = {
   fromAminoMsg(object: ModuleToDistributeCoinsResponseAminoMsg): ModuleToDistributeCoinsResponse {
     return ModuleToDistributeCoinsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: ModuleToDistributeCoinsResponse, useInterfaces: boolean = true): ModuleToDistributeCoinsResponseAminoMsg {
+  toAminoMsg(message: ModuleToDistributeCoinsResponse): ModuleToDistributeCoinsResponseAminoMsg {
     return {
       type: "osmosis/incentives/module-to-distribute-coins-response",
-      value: ModuleToDistributeCoinsResponse.toAmino(message, useInterfaces)
+      value: ModuleToDistributeCoinsResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: ModuleToDistributeCoinsResponseProtoMsg, useInterfaces: boolean = true): ModuleToDistributeCoinsResponse {
-    return ModuleToDistributeCoinsResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ModuleToDistributeCoinsResponseProtoMsg): ModuleToDistributeCoinsResponse {
+    return ModuleToDistributeCoinsResponse.decode(message.value);
   },
   toProto(message: ModuleToDistributeCoinsResponse): Uint8Array {
     return ModuleToDistributeCoinsResponse.encode(message).finish();
@@ -573,7 +573,7 @@ export const GaugeByIDRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GaugeByIDRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): GaugeByIDRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGaugeByIDRequest();
@@ -622,7 +622,7 @@ export const GaugeByIDRequest = {
       id: BigInt(object.id)
     };
   },
-  toAmino(message: GaugeByIDRequest, useInterfaces: boolean = true): GaugeByIDRequestAmino {
+  toAmino(message: GaugeByIDRequest): GaugeByIDRequestAmino {
     const obj: any = {};
     obj.id = message.id ? message.id.toString() : undefined;
     return obj;
@@ -630,14 +630,14 @@ export const GaugeByIDRequest = {
   fromAminoMsg(object: GaugeByIDRequestAminoMsg): GaugeByIDRequest {
     return GaugeByIDRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: GaugeByIDRequest, useInterfaces: boolean = true): GaugeByIDRequestAminoMsg {
+  toAminoMsg(message: GaugeByIDRequest): GaugeByIDRequestAminoMsg {
     return {
       type: "osmosis/incentives/gauge-by-id-request",
-      value: GaugeByIDRequest.toAmino(message, useInterfaces)
+      value: GaugeByIDRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: GaugeByIDRequestProtoMsg, useInterfaces: boolean = true): GaugeByIDRequest {
-    return GaugeByIDRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: GaugeByIDRequestProtoMsg): GaugeByIDRequest {
+    return GaugeByIDRequest.decode(message.value);
   },
   toProto(message: GaugeByIDRequest): Uint8Array {
     return GaugeByIDRequest.encode(message).finish();
@@ -663,7 +663,7 @@ export const GaugeByIDResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GaugeByIDResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): GaugeByIDResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGaugeByIDResponse();
@@ -671,7 +671,7 @@ export const GaugeByIDResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.gauge = Gauge.decode(reader, reader.uint32(), useInterfaces);
+          message.gauge = Gauge.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -712,22 +712,22 @@ export const GaugeByIDResponse = {
       gauge: object?.gauge ? Gauge.fromAmino(object.gauge) : undefined
     };
   },
-  toAmino(message: GaugeByIDResponse, useInterfaces: boolean = true): GaugeByIDResponseAmino {
+  toAmino(message: GaugeByIDResponse): GaugeByIDResponseAmino {
     const obj: any = {};
-    obj.gauge = message.gauge ? Gauge.toAmino(message.gauge, useInterfaces) : undefined;
+    obj.gauge = message.gauge ? Gauge.toAmino(message.gauge) : undefined;
     return obj;
   },
   fromAminoMsg(object: GaugeByIDResponseAminoMsg): GaugeByIDResponse {
     return GaugeByIDResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: GaugeByIDResponse, useInterfaces: boolean = true): GaugeByIDResponseAminoMsg {
+  toAminoMsg(message: GaugeByIDResponse): GaugeByIDResponseAminoMsg {
     return {
       type: "osmosis/incentives/gauge-by-id-response",
-      value: GaugeByIDResponse.toAmino(message, useInterfaces)
+      value: GaugeByIDResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: GaugeByIDResponseProtoMsg, useInterfaces: boolean = true): GaugeByIDResponse {
-    return GaugeByIDResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: GaugeByIDResponseProtoMsg): GaugeByIDResponse {
+    return GaugeByIDResponse.decode(message.value);
   },
   toProto(message: GaugeByIDResponse): Uint8Array {
     return GaugeByIDResponse.encode(message).finish();
@@ -753,7 +753,7 @@ export const GaugesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GaugesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): GaugesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGaugesRequest();
@@ -761,7 +761,7 @@ export const GaugesRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -802,22 +802,22 @@ export const GaugesRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: GaugesRequest, useInterfaces: boolean = true): GaugesRequestAmino {
+  toAmino(message: GaugesRequest): GaugesRequestAmino {
     const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: GaugesRequestAminoMsg): GaugesRequest {
     return GaugesRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: GaugesRequest, useInterfaces: boolean = true): GaugesRequestAminoMsg {
+  toAminoMsg(message: GaugesRequest): GaugesRequestAminoMsg {
     return {
       type: "osmosis/incentives/gauges-request",
-      value: GaugesRequest.toAmino(message, useInterfaces)
+      value: GaugesRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: GaugesRequestProtoMsg, useInterfaces: boolean = true): GaugesRequest {
-    return GaugesRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: GaugesRequestProtoMsg): GaugesRequest {
+    return GaugesRequest.decode(message.value);
   },
   toProto(message: GaugesRequest): Uint8Array {
     return GaugesRequest.encode(message).finish();
@@ -847,7 +847,7 @@ export const GaugesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GaugesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): GaugesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGaugesResponse();
@@ -855,10 +855,10 @@ export const GaugesResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.data.push(Gauge.decode(reader, reader.uint32(), useInterfaces));
+          message.data.push(Gauge.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -913,27 +913,27 @@ export const GaugesResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: GaugesResponse, useInterfaces: boolean = true): GaugesResponseAmino {
+  toAmino(message: GaugesResponse): GaugesResponseAmino {
     const obj: any = {};
     if (message.data) {
-      obj.data = message.data.map(e => e ? Gauge.toAmino(e, useInterfaces) : undefined);
+      obj.data = message.data.map(e => e ? Gauge.toAmino(e) : undefined);
     } else {
       obj.data = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: GaugesResponseAminoMsg): GaugesResponse {
     return GaugesResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: GaugesResponse, useInterfaces: boolean = true): GaugesResponseAminoMsg {
+  toAminoMsg(message: GaugesResponse): GaugesResponseAminoMsg {
     return {
       type: "osmosis/incentives/gauges-response",
-      value: GaugesResponse.toAmino(message, useInterfaces)
+      value: GaugesResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: GaugesResponseProtoMsg, useInterfaces: boolean = true): GaugesResponse {
-    return GaugesResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: GaugesResponseProtoMsg): GaugesResponse {
+    return GaugesResponse.decode(message.value);
   },
   toProto(message: GaugesResponse): Uint8Array {
     return GaugesResponse.encode(message).finish();
@@ -959,7 +959,7 @@ export const ActiveGaugesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ActiveGaugesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): ActiveGaugesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseActiveGaugesRequest();
@@ -967,7 +967,7 @@ export const ActiveGaugesRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1008,22 +1008,22 @@ export const ActiveGaugesRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: ActiveGaugesRequest, useInterfaces: boolean = true): ActiveGaugesRequestAmino {
+  toAmino(message: ActiveGaugesRequest): ActiveGaugesRequestAmino {
     const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: ActiveGaugesRequestAminoMsg): ActiveGaugesRequest {
     return ActiveGaugesRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: ActiveGaugesRequest, useInterfaces: boolean = true): ActiveGaugesRequestAminoMsg {
+  toAminoMsg(message: ActiveGaugesRequest): ActiveGaugesRequestAminoMsg {
     return {
       type: "osmosis/incentives/active-gauges-request",
-      value: ActiveGaugesRequest.toAmino(message, useInterfaces)
+      value: ActiveGaugesRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: ActiveGaugesRequestProtoMsg, useInterfaces: boolean = true): ActiveGaugesRequest {
-    return ActiveGaugesRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ActiveGaugesRequestProtoMsg): ActiveGaugesRequest {
+    return ActiveGaugesRequest.decode(message.value);
   },
   toProto(message: ActiveGaugesRequest): Uint8Array {
     return ActiveGaugesRequest.encode(message).finish();
@@ -1053,7 +1053,7 @@ export const ActiveGaugesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ActiveGaugesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): ActiveGaugesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseActiveGaugesResponse();
@@ -1061,10 +1061,10 @@ export const ActiveGaugesResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.data.push(Gauge.decode(reader, reader.uint32(), useInterfaces));
+          message.data.push(Gauge.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1119,27 +1119,27 @@ export const ActiveGaugesResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: ActiveGaugesResponse, useInterfaces: boolean = true): ActiveGaugesResponseAmino {
+  toAmino(message: ActiveGaugesResponse): ActiveGaugesResponseAmino {
     const obj: any = {};
     if (message.data) {
-      obj.data = message.data.map(e => e ? Gauge.toAmino(e, useInterfaces) : undefined);
+      obj.data = message.data.map(e => e ? Gauge.toAmino(e) : undefined);
     } else {
       obj.data = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: ActiveGaugesResponseAminoMsg): ActiveGaugesResponse {
     return ActiveGaugesResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: ActiveGaugesResponse, useInterfaces: boolean = true): ActiveGaugesResponseAminoMsg {
+  toAminoMsg(message: ActiveGaugesResponse): ActiveGaugesResponseAminoMsg {
     return {
       type: "osmosis/incentives/active-gauges-response",
-      value: ActiveGaugesResponse.toAmino(message, useInterfaces)
+      value: ActiveGaugesResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: ActiveGaugesResponseProtoMsg, useInterfaces: boolean = true): ActiveGaugesResponse {
-    return ActiveGaugesResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ActiveGaugesResponseProtoMsg): ActiveGaugesResponse {
+    return ActiveGaugesResponse.decode(message.value);
   },
   toProto(message: ActiveGaugesResponse): Uint8Array {
     return ActiveGaugesResponse.encode(message).finish();
@@ -1169,7 +1169,7 @@ export const ActiveGaugesPerDenomRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ActiveGaugesPerDenomRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): ActiveGaugesPerDenomRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseActiveGaugesPerDenomRequest();
@@ -1180,7 +1180,7 @@ export const ActiveGaugesPerDenomRequest = {
           message.denom = reader.string();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1227,23 +1227,23 @@ export const ActiveGaugesPerDenomRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: ActiveGaugesPerDenomRequest, useInterfaces: boolean = true): ActiveGaugesPerDenomRequestAmino {
+  toAmino(message: ActiveGaugesPerDenomRequest): ActiveGaugesPerDenomRequestAmino {
     const obj: any = {};
     obj.denom = message.denom;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: ActiveGaugesPerDenomRequestAminoMsg): ActiveGaugesPerDenomRequest {
     return ActiveGaugesPerDenomRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: ActiveGaugesPerDenomRequest, useInterfaces: boolean = true): ActiveGaugesPerDenomRequestAminoMsg {
+  toAminoMsg(message: ActiveGaugesPerDenomRequest): ActiveGaugesPerDenomRequestAminoMsg {
     return {
       type: "osmosis/incentives/active-gauges-per-denom-request",
-      value: ActiveGaugesPerDenomRequest.toAmino(message, useInterfaces)
+      value: ActiveGaugesPerDenomRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: ActiveGaugesPerDenomRequestProtoMsg, useInterfaces: boolean = true): ActiveGaugesPerDenomRequest {
-    return ActiveGaugesPerDenomRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ActiveGaugesPerDenomRequestProtoMsg): ActiveGaugesPerDenomRequest {
+    return ActiveGaugesPerDenomRequest.decode(message.value);
   },
   toProto(message: ActiveGaugesPerDenomRequest): Uint8Array {
     return ActiveGaugesPerDenomRequest.encode(message).finish();
@@ -1273,7 +1273,7 @@ export const ActiveGaugesPerDenomResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ActiveGaugesPerDenomResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): ActiveGaugesPerDenomResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseActiveGaugesPerDenomResponse();
@@ -1281,10 +1281,10 @@ export const ActiveGaugesPerDenomResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.data.push(Gauge.decode(reader, reader.uint32(), useInterfaces));
+          message.data.push(Gauge.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1339,27 +1339,27 @@ export const ActiveGaugesPerDenomResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: ActiveGaugesPerDenomResponse, useInterfaces: boolean = true): ActiveGaugesPerDenomResponseAmino {
+  toAmino(message: ActiveGaugesPerDenomResponse): ActiveGaugesPerDenomResponseAmino {
     const obj: any = {};
     if (message.data) {
-      obj.data = message.data.map(e => e ? Gauge.toAmino(e, useInterfaces) : undefined);
+      obj.data = message.data.map(e => e ? Gauge.toAmino(e) : undefined);
     } else {
       obj.data = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: ActiveGaugesPerDenomResponseAminoMsg): ActiveGaugesPerDenomResponse {
     return ActiveGaugesPerDenomResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: ActiveGaugesPerDenomResponse, useInterfaces: boolean = true): ActiveGaugesPerDenomResponseAminoMsg {
+  toAminoMsg(message: ActiveGaugesPerDenomResponse): ActiveGaugesPerDenomResponseAminoMsg {
     return {
       type: "osmosis/incentives/active-gauges-per-denom-response",
-      value: ActiveGaugesPerDenomResponse.toAmino(message, useInterfaces)
+      value: ActiveGaugesPerDenomResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: ActiveGaugesPerDenomResponseProtoMsg, useInterfaces: boolean = true): ActiveGaugesPerDenomResponse {
-    return ActiveGaugesPerDenomResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ActiveGaugesPerDenomResponseProtoMsg): ActiveGaugesPerDenomResponse {
+    return ActiveGaugesPerDenomResponse.decode(message.value);
   },
   toProto(message: ActiveGaugesPerDenomResponse): Uint8Array {
     return ActiveGaugesPerDenomResponse.encode(message).finish();
@@ -1385,7 +1385,7 @@ export const UpcomingGaugesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpcomingGaugesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): UpcomingGaugesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpcomingGaugesRequest();
@@ -1393,7 +1393,7 @@ export const UpcomingGaugesRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1434,22 +1434,22 @@ export const UpcomingGaugesRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: UpcomingGaugesRequest, useInterfaces: boolean = true): UpcomingGaugesRequestAmino {
+  toAmino(message: UpcomingGaugesRequest): UpcomingGaugesRequestAmino {
     const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: UpcomingGaugesRequestAminoMsg): UpcomingGaugesRequest {
     return UpcomingGaugesRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: UpcomingGaugesRequest, useInterfaces: boolean = true): UpcomingGaugesRequestAminoMsg {
+  toAminoMsg(message: UpcomingGaugesRequest): UpcomingGaugesRequestAminoMsg {
     return {
       type: "osmosis/incentives/upcoming-gauges-request",
-      value: UpcomingGaugesRequest.toAmino(message, useInterfaces)
+      value: UpcomingGaugesRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: UpcomingGaugesRequestProtoMsg, useInterfaces: boolean = true): UpcomingGaugesRequest {
-    return UpcomingGaugesRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: UpcomingGaugesRequestProtoMsg): UpcomingGaugesRequest {
+    return UpcomingGaugesRequest.decode(message.value);
   },
   toProto(message: UpcomingGaugesRequest): Uint8Array {
     return UpcomingGaugesRequest.encode(message).finish();
@@ -1479,7 +1479,7 @@ export const UpcomingGaugesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpcomingGaugesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): UpcomingGaugesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpcomingGaugesResponse();
@@ -1487,10 +1487,10 @@ export const UpcomingGaugesResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.data.push(Gauge.decode(reader, reader.uint32(), useInterfaces));
+          message.data.push(Gauge.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1545,27 +1545,27 @@ export const UpcomingGaugesResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: UpcomingGaugesResponse, useInterfaces: boolean = true): UpcomingGaugesResponseAmino {
+  toAmino(message: UpcomingGaugesResponse): UpcomingGaugesResponseAmino {
     const obj: any = {};
     if (message.data) {
-      obj.data = message.data.map(e => e ? Gauge.toAmino(e, useInterfaces) : undefined);
+      obj.data = message.data.map(e => e ? Gauge.toAmino(e) : undefined);
     } else {
       obj.data = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: UpcomingGaugesResponseAminoMsg): UpcomingGaugesResponse {
     return UpcomingGaugesResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: UpcomingGaugesResponse, useInterfaces: boolean = true): UpcomingGaugesResponseAminoMsg {
+  toAminoMsg(message: UpcomingGaugesResponse): UpcomingGaugesResponseAminoMsg {
     return {
       type: "osmosis/incentives/upcoming-gauges-response",
-      value: UpcomingGaugesResponse.toAmino(message, useInterfaces)
+      value: UpcomingGaugesResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: UpcomingGaugesResponseProtoMsg, useInterfaces: boolean = true): UpcomingGaugesResponse {
-    return UpcomingGaugesResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: UpcomingGaugesResponseProtoMsg): UpcomingGaugesResponse {
+    return UpcomingGaugesResponse.decode(message.value);
   },
   toProto(message: UpcomingGaugesResponse): Uint8Array {
     return UpcomingGaugesResponse.encode(message).finish();
@@ -1595,7 +1595,7 @@ export const UpcomingGaugesPerDenomRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpcomingGaugesPerDenomRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): UpcomingGaugesPerDenomRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpcomingGaugesPerDenomRequest();
@@ -1606,7 +1606,7 @@ export const UpcomingGaugesPerDenomRequest = {
           message.denom = reader.string();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1653,23 +1653,23 @@ export const UpcomingGaugesPerDenomRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: UpcomingGaugesPerDenomRequest, useInterfaces: boolean = true): UpcomingGaugesPerDenomRequestAmino {
+  toAmino(message: UpcomingGaugesPerDenomRequest): UpcomingGaugesPerDenomRequestAmino {
     const obj: any = {};
     obj.denom = message.denom;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: UpcomingGaugesPerDenomRequestAminoMsg): UpcomingGaugesPerDenomRequest {
     return UpcomingGaugesPerDenomRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: UpcomingGaugesPerDenomRequest, useInterfaces: boolean = true): UpcomingGaugesPerDenomRequestAminoMsg {
+  toAminoMsg(message: UpcomingGaugesPerDenomRequest): UpcomingGaugesPerDenomRequestAminoMsg {
     return {
       type: "osmosis/incentives/upcoming-gauges-per-denom-request",
-      value: UpcomingGaugesPerDenomRequest.toAmino(message, useInterfaces)
+      value: UpcomingGaugesPerDenomRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: UpcomingGaugesPerDenomRequestProtoMsg, useInterfaces: boolean = true): UpcomingGaugesPerDenomRequest {
-    return UpcomingGaugesPerDenomRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: UpcomingGaugesPerDenomRequestProtoMsg): UpcomingGaugesPerDenomRequest {
+    return UpcomingGaugesPerDenomRequest.decode(message.value);
   },
   toProto(message: UpcomingGaugesPerDenomRequest): Uint8Array {
     return UpcomingGaugesPerDenomRequest.encode(message).finish();
@@ -1699,7 +1699,7 @@ export const UpcomingGaugesPerDenomResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpcomingGaugesPerDenomResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): UpcomingGaugesPerDenomResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpcomingGaugesPerDenomResponse();
@@ -1707,10 +1707,10 @@ export const UpcomingGaugesPerDenomResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.upcomingGauges.push(Gauge.decode(reader, reader.uint32(), useInterfaces));
+          message.upcomingGauges.push(Gauge.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1765,27 +1765,27 @@ export const UpcomingGaugesPerDenomResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: UpcomingGaugesPerDenomResponse, useInterfaces: boolean = true): UpcomingGaugesPerDenomResponseAmino {
+  toAmino(message: UpcomingGaugesPerDenomResponse): UpcomingGaugesPerDenomResponseAmino {
     const obj: any = {};
     if (message.upcomingGauges) {
-      obj.upcoming_gauges = message.upcomingGauges.map(e => e ? Gauge.toAmino(e, useInterfaces) : undefined);
+      obj.upcoming_gauges = message.upcomingGauges.map(e => e ? Gauge.toAmino(e) : undefined);
     } else {
       obj.upcoming_gauges = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: UpcomingGaugesPerDenomResponseAminoMsg): UpcomingGaugesPerDenomResponse {
     return UpcomingGaugesPerDenomResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: UpcomingGaugesPerDenomResponse, useInterfaces: boolean = true): UpcomingGaugesPerDenomResponseAminoMsg {
+  toAminoMsg(message: UpcomingGaugesPerDenomResponse): UpcomingGaugesPerDenomResponseAminoMsg {
     return {
       type: "osmosis/incentives/upcoming-gauges-per-denom-response",
-      value: UpcomingGaugesPerDenomResponse.toAmino(message, useInterfaces)
+      value: UpcomingGaugesPerDenomResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: UpcomingGaugesPerDenomResponseProtoMsg, useInterfaces: boolean = true): UpcomingGaugesPerDenomResponse {
-    return UpcomingGaugesPerDenomResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: UpcomingGaugesPerDenomResponseProtoMsg): UpcomingGaugesPerDenomResponse {
+    return UpcomingGaugesPerDenomResponse.decode(message.value);
   },
   toProto(message: UpcomingGaugesPerDenomResponse): Uint8Array {
     return UpcomingGaugesPerDenomResponse.encode(message).finish();
@@ -1821,7 +1821,7 @@ export const RewardsEstRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): RewardsEstRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): RewardsEstRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRewardsEstRequest();
@@ -1903,7 +1903,7 @@ export const RewardsEstRequest = {
       endEpoch: BigInt(object.end_epoch)
     };
   },
-  toAmino(message: RewardsEstRequest, useInterfaces: boolean = true): RewardsEstRequestAmino {
+  toAmino(message: RewardsEstRequest): RewardsEstRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
     if (message.lockIds) {
@@ -1917,14 +1917,14 @@ export const RewardsEstRequest = {
   fromAminoMsg(object: RewardsEstRequestAminoMsg): RewardsEstRequest {
     return RewardsEstRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: RewardsEstRequest, useInterfaces: boolean = true): RewardsEstRequestAminoMsg {
+  toAminoMsg(message: RewardsEstRequest): RewardsEstRequestAminoMsg {
     return {
       type: "osmosis/incentives/rewards-est-request",
-      value: RewardsEstRequest.toAmino(message, useInterfaces)
+      value: RewardsEstRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: RewardsEstRequestProtoMsg, useInterfaces: boolean = true): RewardsEstRequest {
-    return RewardsEstRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: RewardsEstRequestProtoMsg): RewardsEstRequest {
+    return RewardsEstRequest.decode(message.value);
   },
   toProto(message: RewardsEstRequest): Uint8Array {
     return RewardsEstRequest.encode(message).finish();
@@ -1950,7 +1950,7 @@ export const RewardsEstResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): RewardsEstResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): RewardsEstResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRewardsEstResponse();
@@ -1958,7 +1958,7 @@ export const RewardsEstResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.coins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.coins.push(Coin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2005,10 +2005,10 @@ export const RewardsEstResponse = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: RewardsEstResponse, useInterfaces: boolean = true): RewardsEstResponseAmino {
+  toAmino(message: RewardsEstResponse): RewardsEstResponseAmino {
     const obj: any = {};
     if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.coins = [];
     }
@@ -2017,14 +2017,14 @@ export const RewardsEstResponse = {
   fromAminoMsg(object: RewardsEstResponseAminoMsg): RewardsEstResponse {
     return RewardsEstResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: RewardsEstResponse, useInterfaces: boolean = true): RewardsEstResponseAminoMsg {
+  toAminoMsg(message: RewardsEstResponse): RewardsEstResponseAminoMsg {
     return {
       type: "osmosis/incentives/rewards-est-response",
-      value: RewardsEstResponse.toAmino(message, useInterfaces)
+      value: RewardsEstResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: RewardsEstResponseProtoMsg, useInterfaces: boolean = true): RewardsEstResponse {
-    return RewardsEstResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: RewardsEstResponseProtoMsg): RewardsEstResponse {
+    return RewardsEstResponse.decode(message.value);
   },
   toProto(message: RewardsEstResponse): Uint8Array {
     return RewardsEstResponse.encode(message).finish();
@@ -2045,7 +2045,7 @@ export const QueryLockableDurationsRequest = {
   encode(_: QueryLockableDurationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryLockableDurationsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryLockableDurationsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryLockableDurationsRequest();
@@ -2081,21 +2081,21 @@ export const QueryLockableDurationsRequest = {
   fromAmino(_: QueryLockableDurationsRequestAmino): QueryLockableDurationsRequest {
     return {};
   },
-  toAmino(_: QueryLockableDurationsRequest, useInterfaces: boolean = true): QueryLockableDurationsRequestAmino {
+  toAmino(_: QueryLockableDurationsRequest): QueryLockableDurationsRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryLockableDurationsRequestAminoMsg): QueryLockableDurationsRequest {
     return QueryLockableDurationsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryLockableDurationsRequest, useInterfaces: boolean = true): QueryLockableDurationsRequestAminoMsg {
+  toAminoMsg(message: QueryLockableDurationsRequest): QueryLockableDurationsRequestAminoMsg {
     return {
       type: "osmosis/incentives/query-lockable-durations-request",
-      value: QueryLockableDurationsRequest.toAmino(message, useInterfaces)
+      value: QueryLockableDurationsRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryLockableDurationsRequestProtoMsg, useInterfaces: boolean = true): QueryLockableDurationsRequest {
-    return QueryLockableDurationsRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryLockableDurationsRequestProtoMsg): QueryLockableDurationsRequest {
+    return QueryLockableDurationsRequest.decode(message.value);
   },
   toProto(message: QueryLockableDurationsRequest): Uint8Array {
     return QueryLockableDurationsRequest.encode(message).finish();
@@ -2121,7 +2121,7 @@ export const QueryLockableDurationsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryLockableDurationsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryLockableDurationsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryLockableDurationsResponse();
@@ -2129,7 +2129,7 @@ export const QueryLockableDurationsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.lockableDurations.push(Duration.decode(reader, reader.uint32(), useInterfaces));
+          message.lockableDurations.push(Duration.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2176,10 +2176,10 @@ export const QueryLockableDurationsResponse = {
       lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryLockableDurationsResponse, useInterfaces: boolean = true): QueryLockableDurationsResponseAmino {
+  toAmino(message: QueryLockableDurationsResponse): QueryLockableDurationsResponseAmino {
     const obj: any = {};
     if (message.lockableDurations) {
-      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e, useInterfaces) : undefined);
+      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e) : undefined);
     } else {
       obj.lockable_durations = [];
     }
@@ -2188,14 +2188,14 @@ export const QueryLockableDurationsResponse = {
   fromAminoMsg(object: QueryLockableDurationsResponseAminoMsg): QueryLockableDurationsResponse {
     return QueryLockableDurationsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryLockableDurationsResponse, useInterfaces: boolean = true): QueryLockableDurationsResponseAminoMsg {
+  toAminoMsg(message: QueryLockableDurationsResponse): QueryLockableDurationsResponseAminoMsg {
     return {
       type: "osmosis/incentives/query-lockable-durations-response",
-      value: QueryLockableDurationsResponse.toAmino(message, useInterfaces)
+      value: QueryLockableDurationsResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryLockableDurationsResponseProtoMsg, useInterfaces: boolean = true): QueryLockableDurationsResponse {
-    return QueryLockableDurationsResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryLockableDurationsResponseProtoMsg): QueryLockableDurationsResponse {
+    return QueryLockableDurationsResponse.decode(message.value);
   },
   toProto(message: QueryLockableDurationsResponse): Uint8Array {
     return QueryLockableDurationsResponse.encode(message).finish();

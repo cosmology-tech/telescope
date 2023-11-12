@@ -16,6 +16,7 @@ interface TelescopeOpts {
     logLevel?: TelescopeLogLevel;
     interfaces?: {
         enabled?: boolean;
+        useUseInterfacesParams?: boolean;
         useByDefault?: boolean;
         useByDefaultRpc?: boolean;
         useUnionTypes?: boolean;

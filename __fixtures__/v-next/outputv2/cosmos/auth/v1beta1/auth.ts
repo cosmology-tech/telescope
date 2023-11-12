@@ -132,7 +132,7 @@ export const BaseAccount = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BaseAccount {
+  decode(input: BinaryReader | Uint8Array, length?: number): BaseAccount {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBaseAccount();
@@ -143,7 +143,7 @@ export const BaseAccount = {
           message.address = reader.string();
           break;
         case 2:
-          message.pubKey = Any.decode(reader, reader.uint32(), useInterfaces);
+          message.pubKey = Any.decode(reader, reader.uint32());
           break;
         case 3:
           message.accountNumber = reader.uint64();
@@ -212,10 +212,10 @@ export const BaseAccount = {
       sequence: BigInt(object.sequence)
     };
   },
-  toAmino(message: BaseAccount, useInterfaces: boolean = true): BaseAccountAmino {
+  toAmino(message: BaseAccount): BaseAccountAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey, useInterfaces) : undefined;
+    obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey) : undefined;
     obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     return obj;
@@ -223,14 +223,14 @@ export const BaseAccount = {
   fromAminoMsg(object: BaseAccountAminoMsg): BaseAccount {
     return BaseAccount.fromAmino(object.value);
   },
-  toAminoMsg(message: BaseAccount, useInterfaces: boolean = true): BaseAccountAminoMsg {
+  toAminoMsg(message: BaseAccount): BaseAccountAminoMsg {
     return {
       type: "cosmos-sdk/BaseAccount",
-      value: BaseAccount.toAmino(message, useInterfaces)
+      value: BaseAccount.toAmino(message)
     };
   },
-  fromProtoMsg(message: BaseAccountProtoMsg, useInterfaces: boolean = true): BaseAccount {
-    return BaseAccount.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: BaseAccountProtoMsg): BaseAccount {
+    return BaseAccount.decode(message.value);
   },
   toProto(message: BaseAccount): Uint8Array {
     return BaseAccount.encode(message).finish();
@@ -265,7 +265,7 @@ export const ModuleAccount = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModuleAccount {
+  decode(input: BinaryReader | Uint8Array, length?: number): ModuleAccount {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleAccount();
@@ -273,7 +273,7 @@ export const ModuleAccount = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.baseAccount = BaseAccount.decode(reader, reader.uint32(), useInterfaces);
+          message.baseAccount = BaseAccount.decode(reader, reader.uint32());
           break;
         case 2:
           message.name = reader.string();
@@ -340,9 +340,9 @@ export const ModuleAccount = {
       permissions: Array.isArray(object?.permissions) ? object.permissions.map((e: any) => e) : []
     };
   },
-  toAmino(message: ModuleAccount, useInterfaces: boolean = true): ModuleAccountAmino {
+  toAmino(message: ModuleAccount): ModuleAccountAmino {
     const obj: any = {};
-    obj.base_account = message.baseAccount ? BaseAccount.toAmino(message.baseAccount, useInterfaces) : undefined;
+    obj.base_account = message.baseAccount ? BaseAccount.toAmino(message.baseAccount) : undefined;
     obj.name = message.name;
     if (message.permissions) {
       obj.permissions = message.permissions.map(e => e);
@@ -354,14 +354,14 @@ export const ModuleAccount = {
   fromAminoMsg(object: ModuleAccountAminoMsg): ModuleAccount {
     return ModuleAccount.fromAmino(object.value);
   },
-  toAminoMsg(message: ModuleAccount, useInterfaces: boolean = true): ModuleAccountAminoMsg {
+  toAminoMsg(message: ModuleAccount): ModuleAccountAminoMsg {
     return {
       type: "cosmos-sdk/ModuleAccount",
-      value: ModuleAccount.toAmino(message, useInterfaces)
+      value: ModuleAccount.toAmino(message)
     };
   },
-  fromProtoMsg(message: ModuleAccountProtoMsg, useInterfaces: boolean = true): ModuleAccount {
-    return ModuleAccount.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ModuleAccountProtoMsg): ModuleAccount {
+    return ModuleAccount.decode(message.value);
   },
   toProto(message: ModuleAccount): Uint8Array {
     return ModuleAccount.encode(message).finish();
@@ -403,7 +403,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -496,7 +496,7 @@ export const Params = {
       sigVerifyCostSecp256k1: BigInt(object.sig_verify_cost_secp256k1)
     };
   },
-  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
+  toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     obj.max_memo_characters = message.maxMemoCharacters ? message.maxMemoCharacters.toString() : undefined;
     obj.tx_sig_limit = message.txSigLimit ? message.txSigLimit.toString() : undefined;
@@ -508,14 +508,14 @@ export const Params = {
   fromAminoMsg(object: ParamsAminoMsg): Params {
     return Params.fromAmino(object.value);
   },
-  toAminoMsg(message: Params, useInterfaces: boolean = true): ParamsAminoMsg {
+  toAminoMsg(message: Params): ParamsAminoMsg {
     return {
       type: "cosmos-sdk/Params",
-      value: Params.toAmino(message, useInterfaces)
+      value: Params.toAmino(message)
     };
   },
-  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
-    return Params.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();

@@ -691,7 +691,7 @@ export const ParsedExpr = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ParsedExpr {
+  decode(input: BinaryReader | Uint8Array, length?: number): ParsedExpr {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParsedExpr();
@@ -699,10 +699,10 @@ export const ParsedExpr = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          message.expr = Expr.decode(reader, reader.uint32(), useInterfaces);
+          message.expr = Expr.decode(reader, reader.uint32());
           break;
         case 3:
-          message.sourceInfo = SourceInfo.decode(reader, reader.uint32(), useInterfaces);
+          message.sourceInfo = SourceInfo.decode(reader, reader.uint32());
           break;
         case 4:
           message.syntaxVersion = reader.string();
@@ -760,18 +760,18 @@ export const ParsedExpr = {
       syntaxVersion: object.syntax_version
     };
   },
-  toAmino(message: ParsedExpr, useInterfaces: boolean = true): ParsedExprAmino {
+  toAmino(message: ParsedExpr): ParsedExprAmino {
     const obj: any = {};
-    obj.expr = message.expr ? Expr.toAmino(message.expr, useInterfaces) : undefined;
-    obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo, useInterfaces) : undefined;
+    obj.expr = message.expr ? Expr.toAmino(message.expr) : undefined;
+    obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined;
     obj.syntax_version = message.syntaxVersion;
     return obj;
   },
   fromAminoMsg(object: ParsedExprAminoMsg): ParsedExpr {
     return ParsedExpr.fromAmino(object.value);
   },
-  fromProtoMsg(message: ParsedExprProtoMsg, useInterfaces: boolean = true): ParsedExpr {
-    return ParsedExpr.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ParsedExprProtoMsg): ParsedExpr {
+    return ParsedExpr.decode(message.value);
   },
   toProto(message: ParsedExpr): Uint8Array {
     return ParsedExpr.encode(message).finish();
@@ -824,7 +824,7 @@ export const Expr = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Expr {
+  decode(input: BinaryReader | Uint8Array, length?: number): Expr {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr();
@@ -835,25 +835,25 @@ export const Expr = {
           message.id = reader.int32();
           break;
         case 3:
-          message.literalExpr = Literal.decode(reader, reader.uint32(), useInterfaces);
+          message.literalExpr = Literal.decode(reader, reader.uint32());
           break;
         case 4:
-          message.identExpr = Expr_Ident.decode(reader, reader.uint32(), useInterfaces);
+          message.identExpr = Expr_Ident.decode(reader, reader.uint32());
           break;
         case 5:
-          message.selectExpr = Expr_Select.decode(reader, reader.uint32(), useInterfaces);
+          message.selectExpr = Expr_Select.decode(reader, reader.uint32());
           break;
         case 6:
-          message.callExpr = Expr_Call.decode(reader, reader.uint32(), useInterfaces);
+          message.callExpr = Expr_Call.decode(reader, reader.uint32());
           break;
         case 7:
-          message.listExpr = Expr_CreateList.decode(reader, reader.uint32(), useInterfaces);
+          message.listExpr = Expr_CreateList.decode(reader, reader.uint32());
           break;
         case 8:
-          message.structExpr = Expr_CreateStruct.decode(reader, reader.uint32(), useInterfaces);
+          message.structExpr = Expr_CreateStruct.decode(reader, reader.uint32());
           break;
         case 9:
-          message.comprehensionExpr = Expr_Comprehension.decode(reader, reader.uint32(), useInterfaces);
+          message.comprehensionExpr = Expr_Comprehension.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -948,23 +948,23 @@ export const Expr = {
       comprehensionExpr: object?.comprehension_expr ? Expr_Comprehension.fromAmino(object.comprehension_expr) : undefined
     };
   },
-  toAmino(message: Expr, useInterfaces: boolean = true): ExprAmino {
+  toAmino(message: Expr): ExprAmino {
     const obj: any = {};
     obj.id = message.id;
-    obj.literal_expr = message.literalExpr ? Literal.toAmino(message.literalExpr, useInterfaces) : undefined;
-    obj.ident_expr = message.identExpr ? Expr_Ident.toAmino(message.identExpr, useInterfaces) : undefined;
-    obj.select_expr = message.selectExpr ? Expr_Select.toAmino(message.selectExpr, useInterfaces) : undefined;
-    obj.call_expr = message.callExpr ? Expr_Call.toAmino(message.callExpr, useInterfaces) : undefined;
-    obj.list_expr = message.listExpr ? Expr_CreateList.toAmino(message.listExpr, useInterfaces) : undefined;
-    obj.struct_expr = message.structExpr ? Expr_CreateStruct.toAmino(message.structExpr, useInterfaces) : undefined;
-    obj.comprehension_expr = message.comprehensionExpr ? Expr_Comprehension.toAmino(message.comprehensionExpr, useInterfaces) : undefined;
+    obj.literal_expr = message.literalExpr ? Literal.toAmino(message.literalExpr) : undefined;
+    obj.ident_expr = message.identExpr ? Expr_Ident.toAmino(message.identExpr) : undefined;
+    obj.select_expr = message.selectExpr ? Expr_Select.toAmino(message.selectExpr) : undefined;
+    obj.call_expr = message.callExpr ? Expr_Call.toAmino(message.callExpr) : undefined;
+    obj.list_expr = message.listExpr ? Expr_CreateList.toAmino(message.listExpr) : undefined;
+    obj.struct_expr = message.structExpr ? Expr_CreateStruct.toAmino(message.structExpr) : undefined;
+    obj.comprehension_expr = message.comprehensionExpr ? Expr_Comprehension.toAmino(message.comprehensionExpr) : undefined;
     return obj;
   },
   fromAminoMsg(object: ExprAminoMsg): Expr {
     return Expr.fromAmino(object.value);
   },
-  fromProtoMsg(message: ExprProtoMsg, useInterfaces: boolean = true): Expr {
-    return Expr.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ExprProtoMsg): Expr {
+    return Expr.decode(message.value);
   },
   toProto(message: Expr): Uint8Array {
     return Expr.encode(message).finish();
@@ -989,7 +989,7 @@ export const Expr_Ident = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Expr_Ident {
+  decode(input: BinaryReader | Uint8Array, length?: number): Expr_Ident {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Ident();
@@ -1036,7 +1036,7 @@ export const Expr_Ident = {
       name: object.name
     };
   },
-  toAmino(message: Expr_Ident, useInterfaces: boolean = true): Expr_IdentAmino {
+  toAmino(message: Expr_Ident): Expr_IdentAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -1044,8 +1044,8 @@ export const Expr_Ident = {
   fromAminoMsg(object: Expr_IdentAminoMsg): Expr_Ident {
     return Expr_Ident.fromAmino(object.value);
   },
-  fromProtoMsg(message: Expr_IdentProtoMsg, useInterfaces: boolean = true): Expr_Ident {
-    return Expr_Ident.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: Expr_IdentProtoMsg): Expr_Ident {
+    return Expr_Ident.decode(message.value);
   },
   toProto(message: Expr_Ident): Uint8Array {
     return Expr_Ident.encode(message).finish();
@@ -1078,7 +1078,7 @@ export const Expr_Select = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Expr_Select {
+  decode(input: BinaryReader | Uint8Array, length?: number): Expr_Select {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Select();
@@ -1086,7 +1086,7 @@ export const Expr_Select = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.operand = Expr.decode(reader, reader.uint32(), useInterfaces);
+          message.operand = Expr.decode(reader, reader.uint32());
           break;
         case 2:
           message.field = reader.string();
@@ -1145,9 +1145,9 @@ export const Expr_Select = {
       testOnly: object.test_only
     };
   },
-  toAmino(message: Expr_Select, useInterfaces: boolean = true): Expr_SelectAmino {
+  toAmino(message: Expr_Select): Expr_SelectAmino {
     const obj: any = {};
-    obj.operand = message.operand ? Expr.toAmino(message.operand, useInterfaces) : undefined;
+    obj.operand = message.operand ? Expr.toAmino(message.operand) : undefined;
     obj.field = message.field;
     obj.test_only = message.testOnly;
     return obj;
@@ -1155,8 +1155,8 @@ export const Expr_Select = {
   fromAminoMsg(object: Expr_SelectAminoMsg): Expr_Select {
     return Expr_Select.fromAmino(object.value);
   },
-  fromProtoMsg(message: Expr_SelectProtoMsg, useInterfaces: boolean = true): Expr_Select {
-    return Expr_Select.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: Expr_SelectProtoMsg): Expr_Select {
+    return Expr_Select.decode(message.value);
   },
   toProto(message: Expr_Select): Uint8Array {
     return Expr_Select.encode(message).finish();
@@ -1189,7 +1189,7 @@ export const Expr_Call = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Expr_Call {
+  decode(input: BinaryReader | Uint8Array, length?: number): Expr_Call {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Call();
@@ -1197,13 +1197,13 @@ export const Expr_Call = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.target = Expr.decode(reader, reader.uint32(), useInterfaces);
+          message.target = Expr.decode(reader, reader.uint32());
           break;
         case 2:
           message.function = reader.string();
           break;
         case 3:
-          message.args.push(Expr.decode(reader, reader.uint32(), useInterfaces));
+          message.args.push(Expr.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1264,12 +1264,12 @@ export const Expr_Call = {
       args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromAmino(e)) : []
     };
   },
-  toAmino(message: Expr_Call, useInterfaces: boolean = true): Expr_CallAmino {
+  toAmino(message: Expr_Call): Expr_CallAmino {
     const obj: any = {};
-    obj.target = message.target ? Expr.toAmino(message.target, useInterfaces) : undefined;
+    obj.target = message.target ? Expr.toAmino(message.target) : undefined;
     obj.function = message.function;
     if (message.args) {
-      obj.args = message.args.map(e => e ? Expr.toAmino(e, useInterfaces) : undefined);
+      obj.args = message.args.map(e => e ? Expr.toAmino(e) : undefined);
     } else {
       obj.args = [];
     }
@@ -1278,8 +1278,8 @@ export const Expr_Call = {
   fromAminoMsg(object: Expr_CallAminoMsg): Expr_Call {
     return Expr_Call.fromAmino(object.value);
   },
-  fromProtoMsg(message: Expr_CallProtoMsg, useInterfaces: boolean = true): Expr_Call {
-    return Expr_Call.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: Expr_CallProtoMsg): Expr_Call {
+    return Expr_Call.decode(message.value);
   },
   toProto(message: Expr_Call): Uint8Array {
     return Expr_Call.encode(message).finish();
@@ -1304,7 +1304,7 @@ export const Expr_CreateList = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Expr_CreateList {
+  decode(input: BinaryReader | Uint8Array, length?: number): Expr_CreateList {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_CreateList();
@@ -1312,7 +1312,7 @@ export const Expr_CreateList = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.elements.push(Expr.decode(reader, reader.uint32(), useInterfaces));
+          message.elements.push(Expr.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1359,10 +1359,10 @@ export const Expr_CreateList = {
       elements: Array.isArray(object?.elements) ? object.elements.map((e: any) => Expr.fromAmino(e)) : []
     };
   },
-  toAmino(message: Expr_CreateList, useInterfaces: boolean = true): Expr_CreateListAmino {
+  toAmino(message: Expr_CreateList): Expr_CreateListAmino {
     const obj: any = {};
     if (message.elements) {
-      obj.elements = message.elements.map(e => e ? Expr.toAmino(e, useInterfaces) : undefined);
+      obj.elements = message.elements.map(e => e ? Expr.toAmino(e) : undefined);
     } else {
       obj.elements = [];
     }
@@ -1371,8 +1371,8 @@ export const Expr_CreateList = {
   fromAminoMsg(object: Expr_CreateListAminoMsg): Expr_CreateList {
     return Expr_CreateList.fromAmino(object.value);
   },
-  fromProtoMsg(message: Expr_CreateListProtoMsg, useInterfaces: boolean = true): Expr_CreateList {
-    return Expr_CreateList.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: Expr_CreateListProtoMsg): Expr_CreateList {
+    return Expr_CreateList.decode(message.value);
   },
   toProto(message: Expr_CreateList): Uint8Array {
     return Expr_CreateList.encode(message).finish();
@@ -1401,7 +1401,7 @@ export const Expr_CreateStruct = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Expr_CreateStruct {
+  decode(input: BinaryReader | Uint8Array, length?: number): Expr_CreateStruct {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_CreateStruct();
@@ -1412,7 +1412,7 @@ export const Expr_CreateStruct = {
           message.type = reader.string();
           break;
         case 2:
-          message.entries.push(Expr_CreateStruct_Entry.decode(reader, reader.uint32(), useInterfaces));
+          message.entries.push(Expr_CreateStruct_Entry.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1465,11 +1465,11 @@ export const Expr_CreateStruct = {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromAmino(e)) : []
     };
   },
-  toAmino(message: Expr_CreateStruct, useInterfaces: boolean = true): Expr_CreateStructAmino {
+  toAmino(message: Expr_CreateStruct): Expr_CreateStructAmino {
     const obj: any = {};
     obj.type = message.type;
     if (message.entries) {
-      obj.entries = message.entries.map(e => e ? Expr_CreateStruct_Entry.toAmino(e, useInterfaces) : undefined);
+      obj.entries = message.entries.map(e => e ? Expr_CreateStruct_Entry.toAmino(e) : undefined);
     } else {
       obj.entries = [];
     }
@@ -1478,8 +1478,8 @@ export const Expr_CreateStruct = {
   fromAminoMsg(object: Expr_CreateStructAminoMsg): Expr_CreateStruct {
     return Expr_CreateStruct.fromAmino(object.value);
   },
-  fromProtoMsg(message: Expr_CreateStructProtoMsg, useInterfaces: boolean = true): Expr_CreateStruct {
-    return Expr_CreateStruct.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: Expr_CreateStructProtoMsg): Expr_CreateStruct {
+    return Expr_CreateStruct.decode(message.value);
   },
   toProto(message: Expr_CreateStruct): Uint8Array {
     return Expr_CreateStruct.encode(message).finish();
@@ -1516,7 +1516,7 @@ export const Expr_CreateStruct_Entry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Expr_CreateStruct_Entry {
+  decode(input: BinaryReader | Uint8Array, length?: number): Expr_CreateStruct_Entry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_CreateStruct_Entry();
@@ -1530,10 +1530,10 @@ export const Expr_CreateStruct_Entry = {
           message.fieldKey = reader.string();
           break;
         case 3:
-          message.mapKey = Expr.decode(reader, reader.uint32(), useInterfaces);
+          message.mapKey = Expr.decode(reader, reader.uint32());
           break;
         case 4:
-          message.value = Expr.decode(reader, reader.uint32(), useInterfaces);
+          message.value = Expr.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1594,19 +1594,19 @@ export const Expr_CreateStruct_Entry = {
       value: object?.value ? Expr.fromAmino(object.value) : undefined
     };
   },
-  toAmino(message: Expr_CreateStruct_Entry, useInterfaces: boolean = true): Expr_CreateStruct_EntryAmino {
+  toAmino(message: Expr_CreateStruct_Entry): Expr_CreateStruct_EntryAmino {
     const obj: any = {};
     obj.id = message.id;
     obj.field_key = message.fieldKey;
-    obj.map_key = message.mapKey ? Expr.toAmino(message.mapKey, useInterfaces) : undefined;
-    obj.value = message.value ? Expr.toAmino(message.value, useInterfaces) : undefined;
+    obj.map_key = message.mapKey ? Expr.toAmino(message.mapKey) : undefined;
+    obj.value = message.value ? Expr.toAmino(message.value) : undefined;
     return obj;
   },
   fromAminoMsg(object: Expr_CreateStruct_EntryAminoMsg): Expr_CreateStruct_Entry {
     return Expr_CreateStruct_Entry.fromAmino(object.value);
   },
-  fromProtoMsg(message: Expr_CreateStruct_EntryProtoMsg, useInterfaces: boolean = true): Expr_CreateStruct_Entry {
-    return Expr_CreateStruct_Entry.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: Expr_CreateStruct_EntryProtoMsg): Expr_CreateStruct_Entry {
+    return Expr_CreateStruct_Entry.decode(message.value);
   },
   toProto(message: Expr_CreateStruct_Entry): Uint8Array {
     return Expr_CreateStruct_Entry.encode(message).finish();
@@ -1655,7 +1655,7 @@ export const Expr_Comprehension = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Expr_Comprehension {
+  decode(input: BinaryReader | Uint8Array, length?: number): Expr_Comprehension {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Comprehension();
@@ -1666,22 +1666,22 @@ export const Expr_Comprehension = {
           message.iterVar = reader.string();
           break;
         case 2:
-          message.iterRange = Expr.decode(reader, reader.uint32(), useInterfaces);
+          message.iterRange = Expr.decode(reader, reader.uint32());
           break;
         case 3:
           message.accuVar = reader.string();
           break;
         case 4:
-          message.accuInit = Expr.decode(reader, reader.uint32(), useInterfaces);
+          message.accuInit = Expr.decode(reader, reader.uint32());
           break;
         case 5:
-          message.loopCondition = Expr.decode(reader, reader.uint32(), useInterfaces);
+          message.loopCondition = Expr.decode(reader, reader.uint32());
           break;
         case 6:
-          message.loopStep = Expr.decode(reader, reader.uint32(), useInterfaces);
+          message.loopStep = Expr.decode(reader, reader.uint32());
           break;
         case 7:
-          message.result = Expr.decode(reader, reader.uint32(), useInterfaces);
+          message.result = Expr.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1766,22 +1766,22 @@ export const Expr_Comprehension = {
       result: object?.result ? Expr.fromAmino(object.result) : undefined
     };
   },
-  toAmino(message: Expr_Comprehension, useInterfaces: boolean = true): Expr_ComprehensionAmino {
+  toAmino(message: Expr_Comprehension): Expr_ComprehensionAmino {
     const obj: any = {};
     obj.iter_var = message.iterVar;
-    obj.iter_range = message.iterRange ? Expr.toAmino(message.iterRange, useInterfaces) : undefined;
+    obj.iter_range = message.iterRange ? Expr.toAmino(message.iterRange) : undefined;
     obj.accu_var = message.accuVar;
-    obj.accu_init = message.accuInit ? Expr.toAmino(message.accuInit, useInterfaces) : undefined;
-    obj.loop_condition = message.loopCondition ? Expr.toAmino(message.loopCondition, useInterfaces) : undefined;
-    obj.loop_step = message.loopStep ? Expr.toAmino(message.loopStep, useInterfaces) : undefined;
-    obj.result = message.result ? Expr.toAmino(message.result, useInterfaces) : undefined;
+    obj.accu_init = message.accuInit ? Expr.toAmino(message.accuInit) : undefined;
+    obj.loop_condition = message.loopCondition ? Expr.toAmino(message.loopCondition) : undefined;
+    obj.loop_step = message.loopStep ? Expr.toAmino(message.loopStep) : undefined;
+    obj.result = message.result ? Expr.toAmino(message.result) : undefined;
     return obj;
   },
   fromAminoMsg(object: Expr_ComprehensionAminoMsg): Expr_Comprehension {
     return Expr_Comprehension.fromAmino(object.value);
   },
-  fromProtoMsg(message: Expr_ComprehensionProtoMsg, useInterfaces: boolean = true): Expr_Comprehension {
-    return Expr_Comprehension.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: Expr_ComprehensionProtoMsg): Expr_Comprehension {
+    return Expr_Comprehension.decode(message.value);
   },
   toProto(message: Expr_Comprehension): Uint8Array {
     return Expr_Comprehension.encode(message).finish();
@@ -1830,7 +1830,7 @@ export const Literal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Literal {
+  decode(input: BinaryReader | Uint8Array, length?: number): Literal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLiteral();
@@ -1939,7 +1939,7 @@ export const Literal = {
       bytesValue: object?.bytes_value
     };
   },
-  toAmino(message: Literal, useInterfaces: boolean = true): LiteralAmino {
+  toAmino(message: Literal): LiteralAmino {
     const obj: any = {};
     obj.null_value = message.nullValue;
     obj.bool_value = message.boolValue;
@@ -1953,8 +1953,8 @@ export const Literal = {
   fromAminoMsg(object: LiteralAminoMsg): Literal {
     return Literal.fromAmino(object.value);
   },
-  fromProtoMsg(message: LiteralProtoMsg, useInterfaces: boolean = true): Literal {
-    return Literal.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: LiteralProtoMsg): Literal {
+    return Literal.decode(message.value);
   },
   toProto(message: Literal): Uint8Array {
     return Literal.encode(message).finish();

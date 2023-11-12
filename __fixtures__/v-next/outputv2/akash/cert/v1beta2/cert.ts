@@ -209,7 +209,7 @@ export const CertificateID = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CertificateID {
+  decode(input: BinaryReader | Uint8Array, length?: number): CertificateID {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCertificateID();
@@ -265,7 +265,7 @@ export const CertificateID = {
       serial: object.serial
     };
   },
-  toAmino(message: CertificateID, useInterfaces: boolean = true): CertificateIDAmino {
+  toAmino(message: CertificateID): CertificateIDAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.serial = message.serial;
@@ -274,8 +274,8 @@ export const CertificateID = {
   fromAminoMsg(object: CertificateIDAminoMsg): CertificateID {
     return CertificateID.fromAmino(object.value);
   },
-  fromProtoMsg(message: CertificateIDProtoMsg, useInterfaces: boolean = true): CertificateID {
-    return CertificateID.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: CertificateIDProtoMsg): CertificateID {
+    return CertificateID.decode(message.value);
   },
   toProto(message: CertificateID): Uint8Array {
     return CertificateID.encode(message).finish();
@@ -308,7 +308,7 @@ export const Certificate = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Certificate {
+  decode(input: BinaryReader | Uint8Array, length?: number): Certificate {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCertificate();
@@ -373,7 +373,7 @@ export const Certificate = {
       pubkey: object.pubkey
     };
   },
-  toAmino(message: Certificate, useInterfaces: boolean = true): CertificateAmino {
+  toAmino(message: Certificate): CertificateAmino {
     const obj: any = {};
     obj.state = message.state;
     obj.cert = message.cert;
@@ -383,8 +383,8 @@ export const Certificate = {
   fromAminoMsg(object: CertificateAminoMsg): Certificate {
     return Certificate.fromAmino(object.value);
   },
-  fromProtoMsg(message: CertificateProtoMsg, useInterfaces: boolean = true): Certificate {
-    return Certificate.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: CertificateProtoMsg): Certificate {
+    return Certificate.decode(message.value);
   },
   toProto(message: Certificate): Uint8Array {
     return Certificate.encode(message).finish();
@@ -417,7 +417,7 @@ export const CertificateFilter = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CertificateFilter {
+  decode(input: BinaryReader | Uint8Array, length?: number): CertificateFilter {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCertificateFilter();
@@ -482,7 +482,7 @@ export const CertificateFilter = {
       state: object.state
     };
   },
-  toAmino(message: CertificateFilter, useInterfaces: boolean = true): CertificateFilterAmino {
+  toAmino(message: CertificateFilter): CertificateFilterAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.serial = message.serial;
@@ -492,8 +492,8 @@ export const CertificateFilter = {
   fromAminoMsg(object: CertificateFilterAminoMsg): CertificateFilter {
     return CertificateFilter.fromAmino(object.value);
   },
-  fromProtoMsg(message: CertificateFilterProtoMsg, useInterfaces: boolean = true): CertificateFilter {
-    return CertificateFilter.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: CertificateFilterProtoMsg): CertificateFilter {
+    return CertificateFilter.decode(message.value);
   },
   toProto(message: CertificateFilter): Uint8Array {
     return CertificateFilter.encode(message).finish();
@@ -526,7 +526,7 @@ export const MsgCreateCertificate = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateCertificate {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateCertificate {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateCertificate();
@@ -591,7 +591,7 @@ export const MsgCreateCertificate = {
       pubkey: object.pubkey
     };
   },
-  toAmino(message: MsgCreateCertificate, useInterfaces: boolean = true): MsgCreateCertificateAmino {
+  toAmino(message: MsgCreateCertificate): MsgCreateCertificateAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.cert = message.cert;
@@ -601,8 +601,8 @@ export const MsgCreateCertificate = {
   fromAminoMsg(object: MsgCreateCertificateAminoMsg): MsgCreateCertificate {
     return MsgCreateCertificate.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgCreateCertificateProtoMsg, useInterfaces: boolean = true): MsgCreateCertificate {
-    return MsgCreateCertificate.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgCreateCertificateProtoMsg): MsgCreateCertificate {
+    return MsgCreateCertificate.decode(message.value);
   },
   toProto(message: MsgCreateCertificate): Uint8Array {
     return MsgCreateCertificate.encode(message).finish();
@@ -622,7 +622,7 @@ export const MsgCreateCertificateResponse = {
   encode(_: MsgCreateCertificateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateCertificateResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateCertificateResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateCertificateResponse();
@@ -658,15 +658,15 @@ export const MsgCreateCertificateResponse = {
   fromAmino(_: MsgCreateCertificateResponseAmino): MsgCreateCertificateResponse {
     return {};
   },
-  toAmino(_: MsgCreateCertificateResponse, useInterfaces: boolean = true): MsgCreateCertificateResponseAmino {
+  toAmino(_: MsgCreateCertificateResponse): MsgCreateCertificateResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgCreateCertificateResponseAminoMsg): MsgCreateCertificateResponse {
     return MsgCreateCertificateResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgCreateCertificateResponseProtoMsg, useInterfaces: boolean = true): MsgCreateCertificateResponse {
-    return MsgCreateCertificateResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgCreateCertificateResponseProtoMsg): MsgCreateCertificateResponse {
+    return MsgCreateCertificateResponse.decode(message.value);
   },
   toProto(message: MsgCreateCertificateResponse): Uint8Array {
     return MsgCreateCertificateResponse.encode(message).finish();
@@ -691,7 +691,7 @@ export const MsgRevokeCertificate = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgRevokeCertificate {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRevokeCertificate {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRevokeCertificate();
@@ -699,7 +699,7 @@ export const MsgRevokeCertificate = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = CertificateID.decode(reader, reader.uint32(), useInterfaces);
+          message.id = CertificateID.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -740,16 +740,16 @@ export const MsgRevokeCertificate = {
       id: object?.id ? CertificateID.fromAmino(object.id) : undefined
     };
   },
-  toAmino(message: MsgRevokeCertificate, useInterfaces: boolean = true): MsgRevokeCertificateAmino {
+  toAmino(message: MsgRevokeCertificate): MsgRevokeCertificateAmino {
     const obj: any = {};
-    obj.id = message.id ? CertificateID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? CertificateID.toAmino(message.id) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgRevokeCertificateAminoMsg): MsgRevokeCertificate {
     return MsgRevokeCertificate.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgRevokeCertificateProtoMsg, useInterfaces: boolean = true): MsgRevokeCertificate {
-    return MsgRevokeCertificate.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgRevokeCertificateProtoMsg): MsgRevokeCertificate {
+    return MsgRevokeCertificate.decode(message.value);
   },
   toProto(message: MsgRevokeCertificate): Uint8Array {
     return MsgRevokeCertificate.encode(message).finish();
@@ -769,7 +769,7 @@ export const MsgRevokeCertificateResponse = {
   encode(_: MsgRevokeCertificateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgRevokeCertificateResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRevokeCertificateResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRevokeCertificateResponse();
@@ -805,15 +805,15 @@ export const MsgRevokeCertificateResponse = {
   fromAmino(_: MsgRevokeCertificateResponseAmino): MsgRevokeCertificateResponse {
     return {};
   },
-  toAmino(_: MsgRevokeCertificateResponse, useInterfaces: boolean = true): MsgRevokeCertificateResponseAmino {
+  toAmino(_: MsgRevokeCertificateResponse): MsgRevokeCertificateResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgRevokeCertificateResponseAminoMsg): MsgRevokeCertificateResponse {
     return MsgRevokeCertificateResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgRevokeCertificateResponseProtoMsg, useInterfaces: boolean = true): MsgRevokeCertificateResponse {
-    return MsgRevokeCertificateResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgRevokeCertificateResponseProtoMsg): MsgRevokeCertificateResponse {
+    return MsgRevokeCertificateResponse.decode(message.value);
   },
   toProto(message: MsgRevokeCertificateResponse): Uint8Array {
     return MsgRevokeCertificateResponse.encode(message).finish();

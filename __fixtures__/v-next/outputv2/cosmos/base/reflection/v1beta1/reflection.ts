@@ -106,7 +106,7 @@ export const ListAllInterfacesRequest = {
   encode(_: ListAllInterfacesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListAllInterfacesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): ListAllInterfacesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAllInterfacesRequest();
@@ -142,21 +142,21 @@ export const ListAllInterfacesRequest = {
   fromAmino(_: ListAllInterfacesRequestAmino): ListAllInterfacesRequest {
     return {};
   },
-  toAmino(_: ListAllInterfacesRequest, useInterfaces: boolean = true): ListAllInterfacesRequestAmino {
+  toAmino(_: ListAllInterfacesRequest): ListAllInterfacesRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: ListAllInterfacesRequestAminoMsg): ListAllInterfacesRequest {
     return ListAllInterfacesRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: ListAllInterfacesRequest, useInterfaces: boolean = true): ListAllInterfacesRequestAminoMsg {
+  toAminoMsg(message: ListAllInterfacesRequest): ListAllInterfacesRequestAminoMsg {
     return {
       type: "cosmos-sdk/ListAllInterfacesRequest",
-      value: ListAllInterfacesRequest.toAmino(message, useInterfaces)
+      value: ListAllInterfacesRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: ListAllInterfacesRequestProtoMsg, useInterfaces: boolean = true): ListAllInterfacesRequest {
-    return ListAllInterfacesRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ListAllInterfacesRequestProtoMsg): ListAllInterfacesRequest {
+    return ListAllInterfacesRequest.decode(message.value);
   },
   toProto(message: ListAllInterfacesRequest): Uint8Array {
     return ListAllInterfacesRequest.encode(message).finish();
@@ -182,7 +182,7 @@ export const ListAllInterfacesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListAllInterfacesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): ListAllInterfacesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAllInterfacesResponse();
@@ -237,7 +237,7 @@ export const ListAllInterfacesResponse = {
       interfaceNames: Array.isArray(object?.interface_names) ? object.interface_names.map((e: any) => e) : []
     };
   },
-  toAmino(message: ListAllInterfacesResponse, useInterfaces: boolean = true): ListAllInterfacesResponseAmino {
+  toAmino(message: ListAllInterfacesResponse): ListAllInterfacesResponseAmino {
     const obj: any = {};
     if (message.interfaceNames) {
       obj.interface_names = message.interfaceNames.map(e => e);
@@ -249,14 +249,14 @@ export const ListAllInterfacesResponse = {
   fromAminoMsg(object: ListAllInterfacesResponseAminoMsg): ListAllInterfacesResponse {
     return ListAllInterfacesResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: ListAllInterfacesResponse, useInterfaces: boolean = true): ListAllInterfacesResponseAminoMsg {
+  toAminoMsg(message: ListAllInterfacesResponse): ListAllInterfacesResponseAminoMsg {
     return {
       type: "cosmos-sdk/ListAllInterfacesResponse",
-      value: ListAllInterfacesResponse.toAmino(message, useInterfaces)
+      value: ListAllInterfacesResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: ListAllInterfacesResponseProtoMsg, useInterfaces: boolean = true): ListAllInterfacesResponse {
-    return ListAllInterfacesResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ListAllInterfacesResponseProtoMsg): ListAllInterfacesResponse {
+    return ListAllInterfacesResponse.decode(message.value);
   },
   toProto(message: ListAllInterfacesResponse): Uint8Array {
     return ListAllInterfacesResponse.encode(message).finish();
@@ -282,7 +282,7 @@ export const ListImplementationsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListImplementationsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): ListImplementationsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListImplementationsRequest();
@@ -329,7 +329,7 @@ export const ListImplementationsRequest = {
       interfaceName: object.interface_name
     };
   },
-  toAmino(message: ListImplementationsRequest, useInterfaces: boolean = true): ListImplementationsRequestAmino {
+  toAmino(message: ListImplementationsRequest): ListImplementationsRequestAmino {
     const obj: any = {};
     obj.interface_name = message.interfaceName;
     return obj;
@@ -337,14 +337,14 @@ export const ListImplementationsRequest = {
   fromAminoMsg(object: ListImplementationsRequestAminoMsg): ListImplementationsRequest {
     return ListImplementationsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: ListImplementationsRequest, useInterfaces: boolean = true): ListImplementationsRequestAminoMsg {
+  toAminoMsg(message: ListImplementationsRequest): ListImplementationsRequestAminoMsg {
     return {
       type: "cosmos-sdk/ListImplementationsRequest",
-      value: ListImplementationsRequest.toAmino(message, useInterfaces)
+      value: ListImplementationsRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: ListImplementationsRequestProtoMsg, useInterfaces: boolean = true): ListImplementationsRequest {
-    return ListImplementationsRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ListImplementationsRequestProtoMsg): ListImplementationsRequest {
+    return ListImplementationsRequest.decode(message.value);
   },
   toProto(message: ListImplementationsRequest): Uint8Array {
     return ListImplementationsRequest.encode(message).finish();
@@ -370,7 +370,7 @@ export const ListImplementationsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListImplementationsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): ListImplementationsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListImplementationsResponse();
@@ -425,7 +425,7 @@ export const ListImplementationsResponse = {
       implementationMessageNames: Array.isArray(object?.implementation_message_names) ? object.implementation_message_names.map((e: any) => e) : []
     };
   },
-  toAmino(message: ListImplementationsResponse, useInterfaces: boolean = true): ListImplementationsResponseAmino {
+  toAmino(message: ListImplementationsResponse): ListImplementationsResponseAmino {
     const obj: any = {};
     if (message.implementationMessageNames) {
       obj.implementation_message_names = message.implementationMessageNames.map(e => e);
@@ -437,14 +437,14 @@ export const ListImplementationsResponse = {
   fromAminoMsg(object: ListImplementationsResponseAminoMsg): ListImplementationsResponse {
     return ListImplementationsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: ListImplementationsResponse, useInterfaces: boolean = true): ListImplementationsResponseAminoMsg {
+  toAminoMsg(message: ListImplementationsResponse): ListImplementationsResponseAminoMsg {
     return {
       type: "cosmos-sdk/ListImplementationsResponse",
-      value: ListImplementationsResponse.toAmino(message, useInterfaces)
+      value: ListImplementationsResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: ListImplementationsResponseProtoMsg, useInterfaces: boolean = true): ListImplementationsResponse {
-    return ListImplementationsResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ListImplementationsResponseProtoMsg): ListImplementationsResponse {
+    return ListImplementationsResponse.decode(message.value);
   },
   toProto(message: ListImplementationsResponse): Uint8Array {
     return ListImplementationsResponse.encode(message).finish();

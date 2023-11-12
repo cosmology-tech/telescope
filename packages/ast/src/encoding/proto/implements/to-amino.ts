@@ -61,15 +61,22 @@ const makeFunctionWrapper = (
                                     )
                                 )
                             ),
-                            t.assignmentPattern(
-                                identifier(
-                                    'useInterfaces',
-                                    t.tsTypeAnnotation(t.tsBooleanKeyword())
-                                ),
-                                t.identifier(
-                                    (context.pluginValue('interfaces.useByDefault') ?? true).toString()
-                                )
-                            )
+                            ...(context.options.interfaces.enabled &&
+                              context.options.interfaces.useUseInterfacesParams
+                                ? [
+                                    t.assignmentPattern(
+                                      identifier(
+                                        "useInterfaces",
+                                        t.tsTypeAnnotation(t.tsBooleanKeyword())
+                                      ),
+                                      t.identifier(
+                                        (
+                                          context.pluginValue("interfaces.useByDefault") ?? true
+                                        ).toString()
+                                      )
+                                    ),
+                                  ]
+                                : []),
                         ],
                         t.blockStatement([
                             stmt
@@ -124,10 +131,20 @@ export const createInterfaceToAminoHelper = (
                                                 t.identifier('value')
                                             ),
                                             t.identifier('undefined'),
-                                            t.identifier('useInterfaces'),
+                                            ...(context.options.interfaces.enabled &&
+                                              context.options.interfaces.useUseInterfacesParams
+                                                ? [
+                                                    t.identifier('useInterfaces')
+                                                  ]
+                                                : []),
                                         ]
                                     ),
-                                    t.identifier('useInterfaces')
+                                    ...(context.options.interfaces.enabled &&
+                                      context.options.interfaces.useUseInterfacesParams
+                                        ? [
+                                            t.identifier('useInterfaces')
+                                          ]
+                                        : []),
                                 ]
                             )
                         )
@@ -146,8 +163,10 @@ export const createInterfaceToAminoHelper = (
                     t.identifier('toAmino')
                 ),
                 [
-                    t.identifier('content'),
-                    t.identifier('useInterfaces')
+                  t.identifier('content'),
+                  ...(context.options.interfaces.enabled && context.options.interfaces.useUseInterfacesParams ? [
+                      t.identifier('useInterfaces')
+                  ] : []),
                 ]
             )
         );
@@ -171,7 +190,9 @@ export const createInterfaceToAminoHelper = (
                                 ),
                                 [
                                     t.identifier('content'),
-                                    t.identifier('useInterfaces')
+                                    ...(context.options.interfaces.enabled && context.options.interfaces.useUseInterfacesParams ? [
+                                      t.identifier('useInterfaces')
+                                    ] : []),
                                 ]
                             )
                         )

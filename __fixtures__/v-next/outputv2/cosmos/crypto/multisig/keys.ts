@@ -55,7 +55,7 @@ export const LegacyAminoPubKey = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LegacyAminoPubKey {
+  decode(input: BinaryReader | Uint8Array, length?: number): LegacyAminoPubKey {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLegacyAminoPubKey();
@@ -66,7 +66,7 @@ export const LegacyAminoPubKey = {
           message.threshold = reader.uint32();
           break;
         case 2:
-          message.publicKeys.push(Any.decode(reader, reader.uint32(), useInterfaces));
+          message.publicKeys.push(Any.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -119,11 +119,11 @@ export const LegacyAminoPubKey = {
       publicKeys: Array.isArray(object?.public_keys) ? object.public_keys.map((e: any) => Any.fromAmino(e)) : []
     };
   },
-  toAmino(message: LegacyAminoPubKey, useInterfaces: boolean = true): LegacyAminoPubKeyAmino {
+  toAmino(message: LegacyAminoPubKey): LegacyAminoPubKeyAmino {
     const obj: any = {};
     obj.threshold = message.threshold;
     if (message.publicKeys) {
-      obj.public_keys = message.publicKeys.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
+      obj.public_keys = message.publicKeys.map(e => e ? Any.toAmino(e) : undefined);
     } else {
       obj.public_keys = [];
     }
@@ -132,14 +132,14 @@ export const LegacyAminoPubKey = {
   fromAminoMsg(object: LegacyAminoPubKeyAminoMsg): LegacyAminoPubKey {
     return LegacyAminoPubKey.fromAmino(object.value);
   },
-  toAminoMsg(message: LegacyAminoPubKey, useInterfaces: boolean = true): LegacyAminoPubKeyAminoMsg {
+  toAminoMsg(message: LegacyAminoPubKey): LegacyAminoPubKeyAminoMsg {
     return {
       type: "cosmos-sdk/LegacyAminoPubKey",
-      value: LegacyAminoPubKey.toAmino(message, useInterfaces)
+      value: LegacyAminoPubKey.toAmino(message)
     };
   },
-  fromProtoMsg(message: LegacyAminoPubKeyProtoMsg, useInterfaces: boolean = true): LegacyAminoPubKey {
-    return LegacyAminoPubKey.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: LegacyAminoPubKeyProtoMsg): LegacyAminoPubKey {
+    return LegacyAminoPubKey.decode(message.value);
   },
   toProto(message: LegacyAminoPubKey): Uint8Array {
     return LegacyAminoPubKey.encode(message).finish();

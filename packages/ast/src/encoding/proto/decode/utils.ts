@@ -151,11 +151,15 @@ export const decode = {
             const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
             const interfaceFnName = getInterfaceDecoderName(interfaceName)
 
-            return switchAnyTypeArray(
+            return args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? switchAnyTypeArrayUseInterfaces(
                 num,
                 prop,
                 name,
                 interfaceFnName,
+            ) : switchAnyTypeArray(
+              num,
+              prop,
+              name,
             );
         }
         return switchProtoTypeArray(
@@ -370,7 +374,7 @@ export const baseTypes = {
                     ),
                     []
                 ),
-                ...(args.context.options.interfaces.enabled ? [
+                ...(args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? [
                     t.identifier('useInterfaces'),
                 ] : []),
             ]
@@ -378,28 +382,25 @@ export const baseTypes = {
     },
 
     anyType(args: DecodeMethod) {
-        // const { propName, origName } = getFieldNames(args.field);
-        // const typeMap = args.context.store.getTypeUrlMap(args.context.ref);
-        // console.log(JSON.stringify(typeMap, null, 2));
-        // console.log(JSON.stringify(args.field, null, 2));
         const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
         const interfaceFnName = getInterfaceDecoderName(interfaceName)
-
-        return t.conditionalExpression(
-            t.identifier('useInterfaces'),
-            t.tsAsExpression(
-                t.callExpression(
-                    t.identifier(interfaceFnName),
-                    [
-                        t.identifier('reader')
-                    ]
-                ),
-                t.tsTypeReference(
-                    t.identifier('Any')
-                )
-            ),
-            baseTypes.protoType(args)
+        const asAny = t.tsAsExpression(
+          t.callExpression(
+              t.identifier(interfaceFnName),
+              [
+                  t.identifier('reader')
+              ]
+          ),
+          t.tsTypeReference(
+              t.identifier('Any')
+          )
         );
+
+        return args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? t.conditionalExpression(
+            t.identifier('useInterfaces'),
+            asAny,
+            baseTypes.protoType(args)
+        ) : asAny;
     },
 
     type(args: DecodeMethod) {
@@ -654,7 +655,7 @@ export const switchProtoTypeArray = (
                                     ),
                                     []
                                 ),
-                                ...(args.context.options.interfaces.enabled ? [
+                                ...(args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? [
                                     t.identifier('useInterfaces'),
                                 ] : []),
                             ]
@@ -667,7 +668,41 @@ export const switchProtoTypeArray = (
     )
 };
 
-export const switchAnyTypeArray = (num: number, prop: string, typeName: string, interfaceName: string) => {
+export const switchAnyTypeArray = (num: number, prop: string, name: string) => {
+  return t.switchCase(
+      t.numericLiteral(num),
+      [
+          t.expressionStatement(
+              t.callExpression(
+                  t.memberExpression(
+                      t.memberExpression(
+                          t.identifier('message'),
+                          t.identifier(prop)
+                      ),
+                      t.identifier('push')
+                  ),
+                  [
+                      t.tsAsExpression(
+                          t.callExpression(
+                              t.identifier(name),
+                              [
+                                  t.identifier('reader')
+                              ]
+                          ),
+                          t.tsTypeReference(
+                              t.identifier('Any')
+                          )
+                      )
+
+                  ]
+              )
+          ),
+          t.breakStatement()
+      ]
+  )
+};
+
+export const switchAnyTypeArrayUseInterfaces = (num: number, prop: string, typeName: string, interfaceName: string) => {
     return switchArray(num, prop,
         t.conditionalExpression(
             t.identifier('useInterfaces'),

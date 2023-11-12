@@ -12,7 +12,7 @@ exports[`Duraation: duration DepositParams 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DepositParams {
+  decode(input: BinaryReader | Uint8Array, length?: number): DepositParams {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDepositParams();
@@ -20,7 +20,7 @@ exports[`Duraation: duration DepositParams 1`] = `
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.minDeposit.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.minDeposit.push(Coin.decode(reader, reader.uint32()));
           break;
         case 2:
           message.maxDepositPeriod = fromDuration(Duration.decode(reader, reader.uint32()));
@@ -44,27 +44,27 @@ exports[`Duraation: duration DepositParams 1`] = `
       maxDepositPeriod: object?.max_deposit_period ? Duration.fromAmino(object.max_deposit_period) : undefined
     };
   },
-  toAmino(message: DepositParams, useInterfaces: boolean = false): DepositParamsAmino {
+  toAmino(message: DepositParams): DepositParamsAmino {
     const obj: any = {};
     if (message.minDeposit) {
-      obj.min_deposit = message.minDeposit.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.min_deposit = message.minDeposit.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.min_deposit = [];
     }
-    obj.max_deposit_period = message.maxDepositPeriod ? Duration.toAmino(message.maxDepositPeriod, useInterfaces) : undefined;
+    obj.max_deposit_period = message.maxDepositPeriod ? Duration.toAmino(message.maxDepositPeriod) : undefined;
     return obj;
   },
   fromAminoMsg(object: DepositParamsAminoMsg): DepositParams {
     return DepositParams.fromAmino(object.value);
   },
-  toAminoMsg(message: DepositParams, useInterfaces: boolean = false): DepositParamsAminoMsg {
+  toAminoMsg(message: DepositParams): DepositParamsAminoMsg {
     return {
       type: "cosmos-sdk/DepositParams",
-      value: DepositParams.toAmino(message, useInterfaces)
+      value: DepositParams.toAmino(message)
     };
   },
-  fromProtoMsg(message: DepositParamsProtoMsg, useInterfaces: boolean = false): DepositParams {
-    return DepositParams.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: DepositParamsProtoMsg): DepositParams {
+    return DepositParams.decode(message.value);
   },
   toProto(message: DepositParams): Uint8Array {
     return DepositParams.encode(message).finish();
@@ -90,7 +90,7 @@ exports[`Duration: string DepositParams 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): DepositParams {
+  decode(input: BinaryReader | Uint8Array, length?: number): DepositParams {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDepositParams();
@@ -98,7 +98,7 @@ exports[`Duration: string DepositParams 1`] = `
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.minDeposit.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.minDeposit.push(Coin.decode(reader, reader.uint32()));
           break;
         case 2:
           message.maxDepositPeriod = fromDuration(Duration.decode(reader, reader.uint32()));
@@ -122,27 +122,27 @@ exports[`Duration: string DepositParams 1`] = `
       maxDepositPeriod: object?.max_deposit_period ? Duration.fromAmino(object.max_deposit_period) : undefined
     };
   },
-  toAmino(message: DepositParams, useInterfaces: boolean = false): DepositParamsAmino {
+  toAmino(message: DepositParams): DepositParamsAmino {
     const obj: any = {};
     if (message.minDeposit) {
-      obj.min_deposit = message.minDeposit.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.min_deposit = message.minDeposit.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.min_deposit = [];
     }
-    obj.max_deposit_period = message.maxDepositPeriod ? Duration.toAmino(message.maxDepositPeriod, useInterfaces) : undefined;
+    obj.max_deposit_period = message.maxDepositPeriod ? Duration.toAmino(message.maxDepositPeriod) : undefined;
     return obj;
   },
   fromAminoMsg(object: DepositParamsAminoMsg): DepositParams {
     return DepositParams.fromAmino(object.value);
   },
-  toAminoMsg(message: DepositParams, useInterfaces: boolean = false): DepositParamsAminoMsg {
+  toAminoMsg(message: DepositParams): DepositParamsAminoMsg {
     return {
       type: "cosmos-sdk/DepositParams",
-      value: DepositParams.toAmino(message, useInterfaces)
+      value: DepositParams.toAmino(message)
     };
   },
-  fromProtoMsg(message: DepositParamsProtoMsg, useInterfaces: boolean = false): DepositParams {
-    return DepositParams.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: DepositParamsProtoMsg): DepositParams {
+    return DepositParams.decode(message.value);
   },
   toProto(message: DepositParams): Uint8Array {
     return DepositParams.encode(message).finish();

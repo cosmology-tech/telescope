@@ -344,7 +344,7 @@ export const Any = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Any {
+  decode(input: BinaryReader | Uint8Array, length?: number): Any {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAny();
@@ -400,7 +400,7 @@ export const Any = {
       value: object.value
     };
   },
-  toAmino(message: Any, useInterfaces: boolean = true): AnyAmino {
+  toAmino(message: Any): AnyAmino {
     const obj: any = {};
     obj.type = message.typeUrl;
     obj.value = message.value;
@@ -409,8 +409,8 @@ export const Any = {
   fromAminoMsg(object: AnyAminoMsg): Any {
     return Any.fromAmino(object.value);
   },
-  fromProtoMsg(message: AnyProtoMsg, useInterfaces: boolean = true): Any {
-    return Any.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AnyProtoMsg): Any {
+    return Any.decode(message.value);
   },
   toProto(message: Any): Uint8Array {
     return Any.encode(message).finish();

@@ -47,7 +47,7 @@ export const QueryConfigRequest = {
   encode(_: QueryConfigRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryConfigRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryConfigRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConfigRequest();
@@ -83,21 +83,21 @@ export const QueryConfigRequest = {
   fromAmino(_: QueryConfigRequestAmino): QueryConfigRequest {
     return {};
   },
-  toAmino(_: QueryConfigRequest, useInterfaces: boolean = true): QueryConfigRequestAmino {
+  toAmino(_: QueryConfigRequest): QueryConfigRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryConfigRequestAminoMsg): QueryConfigRequest {
     return QueryConfigRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryConfigRequest, useInterfaces: boolean = true): QueryConfigRequestAminoMsg {
+  toAminoMsg(message: QueryConfigRequest): QueryConfigRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryConfigRequest",
-      value: QueryConfigRequest.toAmino(message, useInterfaces)
+      value: QueryConfigRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryConfigRequestProtoMsg, useInterfaces: boolean = true): QueryConfigRequest {
-    return QueryConfigRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryConfigRequestProtoMsg): QueryConfigRequest {
+    return QueryConfigRequest.decode(message.value);
   },
   toProto(message: QueryConfigRequest): Uint8Array {
     return QueryConfigRequest.encode(message).finish();
@@ -123,7 +123,7 @@ export const QueryConfigResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryConfigResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryConfigResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryConfigResponse();
@@ -131,7 +131,7 @@ export const QueryConfigResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.config = Config.decode(reader, reader.uint32(), useInterfaces);
+          message.config = Config.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -172,22 +172,22 @@ export const QueryConfigResponse = {
       config: object?.config ? Config.fromAmino(object.config) : undefined
     };
   },
-  toAmino(message: QueryConfigResponse, useInterfaces: boolean = true): QueryConfigResponseAmino {
+  toAmino(message: QueryConfigResponse): QueryConfigResponseAmino {
     const obj: any = {};
-    obj.config = message.config ? Config.toAmino(message.config, useInterfaces) : undefined;
+    obj.config = message.config ? Config.toAmino(message.config) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryConfigResponseAminoMsg): QueryConfigResponse {
     return QueryConfigResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryConfigResponse, useInterfaces: boolean = true): QueryConfigResponseAminoMsg {
+  toAminoMsg(message: QueryConfigResponse): QueryConfigResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryConfigResponse",
-      value: QueryConfigResponse.toAmino(message, useInterfaces)
+      value: QueryConfigResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryConfigResponseProtoMsg, useInterfaces: boolean = true): QueryConfigResponse {
-    return QueryConfigResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryConfigResponseProtoMsg): QueryConfigResponse {
+    return QueryConfigResponse.decode(message.value);
   },
   toProto(message: QueryConfigResponse): Uint8Array {
     return QueryConfigResponse.encode(message).finish();

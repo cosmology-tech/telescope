@@ -42,8 +42,8 @@ export declare const baseTypes: {
     fixed64(args: DecodeMethod): t.CallExpression | t.TSAsExpression;
     sfixed64(args: DecodeMethod): t.CallExpression | t.TSAsExpression;
     protoType(args: DecodeMethod): t.CallExpression;
-    anyType(args: DecodeMethod): t.ConditionalExpression;
-    type(args: DecodeMethod): t.CallExpression | t.ConditionalExpression;
+    anyType(args: DecodeMethod): t.ConditionalExpression | t.TSAsExpression;
+    type(args: DecodeMethod): t.CallExpression | t.ConditionalExpression | t.TSAsExpression;
     enum(args: DecodeMethod): t.TSAsExpression;
     bytes(args: DecodeMethod): t.CallExpression;
     durationString(args: DecodeMethod): t.CallExpression;
@@ -54,6 +54,7 @@ export declare const baseTypes: {
 export declare const switchOnTag: (num: number, prop: string, expr: t.Expression) => t.SwitchCase;
 export declare const switchOnTagTakesArray: (num: number, prop: string, expr: t.Statement[]) => t.SwitchCase;
 export declare const switchProtoTypeArray: (args: DecodeMethod, num: number, prop: string, name: string) => t.SwitchCase;
-export declare const switchAnyTypeArray: (num: number, prop: string, typeName: string, interfaceName: string) => t.SwitchCase;
+export declare const switchAnyTypeArray: (num: number, prop: string, name: string) => t.SwitchCase;
+export declare const switchAnyTypeArrayUseInterfaces: (num: number, prop: string, typeName: string, interfaceName: string) => t.SwitchCase;
 export declare const switchTagDelimArray: (num: number, prop: string, expr: t.Expression) => t.SwitchCase;
 export declare const switchArray: (num: number, prop: string, expr: t.Expression) => t.SwitchCase;

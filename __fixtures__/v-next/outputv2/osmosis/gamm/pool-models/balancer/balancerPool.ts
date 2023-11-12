@@ -294,7 +294,7 @@ export const SmoothWeightChangeParams = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SmoothWeightChangeParams {
+  decode(input: BinaryReader | Uint8Array, length?: number): SmoothWeightChangeParams {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSmoothWeightChangeParams();
@@ -305,13 +305,13 @@ export const SmoothWeightChangeParams = {
           message.startTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.duration = Duration.decode(reader, reader.uint32(), useInterfaces);
+          message.duration = Duration.decode(reader, reader.uint32());
           break;
         case 3:
-          message.initialPoolWeights.push(PoolAsset.decode(reader, reader.uint32(), useInterfaces));
+          message.initialPoolWeights.push(PoolAsset.decode(reader, reader.uint32()));
           break;
         case 4:
-          message.targetPoolWeights.push(PoolAsset.decode(reader, reader.uint32(), useInterfaces));
+          message.targetPoolWeights.push(PoolAsset.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -386,17 +386,17 @@ export const SmoothWeightChangeParams = {
       targetPoolWeights: Array.isArray(object?.target_pool_weights) ? object.target_pool_weights.map((e: any) => PoolAsset.fromAmino(e)) : []
     };
   },
-  toAmino(message: SmoothWeightChangeParams, useInterfaces: boolean = true): SmoothWeightChangeParamsAmino {
+  toAmino(message: SmoothWeightChangeParams): SmoothWeightChangeParamsAmino {
     const obj: any = {};
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
-    obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     if (message.initialPoolWeights) {
-      obj.initial_pool_weights = message.initialPoolWeights.map(e => e ? PoolAsset.toAmino(e, useInterfaces) : undefined);
+      obj.initial_pool_weights = message.initialPoolWeights.map(e => e ? PoolAsset.toAmino(e) : undefined);
     } else {
       obj.initial_pool_weights = [];
     }
     if (message.targetPoolWeights) {
-      obj.target_pool_weights = message.targetPoolWeights.map(e => e ? PoolAsset.toAmino(e, useInterfaces) : undefined);
+      obj.target_pool_weights = message.targetPoolWeights.map(e => e ? PoolAsset.toAmino(e) : undefined);
     } else {
       obj.target_pool_weights = [];
     }
@@ -405,14 +405,14 @@ export const SmoothWeightChangeParams = {
   fromAminoMsg(object: SmoothWeightChangeParamsAminoMsg): SmoothWeightChangeParams {
     return SmoothWeightChangeParams.fromAmino(object.value);
   },
-  toAminoMsg(message: SmoothWeightChangeParams, useInterfaces: boolean = true): SmoothWeightChangeParamsAminoMsg {
+  toAminoMsg(message: SmoothWeightChangeParams): SmoothWeightChangeParamsAminoMsg {
     return {
       type: "osmosis/gamm/smooth-weight-change-params",
-      value: SmoothWeightChangeParams.toAmino(message, useInterfaces)
+      value: SmoothWeightChangeParams.toAmino(message)
     };
   },
-  fromProtoMsg(message: SmoothWeightChangeParamsProtoMsg, useInterfaces: boolean = true): SmoothWeightChangeParams {
-    return SmoothWeightChangeParams.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: SmoothWeightChangeParamsProtoMsg): SmoothWeightChangeParams {
+    return SmoothWeightChangeParams.decode(message.value);
   },
   toProto(message: SmoothWeightChangeParams): Uint8Array {
     return SmoothWeightChangeParams.encode(message).finish();
@@ -446,7 +446,7 @@ export const PoolParams = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PoolParams {
+  decode(input: BinaryReader | Uint8Array, length?: number): PoolParams {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolParams();
@@ -460,7 +460,7 @@ export const PoolParams = {
           message.exitFee = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 3:
-          message.smoothWeightChangeParams = SmoothWeightChangeParams.decode(reader, reader.uint32(), useInterfaces);
+          message.smoothWeightChangeParams = SmoothWeightChangeParams.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -513,24 +513,24 @@ export const PoolParams = {
       smoothWeightChangeParams: object?.smooth_weight_change_params ? SmoothWeightChangeParams.fromAmino(object.smooth_weight_change_params) : undefined
     };
   },
-  toAmino(message: PoolParams, useInterfaces: boolean = true): PoolParamsAmino {
+  toAmino(message: PoolParams): PoolParamsAmino {
     const obj: any = {};
     obj.swap_fee = message.swapFee;
     obj.exit_fee = message.exitFee;
-    obj.smooth_weight_change_params = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toAmino(message.smoothWeightChangeParams, useInterfaces) : undefined;
+    obj.smooth_weight_change_params = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toAmino(message.smoothWeightChangeParams) : undefined;
     return obj;
   },
   fromAminoMsg(object: PoolParamsAminoMsg): PoolParams {
     return PoolParams.fromAmino(object.value);
   },
-  toAminoMsg(message: PoolParams, useInterfaces: boolean = true): PoolParamsAminoMsg {
+  toAminoMsg(message: PoolParams): PoolParamsAminoMsg {
     return {
       type: "osmosis/gamm/pool-params",
-      value: PoolParams.toAmino(message, useInterfaces)
+      value: PoolParams.toAmino(message)
     };
   },
-  fromProtoMsg(message: PoolParamsProtoMsg, useInterfaces: boolean = true): PoolParams {
-    return PoolParams.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: PoolParamsProtoMsg): PoolParams {
+    return PoolParams.decode(message.value);
   },
   toProto(message: PoolParams): Uint8Array {
     return PoolParams.encode(message).finish();
@@ -560,7 +560,7 @@ export const PoolAsset = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PoolAsset {
+  decode(input: BinaryReader | Uint8Array, length?: number): PoolAsset {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolAsset();
@@ -568,7 +568,7 @@ export const PoolAsset = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.token = Coin.decode(reader, reader.uint32(), useInterfaces);
+          message.token = Coin.decode(reader, reader.uint32());
           break;
         case 2:
           message.weight = reader.string();
@@ -618,23 +618,23 @@ export const PoolAsset = {
       weight: object.weight
     };
   },
-  toAmino(message: PoolAsset, useInterfaces: boolean = true): PoolAssetAmino {
+  toAmino(message: PoolAsset): PoolAssetAmino {
     const obj: any = {};
-    obj.token = message.token ? Coin.toAmino(message.token, useInterfaces) : undefined;
+    obj.token = message.token ? Coin.toAmino(message.token) : undefined;
     obj.weight = message.weight;
     return obj;
   },
   fromAminoMsg(object: PoolAssetAminoMsg): PoolAsset {
     return PoolAsset.fromAmino(object.value);
   },
-  toAminoMsg(message: PoolAsset, useInterfaces: boolean = true): PoolAssetAminoMsg {
+  toAminoMsg(message: PoolAsset): PoolAssetAminoMsg {
     return {
       type: "osmosis/gamm/pool-asset",
-      value: PoolAsset.toAmino(message, useInterfaces)
+      value: PoolAsset.toAmino(message)
     };
   },
-  fromProtoMsg(message: PoolAssetProtoMsg, useInterfaces: boolean = true): PoolAsset {
-    return PoolAsset.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: PoolAssetProtoMsg): PoolAsset {
+    return PoolAsset.decode(message.value);
   },
   toProto(message: PoolAsset): Uint8Array {
     return PoolAsset.encode(message).finish();
@@ -685,7 +685,7 @@ export const Pool = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Pool {
+  decode(input: BinaryReader | Uint8Array, length?: number): Pool {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePool();
@@ -699,16 +699,16 @@ export const Pool = {
           message.id = reader.uint64();
           break;
         case 3:
-          message.poolParams = PoolParams.decode(reader, reader.uint32(), useInterfaces);
+          message.poolParams = PoolParams.decode(reader, reader.uint32());
           break;
         case 4:
           message.futurePoolGovernor = reader.string();
           break;
         case 5:
-          message.totalShares = Coin.decode(reader, reader.uint32(), useInterfaces);
+          message.totalShares = Coin.decode(reader, reader.uint32());
           break;
         case 6:
-          message.poolAssets.push(PoolAsset.decode(reader, reader.uint32(), useInterfaces));
+          message.poolAssets.push(PoolAsset.decode(reader, reader.uint32()));
           break;
         case 7:
           message.totalWeight = reader.string();
@@ -800,15 +800,15 @@ export const Pool = {
       totalWeight: object.total_weight
     };
   },
-  toAmino(message: Pool, useInterfaces: boolean = true): PoolAmino {
+  toAmino(message: Pool): PoolAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.id = message.id ? message.id.toString() : undefined;
-    obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams, useInterfaces) : undefined;
+    obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined;
     obj.future_pool_governor = message.futurePoolGovernor;
-    obj.total_shares = message.totalShares ? Coin.toAmino(message.totalShares, useInterfaces) : undefined;
+    obj.total_shares = message.totalShares ? Coin.toAmino(message.totalShares) : undefined;
     if (message.poolAssets) {
-      obj.pool_assets = message.poolAssets.map(e => e ? PoolAsset.toAmino(e, useInterfaces) : undefined);
+      obj.pool_assets = message.poolAssets.map(e => e ? PoolAsset.toAmino(e) : undefined);
     } else {
       obj.pool_assets = [];
     }
@@ -818,14 +818,14 @@ export const Pool = {
   fromAminoMsg(object: PoolAminoMsg): Pool {
     return Pool.fromAmino(object.value);
   },
-  toAminoMsg(message: Pool, useInterfaces: boolean = true): PoolAminoMsg {
+  toAminoMsg(message: Pool): PoolAminoMsg {
     return {
       type: "osmosis/gamm/pool",
-      value: Pool.toAmino(message, useInterfaces)
+      value: Pool.toAmino(message)
     };
   },
-  fromProtoMsg(message: PoolProtoMsg, useInterfaces: boolean = true): Pool {
-    return Pool.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: PoolProtoMsg): Pool {
+    return Pool.decode(message.value);
   },
   toProto(message: Pool): Uint8Array {
     return Pool.encode(message).finish();

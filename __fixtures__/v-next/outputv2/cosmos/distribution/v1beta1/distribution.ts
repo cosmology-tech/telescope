@@ -452,7 +452,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -526,7 +526,7 @@ export const Params = {
       withdrawAddrEnabled: object.withdraw_addr_enabled
     };
   },
-  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
+  toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     obj.community_tax = message.communityTax;
     obj.base_proposer_reward = message.baseProposerReward;
@@ -537,14 +537,14 @@ export const Params = {
   fromAminoMsg(object: ParamsAminoMsg): Params {
     return Params.fromAmino(object.value);
   },
-  toAminoMsg(message: Params, useInterfaces: boolean = true): ParamsAminoMsg {
+  toAminoMsg(message: Params): ParamsAminoMsg {
     return {
       type: "cosmos-sdk/Params",
-      value: Params.toAmino(message, useInterfaces)
+      value: Params.toAmino(message)
     };
   },
-  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
-    return Params.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();
@@ -574,7 +574,7 @@ export const ValidatorHistoricalRewards = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorHistoricalRewards {
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorHistoricalRewards {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorHistoricalRewards();
@@ -582,7 +582,7 @@ export const ValidatorHistoricalRewards = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.cumulativeRewardRatio.push(DecCoin.decode(reader, reader.uint32(), useInterfaces));
+          message.cumulativeRewardRatio.push(DecCoin.decode(reader, reader.uint32()));
           break;
         case 2:
           message.referenceCount = reader.uint32();
@@ -638,10 +638,10 @@ export const ValidatorHistoricalRewards = {
       referenceCount: object.reference_count
     };
   },
-  toAmino(message: ValidatorHistoricalRewards, useInterfaces: boolean = true): ValidatorHistoricalRewardsAmino {
+  toAmino(message: ValidatorHistoricalRewards): ValidatorHistoricalRewardsAmino {
     const obj: any = {};
     if (message.cumulativeRewardRatio) {
-      obj.cumulative_reward_ratio = message.cumulativeRewardRatio.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
+      obj.cumulative_reward_ratio = message.cumulativeRewardRatio.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
       obj.cumulative_reward_ratio = [];
     }
@@ -651,14 +651,14 @@ export const ValidatorHistoricalRewards = {
   fromAminoMsg(object: ValidatorHistoricalRewardsAminoMsg): ValidatorHistoricalRewards {
     return ValidatorHistoricalRewards.fromAmino(object.value);
   },
-  toAminoMsg(message: ValidatorHistoricalRewards, useInterfaces: boolean = true): ValidatorHistoricalRewardsAminoMsg {
+  toAminoMsg(message: ValidatorHistoricalRewards): ValidatorHistoricalRewardsAminoMsg {
     return {
       type: "cosmos-sdk/ValidatorHistoricalRewards",
-      value: ValidatorHistoricalRewards.toAmino(message, useInterfaces)
+      value: ValidatorHistoricalRewards.toAmino(message)
     };
   },
-  fromProtoMsg(message: ValidatorHistoricalRewardsProtoMsg, useInterfaces: boolean = true): ValidatorHistoricalRewards {
-    return ValidatorHistoricalRewards.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ValidatorHistoricalRewardsProtoMsg): ValidatorHistoricalRewards {
+    return ValidatorHistoricalRewards.decode(message.value);
   },
   toProto(message: ValidatorHistoricalRewards): Uint8Array {
     return ValidatorHistoricalRewards.encode(message).finish();
@@ -688,7 +688,7 @@ export const ValidatorCurrentRewards = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorCurrentRewards {
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorCurrentRewards {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorCurrentRewards();
@@ -696,7 +696,7 @@ export const ValidatorCurrentRewards = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.rewards.push(DecCoin.decode(reader, reader.uint32(), useInterfaces));
+          message.rewards.push(DecCoin.decode(reader, reader.uint32()));
           break;
         case 2:
           message.period = reader.uint64();
@@ -754,10 +754,10 @@ export const ValidatorCurrentRewards = {
       period: BigInt(object.period)
     };
   },
-  toAmino(message: ValidatorCurrentRewards, useInterfaces: boolean = true): ValidatorCurrentRewardsAmino {
+  toAmino(message: ValidatorCurrentRewards): ValidatorCurrentRewardsAmino {
     const obj: any = {};
     if (message.rewards) {
-      obj.rewards = message.rewards.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
+      obj.rewards = message.rewards.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
       obj.rewards = [];
     }
@@ -767,14 +767,14 @@ export const ValidatorCurrentRewards = {
   fromAminoMsg(object: ValidatorCurrentRewardsAminoMsg): ValidatorCurrentRewards {
     return ValidatorCurrentRewards.fromAmino(object.value);
   },
-  toAminoMsg(message: ValidatorCurrentRewards, useInterfaces: boolean = true): ValidatorCurrentRewardsAminoMsg {
+  toAminoMsg(message: ValidatorCurrentRewards): ValidatorCurrentRewardsAminoMsg {
     return {
       type: "cosmos-sdk/ValidatorCurrentRewards",
-      value: ValidatorCurrentRewards.toAmino(message, useInterfaces)
+      value: ValidatorCurrentRewards.toAmino(message)
     };
   },
-  fromProtoMsg(message: ValidatorCurrentRewardsProtoMsg, useInterfaces: boolean = true): ValidatorCurrentRewards {
-    return ValidatorCurrentRewards.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ValidatorCurrentRewardsProtoMsg): ValidatorCurrentRewards {
+    return ValidatorCurrentRewards.decode(message.value);
   },
   toProto(message: ValidatorCurrentRewards): Uint8Array {
     return ValidatorCurrentRewards.encode(message).finish();
@@ -800,7 +800,7 @@ export const ValidatorAccumulatedCommission = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorAccumulatedCommission {
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorAccumulatedCommission {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorAccumulatedCommission();
@@ -808,7 +808,7 @@ export const ValidatorAccumulatedCommission = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.commission.push(DecCoin.decode(reader, reader.uint32(), useInterfaces));
+          message.commission.push(DecCoin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -855,10 +855,10 @@ export const ValidatorAccumulatedCommission = {
       commission: Array.isArray(object?.commission) ? object.commission.map((e: any) => DecCoin.fromAmino(e)) : []
     };
   },
-  toAmino(message: ValidatorAccumulatedCommission, useInterfaces: boolean = true): ValidatorAccumulatedCommissionAmino {
+  toAmino(message: ValidatorAccumulatedCommission): ValidatorAccumulatedCommissionAmino {
     const obj: any = {};
     if (message.commission) {
-      obj.commission = message.commission.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
+      obj.commission = message.commission.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
       obj.commission = [];
     }
@@ -867,14 +867,14 @@ export const ValidatorAccumulatedCommission = {
   fromAminoMsg(object: ValidatorAccumulatedCommissionAminoMsg): ValidatorAccumulatedCommission {
     return ValidatorAccumulatedCommission.fromAmino(object.value);
   },
-  toAminoMsg(message: ValidatorAccumulatedCommission, useInterfaces: boolean = true): ValidatorAccumulatedCommissionAminoMsg {
+  toAminoMsg(message: ValidatorAccumulatedCommission): ValidatorAccumulatedCommissionAminoMsg {
     return {
       type: "cosmos-sdk/ValidatorAccumulatedCommission",
-      value: ValidatorAccumulatedCommission.toAmino(message, useInterfaces)
+      value: ValidatorAccumulatedCommission.toAmino(message)
     };
   },
-  fromProtoMsg(message: ValidatorAccumulatedCommissionProtoMsg, useInterfaces: boolean = true): ValidatorAccumulatedCommission {
-    return ValidatorAccumulatedCommission.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ValidatorAccumulatedCommissionProtoMsg): ValidatorAccumulatedCommission {
+    return ValidatorAccumulatedCommission.decode(message.value);
   },
   toProto(message: ValidatorAccumulatedCommission): Uint8Array {
     return ValidatorAccumulatedCommission.encode(message).finish();
@@ -900,7 +900,7 @@ export const ValidatorOutstandingRewards = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorOutstandingRewards {
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorOutstandingRewards {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorOutstandingRewards();
@@ -908,7 +908,7 @@ export const ValidatorOutstandingRewards = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.rewards.push(DecCoin.decode(reader, reader.uint32(), useInterfaces));
+          message.rewards.push(DecCoin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -955,10 +955,10 @@ export const ValidatorOutstandingRewards = {
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromAmino(e)) : []
     };
   },
-  toAmino(message: ValidatorOutstandingRewards, useInterfaces: boolean = true): ValidatorOutstandingRewardsAmino {
+  toAmino(message: ValidatorOutstandingRewards): ValidatorOutstandingRewardsAmino {
     const obj: any = {};
     if (message.rewards) {
-      obj.rewards = message.rewards.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
+      obj.rewards = message.rewards.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
       obj.rewards = [];
     }
@@ -967,14 +967,14 @@ export const ValidatorOutstandingRewards = {
   fromAminoMsg(object: ValidatorOutstandingRewardsAminoMsg): ValidatorOutstandingRewards {
     return ValidatorOutstandingRewards.fromAmino(object.value);
   },
-  toAminoMsg(message: ValidatorOutstandingRewards, useInterfaces: boolean = true): ValidatorOutstandingRewardsAminoMsg {
+  toAminoMsg(message: ValidatorOutstandingRewards): ValidatorOutstandingRewardsAminoMsg {
     return {
       type: "cosmos-sdk/ValidatorOutstandingRewards",
-      value: ValidatorOutstandingRewards.toAmino(message, useInterfaces)
+      value: ValidatorOutstandingRewards.toAmino(message)
     };
   },
-  fromProtoMsg(message: ValidatorOutstandingRewardsProtoMsg, useInterfaces: boolean = true): ValidatorOutstandingRewards {
-    return ValidatorOutstandingRewards.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ValidatorOutstandingRewardsProtoMsg): ValidatorOutstandingRewards {
+    return ValidatorOutstandingRewards.decode(message.value);
   },
   toProto(message: ValidatorOutstandingRewards): Uint8Array {
     return ValidatorOutstandingRewards.encode(message).finish();
@@ -1004,7 +1004,7 @@ export const ValidatorSlashEvent = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorSlashEvent {
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorSlashEvent {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorSlashEvent();
@@ -1062,7 +1062,7 @@ export const ValidatorSlashEvent = {
       fraction: object.fraction
     };
   },
-  toAmino(message: ValidatorSlashEvent, useInterfaces: boolean = true): ValidatorSlashEventAmino {
+  toAmino(message: ValidatorSlashEvent): ValidatorSlashEventAmino {
     const obj: any = {};
     obj.validator_period = message.validatorPeriod ? message.validatorPeriod.toString() : undefined;
     obj.fraction = message.fraction;
@@ -1071,14 +1071,14 @@ export const ValidatorSlashEvent = {
   fromAminoMsg(object: ValidatorSlashEventAminoMsg): ValidatorSlashEvent {
     return ValidatorSlashEvent.fromAmino(object.value);
   },
-  toAminoMsg(message: ValidatorSlashEvent, useInterfaces: boolean = true): ValidatorSlashEventAminoMsg {
+  toAminoMsg(message: ValidatorSlashEvent): ValidatorSlashEventAminoMsg {
     return {
       type: "cosmos-sdk/ValidatorSlashEvent",
-      value: ValidatorSlashEvent.toAmino(message, useInterfaces)
+      value: ValidatorSlashEvent.toAmino(message)
     };
   },
-  fromProtoMsg(message: ValidatorSlashEventProtoMsg, useInterfaces: boolean = true): ValidatorSlashEvent {
-    return ValidatorSlashEvent.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ValidatorSlashEventProtoMsg): ValidatorSlashEvent {
+    return ValidatorSlashEvent.decode(message.value);
   },
   toProto(message: ValidatorSlashEvent): Uint8Array {
     return ValidatorSlashEvent.encode(message).finish();
@@ -1104,7 +1104,7 @@ export const ValidatorSlashEvents = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorSlashEvents {
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorSlashEvents {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorSlashEvents();
@@ -1112,7 +1112,7 @@ export const ValidatorSlashEvents = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.validatorSlashEvents.push(ValidatorSlashEvent.decode(reader, reader.uint32(), useInterfaces));
+          message.validatorSlashEvents.push(ValidatorSlashEvent.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1159,10 +1159,10 @@ export const ValidatorSlashEvents = {
       validatorSlashEvents: Array.isArray(object?.validator_slash_events) ? object.validator_slash_events.map((e: any) => ValidatorSlashEvent.fromAmino(e)) : []
     };
   },
-  toAmino(message: ValidatorSlashEvents, useInterfaces: boolean = true): ValidatorSlashEventsAmino {
+  toAmino(message: ValidatorSlashEvents): ValidatorSlashEventsAmino {
     const obj: any = {};
     if (message.validatorSlashEvents) {
-      obj.validator_slash_events = message.validatorSlashEvents.map(e => e ? ValidatorSlashEvent.toAmino(e, useInterfaces) : undefined);
+      obj.validator_slash_events = message.validatorSlashEvents.map(e => e ? ValidatorSlashEvent.toAmino(e) : undefined);
     } else {
       obj.validator_slash_events = [];
     }
@@ -1171,14 +1171,14 @@ export const ValidatorSlashEvents = {
   fromAminoMsg(object: ValidatorSlashEventsAminoMsg): ValidatorSlashEvents {
     return ValidatorSlashEvents.fromAmino(object.value);
   },
-  toAminoMsg(message: ValidatorSlashEvents, useInterfaces: boolean = true): ValidatorSlashEventsAminoMsg {
+  toAminoMsg(message: ValidatorSlashEvents): ValidatorSlashEventsAminoMsg {
     return {
       type: "cosmos-sdk/ValidatorSlashEvents",
-      value: ValidatorSlashEvents.toAmino(message, useInterfaces)
+      value: ValidatorSlashEvents.toAmino(message)
     };
   },
-  fromProtoMsg(message: ValidatorSlashEventsProtoMsg, useInterfaces: boolean = true): ValidatorSlashEvents {
-    return ValidatorSlashEvents.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ValidatorSlashEventsProtoMsg): ValidatorSlashEvents {
+    return ValidatorSlashEvents.decode(message.value);
   },
   toProto(message: ValidatorSlashEvents): Uint8Array {
     return ValidatorSlashEvents.encode(message).finish();
@@ -1204,7 +1204,7 @@ export const FeePool = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): FeePool {
+  decode(input: BinaryReader | Uint8Array, length?: number): FeePool {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFeePool();
@@ -1212,7 +1212,7 @@ export const FeePool = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.communityPool.push(DecCoin.decode(reader, reader.uint32(), useInterfaces));
+          message.communityPool.push(DecCoin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1259,10 +1259,10 @@ export const FeePool = {
       communityPool: Array.isArray(object?.community_pool) ? object.community_pool.map((e: any) => DecCoin.fromAmino(e)) : []
     };
   },
-  toAmino(message: FeePool, useInterfaces: boolean = true): FeePoolAmino {
+  toAmino(message: FeePool): FeePoolAmino {
     const obj: any = {};
     if (message.communityPool) {
-      obj.community_pool = message.communityPool.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
+      obj.community_pool = message.communityPool.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
       obj.community_pool = [];
     }
@@ -1271,14 +1271,14 @@ export const FeePool = {
   fromAminoMsg(object: FeePoolAminoMsg): FeePool {
     return FeePool.fromAmino(object.value);
   },
-  toAminoMsg(message: FeePool, useInterfaces: boolean = true): FeePoolAminoMsg {
+  toAminoMsg(message: FeePool): FeePoolAminoMsg {
     return {
       type: "cosmos-sdk/FeePool",
-      value: FeePool.toAmino(message, useInterfaces)
+      value: FeePool.toAmino(message)
     };
   },
-  fromProtoMsg(message: FeePoolProtoMsg, useInterfaces: boolean = true): FeePool {
-    return FeePool.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: FeePoolProtoMsg): FeePool {
+    return FeePool.decode(message.value);
   },
   toProto(message: FeePool): Uint8Array {
     return FeePool.encode(message).finish();
@@ -1316,7 +1316,7 @@ export const CommunityPoolSpendProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CommunityPoolSpendProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number): CommunityPoolSpendProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCommunityPoolSpendProposal();
@@ -1333,7 +1333,7 @@ export const CommunityPoolSpendProposal = {
           message.recipient = reader.string();
           break;
         case 4:
-          message.amount.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.amount.push(Coin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1398,13 +1398,13 @@ export const CommunityPoolSpendProposal = {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: CommunityPoolSpendProposal, useInterfaces: boolean = true): CommunityPoolSpendProposalAmino {
+  toAmino(message: CommunityPoolSpendProposal): CommunityPoolSpendProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
     obj.recipient = message.recipient;
     if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.amount = [];
     }
@@ -1413,14 +1413,14 @@ export const CommunityPoolSpendProposal = {
   fromAminoMsg(object: CommunityPoolSpendProposalAminoMsg): CommunityPoolSpendProposal {
     return CommunityPoolSpendProposal.fromAmino(object.value);
   },
-  toAminoMsg(message: CommunityPoolSpendProposal, useInterfaces: boolean = true): CommunityPoolSpendProposalAminoMsg {
+  toAminoMsg(message: CommunityPoolSpendProposal): CommunityPoolSpendProposalAminoMsg {
     return {
       type: "cosmos-sdk/CommunityPoolSpendProposal",
-      value: CommunityPoolSpendProposal.toAmino(message, useInterfaces)
+      value: CommunityPoolSpendProposal.toAmino(message)
     };
   },
-  fromProtoMsg(message: CommunityPoolSpendProposalProtoMsg, useInterfaces: boolean = true): CommunityPoolSpendProposal {
-    return CommunityPoolSpendProposal.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: CommunityPoolSpendProposalProtoMsg): CommunityPoolSpendProposal {
+    return CommunityPoolSpendProposal.decode(message.value);
   },
   toProto(message: CommunityPoolSpendProposal): Uint8Array {
     return CommunityPoolSpendProposal.encode(message).finish();
@@ -1454,7 +1454,7 @@ export const DelegatorStartingInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DelegatorStartingInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number): DelegatorStartingInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegatorStartingInfo();
@@ -1523,7 +1523,7 @@ export const DelegatorStartingInfo = {
       height: BigInt(object.height)
     };
   },
-  toAmino(message: DelegatorStartingInfo, useInterfaces: boolean = true): DelegatorStartingInfoAmino {
+  toAmino(message: DelegatorStartingInfo): DelegatorStartingInfoAmino {
     const obj: any = {};
     obj.previous_period = message.previousPeriod ? message.previousPeriod.toString() : undefined;
     obj.stake = message.stake;
@@ -1533,14 +1533,14 @@ export const DelegatorStartingInfo = {
   fromAminoMsg(object: DelegatorStartingInfoAminoMsg): DelegatorStartingInfo {
     return DelegatorStartingInfo.fromAmino(object.value);
   },
-  toAminoMsg(message: DelegatorStartingInfo, useInterfaces: boolean = true): DelegatorStartingInfoAminoMsg {
+  toAminoMsg(message: DelegatorStartingInfo): DelegatorStartingInfoAminoMsg {
     return {
       type: "cosmos-sdk/DelegatorStartingInfo",
-      value: DelegatorStartingInfo.toAmino(message, useInterfaces)
+      value: DelegatorStartingInfo.toAmino(message)
     };
   },
-  fromProtoMsg(message: DelegatorStartingInfoProtoMsg, useInterfaces: boolean = true): DelegatorStartingInfo {
-    return DelegatorStartingInfo.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: DelegatorStartingInfoProtoMsg): DelegatorStartingInfo {
+    return DelegatorStartingInfo.decode(message.value);
   },
   toProto(message: DelegatorStartingInfo): Uint8Array {
     return DelegatorStartingInfo.encode(message).finish();
@@ -1570,7 +1570,7 @@ export const DelegationDelegatorReward = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DelegationDelegatorReward {
+  decode(input: BinaryReader | Uint8Array, length?: number): DelegationDelegatorReward {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegationDelegatorReward();
@@ -1581,7 +1581,7 @@ export const DelegationDelegatorReward = {
           message.validatorAddress = reader.string();
           break;
         case 2:
-          message.reward.push(DecCoin.decode(reader, reader.uint32(), useInterfaces));
+          message.reward.push(DecCoin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1634,11 +1634,11 @@ export const DelegationDelegatorReward = {
       reward: Array.isArray(object?.reward) ? object.reward.map((e: any) => DecCoin.fromAmino(e)) : []
     };
   },
-  toAmino(message: DelegationDelegatorReward, useInterfaces: boolean = true): DelegationDelegatorRewardAmino {
+  toAmino(message: DelegationDelegatorReward): DelegationDelegatorRewardAmino {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
     if (message.reward) {
-      obj.reward = message.reward.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
+      obj.reward = message.reward.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
       obj.reward = [];
     }
@@ -1647,14 +1647,14 @@ export const DelegationDelegatorReward = {
   fromAminoMsg(object: DelegationDelegatorRewardAminoMsg): DelegationDelegatorReward {
     return DelegationDelegatorReward.fromAmino(object.value);
   },
-  toAminoMsg(message: DelegationDelegatorReward, useInterfaces: boolean = true): DelegationDelegatorRewardAminoMsg {
+  toAminoMsg(message: DelegationDelegatorReward): DelegationDelegatorRewardAminoMsg {
     return {
       type: "cosmos-sdk/DelegationDelegatorReward",
-      value: DelegationDelegatorReward.toAmino(message, useInterfaces)
+      value: DelegationDelegatorReward.toAmino(message)
     };
   },
-  fromProtoMsg(message: DelegationDelegatorRewardProtoMsg, useInterfaces: boolean = true): DelegationDelegatorReward {
-    return DelegationDelegatorReward.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: DelegationDelegatorRewardProtoMsg): DelegationDelegatorReward {
+    return DelegationDelegatorReward.decode(message.value);
   },
   toProto(message: DelegationDelegatorReward): Uint8Array {
     return DelegationDelegatorReward.encode(message).finish();
@@ -1696,7 +1696,7 @@ export const CommunityPoolSpendProposalWithDeposit = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CommunityPoolSpendProposalWithDeposit {
+  decode(input: BinaryReader | Uint8Array, length?: number): CommunityPoolSpendProposalWithDeposit {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCommunityPoolSpendProposalWithDeposit();
@@ -1779,7 +1779,7 @@ export const CommunityPoolSpendProposalWithDeposit = {
       deposit: object.deposit
     };
   },
-  toAmino(message: CommunityPoolSpendProposalWithDeposit, useInterfaces: boolean = true): CommunityPoolSpendProposalWithDepositAmino {
+  toAmino(message: CommunityPoolSpendProposalWithDeposit): CommunityPoolSpendProposalWithDepositAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -1791,14 +1791,14 @@ export const CommunityPoolSpendProposalWithDeposit = {
   fromAminoMsg(object: CommunityPoolSpendProposalWithDepositAminoMsg): CommunityPoolSpendProposalWithDeposit {
     return CommunityPoolSpendProposalWithDeposit.fromAmino(object.value);
   },
-  toAminoMsg(message: CommunityPoolSpendProposalWithDeposit, useInterfaces: boolean = true): CommunityPoolSpendProposalWithDepositAminoMsg {
+  toAminoMsg(message: CommunityPoolSpendProposalWithDeposit): CommunityPoolSpendProposalWithDepositAminoMsg {
     return {
       type: "cosmos-sdk/CommunityPoolSpendProposalWithDeposit",
-      value: CommunityPoolSpendProposalWithDeposit.toAmino(message, useInterfaces)
+      value: CommunityPoolSpendProposalWithDeposit.toAmino(message)
     };
   },
-  fromProtoMsg(message: CommunityPoolSpendProposalWithDepositProtoMsg, useInterfaces: boolean = true): CommunityPoolSpendProposalWithDeposit {
-    return CommunityPoolSpendProposalWithDeposit.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: CommunityPoolSpendProposalWithDepositProtoMsg): CommunityPoolSpendProposalWithDeposit {
+    return CommunityPoolSpendProposalWithDeposit.decode(message.value);
   },
   toProto(message: CommunityPoolSpendProposalWithDeposit): Uint8Array {
     return CommunityPoolSpendProposalWithDeposit.encode(message).finish();
