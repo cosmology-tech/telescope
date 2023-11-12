@@ -183,7 +183,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/evmos.claims.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.enableClaims === true) {
+    if (message.enableClaims !== undefined) {
       writer.uint32(8).bool(message.enableClaims);
     }
     if (message.airdropStartTime !== undefined) {
@@ -195,7 +195,7 @@ export const Params = {
     if (message.durationOfDecay !== undefined) {
       Duration.encode(message.durationOfDecay, writer.uint32(34).fork()).ldelim();
     }
-    if (message.claimsDenom !== "") {
+    if (message.claimsDenom !== undefined) {
       writer.uint32(42).string(message.claimsDenom);
     }
     for (const v of message.authorizedChannels) {
@@ -330,7 +330,7 @@ export const Params = {
   fromAmino(object: ParamsAmino): Params {
     return {
       enableClaims: object.enable_claims,
-      airdropStartTime: object.airdrop_start_time,
+      airdropStartTime: object?.airdrop_start_time ? fromTimestamp(Timestamp.fromAmino(object.airdrop_start_time)) : undefined,
       durationUntilDecay: object?.duration_until_decay ? Duration.fromAmino(object.duration_until_decay) : undefined,
       durationOfDecay: object?.duration_of_decay ? Duration.fromAmino(object.duration_of_decay) : undefined,
       claimsDenom: object.claims_denom,
@@ -341,7 +341,7 @@ export const Params = {
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     obj.enable_claims = message.enableClaims;
-    obj.airdrop_start_time = message.airdropStartTime;
+    obj.airdrop_start_time = message.airdropStartTime ? Timestamp.toAmino(toTimestamp(message.airdropStartTime)) : undefined;
     obj.duration_until_decay = message.durationUntilDecay ? Duration.toAmino(message.durationUntilDecay) : undefined;
     obj.duration_of_decay = message.durationOfDecay ? Duration.toAmino(message.durationOfDecay) : undefined;
     obj.claims_denom = message.claimsDenom;

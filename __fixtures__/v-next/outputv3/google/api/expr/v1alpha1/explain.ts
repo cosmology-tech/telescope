@@ -99,7 +99,7 @@ export const Explain = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Explain {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Explain {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExplain();
@@ -107,10 +107,10 @@ export const Explain = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.values.push(Value.decode(reader, reader.uint32()));
+          message.values.push(Value.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.exprSteps.push(Explain_ExprStep.decode(reader, reader.uint32()));
+          message.exprSteps.push(Explain_ExprStep.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -171,22 +171,22 @@ export const Explain = {
       exprSteps: Array.isArray(object?.expr_steps) ? object.expr_steps.map((e: any) => Explain_ExprStep.fromAmino(e)) : []
     };
   },
-  toAmino(message: Explain): ExplainAmino {
+  toAmino(message: Explain, useInterfaces: boolean = true): ExplainAmino {
     const obj: any = {};
     if (message.values) {
-      obj.values = message.values.map(e => e ? Value.toAmino(e) : undefined);
+      obj.values = message.values.map(e => e ? Value.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.values = [];
     }
     if (message.exprSteps) {
-      obj.expr_steps = message.exprSteps.map(e => e ? Explain_ExprStep.toAmino(e) : undefined);
+      obj.expr_steps = message.exprSteps.map(e => e ? Explain_ExprStep.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.expr_steps = [];
     }
     return obj;
   },
-  fromProtoMsg(message: ExplainProtoMsg): Explain {
-    return Explain.decode(message.value);
+  fromProtoMsg(message: ExplainProtoMsg, useInterfaces: boolean = true): Explain {
+    return Explain.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Explain): Uint8Array {
     return Explain.encode(message).finish();
@@ -215,7 +215,7 @@ export const Explain_ExprStep = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Explain_ExprStep {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Explain_ExprStep {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExplain_ExprStep();
@@ -273,14 +273,14 @@ export const Explain_ExprStep = {
       valueIndex: object.value_index
     };
   },
-  toAmino(message: Explain_ExprStep): Explain_ExprStepAmino {
+  toAmino(message: Explain_ExprStep, useInterfaces: boolean = true): Explain_ExprStepAmino {
     const obj: any = {};
     obj.id = message.id ? message.id.toString() : undefined;
     obj.value_index = message.valueIndex;
     return obj;
   },
-  fromProtoMsg(message: Explain_ExprStepProtoMsg): Explain_ExprStep {
-    return Explain_ExprStep.decode(message.value);
+  fromProtoMsg(message: Explain_ExprStepProtoMsg, useInterfaces: boolean = true): Explain_ExprStep {
+    return Explain_ExprStep.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Explain_ExprStep): Uint8Array {
     return Explain_ExprStep.encode(message).finish();

@@ -345,13 +345,13 @@ function createBaseDistribution(): Distribution {
 export const Distribution = {
   typeUrl: "/google.api.Distribution",
   encode(message: Distribution, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.count !== BigInt(0)) {
+    if (message.count !== undefined) {
       writer.uint32(8).int64(message.count);
     }
-    if (message.mean !== 0) {
+    if (message.mean !== undefined) {
       writer.uint32(17).double(message.mean);
     }
-    if (message.sumOfSquaredDeviation !== 0) {
+    if (message.sumOfSquaredDeviation !== undefined) {
       writer.uint32(25).double(message.sumOfSquaredDeviation);
     }
     if (message.range !== undefined) {
@@ -555,10 +555,10 @@ function createBaseDistribution_Range(): Distribution_Range {
 export const Distribution_Range = {
   typeUrl: "/google.api.Range",
   encode(message: Distribution_Range, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.min !== 0) {
+    if (message.min !== undefined) {
       writer.uint32(9).double(message.min);
     }
-    if (message.max !== 0) {
+    if (message.max !== undefined) {
       writer.uint32(17).double(message.max);
     }
     return writer;
@@ -779,13 +779,13 @@ function createBaseDistribution_BucketOptions_Linear(): Distribution_BucketOptio
 export const Distribution_BucketOptions_Linear = {
   typeUrl: "/google.api.Linear",
   encode(message: Distribution_BucketOptions_Linear, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.numFiniteBuckets !== 0) {
+    if (message.numFiniteBuckets !== undefined) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
-    if (message.width !== 0) {
+    if (message.width !== undefined) {
       writer.uint32(17).double(message.width);
     }
-    if (message.offset !== 0) {
+    if (message.offset !== undefined) {
       writer.uint32(25).double(message.offset);
     }
     return writer;
@@ -895,13 +895,13 @@ function createBaseDistribution_BucketOptions_Exponential(): Distribution_Bucket
 export const Distribution_BucketOptions_Exponential = {
   typeUrl: "/google.api.Exponential",
   encode(message: Distribution_BucketOptions_Exponential, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.numFiniteBuckets !== 0) {
+    if (message.numFiniteBuckets !== undefined) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
-    if (message.growthFactor !== 0) {
+    if (message.growthFactor !== undefined) {
       writer.uint32(17).double(message.growthFactor);
     }
-    if (message.scale !== 0) {
+    if (message.scale !== undefined) {
       writer.uint32(25).double(message.scale);
     }
     return writer;
@@ -1118,7 +1118,7 @@ function createBaseDistribution_Exemplar(): Distribution_Exemplar {
 export const Distribution_Exemplar = {
   typeUrl: "/google.api.Exemplar",
   encode(message: Distribution_Exemplar, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(9).double(message.value);
     }
     if (message.timestamp !== undefined) {
@@ -1205,14 +1205,14 @@ export const Distribution_Exemplar = {
   fromAmino(object: Distribution_ExemplarAmino): Distribution_Exemplar {
     return {
       value: object.value,
-      timestamp: object?.timestamp,
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined,
       attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromAmino(e)) : []
     };
   },
   toAmino(message: Distribution_Exemplar): Distribution_ExemplarAmino {
     const obj: any = {};
     obj.value = message.value;
-    obj.timestamp = message.timestamp;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     if (message.attachments) {
       obj.attachments = message.attachments.map(e => e ? Any.toAmino(e) : undefined);
     } else {

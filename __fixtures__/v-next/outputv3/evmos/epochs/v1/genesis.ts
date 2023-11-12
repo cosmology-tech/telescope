@@ -18,10 +18,10 @@ export interface EpochInfoProtoMsg {
 }
 export interface EpochInfoAmino {
   identifier: string;
-  start_time?: Date;
+  start_time?: string;
   duration?: DurationAmino;
   current_epoch: string;
-  current_epoch_start_time?: Date;
+  current_epoch_start_time?: string;
   epoch_counting_started: boolean;
   current_epoch_start_height: string;
 }
@@ -87,7 +87,7 @@ export const EpochInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EpochInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EpochInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEpochInfo();
@@ -101,7 +101,7 @@ export const EpochInfo = {
           message.startTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 3:
-          message.duration = Duration.decode(reader, reader.uint32());
+          message.duration = Duration.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
           message.currentEpoch = reader.int64();
@@ -186,27 +186,27 @@ export const EpochInfo = {
   fromAmino(object: EpochInfoAmino): EpochInfo {
     return {
       identifier: object.identifier,
-      startTime: object.start_time,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
       currentEpoch: BigInt(object.current_epoch),
-      currentEpochStartTime: object.current_epoch_start_time,
+      currentEpochStartTime: object?.current_epoch_start_time ? fromTimestamp(Timestamp.fromAmino(object.current_epoch_start_time)) : undefined,
       epochCountingStarted: object.epoch_counting_started,
       currentEpochStartHeight: BigInt(object.current_epoch_start_height)
     };
   },
-  toAmino(message: EpochInfo): EpochInfoAmino {
+  toAmino(message: EpochInfo, useInterfaces: boolean = true): EpochInfoAmino {
     const obj: any = {};
     obj.identifier = message.identifier;
-    obj.start_time = message.startTime;
-    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
+    obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
     obj.current_epoch = message.currentEpoch ? message.currentEpoch.toString() : undefined;
-    obj.current_epoch_start_time = message.currentEpochStartTime;
+    obj.current_epoch_start_time = message.currentEpochStartTime ? Timestamp.toAmino(toTimestamp(message.currentEpochStartTime)) : undefined;
     obj.epoch_counting_started = message.epochCountingStarted;
     obj.current_epoch_start_height = message.currentEpochStartHeight ? message.currentEpochStartHeight.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: EpochInfoProtoMsg): EpochInfo {
-    return EpochInfo.decode(message.value);
+  fromProtoMsg(message: EpochInfoProtoMsg, useInterfaces: boolean = true): EpochInfo {
+    return EpochInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EpochInfo): Uint8Array {
     return EpochInfo.encode(message).finish();
@@ -231,7 +231,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -239,7 +239,7 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.epochs.push(EpochInfo.decode(reader, reader.uint32()));
+          message.epochs.push(EpochInfo.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -286,17 +286,17 @@ export const GenesisState = {
       epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromAmino(e)) : []
     };
   },
-  toAmino(message: GenesisState): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     if (message.epochs) {
-      obj.epochs = message.epochs.map(e => e ? EpochInfo.toAmino(e) : undefined);
+      obj.epochs = message.epochs.map(e => e ? EpochInfo.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.epochs = [];
     }
     return obj;
   },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
+    return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();

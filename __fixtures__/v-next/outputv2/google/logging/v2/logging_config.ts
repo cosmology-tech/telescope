@@ -259,9 +259,9 @@ export interface LogBucketAmino {
    * Output only. The creation timestamp of the bucket. This is not set for any of the
    * default buckets.
    */
-  create_time?: Date;
+  create_time?: string;
   /** Output only. The last update timestamp of the bucket. */
-  update_time?: Date;
+  update_time?: string;
   /**
    * Logs will be retained by default for this amount of time, after which they
    * will automatically be deleted. The minimum retention period is 1 day. If
@@ -364,9 +364,9 @@ export interface LogViewAmino {
   /** Describes this view. */
   description: string;
   /** Output only. The creation timestamp of the view. */
-  create_time?: Date;
+  create_time?: string;
   /** Output only. The last update timestamp of the view. */
-  update_time?: Date;
+  update_time?: string;
   /**
    * Filter that restricts which log entries in a bucket are visible in this
    * view.
@@ -629,13 +629,13 @@ export interface LogSinkAmino {
    * 
    * This field may not be present for older sinks.
    */
-  create_time?: Date;
+  create_time?: string;
   /**
    * Output only. The last update timestamp of the sink.
    * 
    * This field may not be present for older sinks.
    */
-  update_time?: Date;
+  update_time?: string;
 }
 export interface LogSinkAminoMsg {
   type: "/google.logging.v2.LogSink";
@@ -1880,13 +1880,13 @@ export interface LogExclusionAmino {
    * 
    * This field may not be present for older exclusions.
    */
-  create_time?: Date;
+  create_time?: string;
   /**
    * Output only. The last update timestamp of the exclusion.
    * 
    * This field may not be present for older exclusions.
    */
-  update_time?: Date;
+  update_time?: string;
 }
 export interface LogExclusionAminoMsg {
   type: "/google.logging.v2.LogExclusion";
@@ -2975,9 +2975,9 @@ export interface CopyLogEntriesMetadataProtoMsg {
 /** Metadata for CopyLogEntries long running operations. */
 export interface CopyLogEntriesMetadataAmino {
   /** The create time of an operation. */
-  start_time?: Date;
+  start_time?: string;
   /** The end time of an operation. */
-  end_time?: Date;
+  end_time?: string;
   /** State of an operation. */
   state: OperationState;
   /** Identifies whether the user has requested cancellation of the operation. */
@@ -3078,7 +3078,7 @@ export const LogBucket = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): LogBucket {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LogBucket {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogBucket();
@@ -3110,7 +3110,7 @@ export const LogBucket = {
           message.restrictedFields.push(reader.string());
           break;
         case 19:
-          message.cmekSettings = CmekSettings.decode(reader, reader.uint32());
+          message.cmekSettings = CmekSettings.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -3198,8 +3198,8 @@ export const LogBucket = {
     return {
       name: object.name,
       description: object.description,
-      createTime: object?.create_time,
-      updateTime: object?.update_time,
+      createTime: object?.create_time ? fromTimestamp(Timestamp.fromAmino(object.create_time)) : undefined,
+      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined,
       retentionDays: object.retention_days,
       locked: object.locked,
       lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : -1,
@@ -3207,12 +3207,12 @@ export const LogBucket = {
       cmekSettings: object?.cmek_settings ? CmekSettings.fromAmino(object.cmek_settings) : undefined
     };
   },
-  toAmino(message: LogBucket): LogBucketAmino {
+  toAmino(message: LogBucket, useInterfaces: boolean = true): LogBucketAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.description = message.description;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
+    obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
+    obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
     obj.retention_days = message.retentionDays;
     obj.locked = message.locked;
     obj.lifecycle_state = message.lifecycleState;
@@ -3221,14 +3221,14 @@ export const LogBucket = {
     } else {
       obj.restricted_fields = [];
     }
-    obj.cmek_settings = message.cmekSettings ? CmekSettings.toAmino(message.cmekSettings) : undefined;
+    obj.cmek_settings = message.cmekSettings ? CmekSettings.toAmino(message.cmekSettings, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: LogBucketAminoMsg): LogBucket {
     return LogBucket.fromAmino(object.value);
   },
-  fromProtoMsg(message: LogBucketProtoMsg): LogBucket {
-    return LogBucket.decode(message.value);
+  fromProtoMsg(message: LogBucketProtoMsg, useInterfaces: boolean = true): LogBucket {
+    return LogBucket.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LogBucket): Uint8Array {
     return LogBucket.encode(message).finish();
@@ -3269,7 +3269,7 @@ export const LogView = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): LogView {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LogView {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogView();
@@ -3347,25 +3347,25 @@ export const LogView = {
     return {
       name: object.name,
       description: object.description,
-      createTime: object?.create_time,
-      updateTime: object?.update_time,
+      createTime: object?.create_time ? fromTimestamp(Timestamp.fromAmino(object.create_time)) : undefined,
+      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined,
       filter: object.filter
     };
   },
-  toAmino(message: LogView): LogViewAmino {
+  toAmino(message: LogView, useInterfaces: boolean = true): LogViewAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.description = message.description;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
+    obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
+    obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
     obj.filter = message.filter;
     return obj;
   },
   fromAminoMsg(object: LogViewAminoMsg): LogView {
     return LogView.fromAmino(object.value);
   },
-  fromProtoMsg(message: LogViewProtoMsg): LogView {
-    return LogView.decode(message.value);
+  fromProtoMsg(message: LogViewProtoMsg, useInterfaces: boolean = true): LogView {
+    return LogView.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LogView): Uint8Array {
     return LogView.encode(message).finish();
@@ -3434,7 +3434,7 @@ export const LogSink = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): LogSink {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LogSink {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogSink();
@@ -3457,7 +3457,7 @@ export const LogSink = {
           message.disabled = reader.bool();
           break;
         case 16:
-          message.exclusions.push(LogExclusion.decode(reader, reader.uint32()));
+          message.exclusions.push(LogExclusion.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 6:
           message.outputVersionFormat = (reader.int32() as any);
@@ -3469,7 +3469,7 @@ export const LogSink = {
           message.includeChildren = reader.bool();
           break;
         case 12:
-          message.bigqueryOptions = BigQueryOptions.decode(reader, reader.uint32());
+          message.bigqueryOptions = BigQueryOptions.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 13:
           message.createTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
@@ -3586,11 +3586,11 @@ export const LogSink = {
       writerIdentity: object.writer_identity,
       includeChildren: object.include_children,
       bigqueryOptions: object?.bigquery_options ? BigQueryOptions.fromAmino(object.bigquery_options) : undefined,
-      createTime: object?.create_time,
-      updateTime: object?.update_time
+      createTime: object?.create_time ? fromTimestamp(Timestamp.fromAmino(object.create_time)) : undefined,
+      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined
     };
   },
-  toAmino(message: LogSink): LogSinkAmino {
+  toAmino(message: LogSink, useInterfaces: boolean = true): LogSinkAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.destination = message.destination;
@@ -3598,23 +3598,23 @@ export const LogSink = {
     obj.description = message.description;
     obj.disabled = message.disabled;
     if (message.exclusions) {
-      obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toAmino(e) : undefined);
+      obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.exclusions = [];
     }
     obj.output_version_format = message.outputVersionFormat;
     obj.writer_identity = message.writerIdentity;
     obj.include_children = message.includeChildren;
-    obj.bigquery_options = message.bigqueryOptions ? BigQueryOptions.toAmino(message.bigqueryOptions) : undefined;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
+    obj.bigquery_options = message.bigqueryOptions ? BigQueryOptions.toAmino(message.bigqueryOptions, useInterfaces) : undefined;
+    obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
+    obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
     return obj;
   },
   fromAminoMsg(object: LogSinkAminoMsg): LogSink {
     return LogSink.fromAmino(object.value);
   },
-  fromProtoMsg(message: LogSinkProtoMsg): LogSink {
-    return LogSink.decode(message.value);
+  fromProtoMsg(message: LogSinkProtoMsg, useInterfaces: boolean = true): LogSink {
+    return LogSink.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LogSink): Uint8Array {
     return LogSink.encode(message).finish();
@@ -3643,7 +3643,7 @@ export const BigQueryOptions = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): BigQueryOptions {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BigQueryOptions {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBigQueryOptions();
@@ -3699,7 +3699,7 @@ export const BigQueryOptions = {
       usesTimestampColumnPartitioning: object.uses_timestamp_column_partitioning
     };
   },
-  toAmino(message: BigQueryOptions): BigQueryOptionsAmino {
+  toAmino(message: BigQueryOptions, useInterfaces: boolean = true): BigQueryOptionsAmino {
     const obj: any = {};
     obj.use_partitioned_tables = message.usePartitionedTables;
     obj.uses_timestamp_column_partitioning = message.usesTimestampColumnPartitioning;
@@ -3708,8 +3708,8 @@ export const BigQueryOptions = {
   fromAminoMsg(object: BigQueryOptionsAminoMsg): BigQueryOptions {
     return BigQueryOptions.fromAmino(object.value);
   },
-  fromProtoMsg(message: BigQueryOptionsProtoMsg): BigQueryOptions {
-    return BigQueryOptions.decode(message.value);
+  fromProtoMsg(message: BigQueryOptionsProtoMsg, useInterfaces: boolean = true): BigQueryOptions {
+    return BigQueryOptions.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BigQueryOptions): Uint8Array {
     return BigQueryOptions.encode(message).finish();
@@ -3742,7 +3742,7 @@ export const ListBucketsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListBucketsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListBucketsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListBucketsRequest();
@@ -3807,7 +3807,7 @@ export const ListBucketsRequest = {
       pageSize: object.page_size
     };
   },
-  toAmino(message: ListBucketsRequest): ListBucketsRequestAmino {
+  toAmino(message: ListBucketsRequest, useInterfaces: boolean = true): ListBucketsRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
     obj.page_token = message.pageToken;
@@ -3817,8 +3817,8 @@ export const ListBucketsRequest = {
   fromAminoMsg(object: ListBucketsRequestAminoMsg): ListBucketsRequest {
     return ListBucketsRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: ListBucketsRequestProtoMsg): ListBucketsRequest {
-    return ListBucketsRequest.decode(message.value);
+  fromProtoMsg(message: ListBucketsRequestProtoMsg, useInterfaces: boolean = true): ListBucketsRequest {
+    return ListBucketsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListBucketsRequest): Uint8Array {
     return ListBucketsRequest.encode(message).finish();
@@ -3847,7 +3847,7 @@ export const ListBucketsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListBucketsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListBucketsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListBucketsResponse();
@@ -3855,7 +3855,7 @@ export const ListBucketsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.buckets.push(LogBucket.decode(reader, reader.uint32()));
+          message.buckets.push(LogBucket.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.nextPageToken = reader.string();
@@ -3911,10 +3911,10 @@ export const ListBucketsResponse = {
       nextPageToken: object.next_page_token
     };
   },
-  toAmino(message: ListBucketsResponse): ListBucketsResponseAmino {
+  toAmino(message: ListBucketsResponse, useInterfaces: boolean = true): ListBucketsResponseAmino {
     const obj: any = {};
     if (message.buckets) {
-      obj.buckets = message.buckets.map(e => e ? LogBucket.toAmino(e) : undefined);
+      obj.buckets = message.buckets.map(e => e ? LogBucket.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.buckets = [];
     }
@@ -3924,8 +3924,8 @@ export const ListBucketsResponse = {
   fromAminoMsg(object: ListBucketsResponseAminoMsg): ListBucketsResponse {
     return ListBucketsResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: ListBucketsResponseProtoMsg): ListBucketsResponse {
-    return ListBucketsResponse.decode(message.value);
+  fromProtoMsg(message: ListBucketsResponseProtoMsg, useInterfaces: boolean = true): ListBucketsResponse {
+    return ListBucketsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListBucketsResponse): Uint8Array {
     return ListBucketsResponse.encode(message).finish();
@@ -3958,7 +3958,7 @@ export const CreateBucketRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CreateBucketRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CreateBucketRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateBucketRequest();
@@ -3972,7 +3972,7 @@ export const CreateBucketRequest = {
           message.bucketId = reader.string();
           break;
         case 3:
-          message.bucket = LogBucket.decode(reader, reader.uint32());
+          message.bucket = LogBucket.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -4025,18 +4025,18 @@ export const CreateBucketRequest = {
       bucket: object?.bucket ? LogBucket.fromAmino(object.bucket) : undefined
     };
   },
-  toAmino(message: CreateBucketRequest): CreateBucketRequestAmino {
+  toAmino(message: CreateBucketRequest, useInterfaces: boolean = true): CreateBucketRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
     obj.bucket_id = message.bucketId;
-    obj.bucket = message.bucket ? LogBucket.toAmino(message.bucket) : undefined;
+    obj.bucket = message.bucket ? LogBucket.toAmino(message.bucket, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: CreateBucketRequestAminoMsg): CreateBucketRequest {
     return CreateBucketRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: CreateBucketRequestProtoMsg): CreateBucketRequest {
-    return CreateBucketRequest.decode(message.value);
+  fromProtoMsg(message: CreateBucketRequestProtoMsg, useInterfaces: boolean = true): CreateBucketRequest {
+    return CreateBucketRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CreateBucketRequest): Uint8Array {
     return CreateBucketRequest.encode(message).finish();
@@ -4069,7 +4069,7 @@ export const UpdateBucketRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdateBucketRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpdateBucketRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateBucketRequest();
@@ -4080,10 +4080,10 @@ export const UpdateBucketRequest = {
           message.name = reader.string();
           break;
         case 2:
-          message.bucket = LogBucket.decode(reader, reader.uint32());
+          message.bucket = LogBucket.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
-          message.updateMask = FieldMask.decode(reader, reader.uint32());
+          message.updateMask = FieldMask.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -4138,18 +4138,18 @@ export const UpdateBucketRequest = {
       updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
     };
   },
-  toAmino(message: UpdateBucketRequest): UpdateBucketRequestAmino {
+  toAmino(message: UpdateBucketRequest, useInterfaces: boolean = true): UpdateBucketRequestAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.bucket = message.bucket ? LogBucket.toAmino(message.bucket) : undefined;
-    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
+    obj.bucket = message.bucket ? LogBucket.toAmino(message.bucket, useInterfaces) : undefined;
+    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: UpdateBucketRequestAminoMsg): UpdateBucketRequest {
     return UpdateBucketRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: UpdateBucketRequestProtoMsg): UpdateBucketRequest {
-    return UpdateBucketRequest.decode(message.value);
+  fromProtoMsg(message: UpdateBucketRequestProtoMsg, useInterfaces: boolean = true): UpdateBucketRequest {
+    return UpdateBucketRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpdateBucketRequest): Uint8Array {
     return UpdateBucketRequest.encode(message).finish();
@@ -4174,7 +4174,7 @@ export const GetBucketRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetBucketRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetBucketRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBucketRequest();
@@ -4221,7 +4221,7 @@ export const GetBucketRequest = {
       name: object.name
     };
   },
-  toAmino(message: GetBucketRequest): GetBucketRequestAmino {
+  toAmino(message: GetBucketRequest, useInterfaces: boolean = true): GetBucketRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -4229,8 +4229,8 @@ export const GetBucketRequest = {
   fromAminoMsg(object: GetBucketRequestAminoMsg): GetBucketRequest {
     return GetBucketRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: GetBucketRequestProtoMsg): GetBucketRequest {
-    return GetBucketRequest.decode(message.value);
+  fromProtoMsg(message: GetBucketRequestProtoMsg, useInterfaces: boolean = true): GetBucketRequest {
+    return GetBucketRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetBucketRequest): Uint8Array {
     return GetBucketRequest.encode(message).finish();
@@ -4255,7 +4255,7 @@ export const DeleteBucketRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DeleteBucketRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DeleteBucketRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteBucketRequest();
@@ -4302,7 +4302,7 @@ export const DeleteBucketRequest = {
       name: object.name
     };
   },
-  toAmino(message: DeleteBucketRequest): DeleteBucketRequestAmino {
+  toAmino(message: DeleteBucketRequest, useInterfaces: boolean = true): DeleteBucketRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -4310,8 +4310,8 @@ export const DeleteBucketRequest = {
   fromAminoMsg(object: DeleteBucketRequestAminoMsg): DeleteBucketRequest {
     return DeleteBucketRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: DeleteBucketRequestProtoMsg): DeleteBucketRequest {
-    return DeleteBucketRequest.decode(message.value);
+  fromProtoMsg(message: DeleteBucketRequestProtoMsg, useInterfaces: boolean = true): DeleteBucketRequest {
+    return DeleteBucketRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DeleteBucketRequest): Uint8Array {
     return DeleteBucketRequest.encode(message).finish();
@@ -4336,7 +4336,7 @@ export const UndeleteBucketRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UndeleteBucketRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UndeleteBucketRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUndeleteBucketRequest();
@@ -4383,7 +4383,7 @@ export const UndeleteBucketRequest = {
       name: object.name
     };
   },
-  toAmino(message: UndeleteBucketRequest): UndeleteBucketRequestAmino {
+  toAmino(message: UndeleteBucketRequest, useInterfaces: boolean = true): UndeleteBucketRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -4391,8 +4391,8 @@ export const UndeleteBucketRequest = {
   fromAminoMsg(object: UndeleteBucketRequestAminoMsg): UndeleteBucketRequest {
     return UndeleteBucketRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: UndeleteBucketRequestProtoMsg): UndeleteBucketRequest {
-    return UndeleteBucketRequest.decode(message.value);
+  fromProtoMsg(message: UndeleteBucketRequestProtoMsg, useInterfaces: boolean = true): UndeleteBucketRequest {
+    return UndeleteBucketRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UndeleteBucketRequest): Uint8Array {
     return UndeleteBucketRequest.encode(message).finish();
@@ -4425,7 +4425,7 @@ export const ListViewsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListViewsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListViewsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListViewsRequest();
@@ -4490,7 +4490,7 @@ export const ListViewsRequest = {
       pageSize: object.page_size
     };
   },
-  toAmino(message: ListViewsRequest): ListViewsRequestAmino {
+  toAmino(message: ListViewsRequest, useInterfaces: boolean = true): ListViewsRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
     obj.page_token = message.pageToken;
@@ -4500,8 +4500,8 @@ export const ListViewsRequest = {
   fromAminoMsg(object: ListViewsRequestAminoMsg): ListViewsRequest {
     return ListViewsRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: ListViewsRequestProtoMsg): ListViewsRequest {
-    return ListViewsRequest.decode(message.value);
+  fromProtoMsg(message: ListViewsRequestProtoMsg, useInterfaces: boolean = true): ListViewsRequest {
+    return ListViewsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListViewsRequest): Uint8Array {
     return ListViewsRequest.encode(message).finish();
@@ -4530,7 +4530,7 @@ export const ListViewsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListViewsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListViewsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListViewsResponse();
@@ -4538,7 +4538,7 @@ export const ListViewsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.views.push(LogView.decode(reader, reader.uint32()));
+          message.views.push(LogView.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.nextPageToken = reader.string();
@@ -4594,10 +4594,10 @@ export const ListViewsResponse = {
       nextPageToken: object.next_page_token
     };
   },
-  toAmino(message: ListViewsResponse): ListViewsResponseAmino {
+  toAmino(message: ListViewsResponse, useInterfaces: boolean = true): ListViewsResponseAmino {
     const obj: any = {};
     if (message.views) {
-      obj.views = message.views.map(e => e ? LogView.toAmino(e) : undefined);
+      obj.views = message.views.map(e => e ? LogView.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.views = [];
     }
@@ -4607,8 +4607,8 @@ export const ListViewsResponse = {
   fromAminoMsg(object: ListViewsResponseAminoMsg): ListViewsResponse {
     return ListViewsResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: ListViewsResponseProtoMsg): ListViewsResponse {
-    return ListViewsResponse.decode(message.value);
+  fromProtoMsg(message: ListViewsResponseProtoMsg, useInterfaces: boolean = true): ListViewsResponse {
+    return ListViewsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListViewsResponse): Uint8Array {
     return ListViewsResponse.encode(message).finish();
@@ -4641,7 +4641,7 @@ export const CreateViewRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CreateViewRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CreateViewRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateViewRequest();
@@ -4655,7 +4655,7 @@ export const CreateViewRequest = {
           message.viewId = reader.string();
           break;
         case 3:
-          message.view = LogView.decode(reader, reader.uint32());
+          message.view = LogView.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -4708,18 +4708,18 @@ export const CreateViewRequest = {
       view: object?.view ? LogView.fromAmino(object.view) : undefined
     };
   },
-  toAmino(message: CreateViewRequest): CreateViewRequestAmino {
+  toAmino(message: CreateViewRequest, useInterfaces: boolean = true): CreateViewRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
     obj.view_id = message.viewId;
-    obj.view = message.view ? LogView.toAmino(message.view) : undefined;
+    obj.view = message.view ? LogView.toAmino(message.view, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: CreateViewRequestAminoMsg): CreateViewRequest {
     return CreateViewRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: CreateViewRequestProtoMsg): CreateViewRequest {
-    return CreateViewRequest.decode(message.value);
+  fromProtoMsg(message: CreateViewRequestProtoMsg, useInterfaces: boolean = true): CreateViewRequest {
+    return CreateViewRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CreateViewRequest): Uint8Array {
     return CreateViewRequest.encode(message).finish();
@@ -4752,7 +4752,7 @@ export const UpdateViewRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdateViewRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpdateViewRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateViewRequest();
@@ -4763,10 +4763,10 @@ export const UpdateViewRequest = {
           message.name = reader.string();
           break;
         case 2:
-          message.view = LogView.decode(reader, reader.uint32());
+          message.view = LogView.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
-          message.updateMask = FieldMask.decode(reader, reader.uint32());
+          message.updateMask = FieldMask.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -4821,18 +4821,18 @@ export const UpdateViewRequest = {
       updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
     };
   },
-  toAmino(message: UpdateViewRequest): UpdateViewRequestAmino {
+  toAmino(message: UpdateViewRequest, useInterfaces: boolean = true): UpdateViewRequestAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.view = message.view ? LogView.toAmino(message.view) : undefined;
-    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
+    obj.view = message.view ? LogView.toAmino(message.view, useInterfaces) : undefined;
+    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: UpdateViewRequestAminoMsg): UpdateViewRequest {
     return UpdateViewRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: UpdateViewRequestProtoMsg): UpdateViewRequest {
-    return UpdateViewRequest.decode(message.value);
+  fromProtoMsg(message: UpdateViewRequestProtoMsg, useInterfaces: boolean = true): UpdateViewRequest {
+    return UpdateViewRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpdateViewRequest): Uint8Array {
     return UpdateViewRequest.encode(message).finish();
@@ -4857,7 +4857,7 @@ export const GetViewRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetViewRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetViewRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetViewRequest();
@@ -4904,7 +4904,7 @@ export const GetViewRequest = {
       name: object.name
     };
   },
-  toAmino(message: GetViewRequest): GetViewRequestAmino {
+  toAmino(message: GetViewRequest, useInterfaces: boolean = true): GetViewRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -4912,8 +4912,8 @@ export const GetViewRequest = {
   fromAminoMsg(object: GetViewRequestAminoMsg): GetViewRequest {
     return GetViewRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: GetViewRequestProtoMsg): GetViewRequest {
-    return GetViewRequest.decode(message.value);
+  fromProtoMsg(message: GetViewRequestProtoMsg, useInterfaces: boolean = true): GetViewRequest {
+    return GetViewRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetViewRequest): Uint8Array {
     return GetViewRequest.encode(message).finish();
@@ -4938,7 +4938,7 @@ export const DeleteViewRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DeleteViewRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DeleteViewRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteViewRequest();
@@ -4985,7 +4985,7 @@ export const DeleteViewRequest = {
       name: object.name
     };
   },
-  toAmino(message: DeleteViewRequest): DeleteViewRequestAmino {
+  toAmino(message: DeleteViewRequest, useInterfaces: boolean = true): DeleteViewRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -4993,8 +4993,8 @@ export const DeleteViewRequest = {
   fromAminoMsg(object: DeleteViewRequestAminoMsg): DeleteViewRequest {
     return DeleteViewRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: DeleteViewRequestProtoMsg): DeleteViewRequest {
-    return DeleteViewRequest.decode(message.value);
+  fromProtoMsg(message: DeleteViewRequestProtoMsg, useInterfaces: boolean = true): DeleteViewRequest {
+    return DeleteViewRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DeleteViewRequest): Uint8Array {
     return DeleteViewRequest.encode(message).finish();
@@ -5027,7 +5027,7 @@ export const ListSinksRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListSinksRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListSinksRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListSinksRequest();
@@ -5092,7 +5092,7 @@ export const ListSinksRequest = {
       pageSize: object.page_size
     };
   },
-  toAmino(message: ListSinksRequest): ListSinksRequestAmino {
+  toAmino(message: ListSinksRequest, useInterfaces: boolean = true): ListSinksRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
     obj.page_token = message.pageToken;
@@ -5102,8 +5102,8 @@ export const ListSinksRequest = {
   fromAminoMsg(object: ListSinksRequestAminoMsg): ListSinksRequest {
     return ListSinksRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: ListSinksRequestProtoMsg): ListSinksRequest {
-    return ListSinksRequest.decode(message.value);
+  fromProtoMsg(message: ListSinksRequestProtoMsg, useInterfaces: boolean = true): ListSinksRequest {
+    return ListSinksRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListSinksRequest): Uint8Array {
     return ListSinksRequest.encode(message).finish();
@@ -5132,7 +5132,7 @@ export const ListSinksResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListSinksResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListSinksResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListSinksResponse();
@@ -5140,7 +5140,7 @@ export const ListSinksResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.sinks.push(LogSink.decode(reader, reader.uint32()));
+          message.sinks.push(LogSink.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.nextPageToken = reader.string();
@@ -5196,10 +5196,10 @@ export const ListSinksResponse = {
       nextPageToken: object.next_page_token
     };
   },
-  toAmino(message: ListSinksResponse): ListSinksResponseAmino {
+  toAmino(message: ListSinksResponse, useInterfaces: boolean = true): ListSinksResponseAmino {
     const obj: any = {};
     if (message.sinks) {
-      obj.sinks = message.sinks.map(e => e ? LogSink.toAmino(e) : undefined);
+      obj.sinks = message.sinks.map(e => e ? LogSink.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.sinks = [];
     }
@@ -5209,8 +5209,8 @@ export const ListSinksResponse = {
   fromAminoMsg(object: ListSinksResponseAminoMsg): ListSinksResponse {
     return ListSinksResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: ListSinksResponseProtoMsg): ListSinksResponse {
-    return ListSinksResponse.decode(message.value);
+  fromProtoMsg(message: ListSinksResponseProtoMsg, useInterfaces: boolean = true): ListSinksResponse {
+    return ListSinksResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListSinksResponse): Uint8Array {
     return ListSinksResponse.encode(message).finish();
@@ -5235,7 +5235,7 @@ export const GetSinkRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetSinkRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetSinkRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSinkRequest();
@@ -5282,7 +5282,7 @@ export const GetSinkRequest = {
       sinkName: object.sink_name
     };
   },
-  toAmino(message: GetSinkRequest): GetSinkRequestAmino {
+  toAmino(message: GetSinkRequest, useInterfaces: boolean = true): GetSinkRequestAmino {
     const obj: any = {};
     obj.sink_name = message.sinkName;
     return obj;
@@ -5290,8 +5290,8 @@ export const GetSinkRequest = {
   fromAminoMsg(object: GetSinkRequestAminoMsg): GetSinkRequest {
     return GetSinkRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: GetSinkRequestProtoMsg): GetSinkRequest {
-    return GetSinkRequest.decode(message.value);
+  fromProtoMsg(message: GetSinkRequestProtoMsg, useInterfaces: boolean = true): GetSinkRequest {
+    return GetSinkRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetSinkRequest): Uint8Array {
     return GetSinkRequest.encode(message).finish();
@@ -5324,7 +5324,7 @@ export const CreateSinkRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CreateSinkRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CreateSinkRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateSinkRequest();
@@ -5335,7 +5335,7 @@ export const CreateSinkRequest = {
           message.parent = reader.string();
           break;
         case 2:
-          message.sink = LogSink.decode(reader, reader.uint32());
+          message.sink = LogSink.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.uniqueWriterIdentity = reader.bool();
@@ -5391,18 +5391,18 @@ export const CreateSinkRequest = {
       uniqueWriterIdentity: object.unique_writer_identity
     };
   },
-  toAmino(message: CreateSinkRequest): CreateSinkRequestAmino {
+  toAmino(message: CreateSinkRequest, useInterfaces: boolean = true): CreateSinkRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
-    obj.sink = message.sink ? LogSink.toAmino(message.sink) : undefined;
+    obj.sink = message.sink ? LogSink.toAmino(message.sink, useInterfaces) : undefined;
     obj.unique_writer_identity = message.uniqueWriterIdentity;
     return obj;
   },
   fromAminoMsg(object: CreateSinkRequestAminoMsg): CreateSinkRequest {
     return CreateSinkRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: CreateSinkRequestProtoMsg): CreateSinkRequest {
-    return CreateSinkRequest.decode(message.value);
+  fromProtoMsg(message: CreateSinkRequestProtoMsg, useInterfaces: boolean = true): CreateSinkRequest {
+    return CreateSinkRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CreateSinkRequest): Uint8Array {
     return CreateSinkRequest.encode(message).finish();
@@ -5439,7 +5439,7 @@ export const UpdateSinkRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdateSinkRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpdateSinkRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateSinkRequest();
@@ -5450,13 +5450,13 @@ export const UpdateSinkRequest = {
           message.sinkName = reader.string();
           break;
         case 2:
-          message.sink = LogSink.decode(reader, reader.uint32());
+          message.sink = LogSink.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.uniqueWriterIdentity = reader.bool();
           break;
         case 4:
-          message.updateMask = FieldMask.decode(reader, reader.uint32());
+          message.updateMask = FieldMask.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -5517,19 +5517,19 @@ export const UpdateSinkRequest = {
       updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
     };
   },
-  toAmino(message: UpdateSinkRequest): UpdateSinkRequestAmino {
+  toAmino(message: UpdateSinkRequest, useInterfaces: boolean = true): UpdateSinkRequestAmino {
     const obj: any = {};
     obj.sink_name = message.sinkName;
-    obj.sink = message.sink ? LogSink.toAmino(message.sink) : undefined;
+    obj.sink = message.sink ? LogSink.toAmino(message.sink, useInterfaces) : undefined;
     obj.unique_writer_identity = message.uniqueWriterIdentity;
-    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
+    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: UpdateSinkRequestAminoMsg): UpdateSinkRequest {
     return UpdateSinkRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: UpdateSinkRequestProtoMsg): UpdateSinkRequest {
-    return UpdateSinkRequest.decode(message.value);
+  fromProtoMsg(message: UpdateSinkRequestProtoMsg, useInterfaces: boolean = true): UpdateSinkRequest {
+    return UpdateSinkRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpdateSinkRequest): Uint8Array {
     return UpdateSinkRequest.encode(message).finish();
@@ -5554,7 +5554,7 @@ export const DeleteSinkRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DeleteSinkRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DeleteSinkRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteSinkRequest();
@@ -5601,7 +5601,7 @@ export const DeleteSinkRequest = {
       sinkName: object.sink_name
     };
   },
-  toAmino(message: DeleteSinkRequest): DeleteSinkRequestAmino {
+  toAmino(message: DeleteSinkRequest, useInterfaces: boolean = true): DeleteSinkRequestAmino {
     const obj: any = {};
     obj.sink_name = message.sinkName;
     return obj;
@@ -5609,8 +5609,8 @@ export const DeleteSinkRequest = {
   fromAminoMsg(object: DeleteSinkRequestAminoMsg): DeleteSinkRequest {
     return DeleteSinkRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: DeleteSinkRequestProtoMsg): DeleteSinkRequest {
-    return DeleteSinkRequest.decode(message.value);
+  fromProtoMsg(message: DeleteSinkRequestProtoMsg, useInterfaces: boolean = true): DeleteSinkRequest {
+    return DeleteSinkRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DeleteSinkRequest): Uint8Array {
     return DeleteSinkRequest.encode(message).finish();
@@ -5655,7 +5655,7 @@ export const LogExclusion = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): LogExclusion {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LogExclusion {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogExclusion();
@@ -5743,25 +5743,25 @@ export const LogExclusion = {
       description: object.description,
       filter: object.filter,
       disabled: object.disabled,
-      createTime: object?.create_time,
-      updateTime: object?.update_time
+      createTime: object?.create_time ? fromTimestamp(Timestamp.fromAmino(object.create_time)) : undefined,
+      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined
     };
   },
-  toAmino(message: LogExclusion): LogExclusionAmino {
+  toAmino(message: LogExclusion, useInterfaces: boolean = true): LogExclusionAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.description = message.description;
     obj.filter = message.filter;
     obj.disabled = message.disabled;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
+    obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
+    obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
     return obj;
   },
   fromAminoMsg(object: LogExclusionAminoMsg): LogExclusion {
     return LogExclusion.fromAmino(object.value);
   },
-  fromProtoMsg(message: LogExclusionProtoMsg): LogExclusion {
-    return LogExclusion.decode(message.value);
+  fromProtoMsg(message: LogExclusionProtoMsg, useInterfaces: boolean = true): LogExclusion {
+    return LogExclusion.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LogExclusion): Uint8Array {
     return LogExclusion.encode(message).finish();
@@ -5794,7 +5794,7 @@ export const ListExclusionsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListExclusionsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListExclusionsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListExclusionsRequest();
@@ -5859,7 +5859,7 @@ export const ListExclusionsRequest = {
       pageSize: object.page_size
     };
   },
-  toAmino(message: ListExclusionsRequest): ListExclusionsRequestAmino {
+  toAmino(message: ListExclusionsRequest, useInterfaces: boolean = true): ListExclusionsRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
     obj.page_token = message.pageToken;
@@ -5869,8 +5869,8 @@ export const ListExclusionsRequest = {
   fromAminoMsg(object: ListExclusionsRequestAminoMsg): ListExclusionsRequest {
     return ListExclusionsRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: ListExclusionsRequestProtoMsg): ListExclusionsRequest {
-    return ListExclusionsRequest.decode(message.value);
+  fromProtoMsg(message: ListExclusionsRequestProtoMsg, useInterfaces: boolean = true): ListExclusionsRequest {
+    return ListExclusionsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListExclusionsRequest): Uint8Array {
     return ListExclusionsRequest.encode(message).finish();
@@ -5899,7 +5899,7 @@ export const ListExclusionsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListExclusionsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListExclusionsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListExclusionsResponse();
@@ -5907,7 +5907,7 @@ export const ListExclusionsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.exclusions.push(LogExclusion.decode(reader, reader.uint32()));
+          message.exclusions.push(LogExclusion.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.nextPageToken = reader.string();
@@ -5963,10 +5963,10 @@ export const ListExclusionsResponse = {
       nextPageToken: object.next_page_token
     };
   },
-  toAmino(message: ListExclusionsResponse): ListExclusionsResponseAmino {
+  toAmino(message: ListExclusionsResponse, useInterfaces: boolean = true): ListExclusionsResponseAmino {
     const obj: any = {};
     if (message.exclusions) {
-      obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toAmino(e) : undefined);
+      obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.exclusions = [];
     }
@@ -5976,8 +5976,8 @@ export const ListExclusionsResponse = {
   fromAminoMsg(object: ListExclusionsResponseAminoMsg): ListExclusionsResponse {
     return ListExclusionsResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: ListExclusionsResponseProtoMsg): ListExclusionsResponse {
-    return ListExclusionsResponse.decode(message.value);
+  fromProtoMsg(message: ListExclusionsResponseProtoMsg, useInterfaces: boolean = true): ListExclusionsResponse {
+    return ListExclusionsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListExclusionsResponse): Uint8Array {
     return ListExclusionsResponse.encode(message).finish();
@@ -6002,7 +6002,7 @@ export const GetExclusionRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetExclusionRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetExclusionRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetExclusionRequest();
@@ -6049,7 +6049,7 @@ export const GetExclusionRequest = {
       name: object.name
     };
   },
-  toAmino(message: GetExclusionRequest): GetExclusionRequestAmino {
+  toAmino(message: GetExclusionRequest, useInterfaces: boolean = true): GetExclusionRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -6057,8 +6057,8 @@ export const GetExclusionRequest = {
   fromAminoMsg(object: GetExclusionRequestAminoMsg): GetExclusionRequest {
     return GetExclusionRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: GetExclusionRequestProtoMsg): GetExclusionRequest {
-    return GetExclusionRequest.decode(message.value);
+  fromProtoMsg(message: GetExclusionRequestProtoMsg, useInterfaces: boolean = true): GetExclusionRequest {
+    return GetExclusionRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetExclusionRequest): Uint8Array {
     return GetExclusionRequest.encode(message).finish();
@@ -6087,7 +6087,7 @@ export const CreateExclusionRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CreateExclusionRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CreateExclusionRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateExclusionRequest();
@@ -6098,7 +6098,7 @@ export const CreateExclusionRequest = {
           message.parent = reader.string();
           break;
         case 2:
-          message.exclusion = LogExclusion.decode(reader, reader.uint32());
+          message.exclusion = LogExclusion.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -6145,17 +6145,17 @@ export const CreateExclusionRequest = {
       exclusion: object?.exclusion ? LogExclusion.fromAmino(object.exclusion) : undefined
     };
   },
-  toAmino(message: CreateExclusionRequest): CreateExclusionRequestAmino {
+  toAmino(message: CreateExclusionRequest, useInterfaces: boolean = true): CreateExclusionRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
-    obj.exclusion = message.exclusion ? LogExclusion.toAmino(message.exclusion) : undefined;
+    obj.exclusion = message.exclusion ? LogExclusion.toAmino(message.exclusion, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: CreateExclusionRequestAminoMsg): CreateExclusionRequest {
     return CreateExclusionRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: CreateExclusionRequestProtoMsg): CreateExclusionRequest {
-    return CreateExclusionRequest.decode(message.value);
+  fromProtoMsg(message: CreateExclusionRequestProtoMsg, useInterfaces: boolean = true): CreateExclusionRequest {
+    return CreateExclusionRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CreateExclusionRequest): Uint8Array {
     return CreateExclusionRequest.encode(message).finish();
@@ -6188,7 +6188,7 @@ export const UpdateExclusionRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdateExclusionRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpdateExclusionRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateExclusionRequest();
@@ -6199,10 +6199,10 @@ export const UpdateExclusionRequest = {
           message.name = reader.string();
           break;
         case 2:
-          message.exclusion = LogExclusion.decode(reader, reader.uint32());
+          message.exclusion = LogExclusion.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.updateMask = FieldMask.decode(reader, reader.uint32());
+          message.updateMask = FieldMask.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -6257,18 +6257,18 @@ export const UpdateExclusionRequest = {
       updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
     };
   },
-  toAmino(message: UpdateExclusionRequest): UpdateExclusionRequestAmino {
+  toAmino(message: UpdateExclusionRequest, useInterfaces: boolean = true): UpdateExclusionRequestAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.exclusion = message.exclusion ? LogExclusion.toAmino(message.exclusion) : undefined;
-    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
+    obj.exclusion = message.exclusion ? LogExclusion.toAmino(message.exclusion, useInterfaces) : undefined;
+    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: UpdateExclusionRequestAminoMsg): UpdateExclusionRequest {
     return UpdateExclusionRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: UpdateExclusionRequestProtoMsg): UpdateExclusionRequest {
-    return UpdateExclusionRequest.decode(message.value);
+  fromProtoMsg(message: UpdateExclusionRequestProtoMsg, useInterfaces: boolean = true): UpdateExclusionRequest {
+    return UpdateExclusionRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpdateExclusionRequest): Uint8Array {
     return UpdateExclusionRequest.encode(message).finish();
@@ -6293,7 +6293,7 @@ export const DeleteExclusionRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DeleteExclusionRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DeleteExclusionRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteExclusionRequest();
@@ -6340,7 +6340,7 @@ export const DeleteExclusionRequest = {
       name: object.name
     };
   },
-  toAmino(message: DeleteExclusionRequest): DeleteExclusionRequestAmino {
+  toAmino(message: DeleteExclusionRequest, useInterfaces: boolean = true): DeleteExclusionRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -6348,8 +6348,8 @@ export const DeleteExclusionRequest = {
   fromAminoMsg(object: DeleteExclusionRequestAminoMsg): DeleteExclusionRequest {
     return DeleteExclusionRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: DeleteExclusionRequestProtoMsg): DeleteExclusionRequest {
-    return DeleteExclusionRequest.decode(message.value);
+  fromProtoMsg(message: DeleteExclusionRequestProtoMsg, useInterfaces: boolean = true): DeleteExclusionRequest {
+    return DeleteExclusionRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DeleteExclusionRequest): Uint8Array {
     return DeleteExclusionRequest.encode(message).finish();
@@ -6374,7 +6374,7 @@ export const GetCmekSettingsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetCmekSettingsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetCmekSettingsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetCmekSettingsRequest();
@@ -6421,7 +6421,7 @@ export const GetCmekSettingsRequest = {
       name: object.name
     };
   },
-  toAmino(message: GetCmekSettingsRequest): GetCmekSettingsRequestAmino {
+  toAmino(message: GetCmekSettingsRequest, useInterfaces: boolean = true): GetCmekSettingsRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -6429,8 +6429,8 @@ export const GetCmekSettingsRequest = {
   fromAminoMsg(object: GetCmekSettingsRequestAminoMsg): GetCmekSettingsRequest {
     return GetCmekSettingsRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: GetCmekSettingsRequestProtoMsg): GetCmekSettingsRequest {
-    return GetCmekSettingsRequest.decode(message.value);
+  fromProtoMsg(message: GetCmekSettingsRequestProtoMsg, useInterfaces: boolean = true): GetCmekSettingsRequest {
+    return GetCmekSettingsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetCmekSettingsRequest): Uint8Array {
     return GetCmekSettingsRequest.encode(message).finish();
@@ -6463,7 +6463,7 @@ export const UpdateCmekSettingsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdateCmekSettingsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpdateCmekSettingsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateCmekSettingsRequest();
@@ -6474,10 +6474,10 @@ export const UpdateCmekSettingsRequest = {
           message.name = reader.string();
           break;
         case 2:
-          message.cmekSettings = CmekSettings.decode(reader, reader.uint32());
+          message.cmekSettings = CmekSettings.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.updateMask = FieldMask.decode(reader, reader.uint32());
+          message.updateMask = FieldMask.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -6532,18 +6532,18 @@ export const UpdateCmekSettingsRequest = {
       updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
     };
   },
-  toAmino(message: UpdateCmekSettingsRequest): UpdateCmekSettingsRequestAmino {
+  toAmino(message: UpdateCmekSettingsRequest, useInterfaces: boolean = true): UpdateCmekSettingsRequestAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.cmek_settings = message.cmekSettings ? CmekSettings.toAmino(message.cmekSettings) : undefined;
-    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
+    obj.cmek_settings = message.cmekSettings ? CmekSettings.toAmino(message.cmekSettings, useInterfaces) : undefined;
+    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: UpdateCmekSettingsRequestAminoMsg): UpdateCmekSettingsRequest {
     return UpdateCmekSettingsRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: UpdateCmekSettingsRequestProtoMsg): UpdateCmekSettingsRequest {
-    return UpdateCmekSettingsRequest.decode(message.value);
+  fromProtoMsg(message: UpdateCmekSettingsRequestProtoMsg, useInterfaces: boolean = true): UpdateCmekSettingsRequest {
+    return UpdateCmekSettingsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpdateCmekSettingsRequest): Uint8Array {
     return UpdateCmekSettingsRequest.encode(message).finish();
@@ -6576,7 +6576,7 @@ export const CmekSettings = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CmekSettings {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CmekSettings {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCmekSettings();
@@ -6641,7 +6641,7 @@ export const CmekSettings = {
       serviceAccountId: object.service_account_id
     };
   },
-  toAmino(message: CmekSettings): CmekSettingsAmino {
+  toAmino(message: CmekSettings, useInterfaces: boolean = true): CmekSettingsAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.kms_key_name = message.kmsKeyName;
@@ -6651,8 +6651,8 @@ export const CmekSettings = {
   fromAminoMsg(object: CmekSettingsAminoMsg): CmekSettings {
     return CmekSettings.fromAmino(object.value);
   },
-  fromProtoMsg(message: CmekSettingsProtoMsg): CmekSettings {
-    return CmekSettings.decode(message.value);
+  fromProtoMsg(message: CmekSettingsProtoMsg, useInterfaces: boolean = true): CmekSettings {
+    return CmekSettings.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CmekSettings): Uint8Array {
     return CmekSettings.encode(message).finish();
@@ -6677,7 +6677,7 @@ export const GetSettingsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetSettingsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetSettingsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSettingsRequest();
@@ -6724,7 +6724,7 @@ export const GetSettingsRequest = {
       name: object.name
     };
   },
-  toAmino(message: GetSettingsRequest): GetSettingsRequestAmino {
+  toAmino(message: GetSettingsRequest, useInterfaces: boolean = true): GetSettingsRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     return obj;
@@ -6732,8 +6732,8 @@ export const GetSettingsRequest = {
   fromAminoMsg(object: GetSettingsRequestAminoMsg): GetSettingsRequest {
     return GetSettingsRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: GetSettingsRequestProtoMsg): GetSettingsRequest {
-    return GetSettingsRequest.decode(message.value);
+  fromProtoMsg(message: GetSettingsRequestProtoMsg, useInterfaces: boolean = true): GetSettingsRequest {
+    return GetSettingsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetSettingsRequest): Uint8Array {
     return GetSettingsRequest.encode(message).finish();
@@ -6766,7 +6766,7 @@ export const UpdateSettingsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdateSettingsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpdateSettingsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateSettingsRequest();
@@ -6777,10 +6777,10 @@ export const UpdateSettingsRequest = {
           message.name = reader.string();
           break;
         case 2:
-          message.settings = Settings.decode(reader, reader.uint32());
+          message.settings = Settings.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.updateMask = FieldMask.decode(reader, reader.uint32());
+          message.updateMask = FieldMask.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -6835,18 +6835,18 @@ export const UpdateSettingsRequest = {
       updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
     };
   },
-  toAmino(message: UpdateSettingsRequest): UpdateSettingsRequestAmino {
+  toAmino(message: UpdateSettingsRequest, useInterfaces: boolean = true): UpdateSettingsRequestAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.settings = message.settings ? Settings.toAmino(message.settings) : undefined;
-    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
+    obj.settings = message.settings ? Settings.toAmino(message.settings, useInterfaces) : undefined;
+    obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: UpdateSettingsRequestAminoMsg): UpdateSettingsRequest {
     return UpdateSettingsRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: UpdateSettingsRequestProtoMsg): UpdateSettingsRequest {
-    return UpdateSettingsRequest.decode(message.value);
+  fromProtoMsg(message: UpdateSettingsRequestProtoMsg, useInterfaces: boolean = true): UpdateSettingsRequest {
+    return UpdateSettingsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpdateSettingsRequest): Uint8Array {
     return UpdateSettingsRequest.encode(message).finish();
@@ -6887,7 +6887,7 @@ export const Settings = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Settings {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Settings {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSettings();
@@ -6970,7 +6970,7 @@ export const Settings = {
       disableDefaultSink: object.disable_default_sink
     };
   },
-  toAmino(message: Settings): SettingsAmino {
+  toAmino(message: Settings, useInterfaces: boolean = true): SettingsAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.kms_key_name = message.kmsKeyName;
@@ -6982,8 +6982,8 @@ export const Settings = {
   fromAminoMsg(object: SettingsAminoMsg): Settings {
     return Settings.fromAmino(object.value);
   },
-  fromProtoMsg(message: SettingsProtoMsg): Settings {
-    return Settings.decode(message.value);
+  fromProtoMsg(message: SettingsProtoMsg, useInterfaces: boolean = true): Settings {
+    return Settings.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Settings): Uint8Array {
     return Settings.encode(message).finish();
@@ -7016,7 +7016,7 @@ export const CopyLogEntriesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CopyLogEntriesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CopyLogEntriesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCopyLogEntriesRequest();
@@ -7081,7 +7081,7 @@ export const CopyLogEntriesRequest = {
       destination: object.destination
     };
   },
-  toAmino(message: CopyLogEntriesRequest): CopyLogEntriesRequestAmino {
+  toAmino(message: CopyLogEntriesRequest, useInterfaces: boolean = true): CopyLogEntriesRequestAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.filter = message.filter;
@@ -7091,8 +7091,8 @@ export const CopyLogEntriesRequest = {
   fromAminoMsg(object: CopyLogEntriesRequestAminoMsg): CopyLogEntriesRequest {
     return CopyLogEntriesRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: CopyLogEntriesRequestProtoMsg): CopyLogEntriesRequest {
-    return CopyLogEntriesRequest.decode(message.value);
+  fromProtoMsg(message: CopyLogEntriesRequestProtoMsg, useInterfaces: boolean = true): CopyLogEntriesRequest {
+    return CopyLogEntriesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CopyLogEntriesRequest): Uint8Array {
     return CopyLogEntriesRequest.encode(message).finish();
@@ -7141,7 +7141,7 @@ export const CopyLogEntriesMetadata = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CopyLogEntriesMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CopyLogEntriesMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCopyLogEntriesMetadata();
@@ -7161,7 +7161,7 @@ export const CopyLogEntriesMetadata = {
           message.cancellationRequested = reader.bool();
           break;
         case 5:
-          message.request = CopyLogEntriesRequest.decode(reader, reader.uint32());
+          message.request = CopyLogEntriesRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 6:
           message.progress = reader.int32();
@@ -7235,8 +7235,8 @@ export const CopyLogEntriesMetadata = {
   },
   fromAmino(object: CopyLogEntriesMetadataAmino): CopyLogEntriesMetadata {
     return {
-      startTime: object?.start_time,
-      endTime: object?.end_time,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
+      endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : undefined,
       state: isSet(object.state) ? operationStateFromJSON(object.state) : -1,
       cancellationRequested: object.cancellation_requested,
       request: object?.request ? CopyLogEntriesRequest.fromAmino(object.request) : undefined,
@@ -7244,13 +7244,13 @@ export const CopyLogEntriesMetadata = {
       writerIdentity: object.writer_identity
     };
   },
-  toAmino(message: CopyLogEntriesMetadata): CopyLogEntriesMetadataAmino {
+  toAmino(message: CopyLogEntriesMetadata, useInterfaces: boolean = true): CopyLogEntriesMetadataAmino {
     const obj: any = {};
-    obj.start_time = message.startTime;
-    obj.end_time = message.endTime;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
+    obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
     obj.state = message.state;
     obj.cancellation_requested = message.cancellationRequested;
-    obj.request = message.request ? CopyLogEntriesRequest.toAmino(message.request) : undefined;
+    obj.request = message.request ? CopyLogEntriesRequest.toAmino(message.request, useInterfaces) : undefined;
     obj.progress = message.progress;
     obj.writer_identity = message.writerIdentity;
     return obj;
@@ -7258,8 +7258,8 @@ export const CopyLogEntriesMetadata = {
   fromAminoMsg(object: CopyLogEntriesMetadataAminoMsg): CopyLogEntriesMetadata {
     return CopyLogEntriesMetadata.fromAmino(object.value);
   },
-  fromProtoMsg(message: CopyLogEntriesMetadataProtoMsg): CopyLogEntriesMetadata {
-    return CopyLogEntriesMetadata.decode(message.value);
+  fromProtoMsg(message: CopyLogEntriesMetadataProtoMsg, useInterfaces: boolean = true): CopyLogEntriesMetadata {
+    return CopyLogEntriesMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CopyLogEntriesMetadata): Uint8Array {
     return CopyLogEntriesMetadata.encode(message).finish();
@@ -7284,7 +7284,7 @@ export const CopyLogEntriesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CopyLogEntriesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CopyLogEntriesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCopyLogEntriesResponse();
@@ -7333,7 +7333,7 @@ export const CopyLogEntriesResponse = {
       logEntriesCopiedCount: BigInt(object.log_entries_copied_count)
     };
   },
-  toAmino(message: CopyLogEntriesResponse): CopyLogEntriesResponseAmino {
+  toAmino(message: CopyLogEntriesResponse, useInterfaces: boolean = true): CopyLogEntriesResponseAmino {
     const obj: any = {};
     obj.log_entries_copied_count = message.logEntriesCopiedCount ? message.logEntriesCopiedCount.toString() : undefined;
     return obj;
@@ -7341,8 +7341,8 @@ export const CopyLogEntriesResponse = {
   fromAminoMsg(object: CopyLogEntriesResponseAminoMsg): CopyLogEntriesResponse {
     return CopyLogEntriesResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: CopyLogEntriesResponseProtoMsg): CopyLogEntriesResponse {
-    return CopyLogEntriesResponse.decode(message.value);
+  fromProtoMsg(message: CopyLogEntriesResponseProtoMsg, useInterfaces: boolean = true): CopyLogEntriesResponse {
+    return CopyLogEntriesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CopyLogEntriesResponse): Uint8Array {
     return CopyLogEntriesResponse.encode(message).finish();

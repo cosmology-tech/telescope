@@ -231,7 +231,7 @@ function createBaseSystemParameterRule(): SystemParameterRule {
 export const SystemParameterRule = {
   typeUrl: "/google.api.SystemParameterRule",
   encode(message: SystemParameterRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
     for (const v of message.parameters) {
@@ -345,13 +345,13 @@ function createBaseSystemParameter(): SystemParameter {
 export const SystemParameter = {
   typeUrl: "/google.api.SystemParameter",
   encode(message: SystemParameter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.httpHeader !== "") {
+    if (message.httpHeader !== undefined) {
       writer.uint32(18).string(message.httpHeader);
     }
-    if (message.urlQueryParameter !== "") {
+    if (message.urlQueryParameter !== undefined) {
       writer.uint32(26).string(message.urlQueryParameter);
     }
     return writer;

@@ -272,7 +272,9 @@ telescope({
 | option                                    | description                                                     | defaults   |
 | ----------------------------------------- | --------------------------------------------------------------  | ---------- |
 | `interfaces.enabled`                      | enables converters convert between Any type and specific implemented interfaces.                | `true`     |
-| `interfaces.useUnionTypes`                      | Generate Any type as union types(TextProposal \| RegisterIncentiveProposal) instead of intersection types(TextProposal & RegisterIncentiveProposal).                | `false`     |
+| `interfaces.useByDefault`                 | decides if interface decoders are used by default (default for `useInterfaces` argument to `decode` and `toAmino` functions).                | `false`     |
+| `interfaces.useByDefaultRpc`                 | decides if interface decoders are used by default by the RPC clients.                | `false`     |
+| `interfaces.useUnionTypes`                | Generate Any type as union types(TextProposal \| RegisterIncentiveProposal) instead of intersection types(TextProposal & RegisterIncentiveProposal).                | `false`     |
 
 ### Prototypes Options
 
@@ -288,6 +290,7 @@ telescope({
 | `prototypes.fieldDefaultIsOptional`       | boolean value representing default optionality of field         | `false`    |
 | `prototypes.useOptionalNullable`          | use `(gogoproto.nullable)` values in determining optionality    | `true`     |
 | `prototypes.allowUndefinedTypes`          | boolean value allowing `Type`s to be `undefined`                | `false`    |
+| `prototypes.allowEncodeDefaultScalars`          | boolean value allowing encoders encoding default values of scalar types. e.g. empty string, 0 or false                | `false`    |
 | `prototypes.optionalQueryParams`          | boolean value setting queryParams to be optional                | `false`    |
 | `prototypes.optionalPageRequests`         | boolean value setting `PageRequest` fields to optional          | `false`    |
 | `prototypes.addTypeUrlToDecoders`         | add $typeUrl field to generated interfaces          | `true`    |

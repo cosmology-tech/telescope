@@ -130,7 +130,7 @@ export const PoolParams = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): PoolParams {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PoolParams {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolParams();
@@ -186,7 +186,7 @@ export const PoolParams = {
       exitFee: object.exit_fee
     };
   },
-  toAmino(message: PoolParams): PoolParamsAmino {
+  toAmino(message: PoolParams, useInterfaces: boolean = true): PoolParamsAmino {
     const obj: any = {};
     obj.swap_fee = message.swapFee;
     obj.exit_fee = message.exitFee;
@@ -195,14 +195,14 @@ export const PoolParams = {
   fromAminoMsg(object: PoolParamsAminoMsg): PoolParams {
     return PoolParams.fromAmino(object.value);
   },
-  toAminoMsg(message: PoolParams): PoolParamsAminoMsg {
+  toAminoMsg(message: PoolParams, useInterfaces: boolean = true): PoolParamsAminoMsg {
     return {
       type: "osmosis/gamm/pool-params",
-      value: PoolParams.toAmino(message)
+      value: PoolParams.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: PoolParamsProtoMsg): PoolParams {
-    return PoolParams.decode(message.value);
+  fromProtoMsg(message: PoolParamsProtoMsg, useInterfaces: boolean = true): PoolParams {
+    return PoolParams.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PoolParams): Uint8Array {
     return PoolParams.encode(message).finish();
@@ -259,7 +259,7 @@ export const Pool = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Pool {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Pool {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePool();
@@ -273,16 +273,16 @@ export const Pool = {
           message.id = reader.uint64();
           break;
         case 3:
-          message.poolParams = PoolParams.decode(reader, reader.uint32());
+          message.poolParams = PoolParams.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
           message.futurePoolGovernor = reader.string();
           break;
         case 5:
-          message.totalShares = Coin.decode(reader, reader.uint32());
+          message.totalShares = Coin.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 6:
-          message.poolLiquidity.push(Coin.decode(reader, reader.uint32()));
+          message.poolLiquidity.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 7:
           if ((tag & 7) === 2) {
@@ -398,15 +398,15 @@ export const Pool = {
       scalingFactorController: object.scaling_factor_controller
     };
   },
-  toAmino(message: Pool): PoolAmino {
+  toAmino(message: Pool, useInterfaces: boolean = true): PoolAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.id = message.id ? message.id.toString() : undefined;
-    obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined;
+    obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams, useInterfaces) : undefined;
     obj.future_pool_governor = message.futurePoolGovernor;
-    obj.total_shares = message.totalShares ? Coin.toAmino(message.totalShares) : undefined;
+    obj.total_shares = message.totalShares ? Coin.toAmino(message.totalShares, useInterfaces) : undefined;
     if (message.poolLiquidity) {
-      obj.pool_liquidity = message.poolLiquidity.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.pool_liquidity = message.poolLiquidity.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.pool_liquidity = [];
     }
@@ -421,14 +421,14 @@ export const Pool = {
   fromAminoMsg(object: PoolAminoMsg): Pool {
     return Pool.fromAmino(object.value);
   },
-  toAminoMsg(message: Pool): PoolAminoMsg {
+  toAminoMsg(message: Pool, useInterfaces: boolean = true): PoolAminoMsg {
     return {
       type: "osmosis/gamm/pool",
-      value: Pool.toAmino(message)
+      value: Pool.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: PoolProtoMsg): Pool {
-    return Pool.decode(message.value);
+  fromProtoMsg(message: PoolProtoMsg, useInterfaces: boolean = true): Pool {
+    return Pool.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Pool): Uint8Array {
     return Pool.encode(message).finish();

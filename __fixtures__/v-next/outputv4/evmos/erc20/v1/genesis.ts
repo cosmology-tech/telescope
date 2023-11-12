@@ -162,10 +162,10 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/evmos.erc20.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.enableErc20 === true) {
+    if (message.enableErc20 !== undefined) {
       writer.uint32(8).bool(message.enableErc20);
     }
-    if (message.enableEvmHook === true) {
+    if (message.enableEvmHook !== undefined) {
       writer.uint32(16).bool(message.enableEvmHook);
     }
     return writer;

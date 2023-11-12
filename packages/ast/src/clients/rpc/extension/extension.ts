@@ -7,6 +7,7 @@ import { camel } from '@cosmology/utils';
 import { getRpcClassName } from '../class/tendermint';
 
 const rpcExtensionMethod = (
+    context: GenericParseContext,
     name: string,
     svc: ProtoServiceMethod
 ) => {
@@ -36,7 +37,18 @@ const rpcExtensionMethod = (
     );
 
     return objectMethod('method', t.identifier(name), [
-        methodArgs
+        methodArgs,
+        ...(context.options.interfaces.enabled ? [
+            t.assignmentPattern(
+                identifier(
+                    'useInterfaces',
+                    t.tsTypeAnnotation(t.tsBooleanKeyword())
+                ),
+                t.identifier(
+                    (context.pluginValue('interfaces.useByDefaultRpc') ?? true).toString()
+                )
+            )
+        ] : []),
     ], t.blockStatement([
         t.returnStatement(
             t.callExpression(
@@ -45,7 +57,10 @@ const rpcExtensionMethod = (
                     t.identifier(name)
                 ),
                 [
-                    t.identifier('request')
+                    t.identifier('request'),
+                    ...(context.options.interfaces.enabled ? [
+                        t.identifier('useInterfaces')
+                    ] : []),
                 ]
             )
         )
@@ -87,6 +102,7 @@ export const createRpcQueryExtension = (
             const method = service.methods[key];
             const name = camelRpcMethods ? camel(key) : key;
             return rpcExtensionMethod(
+                context,
                 name,
                 method
             )

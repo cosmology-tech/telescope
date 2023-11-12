@@ -202,7 +202,7 @@ export const MsgSuperfluidDelegate = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSuperfluidDelegate {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSuperfluidDelegate {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidDelegate();
@@ -269,15 +269,15 @@ export const MsgSuperfluidDelegate = {
       valAddr: object.val_addr
     };
   },
-  toAmino(message: MsgSuperfluidDelegate): MsgSuperfluidDelegateAmino {
+  toAmino(message: MsgSuperfluidDelegate, useInterfaces: boolean = true): MsgSuperfluidDelegateAmino {
     const obj: any = {};
     obj.sender = message.sender;
     obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
     obj.val_addr = message.valAddr;
     return obj;
   },
-  fromProtoMsg(message: MsgSuperfluidDelegateProtoMsg): MsgSuperfluidDelegate {
-    return MsgSuperfluidDelegate.decode(message.value);
+  fromProtoMsg(message: MsgSuperfluidDelegateProtoMsg, useInterfaces: boolean = true): MsgSuperfluidDelegate {
+    return MsgSuperfluidDelegate.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSuperfluidDelegate): Uint8Array {
     return MsgSuperfluidDelegate.encode(message).finish();
@@ -298,7 +298,7 @@ export const MsgSuperfluidDelegateResponse = {
   encode(_: MsgSuperfluidDelegateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSuperfluidDelegateResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSuperfluidDelegateResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidDelegateResponse();
@@ -334,12 +334,12 @@ export const MsgSuperfluidDelegateResponse = {
   fromAmino(_: MsgSuperfluidDelegateResponseAmino): MsgSuperfluidDelegateResponse {
     return {};
   },
-  toAmino(_: MsgSuperfluidDelegateResponse): MsgSuperfluidDelegateResponseAmino {
+  toAmino(_: MsgSuperfluidDelegateResponse, useInterfaces: boolean = true): MsgSuperfluidDelegateResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgSuperfluidDelegateResponseProtoMsg): MsgSuperfluidDelegateResponse {
-    return MsgSuperfluidDelegateResponse.decode(message.value);
+  fromProtoMsg(message: MsgSuperfluidDelegateResponseProtoMsg, useInterfaces: boolean = true): MsgSuperfluidDelegateResponse {
+    return MsgSuperfluidDelegateResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSuperfluidDelegateResponse): Uint8Array {
     return MsgSuperfluidDelegateResponse.encode(message).finish();
@@ -369,7 +369,7 @@ export const MsgSuperfluidUndelegate = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSuperfluidUndelegate {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSuperfluidUndelegate {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidUndelegate();
@@ -427,14 +427,14 @@ export const MsgSuperfluidUndelegate = {
       lockId: BigInt(object.lock_id)
     };
   },
-  toAmino(message: MsgSuperfluidUndelegate): MsgSuperfluidUndelegateAmino {
+  toAmino(message: MsgSuperfluidUndelegate, useInterfaces: boolean = true): MsgSuperfluidUndelegateAmino {
     const obj: any = {};
     obj.sender = message.sender;
     obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: MsgSuperfluidUndelegateProtoMsg): MsgSuperfluidUndelegate {
-    return MsgSuperfluidUndelegate.decode(message.value);
+  fromProtoMsg(message: MsgSuperfluidUndelegateProtoMsg, useInterfaces: boolean = true): MsgSuperfluidUndelegate {
+    return MsgSuperfluidUndelegate.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSuperfluidUndelegate): Uint8Array {
     return MsgSuperfluidUndelegate.encode(message).finish();
@@ -455,7 +455,7 @@ export const MsgSuperfluidUndelegateResponse = {
   encode(_: MsgSuperfluidUndelegateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSuperfluidUndelegateResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSuperfluidUndelegateResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidUndelegateResponse();
@@ -491,12 +491,12 @@ export const MsgSuperfluidUndelegateResponse = {
   fromAmino(_: MsgSuperfluidUndelegateResponseAmino): MsgSuperfluidUndelegateResponse {
     return {};
   },
-  toAmino(_: MsgSuperfluidUndelegateResponse): MsgSuperfluidUndelegateResponseAmino {
+  toAmino(_: MsgSuperfluidUndelegateResponse, useInterfaces: boolean = true): MsgSuperfluidUndelegateResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgSuperfluidUndelegateResponseProtoMsg): MsgSuperfluidUndelegateResponse {
-    return MsgSuperfluidUndelegateResponse.decode(message.value);
+  fromProtoMsg(message: MsgSuperfluidUndelegateResponseProtoMsg, useInterfaces: boolean = true): MsgSuperfluidUndelegateResponse {
+    return MsgSuperfluidUndelegateResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSuperfluidUndelegateResponse): Uint8Array {
     return MsgSuperfluidUndelegateResponse.encode(message).finish();
@@ -526,7 +526,7 @@ export const MsgSuperfluidUnbondLock = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSuperfluidUnbondLock {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSuperfluidUnbondLock {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidUnbondLock();
@@ -584,14 +584,14 @@ export const MsgSuperfluidUnbondLock = {
       lockId: BigInt(object.lock_id)
     };
   },
-  toAmino(message: MsgSuperfluidUnbondLock): MsgSuperfluidUnbondLockAmino {
+  toAmino(message: MsgSuperfluidUnbondLock, useInterfaces: boolean = true): MsgSuperfluidUnbondLockAmino {
     const obj: any = {};
     obj.sender = message.sender;
     obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: MsgSuperfluidUnbondLockProtoMsg): MsgSuperfluidUnbondLock {
-    return MsgSuperfluidUnbondLock.decode(message.value);
+  fromProtoMsg(message: MsgSuperfluidUnbondLockProtoMsg, useInterfaces: boolean = true): MsgSuperfluidUnbondLock {
+    return MsgSuperfluidUnbondLock.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSuperfluidUnbondLock): Uint8Array {
     return MsgSuperfluidUnbondLock.encode(message).finish();
@@ -612,7 +612,7 @@ export const MsgSuperfluidUnbondLockResponse = {
   encode(_: MsgSuperfluidUnbondLockResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSuperfluidUnbondLockResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSuperfluidUnbondLockResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSuperfluidUnbondLockResponse();
@@ -648,12 +648,12 @@ export const MsgSuperfluidUnbondLockResponse = {
   fromAmino(_: MsgSuperfluidUnbondLockResponseAmino): MsgSuperfluidUnbondLockResponse {
     return {};
   },
-  toAmino(_: MsgSuperfluidUnbondLockResponse): MsgSuperfluidUnbondLockResponseAmino {
+  toAmino(_: MsgSuperfluidUnbondLockResponse, useInterfaces: boolean = true): MsgSuperfluidUnbondLockResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgSuperfluidUnbondLockResponseProtoMsg): MsgSuperfluidUnbondLockResponse {
-    return MsgSuperfluidUnbondLockResponse.decode(message.value);
+  fromProtoMsg(message: MsgSuperfluidUnbondLockResponseProtoMsg, useInterfaces: boolean = true): MsgSuperfluidUnbondLockResponse {
+    return MsgSuperfluidUnbondLockResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSuperfluidUnbondLockResponse): Uint8Array {
     return MsgSuperfluidUnbondLockResponse.encode(message).finish();
@@ -687,7 +687,7 @@ export const MsgLockAndSuperfluidDelegate = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgLockAndSuperfluidDelegate {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgLockAndSuperfluidDelegate {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLockAndSuperfluidDelegate();
@@ -698,7 +698,7 @@ export const MsgLockAndSuperfluidDelegate = {
           message.sender = reader.string();
           break;
         case 2:
-          message.coins.push(Coin.decode(reader, reader.uint32()));
+          message.coins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
           message.valAddr = reader.string();
@@ -760,19 +760,19 @@ export const MsgLockAndSuperfluidDelegate = {
       valAddr: object.val_addr
     };
   },
-  toAmino(message: MsgLockAndSuperfluidDelegate): MsgLockAndSuperfluidDelegateAmino {
+  toAmino(message: MsgLockAndSuperfluidDelegate, useInterfaces: boolean = true): MsgLockAndSuperfluidDelegateAmino {
     const obj: any = {};
     obj.sender = message.sender;
     if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.coins = [];
     }
     obj.val_addr = message.valAddr;
     return obj;
   },
-  fromProtoMsg(message: MsgLockAndSuperfluidDelegateProtoMsg): MsgLockAndSuperfluidDelegate {
-    return MsgLockAndSuperfluidDelegate.decode(message.value);
+  fromProtoMsg(message: MsgLockAndSuperfluidDelegateProtoMsg, useInterfaces: boolean = true): MsgLockAndSuperfluidDelegate {
+    return MsgLockAndSuperfluidDelegate.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgLockAndSuperfluidDelegate): Uint8Array {
     return MsgLockAndSuperfluidDelegate.encode(message).finish();
@@ -798,7 +798,7 @@ export const MsgLockAndSuperfluidDelegateResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgLockAndSuperfluidDelegateResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgLockAndSuperfluidDelegateResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLockAndSuperfluidDelegateResponse();
@@ -847,13 +847,13 @@ export const MsgLockAndSuperfluidDelegateResponse = {
       ID: BigInt(object.ID)
     };
   },
-  toAmino(message: MsgLockAndSuperfluidDelegateResponse): MsgLockAndSuperfluidDelegateResponseAmino {
+  toAmino(message: MsgLockAndSuperfluidDelegateResponse, useInterfaces: boolean = true): MsgLockAndSuperfluidDelegateResponseAmino {
     const obj: any = {};
     obj.ID = message.ID ? message.ID.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: MsgLockAndSuperfluidDelegateResponseProtoMsg): MsgLockAndSuperfluidDelegateResponse {
-    return MsgLockAndSuperfluidDelegateResponse.decode(message.value);
+  fromProtoMsg(message: MsgLockAndSuperfluidDelegateResponseProtoMsg, useInterfaces: boolean = true): MsgLockAndSuperfluidDelegateResponse {
+    return MsgLockAndSuperfluidDelegateResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgLockAndSuperfluidDelegateResponse): Uint8Array {
     return MsgLockAndSuperfluidDelegateResponse.encode(message).finish();
@@ -883,7 +883,7 @@ export const MsgUnPoolWhitelistedPool = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUnPoolWhitelistedPool {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUnPoolWhitelistedPool {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUnPoolWhitelistedPool();
@@ -941,14 +941,14 @@ export const MsgUnPoolWhitelistedPool = {
       poolId: BigInt(object.pool_id)
     };
   },
-  toAmino(message: MsgUnPoolWhitelistedPool): MsgUnPoolWhitelistedPoolAmino {
+  toAmino(message: MsgUnPoolWhitelistedPool, useInterfaces: boolean = true): MsgUnPoolWhitelistedPoolAmino {
     const obj: any = {};
     obj.sender = message.sender;
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: MsgUnPoolWhitelistedPoolProtoMsg): MsgUnPoolWhitelistedPool {
-    return MsgUnPoolWhitelistedPool.decode(message.value);
+  fromProtoMsg(message: MsgUnPoolWhitelistedPoolProtoMsg, useInterfaces: boolean = true): MsgUnPoolWhitelistedPool {
+    return MsgUnPoolWhitelistedPool.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUnPoolWhitelistedPool): Uint8Array {
     return MsgUnPoolWhitelistedPool.encode(message).finish();
@@ -976,7 +976,7 @@ export const MsgUnPoolWhitelistedPoolResponse = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUnPoolWhitelistedPoolResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUnPoolWhitelistedPoolResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUnPoolWhitelistedPoolResponse();
@@ -1038,7 +1038,7 @@ export const MsgUnPoolWhitelistedPoolResponse = {
       exitedLockIds: Array.isArray(object?.exited_lock_ids) ? object.exited_lock_ids.map((e: any) => BigInt(e)) : []
     };
   },
-  toAmino(message: MsgUnPoolWhitelistedPoolResponse): MsgUnPoolWhitelistedPoolResponseAmino {
+  toAmino(message: MsgUnPoolWhitelistedPoolResponse, useInterfaces: boolean = true): MsgUnPoolWhitelistedPoolResponseAmino {
     const obj: any = {};
     if (message.exitedLockIds) {
       obj.exited_lock_ids = message.exitedLockIds.map(e => e.toString());
@@ -1047,8 +1047,8 @@ export const MsgUnPoolWhitelistedPoolResponse = {
     }
     return obj;
   },
-  fromProtoMsg(message: MsgUnPoolWhitelistedPoolResponseProtoMsg): MsgUnPoolWhitelistedPoolResponse {
-    return MsgUnPoolWhitelistedPoolResponse.decode(message.value);
+  fromProtoMsg(message: MsgUnPoolWhitelistedPoolResponseProtoMsg, useInterfaces: boolean = true): MsgUnPoolWhitelistedPoolResponse {
+    return MsgUnPoolWhitelistedPoolResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUnPoolWhitelistedPoolResponse): Uint8Array {
     return MsgUnPoolWhitelistedPoolResponse.encode(message).finish();

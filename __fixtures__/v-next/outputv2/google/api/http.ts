@@ -1043,7 +1043,7 @@ export const Http = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Http {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Http {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHttp();
@@ -1051,7 +1051,7 @@ export const Http = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.rules.push(HttpRule.decode(reader, reader.uint32()));
+          message.rules.push(HttpRule.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.fullyDecodeReservedExpansion = reader.bool();
@@ -1107,10 +1107,10 @@ export const Http = {
       fullyDecodeReservedExpansion: object.fully_decode_reserved_expansion
     };
   },
-  toAmino(message: Http): HttpAmino {
+  toAmino(message: Http, useInterfaces: boolean = true): HttpAmino {
     const obj: any = {};
     if (message.rules) {
-      obj.rules = message.rules.map(e => e ? HttpRule.toAmino(e) : undefined);
+      obj.rules = message.rules.map(e => e ? HttpRule.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.rules = [];
     }
@@ -1120,8 +1120,8 @@ export const Http = {
   fromAminoMsg(object: HttpAminoMsg): Http {
     return Http.fromAmino(object.value);
   },
-  fromProtoMsg(message: HttpProtoMsg): Http {
-    return Http.decode(message.value);
+  fromProtoMsg(message: HttpProtoMsg, useInterfaces: boolean = true): Http {
+    return Http.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Http): Uint8Array {
     return Http.encode(message).finish();
@@ -1182,7 +1182,7 @@ export const HttpRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): HttpRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): HttpRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHttpRule();
@@ -1208,7 +1208,7 @@ export const HttpRule = {
           message.patch = reader.string();
           break;
         case 8:
-          message.custom = CustomHttpPattern.decode(reader, reader.uint32());
+          message.custom = CustomHttpPattern.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 7:
           message.body = reader.string();
@@ -1217,7 +1217,7 @@ export const HttpRule = {
           message.responseBody = reader.string();
           break;
         case 11:
-          message.additionalBindings.push(HttpRule.decode(reader, reader.uint32()));
+          message.additionalBindings.push(HttpRule.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1320,7 +1320,7 @@ export const HttpRule = {
       additionalBindings: Array.isArray(object?.additional_bindings) ? object.additional_bindings.map((e: any) => HttpRule.fromAmino(e)) : []
     };
   },
-  toAmino(message: HttpRule): HttpRuleAmino {
+  toAmino(message: HttpRule, useInterfaces: boolean = true): HttpRuleAmino {
     const obj: any = {};
     obj.selector = message.selector;
     obj.get = message.get;
@@ -1328,11 +1328,11 @@ export const HttpRule = {
     obj.post = message.post;
     obj.delete = message.delete;
     obj.patch = message.patch;
-    obj.custom = message.custom ? CustomHttpPattern.toAmino(message.custom) : undefined;
+    obj.custom = message.custom ? CustomHttpPattern.toAmino(message.custom, useInterfaces) : undefined;
     obj.body = message.body;
     obj.response_body = message.responseBody;
     if (message.additionalBindings) {
-      obj.additional_bindings = message.additionalBindings.map(e => e ? HttpRule.toAmino(e) : undefined);
+      obj.additional_bindings = message.additionalBindings.map(e => e ? HttpRule.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.additional_bindings = [];
     }
@@ -1341,8 +1341,8 @@ export const HttpRule = {
   fromAminoMsg(object: HttpRuleAminoMsg): HttpRule {
     return HttpRule.fromAmino(object.value);
   },
-  fromProtoMsg(message: HttpRuleProtoMsg): HttpRule {
-    return HttpRule.decode(message.value);
+  fromProtoMsg(message: HttpRuleProtoMsg, useInterfaces: boolean = true): HttpRule {
+    return HttpRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: HttpRule): Uint8Array {
     return HttpRule.encode(message).finish();
@@ -1371,7 +1371,7 @@ export const CustomHttpPattern = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CustomHttpPattern {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CustomHttpPattern {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCustomHttpPattern();
@@ -1427,7 +1427,7 @@ export const CustomHttpPattern = {
       path: object.path
     };
   },
-  toAmino(message: CustomHttpPattern): CustomHttpPatternAmino {
+  toAmino(message: CustomHttpPattern, useInterfaces: boolean = true): CustomHttpPatternAmino {
     const obj: any = {};
     obj.kind = message.kind;
     obj.path = message.path;
@@ -1436,8 +1436,8 @@ export const CustomHttpPattern = {
   fromAminoMsg(object: CustomHttpPatternAminoMsg): CustomHttpPattern {
     return CustomHttpPattern.fromAmino(object.value);
   },
-  fromProtoMsg(message: CustomHttpPatternProtoMsg): CustomHttpPattern {
-    return CustomHttpPattern.decode(message.value);
+  fromProtoMsg(message: CustomHttpPatternProtoMsg, useInterfaces: boolean = true): CustomHttpPattern {
+    return CustomHttpPattern.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CustomHttpPattern): Uint8Array {
     return CustomHttpPattern.encode(message).finish();

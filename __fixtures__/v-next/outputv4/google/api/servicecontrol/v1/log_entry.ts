@@ -185,10 +185,10 @@ function createBaseLogEntry_LabelsEntry(): LogEntry_LabelsEntry {
 }
 export const LogEntry_LabelsEntry = {
   encode(message: LogEntry_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -290,7 +290,7 @@ function createBaseLogEntry(): LogEntry {
 export const LogEntry = {
   typeUrl: "/google.api.servicecontrol.v1.LogEntry",
   encode(message: LogEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(82).string(message.name);
     }
     if (message.timestamp !== undefined) {
@@ -302,10 +302,10 @@ export const LogEntry = {
     if (message.httpRequest !== undefined) {
       HttpRequest.encode(message.httpRequest, writer.uint32(114).fork()).ldelim();
     }
-    if (message.trace !== "") {
+    if (message.trace !== undefined) {
       writer.uint32(122).string(message.trace);
     }
-    if (message.insertId !== "") {
+    if (message.insertId !== undefined) {
       writer.uint32(34).string(message.insertId);
     }
     Object.entries(message.labels).forEach(([key, value]) => {
@@ -525,7 +525,7 @@ export const LogEntry = {
   fromAmino(object: LogEntryAmino): LogEntry {
     return {
       name: object.name,
-      timestamp: object?.timestamp,
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       httpRequest: object?.http_request ? HttpRequest.fromAmino(object.http_request) : undefined,
       trace: object.trace,
@@ -546,7 +546,7 @@ export const LogEntry = {
   toAmino(message: LogEntry): LogEntryAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.timestamp = message.timestamp;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     obj.severity = message.severity;
     obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined;
     obj.trace = message.trace;
@@ -591,16 +591,16 @@ function createBaseLogEntryOperation(): LogEntryOperation {
 export const LogEntryOperation = {
   typeUrl: "/google.api.servicecontrol.v1.LogEntryOperation",
   encode(message: LogEntryOperation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(10).string(message.id);
     }
-    if (message.producer !== "") {
+    if (message.producer !== undefined) {
       writer.uint32(18).string(message.producer);
     }
-    if (message.first === true) {
+    if (message.first !== undefined) {
       writer.uint32(24).bool(message.first);
     }
-    if (message.last === true) {
+    if (message.last !== undefined) {
       writer.uint32(32).bool(message.last);
     }
     return writer;
@@ -721,13 +721,13 @@ function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
 export const LogEntrySourceLocation = {
   typeUrl: "/google.api.servicecontrol.v1.LogEntrySourceLocation",
   encode(message: LogEntrySourceLocation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.file !== "") {
+    if (message.file !== undefined) {
       writer.uint32(10).string(message.file);
     }
-    if (message.line !== BigInt(0)) {
+    if (message.line !== undefined) {
       writer.uint32(16).int64(message.line);
     }
-    if (message.function !== "") {
+    if (message.function !== undefined) {
       writer.uint32(26).string(message.function);
     }
     return writer;

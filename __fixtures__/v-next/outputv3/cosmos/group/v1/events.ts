@@ -188,7 +188,7 @@ export const EventCreateGroup = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EventCreateGroup {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EventCreateGroup {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventCreateGroup();
@@ -237,13 +237,13 @@ export const EventCreateGroup = {
       groupId: BigInt(object.group_id)
     };
   },
-  toAmino(message: EventCreateGroup): EventCreateGroupAmino {
+  toAmino(message: EventCreateGroup, useInterfaces: boolean = true): EventCreateGroupAmino {
     const obj: any = {};
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: EventCreateGroupProtoMsg): EventCreateGroup {
-    return EventCreateGroup.decode(message.value);
+  fromProtoMsg(message: EventCreateGroupProtoMsg, useInterfaces: boolean = true): EventCreateGroup {
+    return EventCreateGroup.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EventCreateGroup): Uint8Array {
     return EventCreateGroup.encode(message).finish();
@@ -269,7 +269,7 @@ export const EventUpdateGroup = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EventUpdateGroup {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EventUpdateGroup {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventUpdateGroup();
@@ -318,13 +318,13 @@ export const EventUpdateGroup = {
       groupId: BigInt(object.group_id)
     };
   },
-  toAmino(message: EventUpdateGroup): EventUpdateGroupAmino {
+  toAmino(message: EventUpdateGroup, useInterfaces: boolean = true): EventUpdateGroupAmino {
     const obj: any = {};
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: EventUpdateGroupProtoMsg): EventUpdateGroup {
-    return EventUpdateGroup.decode(message.value);
+  fromProtoMsg(message: EventUpdateGroupProtoMsg, useInterfaces: boolean = true): EventUpdateGroup {
+    return EventUpdateGroup.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EventUpdateGroup): Uint8Array {
     return EventUpdateGroup.encode(message).finish();
@@ -350,7 +350,7 @@ export const EventCreateGroupPolicy = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EventCreateGroupPolicy {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EventCreateGroupPolicy {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventCreateGroupPolicy();
@@ -397,13 +397,13 @@ export const EventCreateGroupPolicy = {
       address: object.address
     };
   },
-  toAmino(message: EventCreateGroupPolicy): EventCreateGroupPolicyAmino {
+  toAmino(message: EventCreateGroupPolicy, useInterfaces: boolean = true): EventCreateGroupPolicyAmino {
     const obj: any = {};
     obj.address = message.address;
     return obj;
   },
-  fromProtoMsg(message: EventCreateGroupPolicyProtoMsg): EventCreateGroupPolicy {
-    return EventCreateGroupPolicy.decode(message.value);
+  fromProtoMsg(message: EventCreateGroupPolicyProtoMsg, useInterfaces: boolean = true): EventCreateGroupPolicy {
+    return EventCreateGroupPolicy.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EventCreateGroupPolicy): Uint8Array {
     return EventCreateGroupPolicy.encode(message).finish();
@@ -429,7 +429,7 @@ export const EventUpdateGroupPolicy = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EventUpdateGroupPolicy {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EventUpdateGroupPolicy {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventUpdateGroupPolicy();
@@ -476,13 +476,13 @@ export const EventUpdateGroupPolicy = {
       address: object.address
     };
   },
-  toAmino(message: EventUpdateGroupPolicy): EventUpdateGroupPolicyAmino {
+  toAmino(message: EventUpdateGroupPolicy, useInterfaces: boolean = true): EventUpdateGroupPolicyAmino {
     const obj: any = {};
     obj.address = message.address;
     return obj;
   },
-  fromProtoMsg(message: EventUpdateGroupPolicyProtoMsg): EventUpdateGroupPolicy {
-    return EventUpdateGroupPolicy.decode(message.value);
+  fromProtoMsg(message: EventUpdateGroupPolicyProtoMsg, useInterfaces: boolean = true): EventUpdateGroupPolicy {
+    return EventUpdateGroupPolicy.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EventUpdateGroupPolicy): Uint8Array {
     return EventUpdateGroupPolicy.encode(message).finish();
@@ -508,7 +508,7 @@ export const EventSubmitProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EventSubmitProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EventSubmitProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventSubmitProposal();
@@ -557,13 +557,13 @@ export const EventSubmitProposal = {
       proposalId: BigInt(object.proposal_id)
     };
   },
-  toAmino(message: EventSubmitProposal): EventSubmitProposalAmino {
+  toAmino(message: EventSubmitProposal, useInterfaces: boolean = true): EventSubmitProposalAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: EventSubmitProposalProtoMsg): EventSubmitProposal {
-    return EventSubmitProposal.decode(message.value);
+  fromProtoMsg(message: EventSubmitProposalProtoMsg, useInterfaces: boolean = true): EventSubmitProposal {
+    return EventSubmitProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EventSubmitProposal): Uint8Array {
     return EventSubmitProposal.encode(message).finish();
@@ -589,7 +589,7 @@ export const EventWithdrawProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EventWithdrawProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EventWithdrawProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventWithdrawProposal();
@@ -638,13 +638,13 @@ export const EventWithdrawProposal = {
       proposalId: BigInt(object.proposal_id)
     };
   },
-  toAmino(message: EventWithdrawProposal): EventWithdrawProposalAmino {
+  toAmino(message: EventWithdrawProposal, useInterfaces: boolean = true): EventWithdrawProposalAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: EventWithdrawProposalProtoMsg): EventWithdrawProposal {
-    return EventWithdrawProposal.decode(message.value);
+  fromProtoMsg(message: EventWithdrawProposalProtoMsg, useInterfaces: boolean = true): EventWithdrawProposal {
+    return EventWithdrawProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EventWithdrawProposal): Uint8Array {
     return EventWithdrawProposal.encode(message).finish();
@@ -670,7 +670,7 @@ export const EventVote = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EventVote {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EventVote {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventVote();
@@ -719,13 +719,13 @@ export const EventVote = {
       proposalId: BigInt(object.proposal_id)
     };
   },
-  toAmino(message: EventVote): EventVoteAmino {
+  toAmino(message: EventVote, useInterfaces: boolean = true): EventVoteAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: EventVoteProtoMsg): EventVote {
-    return EventVote.decode(message.value);
+  fromProtoMsg(message: EventVoteProtoMsg, useInterfaces: boolean = true): EventVote {
+    return EventVote.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EventVote): Uint8Array {
     return EventVote.encode(message).finish();
@@ -755,7 +755,7 @@ export const EventExec = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EventExec {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EventExec {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventExec();
@@ -813,14 +813,14 @@ export const EventExec = {
       result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : -1
     };
   },
-  toAmino(message: EventExec): EventExecAmino {
+  toAmino(message: EventExec, useInterfaces: boolean = true): EventExecAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     obj.result = message.result;
     return obj;
   },
-  fromProtoMsg(message: EventExecProtoMsg): EventExec {
-    return EventExec.decode(message.value);
+  fromProtoMsg(message: EventExecProtoMsg, useInterfaces: boolean = true): EventExec {
+    return EventExec.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EventExec): Uint8Array {
     return EventExec.encode(message).finish();
@@ -850,7 +850,7 @@ export const EventLeaveGroup = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EventLeaveGroup {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EventLeaveGroup {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventLeaveGroup();
@@ -908,14 +908,14 @@ export const EventLeaveGroup = {
       address: object.address
     };
   },
-  toAmino(message: EventLeaveGroup): EventLeaveGroupAmino {
+  toAmino(message: EventLeaveGroup, useInterfaces: boolean = true): EventLeaveGroupAmino {
     const obj: any = {};
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
     obj.address = message.address;
     return obj;
   },
-  fromProtoMsg(message: EventLeaveGroupProtoMsg): EventLeaveGroup {
-    return EventLeaveGroup.decode(message.value);
+  fromProtoMsg(message: EventLeaveGroupProtoMsg, useInterfaces: boolean = true): EventLeaveGroup {
+    return EventLeaveGroup.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EventLeaveGroup): Uint8Array {
     return EventLeaveGroup.encode(message).finish();

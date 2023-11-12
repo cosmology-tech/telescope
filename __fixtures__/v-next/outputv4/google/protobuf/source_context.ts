@@ -31,7 +31,7 @@ function createBaseSourceContext(): SourceContext {
 export const SourceContext = {
   typeUrl: "/google.protobuf.SourceContext",
   encode(message: SourceContext, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.fileName !== "") {
+    if (message.fileName !== undefined) {
       writer.uint32(10).string(message.fileName);
     }
     return writer;

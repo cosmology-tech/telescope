@@ -44,10 +44,10 @@ function createBaseStoreKVPair(): StoreKVPair {
 export const StoreKVPair = {
   typeUrl: "/cosmos.base.store.v1beta1.StoreKVPair",
   encode(message: StoreKVPair, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.storeKey !== "") {
+    if (message.storeKey !== undefined) {
       writer.uint32(10).string(message.storeKey);
     }
-    if (message.delete === true) {
+    if (message.delete !== undefined) {
       writer.uint32(16).bool(message.delete);
     }
     if (message.key.length !== 0) {

@@ -43,7 +43,7 @@ export interface ClawbackVestingAccountAmino {
   /** funder_address specifies the account which can perform clawback */
   funder_address: string;
   /** start_time defines the time at which the vesting period begins */
-  start_time?: Date;
+  start_time?: string;
   /** lockup_periods defines the unlocking schedule relative to the start_time */
   lockup_periods: PeriodAmino[];
   /** vesting_periods defines the vesting schedule relative to the start_time */
@@ -95,7 +95,7 @@ export const ClawbackVestingAccount = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ClawbackVestingAccount {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ClawbackVestingAccount {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClawbackVestingAccount();
@@ -103,7 +103,7 @@ export const ClawbackVestingAccount = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.baseVestingAccount = BaseVestingAccount.decode(reader, reader.uint32());
+          message.baseVestingAccount = BaseVestingAccount.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.funderAddress = reader.string();
@@ -112,10 +112,10 @@ export const ClawbackVestingAccount = {
           message.startTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 4:
-          message.lockupPeriods.push(Period.decode(reader, reader.uint32()));
+          message.lockupPeriods.push(Period.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 5:
-          message.vestingPeriods.push(Period.decode(reader, reader.uint32()));
+          message.vestingPeriods.push(Period.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -191,23 +191,23 @@ export const ClawbackVestingAccount = {
     return {
       baseVestingAccount: object?.base_vesting_account ? BaseVestingAccount.fromAmino(object.base_vesting_account) : undefined,
       funderAddress: object.funder_address,
-      startTime: object.start_time,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
       lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromAmino(e)) : [],
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : []
     };
   },
-  toAmino(message: ClawbackVestingAccount): ClawbackVestingAccountAmino {
+  toAmino(message: ClawbackVestingAccount, useInterfaces: boolean = true): ClawbackVestingAccountAmino {
     const obj: any = {};
-    obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount) : undefined;
+    obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount, useInterfaces) : undefined;
     obj.funder_address = message.funderAddress;
-    obj.start_time = message.startTime;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     if (message.lockupPeriods) {
-      obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e) : undefined);
+      obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.lockup_periods = [];
     }
     if (message.vestingPeriods) {
-      obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e) : undefined);
+      obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.vesting_periods = [];
     }
@@ -216,8 +216,8 @@ export const ClawbackVestingAccount = {
   fromAminoMsg(object: ClawbackVestingAccountAminoMsg): ClawbackVestingAccount {
     return ClawbackVestingAccount.fromAmino(object.value);
   },
-  fromProtoMsg(message: ClawbackVestingAccountProtoMsg): ClawbackVestingAccount {
-    return ClawbackVestingAccount.decode(message.value);
+  fromProtoMsg(message: ClawbackVestingAccountProtoMsg, useInterfaces: boolean = true): ClawbackVestingAccount {
+    return ClawbackVestingAccount.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ClawbackVestingAccount): Uint8Array {
     return ClawbackVestingAccount.encode(message).finish();

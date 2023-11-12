@@ -358,10 +358,10 @@ function createBaseLogMetric_LabelExtractorsEntry(): LogMetric_LabelExtractorsEn
 }
 export const LogMetric_LabelExtractorsEntry = {
   encode(message: LogMetric_LabelExtractorsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -462,22 +462,22 @@ function createBaseLogMetric(): LogMetric {
 export const LogMetric = {
   typeUrl: "/google.logging.v2.LogMetric",
   encode(message: LogMetric, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
-    if (message.filter !== "") {
+    if (message.filter !== undefined) {
       writer.uint32(26).string(message.filter);
     }
-    if (message.disabled === true) {
+    if (message.disabled !== undefined) {
       writer.uint32(96).bool(message.disabled);
     }
     if (message.metricDescriptor !== undefined) {
       MetricDescriptor.encode(message.metricDescriptor, writer.uint32(42).fork()).ldelim();
     }
-    if (message.valueExtractor !== "") {
+    if (message.valueExtractor !== undefined) {
       writer.uint32(50).string(message.valueExtractor);
     }
     Object.entries(message.labelExtractors).forEach(([key, value]) => {
@@ -691,8 +691,8 @@ export const LogMetric = {
         return acc;
       }, {}) : {},
       bucketOptions: object?.bucket_options ? Distribution_BucketOptions.fromAmino(object.bucket_options) : undefined,
-      createTime: object?.create_time,
-      updateTime: object?.update_time,
+      createTime: object?.create_time ? fromTimestamp(Timestamp.fromAmino(object.create_time)) : undefined,
+      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined,
       version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
     };
   },
@@ -711,8 +711,8 @@ export const LogMetric = {
       });
     }
     obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toAmino(message.bucketOptions) : undefined;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
+    obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
+    obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
     obj.version = message.version;
     return obj;
   },
@@ -742,13 +742,13 @@ function createBaseListLogMetricsRequest(): ListLogMetricsRequest {
 export const ListLogMetricsRequest = {
   typeUrl: "/google.logging.v2.ListLogMetricsRequest",
   encode(message: ListLogMetricsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(18).string(message.pageToken);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(24).int32(message.pageSize);
     }
     return writer;
@@ -860,7 +860,7 @@ export const ListLogMetricsResponse = {
     for (const v of message.metrics) {
       LogMetric.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -969,7 +969,7 @@ function createBaseGetLogMetricRequest(): GetLogMetricRequest {
 export const GetLogMetricRequest = {
   typeUrl: "/google.logging.v2.GetLogMetricRequest",
   encode(message: GetLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.metricName !== "") {
+    if (message.metricName !== undefined) {
       writer.uint32(10).string(message.metricName);
     }
     return writer;
@@ -1056,7 +1056,7 @@ function createBaseCreateLogMetricRequest(): CreateLogMetricRequest {
 export const CreateLogMetricRequest = {
   typeUrl: "/google.logging.v2.CreateLogMetricRequest",
   encode(message: CreateLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
     if (message.metric !== undefined) {
@@ -1159,7 +1159,7 @@ function createBaseUpdateLogMetricRequest(): UpdateLogMetricRequest {
 export const UpdateLogMetricRequest = {
   typeUrl: "/google.logging.v2.UpdateLogMetricRequest",
   encode(message: UpdateLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.metricName !== "") {
+    if (message.metricName !== undefined) {
       writer.uint32(10).string(message.metricName);
     }
     if (message.metric !== undefined) {
@@ -1261,7 +1261,7 @@ function createBaseDeleteLogMetricRequest(): DeleteLogMetricRequest {
 export const DeleteLogMetricRequest = {
   typeUrl: "/google.logging.v2.DeleteLogMetricRequest",
   encode(message: DeleteLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.metricName !== "") {
+    if (message.metricName !== undefined) {
       writer.uint32(10).string(message.metricName);
     }
     return writer;

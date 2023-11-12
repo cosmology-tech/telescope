@@ -231,16 +231,16 @@ function createBaseService(): Service {
 export const Service = {
   typeUrl: "/google.api.Service",
   encode(message: Service, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(18).string(message.title);
     }
-    if (message.producerProjectId !== "") {
+    if (message.producerProjectId !== undefined) {
       writer.uint32(178).string(message.producerProjectId);
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(266).string(message.id);
     }
     for (const v of message.apis) {

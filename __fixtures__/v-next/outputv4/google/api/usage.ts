@@ -143,7 +143,7 @@ export const Usage = {
     for (const v of message.rules) {
       UsageRule.encode(v!, writer.uint32(50).fork()).ldelim();
     }
-    if (message.producerNotificationChannel !== "") {
+    if (message.producerNotificationChannel !== undefined) {
       writer.uint32(58).string(message.producerNotificationChannel);
     }
     return writer;
@@ -277,13 +277,13 @@ function createBaseUsageRule(): UsageRule {
 export const UsageRule = {
   typeUrl: "/google.api.UsageRule",
   encode(message: UsageRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
-    if (message.allowUnregisteredCalls === true) {
+    if (message.allowUnregisteredCalls !== undefined) {
       writer.uint32(16).bool(message.allowUnregisteredCalls);
     }
-    if (message.skipServiceControl === true) {
+    if (message.skipServiceControl !== undefined) {
       writer.uint32(24).bool(message.skipServiceControl);
     }
     return writer;

@@ -294,7 +294,7 @@ export const Timestamp = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Timestamp {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Timestamp {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTimestamp();
@@ -349,11 +349,11 @@ export const Timestamp = {
   fromAmino(object: TimestampAmino): Timestamp {
     return fromJsonTimestamp(object);
   },
-  toAmino(message: Timestamp): TimestampAmino {
-    return fromTimestamp(message).toString();
+  toAmino(message: Timestamp, useInterfaces: boolean = true): TimestampAmino {
+    return fromTimestamp(message).toISOString().replace(/\.\d+Z$/, "Z");
   },
-  fromProtoMsg(message: TimestampProtoMsg): Timestamp {
-    return Timestamp.decode(message.value);
+  fromProtoMsg(message: TimestampProtoMsg, useInterfaces: boolean = true): Timestamp {
+    return Timestamp.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Timestamp): Uint8Array {
     return Timestamp.encode(message).finish();

@@ -447,16 +447,16 @@ function createBaseClientState(): ClientState {
 export const ClientState = {
   typeUrl: "/ibc.lightclients.solomachine.v2.ClientState",
   encode(message: ClientState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sequence !== BigInt(0)) {
+    if (message.sequence !== undefined) {
       writer.uint32(8).uint64(message.sequence);
     }
-    if (message.isFrozen === true) {
+    if (message.isFrozen !== undefined) {
       writer.uint32(16).bool(message.isFrozen);
     }
     if (message.consensusState !== undefined) {
       ConsensusState.encode(message.consensusState, writer.uint32(26).fork()).ldelim();
     }
-    if (message.allowUpdateAfterProposal === true) {
+    if (message.allowUpdateAfterProposal !== undefined) {
       writer.uint32(32).bool(message.allowUpdateAfterProposal);
     }
     return writer;
@@ -590,10 +590,10 @@ export const ConsensusState = {
     if (message.publicKey !== undefined) {
       Any.encode(message.publicKey, writer.uint32(10).fork()).ldelim();
     }
-    if (message.diversifier !== "") {
+    if (message.diversifier !== undefined) {
       writer.uint32(18).string(message.diversifier);
     }
-    if (message.timestamp !== BigInt(0)) {
+    if (message.timestamp !== undefined) {
       writer.uint32(24).uint64(message.timestamp);
     }
     return writer;
@@ -715,10 +715,10 @@ function createBaseHeader(): Header {
 export const Header = {
   typeUrl: "/ibc.lightclients.solomachine.v2.Header",
   encode(message: Header, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sequence !== BigInt(0)) {
+    if (message.sequence !== undefined) {
       writer.uint32(8).uint64(message.sequence);
     }
-    if (message.timestamp !== BigInt(0)) {
+    if (message.timestamp !== undefined) {
       writer.uint32(16).uint64(message.timestamp);
     }
     if (message.signature.length !== 0) {
@@ -727,7 +727,7 @@ export const Header = {
     if (message.newPublicKey !== undefined) {
       Any.encode(message.newPublicKey, writer.uint32(34).fork()).ldelim();
     }
-    if (message.newDiversifier !== "") {
+    if (message.newDiversifier !== undefined) {
       writer.uint32(42).string(message.newDiversifier);
     }
     return writer;
@@ -872,10 +872,10 @@ function createBaseMisbehaviour(): Misbehaviour {
 export const Misbehaviour = {
   typeUrl: "/ibc.lightclients.solomachine.v2.Misbehaviour",
   encode(message: Misbehaviour, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
-    if (message.sequence !== BigInt(0)) {
+    if (message.sequence !== undefined) {
       writer.uint32(16).uint64(message.sequence);
     }
     if (message.signatureOne !== undefined) {
@@ -1024,7 +1024,7 @@ export const SignatureAndData = {
     if (message.data.length !== 0) {
       writer.uint32(26).bytes(message.data);
     }
-    if (message.timestamp !== BigInt(0)) {
+    if (message.timestamp !== undefined) {
       writer.uint32(32).uint64(message.timestamp);
     }
     return writer;
@@ -1155,7 +1155,7 @@ export const TimestampedSignatureData = {
     if (message.signatureData.length !== 0) {
       writer.uint32(10).bytes(message.signatureData);
     }
-    if (message.timestamp !== BigInt(0)) {
+    if (message.timestamp !== undefined) {
       writer.uint32(16).uint64(message.timestamp);
     }
     return writer;
@@ -1264,13 +1264,13 @@ function createBaseSignBytes(): SignBytes {
 export const SignBytes = {
   typeUrl: "/ibc.lightclients.solomachine.v2.SignBytes",
   encode(message: SignBytes, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sequence !== BigInt(0)) {
+    if (message.sequence !== undefined) {
       writer.uint32(8).uint64(message.sequence);
     }
-    if (message.timestamp !== BigInt(0)) {
+    if (message.timestamp !== undefined) {
       writer.uint32(16).uint64(message.timestamp);
     }
-    if (message.diversifier !== "") {
+    if (message.diversifier !== undefined) {
       writer.uint32(26).string(message.diversifier);
     }
     if (message.dataType !== 0) {
@@ -1420,7 +1420,7 @@ export const HeaderData = {
     if (message.newPubKey !== undefined) {
       Any.encode(message.newPubKey, writer.uint32(10).fork()).ldelim();
     }
-    if (message.newDiversifier !== "") {
+    if (message.newDiversifier !== undefined) {
       writer.uint32(18).string(message.newDiversifier);
     }
     return writer;
@@ -2271,7 +2271,7 @@ export const NextSequenceRecvData = {
     if (message.path.length !== 0) {
       writer.uint32(10).bytes(message.path);
     }
-    if (message.nextSeqRecv !== BigInt(0)) {
+    if (message.nextSeqRecv !== undefined) {
       writer.uint32(16).uint64(message.nextSeqRecv);
     }
     return writer;

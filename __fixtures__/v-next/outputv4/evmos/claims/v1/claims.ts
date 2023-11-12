@@ -135,10 +135,10 @@ export const Claim = {
     if (message.action !== 0) {
       writer.uint32(8).int32(message.action);
     }
-    if (message.completed === true) {
+    if (message.completed !== undefined) {
       writer.uint32(16).bool(message.completed);
     }
-    if (message.claimableAmount !== "") {
+    if (message.claimableAmount !== undefined) {
       writer.uint32(26).string(message.claimableAmount);
     }
     return writer;
@@ -248,10 +248,10 @@ function createBaseClaimsRecordAddress(): ClaimsRecordAddress {
 export const ClaimsRecordAddress = {
   typeUrl: "/evmos.claims.v1.ClaimsRecordAddress",
   encode(message: ClaimsRecordAddress, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
-    if (message.initialClaimableAmount !== "") {
+    if (message.initialClaimableAmount !== undefined) {
       writer.uint32(18).string(message.initialClaimableAmount);
     }
     writer.uint32(26).fork();
@@ -384,7 +384,7 @@ function createBaseClaimsRecord(): ClaimsRecord {
 export const ClaimsRecord = {
   typeUrl: "/evmos.claims.v1.ClaimsRecord",
   encode(message: ClaimsRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.initialClaimableAmount !== "") {
+    if (message.initialClaimableAmount !== undefined) {
       writer.uint32(10).string(message.initialClaimableAmount);
     }
     writer.uint32(18).fork();

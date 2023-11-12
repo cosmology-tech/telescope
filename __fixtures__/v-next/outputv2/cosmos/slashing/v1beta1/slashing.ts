@@ -49,7 +49,7 @@ export interface ValidatorSigningInfoAmino {
    */
   index_offset: string;
   /** Timestamp until which the validator is jailed due to liveness downtime. */
-  jailed_until?: Date;
+  jailed_until?: string;
   /**
    * Whether or not a validator has been tombstoned (killed out of validator set). It is set
    * once the validator commits an equivocation or for any other configured misbehiavor.
@@ -143,7 +143,7 @@ export const ValidatorSigningInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorSigningInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorSigningInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorSigningInfo();
@@ -236,17 +236,17 @@ export const ValidatorSigningInfo = {
       address: object.address,
       startHeight: BigInt(object.start_height),
       indexOffset: BigInt(object.index_offset),
-      jailedUntil: object.jailed_until,
+      jailedUntil: object?.jailed_until ? fromTimestamp(Timestamp.fromAmino(object.jailed_until)) : undefined,
       tombstoned: object.tombstoned,
       missedBlocksCounter: BigInt(object.missed_blocks_counter)
     };
   },
-  toAmino(message: ValidatorSigningInfo): ValidatorSigningInfoAmino {
+  toAmino(message: ValidatorSigningInfo, useInterfaces: boolean = true): ValidatorSigningInfoAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.start_height = message.startHeight ? message.startHeight.toString() : undefined;
     obj.index_offset = message.indexOffset ? message.indexOffset.toString() : undefined;
-    obj.jailed_until = message.jailedUntil;
+    obj.jailed_until = message.jailedUntil ? Timestamp.toAmino(toTimestamp(message.jailedUntil)) : undefined;
     obj.tombstoned = message.tombstoned;
     obj.missed_blocks_counter = message.missedBlocksCounter ? message.missedBlocksCounter.toString() : undefined;
     return obj;
@@ -254,14 +254,14 @@ export const ValidatorSigningInfo = {
   fromAminoMsg(object: ValidatorSigningInfoAminoMsg): ValidatorSigningInfo {
     return ValidatorSigningInfo.fromAmino(object.value);
   },
-  toAminoMsg(message: ValidatorSigningInfo): ValidatorSigningInfoAminoMsg {
+  toAminoMsg(message: ValidatorSigningInfo, useInterfaces: boolean = true): ValidatorSigningInfoAminoMsg {
     return {
       type: "cosmos-sdk/ValidatorSigningInfo",
-      value: ValidatorSigningInfo.toAmino(message)
+      value: ValidatorSigningInfo.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ValidatorSigningInfoProtoMsg): ValidatorSigningInfo {
-    return ValidatorSigningInfo.decode(message.value);
+  fromProtoMsg(message: ValidatorSigningInfoProtoMsg, useInterfaces: boolean = true): ValidatorSigningInfo {
+    return ValidatorSigningInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorSigningInfo): Uint8Array {
     return ValidatorSigningInfo.encode(message).finish();
@@ -303,7 +303,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -317,7 +317,7 @@ export const Params = {
           message.minSignedPerWindow = reader.bytes();
           break;
         case 3:
-          message.downtimeJailDuration = Duration.decode(reader, reader.uint32());
+          message.downtimeJailDuration = Duration.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
           message.slashFractionDoubleSign = reader.bytes();
@@ -390,11 +390,11 @@ export const Params = {
       slashFractionDowntime: object.slash_fraction_downtime
     };
   },
-  toAmino(message: Params): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
     obj.signed_blocks_window = message.signedBlocksWindow ? message.signedBlocksWindow.toString() : undefined;
     obj.min_signed_per_window = message.minSignedPerWindow;
-    obj.downtime_jail_duration = message.downtimeJailDuration ? Duration.toAmino(message.downtimeJailDuration) : undefined;
+    obj.downtime_jail_duration = message.downtimeJailDuration ? Duration.toAmino(message.downtimeJailDuration, useInterfaces) : undefined;
     obj.slash_fraction_double_sign = message.slashFractionDoubleSign;
     obj.slash_fraction_downtime = message.slashFractionDowntime;
     return obj;
@@ -402,14 +402,14 @@ export const Params = {
   fromAminoMsg(object: ParamsAminoMsg): Params {
     return Params.fromAmino(object.value);
   },
-  toAminoMsg(message: Params): ParamsAminoMsg {
+  toAminoMsg(message: Params, useInterfaces: boolean = true): ParamsAminoMsg {
     return {
       type: "cosmos-sdk/Params",
-      value: Params.toAmino(message)
+      value: Params.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
+    return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();

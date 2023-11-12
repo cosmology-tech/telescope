@@ -68,7 +68,7 @@ export const Endpoint = {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);
     }
-    if (message.sequenceNumber !== 0) {
+    if (message.sequenceNumber !== undefined) {
       writer.uint32(16).uint32(message.sequenceNumber);
     }
     return writer;

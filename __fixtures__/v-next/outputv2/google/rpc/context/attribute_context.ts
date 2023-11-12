@@ -597,7 +597,7 @@ export interface AttributeContext_RequestAmino {
    * The timestamp when the `destination` service receives the last byte of
    * the request.
    */
-  time?: Date;
+  time?: string;
   /** The HTTP request size in bytes. If unknown, it must be -1. */
   size: string;
   /**
@@ -718,7 +718,7 @@ export interface AttributeContext_ResponseAmino {
    * The timestamp when the `destination` service sends the last byte of
    * the response.
    */
-  time?: Date;
+  time?: string;
   /**
    * The length of time it takes the backend service to fully respond to a
    * request. Measured from when the destination service starts to send the
@@ -948,18 +948,18 @@ export interface AttributeContext_ResourceAmino {
    * Output only. The timestamp when the resource was created. This may
    * be either the time creation was initiated or when it was completed.
    */
-  create_time?: Date;
+  create_time?: string;
   /**
    * Output only. The timestamp when the resource was last updated. Any
    * change to the resource made by users must refresh this value.
    * Changes to a resource made by the service should refresh this value.
    */
-  update_time?: Date;
+  update_time?: string;
   /**
    * Output only. The timestamp when the resource was deleted.
    * If the resource is not deleted, this must be empty.
    */
-  delete_time?: Date;
+  delete_time?: string;
   /**
    * Output only. An opaque value that uniquely identifies a version or
    * generation of a resource. It can be used to confirm that the client
@@ -1046,7 +1046,7 @@ export const AttributeContext = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AttributeContext {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AttributeContext {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributeContext();
@@ -1054,28 +1054,28 @@ export const AttributeContext = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 7:
-          message.origin = AttributeContext_Peer.decode(reader, reader.uint32());
+          message.origin = AttributeContext_Peer.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 1:
-          message.source = AttributeContext_Peer.decode(reader, reader.uint32());
+          message.source = AttributeContext_Peer.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.destination = AttributeContext_Peer.decode(reader, reader.uint32());
+          message.destination = AttributeContext_Peer.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.request = AttributeContext_Request.decode(reader, reader.uint32());
+          message.request = AttributeContext_Request.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
-          message.response = AttributeContext_Response.decode(reader, reader.uint32());
+          message.response = AttributeContext_Response.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
-          message.resource = AttributeContext_Resource.decode(reader, reader.uint32());
+          message.resource = AttributeContext_Resource.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 6:
-          message.api = AttributeContext_Api.decode(reader, reader.uint32());
+          message.api = AttributeContext_Api.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 8:
-          message.extensions.push(Any.decode(reader, reader.uint32()));
+          message.extensions.push(Any.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1178,17 +1178,17 @@ export const AttributeContext = {
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
     };
   },
-  toAmino(message: AttributeContext): AttributeContextAmino {
+  toAmino(message: AttributeContext, useInterfaces: boolean = true): AttributeContextAmino {
     const obj: any = {};
-    obj.origin = message.origin ? AttributeContext_Peer.toAmino(message.origin) : undefined;
-    obj.source = message.source ? AttributeContext_Peer.toAmino(message.source) : undefined;
-    obj.destination = message.destination ? AttributeContext_Peer.toAmino(message.destination) : undefined;
-    obj.request = message.request ? AttributeContext_Request.toAmino(message.request) : undefined;
-    obj.response = message.response ? AttributeContext_Response.toAmino(message.response) : undefined;
-    obj.resource = message.resource ? AttributeContext_Resource.toAmino(message.resource) : undefined;
-    obj.api = message.api ? AttributeContext_Api.toAmino(message.api) : undefined;
+    obj.origin = message.origin ? AttributeContext_Peer.toAmino(message.origin, useInterfaces) : undefined;
+    obj.source = message.source ? AttributeContext_Peer.toAmino(message.source, useInterfaces) : undefined;
+    obj.destination = message.destination ? AttributeContext_Peer.toAmino(message.destination, useInterfaces) : undefined;
+    obj.request = message.request ? AttributeContext_Request.toAmino(message.request, useInterfaces) : undefined;
+    obj.response = message.response ? AttributeContext_Response.toAmino(message.response, useInterfaces) : undefined;
+    obj.resource = message.resource ? AttributeContext_Resource.toAmino(message.resource, useInterfaces) : undefined;
+    obj.api = message.api ? AttributeContext_Api.toAmino(message.api, useInterfaces) : undefined;
     if (message.extensions) {
-      obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
+      obj.extensions = message.extensions.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.extensions = [];
     }
@@ -1197,8 +1197,8 @@ export const AttributeContext = {
   fromAminoMsg(object: AttributeContextAminoMsg): AttributeContext {
     return AttributeContext.fromAmino(object.value);
   },
-  fromProtoMsg(message: AttributeContextProtoMsg): AttributeContext {
-    return AttributeContext.decode(message.value);
+  fromProtoMsg(message: AttributeContextProtoMsg, useInterfaces: boolean = true): AttributeContext {
+    return AttributeContext.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AttributeContext): Uint8Array {
     return AttributeContext.encode(message).finish();
@@ -1226,7 +1226,7 @@ export const AttributeContext_Peer_LabelsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AttributeContext_Peer_LabelsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AttributeContext_Peer_LabelsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributeContext_Peer_LabelsEntry();
@@ -1282,7 +1282,7 @@ export const AttributeContext_Peer_LabelsEntry = {
       value: object.value
     };
   },
-  toAmino(message: AttributeContext_Peer_LabelsEntry): AttributeContext_Peer_LabelsEntryAmino {
+  toAmino(message: AttributeContext_Peer_LabelsEntry, useInterfaces: boolean = true): AttributeContext_Peer_LabelsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -1291,8 +1291,8 @@ export const AttributeContext_Peer_LabelsEntry = {
   fromAminoMsg(object: AttributeContext_Peer_LabelsEntryAminoMsg): AttributeContext_Peer_LabelsEntry {
     return AttributeContext_Peer_LabelsEntry.fromAmino(object.value);
   },
-  fromProtoMsg(message: AttributeContext_Peer_LabelsEntryProtoMsg): AttributeContext_Peer_LabelsEntry {
-    return AttributeContext_Peer_LabelsEntry.decode(message.value);
+  fromProtoMsg(message: AttributeContext_Peer_LabelsEntryProtoMsg, useInterfaces: boolean = true): AttributeContext_Peer_LabelsEntry {
+    return AttributeContext_Peer_LabelsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AttributeContext_Peer_LabelsEntry): Uint8Array {
     return AttributeContext_Peer_LabelsEntry.encode(message).finish();
@@ -1330,7 +1330,7 @@ export const AttributeContext_Peer = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AttributeContext_Peer {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AttributeContext_Peer {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributeContext_Peer();
@@ -1450,7 +1450,7 @@ export const AttributeContext_Peer = {
       regionCode: object.region_code
     };
   },
-  toAmino(message: AttributeContext_Peer): AttributeContext_PeerAmino {
+  toAmino(message: AttributeContext_Peer, useInterfaces: boolean = true): AttributeContext_PeerAmino {
     const obj: any = {};
     obj.ip = message.ip;
     obj.port = message.port ? message.port.toString() : undefined;
@@ -1467,8 +1467,8 @@ export const AttributeContext_Peer = {
   fromAminoMsg(object: AttributeContext_PeerAminoMsg): AttributeContext_Peer {
     return AttributeContext_Peer.fromAmino(object.value);
   },
-  fromProtoMsg(message: AttributeContext_PeerProtoMsg): AttributeContext_Peer {
-    return AttributeContext_Peer.decode(message.value);
+  fromProtoMsg(message: AttributeContext_PeerProtoMsg, useInterfaces: boolean = true): AttributeContext_Peer {
+    return AttributeContext_Peer.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AttributeContext_Peer): Uint8Array {
     return AttributeContext_Peer.encode(message).finish();
@@ -1505,7 +1505,7 @@ export const AttributeContext_Api = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AttributeContext_Api {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AttributeContext_Api {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributeContext_Api();
@@ -1579,7 +1579,7 @@ export const AttributeContext_Api = {
       version: object.version
     };
   },
-  toAmino(message: AttributeContext_Api): AttributeContext_ApiAmino {
+  toAmino(message: AttributeContext_Api, useInterfaces: boolean = true): AttributeContext_ApiAmino {
     const obj: any = {};
     obj.service = message.service;
     obj.operation = message.operation;
@@ -1590,8 +1590,8 @@ export const AttributeContext_Api = {
   fromAminoMsg(object: AttributeContext_ApiAminoMsg): AttributeContext_Api {
     return AttributeContext_Api.fromAmino(object.value);
   },
-  fromProtoMsg(message: AttributeContext_ApiProtoMsg): AttributeContext_Api {
-    return AttributeContext_Api.decode(message.value);
+  fromProtoMsg(message: AttributeContext_ApiProtoMsg, useInterfaces: boolean = true): AttributeContext_Api {
+    return AttributeContext_Api.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AttributeContext_Api): Uint8Array {
     return AttributeContext_Api.encode(message).finish();
@@ -1632,7 +1632,7 @@ export const AttributeContext_Auth = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AttributeContext_Auth {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AttributeContext_Auth {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributeContext_Auth();
@@ -1649,7 +1649,7 @@ export const AttributeContext_Auth = {
           message.presenter = reader.string();
           break;
         case 4:
-          message.claims = Struct.decode(reader, reader.uint32());
+          message.claims = Struct.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
           message.accessLevels.push(reader.string());
@@ -1733,7 +1733,7 @@ export const AttributeContext_Auth = {
       accessLevels: Array.isArray(object?.access_levels) ? object.access_levels.map((e: any) => e) : []
     };
   },
-  toAmino(message: AttributeContext_Auth): AttributeContext_AuthAmino {
+  toAmino(message: AttributeContext_Auth, useInterfaces: boolean = true): AttributeContext_AuthAmino {
     const obj: any = {};
     obj.principal = message.principal;
     if (message.audiences) {
@@ -1742,7 +1742,7 @@ export const AttributeContext_Auth = {
       obj.audiences = [];
     }
     obj.presenter = message.presenter;
-    obj.claims = message.claims ? Struct.toAmino(message.claims) : undefined;
+    obj.claims = message.claims ? Struct.toAmino(message.claims, useInterfaces) : undefined;
     if (message.accessLevels) {
       obj.access_levels = message.accessLevels.map(e => e);
     } else {
@@ -1753,8 +1753,8 @@ export const AttributeContext_Auth = {
   fromAminoMsg(object: AttributeContext_AuthAminoMsg): AttributeContext_Auth {
     return AttributeContext_Auth.fromAmino(object.value);
   },
-  fromProtoMsg(message: AttributeContext_AuthProtoMsg): AttributeContext_Auth {
-    return AttributeContext_Auth.decode(message.value);
+  fromProtoMsg(message: AttributeContext_AuthProtoMsg, useInterfaces: boolean = true): AttributeContext_Auth {
+    return AttributeContext_Auth.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AttributeContext_Auth): Uint8Array {
     return AttributeContext_Auth.encode(message).finish();
@@ -1782,7 +1782,7 @@ export const AttributeContext_Request_HeadersEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AttributeContext_Request_HeadersEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AttributeContext_Request_HeadersEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributeContext_Request_HeadersEntry();
@@ -1838,7 +1838,7 @@ export const AttributeContext_Request_HeadersEntry = {
       value: object.value
     };
   },
-  toAmino(message: AttributeContext_Request_HeadersEntry): AttributeContext_Request_HeadersEntryAmino {
+  toAmino(message: AttributeContext_Request_HeadersEntry, useInterfaces: boolean = true): AttributeContext_Request_HeadersEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -1847,8 +1847,8 @@ export const AttributeContext_Request_HeadersEntry = {
   fromAminoMsg(object: AttributeContext_Request_HeadersEntryAminoMsg): AttributeContext_Request_HeadersEntry {
     return AttributeContext_Request_HeadersEntry.fromAmino(object.value);
   },
-  fromProtoMsg(message: AttributeContext_Request_HeadersEntryProtoMsg): AttributeContext_Request_HeadersEntry {
-    return AttributeContext_Request_HeadersEntry.decode(message.value);
+  fromProtoMsg(message: AttributeContext_Request_HeadersEntryProtoMsg, useInterfaces: boolean = true): AttributeContext_Request_HeadersEntry {
+    return AttributeContext_Request_HeadersEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AttributeContext_Request_HeadersEntry): Uint8Array {
     return AttributeContext_Request_HeadersEntry.encode(message).finish();
@@ -1914,7 +1914,7 @@ export const AttributeContext_Request = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AttributeContext_Request {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AttributeContext_Request {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributeContext_Request();
@@ -1958,7 +1958,7 @@ export const AttributeContext_Request = {
           message.reason = reader.string();
           break;
         case 13:
-          message.auth = AttributeContext_Auth.decode(reader, reader.uint32());
+          message.auth = AttributeContext_Auth.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2092,14 +2092,14 @@ export const AttributeContext_Request = {
       host: object.host,
       scheme: object.scheme,
       query: object.query,
-      time: object?.time,
+      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
       size: BigInt(object.size),
       protocol: object.protocol,
       reason: object.reason,
       auth: object?.auth ? AttributeContext_Auth.fromAmino(object.auth) : undefined
     };
   },
-  toAmino(message: AttributeContext_Request): AttributeContext_RequestAmino {
+  toAmino(message: AttributeContext_Request, useInterfaces: boolean = true): AttributeContext_RequestAmino {
     const obj: any = {};
     obj.id = message.id;
     obj.method = message.method;
@@ -2113,18 +2113,18 @@ export const AttributeContext_Request = {
     obj.host = message.host;
     obj.scheme = message.scheme;
     obj.query = message.query;
-    obj.time = message.time;
+    obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
     obj.size = message.size ? message.size.toString() : undefined;
     obj.protocol = message.protocol;
     obj.reason = message.reason;
-    obj.auth = message.auth ? AttributeContext_Auth.toAmino(message.auth) : undefined;
+    obj.auth = message.auth ? AttributeContext_Auth.toAmino(message.auth, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: AttributeContext_RequestAminoMsg): AttributeContext_Request {
     return AttributeContext_Request.fromAmino(object.value);
   },
-  fromProtoMsg(message: AttributeContext_RequestProtoMsg): AttributeContext_Request {
-    return AttributeContext_Request.decode(message.value);
+  fromProtoMsg(message: AttributeContext_RequestProtoMsg, useInterfaces: boolean = true): AttributeContext_Request {
+    return AttributeContext_Request.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AttributeContext_Request): Uint8Array {
     return AttributeContext_Request.encode(message).finish();
@@ -2152,7 +2152,7 @@ export const AttributeContext_Response_HeadersEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AttributeContext_Response_HeadersEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AttributeContext_Response_HeadersEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributeContext_Response_HeadersEntry();
@@ -2208,7 +2208,7 @@ export const AttributeContext_Response_HeadersEntry = {
       value: object.value
     };
   },
-  toAmino(message: AttributeContext_Response_HeadersEntry): AttributeContext_Response_HeadersEntryAmino {
+  toAmino(message: AttributeContext_Response_HeadersEntry, useInterfaces: boolean = true): AttributeContext_Response_HeadersEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -2217,8 +2217,8 @@ export const AttributeContext_Response_HeadersEntry = {
   fromAminoMsg(object: AttributeContext_Response_HeadersEntryAminoMsg): AttributeContext_Response_HeadersEntry {
     return AttributeContext_Response_HeadersEntry.fromAmino(object.value);
   },
-  fromProtoMsg(message: AttributeContext_Response_HeadersEntryProtoMsg): AttributeContext_Response_HeadersEntry {
-    return AttributeContext_Response_HeadersEntry.decode(message.value);
+  fromProtoMsg(message: AttributeContext_Response_HeadersEntryProtoMsg, useInterfaces: boolean = true): AttributeContext_Response_HeadersEntry {
+    return AttributeContext_Response_HeadersEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AttributeContext_Response_HeadersEntry): Uint8Array {
     return AttributeContext_Response_HeadersEntry.encode(message).finish();
@@ -2256,7 +2256,7 @@ export const AttributeContext_Response = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AttributeContext_Response {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AttributeContext_Response {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributeContext_Response();
@@ -2279,7 +2279,7 @@ export const AttributeContext_Response = {
           message.time = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 5:
-          message.backendLatency = Duration.decode(reader, reader.uint32());
+          message.backendLatency = Duration.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2376,11 +2376,11 @@ export const AttributeContext_Response = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      time: object?.time,
+      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
       backendLatency: object?.backend_latency ? Duration.fromAmino(object.backend_latency) : undefined
     };
   },
-  toAmino(message: AttributeContext_Response): AttributeContext_ResponseAmino {
+  toAmino(message: AttributeContext_Response, useInterfaces: boolean = true): AttributeContext_ResponseAmino {
     const obj: any = {};
     obj.code = message.code ? message.code.toString() : undefined;
     obj.size = message.size ? message.size.toString() : undefined;
@@ -2390,15 +2390,15 @@ export const AttributeContext_Response = {
         obj.headers[k] = v;
       });
     }
-    obj.time = message.time;
-    obj.backend_latency = message.backendLatency ? Duration.toAmino(message.backendLatency) : undefined;
+    obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
+    obj.backend_latency = message.backendLatency ? Duration.toAmino(message.backendLatency, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: AttributeContext_ResponseAminoMsg): AttributeContext_Response {
     return AttributeContext_Response.fromAmino(object.value);
   },
-  fromProtoMsg(message: AttributeContext_ResponseProtoMsg): AttributeContext_Response {
-    return AttributeContext_Response.decode(message.value);
+  fromProtoMsg(message: AttributeContext_ResponseProtoMsg, useInterfaces: boolean = true): AttributeContext_Response {
+    return AttributeContext_Response.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AttributeContext_Response): Uint8Array {
     return AttributeContext_Response.encode(message).finish();
@@ -2426,7 +2426,7 @@ export const AttributeContext_Resource_LabelsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AttributeContext_Resource_LabelsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AttributeContext_Resource_LabelsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributeContext_Resource_LabelsEntry();
@@ -2482,7 +2482,7 @@ export const AttributeContext_Resource_LabelsEntry = {
       value: object.value
     };
   },
-  toAmino(message: AttributeContext_Resource_LabelsEntry): AttributeContext_Resource_LabelsEntryAmino {
+  toAmino(message: AttributeContext_Resource_LabelsEntry, useInterfaces: boolean = true): AttributeContext_Resource_LabelsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -2491,8 +2491,8 @@ export const AttributeContext_Resource_LabelsEntry = {
   fromAminoMsg(object: AttributeContext_Resource_LabelsEntryAminoMsg): AttributeContext_Resource_LabelsEntry {
     return AttributeContext_Resource_LabelsEntry.fromAmino(object.value);
   },
-  fromProtoMsg(message: AttributeContext_Resource_LabelsEntryProtoMsg): AttributeContext_Resource_LabelsEntry {
-    return AttributeContext_Resource_LabelsEntry.decode(message.value);
+  fromProtoMsg(message: AttributeContext_Resource_LabelsEntryProtoMsg, useInterfaces: boolean = true): AttributeContext_Resource_LabelsEntry {
+    return AttributeContext_Resource_LabelsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AttributeContext_Resource_LabelsEntry): Uint8Array {
     return AttributeContext_Resource_LabelsEntry.encode(message).finish();
@@ -2514,7 +2514,7 @@ export const AttributeContext_Resource_AnnotationsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AttributeContext_Resource_AnnotationsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AttributeContext_Resource_AnnotationsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributeContext_Resource_AnnotationsEntry();
@@ -2570,7 +2570,7 @@ export const AttributeContext_Resource_AnnotationsEntry = {
       value: object.value
     };
   },
-  toAmino(message: AttributeContext_Resource_AnnotationsEntry): AttributeContext_Resource_AnnotationsEntryAmino {
+  toAmino(message: AttributeContext_Resource_AnnotationsEntry, useInterfaces: boolean = true): AttributeContext_Resource_AnnotationsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -2579,8 +2579,8 @@ export const AttributeContext_Resource_AnnotationsEntry = {
   fromAminoMsg(object: AttributeContext_Resource_AnnotationsEntryAminoMsg): AttributeContext_Resource_AnnotationsEntry {
     return AttributeContext_Resource_AnnotationsEntry.fromAmino(object.value);
   },
-  fromProtoMsg(message: AttributeContext_Resource_AnnotationsEntryProtoMsg): AttributeContext_Resource_AnnotationsEntry {
-    return AttributeContext_Resource_AnnotationsEntry.decode(message.value);
+  fromProtoMsg(message: AttributeContext_Resource_AnnotationsEntryProtoMsg, useInterfaces: boolean = true): AttributeContext_Resource_AnnotationsEntry {
+    return AttributeContext_Resource_AnnotationsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AttributeContext_Resource_AnnotationsEntry): Uint8Array {
     return AttributeContext_Resource_AnnotationsEntry.encode(message).finish();
@@ -2649,7 +2649,7 @@ export const AttributeContext_Resource = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AttributeContext_Resource {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AttributeContext_Resource {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttributeContext_Resource();
@@ -2858,14 +2858,14 @@ export const AttributeContext_Resource = {
         return acc;
       }, {}) : {},
       displayName: object.display_name,
-      createTime: object?.create_time,
-      updateTime: object?.update_time,
-      deleteTime: object?.delete_time,
+      createTime: object?.create_time ? fromTimestamp(Timestamp.fromAmino(object.create_time)) : undefined,
+      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined,
+      deleteTime: object?.delete_time ? fromTimestamp(Timestamp.fromAmino(object.delete_time)) : undefined,
       etag: object.etag,
       location: object.location
     };
   },
-  toAmino(message: AttributeContext_Resource): AttributeContext_ResourceAmino {
+  toAmino(message: AttributeContext_Resource, useInterfaces: boolean = true): AttributeContext_ResourceAmino {
     const obj: any = {};
     obj.service = message.service;
     obj.name = message.name;
@@ -2884,9 +2884,9 @@ export const AttributeContext_Resource = {
       });
     }
     obj.display_name = message.displayName;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
-    obj.delete_time = message.deleteTime;
+    obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
+    obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
+    obj.delete_time = message.deleteTime ? Timestamp.toAmino(toTimestamp(message.deleteTime)) : undefined;
     obj.etag = message.etag;
     obj.location = message.location;
     return obj;
@@ -2894,8 +2894,8 @@ export const AttributeContext_Resource = {
   fromAminoMsg(object: AttributeContext_ResourceAminoMsg): AttributeContext_Resource {
     return AttributeContext_Resource.fromAmino(object.value);
   },
-  fromProtoMsg(message: AttributeContext_ResourceProtoMsg): AttributeContext_Resource {
-    return AttributeContext_Resource.decode(message.value);
+  fromProtoMsg(message: AttributeContext_ResourceProtoMsg, useInterfaces: boolean = true): AttributeContext_Resource {
+    return AttributeContext_Resource.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AttributeContext_Resource): Uint8Array {
     return AttributeContext_Resource.encode(message).finish();

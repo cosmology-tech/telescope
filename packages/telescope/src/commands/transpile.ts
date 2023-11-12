@@ -26,6 +26,7 @@ export default async (argv: {
 
       interfaces: {
         enabled: false,
+        useByDefault: false,
         useUnionTypes: false,
       },
 

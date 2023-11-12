@@ -104,10 +104,10 @@ function createBaseMsgCreateClawbackVestingAccount(): MsgCreateClawbackVestingAc
 export const MsgCreateClawbackVestingAccount = {
   typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount",
   encode(message: MsgCreateClawbackVestingAccount, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.fromAddress !== "") {
+    if (message.fromAddress !== undefined) {
       writer.uint32(10).string(message.fromAddress);
     }
-    if (message.toAddress !== "") {
+    if (message.toAddress !== undefined) {
       writer.uint32(18).string(message.toAddress);
     }
     if (message.startTime !== undefined) {
@@ -119,7 +119,7 @@ export const MsgCreateClawbackVestingAccount = {
     for (const v of message.vestingPeriods) {
       Period.encode(v!, writer.uint32(42).fork()).ldelim();
     }
-    if (message.merge === true) {
+    if (message.merge !== undefined) {
       writer.uint32(48).bool(message.merge);
     }
     return writer;
@@ -236,7 +236,7 @@ export const MsgCreateClawbackVestingAccount = {
     return {
       fromAddress: object.from_address,
       toAddress: object.to_address,
-      startTime: object.start_time,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
       lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromAmino(e)) : [],
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : [],
       merge: object.merge
@@ -246,7 +246,7 @@ export const MsgCreateClawbackVestingAccount = {
     const obj: any = {};
     obj.from_address = message.fromAddress;
     obj.to_address = message.toAddress;
-    obj.start_time = message.startTime;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     if (message.lockupPeriods) {
       obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e) : undefined);
     } else {
@@ -353,13 +353,13 @@ function createBaseMsgClawback(): MsgClawback {
 export const MsgClawback = {
   typeUrl: "/evmos.vesting.v1.MsgClawback",
   encode(message: MsgClawback, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.funderAddress !== "") {
+    if (message.funderAddress !== undefined) {
       writer.uint32(10).string(message.funderAddress);
     }
-    if (message.accountAddress !== "") {
+    if (message.accountAddress !== undefined) {
       writer.uint32(18).string(message.accountAddress);
     }
-    if (message.destAddress !== "") {
+    if (message.destAddress !== undefined) {
       writer.uint32(26).string(message.destAddress);
     }
     return writer;

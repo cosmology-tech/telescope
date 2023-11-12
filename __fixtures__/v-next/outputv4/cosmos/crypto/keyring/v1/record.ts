@@ -92,7 +92,7 @@ function createBaseRecord(): Record {
 export const Record = {
   typeUrl: "/cosmos.crypto.keyring.v1.Record",
   encode(message: Record, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.pubKey !== undefined) {
@@ -268,7 +268,7 @@ export const Record_Local = {
     if (message.privKey !== undefined) {
       Any.encode(message.privKey, writer.uint32(10).fork()).ldelim();
     }
-    if (message.privKeyType !== "") {
+    if (message.privKeyType !== undefined) {
       writer.uint32(18).string(message.privKeyType);
     }
     return writer;

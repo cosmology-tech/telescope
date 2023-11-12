@@ -180,19 +180,19 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/evmos.fees.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.enableFees === true) {
+    if (message.enableFees !== undefined) {
       writer.uint32(8).bool(message.enableFees);
     }
-    if (message.developerShares !== "") {
+    if (message.developerShares !== undefined) {
       writer.uint32(18).string(Decimal.fromUserInput(message.developerShares, 18).atomics);
     }
-    if (message.validatorShares !== "") {
+    if (message.validatorShares !== undefined) {
       writer.uint32(26).string(Decimal.fromUserInput(message.validatorShares, 18).atomics);
     }
-    if (message.addrDerivationCostCreate !== BigInt(0)) {
+    if (message.addrDerivationCostCreate !== undefined) {
       writer.uint32(32).uint64(message.addrDerivationCostCreate);
     }
-    if (message.minGasPrice !== "") {
+    if (message.minGasPrice !== undefined) {
       writer.uint32(42).string(Decimal.fromUserInput(message.minGasPrice, 18).atomics);
     }
     return writer;

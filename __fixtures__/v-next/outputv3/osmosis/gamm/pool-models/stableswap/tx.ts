@@ -124,7 +124,7 @@ export const MsgCreateStableswapPool = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateStableswapPool {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateStableswapPool {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateStableswapPool();
@@ -135,10 +135,10 @@ export const MsgCreateStableswapPool = {
           message.sender = reader.string();
           break;
         case 2:
-          message.poolParams = PoolParams.decode(reader, reader.uint32());
+          message.poolParams = PoolParams.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.initialPoolLiquidity.push(Coin.decode(reader, reader.uint32()));
+          message.initialPoolLiquidity.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 4:
           if ((tag & 7) === 2) {
@@ -241,12 +241,12 @@ export const MsgCreateStableswapPool = {
       scalingFactorController: object.scaling_factor_controller
     };
   },
-  toAmino(message: MsgCreateStableswapPool): MsgCreateStableswapPoolAmino {
+  toAmino(message: MsgCreateStableswapPool, useInterfaces: boolean = true): MsgCreateStableswapPoolAmino {
     const obj: any = {};
     obj.sender = message.sender;
-    obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined;
+    obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams, useInterfaces) : undefined;
     if (message.initialPoolLiquidity) {
-      obj.initial_pool_liquidity = message.initialPoolLiquidity.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.initial_pool_liquidity = message.initialPoolLiquidity.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.initial_pool_liquidity = [];
     }
@@ -259,8 +259,8 @@ export const MsgCreateStableswapPool = {
     obj.scaling_factor_controller = message.scalingFactorController;
     return obj;
   },
-  fromProtoMsg(message: MsgCreateStableswapPoolProtoMsg): MsgCreateStableswapPool {
-    return MsgCreateStableswapPool.decode(message.value);
+  fromProtoMsg(message: MsgCreateStableswapPoolProtoMsg, useInterfaces: boolean = true): MsgCreateStableswapPool {
+    return MsgCreateStableswapPool.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateStableswapPool): Uint8Array {
     return MsgCreateStableswapPool.encode(message).finish();
@@ -286,7 +286,7 @@ export const MsgCreateStableswapPoolResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateStableswapPoolResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateStableswapPoolResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateStableswapPoolResponse();
@@ -335,13 +335,13 @@ export const MsgCreateStableswapPoolResponse = {
       poolId: BigInt(object.pool_id)
     };
   },
-  toAmino(message: MsgCreateStableswapPoolResponse): MsgCreateStableswapPoolResponseAmino {
+  toAmino(message: MsgCreateStableswapPoolResponse, useInterfaces: boolean = true): MsgCreateStableswapPoolResponseAmino {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     return obj;
   },
-  fromProtoMsg(message: MsgCreateStableswapPoolResponseProtoMsg): MsgCreateStableswapPoolResponse {
-    return MsgCreateStableswapPoolResponse.decode(message.value);
+  fromProtoMsg(message: MsgCreateStableswapPoolResponseProtoMsg, useInterfaces: boolean = true): MsgCreateStableswapPoolResponse {
+    return MsgCreateStableswapPoolResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateStableswapPoolResponse): Uint8Array {
     return MsgCreateStableswapPoolResponse.encode(message).finish();
@@ -377,7 +377,7 @@ export const MsgStableSwapAdjustScalingFactors = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgStableSwapAdjustScalingFactors {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgStableSwapAdjustScalingFactors {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgStableSwapAdjustScalingFactors();
@@ -459,7 +459,7 @@ export const MsgStableSwapAdjustScalingFactors = {
       scalingFactors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => BigInt(e)) : []
     };
   },
-  toAmino(message: MsgStableSwapAdjustScalingFactors): MsgStableSwapAdjustScalingFactorsAmino {
+  toAmino(message: MsgStableSwapAdjustScalingFactors, useInterfaces: boolean = true): MsgStableSwapAdjustScalingFactorsAmino {
     const obj: any = {};
     obj.sender = message.sender;
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
@@ -470,8 +470,8 @@ export const MsgStableSwapAdjustScalingFactors = {
     }
     return obj;
   },
-  fromProtoMsg(message: MsgStableSwapAdjustScalingFactorsProtoMsg): MsgStableSwapAdjustScalingFactors {
-    return MsgStableSwapAdjustScalingFactors.decode(message.value);
+  fromProtoMsg(message: MsgStableSwapAdjustScalingFactorsProtoMsg, useInterfaces: boolean = true): MsgStableSwapAdjustScalingFactors {
+    return MsgStableSwapAdjustScalingFactors.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgStableSwapAdjustScalingFactors): Uint8Array {
     return MsgStableSwapAdjustScalingFactors.encode(message).finish();
@@ -492,7 +492,7 @@ export const MsgStableSwapAdjustScalingFactorsResponse = {
   encode(_: MsgStableSwapAdjustScalingFactorsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgStableSwapAdjustScalingFactorsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgStableSwapAdjustScalingFactorsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgStableSwapAdjustScalingFactorsResponse();
@@ -528,12 +528,12 @@ export const MsgStableSwapAdjustScalingFactorsResponse = {
   fromAmino(_: MsgStableSwapAdjustScalingFactorsResponseAmino): MsgStableSwapAdjustScalingFactorsResponse {
     return {};
   },
-  toAmino(_: MsgStableSwapAdjustScalingFactorsResponse): MsgStableSwapAdjustScalingFactorsResponseAmino {
+  toAmino(_: MsgStableSwapAdjustScalingFactorsResponse, useInterfaces: boolean = true): MsgStableSwapAdjustScalingFactorsResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromProtoMsg(message: MsgStableSwapAdjustScalingFactorsResponseProtoMsg): MsgStableSwapAdjustScalingFactorsResponse {
-    return MsgStableSwapAdjustScalingFactorsResponse.decode(message.value);
+  fromProtoMsg(message: MsgStableSwapAdjustScalingFactorsResponseProtoMsg, useInterfaces: boolean = true): MsgStableSwapAdjustScalingFactorsResponse {
+    return MsgStableSwapAdjustScalingFactorsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgStableSwapAdjustScalingFactorsResponse): Uint8Array {
     return MsgStableSwapAdjustScalingFactorsResponse.encode(message).finish();

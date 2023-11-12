@@ -416,10 +416,10 @@ function createBaseMetricDescriptor(): MetricDescriptor {
 export const MetricDescriptor = {
   typeUrl: "/google.api.MetricDescriptor",
   encode(message: MetricDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(66).string(message.type);
     }
     for (const v of message.labels) {
@@ -431,13 +431,13 @@ export const MetricDescriptor = {
     if (message.valueType !== 0) {
       writer.uint32(32).int32(message.valueType);
     }
-    if (message.unit !== "") {
+    if (message.unit !== undefined) {
       writer.uint32(42).string(message.unit);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(50).string(message.description);
     }
-    if (message.displayName !== "") {
+    if (message.displayName !== undefined) {
       writer.uint32(58).string(message.displayName);
     }
     if (message.metadata !== undefined) {
@@ -788,10 +788,10 @@ function createBaseMetric_LabelsEntry(): Metric_LabelsEntry {
 }
 export const Metric_LabelsEntry = {
   encode(message: Metric_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -883,7 +883,7 @@ function createBaseMetric(): Metric {
 export const Metric = {
   typeUrl: "/google.api.Metric",
   encode(message: Metric, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(26).string(message.type);
     }
     Object.entries(message.labels).forEach(([key, value]) => {

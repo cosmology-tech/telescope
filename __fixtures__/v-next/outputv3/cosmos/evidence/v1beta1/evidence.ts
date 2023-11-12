@@ -22,7 +22,7 @@ export interface EquivocationProtoMsg {
  */
 export interface EquivocationAmino {
   height: string;
-  time?: Date;
+  time?: string;
   power: string;
   consensus_address: string;
 }
@@ -62,7 +62,7 @@ export const Equivocation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Equivocation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Equivocation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEquivocation();
@@ -135,21 +135,21 @@ export const Equivocation = {
   fromAmino(object: EquivocationAmino): Equivocation {
     return {
       height: BigInt(object.height),
-      time: object.time,
+      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
       power: BigInt(object.power),
       consensusAddress: object.consensus_address
     };
   },
-  toAmino(message: Equivocation): EquivocationAmino {
+  toAmino(message: Equivocation, useInterfaces: boolean = true): EquivocationAmino {
     const obj: any = {};
     obj.height = message.height ? message.height.toString() : undefined;
-    obj.time = message.time;
+    obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
     obj.power = message.power ? message.power.toString() : undefined;
     obj.consensus_address = message.consensusAddress;
     return obj;
   },
-  fromProtoMsg(message: EquivocationProtoMsg): Equivocation {
-    return Equivocation.decode(message.value);
+  fromProtoMsg(message: EquivocationProtoMsg, useInterfaces: boolean = true): Equivocation {
+    return Equivocation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Equivocation): Uint8Array {
     return Equivocation.encode(message).finish();

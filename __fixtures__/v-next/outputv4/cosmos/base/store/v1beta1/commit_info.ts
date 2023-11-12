@@ -70,7 +70,7 @@ function createBaseCommitInfo(): CommitInfo {
 export const CommitInfo = {
   typeUrl: "/cosmos.base.store.v1beta1.CommitInfo",
   encode(message: CommitInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.version !== BigInt(0)) {
+    if (message.version !== undefined) {
       writer.uint32(8).int64(message.version);
     }
     for (const v of message.storeInfos) {
@@ -191,7 +191,7 @@ function createBaseStoreInfo(): StoreInfo {
 export const StoreInfo = {
   typeUrl: "/cosmos.base.store.v1beta1.StoreInfo",
   encode(message: StoreInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.commitId !== undefined) {
@@ -300,7 +300,7 @@ function createBaseCommitID(): CommitID {
 export const CommitID = {
   typeUrl: "/cosmos.base.store.v1beta1.CommitID",
   encode(message: CommitID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.version !== BigInt(0)) {
+    if (message.version !== undefined) {
       writer.uint32(8).int64(message.version);
     }
     if (message.hash.length !== 0) {

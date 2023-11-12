@@ -33,7 +33,7 @@ function createBaseControl(): Control {
 export const Control = {
   typeUrl: "/google.api.Control",
   encode(message: Control, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.environment !== "") {
+    if (message.environment !== undefined) {
       writer.uint32(10).string(message.environment);
     }
     return writer;

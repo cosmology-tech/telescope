@@ -127,49 +127,49 @@ function createBaseHttpRequest(): HttpRequest {
 export const HttpRequest = {
   typeUrl: "/google.api.servicecontrol.v1.HttpRequest",
   encode(message: HttpRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.requestMethod !== "") {
+    if (message.requestMethod !== undefined) {
       writer.uint32(10).string(message.requestMethod);
     }
-    if (message.requestUrl !== "") {
+    if (message.requestUrl !== undefined) {
       writer.uint32(18).string(message.requestUrl);
     }
-    if (message.requestSize !== BigInt(0)) {
+    if (message.requestSize !== undefined) {
       writer.uint32(24).int64(message.requestSize);
     }
-    if (message.status !== 0) {
+    if (message.status !== undefined) {
       writer.uint32(32).int32(message.status);
     }
-    if (message.responseSize !== BigInt(0)) {
+    if (message.responseSize !== undefined) {
       writer.uint32(40).int64(message.responseSize);
     }
-    if (message.userAgent !== "") {
+    if (message.userAgent !== undefined) {
       writer.uint32(50).string(message.userAgent);
     }
-    if (message.remoteIp !== "") {
+    if (message.remoteIp !== undefined) {
       writer.uint32(58).string(message.remoteIp);
     }
-    if (message.serverIp !== "") {
+    if (message.serverIp !== undefined) {
       writer.uint32(106).string(message.serverIp);
     }
-    if (message.referer !== "") {
+    if (message.referer !== undefined) {
       writer.uint32(66).string(message.referer);
     }
     if (message.latency !== undefined) {
       Duration.encode(message.latency, writer.uint32(114).fork()).ldelim();
     }
-    if (message.cacheLookup === true) {
+    if (message.cacheLookup !== undefined) {
       writer.uint32(88).bool(message.cacheLookup);
     }
-    if (message.cacheHit === true) {
+    if (message.cacheHit !== undefined) {
       writer.uint32(72).bool(message.cacheHit);
     }
-    if (message.cacheValidatedWithOriginServer === true) {
+    if (message.cacheValidatedWithOriginServer !== undefined) {
       writer.uint32(80).bool(message.cacheValidatedWithOriginServer);
     }
-    if (message.cacheFillBytes !== BigInt(0)) {
+    if (message.cacheFillBytes !== undefined) {
       writer.uint32(96).int64(message.cacheFillBytes);
     }
-    if (message.protocol !== "") {
+    if (message.protocol !== undefined) {
       writer.uint32(122).string(message.protocol);
     }
     return writer;

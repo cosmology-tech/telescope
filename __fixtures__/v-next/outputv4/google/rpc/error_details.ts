@@ -565,7 +565,7 @@ export const DebugInfo = {
     for (const v of message.stackEntries) {
       writer.uint32(10).string(v!);
     }
-    if (message.detail !== "") {
+    if (message.detail !== undefined) {
       writer.uint32(18).string(message.detail);
     }
     return writer;
@@ -773,10 +773,10 @@ function createBaseQuotaFailure_Violation(): QuotaFailure_Violation {
 export const QuotaFailure_Violation = {
   typeUrl: "/google.rpc.Violation",
   encode(message: QuotaFailure_Violation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.subject !== "") {
+    if (message.subject !== undefined) {
       writer.uint32(10).string(message.subject);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     return writer;
@@ -873,10 +873,10 @@ function createBaseErrorInfo_MetadataEntry(): ErrorInfo_MetadataEntry {
 }
 export const ErrorInfo_MetadataEntry = {
   encode(message: ErrorInfo_MetadataEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -969,10 +969,10 @@ function createBaseErrorInfo(): ErrorInfo {
 export const ErrorInfo = {
   typeUrl: "/google.rpc.ErrorInfo",
   encode(message: ErrorInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.reason !== "") {
+    if (message.reason !== undefined) {
       writer.uint32(10).string(message.reason);
     }
-    if (message.domain !== "") {
+    if (message.domain !== undefined) {
       writer.uint32(18).string(message.domain);
     }
     Object.entries(message.metadata).forEach(([key, value]) => {
@@ -1231,13 +1231,13 @@ function createBasePreconditionFailure_Violation(): PreconditionFailure_Violatio
 export const PreconditionFailure_Violation = {
   typeUrl: "/google.rpc.Violation",
   encode(message: PreconditionFailure_Violation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(10).string(message.type);
     }
-    if (message.subject !== "") {
+    if (message.subject !== undefined) {
       writer.uint32(18).string(message.subject);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(26).string(message.description);
     }
     return writer;
@@ -1444,10 +1444,10 @@ function createBaseBadRequest_FieldViolation(): BadRequest_FieldViolation {
 export const BadRequest_FieldViolation = {
   typeUrl: "/google.rpc.FieldViolation",
   encode(message: BadRequest_FieldViolation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.field !== "") {
+    if (message.field !== undefined) {
       writer.uint32(10).string(message.field);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     return writer;
@@ -1545,10 +1545,10 @@ function createBaseRequestInfo(): RequestInfo {
 export const RequestInfo = {
   typeUrl: "/google.rpc.RequestInfo",
   encode(message: RequestInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.requestId !== "") {
+    if (message.requestId !== undefined) {
       writer.uint32(10).string(message.requestId);
     }
-    if (message.servingData !== "") {
+    if (message.servingData !== undefined) {
       writer.uint32(18).string(message.servingData);
     }
     return writer;
@@ -1648,16 +1648,16 @@ function createBaseResourceInfo(): ResourceInfo {
 export const ResourceInfo = {
   typeUrl: "/google.rpc.ResourceInfo",
   encode(message: ResourceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.resourceType !== "") {
+    if (message.resourceType !== undefined) {
       writer.uint32(10).string(message.resourceType);
     }
-    if (message.resourceName !== "") {
+    if (message.resourceName !== undefined) {
       writer.uint32(18).string(message.resourceName);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(26).string(message.owner);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(34).string(message.description);
     }
     return writer;
@@ -1875,10 +1875,10 @@ function createBaseHelp_Link(): Help_Link {
 export const Help_Link = {
   typeUrl: "/google.rpc.Link",
   encode(message: Help_Link, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(10).string(message.description);
     }
-    if (message.url !== "") {
+    if (message.url !== undefined) {
       writer.uint32(18).string(message.url);
     }
     return writer;
@@ -1976,10 +1976,10 @@ function createBaseLocalizedMessage(): LocalizedMessage {
 export const LocalizedMessage = {
   typeUrl: "/google.rpc.LocalizedMessage",
   encode(message: LocalizedMessage, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.locale !== "") {
+    if (message.locale !== undefined) {
       writer.uint32(10).string(message.locale);
     }
-    if (message.message !== "") {
+    if (message.message !== undefined) {
       writer.uint32(18).string(message.message);
     }
     return writer;

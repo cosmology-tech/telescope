@@ -309,10 +309,10 @@ function createBaseLogEntry_LabelsEntry(): LogEntry_LabelsEntry {
 }
 export const LogEntry_LabelsEntry = {
   encode(message: LogEntry_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -419,7 +419,7 @@ function createBaseLogEntry(): LogEntry {
 export const LogEntry = {
   typeUrl: "/google.logging.v2.LogEntry",
   encode(message: LogEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.logName !== "") {
+    if (message.logName !== undefined) {
       writer.uint32(98).string(message.logName);
     }
     if (message.resource !== undefined) {
@@ -443,7 +443,7 @@ export const LogEntry = {
     if (message.severity !== 0) {
       writer.uint32(80).int32(message.severity);
     }
-    if (message.insertId !== "") {
+    if (message.insertId !== undefined) {
       writer.uint32(34).string(message.insertId);
     }
     if (message.httpRequest !== undefined) {
@@ -458,13 +458,13 @@ export const LogEntry = {
     if (message.operation !== undefined) {
       LogEntryOperation.encode(message.operation, writer.uint32(122).fork()).ldelim();
     }
-    if (message.trace !== "") {
+    if (message.trace !== undefined) {
       writer.uint32(178).string(message.trace);
     }
-    if (message.spanId !== "") {
+    if (message.spanId !== undefined) {
       writer.uint32(218).string(message.spanId);
     }
-    if (message.traceSampled === true) {
+    if (message.traceSampled !== undefined) {
       writer.uint32(240).bool(message.traceSampled);
     }
     if (message.sourceLocation !== undefined) {
@@ -722,8 +722,8 @@ export const LogEntry = {
       protoPayload: object?.proto_payload ? Any.fromAmino(object.proto_payload) : undefined,
       textPayload: object?.text_payload,
       jsonPayload: object?.json_payload ? Struct.fromAmino(object.json_payload) : undefined,
-      timestamp: object?.timestamp,
-      receiveTimestamp: object?.receive_timestamp,
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined,
+      receiveTimestamp: object?.receive_timestamp ? fromTimestamp(Timestamp.fromAmino(object.receive_timestamp)) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       insertId: object.insert_id,
       httpRequest: object?.http_request ? HttpRequest.fromAmino(object.http_request) : undefined,
@@ -748,8 +748,8 @@ export const LogEntry = {
     obj.proto_payload = message.protoPayload ? Any.toAmino(message.protoPayload) : undefined;
     obj.text_payload = message.textPayload;
     obj.json_payload = message.jsonPayload ? Struct.toAmino(message.jsonPayload) : undefined;
-    obj.timestamp = message.timestamp;
-    obj.receive_timestamp = message.receiveTimestamp;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
+    obj.receive_timestamp = message.receiveTimestamp ? Timestamp.toAmino(toTimestamp(message.receiveTimestamp)) : undefined;
     obj.severity = message.severity;
     obj.insert_id = message.insertId;
     obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined;
@@ -794,16 +794,16 @@ function createBaseLogEntryOperation(): LogEntryOperation {
 export const LogEntryOperation = {
   typeUrl: "/google.logging.v2.LogEntryOperation",
   encode(message: LogEntryOperation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(10).string(message.id);
     }
-    if (message.producer !== "") {
+    if (message.producer !== undefined) {
       writer.uint32(18).string(message.producer);
     }
-    if (message.first === true) {
+    if (message.first !== undefined) {
       writer.uint32(24).bool(message.first);
     }
-    if (message.last === true) {
+    if (message.last !== undefined) {
       writer.uint32(32).bool(message.last);
     }
     return writer;
@@ -924,13 +924,13 @@ function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
 export const LogEntrySourceLocation = {
   typeUrl: "/google.logging.v2.LogEntrySourceLocation",
   encode(message: LogEntrySourceLocation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.file !== "") {
+    if (message.file !== undefined) {
       writer.uint32(10).string(message.file);
     }
-    if (message.line !== BigInt(0)) {
+    if (message.line !== undefined) {
       writer.uint32(16).int64(message.line);
     }
-    if (message.function !== "") {
+    if (message.function !== undefined) {
       writer.uint32(26).string(message.function);
     }
     return writer;
@@ -1042,13 +1042,13 @@ function createBaseLogSplit(): LogSplit {
 export const LogSplit = {
   typeUrl: "/google.logging.v2.LogSplit",
   encode(message: LogSplit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.uid !== "") {
+    if (message.uid !== undefined) {
       writer.uint32(10).string(message.uid);
     }
-    if (message.index !== 0) {
+    if (message.index !== undefined) {
       writer.uint32(16).int32(message.index);
     }
-    if (message.totalSplits !== 0) {
+    if (message.totalSplits !== undefined) {
       writer.uint32(24).int32(message.totalSplits);
     }
     return writer;

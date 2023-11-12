@@ -149,7 +149,7 @@ export const Child = {
     if (message.index.length !== 0) {
       writer.uint32(10).bytes(message.index);
     }
-    if (message.accumulation !== "") {
+    if (message.accumulation !== undefined) {
       writer.uint32(18).string(message.accumulation);
     }
     return writer;

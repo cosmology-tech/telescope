@@ -231,7 +231,7 @@ function createBaseGetValidatorSetByHeightRequest(): GetValidatorSetByHeightRequ
 export const GetValidatorSetByHeightRequest = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightRequest",
   encode(message: GetValidatorSetByHeightRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(8).int64(message.height);
     }
     if (message.pagination !== undefined) {
@@ -343,7 +343,7 @@ function createBaseGetValidatorSetByHeightResponse(): GetValidatorSetByHeightRes
 export const GetValidatorSetByHeightResponse = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightResponse",
   encode(message: GetValidatorSetByHeightResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.blockHeight !== BigInt(0)) {
+    if (message.blockHeight !== undefined) {
       writer.uint32(8).int64(message.blockHeight);
     }
     for (const v of message.validators) {
@@ -575,7 +575,7 @@ function createBaseGetLatestValidatorSetResponse(): GetLatestValidatorSetRespons
 export const GetLatestValidatorSetResponse = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetLatestValidatorSetResponse",
   encode(message: GetLatestValidatorSetResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.blockHeight !== BigInt(0)) {
+    if (message.blockHeight !== undefined) {
       writer.uint32(8).int64(message.blockHeight);
     }
     for (const v of message.validators) {
@@ -714,16 +714,16 @@ function createBaseValidator(): Validator {
 export const Validator = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.Validator",
   encode(message: Validator, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     if (message.pubKey !== undefined) {
       Any.encode(message.pubKey, writer.uint32(18).fork()).ldelim();
     }
-    if (message.votingPower !== BigInt(0)) {
+    if (message.votingPower !== undefined) {
       writer.uint32(24).int64(message.votingPower);
     }
-    if (message.proposerPriority !== BigInt(0)) {
+    if (message.proposerPriority !== undefined) {
       writer.uint32(32).int64(message.proposerPriority);
     }
     return writer;
@@ -854,7 +854,7 @@ function createBaseGetBlockByHeightRequest(): GetBlockByHeightRequest {
 export const GetBlockByHeightRequest = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetBlockByHeightRequest",
   encode(message: GetBlockByHeightRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(8).int64(message.height);
     }
     return writer;
@@ -1316,7 +1316,7 @@ function createBaseGetSyncingResponse(): GetSyncingResponse {
 export const GetSyncingResponse = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetSyncingResponse",
   encode(message: GetSyncingResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.syncing === true) {
+    if (message.syncing !== undefined) {
       writer.uint32(8).bool(message.syncing);
     }
     return writer;
@@ -1599,28 +1599,28 @@ function createBaseVersionInfo(): VersionInfo {
 export const VersionInfo = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.VersionInfo",
   encode(message: VersionInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.appName !== "") {
+    if (message.appName !== undefined) {
       writer.uint32(18).string(message.appName);
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       writer.uint32(26).string(message.version);
     }
-    if (message.gitCommit !== "") {
+    if (message.gitCommit !== undefined) {
       writer.uint32(34).string(message.gitCommit);
     }
-    if (message.buildTags !== "") {
+    if (message.buildTags !== undefined) {
       writer.uint32(42).string(message.buildTags);
     }
-    if (message.goVersion !== "") {
+    if (message.goVersion !== undefined) {
       writer.uint32(50).string(message.goVersion);
     }
     for (const v of message.buildDeps) {
       Module.encode(v!, writer.uint32(58).fork()).ldelim();
     }
-    if (message.cosmosSdkVersion !== "") {
+    if (message.cosmosSdkVersion !== undefined) {
       writer.uint32(66).string(message.cosmosSdkVersion);
     }
     return writer;
@@ -1803,13 +1803,13 @@ function createBaseModule(): Module {
 export const Module = {
   typeUrl: "/cosmos.base.tendermint.v1beta1.Module",
   encode(message: Module, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.path !== "") {
+    if (message.path !== undefined) {
       writer.uint32(10).string(message.path);
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       writer.uint32(18).string(message.version);
     }
-    if (message.sum !== "") {
+    if (message.sum !== undefined) {
       writer.uint32(26).string(message.sum);
     }
     return writer;

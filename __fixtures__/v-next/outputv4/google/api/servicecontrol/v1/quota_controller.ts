@@ -360,13 +360,13 @@ function createBaseAllocateQuotaRequest(): AllocateQuotaRequest {
 export const AllocateQuotaRequest = {
   typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaRequest",
   encode(message: AllocateQuotaRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
     }
     if (message.allocateOperation !== undefined) {
       QuotaOperation.encode(message.allocateOperation, writer.uint32(18).fork()).ldelim();
     }
-    if (message.serviceConfigId !== "") {
+    if (message.serviceConfigId !== undefined) {
       writer.uint32(34).string(message.serviceConfigId);
     }
     return writer;
@@ -476,10 +476,10 @@ function createBaseQuotaOperation_LabelsEntry(): QuotaOperation_LabelsEntry {
 }
 export const QuotaOperation_LabelsEntry = {
   encode(message: QuotaOperation_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -575,13 +575,13 @@ function createBaseQuotaOperation(): QuotaOperation {
 export const QuotaOperation = {
   typeUrl: "/google.api.servicecontrol.v1.QuotaOperation",
   encode(message: QuotaOperation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.operationId !== "") {
+    if (message.operationId !== undefined) {
       writer.uint32(10).string(message.operationId);
     }
-    if (message.methodName !== "") {
+    if (message.methodName !== undefined) {
       writer.uint32(18).string(message.methodName);
     }
-    if (message.consumerId !== "") {
+    if (message.consumerId !== undefined) {
       writer.uint32(26).string(message.consumerId);
     }
     Object.entries(message.labels).forEach(([key, value]) => {
@@ -794,7 +794,7 @@ function createBaseAllocateQuotaResponse(): AllocateQuotaResponse {
 export const AllocateQuotaResponse = {
   typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaResponse",
   encode(message: AllocateQuotaResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.operationId !== "") {
+    if (message.operationId !== undefined) {
       writer.uint32(10).string(message.operationId);
     }
     for (const v of message.allocateErrors) {
@@ -803,7 +803,7 @@ export const AllocateQuotaResponse = {
     for (const v of message.quotaMetrics) {
       MetricValueSet.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.serviceConfigId !== "") {
+    if (message.serviceConfigId !== undefined) {
       writer.uint32(34).string(message.serviceConfigId);
     }
     return writer;
@@ -952,10 +952,10 @@ export const QuotaError = {
     if (message.code !== 0) {
       writer.uint32(8).int32(message.code);
     }
-    if (message.subject !== "") {
+    if (message.subject !== undefined) {
       writer.uint32(18).string(message.subject);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(26).string(message.description);
     }
     if (message.status !== undefined) {

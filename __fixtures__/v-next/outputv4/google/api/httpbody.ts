@@ -122,7 +122,7 @@ function createBaseHttpBody(): HttpBody {
 export const HttpBody = {
   typeUrl: "/google.api.HttpBody",
   encode(message: HttpBody, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contentType !== "") {
+    if (message.contentType !== undefined) {
       writer.uint32(10).string(message.contentType);
     }
     if (message.data.length !== 0) {

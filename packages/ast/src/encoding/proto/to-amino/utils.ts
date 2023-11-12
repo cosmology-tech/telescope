@@ -162,7 +162,10 @@ export const toAminoJSON = {
                             t.memberExpression(
                                 t.identifier('message'),
                                 t.identifier(propName)
-                            )
+                            ),
+                            ...(args.context.options.interfaces.enabled ? [
+                                t.identifier('useInterfaces')
+                            ] : []),
                         ]
                     ),
                     defaultValue
@@ -202,7 +205,10 @@ export const toAminoJSON = {
                                 t.tsTypeReference(
                                     t.identifier('Any')
                                 )
-                            )
+                            ),
+                            ...(args.context.options.interfaces.enabled ? [
+                                t.identifier('useInterfaces')
+                            ] : []),
                         ]
                     ),
                     t.identifier('undefined')
@@ -238,7 +244,55 @@ export const toAminoJSON = {
     },
 
     timestamp(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
+        const timestampFormat = args.context.pluginValue(
+            'prototypes.typingsFormat.timestamp'
+        );
+        switch (timestampFormat) {
+            case 'timestamp':
+                return toAminoJSON.type(args);
+            case 'date':
+            default:
+                return toAminoJSON.timestampDate(args);
+        }
+    },
+
+    timestampDate(args: ToAminoJSONMethod) {
+        const { propName, origName } = getFieldNames(args.field);
+        args.context.addUtil('toTimestamp');
+
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.conditionalExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    ),
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('Timestamp'),
+                            t.identifier('toAmino')
+                        ),
+                        [
+                            t.callExpression(
+                                t.identifier('toTimestamp'),
+                                [
+                                    t.memberExpression(
+                                        t.identifier('message'),
+                                        t.identifier(propName)
+                                    )
+                                ]
+                            )
+                        ]
+                    ),
+                    t.identifier('undefined')
+                )
+            )
+        );
     },
 
     pubkey(args: ToAminoJSONMethod) {
@@ -604,7 +658,10 @@ export const arrayTypes = {
                         t.tsTypeReference(
                             t.identifier('Any')
                         )
-                    )
+                    ),
+                    ...(args.context.options.interfaces.enabled ? [
+                        t.identifier('useInterfaces')
+                    ] : []),
                 ]
             ),
             t.identifier('undefined')
@@ -620,7 +677,10 @@ export const arrayTypes = {
                     t.identifier('toAmino')
                 ),
                 [
-                    t.identifier('e')
+                    t.identifier('e'),
+                    ...(args.context.options.interfaces.enabled ? [
+                        t.identifier('useInterfaces')
+                    ] : []),
                 ]
             ),
             t.identifier('undefined')
@@ -691,12 +751,21 @@ export const toAminoMessages = {
             t.callExpression(
                 t.memberExpression(
                     t.callExpression(
-                        t.identifier('fromTimestamp'),
-                        [t.identifier('message')]
+                        t.memberExpression(
+                            t.callExpression(
+                                t.identifier('fromTimestamp'),
+                                [t.identifier('message')]
+                            ),
+                            t.identifier('toISOString')
+                        ),
+                        []
                     ),
-                    t.identifier('toString')
+                    t.identifier('replace')
                 ),
-                []
+                [
+                    t.regExpLiteral('\\.\\d+Z$'),
+                    t.stringLiteral('Z')
+                ]
             )
         )
     },

@@ -35,13 +35,13 @@ function createBaseMsgVerifyInvariant(): MsgVerifyInvariant {
 export const MsgVerifyInvariant = {
   typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariant",
   encode(message: MsgVerifyInvariant, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
-    if (message.invariantModuleName !== "") {
+    if (message.invariantModuleName !== undefined) {
       writer.uint32(18).string(message.invariantModuleName);
     }
-    if (message.invariantRoute !== "") {
+    if (message.invariantRoute !== undefined) {
       writer.uint32(26).string(message.invariantRoute);
     }
     return writer;

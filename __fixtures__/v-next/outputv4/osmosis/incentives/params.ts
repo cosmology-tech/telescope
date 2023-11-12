@@ -25,7 +25,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/osmosis.incentives.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.distrEpochIdentifier !== "") {
+    if (message.distrEpochIdentifier !== undefined) {
       writer.uint32(10).string(message.distrEpochIdentifier);
     }
     return writer;

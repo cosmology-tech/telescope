@@ -478,13 +478,13 @@ function createBaseAuthenticationRule(): AuthenticationRule {
 export const AuthenticationRule = {
   typeUrl: "/google.api.AuthenticationRule",
   encode(message: AuthenticationRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
     if (message.oauth !== undefined) {
       OAuthRequirements.encode(message.oauth, writer.uint32(18).fork()).ldelim();
     }
-    if (message.allowWithoutCredential === true) {
+    if (message.allowWithoutCredential !== undefined) {
       writer.uint32(40).bool(message.allowWithoutCredential);
     }
     for (const v of message.requirements) {
@@ -628,7 +628,7 @@ export const JwtLocation = {
     if (message.query !== undefined) {
       writer.uint32(18).string(message.query);
     }
-    if (message.valuePrefix !== "") {
+    if (message.valuePrefix !== undefined) {
       writer.uint32(26).string(message.valuePrefix);
     }
     return writer;
@@ -741,19 +741,19 @@ function createBaseAuthProvider(): AuthProvider {
 export const AuthProvider = {
   typeUrl: "/google.api.AuthProvider",
   encode(message: AuthProvider, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(10).string(message.id);
     }
-    if (message.issuer !== "") {
+    if (message.issuer !== undefined) {
       writer.uint32(18).string(message.issuer);
     }
-    if (message.jwksUri !== "") {
+    if (message.jwksUri !== undefined) {
       writer.uint32(26).string(message.jwksUri);
     }
-    if (message.audiences !== "") {
+    if (message.audiences !== undefined) {
       writer.uint32(34).string(message.audiences);
     }
-    if (message.authorizationUrl !== "") {
+    if (message.authorizationUrl !== undefined) {
       writer.uint32(42).string(message.authorizationUrl);
     }
     for (const v of message.jwtLocations) {
@@ -909,7 +909,7 @@ function createBaseOAuthRequirements(): OAuthRequirements {
 export const OAuthRequirements = {
   typeUrl: "/google.api.OAuthRequirements",
   encode(message: OAuthRequirements, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.canonicalScopes !== "") {
+    if (message.canonicalScopes !== undefined) {
       writer.uint32(10).string(message.canonicalScopes);
     }
     return writer;
@@ -996,10 +996,10 @@ function createBaseAuthRequirement(): AuthRequirement {
 export const AuthRequirement = {
   typeUrl: "/google.api.AuthRequirement",
   encode(message: AuthRequirement, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.providerId !== "") {
+    if (message.providerId !== undefined) {
       writer.uint32(10).string(message.providerId);
     }
-    if (message.audiences !== "") {
+    if (message.audiences !== undefined) {
       writer.uint32(18).string(message.audiences);
     }
     return writer;

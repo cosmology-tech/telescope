@@ -243,16 +243,16 @@ function createBaseParseRequest(): ParseRequest {
 export const ParseRequest = {
   typeUrl: "/google.api.expr.conformance.v1alpha1.ParseRequest",
   encode(message: ParseRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.celSource !== "") {
+    if (message.celSource !== undefined) {
       writer.uint32(10).string(message.celSource);
     }
-    if (message.syntaxVersion !== "") {
+    if (message.syntaxVersion !== undefined) {
       writer.uint32(18).string(message.syntaxVersion);
     }
-    if (message.sourceLocation !== "") {
+    if (message.sourceLocation !== undefined) {
       writer.uint32(26).string(message.sourceLocation);
     }
-    if (message.disableMacros === true) {
+    if (message.disableMacros !== undefined) {
       writer.uint32(32).bool(message.disableMacros);
     }
     return writer;
@@ -495,10 +495,10 @@ export const CheckRequest = {
     for (const v of message.typeEnv) {
       Decl.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.container !== "") {
+    if (message.container !== undefined) {
       writer.uint32(26).string(message.container);
     }
-    if (message.noStdEnv === true) {
+    if (message.noStdEnv !== undefined) {
       writer.uint32(32).bool(message.noStdEnv);
     }
     return writer;
@@ -746,7 +746,7 @@ function createBaseEvalRequest_BindingsEntry(): EvalRequest_BindingsEntry {
 }
 export const EvalRequest_BindingsEntry = {
   encode(message: EvalRequest_BindingsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
@@ -857,7 +857,7 @@ export const EvalRequest = {
         value
       }, writer.uint32(26).fork()).ldelim();
     });
-    if (message.container !== "") {
+    if (message.container !== undefined) {
       writer.uint32(34).string(message.container);
     }
     return writer;
@@ -1148,7 +1148,7 @@ export const IssueDetails = {
     if (message.position !== undefined) {
       SourcePosition.encode(message.position, writer.uint32(18).fork()).ldelim();
     }
-    if (message.id !== BigInt(0)) {
+    if (message.id !== undefined) {
       writer.uint32(24).int64(message.id);
     }
     return writer;

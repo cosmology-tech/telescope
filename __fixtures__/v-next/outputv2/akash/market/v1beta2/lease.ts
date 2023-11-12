@@ -282,7 +282,7 @@ export const LeaseID = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): LeaseID {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LeaseID {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLeaseID();
@@ -367,7 +367,7 @@ export const LeaseID = {
       provider: object.provider
     };
   },
-  toAmino(message: LeaseID): LeaseIDAmino {
+  toAmino(message: LeaseID, useInterfaces: boolean = true): LeaseIDAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.dseq = message.dseq ? message.dseq.toString() : undefined;
@@ -379,8 +379,8 @@ export const LeaseID = {
   fromAminoMsg(object: LeaseIDAminoMsg): LeaseID {
     return LeaseID.fromAmino(object.value);
   },
-  fromProtoMsg(message: LeaseIDProtoMsg): LeaseID {
-    return LeaseID.decode(message.value);
+  fromProtoMsg(message: LeaseIDProtoMsg, useInterfaces: boolean = true): LeaseID {
+    return LeaseID.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LeaseID): Uint8Array {
     return LeaseID.encode(message).finish();
@@ -421,7 +421,7 @@ export const Lease = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Lease {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Lease {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLease();
@@ -429,13 +429,13 @@ export const Lease = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.leaseId = LeaseID.decode(reader, reader.uint32());
+          message.leaseId = LeaseID.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.state = (reader.int32() as any);
           break;
         case 3:
-          message.price = DecCoin.decode(reader, reader.uint32());
+          message.price = DecCoin.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
           message.createdAt = reader.int64();
@@ -512,11 +512,11 @@ export const Lease = {
       closedOn: BigInt(object.closed_on)
     };
   },
-  toAmino(message: Lease): LeaseAmino {
+  toAmino(message: Lease, useInterfaces: boolean = true): LeaseAmino {
     const obj: any = {};
-    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId) : undefined;
+    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId, useInterfaces) : undefined;
     obj.state = message.state;
-    obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
+    obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     obj.closed_on = message.closedOn ? message.closedOn.toString() : undefined;
     return obj;
@@ -524,8 +524,8 @@ export const Lease = {
   fromAminoMsg(object: LeaseAminoMsg): Lease {
     return Lease.fromAmino(object.value);
   },
-  fromProtoMsg(message: LeaseProtoMsg): Lease {
-    return Lease.decode(message.value);
+  fromProtoMsg(message: LeaseProtoMsg, useInterfaces: boolean = true): Lease {
+    return Lease.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Lease): Uint8Array {
     return Lease.encode(message).finish();
@@ -570,7 +570,7 @@ export const LeaseFilters = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): LeaseFilters {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LeaseFilters {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLeaseFilters();
@@ -664,7 +664,7 @@ export const LeaseFilters = {
       state: object.state
     };
   },
-  toAmino(message: LeaseFilters): LeaseFiltersAmino {
+  toAmino(message: LeaseFilters, useInterfaces: boolean = true): LeaseFiltersAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.dseq = message.dseq ? message.dseq.toString() : undefined;
@@ -677,8 +677,8 @@ export const LeaseFilters = {
   fromAminoMsg(object: LeaseFiltersAminoMsg): LeaseFilters {
     return LeaseFilters.fromAmino(object.value);
   },
-  fromProtoMsg(message: LeaseFiltersProtoMsg): LeaseFilters {
-    return LeaseFilters.decode(message.value);
+  fromProtoMsg(message: LeaseFiltersProtoMsg, useInterfaces: boolean = true): LeaseFilters {
+    return LeaseFilters.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LeaseFilters): Uint8Array {
     return LeaseFilters.encode(message).finish();
@@ -703,7 +703,7 @@ export const MsgCreateLease = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateLease {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateLease {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateLease();
@@ -711,7 +711,7 @@ export const MsgCreateLease = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.bidId = BidID.decode(reader, reader.uint32());
+          message.bidId = BidID.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -752,16 +752,16 @@ export const MsgCreateLease = {
       bidId: object?.bid_id ? BidID.fromAmino(object.bid_id) : undefined
     };
   },
-  toAmino(message: MsgCreateLease): MsgCreateLeaseAmino {
+  toAmino(message: MsgCreateLease, useInterfaces: boolean = true): MsgCreateLeaseAmino {
     const obj: any = {};
-    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : undefined;
+    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgCreateLeaseAminoMsg): MsgCreateLease {
     return MsgCreateLease.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgCreateLeaseProtoMsg): MsgCreateLease {
-    return MsgCreateLease.decode(message.value);
+  fromProtoMsg(message: MsgCreateLeaseProtoMsg, useInterfaces: boolean = true): MsgCreateLease {
+    return MsgCreateLease.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateLease): Uint8Array {
     return MsgCreateLease.encode(message).finish();
@@ -781,7 +781,7 @@ export const MsgCreateLeaseResponse = {
   encode(_: MsgCreateLeaseResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateLeaseResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateLeaseResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateLeaseResponse();
@@ -817,15 +817,15 @@ export const MsgCreateLeaseResponse = {
   fromAmino(_: MsgCreateLeaseResponseAmino): MsgCreateLeaseResponse {
     return {};
   },
-  toAmino(_: MsgCreateLeaseResponse): MsgCreateLeaseResponseAmino {
+  toAmino(_: MsgCreateLeaseResponse, useInterfaces: boolean = true): MsgCreateLeaseResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgCreateLeaseResponseAminoMsg): MsgCreateLeaseResponse {
     return MsgCreateLeaseResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgCreateLeaseResponseProtoMsg): MsgCreateLeaseResponse {
-    return MsgCreateLeaseResponse.decode(message.value);
+  fromProtoMsg(message: MsgCreateLeaseResponseProtoMsg, useInterfaces: boolean = true): MsgCreateLeaseResponse {
+    return MsgCreateLeaseResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateLeaseResponse): Uint8Array {
     return MsgCreateLeaseResponse.encode(message).finish();
@@ -850,7 +850,7 @@ export const MsgWithdrawLease = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgWithdrawLease {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgWithdrawLease {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawLease();
@@ -858,7 +858,7 @@ export const MsgWithdrawLease = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.bidId = LeaseID.decode(reader, reader.uint32());
+          message.bidId = LeaseID.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -899,16 +899,16 @@ export const MsgWithdrawLease = {
       bidId: object?.bid_id ? LeaseID.fromAmino(object.bid_id) : undefined
     };
   },
-  toAmino(message: MsgWithdrawLease): MsgWithdrawLeaseAmino {
+  toAmino(message: MsgWithdrawLease, useInterfaces: boolean = true): MsgWithdrawLeaseAmino {
     const obj: any = {};
-    obj.bid_id = message.bidId ? LeaseID.toAmino(message.bidId) : undefined;
+    obj.bid_id = message.bidId ? LeaseID.toAmino(message.bidId, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgWithdrawLeaseAminoMsg): MsgWithdrawLease {
     return MsgWithdrawLease.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgWithdrawLeaseProtoMsg): MsgWithdrawLease {
-    return MsgWithdrawLease.decode(message.value);
+  fromProtoMsg(message: MsgWithdrawLeaseProtoMsg, useInterfaces: boolean = true): MsgWithdrawLease {
+    return MsgWithdrawLease.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgWithdrawLease): Uint8Array {
     return MsgWithdrawLease.encode(message).finish();
@@ -928,7 +928,7 @@ export const MsgWithdrawLeaseResponse = {
   encode(_: MsgWithdrawLeaseResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgWithdrawLeaseResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgWithdrawLeaseResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawLeaseResponse();
@@ -964,15 +964,15 @@ export const MsgWithdrawLeaseResponse = {
   fromAmino(_: MsgWithdrawLeaseResponseAmino): MsgWithdrawLeaseResponse {
     return {};
   },
-  toAmino(_: MsgWithdrawLeaseResponse): MsgWithdrawLeaseResponseAmino {
+  toAmino(_: MsgWithdrawLeaseResponse, useInterfaces: boolean = true): MsgWithdrawLeaseResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgWithdrawLeaseResponseAminoMsg): MsgWithdrawLeaseResponse {
     return MsgWithdrawLeaseResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgWithdrawLeaseResponseProtoMsg): MsgWithdrawLeaseResponse {
-    return MsgWithdrawLeaseResponse.decode(message.value);
+  fromProtoMsg(message: MsgWithdrawLeaseResponseProtoMsg, useInterfaces: boolean = true): MsgWithdrawLeaseResponse {
+    return MsgWithdrawLeaseResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgWithdrawLeaseResponse): Uint8Array {
     return MsgWithdrawLeaseResponse.encode(message).finish();
@@ -997,7 +997,7 @@ export const MsgCloseLease = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCloseLease {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCloseLease {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseLease();
@@ -1005,7 +1005,7 @@ export const MsgCloseLease = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.leaseId = LeaseID.decode(reader, reader.uint32());
+          message.leaseId = LeaseID.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1046,16 +1046,16 @@ export const MsgCloseLease = {
       leaseId: object?.lease_id ? LeaseID.fromAmino(object.lease_id) : undefined
     };
   },
-  toAmino(message: MsgCloseLease): MsgCloseLeaseAmino {
+  toAmino(message: MsgCloseLease, useInterfaces: boolean = true): MsgCloseLeaseAmino {
     const obj: any = {};
-    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId) : undefined;
+    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgCloseLeaseAminoMsg): MsgCloseLease {
     return MsgCloseLease.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgCloseLeaseProtoMsg): MsgCloseLease {
-    return MsgCloseLease.decode(message.value);
+  fromProtoMsg(message: MsgCloseLeaseProtoMsg, useInterfaces: boolean = true): MsgCloseLease {
+    return MsgCloseLease.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCloseLease): Uint8Array {
     return MsgCloseLease.encode(message).finish();
@@ -1075,7 +1075,7 @@ export const MsgCloseLeaseResponse = {
   encode(_: MsgCloseLeaseResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCloseLeaseResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCloseLeaseResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseLeaseResponse();
@@ -1111,15 +1111,15 @@ export const MsgCloseLeaseResponse = {
   fromAmino(_: MsgCloseLeaseResponseAmino): MsgCloseLeaseResponse {
     return {};
   },
-  toAmino(_: MsgCloseLeaseResponse): MsgCloseLeaseResponseAmino {
+  toAmino(_: MsgCloseLeaseResponse, useInterfaces: boolean = true): MsgCloseLeaseResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgCloseLeaseResponseAminoMsg): MsgCloseLeaseResponse {
     return MsgCloseLeaseResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgCloseLeaseResponseProtoMsg): MsgCloseLeaseResponse {
-    return MsgCloseLeaseResponse.decode(message.value);
+  fromProtoMsg(message: MsgCloseLeaseResponseProtoMsg, useInterfaces: boolean = true): MsgCloseLeaseResponse {
+    return MsgCloseLeaseResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCloseLeaseResponse): Uint8Array {
     return MsgCloseLeaseResponse.encode(message).finish();

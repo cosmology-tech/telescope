@@ -28,7 +28,7 @@ export const Params = {
     if (message.bidMinDeposit !== undefined) {
       Coin.encode(message.bidMinDeposit, writer.uint32(10).fork()).ldelim();
     }
-    if (message.orderMaxBids !== 0) {
+    if (message.orderMaxBids !== undefined) {
       writer.uint32(16).uint32(message.orderMaxBids);
     }
     return writer;

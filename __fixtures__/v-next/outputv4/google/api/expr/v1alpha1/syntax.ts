@@ -656,7 +656,7 @@ function createBaseExpr(): Expr {
 export const Expr = {
   typeUrl: "/google.api.expr.v1alpha1.Expr",
   encode(message: Expr, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== BigInt(0)) {
+    if (message.id !== undefined) {
       writer.uint32(16).int64(message.id);
     }
     if (message.constExpr !== undefined) {
@@ -856,7 +856,7 @@ function createBaseExpr_Ident(): Expr_Ident {
 export const Expr_Ident = {
   typeUrl: "/google.api.expr.v1alpha1.Ident",
   encode(message: Expr_Ident, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -947,10 +947,10 @@ export const Expr_Select = {
     if (message.operand !== undefined) {
       Expr.encode(message.operand, writer.uint32(10).fork()).ldelim();
     }
-    if (message.field !== "") {
+    if (message.field !== undefined) {
       writer.uint32(18).string(message.field);
     }
-    if (message.testOnly === true) {
+    if (message.testOnly !== undefined) {
       writer.uint32(24).bool(message.testOnly);
     }
     return writer;
@@ -1065,7 +1065,7 @@ export const Expr_Call = {
     if (message.target !== undefined) {
       Expr.encode(message.target, writer.uint32(10).fork()).ldelim();
     }
-    if (message.function !== "") {
+    if (message.function !== undefined) {
       writer.uint32(18).string(message.function);
     }
     for (const v of message.args) {
@@ -1289,7 +1289,7 @@ function createBaseExpr_CreateStruct(): Expr_CreateStruct {
 export const Expr_CreateStruct = {
   typeUrl: "/google.api.expr.v1alpha1.CreateStruct",
   encode(message: Expr_CreateStruct, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.messageName !== "") {
+    if (message.messageName !== undefined) {
       writer.uint32(10).string(message.messageName);
     }
     for (const v of message.entries) {
@@ -1404,7 +1404,7 @@ function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
 export const Expr_CreateStruct_Entry = {
   typeUrl: "/google.api.expr.v1alpha1.Entry",
   encode(message: Expr_CreateStruct_Entry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== BigInt(0)) {
+    if (message.id !== undefined) {
       writer.uint32(8).int64(message.id);
     }
     if (message.fieldKey !== undefined) {
@@ -1544,13 +1544,13 @@ function createBaseExpr_Comprehension(): Expr_Comprehension {
 export const Expr_Comprehension = {
   typeUrl: "/google.api.expr.v1alpha1.Comprehension",
   encode(message: Expr_Comprehension, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.iterVar !== "") {
+    if (message.iterVar !== undefined) {
       writer.uint32(10).string(message.iterVar);
     }
     if (message.iterRange !== undefined) {
       Expr.encode(message.iterRange, writer.uint32(18).fork()).ldelim();
     }
-    if (message.accuVar !== "") {
+    if (message.accuVar !== undefined) {
       writer.uint32(26).string(message.accuVar);
     }
     if (message.accuInit !== undefined) {
@@ -1900,7 +1900,7 @@ export const Constant = {
       stringValue: object?.string_value,
       bytesValue: object?.bytes_value,
       durationValue: object?.duration_value ? Duration.fromAmino(object.duration_value) : undefined,
-      timestampValue: object?.timestamp_value
+      timestampValue: object?.timestamp_value ? fromTimestamp(Timestamp.fromAmino(object.timestamp_value)) : undefined
     };
   },
   toAmino(message: Constant): ConstantAmino {
@@ -1913,7 +1913,7 @@ export const Constant = {
     obj.string_value = message.stringValue;
     obj.bytes_value = message.bytesValue;
     obj.duration_value = message.durationValue ? Duration.toAmino(message.durationValue) : undefined;
-    obj.timestamp_value = message.timestampValue;
+    obj.timestamp_value = message.timestampValue ? Timestamp.toAmino(toTimestamp(message.timestampValue)) : undefined;
     return obj;
   },
   fromAminoMsg(object: ConstantAminoMsg): Constant {
@@ -1940,10 +1940,10 @@ function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
 }
 export const SourceInfo_PositionsEntry = {
   encode(message: SourceInfo_PositionsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== BigInt(0)) {
+    if (message.key !== undefined) {
       writer.uint32(8).int64(message.key);
     }
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(16).int32(message.value);
     }
     return writer;
@@ -2036,7 +2036,7 @@ function createBaseSourceInfo_MacroCallsEntry(): SourceInfo_MacroCallsEntry {
 }
 export const SourceInfo_MacroCallsEntry = {
   encode(message: SourceInfo_MacroCallsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== BigInt(0)) {
+    if (message.key !== undefined) {
       writer.uint32(8).int64(message.key);
     }
     if (message.value !== undefined) {
@@ -2138,10 +2138,10 @@ function createBaseSourceInfo(): SourceInfo {
 export const SourceInfo = {
   typeUrl: "/google.api.expr.v1alpha1.SourceInfo",
   encode(message: SourceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.syntaxVersion !== "") {
+    if (message.syntaxVersion !== undefined) {
       writer.uint32(10).string(message.syntaxVersion);
     }
-    if (message.location !== "") {
+    if (message.location !== undefined) {
       writer.uint32(18).string(message.location);
     }
     writer.uint32(26).fork();
@@ -2400,16 +2400,16 @@ function createBaseSourcePosition(): SourcePosition {
 export const SourcePosition = {
   typeUrl: "/google.api.expr.v1alpha1.SourcePosition",
   encode(message: SourcePosition, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.location !== "") {
+    if (message.location !== undefined) {
       writer.uint32(10).string(message.location);
     }
-    if (message.offset !== 0) {
+    if (message.offset !== undefined) {
       writer.uint32(16).int32(message.offset);
     }
-    if (message.line !== 0) {
+    if (message.line !== undefined) {
       writer.uint32(24).int32(message.line);
     }
-    if (message.column !== 0) {
+    if (message.column !== undefined) {
       writer.uint32(32).int32(message.column);
     }
     return writer;

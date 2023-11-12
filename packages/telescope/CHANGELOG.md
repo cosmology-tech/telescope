@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.13](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.12...@cosmology/telescope@1.0.13) (2023-11-10)
+
+**Note:** Version bump only for package @cosmology/telescope
+
 ## [1.0.12](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.11...@cosmology/telescope@1.0.12) (2023-11-03)
 
 **Note:** Version bump only for package @cosmology/telescope

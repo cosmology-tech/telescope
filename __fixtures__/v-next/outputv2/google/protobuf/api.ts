@@ -496,7 +496,7 @@ export const Api = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Api {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Api {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseApi();
@@ -507,19 +507,19 @@ export const Api = {
           message.name = reader.string();
           break;
         case 2:
-          message.methods.push(Method.decode(reader, reader.uint32()));
+          message.methods.push(Method.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.options.push(Option.decode(reader, reader.uint32()));
+          message.options.push(Option.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 4:
           message.version = reader.string();
           break;
         case 5:
-          message.sourceContext = SourceContext.decode(reader, reader.uint32());
+          message.sourceContext = SourceContext.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 6:
-          message.mixins.push(Mixin.decode(reader, reader.uint32()));
+          message.mixins.push(Mixin.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 7:
           message.syntax = (reader.int32() as any);
@@ -623,23 +623,23 @@ export const Api = {
       syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
     };
   },
-  toAmino(message: Api): ApiAmino {
+  toAmino(message: Api, useInterfaces: boolean = true): ApiAmino {
     const obj: any = {};
     obj.name = message.name;
     if (message.methods) {
-      obj.methods = message.methods.map(e => e ? Method.toAmino(e) : undefined);
+      obj.methods = message.methods.map(e => e ? Method.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.methods = [];
     }
     if (message.options) {
-      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+      obj.options = message.options.map(e => e ? Option.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.options = [];
     }
     obj.version = message.version;
-    obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined;
+    obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext, useInterfaces) : undefined;
     if (message.mixins) {
-      obj.mixins = message.mixins.map(e => e ? Mixin.toAmino(e) : undefined);
+      obj.mixins = message.mixins.map(e => e ? Mixin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.mixins = [];
     }
@@ -649,8 +649,8 @@ export const Api = {
   fromAminoMsg(object: ApiAminoMsg): Api {
     return Api.fromAmino(object.value);
   },
-  fromProtoMsg(message: ApiProtoMsg): Api {
-    return Api.decode(message.value);
+  fromProtoMsg(message: ApiProtoMsg, useInterfaces: boolean = true): Api {
+    return Api.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Api): Uint8Array {
     return Api.encode(message).finish();
@@ -699,7 +699,7 @@ export const Method = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Method {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Method {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMethod();
@@ -722,7 +722,7 @@ export const Method = {
           message.responseStreaming = reader.bool();
           break;
         case 6:
-          message.options.push(Option.decode(reader, reader.uint32()));
+          message.options.push(Option.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 7:
           message.syntax = (reader.int32() as any);
@@ -808,7 +808,7 @@ export const Method = {
       syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
     };
   },
-  toAmino(message: Method): MethodAmino {
+  toAmino(message: Method, useInterfaces: boolean = true): MethodAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.request_type_url = message.requestTypeUrl;
@@ -816,7 +816,7 @@ export const Method = {
     obj.response_type_url = message.responseTypeUrl;
     obj.response_streaming = message.responseStreaming;
     if (message.options) {
-      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+      obj.options = message.options.map(e => e ? Option.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.options = [];
     }
@@ -826,8 +826,8 @@ export const Method = {
   fromAminoMsg(object: MethodAminoMsg): Method {
     return Method.fromAmino(object.value);
   },
-  fromProtoMsg(message: MethodProtoMsg): Method {
-    return Method.decode(message.value);
+  fromProtoMsg(message: MethodProtoMsg, useInterfaces: boolean = true): Method {
+    return Method.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Method): Uint8Array {
     return Method.encode(message).finish();
@@ -856,7 +856,7 @@ export const Mixin = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Mixin {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Mixin {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMixin();
@@ -912,7 +912,7 @@ export const Mixin = {
       root: object.root
     };
   },
-  toAmino(message: Mixin): MixinAmino {
+  toAmino(message: Mixin, useInterfaces: boolean = true): MixinAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.root = message.root;
@@ -921,8 +921,8 @@ export const Mixin = {
   fromAminoMsg(object: MixinAminoMsg): Mixin {
     return Mixin.fromAmino(object.value);
   },
-  fromProtoMsg(message: MixinProtoMsg): Mixin {
-    return Mixin.decode(message.value);
+  fromProtoMsg(message: MixinProtoMsg, useInterfaces: boolean = true): Mixin {
+    return Mixin.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Mixin): Uint8Array {
     return Mixin.encode(message).finish();

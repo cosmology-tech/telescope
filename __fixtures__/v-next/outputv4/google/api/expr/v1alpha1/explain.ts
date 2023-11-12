@@ -187,10 +187,10 @@ function createBaseExplain_ExprStep(): Explain_ExprStep {
 export const Explain_ExprStep = {
   typeUrl: "/google.api.expr.v1alpha1.ExprStep",
   encode(message: Explain_ExprStep, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== BigInt(0)) {
+    if (message.id !== undefined) {
       writer.uint32(8).int64(message.id);
     }
-    if (message.valueIndex !== 0) {
+    if (message.valueIndex !== undefined) {
       writer.uint32(16).int32(message.valueIndex);
     }
     return writer;

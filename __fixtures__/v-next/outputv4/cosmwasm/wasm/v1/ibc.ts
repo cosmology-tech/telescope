@@ -55,13 +55,13 @@ function createBaseMsgIBCSend(): MsgIBCSend {
 export const MsgIBCSend = {
   typeUrl: "/cosmwasm.wasm.v1.MsgIBCSend",
   encode(message: MsgIBCSend, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.channel !== "") {
+    if (message.channel !== undefined) {
       writer.uint32(18).string(message.channel);
     }
-    if (message.timeoutHeight !== BigInt(0)) {
+    if (message.timeoutHeight !== undefined) {
       writer.uint32(32).uint64(message.timeoutHeight);
     }
-    if (message.timeoutTimestamp !== BigInt(0)) {
+    if (message.timeoutTimestamp !== undefined) {
       writer.uint32(40).uint64(message.timeoutTimestamp);
     }
     if (message.data.length !== 0) {
@@ -193,7 +193,7 @@ function createBaseMsgIBCCloseChannel(): MsgIBCCloseChannel {
 export const MsgIBCCloseChannel = {
   typeUrl: "/cosmwasm.wasm.v1.MsgIBCCloseChannel",
   encode(message: MsgIBCCloseChannel, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.channel !== "") {
+    if (message.channel !== undefined) {
       writer.uint32(18).string(message.channel);
     }
     return writer;

@@ -238,7 +238,7 @@ function createBaseSigningInfo(): SigningInfo {
 export const SigningInfo = {
   typeUrl: "/cosmos.slashing.v1beta1.SigningInfo",
   encode(message: SigningInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     if (message.validatorSigningInfo !== undefined) {
@@ -347,7 +347,7 @@ function createBaseValidatorMissedBlocks(): ValidatorMissedBlocks {
 export const ValidatorMissedBlocks = {
   typeUrl: "/cosmos.slashing.v1beta1.ValidatorMissedBlocks",
   encode(message: ValidatorMissedBlocks, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     for (const v of message.missedBlocks) {
@@ -466,10 +466,10 @@ function createBaseMissedBlock(): MissedBlock {
 export const MissedBlock = {
   typeUrl: "/cosmos.slashing.v1beta1.MissedBlock",
   encode(message: MissedBlock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.index !== BigInt(0)) {
+    if (message.index !== undefined) {
       writer.uint32(8).int64(message.index);
     }
-    if (message.missed === true) {
+    if (message.missed !== undefined) {
       writer.uint32(16).bool(message.missed);
     }
     return writer;

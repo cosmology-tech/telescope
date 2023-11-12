@@ -21,7 +21,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/osmosis.ibcratelimit.v1beta1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contractAddress !== "") {
+    if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
     }
     return writer;

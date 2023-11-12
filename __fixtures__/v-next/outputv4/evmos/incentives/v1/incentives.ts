@@ -109,19 +109,19 @@ function createBaseIncentive(): Incentive {
 export const Incentive = {
   typeUrl: "/evmos.incentives.v1.Incentive",
   encode(message: Incentive, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contract !== "") {
+    if (message.contract !== undefined) {
       writer.uint32(10).string(message.contract);
     }
     for (const v of message.allocations) {
       DecCoin.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.epochs !== 0) {
+    if (message.epochs !== undefined) {
       writer.uint32(24).uint32(message.epochs);
     }
     if (message.startTime !== undefined) {
       Timestamp.encode(toTimestamp(message.startTime), writer.uint32(34).fork()).ldelim();
     }
-    if (message.totalGas !== BigInt(0)) {
+    if (message.totalGas !== undefined) {
       writer.uint32(40).uint64(message.totalGas);
     }
     return writer;
@@ -224,7 +224,7 @@ export const Incentive = {
       contract: object.contract,
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromAmino(e)) : [],
       epochs: object.epochs,
-      startTime: object.start_time,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
       totalGas: BigInt(object.total_gas)
     };
   },
@@ -237,7 +237,7 @@ export const Incentive = {
       obj.allocations = [];
     }
     obj.epochs = message.epochs;
-    obj.start_time = message.startTime;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.total_gas = message.totalGas ? message.totalGas.toString() : undefined;
     return obj;
   },
@@ -267,13 +267,13 @@ function createBaseGasMeter(): GasMeter {
 export const GasMeter = {
   typeUrl: "/evmos.incentives.v1.GasMeter",
   encode(message: GasMeter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contract !== "") {
+    if (message.contract !== undefined) {
       writer.uint32(10).string(message.contract);
     }
-    if (message.participant !== "") {
+    if (message.participant !== undefined) {
       writer.uint32(18).string(message.participant);
     }
-    if (message.cumulativeGas !== BigInt(0)) {
+    if (message.cumulativeGas !== undefined) {
       writer.uint32(24).uint64(message.cumulativeGas);
     }
     return writer;
@@ -387,19 +387,19 @@ function createBaseRegisterIncentiveProposal(): RegisterIncentiveProposal {
 export const RegisterIncentiveProposal = {
   typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal",
   encode(message: RegisterIncentiveProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
-    if (message.contract !== "") {
+    if (message.contract !== undefined) {
       writer.uint32(26).string(message.contract);
     }
     for (const v of message.allocations) {
       DecCoin.encode(v!, writer.uint32(34).fork()).ldelim();
     }
-    if (message.epochs !== 0) {
+    if (message.epochs !== undefined) {
       writer.uint32(40).uint32(message.epochs);
     }
     return writer;
@@ -543,13 +543,13 @@ function createBaseCancelIncentiveProposal(): CancelIncentiveProposal {
 export const CancelIncentiveProposal = {
   typeUrl: "/evmos.incentives.v1.CancelIncentiveProposal",
   encode(message: CancelIncentiveProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
-    if (message.contract !== "") {
+    if (message.contract !== undefined) {
       writer.uint32(26).string(message.contract);
     }
     return writer;
