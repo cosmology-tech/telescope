@@ -188,7 +188,31 @@ export const createScopedRpcTmFactory = (
     identifier: string
 ) => {
 
-    context.addUtil('connectComet');
+    const newClientType = context.pluginValue('rpcClients.clientType');
+
+    let awaitClientCreation;
+    if (newClientType) {
+        context.addUtil('connectComet');
+        awaitClientCreation = t.callExpression(
+            t.identifier('connectComet'),      
+            [
+                t.identifier('rpcEndpoint')
+            ]
+    )
+    } else {
+        context.addUtil('Tendermint34Client');
+        awaitClientCreation = t.callExpression(
+            t.memberExpression(
+                t.identifier('Tendermint34Client'),
+                t.identifier('connect')
+            ),
+            [
+                t.identifier('rpcEndpoint')
+            ]
+        )
+    }
+
+    
     context.addUtil('HttpEndpoint');
     context.addUtil('QueryClient');
 
@@ -230,12 +254,7 @@ export const createScopedRpcTmFactory = (
                                 t.variableDeclarator(
                                     t.identifier('cometClient'),
                                     t.awaitExpression(
-                                            t.callExpression(
-                                                t.identifier('connectComet'),      
-                                                [
-                                                    t.identifier('rpcEndpoint')
-                                                ]
-                                        )
+                                        awaitClientCreation
                                     )
                                 )
                             ]),
