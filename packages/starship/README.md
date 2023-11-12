@@ -73,3 +73,4 @@ If you are using kind for your kubernetes cluster, you can delete it with
 ```bash
 npm run e2e:clean
 ```
+
