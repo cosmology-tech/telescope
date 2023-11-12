@@ -608,7 +608,7 @@ export const ModuleBalanceRequest = {
   encode(_: ModuleBalanceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModuleBalanceRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): ModuleBalanceRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleBalanceRequest();
@@ -644,21 +644,21 @@ export const ModuleBalanceRequest = {
   fromAmino(_: ModuleBalanceRequestAmino): ModuleBalanceRequest {
     return {};
   },
-  toAmino(_: ModuleBalanceRequest, useInterfaces: boolean = true): ModuleBalanceRequestAmino {
+  toAmino(_: ModuleBalanceRequest): ModuleBalanceRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: ModuleBalanceRequestAminoMsg): ModuleBalanceRequest {
     return ModuleBalanceRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: ModuleBalanceRequest, useInterfaces: boolean = true): ModuleBalanceRequestAminoMsg {
+  toAminoMsg(message: ModuleBalanceRequest): ModuleBalanceRequestAminoMsg {
     return {
       type: "osmosis/lockup/module-balance-request",
-      value: ModuleBalanceRequest.toAmino(message, useInterfaces)
+      value: ModuleBalanceRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: ModuleBalanceRequestProtoMsg, useInterfaces: boolean = true): ModuleBalanceRequest {
-    return ModuleBalanceRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ModuleBalanceRequestProtoMsg): ModuleBalanceRequest {
+    return ModuleBalanceRequest.decode(message.value);
   },
   toProto(message: ModuleBalanceRequest): Uint8Array {
     return ModuleBalanceRequest.encode(message).finish();
@@ -684,7 +684,7 @@ export const ModuleBalanceResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModuleBalanceResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): ModuleBalanceResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleBalanceResponse();
@@ -692,7 +692,7 @@ export const ModuleBalanceResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.coins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.coins.push(Coin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -739,10 +739,10 @@ export const ModuleBalanceResponse = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: ModuleBalanceResponse, useInterfaces: boolean = true): ModuleBalanceResponseAmino {
+  toAmino(message: ModuleBalanceResponse): ModuleBalanceResponseAmino {
     const obj: any = {};
     if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.coins = [];
     }
@@ -751,14 +751,14 @@ export const ModuleBalanceResponse = {
   fromAminoMsg(object: ModuleBalanceResponseAminoMsg): ModuleBalanceResponse {
     return ModuleBalanceResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: ModuleBalanceResponse, useInterfaces: boolean = true): ModuleBalanceResponseAminoMsg {
+  toAminoMsg(message: ModuleBalanceResponse): ModuleBalanceResponseAminoMsg {
     return {
       type: "osmosis/lockup/module-balance-response",
-      value: ModuleBalanceResponse.toAmino(message, useInterfaces)
+      value: ModuleBalanceResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: ModuleBalanceResponseProtoMsg, useInterfaces: boolean = true): ModuleBalanceResponse {
-    return ModuleBalanceResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ModuleBalanceResponseProtoMsg): ModuleBalanceResponse {
+    return ModuleBalanceResponse.decode(message.value);
   },
   toProto(message: ModuleBalanceResponse): Uint8Array {
     return ModuleBalanceResponse.encode(message).finish();
@@ -779,7 +779,7 @@ export const ModuleLockedAmountRequest = {
   encode(_: ModuleLockedAmountRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModuleLockedAmountRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): ModuleLockedAmountRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleLockedAmountRequest();
@@ -815,21 +815,21 @@ export const ModuleLockedAmountRequest = {
   fromAmino(_: ModuleLockedAmountRequestAmino): ModuleLockedAmountRequest {
     return {};
   },
-  toAmino(_: ModuleLockedAmountRequest, useInterfaces: boolean = true): ModuleLockedAmountRequestAmino {
+  toAmino(_: ModuleLockedAmountRequest): ModuleLockedAmountRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: ModuleLockedAmountRequestAminoMsg): ModuleLockedAmountRequest {
     return ModuleLockedAmountRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: ModuleLockedAmountRequest, useInterfaces: boolean = true): ModuleLockedAmountRequestAminoMsg {
+  toAminoMsg(message: ModuleLockedAmountRequest): ModuleLockedAmountRequestAminoMsg {
     return {
       type: "osmosis/lockup/module-locked-amount-request",
-      value: ModuleLockedAmountRequest.toAmino(message, useInterfaces)
+      value: ModuleLockedAmountRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: ModuleLockedAmountRequestProtoMsg, useInterfaces: boolean = true): ModuleLockedAmountRequest {
-    return ModuleLockedAmountRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ModuleLockedAmountRequestProtoMsg): ModuleLockedAmountRequest {
+    return ModuleLockedAmountRequest.decode(message.value);
   },
   toProto(message: ModuleLockedAmountRequest): Uint8Array {
     return ModuleLockedAmountRequest.encode(message).finish();
@@ -855,7 +855,7 @@ export const ModuleLockedAmountResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModuleLockedAmountResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): ModuleLockedAmountResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleLockedAmountResponse();
@@ -863,7 +863,7 @@ export const ModuleLockedAmountResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.coins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.coins.push(Coin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -910,10 +910,10 @@ export const ModuleLockedAmountResponse = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: ModuleLockedAmountResponse, useInterfaces: boolean = true): ModuleLockedAmountResponseAmino {
+  toAmino(message: ModuleLockedAmountResponse): ModuleLockedAmountResponseAmino {
     const obj: any = {};
     if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.coins = [];
     }
@@ -922,14 +922,14 @@ export const ModuleLockedAmountResponse = {
   fromAminoMsg(object: ModuleLockedAmountResponseAminoMsg): ModuleLockedAmountResponse {
     return ModuleLockedAmountResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: ModuleLockedAmountResponse, useInterfaces: boolean = true): ModuleLockedAmountResponseAminoMsg {
+  toAminoMsg(message: ModuleLockedAmountResponse): ModuleLockedAmountResponseAminoMsg {
     return {
       type: "osmosis/lockup/module-locked-amount-response",
-      value: ModuleLockedAmountResponse.toAmino(message, useInterfaces)
+      value: ModuleLockedAmountResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: ModuleLockedAmountResponseProtoMsg, useInterfaces: boolean = true): ModuleLockedAmountResponse {
-    return ModuleLockedAmountResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ModuleLockedAmountResponseProtoMsg): ModuleLockedAmountResponse {
+    return ModuleLockedAmountResponse.decode(message.value);
   },
   toProto(message: ModuleLockedAmountResponse): Uint8Array {
     return ModuleLockedAmountResponse.encode(message).finish();
@@ -955,7 +955,7 @@ export const AccountUnlockableCoinsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountUnlockableCoinsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountUnlockableCoinsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountUnlockableCoinsRequest();
@@ -1002,7 +1002,7 @@ export const AccountUnlockableCoinsRequest = {
       owner: object.owner
     };
   },
-  toAmino(message: AccountUnlockableCoinsRequest, useInterfaces: boolean = true): AccountUnlockableCoinsRequestAmino {
+  toAmino(message: AccountUnlockableCoinsRequest): AccountUnlockableCoinsRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
@@ -1010,14 +1010,14 @@ export const AccountUnlockableCoinsRequest = {
   fromAminoMsg(object: AccountUnlockableCoinsRequestAminoMsg): AccountUnlockableCoinsRequest {
     return AccountUnlockableCoinsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountUnlockableCoinsRequest, useInterfaces: boolean = true): AccountUnlockableCoinsRequestAminoMsg {
+  toAminoMsg(message: AccountUnlockableCoinsRequest): AccountUnlockableCoinsRequestAminoMsg {
     return {
       type: "osmosis/lockup/account-unlockable-coins-request",
-      value: AccountUnlockableCoinsRequest.toAmino(message, useInterfaces)
+      value: AccountUnlockableCoinsRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountUnlockableCoinsRequestProtoMsg, useInterfaces: boolean = true): AccountUnlockableCoinsRequest {
-    return AccountUnlockableCoinsRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountUnlockableCoinsRequestProtoMsg): AccountUnlockableCoinsRequest {
+    return AccountUnlockableCoinsRequest.decode(message.value);
   },
   toProto(message: AccountUnlockableCoinsRequest): Uint8Array {
     return AccountUnlockableCoinsRequest.encode(message).finish();
@@ -1043,7 +1043,7 @@ export const AccountUnlockableCoinsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountUnlockableCoinsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountUnlockableCoinsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountUnlockableCoinsResponse();
@@ -1051,7 +1051,7 @@ export const AccountUnlockableCoinsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.coins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.coins.push(Coin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1098,10 +1098,10 @@ export const AccountUnlockableCoinsResponse = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: AccountUnlockableCoinsResponse, useInterfaces: boolean = true): AccountUnlockableCoinsResponseAmino {
+  toAmino(message: AccountUnlockableCoinsResponse): AccountUnlockableCoinsResponseAmino {
     const obj: any = {};
     if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.coins = [];
     }
@@ -1110,14 +1110,14 @@ export const AccountUnlockableCoinsResponse = {
   fromAminoMsg(object: AccountUnlockableCoinsResponseAminoMsg): AccountUnlockableCoinsResponse {
     return AccountUnlockableCoinsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountUnlockableCoinsResponse, useInterfaces: boolean = true): AccountUnlockableCoinsResponseAminoMsg {
+  toAminoMsg(message: AccountUnlockableCoinsResponse): AccountUnlockableCoinsResponseAminoMsg {
     return {
       type: "osmosis/lockup/account-unlockable-coins-response",
-      value: AccountUnlockableCoinsResponse.toAmino(message, useInterfaces)
+      value: AccountUnlockableCoinsResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountUnlockableCoinsResponseProtoMsg, useInterfaces: boolean = true): AccountUnlockableCoinsResponse {
-    return AccountUnlockableCoinsResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountUnlockableCoinsResponseProtoMsg): AccountUnlockableCoinsResponse {
+    return AccountUnlockableCoinsResponse.decode(message.value);
   },
   toProto(message: AccountUnlockableCoinsResponse): Uint8Array {
     return AccountUnlockableCoinsResponse.encode(message).finish();
@@ -1143,7 +1143,7 @@ export const AccountUnlockingCoinsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountUnlockingCoinsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountUnlockingCoinsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountUnlockingCoinsRequest();
@@ -1190,7 +1190,7 @@ export const AccountUnlockingCoinsRequest = {
       owner: object.owner
     };
   },
-  toAmino(message: AccountUnlockingCoinsRequest, useInterfaces: boolean = true): AccountUnlockingCoinsRequestAmino {
+  toAmino(message: AccountUnlockingCoinsRequest): AccountUnlockingCoinsRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
@@ -1198,14 +1198,14 @@ export const AccountUnlockingCoinsRequest = {
   fromAminoMsg(object: AccountUnlockingCoinsRequestAminoMsg): AccountUnlockingCoinsRequest {
     return AccountUnlockingCoinsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountUnlockingCoinsRequest, useInterfaces: boolean = true): AccountUnlockingCoinsRequestAminoMsg {
+  toAminoMsg(message: AccountUnlockingCoinsRequest): AccountUnlockingCoinsRequestAminoMsg {
     return {
       type: "osmosis/lockup/account-unlocking-coins-request",
-      value: AccountUnlockingCoinsRequest.toAmino(message, useInterfaces)
+      value: AccountUnlockingCoinsRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountUnlockingCoinsRequestProtoMsg, useInterfaces: boolean = true): AccountUnlockingCoinsRequest {
-    return AccountUnlockingCoinsRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountUnlockingCoinsRequestProtoMsg): AccountUnlockingCoinsRequest {
+    return AccountUnlockingCoinsRequest.decode(message.value);
   },
   toProto(message: AccountUnlockingCoinsRequest): Uint8Array {
     return AccountUnlockingCoinsRequest.encode(message).finish();
@@ -1231,7 +1231,7 @@ export const AccountUnlockingCoinsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountUnlockingCoinsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountUnlockingCoinsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountUnlockingCoinsResponse();
@@ -1239,7 +1239,7 @@ export const AccountUnlockingCoinsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.coins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.coins.push(Coin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1286,10 +1286,10 @@ export const AccountUnlockingCoinsResponse = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: AccountUnlockingCoinsResponse, useInterfaces: boolean = true): AccountUnlockingCoinsResponseAmino {
+  toAmino(message: AccountUnlockingCoinsResponse): AccountUnlockingCoinsResponseAmino {
     const obj: any = {};
     if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.coins = [];
     }
@@ -1298,14 +1298,14 @@ export const AccountUnlockingCoinsResponse = {
   fromAminoMsg(object: AccountUnlockingCoinsResponseAminoMsg): AccountUnlockingCoinsResponse {
     return AccountUnlockingCoinsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountUnlockingCoinsResponse, useInterfaces: boolean = true): AccountUnlockingCoinsResponseAminoMsg {
+  toAminoMsg(message: AccountUnlockingCoinsResponse): AccountUnlockingCoinsResponseAminoMsg {
     return {
       type: "osmosis/lockup/account-unlocking-coins-response",
-      value: AccountUnlockingCoinsResponse.toAmino(message, useInterfaces)
+      value: AccountUnlockingCoinsResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountUnlockingCoinsResponseProtoMsg, useInterfaces: boolean = true): AccountUnlockingCoinsResponse {
-    return AccountUnlockingCoinsResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountUnlockingCoinsResponseProtoMsg): AccountUnlockingCoinsResponse {
+    return AccountUnlockingCoinsResponse.decode(message.value);
   },
   toProto(message: AccountUnlockingCoinsResponse): Uint8Array {
     return AccountUnlockingCoinsResponse.encode(message).finish();
@@ -1331,7 +1331,7 @@ export const AccountLockedCoinsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountLockedCoinsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountLockedCoinsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedCoinsRequest();
@@ -1378,7 +1378,7 @@ export const AccountLockedCoinsRequest = {
       owner: object.owner
     };
   },
-  toAmino(message: AccountLockedCoinsRequest, useInterfaces: boolean = true): AccountLockedCoinsRequestAmino {
+  toAmino(message: AccountLockedCoinsRequest): AccountLockedCoinsRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
     return obj;
@@ -1386,14 +1386,14 @@ export const AccountLockedCoinsRequest = {
   fromAminoMsg(object: AccountLockedCoinsRequestAminoMsg): AccountLockedCoinsRequest {
     return AccountLockedCoinsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountLockedCoinsRequest, useInterfaces: boolean = true): AccountLockedCoinsRequestAminoMsg {
+  toAminoMsg(message: AccountLockedCoinsRequest): AccountLockedCoinsRequestAminoMsg {
     return {
       type: "osmosis/lockup/account-locked-coins-request",
-      value: AccountLockedCoinsRequest.toAmino(message, useInterfaces)
+      value: AccountLockedCoinsRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountLockedCoinsRequestProtoMsg, useInterfaces: boolean = true): AccountLockedCoinsRequest {
-    return AccountLockedCoinsRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountLockedCoinsRequestProtoMsg): AccountLockedCoinsRequest {
+    return AccountLockedCoinsRequest.decode(message.value);
   },
   toProto(message: AccountLockedCoinsRequest): Uint8Array {
     return AccountLockedCoinsRequest.encode(message).finish();
@@ -1419,7 +1419,7 @@ export const AccountLockedCoinsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountLockedCoinsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountLockedCoinsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedCoinsResponse();
@@ -1427,7 +1427,7 @@ export const AccountLockedCoinsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.coins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.coins.push(Coin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1474,10 +1474,10 @@ export const AccountLockedCoinsResponse = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: AccountLockedCoinsResponse, useInterfaces: boolean = true): AccountLockedCoinsResponseAmino {
+  toAmino(message: AccountLockedCoinsResponse): AccountLockedCoinsResponseAmino {
     const obj: any = {};
     if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.coins = [];
     }
@@ -1486,14 +1486,14 @@ export const AccountLockedCoinsResponse = {
   fromAminoMsg(object: AccountLockedCoinsResponseAminoMsg): AccountLockedCoinsResponse {
     return AccountLockedCoinsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountLockedCoinsResponse, useInterfaces: boolean = true): AccountLockedCoinsResponseAminoMsg {
+  toAminoMsg(message: AccountLockedCoinsResponse): AccountLockedCoinsResponseAminoMsg {
     return {
       type: "osmosis/lockup/account-locked-coins-response",
-      value: AccountLockedCoinsResponse.toAmino(message, useInterfaces)
+      value: AccountLockedCoinsResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountLockedCoinsResponseProtoMsg, useInterfaces: boolean = true): AccountLockedCoinsResponse {
-    return AccountLockedCoinsResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountLockedCoinsResponseProtoMsg): AccountLockedCoinsResponse {
+    return AccountLockedCoinsResponse.decode(message.value);
   },
   toProto(message: AccountLockedCoinsResponse): Uint8Array {
     return AccountLockedCoinsResponse.encode(message).finish();
@@ -1523,7 +1523,7 @@ export const AccountLockedPastTimeRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountLockedPastTimeRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountLockedPastTimeRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedPastTimeRequest();
@@ -1579,7 +1579,7 @@ export const AccountLockedPastTimeRequest = {
       timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
     };
   },
-  toAmino(message: AccountLockedPastTimeRequest, useInterfaces: boolean = true): AccountLockedPastTimeRequestAmino {
+  toAmino(message: AccountLockedPastTimeRequest): AccountLockedPastTimeRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
@@ -1588,14 +1588,14 @@ export const AccountLockedPastTimeRequest = {
   fromAminoMsg(object: AccountLockedPastTimeRequestAminoMsg): AccountLockedPastTimeRequest {
     return AccountLockedPastTimeRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountLockedPastTimeRequest, useInterfaces: boolean = true): AccountLockedPastTimeRequestAminoMsg {
+  toAminoMsg(message: AccountLockedPastTimeRequest): AccountLockedPastTimeRequestAminoMsg {
     return {
       type: "osmosis/lockup/account-locked-past-time-request",
-      value: AccountLockedPastTimeRequest.toAmino(message, useInterfaces)
+      value: AccountLockedPastTimeRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountLockedPastTimeRequestProtoMsg, useInterfaces: boolean = true): AccountLockedPastTimeRequest {
-    return AccountLockedPastTimeRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountLockedPastTimeRequestProtoMsg): AccountLockedPastTimeRequest {
+    return AccountLockedPastTimeRequest.decode(message.value);
   },
   toProto(message: AccountLockedPastTimeRequest): Uint8Array {
     return AccountLockedPastTimeRequest.encode(message).finish();
@@ -1621,7 +1621,7 @@ export const AccountLockedPastTimeResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountLockedPastTimeResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountLockedPastTimeResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedPastTimeResponse();
@@ -1629,7 +1629,7 @@ export const AccountLockedPastTimeResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.locks.push(PeriodLock.decode(reader, reader.uint32(), useInterfaces));
+          message.locks.push(PeriodLock.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1676,10 +1676,10 @@ export const AccountLockedPastTimeResponse = {
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromAmino(e)) : []
     };
   },
-  toAmino(message: AccountLockedPastTimeResponse, useInterfaces: boolean = true): AccountLockedPastTimeResponseAmino {
+  toAmino(message: AccountLockedPastTimeResponse): AccountLockedPastTimeResponseAmino {
     const obj: any = {};
     if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e, useInterfaces) : undefined);
+      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
       obj.locks = [];
     }
@@ -1688,14 +1688,14 @@ export const AccountLockedPastTimeResponse = {
   fromAminoMsg(object: AccountLockedPastTimeResponseAminoMsg): AccountLockedPastTimeResponse {
     return AccountLockedPastTimeResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountLockedPastTimeResponse, useInterfaces: boolean = true): AccountLockedPastTimeResponseAminoMsg {
+  toAminoMsg(message: AccountLockedPastTimeResponse): AccountLockedPastTimeResponseAminoMsg {
     return {
       type: "osmosis/lockup/account-locked-past-time-response",
-      value: AccountLockedPastTimeResponse.toAmino(message, useInterfaces)
+      value: AccountLockedPastTimeResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountLockedPastTimeResponseProtoMsg, useInterfaces: boolean = true): AccountLockedPastTimeResponse {
-    return AccountLockedPastTimeResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountLockedPastTimeResponseProtoMsg): AccountLockedPastTimeResponse {
+    return AccountLockedPastTimeResponse.decode(message.value);
   },
   toProto(message: AccountLockedPastTimeResponse): Uint8Array {
     return AccountLockedPastTimeResponse.encode(message).finish();
@@ -1725,7 +1725,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountLockedPastTimeNotUnlockingOnlyRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountLockedPastTimeNotUnlockingOnlyRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedPastTimeNotUnlockingOnlyRequest();
@@ -1781,7 +1781,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
       timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
     };
   },
-  toAmino(message: AccountLockedPastTimeNotUnlockingOnlyRequest, useInterfaces: boolean = true): AccountLockedPastTimeNotUnlockingOnlyRequestAmino {
+  toAmino(message: AccountLockedPastTimeNotUnlockingOnlyRequest): AccountLockedPastTimeNotUnlockingOnlyRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
@@ -1790,14 +1790,14 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
   fromAminoMsg(object: AccountLockedPastTimeNotUnlockingOnlyRequestAminoMsg): AccountLockedPastTimeNotUnlockingOnlyRequest {
     return AccountLockedPastTimeNotUnlockingOnlyRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountLockedPastTimeNotUnlockingOnlyRequest, useInterfaces: boolean = true): AccountLockedPastTimeNotUnlockingOnlyRequestAminoMsg {
+  toAminoMsg(message: AccountLockedPastTimeNotUnlockingOnlyRequest): AccountLockedPastTimeNotUnlockingOnlyRequestAminoMsg {
     return {
       type: "osmosis/lockup/account-locked-past-time-not-unlocking-only-request",
-      value: AccountLockedPastTimeNotUnlockingOnlyRequest.toAmino(message, useInterfaces)
+      value: AccountLockedPastTimeNotUnlockingOnlyRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountLockedPastTimeNotUnlockingOnlyRequestProtoMsg, useInterfaces: boolean = true): AccountLockedPastTimeNotUnlockingOnlyRequest {
-    return AccountLockedPastTimeNotUnlockingOnlyRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountLockedPastTimeNotUnlockingOnlyRequestProtoMsg): AccountLockedPastTimeNotUnlockingOnlyRequest {
+    return AccountLockedPastTimeNotUnlockingOnlyRequest.decode(message.value);
   },
   toProto(message: AccountLockedPastTimeNotUnlockingOnlyRequest): Uint8Array {
     return AccountLockedPastTimeNotUnlockingOnlyRequest.encode(message).finish();
@@ -1823,7 +1823,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountLockedPastTimeNotUnlockingOnlyResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountLockedPastTimeNotUnlockingOnlyResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedPastTimeNotUnlockingOnlyResponse();
@@ -1831,7 +1831,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.locks.push(PeriodLock.decode(reader, reader.uint32(), useInterfaces));
+          message.locks.push(PeriodLock.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1878,10 +1878,10 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromAmino(e)) : []
     };
   },
-  toAmino(message: AccountLockedPastTimeNotUnlockingOnlyResponse, useInterfaces: boolean = true): AccountLockedPastTimeNotUnlockingOnlyResponseAmino {
+  toAmino(message: AccountLockedPastTimeNotUnlockingOnlyResponse): AccountLockedPastTimeNotUnlockingOnlyResponseAmino {
     const obj: any = {};
     if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e, useInterfaces) : undefined);
+      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
       obj.locks = [];
     }
@@ -1890,14 +1890,14 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
   fromAminoMsg(object: AccountLockedPastTimeNotUnlockingOnlyResponseAminoMsg): AccountLockedPastTimeNotUnlockingOnlyResponse {
     return AccountLockedPastTimeNotUnlockingOnlyResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountLockedPastTimeNotUnlockingOnlyResponse, useInterfaces: boolean = true): AccountLockedPastTimeNotUnlockingOnlyResponseAminoMsg {
+  toAminoMsg(message: AccountLockedPastTimeNotUnlockingOnlyResponse): AccountLockedPastTimeNotUnlockingOnlyResponseAminoMsg {
     return {
       type: "osmosis/lockup/account-locked-past-time-not-unlocking-only-response",
-      value: AccountLockedPastTimeNotUnlockingOnlyResponse.toAmino(message, useInterfaces)
+      value: AccountLockedPastTimeNotUnlockingOnlyResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountLockedPastTimeNotUnlockingOnlyResponseProtoMsg, useInterfaces: boolean = true): AccountLockedPastTimeNotUnlockingOnlyResponse {
-    return AccountLockedPastTimeNotUnlockingOnlyResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountLockedPastTimeNotUnlockingOnlyResponseProtoMsg): AccountLockedPastTimeNotUnlockingOnlyResponse {
+    return AccountLockedPastTimeNotUnlockingOnlyResponse.decode(message.value);
   },
   toProto(message: AccountLockedPastTimeNotUnlockingOnlyResponse): Uint8Array {
     return AccountLockedPastTimeNotUnlockingOnlyResponse.encode(message).finish();
@@ -1927,7 +1927,7 @@ export const AccountUnlockedBeforeTimeRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountUnlockedBeforeTimeRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountUnlockedBeforeTimeRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountUnlockedBeforeTimeRequest();
@@ -1983,7 +1983,7 @@ export const AccountUnlockedBeforeTimeRequest = {
       timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
     };
   },
-  toAmino(message: AccountUnlockedBeforeTimeRequest, useInterfaces: boolean = true): AccountUnlockedBeforeTimeRequestAmino {
+  toAmino(message: AccountUnlockedBeforeTimeRequest): AccountUnlockedBeforeTimeRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
@@ -1992,14 +1992,14 @@ export const AccountUnlockedBeforeTimeRequest = {
   fromAminoMsg(object: AccountUnlockedBeforeTimeRequestAminoMsg): AccountUnlockedBeforeTimeRequest {
     return AccountUnlockedBeforeTimeRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountUnlockedBeforeTimeRequest, useInterfaces: boolean = true): AccountUnlockedBeforeTimeRequestAminoMsg {
+  toAminoMsg(message: AccountUnlockedBeforeTimeRequest): AccountUnlockedBeforeTimeRequestAminoMsg {
     return {
       type: "osmosis/lockup/account-unlocked-before-time-request",
-      value: AccountUnlockedBeforeTimeRequest.toAmino(message, useInterfaces)
+      value: AccountUnlockedBeforeTimeRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountUnlockedBeforeTimeRequestProtoMsg, useInterfaces: boolean = true): AccountUnlockedBeforeTimeRequest {
-    return AccountUnlockedBeforeTimeRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountUnlockedBeforeTimeRequestProtoMsg): AccountUnlockedBeforeTimeRequest {
+    return AccountUnlockedBeforeTimeRequest.decode(message.value);
   },
   toProto(message: AccountUnlockedBeforeTimeRequest): Uint8Array {
     return AccountUnlockedBeforeTimeRequest.encode(message).finish();
@@ -2025,7 +2025,7 @@ export const AccountUnlockedBeforeTimeResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountUnlockedBeforeTimeResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountUnlockedBeforeTimeResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountUnlockedBeforeTimeResponse();
@@ -2033,7 +2033,7 @@ export const AccountUnlockedBeforeTimeResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.locks.push(PeriodLock.decode(reader, reader.uint32(), useInterfaces));
+          message.locks.push(PeriodLock.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2080,10 +2080,10 @@ export const AccountUnlockedBeforeTimeResponse = {
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromAmino(e)) : []
     };
   },
-  toAmino(message: AccountUnlockedBeforeTimeResponse, useInterfaces: boolean = true): AccountUnlockedBeforeTimeResponseAmino {
+  toAmino(message: AccountUnlockedBeforeTimeResponse): AccountUnlockedBeforeTimeResponseAmino {
     const obj: any = {};
     if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e, useInterfaces) : undefined);
+      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
       obj.locks = [];
     }
@@ -2092,14 +2092,14 @@ export const AccountUnlockedBeforeTimeResponse = {
   fromAminoMsg(object: AccountUnlockedBeforeTimeResponseAminoMsg): AccountUnlockedBeforeTimeResponse {
     return AccountUnlockedBeforeTimeResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountUnlockedBeforeTimeResponse, useInterfaces: boolean = true): AccountUnlockedBeforeTimeResponseAminoMsg {
+  toAminoMsg(message: AccountUnlockedBeforeTimeResponse): AccountUnlockedBeforeTimeResponseAminoMsg {
     return {
       type: "osmosis/lockup/account-unlocked-before-time-response",
-      value: AccountUnlockedBeforeTimeResponse.toAmino(message, useInterfaces)
+      value: AccountUnlockedBeforeTimeResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountUnlockedBeforeTimeResponseProtoMsg, useInterfaces: boolean = true): AccountUnlockedBeforeTimeResponse {
-    return AccountUnlockedBeforeTimeResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountUnlockedBeforeTimeResponseProtoMsg): AccountUnlockedBeforeTimeResponse {
+    return AccountUnlockedBeforeTimeResponse.decode(message.value);
   },
   toProto(message: AccountUnlockedBeforeTimeResponse): Uint8Array {
     return AccountUnlockedBeforeTimeResponse.encode(message).finish();
@@ -2133,7 +2133,7 @@ export const AccountLockedPastTimeDenomRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountLockedPastTimeDenomRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountLockedPastTimeDenomRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedPastTimeDenomRequest();
@@ -2198,7 +2198,7 @@ export const AccountLockedPastTimeDenomRequest = {
       denom: object.denom
     };
   },
-  toAmino(message: AccountLockedPastTimeDenomRequest, useInterfaces: boolean = true): AccountLockedPastTimeDenomRequestAmino {
+  toAmino(message: AccountLockedPastTimeDenomRequest): AccountLockedPastTimeDenomRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
@@ -2208,14 +2208,14 @@ export const AccountLockedPastTimeDenomRequest = {
   fromAminoMsg(object: AccountLockedPastTimeDenomRequestAminoMsg): AccountLockedPastTimeDenomRequest {
     return AccountLockedPastTimeDenomRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountLockedPastTimeDenomRequest, useInterfaces: boolean = true): AccountLockedPastTimeDenomRequestAminoMsg {
+  toAminoMsg(message: AccountLockedPastTimeDenomRequest): AccountLockedPastTimeDenomRequestAminoMsg {
     return {
       type: "osmosis/lockup/account-locked-past-time-denom-request",
-      value: AccountLockedPastTimeDenomRequest.toAmino(message, useInterfaces)
+      value: AccountLockedPastTimeDenomRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountLockedPastTimeDenomRequestProtoMsg, useInterfaces: boolean = true): AccountLockedPastTimeDenomRequest {
-    return AccountLockedPastTimeDenomRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountLockedPastTimeDenomRequestProtoMsg): AccountLockedPastTimeDenomRequest {
+    return AccountLockedPastTimeDenomRequest.decode(message.value);
   },
   toProto(message: AccountLockedPastTimeDenomRequest): Uint8Array {
     return AccountLockedPastTimeDenomRequest.encode(message).finish();
@@ -2241,7 +2241,7 @@ export const AccountLockedPastTimeDenomResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountLockedPastTimeDenomResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountLockedPastTimeDenomResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedPastTimeDenomResponse();
@@ -2249,7 +2249,7 @@ export const AccountLockedPastTimeDenomResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.locks.push(PeriodLock.decode(reader, reader.uint32(), useInterfaces));
+          message.locks.push(PeriodLock.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2296,10 +2296,10 @@ export const AccountLockedPastTimeDenomResponse = {
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromAmino(e)) : []
     };
   },
-  toAmino(message: AccountLockedPastTimeDenomResponse, useInterfaces: boolean = true): AccountLockedPastTimeDenomResponseAmino {
+  toAmino(message: AccountLockedPastTimeDenomResponse): AccountLockedPastTimeDenomResponseAmino {
     const obj: any = {};
     if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e, useInterfaces) : undefined);
+      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
       obj.locks = [];
     }
@@ -2308,14 +2308,14 @@ export const AccountLockedPastTimeDenomResponse = {
   fromAminoMsg(object: AccountLockedPastTimeDenomResponseAminoMsg): AccountLockedPastTimeDenomResponse {
     return AccountLockedPastTimeDenomResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountLockedPastTimeDenomResponse, useInterfaces: boolean = true): AccountLockedPastTimeDenomResponseAminoMsg {
+  toAminoMsg(message: AccountLockedPastTimeDenomResponse): AccountLockedPastTimeDenomResponseAminoMsg {
     return {
       type: "osmosis/lockup/account-locked-past-time-denom-response",
-      value: AccountLockedPastTimeDenomResponse.toAmino(message, useInterfaces)
+      value: AccountLockedPastTimeDenomResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountLockedPastTimeDenomResponseProtoMsg, useInterfaces: boolean = true): AccountLockedPastTimeDenomResponse {
-    return AccountLockedPastTimeDenomResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountLockedPastTimeDenomResponseProtoMsg): AccountLockedPastTimeDenomResponse {
+    return AccountLockedPastTimeDenomResponse.decode(message.value);
   },
   toProto(message: AccountLockedPastTimeDenomResponse): Uint8Array {
     return AccountLockedPastTimeDenomResponse.encode(message).finish();
@@ -2345,7 +2345,7 @@ export const LockedDenomRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LockedDenomRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): LockedDenomRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockedDenomRequest();
@@ -2356,7 +2356,7 @@ export const LockedDenomRequest = {
           message.denom = reader.string();
           break;
         case 2:
-          message.duration = Duration.decode(reader, reader.uint32(), useInterfaces);
+          message.duration = Duration.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -2403,23 +2403,23 @@ export const LockedDenomRequest = {
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
     };
   },
-  toAmino(message: LockedDenomRequest, useInterfaces: boolean = true): LockedDenomRequestAmino {
+  toAmino(message: LockedDenomRequest): LockedDenomRequestAmino {
     const obj: any = {};
     obj.denom = message.denom;
-    obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;
   },
   fromAminoMsg(object: LockedDenomRequestAminoMsg): LockedDenomRequest {
     return LockedDenomRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: LockedDenomRequest, useInterfaces: boolean = true): LockedDenomRequestAminoMsg {
+  toAminoMsg(message: LockedDenomRequest): LockedDenomRequestAminoMsg {
     return {
       type: "osmosis/lockup/locked-denom-request",
-      value: LockedDenomRequest.toAmino(message, useInterfaces)
+      value: LockedDenomRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: LockedDenomRequestProtoMsg, useInterfaces: boolean = true): LockedDenomRequest {
-    return LockedDenomRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: LockedDenomRequestProtoMsg): LockedDenomRequest {
+    return LockedDenomRequest.decode(message.value);
   },
   toProto(message: LockedDenomRequest): Uint8Array {
     return LockedDenomRequest.encode(message).finish();
@@ -2445,7 +2445,7 @@ export const LockedDenomResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LockedDenomResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): LockedDenomResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockedDenomResponse();
@@ -2492,7 +2492,7 @@ export const LockedDenomResponse = {
       amount: object.amount
     };
   },
-  toAmino(message: LockedDenomResponse, useInterfaces: boolean = true): LockedDenomResponseAmino {
+  toAmino(message: LockedDenomResponse): LockedDenomResponseAmino {
     const obj: any = {};
     obj.amount = message.amount;
     return obj;
@@ -2500,14 +2500,14 @@ export const LockedDenomResponse = {
   fromAminoMsg(object: LockedDenomResponseAminoMsg): LockedDenomResponse {
     return LockedDenomResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: LockedDenomResponse, useInterfaces: boolean = true): LockedDenomResponseAminoMsg {
+  toAminoMsg(message: LockedDenomResponse): LockedDenomResponseAminoMsg {
     return {
       type: "osmosis/lockup/locked-denom-response",
-      value: LockedDenomResponse.toAmino(message, useInterfaces)
+      value: LockedDenomResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: LockedDenomResponseProtoMsg, useInterfaces: boolean = true): LockedDenomResponse {
-    return LockedDenomResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: LockedDenomResponseProtoMsg): LockedDenomResponse {
+    return LockedDenomResponse.decode(message.value);
   },
   toProto(message: LockedDenomResponse): Uint8Array {
     return LockedDenomResponse.encode(message).finish();
@@ -2533,7 +2533,7 @@ export const LockedRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LockedRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): LockedRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockedRequest();
@@ -2582,7 +2582,7 @@ export const LockedRequest = {
       lockId: BigInt(object.lock_id)
     };
   },
-  toAmino(message: LockedRequest, useInterfaces: boolean = true): LockedRequestAmino {
+  toAmino(message: LockedRequest): LockedRequestAmino {
     const obj: any = {};
     obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
     return obj;
@@ -2590,14 +2590,14 @@ export const LockedRequest = {
   fromAminoMsg(object: LockedRequestAminoMsg): LockedRequest {
     return LockedRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: LockedRequest, useInterfaces: boolean = true): LockedRequestAminoMsg {
+  toAminoMsg(message: LockedRequest): LockedRequestAminoMsg {
     return {
       type: "osmosis/lockup/locked-request",
-      value: LockedRequest.toAmino(message, useInterfaces)
+      value: LockedRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: LockedRequestProtoMsg, useInterfaces: boolean = true): LockedRequest {
-    return LockedRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: LockedRequestProtoMsg): LockedRequest {
+    return LockedRequest.decode(message.value);
   },
   toProto(message: LockedRequest): Uint8Array {
     return LockedRequest.encode(message).finish();
@@ -2623,7 +2623,7 @@ export const LockedResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LockedResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): LockedResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockedResponse();
@@ -2631,7 +2631,7 @@ export const LockedResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.lock = PeriodLock.decode(reader, reader.uint32(), useInterfaces);
+          message.lock = PeriodLock.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -2672,22 +2672,22 @@ export const LockedResponse = {
       lock: object?.lock ? PeriodLock.fromAmino(object.lock) : undefined
     };
   },
-  toAmino(message: LockedResponse, useInterfaces: boolean = true): LockedResponseAmino {
+  toAmino(message: LockedResponse): LockedResponseAmino {
     const obj: any = {};
-    obj.lock = message.lock ? PeriodLock.toAmino(message.lock, useInterfaces) : undefined;
+    obj.lock = message.lock ? PeriodLock.toAmino(message.lock) : undefined;
     return obj;
   },
   fromAminoMsg(object: LockedResponseAminoMsg): LockedResponse {
     return LockedResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: LockedResponse, useInterfaces: boolean = true): LockedResponseAminoMsg {
+  toAminoMsg(message: LockedResponse): LockedResponseAminoMsg {
     return {
       type: "osmosis/lockup/locked-response",
-      value: LockedResponse.toAmino(message, useInterfaces)
+      value: LockedResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: LockedResponseProtoMsg, useInterfaces: boolean = true): LockedResponse {
-    return LockedResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: LockedResponseProtoMsg): LockedResponse {
+    return LockedResponse.decode(message.value);
   },
   toProto(message: LockedResponse): Uint8Array {
     return LockedResponse.encode(message).finish();
@@ -2713,7 +2713,7 @@ export const SyntheticLockupsByLockupIDRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SyntheticLockupsByLockupIDRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): SyntheticLockupsByLockupIDRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSyntheticLockupsByLockupIDRequest();
@@ -2762,7 +2762,7 @@ export const SyntheticLockupsByLockupIDRequest = {
       lockId: BigInt(object.lock_id)
     };
   },
-  toAmino(message: SyntheticLockupsByLockupIDRequest, useInterfaces: boolean = true): SyntheticLockupsByLockupIDRequestAmino {
+  toAmino(message: SyntheticLockupsByLockupIDRequest): SyntheticLockupsByLockupIDRequestAmino {
     const obj: any = {};
     obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
     return obj;
@@ -2770,14 +2770,14 @@ export const SyntheticLockupsByLockupIDRequest = {
   fromAminoMsg(object: SyntheticLockupsByLockupIDRequestAminoMsg): SyntheticLockupsByLockupIDRequest {
     return SyntheticLockupsByLockupIDRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: SyntheticLockupsByLockupIDRequest, useInterfaces: boolean = true): SyntheticLockupsByLockupIDRequestAminoMsg {
+  toAminoMsg(message: SyntheticLockupsByLockupIDRequest): SyntheticLockupsByLockupIDRequestAminoMsg {
     return {
       type: "osmosis/lockup/synthetic-lockups-by-lockup-id-request",
-      value: SyntheticLockupsByLockupIDRequest.toAmino(message, useInterfaces)
+      value: SyntheticLockupsByLockupIDRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: SyntheticLockupsByLockupIDRequestProtoMsg, useInterfaces: boolean = true): SyntheticLockupsByLockupIDRequest {
-    return SyntheticLockupsByLockupIDRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: SyntheticLockupsByLockupIDRequestProtoMsg): SyntheticLockupsByLockupIDRequest {
+    return SyntheticLockupsByLockupIDRequest.decode(message.value);
   },
   toProto(message: SyntheticLockupsByLockupIDRequest): Uint8Array {
     return SyntheticLockupsByLockupIDRequest.encode(message).finish();
@@ -2803,7 +2803,7 @@ export const SyntheticLockupsByLockupIDResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SyntheticLockupsByLockupIDResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): SyntheticLockupsByLockupIDResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSyntheticLockupsByLockupIDResponse();
@@ -2811,7 +2811,7 @@ export const SyntheticLockupsByLockupIDResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.syntheticLocks.push(SyntheticLock.decode(reader, reader.uint32(), useInterfaces));
+          message.syntheticLocks.push(SyntheticLock.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2858,10 +2858,10 @@ export const SyntheticLockupsByLockupIDResponse = {
       syntheticLocks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromAmino(e)) : []
     };
   },
-  toAmino(message: SyntheticLockupsByLockupIDResponse, useInterfaces: boolean = true): SyntheticLockupsByLockupIDResponseAmino {
+  toAmino(message: SyntheticLockupsByLockupIDResponse): SyntheticLockupsByLockupIDResponseAmino {
     const obj: any = {};
     if (message.syntheticLocks) {
-      obj.synthetic_locks = message.syntheticLocks.map(e => e ? SyntheticLock.toAmino(e, useInterfaces) : undefined);
+      obj.synthetic_locks = message.syntheticLocks.map(e => e ? SyntheticLock.toAmino(e) : undefined);
     } else {
       obj.synthetic_locks = [];
     }
@@ -2870,14 +2870,14 @@ export const SyntheticLockupsByLockupIDResponse = {
   fromAminoMsg(object: SyntheticLockupsByLockupIDResponseAminoMsg): SyntheticLockupsByLockupIDResponse {
     return SyntheticLockupsByLockupIDResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: SyntheticLockupsByLockupIDResponse, useInterfaces: boolean = true): SyntheticLockupsByLockupIDResponseAminoMsg {
+  toAminoMsg(message: SyntheticLockupsByLockupIDResponse): SyntheticLockupsByLockupIDResponseAminoMsg {
     return {
       type: "osmosis/lockup/synthetic-lockups-by-lockup-id-response",
-      value: SyntheticLockupsByLockupIDResponse.toAmino(message, useInterfaces)
+      value: SyntheticLockupsByLockupIDResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: SyntheticLockupsByLockupIDResponseProtoMsg, useInterfaces: boolean = true): SyntheticLockupsByLockupIDResponse {
-    return SyntheticLockupsByLockupIDResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: SyntheticLockupsByLockupIDResponseProtoMsg): SyntheticLockupsByLockupIDResponse {
+    return SyntheticLockupsByLockupIDResponse.decode(message.value);
   },
   toProto(message: SyntheticLockupsByLockupIDResponse): Uint8Array {
     return SyntheticLockupsByLockupIDResponse.encode(message).finish();
@@ -2907,7 +2907,7 @@ export const AccountLockedLongerDurationRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountLockedLongerDurationRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountLockedLongerDurationRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedLongerDurationRequest();
@@ -2918,7 +2918,7 @@ export const AccountLockedLongerDurationRequest = {
           message.owner = reader.string();
           break;
         case 2:
-          message.duration = Duration.decode(reader, reader.uint32(), useInterfaces);
+          message.duration = Duration.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -2965,23 +2965,23 @@ export const AccountLockedLongerDurationRequest = {
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
     };
   },
-  toAmino(message: AccountLockedLongerDurationRequest, useInterfaces: boolean = true): AccountLockedLongerDurationRequestAmino {
+  toAmino(message: AccountLockedLongerDurationRequest): AccountLockedLongerDurationRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;
   },
   fromAminoMsg(object: AccountLockedLongerDurationRequestAminoMsg): AccountLockedLongerDurationRequest {
     return AccountLockedLongerDurationRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountLockedLongerDurationRequest, useInterfaces: boolean = true): AccountLockedLongerDurationRequestAminoMsg {
+  toAminoMsg(message: AccountLockedLongerDurationRequest): AccountLockedLongerDurationRequestAminoMsg {
     return {
       type: "osmosis/lockup/account-locked-longer-duration-request",
-      value: AccountLockedLongerDurationRequest.toAmino(message, useInterfaces)
+      value: AccountLockedLongerDurationRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountLockedLongerDurationRequestProtoMsg, useInterfaces: boolean = true): AccountLockedLongerDurationRequest {
-    return AccountLockedLongerDurationRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountLockedLongerDurationRequestProtoMsg): AccountLockedLongerDurationRequest {
+    return AccountLockedLongerDurationRequest.decode(message.value);
   },
   toProto(message: AccountLockedLongerDurationRequest): Uint8Array {
     return AccountLockedLongerDurationRequest.encode(message).finish();
@@ -3007,7 +3007,7 @@ export const AccountLockedLongerDurationResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountLockedLongerDurationResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountLockedLongerDurationResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedLongerDurationResponse();
@@ -3015,7 +3015,7 @@ export const AccountLockedLongerDurationResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.locks.push(PeriodLock.decode(reader, reader.uint32(), useInterfaces));
+          message.locks.push(PeriodLock.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -3062,10 +3062,10 @@ export const AccountLockedLongerDurationResponse = {
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromAmino(e)) : []
     };
   },
-  toAmino(message: AccountLockedLongerDurationResponse, useInterfaces: boolean = true): AccountLockedLongerDurationResponseAmino {
+  toAmino(message: AccountLockedLongerDurationResponse): AccountLockedLongerDurationResponseAmino {
     const obj: any = {};
     if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e, useInterfaces) : undefined);
+      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
       obj.locks = [];
     }
@@ -3074,14 +3074,14 @@ export const AccountLockedLongerDurationResponse = {
   fromAminoMsg(object: AccountLockedLongerDurationResponseAminoMsg): AccountLockedLongerDurationResponse {
     return AccountLockedLongerDurationResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountLockedLongerDurationResponse, useInterfaces: boolean = true): AccountLockedLongerDurationResponseAminoMsg {
+  toAminoMsg(message: AccountLockedLongerDurationResponse): AccountLockedLongerDurationResponseAminoMsg {
     return {
       type: "osmosis/lockup/account-locked-longer-duration-response",
-      value: AccountLockedLongerDurationResponse.toAmino(message, useInterfaces)
+      value: AccountLockedLongerDurationResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountLockedLongerDurationResponseProtoMsg, useInterfaces: boolean = true): AccountLockedLongerDurationResponse {
-    return AccountLockedLongerDurationResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountLockedLongerDurationResponseProtoMsg): AccountLockedLongerDurationResponse {
+    return AccountLockedLongerDurationResponse.decode(message.value);
   },
   toProto(message: AccountLockedLongerDurationResponse): Uint8Array {
     return AccountLockedLongerDurationResponse.encode(message).finish();
@@ -3111,7 +3111,7 @@ export const AccountLockedDurationRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountLockedDurationRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountLockedDurationRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedDurationRequest();
@@ -3122,7 +3122,7 @@ export const AccountLockedDurationRequest = {
           message.owner = reader.string();
           break;
         case 2:
-          message.duration = Duration.decode(reader, reader.uint32(), useInterfaces);
+          message.duration = Duration.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -3169,23 +3169,23 @@ export const AccountLockedDurationRequest = {
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
     };
   },
-  toAmino(message: AccountLockedDurationRequest, useInterfaces: boolean = true): AccountLockedDurationRequestAmino {
+  toAmino(message: AccountLockedDurationRequest): AccountLockedDurationRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;
   },
   fromAminoMsg(object: AccountLockedDurationRequestAminoMsg): AccountLockedDurationRequest {
     return AccountLockedDurationRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountLockedDurationRequest, useInterfaces: boolean = true): AccountLockedDurationRequestAminoMsg {
+  toAminoMsg(message: AccountLockedDurationRequest): AccountLockedDurationRequestAminoMsg {
     return {
       type: "osmosis/lockup/account-locked-duration-request",
-      value: AccountLockedDurationRequest.toAmino(message, useInterfaces)
+      value: AccountLockedDurationRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountLockedDurationRequestProtoMsg, useInterfaces: boolean = true): AccountLockedDurationRequest {
-    return AccountLockedDurationRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountLockedDurationRequestProtoMsg): AccountLockedDurationRequest {
+    return AccountLockedDurationRequest.decode(message.value);
   },
   toProto(message: AccountLockedDurationRequest): Uint8Array {
     return AccountLockedDurationRequest.encode(message).finish();
@@ -3211,7 +3211,7 @@ export const AccountLockedDurationResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountLockedDurationResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountLockedDurationResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedDurationResponse();
@@ -3219,7 +3219,7 @@ export const AccountLockedDurationResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.locks.push(PeriodLock.decode(reader, reader.uint32(), useInterfaces));
+          message.locks.push(PeriodLock.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -3266,10 +3266,10 @@ export const AccountLockedDurationResponse = {
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromAmino(e)) : []
     };
   },
-  toAmino(message: AccountLockedDurationResponse, useInterfaces: boolean = true): AccountLockedDurationResponseAmino {
+  toAmino(message: AccountLockedDurationResponse): AccountLockedDurationResponseAmino {
     const obj: any = {};
     if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e, useInterfaces) : undefined);
+      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
       obj.locks = [];
     }
@@ -3278,14 +3278,14 @@ export const AccountLockedDurationResponse = {
   fromAminoMsg(object: AccountLockedDurationResponseAminoMsg): AccountLockedDurationResponse {
     return AccountLockedDurationResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountLockedDurationResponse, useInterfaces: boolean = true): AccountLockedDurationResponseAminoMsg {
+  toAminoMsg(message: AccountLockedDurationResponse): AccountLockedDurationResponseAminoMsg {
     return {
       type: "osmosis/lockup/account-locked-duration-response",
-      value: AccountLockedDurationResponse.toAmino(message, useInterfaces)
+      value: AccountLockedDurationResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountLockedDurationResponseProtoMsg, useInterfaces: boolean = true): AccountLockedDurationResponse {
-    return AccountLockedDurationResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountLockedDurationResponseProtoMsg): AccountLockedDurationResponse {
+    return AccountLockedDurationResponse.decode(message.value);
   },
   toProto(message: AccountLockedDurationResponse): Uint8Array {
     return AccountLockedDurationResponse.encode(message).finish();
@@ -3315,7 +3315,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountLockedLongerDurationNotUnlockingOnlyRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountLockedLongerDurationNotUnlockingOnlyRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedLongerDurationNotUnlockingOnlyRequest();
@@ -3326,7 +3326,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
           message.owner = reader.string();
           break;
         case 2:
-          message.duration = Duration.decode(reader, reader.uint32(), useInterfaces);
+          message.duration = Duration.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -3373,23 +3373,23 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
     };
   },
-  toAmino(message: AccountLockedLongerDurationNotUnlockingOnlyRequest, useInterfaces: boolean = true): AccountLockedLongerDurationNotUnlockingOnlyRequestAmino {
+  toAmino(message: AccountLockedLongerDurationNotUnlockingOnlyRequest): AccountLockedLongerDurationNotUnlockingOnlyRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;
   },
   fromAminoMsg(object: AccountLockedLongerDurationNotUnlockingOnlyRequestAminoMsg): AccountLockedLongerDurationNotUnlockingOnlyRequest {
     return AccountLockedLongerDurationNotUnlockingOnlyRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountLockedLongerDurationNotUnlockingOnlyRequest, useInterfaces: boolean = true): AccountLockedLongerDurationNotUnlockingOnlyRequestAminoMsg {
+  toAminoMsg(message: AccountLockedLongerDurationNotUnlockingOnlyRequest): AccountLockedLongerDurationNotUnlockingOnlyRequestAminoMsg {
     return {
       type: "osmosis/lockup/account-locked-longer-duration-not-unlocking-only-request",
-      value: AccountLockedLongerDurationNotUnlockingOnlyRequest.toAmino(message, useInterfaces)
+      value: AccountLockedLongerDurationNotUnlockingOnlyRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountLockedLongerDurationNotUnlockingOnlyRequestProtoMsg, useInterfaces: boolean = true): AccountLockedLongerDurationNotUnlockingOnlyRequest {
-    return AccountLockedLongerDurationNotUnlockingOnlyRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountLockedLongerDurationNotUnlockingOnlyRequestProtoMsg): AccountLockedLongerDurationNotUnlockingOnlyRequest {
+    return AccountLockedLongerDurationNotUnlockingOnlyRequest.decode(message.value);
   },
   toProto(message: AccountLockedLongerDurationNotUnlockingOnlyRequest): Uint8Array {
     return AccountLockedLongerDurationNotUnlockingOnlyRequest.encode(message).finish();
@@ -3415,7 +3415,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountLockedLongerDurationNotUnlockingOnlyResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountLockedLongerDurationNotUnlockingOnlyResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedLongerDurationNotUnlockingOnlyResponse();
@@ -3423,7 +3423,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.locks.push(PeriodLock.decode(reader, reader.uint32(), useInterfaces));
+          message.locks.push(PeriodLock.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -3470,10 +3470,10 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromAmino(e)) : []
     };
   },
-  toAmino(message: AccountLockedLongerDurationNotUnlockingOnlyResponse, useInterfaces: boolean = true): AccountLockedLongerDurationNotUnlockingOnlyResponseAmino {
+  toAmino(message: AccountLockedLongerDurationNotUnlockingOnlyResponse): AccountLockedLongerDurationNotUnlockingOnlyResponseAmino {
     const obj: any = {};
     if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e, useInterfaces) : undefined);
+      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
       obj.locks = [];
     }
@@ -3482,14 +3482,14 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
   fromAminoMsg(object: AccountLockedLongerDurationNotUnlockingOnlyResponseAminoMsg): AccountLockedLongerDurationNotUnlockingOnlyResponse {
     return AccountLockedLongerDurationNotUnlockingOnlyResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountLockedLongerDurationNotUnlockingOnlyResponse, useInterfaces: boolean = true): AccountLockedLongerDurationNotUnlockingOnlyResponseAminoMsg {
+  toAminoMsg(message: AccountLockedLongerDurationNotUnlockingOnlyResponse): AccountLockedLongerDurationNotUnlockingOnlyResponseAminoMsg {
     return {
       type: "osmosis/lockup/account-locked-longer-duration-not-unlocking-only-response",
-      value: AccountLockedLongerDurationNotUnlockingOnlyResponse.toAmino(message, useInterfaces)
+      value: AccountLockedLongerDurationNotUnlockingOnlyResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountLockedLongerDurationNotUnlockingOnlyResponseProtoMsg, useInterfaces: boolean = true): AccountLockedLongerDurationNotUnlockingOnlyResponse {
-    return AccountLockedLongerDurationNotUnlockingOnlyResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountLockedLongerDurationNotUnlockingOnlyResponseProtoMsg): AccountLockedLongerDurationNotUnlockingOnlyResponse {
+    return AccountLockedLongerDurationNotUnlockingOnlyResponse.decode(message.value);
   },
   toProto(message: AccountLockedLongerDurationNotUnlockingOnlyResponse): Uint8Array {
     return AccountLockedLongerDurationNotUnlockingOnlyResponse.encode(message).finish();
@@ -3523,7 +3523,7 @@ export const AccountLockedLongerDurationDenomRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountLockedLongerDurationDenomRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountLockedLongerDurationDenomRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedLongerDurationDenomRequest();
@@ -3534,7 +3534,7 @@ export const AccountLockedLongerDurationDenomRequest = {
           message.owner = reader.string();
           break;
         case 2:
-          message.duration = Duration.decode(reader, reader.uint32(), useInterfaces);
+          message.duration = Duration.decode(reader, reader.uint32());
           break;
         case 3:
           message.denom = reader.string();
@@ -3590,24 +3590,24 @@ export const AccountLockedLongerDurationDenomRequest = {
       denom: object.denom
     };
   },
-  toAmino(message: AccountLockedLongerDurationDenomRequest, useInterfaces: boolean = true): AccountLockedLongerDurationDenomRequestAmino {
+  toAmino(message: AccountLockedLongerDurationDenomRequest): AccountLockedLongerDurationDenomRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     obj.denom = message.denom;
     return obj;
   },
   fromAminoMsg(object: AccountLockedLongerDurationDenomRequestAminoMsg): AccountLockedLongerDurationDenomRequest {
     return AccountLockedLongerDurationDenomRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountLockedLongerDurationDenomRequest, useInterfaces: boolean = true): AccountLockedLongerDurationDenomRequestAminoMsg {
+  toAminoMsg(message: AccountLockedLongerDurationDenomRequest): AccountLockedLongerDurationDenomRequestAminoMsg {
     return {
       type: "osmosis/lockup/account-locked-longer-duration-denom-request",
-      value: AccountLockedLongerDurationDenomRequest.toAmino(message, useInterfaces)
+      value: AccountLockedLongerDurationDenomRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountLockedLongerDurationDenomRequestProtoMsg, useInterfaces: boolean = true): AccountLockedLongerDurationDenomRequest {
-    return AccountLockedLongerDurationDenomRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountLockedLongerDurationDenomRequestProtoMsg): AccountLockedLongerDurationDenomRequest {
+    return AccountLockedLongerDurationDenomRequest.decode(message.value);
   },
   toProto(message: AccountLockedLongerDurationDenomRequest): Uint8Array {
     return AccountLockedLongerDurationDenomRequest.encode(message).finish();
@@ -3633,7 +3633,7 @@ export const AccountLockedLongerDurationDenomResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountLockedLongerDurationDenomResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountLockedLongerDurationDenomResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountLockedLongerDurationDenomResponse();
@@ -3641,7 +3641,7 @@ export const AccountLockedLongerDurationDenomResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.locks.push(PeriodLock.decode(reader, reader.uint32(), useInterfaces));
+          message.locks.push(PeriodLock.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -3688,10 +3688,10 @@ export const AccountLockedLongerDurationDenomResponse = {
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromAmino(e)) : []
     };
   },
-  toAmino(message: AccountLockedLongerDurationDenomResponse, useInterfaces: boolean = true): AccountLockedLongerDurationDenomResponseAmino {
+  toAmino(message: AccountLockedLongerDurationDenomResponse): AccountLockedLongerDurationDenomResponseAmino {
     const obj: any = {};
     if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e, useInterfaces) : undefined);
+      obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
       obj.locks = [];
     }
@@ -3700,14 +3700,14 @@ export const AccountLockedLongerDurationDenomResponse = {
   fromAminoMsg(object: AccountLockedLongerDurationDenomResponseAminoMsg): AccountLockedLongerDurationDenomResponse {
     return AccountLockedLongerDurationDenomResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: AccountLockedLongerDurationDenomResponse, useInterfaces: boolean = true): AccountLockedLongerDurationDenomResponseAminoMsg {
+  toAminoMsg(message: AccountLockedLongerDurationDenomResponse): AccountLockedLongerDurationDenomResponseAminoMsg {
     return {
       type: "osmosis/lockup/account-locked-longer-duration-denom-response",
-      value: AccountLockedLongerDurationDenomResponse.toAmino(message, useInterfaces)
+      value: AccountLockedLongerDurationDenomResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: AccountLockedLongerDurationDenomResponseProtoMsg, useInterfaces: boolean = true): AccountLockedLongerDurationDenomResponse {
-    return AccountLockedLongerDurationDenomResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountLockedLongerDurationDenomResponseProtoMsg): AccountLockedLongerDurationDenomResponse {
+    return AccountLockedLongerDurationDenomResponse.decode(message.value);
   },
   toProto(message: AccountLockedLongerDurationDenomResponse): Uint8Array {
     return AccountLockedLongerDurationDenomResponse.encode(message).finish();
@@ -3728,7 +3728,7 @@ export const QueryParamsRequest = {
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -3764,21 +3764,21 @@ export const QueryParamsRequest = {
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
-  toAmino(_: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
     return QueryParamsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAminoMsg {
+  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
     return {
       type: "osmosis/lockup/query-params-request",
-      value: QueryParamsRequest.toAmino(message, useInterfaces)
+      value: QueryParamsRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = true): QueryParamsRequest {
-    return QueryParamsRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value);
   },
   toProto(message: QueryParamsRequest): Uint8Array {
     return QueryParamsRequest.encode(message).finish();
@@ -3804,7 +3804,7 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -3812,7 +3812,7 @@ export const QueryParamsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
+          message.params = Params.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -3853,22 +3853,22 @@ export const QueryParamsResponse = {
       params: object?.params ? Params.fromAmino(object.params) : undefined
     };
   },
-  toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
     return QueryParamsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAminoMsg {
+  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
     return {
       type: "osmosis/lockup/query-params-response",
-      value: QueryParamsResponse.toAmino(message, useInterfaces)
+      value: QueryParamsResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = true): QueryParamsResponse {
-    return QueryParamsResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value);
   },
   toProto(message: QueryParamsResponse): Uint8Array {
     return QueryParamsResponse.encode(message).finish();

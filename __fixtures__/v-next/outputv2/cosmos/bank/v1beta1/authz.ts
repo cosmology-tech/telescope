@@ -54,7 +54,7 @@ export const SendAuthorization = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SendAuthorization {
+  decode(input: BinaryReader | Uint8Array, length?: number): SendAuthorization {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSendAuthorization();
@@ -62,7 +62,7 @@ export const SendAuthorization = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.spendLimit.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.spendLimit.push(Coin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -109,10 +109,10 @@ export const SendAuthorization = {
       spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: SendAuthorization, useInterfaces: boolean = true): SendAuthorizationAmino {
+  toAmino(message: SendAuthorization): SendAuthorizationAmino {
     const obj: any = {};
     if (message.spendLimit) {
-      obj.spend_limit = message.spendLimit.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.spend_limit = message.spendLimit.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.spend_limit = [];
     }
@@ -121,14 +121,14 @@ export const SendAuthorization = {
   fromAminoMsg(object: SendAuthorizationAminoMsg): SendAuthorization {
     return SendAuthorization.fromAmino(object.value);
   },
-  toAminoMsg(message: SendAuthorization, useInterfaces: boolean = true): SendAuthorizationAminoMsg {
+  toAminoMsg(message: SendAuthorization): SendAuthorizationAminoMsg {
     return {
       type: "cosmos-sdk/SendAuthorization",
-      value: SendAuthorization.toAmino(message, useInterfaces)
+      value: SendAuthorization.toAmino(message)
     };
   },
-  fromProtoMsg(message: SendAuthorizationProtoMsg, useInterfaces: boolean = true): SendAuthorization {
-    return SendAuthorization.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: SendAuthorizationProtoMsg): SendAuthorization {
+    return SendAuthorization.decode(message.value);
   },
   toProto(message: SendAuthorization): Uint8Array {
     return SendAuthorization.encode(message).finish();

@@ -327,7 +327,7 @@ export const DelegatorWithdrawInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DelegatorWithdrawInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number): DelegatorWithdrawInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegatorWithdrawInfo();
@@ -383,7 +383,7 @@ export const DelegatorWithdrawInfo = {
       withdrawAddress: object.withdraw_address
     };
   },
-  toAmino(message: DelegatorWithdrawInfo, useInterfaces: boolean = true): DelegatorWithdrawInfoAmino {
+  toAmino(message: DelegatorWithdrawInfo): DelegatorWithdrawInfoAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     obj.withdraw_address = message.withdrawAddress;
@@ -392,14 +392,14 @@ export const DelegatorWithdrawInfo = {
   fromAminoMsg(object: DelegatorWithdrawInfoAminoMsg): DelegatorWithdrawInfo {
     return DelegatorWithdrawInfo.fromAmino(object.value);
   },
-  toAminoMsg(message: DelegatorWithdrawInfo, useInterfaces: boolean = true): DelegatorWithdrawInfoAminoMsg {
+  toAminoMsg(message: DelegatorWithdrawInfo): DelegatorWithdrawInfoAminoMsg {
     return {
       type: "cosmos-sdk/DelegatorWithdrawInfo",
-      value: DelegatorWithdrawInfo.toAmino(message, useInterfaces)
+      value: DelegatorWithdrawInfo.toAmino(message)
     };
   },
-  fromProtoMsg(message: DelegatorWithdrawInfoProtoMsg, useInterfaces: boolean = true): DelegatorWithdrawInfo {
-    return DelegatorWithdrawInfo.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: DelegatorWithdrawInfoProtoMsg): DelegatorWithdrawInfo {
+    return DelegatorWithdrawInfo.decode(message.value);
   },
   toProto(message: DelegatorWithdrawInfo): Uint8Array {
     return DelegatorWithdrawInfo.encode(message).finish();
@@ -429,7 +429,7 @@ export const ValidatorOutstandingRewardsRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorOutstandingRewardsRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorOutstandingRewardsRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorOutstandingRewardsRecord();
@@ -440,7 +440,7 @@ export const ValidatorOutstandingRewardsRecord = {
           message.validatorAddress = reader.string();
           break;
         case 2:
-          message.outstandingRewards.push(DecCoin.decode(reader, reader.uint32(), useInterfaces));
+          message.outstandingRewards.push(DecCoin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -493,11 +493,11 @@ export const ValidatorOutstandingRewardsRecord = {
       outstandingRewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => DecCoin.fromAmino(e)) : []
     };
   },
-  toAmino(message: ValidatorOutstandingRewardsRecord, useInterfaces: boolean = true): ValidatorOutstandingRewardsRecordAmino {
+  toAmino(message: ValidatorOutstandingRewardsRecord): ValidatorOutstandingRewardsRecordAmino {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
     if (message.outstandingRewards) {
-      obj.outstanding_rewards = message.outstandingRewards.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
+      obj.outstanding_rewards = message.outstandingRewards.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
       obj.outstanding_rewards = [];
     }
@@ -506,14 +506,14 @@ export const ValidatorOutstandingRewardsRecord = {
   fromAminoMsg(object: ValidatorOutstandingRewardsRecordAminoMsg): ValidatorOutstandingRewardsRecord {
     return ValidatorOutstandingRewardsRecord.fromAmino(object.value);
   },
-  toAminoMsg(message: ValidatorOutstandingRewardsRecord, useInterfaces: boolean = true): ValidatorOutstandingRewardsRecordAminoMsg {
+  toAminoMsg(message: ValidatorOutstandingRewardsRecord): ValidatorOutstandingRewardsRecordAminoMsg {
     return {
       type: "cosmos-sdk/ValidatorOutstandingRewardsRecord",
-      value: ValidatorOutstandingRewardsRecord.toAmino(message, useInterfaces)
+      value: ValidatorOutstandingRewardsRecord.toAmino(message)
     };
   },
-  fromProtoMsg(message: ValidatorOutstandingRewardsRecordProtoMsg, useInterfaces: boolean = true): ValidatorOutstandingRewardsRecord {
-    return ValidatorOutstandingRewardsRecord.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ValidatorOutstandingRewardsRecordProtoMsg): ValidatorOutstandingRewardsRecord {
+    return ValidatorOutstandingRewardsRecord.decode(message.value);
   },
   toProto(message: ValidatorOutstandingRewardsRecord): Uint8Array {
     return ValidatorOutstandingRewardsRecord.encode(message).finish();
@@ -543,7 +543,7 @@ export const ValidatorAccumulatedCommissionRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorAccumulatedCommissionRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorAccumulatedCommissionRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorAccumulatedCommissionRecord();
@@ -554,7 +554,7 @@ export const ValidatorAccumulatedCommissionRecord = {
           message.validatorAddress = reader.string();
           break;
         case 2:
-          message.accumulated = ValidatorAccumulatedCommission.decode(reader, reader.uint32(), useInterfaces);
+          message.accumulated = ValidatorAccumulatedCommission.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -601,23 +601,23 @@ export const ValidatorAccumulatedCommissionRecord = {
       accumulated: object?.accumulated ? ValidatorAccumulatedCommission.fromAmino(object.accumulated) : undefined
     };
   },
-  toAmino(message: ValidatorAccumulatedCommissionRecord, useInterfaces: boolean = true): ValidatorAccumulatedCommissionRecordAmino {
+  toAmino(message: ValidatorAccumulatedCommissionRecord): ValidatorAccumulatedCommissionRecordAmino {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
-    obj.accumulated = message.accumulated ? ValidatorAccumulatedCommission.toAmino(message.accumulated, useInterfaces) : undefined;
+    obj.accumulated = message.accumulated ? ValidatorAccumulatedCommission.toAmino(message.accumulated) : undefined;
     return obj;
   },
   fromAminoMsg(object: ValidatorAccumulatedCommissionRecordAminoMsg): ValidatorAccumulatedCommissionRecord {
     return ValidatorAccumulatedCommissionRecord.fromAmino(object.value);
   },
-  toAminoMsg(message: ValidatorAccumulatedCommissionRecord, useInterfaces: boolean = true): ValidatorAccumulatedCommissionRecordAminoMsg {
+  toAminoMsg(message: ValidatorAccumulatedCommissionRecord): ValidatorAccumulatedCommissionRecordAminoMsg {
     return {
       type: "cosmos-sdk/ValidatorAccumulatedCommissionRecord",
-      value: ValidatorAccumulatedCommissionRecord.toAmino(message, useInterfaces)
+      value: ValidatorAccumulatedCommissionRecord.toAmino(message)
     };
   },
-  fromProtoMsg(message: ValidatorAccumulatedCommissionRecordProtoMsg, useInterfaces: boolean = true): ValidatorAccumulatedCommissionRecord {
-    return ValidatorAccumulatedCommissionRecord.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ValidatorAccumulatedCommissionRecordProtoMsg): ValidatorAccumulatedCommissionRecord {
+    return ValidatorAccumulatedCommissionRecord.decode(message.value);
   },
   toProto(message: ValidatorAccumulatedCommissionRecord): Uint8Array {
     return ValidatorAccumulatedCommissionRecord.encode(message).finish();
@@ -651,7 +651,7 @@ export const ValidatorHistoricalRewardsRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorHistoricalRewardsRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorHistoricalRewardsRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorHistoricalRewardsRecord();
@@ -665,7 +665,7 @@ export const ValidatorHistoricalRewardsRecord = {
           message.period = reader.uint64();
           break;
         case 3:
-          message.rewards = ValidatorHistoricalRewards.decode(reader, reader.uint32(), useInterfaces);
+          message.rewards = ValidatorHistoricalRewards.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -720,24 +720,24 @@ export const ValidatorHistoricalRewardsRecord = {
       rewards: object?.rewards ? ValidatorHistoricalRewards.fromAmino(object.rewards) : undefined
     };
   },
-  toAmino(message: ValidatorHistoricalRewardsRecord, useInterfaces: boolean = true): ValidatorHistoricalRewardsRecordAmino {
+  toAmino(message: ValidatorHistoricalRewardsRecord): ValidatorHistoricalRewardsRecordAmino {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
     obj.period = message.period ? message.period.toString() : undefined;
-    obj.rewards = message.rewards ? ValidatorHistoricalRewards.toAmino(message.rewards, useInterfaces) : undefined;
+    obj.rewards = message.rewards ? ValidatorHistoricalRewards.toAmino(message.rewards) : undefined;
     return obj;
   },
   fromAminoMsg(object: ValidatorHistoricalRewardsRecordAminoMsg): ValidatorHistoricalRewardsRecord {
     return ValidatorHistoricalRewardsRecord.fromAmino(object.value);
   },
-  toAminoMsg(message: ValidatorHistoricalRewardsRecord, useInterfaces: boolean = true): ValidatorHistoricalRewardsRecordAminoMsg {
+  toAminoMsg(message: ValidatorHistoricalRewardsRecord): ValidatorHistoricalRewardsRecordAminoMsg {
     return {
       type: "cosmos-sdk/ValidatorHistoricalRewardsRecord",
-      value: ValidatorHistoricalRewardsRecord.toAmino(message, useInterfaces)
+      value: ValidatorHistoricalRewardsRecord.toAmino(message)
     };
   },
-  fromProtoMsg(message: ValidatorHistoricalRewardsRecordProtoMsg, useInterfaces: boolean = true): ValidatorHistoricalRewardsRecord {
-    return ValidatorHistoricalRewardsRecord.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ValidatorHistoricalRewardsRecordProtoMsg): ValidatorHistoricalRewardsRecord {
+    return ValidatorHistoricalRewardsRecord.decode(message.value);
   },
   toProto(message: ValidatorHistoricalRewardsRecord): Uint8Array {
     return ValidatorHistoricalRewardsRecord.encode(message).finish();
@@ -767,7 +767,7 @@ export const ValidatorCurrentRewardsRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorCurrentRewardsRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorCurrentRewardsRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorCurrentRewardsRecord();
@@ -778,7 +778,7 @@ export const ValidatorCurrentRewardsRecord = {
           message.validatorAddress = reader.string();
           break;
         case 2:
-          message.rewards = ValidatorCurrentRewards.decode(reader, reader.uint32(), useInterfaces);
+          message.rewards = ValidatorCurrentRewards.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -825,23 +825,23 @@ export const ValidatorCurrentRewardsRecord = {
       rewards: object?.rewards ? ValidatorCurrentRewards.fromAmino(object.rewards) : undefined
     };
   },
-  toAmino(message: ValidatorCurrentRewardsRecord, useInterfaces: boolean = true): ValidatorCurrentRewardsRecordAmino {
+  toAmino(message: ValidatorCurrentRewardsRecord): ValidatorCurrentRewardsRecordAmino {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
-    obj.rewards = message.rewards ? ValidatorCurrentRewards.toAmino(message.rewards, useInterfaces) : undefined;
+    obj.rewards = message.rewards ? ValidatorCurrentRewards.toAmino(message.rewards) : undefined;
     return obj;
   },
   fromAminoMsg(object: ValidatorCurrentRewardsRecordAminoMsg): ValidatorCurrentRewardsRecord {
     return ValidatorCurrentRewardsRecord.fromAmino(object.value);
   },
-  toAminoMsg(message: ValidatorCurrentRewardsRecord, useInterfaces: boolean = true): ValidatorCurrentRewardsRecordAminoMsg {
+  toAminoMsg(message: ValidatorCurrentRewardsRecord): ValidatorCurrentRewardsRecordAminoMsg {
     return {
       type: "cosmos-sdk/ValidatorCurrentRewardsRecord",
-      value: ValidatorCurrentRewardsRecord.toAmino(message, useInterfaces)
+      value: ValidatorCurrentRewardsRecord.toAmino(message)
     };
   },
-  fromProtoMsg(message: ValidatorCurrentRewardsRecordProtoMsg, useInterfaces: boolean = true): ValidatorCurrentRewardsRecord {
-    return ValidatorCurrentRewardsRecord.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ValidatorCurrentRewardsRecordProtoMsg): ValidatorCurrentRewardsRecord {
+    return ValidatorCurrentRewardsRecord.decode(message.value);
   },
   toProto(message: ValidatorCurrentRewardsRecord): Uint8Array {
     return ValidatorCurrentRewardsRecord.encode(message).finish();
@@ -875,7 +875,7 @@ export const DelegatorStartingInfoRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DelegatorStartingInfoRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number): DelegatorStartingInfoRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegatorStartingInfoRecord();
@@ -889,7 +889,7 @@ export const DelegatorStartingInfoRecord = {
           message.validatorAddress = reader.string();
           break;
         case 3:
-          message.startingInfo = DelegatorStartingInfo.decode(reader, reader.uint32(), useInterfaces);
+          message.startingInfo = DelegatorStartingInfo.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -942,24 +942,24 @@ export const DelegatorStartingInfoRecord = {
       startingInfo: object?.starting_info ? DelegatorStartingInfo.fromAmino(object.starting_info) : undefined
     };
   },
-  toAmino(message: DelegatorStartingInfoRecord, useInterfaces: boolean = true): DelegatorStartingInfoRecordAmino {
+  toAmino(message: DelegatorStartingInfoRecord): DelegatorStartingInfoRecordAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     obj.validator_address = message.validatorAddress;
-    obj.starting_info = message.startingInfo ? DelegatorStartingInfo.toAmino(message.startingInfo, useInterfaces) : undefined;
+    obj.starting_info = message.startingInfo ? DelegatorStartingInfo.toAmino(message.startingInfo) : undefined;
     return obj;
   },
   fromAminoMsg(object: DelegatorStartingInfoRecordAminoMsg): DelegatorStartingInfoRecord {
     return DelegatorStartingInfoRecord.fromAmino(object.value);
   },
-  toAminoMsg(message: DelegatorStartingInfoRecord, useInterfaces: boolean = true): DelegatorStartingInfoRecordAminoMsg {
+  toAminoMsg(message: DelegatorStartingInfoRecord): DelegatorStartingInfoRecordAminoMsg {
     return {
       type: "cosmos-sdk/DelegatorStartingInfoRecord",
-      value: DelegatorStartingInfoRecord.toAmino(message, useInterfaces)
+      value: DelegatorStartingInfoRecord.toAmino(message)
     };
   },
-  fromProtoMsg(message: DelegatorStartingInfoRecordProtoMsg, useInterfaces: boolean = true): DelegatorStartingInfoRecord {
-    return DelegatorStartingInfoRecord.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: DelegatorStartingInfoRecordProtoMsg): DelegatorStartingInfoRecord {
+    return DelegatorStartingInfoRecord.decode(message.value);
   },
   toProto(message: DelegatorStartingInfoRecord): Uint8Array {
     return DelegatorStartingInfoRecord.encode(message).finish();
@@ -997,7 +997,7 @@ export const ValidatorSlashEventRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorSlashEventRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorSlashEventRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorSlashEventRecord();
@@ -1014,7 +1014,7 @@ export const ValidatorSlashEventRecord = {
           message.period = reader.uint64();
           break;
         case 4:
-          message.validatorSlashEvent = ValidatorSlashEvent.decode(reader, reader.uint32(), useInterfaces);
+          message.validatorSlashEvent = ValidatorSlashEvent.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1077,25 +1077,25 @@ export const ValidatorSlashEventRecord = {
       validatorSlashEvent: object?.validator_slash_event ? ValidatorSlashEvent.fromAmino(object.validator_slash_event) : undefined
     };
   },
-  toAmino(message: ValidatorSlashEventRecord, useInterfaces: boolean = true): ValidatorSlashEventRecordAmino {
+  toAmino(message: ValidatorSlashEventRecord): ValidatorSlashEventRecordAmino {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
     obj.height = message.height ? message.height.toString() : undefined;
     obj.period = message.period ? message.period.toString() : undefined;
-    obj.validator_slash_event = message.validatorSlashEvent ? ValidatorSlashEvent.toAmino(message.validatorSlashEvent, useInterfaces) : undefined;
+    obj.validator_slash_event = message.validatorSlashEvent ? ValidatorSlashEvent.toAmino(message.validatorSlashEvent) : undefined;
     return obj;
   },
   fromAminoMsg(object: ValidatorSlashEventRecordAminoMsg): ValidatorSlashEventRecord {
     return ValidatorSlashEventRecord.fromAmino(object.value);
   },
-  toAminoMsg(message: ValidatorSlashEventRecord, useInterfaces: boolean = true): ValidatorSlashEventRecordAminoMsg {
+  toAminoMsg(message: ValidatorSlashEventRecord): ValidatorSlashEventRecordAminoMsg {
     return {
       type: "cosmos-sdk/ValidatorSlashEventRecord",
-      value: ValidatorSlashEventRecord.toAmino(message, useInterfaces)
+      value: ValidatorSlashEventRecord.toAmino(message)
     };
   },
-  fromProtoMsg(message: ValidatorSlashEventRecordProtoMsg, useInterfaces: boolean = true): ValidatorSlashEventRecord {
-    return ValidatorSlashEventRecord.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ValidatorSlashEventRecordProtoMsg): ValidatorSlashEventRecord {
+    return ValidatorSlashEventRecord.decode(message.value);
   },
   toProto(message: ValidatorSlashEventRecord): Uint8Array {
     return ValidatorSlashEventRecord.encode(message).finish();
@@ -1157,7 +1157,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -1165,34 +1165,34 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
+          message.params = Params.decode(reader, reader.uint32());
           break;
         case 2:
-          message.feePool = FeePool.decode(reader, reader.uint32(), useInterfaces);
+          message.feePool = FeePool.decode(reader, reader.uint32());
           break;
         case 3:
-          message.delegatorWithdrawInfos.push(DelegatorWithdrawInfo.decode(reader, reader.uint32(), useInterfaces));
+          message.delegatorWithdrawInfos.push(DelegatorWithdrawInfo.decode(reader, reader.uint32()));
           break;
         case 4:
           message.previousProposer = reader.string();
           break;
         case 5:
-          message.outstandingRewards.push(ValidatorOutstandingRewardsRecord.decode(reader, reader.uint32(), useInterfaces));
+          message.outstandingRewards.push(ValidatorOutstandingRewardsRecord.decode(reader, reader.uint32()));
           break;
         case 6:
-          message.validatorAccumulatedCommissions.push(ValidatorAccumulatedCommissionRecord.decode(reader, reader.uint32(), useInterfaces));
+          message.validatorAccumulatedCommissions.push(ValidatorAccumulatedCommissionRecord.decode(reader, reader.uint32()));
           break;
         case 7:
-          message.validatorHistoricalRewards.push(ValidatorHistoricalRewardsRecord.decode(reader, reader.uint32(), useInterfaces));
+          message.validatorHistoricalRewards.push(ValidatorHistoricalRewardsRecord.decode(reader, reader.uint32()));
           break;
         case 8:
-          message.validatorCurrentRewards.push(ValidatorCurrentRewardsRecord.decode(reader, reader.uint32(), useInterfaces));
+          message.validatorCurrentRewards.push(ValidatorCurrentRewardsRecord.decode(reader, reader.uint32()));
           break;
         case 9:
-          message.delegatorStartingInfos.push(DelegatorStartingInfoRecord.decode(reader, reader.uint32(), useInterfaces));
+          message.delegatorStartingInfos.push(DelegatorStartingInfoRecord.decode(reader, reader.uint32()));
           break;
         case 10:
-          message.validatorSlashEvents.push(ValidatorSlashEventRecord.decode(reader, reader.uint32(), useInterfaces));
+          message.validatorSlashEvents.push(ValidatorSlashEventRecord.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1345,43 +1345,43 @@ export const GenesisState = {
       validatorSlashEvents: Array.isArray(object?.validator_slash_events) ? object.validator_slash_events.map((e: any) => ValidatorSlashEventRecord.fromAmino(e)) : []
     };
   },
-  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
+  toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
-    obj.fee_pool = message.feePool ? FeePool.toAmino(message.feePool, useInterfaces) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.fee_pool = message.feePool ? FeePool.toAmino(message.feePool) : undefined;
     if (message.delegatorWithdrawInfos) {
-      obj.delegator_withdraw_infos = message.delegatorWithdrawInfos.map(e => e ? DelegatorWithdrawInfo.toAmino(e, useInterfaces) : undefined);
+      obj.delegator_withdraw_infos = message.delegatorWithdrawInfos.map(e => e ? DelegatorWithdrawInfo.toAmino(e) : undefined);
     } else {
       obj.delegator_withdraw_infos = [];
     }
     obj.previous_proposer = message.previousProposer;
     if (message.outstandingRewards) {
-      obj.outstanding_rewards = message.outstandingRewards.map(e => e ? ValidatorOutstandingRewardsRecord.toAmino(e, useInterfaces) : undefined);
+      obj.outstanding_rewards = message.outstandingRewards.map(e => e ? ValidatorOutstandingRewardsRecord.toAmino(e) : undefined);
     } else {
       obj.outstanding_rewards = [];
     }
     if (message.validatorAccumulatedCommissions) {
-      obj.validator_accumulated_commissions = message.validatorAccumulatedCommissions.map(e => e ? ValidatorAccumulatedCommissionRecord.toAmino(e, useInterfaces) : undefined);
+      obj.validator_accumulated_commissions = message.validatorAccumulatedCommissions.map(e => e ? ValidatorAccumulatedCommissionRecord.toAmino(e) : undefined);
     } else {
       obj.validator_accumulated_commissions = [];
     }
     if (message.validatorHistoricalRewards) {
-      obj.validator_historical_rewards = message.validatorHistoricalRewards.map(e => e ? ValidatorHistoricalRewardsRecord.toAmino(e, useInterfaces) : undefined);
+      obj.validator_historical_rewards = message.validatorHistoricalRewards.map(e => e ? ValidatorHistoricalRewardsRecord.toAmino(e) : undefined);
     } else {
       obj.validator_historical_rewards = [];
     }
     if (message.validatorCurrentRewards) {
-      obj.validator_current_rewards = message.validatorCurrentRewards.map(e => e ? ValidatorCurrentRewardsRecord.toAmino(e, useInterfaces) : undefined);
+      obj.validator_current_rewards = message.validatorCurrentRewards.map(e => e ? ValidatorCurrentRewardsRecord.toAmino(e) : undefined);
     } else {
       obj.validator_current_rewards = [];
     }
     if (message.delegatorStartingInfos) {
-      obj.delegator_starting_infos = message.delegatorStartingInfos.map(e => e ? DelegatorStartingInfoRecord.toAmino(e, useInterfaces) : undefined);
+      obj.delegator_starting_infos = message.delegatorStartingInfos.map(e => e ? DelegatorStartingInfoRecord.toAmino(e) : undefined);
     } else {
       obj.delegator_starting_infos = [];
     }
     if (message.validatorSlashEvents) {
-      obj.validator_slash_events = message.validatorSlashEvents.map(e => e ? ValidatorSlashEventRecord.toAmino(e, useInterfaces) : undefined);
+      obj.validator_slash_events = message.validatorSlashEvents.map(e => e ? ValidatorSlashEventRecord.toAmino(e) : undefined);
     } else {
       obj.validator_slash_events = [];
     }
@@ -1390,14 +1390,14 @@ export const GenesisState = {
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
   },
-  toAminoMsg(message: GenesisState, useInterfaces: boolean = true): GenesisStateAminoMsg {
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
     return {
       type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message, useInterfaces)
+      value: GenesisState.toAmino(message)
     };
   },
-  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
-    return GenesisState.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();

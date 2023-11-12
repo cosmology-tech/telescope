@@ -187,7 +187,7 @@ export const Claim = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Claim {
+  decode(input: BinaryReader | Uint8Array, length?: number): Claim {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClaim();
@@ -252,7 +252,7 @@ export const Claim = {
       claimableAmount: object.claimable_amount
     };
   },
-  toAmino(message: Claim, useInterfaces: boolean = true): ClaimAmino {
+  toAmino(message: Claim): ClaimAmino {
     const obj: any = {};
     obj.action = message.action;
     obj.completed = message.completed;
@@ -262,8 +262,8 @@ export const Claim = {
   fromAminoMsg(object: ClaimAminoMsg): Claim {
     return Claim.fromAmino(object.value);
   },
-  fromProtoMsg(message: ClaimProtoMsg, useInterfaces: boolean = true): Claim {
-    return Claim.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ClaimProtoMsg): Claim {
+    return Claim.decode(message.value);
   },
   toProto(message: Claim): Uint8Array {
     return Claim.encode(message).finish();
@@ -298,7 +298,7 @@ export const ClaimsRecordAddress = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ClaimsRecordAddress {
+  decode(input: BinaryReader | Uint8Array, length?: number): ClaimsRecordAddress {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClaimsRecordAddress();
@@ -378,7 +378,7 @@ export const ClaimsRecordAddress = {
       actionsCompleted: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => e) : []
     };
   },
-  toAmino(message: ClaimsRecordAddress, useInterfaces: boolean = true): ClaimsRecordAddressAmino {
+  toAmino(message: ClaimsRecordAddress): ClaimsRecordAddressAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.initial_claimable_amount = message.initialClaimableAmount;
@@ -392,8 +392,8 @@ export const ClaimsRecordAddress = {
   fromAminoMsg(object: ClaimsRecordAddressAminoMsg): ClaimsRecordAddress {
     return ClaimsRecordAddress.fromAmino(object.value);
   },
-  fromProtoMsg(message: ClaimsRecordAddressProtoMsg, useInterfaces: boolean = true): ClaimsRecordAddress {
-    return ClaimsRecordAddress.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ClaimsRecordAddressProtoMsg): ClaimsRecordAddress {
+    return ClaimsRecordAddress.decode(message.value);
   },
   toProto(message: ClaimsRecordAddress): Uint8Array {
     return ClaimsRecordAddress.encode(message).finish();
@@ -424,7 +424,7 @@ export const ClaimsRecord = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ClaimsRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number): ClaimsRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClaimsRecord();
@@ -495,7 +495,7 @@ export const ClaimsRecord = {
       actionsCompleted: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => e) : []
     };
   },
-  toAmino(message: ClaimsRecord, useInterfaces: boolean = true): ClaimsRecordAmino {
+  toAmino(message: ClaimsRecord): ClaimsRecordAmino {
     const obj: any = {};
     obj.initial_claimable_amount = message.initialClaimableAmount;
     if (message.actionsCompleted) {
@@ -508,8 +508,8 @@ export const ClaimsRecord = {
   fromAminoMsg(object: ClaimsRecordAminoMsg): ClaimsRecord {
     return ClaimsRecord.fromAmino(object.value);
   },
-  fromProtoMsg(message: ClaimsRecordProtoMsg, useInterfaces: boolean = true): ClaimsRecord {
-    return ClaimsRecord.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ClaimsRecordProtoMsg): ClaimsRecord {
+    return ClaimsRecord.decode(message.value);
   },
   toProto(message: ClaimsRecord): Uint8Array {
     return ClaimsRecord.encode(message).finish();

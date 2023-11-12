@@ -171,7 +171,7 @@ export const MetricValue_LabelsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MetricValue_LabelsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number): MetricValue_LabelsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricValue_LabelsEntry();
@@ -227,7 +227,7 @@ export const MetricValue_LabelsEntry = {
       value: object.value
     };
   },
-  toAmino(message: MetricValue_LabelsEntry, useInterfaces: boolean = true): MetricValue_LabelsEntryAmino {
+  toAmino(message: MetricValue_LabelsEntry): MetricValue_LabelsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
@@ -236,8 +236,8 @@ export const MetricValue_LabelsEntry = {
   fromAminoMsg(object: MetricValue_LabelsEntryAminoMsg): MetricValue_LabelsEntry {
     return MetricValue_LabelsEntry.fromAmino(object.value);
   },
-  fromProtoMsg(message: MetricValue_LabelsEntryProtoMsg, useInterfaces: boolean = true): MetricValue_LabelsEntry {
-    return MetricValue_LabelsEntry.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MetricValue_LabelsEntryProtoMsg): MetricValue_LabelsEntry {
+    return MetricValue_LabelsEntry.decode(message.value);
   },
   toProto(message: MetricValue_LabelsEntry): Uint8Array {
     return MetricValue_LabelsEntry.encode(message).finish();
@@ -287,7 +287,7 @@ export const MetricValue = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MetricValue {
+  decode(input: BinaryReader | Uint8Array, length?: number): MetricValue {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricValue();
@@ -319,7 +319,7 @@ export const MetricValue = {
           message.stringValue = reader.string();
           break;
         case 8:
-          message.distributionValue = Distribution.decode(reader, reader.uint32(), useInterfaces);
+          message.distributionValue = Distribution.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -438,7 +438,7 @@ export const MetricValue = {
       distributionValue: object?.distribution_value ? Distribution.fromAmino(object.distribution_value) : undefined
     };
   },
-  toAmino(message: MetricValue, useInterfaces: boolean = true): MetricValueAmino {
+  toAmino(message: MetricValue): MetricValueAmino {
     const obj: any = {};
     obj.labels = {};
     if (message.labels) {
@@ -452,14 +452,14 @@ export const MetricValue = {
     obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
     obj.double_value = message.doubleValue;
     obj.string_value = message.stringValue;
-    obj.distribution_value = message.distributionValue ? Distribution.toAmino(message.distributionValue, useInterfaces) : undefined;
+    obj.distribution_value = message.distributionValue ? Distribution.toAmino(message.distributionValue) : undefined;
     return obj;
   },
   fromAminoMsg(object: MetricValueAminoMsg): MetricValue {
     return MetricValue.fromAmino(object.value);
   },
-  fromProtoMsg(message: MetricValueProtoMsg, useInterfaces: boolean = true): MetricValue {
-    return MetricValue.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MetricValueProtoMsg): MetricValue {
+    return MetricValue.decode(message.value);
   },
   toProto(message: MetricValue): Uint8Array {
     return MetricValue.encode(message).finish();
@@ -488,7 +488,7 @@ export const MetricValueSet = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MetricValueSet {
+  decode(input: BinaryReader | Uint8Array, length?: number): MetricValueSet {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricValueSet();
@@ -499,7 +499,7 @@ export const MetricValueSet = {
           message.metricName = reader.string();
           break;
         case 2:
-          message.metricValues.push(MetricValue.decode(reader, reader.uint32(), useInterfaces));
+          message.metricValues.push(MetricValue.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -552,11 +552,11 @@ export const MetricValueSet = {
       metricValues: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromAmino(e)) : []
     };
   },
-  toAmino(message: MetricValueSet, useInterfaces: boolean = true): MetricValueSetAmino {
+  toAmino(message: MetricValueSet): MetricValueSetAmino {
     const obj: any = {};
     obj.metric_name = message.metricName;
     if (message.metricValues) {
-      obj.metric_values = message.metricValues.map(e => e ? MetricValue.toAmino(e, useInterfaces) : undefined);
+      obj.metric_values = message.metricValues.map(e => e ? MetricValue.toAmino(e) : undefined);
     } else {
       obj.metric_values = [];
     }
@@ -565,8 +565,8 @@ export const MetricValueSet = {
   fromAminoMsg(object: MetricValueSetAminoMsg): MetricValueSet {
     return MetricValueSet.fromAmino(object.value);
   },
-  fromProtoMsg(message: MetricValueSetProtoMsg, useInterfaces: boolean = true): MetricValueSet {
-    return MetricValueSet.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MetricValueSetProtoMsg): MetricValueSet {
+    return MetricValueSet.decode(message.value);
   },
   toProto(message: MetricValueSet): Uint8Array {
     return MetricValueSet.encode(message).finish();

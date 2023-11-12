@@ -436,7 +436,7 @@ export const Documentation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Documentation {
+  decode(input: BinaryReader | Uint8Array, length?: number): Documentation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDocumentation();
@@ -447,10 +447,10 @@ export const Documentation = {
           message.summary = reader.string();
           break;
         case 5:
-          message.pages.push(Page.decode(reader, reader.uint32(), useInterfaces));
+          message.pages.push(Page.decode(reader, reader.uint32()));
           break;
         case 3:
-          message.rules.push(DocumentationRule.decode(reader, reader.uint32(), useInterfaces));
+          message.rules.push(DocumentationRule.decode(reader, reader.uint32()));
           break;
         case 4:
           message.documentationRootUrl = reader.string();
@@ -544,16 +544,16 @@ export const Documentation = {
       overview: object.overview
     };
   },
-  toAmino(message: Documentation, useInterfaces: boolean = true): DocumentationAmino {
+  toAmino(message: Documentation): DocumentationAmino {
     const obj: any = {};
     obj.summary = message.summary;
     if (message.pages) {
-      obj.pages = message.pages.map(e => e ? Page.toAmino(e, useInterfaces) : undefined);
+      obj.pages = message.pages.map(e => e ? Page.toAmino(e) : undefined);
     } else {
       obj.pages = [];
     }
     if (message.rules) {
-      obj.rules = message.rules.map(e => e ? DocumentationRule.toAmino(e, useInterfaces) : undefined);
+      obj.rules = message.rules.map(e => e ? DocumentationRule.toAmino(e) : undefined);
     } else {
       obj.rules = [];
     }
@@ -565,8 +565,8 @@ export const Documentation = {
   fromAminoMsg(object: DocumentationAminoMsg): Documentation {
     return Documentation.fromAmino(object.value);
   },
-  fromProtoMsg(message: DocumentationProtoMsg, useInterfaces: boolean = true): Documentation {
-    return Documentation.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: DocumentationProtoMsg): Documentation {
+    return Documentation.decode(message.value);
   },
   toProto(message: Documentation): Uint8Array {
     return Documentation.encode(message).finish();
@@ -599,7 +599,7 @@ export const DocumentationRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DocumentationRule {
+  decode(input: BinaryReader | Uint8Array, length?: number): DocumentationRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDocumentationRule();
@@ -664,7 +664,7 @@ export const DocumentationRule = {
       deprecationDescription: object.deprecation_description
     };
   },
-  toAmino(message: DocumentationRule, useInterfaces: boolean = true): DocumentationRuleAmino {
+  toAmino(message: DocumentationRule): DocumentationRuleAmino {
     const obj: any = {};
     obj.selector = message.selector;
     obj.description = message.description;
@@ -674,8 +674,8 @@ export const DocumentationRule = {
   fromAminoMsg(object: DocumentationRuleAminoMsg): DocumentationRule {
     return DocumentationRule.fromAmino(object.value);
   },
-  fromProtoMsg(message: DocumentationRuleProtoMsg, useInterfaces: boolean = true): DocumentationRule {
-    return DocumentationRule.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: DocumentationRuleProtoMsg): DocumentationRule {
+    return DocumentationRule.decode(message.value);
   },
   toProto(message: DocumentationRule): Uint8Array {
     return DocumentationRule.encode(message).finish();
@@ -708,7 +708,7 @@ export const Page = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Page {
+  decode(input: BinaryReader | Uint8Array, length?: number): Page {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePage();
@@ -722,7 +722,7 @@ export const Page = {
           message.content = reader.string();
           break;
         case 3:
-          message.subpages.push(Page.decode(reader, reader.uint32(), useInterfaces));
+          message.subpages.push(Page.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -781,12 +781,12 @@ export const Page = {
       subpages: Array.isArray(object?.subpages) ? object.subpages.map((e: any) => Page.fromAmino(e)) : []
     };
   },
-  toAmino(message: Page, useInterfaces: boolean = true): PageAmino {
+  toAmino(message: Page): PageAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.content = message.content;
     if (message.subpages) {
-      obj.subpages = message.subpages.map(e => e ? Page.toAmino(e, useInterfaces) : undefined);
+      obj.subpages = message.subpages.map(e => e ? Page.toAmino(e) : undefined);
     } else {
       obj.subpages = [];
     }
@@ -795,8 +795,8 @@ export const Page = {
   fromAminoMsg(object: PageAminoMsg): Page {
     return Page.fromAmino(object.value);
   },
-  fromProtoMsg(message: PageProtoMsg, useInterfaces: boolean = true): Page {
-    return Page.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: PageProtoMsg): Page {
+    return Page.decode(message.value);
   },
   toProto(message: Page): Uint8Array {
     return Page.encode(message).finish();

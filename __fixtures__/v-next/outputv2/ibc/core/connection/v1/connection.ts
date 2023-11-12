@@ -379,7 +379,7 @@ export const ConnectionEnd = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ConnectionEnd {
+  decode(input: BinaryReader | Uint8Array, length?: number): ConnectionEnd {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConnectionEnd();
@@ -390,13 +390,13 @@ export const ConnectionEnd = {
           message.clientId = reader.string();
           break;
         case 2:
-          message.versions.push(Version.decode(reader, reader.uint32(), useInterfaces));
+          message.versions.push(Version.decode(reader, reader.uint32()));
           break;
         case 3:
           message.state = (reader.int32() as any);
           break;
         case 4:
-          message.counterparty = Counterparty.decode(reader, reader.uint32(), useInterfaces);
+          message.counterparty = Counterparty.decode(reader, reader.uint32());
           break;
         case 5:
           message.delayPeriod = reader.uint64();
@@ -474,30 +474,30 @@ export const ConnectionEnd = {
       delayPeriod: BigInt(object.delay_period)
     };
   },
-  toAmino(message: ConnectionEnd, useInterfaces: boolean = true): ConnectionEndAmino {
+  toAmino(message: ConnectionEnd): ConnectionEndAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
     if (message.versions) {
-      obj.versions = message.versions.map(e => e ? Version.toAmino(e, useInterfaces) : undefined);
+      obj.versions = message.versions.map(e => e ? Version.toAmino(e) : undefined);
     } else {
       obj.versions = [];
     }
     obj.state = message.state;
-    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty, useInterfaces) : undefined;
+    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     obj.delay_period = message.delayPeriod ? message.delayPeriod.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ConnectionEndAminoMsg): ConnectionEnd {
     return ConnectionEnd.fromAmino(object.value);
   },
-  toAminoMsg(message: ConnectionEnd, useInterfaces: boolean = true): ConnectionEndAminoMsg {
+  toAminoMsg(message: ConnectionEnd): ConnectionEndAminoMsg {
     return {
       type: "cosmos-sdk/ConnectionEnd",
-      value: ConnectionEnd.toAmino(message, useInterfaces)
+      value: ConnectionEnd.toAmino(message)
     };
   },
-  fromProtoMsg(message: ConnectionEndProtoMsg, useInterfaces: boolean = true): ConnectionEnd {
-    return ConnectionEnd.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ConnectionEndProtoMsg): ConnectionEnd {
+    return ConnectionEnd.decode(message.value);
   },
   toProto(message: ConnectionEnd): Uint8Array {
     return ConnectionEnd.encode(message).finish();
@@ -543,7 +543,7 @@ export const IdentifiedConnection = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): IdentifiedConnection {
+  decode(input: BinaryReader | Uint8Array, length?: number): IdentifiedConnection {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdentifiedConnection();
@@ -557,13 +557,13 @@ export const IdentifiedConnection = {
           message.clientId = reader.string();
           break;
         case 3:
-          message.versions.push(Version.decode(reader, reader.uint32(), useInterfaces));
+          message.versions.push(Version.decode(reader, reader.uint32()));
           break;
         case 4:
           message.state = (reader.int32() as any);
           break;
         case 5:
-          message.counterparty = Counterparty.decode(reader, reader.uint32(), useInterfaces);
+          message.counterparty = Counterparty.decode(reader, reader.uint32());
           break;
         case 6:
           message.delayPeriod = reader.uint64();
@@ -647,31 +647,31 @@ export const IdentifiedConnection = {
       delayPeriod: BigInt(object.delay_period)
     };
   },
-  toAmino(message: IdentifiedConnection, useInterfaces: boolean = true): IdentifiedConnectionAmino {
+  toAmino(message: IdentifiedConnection): IdentifiedConnectionAmino {
     const obj: any = {};
     obj.id = message.id;
     obj.client_id = message.clientId;
     if (message.versions) {
-      obj.versions = message.versions.map(e => e ? Version.toAmino(e, useInterfaces) : undefined);
+      obj.versions = message.versions.map(e => e ? Version.toAmino(e) : undefined);
     } else {
       obj.versions = [];
     }
     obj.state = message.state;
-    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty, useInterfaces) : undefined;
+    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     obj.delay_period = message.delayPeriod ? message.delayPeriod.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: IdentifiedConnectionAminoMsg): IdentifiedConnection {
     return IdentifiedConnection.fromAmino(object.value);
   },
-  toAminoMsg(message: IdentifiedConnection, useInterfaces: boolean = true): IdentifiedConnectionAminoMsg {
+  toAminoMsg(message: IdentifiedConnection): IdentifiedConnectionAminoMsg {
     return {
       type: "cosmos-sdk/IdentifiedConnection",
-      value: IdentifiedConnection.toAmino(message, useInterfaces)
+      value: IdentifiedConnection.toAmino(message)
     };
   },
-  fromProtoMsg(message: IdentifiedConnectionProtoMsg, useInterfaces: boolean = true): IdentifiedConnection {
-    return IdentifiedConnection.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: IdentifiedConnectionProtoMsg): IdentifiedConnection {
+    return IdentifiedConnection.decode(message.value);
   },
   toProto(message: IdentifiedConnection): Uint8Array {
     return IdentifiedConnection.encode(message).finish();
@@ -705,7 +705,7 @@ export const Counterparty = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Counterparty {
+  decode(input: BinaryReader | Uint8Array, length?: number): Counterparty {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCounterparty();
@@ -719,7 +719,7 @@ export const Counterparty = {
           message.connectionId = reader.string();
           break;
         case 3:
-          message.prefix = MerklePrefix.decode(reader, reader.uint32(), useInterfaces);
+          message.prefix = MerklePrefix.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -772,24 +772,24 @@ export const Counterparty = {
       prefix: object?.prefix ? MerklePrefix.fromAmino(object.prefix) : undefined
     };
   },
-  toAmino(message: Counterparty, useInterfaces: boolean = true): CounterpartyAmino {
+  toAmino(message: Counterparty): CounterpartyAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
     obj.connection_id = message.connectionId;
-    obj.prefix = message.prefix ? MerklePrefix.toAmino(message.prefix, useInterfaces) : undefined;
+    obj.prefix = message.prefix ? MerklePrefix.toAmino(message.prefix) : undefined;
     return obj;
   },
   fromAminoMsg(object: CounterpartyAminoMsg): Counterparty {
     return Counterparty.fromAmino(object.value);
   },
-  toAminoMsg(message: Counterparty, useInterfaces: boolean = true): CounterpartyAminoMsg {
+  toAminoMsg(message: Counterparty): CounterpartyAminoMsg {
     return {
       type: "cosmos-sdk/Counterparty",
-      value: Counterparty.toAmino(message, useInterfaces)
+      value: Counterparty.toAmino(message)
     };
   },
-  fromProtoMsg(message: CounterpartyProtoMsg, useInterfaces: boolean = true): Counterparty {
-    return Counterparty.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: CounterpartyProtoMsg): Counterparty {
+    return Counterparty.decode(message.value);
   },
   toProto(message: Counterparty): Uint8Array {
     return Counterparty.encode(message).finish();
@@ -815,7 +815,7 @@ export const ClientPaths = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ClientPaths {
+  decode(input: BinaryReader | Uint8Array, length?: number): ClientPaths {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientPaths();
@@ -870,7 +870,7 @@ export const ClientPaths = {
       paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
     };
   },
-  toAmino(message: ClientPaths, useInterfaces: boolean = true): ClientPathsAmino {
+  toAmino(message: ClientPaths): ClientPathsAmino {
     const obj: any = {};
     if (message.paths) {
       obj.paths = message.paths.map(e => e);
@@ -882,14 +882,14 @@ export const ClientPaths = {
   fromAminoMsg(object: ClientPathsAminoMsg): ClientPaths {
     return ClientPaths.fromAmino(object.value);
   },
-  toAminoMsg(message: ClientPaths, useInterfaces: boolean = true): ClientPathsAminoMsg {
+  toAminoMsg(message: ClientPaths): ClientPathsAminoMsg {
     return {
       type: "cosmos-sdk/ClientPaths",
-      value: ClientPaths.toAmino(message, useInterfaces)
+      value: ClientPaths.toAmino(message)
     };
   },
-  fromProtoMsg(message: ClientPathsProtoMsg, useInterfaces: boolean = true): ClientPaths {
-    return ClientPaths.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ClientPathsProtoMsg): ClientPaths {
+    return ClientPaths.decode(message.value);
   },
   toProto(message: ClientPaths): Uint8Array {
     return ClientPaths.encode(message).finish();
@@ -919,7 +919,7 @@ export const ConnectionPaths = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ConnectionPaths {
+  decode(input: BinaryReader | Uint8Array, length?: number): ConnectionPaths {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConnectionPaths();
@@ -983,7 +983,7 @@ export const ConnectionPaths = {
       paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
     };
   },
-  toAmino(message: ConnectionPaths, useInterfaces: boolean = true): ConnectionPathsAmino {
+  toAmino(message: ConnectionPaths): ConnectionPathsAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
     if (message.paths) {
@@ -996,14 +996,14 @@ export const ConnectionPaths = {
   fromAminoMsg(object: ConnectionPathsAminoMsg): ConnectionPaths {
     return ConnectionPaths.fromAmino(object.value);
   },
-  toAminoMsg(message: ConnectionPaths, useInterfaces: boolean = true): ConnectionPathsAminoMsg {
+  toAminoMsg(message: ConnectionPaths): ConnectionPathsAminoMsg {
     return {
       type: "cosmos-sdk/ConnectionPaths",
-      value: ConnectionPaths.toAmino(message, useInterfaces)
+      value: ConnectionPaths.toAmino(message)
     };
   },
-  fromProtoMsg(message: ConnectionPathsProtoMsg, useInterfaces: boolean = true): ConnectionPaths {
-    return ConnectionPaths.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ConnectionPathsProtoMsg): ConnectionPaths {
+    return ConnectionPaths.decode(message.value);
   },
   toProto(message: ConnectionPaths): Uint8Array {
     return ConnectionPaths.encode(message).finish();
@@ -1033,7 +1033,7 @@ export const Version = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Version {
+  decode(input: BinaryReader | Uint8Array, length?: number): Version {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVersion();
@@ -1097,7 +1097,7 @@ export const Version = {
       features: Array.isArray(object?.features) ? object.features.map((e: any) => e) : []
     };
   },
-  toAmino(message: Version, useInterfaces: boolean = true): VersionAmino {
+  toAmino(message: Version): VersionAmino {
     const obj: any = {};
     obj.identifier = message.identifier;
     if (message.features) {
@@ -1110,14 +1110,14 @@ export const Version = {
   fromAminoMsg(object: VersionAminoMsg): Version {
     return Version.fromAmino(object.value);
   },
-  toAminoMsg(message: Version, useInterfaces: boolean = true): VersionAminoMsg {
+  toAminoMsg(message: Version): VersionAminoMsg {
     return {
       type: "cosmos-sdk/Version",
-      value: Version.toAmino(message, useInterfaces)
+      value: Version.toAmino(message)
     };
   },
-  fromProtoMsg(message: VersionProtoMsg, useInterfaces: boolean = true): Version {
-    return Version.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: VersionProtoMsg): Version {
+    return Version.decode(message.value);
   },
   toProto(message: Version): Uint8Array {
     return Version.encode(message).finish();
@@ -1143,7 +1143,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -1192,7 +1192,7 @@ export const Params = {
       maxExpectedTimePerBlock: BigInt(object.max_expected_time_per_block)
     };
   },
-  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
+  toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     obj.max_expected_time_per_block = message.maxExpectedTimePerBlock ? message.maxExpectedTimePerBlock.toString() : undefined;
     return obj;
@@ -1200,14 +1200,14 @@ export const Params = {
   fromAminoMsg(object: ParamsAminoMsg): Params {
     return Params.fromAmino(object.value);
   },
-  toAminoMsg(message: Params, useInterfaces: boolean = true): ParamsAminoMsg {
+  toAminoMsg(message: Params): ParamsAminoMsg {
     return {
       type: "cosmos-sdk/Params",
-      value: Params.toAmino(message, useInterfaces)
+      value: Params.toAmino(message)
     };
   },
-  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
-    return Params.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();

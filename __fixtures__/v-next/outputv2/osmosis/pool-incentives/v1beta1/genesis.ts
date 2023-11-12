@@ -60,7 +60,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -68,16 +68,16 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
+          message.params = Params.decode(reader, reader.uint32());
           break;
         case 2:
-          message.lockableDurations.push(Duration.decode(reader, reader.uint32(), useInterfaces));
+          message.lockableDurations.push(Duration.decode(reader, reader.uint32()));
           break;
         case 3:
-          message.distrInfo = DistrInfo.decode(reader, reader.uint32(), useInterfaces);
+          message.distrInfo = DistrInfo.decode(reader, reader.uint32());
           break;
         case 4:
-          message.poolToGauges = PoolToGauges.decode(reader, reader.uint32(), useInterfaces);
+          message.poolToGauges = PoolToGauges.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -148,29 +148,29 @@ export const GenesisState = {
       poolToGauges: object?.pool_to_gauges ? PoolToGauges.fromAmino(object.pool_to_gauges) : undefined
     };
   },
-  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
+  toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
     if (message.lockableDurations) {
-      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e, useInterfaces) : undefined);
+      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e) : undefined);
     } else {
       obj.lockable_durations = [];
     }
-    obj.distr_info = message.distrInfo ? DistrInfo.toAmino(message.distrInfo, useInterfaces) : undefined;
-    obj.pool_to_gauges = message.poolToGauges ? PoolToGauges.toAmino(message.poolToGauges, useInterfaces) : undefined;
+    obj.distr_info = message.distrInfo ? DistrInfo.toAmino(message.distrInfo) : undefined;
+    obj.pool_to_gauges = message.poolToGauges ? PoolToGauges.toAmino(message.poolToGauges) : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
   },
-  toAminoMsg(message: GenesisState, useInterfaces: boolean = true): GenesisStateAminoMsg {
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
     return {
       type: "osmosis/poolincentives/genesis-state",
-      value: GenesisState.toAmino(message, useInterfaces)
+      value: GenesisState.toAmino(message)
     };
   },
-  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
-    return GenesisState.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();

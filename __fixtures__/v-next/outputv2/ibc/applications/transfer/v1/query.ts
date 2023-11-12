@@ -182,7 +182,7 @@ export const QueryDenomTraceRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDenomTraceRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomTraceRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomTraceRequest();
@@ -229,7 +229,7 @@ export const QueryDenomTraceRequest = {
       hash: object.hash
     };
   },
-  toAmino(message: QueryDenomTraceRequest, useInterfaces: boolean = true): QueryDenomTraceRequestAmino {
+  toAmino(message: QueryDenomTraceRequest): QueryDenomTraceRequestAmino {
     const obj: any = {};
     obj.hash = message.hash;
     return obj;
@@ -237,14 +237,14 @@ export const QueryDenomTraceRequest = {
   fromAminoMsg(object: QueryDenomTraceRequestAminoMsg): QueryDenomTraceRequest {
     return QueryDenomTraceRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDenomTraceRequest, useInterfaces: boolean = true): QueryDenomTraceRequestAminoMsg {
+  toAminoMsg(message: QueryDenomTraceRequest): QueryDenomTraceRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryDenomTraceRequest",
-      value: QueryDenomTraceRequest.toAmino(message, useInterfaces)
+      value: QueryDenomTraceRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryDenomTraceRequestProtoMsg, useInterfaces: boolean = true): QueryDenomTraceRequest {
-    return QueryDenomTraceRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryDenomTraceRequestProtoMsg): QueryDenomTraceRequest {
+    return QueryDenomTraceRequest.decode(message.value);
   },
   toProto(message: QueryDenomTraceRequest): Uint8Array {
     return QueryDenomTraceRequest.encode(message).finish();
@@ -270,7 +270,7 @@ export const QueryDenomTraceResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDenomTraceResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomTraceResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomTraceResponse();
@@ -278,7 +278,7 @@ export const QueryDenomTraceResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.denomTrace = DenomTrace.decode(reader, reader.uint32(), useInterfaces);
+          message.denomTrace = DenomTrace.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -319,22 +319,22 @@ export const QueryDenomTraceResponse = {
       denomTrace: object?.denom_trace ? DenomTrace.fromAmino(object.denom_trace) : undefined
     };
   },
-  toAmino(message: QueryDenomTraceResponse, useInterfaces: boolean = true): QueryDenomTraceResponseAmino {
+  toAmino(message: QueryDenomTraceResponse): QueryDenomTraceResponseAmino {
     const obj: any = {};
-    obj.denom_trace = message.denomTrace ? DenomTrace.toAmino(message.denomTrace, useInterfaces) : undefined;
+    obj.denom_trace = message.denomTrace ? DenomTrace.toAmino(message.denomTrace) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryDenomTraceResponseAminoMsg): QueryDenomTraceResponse {
     return QueryDenomTraceResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDenomTraceResponse, useInterfaces: boolean = true): QueryDenomTraceResponseAminoMsg {
+  toAminoMsg(message: QueryDenomTraceResponse): QueryDenomTraceResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryDenomTraceResponse",
-      value: QueryDenomTraceResponse.toAmino(message, useInterfaces)
+      value: QueryDenomTraceResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryDenomTraceResponseProtoMsg, useInterfaces: boolean = true): QueryDenomTraceResponse {
-    return QueryDenomTraceResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryDenomTraceResponseProtoMsg): QueryDenomTraceResponse {
+    return QueryDenomTraceResponse.decode(message.value);
   },
   toProto(message: QueryDenomTraceResponse): Uint8Array {
     return QueryDenomTraceResponse.encode(message).finish();
@@ -360,7 +360,7 @@ export const QueryDenomTracesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDenomTracesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomTracesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomTracesRequest();
@@ -368,7 +368,7 @@ export const QueryDenomTracesRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -409,22 +409,22 @@ export const QueryDenomTracesRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryDenomTracesRequest, useInterfaces: boolean = true): QueryDenomTracesRequestAmino {
+  toAmino(message: QueryDenomTracesRequest): QueryDenomTracesRequestAmino {
     const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryDenomTracesRequestAminoMsg): QueryDenomTracesRequest {
     return QueryDenomTracesRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDenomTracesRequest, useInterfaces: boolean = true): QueryDenomTracesRequestAminoMsg {
+  toAminoMsg(message: QueryDenomTracesRequest): QueryDenomTracesRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryDenomTracesRequest",
-      value: QueryDenomTracesRequest.toAmino(message, useInterfaces)
+      value: QueryDenomTracesRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryDenomTracesRequestProtoMsg, useInterfaces: boolean = true): QueryDenomTracesRequest {
-    return QueryDenomTracesRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryDenomTracesRequestProtoMsg): QueryDenomTracesRequest {
+    return QueryDenomTracesRequest.decode(message.value);
   },
   toProto(message: QueryDenomTracesRequest): Uint8Array {
     return QueryDenomTracesRequest.encode(message).finish();
@@ -454,7 +454,7 @@ export const QueryDenomTracesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDenomTracesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomTracesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomTracesResponse();
@@ -462,10 +462,10 @@ export const QueryDenomTracesResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.denomTraces.push(DenomTrace.decode(reader, reader.uint32(), useInterfaces));
+          message.denomTraces.push(DenomTrace.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -520,27 +520,27 @@ export const QueryDenomTracesResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryDenomTracesResponse, useInterfaces: boolean = true): QueryDenomTracesResponseAmino {
+  toAmino(message: QueryDenomTracesResponse): QueryDenomTracesResponseAmino {
     const obj: any = {};
     if (message.denomTraces) {
-      obj.denom_traces = message.denomTraces.map(e => e ? DenomTrace.toAmino(e, useInterfaces) : undefined);
+      obj.denom_traces = message.denomTraces.map(e => e ? DenomTrace.toAmino(e) : undefined);
     } else {
       obj.denom_traces = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryDenomTracesResponseAminoMsg): QueryDenomTracesResponse {
     return QueryDenomTracesResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryDenomTracesResponse, useInterfaces: boolean = true): QueryDenomTracesResponseAminoMsg {
+  toAminoMsg(message: QueryDenomTracesResponse): QueryDenomTracesResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryDenomTracesResponse",
-      value: QueryDenomTracesResponse.toAmino(message, useInterfaces)
+      value: QueryDenomTracesResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryDenomTracesResponseProtoMsg, useInterfaces: boolean = true): QueryDenomTracesResponse {
-    return QueryDenomTracesResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryDenomTracesResponseProtoMsg): QueryDenomTracesResponse {
+    return QueryDenomTracesResponse.decode(message.value);
   },
   toProto(message: QueryDenomTracesResponse): Uint8Array {
     return QueryDenomTracesResponse.encode(message).finish();
@@ -561,7 +561,7 @@ export const QueryParamsRequest = {
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -597,21 +597,21 @@ export const QueryParamsRequest = {
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
-  toAmino(_: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
     return QueryParamsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAminoMsg {
+  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryParamsRequest",
-      value: QueryParamsRequest.toAmino(message, useInterfaces)
+      value: QueryParamsRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = true): QueryParamsRequest {
-    return QueryParamsRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value);
   },
   toProto(message: QueryParamsRequest): Uint8Array {
     return QueryParamsRequest.encode(message).finish();
@@ -637,7 +637,7 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -645,7 +645,7 @@ export const QueryParamsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
+          message.params = Params.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -686,22 +686,22 @@ export const QueryParamsResponse = {
       params: object?.params ? Params.fromAmino(object.params) : undefined
     };
   },
-  toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
     return QueryParamsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAminoMsg {
+  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryParamsResponse",
-      value: QueryParamsResponse.toAmino(message, useInterfaces)
+      value: QueryParamsResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = true): QueryParamsResponse {
-    return QueryParamsResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value);
   },
   toProto(message: QueryParamsResponse): Uint8Array {
     return QueryParamsResponse.encode(message).finish();

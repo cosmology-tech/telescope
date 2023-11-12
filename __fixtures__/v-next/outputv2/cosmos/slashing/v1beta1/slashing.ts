@@ -143,7 +143,7 @@ export const ValidatorSigningInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorSigningInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorSigningInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorSigningInfo();
@@ -241,7 +241,7 @@ export const ValidatorSigningInfo = {
       missedBlocksCounter: BigInt(object.missed_blocks_counter)
     };
   },
-  toAmino(message: ValidatorSigningInfo, useInterfaces: boolean = true): ValidatorSigningInfoAmino {
+  toAmino(message: ValidatorSigningInfo): ValidatorSigningInfoAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.start_height = message.startHeight ? message.startHeight.toString() : undefined;
@@ -254,14 +254,14 @@ export const ValidatorSigningInfo = {
   fromAminoMsg(object: ValidatorSigningInfoAminoMsg): ValidatorSigningInfo {
     return ValidatorSigningInfo.fromAmino(object.value);
   },
-  toAminoMsg(message: ValidatorSigningInfo, useInterfaces: boolean = true): ValidatorSigningInfoAminoMsg {
+  toAminoMsg(message: ValidatorSigningInfo): ValidatorSigningInfoAminoMsg {
     return {
       type: "cosmos-sdk/ValidatorSigningInfo",
-      value: ValidatorSigningInfo.toAmino(message, useInterfaces)
+      value: ValidatorSigningInfo.toAmino(message)
     };
   },
-  fromProtoMsg(message: ValidatorSigningInfoProtoMsg, useInterfaces: boolean = true): ValidatorSigningInfo {
-    return ValidatorSigningInfo.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ValidatorSigningInfoProtoMsg): ValidatorSigningInfo {
+    return ValidatorSigningInfo.decode(message.value);
   },
   toProto(message: ValidatorSigningInfo): Uint8Array {
     return ValidatorSigningInfo.encode(message).finish();
@@ -303,7 +303,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -317,7 +317,7 @@ export const Params = {
           message.minSignedPerWindow = reader.bytes();
           break;
         case 3:
-          message.downtimeJailDuration = Duration.decode(reader, reader.uint32(), useInterfaces);
+          message.downtimeJailDuration = Duration.decode(reader, reader.uint32());
           break;
         case 4:
           message.slashFractionDoubleSign = reader.bytes();
@@ -390,11 +390,11 @@ export const Params = {
       slashFractionDowntime: object.slash_fraction_downtime
     };
   },
-  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
+  toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     obj.signed_blocks_window = message.signedBlocksWindow ? message.signedBlocksWindow.toString() : undefined;
     obj.min_signed_per_window = message.minSignedPerWindow;
-    obj.downtime_jail_duration = message.downtimeJailDuration ? Duration.toAmino(message.downtimeJailDuration, useInterfaces) : undefined;
+    obj.downtime_jail_duration = message.downtimeJailDuration ? Duration.toAmino(message.downtimeJailDuration) : undefined;
     obj.slash_fraction_double_sign = message.slashFractionDoubleSign;
     obj.slash_fraction_downtime = message.slashFractionDowntime;
     return obj;
@@ -402,14 +402,14 @@ export const Params = {
   fromAminoMsg(object: ParamsAminoMsg): Params {
     return Params.fromAmino(object.value);
   },
-  toAminoMsg(message: Params, useInterfaces: boolean = true): ParamsAminoMsg {
+  toAminoMsg(message: Params): ParamsAminoMsg {
     return {
       type: "cosmos-sdk/Params",
-      value: Params.toAmino(message, useInterfaces)
+      value: Params.toAmino(message)
     };
   },
-  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
-    return Params.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();

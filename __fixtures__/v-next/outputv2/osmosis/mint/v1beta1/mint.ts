@@ -239,7 +239,7 @@ export const Minter = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Minter {
+  decode(input: BinaryReader | Uint8Array, length?: number): Minter {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMinter();
@@ -286,7 +286,7 @@ export const Minter = {
       epochProvisions: object.epoch_provisions
     };
   },
-  toAmino(message: Minter, useInterfaces: boolean = true): MinterAmino {
+  toAmino(message: Minter): MinterAmino {
     const obj: any = {};
     obj.epoch_provisions = message.epochProvisions;
     return obj;
@@ -294,14 +294,14 @@ export const Minter = {
   fromAminoMsg(object: MinterAminoMsg): Minter {
     return Minter.fromAmino(object.value);
   },
-  toAminoMsg(message: Minter, useInterfaces: boolean = true): MinterAminoMsg {
+  toAminoMsg(message: Minter): MinterAminoMsg {
     return {
       type: "osmosis/mint/minter",
-      value: Minter.toAmino(message, useInterfaces)
+      value: Minter.toAmino(message)
     };
   },
-  fromProtoMsg(message: MinterProtoMsg, useInterfaces: boolean = true): Minter {
-    return Minter.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MinterProtoMsg): Minter {
+    return Minter.decode(message.value);
   },
   toProto(message: Minter): Uint8Array {
     return Minter.encode(message).finish();
@@ -331,7 +331,7 @@ export const WeightedAddress = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): WeightedAddress {
+  decode(input: BinaryReader | Uint8Array, length?: number): WeightedAddress {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWeightedAddress();
@@ -387,7 +387,7 @@ export const WeightedAddress = {
       weight: object.weight
     };
   },
-  toAmino(message: WeightedAddress, useInterfaces: boolean = true): WeightedAddressAmino {
+  toAmino(message: WeightedAddress): WeightedAddressAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.weight = message.weight;
@@ -396,14 +396,14 @@ export const WeightedAddress = {
   fromAminoMsg(object: WeightedAddressAminoMsg): WeightedAddress {
     return WeightedAddress.fromAmino(object.value);
   },
-  toAminoMsg(message: WeightedAddress, useInterfaces: boolean = true): WeightedAddressAminoMsg {
+  toAminoMsg(message: WeightedAddress): WeightedAddressAminoMsg {
     return {
       type: "osmosis/mint/weighted-address",
-      value: WeightedAddress.toAmino(message, useInterfaces)
+      value: WeightedAddress.toAmino(message)
     };
   },
-  fromProtoMsg(message: WeightedAddressProtoMsg, useInterfaces: boolean = true): WeightedAddress {
-    return WeightedAddress.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: WeightedAddressProtoMsg): WeightedAddress {
+    return WeightedAddress.decode(message.value);
   },
   toProto(message: WeightedAddress): Uint8Array {
     return WeightedAddress.encode(message).finish();
@@ -441,7 +441,7 @@ export const DistributionProportions = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DistributionProportions {
+  decode(input: BinaryReader | Uint8Array, length?: number): DistributionProportions {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistributionProportions();
@@ -515,7 +515,7 @@ export const DistributionProportions = {
       communityPool: object.community_pool
     };
   },
-  toAmino(message: DistributionProportions, useInterfaces: boolean = true): DistributionProportionsAmino {
+  toAmino(message: DistributionProportions): DistributionProportionsAmino {
     const obj: any = {};
     obj.staking = message.staking;
     obj.pool_incentives = message.poolIncentives;
@@ -526,14 +526,14 @@ export const DistributionProportions = {
   fromAminoMsg(object: DistributionProportionsAminoMsg): DistributionProportions {
     return DistributionProportions.fromAmino(object.value);
   },
-  toAminoMsg(message: DistributionProportions, useInterfaces: boolean = true): DistributionProportionsAminoMsg {
+  toAminoMsg(message: DistributionProportions): DistributionProportionsAminoMsg {
     return {
       type: "osmosis/mint/distribution-proportions",
-      value: DistributionProportions.toAmino(message, useInterfaces)
+      value: DistributionProportions.toAmino(message)
     };
   },
-  fromProtoMsg(message: DistributionProportionsProtoMsg, useInterfaces: boolean = true): DistributionProportions {
-    return DistributionProportions.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: DistributionProportionsProtoMsg): DistributionProportions {
+    return DistributionProportions.decode(message.value);
   },
   toProto(message: DistributionProportions): Uint8Array {
     return DistributionProportions.encode(message).finish();
@@ -587,7 +587,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -610,10 +610,10 @@ export const Params = {
           message.reductionFactor = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 6:
-          message.distributionProportions = DistributionProportions.decode(reader, reader.uint32(), useInterfaces);
+          message.distributionProportions = DistributionProportions.decode(reader, reader.uint32());
           break;
         case 7:
-          message.weightedDeveloperRewardsReceivers.push(WeightedAddress.decode(reader, reader.uint32(), useInterfaces));
+          message.weightedDeveloperRewardsReceivers.push(WeightedAddress.decode(reader, reader.uint32()));
           break;
         case 8:
           message.mintingRewardsDistributionStartEpoch = reader.int64();
@@ -711,16 +711,16 @@ export const Params = {
       mintingRewardsDistributionStartEpoch: BigInt(object.minting_rewards_distribution_start_epoch)
     };
   },
-  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
+  toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     obj.mint_denom = message.mintDenom;
     obj.genesis_epoch_provisions = message.genesisEpochProvisions;
     obj.epoch_identifier = message.epochIdentifier;
     obj.reduction_period_in_epochs = message.reductionPeriodInEpochs ? message.reductionPeriodInEpochs.toString() : undefined;
     obj.reduction_factor = message.reductionFactor;
-    obj.distribution_proportions = message.distributionProportions ? DistributionProportions.toAmino(message.distributionProportions, useInterfaces) : undefined;
+    obj.distribution_proportions = message.distributionProportions ? DistributionProportions.toAmino(message.distributionProportions) : undefined;
     if (message.weightedDeveloperRewardsReceivers) {
-      obj.weighted_developer_rewards_receivers = message.weightedDeveloperRewardsReceivers.map(e => e ? WeightedAddress.toAmino(e, useInterfaces) : undefined);
+      obj.weighted_developer_rewards_receivers = message.weightedDeveloperRewardsReceivers.map(e => e ? WeightedAddress.toAmino(e) : undefined);
     } else {
       obj.weighted_developer_rewards_receivers = [];
     }
@@ -730,14 +730,14 @@ export const Params = {
   fromAminoMsg(object: ParamsAminoMsg): Params {
     return Params.fromAmino(object.value);
   },
-  toAminoMsg(message: Params, useInterfaces: boolean = true): ParamsAminoMsg {
+  toAminoMsg(message: Params): ParamsAminoMsg {
     return {
       type: "osmosis/mint/params",
-      value: Params.toAmino(message, useInterfaces)
+      value: Params.toAmino(message)
     };
   },
-  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
-    return Params.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();

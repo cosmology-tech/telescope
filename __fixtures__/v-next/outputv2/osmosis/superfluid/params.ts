@@ -48,7 +48,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -95,7 +95,7 @@ export const Params = {
       minimumRiskFactor: object.minimum_risk_factor
     };
   },
-  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
+  toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     obj.minimum_risk_factor = message.minimumRiskFactor;
     return obj;
@@ -103,14 +103,14 @@ export const Params = {
   fromAminoMsg(object: ParamsAminoMsg): Params {
     return Params.fromAmino(object.value);
   },
-  toAminoMsg(message: Params, useInterfaces: boolean = true): ParamsAminoMsg {
+  toAminoMsg(message: Params): ParamsAminoMsg {
     return {
       type: "osmosis/params",
-      value: Params.toAmino(message, useInterfaces)
+      value: Params.toAmino(message)
     };
   },
-  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
-    return Params.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();

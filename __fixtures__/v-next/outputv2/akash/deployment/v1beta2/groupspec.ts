@@ -50,7 +50,7 @@ export const GroupSpec = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GroupSpec {
+  decode(input: BinaryReader | Uint8Array, length?: number): GroupSpec {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGroupSpec();
@@ -61,10 +61,10 @@ export const GroupSpec = {
           message.name = reader.string();
           break;
         case 2:
-          message.requirements = PlacementRequirements.decode(reader, reader.uint32(), useInterfaces);
+          message.requirements = PlacementRequirements.decode(reader, reader.uint32());
           break;
         case 3:
-          message.resources.push(Resource.decode(reader, reader.uint32(), useInterfaces));
+          message.resources.push(Resource.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -125,12 +125,12 @@ export const GroupSpec = {
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromAmino(e)) : []
     };
   },
-  toAmino(message: GroupSpec, useInterfaces: boolean = true): GroupSpecAmino {
+  toAmino(message: GroupSpec): GroupSpecAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements, useInterfaces) : undefined;
+    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements) : undefined;
     if (message.resources) {
-      obj.resources = message.resources.map(e => e ? Resource.toAmino(e, useInterfaces) : undefined);
+      obj.resources = message.resources.map(e => e ? Resource.toAmino(e) : undefined);
     } else {
       obj.resources = [];
     }
@@ -139,8 +139,8 @@ export const GroupSpec = {
   fromAminoMsg(object: GroupSpecAminoMsg): GroupSpec {
     return GroupSpec.fromAmino(object.value);
   },
-  fromProtoMsg(message: GroupSpecProtoMsg, useInterfaces: boolean = true): GroupSpec {
-    return GroupSpec.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: GroupSpecProtoMsg): GroupSpec {
+    return GroupSpec.decode(message.value);
   },
   toProto(message: GroupSpec): Uint8Array {
     return GroupSpec.encode(message).finish();

@@ -78,7 +78,7 @@ export const MsgSend = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSend {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSend {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSend();
@@ -152,7 +152,7 @@ export const MsgSend = {
       receiver: object.receiver
     };
   },
-  toAmino(message: MsgSend, useInterfaces: boolean = true): MsgSendAmino {
+  toAmino(message: MsgSend): MsgSendAmino {
     const obj: any = {};
     obj.class_id = message.classId;
     obj.id = message.id;
@@ -163,14 +163,14 @@ export const MsgSend = {
   fromAminoMsg(object: MsgSendAminoMsg): MsgSend {
     return MsgSend.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgSend, useInterfaces: boolean = true): MsgSendAminoMsg {
+  toAminoMsg(message: MsgSend): MsgSendAminoMsg {
     return {
       type: "cosmos-sdk/MsgNFTSend",
-      value: MsgSend.toAmino(message, useInterfaces)
+      value: MsgSend.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgSendProtoMsg, useInterfaces: boolean = true): MsgSend {
-    return MsgSend.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgSendProtoMsg): MsgSend {
+    return MsgSend.decode(message.value);
   },
   toProto(message: MsgSend): Uint8Array {
     return MsgSend.encode(message).finish();
@@ -191,7 +191,7 @@ export const MsgSendResponse = {
   encode(_: MsgSendResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSendResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSendResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSendResponse();
@@ -227,21 +227,21 @@ export const MsgSendResponse = {
   fromAmino(_: MsgSendResponseAmino): MsgSendResponse {
     return {};
   },
-  toAmino(_: MsgSendResponse, useInterfaces: boolean = true): MsgSendResponseAmino {
+  toAmino(_: MsgSendResponse): MsgSendResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgSendResponseAminoMsg): MsgSendResponse {
     return MsgSendResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgSendResponse, useInterfaces: boolean = true): MsgSendResponseAminoMsg {
+  toAminoMsg(message: MsgSendResponse): MsgSendResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgSendResponse",
-      value: MsgSendResponse.toAmino(message, useInterfaces)
+      value: MsgSendResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgSendResponseProtoMsg, useInterfaces: boolean = true): MsgSendResponse {
-    return MsgSendResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgSendResponseProtoMsg): MsgSendResponse {
+    return MsgSendResponse.decode(message.value);
   },
   toProto(message: MsgSendResponse): Uint8Array {
     return MsgSendResponse.encode(message).finish();

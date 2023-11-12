@@ -210,7 +210,7 @@ export const BasicAllowance = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BasicAllowance {
+  decode(input: BinaryReader | Uint8Array, length?: number): BasicAllowance {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBasicAllowance();
@@ -218,7 +218,7 @@ export const BasicAllowance = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.spendLimit.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.spendLimit.push(Coin.decode(reader, reader.uint32()));
           break;
         case 2:
           message.expiration = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
@@ -274,10 +274,10 @@ export const BasicAllowance = {
       expiration: object?.expiration ? fromTimestamp(Timestamp.fromAmino(object.expiration)) : undefined
     };
   },
-  toAmino(message: BasicAllowance, useInterfaces: boolean = true): BasicAllowanceAmino {
+  toAmino(message: BasicAllowance): BasicAllowanceAmino {
     const obj: any = {};
     if (message.spendLimit) {
-      obj.spend_limit = message.spendLimit.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.spend_limit = message.spendLimit.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.spend_limit = [];
     }
@@ -287,14 +287,14 @@ export const BasicAllowance = {
   fromAminoMsg(object: BasicAllowanceAminoMsg): BasicAllowance {
     return BasicAllowance.fromAmino(object.value);
   },
-  toAminoMsg(message: BasicAllowance, useInterfaces: boolean = true): BasicAllowanceAminoMsg {
+  toAminoMsg(message: BasicAllowance): BasicAllowanceAminoMsg {
     return {
       type: "cosmos-sdk/BasicAllowance",
-      value: BasicAllowance.toAmino(message, useInterfaces)
+      value: BasicAllowance.toAmino(message)
     };
   },
-  fromProtoMsg(message: BasicAllowanceProtoMsg, useInterfaces: boolean = true): BasicAllowance {
-    return BasicAllowance.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: BasicAllowanceProtoMsg): BasicAllowance {
+    return BasicAllowance.decode(message.value);
   },
   toProto(message: BasicAllowance): Uint8Array {
     return BasicAllowance.encode(message).finish();
@@ -337,7 +337,7 @@ export const PeriodicAllowance = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PeriodicAllowance {
+  decode(input: BinaryReader | Uint8Array, length?: number): PeriodicAllowance {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeriodicAllowance();
@@ -345,16 +345,16 @@ export const PeriodicAllowance = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.basic = BasicAllowance.decode(reader, reader.uint32(), useInterfaces);
+          message.basic = BasicAllowance.decode(reader, reader.uint32());
           break;
         case 2:
-          message.period = Duration.decode(reader, reader.uint32(), useInterfaces);
+          message.period = Duration.decode(reader, reader.uint32());
           break;
         case 3:
-          message.periodSpendLimit.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.periodSpendLimit.push(Coin.decode(reader, reader.uint32()));
           break;
         case 4:
-          message.periodCanSpend.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.periodCanSpend.push(Coin.decode(reader, reader.uint32()));
           break;
         case 5:
           message.periodReset = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
@@ -440,17 +440,17 @@ export const PeriodicAllowance = {
       periodReset: object?.period_reset ? fromTimestamp(Timestamp.fromAmino(object.period_reset)) : undefined
     };
   },
-  toAmino(message: PeriodicAllowance, useInterfaces: boolean = true): PeriodicAllowanceAmino {
+  toAmino(message: PeriodicAllowance): PeriodicAllowanceAmino {
     const obj: any = {};
-    obj.basic = message.basic ? BasicAllowance.toAmino(message.basic, useInterfaces) : undefined;
-    obj.period = message.period ? Duration.toAmino(message.period, useInterfaces) : undefined;
+    obj.basic = message.basic ? BasicAllowance.toAmino(message.basic) : undefined;
+    obj.period = message.period ? Duration.toAmino(message.period) : undefined;
     if (message.periodSpendLimit) {
-      obj.period_spend_limit = message.periodSpendLimit.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.period_spend_limit = message.periodSpendLimit.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.period_spend_limit = [];
     }
     if (message.periodCanSpend) {
-      obj.period_can_spend = message.periodCanSpend.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.period_can_spend = message.periodCanSpend.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.period_can_spend = [];
     }
@@ -460,14 +460,14 @@ export const PeriodicAllowance = {
   fromAminoMsg(object: PeriodicAllowanceAminoMsg): PeriodicAllowance {
     return PeriodicAllowance.fromAmino(object.value);
   },
-  toAminoMsg(message: PeriodicAllowance, useInterfaces: boolean = true): PeriodicAllowanceAminoMsg {
+  toAminoMsg(message: PeriodicAllowance): PeriodicAllowanceAminoMsg {
     return {
       type: "cosmos-sdk/PeriodicAllowance",
-      value: PeriodicAllowance.toAmino(message, useInterfaces)
+      value: PeriodicAllowance.toAmino(message)
     };
   },
-  fromProtoMsg(message: PeriodicAllowanceProtoMsg, useInterfaces: boolean = true): PeriodicAllowance {
-    return PeriodicAllowance.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: PeriodicAllowanceProtoMsg): PeriodicAllowance {
+    return PeriodicAllowance.decode(message.value);
   },
   toProto(message: PeriodicAllowance): Uint8Array {
     return PeriodicAllowance.encode(message).finish();
@@ -498,7 +498,7 @@ export const AllowedMsgAllowance = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AllowedMsgAllowance {
+  decode(input: BinaryReader | Uint8Array, length?: number): AllowedMsgAllowance {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllowedMsgAllowance();
@@ -506,7 +506,7 @@ export const AllowedMsgAllowance = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.allowance = useInterfaces ? (FeeAllowanceI_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces);
+          message.allowance = (FeeAllowanceI_InterfaceDecoder(reader) as Any);
           break;
         case 2:
           message.allowedMessages.push(reader.string());
@@ -564,9 +564,9 @@ export const AllowedMsgAllowance = {
       allowedMessages: Array.isArray(object?.allowed_messages) ? object.allowed_messages.map((e: any) => e) : []
     };
   },
-  toAmino(message: AllowedMsgAllowance, useInterfaces: boolean = true): AllowedMsgAllowanceAmino {
+  toAmino(message: AllowedMsgAllowance): AllowedMsgAllowanceAmino {
     const obj: any = {};
-    obj.allowance = message.allowance ? FeeAllowanceI_ToAmino((message.allowance as Any), useInterfaces) : undefined;
+    obj.allowance = message.allowance ? FeeAllowanceI_ToAmino((message.allowance as Any)) : undefined;
     if (message.allowedMessages) {
       obj.allowed_messages = message.allowedMessages.map(e => e);
     } else {
@@ -577,14 +577,14 @@ export const AllowedMsgAllowance = {
   fromAminoMsg(object: AllowedMsgAllowanceAminoMsg): AllowedMsgAllowance {
     return AllowedMsgAllowance.fromAmino(object.value);
   },
-  toAminoMsg(message: AllowedMsgAllowance, useInterfaces: boolean = true): AllowedMsgAllowanceAminoMsg {
+  toAminoMsg(message: AllowedMsgAllowance): AllowedMsgAllowanceAminoMsg {
     return {
       type: "cosmos-sdk/AllowedMsgAllowance",
-      value: AllowedMsgAllowance.toAmino(message, useInterfaces)
+      value: AllowedMsgAllowance.toAmino(message)
     };
   },
-  fromProtoMsg(message: AllowedMsgAllowanceProtoMsg, useInterfaces: boolean = true): AllowedMsgAllowance {
-    return AllowedMsgAllowance.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AllowedMsgAllowanceProtoMsg): AllowedMsgAllowance {
+    return AllowedMsgAllowance.decode(message.value);
   },
   toProto(message: AllowedMsgAllowance): Uint8Array {
     return AllowedMsgAllowance.encode(message).finish();
@@ -618,7 +618,7 @@ export const Grant = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Grant {
+  decode(input: BinaryReader | Uint8Array, length?: number): Grant {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGrant();
@@ -632,7 +632,7 @@ export const Grant = {
           message.grantee = reader.string();
           break;
         case 3:
-          message.allowance = useInterfaces ? (FeeAllowanceI_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces);
+          message.allowance = (FeeAllowanceI_InterfaceDecoder(reader) as Any);
           break;
         default:
           reader.skipType(tag & 7);
@@ -685,24 +685,24 @@ export const Grant = {
       allowance: object?.allowance ? FeeAllowanceI_FromAmino(object.allowance) : undefined
     };
   },
-  toAmino(message: Grant, useInterfaces: boolean = true): GrantAmino {
+  toAmino(message: Grant): GrantAmino {
     const obj: any = {};
     obj.granter = message.granter;
     obj.grantee = message.grantee;
-    obj.allowance = message.allowance ? FeeAllowanceI_ToAmino((message.allowance as Any), useInterfaces) : undefined;
+    obj.allowance = message.allowance ? FeeAllowanceI_ToAmino((message.allowance as Any)) : undefined;
     return obj;
   },
   fromAminoMsg(object: GrantAminoMsg): Grant {
     return Grant.fromAmino(object.value);
   },
-  toAminoMsg(message: Grant, useInterfaces: boolean = true): GrantAminoMsg {
+  toAminoMsg(message: Grant): GrantAminoMsg {
     return {
       type: "cosmos-sdk/Grant",
-      value: Grant.toAmino(message, useInterfaces)
+      value: Grant.toAmino(message)
     };
   },
-  fromProtoMsg(message: GrantProtoMsg, useInterfaces: boolean = true): Grant {
-    return Grant.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: GrantProtoMsg): Grant {
+    return Grant.decode(message.value);
   },
   toProto(message: Grant): Uint8Array {
     return Grant.encode(message).finish();
@@ -749,24 +749,24 @@ export const FeeAllowanceI_FromAmino = (content: AnyAmino) => {
       return Any.fromAmino(content);
   }
 };
-export const FeeAllowanceI_ToAmino = (content: Any, useInterfaces: boolean = true) => {
+export const FeeAllowanceI_ToAmino = (content: Any) => {
   switch (content.typeUrl) {
     case "/cosmos.feegrant.v1beta1.BasicAllowance":
       return {
         type: "cosmos-sdk/BasicAllowance",
-        value: BasicAllowance.toAmino(BasicAllowance.decode(content.value, undefined, useInterfaces), useInterfaces)
+        value: BasicAllowance.toAmino(BasicAllowance.decode(content.value, undefined))
       };
     case "/cosmos.feegrant.v1beta1.PeriodicAllowance":
       return {
         type: "cosmos-sdk/PeriodicAllowance",
-        value: PeriodicAllowance.toAmino(PeriodicAllowance.decode(content.value, undefined, useInterfaces), useInterfaces)
+        value: PeriodicAllowance.toAmino(PeriodicAllowance.decode(content.value, undefined))
       };
     case "/cosmos.feegrant.v1beta1.AllowedMsgAllowance":
       return {
         type: "cosmos-sdk/AllowedMsgAllowance",
-        value: AllowedMsgAllowance.toAmino(AllowedMsgAllowance.decode(content.value, undefined, useInterfaces), useInterfaces)
+        value: AllowedMsgAllowance.toAmino(AllowedMsgAllowance.decode(content.value, undefined))
       };
     default:
-      return Any.toAmino(content, useInterfaces);
+      return Any.toAmino(content);
   }
 };

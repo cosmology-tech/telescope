@@ -85,7 +85,7 @@ export const MultiSignature = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MultiSignature {
+  decode(input: BinaryReader | Uint8Array, length?: number): MultiSignature {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMultiSignature();
@@ -140,7 +140,7 @@ export const MultiSignature = {
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
     };
   },
-  toAmino(message: MultiSignature, useInterfaces: boolean = true): MultiSignatureAmino {
+  toAmino(message: MultiSignature): MultiSignatureAmino {
     const obj: any = {};
     if (message.signatures) {
       obj.signatures = message.signatures.map(e => e);
@@ -152,14 +152,14 @@ export const MultiSignature = {
   fromAminoMsg(object: MultiSignatureAminoMsg): MultiSignature {
     return MultiSignature.fromAmino(object.value);
   },
-  toAminoMsg(message: MultiSignature, useInterfaces: boolean = true): MultiSignatureAminoMsg {
+  toAminoMsg(message: MultiSignature): MultiSignatureAminoMsg {
     return {
       type: "cosmos-sdk/MultiSignature",
-      value: MultiSignature.toAmino(message, useInterfaces)
+      value: MultiSignature.toAmino(message)
     };
   },
-  fromProtoMsg(message: MultiSignatureProtoMsg, useInterfaces: boolean = true): MultiSignature {
-    return MultiSignature.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MultiSignatureProtoMsg): MultiSignature {
+    return MultiSignature.decode(message.value);
   },
   toProto(message: MultiSignature): Uint8Array {
     return MultiSignature.encode(message).finish();
@@ -189,7 +189,7 @@ export const CompactBitArray = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CompactBitArray {
+  decode(input: BinaryReader | Uint8Array, length?: number): CompactBitArray {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCompactBitArray();
@@ -245,7 +245,7 @@ export const CompactBitArray = {
       elems: object.elems
     };
   },
-  toAmino(message: CompactBitArray, useInterfaces: boolean = true): CompactBitArrayAmino {
+  toAmino(message: CompactBitArray): CompactBitArrayAmino {
     const obj: any = {};
     obj.extra_bits_stored = message.extraBitsStored;
     obj.elems = message.elems;
@@ -254,14 +254,14 @@ export const CompactBitArray = {
   fromAminoMsg(object: CompactBitArrayAminoMsg): CompactBitArray {
     return CompactBitArray.fromAmino(object.value);
   },
-  toAminoMsg(message: CompactBitArray, useInterfaces: boolean = true): CompactBitArrayAminoMsg {
+  toAminoMsg(message: CompactBitArray): CompactBitArrayAminoMsg {
     return {
       type: "cosmos-sdk/CompactBitArray",
-      value: CompactBitArray.toAmino(message, useInterfaces)
+      value: CompactBitArray.toAmino(message)
     };
   },
-  fromProtoMsg(message: CompactBitArrayProtoMsg, useInterfaces: boolean = true): CompactBitArray {
-    return CompactBitArray.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: CompactBitArrayProtoMsg): CompactBitArray {
+    return CompactBitArray.decode(message.value);
   },
   toProto(message: CompactBitArray): Uint8Array {
     return CompactBitArray.encode(message).finish();

@@ -317,7 +317,7 @@ export const MsgCreateValidator = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateValidator {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateValidator {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateValidator();
@@ -325,10 +325,10 @@ export const MsgCreateValidator = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.description = Description.decode(reader, reader.uint32(), useInterfaces);
+          message.description = Description.decode(reader, reader.uint32());
           break;
         case 2:
-          message.commission = CommissionRates.decode(reader, reader.uint32(), useInterfaces);
+          message.commission = CommissionRates.decode(reader, reader.uint32());
           break;
         case 3:
           message.minSelfDelegation = reader.string();
@@ -340,10 +340,10 @@ export const MsgCreateValidator = {
           message.validatorAddress = reader.string();
           break;
         case 6:
-          message.pubkey = useInterfaces ? (Cosmos_cryptoPubKey_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces);
+          message.pubkey = (Cosmos_cryptoPubKey_InterfaceDecoder(reader) as Any);
           break;
         case 7:
-          message.value = Coin.decode(reader, reader.uint32(), useInterfaces);
+          message.value = Coin.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -426,28 +426,28 @@ export const MsgCreateValidator = {
       value: object?.value ? Coin.fromAmino(object.value) : undefined
     };
   },
-  toAmino(message: MsgCreateValidator, useInterfaces: boolean = true): MsgCreateValidatorAmino {
+  toAmino(message: MsgCreateValidator): MsgCreateValidatorAmino {
     const obj: any = {};
-    obj.description = message.description ? Description.toAmino(message.description, useInterfaces) : undefined;
-    obj.commission = message.commission ? CommissionRates.toAmino(message.commission, useInterfaces) : undefined;
+    obj.description = message.description ? Description.toAmino(message.description) : undefined;
+    obj.commission = message.commission ? CommissionRates.toAmino(message.commission) : undefined;
     obj.min_self_delegation = message.minSelfDelegation;
     obj.delegator_address = message.delegatorAddress;
     obj.validator_address = message.validatorAddress;
     obj.pubkey = message.pubkey ? decodePubkey(message.pubkey) : undefined;
-    obj.value = message.value ? Coin.toAmino(message.value, useInterfaces) : undefined;
+    obj.value = message.value ? Coin.toAmino(message.value) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgCreateValidatorAminoMsg): MsgCreateValidator {
     return MsgCreateValidator.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreateValidator, useInterfaces: boolean = true): MsgCreateValidatorAminoMsg {
+  toAminoMsg(message: MsgCreateValidator): MsgCreateValidatorAminoMsg {
     return {
       type: "cosmos-sdk/MsgCreateValidator",
-      value: MsgCreateValidator.toAmino(message, useInterfaces)
+      value: MsgCreateValidator.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgCreateValidatorProtoMsg, useInterfaces: boolean = true): MsgCreateValidator {
-    return MsgCreateValidator.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgCreateValidatorProtoMsg): MsgCreateValidator {
+    return MsgCreateValidator.decode(message.value);
   },
   toProto(message: MsgCreateValidator): Uint8Array {
     return MsgCreateValidator.encode(message).finish();
@@ -468,7 +468,7 @@ export const MsgCreateValidatorResponse = {
   encode(_: MsgCreateValidatorResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateValidatorResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateValidatorResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateValidatorResponse();
@@ -504,21 +504,21 @@ export const MsgCreateValidatorResponse = {
   fromAmino(_: MsgCreateValidatorResponseAmino): MsgCreateValidatorResponse {
     return {};
   },
-  toAmino(_: MsgCreateValidatorResponse, useInterfaces: boolean = true): MsgCreateValidatorResponseAmino {
+  toAmino(_: MsgCreateValidatorResponse): MsgCreateValidatorResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgCreateValidatorResponseAminoMsg): MsgCreateValidatorResponse {
     return MsgCreateValidatorResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreateValidatorResponse, useInterfaces: boolean = true): MsgCreateValidatorResponseAminoMsg {
+  toAminoMsg(message: MsgCreateValidatorResponse): MsgCreateValidatorResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgCreateValidatorResponse",
-      value: MsgCreateValidatorResponse.toAmino(message, useInterfaces)
+      value: MsgCreateValidatorResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgCreateValidatorResponseProtoMsg, useInterfaces: boolean = true): MsgCreateValidatorResponse {
-    return MsgCreateValidatorResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgCreateValidatorResponseProtoMsg): MsgCreateValidatorResponse {
+    return MsgCreateValidatorResponse.decode(message.value);
   },
   toProto(message: MsgCreateValidatorResponse): Uint8Array {
     return MsgCreateValidatorResponse.encode(message).finish();
@@ -556,7 +556,7 @@ export const MsgEditValidator = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgEditValidator {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgEditValidator {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgEditValidator();
@@ -564,7 +564,7 @@ export const MsgEditValidator = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.description = Description.decode(reader, reader.uint32(), useInterfaces);
+          message.description = Description.decode(reader, reader.uint32());
           break;
         case 2:
           message.validatorAddress = reader.string();
@@ -632,9 +632,9 @@ export const MsgEditValidator = {
       minSelfDelegation: object.min_self_delegation
     };
   },
-  toAmino(message: MsgEditValidator, useInterfaces: boolean = true): MsgEditValidatorAmino {
+  toAmino(message: MsgEditValidator): MsgEditValidatorAmino {
     const obj: any = {};
-    obj.description = message.description ? Description.toAmino(message.description, useInterfaces) : undefined;
+    obj.description = message.description ? Description.toAmino(message.description) : undefined;
     obj.validator_address = message.validatorAddress;
     obj.commission_rate = message.commissionRate;
     obj.min_self_delegation = message.minSelfDelegation;
@@ -643,14 +643,14 @@ export const MsgEditValidator = {
   fromAminoMsg(object: MsgEditValidatorAminoMsg): MsgEditValidator {
     return MsgEditValidator.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgEditValidator, useInterfaces: boolean = true): MsgEditValidatorAminoMsg {
+  toAminoMsg(message: MsgEditValidator): MsgEditValidatorAminoMsg {
     return {
       type: "cosmos-sdk/MsgEditValidator",
-      value: MsgEditValidator.toAmino(message, useInterfaces)
+      value: MsgEditValidator.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgEditValidatorProtoMsg, useInterfaces: boolean = true): MsgEditValidator {
-    return MsgEditValidator.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgEditValidatorProtoMsg): MsgEditValidator {
+    return MsgEditValidator.decode(message.value);
   },
   toProto(message: MsgEditValidator): Uint8Array {
     return MsgEditValidator.encode(message).finish();
@@ -671,7 +671,7 @@ export const MsgEditValidatorResponse = {
   encode(_: MsgEditValidatorResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgEditValidatorResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgEditValidatorResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgEditValidatorResponse();
@@ -707,21 +707,21 @@ export const MsgEditValidatorResponse = {
   fromAmino(_: MsgEditValidatorResponseAmino): MsgEditValidatorResponse {
     return {};
   },
-  toAmino(_: MsgEditValidatorResponse, useInterfaces: boolean = true): MsgEditValidatorResponseAmino {
+  toAmino(_: MsgEditValidatorResponse): MsgEditValidatorResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgEditValidatorResponseAminoMsg): MsgEditValidatorResponse {
     return MsgEditValidatorResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgEditValidatorResponse, useInterfaces: boolean = true): MsgEditValidatorResponseAminoMsg {
+  toAminoMsg(message: MsgEditValidatorResponse): MsgEditValidatorResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgEditValidatorResponse",
-      value: MsgEditValidatorResponse.toAmino(message, useInterfaces)
+      value: MsgEditValidatorResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgEditValidatorResponseProtoMsg, useInterfaces: boolean = true): MsgEditValidatorResponse {
-    return MsgEditValidatorResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgEditValidatorResponseProtoMsg): MsgEditValidatorResponse {
+    return MsgEditValidatorResponse.decode(message.value);
   },
   toProto(message: MsgEditValidatorResponse): Uint8Array {
     return MsgEditValidatorResponse.encode(message).finish();
@@ -755,7 +755,7 @@ export const MsgDelegate = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgDelegate {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgDelegate {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDelegate();
@@ -769,7 +769,7 @@ export const MsgDelegate = {
           message.validatorAddress = reader.string();
           break;
         case 3:
-          message.amount = Coin.decode(reader, reader.uint32(), useInterfaces);
+          message.amount = Coin.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -822,24 +822,24 @@ export const MsgDelegate = {
       amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
     };
   },
-  toAmino(message: MsgDelegate, useInterfaces: boolean = true): MsgDelegateAmino {
+  toAmino(message: MsgDelegate): MsgDelegateAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     obj.validator_address = message.validatorAddress;
-    obj.amount = message.amount ? Coin.toAmino(message.amount, useInterfaces) : undefined;
+    obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgDelegateAminoMsg): MsgDelegate {
     return MsgDelegate.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgDelegate, useInterfaces: boolean = true): MsgDelegateAminoMsg {
+  toAminoMsg(message: MsgDelegate): MsgDelegateAminoMsg {
     return {
       type: "cosmos-sdk/MsgDelegate",
-      value: MsgDelegate.toAmino(message, useInterfaces)
+      value: MsgDelegate.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgDelegateProtoMsg, useInterfaces: boolean = true): MsgDelegate {
-    return MsgDelegate.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgDelegateProtoMsg): MsgDelegate {
+    return MsgDelegate.decode(message.value);
   },
   toProto(message: MsgDelegate): Uint8Array {
     return MsgDelegate.encode(message).finish();
@@ -860,7 +860,7 @@ export const MsgDelegateResponse = {
   encode(_: MsgDelegateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgDelegateResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgDelegateResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDelegateResponse();
@@ -896,21 +896,21 @@ export const MsgDelegateResponse = {
   fromAmino(_: MsgDelegateResponseAmino): MsgDelegateResponse {
     return {};
   },
-  toAmino(_: MsgDelegateResponse, useInterfaces: boolean = true): MsgDelegateResponseAmino {
+  toAmino(_: MsgDelegateResponse): MsgDelegateResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgDelegateResponseAminoMsg): MsgDelegateResponse {
     return MsgDelegateResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgDelegateResponse, useInterfaces: boolean = true): MsgDelegateResponseAminoMsg {
+  toAminoMsg(message: MsgDelegateResponse): MsgDelegateResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgDelegateResponse",
-      value: MsgDelegateResponse.toAmino(message, useInterfaces)
+      value: MsgDelegateResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgDelegateResponseProtoMsg, useInterfaces: boolean = true): MsgDelegateResponse {
-    return MsgDelegateResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgDelegateResponseProtoMsg): MsgDelegateResponse {
+    return MsgDelegateResponse.decode(message.value);
   },
   toProto(message: MsgDelegateResponse): Uint8Array {
     return MsgDelegateResponse.encode(message).finish();
@@ -948,7 +948,7 @@ export const MsgBeginRedelegate = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgBeginRedelegate {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgBeginRedelegate {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBeginRedelegate();
@@ -965,7 +965,7 @@ export const MsgBeginRedelegate = {
           message.validatorDstAddress = reader.string();
           break;
         case 4:
-          message.amount = Coin.decode(reader, reader.uint32(), useInterfaces);
+          message.amount = Coin.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1024,25 +1024,25 @@ export const MsgBeginRedelegate = {
       amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
     };
   },
-  toAmino(message: MsgBeginRedelegate, useInterfaces: boolean = true): MsgBeginRedelegateAmino {
+  toAmino(message: MsgBeginRedelegate): MsgBeginRedelegateAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     obj.validator_src_address = message.validatorSrcAddress;
     obj.validator_dst_address = message.validatorDstAddress;
-    obj.amount = message.amount ? Coin.toAmino(message.amount, useInterfaces) : undefined;
+    obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgBeginRedelegateAminoMsg): MsgBeginRedelegate {
     return MsgBeginRedelegate.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgBeginRedelegate, useInterfaces: boolean = true): MsgBeginRedelegateAminoMsg {
+  toAminoMsg(message: MsgBeginRedelegate): MsgBeginRedelegateAminoMsg {
     return {
       type: "cosmos-sdk/MsgBeginRedelegate",
-      value: MsgBeginRedelegate.toAmino(message, useInterfaces)
+      value: MsgBeginRedelegate.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgBeginRedelegateProtoMsg, useInterfaces: boolean = true): MsgBeginRedelegate {
-    return MsgBeginRedelegate.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgBeginRedelegateProtoMsg): MsgBeginRedelegate {
+    return MsgBeginRedelegate.decode(message.value);
   },
   toProto(message: MsgBeginRedelegate): Uint8Array {
     return MsgBeginRedelegate.encode(message).finish();
@@ -1068,7 +1068,7 @@ export const MsgBeginRedelegateResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgBeginRedelegateResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgBeginRedelegateResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBeginRedelegateResponse();
@@ -1115,7 +1115,7 @@ export const MsgBeginRedelegateResponse = {
       completionTime: object?.completion_time ? fromTimestamp(Timestamp.fromAmino(object.completion_time)) : undefined
     };
   },
-  toAmino(message: MsgBeginRedelegateResponse, useInterfaces: boolean = true): MsgBeginRedelegateResponseAmino {
+  toAmino(message: MsgBeginRedelegateResponse): MsgBeginRedelegateResponseAmino {
     const obj: any = {};
     obj.completion_time = message.completionTime ? Timestamp.toAmino(toTimestamp(message.completionTime)) : undefined;
     return obj;
@@ -1123,14 +1123,14 @@ export const MsgBeginRedelegateResponse = {
   fromAminoMsg(object: MsgBeginRedelegateResponseAminoMsg): MsgBeginRedelegateResponse {
     return MsgBeginRedelegateResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgBeginRedelegateResponse, useInterfaces: boolean = true): MsgBeginRedelegateResponseAminoMsg {
+  toAminoMsg(message: MsgBeginRedelegateResponse): MsgBeginRedelegateResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgBeginRedelegateResponse",
-      value: MsgBeginRedelegateResponse.toAmino(message, useInterfaces)
+      value: MsgBeginRedelegateResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgBeginRedelegateResponseProtoMsg, useInterfaces: boolean = true): MsgBeginRedelegateResponse {
-    return MsgBeginRedelegateResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgBeginRedelegateResponseProtoMsg): MsgBeginRedelegateResponse {
+    return MsgBeginRedelegateResponse.decode(message.value);
   },
   toProto(message: MsgBeginRedelegateResponse): Uint8Array {
     return MsgBeginRedelegateResponse.encode(message).finish();
@@ -1164,7 +1164,7 @@ export const MsgUndelegate = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUndelegate {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUndelegate {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUndelegate();
@@ -1178,7 +1178,7 @@ export const MsgUndelegate = {
           message.validatorAddress = reader.string();
           break;
         case 3:
-          message.amount = Coin.decode(reader, reader.uint32(), useInterfaces);
+          message.amount = Coin.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1231,24 +1231,24 @@ export const MsgUndelegate = {
       amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
     };
   },
-  toAmino(message: MsgUndelegate, useInterfaces: boolean = true): MsgUndelegateAmino {
+  toAmino(message: MsgUndelegate): MsgUndelegateAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     obj.validator_address = message.validatorAddress;
-    obj.amount = message.amount ? Coin.toAmino(message.amount, useInterfaces) : undefined;
+    obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgUndelegateAminoMsg): MsgUndelegate {
     return MsgUndelegate.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUndelegate, useInterfaces: boolean = true): MsgUndelegateAminoMsg {
+  toAminoMsg(message: MsgUndelegate): MsgUndelegateAminoMsg {
     return {
       type: "cosmos-sdk/MsgUndelegate",
-      value: MsgUndelegate.toAmino(message, useInterfaces)
+      value: MsgUndelegate.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgUndelegateProtoMsg, useInterfaces: boolean = true): MsgUndelegate {
-    return MsgUndelegate.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgUndelegateProtoMsg): MsgUndelegate {
+    return MsgUndelegate.decode(message.value);
   },
   toProto(message: MsgUndelegate): Uint8Array {
     return MsgUndelegate.encode(message).finish();
@@ -1274,7 +1274,7 @@ export const MsgUndelegateResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUndelegateResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUndelegateResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUndelegateResponse();
@@ -1321,7 +1321,7 @@ export const MsgUndelegateResponse = {
       completionTime: object?.completion_time ? fromTimestamp(Timestamp.fromAmino(object.completion_time)) : undefined
     };
   },
-  toAmino(message: MsgUndelegateResponse, useInterfaces: boolean = true): MsgUndelegateResponseAmino {
+  toAmino(message: MsgUndelegateResponse): MsgUndelegateResponseAmino {
     const obj: any = {};
     obj.completion_time = message.completionTime ? Timestamp.toAmino(toTimestamp(message.completionTime)) : undefined;
     return obj;
@@ -1329,14 +1329,14 @@ export const MsgUndelegateResponse = {
   fromAminoMsg(object: MsgUndelegateResponseAminoMsg): MsgUndelegateResponse {
     return MsgUndelegateResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUndelegateResponse, useInterfaces: boolean = true): MsgUndelegateResponseAminoMsg {
+  toAminoMsg(message: MsgUndelegateResponse): MsgUndelegateResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgUndelegateResponse",
-      value: MsgUndelegateResponse.toAmino(message, useInterfaces)
+      value: MsgUndelegateResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgUndelegateResponseProtoMsg, useInterfaces: boolean = true): MsgUndelegateResponse {
-    return MsgUndelegateResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgUndelegateResponseProtoMsg): MsgUndelegateResponse {
+    return MsgUndelegateResponse.decode(message.value);
   },
   toProto(message: MsgUndelegateResponse): Uint8Array {
     return MsgUndelegateResponse.encode(message).finish();
@@ -1359,6 +1359,6 @@ export const Cosmos_cryptoPubKey_InterfaceDecoder = (input: BinaryReader | Uint8
 export const Cosmos_cryptoPubKey_FromAmino = (content: AnyAmino) => {
   return encodePubkey(content);
 };
-export const Cosmos_cryptoPubKey_ToAmino = (content: Any, useInterfaces: boolean = true) => {
+export const Cosmos_cryptoPubKey_ToAmino = (content: Any) => {
   return decodePubkey(content);
 };
