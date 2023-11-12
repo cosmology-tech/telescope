@@ -74,7 +74,7 @@ export const StoreKVPair = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): StoreKVPair {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): StoreKVPair {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStoreKVPair();
@@ -148,7 +148,7 @@ export const StoreKVPair = {
       value: object.value
     };
   },
-  toAmino(message: StoreKVPair): StoreKVPairAmino {
+  toAmino(message: StoreKVPair, useInterfaces: boolean = true): StoreKVPairAmino {
     const obj: any = {};
     obj.store_key = message.storeKey;
     obj.delete = message.delete;
@@ -156,8 +156,8 @@ export const StoreKVPair = {
     obj.value = message.value;
     return obj;
   },
-  fromProtoMsg(message: StoreKVPairProtoMsg): StoreKVPair {
-    return StoreKVPair.decode(message.value);
+  fromProtoMsg(message: StoreKVPairProtoMsg, useInterfaces: boolean = true): StoreKVPair {
+    return StoreKVPair.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: StoreKVPair): Uint8Array {
     return StoreKVPair.encode(message).finish();

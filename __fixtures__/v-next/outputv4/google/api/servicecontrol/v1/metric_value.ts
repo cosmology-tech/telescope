@@ -100,10 +100,10 @@ function createBaseMetricValue_LabelsEntry(): MetricValue_LabelsEntry {
 }
 export const MetricValue_LabelsEntry = {
   encode(message: MetricValue_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -440,7 +440,7 @@ function createBaseMetricValueSet(): MetricValueSet {
 export const MetricValueSet = {
   typeUrl: "/google.api.servicecontrol.v1.MetricValueSet",
   encode(message: MetricValueSet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.metricName !== "") {
+    if (message.metricName !== undefined) {
       writer.uint32(10).string(message.metricName);
     }
     for (const v of message.metricValues) {

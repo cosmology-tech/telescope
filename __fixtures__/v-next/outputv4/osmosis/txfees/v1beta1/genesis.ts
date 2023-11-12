@@ -25,7 +25,7 @@ function createBaseGenesisState(): GenesisState {
 export const GenesisState = {
   typeUrl: "/osmosis.txfees.v1beta1.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.basedenom !== "") {
+    if (message.basedenom !== undefined) {
       writer.uint32(10).string(message.basedenom);
     }
     for (const v of message.feetokens) {

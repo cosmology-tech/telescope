@@ -234,7 +234,7 @@ function createBaseBalance(): Balance {
 export const Balance = {
   typeUrl: "/cosmos.bank.v1beta1.Balance",
   encode(message: Balance, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     for (const v of message.coins) {

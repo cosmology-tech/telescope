@@ -16,6 +16,8 @@ interface TelescopeOpts {
     logLevel?: TelescopeLogLevel;
     interfaces?: {
         enabled?: boolean;
+        useByDefault?: boolean;
+        useByDefaultRpc?: boolean;
         useUnionTypes?: boolean;
     };
     prototypes?: {
@@ -48,6 +50,7 @@ interface TelescopeOpts {
         fieldDefaultIsOptional?: boolean;
         useOptionalNullable?: boolean;
         allowUndefinedTypes?: boolean;
+        allowEncodeDefaultScalars?: boolean;
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
         addTypeUrlToObjects?: boolean;

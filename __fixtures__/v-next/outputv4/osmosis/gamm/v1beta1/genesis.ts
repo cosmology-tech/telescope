@@ -149,7 +149,7 @@ export const GenesisState = {
     for (const v of message.pools) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPoolNumber !== BigInt(0)) {
+    if (message.nextPoolNumber !== undefined) {
       writer.uint32(16).uint64(message.nextPoolNumber);
     }
     if (message.params !== undefined) {

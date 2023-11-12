@@ -243,10 +243,10 @@ export const CheckError = {
     if (message.code !== 0) {
       writer.uint32(8).int32(message.code);
     }
-    if (message.subject !== "") {
+    if (message.subject !== undefined) {
       writer.uint32(34).string(message.subject);
     }
-    if (message.detail !== "") {
+    if (message.detail !== undefined) {
       writer.uint32(18).string(message.detail);
     }
     if (message.status !== undefined) {

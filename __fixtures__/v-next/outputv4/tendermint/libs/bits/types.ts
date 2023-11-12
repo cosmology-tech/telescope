@@ -22,7 +22,7 @@ function createBaseBitArray(): BitArray {
 export const BitArray = {
   typeUrl: "/tendermint.libs.bits.BitArray",
   encode(message: BitArray, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.bits !== BigInt(0)) {
+    if (message.bits !== undefined) {
       writer.uint32(8).int64(message.bits);
     }
     writer.uint32(18).fork();

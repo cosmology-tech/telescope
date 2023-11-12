@@ -167,10 +167,10 @@ function createBaseOperation_LabelsEntry(): Operation_LabelsEntry {
 }
 export const Operation_LabelsEntry = {
   encode(message: Operation_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -270,13 +270,13 @@ function createBaseOperation(): Operation {
 export const Operation = {
   typeUrl: "/google.api.servicecontrol.v1.Operation",
   encode(message: Operation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.operationId !== "") {
+    if (message.operationId !== undefined) {
       writer.uint32(10).string(message.operationId);
     }
-    if (message.operationName !== "") {
+    if (message.operationName !== undefined) {
       writer.uint32(18).string(message.operationName);
     }
-    if (message.consumerId !== "") {
+    if (message.consumerId !== undefined) {
       writer.uint32(26).string(message.consumerId);
     }
     if (message.startTime !== undefined) {

@@ -919,10 +919,10 @@ function createBaseRoutingParameter(): RoutingParameter {
 export const RoutingParameter = {
   typeUrl: "/google.api.RoutingParameter",
   encode(message: RoutingParameter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.field !== "") {
+    if (message.field !== undefined) {
       writer.uint32(10).string(message.field);
     }
-    if (message.pathTemplate !== "") {
+    if (message.pathTemplate !== undefined) {
       writer.uint32(18).string(message.pathTemplate);
     }
     return writer;

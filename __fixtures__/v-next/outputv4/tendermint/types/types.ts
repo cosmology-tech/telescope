@@ -357,7 +357,7 @@ function createBasePartSetHeader(): PartSetHeader {
 export const PartSetHeader = {
   typeUrl: "/tendermint.types.PartSetHeader",
   encode(message: PartSetHeader, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.total !== 0) {
+    if (message.total !== undefined) {
       writer.uint32(8).uint32(message.total);
     }
     if (message.hash.length !== 0) {
@@ -459,7 +459,7 @@ function createBasePart(): Part {
 export const Part = {
   typeUrl: "/tendermint.types.Part",
   encode(message: Part, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.index !== 0) {
+    if (message.index !== undefined) {
       writer.uint32(8).uint32(message.index);
     }
     if (message.bytes.length !== 0) {
@@ -694,10 +694,10 @@ export const Header = {
     if (message.version !== undefined) {
       Consensus.encode(message.version, writer.uint32(10).fork()).ldelim();
     }
-    if (message.chainId !== "") {
+    if (message.chainId !== undefined) {
       writer.uint32(18).string(message.chainId);
     }
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(24).int64(message.height);
     }
     if (message.time !== undefined) {
@@ -1073,10 +1073,10 @@ export const Vote = {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
     }
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(16).int64(message.height);
     }
-    if (message.round !== 0) {
+    if (message.round !== undefined) {
       writer.uint32(24).int32(message.round);
     }
     if (message.blockId !== undefined) {
@@ -1088,7 +1088,7 @@ export const Vote = {
     if (message.validatorAddress.length !== 0) {
       writer.uint32(50).bytes(message.validatorAddress);
     }
-    if (message.validatorIndex !== 0) {
+    if (message.validatorIndex !== undefined) {
       writer.uint32(56).int32(message.validatorIndex);
     }
     if (message.signature.length !== 0) {
@@ -1261,10 +1261,10 @@ function createBaseCommit(): Commit {
 export const Commit = {
   typeUrl: "/tendermint.types.Commit",
   encode(message: Commit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(8).int64(message.height);
     }
-    if (message.round !== 0) {
+    if (message.round !== undefined) {
       writer.uint32(16).int32(message.round);
     }
     if (message.blockId !== undefined) {
@@ -1545,13 +1545,13 @@ export const Proposal = {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
     }
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(16).int64(message.height);
     }
-    if (message.round !== 0) {
+    if (message.round !== undefined) {
       writer.uint32(24).int32(message.round);
     }
-    if (message.polRound !== 0) {
+    if (message.polRound !== undefined) {
       writer.uint32(32).int32(message.polRound);
     }
     if (message.blockId !== undefined) {
@@ -1932,13 +1932,13 @@ export const BlockMeta = {
     if (message.blockId !== undefined) {
       BlockID.encode(message.blockId, writer.uint32(10).fork()).ldelim();
     }
-    if (message.blockSize !== BigInt(0)) {
+    if (message.blockSize !== undefined) {
       writer.uint32(16).int64(message.blockSize);
     }
     if (message.header !== undefined) {
       Header.encode(message.header, writer.uint32(26).fork()).ldelim();
     }
-    if (message.numTxs !== BigInt(0)) {
+    if (message.numTxs !== undefined) {
       writer.uint32(32).int64(message.numTxs);
     }
     return writer;

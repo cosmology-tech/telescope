@@ -57,7 +57,7 @@ export const CertificateResponse = {
     if (message.certificate !== undefined) {
       Certificate.encode(message.certificate, writer.uint32(10).fork()).ldelim();
     }
-    if (message.serial !== "") {
+    if (message.serial !== undefined) {
       writer.uint32(18).string(message.serial);
     }
     return writer;

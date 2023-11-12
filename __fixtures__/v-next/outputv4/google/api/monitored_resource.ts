@@ -212,16 +212,16 @@ function createBaseMonitoredResourceDescriptor(): MonitoredResourceDescriptor {
 export const MonitoredResourceDescriptor = {
   typeUrl: "/google.api.MonitoredResourceDescriptor",
   encode(message: MonitoredResourceDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(42).string(message.name);
     }
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(10).string(message.type);
     }
-    if (message.displayName !== "") {
+    if (message.displayName !== undefined) {
       writer.uint32(18).string(message.displayName);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(26).string(message.description);
     }
     for (const v of message.labels) {
@@ -380,10 +380,10 @@ function createBaseMonitoredResource_LabelsEntry(): MonitoredResource_LabelsEntr
 }
 export const MonitoredResource_LabelsEntry = {
   encode(message: MonitoredResource_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -475,7 +475,7 @@ function createBaseMonitoredResource(): MonitoredResource {
 export const MonitoredResource = {
   typeUrl: "/google.api.MonitoredResource",
   encode(message: MonitoredResource, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(10).string(message.type);
     }
     Object.entries(message.labels).forEach(([key, value]) => {
@@ -623,10 +623,10 @@ function createBaseMonitoredResourceMetadata_UserLabelsEntry(): MonitoredResourc
 }
 export const MonitoredResourceMetadata_UserLabelsEntry = {
   encode(message: MonitoredResourceMetadata_UserLabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;

@@ -302,40 +302,40 @@ function createBaseTxResponse(): TxResponse {
 export const TxResponse = {
   typeUrl: "/cosmos.base.abci.v1beta1.TxResponse",
   encode(message: TxResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(8).int64(message.height);
     }
-    if (message.txhash !== "") {
+    if (message.txhash !== undefined) {
       writer.uint32(18).string(message.txhash);
     }
-    if (message.codespace !== "") {
+    if (message.codespace !== undefined) {
       writer.uint32(26).string(message.codespace);
     }
-    if (message.code !== 0) {
+    if (message.code !== undefined) {
       writer.uint32(32).uint32(message.code);
     }
-    if (message.data !== "") {
+    if (message.data !== undefined) {
       writer.uint32(42).string(message.data);
     }
-    if (message.rawLog !== "") {
+    if (message.rawLog !== undefined) {
       writer.uint32(50).string(message.rawLog);
     }
     for (const v of message.logs) {
       ABCIMessageLog.encode(v!, writer.uint32(58).fork()).ldelim();
     }
-    if (message.info !== "") {
+    if (message.info !== undefined) {
       writer.uint32(66).string(message.info);
     }
-    if (message.gasWanted !== BigInt(0)) {
+    if (message.gasWanted !== undefined) {
       writer.uint32(72).int64(message.gasWanted);
     }
-    if (message.gasUsed !== BigInt(0)) {
+    if (message.gasUsed !== undefined) {
       writer.uint32(80).int64(message.gasUsed);
     }
     if (message.tx !== undefined) {
       Any.encode(message.tx, writer.uint32(90).fork()).ldelim();
     }
-    if (message.timestamp !== "") {
+    if (message.timestamp !== undefined) {
       writer.uint32(98).string(message.timestamp);
     }
     for (const v of message.events) {
@@ -596,10 +596,10 @@ function createBaseABCIMessageLog(): ABCIMessageLog {
 export const ABCIMessageLog = {
   typeUrl: "/cosmos.base.abci.v1beta1.ABCIMessageLog",
   encode(message: ABCIMessageLog, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.msgIndex !== 0) {
+    if (message.msgIndex !== undefined) {
       writer.uint32(8).uint32(message.msgIndex);
     }
-    if (message.log !== "") {
+    if (message.log !== undefined) {
       writer.uint32(18).string(message.log);
     }
     for (const v of message.events) {
@@ -729,7 +729,7 @@ function createBaseStringEvent(): StringEvent {
 export const StringEvent = {
   typeUrl: "/cosmos.base.abci.v1beta1.StringEvent",
   encode(message: StringEvent, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(10).string(message.type);
     }
     for (const v of message.attributes) {
@@ -848,10 +848,10 @@ function createBaseAttribute(): Attribute {
 export const Attribute = {
   typeUrl: "/cosmos.base.abci.v1beta1.Attribute",
   encode(message: Attribute, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -955,10 +955,10 @@ function createBaseGasInfo(): GasInfo {
 export const GasInfo = {
   typeUrl: "/cosmos.base.abci.v1beta1.GasInfo",
   encode(message: GasInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.gasWanted !== BigInt(0)) {
+    if (message.gasWanted !== undefined) {
       writer.uint32(8).uint64(message.gasWanted);
     }
-    if (message.gasUsed !== BigInt(0)) {
+    if (message.gasUsed !== undefined) {
       writer.uint32(16).uint64(message.gasUsed);
     }
     return writer;
@@ -1071,7 +1071,7 @@ export const Result = {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
     }
-    if (message.log !== "") {
+    if (message.log !== undefined) {
       writer.uint32(18).string(message.log);
     }
     for (const v of message.events) {
@@ -1338,7 +1338,7 @@ function createBaseMsgData(): MsgData {
 export const MsgData = {
   typeUrl: "/cosmos.base.abci.v1beta1.MsgData",
   encode(message: MsgData, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.msgType !== "") {
+    if (message.msgType !== undefined) {
       writer.uint32(10).string(message.msgType);
     }
     if (message.data.length !== 0) {
@@ -1580,19 +1580,19 @@ function createBaseSearchTxsResult(): SearchTxsResult {
 export const SearchTxsResult = {
   typeUrl: "/cosmos.base.abci.v1beta1.SearchTxsResult",
   encode(message: SearchTxsResult, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.totalCount !== BigInt(0)) {
+    if (message.totalCount !== undefined) {
       writer.uint32(8).uint64(message.totalCount);
     }
-    if (message.count !== BigInt(0)) {
+    if (message.count !== undefined) {
       writer.uint32(16).uint64(message.count);
     }
-    if (message.pageNumber !== BigInt(0)) {
+    if (message.pageNumber !== undefined) {
       writer.uint32(24).uint64(message.pageNumber);
     }
-    if (message.pageTotal !== BigInt(0)) {
+    if (message.pageTotal !== undefined) {
       writer.uint32(32).uint64(message.pageTotal);
     }
-    if (message.limit !== BigInt(0)) {
+    if (message.limit !== undefined) {
       writer.uint32(40).uint64(message.limit);
     }
     for (const v of message.txs) {

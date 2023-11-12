@@ -28,7 +28,7 @@ function createBaseGenesisState(): GenesisState {
 export const GenesisState = {
   typeUrl: "/osmosis.lockup.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.lastLockId !== BigInt(0)) {
+    if (message.lastLockId !== undefined) {
       writer.uint32(8).uint64(message.lastLockId);
     }
     for (const v of message.locks) {

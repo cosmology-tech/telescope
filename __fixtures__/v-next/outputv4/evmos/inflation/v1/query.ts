@@ -253,7 +253,7 @@ function createBaseQueryPeriodResponse(): QueryPeriodResponse {
 export const QueryPeriodResponse = {
   typeUrl: "/evmos.inflation.v1.QueryPeriodResponse",
   encode(message: QueryPeriodResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.period !== BigInt(0)) {
+    if (message.period !== undefined) {
       writer.uint32(8).uint64(message.period);
     }
     return writer;
@@ -563,7 +563,7 @@ function createBaseQuerySkippedEpochsResponse(): QuerySkippedEpochsResponse {
 export const QuerySkippedEpochsResponse = {
   typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsResponse",
   encode(message: QuerySkippedEpochsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.skippedEpochs !== BigInt(0)) {
+    if (message.skippedEpochs !== undefined) {
       writer.uint32(8).uint64(message.skippedEpochs);
     }
     return writer;
@@ -873,7 +873,7 @@ function createBaseQueryInflationRateResponse(): QueryInflationRateResponse {
 export const QueryInflationRateResponse = {
   typeUrl: "/evmos.inflation.v1.QueryInflationRateResponse",
   encode(message: QueryInflationRateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.inflationRate !== "") {
+    if (message.inflationRate !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.inflationRate, 18).atomics);
     }
     return writer;

@@ -55,10 +55,10 @@ function createBaseMinter(): Minter {
 export const Minter = {
   typeUrl: "/cosmos.mint.v1beta1.Minter",
   encode(message: Minter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.inflation !== "") {
+    if (message.inflation !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.inflation, 18).atomics);
     }
-    if (message.annualProvisions !== "") {
+    if (message.annualProvisions !== undefined) {
       writer.uint32(18).string(Decimal.fromUserInput(message.annualProvisions, 18).atomics);
     }
     return writer;
@@ -166,22 +166,22 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/cosmos.mint.v1beta1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.mintDenom !== "") {
+    if (message.mintDenom !== undefined) {
       writer.uint32(10).string(message.mintDenom);
     }
-    if (message.inflationRateChange !== "") {
+    if (message.inflationRateChange !== undefined) {
       writer.uint32(18).string(Decimal.fromUserInput(message.inflationRateChange, 18).atomics);
     }
-    if (message.inflationMax !== "") {
+    if (message.inflationMax !== undefined) {
       writer.uint32(26).string(Decimal.fromUserInput(message.inflationMax, 18).atomics);
     }
-    if (message.inflationMin !== "") {
+    if (message.inflationMin !== undefined) {
       writer.uint32(34).string(Decimal.fromUserInput(message.inflationMin, 18).atomics);
     }
-    if (message.goalBonded !== "") {
+    if (message.goalBonded !== undefined) {
       writer.uint32(42).string(Decimal.fromUserInput(message.goalBonded, 18).atomics);
     }
-    if (message.blocksPerYear !== BigInt(0)) {
+    if (message.blocksPerYear !== undefined) {
       writer.uint32(48).uint64(message.blocksPerYear);
     }
     return writer;

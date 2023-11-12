@@ -158,7 +158,7 @@ function createBaseCompactBitArray(): CompactBitArray {
 export const CompactBitArray = {
   typeUrl: "/cosmos.crypto.multisig.v1beta1.CompactBitArray",
   encode(message: CompactBitArray, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.extraBitsStored !== 0) {
+    if (message.extraBitsStored !== undefined) {
       writer.uint32(8).uint32(message.extraBitsStored);
     }
     if (message.elems.length !== 0) {

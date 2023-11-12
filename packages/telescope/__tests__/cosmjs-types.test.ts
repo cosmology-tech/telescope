@@ -22,8 +22,8 @@ const options: TelescopeOptions = {
         enabled: false
     },
     interfaces: {
-      enabled: false,
-      useUnionTypes: false
+        enabled: false,
+        useUnionTypes: false
     },
     prototypes: {
         includePackageVar: true,

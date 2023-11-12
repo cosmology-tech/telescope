@@ -93,7 +93,7 @@ export const Status = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Status {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Status {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStatus();
@@ -107,7 +107,7 @@ export const Status = {
           message.message = reader.string();
           break;
         case 3:
-          message.details.push(Any.decode(reader, reader.uint32()));
+          message.details.push(Any.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -166,12 +166,12 @@ export const Status = {
       details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromAmino(e)) : []
     };
   },
-  toAmino(message: Status): StatusAmino {
+  toAmino(message: Status, useInterfaces: boolean = true): StatusAmino {
     const obj: any = {};
     obj.code = message.code;
     obj.message = message.message;
     if (message.details) {
-      obj.details = message.details.map(e => e ? Any.toAmino(e) : undefined);
+      obj.details = message.details.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.details = [];
     }
@@ -180,8 +180,8 @@ export const Status = {
   fromAminoMsg(object: StatusAminoMsg): Status {
     return Status.fromAmino(object.value);
   },
-  fromProtoMsg(message: StatusProtoMsg): Status {
-    return Status.decode(message.value);
+  fromProtoMsg(message: StatusProtoMsg, useInterfaces: boolean = true): Status {
+    return Status.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Status): Uint8Array {
     return Status.encode(message).finish();

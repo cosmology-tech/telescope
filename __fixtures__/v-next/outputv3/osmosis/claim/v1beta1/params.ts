@@ -56,7 +56,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -67,10 +67,10 @@ export const Params = {
           message.airdropStartTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.durationUntilDecay = Duration.decode(reader, reader.uint32());
+          message.durationUntilDecay = Duration.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.durationOfDecay = Duration.decode(reader, reader.uint32());
+          message.durationOfDecay = Duration.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
           message.claimDenom = reader.string();
@@ -134,16 +134,16 @@ export const Params = {
       claimDenom: object.claim_denom
     };
   },
-  toAmino(message: Params): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
     obj.airdrop_start_time = message.airdropStartTime ? Timestamp.toAmino(toTimestamp(message.airdropStartTime)) : undefined;
-    obj.duration_until_decay = message.durationUntilDecay ? Duration.toAmino(message.durationUntilDecay) : undefined;
-    obj.duration_of_decay = message.durationOfDecay ? Duration.toAmino(message.durationOfDecay) : undefined;
+    obj.duration_until_decay = message.durationUntilDecay ? Duration.toAmino(message.durationUntilDecay, useInterfaces) : undefined;
+    obj.duration_of_decay = message.durationOfDecay ? Duration.toAmino(message.durationOfDecay, useInterfaces) : undefined;
     obj.claim_denom = message.claimDenom;
     return obj;
   },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
+    return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();

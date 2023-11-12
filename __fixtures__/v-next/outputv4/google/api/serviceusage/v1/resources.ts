@@ -181,10 +181,10 @@ function createBaseService(): Service {
 export const Service = {
   typeUrl: "/google.api.serviceusage.v1.Service",
   encode(message: Service, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(42).string(message.parent);
     }
     if (message.config !== undefined) {
@@ -320,10 +320,10 @@ function createBaseServiceConfig(): ServiceConfig {
 export const ServiceConfig = {
   typeUrl: "/google.api.serviceusage.v1.ServiceConfig",
   encode(message: ServiceConfig, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(18).string(message.title);
     }
     for (const v of message.apis) {

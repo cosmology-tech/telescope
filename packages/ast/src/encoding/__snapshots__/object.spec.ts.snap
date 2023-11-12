@@ -15,7 +15,7 @@ exports[`cosmos/staking/v1beta1 Delegation 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Delegation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Delegation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegation();
@@ -80,7 +80,7 @@ exports[`cosmos/staking/v1beta1 Delegation 1`] = `
       shares: object.shares
     };
   },
-  toAmino(message: Delegation): DelegationAmino {
+  toAmino(message: Delegation, useInterfaces: boolean = false): DelegationAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     obj.validator_address = message.validatorAddress;
@@ -90,14 +90,14 @@ exports[`cosmos/staking/v1beta1 Delegation 1`] = `
   fromAminoMsg(object: DelegationAminoMsg): Delegation {
     return Delegation.fromAmino(object.value);
   },
-  toAminoMsg(message: Delegation): DelegationAminoMsg {
+  toAminoMsg(message: Delegation, useInterfaces: boolean = false): DelegationAminoMsg {
     return {
       type: "cosmos-sdk/Delegation",
-      value: Delegation.toAmino(message)
+      value: Delegation.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: DelegationProtoMsg): Delegation {
-    return Delegation.decode(message.value);
+  fromProtoMsg(message: DelegationProtoMsg, useInterfaces: boolean = false): Delegation {
+    return Delegation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Delegation): Uint8Array {
     return Delegation.encode(message).finish();
@@ -126,7 +126,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SignatureDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SignatureDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignatureDescriptor();
@@ -134,10 +134,10 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.publicKey = Any.decode(reader, reader.uint32());
+          message.publicKey = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.data = SignatureDescriptor_Data.decode(reader, reader.uint32());
+          message.data = SignatureDescriptor_Data.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.sequence = reader.uint64();
@@ -191,24 +191,24 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
       sequence: BigInt(object.sequence)
     };
   },
-  toAmino(message: SignatureDescriptor): SignatureDescriptorAmino {
+  toAmino(message: SignatureDescriptor, useInterfaces: boolean = false): SignatureDescriptorAmino {
     const obj: any = {};
-    obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined;
-    obj.data = message.data ? SignatureDescriptor_Data.toAmino(message.data) : undefined;
+    obj.public_key = message.publicKey ? Any.toAmino(message.publicKey, useInterfaces) : undefined;
+    obj.data = message.data ? SignatureDescriptor_Data.toAmino(message.data, useInterfaces) : undefined;
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: SignatureDescriptorAminoMsg): SignatureDescriptor {
     return SignatureDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: SignatureDescriptor): SignatureDescriptorAminoMsg {
+  toAminoMsg(message: SignatureDescriptor, useInterfaces: boolean = false): SignatureDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/SignatureDescriptor",
-      value: SignatureDescriptor.toAmino(message)
+      value: SignatureDescriptor.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: SignatureDescriptorProtoMsg): SignatureDescriptor {
-    return SignatureDescriptor.decode(message.value);
+  fromProtoMsg(message: SignatureDescriptorProtoMsg, useInterfaces: boolean = false): SignatureDescriptor {
+    return SignatureDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SignatureDescriptor): Uint8Array {
     return SignatureDescriptor.encode(message).finish();
@@ -231,7 +231,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptors 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SignatureDescriptors {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SignatureDescriptors {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignatureDescriptors();
@@ -239,7 +239,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptors 1`] = `
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.signatures.push(SignatureDescriptor.decode(reader, reader.uint32()));
+          message.signatures.push(SignatureDescriptor.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -286,10 +286,10 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptors 1`] = `
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor.fromAmino(e)) : []
     };
   },
-  toAmino(message: SignatureDescriptors): SignatureDescriptorsAmino {
+  toAmino(message: SignatureDescriptors, useInterfaces: boolean = false): SignatureDescriptorsAmino {
     const obj: any = {};
     if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e ? SignatureDescriptor.toAmino(e) : undefined);
+      obj.signatures = message.signatures.map(e => e ? SignatureDescriptor.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.signatures = [];
     }
@@ -298,14 +298,14 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptors 1`] = `
   fromAminoMsg(object: SignatureDescriptorsAminoMsg): SignatureDescriptors {
     return SignatureDescriptors.fromAmino(object.value);
   },
-  toAminoMsg(message: SignatureDescriptors): SignatureDescriptorsAminoMsg {
+  toAminoMsg(message: SignatureDescriptors, useInterfaces: boolean = false): SignatureDescriptorsAminoMsg {
     return {
       type: "cosmos-sdk/SignatureDescriptors",
-      value: SignatureDescriptors.toAmino(message)
+      value: SignatureDescriptors.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: SignatureDescriptorsProtoMsg): SignatureDescriptors {
-    return SignatureDescriptors.decode(message.value);
+  fromProtoMsg(message: SignatureDescriptorsProtoMsg, useInterfaces: boolean = false): SignatureDescriptors {
+    return SignatureDescriptors.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SignatureDescriptors): Uint8Array {
     return SignatureDescriptors.encode(message).finish();
@@ -337,7 +337,7 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AuxSignerData {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): AuxSignerData {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuxSignerData();
@@ -348,7 +348,7 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
           message.address = reader.string();
           break;
         case 2:
-          message.signDoc = SignDocDirectAux.decode(reader, reader.uint32());
+          message.signDoc = SignDocDirectAux.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.mode = (reader.int32() as any);
@@ -411,10 +411,10 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
       sig: object.sig
     };
   },
-  toAmino(message: AuxSignerData): AuxSignerDataAmino {
+  toAmino(message: AuxSignerData, useInterfaces: boolean = false): AuxSignerDataAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.sign_doc = message.signDoc ? SignDocDirectAux.toAmino(message.signDoc) : undefined;
+    obj.sign_doc = message.signDoc ? SignDocDirectAux.toAmino(message.signDoc, useInterfaces) : undefined;
     obj.mode = message.mode;
     obj.sig = message.sig;
     return obj;
@@ -422,14 +422,14 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
   fromAminoMsg(object: AuxSignerDataAminoMsg): AuxSignerData {
     return AuxSignerData.fromAmino(object.value);
   },
-  toAminoMsg(message: AuxSignerData): AuxSignerDataAminoMsg {
+  toAminoMsg(message: AuxSignerData, useInterfaces: boolean = false): AuxSignerDataAminoMsg {
     return {
       type: "cosmos-sdk/AuxSignerData",
-      value: AuxSignerData.toAmino(message)
+      value: AuxSignerData.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: AuxSignerDataProtoMsg): AuxSignerData {
-    return AuxSignerData.decode(message.value);
+  fromProtoMsg(message: AuxSignerDataProtoMsg, useInterfaces: boolean = false): AuxSignerData {
+    return AuxSignerData.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AuxSignerData): Uint8Array {
     return AuxSignerData.encode(message).finish();
@@ -455,7 +455,7 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ModeInfo_Multi {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ModeInfo_Multi {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModeInfo_Multi();
@@ -463,10 +463,10 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.single = ModeInfo_Single.decode(reader, reader.uint32());
+          message.single = ModeInfo_Single.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.multi = ModeInfo_Multi.decode(reader, reader.uint32());
+          message.multi = ModeInfo_Multi.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -511,23 +511,23 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
       multi: object?.multi ? ModeInfo_Multi.fromAmino(object.multi) : undefined
     };
   },
-  toAmino(message: ModeInfo_Multi): ModeInfo_MultiAmino {
+  toAmino(message: ModeInfo_Multi, useInterfaces: boolean = false): ModeInfo_MultiAmino {
     const obj: any = {};
-    obj.single = message.single ? ModeInfo_Single.toAmino(message.single) : undefined;
-    obj.multi = message.multi ? ModeInfo_Multi.toAmino(message.multi) : undefined;
+    obj.single = message.single ? ModeInfo_Single.toAmino(message.single, useInterfaces) : undefined;
+    obj.multi = message.multi ? ModeInfo_Multi.toAmino(message.multi, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: ModeInfo_MultiAminoMsg): ModeInfo_Multi {
     return ModeInfo_Multi.fromAmino(object.value);
   },
-  toAminoMsg(message: ModeInfo_Multi): ModeInfo_MultiAminoMsg {
+  toAminoMsg(message: ModeInfo_Multi, useInterfaces: boolean = false): ModeInfo_MultiAminoMsg {
     return {
       type: "cosmos-sdk/ModeInfo",
-      value: ModeInfo_Multi.toAmino(message)
+      value: ModeInfo_Multi.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: ModeInfo_MultiProtoMsg): ModeInfo_Multi {
-    return ModeInfo_Multi.decode(message.value);
+  fromProtoMsg(message: ModeInfo_MultiProtoMsg, useInterfaces: boolean = false): ModeInfo_Multi {
+    return ModeInfo_Multi.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ModeInfo_Multi): Uint8Array {
     return ModeInfo_Multi.encode(message).finish();
@@ -558,7 +558,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): PinCodesProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): PinCodesProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePinCodesProposal();
@@ -638,7 +638,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
       codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => BigInt(e)) : []
     };
   },
-  toAmino(message: PinCodesProposal): PinCodesProposalAmino {
+  toAmino(message: PinCodesProposal, useInterfaces: boolean = false): PinCodesProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -652,14 +652,14 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
   fromAminoMsg(object: PinCodesProposalAminoMsg): PinCodesProposal {
     return PinCodesProposal.fromAmino(object.value);
   },
-  toAminoMsg(message: PinCodesProposal): PinCodesProposalAminoMsg {
+  toAminoMsg(message: PinCodesProposal, useInterfaces: boolean = false): PinCodesProposalAminoMsg {
     return {
       type: "wasm/PinCodesProposal",
-      value: PinCodesProposal.toAmino(message)
+      value: PinCodesProposal.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: PinCodesProposalProtoMsg): PinCodesProposal {
-    return PinCodesProposal.decode(message.value);
+  fromProtoMsg(message: PinCodesProposalProtoMsg, useInterfaces: boolean = false): PinCodesProposal {
+    return PinCodesProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PinCodesProposal): Uint8Array {
     return PinCodesProposal.encode(message).finish();
@@ -690,7 +690,7 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UnpinCodesProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): UnpinCodesProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUnpinCodesProposal();
@@ -770,7 +770,7 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
       codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => BigInt(e)) : []
     };
   },
-  toAmino(message: UnpinCodesProposal): UnpinCodesProposalAmino {
+  toAmino(message: UnpinCodesProposal, useInterfaces: boolean = false): UnpinCodesProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
@@ -784,14 +784,14 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
   fromAminoMsg(object: UnpinCodesProposalAminoMsg): UnpinCodesProposal {
     return UnpinCodesProposal.fromAmino(object.value);
   },
-  toAminoMsg(message: UnpinCodesProposal): UnpinCodesProposalAminoMsg {
+  toAminoMsg(message: UnpinCodesProposal, useInterfaces: boolean = false): UnpinCodesProposalAminoMsg {
     return {
       type: "wasm/UnpinCodesProposal",
-      value: UnpinCodesProposal.toAmino(message)
+      value: UnpinCodesProposal.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: UnpinCodesProposalProtoMsg): UnpinCodesProposal {
-    return UnpinCodesProposal.decode(message.value);
+  fromProtoMsg(message: UnpinCodesProposalProtoMsg, useInterfaces: boolean = false): UnpinCodesProposal {
+    return UnpinCodesProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UnpinCodesProposal): Uint8Array {
     return UnpinCodesProposal.encode(message).finish();
@@ -817,7 +817,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryRawContractStateRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryRawContractStateRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRawContractStateRequest();
@@ -873,7 +873,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
       queryData: object.query_data
     };
   },
-  toAmino(message: QueryRawContractStateRequest): QueryRawContractStateRequestAmino {
+  toAmino(message: QueryRawContractStateRequest, useInterfaces: boolean = false): QueryRawContractStateRequestAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.query_data = message.queryData;
@@ -882,14 +882,14 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
   fromAminoMsg(object: QueryRawContractStateRequestAminoMsg): QueryRawContractStateRequest {
     return QueryRawContractStateRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryRawContractStateRequest): QueryRawContractStateRequestAminoMsg {
+  toAminoMsg(message: QueryRawContractStateRequest, useInterfaces: boolean = false): QueryRawContractStateRequestAminoMsg {
     return {
       type: "wasm/QueryRawContractStateRequest",
-      value: QueryRawContractStateRequest.toAmino(message)
+      value: QueryRawContractStateRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryRawContractStateRequestProtoMsg): QueryRawContractStateRequest {
-    return QueryRawContractStateRequest.decode(message.value);
+  fromProtoMsg(message: QueryRawContractStateRequestProtoMsg, useInterfaces: boolean = false): QueryRawContractStateRequest {
+    return QueryRawContractStateRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryRawContractStateRequest): Uint8Array {
     return QueryRawContractStateRequest.encode(message).finish();
@@ -923,7 +923,7 @@ exports[`evmos/fees/v1/tx 1`] = `
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgRegisterDevFeeInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgRegisterDevFeeInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRegisterDevFeeInfo();
@@ -1012,7 +1012,7 @@ exports[`evmos/fees/v1/tx 1`] = `
       nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e)) : []
     };
   },
-  toAmino(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoAmino {
+  toAmino(message: MsgRegisterDevFeeInfo, useInterfaces: boolean = false): MsgRegisterDevFeeInfoAmino {
     const obj: any = {};
     obj.contract_address = message.contractAddress;
     obj.deployer_address = message.deployerAddress;
@@ -1027,8 +1027,8 @@ exports[`evmos/fees/v1/tx 1`] = `
   fromAminoMsg(object: MsgRegisterDevFeeInfoAminoMsg): MsgRegisterDevFeeInfo {
     return MsgRegisterDevFeeInfo.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgRegisterDevFeeInfoProtoMsg): MsgRegisterDevFeeInfo {
-    return MsgRegisterDevFeeInfo.decode(message.value);
+  fromProtoMsg(message: MsgRegisterDevFeeInfoProtoMsg, useInterfaces: boolean = false): MsgRegisterDevFeeInfo {
+    return MsgRegisterDevFeeInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgRegisterDevFeeInfo): Uint8Array {
     return MsgRegisterDevFeeInfo.encode(message).finish();
@@ -1060,7 +1060,7 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ParseRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): ParseRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParseRequest();
@@ -1134,7 +1134,7 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
       disableMacros: object.disable_macros
     };
   },
-  toAmino(message: ParseRequest): ParseRequestAmino {
+  toAmino(message: ParseRequest, useInterfaces: boolean = false): ParseRequestAmino {
     const obj: any = {};
     obj.cel_source = message.celSource;
     obj.syntax_version = message.syntaxVersion;
@@ -1145,8 +1145,8 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
   fromAminoMsg(object: ParseRequestAminoMsg): ParseRequest {
     return ParseRequest.fromAmino(object.value);
   },
-  fromProtoMsg(message: ParseRequestProtoMsg): ParseRequest {
-    return ParseRequest.decode(message.value);
+  fromProtoMsg(message: ParseRequestProtoMsg, useInterfaces: boolean = false): ParseRequest {
+    return ParseRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ParseRequest): Uint8Array {
     return ParseRequest.encode(message).finish();
@@ -1184,7 +1184,7 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Decl_FunctionDecl_Overload {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Decl_FunctionDecl_Overload {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl_FunctionDecl_Overload();
@@ -1195,13 +1195,13 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
           message.overloadId = reader.string();
           break;
         case 2:
-          message.params.push(Type.decode(reader, reader.uint32()));
+          message.params.push(Type.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
           message.typeParams.push(reader.string());
           break;
         case 4:
-          message.resultType = Type.decode(reader, reader.uint32());
+          message.resultType = Type.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
           message.isInstanceFunction = reader.bool();
@@ -1292,11 +1292,11 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
       doc: object.doc
     };
   },
-  toAmino(message: Decl_FunctionDecl_Overload): Decl_FunctionDecl_OverloadAmino {
+  toAmino(message: Decl_FunctionDecl_Overload, useInterfaces: boolean = false): Decl_FunctionDecl_OverloadAmino {
     const obj: any = {};
     obj.overload_id = message.overloadId;
     if (message.params) {
-      obj.params = message.params.map(e => e ? Type.toAmino(e) : undefined);
+      obj.params = message.params.map(e => e ? Type.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.params = [];
     }
@@ -1305,7 +1305,7 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
     } else {
       obj.type_params = [];
     }
-    obj.result_type = message.resultType ? Type.toAmino(message.resultType) : undefined;
+    obj.result_type = message.resultType ? Type.toAmino(message.resultType, useInterfaces) : undefined;
     obj.is_instance_function = message.isInstanceFunction;
     obj.doc = message.doc;
     return obj;
@@ -1313,8 +1313,8 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
   fromAminoMsg(object: Decl_FunctionDecl_OverloadAminoMsg): Decl_FunctionDecl_Overload {
     return Decl_FunctionDecl_Overload.fromAmino(object.value);
   },
-  fromProtoMsg(message: Decl_FunctionDecl_OverloadProtoMsg): Decl_FunctionDecl_Overload {
-    return Decl_FunctionDecl_Overload.decode(message.value);
+  fromProtoMsg(message: Decl_FunctionDecl_OverloadProtoMsg, useInterfaces: boolean = false): Decl_FunctionDecl_Overload {
+    return Decl_FunctionDecl_Overload.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Decl_FunctionDecl_Overload): Uint8Array {
     return Decl_FunctionDecl_Overload.encode(message).finish();
@@ -1373,7 +1373,7 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Type {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Type {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType();
@@ -1381,7 +1381,7 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.dyn = Empty.decode(reader, reader.uint32());
+          message.dyn = Empty.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.null = (reader.int32() as any);
@@ -1396,13 +1396,13 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
           message.wellKnown = (reader.int32() as any);
           break;
         case 6:
-          message.listType = Type_ListType.decode(reader, reader.uint32());
+          message.listType = Type_ListType.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 7:
-          message.mapType = Type_MapType.decode(reader, reader.uint32());
+          message.mapType = Type_MapType.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 8:
-          message.function = Type_FunctionType.decode(reader, reader.uint32());
+          message.function = Type_FunctionType.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 9:
           message.messageType = reader.string();
@@ -1411,13 +1411,13 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
           message.typeParam = reader.string();
           break;
         case 11:
-          message.type = Type.decode(reader, reader.uint32());
+          message.type = Type.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 12:
-          message.error = Empty.decode(reader, reader.uint32());
+          message.error = Empty.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 14:
-          message.abstractType = Type_AbstractType.decode(reader, reader.uint32());
+          message.abstractType = Type_AbstractType.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1528,28 +1528,28 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
       abstractType: object?.abstract_type ? Type_AbstractType.fromAmino(object.abstract_type) : undefined
     };
   },
-  toAmino(message: Type): TypeAmino {
+  toAmino(message: Type, useInterfaces: boolean = false): TypeAmino {
     const obj: any = {};
-    obj.dyn = message.dyn ? Empty.toAmino(message.dyn) : undefined;
+    obj.dyn = message.dyn ? Empty.toAmino(message.dyn, useInterfaces) : undefined;
     obj.null = message.null;
     obj.primitive = message.primitive;
     obj.wrapper = message.wrapper;
     obj.well_known = message.wellKnown;
-    obj.list_type = message.listType ? Type_ListType.toAmino(message.listType) : undefined;
-    obj.map_type = message.mapType ? Type_MapType.toAmino(message.mapType) : undefined;
-    obj.function = message.function ? Type_FunctionType.toAmino(message.function) : undefined;
+    obj.list_type = message.listType ? Type_ListType.toAmino(message.listType, useInterfaces) : undefined;
+    obj.map_type = message.mapType ? Type_MapType.toAmino(message.mapType, useInterfaces) : undefined;
+    obj.function = message.function ? Type_FunctionType.toAmino(message.function, useInterfaces) : undefined;
     obj.message_type = message.messageType;
     obj.type_param = message.typeParam;
-    obj.type = message.type ? Type.toAmino(message.type) : undefined;
-    obj.error = message.error ? Empty.toAmino(message.error) : undefined;
-    obj.abstract_type = message.abstractType ? Type_AbstractType.toAmino(message.abstractType) : undefined;
+    obj.type = message.type ? Type.toAmino(message.type, useInterfaces) : undefined;
+    obj.error = message.error ? Empty.toAmino(message.error, useInterfaces) : undefined;
+    obj.abstract_type = message.abstractType ? Type_AbstractType.toAmino(message.abstractType, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: TypeAminoMsg): Type {
     return Type.fromAmino(object.value);
   },
-  fromProtoMsg(message: TypeProtoMsg): Type {
-    return Type.decode(message.value);
+  fromProtoMsg(message: TypeProtoMsg, useInterfaces: boolean = false): Type {
+    return Type.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Type): Uint8Array {
     return Type.encode(message).finish();
@@ -1575,7 +1575,7 @@ exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Type_MapType {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Type_MapType {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType_MapType();
@@ -1583,10 +1583,10 @@ exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.keyType = Type.decode(reader, reader.uint32());
+          message.keyType = Type.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.valueType = Type.decode(reader, reader.uint32());
+          message.valueType = Type.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1631,17 +1631,17 @@ exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
       valueType: object?.value_type ? Type.fromAmino(object.value_type) : undefined
     };
   },
-  toAmino(message: Type_MapType): Type_MapTypeAmino {
+  toAmino(message: Type_MapType, useInterfaces: boolean = false): Type_MapTypeAmino {
     const obj: any = {};
-    obj.key_type = message.keyType ? Type.toAmino(message.keyType) : undefined;
-    obj.value_type = message.valueType ? Type.toAmino(message.valueType) : undefined;
+    obj.key_type = message.keyType ? Type.toAmino(message.keyType, useInterfaces) : undefined;
+    obj.value_type = message.valueType ? Type.toAmino(message.valueType, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: Type_MapTypeAminoMsg): Type_MapType {
     return Type_MapType.fromAmino(object.value);
   },
-  fromProtoMsg(message: Type_MapTypeProtoMsg): Type_MapType {
-    return Type_MapType.decode(message.value);
+  fromProtoMsg(message: Type_MapTypeProtoMsg, useInterfaces: boolean = false): Type_MapType {
+    return Type_MapType.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Type_MapType): Uint8Array {
     return Type_MapType.encode(message).finish();
@@ -1682,7 +1682,7 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CheckedExpr {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): CheckedExpr {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckedExpr();
@@ -1702,13 +1702,13 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
           }
           break;
         case 5:
-          message.sourceInfo = SourceInfo.decode(reader, reader.uint32());
+          message.sourceInfo = SourceInfo.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 6:
           message.exprVersion = reader.string();
           break;
         case 4:
-          message.expr = Expr.decode(reader, reader.uint32());
+          message.expr = Expr.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1835,7 +1835,7 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
       expr: object?.expr ? Expr.fromAmino(object.expr) : undefined
     };
   },
-  toAmino(message: CheckedExpr): CheckedExprAmino {
+  toAmino(message: CheckedExpr, useInterfaces: boolean = false): CheckedExprAmino {
     const obj: any = {};
     obj.reference_map = {};
     if (message.referenceMap) {
@@ -1849,16 +1849,16 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
         obj.type_map[k] = Type.toAmino(v);
       });
     }
-    obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined;
+    obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo, useInterfaces) : undefined;
     obj.expr_version = message.exprVersion;
-    obj.expr = message.expr ? Expr.toAmino(message.expr) : undefined;
+    obj.expr = message.expr ? Expr.toAmino(message.expr, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: CheckedExprAminoMsg): CheckedExpr {
     return CheckedExpr.fromAmino(object.value);
   },
-  fromProtoMsg(message: CheckedExprProtoMsg): CheckedExpr {
-    return CheckedExpr.decode(message.value);
+  fromProtoMsg(message: CheckedExprProtoMsg, useInterfaces: boolean = false): CheckedExpr {
+    return CheckedExpr.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CheckedExpr): Uint8Array {
     return CheckedExpr.encode(message).finish();
@@ -1905,7 +1905,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Constant {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Constant {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConstant();
@@ -1934,7 +1934,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
           message.bytesValue = reader.bytes();
           break;
         case 8:
-          message.durationValue = Duration.decode(reader, reader.uint32());
+          message.durationValue = Duration.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 9:
           message.timestampValue = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
@@ -2028,7 +2028,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
       timestampValue: object?.timestamp_value ? fromTimestamp(Timestamp.fromAmino(object.timestamp_value)) : undefined
     };
   },
-  toAmino(message: Constant): ConstantAmino {
+  toAmino(message: Constant, useInterfaces: boolean = false): ConstantAmino {
     const obj: any = {};
     obj.null_value = message.nullValue;
     obj.bool_value = message.boolValue;
@@ -2037,15 +2037,15 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     obj.double_value = message.doubleValue;
     obj.string_value = message.stringValue;
     obj.bytes_value = message.bytesValue;
-    obj.duration_value = message.durationValue ? Duration.toAmino(message.durationValue) : undefined;
+    obj.duration_value = message.durationValue ? Duration.toAmino(message.durationValue, useInterfaces) : undefined;
     obj.timestamp_value = message.timestampValue ? Timestamp.toAmino(toTimestamp(message.timestampValue)) : undefined;
     return obj;
   },
   fromAminoMsg(object: ConstantAminoMsg): Constant {
     return Constant.fromAmino(object.value);
   },
-  fromProtoMsg(message: ConstantProtoMsg): Constant {
-    return Constant.decode(message.value);
+  fromProtoMsg(message: ConstantProtoMsg, useInterfaces: boolean = false): Constant {
+    return Constant.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Constant): Uint8Array {
     return Constant.encode(message).finish();
@@ -2071,7 +2071,7 @@ exports[`google/api/expr/v1alpha1/value Entry 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Entry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): Entry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEntry();
@@ -2079,10 +2079,10 @@ exports[`google/api/expr/v1alpha1/value Entry 1`] = `
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.key = Value.decode(reader, reader.uint32());
+          message.key = Value.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.value = Value.decode(reader, reader.uint32());
+          message.value = Value.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2127,17 +2127,17 @@ exports[`google/api/expr/v1alpha1/value Entry 1`] = `
       value: object?.value ? Value.fromAmino(object.value) : undefined
     };
   },
-  toAmino(message: Entry): EntryAmino {
+  toAmino(message: Entry, useInterfaces: boolean = false): EntryAmino {
     const obj: any = {};
-    obj.key = message.key ? Value.toAmino(message.key) : undefined;
-    obj.value = message.value ? Value.toAmino(message.value) : undefined;
+    obj.key = message.key ? Value.toAmino(message.key, useInterfaces) : undefined;
+    obj.value = message.value ? Value.toAmino(message.value, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: EntryAminoMsg): Entry {
     return Entry.fromAmino(object.value);
   },
-  fromProtoMsg(message: EntryProtoMsg): Entry {
-    return Entry.decode(message.value);
+  fromProtoMsg(message: EntryProtoMsg, useInterfaces: boolean = false): Entry {
+    return Entry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Entry): Uint8Array {
     return Entry.encode(message).finish();
@@ -2162,7 +2162,7 @@ exports[`google/api/expr/v1alpha1/value MapValue 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MapValue {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MapValue {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMapValue();
@@ -2170,7 +2170,7 @@ exports[`google/api/expr/v1alpha1/value MapValue 1`] = `
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.entries.push(MapValue_Entry.decode(reader, reader.uint32()));
+          message.entries.push(MapValue_Entry.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2217,10 +2217,10 @@ exports[`google/api/expr/v1alpha1/value MapValue 1`] = `
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromAmino(e)) : []
     };
   },
-  toAmino(message: MapValue): MapValueAmino {
+  toAmino(message: MapValue, useInterfaces: boolean = false): MapValueAmino {
     const obj: any = {};
     if (message.entries) {
-      obj.entries = message.entries.map(e => e ? MapValue_Entry.toAmino(e) : undefined);
+      obj.entries = message.entries.map(e => e ? MapValue_Entry.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.entries = [];
     }
@@ -2229,8 +2229,8 @@ exports[`google/api/expr/v1alpha1/value MapValue 1`] = `
   fromAminoMsg(object: MapValueAminoMsg): MapValue {
     return MapValue.fromAmino(object.value);
   },
-  fromProtoMsg(message: MapValueProtoMsg): MapValue {
-    return MapValue.decode(message.value);
+  fromProtoMsg(message: MapValueProtoMsg, useInterfaces: boolean = false): MapValue {
+    return MapValue.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MapValue): Uint8Array {
     return MapValue.encode(message).finish();
@@ -2266,7 +2266,7 @@ exports[`google/api/expr/v1beta1/source 1`] = `
     });
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SourceInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): SourceInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo();
@@ -2381,7 +2381,7 @@ exports[`google/api/expr/v1beta1/source 1`] = `
       }, {}) : {}
     };
   },
-  toAmino(message: SourceInfo): SourceInfoAmino {
+  toAmino(message: SourceInfo, useInterfaces: boolean = false): SourceInfoAmino {
     const obj: any = {};
     obj.location = message.location;
     if (message.lineOffsets) {
@@ -2400,8 +2400,8 @@ exports[`google/api/expr/v1beta1/source 1`] = `
   fromAminoMsg(object: SourceInfoAminoMsg): SourceInfo {
     return SourceInfo.fromAmino(object.value);
   },
-  fromProtoMsg(message: SourceInfoProtoMsg): SourceInfo {
-    return SourceInfo.decode(message.value);
+  fromProtoMsg(message: SourceInfoProtoMsg, useInterfaces: boolean = false): SourceInfo {
+    return SourceInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SourceInfo): Uint8Array {
     return SourceInfo.encode(message).finish();
@@ -2430,7 +2430,7 @@ exports[`google/api/quota keyType 1`] = `
     });
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MetricRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MetricRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricRule();
@@ -2521,7 +2521,7 @@ exports[`google/api/quota keyType 1`] = `
       }, {}) : {}
     };
   },
-  toAmino(message: MetricRule): MetricRuleAmino {
+  toAmino(message: MetricRule, useInterfaces: boolean = false): MetricRuleAmino {
     const obj: any = {};
     obj.selector = message.selector;
     obj.metric_costs = {};
@@ -2535,8 +2535,8 @@ exports[`google/api/quota keyType 1`] = `
   fromAminoMsg(object: MetricRuleAminoMsg): MetricRule {
     return MetricRule.fromAmino(object.value);
   },
-  fromProtoMsg(message: MetricRuleProtoMsg): MetricRule {
-    return MetricRule.decode(message.value);
+  fromProtoMsg(message: MetricRuleProtoMsg, useInterfaces: boolean = false): MetricRule {
+    return MetricRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MetricRule): Uint8Array {
     return MetricRule.encode(message).finish();
@@ -2597,7 +2597,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): LogEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): LogEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogEntry();
@@ -2614,7 +2614,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
           message.severity = (reader.int32() as any);
           break;
         case 14:
-          message.httpRequest = HttpRequest.decode(reader, reader.uint32());
+          message.httpRequest = HttpRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 15:
           message.trace = reader.string();
@@ -2629,19 +2629,19 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
           }
           break;
         case 2:
-          message.protoPayload = Any.decode(reader, reader.uint32());
+          message.protoPayload = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.textPayload = reader.string();
           break;
         case 6:
-          message.structPayload = Struct.decode(reader, reader.uint32());
+          message.structPayload = Struct.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 16:
-          message.operation = LogEntryOperation.decode(reader, reader.uint32());
+          message.operation = LogEntryOperation.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 17:
-          message.sourceLocation = LogEntrySourceLocation.decode(reader, reader.uint32());
+          message.sourceLocation = LogEntrySourceLocation.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2778,12 +2778,12 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
       sourceLocation: object?.source_location ? LogEntrySourceLocation.fromAmino(object.source_location) : undefined
     };
   },
-  toAmino(message: LogEntry): LogEntryAmino {
+  toAmino(message: LogEntry, useInterfaces: boolean = false): LogEntryAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     obj.severity = message.severity;
-    obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined;
+    obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest, useInterfaces) : undefined;
     obj.trace = message.trace;
     obj.insert_id = message.insertId;
     obj.labels = {};
@@ -2792,18 +2792,18 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
         obj.labels[k] = v;
       });
     }
-    obj.proto_payload = message.protoPayload ? Any.toAmino(message.protoPayload) : undefined;
+    obj.proto_payload = message.protoPayload ? Any.toAmino(message.protoPayload, useInterfaces) : undefined;
     obj.text_payload = message.textPayload;
-    obj.struct_payload = message.structPayload ? Struct.toAmino(message.structPayload) : undefined;
-    obj.operation = message.operation ? LogEntryOperation.toAmino(message.operation) : undefined;
-    obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toAmino(message.sourceLocation) : undefined;
+    obj.struct_payload = message.structPayload ? Struct.toAmino(message.structPayload, useInterfaces) : undefined;
+    obj.operation = message.operation ? LogEntryOperation.toAmino(message.operation, useInterfaces) : undefined;
+    obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toAmino(message.sourceLocation, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: LogEntryAminoMsg): LogEntry {
     return LogEntry.fromAmino(object.value);
   },
-  fromProtoMsg(message: LogEntryProtoMsg): LogEntry {
-    return LogEntry.decode(message.value);
+  fromProtoMsg(message: LogEntryProtoMsg, useInterfaces: boolean = false): LogEntry {
+    return LogEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LogEntry): Uint8Array {
     return LogEntry.encode(message).finish();
@@ -2840,7 +2840,7 @@ exports[`google/rpc/error_details name collisions 2`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): PreconditionFailure {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): PreconditionFailure {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePreconditionFailure();
@@ -2848,7 +2848,7 @@ exports[`google/rpc/error_details name collisions 2`] = `
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.violations.push(PreconditionFailure_Violation.decode(reader, reader.uint32()));
+          message.violations.push(PreconditionFailure_Violation.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2895,10 +2895,10 @@ exports[`google/rpc/error_details name collisions 2`] = `
       violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromAmino(e)) : []
     };
   },
-  toAmino(message: PreconditionFailure): PreconditionFailureAmino {
+  toAmino(message: PreconditionFailure, useInterfaces: boolean = false): PreconditionFailureAmino {
     const obj: any = {};
     if (message.violations) {
-      obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toAmino(e) : undefined);
+      obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.violations = [];
     }
@@ -2907,8 +2907,8 @@ exports[`google/rpc/error_details name collisions 2`] = `
   fromAminoMsg(object: PreconditionFailureAminoMsg): PreconditionFailure {
     return PreconditionFailure.fromAmino(object.value);
   },
-  fromProtoMsg(message: PreconditionFailureProtoMsg): PreconditionFailure {
-    return PreconditionFailure.decode(message.value);
+  fromProtoMsg(message: PreconditionFailureProtoMsg, useInterfaces: boolean = false): PreconditionFailure {
+    return PreconditionFailure.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PreconditionFailure): Uint8Array {
     return PreconditionFailure.encode(message).finish();
@@ -2943,7 +2943,7 @@ exports[`ibc/core/port/v1/query 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAppVersionRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryAppVersionRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAppVersionRequest();
@@ -2960,7 +2960,7 @@ exports[`ibc/core/port/v1/query 1`] = `
           message.ordering = (reader.int32() as any);
           break;
         case 4:
-          message.counterparty = Counterparty.decode(reader, reader.uint32());
+          message.counterparty = Counterparty.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
           message.proposedVersion = reader.string();
@@ -3026,26 +3026,26 @@ exports[`ibc/core/port/v1/query 1`] = `
       proposedVersion: object.proposed_version
     };
   },
-  toAmino(message: QueryAppVersionRequest): QueryAppVersionRequestAmino {
+  toAmino(message: QueryAppVersionRequest, useInterfaces: boolean = false): QueryAppVersionRequestAmino {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.connection_id = message.connectionId;
     obj.ordering = message.ordering;
-    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
+    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty, useInterfaces) : undefined;
     obj.proposed_version = message.proposedVersion;
     return obj;
   },
   fromAminoMsg(object: QueryAppVersionRequestAminoMsg): QueryAppVersionRequest {
     return QueryAppVersionRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryAppVersionRequest): QueryAppVersionRequestAminoMsg {
+  toAminoMsg(message: QueryAppVersionRequest, useInterfaces: boolean = false): QueryAppVersionRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryAppVersionRequest",
-      value: QueryAppVersionRequest.toAmino(message)
+      value: QueryAppVersionRequest.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryAppVersionRequestProtoMsg): QueryAppVersionRequest {
-    return QueryAppVersionRequest.decode(message.value);
+  fromProtoMsg(message: QueryAppVersionRequestProtoMsg, useInterfaces: boolean = false): QueryAppVersionRequest {
+    return QueryAppVersionRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAppVersionRequest): Uint8Array {
     return QueryAppVersionRequest.encode(message).finish();
@@ -3170,7 +3170,7 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -3178,13 +3178,13 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.clientGenesis = GenesisState1.decode(reader, reader.uint32());
+          message.clientGenesis = GenesisState1.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.connectionGenesis = GenesisState2.decode(reader, reader.uint32());
+          message.connectionGenesis = GenesisState2.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.channelGenesis = GenesisState3.decode(reader, reader.uint32());
+          message.channelGenesis = GenesisState3.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -3235,24 +3235,24 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
       channelGenesis: object?.channel_genesis ? GenesisState3.fromAmino(object.channel_genesis) : undefined
     };
   },
-  toAmino(message: GenesisState): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = false): GenesisStateAmino {
     const obj: any = {};
-    obj.client_genesis = message.clientGenesis ? GenesisState1.toAmino(message.clientGenesis) : undefined;
-    obj.connection_genesis = message.connectionGenesis ? GenesisState2.toAmino(message.connectionGenesis) : undefined;
-    obj.channel_genesis = message.channelGenesis ? GenesisState3.toAmino(message.channelGenesis) : undefined;
+    obj.client_genesis = message.clientGenesis ? GenesisState1.toAmino(message.clientGenesis, useInterfaces) : undefined;
+    obj.connection_genesis = message.connectionGenesis ? GenesisState2.toAmino(message.connectionGenesis, useInterfaces) : undefined;
+    obj.channel_genesis = message.channelGenesis ? GenesisState3.toAmino(message.channelGenesis, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
   },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+  toAminoMsg(message: GenesisState, useInterfaces: boolean = false): GenesisStateAminoMsg {
     return {
       type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
+      value: GenesisState.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = false): GenesisState {
+    return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();
@@ -3463,7 +3463,7 @@ exports[`osmosis/gamm/v1beta1/query 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPoolsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): QueryPoolsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPoolsResponse();
@@ -3471,10 +3471,10 @@ exports[`osmosis/gamm/v1beta1/query 1`] = `
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pools.push(Any.decode(reader, reader.uint32()));
+          message.pools.push(Any.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -3527,27 +3527,27 @@ exports[`osmosis/gamm/v1beta1/query 1`] = `
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryPoolsResponse): QueryPoolsResponseAmino {
+  toAmino(message: QueryPoolsResponse, useInterfaces: boolean = false): QueryPoolsResponseAmino {
     const obj: any = {};
     if (message.pools) {
-      obj.pools = message.pools.map(e => e ? Any.toAmino(e) : undefined);
+      obj.pools = message.pools.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.pools = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryPoolsResponseAminoMsg): QueryPoolsResponse {
     return QueryPoolsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryPoolsResponse): QueryPoolsResponseAminoMsg {
+  toAminoMsg(message: QueryPoolsResponse, useInterfaces: boolean = false): QueryPoolsResponseAminoMsg {
     return {
       type: "osmosis/gamm/query-pools-response",
-      value: QueryPoolsResponse.toAmino(message)
+      value: QueryPoolsResponse.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: QueryPoolsResponseProtoMsg): QueryPoolsResponse {
-    return QueryPoolsResponse.decode(message.value);
+  fromProtoMsg(message: QueryPoolsResponseProtoMsg, useInterfaces: boolean = false): QueryPoolsResponse {
+    return QueryPoolsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryPoolsResponse): Uint8Array {
     return QueryPoolsResponse.encode(message).finish();
@@ -3579,7 +3579,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgJoinPool {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgJoinPool {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgJoinPool();
@@ -3596,7 +3596,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
           message.shareOutAmount = reader.string();
           break;
         case 4:
-          message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
+          message.tokenInMaxs.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -3661,13 +3661,13 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
       tokenInMaxs: Array.isArray(object?.token_in_maxs) ? object.token_in_maxs.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgJoinPool): MsgJoinPoolAmino {
+  toAmino(message: MsgJoinPool, useInterfaces: boolean = false): MsgJoinPoolAmino {
     const obj: any = {};
     obj.sender = message.sender;
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     obj.share_out_amount = message.shareOutAmount;
     if (message.tokenInMaxs) {
-      obj.token_in_maxs = message.tokenInMaxs.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.token_in_maxs = message.tokenInMaxs.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.token_in_maxs = [];
     }
@@ -3676,14 +3676,14 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
   fromAminoMsg(object: MsgJoinPoolAminoMsg): MsgJoinPool {
     return MsgJoinPool.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgJoinPool): MsgJoinPoolAminoMsg {
+  toAminoMsg(message: MsgJoinPool, useInterfaces: boolean = false): MsgJoinPoolAminoMsg {
     return {
       type: "osmosis/gamm/join-pool",
-      value: MsgJoinPool.toAmino(message)
+      value: MsgJoinPool.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgJoinPoolProtoMsg): MsgJoinPool {
-    return MsgJoinPool.decode(message.value);
+  fromProtoMsg(message: MsgJoinPoolProtoMsg, useInterfaces: boolean = false): MsgJoinPool {
+    return MsgJoinPool.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgJoinPool): Uint8Array {
     return MsgJoinPool.encode(message).finish();
@@ -3715,7 +3715,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSwapExactAmountIn {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSwapExactAmountIn {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSwapExactAmountIn();
@@ -3726,10 +3726,10 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
           message.sender = reader.string();
           break;
         case 2:
-          message.routes.push(SwapAmountInRoute.decode(reader, reader.uint32()));
+          message.routes.push(SwapAmountInRoute.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.tokenIn = Coin.decode(reader, reader.uint32());
+          message.tokenIn = Coin.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
           message.tokenOutMinAmount = reader.string();
@@ -3797,29 +3797,29 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
       tokenOutMinAmount: object.token_out_min_amount
     };
   },
-  toAmino(message: MsgSwapExactAmountIn): MsgSwapExactAmountInAmino {
+  toAmino(message: MsgSwapExactAmountIn, useInterfaces: boolean = false): MsgSwapExactAmountInAmino {
     const obj: any = {};
     obj.sender = message.sender;
     if (message.routes) {
-      obj.routes = message.routes.map(e => e ? SwapAmountInRoute.toAmino(e) : undefined);
+      obj.routes = message.routes.map(e => e ? SwapAmountInRoute.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.routes = [];
     }
-    obj.token_in = message.tokenIn ? Coin.toAmino(message.tokenIn) : undefined;
+    obj.token_in = message.tokenIn ? Coin.toAmino(message.tokenIn, useInterfaces) : undefined;
     obj.token_out_min_amount = message.tokenOutMinAmount;
     return obj;
   },
   fromAminoMsg(object: MsgSwapExactAmountInAminoMsg): MsgSwapExactAmountIn {
     return MsgSwapExactAmountIn.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgSwapExactAmountIn): MsgSwapExactAmountInAminoMsg {
+  toAminoMsg(message: MsgSwapExactAmountIn, useInterfaces: boolean = false): MsgSwapExactAmountInAminoMsg {
     return {
       type: "osmosis/gamm/swap-exact-amount-in",
-      value: MsgSwapExactAmountIn.toAmino(message)
+      value: MsgSwapExactAmountIn.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgSwapExactAmountInProtoMsg): MsgSwapExactAmountIn {
-    return MsgSwapExactAmountIn.decode(message.value);
+  fromProtoMsg(message: MsgSwapExactAmountInProtoMsg, useInterfaces: boolean = false): MsgSwapExactAmountIn {
+    return MsgSwapExactAmountIn.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSwapExactAmountIn): Uint8Array {
     return MsgSwapExactAmountIn.encode(message).finish();
@@ -3851,7 +3851,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSwapExactAmountOut {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = false): MsgSwapExactAmountOut {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSwapExactAmountOut();
@@ -3862,13 +3862,13 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
           message.sender = reader.string();
           break;
         case 2:
-          message.routes.push(SwapAmountOutRoute.decode(reader, reader.uint32()));
+          message.routes.push(SwapAmountOutRoute.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
           message.tokenInMaxAmount = reader.string();
           break;
         case 4:
-          message.tokenOut = Coin.decode(reader, reader.uint32());
+          message.tokenOut = Coin.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -3933,29 +3933,29 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
       tokenOut: object?.token_out ? Coin.fromAmino(object.token_out) : undefined
     };
   },
-  toAmino(message: MsgSwapExactAmountOut): MsgSwapExactAmountOutAmino {
+  toAmino(message: MsgSwapExactAmountOut, useInterfaces: boolean = false): MsgSwapExactAmountOutAmino {
     const obj: any = {};
     obj.sender = message.sender;
     if (message.routes) {
-      obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toAmino(e) : undefined);
+      obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.routes = [];
     }
     obj.token_in_max_amount = message.tokenInMaxAmount;
-    obj.token_out = message.tokenOut ? Coin.toAmino(message.tokenOut) : undefined;
+    obj.token_out = message.tokenOut ? Coin.toAmino(message.tokenOut, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgSwapExactAmountOutAminoMsg): MsgSwapExactAmountOut {
     return MsgSwapExactAmountOut.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgSwapExactAmountOut): MsgSwapExactAmountOutAminoMsg {
+  toAminoMsg(message: MsgSwapExactAmountOut, useInterfaces: boolean = false): MsgSwapExactAmountOutAminoMsg {
     return {
       type: "osmosis/gamm/swap-exact-amount-out",
-      value: MsgSwapExactAmountOut.toAmino(message)
+      value: MsgSwapExactAmountOut.toAmino(message, useInterfaces)
     };
   },
-  fromProtoMsg(message: MsgSwapExactAmountOutProtoMsg): MsgSwapExactAmountOut {
-    return MsgSwapExactAmountOut.decode(message.value);
+  fromProtoMsg(message: MsgSwapExactAmountOutProtoMsg, useInterfaces: boolean = false): MsgSwapExactAmountOut {
+    return MsgSwapExactAmountOut.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSwapExactAmountOut): Uint8Array {
     return MsgSwapExactAmountOut.encode(message).finish();

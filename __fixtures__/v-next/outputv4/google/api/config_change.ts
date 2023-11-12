@@ -153,13 +153,13 @@ function createBaseConfigChange(): ConfigChange {
 export const ConfigChange = {
   typeUrl: "/google.api.ConfigChange",
   encode(message: ConfigChange, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.element !== "") {
+    if (message.element !== undefined) {
       writer.uint32(10).string(message.element);
     }
-    if (message.oldValue !== "") {
+    if (message.oldValue !== undefined) {
       writer.uint32(18).string(message.oldValue);
     }
-    if (message.newValue !== "") {
+    if (message.newValue !== undefined) {
       writer.uint32(26).string(message.newValue);
     }
     if (message.changeType !== 0) {
@@ -307,7 +307,7 @@ function createBaseAdvice(): Advice {
 export const Advice = {
   typeUrl: "/google.api.Advice",
   encode(message: Advice, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     return writer;

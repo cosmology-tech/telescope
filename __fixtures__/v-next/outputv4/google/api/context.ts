@@ -243,7 +243,7 @@ function createBaseContextRule(): ContextRule {
 export const ContextRule = {
   typeUrl: "/google.api.ContextRule",
   encode(message: ContextRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
     for (const v of message.requested) {

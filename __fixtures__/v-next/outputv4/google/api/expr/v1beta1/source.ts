@@ -87,10 +87,10 @@ function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
 }
 export const SourceInfo_PositionsEntry = {
   encode(message: SourceInfo_PositionsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== 0) {
+    if (message.key !== undefined) {
       writer.uint32(8).int32(message.key);
     }
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(16).int32(message.value);
     }
     return writer;
@@ -183,7 +183,7 @@ function createBaseSourceInfo(): SourceInfo {
 export const SourceInfo = {
   typeUrl: "/google.api.expr.v1beta1.SourceInfo",
   encode(message: SourceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.location !== "") {
+    if (message.location !== undefined) {
       writer.uint32(18).string(message.location);
     }
     writer.uint32(26).fork();
@@ -369,16 +369,16 @@ function createBaseSourcePosition(): SourcePosition {
 export const SourcePosition = {
   typeUrl: "/google.api.expr.v1beta1.SourcePosition",
   encode(message: SourcePosition, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.location !== "") {
+    if (message.location !== undefined) {
       writer.uint32(10).string(message.location);
     }
-    if (message.offset !== 0) {
+    if (message.offset !== undefined) {
       writer.uint32(16).int32(message.offset);
     }
-    if (message.line !== 0) {
+    if (message.line !== undefined) {
       writer.uint32(24).int32(message.line);
     }
-    if (message.column !== 0) {
+    if (message.column !== undefined) {
       writer.uint32(32).int32(message.column);
     }
     return writer;

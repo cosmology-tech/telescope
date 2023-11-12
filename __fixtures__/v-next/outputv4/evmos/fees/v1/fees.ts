@@ -39,13 +39,13 @@ function createBaseDevFeeInfo(): DevFeeInfo {
 export const DevFeeInfo = {
   typeUrl: "/evmos.fees.v1.DevFeeInfo",
   encode(message: DevFeeInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contractAddress !== "") {
+    if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
     }
-    if (message.deployerAddress !== "") {
+    if (message.deployerAddress !== undefined) {
       writer.uint32(18).string(message.deployerAddress);
     }
-    if (message.withdrawAddress !== "") {
+    if (message.withdrawAddress !== undefined) {
       writer.uint32(26).string(message.withdrawAddress);
     }
     return writer;

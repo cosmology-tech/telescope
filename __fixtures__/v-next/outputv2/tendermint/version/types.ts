@@ -88,7 +88,7 @@ export const App = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): App {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): App {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseApp();
@@ -146,7 +146,7 @@ export const App = {
       software: object.software
     };
   },
-  toAmino(message: App): AppAmino {
+  toAmino(message: App, useInterfaces: boolean = true): AppAmino {
     const obj: any = {};
     obj.protocol = message.protocol ? message.protocol.toString() : undefined;
     obj.software = message.software;
@@ -155,8 +155,8 @@ export const App = {
   fromAminoMsg(object: AppAminoMsg): App {
     return App.fromAmino(object.value);
   },
-  fromProtoMsg(message: AppProtoMsg): App {
-    return App.decode(message.value);
+  fromProtoMsg(message: AppProtoMsg, useInterfaces: boolean = true): App {
+    return App.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: App): Uint8Array {
     return App.encode(message).finish();
@@ -185,7 +185,7 @@ export const Consensus = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Consensus {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Consensus {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensus();
@@ -245,7 +245,7 @@ export const Consensus = {
       app: BigInt(object.app)
     };
   },
-  toAmino(message: Consensus): ConsensusAmino {
+  toAmino(message: Consensus, useInterfaces: boolean = true): ConsensusAmino {
     const obj: any = {};
     obj.block = message.block ? message.block.toString() : undefined;
     obj.app = message.app ? message.app.toString() : undefined;
@@ -254,8 +254,8 @@ export const Consensus = {
   fromAminoMsg(object: ConsensusAminoMsg): Consensus {
     return Consensus.fromAmino(object.value);
   },
-  fromProtoMsg(message: ConsensusProtoMsg): Consensus {
-    return Consensus.decode(message.value);
+  fromProtoMsg(message: ConsensusProtoMsg, useInterfaces: boolean = true): Consensus {
+    return Consensus.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Consensus): Uint8Array {
     return Consensus.encode(message).finish();

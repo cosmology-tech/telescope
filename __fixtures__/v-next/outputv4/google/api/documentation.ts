@@ -255,7 +255,7 @@ function createBaseDocumentation(): Documentation {
 export const Documentation = {
   typeUrl: "/google.api.Documentation",
   encode(message: Documentation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.summary !== "") {
+    if (message.summary !== undefined) {
       writer.uint32(10).string(message.summary);
     }
     for (const v of message.pages) {
@@ -264,13 +264,13 @@ export const Documentation = {
     for (const v of message.rules) {
       DocumentationRule.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.documentationRootUrl !== "") {
+    if (message.documentationRootUrl !== undefined) {
       writer.uint32(34).string(message.documentationRootUrl);
     }
-    if (message.serviceRootUrl !== "") {
+    if (message.serviceRootUrl !== undefined) {
       writer.uint32(50).string(message.serviceRootUrl);
     }
-    if (message.overview !== "") {
+    if (message.overview !== undefined) {
       writer.uint32(18).string(message.overview);
     }
     return writer;
@@ -437,13 +437,13 @@ function createBaseDocumentationRule(): DocumentationRule {
 export const DocumentationRule = {
   typeUrl: "/google.api.DocumentationRule",
   encode(message: DocumentationRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
-    if (message.deprecationDescription !== "") {
+    if (message.deprecationDescription !== undefined) {
       writer.uint32(26).string(message.deprecationDescription);
     }
     return writer;
@@ -553,10 +553,10 @@ function createBasePage(): Page {
 export const Page = {
   typeUrl: "/google.api.Page",
   encode(message: Page, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.content !== "") {
+    if (message.content !== undefined) {
       writer.uint32(18).string(message.content);
     }
     for (const v of message.subpages) {

@@ -118,10 +118,10 @@ function createBaseProvider(): Provider {
 export const Provider = {
   typeUrl: "/akash.audit.v1beta1.Provider",
   encode(message: Provider, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.auditor !== "") {
+    if (message.auditor !== undefined) {
       writer.uint32(18).string(message.auditor);
     }
     for (const v of message.attributes) {
@@ -252,10 +252,10 @@ function createBaseAuditedAttributes(): AuditedAttributes {
 export const AuditedAttributes = {
   typeUrl: "/akash.audit.v1beta1.AuditedAttributes",
   encode(message: AuditedAttributes, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.auditor !== "") {
+    if (message.auditor !== undefined) {
       writer.uint32(18).string(message.auditor);
     }
     for (const v of message.attributes) {
@@ -621,10 +621,10 @@ function createBaseMsgSignProviderAttributes(): MsgSignProviderAttributes {
 export const MsgSignProviderAttributes = {
   typeUrl: "/akash.audit.v1beta1.MsgSignProviderAttributes",
   encode(message: MsgSignProviderAttributes, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.auditor !== "") {
+    if (message.auditor !== undefined) {
       writer.uint32(18).string(message.auditor);
     }
     for (const v of message.attributes) {
@@ -828,10 +828,10 @@ function createBaseMsgDeleteProviderAttributes(): MsgDeleteProviderAttributes {
 export const MsgDeleteProviderAttributes = {
   typeUrl: "/akash.audit.v1beta1.MsgDeleteProviderAttributes",
   encode(message: MsgDeleteProviderAttributes, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.auditor !== "") {
+    if (message.auditor !== undefined) {
       writer.uint32(18).string(message.auditor);
     }
     for (const v of message.keys) {

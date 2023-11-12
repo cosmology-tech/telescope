@@ -299,7 +299,7 @@ function createBaseStorage(): Storage {
 export const Storage = {
   typeUrl: "/akash.base.v1beta2.Storage",
   encode(message: Storage, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.quantity !== undefined) {

@@ -139,7 +139,7 @@ function createBaseMinter(): Minter {
 export const Minter = {
   typeUrl: "/osmosis.mint.v1beta1.Minter",
   encode(message: Minter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.epochProvisions !== "") {
+    if (message.epochProvisions !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.epochProvisions, 18).atomics);
     }
     return writer;
@@ -232,10 +232,10 @@ function createBaseWeightedAddress(): WeightedAddress {
 export const WeightedAddress = {
   typeUrl: "/osmosis.mint.v1beta1.WeightedAddress",
   encode(message: WeightedAddress, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
-    if (message.weight !== "") {
+    if (message.weight !== undefined) {
       writer.uint32(18).string(Decimal.fromUserInput(message.weight, 18).atomics);
     }
     return writer;
@@ -341,16 +341,16 @@ function createBaseDistributionProportions(): DistributionProportions {
 export const DistributionProportions = {
   typeUrl: "/osmosis.mint.v1beta1.DistributionProportions",
   encode(message: DistributionProportions, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.staking !== "") {
+    if (message.staking !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.staking, 18).atomics);
     }
-    if (message.poolIncentives !== "") {
+    if (message.poolIncentives !== undefined) {
       writer.uint32(18).string(Decimal.fromUserInput(message.poolIncentives, 18).atomics);
     }
-    if (message.developerRewards !== "") {
+    if (message.developerRewards !== undefined) {
       writer.uint32(26).string(Decimal.fromUserInput(message.developerRewards, 18).atomics);
     }
-    if (message.communityPool !== "") {
+    if (message.communityPool !== undefined) {
       writer.uint32(34).string(Decimal.fromUserInput(message.communityPool, 18).atomics);
     }
     return writer;
@@ -482,19 +482,19 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/osmosis.mint.v1beta1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.mintDenom !== "") {
+    if (message.mintDenom !== undefined) {
       writer.uint32(10).string(message.mintDenom);
     }
-    if (message.genesisEpochProvisions !== "") {
+    if (message.genesisEpochProvisions !== undefined) {
       writer.uint32(18).string(Decimal.fromUserInput(message.genesisEpochProvisions, 18).atomics);
     }
-    if (message.epochIdentifier !== "") {
+    if (message.epochIdentifier !== undefined) {
       writer.uint32(26).string(message.epochIdentifier);
     }
-    if (message.reductionPeriodInEpochs !== BigInt(0)) {
+    if (message.reductionPeriodInEpochs !== undefined) {
       writer.uint32(32).int64(message.reductionPeriodInEpochs);
     }
-    if (message.reductionFactor !== "") {
+    if (message.reductionFactor !== undefined) {
       writer.uint32(42).string(Decimal.fromUserInput(message.reductionFactor, 18).atomics);
     }
     if (message.distributionProportions !== undefined) {
@@ -503,7 +503,7 @@ export const Params = {
     for (const v of message.weightedDeveloperRewardsReceivers) {
       WeightedAddress.encode(v!, writer.uint32(58).fork()).ldelim();
     }
-    if (message.mintingRewardsDistributionStartEpoch !== BigInt(0)) {
+    if (message.mintingRewardsDistributionStartEpoch !== undefined) {
       writer.uint32(64).int64(message.mintingRewardsDistributionStartEpoch);
     }
     return writer;

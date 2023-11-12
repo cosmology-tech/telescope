@@ -361,7 +361,7 @@ function createBaseQueryDevFeeInfoRequest(): QueryDevFeeInfoRequest {
 export const QueryDevFeeInfoRequest = {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfoRequest",
   encode(message: QueryDevFeeInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contractAddress !== "") {
+    if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
     }
     return writer;
@@ -691,7 +691,7 @@ function createBaseQueryDevFeeInfosPerDeployerRequest(): QueryDevFeeInfosPerDepl
 export const QueryDevFeeInfosPerDeployerRequest = {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerRequest",
   encode(message: QueryDevFeeInfosPerDeployerRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.deployerAddress !== "") {
+    if (message.deployerAddress !== undefined) {
       writer.uint32(10).string(message.deployerAddress);
     }
     if (message.pagination !== undefined) {

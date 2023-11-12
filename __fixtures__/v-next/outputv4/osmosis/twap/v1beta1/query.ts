@@ -86,13 +86,13 @@ function createBaseArithmeticTwapRequest(): ArithmeticTwapRequest {
 export const ArithmeticTwapRequest = {
   typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapRequest",
   encode(message: ArithmeticTwapRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
-    if (message.baseAsset !== "") {
+    if (message.baseAsset !== undefined) {
       writer.uint32(18).string(message.baseAsset);
     }
-    if (message.quoteAsset !== "") {
+    if (message.quoteAsset !== undefined) {
       writer.uint32(26).string(message.quoteAsset);
     }
     if (message.startTime !== undefined) {
@@ -236,7 +236,7 @@ function createBaseArithmeticTwapResponse(): ArithmeticTwapResponse {
 export const ArithmeticTwapResponse = {
   typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapResponse",
   encode(message: ArithmeticTwapResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.arithmeticTwap !== "") {
+    if (message.arithmeticTwap !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.arithmeticTwap, 18).atomics);
     }
     return writer;
@@ -331,13 +331,13 @@ function createBaseArithmeticTwapToNowRequest(): ArithmeticTwapToNowRequest {
 export const ArithmeticTwapToNowRequest = {
   typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowRequest",
   encode(message: ArithmeticTwapToNowRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
-    if (message.baseAsset !== "") {
+    if (message.baseAsset !== undefined) {
       writer.uint32(18).string(message.baseAsset);
     }
-    if (message.quoteAsset !== "") {
+    if (message.quoteAsset !== undefined) {
       writer.uint32(26).string(message.quoteAsset);
     }
     if (message.startTime !== undefined) {
@@ -467,7 +467,7 @@ function createBaseArithmeticTwapToNowResponse(): ArithmeticTwapToNowResponse {
 export const ArithmeticTwapToNowResponse = {
   typeUrl: "/osmosis.twap.v1beta1.ArithmeticTwapToNowResponse",
   encode(message: ArithmeticTwapToNowResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.arithmeticTwap !== "") {
+    if (message.arithmeticTwap !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.arithmeticTwap, 18).atomics);
     }
     return writer;

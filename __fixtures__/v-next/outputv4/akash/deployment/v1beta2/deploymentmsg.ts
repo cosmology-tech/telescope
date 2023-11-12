@@ -124,7 +124,7 @@ export const MsgCreateDeployment = {
     if (message.deposit !== undefined) {
       Coin.encode(message.deposit, writer.uint32(34).fork()).ldelim();
     }
-    if (message.depositor !== "") {
+    if (message.depositor !== undefined) {
       writer.uint32(42).string(message.depositor);
     }
     return writer;
@@ -357,7 +357,7 @@ export const MsgDepositDeployment = {
     if (message.amount !== undefined) {
       Coin.encode(message.amount, writer.uint32(18).fork()).ldelim();
     }
-    if (message.depositor !== "") {
+    if (message.depositor !== undefined) {
       writer.uint32(26).string(message.depositor);
     }
     return writer;

@@ -227,7 +227,7 @@ export const Struct_FieldsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Struct_FieldsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Struct_FieldsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStruct_FieldsEntry();
@@ -238,7 +238,7 @@ export const Struct_FieldsEntry = {
           message.key = reader.string();
           break;
         case 2:
-          message.value = Value.decode(reader, reader.uint32());
+          message.value = Value.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -285,17 +285,17 @@ export const Struct_FieldsEntry = {
       value: object?.value ? Value.fromAmino(object.value) : undefined
     };
   },
-  toAmino(message: Struct_FieldsEntry): Struct_FieldsEntryAmino {
+  toAmino(message: Struct_FieldsEntry, useInterfaces: boolean = true): Struct_FieldsEntryAmino {
     const obj: any = {};
     obj.key = message.key;
-    obj.value = message.value ? Value.toAmino(message.value) : undefined;
+    obj.value = message.value ? Value.toAmino(message.value, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: Struct_FieldsEntryAminoMsg): Struct_FieldsEntry {
     return Struct_FieldsEntry.fromAmino(object.value);
   },
-  fromProtoMsg(message: Struct_FieldsEntryProtoMsg): Struct_FieldsEntry {
-    return Struct_FieldsEntry.decode(message.value);
+  fromProtoMsg(message: Struct_FieldsEntryProtoMsg, useInterfaces: boolean = true): Struct_FieldsEntry {
+    return Struct_FieldsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Struct_FieldsEntry): Uint8Array {
     return Struct_FieldsEntry.encode(message).finish();
@@ -317,7 +317,7 @@ export const Struct = {
     });
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Struct {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Struct {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStruct();
@@ -399,7 +399,7 @@ export const Struct = {
       }, {}) : {}
     };
   },
-  toAmino(message: Struct): StructAmino {
+  toAmino(message: Struct, useInterfaces: boolean = true): StructAmino {
     const obj: any = {};
     obj.fields = {};
     if (message.fields) {
@@ -412,8 +412,8 @@ export const Struct = {
   fromAminoMsg(object: StructAminoMsg): Struct {
     return Struct.fromAmino(object.value);
   },
-  fromProtoMsg(message: StructProtoMsg): Struct {
-    return Struct.decode(message.value);
+  fromProtoMsg(message: StructProtoMsg, useInterfaces: boolean = true): Struct {
+    return Struct.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Struct): Uint8Array {
     return Struct.encode(message).finish();
@@ -458,7 +458,7 @@ export const Value = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Value {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Value {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValue();
@@ -478,10 +478,10 @@ export const Value = {
           message.boolValue = reader.bool();
           break;
         case 5:
-          message.structValue = Struct.decode(reader, reader.uint32());
+          message.structValue = Struct.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 6:
-          message.listValue = ListValue.decode(reader, reader.uint32());
+          message.listValue = ListValue.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -554,21 +554,21 @@ export const Value = {
       listValue: object?.list_value ? ListValue.fromAmino(object.list_value) : undefined
     };
   },
-  toAmino(message: Value): ValueAmino {
+  toAmino(message: Value, useInterfaces: boolean = true): ValueAmino {
     const obj: any = {};
     obj.null_value = message.nullValue;
     obj.number_value = message.numberValue;
     obj.string_value = message.stringValue;
     obj.bool_value = message.boolValue;
-    obj.struct_value = message.structValue ? Struct.toAmino(message.structValue) : undefined;
-    obj.list_value = message.listValue ? ListValue.toAmino(message.listValue) : undefined;
+    obj.struct_value = message.structValue ? Struct.toAmino(message.structValue, useInterfaces) : undefined;
+    obj.list_value = message.listValue ? ListValue.toAmino(message.listValue, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: ValueAminoMsg): Value {
     return Value.fromAmino(object.value);
   },
-  fromProtoMsg(message: ValueProtoMsg): Value {
-    return Value.decode(message.value);
+  fromProtoMsg(message: ValueProtoMsg, useInterfaces: boolean = true): Value {
+    return Value.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Value): Uint8Array {
     return Value.encode(message).finish();
@@ -593,7 +593,7 @@ export const ListValue = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListValue {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListValue {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListValue();
@@ -601,7 +601,7 @@ export const ListValue = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.values.push(Value.decode(reader, reader.uint32()));
+          message.values.push(Value.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -648,10 +648,10 @@ export const ListValue = {
       values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromAmino(e)) : []
     };
   },
-  toAmino(message: ListValue): ListValueAmino {
+  toAmino(message: ListValue, useInterfaces: boolean = true): ListValueAmino {
     const obj: any = {};
     if (message.values) {
-      obj.values = message.values.map(e => e ? Value.toAmino(e) : undefined);
+      obj.values = message.values.map(e => e ? Value.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.values = [];
     }
@@ -660,8 +660,8 @@ export const ListValue = {
   fromAminoMsg(object: ListValueAminoMsg): ListValue {
     return ListValue.fromAmino(object.value);
   },
-  fromProtoMsg(message: ListValueProtoMsg): ListValue {
-    return ListValue.decode(message.value);
+  fromProtoMsg(message: ListValueProtoMsg, useInterfaces: boolean = true): ListValue {
+    return ListValue.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListValue): Uint8Array {
     return ListValue.encode(message).finish();

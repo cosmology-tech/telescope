@@ -302,13 +302,13 @@ function createBaseCheckRequest(): CheckRequest {
 export const CheckRequest = {
   typeUrl: "/google.api.servicecontrol.v1.CheckRequest",
   encode(message: CheckRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
     }
     if (message.operation !== undefined) {
       Operation.encode(message.operation, writer.uint32(18).fork()).ldelim();
     }
-    if (message.serviceConfigId !== "") {
+    if (message.serviceConfigId !== undefined) {
       writer.uint32(34).string(message.serviceConfigId);
     }
     return writer;
@@ -422,16 +422,16 @@ function createBaseCheckResponse(): CheckResponse {
 export const CheckResponse = {
   typeUrl: "/google.api.servicecontrol.v1.CheckResponse",
   encode(message: CheckResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.operationId !== "") {
+    if (message.operationId !== undefined) {
       writer.uint32(10).string(message.operationId);
     }
     for (const v of message.checkErrors) {
       CheckError.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.serviceConfigId !== "") {
+    if (message.serviceConfigId !== undefined) {
       writer.uint32(42).string(message.serviceConfigId);
     }
-    if (message.serviceRolloutId !== "") {
+    if (message.serviceRolloutId !== undefined) {
       writer.uint32(90).string(message.serviceRolloutId);
     }
     if (message.checkInfo !== undefined) {
@@ -695,13 +695,13 @@ function createBaseCheckResponse_ConsumerInfo(): CheckResponse_ConsumerInfo {
 export const CheckResponse_ConsumerInfo = {
   typeUrl: "/google.api.servicecontrol.v1.ConsumerInfo",
   encode(message: CheckResponse_ConsumerInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.projectNumber !== BigInt(0)) {
+    if (message.projectNumber !== undefined) {
       writer.uint32(8).int64(message.projectNumber);
     }
     if (message.type !== 0) {
       writer.uint32(16).int32(message.type);
     }
-    if (message.consumerNumber !== BigInt(0)) {
+    if (message.consumerNumber !== undefined) {
       writer.uint32(24).int64(message.consumerNumber);
     }
     return writer;
@@ -815,13 +815,13 @@ function createBaseReportRequest(): ReportRequest {
 export const ReportRequest = {
   typeUrl: "/google.api.servicecontrol.v1.ReportRequest",
   encode(message: ReportRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
     }
     for (const v of message.operations) {
       Operation.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.serviceConfigId !== "") {
+    if (message.serviceConfigId !== undefined) {
       writer.uint32(26).string(message.serviceConfigId);
     }
     return writer;
@@ -946,10 +946,10 @@ export const ReportResponse = {
     for (const v of message.reportErrors) {
       ReportResponse_ReportError.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.serviceConfigId !== "") {
+    if (message.serviceConfigId !== undefined) {
       writer.uint32(18).string(message.serviceConfigId);
     }
-    if (message.serviceRolloutId !== "") {
+    if (message.serviceRolloutId !== undefined) {
       writer.uint32(34).string(message.serviceRolloutId);
     }
     return writer;
@@ -1070,7 +1070,7 @@ function createBaseReportResponse_ReportError(): ReportResponse_ReportError {
 export const ReportResponse_ReportError = {
   typeUrl: "/google.api.servicecontrol.v1.ReportError",
   encode(message: ReportResponse_ReportError, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.operationId !== "") {
+    if (message.operationId !== undefined) {
       writer.uint32(10).string(message.operationId);
     }
     if (message.status !== undefined) {

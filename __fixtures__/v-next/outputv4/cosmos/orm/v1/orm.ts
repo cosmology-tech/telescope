@@ -141,7 +141,7 @@ export const TableDescriptor = {
     for (const v of message.index) {
       SecondaryIndexDescriptor.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.id !== 0) {
+    if (message.id !== undefined) {
       writer.uint32(24).uint32(message.id);
     }
     return writer;
@@ -270,10 +270,10 @@ function createBasePrimaryKeyDescriptor(): PrimaryKeyDescriptor {
 export const PrimaryKeyDescriptor = {
   typeUrl: "/cosmos.orm.v1.PrimaryKeyDescriptor",
   encode(message: PrimaryKeyDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.fields !== "") {
+    if (message.fields !== undefined) {
       writer.uint32(10).string(message.fields);
     }
-    if (message.autoIncrement === true) {
+    if (message.autoIncrement !== undefined) {
       writer.uint32(16).bool(message.autoIncrement);
     }
     return writer;
@@ -378,13 +378,13 @@ function createBaseSecondaryIndexDescriptor(): SecondaryIndexDescriptor {
 export const SecondaryIndexDescriptor = {
   typeUrl: "/cosmos.orm.v1.SecondaryIndexDescriptor",
   encode(message: SecondaryIndexDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.fields !== "") {
+    if (message.fields !== undefined) {
       writer.uint32(10).string(message.fields);
     }
-    if (message.id !== 0) {
+    if (message.id !== undefined) {
       writer.uint32(16).uint32(message.id);
     }
-    if (message.unique === true) {
+    if (message.unique !== undefined) {
       writer.uint32(24).bool(message.unique);
     }
     return writer;
@@ -498,7 +498,7 @@ function createBaseSingletonDescriptor(): SingletonDescriptor {
 export const SingletonDescriptor = {
   typeUrl: "/cosmos.orm.v1.SingletonDescriptor",
   encode(message: SingletonDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== 0) {
+    if (message.id !== undefined) {
       writer.uint32(8).uint32(message.id);
     }
     return writer;

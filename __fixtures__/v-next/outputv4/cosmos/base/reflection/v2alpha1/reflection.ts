@@ -600,7 +600,7 @@ function createBaseTxDescriptor(): TxDescriptor {
 export const TxDescriptor = {
   typeUrl: "/cosmos.base.reflection.v2alpha1.TxDescriptor",
   encode(message: TxDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.fullname !== "") {
+    if (message.fullname !== undefined) {
       writer.uint32(10).string(message.fullname);
     }
     for (const v of message.msgs) {
@@ -824,13 +824,13 @@ function createBaseSigningModeDescriptor(): SigningModeDescriptor {
 export const SigningModeDescriptor = {
   typeUrl: "/cosmos.base.reflection.v2alpha1.SigningModeDescriptor",
   encode(message: SigningModeDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.number !== 0) {
+    if (message.number !== undefined) {
       writer.uint32(16).int32(message.number);
     }
-    if (message.authnInfoProviderMethodFullname !== "") {
+    if (message.authnInfoProviderMethodFullname !== undefined) {
       writer.uint32(26).string(message.authnInfoProviderMethodFullname);
     }
     return writer;
@@ -944,7 +944,7 @@ function createBaseChainDescriptor(): ChainDescriptor {
 export const ChainDescriptor = {
   typeUrl: "/cosmos.base.reflection.v2alpha1.ChainDescriptor",
   encode(message: ChainDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(10).string(message.id);
     }
     return writer;
@@ -1142,7 +1142,7 @@ function createBaseInterfaceDescriptor(): InterfaceDescriptor {
 export const InterfaceDescriptor = {
   typeUrl: "/cosmos.base.reflection.v2alpha1.InterfaceDescriptor",
   encode(message: InterfaceDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.fullname !== "") {
+    if (message.fullname !== undefined) {
       writer.uint32(10).string(message.fullname);
     }
     for (const v of message.interfaceAcceptingMessages) {
@@ -1287,10 +1287,10 @@ function createBaseInterfaceImplementerDescriptor(): InterfaceImplementerDescrip
 export const InterfaceImplementerDescriptor = {
   typeUrl: "/cosmos.base.reflection.v2alpha1.InterfaceImplementerDescriptor",
   encode(message: InterfaceImplementerDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.fullname !== "") {
+    if (message.fullname !== undefined) {
       writer.uint32(10).string(message.fullname);
     }
-    if (message.typeUrl !== "") {
+    if (message.typeUrl !== undefined) {
       writer.uint32(18).string(message.typeUrl);
     }
     return writer;
@@ -1394,7 +1394,7 @@ function createBaseInterfaceAcceptingMessageDescriptor(): InterfaceAcceptingMess
 export const InterfaceAcceptingMessageDescriptor = {
   typeUrl: "/cosmos.base.reflection.v2alpha1.InterfaceAcceptingMessageDescriptor",
   encode(message: InterfaceAcceptingMessageDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.fullname !== "") {
+    if (message.fullname !== undefined) {
       writer.uint32(10).string(message.fullname);
     }
     for (const v of message.fieldDescriptorNames) {
@@ -1512,7 +1512,7 @@ function createBaseConfigurationDescriptor(): ConfigurationDescriptor {
 export const ConfigurationDescriptor = {
   typeUrl: "/cosmos.base.reflection.v2alpha1.ConfigurationDescriptor",
   encode(message: ConfigurationDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.bech32AccountAddressPrefix !== "") {
+    if (message.bech32AccountAddressPrefix !== undefined) {
       writer.uint32(10).string(message.bech32AccountAddressPrefix);
     }
     return writer;
@@ -1604,7 +1604,7 @@ function createBaseMsgDescriptor(): MsgDescriptor {
 export const MsgDescriptor = {
   typeUrl: "/cosmos.base.reflection.v2alpha1.MsgDescriptor",
   encode(message: MsgDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.msgTypeUrl !== "") {
+    if (message.msgTypeUrl !== undefined) {
       writer.uint32(10).string(message.msgTypeUrl);
     }
     return writer;
@@ -2804,10 +2804,10 @@ function createBaseQueryServiceDescriptor(): QueryServiceDescriptor {
 export const QueryServiceDescriptor = {
   typeUrl: "/cosmos.base.reflection.v2alpha1.QueryServiceDescriptor",
   encode(message: QueryServiceDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.fullname !== "") {
+    if (message.fullname !== undefined) {
       writer.uint32(10).string(message.fullname);
     }
-    if (message.isModule === true) {
+    if (message.isModule !== undefined) {
       writer.uint32(16).bool(message.isModule);
     }
     for (const v of message.methods) {
@@ -2937,10 +2937,10 @@ function createBaseQueryMethodDescriptor(): QueryMethodDescriptor {
 export const QueryMethodDescriptor = {
   typeUrl: "/cosmos.base.reflection.v2alpha1.QueryMethodDescriptor",
   encode(message: QueryMethodDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.fullQueryPath !== "") {
+    if (message.fullQueryPath !== undefined) {
       writer.uint32(18).string(message.fullQueryPath);
     }
     return writer;

@@ -729,10 +729,10 @@ export const SignDoc = {
     if (message.authInfoBytes.length !== 0) {
       writer.uint32(18).bytes(message.authInfoBytes);
     }
-    if (message.chainId !== "") {
+    if (message.chainId !== undefined) {
       writer.uint32(26).string(message.chainId);
     }
-    if (message.accountNumber !== BigInt(0)) {
+    if (message.accountNumber !== undefined) {
       writer.uint32(32).uint64(message.accountNumber);
     }
     return writer;
@@ -870,13 +870,13 @@ export const SignDocDirectAux = {
     if (message.publicKey !== undefined) {
       Any.encode(message.publicKey, writer.uint32(18).fork()).ldelim();
     }
-    if (message.chainId !== "") {
+    if (message.chainId !== undefined) {
       writer.uint32(26).string(message.chainId);
     }
-    if (message.accountNumber !== BigInt(0)) {
+    if (message.accountNumber !== undefined) {
       writer.uint32(32).uint64(message.accountNumber);
     }
-    if (message.sequence !== BigInt(0)) {
+    if (message.sequence !== undefined) {
       writer.uint32(40).uint64(message.sequence);
     }
     if (message.tip !== undefined) {
@@ -1041,10 +1041,10 @@ export const TxBody = {
     for (const v of message.messages) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.memo !== "") {
+    if (message.memo !== undefined) {
       writer.uint32(18).string(message.memo);
     }
-    if (message.timeoutHeight !== BigInt(0)) {
+    if (message.timeoutHeight !== undefined) {
       writer.uint32(24).uint64(message.timeoutHeight);
     }
     for (const v of message.extensionOptions) {
@@ -1370,7 +1370,7 @@ export const SignerInfo = {
     if (message.modeInfo !== undefined) {
       ModeInfo.encode(message.modeInfo, writer.uint32(18).fork()).ldelim();
     }
-    if (message.sequence !== BigInt(0)) {
+    if (message.sequence !== undefined) {
       writer.uint32(24).uint64(message.sequence);
     }
     return writer;
@@ -1820,13 +1820,13 @@ export const Fee = {
     for (const v of message.amount) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.gasLimit !== BigInt(0)) {
+    if (message.gasLimit !== undefined) {
       writer.uint32(16).uint64(message.gasLimit);
     }
-    if (message.payer !== "") {
+    if (message.payer !== undefined) {
       writer.uint32(26).string(message.payer);
     }
-    if (message.granter !== "") {
+    if (message.granter !== undefined) {
       writer.uint32(34).string(message.granter);
     }
     return writer;
@@ -1969,7 +1969,7 @@ export const Tip = {
     for (const v of message.amount) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.tipper !== "") {
+    if (message.tipper !== undefined) {
       writer.uint32(18).string(message.tipper);
     }
     return writer;
@@ -2087,7 +2087,7 @@ function createBaseAuxSignerData(): AuxSignerData {
 export const AuxSignerData = {
   typeUrl: "/cosmos.tx.v1beta1.AuxSignerData",
   encode(message: AuxSignerData, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     if (message.signDoc !== undefined) {

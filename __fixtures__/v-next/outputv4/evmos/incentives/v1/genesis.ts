@@ -197,16 +197,16 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/evmos.incentives.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.enableIncentives === true) {
+    if (message.enableIncentives !== undefined) {
       writer.uint32(8).bool(message.enableIncentives);
     }
-    if (message.allocationLimit !== "") {
+    if (message.allocationLimit !== undefined) {
       writer.uint32(18).string(Decimal.fromUserInput(message.allocationLimit, 18).atomics);
     }
-    if (message.incentivesEpochIdentifier !== "") {
+    if (message.incentivesEpochIdentifier !== undefined) {
       writer.uint32(26).string(message.incentivesEpochIdentifier);
     }
-    if (message.rewardScaler !== "") {
+    if (message.rewardScaler !== undefined) {
       writer.uint32(34).string(Decimal.fromUserInput(message.rewardScaler, 18).atomics);
     }
     return writer;

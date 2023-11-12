@@ -40,7 +40,7 @@ export const GenesisState = {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(18).fork()).ldelim();
     }
-    if (message.reductionStartedEpoch !== BigInt(0)) {
+    if (message.reductionStartedEpoch !== undefined) {
       writer.uint32(24).int64(message.reductionStartedEpoch);
     }
     return writer;

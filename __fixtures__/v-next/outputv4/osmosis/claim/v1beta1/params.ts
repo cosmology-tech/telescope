@@ -42,7 +42,7 @@ export const Params = {
     if (message.durationOfDecay !== undefined) {
       Duration.encode(message.durationOfDecay, writer.uint32(26).fork()).ldelim();
     }
-    if (message.claimDenom !== "") {
+    if (message.claimDenom !== undefined) {
       writer.uint32(34).string(message.claimDenom);
     }
     return writer;

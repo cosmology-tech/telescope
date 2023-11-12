@@ -176,10 +176,10 @@ function createBaseCheckRequest(): CheckRequest {
 export const CheckRequest = {
   typeUrl: "/google.api.servicecontrol.v2.CheckRequest",
   encode(message: CheckRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
     }
-    if (message.serviceConfigId !== "") {
+    if (message.serviceConfigId !== undefined) {
       writer.uint32(18).string(message.serviceConfigId);
     }
     if (message.attributes !== undefined) {
@@ -188,7 +188,7 @@ export const CheckRequest = {
     for (const v of message.resources) {
       ResourceInfo.encode(v!, writer.uint32(34).fork()).ldelim();
     }
-    if (message.flags !== "") {
+    if (message.flags !== undefined) {
       writer.uint32(42).string(message.flags);
     }
     return writer;
@@ -336,19 +336,19 @@ function createBaseResourceInfo(): ResourceInfo {
 export const ResourceInfo = {
   typeUrl: "/google.api.servicecontrol.v2.ResourceInfo",
   encode(message: ResourceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(18).string(message.type);
     }
-    if (message.permission !== "") {
+    if (message.permission !== undefined) {
       writer.uint32(26).string(message.permission);
     }
-    if (message.container !== "") {
+    if (message.container !== undefined) {
       writer.uint32(34).string(message.container);
     }
-    if (message.location !== "") {
+    if (message.location !== undefined) {
       writer.uint32(42).string(message.location);
     }
     return writer;
@@ -478,10 +478,10 @@ function createBaseCheckResponse_HeadersEntry(): CheckResponse_HeadersEntry {
 }
 export const CheckResponse_HeadersEntry = {
   encode(message: CheckResponse_HeadersEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -725,10 +725,10 @@ function createBaseReportRequest(): ReportRequest {
 export const ReportRequest = {
   typeUrl: "/google.api.servicecontrol.v2.ReportRequest",
   encode(message: ReportRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
     }
-    if (message.serviceConfigId !== "") {
+    if (message.serviceConfigId !== undefined) {
       writer.uint32(18).string(message.serviceConfigId);
     }
     for (const v of message.operations) {

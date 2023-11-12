@@ -151,7 +151,7 @@ export const GenericAuthorization = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenericAuthorization {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenericAuthorization {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenericAuthorization();
@@ -198,13 +198,13 @@ export const GenericAuthorization = {
       msg: object.msg
     };
   },
-  toAmino(message: GenericAuthorization): GenericAuthorizationAmino {
+  toAmino(message: GenericAuthorization, useInterfaces: boolean = true): GenericAuthorizationAmino {
     const obj: any = {};
     obj.msg = message.msg;
     return obj;
   },
-  fromProtoMsg(message: GenericAuthorizationProtoMsg): GenericAuthorization {
-    return GenericAuthorization.decode(message.value);
+  fromProtoMsg(message: GenericAuthorizationProtoMsg, useInterfaces: boolean = true): GenericAuthorization {
+    return GenericAuthorization.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenericAuthorization): Uint8Array {
     return GenericAuthorization.encode(message).finish();
@@ -234,7 +234,7 @@ export const Grant = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Grant {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Grant {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGrant();
@@ -242,7 +242,7 @@ export const Grant = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.authorization = (Authorization_InterfaceDecoder(reader) as Any);
+          message.authorization = useInterfaces ? (Authorization_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.expiration = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
@@ -292,14 +292,14 @@ export const Grant = {
       expiration: object?.expiration ? fromTimestamp(Timestamp.fromAmino(object.expiration)) : undefined
     };
   },
-  toAmino(message: Grant): GrantAmino {
+  toAmino(message: Grant, useInterfaces: boolean = true): GrantAmino {
     const obj: any = {};
-    obj.authorization = message.authorization ? Authorization_ToAmino((message.authorization as Any)) : undefined;
+    obj.authorization = message.authorization ? Authorization_ToAmino((message.authorization as Any), useInterfaces) : undefined;
     obj.expiration = message.expiration ? Timestamp.toAmino(toTimestamp(message.expiration)) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GrantProtoMsg): Grant {
-    return Grant.decode(message.value);
+  fromProtoMsg(message: GrantProtoMsg, useInterfaces: boolean = true): Grant {
+    return Grant.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Grant): Uint8Array {
     return Grant.encode(message).finish();
@@ -337,7 +337,7 @@ export const GrantAuthorization = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GrantAuthorization {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GrantAuthorization {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGrantAuthorization();
@@ -351,7 +351,7 @@ export const GrantAuthorization = {
           message.grantee = reader.string();
           break;
         case 3:
-          message.authorization = (Authorization_InterfaceDecoder(reader) as Any);
+          message.authorization = useInterfaces ? (Authorization_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
           message.expiration = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
@@ -413,16 +413,16 @@ export const GrantAuthorization = {
       expiration: object?.expiration ? fromTimestamp(Timestamp.fromAmino(object.expiration)) : undefined
     };
   },
-  toAmino(message: GrantAuthorization): GrantAuthorizationAmino {
+  toAmino(message: GrantAuthorization, useInterfaces: boolean = true): GrantAuthorizationAmino {
     const obj: any = {};
     obj.granter = message.granter;
     obj.grantee = message.grantee;
-    obj.authorization = message.authorization ? Authorization_ToAmino((message.authorization as Any)) : undefined;
+    obj.authorization = message.authorization ? Authorization_ToAmino((message.authorization as Any), useInterfaces) : undefined;
     obj.expiration = message.expiration ? Timestamp.toAmino(toTimestamp(message.expiration)) : undefined;
     return obj;
   },
-  fromProtoMsg(message: GrantAuthorizationProtoMsg): GrantAuthorization {
-    return GrantAuthorization.decode(message.value);
+  fromProtoMsg(message: GrantAuthorizationProtoMsg, useInterfaces: boolean = true): GrantAuthorization {
+    return GrantAuthorization.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GrantAuthorization): Uint8Array {
     return GrantAuthorization.encode(message).finish();
@@ -448,7 +448,7 @@ export const GrantQueueItem = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GrantQueueItem {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GrantQueueItem {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGrantQueueItem();
@@ -503,7 +503,7 @@ export const GrantQueueItem = {
       msgTypeUrls: Array.isArray(object?.msg_type_urls) ? object.msg_type_urls.map((e: any) => e) : []
     };
   },
-  toAmino(message: GrantQueueItem): GrantQueueItemAmino {
+  toAmino(message: GrantQueueItem, useInterfaces: boolean = true): GrantQueueItemAmino {
     const obj: any = {};
     if (message.msgTypeUrls) {
       obj.msg_type_urls = message.msgTypeUrls.map(e => e);
@@ -512,8 +512,8 @@ export const GrantQueueItem = {
     }
     return obj;
   },
-  fromProtoMsg(message: GrantQueueItemProtoMsg): GrantQueueItem {
-    return GrantQueueItem.decode(message.value);
+  fromProtoMsg(message: GrantQueueItemProtoMsg, useInterfaces: boolean = true): GrantQueueItem {
+    return GrantQueueItem.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GrantQueueItem): Uint8Array {
     return GrantQueueItem.encode(message).finish();
@@ -527,18 +527,18 @@ export const GrantQueueItem = {
 };
 export const Authorization_InterfaceDecoder = (input: BinaryReader | Uint8Array): DepositDeploymentAuthorization1 | DepositDeploymentAuthorization2 | GenericAuthorization | SendAuthorization | StakeAuthorization | Any => {
   const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32());
+  const data = Any.decode(reader, reader.uint32(), true);
   switch (data.typeUrl) {
     case "/akash.deployment.v1beta1.DepositDeploymentAuthorization":
-      return DepositDeploymentAuthorization1.decode(data.value);
+      return DepositDeploymentAuthorization1.decode(data.value, undefined, true);
     case "/akash.deployment.v1beta2.DepositDeploymentAuthorization":
-      return DepositDeploymentAuthorization2.decode(data.value);
+      return DepositDeploymentAuthorization2.decode(data.value, undefined, true);
     case "/cosmos.authz.v1beta1.GenericAuthorization":
-      return GenericAuthorization.decode(data.value);
+      return GenericAuthorization.decode(data.value, undefined, true);
     case "/cosmos.bank.v1beta1.SendAuthorization":
-      return SendAuthorization.decode(data.value);
+      return SendAuthorization.decode(data.value, undefined, true);
     case "/cosmos.staking.v1beta1.StakeAuthorization":
-      return StakeAuthorization.decode(data.value);
+      return StakeAuthorization.decode(data.value, undefined, true);
     default:
       return data;
   }
@@ -574,34 +574,34 @@ export const Authorization_FromAmino = (content: AnyAmino) => {
       return Any.fromAmino(content);
   }
 };
-export const Authorization_ToAmino = (content: Any) => {
+export const Authorization_ToAmino = (content: Any, useInterfaces: boolean = true) => {
   switch (content.typeUrl) {
     case "/akash.deployment.v1beta1.DepositDeploymentAuthorization":
       return {
         type: "/akash.deployment.v1beta1.DepositDeploymentAuthorization",
-        value: DepositDeploymentAuthorization1.toAmino(DepositDeploymentAuthorization1.decode(content.value))
+        value: DepositDeploymentAuthorization1.toAmino(DepositDeploymentAuthorization1.decode(content.value, undefined, useInterfaces), useInterfaces)
       };
     case "/akash.deployment.v1beta2.DepositDeploymentAuthorization":
       return {
         type: "/akash.deployment.v1beta2.DepositDeploymentAuthorization",
-        value: DepositDeploymentAuthorization2.toAmino(DepositDeploymentAuthorization2.decode(content.value))
+        value: DepositDeploymentAuthorization2.toAmino(DepositDeploymentAuthorization2.decode(content.value, undefined, useInterfaces), useInterfaces)
       };
     case "/cosmos.authz.v1beta1.GenericAuthorization":
       return {
         type: "cosmos-sdk/GenericAuthorization",
-        value: GenericAuthorization.toAmino(GenericAuthorization.decode(content.value))
+        value: GenericAuthorization.toAmino(GenericAuthorization.decode(content.value, undefined, useInterfaces), useInterfaces)
       };
     case "/cosmos.bank.v1beta1.SendAuthorization":
       return {
         type: "cosmos-sdk/SendAuthorization",
-        value: SendAuthorization.toAmino(SendAuthorization.decode(content.value))
+        value: SendAuthorization.toAmino(SendAuthorization.decode(content.value, undefined, useInterfaces), useInterfaces)
       };
     case "/cosmos.staking.v1beta1.StakeAuthorization":
       return {
         type: "cosmos-sdk/StakeAuthorization",
-        value: StakeAuthorization.toAmino(StakeAuthorization.decode(content.value))
+        value: StakeAuthorization.toAmino(StakeAuthorization.decode(content.value, undefined, useInterfaces), useInterfaces)
       };
     default:
-      return Any.toAmino(content);
+      return Any.toAmino(content, useInterfaces);
   }
 };

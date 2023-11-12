@@ -284,7 +284,7 @@ export const CheckError = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CheckError {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CheckError {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckError();
@@ -301,7 +301,7 @@ export const CheckError = {
           message.detail = reader.string();
           break;
         case 3:
-          message.status = Status.decode(reader, reader.uint32());
+          message.status = Status.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -360,19 +360,19 @@ export const CheckError = {
       status: object?.status ? Status.fromAmino(object.status) : undefined
     };
   },
-  toAmino(message: CheckError): CheckErrorAmino {
+  toAmino(message: CheckError, useInterfaces: boolean = true): CheckErrorAmino {
     const obj: any = {};
     obj.code = message.code;
     obj.subject = message.subject;
     obj.detail = message.detail;
-    obj.status = message.status ? Status.toAmino(message.status) : undefined;
+    obj.status = message.status ? Status.toAmino(message.status, useInterfaces) : undefined;
     return obj;
   },
   fromAminoMsg(object: CheckErrorAminoMsg): CheckError {
     return CheckError.fromAmino(object.value);
   },
-  fromProtoMsg(message: CheckErrorProtoMsg): CheckError {
-    return CheckError.decode(message.value);
+  fromProtoMsg(message: CheckErrorProtoMsg, useInterfaces: boolean = true): CheckError {
+    return CheckError.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CheckError): Uint8Array {
     return CheckError.encode(message).finish();

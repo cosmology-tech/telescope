@@ -186,10 +186,10 @@ function createBaseAccountID(): AccountID {
 export const AccountID = {
   typeUrl: "/akash.escrow.v1beta2.AccountID",
   encode(message: AccountID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.scope !== "") {
+    if (message.scope !== undefined) {
       writer.uint32(10).string(message.scope);
     }
-    if (message.xid !== "") {
+    if (message.xid !== undefined) {
       writer.uint32(18).string(message.xid);
     }
     return writer;
@@ -302,7 +302,7 @@ export const Account = {
     if (message.id !== undefined) {
       AccountID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(18).string(message.owner);
     }
     if (message.state !== 0) {
@@ -314,10 +314,10 @@ export const Account = {
     if (message.transferred !== undefined) {
       DecCoin.encode(message.transferred, writer.uint32(42).fork()).ldelim();
     }
-    if (message.settledAt !== BigInt(0)) {
+    if (message.settledAt !== undefined) {
       writer.uint32(48).int64(message.settledAt);
     }
-    if (message.depositor !== "") {
+    if (message.depositor !== undefined) {
       writer.uint32(58).string(message.depositor);
     }
     if (message.funds !== undefined) {
@@ -508,10 +508,10 @@ export const FractionalPayment = {
     if (message.accountId !== undefined) {
       AccountID.encode(message.accountId, writer.uint32(10).fork()).ldelim();
     }
-    if (message.paymentId !== "") {
+    if (message.paymentId !== undefined) {
       writer.uint32(18).string(message.paymentId);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(26).string(message.owner);
     }
     if (message.state !== 0) {

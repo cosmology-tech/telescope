@@ -38,7 +38,7 @@ export const GenesisState = {
     for (const v of message.clientConnectionPaths) {
       ConnectionPaths.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.nextConnectionSequence !== BigInt(0)) {
+    if (message.nextConnectionSequence !== undefined) {
       writer.uint32(24).uint64(message.nextConnectionSequence);
     }
     if (message.params !== undefined) {

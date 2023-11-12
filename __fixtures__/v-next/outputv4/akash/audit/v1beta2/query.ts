@@ -215,10 +215,10 @@ function createBaseQueryProviderRequest(): QueryProviderRequest {
 export const QueryProviderRequest = {
   typeUrl: "/akash.audit.v1beta2.QueryProviderRequest",
   encode(message: QueryProviderRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.auditor !== "") {
+    if (message.auditor !== undefined) {
       writer.uint32(10).string(message.auditor);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(18).string(message.owner);
     }
     return writer;
@@ -416,7 +416,7 @@ function createBaseQueryProviderAttributesRequest(): QueryProviderAttributesRequ
 export const QueryProviderAttributesRequest = {
   typeUrl: "/akash.audit.v1beta2.QueryProviderAttributesRequest",
   encode(message: QueryProviderAttributesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     if (message.pagination !== undefined) {
@@ -525,10 +525,10 @@ function createBaseQueryProviderAuditorRequest(): QueryProviderAuditorRequest {
 export const QueryProviderAuditorRequest = {
   typeUrl: "/akash.audit.v1beta2.QueryProviderAuditorRequest",
   encode(message: QueryProviderAuditorRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.auditor !== "") {
+    if (message.auditor !== undefined) {
       writer.uint32(10).string(message.auditor);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(18).string(message.owner);
     }
     return writer;
@@ -632,7 +632,7 @@ function createBaseQueryAuditorAttributesRequest(): QueryAuditorAttributesReques
 export const QueryAuditorAttributesRequest = {
   typeUrl: "/akash.audit.v1beta2.QueryAuditorAttributesRequest",
   encode(message: QueryAuditorAttributesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.auditor !== "") {
+    if (message.auditor !== undefined) {
       writer.uint32(10).string(message.auditor);
     }
     if (message.pagination !== undefined) {

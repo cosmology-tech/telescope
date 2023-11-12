@@ -197,7 +197,7 @@ function createBaseClientState(): ClientState {
 export const ClientState = {
   typeUrl: "/ibc.lightclients.tendermint.v1.ClientState",
   encode(message: ClientState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.chainId !== "") {
+    if (message.chainId !== undefined) {
       writer.uint32(10).string(message.chainId);
     }
     if (message.trustLevel !== undefined) {
@@ -224,10 +224,10 @@ export const ClientState = {
     for (const v of message.upgradePath) {
       writer.uint32(74).string(v!);
     }
-    if (message.allowUpdateAfterExpiry === true) {
+    if (message.allowUpdateAfterExpiry !== undefined) {
       writer.uint32(80).bool(message.allowUpdateAfterExpiry);
     }
-    if (message.allowUpdateAfterMisbehaviour === true) {
+    if (message.allowUpdateAfterMisbehaviour !== undefined) {
       writer.uint32(88).bool(message.allowUpdateAfterMisbehaviour);
     }
     return writer;
@@ -591,7 +591,7 @@ function createBaseMisbehaviour(): Misbehaviour {
 export const Misbehaviour = {
   typeUrl: "/ibc.lightclients.tendermint.v1.Misbehaviour",
   encode(message: Misbehaviour, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
     if (message.header1 !== undefined) {
@@ -861,10 +861,10 @@ function createBaseFraction(): Fraction {
 export const Fraction = {
   typeUrl: "/ibc.lightclients.tendermint.v1.Fraction",
   encode(message: Fraction, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.numerator !== BigInt(0)) {
+    if (message.numerator !== undefined) {
       writer.uint32(8).uint64(message.numerator);
     }
-    if (message.denominator !== BigInt(0)) {
+    if (message.denominator !== undefined) {
       writer.uint32(16).uint64(message.denominator);
     }
     return writer;

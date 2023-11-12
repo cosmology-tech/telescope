@@ -435,7 +435,7 @@ function createBaseCode(): Code {
 export const Code = {
   typeUrl: "/cosmwasm.wasm.v1.Code",
   encode(message: Code, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.codeId !== BigInt(0)) {
+    if (message.codeId !== undefined) {
       writer.uint32(8).uint64(message.codeId);
     }
     if (message.codeInfo !== undefined) {
@@ -444,7 +444,7 @@ export const Code = {
     if (message.codeBytes.length !== 0) {
       writer.uint32(26).bytes(message.codeBytes);
     }
-    if (message.pinned === true) {
+    if (message.pinned !== undefined) {
       writer.uint32(32).bool(message.pinned);
     }
     return writer;
@@ -575,7 +575,7 @@ function createBaseContract(): Contract {
 export const Contract = {
   typeUrl: "/cosmwasm.wasm.v1.Contract",
   encode(message: Contract, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contractAddress !== "") {
+    if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
     }
     if (message.contractInfo !== undefined) {
@@ -713,7 +713,7 @@ export const Sequence = {
     if (message.idKey.length !== 0) {
       writer.uint32(10).bytes(message.idKey);
     }
-    if (message.value !== BigInt(0)) {
+    if (message.value !== undefined) {
       writer.uint32(16).uint64(message.value);
     }
     return writer;
