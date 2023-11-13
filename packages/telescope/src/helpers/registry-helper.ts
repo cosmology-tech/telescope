@@ -1,4 +1,4 @@
-import { BinaryReader, BinaryWriter } from "./binary";
+export const registryHelper = `import { BinaryReader, BinaryWriter } from "./binary";
 import { Any } from "./google/protobuf/any";
 
 export type ProtoMsg = Omit<Any, "typeUrl"> & { typeUrl: any };
@@ -158,9 +158,10 @@ function getDecoderByInstance<T = unknown, SDK = unknown, Amino = unknown>(
 
   if (!decoder) {
     throw new Error(
-      `There's no decoder for the instance ${JSON.stringify(obj)}`
+      \`There's no decoder for the instance \${JSON.stringify(obj)}\`
     );
   }
 
   return decoder;
 }
+`;
