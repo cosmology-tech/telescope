@@ -81,7 +81,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -89,10 +89,10 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
+          message.params = Params.decode(reader, reader.uint32());
           break;
         case 2:
-          message.factoryDenoms.push(GenesisDenom.decode(reader, reader.uint32(), useInterfaces));
+          message.factoryDenoms.push(GenesisDenom.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -147,11 +147,11 @@ export const GenesisState = {
       factoryDenoms: Array.isArray(object?.factory_denoms) ? object.factory_denoms.map((e: any) => GenesisDenom.fromAmino(e)) : []
     };
   },
-  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
+  toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
     if (message.factoryDenoms) {
-      obj.factory_denoms = message.factoryDenoms.map(e => e ? GenesisDenom.toAmino(e, useInterfaces) : undefined);
+      obj.factory_denoms = message.factoryDenoms.map(e => e ? GenesisDenom.toAmino(e) : undefined);
     } else {
       obj.factory_denoms = [];
     }
@@ -160,14 +160,14 @@ export const GenesisState = {
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
   },
-  toAminoMsg(message: GenesisState, useInterfaces: boolean = true): GenesisStateAminoMsg {
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
     return {
       type: "osmosis/tokenfactory/genesis-state",
-      value: GenesisState.toAmino(message, useInterfaces)
+      value: GenesisState.toAmino(message)
     };
   },
-  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
-    return GenesisState.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();
@@ -197,7 +197,7 @@ export const GenesisDenom = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisDenom {
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisDenom {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisDenom();
@@ -208,7 +208,7 @@ export const GenesisDenom = {
           message.denom = reader.string();
           break;
         case 2:
-          message.authorityMetadata = DenomAuthorityMetadata.decode(reader, reader.uint32(), useInterfaces);
+          message.authorityMetadata = DenomAuthorityMetadata.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -255,23 +255,23 @@ export const GenesisDenom = {
       authorityMetadata: object?.authority_metadata ? DenomAuthorityMetadata.fromAmino(object.authority_metadata) : undefined
     };
   },
-  toAmino(message: GenesisDenom, useInterfaces: boolean = true): GenesisDenomAmino {
+  toAmino(message: GenesisDenom): GenesisDenomAmino {
     const obj: any = {};
     obj.denom = message.denom;
-    obj.authority_metadata = message.authorityMetadata ? DenomAuthorityMetadata.toAmino(message.authorityMetadata, useInterfaces) : undefined;
+    obj.authority_metadata = message.authorityMetadata ? DenomAuthorityMetadata.toAmino(message.authorityMetadata) : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisDenomAminoMsg): GenesisDenom {
     return GenesisDenom.fromAmino(object.value);
   },
-  toAminoMsg(message: GenesisDenom, useInterfaces: boolean = true): GenesisDenomAminoMsg {
+  toAminoMsg(message: GenesisDenom): GenesisDenomAminoMsg {
     return {
       type: "osmosis/tokenfactory/genesis-denom",
-      value: GenesisDenom.toAmino(message, useInterfaces)
+      value: GenesisDenom.toAmino(message)
     };
   },
-  fromProtoMsg(message: GenesisDenomProtoMsg, useInterfaces: boolean = true): GenesisDenom {
-    return GenesisDenom.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: GenesisDenomProtoMsg): GenesisDenom {
+    return GenesisDenom.decode(message.value);
   },
   toProto(message: GenesisDenom): Uint8Array {
     return GenesisDenom.encode(message).finish();

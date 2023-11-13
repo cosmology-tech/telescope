@@ -134,7 +134,7 @@ export const Class = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Class {
+  decode(input: BinaryReader | Uint8Array, length?: number): Class {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClass();
@@ -160,7 +160,7 @@ export const Class = {
           message.uriHash = reader.string();
           break;
         case 7:
-          message.data = Any.decode(reader, reader.uint32(), useInterfaces);
+          message.data = Any.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -237,7 +237,7 @@ export const Class = {
       data: object?.data ? Any.fromAmino(object.data) : undefined
     };
   },
-  toAmino(message: Class, useInterfaces: boolean = true): ClassAmino {
+  toAmino(message: Class): ClassAmino {
     const obj: any = {};
     obj.id = message.id;
     obj.name = message.name;
@@ -245,20 +245,20 @@ export const Class = {
     obj.description = message.description;
     obj.uri = message.uri;
     obj.uri_hash = message.uriHash;
-    obj.data = message.data ? Any.toAmino(message.data, useInterfaces) : undefined;
+    obj.data = message.data ? Any.toAmino(message.data) : undefined;
     return obj;
   },
   fromAminoMsg(object: ClassAminoMsg): Class {
     return Class.fromAmino(object.value);
   },
-  toAminoMsg(message: Class, useInterfaces: boolean = true): ClassAminoMsg {
+  toAminoMsg(message: Class): ClassAminoMsg {
     return {
       type: "cosmos-sdk/Class",
-      value: Class.toAmino(message, useInterfaces)
+      value: Class.toAmino(message)
     };
   },
-  fromProtoMsg(message: ClassProtoMsg, useInterfaces: boolean = true): Class {
-    return Class.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ClassProtoMsg): Class {
+    return Class.decode(message.value);
   },
   toProto(message: Class): Uint8Array {
     return Class.encode(message).finish();
@@ -300,7 +300,7 @@ export const NFT = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): NFT {
+  decode(input: BinaryReader | Uint8Array, length?: number): NFT {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNFT();
@@ -320,7 +320,7 @@ export const NFT = {
           message.uriHash = reader.string();
           break;
         case 10:
-          message.data = Any.decode(reader, reader.uint32(), useInterfaces);
+          message.data = Any.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -385,26 +385,26 @@ export const NFT = {
       data: object?.data ? Any.fromAmino(object.data) : undefined
     };
   },
-  toAmino(message: NFT, useInterfaces: boolean = true): NFTAmino {
+  toAmino(message: NFT): NFTAmino {
     const obj: any = {};
     obj.class_id = message.classId;
     obj.id = message.id;
     obj.uri = message.uri;
     obj.uri_hash = message.uriHash;
-    obj.data = message.data ? Any.toAmino(message.data, useInterfaces) : undefined;
+    obj.data = message.data ? Any.toAmino(message.data) : undefined;
     return obj;
   },
   fromAminoMsg(object: NFTAminoMsg): NFT {
     return NFT.fromAmino(object.value);
   },
-  toAminoMsg(message: NFT, useInterfaces: boolean = true): NFTAminoMsg {
+  toAminoMsg(message: NFT): NFTAminoMsg {
     return {
       type: "cosmos-sdk/NFT",
-      value: NFT.toAmino(message, useInterfaces)
+      value: NFT.toAmino(message)
     };
   },
-  fromProtoMsg(message: NFTProtoMsg, useInterfaces: boolean = true): NFT {
-    return NFT.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: NFTProtoMsg): NFT {
+    return NFT.decode(message.value);
   },
   toProto(message: NFT): Uint8Array {
     return NFT.encode(message).finish();

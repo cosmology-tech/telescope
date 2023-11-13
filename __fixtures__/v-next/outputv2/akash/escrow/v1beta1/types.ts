@@ -225,7 +225,7 @@ export const AccountID = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccountID {
+  decode(input: BinaryReader | Uint8Array, length?: number): AccountID {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccountID();
@@ -281,7 +281,7 @@ export const AccountID = {
       xid: object.xid
     };
   },
-  toAmino(message: AccountID, useInterfaces: boolean = true): AccountIDAmino {
+  toAmino(message: AccountID): AccountIDAmino {
     const obj: any = {};
     obj.scope = message.scope;
     obj.xid = message.xid;
@@ -290,8 +290,8 @@ export const AccountID = {
   fromAminoMsg(object: AccountIDAminoMsg): AccountID {
     return AccountID.fromAmino(object.value);
   },
-  fromProtoMsg(message: AccountIDProtoMsg, useInterfaces: boolean = true): AccountID {
-    return AccountID.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountIDProtoMsg): AccountID {
+    return AccountID.decode(message.value);
   },
   toProto(message: AccountID): Uint8Array {
     return AccountID.encode(message).finish();
@@ -336,7 +336,7 @@ export const Account = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Account {
+  decode(input: BinaryReader | Uint8Array, length?: number): Account {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccount();
@@ -344,7 +344,7 @@ export const Account = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = AccountID.decode(reader, reader.uint32(), useInterfaces);
+          message.id = AccountID.decode(reader, reader.uint32());
           break;
         case 2:
           message.owner = reader.string();
@@ -353,10 +353,10 @@ export const Account = {
           message.state = (reader.int32() as any);
           break;
         case 4:
-          message.balance = Coin.decode(reader, reader.uint32(), useInterfaces);
+          message.balance = Coin.decode(reader, reader.uint32());
           break;
         case 5:
-          message.transferred = Coin.decode(reader, reader.uint32(), useInterfaces);
+          message.transferred = Coin.decode(reader, reader.uint32());
           break;
         case 6:
           message.settledAt = reader.int64();
@@ -436,21 +436,21 @@ export const Account = {
       settledAt: BigInt(object.settled_at)
     };
   },
-  toAmino(message: Account, useInterfaces: boolean = true): AccountAmino {
+  toAmino(message: Account): AccountAmino {
     const obj: any = {};
-    obj.id = message.id ? AccountID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? AccountID.toAmino(message.id) : undefined;
     obj.owner = message.owner;
     obj.state = message.state;
-    obj.balance = message.balance ? Coin.toAmino(message.balance, useInterfaces) : undefined;
-    obj.transferred = message.transferred ? Coin.toAmino(message.transferred, useInterfaces) : undefined;
+    obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined;
+    obj.transferred = message.transferred ? Coin.toAmino(message.transferred) : undefined;
     obj.settled_at = message.settledAt ? message.settledAt.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: AccountAminoMsg): Account {
     return Account.fromAmino(object.value);
   },
-  fromProtoMsg(message: AccountProtoMsg, useInterfaces: boolean = true): Account {
-    return Account.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AccountProtoMsg): Account {
+    return Account.decode(message.value);
   },
   toProto(message: Account): Uint8Array {
     return Account.encode(message).finish();
@@ -499,7 +499,7 @@ export const Payment = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Payment {
+  decode(input: BinaryReader | Uint8Array, length?: number): Payment {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePayment();
@@ -507,7 +507,7 @@ export const Payment = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.accountId = AccountID.decode(reader, reader.uint32(), useInterfaces);
+          message.accountId = AccountID.decode(reader, reader.uint32());
           break;
         case 2:
           message.paymentId = reader.string();
@@ -519,13 +519,13 @@ export const Payment = {
           message.state = (reader.int32() as any);
           break;
         case 5:
-          message.rate = Coin.decode(reader, reader.uint32(), useInterfaces);
+          message.rate = Coin.decode(reader, reader.uint32());
           break;
         case 6:
-          message.balance = Coin.decode(reader, reader.uint32(), useInterfaces);
+          message.balance = Coin.decode(reader, reader.uint32());
           break;
         case 7:
-          message.withdrawn = Coin.decode(reader, reader.uint32(), useInterfaces);
+          message.withdrawn = Coin.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -608,22 +608,22 @@ export const Payment = {
       withdrawn: object?.withdrawn ? Coin.fromAmino(object.withdrawn) : undefined
     };
   },
-  toAmino(message: Payment, useInterfaces: boolean = true): PaymentAmino {
+  toAmino(message: Payment): PaymentAmino {
     const obj: any = {};
-    obj.account_id = message.accountId ? AccountID.toAmino(message.accountId, useInterfaces) : undefined;
+    obj.account_id = message.accountId ? AccountID.toAmino(message.accountId) : undefined;
     obj.payment_id = message.paymentId;
     obj.owner = message.owner;
     obj.state = message.state;
-    obj.rate = message.rate ? Coin.toAmino(message.rate, useInterfaces) : undefined;
-    obj.balance = message.balance ? Coin.toAmino(message.balance, useInterfaces) : undefined;
-    obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn, useInterfaces) : undefined;
+    obj.rate = message.rate ? Coin.toAmino(message.rate) : undefined;
+    obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined;
+    obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn) : undefined;
     return obj;
   },
   fromAminoMsg(object: PaymentAminoMsg): Payment {
     return Payment.fromAmino(object.value);
   },
-  fromProtoMsg(message: PaymentProtoMsg, useInterfaces: boolean = true): Payment {
-    return Payment.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: PaymentProtoMsg): Payment {
+    return Payment.decode(message.value);
   },
   toProto(message: Payment): Uint8Array {
     return Payment.encode(message).finish();

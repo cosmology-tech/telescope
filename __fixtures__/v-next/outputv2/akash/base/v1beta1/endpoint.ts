@@ -69,7 +69,7 @@ export const Endpoint = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Endpoint {
+  decode(input: BinaryReader | Uint8Array, length?: number): Endpoint {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEndpoint();
@@ -116,7 +116,7 @@ export const Endpoint = {
       kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1
     };
   },
-  toAmino(message: Endpoint, useInterfaces: boolean = true): EndpointAmino {
+  toAmino(message: Endpoint): EndpointAmino {
     const obj: any = {};
     obj.kind = message.kind;
     return obj;
@@ -124,8 +124,8 @@ export const Endpoint = {
   fromAminoMsg(object: EndpointAminoMsg): Endpoint {
     return Endpoint.fromAmino(object.value);
   },
-  fromProtoMsg(message: EndpointProtoMsg, useInterfaces: boolean = true): Endpoint {
-    return Endpoint.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: EndpointProtoMsg): Endpoint {
+    return Endpoint.decode(message.value);
   },
   toProto(message: Endpoint): Uint8Array {
     return Endpoint.encode(message).finish();

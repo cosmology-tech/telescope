@@ -285,7 +285,7 @@ export const Service = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Service {
+  decode(input: BinaryReader | Uint8Array, length?: number): Service {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseService();
@@ -299,7 +299,7 @@ export const Service = {
           message.parent = reader.string();
           break;
         case 2:
-          message.config = ServiceConfig.decode(reader, reader.uint32(), useInterfaces);
+          message.config = ServiceConfig.decode(reader, reader.uint32());
           break;
         case 4:
           message.state = (reader.int32() as any);
@@ -361,19 +361,19 @@ export const Service = {
       state: isSet(object.state) ? stateFromJSON(object.state) : -1
     };
   },
-  toAmino(message: Service, useInterfaces: boolean = true): ServiceAmino {
+  toAmino(message: Service): ServiceAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.parent = message.parent;
-    obj.config = message.config ? ServiceConfig.toAmino(message.config, useInterfaces) : undefined;
+    obj.config = message.config ? ServiceConfig.toAmino(message.config) : undefined;
     obj.state = message.state;
     return obj;
   },
   fromAminoMsg(object: ServiceAminoMsg): Service {
     return Service.fromAmino(object.value);
   },
-  fromProtoMsg(message: ServiceProtoMsg, useInterfaces: boolean = true): Service {
-    return Service.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ServiceProtoMsg): Service {
+    return Service.decode(message.value);
   },
   toProto(message: Service): Uint8Array {
     return Service.encode(message).finish();
@@ -434,7 +434,7 @@ export const ServiceConfig = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ServiceConfig {
+  decode(input: BinaryReader | Uint8Array, length?: number): ServiceConfig {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServiceConfig();
@@ -448,28 +448,28 @@ export const ServiceConfig = {
           message.title = reader.string();
           break;
         case 3:
-          message.apis.push(Api.decode(reader, reader.uint32(), useInterfaces));
+          message.apis.push(Api.decode(reader, reader.uint32()));
           break;
         case 6:
-          message.documentation = Documentation.decode(reader, reader.uint32(), useInterfaces);
+          message.documentation = Documentation.decode(reader, reader.uint32());
           break;
         case 10:
-          message.quota = Quota.decode(reader, reader.uint32(), useInterfaces);
+          message.quota = Quota.decode(reader, reader.uint32());
           break;
         case 11:
-          message.authentication = Authentication.decode(reader, reader.uint32(), useInterfaces);
+          message.authentication = Authentication.decode(reader, reader.uint32());
           break;
         case 15:
-          message.usage = Usage.decode(reader, reader.uint32(), useInterfaces);
+          message.usage = Usage.decode(reader, reader.uint32());
           break;
         case 18:
-          message.endpoints.push(Endpoint.decode(reader, reader.uint32(), useInterfaces));
+          message.endpoints.push(Endpoint.decode(reader, reader.uint32()));
           break;
         case 25:
-          message.monitoredResources.push(MonitoredResourceDescriptor.decode(reader, reader.uint32(), useInterfaces));
+          message.monitoredResources.push(MonitoredResourceDescriptor.decode(reader, reader.uint32()));
           break;
         case 28:
-          message.monitoring = Monitoring.decode(reader, reader.uint32(), useInterfaces);
+          message.monitoring = Monitoring.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -596,37 +596,37 @@ export const ServiceConfig = {
       monitoring: object?.monitoring ? Monitoring.fromAmino(object.monitoring) : undefined
     };
   },
-  toAmino(message: ServiceConfig, useInterfaces: boolean = true): ServiceConfigAmino {
+  toAmino(message: ServiceConfig): ServiceConfigAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.title = message.title;
     if (message.apis) {
-      obj.apis = message.apis.map(e => e ? Api.toAmino(e, useInterfaces) : undefined);
+      obj.apis = message.apis.map(e => e ? Api.toAmino(e) : undefined);
     } else {
       obj.apis = [];
     }
-    obj.documentation = message.documentation ? Documentation.toAmino(message.documentation, useInterfaces) : undefined;
-    obj.quota = message.quota ? Quota.toAmino(message.quota, useInterfaces) : undefined;
-    obj.authentication = message.authentication ? Authentication.toAmino(message.authentication, useInterfaces) : undefined;
-    obj.usage = message.usage ? Usage.toAmino(message.usage, useInterfaces) : undefined;
+    obj.documentation = message.documentation ? Documentation.toAmino(message.documentation) : undefined;
+    obj.quota = message.quota ? Quota.toAmino(message.quota) : undefined;
+    obj.authentication = message.authentication ? Authentication.toAmino(message.authentication) : undefined;
+    obj.usage = message.usage ? Usage.toAmino(message.usage) : undefined;
     if (message.endpoints) {
-      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e, useInterfaces) : undefined);
+      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
     } else {
       obj.endpoints = [];
     }
     if (message.monitoredResources) {
-      obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toAmino(e, useInterfaces) : undefined);
+      obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toAmino(e) : undefined);
     } else {
       obj.monitored_resources = [];
     }
-    obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring, useInterfaces) : undefined;
+    obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring) : undefined;
     return obj;
   },
   fromAminoMsg(object: ServiceConfigAminoMsg): ServiceConfig {
     return ServiceConfig.fromAmino(object.value);
   },
-  fromProtoMsg(message: ServiceConfigProtoMsg, useInterfaces: boolean = true): ServiceConfig {
-    return ServiceConfig.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ServiceConfigProtoMsg): ServiceConfig {
+    return ServiceConfig.decode(message.value);
   },
   toProto(message: ServiceConfig): Uint8Array {
     return ServiceConfig.encode(message).finish();
@@ -651,7 +651,7 @@ export const OperationMetadata = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): OperationMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number): OperationMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOperationMetadata();
@@ -706,7 +706,7 @@ export const OperationMetadata = {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
     };
   },
-  toAmino(message: OperationMetadata, useInterfaces: boolean = true): OperationMetadataAmino {
+  toAmino(message: OperationMetadata): OperationMetadataAmino {
     const obj: any = {};
     if (message.resourceNames) {
       obj.resource_names = message.resourceNames.map(e => e);
@@ -718,8 +718,8 @@ export const OperationMetadata = {
   fromAminoMsg(object: OperationMetadataAminoMsg): OperationMetadata {
     return OperationMetadata.fromAmino(object.value);
   },
-  fromProtoMsg(message: OperationMetadataProtoMsg, useInterfaces: boolean = true): OperationMetadata {
-    return OperationMetadata.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: OperationMetadataProtoMsg): OperationMetadata {
+    return OperationMetadata.decode(message.value);
   },
   toProto(message: OperationMetadata): Uint8Array {
     return OperationMetadata.encode(message).finish();

@@ -636,7 +636,7 @@ export const FieldMask = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): FieldMask {
+  decode(input: BinaryReader | Uint8Array, length?: number): FieldMask {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFieldMask();
@@ -691,7 +691,7 @@ export const FieldMask = {
       paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
     };
   },
-  toAmino(message: FieldMask, useInterfaces: boolean = true): FieldMaskAmino {
+  toAmino(message: FieldMask): FieldMaskAmino {
     const obj: any = {};
     if (message.paths) {
       obj.paths = message.paths.map(e => e);
@@ -703,8 +703,8 @@ export const FieldMask = {
   fromAminoMsg(object: FieldMaskAminoMsg): FieldMask {
     return FieldMask.fromAmino(object.value);
   },
-  fromProtoMsg(message: FieldMaskProtoMsg, useInterfaces: boolean = true): FieldMask {
-    return FieldMask.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: FieldMaskProtoMsg): FieldMask {
+    return FieldMask.decode(message.value);
   },
   toProto(message: FieldMask): Uint8Array {
     return FieldMask.encode(message).finish();

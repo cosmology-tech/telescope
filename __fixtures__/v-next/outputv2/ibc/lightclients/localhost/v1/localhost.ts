@@ -56,7 +56,7 @@ export const ClientState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ClientState {
+  decode(input: BinaryReader | Uint8Array, length?: number): ClientState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClientState();
@@ -67,7 +67,7 @@ export const ClientState = {
           message.chainId = reader.string();
           break;
         case 2:
-          message.height = Height.decode(reader, reader.uint32(), useInterfaces);
+          message.height = Height.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -114,23 +114,23 @@ export const ClientState = {
       height: object?.height ? Height.fromAmino(object.height) : undefined
     };
   },
-  toAmino(message: ClientState, useInterfaces: boolean = true): ClientStateAmino {
+  toAmino(message: ClientState): ClientStateAmino {
     const obj: any = {};
     obj.chain_id = message.chainId;
-    obj.height = message.height ? Height.toAmino(message.height, useInterfaces) : {};
+    obj.height = message.height ? Height.toAmino(message.height) : {};
     return obj;
   },
   fromAminoMsg(object: ClientStateAminoMsg): ClientState {
     return ClientState.fromAmino(object.value);
   },
-  toAminoMsg(message: ClientState, useInterfaces: boolean = true): ClientStateAminoMsg {
+  toAminoMsg(message: ClientState): ClientStateAminoMsg {
     return {
       type: "cosmos-sdk/ClientState",
-      value: ClientState.toAmino(message, useInterfaces)
+      value: ClientState.toAmino(message)
     };
   },
-  fromProtoMsg(message: ClientStateProtoMsg, useInterfaces: boolean = true): ClientState {
-    return ClientState.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ClientStateProtoMsg): ClientState {
+    return ClientState.decode(message.value);
   },
   toProto(message: ClientState): Uint8Array {
     return ClientState.encode(message).finish();

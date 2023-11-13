@@ -271,7 +271,7 @@ export const MsgCreateClient = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateClient {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateClient {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateClient();
@@ -279,10 +279,10 @@ export const MsgCreateClient = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.clientState = Any.decode(reader, reader.uint32(), useInterfaces);
+          message.clientState = Any.decode(reader, reader.uint32());
           break;
         case 2:
-          message.consensusState = Any.decode(reader, reader.uint32(), useInterfaces);
+          message.consensusState = Any.decode(reader, reader.uint32());
           break;
         case 3:
           message.signer = reader.string();
@@ -340,24 +340,24 @@ export const MsgCreateClient = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgCreateClient, useInterfaces: boolean = true): MsgCreateClientAmino {
+  toAmino(message: MsgCreateClient): MsgCreateClientAmino {
     const obj: any = {};
-    obj.client_state = message.clientState ? Any.toAmino(message.clientState, useInterfaces) : undefined;
-    obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState, useInterfaces) : undefined;
+    obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
+    obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
     obj.signer = message.signer;
     return obj;
   },
   fromAminoMsg(object: MsgCreateClientAminoMsg): MsgCreateClient {
     return MsgCreateClient.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreateClient, useInterfaces: boolean = true): MsgCreateClientAminoMsg {
+  toAminoMsg(message: MsgCreateClient): MsgCreateClientAminoMsg {
     return {
       type: "cosmos-sdk/MsgCreateClient",
-      value: MsgCreateClient.toAmino(message, useInterfaces)
+      value: MsgCreateClient.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgCreateClientProtoMsg, useInterfaces: boolean = true): MsgCreateClient {
-    return MsgCreateClient.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgCreateClientProtoMsg): MsgCreateClient {
+    return MsgCreateClient.decode(message.value);
   },
   toProto(message: MsgCreateClient): Uint8Array {
     return MsgCreateClient.encode(message).finish();
@@ -378,7 +378,7 @@ export const MsgCreateClientResponse = {
   encode(_: MsgCreateClientResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateClientResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateClientResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateClientResponse();
@@ -414,21 +414,21 @@ export const MsgCreateClientResponse = {
   fromAmino(_: MsgCreateClientResponseAmino): MsgCreateClientResponse {
     return {};
   },
-  toAmino(_: MsgCreateClientResponse, useInterfaces: boolean = true): MsgCreateClientResponseAmino {
+  toAmino(_: MsgCreateClientResponse): MsgCreateClientResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgCreateClientResponseAminoMsg): MsgCreateClientResponse {
     return MsgCreateClientResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgCreateClientResponse, useInterfaces: boolean = true): MsgCreateClientResponseAminoMsg {
+  toAminoMsg(message: MsgCreateClientResponse): MsgCreateClientResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgCreateClientResponse",
-      value: MsgCreateClientResponse.toAmino(message, useInterfaces)
+      value: MsgCreateClientResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgCreateClientResponseProtoMsg, useInterfaces: boolean = true): MsgCreateClientResponse {
-    return MsgCreateClientResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgCreateClientResponseProtoMsg): MsgCreateClientResponse {
+    return MsgCreateClientResponse.decode(message.value);
   },
   toProto(message: MsgCreateClientResponse): Uint8Array {
     return MsgCreateClientResponse.encode(message).finish();
@@ -462,7 +462,7 @@ export const MsgUpdateClient = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateClient {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateClient {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateClient();
@@ -473,7 +473,7 @@ export const MsgUpdateClient = {
           message.clientId = reader.string();
           break;
         case 2:
-          message.header = Any.decode(reader, reader.uint32(), useInterfaces);
+          message.header = Any.decode(reader, reader.uint32());
           break;
         case 3:
           message.signer = reader.string();
@@ -529,24 +529,24 @@ export const MsgUpdateClient = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgUpdateClient, useInterfaces: boolean = true): MsgUpdateClientAmino {
+  toAmino(message: MsgUpdateClient): MsgUpdateClientAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
-    obj.header = message.header ? Any.toAmino(message.header, useInterfaces) : undefined;
+    obj.header = message.header ? Any.toAmino(message.header) : undefined;
     obj.signer = message.signer;
     return obj;
   },
   fromAminoMsg(object: MsgUpdateClientAminoMsg): MsgUpdateClient {
     return MsgUpdateClient.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUpdateClient, useInterfaces: boolean = true): MsgUpdateClientAminoMsg {
+  toAminoMsg(message: MsgUpdateClient): MsgUpdateClientAminoMsg {
     return {
       type: "cosmos-sdk/MsgUpdateClient",
-      value: MsgUpdateClient.toAmino(message, useInterfaces)
+      value: MsgUpdateClient.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgUpdateClientProtoMsg, useInterfaces: boolean = true): MsgUpdateClient {
-    return MsgUpdateClient.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgUpdateClientProtoMsg): MsgUpdateClient {
+    return MsgUpdateClient.decode(message.value);
   },
   toProto(message: MsgUpdateClient): Uint8Array {
     return MsgUpdateClient.encode(message).finish();
@@ -567,7 +567,7 @@ export const MsgUpdateClientResponse = {
   encode(_: MsgUpdateClientResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateClientResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateClientResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateClientResponse();
@@ -603,21 +603,21 @@ export const MsgUpdateClientResponse = {
   fromAmino(_: MsgUpdateClientResponseAmino): MsgUpdateClientResponse {
     return {};
   },
-  toAmino(_: MsgUpdateClientResponse, useInterfaces: boolean = true): MsgUpdateClientResponseAmino {
+  toAmino(_: MsgUpdateClientResponse): MsgUpdateClientResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgUpdateClientResponseAminoMsg): MsgUpdateClientResponse {
     return MsgUpdateClientResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUpdateClientResponse, useInterfaces: boolean = true): MsgUpdateClientResponseAminoMsg {
+  toAminoMsg(message: MsgUpdateClientResponse): MsgUpdateClientResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgUpdateClientResponse",
-      value: MsgUpdateClientResponse.toAmino(message, useInterfaces)
+      value: MsgUpdateClientResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgUpdateClientResponseProtoMsg, useInterfaces: boolean = true): MsgUpdateClientResponse {
-    return MsgUpdateClientResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgUpdateClientResponseProtoMsg): MsgUpdateClientResponse {
+    return MsgUpdateClientResponse.decode(message.value);
   },
   toProto(message: MsgUpdateClientResponse): Uint8Array {
     return MsgUpdateClientResponse.encode(message).finish();
@@ -663,7 +663,7 @@ export const MsgUpgradeClient = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpgradeClient {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpgradeClient {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpgradeClient();
@@ -674,10 +674,10 @@ export const MsgUpgradeClient = {
           message.clientId = reader.string();
           break;
         case 2:
-          message.clientState = Any.decode(reader, reader.uint32(), useInterfaces);
+          message.clientState = Any.decode(reader, reader.uint32());
           break;
         case 3:
-          message.consensusState = Any.decode(reader, reader.uint32(), useInterfaces);
+          message.consensusState = Any.decode(reader, reader.uint32());
           break;
         case 4:
           message.proofUpgradeClient = reader.bytes();
@@ -759,11 +759,11 @@ export const MsgUpgradeClient = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgUpgradeClient, useInterfaces: boolean = true): MsgUpgradeClientAmino {
+  toAmino(message: MsgUpgradeClient): MsgUpgradeClientAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
-    obj.client_state = message.clientState ? Any.toAmino(message.clientState, useInterfaces) : undefined;
-    obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState, useInterfaces) : undefined;
+    obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
+    obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
     obj.proof_upgrade_client = message.proofUpgradeClient;
     obj.proof_upgrade_consensus_state = message.proofUpgradeConsensusState;
     obj.signer = message.signer;
@@ -772,14 +772,14 @@ export const MsgUpgradeClient = {
   fromAminoMsg(object: MsgUpgradeClientAminoMsg): MsgUpgradeClient {
     return MsgUpgradeClient.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUpgradeClient, useInterfaces: boolean = true): MsgUpgradeClientAminoMsg {
+  toAminoMsg(message: MsgUpgradeClient): MsgUpgradeClientAminoMsg {
     return {
       type: "cosmos-sdk/MsgUpgradeClient",
-      value: MsgUpgradeClient.toAmino(message, useInterfaces)
+      value: MsgUpgradeClient.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgUpgradeClientProtoMsg, useInterfaces: boolean = true): MsgUpgradeClient {
-    return MsgUpgradeClient.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgUpgradeClientProtoMsg): MsgUpgradeClient {
+    return MsgUpgradeClient.decode(message.value);
   },
   toProto(message: MsgUpgradeClient): Uint8Array {
     return MsgUpgradeClient.encode(message).finish();
@@ -800,7 +800,7 @@ export const MsgUpgradeClientResponse = {
   encode(_: MsgUpgradeClientResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpgradeClientResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpgradeClientResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpgradeClientResponse();
@@ -836,21 +836,21 @@ export const MsgUpgradeClientResponse = {
   fromAmino(_: MsgUpgradeClientResponseAmino): MsgUpgradeClientResponse {
     return {};
   },
-  toAmino(_: MsgUpgradeClientResponse, useInterfaces: boolean = true): MsgUpgradeClientResponseAmino {
+  toAmino(_: MsgUpgradeClientResponse): MsgUpgradeClientResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgUpgradeClientResponseAminoMsg): MsgUpgradeClientResponse {
     return MsgUpgradeClientResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgUpgradeClientResponse, useInterfaces: boolean = true): MsgUpgradeClientResponseAminoMsg {
+  toAminoMsg(message: MsgUpgradeClientResponse): MsgUpgradeClientResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgUpgradeClientResponse",
-      value: MsgUpgradeClientResponse.toAmino(message, useInterfaces)
+      value: MsgUpgradeClientResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgUpgradeClientResponseProtoMsg, useInterfaces: boolean = true): MsgUpgradeClientResponse {
-    return MsgUpgradeClientResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgUpgradeClientResponseProtoMsg): MsgUpgradeClientResponse {
+    return MsgUpgradeClientResponse.decode(message.value);
   },
   toProto(message: MsgUpgradeClientResponse): Uint8Array {
     return MsgUpgradeClientResponse.encode(message).finish();
@@ -884,7 +884,7 @@ export const MsgSubmitMisbehaviour = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSubmitMisbehaviour {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSubmitMisbehaviour {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitMisbehaviour();
@@ -895,7 +895,7 @@ export const MsgSubmitMisbehaviour = {
           message.clientId = reader.string();
           break;
         case 2:
-          message.misbehaviour = Any.decode(reader, reader.uint32(), useInterfaces);
+          message.misbehaviour = Any.decode(reader, reader.uint32());
           break;
         case 3:
           message.signer = reader.string();
@@ -951,24 +951,24 @@ export const MsgSubmitMisbehaviour = {
       signer: object.signer
     };
   },
-  toAmino(message: MsgSubmitMisbehaviour, useInterfaces: boolean = true): MsgSubmitMisbehaviourAmino {
+  toAmino(message: MsgSubmitMisbehaviour): MsgSubmitMisbehaviourAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
-    obj.misbehaviour = message.misbehaviour ? Any.toAmino(message.misbehaviour, useInterfaces) : undefined;
+    obj.misbehaviour = message.misbehaviour ? Any.toAmino(message.misbehaviour) : undefined;
     obj.signer = message.signer;
     return obj;
   },
   fromAminoMsg(object: MsgSubmitMisbehaviourAminoMsg): MsgSubmitMisbehaviour {
     return MsgSubmitMisbehaviour.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgSubmitMisbehaviour, useInterfaces: boolean = true): MsgSubmitMisbehaviourAminoMsg {
+  toAminoMsg(message: MsgSubmitMisbehaviour): MsgSubmitMisbehaviourAminoMsg {
     return {
       type: "cosmos-sdk/MsgSubmitMisbehaviour",
-      value: MsgSubmitMisbehaviour.toAmino(message, useInterfaces)
+      value: MsgSubmitMisbehaviour.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgSubmitMisbehaviourProtoMsg, useInterfaces: boolean = true): MsgSubmitMisbehaviour {
-    return MsgSubmitMisbehaviour.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgSubmitMisbehaviourProtoMsg): MsgSubmitMisbehaviour {
+    return MsgSubmitMisbehaviour.decode(message.value);
   },
   toProto(message: MsgSubmitMisbehaviour): Uint8Array {
     return MsgSubmitMisbehaviour.encode(message).finish();
@@ -989,7 +989,7 @@ export const MsgSubmitMisbehaviourResponse = {
   encode(_: MsgSubmitMisbehaviourResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSubmitMisbehaviourResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSubmitMisbehaviourResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitMisbehaviourResponse();
@@ -1025,21 +1025,21 @@ export const MsgSubmitMisbehaviourResponse = {
   fromAmino(_: MsgSubmitMisbehaviourResponseAmino): MsgSubmitMisbehaviourResponse {
     return {};
   },
-  toAmino(_: MsgSubmitMisbehaviourResponse, useInterfaces: boolean = true): MsgSubmitMisbehaviourResponseAmino {
+  toAmino(_: MsgSubmitMisbehaviourResponse): MsgSubmitMisbehaviourResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgSubmitMisbehaviourResponseAminoMsg): MsgSubmitMisbehaviourResponse {
     return MsgSubmitMisbehaviourResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgSubmitMisbehaviourResponse, useInterfaces: boolean = true): MsgSubmitMisbehaviourResponseAminoMsg {
+  toAminoMsg(message: MsgSubmitMisbehaviourResponse): MsgSubmitMisbehaviourResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgSubmitMisbehaviourResponse",
-      value: MsgSubmitMisbehaviourResponse.toAmino(message, useInterfaces)
+      value: MsgSubmitMisbehaviourResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgSubmitMisbehaviourResponseProtoMsg, useInterfaces: boolean = true): MsgSubmitMisbehaviourResponse {
-    return MsgSubmitMisbehaviourResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgSubmitMisbehaviourResponseProtoMsg): MsgSubmitMisbehaviourResponse {
+    return MsgSubmitMisbehaviourResponse.decode(message.value);
   },
   toProto(message: MsgSubmitMisbehaviourResponse): Uint8Array {
     return MsgSubmitMisbehaviourResponse.encode(message).finish();

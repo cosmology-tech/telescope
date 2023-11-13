@@ -42,7 +42,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -50,10 +50,10 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.accounts.push(Account.decode(reader, reader.uint32(), useInterfaces));
+          message.accounts.push(Account.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.payments.push(FractionalPayment.decode(reader, reader.uint32(), useInterfaces));
+          message.payments.push(FractionalPayment.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -114,15 +114,15 @@ export const GenesisState = {
       payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => FractionalPayment.fromAmino(e)) : []
     };
   },
-  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
+  toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
     if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? Account.toAmino(e, useInterfaces) : undefined);
+      obj.accounts = message.accounts.map(e => e ? Account.toAmino(e) : undefined);
     } else {
       obj.accounts = [];
     }
     if (message.payments) {
-      obj.payments = message.payments.map(e => e ? FractionalPayment.toAmino(e, useInterfaces) : undefined);
+      obj.payments = message.payments.map(e => e ? FractionalPayment.toAmino(e) : undefined);
     } else {
       obj.payments = [];
     }
@@ -131,8 +131,8 @@ export const GenesisState = {
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
   },
-  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
-    return GenesisState.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();

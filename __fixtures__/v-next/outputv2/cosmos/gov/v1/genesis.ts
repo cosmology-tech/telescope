@@ -92,7 +92,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -103,22 +103,22 @@ export const GenesisState = {
           message.startingProposalId = reader.uint64();
           break;
         case 2:
-          message.deposits.push(Deposit.decode(reader, reader.uint32(), useInterfaces));
+          message.deposits.push(Deposit.decode(reader, reader.uint32()));
           break;
         case 3:
-          message.votes.push(Vote.decode(reader, reader.uint32(), useInterfaces));
+          message.votes.push(Vote.decode(reader, reader.uint32()));
           break;
         case 4:
-          message.proposals.push(Proposal.decode(reader, reader.uint32(), useInterfaces));
+          message.proposals.push(Proposal.decode(reader, reader.uint32()));
           break;
         case 5:
-          message.depositParams = DepositParams.decode(reader, reader.uint32(), useInterfaces);
+          message.depositParams = DepositParams.decode(reader, reader.uint32());
           break;
         case 6:
-          message.votingParams = VotingParams.decode(reader, reader.uint32(), useInterfaces);
+          message.votingParams = VotingParams.decode(reader, reader.uint32());
           break;
         case 7:
-          message.tallyParams = TallyParams.decode(reader, reader.uint32(), useInterfaces);
+          message.tallyParams = TallyParams.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -225,40 +225,40 @@ export const GenesisState = {
       tallyParams: object?.tally_params ? TallyParams.fromAmino(object.tally_params) : undefined
     };
   },
-  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
+  toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
     obj.starting_proposal_id = message.startingProposalId ? message.startingProposalId.toString() : undefined;
     if (message.deposits) {
-      obj.deposits = message.deposits.map(e => e ? Deposit.toAmino(e, useInterfaces) : undefined);
+      obj.deposits = message.deposits.map(e => e ? Deposit.toAmino(e) : undefined);
     } else {
       obj.deposits = [];
     }
     if (message.votes) {
-      obj.votes = message.votes.map(e => e ? Vote.toAmino(e, useInterfaces) : undefined);
+      obj.votes = message.votes.map(e => e ? Vote.toAmino(e) : undefined);
     } else {
       obj.votes = [];
     }
     if (message.proposals) {
-      obj.proposals = message.proposals.map(e => e ? Proposal.toAmino(e, useInterfaces) : undefined);
+      obj.proposals = message.proposals.map(e => e ? Proposal.toAmino(e) : undefined);
     } else {
       obj.proposals = [];
     }
-    obj.deposit_params = message.depositParams ? DepositParams.toAmino(message.depositParams, useInterfaces) : undefined;
-    obj.voting_params = message.votingParams ? VotingParams.toAmino(message.votingParams, useInterfaces) : undefined;
-    obj.tally_params = message.tallyParams ? TallyParams.toAmino(message.tallyParams, useInterfaces) : undefined;
+    obj.deposit_params = message.depositParams ? DepositParams.toAmino(message.depositParams) : undefined;
+    obj.voting_params = message.votingParams ? VotingParams.toAmino(message.votingParams) : undefined;
+    obj.tally_params = message.tallyParams ? TallyParams.toAmino(message.tallyParams) : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
   },
-  toAminoMsg(message: GenesisState, useInterfaces: boolean = true): GenesisStateAminoMsg {
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
     return {
       type: "cosmos-sdk/v1/GenesisState",
-      value: GenesisState.toAmino(message, useInterfaces)
+      value: GenesisState.toAmino(message)
     };
   },
-  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
-    return GenesisState.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();

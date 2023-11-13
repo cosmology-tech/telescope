@@ -80,7 +80,7 @@ export const GenesisOwners = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisOwners {
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisOwners {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisOwners();
@@ -91,7 +91,7 @@ export const GenesisOwners = {
           message.index = reader.uint64();
           break;
         case 2:
-          message.indexOwners = CapabilityOwners.decode(reader, reader.uint32(), useInterfaces);
+          message.indexOwners = CapabilityOwners.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -140,23 +140,23 @@ export const GenesisOwners = {
       indexOwners: object?.index_owners ? CapabilityOwners.fromAmino(object.index_owners) : undefined
     };
   },
-  toAmino(message: GenesisOwners, useInterfaces: boolean = true): GenesisOwnersAmino {
+  toAmino(message: GenesisOwners): GenesisOwnersAmino {
     const obj: any = {};
     obj.index = message.index ? message.index.toString() : undefined;
-    obj.index_owners = message.indexOwners ? CapabilityOwners.toAmino(message.indexOwners, useInterfaces) : undefined;
+    obj.index_owners = message.indexOwners ? CapabilityOwners.toAmino(message.indexOwners) : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisOwnersAminoMsg): GenesisOwners {
     return GenesisOwners.fromAmino(object.value);
   },
-  toAminoMsg(message: GenesisOwners, useInterfaces: boolean = true): GenesisOwnersAminoMsg {
+  toAminoMsg(message: GenesisOwners): GenesisOwnersAminoMsg {
     return {
       type: "cosmos-sdk/GenesisOwners",
-      value: GenesisOwners.toAmino(message, useInterfaces)
+      value: GenesisOwners.toAmino(message)
     };
   },
-  fromProtoMsg(message: GenesisOwnersProtoMsg, useInterfaces: boolean = true): GenesisOwners {
-    return GenesisOwners.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: GenesisOwnersProtoMsg): GenesisOwners {
+    return GenesisOwners.decode(message.value);
   },
   toProto(message: GenesisOwners): Uint8Array {
     return GenesisOwners.encode(message).finish();
@@ -186,7 +186,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -197,7 +197,7 @@ export const GenesisState = {
           message.index = reader.uint64();
           break;
         case 2:
-          message.owners.push(GenesisOwners.decode(reader, reader.uint32(), useInterfaces));
+          message.owners.push(GenesisOwners.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -252,11 +252,11 @@ export const GenesisState = {
       owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromAmino(e)) : []
     };
   },
-  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
+  toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
     obj.index = message.index ? message.index.toString() : undefined;
     if (message.owners) {
-      obj.owners = message.owners.map(e => e ? GenesisOwners.toAmino(e, useInterfaces) : undefined);
+      obj.owners = message.owners.map(e => e ? GenesisOwners.toAmino(e) : undefined);
     } else {
       obj.owners = [];
     }
@@ -265,14 +265,14 @@ export const GenesisState = {
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
   },
-  toAminoMsg(message: GenesisState, useInterfaces: boolean = true): GenesisStateAminoMsg {
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
     return {
       type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message, useInterfaces)
+      value: GenesisState.toAmino(message)
     };
   },
-  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
-    return GenesisState.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();

@@ -592,7 +592,7 @@ export const QueryParamsRequest = {
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -628,21 +628,21 @@ export const QueryParamsRequest = {
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
-  toAmino(_: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
     return QueryParamsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAminoMsg {
+  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
     return {
       type: "osmosis/query-params-request",
-      value: QueryParamsRequest.toAmino(message, useInterfaces)
+      value: QueryParamsRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = true): QueryParamsRequest {
-    return QueryParamsRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value);
   },
   toProto(message: QueryParamsRequest): Uint8Array {
     return QueryParamsRequest.encode(message).finish();
@@ -668,7 +668,7 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -676,7 +676,7 @@ export const QueryParamsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
+          message.params = Params.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -717,22 +717,22 @@ export const QueryParamsResponse = {
       params: object?.params ? Params.fromAmino(object.params) : undefined
     };
   },
-  toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
     return QueryParamsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAminoMsg {
+  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
     return {
       type: "osmosis/query-params-response",
-      value: QueryParamsResponse.toAmino(message, useInterfaces)
+      value: QueryParamsResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = true): QueryParamsResponse {
-    return QueryParamsResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value);
   },
   toProto(message: QueryParamsResponse): Uint8Array {
     return QueryParamsResponse.encode(message).finish();
@@ -758,7 +758,7 @@ export const AssetTypeRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AssetTypeRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): AssetTypeRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAssetTypeRequest();
@@ -805,7 +805,7 @@ export const AssetTypeRequest = {
       denom: object.denom
     };
   },
-  toAmino(message: AssetTypeRequest, useInterfaces: boolean = true): AssetTypeRequestAmino {
+  toAmino(message: AssetTypeRequest): AssetTypeRequestAmino {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
@@ -813,14 +813,14 @@ export const AssetTypeRequest = {
   fromAminoMsg(object: AssetTypeRequestAminoMsg): AssetTypeRequest {
     return AssetTypeRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: AssetTypeRequest, useInterfaces: boolean = true): AssetTypeRequestAminoMsg {
+  toAminoMsg(message: AssetTypeRequest): AssetTypeRequestAminoMsg {
     return {
       type: "osmosis/asset-type-request",
-      value: AssetTypeRequest.toAmino(message, useInterfaces)
+      value: AssetTypeRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: AssetTypeRequestProtoMsg, useInterfaces: boolean = true): AssetTypeRequest {
-    return AssetTypeRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AssetTypeRequestProtoMsg): AssetTypeRequest {
+    return AssetTypeRequest.decode(message.value);
   },
   toProto(message: AssetTypeRequest): Uint8Array {
     return AssetTypeRequest.encode(message).finish();
@@ -846,7 +846,7 @@ export const AssetTypeResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AssetTypeResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): AssetTypeResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAssetTypeResponse();
@@ -893,7 +893,7 @@ export const AssetTypeResponse = {
       assetType: isSet(object.asset_type) ? superfluidAssetTypeFromJSON(object.asset_type) : -1
     };
   },
-  toAmino(message: AssetTypeResponse, useInterfaces: boolean = true): AssetTypeResponseAmino {
+  toAmino(message: AssetTypeResponse): AssetTypeResponseAmino {
     const obj: any = {};
     obj.asset_type = message.assetType;
     return obj;
@@ -901,14 +901,14 @@ export const AssetTypeResponse = {
   fromAminoMsg(object: AssetTypeResponseAminoMsg): AssetTypeResponse {
     return AssetTypeResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: AssetTypeResponse, useInterfaces: boolean = true): AssetTypeResponseAminoMsg {
+  toAminoMsg(message: AssetTypeResponse): AssetTypeResponseAminoMsg {
     return {
       type: "osmosis/asset-type-response",
-      value: AssetTypeResponse.toAmino(message, useInterfaces)
+      value: AssetTypeResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: AssetTypeResponseProtoMsg, useInterfaces: boolean = true): AssetTypeResponse {
-    return AssetTypeResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AssetTypeResponseProtoMsg): AssetTypeResponse {
+    return AssetTypeResponse.decode(message.value);
   },
   toProto(message: AssetTypeResponse): Uint8Array {
     return AssetTypeResponse.encode(message).finish();
@@ -929,7 +929,7 @@ export const AllAssetsRequest = {
   encode(_: AllAssetsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AllAssetsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): AllAssetsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllAssetsRequest();
@@ -965,21 +965,21 @@ export const AllAssetsRequest = {
   fromAmino(_: AllAssetsRequestAmino): AllAssetsRequest {
     return {};
   },
-  toAmino(_: AllAssetsRequest, useInterfaces: boolean = true): AllAssetsRequestAmino {
+  toAmino(_: AllAssetsRequest): AllAssetsRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: AllAssetsRequestAminoMsg): AllAssetsRequest {
     return AllAssetsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: AllAssetsRequest, useInterfaces: boolean = true): AllAssetsRequestAminoMsg {
+  toAminoMsg(message: AllAssetsRequest): AllAssetsRequestAminoMsg {
     return {
       type: "osmosis/all-assets-request",
-      value: AllAssetsRequest.toAmino(message, useInterfaces)
+      value: AllAssetsRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: AllAssetsRequestProtoMsg, useInterfaces: boolean = true): AllAssetsRequest {
-    return AllAssetsRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AllAssetsRequestProtoMsg): AllAssetsRequest {
+    return AllAssetsRequest.decode(message.value);
   },
   toProto(message: AllAssetsRequest): Uint8Array {
     return AllAssetsRequest.encode(message).finish();
@@ -1005,7 +1005,7 @@ export const AllAssetsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AllAssetsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): AllAssetsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllAssetsResponse();
@@ -1013,7 +1013,7 @@ export const AllAssetsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.assets.push(SuperfluidAsset.decode(reader, reader.uint32(), useInterfaces));
+          message.assets.push(SuperfluidAsset.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1060,10 +1060,10 @@ export const AllAssetsResponse = {
       assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => SuperfluidAsset.fromAmino(e)) : []
     };
   },
-  toAmino(message: AllAssetsResponse, useInterfaces: boolean = true): AllAssetsResponseAmino {
+  toAmino(message: AllAssetsResponse): AllAssetsResponseAmino {
     const obj: any = {};
     if (message.assets) {
-      obj.assets = message.assets.map(e => e ? SuperfluidAsset.toAmino(e, useInterfaces) : undefined);
+      obj.assets = message.assets.map(e => e ? SuperfluidAsset.toAmino(e) : undefined);
     } else {
       obj.assets = [];
     }
@@ -1072,14 +1072,14 @@ export const AllAssetsResponse = {
   fromAminoMsg(object: AllAssetsResponseAminoMsg): AllAssetsResponse {
     return AllAssetsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: AllAssetsResponse, useInterfaces: boolean = true): AllAssetsResponseAminoMsg {
+  toAminoMsg(message: AllAssetsResponse): AllAssetsResponseAminoMsg {
     return {
       type: "osmosis/all-assets-response",
-      value: AllAssetsResponse.toAmino(message, useInterfaces)
+      value: AllAssetsResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: AllAssetsResponseProtoMsg, useInterfaces: boolean = true): AllAssetsResponse {
-    return AllAssetsResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AllAssetsResponseProtoMsg): AllAssetsResponse {
+    return AllAssetsResponse.decode(message.value);
   },
   toProto(message: AllAssetsResponse): Uint8Array {
     return AllAssetsResponse.encode(message).finish();
@@ -1105,7 +1105,7 @@ export const AssetMultiplierRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AssetMultiplierRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): AssetMultiplierRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAssetMultiplierRequest();
@@ -1152,7 +1152,7 @@ export const AssetMultiplierRequest = {
       denom: object.denom
     };
   },
-  toAmino(message: AssetMultiplierRequest, useInterfaces: boolean = true): AssetMultiplierRequestAmino {
+  toAmino(message: AssetMultiplierRequest): AssetMultiplierRequestAmino {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
@@ -1160,14 +1160,14 @@ export const AssetMultiplierRequest = {
   fromAminoMsg(object: AssetMultiplierRequestAminoMsg): AssetMultiplierRequest {
     return AssetMultiplierRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: AssetMultiplierRequest, useInterfaces: boolean = true): AssetMultiplierRequestAminoMsg {
+  toAminoMsg(message: AssetMultiplierRequest): AssetMultiplierRequestAminoMsg {
     return {
       type: "osmosis/asset-multiplier-request",
-      value: AssetMultiplierRequest.toAmino(message, useInterfaces)
+      value: AssetMultiplierRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: AssetMultiplierRequestProtoMsg, useInterfaces: boolean = true): AssetMultiplierRequest {
-    return AssetMultiplierRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AssetMultiplierRequestProtoMsg): AssetMultiplierRequest {
+    return AssetMultiplierRequest.decode(message.value);
   },
   toProto(message: AssetMultiplierRequest): Uint8Array {
     return AssetMultiplierRequest.encode(message).finish();
@@ -1193,7 +1193,7 @@ export const AssetMultiplierResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AssetMultiplierResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): AssetMultiplierResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAssetMultiplierResponse();
@@ -1201,7 +1201,7 @@ export const AssetMultiplierResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.osmoEquivalentMultiplier = OsmoEquivalentMultiplierRecord.decode(reader, reader.uint32(), useInterfaces);
+          message.osmoEquivalentMultiplier = OsmoEquivalentMultiplierRecord.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1242,22 +1242,22 @@ export const AssetMultiplierResponse = {
       osmoEquivalentMultiplier: object?.osmo_equivalent_multiplier ? OsmoEquivalentMultiplierRecord.fromAmino(object.osmo_equivalent_multiplier) : undefined
     };
   },
-  toAmino(message: AssetMultiplierResponse, useInterfaces: boolean = true): AssetMultiplierResponseAmino {
+  toAmino(message: AssetMultiplierResponse): AssetMultiplierResponseAmino {
     const obj: any = {};
-    obj.osmo_equivalent_multiplier = message.osmoEquivalentMultiplier ? OsmoEquivalentMultiplierRecord.toAmino(message.osmoEquivalentMultiplier, useInterfaces) : undefined;
+    obj.osmo_equivalent_multiplier = message.osmoEquivalentMultiplier ? OsmoEquivalentMultiplierRecord.toAmino(message.osmoEquivalentMultiplier) : undefined;
     return obj;
   },
   fromAminoMsg(object: AssetMultiplierResponseAminoMsg): AssetMultiplierResponse {
     return AssetMultiplierResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: AssetMultiplierResponse, useInterfaces: boolean = true): AssetMultiplierResponseAminoMsg {
+  toAminoMsg(message: AssetMultiplierResponse): AssetMultiplierResponseAminoMsg {
     return {
       type: "osmosis/asset-multiplier-response",
-      value: AssetMultiplierResponse.toAmino(message, useInterfaces)
+      value: AssetMultiplierResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: AssetMultiplierResponseProtoMsg, useInterfaces: boolean = true): AssetMultiplierResponse {
-    return AssetMultiplierResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AssetMultiplierResponseProtoMsg): AssetMultiplierResponse {
+    return AssetMultiplierResponse.decode(message.value);
   },
   toProto(message: AssetMultiplierResponse): Uint8Array {
     return AssetMultiplierResponse.encode(message).finish();
@@ -1295,7 +1295,7 @@ export const SuperfluidIntermediaryAccountInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SuperfluidIntermediaryAccountInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number): SuperfluidIntermediaryAccountInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidIntermediaryAccountInfo();
@@ -1371,7 +1371,7 @@ export const SuperfluidIntermediaryAccountInfo = {
       address: object.address
     };
   },
-  toAmino(message: SuperfluidIntermediaryAccountInfo, useInterfaces: boolean = true): SuperfluidIntermediaryAccountInfoAmino {
+  toAmino(message: SuperfluidIntermediaryAccountInfo): SuperfluidIntermediaryAccountInfoAmino {
     const obj: any = {};
     obj.denom = message.denom;
     obj.val_addr = message.valAddr;
@@ -1382,14 +1382,14 @@ export const SuperfluidIntermediaryAccountInfo = {
   fromAminoMsg(object: SuperfluidIntermediaryAccountInfoAminoMsg): SuperfluidIntermediaryAccountInfo {
     return SuperfluidIntermediaryAccountInfo.fromAmino(object.value);
   },
-  toAminoMsg(message: SuperfluidIntermediaryAccountInfo, useInterfaces: boolean = true): SuperfluidIntermediaryAccountInfoAminoMsg {
+  toAminoMsg(message: SuperfluidIntermediaryAccountInfo): SuperfluidIntermediaryAccountInfoAminoMsg {
     return {
       type: "osmosis/superfluid-intermediary-account-info",
-      value: SuperfluidIntermediaryAccountInfo.toAmino(message, useInterfaces)
+      value: SuperfluidIntermediaryAccountInfo.toAmino(message)
     };
   },
-  fromProtoMsg(message: SuperfluidIntermediaryAccountInfoProtoMsg, useInterfaces: boolean = true): SuperfluidIntermediaryAccountInfo {
-    return SuperfluidIntermediaryAccountInfo.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: SuperfluidIntermediaryAccountInfoProtoMsg): SuperfluidIntermediaryAccountInfo {
+    return SuperfluidIntermediaryAccountInfo.decode(message.value);
   },
   toProto(message: SuperfluidIntermediaryAccountInfo): Uint8Array {
     return SuperfluidIntermediaryAccountInfo.encode(message).finish();
@@ -1415,7 +1415,7 @@ export const AllIntermediaryAccountsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AllIntermediaryAccountsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): AllIntermediaryAccountsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllIntermediaryAccountsRequest();
@@ -1423,7 +1423,7 @@ export const AllIntermediaryAccountsRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1464,22 +1464,22 @@ export const AllIntermediaryAccountsRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: AllIntermediaryAccountsRequest, useInterfaces: boolean = true): AllIntermediaryAccountsRequestAmino {
+  toAmino(message: AllIntermediaryAccountsRequest): AllIntermediaryAccountsRequestAmino {
     const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: AllIntermediaryAccountsRequestAminoMsg): AllIntermediaryAccountsRequest {
     return AllIntermediaryAccountsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: AllIntermediaryAccountsRequest, useInterfaces: boolean = true): AllIntermediaryAccountsRequestAminoMsg {
+  toAminoMsg(message: AllIntermediaryAccountsRequest): AllIntermediaryAccountsRequestAminoMsg {
     return {
       type: "osmosis/all-intermediary-accounts-request",
-      value: AllIntermediaryAccountsRequest.toAmino(message, useInterfaces)
+      value: AllIntermediaryAccountsRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: AllIntermediaryAccountsRequestProtoMsg, useInterfaces: boolean = true): AllIntermediaryAccountsRequest {
-    return AllIntermediaryAccountsRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AllIntermediaryAccountsRequestProtoMsg): AllIntermediaryAccountsRequest {
+    return AllIntermediaryAccountsRequest.decode(message.value);
   },
   toProto(message: AllIntermediaryAccountsRequest): Uint8Array {
     return AllIntermediaryAccountsRequest.encode(message).finish();
@@ -1509,7 +1509,7 @@ export const AllIntermediaryAccountsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AllIntermediaryAccountsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): AllIntermediaryAccountsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllIntermediaryAccountsResponse();
@@ -1517,10 +1517,10 @@ export const AllIntermediaryAccountsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.accounts.push(SuperfluidIntermediaryAccountInfo.decode(reader, reader.uint32(), useInterfaces));
+          message.accounts.push(SuperfluidIntermediaryAccountInfo.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1575,27 +1575,27 @@ export const AllIntermediaryAccountsResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: AllIntermediaryAccountsResponse, useInterfaces: boolean = true): AllIntermediaryAccountsResponseAmino {
+  toAmino(message: AllIntermediaryAccountsResponse): AllIntermediaryAccountsResponseAmino {
     const obj: any = {};
     if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? SuperfluidIntermediaryAccountInfo.toAmino(e, useInterfaces) : undefined);
+      obj.accounts = message.accounts.map(e => e ? SuperfluidIntermediaryAccountInfo.toAmino(e) : undefined);
     } else {
       obj.accounts = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: AllIntermediaryAccountsResponseAminoMsg): AllIntermediaryAccountsResponse {
     return AllIntermediaryAccountsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: AllIntermediaryAccountsResponse, useInterfaces: boolean = true): AllIntermediaryAccountsResponseAminoMsg {
+  toAminoMsg(message: AllIntermediaryAccountsResponse): AllIntermediaryAccountsResponseAminoMsg {
     return {
       type: "osmosis/all-intermediary-accounts-response",
-      value: AllIntermediaryAccountsResponse.toAmino(message, useInterfaces)
+      value: AllIntermediaryAccountsResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: AllIntermediaryAccountsResponseProtoMsg, useInterfaces: boolean = true): AllIntermediaryAccountsResponse {
-    return AllIntermediaryAccountsResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AllIntermediaryAccountsResponseProtoMsg): AllIntermediaryAccountsResponse {
+    return AllIntermediaryAccountsResponse.decode(message.value);
   },
   toProto(message: AllIntermediaryAccountsResponse): Uint8Array {
     return AllIntermediaryAccountsResponse.encode(message).finish();
@@ -1621,7 +1621,7 @@ export const ConnectedIntermediaryAccountRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ConnectedIntermediaryAccountRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): ConnectedIntermediaryAccountRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConnectedIntermediaryAccountRequest();
@@ -1670,7 +1670,7 @@ export const ConnectedIntermediaryAccountRequest = {
       lockId: BigInt(object.lock_id)
     };
   },
-  toAmino(message: ConnectedIntermediaryAccountRequest, useInterfaces: boolean = true): ConnectedIntermediaryAccountRequestAmino {
+  toAmino(message: ConnectedIntermediaryAccountRequest): ConnectedIntermediaryAccountRequestAmino {
     const obj: any = {};
     obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
     return obj;
@@ -1678,14 +1678,14 @@ export const ConnectedIntermediaryAccountRequest = {
   fromAminoMsg(object: ConnectedIntermediaryAccountRequestAminoMsg): ConnectedIntermediaryAccountRequest {
     return ConnectedIntermediaryAccountRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: ConnectedIntermediaryAccountRequest, useInterfaces: boolean = true): ConnectedIntermediaryAccountRequestAminoMsg {
+  toAminoMsg(message: ConnectedIntermediaryAccountRequest): ConnectedIntermediaryAccountRequestAminoMsg {
     return {
       type: "osmosis/connected-intermediary-account-request",
-      value: ConnectedIntermediaryAccountRequest.toAmino(message, useInterfaces)
+      value: ConnectedIntermediaryAccountRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: ConnectedIntermediaryAccountRequestProtoMsg, useInterfaces: boolean = true): ConnectedIntermediaryAccountRequest {
-    return ConnectedIntermediaryAccountRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ConnectedIntermediaryAccountRequestProtoMsg): ConnectedIntermediaryAccountRequest {
+    return ConnectedIntermediaryAccountRequest.decode(message.value);
   },
   toProto(message: ConnectedIntermediaryAccountRequest): Uint8Array {
     return ConnectedIntermediaryAccountRequest.encode(message).finish();
@@ -1711,7 +1711,7 @@ export const ConnectedIntermediaryAccountResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ConnectedIntermediaryAccountResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): ConnectedIntermediaryAccountResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConnectedIntermediaryAccountResponse();
@@ -1719,7 +1719,7 @@ export const ConnectedIntermediaryAccountResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.account = SuperfluidIntermediaryAccountInfo.decode(reader, reader.uint32(), useInterfaces);
+          message.account = SuperfluidIntermediaryAccountInfo.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1760,22 +1760,22 @@ export const ConnectedIntermediaryAccountResponse = {
       account: object?.account ? SuperfluidIntermediaryAccountInfo.fromAmino(object.account) : undefined
     };
   },
-  toAmino(message: ConnectedIntermediaryAccountResponse, useInterfaces: boolean = true): ConnectedIntermediaryAccountResponseAmino {
+  toAmino(message: ConnectedIntermediaryAccountResponse): ConnectedIntermediaryAccountResponseAmino {
     const obj: any = {};
-    obj.account = message.account ? SuperfluidIntermediaryAccountInfo.toAmino(message.account, useInterfaces) : undefined;
+    obj.account = message.account ? SuperfluidIntermediaryAccountInfo.toAmino(message.account) : undefined;
     return obj;
   },
   fromAminoMsg(object: ConnectedIntermediaryAccountResponseAminoMsg): ConnectedIntermediaryAccountResponse {
     return ConnectedIntermediaryAccountResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: ConnectedIntermediaryAccountResponse, useInterfaces: boolean = true): ConnectedIntermediaryAccountResponseAminoMsg {
+  toAminoMsg(message: ConnectedIntermediaryAccountResponse): ConnectedIntermediaryAccountResponseAminoMsg {
     return {
       type: "osmosis/connected-intermediary-account-response",
-      value: ConnectedIntermediaryAccountResponse.toAmino(message, useInterfaces)
+      value: ConnectedIntermediaryAccountResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: ConnectedIntermediaryAccountResponseProtoMsg, useInterfaces: boolean = true): ConnectedIntermediaryAccountResponse {
-    return ConnectedIntermediaryAccountResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ConnectedIntermediaryAccountResponseProtoMsg): ConnectedIntermediaryAccountResponse {
+    return ConnectedIntermediaryAccountResponse.decode(message.value);
   },
   toProto(message: ConnectedIntermediaryAccountResponse): Uint8Array {
     return ConnectedIntermediaryAccountResponse.encode(message).finish();
@@ -1801,7 +1801,7 @@ export const QueryTotalDelegationByValidatorForDenomRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryTotalDelegationByValidatorForDenomRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalDelegationByValidatorForDenomRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalDelegationByValidatorForDenomRequest();
@@ -1848,7 +1848,7 @@ export const QueryTotalDelegationByValidatorForDenomRequest = {
       denom: object.denom
     };
   },
-  toAmino(message: QueryTotalDelegationByValidatorForDenomRequest, useInterfaces: boolean = true): QueryTotalDelegationByValidatorForDenomRequestAmino {
+  toAmino(message: QueryTotalDelegationByValidatorForDenomRequest): QueryTotalDelegationByValidatorForDenomRequestAmino {
     const obj: any = {};
     obj.denom = message.denom;
     return obj;
@@ -1856,14 +1856,14 @@ export const QueryTotalDelegationByValidatorForDenomRequest = {
   fromAminoMsg(object: QueryTotalDelegationByValidatorForDenomRequestAminoMsg): QueryTotalDelegationByValidatorForDenomRequest {
     return QueryTotalDelegationByValidatorForDenomRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryTotalDelegationByValidatorForDenomRequest, useInterfaces: boolean = true): QueryTotalDelegationByValidatorForDenomRequestAminoMsg {
+  toAminoMsg(message: QueryTotalDelegationByValidatorForDenomRequest): QueryTotalDelegationByValidatorForDenomRequestAminoMsg {
     return {
       type: "osmosis/query-total-delegation-by-validator-for-denom-request",
-      value: QueryTotalDelegationByValidatorForDenomRequest.toAmino(message, useInterfaces)
+      value: QueryTotalDelegationByValidatorForDenomRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryTotalDelegationByValidatorForDenomRequestProtoMsg, useInterfaces: boolean = true): QueryTotalDelegationByValidatorForDenomRequest {
-    return QueryTotalDelegationByValidatorForDenomRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryTotalDelegationByValidatorForDenomRequestProtoMsg): QueryTotalDelegationByValidatorForDenomRequest {
+    return QueryTotalDelegationByValidatorForDenomRequest.decode(message.value);
   },
   toProto(message: QueryTotalDelegationByValidatorForDenomRequest): Uint8Array {
     return QueryTotalDelegationByValidatorForDenomRequest.encode(message).finish();
@@ -1889,7 +1889,7 @@ export const QueryTotalDelegationByValidatorForDenomResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryTotalDelegationByValidatorForDenomResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalDelegationByValidatorForDenomResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalDelegationByValidatorForDenomResponse();
@@ -1897,7 +1897,7 @@ export const QueryTotalDelegationByValidatorForDenomResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.assets.push(Delegations.decode(reader, reader.uint32(), useInterfaces));
+          message.assets.push(Delegations.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1944,10 +1944,10 @@ export const QueryTotalDelegationByValidatorForDenomResponse = {
       assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => Delegations.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryTotalDelegationByValidatorForDenomResponse, useInterfaces: boolean = true): QueryTotalDelegationByValidatorForDenomResponseAmino {
+  toAmino(message: QueryTotalDelegationByValidatorForDenomResponse): QueryTotalDelegationByValidatorForDenomResponseAmino {
     const obj: any = {};
     if (message.assets) {
-      obj.assets = message.assets.map(e => e ? Delegations.toAmino(e, useInterfaces) : undefined);
+      obj.assets = message.assets.map(e => e ? Delegations.toAmino(e) : undefined);
     } else {
       obj.assets = [];
     }
@@ -1956,14 +1956,14 @@ export const QueryTotalDelegationByValidatorForDenomResponse = {
   fromAminoMsg(object: QueryTotalDelegationByValidatorForDenomResponseAminoMsg): QueryTotalDelegationByValidatorForDenomResponse {
     return QueryTotalDelegationByValidatorForDenomResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryTotalDelegationByValidatorForDenomResponse, useInterfaces: boolean = true): QueryTotalDelegationByValidatorForDenomResponseAminoMsg {
+  toAminoMsg(message: QueryTotalDelegationByValidatorForDenomResponse): QueryTotalDelegationByValidatorForDenomResponseAminoMsg {
     return {
       type: "osmosis/query-total-delegation-by-validator-for-denom-response",
-      value: QueryTotalDelegationByValidatorForDenomResponse.toAmino(message, useInterfaces)
+      value: QueryTotalDelegationByValidatorForDenomResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryTotalDelegationByValidatorForDenomResponseProtoMsg, useInterfaces: boolean = true): QueryTotalDelegationByValidatorForDenomResponse {
-    return QueryTotalDelegationByValidatorForDenomResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryTotalDelegationByValidatorForDenomResponseProtoMsg): QueryTotalDelegationByValidatorForDenomResponse {
+    return QueryTotalDelegationByValidatorForDenomResponse.decode(message.value);
   },
   toProto(message: QueryTotalDelegationByValidatorForDenomResponse): Uint8Array {
     return QueryTotalDelegationByValidatorForDenomResponse.encode(message).finish();
@@ -1997,7 +1997,7 @@ export const Delegations = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Delegations {
+  decode(input: BinaryReader | Uint8Array, length?: number): Delegations {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegations();
@@ -2062,7 +2062,7 @@ export const Delegations = {
       osmoEquivalent: object.osmo_equivalent
     };
   },
-  toAmino(message: Delegations, useInterfaces: boolean = true): DelegationsAmino {
+  toAmino(message: Delegations): DelegationsAmino {
     const obj: any = {};
     obj.val_addr = message.valAddr;
     obj.amount_sfsd = message.amountSfsd;
@@ -2072,14 +2072,14 @@ export const Delegations = {
   fromAminoMsg(object: DelegationsAminoMsg): Delegations {
     return Delegations.fromAmino(object.value);
   },
-  toAminoMsg(message: Delegations, useInterfaces: boolean = true): DelegationsAminoMsg {
+  toAminoMsg(message: Delegations): DelegationsAminoMsg {
     return {
       type: "osmosis/delegations",
-      value: Delegations.toAmino(message, useInterfaces)
+      value: Delegations.toAmino(message)
     };
   },
-  fromProtoMsg(message: DelegationsProtoMsg, useInterfaces: boolean = true): Delegations {
-    return Delegations.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: DelegationsProtoMsg): Delegations {
+    return Delegations.decode(message.value);
   },
   toProto(message: Delegations): Uint8Array {
     return Delegations.encode(message).finish();
@@ -2100,7 +2100,7 @@ export const TotalSuperfluidDelegationsRequest = {
   encode(_: TotalSuperfluidDelegationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): TotalSuperfluidDelegationsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): TotalSuperfluidDelegationsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTotalSuperfluidDelegationsRequest();
@@ -2136,21 +2136,21 @@ export const TotalSuperfluidDelegationsRequest = {
   fromAmino(_: TotalSuperfluidDelegationsRequestAmino): TotalSuperfluidDelegationsRequest {
     return {};
   },
-  toAmino(_: TotalSuperfluidDelegationsRequest, useInterfaces: boolean = true): TotalSuperfluidDelegationsRequestAmino {
+  toAmino(_: TotalSuperfluidDelegationsRequest): TotalSuperfluidDelegationsRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: TotalSuperfluidDelegationsRequestAminoMsg): TotalSuperfluidDelegationsRequest {
     return TotalSuperfluidDelegationsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: TotalSuperfluidDelegationsRequest, useInterfaces: boolean = true): TotalSuperfluidDelegationsRequestAminoMsg {
+  toAminoMsg(message: TotalSuperfluidDelegationsRequest): TotalSuperfluidDelegationsRequestAminoMsg {
     return {
       type: "osmosis/total-superfluid-delegations-request",
-      value: TotalSuperfluidDelegationsRequest.toAmino(message, useInterfaces)
+      value: TotalSuperfluidDelegationsRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: TotalSuperfluidDelegationsRequestProtoMsg, useInterfaces: boolean = true): TotalSuperfluidDelegationsRequest {
-    return TotalSuperfluidDelegationsRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: TotalSuperfluidDelegationsRequestProtoMsg): TotalSuperfluidDelegationsRequest {
+    return TotalSuperfluidDelegationsRequest.decode(message.value);
   },
   toProto(message: TotalSuperfluidDelegationsRequest): Uint8Array {
     return TotalSuperfluidDelegationsRequest.encode(message).finish();
@@ -2176,7 +2176,7 @@ export const TotalSuperfluidDelegationsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): TotalSuperfluidDelegationsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): TotalSuperfluidDelegationsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTotalSuperfluidDelegationsResponse();
@@ -2223,7 +2223,7 @@ export const TotalSuperfluidDelegationsResponse = {
       totalDelegations: object.total_delegations
     };
   },
-  toAmino(message: TotalSuperfluidDelegationsResponse, useInterfaces: boolean = true): TotalSuperfluidDelegationsResponseAmino {
+  toAmino(message: TotalSuperfluidDelegationsResponse): TotalSuperfluidDelegationsResponseAmino {
     const obj: any = {};
     obj.total_delegations = message.totalDelegations;
     return obj;
@@ -2231,14 +2231,14 @@ export const TotalSuperfluidDelegationsResponse = {
   fromAminoMsg(object: TotalSuperfluidDelegationsResponseAminoMsg): TotalSuperfluidDelegationsResponse {
     return TotalSuperfluidDelegationsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: TotalSuperfluidDelegationsResponse, useInterfaces: boolean = true): TotalSuperfluidDelegationsResponseAminoMsg {
+  toAminoMsg(message: TotalSuperfluidDelegationsResponse): TotalSuperfluidDelegationsResponseAminoMsg {
     return {
       type: "osmosis/total-superfluid-delegations-response",
-      value: TotalSuperfluidDelegationsResponse.toAmino(message, useInterfaces)
+      value: TotalSuperfluidDelegationsResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: TotalSuperfluidDelegationsResponseProtoMsg, useInterfaces: boolean = true): TotalSuperfluidDelegationsResponse {
-    return TotalSuperfluidDelegationsResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: TotalSuperfluidDelegationsResponseProtoMsg): TotalSuperfluidDelegationsResponse {
+    return TotalSuperfluidDelegationsResponse.decode(message.value);
   },
   toProto(message: TotalSuperfluidDelegationsResponse): Uint8Array {
     return TotalSuperfluidDelegationsResponse.encode(message).finish();
@@ -2272,7 +2272,7 @@ export const SuperfluidDelegationAmountRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SuperfluidDelegationAmountRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): SuperfluidDelegationAmountRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidDelegationAmountRequest();
@@ -2337,7 +2337,7 @@ export const SuperfluidDelegationAmountRequest = {
       denom: object.denom
     };
   },
-  toAmino(message: SuperfluidDelegationAmountRequest, useInterfaces: boolean = true): SuperfluidDelegationAmountRequestAmino {
+  toAmino(message: SuperfluidDelegationAmountRequest): SuperfluidDelegationAmountRequestAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     obj.validator_address = message.validatorAddress;
@@ -2347,14 +2347,14 @@ export const SuperfluidDelegationAmountRequest = {
   fromAminoMsg(object: SuperfluidDelegationAmountRequestAminoMsg): SuperfluidDelegationAmountRequest {
     return SuperfluidDelegationAmountRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: SuperfluidDelegationAmountRequest, useInterfaces: boolean = true): SuperfluidDelegationAmountRequestAminoMsg {
+  toAminoMsg(message: SuperfluidDelegationAmountRequest): SuperfluidDelegationAmountRequestAminoMsg {
     return {
       type: "osmosis/superfluid-delegation-amount-request",
-      value: SuperfluidDelegationAmountRequest.toAmino(message, useInterfaces)
+      value: SuperfluidDelegationAmountRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: SuperfluidDelegationAmountRequestProtoMsg, useInterfaces: boolean = true): SuperfluidDelegationAmountRequest {
-    return SuperfluidDelegationAmountRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: SuperfluidDelegationAmountRequestProtoMsg): SuperfluidDelegationAmountRequest {
+    return SuperfluidDelegationAmountRequest.decode(message.value);
   },
   toProto(message: SuperfluidDelegationAmountRequest): Uint8Array {
     return SuperfluidDelegationAmountRequest.encode(message).finish();
@@ -2380,7 +2380,7 @@ export const SuperfluidDelegationAmountResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SuperfluidDelegationAmountResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): SuperfluidDelegationAmountResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidDelegationAmountResponse();
@@ -2388,7 +2388,7 @@ export const SuperfluidDelegationAmountResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.amount.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.amount.push(Coin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2435,10 +2435,10 @@ export const SuperfluidDelegationAmountResponse = {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: SuperfluidDelegationAmountResponse, useInterfaces: boolean = true): SuperfluidDelegationAmountResponseAmino {
+  toAmino(message: SuperfluidDelegationAmountResponse): SuperfluidDelegationAmountResponseAmino {
     const obj: any = {};
     if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.amount = [];
     }
@@ -2447,14 +2447,14 @@ export const SuperfluidDelegationAmountResponse = {
   fromAminoMsg(object: SuperfluidDelegationAmountResponseAminoMsg): SuperfluidDelegationAmountResponse {
     return SuperfluidDelegationAmountResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: SuperfluidDelegationAmountResponse, useInterfaces: boolean = true): SuperfluidDelegationAmountResponseAminoMsg {
+  toAminoMsg(message: SuperfluidDelegationAmountResponse): SuperfluidDelegationAmountResponseAminoMsg {
     return {
       type: "osmosis/superfluid-delegation-amount-response",
-      value: SuperfluidDelegationAmountResponse.toAmino(message, useInterfaces)
+      value: SuperfluidDelegationAmountResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: SuperfluidDelegationAmountResponseProtoMsg, useInterfaces: boolean = true): SuperfluidDelegationAmountResponse {
-    return SuperfluidDelegationAmountResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: SuperfluidDelegationAmountResponseProtoMsg): SuperfluidDelegationAmountResponse {
+    return SuperfluidDelegationAmountResponse.decode(message.value);
   },
   toProto(message: SuperfluidDelegationAmountResponse): Uint8Array {
     return SuperfluidDelegationAmountResponse.encode(message).finish();
@@ -2480,7 +2480,7 @@ export const SuperfluidDelegationsByDelegatorRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SuperfluidDelegationsByDelegatorRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): SuperfluidDelegationsByDelegatorRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidDelegationsByDelegatorRequest();
@@ -2527,7 +2527,7 @@ export const SuperfluidDelegationsByDelegatorRequest = {
       delegatorAddress: object.delegator_address
     };
   },
-  toAmino(message: SuperfluidDelegationsByDelegatorRequest, useInterfaces: boolean = true): SuperfluidDelegationsByDelegatorRequestAmino {
+  toAmino(message: SuperfluidDelegationsByDelegatorRequest): SuperfluidDelegationsByDelegatorRequestAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     return obj;
@@ -2535,14 +2535,14 @@ export const SuperfluidDelegationsByDelegatorRequest = {
   fromAminoMsg(object: SuperfluidDelegationsByDelegatorRequestAminoMsg): SuperfluidDelegationsByDelegatorRequest {
     return SuperfluidDelegationsByDelegatorRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: SuperfluidDelegationsByDelegatorRequest, useInterfaces: boolean = true): SuperfluidDelegationsByDelegatorRequestAminoMsg {
+  toAminoMsg(message: SuperfluidDelegationsByDelegatorRequest): SuperfluidDelegationsByDelegatorRequestAminoMsg {
     return {
       type: "osmosis/superfluid-delegations-by-delegator-request",
-      value: SuperfluidDelegationsByDelegatorRequest.toAmino(message, useInterfaces)
+      value: SuperfluidDelegationsByDelegatorRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: SuperfluidDelegationsByDelegatorRequestProtoMsg, useInterfaces: boolean = true): SuperfluidDelegationsByDelegatorRequest {
-    return SuperfluidDelegationsByDelegatorRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: SuperfluidDelegationsByDelegatorRequestProtoMsg): SuperfluidDelegationsByDelegatorRequest {
+    return SuperfluidDelegationsByDelegatorRequest.decode(message.value);
   },
   toProto(message: SuperfluidDelegationsByDelegatorRequest): Uint8Array {
     return SuperfluidDelegationsByDelegatorRequest.encode(message).finish();
@@ -2576,7 +2576,7 @@ export const SuperfluidDelegationsByDelegatorResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SuperfluidDelegationsByDelegatorResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): SuperfluidDelegationsByDelegatorResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidDelegationsByDelegatorResponse();
@@ -2584,13 +2584,13 @@ export const SuperfluidDelegationsByDelegatorResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.superfluidDelegationRecords.push(SuperfluidDelegationRecord.decode(reader, reader.uint32(), useInterfaces));
+          message.superfluidDelegationRecords.push(SuperfluidDelegationRecord.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.totalDelegatedCoins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.totalDelegatedCoins.push(Coin.decode(reader, reader.uint32()));
           break;
         case 3:
-          message.totalEquivalentStakedAmount = Coin.decode(reader, reader.uint32(), useInterfaces);
+          message.totalEquivalentStakedAmount = Coin.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -2659,32 +2659,32 @@ export const SuperfluidDelegationsByDelegatorResponse = {
       totalEquivalentStakedAmount: object?.total_equivalent_staked_amount ? Coin.fromAmino(object.total_equivalent_staked_amount) : undefined
     };
   },
-  toAmino(message: SuperfluidDelegationsByDelegatorResponse, useInterfaces: boolean = true): SuperfluidDelegationsByDelegatorResponseAmino {
+  toAmino(message: SuperfluidDelegationsByDelegatorResponse): SuperfluidDelegationsByDelegatorResponseAmino {
     const obj: any = {};
     if (message.superfluidDelegationRecords) {
-      obj.superfluid_delegation_records = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toAmino(e, useInterfaces) : undefined);
+      obj.superfluid_delegation_records = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toAmino(e) : undefined);
     } else {
       obj.superfluid_delegation_records = [];
     }
     if (message.totalDelegatedCoins) {
-      obj.total_delegated_coins = message.totalDelegatedCoins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.total_delegated_coins = message.totalDelegatedCoins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.total_delegated_coins = [];
     }
-    obj.total_equivalent_staked_amount = message.totalEquivalentStakedAmount ? Coin.toAmino(message.totalEquivalentStakedAmount, useInterfaces) : undefined;
+    obj.total_equivalent_staked_amount = message.totalEquivalentStakedAmount ? Coin.toAmino(message.totalEquivalentStakedAmount) : undefined;
     return obj;
   },
   fromAminoMsg(object: SuperfluidDelegationsByDelegatorResponseAminoMsg): SuperfluidDelegationsByDelegatorResponse {
     return SuperfluidDelegationsByDelegatorResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: SuperfluidDelegationsByDelegatorResponse, useInterfaces: boolean = true): SuperfluidDelegationsByDelegatorResponseAminoMsg {
+  toAminoMsg(message: SuperfluidDelegationsByDelegatorResponse): SuperfluidDelegationsByDelegatorResponseAminoMsg {
     return {
       type: "osmosis/superfluid-delegations-by-delegator-response",
-      value: SuperfluidDelegationsByDelegatorResponse.toAmino(message, useInterfaces)
+      value: SuperfluidDelegationsByDelegatorResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: SuperfluidDelegationsByDelegatorResponseProtoMsg, useInterfaces: boolean = true): SuperfluidDelegationsByDelegatorResponse {
-    return SuperfluidDelegationsByDelegatorResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: SuperfluidDelegationsByDelegatorResponseProtoMsg): SuperfluidDelegationsByDelegatorResponse {
+    return SuperfluidDelegationsByDelegatorResponse.decode(message.value);
   },
   toProto(message: SuperfluidDelegationsByDelegatorResponse): Uint8Array {
     return SuperfluidDelegationsByDelegatorResponse.encode(message).finish();
@@ -2714,7 +2714,7 @@ export const SuperfluidUndelegationsByDelegatorRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SuperfluidUndelegationsByDelegatorRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): SuperfluidUndelegationsByDelegatorRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidUndelegationsByDelegatorRequest();
@@ -2770,7 +2770,7 @@ export const SuperfluidUndelegationsByDelegatorRequest = {
       denom: object.denom
     };
   },
-  toAmino(message: SuperfluidUndelegationsByDelegatorRequest, useInterfaces: boolean = true): SuperfluidUndelegationsByDelegatorRequestAmino {
+  toAmino(message: SuperfluidUndelegationsByDelegatorRequest): SuperfluidUndelegationsByDelegatorRequestAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     obj.denom = message.denom;
@@ -2779,14 +2779,14 @@ export const SuperfluidUndelegationsByDelegatorRequest = {
   fromAminoMsg(object: SuperfluidUndelegationsByDelegatorRequestAminoMsg): SuperfluidUndelegationsByDelegatorRequest {
     return SuperfluidUndelegationsByDelegatorRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: SuperfluidUndelegationsByDelegatorRequest, useInterfaces: boolean = true): SuperfluidUndelegationsByDelegatorRequestAminoMsg {
+  toAminoMsg(message: SuperfluidUndelegationsByDelegatorRequest): SuperfluidUndelegationsByDelegatorRequestAminoMsg {
     return {
       type: "osmosis/superfluid-undelegations-by-delegator-request",
-      value: SuperfluidUndelegationsByDelegatorRequest.toAmino(message, useInterfaces)
+      value: SuperfluidUndelegationsByDelegatorRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: SuperfluidUndelegationsByDelegatorRequestProtoMsg, useInterfaces: boolean = true): SuperfluidUndelegationsByDelegatorRequest {
-    return SuperfluidUndelegationsByDelegatorRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: SuperfluidUndelegationsByDelegatorRequestProtoMsg): SuperfluidUndelegationsByDelegatorRequest {
+    return SuperfluidUndelegationsByDelegatorRequest.decode(message.value);
   },
   toProto(message: SuperfluidUndelegationsByDelegatorRequest): Uint8Array {
     return SuperfluidUndelegationsByDelegatorRequest.encode(message).finish();
@@ -2820,7 +2820,7 @@ export const SuperfluidUndelegationsByDelegatorResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SuperfluidUndelegationsByDelegatorResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): SuperfluidUndelegationsByDelegatorResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidUndelegationsByDelegatorResponse();
@@ -2828,13 +2828,13 @@ export const SuperfluidUndelegationsByDelegatorResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.superfluidDelegationRecords.push(SuperfluidDelegationRecord.decode(reader, reader.uint32(), useInterfaces));
+          message.superfluidDelegationRecords.push(SuperfluidDelegationRecord.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.totalUndelegatedCoins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.totalUndelegatedCoins.push(Coin.decode(reader, reader.uint32()));
           break;
         case 3:
-          message.syntheticLocks.push(SyntheticLock.decode(reader, reader.uint32(), useInterfaces));
+          message.syntheticLocks.push(SyntheticLock.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2909,20 +2909,20 @@ export const SuperfluidUndelegationsByDelegatorResponse = {
       syntheticLocks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromAmino(e)) : []
     };
   },
-  toAmino(message: SuperfluidUndelegationsByDelegatorResponse, useInterfaces: boolean = true): SuperfluidUndelegationsByDelegatorResponseAmino {
+  toAmino(message: SuperfluidUndelegationsByDelegatorResponse): SuperfluidUndelegationsByDelegatorResponseAmino {
     const obj: any = {};
     if (message.superfluidDelegationRecords) {
-      obj.superfluid_delegation_records = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toAmino(e, useInterfaces) : undefined);
+      obj.superfluid_delegation_records = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toAmino(e) : undefined);
     } else {
       obj.superfluid_delegation_records = [];
     }
     if (message.totalUndelegatedCoins) {
-      obj.total_undelegated_coins = message.totalUndelegatedCoins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.total_undelegated_coins = message.totalUndelegatedCoins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.total_undelegated_coins = [];
     }
     if (message.syntheticLocks) {
-      obj.synthetic_locks = message.syntheticLocks.map(e => e ? SyntheticLock.toAmino(e, useInterfaces) : undefined);
+      obj.synthetic_locks = message.syntheticLocks.map(e => e ? SyntheticLock.toAmino(e) : undefined);
     } else {
       obj.synthetic_locks = [];
     }
@@ -2931,14 +2931,14 @@ export const SuperfluidUndelegationsByDelegatorResponse = {
   fromAminoMsg(object: SuperfluidUndelegationsByDelegatorResponseAminoMsg): SuperfluidUndelegationsByDelegatorResponse {
     return SuperfluidUndelegationsByDelegatorResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: SuperfluidUndelegationsByDelegatorResponse, useInterfaces: boolean = true): SuperfluidUndelegationsByDelegatorResponseAminoMsg {
+  toAminoMsg(message: SuperfluidUndelegationsByDelegatorResponse): SuperfluidUndelegationsByDelegatorResponseAminoMsg {
     return {
       type: "osmosis/superfluid-undelegations-by-delegator-response",
-      value: SuperfluidUndelegationsByDelegatorResponse.toAmino(message, useInterfaces)
+      value: SuperfluidUndelegationsByDelegatorResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: SuperfluidUndelegationsByDelegatorResponseProtoMsg, useInterfaces: boolean = true): SuperfluidUndelegationsByDelegatorResponse {
-    return SuperfluidUndelegationsByDelegatorResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: SuperfluidUndelegationsByDelegatorResponseProtoMsg): SuperfluidUndelegationsByDelegatorResponse {
+    return SuperfluidUndelegationsByDelegatorResponse.decode(message.value);
   },
   toProto(message: SuperfluidUndelegationsByDelegatorResponse): Uint8Array {
     return SuperfluidUndelegationsByDelegatorResponse.encode(message).finish();
@@ -2968,7 +2968,7 @@ export const SuperfluidDelegationsByValidatorDenomRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SuperfluidDelegationsByValidatorDenomRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): SuperfluidDelegationsByValidatorDenomRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidDelegationsByValidatorDenomRequest();
@@ -3024,7 +3024,7 @@ export const SuperfluidDelegationsByValidatorDenomRequest = {
       denom: object.denom
     };
   },
-  toAmino(message: SuperfluidDelegationsByValidatorDenomRequest, useInterfaces: boolean = true): SuperfluidDelegationsByValidatorDenomRequestAmino {
+  toAmino(message: SuperfluidDelegationsByValidatorDenomRequest): SuperfluidDelegationsByValidatorDenomRequestAmino {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
     obj.denom = message.denom;
@@ -3033,14 +3033,14 @@ export const SuperfluidDelegationsByValidatorDenomRequest = {
   fromAminoMsg(object: SuperfluidDelegationsByValidatorDenomRequestAminoMsg): SuperfluidDelegationsByValidatorDenomRequest {
     return SuperfluidDelegationsByValidatorDenomRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: SuperfluidDelegationsByValidatorDenomRequest, useInterfaces: boolean = true): SuperfluidDelegationsByValidatorDenomRequestAminoMsg {
+  toAminoMsg(message: SuperfluidDelegationsByValidatorDenomRequest): SuperfluidDelegationsByValidatorDenomRequestAminoMsg {
     return {
       type: "osmosis/superfluid-delegations-by-validator-denom-request",
-      value: SuperfluidDelegationsByValidatorDenomRequest.toAmino(message, useInterfaces)
+      value: SuperfluidDelegationsByValidatorDenomRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: SuperfluidDelegationsByValidatorDenomRequestProtoMsg, useInterfaces: boolean = true): SuperfluidDelegationsByValidatorDenomRequest {
-    return SuperfluidDelegationsByValidatorDenomRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: SuperfluidDelegationsByValidatorDenomRequestProtoMsg): SuperfluidDelegationsByValidatorDenomRequest {
+    return SuperfluidDelegationsByValidatorDenomRequest.decode(message.value);
   },
   toProto(message: SuperfluidDelegationsByValidatorDenomRequest): Uint8Array {
     return SuperfluidDelegationsByValidatorDenomRequest.encode(message).finish();
@@ -3066,7 +3066,7 @@ export const SuperfluidDelegationsByValidatorDenomResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SuperfluidDelegationsByValidatorDenomResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): SuperfluidDelegationsByValidatorDenomResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSuperfluidDelegationsByValidatorDenomResponse();
@@ -3074,7 +3074,7 @@ export const SuperfluidDelegationsByValidatorDenomResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.superfluidDelegationRecords.push(SuperfluidDelegationRecord.decode(reader, reader.uint32(), useInterfaces));
+          message.superfluidDelegationRecords.push(SuperfluidDelegationRecord.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -3121,10 +3121,10 @@ export const SuperfluidDelegationsByValidatorDenomResponse = {
       superfluidDelegationRecords: Array.isArray(object?.superfluid_delegation_records) ? object.superfluid_delegation_records.map((e: any) => SuperfluidDelegationRecord.fromAmino(e)) : []
     };
   },
-  toAmino(message: SuperfluidDelegationsByValidatorDenomResponse, useInterfaces: boolean = true): SuperfluidDelegationsByValidatorDenomResponseAmino {
+  toAmino(message: SuperfluidDelegationsByValidatorDenomResponse): SuperfluidDelegationsByValidatorDenomResponseAmino {
     const obj: any = {};
     if (message.superfluidDelegationRecords) {
-      obj.superfluid_delegation_records = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toAmino(e, useInterfaces) : undefined);
+      obj.superfluid_delegation_records = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toAmino(e) : undefined);
     } else {
       obj.superfluid_delegation_records = [];
     }
@@ -3133,14 +3133,14 @@ export const SuperfluidDelegationsByValidatorDenomResponse = {
   fromAminoMsg(object: SuperfluidDelegationsByValidatorDenomResponseAminoMsg): SuperfluidDelegationsByValidatorDenomResponse {
     return SuperfluidDelegationsByValidatorDenomResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: SuperfluidDelegationsByValidatorDenomResponse, useInterfaces: boolean = true): SuperfluidDelegationsByValidatorDenomResponseAminoMsg {
+  toAminoMsg(message: SuperfluidDelegationsByValidatorDenomResponse): SuperfluidDelegationsByValidatorDenomResponseAminoMsg {
     return {
       type: "osmosis/superfluid-delegations-by-validator-denom-response",
-      value: SuperfluidDelegationsByValidatorDenomResponse.toAmino(message, useInterfaces)
+      value: SuperfluidDelegationsByValidatorDenomResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: SuperfluidDelegationsByValidatorDenomResponseProtoMsg, useInterfaces: boolean = true): SuperfluidDelegationsByValidatorDenomResponse {
-    return SuperfluidDelegationsByValidatorDenomResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: SuperfluidDelegationsByValidatorDenomResponseProtoMsg): SuperfluidDelegationsByValidatorDenomResponse {
+    return SuperfluidDelegationsByValidatorDenomResponse.decode(message.value);
   },
   toProto(message: SuperfluidDelegationsByValidatorDenomResponse): Uint8Array {
     return SuperfluidDelegationsByValidatorDenomResponse.encode(message).finish();
@@ -3170,7 +3170,7 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEstimateSuperfluidDelegatedAmountByValidatorDenomRequest();
@@ -3226,7 +3226,7 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomRequest = {
       denom: object.denom
     };
   },
-  toAmino(message: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, useInterfaces: boolean = true): EstimateSuperfluidDelegatedAmountByValidatorDenomRequestAmino {
+  toAmino(message: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): EstimateSuperfluidDelegatedAmountByValidatorDenomRequestAmino {
     const obj: any = {};
     obj.validator_address = message.validatorAddress;
     obj.denom = message.denom;
@@ -3235,14 +3235,14 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomRequest = {
   fromAminoMsg(object: EstimateSuperfluidDelegatedAmountByValidatorDenomRequestAminoMsg): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
     return EstimateSuperfluidDelegatedAmountByValidatorDenomRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, useInterfaces: boolean = true): EstimateSuperfluidDelegatedAmountByValidatorDenomRequestAminoMsg {
+  toAminoMsg(message: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): EstimateSuperfluidDelegatedAmountByValidatorDenomRequestAminoMsg {
     return {
       type: "osmosis/estimate-superfluid-delegated-amount-by-validator-denom-request",
-      value: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest.toAmino(message, useInterfaces)
+      value: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: EstimateSuperfluidDelegatedAmountByValidatorDenomRequestProtoMsg, useInterfaces: boolean = true): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
-    return EstimateSuperfluidDelegatedAmountByValidatorDenomRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: EstimateSuperfluidDelegatedAmountByValidatorDenomRequestProtoMsg): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
+    return EstimateSuperfluidDelegatedAmountByValidatorDenomRequest.decode(message.value);
   },
   toProto(message: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): Uint8Array {
     return EstimateSuperfluidDelegatedAmountByValidatorDenomRequest.encode(message).finish();
@@ -3268,7 +3268,7 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEstimateSuperfluidDelegatedAmountByValidatorDenomResponse();
@@ -3276,7 +3276,7 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.totalDelegatedCoins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.totalDelegatedCoins.push(Coin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -3323,10 +3323,10 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomResponse = {
       totalDelegatedCoins: Array.isArray(object?.total_delegated_coins) ? object.total_delegated_coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse, useInterfaces: boolean = true): EstimateSuperfluidDelegatedAmountByValidatorDenomResponseAmino {
+  toAmino(message: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse): EstimateSuperfluidDelegatedAmountByValidatorDenomResponseAmino {
     const obj: any = {};
     if (message.totalDelegatedCoins) {
-      obj.total_delegated_coins = message.totalDelegatedCoins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.total_delegated_coins = message.totalDelegatedCoins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.total_delegated_coins = [];
     }
@@ -3335,14 +3335,14 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomResponse = {
   fromAminoMsg(object: EstimateSuperfluidDelegatedAmountByValidatorDenomResponseAminoMsg): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
     return EstimateSuperfluidDelegatedAmountByValidatorDenomResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse, useInterfaces: boolean = true): EstimateSuperfluidDelegatedAmountByValidatorDenomResponseAminoMsg {
+  toAminoMsg(message: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse): EstimateSuperfluidDelegatedAmountByValidatorDenomResponseAminoMsg {
     return {
       type: "osmosis/estimate-superfluid-delegated-amount-by-validator-denom-response",
-      value: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse.toAmino(message, useInterfaces)
+      value: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: EstimateSuperfluidDelegatedAmountByValidatorDenomResponseProtoMsg, useInterfaces: boolean = true): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
-    return EstimateSuperfluidDelegatedAmountByValidatorDenomResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: EstimateSuperfluidDelegatedAmountByValidatorDenomResponseProtoMsg): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
+    return EstimateSuperfluidDelegatedAmountByValidatorDenomResponse.decode(message.value);
   },
   toProto(message: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse): Uint8Array {
     return EstimateSuperfluidDelegatedAmountByValidatorDenomResponse.encode(message).finish();
@@ -3368,7 +3368,7 @@ export const QueryTotalDelegationByDelegatorRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryTotalDelegationByDelegatorRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalDelegationByDelegatorRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalDelegationByDelegatorRequest();
@@ -3415,7 +3415,7 @@ export const QueryTotalDelegationByDelegatorRequest = {
       delegatorAddress: object.delegator_address
     };
   },
-  toAmino(message: QueryTotalDelegationByDelegatorRequest, useInterfaces: boolean = true): QueryTotalDelegationByDelegatorRequestAmino {
+  toAmino(message: QueryTotalDelegationByDelegatorRequest): QueryTotalDelegationByDelegatorRequestAmino {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress;
     return obj;
@@ -3423,14 +3423,14 @@ export const QueryTotalDelegationByDelegatorRequest = {
   fromAminoMsg(object: QueryTotalDelegationByDelegatorRequestAminoMsg): QueryTotalDelegationByDelegatorRequest {
     return QueryTotalDelegationByDelegatorRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryTotalDelegationByDelegatorRequest, useInterfaces: boolean = true): QueryTotalDelegationByDelegatorRequestAminoMsg {
+  toAminoMsg(message: QueryTotalDelegationByDelegatorRequest): QueryTotalDelegationByDelegatorRequestAminoMsg {
     return {
       type: "osmosis/query-total-delegation-by-delegator-request",
-      value: QueryTotalDelegationByDelegatorRequest.toAmino(message, useInterfaces)
+      value: QueryTotalDelegationByDelegatorRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryTotalDelegationByDelegatorRequestProtoMsg, useInterfaces: boolean = true): QueryTotalDelegationByDelegatorRequest {
-    return QueryTotalDelegationByDelegatorRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryTotalDelegationByDelegatorRequestProtoMsg): QueryTotalDelegationByDelegatorRequest {
+    return QueryTotalDelegationByDelegatorRequest.decode(message.value);
   },
   toProto(message: QueryTotalDelegationByDelegatorRequest): Uint8Array {
     return QueryTotalDelegationByDelegatorRequest.encode(message).finish();
@@ -3468,7 +3468,7 @@ export const QueryTotalDelegationByDelegatorResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryTotalDelegationByDelegatorResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalDelegationByDelegatorResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalDelegationByDelegatorResponse();
@@ -3476,16 +3476,16 @@ export const QueryTotalDelegationByDelegatorResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.superfluidDelegationRecords.push(SuperfluidDelegationRecord.decode(reader, reader.uint32(), useInterfaces));
+          message.superfluidDelegationRecords.push(SuperfluidDelegationRecord.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.delegationResponse.push(DelegationResponse.decode(reader, reader.uint32(), useInterfaces));
+          message.delegationResponse.push(DelegationResponse.decode(reader, reader.uint32()));
           break;
         case 3:
-          message.totalDelegatedCoins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.totalDelegatedCoins.push(Coin.decode(reader, reader.uint32()));
           break;
         case 4:
-          message.totalEquivalentStakedAmount = Coin.decode(reader, reader.uint32(), useInterfaces);
+          message.totalEquivalentStakedAmount = Coin.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -3568,37 +3568,37 @@ export const QueryTotalDelegationByDelegatorResponse = {
       totalEquivalentStakedAmount: object?.total_equivalent_staked_amount ? Coin.fromAmino(object.total_equivalent_staked_amount) : undefined
     };
   },
-  toAmino(message: QueryTotalDelegationByDelegatorResponse, useInterfaces: boolean = true): QueryTotalDelegationByDelegatorResponseAmino {
+  toAmino(message: QueryTotalDelegationByDelegatorResponse): QueryTotalDelegationByDelegatorResponseAmino {
     const obj: any = {};
     if (message.superfluidDelegationRecords) {
-      obj.superfluid_delegation_records = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toAmino(e, useInterfaces) : undefined);
+      obj.superfluid_delegation_records = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toAmino(e) : undefined);
     } else {
       obj.superfluid_delegation_records = [];
     }
     if (message.delegationResponse) {
-      obj.delegation_response = message.delegationResponse.map(e => e ? DelegationResponse.toAmino(e, useInterfaces) : undefined);
+      obj.delegation_response = message.delegationResponse.map(e => e ? DelegationResponse.toAmino(e) : undefined);
     } else {
       obj.delegation_response = [];
     }
     if (message.totalDelegatedCoins) {
-      obj.total_delegated_coins = message.totalDelegatedCoins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.total_delegated_coins = message.totalDelegatedCoins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.total_delegated_coins = [];
     }
-    obj.total_equivalent_staked_amount = message.totalEquivalentStakedAmount ? Coin.toAmino(message.totalEquivalentStakedAmount, useInterfaces) : undefined;
+    obj.total_equivalent_staked_amount = message.totalEquivalentStakedAmount ? Coin.toAmino(message.totalEquivalentStakedAmount) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryTotalDelegationByDelegatorResponseAminoMsg): QueryTotalDelegationByDelegatorResponse {
     return QueryTotalDelegationByDelegatorResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryTotalDelegationByDelegatorResponse, useInterfaces: boolean = true): QueryTotalDelegationByDelegatorResponseAminoMsg {
+  toAminoMsg(message: QueryTotalDelegationByDelegatorResponse): QueryTotalDelegationByDelegatorResponseAminoMsg {
     return {
       type: "osmosis/query-total-delegation-by-delegator-response",
-      value: QueryTotalDelegationByDelegatorResponse.toAmino(message, useInterfaces)
+      value: QueryTotalDelegationByDelegatorResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryTotalDelegationByDelegatorResponseProtoMsg, useInterfaces: boolean = true): QueryTotalDelegationByDelegatorResponse {
-    return QueryTotalDelegationByDelegatorResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryTotalDelegationByDelegatorResponseProtoMsg): QueryTotalDelegationByDelegatorResponse {
+    return QueryTotalDelegationByDelegatorResponse.decode(message.value);
   },
   toProto(message: QueryTotalDelegationByDelegatorResponse): Uint8Array {
     return QueryTotalDelegationByDelegatorResponse.encode(message).finish();
@@ -3619,7 +3619,7 @@ export const QueryUnpoolWhitelistRequest = {
   encode(_: QueryUnpoolWhitelistRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryUnpoolWhitelistRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryUnpoolWhitelistRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUnpoolWhitelistRequest();
@@ -3655,21 +3655,21 @@ export const QueryUnpoolWhitelistRequest = {
   fromAmino(_: QueryUnpoolWhitelistRequestAmino): QueryUnpoolWhitelistRequest {
     return {};
   },
-  toAmino(_: QueryUnpoolWhitelistRequest, useInterfaces: boolean = true): QueryUnpoolWhitelistRequestAmino {
+  toAmino(_: QueryUnpoolWhitelistRequest): QueryUnpoolWhitelistRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryUnpoolWhitelistRequestAminoMsg): QueryUnpoolWhitelistRequest {
     return QueryUnpoolWhitelistRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryUnpoolWhitelistRequest, useInterfaces: boolean = true): QueryUnpoolWhitelistRequestAminoMsg {
+  toAminoMsg(message: QueryUnpoolWhitelistRequest): QueryUnpoolWhitelistRequestAminoMsg {
     return {
       type: "osmosis/query-unpool-whitelist-request",
-      value: QueryUnpoolWhitelistRequest.toAmino(message, useInterfaces)
+      value: QueryUnpoolWhitelistRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryUnpoolWhitelistRequestProtoMsg, useInterfaces: boolean = true): QueryUnpoolWhitelistRequest {
-    return QueryUnpoolWhitelistRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryUnpoolWhitelistRequestProtoMsg): QueryUnpoolWhitelistRequest {
+    return QueryUnpoolWhitelistRequest.decode(message.value);
   },
   toProto(message: QueryUnpoolWhitelistRequest): Uint8Array {
     return QueryUnpoolWhitelistRequest.encode(message).finish();
@@ -3697,7 +3697,7 @@ export const QueryUnpoolWhitelistResponse = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryUnpoolWhitelistResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryUnpoolWhitelistResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryUnpoolWhitelistResponse();
@@ -3759,7 +3759,7 @@ export const QueryUnpoolWhitelistResponse = {
       poolIds: Array.isArray(object?.pool_ids) ? object.pool_ids.map((e: any) => BigInt(e)) : []
     };
   },
-  toAmino(message: QueryUnpoolWhitelistResponse, useInterfaces: boolean = true): QueryUnpoolWhitelistResponseAmino {
+  toAmino(message: QueryUnpoolWhitelistResponse): QueryUnpoolWhitelistResponseAmino {
     const obj: any = {};
     if (message.poolIds) {
       obj.pool_ids = message.poolIds.map(e => e.toString());
@@ -3771,14 +3771,14 @@ export const QueryUnpoolWhitelistResponse = {
   fromAminoMsg(object: QueryUnpoolWhitelistResponseAminoMsg): QueryUnpoolWhitelistResponse {
     return QueryUnpoolWhitelistResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryUnpoolWhitelistResponse, useInterfaces: boolean = true): QueryUnpoolWhitelistResponseAminoMsg {
+  toAminoMsg(message: QueryUnpoolWhitelistResponse): QueryUnpoolWhitelistResponseAminoMsg {
     return {
       type: "osmosis/query-unpool-whitelist-response",
-      value: QueryUnpoolWhitelistResponse.toAmino(message, useInterfaces)
+      value: QueryUnpoolWhitelistResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryUnpoolWhitelistResponseProtoMsg, useInterfaces: boolean = true): QueryUnpoolWhitelistResponse {
-    return QueryUnpoolWhitelistResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryUnpoolWhitelistResponseProtoMsg): QueryUnpoolWhitelistResponse {
+    return QueryUnpoolWhitelistResponse.decode(message.value);
   },
   toProto(message: QueryUnpoolWhitelistResponse): Uint8Array {
     return QueryUnpoolWhitelistResponse.encode(message).finish();

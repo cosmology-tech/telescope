@@ -96,7 +96,7 @@ export const LabelDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LabelDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number): LabelDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLabelDescriptor();
@@ -161,7 +161,7 @@ export const LabelDescriptor = {
       description: object.description
     };
   },
-  toAmino(message: LabelDescriptor, useInterfaces: boolean = true): LabelDescriptorAmino {
+  toAmino(message: LabelDescriptor): LabelDescriptorAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.value_type = message.valueType;
@@ -171,8 +171,8 @@ export const LabelDescriptor = {
   fromAminoMsg(object: LabelDescriptorAminoMsg): LabelDescriptor {
     return LabelDescriptor.fromAmino(object.value);
   },
-  fromProtoMsg(message: LabelDescriptorProtoMsg, useInterfaces: boolean = true): LabelDescriptor {
-    return LabelDescriptor.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: LabelDescriptorProtoMsg): LabelDescriptor {
+    return LabelDescriptor.decode(message.value);
   },
   toProto(message: LabelDescriptor): Uint8Array {
     return LabelDescriptor.encode(message).finish();

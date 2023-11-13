@@ -190,7 +190,7 @@ export const QueryModuleAccountBalanceRequest = {
   encode(_: QueryModuleAccountBalanceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryModuleAccountBalanceRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryModuleAccountBalanceRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountBalanceRequest();
@@ -226,21 +226,21 @@ export const QueryModuleAccountBalanceRequest = {
   fromAmino(_: QueryModuleAccountBalanceRequestAmino): QueryModuleAccountBalanceRequest {
     return {};
   },
-  toAmino(_: QueryModuleAccountBalanceRequest, useInterfaces: boolean = true): QueryModuleAccountBalanceRequestAmino {
+  toAmino(_: QueryModuleAccountBalanceRequest): QueryModuleAccountBalanceRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryModuleAccountBalanceRequestAminoMsg): QueryModuleAccountBalanceRequest {
     return QueryModuleAccountBalanceRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryModuleAccountBalanceRequest, useInterfaces: boolean = true): QueryModuleAccountBalanceRequestAminoMsg {
+  toAminoMsg(message: QueryModuleAccountBalanceRequest): QueryModuleAccountBalanceRequestAminoMsg {
     return {
       type: "osmosis/claim/query-module-account-balance-request",
-      value: QueryModuleAccountBalanceRequest.toAmino(message, useInterfaces)
+      value: QueryModuleAccountBalanceRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryModuleAccountBalanceRequestProtoMsg, useInterfaces: boolean = true): QueryModuleAccountBalanceRequest {
-    return QueryModuleAccountBalanceRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryModuleAccountBalanceRequestProtoMsg): QueryModuleAccountBalanceRequest {
+    return QueryModuleAccountBalanceRequest.decode(message.value);
   },
   toProto(message: QueryModuleAccountBalanceRequest): Uint8Array {
     return QueryModuleAccountBalanceRequest.encode(message).finish();
@@ -266,7 +266,7 @@ export const QueryModuleAccountBalanceResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryModuleAccountBalanceResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryModuleAccountBalanceResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountBalanceResponse();
@@ -274,7 +274,7 @@ export const QueryModuleAccountBalanceResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.moduleAccountBalance.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.moduleAccountBalance.push(Coin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -321,10 +321,10 @@ export const QueryModuleAccountBalanceResponse = {
       moduleAccountBalance: Array.isArray(object?.moduleAccountBalance) ? object.moduleAccountBalance.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryModuleAccountBalanceResponse, useInterfaces: boolean = true): QueryModuleAccountBalanceResponseAmino {
+  toAmino(message: QueryModuleAccountBalanceResponse): QueryModuleAccountBalanceResponseAmino {
     const obj: any = {};
     if (message.moduleAccountBalance) {
-      obj.moduleAccountBalance = message.moduleAccountBalance.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.moduleAccountBalance = message.moduleAccountBalance.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.moduleAccountBalance = [];
     }
@@ -333,14 +333,14 @@ export const QueryModuleAccountBalanceResponse = {
   fromAminoMsg(object: QueryModuleAccountBalanceResponseAminoMsg): QueryModuleAccountBalanceResponse {
     return QueryModuleAccountBalanceResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryModuleAccountBalanceResponse, useInterfaces: boolean = true): QueryModuleAccountBalanceResponseAminoMsg {
+  toAminoMsg(message: QueryModuleAccountBalanceResponse): QueryModuleAccountBalanceResponseAminoMsg {
     return {
       type: "osmosis/claim/query-module-account-balance-response",
-      value: QueryModuleAccountBalanceResponse.toAmino(message, useInterfaces)
+      value: QueryModuleAccountBalanceResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryModuleAccountBalanceResponseProtoMsg, useInterfaces: boolean = true): QueryModuleAccountBalanceResponse {
-    return QueryModuleAccountBalanceResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryModuleAccountBalanceResponseProtoMsg): QueryModuleAccountBalanceResponse {
+    return QueryModuleAccountBalanceResponse.decode(message.value);
   },
   toProto(message: QueryModuleAccountBalanceResponse): Uint8Array {
     return QueryModuleAccountBalanceResponse.encode(message).finish();
@@ -361,7 +361,7 @@ export const QueryParamsRequest = {
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -397,21 +397,21 @@ export const QueryParamsRequest = {
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     return {};
   },
-  toAmino(_: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
     return QueryParamsRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAminoMsg {
+  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
     return {
       type: "osmosis/claim/query-params-request",
-      value: QueryParamsRequest.toAmino(message, useInterfaces)
+      value: QueryParamsRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = true): QueryParamsRequest {
-    return QueryParamsRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value);
   },
   toProto(message: QueryParamsRequest): Uint8Array {
     return QueryParamsRequest.encode(message).finish();
@@ -437,7 +437,7 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -445,7 +445,7 @@ export const QueryParamsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
+          message.params = Params.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -486,22 +486,22 @@ export const QueryParamsResponse = {
       params: object?.params ? Params.fromAmino(object.params) : undefined
     };
   },
-  toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
     return QueryParamsResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAminoMsg {
+  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
     return {
       type: "osmosis/claim/query-params-response",
-      value: QueryParamsResponse.toAmino(message, useInterfaces)
+      value: QueryParamsResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = true): QueryParamsResponse {
-    return QueryParamsResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value);
   },
   toProto(message: QueryParamsResponse): Uint8Array {
     return QueryParamsResponse.encode(message).finish();
@@ -527,7 +527,7 @@ export const QueryClaimRecordRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryClaimRecordRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryClaimRecordRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimRecordRequest();
@@ -574,7 +574,7 @@ export const QueryClaimRecordRequest = {
       address: object.address
     };
   },
-  toAmino(message: QueryClaimRecordRequest, useInterfaces: boolean = true): QueryClaimRecordRequestAmino {
+  toAmino(message: QueryClaimRecordRequest): QueryClaimRecordRequestAmino {
     const obj: any = {};
     obj.address = message.address;
     return obj;
@@ -582,14 +582,14 @@ export const QueryClaimRecordRequest = {
   fromAminoMsg(object: QueryClaimRecordRequestAminoMsg): QueryClaimRecordRequest {
     return QueryClaimRecordRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryClaimRecordRequest, useInterfaces: boolean = true): QueryClaimRecordRequestAminoMsg {
+  toAminoMsg(message: QueryClaimRecordRequest): QueryClaimRecordRequestAminoMsg {
     return {
       type: "osmosis/claim/query-claim-record-request",
-      value: QueryClaimRecordRequest.toAmino(message, useInterfaces)
+      value: QueryClaimRecordRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryClaimRecordRequestProtoMsg, useInterfaces: boolean = true): QueryClaimRecordRequest {
-    return QueryClaimRecordRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryClaimRecordRequestProtoMsg): QueryClaimRecordRequest {
+    return QueryClaimRecordRequest.decode(message.value);
   },
   toProto(message: QueryClaimRecordRequest): Uint8Array {
     return QueryClaimRecordRequest.encode(message).finish();
@@ -615,7 +615,7 @@ export const QueryClaimRecordResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryClaimRecordResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryClaimRecordResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimRecordResponse();
@@ -623,7 +623,7 @@ export const QueryClaimRecordResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.claimRecord = ClaimRecord.decode(reader, reader.uint32(), useInterfaces);
+          message.claimRecord = ClaimRecord.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -664,22 +664,22 @@ export const QueryClaimRecordResponse = {
       claimRecord: object?.claim_record ? ClaimRecord.fromAmino(object.claim_record) : undefined
     };
   },
-  toAmino(message: QueryClaimRecordResponse, useInterfaces: boolean = true): QueryClaimRecordResponseAmino {
+  toAmino(message: QueryClaimRecordResponse): QueryClaimRecordResponseAmino {
     const obj: any = {};
-    obj.claim_record = message.claimRecord ? ClaimRecord.toAmino(message.claimRecord, useInterfaces) : undefined;
+    obj.claim_record = message.claimRecord ? ClaimRecord.toAmino(message.claimRecord) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryClaimRecordResponseAminoMsg): QueryClaimRecordResponse {
     return QueryClaimRecordResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryClaimRecordResponse, useInterfaces: boolean = true): QueryClaimRecordResponseAminoMsg {
+  toAminoMsg(message: QueryClaimRecordResponse): QueryClaimRecordResponseAminoMsg {
     return {
       type: "osmosis/claim/query-claim-record-response",
-      value: QueryClaimRecordResponse.toAmino(message, useInterfaces)
+      value: QueryClaimRecordResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryClaimRecordResponseProtoMsg, useInterfaces: boolean = true): QueryClaimRecordResponse {
-    return QueryClaimRecordResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryClaimRecordResponseProtoMsg): QueryClaimRecordResponse {
+    return QueryClaimRecordResponse.decode(message.value);
   },
   toProto(message: QueryClaimRecordResponse): Uint8Array {
     return QueryClaimRecordResponse.encode(message).finish();
@@ -709,7 +709,7 @@ export const QueryClaimableForActionRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryClaimableForActionRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryClaimableForActionRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimableForActionRequest();
@@ -765,7 +765,7 @@ export const QueryClaimableForActionRequest = {
       action: isSet(object.action) ? actionFromJSON(object.action) : -1
     };
   },
-  toAmino(message: QueryClaimableForActionRequest, useInterfaces: boolean = true): QueryClaimableForActionRequestAmino {
+  toAmino(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.action = message.action;
@@ -774,14 +774,14 @@ export const QueryClaimableForActionRequest = {
   fromAminoMsg(object: QueryClaimableForActionRequestAminoMsg): QueryClaimableForActionRequest {
     return QueryClaimableForActionRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryClaimableForActionRequest, useInterfaces: boolean = true): QueryClaimableForActionRequestAminoMsg {
+  toAminoMsg(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestAminoMsg {
     return {
       type: "osmosis/claim/query-claimable-for-action-request",
-      value: QueryClaimableForActionRequest.toAmino(message, useInterfaces)
+      value: QueryClaimableForActionRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryClaimableForActionRequestProtoMsg, useInterfaces: boolean = true): QueryClaimableForActionRequest {
-    return QueryClaimableForActionRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryClaimableForActionRequestProtoMsg): QueryClaimableForActionRequest {
+    return QueryClaimableForActionRequest.decode(message.value);
   },
   toProto(message: QueryClaimableForActionRequest): Uint8Array {
     return QueryClaimableForActionRequest.encode(message).finish();
@@ -807,7 +807,7 @@ export const QueryClaimableForActionResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryClaimableForActionResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryClaimableForActionResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClaimableForActionResponse();
@@ -815,7 +815,7 @@ export const QueryClaimableForActionResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.coins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.coins.push(Coin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -862,10 +862,10 @@ export const QueryClaimableForActionResponse = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryClaimableForActionResponse, useInterfaces: boolean = true): QueryClaimableForActionResponseAmino {
+  toAmino(message: QueryClaimableForActionResponse): QueryClaimableForActionResponseAmino {
     const obj: any = {};
     if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.coins = [];
     }
@@ -874,14 +874,14 @@ export const QueryClaimableForActionResponse = {
   fromAminoMsg(object: QueryClaimableForActionResponseAminoMsg): QueryClaimableForActionResponse {
     return QueryClaimableForActionResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryClaimableForActionResponse, useInterfaces: boolean = true): QueryClaimableForActionResponseAminoMsg {
+  toAminoMsg(message: QueryClaimableForActionResponse): QueryClaimableForActionResponseAminoMsg {
     return {
       type: "osmosis/claim/query-claimable-for-action-response",
-      value: QueryClaimableForActionResponse.toAmino(message, useInterfaces)
+      value: QueryClaimableForActionResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryClaimableForActionResponseProtoMsg, useInterfaces: boolean = true): QueryClaimableForActionResponse {
-    return QueryClaimableForActionResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryClaimableForActionResponseProtoMsg): QueryClaimableForActionResponse {
+    return QueryClaimableForActionResponse.decode(message.value);
   },
   toProto(message: QueryClaimableForActionResponse): Uint8Array {
     return QueryClaimableForActionResponse.encode(message).finish();
@@ -907,7 +907,7 @@ export const QueryTotalClaimableRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryTotalClaimableRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalClaimableRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalClaimableRequest();
@@ -954,7 +954,7 @@ export const QueryTotalClaimableRequest = {
       address: object.address
     };
   },
-  toAmino(message: QueryTotalClaimableRequest, useInterfaces: boolean = true): QueryTotalClaimableRequestAmino {
+  toAmino(message: QueryTotalClaimableRequest): QueryTotalClaimableRequestAmino {
     const obj: any = {};
     obj.address = message.address;
     return obj;
@@ -962,14 +962,14 @@ export const QueryTotalClaimableRequest = {
   fromAminoMsg(object: QueryTotalClaimableRequestAminoMsg): QueryTotalClaimableRequest {
     return QueryTotalClaimableRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryTotalClaimableRequest, useInterfaces: boolean = true): QueryTotalClaimableRequestAminoMsg {
+  toAminoMsg(message: QueryTotalClaimableRequest): QueryTotalClaimableRequestAminoMsg {
     return {
       type: "osmosis/claim/query-total-claimable-request",
-      value: QueryTotalClaimableRequest.toAmino(message, useInterfaces)
+      value: QueryTotalClaimableRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryTotalClaimableRequestProtoMsg, useInterfaces: boolean = true): QueryTotalClaimableRequest {
-    return QueryTotalClaimableRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryTotalClaimableRequestProtoMsg): QueryTotalClaimableRequest {
+    return QueryTotalClaimableRequest.decode(message.value);
   },
   toProto(message: QueryTotalClaimableRequest): Uint8Array {
     return QueryTotalClaimableRequest.encode(message).finish();
@@ -995,7 +995,7 @@ export const QueryTotalClaimableResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryTotalClaimableResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalClaimableResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalClaimableResponse();
@@ -1003,7 +1003,7 @@ export const QueryTotalClaimableResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.coins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.coins.push(Coin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1050,10 +1050,10 @@ export const QueryTotalClaimableResponse = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: QueryTotalClaimableResponse, useInterfaces: boolean = true): QueryTotalClaimableResponseAmino {
+  toAmino(message: QueryTotalClaimableResponse): QueryTotalClaimableResponseAmino {
     const obj: any = {};
     if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.coins = [];
     }
@@ -1062,14 +1062,14 @@ export const QueryTotalClaimableResponse = {
   fromAminoMsg(object: QueryTotalClaimableResponseAminoMsg): QueryTotalClaimableResponse {
     return QueryTotalClaimableResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryTotalClaimableResponse, useInterfaces: boolean = true): QueryTotalClaimableResponseAminoMsg {
+  toAminoMsg(message: QueryTotalClaimableResponse): QueryTotalClaimableResponseAminoMsg {
     return {
       type: "osmosis/claim/query-total-claimable-response",
-      value: QueryTotalClaimableResponse.toAmino(message, useInterfaces)
+      value: QueryTotalClaimableResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryTotalClaimableResponseProtoMsg, useInterfaces: boolean = true): QueryTotalClaimableResponse {
-    return QueryTotalClaimableResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryTotalClaimableResponseProtoMsg): QueryTotalClaimableResponse {
+    return QueryTotalClaimableResponse.decode(message.value);
   },
   toProto(message: QueryTotalClaimableResponse): Uint8Array {
     return QueryTotalClaimableResponse.encode(message).finish();

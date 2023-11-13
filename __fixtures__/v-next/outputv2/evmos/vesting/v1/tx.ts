@@ -187,7 +187,7 @@ export const MsgCreateClawbackVestingAccount = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateClawbackVestingAccount {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateClawbackVestingAccount {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateClawbackVestingAccount();
@@ -204,10 +204,10 @@ export const MsgCreateClawbackVestingAccount = {
           message.startTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 4:
-          message.lockupPeriods.push(Period.decode(reader, reader.uint32(), useInterfaces));
+          message.lockupPeriods.push(Period.decode(reader, reader.uint32()));
           break;
         case 5:
-          message.vestingPeriods.push(Period.decode(reader, reader.uint32(), useInterfaces));
+          message.vestingPeriods.push(Period.decode(reader, reader.uint32()));
           break;
         case 6:
           message.merge = reader.bool();
@@ -295,18 +295,18 @@ export const MsgCreateClawbackVestingAccount = {
       merge: object.merge
     };
   },
-  toAmino(message: MsgCreateClawbackVestingAccount, useInterfaces: boolean = true): MsgCreateClawbackVestingAccountAmino {
+  toAmino(message: MsgCreateClawbackVestingAccount): MsgCreateClawbackVestingAccountAmino {
     const obj: any = {};
     obj.from_address = message.fromAddress;
     obj.to_address = message.toAddress;
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     if (message.lockupPeriods) {
-      obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e, useInterfaces) : undefined);
+      obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e) : undefined);
     } else {
       obj.lockup_periods = [];
     }
     if (message.vestingPeriods) {
-      obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e, useInterfaces) : undefined);
+      obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e) : undefined);
     } else {
       obj.vesting_periods = [];
     }
@@ -316,8 +316,8 @@ export const MsgCreateClawbackVestingAccount = {
   fromAminoMsg(object: MsgCreateClawbackVestingAccountAminoMsg): MsgCreateClawbackVestingAccount {
     return MsgCreateClawbackVestingAccount.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgCreateClawbackVestingAccountProtoMsg, useInterfaces: boolean = true): MsgCreateClawbackVestingAccount {
-    return MsgCreateClawbackVestingAccount.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgCreateClawbackVestingAccountProtoMsg): MsgCreateClawbackVestingAccount {
+    return MsgCreateClawbackVestingAccount.decode(message.value);
   },
   toProto(message: MsgCreateClawbackVestingAccount): Uint8Array {
     return MsgCreateClawbackVestingAccount.encode(message).finish();
@@ -337,7 +337,7 @@ export const MsgCreateClawbackVestingAccountResponse = {
   encode(_: MsgCreateClawbackVestingAccountResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateClawbackVestingAccountResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateClawbackVestingAccountResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateClawbackVestingAccountResponse();
@@ -373,15 +373,15 @@ export const MsgCreateClawbackVestingAccountResponse = {
   fromAmino(_: MsgCreateClawbackVestingAccountResponseAmino): MsgCreateClawbackVestingAccountResponse {
     return {};
   },
-  toAmino(_: MsgCreateClawbackVestingAccountResponse, useInterfaces: boolean = true): MsgCreateClawbackVestingAccountResponseAmino {
+  toAmino(_: MsgCreateClawbackVestingAccountResponse): MsgCreateClawbackVestingAccountResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgCreateClawbackVestingAccountResponseAminoMsg): MsgCreateClawbackVestingAccountResponse {
     return MsgCreateClawbackVestingAccountResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgCreateClawbackVestingAccountResponseProtoMsg, useInterfaces: boolean = true): MsgCreateClawbackVestingAccountResponse {
-    return MsgCreateClawbackVestingAccountResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgCreateClawbackVestingAccountResponseProtoMsg): MsgCreateClawbackVestingAccountResponse {
+    return MsgCreateClawbackVestingAccountResponse.decode(message.value);
   },
   toProto(message: MsgCreateClawbackVestingAccountResponse): Uint8Array {
     return MsgCreateClawbackVestingAccountResponse.encode(message).finish();
@@ -414,7 +414,7 @@ export const MsgClawback = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgClawback {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgClawback {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgClawback();
@@ -479,7 +479,7 @@ export const MsgClawback = {
       destAddress: object.dest_address
     };
   },
-  toAmino(message: MsgClawback, useInterfaces: boolean = true): MsgClawbackAmino {
+  toAmino(message: MsgClawback): MsgClawbackAmino {
     const obj: any = {};
     obj.funder_address = message.funderAddress;
     obj.account_address = message.accountAddress;
@@ -489,8 +489,8 @@ export const MsgClawback = {
   fromAminoMsg(object: MsgClawbackAminoMsg): MsgClawback {
     return MsgClawback.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgClawbackProtoMsg, useInterfaces: boolean = true): MsgClawback {
-    return MsgClawback.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgClawbackProtoMsg): MsgClawback {
+    return MsgClawback.decode(message.value);
   },
   toProto(message: MsgClawback): Uint8Array {
     return MsgClawback.encode(message).finish();
@@ -510,7 +510,7 @@ export const MsgClawbackResponse = {
   encode(_: MsgClawbackResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgClawbackResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgClawbackResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgClawbackResponse();
@@ -546,15 +546,15 @@ export const MsgClawbackResponse = {
   fromAmino(_: MsgClawbackResponseAmino): MsgClawbackResponse {
     return {};
   },
-  toAmino(_: MsgClawbackResponse, useInterfaces: boolean = true): MsgClawbackResponseAmino {
+  toAmino(_: MsgClawbackResponse): MsgClawbackResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgClawbackResponseAminoMsg): MsgClawbackResponse {
     return MsgClawbackResponse.fromAmino(object.value);
   },
-  fromProtoMsg(message: MsgClawbackResponseProtoMsg, useInterfaces: boolean = true): MsgClawbackResponse {
-    return MsgClawbackResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgClawbackResponseProtoMsg): MsgClawbackResponse {
+    return MsgClawbackResponse.decode(message.value);
   },
   toProto(message: MsgClawbackResponse): Uint8Array {
     return MsgClawbackResponse.encode(message).finish();

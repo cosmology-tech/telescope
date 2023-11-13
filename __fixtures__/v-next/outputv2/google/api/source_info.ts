@@ -37,7 +37,7 @@ export const SourceInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SourceInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number): SourceInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo();
@@ -45,7 +45,7 @@ export const SourceInfo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.sourceFiles.push(Any.decode(reader, reader.uint32(), useInterfaces));
+          message.sourceFiles.push(Any.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -92,10 +92,10 @@ export const SourceInfo = {
       sourceFiles: Array.isArray(object?.source_files) ? object.source_files.map((e: any) => Any.fromAmino(e)) : []
     };
   },
-  toAmino(message: SourceInfo, useInterfaces: boolean = true): SourceInfoAmino {
+  toAmino(message: SourceInfo): SourceInfoAmino {
     const obj: any = {};
     if (message.sourceFiles) {
-      obj.source_files = message.sourceFiles.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
+      obj.source_files = message.sourceFiles.map(e => e ? Any.toAmino(e) : undefined);
     } else {
       obj.source_files = [];
     }
@@ -104,8 +104,8 @@ export const SourceInfo = {
   fromAminoMsg(object: SourceInfoAminoMsg): SourceInfo {
     return SourceInfo.fromAmino(object.value);
   },
-  fromProtoMsg(message: SourceInfoProtoMsg, useInterfaces: boolean = true): SourceInfo {
-    return SourceInfo.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: SourceInfoProtoMsg): SourceInfo {
+    return SourceInfo.decode(message.value);
   },
   toProto(message: SourceInfo): Uint8Array {
     return SourceInfo.encode(message).finish();

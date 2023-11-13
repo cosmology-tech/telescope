@@ -193,7 +193,7 @@ export const Billing = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Billing {
+  decode(input: BinaryReader | Uint8Array, length?: number): Billing {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBilling();
@@ -201,7 +201,7 @@ export const Billing = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 8:
-          message.consumerDestinations.push(Billing_BillingDestination.decode(reader, reader.uint32(), useInterfaces));
+          message.consumerDestinations.push(Billing_BillingDestination.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -248,10 +248,10 @@ export const Billing = {
       consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Billing_BillingDestination.fromAmino(e)) : []
     };
   },
-  toAmino(message: Billing, useInterfaces: boolean = true): BillingAmino {
+  toAmino(message: Billing): BillingAmino {
     const obj: any = {};
     if (message.consumerDestinations) {
-      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Billing_BillingDestination.toAmino(e, useInterfaces) : undefined);
+      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Billing_BillingDestination.toAmino(e) : undefined);
     } else {
       obj.consumer_destinations = [];
     }
@@ -260,8 +260,8 @@ export const Billing = {
   fromAminoMsg(object: BillingAminoMsg): Billing {
     return Billing.fromAmino(object.value);
   },
-  fromProtoMsg(message: BillingProtoMsg, useInterfaces: boolean = true): Billing {
-    return Billing.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: BillingProtoMsg): Billing {
+    return Billing.decode(message.value);
   },
   toProto(message: Billing): Uint8Array {
     return Billing.encode(message).finish();
@@ -290,7 +290,7 @@ export const Billing_BillingDestination = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Billing_BillingDestination {
+  decode(input: BinaryReader | Uint8Array, length?: number): Billing_BillingDestination {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBilling_BillingDestination();
@@ -354,7 +354,7 @@ export const Billing_BillingDestination = {
       metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
     };
   },
-  toAmino(message: Billing_BillingDestination, useInterfaces: boolean = true): Billing_BillingDestinationAmino {
+  toAmino(message: Billing_BillingDestination): Billing_BillingDestinationAmino {
     const obj: any = {};
     obj.monitored_resource = message.monitoredResource;
     if (message.metrics) {
@@ -367,8 +367,8 @@ export const Billing_BillingDestination = {
   fromAminoMsg(object: Billing_BillingDestinationAminoMsg): Billing_BillingDestination {
     return Billing_BillingDestination.fromAmino(object.value);
   },
-  fromProtoMsg(message: Billing_BillingDestinationProtoMsg, useInterfaces: boolean = true): Billing_BillingDestination {
-    return Billing_BillingDestination.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: Billing_BillingDestinationProtoMsg): Billing_BillingDestination {
+    return Billing_BillingDestination.decode(message.value);
   },
   toProto(message: Billing_BillingDestination): Uint8Array {
     return Billing_BillingDestination.encode(message).finish();

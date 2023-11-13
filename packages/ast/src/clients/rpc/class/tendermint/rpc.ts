@@ -154,7 +154,7 @@ const returnPromise = (name: string, context: GenericParseContext) => {
                                     t.identifier('data')
                                 ]
                             ),
-                            ...(context.options.interfaces.enabled ? [
+                            ...(context.options.interfaces.enabled && context.options.interfaces.useUseInterfacesParams ? [
                                 t.identifier('undefined'),
                                 t.identifier('useInterfaces')
                             ] : []),
@@ -259,7 +259,7 @@ const rpcClassMethod = (
         t.identifier(name),
         [
             methodArgs,
-            ...(context.options.interfaces.enabled ? [
+            ...(context.options.interfaces.enabled && context.options.interfaces.useUseInterfacesParams ? [
                 t.assignmentPattern(
                     identifier(
                         'useInterfaces',

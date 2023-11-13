@@ -202,7 +202,7 @@ export const PageRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PageRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): PageRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePageRequest();
@@ -289,7 +289,7 @@ export const PageRequest = {
       reverse: object.reverse
     };
   },
-  toAmino(message: PageRequest, useInterfaces: boolean = true): PageRequestAmino {
+  toAmino(message: PageRequest): PageRequestAmino {
     const obj: any = {};
     obj.key = message.key;
     obj.offset = message.offset ? message.offset.toString() : undefined;
@@ -301,14 +301,14 @@ export const PageRequest = {
   fromAminoMsg(object: PageRequestAminoMsg): PageRequest {
     return PageRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: PageRequest, useInterfaces: boolean = true): PageRequestAminoMsg {
+  toAminoMsg(message: PageRequest): PageRequestAminoMsg {
     return {
       type: "cosmos-sdk/PageRequest",
-      value: PageRequest.toAmino(message, useInterfaces)
+      value: PageRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: PageRequestProtoMsg, useInterfaces: boolean = true): PageRequest {
-    return PageRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: PageRequestProtoMsg): PageRequest {
+    return PageRequest.decode(message.value);
   },
   toProto(message: PageRequest): Uint8Array {
     return PageRequest.encode(message).finish();
@@ -338,7 +338,7 @@ export const PageResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PageResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): PageResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePageResponse();
@@ -396,7 +396,7 @@ export const PageResponse = {
       total: BigInt(object.total)
     };
   },
-  toAmino(message: PageResponse, useInterfaces: boolean = true): PageResponseAmino {
+  toAmino(message: PageResponse): PageResponseAmino {
     const obj: any = {};
     obj.next_key = message.nextKey;
     obj.total = message.total ? message.total.toString() : undefined;
@@ -405,14 +405,14 @@ export const PageResponse = {
   fromAminoMsg(object: PageResponseAminoMsg): PageResponse {
     return PageResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: PageResponse, useInterfaces: boolean = true): PageResponseAminoMsg {
+  toAminoMsg(message: PageResponse): PageResponseAminoMsg {
     return {
       type: "cosmos-sdk/PageResponse",
-      value: PageResponse.toAmino(message, useInterfaces)
+      value: PageResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: PageResponseProtoMsg, useInterfaces: boolean = true): PageResponse {
-    return PageResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: PageResponseProtoMsg): PageResponse {
+    return PageResponse.decode(message.value);
   },
   toProto(message: PageResponse): Uint8Array {
     return PageResponse.encode(message).finish();

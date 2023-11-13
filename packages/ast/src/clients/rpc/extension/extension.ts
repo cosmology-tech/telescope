@@ -38,7 +38,7 @@ const rpcExtensionMethod = (
 
     return objectMethod('method', t.identifier(name), [
         methodArgs,
-        ...(context.options.interfaces.enabled ? [
+        ...(context.options.interfaces.enabled && context.options.interfaces.useUseInterfacesParams ? [
             t.assignmentPattern(
                 identifier(
                     'useInterfaces',
@@ -58,7 +58,7 @@ const rpcExtensionMethod = (
                 ),
                 [
                     t.identifier('request'),
-                    ...(context.options.interfaces.enabled ? [
+                    ...(context.options.interfaces.enabled && context.options.interfaces.useUseInterfacesParams ? [
                         t.identifier('useInterfaces')
                     ] : []),
                 ]

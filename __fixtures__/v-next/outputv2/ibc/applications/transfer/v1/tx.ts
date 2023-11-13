@@ -131,7 +131,7 @@ export const MsgTransfer = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgTransfer {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgTransfer {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTransfer();
@@ -145,7 +145,7 @@ export const MsgTransfer = {
           message.sourceChannel = reader.string();
           break;
         case 3:
-          message.token = Coin.decode(reader, reader.uint32(), useInterfaces);
+          message.token = Coin.decode(reader, reader.uint32());
           break;
         case 4:
           message.sender = reader.string();
@@ -154,7 +154,7 @@ export const MsgTransfer = {
           message.receiver = reader.string();
           break;
         case 6:
-          message.timeoutHeight = Height.decode(reader, reader.uint32(), useInterfaces);
+          message.timeoutHeight = Height.decode(reader, reader.uint32());
           break;
         case 7:
           message.timeoutTimestamp = reader.uint64();
@@ -238,28 +238,28 @@ export const MsgTransfer = {
       timeoutTimestamp: BigInt(object.timeout_timestamp)
     };
   },
-  toAmino(message: MsgTransfer, useInterfaces: boolean = true): MsgTransferAmino {
+  toAmino(message: MsgTransfer): MsgTransferAmino {
     const obj: any = {};
     obj.source_port = message.sourcePort;
     obj.source_channel = message.sourceChannel;
-    obj.token = message.token ? Coin.toAmino(message.token, useInterfaces) : undefined;
+    obj.token = message.token ? Coin.toAmino(message.token) : undefined;
     obj.sender = message.sender;
     obj.receiver = message.receiver;
-    obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight, useInterfaces) : {};
+    obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : {};
     obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgTransferAminoMsg): MsgTransfer {
     return MsgTransfer.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgTransfer, useInterfaces: boolean = true): MsgTransferAminoMsg {
+  toAminoMsg(message: MsgTransfer): MsgTransferAminoMsg {
     return {
       type: "cosmos-sdk/MsgTransfer",
-      value: MsgTransfer.toAmino(message, useInterfaces)
+      value: MsgTransfer.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgTransferProtoMsg, useInterfaces: boolean = true): MsgTransfer {
-    return MsgTransfer.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgTransferProtoMsg): MsgTransfer {
+    return MsgTransfer.decode(message.value);
   },
   toProto(message: MsgTransfer): Uint8Array {
     return MsgTransfer.encode(message).finish();
@@ -280,7 +280,7 @@ export const MsgTransferResponse = {
   encode(_: MsgTransferResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgTransferResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgTransferResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTransferResponse();
@@ -316,21 +316,21 @@ export const MsgTransferResponse = {
   fromAmino(_: MsgTransferResponseAmino): MsgTransferResponse {
     return {};
   },
-  toAmino(_: MsgTransferResponse, useInterfaces: boolean = true): MsgTransferResponseAmino {
+  toAmino(_: MsgTransferResponse): MsgTransferResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgTransferResponseAminoMsg): MsgTransferResponse {
     return MsgTransferResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgTransferResponse, useInterfaces: boolean = true): MsgTransferResponseAminoMsg {
+  toAminoMsg(message: MsgTransferResponse): MsgTransferResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgTransferResponse",
-      value: MsgTransferResponse.toAmino(message, useInterfaces)
+      value: MsgTransferResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgTransferResponseProtoMsg, useInterfaces: boolean = true): MsgTransferResponse {
-    return MsgTransferResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgTransferResponseProtoMsg): MsgTransferResponse {
+    return MsgTransferResponse.decode(message.value);
   },
   toProto(message: MsgTransferResponse): Uint8Array {
     return MsgTransferResponse.encode(message).finish();

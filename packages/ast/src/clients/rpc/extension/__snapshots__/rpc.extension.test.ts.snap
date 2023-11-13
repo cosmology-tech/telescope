@@ -5,26 +5,26 @@ exports[`createRpcQueryExtension 1`] = `
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    accounts(request?: QueryAccountsRequest, useInterfaces: boolean = true): Promise<QueryAccountsResponse> {
-      return queryService.accounts(request, useInterfaces);
+    accounts(request?: QueryAccountsRequest): Promise<QueryAccountsResponse> {
+      return queryService.accounts(request);
     },
-    account(request: QueryAccountRequest, useInterfaces: boolean = true): Promise<QueryAccountResponse> {
-      return queryService.account(request, useInterfaces);
+    account(request: QueryAccountRequest): Promise<QueryAccountResponse> {
+      return queryService.account(request);
     },
-    params(request?: QueryParamsRequest, useInterfaces: boolean = true): Promise<QueryParamsResponse> {
-      return queryService.params(request, useInterfaces);
+    params(request?: QueryParamsRequest): Promise<QueryParamsResponse> {
+      return queryService.params(request);
     },
-    moduleAccounts(request?: QueryModuleAccountsRequest, useInterfaces: boolean = true): Promise<QueryModuleAccountsResponse> {
-      return queryService.moduleAccounts(request, useInterfaces);
+    moduleAccounts(request?: QueryModuleAccountsRequest): Promise<QueryModuleAccountsResponse> {
+      return queryService.moduleAccounts(request);
     },
-    bech32Prefix(request?: Bech32PrefixRequest, useInterfaces: boolean = true): Promise<Bech32PrefixResponse> {
-      return queryService.bech32Prefix(request, useInterfaces);
+    bech32Prefix(request?: Bech32PrefixRequest): Promise<Bech32PrefixResponse> {
+      return queryService.bech32Prefix(request);
     },
-    addressBytesToString(request: AddressBytesToStringRequest, useInterfaces: boolean = true): Promise<AddressBytesToStringResponse> {
-      return queryService.addressBytesToString(request, useInterfaces);
+    addressBytesToString(request: AddressBytesToStringRequest): Promise<AddressBytesToStringResponse> {
+      return queryService.addressBytesToString(request);
     },
-    addressStringToBytes(request: AddressStringToBytesRequest, useInterfaces: boolean = true): Promise<AddressStringToBytesResponse> {
-      return queryService.addressStringToBytes(request, useInterfaces);
+    addressStringToBytes(request: AddressStringToBytesRequest): Promise<AddressStringToBytesResponse> {
+      return queryService.addressStringToBytes(request);
     }
   };
 };"

@@ -51,7 +51,7 @@ export const SourceContext = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SourceContext {
+  decode(input: BinaryReader | Uint8Array, length?: number): SourceContext {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceContext();
@@ -98,7 +98,7 @@ export const SourceContext = {
       fileName: object.file_name
     };
   },
-  toAmino(message: SourceContext, useInterfaces: boolean = true): SourceContextAmino {
+  toAmino(message: SourceContext): SourceContextAmino {
     const obj: any = {};
     obj.file_name = message.fileName;
     return obj;
@@ -106,8 +106,8 @@ export const SourceContext = {
   fromAminoMsg(object: SourceContextAminoMsg): SourceContext {
     return SourceContext.fromAmino(object.value);
   },
-  fromProtoMsg(message: SourceContextProtoMsg, useInterfaces: boolean = true): SourceContext {
-    return SourceContext.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: SourceContextProtoMsg): SourceContext {
+    return SourceContext.decode(message.value);
   },
   toProto(message: SourceContext): Uint8Array {
     return SourceContext.encode(message).finish();

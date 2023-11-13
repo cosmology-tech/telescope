@@ -460,7 +460,7 @@ export const Channel = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Channel {
+  decode(input: BinaryReader | Uint8Array, length?: number): Channel {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChannel();
@@ -474,7 +474,7 @@ export const Channel = {
           message.ordering = (reader.int32() as any);
           break;
         case 3:
-          message.counterparty = Counterparty.decode(reader, reader.uint32(), useInterfaces);
+          message.counterparty = Counterparty.decode(reader, reader.uint32());
           break;
         case 4:
           message.connectionHops.push(reader.string());
@@ -553,11 +553,11 @@ export const Channel = {
       version: object.version
     };
   },
-  toAmino(message: Channel, useInterfaces: boolean = true): ChannelAmino {
+  toAmino(message: Channel): ChannelAmino {
     const obj: any = {};
     obj.state = message.state;
     obj.ordering = message.ordering;
-    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty, useInterfaces) : undefined;
+    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     if (message.connectionHops) {
       obj.connection_hops = message.connectionHops.map(e => e);
     } else {
@@ -569,14 +569,14 @@ export const Channel = {
   fromAminoMsg(object: ChannelAminoMsg): Channel {
     return Channel.fromAmino(object.value);
   },
-  toAminoMsg(message: Channel, useInterfaces: boolean = true): ChannelAminoMsg {
+  toAminoMsg(message: Channel): ChannelAminoMsg {
     return {
       type: "cosmos-sdk/Channel",
-      value: Channel.toAmino(message, useInterfaces)
+      value: Channel.toAmino(message)
     };
   },
-  fromProtoMsg(message: ChannelProtoMsg, useInterfaces: boolean = true): Channel {
-    return Channel.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ChannelProtoMsg): Channel {
+    return Channel.decode(message.value);
   },
   toProto(message: Channel): Uint8Array {
     return Channel.encode(message).finish();
@@ -626,7 +626,7 @@ export const IdentifiedChannel = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): IdentifiedChannel {
+  decode(input: BinaryReader | Uint8Array, length?: number): IdentifiedChannel {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdentifiedChannel();
@@ -640,7 +640,7 @@ export const IdentifiedChannel = {
           message.ordering = (reader.int32() as any);
           break;
         case 3:
-          message.counterparty = Counterparty.decode(reader, reader.uint32(), useInterfaces);
+          message.counterparty = Counterparty.decode(reader, reader.uint32());
           break;
         case 4:
           message.connectionHops.push(reader.string());
@@ -737,11 +737,11 @@ export const IdentifiedChannel = {
       channelId: object.channel_id
     };
   },
-  toAmino(message: IdentifiedChannel, useInterfaces: boolean = true): IdentifiedChannelAmino {
+  toAmino(message: IdentifiedChannel): IdentifiedChannelAmino {
     const obj: any = {};
     obj.state = message.state;
     obj.ordering = message.ordering;
-    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty, useInterfaces) : undefined;
+    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     if (message.connectionHops) {
       obj.connection_hops = message.connectionHops.map(e => e);
     } else {
@@ -755,14 +755,14 @@ export const IdentifiedChannel = {
   fromAminoMsg(object: IdentifiedChannelAminoMsg): IdentifiedChannel {
     return IdentifiedChannel.fromAmino(object.value);
   },
-  toAminoMsg(message: IdentifiedChannel, useInterfaces: boolean = true): IdentifiedChannelAminoMsg {
+  toAminoMsg(message: IdentifiedChannel): IdentifiedChannelAminoMsg {
     return {
       type: "cosmos-sdk/IdentifiedChannel",
-      value: IdentifiedChannel.toAmino(message, useInterfaces)
+      value: IdentifiedChannel.toAmino(message)
     };
   },
-  fromProtoMsg(message: IdentifiedChannelProtoMsg, useInterfaces: boolean = true): IdentifiedChannel {
-    return IdentifiedChannel.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: IdentifiedChannelProtoMsg): IdentifiedChannel {
+    return IdentifiedChannel.decode(message.value);
   },
   toProto(message: IdentifiedChannel): Uint8Array {
     return IdentifiedChannel.encode(message).finish();
@@ -792,7 +792,7 @@ export const Counterparty = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Counterparty {
+  decode(input: BinaryReader | Uint8Array, length?: number): Counterparty {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCounterparty();
@@ -848,7 +848,7 @@ export const Counterparty = {
       channelId: object.channel_id
     };
   },
-  toAmino(message: Counterparty, useInterfaces: boolean = true): CounterpartyAmino {
+  toAmino(message: Counterparty): CounterpartyAmino {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
@@ -857,14 +857,14 @@ export const Counterparty = {
   fromAminoMsg(object: CounterpartyAminoMsg): Counterparty {
     return Counterparty.fromAmino(object.value);
   },
-  toAminoMsg(message: Counterparty, useInterfaces: boolean = true): CounterpartyAminoMsg {
+  toAminoMsg(message: Counterparty): CounterpartyAminoMsg {
     return {
       type: "cosmos-sdk/Counterparty",
-      value: Counterparty.toAmino(message, useInterfaces)
+      value: Counterparty.toAmino(message)
     };
   },
-  fromProtoMsg(message: CounterpartyProtoMsg, useInterfaces: boolean = true): Counterparty {
-    return Counterparty.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: CounterpartyProtoMsg): Counterparty {
+    return Counterparty.decode(message.value);
   },
   toProto(message: Counterparty): Uint8Array {
     return Counterparty.encode(message).finish();
@@ -918,7 +918,7 @@ export const Packet = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Packet {
+  decode(input: BinaryReader | Uint8Array, length?: number): Packet {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePacket();
@@ -944,7 +944,7 @@ export const Packet = {
           message.data = reader.bytes();
           break;
         case 7:
-          message.timeoutHeight = Height.decode(reader, reader.uint32(), useInterfaces);
+          message.timeoutHeight = Height.decode(reader, reader.uint32());
           break;
         case 8:
           message.timeoutTimestamp = reader.uint64();
@@ -1034,7 +1034,7 @@ export const Packet = {
       timeoutTimestamp: BigInt(object.timeout_timestamp)
     };
   },
-  toAmino(message: Packet, useInterfaces: boolean = true): PacketAmino {
+  toAmino(message: Packet): PacketAmino {
     const obj: any = {};
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     obj.source_port = message.sourcePort;
@@ -1042,21 +1042,21 @@ export const Packet = {
     obj.destination_port = message.destinationPort;
     obj.destination_channel = message.destinationChannel;
     obj.data = message.data;
-    obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight, useInterfaces) : {};
+    obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : {};
     obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: PacketAminoMsg): Packet {
     return Packet.fromAmino(object.value);
   },
-  toAminoMsg(message: Packet, useInterfaces: boolean = true): PacketAminoMsg {
+  toAminoMsg(message: Packet): PacketAminoMsg {
     return {
       type: "cosmos-sdk/Packet",
-      value: Packet.toAmino(message, useInterfaces)
+      value: Packet.toAmino(message)
     };
   },
-  fromProtoMsg(message: PacketProtoMsg, useInterfaces: boolean = true): Packet {
-    return Packet.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: PacketProtoMsg): Packet {
+    return Packet.decode(message.value);
   },
   toProto(message: Packet): Uint8Array {
     return Packet.encode(message).finish();
@@ -1094,7 +1094,7 @@ export const PacketState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PacketState {
+  decode(input: BinaryReader | Uint8Array, length?: number): PacketState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePacketState();
@@ -1170,7 +1170,7 @@ export const PacketState = {
       data: object.data
     };
   },
-  toAmino(message: PacketState, useInterfaces: boolean = true): PacketStateAmino {
+  toAmino(message: PacketState): PacketStateAmino {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
@@ -1181,14 +1181,14 @@ export const PacketState = {
   fromAminoMsg(object: PacketStateAminoMsg): PacketState {
     return PacketState.fromAmino(object.value);
   },
-  toAminoMsg(message: PacketState, useInterfaces: boolean = true): PacketStateAminoMsg {
+  toAminoMsg(message: PacketState): PacketStateAminoMsg {
     return {
       type: "cosmos-sdk/PacketState",
-      value: PacketState.toAmino(message, useInterfaces)
+      value: PacketState.toAmino(message)
     };
   },
-  fromProtoMsg(message: PacketStateProtoMsg, useInterfaces: boolean = true): PacketState {
-    return PacketState.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: PacketStateProtoMsg): PacketState {
+    return PacketState.decode(message.value);
   },
   toProto(message: PacketState): Uint8Array {
     return PacketState.encode(message).finish();
@@ -1218,7 +1218,7 @@ export const Acknowledgement = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Acknowledgement {
+  decode(input: BinaryReader | Uint8Array, length?: number): Acknowledgement {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAcknowledgement();
@@ -1274,7 +1274,7 @@ export const Acknowledgement = {
       error: object?.error
     };
   },
-  toAmino(message: Acknowledgement, useInterfaces: boolean = true): AcknowledgementAmino {
+  toAmino(message: Acknowledgement): AcknowledgementAmino {
     const obj: any = {};
     obj.result = message.result;
     obj.error = message.error;
@@ -1283,14 +1283,14 @@ export const Acknowledgement = {
   fromAminoMsg(object: AcknowledgementAminoMsg): Acknowledgement {
     return Acknowledgement.fromAmino(object.value);
   },
-  toAminoMsg(message: Acknowledgement, useInterfaces: boolean = true): AcknowledgementAminoMsg {
+  toAminoMsg(message: Acknowledgement): AcknowledgementAminoMsg {
     return {
       type: "cosmos-sdk/Acknowledgement",
-      value: Acknowledgement.toAmino(message, useInterfaces)
+      value: Acknowledgement.toAmino(message)
     };
   },
-  fromProtoMsg(message: AcknowledgementProtoMsg, useInterfaces: boolean = true): Acknowledgement {
-    return Acknowledgement.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: AcknowledgementProtoMsg): Acknowledgement {
+    return Acknowledgement.decode(message.value);
   },
   toProto(message: Acknowledgement): Uint8Array {
     return Acknowledgement.encode(message).finish();
