@@ -138,7 +138,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -146,25 +146,25 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
+          message.params = Params.decode(reader, reader.uint32());
           break;
         case 2:
           message.lastTotalPower = reader.bytes();
           break;
         case 3:
-          message.lastValidatorPowers.push(LastValidatorPower.decode(reader, reader.uint32(), useInterfaces));
+          message.lastValidatorPowers.push(LastValidatorPower.decode(reader, reader.uint32()));
           break;
         case 4:
-          message.validators.push(Validator.decode(reader, reader.uint32(), useInterfaces));
+          message.validators.push(Validator.decode(reader, reader.uint32()));
           break;
         case 5:
-          message.delegations.push(Delegation.decode(reader, reader.uint32(), useInterfaces));
+          message.delegations.push(Delegation.decode(reader, reader.uint32()));
           break;
         case 6:
-          message.unbondingDelegations.push(UnbondingDelegation.decode(reader, reader.uint32(), useInterfaces));
+          message.unbondingDelegations.push(UnbondingDelegation.decode(reader, reader.uint32()));
           break;
         case 7:
-          message.redelegations.push(Redelegation.decode(reader, reader.uint32(), useInterfaces));
+          message.redelegations.push(Redelegation.decode(reader, reader.uint32()));
           break;
         case 8:
           message.exported = reader.bool();
@@ -290,32 +290,32 @@ export const GenesisState = {
       exported: object.exported
     };
   },
-  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
+  toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
     obj.last_total_power = message.lastTotalPower;
     if (message.lastValidatorPowers) {
-      obj.last_validator_powers = message.lastValidatorPowers.map(e => e ? LastValidatorPower.toAmino(e, useInterfaces) : undefined);
+      obj.last_validator_powers = message.lastValidatorPowers.map(e => e ? LastValidatorPower.toAmino(e) : undefined);
     } else {
       obj.last_validator_powers = [];
     }
     if (message.validators) {
-      obj.validators = message.validators.map(e => e ? Validator.toAmino(e, useInterfaces) : undefined);
+      obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
     } else {
       obj.validators = [];
     }
     if (message.delegations) {
-      obj.delegations = message.delegations.map(e => e ? Delegation.toAmino(e, useInterfaces) : undefined);
+      obj.delegations = message.delegations.map(e => e ? Delegation.toAmino(e) : undefined);
     } else {
       obj.delegations = [];
     }
     if (message.unbondingDelegations) {
-      obj.unbonding_delegations = message.unbondingDelegations.map(e => e ? UnbondingDelegation.toAmino(e, useInterfaces) : undefined);
+      obj.unbonding_delegations = message.unbondingDelegations.map(e => e ? UnbondingDelegation.toAmino(e) : undefined);
     } else {
       obj.unbonding_delegations = [];
     }
     if (message.redelegations) {
-      obj.redelegations = message.redelegations.map(e => e ? Redelegation.toAmino(e, useInterfaces) : undefined);
+      obj.redelegations = message.redelegations.map(e => e ? Redelegation.toAmino(e) : undefined);
     } else {
       obj.redelegations = [];
     }
@@ -325,14 +325,14 @@ export const GenesisState = {
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
   },
-  toAminoMsg(message: GenesisState, useInterfaces: boolean = true): GenesisStateAminoMsg {
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
     return {
       type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message, useInterfaces)
+      value: GenesisState.toAmino(message)
     };
   },
-  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
-    return GenesisState.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();
@@ -362,7 +362,7 @@ export const LastValidatorPower = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LastValidatorPower {
+  decode(input: BinaryReader | Uint8Array, length?: number): LastValidatorPower {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLastValidatorPower();
@@ -420,7 +420,7 @@ export const LastValidatorPower = {
       power: BigInt(object.power)
     };
   },
-  toAmino(message: LastValidatorPower, useInterfaces: boolean = true): LastValidatorPowerAmino {
+  toAmino(message: LastValidatorPower): LastValidatorPowerAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.power = message.power ? message.power.toString() : undefined;
@@ -429,14 +429,14 @@ export const LastValidatorPower = {
   fromAminoMsg(object: LastValidatorPowerAminoMsg): LastValidatorPower {
     return LastValidatorPower.fromAmino(object.value);
   },
-  toAminoMsg(message: LastValidatorPower, useInterfaces: boolean = true): LastValidatorPowerAminoMsg {
+  toAminoMsg(message: LastValidatorPower): LastValidatorPowerAminoMsg {
     return {
       type: "cosmos-sdk/LastValidatorPower",
-      value: LastValidatorPower.toAmino(message, useInterfaces)
+      value: LastValidatorPower.toAmino(message)
     };
   },
-  fromProtoMsg(message: LastValidatorPowerProtoMsg, useInterfaces: boolean = true): LastValidatorPower {
-    return LastValidatorPower.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: LastValidatorPowerProtoMsg): LastValidatorPower {
+    return LastValidatorPower.decode(message.value);
   },
   toProto(message: LastValidatorPower): Uint8Array {
     return LastValidatorPower.encode(message).finish();

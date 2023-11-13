@@ -26,7 +26,7 @@ export const fromProtoMsgMethod = (context: ProtoParseContext, name: string, pro
                         t.identifier(varName),
                         t.identifier('value')
                     ),
-                    ...(context.options.interfaces.enabled ? [
+                    ...(context.options.interfaces.enabled && context.options.interfaces.useUseInterfacesParams ? [
                         t.identifier('undefined'),
                         t.identifier('useInterfaces')
                     ] : []),
@@ -46,7 +46,7 @@ export const fromProtoMsgMethod = (context: ProtoParseContext, name: string, pro
                     )
                 )
             ),
-            ...(context.options.interfaces.enabled ? [
+            ...(context.options.interfaces.enabled && context.options.interfaces.useUseInterfacesParams ? [
                 t.assignmentPattern(
                     identifier(
                         'useInterfaces',

@@ -250,7 +250,7 @@ export const TableDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): TableDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number): TableDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTableDescriptor();
@@ -258,10 +258,10 @@ export const TableDescriptor = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.primaryKey = PrimaryKeyDescriptor.decode(reader, reader.uint32(), useInterfaces);
+          message.primaryKey = PrimaryKeyDescriptor.decode(reader, reader.uint32());
           break;
         case 2:
-          message.index.push(SecondaryIndexDescriptor.decode(reader, reader.uint32(), useInterfaces));
+          message.index.push(SecondaryIndexDescriptor.decode(reader, reader.uint32()));
           break;
         case 3:
           message.id = reader.uint32();
@@ -325,11 +325,11 @@ export const TableDescriptor = {
       id: object.id
     };
   },
-  toAmino(message: TableDescriptor, useInterfaces: boolean = true): TableDescriptorAmino {
+  toAmino(message: TableDescriptor): TableDescriptorAmino {
     const obj: any = {};
-    obj.primary_key = message.primaryKey ? PrimaryKeyDescriptor.toAmino(message.primaryKey, useInterfaces) : undefined;
+    obj.primary_key = message.primaryKey ? PrimaryKeyDescriptor.toAmino(message.primaryKey) : undefined;
     if (message.index) {
-      obj.index = message.index.map(e => e ? SecondaryIndexDescriptor.toAmino(e, useInterfaces) : undefined);
+      obj.index = message.index.map(e => e ? SecondaryIndexDescriptor.toAmino(e) : undefined);
     } else {
       obj.index = [];
     }
@@ -339,14 +339,14 @@ export const TableDescriptor = {
   fromAminoMsg(object: TableDescriptorAminoMsg): TableDescriptor {
     return TableDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: TableDescriptor, useInterfaces: boolean = true): TableDescriptorAminoMsg {
+  toAminoMsg(message: TableDescriptor): TableDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/TableDescriptor",
-      value: TableDescriptor.toAmino(message, useInterfaces)
+      value: TableDescriptor.toAmino(message)
     };
   },
-  fromProtoMsg(message: TableDescriptorProtoMsg, useInterfaces: boolean = true): TableDescriptor {
-    return TableDescriptor.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: TableDescriptorProtoMsg): TableDescriptor {
+    return TableDescriptor.decode(message.value);
   },
   toProto(message: TableDescriptor): Uint8Array {
     return TableDescriptor.encode(message).finish();
@@ -376,7 +376,7 @@ export const PrimaryKeyDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PrimaryKeyDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number): PrimaryKeyDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrimaryKeyDescriptor();
@@ -432,7 +432,7 @@ export const PrimaryKeyDescriptor = {
       autoIncrement: object.auto_increment
     };
   },
-  toAmino(message: PrimaryKeyDescriptor, useInterfaces: boolean = true): PrimaryKeyDescriptorAmino {
+  toAmino(message: PrimaryKeyDescriptor): PrimaryKeyDescriptorAmino {
     const obj: any = {};
     obj.fields = message.fields;
     obj.auto_increment = message.autoIncrement;
@@ -441,14 +441,14 @@ export const PrimaryKeyDescriptor = {
   fromAminoMsg(object: PrimaryKeyDescriptorAminoMsg): PrimaryKeyDescriptor {
     return PrimaryKeyDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: PrimaryKeyDescriptor, useInterfaces: boolean = true): PrimaryKeyDescriptorAminoMsg {
+  toAminoMsg(message: PrimaryKeyDescriptor): PrimaryKeyDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/PrimaryKeyDescriptor",
-      value: PrimaryKeyDescriptor.toAmino(message, useInterfaces)
+      value: PrimaryKeyDescriptor.toAmino(message)
     };
   },
-  fromProtoMsg(message: PrimaryKeyDescriptorProtoMsg, useInterfaces: boolean = true): PrimaryKeyDescriptor {
-    return PrimaryKeyDescriptor.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: PrimaryKeyDescriptorProtoMsg): PrimaryKeyDescriptor {
+    return PrimaryKeyDescriptor.decode(message.value);
   },
   toProto(message: PrimaryKeyDescriptor): Uint8Array {
     return PrimaryKeyDescriptor.encode(message).finish();
@@ -482,7 +482,7 @@ export const SecondaryIndexDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SecondaryIndexDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number): SecondaryIndexDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSecondaryIndexDescriptor();
@@ -547,7 +547,7 @@ export const SecondaryIndexDescriptor = {
       unique: object.unique
     };
   },
-  toAmino(message: SecondaryIndexDescriptor, useInterfaces: boolean = true): SecondaryIndexDescriptorAmino {
+  toAmino(message: SecondaryIndexDescriptor): SecondaryIndexDescriptorAmino {
     const obj: any = {};
     obj.fields = message.fields;
     obj.id = message.id;
@@ -557,14 +557,14 @@ export const SecondaryIndexDescriptor = {
   fromAminoMsg(object: SecondaryIndexDescriptorAminoMsg): SecondaryIndexDescriptor {
     return SecondaryIndexDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: SecondaryIndexDescriptor, useInterfaces: boolean = true): SecondaryIndexDescriptorAminoMsg {
+  toAminoMsg(message: SecondaryIndexDescriptor): SecondaryIndexDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/SecondaryIndexDescriptor",
-      value: SecondaryIndexDescriptor.toAmino(message, useInterfaces)
+      value: SecondaryIndexDescriptor.toAmino(message)
     };
   },
-  fromProtoMsg(message: SecondaryIndexDescriptorProtoMsg, useInterfaces: boolean = true): SecondaryIndexDescriptor {
-    return SecondaryIndexDescriptor.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: SecondaryIndexDescriptorProtoMsg): SecondaryIndexDescriptor {
+    return SecondaryIndexDescriptor.decode(message.value);
   },
   toProto(message: SecondaryIndexDescriptor): Uint8Array {
     return SecondaryIndexDescriptor.encode(message).finish();
@@ -590,7 +590,7 @@ export const SingletonDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SingletonDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number): SingletonDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSingletonDescriptor();
@@ -637,7 +637,7 @@ export const SingletonDescriptor = {
       id: object.id
     };
   },
-  toAmino(message: SingletonDescriptor, useInterfaces: boolean = true): SingletonDescriptorAmino {
+  toAmino(message: SingletonDescriptor): SingletonDescriptorAmino {
     const obj: any = {};
     obj.id = message.id;
     return obj;
@@ -645,14 +645,14 @@ export const SingletonDescriptor = {
   fromAminoMsg(object: SingletonDescriptorAminoMsg): SingletonDescriptor {
     return SingletonDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: SingletonDescriptor, useInterfaces: boolean = true): SingletonDescriptorAminoMsg {
+  toAminoMsg(message: SingletonDescriptor): SingletonDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/SingletonDescriptor",
-      value: SingletonDescriptor.toAmino(message, useInterfaces)
+      value: SingletonDescriptor.toAmino(message)
     };
   },
-  fromProtoMsg(message: SingletonDescriptorProtoMsg, useInterfaces: boolean = true): SingletonDescriptor {
-    return SingletonDescriptor.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: SingletonDescriptorProtoMsg): SingletonDescriptor {
+    return SingletonDescriptor.decode(message.value);
   },
   toProto(message: SingletonDescriptor): Uint8Array {
     return SingletonDescriptor.encode(message).finish();

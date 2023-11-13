@@ -71,7 +71,7 @@ export const UpdateFeeTokenProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpdateFeeTokenProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number): UpdateFeeTokenProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateFeeTokenProposal();
@@ -85,7 +85,7 @@ export const UpdateFeeTokenProposal = {
           message.description = reader.string();
           break;
         case 3:
-          message.feetoken = FeeToken.decode(reader, reader.uint32(), useInterfaces);
+          message.feetoken = FeeToken.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -138,24 +138,24 @@ export const UpdateFeeTokenProposal = {
       feetoken: object?.feetoken ? FeeToken.fromAmino(object.feetoken) : undefined
     };
   },
-  toAmino(message: UpdateFeeTokenProposal, useInterfaces: boolean = true): UpdateFeeTokenProposalAmino {
+  toAmino(message: UpdateFeeTokenProposal): UpdateFeeTokenProposalAmino {
     const obj: any = {};
     obj.title = message.title;
     obj.description = message.description;
-    obj.feetoken = message.feetoken ? FeeToken.toAmino(message.feetoken, useInterfaces) : undefined;
+    obj.feetoken = message.feetoken ? FeeToken.toAmino(message.feetoken) : undefined;
     return obj;
   },
   fromAminoMsg(object: UpdateFeeTokenProposalAminoMsg): UpdateFeeTokenProposal {
     return UpdateFeeTokenProposal.fromAmino(object.value);
   },
-  toAminoMsg(message: UpdateFeeTokenProposal, useInterfaces: boolean = true): UpdateFeeTokenProposalAminoMsg {
+  toAminoMsg(message: UpdateFeeTokenProposal): UpdateFeeTokenProposalAminoMsg {
     return {
       type: "osmosis/txfees/update-fee-token-proposal",
-      value: UpdateFeeTokenProposal.toAmino(message, useInterfaces)
+      value: UpdateFeeTokenProposal.toAmino(message)
     };
   },
-  fromProtoMsg(message: UpdateFeeTokenProposalProtoMsg, useInterfaces: boolean = true): UpdateFeeTokenProposal {
-    return UpdateFeeTokenProposal.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: UpdateFeeTokenProposalProtoMsg): UpdateFeeTokenProposal {
+    return UpdateFeeTokenProposal.decode(message.value);
   },
   toProto(message: UpdateFeeTokenProposal): Uint8Array {
     return UpdateFeeTokenProposal.encode(message).finish();

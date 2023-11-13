@@ -163,7 +163,7 @@ export const toAminoJSON = {
                                 t.identifier('message'),
                                 t.identifier(propName)
                             ),
-                            ...(args.context.options.interfaces.enabled ? [
+                            ...(args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? [
                                 t.identifier('useInterfaces')
                             ] : []),
                         ]
@@ -206,7 +206,7 @@ export const toAminoJSON = {
                                     t.identifier('Any')
                                 )
                             ),
-                            ...(args.context.options.interfaces.enabled ? [
+                            ...(args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? [
                                 t.identifier('useInterfaces')
                             ] : []),
                         ]
@@ -659,7 +659,7 @@ export const arrayTypes = {
                             t.identifier('Any')
                         )
                     ),
-                    ...(args.context.options.interfaces.enabled ? [
+                    ...(args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? [
                         t.identifier('useInterfaces')
                     ] : []),
                 ]
@@ -678,7 +678,7 @@ export const arrayTypes = {
                 ),
                 [
                     t.identifier('e'),
-                    ...(args.context.options.interfaces.enabled ? [
+                    ...(args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? [
                         t.identifier('useInterfaces')
                     ] : []),
                 ]

@@ -67,7 +67,7 @@ export const GenesisDeployment = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisDeployment {
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisDeployment {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisDeployment();
@@ -75,10 +75,10 @@ export const GenesisDeployment = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.deployment = Deployment.decode(reader, reader.uint32(), useInterfaces);
+          message.deployment = Deployment.decode(reader, reader.uint32());
           break;
         case 2:
-          message.groups.push(Group.decode(reader, reader.uint32(), useInterfaces));
+          message.groups.push(Group.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -133,11 +133,11 @@ export const GenesisDeployment = {
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromAmino(e)) : []
     };
   },
-  toAmino(message: GenesisDeployment, useInterfaces: boolean = true): GenesisDeploymentAmino {
+  toAmino(message: GenesisDeployment): GenesisDeploymentAmino {
     const obj: any = {};
-    obj.deployment = message.deployment ? Deployment.toAmino(message.deployment, useInterfaces) : undefined;
+    obj.deployment = message.deployment ? Deployment.toAmino(message.deployment) : undefined;
     if (message.groups) {
-      obj.groups = message.groups.map(e => e ? Group.toAmino(e, useInterfaces) : undefined);
+      obj.groups = message.groups.map(e => e ? Group.toAmino(e) : undefined);
     } else {
       obj.groups = [];
     }
@@ -146,8 +146,8 @@ export const GenesisDeployment = {
   fromAminoMsg(object: GenesisDeploymentAminoMsg): GenesisDeployment {
     return GenesisDeployment.fromAmino(object.value);
   },
-  fromProtoMsg(message: GenesisDeploymentProtoMsg, useInterfaces: boolean = true): GenesisDeployment {
-    return GenesisDeployment.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: GenesisDeploymentProtoMsg): GenesisDeployment {
+    return GenesisDeployment.decode(message.value);
   },
   toProto(message: GenesisDeployment): Uint8Array {
     return GenesisDeployment.encode(message).finish();
@@ -176,7 +176,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -184,10 +184,10 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.deployments.push(GenesisDeployment.decode(reader, reader.uint32(), useInterfaces));
+          message.deployments.push(GenesisDeployment.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
+          message.params = Params.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -242,21 +242,21 @@ export const GenesisState = {
       params: object?.params ? Params.fromAmino(object.params) : undefined
     };
   },
-  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
+  toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
     if (message.deployments) {
-      obj.deployments = message.deployments.map(e => e ? GenesisDeployment.toAmino(e, useInterfaces) : undefined);
+      obj.deployments = message.deployments.map(e => e ? GenesisDeployment.toAmino(e) : undefined);
     } else {
       obj.deployments = [];
     }
-    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
   },
-  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
-    return GenesisState.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();

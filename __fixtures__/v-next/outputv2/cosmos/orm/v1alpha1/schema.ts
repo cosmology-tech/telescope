@@ -189,7 +189,7 @@ export const ModuleSchemaDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModuleSchemaDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number): ModuleSchemaDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleSchemaDescriptor();
@@ -197,7 +197,7 @@ export const ModuleSchemaDescriptor = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.schemaFile.push(ModuleSchemaDescriptor_FileEntry.decode(reader, reader.uint32(), useInterfaces));
+          message.schemaFile.push(ModuleSchemaDescriptor_FileEntry.decode(reader, reader.uint32()));
           break;
         case 2:
           message.prefix = reader.bytes();
@@ -253,10 +253,10 @@ export const ModuleSchemaDescriptor = {
       prefix: object.prefix
     };
   },
-  toAmino(message: ModuleSchemaDescriptor, useInterfaces: boolean = true): ModuleSchemaDescriptorAmino {
+  toAmino(message: ModuleSchemaDescriptor): ModuleSchemaDescriptorAmino {
     const obj: any = {};
     if (message.schemaFile) {
-      obj.schema_file = message.schemaFile.map(e => e ? ModuleSchemaDescriptor_FileEntry.toAmino(e, useInterfaces) : undefined);
+      obj.schema_file = message.schemaFile.map(e => e ? ModuleSchemaDescriptor_FileEntry.toAmino(e) : undefined);
     } else {
       obj.schema_file = [];
     }
@@ -266,14 +266,14 @@ export const ModuleSchemaDescriptor = {
   fromAminoMsg(object: ModuleSchemaDescriptorAminoMsg): ModuleSchemaDescriptor {
     return ModuleSchemaDescriptor.fromAmino(object.value);
   },
-  toAminoMsg(message: ModuleSchemaDescriptor, useInterfaces: boolean = true): ModuleSchemaDescriptorAminoMsg {
+  toAminoMsg(message: ModuleSchemaDescriptor): ModuleSchemaDescriptorAminoMsg {
     return {
       type: "cosmos-sdk/ModuleSchemaDescriptor",
-      value: ModuleSchemaDescriptor.toAmino(message, useInterfaces)
+      value: ModuleSchemaDescriptor.toAmino(message)
     };
   },
-  fromProtoMsg(message: ModuleSchemaDescriptorProtoMsg, useInterfaces: boolean = true): ModuleSchemaDescriptor {
-    return ModuleSchemaDescriptor.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ModuleSchemaDescriptorProtoMsg): ModuleSchemaDescriptor {
+    return ModuleSchemaDescriptor.decode(message.value);
   },
   toProto(message: ModuleSchemaDescriptor): Uint8Array {
     return ModuleSchemaDescriptor.encode(message).finish();
@@ -307,7 +307,7 @@ export const ModuleSchemaDescriptor_FileEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModuleSchemaDescriptor_FileEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number): ModuleSchemaDescriptor_FileEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleSchemaDescriptor_FileEntry();
@@ -372,7 +372,7 @@ export const ModuleSchemaDescriptor_FileEntry = {
       storageType: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : -1
     };
   },
-  toAmino(message: ModuleSchemaDescriptor_FileEntry, useInterfaces: boolean = true): ModuleSchemaDescriptor_FileEntryAmino {
+  toAmino(message: ModuleSchemaDescriptor_FileEntry): ModuleSchemaDescriptor_FileEntryAmino {
     const obj: any = {};
     obj.id = message.id;
     obj.proto_file_name = message.protoFileName;
@@ -382,14 +382,14 @@ export const ModuleSchemaDescriptor_FileEntry = {
   fromAminoMsg(object: ModuleSchemaDescriptor_FileEntryAminoMsg): ModuleSchemaDescriptor_FileEntry {
     return ModuleSchemaDescriptor_FileEntry.fromAmino(object.value);
   },
-  toAminoMsg(message: ModuleSchemaDescriptor_FileEntry, useInterfaces: boolean = true): ModuleSchemaDescriptor_FileEntryAminoMsg {
+  toAminoMsg(message: ModuleSchemaDescriptor_FileEntry): ModuleSchemaDescriptor_FileEntryAminoMsg {
     return {
       type: "cosmos-sdk/FileEntry",
-      value: ModuleSchemaDescriptor_FileEntry.toAmino(message, useInterfaces)
+      value: ModuleSchemaDescriptor_FileEntry.toAmino(message)
     };
   },
-  fromProtoMsg(message: ModuleSchemaDescriptor_FileEntryProtoMsg, useInterfaces: boolean = true): ModuleSchemaDescriptor_FileEntry {
-    return ModuleSchemaDescriptor_FileEntry.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ModuleSchemaDescriptor_FileEntryProtoMsg): ModuleSchemaDescriptor_FileEntry {
+    return ModuleSchemaDescriptor_FileEntry.decode(message.value);
   },
   toProto(message: ModuleSchemaDescriptor_FileEntry): Uint8Array {
     return ModuleSchemaDescriptor_FileEntry.encode(message).finish();

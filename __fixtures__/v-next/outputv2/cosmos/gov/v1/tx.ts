@@ -278,7 +278,7 @@ export const MsgSubmitProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSubmitProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSubmitProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitProposal();
@@ -286,10 +286,10 @@ export const MsgSubmitProposal = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.messages.push(useInterfaces ? (ProposalContentI_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces));
+          message.messages.push((Any(reader) as Any));
           break;
         case 2:
-          message.initialDeposit.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.initialDeposit.push(Coin.decode(reader, reader.uint32()));
           break;
         case 3:
           message.proposer = reader.string();
@@ -368,15 +368,15 @@ export const MsgSubmitProposal = {
       metadata: object.metadata
     };
   },
-  toAmino(message: MsgSubmitProposal, useInterfaces: boolean = true): MsgSubmitProposalAmino {
+  toAmino(message: MsgSubmitProposal): MsgSubmitProposalAmino {
     const obj: any = {};
     if (message.messages) {
-      obj.messages = message.messages.map(e => e ? ProposalContentI_ToAmino((e as Any), useInterfaces) : undefined);
+      obj.messages = message.messages.map(e => e ? ProposalContentI_ToAmino((e as Any)) : undefined);
     } else {
       obj.messages = [];
     }
     if (message.initialDeposit) {
-      obj.initial_deposit = message.initialDeposit.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.initial_deposit = message.initialDeposit.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.initial_deposit = [];
     }
@@ -387,14 +387,14 @@ export const MsgSubmitProposal = {
   fromAminoMsg(object: MsgSubmitProposalAminoMsg): MsgSubmitProposal {
     return MsgSubmitProposal.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgSubmitProposal, useInterfaces: boolean = true): MsgSubmitProposalAminoMsg {
+  toAminoMsg(message: MsgSubmitProposal): MsgSubmitProposalAminoMsg {
     return {
       type: "cosmos-sdk/v1/MsgSubmitProposal",
-      value: MsgSubmitProposal.toAmino(message, useInterfaces)
+      value: MsgSubmitProposal.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgSubmitProposalProtoMsg, useInterfaces: boolean = true): MsgSubmitProposal {
-    return MsgSubmitProposal.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgSubmitProposalProtoMsg): MsgSubmitProposal {
+    return MsgSubmitProposal.decode(message.value);
   },
   toProto(message: MsgSubmitProposal): Uint8Array {
     return MsgSubmitProposal.encode(message).finish();
@@ -420,7 +420,7 @@ export const MsgSubmitProposalResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSubmitProposalResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSubmitProposalResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitProposalResponse();
@@ -469,7 +469,7 @@ export const MsgSubmitProposalResponse = {
       proposalId: BigInt(object.proposal_id)
     };
   },
-  toAmino(message: MsgSubmitProposalResponse, useInterfaces: boolean = true): MsgSubmitProposalResponseAmino {
+  toAmino(message: MsgSubmitProposalResponse): MsgSubmitProposalResponseAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     return obj;
@@ -477,14 +477,14 @@ export const MsgSubmitProposalResponse = {
   fromAminoMsg(object: MsgSubmitProposalResponseAminoMsg): MsgSubmitProposalResponse {
     return MsgSubmitProposalResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgSubmitProposalResponse, useInterfaces: boolean = true): MsgSubmitProposalResponseAminoMsg {
+  toAminoMsg(message: MsgSubmitProposalResponse): MsgSubmitProposalResponseAminoMsg {
     return {
       type: "cosmos-sdk/v1/MsgSubmitProposalResponse",
-      value: MsgSubmitProposalResponse.toAmino(message, useInterfaces)
+      value: MsgSubmitProposalResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgSubmitProposalResponseProtoMsg, useInterfaces: boolean = true): MsgSubmitProposalResponse {
-    return MsgSubmitProposalResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgSubmitProposalResponseProtoMsg): MsgSubmitProposalResponse {
+    return MsgSubmitProposalResponse.decode(message.value);
   },
   toProto(message: MsgSubmitProposalResponse): Uint8Array {
     return MsgSubmitProposalResponse.encode(message).finish();
@@ -514,7 +514,7 @@ export const MsgExecLegacyContent = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgExecLegacyContent {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgExecLegacyContent {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExecLegacyContent();
@@ -522,7 +522,7 @@ export const MsgExecLegacyContent = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.content = useInterfaces ? (ProposalContentI_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces);
+          message.content = (ProposalContentI_InterfaceDecoder(reader) as Any);
           break;
         case 2:
           message.authority = reader.string();
@@ -572,23 +572,23 @@ export const MsgExecLegacyContent = {
       authority: object.authority
     };
   },
-  toAmino(message: MsgExecLegacyContent, useInterfaces: boolean = true): MsgExecLegacyContentAmino {
+  toAmino(message: MsgExecLegacyContent): MsgExecLegacyContentAmino {
     const obj: any = {};
-    obj.content = message.content ? ProposalContentI_ToAmino((message.content as Any), useInterfaces) : undefined;
+    obj.content = message.content ? ProposalContentI_ToAmino((message.content as Any)) : undefined;
     obj.authority = message.authority;
     return obj;
   },
   fromAminoMsg(object: MsgExecLegacyContentAminoMsg): MsgExecLegacyContent {
     return MsgExecLegacyContent.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgExecLegacyContent, useInterfaces: boolean = true): MsgExecLegacyContentAminoMsg {
+  toAminoMsg(message: MsgExecLegacyContent): MsgExecLegacyContentAminoMsg {
     return {
       type: "cosmos-sdk/v1/MsgExecLegacyContent",
-      value: MsgExecLegacyContent.toAmino(message, useInterfaces)
+      value: MsgExecLegacyContent.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgExecLegacyContentProtoMsg, useInterfaces: boolean = true): MsgExecLegacyContent {
-    return MsgExecLegacyContent.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgExecLegacyContentProtoMsg): MsgExecLegacyContent {
+    return MsgExecLegacyContent.decode(message.value);
   },
   toProto(message: MsgExecLegacyContent): Uint8Array {
     return MsgExecLegacyContent.encode(message).finish();
@@ -609,7 +609,7 @@ export const MsgExecLegacyContentResponse = {
   encode(_: MsgExecLegacyContentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgExecLegacyContentResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgExecLegacyContentResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExecLegacyContentResponse();
@@ -645,21 +645,21 @@ export const MsgExecLegacyContentResponse = {
   fromAmino(_: MsgExecLegacyContentResponseAmino): MsgExecLegacyContentResponse {
     return {};
   },
-  toAmino(_: MsgExecLegacyContentResponse, useInterfaces: boolean = true): MsgExecLegacyContentResponseAmino {
+  toAmino(_: MsgExecLegacyContentResponse): MsgExecLegacyContentResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgExecLegacyContentResponseAminoMsg): MsgExecLegacyContentResponse {
     return MsgExecLegacyContentResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgExecLegacyContentResponse, useInterfaces: boolean = true): MsgExecLegacyContentResponseAminoMsg {
+  toAminoMsg(message: MsgExecLegacyContentResponse): MsgExecLegacyContentResponseAminoMsg {
     return {
       type: "cosmos-sdk/v1/MsgExecLegacyContentResponse",
-      value: MsgExecLegacyContentResponse.toAmino(message, useInterfaces)
+      value: MsgExecLegacyContentResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgExecLegacyContentResponseProtoMsg, useInterfaces: boolean = true): MsgExecLegacyContentResponse {
-    return MsgExecLegacyContentResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgExecLegacyContentResponseProtoMsg): MsgExecLegacyContentResponse {
+    return MsgExecLegacyContentResponse.decode(message.value);
   },
   toProto(message: MsgExecLegacyContentResponse): Uint8Array {
     return MsgExecLegacyContentResponse.encode(message).finish();
@@ -697,7 +697,7 @@ export const MsgVote = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgVote {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgVote {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVote();
@@ -773,7 +773,7 @@ export const MsgVote = {
       metadata: object.metadata
     };
   },
-  toAmino(message: MsgVote, useInterfaces: boolean = true): MsgVoteAmino {
+  toAmino(message: MsgVote): MsgVoteAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     obj.voter = message.voter;
@@ -784,14 +784,14 @@ export const MsgVote = {
   fromAminoMsg(object: MsgVoteAminoMsg): MsgVote {
     return MsgVote.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgVote, useInterfaces: boolean = true): MsgVoteAminoMsg {
+  toAminoMsg(message: MsgVote): MsgVoteAminoMsg {
     return {
       type: "cosmos-sdk/v1/MsgVote",
-      value: MsgVote.toAmino(message, useInterfaces)
+      value: MsgVote.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgVoteProtoMsg, useInterfaces: boolean = true): MsgVote {
-    return MsgVote.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgVoteProtoMsg): MsgVote {
+    return MsgVote.decode(message.value);
   },
   toProto(message: MsgVote): Uint8Array {
     return MsgVote.encode(message).finish();
@@ -812,7 +812,7 @@ export const MsgVoteResponse = {
   encode(_: MsgVoteResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgVoteResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgVoteResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVoteResponse();
@@ -848,21 +848,21 @@ export const MsgVoteResponse = {
   fromAmino(_: MsgVoteResponseAmino): MsgVoteResponse {
     return {};
   },
-  toAmino(_: MsgVoteResponse, useInterfaces: boolean = true): MsgVoteResponseAmino {
+  toAmino(_: MsgVoteResponse): MsgVoteResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgVoteResponseAminoMsg): MsgVoteResponse {
     return MsgVoteResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgVoteResponse, useInterfaces: boolean = true): MsgVoteResponseAminoMsg {
+  toAminoMsg(message: MsgVoteResponse): MsgVoteResponseAminoMsg {
     return {
       type: "cosmos-sdk/v1/MsgVoteResponse",
-      value: MsgVoteResponse.toAmino(message, useInterfaces)
+      value: MsgVoteResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgVoteResponseProtoMsg, useInterfaces: boolean = true): MsgVoteResponse {
-    return MsgVoteResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgVoteResponseProtoMsg): MsgVoteResponse {
+    return MsgVoteResponse.decode(message.value);
   },
   toProto(message: MsgVoteResponse): Uint8Array {
     return MsgVoteResponse.encode(message).finish();
@@ -900,7 +900,7 @@ export const MsgVoteWeighted = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgVoteWeighted {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgVoteWeighted {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVoteWeighted();
@@ -914,7 +914,7 @@ export const MsgVoteWeighted = {
           message.voter = reader.string();
           break;
         case 3:
-          message.options.push(WeightedVoteOption.decode(reader, reader.uint32(), useInterfaces));
+          message.options.push(WeightedVoteOption.decode(reader, reader.uint32()));
           break;
         case 4:
           message.metadata = reader.string();
@@ -984,12 +984,12 @@ export const MsgVoteWeighted = {
       metadata: object.metadata
     };
   },
-  toAmino(message: MsgVoteWeighted, useInterfaces: boolean = true): MsgVoteWeightedAmino {
+  toAmino(message: MsgVoteWeighted): MsgVoteWeightedAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     obj.voter = message.voter;
     if (message.options) {
-      obj.options = message.options.map(e => e ? WeightedVoteOption.toAmino(e, useInterfaces) : undefined);
+      obj.options = message.options.map(e => e ? WeightedVoteOption.toAmino(e) : undefined);
     } else {
       obj.options = [];
     }
@@ -999,14 +999,14 @@ export const MsgVoteWeighted = {
   fromAminoMsg(object: MsgVoteWeightedAminoMsg): MsgVoteWeighted {
     return MsgVoteWeighted.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgVoteWeighted, useInterfaces: boolean = true): MsgVoteWeightedAminoMsg {
+  toAminoMsg(message: MsgVoteWeighted): MsgVoteWeightedAminoMsg {
     return {
       type: "cosmos-sdk/v1/MsgVoteWeighted",
-      value: MsgVoteWeighted.toAmino(message, useInterfaces)
+      value: MsgVoteWeighted.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgVoteWeightedProtoMsg, useInterfaces: boolean = true): MsgVoteWeighted {
-    return MsgVoteWeighted.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgVoteWeightedProtoMsg): MsgVoteWeighted {
+    return MsgVoteWeighted.decode(message.value);
   },
   toProto(message: MsgVoteWeighted): Uint8Array {
     return MsgVoteWeighted.encode(message).finish();
@@ -1027,7 +1027,7 @@ export const MsgVoteWeightedResponse = {
   encode(_: MsgVoteWeightedResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgVoteWeightedResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgVoteWeightedResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVoteWeightedResponse();
@@ -1063,21 +1063,21 @@ export const MsgVoteWeightedResponse = {
   fromAmino(_: MsgVoteWeightedResponseAmino): MsgVoteWeightedResponse {
     return {};
   },
-  toAmino(_: MsgVoteWeightedResponse, useInterfaces: boolean = true): MsgVoteWeightedResponseAmino {
+  toAmino(_: MsgVoteWeightedResponse): MsgVoteWeightedResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgVoteWeightedResponseAminoMsg): MsgVoteWeightedResponse {
     return MsgVoteWeightedResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgVoteWeightedResponse, useInterfaces: boolean = true): MsgVoteWeightedResponseAminoMsg {
+  toAminoMsg(message: MsgVoteWeightedResponse): MsgVoteWeightedResponseAminoMsg {
     return {
       type: "cosmos-sdk/v1/MsgVoteWeightedResponse",
-      value: MsgVoteWeightedResponse.toAmino(message, useInterfaces)
+      value: MsgVoteWeightedResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgVoteWeightedResponseProtoMsg, useInterfaces: boolean = true): MsgVoteWeightedResponse {
-    return MsgVoteWeightedResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgVoteWeightedResponseProtoMsg): MsgVoteWeightedResponse {
+    return MsgVoteWeightedResponse.decode(message.value);
   },
   toProto(message: MsgVoteWeightedResponse): Uint8Array {
     return MsgVoteWeightedResponse.encode(message).finish();
@@ -1111,7 +1111,7 @@ export const MsgDeposit = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgDeposit {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgDeposit {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeposit();
@@ -1125,7 +1125,7 @@ export const MsgDeposit = {
           message.depositor = reader.string();
           break;
         case 3:
-          message.amount.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.amount.push(Coin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1186,12 +1186,12 @@ export const MsgDeposit = {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: MsgDeposit, useInterfaces: boolean = true): MsgDepositAmino {
+  toAmino(message: MsgDeposit): MsgDepositAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     obj.depositor = message.depositor;
     if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.amount = [];
     }
@@ -1200,14 +1200,14 @@ export const MsgDeposit = {
   fromAminoMsg(object: MsgDepositAminoMsg): MsgDeposit {
     return MsgDeposit.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgDeposit, useInterfaces: boolean = true): MsgDepositAminoMsg {
+  toAminoMsg(message: MsgDeposit): MsgDepositAminoMsg {
     return {
       type: "cosmos-sdk/v1/MsgDeposit",
-      value: MsgDeposit.toAmino(message, useInterfaces)
+      value: MsgDeposit.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgDepositProtoMsg, useInterfaces: boolean = true): MsgDeposit {
-    return MsgDeposit.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgDepositProtoMsg): MsgDeposit {
+    return MsgDeposit.decode(message.value);
   },
   toProto(message: MsgDeposit): Uint8Array {
     return MsgDeposit.encode(message).finish();
@@ -1228,7 +1228,7 @@ export const MsgDepositResponse = {
   encode(_: MsgDepositResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgDepositResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgDepositResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDepositResponse();
@@ -1264,21 +1264,21 @@ export const MsgDepositResponse = {
   fromAmino(_: MsgDepositResponseAmino): MsgDepositResponse {
     return {};
   },
-  toAmino(_: MsgDepositResponse, useInterfaces: boolean = true): MsgDepositResponseAmino {
+  toAmino(_: MsgDepositResponse): MsgDepositResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(object: MsgDepositResponseAminoMsg): MsgDepositResponse {
     return MsgDepositResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: MsgDepositResponse, useInterfaces: boolean = true): MsgDepositResponseAminoMsg {
+  toAminoMsg(message: MsgDepositResponse): MsgDepositResponseAminoMsg {
     return {
       type: "cosmos-sdk/v1/MsgDepositResponse",
-      value: MsgDepositResponse.toAmino(message, useInterfaces)
+      value: MsgDepositResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: MsgDepositResponseProtoMsg, useInterfaces: boolean = true): MsgDepositResponse {
-    return MsgDepositResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: MsgDepositResponseProtoMsg): MsgDepositResponse {
+    return MsgDepositResponse.decode(message.value);
   },
   toProto(message: MsgDepositResponse): Uint8Array {
     return MsgDepositResponse.encode(message).finish();
@@ -1374,59 +1374,59 @@ export const ProposalContentI_FromAmino = (content: AnyAmino) => {
       return Any.fromAmino(content);
   }
 };
-export const ProposalContentI_ToAmino = (content: Any, useInterfaces: boolean = true) => {
+export const ProposalContentI_ToAmino = (content: Any) => {
   switch (content.typeUrl) {
     case "/cosmos.gov.v1beta1.TextProposal":
       return {
         type: "cosmos-sdk/v1/TextProposal",
-        value: TextProposal.toAmino(TextProposal.decode(content.value, undefined, useInterfaces), useInterfaces)
+        value: TextProposal.toAmino(TextProposal.decode(content.value, undefined))
       };
     case "/evmos.incentives.v1.RegisterIncentiveProposal":
       return {
         type: "/evmos.incentives.v1.RegisterIncentiveProposal",
-        value: RegisterIncentiveProposal.toAmino(RegisterIncentiveProposal.decode(content.value, undefined, useInterfaces), useInterfaces)
+        value: RegisterIncentiveProposal.toAmino(RegisterIncentiveProposal.decode(content.value, undefined))
       };
     case "/ibc.core.client.v1.ClientUpdateProposal":
       return {
         type: "cosmos-sdk/ClientUpdateProposal",
-        value: ClientUpdateProposal.toAmino(ClientUpdateProposal.decode(content.value, undefined, useInterfaces), useInterfaces)
+        value: ClientUpdateProposal.toAmino(ClientUpdateProposal.decode(content.value, undefined))
       };
     case "/ibc.core.client.v1.UpgradeProposal":
       return {
         type: "cosmos-sdk/UpgradeProposal",
-        value: UpgradeProposal.toAmino(UpgradeProposal.decode(content.value, undefined, useInterfaces), useInterfaces)
+        value: UpgradeProposal.toAmino(UpgradeProposal.decode(content.value, undefined))
       };
     case "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal":
       return {
         type: "osmosis/poolincentives/replace-pool-incentives-proposal",
-        value: ReplacePoolIncentivesProposal.toAmino(ReplacePoolIncentivesProposal.decode(content.value, undefined, useInterfaces), useInterfaces)
+        value: ReplacePoolIncentivesProposal.toAmino(ReplacePoolIncentivesProposal.decode(content.value, undefined))
       };
     case "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal":
       return {
         type: "osmosis/poolincentives/update-pool-incentives-proposal",
-        value: UpdatePoolIncentivesProposal.toAmino(UpdatePoolIncentivesProposal.decode(content.value, undefined, useInterfaces), useInterfaces)
+        value: UpdatePoolIncentivesProposal.toAmino(UpdatePoolIncentivesProposal.decode(content.value, undefined))
       };
     case "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal":
       return {
         type: "osmosis/v1beta1/set-superfluid-assets-proposal",
-        value: SetSuperfluidAssetsProposal.toAmino(SetSuperfluidAssetsProposal.decode(content.value, undefined, useInterfaces), useInterfaces)
+        value: SetSuperfluidAssetsProposal.toAmino(SetSuperfluidAssetsProposal.decode(content.value, undefined))
       };
     case "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal":
       return {
         type: "osmosis/v1beta1/remove-superfluid-assets-proposal",
-        value: RemoveSuperfluidAssetsProposal.toAmino(RemoveSuperfluidAssetsProposal.decode(content.value, undefined, useInterfaces), useInterfaces)
+        value: RemoveSuperfluidAssetsProposal.toAmino(RemoveSuperfluidAssetsProposal.decode(content.value, undefined))
       };
     case "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal":
       return {
         type: "osmosis/v1beta1/update-unpool-white-list-proposal",
-        value: UpdateUnpoolWhiteListProposal.toAmino(UpdateUnpoolWhiteListProposal.decode(content.value, undefined, useInterfaces), useInterfaces)
+        value: UpdateUnpoolWhiteListProposal.toAmino(UpdateUnpoolWhiteListProposal.decode(content.value, undefined))
       };
     case "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal":
       return {
         type: "osmosis/txfees/update-fee-token-proposal",
-        value: UpdateFeeTokenProposal.toAmino(UpdateFeeTokenProposal.decode(content.value, undefined, useInterfaces), useInterfaces)
+        value: UpdateFeeTokenProposal.toAmino(UpdateFeeTokenProposal.decode(content.value, undefined))
       };
     default:
-      return Any.toAmino(content, useInterfaces);
+      return Any.toAmino(content);
   }
 };

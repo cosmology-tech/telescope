@@ -235,7 +235,7 @@ export const toAminoJSONMethod = (context: ProtoParseContext, name: string, prot
                     )
                 )
             ),
-            ...(context.options.interfaces.enabled ? [
+            ...(context.options.interfaces.enabled && context.options.interfaces.useUseInterfacesParams ? [
                 t.assignmentPattern(
                     identifier(
                         'useInterfaces',
@@ -287,7 +287,7 @@ export const toAminoMsgMethod = (context: ProtoParseContext, name: string, proto
                         ),
                         [
                             t.identifier(varName),
-                            ...(context.options.interfaces.enabled ? [
+                            ...(context.options.interfaces.enabled && context.options.interfaces.useUseInterfacesParams ? [
                                 t.identifier('useInterfaces')
                             ] : []),
                         ]
@@ -308,7 +308,7 @@ export const toAminoMsgMethod = (context: ProtoParseContext, name: string, proto
                     )
                 )
             ),
-            ...(context.options.interfaces.enabled ? [
+            ...(context.options.interfaces.enabled && context.options.interfaces.useUseInterfacesParams ? [
                 t.assignmentPattern(
                     identifier(
                         'useInterfaces',

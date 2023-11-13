@@ -54,7 +54,7 @@ export const Control = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Control {
+  decode(input: BinaryReader | Uint8Array, length?: number): Control {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseControl();
@@ -101,7 +101,7 @@ export const Control = {
       environment: object.environment
     };
   },
-  toAmino(message: Control, useInterfaces: boolean = true): ControlAmino {
+  toAmino(message: Control): ControlAmino {
     const obj: any = {};
     obj.environment = message.environment;
     return obj;
@@ -109,8 +109,8 @@ export const Control = {
   fromAminoMsg(object: ControlAminoMsg): Control {
     return Control.fromAmino(object.value);
   },
-  fromProtoMsg(message: ControlProtoMsg, useInterfaces: boolean = true): Control {
-    return Control.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: ControlProtoMsg): Control {
+    return Control.decode(message.value);
   },
   toProto(message: Control): Uint8Array {
     return Control.encode(message).finish();

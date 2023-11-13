@@ -674,7 +674,7 @@ export const QueryGroupInfoRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGroupInfoRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGroupInfoRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupInfoRequest();
@@ -723,7 +723,7 @@ export const QueryGroupInfoRequest = {
       groupId: BigInt(object.group_id)
     };
   },
-  toAmino(message: QueryGroupInfoRequest, useInterfaces: boolean = true): QueryGroupInfoRequestAmino {
+  toAmino(message: QueryGroupInfoRequest): QueryGroupInfoRequestAmino {
     const obj: any = {};
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
     return obj;
@@ -731,14 +731,14 @@ export const QueryGroupInfoRequest = {
   fromAminoMsg(object: QueryGroupInfoRequestAminoMsg): QueryGroupInfoRequest {
     return QueryGroupInfoRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGroupInfoRequest, useInterfaces: boolean = true): QueryGroupInfoRequestAminoMsg {
+  toAminoMsg(message: QueryGroupInfoRequest): QueryGroupInfoRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryGroupInfoRequest",
-      value: QueryGroupInfoRequest.toAmino(message, useInterfaces)
+      value: QueryGroupInfoRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryGroupInfoRequestProtoMsg, useInterfaces: boolean = true): QueryGroupInfoRequest {
-    return QueryGroupInfoRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryGroupInfoRequestProtoMsg): QueryGroupInfoRequest {
+    return QueryGroupInfoRequest.decode(message.value);
   },
   toProto(message: QueryGroupInfoRequest): Uint8Array {
     return QueryGroupInfoRequest.encode(message).finish();
@@ -764,7 +764,7 @@ export const QueryGroupInfoResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGroupInfoResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGroupInfoResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupInfoResponse();
@@ -772,7 +772,7 @@ export const QueryGroupInfoResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.info = GroupInfo.decode(reader, reader.uint32(), useInterfaces);
+          message.info = GroupInfo.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -813,22 +813,22 @@ export const QueryGroupInfoResponse = {
       info: object?.info ? GroupInfo.fromAmino(object.info) : undefined
     };
   },
-  toAmino(message: QueryGroupInfoResponse, useInterfaces: boolean = true): QueryGroupInfoResponseAmino {
+  toAmino(message: QueryGroupInfoResponse): QueryGroupInfoResponseAmino {
     const obj: any = {};
-    obj.info = message.info ? GroupInfo.toAmino(message.info, useInterfaces) : undefined;
+    obj.info = message.info ? GroupInfo.toAmino(message.info) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryGroupInfoResponseAminoMsg): QueryGroupInfoResponse {
     return QueryGroupInfoResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGroupInfoResponse, useInterfaces: boolean = true): QueryGroupInfoResponseAminoMsg {
+  toAminoMsg(message: QueryGroupInfoResponse): QueryGroupInfoResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryGroupInfoResponse",
-      value: QueryGroupInfoResponse.toAmino(message, useInterfaces)
+      value: QueryGroupInfoResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryGroupInfoResponseProtoMsg, useInterfaces: boolean = true): QueryGroupInfoResponse {
-    return QueryGroupInfoResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryGroupInfoResponseProtoMsg): QueryGroupInfoResponse {
+    return QueryGroupInfoResponse.decode(message.value);
   },
   toProto(message: QueryGroupInfoResponse): Uint8Array {
     return QueryGroupInfoResponse.encode(message).finish();
@@ -854,7 +854,7 @@ export const QueryGroupPolicyInfoRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGroupPolicyInfoRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGroupPolicyInfoRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupPolicyInfoRequest();
@@ -901,7 +901,7 @@ export const QueryGroupPolicyInfoRequest = {
       address: object.address
     };
   },
-  toAmino(message: QueryGroupPolicyInfoRequest, useInterfaces: boolean = true): QueryGroupPolicyInfoRequestAmino {
+  toAmino(message: QueryGroupPolicyInfoRequest): QueryGroupPolicyInfoRequestAmino {
     const obj: any = {};
     obj.address = message.address;
     return obj;
@@ -909,14 +909,14 @@ export const QueryGroupPolicyInfoRequest = {
   fromAminoMsg(object: QueryGroupPolicyInfoRequestAminoMsg): QueryGroupPolicyInfoRequest {
     return QueryGroupPolicyInfoRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGroupPolicyInfoRequest, useInterfaces: boolean = true): QueryGroupPolicyInfoRequestAminoMsg {
+  toAminoMsg(message: QueryGroupPolicyInfoRequest): QueryGroupPolicyInfoRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryGroupPolicyInfoRequest",
-      value: QueryGroupPolicyInfoRequest.toAmino(message, useInterfaces)
+      value: QueryGroupPolicyInfoRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryGroupPolicyInfoRequestProtoMsg, useInterfaces: boolean = true): QueryGroupPolicyInfoRequest {
-    return QueryGroupPolicyInfoRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryGroupPolicyInfoRequestProtoMsg): QueryGroupPolicyInfoRequest {
+    return QueryGroupPolicyInfoRequest.decode(message.value);
   },
   toProto(message: QueryGroupPolicyInfoRequest): Uint8Array {
     return QueryGroupPolicyInfoRequest.encode(message).finish();
@@ -942,7 +942,7 @@ export const QueryGroupPolicyInfoResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGroupPolicyInfoResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGroupPolicyInfoResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupPolicyInfoResponse();
@@ -950,7 +950,7 @@ export const QueryGroupPolicyInfoResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.info = GroupPolicyInfo.decode(reader, reader.uint32(), useInterfaces);
+          message.info = GroupPolicyInfo.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -991,22 +991,22 @@ export const QueryGroupPolicyInfoResponse = {
       info: object?.info ? GroupPolicyInfo.fromAmino(object.info) : undefined
     };
   },
-  toAmino(message: QueryGroupPolicyInfoResponse, useInterfaces: boolean = true): QueryGroupPolicyInfoResponseAmino {
+  toAmino(message: QueryGroupPolicyInfoResponse): QueryGroupPolicyInfoResponseAmino {
     const obj: any = {};
-    obj.info = message.info ? GroupPolicyInfo.toAmino(message.info, useInterfaces) : undefined;
+    obj.info = message.info ? GroupPolicyInfo.toAmino(message.info) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryGroupPolicyInfoResponseAminoMsg): QueryGroupPolicyInfoResponse {
     return QueryGroupPolicyInfoResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGroupPolicyInfoResponse, useInterfaces: boolean = true): QueryGroupPolicyInfoResponseAminoMsg {
+  toAminoMsg(message: QueryGroupPolicyInfoResponse): QueryGroupPolicyInfoResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryGroupPolicyInfoResponse",
-      value: QueryGroupPolicyInfoResponse.toAmino(message, useInterfaces)
+      value: QueryGroupPolicyInfoResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryGroupPolicyInfoResponseProtoMsg, useInterfaces: boolean = true): QueryGroupPolicyInfoResponse {
-    return QueryGroupPolicyInfoResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryGroupPolicyInfoResponseProtoMsg): QueryGroupPolicyInfoResponse {
+    return QueryGroupPolicyInfoResponse.decode(message.value);
   },
   toProto(message: QueryGroupPolicyInfoResponse): Uint8Array {
     return QueryGroupPolicyInfoResponse.encode(message).finish();
@@ -1036,7 +1036,7 @@ export const QueryGroupMembersRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGroupMembersRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGroupMembersRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupMembersRequest();
@@ -1047,7 +1047,7 @@ export const QueryGroupMembersRequest = {
           message.groupId = reader.uint64();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1096,23 +1096,23 @@ export const QueryGroupMembersRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryGroupMembersRequest, useInterfaces: boolean = true): QueryGroupMembersRequestAmino {
+  toAmino(message: QueryGroupMembersRequest): QueryGroupMembersRequestAmino {
     const obj: any = {};
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryGroupMembersRequestAminoMsg): QueryGroupMembersRequest {
     return QueryGroupMembersRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGroupMembersRequest, useInterfaces: boolean = true): QueryGroupMembersRequestAminoMsg {
+  toAminoMsg(message: QueryGroupMembersRequest): QueryGroupMembersRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryGroupMembersRequest",
-      value: QueryGroupMembersRequest.toAmino(message, useInterfaces)
+      value: QueryGroupMembersRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryGroupMembersRequestProtoMsg, useInterfaces: boolean = true): QueryGroupMembersRequest {
-    return QueryGroupMembersRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryGroupMembersRequestProtoMsg): QueryGroupMembersRequest {
+    return QueryGroupMembersRequest.decode(message.value);
   },
   toProto(message: QueryGroupMembersRequest): Uint8Array {
     return QueryGroupMembersRequest.encode(message).finish();
@@ -1142,7 +1142,7 @@ export const QueryGroupMembersResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGroupMembersResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGroupMembersResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupMembersResponse();
@@ -1150,10 +1150,10 @@ export const QueryGroupMembersResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.members.push(GroupMember.decode(reader, reader.uint32(), useInterfaces));
+          message.members.push(GroupMember.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1208,27 +1208,27 @@ export const QueryGroupMembersResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryGroupMembersResponse, useInterfaces: boolean = true): QueryGroupMembersResponseAmino {
+  toAmino(message: QueryGroupMembersResponse): QueryGroupMembersResponseAmino {
     const obj: any = {};
     if (message.members) {
-      obj.members = message.members.map(e => e ? GroupMember.toAmino(e, useInterfaces) : undefined);
+      obj.members = message.members.map(e => e ? GroupMember.toAmino(e) : undefined);
     } else {
       obj.members = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryGroupMembersResponseAminoMsg): QueryGroupMembersResponse {
     return QueryGroupMembersResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGroupMembersResponse, useInterfaces: boolean = true): QueryGroupMembersResponseAminoMsg {
+  toAminoMsg(message: QueryGroupMembersResponse): QueryGroupMembersResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryGroupMembersResponse",
-      value: QueryGroupMembersResponse.toAmino(message, useInterfaces)
+      value: QueryGroupMembersResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryGroupMembersResponseProtoMsg, useInterfaces: boolean = true): QueryGroupMembersResponse {
-    return QueryGroupMembersResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryGroupMembersResponseProtoMsg): QueryGroupMembersResponse {
+    return QueryGroupMembersResponse.decode(message.value);
   },
   toProto(message: QueryGroupMembersResponse): Uint8Array {
     return QueryGroupMembersResponse.encode(message).finish();
@@ -1258,7 +1258,7 @@ export const QueryGroupsByAdminRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGroupsByAdminRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGroupsByAdminRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupsByAdminRequest();
@@ -1269,7 +1269,7 @@ export const QueryGroupsByAdminRequest = {
           message.admin = reader.string();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1316,23 +1316,23 @@ export const QueryGroupsByAdminRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryGroupsByAdminRequest, useInterfaces: boolean = true): QueryGroupsByAdminRequestAmino {
+  toAmino(message: QueryGroupsByAdminRequest): QueryGroupsByAdminRequestAmino {
     const obj: any = {};
     obj.admin = message.admin;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryGroupsByAdminRequestAminoMsg): QueryGroupsByAdminRequest {
     return QueryGroupsByAdminRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGroupsByAdminRequest, useInterfaces: boolean = true): QueryGroupsByAdminRequestAminoMsg {
+  toAminoMsg(message: QueryGroupsByAdminRequest): QueryGroupsByAdminRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryGroupsByAdminRequest",
-      value: QueryGroupsByAdminRequest.toAmino(message, useInterfaces)
+      value: QueryGroupsByAdminRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryGroupsByAdminRequestProtoMsg, useInterfaces: boolean = true): QueryGroupsByAdminRequest {
-    return QueryGroupsByAdminRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryGroupsByAdminRequestProtoMsg): QueryGroupsByAdminRequest {
+    return QueryGroupsByAdminRequest.decode(message.value);
   },
   toProto(message: QueryGroupsByAdminRequest): Uint8Array {
     return QueryGroupsByAdminRequest.encode(message).finish();
@@ -1362,7 +1362,7 @@ export const QueryGroupsByAdminResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGroupsByAdminResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGroupsByAdminResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupsByAdminResponse();
@@ -1370,10 +1370,10 @@ export const QueryGroupsByAdminResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.groups.push(GroupInfo.decode(reader, reader.uint32(), useInterfaces));
+          message.groups.push(GroupInfo.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1428,27 +1428,27 @@ export const QueryGroupsByAdminResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryGroupsByAdminResponse, useInterfaces: boolean = true): QueryGroupsByAdminResponseAmino {
+  toAmino(message: QueryGroupsByAdminResponse): QueryGroupsByAdminResponseAmino {
     const obj: any = {};
     if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupInfo.toAmino(e, useInterfaces) : undefined);
+      obj.groups = message.groups.map(e => e ? GroupInfo.toAmino(e) : undefined);
     } else {
       obj.groups = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryGroupsByAdminResponseAminoMsg): QueryGroupsByAdminResponse {
     return QueryGroupsByAdminResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGroupsByAdminResponse, useInterfaces: boolean = true): QueryGroupsByAdminResponseAminoMsg {
+  toAminoMsg(message: QueryGroupsByAdminResponse): QueryGroupsByAdminResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryGroupsByAdminResponse",
-      value: QueryGroupsByAdminResponse.toAmino(message, useInterfaces)
+      value: QueryGroupsByAdminResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryGroupsByAdminResponseProtoMsg, useInterfaces: boolean = true): QueryGroupsByAdminResponse {
-    return QueryGroupsByAdminResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryGroupsByAdminResponseProtoMsg): QueryGroupsByAdminResponse {
+    return QueryGroupsByAdminResponse.decode(message.value);
   },
   toProto(message: QueryGroupsByAdminResponse): Uint8Array {
     return QueryGroupsByAdminResponse.encode(message).finish();
@@ -1478,7 +1478,7 @@ export const QueryGroupPoliciesByGroupRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGroupPoliciesByGroupRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGroupPoliciesByGroupRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupPoliciesByGroupRequest();
@@ -1489,7 +1489,7 @@ export const QueryGroupPoliciesByGroupRequest = {
           message.groupId = reader.uint64();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1538,23 +1538,23 @@ export const QueryGroupPoliciesByGroupRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryGroupPoliciesByGroupRequest, useInterfaces: boolean = true): QueryGroupPoliciesByGroupRequestAmino {
+  toAmino(message: QueryGroupPoliciesByGroupRequest): QueryGroupPoliciesByGroupRequestAmino {
     const obj: any = {};
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryGroupPoliciesByGroupRequestAminoMsg): QueryGroupPoliciesByGroupRequest {
     return QueryGroupPoliciesByGroupRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGroupPoliciesByGroupRequest, useInterfaces: boolean = true): QueryGroupPoliciesByGroupRequestAminoMsg {
+  toAminoMsg(message: QueryGroupPoliciesByGroupRequest): QueryGroupPoliciesByGroupRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryGroupPoliciesByGroupRequest",
-      value: QueryGroupPoliciesByGroupRequest.toAmino(message, useInterfaces)
+      value: QueryGroupPoliciesByGroupRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryGroupPoliciesByGroupRequestProtoMsg, useInterfaces: boolean = true): QueryGroupPoliciesByGroupRequest {
-    return QueryGroupPoliciesByGroupRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryGroupPoliciesByGroupRequestProtoMsg): QueryGroupPoliciesByGroupRequest {
+    return QueryGroupPoliciesByGroupRequest.decode(message.value);
   },
   toProto(message: QueryGroupPoliciesByGroupRequest): Uint8Array {
     return QueryGroupPoliciesByGroupRequest.encode(message).finish();
@@ -1584,7 +1584,7 @@ export const QueryGroupPoliciesByGroupResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGroupPoliciesByGroupResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGroupPoliciesByGroupResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupPoliciesByGroupResponse();
@@ -1592,10 +1592,10 @@ export const QueryGroupPoliciesByGroupResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.groupPolicies.push(GroupPolicyInfo.decode(reader, reader.uint32(), useInterfaces));
+          message.groupPolicies.push(GroupPolicyInfo.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1650,27 +1650,27 @@ export const QueryGroupPoliciesByGroupResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryGroupPoliciesByGroupResponse, useInterfaces: boolean = true): QueryGroupPoliciesByGroupResponseAmino {
+  toAmino(message: QueryGroupPoliciesByGroupResponse): QueryGroupPoliciesByGroupResponseAmino {
     const obj: any = {};
     if (message.groupPolicies) {
-      obj.group_policies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toAmino(e, useInterfaces) : undefined);
+      obj.group_policies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toAmino(e) : undefined);
     } else {
       obj.group_policies = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryGroupPoliciesByGroupResponseAminoMsg): QueryGroupPoliciesByGroupResponse {
     return QueryGroupPoliciesByGroupResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGroupPoliciesByGroupResponse, useInterfaces: boolean = true): QueryGroupPoliciesByGroupResponseAminoMsg {
+  toAminoMsg(message: QueryGroupPoliciesByGroupResponse): QueryGroupPoliciesByGroupResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryGroupPoliciesByGroupResponse",
-      value: QueryGroupPoliciesByGroupResponse.toAmino(message, useInterfaces)
+      value: QueryGroupPoliciesByGroupResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryGroupPoliciesByGroupResponseProtoMsg, useInterfaces: boolean = true): QueryGroupPoliciesByGroupResponse {
-    return QueryGroupPoliciesByGroupResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryGroupPoliciesByGroupResponseProtoMsg): QueryGroupPoliciesByGroupResponse {
+    return QueryGroupPoliciesByGroupResponse.decode(message.value);
   },
   toProto(message: QueryGroupPoliciesByGroupResponse): Uint8Array {
     return QueryGroupPoliciesByGroupResponse.encode(message).finish();
@@ -1700,7 +1700,7 @@ export const QueryGroupPoliciesByAdminRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGroupPoliciesByAdminRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGroupPoliciesByAdminRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupPoliciesByAdminRequest();
@@ -1711,7 +1711,7 @@ export const QueryGroupPoliciesByAdminRequest = {
           message.admin = reader.string();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1758,23 +1758,23 @@ export const QueryGroupPoliciesByAdminRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryGroupPoliciesByAdminRequest, useInterfaces: boolean = true): QueryGroupPoliciesByAdminRequestAmino {
+  toAmino(message: QueryGroupPoliciesByAdminRequest): QueryGroupPoliciesByAdminRequestAmino {
     const obj: any = {};
     obj.admin = message.admin;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryGroupPoliciesByAdminRequestAminoMsg): QueryGroupPoliciesByAdminRequest {
     return QueryGroupPoliciesByAdminRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGroupPoliciesByAdminRequest, useInterfaces: boolean = true): QueryGroupPoliciesByAdminRequestAminoMsg {
+  toAminoMsg(message: QueryGroupPoliciesByAdminRequest): QueryGroupPoliciesByAdminRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryGroupPoliciesByAdminRequest",
-      value: QueryGroupPoliciesByAdminRequest.toAmino(message, useInterfaces)
+      value: QueryGroupPoliciesByAdminRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryGroupPoliciesByAdminRequestProtoMsg, useInterfaces: boolean = true): QueryGroupPoliciesByAdminRequest {
-    return QueryGroupPoliciesByAdminRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryGroupPoliciesByAdminRequestProtoMsg): QueryGroupPoliciesByAdminRequest {
+    return QueryGroupPoliciesByAdminRequest.decode(message.value);
   },
   toProto(message: QueryGroupPoliciesByAdminRequest): Uint8Array {
     return QueryGroupPoliciesByAdminRequest.encode(message).finish();
@@ -1804,7 +1804,7 @@ export const QueryGroupPoliciesByAdminResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGroupPoliciesByAdminResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGroupPoliciesByAdminResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupPoliciesByAdminResponse();
@@ -1812,10 +1812,10 @@ export const QueryGroupPoliciesByAdminResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.groupPolicies.push(GroupPolicyInfo.decode(reader, reader.uint32(), useInterfaces));
+          message.groupPolicies.push(GroupPolicyInfo.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1870,27 +1870,27 @@ export const QueryGroupPoliciesByAdminResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryGroupPoliciesByAdminResponse, useInterfaces: boolean = true): QueryGroupPoliciesByAdminResponseAmino {
+  toAmino(message: QueryGroupPoliciesByAdminResponse): QueryGroupPoliciesByAdminResponseAmino {
     const obj: any = {};
     if (message.groupPolicies) {
-      obj.group_policies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toAmino(e, useInterfaces) : undefined);
+      obj.group_policies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toAmino(e) : undefined);
     } else {
       obj.group_policies = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryGroupPoliciesByAdminResponseAminoMsg): QueryGroupPoliciesByAdminResponse {
     return QueryGroupPoliciesByAdminResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGroupPoliciesByAdminResponse, useInterfaces: boolean = true): QueryGroupPoliciesByAdminResponseAminoMsg {
+  toAminoMsg(message: QueryGroupPoliciesByAdminResponse): QueryGroupPoliciesByAdminResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryGroupPoliciesByAdminResponse",
-      value: QueryGroupPoliciesByAdminResponse.toAmino(message, useInterfaces)
+      value: QueryGroupPoliciesByAdminResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryGroupPoliciesByAdminResponseProtoMsg, useInterfaces: boolean = true): QueryGroupPoliciesByAdminResponse {
-    return QueryGroupPoliciesByAdminResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryGroupPoliciesByAdminResponseProtoMsg): QueryGroupPoliciesByAdminResponse {
+    return QueryGroupPoliciesByAdminResponse.decode(message.value);
   },
   toProto(message: QueryGroupPoliciesByAdminResponse): Uint8Array {
     return QueryGroupPoliciesByAdminResponse.encode(message).finish();
@@ -1916,7 +1916,7 @@ export const QueryProposalRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryProposalRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryProposalRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalRequest();
@@ -1965,7 +1965,7 @@ export const QueryProposalRequest = {
       proposalId: BigInt(object.proposal_id)
     };
   },
-  toAmino(message: QueryProposalRequest, useInterfaces: boolean = true): QueryProposalRequestAmino {
+  toAmino(message: QueryProposalRequest): QueryProposalRequestAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     return obj;
@@ -1973,14 +1973,14 @@ export const QueryProposalRequest = {
   fromAminoMsg(object: QueryProposalRequestAminoMsg): QueryProposalRequest {
     return QueryProposalRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryProposalRequest, useInterfaces: boolean = true): QueryProposalRequestAminoMsg {
+  toAminoMsg(message: QueryProposalRequest): QueryProposalRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryProposalRequest",
-      value: QueryProposalRequest.toAmino(message, useInterfaces)
+      value: QueryProposalRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryProposalRequestProtoMsg, useInterfaces: boolean = true): QueryProposalRequest {
-    return QueryProposalRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryProposalRequestProtoMsg): QueryProposalRequest {
+    return QueryProposalRequest.decode(message.value);
   },
   toProto(message: QueryProposalRequest): Uint8Array {
     return QueryProposalRequest.encode(message).finish();
@@ -2006,7 +2006,7 @@ export const QueryProposalResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryProposalResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryProposalResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalResponse();
@@ -2014,7 +2014,7 @@ export const QueryProposalResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposal = Proposal.decode(reader, reader.uint32(), useInterfaces);
+          message.proposal = Proposal.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -2055,22 +2055,22 @@ export const QueryProposalResponse = {
       proposal: object?.proposal ? Proposal.fromAmino(object.proposal) : undefined
     };
   },
-  toAmino(message: QueryProposalResponse, useInterfaces: boolean = true): QueryProposalResponseAmino {
+  toAmino(message: QueryProposalResponse): QueryProposalResponseAmino {
     const obj: any = {};
-    obj.proposal = message.proposal ? Proposal.toAmino(message.proposal, useInterfaces) : undefined;
+    obj.proposal = message.proposal ? Proposal.toAmino(message.proposal) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryProposalResponseAminoMsg): QueryProposalResponse {
     return QueryProposalResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryProposalResponse, useInterfaces: boolean = true): QueryProposalResponseAminoMsg {
+  toAminoMsg(message: QueryProposalResponse): QueryProposalResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryProposalResponse",
-      value: QueryProposalResponse.toAmino(message, useInterfaces)
+      value: QueryProposalResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryProposalResponseProtoMsg, useInterfaces: boolean = true): QueryProposalResponse {
-    return QueryProposalResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryProposalResponseProtoMsg): QueryProposalResponse {
+    return QueryProposalResponse.decode(message.value);
   },
   toProto(message: QueryProposalResponse): Uint8Array {
     return QueryProposalResponse.encode(message).finish();
@@ -2100,7 +2100,7 @@ export const QueryProposalsByGroupPolicyRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryProposalsByGroupPolicyRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryProposalsByGroupPolicyRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalsByGroupPolicyRequest();
@@ -2111,7 +2111,7 @@ export const QueryProposalsByGroupPolicyRequest = {
           message.address = reader.string();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -2158,23 +2158,23 @@ export const QueryProposalsByGroupPolicyRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryProposalsByGroupPolicyRequest, useInterfaces: boolean = true): QueryProposalsByGroupPolicyRequestAmino {
+  toAmino(message: QueryProposalsByGroupPolicyRequest): QueryProposalsByGroupPolicyRequestAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryProposalsByGroupPolicyRequestAminoMsg): QueryProposalsByGroupPolicyRequest {
     return QueryProposalsByGroupPolicyRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryProposalsByGroupPolicyRequest, useInterfaces: boolean = true): QueryProposalsByGroupPolicyRequestAminoMsg {
+  toAminoMsg(message: QueryProposalsByGroupPolicyRequest): QueryProposalsByGroupPolicyRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryProposalsByGroupPolicyRequest",
-      value: QueryProposalsByGroupPolicyRequest.toAmino(message, useInterfaces)
+      value: QueryProposalsByGroupPolicyRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryProposalsByGroupPolicyRequestProtoMsg, useInterfaces: boolean = true): QueryProposalsByGroupPolicyRequest {
-    return QueryProposalsByGroupPolicyRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryProposalsByGroupPolicyRequestProtoMsg): QueryProposalsByGroupPolicyRequest {
+    return QueryProposalsByGroupPolicyRequest.decode(message.value);
   },
   toProto(message: QueryProposalsByGroupPolicyRequest): Uint8Array {
     return QueryProposalsByGroupPolicyRequest.encode(message).finish();
@@ -2204,7 +2204,7 @@ export const QueryProposalsByGroupPolicyResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryProposalsByGroupPolicyResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryProposalsByGroupPolicyResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalsByGroupPolicyResponse();
@@ -2212,10 +2212,10 @@ export const QueryProposalsByGroupPolicyResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposals.push(Proposal.decode(reader, reader.uint32(), useInterfaces));
+          message.proposals.push(Proposal.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -2270,27 +2270,27 @@ export const QueryProposalsByGroupPolicyResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryProposalsByGroupPolicyResponse, useInterfaces: boolean = true): QueryProposalsByGroupPolicyResponseAmino {
+  toAmino(message: QueryProposalsByGroupPolicyResponse): QueryProposalsByGroupPolicyResponseAmino {
     const obj: any = {};
     if (message.proposals) {
-      obj.proposals = message.proposals.map(e => e ? Proposal.toAmino(e, useInterfaces) : undefined);
+      obj.proposals = message.proposals.map(e => e ? Proposal.toAmino(e) : undefined);
     } else {
       obj.proposals = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryProposalsByGroupPolicyResponseAminoMsg): QueryProposalsByGroupPolicyResponse {
     return QueryProposalsByGroupPolicyResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryProposalsByGroupPolicyResponse, useInterfaces: boolean = true): QueryProposalsByGroupPolicyResponseAminoMsg {
+  toAminoMsg(message: QueryProposalsByGroupPolicyResponse): QueryProposalsByGroupPolicyResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryProposalsByGroupPolicyResponse",
-      value: QueryProposalsByGroupPolicyResponse.toAmino(message, useInterfaces)
+      value: QueryProposalsByGroupPolicyResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryProposalsByGroupPolicyResponseProtoMsg, useInterfaces: boolean = true): QueryProposalsByGroupPolicyResponse {
-    return QueryProposalsByGroupPolicyResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryProposalsByGroupPolicyResponseProtoMsg): QueryProposalsByGroupPolicyResponse {
+    return QueryProposalsByGroupPolicyResponse.decode(message.value);
   },
   toProto(message: QueryProposalsByGroupPolicyResponse): Uint8Array {
     return QueryProposalsByGroupPolicyResponse.encode(message).finish();
@@ -2320,7 +2320,7 @@ export const QueryVoteByProposalVoterRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryVoteByProposalVoterRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryVoteByProposalVoterRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVoteByProposalVoterRequest();
@@ -2378,7 +2378,7 @@ export const QueryVoteByProposalVoterRequest = {
       voter: object.voter
     };
   },
-  toAmino(message: QueryVoteByProposalVoterRequest, useInterfaces: boolean = true): QueryVoteByProposalVoterRequestAmino {
+  toAmino(message: QueryVoteByProposalVoterRequest): QueryVoteByProposalVoterRequestAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     obj.voter = message.voter;
@@ -2387,14 +2387,14 @@ export const QueryVoteByProposalVoterRequest = {
   fromAminoMsg(object: QueryVoteByProposalVoterRequestAminoMsg): QueryVoteByProposalVoterRequest {
     return QueryVoteByProposalVoterRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryVoteByProposalVoterRequest, useInterfaces: boolean = true): QueryVoteByProposalVoterRequestAminoMsg {
+  toAminoMsg(message: QueryVoteByProposalVoterRequest): QueryVoteByProposalVoterRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryVoteByProposalVoterRequest",
-      value: QueryVoteByProposalVoterRequest.toAmino(message, useInterfaces)
+      value: QueryVoteByProposalVoterRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryVoteByProposalVoterRequestProtoMsg, useInterfaces: boolean = true): QueryVoteByProposalVoterRequest {
-    return QueryVoteByProposalVoterRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryVoteByProposalVoterRequestProtoMsg): QueryVoteByProposalVoterRequest {
+    return QueryVoteByProposalVoterRequest.decode(message.value);
   },
   toProto(message: QueryVoteByProposalVoterRequest): Uint8Array {
     return QueryVoteByProposalVoterRequest.encode(message).finish();
@@ -2420,7 +2420,7 @@ export const QueryVoteByProposalVoterResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryVoteByProposalVoterResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryVoteByProposalVoterResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVoteByProposalVoterResponse();
@@ -2428,7 +2428,7 @@ export const QueryVoteByProposalVoterResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.vote = Vote.decode(reader, reader.uint32(), useInterfaces);
+          message.vote = Vote.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -2469,22 +2469,22 @@ export const QueryVoteByProposalVoterResponse = {
       vote: object?.vote ? Vote.fromAmino(object.vote) : undefined
     };
   },
-  toAmino(message: QueryVoteByProposalVoterResponse, useInterfaces: boolean = true): QueryVoteByProposalVoterResponseAmino {
+  toAmino(message: QueryVoteByProposalVoterResponse): QueryVoteByProposalVoterResponseAmino {
     const obj: any = {};
-    obj.vote = message.vote ? Vote.toAmino(message.vote, useInterfaces) : undefined;
+    obj.vote = message.vote ? Vote.toAmino(message.vote) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryVoteByProposalVoterResponseAminoMsg): QueryVoteByProposalVoterResponse {
     return QueryVoteByProposalVoterResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryVoteByProposalVoterResponse, useInterfaces: boolean = true): QueryVoteByProposalVoterResponseAminoMsg {
+  toAminoMsg(message: QueryVoteByProposalVoterResponse): QueryVoteByProposalVoterResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryVoteByProposalVoterResponse",
-      value: QueryVoteByProposalVoterResponse.toAmino(message, useInterfaces)
+      value: QueryVoteByProposalVoterResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryVoteByProposalVoterResponseProtoMsg, useInterfaces: boolean = true): QueryVoteByProposalVoterResponse {
-    return QueryVoteByProposalVoterResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryVoteByProposalVoterResponseProtoMsg): QueryVoteByProposalVoterResponse {
+    return QueryVoteByProposalVoterResponse.decode(message.value);
   },
   toProto(message: QueryVoteByProposalVoterResponse): Uint8Array {
     return QueryVoteByProposalVoterResponse.encode(message).finish();
@@ -2514,7 +2514,7 @@ export const QueryVotesByProposalRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryVotesByProposalRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryVotesByProposalRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVotesByProposalRequest();
@@ -2525,7 +2525,7 @@ export const QueryVotesByProposalRequest = {
           message.proposalId = reader.uint64();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -2574,23 +2574,23 @@ export const QueryVotesByProposalRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryVotesByProposalRequest, useInterfaces: boolean = true): QueryVotesByProposalRequestAmino {
+  toAmino(message: QueryVotesByProposalRequest): QueryVotesByProposalRequestAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryVotesByProposalRequestAminoMsg): QueryVotesByProposalRequest {
     return QueryVotesByProposalRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryVotesByProposalRequest, useInterfaces: boolean = true): QueryVotesByProposalRequestAminoMsg {
+  toAminoMsg(message: QueryVotesByProposalRequest): QueryVotesByProposalRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryVotesByProposalRequest",
-      value: QueryVotesByProposalRequest.toAmino(message, useInterfaces)
+      value: QueryVotesByProposalRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryVotesByProposalRequestProtoMsg, useInterfaces: boolean = true): QueryVotesByProposalRequest {
-    return QueryVotesByProposalRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryVotesByProposalRequestProtoMsg): QueryVotesByProposalRequest {
+    return QueryVotesByProposalRequest.decode(message.value);
   },
   toProto(message: QueryVotesByProposalRequest): Uint8Array {
     return QueryVotesByProposalRequest.encode(message).finish();
@@ -2620,7 +2620,7 @@ export const QueryVotesByProposalResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryVotesByProposalResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryVotesByProposalResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVotesByProposalResponse();
@@ -2628,10 +2628,10 @@ export const QueryVotesByProposalResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.votes.push(Vote.decode(reader, reader.uint32(), useInterfaces));
+          message.votes.push(Vote.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -2686,27 +2686,27 @@ export const QueryVotesByProposalResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryVotesByProposalResponse, useInterfaces: boolean = true): QueryVotesByProposalResponseAmino {
+  toAmino(message: QueryVotesByProposalResponse): QueryVotesByProposalResponseAmino {
     const obj: any = {};
     if (message.votes) {
-      obj.votes = message.votes.map(e => e ? Vote.toAmino(e, useInterfaces) : undefined);
+      obj.votes = message.votes.map(e => e ? Vote.toAmino(e) : undefined);
     } else {
       obj.votes = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryVotesByProposalResponseAminoMsg): QueryVotesByProposalResponse {
     return QueryVotesByProposalResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryVotesByProposalResponse, useInterfaces: boolean = true): QueryVotesByProposalResponseAminoMsg {
+  toAminoMsg(message: QueryVotesByProposalResponse): QueryVotesByProposalResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryVotesByProposalResponse",
-      value: QueryVotesByProposalResponse.toAmino(message, useInterfaces)
+      value: QueryVotesByProposalResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryVotesByProposalResponseProtoMsg, useInterfaces: boolean = true): QueryVotesByProposalResponse {
-    return QueryVotesByProposalResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryVotesByProposalResponseProtoMsg): QueryVotesByProposalResponse {
+    return QueryVotesByProposalResponse.decode(message.value);
   },
   toProto(message: QueryVotesByProposalResponse): Uint8Array {
     return QueryVotesByProposalResponse.encode(message).finish();
@@ -2736,7 +2736,7 @@ export const QueryVotesByVoterRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryVotesByVoterRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryVotesByVoterRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVotesByVoterRequest();
@@ -2747,7 +2747,7 @@ export const QueryVotesByVoterRequest = {
           message.voter = reader.string();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -2794,23 +2794,23 @@ export const QueryVotesByVoterRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryVotesByVoterRequest, useInterfaces: boolean = true): QueryVotesByVoterRequestAmino {
+  toAmino(message: QueryVotesByVoterRequest): QueryVotesByVoterRequestAmino {
     const obj: any = {};
     obj.voter = message.voter;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryVotesByVoterRequestAminoMsg): QueryVotesByVoterRequest {
     return QueryVotesByVoterRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryVotesByVoterRequest, useInterfaces: boolean = true): QueryVotesByVoterRequestAminoMsg {
+  toAminoMsg(message: QueryVotesByVoterRequest): QueryVotesByVoterRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryVotesByVoterRequest",
-      value: QueryVotesByVoterRequest.toAmino(message, useInterfaces)
+      value: QueryVotesByVoterRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryVotesByVoterRequestProtoMsg, useInterfaces: boolean = true): QueryVotesByVoterRequest {
-    return QueryVotesByVoterRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryVotesByVoterRequestProtoMsg): QueryVotesByVoterRequest {
+    return QueryVotesByVoterRequest.decode(message.value);
   },
   toProto(message: QueryVotesByVoterRequest): Uint8Array {
     return QueryVotesByVoterRequest.encode(message).finish();
@@ -2840,7 +2840,7 @@ export const QueryVotesByVoterResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryVotesByVoterResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryVotesByVoterResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVotesByVoterResponse();
@@ -2848,10 +2848,10 @@ export const QueryVotesByVoterResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.votes.push(Vote.decode(reader, reader.uint32(), useInterfaces));
+          message.votes.push(Vote.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -2906,27 +2906,27 @@ export const QueryVotesByVoterResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryVotesByVoterResponse, useInterfaces: boolean = true): QueryVotesByVoterResponseAmino {
+  toAmino(message: QueryVotesByVoterResponse): QueryVotesByVoterResponseAmino {
     const obj: any = {};
     if (message.votes) {
-      obj.votes = message.votes.map(e => e ? Vote.toAmino(e, useInterfaces) : undefined);
+      obj.votes = message.votes.map(e => e ? Vote.toAmino(e) : undefined);
     } else {
       obj.votes = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryVotesByVoterResponseAminoMsg): QueryVotesByVoterResponse {
     return QueryVotesByVoterResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryVotesByVoterResponse, useInterfaces: boolean = true): QueryVotesByVoterResponseAminoMsg {
+  toAminoMsg(message: QueryVotesByVoterResponse): QueryVotesByVoterResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryVotesByVoterResponse",
-      value: QueryVotesByVoterResponse.toAmino(message, useInterfaces)
+      value: QueryVotesByVoterResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryVotesByVoterResponseProtoMsg, useInterfaces: boolean = true): QueryVotesByVoterResponse {
-    return QueryVotesByVoterResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryVotesByVoterResponseProtoMsg): QueryVotesByVoterResponse {
+    return QueryVotesByVoterResponse.decode(message.value);
   },
   toProto(message: QueryVotesByVoterResponse): Uint8Array {
     return QueryVotesByVoterResponse.encode(message).finish();
@@ -2956,7 +2956,7 @@ export const QueryGroupsByMemberRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGroupsByMemberRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGroupsByMemberRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupsByMemberRequest();
@@ -2967,7 +2967,7 @@ export const QueryGroupsByMemberRequest = {
           message.address = reader.string();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -3014,23 +3014,23 @@ export const QueryGroupsByMemberRequest = {
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryGroupsByMemberRequest, useInterfaces: boolean = true): QueryGroupsByMemberRequestAmino {
+  toAmino(message: QueryGroupsByMemberRequest): QueryGroupsByMemberRequestAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryGroupsByMemberRequestAminoMsg): QueryGroupsByMemberRequest {
     return QueryGroupsByMemberRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGroupsByMemberRequest, useInterfaces: boolean = true): QueryGroupsByMemberRequestAminoMsg {
+  toAminoMsg(message: QueryGroupsByMemberRequest): QueryGroupsByMemberRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryGroupsByMemberRequest",
-      value: QueryGroupsByMemberRequest.toAmino(message, useInterfaces)
+      value: QueryGroupsByMemberRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryGroupsByMemberRequestProtoMsg, useInterfaces: boolean = true): QueryGroupsByMemberRequest {
-    return QueryGroupsByMemberRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryGroupsByMemberRequestProtoMsg): QueryGroupsByMemberRequest {
+    return QueryGroupsByMemberRequest.decode(message.value);
   },
   toProto(message: QueryGroupsByMemberRequest): Uint8Array {
     return QueryGroupsByMemberRequest.encode(message).finish();
@@ -3060,7 +3060,7 @@ export const QueryGroupsByMemberResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGroupsByMemberResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGroupsByMemberResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupsByMemberResponse();
@@ -3068,10 +3068,10 @@ export const QueryGroupsByMemberResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.groups.push(GroupInfo.decode(reader, reader.uint32(), useInterfaces));
+          message.groups.push(GroupInfo.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
+          message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -3126,27 +3126,27 @@ export const QueryGroupsByMemberResponse = {
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
     };
   },
-  toAmino(message: QueryGroupsByMemberResponse, useInterfaces: boolean = true): QueryGroupsByMemberResponseAmino {
+  toAmino(message: QueryGroupsByMemberResponse): QueryGroupsByMemberResponseAmino {
     const obj: any = {};
     if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupInfo.toAmino(e, useInterfaces) : undefined);
+      obj.groups = message.groups.map(e => e ? GroupInfo.toAmino(e) : undefined);
     } else {
       obj.groups = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryGroupsByMemberResponseAminoMsg): QueryGroupsByMemberResponse {
     return QueryGroupsByMemberResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryGroupsByMemberResponse, useInterfaces: boolean = true): QueryGroupsByMemberResponseAminoMsg {
+  toAminoMsg(message: QueryGroupsByMemberResponse): QueryGroupsByMemberResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryGroupsByMemberResponse",
-      value: QueryGroupsByMemberResponse.toAmino(message, useInterfaces)
+      value: QueryGroupsByMemberResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryGroupsByMemberResponseProtoMsg, useInterfaces: boolean = true): QueryGroupsByMemberResponse {
-    return QueryGroupsByMemberResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryGroupsByMemberResponseProtoMsg): QueryGroupsByMemberResponse {
+    return QueryGroupsByMemberResponse.decode(message.value);
   },
   toProto(message: QueryGroupsByMemberResponse): Uint8Array {
     return QueryGroupsByMemberResponse.encode(message).finish();
@@ -3172,7 +3172,7 @@ export const QueryTallyResultRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryTallyResultRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTallyResultRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTallyResultRequest();
@@ -3221,7 +3221,7 @@ export const QueryTallyResultRequest = {
       proposalId: BigInt(object.proposal_id)
     };
   },
-  toAmino(message: QueryTallyResultRequest, useInterfaces: boolean = true): QueryTallyResultRequestAmino {
+  toAmino(message: QueryTallyResultRequest): QueryTallyResultRequestAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     return obj;
@@ -3229,14 +3229,14 @@ export const QueryTallyResultRequest = {
   fromAminoMsg(object: QueryTallyResultRequestAminoMsg): QueryTallyResultRequest {
     return QueryTallyResultRequest.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryTallyResultRequest, useInterfaces: boolean = true): QueryTallyResultRequestAminoMsg {
+  toAminoMsg(message: QueryTallyResultRequest): QueryTallyResultRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryTallyResultRequest",
-      value: QueryTallyResultRequest.toAmino(message, useInterfaces)
+      value: QueryTallyResultRequest.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryTallyResultRequestProtoMsg, useInterfaces: boolean = true): QueryTallyResultRequest {
-    return QueryTallyResultRequest.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryTallyResultRequestProtoMsg): QueryTallyResultRequest {
+    return QueryTallyResultRequest.decode(message.value);
   },
   toProto(message: QueryTallyResultRequest): Uint8Array {
     return QueryTallyResultRequest.encode(message).finish();
@@ -3262,7 +3262,7 @@ export const QueryTallyResultResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryTallyResultResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTallyResultResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTallyResultResponse();
@@ -3270,7 +3270,7 @@ export const QueryTallyResultResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.tally = TallyResult.decode(reader, reader.uint32(), useInterfaces);
+          message.tally = TallyResult.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -3311,22 +3311,22 @@ export const QueryTallyResultResponse = {
       tally: object?.tally ? TallyResult.fromAmino(object.tally) : undefined
     };
   },
-  toAmino(message: QueryTallyResultResponse, useInterfaces: boolean = true): QueryTallyResultResponseAmino {
+  toAmino(message: QueryTallyResultResponse): QueryTallyResultResponseAmino {
     const obj: any = {};
-    obj.tally = message.tally ? TallyResult.toAmino(message.tally, useInterfaces) : undefined;
+    obj.tally = message.tally ? TallyResult.toAmino(message.tally) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryTallyResultResponseAminoMsg): QueryTallyResultResponse {
     return QueryTallyResultResponse.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryTallyResultResponse, useInterfaces: boolean = true): QueryTallyResultResponseAminoMsg {
+  toAminoMsg(message: QueryTallyResultResponse): QueryTallyResultResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryTallyResultResponse",
-      value: QueryTallyResultResponse.toAmino(message, useInterfaces)
+      value: QueryTallyResultResponse.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryTallyResultResponseProtoMsg, useInterfaces: boolean = true): QueryTallyResultResponse {
-    return QueryTallyResultResponse.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryTallyResultResponseProtoMsg): QueryTallyResultResponse {
+    return QueryTallyResultResponse.decode(message.value);
   },
   toProto(message: QueryTallyResultResponse): Uint8Array {
     return QueryTallyResultResponse.encode(message).finish();

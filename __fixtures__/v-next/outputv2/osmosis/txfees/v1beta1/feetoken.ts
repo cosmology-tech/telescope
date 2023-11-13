@@ -57,7 +57,7 @@ export const FeeToken = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): FeeToken {
+  decode(input: BinaryReader | Uint8Array, length?: number): FeeToken {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFeeToken();
@@ -115,7 +115,7 @@ export const FeeToken = {
       poolID: BigInt(object.poolID)
     };
   },
-  toAmino(message: FeeToken, useInterfaces: boolean = true): FeeTokenAmino {
+  toAmino(message: FeeToken): FeeTokenAmino {
     const obj: any = {};
     obj.denom = message.denom;
     obj.poolID = message.poolID ? message.poolID.toString() : undefined;
@@ -124,14 +124,14 @@ export const FeeToken = {
   fromAminoMsg(object: FeeTokenAminoMsg): FeeToken {
     return FeeToken.fromAmino(object.value);
   },
-  toAminoMsg(message: FeeToken, useInterfaces: boolean = true): FeeTokenAminoMsg {
+  toAminoMsg(message: FeeToken): FeeTokenAminoMsg {
     return {
       type: "osmosis/txfees/fee-token",
-      value: FeeToken.toAmino(message, useInterfaces)
+      value: FeeToken.toAmino(message)
     };
   },
-  fromProtoMsg(message: FeeTokenProtoMsg, useInterfaces: boolean = true): FeeToken {
-    return FeeToken.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: FeeTokenProtoMsg): FeeToken {
+    return FeeToken.decode(message.value);
   },
   toProto(message: FeeToken): Uint8Array {
     return FeeToken.encode(message).finish();

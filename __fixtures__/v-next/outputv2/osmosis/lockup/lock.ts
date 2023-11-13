@@ -299,7 +299,7 @@ export const PeriodLock = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PeriodLock {
+  decode(input: BinaryReader | Uint8Array, length?: number): PeriodLock {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePeriodLock();
@@ -313,13 +313,13 @@ export const PeriodLock = {
           message.owner = reader.string();
           break;
         case 3:
-          message.duration = Duration.decode(reader, reader.uint32(), useInterfaces);
+          message.duration = Duration.decode(reader, reader.uint32());
           break;
         case 4:
           message.endTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 5:
-          message.coins.push(Coin.decode(reader, reader.uint32(), useInterfaces));
+          message.coins.push(Coin.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -394,14 +394,14 @@ export const PeriodLock = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
-  toAmino(message: PeriodLock, useInterfaces: boolean = true): PeriodLockAmino {
+  toAmino(message: PeriodLock): PeriodLockAmino {
     const obj: any = {};
     obj.ID = message.ID ? message.ID.toString() : undefined;
     obj.owner = message.owner;
-    obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
     if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.coins = [];
     }
@@ -410,14 +410,14 @@ export const PeriodLock = {
   fromAminoMsg(object: PeriodLockAminoMsg): PeriodLock {
     return PeriodLock.fromAmino(object.value);
   },
-  toAminoMsg(message: PeriodLock, useInterfaces: boolean = true): PeriodLockAminoMsg {
+  toAminoMsg(message: PeriodLock): PeriodLockAminoMsg {
     return {
       type: "osmosis/lockup/period-lock",
-      value: PeriodLock.toAmino(message, useInterfaces)
+      value: PeriodLock.toAmino(message)
     };
   },
-  fromProtoMsg(message: PeriodLockProtoMsg, useInterfaces: boolean = true): PeriodLock {
-    return PeriodLock.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: PeriodLockProtoMsg): PeriodLock {
+    return PeriodLock.decode(message.value);
   },
   toProto(message: PeriodLock): Uint8Array {
     return PeriodLock.encode(message).finish();
@@ -455,7 +455,7 @@ export const QueryCondition = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryCondition {
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryCondition {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCondition();
@@ -469,7 +469,7 @@ export const QueryCondition = {
           message.denom = reader.string();
           break;
         case 3:
-          message.duration = Duration.decode(reader, reader.uint32(), useInterfaces);
+          message.duration = Duration.decode(reader, reader.uint32());
           break;
         case 4:
           message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
@@ -531,25 +531,25 @@ export const QueryCondition = {
       timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
     };
   },
-  toAmino(message: QueryCondition, useInterfaces: boolean = true): QueryConditionAmino {
+  toAmino(message: QueryCondition): QueryConditionAmino {
     const obj: any = {};
     obj.lock_query_type = message.lockQueryType;
     obj.denom = message.denom;
-    obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryConditionAminoMsg): QueryCondition {
     return QueryCondition.fromAmino(object.value);
   },
-  toAminoMsg(message: QueryCondition, useInterfaces: boolean = true): QueryConditionAminoMsg {
+  toAminoMsg(message: QueryCondition): QueryConditionAminoMsg {
     return {
       type: "osmosis/lockup/query-condition",
-      value: QueryCondition.toAmino(message, useInterfaces)
+      value: QueryCondition.toAmino(message)
     };
   },
-  fromProtoMsg(message: QueryConditionProtoMsg, useInterfaces: boolean = true): QueryCondition {
-    return QueryCondition.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: QueryConditionProtoMsg): QueryCondition {
+    return QueryCondition.decode(message.value);
   },
   toProto(message: QueryCondition): Uint8Array {
     return QueryCondition.encode(message).finish();
@@ -587,7 +587,7 @@ export const SyntheticLock = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SyntheticLock {
+  decode(input: BinaryReader | Uint8Array, length?: number): SyntheticLock {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSyntheticLock();
@@ -604,7 +604,7 @@ export const SyntheticLock = {
           message.endTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 4:
-          message.duration = Duration.decode(reader, reader.uint32(), useInterfaces);
+          message.duration = Duration.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -665,25 +665,25 @@ export const SyntheticLock = {
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
     };
   },
-  toAmino(message: SyntheticLock, useInterfaces: boolean = true): SyntheticLockAmino {
+  toAmino(message: SyntheticLock): SyntheticLockAmino {
     const obj: any = {};
     obj.underlying_lock_id = message.underlyingLockId ? message.underlyingLockId.toString() : undefined;
     obj.synth_denom = message.synthDenom;
     obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
-    obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;
   },
   fromAminoMsg(object: SyntheticLockAminoMsg): SyntheticLock {
     return SyntheticLock.fromAmino(object.value);
   },
-  toAminoMsg(message: SyntheticLock, useInterfaces: boolean = true): SyntheticLockAminoMsg {
+  toAminoMsg(message: SyntheticLock): SyntheticLockAminoMsg {
     return {
       type: "osmosis/lockup/synthetic-lock",
-      value: SyntheticLock.toAmino(message, useInterfaces)
+      value: SyntheticLock.toAmino(message)
     };
   },
-  fromProtoMsg(message: SyntheticLockProtoMsg, useInterfaces: boolean = true): SyntheticLock {
-    return SyntheticLock.decode(message.value, undefined, useInterfaces);
+  fromProtoMsg(message: SyntheticLockProtoMsg): SyntheticLock {
+    return SyntheticLock.decode(message.value);
   },
   toProto(message: SyntheticLock): Uint8Array {
     return SyntheticLock.encode(message).finish();
