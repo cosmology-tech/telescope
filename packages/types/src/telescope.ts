@@ -21,6 +21,7 @@ interface TelescopeOpts {
 
     interfaces?: {
         enabled?: boolean;
+        useGlobalDecoderRegistry?: boolean;
         useUseInterfacesParams?: boolean;
         useByDefault?: boolean,
         useByDefaultRpc?: boolean,

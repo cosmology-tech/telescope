@@ -10,3 +10,4 @@ export * from './varint';
 export * from './utf8-helper';
 export * from './binary-coder';
 export * from './types-helper';
+export * from './registry-helper';

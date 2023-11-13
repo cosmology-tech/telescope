@@ -51,3 +51,15 @@ export const createObjectWithMethods = (
         )
     )
 };
+
+export const createRegisterObject = (
+  name: string,
+) => {
+  return t.callExpression(
+    t.memberExpression(t.identifier("GlobalDecoderRegistry"), t.identifier("register")),
+    [
+      t.memberExpression(t.identifier(name), t.identifier("typeUrl")),
+      t.identifier(name),
+    ]
+  );
+};

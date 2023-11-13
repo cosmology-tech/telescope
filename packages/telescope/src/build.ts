@@ -5,6 +5,7 @@ import {
     createAminoConverter,
     createCreateProtoType,
     createObjectWithMethods,
+    createRegisterObject,
     createProtoEnum,
     createProtoEnumToJSON,
     createProtoEnumFromJSON,
@@ -55,6 +56,10 @@ export const buildBaseTypeScriptClass = (
     if (context.options.prototypes.enabled) {
         context.body.push(createCreateProtoType(context.proto, name, obj));
         context.body.push(createObjectWithMethods(context.proto, name, obj));
+
+        if(context.options.interfaces?.enabled && context.options.interfaces?.useGlobalDecoderRegistry){
+          context.body.push(createRegisterObject(name));
+        }
     }
 };
 
