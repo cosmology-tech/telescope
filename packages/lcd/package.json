@@ -1,6 +1,6 @@
 {
   "name": "@cosmology/lcd",
-  "version": "0.13.2",
+  "version": "0.13.3",
   "description": "Telescope LCDClient helpers",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/cosmology-tech/telescope/tree/master/packages/helpers#readme",
