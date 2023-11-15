@@ -7,6 +7,7 @@ import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 import { encodePubkey, decodePubkey } from "@cosmjs/proto-signing";
+import { Pubkey } from "@cosmjs/amino";
 export const protobufPackage = "cosmos.staking.v1beta1";
 /** BondStatus is the status of a validator. */
 export enum BondStatus {
@@ -3052,6 +3053,6 @@ export const Cosmos_cryptoPubKey_InterfaceDecoder = (input: BinaryReader | Uint8
 export const Cosmos_cryptoPubKey_FromAmino = (content: AnyAmino) => {
   return encodePubkey(content);
 };
-export const Cosmos_cryptoPubKey_ToAmino = (content: Any, useInterfaces: boolean = true) => {
+export const Cosmos_cryptoPubKey_ToAmino = (content: Any, useInterfaces: boolean = true): Pubkey | null => {
   return decodePubkey(content);
 };
