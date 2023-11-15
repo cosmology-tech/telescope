@@ -11,6 +11,7 @@ import { toSDKMethod } from './proto/to-sdk';
 import { fromSDKMethod } from './proto/from-sdk';
 import { ProtoParseContext } from './context';
 import { createAminoTypeProperty, createTypeUrlProperty, fromProtoMsgMethod, fromSDKJSONMethod, toProtoMethod, toProtoMsgMethod } from './proto';
+import { isMethod } from './proto/is';
 
 export const createObjectWithMethods = (
     context: ProtoParseContext,
@@ -19,8 +20,9 @@ export const createObjectWithMethods = (
 ) => {
 
     const methodsAndProps = [
-        context.pluginValue('prototypes.addTypeUrlToObjects') && createTypeUrlProperty(context, proto),
+        ( context.pluginValue('prototypes.addTypeUrlToObjects') || context.pluginValue('interfaces.enabled') && context.pluginValue('interfaces.useGlobalDecoderRegistry') ) && createTypeUrlProperty(context, proto),
         context.pluginValue('prototypes.addAminoTypeToObjects') && createAminoTypeProperty(context, proto),
+        context.pluginValue('interfaces.enabled') && context.pluginValue('interfaces.useGlobalDecoderRegistry') && isMethod({context, name, proto}),
         context.pluginValue('prototypes.methods.encode') && encodeMethod(context, name, proto),
         context.pluginValue('prototypes.methods.decode') && decodeMethod(context, name, proto),
         context.pluginValue('prototypes.methods.fromJSON') && fromJSONMethod(context, name, proto),
@@ -53,13 +55,21 @@ export const createObjectWithMethods = (
 };
 
 export const createRegisterObject = (
+  context: ProtoParseContext,
   name: string,
 ) => {
-  return t.callExpression(
-    t.memberExpression(t.identifier("GlobalDecoderRegistry"), t.identifier("register")),
-    [
-      t.memberExpression(t.identifier(name), t.identifier("typeUrl")),
-      t.identifier(name),
-    ]
+  context.addUtil("GlobalDecoderRegistry");
+
+  return t.expressionStatement(
+    t.callExpression(
+      t.memberExpression(
+        t.identifier("GlobalDecoderRegistry"),
+        t.identifier("register")
+      ),
+      [
+        t.memberExpression(t.identifier(name), t.identifier("typeUrl")),
+        t.identifier(name),
+      ]
+    )
   );
 };

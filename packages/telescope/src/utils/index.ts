@@ -76,6 +76,7 @@ export const UTILS = {
   BinaryReader: '__binary__',
   BinaryWriter: '__binary__',
   TelescopeGeneratedType: '__types__',
+  GlobalDecoderRegistry: '__registry__',
 };
 
 export const UTIL_HELPERS = [
@@ -87,7 +88,8 @@ export const UTIL_HELPERS = [
   '__pinia-endpoint__',
   '__grpc-gateway__',
   '__grpc-web__',
-  '__types__'
+  '__types__',
+  '__registry__'
 ];
 
 export const fixlocalpaths = (imports: ImportObj[]) => {
