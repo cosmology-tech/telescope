@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { ProtoRef, TraverseTypeUrlRef, TypeUrlRef } from '@cosmology/types';
 import { slugify } from '@cosmology/utils';
-import { identifier } from '../../../utils';
+import { arrowFunctionExpression, identifier } from '../../../utils';
 import { ProtoParseContext } from "../../context";
 
 const firstUpper = (s: string) => s = s.charAt(0).toUpperCase() + s.slice(1);
@@ -18,6 +18,7 @@ export const createInterfaceToAmino = (
     if (interfaceName === 'cosmos.crypto.PubKey') {
         // return a helper!
         context.addUtil('decodePubkey');
+        context.addUtil('Pubkey');
         const functionName = getInterfaceToAminoName(interfaceName);
 
         return makeFunctionWrapper(context, functionName, t.returnStatement(
@@ -27,7 +28,7 @@ export const createInterfaceToAmino = (
                     t.identifier('content')
                 ]
             ),
-        ));
+        ), t.tsTypeAnnotation(t.tsUnionType([t.tsTypeReference(t.identifier("Pubkey")), t.tsNullKeyword()])));
     }
 
 
@@ -43,7 +44,8 @@ export const createInterfaceToAmino = (
 const makeFunctionWrapper = (
     context: ProtoParseContext,
     functionName: string,
-    stmt: t.Statement
+    stmt: t.Statement,
+    returnType?: t.TSTypeAnnotation
 ) => {
     return t.exportNamedDeclaration(
         t.variableDeclaration(
@@ -51,7 +53,7 @@ const makeFunctionWrapper = (
             [
                 t.variableDeclarator(
                     t.identifier(functionName),
-                    t.arrowFunctionExpression(
+                    arrowFunctionExpression(
                         [
                             identifier(
                                 'content',
@@ -80,7 +82,8 @@ const makeFunctionWrapper = (
                         ],
                         t.blockStatement([
                             stmt
-                        ])
+                        ]),
+                        returnType
                     )
 
                 )
