@@ -22,7 +22,7 @@ export declare const createProtoTypeComparison: (args: {
     context: ProtoParseContext;
     fieldName: t.Expression;
     field: ProtoField;
-}) => t.CallExpression;
+}) => t.Expression;
 export declare const createArrayTypeComparison: (args: {
     context: ProtoParseContext;
     fieldName: string;

@@ -1,6 +1,6 @@
-import * as t from '@babel/types';
-import { ProtoField } from '@cosmology/types';
-import { ProtoParseContext } from '../encoding';
+import * as t from "@babel/types";
+import { ProtoField } from "@cosmology/types";
+import { ProtoParseContext } from "../encoding";
 declare const BILLION: t.NumericLiteral;
 export { BILLION };
 export declare const cleanComment: (str: any) => any;
@@ -15,3 +15,4 @@ export declare const memberExpressionOrIdentifier: (names: any) => any;
 export declare const memberExpressionOrIdentifierAminoCasing: (names: any, aminoCasingFn: Function) => any;
 export declare const memberExpressionOrIdentifierAminoCaseField: (fields: ProtoField[], aminoCaseFunc: Function) => any;
 export declare const promiseTypeAnnotation: (name: any) => t.TSTypeAnnotation;
+export declare const getAcceptedInterfacesTypes: (context: ProtoParseContext, lookupInterface: string) => import("@cosmology/types").TraversalSymbol[];

@@ -1,7 +1,16 @@
 import * as t from "@babel/types";
 import { ProtoParseContext } from "../../context";
 import { ProtoField, ProtoType } from "@cosmology/types";
-import { identifier, objectMethod } from "../../../utils";
+import {
+  getAcceptedInterfacesTypes,
+  identifier,
+  objectMethod,
+} from "../../../utils";
+import {
+  getFieldOptionality,
+  getFieldOptionalityForDefaults,
+  getOneOfs,
+} from "../types";
 
 const INPUT_PARAM = "o";
 
@@ -47,6 +56,66 @@ export const createProtoTypeComparison = (args: {
   field: ProtoField;
 }) => {
   const { context, fieldName, field } = args;
+
+  switch (field.type) {
+    case "google.protobuf.Duration":
+    case "Duration":
+      const durationFormat = args.context.pluginValue(
+        "prototypes.typingsFormat.duration"
+      );
+
+      if (durationFormat === "string") {
+        return createScalarTypeComparison({
+          context,
+          fieldName,
+          field,
+          type: "string",
+        });
+      }
+    case "google.protobuf.Timestamp":
+    case "Timestamp":
+      const timestampFormat = args.context.pluginValue(
+        "prototypes.typingsFormat.timestamp"
+      );
+
+      if (timestampFormat === "date") {
+        createInstanceOfTypeComparison({
+          context,
+          fieldName,
+          field,
+          type: "Date",
+        });
+      }
+    case "Any":
+    case "google.protobuf.Any":
+      const lookupInterface =
+        field.options?.["(cosmos_proto.accepts_interface)"];
+
+      const acceptedTypes = getAcceptedInterfacesTypes(
+        context,
+        lookupInterface
+      );
+
+      const acceptedTypeNames = acceptedTypes.map(
+        (acceptedType) => acceptedType.readAs
+      );
+
+      acceptedTypeNames.push("Any");
+
+      return acceptedTypeNames.reduce<t.Expression>((comparison, acceptedTypeName) => {
+        const current = t.callExpression(
+          t.memberExpression(
+            t.identifier(acceptedTypeName),
+            t.identifier("is")
+          ),
+          [fieldName]
+        );
+
+        return comparison
+          ? t.logicalExpression("||", comparison, current)
+          : current;
+      }, undefined);
+  }
 
   const typeName = context.getTypeName(field);
 
@@ -96,6 +165,7 @@ function getScalarExpression(args: {
   fieldName: t.Expression;
   field: ProtoField;
 }) {
+  //TODO:: Date, timestamp, etc
   const { context, field, fieldName } = args;
   switch (field.type) {
     case "string":
@@ -271,6 +341,13 @@ export const isMethod = (args: {
     proto.fields ?? {}
   ).reduce<t.Expression>((comparison, fieldName) => {
     const field = proto.fields[fieldName];
+    const oneOfs = getOneOfs(proto);
+    const isOneOf = oneOfs.includes(fieldName);
+    const isOptional = getFieldOptionalityForDefaults(context, field, isOneOf);
+
+    if (isOptional) {
+      return comparison;
+    }
 
     const current = createFieldTypeComparison({ context, field, fieldName });
 
@@ -278,6 +355,12 @@ export const isMethod = (args: {
       ? t.logicalExpression("&&", comparison, current)
       : current;
   }, undefined);
+
+  const typeUrlExpr = t.binaryExpression(
+    "===",
+    t.memberExpression(t.identifier(INPUT_PARAM), t.identifier("$typeUrl")),
+    t.memberExpression(t.identifier(name), t.identifier("typeUrl"))
+  );
 
   const method = objectMethod(
     "method",
@@ -288,18 +371,9 @@ export const isMethod = (args: {
         t.logicalExpression(
           "&&",
           t.identifier(INPUT_PARAM),
-          t.logicalExpression(
-            "&&",
-            t.binaryExpression(
-              "===",
-              t.memberExpression(
-                t.identifier(INPUT_PARAM),
-                t.identifier("$typeUrl")
-              ),
-              t.memberExpression(t.identifier(name), t.identifier("typeUrl"))
-            ),
-            fieldTypesComparison
-          )
+          fieldTypesComparison
+            ? t.logicalExpression("||", typeUrlExpr, fieldTypesComparison)
+            : typeUrlExpr
         )
       ),
     ]),

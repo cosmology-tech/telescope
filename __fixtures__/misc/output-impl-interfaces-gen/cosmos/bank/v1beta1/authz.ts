@@ -24,7 +24,7 @@ function createBaseSendAuthorization(): SendAuthorization {
 export const SendAuthorization = {
   typeUrl: "/cosmos.bank.v1beta1.SendAuthorization",
   is(o: any): o is SendAuthorization {
-    return o && o.$typeUrl === SendAuthorization.typeUrl && o;
+    return o && (o.$typeUrl === SendAuthorization.typeUrl || Array.isArray(o.spendLimit) && (!o.spendLimit.length || Coin.is(o.spendLimit[0])));
   },
   encode(message: SendAuthorization, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.spendLimit) {

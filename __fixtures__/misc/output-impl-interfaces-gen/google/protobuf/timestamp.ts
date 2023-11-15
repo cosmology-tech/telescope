@@ -114,7 +114,7 @@ function createBaseTimestamp(): Timestamp {
 export const Timestamp = {
   typeUrl: "/google.protobuf.Timestamp",
   is(o: any): o is Timestamp {
-    return o && o.$typeUrl === Timestamp.typeUrl && typeof o.seconds === "int64" && typeof o.nanos === "int32";
+    return o && (o.$typeUrl === Timestamp.typeUrl || typeof o.seconds === "bigint" && typeof o.nanos === "number");
   },
   encode(message: Timestamp, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.seconds !== BigInt(0)) {

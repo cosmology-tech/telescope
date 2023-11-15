@@ -55,7 +55,7 @@ function createBaseCoin(): Coin {
 export const Coin = {
   typeUrl: "/cosmos.base.v1beta1.Coin",
   is(o: any): o is Coin {
-    return o && o.$typeUrl === Coin.typeUrl && typeof o.denom === "string" && typeof o.amount === "string";
+    return o && (o.$typeUrl === Coin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
   },
   encode(message: Coin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
@@ -127,7 +127,7 @@ function createBaseDecCoin(): DecCoin {
 export const DecCoin = {
   typeUrl: "/cosmos.base.v1beta1.DecCoin",
   is(o: any): o is DecCoin {
-    return o && o.$typeUrl === DecCoin.typeUrl && typeof o.denom === "string" && typeof o.amount === "string";
+    return o && (o.$typeUrl === DecCoin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
   },
   encode(message: DecCoin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
@@ -198,7 +198,7 @@ function createBaseIntProto(): IntProto {
 export const IntProto = {
   typeUrl: "/cosmos.base.v1beta1.IntProto",
   is(o: any): o is IntProto {
-    return o && o.$typeUrl === IntProto.typeUrl && typeof o.int === "string";
+    return o && (o.$typeUrl === IntProto.typeUrl || typeof o.int === "string");
   },
   encode(message: IntProto, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.int !== "") {
@@ -260,7 +260,7 @@ function createBaseDecProto(): DecProto {
 export const DecProto = {
   typeUrl: "/cosmos.base.v1beta1.DecProto",
   is(o: any): o is DecProto {
-    return o && o.$typeUrl === DecProto.typeUrl && typeof o.dec === "string";
+    return o && (o.$typeUrl === DecProto.typeUrl || typeof o.dec === "string");
   },
   encode(message: DecProto, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.dec !== "") {

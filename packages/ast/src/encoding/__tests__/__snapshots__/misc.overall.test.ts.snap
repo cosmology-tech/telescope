@@ -4,7 +4,7 @@ exports[`misc/eval_request date 1`] = `
 "export const EvalRequest = {
   typeUrl: "/misc.EvalRequest",
   is(o: any): o is EvalRequest {
-    return o && o.$typeUrl === EvalRequest.typeUrl && o.bindings && o.refs && typeof o.testNum === "number" && typeof o.testString === "string" && typeof o.testBool === "boolean" && AccessConfig.is(o.instantiatePermission) && typeof o.id === "string" && typeof o.name === "string" && Array.isArray(o.testArray) && (!o.testArray.length || typeof o.testArray[0] === "string");
+    return o && (o.$typeUrl === EvalRequest.typeUrl || o.bindings && o.refs && typeof o.testNum === "number" && typeof o.testString === "string" && typeof o.testBool === "boolean" && Array.isArray(o.testArray) && (!o.testArray.length || typeof o.testArray[0] === "string"));
   },
   encode(message: EvalRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     Object.entries(message.bindings).forEach(([key, value]) => {
@@ -288,7 +288,7 @@ exports[`misc/eval_request timestamp 1`] = `
 "export const EvalRequest = {
   typeUrl: "/misc.EvalRequest",
   is(o: any): o is EvalRequest {
-    return o && o.$typeUrl === EvalRequest.typeUrl && o.bindings && o.refs && typeof o.testNum === "number" && typeof o.testString === "string" && typeof o.testBool === "boolean" && AccessConfig.is(o.instantiatePermission) && typeof o.id === "string" && typeof o.name === "string" && Array.isArray(o.testArray) && (!o.testArray.length || typeof o.testArray[0] === "string");
+    return o && (o.$typeUrl === EvalRequest.typeUrl || o.bindings && o.refs && typeof o.testNum === "number" && typeof o.testString === "string" && typeof o.testBool === "boolean" && Array.isArray(o.testArray) && (!o.testArray.length || typeof o.testArray[0] === "string"));
   },
   encode(message: EvalRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     Object.entries(message.bindings).forEach(([key, value]) => {

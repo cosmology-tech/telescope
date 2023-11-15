@@ -23,7 +23,7 @@ export interface GenericAuthorizationProtoMsg {
  * the provide method with expiration time.
  */
 export interface Grant {
-  authorization?: GenericAuthorization | DepositDeploymentAuthorization | SendAuthorization | Any | undefined;
+  authorization: GenericAuthorization | DepositDeploymentAuthorization | SendAuthorization | Any | undefined;
   /**
    * time when the grant will expire and will be pruned. If null, then the grant
    * doesn't have a time expiration (other conditions  in `authorization`
@@ -66,7 +66,7 @@ function createBaseGenericAuthorization(): GenericAuthorization {
 export const GenericAuthorization = {
   typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization",
   is(o: any): o is GenericAuthorization {
-    return o && o.$typeUrl === GenericAuthorization.typeUrl && typeof o.msg === "string";
+    return o && (o.$typeUrl === GenericAuthorization.typeUrl || typeof o.msg === "string");
   },
   encode(message: GenericAuthorization, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.msg !== "") {
@@ -122,14 +122,14 @@ export const GenericAuthorization = {
 GlobalDecoderRegistry.register(GenericAuthorization.typeUrl, GenericAuthorization);
 function createBaseGrant(): Grant {
   return {
-    authorization: undefined,
+    authorization: Any.fromPartial({}),
     expiration: undefined
   };
 }
 export const Grant = {
   typeUrl: "/cosmos.authz.v1beta1.Grant",
   is(o: any): o is Grant {
-    return o && o.$typeUrl === Grant.typeUrl && o && o;
+    return o && (o.$typeUrl === Grant.typeUrl || GenericAuthorization.is(o.authorization) || DepositDeploymentAuthorization.is(o.authorization) || SendAuthorization.is(o.authorization) || Any.is(o.authorization));
   },
   encode(message: Grant, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.authorization !== undefined) {
@@ -205,7 +205,7 @@ function createBaseGrantAuthorization(): GrantAuthorization {
 export const GrantAuthorization = {
   typeUrl: "/cosmos.authz.v1beta1.GrantAuthorization",
   is(o: any): o is GrantAuthorization {
-    return o && o.$typeUrl === GrantAuthorization.typeUrl && typeof o.granter === "string" && typeof o.grantee === "string" && o && o;
+    return o && (o.$typeUrl === GrantAuthorization.typeUrl || typeof o.granter === "string" && typeof o.grantee === "string");
   },
   encode(message: GrantAuthorization, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.granter !== "") {
@@ -296,9 +296,7 @@ function createBaseGrantQueueItem(): GrantQueueItem {
 export const GrantQueueItem = {
   typeUrl: "/cosmos.authz.v1beta1.GrantQueueItem",
   is(o: any): o is GrantQueueItem {
-    return o && o.$typeUrl === GrantQueueItem.typeUrl && Array.isArray(o.msgTypeUrls) && (!o.msgTypeUrls.length || o.msgTypeUrls.some(item => {
-      return typeof o.item === "string";
-    }));
+    return o && (o.$typeUrl === GrantQueueItem.typeUrl || Array.isArray(o.msgTypeUrls) && (!o.msgTypeUrls.length || typeof o.msgTypeUrls[0] === "string"));
   },
   encode(message: GrantQueueItem, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.msgTypeUrls) {

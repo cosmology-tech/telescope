@@ -26,7 +26,7 @@ function createBaseDepositDeploymentAuthorization(): DepositDeploymentAuthorizat
 export const DepositDeploymentAuthorization = {
   typeUrl: "/akash.deployment.v1beta1.DepositDeploymentAuthorization",
   is(o: any): o is DepositDeploymentAuthorization {
-    return o && o.$typeUrl === DepositDeploymentAuthorization.typeUrl && o;
+    return o && (o.$typeUrl === DepositDeploymentAuthorization.typeUrl || Coin.is(o.spendLimit));
   },
   encode(message: DepositDeploymentAuthorization, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.spendLimit !== undefined) {

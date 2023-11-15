@@ -130,7 +130,7 @@ function createBaseAny(): Any {
 export const Any = {
   typeUrl: "/google.protobuf.Any",
   is(o: any): o is Any {
-    return o && o.$typeUrl === Any.typeUrl && typeof o.typeUrl === "string" && typeof o.value === "bytes";
+    return o && (o.$typeUrl === Any.typeUrl || typeof o.typeUrl === "string" && o.value instanceof Uint8Array);
   },
   encode(message: Any, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.typeUrl !== "") {
