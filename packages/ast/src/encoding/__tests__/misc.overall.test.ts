@@ -28,6 +28,9 @@ cases(
     context.options.prototypes!.typingsFormat!.timestamp = opts.name;
     context.options.interfaces!.enabled = true;
     context.options.interfaces!.useGlobalDecoderRegistry = true;
+    context.options.aminoEncoding = {
+      enabled: true
+    }
 
     expectCode(
       createObjectWithMethods(
