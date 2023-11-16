@@ -16,3 +16,5 @@ export declare const memberExpressionOrIdentifierAminoCasing: (names: any, amino
 export declare const memberExpressionOrIdentifierAminoCaseField: (fields: ProtoField[], aminoCaseFunc: Function) => any;
 export declare const promiseTypeAnnotation: (name: any) => t.TSTypeAnnotation;
 export declare const getAcceptedInterfacesTypes: (context: ProtoParseContext, lookupInterface: string) => import("@cosmology/types").TraversalSymbol[];
+export declare const getSdkFieldName: (fieldName: string, field: ProtoField) => string;
+export declare const getAminoFieldName: (fieldName: string, field: ProtoField, interfaceName: string, context: ProtoParseContext) => string;

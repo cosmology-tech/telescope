@@ -52,10 +52,11 @@ export const createFieldExistingTest = (args: {
 
 export const createProtoTypeComparison = (args: {
   context: ProtoParseContext;
+  methodName: string;
   fieldName: t.Expression;
   field: ProtoField;
 }) => {
-  const { context, fieldName, field } = args;
+  const { context, fieldName, field, methodName } = args;
 
   switch (field.type) {
     case "google.protobuf.Duration":
@@ -107,7 +108,7 @@ export const createProtoTypeComparison = (args: {
           const current = t.callExpression(
             t.memberExpression(
               t.identifier(acceptedTypeName),
-              t.identifier("is")
+              t.identifier(methodName)
             ),
             [fieldName]
           );
@@ -123,7 +124,7 @@ export const createProtoTypeComparison = (args: {
   const typeName = context.getTypeName(field);
 
   return t.callExpression(
-    t.memberExpression(t.identifier(typeName), t.identifier("is")),
+    t.memberExpression(t.identifier(typeName), t.identifier(methodName)),
     [fieldName]
   );
 };
@@ -223,10 +224,11 @@ function getScalarExpression(args: {
 
 export const createFieldTypeComparison = (args: {
   context: ProtoParseContext;
+  methodName: string;
   fieldName: string;
   field: ProtoField;
 }): t.Expression => {
-  const { context, field, fieldName } = args;
+  const { context, field, fieldName, methodName } = args;
 
   if (field.keyType) {
     return createFieldExistingTest({
@@ -265,6 +267,7 @@ export const createFieldTypeComparison = (args: {
           fieldName,
           typeComparison: createProtoTypeComparison({
             context,
+            methodName,
             field,
             fieldName: t.memberExpression(
               t.memberExpression(
@@ -279,6 +282,7 @@ export const createFieldTypeComparison = (args: {
       } else {
         return createProtoTypeComparison({
           context,
+          methodName,
           fieldName: t.memberExpression(
             t.identifier(INPUT_PARAM),
             t.identifier(fieldName)
@@ -330,6 +334,7 @@ export const isMethod = (args: {
   context: ProtoParseContext;
   name: string;
   proto: ProtoType;
+  methodName?: string;
   getFieldName?: (
     fieldName: string,
     field: ProtoField,
@@ -338,6 +343,8 @@ export const isMethod = (args: {
   ) => string;
 }) => {
   const { context, name, proto, getFieldName } = args;
+
+  const methodName = args.methodName ?? "is";
 
   const returnType = t.tsTypeAnnotation(
     t.tsTypePredicate(
@@ -364,6 +371,7 @@ export const isMethod = (args: {
 
     const current = createFieldTypeComparison({
       context,
+      methodName,
       field,
       fieldName: fieldNameWithCase,
     });
@@ -381,7 +389,7 @@ export const isMethod = (args: {
 
   const method = objectMethod(
     "method",
-    t.identifier("is"),
+    t.identifier(methodName),
     [identifier(INPUT_PARAM, t.tsTypeAnnotation(t.tsAnyKeyword()), false)],
     t.blockStatement([
       t.returnStatement(

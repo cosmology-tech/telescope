@@ -20,6 +20,7 @@ export declare const createFieldExistingTest: (args: {
 }) => t.Expression;
 export declare const createProtoTypeComparison: (args: {
     context: ProtoParseContext;
+    methodName: string;
     fieldName: t.Expression;
     field: ProtoField;
 }) => t.Expression;
@@ -31,6 +32,7 @@ export declare const createArrayTypeComparison: (args: {
 }) => t.CallExpression | t.LogicalExpression;
 export declare const createFieldTypeComparison: (args: {
     context: ProtoParseContext;
+    methodName: string;
     fieldName: string;
     field: ProtoField;
 }) => t.Expression;
@@ -38,4 +40,6 @@ export declare const isMethod: (args: {
     context: ProtoParseContext;
     name: string;
     proto: ProtoType;
+    methodName?: string;
+    getFieldName?: (fieldName: string, field: ProtoField, interfaceName?: string, context?: ProtoParseContext) => string;
 }) => t.ObjectMethod;

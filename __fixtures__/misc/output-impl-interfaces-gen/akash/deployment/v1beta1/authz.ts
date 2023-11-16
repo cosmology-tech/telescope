@@ -1,4 +1,4 @@
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 import { GlobalDecoderRegistry } from "../../../registry";
@@ -18,6 +18,28 @@ export interface DepositDeploymentAuthorizationProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.DepositDeploymentAuthorization";
   value: Uint8Array;
 }
+/**
+ * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
+ * the granter's account for a deployment.
+ */
+export interface DepositDeploymentAuthorizationAmino {
+  /**
+   * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
+   * the purpose of deployment.
+   */
+  spend_limit?: CoinAmino;
+}
+export interface DepositDeploymentAuthorizationAminoMsg {
+  type: "/akash.deployment.v1beta1.DepositDeploymentAuthorization";
+  value: DepositDeploymentAuthorizationAmino;
+}
+/**
+ * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
+ * the granter's account for a deployment.
+ */
+export interface DepositDeploymentAuthorizationSDKType {
+  spend_limit: CoinSDKType;
+}
 function createBaseDepositDeploymentAuthorization(): DepositDeploymentAuthorization {
   return {
     spendLimit: Coin.fromPartial({})
@@ -27,6 +49,12 @@ export const DepositDeploymentAuthorization = {
   typeUrl: "/akash.deployment.v1beta1.DepositDeploymentAuthorization",
   is(o: any): o is DepositDeploymentAuthorization {
     return o && (o.$typeUrl === DepositDeploymentAuthorization.typeUrl || Coin.is(o.spendLimit));
+  },
+  isSDK(o: any): o is DepositDeploymentAuthorization {
+    return o && (o.$typeUrl === DepositDeploymentAuthorization.typeUrl || Coin.isSDK(o.spend_limit));
+  },
+  isAmino(o: any): o is DepositDeploymentAuthorization {
+    return o && (o.$typeUrl === DepositDeploymentAuthorization.typeUrl || Coin.isAmino(o.spend_limit));
   },
   encode(message: DepositDeploymentAuthorization, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.spendLimit !== undefined) {
@@ -67,6 +95,19 @@ export const DepositDeploymentAuthorization = {
       message.spendLimit = Coin.fromPartial(object.spendLimit);
     }
     return message;
+  },
+  fromAmino(object: DepositDeploymentAuthorizationAmino): DepositDeploymentAuthorization {
+    return {
+      spendLimit: object?.spend_limit ? Coin.fromAmino(object.spend_limit) : undefined
+    };
+  },
+  toAmino(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationAmino {
+    const obj: any = {};
+    obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: DepositDeploymentAuthorizationAminoMsg): DepositDeploymentAuthorization {
+    return DepositDeploymentAuthorization.fromAmino(object.value);
   },
   fromProtoMsg(message: DepositDeploymentAuthorizationProtoMsg): DepositDeploymentAuthorization {
     return DepositDeploymentAuthorization.decode(message.value);

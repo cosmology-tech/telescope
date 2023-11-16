@@ -120,7 +120,7 @@ describe("implements interface works", () => {
           useUnionTypes: true,
         },
 
-        useSDKTypes:false,
+        useSDKTypes:true,
 
         prototypes: {
           addTypeUrlToDecoders: false,
@@ -136,7 +136,7 @@ describe("implements interface works", () => {
         },
 
         aminoEncoding: {
-          enabled: false,
+          enabled: true,
           useLegacyInlineEncoding: false,
         },
       }),

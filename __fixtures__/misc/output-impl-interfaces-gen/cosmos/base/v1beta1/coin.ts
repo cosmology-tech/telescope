@@ -17,6 +17,30 @@ export interface CoinProtoMsg {
   value: Uint8Array;
 }
 /**
+ * Coin defines a token with a denomination and an amount.
+ * 
+ * NOTE: The amount field is an Int which implements the custom method
+ * signatures required by gogoproto.
+ */
+export interface CoinAmino {
+  denom: string;
+  amount: string;
+}
+export interface CoinAminoMsg {
+  type: "cosmos-sdk/Coin";
+  value: CoinAmino;
+}
+/**
+ * Coin defines a token with a denomination and an amount.
+ * 
+ * NOTE: The amount field is an Int which implements the custom method
+ * signatures required by gogoproto.
+ */
+export interface CoinSDKType {
+  denom: string;
+  amount: string;
+}
+/**
  * DecCoin defines a token with a denomination and a decimal amount.
  * 
  * NOTE: The amount field is an Dec which implements the custom method
@@ -30,6 +54,30 @@ export interface DecCoinProtoMsg {
   typeUrl: "/cosmos.base.v1beta1.DecCoin";
   value: Uint8Array;
 }
+/**
+ * DecCoin defines a token with a denomination and a decimal amount.
+ * 
+ * NOTE: The amount field is an Dec which implements the custom method
+ * signatures required by gogoproto.
+ */
+export interface DecCoinAmino {
+  denom: string;
+  amount: string;
+}
+export interface DecCoinAminoMsg {
+  type: "cosmos-sdk/DecCoin";
+  value: DecCoinAmino;
+}
+/**
+ * DecCoin defines a token with a denomination and a decimal amount.
+ * 
+ * NOTE: The amount field is an Dec which implements the custom method
+ * signatures required by gogoproto.
+ */
+export interface DecCoinSDKType {
+  denom: string;
+  amount: string;
+}
 /** IntProto defines a Protobuf wrapper around an Int object. */
 export interface IntProto {
   int: string;
@@ -38,6 +86,18 @@ export interface IntProtoProtoMsg {
   typeUrl: "/cosmos.base.v1beta1.IntProto";
   value: Uint8Array;
 }
+/** IntProto defines a Protobuf wrapper around an Int object. */
+export interface IntProtoAmino {
+  int: string;
+}
+export interface IntProtoAminoMsg {
+  type: "cosmos-sdk/IntProto";
+  value: IntProtoAmino;
+}
+/** IntProto defines a Protobuf wrapper around an Int object. */
+export interface IntProtoSDKType {
+  int: string;
+}
 /** DecProto defines a Protobuf wrapper around a Dec object. */
 export interface DecProto {
   dec: string;
@@ -45,6 +105,18 @@ export interface DecProto {
 export interface DecProtoProtoMsg {
   typeUrl: "/cosmos.base.v1beta1.DecProto";
   value: Uint8Array;
+}
+/** DecProto defines a Protobuf wrapper around a Dec object. */
+export interface DecProtoAmino {
+  dec: string;
+}
+export interface DecProtoAminoMsg {
+  type: "cosmos-sdk/DecProto";
+  value: DecProtoAmino;
+}
+/** DecProto defines a Protobuf wrapper around a Dec object. */
+export interface DecProtoSDKType {
+  dec: string;
 }
 function createBaseCoin(): Coin {
   return {
@@ -55,6 +127,12 @@ function createBaseCoin(): Coin {
 export const Coin = {
   typeUrl: "/cosmos.base.v1beta1.Coin",
   is(o: any): o is Coin {
+    return o && (o.$typeUrl === Coin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
+  },
+  isSDK(o: any): o is Coin {
+    return o && (o.$typeUrl === Coin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
+  },
+  isAmino(o: any): o is Coin {
     return o && (o.$typeUrl === Coin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
   },
   encode(message: Coin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
@@ -104,6 +182,27 @@ export const Coin = {
     message.amount = object.amount ?? "";
     return message;
   },
+  fromAmino(object: CoinAmino): Coin {
+    return {
+      denom: object.denom,
+      amount: object.amount
+    };
+  },
+  toAmino(message: Coin): CoinAmino {
+    const obj: any = {};
+    obj.denom = message.denom;
+    obj.amount = message.amount;
+    return obj;
+  },
+  fromAminoMsg(object: CoinAminoMsg): Coin {
+    return Coin.fromAmino(object.value);
+  },
+  toAminoMsg(message: Coin): CoinAminoMsg {
+    return {
+      type: "cosmos-sdk/Coin",
+      value: Coin.toAmino(message)
+    };
+  },
   fromProtoMsg(message: CoinProtoMsg): Coin {
     return Coin.decode(message.value);
   },
@@ -127,6 +226,12 @@ function createBaseDecCoin(): DecCoin {
 export const DecCoin = {
   typeUrl: "/cosmos.base.v1beta1.DecCoin",
   is(o: any): o is DecCoin {
+    return o && (o.$typeUrl === DecCoin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
+  },
+  isSDK(o: any): o is DecCoin {
+    return o && (o.$typeUrl === DecCoin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
+  },
+  isAmino(o: any): o is DecCoin {
     return o && (o.$typeUrl === DecCoin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
   },
   encode(message: DecCoin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
@@ -176,6 +281,27 @@ export const DecCoin = {
     message.amount = object.amount ?? "";
     return message;
   },
+  fromAmino(object: DecCoinAmino): DecCoin {
+    return {
+      denom: object.denom,
+      amount: object.amount
+    };
+  },
+  toAmino(message: DecCoin): DecCoinAmino {
+    const obj: any = {};
+    obj.denom = message.denom;
+    obj.amount = message.amount;
+    return obj;
+  },
+  fromAminoMsg(object: DecCoinAminoMsg): DecCoin {
+    return DecCoin.fromAmino(object.value);
+  },
+  toAminoMsg(message: DecCoin): DecCoinAminoMsg {
+    return {
+      type: "cosmos-sdk/DecCoin",
+      value: DecCoin.toAmino(message)
+    };
+  },
   fromProtoMsg(message: DecCoinProtoMsg): DecCoin {
     return DecCoin.decode(message.value);
   },
@@ -198,6 +324,12 @@ function createBaseIntProto(): IntProto {
 export const IntProto = {
   typeUrl: "/cosmos.base.v1beta1.IntProto",
   is(o: any): o is IntProto {
+    return o && (o.$typeUrl === IntProto.typeUrl || typeof o.int === "string");
+  },
+  isSDK(o: any): o is IntProto {
+    return o && (o.$typeUrl === IntProto.typeUrl || typeof o.int === "string");
+  },
+  isAmino(o: any): o is IntProto {
     return o && (o.$typeUrl === IntProto.typeUrl || typeof o.int === "string");
   },
   encode(message: IntProto, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
@@ -238,6 +370,25 @@ export const IntProto = {
     message.int = object.int ?? "";
     return message;
   },
+  fromAmino(object: IntProtoAmino): IntProto {
+    return {
+      int: object.int
+    };
+  },
+  toAmino(message: IntProto): IntProtoAmino {
+    const obj: any = {};
+    obj.int = message.int;
+    return obj;
+  },
+  fromAminoMsg(object: IntProtoAminoMsg): IntProto {
+    return IntProto.fromAmino(object.value);
+  },
+  toAminoMsg(message: IntProto): IntProtoAminoMsg {
+    return {
+      type: "cosmos-sdk/IntProto",
+      value: IntProto.toAmino(message)
+    };
+  },
   fromProtoMsg(message: IntProtoProtoMsg): IntProto {
     return IntProto.decode(message.value);
   },
@@ -260,6 +411,12 @@ function createBaseDecProto(): DecProto {
 export const DecProto = {
   typeUrl: "/cosmos.base.v1beta1.DecProto",
   is(o: any): o is DecProto {
+    return o && (o.$typeUrl === DecProto.typeUrl || typeof o.dec === "string");
+  },
+  isSDK(o: any): o is DecProto {
+    return o && (o.$typeUrl === DecProto.typeUrl || typeof o.dec === "string");
+  },
+  isAmino(o: any): o is DecProto {
     return o && (o.$typeUrl === DecProto.typeUrl || typeof o.dec === "string");
   },
   encode(message: DecProto, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
@@ -299,6 +456,25 @@ export const DecProto = {
     const message = createBaseDecProto();
     message.dec = object.dec ?? "";
     return message;
+  },
+  fromAmino(object: DecProtoAmino): DecProto {
+    return {
+      dec: object.dec
+    };
+  },
+  toAmino(message: DecProto): DecProtoAmino {
+    const obj: any = {};
+    obj.dec = message.dec;
+    return obj;
+  },
+  fromAminoMsg(object: DecProtoAminoMsg): DecProto {
+    return DecProto.fromAmino(object.value);
+  },
+  toAminoMsg(message: DecProto): DecProtoAminoMsg {
+    return {
+      type: "cosmos-sdk/DecProto",
+      value: DecProto.toAmino(message)
+    };
   },
   fromProtoMsg(message: DecProtoProtoMsg): DecProto {
     return DecProto.decode(message.value);
