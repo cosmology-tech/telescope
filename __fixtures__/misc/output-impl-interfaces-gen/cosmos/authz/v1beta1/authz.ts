@@ -266,7 +266,7 @@ export const Grant = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.authorization = (Authorization_InterfaceDecoder(reader) as Any);
+          message.authorization = GlobalDecoderRegistry.unwrapAny(reader);
           break;
         case 2:
           message.expiration = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
@@ -381,7 +381,7 @@ export const GrantAuthorization = {
           message.grantee = reader.string();
           break;
         case 3:
-          message.authorization = (Authorization_InterfaceDecoder(reader) as Any);
+          message.authorization = GlobalDecoderRegistry.unwrapAny(reader);
           break;
         case 4:
           message.expiration = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
