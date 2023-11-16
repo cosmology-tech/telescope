@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MsgCreateValidator MsgCreateValidator 1`] = `
-"export const Cosmos_cryptoPubKey_ToAmino = (content: Any) => {
+"export const Cosmos_cryptoPubKey_ToAmino = (content: Any): Pubkey | null => {
   return decodePubkey(content);
 };"
 `;
