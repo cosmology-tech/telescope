@@ -102,19 +102,22 @@ export const createProtoTypeComparison = (args: {
 
       acceptedTypeNames.push("Any");
 
-      return acceptedTypeNames.reduce<t.Expression>((comparison, acceptedTypeName) => {
-        const current = t.callExpression(
-          t.memberExpression(
-            t.identifier(acceptedTypeName),
-            t.identifier("is")
-          ),
-          [fieldName]
-        );
+      return acceptedTypeNames.reduce<t.Expression>(
+        (comparison, acceptedTypeName) => {
+          const current = t.callExpression(
+            t.memberExpression(
+              t.identifier(acceptedTypeName),
+              t.identifier("is")
+            ),
+            [fieldName]
+          );
 
-        return comparison
-          ? t.logicalExpression("||", comparison, current)
-          : current;
-      }, undefined);
+          return comparison
+            ? t.logicalExpression("||", comparison, current)
+            : current;
+        },
+        undefined
+      );
   }
 
   const typeName = context.getTypeName(field);
@@ -327,8 +330,14 @@ export const isMethod = (args: {
   context: ProtoParseContext;
   name: string;
   proto: ProtoType;
+  getFieldName?: (
+    fieldName: string,
+    field: ProtoField,
+    interfaceName?: string,
+    context?: ProtoParseContext
+  ) => string;
 }) => {
-  const { context, name, proto } = args;
+  const { context, name, proto, getFieldName } = args;
 
   const returnType = t.tsTypeAnnotation(
     t.tsTypePredicate(
@@ -349,7 +358,15 @@ export const isMethod = (args: {
       return comparison;
     }
 
-    const current = createFieldTypeComparison({ context, field, fieldName });
+    const fieldNameWithCase = getFieldName
+      ? getFieldName(fieldName, field, name, context)
+      : fieldName;
+
+    const current = createFieldTypeComparison({
+      context,
+      field,
+      fieldName: fieldNameWithCase,
+    });
 
     return comparison
       ? t.logicalExpression("&&", comparison, current)

@@ -184,3 +184,26 @@ export const getAcceptedInterfacesTypes = (
       s.implementsType === lookupInterface && s.ref === context.ref.filename
   );
 };
+
+export const getSdkFieldName = (fieldName: string, field: ProtoField) => {
+  return field.options?.["(telescope:orig)"] ?? fieldName;
+};
+
+export const getAminoFieldName = (
+  fieldName: string,
+  field: ProtoField,
+  interfaceName: string,
+  context: ProtoParseContext
+) => {
+  const orig = field.options?.["(telescope:orig)"] ?? fieldName;
+
+  if (
+    (interfaceName === "Any" &&
+      context.ref.proto.package === "google.protobuf" &&
+      ( orig === "type_url" || orig === "typeUrl" ))) {
+    // type_url => type for amino
+    return "type";
+  }
+
+  return orig;
+};
