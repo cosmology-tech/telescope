@@ -129,10 +129,10 @@ export const Coin = {
   is(o: any): o is Coin {
     return o && (o.$typeUrl === Coin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
   },
-  isSDK(o: any): o is Coin {
+  isSDK(o: any): o is CoinSDKType {
     return o && (o.$typeUrl === Coin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
   },
-  isAmino(o: any): o is Coin {
+  isAmino(o: any): o is CoinAmino {
     return o && (o.$typeUrl === Coin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
   },
   encode(message: Coin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
@@ -228,10 +228,10 @@ export const DecCoin = {
   is(o: any): o is DecCoin {
     return o && (o.$typeUrl === DecCoin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
   },
-  isSDK(o: any): o is DecCoin {
+  isSDK(o: any): o is DecCoinSDKType {
     return o && (o.$typeUrl === DecCoin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
   },
-  isAmino(o: any): o is DecCoin {
+  isAmino(o: any): o is DecCoinAmino {
     return o && (o.$typeUrl === DecCoin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
   },
   encode(message: DecCoin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
@@ -326,10 +326,10 @@ export const IntProto = {
   is(o: any): o is IntProto {
     return o && (o.$typeUrl === IntProto.typeUrl || typeof o.int === "string");
   },
-  isSDK(o: any): o is IntProto {
+  isSDK(o: any): o is IntProtoSDKType {
     return o && (o.$typeUrl === IntProto.typeUrl || typeof o.int === "string");
   },
-  isAmino(o: any): o is IntProto {
+  isAmino(o: any): o is IntProtoAmino {
     return o && (o.$typeUrl === IntProto.typeUrl || typeof o.int === "string");
   },
   encode(message: IntProto, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
@@ -413,10 +413,10 @@ export const DecProto = {
   is(o: any): o is DecProto {
     return o && (o.$typeUrl === DecProto.typeUrl || typeof o.dec === "string");
   },
-  isSDK(o: any): o is DecProto {
+  isSDK(o: any): o is DecProtoSDKType {
     return o && (o.$typeUrl === DecProto.typeUrl || typeof o.dec === "string");
   },
-  isAmino(o: any): o is DecProto {
+  isAmino(o: any): o is DecProtoAmino {
     return o && (o.$typeUrl === DecProto.typeUrl || typeof o.dec === "string");
   },
   encode(message: DecProto, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {

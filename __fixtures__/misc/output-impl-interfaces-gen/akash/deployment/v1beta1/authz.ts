@@ -50,10 +50,10 @@ export const DepositDeploymentAuthorization = {
   is(o: any): o is DepositDeploymentAuthorization {
     return o && (o.$typeUrl === DepositDeploymentAuthorization.typeUrl || Coin.is(o.spendLimit));
   },
-  isSDK(o: any): o is DepositDeploymentAuthorization {
+  isSDK(o: any): o is DepositDeploymentAuthorizationSDKType {
     return o && (o.$typeUrl === DepositDeploymentAuthorization.typeUrl || Coin.isSDK(o.spend_limit));
   },
-  isAmino(o: any): o is DepositDeploymentAuthorization {
+  isAmino(o: any): o is DepositDeploymentAuthorizationAmino {
     return o && (o.$typeUrl === DepositDeploymentAuthorization.typeUrl || Coin.isAmino(o.spend_limit));
   },
   encode(message: DepositDeploymentAuthorization, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {

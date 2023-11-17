@@ -336,10 +336,10 @@ export const Any = {
   is(o: any): o is Any {
     return o && (o.$typeUrl === Any.typeUrl || typeof o.typeUrl === "string" && o.value instanceof Uint8Array);
   },
-  isSDK(o: any): o is Any {
+  isSDK(o: any): o is AnySDKType {
     return o && (o.$typeUrl === Any.typeUrl || typeof o.type_url === "string" && o.value instanceof Uint8Array);
   },
-  isAmino(o: any): o is Any {
+  isAmino(o: any): o is AnyAmino {
     return o && (o.$typeUrl === Any.typeUrl || typeof o.type === "string" && o.value instanceof Uint8Array);
   },
   encode(message: Any, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {

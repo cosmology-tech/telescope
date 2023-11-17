@@ -11,6 +11,7 @@ import {
   getFieldOptionalityForDefaults,
   getOneOfs,
 } from "../types";
+import { SymbolNames } from "../../types";
 
 const INPUT_PARAM = "o";
 
@@ -345,11 +346,12 @@ export const isMethod = (args: {
   const { context, name, proto, getFieldName } = args;
 
   const methodName = args.methodName ?? "is";
+  const typeName = getTypeName(name, methodName);
 
   const returnType = t.tsTypeAnnotation(
     t.tsTypePredicate(
       t.identifier(INPUT_PARAM),
-      t.tsTypeAnnotation(t.tsTypeReference(t.identifier(name)))
+      t.tsTypeAnnotation(t.tsTypeReference(t.identifier(typeName)))
     )
   );
 
@@ -410,3 +412,15 @@ export const isMethod = (args: {
 
   return method;
 };
+
+function getTypeName(typeName: string, methodName: string) {
+  switch (methodName) {
+    case "isSDK":
+      return SymbolNames.SDKType(typeName);
+    case "isAmino":
+      return SymbolNames.Amino(typeName);
+    case "is":
+    default:
+      return typeName;
+  }
+}

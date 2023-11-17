@@ -187,10 +187,10 @@ export const InterfaceDescriptor = {
   is(o: any): o is InterfaceDescriptor {
     return o && (o.$typeUrl === InterfaceDescriptor.typeUrl || typeof o.name === "string" && typeof o.description === "string");
   },
-  isSDK(o: any): o is InterfaceDescriptor {
+  isSDK(o: any): o is InterfaceDescriptorSDKType {
     return o && (o.$typeUrl === InterfaceDescriptor.typeUrl || typeof o.name === "string" && typeof o.description === "string");
   },
-  isAmino(o: any): o is InterfaceDescriptor {
+  isAmino(o: any): o is InterfaceDescriptorAmino {
     return o && (o.$typeUrl === InterfaceDescriptor.typeUrl || typeof o.name === "string" && typeof o.description === "string");
   },
   encode(message: InterfaceDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
@@ -281,10 +281,10 @@ export const ScalarDescriptor = {
   is(o: any): o is ScalarDescriptor {
     return o && (o.$typeUrl === ScalarDescriptor.typeUrl || typeof o.name === "string" && typeof o.description === "string" && Array.isArray(o.fieldType));
   },
-  isSDK(o: any): o is ScalarDescriptor {
+  isSDK(o: any): o is ScalarDescriptorSDKType {
     return o && (o.$typeUrl === ScalarDescriptor.typeUrl || typeof o.name === "string" && typeof o.description === "string" && Array.isArray(o.field_type));
   },
-  isAmino(o: any): o is ScalarDescriptor {
+  isAmino(o: any): o is ScalarDescriptorAmino {
     return o && (o.$typeUrl === ScalarDescriptor.typeUrl || typeof o.name === "string" && typeof o.description === "string" && Array.isArray(o.field_type));
   },
   encode(message: ScalarDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {

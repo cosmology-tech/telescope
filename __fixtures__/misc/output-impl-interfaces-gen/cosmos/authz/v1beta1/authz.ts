@@ -155,10 +155,10 @@ export const GenericAuthorization = {
   is(o: any): o is GenericAuthorization {
     return o && (o.$typeUrl === GenericAuthorization.typeUrl || typeof o.msg === "string");
   },
-  isSDK(o: any): o is GenericAuthorization {
+  isSDK(o: any): o is GenericAuthorizationSDKType {
     return o && (o.$typeUrl === GenericAuthorization.typeUrl || typeof o.msg === "string");
   },
-  isAmino(o: any): o is GenericAuthorization {
+  isAmino(o: any): o is GenericAuthorizationAmino {
     return o && (o.$typeUrl === GenericAuthorization.typeUrl || typeof o.msg === "string");
   },
   encode(message: GenericAuthorization, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
@@ -243,10 +243,10 @@ export const Grant = {
   is(o: any): o is Grant {
     return o && (o.$typeUrl === Grant.typeUrl || GenericAuthorization.is(o.authorization) || DepositDeploymentAuthorization.is(o.authorization) || SendAuthorization.is(o.authorization) || Any.is(o.authorization));
   },
-  isSDK(o: any): o is Grant {
+  isSDK(o: any): o is GrantSDKType {
     return o && (o.$typeUrl === Grant.typeUrl || GenericAuthorization.isSDK(o.authorization) || DepositDeploymentAuthorization.isSDK(o.authorization) || SendAuthorization.isSDK(o.authorization) || Any.isSDK(o.authorization));
   },
-  isAmino(o: any): o is Grant {
+  isAmino(o: any): o is GrantAmino {
     return o && (o.$typeUrl === Grant.typeUrl || GenericAuthorization.isAmino(o.authorization) || DepositDeploymentAuthorization.isAmino(o.authorization) || SendAuthorization.isAmino(o.authorization) || Any.isAmino(o.authorization));
   },
   encode(message: Grant, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
@@ -346,10 +346,10 @@ export const GrantAuthorization = {
   is(o: any): o is GrantAuthorization {
     return o && (o.$typeUrl === GrantAuthorization.typeUrl || typeof o.granter === "string" && typeof o.grantee === "string");
   },
-  isSDK(o: any): o is GrantAuthorization {
+  isSDK(o: any): o is GrantAuthorizationSDKType {
     return o && (o.$typeUrl === GrantAuthorization.typeUrl || typeof o.granter === "string" && typeof o.grantee === "string");
   },
-  isAmino(o: any): o is GrantAuthorization {
+  isAmino(o: any): o is GrantAuthorizationAmino {
     return o && (o.$typeUrl === GrantAuthorization.typeUrl || typeof o.granter === "string" && typeof o.grantee === "string");
   },
   encode(message: GrantAuthorization, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
@@ -468,10 +468,10 @@ export const GrantQueueItem = {
   is(o: any): o is GrantQueueItem {
     return o && (o.$typeUrl === GrantQueueItem.typeUrl || Array.isArray(o.msgTypeUrls) && (!o.msgTypeUrls.length || typeof o.msgTypeUrls[0] === "string"));
   },
-  isSDK(o: any): o is GrantQueueItem {
+  isSDK(o: any): o is GrantQueueItemSDKType {
     return o && (o.$typeUrl === GrantQueueItem.typeUrl || Array.isArray(o.msg_type_urls) && (!o.msg_type_urls.length || typeof o.msg_type_urls[0] === "string"));
   },
-  isAmino(o: any): o is GrantQueueItem {
+  isAmino(o: any): o is GrantQueueItemAmino {
     return o && (o.$typeUrl === GrantQueueItem.typeUrl || Array.isArray(o.msg_type_urls) && (!o.msg_type_urls.length || typeof o.msg_type_urls[0] === "string"));
   },
   encode(message: GrantQueueItem, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {

@@ -293,10 +293,10 @@ export const Timestamp = {
   is(o: any): o is Timestamp {
     return o && (o.$typeUrl === Timestamp.typeUrl || typeof o.seconds === "bigint" && typeof o.nanos === "number");
   },
-  isSDK(o: any): o is Timestamp {
+  isSDK(o: any): o is TimestampSDKType {
     return o && (o.$typeUrl === Timestamp.typeUrl || typeof o.seconds === "bigint" && typeof o.nanos === "number");
   },
-  isAmino(o: any): o is Timestamp {
+  isAmino(o: any): o is TimestampAmino {
     return o && (o.$typeUrl === Timestamp.typeUrl || typeof o.seconds === "bigint" && typeof o.nanos === "number");
   },
   encode(message: Timestamp, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {

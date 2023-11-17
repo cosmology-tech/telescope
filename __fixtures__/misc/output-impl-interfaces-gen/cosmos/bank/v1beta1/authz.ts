@@ -48,10 +48,10 @@ export const SendAuthorization = {
   is(o: any): o is SendAuthorization {
     return o && (o.$typeUrl === SendAuthorization.typeUrl || Array.isArray(o.spendLimit) && (!o.spendLimit.length || Coin.is(o.spendLimit[0])));
   },
-  isSDK(o: any): o is SendAuthorization {
+  isSDK(o: any): o is SendAuthorizationSDKType {
     return o && (o.$typeUrl === SendAuthorization.typeUrl || Array.isArray(o.spend_limit) && (!o.spend_limit.length || Coin.isSDK(o.spend_limit[0])));
   },
-  isAmino(o: any): o is SendAuthorization {
+  isAmino(o: any): o is SendAuthorizationAmino {
     return o && (o.$typeUrl === SendAuthorization.typeUrl || Array.isArray(o.spend_limit) && (!o.spend_limit.length || Coin.isAmino(o.spend_limit[0])));
   },
   encode(message: SendAuthorization, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
