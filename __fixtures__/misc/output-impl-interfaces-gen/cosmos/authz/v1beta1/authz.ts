@@ -280,13 +280,13 @@ export const Grant = {
   },
   fromJSON(object: any): Grant {
     const obj = createBaseGrant();
-    if (isSet(object.authorization)) obj.authorization = Any.fromJSON(object.authorization);
+    if (isSet(object.authorization)) obj.authorization = GlobalDecoderRegistry.fromJSON(object.authorization);
     if (isSet(object.expiration)) obj.expiration = new Date(object.expiration);
     return obj;
   },
   toJSON(message: Grant): unknown {
     const obj: any = {};
-    message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toJSON(message.authorization) : undefined);
+    message.authorization !== undefined && (obj.authorization = message.authorization ? GlobalDecoderRegistry.toJSON(message.authorization) : undefined);
     message.expiration !== undefined && (obj.expiration = message.expiration.toISOString());
     return obj;
   },
@@ -397,7 +397,7 @@ export const GrantAuthorization = {
     const obj = createBaseGrantAuthorization();
     if (isSet(object.granter)) obj.granter = String(object.granter);
     if (isSet(object.grantee)) obj.grantee = String(object.grantee);
-    if (isSet(object.authorization)) obj.authorization = Any.fromJSON(object.authorization);
+    if (isSet(object.authorization)) obj.authorization = GlobalDecoderRegistry.fromJSON(object.authorization);
     if (isSet(object.expiration)) obj.expiration = new Date(object.expiration);
     return obj;
   },
@@ -405,7 +405,7 @@ export const GrantAuthorization = {
     const obj: any = {};
     message.granter !== undefined && (obj.granter = message.granter);
     message.grantee !== undefined && (obj.grantee = message.grantee);
-    message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toJSON(message.authorization) : undefined);
+    message.authorization !== undefined && (obj.authorization = message.authorization ? GlobalDecoderRegistry.toJSON(message.authorization) : undefined);
     message.expiration !== undefined && (obj.expiration = message.expiration.toISOString());
     return obj;
   },

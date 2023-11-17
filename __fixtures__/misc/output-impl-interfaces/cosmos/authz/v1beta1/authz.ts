@@ -201,11 +201,7 @@ export const Grant = {
     if (isSet(object.authorization)) {
       obj.authorization = GlobalDecoderRegistry.fromJSON(
         object.authorization
-      ) as
-        | GenericAuthorization
-        | DepositDeploymentAuthorization
-        | SendAuthorization
-        | Any;
+      )
     }
     if (isSet(object.expiration)) obj.expiration = new Date(object.expiration);
     return obj;
@@ -224,11 +220,7 @@ export const Grant = {
     if (object.authorization !== undefined && object.authorization !== null) {
       message.authorization = GlobalDecoderRegistry.fromPartial(
         object.authorization
-      ) as
-        | GenericAuthorization
-        | DepositDeploymentAuthorization
-        | SendAuthorization
-        | Any;
+      )
     }
     message.expiration = object.expiration ?? undefined;
     return message;
