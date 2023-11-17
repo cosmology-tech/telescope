@@ -293,20 +293,20 @@ export const Grant = {
   fromPartial(object: DeepPartial<Grant>): Grant {
     const message = createBaseGrant();
     if (object.authorization !== undefined && object.authorization !== null) {
-      message.authorization = Any.fromPartial(object.authorization);
+      message.authorization = GlobalDecoderRegistry.fromPartial(object.authorization);
     }
     message.expiration = object.expiration ?? undefined;
     return message;
   },
   fromAmino(object: GrantAmino): Grant {
     return {
-      authorization: object?.authorization ? Authorization_FromAmino(object.authorization) : undefined,
+      authorization: object?.authorization ? GlobalDecoderRegistry.fromAmino(object.authorization) : undefined,
       expiration: object?.expiration ? fromTimestamp(Timestamp.fromAmino(object.expiration)) : undefined
     };
   },
   toAmino(message: Grant): GrantAmino {
     const obj: any = {};
-    obj.authorization = message.authorization ? Authorization_ToAmino((message.authorization as Any)) : undefined;
+    obj.authorization = message.authorization ? GlobalDecoderRegistry.toAmino(message.authorization) : undefined;
     obj.expiration = message.expiration ? Timestamp.toAmino(toTimestamp(message.expiration)) : undefined;
     return obj;
   },
@@ -414,7 +414,7 @@ export const GrantAuthorization = {
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";
     if (object.authorization !== undefined && object.authorization !== null) {
-      message.authorization = Any.fromPartial(object.authorization);
+      message.authorization = GlobalDecoderRegistry.fromPartial(object.authorization);
     }
     message.expiration = object.expiration ?? undefined;
     return message;
@@ -423,7 +423,7 @@ export const GrantAuthorization = {
     return {
       granter: object.granter,
       grantee: object.grantee,
-      authorization: object?.authorization ? Authorization_FromAmino(object.authorization) : undefined,
+      authorization: object?.authorization ? GlobalDecoderRegistry.fromAmino(object.authorization) : undefined,
       expiration: object?.expiration ? fromTimestamp(Timestamp.fromAmino(object.expiration)) : undefined
     };
   },
@@ -431,7 +431,7 @@ export const GrantAuthorization = {
     const obj: any = {};
     obj.granter = message.granter;
     obj.grantee = message.grantee;
-    obj.authorization = message.authorization ? Authorization_ToAmino((message.authorization as Any)) : undefined;
+    obj.authorization = message.authorization ? GlobalDecoderRegistry.toAmino(message.authorization) : undefined;
     obj.expiration = message.expiration ? Timestamp.toAmino(toTimestamp(message.expiration)) : undefined;
     return obj;
   },

@@ -200,7 +200,18 @@ export const fromPartial = {
     // message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromPartial(object.signDoc) : SignDocDirectAux.fromPartial({});
     type(args: FromPartialMethod) {
         const prop = args.field.name;
-        const name = args.context.getTypeName(args.field);
+        let name = args.context.getTypeName(args.field);
+
+        if (
+          !args.context.options.aminoEncoding.useLegacyInlineEncoding &&
+          args.context.options.interfaces.enabled &&
+          args.context.options.interfaces?.useGlobalDecoderRegistry &&
+          args.field.type === 'google.protobuf.Any' &&
+          args.field.options['(cosmos_proto.accepts_interface)']
+        ) {
+          name = 'GlobalDecoderRegistry';
+        }
+
         return setNotUndefinedAndNotNull(
             prop,
             t.callExpression(
@@ -584,7 +595,18 @@ export const arrayTypes = {
 
     // message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
     type(args: FromPartialMethod) {
-        const name = args.context.getTypeName(args.field);
+        let name = args.context.getTypeName(args.field);
+
+        if (
+          !args.context.options.aminoEncoding.useLegacyInlineEncoding &&
+          args.context.options.interfaces.enabled &&
+          args.context.options.interfaces?.useGlobalDecoderRegistry &&
+          args.field.type === 'google.protobuf.Any' &&
+          args.field.options['(cosmos_proto.accepts_interface)']
+        ) {
+          name = 'GlobalDecoderRegistry';
+        }
+
         return t.callExpression(
             t.memberExpression(
                 t.identifier(name),

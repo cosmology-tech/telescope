@@ -6,10 +6,10 @@ exports[`misc/eval_request date 1`] = `
   is(o: any): o is EvalRequest {
     return o && (o.$typeUrl === EvalRequest.typeUrl || o.bindings && o.refs && typeof o.testNum === "number" && typeof o.testString === "string" && typeof o.testBool === "boolean" && Array.isArray(o.testArray) && (!o.testArray.length || typeof o.testArray[0] === "string"));
   },
-  isSDK(o: any): o is EvalRequest {
+  isSDK(o: any): o is EvalRequestSDKType {
     return o && (o.$typeUrl === EvalRequest.typeUrl || o.bindings && o.refs && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string"));
   },
-  isAmino(o: any): o is EvalRequest {
+  isAmino(o: any): o is EvalRequestAmino {
     return o && (o.$typeUrl === EvalRequest.typeUrl || o.bindings && o.refs && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string"));
   },
   encode(message: EvalRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
@@ -296,10 +296,10 @@ exports[`misc/eval_request timestamp 1`] = `
   is(o: any): o is EvalRequest {
     return o && (o.$typeUrl === EvalRequest.typeUrl || o.bindings && o.refs && typeof o.testNum === "number" && typeof o.testString === "string" && typeof o.testBool === "boolean" && Array.isArray(o.testArray) && (!o.testArray.length || typeof o.testArray[0] === "string"));
   },
-  isSDK(o: any): o is EvalRequest {
+  isSDK(o: any): o is EvalRequestSDKType {
     return o && (o.$typeUrl === EvalRequest.typeUrl || o.bindings && o.refs && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string"));
   },
-  isAmino(o: any): o is EvalRequest {
+  isAmino(o: any): o is EvalRequestAmino {
     return o && (o.$typeUrl === EvalRequest.typeUrl || o.bindings && o.refs && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string"));
   },
   encode(message: EvalRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
