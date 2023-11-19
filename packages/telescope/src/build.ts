@@ -185,7 +185,7 @@ export class TelescopeParseContext implements TelescopeParseContext {
         });
 
         // interfaces
-        if (this.options.interfaces.enabled) {
+        if (this.options.interfaces.enabled && !this.options.interfaces.useGlobalDecoderRegistry) {
             const interfaces = Object.keys(this.ref.traversed.acceptsInterface ?? {});
             if (interfaces.length) {
                 interfaces.forEach(interfaceName => {

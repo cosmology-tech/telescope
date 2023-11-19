@@ -2256,6 +2256,25 @@ export const FileDescriptorSet = {
     message.file = object.file?.map(e => FileDescriptorProto.fromPartial(e)) || [];
     return message;
   },
+  fromSDK(object: FileDescriptorSetSDKType): FileDescriptorSet {
+    return {
+      file: Array.isArray(object?.file) ? object.file.map((e: any) => FileDescriptorProto.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): FileDescriptorSetSDKType {
+    return {
+      file: Array.isArray(object?.file) ? object.file.map((e: any) => FileDescriptorProto.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: FileDescriptorSet): FileDescriptorSetSDKType {
+    const obj: any = {};
+    if (message.file) {
+      obj.file = message.file.map(e => e ? FileDescriptorProto.toSDK(e) : undefined);
+    } else {
+      obj.file = [];
+    }
+    return obj;
+  },
   fromAmino(object: FileDescriptorSetAmino): FileDescriptorSet {
     return {
       file: Array.isArray(object?.file) ? object.file.map((e: any) => FileDescriptorProto.fromAmino(e)) : []
@@ -2500,6 +2519,82 @@ export const FileDescriptorProto = {
     }
     message.syntax = object.syntax ?? "";
     return message;
+  },
+  fromSDK(object: FileDescriptorProtoSDKType): FileDescriptorProto {
+    return {
+      name: object?.name,
+      package: object?.package,
+      dependency: Array.isArray(object?.dependency) ? object.dependency.map((e: any) => e) : [],
+      publicDependency: Array.isArray(object?.public_dependency) ? object.public_dependency.map((e: any) => e) : [],
+      weakDependency: Array.isArray(object?.weak_dependency) ? object.weak_dependency.map((e: any) => e) : [],
+      messageType: Array.isArray(object?.message_type) ? object.message_type.map((e: any) => DescriptorProto.fromSDK(e)) : [],
+      enumType: Array.isArray(object?.enum_type) ? object.enum_type.map((e: any) => EnumDescriptorProto.fromSDK(e)) : [],
+      service: Array.isArray(object?.service) ? object.service.map((e: any) => ServiceDescriptorProto.fromSDK(e)) : [],
+      extension: Array.isArray(object?.extension) ? object.extension.map((e: any) => FieldDescriptorProto.fromSDK(e)) : [],
+      options: object.options ? FileOptions.fromSDK(object.options) : undefined,
+      sourceCodeInfo: object.source_code_info ? SourceCodeInfo.fromSDK(object.source_code_info) : undefined,
+      syntax: object?.syntax
+    };
+  },
+  fromSDKJSON(object: any): FileDescriptorProtoSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      package: isSet(object.package) ? String(object.package) : "",
+      dependency: Array.isArray(object?.dependency) ? object.dependency.map((e: any) => String(e)) : [],
+      public_dependency: Array.isArray(object?.public_dependency) ? object.public_dependency.map((e: any) => Number(e)) : [],
+      weak_dependency: Array.isArray(object?.weak_dependency) ? object.weak_dependency.map((e: any) => Number(e)) : [],
+      message_type: Array.isArray(object?.message_type) ? object.message_type.map((e: any) => DescriptorProto.fromSDKJSON(e)) : [],
+      enum_type: Array.isArray(object?.enum_type) ? object.enum_type.map((e: any) => EnumDescriptorProto.fromSDKJSON(e)) : [],
+      service: Array.isArray(object?.service) ? object.service.map((e: any) => ServiceDescriptorProto.fromSDKJSON(e)) : [],
+      extension: Array.isArray(object?.extension) ? object.extension.map((e: any) => FieldDescriptorProto.fromSDKJSON(e)) : [],
+      options: isSet(object.options) ? FileOptions.fromSDKJSON(object.options) : undefined,
+      source_code_info: isSet(object.source_code_info) ? SourceCodeInfo.fromSDKJSON(object.source_code_info) : undefined,
+      syntax: isSet(object.syntax) ? String(object.syntax) : ""
+    };
+  },
+  toSDK(message: FileDescriptorProto): FileDescriptorProtoSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.package = message.package;
+    if (message.dependency) {
+      obj.dependency = message.dependency.map(e => e);
+    } else {
+      obj.dependency = [];
+    }
+    if (message.publicDependency) {
+      obj.public_dependency = message.publicDependency.map(e => e);
+    } else {
+      obj.public_dependency = [];
+    }
+    if (message.weakDependency) {
+      obj.weak_dependency = message.weakDependency.map(e => e);
+    } else {
+      obj.weak_dependency = [];
+    }
+    if (message.messageType) {
+      obj.message_type = message.messageType.map(e => e ? DescriptorProto.toSDK(e) : undefined);
+    } else {
+      obj.message_type = [];
+    }
+    if (message.enumType) {
+      obj.enum_type = message.enumType.map(e => e ? EnumDescriptorProto.toSDK(e) : undefined);
+    } else {
+      obj.enum_type = [];
+    }
+    if (message.service) {
+      obj.service = message.service.map(e => e ? ServiceDescriptorProto.toSDK(e) : undefined);
+    } else {
+      obj.service = [];
+    }
+    if (message.extension) {
+      obj.extension = message.extension.map(e => e ? FieldDescriptorProto.toSDK(e) : undefined);
+    } else {
+      obj.extension = [];
+    }
+    message.options !== undefined && (obj.options = message.options ? FileOptions.toSDK(message.options) : undefined);
+    message.sourceCodeInfo !== undefined && (obj.source_code_info = message.sourceCodeInfo ? SourceCodeInfo.toSDK(message.sourceCodeInfo) : undefined);
+    obj.syntax = message.syntax;
+    return obj;
   },
   fromAmino(object: FileDescriptorProtoAmino): FileDescriptorProto {
     return {
@@ -2756,6 +2851,80 @@ export const DescriptorProto = {
     message.reservedName = object.reservedName?.map(e => e) || [];
     return message;
   },
+  fromSDK(object: DescriptorProtoSDKType): DescriptorProto {
+    return {
+      name: object?.name,
+      field: Array.isArray(object?.field) ? object.field.map((e: any) => FieldDescriptorProto.fromSDK(e)) : [],
+      extension: Array.isArray(object?.extension) ? object.extension.map((e: any) => FieldDescriptorProto.fromSDK(e)) : [],
+      nestedType: Array.isArray(object?.nested_type) ? object.nested_type.map((e: any) => DescriptorProto.fromSDK(e)) : [],
+      enumType: Array.isArray(object?.enum_type) ? object.enum_type.map((e: any) => EnumDescriptorProto.fromSDK(e)) : [],
+      extensionRange: Array.isArray(object?.extension_range) ? object.extension_range.map((e: any) => DescriptorProto_ExtensionRange.fromSDK(e)) : [],
+      oneofDecl: Array.isArray(object?.oneof_decl) ? object.oneof_decl.map((e: any) => OneofDescriptorProto.fromSDK(e)) : [],
+      options: object.options ? MessageOptions.fromSDK(object.options) : undefined,
+      reservedRange: Array.isArray(object?.reserved_range) ? object.reserved_range.map((e: any) => DescriptorProto_ReservedRange.fromSDK(e)) : [],
+      reservedName: Array.isArray(object?.reserved_name) ? object.reserved_name.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): DescriptorProtoSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      field: Array.isArray(object?.field) ? object.field.map((e: any) => FieldDescriptorProto.fromSDKJSON(e)) : [],
+      extension: Array.isArray(object?.extension) ? object.extension.map((e: any) => FieldDescriptorProto.fromSDKJSON(e)) : [],
+      nested_type: Array.isArray(object?.nested_type) ? object.nested_type.map((e: any) => DescriptorProto.fromSDKJSON(e)) : [],
+      enum_type: Array.isArray(object?.enum_type) ? object.enum_type.map((e: any) => EnumDescriptorProto.fromSDKJSON(e)) : [],
+      extension_range: Array.isArray(object?.extension_range) ? object.extension_range.map((e: any) => DescriptorProto_ExtensionRange.fromSDKJSON(e)) : [],
+      oneof_decl: Array.isArray(object?.oneof_decl) ? object.oneof_decl.map((e: any) => OneofDescriptorProto.fromSDKJSON(e)) : [],
+      options: isSet(object.options) ? MessageOptions.fromSDKJSON(object.options) : undefined,
+      reserved_range: Array.isArray(object?.reserved_range) ? object.reserved_range.map((e: any) => DescriptorProto_ReservedRange.fromSDKJSON(e)) : [],
+      reserved_name: Array.isArray(object?.reserved_name) ? object.reserved_name.map((e: any) => String(e)) : []
+    };
+  },
+  toSDK(message: DescriptorProto): DescriptorProtoSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    if (message.field) {
+      obj.field = message.field.map(e => e ? FieldDescriptorProto.toSDK(e) : undefined);
+    } else {
+      obj.field = [];
+    }
+    if (message.extension) {
+      obj.extension = message.extension.map(e => e ? FieldDescriptorProto.toSDK(e) : undefined);
+    } else {
+      obj.extension = [];
+    }
+    if (message.nestedType) {
+      obj.nested_type = message.nestedType.map(e => e ? DescriptorProto.toSDK(e) : undefined);
+    } else {
+      obj.nested_type = [];
+    }
+    if (message.enumType) {
+      obj.enum_type = message.enumType.map(e => e ? EnumDescriptorProto.toSDK(e) : undefined);
+    } else {
+      obj.enum_type = [];
+    }
+    if (message.extensionRange) {
+      obj.extension_range = message.extensionRange.map(e => e ? DescriptorProto_ExtensionRange.toSDK(e) : undefined);
+    } else {
+      obj.extension_range = [];
+    }
+    if (message.oneofDecl) {
+      obj.oneof_decl = message.oneofDecl.map(e => e ? OneofDescriptorProto.toSDK(e) : undefined);
+    } else {
+      obj.oneof_decl = [];
+    }
+    message.options !== undefined && (obj.options = message.options ? MessageOptions.toSDK(message.options) : undefined);
+    if (message.reservedRange) {
+      obj.reserved_range = message.reservedRange.map(e => e ? DescriptorProto_ReservedRange.toSDK(e) : undefined);
+    } else {
+      obj.reserved_range = [];
+    }
+    if (message.reservedName) {
+      obj.reserved_name = message.reservedName.map(e => e);
+    } else {
+      obj.reserved_name = [];
+    }
+    return obj;
+  },
   fromAmino(object: DescriptorProtoAmino): DescriptorProto {
     return {
       name: object.name,
@@ -2909,6 +3078,27 @@ export const DescriptorProto_ExtensionRange = {
     }
     return message;
   },
+  fromSDK(object: DescriptorProto_ExtensionRangeSDKType): DescriptorProto_ExtensionRange {
+    return {
+      start: object?.start,
+      end: object?.end,
+      options: object.options ? ExtensionRangeOptions.fromSDK(object.options) : undefined
+    };
+  },
+  fromSDKJSON(object: any): DescriptorProto_ExtensionRangeSDKType {
+    return {
+      start: isSet(object.start) ? Number(object.start) : 0,
+      end: isSet(object.end) ? Number(object.end) : 0,
+      options: isSet(object.options) ? ExtensionRangeOptions.fromSDKJSON(object.options) : undefined
+    };
+  },
+  toSDK(message: DescriptorProto_ExtensionRange): DescriptorProto_ExtensionRangeSDKType {
+    const obj: any = {};
+    obj.start = message.start;
+    obj.end = message.end;
+    message.options !== undefined && (obj.options = message.options ? ExtensionRangeOptions.toSDK(message.options) : undefined);
+    return obj;
+  },
   fromAmino(object: DescriptorProto_ExtensionRangeAmino): DescriptorProto_ExtensionRange {
     return {
       start: object.start,
@@ -3004,6 +3194,24 @@ export const DescriptorProto_ReservedRange = {
     message.end = object.end ?? 0;
     return message;
   },
+  fromSDK(object: DescriptorProto_ReservedRangeSDKType): DescriptorProto_ReservedRange {
+    return {
+      start: object?.start,
+      end: object?.end
+    };
+  },
+  fromSDKJSON(object: any): DescriptorProto_ReservedRangeSDKType {
+    return {
+      start: isSet(object.start) ? Number(object.start) : 0,
+      end: isSet(object.end) ? Number(object.end) : 0
+    };
+  },
+  toSDK(message: DescriptorProto_ReservedRange): DescriptorProto_ReservedRangeSDKType {
+    const obj: any = {};
+    obj.start = message.start;
+    obj.end = message.end;
+    return obj;
+  },
   fromAmino(object: DescriptorProto_ReservedRangeAmino): DescriptorProto_ReservedRange {
     return {
       start: object.start,
@@ -3090,6 +3298,25 @@ export const ExtensionRangeOptions = {
     const message = createBaseExtensionRangeOptions();
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: ExtensionRangeOptionsSDKType): ExtensionRangeOptions {
+    return {
+      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ExtensionRangeOptionsSDKType {
+    return {
+      uninterpreted_option: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: ExtensionRangeOptions): ExtensionRangeOptionsSDKType {
+    const obj: any = {};
+    if (message.uninterpretedOption) {
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
+    } else {
+      obj.uninterpreted_option = [];
+    }
+    return obj;
   },
   fromAmino(object: ExtensionRangeOptionsAmino): ExtensionRangeOptions {
     return {
@@ -3268,6 +3495,48 @@ export const FieldDescriptorProto = {
     }
     return message;
   },
+  fromSDK(object: FieldDescriptorProtoSDKType): FieldDescriptorProto {
+    return {
+      name: object?.name,
+      number: object?.number,
+      label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : -1,
+      type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : -1,
+      typeName: object?.type_name,
+      extendee: object?.extendee,
+      defaultValue: object?.default_value,
+      oneofIndex: object?.oneof_index,
+      jsonName: object?.json_name,
+      options: object.options ? FieldOptions.fromSDK(object.options) : undefined
+    };
+  },
+  fromSDKJSON(object: any): FieldDescriptorProtoSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      number: isSet(object.number) ? Number(object.number) : 0,
+      label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : -1,
+      type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : -1,
+      type_name: isSet(object.type_name) ? String(object.type_name) : "",
+      extendee: isSet(object.extendee) ? String(object.extendee) : "",
+      default_value: isSet(object.default_value) ? String(object.default_value) : "",
+      oneof_index: isSet(object.oneof_index) ? Number(object.oneof_index) : 0,
+      json_name: isSet(object.json_name) ? String(object.json_name) : "",
+      options: isSet(object.options) ? FieldOptions.fromSDKJSON(object.options) : undefined
+    };
+  },
+  toSDK(message: FieldDescriptorProto): FieldDescriptorProtoSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.number = message.number;
+    message.label !== undefined && (obj.label = fieldDescriptorProto_LabelToJSON(message.label));
+    message.type !== undefined && (obj.type = fieldDescriptorProto_TypeToJSON(message.type));
+    obj.type_name = message.typeName;
+    obj.extendee = message.extendee;
+    obj.default_value = message.defaultValue;
+    obj.oneof_index = message.oneofIndex;
+    obj.json_name = message.jsonName;
+    message.options !== undefined && (obj.options = message.options ? FieldOptions.toSDK(message.options) : undefined);
+    return obj;
+  },
   fromAmino(object: FieldDescriptorProtoAmino): FieldDescriptorProto {
     return {
       name: object.name,
@@ -3378,6 +3647,24 @@ export const OneofDescriptorProto = {
       message.options = OneofOptions.fromPartial(object.options);
     }
     return message;
+  },
+  fromSDK(object: OneofDescriptorProtoSDKType): OneofDescriptorProto {
+    return {
+      name: object?.name,
+      options: object.options ? OneofOptions.fromSDK(object.options) : undefined
+    };
+  },
+  fromSDKJSON(object: any): OneofDescriptorProtoSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      options: isSet(object.options) ? OneofOptions.fromSDKJSON(object.options) : undefined
+    };
+  },
+  toSDK(message: OneofDescriptorProto): OneofDescriptorProtoSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    message.options !== undefined && (obj.options = message.options ? OneofOptions.toSDK(message.options) : undefined);
+    return obj;
   },
   fromAmino(object: OneofDescriptorProtoAmino): OneofDescriptorProto {
     return {
@@ -3516,6 +3803,45 @@ export const EnumDescriptorProto = {
     message.reservedName = object.reservedName?.map(e => e) || [];
     return message;
   },
+  fromSDK(object: EnumDescriptorProtoSDKType): EnumDescriptorProto {
+    return {
+      name: object?.name,
+      value: Array.isArray(object?.value) ? object.value.map((e: any) => EnumValueDescriptorProto.fromSDK(e)) : [],
+      options: object.options ? EnumOptions.fromSDK(object.options) : undefined,
+      reservedRange: Array.isArray(object?.reserved_range) ? object.reserved_range.map((e: any) => EnumDescriptorProto_EnumReservedRange.fromSDK(e)) : [],
+      reservedName: Array.isArray(object?.reserved_name) ? object.reserved_name.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): EnumDescriptorProtoSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      value: Array.isArray(object?.value) ? object.value.map((e: any) => EnumValueDescriptorProto.fromSDKJSON(e)) : [],
+      options: isSet(object.options) ? EnumOptions.fromSDKJSON(object.options) : undefined,
+      reserved_range: Array.isArray(object?.reserved_range) ? object.reserved_range.map((e: any) => EnumDescriptorProto_EnumReservedRange.fromSDKJSON(e)) : [],
+      reserved_name: Array.isArray(object?.reserved_name) ? object.reserved_name.map((e: any) => String(e)) : []
+    };
+  },
+  toSDK(message: EnumDescriptorProto): EnumDescriptorProtoSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    if (message.value) {
+      obj.value = message.value.map(e => e ? EnumValueDescriptorProto.toSDK(e) : undefined);
+    } else {
+      obj.value = [];
+    }
+    message.options !== undefined && (obj.options = message.options ? EnumOptions.toSDK(message.options) : undefined);
+    if (message.reservedRange) {
+      obj.reserved_range = message.reservedRange.map(e => e ? EnumDescriptorProto_EnumReservedRange.toSDK(e) : undefined);
+    } else {
+      obj.reserved_range = [];
+    }
+    if (message.reservedName) {
+      obj.reserved_name = message.reservedName.map(e => e);
+    } else {
+      obj.reserved_name = [];
+    }
+    return obj;
+  },
   fromAmino(object: EnumDescriptorProtoAmino): EnumDescriptorProto {
     return {
       name: object.name,
@@ -3627,6 +3953,24 @@ export const EnumDescriptorProto_EnumReservedRange = {
     message.end = object.end ?? 0;
     return message;
   },
+  fromSDK(object: EnumDescriptorProto_EnumReservedRangeSDKType): EnumDescriptorProto_EnumReservedRange {
+    return {
+      start: object?.start,
+      end: object?.end
+    };
+  },
+  fromSDKJSON(object: any): EnumDescriptorProto_EnumReservedRangeSDKType {
+    return {
+      start: isSet(object.start) ? Number(object.start) : 0,
+      end: isSet(object.end) ? Number(object.end) : 0
+    };
+  },
+  toSDK(message: EnumDescriptorProto_EnumReservedRange): EnumDescriptorProto_EnumReservedRangeSDKType {
+    const obj: any = {};
+    obj.start = message.start;
+    obj.end = message.end;
+    return obj;
+  },
   fromAmino(object: EnumDescriptorProto_EnumReservedRangeAmino): EnumDescriptorProto_EnumReservedRange {
     return {
       start: object.start,
@@ -3731,6 +4075,27 @@ export const EnumValueDescriptorProto = {
       message.options = EnumValueOptions.fromPartial(object.options);
     }
     return message;
+  },
+  fromSDK(object: EnumValueDescriptorProtoSDKType): EnumValueDescriptorProto {
+    return {
+      name: object?.name,
+      number: object?.number,
+      options: object.options ? EnumValueOptions.fromSDK(object.options) : undefined
+    };
+  },
+  fromSDKJSON(object: any): EnumValueDescriptorProtoSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      number: isSet(object.number) ? Number(object.number) : 0,
+      options: isSet(object.options) ? EnumValueOptions.fromSDKJSON(object.options) : undefined
+    };
+  },
+  toSDK(message: EnumValueDescriptorProto): EnumValueDescriptorProtoSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.number = message.number;
+    message.options !== undefined && (obj.options = message.options ? EnumValueOptions.toSDK(message.options) : undefined);
+    return obj;
   },
   fromAmino(object: EnumValueDescriptorProtoAmino): EnumValueDescriptorProto {
     return {
@@ -3842,6 +4207,31 @@ export const ServiceDescriptorProto = {
       message.options = ServiceOptions.fromPartial(object.options);
     }
     return message;
+  },
+  fromSDK(object: ServiceDescriptorProtoSDKType): ServiceDescriptorProto {
+    return {
+      name: object?.name,
+      method: Array.isArray(object?.method) ? object.method.map((e: any) => MethodDescriptorProto.fromSDK(e)) : [],
+      options: object.options ? ServiceOptions.fromSDK(object.options) : undefined
+    };
+  },
+  fromSDKJSON(object: any): ServiceDescriptorProtoSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      method: Array.isArray(object?.method) ? object.method.map((e: any) => MethodDescriptorProto.fromSDKJSON(e)) : [],
+      options: isSet(object.options) ? ServiceOptions.fromSDKJSON(object.options) : undefined
+    };
+  },
+  toSDK(message: ServiceDescriptorProto): ServiceDescriptorProtoSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    if (message.method) {
+      obj.method = message.method.map(e => e ? MethodDescriptorProto.toSDK(e) : undefined);
+    } else {
+      obj.method = [];
+    }
+    message.options !== undefined && (obj.options = message.options ? ServiceOptions.toSDK(message.options) : undefined);
+    return obj;
   },
   fromAmino(object: ServiceDescriptorProtoAmino): ServiceDescriptorProto {
     return {
@@ -3983,6 +4373,36 @@ export const MethodDescriptorProto = {
     message.clientStreaming = object.clientStreaming ?? false;
     message.serverStreaming = object.serverStreaming ?? false;
     return message;
+  },
+  fromSDK(object: MethodDescriptorProtoSDKType): MethodDescriptorProto {
+    return {
+      name: object?.name,
+      inputType: object?.input_type,
+      outputType: object?.output_type,
+      options: object.options ? MethodOptions.fromSDK(object.options) : undefined,
+      clientStreaming: object?.client_streaming,
+      serverStreaming: object?.server_streaming
+    };
+  },
+  fromSDKJSON(object: any): MethodDescriptorProtoSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      input_type: isSet(object.input_type) ? String(object.input_type) : "",
+      output_type: isSet(object.output_type) ? String(object.output_type) : "",
+      options: isSet(object.options) ? MethodOptions.fromSDKJSON(object.options) : undefined,
+      client_streaming: isSet(object.client_streaming) ? Boolean(object.client_streaming) : false,
+      server_streaming: isSet(object.server_streaming) ? Boolean(object.server_streaming) : false
+    };
+  },
+  toSDK(message: MethodDescriptorProto): MethodDescriptorProtoSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.input_type = message.inputType;
+    obj.output_type = message.outputType;
+    message.options !== undefined && (obj.options = message.options ? MethodOptions.toSDK(message.options) : undefined);
+    obj.client_streaming = message.clientStreaming;
+    obj.server_streaming = message.serverStreaming;
+    return obj;
   },
   fromAmino(object: MethodDescriptorProtoAmino): MethodDescriptorProto {
     return {
@@ -4279,6 +4699,85 @@ export const FileOptions = {
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
   },
+  fromSDK(object: FileOptionsSDKType): FileOptions {
+    return {
+      javaPackage: object?.java_package,
+      javaOuterClassname: object?.java_outer_classname,
+      javaMultipleFiles: object?.java_multiple_files,
+      javaGenerateEqualsAndHash: object?.java_generate_equals_and_hash,
+      javaStringCheckUtf8: object?.java_string_check_utf8,
+      optimizeFor: isSet(object.optimize_for) ? fileOptions_OptimizeModeFromJSON(object.optimize_for) : -1,
+      goPackage: object?.go_package,
+      ccGenericServices: object?.cc_generic_services,
+      javaGenericServices: object?.java_generic_services,
+      pyGenericServices: object?.py_generic_services,
+      phpGenericServices: object?.php_generic_services,
+      deprecated: object?.deprecated,
+      ccEnableArenas: object?.cc_enable_arenas,
+      objcClassPrefix: object?.objc_class_prefix,
+      csharpNamespace: object?.csharp_namespace,
+      swiftPrefix: object?.swift_prefix,
+      phpClassPrefix: object?.php_class_prefix,
+      phpNamespace: object?.php_namespace,
+      phpMetadataNamespace: object?.php_metadata_namespace,
+      rubyPackage: object?.ruby_package,
+      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): FileOptionsSDKType {
+    return {
+      java_package: isSet(object.java_package) ? String(object.java_package) : "",
+      java_outer_classname: isSet(object.java_outer_classname) ? String(object.java_outer_classname) : "",
+      java_multiple_files: isSet(object.java_multiple_files) ? Boolean(object.java_multiple_files) : false,
+      java_generate_equals_and_hash: isSet(object.java_generate_equals_and_hash) ? Boolean(object.java_generate_equals_and_hash) : false,
+      java_string_check_utf8: isSet(object.java_string_check_utf8) ? Boolean(object.java_string_check_utf8) : false,
+      optimize_for: isSet(object.optimize_for) ? fileOptions_OptimizeModeFromJSON(object.optimize_for) : -1,
+      go_package: isSet(object.go_package) ? String(object.go_package) : "",
+      cc_generic_services: isSet(object.cc_generic_services) ? Boolean(object.cc_generic_services) : false,
+      java_generic_services: isSet(object.java_generic_services) ? Boolean(object.java_generic_services) : false,
+      py_generic_services: isSet(object.py_generic_services) ? Boolean(object.py_generic_services) : false,
+      php_generic_services: isSet(object.php_generic_services) ? Boolean(object.php_generic_services) : false,
+      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
+      cc_enable_arenas: isSet(object.cc_enable_arenas) ? Boolean(object.cc_enable_arenas) : false,
+      objc_class_prefix: isSet(object.objc_class_prefix) ? String(object.objc_class_prefix) : "",
+      csharp_namespace: isSet(object.csharp_namespace) ? String(object.csharp_namespace) : "",
+      swift_prefix: isSet(object.swift_prefix) ? String(object.swift_prefix) : "",
+      php_class_prefix: isSet(object.php_class_prefix) ? String(object.php_class_prefix) : "",
+      php_namespace: isSet(object.php_namespace) ? String(object.php_namespace) : "",
+      php_metadata_namespace: isSet(object.php_metadata_namespace) ? String(object.php_metadata_namespace) : "",
+      ruby_package: isSet(object.ruby_package) ? String(object.ruby_package) : "",
+      uninterpreted_option: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: FileOptions): FileOptionsSDKType {
+    const obj: any = {};
+    obj.java_package = message.javaPackage;
+    obj.java_outer_classname = message.javaOuterClassname;
+    obj.java_multiple_files = message.javaMultipleFiles;
+    obj.java_generate_equals_and_hash = message.javaGenerateEqualsAndHash;
+    obj.java_string_check_utf8 = message.javaStringCheckUtf8;
+    message.optimizeFor !== undefined && (obj.optimize_for = fileOptions_OptimizeModeToJSON(message.optimizeFor));
+    obj.go_package = message.goPackage;
+    obj.cc_generic_services = message.ccGenericServices;
+    obj.java_generic_services = message.javaGenericServices;
+    obj.py_generic_services = message.pyGenericServices;
+    obj.php_generic_services = message.phpGenericServices;
+    obj.deprecated = message.deprecated;
+    obj.cc_enable_arenas = message.ccEnableArenas;
+    obj.objc_class_prefix = message.objcClassPrefix;
+    obj.csharp_namespace = message.csharpNamespace;
+    obj.swift_prefix = message.swiftPrefix;
+    obj.php_class_prefix = message.phpClassPrefix;
+    obj.php_namespace = message.phpNamespace;
+    obj.php_metadata_namespace = message.phpMetadataNamespace;
+    obj.ruby_package = message.rubyPackage;
+    if (message.uninterpretedOption) {
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
+    } else {
+      obj.uninterpreted_option = [];
+    }
+    return obj;
+  },
   fromAmino(object: FileOptionsAmino): FileOptions {
     return {
       javaPackage: object.java_package,
@@ -4448,6 +4947,37 @@ export const MessageOptions = {
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
   },
+  fromSDK(object: MessageOptionsSDKType): MessageOptions {
+    return {
+      messageSetWireFormat: object?.message_set_wire_format,
+      noStandardDescriptorAccessor: object?.no_standard_descriptor_accessor,
+      deprecated: object?.deprecated,
+      mapEntry: object?.map_entry,
+      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): MessageOptionsSDKType {
+    return {
+      message_set_wire_format: isSet(object.message_set_wire_format) ? Boolean(object.message_set_wire_format) : false,
+      no_standard_descriptor_accessor: isSet(object.no_standard_descriptor_accessor) ? Boolean(object.no_standard_descriptor_accessor) : false,
+      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
+      map_entry: isSet(object.map_entry) ? Boolean(object.map_entry) : false,
+      uninterpreted_option: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: MessageOptions): MessageOptionsSDKType {
+    const obj: any = {};
+    obj.message_set_wire_format = message.messageSetWireFormat;
+    obj.no_standard_descriptor_accessor = message.noStandardDescriptorAccessor;
+    obj.deprecated = message.deprecated;
+    obj.map_entry = message.mapEntry;
+    if (message.uninterpretedOption) {
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
+    } else {
+      obj.uninterpreted_option = [];
+    }
+    return obj;
+  },
   fromAmino(object: MessageOptionsAmino): MessageOptions {
     return {
       messageSetWireFormat: object.message_set_wire_format,
@@ -4605,6 +5135,43 @@ export const FieldOptions = {
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
   },
+  fromSDK(object: FieldOptionsSDKType): FieldOptions {
+    return {
+      ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : -1,
+      packed: object?.packed,
+      jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : -1,
+      lazy: object?.lazy,
+      deprecated: object?.deprecated,
+      weak: object?.weak,
+      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): FieldOptionsSDKType {
+    return {
+      ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : -1,
+      packed: isSet(object.packed) ? Boolean(object.packed) : false,
+      jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : -1,
+      lazy: isSet(object.lazy) ? Boolean(object.lazy) : false,
+      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
+      weak: isSet(object.weak) ? Boolean(object.weak) : false,
+      uninterpreted_option: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: FieldOptions): FieldOptionsSDKType {
+    const obj: any = {};
+    message.ctype !== undefined && (obj.ctype = fieldOptions_CTypeToJSON(message.ctype));
+    obj.packed = message.packed;
+    message.jstype !== undefined && (obj.jstype = fieldOptions_JSTypeToJSON(message.jstype));
+    obj.lazy = message.lazy;
+    obj.deprecated = message.deprecated;
+    obj.weak = message.weak;
+    if (message.uninterpretedOption) {
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
+    } else {
+      obj.uninterpreted_option = [];
+    }
+    return obj;
+  },
   fromAmino(object: FieldOptionsAmino): FieldOptions {
     return {
       ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : -1,
@@ -4705,6 +5272,25 @@ export const OneofOptions = {
     const message = createBaseOneofOptions();
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: OneofOptionsSDKType): OneofOptions {
+    return {
+      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): OneofOptionsSDKType {
+    return {
+      uninterpreted_option: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: OneofOptions): OneofOptionsSDKType {
+    const obj: any = {};
+    if (message.uninterpretedOption) {
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
+    } else {
+      obj.uninterpreted_option = [];
+    }
+    return obj;
   },
   fromAmino(object: OneofOptionsAmino): OneofOptions {
     return {
@@ -4815,6 +5401,31 @@ export const EnumOptions = {
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
   },
+  fromSDK(object: EnumOptionsSDKType): EnumOptions {
+    return {
+      allowAlias: object?.allow_alias,
+      deprecated: object?.deprecated,
+      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): EnumOptionsSDKType {
+    return {
+      allow_alias: isSet(object.allow_alias) ? Boolean(object.allow_alias) : false,
+      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
+      uninterpreted_option: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: EnumOptions): EnumOptionsSDKType {
+    const obj: any = {};
+    obj.allow_alias = message.allowAlias;
+    obj.deprecated = message.deprecated;
+    if (message.uninterpretedOption) {
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
+    } else {
+      obj.uninterpreted_option = [];
+    }
+    return obj;
+  },
   fromAmino(object: EnumOptionsAmino): EnumOptions {
     return {
       allowAlias: object.allow_alias,
@@ -4918,6 +5529,28 @@ export const EnumValueOptions = {
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
   },
+  fromSDK(object: EnumValueOptionsSDKType): EnumValueOptions {
+    return {
+      deprecated: object?.deprecated,
+      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): EnumValueOptionsSDKType {
+    return {
+      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
+      uninterpreted_option: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: EnumValueOptions): EnumValueOptionsSDKType {
+    const obj: any = {};
+    obj.deprecated = message.deprecated;
+    if (message.uninterpretedOption) {
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
+    } else {
+      obj.uninterpreted_option = [];
+    }
+    return obj;
+  },
   fromAmino(object: EnumValueOptionsAmino): EnumValueOptions {
     return {
       deprecated: object.deprecated,
@@ -5018,6 +5651,28 @@ export const ServiceOptions = {
     message.deprecated = object.deprecated ?? false;
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: ServiceOptionsSDKType): ServiceOptions {
+    return {
+      deprecated: object?.deprecated,
+      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ServiceOptionsSDKType {
+    return {
+      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
+      uninterpreted_option: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: ServiceOptions): ServiceOptionsSDKType {
+    const obj: any = {};
+    obj.deprecated = message.deprecated;
+    if (message.uninterpretedOption) {
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
+    } else {
+      obj.uninterpreted_option = [];
+    }
+    return obj;
   },
   fromAmino(object: ServiceOptionsAmino): ServiceOptions {
     return {
@@ -5130,6 +5785,31 @@ export const MethodOptions = {
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.fromPartial(e)) || [];
     return message;
   },
+  fromSDK(object: MethodOptionsSDKType): MethodOptions {
+    return {
+      deprecated: object?.deprecated,
+      idempotencyLevel: isSet(object.idempotency_level) ? methodOptions_IdempotencyLevelFromJSON(object.idempotency_level) : -1,
+      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): MethodOptionsSDKType {
+    return {
+      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
+      idempotency_level: isSet(object.idempotency_level) ? methodOptions_IdempotencyLevelFromJSON(object.idempotency_level) : -1,
+      uninterpreted_option: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: MethodOptions): MethodOptionsSDKType {
+    const obj: any = {};
+    obj.deprecated = message.deprecated;
+    message.idempotencyLevel !== undefined && (obj.idempotency_level = methodOptions_IdempotencyLevelToJSON(message.idempotencyLevel));
+    if (message.uninterpretedOption) {
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toSDK(e) : undefined);
+    } else {
+      obj.uninterpreted_option = [];
+    }
+    return obj;
+  },
   fromAmino(object: MethodOptionsAmino): MethodOptions {
     return {
       deprecated: object.deprecated,
@@ -5179,13 +5859,13 @@ function createBaseUninterpretedOption(): UninterpretedOption {
 export const UninterpretedOption = {
   typeUrl: "/google.protobuf.UninterpretedOption",
   is(o: any): o is UninterpretedOption {
-    return o && (o.$typeUrl === UninterpretedOption.typeUrl || Array.isArray(o.name) && (!o.name.length || UninterpretedOption_NamePart.is(o.name[0])) && typeof o.identifierValue === "string" && typeof o.positiveIntValue === "bigint" && typeof o.negativeIntValue === "bigint" && typeof o.doubleValue === "number" && o.stringValue instanceof Uint8Array && typeof o.aggregateValue === "string");
+    return o && (o.$typeUrl === UninterpretedOption.typeUrl || Array.isArray(o.name) && (!o.name.length || UninterpretedOption_NamePart.is(o.name[0])) && typeof o.identifierValue === "string" && typeof o.positiveIntValue === "bigint" && typeof o.negativeIntValue === "bigint" && typeof o.doubleValue === "number" && (o.stringValue instanceof Uint8Array || typeof o.stringValue === "string") && typeof o.aggregateValue === "string");
   },
   isSDK(o: any): o is UninterpretedOptionSDKType {
-    return o && (o.$typeUrl === UninterpretedOption.typeUrl || Array.isArray(o.name) && (!o.name.length || UninterpretedOption_NamePart.isSDK(o.name[0])) && typeof o.identifier_value === "string" && typeof o.positive_int_value === "bigint" && typeof o.negative_int_value === "bigint" && typeof o.double_value === "number" && o.string_value instanceof Uint8Array && typeof o.aggregate_value === "string");
+    return o && (o.$typeUrl === UninterpretedOption.typeUrl || Array.isArray(o.name) && (!o.name.length || UninterpretedOption_NamePart.isSDK(o.name[0])) && typeof o.identifier_value === "string" && typeof o.positive_int_value === "bigint" && typeof o.negative_int_value === "bigint" && typeof o.double_value === "number" && (o.string_value instanceof Uint8Array || typeof o.string_value === "string") && typeof o.aggregate_value === "string");
   },
   isAmino(o: any): o is UninterpretedOptionAmino {
-    return o && (o.$typeUrl === UninterpretedOption.typeUrl || Array.isArray(o.name) && (!o.name.length || UninterpretedOption_NamePart.isAmino(o.name[0])) && typeof o.identifier_value === "string" && typeof o.positive_int_value === "bigint" && typeof o.negative_int_value === "bigint" && typeof o.double_value === "number" && o.string_value instanceof Uint8Array && typeof o.aggregate_value === "string");
+    return o && (o.$typeUrl === UninterpretedOption.typeUrl || Array.isArray(o.name) && (!o.name.length || UninterpretedOption_NamePart.isAmino(o.name[0])) && typeof o.identifier_value === "string" && typeof o.positive_int_value === "bigint" && typeof o.negative_int_value === "bigint" && typeof o.double_value === "number" && (o.string_value instanceof Uint8Array || typeof o.string_value === "string") && typeof o.aggregate_value === "string");
   },
   encode(message: UninterpretedOption, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.name) {
@@ -5286,6 +5966,43 @@ export const UninterpretedOption = {
     message.stringValue = object.stringValue ?? new Uint8Array();
     message.aggregateValue = object.aggregateValue ?? "";
     return message;
+  },
+  fromSDK(object: UninterpretedOptionSDKType): UninterpretedOption {
+    return {
+      name: Array.isArray(object?.name) ? object.name.map((e: any) => UninterpretedOption_NamePart.fromSDK(e)) : [],
+      identifierValue: object?.identifier_value,
+      positiveIntValue: object?.positive_int_value,
+      negativeIntValue: object?.negative_int_value,
+      doubleValue: object?.double_value,
+      stringValue: object?.string_value,
+      aggregateValue: object?.aggregate_value
+    };
+  },
+  fromSDKJSON(object: any): UninterpretedOptionSDKType {
+    return {
+      name: Array.isArray(object?.name) ? object.name.map((e: any) => UninterpretedOption_NamePart.fromSDKJSON(e)) : [],
+      identifier_value: isSet(object.identifier_value) ? String(object.identifier_value) : "",
+      positive_int_value: isSet(object.positive_int_value) ? BigInt(object.positive_int_value.toString()) : BigInt(0),
+      negative_int_value: isSet(object.negative_int_value) ? BigInt(object.negative_int_value.toString()) : BigInt(0),
+      double_value: isSet(object.double_value) ? Number(object.double_value) : 0,
+      string_value: isSet(object.string_value) ? bytesFromBase64(object.string_value) : new Uint8Array(),
+      aggregate_value: isSet(object.aggregate_value) ? String(object.aggregate_value) : ""
+    };
+  },
+  toSDK(message: UninterpretedOption): UninterpretedOptionSDKType {
+    const obj: any = {};
+    if (message.name) {
+      obj.name = message.name.map(e => e ? UninterpretedOption_NamePart.toSDK(e) : undefined);
+    } else {
+      obj.name = [];
+    }
+    obj.identifier_value = message.identifierValue;
+    obj.positive_int_value = message.positiveIntValue;
+    obj.negative_int_value = message.negativeIntValue;
+    obj.double_value = message.doubleValue;
+    obj.string_value = message.stringValue;
+    obj.aggregate_value = message.aggregateValue;
+    return obj;
   },
   fromAmino(object: UninterpretedOptionAmino): UninterpretedOption {
     return {
@@ -5394,6 +6111,24 @@ export const UninterpretedOption_NamePart = {
     message.isExtension = object.isExtension ?? false;
     return message;
   },
+  fromSDK(object: UninterpretedOption_NamePartSDKType): UninterpretedOption_NamePart {
+    return {
+      namePart: object?.name_part,
+      isExtension: object?.is_extension
+    };
+  },
+  fromSDKJSON(object: any): UninterpretedOption_NamePartSDKType {
+    return {
+      name_part: isSet(object.name_part) ? String(object.name_part) : "",
+      is_extension: isSet(object.is_extension) ? Boolean(object.is_extension) : false
+    };
+  },
+  toSDK(message: UninterpretedOption_NamePart): UninterpretedOption_NamePartSDKType {
+    const obj: any = {};
+    obj.name_part = message.namePart;
+    obj.is_extension = message.isExtension;
+    return obj;
+  },
   fromAmino(object: UninterpretedOption_NamePartAmino): UninterpretedOption_NamePart {
     return {
       namePart: object.name_part,
@@ -5480,6 +6215,25 @@ export const SourceCodeInfo = {
     const message = createBaseSourceCodeInfo();
     message.location = object.location?.map(e => SourceCodeInfo_Location.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: SourceCodeInfoSDKType): SourceCodeInfo {
+    return {
+      location: Array.isArray(object?.location) ? object.location.map((e: any) => SourceCodeInfo_Location.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): SourceCodeInfoSDKType {
+    return {
+      location: Array.isArray(object?.location) ? object.location.map((e: any) => SourceCodeInfo_Location.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: SourceCodeInfo): SourceCodeInfoSDKType {
+    const obj: any = {};
+    if (message.location) {
+      obj.location = message.location.map(e => e ? SourceCodeInfo_Location.toSDK(e) : undefined);
+    } else {
+      obj.location = [];
+    }
+    return obj;
   },
   fromAmino(object: SourceCodeInfoAmino): SourceCodeInfo {
     return {
@@ -5636,6 +6390,45 @@ export const SourceCodeInfo_Location = {
     message.leadingDetachedComments = object.leadingDetachedComments?.map(e => e) || [];
     return message;
   },
+  fromSDK(object: SourceCodeInfo_LocationSDKType): SourceCodeInfo_Location {
+    return {
+      path: Array.isArray(object?.path) ? object.path.map((e: any) => e) : [],
+      span: Array.isArray(object?.span) ? object.span.map((e: any) => e) : [],
+      leadingComments: object?.leading_comments,
+      trailingComments: object?.trailing_comments,
+      leadingDetachedComments: Array.isArray(object?.leading_detached_comments) ? object.leading_detached_comments.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): SourceCodeInfo_LocationSDKType {
+    return {
+      path: Array.isArray(object?.path) ? object.path.map((e: any) => Number(e)) : [],
+      span: Array.isArray(object?.span) ? object.span.map((e: any) => Number(e)) : [],
+      leading_comments: isSet(object.leading_comments) ? String(object.leading_comments) : "",
+      trailing_comments: isSet(object.trailing_comments) ? String(object.trailing_comments) : "",
+      leading_detached_comments: Array.isArray(object?.leading_detached_comments) ? object.leading_detached_comments.map((e: any) => String(e)) : []
+    };
+  },
+  toSDK(message: SourceCodeInfo_Location): SourceCodeInfo_LocationSDKType {
+    const obj: any = {};
+    if (message.path) {
+      obj.path = message.path.map(e => e);
+    } else {
+      obj.path = [];
+    }
+    if (message.span) {
+      obj.span = message.span.map(e => e);
+    } else {
+      obj.span = [];
+    }
+    obj.leading_comments = message.leadingComments;
+    obj.trailing_comments = message.trailingComments;
+    if (message.leadingDetachedComments) {
+      obj.leading_detached_comments = message.leadingDetachedComments.map(e => e);
+    } else {
+      obj.leading_detached_comments = [];
+    }
+    return obj;
+  },
   fromAmino(object: SourceCodeInfo_LocationAmino): SourceCodeInfo_Location {
     return {
       path: Array.isArray(object?.path) ? object.path.map((e: any) => e) : [],
@@ -5740,6 +6533,25 @@ export const GeneratedCodeInfo = {
     const message = createBaseGeneratedCodeInfo();
     message.annotation = object.annotation?.map(e => GeneratedCodeInfo_Annotation.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: GeneratedCodeInfoSDKType): GeneratedCodeInfo {
+    return {
+      annotation: Array.isArray(object?.annotation) ? object.annotation.map((e: any) => GeneratedCodeInfo_Annotation.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): GeneratedCodeInfoSDKType {
+    return {
+      annotation: Array.isArray(object?.annotation) ? object.annotation.map((e: any) => GeneratedCodeInfo_Annotation.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: GeneratedCodeInfo): GeneratedCodeInfoSDKType {
+    const obj: any = {};
+    if (message.annotation) {
+      obj.annotation = message.annotation.map(e => e ? GeneratedCodeInfo_Annotation.toSDK(e) : undefined);
+    } else {
+      obj.annotation = [];
+    }
+    return obj;
   },
   fromAmino(object: GeneratedCodeInfoAmino): GeneratedCodeInfo {
     return {
@@ -5868,6 +6680,34 @@ export const GeneratedCodeInfo_Annotation = {
     message.begin = object.begin ?? 0;
     message.end = object.end ?? 0;
     return message;
+  },
+  fromSDK(object: GeneratedCodeInfo_AnnotationSDKType): GeneratedCodeInfo_Annotation {
+    return {
+      path: Array.isArray(object?.path) ? object.path.map((e: any) => e) : [],
+      sourceFile: object?.source_file,
+      begin: object?.begin,
+      end: object?.end
+    };
+  },
+  fromSDKJSON(object: any): GeneratedCodeInfo_AnnotationSDKType {
+    return {
+      path: Array.isArray(object?.path) ? object.path.map((e: any) => Number(e)) : [],
+      source_file: isSet(object.source_file) ? String(object.source_file) : "",
+      begin: isSet(object.begin) ? Number(object.begin) : 0,
+      end: isSet(object.end) ? Number(object.end) : 0
+    };
+  },
+  toSDK(message: GeneratedCodeInfo_Annotation): GeneratedCodeInfo_AnnotationSDKType {
+    const obj: any = {};
+    if (message.path) {
+      obj.path = message.path.map(e => e);
+    } else {
+      obj.path = [];
+    }
+    obj.source_file = message.sourceFile;
+    obj.begin = message.begin;
+    obj.end = message.end;
+    return obj;
   },
   fromAmino(object: GeneratedCodeInfo_AnnotationAmino): GeneratedCodeInfo_Annotation {
     return {

@@ -348,6 +348,24 @@ export const Timestamp = {
     message.nanos = object.nanos ?? 0;
     return message;
   },
+  fromSDK(object: TimestampSDKType): Timestamp {
+    return {
+      seconds: object?.seconds,
+      nanos: object?.nanos
+    };
+  },
+  fromSDKJSON(object: any): TimestampSDKType {
+    return {
+      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt(0),
+      nanos: isSet(object.nanos) ? Number(object.nanos) : 0
+    };
+  },
+  toSDK(message: Timestamp): TimestampSDKType {
+    const obj: any = {};
+    obj.seconds = message.seconds;
+    obj.nanos = message.nanos;
+    return obj;
+  },
   fromAmino(object: TimestampAmino): Timestamp {
     return fromJsonTimestamp(object);
   },

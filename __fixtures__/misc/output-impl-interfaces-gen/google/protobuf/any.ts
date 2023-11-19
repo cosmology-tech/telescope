@@ -334,13 +334,13 @@ function createBaseAny(): Any {
 export const Any = {
   typeUrl: "/google.protobuf.Any",
   is(o: any): o is Any {
-    return o && (o.$typeUrl === Any.typeUrl || typeof o.typeUrl === "string" && o.value instanceof Uint8Array);
+    return o && (o.$typeUrl === Any.typeUrl || typeof o.typeUrl === "string" && (o.value instanceof Uint8Array || typeof o.value === "string"));
   },
   isSDK(o: any): o is AnySDKType {
-    return o && (o.$typeUrl === Any.typeUrl || typeof o.type_url === "string" && o.value instanceof Uint8Array);
+    return o && (o.$typeUrl === Any.typeUrl || typeof o.type_url === "string" && (o.value instanceof Uint8Array || typeof o.value === "string"));
   },
   isAmino(o: any): o is AnyAmino {
-    return o && (o.$typeUrl === Any.typeUrl || typeof o.type === "string" && o.value instanceof Uint8Array);
+    return o && (o.$typeUrl === Any.typeUrl || typeof o.type === "string" && (o.value instanceof Uint8Array || typeof o.value === "string"));
   },
   encode(message: Any, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.typeUrl !== "") {
@@ -388,6 +388,24 @@ export const Any = {
     message.typeUrl = object.typeUrl ?? "";
     message.value = object.value ?? new Uint8Array();
     return message;
+  },
+  fromSDK(object: AnySDKType): Any {
+    return {
+      typeUrl: object?.type_url,
+      value: object?.value
+    };
+  },
+  fromSDKJSON(object: any): AnySDKType {
+    return {
+      type_url: isSet(object.type_url) ? String(object.type_url) : "",
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
+    };
+  },
+  toSDK(message: Any): AnySDKType {
+    const obj: any = {};
+    obj.type_url = message.typeUrl;
+    obj.value = message.value;
+    return obj;
   },
   fromAmino(object: AnyAmino): Any {
     return {

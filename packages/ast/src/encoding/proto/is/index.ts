@@ -12,6 +12,7 @@ import {
   getOneOfs,
 } from "../types";
 import { SymbolNames } from "../../types";
+import { type } from "case";
 
 const INPUT_PARAM = "o";
 
@@ -24,6 +25,44 @@ export const createInstanceOfTypeComparison = (args: {
   const { fieldName, type } = args;
 
   return t.binaryExpression("instanceof", fieldName, t.identifier(type));
+};
+
+export const createInstanceOfTypeComparisonGroup = (args: {
+  context: ProtoParseContext;
+  fieldName: t.Expression;
+  field: ProtoField;
+  types: string[];
+}): t.Expression => {
+  const { context, fieldName, field, types } = args;
+
+  switch (types.length) {
+    case 0:
+      throw new Error("types shouldn't be empty.");
+    case 1:
+      return createInstanceOfTypeComparison({
+        context,
+        fieldName,
+        field,
+        type: types[0],
+      });
+    default:
+      const current = types.shift();
+      return t.logicalExpression(
+        "||",
+        createInstanceOfTypeComparison({
+          context,
+          fieldName,
+          field,
+          type: current,
+        }),
+        createInstanceOfTypeComparisonGroup({
+          context,
+          fieldName,
+          field,
+          types,
+        })
+      );
+  }
 };
 
 export const createScalarTypeComparison = (args: {
@@ -201,12 +240,21 @@ function getScalarExpression(args: {
         type: "number",
       });
     case "bytes":
-      return createInstanceOfTypeComparison({
-        context,
-        field,
-        fieldName,
-        type: "Uint8Array",
-      });
+      return t.logicalExpression(
+        "||",
+        createInstanceOfTypeComparison({
+          context,
+          field,
+          fieldName,
+          type: "Uint8Array",
+        }),
+        createScalarTypeComparison({
+          context,
+          field,
+          fieldName,
+          type: "string",
+        })
+      );
     case "int64":
     case "sint64":
     case "uint64":

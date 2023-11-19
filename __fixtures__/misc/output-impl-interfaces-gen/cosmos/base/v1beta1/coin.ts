@@ -182,6 +182,24 @@ export const Coin = {
     message.amount = object.amount ?? "";
     return message;
   },
+  fromSDK(object: CoinSDKType): Coin {
+    return {
+      denom: object?.denom,
+      amount: object?.amount
+    };
+  },
+  fromSDKJSON(object: any): CoinSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      amount: isSet(object.amount) ? String(object.amount) : ""
+    };
+  },
+  toSDK(message: Coin): CoinSDKType {
+    const obj: any = {};
+    obj.denom = message.denom;
+    obj.amount = message.amount;
+    return obj;
+  },
   fromAmino(object: CoinAmino): Coin {
     return {
       denom: object.denom,
@@ -281,6 +299,24 @@ export const DecCoin = {
     message.amount = object.amount ?? "";
     return message;
   },
+  fromSDK(object: DecCoinSDKType): DecCoin {
+    return {
+      denom: object?.denom,
+      amount: object?.amount
+    };
+  },
+  fromSDKJSON(object: any): DecCoinSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      amount: isSet(object.amount) ? String(object.amount) : ""
+    };
+  },
+  toSDK(message: DecCoin): DecCoinSDKType {
+    const obj: any = {};
+    obj.denom = message.denom;
+    obj.amount = message.amount;
+    return obj;
+  },
   fromAmino(object: DecCoinAmino): DecCoin {
     return {
       denom: object.denom,
@@ -370,6 +406,21 @@ export const IntProto = {
     message.int = object.int ?? "";
     return message;
   },
+  fromSDK(object: IntProtoSDKType): IntProto {
+    return {
+      int: object?.int
+    };
+  },
+  fromSDKJSON(object: any): IntProtoSDKType {
+    return {
+      int: isSet(object.int) ? String(object.int) : ""
+    };
+  },
+  toSDK(message: IntProto): IntProtoSDKType {
+    const obj: any = {};
+    obj.int = message.int;
+    return obj;
+  },
   fromAmino(object: IntProtoAmino): IntProto {
     return {
       int: object.int
@@ -456,6 +507,21 @@ export const DecProto = {
     const message = createBaseDecProto();
     message.dec = object.dec ?? "";
     return message;
+  },
+  fromSDK(object: DecProtoSDKType): DecProto {
+    return {
+      dec: object?.dec
+    };
+  },
+  fromSDKJSON(object: any): DecProtoSDKType {
+    return {
+      dec: isSet(object.dec) ? String(object.dec) : ""
+    };
+  },
+  toSDK(message: DecProto): DecProtoSDKType {
+    const obj: any = {};
+    obj.dec = message.dec;
+    return obj;
   },
   fromAmino(object: DecProtoAmino): DecProto {
     return {

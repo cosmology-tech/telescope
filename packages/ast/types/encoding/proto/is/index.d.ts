@@ -1,12 +1,19 @@
 import * as t from "@babel/types";
 import { ProtoParseContext } from "../../context";
 import { ProtoField, ProtoType } from "@cosmology/types";
+import { type } from "case";
 export declare const createInstanceOfTypeComparison: (args: {
     context: ProtoParseContext;
     fieldName: t.Expression;
     field: ProtoField;
     type: string;
 }) => t.BinaryExpression;
+export declare const createInstanceOfTypeComparisonGroup: (args: {
+    context: ProtoParseContext;
+    fieldName: t.Expression;
+    field: ProtoField;
+    types: string[];
+}) => t.Expression;
 export declare const createScalarTypeComparison: (args: {
     context: ProtoParseContext;
     fieldName: t.Expression;

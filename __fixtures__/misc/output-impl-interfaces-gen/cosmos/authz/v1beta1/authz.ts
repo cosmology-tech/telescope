@@ -199,6 +199,21 @@ export const GenericAuthorization = {
     message.msg = object.msg ?? "";
     return message;
   },
+  fromSDK(object: GenericAuthorizationSDKType): GenericAuthorization {
+    return {
+      msg: object?.msg
+    };
+  },
+  fromSDKJSON(object: any): GenericAuthorizationSDKType {
+    return {
+      msg: isSet(object.msg) ? String(object.msg) : ""
+    };
+  },
+  toSDK(message: GenericAuthorization): GenericAuthorizationSDKType {
+    const obj: any = {};
+    obj.msg = message.msg;
+    return obj;
+  },
   fromAmino(object: GenericAuthorizationAmino): GenericAuthorization {
     return {
       msg: object.msg
@@ -297,6 +312,24 @@ export const Grant = {
     }
     message.expiration = object.expiration ?? undefined;
     return message;
+  },
+  fromSDK(object: GrantSDKType): Grant {
+    return {
+      authorization: object.authorization ? GlobalDecoderRegistry.fromSDK(object.authorization) : undefined,
+      expiration: object.expiration ?? undefined
+    };
+  },
+  fromSDKJSON(object: any): GrantSDKType {
+    return {
+      authorization: isSet(object.authorization) ? GlobalDecoderRegistry.fromSDKJSON(object.authorization) : undefined,
+      expiration: isSet(object.expiration) ? new Date(object.expiration) : undefined
+    };
+  },
+  toSDK(message: Grant): GrantSDKType {
+    const obj: any = {};
+    message.authorization !== undefined && (obj.authorization = message.authorization ? GlobalDecoderRegistry.toSDK(message.authorization) : undefined);
+    message.expiration !== undefined && (obj.expiration = message.expiration ?? undefined);
+    return obj;
   },
   fromAmino(object: GrantAmino): Grant {
     return {
@@ -419,6 +452,30 @@ export const GrantAuthorization = {
     message.expiration = object.expiration ?? undefined;
     return message;
   },
+  fromSDK(object: GrantAuthorizationSDKType): GrantAuthorization {
+    return {
+      granter: object?.granter,
+      grantee: object?.grantee,
+      authorization: object.authorization ? GlobalDecoderRegistry.fromSDK(object.authorization) : undefined,
+      expiration: object.expiration ?? undefined
+    };
+  },
+  fromSDKJSON(object: any): GrantAuthorizationSDKType {
+    return {
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      authorization: isSet(object.authorization) ? GlobalDecoderRegistry.fromSDKJSON(object.authorization) : undefined,
+      expiration: isSet(object.expiration) ? new Date(object.expiration) : undefined
+    };
+  },
+  toSDK(message: GrantAuthorization): GrantAuthorizationSDKType {
+    const obj: any = {};
+    obj.granter = message.granter;
+    obj.grantee = message.grantee;
+    message.authorization !== undefined && (obj.authorization = message.authorization ? GlobalDecoderRegistry.toSDK(message.authorization) : undefined);
+    message.expiration !== undefined && (obj.expiration = message.expiration ?? undefined);
+    return obj;
+  },
   fromAmino(object: GrantAuthorizationAmino): GrantAuthorization {
     return {
       granter: object.granter,
@@ -516,6 +573,25 @@ export const GrantQueueItem = {
     message.msgTypeUrls = object.msgTypeUrls?.map(e => e) || [];
     return message;
   },
+  fromSDK(object: GrantQueueItemSDKType): GrantQueueItem {
+    return {
+      msgTypeUrls: Array.isArray(object?.msg_type_urls) ? object.msg_type_urls.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): GrantQueueItemSDKType {
+    return {
+      msg_type_urls: Array.isArray(object?.msg_type_urls) ? object.msg_type_urls.map((e: any) => String(e)) : []
+    };
+  },
+  toSDK(message: GrantQueueItem): GrantQueueItemSDKType {
+    const obj: any = {};
+    if (message.msgTypeUrls) {
+      obj.msg_type_urls = message.msgTypeUrls.map(e => e);
+    } else {
+      obj.msg_type_urls = [];
+    }
+    return obj;
+  },
   fromAmino(object: GrantQueueItemAmino): GrantQueueItem {
     return {
       msgTypeUrls: Array.isArray(object?.msg_type_urls) ? object.msg_type_urls.map((e: any) => e) : []
@@ -553,59 +629,3 @@ export const GrantQueueItem = {
   }
 };
 GlobalDecoderRegistry.register(GrantQueueItem.typeUrl, GrantQueueItem);
-export const Authorization_InterfaceDecoder = (input: BinaryReader | Uint8Array): DepositDeploymentAuthorization | GenericAuthorization | SendAuthorization | Any => {
-  const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32(), true);
-  switch (data.typeUrl) {
-    case "/akash.deployment.v1beta1.DepositDeploymentAuthorization":
-      return DepositDeploymentAuthorization.decode(data.value, undefined, true);
-    case "/cosmos.authz.v1beta1.GenericAuthorization":
-      return GenericAuthorization.decode(data.value, undefined, true);
-    case "/cosmos.bank.v1beta1.SendAuthorization":
-      return SendAuthorization.decode(data.value, undefined, true);
-    default:
-      return data;
-  }
-};
-export const Authorization_FromAmino = (content: AnyAmino) => {
-  switch (content.type) {
-    case "/akash.deployment.v1beta1.DepositDeploymentAuthorization":
-      return Any.fromPartial({
-        typeUrl: "/akash.deployment.v1beta1.DepositDeploymentAuthorization",
-        value: DepositDeploymentAuthorization.encode(DepositDeploymentAuthorization.fromPartial(DepositDeploymentAuthorization.fromAmino(content.value))).finish()
-      });
-    case "cosmos-sdk/GenericAuthorization":
-      return Any.fromPartial({
-        typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization",
-        value: GenericAuthorization.encode(GenericAuthorization.fromPartial(GenericAuthorization.fromAmino(content.value))).finish()
-      });
-    case "cosmos-sdk/SendAuthorization":
-      return Any.fromPartial({
-        typeUrl: "/cosmos.bank.v1beta1.SendAuthorization",
-        value: SendAuthorization.encode(SendAuthorization.fromPartial(SendAuthorization.fromAmino(content.value))).finish()
-      });
-    default:
-      return Any.fromAmino(content);
-  }
-};
-export const Authorization_ToAmino = (content: Any) => {
-  switch (content.typeUrl) {
-    case "/akash.deployment.v1beta1.DepositDeploymentAuthorization":
-      return {
-        type: "/akash.deployment.v1beta1.DepositDeploymentAuthorization",
-        value: DepositDeploymentAuthorization.toAmino(DepositDeploymentAuthorization.decode(content.value, undefined))
-      };
-    case "/cosmos.authz.v1beta1.GenericAuthorization":
-      return {
-        type: "cosmos-sdk/GenericAuthorization",
-        value: GenericAuthorization.toAmino(GenericAuthorization.decode(content.value, undefined))
-      };
-    case "/cosmos.bank.v1beta1.SendAuthorization":
-      return {
-        type: "cosmos-sdk/SendAuthorization",
-        value: SendAuthorization.toAmino(SendAuthorization.decode(content.value, undefined))
-      };
-    default:
-      return Any.toAmino(content);
-  }
-};
