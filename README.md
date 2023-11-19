@@ -272,7 +272,7 @@ telescope({
 | option                                    | description                                                     | defaults   |
 | ----------------------------------------- | --------------------------------------------------------------  | ---------- |
 | `interfaces.enabled`                      | enables converters convert between Any type and specific implemented interfaces.                | `true`     |
-| `interfaces.useGlobalDecoderRegistry`                      |    enables GlobalDecoderRegistry and related functions. Highly recommended to enable when dealing with fields with 'accepted_interface' options. Please see 'packages/telescope/__tests__/impl-interfaces.test.ts' for usage.             | `false`     |
+| `interfaces.useGlobalDecoderRegistry`                      |    enables GlobalDecoderRegistry and related functions. Highly recommended to enable when dealing with fields with 'accepted_interface' option. Please see 'packages/telescope/__tests__/impl-interfaces.test.ts' for usage.             | `false`     |
 | `interfaces.useUseInterfacesParams`                 | decides if add `useInterfaces` argument to `decode` and `toAmino` functions.                | `false`     |
 | `interfaces.useByDefault`                 | decides if interface decoders are used by default (default for `useInterfaces` argument to `decode` and `toAmino` functions).                | `true`     |
 | `interfaces.useByDefaultRpc`                 | decides if interface decoders are used by default by the RPC clients.                | `true`     |
