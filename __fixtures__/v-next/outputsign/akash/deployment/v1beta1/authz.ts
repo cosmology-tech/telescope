@@ -1,5 +1,6 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
@@ -15,6 +16,21 @@ export interface DepositDeploymentAuthorization {
 export interface DepositDeploymentAuthorizationProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.DepositDeploymentAuthorization";
   value: Uint8Array;
+}
+/**
+ * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
+ * the granter's account for a deployment.
+ */
+export interface DepositDeploymentAuthorizationAmino {
+  /**
+   * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
+   * the purpose of deployment.
+   */
+  spend_limit?: CoinAmino | undefined;
+}
+export interface DepositDeploymentAuthorizationAminoMsg {
+  type: "/akash.deployment.v1beta1.DepositDeploymentAuthorization";
+  value: DepositDeploymentAuthorizationAmino;
 }
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
@@ -50,6 +66,13 @@ export const DepositDeploymentAuthorization = {
           reader.skipType(tag & 7);
           break;
       }
+    }
+    return message;
+  },
+  fromPartial<I extends Exact<Partial<DepositDeploymentAuthorization>, I>>(object: I): DepositDeploymentAuthorization {
+    const message = createBaseDepositDeploymentAuthorization();
+    if (object.spendLimit !== undefined && object.spendLimit !== null) {
+      message.spendLimit = Coin.fromPartial(object.spendLimit);
     }
     return message;
   },

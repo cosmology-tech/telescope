@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.store.v1beta1";
 export interface Node {
   children: Child[];
@@ -6,6 +7,13 @@ export interface Node {
 export interface NodeProtoMsg {
   typeUrl: "/osmosis.store.v1beta1.Node";
   value: Uint8Array;
+}
+export interface NodeAmino {
+  children: ChildAmino[];
+}
+export interface NodeAminoMsg {
+  type: "osmosis/store/node";
+  value: NodeAmino;
 }
 export interface NodeSDKType {
   children: ChildSDKType[];
@@ -18,6 +26,14 @@ export interface ChildProtoMsg {
   typeUrl: "/osmosis.store.v1beta1.Child";
   value: Uint8Array;
 }
+export interface ChildAmino {
+  index: Uint8Array;
+  accumulation: string;
+}
+export interface ChildAminoMsg {
+  type: "osmosis/store/child";
+  value: ChildAmino;
+}
 export interface ChildSDKType {
   index: Uint8Array;
   accumulation: string;
@@ -28,6 +44,13 @@ export interface Leaf {
 export interface LeafProtoMsg {
   typeUrl: "/osmosis.store.v1beta1.Leaf";
   value: Uint8Array;
+}
+export interface LeafAmino {
+  leaf?: ChildAmino;
+}
+export interface LeafAminoMsg {
+  type: "osmosis/store/leaf";
+  value: LeafAmino;
 }
 export interface LeafSDKType {
   leaf?: ChildSDKType;
@@ -61,6 +84,34 @@ export const Node = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<Node>): Node {
+    const message = createBaseNode();
+    message.children = object.children?.map(e => Child.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: NodeAmino): Node {
+    return {
+      children: Array.isArray(object?.children) ? object.children.map((e: any) => Child.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Node): NodeAmino {
+    const obj: any = {};
+    if (message.children) {
+      obj.children = message.children.map(e => e ? Child.toAmino(e) : undefined);
+    } else {
+      obj.children = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: NodeAminoMsg): Node {
+    return Node.fromAmino(object.value);
+  },
+  toAminoMsg(message: Node): NodeAminoMsg {
+    return {
+      type: "osmosis/store/node",
+      value: Node.toAmino(message)
+    };
   },
   fromProtoMsg(message: NodeProtoMsg): Node {
     return Node.decode(message.value);
@@ -112,6 +163,33 @@ export const Child = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<Child>): Child {
+    const message = createBaseChild();
+    message.index = object.index ?? new Uint8Array();
+    message.accumulation = object.accumulation ?? "";
+    return message;
+  },
+  fromAmino(object: ChildAmino): Child {
+    return {
+      index: object.index,
+      accumulation: object.accumulation
+    };
+  },
+  toAmino(message: Child): ChildAmino {
+    const obj: any = {};
+    obj.index = message.index;
+    obj.accumulation = message.accumulation;
+    return obj;
+  },
+  fromAminoMsg(object: ChildAminoMsg): Child {
+    return Child.fromAmino(object.value);
+  },
+  toAminoMsg(message: Child): ChildAminoMsg {
+    return {
+      type: "osmosis/store/child",
+      value: Child.toAmino(message)
+    };
+  },
   fromProtoMsg(message: ChildProtoMsg): Child {
     return Child.decode(message.value);
   },
@@ -154,6 +232,32 @@ export const Leaf = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<Leaf>): Leaf {
+    const message = createBaseLeaf();
+    if (object.leaf !== undefined && object.leaf !== null) {
+      message.leaf = Child.fromPartial(object.leaf);
+    }
+    return message;
+  },
+  fromAmino(object: LeafAmino): Leaf {
+    return {
+      leaf: object?.leaf ? Child.fromAmino(object.leaf) : undefined
+    };
+  },
+  toAmino(message: Leaf): LeafAmino {
+    const obj: any = {};
+    obj.leaf = message.leaf ? Child.toAmino(message.leaf) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: LeafAminoMsg): Leaf {
+    return Leaf.fromAmino(object.value);
+  },
+  toAminoMsg(message: Leaf): LeafAminoMsg {
+    return {
+      type: "osmosis/store/leaf",
+      value: Leaf.toAmino(message)
+    };
   },
   fromProtoMsg(message: LeafProtoMsg): Leaf {
     return Leaf.decode(message.value);

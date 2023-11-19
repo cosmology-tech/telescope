@@ -1,10 +1,16 @@
-import { EpochInfo, EpochInfoSDKType } from "./genesis";
+import { EpochInfo, EpochInfoAmino, EpochInfoSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.epochs.v1beta1";
 export interface QueryEpochsInfoRequest {}
 export interface QueryEpochsInfoRequestProtoMsg {
   typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoRequest";
   value: Uint8Array;
+}
+export interface QueryEpochsInfoRequestAmino {}
+export interface QueryEpochsInfoRequestAminoMsg {
+  type: "osmosis/epochs/query-epochs-info-request";
+  value: QueryEpochsInfoRequestAmino;
 }
 export interface QueryEpochsInfoRequestSDKType {}
 export interface QueryEpochsInfoResponse {
@@ -13,6 +19,13 @@ export interface QueryEpochsInfoResponse {
 export interface QueryEpochsInfoResponseProtoMsg {
   typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoResponse";
   value: Uint8Array;
+}
+export interface QueryEpochsInfoResponseAmino {
+  epochs: EpochInfoAmino[];
+}
+export interface QueryEpochsInfoResponseAminoMsg {
+  type: "osmosis/epochs/query-epochs-info-response";
+  value: QueryEpochsInfoResponseAmino;
 }
 export interface QueryEpochsInfoResponseSDKType {
   epochs: EpochInfoSDKType[];
@@ -24,6 +37,13 @@ export interface QueryCurrentEpochRequestProtoMsg {
   typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochRequest";
   value: Uint8Array;
 }
+export interface QueryCurrentEpochRequestAmino {
+  identifier: string;
+}
+export interface QueryCurrentEpochRequestAminoMsg {
+  type: "osmosis/epochs/query-current-epoch-request";
+  value: QueryCurrentEpochRequestAmino;
+}
 export interface QueryCurrentEpochRequestSDKType {
   identifier: string;
 }
@@ -33,6 +53,13 @@ export interface QueryCurrentEpochResponse {
 export interface QueryCurrentEpochResponseProtoMsg {
   typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochResponse";
   value: Uint8Array;
+}
+export interface QueryCurrentEpochResponseAmino {
+  current_epoch: string;
+}
+export interface QueryCurrentEpochResponseAminoMsg {
+  type: "osmosis/epochs/query-current-epoch-response";
+  value: QueryCurrentEpochResponseAmino;
 }
 export interface QueryCurrentEpochResponseSDKType {
   current_epoch: bigint;
@@ -58,6 +85,26 @@ export const QueryEpochsInfoRequest = {
       }
     }
     return message;
+  },
+  fromPartial(_: DeepPartial<QueryEpochsInfoRequest>): QueryEpochsInfoRequest {
+    const message = createBaseQueryEpochsInfoRequest();
+    return message;
+  },
+  fromAmino(_: QueryEpochsInfoRequestAmino): QueryEpochsInfoRequest {
+    return {};
+  },
+  toAmino(_: QueryEpochsInfoRequest): QueryEpochsInfoRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryEpochsInfoRequestAminoMsg): QueryEpochsInfoRequest {
+    return QueryEpochsInfoRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryEpochsInfoRequest): QueryEpochsInfoRequestAminoMsg {
+    return {
+      type: "osmosis/epochs/query-epochs-info-request",
+      value: QueryEpochsInfoRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryEpochsInfoRequestProtoMsg): QueryEpochsInfoRequest {
     return QueryEpochsInfoRequest.decode(message.value);
@@ -102,6 +149,34 @@ export const QueryEpochsInfoResponse = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<QueryEpochsInfoResponse>): QueryEpochsInfoResponse {
+    const message = createBaseQueryEpochsInfoResponse();
+    message.epochs = object.epochs?.map(e => EpochInfo.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: QueryEpochsInfoResponseAmino): QueryEpochsInfoResponse {
+    return {
+      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: QueryEpochsInfoResponse): QueryEpochsInfoResponseAmino {
+    const obj: any = {};
+    if (message.epochs) {
+      obj.epochs = message.epochs.map(e => e ? EpochInfo.toAmino(e) : undefined);
+    } else {
+      obj.epochs = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: QueryEpochsInfoResponseAminoMsg): QueryEpochsInfoResponse {
+    return QueryEpochsInfoResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryEpochsInfoResponse): QueryEpochsInfoResponseAminoMsg {
+    return {
+      type: "osmosis/epochs/query-epochs-info-response",
+      value: QueryEpochsInfoResponse.toAmino(message)
+    };
+  },
   fromProtoMsg(message: QueryEpochsInfoResponseProtoMsg): QueryEpochsInfoResponse {
     return QueryEpochsInfoResponse.decode(message.value);
   },
@@ -145,6 +220,30 @@ export const QueryCurrentEpochRequest = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<QueryCurrentEpochRequest>): QueryCurrentEpochRequest {
+    const message = createBaseQueryCurrentEpochRequest();
+    message.identifier = object.identifier ?? "";
+    return message;
+  },
+  fromAmino(object: QueryCurrentEpochRequestAmino): QueryCurrentEpochRequest {
+    return {
+      identifier: object.identifier
+    };
+  },
+  toAmino(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestAmino {
+    const obj: any = {};
+    obj.identifier = message.identifier;
+    return obj;
+  },
+  fromAminoMsg(object: QueryCurrentEpochRequestAminoMsg): QueryCurrentEpochRequest {
+    return QueryCurrentEpochRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestAminoMsg {
+    return {
+      type: "osmosis/epochs/query-current-epoch-request",
+      value: QueryCurrentEpochRequest.toAmino(message)
+    };
+  },
   fromProtoMsg(message: QueryCurrentEpochRequestProtoMsg): QueryCurrentEpochRequest {
     return QueryCurrentEpochRequest.decode(message.value);
   },
@@ -187,6 +286,32 @@ export const QueryCurrentEpochResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<QueryCurrentEpochResponse>): QueryCurrentEpochResponse {
+    const message = createBaseQueryCurrentEpochResponse();
+    if (object.currentEpoch !== undefined && object.currentEpoch !== null) {
+      message.currentEpoch = BigInt(object.currentEpoch.toString());
+    }
+    return message;
+  },
+  fromAmino(object: QueryCurrentEpochResponseAmino): QueryCurrentEpochResponse {
+    return {
+      currentEpoch: BigInt(object.current_epoch)
+    };
+  },
+  toAmino(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseAmino {
+    const obj: any = {};
+    obj.current_epoch = message.currentEpoch ? message.currentEpoch.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryCurrentEpochResponseAminoMsg): QueryCurrentEpochResponse {
+    return QueryCurrentEpochResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseAminoMsg {
+    return {
+      type: "osmosis/epochs/query-current-epoch-response",
+      value: QueryCurrentEpochResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryCurrentEpochResponseProtoMsg): QueryCurrentEpochResponse {
     return QueryCurrentEpochResponse.decode(message.value);

@@ -1,5 +1,6 @@
-import { FeeToken, FeeTokenSDKType } from "./feetoken";
+import { FeeToken, FeeTokenAmino, FeeTokenSDKType } from "./feetoken";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /** GenesisState defines the txfees module's genesis state. */
 export interface GenesisState {
@@ -9,6 +10,15 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState defines the txfees module's genesis state. */
+export interface GenesisStateAmino {
+  basedenom: string;
+  feetokens: FeeTokenAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "osmosis/txfees/genesis-state";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the txfees module's genesis state. */
 export interface GenesisStateSDKType {
@@ -51,6 +61,37 @@ export const GenesisState = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
+    const message = createBaseGenesisState();
+    message.basedenom = object.basedenom ?? "";
+    message.feetokens = object.feetokens?.map(e => FeeToken.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      basedenom: object.basedenom,
+      feetokens: Array.isArray(object?.feetokens) ? object.feetokens.map((e: any) => FeeToken.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.basedenom = message.basedenom;
+    if (message.feetokens) {
+      obj.feetokens = message.feetokens.map(e => e ? FeeToken.toAmino(e) : undefined);
+    } else {
+      obj.feetokens = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "osmosis/txfees/genesis-state",
+      value: GenesisState.toAmino(message)
+    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

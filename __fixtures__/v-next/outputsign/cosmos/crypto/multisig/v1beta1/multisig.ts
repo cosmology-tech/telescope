@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { DeepPartial } from "../../../../helpers";
 export const protobufPackage = "cosmos.crypto.multisig.v1beta1";
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
@@ -11,6 +12,18 @@ export interface MultiSignature {
 export interface MultiSignatureProtoMsg {
   typeUrl: "/cosmos.crypto.multisig.v1beta1.MultiSignature";
   value: Uint8Array;
+}
+/**
+ * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
+ * See cosmos.tx.v1betata1.ModeInfo.Multi for how to specify which signers
+ * signed and with which modes.
+ */
+export interface MultiSignatureAmino {
+  signatures: Uint8Array[];
+}
+export interface MultiSignatureAminoMsg {
+  type: "cosmos-sdk/MultiSignature";
+  value: MultiSignatureAmino;
 }
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
@@ -33,6 +46,20 @@ export interface CompactBitArray {
 export interface CompactBitArrayProtoMsg {
   typeUrl: "/cosmos.crypto.multisig.v1beta1.CompactBitArray";
   value: Uint8Array;
+}
+/**
+ * CompactBitArray is an implementation of a space efficient bit array.
+ * This is used to ensure that the encoded data takes up a minimal amount of
+ * space after proto encoding.
+ * This is not thread safe, and is not intended for concurrent usage.
+ */
+export interface CompactBitArrayAmino {
+  extra_bits_stored: number;
+  elems: Uint8Array;
+}
+export interface CompactBitArrayAminoMsg {
+  type: "cosmos-sdk/CompactBitArray";
+  value: CompactBitArrayAmino;
 }
 /**
  * CompactBitArray is an implementation of a space efficient bit array.
@@ -73,6 +100,34 @@ export const MultiSignature = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<MultiSignature>): MultiSignature {
+    const message = createBaseMultiSignature();
+    message.signatures = object.signatures?.map(e => e) || [];
+    return message;
+  },
+  fromAmino(object: MultiSignatureAmino): MultiSignature {
+    return {
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: MultiSignature): MultiSignatureAmino {
+    const obj: any = {};
+    if (message.signatures) {
+      obj.signatures = message.signatures.map(e => e);
+    } else {
+      obj.signatures = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MultiSignatureAminoMsg): MultiSignature {
+    return MultiSignature.fromAmino(object.value);
+  },
+  toAminoMsg(message: MultiSignature): MultiSignatureAminoMsg {
+    return {
+      type: "cosmos-sdk/MultiSignature",
+      value: MultiSignature.toAmino(message)
+    };
   },
   fromProtoMsg(message: MultiSignatureProtoMsg): MultiSignature {
     return MultiSignature.decode(message.value);
@@ -123,6 +178,33 @@ export const CompactBitArray = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<CompactBitArray>): CompactBitArray {
+    const message = createBaseCompactBitArray();
+    message.extraBitsStored = object.extraBitsStored ?? 0;
+    message.elems = object.elems ?? new Uint8Array();
+    return message;
+  },
+  fromAmino(object: CompactBitArrayAmino): CompactBitArray {
+    return {
+      extraBitsStored: object.extra_bits_stored,
+      elems: object.elems
+    };
+  },
+  toAmino(message: CompactBitArray): CompactBitArrayAmino {
+    const obj: any = {};
+    obj.extra_bits_stored = message.extraBitsStored;
+    obj.elems = message.elems;
+    return obj;
+  },
+  fromAminoMsg(object: CompactBitArrayAminoMsg): CompactBitArray {
+    return CompactBitArray.fromAmino(object.value);
+  },
+  toAminoMsg(message: CompactBitArray): CompactBitArrayAminoMsg {
+    return {
+      type: "cosmos-sdk/CompactBitArray",
+      value: CompactBitArray.toAmino(message)
+    };
   },
   fromProtoMsg(message: CompactBitArrayProtoMsg): CompactBitArray {
     return CompactBitArray.decode(message.value);

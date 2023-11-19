@@ -1,5 +1,6 @@
-import { Any, AnySDKType } from "../../../../google/protobuf/any";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.core.client.v1";
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClient {
@@ -18,6 +19,22 @@ export interface MsgCreateClientProtoMsg {
   value: Uint8Array;
 }
 /** MsgCreateClient defines a message to create an IBC client */
+export interface MsgCreateClientAmino {
+  /** light client state */
+  client_state?: AnyAmino;
+  /**
+   * consensus state associated with the client that corresponds to a given
+   * height.
+   */
+  consensus_state?: AnyAmino;
+  /** signer address */
+  signer: string;
+}
+export interface MsgCreateClientAminoMsg {
+  type: "cosmos-sdk/MsgCreateClient";
+  value: MsgCreateClientAmino;
+}
+/** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClientSDKType {
   client_state?: AnySDKType;
   consensus_state?: AnySDKType;
@@ -28,6 +45,12 @@ export interface MsgCreateClientResponse {}
 export interface MsgCreateClientResponseProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgCreateClientResponse";
   value: Uint8Array;
+}
+/** MsgCreateClientResponse defines the Msg/CreateClient response type. */
+export interface MsgCreateClientResponseAmino {}
+export interface MsgCreateClientResponseAminoMsg {
+  type: "cosmos-sdk/MsgCreateClientResponse";
+  value: MsgCreateClientResponseAmino;
 }
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
 export interface MsgCreateClientResponseSDKType {}
@@ -51,6 +74,22 @@ export interface MsgUpdateClientProtoMsg {
  * MsgUpdateClient defines an sdk.Msg to update a IBC client state using
  * the given header.
  */
+export interface MsgUpdateClientAmino {
+  /** client unique identifier */
+  client_id: string;
+  /** header to update the light client */
+  header?: AnyAmino;
+  /** signer address */
+  signer: string;
+}
+export interface MsgUpdateClientAminoMsg {
+  type: "cosmos-sdk/MsgUpdateClient";
+  value: MsgUpdateClientAmino;
+}
+/**
+ * MsgUpdateClient defines an sdk.Msg to update a IBC client state using
+ * the given header.
+ */
 export interface MsgUpdateClientSDKType {
   client_id: string;
   header?: AnySDKType;
@@ -61,6 +100,12 @@ export interface MsgUpdateClientResponse {}
 export interface MsgUpdateClientResponseProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgUpdateClientResponse";
   value: Uint8Array;
+}
+/** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
+export interface MsgUpdateClientResponseAmino {}
+export interface MsgUpdateClientResponseAminoMsg {
+  type: "cosmos-sdk/MsgUpdateClientResponse";
+  value: MsgUpdateClientResponseAmino;
 }
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
 export interface MsgUpdateClientResponseSDKType {}
@@ -93,6 +138,31 @@ export interface MsgUpgradeClientProtoMsg {
  * MsgUpgradeClient defines an sdk.Msg to upgrade an IBC client to a new client
  * state
  */
+export interface MsgUpgradeClientAmino {
+  /** client unique identifier */
+  client_id: string;
+  /** upgraded client state */
+  client_state?: AnyAmino;
+  /**
+   * upgraded consensus state, only contains enough information to serve as a
+   * basis of trust in update logic
+   */
+  consensus_state?: AnyAmino;
+  /** proof that old chain committed to new client */
+  proof_upgrade_client: Uint8Array;
+  /** proof that old chain committed to new consensus state */
+  proof_upgrade_consensus_state: Uint8Array;
+  /** signer address */
+  signer: string;
+}
+export interface MsgUpgradeClientAminoMsg {
+  type: "cosmos-sdk/MsgUpgradeClient";
+  value: MsgUpgradeClientAmino;
+}
+/**
+ * MsgUpgradeClient defines an sdk.Msg to upgrade an IBC client to a new client
+ * state
+ */
 export interface MsgUpgradeClientSDKType {
   client_id: string;
   client_state?: AnySDKType;
@@ -106,6 +176,12 @@ export interface MsgUpgradeClientResponse {}
 export interface MsgUpgradeClientResponseProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgUpgradeClientResponse";
   value: Uint8Array;
+}
+/** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
+export interface MsgUpgradeClientResponseAmino {}
+export interface MsgUpgradeClientResponseAminoMsg {
+  type: "cosmos-sdk/MsgUpgradeClientResponse";
+  value: MsgUpgradeClientResponseAmino;
 }
 /** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
 export interface MsgUpgradeClientResponseSDKType {}
@@ -129,6 +205,22 @@ export interface MsgSubmitMisbehaviourProtoMsg {
  * MsgSubmitMisbehaviour defines an sdk.Msg type that submits Evidence for
  * light client misbehaviour.
  */
+export interface MsgSubmitMisbehaviourAmino {
+  /** client unique identifier */
+  client_id: string;
+  /** misbehaviour used for freezing the light client */
+  misbehaviour?: AnyAmino;
+  /** signer address */
+  signer: string;
+}
+export interface MsgSubmitMisbehaviourAminoMsg {
+  type: "cosmos-sdk/MsgSubmitMisbehaviour";
+  value: MsgSubmitMisbehaviourAmino;
+}
+/**
+ * MsgSubmitMisbehaviour defines an sdk.Msg type that submits Evidence for
+ * light client misbehaviour.
+ */
 export interface MsgSubmitMisbehaviourSDKType {
   client_id: string;
   misbehaviour?: AnySDKType;
@@ -142,6 +234,15 @@ export interface MsgSubmitMisbehaviourResponse {}
 export interface MsgSubmitMisbehaviourResponseProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviourResponse";
   value: Uint8Array;
+}
+/**
+ * MsgSubmitMisbehaviourResponse defines the Msg/SubmitMisbehaviour response
+ * type.
+ */
+export interface MsgSubmitMisbehaviourResponseAmino {}
+export interface MsgSubmitMisbehaviourResponseAminoMsg {
+  type: "cosmos-sdk/MsgSubmitMisbehaviourResponse";
+  value: MsgSubmitMisbehaviourResponseAmino;
 }
 /**
  * MsgSubmitMisbehaviourResponse defines the Msg/SubmitMisbehaviour response
@@ -192,6 +293,40 @@ export const MsgCreateClient = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<MsgCreateClient>): MsgCreateClient {
+    const message = createBaseMsgCreateClient();
+    if (object.clientState !== undefined && object.clientState !== null) {
+      message.clientState = Any.fromPartial(object.clientState);
+    }
+    if (object.consensusState !== undefined && object.consensusState !== null) {
+      message.consensusState = Any.fromPartial(object.consensusState);
+    }
+    message.signer = object.signer ?? "";
+    return message;
+  },
+  fromAmino(object: MsgCreateClientAmino): MsgCreateClient {
+    return {
+      clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
+      consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
+      signer: object.signer
+    };
+  },
+  toAmino(message: MsgCreateClient): MsgCreateClientAmino {
+    const obj: any = {};
+    obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
+    obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateClientAminoMsg): MsgCreateClient {
+    return MsgCreateClient.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCreateClient): MsgCreateClientAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgCreateClient",
+      value: MsgCreateClient.toAmino(message)
+    };
+  },
   fromProtoMsg(message: MsgCreateClientProtoMsg): MsgCreateClient {
     return MsgCreateClient.decode(message.value);
   },
@@ -226,6 +361,26 @@ export const MsgCreateClientResponse = {
       }
     }
     return message;
+  },
+  fromPartial(_: DeepPartial<MsgCreateClientResponse>): MsgCreateClientResponse {
+    const message = createBaseMsgCreateClientResponse();
+    return message;
+  },
+  fromAmino(_: MsgCreateClientResponseAmino): MsgCreateClientResponse {
+    return {};
+  },
+  toAmino(_: MsgCreateClientResponse): MsgCreateClientResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateClientResponseAminoMsg): MsgCreateClientResponse {
+    return MsgCreateClientResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCreateClientResponse): MsgCreateClientResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgCreateClientResponse",
+      value: MsgCreateClientResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgCreateClientResponseProtoMsg): MsgCreateClientResponse {
     return MsgCreateClientResponse.decode(message.value);
@@ -284,6 +439,38 @@ export const MsgUpdateClient = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<MsgUpdateClient>): MsgUpdateClient {
+    const message = createBaseMsgUpdateClient();
+    message.clientId = object.clientId ?? "";
+    if (object.header !== undefined && object.header !== null) {
+      message.header = Any.fromPartial(object.header);
+    }
+    message.signer = object.signer ?? "";
+    return message;
+  },
+  fromAmino(object: MsgUpdateClientAmino): MsgUpdateClient {
+    return {
+      clientId: object.client_id,
+      header: object?.header ? Any.fromAmino(object.header) : undefined,
+      signer: object.signer
+    };
+  },
+  toAmino(message: MsgUpdateClient): MsgUpdateClientAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    obj.header = message.header ? Any.toAmino(message.header) : undefined;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateClientAminoMsg): MsgUpdateClient {
+    return MsgUpdateClient.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgUpdateClient): MsgUpdateClientAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgUpdateClient",
+      value: MsgUpdateClient.toAmino(message)
+    };
+  },
   fromProtoMsg(message: MsgUpdateClientProtoMsg): MsgUpdateClient {
     return MsgUpdateClient.decode(message.value);
   },
@@ -318,6 +505,26 @@ export const MsgUpdateClientResponse = {
       }
     }
     return message;
+  },
+  fromPartial(_: DeepPartial<MsgUpdateClientResponse>): MsgUpdateClientResponse {
+    const message = createBaseMsgUpdateClientResponse();
+    return message;
+  },
+  fromAmino(_: MsgUpdateClientResponseAmino): MsgUpdateClientResponse {
+    return {};
+  },
+  toAmino(_: MsgUpdateClientResponse): MsgUpdateClientResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateClientResponseAminoMsg): MsgUpdateClientResponse {
+    return MsgUpdateClientResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgUpdateClientResponse): MsgUpdateClientResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgUpdateClientResponse",
+      value: MsgUpdateClientResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgUpdateClientResponseProtoMsg): MsgUpdateClientResponse {
     return MsgUpdateClientResponse.decode(message.value);
@@ -397,6 +604,49 @@ export const MsgUpgradeClient = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<MsgUpgradeClient>): MsgUpgradeClient {
+    const message = createBaseMsgUpgradeClient();
+    message.clientId = object.clientId ?? "";
+    if (object.clientState !== undefined && object.clientState !== null) {
+      message.clientState = Any.fromPartial(object.clientState);
+    }
+    if (object.consensusState !== undefined && object.consensusState !== null) {
+      message.consensusState = Any.fromPartial(object.consensusState);
+    }
+    message.proofUpgradeClient = object.proofUpgradeClient ?? new Uint8Array();
+    message.proofUpgradeConsensusState = object.proofUpgradeConsensusState ?? new Uint8Array();
+    message.signer = object.signer ?? "";
+    return message;
+  },
+  fromAmino(object: MsgUpgradeClientAmino): MsgUpgradeClient {
+    return {
+      clientId: object.client_id,
+      clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
+      consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
+      proofUpgradeClient: object.proof_upgrade_client,
+      proofUpgradeConsensusState: object.proof_upgrade_consensus_state,
+      signer: object.signer
+    };
+  },
+  toAmino(message: MsgUpgradeClient): MsgUpgradeClientAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
+    obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
+    obj.proof_upgrade_client = message.proofUpgradeClient;
+    obj.proof_upgrade_consensus_state = message.proofUpgradeConsensusState;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpgradeClientAminoMsg): MsgUpgradeClient {
+    return MsgUpgradeClient.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgUpgradeClient): MsgUpgradeClientAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgUpgradeClient",
+      value: MsgUpgradeClient.toAmino(message)
+    };
+  },
   fromProtoMsg(message: MsgUpgradeClientProtoMsg): MsgUpgradeClient {
     return MsgUpgradeClient.decode(message.value);
   },
@@ -431,6 +681,26 @@ export const MsgUpgradeClientResponse = {
       }
     }
     return message;
+  },
+  fromPartial(_: DeepPartial<MsgUpgradeClientResponse>): MsgUpgradeClientResponse {
+    const message = createBaseMsgUpgradeClientResponse();
+    return message;
+  },
+  fromAmino(_: MsgUpgradeClientResponseAmino): MsgUpgradeClientResponse {
+    return {};
+  },
+  toAmino(_: MsgUpgradeClientResponse): MsgUpgradeClientResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpgradeClientResponseAminoMsg): MsgUpgradeClientResponse {
+    return MsgUpgradeClientResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgUpgradeClientResponse): MsgUpgradeClientResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgUpgradeClientResponse",
+      value: MsgUpgradeClientResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgUpgradeClientResponseProtoMsg): MsgUpgradeClientResponse {
     return MsgUpgradeClientResponse.decode(message.value);
@@ -489,6 +759,38 @@ export const MsgSubmitMisbehaviour = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<MsgSubmitMisbehaviour>): MsgSubmitMisbehaviour {
+    const message = createBaseMsgSubmitMisbehaviour();
+    message.clientId = object.clientId ?? "";
+    if (object.misbehaviour !== undefined && object.misbehaviour !== null) {
+      message.misbehaviour = Any.fromPartial(object.misbehaviour);
+    }
+    message.signer = object.signer ?? "";
+    return message;
+  },
+  fromAmino(object: MsgSubmitMisbehaviourAmino): MsgSubmitMisbehaviour {
+    return {
+      clientId: object.client_id,
+      misbehaviour: object?.misbehaviour ? Any.fromAmino(object.misbehaviour) : undefined,
+      signer: object.signer
+    };
+  },
+  toAmino(message: MsgSubmitMisbehaviour): MsgSubmitMisbehaviourAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    obj.misbehaviour = message.misbehaviour ? Any.toAmino(message.misbehaviour) : undefined;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgSubmitMisbehaviourAminoMsg): MsgSubmitMisbehaviour {
+    return MsgSubmitMisbehaviour.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSubmitMisbehaviour): MsgSubmitMisbehaviourAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgSubmitMisbehaviour",
+      value: MsgSubmitMisbehaviour.toAmino(message)
+    };
+  },
   fromProtoMsg(message: MsgSubmitMisbehaviourProtoMsg): MsgSubmitMisbehaviour {
     return MsgSubmitMisbehaviour.decode(message.value);
   },
@@ -523,6 +825,26 @@ export const MsgSubmitMisbehaviourResponse = {
       }
     }
     return message;
+  },
+  fromPartial(_: DeepPartial<MsgSubmitMisbehaviourResponse>): MsgSubmitMisbehaviourResponse {
+    const message = createBaseMsgSubmitMisbehaviourResponse();
+    return message;
+  },
+  fromAmino(_: MsgSubmitMisbehaviourResponseAmino): MsgSubmitMisbehaviourResponse {
+    return {};
+  },
+  toAmino(_: MsgSubmitMisbehaviourResponse): MsgSubmitMisbehaviourResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgSubmitMisbehaviourResponseAminoMsg): MsgSubmitMisbehaviourResponse {
+    return MsgSubmitMisbehaviourResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSubmitMisbehaviourResponse): MsgSubmitMisbehaviourResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgSubmitMisbehaviourResponse",
+      value: MsgSubmitMisbehaviourResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgSubmitMisbehaviourResponseProtoMsg): MsgSubmitMisbehaviourResponse {
     return MsgSubmitMisbehaviourResponse.decode(message.value);

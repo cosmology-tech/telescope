@@ -1,5 +1,6 @@
-import { Any, AnySDKType } from "../protobuf/any";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /** Source information used to create a Service Config */
 export interface SourceInfo {
@@ -9,6 +10,15 @@ export interface SourceInfo {
 export interface SourceInfoProtoMsg {
   typeUrl: "/google.api.SourceInfo";
   value: Uint8Array;
+}
+/** Source information used to create a Service Config */
+export interface SourceInfoAmino {
+  /** All files used during config generation. */
+  source_files: AnyAmino[];
+}
+export interface SourceInfoAminoMsg {
+  type: "/google.api.SourceInfo";
+  value: SourceInfoAmino;
 }
 /** Source information used to create a Service Config */
 export interface SourceInfoSDKType {
@@ -43,6 +53,28 @@ export const SourceInfo = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<SourceInfo>): SourceInfo {
+    const message = createBaseSourceInfo();
+    message.sourceFiles = object.sourceFiles?.map(e => Any.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: SourceInfoAmino): SourceInfo {
+    return {
+      sourceFiles: Array.isArray(object?.source_files) ? object.source_files.map((e: any) => Any.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: SourceInfo): SourceInfoAmino {
+    const obj: any = {};
+    if (message.sourceFiles) {
+      obj.source_files = message.sourceFiles.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.source_files = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: SourceInfoAminoMsg): SourceInfo {
+    return SourceInfo.fromAmino(object.value);
   },
   fromProtoMsg(message: SourceInfoProtoMsg): SourceInfo {
     return SourceInfo.decode(message.value);

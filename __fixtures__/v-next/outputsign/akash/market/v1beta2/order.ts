@@ -1,5 +1,6 @@
-import { GroupSpec, GroupSpecSDKType } from "../../deployment/v1beta2/groupspec";
+import { GroupSpec, GroupSpecAmino, GroupSpecSDKType } from "../../deployment/v1beta2/groupspec";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial, Exact, isSet } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of order */
 export enum Order_State {
@@ -14,6 +15,7 @@ export enum Order_State {
   UNRECOGNIZED = -1,
 }
 export const Order_StateSDKType = Order_State;
+export const Order_StateAmino = Order_State;
 export function order_StateFromJSON(object: any): Order_State {
   switch (object) {
     case 0:
@@ -61,6 +63,17 @@ export interface OrderIDProtoMsg {
   value: Uint8Array;
 }
 /** OrderID stores owner and all other seq numbers */
+export interface OrderIDAmino {
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
+}
+export interface OrderIDAminoMsg {
+  type: "/akash.market.v1beta2.OrderID";
+  value: OrderIDAmino;
+}
+/** OrderID stores owner and all other seq numbers */
 export interface OrderIDSDKType {
   owner: string;
   dseq: bigint;
@@ -77,6 +90,17 @@ export interface Order {
 export interface OrderProtoMsg {
   typeUrl: "/akash.market.v1beta2.Order";
   value: Uint8Array;
+}
+/** Order stores orderID, state of order and other details */
+export interface OrderAmino {
+  order_id?: OrderIDAmino;
+  state: Order_State;
+  spec?: GroupSpecAmino;
+  created_at: string;
+}
+export interface OrderAminoMsg {
+  type: "/akash.market.v1beta2.Order";
+  value: OrderAmino;
 }
 /** Order stores orderID, state of order and other details */
 export interface OrderSDKType {
@@ -96,6 +120,18 @@ export interface OrderFilters {
 export interface OrderFiltersProtoMsg {
   typeUrl: "/akash.market.v1beta2.OrderFilters";
   value: Uint8Array;
+}
+/** OrderFilters defines flags for order list filter */
+export interface OrderFiltersAmino {
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
+  state: string;
+}
+export interface OrderFiltersAminoMsg {
+  type: "/akash.market.v1beta2.OrderFilters";
+  value: OrderFiltersAmino;
 }
 /** OrderFilters defines flags for order list filter */
 export interface OrderFiltersSDKType {
@@ -155,6 +191,35 @@ export const OrderID = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<OrderID>, I>>(object: I): OrderID {
+    const message = createBaseOrderID();
+    message.owner = object.owner ?? "";
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq.toString());
+    }
+    message.gseq = object.gseq ?? 0;
+    message.oseq = object.oseq ?? 0;
+    return message;
+  },
+  fromAmino(object: OrderIDAmino): OrderID {
+    return {
+      owner: object.owner,
+      dseq: BigInt(object.dseq),
+      gseq: object.gseq,
+      oseq: object.oseq
+    };
+  },
+  toAmino(message: OrderID): OrderIDAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.gseq = message.gseq;
+    obj.oseq = message.oseq;
+    return obj;
+  },
+  fromAminoMsg(object: OrderIDAminoMsg): OrderID {
+    return OrderID.fromAmino(object.value);
   },
   fromProtoMsg(message: OrderIDProtoMsg): OrderID {
     return OrderID.decode(message.value);
@@ -219,6 +284,39 @@ export const Order = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<Order>, I>>(object: I): Order {
+    const message = createBaseOrder();
+    if (object.orderId !== undefined && object.orderId !== null) {
+      message.orderId = OrderID.fromPartial(object.orderId);
+    }
+    message.state = object.state ?? 0;
+    if (object.spec !== undefined && object.spec !== null) {
+      message.spec = GroupSpec.fromPartial(object.spec);
+    }
+    if (object.createdAt !== undefined && object.createdAt !== null) {
+      message.createdAt = BigInt(object.createdAt.toString());
+    }
+    return message;
+  },
+  fromAmino(object: OrderAmino): Order {
+    return {
+      orderId: object?.order_id ? OrderID.fromAmino(object.order_id) : undefined,
+      state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
+      spec: object?.spec ? GroupSpec.fromAmino(object.spec) : undefined,
+      createdAt: BigInt(object.created_at)
+    };
+  },
+  toAmino(message: Order): OrderAmino {
+    const obj: any = {};
+    obj.order_id = message.orderId ? OrderID.toAmino(message.orderId) : undefined;
+    obj.state = message.state;
+    obj.spec = message.spec ? GroupSpec.toAmino(message.spec) : undefined;
+    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: OrderAminoMsg): Order {
+    return Order.fromAmino(object.value);
   },
   fromProtoMsg(message: OrderProtoMsg): Order {
     return Order.decode(message.value);
@@ -290,6 +388,38 @@ export const OrderFilters = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<OrderFilters>, I>>(object: I): OrderFilters {
+    const message = createBaseOrderFilters();
+    message.owner = object.owner ?? "";
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq.toString());
+    }
+    message.gseq = object.gseq ?? 0;
+    message.oseq = object.oseq ?? 0;
+    message.state = object.state ?? "";
+    return message;
+  },
+  fromAmino(object: OrderFiltersAmino): OrderFilters {
+    return {
+      owner: object.owner,
+      dseq: BigInt(object.dseq),
+      gseq: object.gseq,
+      oseq: object.oseq,
+      state: object.state
+    };
+  },
+  toAmino(message: OrderFilters): OrderFiltersAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.gseq = message.gseq;
+    obj.oseq = message.oseq;
+    obj.state = message.state;
+    return obj;
+  },
+  fromAminoMsg(object: OrderFiltersAminoMsg): OrderFilters {
+    return OrderFilters.fromAmino(object.value);
   },
   fromProtoMsg(message: OrderFiltersProtoMsg): OrderFilters {
     return OrderFilters.decode(message.value);

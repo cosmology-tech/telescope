@@ -1,5 +1,6 @@
-import { Expr, ExprSDKType } from "./expr";
+import { Expr, ExprAmino, ExprSDKType } from "./expr";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
 /** A declaration. */
 export interface Decl {
@@ -17,6 +18,23 @@ export interface Decl {
 export interface DeclProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Decl";
   value: Uint8Array;
+}
+/** A declaration. */
+export interface DeclAmino {
+  /** The id of the declaration. */
+  id: number;
+  /** The name of the declaration. */
+  name: string;
+  /** The documentation string for the declaration. */
+  doc: string;
+  /** An identifier declaration. */
+  ident?: IdentDeclAmino;
+  /** A function declaration. */
+  function?: FunctionDeclAmino;
+}
+export interface DeclAminoMsg {
+  type: "/google.api.expr.v1beta1.Decl";
+  value: DeclAmino;
 }
 /** A declaration. */
 export interface DeclSDKType {
@@ -53,6 +71,27 @@ export interface DeclTypeProtoMsg {
  * Extends runtime type values with extra information used for type checking
  * and dispatching.
  */
+export interface DeclTypeAmino {
+  /** The expression id of the declared type, if applicable. */
+  id: number;
+  /** The type name, e.g. 'int', 'my.type.Type' or 'T' */
+  type: string;
+  /**
+   * An ordered list of type parameters, e.g. `<string, int>`.
+   * Only applies to a subset of types, e.g. `map`, `list`.
+   */
+  type_params: DeclTypeAmino[];
+}
+export interface DeclTypeAminoMsg {
+  type: "/google.api.expr.v1beta1.DeclType";
+  value: DeclTypeAmino;
+}
+/**
+ * The declared type of a variable.
+ * 
+ * Extends runtime type values with extra information used for type checking
+ * and dispatching.
+ */
 export interface DeclTypeSDKType {
   id: number;
   type: string;
@@ -68,6 +107,17 @@ export interface IdentDecl {
 export interface IdentDeclProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.IdentDecl";
   value: Uint8Array;
+}
+/** An identifier declaration. */
+export interface IdentDeclAmino {
+  /** Optional type of the identifier. */
+  type?: DeclTypeAmino;
+  /** Optional value of the identifier. */
+  value?: ExprAmino;
+}
+export interface IdentDeclAminoMsg {
+  type: "/google.api.expr.v1beta1.IdentDecl";
+  value: IdentDeclAmino;
 }
 /** An identifier declaration. */
 export interface IdentDeclSDKType {
@@ -86,6 +136,19 @@ export interface FunctionDecl {
 export interface FunctionDeclProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.FunctionDecl";
   value: Uint8Array;
+}
+/** A function declaration. */
+export interface FunctionDeclAmino {
+  /** The function arguments. */
+  args: IdentDeclAmino[];
+  /** Optional declared return type. */
+  return_type?: DeclTypeAmino;
+  /** If the first argument of the function is the receiver. */
+  receiver_function: boolean;
+}
+export interface FunctionDeclAminoMsg {
+  type: "/google.api.expr.v1beta1.FunctionDecl";
+  value: FunctionDeclAmino;
 }
 /** A function declaration. */
 export interface FunctionDeclSDKType {
@@ -151,6 +214,40 @@ export const Decl = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<Decl>): Decl {
+    const message = createBaseDecl();
+    message.id = object.id ?? 0;
+    message.name = object.name ?? "";
+    message.doc = object.doc ?? "";
+    if (object.ident !== undefined && object.ident !== null) {
+      message.ident = IdentDecl.fromPartial(object.ident);
+    }
+    if (object.function !== undefined && object.function !== null) {
+      message.function = FunctionDecl.fromPartial(object.function);
+    }
+    return message;
+  },
+  fromAmino(object: DeclAmino): Decl {
+    return {
+      id: object.id,
+      name: object.name,
+      doc: object.doc,
+      ident: object?.ident ? IdentDecl.fromAmino(object.ident) : undefined,
+      function: object?.function ? FunctionDecl.fromAmino(object.function) : undefined
+    };
+  },
+  toAmino(message: Decl): DeclAmino {
+    const obj: any = {};
+    obj.id = message.id;
+    obj.name = message.name;
+    obj.doc = message.doc;
+    obj.ident = message.ident ? IdentDecl.toAmino(message.ident) : undefined;
+    obj.function = message.function ? FunctionDecl.toAmino(message.function) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: DeclAminoMsg): Decl {
+    return Decl.fromAmino(object.value);
+  },
   fromProtoMsg(message: DeclProtoMsg): Decl {
     return Decl.decode(message.value);
   },
@@ -208,6 +305,34 @@ export const DeclType = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<DeclType>): DeclType {
+    const message = createBaseDeclType();
+    message.id = object.id ?? 0;
+    message.type = object.type ?? "";
+    message.typeParams = object.typeParams?.map(e => DeclType.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: DeclTypeAmino): DeclType {
+    return {
+      id: object.id,
+      type: object.type,
+      typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => DeclType.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: DeclType): DeclTypeAmino {
+    const obj: any = {};
+    obj.id = message.id;
+    obj.type = message.type;
+    if (message.typeParams) {
+      obj.type_params = message.typeParams.map(e => e ? DeclType.toAmino(e) : undefined);
+    } else {
+      obj.type_params = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: DeclTypeAminoMsg): DeclType {
+    return DeclType.fromAmino(object.value);
+  },
   fromProtoMsg(message: DeclTypeProtoMsg): DeclType {
     return DeclType.decode(message.value);
   },
@@ -257,6 +382,31 @@ export const IdentDecl = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<IdentDecl>): IdentDecl {
+    const message = createBaseIdentDecl();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = DeclType.fromPartial(object.type);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Expr.fromPartial(object.value);
+    }
+    return message;
+  },
+  fromAmino(object: IdentDeclAmino): IdentDecl {
+    return {
+      type: object?.type ? DeclType.fromAmino(object.type) : undefined,
+      value: object?.value ? Expr.fromAmino(object.value) : undefined
+    };
+  },
+  toAmino(message: IdentDecl): IdentDeclAmino {
+    const obj: any = {};
+    obj.type = message.type ? DeclType.toAmino(message.type) : undefined;
+    obj.value = message.value ? Expr.toAmino(message.value) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: IdentDeclAminoMsg): IdentDecl {
+    return IdentDecl.fromAmino(object.value);
   },
   fromProtoMsg(message: IdentDeclProtoMsg): IdentDecl {
     return IdentDecl.decode(message.value);
@@ -314,6 +464,36 @@ export const FunctionDecl = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<FunctionDecl>): FunctionDecl {
+    const message = createBaseFunctionDecl();
+    message.args = object.args?.map(e => IdentDecl.fromPartial(e)) || [];
+    if (object.returnType !== undefined && object.returnType !== null) {
+      message.returnType = DeclType.fromPartial(object.returnType);
+    }
+    message.receiverFunction = object.receiverFunction ?? false;
+    return message;
+  },
+  fromAmino(object: FunctionDeclAmino): FunctionDecl {
+    return {
+      args: Array.isArray(object?.args) ? object.args.map((e: any) => IdentDecl.fromAmino(e)) : [],
+      returnType: object?.return_type ? DeclType.fromAmino(object.return_type) : undefined,
+      receiverFunction: object.receiver_function
+    };
+  },
+  toAmino(message: FunctionDecl): FunctionDeclAmino {
+    const obj: any = {};
+    if (message.args) {
+      obj.args = message.args.map(e => e ? IdentDecl.toAmino(e) : undefined);
+    } else {
+      obj.args = [];
+    }
+    obj.return_type = message.returnType ? DeclType.toAmino(message.returnType) : undefined;
+    obj.receiver_function = message.receiverFunction;
+    return obj;
+  },
+  fromAminoMsg(object: FunctionDeclAminoMsg): FunctionDecl {
+    return FunctionDecl.fromAmino(object.value);
   },
   fromProtoMsg(message: FunctionDeclProtoMsg): FunctionDecl {
     return FunctionDecl.decode(message.value);

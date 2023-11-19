@@ -1,5 +1,6 @@
-import { DistrRecord, DistrRecordSDKType } from "./incentives";
+import { DistrRecord, DistrRecordAmino, DistrRecordSDKType } from "./incentives";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
@@ -18,6 +19,24 @@ export interface ReplacePoolIncentivesProposal {
 export interface ReplacePoolIncentivesProposalProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal";
   value: Uint8Array;
+}
+/**
+ * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
+ * incentives. If a ReplacePoolIncentivesProposal passes, the proposal’s records
+ * override the existing DistrRecords set in the module. Each record has a
+ * specified gauge id and weight, and the incentives are distributed to each
+ * gauge according to weight/total_weight. The incentives are put in the fee
+ * pool and it is allocated to gauges and community pool by the DistrRecords
+ * configuration. Note that gaugeId=0 represents the community pool.
+ */
+export interface ReplacePoolIncentivesProposalAmino {
+  title: string;
+  description: string;
+  records: DistrRecordAmino[];
+}
+export interface ReplacePoolIncentivesProposalAminoMsg {
+  type: "osmosis/poolincentives/replace-pool-incentives-proposal";
+  value: ReplacePoolIncentivesProposalAmino;
 }
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
@@ -50,6 +69,24 @@ export interface UpdatePoolIncentivesProposal {
 export interface UpdatePoolIncentivesProposalProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal";
   value: Uint8Array;
+}
+/**
+ * For example: if the existing DistrRecords were:
+ * [(Gauge 0, 5), (Gauge 1, 6), (Gauge 2, 6)]
+ * An UpdatePoolIncentivesProposal includes
+ * [(Gauge 1, 0), (Gauge 2, 4), (Gauge 3, 10)]
+ * This would delete Gauge 1, Edit Gauge 2, and Add Gauge 3
+ * The result DistrRecords in state would be:
+ * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
+ */
+export interface UpdatePoolIncentivesProposalAmino {
+  title: string;
+  description: string;
+  records: DistrRecordAmino[];
+}
+export interface UpdatePoolIncentivesProposalAminoMsg {
+  type: "osmosis/poolincentives/update-pool-incentives-proposal";
+  value: UpdatePoolIncentivesProposalAmino;
 }
 /**
  * For example: if the existing DistrRecords were:
@@ -109,6 +146,40 @@ export const ReplacePoolIncentivesProposal = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<ReplacePoolIncentivesProposal>): ReplacePoolIncentivesProposal {
+    const message = createBaseReplacePoolIncentivesProposal();
+    message.title = object.title ?? "";
+    message.description = object.description ?? "";
+    message.records = object.records?.map(e => DistrRecord.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: ReplacePoolIncentivesProposalAmino): ReplacePoolIncentivesProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    if (message.records) {
+      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
+    } else {
+      obj.records = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ReplacePoolIncentivesProposalAminoMsg): ReplacePoolIncentivesProposal {
+    return ReplacePoolIncentivesProposal.fromAmino(object.value);
+  },
+  toAminoMsg(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalAminoMsg {
+    return {
+      type: "osmosis/poolincentives/replace-pool-incentives-proposal",
+      value: ReplacePoolIncentivesProposal.toAmino(message)
+    };
+  },
   fromProtoMsg(message: ReplacePoolIncentivesProposalProtoMsg): ReplacePoolIncentivesProposal {
     return ReplacePoolIncentivesProposal.decode(message.value);
   },
@@ -165,6 +236,40 @@ export const UpdatePoolIncentivesProposal = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<UpdatePoolIncentivesProposal>): UpdatePoolIncentivesProposal {
+    const message = createBaseUpdatePoolIncentivesProposal();
+    message.title = object.title ?? "";
+    message.description = object.description ?? "";
+    message.records = object.records?.map(e => DistrRecord.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: UpdatePoolIncentivesProposalAmino): UpdatePoolIncentivesProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    if (message.records) {
+      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
+    } else {
+      obj.records = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: UpdatePoolIncentivesProposalAminoMsg): UpdatePoolIncentivesProposal {
+    return UpdatePoolIncentivesProposal.fromAmino(object.value);
+  },
+  toAminoMsg(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalAminoMsg {
+    return {
+      type: "osmosis/poolincentives/update-pool-incentives-proposal",
+      value: UpdatePoolIncentivesProposal.toAmino(message)
+    };
   },
   fromProtoMsg(message: UpdatePoolIncentivesProposalProtoMsg): UpdatePoolIncentivesProposal {
     return UpdatePoolIncentivesProposal.decode(message.value);

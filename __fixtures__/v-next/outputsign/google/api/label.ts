@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /** Value types that can be used as label values. */
 export enum LabelDescriptor_ValueType {
@@ -11,6 +12,7 @@ export enum LabelDescriptor_ValueType {
   UNRECOGNIZED = -1,
 }
 export const LabelDescriptor_ValueTypeSDKType = LabelDescriptor_ValueType;
+export const LabelDescriptor_ValueTypeAmino = LabelDescriptor_ValueType;
 export function labelDescriptor_ValueTypeFromJSON(object: any): LabelDescriptor_ValueType {
   switch (object) {
     case 0:
@@ -53,6 +55,19 @@ export interface LabelDescriptor {
 export interface LabelDescriptorProtoMsg {
   typeUrl: "/google.api.LabelDescriptor";
   value: Uint8Array;
+}
+/** A description of a label. */
+export interface LabelDescriptorAmino {
+  /** The label key. */
+  key: string;
+  /** The type of data that can be assigned to the label. */
+  value_type: LabelDescriptor_ValueType;
+  /** A human-readable description for the label. */
+  description: string;
+}
+export interface LabelDescriptorAminoMsg {
+  type: "/google.api.LabelDescriptor";
+  value: LabelDescriptorAmino;
 }
 /** A description of a label. */
 export interface LabelDescriptorSDKType {
@@ -103,6 +118,30 @@ export const LabelDescriptor = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<LabelDescriptor>): LabelDescriptor {
+    const message = createBaseLabelDescriptor();
+    message.key = object.key ?? "";
+    message.valueType = object.valueType ?? 0;
+    message.description = object.description ?? "";
+    return message;
+  },
+  fromAmino(object: LabelDescriptorAmino): LabelDescriptor {
+    return {
+      key: object.key,
+      valueType: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : -1,
+      description: object.description
+    };
+  },
+  toAmino(message: LabelDescriptor): LabelDescriptorAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value_type = message.valueType;
+    obj.description = message.description;
+    return obj;
+  },
+  fromAminoMsg(object: LabelDescriptorAminoMsg): LabelDescriptor {
+    return LabelDescriptor.fromAmino(object.value);
   },
   fromProtoMsg(message: LabelDescriptorProtoMsg): LabelDescriptor {
     return LabelDescriptor.decode(message.value);

@@ -1,6 +1,7 @@
-import { NullValue, NullValueSDKType } from "../../../protobuf/struct";
-import { Any, AnySDKType } from "../../../protobuf/any";
+import { NullValue, NullValueSDKType, nullValueFromJSON } from "../../../protobuf/struct";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
 /**
  * Represents a CEL value.
@@ -44,6 +45,42 @@ export interface ValueProtoMsg {
  * This is similar to `google.protobuf.Value`, but can represent CEL's full
  * range of values.
  */
+export interface ValueAmino {
+  /** Null value. */
+  null_value?: NullValue;
+  /** Boolean value. */
+  bool_value?: boolean;
+  /** Signed integer value. */
+  int64_value?: string;
+  /** Unsigned integer value. */
+  uint64_value?: string;
+  /** Floating point value. */
+  double_value?: number;
+  /** UTF-8 string value. */
+  string_value?: string;
+  /** Byte string value. */
+  bytes_value?: Uint8Array;
+  /** An enum value. */
+  enum_value?: EnumValueAmino;
+  /** The proto message backing an object value. */
+  object_value?: AnyAmino;
+  /** Map value. */
+  map_value?: MapValueAmino;
+  /** List value. */
+  list_value?: ListValueAmino;
+  /** A Type value represented by the fully qualified name of the type. */
+  type_value?: string;
+}
+export interface ValueAminoMsg {
+  type: "/google.api.expr.v1beta1.Value";
+  value: ValueAmino;
+}
+/**
+ * Represents a CEL value.
+ * 
+ * This is similar to `google.protobuf.Value`, but can represent CEL's full
+ * range of values.
+ */
 export interface ValueSDKType {
   null_value?: NullValue;
   bool_value?: boolean;
@@ -70,6 +107,17 @@ export interface EnumValueProtoMsg {
   value: Uint8Array;
 }
 /** An enum value. */
+export interface EnumValueAmino {
+  /** The fully qualified name of the enum type. */
+  type: string;
+  /** The value of the enum. */
+  value: number;
+}
+export interface EnumValueAminoMsg {
+  type: "/google.api.expr.v1beta1.EnumValue";
+  value: EnumValueAmino;
+}
+/** An enum value. */
 export interface EnumValueSDKType {
   type: string;
   value: number;
@@ -87,6 +135,20 @@ export interface ListValue {
 export interface ListValueProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.ListValue";
   value: Uint8Array;
+}
+/**
+ * A list.
+ * 
+ * Wrapped in a message so 'not set' and empty can be differentiated, which is
+ * required for use in a 'oneof'.
+ */
+export interface ListValueAmino {
+  /** The ordered values in the list. */
+  values: ValueAmino[];
+}
+export interface ListValueAminoMsg {
+  type: "/google.api.expr.v1beta1.ListValue";
+  value: ListValueAmino;
 }
 /**
  * A list.
@@ -122,6 +184,25 @@ export interface MapValueProtoMsg {
  * Wrapped in a message so 'not set' and empty can be differentiated, which is
  * required for use in a 'oneof'.
  */
+export interface MapValueAmino {
+  /**
+   * The set of map entries.
+   * 
+   * CEL has fewer restrictions on keys, so a protobuf map represenation
+   * cannot be used.
+   */
+  entries: MapValue_EntryAmino[];
+}
+export interface MapValueAminoMsg {
+  type: "/google.api.expr.v1beta1.MapValue";
+  value: MapValueAmino;
+}
+/**
+ * A map.
+ * 
+ * Wrapped in a message so 'not set' and empty can be differentiated, which is
+ * required for use in a 'oneof'.
+ */
 export interface MapValueSDKType {
   entries: MapValue_EntrySDKType[];
 }
@@ -140,6 +221,22 @@ export interface MapValue_Entry {
 export interface MapValue_EntryProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Entry";
   value: Uint8Array;
+}
+/** An entry in the map. */
+export interface MapValue_EntryAmino {
+  /**
+   * The key.
+   * 
+   * Must be unique with in the map.
+   * Currently only boolean, int, uint, and string values can be keys.
+   */
+  key?: ValueAmino;
+  /** The value. */
+  value?: ValueAmino;
+}
+export interface MapValue_EntryAminoMsg {
+  type: "/google.api.expr.v1beta1.Entry";
+  value: MapValue_EntryAmino;
 }
 /** An entry in the map. */
 export interface MapValue_EntrySDKType {
@@ -253,6 +350,69 @@ export const Value = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<Value>): Value {
+    const message = createBaseValue();
+    message.nullValue = object.nullValue ?? undefined;
+    message.boolValue = object.boolValue ?? undefined;
+    if (object.int64Value !== undefined && object.int64Value !== null) {
+      message.int64Value = BigInt(object.int64Value.toString());
+    }
+    if (object.uint64Value !== undefined && object.uint64Value !== null) {
+      message.uint64Value = BigInt(object.uint64Value.toString());
+    }
+    message.doubleValue = object.doubleValue ?? undefined;
+    message.stringValue = object.stringValue ?? undefined;
+    message.bytesValue = object.bytesValue ?? undefined;
+    if (object.enumValue !== undefined && object.enumValue !== null) {
+      message.enumValue = EnumValue.fromPartial(object.enumValue);
+    }
+    if (object.objectValue !== undefined && object.objectValue !== null) {
+      message.objectValue = Any.fromPartial(object.objectValue);
+    }
+    if (object.mapValue !== undefined && object.mapValue !== null) {
+      message.mapValue = MapValue.fromPartial(object.mapValue);
+    }
+    if (object.listValue !== undefined && object.listValue !== null) {
+      message.listValue = ListValue.fromPartial(object.listValue);
+    }
+    message.typeValue = object.typeValue ?? undefined;
+    return message;
+  },
+  fromAmino(object: ValueAmino): Value {
+    return {
+      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
+      boolValue: object?.bool_value,
+      int64Value: object?.int64_value ? BigInt(object.int64_value) : undefined,
+      uint64Value: object?.uint64_value ? BigInt(object.uint64_value) : undefined,
+      doubleValue: object?.double_value,
+      stringValue: object?.string_value,
+      bytesValue: object?.bytes_value,
+      enumValue: object?.enum_value ? EnumValue.fromAmino(object.enum_value) : undefined,
+      objectValue: object?.object_value ? Any.fromAmino(object.object_value) : undefined,
+      mapValue: object?.map_value ? MapValue.fromAmino(object.map_value) : undefined,
+      listValue: object?.list_value ? ListValue.fromAmino(object.list_value) : undefined,
+      typeValue: object?.type_value
+    };
+  },
+  toAmino(message: Value): ValueAmino {
+    const obj: any = {};
+    obj.null_value = message.nullValue;
+    obj.bool_value = message.boolValue;
+    obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
+    obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
+    obj.double_value = message.doubleValue;
+    obj.string_value = message.stringValue;
+    obj.bytes_value = message.bytesValue;
+    obj.enum_value = message.enumValue ? EnumValue.toAmino(message.enumValue) : undefined;
+    obj.object_value = message.objectValue ? Any.toAmino(message.objectValue) : undefined;
+    obj.map_value = message.mapValue ? MapValue.toAmino(message.mapValue) : undefined;
+    obj.list_value = message.listValue ? ListValue.toAmino(message.listValue) : undefined;
+    obj.type_value = message.typeValue;
+    return obj;
+  },
+  fromAminoMsg(object: ValueAminoMsg): Value {
+    return Value.fromAmino(object.value);
+  },
   fromProtoMsg(message: ValueProtoMsg): Value {
     return Value.decode(message.value);
   },
@@ -303,6 +463,27 @@ export const EnumValue = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<EnumValue>): EnumValue {
+    const message = createBaseEnumValue();
+    message.type = object.type ?? "";
+    message.value = object.value ?? 0;
+    return message;
+  },
+  fromAmino(object: EnumValueAmino): EnumValue {
+    return {
+      type: object.type,
+      value: object.value
+    };
+  },
+  toAmino(message: EnumValue): EnumValueAmino {
+    const obj: any = {};
+    obj.type = message.type;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: EnumValueAminoMsg): EnumValue {
+    return EnumValue.fromAmino(object.value);
+  },
   fromProtoMsg(message: EnumValueProtoMsg): EnumValue {
     return EnumValue.decode(message.value);
   },
@@ -346,6 +527,28 @@ export const ListValue = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<ListValue>): ListValue {
+    const message = createBaseListValue();
+    message.values = object.values?.map(e => Value.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: ListValueAmino): ListValue {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: ListValue): ListValueAmino {
+    const obj: any = {};
+    if (message.values) {
+      obj.values = message.values.map(e => e ? Value.toAmino(e) : undefined);
+    } else {
+      obj.values = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ListValueAminoMsg): ListValue {
+    return ListValue.fromAmino(object.value);
+  },
   fromProtoMsg(message: ListValueProtoMsg): ListValue {
     return ListValue.decode(message.value);
   },
@@ -388,6 +591,28 @@ export const MapValue = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<MapValue>): MapValue {
+    const message = createBaseMapValue();
+    message.entries = object.entries?.map(e => MapValue_Entry.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: MapValueAmino): MapValue {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: MapValue): MapValueAmino {
+    const obj: any = {};
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? MapValue_Entry.toAmino(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MapValueAminoMsg): MapValue {
+    return MapValue.fromAmino(object.value);
   },
   fromProtoMsg(message: MapValueProtoMsg): MapValue {
     return MapValue.decode(message.value);
@@ -438,6 +663,31 @@ export const MapValue_Entry = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<MapValue_Entry>): MapValue_Entry {
+    const message = createBaseMapValue_Entry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = Value.fromPartial(object.key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Value.fromPartial(object.value);
+    }
+    return message;
+  },
+  fromAmino(object: MapValue_EntryAmino): MapValue_Entry {
+    return {
+      key: object?.key ? Value.fromAmino(object.key) : undefined,
+      value: object?.value ? Value.fromAmino(object.value) : undefined
+    };
+  },
+  toAmino(message: MapValue_Entry): MapValue_EntryAmino {
+    const obj: any = {};
+    obj.key = message.key ? Value.toAmino(message.key) : undefined;
+    obj.value = message.value ? Value.toAmino(message.value) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MapValue_EntryAminoMsg): MapValue_Entry {
+    return MapValue_Entry.fromAmino(object.value);
   },
   fromProtoMsg(message: MapValue_EntryProtoMsg): MapValue_Entry {
     return MapValue_Entry.decode(message.value);

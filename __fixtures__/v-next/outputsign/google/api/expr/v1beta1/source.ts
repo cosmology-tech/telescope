@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
 export interface SourceInfo_PositionsEntry {
   key: number;
@@ -7,6 +8,14 @@ export interface SourceInfo_PositionsEntry {
 export interface SourceInfo_PositionsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
+}
+export interface SourceInfo_PositionsEntryAmino {
+  key: number;
+  value: number;
+}
+export interface SourceInfo_PositionsEntryAminoMsg {
+  type: string;
+  value: SourceInfo_PositionsEntryAmino;
 }
 export interface SourceInfo_PositionsEntrySDKType {
   key: number;
@@ -43,6 +52,36 @@ export interface SourceInfoProtoMsg {
   value: Uint8Array;
 }
 /** Source information collected at parse time. */
+export interface SourceInfoAmino {
+  /**
+   * The location name. All position information attached to an expression is
+   * relative to this location.
+   * 
+   * The location could be a file, UI element, or similar. For example,
+   * `acme/app/AnvilPolicy.cel`.
+   */
+  location: string;
+  /**
+   * Monotonically increasing list of character offsets where newlines appear.
+   * 
+   * The line number of a given position is the index `i` where for a given
+   * `id` the `line_offsets[i] < id_positions[id] < line_offsets[i+1]`. The
+   * column may be derivd from `id_positions[id] - line_offsets[i]`.
+   */
+  line_offsets: number[];
+  /**
+   * A map from the parse node id (e.g. `Expr.id`) to the character offset
+   * within source.
+   */
+  positions: {
+    [key: number]: number;
+  };
+}
+export interface SourceInfoAminoMsg {
+  type: "/google.api.expr.v1beta1.SourceInfo";
+  value: SourceInfoAmino;
+}
+/** Source information collected at parse time. */
 export interface SourceInfoSDKType {
   location: string;
   line_offsets: number[];
@@ -70,6 +109,27 @@ export interface SourcePosition {
 export interface SourcePositionProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.SourcePosition";
   value: Uint8Array;
+}
+/** A specific position in source. */
+export interface SourcePositionAmino {
+  /** The soucre location name (e.g. file name). */
+  location: string;
+  /** The character offset. */
+  offset: number;
+  /**
+   * The 1-based index of the starting line in the source text
+   * where the issue occurs, or 0 if unknown.
+   */
+  line: number;
+  /**
+   * The 0-based index of the starting position within the line of source text
+   * where the issue occurs.  Only meaningful if line is nonzer..
+   */
+  column: number;
+}
+export interface SourcePositionAminoMsg {
+  type: "/google.api.expr.v1beta1.SourcePosition";
+  value: SourcePositionAmino;
 }
 /** A specific position in source. */
 export interface SourcePositionSDKType {
@@ -113,6 +173,27 @@ export const SourceInfo_PositionsEntry = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<SourceInfo_PositionsEntry>): SourceInfo_PositionsEntry {
+    const message = createBaseSourceInfo_PositionsEntry();
+    message.key = object.key ?? 0;
+    message.value = object.value ?? 0;
+    return message;
+  },
+  fromAmino(object: SourceInfo_PositionsEntryAmino): SourceInfo_PositionsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+  toAmino(message: SourceInfo_PositionsEntry): SourceInfo_PositionsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: SourceInfo_PositionsEntryAminoMsg): SourceInfo_PositionsEntry {
+    return SourceInfo_PositionsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: SourceInfo_PositionsEntryProtoMsg): SourceInfo_PositionsEntry {
     return SourceInfo_PositionsEntry.decode(message.value);
@@ -180,6 +261,51 @@ export const SourceInfo = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<SourceInfo>): SourceInfo {
+    const message = createBaseSourceInfo();
+    message.location = object.location ?? "";
+    message.lineOffsets = object.lineOffsets?.map(e => e) || [];
+    message.positions = Object.entries(object.positions ?? {}).reduce<{
+      [key: number]: number;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[Number(key)] = Number(value);
+      }
+      return acc;
+    }, {});
+    return message;
+  },
+  fromAmino(object: SourceInfoAmino): SourceInfo {
+    return {
+      location: object.location,
+      lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
+      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
+        [key: number]: number;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Number(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+  toAmino(message: SourceInfo): SourceInfoAmino {
+    const obj: any = {};
+    obj.location = message.location;
+    if (message.lineOffsets) {
+      obj.line_offsets = message.lineOffsets.map(e => e);
+    } else {
+      obj.line_offsets = [];
+    }
+    obj.positions = {};
+    if (message.positions) {
+      Object.entries(message.positions).forEach(([k, v]) => {
+        obj.positions[k] = Math.round(v);
+      });
+    }
+    return obj;
+  },
+  fromAminoMsg(object: SourceInfoAminoMsg): SourceInfo {
+    return SourceInfo.fromAmino(object.value);
+  },
   fromProtoMsg(message: SourceInfoProtoMsg): SourceInfo {
     return SourceInfo.decode(message.value);
   },
@@ -243,6 +369,33 @@ export const SourcePosition = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<SourcePosition>): SourcePosition {
+    const message = createBaseSourcePosition();
+    message.location = object.location ?? "";
+    message.offset = object.offset ?? 0;
+    message.line = object.line ?? 0;
+    message.column = object.column ?? 0;
+    return message;
+  },
+  fromAmino(object: SourcePositionAmino): SourcePosition {
+    return {
+      location: object.location,
+      offset: object.offset,
+      line: object.line,
+      column: object.column
+    };
+  },
+  toAmino(message: SourcePosition): SourcePositionAmino {
+    const obj: any = {};
+    obj.location = message.location;
+    obj.offset = message.offset;
+    obj.line = message.line;
+    obj.column = message.column;
+    return obj;
+  },
+  fromAminoMsg(object: SourcePositionAminoMsg): SourcePosition {
+    return SourcePosition.fromAmino(object.value);
   },
   fromProtoMsg(message: SourcePositionProtoMsg): SourcePosition {
     return SourcePosition.decode(message.value);

@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.ibcratelimit.v1beta1";
 /** Params defines the parameters for the ibc-rate-limit module. */
 export interface Params {
@@ -7,6 +8,14 @@ export interface Params {
 export interface ParamsProtoMsg {
   typeUrl: "/osmosis.ibcratelimit.v1beta1.Params";
   value: Uint8Array;
+}
+/** Params defines the parameters for the ibc-rate-limit module. */
+export interface ParamsAmino {
+  contract_address: string;
+}
+export interface ParamsAminoMsg {
+  type: "osmosis/ibcratelimit/params";
+  value: ParamsAmino;
 }
 /** Params defines the parameters for the ibc-rate-limit module. */
 export interface ParamsSDKType {
@@ -41,6 +50,30 @@ export const Params = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<Params>): Params {
+    const message = createBaseParams();
+    message.contractAddress = object.contractAddress ?? "";
+    return message;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      contractAddress: object.contract_address
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "osmosis/ibcratelimit/params",
+      value: Params.toAmino(message)
+    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

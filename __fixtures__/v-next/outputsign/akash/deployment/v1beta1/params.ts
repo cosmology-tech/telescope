@@ -1,5 +1,6 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** Params defines the parameters for the x/deployment package */
 export interface Params {
@@ -8,6 +9,14 @@ export interface Params {
 export interface ParamsProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.Params";
   value: Uint8Array;
+}
+/** Params defines the parameters for the x/deployment package */
+export interface ParamsAmino {
+  deployment_min_deposit?: CoinAmino | undefined;
+}
+export interface ParamsAminoMsg {
+  type: "/akash.deployment.v1beta1.Params";
+  value: ParamsAmino;
 }
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsSDKType {
@@ -40,6 +49,13 @@ export const Params = {
           reader.skipType(tag & 7);
           break;
       }
+    }
+    return message;
+  },
+  fromPartial<I extends Exact<Partial<Params>, I>>(object: I): Params {
+    const message = createBaseParams();
+    if (object.deploymentMinDeposit !== undefined && object.deploymentMinDeposit !== null) {
+      message.deploymentMinDeposit = Coin.fromPartial(object.deploymentMinDeposit);
     }
     return message;
   },

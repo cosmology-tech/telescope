@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial, Exact, isSet } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -11,6 +12,7 @@ export enum Deployment_State {
   UNRECOGNIZED = -1,
 }
 export const Deployment_StateSDKType = Deployment_State;
+export const Deployment_StateAmino = Deployment_State;
 export function deployment_StateFromJSON(object: any): Deployment_State {
   switch (object) {
     case 0:
@@ -51,6 +53,15 @@ export interface DeploymentIDProtoMsg {
   value: Uint8Array;
 }
 /** DeploymentID stores owner and sequence number */
+export interface DeploymentIDAmino {
+  owner: string;
+  dseq: string;
+}
+export interface DeploymentIDAminoMsg {
+  type: "/akash.deployment.v1beta2.DeploymentID";
+  value: DeploymentIDAmino;
+}
+/** DeploymentID stores owner and sequence number */
 export interface DeploymentIDSDKType {
   owner: string;
   dseq: bigint;
@@ -65,6 +76,17 @@ export interface Deployment {
 export interface DeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.Deployment";
   value: Uint8Array;
+}
+/** Deployment stores deploymentID, state and version details */
+export interface DeploymentAmino {
+  deployment_id?: DeploymentIDAmino;
+  state: Deployment_State;
+  version: Uint8Array;
+  created_at: string;
+}
+export interface DeploymentAminoMsg {
+  type: "/akash.deployment.v1beta2.Deployment";
+  value: DeploymentAmino;
 }
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
@@ -82,6 +104,16 @@ export interface DeploymentFilters {
 export interface DeploymentFiltersProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.DeploymentFilters";
   value: Uint8Array;
+}
+/** DeploymentFilters defines filters used to filter deployments */
+export interface DeploymentFiltersAmino {
+  owner: string;
+  dseq: string;
+  state: string;
+}
+export interface DeploymentFiltersAminoMsg {
+  type: "/akash.deployment.v1beta2.DeploymentFilters";
+  value: DeploymentFiltersAmino;
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersSDKType {
@@ -125,6 +157,29 @@ export const DeploymentID = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<DeploymentID>, I>>(object: I): DeploymentID {
+    const message = createBaseDeploymentID();
+    message.owner = object.owner ?? "";
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq.toString());
+    }
+    return message;
+  },
+  fromAmino(object: DeploymentIDAmino): DeploymentID {
+    return {
+      owner: object.owner,
+      dseq: BigInt(object.dseq)
+    };
+  },
+  toAmino(message: DeploymentID): DeploymentIDAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: DeploymentIDAminoMsg): DeploymentID {
+    return DeploymentID.fromAmino(object.value);
   },
   fromProtoMsg(message: DeploymentIDProtoMsg): DeploymentID {
     return DeploymentID.decode(message.value);
@@ -190,6 +245,37 @@ export const Deployment = {
     }
     return message;
   },
+  fromPartial<I extends Exact<DeepPartial<Deployment>, I>>(object: I): Deployment {
+    const message = createBaseDeployment();
+    if (object.deploymentId !== undefined && object.deploymentId !== null) {
+      message.deploymentId = DeploymentID.fromPartial(object.deploymentId);
+    }
+    message.state = object.state ?? 0;
+    message.version = object.version ?? new Uint8Array();
+    if (object.createdAt !== undefined && object.createdAt !== null) {
+      message.createdAt = BigInt(object.createdAt.toString());
+    }
+    return message;
+  },
+  fromAmino(object: DeploymentAmino): Deployment {
+    return {
+      deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : undefined,
+      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
+      version: object.version,
+      createdAt: BigInt(object.created_at)
+    };
+  },
+  toAmino(message: Deployment): DeploymentAmino {
+    const obj: any = {};
+    obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined;
+    obj.state = message.state;
+    obj.version = message.version;
+    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: DeploymentAminoMsg): Deployment {
+    return Deployment.fromAmino(object.value);
+  },
   fromProtoMsg(message: DeploymentProtoMsg): Deployment {
     return Deployment.decode(message.value);
   },
@@ -246,6 +332,32 @@ export const DeploymentFilters = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<DeploymentFilters>, I>>(object: I): DeploymentFilters {
+    const message = createBaseDeploymentFilters();
+    message.owner = object.owner ?? "";
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq.toString());
+    }
+    message.state = object.state ?? "";
+    return message;
+  },
+  fromAmino(object: DeploymentFiltersAmino): DeploymentFilters {
+    return {
+      owner: object.owner,
+      dseq: BigInt(object.dseq),
+      state: object.state
+    };
+  },
+  toAmino(message: DeploymentFilters): DeploymentFiltersAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.state = message.state;
+    return obj;
+  },
+  fromAminoMsg(object: DeploymentFiltersAminoMsg): DeploymentFilters {
+    return DeploymentFilters.fromAmino(object.value);
   },
   fromProtoMsg(message: DeploymentFiltersProtoMsg): DeploymentFilters {
     return DeploymentFilters.decode(message.value);

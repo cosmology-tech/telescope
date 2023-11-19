@@ -1,6 +1,7 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { EpochInfo, EpochInfoSDKType } from "./genesis";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { EpochInfo, EpochInfoAmino, EpochInfoSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.epochs.v1";
 export interface QueryEpochsInfoRequest {
   pagination?: PageRequest;
@@ -8,6 +9,13 @@ export interface QueryEpochsInfoRequest {
 export interface QueryEpochsInfoRequestProtoMsg {
   typeUrl: "/evmos.epochs.v1.QueryEpochsInfoRequest";
   value: Uint8Array;
+}
+export interface QueryEpochsInfoRequestAmino {
+  pagination?: PageRequestAmino;
+}
+export interface QueryEpochsInfoRequestAminoMsg {
+  type: "/evmos.epochs.v1.QueryEpochsInfoRequest";
+  value: QueryEpochsInfoRequestAmino;
 }
 export interface QueryEpochsInfoRequestSDKType {
   pagination?: PageRequestSDKType;
@@ -20,6 +28,14 @@ export interface QueryEpochsInfoResponseProtoMsg {
   typeUrl: "/evmos.epochs.v1.QueryEpochsInfoResponse";
   value: Uint8Array;
 }
+export interface QueryEpochsInfoResponseAmino {
+  epochs: EpochInfoAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QueryEpochsInfoResponseAminoMsg {
+  type: "/evmos.epochs.v1.QueryEpochsInfoResponse";
+  value: QueryEpochsInfoResponseAmino;
+}
 export interface QueryEpochsInfoResponseSDKType {
   epochs: EpochInfoSDKType[];
   pagination?: PageResponseSDKType;
@@ -31,6 +47,13 @@ export interface QueryCurrentEpochRequestProtoMsg {
   typeUrl: "/evmos.epochs.v1.QueryCurrentEpochRequest";
   value: Uint8Array;
 }
+export interface QueryCurrentEpochRequestAmino {
+  identifier: string;
+}
+export interface QueryCurrentEpochRequestAminoMsg {
+  type: "/evmos.epochs.v1.QueryCurrentEpochRequest";
+  value: QueryCurrentEpochRequestAmino;
+}
 export interface QueryCurrentEpochRequestSDKType {
   identifier: string;
 }
@@ -40,6 +63,13 @@ export interface QueryCurrentEpochResponse {
 export interface QueryCurrentEpochResponseProtoMsg {
   typeUrl: "/evmos.epochs.v1.QueryCurrentEpochResponse";
   value: Uint8Array;
+}
+export interface QueryCurrentEpochResponseAmino {
+  current_epoch: string;
+}
+export interface QueryCurrentEpochResponseAminoMsg {
+  type: "/evmos.epochs.v1.QueryCurrentEpochResponse";
+  value: QueryCurrentEpochResponseAmino;
 }
 export interface QueryCurrentEpochResponseSDKType {
   current_epoch: bigint;
@@ -73,6 +103,26 @@ export const QueryEpochsInfoRequest = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<QueryEpochsInfoRequest>): QueryEpochsInfoRequest {
+    const message = createBaseQueryEpochsInfoRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
+    return message;
+  },
+  fromAmino(object: QueryEpochsInfoRequestAmino): QueryEpochsInfoRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryEpochsInfoRequest): QueryEpochsInfoRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryEpochsInfoRequestAminoMsg): QueryEpochsInfoRequest {
+    return QueryEpochsInfoRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryEpochsInfoRequestProtoMsg): QueryEpochsInfoRequest {
     return QueryEpochsInfoRequest.decode(message.value);
@@ -124,6 +174,33 @@ export const QueryEpochsInfoResponse = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<QueryEpochsInfoResponse>): QueryEpochsInfoResponse {
+    const message = createBaseQueryEpochsInfoResponse();
+    message.epochs = object.epochs?.map(e => EpochInfo.fromPartial(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
+    return message;
+  },
+  fromAmino(object: QueryEpochsInfoResponseAmino): QueryEpochsInfoResponse {
+    return {
+      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryEpochsInfoResponse): QueryEpochsInfoResponseAmino {
+    const obj: any = {};
+    if (message.epochs) {
+      obj.epochs = message.epochs.map(e => e ? EpochInfo.toAmino(e) : undefined);
+    } else {
+      obj.epochs = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryEpochsInfoResponseAminoMsg): QueryEpochsInfoResponse {
+    return QueryEpochsInfoResponse.fromAmino(object.value);
+  },
   fromProtoMsg(message: QueryEpochsInfoResponseProtoMsg): QueryEpochsInfoResponse {
     return QueryEpochsInfoResponse.decode(message.value);
   },
@@ -167,6 +244,24 @@ export const QueryCurrentEpochRequest = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<QueryCurrentEpochRequest>): QueryCurrentEpochRequest {
+    const message = createBaseQueryCurrentEpochRequest();
+    message.identifier = object.identifier ?? "";
+    return message;
+  },
+  fromAmino(object: QueryCurrentEpochRequestAmino): QueryCurrentEpochRequest {
+    return {
+      identifier: object.identifier
+    };
+  },
+  toAmino(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestAmino {
+    const obj: any = {};
+    obj.identifier = message.identifier;
+    return obj;
+  },
+  fromAminoMsg(object: QueryCurrentEpochRequestAminoMsg): QueryCurrentEpochRequest {
+    return QueryCurrentEpochRequest.fromAmino(object.value);
+  },
   fromProtoMsg(message: QueryCurrentEpochRequestProtoMsg): QueryCurrentEpochRequest {
     return QueryCurrentEpochRequest.decode(message.value);
   },
@@ -209,6 +304,26 @@ export const QueryCurrentEpochResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<QueryCurrentEpochResponse>): QueryCurrentEpochResponse {
+    const message = createBaseQueryCurrentEpochResponse();
+    if (object.currentEpoch !== undefined && object.currentEpoch !== null) {
+      message.currentEpoch = BigInt(object.currentEpoch.toString());
+    }
+    return message;
+  },
+  fromAmino(object: QueryCurrentEpochResponseAmino): QueryCurrentEpochResponse {
+    return {
+      currentEpoch: BigInt(object.current_epoch)
+    };
+  },
+  toAmino(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseAmino {
+    const obj: any = {};
+    obj.current_epoch = message.currentEpoch ? message.currentEpoch.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryCurrentEpochResponseAminoMsg): QueryCurrentEpochResponse {
+    return QueryCurrentEpochResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryCurrentEpochResponseProtoMsg): QueryCurrentEpochResponse {
     return QueryCurrentEpochResponse.decode(message.value);

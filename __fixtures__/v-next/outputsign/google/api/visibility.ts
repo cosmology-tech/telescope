@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * `Visibility` defines restrictions for the visibility of service
@@ -35,6 +36,42 @@ export interface Visibility {
 export interface VisibilityProtoMsg {
   typeUrl: "/google.api.Visibility";
   value: Uint8Array;
+}
+/**
+ * `Visibility` defines restrictions for the visibility of service
+ * elements.  Restrictions are specified using visibility labels
+ * (e.g., PREVIEW) that are elsewhere linked to users and projects.
+ * 
+ * Users and projects can have access to more than one visibility label. The
+ * effective visibility for multiple labels is the union of each label's
+ * elements, plus any unrestricted elements.
+ * 
+ * If an element and its parents have no restrictions, visibility is
+ * unconditionally granted.
+ * 
+ * Example:
+ * 
+ *     visibility:
+ *       rules:
+ *       - selector: google.calendar.Calendar.EnhancedSearch
+ *         restriction: PREVIEW
+ *       - selector: google.calendar.Calendar.Delegate
+ *         restriction: INTERNAL
+ * 
+ * Here, all methods are publicly visible except for the restricted methods
+ * EnhancedSearch and Delegate.
+ */
+export interface VisibilityAmino {
+  /**
+   * A list of visibility rules that apply to individual API elements.
+   * 
+   * **NOTE:** All service configuration rules follow "last one wins" order.
+   */
+  rules: VisibilityRuleAmino[];
+}
+export interface VisibilityAminoMsg {
+  type: "/google.api.Visibility";
+  value: VisibilityAmino;
 }
 /**
  * `Visibility` defines restrictions for the visibility of service
@@ -101,6 +138,40 @@ export interface VisibilityRuleProtoMsg {
  * A visibility rule provides visibility configuration for an individual API
  * element.
  */
+export interface VisibilityRuleAmino {
+  /**
+   * Selects methods, messages, fields, enums, etc. to which this rule applies.
+   * 
+   * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+   */
+  selector: string;
+  /**
+   * A comma-separated list of visibility labels that apply to the `selector`.
+   * Any of the listed labels can be used to grant the visibility.
+   * 
+   * If a rule has multiple labels, removing one of the labels but not all of
+   * them can break clients.
+   * 
+   * Example:
+   * 
+   *     visibility:
+   *       rules:
+   *       - selector: google.calendar.Calendar.EnhancedSearch
+   *         restriction: INTERNAL, PREVIEW
+   * 
+   * Removing INTERNAL from this restriction will break clients that rely on
+   * this method and only had access to it through INTERNAL.
+   */
+  restriction: string;
+}
+export interface VisibilityRuleAminoMsg {
+  type: "/google.api.VisibilityRule";
+  value: VisibilityRuleAmino;
+}
+/**
+ * A visibility rule provides visibility configuration for an individual API
+ * element.
+ */
 export interface VisibilityRuleSDKType {
   selector: string;
   restriction: string;
@@ -134,6 +205,28 @@ export const Visibility = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<Visibility>): Visibility {
+    const message = createBaseVisibility();
+    message.rules = object.rules?.map(e => VisibilityRule.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: VisibilityAmino): Visibility {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => VisibilityRule.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Visibility): VisibilityAmino {
+    const obj: any = {};
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? VisibilityRule.toAmino(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: VisibilityAminoMsg): Visibility {
+    return Visibility.fromAmino(object.value);
   },
   fromProtoMsg(message: VisibilityProtoMsg): Visibility {
     return Visibility.decode(message.value);
@@ -184,6 +277,27 @@ export const VisibilityRule = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<VisibilityRule>): VisibilityRule {
+    const message = createBaseVisibilityRule();
+    message.selector = object.selector ?? "";
+    message.restriction = object.restriction ?? "";
+    return message;
+  },
+  fromAmino(object: VisibilityRuleAmino): VisibilityRule {
+    return {
+      selector: object.selector,
+      restriction: object.restriction
+    };
+  },
+  toAmino(message: VisibilityRule): VisibilityRuleAmino {
+    const obj: any = {};
+    obj.selector = message.selector;
+    obj.restriction = message.restriction;
+    return obj;
+  },
+  fromAminoMsg(object: VisibilityRuleAminoMsg): VisibilityRule {
+    return VisibilityRule.fromAmino(object.value);
   },
   fromProtoMsg(message: VisibilityRuleProtoMsg): VisibilityRule {
     return VisibilityRule.decode(message.value);

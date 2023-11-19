@@ -1,7 +1,8 @@
-import { Duration, DurationSDKType } from "../../google/protobuf/duration";
-import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { PeriodLock, PeriodLockSDKType } from "./lock";
+import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/duration";
+import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { PeriodLock, PeriodLockAmino, PeriodLockSDKType } from "./lock";
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 export interface MsgLockTokens {
   owner: string;
@@ -11,6 +12,15 @@ export interface MsgLockTokens {
 export interface MsgLockTokensProtoMsg {
   typeUrl: "/osmosis.lockup.MsgLockTokens";
   value: Uint8Array;
+}
+export interface MsgLockTokensAmino {
+  owner: string;
+  duration?: DurationAmino;
+  coins: CoinAmino[];
+}
+export interface MsgLockTokensAminoMsg {
+  type: "osmosis/lockup/lock-tokens";
+  value: MsgLockTokensAmino;
 }
 export interface MsgLockTokensSDKType {
   owner: string;
@@ -24,6 +34,13 @@ export interface MsgLockTokensResponseProtoMsg {
   typeUrl: "/osmosis.lockup.MsgLockTokensResponse";
   value: Uint8Array;
 }
+export interface MsgLockTokensResponseAmino {
+  ID: string;
+}
+export interface MsgLockTokensResponseAminoMsg {
+  type: "osmosis/lockup/lock-tokens-response";
+  value: MsgLockTokensResponseAmino;
+}
 export interface MsgLockTokensResponseSDKType {
   ID: bigint;
 }
@@ -34,6 +51,13 @@ export interface MsgBeginUnlockingAllProtoMsg {
   typeUrl: "/osmosis.lockup.MsgBeginUnlockingAll";
   value: Uint8Array;
 }
+export interface MsgBeginUnlockingAllAmino {
+  owner: string;
+}
+export interface MsgBeginUnlockingAllAminoMsg {
+  type: "osmosis/lockup/begin-unlock-tokens";
+  value: MsgBeginUnlockingAllAmino;
+}
 export interface MsgBeginUnlockingAllSDKType {
   owner: string;
 }
@@ -43,6 +67,13 @@ export interface MsgBeginUnlockingAllResponse {
 export interface MsgBeginUnlockingAllResponseProtoMsg {
   typeUrl: "/osmosis.lockup.MsgBeginUnlockingAllResponse";
   value: Uint8Array;
+}
+export interface MsgBeginUnlockingAllResponseAmino {
+  unlocks: PeriodLockAmino[];
+}
+export interface MsgBeginUnlockingAllResponseAminoMsg {
+  type: "osmosis/lockup/begin-unlocking-all-response";
+  value: MsgBeginUnlockingAllResponseAmino;
 }
 export interface MsgBeginUnlockingAllResponseSDKType {
   unlocks: PeriodLockSDKType[];
@@ -57,6 +88,16 @@ export interface MsgBeginUnlockingProtoMsg {
   typeUrl: "/osmosis.lockup.MsgBeginUnlocking";
   value: Uint8Array;
 }
+export interface MsgBeginUnlockingAmino {
+  owner: string;
+  ID: string;
+  /** Amount of unlocking coins. Unlock all if not set. */
+  coins: CoinAmino[];
+}
+export interface MsgBeginUnlockingAminoMsg {
+  type: "osmosis/lockup/begin-unlock-period-lock";
+  value: MsgBeginUnlockingAmino;
+}
 export interface MsgBeginUnlockingSDKType {
   owner: string;
   ID: bigint;
@@ -68,6 +109,13 @@ export interface MsgBeginUnlockingResponse {
 export interface MsgBeginUnlockingResponseProtoMsg {
   typeUrl: "/osmosis.lockup.MsgBeginUnlockingResponse";
   value: Uint8Array;
+}
+export interface MsgBeginUnlockingResponseAmino {
+  success: boolean;
+}
+export interface MsgBeginUnlockingResponseAminoMsg {
+  type: "osmosis/lockup/begin-unlocking-response";
+  value: MsgBeginUnlockingResponseAmino;
 }
 export interface MsgBeginUnlockingResponseSDKType {
   success: boolean;
@@ -93,6 +141,23 @@ export interface MsgExtendLockupProtoMsg {
  * MsgExtendLockup extends the existing lockup's duration.
  * The new duration is longer than the original.
  */
+export interface MsgExtendLockupAmino {
+  owner: string;
+  ID: string;
+  /**
+   * duration to be set. fails if lower than the current duration, or is
+   * unlocking
+   */
+  duration?: DurationAmino;
+}
+export interface MsgExtendLockupAminoMsg {
+  type: "osmosis/lockup/extend-lockup";
+  value: MsgExtendLockupAmino;
+}
+/**
+ * MsgExtendLockup extends the existing lockup's duration.
+ * The new duration is longer than the original.
+ */
 export interface MsgExtendLockupSDKType {
   owner: string;
   ID: bigint;
@@ -104,6 +169,13 @@ export interface MsgExtendLockupResponse {
 export interface MsgExtendLockupResponseProtoMsg {
   typeUrl: "/osmosis.lockup.MsgExtendLockupResponse";
   value: Uint8Array;
+}
+export interface MsgExtendLockupResponseAmino {
+  success: boolean;
+}
+export interface MsgExtendLockupResponseAminoMsg {
+  type: "osmosis/lockup/extend-lockup-response";
+  value: MsgExtendLockupResponseAmino;
 }
 export interface MsgExtendLockupResponseSDKType {
   success: boolean;
@@ -126,6 +198,20 @@ export interface MsgForceUnlockProtoMsg {
  * MsgForceUnlock unlocks locks immediately for
  * addresses registered via governance.
  */
+export interface MsgForceUnlockAmino {
+  owner: string;
+  ID: string;
+  /** Amount of unlocking coins. Unlock all if not set. */
+  coins: CoinAmino[];
+}
+export interface MsgForceUnlockAminoMsg {
+  type: "osmosis/lockup/force-unlock";
+  value: MsgForceUnlockAmino;
+}
+/**
+ * MsgForceUnlock unlocks locks immediately for
+ * addresses registered via governance.
+ */
 export interface MsgForceUnlockSDKType {
   owner: string;
   ID: bigint;
@@ -137,6 +223,13 @@ export interface MsgForceUnlockResponse {
 export interface MsgForceUnlockResponseProtoMsg {
   typeUrl: "/osmosis.lockup.MsgForceUnlockResponse";
   value: Uint8Array;
+}
+export interface MsgForceUnlockResponseAmino {
+  success: boolean;
+}
+export interface MsgForceUnlockResponseAminoMsg {
+  type: "osmosis/lockup/force-unlock-response";
+  value: MsgForceUnlockResponseAmino;
 }
 export interface MsgForceUnlockResponseSDKType {
   success: boolean;
@@ -185,6 +278,42 @@ export const MsgLockTokens = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<MsgLockTokens>): MsgLockTokens {
+    const message = createBaseMsgLockTokens();
+    message.owner = object.owner ?? "";
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
+    message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: MsgLockTokensAmino): MsgLockTokens {
+    return {
+      owner: object.owner,
+      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: MsgLockTokens): MsgLockTokensAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgLockTokensAminoMsg): MsgLockTokens {
+    return MsgLockTokens.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgLockTokens): MsgLockTokensAminoMsg {
+    return {
+      type: "osmosis/lockup/lock-tokens",
+      value: MsgLockTokens.toAmino(message)
+    };
+  },
   fromProtoMsg(message: MsgLockTokensProtoMsg): MsgLockTokens {
     return MsgLockTokens.decode(message.value);
   },
@@ -227,6 +356,32 @@ export const MsgLockTokensResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<MsgLockTokensResponse>): MsgLockTokensResponse {
+    const message = createBaseMsgLockTokensResponse();
+    if (object.ID !== undefined && object.ID !== null) {
+      message.ID = BigInt(object.ID.toString());
+    }
+    return message;
+  },
+  fromAmino(object: MsgLockTokensResponseAmino): MsgLockTokensResponse {
+    return {
+      ID: BigInt(object.ID)
+    };
+  },
+  toAmino(message: MsgLockTokensResponse): MsgLockTokensResponseAmino {
+    const obj: any = {};
+    obj.ID = message.ID ? message.ID.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgLockTokensResponseAminoMsg): MsgLockTokensResponse {
+    return MsgLockTokensResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgLockTokensResponse): MsgLockTokensResponseAminoMsg {
+    return {
+      type: "osmosis/lockup/lock-tokens-response",
+      value: MsgLockTokensResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgLockTokensResponseProtoMsg): MsgLockTokensResponse {
     return MsgLockTokensResponse.decode(message.value);
@@ -271,6 +426,30 @@ export const MsgBeginUnlockingAll = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<MsgBeginUnlockingAll>): MsgBeginUnlockingAll {
+    const message = createBaseMsgBeginUnlockingAll();
+    message.owner = object.owner ?? "";
+    return message;
+  },
+  fromAmino(object: MsgBeginUnlockingAllAmino): MsgBeginUnlockingAll {
+    return {
+      owner: object.owner
+    };
+  },
+  toAmino(message: MsgBeginUnlockingAll): MsgBeginUnlockingAllAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    return obj;
+  },
+  fromAminoMsg(object: MsgBeginUnlockingAllAminoMsg): MsgBeginUnlockingAll {
+    return MsgBeginUnlockingAll.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgBeginUnlockingAll): MsgBeginUnlockingAllAminoMsg {
+    return {
+      type: "osmosis/lockup/begin-unlock-tokens",
+      value: MsgBeginUnlockingAll.toAmino(message)
+    };
+  },
   fromProtoMsg(message: MsgBeginUnlockingAllProtoMsg): MsgBeginUnlockingAll {
     return MsgBeginUnlockingAll.decode(message.value);
   },
@@ -313,6 +492,34 @@ export const MsgBeginUnlockingAllResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<MsgBeginUnlockingAllResponse>): MsgBeginUnlockingAllResponse {
+    const message = createBaseMsgBeginUnlockingAllResponse();
+    message.unlocks = object.unlocks?.map(e => PeriodLock.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: MsgBeginUnlockingAllResponseAmino): MsgBeginUnlockingAllResponse {
+    return {
+      unlocks: Array.isArray(object?.unlocks) ? object.unlocks.map((e: any) => PeriodLock.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: MsgBeginUnlockingAllResponse): MsgBeginUnlockingAllResponseAmino {
+    const obj: any = {};
+    if (message.unlocks) {
+      obj.unlocks = message.unlocks.map(e => e ? PeriodLock.toAmino(e) : undefined);
+    } else {
+      obj.unlocks = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgBeginUnlockingAllResponseAminoMsg): MsgBeginUnlockingAllResponse {
+    return MsgBeginUnlockingAllResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgBeginUnlockingAllResponse): MsgBeginUnlockingAllResponseAminoMsg {
+    return {
+      type: "osmosis/lockup/begin-unlocking-all-response",
+      value: MsgBeginUnlockingAllResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgBeginUnlockingAllResponseProtoMsg): MsgBeginUnlockingAllResponse {
     return MsgBeginUnlockingAllResponse.decode(message.value);
@@ -371,6 +578,42 @@ export const MsgBeginUnlocking = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<MsgBeginUnlocking>): MsgBeginUnlocking {
+    const message = createBaseMsgBeginUnlocking();
+    message.owner = object.owner ?? "";
+    if (object.ID !== undefined && object.ID !== null) {
+      message.ID = BigInt(object.ID.toString());
+    }
+    message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: MsgBeginUnlockingAmino): MsgBeginUnlocking {
+    return {
+      owner: object.owner,
+      ID: BigInt(object.ID),
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: MsgBeginUnlocking): MsgBeginUnlockingAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.ID = message.ID ? message.ID.toString() : undefined;
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgBeginUnlockingAminoMsg): MsgBeginUnlocking {
+    return MsgBeginUnlocking.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgBeginUnlocking): MsgBeginUnlockingAminoMsg {
+    return {
+      type: "osmosis/lockup/begin-unlock-period-lock",
+      value: MsgBeginUnlocking.toAmino(message)
+    };
+  },
   fromProtoMsg(message: MsgBeginUnlockingProtoMsg): MsgBeginUnlocking {
     return MsgBeginUnlocking.decode(message.value);
   },
@@ -413,6 +656,30 @@ export const MsgBeginUnlockingResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<MsgBeginUnlockingResponse>): MsgBeginUnlockingResponse {
+    const message = createBaseMsgBeginUnlockingResponse();
+    message.success = object.success ?? false;
+    return message;
+  },
+  fromAmino(object: MsgBeginUnlockingResponseAmino): MsgBeginUnlockingResponse {
+    return {
+      success: object.success
+    };
+  },
+  toAmino(message: MsgBeginUnlockingResponse): MsgBeginUnlockingResponseAmino {
+    const obj: any = {};
+    obj.success = message.success;
+    return obj;
+  },
+  fromAminoMsg(object: MsgBeginUnlockingResponseAminoMsg): MsgBeginUnlockingResponse {
+    return MsgBeginUnlockingResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgBeginUnlockingResponse): MsgBeginUnlockingResponseAminoMsg {
+    return {
+      type: "osmosis/lockup/begin-unlocking-response",
+      value: MsgBeginUnlockingResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgBeginUnlockingResponseProtoMsg): MsgBeginUnlockingResponse {
     return MsgBeginUnlockingResponse.decode(message.value);
@@ -471,6 +738,40 @@ export const MsgExtendLockup = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<MsgExtendLockup>): MsgExtendLockup {
+    const message = createBaseMsgExtendLockup();
+    message.owner = object.owner ?? "";
+    if (object.ID !== undefined && object.ID !== null) {
+      message.ID = BigInt(object.ID.toString());
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
+    return message;
+  },
+  fromAmino(object: MsgExtendLockupAmino): MsgExtendLockup {
+    return {
+      owner: object.owner,
+      ID: BigInt(object.ID),
+      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
+    };
+  },
+  toAmino(message: MsgExtendLockup): MsgExtendLockupAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.ID = message.ID ? message.ID.toString() : undefined;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgExtendLockupAminoMsg): MsgExtendLockup {
+    return MsgExtendLockup.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgExtendLockup): MsgExtendLockupAminoMsg {
+    return {
+      type: "osmosis/lockup/extend-lockup",
+      value: MsgExtendLockup.toAmino(message)
+    };
+  },
   fromProtoMsg(message: MsgExtendLockupProtoMsg): MsgExtendLockup {
     return MsgExtendLockup.decode(message.value);
   },
@@ -513,6 +814,30 @@ export const MsgExtendLockupResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<MsgExtendLockupResponse>): MsgExtendLockupResponse {
+    const message = createBaseMsgExtendLockupResponse();
+    message.success = object.success ?? false;
+    return message;
+  },
+  fromAmino(object: MsgExtendLockupResponseAmino): MsgExtendLockupResponse {
+    return {
+      success: object.success
+    };
+  },
+  toAmino(message: MsgExtendLockupResponse): MsgExtendLockupResponseAmino {
+    const obj: any = {};
+    obj.success = message.success;
+    return obj;
+  },
+  fromAminoMsg(object: MsgExtendLockupResponseAminoMsg): MsgExtendLockupResponse {
+    return MsgExtendLockupResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgExtendLockupResponse): MsgExtendLockupResponseAminoMsg {
+    return {
+      type: "osmosis/lockup/extend-lockup-response",
+      value: MsgExtendLockupResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgExtendLockupResponseProtoMsg): MsgExtendLockupResponse {
     return MsgExtendLockupResponse.decode(message.value);
@@ -571,6 +896,42 @@ export const MsgForceUnlock = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<MsgForceUnlock>): MsgForceUnlock {
+    const message = createBaseMsgForceUnlock();
+    message.owner = object.owner ?? "";
+    if (object.ID !== undefined && object.ID !== null) {
+      message.ID = BigInt(object.ID.toString());
+    }
+    message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: MsgForceUnlockAmino): MsgForceUnlock {
+    return {
+      owner: object.owner,
+      ID: BigInt(object.ID),
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: MsgForceUnlock): MsgForceUnlockAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.ID = message.ID ? message.ID.toString() : undefined;
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgForceUnlockAminoMsg): MsgForceUnlock {
+    return MsgForceUnlock.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgForceUnlock): MsgForceUnlockAminoMsg {
+    return {
+      type: "osmosis/lockup/force-unlock",
+      value: MsgForceUnlock.toAmino(message)
+    };
+  },
   fromProtoMsg(message: MsgForceUnlockProtoMsg): MsgForceUnlock {
     return MsgForceUnlock.decode(message.value);
   },
@@ -613,6 +974,30 @@ export const MsgForceUnlockResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<MsgForceUnlockResponse>): MsgForceUnlockResponse {
+    const message = createBaseMsgForceUnlockResponse();
+    message.success = object.success ?? false;
+    return message;
+  },
+  fromAmino(object: MsgForceUnlockResponseAmino): MsgForceUnlockResponse {
+    return {
+      success: object.success
+    };
+  },
+  toAmino(message: MsgForceUnlockResponse): MsgForceUnlockResponseAmino {
+    const obj: any = {};
+    obj.success = message.success;
+    return obj;
+  },
+  fromAminoMsg(object: MsgForceUnlockResponseAminoMsg): MsgForceUnlockResponse {
+    return MsgForceUnlockResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgForceUnlockResponse): MsgForceUnlockResponseAminoMsg {
+    return {
+      type: "osmosis/lockup/force-unlock-response",
+      value: MsgForceUnlockResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgForceUnlockResponseProtoMsg): MsgForceUnlockResponse {
     return MsgForceUnlockResponse.decode(message.value);

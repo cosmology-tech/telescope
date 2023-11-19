@@ -1,9 +1,9 @@
-import { DeploymentFilters, DeploymentFiltersSDKType, DeploymentID, DeploymentIDSDKType, Deployment, DeploymentSDKType } from "./deployment";
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { GroupID, GroupIDSDKType, Group, GroupSDKType } from "./group";
-import { Account, AccountSDKType } from "../../escrow/v1beta1/types";
+import { DeploymentFilters, DeploymentFiltersAmino, DeploymentFiltersSDKType, DeploymentID, DeploymentIDAmino, DeploymentIDSDKType, Deployment, DeploymentAmino, DeploymentSDKType } from "./deployment";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { GroupID, GroupIDAmino, GroupIDSDKType, Group, GroupAmino, GroupSDKType } from "./group";
+import { Account, AccountAmino, AccountSDKType } from "../../escrow/v1beta1/types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { Rpc } from "../../../helpers";
+import { Exact, Rpc } from "../../../helpers";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
@@ -14,6 +14,15 @@ export interface QueryDeploymentsRequest {
 export interface QueryDeploymentsRequestProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.QueryDeploymentsRequest";
   value: Uint8Array;
+}
+/** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
+export interface QueryDeploymentsRequestAmino {
+  filters?: DeploymentFiltersAmino | undefined;
+  pagination?: PageRequestAmino | undefined;
+}
+export interface QueryDeploymentsRequestAminoMsg {
+  type: "/akash.deployment.v1beta1.QueryDeploymentsRequest";
+  value: QueryDeploymentsRequestAmino;
 }
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequestSDKType {
@@ -30,6 +39,15 @@ export interface QueryDeploymentsResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
+export interface QueryDeploymentsResponseAmino {
+  deployments: QueryDeploymentResponseAmino[];
+  pagination?: PageResponseAmino | undefined;
+}
+export interface QueryDeploymentsResponseAminoMsg {
+  type: "/akash.deployment.v1beta1.QueryDeploymentsResponse";
+  value: QueryDeploymentsResponseAmino;
+}
+/** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponseSDKType {
   deployments: QueryDeploymentResponseSDKType[];
   pagination?: PageResponseSDKType | undefined;
@@ -41,6 +59,14 @@ export interface QueryDeploymentRequest {
 export interface QueryDeploymentRequestProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.QueryDeploymentRequest";
   value: Uint8Array;
+}
+/** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
+export interface QueryDeploymentRequestAmino {
+  id?: DeploymentIDAmino | undefined;
+}
+export interface QueryDeploymentRequestAminoMsg {
+  type: "/akash.deployment.v1beta1.QueryDeploymentRequest";
+  value: QueryDeploymentRequestAmino;
 }
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequestSDKType {
@@ -57,6 +83,16 @@ export interface QueryDeploymentResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
+export interface QueryDeploymentResponseAmino {
+  deployment?: DeploymentAmino | undefined;
+  groups: GroupAmino[];
+  escrow_account?: AccountAmino | undefined;
+}
+export interface QueryDeploymentResponseAminoMsg {
+  type: "/akash.deployment.v1beta1.QueryDeploymentResponse";
+  value: QueryDeploymentResponseAmino;
+}
+/** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponseSDKType {
   deployment: DeploymentSDKType | undefined;
   groups: GroupSDKType[];
@@ -71,6 +107,14 @@ export interface QueryGroupRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryGroupRequest is request type for the Query/Group RPC method */
+export interface QueryGroupRequestAmino {
+  id?: GroupIDAmino | undefined;
+}
+export interface QueryGroupRequestAminoMsg {
+  type: "/akash.deployment.v1beta1.QueryGroupRequest";
+  value: QueryGroupRequestAmino;
+}
+/** QueryGroupRequest is request type for the Query/Group RPC method */
 export interface QueryGroupRequestSDKType {
   id: GroupIDSDKType | undefined;
 }
@@ -81,6 +125,14 @@ export interface QueryGroupResponse {
 export interface QueryGroupResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.QueryGroupResponse";
   value: Uint8Array;
+}
+/** QueryGroupResponse is response type for the Query/Group RPC method */
+export interface QueryGroupResponseAmino {
+  group?: GroupAmino | undefined;
+}
+export interface QueryGroupResponseAminoMsg {
+  type: "/akash.deployment.v1beta1.QueryGroupResponse";
+  value: QueryGroupResponseAmino;
 }
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponseSDKType {
@@ -120,6 +172,16 @@ export const QueryDeploymentsRequest = {
           reader.skipType(tag & 7);
           break;
       }
+    }
+    return message;
+  },
+  fromPartial<I extends Exact<Partial<QueryDeploymentsRequest>, I>>(object: I): QueryDeploymentsRequest {
+    const message = createBaseQueryDeploymentsRequest();
+    if (object.filters !== undefined && object.filters !== null) {
+      message.filters = DeploymentFilters.fromPartial(object.filters);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
     }
     return message;
   },
@@ -173,6 +235,14 @@ export const QueryDeploymentsResponse = {
     }
     return message;
   },
+  fromPartial<I extends Exact<Partial<QueryDeploymentsResponse>, I>>(object: I): QueryDeploymentsResponse {
+    const message = createBaseQueryDeploymentsResponse();
+    message.deployments = object.deployments?.map(e => QueryDeploymentResponse.fromPartial(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
+    return message;
+  },
   fromProtoMsg(message: QueryDeploymentsResponseProtoMsg): QueryDeploymentsResponse {
     return QueryDeploymentsResponse.decode(message.value);
   },
@@ -213,6 +283,13 @@ export const QueryDeploymentRequest = {
           reader.skipType(tag & 7);
           break;
       }
+    }
+    return message;
+  },
+  fromPartial<I extends Exact<Partial<QueryDeploymentRequest>, I>>(object: I): QueryDeploymentRequest {
+    const message = createBaseQueryDeploymentRequest();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromPartial(object.id);
     }
     return message;
   },
@@ -273,6 +350,17 @@ export const QueryDeploymentResponse = {
     }
     return message;
   },
+  fromPartial<I extends Exact<Partial<QueryDeploymentResponse>, I>>(object: I): QueryDeploymentResponse {
+    const message = createBaseQueryDeploymentResponse();
+    if (object.deployment !== undefined && object.deployment !== null) {
+      message.deployment = Deployment.fromPartial(object.deployment);
+    }
+    message.groups = object.groups?.map(e => Group.fromPartial(e)) || [];
+    if (object.escrowAccount !== undefined && object.escrowAccount !== null) {
+      message.escrowAccount = Account.fromPartial(object.escrowAccount);
+    }
+    return message;
+  },
   fromProtoMsg(message: QueryDeploymentResponseProtoMsg): QueryDeploymentResponse {
     return QueryDeploymentResponse.decode(message.value);
   },
@@ -316,6 +404,13 @@ export const QueryGroupRequest = {
     }
     return message;
   },
+  fromPartial<I extends Exact<Partial<QueryGroupRequest>, I>>(object: I): QueryGroupRequest {
+    const message = createBaseQueryGroupRequest();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromPartial(object.id);
+    }
+    return message;
+  },
   fromProtoMsg(message: QueryGroupRequestProtoMsg): QueryGroupRequest {
     return QueryGroupRequest.decode(message.value);
   },
@@ -356,6 +451,13 @@ export const QueryGroupResponse = {
           reader.skipType(tag & 7);
           break;
       }
+    }
+    return message;
+  },
+  fromPartial<I extends Exact<Partial<QueryGroupResponse>, I>>(object: I): QueryGroupResponse {
+    const message = createBaseQueryGroupResponse();
+    if (object.group !== undefined && object.group !== null) {
+      message.group = Group.fromPartial(object.group);
     }
     return message;
   },

@@ -1,5 +1,6 @@
-import { TokenPair, TokenPairSDKType } from "./erc20";
+import { TokenPair, TokenPairAmino, TokenPairSDKType } from "./erc20";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
@@ -11,6 +12,17 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.erc20.v1.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState defines the module's genesis state. */
+export interface GenesisStateAmino {
+  /** module parameters */
+  params?: ParamsAmino;
+  /** registered token pairs */
+  token_pairs: TokenPairAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "/evmos.erc20.v1.GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
@@ -31,6 +43,21 @@ export interface Params {
 export interface ParamsProtoMsg {
   typeUrl: "/evmos.erc20.v1.Params";
   value: Uint8Array;
+}
+/** Params defines the erc20 module params */
+export interface ParamsAmino {
+  /** parameter to enable the conversion of Cosmos coins <--> ERC20 tokens. */
+  enable_erc20: boolean;
+  /**
+   * parameter to enable the EVM hook that converts an ERC20 token to a Cosmos
+   * Coin by transferring the Tokens through a MsgEthereumTx to the
+   * ModuleAddress Ethereum address.
+   */
+  enable_evm_hook: boolean;
+}
+export interface ParamsAminoMsg {
+  type: "/evmos.erc20.v1.Params";
+  value: ParamsAmino;
 }
 /** Params defines the erc20 module params */
 export interface ParamsSDKType {
@@ -73,6 +100,33 @@ export const GenesisState = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
+    message.tokenPairs = object.tokenPairs?.map(e => TokenPair.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      tokenPairs: Array.isArray(object?.token_pairs) ? object.token_pairs.map((e: any) => TokenPair.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    if (message.tokenPairs) {
+      obj.token_pairs = message.tokenPairs.map(e => e ? TokenPair.toAmino(e) : undefined);
+    } else {
+      obj.token_pairs = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
@@ -123,6 +177,27 @@ export const Params = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<Params>): Params {
+    const message = createBaseParams();
+    message.enableErc20 = object.enableErc20 ?? false;
+    message.enableEvmHook = object.enableEvmHook ?? false;
+    return message;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      enableErc20: object.enable_erc20,
+      enableEvmHook: object.enable_evm_hook
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.enable_erc20 = message.enableErc20;
+    obj.enable_evm_hook = message.enableEvmHook;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

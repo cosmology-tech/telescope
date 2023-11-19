@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { DeepPartial, isObject, isSet } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * `NullValue` is a singleton enumeration to represent the null value for the
@@ -12,6 +13,7 @@ export enum NullValue {
   UNRECOGNIZED = -1,
 }
 export const NullValueSDKType = NullValue;
+export const NullValueAmino = NullValue;
 export function nullValueFromJSON(object: any): NullValue {
   switch (object) {
     case 0:
@@ -40,6 +42,14 @@ export interface Struct_FieldsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
+export interface Struct_FieldsEntryAmino {
+  key: string;
+  value?: ValueAmino;
+}
+export interface Struct_FieldsEntryAminoMsg {
+  type: string;
+  value: Struct_FieldsEntryAmino;
+}
 export interface Struct_FieldsEntrySDKType {
   key: string;
   value?: ValueSDKType;
@@ -63,6 +73,26 @@ export interface Struct {
 export interface StructProtoMsg {
   typeUrl: "/google.protobuf.Struct";
   value: Uint8Array;
+}
+/**
+ * `Struct` represents a structured data value, consisting of fields
+ * which map to dynamically typed values. In some languages, `Struct`
+ * might be supported by a native representation. For example, in
+ * scripting languages like JS a struct is represented as an
+ * object. The details of that representation are described together
+ * with the proto support for the language.
+ * 
+ * The JSON representation for `Struct` is JSON object.
+ */
+export interface StructAmino {
+  /** Unordered map of dynamically typed values. */
+  fields?: {
+    [key: string]: ValueAmino;
+  };
+}
+export interface StructAminoMsg {
+  type: "/google.protobuf.Struct";
+  value: StructAmino;
 }
 /**
  * `Struct` represents a structured data value, consisting of fields
@@ -113,6 +143,32 @@ export interface ValueProtoMsg {
  * 
  * The JSON representation for `Value` is JSON value.
  */
+export interface ValueAmino {
+  /** Represents a null value. */
+  null_value?: NullValue;
+  /** Represents a double value. */
+  number_value?: number;
+  /** Represents a string value. */
+  string_value?: string;
+  /** Represents a boolean value. */
+  bool_value?: boolean;
+  /** Represents a structured value. */
+  struct_value?: StructAmino;
+  /** Represents a repeated `Value`. */
+  list_value?: ListValueAmino;
+}
+export interface ValueAminoMsg {
+  type: "/google.protobuf.Value";
+  value: ValueAmino;
+}
+/**
+ * `Value` represents a dynamically typed value which can be either
+ * null, a number, a string, a boolean, a recursive struct value, or a
+ * list of values. A producer of value is expected to set one of that
+ * variants, absence of any variant indicates an error.
+ * 
+ * The JSON representation for `Value` is JSON value.
+ */
 export interface ValueSDKType {
   null_value?: NullValue;
   number_value?: number;
@@ -133,6 +189,19 @@ export interface ListValue {
 export interface ListValueProtoMsg {
   typeUrl: "/google.protobuf.ListValue";
   value: Uint8Array;
+}
+/**
+ * `ListValue` is a wrapper around a repeated field of values.
+ * 
+ * The JSON representation for `ListValue` is JSON array.
+ */
+export interface ListValueAmino {
+  /** Repeated field of dynamically typed values. */
+  values: ValueAmino[];
+}
+export interface ListValueAminoMsg {
+  type: "/google.protobuf.ListValue";
+  value: ListValueAmino;
 }
 /**
  * `ListValue` is a wrapper around a repeated field of values.
@@ -178,6 +247,29 @@ export const Struct_FieldsEntry = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<Struct_FieldsEntry>): Struct_FieldsEntry {
+    const message = createBaseStruct_FieldsEntry();
+    message.key = object.key ?? "";
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Value.fromPartial(object.value);
+    }
+    return message;
+  },
+  fromAmino(object: Struct_FieldsEntryAmino): Struct_FieldsEntry {
+    return {
+      key: object.key,
+      value: object?.value ? Value.fromAmino(object.value) : undefined
+    };
+  },
+  toAmino(message: Struct_FieldsEntry): Struct_FieldsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value ? Value.toAmino(message.value) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: Struct_FieldsEntryAminoMsg): Struct_FieldsEntry {
+    return Struct_FieldsEntry.fromAmino(object.value);
+  },
   fromProtoMsg(message: Struct_FieldsEntryProtoMsg): Struct_FieldsEntry {
     return Struct_FieldsEntry.decode(message.value);
   },
@@ -220,6 +312,41 @@ export const Struct = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<Struct>): Struct {
+    const message = createBaseStruct();
+    message.fields = Object.entries(object.fields ?? {}).reduce<{
+      [key: string]: Value;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = Value.fromPartial(value);
+      }
+      return acc;
+    }, {});
+    return message;
+  },
+  fromAmino(object: StructAmino): Struct {
+    return {
+      fields: isObject(object.fields) ? Object.entries(object.fields).reduce<{
+        [key: string]: Value;
+      }>((acc, [key, value]) => {
+        acc[key] = Value.fromAmino(value);
+        return acc;
+      }, {}) : {}
+    };
+  },
+  toAmino(message: Struct): StructAmino {
+    const obj: any = {};
+    obj.fields = {};
+    if (message.fields) {
+      Object.entries(message.fields).forEach(([k, v]) => {
+        obj.fields[k] = Value.toAmino(v);
+      });
+    }
+    return obj;
+  },
+  fromAminoMsg(object: StructAminoMsg): Struct {
+    return Struct.fromAmino(object.value);
   },
   fromProtoMsg(message: StructProtoMsg): Struct {
     return Struct.decode(message.value);
@@ -299,6 +426,43 @@ export const Value = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<Value>): Value {
+    const message = createBaseValue();
+    message.nullValue = object.nullValue ?? undefined;
+    message.numberValue = object.numberValue ?? undefined;
+    message.stringValue = object.stringValue ?? undefined;
+    message.boolValue = object.boolValue ?? undefined;
+    if (object.structValue !== undefined && object.structValue !== null) {
+      message.structValue = Struct.fromPartial(object.structValue);
+    }
+    if (object.listValue !== undefined && object.listValue !== null) {
+      message.listValue = ListValue.fromPartial(object.listValue);
+    }
+    return message;
+  },
+  fromAmino(object: ValueAmino): Value {
+    return {
+      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
+      numberValue: object?.number_value,
+      stringValue: object?.string_value,
+      boolValue: object?.bool_value,
+      structValue: object?.struct_value ? Struct.fromAmino(object.struct_value) : undefined,
+      listValue: object?.list_value ? ListValue.fromAmino(object.list_value) : undefined
+    };
+  },
+  toAmino(message: Value): ValueAmino {
+    const obj: any = {};
+    obj.null_value = message.nullValue;
+    obj.number_value = message.numberValue;
+    obj.string_value = message.stringValue;
+    obj.bool_value = message.boolValue;
+    obj.struct_value = message.structValue ? Struct.toAmino(message.structValue) : undefined;
+    obj.list_value = message.listValue ? ListValue.toAmino(message.listValue) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ValueAminoMsg): Value {
+    return Value.fromAmino(object.value);
+  },
   fromProtoMsg(message: ValueProtoMsg): Value {
     return Value.decode(message.value);
   },
@@ -341,6 +505,28 @@ export const ListValue = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<ListValue>): ListValue {
+    const message = createBaseListValue();
+    message.values = object.values?.map(e => Value.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: ListValueAmino): ListValue {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: ListValue): ListValueAmino {
+    const obj: any = {};
+    if (message.values) {
+      obj.values = message.values.map(e => e ? Value.toAmino(e) : undefined);
+    } else {
+      obj.values = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ListValueAminoMsg): ListValue {
+    return ListValue.fromAmino(object.value);
   },
   fromProtoMsg(message: ListValueProtoMsg): ListValue {
     return ListValue.decode(message.value);

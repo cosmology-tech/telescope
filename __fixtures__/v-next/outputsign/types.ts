@@ -48,4 +48,10 @@ export interface TelescopeGeneratedCodec<
   toProtoMsg?: (message: T) => Any;
 }
 
+export type TelescopeGeneratedType<
+  T = unknown,
+  SDK = unknown,
+  Amino = unknown
+> = TelescopeGeneratedCodec<T, SDK, Amino>;
+
 export type GeneratedType = TelescopeGeneratedCodec;

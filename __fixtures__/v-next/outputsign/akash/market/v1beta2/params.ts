@@ -1,5 +1,6 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** Params is the params for the x/market module */
 export interface Params {
@@ -9,6 +10,15 @@ export interface Params {
 export interface ParamsProtoMsg {
   typeUrl: "/akash.market.v1beta2.Params";
   value: Uint8Array;
+}
+/** Params is the params for the x/market module */
+export interface ParamsAmino {
+  bid_min_deposit?: CoinAmino;
+  order_max_bids: number;
+}
+export interface ParamsAminoMsg {
+  type: "/akash.market.v1beta2.Params";
+  value: ParamsAmino;
 }
 /** Params is the params for the x/market module */
 export interface ParamsSDKType {
@@ -51,6 +61,29 @@ export const Params = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
+    const message = createBaseParams();
+    if (object.bidMinDeposit !== undefined && object.bidMinDeposit !== null) {
+      message.bidMinDeposit = Coin.fromPartial(object.bidMinDeposit);
+    }
+    message.orderMaxBids = object.orderMaxBids ?? 0;
+    return message;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      bidMinDeposit: object?.bid_min_deposit ? Coin.fromAmino(object.bid_min_deposit) : undefined,
+      orderMaxBids: object.order_max_bids
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.bid_min_deposit = message.bidMinDeposit ? Coin.toAmino(message.bidMinDeposit) : undefined;
+    obj.order_max_bids = message.orderMaxBids;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

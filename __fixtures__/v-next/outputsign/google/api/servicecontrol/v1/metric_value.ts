@@ -1,7 +1,7 @@
-import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
-import { Distribution, DistributionSDKType } from "./distribution";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
+import { Distribution, DistributionAmino, DistributionSDKType } from "./distribution";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { toTimestamp, fromTimestamp } from "../../../../helpers";
+import { DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface MetricValue_LabelsEntry {
   key: string;
@@ -10,6 +10,14 @@ export interface MetricValue_LabelsEntry {
 export interface MetricValue_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
+}
+export interface MetricValue_LabelsEntryAmino {
+  key: string;
+  value: string;
+}
+export interface MetricValue_LabelsEntryAminoMsg {
+  type: string;
+  value: MetricValue_LabelsEntryAmino;
 }
 export interface MetricValue_LabelsEntrySDKType {
   key: string;
@@ -56,6 +64,46 @@ export interface MetricValueProtoMsg {
   value: Uint8Array;
 }
 /** Represents a single metric value. */
+export interface MetricValueAmino {
+  /**
+   * The labels describing the metric value.
+   * See comments on [google.api.servicecontrol.v1.Operation.labels][google.api.servicecontrol.v1.Operation.labels] for
+   * the overriding relationship.
+   * Note that this map must not contain monitored resource labels.
+   */
+  labels: {
+    [key: string]: string;
+  };
+  /**
+   * The start of the time period over which this metric value's measurement
+   * applies. The time period has different semantics for different metric
+   * types (cumulative, delta, and gauge). See the metric definition
+   * documentation in the service configuration for details. If not specified,
+   * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
+   */
+  start_time?: string;
+  /**
+   * The end of the time period over which this metric value's measurement
+   * applies.  If not specified,
+   * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
+   */
+  end_time?: string;
+  /** A boolean value. */
+  bool_value?: boolean;
+  /** A signed 64-bit integer value. */
+  int64_value?: string;
+  /** A double precision floating point value. */
+  double_value?: number;
+  /** A text string value. */
+  string_value?: string;
+  /** A distribution value. */
+  distribution_value?: DistributionAmino;
+}
+export interface MetricValueAminoMsg {
+  type: "/google.api.servicecontrol.v1.MetricValue";
+  value: MetricValueAmino;
+}
+/** Represents a single metric value. */
 export interface MetricValueSDKType {
   labels: {
     [key: string]: string;
@@ -82,6 +130,21 @@ export interface MetricValueSet {
 export interface MetricValueSetProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.MetricValueSet";
   value: Uint8Array;
+}
+/**
+ * Represents a set of metric values in the same metric.
+ * Each metric value in the set should have a unique combination of start time,
+ * end time, and label values.
+ */
+export interface MetricValueSetAmino {
+  /** The metric name defined in the service configuration. */
+  metric_name: string;
+  /** The values in this metric. */
+  metric_values: MetricValueAmino[];
+}
+export interface MetricValueSetAminoMsg {
+  type: "/google.api.servicecontrol.v1.MetricValueSet";
+  value: MetricValueSetAmino;
 }
 /**
  * Represents a set of metric values in the same metric.
@@ -127,6 +190,27 @@ export const MetricValue_LabelsEntry = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<MetricValue_LabelsEntry>): MetricValue_LabelsEntry {
+    const message = createBaseMetricValue_LabelsEntry();
+    message.key = object.key ?? "";
+    message.value = object.value ?? "";
+    return message;
+  },
+  fromAmino(object: MetricValue_LabelsEntryAmino): MetricValue_LabelsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+  toAmino(message: MetricValue_LabelsEntry): MetricValue_LabelsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: MetricValue_LabelsEntryAminoMsg): MetricValue_LabelsEntry {
+    return MetricValue_LabelsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: MetricValue_LabelsEntryProtoMsg): MetricValue_LabelsEntry {
     return MetricValue_LabelsEntry.decode(message.value);
@@ -220,6 +304,66 @@ export const MetricValue = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<MetricValue>): MetricValue {
+    const message = createBaseMetricValue();
+    message.labels = Object.entries(object.labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = String(value);
+      }
+      return acc;
+    }, {});
+    message.startTime = object.startTime ?? undefined;
+    message.endTime = object.endTime ?? undefined;
+    message.boolValue = object.boolValue ?? undefined;
+    if (object.int64Value !== undefined && object.int64Value !== null) {
+      message.int64Value = BigInt(object.int64Value.toString());
+    }
+    message.doubleValue = object.doubleValue ?? undefined;
+    message.stringValue = object.stringValue ?? undefined;
+    if (object.distributionValue !== undefined && object.distributionValue !== null) {
+      message.distributionValue = Distribution.fromPartial(object.distributionValue);
+    }
+    return message;
+  },
+  fromAmino(object: MetricValueAmino): MetricValue {
+    return {
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
+      endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : undefined,
+      boolValue: object?.bool_value,
+      int64Value: object?.int64_value ? BigInt(object.int64_value) : undefined,
+      doubleValue: object?.double_value,
+      stringValue: object?.string_value,
+      distributionValue: object?.distribution_value ? Distribution.fromAmino(object.distribution_value) : undefined
+    };
+  },
+  toAmino(message: MetricValue): MetricValueAmino {
+    const obj: any = {};
+    obj.labels = {};
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
+    obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
+    obj.bool_value = message.boolValue;
+    obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
+    obj.double_value = message.doubleValue;
+    obj.string_value = message.stringValue;
+    obj.distribution_value = message.distributionValue ? Distribution.toAmino(message.distributionValue) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MetricValueAminoMsg): MetricValue {
+    return MetricValue.fromAmino(object.value);
+  },
   fromProtoMsg(message: MetricValueProtoMsg): MetricValue {
     return MetricValue.decode(message.value);
   },
@@ -269,6 +413,31 @@ export const MetricValueSet = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<MetricValueSet>): MetricValueSet {
+    const message = createBaseMetricValueSet();
+    message.metricName = object.metricName ?? "";
+    message.metricValues = object.metricValues?.map(e => MetricValue.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: MetricValueSetAmino): MetricValueSet {
+    return {
+      metricName: object.metric_name,
+      metricValues: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: MetricValueSet): MetricValueSetAmino {
+    const obj: any = {};
+    obj.metric_name = message.metricName;
+    if (message.metricValues) {
+      obj.metric_values = message.metricValues.map(e => e ? MetricValue.toAmino(e) : undefined);
+    } else {
+      obj.metric_values = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MetricValueSetAminoMsg): MetricValueSet {
+    return MetricValueSet.fromAmino(object.value);
   },
   fromProtoMsg(message: MetricValueSetProtoMsg): MetricValueSet {
     return MetricValueSet.decode(message.value);
