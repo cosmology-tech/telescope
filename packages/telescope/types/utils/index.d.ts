@@ -74,6 +74,7 @@ export declare const UTILS: {
     BinaryReader: string;
     BinaryWriter: string;
     TelescopeGeneratedType: string;
+    GlobalDecoderRegistry: string;
 };
 export declare const UTIL_HELPERS: string[];
 export declare const fixlocalpaths: (imports: ImportObj[]) => {

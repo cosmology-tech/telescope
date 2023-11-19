@@ -7,7 +7,7 @@
   "license": "SEE LICENSE IN LICENSE",
   "main": "main/index.js",
   "module": "module/index.js",
-  "typings": "types/src/index.d.ts",
+  "typings": "types/index.d.ts",
   "directories": {
     "lib": "src",
     "test": "__tests__"

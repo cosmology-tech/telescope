@@ -148,6 +148,16 @@ export const decode = {
             args.field.options['(cosmos_proto.accepts_interface)']
 
         ) {
+            const isGlobalRegistry = args.context.options.interfaces?.enabled && args.context.options.interfaces?.useGlobalDecoderRegistry;
+
+            if(isGlobalRegistry){
+              return switchAnyTypeArrayUnwrap(
+                num,
+                prop,
+                name,
+              )
+            }
+
             const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
             const interfaceFnName = getInterfaceDecoderName(interfaceName)
 
@@ -382,6 +392,17 @@ export const baseTypes = {
     },
 
     anyType(args: DecodeMethod) {
+        const isGlobalRegistry = args.context.options.interfaces?.enabled && args.context.options.interfaces?.useGlobalDecoderRegistry;
+
+        if(isGlobalRegistry) {
+          return t.callExpression(
+            t.memberExpression(t.identifier("GlobalDecoderRegistry"), t.identifier("unwrapAny")),
+            [
+                t.identifier('reader')
+            ]
+          );
+        }
+
         const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
         const interfaceFnName = getInterfaceDecoderName(interfaceName)
         const asAny = t.tsAsExpression(
@@ -666,6 +687,34 @@ export const switchProtoTypeArray = (
             t.breakStatement()
         ]
     )
+};
+
+export const switchAnyTypeArrayUnwrap = (num: number, prop: string, name: string) => {
+  return t.switchCase(
+      t.numericLiteral(num),
+      [
+          t.expressionStatement(
+              t.callExpression(
+                  t.memberExpression(
+                      t.memberExpression(
+                          t.identifier('message'),
+                          t.identifier(prop)
+                      ),
+                      t.identifier('push')
+                  ),
+                  [
+                    t.callExpression(
+                      t.memberExpression(t.identifier("GlobalDecoderRegistry"), t.identifier("unwrapAny")),
+                      [
+                          t.identifier('reader')
+                      ]
+                    )
+                  ]
+              )
+          ),
+          t.breakStatement()
+      ]
+  )
 };
 
 export const switchAnyTypeArray = (num: number, prop: string, name: string) => {

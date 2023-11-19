@@ -1,0 +1,581 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`misc/eval_request date 1`] = `
+"export const EvalRequest = {
+  typeUrl: "/misc.EvalRequest",
+  is(o: any): o is EvalRequest {
+    return o && (o.$typeUrl === EvalRequest.typeUrl || o.bindings && o.refs && typeof o.testNum === "number" && typeof o.testString === "string" && typeof o.testBool === "boolean" && Array.isArray(o.testArray) && (!o.testArray.length || typeof o.testArray[0] === "string"));
+  },
+  isSDK(o: any): o is EvalRequestSDKType {
+    return o && (o.$typeUrl === EvalRequest.typeUrl || o.bindings && o.refs && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string"));
+  },
+  isAmino(o: any): o is EvalRequestAmino {
+    return o && (o.$typeUrl === EvalRequest.typeUrl || o.bindings && o.refs && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string"));
+  },
+  encode(message: EvalRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    Object.entries(message.bindings).forEach(([key, value]) => {
+      EvalRequest_BindingsEntry.encode({
+        key: (key as any),
+        value
+      }, writer.uint32(10).fork()).ldelim();
+    });
+    Object.entries(message.refs).forEach(([key, value]) => {
+      EvalRequest_RefsEntry.encode({
+        key: (key as any),
+        value
+      }, writer.uint32(18).fork()).ldelim();
+    });
+    if (message.testNum !== 0) {
+      writer.uint32(24).uint32(message.testNum);
+    }
+    if (message.testString !== "") {
+      writer.uint32(34).string(message.testString);
+    }
+    if (message.testBool === true) {
+      writer.uint32(40).bool(message.testBool);
+    }
+    if (message.instantiatePermission !== undefined) {
+      AccessConfig.encode(message.instantiatePermission, writer.uint32(66).fork()).ldelim();
+    }
+    if (message.id !== undefined) {
+      writer.uint32(98).string(message.id);
+    }
+    if (message.name !== undefined) {
+      writer.uint32(106).string(message.name);
+    }
+    for (const v of message.testArray) {
+      writer.uint32(114).string(v!);
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): EvalRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEvalRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          const entry1 = EvalRequest_BindingsEntry.decode(reader, reader.uint32());
+          if (entry1.value !== undefined) {
+            message.bindings[entry1.key] = entry1.value;
+          }
+          break;
+        case 2:
+          const entry2 = EvalRequest_RefsEntry.decode(reader, reader.uint32());
+          if (entry2.value !== undefined) {
+            message.refs[entry2.key] = entry2.value;
+          }
+          break;
+        case 3:
+          message.testNum = reader.uint32();
+          break;
+        case 4:
+          message.testString = reader.string();
+          break;
+        case 5:
+          message.testBool = reader.bool();
+          break;
+        case 8:
+          message.instantiatePermission = AccessConfig.decode(reader, reader.uint32());
+          break;
+        case 12:
+          message.id = reader.string();
+          break;
+        case 13:
+          message.name = reader.string();
+          break;
+        case 14:
+          message.testArray.push(reader.string());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): EvalRequest {
+    return {
+      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
+        [key: string]: ExprValue;
+      }>((acc, [key, value]) => {
+        acc[key] = ExprValue.fromJSON(value);
+        return acc;
+      }, {}) : {},
+      refs: isObject(object.refs) ? Object.entries(object.refs).reduce<{
+        [key: string]: IdRef;
+      }>((acc, [key, value]) => {
+        acc[key] = IdRef.fromJSON(value);
+        return acc;
+      }, {}) : {},
+      testNum: isSet(object.testNum) ? Number(object.testNum) : 0,
+      testString: isSet(object.testString) ? String(object.testString) : "",
+      testBool: isSet(object.testBool) ? Boolean(object.testBool) : false,
+      instantiatePermission: isSet(object.instantiatePermission) ? AccessConfig.fromJSON(object.instantiatePermission) : undefined,
+      id: isSet(object.id) ? String(object.id) : undefined,
+      name: isSet(object.name) ? String(object.name) : undefined,
+      testArray: Array.isArray(object?.testArray) ? object.testArray.map((e: any) => String(e)) : []
+    };
+  },
+  toJSON(message: EvalRequest): unknown {
+    const obj: any = {};
+    obj.bindings = {};
+    if (message.bindings) {
+      Object.entries(message.bindings).forEach(([k, v]) => {
+        obj.bindings[k] = ExprValue.toJSON(v);
+      });
+    }
+    obj.refs = {};
+    if (message.refs) {
+      Object.entries(message.refs).forEach(([k, v]) => {
+        obj.refs[k] = IdRef.toJSON(v);
+      });
+    }
+    message.testNum !== undefined && (obj.testNum = Math.round(message.testNum));
+    message.testString !== undefined && (obj.testString = message.testString);
+    message.testBool !== undefined && (obj.testBool = message.testBool);
+    message.instantiatePermission !== undefined && (obj.instantiatePermission = message.instantiatePermission ? AccessConfig.toJSON(message.instantiatePermission) : undefined);
+    message.id !== undefined && (obj.id = message.id);
+    message.name !== undefined && (obj.name = message.name);
+    if (message.testArray) {
+      obj.testArray = message.testArray.map(e => e);
+    } else {
+      obj.testArray = [];
+    }
+    return obj;
+  },
+  fromPartial(object: Partial<EvalRequest>): EvalRequest {
+    const message = createBaseEvalRequest();
+    message.bindings = Object.entries(object.bindings ?? {}).reduce<{
+      [key: string]: ExprValue;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = ExprValue.fromPartial(value);
+      }
+      return acc;
+    }, {});
+    message.refs = Object.entries(object.refs ?? {}).reduce<{
+      [key: string]: IdRef;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = IdRef.fromPartial(value);
+      }
+      return acc;
+    }, {});
+    message.testNum = object.testNum ?? 0;
+    message.testString = object.testString ?? "";
+    message.testBool = object.testBool ?? false;
+    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : undefined;
+    message.id = object.id ?? undefined;
+    message.name = object.name ?? undefined;
+    message.testArray = object.testArray?.map(e => e) || [];
+    return message;
+  },
+  fromSDK(object: EvalRequestSDKType): EvalRequest {
+    return {
+      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
+        [key: string]: ExprValue;
+      }>((acc, [key, value]) => {
+        acc[key] = ExprValue.fromSDK(value);
+        return acc;
+      }, {}) : {},
+      refs: isObject(object.refs) ? Object.entries(object.refs).reduce<{
+        [key: string]: IdRef;
+      }>((acc, [key, value]) => {
+        acc[key] = IdRef.fromSDK(value);
+        return acc;
+      }, {}) : {},
+      testNum: object?.test_num,
+      testString: object?.test_string,
+      testBool: object?.test_bool,
+      instantiatePermission: object.instantiate_permission ? AccessConfig.fromSDK(object.instantiate_permission) : undefined,
+      id: object?.id,
+      name: object?.name,
+      testArray: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => e) : []
+    };
+  },
+  toSDK(message: EvalRequest): EvalRequestSDKType {
+    const obj: any = {};
+    obj.bindings = {};
+    if (message.bindings) {
+      Object.entries(message.bindings).forEach(([k, v]) => {
+        obj.bindings[k] = ExprValue.toSDK(v);
+      });
+    }
+    obj.refs = {};
+    if (message.refs) {
+      Object.entries(message.refs).forEach(([k, v]) => {
+        obj.refs[k] = IdRef.toSDK(v);
+      });
+    }
+    obj.test_num = message.testNum;
+    obj.test_string = message.testString;
+    obj.test_bool = message.testBool;
+    message.instantiatePermission !== undefined && (obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toSDK(message.instantiatePermission) : undefined);
+    obj.id = message.id;
+    obj.name = message.name;
+    if (message.testArray) {
+      obj.test_array = message.testArray.map(e => e);
+    } else {
+      obj.test_array = [];
+    }
+    return obj;
+  },
+  fromAmino(object: EvalRequestAmino): EvalRequest {
+    return {
+      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
+        [key: string]: ExprValue;
+      }>((acc, [key, value]) => {
+        acc[key] = ExprValue.fromAmino(value);
+        return acc;
+      }, {}) : {},
+      refs: isObject(object.refs) ? Object.entries(object.refs).reduce<{
+        [key: string]: IdRef;
+      }>((acc, [key, value]) => {
+        acc[key] = IdRef.fromAmino(value);
+        return acc;
+      }, {}) : {},
+      testNum: object.test_num,
+      testString: object.test_string,
+      testBool: object.test_bool,
+      instantiatePermission: object?.instantiate_permission ? AccessConfig.fromAmino(object.instantiate_permission) : undefined,
+      id: object?.id,
+      name: object?.name,
+      testArray: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: EvalRequest): EvalRequestAmino {
+    const obj: any = {};
+    obj.bindings = {};
+    if (message.bindings) {
+      Object.entries(message.bindings).forEach(([k, v]) => {
+        obj.bindings[k] = ExprValue.toAmino(v);
+      });
+    }
+    obj.refs = {};
+    if (message.refs) {
+      Object.entries(message.refs).forEach(([k, v]) => {
+        obj.refs[k] = IdRef.toAmino(v);
+      });
+    }
+    obj.test_num = message.testNum;
+    obj.test_string = message.testString;
+    obj.test_bool = message.testBool;
+    obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission) : undefined;
+    obj.id = message.id;
+    obj.name = message.name;
+    if (message.testArray) {
+      obj.test_array = message.testArray.map(e => e);
+    } else {
+      obj.test_array = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: EvalRequestAminoMsg): EvalRequest {
+    return EvalRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: EvalRequestProtoMsg): EvalRequest {
+    return EvalRequest.decode(message.value);
+  },
+  toProto(message: EvalRequest): Uint8Array {
+    return EvalRequest.encode(message).finish();
+  },
+  toProtoMsg(message: EvalRequest): EvalRequestProtoMsg {
+    return {
+      typeUrl: "/misc.EvalRequest",
+      value: EvalRequest.encode(message).finish()
+    };
+  }
+};"
+`;
+
+exports[`misc/eval_request timestamp 1`] = `
+"export const EvalRequest = {
+  typeUrl: "/misc.EvalRequest",
+  is(o: any): o is EvalRequest {
+    return o && (o.$typeUrl === EvalRequest.typeUrl || o.bindings && o.refs && typeof o.testNum === "number" && typeof o.testString === "string" && typeof o.testBool === "boolean" && Array.isArray(o.testArray) && (!o.testArray.length || typeof o.testArray[0] === "string"));
+  },
+  isSDK(o: any): o is EvalRequestSDKType {
+    return o && (o.$typeUrl === EvalRequest.typeUrl || o.bindings && o.refs && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string"));
+  },
+  isAmino(o: any): o is EvalRequestAmino {
+    return o && (o.$typeUrl === EvalRequest.typeUrl || o.bindings && o.refs && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string"));
+  },
+  encode(message: EvalRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    Object.entries(message.bindings).forEach(([key, value]) => {
+      EvalRequest_BindingsEntry.encode({
+        key: (key as any),
+        value
+      }, writer.uint32(10).fork()).ldelim();
+    });
+    Object.entries(message.refs).forEach(([key, value]) => {
+      EvalRequest_RefsEntry.encode({
+        key: (key as any),
+        value
+      }, writer.uint32(18).fork()).ldelim();
+    });
+    if (message.testNum !== 0) {
+      writer.uint32(24).uint32(message.testNum);
+    }
+    if (message.testString !== "") {
+      writer.uint32(34).string(message.testString);
+    }
+    if (message.testBool === true) {
+      writer.uint32(40).bool(message.testBool);
+    }
+    if (message.instantiatePermission !== undefined) {
+      AccessConfig.encode(message.instantiatePermission, writer.uint32(66).fork()).ldelim();
+    }
+    if (message.id !== undefined) {
+      writer.uint32(98).string(message.id);
+    }
+    if (message.name !== undefined) {
+      writer.uint32(106).string(message.name);
+    }
+    for (const v of message.testArray) {
+      writer.uint32(114).string(v!);
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): EvalRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEvalRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          const entry1 = EvalRequest_BindingsEntry.decode(reader, reader.uint32());
+          if (entry1.value !== undefined) {
+            message.bindings[entry1.key] = entry1.value;
+          }
+          break;
+        case 2:
+          const entry2 = EvalRequest_RefsEntry.decode(reader, reader.uint32());
+          if (entry2.value !== undefined) {
+            message.refs[entry2.key] = entry2.value;
+          }
+          break;
+        case 3:
+          message.testNum = reader.uint32();
+          break;
+        case 4:
+          message.testString = reader.string();
+          break;
+        case 5:
+          message.testBool = reader.bool();
+          break;
+        case 8:
+          message.instantiatePermission = AccessConfig.decode(reader, reader.uint32());
+          break;
+        case 12:
+          message.id = reader.string();
+          break;
+        case 13:
+          message.name = reader.string();
+          break;
+        case 14:
+          message.testArray.push(reader.string());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): EvalRequest {
+    return {
+      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
+        [key: string]: ExprValue;
+      }>((acc, [key, value]) => {
+        acc[key] = ExprValue.fromJSON(value);
+        return acc;
+      }, {}) : {},
+      refs: isObject(object.refs) ? Object.entries(object.refs).reduce<{
+        [key: string]: IdRef;
+      }>((acc, [key, value]) => {
+        acc[key] = IdRef.fromJSON(value);
+        return acc;
+      }, {}) : {},
+      testNum: isSet(object.testNum) ? Number(object.testNum) : 0,
+      testString: isSet(object.testString) ? String(object.testString) : "",
+      testBool: isSet(object.testBool) ? Boolean(object.testBool) : false,
+      instantiatePermission: isSet(object.instantiatePermission) ? AccessConfig.fromJSON(object.instantiatePermission) : undefined,
+      id: isSet(object.id) ? String(object.id) : undefined,
+      name: isSet(object.name) ? String(object.name) : undefined,
+      testArray: Array.isArray(object?.testArray) ? object.testArray.map((e: any) => String(e)) : []
+    };
+  },
+  toJSON(message: EvalRequest): unknown {
+    const obj: any = {};
+    obj.bindings = {};
+    if (message.bindings) {
+      Object.entries(message.bindings).forEach(([k, v]) => {
+        obj.bindings[k] = ExprValue.toJSON(v);
+      });
+    }
+    obj.refs = {};
+    if (message.refs) {
+      Object.entries(message.refs).forEach(([k, v]) => {
+        obj.refs[k] = IdRef.toJSON(v);
+      });
+    }
+    message.testNum !== undefined && (obj.testNum = Math.round(message.testNum));
+    message.testString !== undefined && (obj.testString = message.testString);
+    message.testBool !== undefined && (obj.testBool = message.testBool);
+    message.instantiatePermission !== undefined && (obj.instantiatePermission = message.instantiatePermission ? AccessConfig.toJSON(message.instantiatePermission) : undefined);
+    message.id !== undefined && (obj.id = message.id);
+    message.name !== undefined && (obj.name = message.name);
+    if (message.testArray) {
+      obj.testArray = message.testArray.map(e => e);
+    } else {
+      obj.testArray = [];
+    }
+    return obj;
+  },
+  fromPartial(object: Partial<EvalRequest>): EvalRequest {
+    const message = createBaseEvalRequest();
+    message.bindings = Object.entries(object.bindings ?? {}).reduce<{
+      [key: string]: ExprValue;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = ExprValue.fromPartial(value);
+      }
+      return acc;
+    }, {});
+    message.refs = Object.entries(object.refs ?? {}).reduce<{
+      [key: string]: IdRef;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = IdRef.fromPartial(value);
+      }
+      return acc;
+    }, {});
+    message.testNum = object.testNum ?? 0;
+    message.testString = object.testString ?? "";
+    message.testBool = object.testBool ?? false;
+    message.instantiatePermission = object.instantiatePermission !== undefined && object.instantiatePermission !== null ? AccessConfig.fromPartial(object.instantiatePermission) : undefined;
+    message.id = object.id ?? undefined;
+    message.name = object.name ?? undefined;
+    message.testArray = object.testArray?.map(e => e) || [];
+    return message;
+  },
+  fromSDK(object: EvalRequestSDKType): EvalRequest {
+    return {
+      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
+        [key: string]: ExprValue;
+      }>((acc, [key, value]) => {
+        acc[key] = ExprValue.fromSDK(value);
+        return acc;
+      }, {}) : {},
+      refs: isObject(object.refs) ? Object.entries(object.refs).reduce<{
+        [key: string]: IdRef;
+      }>((acc, [key, value]) => {
+        acc[key] = IdRef.fromSDK(value);
+        return acc;
+      }, {}) : {},
+      testNum: object?.test_num,
+      testString: object?.test_string,
+      testBool: object?.test_bool,
+      instantiatePermission: object.instantiate_permission ? AccessConfig.fromSDK(object.instantiate_permission) : undefined,
+      id: object?.id,
+      name: object?.name,
+      testArray: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => e) : []
+    };
+  },
+  toSDK(message: EvalRequest): EvalRequestSDKType {
+    const obj: any = {};
+    obj.bindings = {};
+    if (message.bindings) {
+      Object.entries(message.bindings).forEach(([k, v]) => {
+        obj.bindings[k] = ExprValue.toSDK(v);
+      });
+    }
+    obj.refs = {};
+    if (message.refs) {
+      Object.entries(message.refs).forEach(([k, v]) => {
+        obj.refs[k] = IdRef.toSDK(v);
+      });
+    }
+    obj.test_num = message.testNum;
+    obj.test_string = message.testString;
+    obj.test_bool = message.testBool;
+    message.instantiatePermission !== undefined && (obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toSDK(message.instantiatePermission) : undefined);
+    obj.id = message.id;
+    obj.name = message.name;
+    if (message.testArray) {
+      obj.test_array = message.testArray.map(e => e);
+    } else {
+      obj.test_array = [];
+    }
+    return obj;
+  },
+  fromAmino(object: EvalRequestAmino): EvalRequest {
+    return {
+      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
+        [key: string]: ExprValue;
+      }>((acc, [key, value]) => {
+        acc[key] = ExprValue.fromAmino(value);
+        return acc;
+      }, {}) : {},
+      refs: isObject(object.refs) ? Object.entries(object.refs).reduce<{
+        [key: string]: IdRef;
+      }>((acc, [key, value]) => {
+        acc[key] = IdRef.fromAmino(value);
+        return acc;
+      }, {}) : {},
+      testNum: object.test_num,
+      testString: object.test_string,
+      testBool: object.test_bool,
+      instantiatePermission: object?.instantiate_permission ? AccessConfig.fromAmino(object.instantiate_permission) : undefined,
+      id: object?.id,
+      name: object?.name,
+      testArray: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: EvalRequest): EvalRequestAmino {
+    const obj: any = {};
+    obj.bindings = {};
+    if (message.bindings) {
+      Object.entries(message.bindings).forEach(([k, v]) => {
+        obj.bindings[k] = ExprValue.toAmino(v);
+      });
+    }
+    obj.refs = {};
+    if (message.refs) {
+      Object.entries(message.refs).forEach(([k, v]) => {
+        obj.refs[k] = IdRef.toAmino(v);
+      });
+    }
+    obj.test_num = message.testNum;
+    obj.test_string = message.testString;
+    obj.test_bool = message.testBool;
+    obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission) : undefined;
+    obj.id = message.id;
+    obj.name = message.name;
+    if (message.testArray) {
+      obj.test_array = message.testArray.map(e => e);
+    } else {
+      obj.test_array = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: EvalRequestAminoMsg): EvalRequest {
+    return EvalRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: EvalRequestProtoMsg): EvalRequest {
+    return EvalRequest.decode(message.value);
+  },
+  toProto(message: EvalRequest): Uint8Array {
+    return EvalRequest.encode(message).finish();
+  },
+  toProtoMsg(message: EvalRequest): EvalRequestProtoMsg {
+    return {
+      typeUrl: "/misc.EvalRequest",
+      value: EvalRequest.encode(message).finish()
+    };
+  }
+};"
+`;

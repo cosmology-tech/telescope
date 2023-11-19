@@ -176,11 +176,40 @@ export const toAminoJSON = {
 
     anyType(args: ToAminoJSONMethod) {
         const { propName, origName } = getFieldNames(args.field);
-        // const typeMap = args.context.store.getTypeUrlMap(args.context.ref);
-        // console.log(JSON.stringify(typeMap, null, 2));
-        // console.log(JSON.stringify(args.field, null, 2));
         const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
         const interfaceFnName = getInterfaceToAminoName(interfaceName)
+
+        let aminoFuncExpr: t.Expression = t.callExpression(
+          t.identifier(interfaceFnName),
+          [
+              t.tsAsExpression(
+                  t.memberExpression(
+                      t.identifier('message'),
+                      t.identifier(propName)
+                  ),
+                  t.tsTypeReference(
+                      t.identifier('Any')
+                  )
+              ),
+              ...(args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? [
+                  t.identifier('useInterfaces')
+              ] : []),
+          ]
+        );
+
+        const isGlobalRegistry = args.context.options.interfaces?.useGlobalDecoderRegistry;
+
+        if(isGlobalRegistry) {
+          aminoFuncExpr = t.callExpression(
+            t.memberExpression(t.identifier('GlobalDecoderRegistry'), t.identifier('toAmino')),
+            [
+              t.memberExpression(
+                t.identifier('message'),
+                t.identifier(propName)
+              )
+            ]
+          )
+        }
 
         return t.expressionStatement(
             t.assignmentExpression(
@@ -194,23 +223,7 @@ export const toAminoJSON = {
                         t.identifier('message'),
                         t.identifier(propName)
                     ),
-                    t.callExpression(
-                        t.identifier(interfaceFnName),
-                        [
-                            t.tsAsExpression(
-                                t.memberExpression(
-                                    t.identifier('message'),
-                                    t.identifier(propName)
-                                ),
-                                t.tsTypeReference(
-                                    t.identifier('Any')
-                                )
-                            ),
-                            ...(args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? [
-                                t.identifier('useInterfaces')
-                            ] : []),
-                        ]
-                    ),
+                    aminoFuncExpr,
                     t.identifier('undefined')
                 )
             )
@@ -643,14 +656,12 @@ export const arrayTypes = {
     },
     anyType(args: ToAminoJSONMethod) {
         const { propName, origName } = getFieldNames(args.field);
-        // const typeMap = args.context.store.getTypeUrlMap(args.context.ref);
-        // console.log(JSON.stringify(typeMap, null, 2));
-        // console.log(JSON.stringify(args.field, null, 2));
         const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
         const interfaceFnName = getInterfaceToAminoName(interfaceName)
-        return t.conditionalExpression(
-            t.identifier('e'),
-            t.callExpression(
+
+        const isGlobalRegistry = args.context.options.interfaces?.useGlobalDecoderRegistry;
+
+        let aminoFuncExpr: t.Expression = t.callExpression(
                 t.identifier(interfaceFnName),
                 [
                     t.tsAsExpression(
@@ -663,7 +674,20 @@ export const arrayTypes = {
                         t.identifier('useInterfaces')
                     ] : []),
                 ]
-            ),
+            );
+
+        if(isGlobalRegistry) {
+          aminoFuncExpr = t.callExpression(
+            t.memberExpression(t.identifier('GlobalDecoderRegistry'), t.identifier('toAmino')),
+            [
+              t.identifier('e')
+            ]
+          )
+        }
+
+        return t.conditionalExpression(
+            t.identifier('e'),
+            aminoFuncExpr,
             t.identifier('undefined')
         );
     },

@@ -127,8 +127,18 @@ export const fromSDKJSON = {
   // signDoc: isSet(object.signDoc) ? SignDocDirectAux.fromSDKJSON(object.signDoc) : undefined,
   type(args: FromSDKJSONMethod) {
     const { origName } = getFieldNames(args.field);
-    const name = args.context.getTypeName(args.field);
+    let name = args.context.getTypeName(args.field);
     args.context.addUtil('isSet');
+
+    if (
+      !args.context.options.aminoEncoding.useLegacyInlineEncoding &&
+      args.context.options.interfaces.enabled &&
+      args.context.options.interfaces?.useGlobalDecoderRegistry &&
+      args.field.type === 'google.protobuf.Any' &&
+      args.field.options['(cosmos_proto.accepts_interface)']
+    ) {
+      name = 'GlobalDecoderRegistry';
+    }
 
     return t.objectProperty(
       t.identifier(origName),
@@ -582,7 +592,18 @@ export const arrayTypes = {
 
   // tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromSDKJSON(e)) : []
   type(args: FromSDKJSONMethod) {
-    const name = args.context.getTypeName(args.field);
+    let name = args.context.getTypeName(args.field);
+
+    if (
+      !args.context.options.aminoEncoding.useLegacyInlineEncoding &&
+      args.context.options.interfaces.enabled &&
+      args.context.options.interfaces?.useGlobalDecoderRegistry &&
+      args.field.type === 'google.protobuf.Any' &&
+      args.field.options['(cosmos_proto.accepts_interface)']
+    ) {
+      name = 'GlobalDecoderRegistry';
+    }
+
     return t.callExpression(
       t.memberExpression(t.identifier(name), t.identifier('fromSDKJSON')),
       [t.identifier('e')]

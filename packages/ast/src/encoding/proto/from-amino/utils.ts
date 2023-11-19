@@ -239,11 +239,17 @@ export const fromAminoJSON = {
 
     anyType(args: FromAminoJSONMethod) {
         const { propName, origName } = getFieldNames(args.field);
-        // const typeMap = args.context.store.getTypeUrlMap(args.context.ref);
-        // console.log(JSON.stringify(typeMap, null, 2));
-        // console.log(JSON.stringify(args.field, null, 2));
+
         const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
         const interfaceFnName = getInterfaceFromAminoName(interfaceName)
+
+        let aminoFuncExpr: t.Expression = t.identifier(interfaceFnName);
+
+        const isGlobalRegistry = args.context.options.interfaces?.useGlobalDecoderRegistry;
+
+        if(isGlobalRegistry) {
+          aminoFuncExpr = t.memberExpression(t.identifier('GlobalDecoderRegistry'), t.identifier('fromAmino'));
+        }
 
         return t.objectProperty(
             t.identifier(propName),
@@ -255,7 +261,7 @@ export const fromAminoJSON = {
                     true
                 ),
                 t.callExpression(
-                    t.identifier(interfaceFnName),
+                    aminoFuncExpr,
                     [
                         t.memberExpression(
                             t.identifier('object'),
@@ -701,8 +707,17 @@ export const arrayTypes = {
     anyType(args: FromAminoJSONMethod) {
         const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
         const interfaceFnName = getInterfaceFromAminoName(interfaceName)
+
+        let aminoFuncExpr: t.Expression = t.identifier(interfaceFnName);
+
+        const isGlobalRegistry = args.context.options.interfaces?.useGlobalDecoderRegistry;
+
+        if(isGlobalRegistry) {
+          aminoFuncExpr = t.memberExpression(t.identifier('GlobalDecoderRegistry'), t.identifier('fromAmino'));
+        }
+
         return t.callExpression(
-            t.identifier(interfaceFnName),
+            aminoFuncExpr,
             [
                 t.identifier('e')
             ]
