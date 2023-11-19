@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.0.10...@cosmology/types@1.1.0) (2023-11-19)
+
+**Note:** Version bump only for package @cosmology/types
+
 ## [1.0.10](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.0.9...@cosmology/types@1.0.10) (2023-11-13)
 
 **Note:** Version bump only for package @cosmology/types
