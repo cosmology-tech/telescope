@@ -1,62 +1,25 @@
-export const registryHelper = `import { BinaryReader, BinaryWriter } from "./binary";
+export const registryHelper = `import { BinaryReader } from "./binary";
 import { Any } from "./google/protobuf/any";
-
-export type ProtoMsg = Omit<Any, "typeUrl"> & { typeUrl: any };
-
-export interface IAminoMsg<Amino> {
-  type: any;
-  value: Amino;
-}
-
-export interface IProtoType {
-  $typeUrl?: any;
-}
-
-export interface TelescopeGeneratedDecoder<
-  T = unknown,
-  SDK = unknown,
-  Amino = unknown
-> {
-  readonly typeUrl: string;
-  readonly aminoType?: string;
-  is(o: unknown): o is T;
-  isSDK?(o: unknown): o is SDK;
-  isAmino?(o: unknown): o is Amino;
-  encode: (message: T, writer?: BinaryWriter | any) => BinaryWriter | any;
-  decode: (input: BinaryReader | Uint8Array | any, length?: number) => T;
-  fromPartial: (object: any) => T;
-  fromJSON?: (object: unknown) => T;
-  toJSON?: (message: T) => unknown;
-  fromSDK?: (sdk: SDK) => T;
-  fromSDKJSON?: (object: any) => SDK;
-  toSDK?: (message: T) => SDK;
-  fromAmino?: (amino: Amino) => T;
-  toAmino?: (message: T) => Amino;
-  fromAminoMsg?: (aminoMsg: IAminoMsg<Amino>) => T;
-  toAminoMsg?: (message: T) => IAminoMsg<Amino>;
-  toProto?: (message: T) => Uint8Array;
-  fromProtoMsg?: (message: ProtoMsg) => T;
-  toProtoMsg?: (message: T) => Any;
-}
+import { IProtoType, TelescopeGeneratedCodec } from "./types";
 
 export class GlobalDecoderRegistry {
   static registry: {
-    [key: string]: TelescopeGeneratedDecoder<any, any, any>;
+    [key: string]: TelescopeGeneratedCodec<any, any, any>;
   } = {};
   static register<T, SDK, Amino>(
     key: string,
-    decoder: TelescopeGeneratedDecoder<T, SDK, Amino>
+    decoder: TelescopeGeneratedCodec<T, SDK, Amino>
   ) {
     GlobalDecoderRegistry.registry[key] = decoder;
   }
   static getDecoder<T, SDK, Amino>(
     key: string
-  ): TelescopeGeneratedDecoder<T, SDK, Amino> {
+  ): TelescopeGeneratedCodec<T, SDK, Amino> {
     return GlobalDecoderRegistry.registry[key];
   }
   static getDecoderByInstance<T, SDK, Amino>(
     obj: unknown
-  ): TelescopeGeneratedDecoder<T, SDK, Amino> | null {
+  ): TelescopeGeneratedCodec<T, SDK, Amino> | null {
     if (obj === undefined || obj === null) {
       return null;
     }
@@ -151,7 +114,7 @@ export class GlobalDecoderRegistry {
 
 function getDecoderByInstance<T = unknown, SDK = unknown, Amino = unknown>(
   obj: unknown
-): TelescopeGeneratedDecoder<T, SDK, Amino> {
+): TelescopeGeneratedCodec<T, SDK, Amino> {
   const decoder = GlobalDecoderRegistry.getDecoderByInstance<T, SDK, Amino>(
     obj
   );
