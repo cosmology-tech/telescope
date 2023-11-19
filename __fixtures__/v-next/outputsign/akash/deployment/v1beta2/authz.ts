@@ -1,5 +1,6 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
@@ -15,6 +16,21 @@ export interface DepositDeploymentAuthorization {
 export interface DepositDeploymentAuthorizationProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.DepositDeploymentAuthorization";
   value: Uint8Array;
+}
+/**
+ * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
+ * the granter's account for a deployment.
+ */
+export interface DepositDeploymentAuthorizationAmino {
+  /**
+   * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
+   * the purpose of deployment.
+   */
+  spend_limit?: CoinAmino;
+}
+export interface DepositDeploymentAuthorizationAminoMsg {
+  type: "/akash.deployment.v1beta2.DepositDeploymentAuthorization";
+  value: DepositDeploymentAuthorizationAmino;
 }
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
@@ -52,6 +68,26 @@ export const DepositDeploymentAuthorization = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<DepositDeploymentAuthorization>, I>>(object: I): DepositDeploymentAuthorization {
+    const message = createBaseDepositDeploymentAuthorization();
+    if (object.spendLimit !== undefined && object.spendLimit !== null) {
+      message.spendLimit = Coin.fromPartial(object.spendLimit);
+    }
+    return message;
+  },
+  fromAmino(object: DepositDeploymentAuthorizationAmino): DepositDeploymentAuthorization {
+    return {
+      spendLimit: object?.spend_limit ? Coin.fromAmino(object.spend_limit) : undefined
+    };
+  },
+  toAmino(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationAmino {
+    const obj: any = {};
+    obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: DepositDeploymentAuthorizationAminoMsg): DepositDeploymentAuthorization {
+    return DepositDeploymentAuthorization.fromAmino(object.value);
   },
   fromProtoMsg(message: DepositDeploymentAuthorizationProtoMsg): DepositDeploymentAuthorization {
     return DepositDeploymentAuthorization.decode(message.value);

@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** MsgIBCSend */
 export interface MsgIBCSend {
@@ -25,6 +26,30 @@ export interface MsgIBCSendProtoMsg {
   value: Uint8Array;
 }
 /** MsgIBCSend */
+export interface MsgIBCSendAmino {
+  /** the channel by which the packet will be sent */
+  channel: string;
+  /**
+   * Timeout height relative to the current block height.
+   * The timeout is disabled when set to 0.
+   */
+  timeout_height: string;
+  /**
+   * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
+   * The timeout is disabled when set to 0.
+   */
+  timeout_timestamp: string;
+  /**
+   * Data is the payload to transfer. We must not make assumption what format or
+   * content is in here.
+   */
+  data: Uint8Array;
+}
+export interface MsgIBCSendAminoMsg {
+  type: "wasm/MsgIBCSend";
+  value: MsgIBCSendAmino;
+}
+/** MsgIBCSend */
 export interface MsgIBCSendSDKType {
   channel: string;
   timeout_height: bigint;
@@ -38,6 +63,14 @@ export interface MsgIBCCloseChannel {
 export interface MsgIBCCloseChannelProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.MsgIBCCloseChannel";
   value: Uint8Array;
+}
+/** MsgIBCCloseChannel port and channel need to be owned by the contract */
+export interface MsgIBCCloseChannelAmino {
+  channel: string;
+}
+export interface MsgIBCCloseChannelAminoMsg {
+  type: "wasm/MsgIBCCloseChannel";
+  value: MsgIBCCloseChannelAmino;
 }
 /** MsgIBCCloseChannel port and channel need to be owned by the contract */
 export interface MsgIBCCloseChannelSDKType {
@@ -94,6 +127,43 @@ export const MsgIBCSend = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<MsgIBCSend>): MsgIBCSend {
+    const message = createBaseMsgIBCSend();
+    message.channel = object.channel ?? "";
+    if (object.timeoutHeight !== undefined && object.timeoutHeight !== null) {
+      message.timeoutHeight = BigInt(object.timeoutHeight.toString());
+    }
+    if (object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null) {
+      message.timeoutTimestamp = BigInt(object.timeoutTimestamp.toString());
+    }
+    message.data = object.data ?? new Uint8Array();
+    return message;
+  },
+  fromAmino(object: MsgIBCSendAmino): MsgIBCSend {
+    return {
+      channel: object.channel,
+      timeoutHeight: BigInt(object.timeout_height),
+      timeoutTimestamp: BigInt(object.timeout_timestamp),
+      data: object.data
+    };
+  },
+  toAmino(message: MsgIBCSend): MsgIBCSendAmino {
+    const obj: any = {};
+    obj.channel = message.channel;
+    obj.timeout_height = message.timeoutHeight ? message.timeoutHeight.toString() : undefined;
+    obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
+    obj.data = message.data;
+    return obj;
+  },
+  fromAminoMsg(object: MsgIBCSendAminoMsg): MsgIBCSend {
+    return MsgIBCSend.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgIBCSend): MsgIBCSendAminoMsg {
+    return {
+      type: "wasm/MsgIBCSend",
+      value: MsgIBCSend.toAmino(message)
+    };
+  },
   fromProtoMsg(message: MsgIBCSendProtoMsg): MsgIBCSend {
     return MsgIBCSend.decode(message.value);
   },
@@ -136,6 +206,30 @@ export const MsgIBCCloseChannel = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<MsgIBCCloseChannel>): MsgIBCCloseChannel {
+    const message = createBaseMsgIBCCloseChannel();
+    message.channel = object.channel ?? "";
+    return message;
+  },
+  fromAmino(object: MsgIBCCloseChannelAmino): MsgIBCCloseChannel {
+    return {
+      channel: object.channel
+    };
+  },
+  toAmino(message: MsgIBCCloseChannel): MsgIBCCloseChannelAmino {
+    const obj: any = {};
+    obj.channel = message.channel;
+    return obj;
+  },
+  fromAminoMsg(object: MsgIBCCloseChannelAminoMsg): MsgIBCCloseChannel {
+    return MsgIBCCloseChannel.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgIBCCloseChannel): MsgIBCCloseChannelAminoMsg {
+    return {
+      type: "wasm/MsgIBCCloseChannel",
+      value: MsgIBCCloseChannel.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgIBCCloseChannelProtoMsg): MsgIBCCloseChannel {
     return MsgIBCCloseChannel.decode(message.value);

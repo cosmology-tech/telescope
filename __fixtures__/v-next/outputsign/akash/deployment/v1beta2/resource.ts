@@ -1,6 +1,7 @@
-import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
-import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { ResourceUnits, ResourceUnitsAmino, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
+import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** Resource stores unit, total count and price of resource */
 export interface Resource {
@@ -11,6 +12,16 @@ export interface Resource {
 export interface ResourceProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.Resource";
   value: Uint8Array;
+}
+/** Resource stores unit, total count and price of resource */
+export interface ResourceAmino {
+  resources?: ResourceUnitsAmino;
+  count: number;
+  price?: DecCoinAmino;
+}
+export interface ResourceAminoMsg {
+  type: "/akash.deployment.v1beta2.Resource";
+  value: ResourceAmino;
 }
 /** Resource stores unit, total count and price of resource */
 export interface ResourceSDKType {
@@ -61,6 +72,34 @@ export const Resource = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<Resource>, I>>(object: I): Resource {
+    const message = createBaseResource();
+    if (object.resources !== undefined && object.resources !== null) {
+      message.resources = ResourceUnits.fromPartial(object.resources);
+    }
+    message.count = object.count ?? 0;
+    if (object.price !== undefined && object.price !== null) {
+      message.price = DecCoin.fromPartial(object.price);
+    }
+    return message;
+  },
+  fromAmino(object: ResourceAmino): Resource {
+    return {
+      resources: object?.resources ? ResourceUnits.fromAmino(object.resources) : undefined,
+      count: object.count,
+      price: object?.price ? DecCoin.fromAmino(object.price) : undefined
+    };
+  },
+  toAmino(message: Resource): ResourceAmino {
+    const obj: any = {};
+    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources) : undefined;
+    obj.count = message.count;
+    obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ResourceAminoMsg): Resource {
+    return Resource.fromAmino(object.value);
   },
   fromProtoMsg(message: ResourceProtoMsg): Resource {
     return Resource.decode(message.value);

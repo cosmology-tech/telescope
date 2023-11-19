@@ -1,8 +1,8 @@
-import { MetricDescriptor, MetricDescriptorSDKType } from "../../api/metric";
+import { MetricDescriptor, MetricDescriptorAmino, MetricDescriptorSDKType } from "../../api/metric";
 import { Distribution_BucketOptions } from "../../api/distribution";
-import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp } from "../../../helpers";
+import { DeepPartial, toTimestamp, fromTimestamp, isObject, isSet } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 /** Logging API version. */
 export enum LogMetric_ApiVersion {
@@ -13,6 +13,7 @@ export enum LogMetric_ApiVersion {
   UNRECOGNIZED = -1,
 }
 export const LogMetric_ApiVersionSDKType = LogMetric_ApiVersion;
+export const LogMetric_ApiVersionAmino = LogMetric_ApiVersion;
 export function logMetric_ApiVersionFromJSON(object: any): LogMetric_ApiVersion {
   switch (object) {
     case 0:
@@ -45,6 +46,14 @@ export interface LogMetric_LabelExtractorsEntry {
 export interface LogMetric_LabelExtractorsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
+}
+export interface LogMetric_LabelExtractorsEntryAmino {
+  key: string;
+  value: string;
+}
+export interface LogMetric_LabelExtractorsEntryAminoMsg {
+  type: string;
+  value: LogMetric_LabelExtractorsEntryAmino;
 }
 export interface LogMetric_LabelExtractorsEntrySDKType {
   key: string;
@@ -199,6 +208,146 @@ export interface LogMetricProtoMsg {
  * extracted values along with an optional histogram of the values as specified
  * by the bucket options.
  */
+export interface LogMetricAmino {
+  /**
+   * Required. The client-assigned metric identifier.
+   * Examples: `"error_count"`, `"nginx/requests"`.
+   * 
+   * Metric identifiers are limited to 100 characters and can include only the
+   * following characters: `A-Z`, `a-z`, `0-9`, and the special characters
+   * `_-.,+!*',()%/`. The forward-slash character (`/`) denotes a hierarchy of
+   * name pieces, and it cannot be the first character of the name.
+   * 
+   * This field is the `[METRIC_ID]` part of a metric resource name in the
+   * format "projects/[PROJECT_ID]/metrics/[METRIC_ID]". Example: If the
+   * resource name of a metric is
+   * `"projects/my-project/metrics/nginx%2Frequests"`, this field's value is
+   * `"nginx/requests"`.
+   */
+  name: string;
+  /**
+   * Optional. A description of this metric, which is used in documentation.
+   * The maximum length of the description is 8000 characters.
+   */
+  description: string;
+  /**
+   * Required. An [advanced logs
+   * filter](https://cloud.google.com/logging/docs/view/advanced_filters) which
+   * is used to match log entries. Example:
+   * 
+   *     "resource.type=gae_app AND severity>=ERROR"
+   * 
+   * The maximum length of the filter is 20000 characters.
+   */
+  filter: string;
+  /**
+   * Optional. If set to True, then this metric is disabled and it does not
+   * generate any points.
+   */
+  disabled: boolean;
+  /**
+   * Optional. The metric descriptor associated with the logs-based metric.
+   * If unspecified, it uses a default metric descriptor with a DELTA metric
+   * kind, INT64 value type, with no labels and a unit of "1". Such a metric
+   * counts the number of log entries matching the `filter` expression.
+   * 
+   * The `name`, `type`, and `description` fields in the `metric_descriptor`
+   * are output only, and is constructed using the `name` and `description`
+   * field in the LogMetric.
+   * 
+   * To create a logs-based metric that records a distribution of log values, a
+   * DELTA metric kind with a DISTRIBUTION value type must be used along with
+   * a `value_extractor` expression in the LogMetric.
+   * 
+   * Each label in the metric descriptor must have a matching label
+   * name as the key and an extractor expression as the value in the
+   * `label_extractors` map.
+   * 
+   * The `metric_kind` and `value_type` fields in the `metric_descriptor` cannot
+   * be updated once initially configured. New labels can be added in the
+   * `metric_descriptor`, but existing labels cannot be modified except for
+   * their description.
+   */
+  metric_descriptor?: MetricDescriptorAmino;
+  /**
+   * Optional. A `value_extractor` is required when using a distribution
+   * logs-based metric to extract the values to record from a log entry.
+   * Two functions are supported for value extraction: `EXTRACT(field)` or
+   * `REGEXP_EXTRACT(field, regex)`. The argument are:
+   *   1. field: The name of the log entry field from which the value is to be
+   *      extracted.
+   *   2. regex: A regular expression using the Google RE2 syntax
+   *      (https://github.com/google/re2/wiki/Syntax) with a single capture
+   *      group to extract data from the specified log entry field. The value
+   *      of the field is converted to a string before applying the regex.
+   *      It is an error to specify a regex that does not include exactly one
+   *      capture group.
+   * 
+   * The result of the extraction must be convertible to a double type, as the
+   * distribution always records double values. If either the extraction or
+   * the conversion to double fails, then those values are not recorded in the
+   * distribution.
+   * 
+   * Example: `REGEXP_EXTRACT(jsonPayload.request, ".*quantity=(\d+).*")`
+   */
+  value_extractor: string;
+  /**
+   * Optional. A map from a label key string to an extractor expression which is
+   * used to extract data from a log entry field and assign as the label value.
+   * Each label key specified in the LabelDescriptor must have an associated
+   * extractor expression in this map. The syntax of the extractor expression
+   * is the same as for the `value_extractor` field.
+   * 
+   * The extracted value is converted to the type defined in the label
+   * descriptor. If the either the extraction or the type conversion fails,
+   * the label will have a default value. The default value for a string
+   * label is an empty string, for an integer label its 0, and for a boolean
+   * label its `false`.
+   * 
+   * Note that there are upper bounds on the maximum number of labels and the
+   * number of active time series that are allowed in a project.
+   */
+  label_extractors: {
+    [key: string]: string;
+  };
+  /**
+   * Optional. The `bucket_options` are required when the logs-based metric is
+   * using a DISTRIBUTION value type and it describes the bucket boundaries
+   * used to create a histogram of the extracted values.
+   */
+  bucket_options?: Distribution_BucketOptionsAmino;
+  /**
+   * Output only. The creation timestamp of the metric.
+   * 
+   * This field may not be present for older metrics.
+   */
+  create_time?: string;
+  /**
+   * Output only. The last update timestamp of the metric.
+   * 
+   * This field may not be present for older metrics.
+   */
+  update_time?: string;
+  /**
+   * Deprecated. The API version that created or updated this metric.
+   * The v2 format is used by default and cannot be changed.
+   */
+  /** @deprecated */
+  version: LogMetric_ApiVersion;
+}
+export interface LogMetricAminoMsg {
+  type: "/google.logging.v2.LogMetric";
+  value: LogMetricAmino;
+}
+/**
+ * Describes a logs-based metric. The value of the metric is the number of log
+ * entries that match a logs filter in a given time interval.
+ * 
+ * Logs-based metrics can also be used to extract values from logs and create a
+ * distribution of the values. The distribution records the statistics of the
+ * extracted values along with an optional histogram of the values as specified
+ * by the bucket options.
+ */
 export interface LogMetricSDKType {
   name: string;
   description: string;
@@ -242,6 +391,32 @@ export interface ListLogMetricsRequestProtoMsg {
   value: Uint8Array;
 }
 /** The parameters to ListLogMetrics. */
+export interface ListLogMetricsRequestAmino {
+  /**
+   * Required. The name of the project containing the metrics:
+   * 
+   *     "projects/[PROJECT_ID]"
+   */
+  parent: string;
+  /**
+   * Optional. If present, then retrieve the next batch of results from the
+   * preceding call to this method. `pageToken` must be the value of
+   * `nextPageToken` from the previous response. The values of other method
+   * parameters should be identical to those in the previous call.
+   */
+  page_token: string;
+  /**
+   * Optional. The maximum number of results to return from this request.
+   * Non-positive values are ignored. The presence of `nextPageToken` in the
+   * response indicates that more results might be available.
+   */
+  page_size: number;
+}
+export interface ListLogMetricsRequestAminoMsg {
+  type: "/google.logging.v2.ListLogMetricsRequest";
+  value: ListLogMetricsRequestAmino;
+}
+/** The parameters to ListLogMetrics. */
 export interface ListLogMetricsRequestSDKType {
   parent: string;
   page_token: string;
@@ -263,6 +438,21 @@ export interface ListLogMetricsResponseProtoMsg {
   value: Uint8Array;
 }
 /** Result returned from ListLogMetrics. */
+export interface ListLogMetricsResponseAmino {
+  /** A list of logs-based metrics. */
+  metrics: LogMetricAmino[];
+  /**
+   * If there might be more results than appear in this response, then
+   * `nextPageToken` is included. To get the next set of results, call this
+   * method again using the value of `nextPageToken` as `pageToken`.
+   */
+  next_page_token: string;
+}
+export interface ListLogMetricsResponseAminoMsg {
+  type: "/google.logging.v2.ListLogMetricsResponse";
+  value: ListLogMetricsResponseAmino;
+}
+/** Result returned from ListLogMetrics. */
 export interface ListLogMetricsResponseSDKType {
   metrics: LogMetricSDKType[];
   next_page_token: string;
@@ -279,6 +469,19 @@ export interface GetLogMetricRequest {
 export interface GetLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetLogMetricRequest";
   value: Uint8Array;
+}
+/** The parameters to GetLogMetric. */
+export interface GetLogMetricRequestAmino {
+  /**
+   * Required. The resource name of the desired metric:
+   * 
+   *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+   */
+  metric_name: string;
+}
+export interface GetLogMetricRequestAminoMsg {
+  type: "/google.logging.v2.GetLogMetricRequest";
+  value: GetLogMetricRequestAmino;
 }
 /** The parameters to GetLogMetric. */
 export interface GetLogMetricRequestSDKType {
@@ -305,6 +508,26 @@ export interface CreateLogMetricRequestProtoMsg {
   value: Uint8Array;
 }
 /** The parameters to CreateLogMetric. */
+export interface CreateLogMetricRequestAmino {
+  /**
+   * Required. The resource name of the project in which to create the metric:
+   * 
+   *     "projects/[PROJECT_ID]"
+   * 
+   * The new metric must be provided in the request.
+   */
+  parent: string;
+  /**
+   * Required. The new logs-based metric, which must not have an identifier that
+   * already exists.
+   */
+  metric?: LogMetricAmino;
+}
+export interface CreateLogMetricRequestAminoMsg {
+  type: "/google.logging.v2.CreateLogMetricRequest";
+  value: CreateLogMetricRequestAmino;
+}
+/** The parameters to CreateLogMetric. */
 export interface CreateLogMetricRequestSDKType {
   parent: string;
   metric?: LogMetricSDKType;
@@ -329,6 +552,25 @@ export interface UpdateLogMetricRequestProtoMsg {
   value: Uint8Array;
 }
 /** The parameters to UpdateLogMetric. */
+export interface UpdateLogMetricRequestAmino {
+  /**
+   * Required. The resource name of the metric to update:
+   * 
+   *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+   * 
+   * The updated metric must be provided in the request and it's
+   * `name` field must be the same as `[METRIC_ID]` If the metric
+   * does not exist in `[PROJECT_ID]`, then a new metric is created.
+   */
+  metric_name: string;
+  /** Required. The updated metric. */
+  metric?: LogMetricAmino;
+}
+export interface UpdateLogMetricRequestAminoMsg {
+  type: "/google.logging.v2.UpdateLogMetricRequest";
+  value: UpdateLogMetricRequestAmino;
+}
+/** The parameters to UpdateLogMetric. */
 export interface UpdateLogMetricRequestSDKType {
   metric_name: string;
   metric?: LogMetricSDKType;
@@ -345,6 +587,19 @@ export interface DeleteLogMetricRequest {
 export interface DeleteLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.DeleteLogMetricRequest";
   value: Uint8Array;
+}
+/** The parameters to DeleteLogMetric. */
+export interface DeleteLogMetricRequestAmino {
+  /**
+   * Required. The resource name of the metric to delete:
+   * 
+   *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+   */
+  metric_name: string;
+}
+export interface DeleteLogMetricRequestAminoMsg {
+  type: "/google.logging.v2.DeleteLogMetricRequest";
+  value: DeleteLogMetricRequestAmino;
 }
 /** The parameters to DeleteLogMetric. */
 export interface DeleteLogMetricRequestSDKType {
@@ -385,6 +640,27 @@ export const LogMetric_LabelExtractorsEntry = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<LogMetric_LabelExtractorsEntry>): LogMetric_LabelExtractorsEntry {
+    const message = createBaseLogMetric_LabelExtractorsEntry();
+    message.key = object.key ?? "";
+    message.value = object.value ?? "";
+    return message;
+  },
+  fromAmino(object: LogMetric_LabelExtractorsEntryAmino): LogMetric_LabelExtractorsEntry {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+  toAmino(message: LogMetric_LabelExtractorsEntry): LogMetric_LabelExtractorsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: LogMetric_LabelExtractorsEntryAminoMsg): LogMetric_LabelExtractorsEntry {
+    return LogMetric_LabelExtractorsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: LogMetric_LabelExtractorsEntryProtoMsg): LogMetric_LabelExtractorsEntry {
     return LogMetric_LabelExtractorsEntry.decode(message.value);
@@ -499,6 +775,75 @@ export const LogMetric = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<LogMetric>): LogMetric {
+    const message = createBaseLogMetric();
+    message.name = object.name ?? "";
+    message.description = object.description ?? "";
+    message.filter = object.filter ?? "";
+    message.disabled = object.disabled ?? false;
+    if (object.metricDescriptor !== undefined && object.metricDescriptor !== null) {
+      message.metricDescriptor = MetricDescriptor.fromPartial(object.metricDescriptor);
+    }
+    message.valueExtractor = object.valueExtractor ?? "";
+    message.labelExtractors = Object.entries(object.labelExtractors ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = String(value);
+      }
+      return acc;
+    }, {});
+    if (object.bucketOptions !== undefined && object.bucketOptions !== null) {
+      message.bucketOptions = Distribution_BucketOptions.fromPartial(object.bucketOptions);
+    }
+    message.createTime = object.createTime ?? undefined;
+    message.updateTime = object.updateTime ?? undefined;
+    message.version = object.version ?? 0;
+    return message;
+  },
+  fromAmino(object: LogMetricAmino): LogMetric {
+    return {
+      name: object.name,
+      description: object.description,
+      filter: object.filter,
+      disabled: object.disabled,
+      metricDescriptor: object?.metric_descriptor ? MetricDescriptor.fromAmino(object.metric_descriptor) : undefined,
+      valueExtractor: object.value_extractor,
+      labelExtractors: isObject(object.label_extractors) ? Object.entries(object.label_extractors).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      bucketOptions: object?.bucket_options ? Distribution_BucketOptions.fromAmino(object.bucket_options) : undefined,
+      createTime: object?.create_time ? fromTimestamp(Timestamp.fromAmino(object.create_time)) : undefined,
+      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined,
+      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
+    };
+  },
+  toAmino(message: LogMetric): LogMetricAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.description = message.description;
+    obj.filter = message.filter;
+    obj.disabled = message.disabled;
+    obj.metric_descriptor = message.metricDescriptor ? MetricDescriptor.toAmino(message.metricDescriptor) : undefined;
+    obj.value_extractor = message.valueExtractor;
+    obj.label_extractors = {};
+    if (message.labelExtractors) {
+      Object.entries(message.labelExtractors).forEach(([k, v]) => {
+        obj.label_extractors[k] = v;
+      });
+    }
+    obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toAmino(message.bucketOptions) : undefined;
+    obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
+    obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
+    obj.version = message.version;
+    return obj;
+  },
+  fromAminoMsg(object: LogMetricAminoMsg): LogMetric {
+    return LogMetric.fromAmino(object.value);
+  },
   fromProtoMsg(message: LogMetricProtoMsg): LogMetric {
     return LogMetric.decode(message.value);
   },
@@ -556,6 +901,30 @@ export const ListLogMetricsRequest = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<ListLogMetricsRequest>): ListLogMetricsRequest {
+    const message = createBaseListLogMetricsRequest();
+    message.parent = object.parent ?? "";
+    message.pageToken = object.pageToken ?? "";
+    message.pageSize = object.pageSize ?? 0;
+    return message;
+  },
+  fromAmino(object: ListLogMetricsRequestAmino): ListLogMetricsRequest {
+    return {
+      parent: object.parent,
+      pageToken: object.page_token,
+      pageSize: object.page_size
+    };
+  },
+  toAmino(message: ListLogMetricsRequest): ListLogMetricsRequestAmino {
+    const obj: any = {};
+    obj.parent = message.parent;
+    obj.page_token = message.pageToken;
+    obj.page_size = message.pageSize;
+    return obj;
+  },
+  fromAminoMsg(object: ListLogMetricsRequestAminoMsg): ListLogMetricsRequest {
+    return ListLogMetricsRequest.fromAmino(object.value);
+  },
   fromProtoMsg(message: ListLogMetricsRequestProtoMsg): ListLogMetricsRequest {
     return ListLogMetricsRequest.decode(message.value);
   },
@@ -606,6 +975,31 @@ export const ListLogMetricsResponse = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<ListLogMetricsResponse>): ListLogMetricsResponse {
+    const message = createBaseListLogMetricsResponse();
+    message.metrics = object.metrics?.map(e => LogMetric.fromPartial(e)) || [];
+    message.nextPageToken = object.nextPageToken ?? "";
+    return message;
+  },
+  fromAmino(object: ListLogMetricsResponseAmino): ListLogMetricsResponse {
+    return {
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => LogMetric.fromAmino(e)) : [],
+      nextPageToken: object.next_page_token
+    };
+  },
+  toAmino(message: ListLogMetricsResponse): ListLogMetricsResponseAmino {
+    const obj: any = {};
+    if (message.metrics) {
+      obj.metrics = message.metrics.map(e => e ? LogMetric.toAmino(e) : undefined);
+    } else {
+      obj.metrics = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
+  },
+  fromAminoMsg(object: ListLogMetricsResponseAminoMsg): ListLogMetricsResponse {
+    return ListLogMetricsResponse.fromAmino(object.value);
+  },
   fromProtoMsg(message: ListLogMetricsResponseProtoMsg): ListLogMetricsResponse {
     return ListLogMetricsResponse.decode(message.value);
   },
@@ -648,6 +1042,24 @@ export const GetLogMetricRequest = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<GetLogMetricRequest>): GetLogMetricRequest {
+    const message = createBaseGetLogMetricRequest();
+    message.metricName = object.metricName ?? "";
+    return message;
+  },
+  fromAmino(object: GetLogMetricRequestAmino): GetLogMetricRequest {
+    return {
+      metricName: object.metric_name
+    };
+  },
+  toAmino(message: GetLogMetricRequest): GetLogMetricRequestAmino {
+    const obj: any = {};
+    obj.metric_name = message.metricName;
+    return obj;
+  },
+  fromAminoMsg(object: GetLogMetricRequestAminoMsg): GetLogMetricRequest {
+    return GetLogMetricRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GetLogMetricRequestProtoMsg): GetLogMetricRequest {
     return GetLogMetricRequest.decode(message.value);
@@ -699,6 +1111,29 @@ export const CreateLogMetricRequest = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<CreateLogMetricRequest>): CreateLogMetricRequest {
+    const message = createBaseCreateLogMetricRequest();
+    message.parent = object.parent ?? "";
+    if (object.metric !== undefined && object.metric !== null) {
+      message.metric = LogMetric.fromPartial(object.metric);
+    }
+    return message;
+  },
+  fromAmino(object: CreateLogMetricRequestAmino): CreateLogMetricRequest {
+    return {
+      parent: object.parent,
+      metric: object?.metric ? LogMetric.fromAmino(object.metric) : undefined
+    };
+  },
+  toAmino(message: CreateLogMetricRequest): CreateLogMetricRequestAmino {
+    const obj: any = {};
+    obj.parent = message.parent;
+    obj.metric = message.metric ? LogMetric.toAmino(message.metric) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: CreateLogMetricRequestAminoMsg): CreateLogMetricRequest {
+    return CreateLogMetricRequest.fromAmino(object.value);
+  },
   fromProtoMsg(message: CreateLogMetricRequestProtoMsg): CreateLogMetricRequest {
     return CreateLogMetricRequest.decode(message.value);
   },
@@ -749,6 +1184,29 @@ export const UpdateLogMetricRequest = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<UpdateLogMetricRequest>): UpdateLogMetricRequest {
+    const message = createBaseUpdateLogMetricRequest();
+    message.metricName = object.metricName ?? "";
+    if (object.metric !== undefined && object.metric !== null) {
+      message.metric = LogMetric.fromPartial(object.metric);
+    }
+    return message;
+  },
+  fromAmino(object: UpdateLogMetricRequestAmino): UpdateLogMetricRequest {
+    return {
+      metricName: object.metric_name,
+      metric: object?.metric ? LogMetric.fromAmino(object.metric) : undefined
+    };
+  },
+  toAmino(message: UpdateLogMetricRequest): UpdateLogMetricRequestAmino {
+    const obj: any = {};
+    obj.metric_name = message.metricName;
+    obj.metric = message.metric ? LogMetric.toAmino(message.metric) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: UpdateLogMetricRequestAminoMsg): UpdateLogMetricRequest {
+    return UpdateLogMetricRequest.fromAmino(object.value);
+  },
   fromProtoMsg(message: UpdateLogMetricRequestProtoMsg): UpdateLogMetricRequest {
     return UpdateLogMetricRequest.decode(message.value);
   },
@@ -791,6 +1249,24 @@ export const DeleteLogMetricRequest = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<DeleteLogMetricRequest>): DeleteLogMetricRequest {
+    const message = createBaseDeleteLogMetricRequest();
+    message.metricName = object.metricName ?? "";
+    return message;
+  },
+  fromAmino(object: DeleteLogMetricRequestAmino): DeleteLogMetricRequest {
+    return {
+      metricName: object.metric_name
+    };
+  },
+  toAmino(message: DeleteLogMetricRequest): DeleteLogMetricRequestAmino {
+    const obj: any = {};
+    obj.metric_name = message.metricName;
+    return obj;
+  },
+  fromAminoMsg(object: DeleteLogMetricRequestAminoMsg): DeleteLogMetricRequest {
+    return DeleteLogMetricRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: DeleteLogMetricRequestProtoMsg): DeleteLogMetricRequest {
     return DeleteLogMetricRequest.decode(message.value);

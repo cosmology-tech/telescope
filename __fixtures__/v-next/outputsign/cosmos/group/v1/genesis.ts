@@ -1,5 +1,6 @@
-import { GroupInfo, GroupInfoSDKType, GroupMember, GroupMemberSDKType, GroupPolicyInfo, GroupPolicyInfoSDKType, Proposal, ProposalSDKType, Vote, VoteSDKType } from "./types";
+import { GroupInfo, GroupInfoAmino, GroupInfoSDKType, GroupMember, GroupMemberAmino, GroupMemberSDKType, GroupPolicyInfo, GroupPolicyInfoAmino, GroupPolicyInfoSDKType, Proposal, ProposalAmino, ProposalSDKType, Vote, VoteAmino, VoteSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.group.v1";
 /** GenesisState defines the group module's genesis state. */
 export interface GenesisState {
@@ -32,6 +33,38 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.group.v1.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState defines the group module's genesis state. */
+export interface GenesisStateAmino {
+  /**
+   * group_seq is the group table orm.Sequence,
+   * it is used to get the next group ID.
+   */
+  group_seq: string;
+  /** groups is the list of groups info. */
+  groups: GroupInfoAmino[];
+  /** group_members is the list of groups members. */
+  group_members: GroupMemberAmino[];
+  /**
+   * group_policy_seq is the group policy table orm.Sequence,
+   * it is used to generate the next group policy account address.
+   */
+  group_policy_seq: string;
+  /** group_policies is the list of group policies info. */
+  group_policies: GroupPolicyInfoAmino[];
+  /**
+   * proposal_seq is the proposal table orm.Sequence,
+   * it is used to get the next proposal ID.
+   */
+  proposal_seq: string;
+  /** proposals is the list of proposals. */
+  proposals: ProposalAmino[];
+  /** votes is the list of votes. */
+  votes: VoteAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the group module's genesis state. */
 export interface GenesisStateSDKType {
@@ -122,6 +155,77 @@ export const GenesisState = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
+    const message = createBaseGenesisState();
+    if (object.groupSeq !== undefined && object.groupSeq !== null) {
+      message.groupSeq = BigInt(object.groupSeq.toString());
+    }
+    message.groups = object.groups?.map(e => GroupInfo.fromPartial(e)) || [];
+    message.groupMembers = object.groupMembers?.map(e => GroupMember.fromPartial(e)) || [];
+    if (object.groupPolicySeq !== undefined && object.groupPolicySeq !== null) {
+      message.groupPolicySeq = BigInt(object.groupPolicySeq.toString());
+    }
+    message.groupPolicies = object.groupPolicies?.map(e => GroupPolicyInfo.fromPartial(e)) || [];
+    if (object.proposalSeq !== undefined && object.proposalSeq !== null) {
+      message.proposalSeq = BigInt(object.proposalSeq.toString());
+    }
+    message.proposals = object.proposals?.map(e => Proposal.fromPartial(e)) || [];
+    message.votes = object.votes?.map(e => Vote.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      groupSeq: BigInt(object.group_seq),
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromAmino(e)) : [],
+      groupMembers: Array.isArray(object?.group_members) ? object.group_members.map((e: any) => GroupMember.fromAmino(e)) : [],
+      groupPolicySeq: BigInt(object.group_policy_seq),
+      groupPolicies: Array.isArray(object?.group_policies) ? object.group_policies.map((e: any) => GroupPolicyInfo.fromAmino(e)) : [],
+      proposalSeq: BigInt(object.proposal_seq),
+      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromAmino(e)) : [],
+      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.group_seq = message.groupSeq ? message.groupSeq.toString() : undefined;
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? GroupInfo.toAmino(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+    if (message.groupMembers) {
+      obj.group_members = message.groupMembers.map(e => e ? GroupMember.toAmino(e) : undefined);
+    } else {
+      obj.group_members = [];
+    }
+    obj.group_policy_seq = message.groupPolicySeq ? message.groupPolicySeq.toString() : undefined;
+    if (message.groupPolicies) {
+      obj.group_policies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toAmino(e) : undefined);
+    } else {
+      obj.group_policies = [];
+    }
+    obj.proposal_seq = message.proposalSeq ? message.proposalSeq.toString() : undefined;
+    if (message.proposals) {
+      obj.proposals = message.proposals.map(e => e ? Proposal.toAmino(e) : undefined);
+    } else {
+      obj.proposals = [];
+    }
+    if (message.votes) {
+      obj.votes = message.votes.map(e => e ? Vote.toAmino(e) : undefined);
+    } else {
+      obj.votes = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "cosmos-sdk/GenesisState",
+      value: GenesisState.toAmino(message)
+    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

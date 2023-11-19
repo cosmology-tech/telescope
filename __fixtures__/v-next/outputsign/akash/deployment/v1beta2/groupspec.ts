@@ -1,6 +1,7 @@
-import { PlacementRequirements, PlacementRequirementsSDKType } from "../../base/v1beta2/attribute";
-import { Resource, ResourceSDKType } from "./resource";
+import { PlacementRequirements, PlacementRequirementsAmino, PlacementRequirementsSDKType } from "../../base/v1beta2/attribute";
+import { Resource, ResourceAmino, ResourceSDKType } from "./resource";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** GroupSpec stores group specifications */
 export interface GroupSpec {
@@ -11,6 +12,16 @@ export interface GroupSpec {
 export interface GroupSpecProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.GroupSpec";
   value: Uint8Array;
+}
+/** GroupSpec stores group specifications */
+export interface GroupSpecAmino {
+  name: string;
+  requirements?: PlacementRequirementsAmino;
+  resources: ResourceAmino[];
+}
+export interface GroupSpecAminoMsg {
+  type: "/akash.deployment.v1beta2.GroupSpec";
+  value: GroupSpecAmino;
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
@@ -61,6 +72,36 @@ export const GroupSpec = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<GroupSpec>, I>>(object: I): GroupSpec {
+    const message = createBaseGroupSpec();
+    message.name = object.name ?? "";
+    if (object.requirements !== undefined && object.requirements !== null) {
+      message.requirements = PlacementRequirements.fromPartial(object.requirements);
+    }
+    message.resources = object.resources?.map(e => Resource.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: GroupSpecAmino): GroupSpec {
+    return {
+      name: object.name,
+      requirements: object?.requirements ? PlacementRequirements.fromAmino(object.requirements) : undefined,
+      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: GroupSpec): GroupSpecAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements) : undefined;
+    if (message.resources) {
+      obj.resources = message.resources.map(e => e ? Resource.toAmino(e) : undefined);
+    } else {
+      obj.resources = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GroupSpecAminoMsg): GroupSpec {
+    return GroupSpec.fromAmino(object.value);
   },
   fromProtoMsg(message: GroupSpecProtoMsg): GroupSpec {
     return GroupSpec.decode(message.value);

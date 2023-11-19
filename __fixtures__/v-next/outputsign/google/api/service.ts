@@ -1,24 +1,25 @@
-import { Api, ApiSDKType } from "../protobuf/api";
-import { Type, TypeSDKType, Enum, EnumSDKType } from "../protobuf/type";
-import { Documentation, DocumentationSDKType } from "./documentation";
-import { Backend, BackendSDKType } from "./backend";
-import { Http, HttpSDKType } from "./http";
-import { Quota, QuotaSDKType } from "./quota";
-import { Authentication, AuthenticationSDKType } from "./auth";
-import { Context, ContextSDKType } from "./context";
-import { Usage, UsageSDKType } from "./usage";
-import { Endpoint, EndpointSDKType } from "./endpoint";
-import { Control, ControlSDKType } from "./control";
-import { LogDescriptor, LogDescriptorSDKType } from "./log";
-import { MetricDescriptor, MetricDescriptorSDKType } from "./metric";
-import { MonitoredResourceDescriptor, MonitoredResourceDescriptorSDKType } from "./monitored_resource";
-import { Billing, BillingSDKType } from "./billing";
-import { Logging, LoggingSDKType } from "./logging";
-import { Monitoring, MonitoringSDKType } from "./monitoring";
-import { SystemParameters, SystemParametersSDKType } from "./system_parameter";
-import { SourceInfo, SourceInfoSDKType } from "./source_info";
-import { UInt32Value, UInt32ValueSDKType } from "../protobuf/wrappers";
+import { Api, ApiAmino, ApiSDKType } from "../protobuf/api";
+import { Type, TypeAmino, TypeSDKType, Enum, EnumAmino, EnumSDKType } from "../protobuf/type";
+import { Documentation, DocumentationAmino, DocumentationSDKType } from "./documentation";
+import { Backend, BackendAmino, BackendSDKType } from "./backend";
+import { Http, HttpAmino, HttpSDKType } from "./http";
+import { Quota, QuotaAmino, QuotaSDKType } from "./quota";
+import { Authentication, AuthenticationAmino, AuthenticationSDKType } from "./auth";
+import { Context, ContextAmino, ContextSDKType } from "./context";
+import { Usage, UsageAmino, UsageSDKType } from "./usage";
+import { Endpoint, EndpointAmino, EndpointSDKType } from "./endpoint";
+import { Control, ControlAmino, ControlSDKType } from "./control";
+import { LogDescriptor, LogDescriptorAmino, LogDescriptorSDKType } from "./log";
+import { MetricDescriptor, MetricDescriptorAmino, MetricDescriptorSDKType } from "./metric";
+import { MonitoredResourceDescriptor, MonitoredResourceDescriptorAmino, MonitoredResourceDescriptorSDKType } from "./monitored_resource";
+import { Billing, BillingAmino, BillingSDKType } from "./billing";
+import { Logging, LoggingAmino, LoggingSDKType } from "./logging";
+import { Monitoring, MonitoringAmino, MonitoringSDKType } from "./monitoring";
+import { SystemParameters, SystemParametersAmino, SystemParametersSDKType } from "./system_parameter";
+import { SourceInfo, SourceInfoAmino, SourceInfoSDKType } from "./source_info";
+import { UInt32Value, UInt32ValueAmino, UInt32ValueSDKType } from "../protobuf/wrappers";
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * `Service` is the root object of Google service configuration schema. It
@@ -145,6 +146,132 @@ export interface Service {
 export interface ServiceProtoMsg {
   typeUrl: "/google.api.Service";
   value: Uint8Array;
+}
+/**
+ * `Service` is the root object of Google service configuration schema. It
+ * describes basic information about a service, such as the name and the
+ * title, and delegates other aspects to sub-sections. Each sub-section is
+ * either a proto message or a repeated proto message that configures a
+ * specific aspect, such as auth. See each proto message definition for details.
+ * 
+ * Example:
+ * 
+ *     type: google.api.Service
+ *     name: calendar.googleapis.com
+ *     title: Google Calendar API
+ *     apis:
+ *     - name: google.calendar.v3.Calendar
+ *     authentication:
+ *       providers:
+ *       - id: google_calendar_auth
+ *         jwks_uri: https://www.googleapis.com/oauth2/v1/certs
+ *         issuer: https://securetoken.google.com
+ *       rules:
+ *       - selector: "*"
+ *         requirements:
+ *           provider_id: google_calendar_auth
+ */
+export interface ServiceAmino {
+  /**
+   * The service name, which is a DNS-like logical identifier for the
+   * service, such as `calendar.googleapis.com`. The service name
+   * typically goes through DNS verification to make sure the owner
+   * of the service also owns the DNS name.
+   */
+  name: string;
+  /** The product title for this service. */
+  title: string;
+  /** The Google project that owns this service. */
+  producer_project_id: string;
+  /**
+   * A unique ID for a specific instance of this message, typically assigned
+   * by the client for tracking purpose. Must be no longer than 63 characters
+   * and only lower case letters, digits, '.', '_' and '-' are allowed. If
+   * empty, the server may choose to generate one instead.
+   */
+  id: string;
+  /**
+   * A list of API interfaces exported by this service. Only the `name` field
+   * of the [google.protobuf.Api][google.protobuf.Api] needs to be provided by the configuration
+   * author, as the remaining fields will be derived from the IDL during the
+   * normalization process. It is an error to specify an API interface here
+   * which cannot be resolved against the associated IDL files.
+   */
+  apis: ApiAmino[];
+  /**
+   * A list of all proto message types included in this API service.
+   * Types referenced directly or indirectly by the `apis` are
+   * automatically included.  Messages which are not referenced but
+   * shall be included, such as types used by the `google.protobuf.Any` type,
+   * should be listed here by name. Example:
+   * 
+   *     types:
+   *     - name: google.protobuf.Int32
+   */
+  types: TypeAmino[];
+  /**
+   * A list of all enum types included in this API service.  Enums
+   * referenced directly or indirectly by the `apis` are automatically
+   * included.  Enums which are not referenced but shall be included
+   * should be listed here by name. Example:
+   * 
+   *     enums:
+   *     - name: google.someapi.v1.SomeEnum
+   */
+  enums: EnumAmino[];
+  /** Additional API documentation. */
+  documentation?: DocumentationAmino;
+  /** API backend configuration. */
+  backend?: BackendAmino;
+  /** HTTP configuration. */
+  http?: HttpAmino;
+  /** Quota configuration. */
+  quota?: QuotaAmino;
+  /** Auth configuration. */
+  authentication?: AuthenticationAmino;
+  /** Context configuration. */
+  context?: ContextAmino;
+  /** Configuration controlling usage of this service. */
+  usage?: UsageAmino;
+  /**
+   * Configuration for network endpoints.  If this is empty, then an endpoint
+   * with the same name as the service is automatically generated to service all
+   * defined APIs.
+   */
+  endpoints: EndpointAmino[];
+  /** Configuration for the service control plane. */
+  control?: ControlAmino;
+  /** Defines the logs used by this service. */
+  logs: LogDescriptorAmino[];
+  /** Defines the metrics used by this service. */
+  metrics: MetricDescriptorAmino[];
+  /**
+   * Defines the monitored resources used by this service. This is required
+   * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
+   */
+  monitored_resources: MonitoredResourceDescriptorAmino[];
+  /** Billing configuration. */
+  billing?: BillingAmino;
+  /** Logging configuration. */
+  logging?: LoggingAmino;
+  /** Monitoring configuration. */
+  monitoring?: MonitoringAmino;
+  /** System parameter configuration. */
+  system_parameters?: SystemParametersAmino;
+  /** Output only. The source information for this configuration if available. */
+  source_info?: SourceInfoAmino;
+  /**
+   * Obsolete. Do not use.
+   * 
+   * This field has no semantic meaning. The service config compiler always
+   * sets this field to `3`.
+   */
+  /** @deprecated */
+  config_version?: UInt32ValueAmino;
+}
+export interface ServiceAminoMsg {
+  type: "/google.api.Service";
+  value: ServiceAmino;
 }
 /**
  * `Service` is the root object of Google service configuration schema. It
@@ -395,6 +522,152 @@ export const Service = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<Service>): Service {
+    const message = createBaseService();
+    message.name = object.name ?? "";
+    message.title = object.title ?? "";
+    message.producerProjectId = object.producerProjectId ?? "";
+    message.id = object.id ?? "";
+    message.apis = object.apis?.map(e => Api.fromPartial(e)) || [];
+    message.types = object.types?.map(e => Type.fromPartial(e)) || [];
+    message.enums = object.enums?.map(e => Enum.fromPartial(e)) || [];
+    if (object.documentation !== undefined && object.documentation !== null) {
+      message.documentation = Documentation.fromPartial(object.documentation);
+    }
+    if (object.backend !== undefined && object.backend !== null) {
+      message.backend = Backend.fromPartial(object.backend);
+    }
+    if (object.http !== undefined && object.http !== null) {
+      message.http = Http.fromPartial(object.http);
+    }
+    if (object.quota !== undefined && object.quota !== null) {
+      message.quota = Quota.fromPartial(object.quota);
+    }
+    if (object.authentication !== undefined && object.authentication !== null) {
+      message.authentication = Authentication.fromPartial(object.authentication);
+    }
+    if (object.context !== undefined && object.context !== null) {
+      message.context = Context.fromPartial(object.context);
+    }
+    if (object.usage !== undefined && object.usage !== null) {
+      message.usage = Usage.fromPartial(object.usage);
+    }
+    message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
+    if (object.control !== undefined && object.control !== null) {
+      message.control = Control.fromPartial(object.control);
+    }
+    message.logs = object.logs?.map(e => LogDescriptor.fromPartial(e)) || [];
+    message.metrics = object.metrics?.map(e => MetricDescriptor.fromPartial(e)) || [];
+    message.monitoredResources = object.monitoredResources?.map(e => MonitoredResourceDescriptor.fromPartial(e)) || [];
+    if (object.billing !== undefined && object.billing !== null) {
+      message.billing = Billing.fromPartial(object.billing);
+    }
+    if (object.logging !== undefined && object.logging !== null) {
+      message.logging = Logging.fromPartial(object.logging);
+    }
+    if (object.monitoring !== undefined && object.monitoring !== null) {
+      message.monitoring = Monitoring.fromPartial(object.monitoring);
+    }
+    if (object.systemParameters !== undefined && object.systemParameters !== null) {
+      message.systemParameters = SystemParameters.fromPartial(object.systemParameters);
+    }
+    if (object.sourceInfo !== undefined && object.sourceInfo !== null) {
+      message.sourceInfo = SourceInfo.fromPartial(object.sourceInfo);
+    }
+    if (object.configVersion !== undefined && object.configVersion !== null) {
+      message.configVersion = UInt32Value.fromPartial(object.configVersion);
+    }
+    return message;
+  },
+  fromAmino(object: ServiceAmino): Service {
+    return {
+      name: object.name,
+      title: object.title,
+      producerProjectId: object.producer_project_id,
+      id: object.id,
+      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromAmino(e)) : [],
+      types: Array.isArray(object?.types) ? object.types.map((e: any) => Type.fromAmino(e)) : [],
+      enums: Array.isArray(object?.enums) ? object.enums.map((e: any) => Enum.fromAmino(e)) : [],
+      documentation: object?.documentation ? Documentation.fromAmino(object.documentation) : undefined,
+      backend: object?.backend ? Backend.fromAmino(object.backend) : undefined,
+      http: object?.http ? Http.fromAmino(object.http) : undefined,
+      quota: object?.quota ? Quota.fromAmino(object.quota) : undefined,
+      authentication: object?.authentication ? Authentication.fromAmino(object.authentication) : undefined,
+      context: object?.context ? Context.fromAmino(object.context) : undefined,
+      usage: object?.usage ? Usage.fromAmino(object.usage) : undefined,
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : [],
+      control: object?.control ? Control.fromAmino(object.control) : undefined,
+      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => LogDescriptor.fromAmino(e)) : [],
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => MetricDescriptor.fromAmino(e)) : [],
+      monitoredResources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromAmino(e)) : [],
+      billing: object?.billing ? Billing.fromAmino(object.billing) : undefined,
+      logging: object?.logging ? Logging.fromAmino(object.logging) : undefined,
+      monitoring: object?.monitoring ? Monitoring.fromAmino(object.monitoring) : undefined,
+      systemParameters: object?.system_parameters ? SystemParameters.fromAmino(object.system_parameters) : undefined,
+      sourceInfo: object?.source_info ? SourceInfo.fromAmino(object.source_info) : undefined,
+      configVersion: object?.config_version ? UInt32Value.fromAmino(object.config_version) : undefined
+    };
+  },
+  toAmino(message: Service): ServiceAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.title = message.title;
+    obj.producer_project_id = message.producerProjectId;
+    obj.id = message.id;
+    if (message.apis) {
+      obj.apis = message.apis.map(e => e ? Api.toAmino(e) : undefined);
+    } else {
+      obj.apis = [];
+    }
+    if (message.types) {
+      obj.types = message.types.map(e => e ? Type.toAmino(e) : undefined);
+    } else {
+      obj.types = [];
+    }
+    if (message.enums) {
+      obj.enums = message.enums.map(e => e ? Enum.toAmino(e) : undefined);
+    } else {
+      obj.enums = [];
+    }
+    obj.documentation = message.documentation ? Documentation.toAmino(message.documentation) : undefined;
+    obj.backend = message.backend ? Backend.toAmino(message.backend) : undefined;
+    obj.http = message.http ? Http.toAmino(message.http) : undefined;
+    obj.quota = message.quota ? Quota.toAmino(message.quota) : undefined;
+    obj.authentication = message.authentication ? Authentication.toAmino(message.authentication) : undefined;
+    obj.context = message.context ? Context.toAmino(message.context) : undefined;
+    obj.usage = message.usage ? Usage.toAmino(message.usage) : undefined;
+    if (message.endpoints) {
+      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
+    } else {
+      obj.endpoints = [];
+    }
+    obj.control = message.control ? Control.toAmino(message.control) : undefined;
+    if (message.logs) {
+      obj.logs = message.logs.map(e => e ? LogDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.logs = [];
+    }
+    if (message.metrics) {
+      obj.metrics = message.metrics.map(e => e ? MetricDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.metrics = [];
+    }
+    if (message.monitoredResources) {
+      obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.monitored_resources = [];
+    }
+    obj.billing = message.billing ? Billing.toAmino(message.billing) : undefined;
+    obj.logging = message.logging ? Logging.toAmino(message.logging) : undefined;
+    obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring) : undefined;
+    obj.system_parameters = message.systemParameters ? SystemParameters.toAmino(message.systemParameters) : undefined;
+    obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined;
+    obj.config_version = message.configVersion ? UInt32Value.toAmino(message.configVersion) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ServiceAminoMsg): Service {
+    return Service.fromAmino(object.value);
   },
   fromProtoMsg(message: ServiceProtoMsg): Service {
     return Service.decode(message.value);

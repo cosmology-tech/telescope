@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
 /** Attribute represents key value pair */
 export interface Attribute {
@@ -8,6 +9,15 @@ export interface Attribute {
 export interface AttributeProtoMsg {
   typeUrl: "/akash.base.v1beta2.Attribute";
   value: Uint8Array;
+}
+/** Attribute represents key value pair */
+export interface AttributeAmino {
+  key: string;
+  value: string;
+}
+export interface AttributeAminoMsg {
+  type: "/akash.base.v1beta2.Attribute";
+  value: AttributeAmino;
 }
 /** Attribute represents key value pair */
 export interface AttributeSDKType {
@@ -36,6 +46,22 @@ export interface SignedByProtoMsg {
  * entries there
  * this behaviour to be discussed
  */
+export interface SignedByAmino {
+  /** all_of all keys in this list must have signed attributes */
+  all_of: string[];
+  /** any_of at least of of the keys from the list must have signed attributes */
+  any_of: string[];
+}
+export interface SignedByAminoMsg {
+  type: "/akash.base.v1beta2.SignedBy";
+  value: SignedByAmino;
+}
+/**
+ * SignedBy represents validation accounts that tenant expects signatures for provider attributes
+ * AllOf has precedence i.e. if there is at least one entry AnyOf is ignored regardless to how many
+ * entries there
+ * this behaviour to be discussed
+ */
 export interface SignedBySDKType {
   all_of: string[];
   any_of: string[];
@@ -50,6 +76,17 @@ export interface PlacementRequirements {
 export interface PlacementRequirementsProtoMsg {
   typeUrl: "/akash.base.v1beta2.PlacementRequirements";
   value: Uint8Array;
+}
+/** PlacementRequirements */
+export interface PlacementRequirementsAmino {
+  /** SignedBy list of keys that tenants expect to have signatures from */
+  signed_by?: SignedByAmino;
+  /** Attribute list of attributes tenant expects from the provider */
+  attributes: AttributeAmino[];
+}
+export interface PlacementRequirementsAminoMsg {
+  type: "/akash.base.v1beta2.PlacementRequirements";
+  value: PlacementRequirementsAmino;
 }
 /** PlacementRequirements */
 export interface PlacementRequirementsSDKType {
@@ -92,6 +129,27 @@ export const Attribute = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<Attribute>, I>>(object: I): Attribute {
+    const message = createBaseAttribute();
+    message.key = object.key ?? "";
+    message.value = object.value ?? "";
+    return message;
+  },
+  fromAmino(object: AttributeAmino): Attribute {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+  toAmino(message: Attribute): AttributeAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: AttributeAminoMsg): Attribute {
+    return Attribute.fromAmino(object.value);
   },
   fromProtoMsg(message: AttributeProtoMsg): Attribute {
     return Attribute.decode(message.value);
@@ -143,6 +201,35 @@ export const SignedBy = {
     }
     return message;
   },
+  fromPartial<I extends Exact<DeepPartial<SignedBy>, I>>(object: I): SignedBy {
+    const message = createBaseSignedBy();
+    message.allOf = object.allOf?.map(e => e) || [];
+    message.anyOf = object.anyOf?.map(e => e) || [];
+    return message;
+  },
+  fromAmino(object: SignedByAmino): SignedBy {
+    return {
+      allOf: Array.isArray(object?.all_of) ? object.all_of.map((e: any) => e) : [],
+      anyOf: Array.isArray(object?.any_of) ? object.any_of.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: SignedBy): SignedByAmino {
+    const obj: any = {};
+    if (message.allOf) {
+      obj.all_of = message.allOf.map(e => e);
+    } else {
+      obj.all_of = [];
+    }
+    if (message.anyOf) {
+      obj.any_of = message.anyOf.map(e => e);
+    } else {
+      obj.any_of = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: SignedByAminoMsg): SignedBy {
+    return SignedBy.fromAmino(object.value);
+  },
   fromProtoMsg(message: SignedByProtoMsg): SignedBy {
     return SignedBy.decode(message.value);
   },
@@ -192,6 +279,33 @@ export const PlacementRequirements = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<PlacementRequirements>, I>>(object: I): PlacementRequirements {
+    const message = createBasePlacementRequirements();
+    if (object.signedBy !== undefined && object.signedBy !== null) {
+      message.signedBy = SignedBy.fromPartial(object.signedBy);
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: PlacementRequirementsAmino): PlacementRequirements {
+    return {
+      signedBy: object?.signed_by ? SignedBy.fromAmino(object.signed_by) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: PlacementRequirements): PlacementRequirementsAmino {
+    const obj: any = {};
+    obj.signed_by = message.signedBy ? SignedBy.toAmino(message.signedBy) : undefined;
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: PlacementRequirementsAminoMsg): PlacementRequirements {
+    return PlacementRequirements.fromAmino(object.value);
   },
   fromProtoMsg(message: PlacementRequirementsProtoMsg): PlacementRequirements {
     return PlacementRequirements.decode(message.value);

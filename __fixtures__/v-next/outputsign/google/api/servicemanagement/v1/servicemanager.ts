@@ -1,7 +1,8 @@
-import { ManagedService, ManagedServiceSDKType, ConfigSource, ConfigSourceSDKType, Rollout, RolloutSDKType, ChangeReport, ChangeReportSDKType, Diagnostic, DiagnosticSDKType } from "./resources";
-import { Service, ServiceSDKType } from "../../service";
-import { Any, AnySDKType } from "../../../protobuf/any";
+import { ManagedService, ManagedServiceAmino, ManagedServiceSDKType, ConfigSource, ConfigSourceAmino, ConfigSourceSDKType, Rollout, RolloutAmino, RolloutSDKType, ChangeReport, ChangeReportAmino, ChangeReportSDKType, Diagnostic, DiagnosticAmino, DiagnosticSDKType } from "./resources";
+import { Service, ServiceAmino, ServiceSDKType } from "../../service";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.servicemanagement.v1";
 export enum GetServiceConfigRequest_ConfigView {
   /** BASIC - Server response includes all fields except SourceInfo. */
@@ -16,6 +17,7 @@ export enum GetServiceConfigRequest_ConfigView {
   UNRECOGNIZED = -1,
 }
 export const GetServiceConfigRequest_ConfigViewSDKType = GetServiceConfigRequest_ConfigView;
+export const GetServiceConfigRequest_ConfigViewAmino = GetServiceConfigRequest_ConfigView;
 export function getServiceConfigRequest_ConfigViewFromJSON(object: any): GetServiceConfigRequest_ConfigView {
   switch (object) {
     case 0:
@@ -70,6 +72,34 @@ export interface ListServicesRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for `ListServices` method. */
+export interface ListServicesRequestAmino {
+  /** Include services produced by the specified project. */
+  producer_project_id: string;
+  /**
+   * The max number of items to include in the response list. Page size is 50
+   * if not specified. Maximum value is 100.
+   */
+  page_size: number;
+  /**
+   * Token identifying which result to start with; returned by a previous list
+   * call.
+   */
+  page_token: string;
+  /**
+   * Include services consumed by the specified consumer.
+   * 
+   * The Google Service Management implementation accepts the following
+   * forms:
+   * - project:<project_id>
+   */
+  /** @deprecated */
+  consumer_id: string;
+}
+export interface ListServicesRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.ListServicesRequest";
+  value: ListServicesRequestAmino;
+}
+/** Request message for `ListServices` method. */
 export interface ListServicesRequestSDKType {
   producer_project_id: string;
   page_size: number;
@@ -89,6 +119,17 @@ export interface ListServicesResponseProtoMsg {
   value: Uint8Array;
 }
 /** Response message for `ListServices` method. */
+export interface ListServicesResponseAmino {
+  /** The returned services will only have the name field set. */
+  services: ManagedServiceAmino[];
+  /** Token that can be passed to `ListServices` to resume a paginated query. */
+  next_page_token: string;
+}
+export interface ListServicesResponseAminoMsg {
+  type: "/google.api.servicemanagement.v1.ListServicesResponse";
+  value: ListServicesResponseAmino;
+}
+/** Response message for `ListServices` method. */
 export interface ListServicesResponseSDKType {
   services: ManagedServiceSDKType[];
   next_page_token: string;
@@ -106,6 +147,18 @@ export interface GetServiceRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for `GetService` method. */
+export interface GetServiceRequestAmino {
+  /**
+   * Required. The name of the service.  See the `ServiceManager` overview for naming
+   * requirements.  For example: `example.googleapis.com`.
+   */
+  service_name: string;
+}
+export interface GetServiceRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.GetServiceRequest";
+  value: GetServiceRequestAmino;
+}
+/** Request message for `GetService` method. */
 export interface GetServiceRequestSDKType {
   service_name: string;
 }
@@ -117,6 +170,15 @@ export interface CreateServiceRequest {
 export interface CreateServiceRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.CreateServiceRequest";
   value: Uint8Array;
+}
+/** Request message for CreateService method. */
+export interface CreateServiceRequestAmino {
+  /** Required. Initial values for the service resource. */
+  service?: ManagedServiceAmino;
+}
+export interface CreateServiceRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.CreateServiceRequest";
+  value: CreateServiceRequestAmino;
 }
 /** Request message for CreateService method. */
 export interface CreateServiceRequestSDKType {
@@ -135,6 +197,18 @@ export interface DeleteServiceRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for DeleteService method. */
+export interface DeleteServiceRequestAmino {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name: string;
+}
+export interface DeleteServiceRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.DeleteServiceRequest";
+  value: DeleteServiceRequestAmino;
+}
+/** Request message for DeleteService method. */
 export interface DeleteServiceRequestSDKType {
   service_name: string;
 }
@@ -151,6 +225,18 @@ export interface UndeleteServiceRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for UndeleteService method. */
+export interface UndeleteServiceRequestAmino {
+  /**
+   * Required. The name of the service. See the [overview](/service-management/overview)
+   * for naming requirements. For example: `example.googleapis.com`.
+   */
+  service_name: string;
+}
+export interface UndeleteServiceRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.UndeleteServiceRequest";
+  value: UndeleteServiceRequestAmino;
+}
+/** Request message for UndeleteService method. */
 export interface UndeleteServiceRequestSDKType {
   service_name: string;
 }
@@ -162,6 +248,15 @@ export interface UndeleteServiceResponse {
 export interface UndeleteServiceResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceResponse";
   value: Uint8Array;
+}
+/** Response message for UndeleteService method. */
+export interface UndeleteServiceResponseAmino {
+  /** Revived service resource. */
+  service?: ManagedServiceAmino;
+}
+export interface UndeleteServiceResponseAminoMsg {
+  type: "/google.api.servicemanagement.v1.UndeleteServiceResponse";
+  value: UndeleteServiceResponseAmino;
 }
 /** Response message for UndeleteService method. */
 export interface UndeleteServiceResponseSDKType {
@@ -192,6 +287,30 @@ export interface GetServiceConfigRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for GetServiceConfig method. */
+export interface GetServiceConfigRequestAmino {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name: string;
+  /**
+   * Required. The id of the service configuration resource.
+   * 
+   * This field must be specified for the server to return all fields, including
+   * `SourceInfo`.
+   */
+  config_id: string;
+  /**
+   * Specifies which parts of the Service Config should be returned in the
+   * response.
+   */
+  view: GetServiceConfigRequest_ConfigView;
+}
+export interface GetServiceConfigRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.GetServiceConfigRequest";
+  value: GetServiceConfigRequestAmino;
+}
+/** Request message for GetServiceConfig method. */
 export interface GetServiceConfigRequestSDKType {
   service_name: string;
   config_id: string;
@@ -217,6 +336,25 @@ export interface ListServiceConfigsRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for ListServiceConfigs method. */
+export interface ListServiceConfigsRequestAmino {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name: string;
+  /** The token of the page to retrieve. */
+  page_token: string;
+  /**
+   * The max number of items to include in the response list. Page size is 50
+   * if not specified. Maximum value is 100.
+   */
+  page_size: number;
+}
+export interface ListServiceConfigsRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.ListServiceConfigsRequest";
+  value: ListServiceConfigsRequestAmino;
+}
+/** Request message for ListServiceConfigs method. */
 export interface ListServiceConfigsRequestSDKType {
   service_name: string;
   page_token: string;
@@ -232,6 +370,17 @@ export interface ListServiceConfigsResponse {
 export interface ListServiceConfigsResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsResponse";
   value: Uint8Array;
+}
+/** Response message for ListServiceConfigs method. */
+export interface ListServiceConfigsResponseAmino {
+  /** The list of service configuration resources. */
+  service_configs: ServiceAmino[];
+  /** The token of the next page of results. */
+  next_page_token: string;
+}
+export interface ListServiceConfigsResponseAminoMsg {
+  type: "/google.api.servicemanagement.v1.ListServiceConfigsResponse";
+  value: ListServiceConfigsResponseAmino;
 }
 /** Response message for ListServiceConfigs method. */
 export interface ListServiceConfigsResponseSDKType {
@@ -251,6 +400,20 @@ export interface CreateServiceConfigRequest {
 export interface CreateServiceConfigRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.CreateServiceConfigRequest";
   value: Uint8Array;
+}
+/** Request message for CreateServiceConfig method. */
+export interface CreateServiceConfigRequestAmino {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name: string;
+  /** Required. The service configuration resource. */
+  service_config?: ServiceAmino;
+}
+export interface CreateServiceConfigRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.CreateServiceConfigRequest";
+  value: CreateServiceConfigRequestAmino;
 }
 /** Request message for CreateServiceConfig method. */
 export interface CreateServiceConfigRequestSDKType {
@@ -278,6 +441,26 @@ export interface SubmitConfigSourceRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for SubmitConfigSource method. */
+export interface SubmitConfigSourceRequestAmino {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name: string;
+  /** Required. The source configuration for the service. */
+  config_source?: ConfigSourceAmino;
+  /**
+   * Optional. If set, this will result in the generation of a
+   * `google.api.Service` configuration based on the `ConfigSource` provided,
+   * but the generated config and the sources will NOT be persisted.
+   */
+  validate_only: boolean;
+}
+export interface SubmitConfigSourceRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.SubmitConfigSourceRequest";
+  value: SubmitConfigSourceRequestAmino;
+}
+/** Request message for SubmitConfigSource method. */
 export interface SubmitConfigSourceRequestSDKType {
   service_name: string;
   config_source?: ConfigSourceSDKType;
@@ -291,6 +474,15 @@ export interface SubmitConfigSourceResponse {
 export interface SubmitConfigSourceResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceResponse";
   value: Uint8Array;
+}
+/** Response message for SubmitConfigSource method. */
+export interface SubmitConfigSourceResponseAmino {
+  /** The generated service configuration. */
+  service_config?: ServiceAmino;
+}
+export interface SubmitConfigSourceResponseAminoMsg {
+  type: "/google.api.servicemanagement.v1.SubmitConfigSourceResponse";
+  value: SubmitConfigSourceResponseAmino;
 }
 /** Response message for SubmitConfigSource method. */
 export interface SubmitConfigSourceResponseSDKType {
@@ -309,6 +501,20 @@ export interface CreateServiceRolloutRequest {
 export interface CreateServiceRolloutRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.CreateServiceRolloutRequest";
   value: Uint8Array;
+}
+/** Request message for 'CreateServiceRollout' */
+export interface CreateServiceRolloutRequestAmino {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name: string;
+  /** Required. The rollout resource. The `service_name` field is output only. */
+  rollout?: RolloutAmino;
+}
+export interface CreateServiceRolloutRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.CreateServiceRolloutRequest";
+  value: CreateServiceRolloutRequestAmino;
 }
 /** Request message for 'CreateServiceRollout' */
 export interface CreateServiceRolloutRequestSDKType {
@@ -346,6 +552,36 @@ export interface ListServiceRolloutsRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for 'ListServiceRollouts' */
+export interface ListServiceRolloutsRequestAmino {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name: string;
+  /** The token of the page to retrieve. */
+  page_token: string;
+  /**
+   * The max number of items to include in the response list. Page size is 50
+   * if not specified. Maximum value is 100.
+   */
+  page_size: number;
+  /**
+   * Required. Use `filter` to return subset of rollouts.
+   * The following filters are supported:
+   *   -- To limit the results to only those in
+   *      [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
+   *      use filter='status=SUCCESS'
+   *   -- To limit the results to those in
+   *      [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
+   *      or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
+   */
+  filter: string;
+}
+export interface ListServiceRolloutsRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.ListServiceRolloutsRequest";
+  value: ListServiceRolloutsRequestAmino;
+}
+/** Request message for 'ListServiceRollouts' */
 export interface ListServiceRolloutsRequestSDKType {
   service_name: string;
   page_token: string;
@@ -362,6 +598,17 @@ export interface ListServiceRolloutsResponse {
 export interface ListServiceRolloutsResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsResponse";
   value: Uint8Array;
+}
+/** Response message for ListServiceRollouts method. */
+export interface ListServiceRolloutsResponseAmino {
+  /** The list of rollout resources. */
+  rollouts: RolloutAmino[];
+  /** The token of the next page of results. */
+  next_page_token: string;
+}
+export interface ListServiceRolloutsResponseAminoMsg {
+  type: "/google.api.servicemanagement.v1.ListServiceRolloutsResponse";
+  value: ListServiceRolloutsResponseAmino;
 }
 /** Response message for ListServiceRollouts method. */
 export interface ListServiceRolloutsResponseSDKType {
@@ -381,6 +628,20 @@ export interface GetServiceRolloutRequest {
 export interface GetServiceRolloutRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.GetServiceRolloutRequest";
   value: Uint8Array;
+}
+/** Request message for GetServiceRollout method. */
+export interface GetServiceRolloutRequestAmino {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name: string;
+  /** Required. The id of the rollout resource. */
+  rollout_id: string;
+}
+export interface GetServiceRolloutRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.GetServiceRolloutRequest";
+  value: GetServiceRolloutRequestAmino;
 }
 /** Request message for GetServiceRollout method. */
 export interface GetServiceRolloutRequestSDKType {
@@ -411,6 +672,29 @@ export interface GenerateConfigReportRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for GenerateConfigReport method. */
+export interface GenerateConfigReportRequestAmino {
+  /**
+   * Required. Service configuration for which we want to generate the report.
+   * For this version of API, the supported types are
+   * [google.api.servicemanagement.v1.ConfigRef][google.api.servicemanagement.v1.ConfigRef],
+   * [google.api.servicemanagement.v1.ConfigSource][google.api.servicemanagement.v1.ConfigSource],
+   * and [google.api.Service][google.api.Service]
+   */
+  new_config?: AnyAmino;
+  /**
+   * Optional. Service configuration against which the comparison will be done.
+   * For this version of API, the supported types are
+   * [google.api.servicemanagement.v1.ConfigRef][google.api.servicemanagement.v1.ConfigRef],
+   * [google.api.servicemanagement.v1.ConfigSource][google.api.servicemanagement.v1.ConfigSource],
+   * and [google.api.Service][google.api.Service]
+   */
+  old_config?: AnyAmino;
+}
+export interface GenerateConfigReportRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.GenerateConfigReportRequest";
+  value: GenerateConfigReportRequestAmino;
+}
+/** Request message for GenerateConfigReport method. */
 export interface GenerateConfigReportRequestSDKType {
   new_config?: AnySDKType;
   old_config?: AnySDKType;
@@ -436,6 +720,28 @@ export interface GenerateConfigReportResponse {
 export interface GenerateConfigReportResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportResponse";
   value: Uint8Array;
+}
+/** Response message for GenerateConfigReport method. */
+export interface GenerateConfigReportResponseAmino {
+  /** Name of the service this report belongs to. */
+  service_name: string;
+  /** ID of the service configuration this report belongs to. */
+  id: string;
+  /**
+   * list of ChangeReport, each corresponding to comparison between two
+   * service configurations.
+   */
+  change_reports: ChangeReportAmino[];
+  /**
+   * Errors / Linter warnings associated with the service definition this
+   * report
+   * belongs to.
+   */
+  diagnostics: DiagnosticAmino[];
+}
+export interface GenerateConfigReportResponseAminoMsg {
+  type: "/google.api.servicemanagement.v1.GenerateConfigReportResponse";
+  value: GenerateConfigReportResponseAmino;
 }
 /** Response message for GenerateConfigReport method. */
 export interface GenerateConfigReportResponseSDKType {
@@ -495,6 +801,33 @@ export const ListServicesRequest = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<ListServicesRequest>): ListServicesRequest {
+    const message = createBaseListServicesRequest();
+    message.producerProjectId = object.producerProjectId ?? "";
+    message.pageSize = object.pageSize ?? 0;
+    message.pageToken = object.pageToken ?? "";
+    message.consumerId = object.consumerId ?? "";
+    return message;
+  },
+  fromAmino(object: ListServicesRequestAmino): ListServicesRequest {
+    return {
+      producerProjectId: object.producer_project_id,
+      pageSize: object.page_size,
+      pageToken: object.page_token,
+      consumerId: object.consumer_id
+    };
+  },
+  toAmino(message: ListServicesRequest): ListServicesRequestAmino {
+    const obj: any = {};
+    obj.producer_project_id = message.producerProjectId;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
+    obj.consumer_id = message.consumerId;
+    return obj;
+  },
+  fromAminoMsg(object: ListServicesRequestAminoMsg): ListServicesRequest {
+    return ListServicesRequest.fromAmino(object.value);
+  },
   fromProtoMsg(message: ListServicesRequestProtoMsg): ListServicesRequest {
     return ListServicesRequest.decode(message.value);
   },
@@ -545,6 +878,31 @@ export const ListServicesResponse = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<ListServicesResponse>): ListServicesResponse {
+    const message = createBaseListServicesResponse();
+    message.services = object.services?.map(e => ManagedService.fromPartial(e)) || [];
+    message.nextPageToken = object.nextPageToken ?? "";
+    return message;
+  },
+  fromAmino(object: ListServicesResponseAmino): ListServicesResponse {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => ManagedService.fromAmino(e)) : [],
+      nextPageToken: object.next_page_token
+    };
+  },
+  toAmino(message: ListServicesResponse): ListServicesResponseAmino {
+    const obj: any = {};
+    if (message.services) {
+      obj.services = message.services.map(e => e ? ManagedService.toAmino(e) : undefined);
+    } else {
+      obj.services = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
+  },
+  fromAminoMsg(object: ListServicesResponseAminoMsg): ListServicesResponse {
+    return ListServicesResponse.fromAmino(object.value);
+  },
   fromProtoMsg(message: ListServicesResponseProtoMsg): ListServicesResponse {
     return ListServicesResponse.decode(message.value);
   },
@@ -587,6 +945,24 @@ export const GetServiceRequest = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<GetServiceRequest>): GetServiceRequest {
+    const message = createBaseGetServiceRequest();
+    message.serviceName = object.serviceName ?? "";
+    return message;
+  },
+  fromAmino(object: GetServiceRequestAmino): GetServiceRequest {
+    return {
+      serviceName: object.service_name
+    };
+  },
+  toAmino(message: GetServiceRequest): GetServiceRequestAmino {
+    const obj: any = {};
+    obj.service_name = message.serviceName;
+    return obj;
+  },
+  fromAminoMsg(object: GetServiceRequestAminoMsg): GetServiceRequest {
+    return GetServiceRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GetServiceRequestProtoMsg): GetServiceRequest {
     return GetServiceRequest.decode(message.value);
@@ -631,6 +1007,26 @@ export const CreateServiceRequest = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<CreateServiceRequest>): CreateServiceRequest {
+    const message = createBaseCreateServiceRequest();
+    if (object.service !== undefined && object.service !== null) {
+      message.service = ManagedService.fromPartial(object.service);
+    }
+    return message;
+  },
+  fromAmino(object: CreateServiceRequestAmino): CreateServiceRequest {
+    return {
+      service: object?.service ? ManagedService.fromAmino(object.service) : undefined
+    };
+  },
+  toAmino(message: CreateServiceRequest): CreateServiceRequestAmino {
+    const obj: any = {};
+    obj.service = message.service ? ManagedService.toAmino(message.service) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: CreateServiceRequestAminoMsg): CreateServiceRequest {
+    return CreateServiceRequest.fromAmino(object.value);
+  },
   fromProtoMsg(message: CreateServiceRequestProtoMsg): CreateServiceRequest {
     return CreateServiceRequest.decode(message.value);
   },
@@ -673,6 +1069,24 @@ export const DeleteServiceRequest = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<DeleteServiceRequest>): DeleteServiceRequest {
+    const message = createBaseDeleteServiceRequest();
+    message.serviceName = object.serviceName ?? "";
+    return message;
+  },
+  fromAmino(object: DeleteServiceRequestAmino): DeleteServiceRequest {
+    return {
+      serviceName: object.service_name
+    };
+  },
+  toAmino(message: DeleteServiceRequest): DeleteServiceRequestAmino {
+    const obj: any = {};
+    obj.service_name = message.serviceName;
+    return obj;
+  },
+  fromAminoMsg(object: DeleteServiceRequestAminoMsg): DeleteServiceRequest {
+    return DeleteServiceRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: DeleteServiceRequestProtoMsg): DeleteServiceRequest {
     return DeleteServiceRequest.decode(message.value);
@@ -717,6 +1131,24 @@ export const UndeleteServiceRequest = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<UndeleteServiceRequest>): UndeleteServiceRequest {
+    const message = createBaseUndeleteServiceRequest();
+    message.serviceName = object.serviceName ?? "";
+    return message;
+  },
+  fromAmino(object: UndeleteServiceRequestAmino): UndeleteServiceRequest {
+    return {
+      serviceName: object.service_name
+    };
+  },
+  toAmino(message: UndeleteServiceRequest): UndeleteServiceRequestAmino {
+    const obj: any = {};
+    obj.service_name = message.serviceName;
+    return obj;
+  },
+  fromAminoMsg(object: UndeleteServiceRequestAminoMsg): UndeleteServiceRequest {
+    return UndeleteServiceRequest.fromAmino(object.value);
+  },
   fromProtoMsg(message: UndeleteServiceRequestProtoMsg): UndeleteServiceRequest {
     return UndeleteServiceRequest.decode(message.value);
   },
@@ -759,6 +1191,26 @@ export const UndeleteServiceResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<UndeleteServiceResponse>): UndeleteServiceResponse {
+    const message = createBaseUndeleteServiceResponse();
+    if (object.service !== undefined && object.service !== null) {
+      message.service = ManagedService.fromPartial(object.service);
+    }
+    return message;
+  },
+  fromAmino(object: UndeleteServiceResponseAmino): UndeleteServiceResponse {
+    return {
+      service: object?.service ? ManagedService.fromAmino(object.service) : undefined
+    };
+  },
+  toAmino(message: UndeleteServiceResponse): UndeleteServiceResponseAmino {
+    const obj: any = {};
+    obj.service = message.service ? ManagedService.toAmino(message.service) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: UndeleteServiceResponseAminoMsg): UndeleteServiceResponse {
+    return UndeleteServiceResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: UndeleteServiceResponseProtoMsg): UndeleteServiceResponse {
     return UndeleteServiceResponse.decode(message.value);
@@ -817,6 +1269,30 @@ export const GetServiceConfigRequest = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<GetServiceConfigRequest>): GetServiceConfigRequest {
+    const message = createBaseGetServiceConfigRequest();
+    message.serviceName = object.serviceName ?? "";
+    message.configId = object.configId ?? "";
+    message.view = object.view ?? 0;
+    return message;
+  },
+  fromAmino(object: GetServiceConfigRequestAmino): GetServiceConfigRequest {
+    return {
+      serviceName: object.service_name,
+      configId: object.config_id,
+      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : -1
+    };
+  },
+  toAmino(message: GetServiceConfigRequest): GetServiceConfigRequestAmino {
+    const obj: any = {};
+    obj.service_name = message.serviceName;
+    obj.config_id = message.configId;
+    obj.view = message.view;
+    return obj;
+  },
+  fromAminoMsg(object: GetServiceConfigRequestAminoMsg): GetServiceConfigRequest {
+    return GetServiceConfigRequest.fromAmino(object.value);
+  },
   fromProtoMsg(message: GetServiceConfigRequestProtoMsg): GetServiceConfigRequest {
     return GetServiceConfigRequest.decode(message.value);
   },
@@ -874,6 +1350,30 @@ export const ListServiceConfigsRequest = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<ListServiceConfigsRequest>): ListServiceConfigsRequest {
+    const message = createBaseListServiceConfigsRequest();
+    message.serviceName = object.serviceName ?? "";
+    message.pageToken = object.pageToken ?? "";
+    message.pageSize = object.pageSize ?? 0;
+    return message;
+  },
+  fromAmino(object: ListServiceConfigsRequestAmino): ListServiceConfigsRequest {
+    return {
+      serviceName: object.service_name,
+      pageToken: object.page_token,
+      pageSize: object.page_size
+    };
+  },
+  toAmino(message: ListServiceConfigsRequest): ListServiceConfigsRequestAmino {
+    const obj: any = {};
+    obj.service_name = message.serviceName;
+    obj.page_token = message.pageToken;
+    obj.page_size = message.pageSize;
+    return obj;
+  },
+  fromAminoMsg(object: ListServiceConfigsRequestAminoMsg): ListServiceConfigsRequest {
+    return ListServiceConfigsRequest.fromAmino(object.value);
+  },
   fromProtoMsg(message: ListServiceConfigsRequestProtoMsg): ListServiceConfigsRequest {
     return ListServiceConfigsRequest.decode(message.value);
   },
@@ -924,6 +1424,31 @@ export const ListServiceConfigsResponse = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<ListServiceConfigsResponse>): ListServiceConfigsResponse {
+    const message = createBaseListServiceConfigsResponse();
+    message.serviceConfigs = object.serviceConfigs?.map(e => Service.fromPartial(e)) || [];
+    message.nextPageToken = object.nextPageToken ?? "";
+    return message;
+  },
+  fromAmino(object: ListServiceConfigsResponseAmino): ListServiceConfigsResponse {
+    return {
+      serviceConfigs: Array.isArray(object?.service_configs) ? object.service_configs.map((e: any) => Service.fromAmino(e)) : [],
+      nextPageToken: object.next_page_token
+    };
+  },
+  toAmino(message: ListServiceConfigsResponse): ListServiceConfigsResponseAmino {
+    const obj: any = {};
+    if (message.serviceConfigs) {
+      obj.service_configs = message.serviceConfigs.map(e => e ? Service.toAmino(e) : undefined);
+    } else {
+      obj.service_configs = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
+  },
+  fromAminoMsg(object: ListServiceConfigsResponseAminoMsg): ListServiceConfigsResponse {
+    return ListServiceConfigsResponse.fromAmino(object.value);
+  },
   fromProtoMsg(message: ListServiceConfigsResponseProtoMsg): ListServiceConfigsResponse {
     return ListServiceConfigsResponse.decode(message.value);
   },
@@ -973,6 +1498,29 @@ export const CreateServiceConfigRequest = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<CreateServiceConfigRequest>): CreateServiceConfigRequest {
+    const message = createBaseCreateServiceConfigRequest();
+    message.serviceName = object.serviceName ?? "";
+    if (object.serviceConfig !== undefined && object.serviceConfig !== null) {
+      message.serviceConfig = Service.fromPartial(object.serviceConfig);
+    }
+    return message;
+  },
+  fromAmino(object: CreateServiceConfigRequestAmino): CreateServiceConfigRequest {
+    return {
+      serviceName: object.service_name,
+      serviceConfig: object?.service_config ? Service.fromAmino(object.service_config) : undefined
+    };
+  },
+  toAmino(message: CreateServiceConfigRequest): CreateServiceConfigRequestAmino {
+    const obj: any = {};
+    obj.service_name = message.serviceName;
+    obj.service_config = message.serviceConfig ? Service.toAmino(message.serviceConfig) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: CreateServiceConfigRequestAminoMsg): CreateServiceConfigRequest {
+    return CreateServiceConfigRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: CreateServiceConfigRequestProtoMsg): CreateServiceConfigRequest {
     return CreateServiceConfigRequest.decode(message.value);
@@ -1031,6 +1579,32 @@ export const SubmitConfigSourceRequest = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<SubmitConfigSourceRequest>): SubmitConfigSourceRequest {
+    const message = createBaseSubmitConfigSourceRequest();
+    message.serviceName = object.serviceName ?? "";
+    if (object.configSource !== undefined && object.configSource !== null) {
+      message.configSource = ConfigSource.fromPartial(object.configSource);
+    }
+    message.validateOnly = object.validateOnly ?? false;
+    return message;
+  },
+  fromAmino(object: SubmitConfigSourceRequestAmino): SubmitConfigSourceRequest {
+    return {
+      serviceName: object.service_name,
+      configSource: object?.config_source ? ConfigSource.fromAmino(object.config_source) : undefined,
+      validateOnly: object.validate_only
+    };
+  },
+  toAmino(message: SubmitConfigSourceRequest): SubmitConfigSourceRequestAmino {
+    const obj: any = {};
+    obj.service_name = message.serviceName;
+    obj.config_source = message.configSource ? ConfigSource.toAmino(message.configSource) : undefined;
+    obj.validate_only = message.validateOnly;
+    return obj;
+  },
+  fromAminoMsg(object: SubmitConfigSourceRequestAminoMsg): SubmitConfigSourceRequest {
+    return SubmitConfigSourceRequest.fromAmino(object.value);
+  },
   fromProtoMsg(message: SubmitConfigSourceRequestProtoMsg): SubmitConfigSourceRequest {
     return SubmitConfigSourceRequest.decode(message.value);
   },
@@ -1073,6 +1647,26 @@ export const SubmitConfigSourceResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<SubmitConfigSourceResponse>): SubmitConfigSourceResponse {
+    const message = createBaseSubmitConfigSourceResponse();
+    if (object.serviceConfig !== undefined && object.serviceConfig !== null) {
+      message.serviceConfig = Service.fromPartial(object.serviceConfig);
+    }
+    return message;
+  },
+  fromAmino(object: SubmitConfigSourceResponseAmino): SubmitConfigSourceResponse {
+    return {
+      serviceConfig: object?.service_config ? Service.fromAmino(object.service_config) : undefined
+    };
+  },
+  toAmino(message: SubmitConfigSourceResponse): SubmitConfigSourceResponseAmino {
+    const obj: any = {};
+    obj.service_config = message.serviceConfig ? Service.toAmino(message.serviceConfig) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: SubmitConfigSourceResponseAminoMsg): SubmitConfigSourceResponse {
+    return SubmitConfigSourceResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: SubmitConfigSourceResponseProtoMsg): SubmitConfigSourceResponse {
     return SubmitConfigSourceResponse.decode(message.value);
@@ -1123,6 +1717,29 @@ export const CreateServiceRolloutRequest = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<CreateServiceRolloutRequest>): CreateServiceRolloutRequest {
+    const message = createBaseCreateServiceRolloutRequest();
+    message.serviceName = object.serviceName ?? "";
+    if (object.rollout !== undefined && object.rollout !== null) {
+      message.rollout = Rollout.fromPartial(object.rollout);
+    }
+    return message;
+  },
+  fromAmino(object: CreateServiceRolloutRequestAmino): CreateServiceRolloutRequest {
+    return {
+      serviceName: object.service_name,
+      rollout: object?.rollout ? Rollout.fromAmino(object.rollout) : undefined
+    };
+  },
+  toAmino(message: CreateServiceRolloutRequest): CreateServiceRolloutRequestAmino {
+    const obj: any = {};
+    obj.service_name = message.serviceName;
+    obj.rollout = message.rollout ? Rollout.toAmino(message.rollout) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: CreateServiceRolloutRequestAminoMsg): CreateServiceRolloutRequest {
+    return CreateServiceRolloutRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: CreateServiceRolloutRequestProtoMsg): CreateServiceRolloutRequest {
     return CreateServiceRolloutRequest.decode(message.value);
@@ -1188,6 +1805,33 @@ export const ListServiceRolloutsRequest = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<ListServiceRolloutsRequest>): ListServiceRolloutsRequest {
+    const message = createBaseListServiceRolloutsRequest();
+    message.serviceName = object.serviceName ?? "";
+    message.pageToken = object.pageToken ?? "";
+    message.pageSize = object.pageSize ?? 0;
+    message.filter = object.filter ?? "";
+    return message;
+  },
+  fromAmino(object: ListServiceRolloutsRequestAmino): ListServiceRolloutsRequest {
+    return {
+      serviceName: object.service_name,
+      pageToken: object.page_token,
+      pageSize: object.page_size,
+      filter: object.filter
+    };
+  },
+  toAmino(message: ListServiceRolloutsRequest): ListServiceRolloutsRequestAmino {
+    const obj: any = {};
+    obj.service_name = message.serviceName;
+    obj.page_token = message.pageToken;
+    obj.page_size = message.pageSize;
+    obj.filter = message.filter;
+    return obj;
+  },
+  fromAminoMsg(object: ListServiceRolloutsRequestAminoMsg): ListServiceRolloutsRequest {
+    return ListServiceRolloutsRequest.fromAmino(object.value);
+  },
   fromProtoMsg(message: ListServiceRolloutsRequestProtoMsg): ListServiceRolloutsRequest {
     return ListServiceRolloutsRequest.decode(message.value);
   },
@@ -1237,6 +1881,31 @@ export const ListServiceRolloutsResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<ListServiceRolloutsResponse>): ListServiceRolloutsResponse {
+    const message = createBaseListServiceRolloutsResponse();
+    message.rollouts = object.rollouts?.map(e => Rollout.fromPartial(e)) || [];
+    message.nextPageToken = object.nextPageToken ?? "";
+    return message;
+  },
+  fromAmino(object: ListServiceRolloutsResponseAmino): ListServiceRolloutsResponse {
+    return {
+      rollouts: Array.isArray(object?.rollouts) ? object.rollouts.map((e: any) => Rollout.fromAmino(e)) : [],
+      nextPageToken: object.next_page_token
+    };
+  },
+  toAmino(message: ListServiceRolloutsResponse): ListServiceRolloutsResponseAmino {
+    const obj: any = {};
+    if (message.rollouts) {
+      obj.rollouts = message.rollouts.map(e => e ? Rollout.toAmino(e) : undefined);
+    } else {
+      obj.rollouts = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
+  },
+  fromAminoMsg(object: ListServiceRolloutsResponseAminoMsg): ListServiceRolloutsResponse {
+    return ListServiceRolloutsResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: ListServiceRolloutsResponseProtoMsg): ListServiceRolloutsResponse {
     return ListServiceRolloutsResponse.decode(message.value);
@@ -1288,6 +1957,27 @@ export const GetServiceRolloutRequest = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<GetServiceRolloutRequest>): GetServiceRolloutRequest {
+    const message = createBaseGetServiceRolloutRequest();
+    message.serviceName = object.serviceName ?? "";
+    message.rolloutId = object.rolloutId ?? "";
+    return message;
+  },
+  fromAmino(object: GetServiceRolloutRequestAmino): GetServiceRolloutRequest {
+    return {
+      serviceName: object.service_name,
+      rolloutId: object.rollout_id
+    };
+  },
+  toAmino(message: GetServiceRolloutRequest): GetServiceRolloutRequestAmino {
+    const obj: any = {};
+    obj.service_name = message.serviceName;
+    obj.rollout_id = message.rolloutId;
+    return obj;
+  },
+  fromAminoMsg(object: GetServiceRolloutRequestAminoMsg): GetServiceRolloutRequest {
+    return GetServiceRolloutRequest.fromAmino(object.value);
+  },
   fromProtoMsg(message: GetServiceRolloutRequestProtoMsg): GetServiceRolloutRequest {
     return GetServiceRolloutRequest.decode(message.value);
   },
@@ -1337,6 +2027,31 @@ export const GenerateConfigReportRequest = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<GenerateConfigReportRequest>): GenerateConfigReportRequest {
+    const message = createBaseGenerateConfigReportRequest();
+    if (object.newConfig !== undefined && object.newConfig !== null) {
+      message.newConfig = Any.fromPartial(object.newConfig);
+    }
+    if (object.oldConfig !== undefined && object.oldConfig !== null) {
+      message.oldConfig = Any.fromPartial(object.oldConfig);
+    }
+    return message;
+  },
+  fromAmino(object: GenerateConfigReportRequestAmino): GenerateConfigReportRequest {
+    return {
+      newConfig: object?.new_config ? Any.fromAmino(object.new_config) : undefined,
+      oldConfig: object?.old_config ? Any.fromAmino(object.old_config) : undefined
+    };
+  },
+  toAmino(message: GenerateConfigReportRequest): GenerateConfigReportRequestAmino {
+    const obj: any = {};
+    obj.new_config = message.newConfig ? Any.toAmino(message.newConfig) : undefined;
+    obj.old_config = message.oldConfig ? Any.toAmino(message.oldConfig) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: GenerateConfigReportRequestAminoMsg): GenerateConfigReportRequest {
+    return GenerateConfigReportRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: GenerateConfigReportRequestProtoMsg): GenerateConfigReportRequest {
     return GenerateConfigReportRequest.decode(message.value);
@@ -1401,6 +2116,41 @@ export const GenerateConfigReportResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<GenerateConfigReportResponse>): GenerateConfigReportResponse {
+    const message = createBaseGenerateConfigReportResponse();
+    message.serviceName = object.serviceName ?? "";
+    message.id = object.id ?? "";
+    message.changeReports = object.changeReports?.map(e => ChangeReport.fromPartial(e)) || [];
+    message.diagnostics = object.diagnostics?.map(e => Diagnostic.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: GenerateConfigReportResponseAmino): GenerateConfigReportResponse {
+    return {
+      serviceName: object.service_name,
+      id: object.id,
+      changeReports: Array.isArray(object?.change_reports) ? object.change_reports.map((e: any) => ChangeReport.fromAmino(e)) : [],
+      diagnostics: Array.isArray(object?.diagnostics) ? object.diagnostics.map((e: any) => Diagnostic.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: GenerateConfigReportResponse): GenerateConfigReportResponseAmino {
+    const obj: any = {};
+    obj.service_name = message.serviceName;
+    obj.id = message.id;
+    if (message.changeReports) {
+      obj.change_reports = message.changeReports.map(e => e ? ChangeReport.toAmino(e) : undefined);
+    } else {
+      obj.change_reports = [];
+    }
+    if (message.diagnostics) {
+      obj.diagnostics = message.diagnostics.map(e => e ? Diagnostic.toAmino(e) : undefined);
+    } else {
+      obj.diagnostics = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenerateConfigReportResponseAminoMsg): GenerateConfigReportResponse {
+    return GenerateConfigReportResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: GenerateConfigReportResponseProtoMsg): GenerateConfigReportResponse {
     return GenerateConfigReportResponse.decode(message.value);

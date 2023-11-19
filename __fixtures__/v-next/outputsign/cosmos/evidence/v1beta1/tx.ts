@@ -1,5 +1,6 @@
-import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 /**
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
@@ -17,6 +18,18 @@ export interface MsgSubmitEvidenceProtoMsg {
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
  * Evidence of misbehavior such as equivocation or counterfactual signing.
  */
+export interface MsgSubmitEvidenceAmino {
+  submitter: string;
+  evidence?: AnyAmino;
+}
+export interface MsgSubmitEvidenceAminoMsg {
+  type: "cosmos-sdk/MsgSubmitEvidence";
+  value: MsgSubmitEvidenceAmino;
+}
+/**
+ * MsgSubmitEvidence represents a message that supports submitting arbitrary
+ * Evidence of misbehavior such as equivocation or counterfactual signing.
+ */
 export interface MsgSubmitEvidenceSDKType {
   submitter: string;
   evidence?: AnySDKType;
@@ -29,6 +42,15 @@ export interface MsgSubmitEvidenceResponse {
 export interface MsgSubmitEvidenceResponseProtoMsg {
   typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidenceResponse";
   value: Uint8Array;
+}
+/** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
+export interface MsgSubmitEvidenceResponseAmino {
+  /** hash defines the hash of the evidence. */
+  hash: Uint8Array;
+}
+export interface MsgSubmitEvidenceResponseAminoMsg {
+  type: "cosmos-sdk/MsgSubmitEvidenceResponse";
+  value: MsgSubmitEvidenceResponseAmino;
 }
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponseSDKType {
@@ -70,6 +92,35 @@ export const MsgSubmitEvidence = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<MsgSubmitEvidence>): MsgSubmitEvidence {
+    const message = createBaseMsgSubmitEvidence();
+    message.submitter = object.submitter ?? "";
+    if (object.evidence !== undefined && object.evidence !== null) {
+      message.evidence = Any.fromPartial(object.evidence);
+    }
+    return message;
+  },
+  fromAmino(object: MsgSubmitEvidenceAmino): MsgSubmitEvidence {
+    return {
+      submitter: object.submitter,
+      evidence: object?.evidence ? Any.fromAmino(object.evidence) : undefined
+    };
+  },
+  toAmino(message: MsgSubmitEvidence): MsgSubmitEvidenceAmino {
+    const obj: any = {};
+    obj.submitter = message.submitter;
+    obj.evidence = message.evidence ? Any.toAmino(message.evidence) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgSubmitEvidenceAminoMsg): MsgSubmitEvidence {
+    return MsgSubmitEvidence.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSubmitEvidence): MsgSubmitEvidenceAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgSubmitEvidence",
+      value: MsgSubmitEvidence.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgSubmitEvidenceProtoMsg): MsgSubmitEvidence {
     return MsgSubmitEvidence.decode(message.value);
@@ -113,6 +164,30 @@ export const MsgSubmitEvidenceResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<MsgSubmitEvidenceResponse>): MsgSubmitEvidenceResponse {
+    const message = createBaseMsgSubmitEvidenceResponse();
+    message.hash = object.hash ?? new Uint8Array();
+    return message;
+  },
+  fromAmino(object: MsgSubmitEvidenceResponseAmino): MsgSubmitEvidenceResponse {
+    return {
+      hash: object.hash
+    };
+  },
+  toAmino(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseAmino {
+    const obj: any = {};
+    obj.hash = message.hash;
+    return obj;
+  },
+  fromAminoMsg(object: MsgSubmitEvidenceResponseAminoMsg): MsgSubmitEvidenceResponse {
+    return MsgSubmitEvidenceResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgSubmitEvidenceResponse",
+      value: MsgSubmitEvidenceResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgSubmitEvidenceResponseProtoMsg): MsgSubmitEvidenceResponse {
     return MsgSubmitEvidenceResponse.decode(message.value);

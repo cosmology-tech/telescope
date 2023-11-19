@@ -1,5 +1,6 @@
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.recovery.v1";
 /** GenesisState defines the recovery module's genesis state. */
 export interface GenesisState {
@@ -9,6 +10,15 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.recovery.v1.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState defines the recovery module's genesis state. */
+export interface GenesisStateAmino {
+  /** params defines all the paramaters of the module. */
+  params?: ParamsAmino;
+}
+export interface GenesisStateAminoMsg {
+  type: "/evmos.recovery.v1.GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the recovery module's genesis state. */
 export interface GenesisStateSDKType {
@@ -24,6 +34,17 @@ export interface Params {
 export interface ParamsProtoMsg {
   typeUrl: "/evmos.recovery.v1.Params";
   value: Uint8Array;
+}
+/** Params holds parameters for the recovery module */
+export interface ParamsAmino {
+  /** enable recovery IBC middleware */
+  enable_recovery: boolean;
+  /** duration added to timeout timestamp for balances recovered via IBC packets */
+  packet_timeout_duration?: DurationAmino;
+}
+export interface ParamsAminoMsg {
+  type: "/evmos.recovery.v1.Params";
+  value: ParamsAmino;
 }
 /** Params holds parameters for the recovery module */
 export interface ParamsSDKType {
@@ -59,6 +80,26 @@ export const GenesisState = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
+    return message;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
@@ -109,6 +150,29 @@ export const Params = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<Params>): Params {
+    const message = createBaseParams();
+    message.enableRecovery = object.enableRecovery ?? false;
+    if (object.packetTimeoutDuration !== undefined && object.packetTimeoutDuration !== null) {
+      message.packetTimeoutDuration = Duration.fromPartial(object.packetTimeoutDuration);
+    }
+    return message;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      enableRecovery: object.enable_recovery,
+      packetTimeoutDuration: object?.packet_timeout_duration ? Duration.fromAmino(object.packet_timeout_duration) : undefined
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.enable_recovery = message.enableRecovery;
+    obj.packet_timeout_duration = message.packetTimeoutDuration ? Duration.toAmino(message.packetTimeoutDuration) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

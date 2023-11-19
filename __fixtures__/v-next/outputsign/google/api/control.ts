@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Selects and configures the service controller used by the service.  The
@@ -15,6 +16,22 @@ export interface Control {
 export interface ControlProtoMsg {
   typeUrl: "/google.api.Control";
   value: Uint8Array;
+}
+/**
+ * Selects and configures the service controller used by the service.  The
+ * service controller handles features like abuse, quota, billing, logging,
+ * monitoring, etc.
+ */
+export interface ControlAmino {
+  /**
+   * The service control environment to use. If empty, no control plane
+   * feature (like quota and billing) will be enabled.
+   */
+  environment: string;
+}
+export interface ControlAminoMsg {
+  type: "/google.api.Control";
+  value: ControlAmino;
 }
 /**
  * Selects and configures the service controller used by the service.  The
@@ -53,6 +70,24 @@ export const Control = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<Control>): Control {
+    const message = createBaseControl();
+    message.environment = object.environment ?? "";
+    return message;
+  },
+  fromAmino(object: ControlAmino): Control {
+    return {
+      environment: object.environment
+    };
+  },
+  toAmino(message: Control): ControlAmino {
+    const obj: any = {};
+    obj.environment = message.environment;
+    return obj;
+  },
+  fromAminoMsg(object: ControlAminoMsg): Control {
+    return Control.fromAmino(object.value);
   },
   fromProtoMsg(message: ControlProtoMsg): Control {
     return Control.decode(message.value);

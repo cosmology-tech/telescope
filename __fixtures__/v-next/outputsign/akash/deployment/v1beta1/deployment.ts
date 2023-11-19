@@ -1,9 +1,9 @@
 //@ts-nocheck
 /* eslint-disable */
-import { GroupSpec, GroupSpecSDKType, GroupID, GroupIDSDKType } from "./group";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { GroupSpec, GroupSpecAmino, GroupSpecSDKType, GroupID, GroupIDSDKType } from "./group";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { Rpc } from "../../../helpers";
+import { Exact, Rpc } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -16,6 +16,7 @@ export enum Deployment_State {
   UNRECOGNIZED = -1,
 }
 export const Deployment_StateSDKType = Deployment_State;
+export const Deployment_StateAmino = Deployment_State;
 export function deployment_StateFromJSON(object: any): Deployment_State {
   switch (object) {
     case 0:
@@ -58,6 +59,17 @@ export interface MsgCreateDeploymentProtoMsg {
   value: Uint8Array;
 }
 /** MsgCreateDeployment defines an SDK message for creating deployment */
+export interface MsgCreateDeploymentAmino {
+  id?: DeploymentIDAmino | undefined;
+  groups: GroupSpecAmino[];
+  version: Uint8Array;
+  deposit?: CoinAmino | undefined;
+}
+export interface MsgCreateDeploymentAminoMsg {
+  type: "/akash.deployment.v1beta1.MsgCreateDeployment";
+  value: MsgCreateDeploymentAmino;
+}
+/** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentSDKType {
   id: DeploymentIDSDKType | undefined;
   groups: GroupSpecSDKType[];
@@ -71,6 +83,12 @@ export interface MsgCreateDeploymentResponseProtoMsg {
   value: Uint8Array;
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
+export interface MsgCreateDeploymentResponseAmino {}
+export interface MsgCreateDeploymentResponseAminoMsg {
+  type: "/akash.deployment.v1beta1.MsgCreateDeploymentResponse";
+  value: MsgCreateDeploymentResponseAmino;
+}
+/** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponseSDKType {}
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeployment {
@@ -82,6 +100,15 @@ export interface MsgDepositDeploymentProtoMsg {
   value: Uint8Array;
 }
 /** MsgDepositDeployment deposits more funds into the deposit account */
+export interface MsgDepositDeploymentAmino {
+  id?: DeploymentIDAmino | undefined;
+  amount?: CoinAmino | undefined;
+}
+export interface MsgDepositDeploymentAminoMsg {
+  type: "/akash.deployment.v1beta1.MsgDepositDeployment";
+  value: MsgDepositDeploymentAmino;
+}
+/** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeploymentSDKType {
   id: DeploymentIDSDKType | undefined;
   amount: CoinSDKType | undefined;
@@ -91,6 +118,12 @@ export interface MsgDepositDeploymentResponse {}
 export interface MsgDepositDeploymentResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgDepositDeploymentResponse";
   value: Uint8Array;
+}
+/** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
+export interface MsgDepositDeploymentResponseAmino {}
+export interface MsgDepositDeploymentResponseAminoMsg {
+  type: "/akash.deployment.v1beta1.MsgDepositDeploymentResponse";
+  value: MsgDepositDeploymentResponseAmino;
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponseSDKType {}
@@ -105,6 +138,16 @@ export interface MsgUpdateDeploymentProtoMsg {
   value: Uint8Array;
 }
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
+export interface MsgUpdateDeploymentAmino {
+  id?: DeploymentIDAmino | undefined;
+  groups: GroupSpecAmino[];
+  version: Uint8Array;
+}
+export interface MsgUpdateDeploymentAminoMsg {
+  type: "/akash.deployment.v1beta1.MsgUpdateDeployment";
+  value: MsgUpdateDeploymentAmino;
+}
+/** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
   id: DeploymentIDSDKType | undefined;
   groups: GroupSpecSDKType[];
@@ -117,6 +160,12 @@ export interface MsgUpdateDeploymentResponseProtoMsg {
   value: Uint8Array;
 }
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
+export interface MsgUpdateDeploymentResponseAmino {}
+export interface MsgUpdateDeploymentResponseAminoMsg {
+  type: "/akash.deployment.v1beta1.MsgUpdateDeploymentResponse";
+  value: MsgUpdateDeploymentResponseAmino;
+}
+/** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponseSDKType {}
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeployment {
@@ -125,6 +174,14 @@ export interface MsgCloseDeployment {
 export interface MsgCloseDeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgCloseDeployment";
   value: Uint8Array;
+}
+/** MsgCloseDeployment defines an SDK message for closing deployment */
+export interface MsgCloseDeploymentAmino {
+  id?: DeploymentIDAmino | undefined;
+}
+export interface MsgCloseDeploymentAminoMsg {
+  type: "/akash.deployment.v1beta1.MsgCloseDeployment";
+  value: MsgCloseDeploymentAmino;
 }
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeploymentSDKType {
@@ -137,6 +194,12 @@ export interface MsgCloseDeploymentResponseProtoMsg {
   value: Uint8Array;
 }
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
+export interface MsgCloseDeploymentResponseAmino {}
+export interface MsgCloseDeploymentResponseAminoMsg {
+  type: "/akash.deployment.v1beta1.MsgCloseDeploymentResponse";
+  value: MsgCloseDeploymentResponseAmino;
+}
+/** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponseSDKType {}
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentID {
@@ -146,6 +209,15 @@ export interface DeploymentID {
 export interface DeploymentIDProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.DeploymentID";
   value: Uint8Array;
+}
+/** DeploymentID stores owner and sequence number */
+export interface DeploymentIDAmino {
+  owner: string;
+  dseq: string;
+}
+export interface DeploymentIDAminoMsg {
+  type: "/akash.deployment.v1beta1.DeploymentID";
+  value: DeploymentIDAmino;
 }
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDSDKType {
@@ -164,6 +236,17 @@ export interface DeploymentProtoMsg {
   value: Uint8Array;
 }
 /** Deployment stores deploymentID, state and version details */
+export interface DeploymentAmino {
+  deployment_id?: DeploymentIDAmino | undefined;
+  state: Deployment_State;
+  version: Uint8Array;
+  created_at: string;
+}
+export interface DeploymentAminoMsg {
+  type: "/akash.deployment.v1beta1.Deployment";
+  value: DeploymentAmino;
+}
+/** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
   deployment_id: DeploymentIDSDKType | undefined;
   state: Deployment_State;
@@ -179,6 +262,16 @@ export interface DeploymentFilters {
 export interface DeploymentFiltersProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.DeploymentFilters";
   value: Uint8Array;
+}
+/** DeploymentFilters defines filters used to filter deployments */
+export interface DeploymentFiltersAmino {
+  owner: string;
+  dseq: string;
+  state: string;
+}
+export interface DeploymentFiltersAminoMsg {
+  type: "/akash.deployment.v1beta1.DeploymentFilters";
+  value: DeploymentFiltersAmino;
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersSDKType {
@@ -237,6 +330,18 @@ export const MsgCreateDeployment = {
     }
     return message;
   },
+  fromPartial<I extends Exact<Partial<MsgCreateDeployment>, I>>(object: I): MsgCreateDeployment {
+    const message = createBaseMsgCreateDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromPartial(object.id);
+    }
+    message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
+    message.version = object.version ?? new Uint8Array();
+    if (object.deposit !== undefined && object.deposit !== null) {
+      message.deposit = Coin.fromPartial(object.deposit);
+    }
+    return message;
+  },
   fromProtoMsg(message: MsgCreateDeploymentProtoMsg): MsgCreateDeployment {
     return MsgCreateDeployment.decode(message.value);
   },
@@ -270,6 +375,10 @@ export const MsgCreateDeploymentResponse = {
           break;
       }
     }
+    return message;
+  },
+  fromPartial<I extends Exact<Partial<MsgCreateDeploymentResponse>, I>>(_: I): MsgCreateDeploymentResponse {
+    const message = createBaseMsgCreateDeploymentResponse();
     return message;
   },
   fromProtoMsg(message: MsgCreateDeploymentResponseProtoMsg): MsgCreateDeploymentResponse {
@@ -322,6 +431,16 @@ export const MsgDepositDeployment = {
     }
     return message;
   },
+  fromPartial<I extends Exact<Partial<MsgDepositDeployment>, I>>(object: I): MsgDepositDeployment {
+    const message = createBaseMsgDepositDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromPartial(object.id);
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromPartial(object.amount);
+    }
+    return message;
+  },
   fromProtoMsg(message: MsgDepositDeploymentProtoMsg): MsgDepositDeployment {
     return MsgDepositDeployment.decode(message.value);
   },
@@ -355,6 +474,10 @@ export const MsgDepositDeploymentResponse = {
           break;
       }
     }
+    return message;
+  },
+  fromPartial<I extends Exact<Partial<MsgDepositDeploymentResponse>, I>>(_: I): MsgDepositDeploymentResponse {
+    const message = createBaseMsgDepositDeploymentResponse();
     return message;
   },
   fromProtoMsg(message: MsgDepositDeploymentResponseProtoMsg): MsgDepositDeploymentResponse {
@@ -414,6 +537,15 @@ export const MsgUpdateDeployment = {
     }
     return message;
   },
+  fromPartial<I extends Exact<Partial<MsgUpdateDeployment>, I>>(object: I): MsgUpdateDeployment {
+    const message = createBaseMsgUpdateDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromPartial(object.id);
+    }
+    message.groups = object.groups?.map(e => GroupSpec.fromPartial(e)) || [];
+    message.version = object.version ?? new Uint8Array();
+    return message;
+  },
   fromProtoMsg(message: MsgUpdateDeploymentProtoMsg): MsgUpdateDeployment {
     return MsgUpdateDeployment.decode(message.value);
   },
@@ -447,6 +579,10 @@ export const MsgUpdateDeploymentResponse = {
           break;
       }
     }
+    return message;
+  },
+  fromPartial<I extends Exact<Partial<MsgUpdateDeploymentResponse>, I>>(_: I): MsgUpdateDeploymentResponse {
+    const message = createBaseMsgUpdateDeploymentResponse();
     return message;
   },
   fromProtoMsg(message: MsgUpdateDeploymentResponseProtoMsg): MsgUpdateDeploymentResponse {
@@ -492,6 +628,13 @@ export const MsgCloseDeployment = {
     }
     return message;
   },
+  fromPartial<I extends Exact<Partial<MsgCloseDeployment>, I>>(object: I): MsgCloseDeployment {
+    const message = createBaseMsgCloseDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromPartial(object.id);
+    }
+    return message;
+  },
   fromProtoMsg(message: MsgCloseDeploymentProtoMsg): MsgCloseDeployment {
     return MsgCloseDeployment.decode(message.value);
   },
@@ -525,6 +668,10 @@ export const MsgCloseDeploymentResponse = {
           break;
       }
     }
+    return message;
+  },
+  fromPartial<I extends Exact<Partial<MsgCloseDeploymentResponse>, I>>(_: I): MsgCloseDeploymentResponse {
+    const message = createBaseMsgCloseDeploymentResponse();
     return message;
   },
   fromProtoMsg(message: MsgCloseDeploymentResponseProtoMsg): MsgCloseDeploymentResponse {
@@ -574,6 +721,14 @@ export const DeploymentID = {
           reader.skipType(tag & 7);
           break;
       }
+    }
+    return message;
+  },
+  fromPartial<I extends Exact<Partial<DeploymentID>, I>>(object: I): DeploymentID {
+    const message = createBaseDeploymentID();
+    message.owner = object.owner ?? "";
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq.toString());
     }
     return message;
   },
@@ -641,6 +796,18 @@ export const Deployment = {
     }
     return message;
   },
+  fromPartial<I extends Exact<Partial<Deployment>, I>>(object: I): Deployment {
+    const message = createBaseDeployment();
+    if (object.deploymentId !== undefined && object.deploymentId !== null) {
+      message.deploymentId = DeploymentID.fromPartial(object.deploymentId);
+    }
+    message.state = object.state ?? 0;
+    message.version = object.version ?? new Uint8Array();
+    if (object.createdAt !== undefined && object.createdAt !== null) {
+      message.createdAt = BigInt(object.createdAt.toString());
+    }
+    return message;
+  },
   fromProtoMsg(message: DeploymentProtoMsg): Deployment {
     return Deployment.decode(message.value);
   },
@@ -696,6 +863,15 @@ export const DeploymentFilters = {
           break;
       }
     }
+    return message;
+  },
+  fromPartial<I extends Exact<Partial<DeploymentFilters>, I>>(object: I): DeploymentFilters {
+    const message = createBaseDeploymentFilters();
+    message.owner = object.owner ?? "";
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq.toString());
+    }
+    message.state = object.state ?? "";
     return message;
   },
   fromProtoMsg(message: DeploymentFiltersProtoMsg): DeploymentFilters {

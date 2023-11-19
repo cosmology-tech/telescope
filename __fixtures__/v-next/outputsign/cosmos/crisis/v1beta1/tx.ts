@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.crisis.v1beta1";
 /** MsgVerifyInvariant represents a message to verify a particular invariance. */
 export interface MsgVerifyInvariant {
@@ -11,6 +12,16 @@ export interface MsgVerifyInvariantProtoMsg {
   value: Uint8Array;
 }
 /** MsgVerifyInvariant represents a message to verify a particular invariance. */
+export interface MsgVerifyInvariantAmino {
+  sender: string;
+  invariant_module_name: string;
+  invariant_route: string;
+}
+export interface MsgVerifyInvariantAminoMsg {
+  type: "cosmos-sdk/MsgVerifyInvariant";
+  value: MsgVerifyInvariantAmino;
+}
+/** MsgVerifyInvariant represents a message to verify a particular invariance. */
 export interface MsgVerifyInvariantSDKType {
   sender: string;
   invariant_module_name: string;
@@ -21,6 +32,12 @@ export interface MsgVerifyInvariantResponse {}
 export interface MsgVerifyInvariantResponseProtoMsg {
   typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariantResponse";
   value: Uint8Array;
+}
+/** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
+export interface MsgVerifyInvariantResponseAmino {}
+export interface MsgVerifyInvariantResponseAminoMsg {
+  type: "cosmos-sdk/MsgVerifyInvariantResponse";
+  value: MsgVerifyInvariantResponseAmino;
 }
 /** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
 export interface MsgVerifyInvariantResponseSDKType {}
@@ -68,6 +85,36 @@ export const MsgVerifyInvariant = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<MsgVerifyInvariant>): MsgVerifyInvariant {
+    const message = createBaseMsgVerifyInvariant();
+    message.sender = object.sender ?? "";
+    message.invariantModuleName = object.invariantModuleName ?? "";
+    message.invariantRoute = object.invariantRoute ?? "";
+    return message;
+  },
+  fromAmino(object: MsgVerifyInvariantAmino): MsgVerifyInvariant {
+    return {
+      sender: object.sender,
+      invariantModuleName: object.invariant_module_name,
+      invariantRoute: object.invariant_route
+    };
+  },
+  toAmino(message: MsgVerifyInvariant): MsgVerifyInvariantAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.invariant_module_name = message.invariantModuleName;
+    obj.invariant_route = message.invariantRoute;
+    return obj;
+  },
+  fromAminoMsg(object: MsgVerifyInvariantAminoMsg): MsgVerifyInvariant {
+    return MsgVerifyInvariant.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgVerifyInvariant): MsgVerifyInvariantAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgVerifyInvariant",
+      value: MsgVerifyInvariant.toAmino(message)
+    };
+  },
   fromProtoMsg(message: MsgVerifyInvariantProtoMsg): MsgVerifyInvariant {
     return MsgVerifyInvariant.decode(message.value);
   },
@@ -102,6 +149,26 @@ export const MsgVerifyInvariantResponse = {
       }
     }
     return message;
+  },
+  fromPartial(_: DeepPartial<MsgVerifyInvariantResponse>): MsgVerifyInvariantResponse {
+    const message = createBaseMsgVerifyInvariantResponse();
+    return message;
+  },
+  fromAmino(_: MsgVerifyInvariantResponseAmino): MsgVerifyInvariantResponse {
+    return {};
+  },
+  toAmino(_: MsgVerifyInvariantResponse): MsgVerifyInvariantResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgVerifyInvariantResponseAminoMsg): MsgVerifyInvariantResponse {
+    return MsgVerifyInvariantResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgVerifyInvariantResponse): MsgVerifyInvariantResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgVerifyInvariantResponse",
+      value: MsgVerifyInvariantResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgVerifyInvariantResponseProtoMsg): MsgVerifyInvariantResponse {
     return MsgVerifyInvariantResponse.decode(message.value);

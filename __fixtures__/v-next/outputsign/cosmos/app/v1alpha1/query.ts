@@ -1,11 +1,18 @@
-import { Config, ConfigSDKType } from "./config";
+import { Config, ConfigAmino, ConfigSDKType } from "./config";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.app.v1alpha1";
 /** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequest {}
 export interface QueryConfigRequestProtoMsg {
   typeUrl: "/cosmos.app.v1alpha1.QueryConfigRequest";
   value: Uint8Array;
+}
+/** QueryConfigRequest is the Query/Config request type. */
+export interface QueryConfigRequestAmino {}
+export interface QueryConfigRequestAminoMsg {
+  type: "cosmos-sdk/QueryConfigRequest";
+  value: QueryConfigRequestAmino;
 }
 /** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequestSDKType {}
@@ -17,6 +24,15 @@ export interface QueryConfigResponse {
 export interface QueryConfigResponseProtoMsg {
   typeUrl: "/cosmos.app.v1alpha1.QueryConfigResponse";
   value: Uint8Array;
+}
+/** QueryConfigRequest is the Query/Config response type. */
+export interface QueryConfigResponseAmino {
+  /** config is the current app config. */
+  config?: ConfigAmino;
+}
+export interface QueryConfigResponseAminoMsg {
+  type: "cosmos-sdk/QueryConfigResponse";
+  value: QueryConfigResponseAmino;
 }
 /** QueryConfigRequest is the Query/Config response type. */
 export interface QueryConfigResponseSDKType {
@@ -43,6 +59,26 @@ export const QueryConfigRequest = {
       }
     }
     return message;
+  },
+  fromPartial(_: DeepPartial<QueryConfigRequest>): QueryConfigRequest {
+    const message = createBaseQueryConfigRequest();
+    return message;
+  },
+  fromAmino(_: QueryConfigRequestAmino): QueryConfigRequest {
+    return {};
+  },
+  toAmino(_: QueryConfigRequest): QueryConfigRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryConfigRequestAminoMsg): QueryConfigRequest {
+    return QueryConfigRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryConfigRequest): QueryConfigRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConfigRequest",
+      value: QueryConfigRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryConfigRequestProtoMsg): QueryConfigRequest {
     return QueryConfigRequest.decode(message.value);
@@ -86,6 +122,32 @@ export const QueryConfigResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<QueryConfigResponse>): QueryConfigResponse {
+    const message = createBaseQueryConfigResponse();
+    if (object.config !== undefined && object.config !== null) {
+      message.config = Config.fromPartial(object.config);
+    }
+    return message;
+  },
+  fromAmino(object: QueryConfigResponseAmino): QueryConfigResponse {
+    return {
+      config: object?.config ? Config.fromAmino(object.config) : undefined
+    };
+  },
+  toAmino(message: QueryConfigResponse): QueryConfigResponseAmino {
+    const obj: any = {};
+    obj.config = message.config ? Config.toAmino(message.config) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryConfigResponseAminoMsg): QueryConfigResponse {
+    return QueryConfigResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryConfigResponse): QueryConfigResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConfigResponse",
+      value: QueryConfigResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryConfigResponseProtoMsg): QueryConfigResponse {
     return QueryConfigResponse.decode(message.value);

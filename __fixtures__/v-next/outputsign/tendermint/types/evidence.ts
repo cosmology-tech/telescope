@@ -1,8 +1,8 @@
-import { Vote, VoteSDKType, LightBlock, LightBlockSDKType } from "./types";
-import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
-import { Validator, ValidatorSDKType } from "./validator";
+import { Vote, VoteAmino, VoteSDKType, LightBlock, LightBlockAmino, LightBlockSDKType } from "./types";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { Validator, ValidatorAmino, ValidatorSDKType } from "./validator";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { toTimestamp, fromTimestamp } from "../../helpers";
+import { DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "tendermint.types";
 export interface Evidence {
   duplicateVoteEvidence?: DuplicateVoteEvidence;
@@ -11,6 +11,14 @@ export interface Evidence {
 export interface EvidenceProtoMsg {
   typeUrl: "/tendermint.types.Evidence";
   value: Uint8Array;
+}
+export interface EvidenceAmino {
+  duplicate_vote_evidence?: DuplicateVoteEvidenceAmino;
+  light_client_attack_evidence?: LightClientAttackEvidenceAmino;
+}
+export interface EvidenceAminoMsg {
+  type: "/tendermint.types.Evidence";
+  value: EvidenceAmino;
 }
 export interface EvidenceSDKType {
   duplicate_vote_evidence?: DuplicateVoteEvidenceSDKType;
@@ -27,6 +35,18 @@ export interface DuplicateVoteEvidence {
 export interface DuplicateVoteEvidenceProtoMsg {
   typeUrl: "/tendermint.types.DuplicateVoteEvidence";
   value: Uint8Array;
+}
+/** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
+export interface DuplicateVoteEvidenceAmino {
+  vote_a?: VoteAmino;
+  vote_b?: VoteAmino;
+  total_voting_power: string;
+  validator_power: string;
+  timestamp?: string;
+}
+export interface DuplicateVoteEvidenceAminoMsg {
+  type: "/tendermint.types.DuplicateVoteEvidence";
+  value: DuplicateVoteEvidenceAmino;
 }
 /** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
 export interface DuplicateVoteEvidenceSDKType {
@@ -49,6 +69,18 @@ export interface LightClientAttackEvidenceProtoMsg {
   value: Uint8Array;
 }
 /** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
+export interface LightClientAttackEvidenceAmino {
+  conflicting_block?: LightBlockAmino;
+  common_height: string;
+  byzantine_validators: ValidatorAmino[];
+  total_voting_power: string;
+  timestamp?: string;
+}
+export interface LightClientAttackEvidenceAminoMsg {
+  type: "/tendermint.types.LightClientAttackEvidence";
+  value: LightClientAttackEvidenceAmino;
+}
+/** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
 export interface LightClientAttackEvidenceSDKType {
   conflicting_block?: LightBlockSDKType;
   common_height: bigint;
@@ -62,6 +94,13 @@ export interface EvidenceList {
 export interface EvidenceListProtoMsg {
   typeUrl: "/tendermint.types.EvidenceList";
   value: Uint8Array;
+}
+export interface EvidenceListAmino {
+  evidence: EvidenceAmino[];
+}
+export interface EvidenceListAminoMsg {
+  type: "/tendermint.types.EvidenceList";
+  value: EvidenceListAmino;
 }
 export interface EvidenceListSDKType {
   evidence: EvidenceSDKType[];
@@ -102,6 +141,31 @@ export const Evidence = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<Evidence>): Evidence {
+    const message = createBaseEvidence();
+    if (object.duplicateVoteEvidence !== undefined && object.duplicateVoteEvidence !== null) {
+      message.duplicateVoteEvidence = DuplicateVoteEvidence.fromPartial(object.duplicateVoteEvidence);
+    }
+    if (object.lightClientAttackEvidence !== undefined && object.lightClientAttackEvidence !== null) {
+      message.lightClientAttackEvidence = LightClientAttackEvidence.fromPartial(object.lightClientAttackEvidence);
+    }
+    return message;
+  },
+  fromAmino(object: EvidenceAmino): Evidence {
+    return {
+      duplicateVoteEvidence: object?.duplicate_vote_evidence ? DuplicateVoteEvidence.fromAmino(object.duplicate_vote_evidence) : undefined,
+      lightClientAttackEvidence: object?.light_client_attack_evidence ? LightClientAttackEvidence.fromAmino(object.light_client_attack_evidence) : undefined
+    };
+  },
+  toAmino(message: Evidence): EvidenceAmino {
+    const obj: any = {};
+    obj.duplicate_vote_evidence = message.duplicateVoteEvidence ? DuplicateVoteEvidence.toAmino(message.duplicateVoteEvidence) : undefined;
+    obj.light_client_attack_evidence = message.lightClientAttackEvidence ? LightClientAttackEvidence.toAmino(message.lightClientAttackEvidence) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: EvidenceAminoMsg): Evidence {
+    return Evidence.fromAmino(object.value);
   },
   fromProtoMsg(message: EvidenceProtoMsg): Evidence {
     return Evidence.decode(message.value);
@@ -174,6 +238,44 @@ export const DuplicateVoteEvidence = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<DuplicateVoteEvidence>): DuplicateVoteEvidence {
+    const message = createBaseDuplicateVoteEvidence();
+    if (object.voteA !== undefined && object.voteA !== null) {
+      message.voteA = Vote.fromPartial(object.voteA);
+    }
+    if (object.voteB !== undefined && object.voteB !== null) {
+      message.voteB = Vote.fromPartial(object.voteB);
+    }
+    if (object.totalVotingPower !== undefined && object.totalVotingPower !== null) {
+      message.totalVotingPower = BigInt(object.totalVotingPower.toString());
+    }
+    if (object.validatorPower !== undefined && object.validatorPower !== null) {
+      message.validatorPower = BigInt(object.validatorPower.toString());
+    }
+    message.timestamp = object.timestamp ?? undefined;
+    return message;
+  },
+  fromAmino(object: DuplicateVoteEvidenceAmino): DuplicateVoteEvidence {
+    return {
+      voteA: object?.vote_a ? Vote.fromAmino(object.vote_a) : undefined,
+      voteB: object?.vote_b ? Vote.fromAmino(object.vote_b) : undefined,
+      totalVotingPower: BigInt(object.total_voting_power),
+      validatorPower: BigInt(object.validator_power),
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
+    };
+  },
+  toAmino(message: DuplicateVoteEvidence): DuplicateVoteEvidenceAmino {
+    const obj: any = {};
+    obj.vote_a = message.voteA ? Vote.toAmino(message.voteA) : undefined;
+    obj.vote_b = message.voteB ? Vote.toAmino(message.voteB) : undefined;
+    obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
+    obj.validator_power = message.validatorPower ? message.validatorPower.toString() : undefined;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: DuplicateVoteEvidenceAminoMsg): DuplicateVoteEvidence {
+    return DuplicateVoteEvidence.fromAmino(object.value);
+  },
   fromProtoMsg(message: DuplicateVoteEvidenceProtoMsg): DuplicateVoteEvidence {
     return DuplicateVoteEvidence.decode(message.value);
   },
@@ -245,6 +347,46 @@ export const LightClientAttackEvidence = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<LightClientAttackEvidence>): LightClientAttackEvidence {
+    const message = createBaseLightClientAttackEvidence();
+    if (object.conflictingBlock !== undefined && object.conflictingBlock !== null) {
+      message.conflictingBlock = LightBlock.fromPartial(object.conflictingBlock);
+    }
+    if (object.commonHeight !== undefined && object.commonHeight !== null) {
+      message.commonHeight = BigInt(object.commonHeight.toString());
+    }
+    message.byzantineValidators = object.byzantineValidators?.map(e => Validator.fromPartial(e)) || [];
+    if (object.totalVotingPower !== undefined && object.totalVotingPower !== null) {
+      message.totalVotingPower = BigInt(object.totalVotingPower.toString());
+    }
+    message.timestamp = object.timestamp ?? undefined;
+    return message;
+  },
+  fromAmino(object: LightClientAttackEvidenceAmino): LightClientAttackEvidence {
+    return {
+      conflictingBlock: object?.conflicting_block ? LightBlock.fromAmino(object.conflicting_block) : undefined,
+      commonHeight: BigInt(object.common_height),
+      byzantineValidators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Validator.fromAmino(e)) : [],
+      totalVotingPower: BigInt(object.total_voting_power),
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
+    };
+  },
+  toAmino(message: LightClientAttackEvidence): LightClientAttackEvidenceAmino {
+    const obj: any = {};
+    obj.conflicting_block = message.conflictingBlock ? LightBlock.toAmino(message.conflictingBlock) : undefined;
+    obj.common_height = message.commonHeight ? message.commonHeight.toString() : undefined;
+    if (message.byzantineValidators) {
+      obj.byzantine_validators = message.byzantineValidators.map(e => e ? Validator.toAmino(e) : undefined);
+    } else {
+      obj.byzantine_validators = [];
+    }
+    obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: LightClientAttackEvidenceAminoMsg): LightClientAttackEvidence {
+    return LightClientAttackEvidence.fromAmino(object.value);
+  },
   fromProtoMsg(message: LightClientAttackEvidenceProtoMsg): LightClientAttackEvidence {
     return LightClientAttackEvidence.decode(message.value);
   },
@@ -287,6 +429,28 @@ export const EvidenceList = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<EvidenceList>): EvidenceList {
+    const message = createBaseEvidenceList();
+    message.evidence = object.evidence?.map(e => Evidence.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: EvidenceListAmino): EvidenceList {
+    return {
+      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Evidence.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: EvidenceList): EvidenceListAmino {
+    const obj: any = {};
+    if (message.evidence) {
+      obj.evidence = message.evidence.map(e => e ? Evidence.toAmino(e) : undefined);
+    } else {
+      obj.evidence = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: EvidenceListAminoMsg): EvidenceList {
+    return EvidenceList.fromAmino(object.value);
   },
   fromProtoMsg(message: EvidenceListProtoMsg): EvidenceList {
     return EvidenceList.decode(message.value);
