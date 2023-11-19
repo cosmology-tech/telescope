@@ -44,7 +44,7 @@ export class GlobalDecoderRegistry {
       ) {
         const element = GlobalDecoderRegistry.registry[key];
 
-        if (element.is(obj)) {
+        if (element.is!(obj)) {
           return element;
         }
 

@@ -28,7 +28,7 @@ export interface TelescopeGeneratedCodec<
 > {
   readonly typeUrl: string;
   readonly aminoType?: string;
-  is(o: unknown): o is T;
+  is?(o: unknown): o is T;
   isSDK?(o: unknown): o is SDK;
   isAmino?(o: unknown): o is Amino;
   encode: (message: T, writer?: IBinaryWriter | any) => IBinaryWriter | any;
