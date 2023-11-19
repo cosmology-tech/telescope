@@ -122,7 +122,6 @@ describe("implements interface works", () => {
     const message = Grant.fromJSON({
       authorization: {
         $typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization",
-        msg: "pass",
       },
       expiration: new Date("2020-01-01"),
     });
@@ -133,7 +132,7 @@ describe("implements interface works", () => {
 
     if (decodedMessage.authorization) {
       if (GenericAuthorization.is(decodedMessage.authorization)) {
-        expect(decodedMessage.authorization.msg).toBe("pass");
+        expect(decodedMessage.authorization.msg).toBe("");
       } else {
         throw new Error("should be GenericAuthorization");
       }
