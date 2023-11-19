@@ -4,7 +4,7 @@ import {
   Grant,
 } from "../../../__fixtures__/misc/output-impl-interfaces-gen/cosmos/authz/v1beta1/authz";
 import { Any } from "../../../__fixtures__/misc/output-impl-interfaces-gen/google/protobuf/any";
-
+import { SendAuthorization } from "../../../__fixtures__/misc/output-impl-interfaces-gen/cosmos/bank/v1beta1/authz";
 
 describe("implements interface works", () => {
   it("encodes and decodes", () => {
@@ -213,5 +213,74 @@ describe("implements interface works", () => {
     } else {
       throw new Error("auth can't be empty");
     }
+  });
+
+  it("toSDK for interface", () => {
+    const data = Grant.encode({
+      authorization: {
+        spendLimit: [
+          {
+            denom: "d",
+            amount: "1",
+          },
+        ],
+      },
+      expiration: new Date("2020-01-01"),
+    }).finish();
+
+    const message = Grant.decode(data);
+
+    const SDK = Grant.toSDK(message);
+
+    expect(SDK).toMatchSnapshot();
+  });
+
+  it("fromSDK for extended interface", () => {
+    const message = Grant.fromSDK({
+      authorization: {
+        spend_limit: [
+          {
+            denom: "d",
+            amount: "1",
+          },
+        ],
+      },
+      expiration: new Date("2020-01-01"),
+    });
+
+    const data = Grant.encode(message).finish();
+
+    const decodedMessage = Grant.decode(data);
+
+    if (decodedMessage.authorization) {
+      if (SendAuthorization.is(decodedMessage.authorization)) {
+        expect(decodedMessage.authorization.spendLimit[0].denom).toBe("d");
+        expect(decodedMessage.authorization.spendLimit[0].amount).toBe("1");
+      } else {
+        throw new Error("should be SendAuthorization");
+      }
+    } else {
+      throw new Error("auth can't be empty");
+    }
+  });
+
+  it("toAmino for interface", () => {
+    const data = Grant.encode({
+      authorization: {
+        spendLimit: [
+          {
+            denom: "d",
+            amount: "1",
+          },
+        ],
+      },
+      expiration: new Date("2020-01-01"),
+    }).finish();
+
+    const message = Grant.decode(data);
+
+    const amino = Grant.toAmino(message);
+
+    expect(amino).toMatchSnapshot();
   });
 });

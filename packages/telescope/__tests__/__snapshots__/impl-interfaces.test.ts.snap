@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`implements interface works toAmino for interface 1`] = `
+{
+  "authorization": {
+    "spend_limit": [
+      {
+        "amount": "1",
+        "denom": "d",
+      },
+    ],
+  },
+  "expiration": "2020-01-01T00:00:00Z",
+}
+`;
+
 exports[`implements interface works toJson for Any 1`] = `
 {
   "authorization": {
@@ -16,5 +30,19 @@ exports[`implements interface works toJson for extended interface 1`] = `
     "msg": "pass",
   },
   "expiration": "2020-01-01T00:00:00.000Z",
+}
+`;
+
+exports[`implements interface works toSDK for interface 1`] = `
+{
+  "authorization": {
+    "spend_limit": [
+      {
+        "amount": "1",
+        "denom": "d",
+      },
+    ],
+  },
+  "expiration": 2020-01-01T00:00:00.000Z,
 }
 `;
