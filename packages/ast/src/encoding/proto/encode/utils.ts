@@ -267,7 +267,9 @@ export const encode = {
             isAnyType = true;
         }
 
-        return types.type(num, prop, name, isAnyType);
+        const isGlobalRegistry = args.context.options.interfaces?.enabled && args.context.options.interfaces?.useGlobalDecoderRegistry;
+
+        return types.type(num, prop, name, isAnyType, isGlobalRegistry);
     },
 
     enum(args: EncodeMethod) {
@@ -337,7 +339,9 @@ export const encode = {
             isAnyType = true;
         }
 
-        return types.typeArray(num, prop, name, isAnyType);
+        const isGlobalRegistry = args.context.options.interfaces?.enabled && args.context.options.interfaces?.useGlobalDecoderRegistry;
+
+        return types.typeArray(num, prop, name, isAnyType, isGlobalRegistry);
     },
 
     keyHash(args: EncodeMethod) {
@@ -507,20 +511,26 @@ export const types = {
         )
     },
 
-    type(num: number, prop: string, name: string, isAnyType: boolean) {
+    type(num: number, prop: string, name: string, isAnyType: boolean, isGlobalRegistry: boolean) {
 
-        let messageProp: t.MemberExpression | t.TSAsExpression = t.memberExpression(
+        let messageProp: t.MemberExpression | t.TSAsExpression | t.CallExpression = t.memberExpression(
             t.identifier('message'),
             t.identifier(prop)
         );
 
         if (isAnyType) {
+          if(isGlobalRegistry){
+            messageProp = t.callExpression(t.memberExpression(t.identifier("GlobalDecoderRegistry"), t.identifier("wrapAny")),[
+              messageProp
+            ])
+          } else {
             messageProp = t.tsAsExpression(
                 messageProp,
                 t.tsTypeReference(
                     t.identifier('Any')
                 )
             )
+          }
         }
 
         return t.ifStatement(
@@ -819,18 +829,25 @@ export const types = {
         ];
     },
 
-    typeArray(num: number, prop: string, name: string, isAnyType: boolean) {
+    typeArray(num: number, prop: string, name: string, isAnyType: boolean, isGlobalRegistry: boolean) {
         // "v!" just means it's NOT NULLABLE
-        let nestedProp: t.TSNonNullExpression | t.TSAsExpression = t.tsNonNullExpression(
+        let nestedProp: t.TSNonNullExpression | t.TSAsExpression | t.CallExpression = t.tsNonNullExpression(
             t.identifier('v')
         );
+
         if (isAnyType) {
-            nestedProp = t.tsAsExpression(
-                nestedProp,
-                t.tsTypeReference(
-                    t.identifier('Any')
-                )
-            )
+            if(isGlobalRegistry){
+              nestedProp = t.callExpression(t.memberExpression(t.identifier("GlobalDecoderRegistry"), t.identifier("wrapAny")),[
+                nestedProp
+              ])
+            } else {
+              nestedProp = t.tsAsExpression(
+                  nestedProp,
+                  t.tsTypeReference(
+                      t.identifier('Any')
+                  )
+              )
+            }
         }
 
 

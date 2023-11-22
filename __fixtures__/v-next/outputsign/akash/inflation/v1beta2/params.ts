@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
+import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.inflation.v1beta2";
 /** Params defines the parameters for the x/deployment package */
 export interface Params {
@@ -19,6 +20,25 @@ export interface Params {
 export interface ParamsProtoMsg {
   typeUrl: "/akash.inflation.v1beta2.Params";
   value: Uint8Array;
+}
+/** Params defines the parameters for the x/deployment package */
+export interface ParamsAmino {
+  /** InflationDecayFactor is the number of years it takes inflation to halve. */
+  inflation_decay_factor: string;
+  /**
+   * InitialInflation is the rate at which inflation starts at genesis.
+   * It is a decimal value in the range [0.0, 100.0].
+   */
+  initial_inflation: string;
+  /**
+   * Variance defines the fraction by which inflation can vary from ideal inflation in a block.
+   * It is a decimal value in the range [0.0, 1.0].
+   */
+  variance: string;
+}
+export interface ParamsAminoMsg {
+  type: "/akash.inflation.v1beta2.Params";
+  value: ParamsAmino;
 }
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsSDKType {
@@ -69,6 +89,30 @@ export const Params = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
+    const message = createBaseParams();
+    message.inflationDecayFactor = object.inflationDecayFactor ?? "";
+    message.initialInflation = object.initialInflation ?? "";
+    message.variance = object.variance ?? "";
+    return message;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      inflationDecayFactor: object.inflation_decay_factor,
+      initialInflation: object.initial_inflation,
+      variance: object.variance
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.inflation_decay_factor = message.inflationDecayFactor;
+    obj.initial_inflation = message.initialInflation;
+    obj.variance = message.variance;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

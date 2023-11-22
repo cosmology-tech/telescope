@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.fees.v1";
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
 export interface MsgRegisterDevFeeInfo {
@@ -23,6 +24,28 @@ export interface MsgRegisterDevFeeInfoProtoMsg {
   value: Uint8Array;
 }
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
+export interface MsgRegisterDevFeeInfoAmino {
+  /** contract hex address */
+  contract_address: string;
+  /**
+   * bech32 address of message sender, must be the same as the origin EOA
+   * sending the transaction which deploys the contract
+   */
+  deployer_address: string;
+  /** bech32 address of account receiving the transaction fees */
+  withdraw_address: string;
+  /**
+   * array of nonces from the address path, where the last nonce is
+   * the nonce that determines the contract's address - it can be an EOA nonce
+   * or a factory contract nonce
+   */
+  nonces: string[];
+}
+export interface MsgRegisterDevFeeInfoAminoMsg {
+  type: "/evmos.fees.v1.MsgRegisterDevFeeInfo";
+  value: MsgRegisterDevFeeInfoAmino;
+}
+/** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
 export interface MsgRegisterDevFeeInfoSDKType {
   contract_address: string;
   deployer_address: string;
@@ -37,6 +60,15 @@ export interface MsgRegisterDevFeeInfoResponse {}
 export interface MsgRegisterDevFeeInfoResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse";
   value: Uint8Array;
+}
+/**
+ * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
+ * type
+ */
+export interface MsgRegisterDevFeeInfoResponseAmino {}
+export interface MsgRegisterDevFeeInfoResponseAminoMsg {
+  type: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse";
+  value: MsgRegisterDevFeeInfoResponseAmino;
 }
 /**
  * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
@@ -61,6 +93,20 @@ export interface MsgCancelDevFeeInfoProtoMsg {
  * MsgCancelDevFeeInfo defines a message that cancels a registered a
  * DevFeeInfo
  */
+export interface MsgCancelDevFeeInfoAmino {
+  /** contract hex address */
+  contract_address: string;
+  /** deployer bech32 address */
+  deployer_address: string;
+}
+export interface MsgCancelDevFeeInfoAminoMsg {
+  type: "/evmos.fees.v1.MsgCancelDevFeeInfo";
+  value: MsgCancelDevFeeInfoAmino;
+}
+/**
+ * MsgCancelDevFeeInfo defines a message that cancels a registered a
+ * DevFeeInfo
+ */
 export interface MsgCancelDevFeeInfoSDKType {
   contract_address: string;
   deployer_address: string;
@@ -70,6 +116,12 @@ export interface MsgCancelDevFeeInfoResponse {}
 export interface MsgCancelDevFeeInfoResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse";
   value: Uint8Array;
+}
+/** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
+export interface MsgCancelDevFeeInfoResponseAmino {}
+export interface MsgCancelDevFeeInfoResponseAminoMsg {
+  type: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse";
+  value: MsgCancelDevFeeInfoResponseAmino;
 }
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponseSDKType {}
@@ -93,6 +145,22 @@ export interface MsgUpdateDevFeeInfoProtoMsg {
  * MsgUpdateDevFeeInfo defines a message that updates the withdraw address for
  * a registered DevFeeInfo
  */
+export interface MsgUpdateDevFeeInfoAmino {
+  /** contract hex address */
+  contract_address: string;
+  /** deployer bech32 address */
+  deployer_address: string;
+  /** new withdraw bech32 address for receiving the transaction fees */
+  withdraw_address: string;
+}
+export interface MsgUpdateDevFeeInfoAminoMsg {
+  type: "/evmos.fees.v1.MsgUpdateDevFeeInfo";
+  value: MsgUpdateDevFeeInfoAmino;
+}
+/**
+ * MsgUpdateDevFeeInfo defines a message that updates the withdraw address for
+ * a registered DevFeeInfo
+ */
 export interface MsgUpdateDevFeeInfoSDKType {
   contract_address: string;
   deployer_address: string;
@@ -103,6 +171,12 @@ export interface MsgUpdateDevFeeInfoResponse {}
 export interface MsgUpdateDevFeeInfoResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse";
   value: Uint8Array;
+}
+/** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
+export interface MsgUpdateDevFeeInfoResponseAmino {}
+export interface MsgUpdateDevFeeInfoResponseAminoMsg {
+  type: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse";
+  value: MsgUpdateDevFeeInfoResponseAmino;
 }
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponseSDKType {}
@@ -166,6 +240,37 @@ export const MsgRegisterDevFeeInfo = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<MsgRegisterDevFeeInfo>): MsgRegisterDevFeeInfo {
+    const message = createBaseMsgRegisterDevFeeInfo();
+    message.contractAddress = object.contractAddress ?? "";
+    message.deployerAddress = object.deployerAddress ?? "";
+    message.withdrawAddress = object.withdrawAddress ?? "";
+    message.nonces = object.nonces?.map(e => BigInt(e.toString())) || [];
+    return message;
+  },
+  fromAmino(object: MsgRegisterDevFeeInfoAmino): MsgRegisterDevFeeInfo {
+    return {
+      contractAddress: object.contract_address,
+      deployerAddress: object.deployer_address,
+      withdrawAddress: object.withdraw_address,
+      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e)) : []
+    };
+  },
+  toAmino(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoAmino {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress;
+    obj.deployer_address = message.deployerAddress;
+    obj.withdraw_address = message.withdrawAddress;
+    if (message.nonces) {
+      obj.nonces = message.nonces.map(e => e.toString());
+    } else {
+      obj.nonces = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgRegisterDevFeeInfoAminoMsg): MsgRegisterDevFeeInfo {
+    return MsgRegisterDevFeeInfo.fromAmino(object.value);
+  },
   fromProtoMsg(message: MsgRegisterDevFeeInfoProtoMsg): MsgRegisterDevFeeInfo {
     return MsgRegisterDevFeeInfo.decode(message.value);
   },
@@ -200,6 +305,20 @@ export const MsgRegisterDevFeeInfoResponse = {
       }
     }
     return message;
+  },
+  fromPartial(_: DeepPartial<MsgRegisterDevFeeInfoResponse>): MsgRegisterDevFeeInfoResponse {
+    const message = createBaseMsgRegisterDevFeeInfoResponse();
+    return message;
+  },
+  fromAmino(_: MsgRegisterDevFeeInfoResponseAmino): MsgRegisterDevFeeInfoResponse {
+    return {};
+  },
+  toAmino(_: MsgRegisterDevFeeInfoResponse): MsgRegisterDevFeeInfoResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgRegisterDevFeeInfoResponseAminoMsg): MsgRegisterDevFeeInfoResponse {
+    return MsgRegisterDevFeeInfoResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgRegisterDevFeeInfoResponseProtoMsg): MsgRegisterDevFeeInfoResponse {
     return MsgRegisterDevFeeInfoResponse.decode(message.value);
@@ -251,6 +370,27 @@ export const MsgCancelDevFeeInfo = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<MsgCancelDevFeeInfo>): MsgCancelDevFeeInfo {
+    const message = createBaseMsgCancelDevFeeInfo();
+    message.contractAddress = object.contractAddress ?? "";
+    message.deployerAddress = object.deployerAddress ?? "";
+    return message;
+  },
+  fromAmino(object: MsgCancelDevFeeInfoAmino): MsgCancelDevFeeInfo {
+    return {
+      contractAddress: object.contract_address,
+      deployerAddress: object.deployer_address
+    };
+  },
+  toAmino(message: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoAmino {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress;
+    obj.deployer_address = message.deployerAddress;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCancelDevFeeInfoAminoMsg): MsgCancelDevFeeInfo {
+    return MsgCancelDevFeeInfo.fromAmino(object.value);
+  },
   fromProtoMsg(message: MsgCancelDevFeeInfoProtoMsg): MsgCancelDevFeeInfo {
     return MsgCancelDevFeeInfo.decode(message.value);
   },
@@ -285,6 +425,20 @@ export const MsgCancelDevFeeInfoResponse = {
       }
     }
     return message;
+  },
+  fromPartial(_: DeepPartial<MsgCancelDevFeeInfoResponse>): MsgCancelDevFeeInfoResponse {
+    const message = createBaseMsgCancelDevFeeInfoResponse();
+    return message;
+  },
+  fromAmino(_: MsgCancelDevFeeInfoResponseAmino): MsgCancelDevFeeInfoResponse {
+    return {};
+  },
+  toAmino(_: MsgCancelDevFeeInfoResponse): MsgCancelDevFeeInfoResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgCancelDevFeeInfoResponseAminoMsg): MsgCancelDevFeeInfoResponse {
+    return MsgCancelDevFeeInfoResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgCancelDevFeeInfoResponseProtoMsg): MsgCancelDevFeeInfoResponse {
     return MsgCancelDevFeeInfoResponse.decode(message.value);
@@ -343,6 +497,30 @@ export const MsgUpdateDevFeeInfo = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<MsgUpdateDevFeeInfo>): MsgUpdateDevFeeInfo {
+    const message = createBaseMsgUpdateDevFeeInfo();
+    message.contractAddress = object.contractAddress ?? "";
+    message.deployerAddress = object.deployerAddress ?? "";
+    message.withdrawAddress = object.withdrawAddress ?? "";
+    return message;
+  },
+  fromAmino(object: MsgUpdateDevFeeInfoAmino): MsgUpdateDevFeeInfo {
+    return {
+      contractAddress: object.contract_address,
+      deployerAddress: object.deployer_address,
+      withdrawAddress: object.withdraw_address
+    };
+  },
+  toAmino(message: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoAmino {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress;
+    obj.deployer_address = message.deployerAddress;
+    obj.withdraw_address = message.withdrawAddress;
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateDevFeeInfoAminoMsg): MsgUpdateDevFeeInfo {
+    return MsgUpdateDevFeeInfo.fromAmino(object.value);
+  },
   fromProtoMsg(message: MsgUpdateDevFeeInfoProtoMsg): MsgUpdateDevFeeInfo {
     return MsgUpdateDevFeeInfo.decode(message.value);
   },
@@ -377,6 +555,20 @@ export const MsgUpdateDevFeeInfoResponse = {
       }
     }
     return message;
+  },
+  fromPartial(_: DeepPartial<MsgUpdateDevFeeInfoResponse>): MsgUpdateDevFeeInfoResponse {
+    const message = createBaseMsgUpdateDevFeeInfoResponse();
+    return message;
+  },
+  fromAmino(_: MsgUpdateDevFeeInfoResponseAmino): MsgUpdateDevFeeInfoResponse {
+    return {};
+  },
+  toAmino(_: MsgUpdateDevFeeInfoResponse): MsgUpdateDevFeeInfoResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateDevFeeInfoResponseAminoMsg): MsgUpdateDevFeeInfoResponse {
+    return MsgUpdateDevFeeInfoResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgUpdateDevFeeInfoResponseProtoMsg): MsgUpdateDevFeeInfoResponse {
     return MsgUpdateDevFeeInfoResponse.decode(message.value);

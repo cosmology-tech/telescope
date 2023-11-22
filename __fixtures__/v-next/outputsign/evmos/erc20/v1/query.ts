@@ -1,7 +1,8 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { TokenPair, TokenPairSDKType } from "./erc20";
-import { Params, ParamsSDKType } from "./genesis";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { TokenPair, TokenPairAmino, TokenPairSDKType } from "./erc20";
+import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
 /**
  * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC
@@ -14,6 +15,18 @@ export interface QueryTokenPairsRequest {
 export interface QueryTokenPairsRequestProtoMsg {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairsRequest";
   value: Uint8Array;
+}
+/**
+ * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC
+ * method.
+ */
+export interface QueryTokenPairsRequestAmino {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryTokenPairsRequestAminoMsg {
+  type: "/evmos.erc20.v1.QueryTokenPairsRequest";
+  value: QueryTokenPairsRequestAmino;
 }
 /**
  * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC
@@ -39,6 +52,19 @@ export interface QueryTokenPairsResponseProtoMsg {
  * QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
  * method.
  */
+export interface QueryTokenPairsResponseAmino {
+  token_pairs: TokenPairAmino[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryTokenPairsResponseAminoMsg {
+  type: "/evmos.erc20.v1.QueryTokenPairsResponse";
+  value: QueryTokenPairsResponseAmino;
+}
+/**
+ * QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
+ * method.
+ */
 export interface QueryTokenPairsResponseSDKType {
   token_pairs: TokenPairSDKType[];
   pagination?: PageResponseSDKType;
@@ -54,6 +80,18 @@ export interface QueryTokenPairRequest {
 export interface QueryTokenPairRequestProtoMsg {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairRequest";
   value: Uint8Array;
+}
+/** QueryTokenPairRequest is the request type for the Query/TokenPair RPC method. */
+export interface QueryTokenPairRequestAmino {
+  /**
+   * token identifier can be either the hex contract address of the ERC20 or the
+   * Cosmos base denomination
+   */
+  token: string;
+}
+export interface QueryTokenPairRequestAminoMsg {
+  type: "/evmos.erc20.v1.QueryTokenPairRequest";
+  value: QueryTokenPairRequestAmino;
 }
 /** QueryTokenPairRequest is the request type for the Query/TokenPair RPC method. */
 export interface QueryTokenPairRequestSDKType {
@@ -74,6 +112,17 @@ export interface QueryTokenPairResponseProtoMsg {
  * QueryTokenPairResponse is the response type for the Query/TokenPair RPC
  * method.
  */
+export interface QueryTokenPairResponseAmino {
+  token_pair?: TokenPairAmino;
+}
+export interface QueryTokenPairResponseAminoMsg {
+  type: "/evmos.erc20.v1.QueryTokenPairResponse";
+  value: QueryTokenPairResponseAmino;
+}
+/**
+ * QueryTokenPairResponse is the response type for the Query/TokenPair RPC
+ * method.
+ */
 export interface QueryTokenPairResponseSDKType {
   token_pair: TokenPairSDKType;
 }
@@ -82,6 +131,12 @@ export interface QueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/evmos.erc20.v1.QueryParamsRequest";
   value: Uint8Array;
+}
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoMsg {
+  type: "/evmos.erc20.v1.QueryParamsRequest";
+  value: QueryParamsRequestAmino;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -95,6 +150,17 @@ export interface QueryParamsResponse {
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/evmos.erc20.v1.QueryParamsResponse";
   value: Uint8Array;
+}
+/**
+ * QueryParamsResponse is the response type for the Query/Params RPC
+ * method.
+ */
+export interface QueryParamsResponseAmino {
+  params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoMsg {
+  type: "/evmos.erc20.v1.QueryParamsResponse";
+  value: QueryParamsResponseAmino;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC
@@ -132,6 +198,26 @@ export const QueryTokenPairsRequest = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<QueryTokenPairsRequest>): QueryTokenPairsRequest {
+    const message = createBaseQueryTokenPairsRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
+    return message;
+  },
+  fromAmino(object: QueryTokenPairsRequestAmino): QueryTokenPairsRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryTokenPairsRequest): QueryTokenPairsRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryTokenPairsRequestAminoMsg): QueryTokenPairsRequest {
+    return QueryTokenPairsRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryTokenPairsRequestProtoMsg): QueryTokenPairsRequest {
     return QueryTokenPairsRequest.decode(message.value);
@@ -183,6 +269,33 @@ export const QueryTokenPairsResponse = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<QueryTokenPairsResponse>): QueryTokenPairsResponse {
+    const message = createBaseQueryTokenPairsResponse();
+    message.tokenPairs = object.tokenPairs?.map(e => TokenPair.fromPartial(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
+    return message;
+  },
+  fromAmino(object: QueryTokenPairsResponseAmino): QueryTokenPairsResponse {
+    return {
+      tokenPairs: Array.isArray(object?.token_pairs) ? object.token_pairs.map((e: any) => TokenPair.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryTokenPairsResponse): QueryTokenPairsResponseAmino {
+    const obj: any = {};
+    if (message.tokenPairs) {
+      obj.token_pairs = message.tokenPairs.map(e => e ? TokenPair.toAmino(e) : undefined);
+    } else {
+      obj.token_pairs = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryTokenPairsResponseAminoMsg): QueryTokenPairsResponse {
+    return QueryTokenPairsResponse.fromAmino(object.value);
+  },
   fromProtoMsg(message: QueryTokenPairsResponseProtoMsg): QueryTokenPairsResponse {
     return QueryTokenPairsResponse.decode(message.value);
   },
@@ -225,6 +338,24 @@ export const QueryTokenPairRequest = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<QueryTokenPairRequest>): QueryTokenPairRequest {
+    const message = createBaseQueryTokenPairRequest();
+    message.token = object.token ?? "";
+    return message;
+  },
+  fromAmino(object: QueryTokenPairRequestAmino): QueryTokenPairRequest {
+    return {
+      token: object.token
+    };
+  },
+  toAmino(message: QueryTokenPairRequest): QueryTokenPairRequestAmino {
+    const obj: any = {};
+    obj.token = message.token;
+    return obj;
+  },
+  fromAminoMsg(object: QueryTokenPairRequestAminoMsg): QueryTokenPairRequest {
+    return QueryTokenPairRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryTokenPairRequestProtoMsg): QueryTokenPairRequest {
     return QueryTokenPairRequest.decode(message.value);
@@ -269,6 +400,26 @@ export const QueryTokenPairResponse = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<QueryTokenPairResponse>): QueryTokenPairResponse {
+    const message = createBaseQueryTokenPairResponse();
+    if (object.tokenPair !== undefined && object.tokenPair !== null) {
+      message.tokenPair = TokenPair.fromPartial(object.tokenPair);
+    }
+    return message;
+  },
+  fromAmino(object: QueryTokenPairResponseAmino): QueryTokenPairResponse {
+    return {
+      tokenPair: object?.token_pair ? TokenPair.fromAmino(object.token_pair) : undefined
+    };
+  },
+  toAmino(message: QueryTokenPairResponse): QueryTokenPairResponseAmino {
+    const obj: any = {};
+    obj.token_pair = message.tokenPair ? TokenPair.toAmino(message.tokenPair) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryTokenPairResponseAminoMsg): QueryTokenPairResponse {
+    return QueryTokenPairResponse.fromAmino(object.value);
+  },
   fromProtoMsg(message: QueryTokenPairResponseProtoMsg): QueryTokenPairResponse {
     return QueryTokenPairResponse.decode(message.value);
   },
@@ -303,6 +454,20 @@ export const QueryParamsRequest = {
       }
     }
     return message;
+  },
+  fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
+    const message = createBaseQueryParamsRequest();
+    return message;
+  },
+  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
+    return {};
+  },
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
+    return QueryParamsRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value);
@@ -346,6 +511,26 @@ export const QueryParamsResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
+    return message;
+  },
+  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
+    return QueryParamsResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value);

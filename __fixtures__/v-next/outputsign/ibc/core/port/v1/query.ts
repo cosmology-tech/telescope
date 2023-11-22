@@ -1,5 +1,6 @@
-import { Order, OrderSDKType, Counterparty, CounterpartySDKType } from "../../channel/v1/channel";
+import { Order, OrderSDKType, Counterparty, CounterpartyAmino, CounterpartySDKType, orderFromJSON } from "../../channel/v1/channel";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "ibc.core.port.v1";
 /** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
 export interface QueryAppVersionRequest {
@@ -19,6 +20,23 @@ export interface QueryAppVersionRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
+export interface QueryAppVersionRequestAmino {
+  /** port unique identifier */
+  port_id: string;
+  /** connection unique identifier */
+  connection_id: string;
+  /** whether the channel is ordered or unordered */
+  ordering: Order;
+  /** counterparty channel end */
+  counterparty?: CounterpartyAmino;
+  /** proposed version */
+  proposed_version: string;
+}
+export interface QueryAppVersionRequestAminoMsg {
+  type: "cosmos-sdk/QueryAppVersionRequest";
+  value: QueryAppVersionRequestAmino;
+}
+/** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
 export interface QueryAppVersionRequestSDKType {
   port_id: string;
   connection_id: string;
@@ -36,6 +54,17 @@ export interface QueryAppVersionResponse {
 export interface QueryAppVersionResponseProtoMsg {
   typeUrl: "/ibc.core.port.v1.QueryAppVersionResponse";
   value: Uint8Array;
+}
+/** QueryAppVersionResponse is the response type for the Query/AppVersion RPC method. */
+export interface QueryAppVersionResponseAmino {
+  /** port id associated with the request identifiers */
+  port_id: string;
+  /** supported app version */
+  version: string;
+}
+export interface QueryAppVersionResponseAminoMsg {
+  type: "cosmos-sdk/QueryAppVersionResponse";
+  value: QueryAppVersionResponseAmino;
 }
 /** QueryAppVersionResponse is the response type for the Query/AppVersion RPC method. */
 export interface QueryAppVersionResponseSDKType {
@@ -100,6 +129,44 @@ export const QueryAppVersionRequest = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<QueryAppVersionRequest>): QueryAppVersionRequest {
+    const message = createBaseQueryAppVersionRequest();
+    message.portId = object.portId ?? "";
+    message.connectionId = object.connectionId ?? "";
+    message.ordering = object.ordering ?? 0;
+    if (object.counterparty !== undefined && object.counterparty !== null) {
+      message.counterparty = Counterparty.fromPartial(object.counterparty);
+    }
+    message.proposedVersion = object.proposedVersion ?? "";
+    return message;
+  },
+  fromAmino(object: QueryAppVersionRequestAmino): QueryAppVersionRequest {
+    return {
+      portId: object.port_id,
+      connectionId: object.connection_id,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
+      proposedVersion: object.proposed_version
+    };
+  },
+  toAmino(message: QueryAppVersionRequest): QueryAppVersionRequestAmino {
+    const obj: any = {};
+    obj.port_id = message.portId;
+    obj.connection_id = message.connectionId;
+    obj.ordering = message.ordering;
+    obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
+    obj.proposed_version = message.proposedVersion;
+    return obj;
+  },
+  fromAminoMsg(object: QueryAppVersionRequestAminoMsg): QueryAppVersionRequest {
+    return QueryAppVersionRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryAppVersionRequest): QueryAppVersionRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryAppVersionRequest",
+      value: QueryAppVersionRequest.toAmino(message)
+    };
+  },
   fromProtoMsg(message: QueryAppVersionRequestProtoMsg): QueryAppVersionRequest {
     return QueryAppVersionRequest.decode(message.value);
   },
@@ -149,6 +216,33 @@ export const QueryAppVersionResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<QueryAppVersionResponse>): QueryAppVersionResponse {
+    const message = createBaseQueryAppVersionResponse();
+    message.portId = object.portId ?? "";
+    message.version = object.version ?? "";
+    return message;
+  },
+  fromAmino(object: QueryAppVersionResponseAmino): QueryAppVersionResponse {
+    return {
+      portId: object.port_id,
+      version: object.version
+    };
+  },
+  toAmino(message: QueryAppVersionResponse): QueryAppVersionResponseAmino {
+    const obj: any = {};
+    obj.port_id = message.portId;
+    obj.version = message.version;
+    return obj;
+  },
+  fromAminoMsg(object: QueryAppVersionResponseAminoMsg): QueryAppVersionResponse {
+    return QueryAppVersionResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryAppVersionResponse): QueryAppVersionResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryAppVersionResponse",
+      value: QueryAppVersionResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryAppVersionResponseProtoMsg): QueryAppVersionResponse {
     return QueryAppVersionResponse.decode(message.value);

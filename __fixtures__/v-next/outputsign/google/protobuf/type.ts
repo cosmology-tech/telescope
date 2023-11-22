@@ -1,6 +1,7 @@
-import { SourceContext, SourceContextSDKType } from "./source_context";
-import { Any, AnySDKType } from "./any";
+import { SourceContext, SourceContextAmino, SourceContextSDKType } from "./source_context";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "./any";
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /** Basic field types. */
 export enum Field_Kind {
@@ -45,6 +46,7 @@ export enum Field_Kind {
   UNRECOGNIZED = -1,
 }
 export const Field_KindSDKType = Field_Kind;
+export const Field_KindAmino = Field_Kind;
 export function field_KindFromJSON(object: any): Field_Kind {
   switch (object) {
     case 0:
@@ -168,6 +170,7 @@ export enum Field_Cardinality {
   UNRECOGNIZED = -1,
 }
 export const Field_CardinalitySDKType = Field_Cardinality;
+export const Field_CardinalityAmino = Field_Cardinality;
 export function field_CardinalityFromJSON(object: any): Field_Cardinality {
   switch (object) {
     case 0:
@@ -212,6 +215,7 @@ export enum Syntax {
   UNRECOGNIZED = -1,
 }
 export const SyntaxSDKType = Syntax;
+export const SyntaxAmino = Syntax;
 export function syntaxFromJSON(object: any): Syntax {
   switch (object) {
     case 0:
@@ -257,6 +261,25 @@ export interface TypeProtoMsg {
   value: Uint8Array;
 }
 /** A protocol buffer message type. */
+export interface TypeAmino {
+  /** The fully qualified message name. */
+  name: string;
+  /** The list of fields. */
+  fields: FieldAmino[];
+  /** The list of types appearing in `oneof` definitions in this type. */
+  oneofs: string[];
+  /** The protocol buffer options. */
+  options: OptionAmino[];
+  /** The source context. */
+  source_context?: SourceContextAmino;
+  /** The source syntax. */
+  syntax: Syntax;
+}
+export interface TypeAminoMsg {
+  type: "/google.protobuf.Type";
+  value: TypeAmino;
+}
+/** A protocol buffer message type. */
 export interface TypeSDKType {
   name: string;
   fields: FieldSDKType[];
@@ -299,6 +322,39 @@ export interface FieldProtoMsg {
   value: Uint8Array;
 }
 /** A single field of a message type. */
+export interface FieldAmino {
+  /** The field type. */
+  kind: Field_Kind;
+  /** The field cardinality. */
+  cardinality: Field_Cardinality;
+  /** The field number. */
+  number: number;
+  /** The field name. */
+  name: string;
+  /**
+   * The field type URL, without the scheme, for message or enumeration
+   * types. Example: `"type.googleapis.com/google.protobuf.Timestamp"`.
+   */
+  type_url: string;
+  /**
+   * The index of the field type in `Type.oneofs`, for message or enumeration
+   * types. The first type has index 1; zero means the type is not in the list.
+   */
+  oneof_index: number;
+  /** Whether to use alternative packed wire representation. */
+  packed: boolean;
+  /** The protocol buffer options. */
+  options: OptionAmino[];
+  /** The field JSON name. */
+  json_name: string;
+  /** The string value of the default value of this field. Proto2 syntax only. */
+  default_value: string;
+}
+export interface FieldAminoMsg {
+  type: "/google.protobuf.Field";
+  value: FieldAmino;
+}
+/** A single field of a message type. */
 export interface FieldSDKType {
   kind: Field_Kind;
   cardinality: Field_Cardinality;
@@ -329,6 +385,23 @@ export interface EnumProtoMsg {
   value: Uint8Array;
 }
 /** Enum type definition. */
+export interface EnumAmino {
+  /** Enum type name. */
+  name: string;
+  /** Enum value definitions. */
+  enumvalue: EnumValueAmino[];
+  /** Protocol buffer options. */
+  options: OptionAmino[];
+  /** The source context. */
+  source_context?: SourceContextAmino;
+  /** The source syntax. */
+  syntax: Syntax;
+}
+export interface EnumAminoMsg {
+  type: "/google.protobuf.Enum";
+  value: EnumAmino;
+}
+/** Enum type definition. */
 export interface EnumSDKType {
   name: string;
   enumvalue: EnumValueSDKType[];
@@ -348,6 +421,19 @@ export interface EnumValue {
 export interface EnumValueProtoMsg {
   typeUrl: "/google.protobuf.EnumValue";
   value: Uint8Array;
+}
+/** Enum value definition. */
+export interface EnumValueAmino {
+  /** Enum value name. */
+  name: string;
+  /** Enum value number. */
+  number: number;
+  /** Protocol buffer options. */
+  options: OptionAmino[];
+}
+export interface EnumValueAminoMsg {
+  type: "/google.protobuf.EnumValue";
+  value: EnumValueAmino;
 }
 /** Enum value definition. */
 export interface EnumValueSDKType {
@@ -378,6 +464,30 @@ export interface Option {
 export interface OptionProtoMsg {
   typeUrl: "/google.protobuf.Option";
   value: Uint8Array;
+}
+/**
+ * A protocol buffer option, which can be attached to a message, field,
+ * enumeration, etc.
+ */
+export interface OptionAmino {
+  /**
+   * The option's name. For protobuf built-in options (options defined in
+   * descriptor.proto), this is the short name. For example, `"map_entry"`.
+   * For custom options, it should be the fully-qualified name. For example,
+   * `"google.api.http"`.
+   */
+  name: string;
+  /**
+   * The option's value packed in an Any message. If the value is a primitive,
+   * the corresponding wrapper type defined in google/protobuf/wrappers.proto
+   * should be used. If the value is an enum, it should be stored as an int32
+   * value using the google.protobuf.Int32Value type.
+   */
+  value?: AnyAmino;
+}
+export interface OptionAminoMsg {
+  type: "/google.protobuf.Option";
+  value: OptionAmino;
 }
 /**
  * A protocol buffer option, which can be attached to a message, field,
@@ -451,6 +561,53 @@ export const Type = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<Type>): Type {
+    const message = createBaseType();
+    message.name = object.name ?? "";
+    message.fields = object.fields?.map(e => Field.fromPartial(e)) || [];
+    message.oneofs = object.oneofs?.map(e => e) || [];
+    message.options = object.options?.map(e => Option.fromPartial(e)) || [];
+    if (object.sourceContext !== undefined && object.sourceContext !== null) {
+      message.sourceContext = SourceContext.fromPartial(object.sourceContext);
+    }
+    message.syntax = object.syntax ?? 0;
+    return message;
+  },
+  fromAmino(object: TypeAmino): Type {
+    return {
+      name: object.name,
+      fields: Array.isArray(object?.fields) ? object.fields.map((e: any) => Field.fromAmino(e)) : [],
+      oneofs: Array.isArray(object?.oneofs) ? object.oneofs.map((e: any) => e) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
+      sourceContext: object?.source_context ? SourceContext.fromAmino(object.source_context) : undefined,
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+    };
+  },
+  toAmino(message: Type): TypeAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    if (message.fields) {
+      obj.fields = message.fields.map(e => e ? Field.toAmino(e) : undefined);
+    } else {
+      obj.fields = [];
+    }
+    if (message.oneofs) {
+      obj.oneofs = message.oneofs.map(e => e);
+    } else {
+      obj.oneofs = [];
+    }
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined;
+    obj.syntax = message.syntax;
+    return obj;
+  },
+  fromAminoMsg(object: TypeAminoMsg): Type {
+    return Type.fromAmino(object.value);
   },
   fromProtoMsg(message: TypeProtoMsg): Type {
     return Type.decode(message.value);
@@ -558,6 +715,55 @@ export const Field = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<Field>): Field {
+    const message = createBaseField();
+    message.kind = object.kind ?? 0;
+    message.cardinality = object.cardinality ?? 0;
+    message.number = object.number ?? 0;
+    message.name = object.name ?? "";
+    message.typeUrl = object.typeUrl ?? "";
+    message.oneofIndex = object.oneofIndex ?? 0;
+    message.packed = object.packed ?? false;
+    message.options = object.options?.map(e => Option.fromPartial(e)) || [];
+    message.jsonName = object.jsonName ?? "";
+    message.defaultValue = object.defaultValue ?? "";
+    return message;
+  },
+  fromAmino(object: FieldAmino): Field {
+    return {
+      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : -1,
+      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : -1,
+      number: object.number,
+      name: object.name,
+      typeUrl: object.type_url,
+      oneofIndex: object.oneof_index,
+      packed: object.packed,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
+      jsonName: object.json_name,
+      defaultValue: object.default_value
+    };
+  },
+  toAmino(message: Field): FieldAmino {
+    const obj: any = {};
+    obj.kind = message.kind;
+    obj.cardinality = message.cardinality;
+    obj.number = message.number;
+    obj.name = message.name;
+    obj.type_url = message.typeUrl;
+    obj.oneof_index = message.oneofIndex;
+    obj.packed = message.packed;
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    obj.json_name = message.jsonName;
+    obj.default_value = message.defaultValue;
+    return obj;
+  },
+  fromAminoMsg(object: FieldAminoMsg): Field {
+    return Field.fromAmino(object.value);
+  },
   fromProtoMsg(message: FieldProtoMsg): Field {
     return Field.decode(message.value);
   },
@@ -629,6 +835,46 @@ export const Enum = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<Enum>): Enum {
+    const message = createBaseEnum();
+    message.name = object.name ?? "";
+    message.enumvalue = object.enumvalue?.map(e => EnumValue.fromPartial(e)) || [];
+    message.options = object.options?.map(e => Option.fromPartial(e)) || [];
+    if (object.sourceContext !== undefined && object.sourceContext !== null) {
+      message.sourceContext = SourceContext.fromPartial(object.sourceContext);
+    }
+    message.syntax = object.syntax ?? 0;
+    return message;
+  },
+  fromAmino(object: EnumAmino): Enum {
+    return {
+      name: object.name,
+      enumvalue: Array.isArray(object?.enumvalue) ? object.enumvalue.map((e: any) => EnumValue.fromAmino(e)) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
+      sourceContext: object?.source_context ? SourceContext.fromAmino(object.source_context) : undefined,
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+    };
+  },
+  toAmino(message: Enum): EnumAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    if (message.enumvalue) {
+      obj.enumvalue = message.enumvalue.map(e => e ? EnumValue.toAmino(e) : undefined);
+    } else {
+      obj.enumvalue = [];
+    }
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined;
+    obj.syntax = message.syntax;
+    return obj;
+  },
+  fromAminoMsg(object: EnumAminoMsg): Enum {
+    return Enum.fromAmino(object.value);
+  },
   fromProtoMsg(message: EnumProtoMsg): Enum {
     return Enum.decode(message.value);
   },
@@ -686,6 +932,34 @@ export const EnumValue = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<EnumValue>): EnumValue {
+    const message = createBaseEnumValue();
+    message.name = object.name ?? "";
+    message.number = object.number ?? 0;
+    message.options = object.options?.map(e => Option.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: EnumValueAmino): EnumValue {
+    return {
+      name: object.name,
+      number: object.number,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: EnumValue): EnumValueAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.number = message.number;
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: EnumValueAminoMsg): EnumValue {
+    return EnumValue.fromAmino(object.value);
+  },
   fromProtoMsg(message: EnumValueProtoMsg): EnumValue {
     return EnumValue.decode(message.value);
   },
@@ -735,6 +1009,29 @@ export const Option = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<Option>): Option {
+    const message = createBaseOption();
+    message.name = object.name ?? "";
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Any.fromPartial(object.value);
+    }
+    return message;
+  },
+  fromAmino(object: OptionAmino): Option {
+    return {
+      name: object.name,
+      value: object?.value ? Any.fromAmino(object.value) : undefined
+    };
+  },
+  toAmino(message: Option): OptionAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.value = message.value ? Any.toAmino(message.value) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: OptionAminoMsg): Option {
+    return Option.fromAmino(object.value);
   },
   fromProtoMsg(message: OptionProtoMsg): Option {
     return Option.decode(message.value);

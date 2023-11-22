@@ -1,6 +1,7 @@
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
-import { Input, InputSDKType, Output, OutputSDKType } from "./bank";
+import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
+import { Input, InputAmino, InputSDKType, Output, OutputAmino, OutputSDKType } from "./bank";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSend {
@@ -11,6 +12,16 @@ export interface MsgSend {
 export interface MsgSendProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.MsgSend";
   value: Uint8Array;
+}
+/** MsgSend represents a message to send coins from one account to another. */
+export interface MsgSendAmino {
+  from_address: string;
+  to_address: string;
+  amount: CoinAmino[];
+}
+export interface MsgSendAminoMsg {
+  type: "cosmos-sdk/MsgSend";
+  value: MsgSendAmino;
 }
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSendSDKType {
@@ -25,6 +36,12 @@ export interface MsgSendResponseProtoMsg {
   value: Uint8Array;
 }
 /** MsgSendResponse defines the Msg/Send response type. */
+export interface MsgSendResponseAmino {}
+export interface MsgSendResponseAminoMsg {
+  type: "cosmos-sdk/MsgSendResponse";
+  value: MsgSendResponseAmino;
+}
+/** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponseSDKType {}
 /** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
 export interface MsgMultiSend {
@@ -36,6 +53,15 @@ export interface MsgMultiSendProtoMsg {
   value: Uint8Array;
 }
 /** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
+export interface MsgMultiSendAmino {
+  inputs: InputAmino[];
+  outputs: OutputAmino[];
+}
+export interface MsgMultiSendAminoMsg {
+  type: "cosmos-sdk/MsgMultiSend";
+  value: MsgMultiSendAmino;
+}
+/** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
 export interface MsgMultiSendSDKType {
   inputs: InputSDKType[];
   outputs: OutputSDKType[];
@@ -45,6 +71,12 @@ export interface MsgMultiSendResponse {}
 export interface MsgMultiSendResponseProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.MsgMultiSendResponse";
   value: Uint8Array;
+}
+/** MsgMultiSendResponse defines the Msg/MultiSend response type. */
+export interface MsgMultiSendResponseAmino {}
+export interface MsgMultiSendResponseAminoMsg {
+  type: "cosmos-sdk/MsgMultiSendResponse";
+  value: MsgMultiSendResponseAmino;
 }
 /** MsgMultiSendResponse defines the Msg/MultiSend response type. */
 export interface MsgMultiSendResponseSDKType {}
@@ -92,6 +124,40 @@ export const MsgSend = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<MsgSend>): MsgSend {
+    const message = createBaseMsgSend();
+    message.fromAddress = object.fromAddress ?? "";
+    message.toAddress = object.toAddress ?? "";
+    message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: MsgSendAmino): MsgSend {
+    return {
+      fromAddress: object.from_address,
+      toAddress: object.to_address,
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: MsgSend): MsgSendAmino {
+    const obj: any = {};
+    obj.from_address = message.fromAddress;
+    obj.to_address = message.toAddress;
+    if (message.amount) {
+      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.amount = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgSendAminoMsg): MsgSend {
+    return MsgSend.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSend): MsgSendAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgSend",
+      value: MsgSend.toAmino(message)
+    };
+  },
   fromProtoMsg(message: MsgSendProtoMsg): MsgSend {
     return MsgSend.decode(message.value);
   },
@@ -126,6 +192,26 @@ export const MsgSendResponse = {
       }
     }
     return message;
+  },
+  fromPartial(_: DeepPartial<MsgSendResponse>): MsgSendResponse {
+    const message = createBaseMsgSendResponse();
+    return message;
+  },
+  fromAmino(_: MsgSendResponseAmino): MsgSendResponse {
+    return {};
+  },
+  toAmino(_: MsgSendResponse): MsgSendResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgSendResponseAminoMsg): MsgSendResponse {
+    return MsgSendResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSendResponse): MsgSendResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgSendResponse",
+      value: MsgSendResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgSendResponseProtoMsg): MsgSendResponse {
     return MsgSendResponse.decode(message.value);
@@ -177,6 +263,41 @@ export const MsgMultiSend = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<MsgMultiSend>): MsgMultiSend {
+    const message = createBaseMsgMultiSend();
+    message.inputs = object.inputs?.map(e => Input.fromPartial(e)) || [];
+    message.outputs = object.outputs?.map(e => Output.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: MsgMultiSendAmino): MsgMultiSend {
+    return {
+      inputs: Array.isArray(object?.inputs) ? object.inputs.map((e: any) => Input.fromAmino(e)) : [],
+      outputs: Array.isArray(object?.outputs) ? object.outputs.map((e: any) => Output.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: MsgMultiSend): MsgMultiSendAmino {
+    const obj: any = {};
+    if (message.inputs) {
+      obj.inputs = message.inputs.map(e => e ? Input.toAmino(e) : undefined);
+    } else {
+      obj.inputs = [];
+    }
+    if (message.outputs) {
+      obj.outputs = message.outputs.map(e => e ? Output.toAmino(e) : undefined);
+    } else {
+      obj.outputs = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgMultiSendAminoMsg): MsgMultiSend {
+    return MsgMultiSend.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgMultiSend): MsgMultiSendAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgMultiSend",
+      value: MsgMultiSend.toAmino(message)
+    };
+  },
   fromProtoMsg(message: MsgMultiSendProtoMsg): MsgMultiSend {
     return MsgMultiSend.decode(message.value);
   },
@@ -211,6 +332,26 @@ export const MsgMultiSendResponse = {
       }
     }
     return message;
+  },
+  fromPartial(_: DeepPartial<MsgMultiSendResponse>): MsgMultiSendResponse {
+    const message = createBaseMsgMultiSendResponse();
+    return message;
+  },
+  fromAmino(_: MsgMultiSendResponseAmino): MsgMultiSendResponse {
+    return {};
+  },
+  toAmino(_: MsgMultiSendResponse): MsgMultiSendResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgMultiSendResponseAminoMsg): MsgMultiSendResponse {
+    return MsgMultiSendResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgMultiSendResponse): MsgMultiSendResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgMultiSendResponse",
+      value: MsgMultiSendResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgMultiSendResponseProtoMsg): MsgMultiSendResponse {
     return MsgMultiSendResponse.decode(message.value);

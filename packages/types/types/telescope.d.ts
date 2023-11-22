@@ -16,6 +16,7 @@ interface TelescopeOpts {
     logLevel?: TelescopeLogLevel;
     interfaces?: {
         enabled?: boolean;
+        useGlobalDecoderRegistry?: boolean;
         useUseInterfacesParams?: boolean;
         useByDefault?: boolean;
         useByDefaultRpc?: boolean;

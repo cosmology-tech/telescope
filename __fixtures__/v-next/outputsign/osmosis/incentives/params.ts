@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
 /** Params holds parameters for the incentives module */
 export interface Params {
@@ -11,6 +12,18 @@ export interface Params {
 export interface ParamsProtoMsg {
   typeUrl: "/osmosis.incentives.Params";
   value: Uint8Array;
+}
+/** Params holds parameters for the incentives module */
+export interface ParamsAmino {
+  /**
+   * distr_epoch_identifier is what epoch type distribution will be triggered by
+   * (day, week, etc.)
+   */
+  distr_epoch_identifier: string;
+}
+export interface ParamsAminoMsg {
+  type: "osmosis/incentives/params";
+  value: ParamsAmino;
 }
 /** Params holds parameters for the incentives module */
 export interface ParamsSDKType {
@@ -45,6 +58,30 @@ export const Params = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<Params>): Params {
+    const message = createBaseParams();
+    message.distrEpochIdentifier = object.distrEpochIdentifier ?? "";
+    return message;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      distrEpochIdentifier: object.distr_epoch_identifier
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.distr_epoch_identifier = message.distrEpochIdentifier;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "osmosis/incentives/params",
+      value: Params.toAmino(message)
+    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

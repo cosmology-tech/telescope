@@ -1,7 +1,8 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { DevFeeInfo, DevFeeInfoSDKType } from "./fees";
-import { Params, ParamsSDKType } from "./genesis";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { DevFeeInfo, DevFeeInfoAmino, DevFeeInfoSDKType } from "./fees";
+import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.fees.v1";
 /**
  * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC
@@ -14,6 +15,18 @@ export interface QueryDevFeeInfosRequest {
 export interface QueryDevFeeInfosRequestProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfosRequest";
   value: Uint8Array;
+}
+/**
+ * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC
+ * method.
+ */
+export interface QueryDevFeeInfosRequestAmino {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryDevFeeInfosRequestAminoMsg {
+  type: "/evmos.fees.v1.QueryDevFeeInfosRequest";
+  value: QueryDevFeeInfosRequestAmino;
 }
 /**
  * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC
@@ -39,6 +52,19 @@ export interface QueryDevFeeInfosResponseProtoMsg {
  * QueryDevFeeInfosResponse is the response type for the Query/DevFeeInfos
  * RPC method.
  */
+export interface QueryDevFeeInfosResponseAmino {
+  fees: DevFeeInfoAmino[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryDevFeeInfosResponseAminoMsg {
+  type: "/evmos.fees.v1.QueryDevFeeInfosResponse";
+  value: QueryDevFeeInfosResponseAmino;
+}
+/**
+ * QueryDevFeeInfosResponse is the response type for the Query/DevFeeInfos
+ * RPC method.
+ */
 export interface QueryDevFeeInfosResponseSDKType {
   fees: DevFeeInfoSDKType[];
   pagination?: PageResponseSDKType;
@@ -54,6 +80,18 @@ export interface QueryDevFeeInfoRequest {
 export interface QueryDevFeeInfoRequestProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfoRequest";
   value: Uint8Array;
+}
+/**
+ * QueryDevFeeInfoRequest is the request type for the Query/DevFeeInfo RPC
+ * method.
+ */
+export interface QueryDevFeeInfoRequestAmino {
+  /** contract identifier is the hex contract address of a contract */
+  contract_address: string;
+}
+export interface QueryDevFeeInfoRequestAminoMsg {
+  type: "/evmos.fees.v1.QueryDevFeeInfoRequest";
+  value: QueryDevFeeInfoRequestAmino;
 }
 /**
  * QueryDevFeeInfoRequest is the request type for the Query/DevFeeInfo RPC
@@ -77,6 +115,17 @@ export interface QueryDevFeeInfoResponseProtoMsg {
  * QueryDevFeeInfoResponse is the response type for the Query/DevFeeInfo RPC
  * method.
  */
+export interface QueryDevFeeInfoResponseAmino {
+  fee?: DevFeeInfoAmino;
+}
+export interface QueryDevFeeInfoResponseAminoMsg {
+  type: "/evmos.fees.v1.QueryDevFeeInfoResponse";
+  value: QueryDevFeeInfoResponseAmino;
+}
+/**
+ * QueryDevFeeInfoResponse is the response type for the Query/DevFeeInfo RPC
+ * method.
+ */
 export interface QueryDevFeeInfoResponseSDKType {
   fee: DevFeeInfoSDKType;
 }
@@ -85,6 +134,12 @@ export interface QueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryParamsRequest";
   value: Uint8Array;
+}
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoMsg {
+  type: "/evmos.fees.v1.QueryParamsRequest";
+  value: QueryParamsRequestAmino;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -98,6 +153,17 @@ export interface QueryParamsResponse {
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryParamsResponse";
   value: Uint8Array;
+}
+/**
+ * QueryParamsResponse is the response type for the Query/Params RPC
+ * method.
+ */
+export interface QueryParamsResponseAmino {
+  params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoMsg {
+  type: "/evmos.fees.v1.QueryParamsResponse";
+  value: QueryParamsResponseAmino;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC
@@ -124,6 +190,20 @@ export interface QueryDevFeeInfosPerDeployerRequestProtoMsg {
  * QueryDevFeeInfosPerDeployerRequest is the request type for the
  * Query/DevFeeInfosPerDeployer RPC method.
  */
+export interface QueryDevFeeInfosPerDeployerRequestAmino {
+  /** deployer bech32 address */
+  deployer_address: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryDevFeeInfosPerDeployerRequestAminoMsg {
+  type: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerRequest";
+  value: QueryDevFeeInfosPerDeployerRequestAmino;
+}
+/**
+ * QueryDevFeeInfosPerDeployerRequest is the request type for the
+ * Query/DevFeeInfosPerDeployer RPC method.
+ */
 export interface QueryDevFeeInfosPerDeployerRequestSDKType {
   deployer_address: string;
   pagination?: PageRequestSDKType;
@@ -140,6 +220,19 @@ export interface QueryDevFeeInfosPerDeployerResponse {
 export interface QueryDevFeeInfosPerDeployerResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerResponse";
   value: Uint8Array;
+}
+/**
+ * QueryDevFeeInfosPerDeployerResponse is the response type for the
+ * Query/DevFeeInfosPerDeployer RPC method.
+ */
+export interface QueryDevFeeInfosPerDeployerResponseAmino {
+  fees: DevFeeInfoAmino[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryDevFeeInfosPerDeployerResponseAminoMsg {
+  type: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerResponse";
+  value: QueryDevFeeInfosPerDeployerResponseAmino;
 }
 /**
  * QueryDevFeeInfosPerDeployerResponse is the response type for the
@@ -178,6 +271,26 @@ export const QueryDevFeeInfosRequest = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<QueryDevFeeInfosRequest>): QueryDevFeeInfosRequest {
+    const message = createBaseQueryDevFeeInfosRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
+    return message;
+  },
+  fromAmino(object: QueryDevFeeInfosRequestAmino): QueryDevFeeInfosRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryDevFeeInfosRequest): QueryDevFeeInfosRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryDevFeeInfosRequestAminoMsg): QueryDevFeeInfosRequest {
+    return QueryDevFeeInfosRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryDevFeeInfosRequestProtoMsg): QueryDevFeeInfosRequest {
     return QueryDevFeeInfosRequest.decode(message.value);
@@ -229,6 +342,33 @@ export const QueryDevFeeInfosResponse = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<QueryDevFeeInfosResponse>): QueryDevFeeInfosResponse {
+    const message = createBaseQueryDevFeeInfosResponse();
+    message.fees = object.fees?.map(e => DevFeeInfo.fromPartial(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
+    return message;
+  },
+  fromAmino(object: QueryDevFeeInfosResponseAmino): QueryDevFeeInfosResponse {
+    return {
+      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryDevFeeInfosResponse): QueryDevFeeInfosResponseAmino {
+    const obj: any = {};
+    if (message.fees) {
+      obj.fees = message.fees.map(e => e ? DevFeeInfo.toAmino(e) : undefined);
+    } else {
+      obj.fees = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryDevFeeInfosResponseAminoMsg): QueryDevFeeInfosResponse {
+    return QueryDevFeeInfosResponse.fromAmino(object.value);
+  },
   fromProtoMsg(message: QueryDevFeeInfosResponseProtoMsg): QueryDevFeeInfosResponse {
     return QueryDevFeeInfosResponse.decode(message.value);
   },
@@ -271,6 +411,24 @@ export const QueryDevFeeInfoRequest = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<QueryDevFeeInfoRequest>): QueryDevFeeInfoRequest {
+    const message = createBaseQueryDevFeeInfoRequest();
+    message.contractAddress = object.contractAddress ?? "";
+    return message;
+  },
+  fromAmino(object: QueryDevFeeInfoRequestAmino): QueryDevFeeInfoRequest {
+    return {
+      contractAddress: object.contract_address
+    };
+  },
+  toAmino(message: QueryDevFeeInfoRequest): QueryDevFeeInfoRequestAmino {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress;
+    return obj;
+  },
+  fromAminoMsg(object: QueryDevFeeInfoRequestAminoMsg): QueryDevFeeInfoRequest {
+    return QueryDevFeeInfoRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryDevFeeInfoRequestProtoMsg): QueryDevFeeInfoRequest {
     return QueryDevFeeInfoRequest.decode(message.value);
@@ -315,6 +473,26 @@ export const QueryDevFeeInfoResponse = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<QueryDevFeeInfoResponse>): QueryDevFeeInfoResponse {
+    const message = createBaseQueryDevFeeInfoResponse();
+    if (object.fee !== undefined && object.fee !== null) {
+      message.fee = DevFeeInfo.fromPartial(object.fee);
+    }
+    return message;
+  },
+  fromAmino(object: QueryDevFeeInfoResponseAmino): QueryDevFeeInfoResponse {
+    return {
+      fee: object?.fee ? DevFeeInfo.fromAmino(object.fee) : undefined
+    };
+  },
+  toAmino(message: QueryDevFeeInfoResponse): QueryDevFeeInfoResponseAmino {
+    const obj: any = {};
+    obj.fee = message.fee ? DevFeeInfo.toAmino(message.fee) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryDevFeeInfoResponseAminoMsg): QueryDevFeeInfoResponse {
+    return QueryDevFeeInfoResponse.fromAmino(object.value);
+  },
   fromProtoMsg(message: QueryDevFeeInfoResponseProtoMsg): QueryDevFeeInfoResponse {
     return QueryDevFeeInfoResponse.decode(message.value);
   },
@@ -349,6 +527,20 @@ export const QueryParamsRequest = {
       }
     }
     return message;
+  },
+  fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
+    const message = createBaseQueryParamsRequest();
+    return message;
+  },
+  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
+    return {};
+  },
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
+    return QueryParamsRequest.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
     return QueryParamsRequest.decode(message.value);
@@ -392,6 +584,26 @@ export const QueryParamsResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
+    return message;
+  },
+  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
+    return QueryParamsResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
     return QueryParamsResponse.decode(message.value);
@@ -443,6 +655,29 @@ export const QueryDevFeeInfosPerDeployerRequest = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<QueryDevFeeInfosPerDeployerRequest>): QueryDevFeeInfosPerDeployerRequest {
+    const message = createBaseQueryDevFeeInfosPerDeployerRequest();
+    message.deployerAddress = object.deployerAddress ?? "";
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
+    return message;
+  },
+  fromAmino(object: QueryDevFeeInfosPerDeployerRequestAmino): QueryDevFeeInfosPerDeployerRequest {
+    return {
+      deployerAddress: object.deployer_address,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryDevFeeInfosPerDeployerRequest): QueryDevFeeInfosPerDeployerRequestAmino {
+    const obj: any = {};
+    obj.deployer_address = message.deployerAddress;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryDevFeeInfosPerDeployerRequestAminoMsg): QueryDevFeeInfosPerDeployerRequest {
+    return QueryDevFeeInfosPerDeployerRequest.fromAmino(object.value);
+  },
   fromProtoMsg(message: QueryDevFeeInfosPerDeployerRequestProtoMsg): QueryDevFeeInfosPerDeployerRequest {
     return QueryDevFeeInfosPerDeployerRequest.decode(message.value);
   },
@@ -492,6 +727,33 @@ export const QueryDevFeeInfosPerDeployerResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<QueryDevFeeInfosPerDeployerResponse>): QueryDevFeeInfosPerDeployerResponse {
+    const message = createBaseQueryDevFeeInfosPerDeployerResponse();
+    message.fees = object.fees?.map(e => DevFeeInfo.fromPartial(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
+    return message;
+  },
+  fromAmino(object: QueryDevFeeInfosPerDeployerResponseAmino): QueryDevFeeInfosPerDeployerResponse {
+    return {
+      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryDevFeeInfosPerDeployerResponse): QueryDevFeeInfosPerDeployerResponseAmino {
+    const obj: any = {};
+    if (message.fees) {
+      obj.fees = message.fees.map(e => e ? DevFeeInfo.toAmino(e) : undefined);
+    } else {
+      obj.fees = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryDevFeeInfosPerDeployerResponseAminoMsg): QueryDevFeeInfosPerDeployerResponse {
+    return QueryDevFeeInfosPerDeployerResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryDevFeeInfosPerDeployerResponseProtoMsg): QueryDevFeeInfosPerDeployerResponse {
     return QueryDevFeeInfosPerDeployerResponse.decode(message.value);

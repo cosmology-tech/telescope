@@ -47,7 +47,7 @@ const options: TelescopeOptions = {
       decode: true,
       fromJSON: false,
       toJSON: false,
-      fromPartial: false,
+      fromPartial: true,
       toSDK: false,
       fromSDKJSON: false,
       fromSDK: false,
@@ -206,7 +206,7 @@ const options: TelescopeOptions = {
   },
 
   aminoEncoding: {
-    enabled: false,
+    enabled: true,
   },
   packages: {
     akash: {

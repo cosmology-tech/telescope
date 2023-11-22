@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.gamm.v2";
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
@@ -12,6 +13,19 @@ export interface QuerySpotPriceRequest {
 export interface QuerySpotPriceRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v2.QuerySpotPriceRequest";
   value: Uint8Array;
+}
+/**
+ * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
+ * query.
+ */
+export interface QuerySpotPriceRequestAmino {
+  pool_id: string;
+  base_asset_denom: string;
+  quote_asset_denom: string;
+}
+export interface QuerySpotPriceRequestAminoMsg {
+  type: "osmosis/gamm/v2/query-spot-price-request";
+  value: QuerySpotPriceRequestAmino;
 }
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
@@ -33,6 +47,18 @@ export interface QuerySpotPriceResponse {
 export interface QuerySpotPriceResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v2.QuerySpotPriceResponse";
   value: Uint8Array;
+}
+/**
+ * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
+ * query.
+ */
+export interface QuerySpotPriceResponseAmino {
+  /** String of the Dec. Ex) 10.203uatom */
+  spot_price: string;
+}
+export interface QuerySpotPriceResponseAminoMsg {
+  type: "osmosis/gamm/v2/query-spot-price-response";
+  value: QuerySpotPriceResponseAmino;
 }
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
@@ -85,6 +111,38 @@ export const QuerySpotPriceRequest = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<QuerySpotPriceRequest>): QuerySpotPriceRequest {
+    const message = createBaseQuerySpotPriceRequest();
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
+    message.baseAssetDenom = object.baseAssetDenom ?? "";
+    message.quoteAssetDenom = object.quoteAssetDenom ?? "";
+    return message;
+  },
+  fromAmino(object: QuerySpotPriceRequestAmino): QuerySpotPriceRequest {
+    return {
+      poolId: BigInt(object.pool_id),
+      baseAssetDenom: object.base_asset_denom,
+      quoteAssetDenom: object.quote_asset_denom
+    };
+  },
+  toAmino(message: QuerySpotPriceRequest): QuerySpotPriceRequestAmino {
+    const obj: any = {};
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.base_asset_denom = message.baseAssetDenom;
+    obj.quote_asset_denom = message.quoteAssetDenom;
+    return obj;
+  },
+  fromAminoMsg(object: QuerySpotPriceRequestAminoMsg): QuerySpotPriceRequest {
+    return QuerySpotPriceRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QuerySpotPriceRequest): QuerySpotPriceRequestAminoMsg {
+    return {
+      type: "osmosis/gamm/v2/query-spot-price-request",
+      value: QuerySpotPriceRequest.toAmino(message)
+    };
+  },
   fromProtoMsg(message: QuerySpotPriceRequestProtoMsg): QuerySpotPriceRequest {
     return QuerySpotPriceRequest.decode(message.value);
   },
@@ -127,6 +185,30 @@ export const QuerySpotPriceResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<QuerySpotPriceResponse>): QuerySpotPriceResponse {
+    const message = createBaseQuerySpotPriceResponse();
+    message.spotPrice = object.spotPrice ?? "";
+    return message;
+  },
+  fromAmino(object: QuerySpotPriceResponseAmino): QuerySpotPriceResponse {
+    return {
+      spotPrice: object.spot_price
+    };
+  },
+  toAmino(message: QuerySpotPriceResponse): QuerySpotPriceResponseAmino {
+    const obj: any = {};
+    obj.spot_price = message.spotPrice;
+    return obj;
+  },
+  fromAminoMsg(object: QuerySpotPriceResponseAminoMsg): QuerySpotPriceResponse {
+    return QuerySpotPriceResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QuerySpotPriceResponse): QuerySpotPriceResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/v2/query-spot-price-response",
+      value: QuerySpotPriceResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: QuerySpotPriceResponseProtoMsg): QuerySpotPriceResponse {
     return QuerySpotPriceResponse.decode(message.value);

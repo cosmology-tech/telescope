@@ -1,6 +1,7 @@
-import { Params, ParamsSDKType, DistrInfo, DistrInfoSDKType, PoolToGauges, PoolToGaugesSDKType } from "./incentives";
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { Params, ParamsAmino, ParamsSDKType, DistrInfo, DistrInfoAmino, DistrInfoSDKType, PoolToGauges, PoolToGaugesAmino, PoolToGaugesSDKType } from "./incentives";
+import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 /** GenesisState defines the pool incentives module's genesis state. */
 export interface GenesisState {
@@ -13,6 +14,18 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState defines the pool incentives module's genesis state. */
+export interface GenesisStateAmino {
+  /** params defines all the paramaters of the module. */
+  params?: ParamsAmino;
+  lockable_durations: DurationAmino[];
+  distr_info?: DistrInfoAmino;
+  pool_to_gauges?: PoolToGaugesAmino;
+}
+export interface GenesisStateAminoMsg {
+  type: "osmosis/poolincentives/genesis-state";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the pool incentives module's genesis state. */
 export interface GenesisStateSDKType {
@@ -71,6 +84,49 @@ export const GenesisState = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
+    message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
+    if (object.distrInfo !== undefined && object.distrInfo !== null) {
+      message.distrInfo = DistrInfo.fromPartial(object.distrInfo);
+    }
+    if (object.poolToGauges !== undefined && object.poolToGauges !== null) {
+      message.poolToGauges = PoolToGauges.fromPartial(object.poolToGauges);
+    }
+    return message;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : [],
+      distrInfo: object?.distr_info ? DistrInfo.fromAmino(object.distr_info) : undefined,
+      poolToGauges: object?.pool_to_gauges ? PoolToGauges.fromAmino(object.pool_to_gauges) : undefined
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    if (message.lockableDurations) {
+      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e) : undefined);
+    } else {
+      obj.lockable_durations = [];
+    }
+    obj.distr_info = message.distrInfo ? DistrInfo.toAmino(message.distrInfo) : undefined;
+    obj.pool_to_gauges = message.poolToGauges ? PoolToGauges.toAmino(message.poolToGauges) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "osmosis/poolincentives/genesis-state",
+      value: GenesisState.toAmino(message)
+    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

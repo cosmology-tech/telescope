@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial, Exact, isSet } from "../../../helpers";
 export const protobufPackage = "akash.cert.v1beta2";
 /** State is an enum which refers to state of deployment */
 export enum Certificate_State {
@@ -11,6 +12,7 @@ export enum Certificate_State {
   UNRECOGNIZED = -1,
 }
 export const Certificate_StateSDKType = Certificate_State;
+export const Certificate_StateAmino = Certificate_State;
 export function certificate_StateFromJSON(object: any): Certificate_State {
   switch (object) {
     case 0:
@@ -51,6 +53,15 @@ export interface CertificateIDProtoMsg {
   value: Uint8Array;
 }
 /** CertificateID stores owner and sequence number */
+export interface CertificateIDAmino {
+  owner: string;
+  serial: string;
+}
+export interface CertificateIDAminoMsg {
+  type: "/akash.cert.v1beta2.CertificateID";
+  value: CertificateIDAmino;
+}
+/** CertificateID stores owner and sequence number */
 export interface CertificateIDSDKType {
   owner: string;
   serial: string;
@@ -64,6 +75,16 @@ export interface Certificate {
 export interface CertificateProtoMsg {
   typeUrl: "/akash.cert.v1beta2.Certificate";
   value: Uint8Array;
+}
+/** Certificate stores state, certificate and it's public key */
+export interface CertificateAmino {
+  state: Certificate_State;
+  cert: Uint8Array;
+  pubkey: Uint8Array;
+}
+export interface CertificateAminoMsg {
+  type: "/akash.cert.v1beta2.Certificate";
+  value: CertificateAmino;
 }
 /** Certificate stores state, certificate and it's public key */
 export interface CertificateSDKType {
@@ -82,6 +103,16 @@ export interface CertificateFilterProtoMsg {
   value: Uint8Array;
 }
 /** CertificateFilter defines filters used to filter certificates */
+export interface CertificateFilterAmino {
+  owner: string;
+  serial: string;
+  state: string;
+}
+export interface CertificateFilterAminoMsg {
+  type: "/akash.cert.v1beta2.CertificateFilter";
+  value: CertificateFilterAmino;
+}
+/** CertificateFilter defines filters used to filter certificates */
 export interface CertificateFilterSDKType {
   owner: string;
   serial: string;
@@ -98,6 +129,16 @@ export interface MsgCreateCertificateProtoMsg {
   value: Uint8Array;
 }
 /** MsgCreateCertificate defines an SDK message for creating certificate */
+export interface MsgCreateCertificateAmino {
+  owner: string;
+  cert: Uint8Array;
+  pubkey: Uint8Array;
+}
+export interface MsgCreateCertificateAminoMsg {
+  type: "/akash.cert.v1beta2.MsgCreateCertificate";
+  value: MsgCreateCertificateAmino;
+}
+/** MsgCreateCertificate defines an SDK message for creating certificate */
 export interface MsgCreateCertificateSDKType {
   owner: string;
   cert: Uint8Array;
@@ -110,6 +151,12 @@ export interface MsgCreateCertificateResponseProtoMsg {
   value: Uint8Array;
 }
 /** MsgCreateCertificateResponse defines the Msg/CreateCertificate response type. */
+export interface MsgCreateCertificateResponseAmino {}
+export interface MsgCreateCertificateResponseAminoMsg {
+  type: "/akash.cert.v1beta2.MsgCreateCertificateResponse";
+  value: MsgCreateCertificateResponseAmino;
+}
+/** MsgCreateCertificateResponse defines the Msg/CreateCertificate response type. */
 export interface MsgCreateCertificateResponseSDKType {}
 /** MsgRevokeCertificate defines an SDK message for revoking certificate */
 export interface MsgRevokeCertificate {
@@ -120,6 +167,14 @@ export interface MsgRevokeCertificateProtoMsg {
   value: Uint8Array;
 }
 /** MsgRevokeCertificate defines an SDK message for revoking certificate */
+export interface MsgRevokeCertificateAmino {
+  id?: CertificateIDAmino;
+}
+export interface MsgRevokeCertificateAminoMsg {
+  type: "/akash.cert.v1beta2.MsgRevokeCertificate";
+  value: MsgRevokeCertificateAmino;
+}
+/** MsgRevokeCertificate defines an SDK message for revoking certificate */
 export interface MsgRevokeCertificateSDKType {
   id: CertificateIDSDKType;
 }
@@ -128,6 +183,12 @@ export interface MsgRevokeCertificateResponse {}
 export interface MsgRevokeCertificateResponseProtoMsg {
   typeUrl: "/akash.cert.v1beta2.MsgRevokeCertificateResponse";
   value: Uint8Array;
+}
+/** MsgRevokeCertificateResponse defines the Msg/RevokeCertificate response type. */
+export interface MsgRevokeCertificateResponseAmino {}
+export interface MsgRevokeCertificateResponseAminoMsg {
+  type: "/akash.cert.v1beta2.MsgRevokeCertificateResponse";
+  value: MsgRevokeCertificateResponseAmino;
 }
 /** MsgRevokeCertificateResponse defines the Msg/RevokeCertificate response type. */
 export interface MsgRevokeCertificateResponseSDKType {}
@@ -167,6 +228,27 @@ export const CertificateID = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<CertificateID>, I>>(object: I): CertificateID {
+    const message = createBaseCertificateID();
+    message.owner = object.owner ?? "";
+    message.serial = object.serial ?? "";
+    return message;
+  },
+  fromAmino(object: CertificateIDAmino): CertificateID {
+    return {
+      owner: object.owner,
+      serial: object.serial
+    };
+  },
+  toAmino(message: CertificateID): CertificateIDAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.serial = message.serial;
+    return obj;
+  },
+  fromAminoMsg(object: CertificateIDAminoMsg): CertificateID {
+    return CertificateID.fromAmino(object.value);
   },
   fromProtoMsg(message: CertificateIDProtoMsg): CertificateID {
     return CertificateID.decode(message.value);
@@ -225,6 +307,30 @@ export const Certificate = {
     }
     return message;
   },
+  fromPartial<I extends Exact<DeepPartial<Certificate>, I>>(object: I): Certificate {
+    const message = createBaseCertificate();
+    message.state = object.state ?? 0;
+    message.cert = object.cert ?? new Uint8Array();
+    message.pubkey = object.pubkey ?? new Uint8Array();
+    return message;
+  },
+  fromAmino(object: CertificateAmino): Certificate {
+    return {
+      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : -1,
+      cert: object.cert,
+      pubkey: object.pubkey
+    };
+  },
+  toAmino(message: Certificate): CertificateAmino {
+    const obj: any = {};
+    obj.state = message.state;
+    obj.cert = message.cert;
+    obj.pubkey = message.pubkey;
+    return obj;
+  },
+  fromAminoMsg(object: CertificateAminoMsg): Certificate {
+    return Certificate.fromAmino(object.value);
+  },
   fromProtoMsg(message: CertificateProtoMsg): Certificate {
     return Certificate.decode(message.value);
   },
@@ -281,6 +387,30 @@ export const CertificateFilter = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<CertificateFilter>, I>>(object: I): CertificateFilter {
+    const message = createBaseCertificateFilter();
+    message.owner = object.owner ?? "";
+    message.serial = object.serial ?? "";
+    message.state = object.state ?? "";
+    return message;
+  },
+  fromAmino(object: CertificateFilterAmino): CertificateFilter {
+    return {
+      owner: object.owner,
+      serial: object.serial,
+      state: object.state
+    };
+  },
+  toAmino(message: CertificateFilter): CertificateFilterAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.serial = message.serial;
+    obj.state = message.state;
+    return obj;
+  },
+  fromAminoMsg(object: CertificateFilterAminoMsg): CertificateFilter {
+    return CertificateFilter.fromAmino(object.value);
   },
   fromProtoMsg(message: CertificateFilterProtoMsg): CertificateFilter {
     return CertificateFilter.decode(message.value);
@@ -339,6 +469,30 @@ export const MsgCreateCertificate = {
     }
     return message;
   },
+  fromPartial<I extends Exact<DeepPartial<MsgCreateCertificate>, I>>(object: I): MsgCreateCertificate {
+    const message = createBaseMsgCreateCertificate();
+    message.owner = object.owner ?? "";
+    message.cert = object.cert ?? new Uint8Array();
+    message.pubkey = object.pubkey ?? new Uint8Array();
+    return message;
+  },
+  fromAmino(object: MsgCreateCertificateAmino): MsgCreateCertificate {
+    return {
+      owner: object.owner,
+      cert: object.cert,
+      pubkey: object.pubkey
+    };
+  },
+  toAmino(message: MsgCreateCertificate): MsgCreateCertificateAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.cert = message.cert;
+    obj.pubkey = message.pubkey;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateCertificateAminoMsg): MsgCreateCertificate {
+    return MsgCreateCertificate.fromAmino(object.value);
+  },
   fromProtoMsg(message: MsgCreateCertificateProtoMsg): MsgCreateCertificate {
     return MsgCreateCertificate.decode(message.value);
   },
@@ -373,6 +527,20 @@ export const MsgCreateCertificateResponse = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgCreateCertificateResponse>, I>>(_: I): MsgCreateCertificateResponse {
+    const message = createBaseMsgCreateCertificateResponse();
+    return message;
+  },
+  fromAmino(_: MsgCreateCertificateResponseAmino): MsgCreateCertificateResponse {
+    return {};
+  },
+  toAmino(_: MsgCreateCertificateResponse): MsgCreateCertificateResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateCertificateResponseAminoMsg): MsgCreateCertificateResponse {
+    return MsgCreateCertificateResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgCreateCertificateResponseProtoMsg): MsgCreateCertificateResponse {
     return MsgCreateCertificateResponse.decode(message.value);
@@ -417,6 +585,26 @@ export const MsgRevokeCertificate = {
     }
     return message;
   },
+  fromPartial<I extends Exact<DeepPartial<MsgRevokeCertificate>, I>>(object: I): MsgRevokeCertificate {
+    const message = createBaseMsgRevokeCertificate();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = CertificateID.fromPartial(object.id);
+    }
+    return message;
+  },
+  fromAmino(object: MsgRevokeCertificateAmino): MsgRevokeCertificate {
+    return {
+      id: object?.id ? CertificateID.fromAmino(object.id) : undefined
+    };
+  },
+  toAmino(message: MsgRevokeCertificate): MsgRevokeCertificateAmino {
+    const obj: any = {};
+    obj.id = message.id ? CertificateID.toAmino(message.id) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgRevokeCertificateAminoMsg): MsgRevokeCertificate {
+    return MsgRevokeCertificate.fromAmino(object.value);
+  },
   fromProtoMsg(message: MsgRevokeCertificateProtoMsg): MsgRevokeCertificate {
     return MsgRevokeCertificate.decode(message.value);
   },
@@ -451,6 +639,20 @@ export const MsgRevokeCertificateResponse = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgRevokeCertificateResponse>, I>>(_: I): MsgRevokeCertificateResponse {
+    const message = createBaseMsgRevokeCertificateResponse();
+    return message;
+  },
+  fromAmino(_: MsgRevokeCertificateResponseAmino): MsgRevokeCertificateResponse {
+    return {};
+  },
+  toAmino(_: MsgRevokeCertificateResponse): MsgRevokeCertificateResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgRevokeCertificateResponseAminoMsg): MsgRevokeCertificateResponse {
+    return MsgRevokeCertificateResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: MsgRevokeCertificateResponseProtoMsg): MsgRevokeCertificateResponse {
     return MsgRevokeCertificateResponse.decode(message.value);

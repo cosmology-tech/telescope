@@ -1,7 +1,8 @@
-import { PlacementRequirements, PlacementRequirementsSDKType } from "../../base/v1beta1/attribute";
-import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta1/resource";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { PlacementRequirements, PlacementRequirementsAmino, PlacementRequirementsSDKType } from "../../base/v1beta1/attribute";
+import { ResourceUnits, ResourceUnitsAmino, ResourceUnitsSDKType } from "../../base/v1beta1/resource";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** State is an enum which refers to state of group */
 export enum Group_State {
@@ -18,6 +19,7 @@ export enum Group_State {
   UNRECOGNIZED = -1,
 }
 export const Group_StateSDKType = Group_State;
+export const Group_StateAmino = Group_State;
 export function group_StateFromJSON(object: any): Group_State {
   switch (object) {
     case 0:
@@ -67,6 +69,14 @@ export interface MsgCloseGroupProtoMsg {
   value: Uint8Array;
 }
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
+export interface MsgCloseGroupAmino {
+  id?: GroupIDAmino | undefined;
+}
+export interface MsgCloseGroupAminoMsg {
+  type: "/akash.deployment.v1beta1.MsgCloseGroup";
+  value: MsgCloseGroupAmino;
+}
+/** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupSDKType {
   id: GroupIDSDKType | undefined;
 }
@@ -75,6 +85,12 @@ export interface MsgCloseGroupResponse {}
 export interface MsgCloseGroupResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgCloseGroupResponse";
   value: Uint8Array;
+}
+/** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
+export interface MsgCloseGroupResponseAmino {}
+export interface MsgCloseGroupResponseAminoMsg {
+  type: "/akash.deployment.v1beta1.MsgCloseGroupResponse";
+  value: MsgCloseGroupResponseAmino;
 }
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponseSDKType {}
@@ -87,6 +103,14 @@ export interface MsgPauseGroupProtoMsg {
   value: Uint8Array;
 }
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
+export interface MsgPauseGroupAmino {
+  id?: GroupIDAmino | undefined;
+}
+export interface MsgPauseGroupAminoMsg {
+  type: "/akash.deployment.v1beta1.MsgPauseGroup";
+  value: MsgPauseGroupAmino;
+}
+/** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroupSDKType {
   id: GroupIDSDKType | undefined;
 }
@@ -95,6 +119,12 @@ export interface MsgPauseGroupResponse {}
 export interface MsgPauseGroupResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgPauseGroupResponse";
   value: Uint8Array;
+}
+/** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
+export interface MsgPauseGroupResponseAmino {}
+export interface MsgPauseGroupResponseAminoMsg {
+  type: "/akash.deployment.v1beta1.MsgPauseGroupResponse";
+  value: MsgPauseGroupResponseAmino;
 }
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponseSDKType {}
@@ -107,6 +137,14 @@ export interface MsgStartGroupProtoMsg {
   value: Uint8Array;
 }
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
+export interface MsgStartGroupAmino {
+  id?: GroupIDAmino | undefined;
+}
+export interface MsgStartGroupAminoMsg {
+  type: "/akash.deployment.v1beta1.MsgStartGroup";
+  value: MsgStartGroupAmino;
+}
+/** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroupSDKType {
   id: GroupIDSDKType | undefined;
 }
@@ -115,6 +153,12 @@ export interface MsgStartGroupResponse {}
 export interface MsgStartGroupResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgStartGroupResponse";
   value: Uint8Array;
+}
+/** MsgStartGroupResponse defines the Msg/StartGroup response type. */
+export interface MsgStartGroupResponseAmino {}
+export interface MsgStartGroupResponseAminoMsg {
+  type: "/akash.deployment.v1beta1.MsgStartGroupResponse";
+  value: MsgStartGroupResponseAmino;
 }
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponseSDKType {}
@@ -127,6 +171,16 @@ export interface GroupID {
 export interface GroupIDProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.GroupID";
   value: Uint8Array;
+}
+/** GroupID stores owner, deployment sequence number and group sequence number */
+export interface GroupIDAmino {
+  owner: string;
+  dseq: string;
+  gseq: number;
+}
+export interface GroupIDAminoMsg {
+  type: "/akash.deployment.v1beta1.GroupID";
+  value: GroupIDAmino;
 }
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDSDKType {
@@ -143,6 +197,16 @@ export interface GroupSpec {
 export interface GroupSpecProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.GroupSpec";
   value: Uint8Array;
+}
+/** GroupSpec stores group specifications */
+export interface GroupSpecAmino {
+  name: string;
+  requirements?: PlacementRequirementsAmino | undefined;
+  resources: ResourceAmino[];
+}
+export interface GroupSpecAminoMsg {
+  type: "/akash.deployment.v1beta1.GroupSpec";
+  value: GroupSpecAmino;
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
@@ -162,6 +226,17 @@ export interface GroupProtoMsg {
   value: Uint8Array;
 }
 /** Group stores group id, state and specifications of group */
+export interface GroupAmino {
+  group_id?: GroupIDAmino | undefined;
+  state: Group_State;
+  group_spec?: GroupSpecAmino | undefined;
+  created_at: string;
+}
+export interface GroupAminoMsg {
+  type: "/akash.deployment.v1beta1.Group";
+  value: GroupAmino;
+}
+/** Group stores group id, state and specifications of group */
 export interface GroupSDKType {
   group_id: GroupIDSDKType | undefined;
   state: Group_State;
@@ -177,6 +252,16 @@ export interface Resource {
 export interface ResourceProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.Resource";
   value: Uint8Array;
+}
+/** Resource stores unit, total count and price of resource */
+export interface ResourceAmino {
+  resources?: ResourceUnitsAmino | undefined;
+  count: number;
+  price?: CoinAmino | undefined;
+}
+export interface ResourceAminoMsg {
+  type: "/akash.deployment.v1beta1.Resource";
+  value: ResourceAmino;
 }
 /** Resource stores unit, total count and price of resource */
 export interface ResourceSDKType {
@@ -214,6 +299,13 @@ export const MsgCloseGroup = {
     }
     return message;
   },
+  fromPartial<I extends Exact<Partial<MsgCloseGroup>, I>>(object: I): MsgCloseGroup {
+    const message = createBaseMsgCloseGroup();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromPartial(object.id);
+    }
+    return message;
+  },
   fromProtoMsg(message: MsgCloseGroupProtoMsg): MsgCloseGroup {
     return MsgCloseGroup.decode(message.value);
   },
@@ -247,6 +339,10 @@ export const MsgCloseGroupResponse = {
           break;
       }
     }
+    return message;
+  },
+  fromPartial<I extends Exact<Partial<MsgCloseGroupResponse>, I>>(_: I): MsgCloseGroupResponse {
+    const message = createBaseMsgCloseGroupResponse();
     return message;
   },
   fromProtoMsg(message: MsgCloseGroupResponseProtoMsg): MsgCloseGroupResponse {
@@ -292,6 +388,13 @@ export const MsgPauseGroup = {
     }
     return message;
   },
+  fromPartial<I extends Exact<Partial<MsgPauseGroup>, I>>(object: I): MsgPauseGroup {
+    const message = createBaseMsgPauseGroup();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromPartial(object.id);
+    }
+    return message;
+  },
   fromProtoMsg(message: MsgPauseGroupProtoMsg): MsgPauseGroup {
     return MsgPauseGroup.decode(message.value);
   },
@@ -325,6 +428,10 @@ export const MsgPauseGroupResponse = {
           break;
       }
     }
+    return message;
+  },
+  fromPartial<I extends Exact<Partial<MsgPauseGroupResponse>, I>>(_: I): MsgPauseGroupResponse {
+    const message = createBaseMsgPauseGroupResponse();
     return message;
   },
   fromProtoMsg(message: MsgPauseGroupResponseProtoMsg): MsgPauseGroupResponse {
@@ -370,6 +477,13 @@ export const MsgStartGroup = {
     }
     return message;
   },
+  fromPartial<I extends Exact<Partial<MsgStartGroup>, I>>(object: I): MsgStartGroup {
+    const message = createBaseMsgStartGroup();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromPartial(object.id);
+    }
+    return message;
+  },
   fromProtoMsg(message: MsgStartGroupProtoMsg): MsgStartGroup {
     return MsgStartGroup.decode(message.value);
   },
@@ -403,6 +517,10 @@ export const MsgStartGroupResponse = {
           break;
       }
     }
+    return message;
+  },
+  fromPartial<I extends Exact<Partial<MsgStartGroupResponse>, I>>(_: I): MsgStartGroupResponse {
+    const message = createBaseMsgStartGroupResponse();
     return message;
   },
   fromProtoMsg(message: MsgStartGroupResponseProtoMsg): MsgStartGroupResponse {
@@ -462,6 +580,15 @@ export const GroupID = {
     }
     return message;
   },
+  fromPartial<I extends Exact<Partial<GroupID>, I>>(object: I): GroupID {
+    const message = createBaseGroupID();
+    message.owner = object.owner ?? "";
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq.toString());
+    }
+    message.gseq = object.gseq ?? 0;
+    return message;
+  },
   fromProtoMsg(message: GroupIDProtoMsg): GroupID {
     return GroupID.decode(message.value);
   },
@@ -517,6 +644,15 @@ export const GroupSpec = {
           break;
       }
     }
+    return message;
+  },
+  fromPartial<I extends Exact<Partial<GroupSpec>, I>>(object: I): GroupSpec {
+    const message = createBaseGroupSpec();
+    message.name = object.name ?? "";
+    if (object.requirements !== undefined && object.requirements !== null) {
+      message.requirements = PlacementRequirements.fromPartial(object.requirements);
+    }
+    message.resources = object.resources?.map(e => Resource.fromPartial(e)) || [];
     return message;
   },
   fromProtoMsg(message: GroupSpecProtoMsg): GroupSpec {
@@ -583,6 +719,20 @@ export const Group = {
     }
     return message;
   },
+  fromPartial<I extends Exact<Partial<Group>, I>>(object: I): Group {
+    const message = createBaseGroup();
+    if (object.groupId !== undefined && object.groupId !== null) {
+      message.groupId = GroupID.fromPartial(object.groupId);
+    }
+    message.state = object.state ?? 0;
+    if (object.groupSpec !== undefined && object.groupSpec !== null) {
+      message.groupSpec = GroupSpec.fromPartial(object.groupSpec);
+    }
+    if (object.createdAt !== undefined && object.createdAt !== null) {
+      message.createdAt = BigInt(object.createdAt.toString());
+    }
+    return message;
+  },
   fromProtoMsg(message: GroupProtoMsg): Group {
     return Group.decode(message.value);
   },
@@ -637,6 +787,17 @@ export const Resource = {
           reader.skipType(tag & 7);
           break;
       }
+    }
+    return message;
+  },
+  fromPartial<I extends Exact<Partial<Resource>, I>>(object: I): Resource {
+    const message = createBaseResource();
+    if (object.resources !== undefined && object.resources !== null) {
+      message.resources = ResourceUnits.fromPartial(object.resources);
+    }
+    message.count = object.count ?? 0;
+    if (object.price !== undefined && object.price !== null) {
+      message.price = Coin.fromPartial(object.price);
     }
     return message;
   },

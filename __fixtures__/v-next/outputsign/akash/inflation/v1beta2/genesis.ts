@@ -1,5 +1,6 @@
-import { Params, ParamsSDKType } from "./params";
+import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.inflation.v1beta2";
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisState {
@@ -8,6 +9,14 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/akash.inflation.v1beta2.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState stores slice of genesis deployment instance */
+export interface GenesisStateAmino {
+  params?: ParamsAmino;
+}
+export interface GenesisStateAminoMsg {
+  type: "/akash.inflation.v1beta2.GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateSDKType {
@@ -42,6 +51,26 @@ export const GenesisState = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
+    return message;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

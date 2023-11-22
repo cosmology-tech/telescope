@@ -1,5 +1,6 @@
-import { Certificate, CertificateSDKType } from "./cert";
+import { Certificate, CertificateAmino, CertificateSDKType } from "./cert";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.cert.v1beta2";
 /** GenesisCertificate defines certificate entry at genesis */
 export interface GenesisCertificate {
@@ -9,6 +10,15 @@ export interface GenesisCertificate {
 export interface GenesisCertificateProtoMsg {
   typeUrl: "/akash.cert.v1beta2.GenesisCertificate";
   value: Uint8Array;
+}
+/** GenesisCertificate defines certificate entry at genesis */
+export interface GenesisCertificateAmino {
+  owner: string;
+  certificate?: CertificateAmino;
+}
+export interface GenesisCertificateAminoMsg {
+  type: "/akash.cert.v1beta2.GenesisCertificate";
+  value: GenesisCertificateAmino;
 }
 /** GenesisCertificate defines certificate entry at genesis */
 export interface GenesisCertificateSDKType {
@@ -22,6 +32,14 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/akash.cert.v1beta2.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState defines the basic genesis state used by cert module */
+export interface GenesisStateAmino {
+  certificates: GenesisCertificateAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "/akash.cert.v1beta2.GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the basic genesis state used by cert module */
 export interface GenesisStateSDKType {
@@ -63,6 +81,29 @@ export const GenesisCertificate = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<GenesisCertificate>, I>>(object: I): GenesisCertificate {
+    const message = createBaseGenesisCertificate();
+    message.owner = object.owner ?? "";
+    if (object.certificate !== undefined && object.certificate !== null) {
+      message.certificate = Certificate.fromPartial(object.certificate);
+    }
+    return message;
+  },
+  fromAmino(object: GenesisCertificateAmino): GenesisCertificate {
+    return {
+      owner: object.owner,
+      certificate: object?.certificate ? Certificate.fromAmino(object.certificate) : undefined
+    };
+  },
+  toAmino(message: GenesisCertificate): GenesisCertificateAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: GenesisCertificateAminoMsg): GenesisCertificate {
+    return GenesisCertificate.fromAmino(object.value);
   },
   fromProtoMsg(message: GenesisCertificateProtoMsg): GenesisCertificate {
     return GenesisCertificate.decode(message.value);
@@ -106,6 +147,28 @@ export const GenesisState = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
+    const message = createBaseGenesisState();
+    message.certificates = object.certificates?.map(e => GenesisCertificate.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => GenesisCertificate.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    if (message.certificates) {
+      obj.certificates = message.certificates.map(e => e ? GenesisCertificate.toAmino(e) : undefined);
+    } else {
+      obj.certificates = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

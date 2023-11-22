@@ -1,6 +1,7 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "./types";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Account, AccountAmino, AccountSDKType, FractionalPayment, FractionalPaymentAmino, FractionalPaymentSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta2";
 /** QueryAccountRequest is request type for the Query/Account RPC method */
 export interface QueryAccountsRequest {
@@ -13,6 +14,18 @@ export interface QueryAccountsRequest {
 export interface QueryAccountsRequestProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.QueryAccountsRequest";
   value: Uint8Array;
+}
+/** QueryAccountRequest is request type for the Query/Account RPC method */
+export interface QueryAccountsRequestAmino {
+  scope: string;
+  xid: string;
+  owner: string;
+  state: string;
+  pagination?: PageRequestAmino;
+}
+export interface QueryAccountsRequestAminoMsg {
+  type: "/akash.escrow.v1beta2.QueryAccountsRequest";
+  value: QueryAccountsRequestAmino;
 }
 /** QueryAccountRequest is request type for the Query/Account RPC method */
 export interface QueryAccountsRequestSDKType {
@@ -30,6 +43,15 @@ export interface QueryAccountsResponse {
 export interface QueryAccountsResponseProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.QueryAccountsResponse";
   value: Uint8Array;
+}
+/** QueryProvidersResponse is response type for the Query/Providers RPC method */
+export interface QueryAccountsResponseAmino {
+  accounts: AccountAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QueryAccountsResponseAminoMsg {
+  type: "/akash.escrow.v1beta2.QueryAccountsResponse";
+  value: QueryAccountsResponseAmino;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryAccountsResponseSDKType {
@@ -50,6 +72,19 @@ export interface QueryPaymentsRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
+export interface QueryPaymentsRequestAmino {
+  scope: string;
+  xid: string;
+  id: string;
+  owner: string;
+  state: string;
+  pagination?: PageRequestAmino;
+}
+export interface QueryPaymentsRequestAminoMsg {
+  type: "/akash.escrow.v1beta2.QueryPaymentsRequest";
+  value: QueryPaymentsRequestAmino;
+}
+/** QueryPaymentRequest is request type for the Query/Payment RPC method */
 export interface QueryPaymentsRequestSDKType {
   scope: string;
   xid: string;
@@ -66,6 +101,15 @@ export interface QueryPaymentsResponse {
 export interface QueryPaymentsResponseProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.QueryPaymentsResponse";
   value: Uint8Array;
+}
+/** QueryProvidersResponse is response type for the Query/Providers RPC method */
+export interface QueryPaymentsResponseAmino {
+  payments: FractionalPaymentAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QueryPaymentsResponseAminoMsg {
+  type: "/akash.escrow.v1beta2.QueryPaymentsResponse";
+  value: QueryPaymentsResponseAmino;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryPaymentsResponseSDKType {
@@ -130,6 +174,38 @@ export const QueryAccountsRequest = {
     }
     return message;
   },
+  fromPartial<I extends Exact<DeepPartial<QueryAccountsRequest>, I>>(object: I): QueryAccountsRequest {
+    const message = createBaseQueryAccountsRequest();
+    message.scope = object.scope ?? "";
+    message.xid = object.xid ?? "";
+    message.owner = object.owner ?? "";
+    message.state = object.state ?? "";
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
+    return message;
+  },
+  fromAmino(object: QueryAccountsRequestAmino): QueryAccountsRequest {
+    return {
+      scope: object.scope,
+      xid: object.xid,
+      owner: object.owner,
+      state: object.state,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryAccountsRequest): QueryAccountsRequestAmino {
+    const obj: any = {};
+    obj.scope = message.scope;
+    obj.xid = message.xid;
+    obj.owner = message.owner;
+    obj.state = message.state;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryAccountsRequestAminoMsg): QueryAccountsRequest {
+    return QueryAccountsRequest.fromAmino(object.value);
+  },
   fromProtoMsg(message: QueryAccountsRequestProtoMsg): QueryAccountsRequest {
     return QueryAccountsRequest.decode(message.value);
   },
@@ -179,6 +255,33 @@ export const QueryAccountsResponse = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryAccountsResponse>, I>>(object: I): QueryAccountsResponse {
+    const message = createBaseQueryAccountsResponse();
+    message.accounts = object.accounts?.map(e => Account.fromPartial(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
+    return message;
+  },
+  fromAmino(object: QueryAccountsResponseAmino): QueryAccountsResponse {
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryAccountsResponse): QueryAccountsResponseAmino {
+    const obj: any = {};
+    if (message.accounts) {
+      obj.accounts = message.accounts.map(e => e ? Account.toAmino(e) : undefined);
+    } else {
+      obj.accounts = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryAccountsResponseAminoMsg): QueryAccountsResponse {
+    return QueryAccountsResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryAccountsResponseProtoMsg): QueryAccountsResponse {
     return QueryAccountsResponse.decode(message.value);
@@ -258,6 +361,41 @@ export const QueryPaymentsRequest = {
     }
     return message;
   },
+  fromPartial<I extends Exact<DeepPartial<QueryPaymentsRequest>, I>>(object: I): QueryPaymentsRequest {
+    const message = createBaseQueryPaymentsRequest();
+    message.scope = object.scope ?? "";
+    message.xid = object.xid ?? "";
+    message.id = object.id ?? "";
+    message.owner = object.owner ?? "";
+    message.state = object.state ?? "";
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
+    return message;
+  },
+  fromAmino(object: QueryPaymentsRequestAmino): QueryPaymentsRequest {
+    return {
+      scope: object.scope,
+      xid: object.xid,
+      id: object.id,
+      owner: object.owner,
+      state: object.state,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryPaymentsRequest): QueryPaymentsRequestAmino {
+    const obj: any = {};
+    obj.scope = message.scope;
+    obj.xid = message.xid;
+    obj.id = message.id;
+    obj.owner = message.owner;
+    obj.state = message.state;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryPaymentsRequestAminoMsg): QueryPaymentsRequest {
+    return QueryPaymentsRequest.fromAmino(object.value);
+  },
   fromProtoMsg(message: QueryPaymentsRequestProtoMsg): QueryPaymentsRequest {
     return QueryPaymentsRequest.decode(message.value);
   },
@@ -307,6 +445,33 @@ export const QueryPaymentsResponse = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryPaymentsResponse>, I>>(object: I): QueryPaymentsResponse {
+    const message = createBaseQueryPaymentsResponse();
+    message.payments = object.payments?.map(e => FractionalPayment.fromPartial(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
+    return message;
+  },
+  fromAmino(object: QueryPaymentsResponseAmino): QueryPaymentsResponse {
+    return {
+      payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => FractionalPayment.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
+    };
+  },
+  toAmino(message: QueryPaymentsResponse): QueryPaymentsResponseAmino {
+    const obj: any = {};
+    if (message.payments) {
+      obj.payments = message.payments.map(e => e ? FractionalPayment.toAmino(e) : undefined);
+    } else {
+      obj.payments = [];
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryPaymentsResponseAminoMsg): QueryPaymentsResponse {
+    return QueryPaymentsResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: QueryPaymentsResponseProtoMsg): QueryPaymentsResponse {
     return QueryPaymentsResponse.decode(message.value);

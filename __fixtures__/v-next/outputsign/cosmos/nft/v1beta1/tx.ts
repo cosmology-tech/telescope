@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSend {
@@ -16,6 +17,21 @@ export interface MsgSendProtoMsg {
   value: Uint8Array;
 }
 /** MsgSend represents a message to send a nft from one account to another account. */
+export interface MsgSendAmino {
+  /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
+  class_id: string;
+  /** id defines the unique identification of nft */
+  id: string;
+  /** sender is the address of the owner of nft */
+  sender: string;
+  /** receiver is the receiver address of nft */
+  receiver: string;
+}
+export interface MsgSendAminoMsg {
+  type: "cosmos-sdk/MsgNFTSend";
+  value: MsgSendAmino;
+}
+/** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSendSDKType {
   class_id: string;
   id: string;
@@ -27,6 +43,12 @@ export interface MsgSendResponse {}
 export interface MsgSendResponseProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.MsgSendResponse";
   value: Uint8Array;
+}
+/** MsgSendResponse defines the Msg/Send response type. */
+export interface MsgSendResponseAmino {}
+export interface MsgSendResponseAminoMsg {
+  type: "cosmos-sdk/MsgSendResponse";
+  value: MsgSendResponseAmino;
 }
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponseSDKType {}
@@ -81,6 +103,39 @@ export const MsgSend = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<MsgSend>): MsgSend {
+    const message = createBaseMsgSend();
+    message.classId = object.classId ?? "";
+    message.id = object.id ?? "";
+    message.sender = object.sender ?? "";
+    message.receiver = object.receiver ?? "";
+    return message;
+  },
+  fromAmino(object: MsgSendAmino): MsgSend {
+    return {
+      classId: object.class_id,
+      id: object.id,
+      sender: object.sender,
+      receiver: object.receiver
+    };
+  },
+  toAmino(message: MsgSend): MsgSendAmino {
+    const obj: any = {};
+    obj.class_id = message.classId;
+    obj.id = message.id;
+    obj.sender = message.sender;
+    obj.receiver = message.receiver;
+    return obj;
+  },
+  fromAminoMsg(object: MsgSendAminoMsg): MsgSend {
+    return MsgSend.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSend): MsgSendAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgNFTSend",
+      value: MsgSend.toAmino(message)
+    };
+  },
   fromProtoMsg(message: MsgSendProtoMsg): MsgSend {
     return MsgSend.decode(message.value);
   },
@@ -115,6 +170,26 @@ export const MsgSendResponse = {
       }
     }
     return message;
+  },
+  fromPartial(_: DeepPartial<MsgSendResponse>): MsgSendResponse {
+    const message = createBaseMsgSendResponse();
+    return message;
+  },
+  fromAmino(_: MsgSendResponseAmino): MsgSendResponse {
+    return {};
+  },
+  toAmino(_: MsgSendResponse): MsgSendResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgSendResponseAminoMsg): MsgSendResponse {
+    return MsgSendResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSendResponse): MsgSendResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/MsgSendResponse",
+      value: MsgSendResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgSendResponseProtoMsg): MsgSendResponse {
     return MsgSendResponse.decode(message.value);

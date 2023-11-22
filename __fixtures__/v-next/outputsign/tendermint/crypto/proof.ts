@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { DeepPartial } from "../../helpers";
 export const protobufPackage = "tendermint.crypto";
 export interface Proof {
   total: bigint;
@@ -9,6 +10,16 @@ export interface Proof {
 export interface ProofProtoMsg {
   typeUrl: "/tendermint.crypto.Proof";
   value: Uint8Array;
+}
+export interface ProofAmino {
+  total: string;
+  index: string;
+  leaf_hash: Uint8Array;
+  aunts: Uint8Array[];
+}
+export interface ProofAminoMsg {
+  type: "/tendermint.crypto.Proof";
+  value: ProofAmino;
 }
 export interface ProofSDKType {
   total: bigint;
@@ -26,6 +37,16 @@ export interface ValueOpProtoMsg {
   typeUrl: "/tendermint.crypto.ValueOp";
   value: Uint8Array;
 }
+export interface ValueOpAmino {
+  /** Encoded in ProofOp.Key. */
+  key: Uint8Array;
+  /** To encode in ProofOp.Data */
+  proof?: ProofAmino;
+}
+export interface ValueOpAminoMsg {
+  type: "/tendermint.crypto.ValueOp";
+  value: ValueOpAmino;
+}
 export interface ValueOpSDKType {
   key: Uint8Array;
   proof?: ProofSDKType;
@@ -38,6 +59,15 @@ export interface DominoOp {
 export interface DominoOpProtoMsg {
   typeUrl: "/tendermint.crypto.DominoOp";
   value: Uint8Array;
+}
+export interface DominoOpAmino {
+  key: string;
+  input: string;
+  output: string;
+}
+export interface DominoOpAminoMsg {
+  type: "/tendermint.crypto.DominoOp";
+  value: DominoOpAmino;
 }
 export interface DominoOpSDKType {
   key: string;
@@ -63,6 +93,20 @@ export interface ProofOpProtoMsg {
  * The data could be arbitrary format, providing nessecary data
  * for example neighbouring node hash
  */
+export interface ProofOpAmino {
+  type: string;
+  key: Uint8Array;
+  data: Uint8Array;
+}
+export interface ProofOpAminoMsg {
+  type: "/tendermint.crypto.ProofOp";
+  value: ProofOpAmino;
+}
+/**
+ * ProofOp defines an operation used for calculating Merkle root
+ * The data could be arbitrary format, providing nessecary data
+ * for example neighbouring node hash
+ */
 export interface ProofOpSDKType {
   type: string;
   key: Uint8Array;
@@ -75,6 +119,14 @@ export interface ProofOps {
 export interface ProofOpsProtoMsg {
   typeUrl: "/tendermint.crypto.ProofOps";
   value: Uint8Array;
+}
+/** ProofOps is Merkle proof defined by the list of ProofOps */
+export interface ProofOpsAmino {
+  ops: ProofOpAmino[];
+}
+export interface ProofOpsAminoMsg {
+  type: "/tendermint.crypto.ProofOps";
+  value: ProofOpsAmino;
 }
 /** ProofOps is Merkle proof defined by the list of ProofOps */
 export interface ProofOpsSDKType {
@@ -131,6 +183,41 @@ export const Proof = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<Proof>): Proof {
+    const message = createBaseProof();
+    if (object.total !== undefined && object.total !== null) {
+      message.total = BigInt(object.total.toString());
+    }
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index.toString());
+    }
+    message.leafHash = object.leafHash ?? new Uint8Array();
+    message.aunts = object.aunts?.map(e => e) || [];
+    return message;
+  },
+  fromAmino(object: ProofAmino): Proof {
+    return {
+      total: BigInt(object.total),
+      index: BigInt(object.index),
+      leafHash: object.leaf_hash,
+      aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: Proof): ProofAmino {
+    const obj: any = {};
+    obj.total = message.total ? message.total.toString() : undefined;
+    obj.index = message.index ? message.index.toString() : undefined;
+    obj.leaf_hash = message.leafHash;
+    if (message.aunts) {
+      obj.aunts = message.aunts.map(e => e);
+    } else {
+      obj.aunts = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ProofAminoMsg): Proof {
+    return Proof.fromAmino(object.value);
+  },
   fromProtoMsg(message: ProofProtoMsg): Proof {
     return Proof.decode(message.value);
   },
@@ -180,6 +267,29 @@ export const ValueOp = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<ValueOp>): ValueOp {
+    const message = createBaseValueOp();
+    message.key = object.key ?? new Uint8Array();
+    if (object.proof !== undefined && object.proof !== null) {
+      message.proof = Proof.fromPartial(object.proof);
+    }
+    return message;
+  },
+  fromAmino(object: ValueOpAmino): ValueOp {
+    return {
+      key: object.key,
+      proof: object?.proof ? Proof.fromAmino(object.proof) : undefined
+    };
+  },
+  toAmino(message: ValueOp): ValueOpAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.proof = message.proof ? Proof.toAmino(message.proof) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ValueOpAminoMsg): ValueOp {
+    return ValueOp.fromAmino(object.value);
   },
   fromProtoMsg(message: ValueOpProtoMsg): ValueOp {
     return ValueOp.decode(message.value);
@@ -238,6 +348,30 @@ export const DominoOp = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<DominoOp>): DominoOp {
+    const message = createBaseDominoOp();
+    message.key = object.key ?? "";
+    message.input = object.input ?? "";
+    message.output = object.output ?? "";
+    return message;
+  },
+  fromAmino(object: DominoOpAmino): DominoOp {
+    return {
+      key: object.key,
+      input: object.input,
+      output: object.output
+    };
+  },
+  toAmino(message: DominoOp): DominoOpAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.input = message.input;
+    obj.output = message.output;
+    return obj;
+  },
+  fromAminoMsg(object: DominoOpAminoMsg): DominoOp {
+    return DominoOp.fromAmino(object.value);
+  },
   fromProtoMsg(message: DominoOpProtoMsg): DominoOp {
     return DominoOp.decode(message.value);
   },
@@ -295,6 +429,30 @@ export const ProofOp = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<ProofOp>): ProofOp {
+    const message = createBaseProofOp();
+    message.type = object.type ?? "";
+    message.key = object.key ?? new Uint8Array();
+    message.data = object.data ?? new Uint8Array();
+    return message;
+  },
+  fromAmino(object: ProofOpAmino): ProofOp {
+    return {
+      type: object.type,
+      key: object.key,
+      data: object.data
+    };
+  },
+  toAmino(message: ProofOp): ProofOpAmino {
+    const obj: any = {};
+    obj.type = message.type;
+    obj.key = message.key;
+    obj.data = message.data;
+    return obj;
+  },
+  fromAminoMsg(object: ProofOpAminoMsg): ProofOp {
+    return ProofOp.fromAmino(object.value);
+  },
   fromProtoMsg(message: ProofOpProtoMsg): ProofOp {
     return ProofOp.decode(message.value);
   },
@@ -337,6 +495,28 @@ export const ProofOps = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<ProofOps>): ProofOps {
+    const message = createBaseProofOps();
+    message.ops = object.ops?.map(e => ProofOp.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: ProofOpsAmino): ProofOps {
+    return {
+      ops: Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: ProofOps): ProofOpsAmino {
+    const obj: any = {};
+    if (message.ops) {
+      obj.ops = message.ops.map(e => e ? ProofOp.toAmino(e) : undefined);
+    } else {
+      obj.ops = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ProofOpsAminoMsg): ProofOps {
+    return ProofOps.fromAmino(object.value);
   },
   fromProtoMsg(message: ProofOpsProtoMsg): ProofOps {
     return ProofOps.decode(message.value);

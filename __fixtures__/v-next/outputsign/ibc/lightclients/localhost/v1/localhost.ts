@@ -1,5 +1,6 @@
-import { Height, HeightSDKType } from "../../../core/client/v1/client";
+import { Height, HeightAmino, HeightSDKType } from "../../../core/client/v1/client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.lightclients.localhost.v1";
 /**
  * ClientState defines a loopback (localhost) client. It requires (read-only)
@@ -14,6 +15,20 @@ export interface ClientState {
 export interface ClientStateProtoMsg {
   typeUrl: "/ibc.lightclients.localhost.v1.ClientState";
   value: Uint8Array;
+}
+/**
+ * ClientState defines a loopback (localhost) client. It requires (read-only)
+ * access to keys outside the client prefix.
+ */
+export interface ClientStateAmino {
+  /** self chain ID */
+  chain_id: string;
+  /** self latest block height */
+  height?: HeightAmino;
+}
+export interface ClientStateAminoMsg {
+  type: "cosmos-sdk/ClientState";
+  value: ClientStateAmino;
 }
 /**
  * ClientState defines a loopback (localhost) client. It requires (read-only)
@@ -59,6 +74,35 @@ export const ClientState = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<ClientState>): ClientState {
+    const message = createBaseClientState();
+    message.chainId = object.chainId ?? "";
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Height.fromPartial(object.height);
+    }
+    return message;
+  },
+  fromAmino(object: ClientStateAmino): ClientState {
+    return {
+      chainId: object.chain_id,
+      height: object?.height ? Height.fromAmino(object.height) : undefined
+    };
+  },
+  toAmino(message: ClientState): ClientStateAmino {
+    const obj: any = {};
+    obj.chain_id = message.chainId;
+    obj.height = message.height ? Height.toAmino(message.height) : {};
+    return obj;
+  },
+  fromAminoMsg(object: ClientStateAminoMsg): ClientState {
+    return ClientState.fromAmino(object.value);
+  },
+  toAminoMsg(message: ClientState): ClientStateAminoMsg {
+    return {
+      type: "cosmos-sdk/ClientState",
+      value: ClientState.toAmino(message)
+    };
   },
   fromProtoMsg(message: ClientStateProtoMsg): ClientState {
     return ClientState.decode(message.value);

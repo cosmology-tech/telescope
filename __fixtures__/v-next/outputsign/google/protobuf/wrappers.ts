@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * Wrapper message for `double`.
@@ -12,6 +13,19 @@ export interface DoubleValue {
 export interface DoubleValueProtoMsg {
   typeUrl: "/google.protobuf.DoubleValue";
   value: Uint8Array;
+}
+/**
+ * Wrapper message for `double`.
+ * 
+ * The JSON representation for `DoubleValue` is JSON number.
+ */
+export interface DoubleValueAmino {
+  /** The double value. */
+  value: number;
+}
+export interface DoubleValueAminoMsg {
+  type: "/google.protobuf.DoubleValue";
+  value: DoubleValueAmino;
 }
 /**
  * Wrapper message for `double`.
@@ -39,6 +53,19 @@ export interface FloatValueProtoMsg {
  * 
  * The JSON representation for `FloatValue` is JSON number.
  */
+export interface FloatValueAmino {
+  /** The float value. */
+  value: number;
+}
+export interface FloatValueAminoMsg {
+  type: "/google.protobuf.FloatValue";
+  value: FloatValueAmino;
+}
+/**
+ * Wrapper message for `float`.
+ * 
+ * The JSON representation for `FloatValue` is JSON number.
+ */
 export interface FloatValueSDKType {
   value: number;
 }
@@ -54,6 +81,19 @@ export interface Int64Value {
 export interface Int64ValueProtoMsg {
   typeUrl: "/google.protobuf.Int64Value";
   value: Uint8Array;
+}
+/**
+ * Wrapper message for `int64`.
+ * 
+ * The JSON representation for `Int64Value` is JSON string.
+ */
+export interface Int64ValueAmino {
+  /** The int64 value. */
+  value: string;
+}
+export interface Int64ValueAminoMsg {
+  type: "/google.protobuf.Int64Value";
+  value: Int64ValueAmino;
 }
 /**
  * Wrapper message for `int64`.
@@ -81,6 +121,19 @@ export interface UInt64ValueProtoMsg {
  * 
  * The JSON representation for `UInt64Value` is JSON string.
  */
+export interface UInt64ValueAmino {
+  /** The uint64 value. */
+  value: string;
+}
+export interface UInt64ValueAminoMsg {
+  type: "/google.protobuf.UInt64Value";
+  value: UInt64ValueAmino;
+}
+/**
+ * Wrapper message for `uint64`.
+ * 
+ * The JSON representation for `UInt64Value` is JSON string.
+ */
 export interface UInt64ValueSDKType {
   value: bigint;
 }
@@ -96,6 +149,19 @@ export interface Int32Value {
 export interface Int32ValueProtoMsg {
   typeUrl: "/google.protobuf.Int32Value";
   value: Uint8Array;
+}
+/**
+ * Wrapper message for `int32`.
+ * 
+ * The JSON representation for `Int32Value` is JSON number.
+ */
+export interface Int32ValueAmino {
+  /** The int32 value. */
+  value: number;
+}
+export interface Int32ValueAminoMsg {
+  type: "/google.protobuf.Int32Value";
+  value: Int32ValueAmino;
 }
 /**
  * Wrapper message for `int32`.
@@ -123,6 +189,19 @@ export interface UInt32ValueProtoMsg {
  * 
  * The JSON representation for `UInt32Value` is JSON number.
  */
+export interface UInt32ValueAmino {
+  /** The uint32 value. */
+  value: number;
+}
+export interface UInt32ValueAminoMsg {
+  type: "/google.protobuf.UInt32Value";
+  value: UInt32ValueAmino;
+}
+/**
+ * Wrapper message for `uint32`.
+ * 
+ * The JSON representation for `UInt32Value` is JSON number.
+ */
 export interface UInt32ValueSDKType {
   value: number;
 }
@@ -138,6 +217,19 @@ export interface BoolValue {
 export interface BoolValueProtoMsg {
   typeUrl: "/google.protobuf.BoolValue";
   value: Uint8Array;
+}
+/**
+ * Wrapper message for `bool`.
+ * 
+ * The JSON representation for `BoolValue` is JSON `true` and `false`.
+ */
+export interface BoolValueAmino {
+  /** The bool value. */
+  value: boolean;
+}
+export interface BoolValueAminoMsg {
+  type: "/google.protobuf.BoolValue";
+  value: BoolValueAmino;
 }
 /**
  * Wrapper message for `bool`.
@@ -165,6 +257,19 @@ export interface StringValueProtoMsg {
  * 
  * The JSON representation for `StringValue` is JSON string.
  */
+export interface StringValueAmino {
+  /** The string value. */
+  value: string;
+}
+export interface StringValueAminoMsg {
+  type: "/google.protobuf.StringValue";
+  value: StringValueAmino;
+}
+/**
+ * Wrapper message for `string`.
+ * 
+ * The JSON representation for `StringValue` is JSON string.
+ */
 export interface StringValueSDKType {
   value: string;
 }
@@ -180,6 +285,19 @@ export interface BytesValue {
 export interface BytesValueProtoMsg {
   typeUrl: "/google.protobuf.BytesValue";
   value: Uint8Array;
+}
+/**
+ * Wrapper message for `bytes`.
+ * 
+ * The JSON representation for `BytesValue` is JSON string.
+ */
+export interface BytesValueAmino {
+  /** The bytes value. */
+  value: Uint8Array;
+}
+export interface BytesValueAminoMsg {
+  type: "/google.protobuf.BytesValue";
+  value: BytesValueAmino;
 }
 /**
  * Wrapper message for `bytes`.
@@ -218,6 +336,24 @@ export const DoubleValue = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<DoubleValue>): DoubleValue {
+    const message = createBaseDoubleValue();
+    message.value = object.value ?? 0;
+    return message;
+  },
+  fromAmino(object: DoubleValueAmino): DoubleValue {
+    return {
+      value: object.value
+    };
+  },
+  toAmino(message: DoubleValue): DoubleValueAmino {
+    const obj: any = {};
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: DoubleValueAminoMsg): DoubleValue {
+    return DoubleValue.fromAmino(object.value);
   },
   fromProtoMsg(message: DoubleValueProtoMsg): DoubleValue {
     return DoubleValue.decode(message.value);
@@ -262,6 +398,24 @@ export const FloatValue = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<FloatValue>): FloatValue {
+    const message = createBaseFloatValue();
+    message.value = object.value ?? 0;
+    return message;
+  },
+  fromAmino(object: FloatValueAmino): FloatValue {
+    return {
+      value: object.value
+    };
+  },
+  toAmino(message: FloatValue): FloatValueAmino {
+    const obj: any = {};
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: FloatValueAminoMsg): FloatValue {
+    return FloatValue.fromAmino(object.value);
+  },
   fromProtoMsg(message: FloatValueProtoMsg): FloatValue {
     return FloatValue.decode(message.value);
   },
@@ -304,6 +458,26 @@ export const Int64Value = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<Int64Value>): Int64Value {
+    const message = createBaseInt64Value();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value.toString());
+    }
+    return message;
+  },
+  fromAmino(object: Int64ValueAmino): Int64Value {
+    return {
+      value: BigInt(object.value)
+    };
+  },
+  toAmino(message: Int64Value): Int64ValueAmino {
+    const obj: any = {};
+    obj.value = message.value ? message.value.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: Int64ValueAminoMsg): Int64Value {
+    return Int64Value.fromAmino(object.value);
   },
   fromProtoMsg(message: Int64ValueProtoMsg): Int64Value {
     return Int64Value.decode(message.value);
@@ -348,6 +522,26 @@ export const UInt64Value = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<UInt64Value>): UInt64Value {
+    const message = createBaseUInt64Value();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value.toString());
+    }
+    return message;
+  },
+  fromAmino(object: UInt64ValueAmino): UInt64Value {
+    return {
+      value: BigInt(object.value)
+    };
+  },
+  toAmino(message: UInt64Value): UInt64ValueAmino {
+    const obj: any = {};
+    obj.value = message.value ? message.value.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: UInt64ValueAminoMsg): UInt64Value {
+    return UInt64Value.fromAmino(object.value);
+  },
   fromProtoMsg(message: UInt64ValueProtoMsg): UInt64Value {
     return UInt64Value.decode(message.value);
   },
@@ -390,6 +584,24 @@ export const Int32Value = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<Int32Value>): Int32Value {
+    const message = createBaseInt32Value();
+    message.value = object.value ?? 0;
+    return message;
+  },
+  fromAmino(object: Int32ValueAmino): Int32Value {
+    return {
+      value: object.value
+    };
+  },
+  toAmino(message: Int32Value): Int32ValueAmino {
+    const obj: any = {};
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: Int32ValueAminoMsg): Int32Value {
+    return Int32Value.fromAmino(object.value);
   },
   fromProtoMsg(message: Int32ValueProtoMsg): Int32Value {
     return Int32Value.decode(message.value);
@@ -434,6 +646,24 @@ export const UInt32Value = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<UInt32Value>): UInt32Value {
+    const message = createBaseUInt32Value();
+    message.value = object.value ?? 0;
+    return message;
+  },
+  fromAmino(object: UInt32ValueAmino): UInt32Value {
+    return {
+      value: object.value
+    };
+  },
+  toAmino(message: UInt32Value): UInt32ValueAmino {
+    const obj: any = {};
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: UInt32ValueAminoMsg): UInt32Value {
+    return UInt32Value.fromAmino(object.value);
+  },
   fromProtoMsg(message: UInt32ValueProtoMsg): UInt32Value {
     return UInt32Value.decode(message.value);
   },
@@ -476,6 +706,24 @@ export const BoolValue = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<BoolValue>): BoolValue {
+    const message = createBaseBoolValue();
+    message.value = object.value ?? false;
+    return message;
+  },
+  fromAmino(object: BoolValueAmino): BoolValue {
+    return {
+      value: object.value
+    };
+  },
+  toAmino(message: BoolValue): BoolValueAmino {
+    const obj: any = {};
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: BoolValueAminoMsg): BoolValue {
+    return BoolValue.fromAmino(object.value);
   },
   fromProtoMsg(message: BoolValueProtoMsg): BoolValue {
     return BoolValue.decode(message.value);
@@ -520,6 +768,24 @@ export const StringValue = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<StringValue>): StringValue {
+    const message = createBaseStringValue();
+    message.value = object.value ?? "";
+    return message;
+  },
+  fromAmino(object: StringValueAmino): StringValue {
+    return {
+      value: object.value
+    };
+  },
+  toAmino(message: StringValue): StringValueAmino {
+    const obj: any = {};
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: StringValueAminoMsg): StringValue {
+    return StringValue.fromAmino(object.value);
+  },
   fromProtoMsg(message: StringValueProtoMsg): StringValue {
     return StringValue.decode(message.value);
   },
@@ -562,6 +828,24 @@ export const BytesValue = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<BytesValue>): BytesValue {
+    const message = createBaseBytesValue();
+    message.value = object.value ?? new Uint8Array();
+    return message;
+  },
+  fromAmino(object: BytesValueAmino): BytesValue {
+    return {
+      value: object.value
+    };
+  },
+  toAmino(message: BytesValue): BytesValueAmino {
+    const obj: any = {};
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: BytesValueAminoMsg): BytesValue {
+    return BytesValue.fromAmino(object.value);
   },
   fromProtoMsg(message: BytesValueProtoMsg): BytesValue {
     return BytesValue.decode(message.value);

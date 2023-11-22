@@ -1,7 +1,8 @@
-import { Deployment, DeploymentSDKType } from "./deployment";
-import { Group, GroupSDKType } from "./group";
-import { Params, ParamsSDKType } from "./params";
+import { Deployment, DeploymentAmino, DeploymentSDKType } from "./deployment";
+import { Group, GroupAmino, GroupSDKType } from "./group";
+import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { Exact } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeployment {
@@ -11,6 +12,15 @@ export interface GenesisDeployment {
 export interface GenesisDeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.GenesisDeployment";
   value: Uint8Array;
+}
+/** GenesisDeployment defines the basic genesis state used by deployment module */
+export interface GenesisDeploymentAmino {
+  deployment?: DeploymentAmino | undefined;
+  groups: GroupAmino[];
+}
+export interface GenesisDeploymentAminoMsg {
+  type: "/akash.deployment.v1beta1.GenesisDeployment";
+  value: GenesisDeploymentAmino;
 }
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeploymentSDKType {
@@ -25,6 +35,15 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState stores slice of genesis deployment instance */
+export interface GenesisStateAmino {
+  deployments: GenesisDeploymentAmino[];
+  params?: ParamsAmino | undefined;
+}
+export interface GenesisStateAminoMsg {
+  type: "/akash.deployment.v1beta1.GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateSDKType {
@@ -66,6 +85,14 @@ export const GenesisDeployment = {
           break;
       }
     }
+    return message;
+  },
+  fromPartial<I extends Exact<Partial<GenesisDeployment>, I>>(object: I): GenesisDeployment {
+    const message = createBaseGenesisDeployment();
+    if (object.deployment !== undefined && object.deployment !== null) {
+      message.deployment = Deployment.fromPartial(object.deployment);
+    }
+    message.groups = object.groups?.map(e => Group.fromPartial(e)) || [];
     return message;
   },
   fromProtoMsg(message: GenesisDeploymentProtoMsg): GenesisDeployment {
@@ -115,6 +142,14 @@ export const GenesisState = {
           reader.skipType(tag & 7);
           break;
       }
+    }
+    return message;
+  },
+  fromPartial<I extends Exact<Partial<GenesisState>, I>>(object: I): GenesisState {
+    const message = createBaseGenesisState();
+    message.deployments = object.deployments?.map(e => GenesisDeployment.fromPartial(e)) || [];
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
     }
     return message;
   },

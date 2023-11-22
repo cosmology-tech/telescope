@@ -1,5 +1,6 @@
-import { ExponentialCalculation, ExponentialCalculationSDKType, InflationDistribution, InflationDistributionSDKType } from "./inflation";
+import { ExponentialCalculation, ExponentialCalculationAmino, ExponentialCalculationSDKType, InflationDistribution, InflationDistributionAmino, InflationDistributionSDKType } from "./inflation";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.inflation.v1";
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisState {
@@ -17,6 +18,23 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.inflation.v1.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState defines the inflation module's genesis state. */
+export interface GenesisStateAmino {
+  /** params defines all the paramaters of the module. */
+  params?: ParamsAmino;
+  /** amount of past periods, based on the epochs per period param */
+  period: string;
+  /** inflation epoch identifier */
+  epoch_identifier: string;
+  /** number of epochs after which inflation is recalculated */
+  epochs_per_period: string;
+  /** number of epochs that have passed while inflation is disabled */
+  skipped_epochs: string;
+}
+export interface GenesisStateAminoMsg {
+  type: "/evmos.inflation.v1.GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisStateSDKType {
@@ -40,6 +58,21 @@ export interface Params {
 export interface ParamsProtoMsg {
   typeUrl: "/evmos.inflation.v1.Params";
   value: Uint8Array;
+}
+/** Params holds parameters for the inflation module. */
+export interface ParamsAmino {
+  /** type of coin to mint */
+  mint_denom: string;
+  /** variables to calculate exponential inflation */
+  exponential_calculation?: ExponentialCalculationAmino;
+  /** inflation distribution of the minted denom */
+  inflation_distribution?: InflationDistributionAmino;
+  /** parameter to enable inflation and halt increasing the skipped_epochs */
+  enable_inflation: boolean;
+}
+export interface ParamsAminoMsg {
+  type: "/evmos.inflation.v1.Params";
+  value: ParamsAmino;
 }
 /** Params holds parameters for the inflation module. */
 export interface ParamsSDKType {
@@ -106,6 +139,44 @@ export const GenesisState = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
+    if (object.period !== undefined && object.period !== null) {
+      message.period = BigInt(object.period.toString());
+    }
+    message.epochIdentifier = object.epochIdentifier ?? "";
+    if (object.epochsPerPeriod !== undefined && object.epochsPerPeriod !== null) {
+      message.epochsPerPeriod = BigInt(object.epochsPerPeriod.toString());
+    }
+    if (object.skippedEpochs !== undefined && object.skippedEpochs !== null) {
+      message.skippedEpochs = BigInt(object.skippedEpochs.toString());
+    }
+    return message;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      period: BigInt(object.period),
+      epochIdentifier: object.epoch_identifier,
+      epochsPerPeriod: BigInt(object.epochs_per_period),
+      skippedEpochs: BigInt(object.skipped_epochs)
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.period = message.period ? message.period.toString() : undefined;
+    obj.epoch_identifier = message.epochIdentifier;
+    obj.epochs_per_period = message.epochsPerPeriod ? message.epochsPerPeriod.toString() : undefined;
+    obj.skipped_epochs = message.skippedEpochs ? message.skippedEpochs.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
   },
@@ -169,6 +240,37 @@ export const Params = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<Params>): Params {
+    const message = createBaseParams();
+    message.mintDenom = object.mintDenom ?? "";
+    if (object.exponentialCalculation !== undefined && object.exponentialCalculation !== null) {
+      message.exponentialCalculation = ExponentialCalculation.fromPartial(object.exponentialCalculation);
+    }
+    if (object.inflationDistribution !== undefined && object.inflationDistribution !== null) {
+      message.inflationDistribution = InflationDistribution.fromPartial(object.inflationDistribution);
+    }
+    message.enableInflation = object.enableInflation ?? false;
+    return message;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      mintDenom: object.mint_denom,
+      exponentialCalculation: object?.exponential_calculation ? ExponentialCalculation.fromAmino(object.exponential_calculation) : undefined,
+      inflationDistribution: object?.inflation_distribution ? InflationDistribution.fromAmino(object.inflation_distribution) : undefined,
+      enableInflation: object.enable_inflation
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.mint_denom = message.mintDenom;
+    obj.exponential_calculation = message.exponentialCalculation ? ExponentialCalculation.toAmino(message.exponentialCalculation) : undefined;
+    obj.inflation_distribution = message.inflationDistribution ? InflationDistribution.toAmino(message.inflationDistribution) : undefined;
+    obj.enable_inflation = message.enableInflation;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

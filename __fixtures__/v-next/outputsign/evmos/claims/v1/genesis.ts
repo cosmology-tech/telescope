@@ -1,8 +1,8 @@
-import { ClaimsRecordAddress, ClaimsRecordAddressSDKType } from "./claims";
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { ClaimsRecordAddress, ClaimsRecordAddressAmino, ClaimsRecordAddressSDKType } from "./claims";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp } from "../../../helpers";
+import { DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "evmos.claims.v1";
 /** GenesisState define the claims module's genesis state. */
 export interface GenesisState {
@@ -14,6 +14,17 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.claims.v1.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState define the claims module's genesis state. */
+export interface GenesisStateAmino {
+  /** params defines all the parameters of the module. */
+  params?: ParamsAmino;
+  /** list of claim records with the corresponding airdrop recipient */
+  claims_records: ClaimsRecordAddressAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "/evmos.claims.v1.GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState define the claims module's genesis state. */
 export interface GenesisStateSDKType {
@@ -43,6 +54,30 @@ export interface Params {
 export interface ParamsProtoMsg {
   typeUrl: "/evmos.claims.v1.Params";
   value: Uint8Array;
+}
+/** Params defines the claims module's parameters. */
+export interface ParamsAmino {
+  /** enable claiming process */
+  enable_claims: boolean;
+  /** timestamp of the airdrop start */
+  airdrop_start_time?: string;
+  /** duration until decay of claimable tokens begin */
+  duration_until_decay?: DurationAmino;
+  /** duration of the token claim decay period */
+  duration_of_decay?: DurationAmino;
+  /** denom of claimable coin */
+  claims_denom: string;
+  /**
+   * list of authorized channel identifiers that can perform address
+   * attestations via IBC.
+   */
+  authorized_channels: string[];
+  /** list of channel identifiers from EVM compatible chains */
+  evm_channels: string[];
+}
+export interface ParamsAminoMsg {
+  type: "/evmos.claims.v1.Params";
+  value: ParamsAmino;
 }
 /** Params defines the claims module's parameters. */
 export interface ParamsSDKType {
@@ -90,6 +125,33 @@ export const GenesisState = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
+    message.claimsRecords = object.claimsRecords?.map(e => ClaimsRecordAddress.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      claimsRecords: Array.isArray(object?.claims_records) ? object.claims_records.map((e: any) => ClaimsRecordAddress.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    if (message.claimsRecords) {
+      obj.claims_records = message.claimsRecords.map(e => e ? ClaimsRecordAddress.toAmino(e) : undefined);
+    } else {
+      obj.claims_records = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);
@@ -175,6 +237,54 @@ export const Params = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<Params>): Params {
+    const message = createBaseParams();
+    message.enableClaims = object.enableClaims ?? false;
+    message.airdropStartTime = object.airdropStartTime ?? undefined;
+    if (object.durationUntilDecay !== undefined && object.durationUntilDecay !== null) {
+      message.durationUntilDecay = Duration.fromPartial(object.durationUntilDecay);
+    }
+    if (object.durationOfDecay !== undefined && object.durationOfDecay !== null) {
+      message.durationOfDecay = Duration.fromPartial(object.durationOfDecay);
+    }
+    message.claimsDenom = object.claimsDenom ?? "";
+    message.authorizedChannels = object.authorizedChannels?.map(e => e) || [];
+    message.evmChannels = object.evmChannels?.map(e => e) || [];
+    return message;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      enableClaims: object.enable_claims,
+      airdropStartTime: object?.airdrop_start_time ? fromTimestamp(Timestamp.fromAmino(object.airdrop_start_time)) : undefined,
+      durationUntilDecay: object?.duration_until_decay ? Duration.fromAmino(object.duration_until_decay) : undefined,
+      durationOfDecay: object?.duration_of_decay ? Duration.fromAmino(object.duration_of_decay) : undefined,
+      claimsDenom: object.claims_denom,
+      authorizedChannels: Array.isArray(object?.authorized_channels) ? object.authorized_channels.map((e: any) => e) : [],
+      evmChannels: Array.isArray(object?.evm_channels) ? object.evm_channels.map((e: any) => e) : []
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.enable_claims = message.enableClaims;
+    obj.airdrop_start_time = message.airdropStartTime ? Timestamp.toAmino(toTimestamp(message.airdropStartTime)) : undefined;
+    obj.duration_until_decay = message.durationUntilDecay ? Duration.toAmino(message.durationUntilDecay) : undefined;
+    obj.duration_of_decay = message.durationOfDecay ? Duration.toAmino(message.durationOfDecay) : undefined;
+    obj.claims_denom = message.claimsDenom;
+    if (message.authorizedChannels) {
+      obj.authorized_channels = message.authorizedChannels.map(e => e);
+    } else {
+      obj.authorized_channels = [];
+    }
+    if (message.evmChannels) {
+      obj.evm_channels = message.evmChannels.map(e => e);
+    } else {
+      obj.evm_channels = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial, Exact, isSet } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta1";
 /** This describes how the endpoint is implemented when the lease is deployed */
 export enum Endpoint_Kind {
@@ -9,6 +10,7 @@ export enum Endpoint_Kind {
   UNRECOGNIZED = -1,
 }
 export const Endpoint_KindSDKType = Endpoint_Kind;
+export const Endpoint_KindAmino = Endpoint_Kind;
 export function endpoint_KindFromJSON(object: any): Endpoint_Kind {
   switch (object) {
     case 0:
@@ -43,6 +45,14 @@ export interface EndpointProtoMsg {
   value: Uint8Array;
 }
 /** Endpoint describes a publicly accessible IP service */
+export interface EndpointAmino {
+  kind: Endpoint_Kind;
+}
+export interface EndpointAminoMsg {
+  type: "/akash.base.v1beta1.Endpoint";
+  value: EndpointAmino;
+}
+/** Endpoint describes a publicly accessible IP service */
 export interface EndpointSDKType {
   kind: Endpoint_Kind;
 }
@@ -75,6 +85,24 @@ export const Endpoint = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<Endpoint>, I>>(object: I): Endpoint {
+    const message = createBaseEndpoint();
+    message.kind = object.kind ?? 0;
+    return message;
+  },
+  fromAmino(object: EndpointAmino): Endpoint {
+    return {
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1
+    };
+  },
+  toAmino(message: Endpoint): EndpointAmino {
+    const obj: any = {};
+    obj.kind = message.kind;
+    return obj;
+  },
+  fromAminoMsg(object: EndpointAminoMsg): Endpoint {
+    return Endpoint.fromAmino(object.value);
   },
   fromProtoMsg(message: EndpointProtoMsg): Endpoint {
     return Endpoint.decode(message.value);

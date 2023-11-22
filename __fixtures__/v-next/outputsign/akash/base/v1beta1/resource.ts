@@ -1,7 +1,8 @@
-import { ResourceValue, ResourceValueSDKType } from "./resourcevalue";
-import { Attribute, AttributeSDKType } from "./attribute";
-import { Endpoint, EndpointSDKType } from "./endpoint";
+import { ResourceValue, ResourceValueAmino, ResourceValueSDKType } from "./resourcevalue";
+import { Attribute, AttributeAmino, AttributeSDKType } from "./attribute";
+import { Endpoint, EndpointAmino, EndpointSDKType } from "./endpoint";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta1";
 /** CPU stores resource units and cpu config attributes */
 export interface CPU {
@@ -11,6 +12,15 @@ export interface CPU {
 export interface CPUProtoMsg {
   typeUrl: "/akash.base.v1beta1.CPU";
   value: Uint8Array;
+}
+/** CPU stores resource units and cpu config attributes */
+export interface CPUAmino {
+  units?: ResourceValueAmino;
+  attributes: AttributeAmino[];
+}
+export interface CPUAminoMsg {
+  type: "/akash.base.v1beta1.CPU";
+  value: CPUAmino;
 }
 /** CPU stores resource units and cpu config attributes */
 export interface CPUSDKType {
@@ -27,6 +37,15 @@ export interface MemoryProtoMsg {
   value: Uint8Array;
 }
 /** Memory stores resource quantity and memory attributes */
+export interface MemoryAmino {
+  quantity?: ResourceValueAmino;
+  attributes: AttributeAmino[];
+}
+export interface MemoryAminoMsg {
+  type: "/akash.base.v1beta1.Memory";
+  value: MemoryAmino;
+}
+/** Memory stores resource quantity and memory attributes */
 export interface MemorySDKType {
   quantity: ResourceValueSDKType;
   attributes: AttributeSDKType[];
@@ -39,6 +58,15 @@ export interface Storage {
 export interface StorageProtoMsg {
   typeUrl: "/akash.base.v1beta1.Storage";
   value: Uint8Array;
+}
+/** Storage stores resource quantity and storage attributes */
+export interface StorageAmino {
+  quantity?: ResourceValueAmino;
+  attributes: AttributeAmino[];
+}
+export interface StorageAminoMsg {
+  type: "/akash.base.v1beta1.Storage";
+  value: StorageAmino;
 }
 /** Storage stores resource quantity and storage attributes */
 export interface StorageSDKType {
@@ -58,6 +86,20 @@ export interface ResourceUnits {
 export interface ResourceUnitsProtoMsg {
   typeUrl: "/akash.base.v1beta1.ResourceUnits";
   value: Uint8Array;
+}
+/**
+ * ResourceUnits describes all available resources types for deployment/node etc
+ * if field is nil resource is not present in the given data-structure
+ */
+export interface ResourceUnitsAmino {
+  cpu?: CPUAmino;
+  memory?: MemoryAmino;
+  storage?: StorageAmino;
+  endpoints: EndpointAmino[];
+}
+export interface ResourceUnitsAminoMsg {
+  type: "/akash.base.v1beta1.ResourceUnits";
+  value: ResourceUnitsAmino;
 }
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
@@ -105,6 +147,33 @@ export const CPU = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<CPU>, I>>(object: I): CPU {
+    const message = createBaseCPU();
+    if (object.units !== undefined && object.units !== null) {
+      message.units = ResourceValue.fromPartial(object.units);
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: CPUAmino): CPU {
+    return {
+      units: object?.units ? ResourceValue.fromAmino(object.units) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: CPU): CPUAmino {
+    const obj: any = {};
+    obj.units = message.units ? ResourceValue.toAmino(message.units) : undefined;
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: CPUAminoMsg): CPU {
+    return CPU.fromAmino(object.value);
   },
   fromProtoMsg(message: CPUProtoMsg): CPU {
     return CPU.decode(message.value);
@@ -156,6 +225,33 @@ export const Memory = {
     }
     return message;
   },
+  fromPartial<I extends Exact<DeepPartial<Memory>, I>>(object: I): Memory {
+    const message = createBaseMemory();
+    if (object.quantity !== undefined && object.quantity !== null) {
+      message.quantity = ResourceValue.fromPartial(object.quantity);
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: MemoryAmino): Memory {
+    return {
+      quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Memory): MemoryAmino {
+    const obj: any = {};
+    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity) : undefined;
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MemoryAminoMsg): Memory {
+    return Memory.fromAmino(object.value);
+  },
   fromProtoMsg(message: MemoryProtoMsg): Memory {
     return Memory.decode(message.value);
   },
@@ -205,6 +301,33 @@ export const Storage = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<Storage>, I>>(object: I): Storage {
+    const message = createBaseStorage();
+    if (object.quantity !== undefined && object.quantity !== null) {
+      message.quantity = ResourceValue.fromPartial(object.quantity);
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: StorageAmino): Storage {
+    return {
+      quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : undefined,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: Storage): StorageAmino {
+    const obj: any = {};
+    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity) : undefined;
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: StorageAminoMsg): Storage {
+    return Storage.fromAmino(object.value);
   },
   fromProtoMsg(message: StorageProtoMsg): Storage {
     return Storage.decode(message.value);
@@ -269,6 +392,43 @@ export const ResourceUnits = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<ResourceUnits>, I>>(object: I): ResourceUnits {
+    const message = createBaseResourceUnits();
+    if (object.cpu !== undefined && object.cpu !== null) {
+      message.cpu = CPU.fromPartial(object.cpu);
+    }
+    if (object.memory !== undefined && object.memory !== null) {
+      message.memory = Memory.fromPartial(object.memory);
+    }
+    if (object.storage !== undefined && object.storage !== null) {
+      message.storage = Storage.fromPartial(object.storage);
+    }
+    message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: ResourceUnitsAmino): ResourceUnits {
+    return {
+      cpu: object?.cpu ? CPU.fromAmino(object.cpu) : undefined,
+      memory: object?.memory ? Memory.fromAmino(object.memory) : undefined,
+      storage: object?.storage ? Storage.fromAmino(object.storage) : undefined,
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: ResourceUnits): ResourceUnitsAmino {
+    const obj: any = {};
+    obj.cpu = message.cpu ? CPU.toAmino(message.cpu) : undefined;
+    obj.memory = message.memory ? Memory.toAmino(message.memory) : undefined;
+    obj.storage = message.storage ? Storage.toAmino(message.storage) : undefined;
+    if (message.endpoints) {
+      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
+    } else {
+      obj.endpoints = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ResourceUnitsAminoMsg): ResourceUnits {
+    return ResourceUnits.fromAmino(object.value);
   },
   fromProtoMsg(message: ResourceUnitsProtoMsg): ResourceUnits {
     return ResourceUnits.decode(message.value);

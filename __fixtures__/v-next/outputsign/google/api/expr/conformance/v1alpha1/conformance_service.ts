@@ -1,8 +1,9 @@
-import { ParsedExpr, ParsedExprSDKType, SourcePosition, SourcePositionSDKType } from "../../v1alpha1/syntax";
-import { Decl, DeclSDKType, CheckedExpr, CheckedExprSDKType } from "../../v1alpha1/checked";
-import { ExprValue, ExprValueSDKType } from "../../v1alpha1/eval";
-import { Status, StatusSDKType } from "../../../../rpc/status";
+import { ParsedExpr, ParsedExprAmino, ParsedExprSDKType, SourcePosition, SourcePositionAmino, SourcePositionSDKType } from "../../v1alpha1/syntax";
+import { Decl, DeclAmino, DeclSDKType, CheckedExpr, CheckedExprAmino, CheckedExprSDKType } from "../../v1alpha1/checked";
+import { ExprValue, ExprValueAmino, ExprValueSDKType } from "../../v1alpha1/eval";
+import { Status, StatusAmino, StatusSDKType } from "../../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../../binary";
+import { DeepPartial, isObject, isSet } from "../../../../../helpers";
 export const protobufPackage = "google.api.expr.conformance.v1alpha1";
 /** Severities of issues. */
 export enum IssueDetails_Severity {
@@ -20,6 +21,7 @@ export enum IssueDetails_Severity {
   UNRECOGNIZED = -1,
 }
 export const IssueDetails_SeveritySDKType = IssueDetails_Severity;
+export const IssueDetails_SeverityAmino = IssueDetails_Severity;
 export function issueDetails_SeverityFromJSON(object: any): IssueDetails_Severity {
   switch (object) {
     case 0:
@@ -71,6 +73,21 @@ export interface ParseRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the Parse method. */
+export interface ParseRequestAmino {
+  /** Required. Source text in CEL syntax. */
+  cel_source: string;
+  /** Tag for version of CEL syntax, for future use. */
+  syntax_version: string;
+  /** File or resource for source text, used in [SourceInfo][google.api.SourceInfo]. */
+  source_location: string;
+  /** Prevent macro expansion.  See "Macros" in Language Defiinition. */
+  disable_macros: boolean;
+}
+export interface ParseRequestAminoMsg {
+  type: "/google.api.expr.conformance.v1alpha1.ParseRequest";
+  value: ParseRequestAmino;
+}
+/** Request message for the Parse method. */
 export interface ParseRequestSDKType {
   cel_source: string;
   syntax_version: string;
@@ -87,6 +104,17 @@ export interface ParseResponse {
 export interface ParseResponseProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.ParseResponse";
   value: Uint8Array;
+}
+/** Response message for the Parse method. */
+export interface ParseResponseAmino {
+  /** The parsed representation, or unset if parsing failed. */
+  parsed_expr?: ParsedExprAmino;
+  /** Any number of issues with [StatusDetails][] as the details. */
+  issues: StatusAmino[];
+}
+export interface ParseResponseAminoMsg {
+  type: "/google.api.expr.conformance.v1alpha1.ParseResponse";
+  value: ParseResponseAmino;
 }
 /** Response message for the Parse method. */
 export interface ParseResponseSDKType {
@@ -120,6 +148,32 @@ export interface CheckRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the Check method. */
+export interface CheckRequestAmino {
+  /** Required. The parsed representation of the CEL program. */
+  parsed_expr?: ParsedExprAmino;
+  /**
+   * Declarations of types for external variables and functions.
+   * Required if program uses external variables or functions
+   * not in the default environment.
+   */
+  type_env: DeclAmino[];
+  /**
+   * The protocol buffer context.  See "Name Resolution" in the
+   * Language Definition.
+   */
+  container: string;
+  /**
+   * If true, use only the declarations in [type_env][google.api.expr.conformance.v1alpha1.CheckRequest.type_env].  If false (default),
+   * add declarations for the standard definitions to the type environment.  See
+   * "Standard Definitions" in the Language Definition.
+   */
+  no_std_env: boolean;
+}
+export interface CheckRequestAminoMsg {
+  type: "/google.api.expr.conformance.v1alpha1.CheckRequest";
+  value: CheckRequestAmino;
+}
+/** Request message for the Check method. */
 export interface CheckRequestSDKType {
   parsed_expr?: ParsedExprSDKType;
   type_env: DeclSDKType[];
@@ -138,6 +192,17 @@ export interface CheckResponseProtoMsg {
   value: Uint8Array;
 }
 /** Response message for the Check method. */
+export interface CheckResponseAmino {
+  /** The annotated representation, or unset if checking failed. */
+  checked_expr?: CheckedExprAmino;
+  /** Any number of issues with [StatusDetails][] as the details. */
+  issues: StatusAmino[];
+}
+export interface CheckResponseAminoMsg {
+  type: "/google.api.expr.conformance.v1alpha1.CheckResponse";
+  value: CheckResponseAmino;
+}
+/** Response message for the Check method. */
 export interface CheckResponseSDKType {
   checked_expr?: CheckedExprSDKType;
   issues: StatusSDKType[];
@@ -149,6 +214,14 @@ export interface EvalRequest_BindingsEntry {
 export interface EvalRequest_BindingsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
+}
+export interface EvalRequest_BindingsEntryAmino {
+  key: string;
+  value?: ExprValueAmino;
+}
+export interface EvalRequest_BindingsEntryAminoMsg {
+  type: string;
+  value: EvalRequest_BindingsEntryAmino;
 }
 export interface EvalRequest_BindingsEntrySDKType {
   key: string;
@@ -173,6 +246,26 @@ export interface EvalRequest {
 export interface EvalRequestProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.EvalRequest";
   value: Uint8Array;
+}
+/** Request message for the Eval method. */
+export interface EvalRequestAmino {
+  /** Evaluate based on the parsed representation. */
+  parsed_expr?: ParsedExprAmino;
+  /** Evaluate based on the checked representation. */
+  checked_expr?: CheckedExprAmino;
+  /**
+   * Bindings for the external variables.  The types SHOULD be compatible
+   * with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
+   */
+  bindings?: {
+    [key: string]: ExprValueAmino;
+  };
+  /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
+  container: string;
+}
+export interface EvalRequestAminoMsg {
+  type: "/google.api.expr.conformance.v1alpha1.EvalRequest";
+  value: EvalRequestAmino;
 }
 /** Request message for the Eval method. */
 export interface EvalRequestSDKType {
@@ -200,6 +293,22 @@ export interface EvalResponseProtoMsg {
   value: Uint8Array;
 }
 /** Response message for the Eval method. */
+export interface EvalResponseAmino {
+  /** The execution result, or unset if execution couldn't start. */
+  result?: ExprValueAmino;
+  /**
+   * Any number of issues with [StatusDetails][] as the details.
+   * Note that CEL execution errors are reified into [ExprValue][].
+   * Nevertheless, we'll allow out-of-band issues to be raised,
+   * which also makes the replies more regular.
+   */
+  issues: StatusAmino[];
+}
+export interface EvalResponseAminoMsg {
+  type: "/google.api.expr.conformance.v1alpha1.EvalResponse";
+  value: EvalResponseAmino;
+}
+/** Response message for the Eval method. */
 export interface EvalResponseSDKType {
   result?: ExprValueSDKType;
   issues: StatusSDKType[];
@@ -220,6 +329,23 @@ export interface IssueDetails {
 export interface IssueDetailsProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.IssueDetails";
   value: Uint8Array;
+}
+/**
+ * Warnings or errors in service execution are represented by
+ * [google.rpc.Status][google.rpc.Status] messages, with the following message
+ * in the details field.
+ */
+export interface IssueDetailsAmino {
+  /** The severity of the issue. */
+  severity: IssueDetails_Severity;
+  /** Position in the source, if known. */
+  position?: SourcePositionAmino;
+  /** Expression ID from [Expr][], 0 if unknown. */
+  id: string;
+}
+export interface IssueDetailsAminoMsg {
+  type: "/google.api.expr.conformance.v1alpha1.IssueDetails";
+  value: IssueDetailsAmino;
 }
 /**
  * Warnings or errors in service execution are represented by
@@ -282,6 +408,33 @@ export const ParseRequest = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<ParseRequest>): ParseRequest {
+    const message = createBaseParseRequest();
+    message.celSource = object.celSource ?? "";
+    message.syntaxVersion = object.syntaxVersion ?? "";
+    message.sourceLocation = object.sourceLocation ?? "";
+    message.disableMacros = object.disableMacros ?? false;
+    return message;
+  },
+  fromAmino(object: ParseRequestAmino): ParseRequest {
+    return {
+      celSource: object.cel_source,
+      syntaxVersion: object.syntax_version,
+      sourceLocation: object.source_location,
+      disableMacros: object.disable_macros
+    };
+  },
+  toAmino(message: ParseRequest): ParseRequestAmino {
+    const obj: any = {};
+    obj.cel_source = message.celSource;
+    obj.syntax_version = message.syntaxVersion;
+    obj.source_location = message.sourceLocation;
+    obj.disable_macros = message.disableMacros;
+    return obj;
+  },
+  fromAminoMsg(object: ParseRequestAminoMsg): ParseRequest {
+    return ParseRequest.fromAmino(object.value);
+  },
   fromProtoMsg(message: ParseRequestProtoMsg): ParseRequest {
     return ParseRequest.decode(message.value);
   },
@@ -331,6 +484,33 @@ export const ParseResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<ParseResponse>): ParseResponse {
+    const message = createBaseParseResponse();
+    if (object.parsedExpr !== undefined && object.parsedExpr !== null) {
+      message.parsedExpr = ParsedExpr.fromPartial(object.parsedExpr);
+    }
+    message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: ParseResponseAmino): ParseResponse {
+    return {
+      parsedExpr: object?.parsed_expr ? ParsedExpr.fromAmino(object.parsed_expr) : undefined,
+      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: ParseResponse): ParseResponseAmino {
+    const obj: any = {};
+    obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr) : undefined;
+    if (message.issues) {
+      obj.issues = message.issues.map(e => e ? Status.toAmino(e) : undefined);
+    } else {
+      obj.issues = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ParseResponseAminoMsg): ParseResponse {
+    return ParseResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: ParseResponseProtoMsg): ParseResponse {
     return ParseResponse.decode(message.value);
@@ -396,6 +576,39 @@ export const CheckRequest = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
+    const message = createBaseCheckRequest();
+    if (object.parsedExpr !== undefined && object.parsedExpr !== null) {
+      message.parsedExpr = ParsedExpr.fromPartial(object.parsedExpr);
+    }
+    message.typeEnv = object.typeEnv?.map(e => Decl.fromPartial(e)) || [];
+    message.container = object.container ?? "";
+    message.noStdEnv = object.noStdEnv ?? false;
+    return message;
+  },
+  fromAmino(object: CheckRequestAmino): CheckRequest {
+    return {
+      parsedExpr: object?.parsed_expr ? ParsedExpr.fromAmino(object.parsed_expr) : undefined,
+      typeEnv: Array.isArray(object?.type_env) ? object.type_env.map((e: any) => Decl.fromAmino(e)) : [],
+      container: object.container,
+      noStdEnv: object.no_std_env
+    };
+  },
+  toAmino(message: CheckRequest): CheckRequestAmino {
+    const obj: any = {};
+    obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr) : undefined;
+    if (message.typeEnv) {
+      obj.type_env = message.typeEnv.map(e => e ? Decl.toAmino(e) : undefined);
+    } else {
+      obj.type_env = [];
+    }
+    obj.container = message.container;
+    obj.no_std_env = message.noStdEnv;
+    return obj;
+  },
+  fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
+    return CheckRequest.fromAmino(object.value);
+  },
   fromProtoMsg(message: CheckRequestProtoMsg): CheckRequest {
     return CheckRequest.decode(message.value);
   },
@@ -446,6 +659,33 @@ export const CheckResponse = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<CheckResponse>): CheckResponse {
+    const message = createBaseCheckResponse();
+    if (object.checkedExpr !== undefined && object.checkedExpr !== null) {
+      message.checkedExpr = CheckedExpr.fromPartial(object.checkedExpr);
+    }
+    message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: CheckResponseAmino): CheckResponse {
+    return {
+      checkedExpr: object?.checked_expr ? CheckedExpr.fromAmino(object.checked_expr) : undefined,
+      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: CheckResponse): CheckResponseAmino {
+    const obj: any = {};
+    obj.checked_expr = message.checkedExpr ? CheckedExpr.toAmino(message.checkedExpr) : undefined;
+    if (message.issues) {
+      obj.issues = message.issues.map(e => e ? Status.toAmino(e) : undefined);
+    } else {
+      obj.issues = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: CheckResponseAminoMsg): CheckResponse {
+    return CheckResponse.fromAmino(object.value);
+  },
   fromProtoMsg(message: CheckResponseProtoMsg): CheckResponse {
     return CheckResponse.decode(message.value);
   },
@@ -494,6 +734,29 @@ export const EvalRequest_BindingsEntry = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<EvalRequest_BindingsEntry>): EvalRequest_BindingsEntry {
+    const message = createBaseEvalRequest_BindingsEntry();
+    message.key = object.key ?? "";
+    if (object.value !== undefined && object.value !== null) {
+      message.value = ExprValue.fromPartial(object.value);
+    }
+    return message;
+  },
+  fromAmino(object: EvalRequest_BindingsEntryAmino): EvalRequest_BindingsEntry {
+    return {
+      key: object.key,
+      value: object?.value ? ExprValue.fromAmino(object.value) : undefined
+    };
+  },
+  toAmino(message: EvalRequest_BindingsEntry): EvalRequest_BindingsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value ? ExprValue.toAmino(message.value) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: EvalRequest_BindingsEntryAminoMsg): EvalRequest_BindingsEntry {
+    return EvalRequest_BindingsEntry.fromAmino(object.value);
   },
   fromProtoMsg(message: EvalRequest_BindingsEntryProtoMsg): EvalRequest_BindingsEntry {
     return EvalRequest_BindingsEntry.decode(message.value);
@@ -559,6 +822,54 @@ export const EvalRequest = {
     }
     return message;
   },
+  fromPartial(object: DeepPartial<EvalRequest>): EvalRequest {
+    const message = createBaseEvalRequest();
+    if (object.parsedExpr !== undefined && object.parsedExpr !== null) {
+      message.parsedExpr = ParsedExpr.fromPartial(object.parsedExpr);
+    }
+    if (object.checkedExpr !== undefined && object.checkedExpr !== null) {
+      message.checkedExpr = CheckedExpr.fromPartial(object.checkedExpr);
+    }
+    message.bindings = Object.entries(object.bindings ?? {}).reduce<{
+      [key: string]: ExprValue;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = ExprValue.fromPartial(value);
+      }
+      return acc;
+    }, {});
+    message.container = object.container ?? "";
+    return message;
+  },
+  fromAmino(object: EvalRequestAmino): EvalRequest {
+    return {
+      parsedExpr: object?.parsed_expr ? ParsedExpr.fromAmino(object.parsed_expr) : undefined,
+      checkedExpr: object?.checked_expr ? CheckedExpr.fromAmino(object.checked_expr) : undefined,
+      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
+        [key: string]: ExprValue;
+      }>((acc, [key, value]) => {
+        acc[key] = ExprValue.fromAmino(value);
+        return acc;
+      }, {}) : {},
+      container: object.container
+    };
+  },
+  toAmino(message: EvalRequest): EvalRequestAmino {
+    const obj: any = {};
+    obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr) : undefined;
+    obj.checked_expr = message.checkedExpr ? CheckedExpr.toAmino(message.checkedExpr) : undefined;
+    obj.bindings = {};
+    if (message.bindings) {
+      Object.entries(message.bindings).forEach(([k, v]) => {
+        obj.bindings[k] = ExprValue.toAmino(v);
+      });
+    }
+    obj.container = message.container;
+    return obj;
+  },
+  fromAminoMsg(object: EvalRequestAminoMsg): EvalRequest {
+    return EvalRequest.fromAmino(object.value);
+  },
   fromProtoMsg(message: EvalRequestProtoMsg): EvalRequest {
     return EvalRequest.decode(message.value);
   },
@@ -608,6 +919,33 @@ export const EvalResponse = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<EvalResponse>): EvalResponse {
+    const message = createBaseEvalResponse();
+    if (object.result !== undefined && object.result !== null) {
+      message.result = ExprValue.fromPartial(object.result);
+    }
+    message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: EvalResponseAmino): EvalResponse {
+    return {
+      result: object?.result ? ExprValue.fromAmino(object.result) : undefined,
+      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromAmino(e)) : []
+    };
+  },
+  toAmino(message: EvalResponse): EvalResponseAmino {
+    const obj: any = {};
+    obj.result = message.result ? ExprValue.toAmino(message.result) : undefined;
+    if (message.issues) {
+      obj.issues = message.issues.map(e => e ? Status.toAmino(e) : undefined);
+    } else {
+      obj.issues = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: EvalResponseAminoMsg): EvalResponse {
+    return EvalResponse.fromAmino(object.value);
   },
   fromProtoMsg(message: EvalResponseProtoMsg): EvalResponse {
     return EvalResponse.decode(message.value);
@@ -665,6 +1003,34 @@ export const IssueDetails = {
       }
     }
     return message;
+  },
+  fromPartial(object: DeepPartial<IssueDetails>): IssueDetails {
+    const message = createBaseIssueDetails();
+    message.severity = object.severity ?? 0;
+    if (object.position !== undefined && object.position !== null) {
+      message.position = SourcePosition.fromPartial(object.position);
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id.toString());
+    }
+    return message;
+  },
+  fromAmino(object: IssueDetailsAmino): IssueDetails {
+    return {
+      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : -1,
+      position: object?.position ? SourcePosition.fromAmino(object.position) : undefined,
+      id: BigInt(object.id)
+    };
+  },
+  toAmino(message: IssueDetails): IssueDetailsAmino {
+    const obj: any = {};
+    obj.severity = message.severity;
+    obj.position = message.position ? SourcePosition.toAmino(message.position) : undefined;
+    obj.id = message.id ? message.id.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: IssueDetailsAminoMsg): IssueDetails {
+    return IssueDetails.fromAmino(object.value);
   },
   fromProtoMsg(message: IssueDetailsProtoMsg): IssueDetails {
     return IssueDetails.decode(message.value);

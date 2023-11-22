@@ -1,5 +1,6 @@
-import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { DecCoin, DecCoinAmino, DecCoinSDKType, Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial, Exact, isSet } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta2";
 /** State stores state for an escrow account */
 export enum Account_State {
@@ -14,6 +15,7 @@ export enum Account_State {
   UNRECOGNIZED = -1,
 }
 export const Account_StateSDKType = Account_State;
+export const Account_StateAmino = Account_State;
 export function account_StateFromJSON(object: any): Account_State {
   switch (object) {
     case 0:
@@ -62,6 +64,7 @@ export enum FractionalPayment_State {
   UNRECOGNIZED = -1,
 }
 export const FractionalPayment_StateSDKType = FractionalPayment_State;
+export const FractionalPayment_StateAmino = FractionalPayment_State;
 export function fractionalPayment_StateFromJSON(object: any): FractionalPayment_State {
   switch (object) {
     case 0:
@@ -107,6 +110,15 @@ export interface AccountIDProtoMsg {
   value: Uint8Array;
 }
 /** AccountID is the account identifier */
+export interface AccountIDAmino {
+  scope: string;
+  xid: string;
+}
+export interface AccountIDAminoMsg {
+  type: "/akash.escrow.v1beta2.AccountID";
+  value: AccountIDAmino;
+}
+/** AccountID is the account identifier */
 export interface AccountIDSDKType {
   scope: string;
   xid: string;
@@ -142,6 +154,36 @@ export interface AccountProtoMsg {
   value: Uint8Array;
 }
 /** Account stores state for an escrow account */
+export interface AccountAmino {
+  /** unique identifier for this escrow account */
+  id?: AccountIDAmino;
+  /** bech32 encoded account address of the owner of this escrow account */
+  owner: string;
+  /** current state of this escrow account */
+  state: Account_State;
+  /** unspent coins received from the owner's wallet */
+  balance?: DecCoinAmino;
+  /** total coins spent by this account */
+  transferred?: DecCoinAmino;
+  /** block height at which this account was last settled */
+  settled_at: string;
+  /**
+   * bech32 encoded account address of the depositor.
+   * If depositor is same as the owner, then any incoming coins are added to the Balance.
+   * If depositor isn't same as the owner, then any incoming coins are added to the Funds.
+   */
+  depositor: string;
+  /**
+   * Funds are unspent coins received from the (non-Owner) Depositor's wallet.
+   * If there are any funds, they should be spent before spending the Balance.
+   */
+  funds?: DecCoinAmino;
+}
+export interface AccountAminoMsg {
+  type: "/akash.escrow.v1beta2.Account";
+  value: AccountAmino;
+}
+/** Account stores state for an escrow account */
 export interface AccountSDKType {
   id: AccountIDSDKType;
   owner: string;
@@ -165,6 +207,20 @@ export interface FractionalPayment {
 export interface FractionalPaymentProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.FractionalPayment";
   value: Uint8Array;
+}
+/** Payment stores state for a payment */
+export interface FractionalPaymentAmino {
+  account_id?: AccountIDAmino;
+  payment_id: string;
+  owner: string;
+  state: FractionalPayment_State;
+  rate?: DecCoinAmino;
+  balance?: DecCoinAmino;
+  withdrawn?: CoinAmino;
+}
+export interface FractionalPaymentAminoMsg {
+  type: "/akash.escrow.v1beta2.FractionalPayment";
+  value: FractionalPaymentAmino;
 }
 /** Payment stores state for a payment */
 export interface FractionalPaymentSDKType {
@@ -212,6 +268,27 @@ export const AccountID = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<AccountID>, I>>(object: I): AccountID {
+    const message = createBaseAccountID();
+    message.scope = object.scope ?? "";
+    message.xid = object.xid ?? "";
+    return message;
+  },
+  fromAmino(object: AccountIDAmino): AccountID {
+    return {
+      scope: object.scope,
+      xid: object.xid
+    };
+  },
+  toAmino(message: AccountID): AccountIDAmino {
+    const obj: any = {};
+    obj.scope = message.scope;
+    obj.xid = message.xid;
+    return obj;
+  },
+  fromAminoMsg(object: AccountIDAminoMsg): AccountID {
+    return AccountID.fromAmino(object.value);
   },
   fromProtoMsg(message: AccountIDProtoMsg): AccountID {
     return AccountID.decode(message.value);
@@ -305,6 +382,55 @@ export const Account = {
     }
     return message;
   },
+  fromPartial<I extends Exact<DeepPartial<Account>, I>>(object: I): Account {
+    const message = createBaseAccount();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = AccountID.fromPartial(object.id);
+    }
+    message.owner = object.owner ?? "";
+    message.state = object.state ?? 0;
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = DecCoin.fromPartial(object.balance);
+    }
+    if (object.transferred !== undefined && object.transferred !== null) {
+      message.transferred = DecCoin.fromPartial(object.transferred);
+    }
+    if (object.settledAt !== undefined && object.settledAt !== null) {
+      message.settledAt = BigInt(object.settledAt.toString());
+    }
+    message.depositor = object.depositor ?? "";
+    if (object.funds !== undefined && object.funds !== null) {
+      message.funds = DecCoin.fromPartial(object.funds);
+    }
+    return message;
+  },
+  fromAmino(object: AccountAmino): Account {
+    return {
+      id: object?.id ? AccountID.fromAmino(object.id) : undefined,
+      owner: object.owner,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
+      balance: object?.balance ? DecCoin.fromAmino(object.balance) : undefined,
+      transferred: object?.transferred ? DecCoin.fromAmino(object.transferred) : undefined,
+      settledAt: BigInt(object.settled_at),
+      depositor: object.depositor,
+      funds: object?.funds ? DecCoin.fromAmino(object.funds) : undefined
+    };
+  },
+  toAmino(message: Account): AccountAmino {
+    const obj: any = {};
+    obj.id = message.id ? AccountID.toAmino(message.id) : undefined;
+    obj.owner = message.owner;
+    obj.state = message.state;
+    obj.balance = message.balance ? DecCoin.toAmino(message.balance) : undefined;
+    obj.transferred = message.transferred ? DecCoin.toAmino(message.transferred) : undefined;
+    obj.settled_at = message.settledAt ? message.settledAt.toString() : undefined;
+    obj.depositor = message.depositor;
+    obj.funds = message.funds ? DecCoin.toAmino(message.funds) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: AccountAminoMsg): Account {
+    return Account.fromAmino(object.value);
+  },
   fromProtoMsg(message: AccountProtoMsg): Account {
     return Account.decode(message.value);
   },
@@ -389,6 +515,50 @@ export const FractionalPayment = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<FractionalPayment>, I>>(object: I): FractionalPayment {
+    const message = createBaseFractionalPayment();
+    if (object.accountId !== undefined && object.accountId !== null) {
+      message.accountId = AccountID.fromPartial(object.accountId);
+    }
+    message.paymentId = object.paymentId ?? "";
+    message.owner = object.owner ?? "";
+    message.state = object.state ?? 0;
+    if (object.rate !== undefined && object.rate !== null) {
+      message.rate = DecCoin.fromPartial(object.rate);
+    }
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = DecCoin.fromPartial(object.balance);
+    }
+    if (object.withdrawn !== undefined && object.withdrawn !== null) {
+      message.withdrawn = Coin.fromPartial(object.withdrawn);
+    }
+    return message;
+  },
+  fromAmino(object: FractionalPaymentAmino): FractionalPayment {
+    return {
+      accountId: object?.account_id ? AccountID.fromAmino(object.account_id) : undefined,
+      paymentId: object.payment_id,
+      owner: object.owner,
+      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : -1,
+      rate: object?.rate ? DecCoin.fromAmino(object.rate) : undefined,
+      balance: object?.balance ? DecCoin.fromAmino(object.balance) : undefined,
+      withdrawn: object?.withdrawn ? Coin.fromAmino(object.withdrawn) : undefined
+    };
+  },
+  toAmino(message: FractionalPayment): FractionalPaymentAmino {
+    const obj: any = {};
+    obj.account_id = message.accountId ? AccountID.toAmino(message.accountId) : undefined;
+    obj.payment_id = message.paymentId;
+    obj.owner = message.owner;
+    obj.state = message.state;
+    obj.rate = message.rate ? DecCoin.toAmino(message.rate) : undefined;
+    obj.balance = message.balance ? DecCoin.toAmino(message.balance) : undefined;
+    obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: FractionalPaymentAminoMsg): FractionalPayment {
+    return FractionalPayment.fromAmino(object.value);
   },
   fromProtoMsg(message: FractionalPaymentProtoMsg): FractionalPayment {
     return FractionalPayment.decode(message.value);

@@ -1,7 +1,8 @@
-import { Order, OrderSDKType } from "./order";
-import { Lease, LeaseSDKType } from "./lease";
-import { Params, ParamsSDKType } from "./params";
+import { Order, OrderAmino, OrderSDKType } from "./order";
+import { Lease, LeaseAmino, LeaseSDKType } from "./lease";
+import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** GenesisState defines the basic genesis state used by market module */
 export interface GenesisState {
@@ -12,6 +13,16 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/akash.market.v1beta2.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState defines the basic genesis state used by market module */
+export interface GenesisStateAmino {
+  orders: OrderAmino[];
+  leases: LeaseAmino[];
+  params?: ParamsAmino;
+}
+export interface GenesisStateAminoMsg {
+  type: "/akash.market.v1beta2.GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the basic genesis state used by market module */
 export interface GenesisStateSDKType {
@@ -62,6 +73,40 @@ export const GenesisState = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
+    const message = createBaseGenesisState();
+    message.orders = object.orders?.map(e => Order.fromPartial(e)) || [];
+    message.leases = object.leases?.map(e => Lease.fromPartial(e)) || [];
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
+    return message;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromAmino(e)) : [],
+      leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => Lease.fromAmino(e)) : [],
+      params: object?.params ? Params.fromAmino(object.params) : undefined
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    if (message.orders) {
+      obj.orders = message.orders.map(e => e ? Order.toAmino(e) : undefined);
+    } else {
+      obj.orders = [];
+    }
+    if (message.leases) {
+      obj.leases = message.leases.map(e => e ? Lease.toAmino(e) : undefined);
+    } else {
+      obj.leases = [];
+    }
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

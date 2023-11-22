@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
 /** Unit stores cpu, memory and storage metrics */
 export interface ResourceValue {
@@ -7,6 +8,14 @@ export interface ResourceValue {
 export interface ResourceValueProtoMsg {
   typeUrl: "/akash.base.v1beta2.ResourceValue";
   value: Uint8Array;
+}
+/** Unit stores cpu, memory and storage metrics */
+export interface ResourceValueAmino {
+  val: Uint8Array;
+}
+export interface ResourceValueAminoMsg {
+  type: "/akash.base.v1beta2.ResourceValue";
+  value: ResourceValueAmino;
 }
 /** Unit stores cpu, memory and storage metrics */
 export interface ResourceValueSDKType {
@@ -41,6 +50,24 @@ export const ResourceValue = {
       }
     }
     return message;
+  },
+  fromPartial<I extends Exact<DeepPartial<ResourceValue>, I>>(object: I): ResourceValue {
+    const message = createBaseResourceValue();
+    message.val = object.val ?? new Uint8Array();
+    return message;
+  },
+  fromAmino(object: ResourceValueAmino): ResourceValue {
+    return {
+      val: object.val
+    };
+  },
+  toAmino(message: ResourceValue): ResourceValueAmino {
+    const obj: any = {};
+    obj.val = message.val;
+    return obj;
+  },
+  fromAminoMsg(object: ResourceValueAminoMsg): ResourceValue {
+    return ResourceValue.fromAmino(object.value);
   },
   fromProtoMsg(message: ResourceValueProtoMsg): ResourceValue {
     return ResourceValue.decode(message.value);
