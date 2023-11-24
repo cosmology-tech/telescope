@@ -51,3 +51,25 @@ it('createScopedRpcTmFactory', async () => {
         'createRpcFactorizzle',
     ))
 });
+
+it('createScopedRpcFactoryWithoutTm', async () => {
+  const context = getGenericParseContext();
+  context.options!.rpcClients!.extensions = false;
+  expectCode(createScopedRpcTmFactory(context, {
+      cosmos: {
+          bank: {
+              v1beta1: "./proto/cosmos/bank/v1beta1/query.lcd"
+          },
+          gov: {
+              v1beta1: "./proto/cosmos/bank/v1beta1/query.lcd"
+          },
+      },
+      osmosis: {
+          gamm: {
+              v1beta1: "./proto/cosmos/bank/v1beta1/query.lcd"
+          }
+      }
+  },
+      'createRpcFactorizzleWithoutTM',
+  ))
+});
