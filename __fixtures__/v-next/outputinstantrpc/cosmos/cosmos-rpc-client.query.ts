@@ -7,10 +7,10 @@ export const createCosmicRPCQueryClient = async ({
   return {
     cosmos: {
       bank: {
-        v1beta1: (await import("./bank/v1beta1/query.rpc.Query")).QueryClientImpl(rpc)
+        v1beta1: (await import("./bank/v1beta1/query.rpc.Query")).createClientImpl(rpc)
       },
       gov: {
-        v1beta1: (await import("./gov/v1beta1/query.rpc.Query")).QueryClientImpl(rpc)
+        v1beta1: (await import("./gov/v1beta1/query.rpc.Query")).createClientImpl(rpc)
       }
     }
   };

@@ -119,3 +119,6 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
     return promise.then(data => ResponseApplySnapshotChunk.decode(new BinaryReader(data)));
   }
 }
+export const createClientImpl = (rpc: Rpc) => {
+  return new ABCIApplicationClientImpl(rpc);
+};

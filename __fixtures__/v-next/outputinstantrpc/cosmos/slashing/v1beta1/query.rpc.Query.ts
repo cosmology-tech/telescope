@@ -38,3 +38,6 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QuerySigningInfosResponse.decode(new BinaryReader(data)));
   }
 }
+export const createClientImpl = (rpc: Rpc) => {
+  return new QueryClientImpl(rpc);
+};

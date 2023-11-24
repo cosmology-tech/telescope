@@ -5,6 +5,7 @@ import { ProtoService, ProtoServiceMethod } from '@cosmology/types';
 import { GenericParseContext } from '../../../encoding';
 import { camel } from '@cosmology/utils';
 import { getRpcClassName } from '../class/tendermint';
+import { rpcFuncArguments } from '../scoped';
 
 const rpcExtensionMethod = (
     context: GenericParseContext,
@@ -151,3 +152,31 @@ export const createRpcQueryExtension = (
     );
 };
 
+export const createRpcClientImpl = (
+  context: GenericParseContext,
+  service: ProtoService
+) => {
+  return t.exportNamedDeclaration(
+    t.variableDeclaration('const', [
+        t.variableDeclarator(
+            t.identifier('createClientImpl'),
+            t.arrowFunctionExpression(
+              [
+                identifier('rpc',t.tsTypeAnnotation(
+                  t.tsTypeReference(t.identifier('Rpc'))
+              ))
+              ],
+              t.blockStatement([
+
+                t.returnStatement(t.newExpression(
+                  t.identifier(getRpcClassName(service)),
+                  [
+                      t.identifier('rpc')
+                  ]
+                ))
+
+            ]))
+        )
+    ])
+  );
+}

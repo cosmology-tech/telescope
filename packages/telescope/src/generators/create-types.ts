@@ -7,7 +7,7 @@ import { writeFileSync } from 'fs';
 import { dirname } from 'path';
 import { mkdirp } from 'mkdirp';
 import { getNestedProto, isRefExcluded } from '@cosmology/proto-parser';
-import { createRpcClientClass, createRpcClientInterface, createRpcQueryExtension } from '@cosmology/ast';
+import { createRpcClientClass, createRpcClientImpl, createRpcClientInterface, createRpcQueryExtension } from '@cosmology/ast';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -37,6 +37,11 @@ export const plugin = (
                     context.body.push(createRpcClientClass(context.generic, proto[svcKey]));
                     if (context.proto.pluginValue('rpcClients.extensions')) {
                         context.body.push(createRpcQueryExtension(context.generic, proto[svcKey]));
+                    } else {
+                      const env = context.proto.pluginValue('env');
+                      if(env === 'v-next'){
+                        context.body.push(createRpcClientImpl(context.generic, proto[svcKey]));
+                      }
                     }
                 }
             });

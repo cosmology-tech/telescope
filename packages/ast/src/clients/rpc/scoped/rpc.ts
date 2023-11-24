@@ -74,28 +74,29 @@ export const rpcNewAwaitImport = (
 export const rpcNewTmAwaitImport = (
     path: string,
     className: string,
-    clientName: string = 'client'
+    clientName = 'client',
+    isNew = false
 ) => {
-    return t.callExpression(
-        t.memberExpression(
-            t.awaitExpression(
-                t.callExpression(
-                    t.import(),
-                    [
-                        t.stringLiteral(
-                            path
-                        )
-                    ]
-                )
-            ),
-            t.identifier(className),
-            false
-        ),
-        [
-            t.identifier(clientName)
-        ]
-    )
+    const calleeExpr = t.memberExpression(
+      t.awaitExpression(
+          t.callExpression(
+              t.import(),
+              [
+                  t.stringLiteral(
+                      path
+                  )
+              ]
+          )
+      ),
+      t.identifier(className),
+      false
+    );
 
+    const argsExpr = [
+      t.identifier(clientName)
+    ];
+
+    return isNew ? t.newExpression(calleeExpr, argsExpr) : t.callExpression(calleeExpr, argsExpr);
 }
 
 export const rpcRecursiveObjectProps = (
@@ -141,11 +142,12 @@ export const rpcNestedImportObject = (
 export const rpcTmNestedImportObject = (
     obj: object,
     className: string,
-    clientName?: string
+    clientName?: string,
+    isNew?: boolean
 ) => {
 
     if (typeof obj === 'string') {
-        return rpcNewTmAwaitImport(obj, className, clientName);
+        return rpcNewTmAwaitImport(obj, className, clientName, isNew);
     }
 
     const keys = Object.keys(obj);
@@ -153,7 +155,7 @@ export const rpcTmNestedImportObject = (
     return t.objectExpression(keys.map(name => {
         return t.objectProperty(
             t.identifier(name),
-            rpcTmNestedImportObject(obj[name], className, clientName)
+            rpcTmNestedImportObject(obj[name], className, clientName, isNew)
         )
     }))
 };
@@ -194,8 +196,8 @@ export const createScopedRpcTmFactory = (
     const returnStatement = t.returnStatement(
       rpcTmNestedImportObject(
           obj,
-          extensions ? 'createRpcQueryExtension' : 'QueryClientImpl',
-          extensions ? 'client' : 'rpc'
+          extensions ? 'createRpcQueryExtension' : 'createClientImpl',
+          extensions ? 'client' : 'rpc',
       )
     );
     let functionStatements;

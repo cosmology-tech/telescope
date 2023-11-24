@@ -18,6 +18,7 @@ import {
     getMethodDesc,
     grpcWebRpcInterface,
     getGrpcWebImpl,
+    createRpcClientImpl,
 } from '@cosmology/ast';
 import { getNestedProto, isRefIncluded } from '@cosmology/proto-parser';
 import { parse } from '../parse';
@@ -158,6 +159,11 @@ export const plugin = (
                         asts.push(createRpcClientClass(ctx.generic, svc));
                         if (c.proto.pluginValue('rpcClients.extensions')) {
                             asts.push(createRpcQueryExtension(ctx.generic, svc));
+                        } else {
+                            const env = c.proto.pluginValue('env');
+                            if(env === 'v-next'){
+                              asts.push(createRpcClientImpl(ctx.generic, svc));
+                            }
                         }
 
 

@@ -59,3 +59,6 @@ export class ServiceClientImpl implements Service {
     return promise.then(data => GetBlockWithTxsResponse.decode(new BinaryReader(data)));
   }
 }
+export const createClientImpl = (rpc: Rpc) => {
+  return new ServiceClientImpl(rpc);
+};
