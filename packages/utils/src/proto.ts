@@ -38,6 +38,10 @@ export const makeUsePkgHookName = (packageName: string, name: string) => {
   return variableSlug(`use_${packageName.replace(/\./g, "_")}_${snake(name)}`);
 };
 
+export const makePkgMethodName = (packageName: string, name: string) => {
+  return variableSlug(`pkg_${packageName.replace(/\./g, "_")}_${snake(name)}`);
+};
+
 export const makeUseHookTypeName = (name: string) => {
   return pascal("Use_" + name + "Query");
 };
