@@ -27,97 +27,97 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
   private readonly rpc: Rpc;
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.echo = this.echo.bind(this);
-    this.flush = this.flush.bind(this);
-    this.info = this.info.bind(this);
-    this.setOption = this.setOption.bind(this);
-    this.deliverTx = this.deliverTx.bind(this);
-    this.checkTx = this.checkTx.bind(this);
-    this.query = this.query.bind(this);
-    this.commit = this.commit.bind(this);
-    this.initChain = this.initChain.bind(this);
-    this.beginBlock = this.beginBlock.bind(this);
-    this.endBlock = this.endBlock.bind(this);
-    this.listSnapshots = this.listSnapshots.bind(this);
-    this.offerSnapshot = this.offerSnapshot.bind(this);
-    this.loadSnapshotChunk = this.loadSnapshotChunk.bind(this);
-    this.applySnapshotChunk = this.applySnapshotChunk.bind(this);
   }
-  echo(request: RequestEcho): Promise<ResponseEcho> {
+  /* Echo */
+  echo = async (request: RequestEcho): Promise<ResponseEcho> => {
     const data = RequestEcho.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Echo", data);
     return promise.then(data => ResponseEcho.decode(new BinaryReader(data)));
-  }
-  flush(request: RequestFlush = {}): Promise<ResponseFlush> {
+  };
+  /* Flush */
+  flush = async (request: RequestFlush = {}): Promise<ResponseFlush> => {
     const data = RequestFlush.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Flush", data);
     return promise.then(data => ResponseFlush.decode(new BinaryReader(data)));
-  }
-  info(request: RequestInfo): Promise<ResponseInfo> {
+  };
+  /* Info */
+  info = async (request: RequestInfo): Promise<ResponseInfo> => {
     const data = RequestInfo.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Info", data);
     return promise.then(data => ResponseInfo.decode(new BinaryReader(data)));
-  }
-  setOption(request: RequestSetOption): Promise<ResponseSetOption> {
+  };
+  /* SetOption */
+  setOption = async (request: RequestSetOption): Promise<ResponseSetOption> => {
     const data = RequestSetOption.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "SetOption", data);
     return promise.then(data => ResponseSetOption.decode(new BinaryReader(data)));
-  }
-  deliverTx(request: RequestDeliverTx): Promise<ResponseDeliverTx> {
+  };
+  /* DeliverTx */
+  deliverTx = async (request: RequestDeliverTx): Promise<ResponseDeliverTx> => {
     const data = RequestDeliverTx.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "DeliverTx", data);
     return promise.then(data => ResponseDeliverTx.decode(new BinaryReader(data)));
-  }
-  checkTx(request: RequestCheckTx): Promise<ResponseCheckTx> {
+  };
+  /* CheckTx */
+  checkTx = async (request: RequestCheckTx): Promise<ResponseCheckTx> => {
     const data = RequestCheckTx.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "CheckTx", data);
     return promise.then(data => ResponseCheckTx.decode(new BinaryReader(data)));
-  }
-  query(request: RequestQuery): Promise<ResponseQuery> {
+  };
+  /* Query */
+  query = async (request: RequestQuery): Promise<ResponseQuery> => {
     const data = RequestQuery.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Query", data);
     return promise.then(data => ResponseQuery.decode(new BinaryReader(data)));
-  }
-  commit(request: RequestCommit = {}): Promise<ResponseCommit> {
+  };
+  /* Commit */
+  commit = async (request: RequestCommit = {}): Promise<ResponseCommit> => {
     const data = RequestCommit.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "Commit", data);
     return promise.then(data => ResponseCommit.decode(new BinaryReader(data)));
-  }
-  initChain(request: RequestInitChain): Promise<ResponseInitChain> {
+  };
+  /* InitChain */
+  initChain = async (request: RequestInitChain): Promise<ResponseInitChain> => {
     const data = RequestInitChain.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "InitChain", data);
     return promise.then(data => ResponseInitChain.decode(new BinaryReader(data)));
-  }
-  beginBlock(request: RequestBeginBlock): Promise<ResponseBeginBlock> {
+  };
+  /* BeginBlock */
+  beginBlock = async (request: RequestBeginBlock): Promise<ResponseBeginBlock> => {
     const data = RequestBeginBlock.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "BeginBlock", data);
     return promise.then(data => ResponseBeginBlock.decode(new BinaryReader(data)));
-  }
-  endBlock(request: RequestEndBlock): Promise<ResponseEndBlock> {
+  };
+  /* EndBlock */
+  endBlock = async (request: RequestEndBlock): Promise<ResponseEndBlock> => {
     const data = RequestEndBlock.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "EndBlock", data);
     return promise.then(data => ResponseEndBlock.decode(new BinaryReader(data)));
-  }
-  listSnapshots(request: RequestListSnapshots = {}): Promise<ResponseListSnapshots> {
+  };
+  /* ListSnapshots */
+  listSnapshots = async (request: RequestListSnapshots = {}): Promise<ResponseListSnapshots> => {
     const data = RequestListSnapshots.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "ListSnapshots", data);
     return promise.then(data => ResponseListSnapshots.decode(new BinaryReader(data)));
-  }
-  offerSnapshot(request: RequestOfferSnapshot): Promise<ResponseOfferSnapshot> {
+  };
+  /* OfferSnapshot */
+  offerSnapshot = async (request: RequestOfferSnapshot): Promise<ResponseOfferSnapshot> => {
     const data = RequestOfferSnapshot.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "OfferSnapshot", data);
     return promise.then(data => ResponseOfferSnapshot.decode(new BinaryReader(data)));
-  }
-  loadSnapshotChunk(request: RequestLoadSnapshotChunk): Promise<ResponseLoadSnapshotChunk> {
+  };
+  /* LoadSnapshotChunk */
+  loadSnapshotChunk = async (request: RequestLoadSnapshotChunk): Promise<ResponseLoadSnapshotChunk> => {
     const data = RequestLoadSnapshotChunk.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "LoadSnapshotChunk", data);
     return promise.then(data => ResponseLoadSnapshotChunk.decode(new BinaryReader(data)));
-  }
-  applySnapshotChunk(request: RequestApplySnapshotChunk): Promise<ResponseApplySnapshotChunk> {
+  };
+  /* ApplySnapshotChunk */
+  applySnapshotChunk = async (request: RequestApplySnapshotChunk): Promise<ResponseApplySnapshotChunk> => {
     const data = RequestApplySnapshotChunk.encode(request).finish();
     const promise = this.rpc.request("tendermint.abci.ABCIApplication", "ApplySnapshotChunk", data);
     return promise.then(data => ResponseApplySnapshotChunk.decode(new BinaryReader(data)));
-  }
+  };
 }
 export const createClientImpl = (rpc: Rpc) => {
   return new ABCIApplicationClientImpl(rpc);

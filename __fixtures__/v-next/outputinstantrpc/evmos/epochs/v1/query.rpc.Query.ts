@@ -14,21 +14,21 @@ export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.epochInfos = this.epochInfos.bind(this);
-    this.currentEpoch = this.currentEpoch.bind(this);
   }
-  epochInfos(request: QueryEpochsInfoRequest = {
+  /* EpochInfos provide running epochInfos */
+  epochInfos = async (request: QueryEpochsInfoRequest = {
     pagination: PageRequest.fromPartial({})
-  }): Promise<QueryEpochsInfoResponse> {
+  }): Promise<QueryEpochsInfoResponse> => {
     const data = QueryEpochsInfoRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.epochs.v1.Query", "EpochInfos", data);
     return promise.then(data => QueryEpochsInfoResponse.decode(new BinaryReader(data)));
-  }
-  currentEpoch(request: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponse> {
+  };
+  /* CurrentEpoch provide current epoch of specified identifier */
+  currentEpoch = async (request: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponse> => {
     const data = QueryCurrentEpochRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.epochs.v1.Query", "CurrentEpoch", data);
     return promise.then(data => QueryCurrentEpochResponse.decode(new BinaryReader(data)));
-  }
+  };
 }
 export const createClientImpl = (rpc: Rpc) => {
   return new QueryClientImpl(rpc);

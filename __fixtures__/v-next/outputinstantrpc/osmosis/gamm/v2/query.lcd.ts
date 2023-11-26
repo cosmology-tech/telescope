@@ -8,11 +8,10 @@ export class LCDQueryClient {
     requestClient: LCDClient;
   }) {
     this.req = requestClient;
-    this.spotPrice = this.spotPrice.bind(this);
   }
   /* SpotPrice defines a gRPC query handler that returns the spot price given
    a base denomination and a quote denomination. */
-  async spotPrice(params: QuerySpotPriceRequest): Promise<QuerySpotPriceResponseSDKType> {
+  spotPrice = async (params: QuerySpotPriceRequest): Promise<QuerySpotPriceResponseSDKType> => {
     const options: any = {
       params: {}
     };
@@ -24,5 +23,5 @@ export class LCDQueryClient {
     }
     const endpoint = `osmosis/gamm/v2/pools/${params.poolId}/prices`;
     return QuerySpotPriceResponse.fromSDKJSON(await this.req.get<QuerySpotPriceResponseSDKType>(endpoint, options));
-  }
+  };
 }

@@ -13,18 +13,11 @@ export class LCDQueryClient {
     requestClient: LCDClient;
   }) {
     this.req = requestClient;
-    this.incentives = this.incentives.bind(this);
-    this.incentive = this.incentive.bind(this);
-    this.gasMeters = this.gasMeters.bind(this);
-    this.gasMeter = this.gasMeter.bind(this);
-    this.allocationMeters = this.allocationMeters.bind(this);
-    this.allocationMeter = this.allocationMeter.bind(this);
-    this.params = this.params.bind(this);
   }
   /* Incentives retrieves registered incentives */
-  async incentives(params: QueryIncentivesRequest = {
+  incentives = async (params: QueryIncentivesRequest = {
     pagination: PageRequest.fromPartial({})
-  }): Promise<QueryIncentivesResponseSDKType> {
+  }): Promise<QueryIncentivesResponseSDKType> => {
     const options: any = {
       params: {}
     };
@@ -33,14 +26,14 @@ export class LCDQueryClient {
     }
     const endpoint = `evmos/incentives/v1/incentives`;
     return QueryIncentivesResponse.fromSDKJSON(await this.req.get<QueryIncentivesResponseSDKType>(endpoint, options));
-  }
+  };
   /* Incentive retrieves a registered incentive */
-  async incentive(params: QueryIncentiveRequest): Promise<QueryIncentiveResponseSDKType> {
+  incentive = async (params: QueryIncentiveRequest): Promise<QueryIncentiveResponseSDKType> => {
     const endpoint = `evmos/incentives/v1/incentives/${params.contract}`;
     return QueryIncentiveResponse.fromSDKJSON(await this.req.get<QueryIncentiveResponseSDKType>(endpoint));
-  }
+  };
   /* GasMeters retrieves active gas meters for a given contract */
-  async gasMeters(params: QueryGasMetersRequest): Promise<QueryGasMetersResponseSDKType> {
+  gasMeters = async (params: QueryGasMetersRequest): Promise<QueryGasMetersResponseSDKType> => {
     const options: any = {
       params: {}
     };
@@ -49,17 +42,17 @@ export class LCDQueryClient {
     }
     const endpoint = `evmos/incentives/v1/gas_meters/${params.contract}`;
     return QueryGasMetersResponse.fromSDKJSON(await this.req.get<QueryGasMetersResponseSDKType>(endpoint, options));
-  }
+  };
   /* GasMeter Retrieves a active gas meter */
-  async gasMeter(params: QueryGasMeterRequest): Promise<QueryGasMeterResponseSDKType> {
+  gasMeter = async (params: QueryGasMeterRequest): Promise<QueryGasMeterResponseSDKType> => {
     const endpoint = `evmos/incentives/v1/gas_meters/${params.contract}/${params.participant}`;
     return QueryGasMeterResponse.fromSDKJSON(await this.req.get<QueryGasMeterResponseSDKType>(endpoint));
-  }
+  };
   /* AllocationMeters retrieves active allocation meters for a given
    denomination */
-  async allocationMeters(params: QueryAllocationMetersRequest = {
+  allocationMeters = async (params: QueryAllocationMetersRequest = {
     pagination: PageRequest.fromPartial({})
-  }): Promise<QueryAllocationMetersResponseSDKType> {
+  }): Promise<QueryAllocationMetersResponseSDKType> => {
     const options: any = {
       params: {}
     };
@@ -68,15 +61,15 @@ export class LCDQueryClient {
     }
     const endpoint = `evmos/incentives/v1/allocation_meters`;
     return QueryAllocationMetersResponse.fromSDKJSON(await this.req.get<QueryAllocationMetersResponseSDKType>(endpoint, options));
-  }
+  };
   /* AllocationMeter Retrieves a active gas meter */
-  async allocationMeter(params: QueryAllocationMeterRequest): Promise<QueryAllocationMeterResponseSDKType> {
+  allocationMeter = async (params: QueryAllocationMeterRequest): Promise<QueryAllocationMeterResponseSDKType> => {
     const endpoint = `evmos/incentives/v1/allocation_meters/${params.denom}`;
     return QueryAllocationMeterResponse.fromSDKJSON(await this.req.get<QueryAllocationMeterResponseSDKType>(endpoint));
-  }
+  };
   /* Params retrieves the incentives module params */
-  async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
+  params = async (_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> => {
     const endpoint = `evmos/incentives/v1/params`;
     return QueryParamsResponse.fromSDKJSON(await this.req.get<QueryParamsResponseSDKType>(endpoint));
-  }
+  };
 }

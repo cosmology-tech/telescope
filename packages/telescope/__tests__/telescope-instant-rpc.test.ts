@@ -19,7 +19,7 @@ const options: TelescopeOptions = {
 
   env: 'v-next',
   removeUnusedImports: false,
-  classesUseArrowFunctions: false,
+  classesUseArrowFunctions: true,
 
   tsDisable: {
     disableAll: false,

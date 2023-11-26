@@ -10,17 +10,14 @@ export class LCDQueryClient {
     requestClient: LCDClient;
   }) {
     this.req = requestClient;
-    this.params = this.params.bind(this);
-    this.arithmeticTwap = this.arithmeticTwap.bind(this);
-    this.arithmeticTwapToNow = this.arithmeticTwapToNow.bind(this);
   }
   /* Params */
-  async params(_params: ParamsRequest = {}): Promise<ParamsResponseSDKType> {
+  params = async (_params: ParamsRequest = {}): Promise<ParamsResponseSDKType> => {
     const endpoint = `osmosis/twap/v1beta1/Params`;
     return ParamsResponse.fromSDKJSON(await this.req.get<ParamsResponseSDKType>(endpoint));
-  }
+  };
   /* ArithmeticTwap */
-  async arithmeticTwap(params: ArithmeticTwapRequest): Promise<ArithmeticTwapResponseSDKType> {
+  arithmeticTwap = async (params: ArithmeticTwapRequest): Promise<ArithmeticTwapResponseSDKType> => {
     const options: any = {
       params: {}
     };
@@ -41,9 +38,9 @@ export class LCDQueryClient {
     }
     const endpoint = `osmosis/twap/v1beta1/ArithmeticTwap`;
     return ArithmeticTwapResponse.fromSDKJSON(await this.req.get<ArithmeticTwapResponseSDKType>(endpoint, options));
-  }
+  };
   /* ArithmeticTwapToNow */
-  async arithmeticTwapToNow(params: ArithmeticTwapToNowRequest): Promise<ArithmeticTwapToNowResponseSDKType> {
+  arithmeticTwapToNow = async (params: ArithmeticTwapToNowRequest): Promise<ArithmeticTwapToNowResponseSDKType> => {
     const options: any = {
       params: {}
     };
@@ -61,5 +58,5 @@ export class LCDQueryClient {
     }
     const endpoint = `osmosis/twap/v1beta1/ArithmeticTwapToNow`;
     return ArithmeticTwapToNowResponse.fromSDKJSON(await this.req.get<ArithmeticTwapToNowResponseSDKType>(endpoint, options));
-  }
+  };
 }

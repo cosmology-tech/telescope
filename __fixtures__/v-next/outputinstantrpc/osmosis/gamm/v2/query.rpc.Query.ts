@@ -17,13 +17,14 @@ export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.spotPrice = this.spotPrice.bind(this);
   }
-  spotPrice(request: QuerySpotPriceRequest): Promise<QuerySpotPriceResponse> {
+  /* SpotPrice defines a gRPC query handler that returns the spot price given
+   a base denomination and a quote denomination. */
+  spotPrice = async (request: QuerySpotPriceRequest): Promise<QuerySpotPriceResponse> => {
     const data = QuerySpotPriceRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v2.Query", "SpotPrice", data);
     return promise.then(data => QuerySpotPriceResponse.decode(new BinaryReader(data)));
-  }
+  };
 }
 export const createClientImpl = (rpc: Rpc) => {
   return new QueryClientImpl(rpc);

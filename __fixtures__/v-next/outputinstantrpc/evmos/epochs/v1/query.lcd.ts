@@ -11,13 +11,11 @@ export class LCDQueryClient {
     requestClient: LCDClient;
   }) {
     this.req = requestClient;
-    this.epochInfos = this.epochInfos.bind(this);
-    this.currentEpoch = this.currentEpoch.bind(this);
   }
   /* EpochInfos provide running epochInfos */
-  async epochInfos(params: QueryEpochsInfoRequest = {
+  epochInfos = async (params: QueryEpochsInfoRequest = {
     pagination: PageRequest.fromPartial({})
-  }): Promise<QueryEpochsInfoResponseSDKType> {
+  }): Promise<QueryEpochsInfoResponseSDKType> => {
     const options: any = {
       params: {}
     };
@@ -26,9 +24,9 @@ export class LCDQueryClient {
     }
     const endpoint = `evmos/epochs/v1/epochs`;
     return QueryEpochsInfoResponse.fromSDKJSON(await this.req.get<QueryEpochsInfoResponseSDKType>(endpoint, options));
-  }
+  };
   /* CurrentEpoch provide current epoch of specified identifier */
-  async currentEpoch(params: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponseSDKType> {
+  currentEpoch = async (params: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponseSDKType> => {
     const options: any = {
       params: {}
     };
@@ -37,5 +35,5 @@ export class LCDQueryClient {
     }
     const endpoint = `evmos/epochs/v1/current_epoch`;
     return QueryCurrentEpochResponse.fromSDKJSON(await this.req.get<QueryCurrentEpochResponseSDKType>(endpoint, options));
-  }
+  };
 }

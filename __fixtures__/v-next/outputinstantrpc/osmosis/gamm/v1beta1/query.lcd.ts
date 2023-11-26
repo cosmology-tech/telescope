@@ -13,25 +13,11 @@ export class LCDQueryClient {
     requestClient: LCDClient;
   }) {
     this.req = requestClient;
-    this.pools = this.pools.bind(this);
-    this.numPools = this.numPools.bind(this);
-    this.totalLiquidity = this.totalLiquidity.bind(this);
-    this.poolsWithFilter = this.poolsWithFilter.bind(this);
-    this.pool = this.pool.bind(this);
-    this.poolType = this.poolType.bind(this);
-    this.calcJoinPoolShares = this.calcJoinPoolShares.bind(this);
-    this.calcExitPoolCoinsFromShares = this.calcExitPoolCoinsFromShares.bind(this);
-    this.poolParams = this.poolParams.bind(this);
-    this.totalPoolLiquidity = this.totalPoolLiquidity.bind(this);
-    this.totalShares = this.totalShares.bind(this);
-    this.spotPrice = this.spotPrice.bind(this);
-    this.estimateSwapExactAmountIn = this.estimateSwapExactAmountIn.bind(this);
-    this.estimateSwapExactAmountOut = this.estimateSwapExactAmountOut.bind(this);
   }
   /* Pools */
-  async pools(params: QueryPoolsRequest = {
+  pools = async (params: QueryPoolsRequest = {
     pagination: PageRequest.fromPartial({})
-  }): Promise<QueryPoolsResponseSDKType> {
+  }): Promise<QueryPoolsResponseSDKType> => {
     const options: any = {
       params: {}
     };
@@ -40,20 +26,20 @@ export class LCDQueryClient {
     }
     const endpoint = `osmosis/gamm/v1beta1/pools`;
     return QueryPoolsResponse.fromSDKJSON(await this.req.get<QueryPoolsResponseSDKType>(endpoint, options));
-  }
+  };
   /* NumPools */
-  async numPools(_params: QueryNumPoolsRequest = {}): Promise<QueryNumPoolsResponseSDKType> {
+  numPools = async (_params: QueryNumPoolsRequest = {}): Promise<QueryNumPoolsResponseSDKType> => {
     const endpoint = `osmosis/gamm/v1beta1/num_pools`;
     return QueryNumPoolsResponse.fromSDKJSON(await this.req.get<QueryNumPoolsResponseSDKType>(endpoint));
-  }
+  };
   /* TotalLiquidity */
-  async totalLiquidity(_params: QueryTotalLiquidityRequest = {}): Promise<QueryTotalLiquidityResponseSDKType> {
+  totalLiquidity = async (_params: QueryTotalLiquidityRequest = {}): Promise<QueryTotalLiquidityResponseSDKType> => {
     const endpoint = `osmosis/gamm/v1beta1/total_liquidity`;
     return QueryTotalLiquidityResponse.fromSDKJSON(await this.req.get<QueryTotalLiquidityResponseSDKType>(endpoint));
-  }
+  };
   /* PoolsWithFilter allows you to query specific pools with requested
    parameters */
-  async poolsWithFilter(params: QueryPoolsWithFilterRequest): Promise<QueryPoolsWithFilterResponseSDKType> {
+  poolsWithFilter = async (params: QueryPoolsWithFilterRequest): Promise<QueryPoolsWithFilterResponseSDKType> => {
     const options: any = {
       params: {}
     };
@@ -68,21 +54,21 @@ export class LCDQueryClient {
     }
     const endpoint = `osmosis/gamm/v1beta1/filtered_pools`;
     return QueryPoolsWithFilterResponse.fromSDKJSON(await this.req.get<QueryPoolsWithFilterResponseSDKType>(endpoint, options));
-  }
+  };
   /* Per Pool gRPC Endpoints */
-  async pool(params: QueryPoolRequest): Promise<QueryPoolResponseSDKType> {
+  pool = async (params: QueryPoolRequest): Promise<QueryPoolResponseSDKType> => {
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}`;
     return QueryPoolResponse.fromSDKJSON(await this.req.get<QueryPoolResponseSDKType>(endpoint));
-  }
+  };
   /* PoolType returns the type of the pool.
    Returns "Balancer" as a string literal when the pool is a balancer pool.
    Errors if the pool is failed to be type caseted. */
-  async poolType(params: QueryPoolTypeRequest): Promise<QueryPoolTypeResponseSDKType> {
+  poolType = async (params: QueryPoolTypeRequest): Promise<QueryPoolTypeResponseSDKType> => {
     const endpoint = `osmosis/gamm/v1beta1/pool_type/${params.poolId}`;
     return QueryPoolTypeResponse.fromSDKJSON(await this.req.get<QueryPoolTypeResponseSDKType>(endpoint));
-  }
+  };
   /* CalcJoinPoolShares */
-  async calcJoinPoolShares(params: QueryCalcJoinPoolSharesRequest): Promise<QueryCalcJoinPoolSharesResponseSDKType> {
+  calcJoinPoolShares = async (params: QueryCalcJoinPoolSharesRequest): Promise<QueryCalcJoinPoolSharesResponseSDKType> => {
     const options: any = {
       params: {}
     };
@@ -91,9 +77,9 @@ export class LCDQueryClient {
     }
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/join_swap_exact_in`;
     return QueryCalcJoinPoolSharesResponse.fromSDKJSON(await this.req.get<QueryCalcJoinPoolSharesResponseSDKType>(endpoint, options));
-  }
+  };
   /* CalcExitPoolCoinsFromShares */
-  async calcExitPoolCoinsFromShares(params: QueryCalcExitPoolCoinsFromSharesRequest): Promise<QueryCalcExitPoolCoinsFromSharesResponseSDKType> {
+  calcExitPoolCoinsFromShares = async (params: QueryCalcExitPoolCoinsFromSharesRequest): Promise<QueryCalcExitPoolCoinsFromSharesResponseSDKType> => {
     const options: any = {
       params: {}
     };
@@ -102,25 +88,25 @@ export class LCDQueryClient {
     }
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/exit_swap_share_amount_in`;
     return QueryCalcExitPoolCoinsFromSharesResponse.fromSDKJSON(await this.req.get<QueryCalcExitPoolCoinsFromSharesResponseSDKType>(endpoint, options));
-  }
+  };
   /* PoolParams */
-  async poolParams(params: QueryPoolParamsRequest): Promise<QueryPoolParamsResponseSDKType> {
+  poolParams = async (params: QueryPoolParamsRequest): Promise<QueryPoolParamsResponseSDKType> => {
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/params`;
     return QueryPoolParamsResponse.fromSDKJSON(await this.req.get<QueryPoolParamsResponseSDKType>(endpoint));
-  }
+  };
   /* TotalPoolLiquidity */
-  async totalPoolLiquidity(params: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponseSDKType> {
+  totalPoolLiquidity = async (params: QueryTotalPoolLiquidityRequest): Promise<QueryTotalPoolLiquidityResponseSDKType> => {
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/total_pool_liquidity`;
     return QueryTotalPoolLiquidityResponse.fromSDKJSON(await this.req.get<QueryTotalPoolLiquidityResponseSDKType>(endpoint));
-  }
+  };
   /* TotalShares */
-  async totalShares(params: QueryTotalSharesRequest): Promise<QueryTotalSharesResponseSDKType> {
+  totalShares = async (params: QueryTotalSharesRequest): Promise<QueryTotalSharesResponseSDKType> => {
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/total_shares`;
     return QueryTotalSharesResponse.fromSDKJSON(await this.req.get<QueryTotalSharesResponseSDKType>(endpoint));
-  }
+  };
   /* SpotPrice defines a gRPC query handler that returns the spot price given
    a base denomination and a quote denomination. */
-  async spotPrice(params: QuerySpotPriceRequest): Promise<QuerySpotPriceResponseSDKType> {
+  spotPrice = async (params: QuerySpotPriceRequest): Promise<QuerySpotPriceResponseSDKType> => {
     const options: any = {
       params: {}
     };
@@ -132,9 +118,9 @@ export class LCDQueryClient {
     }
     const endpoint = `osmosis/gamm/v1beta1/pools/${params.poolId}/prices`;
     return QuerySpotPriceResponse.fromSDKJSON(await this.req.get<QuerySpotPriceResponseSDKType>(endpoint, options));
-  }
+  };
   /* Estimate the swap. */
-  async estimateSwapExactAmountIn(params: QuerySwapExactAmountInRequest): Promise<QuerySwapExactAmountInResponseSDKType> {
+  estimateSwapExactAmountIn = async (params: QuerySwapExactAmountInRequest): Promise<QuerySwapExactAmountInResponseSDKType> => {
     const options: any = {
       params: {}
     };
@@ -149,9 +135,9 @@ export class LCDQueryClient {
     }
     const endpoint = `osmosis/gamm/v1beta1/${params.poolId}/estimate/swap_exact_amount_in`;
     return QuerySwapExactAmountInResponse.fromSDKJSON(await this.req.get<QuerySwapExactAmountInResponseSDKType>(endpoint, options));
-  }
+  };
   /* EstimateSwapExactAmountOut */
-  async estimateSwapExactAmountOut(params: QuerySwapExactAmountOutRequest): Promise<QuerySwapExactAmountOutResponseSDKType> {
+  estimateSwapExactAmountOut = async (params: QuerySwapExactAmountOutRequest): Promise<QuerySwapExactAmountOutResponseSDKType> => {
     const options: any = {
       params: {}
     };
@@ -166,5 +152,5 @@ export class LCDQueryClient {
     }
     const endpoint = `osmosis/gamm/v1beta1/${params.poolId}/estimate/swap_exact_amount_out`;
     return QuerySwapExactAmountOutResponse.fromSDKJSON(await this.req.get<QuerySwapExactAmountOutResponseSDKType>(endpoint, options));
-  }
+  };
 }

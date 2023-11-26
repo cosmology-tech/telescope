@@ -14,17 +14,14 @@ export class LCDQueryClient {
     requestClient: LCDClient;
   }) {
     this.req = requestClient;
-    this.getTx = this.getTx.bind(this);
-    this.getTxsEvent = this.getTxsEvent.bind(this);
-    this.getBlockWithTxs = this.getBlockWithTxs.bind(this);
   }
   /* GetTx fetches a tx by hash. */
-  async getTx(params: GetTxRequest): Promise<GetTxResponseSDKType> {
+  getTx = async (params: GetTxRequest): Promise<GetTxResponseSDKType> => {
     const endpoint = `cosmos/tx/v1beta1/txs/${params.hash}`;
     return GetTxResponse.fromSDKJSON(await this.req.get<GetTxResponseSDKType>(endpoint));
-  }
+  };
   /* GetTxsEvent fetches txs by event. */
-  async getTxsEvent(params: GetTxsEventRequest): Promise<GetTxsEventResponseSDKType> {
+  getTxsEvent = async (params: GetTxsEventRequest): Promise<GetTxsEventResponseSDKType> => {
     const options: any = {
       params: {}
     };
@@ -39,11 +36,11 @@ export class LCDQueryClient {
     }
     const endpoint = `cosmos/tx/v1beta1/txs`;
     return GetTxsEventResponse.fromSDKJSON(await this.req.get<GetTxsEventResponseSDKType>(endpoint, options));
-  }
+  };
   /* GetBlockWithTxs fetches a block with decoded txs.
   
    Since: cosmos-sdk 0.45.2 */
-  async getBlockWithTxs(params: GetBlockWithTxsRequest): Promise<GetBlockWithTxsResponseSDKType> {
+  getBlockWithTxs = async (params: GetBlockWithTxsRequest): Promise<GetBlockWithTxsResponseSDKType> => {
     const options: any = {
       params: {}
     };
@@ -52,5 +49,5 @@ export class LCDQueryClient {
     }
     const endpoint = `cosmos/tx/v1beta1/txs/block/${params.height}`;
     return GetBlockWithTxsResponse.fromSDKJSON(await this.req.get<GetBlockWithTxsResponseSDKType>(endpoint, options));
-  }
+  };
 }

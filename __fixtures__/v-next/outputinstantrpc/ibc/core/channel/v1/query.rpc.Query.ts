@@ -62,87 +62,95 @@ export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.channel = this.channel.bind(this);
-    this.channels = this.channels.bind(this);
-    this.connectionChannels = this.connectionChannels.bind(this);
-    this.channelClientState = this.channelClientState.bind(this);
-    this.channelConsensusState = this.channelConsensusState.bind(this);
-    this.packetCommitment = this.packetCommitment.bind(this);
-    this.packetCommitments = this.packetCommitments.bind(this);
-    this.packetReceipt = this.packetReceipt.bind(this);
-    this.packetAcknowledgement = this.packetAcknowledgement.bind(this);
-    this.packetAcknowledgements = this.packetAcknowledgements.bind(this);
-    this.unreceivedPackets = this.unreceivedPackets.bind(this);
-    this.unreceivedAcks = this.unreceivedAcks.bind(this);
-    this.nextSequenceReceive = this.nextSequenceReceive.bind(this);
   }
-  channel(request: QueryChannelRequest): Promise<QueryChannelResponse> {
+  /* Channel queries an IBC Channel. */
+  channel = async (request: QueryChannelRequest): Promise<QueryChannelResponse> => {
     const data = QueryChannelRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.channel.v1.Query", "Channel", data);
     return promise.then(data => QueryChannelResponse.decode(new BinaryReader(data)));
-  }
-  channels(request: QueryChannelsRequest = {
+  };
+  /* Channels queries all the IBC channels of a chain. */
+  channels = async (request: QueryChannelsRequest = {
     pagination: PageRequest.fromPartial({})
-  }): Promise<QueryChannelsResponse> {
+  }): Promise<QueryChannelsResponse> => {
     const data = QueryChannelsRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.channel.v1.Query", "Channels", data);
     return promise.then(data => QueryChannelsResponse.decode(new BinaryReader(data)));
-  }
-  connectionChannels(request: QueryConnectionChannelsRequest): Promise<QueryConnectionChannelsResponse> {
+  };
+  /* ConnectionChannels queries all the channels associated with a connection
+   end. */
+  connectionChannels = async (request: QueryConnectionChannelsRequest): Promise<QueryConnectionChannelsResponse> => {
     const data = QueryConnectionChannelsRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.channel.v1.Query", "ConnectionChannels", data);
     return promise.then(data => QueryConnectionChannelsResponse.decode(new BinaryReader(data)));
-  }
-  channelClientState(request: QueryChannelClientStateRequest): Promise<QueryChannelClientStateResponse> {
+  };
+  /* ChannelClientState queries for the client state for the channel associated
+   with the provided channel identifiers. */
+  channelClientState = async (request: QueryChannelClientStateRequest): Promise<QueryChannelClientStateResponse> => {
     const data = QueryChannelClientStateRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.channel.v1.Query", "ChannelClientState", data);
     return promise.then(data => QueryChannelClientStateResponse.decode(new BinaryReader(data)));
-  }
-  channelConsensusState(request: QueryChannelConsensusStateRequest): Promise<QueryChannelConsensusStateResponse> {
+  };
+  /* ChannelConsensusState queries for the consensus state for the channel
+   associated with the provided channel identifiers. */
+  channelConsensusState = async (request: QueryChannelConsensusStateRequest): Promise<QueryChannelConsensusStateResponse> => {
     const data = QueryChannelConsensusStateRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.channel.v1.Query", "ChannelConsensusState", data);
     return promise.then(data => QueryChannelConsensusStateResponse.decode(new BinaryReader(data)));
-  }
-  packetCommitment(request: QueryPacketCommitmentRequest): Promise<QueryPacketCommitmentResponse> {
+  };
+  /* PacketCommitment queries a stored packet commitment hash. */
+  packetCommitment = async (request: QueryPacketCommitmentRequest): Promise<QueryPacketCommitmentResponse> => {
     const data = QueryPacketCommitmentRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.channel.v1.Query", "PacketCommitment", data);
     return promise.then(data => QueryPacketCommitmentResponse.decode(new BinaryReader(data)));
-  }
-  packetCommitments(request: QueryPacketCommitmentsRequest): Promise<QueryPacketCommitmentsResponse> {
+  };
+  /* PacketCommitments returns all the packet commitments hashes associated
+   with a channel. */
+  packetCommitments = async (request: QueryPacketCommitmentsRequest): Promise<QueryPacketCommitmentsResponse> => {
     const data = QueryPacketCommitmentsRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.channel.v1.Query", "PacketCommitments", data);
     return promise.then(data => QueryPacketCommitmentsResponse.decode(new BinaryReader(data)));
-  }
-  packetReceipt(request: QueryPacketReceiptRequest): Promise<QueryPacketReceiptResponse> {
+  };
+  /* PacketReceipt queries if a given packet sequence has been received on the
+   queried chain */
+  packetReceipt = async (request: QueryPacketReceiptRequest): Promise<QueryPacketReceiptResponse> => {
     const data = QueryPacketReceiptRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.channel.v1.Query", "PacketReceipt", data);
     return promise.then(data => QueryPacketReceiptResponse.decode(new BinaryReader(data)));
-  }
-  packetAcknowledgement(request: QueryPacketAcknowledgementRequest): Promise<QueryPacketAcknowledgementResponse> {
+  };
+  /* PacketAcknowledgement queries a stored packet acknowledgement hash. */
+  packetAcknowledgement = async (request: QueryPacketAcknowledgementRequest): Promise<QueryPacketAcknowledgementResponse> => {
     const data = QueryPacketAcknowledgementRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.channel.v1.Query", "PacketAcknowledgement", data);
     return promise.then(data => QueryPacketAcknowledgementResponse.decode(new BinaryReader(data)));
-  }
-  packetAcknowledgements(request: QueryPacketAcknowledgementsRequest): Promise<QueryPacketAcknowledgementsResponse> {
+  };
+  /* PacketAcknowledgements returns all the packet acknowledgements associated
+   with a channel. */
+  packetAcknowledgements = async (request: QueryPacketAcknowledgementsRequest): Promise<QueryPacketAcknowledgementsResponse> => {
     const data = QueryPacketAcknowledgementsRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.channel.v1.Query", "PacketAcknowledgements", data);
     return promise.then(data => QueryPacketAcknowledgementsResponse.decode(new BinaryReader(data)));
-  }
-  unreceivedPackets(request: QueryUnreceivedPacketsRequest): Promise<QueryUnreceivedPacketsResponse> {
+  };
+  /* UnreceivedPackets returns all the unreceived IBC packets associated with a
+   channel and sequences. */
+  unreceivedPackets = async (request: QueryUnreceivedPacketsRequest): Promise<QueryUnreceivedPacketsResponse> => {
     const data = QueryUnreceivedPacketsRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.channel.v1.Query", "UnreceivedPackets", data);
     return promise.then(data => QueryUnreceivedPacketsResponse.decode(new BinaryReader(data)));
-  }
-  unreceivedAcks(request: QueryUnreceivedAcksRequest): Promise<QueryUnreceivedAcksResponse> {
+  };
+  /* UnreceivedAcks returns all the unreceived IBC acknowledgements associated
+   with a channel and sequences. */
+  unreceivedAcks = async (request: QueryUnreceivedAcksRequest): Promise<QueryUnreceivedAcksResponse> => {
     const data = QueryUnreceivedAcksRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.channel.v1.Query", "UnreceivedAcks", data);
     return promise.then(data => QueryUnreceivedAcksResponse.decode(new BinaryReader(data)));
-  }
-  nextSequenceReceive(request: QueryNextSequenceReceiveRequest): Promise<QueryNextSequenceReceiveResponse> {
+  };
+  /* NextSequenceReceive returns the next receive sequence for a given channel. */
+  nextSequenceReceive = async (request: QueryNextSequenceReceiveRequest): Promise<QueryNextSequenceReceiveResponse> => {
     const data = QueryNextSequenceReceiveRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.channel.v1.Query", "NextSequenceReceive", data);
     return promise.then(data => QueryNextSequenceReceiveResponse.decode(new BinaryReader(data)));
-  }
+  };
 }
 export const createClientImpl = (rpc: Rpc) => {
   return new QueryClientImpl(rpc);

@@ -20,33 +20,33 @@ export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.totalUnclaimed = this.totalUnclaimed.bind(this);
-    this.params = this.params.bind(this);
-    this.claimsRecords = this.claimsRecords.bind(this);
-    this.claimsRecord = this.claimsRecord.bind(this);
   }
-  totalUnclaimed(request: QueryTotalUnclaimedRequest = {}): Promise<QueryTotalUnclaimedResponse> {
+  /* TotalUnclaimed queries the total unclaimed tokens from the airdrop */
+  totalUnclaimed = async (request: QueryTotalUnclaimedRequest = {}): Promise<QueryTotalUnclaimedResponse> => {
     const data = QueryTotalUnclaimedRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.claims.v1.Query", "TotalUnclaimed", data);
     return promise.then(data => QueryTotalUnclaimedResponse.decode(new BinaryReader(data)));
-  }
-  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
+  };
+  /* Params returns the claims module parameters */
+  params = async (request: QueryParamsRequest = {}): Promise<QueryParamsResponse> => {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.claims.v1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new BinaryReader(data)));
-  }
-  claimsRecords(request: QueryClaimsRecordsRequest = {
+  };
+  /* ClaimsRecords returns all claims records */
+  claimsRecords = async (request: QueryClaimsRecordsRequest = {
     pagination: PageRequest.fromPartial({})
-  }): Promise<QueryClaimsRecordsResponse> {
+  }): Promise<QueryClaimsRecordsResponse> => {
     const data = QueryClaimsRecordsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.claims.v1.Query", "ClaimsRecords", data);
     return promise.then(data => QueryClaimsRecordsResponse.decode(new BinaryReader(data)));
-  }
-  claimsRecord(request: QueryClaimsRecordRequest): Promise<QueryClaimsRecordResponse> {
+  };
+  /* ClaimsRecord returns the claims record for a given address */
+  claimsRecord = async (request: QueryClaimsRecordRequest): Promise<QueryClaimsRecordResponse> => {
     const data = QueryClaimsRecordRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.claims.v1.Query", "ClaimsRecord", data);
     return promise.then(data => QueryClaimsRecordResponse.decode(new BinaryReader(data)));
-  }
+  };
 }
 export const createClientImpl = (rpc: Rpc) => {
   return new QueryClientImpl(rpc);

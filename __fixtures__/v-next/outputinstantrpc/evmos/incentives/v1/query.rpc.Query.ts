@@ -29,53 +29,54 @@ export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.incentives = this.incentives.bind(this);
-    this.incentive = this.incentive.bind(this);
-    this.gasMeters = this.gasMeters.bind(this);
-    this.gasMeter = this.gasMeter.bind(this);
-    this.allocationMeters = this.allocationMeters.bind(this);
-    this.allocationMeter = this.allocationMeter.bind(this);
-    this.params = this.params.bind(this);
   }
-  incentives(request: QueryIncentivesRequest = {
+  /* Incentives retrieves registered incentives */
+  incentives = async (request: QueryIncentivesRequest = {
     pagination: PageRequest.fromPartial({})
-  }): Promise<QueryIncentivesResponse> {
+  }): Promise<QueryIncentivesResponse> => {
     const data = QueryIncentivesRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "Incentives", data);
     return promise.then(data => QueryIncentivesResponse.decode(new BinaryReader(data)));
-  }
-  incentive(request: QueryIncentiveRequest): Promise<QueryIncentiveResponse> {
+  };
+  /* Incentive retrieves a registered incentive */
+  incentive = async (request: QueryIncentiveRequest): Promise<QueryIncentiveResponse> => {
     const data = QueryIncentiveRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "Incentive", data);
     return promise.then(data => QueryIncentiveResponse.decode(new BinaryReader(data)));
-  }
-  gasMeters(request: QueryGasMetersRequest): Promise<QueryGasMetersResponse> {
+  };
+  /* GasMeters retrieves active gas meters for a given contract */
+  gasMeters = async (request: QueryGasMetersRequest): Promise<QueryGasMetersResponse> => {
     const data = QueryGasMetersRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "GasMeters", data);
     return promise.then(data => QueryGasMetersResponse.decode(new BinaryReader(data)));
-  }
-  gasMeter(request: QueryGasMeterRequest): Promise<QueryGasMeterResponse> {
+  };
+  /* GasMeter Retrieves a active gas meter */
+  gasMeter = async (request: QueryGasMeterRequest): Promise<QueryGasMeterResponse> => {
     const data = QueryGasMeterRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "GasMeter", data);
     return promise.then(data => QueryGasMeterResponse.decode(new BinaryReader(data)));
-  }
-  allocationMeters(request: QueryAllocationMetersRequest = {
+  };
+  /* AllocationMeters retrieves active allocation meters for a given
+   denomination */
+  allocationMeters = async (request: QueryAllocationMetersRequest = {
     pagination: PageRequest.fromPartial({})
-  }): Promise<QueryAllocationMetersResponse> {
+  }): Promise<QueryAllocationMetersResponse> => {
     const data = QueryAllocationMetersRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "AllocationMeters", data);
     return promise.then(data => QueryAllocationMetersResponse.decode(new BinaryReader(data)));
-  }
-  allocationMeter(request: QueryAllocationMeterRequest): Promise<QueryAllocationMeterResponse> {
+  };
+  /* AllocationMeter Retrieves a active gas meter */
+  allocationMeter = async (request: QueryAllocationMeterRequest): Promise<QueryAllocationMeterResponse> => {
     const data = QueryAllocationMeterRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "AllocationMeter", data);
     return promise.then(data => QueryAllocationMeterResponse.decode(new BinaryReader(data)));
-  }
-  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
+  };
+  /* Params retrieves the incentives module params */
+  params = async (request: QueryParamsRequest = {}): Promise<QueryParamsResponse> => {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.incentives.v1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new BinaryReader(data)));
-  }
+  };
 }
 export const createClientImpl = (rpc: Rpc) => {
   return new QueryClientImpl(rpc);

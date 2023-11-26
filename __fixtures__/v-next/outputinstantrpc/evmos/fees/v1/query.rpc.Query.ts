@@ -22,33 +22,34 @@ export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.devFeeInfos = this.devFeeInfos.bind(this);
-    this.devFeeInfo = this.devFeeInfo.bind(this);
-    this.params = this.params.bind(this);
-    this.devFeeInfosPerDeployer = this.devFeeInfosPerDeployer.bind(this);
   }
-  devFeeInfos(request: QueryDevFeeInfosRequest = {
+  /* DevFeeInfos retrieves all registered contracts for fee distribution */
+  devFeeInfos = async (request: QueryDevFeeInfosRequest = {
     pagination: PageRequest.fromPartial({})
-  }): Promise<QueryDevFeeInfosResponse> {
+  }): Promise<QueryDevFeeInfosResponse> => {
     const data = QueryDevFeeInfosRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.fees.v1.Query", "DevFeeInfos", data);
     return promise.then(data => QueryDevFeeInfosResponse.decode(new BinaryReader(data)));
-  }
-  devFeeInfo(request: QueryDevFeeInfoRequest): Promise<QueryDevFeeInfoResponse> {
+  };
+  /* DevFeeInfo retrieves a registered contract for fee distribution */
+  devFeeInfo = async (request: QueryDevFeeInfoRequest): Promise<QueryDevFeeInfoResponse> => {
     const data = QueryDevFeeInfoRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.fees.v1.Query", "DevFeeInfo", data);
     return promise.then(data => QueryDevFeeInfoResponse.decode(new BinaryReader(data)));
-  }
-  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
+  };
+  /* Params retrieves the fees module params */
+  params = async (request: QueryParamsRequest = {}): Promise<QueryParamsResponse> => {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.fees.v1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new BinaryReader(data)));
-  }
-  devFeeInfosPerDeployer(request: QueryDevFeeInfosPerDeployerRequest): Promise<QueryDevFeeInfosPerDeployerResponse> {
+  };
+  /* DevFeeInfosPerDeployer retrieves all contracts that a deployer has
+   registered for fee distribution */
+  devFeeInfosPerDeployer = async (request: QueryDevFeeInfosPerDeployerRequest): Promise<QueryDevFeeInfosPerDeployerResponse> => {
     const data = QueryDevFeeInfosPerDeployerRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.fees.v1.Query", "DevFeeInfosPerDeployer", data);
     return promise.then(data => QueryDevFeeInfosPerDeployerResponse.decode(new BinaryReader(data)));
-  }
+  };
 }
 export const createClientImpl = (rpc: Rpc) => {
   return new QueryClientImpl(rpc);

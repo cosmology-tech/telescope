@@ -11,13 +11,13 @@ export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.balances = this.balances.bind(this);
   }
-  balances(request: QueryBalancesRequest): Promise<QueryBalancesResponse> {
+  /* Retrieves the unvested, vested and locked tokens for a vesting account */
+  balances = async (request: QueryBalancesRequest): Promise<QueryBalancesResponse> => {
     const data = QueryBalancesRequest.encode(request).finish();
     const promise = this.rpc.request("evmos.vesting.v1.Query", "Balances", data);
     return promise.then(data => QueryBalancesResponse.decode(new BinaryReader(data)));
-  }
+  };
 }
 export const createClientImpl = (rpc: Rpc) => {
   return new QueryClientImpl(rpc);

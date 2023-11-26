@@ -13,19 +13,19 @@ export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.params = this.params.bind(this);
-    this.epochProvisions = this.epochProvisions.bind(this);
   }
-  params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
+  /* Params returns the total set of minting parameters. */
+  params = async (request: QueryParamsRequest = {}): Promise<QueryParamsResponse> => {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.mint.v1beta1.Query", "Params", data);
     return promise.then(data => QueryParamsResponse.decode(new BinaryReader(data)));
-  }
-  epochProvisions(request: QueryEpochProvisionsRequest = {}): Promise<QueryEpochProvisionsResponse> {
+  };
+  /* EpochProvisions returns the current minting epoch provisions value. */
+  epochProvisions = async (request: QueryEpochProvisionsRequest = {}): Promise<QueryEpochProvisionsResponse> => {
     const data = QueryEpochProvisionsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.mint.v1beta1.Query", "EpochProvisions", data);
     return promise.then(data => QueryEpochProvisionsResponse.decode(new BinaryReader(data)));
-  }
+  };
 }
 export const createClientImpl = (rpc: Rpc) => {
   return new QueryClientImpl(rpc);

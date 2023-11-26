@@ -9,16 +9,14 @@ export class LCDQueryClient {
     requestClient: LCDClient;
   }) {
     this.req = requestClient;
-    this.epochInfos = this.epochInfos.bind(this);
-    this.currentEpoch = this.currentEpoch.bind(this);
   }
   /* EpochInfos provide running epochInfos */
-  async epochInfos(_params: QueryEpochsInfoRequest = {}): Promise<QueryEpochsInfoResponseSDKType> {
+  epochInfos = async (_params: QueryEpochsInfoRequest = {}): Promise<QueryEpochsInfoResponseSDKType> => {
     const endpoint = `osmosis/epochs/v1beta1/epochs`;
     return QueryEpochsInfoResponse.fromSDKJSON(await this.req.get<QueryEpochsInfoResponseSDKType>(endpoint));
-  }
+  };
   /* CurrentEpoch provide current epoch of specified identifier */
-  async currentEpoch(params: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponseSDKType> {
+  currentEpoch = async (params: QueryCurrentEpochRequest): Promise<QueryCurrentEpochResponseSDKType> => {
     const options: any = {
       params: {}
     };
@@ -27,5 +25,5 @@ export class LCDQueryClient {
     }
     const endpoint = `osmosis/epochs/v1beta1/current_epoch`;
     return QueryCurrentEpochResponse.fromSDKJSON(await this.req.get<QueryCurrentEpochResponseSDKType>(endpoint, options));
-  }
+  };
 }

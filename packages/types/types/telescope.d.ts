@@ -151,6 +151,15 @@ interface TelescopeOpts {
             methodNameQuery?: string;
             methodNameTx?: string;
         }[];
+        instantOps?: {
+            className: string;
+            include: {
+                patterns?: string[];
+            };
+            nameMapping?: {
+                [key: string]: string;
+            };
+        }[];
     };
     reactQuery?: {
         enabled: boolean;

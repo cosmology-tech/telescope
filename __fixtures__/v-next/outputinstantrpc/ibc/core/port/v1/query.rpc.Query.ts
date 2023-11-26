@@ -11,13 +11,13 @@ export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.appVersion = this.appVersion.bind(this);
   }
-  appVersion(request: QueryAppVersionRequest): Promise<QueryAppVersionResponse> {
+  /* AppVersion queries an IBC Port and determines the appropriate application version to be used */
+  appVersion = async (request: QueryAppVersionRequest): Promise<QueryAppVersionResponse> => {
     const data = QueryAppVersionRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.core.port.v1.Query", "AppVersion", data);
     return promise.then(data => QueryAppVersionResponse.decode(new BinaryReader(data)));
-  }
+  };
 }
 export const createClientImpl = (rpc: Rpc) => {
   return new QueryClientImpl(rpc);
