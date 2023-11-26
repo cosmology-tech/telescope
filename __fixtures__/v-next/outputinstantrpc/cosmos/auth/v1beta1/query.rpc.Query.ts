@@ -28,6 +28,17 @@ export interface Query {
   /** AddressStringToBytes converts Address string to bytes */
   addressStringToBytes(request: AddressStringToBytesRequest): Promise<AddressStringToBytesResponse>;
 }
+/** Query defines the gRPC querier service. */
+export interface CosmosAuthAccountQuery {
+  /**
+   * Accounts returns all the existing accounts
+   * 
+   * Since: cosmos-sdk 0.43
+   */
+  accounts(request?: QueryAccountsRequest): Promise<QueryAccountsResponse>;
+  /** Account returns account details based on address. */
+  account(request: QueryAccountRequest): Promise<QueryAccountResponse>;
+}
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
   constructor(rpc: Rpc) {

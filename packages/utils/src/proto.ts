@@ -46,6 +46,10 @@ export const makeHookKeyName = (name: string) => {
   return camel(name + "Query");
 };
 
+export const makeRpcClientInterfaceName = (className: string, serviceName: string) => {
+  return pascal(`${className}${serviceName}`);
+};
+
 // https://github.com/isaacs/minimatch/blob/main/src/index.ts#L61
 // Optimized checking for the most common glob patterns.
 const globPattern = /\*+([^+@!?\*\[\(]*)/;
@@ -60,20 +64,24 @@ const globPattern = /\*+([^+@!?\*\[\(]*)/;
 export const getQueryMethodNames = (
   packagePath: string,
   methodKeys: string[],
-  patterns?: string[]
+  patterns?: string[],
+  makeMethodName?: Function
 ) => {
+  const make = makeMethodName ?? makeUseHookName;
+
   return methodKeys
     .map((key) => {
-      const useHookName = makeUseHookName(camel(key));
-      const hookNameWithPkg = `${packagePath}.${useHookName}`;
+
+      const methodName = make(camel(key));
+      const methodNameWithPkg = `${packagePath}.${methodName}`;
 
       const isMatching =
         patterns &&
         patterns.some((pattern) => {
           if (!globPattern.test(pattern)) {
-            return hookNameWithPkg === pattern;
+            return methodNameWithPkg === pattern;
           }
-          return minimatch(hookNameWithPkg, pattern);
+          return minimatch(methodNameWithPkg, pattern);
         });
 
       if (isMatching) {

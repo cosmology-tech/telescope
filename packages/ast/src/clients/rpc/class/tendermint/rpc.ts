@@ -318,13 +318,20 @@ const rpcClassConstructor = (
 
 export const createRpcClientInterface = (
     context: GenericParseContext,
-    service: ProtoService
+    service: ProtoService,
+    name?: string,
+    methodKeys?: string[]
 ) => {
     const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
-    const keys = Object.keys(service.methods ?? {});
+    const keys = methodKeys && methodKeys.length ? methodKeys : Object.keys(service.methods ?? {});
     const methods = keys
         .map((key) => {
             const method = service.methods[key];
+
+            if(!method){
+              return null;
+            }
+
             const name = camelRpcMethods ? camel(key) : key;
             const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
             let trailingComments = [];
@@ -334,11 +341,11 @@ export const createRpcClientInterface = (
                 trailingComments,
                 leadingComments
             )
-        });
+        }).filter(Boolean);
 
     const obj = t.exportNamedDeclaration(
         t.tsInterfaceDeclaration(
-            t.identifier(service.name),
+            t.identifier(name ?? service.name),
             null,
             [],
             t.tsInterfaceBody(

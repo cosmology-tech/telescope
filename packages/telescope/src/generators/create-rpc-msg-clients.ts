@@ -4,6 +4,8 @@ import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayMsgCla
 import { getNestedProto } from '@cosmology/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
+import { getQueryMethodNames, makeRpcClientInterfaceName } from '@cosmology/utils';
+import { BundlerFile } from 'src/types';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -12,6 +14,7 @@ export const plugin = (
     // if (!builder.options.rpcClients.enabled) {
     //     return;
     // }
+    const instantRpcBundlerFiles = [];
 
     const mutationContexts = bundler
         .contexts
@@ -40,8 +43,14 @@ export const plugin = (
             return;
         }
 
-        //////// 
+        ////////
         const asts = [];
+        const bundlerFile: BundlerFile = {
+          proto: c.ref.filename,
+          package: c.ref.proto.package,
+          localname,
+          filename
+        };
         switch (c.proto.pluginValue("rpcClients.type")) {
             case 'grpc-gateway':
                 asts.push(createGRPCGatewayMsgClass(ctx.generic, proto.Msg))
@@ -61,6 +70,37 @@ export const plugin = (
             case 'tendermint':
             default:
                 asts.push(createRpcClientInterface(ctx.generic, proto.Msg))
+
+                const svc = proto.Msg;
+                const instantOps = c.options.rpcClients?.instantOps ?? [];
+
+                instantOps.forEach((item) => {
+                  // get all query methods
+                  const patterns = item.include?.patterns;
+                  const methodKeys = getQueryMethodNames(
+                    bundlerFile.package,
+                    Object.keys(svc.methods ?? {}),
+                    patterns,
+                    (name: string)=>name
+                  );
+
+                  if(!methodKeys || !methodKeys.length){
+                    return
+                  }
+
+                  asts.push(
+                    createRpcClientInterface(
+                      ctx.generic,
+                      svc,
+                      makeRpcClientInterfaceName(item.className, svc.name),
+                      methodKeys
+                    )
+                  );
+
+                  bundlerFile.instantExportedMethods = methodKeys.map((key) => svc.methods[key]);
+                  instantRpcBundlerFiles.push(bundlerFile);
+                });
+
                 asts.push(createRpcClientClass(ctx.generic, proto.Msg))
         }
 
@@ -91,5 +131,6 @@ export const plugin = (
     }).filter(Boolean);
 
     bundler.addRPCMsgClients(clients);
+    bundler.addStateManagers("instantRpc", instantRpcBundlerFiles);
 
 };

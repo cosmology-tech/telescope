@@ -1,47 +1,46 @@
-import { TelescopeBuilder } from '../src/builder';
-import { TelescopeOptions } from '@cosmology/types';
+import { TelescopeBuilder } from "../src/builder";
+import { TelescopeOptions } from "@cosmology/types";
 import {
   bundleBaseRegistries,
   bundleRegistries,
-  parseContextsForRegistry
-} from '../src/bundle';
-import { TelescopeInput } from '../src';
-import { kebab } from 'case';
-import { join } from 'path';
-import { getTestProtoStore } from '../test-utils';
-import { TelescopeParseContext } from '../src/build';
+  parseContextsForRegistry,
+} from "../src/bundle";
+import { TelescopeInput } from "../src";
+import { kebab } from "case";
+import { join } from "path";
+import { getTestProtoStore } from "../test-utils";
+import { TelescopeParseContext } from "../src/build";
 
-const outPath = __dirname + '/../../../__fixtures__/v-next/outputinstantrpc';
+const outPath = __dirname + "/../../../__fixtures__/v-next/outputinstantrpc";
 const store = getTestProtoStore();
 store.traverseAll();
 
 const options: TelescopeOptions = {
-
-  env: 'v-next',
+  env: "v-next",
   removeUnusedImports: false,
   classesUseArrowFunctions: true,
 
   tsDisable: {
     disableAll: false,
-    patterns: ['osmosis/**/*amino.ts'],
-    files: ['akash/deployment/v1beta1/deployment.ts']
+    patterns: ["osmosis/**/*amino.ts"],
+    files: ["akash/deployment/v1beta1/deployment.ts"],
   },
 
   eslintDisable: {
     disableAll: false,
-    patterns: ['akash/**/*amino.ts'],
-    files: ['akash/deployment/v1beta1/deployment.ts']
+    patterns: ["akash/**/*amino.ts"],
+    files: ["akash/deployment/v1beta1/deployment.ts"],
   },
 
   interfaces: {
     enabled: false,
-    useUnionTypes: false
+    useUnionTypes: false,
   },
 
   prototypes: {
     enabled: true,
     parser: {
-      keepCase: false
+      keepCase: false,
     },
     methods: {
       encode: true,
@@ -51,7 +50,7 @@ const options: TelescopeOptions = {
       fromPartial: true,
       toSDK: true,
       fromSDKJSON: true,
-      fromSDK: true
+      fromSDK: true,
     },
     strictNullCheckForPrototypeMethods: true,
     paginationDefaultFromPartial: true,
@@ -65,34 +64,34 @@ const options: TelescopeOptions = {
         // 'cosmos.gov.v1',
         // 'cosmos.group.v1'
       ],
-      protos: ['cosmos/authz/v1beta1/event.proto']
+      protos: ["cosmos/authz/v1beta1/event.proto"],
     },
     typingsFormat: {
       customTypes: {
-        useCosmosSDKDec: true
+        useCosmosSDKDec: true,
       },
-      num64: 'bigint',
+      num64: "bigint",
       useDeepPartial: true,
       useExact: false,
-      timestamp: 'date',
-      duration: 'duration'
-    }
+      timestamp: "date",
+      duration: "duration",
+    },
   },
 
   bundle: {
-    enabled: true
+    enabled: true,
   },
 
   stargateClients: {
     enabled: true,
-    includeCosmosDefaultTypes: true
+    includeCosmosDefaultTypes: true,
   },
 
   aggregatedLCD: {
-    dir: 'osmosis',
-    filename: 'agg-lcd.ts',
-    packages: ['cosmos.bank.v1beta1', 'osmosis.gamm.v1beta1'],
-    addToBundle: true
+    dir: "osmosis",
+    filename: "agg-lcd.ts",
+    packages: ["cosmos.bank.v1beta1", "osmosis.gamm.v1beta1"],
+    addToBundle: true,
   },
 
   lcdClients: {
@@ -100,28 +99,28 @@ const options: TelescopeOptions = {
     scopedIsExclusive: false,
     scoped: [
       {
-        dir: 'osmosis',
-        filename: 'custom-lcd-client.ts',
+        dir: "osmosis",
+        filename: "custom-lcd-client.ts",
         packages: [
-          'cosmos.bank.v1beta1',
-          'cosmos.gov.v1beta1',
-          'osmosis.gamm.v1beta1'
+          "cosmos.bank.v1beta1",
+          "cosmos.gov.v1beta1",
+          "osmosis.gamm.v1beta1",
         ],
         addToBundle: true,
-        methodName: 'createCustomLCDClient'
+        methodName: "createCustomLCDClient",
       },
       {
-        dir: 'evmos',
-        filename: 'custom-lcd-client.ts',
+        dir: "evmos",
+        filename: "custom-lcd-client.ts",
         packages: [
-          'cosmos.bank.v1beta1',
-          'cosmos.gov.v1beta1',
-          'evmos.erc20.v1'
+          "cosmos.bank.v1beta1",
+          "cosmos.gov.v1beta1",
+          "evmos.erc20.v1",
         ],
         addToBundle: true,
-        methodName: 'createEvmosLCDClient'
-      }
-    ]
+        methodName: "createEvmosLCDClient",
+      },
+    ],
   },
 
   rpcClients: {
@@ -131,100 +130,109 @@ const options: TelescopeOptions = {
     scopedIsExclusive: false,
     scoped: [
       {
-        dir: 'cosmos',
-        filename: 'cosmos-rpc-client.ts',
-        packages: ['cosmos.bank.v1beta1', 'cosmos.gov.v1beta1'],
+        dir: "cosmos",
+        filename: "cosmos-rpc-client.ts",
+        packages: ["cosmos.bank.v1beta1", "cosmos.gov.v1beta1"],
         addToBundle: true,
-        methodNameQuery: 'createCosmicRPCQueryClient',
-        methodNameTx: 'createCosmicRPCTxClient'
+        methodNameQuery: "createCosmicRPCQueryClient",
+        methodNameTx: "createCosmicRPCTxClient",
       },
       {
-        dir: 'evmos',
-        filename: 'evmos-rpc-client.ts',
+        dir: "evmos",
+        filename: "evmos-rpc-client.ts",
         packages: [
-          'cosmos.bank.v1beta1',
-          'cosmos.gov.v1beta1',
-          'evmos.erc20.v1'
+          "cosmos.bank.v1beta1",
+          "cosmos.gov.v1beta1",
+          "evmos.erc20.v1",
         ],
         addToBundle: true,
-        methodNameQuery: 'createEvmosRPCQueryClient',
-        methodNameTx: 'createEvmosRPCTxClient'
-      }
+        methodNameQuery: "createEvmosRPCQueryClient",
+        methodNameTx: "createEvmosRPCTxClient",
+      },
     ],
     enabledServices: [
-      'Msg',
-      'Query',
-      'Service',
-      'ReflectionService',
-      'ABCIApplication'
-    ]
+      "Msg",
+      "Query",
+      "Service",
+      "ReflectionService",
+      "ABCIApplication",
+    ],
+    instantOps: [
+      {
+        className: "OsmosisClaim",
+        include: {
+          patterns: ["osmosis.**.*claim*"],
+        },
+      },
+      {
+        className: "CosmosAuthAccount",
+        include: {
+          patterns: ["cosmos.auth.**.*account*"],
+        },
+      },
+    ],
   },
 
   reactQuery: {
     enabled: true,
     needExtraQueryKey: true,
     include: {
-      patterns: ['osmosis/**/gamm/**/query.proto'],
-      protos: ['akash/cert/v1beta2/query.proto'],
-      packages: ['cosmos.bank.v1beta1', 'cosmos.auth.**',  'cosmos.nft.**']
+      patterns: ["osmosis/**/gamm/**/query.proto"],
+      protos: ["akash/cert/v1beta2/query.proto"],
+      packages: ["cosmos.bank.v1beta1", "cosmos.auth.**", "cosmos.nft.**"],
     },
     instantExport: {
       include: {
-        patterns: [
-          '**.useBalance',
-          'cosmos.auth.**',
-          'osmosis.**',
-          'akash.**'
-        ]
+        patterns: ["**.useBalance", "cosmos.auth.**", "osmosis.**", "akash.**"],
       },
       nameMapping: {
-        'useAuthModuleAccounts': 'cosmos.auth.v1beta1.useModuleAccounts',
-        'useBankBalance': 'cosmos.bank.v1beta1.useBalance',
-        'useNftBalance': 'cosmos.nft.v1beta1.useBalance',
-      }
-    }
+        useAuthModuleAccounts: "cosmos.auth.v1beta1.useModuleAccounts",
+        useBankBalance: "cosmos.bank.v1beta1.useBalance",
+        useNftBalance: "cosmos.nft.v1beta1.useBalance",
+      },
+    },
   },
 
   mobx: {
     enabled: true,
     include: {
-      patterns: ['osmosis/**/gamm/**/query.proto'],
-      protos: ['akash/cert/v1beta2/query.proto'],
-      packages: ['cosmos.gov.v1beta1']
-    }
+      patterns: ["osmosis/**/gamm/**/query.proto"],
+      protos: ["akash/cert/v1beta2/query.proto"],
+      packages: ["cosmos.gov.v1beta1"],
+    },
   },
 
   pinia: {
     enabled: true,
     include: {
-      patterns: ['osmosis/**/gamm/**/query.proto'],
-      protos: ['akash/cert/v1beta2/query.proto'],
-      packages: ['evmos.erc20.v1']
-    }
+      patterns: ["osmosis/**/gamm/**/query.proto"],
+      protos: ["akash/cert/v1beta2/query.proto"],
+      packages: ["evmos.erc20.v1"],
+    },
   },
 
   aminoEncoding: {
     enabled: true,
     exceptions: {
-      '/akash.audit.v1beta2.MsgSignProviderAttributes': {
-        aminoType: 'mymessage-testonly'
-      }
+      "/akash.audit.v1beta2.MsgSignProviderAttributes": {
+        aminoType: "mymessage-testonly",
+      },
     },
     typeUrlToAmino: (typeUrl: string) => {
-      const name = typeUrl.replace(/^\//, '');
-      const elements = name.split('.');
+      const name = typeUrl.replace(/^\//, "");
+      const elements = name.split(".");
       const pkg = elements[0];
 
       switch (pkg) {
-        case 'akash': {
+        case "akash": {
           const n = elements.filter((a) => !a.match(/v1beta1/));
           n[n.length - 1] = kebab(n[n.length - 1]);
-          n[n.length - 1] = n[n.length - 1].replace(/^msg-/, 'testonly-');
-          return n.join('/');
+          n[n.length - 1] = n[n.length - 1].replace(/^msg-/, "testonly-");
+          return n.join("/");
         }
       }
     },
-    useLegacyInlineEncoding: true
+    useLegacyInlineEncoding: true,
   },
   packages: {
     akash: {
@@ -234,61 +242,59 @@ const options: TelescopeOptions = {
           prototypes: {
             allowUndefinedTypes: true,
             typingsFormat: {
-              useDeepPartial: false
-            }
+              useDeepPartial: false,
+            },
           },
           aminoEncoding: {
-            enabled: false
+            enabled: false,
           },
           rpcClients: {
-            inline: true
-          }
-        }
+            inline: true,
+          },
+        },
       },
       prototypes: {
         typingsFormat: {
-          useExact: true
-        }
-      }
-    }
-  }
+          useExact: true,
+        },
+      },
+    },
+  },
 };
 
 const input: TelescopeInput = {
   outPath,
-  protoDirs: [
-    __dirname + '/../../../__fixtures__/chain1',
-  ],
-  options
+  protoDirs: [__dirname + "/../../../__fixtures__/chain1"],
+  options,
 };
 
 const telescope = new TelescopeBuilder(input);
 
-describe('bundle package registries and root file names', () => {
-  it('bundleRegistries', async () => {
+describe("bundle package registries and root file names", () => {
+  it("bundleRegistries", async () => {
     await telescope.build();
     const registries = bundleRegistries(telescope);
     const result = registries.map((reg) => ({
-      ['package']: reg.package,
+      ["package"]: reg.package,
       contexts: parseContextsForRegistry(
         reg.contexts as TelescopeParseContext[]
-      )
+      ),
     }));
     // console.log(JSON.stringify(result, null, 2));
   });
 
-  it('bundleBaseRegistries', () => {
+  it("bundleBaseRegistries", () => {
     const registries = bundleBaseRegistries(telescope);
     const result = registries.map((reg) => ({
       base: reg.base,
       pkgs: reg.pkgs.map((obj) => {
         return {
-          ['package']: obj.package,
+          ["package"]: obj.package,
           contexts: parseContextsForRegistry(
             obj.contexts as TelescopeParseContext[]
-          )
+          ),
         };
-      })
+      }),
     }));
     // console.log(JSON.stringify(result, null, 2));
   });

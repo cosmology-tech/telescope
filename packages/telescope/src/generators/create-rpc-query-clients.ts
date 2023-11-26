@@ -24,13 +24,14 @@ import { getNestedProto, isRefIncluded } from '@cosmology/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
 import { ProtoRoot, ProtoService } from '@cosmology/types';
-import { getQueryMethodNames } from '@cosmology/utils';
+import { getQueryMethodNames, makeRpcClientInterfaceName } from '@cosmology/utils';
 import { BundlerFile } from '../types';
 
 export const plugin = (
     builder: TelescopeBuilder,
     bundler: Bundler
 ) => {
+    const instantRpcBundlerFiles = [];
     const reactQueryBundlerFiles = [];
     const mobxBundlerFiles = [];
 
@@ -156,6 +157,36 @@ export const plugin = (
                         const svc: ProtoService = proto[svcKey];
 
                         asts.push(createRpcClientInterface(ctx.generic, svc));
+
+                        const instantOps = c.options.rpcClients?.instantOps ?? [];
+
+                        instantOps.forEach((item) => {
+                          // get all query methods
+                          const patterns = item.include?.patterns;
+                          const methodKeys = getQueryMethodNames(
+                            bundlerFile.package,
+                            Object.keys(proto[svcKey].methods ?? {}),
+                            patterns,
+                            (name: string)=>name
+                          );
+
+                          if(!methodKeys || !methodKeys.length){
+                            return
+                          }
+
+                          asts.push(
+                            createRpcClientInterface(
+                              ctx.generic,
+                              svc,
+                              makeRpcClientInterfaceName(item.className, svc.name),
+                              methodKeys
+                            )
+                          );
+
+                          bundlerFile.instantExportedMethods = methodKeys.map((key) => proto[svcKey].methods[key]);
+                          instantRpcBundlerFiles.push(bundlerFile);
+                        });
+
                         asts.push(createRpcClientClass(ctx.generic, svc));
                         if (c.proto.pluginValue('rpcClients.extensions')) {
                             asts.push(createRpcQueryExtension(ctx.generic, svc));
@@ -243,6 +274,7 @@ export const plugin = (
     }).filter(Boolean);
 
     bundler.addRPCQueryClients(clients);
+    bundler.addStateManagers("instantRpc", instantRpcBundlerFiles);
     bundler.addStateManagers("reactQuery", reactQueryBundlerFiles);
     bundler.addStateManagers("mobx", mobxBundlerFiles);
 };

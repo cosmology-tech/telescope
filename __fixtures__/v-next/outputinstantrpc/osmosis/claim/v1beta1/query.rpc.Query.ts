@@ -12,6 +12,11 @@ export interface Query {
   claimableForAction(request: QueryClaimableForActionRequest): Promise<QueryClaimableForActionResponse>;
   totalClaimable(request: QueryTotalClaimableRequest): Promise<QueryTotalClaimableResponse>;
 }
+/** Query defines the gRPC querier service. */
+export interface OsmosisClaimQuery {
+  claimRecord(request: QueryClaimRecordRequest): Promise<QueryClaimRecordResponse>;
+  claimableForAction(request: QueryClaimableForActionRequest): Promise<QueryClaimableForActionResponse>;
+}
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
   constructor(rpc: Rpc) {
