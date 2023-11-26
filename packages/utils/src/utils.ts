@@ -1,4 +1,4 @@
-import { TelescopeOptions, TelescopeOption, ProtoRef } from '@cosmology/types';
+import { TelescopeOptions, TelescopeOption, ProtoRef, ImportUsage } from '@cosmology/types';
 import * as dotty from 'dotty';
 
 /**
@@ -65,4 +65,26 @@ export const getTypeNameFromFieldName = (name: string, importSrc: string, ref: P
   }
 
   return importedAs;
+}
+
+export const buildImports = (imports: ImportUsage[])=>{
+  return imports.map((item) => {
+    return {
+      type: 'ImportDeclaration',
+      importKind: 'value',
+      specifiers: [
+        {
+          type: 'ImportNamespaceSpecifier',
+          local: {
+            type: 'Identifier',
+            name: item.importedAs
+          }
+        }
+      ],
+      source: {
+        type: 'StringLiteral',
+        value: item.import
+      }
+    };
+  });
 }

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createInstantRpcClass 1`] = `
+"export class CosmosAuth {
+  static rpc: Rpc;
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.authAccount = _CosmosAuthV1beta1Queryrpc.createClientImpl(rpc).account;
+    this.bankAccount = _CosmosBankV1beta1Queryrpc.createClientImpl(rpc).account;
+  }
+}"
+`;
+
+exports[`createInstantRpcInterface 1`] = `"export interface CosmosAuth extends _CosmosAuthV1beta1Queryrpc.CosmosAuthAccountQuery, _CosmosAuthV2beta1Queryrpc.CosmosAuthAccountMsg {}"`;

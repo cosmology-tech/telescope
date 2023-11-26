@@ -27,7 +27,7 @@ export const plugin = (builder: TelescopeBuilder) => {
   const obj = {};
   const instantOpsMapping = {};
   const methodSet = new Set();
-  const bundlerFiles = builder.stateManagers["instantOps"];
+  const bundlerFiles = builder.stateManagers["instantRpc"];
 
   if (!bundlerFiles || !bundlerFiles.length) {
     return;
@@ -86,7 +86,7 @@ function createRpcOpsAst(
   instantOpsMapping,
   obj
 ) {
-  bundlerFiles.map((bundlerFile) => {
+  bundlerFiles.forEach((bundlerFile) => {
     const path = `./${bundlerFile.localname.replace(/\.ts$/, "")}`;
     dotty.put(obj, bundlerFile.package, path);
 

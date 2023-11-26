@@ -13,6 +13,7 @@ export declare const getNested: (root: ProtoRoot, path: string[]) => any;
  */
 export declare const makeUseHookName: (name: string) => any;
 export declare const makeUsePkgHookName: (packageName: string, name: string) => any;
+export declare const makePkgMethodName: (packageName: string, name: string) => any;
 export declare const makeUseHookTypeName: (name: string) => string;
 export declare const makeHookKeyName: (name: string) => any;
 export declare const makeRpcClientInterfaceName: (className: string, serviceName: string) => string;
