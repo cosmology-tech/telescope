@@ -1,5 +1,5 @@
 import * as t from "@babel/types";
-import { identifier } from "../../../utils";
+import { classProperty, identifier } from "../../../utils";
 import { GenericParseContext } from "../../../encoding";
 
 export const createInstantRpcInterface = (
@@ -41,11 +41,12 @@ export const createInstantRpcClass = (
       t.identifier(name),
       null,
       t.classBody([
-        t.classProperty(
+        classProperty(
           t.identifier("rpc"),
           null,
           t.tsTypeAnnotation(t.tsTypeReference(t.identifier("Rpc"))),
           null,
+          false,
           false,
           true
         ),

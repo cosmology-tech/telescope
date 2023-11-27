@@ -175,7 +175,7 @@ const options: TelescopeOptions = {
           patterns: ["cosmos.auth.**.*account*", "cosmos.auth.**.*Account*"],
         },
         nameMapping: {
-          useAuthModuleAccounts: "cosmos.auth.v1beta1.moduleAccounts",
+          authModuleAccounts: "cosmos.auth.v1beta1.moduleAccounts",
           useBankBalance: "cosmos.bank.v1beta1.balance",
           useNftBalance: "cosmos.nft.v1beta1.balance",
         },

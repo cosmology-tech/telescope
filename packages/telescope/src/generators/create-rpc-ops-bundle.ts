@@ -1,7 +1,10 @@
 import { aggregateImports, getImportStatements } from "../imports";
 import { join, dirname, extname, basename } from "path";
 import { TelescopeBuilder } from "../builder";
-import { createScopedRpcHookFactory } from "@cosmology/ast";
+import {
+  createInstantRpcInterface,
+  createInstantRpcClass,
+} from "@cosmology/ast";
 import { ImportUsage, ProtoRef } from "@cosmology/types";
 import { TelescopeParseContext } from "../build";
 import { writeAstToFile } from "../utils/files";
@@ -11,6 +14,7 @@ import { createEmptyProtoRef } from "@cosmology/proto-parser";
 import { camel, makeUseHookName, makeUsePkgHookName } from "@cosmology/utils";
 import { variableSlug } from "@cosmology/utils";
 import { swapKeyValue } from "@cosmology/utils";
+import { buildImports } from "@cosmology/utils";
 import { BundlerFile } from "src/types";
 
 export const plugin = (builder: TelescopeBuilder) => {
@@ -55,7 +59,7 @@ export const plugin = (builder: TelescopeBuilder) => {
           instantOpsConfig.className,
           pkgImports,
           nameMapping,
-          bundlerFiles,
+          bundlerFiles
         )
       );
     },
@@ -67,7 +71,7 @@ export const plugin = (builder: TelescopeBuilder) => {
   const importStmts = getImportStatements(localname, imports);
 
   // construct the AST
-  const prog = [].concat(importStmts).concat([]).concat(ast);
+  const prog = [].concat(importStmts).concat(buildImports(pkgImports)).concat(ast);
 
   // write the file.
   const filename = join(builder.outPath, localname);
@@ -81,7 +85,7 @@ function createRpcOpsAst(
   className: string,
   pkgImports: ImportUsage[],
   nameMapping,
-  bundlerFiles: BundlerFile[],
+  bundlerFiles: BundlerFile[]
 ) {
   const extendInterfaces = [];
   const instantMapping: {
@@ -91,7 +95,7 @@ function createRpcOpsAst(
       comment?: string | undefined;
     };
   } = {};
-  const camelRpcMethods = context.options.rpcClients?.camelCase;
+  const camelRpcMethods = context.generic.pluginValue("rpcClients.camelCase");
 
   bundlerFiles.forEach((bundlerFile) => {
     const path = `./${bundlerFile.localname.replace(/\.ts$/, "")}`;
@@ -116,16 +120,12 @@ function createRpcOpsAst(
 
     bundlerFile.instantExportedMethods?.forEach((method) => {
       const methodName = camelRpcMethods ? camel(method.name) : method.name;
-      const nameWithPkg = `${context.ref.proto.package}.${methodName}`;
+      const nameWithPkg = `${bundlerFile.package}.${methodName}`;
       const methodAlias =
         nameMapping && nameMapping[nameWithPkg]
           ? nameMapping[nameWithPkg]
           : methodName;
 
-      instantMapping[methodAlias] = {
-        methodName,
-        importedVarName,
-      };
       dotty.put(instantMapping, methodAlias, {
         methodName,
         importedVarName,
@@ -133,5 +133,8 @@ function createRpcOpsAst(
     });
   });
 
-  return [];
+  return [
+    createInstantRpcInterface(className, extendInterfaces),
+    createInstantRpcClass(context.generic, className, instantMapping),
+  ];
 }

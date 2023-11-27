@@ -110,7 +110,7 @@ export const plugin = (
                     instantRpcBundlerFiles[item.className] = [];
                   }
 
-                  instantRpcBundlerFiles[item.className].push(bundlerFile);
+                  instantRpcBundlerFiles[item.className].push({...bundlerFile});
                 });
 
                 asts.push(createRpcClientClass(ctx.generic, proto.Msg))

@@ -89,7 +89,7 @@ export const plugin = (
                         instantRpcBundlerFiles[item.className] = [];
                       }
 
-                      instantRpcBundlerFiles[item.className].push(bundlerFile);
+                      instantRpcBundlerFiles[item.className].push({...bundlerFile});
                     });
 
                     context.body.push(createRpcClientClass(context.generic, proto[svcKey]));
@@ -140,7 +140,7 @@ export const plugin = (
                     instantRpcBundlerFiles[item.className] = [];
                   }
 
-                  instantRpcBundlerFiles[item.className].push(bundlerFile);
+                  instantRpcBundlerFiles[item.className].push({...bundlerFile});
                 });
 
                 context.body.push(createRpcClientClass(context.generic, proto.Msg))

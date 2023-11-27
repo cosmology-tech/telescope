@@ -39,7 +39,7 @@ export interface CosmosAuthAccount {
   /** Account returns account details based on address. */
   account(request: QueryAccountRequest): Promise<QueryAccountResponse>;
   /** ModuleAccounts returns all the existing module accounts. */
-  useAuthModuleAccounts(request?: QueryModuleAccountsRequest): Promise<QueryModuleAccountsResponse>;
+  authModuleAccounts(request?: QueryModuleAccountsRequest): Promise<QueryModuleAccountsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
