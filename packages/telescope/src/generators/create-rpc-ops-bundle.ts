@@ -24,14 +24,6 @@ export const plugin = (builder: TelescopeBuilder) => {
   const localname = "service-ops.ts";
 
   // get mapping of packages and rpc query filenames.
-  const instantOpsMapping = {};
-  const methodSet = new Set();
-  const bundlerFiles = builder.stateManagers["instantRpc"];
-
-  if (!bundlerFiles || !bundlerFiles.length) {
-    return;
-  }
-
   // create proto ref for context
   const pkg = "@root";
   const ref: ProtoRef = createEmptyProtoRef(pkg, localname);
@@ -47,6 +39,12 @@ export const plugin = (builder: TelescopeBuilder) => {
 
   const ast = builder.options.rpcClients!.instantOps!.reduce(
     (ast, instantOpsConfig) => {
+      const bundlerFiles =
+        builder.stateManagers[`instantRpc_${instantOpsConfig.className}`];
+
+      if (!bundlerFiles || !bundlerFiles.length) {
+        return ast;
+      }
       let nameMapping = instantOpsConfig.nameMapping;
 
       nameMapping = swapKeyValue(nameMapping ?? {});
@@ -58,8 +56,6 @@ export const plugin = (builder: TelescopeBuilder) => {
           pkgImports,
           nameMapping,
           bundlerFiles,
-          methodSet,
-          instantOpsMapping
         )
       );
     },
@@ -86,43 +82,55 @@ function createRpcOpsAst(
   pkgImports: ImportUsage[],
   nameMapping,
   bundlerFiles: BundlerFile[],
-  methodSet: Set<unknown>,
-  instantOpsMapping,
 ) {
   const extendInterfaces = [];
+  const instantMapping: {
+    [key: string]: {
+      methodName: string;
+      importedVarName: string;
+      comment?: string | undefined;
+    };
+  } = {};
+  const camelRpcMethods = context.options.rpcClients?.camelCase;
 
   bundlerFiles.forEach((bundlerFile) => {
-    const path = `./${bundlerFile.localname.replace(/\.ts$/, '')}`;
-    const importedVarName = variableSlug(path)
+    const path = `./${bundlerFile.localname.replace(/\.ts$/, "")}`;
+    const importedVarName = variableSlug(path);
 
-    // // build instantOpsMapping
-    // bundlerFile.instantExportedMethods?.forEach((method) => {
-    //   const methodName = method.name;
+    if (
+      pkgImports &&
+      !pkgImports.some((item) => item.importedAs === importedVarName)
+    ) {
+      pkgImports.push({
+        type: "typeImport",
+        name: importedVarName,
+        import: path,
+        importedAs: importedVarName,
+      });
+    }
 
-    //   const useHookName = makeUseHookName(camel(methodName));
-    //   const hookNameWithPkg = `${bundlerFile.package}.${useHookName}`;
-    //   let instantHookName = null;
+    extendInterfaces.push({
+      importedVarName: importedVarName,
+      interfaceName: className,
+    });
 
-    //   if (nameMapping[hookNameWithPkg]) {
-    //     instantHookName = nameMapping[hookNameWithPkg];
-    //   } else {
-    //     if (methodSet.has(useHookName)) {
-    //       instantHookName = makeUsePkgHookName(bundlerFile.package, methodName);
-    //     } else {
-    //       instantHookName = useHookName;
-    //     }
-    //   }
+    bundlerFile.instantExportedMethods?.forEach((method) => {
+      const methodName = camelRpcMethods ? camel(method.name) : method.name;
+      const nameWithPkg = `${context.ref.proto.package}.${methodName}`;
+      const methodAlias =
+        nameMapping && nameMapping[nameWithPkg]
+          ? nameMapping[nameWithPkg]
+          : methodName;
 
-    //   dotty.put(instantOpsMapping, instantHookName, {
-    //     useHookName,
-    //     importedVarName: variableSlug(path),
-    //     comment: `${bundlerFile.package}.${useHookName}\n${
-    //       method.comment ?? methodName
-    //     }`,
-    //   });
-
-    //   methodSet.add(instantHookName);
-    // });
+      instantMapping[methodAlias] = {
+        methodName,
+        importedVarName,
+      };
+      dotty.put(instantMapping, methodAlias, {
+        methodName,
+        importedVarName,
+      });
+    });
   });
 
   return [];

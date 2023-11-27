@@ -15,7 +15,9 @@ export const plugin = (
     builder: TelescopeBuilder,
     bundler: Bundler
 ) => {
-    const instantRpcBundlerFiles = [];
+    const instantRpcBundlerFiles: {
+      [key: string]: BundlerFile[]
+    } = {};
 
     // [x] search for all files that live in package
     const baseProtos = builder.store.getProtos().filter(ref => {
@@ -82,7 +84,12 @@ export const plugin = (
                       );
 
                       bundlerFile.instantExportedMethods = methodKeys.map((key) => proto[svcKey].methods[key]);
-                      instantRpcBundlerFiles.push(bundlerFile);
+
+                      if(!instantRpcBundlerFiles[item.className]){
+                        instantRpcBundlerFiles[item.className] = [];
+                      }
+
+                      instantRpcBundlerFiles[item.className].push(bundlerFile);
                     });
 
                     context.body.push(createRpcClientClass(context.generic, proto[svcKey]));
@@ -129,7 +136,11 @@ export const plugin = (
                   );
 
                   bundlerFile.instantExportedMethods = methodKeys.map((key) => proto['Msg'].methods[key]);
-                  instantRpcBundlerFiles.push(bundlerFile);
+                  if(!instantRpcBundlerFiles[item.className]){
+                    instantRpcBundlerFiles[item.className] = [];
+                  }
+
+                  instantRpcBundlerFiles[item.className].push(bundlerFile);
                 });
 
                 context.body.push(createRpcClientClass(context.generic, proto.Msg))
@@ -165,5 +176,7 @@ export const plugin = (
         return context;
     }).filter(Boolean);
 
-    bundler.addStateManagers("instantRpc", instantRpcBundlerFiles);
+    Object.keys(instantRpcBundlerFiles).forEach((className)=>{
+      bundler.addStateManagers(`instantRpc_${className}`, instantRpcBundlerFiles[className]);
+    })
 };

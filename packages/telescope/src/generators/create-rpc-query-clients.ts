@@ -31,7 +31,9 @@ export const plugin = (
     builder: TelescopeBuilder,
     bundler: Bundler
 ) => {
-    const instantRpcBundlerFiles = [];
+    const instantRpcBundlerFiles: {
+      [key: string]: BundlerFile[]
+    } = {};
     const reactQueryBundlerFiles = [];
     const mobxBundlerFiles = [];
 
@@ -189,7 +191,12 @@ export const plugin = (
                           );
 
                           bundlerFile.instantExportedMethods = methodKeys.map((key) => proto[svcKey].methods[key]);
-                          instantRpcBundlerFiles.push(bundlerFile);
+
+                          if(!instantRpcBundlerFiles[item.className]){
+                            instantRpcBundlerFiles[item.className] = [];
+                          }
+
+                          instantRpcBundlerFiles[item.className].push(bundlerFile);
                         });
 
                         asts.push(createRpcClientClass(ctx.generic, svc));
@@ -279,7 +286,11 @@ export const plugin = (
     }).filter(Boolean);
 
     bundler.addRPCQueryClients(clients);
-    bundler.addStateManagers("instantRpc", instantRpcBundlerFiles);
+
+    Object.keys(instantRpcBundlerFiles).forEach((className)=>{
+      bundler.addStateManagers(`instantRpc_${className}`, instantRpcBundlerFiles[className]);
+    })
+
     bundler.addStateManagers("reactQuery", reactQueryBundlerFiles);
     bundler.addStateManagers("mobx", mobxBundlerFiles);
 };

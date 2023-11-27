@@ -14,7 +14,9 @@ export const plugin = (
     // if (!builder.options.rpcClients.enabled) {
     //     return;
     // }
-    const instantRpcBundlerFiles = [];
+    const instantRpcBundlerFiles: {
+      [key: string]: BundlerFile[]
+    } = {};
 
     const mutationContexts = bundler
         .contexts
@@ -103,7 +105,12 @@ export const plugin = (
                   );
 
                   bundlerFile.instantExportedMethods = methodKeys.map((key) => svc.methods[key]);
-                  instantRpcBundlerFiles.push(bundlerFile);
+
+                  if(!instantRpcBundlerFiles[item.className]){
+                    instantRpcBundlerFiles[item.className] = [];
+                  }
+
+                  instantRpcBundlerFiles[item.className].push(bundlerFile);
                 });
 
                 asts.push(createRpcClientClass(ctx.generic, proto.Msg))
@@ -136,6 +143,8 @@ export const plugin = (
     }).filter(Boolean);
 
     bundler.addRPCMsgClients(clients);
-    bundler.addStateManagers("instantRpc", instantRpcBundlerFiles);
 
+    Object.keys(instantRpcBundlerFiles).forEach((className)=>{
+      bundler.addStateManagers(`instantRpc_${className}`, instantRpcBundlerFiles[className]);
+    })
 };
