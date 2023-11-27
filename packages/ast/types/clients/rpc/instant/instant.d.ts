@@ -1,11 +1,13 @@
+import * as t from "@babel/types";
 import { GenericParseContext } from "../../../encoding";
-export declare const createInstantRpcClass: (context: GenericParseContext, obj: object, identifier: string, instantHooksMapping?: {
+export declare const createInstantRpcInterface: (name: string, extendInterfaces: {
+    importedVarName: string;
+    interfaceName: string;
+}[]) => t.ExportNamedDeclaration;
+export declare const createInstantRpcClass: (context: GenericParseContext, name: string, instantMapping: {
     [key: string]: {
-        useHookName: string;
+        methodName: string;
         importedVarName: string;
         comment?: string;
     };
-}) => {
-    imports: any[];
-    ast: any[];
-};
+}) => t.ExportNamedDeclaration;

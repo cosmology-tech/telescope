@@ -163,11 +163,21 @@ const options: TelescopeOptions = {
         include: {
           patterns: ["osmosis.**.*claim*"],
         },
+        nameMapping: {
+          useAuthModuleAccounts: "cosmos.auth.v1beta1.useModuleAccounts",
+          useBankBalance: "cosmos.bank.v1beta1.useBalance",
+          useNftBalance: "cosmos.nft.v1beta1.useBalance",
+        },
       },
       {
         className: "CosmosAuthAccount",
         include: {
-          patterns: ["cosmos.auth.**.*account*"],
+          patterns: ["cosmos.auth.**.*account*", "cosmos.auth.**.*Account*"],
+        },
+        nameMapping: {
+          useAuthModuleAccounts: "cosmos.auth.v1beta1.moduleAccounts",
+          useBankBalance: "cosmos.bank.v1beta1.balance",
+          useNftBalance: "cosmos.nft.v1beta1.balance",
         },
       },
     ],

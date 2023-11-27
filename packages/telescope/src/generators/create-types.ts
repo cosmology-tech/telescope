@@ -9,7 +9,7 @@ import { mkdirp } from 'mkdirp';
 import { getNestedProto, isRefExcluded } from '@cosmology/proto-parser';
 import { createRpcClientClass, createRpcClientImpl, createRpcClientInterface, createRpcQueryExtension } from '@cosmology/ast';
 import { BundlerFile } from 'src/types';
-import { getQueryMethodNames, makeRpcClientInterfaceName } from '@cosmology/utils';
+import { getQueryMethodNames, swapKeyValue } from '@cosmology/utils';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -54,6 +54,10 @@ export const plugin = (
                     context.body.push(createRpcClientInterface(context.generic, proto[svcKey]));
 
                     instantOps.forEach((item) => {
+                      let nameMapping = item.nameMapping;
+
+                      nameMapping = swapKeyValue(nameMapping ?? {});
+
                       // get all query methods
                       const patterns = item.include?.patterns;
                       const methodKeys = getQueryMethodNames(
@@ -71,8 +75,9 @@ export const plugin = (
                         createRpcClientInterface(
                           context.generic,
                           svc,
-                          makeRpcClientInterfaceName(item.className, svc.name),
-                          methodKeys
+                          item.className,
+                          methodKeys,
+                          nameMapping
                         )
                       );
 
@@ -96,6 +101,10 @@ export const plugin = (
                 context.body.push(createRpcClientInterface(context.generic, proto.Msg))
 
                 instantOps.forEach((item) => {
+                  let nameMapping = item.nameMapping;
+
+                  nameMapping = swapKeyValue(nameMapping ?? {});
+
                   // get all query methods
                   const patterns = item.include?.patterns;
                   const methodKeys = getQueryMethodNames(
@@ -113,8 +122,9 @@ export const plugin = (
                     createRpcClientInterface(
                       context.generic,
                       proto.Msg,
-                      makeRpcClientInterfaceName(item.className, proto.Msg.name),
-                      methodKeys
+                      item.className,
+                      methodKeys,
+                      nameMapping
                     )
                   );
 

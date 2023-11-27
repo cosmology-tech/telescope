@@ -13,7 +13,7 @@ export interface Query {
   totalClaimable(request: QueryTotalClaimableRequest): Promise<QueryTotalClaimableResponse>;
 }
 /** Query defines the gRPC querier service. */
-export interface OsmosisClaimQuery {
+export interface OsmosisClaim {
   claimRecord(request: QueryClaimRecordRequest): Promise<QueryClaimRecordResponse>;
   claimableForAction(request: QueryClaimableForActionRequest): Promise<QueryClaimableForActionResponse>;
 }

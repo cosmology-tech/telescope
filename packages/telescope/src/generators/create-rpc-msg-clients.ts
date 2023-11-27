@@ -4,7 +4,7 @@ import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayMsgCla
 import { getNestedProto } from '@cosmology/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
-import { getQueryMethodNames, makeRpcClientInterfaceName } from '@cosmology/utils';
+import { getQueryMethodNames, swapKeyValue } from '@cosmology/utils';
 import { BundlerFile } from 'src/types';
 
 export const plugin = (
@@ -75,6 +75,10 @@ export const plugin = (
                 const instantOps = c.options.rpcClients?.instantOps ?? [];
 
                 instantOps.forEach((item) => {
+                  let nameMapping = item.nameMapping;
+
+                  nameMapping = swapKeyValue(nameMapping ?? {});
+
                   // get all query methods
                   const patterns = item.include?.patterns;
                   const methodKeys = getQueryMethodNames(
@@ -92,8 +96,9 @@ export const plugin = (
                     createRpcClientInterface(
                       ctx.generic,
                       svc,
-                      makeRpcClientInterfaceName(item.className, svc.name),
-                      methodKeys
+                      item.className,
+                      methodKeys,
+                      nameMapping
                     )
                   );
 

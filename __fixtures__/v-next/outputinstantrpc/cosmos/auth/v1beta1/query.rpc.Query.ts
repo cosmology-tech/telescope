@@ -29,7 +29,7 @@ export interface Query {
   addressStringToBytes(request: AddressStringToBytesRequest): Promise<AddressStringToBytesResponse>;
 }
 /** Query defines the gRPC querier service. */
-export interface CosmosAuthAccountQuery {
+export interface CosmosAuthAccount {
   /**
    * Accounts returns all the existing accounts
    * 
@@ -38,6 +38,8 @@ export interface CosmosAuthAccountQuery {
   accounts(request?: QueryAccountsRequest): Promise<QueryAccountsResponse>;
   /** Account returns account details based on address. */
   account(request: QueryAccountRequest): Promise<QueryAccountResponse>;
+  /** ModuleAccounts returns all the existing module accounts. */
+  useAuthModuleAccounts(request?: QueryModuleAccountsRequest): Promise<QueryModuleAccountsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;

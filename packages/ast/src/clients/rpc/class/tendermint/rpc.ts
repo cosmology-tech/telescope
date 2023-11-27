@@ -320,7 +320,10 @@ export const createRpcClientInterface = (
     context: GenericParseContext,
     service: ProtoService,
     name?: string,
-    methodKeys?: string[]
+    methodKeys?: string[],
+    nameMapping?: {
+      [key: string]: string
+    }
 ) => {
     const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
     const keys = methodKeys && methodKeys.length ? methodKeys : Object.keys(service.methods ?? {});
@@ -332,11 +335,13 @@ export const createRpcClientInterface = (
               return null;
             }
 
-            const name = camelRpcMethods ? camel(key) : key;
+            const methodName = camelRpcMethods ? camel(key) : key;
+            const nameWithPkg = `${context.ref.proto.package}.${methodName}`;
+            const methodAlias = nameMapping && nameMapping[nameWithPkg] ? nameMapping[nameWithPkg] : methodName;
             const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
             let trailingComments = [];
             return rpcMethodDefinition(
-                name,
+                methodAlias,
                 method,
                 trailingComments,
                 leadingComments

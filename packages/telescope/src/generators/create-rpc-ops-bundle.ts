@@ -2,7 +2,7 @@ import { aggregateImports, getImportStatements } from "../imports";
 import { join, dirname, extname, basename } from "path";
 import { TelescopeBuilder } from "../builder";
 import { createScopedRpcHookFactory } from "@cosmology/ast";
-import { ProtoRef } from "@cosmology/types";
+import { ImportUsage, ProtoRef } from "@cosmology/types";
 import { TelescopeParseContext } from "../build";
 import { writeAstToFile } from "../utils/files";
 import { fixlocalpaths } from "../utils";
@@ -24,7 +24,6 @@ export const plugin = (builder: TelescopeBuilder) => {
   const localname = "service-ops.ts";
 
   // get mapping of packages and rpc query filenames.
-  const obj = {};
   const instantOpsMapping = {};
   const methodSet = new Set();
   const bundlerFiles = builder.stateManagers["instantRpc"];
@@ -44,6 +43,8 @@ export const plugin = (builder: TelescopeBuilder) => {
     builder.options
   );
 
+  const pkgImports = [];
+
   const ast = builder.options.rpcClients!.instantOps!.reduce(
     (ast, instantOpsConfig) => {
       let nameMapping = instantOpsConfig.nameMapping;
@@ -53,11 +54,12 @@ export const plugin = (builder: TelescopeBuilder) => {
       return ast.concat(
         createRpcOpsAst(
           context,
+          instantOpsConfig.className,
+          pkgImports,
           nameMapping,
           bundlerFiles,
           methodSet,
-          instantOpsMapping,
-          obj
+          instantOpsMapping
         )
       );
     },
@@ -69,7 +71,7 @@ export const plugin = (builder: TelescopeBuilder) => {
   const importStmts = getImportStatements(localname, imports);
 
   // construct the AST
-  const prog = [].concat(importStmts).concat(ast);
+  const prog = [].concat(importStmts).concat([]).concat(ast);
 
   // write the file.
   const filename = join(builder.outPath, localname);
@@ -80,44 +82,47 @@ export const plugin = (builder: TelescopeBuilder) => {
 
 function createRpcOpsAst(
   context: TelescopeParseContext,
+  className: string,
+  pkgImports: ImportUsage[],
   nameMapping,
   bundlerFiles: BundlerFile[],
   methodSet: Set<unknown>,
   instantOpsMapping,
-  obj
 ) {
+  const extendInterfaces = [];
+
   bundlerFiles.forEach((bundlerFile) => {
-    const path = `./${bundlerFile.localname.replace(/\.ts$/, "")}`;
-    dotty.put(obj, bundlerFile.package, path);
+    const path = `./${bundlerFile.localname.replace(/\.ts$/, '')}`;
+    const importedVarName = variableSlug(path)
 
-    // build instantOpsMapping
-    bundlerFile.instantExportedMethods?.forEach((method) => {
-      const methodName = method.name;
+    // // build instantOpsMapping
+    // bundlerFile.instantExportedMethods?.forEach((method) => {
+    //   const methodName = method.name;
 
-      const useHookName = makeUseHookName(camel(methodName));
-      const hookNameWithPkg = `${bundlerFile.package}.${useHookName}`;
-      let instantHookName = null;
+    //   const useHookName = makeUseHookName(camel(methodName));
+    //   const hookNameWithPkg = `${bundlerFile.package}.${useHookName}`;
+    //   let instantHookName = null;
 
-      if (nameMapping[hookNameWithPkg]) {
-        instantHookName = nameMapping[hookNameWithPkg];
-      } else {
-        if (methodSet.has(useHookName)) {
-          instantHookName = makeUsePkgHookName(bundlerFile.package, methodName);
-        } else {
-          instantHookName = useHookName;
-        }
-      }
+    //   if (nameMapping[hookNameWithPkg]) {
+    //     instantHookName = nameMapping[hookNameWithPkg];
+    //   } else {
+    //     if (methodSet.has(useHookName)) {
+    //       instantHookName = makeUsePkgHookName(bundlerFile.package, methodName);
+    //     } else {
+    //       instantHookName = useHookName;
+    //     }
+    //   }
 
-      dotty.put(instantOpsMapping, instantHookName, {
-        useHookName,
-        importedVarName: variableSlug(path),
-        comment: `${bundlerFile.package}.${useHookName}\n${
-          method.comment ?? methodName
-        }`,
-      });
+    //   dotty.put(instantOpsMapping, instantHookName, {
+    //     useHookName,
+    //     importedVarName: variableSlug(path),
+    //     comment: `${bundlerFile.package}.${useHookName}\n${
+    //       method.comment ?? methodName
+    //     }`,
+    //   });
 
-      methodSet.add(instantHookName);
-    });
+    //   methodSet.add(instantHookName);
+    // });
   });
 
   return [];

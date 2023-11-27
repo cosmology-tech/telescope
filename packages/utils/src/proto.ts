@@ -50,9 +50,6 @@ export const makeHookKeyName = (name: string) => {
   return camel(name + "Query");
 };
 
-export const makeRpcClientInterfaceName = (className: string, serviceName: string) => {
-  return pascal(`${className}${serviceName}`);
-};
 
 // https://github.com/isaacs/minimatch/blob/main/src/index.ts#L61
 // Optimized checking for the most common glob patterns.
