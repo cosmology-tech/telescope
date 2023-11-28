@@ -2,7 +2,7 @@
 
 exports[`createInstantRpcClass 1`] = `
 "export class CosmosAuth {
-  static rpc: Rpc;
+  readonly rpc: Rpc;
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.authAccount = _CosmosAuthV1beta1Queryrpc.createClientImpl(rpc).account;
