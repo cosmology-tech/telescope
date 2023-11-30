@@ -1,4 +1,4 @@
-import { Rpc } from "../../../helpers";
+import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgRegisterDevFeeInfo, MsgRegisterDevFeeInfoSDKType, MsgRegisterDevFeeInfoResponse, MsgRegisterDevFeeInfoResponseSDKType, MsgCancelDevFeeInfo, MsgCancelDevFeeInfoSDKType, MsgCancelDevFeeInfoResponse, MsgCancelDevFeeInfoResponseSDKType, MsgUpdateDevFeeInfo, MsgUpdateDevFeeInfoSDKType, MsgUpdateDevFeeInfoResponse, MsgUpdateDevFeeInfoResponseSDKType } from "./tx";
 /** Msg defines the fees Msg service. */
@@ -7,38 +7,56 @@ export interface Msg {
    * RegisterDevFeeInfo is used by a deployer to register a new contract for
    * receiving transaction fees
    */
-  registerDevFeeInfo(request: MsgRegisterDevFeeInfo): Promise<MsgRegisterDevFeeInfoResponse>;
+  registerDevFeeInfo(request: BroadcastTxRequest<MsgRegisterDevFeeInfo>): Promise<BroadcastTxResponse<MsgRegisterDevFeeInfoResponse>>;
   /**
    * CancelDevFeeInfo is used by a deployer to cancel a registered contract
    * and stop receiving transaction fees
    */
-  cancelDevFeeInfo(request: MsgCancelDevFeeInfo): Promise<MsgCancelDevFeeInfoResponse>;
+  cancelDevFeeInfo(request: BroadcastTxRequest<MsgCancelDevFeeInfo>): Promise<BroadcastTxResponse<MsgCancelDevFeeInfoResponse>>;
   /** UpdateDevFeeInfo is used by a deployer to update the withdraw address */
-  updateDevFeeInfo(request: MsgUpdateDevFeeInfo): Promise<MsgUpdateDevFeeInfoResponse>;
+  updateDevFeeInfo(request: BroadcastTxRequest<MsgUpdateDevFeeInfo>): Promise<BroadcastTxResponse<MsgUpdateDevFeeInfoResponse>>;
 }
 export class MsgClientImpl implements Msg {
-  private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly rpc: TxRpc;
+  constructor(rpc: TxRpc) {
     this.rpc = rpc;
   }
   /* RegisterDevFeeInfo is used by a deployer to register a new contract for
    receiving transaction fees */
-  registerDevFeeInfo = async (request: MsgRegisterDevFeeInfo): Promise<MsgRegisterDevFeeInfoResponse> => {
-    const data = MsgRegisterDevFeeInfo.encode(request).finish();
-    const promise = this.rpc.request("evmos.fees.v1.Msg", "RegisterDevFeeInfo", data);
-    return promise.then(data => MsgRegisterDevFeeInfoResponse.decode(new BinaryReader(data)));
+  registerDevFeeInfo = async (request: BroadcastTxRequest<MsgRegisterDevFeeInfo>): Promise<BroadcastTxResponse<MsgRegisterDevFeeInfoResponse>> => {
+    const data = [{
+      typeUrl: MsgRegisterDevFeeInfo.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgRegisterDevFeeInfoResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* CancelDevFeeInfo is used by a deployer to cancel a registered contract
    and stop receiving transaction fees */
-  cancelDevFeeInfo = async (request: MsgCancelDevFeeInfo): Promise<MsgCancelDevFeeInfoResponse> => {
-    const data = MsgCancelDevFeeInfo.encode(request).finish();
-    const promise = this.rpc.request("evmos.fees.v1.Msg", "CancelDevFeeInfo", data);
-    return promise.then(data => MsgCancelDevFeeInfoResponse.decode(new BinaryReader(data)));
+  cancelDevFeeInfo = async (request: BroadcastTxRequest<MsgCancelDevFeeInfo>): Promise<BroadcastTxResponse<MsgCancelDevFeeInfoResponse>> => {
+    const data = [{
+      typeUrl: MsgCancelDevFeeInfo.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgCancelDevFeeInfoResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* UpdateDevFeeInfo is used by a deployer to update the withdraw address */
-  updateDevFeeInfo = async (request: MsgUpdateDevFeeInfo): Promise<MsgUpdateDevFeeInfoResponse> => {
-    const data = MsgUpdateDevFeeInfo.encode(request).finish();
-    const promise = this.rpc.request("evmos.fees.v1.Msg", "UpdateDevFeeInfo", data);
-    return promise.then(data => MsgUpdateDevFeeInfoResponse.decode(new BinaryReader(data)));
+  updateDevFeeInfo = async (request: BroadcastTxRequest<MsgUpdateDevFeeInfo>): Promise<BroadcastTxResponse<MsgUpdateDevFeeInfoResponse>> => {
+    const data = [{
+      typeUrl: MsgUpdateDevFeeInfo.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgUpdateDevFeeInfoResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
 }

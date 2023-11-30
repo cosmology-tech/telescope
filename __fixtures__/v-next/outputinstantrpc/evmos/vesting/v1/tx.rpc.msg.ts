@@ -1,6 +1,6 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
-import { Rpc } from "../../../helpers";
+import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgCreateClawbackVestingAccount, MsgCreateClawbackVestingAccountSDKType, MsgCreateClawbackVestingAccountResponse, MsgCreateClawbackVestingAccountResponseSDKType, MsgClawback, MsgClawbackSDKType, MsgClawbackResponse, MsgClawbackResponseSDKType } from "./tx";
 /** Msg defines the vesting Msg service. */
@@ -9,26 +9,38 @@ export interface Msg {
    * CreateClawbackVestingAccount creats a vesting account that is subject to
    * clawback and the configuration of vesting and lockup schedules.
    */
-  createClawbackVestingAccount(request: MsgCreateClawbackVestingAccount): Promise<MsgCreateClawbackVestingAccountResponse>;
+  createClawbackVestingAccount(request: BroadcastTxRequest<MsgCreateClawbackVestingAccount>): Promise<BroadcastTxResponse<MsgCreateClawbackVestingAccountResponse>>;
   /** Clawback removes the unvested tokens from a ClawbackVestingAccount. */
-  clawback(request: MsgClawback): Promise<MsgClawbackResponse>;
+  clawback(request: BroadcastTxRequest<MsgClawback>): Promise<BroadcastTxResponse<MsgClawbackResponse>>;
 }
 export class MsgClientImpl implements Msg {
-  private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly rpc: TxRpc;
+  constructor(rpc: TxRpc) {
     this.rpc = rpc;
   }
   /* CreateClawbackVestingAccount creats a vesting account that is subject to
    clawback and the configuration of vesting and lockup schedules. */
-  createClawbackVestingAccount = async (request: MsgCreateClawbackVestingAccount): Promise<MsgCreateClawbackVestingAccountResponse> => {
-    const data = MsgCreateClawbackVestingAccount.encode(request).finish();
-    const promise = this.rpc.request("evmos.vesting.v1.Msg", "CreateClawbackVestingAccount", data);
-    return promise.then(data => MsgCreateClawbackVestingAccountResponse.decode(new BinaryReader(data)));
+  createClawbackVestingAccount = async (request: BroadcastTxRequest<MsgCreateClawbackVestingAccount>): Promise<BroadcastTxResponse<MsgCreateClawbackVestingAccountResponse>> => {
+    const data = [{
+      typeUrl: MsgCreateClawbackVestingAccount.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgCreateClawbackVestingAccountResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* Clawback removes the unvested tokens from a ClawbackVestingAccount. */
-  clawback = async (request: MsgClawback): Promise<MsgClawbackResponse> => {
-    const data = MsgClawback.encode(request).finish();
-    const promise = this.rpc.request("evmos.vesting.v1.Msg", "Clawback", data);
-    return promise.then(data => MsgClawbackResponse.decode(new BinaryReader(data)));
+  clawback = async (request: BroadcastTxRequest<MsgClawback>): Promise<BroadcastTxResponse<MsgClawbackResponse>> => {
+    const data = [{
+      typeUrl: MsgClawback.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgClawbackResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
 }

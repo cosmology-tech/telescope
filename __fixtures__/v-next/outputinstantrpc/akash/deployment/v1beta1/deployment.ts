@@ -3,7 +3,8 @@
 import { GroupSpec, GroupSpecSDKType, GroupID, GroupIDSDKType } from "./group";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, Exact, Rpc } from "../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, Exact } from "../../../helpers";
+import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -1349,65 +1350,107 @@ export const DeploymentFilters = {
 /** Msg defines the deployment Msg service. */
 export interface Msg {
   /** CreateDeployment defines a method to create new deployment given proper inputs. */
-  createDeployment(request: MsgCreateDeployment): Promise<MsgCreateDeploymentResponse>;
+  createDeployment(request: BroadcastTxRequest<MsgCreateDeployment>): Promise<BroadcastTxResponse<MsgCreateDeploymentResponse>>;
   /** DepositDeployment deposits more funds into the deployment account */
-  depositDeployment(request: MsgDepositDeployment): Promise<MsgDepositDeploymentResponse>;
+  depositDeployment(request: BroadcastTxRequest<MsgDepositDeployment>): Promise<BroadcastTxResponse<MsgDepositDeploymentResponse>>;
   /** UpdateDeployment defines a method to update a deployment given proper inputs. */
-  updateDeployment(request: MsgUpdateDeployment): Promise<MsgUpdateDeploymentResponse>;
+  updateDeployment(request: BroadcastTxRequest<MsgUpdateDeployment>): Promise<BroadcastTxResponse<MsgUpdateDeploymentResponse>>;
   /** CloseDeployment defines a method to close a deployment given proper inputs. */
-  closeDeployment(request: MsgCloseDeployment): Promise<MsgCloseDeploymentResponse>;
+  closeDeployment(request: BroadcastTxRequest<MsgCloseDeployment>): Promise<BroadcastTxResponse<MsgCloseDeploymentResponse>>;
   /** CloseGroup defines a method to close a group of a deployment given proper inputs. */
-  closeGroup(request: MsgCloseGroup): Promise<MsgCloseGroupResponse>;
+  closeGroup(request: BroadcastTxRequest<MsgCloseGroup>): Promise<BroadcastTxResponse<MsgCloseGroupResponse>>;
   /** PauseGroup defines a method to close a group of a deployment given proper inputs. */
-  pauseGroup(request: MsgPauseGroup): Promise<MsgPauseGroupResponse>;
+  pauseGroup(request: BroadcastTxRequest<MsgPauseGroup>): Promise<BroadcastTxResponse<MsgPauseGroupResponse>>;
   /** StartGroup defines a method to close a group of a deployment given proper inputs. */
-  startGroup(request: MsgStartGroup): Promise<MsgStartGroupResponse>;
+  startGroup(request: BroadcastTxRequest<MsgStartGroup>): Promise<BroadcastTxResponse<MsgStartGroupResponse>>;
 }
 export class MsgClientImpl implements Msg {
-  private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly rpc: TxRpc;
+  constructor(rpc: TxRpc) {
     this.rpc = rpc;
   }
   /* CreateDeployment defines a method to create new deployment given proper inputs. */
-  createDeployment = async (request: MsgCreateDeployment): Promise<MsgCreateDeploymentResponse> => {
-    const data = MsgCreateDeployment.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "CreateDeployment", data);
-    return promise.then(data => MsgCreateDeploymentResponse.decode(new BinaryReader(data)));
+  createDeployment = async (request: BroadcastTxRequest<MsgCreateDeployment>): Promise<BroadcastTxResponse<MsgCreateDeploymentResponse>> => {
+    const data = [{
+      typeUrl: MsgCreateDeployment.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgCreateDeploymentResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* DepositDeployment deposits more funds into the deployment account */
-  depositDeployment = async (request: MsgDepositDeployment): Promise<MsgDepositDeploymentResponse> => {
-    const data = MsgDepositDeployment.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "DepositDeployment", data);
-    return promise.then(data => MsgDepositDeploymentResponse.decode(new BinaryReader(data)));
+  depositDeployment = async (request: BroadcastTxRequest<MsgDepositDeployment>): Promise<BroadcastTxResponse<MsgDepositDeploymentResponse>> => {
+    const data = [{
+      typeUrl: MsgDepositDeployment.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgDepositDeploymentResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* UpdateDeployment defines a method to update a deployment given proper inputs. */
-  updateDeployment = async (request: MsgUpdateDeployment): Promise<MsgUpdateDeploymentResponse> => {
-    const data = MsgUpdateDeployment.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "UpdateDeployment", data);
-    return promise.then(data => MsgUpdateDeploymentResponse.decode(new BinaryReader(data)));
+  updateDeployment = async (request: BroadcastTxRequest<MsgUpdateDeployment>): Promise<BroadcastTxResponse<MsgUpdateDeploymentResponse>> => {
+    const data = [{
+      typeUrl: MsgUpdateDeployment.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgUpdateDeploymentResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* CloseDeployment defines a method to close a deployment given proper inputs. */
-  closeDeployment = async (request: MsgCloseDeployment): Promise<MsgCloseDeploymentResponse> => {
-    const data = MsgCloseDeployment.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "CloseDeployment", data);
-    return promise.then(data => MsgCloseDeploymentResponse.decode(new BinaryReader(data)));
+  closeDeployment = async (request: BroadcastTxRequest<MsgCloseDeployment>): Promise<BroadcastTxResponse<MsgCloseDeploymentResponse>> => {
+    const data = [{
+      typeUrl: MsgCloseDeployment.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgCloseDeploymentResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* CloseGroup defines a method to close a group of a deployment given proper inputs. */
-  closeGroup = async (request: MsgCloseGroup): Promise<MsgCloseGroupResponse> => {
-    const data = MsgCloseGroup.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "CloseGroup", data);
-    return promise.then(data => MsgCloseGroupResponse.decode(new BinaryReader(data)));
+  closeGroup = async (request: BroadcastTxRequest<MsgCloseGroup>): Promise<BroadcastTxResponse<MsgCloseGroupResponse>> => {
+    const data = [{
+      typeUrl: MsgCloseGroup.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgCloseGroupResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* PauseGroup defines a method to close a group of a deployment given proper inputs. */
-  pauseGroup = async (request: MsgPauseGroup): Promise<MsgPauseGroupResponse> => {
-    const data = MsgPauseGroup.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "PauseGroup", data);
-    return promise.then(data => MsgPauseGroupResponse.decode(new BinaryReader(data)));
+  pauseGroup = async (request: BroadcastTxRequest<MsgPauseGroup>): Promise<BroadcastTxResponse<MsgPauseGroupResponse>> => {
+    const data = [{
+      typeUrl: MsgPauseGroup.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgPauseGroupResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* StartGroup defines a method to close a group of a deployment given proper inputs. */
-  startGroup = async (request: MsgStartGroup): Promise<MsgStartGroupResponse> => {
-    const data = MsgStartGroup.encode(request).finish();
-    const promise = this.rpc.request("akash.deployment.v1beta1.Msg", "StartGroup", data);
-    return promise.then(data => MsgStartGroupResponse.decode(new BinaryReader(data)));
+  startGroup = async (request: BroadcastTxRequest<MsgStartGroup>): Promise<BroadcastTxResponse<MsgStartGroupResponse>> => {
+    const data = [{
+      typeUrl: MsgStartGroup.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgStartGroupResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
 }

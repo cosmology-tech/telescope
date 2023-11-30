@@ -1,29 +1,41 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
-import { Rpc } from "../../../helpers";
+import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgSignProviderAttributes, MsgSignProviderAttributesSDKType, MsgSignProviderAttributesResponse, MsgSignProviderAttributesResponseSDKType, MsgDeleteProviderAttributes, MsgDeleteProviderAttributesSDKType, MsgDeleteProviderAttributesResponse, MsgDeleteProviderAttributesResponseSDKType } from "./audit";
 /** Msg defines the provider Msg service */
 export interface Msg {
   /** SignProviderAttributes defines a method that signs provider attributes */
-  signProviderAttributes(request: MsgSignProviderAttributes): Promise<MsgSignProviderAttributesResponse>;
+  signProviderAttributes(request: BroadcastTxRequest<MsgSignProviderAttributes>): Promise<BroadcastTxResponse<MsgSignProviderAttributesResponse>>;
   /** DeleteProviderAttributes defines a method that deletes provider attributes */
-  deleteProviderAttributes(request: MsgDeleteProviderAttributes): Promise<MsgDeleteProviderAttributesResponse>;
+  deleteProviderAttributes(request: BroadcastTxRequest<MsgDeleteProviderAttributes>): Promise<BroadcastTxResponse<MsgDeleteProviderAttributesResponse>>;
 }
 export class MsgClientImpl implements Msg {
-  private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly rpc: TxRpc;
+  constructor(rpc: TxRpc) {
     this.rpc = rpc;
   }
   /* SignProviderAttributes defines a method that signs provider attributes */
-  signProviderAttributes = async (request: MsgSignProviderAttributes): Promise<MsgSignProviderAttributesResponse> => {
-    const data = MsgSignProviderAttributes.encode(request).finish();
-    const promise = this.rpc.request("akash.audit.v1beta1.Msg", "SignProviderAttributes", data);
-    return promise.then(data => MsgSignProviderAttributesResponse.decode(new BinaryReader(data)));
+  signProviderAttributes = async (request: BroadcastTxRequest<MsgSignProviderAttributes>): Promise<BroadcastTxResponse<MsgSignProviderAttributesResponse>> => {
+    const data = [{
+      typeUrl: MsgSignProviderAttributes.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgSignProviderAttributesResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* DeleteProviderAttributes defines a method that deletes provider attributes */
-  deleteProviderAttributes = async (request: MsgDeleteProviderAttributes): Promise<MsgDeleteProviderAttributesResponse> => {
-    const data = MsgDeleteProviderAttributes.encode(request).finish();
-    const promise = this.rpc.request("akash.audit.v1beta1.Msg", "DeleteProviderAttributes", data);
-    return promise.then(data => MsgDeleteProviderAttributesResponse.decode(new BinaryReader(data)));
+  deleteProviderAttributes = async (request: BroadcastTxRequest<MsgDeleteProviderAttributes>): Promise<BroadcastTxResponse<MsgDeleteProviderAttributesResponse>> => {
+    const data = [{
+      typeUrl: MsgDeleteProviderAttributes.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgDeleteProviderAttributesResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
 }

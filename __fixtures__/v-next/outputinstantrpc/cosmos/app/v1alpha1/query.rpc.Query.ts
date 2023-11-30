@@ -1,5 +1,5 @@
 import { Config, ConfigSDKType } from "./config";
-import { Rpc } from "../../../helpers";
+import { TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { QueryConfigRequest, QueryConfigRequestSDKType, QueryConfigResponse, QueryConfigResponseSDKType } from "./query";
 /** Query is the app module query service. */
@@ -8,8 +8,8 @@ export interface Query {
   config(request?: QueryConfigRequest): Promise<QueryConfigResponse>;
 }
 export class QueryClientImpl implements Query {
-  private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly rpc: TxRpc;
+  constructor(rpc: TxRpc) {
     this.rpc = rpc;
   }
   /* Config returns the current app config. */

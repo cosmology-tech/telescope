@@ -49,6 +49,9 @@ export declare const UTILS: {
     QueryClient: string;
     Registry: string;
     Rpc: string;
+    TxRpc: string;
+    BroadcastTxRequest: string;
+    BroadcastTxResponse: string;
     grpc: string;
     setPaginationParams: string;
     SigningStargateClient: string;

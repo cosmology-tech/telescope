@@ -1,4 +1,4 @@
-import { Rpc } from "../../../helpers";
+import { TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { ReactQueryParams } from "../../../react-query";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
@@ -14,8 +14,8 @@ export interface Query {
   spotPrice(request: QuerySpotPriceRequest): Promise<QuerySpotPriceResponse>;
 }
 export class QueryClientImpl implements Query {
-  private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly rpc: TxRpc;
+  constructor(rpc: TxRpc) {
     this.rpc = rpc;
   }
   /* SpotPrice defines a gRPC query handler that returns the spot price given

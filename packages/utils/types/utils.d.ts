@@ -1,4 +1,4 @@
-import { TelescopeOptions, TelescopeOption, ProtoRef, ImportUsage } from '@cosmology/types';
+import { TelescopeOptions, TelescopeOption, ProtoRef, ImportUsage } from "@cosmology/types";
 /**
  * swap the key and value of the input object
  * @param input obj needs to swap
@@ -26,3 +26,7 @@ export declare const buildImports: (imports: ImportUsage[]) => {
         value: string;
     };
 }[];
+export declare const getServiceImplement: (serviceName: "Msg" | "Query" | "Service" | "ReflectionService" | "ABCIApplication" | string, methodName: string, serviceImplement?: {
+    service: "Msg" | "Query" | "Service" | "ReflectionService" | "ABCIApplication" | string;
+    implementType: "Query" | "Tx" | string;
+}) => any;

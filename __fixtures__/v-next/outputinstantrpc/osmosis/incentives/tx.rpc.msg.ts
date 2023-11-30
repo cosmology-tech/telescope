@@ -1,28 +1,40 @@
 import { QueryCondition, QueryConditionSDKType } from "../lockup/lock";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
-import { Rpc } from "../../helpers";
+import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../types";
 import { BinaryReader } from "../../binary";
 import { MsgCreateGauge, MsgCreateGaugeSDKType, MsgCreateGaugeResponse, MsgCreateGaugeResponseSDKType, MsgAddToGauge, MsgAddToGaugeSDKType, MsgAddToGaugeResponse, MsgAddToGaugeResponseSDKType } from "./tx";
 export interface Msg {
-  createGauge(request: MsgCreateGauge): Promise<MsgCreateGaugeResponse>;
-  addToGauge(request: MsgAddToGauge): Promise<MsgAddToGaugeResponse>;
+  createGauge(request: BroadcastTxRequest<MsgCreateGauge>): Promise<BroadcastTxResponse<MsgCreateGaugeResponse>>;
+  addToGauge(request: BroadcastTxRequest<MsgAddToGauge>): Promise<BroadcastTxResponse<MsgAddToGaugeResponse>>;
 }
 export class MsgClientImpl implements Msg {
-  private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly rpc: TxRpc;
+  constructor(rpc: TxRpc) {
     this.rpc = rpc;
   }
   /* CreateGauge */
-  createGauge = async (request: MsgCreateGauge): Promise<MsgCreateGaugeResponse> => {
-    const data = MsgCreateGauge.encode(request).finish();
-    const promise = this.rpc.request("osmosis.incentives.Msg", "CreateGauge", data);
-    return promise.then(data => MsgCreateGaugeResponse.decode(new BinaryReader(data)));
+  createGauge = async (request: BroadcastTxRequest<MsgCreateGauge>): Promise<BroadcastTxResponse<MsgCreateGaugeResponse>> => {
+    const data = [{
+      typeUrl: MsgCreateGauge.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgCreateGaugeResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* AddToGauge */
-  addToGauge = async (request: MsgAddToGauge): Promise<MsgAddToGaugeResponse> => {
-    const data = MsgAddToGauge.encode(request).finish();
-    const promise = this.rpc.request("osmosis.incentives.Msg", "AddToGauge", data);
-    return promise.then(data => MsgAddToGaugeResponse.decode(new BinaryReader(data)));
+  addToGauge = async (request: BroadcastTxRequest<MsgAddToGauge>): Promise<BroadcastTxResponse<MsgAddToGaugeResponse>> => {
+    const data = [{
+      typeUrl: MsgAddToGauge.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgAddToGaugeResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
 }

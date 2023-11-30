@@ -1,4 +1,4 @@
-import { Rpc } from "../../../helpers";
+import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgUnjail, MsgUnjailSDKType, MsgUnjailResponse, MsgUnjailResponseSDKType } from "./tx";
 /** Msg defines the slashing Msg service. */
@@ -8,19 +8,25 @@ export interface Msg {
    * them into the bonded validator set, so they can begin receiving provisions
    * and rewards again.
    */
-  unjail(request: MsgUnjail): Promise<MsgUnjailResponse>;
+  unjail(request: BroadcastTxRequest<MsgUnjail>): Promise<BroadcastTxResponse<MsgUnjailResponse>>;
 }
 export class MsgClientImpl implements Msg {
-  private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly rpc: TxRpc;
+  constructor(rpc: TxRpc) {
     this.rpc = rpc;
   }
   /* Unjail defines a method for unjailing a jailed validator, thus returning
    them into the bonded validator set, so they can begin receiving provisions
    and rewards again. */
-  unjail = async (request: MsgUnjail): Promise<MsgUnjailResponse> => {
-    const data = MsgUnjail.encode(request).finish();
-    const promise = this.rpc.request("cosmos.slashing.v1beta1.Msg", "Unjail", data);
-    return promise.then(data => MsgUnjailResponse.decode(new BinaryReader(data)));
+  unjail = async (request: BroadcastTxRequest<MsgUnjail>): Promise<BroadcastTxResponse<MsgUnjailResponse>> => {
+    const data = [{
+      typeUrl: MsgUnjail.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgUnjailResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
 }

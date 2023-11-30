@@ -3,7 +3,8 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { GroupID, GroupIDSDKType, Group, GroupSDKType } from "./group";
 import { Account, AccountSDKType } from "../../escrow/v1beta1/types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, Exact, Rpc } from "../../../helpers";
+import { isSet, Exact } from "../../../helpers";
+import { TxRpc } from "../../../types";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequest {
@@ -747,8 +748,8 @@ export interface Query {
   group(request: QueryGroupRequest): Promise<QueryGroupResponse>;
 }
 export class QueryClientImpl implements Query {
-  private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly rpc: TxRpc;
+  constructor(rpc: TxRpc) {
     this.rpc = rpc;
   }
   /* Deployments queries deployments */

@@ -2,54 +2,84 @@ import { OrderID, OrderIDSDKType } from "./order";
 import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BidID, BidIDSDKType, MsgCreateBid, MsgCreateBidSDKType, MsgCreateBidResponse, MsgCreateBidResponseSDKType, MsgCloseBid, MsgCloseBidSDKType, MsgCloseBidResponse, MsgCloseBidResponseSDKType } from "./bid";
 import { LeaseID, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseSDKType, MsgWithdrawLeaseResponse, MsgWithdrawLeaseResponseSDKType, MsgCreateLease, MsgCreateLeaseSDKType, MsgCreateLeaseResponse, MsgCreateLeaseResponseSDKType, MsgCloseLease, MsgCloseLeaseSDKType, MsgCloseLeaseResponse, MsgCloseLeaseResponseSDKType } from "./lease";
-import { Rpc } from "../../../helpers";
+import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 /** Msg defines the market Msg service */
 export interface Msg {
   /** CreateBid defines a method to create a bid given proper inputs. */
-  createBid(request: MsgCreateBid): Promise<MsgCreateBidResponse>;
+  createBid(request: BroadcastTxRequest<MsgCreateBid>): Promise<BroadcastTxResponse<MsgCreateBidResponse>>;
   /** CloseBid defines a method to close a bid given proper inputs. */
-  closeBid(request: MsgCloseBid): Promise<MsgCloseBidResponse>;
+  closeBid(request: BroadcastTxRequest<MsgCloseBid>): Promise<BroadcastTxResponse<MsgCloseBidResponse>>;
   /** WithdrawLease withdraws accrued funds from the lease payment */
-  withdrawLease(request: MsgWithdrawLease): Promise<MsgWithdrawLeaseResponse>;
+  withdrawLease(request: BroadcastTxRequest<MsgWithdrawLease>): Promise<BroadcastTxResponse<MsgWithdrawLeaseResponse>>;
   /** CreateLease creates a new lease */
-  createLease(request: MsgCreateLease): Promise<MsgCreateLeaseResponse>;
+  createLease(request: BroadcastTxRequest<MsgCreateLease>): Promise<BroadcastTxResponse<MsgCreateLeaseResponse>>;
   /** CloseLease defines a method to close an order given proper inputs. */
-  closeLease(request: MsgCloseLease): Promise<MsgCloseLeaseResponse>;
+  closeLease(request: BroadcastTxRequest<MsgCloseLease>): Promise<BroadcastTxResponse<MsgCloseLeaseResponse>>;
 }
 export class MsgClientImpl implements Msg {
-  private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly rpc: TxRpc;
+  constructor(rpc: TxRpc) {
     this.rpc = rpc;
   }
   /* CreateBid defines a method to create a bid given proper inputs. */
-  createBid = async (request: MsgCreateBid): Promise<MsgCreateBidResponse> => {
-    const data = MsgCreateBid.encode(request).finish();
-    const promise = this.rpc.request("akash.market.v1beta2.Msg", "CreateBid", data);
-    return promise.then(data => MsgCreateBidResponse.decode(new BinaryReader(data)));
+  createBid = async (request: BroadcastTxRequest<MsgCreateBid>): Promise<BroadcastTxResponse<MsgCreateBidResponse>> => {
+    const data = [{
+      typeUrl: MsgCreateBid.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgCreateBidResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* CloseBid defines a method to close a bid given proper inputs. */
-  closeBid = async (request: MsgCloseBid): Promise<MsgCloseBidResponse> => {
-    const data = MsgCloseBid.encode(request).finish();
-    const promise = this.rpc.request("akash.market.v1beta2.Msg", "CloseBid", data);
-    return promise.then(data => MsgCloseBidResponse.decode(new BinaryReader(data)));
+  closeBid = async (request: BroadcastTxRequest<MsgCloseBid>): Promise<BroadcastTxResponse<MsgCloseBidResponse>> => {
+    const data = [{
+      typeUrl: MsgCloseBid.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgCloseBidResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* WithdrawLease withdraws accrued funds from the lease payment */
-  withdrawLease = async (request: MsgWithdrawLease): Promise<MsgWithdrawLeaseResponse> => {
-    const data = MsgWithdrawLease.encode(request).finish();
-    const promise = this.rpc.request("akash.market.v1beta2.Msg", "WithdrawLease", data);
-    return promise.then(data => MsgWithdrawLeaseResponse.decode(new BinaryReader(data)));
+  withdrawLease = async (request: BroadcastTxRequest<MsgWithdrawLease>): Promise<BroadcastTxResponse<MsgWithdrawLeaseResponse>> => {
+    const data = [{
+      typeUrl: MsgWithdrawLease.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgWithdrawLeaseResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* CreateLease creates a new lease */
-  createLease = async (request: MsgCreateLease): Promise<MsgCreateLeaseResponse> => {
-    const data = MsgCreateLease.encode(request).finish();
-    const promise = this.rpc.request("akash.market.v1beta2.Msg", "CreateLease", data);
-    return promise.then(data => MsgCreateLeaseResponse.decode(new BinaryReader(data)));
+  createLease = async (request: BroadcastTxRequest<MsgCreateLease>): Promise<BroadcastTxResponse<MsgCreateLeaseResponse>> => {
+    const data = [{
+      typeUrl: MsgCreateLease.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgCreateLeaseResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* CloseLease defines a method to close an order given proper inputs. */
-  closeLease = async (request: MsgCloseLease): Promise<MsgCloseLeaseResponse> => {
-    const data = MsgCloseLease.encode(request).finish();
-    const promise = this.rpc.request("akash.market.v1beta2.Msg", "CloseLease", data);
-    return promise.then(data => MsgCloseLeaseResponse.decode(new BinaryReader(data)));
+  closeLease = async (request: BroadcastTxRequest<MsgCloseLease>): Promise<BroadcastTxResponse<MsgCloseLeaseResponse>> => {
+    const data = [{
+      typeUrl: MsgCloseLease.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgCloseLeaseResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
 }

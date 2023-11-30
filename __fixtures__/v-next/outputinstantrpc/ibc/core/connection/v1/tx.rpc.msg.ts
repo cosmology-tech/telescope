@@ -1,51 +1,75 @@
 import { Counterparty, CounterpartySDKType, Version, VersionSDKType } from "./connection";
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Height, HeightSDKType } from "../../client/v1/client";
-import { Rpc } from "../../../../helpers";
+import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../../types";
 import { BinaryReader } from "../../../../binary";
 import { MsgConnectionOpenInit, MsgConnectionOpenInitSDKType, MsgConnectionOpenInitResponse, MsgConnectionOpenInitResponseSDKType, MsgConnectionOpenTry, MsgConnectionOpenTrySDKType, MsgConnectionOpenTryResponse, MsgConnectionOpenTryResponseSDKType, MsgConnectionOpenAck, MsgConnectionOpenAckSDKType, MsgConnectionOpenAckResponse, MsgConnectionOpenAckResponseSDKType, MsgConnectionOpenConfirm, MsgConnectionOpenConfirmSDKType, MsgConnectionOpenConfirmResponse, MsgConnectionOpenConfirmResponseSDKType } from "./tx";
 /** Msg defines the ibc/connection Msg service. */
 export interface Msg {
   /** ConnectionOpenInit defines a rpc handler method for MsgConnectionOpenInit. */
-  connectionOpenInit(request: MsgConnectionOpenInit): Promise<MsgConnectionOpenInitResponse>;
+  connectionOpenInit(request: BroadcastTxRequest<MsgConnectionOpenInit>): Promise<BroadcastTxResponse<MsgConnectionOpenInitResponse>>;
   /** ConnectionOpenTry defines a rpc handler method for MsgConnectionOpenTry. */
-  connectionOpenTry(request: MsgConnectionOpenTry): Promise<MsgConnectionOpenTryResponse>;
+  connectionOpenTry(request: BroadcastTxRequest<MsgConnectionOpenTry>): Promise<BroadcastTxResponse<MsgConnectionOpenTryResponse>>;
   /** ConnectionOpenAck defines a rpc handler method for MsgConnectionOpenAck. */
-  connectionOpenAck(request: MsgConnectionOpenAck): Promise<MsgConnectionOpenAckResponse>;
+  connectionOpenAck(request: BroadcastTxRequest<MsgConnectionOpenAck>): Promise<BroadcastTxResponse<MsgConnectionOpenAckResponse>>;
   /**
    * ConnectionOpenConfirm defines a rpc handler method for
    * MsgConnectionOpenConfirm.
    */
-  connectionOpenConfirm(request: MsgConnectionOpenConfirm): Promise<MsgConnectionOpenConfirmResponse>;
+  connectionOpenConfirm(request: BroadcastTxRequest<MsgConnectionOpenConfirm>): Promise<BroadcastTxResponse<MsgConnectionOpenConfirmResponse>>;
 }
 export class MsgClientImpl implements Msg {
-  private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly rpc: TxRpc;
+  constructor(rpc: TxRpc) {
     this.rpc = rpc;
   }
   /* ConnectionOpenInit defines a rpc handler method for MsgConnectionOpenInit. */
-  connectionOpenInit = async (request: MsgConnectionOpenInit): Promise<MsgConnectionOpenInitResponse> => {
-    const data = MsgConnectionOpenInit.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.connection.v1.Msg", "ConnectionOpenInit", data);
-    return promise.then(data => MsgConnectionOpenInitResponse.decode(new BinaryReader(data)));
+  connectionOpenInit = async (request: BroadcastTxRequest<MsgConnectionOpenInit>): Promise<BroadcastTxResponse<MsgConnectionOpenInitResponse>> => {
+    const data = [{
+      typeUrl: MsgConnectionOpenInit.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgConnectionOpenInitResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* ConnectionOpenTry defines a rpc handler method for MsgConnectionOpenTry. */
-  connectionOpenTry = async (request: MsgConnectionOpenTry): Promise<MsgConnectionOpenTryResponse> => {
-    const data = MsgConnectionOpenTry.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.connection.v1.Msg", "ConnectionOpenTry", data);
-    return promise.then(data => MsgConnectionOpenTryResponse.decode(new BinaryReader(data)));
+  connectionOpenTry = async (request: BroadcastTxRequest<MsgConnectionOpenTry>): Promise<BroadcastTxResponse<MsgConnectionOpenTryResponse>> => {
+    const data = [{
+      typeUrl: MsgConnectionOpenTry.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgConnectionOpenTryResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* ConnectionOpenAck defines a rpc handler method for MsgConnectionOpenAck. */
-  connectionOpenAck = async (request: MsgConnectionOpenAck): Promise<MsgConnectionOpenAckResponse> => {
-    const data = MsgConnectionOpenAck.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.connection.v1.Msg", "ConnectionOpenAck", data);
-    return promise.then(data => MsgConnectionOpenAckResponse.decode(new BinaryReader(data)));
+  connectionOpenAck = async (request: BroadcastTxRequest<MsgConnectionOpenAck>): Promise<BroadcastTxResponse<MsgConnectionOpenAckResponse>> => {
+    const data = [{
+      typeUrl: MsgConnectionOpenAck.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgConnectionOpenAckResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* ConnectionOpenConfirm defines a rpc handler method for
    MsgConnectionOpenConfirm. */
-  connectionOpenConfirm = async (request: MsgConnectionOpenConfirm): Promise<MsgConnectionOpenConfirmResponse> => {
-    const data = MsgConnectionOpenConfirm.encode(request).finish();
-    const promise = this.rpc.request("ibc.core.connection.v1.Msg", "ConnectionOpenConfirm", data);
-    return promise.then(data => MsgConnectionOpenConfirmResponse.decode(new BinaryReader(data)));
+  connectionOpenConfirm = async (request: BroadcastTxRequest<MsgConnectionOpenConfirm>): Promise<BroadcastTxResponse<MsgConnectionOpenConfirmResponse>> => {
+    const data = [{
+      typeUrl: MsgConnectionOpenConfirm.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgConnectionOpenConfirmResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
 }

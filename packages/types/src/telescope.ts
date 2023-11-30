@@ -169,6 +169,14 @@ interface TelescopeOpts {
         camelCase?: boolean;
         scopedIsExclusive?: boolean;
         bundle?: boolean;
+        serviceImplement?: {
+          [ key: 'Msg' |
+          'Query' |
+          'Service' |
+          'ReflectionService' |
+          'ABCIApplication' |
+          string ]: 'Query' | 'Tx' | string
+        },
         enabledServices?: (
             'Msg' |
             'Query' |

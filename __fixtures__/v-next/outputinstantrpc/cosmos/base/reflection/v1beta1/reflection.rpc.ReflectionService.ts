@@ -1,4 +1,4 @@
-import { Rpc } from "../../../../helpers";
+import { TxRpc } from "../../../../types";
 import { BinaryReader } from "../../../../binary";
 import { ListAllInterfacesRequest, ListAllInterfacesRequestSDKType, ListAllInterfacesResponse, ListAllInterfacesResponseSDKType, ListImplementationsRequest, ListImplementationsRequestSDKType, ListImplementationsResponse, ListImplementationsResponseSDKType } from "./reflection";
 /** ReflectionService defines a service for interface reflection. */
@@ -15,8 +15,8 @@ export interface ReflectionService {
   listImplementations(request: ListImplementationsRequest): Promise<ListImplementationsResponse>;
 }
 export class ReflectionServiceClientImpl implements ReflectionService {
-  private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly rpc: TxRpc;
+  constructor(rpc: TxRpc) {
     this.rpc = rpc;
   }
   /* ListAllInterfaces lists all the interfaces registered in the interface

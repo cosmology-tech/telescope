@@ -75,6 +75,7 @@ const options: TelescopeOptions = {
       useExact: false,
       timestamp: "date",
       duration: "duration",
+      useTelescopeGeneratedType: true
     },
   },
 
@@ -150,6 +151,9 @@ const options: TelescopeOptions = {
         methodNameTx: "createEvmosRPCTxClient",
       },
     ],
+    serviceImplement: {
+      "Msg": "Tx"
+    },
     enabledServices: [
       "Msg",
       "Query",
@@ -163,11 +167,6 @@ const options: TelescopeOptions = {
         include: {
           patterns: ["osmosis.**.*claim*"],
         },
-        nameMapping: {
-          useAuthModuleAccounts: "cosmos.auth.v1beta1.useModuleAccounts",
-          useBankBalance: "cosmos.bank.v1beta1.useBalance",
-          useNftBalance: "cosmos.nft.v1beta1.useBalance",
-        },
       },
       {
         className: "CosmosAuthAccount",
@@ -176,8 +175,6 @@ const options: TelescopeOptions = {
         },
         nameMapping: {
           authModuleAccounts: "cosmos.auth.v1beta1.moduleAccounts",
-          useBankBalance: "cosmos.bank.v1beta1.balance",
-          useNftBalance: "cosmos.nft.v1beta1.balance",
         },
       },
     ],

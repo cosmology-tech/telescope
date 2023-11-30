@@ -2,67 +2,97 @@ import { Description, DescriptionSDKType, CommissionRates, CommissionRatesSDKTyp
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Rpc } from "../../../helpers";
+import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgCreateValidator, MsgCreateValidatorSDKType, MsgCreateValidatorResponse, MsgCreateValidatorResponseSDKType, MsgEditValidator, MsgEditValidatorSDKType, MsgEditValidatorResponse, MsgEditValidatorResponseSDKType, MsgDelegate, MsgDelegateSDKType, MsgDelegateResponse, MsgDelegateResponseSDKType, MsgBeginRedelegate, MsgBeginRedelegateSDKType, MsgBeginRedelegateResponse, MsgBeginRedelegateResponseSDKType, MsgUndelegate, MsgUndelegateSDKType, MsgUndelegateResponse, MsgUndelegateResponseSDKType } from "./tx";
 /** Msg defines the staking Msg service. */
 export interface Msg {
   /** CreateValidator defines a method for creating a new validator. */
-  createValidator(request: MsgCreateValidator): Promise<MsgCreateValidatorResponse>;
+  createValidator(request: BroadcastTxRequest<MsgCreateValidator>): Promise<BroadcastTxResponse<MsgCreateValidatorResponse>>;
   /** EditValidator defines a method for editing an existing validator. */
-  editValidator(request: MsgEditValidator): Promise<MsgEditValidatorResponse>;
+  editValidator(request: BroadcastTxRequest<MsgEditValidator>): Promise<BroadcastTxResponse<MsgEditValidatorResponse>>;
   /**
    * Delegate defines a method for performing a delegation of coins
    * from a delegator to a validator.
    */
-  delegate(request: MsgDelegate): Promise<MsgDelegateResponse>;
+  delegate(request: BroadcastTxRequest<MsgDelegate>): Promise<BroadcastTxResponse<MsgDelegateResponse>>;
   /**
    * BeginRedelegate defines a method for performing a redelegation
    * of coins from a delegator and source validator to a destination validator.
    */
-  beginRedelegate(request: MsgBeginRedelegate): Promise<MsgBeginRedelegateResponse>;
+  beginRedelegate(request: BroadcastTxRequest<MsgBeginRedelegate>): Promise<BroadcastTxResponse<MsgBeginRedelegateResponse>>;
   /**
    * Undelegate defines a method for performing an undelegation from a
    * delegate and a validator.
    */
-  undelegate(request: MsgUndelegate): Promise<MsgUndelegateResponse>;
+  undelegate(request: BroadcastTxRequest<MsgUndelegate>): Promise<BroadcastTxResponse<MsgUndelegateResponse>>;
 }
 export class MsgClientImpl implements Msg {
-  private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly rpc: TxRpc;
+  constructor(rpc: TxRpc) {
     this.rpc = rpc;
   }
   /* CreateValidator defines a method for creating a new validator. */
-  createValidator = async (request: MsgCreateValidator): Promise<MsgCreateValidatorResponse> => {
-    const data = MsgCreateValidator.encode(request).finish();
-    const promise = this.rpc.request("cosmos.staking.v1beta1.Msg", "CreateValidator", data);
-    return promise.then(data => MsgCreateValidatorResponse.decode(new BinaryReader(data)));
+  createValidator = async (request: BroadcastTxRequest<MsgCreateValidator>): Promise<BroadcastTxResponse<MsgCreateValidatorResponse>> => {
+    const data = [{
+      typeUrl: MsgCreateValidator.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgCreateValidatorResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* EditValidator defines a method for editing an existing validator. */
-  editValidator = async (request: MsgEditValidator): Promise<MsgEditValidatorResponse> => {
-    const data = MsgEditValidator.encode(request).finish();
-    const promise = this.rpc.request("cosmos.staking.v1beta1.Msg", "EditValidator", data);
-    return promise.then(data => MsgEditValidatorResponse.decode(new BinaryReader(data)));
+  editValidator = async (request: BroadcastTxRequest<MsgEditValidator>): Promise<BroadcastTxResponse<MsgEditValidatorResponse>> => {
+    const data = [{
+      typeUrl: MsgEditValidator.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgEditValidatorResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* Delegate defines a method for performing a delegation of coins
    from a delegator to a validator. */
-  delegate = async (request: MsgDelegate): Promise<MsgDelegateResponse> => {
-    const data = MsgDelegate.encode(request).finish();
-    const promise = this.rpc.request("cosmos.staking.v1beta1.Msg", "Delegate", data);
-    return promise.then(data => MsgDelegateResponse.decode(new BinaryReader(data)));
+  delegate = async (request: BroadcastTxRequest<MsgDelegate>): Promise<BroadcastTxResponse<MsgDelegateResponse>> => {
+    const data = [{
+      typeUrl: MsgDelegate.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgDelegateResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* BeginRedelegate defines a method for performing a redelegation
    of coins from a delegator and source validator to a destination validator. */
-  beginRedelegate = async (request: MsgBeginRedelegate): Promise<MsgBeginRedelegateResponse> => {
-    const data = MsgBeginRedelegate.encode(request).finish();
-    const promise = this.rpc.request("cosmos.staking.v1beta1.Msg", "BeginRedelegate", data);
-    return promise.then(data => MsgBeginRedelegateResponse.decode(new BinaryReader(data)));
+  beginRedelegate = async (request: BroadcastTxRequest<MsgBeginRedelegate>): Promise<BroadcastTxResponse<MsgBeginRedelegateResponse>> => {
+    const data = [{
+      typeUrl: MsgBeginRedelegate.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgBeginRedelegateResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
   /* Undelegate defines a method for performing an undelegation from a
    delegate and a validator. */
-  undelegate = async (request: MsgUndelegate): Promise<MsgUndelegateResponse> => {
-    const data = MsgUndelegate.encode(request).finish();
-    const promise = this.rpc.request("cosmos.staking.v1beta1.Msg", "Undelegate", data);
-    return promise.then(data => MsgUndelegateResponse.decode(new BinaryReader(data)));
+  undelegate = async (request: BroadcastTxRequest<MsgUndelegate>): Promise<BroadcastTxResponse<MsgUndelegateResponse>> => {
+    const data = [{
+      typeUrl: MsgUndelegate.typeUrl,
+      value: request.message
+    }];
+    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return promise.then(data => ({
+      txResponse: data,
+      response: data && data.msgResponses?.length ? MsgUndelegateResponse.decode(data.msgResponses[0].value) : undefined
+    }));
   };
 }
