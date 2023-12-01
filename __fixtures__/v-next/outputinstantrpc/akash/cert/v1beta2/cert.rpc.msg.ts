@@ -1,12 +1,12 @@
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgCreateCertificate, MsgCreateCertificateSDKType, MsgCreateCertificateResponse, MsgCreateCertificateResponseSDKType, MsgRevokeCertificate, MsgRevokeCertificateSDKType, MsgRevokeCertificateResponse, MsgRevokeCertificateResponseSDKType } from "./cert";
 /** Msg defines the provider Msg service */
 export interface Msg {
   /** CreateCertificate defines a method to create new certificate given proper inputs. */
-  createCertificate(request: BroadcastTxRequest<MsgCreateCertificate>): Promise<BroadcastTxResponse<MsgCreateCertificateResponse>>;
+  createCertificate(request: BroadcastTxReq<MsgCreateCertificate>): Promise<BroadcastTxRes<MsgCreateCertificateResponse>>;
   /** RevokeCertificate defines a method to revoke the certificate */
-  revokeCertificate(request: BroadcastTxRequest<MsgRevokeCertificate>): Promise<BroadcastTxResponse<MsgRevokeCertificateResponse>>;
+  revokeCertificate(request: BroadcastTxReq<MsgRevokeCertificate>): Promise<BroadcastTxRes<MsgRevokeCertificateResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -14,7 +14,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* CreateCertificate defines a method to create new certificate given proper inputs. */
-  createCertificate = async (request: BroadcastTxRequest<MsgCreateCertificate>): Promise<BroadcastTxResponse<MsgCreateCertificateResponse>> => {
+  createCertificate = async (request: BroadcastTxReq<MsgCreateCertificate>): Promise<BroadcastTxRes<MsgCreateCertificateResponse>> => {
     const data = [{
       typeUrl: MsgCreateCertificate.typeUrl,
       value: request.message
@@ -26,7 +26,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* RevokeCertificate defines a method to revoke the certificate */
-  revokeCertificate = async (request: BroadcastTxRequest<MsgRevokeCertificate>): Promise<BroadcastTxResponse<MsgRevokeCertificateResponse>> => {
+  revokeCertificate = async (request: BroadcastTxReq<MsgRevokeCertificate>): Promise<BroadcastTxRes<MsgRevokeCertificateResponse>> => {
     const data = [{
       typeUrl: MsgRevokeCertificate.typeUrl,
       value: request.message

@@ -2,26 +2,26 @@ import { DeploymentID, DeploymentIDSDKType } from "./deployment";
 import { GroupSpec, GroupSpecSDKType } from "./groupspec";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { GroupID, GroupIDSDKType } from "./groupid";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgCreateDeployment, MsgCreateDeploymentSDKType, MsgCreateDeploymentResponse, MsgCreateDeploymentResponseSDKType, MsgDepositDeployment, MsgDepositDeploymentSDKType, MsgDepositDeploymentResponse, MsgDepositDeploymentResponseSDKType, MsgUpdateDeployment, MsgUpdateDeploymentSDKType, MsgUpdateDeploymentResponse, MsgUpdateDeploymentResponseSDKType, MsgCloseDeployment, MsgCloseDeploymentSDKType, MsgCloseDeploymentResponse, MsgCloseDeploymentResponseSDKType } from "./deploymentmsg";
 import { MsgCloseGroup, MsgCloseGroupSDKType, MsgCloseGroupResponse, MsgCloseGroupResponseSDKType, MsgPauseGroup, MsgPauseGroupSDKType, MsgPauseGroupResponse, MsgPauseGroupResponseSDKType, MsgStartGroup, MsgStartGroupSDKType, MsgStartGroupResponse, MsgStartGroupResponseSDKType } from "./groupmsg";
 /** Msg defines the deployment Msg service. */
 export interface Msg {
   /** CreateDeployment defines a method to create new deployment given proper inputs. */
-  createDeployment(request: BroadcastTxRequest<MsgCreateDeployment>): Promise<BroadcastTxResponse<MsgCreateDeploymentResponse>>;
+  createDeployment(request: BroadcastTxReq<MsgCreateDeployment>): Promise<BroadcastTxRes<MsgCreateDeploymentResponse>>;
   /** DepositDeployment deposits more funds into the deployment account */
-  depositDeployment(request: BroadcastTxRequest<MsgDepositDeployment>): Promise<BroadcastTxResponse<MsgDepositDeploymentResponse>>;
+  depositDeployment(request: BroadcastTxReq<MsgDepositDeployment>): Promise<BroadcastTxRes<MsgDepositDeploymentResponse>>;
   /** UpdateDeployment defines a method to update a deployment given proper inputs. */
-  updateDeployment(request: BroadcastTxRequest<MsgUpdateDeployment>): Promise<BroadcastTxResponse<MsgUpdateDeploymentResponse>>;
+  updateDeployment(request: BroadcastTxReq<MsgUpdateDeployment>): Promise<BroadcastTxRes<MsgUpdateDeploymentResponse>>;
   /** CloseDeployment defines a method to close a deployment given proper inputs. */
-  closeDeployment(request: BroadcastTxRequest<MsgCloseDeployment>): Promise<BroadcastTxResponse<MsgCloseDeploymentResponse>>;
+  closeDeployment(request: BroadcastTxReq<MsgCloseDeployment>): Promise<BroadcastTxRes<MsgCloseDeploymentResponse>>;
   /** CloseGroup defines a method to close a group of a deployment given proper inputs. */
-  closeGroup(request: BroadcastTxRequest<MsgCloseGroup>): Promise<BroadcastTxResponse<MsgCloseGroupResponse>>;
+  closeGroup(request: BroadcastTxReq<MsgCloseGroup>): Promise<BroadcastTxRes<MsgCloseGroupResponse>>;
   /** PauseGroup defines a method to close a group of a deployment given proper inputs. */
-  pauseGroup(request: BroadcastTxRequest<MsgPauseGroup>): Promise<BroadcastTxResponse<MsgPauseGroupResponse>>;
+  pauseGroup(request: BroadcastTxReq<MsgPauseGroup>): Promise<BroadcastTxRes<MsgPauseGroupResponse>>;
   /** StartGroup defines a method to close a group of a deployment given proper inputs. */
-  startGroup(request: BroadcastTxRequest<MsgStartGroup>): Promise<BroadcastTxResponse<MsgStartGroupResponse>>;
+  startGroup(request: BroadcastTxReq<MsgStartGroup>): Promise<BroadcastTxRes<MsgStartGroupResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -29,7 +29,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* CreateDeployment defines a method to create new deployment given proper inputs. */
-  createDeployment = async (request: BroadcastTxRequest<MsgCreateDeployment>): Promise<BroadcastTxResponse<MsgCreateDeploymentResponse>> => {
+  createDeployment = async (request: BroadcastTxReq<MsgCreateDeployment>): Promise<BroadcastTxRes<MsgCreateDeploymentResponse>> => {
     const data = [{
       typeUrl: MsgCreateDeployment.typeUrl,
       value: request.message
@@ -41,7 +41,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* DepositDeployment deposits more funds into the deployment account */
-  depositDeployment = async (request: BroadcastTxRequest<MsgDepositDeployment>): Promise<BroadcastTxResponse<MsgDepositDeploymentResponse>> => {
+  depositDeployment = async (request: BroadcastTxReq<MsgDepositDeployment>): Promise<BroadcastTxRes<MsgDepositDeploymentResponse>> => {
     const data = [{
       typeUrl: MsgDepositDeployment.typeUrl,
       value: request.message
@@ -53,7 +53,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* UpdateDeployment defines a method to update a deployment given proper inputs. */
-  updateDeployment = async (request: BroadcastTxRequest<MsgUpdateDeployment>): Promise<BroadcastTxResponse<MsgUpdateDeploymentResponse>> => {
+  updateDeployment = async (request: BroadcastTxReq<MsgUpdateDeployment>): Promise<BroadcastTxRes<MsgUpdateDeploymentResponse>> => {
     const data = [{
       typeUrl: MsgUpdateDeployment.typeUrl,
       value: request.message
@@ -65,7 +65,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* CloseDeployment defines a method to close a deployment given proper inputs. */
-  closeDeployment = async (request: BroadcastTxRequest<MsgCloseDeployment>): Promise<BroadcastTxResponse<MsgCloseDeploymentResponse>> => {
+  closeDeployment = async (request: BroadcastTxReq<MsgCloseDeployment>): Promise<BroadcastTxRes<MsgCloseDeploymentResponse>> => {
     const data = [{
       typeUrl: MsgCloseDeployment.typeUrl,
       value: request.message
@@ -77,7 +77,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* CloseGroup defines a method to close a group of a deployment given proper inputs. */
-  closeGroup = async (request: BroadcastTxRequest<MsgCloseGroup>): Promise<BroadcastTxResponse<MsgCloseGroupResponse>> => {
+  closeGroup = async (request: BroadcastTxReq<MsgCloseGroup>): Promise<BroadcastTxRes<MsgCloseGroupResponse>> => {
     const data = [{
       typeUrl: MsgCloseGroup.typeUrl,
       value: request.message
@@ -89,7 +89,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* PauseGroup defines a method to close a group of a deployment given proper inputs. */
-  pauseGroup = async (request: BroadcastTxRequest<MsgPauseGroup>): Promise<BroadcastTxResponse<MsgPauseGroupResponse>> => {
+  pauseGroup = async (request: BroadcastTxReq<MsgPauseGroup>): Promise<BroadcastTxRes<MsgPauseGroupResponse>> => {
     const data = [{
       typeUrl: MsgPauseGroup.typeUrl,
       value: request.message
@@ -101,7 +101,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* StartGroup defines a method to close a group of a deployment given proper inputs. */
-  startGroup = async (request: BroadcastTxRequest<MsgStartGroup>): Promise<BroadcastTxResponse<MsgStartGroupResponse>> => {
+  startGroup = async (request: BroadcastTxReq<MsgStartGroup>): Promise<BroadcastTxRes<MsgStartGroupResponse>> => {
     const data = [{
       typeUrl: MsgStartGroup.typeUrl,
       value: request.message

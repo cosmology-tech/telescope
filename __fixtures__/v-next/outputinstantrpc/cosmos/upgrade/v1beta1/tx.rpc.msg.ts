@@ -1,5 +1,5 @@
 import { Plan, PlanSDKType } from "./upgrade";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgSoftwareUpgrade, MsgSoftwareUpgradeSDKType, MsgSoftwareUpgradeResponse, MsgSoftwareUpgradeResponseSDKType, MsgCancelUpgrade, MsgCancelUpgradeSDKType, MsgCancelUpgradeResponse, MsgCancelUpgradeResponseSDKType } from "./tx";
 /** Msg defines the upgrade Msg service. */
@@ -9,14 +9,14 @@ export interface Msg {
    * 
    * Since: cosmos-sdk 0.46
    */
-  softwareUpgrade(request: BroadcastTxRequest<MsgSoftwareUpgrade>): Promise<BroadcastTxResponse<MsgSoftwareUpgradeResponse>>;
+  softwareUpgrade(request: BroadcastTxReq<MsgSoftwareUpgrade>): Promise<BroadcastTxRes<MsgSoftwareUpgradeResponse>>;
   /**
    * CancelUpgrade is a governance operation for cancelling a previously
    * approvid software upgrade.
    * 
    * Since: cosmos-sdk 0.46
    */
-  cancelUpgrade(request: BroadcastTxRequest<MsgCancelUpgrade>): Promise<BroadcastTxResponse<MsgCancelUpgradeResponse>>;
+  cancelUpgrade(request: BroadcastTxReq<MsgCancelUpgrade>): Promise<BroadcastTxRes<MsgCancelUpgradeResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -26,7 +26,7 @@ export class MsgClientImpl implements Msg {
   /* SoftwareUpgrade is a governance operation for initiating a software upgrade.
   
    Since: cosmos-sdk 0.46 */
-  softwareUpgrade = async (request: BroadcastTxRequest<MsgSoftwareUpgrade>): Promise<BroadcastTxResponse<MsgSoftwareUpgradeResponse>> => {
+  softwareUpgrade = async (request: BroadcastTxReq<MsgSoftwareUpgrade>): Promise<BroadcastTxRes<MsgSoftwareUpgradeResponse>> => {
     const data = [{
       typeUrl: MsgSoftwareUpgrade.typeUrl,
       value: request.message
@@ -41,7 +41,7 @@ export class MsgClientImpl implements Msg {
    approvid software upgrade.
   
    Since: cosmos-sdk 0.46 */
-  cancelUpgrade = async (request: BroadcastTxRequest<MsgCancelUpgrade>): Promise<BroadcastTxResponse<MsgCancelUpgradeResponse>> => {
+  cancelUpgrade = async (request: BroadcastTxReq<MsgCancelUpgrade>): Promise<BroadcastTxRes<MsgCancelUpgradeResponse>> => {
     const data = [{
       typeUrl: MsgCancelUpgrade.typeUrl,
       value: request.message

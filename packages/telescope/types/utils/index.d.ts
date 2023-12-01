@@ -50,8 +50,8 @@ export declare const UTILS: {
     Registry: string;
     Rpc: string;
     TxRpc: string;
-    BroadcastTxRequest: string;
-    BroadcastTxResponse: string;
+    BroadcastTxReq: string;
+    BroadcastTxRes: string;
     grpc: string;
     setPaginationParams: string;
     SigningStargateClient: string;

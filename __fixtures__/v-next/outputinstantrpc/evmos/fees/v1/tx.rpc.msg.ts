@@ -1,4 +1,4 @@
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgRegisterDevFeeInfo, MsgRegisterDevFeeInfoSDKType, MsgRegisterDevFeeInfoResponse, MsgRegisterDevFeeInfoResponseSDKType, MsgCancelDevFeeInfo, MsgCancelDevFeeInfoSDKType, MsgCancelDevFeeInfoResponse, MsgCancelDevFeeInfoResponseSDKType, MsgUpdateDevFeeInfo, MsgUpdateDevFeeInfoSDKType, MsgUpdateDevFeeInfoResponse, MsgUpdateDevFeeInfoResponseSDKType } from "./tx";
 /** Msg defines the fees Msg service. */
@@ -7,14 +7,14 @@ export interface Msg {
    * RegisterDevFeeInfo is used by a deployer to register a new contract for
    * receiving transaction fees
    */
-  registerDevFeeInfo(request: BroadcastTxRequest<MsgRegisterDevFeeInfo>): Promise<BroadcastTxResponse<MsgRegisterDevFeeInfoResponse>>;
+  registerDevFeeInfo(request: BroadcastTxReq<MsgRegisterDevFeeInfo>): Promise<BroadcastTxRes<MsgRegisterDevFeeInfoResponse>>;
   /**
    * CancelDevFeeInfo is used by a deployer to cancel a registered contract
    * and stop receiving transaction fees
    */
-  cancelDevFeeInfo(request: BroadcastTxRequest<MsgCancelDevFeeInfo>): Promise<BroadcastTxResponse<MsgCancelDevFeeInfoResponse>>;
+  cancelDevFeeInfo(request: BroadcastTxReq<MsgCancelDevFeeInfo>): Promise<BroadcastTxRes<MsgCancelDevFeeInfoResponse>>;
   /** UpdateDevFeeInfo is used by a deployer to update the withdraw address */
-  updateDevFeeInfo(request: BroadcastTxRequest<MsgUpdateDevFeeInfo>): Promise<BroadcastTxResponse<MsgUpdateDevFeeInfoResponse>>;
+  updateDevFeeInfo(request: BroadcastTxReq<MsgUpdateDevFeeInfo>): Promise<BroadcastTxRes<MsgUpdateDevFeeInfoResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -23,7 +23,7 @@ export class MsgClientImpl implements Msg {
   }
   /* RegisterDevFeeInfo is used by a deployer to register a new contract for
    receiving transaction fees */
-  registerDevFeeInfo = async (request: BroadcastTxRequest<MsgRegisterDevFeeInfo>): Promise<BroadcastTxResponse<MsgRegisterDevFeeInfoResponse>> => {
+  registerDevFeeInfo = async (request: BroadcastTxReq<MsgRegisterDevFeeInfo>): Promise<BroadcastTxRes<MsgRegisterDevFeeInfoResponse>> => {
     const data = [{
       typeUrl: MsgRegisterDevFeeInfo.typeUrl,
       value: request.message
@@ -36,7 +36,7 @@ export class MsgClientImpl implements Msg {
   };
   /* CancelDevFeeInfo is used by a deployer to cancel a registered contract
    and stop receiving transaction fees */
-  cancelDevFeeInfo = async (request: BroadcastTxRequest<MsgCancelDevFeeInfo>): Promise<BroadcastTxResponse<MsgCancelDevFeeInfoResponse>> => {
+  cancelDevFeeInfo = async (request: BroadcastTxReq<MsgCancelDevFeeInfo>): Promise<BroadcastTxRes<MsgCancelDevFeeInfoResponse>> => {
     const data = [{
       typeUrl: MsgCancelDevFeeInfo.typeUrl,
       value: request.message
@@ -48,7 +48,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* UpdateDevFeeInfo is used by a deployer to update the withdraw address */
-  updateDevFeeInfo = async (request: BroadcastTxRequest<MsgUpdateDevFeeInfo>): Promise<BroadcastTxResponse<MsgUpdateDevFeeInfoResponse>> => {
+  updateDevFeeInfo = async (request: BroadcastTxReq<MsgUpdateDevFeeInfo>): Promise<BroadcastTxRes<MsgUpdateDevFeeInfoResponse>> => {
     const data = [{
       typeUrl: MsgUpdateDevFeeInfo.typeUrl,
       value: request.message

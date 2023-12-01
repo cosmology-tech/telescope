@@ -2,30 +2,30 @@ import { Description, DescriptionSDKType, CommissionRates, CommissionRatesSDKTyp
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgCreateValidator, MsgCreateValidatorSDKType, MsgCreateValidatorResponse, MsgCreateValidatorResponseSDKType, MsgEditValidator, MsgEditValidatorSDKType, MsgEditValidatorResponse, MsgEditValidatorResponseSDKType, MsgDelegate, MsgDelegateSDKType, MsgDelegateResponse, MsgDelegateResponseSDKType, MsgBeginRedelegate, MsgBeginRedelegateSDKType, MsgBeginRedelegateResponse, MsgBeginRedelegateResponseSDKType, MsgUndelegate, MsgUndelegateSDKType, MsgUndelegateResponse, MsgUndelegateResponseSDKType } from "./tx";
 /** Msg defines the staking Msg service. */
 export interface Msg {
   /** CreateValidator defines a method for creating a new validator. */
-  createValidator(request: BroadcastTxRequest<MsgCreateValidator>): Promise<BroadcastTxResponse<MsgCreateValidatorResponse>>;
+  createValidator(request: BroadcastTxReq<MsgCreateValidator>): Promise<BroadcastTxRes<MsgCreateValidatorResponse>>;
   /** EditValidator defines a method for editing an existing validator. */
-  editValidator(request: BroadcastTxRequest<MsgEditValidator>): Promise<BroadcastTxResponse<MsgEditValidatorResponse>>;
+  editValidator(request: BroadcastTxReq<MsgEditValidator>): Promise<BroadcastTxRes<MsgEditValidatorResponse>>;
   /**
    * Delegate defines a method for performing a delegation of coins
    * from a delegator to a validator.
    */
-  delegate(request: BroadcastTxRequest<MsgDelegate>): Promise<BroadcastTxResponse<MsgDelegateResponse>>;
+  delegate(request: BroadcastTxReq<MsgDelegate>): Promise<BroadcastTxRes<MsgDelegateResponse>>;
   /**
    * BeginRedelegate defines a method for performing a redelegation
    * of coins from a delegator and source validator to a destination validator.
    */
-  beginRedelegate(request: BroadcastTxRequest<MsgBeginRedelegate>): Promise<BroadcastTxResponse<MsgBeginRedelegateResponse>>;
+  beginRedelegate(request: BroadcastTxReq<MsgBeginRedelegate>): Promise<BroadcastTxRes<MsgBeginRedelegateResponse>>;
   /**
    * Undelegate defines a method for performing an undelegation from a
    * delegate and a validator.
    */
-  undelegate(request: BroadcastTxRequest<MsgUndelegate>): Promise<BroadcastTxResponse<MsgUndelegateResponse>>;
+  undelegate(request: BroadcastTxReq<MsgUndelegate>): Promise<BroadcastTxRes<MsgUndelegateResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -33,7 +33,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* CreateValidator defines a method for creating a new validator. */
-  createValidator = async (request: BroadcastTxRequest<MsgCreateValidator>): Promise<BroadcastTxResponse<MsgCreateValidatorResponse>> => {
+  createValidator = async (request: BroadcastTxReq<MsgCreateValidator>): Promise<BroadcastTxRes<MsgCreateValidatorResponse>> => {
     const data = [{
       typeUrl: MsgCreateValidator.typeUrl,
       value: request.message
@@ -45,7 +45,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* EditValidator defines a method for editing an existing validator. */
-  editValidator = async (request: BroadcastTxRequest<MsgEditValidator>): Promise<BroadcastTxResponse<MsgEditValidatorResponse>> => {
+  editValidator = async (request: BroadcastTxReq<MsgEditValidator>): Promise<BroadcastTxRes<MsgEditValidatorResponse>> => {
     const data = [{
       typeUrl: MsgEditValidator.typeUrl,
       value: request.message
@@ -58,7 +58,7 @@ export class MsgClientImpl implements Msg {
   };
   /* Delegate defines a method for performing a delegation of coins
    from a delegator to a validator. */
-  delegate = async (request: BroadcastTxRequest<MsgDelegate>): Promise<BroadcastTxResponse<MsgDelegateResponse>> => {
+  delegate = async (request: BroadcastTxReq<MsgDelegate>): Promise<BroadcastTxRes<MsgDelegateResponse>> => {
     const data = [{
       typeUrl: MsgDelegate.typeUrl,
       value: request.message
@@ -71,7 +71,7 @@ export class MsgClientImpl implements Msg {
   };
   /* BeginRedelegate defines a method for performing a redelegation
    of coins from a delegator and source validator to a destination validator. */
-  beginRedelegate = async (request: BroadcastTxRequest<MsgBeginRedelegate>): Promise<BroadcastTxResponse<MsgBeginRedelegateResponse>> => {
+  beginRedelegate = async (request: BroadcastTxReq<MsgBeginRedelegate>): Promise<BroadcastTxRes<MsgBeginRedelegateResponse>> => {
     const data = [{
       typeUrl: MsgBeginRedelegate.typeUrl,
       value: request.message
@@ -84,7 +84,7 @@ export class MsgClientImpl implements Msg {
   };
   /* Undelegate defines a method for performing an undelegation from a
    delegate and a validator. */
-  undelegate = async (request: BroadcastTxRequest<MsgUndelegate>): Promise<BroadcastTxResponse<MsgUndelegateResponse>> => {
+  undelegate = async (request: BroadcastTxReq<MsgUndelegate>): Promise<BroadcastTxRes<MsgUndelegateResponse>> => {
     const data = [{
       typeUrl: MsgUndelegate.typeUrl,
       value: request.message

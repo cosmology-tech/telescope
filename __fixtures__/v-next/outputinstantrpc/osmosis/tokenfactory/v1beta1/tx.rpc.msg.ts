@@ -1,15 +1,15 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Metadata, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgCreateDenom, MsgCreateDenomSDKType, MsgCreateDenomResponse, MsgCreateDenomResponseSDKType, MsgMint, MsgMintSDKType, MsgMintResponse, MsgMintResponseSDKType, MsgBurn, MsgBurnSDKType, MsgBurnResponse, MsgBurnResponseSDKType, MsgChangeAdmin, MsgChangeAdminSDKType, MsgChangeAdminResponse, MsgChangeAdminResponseSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataSDKType, MsgSetDenomMetadataResponse, MsgSetDenomMetadataResponseSDKType } from "./tx";
 /** Msg defines the tokefactory module's gRPC message service. */
 export interface Msg {
-  createDenom(request: BroadcastTxRequest<MsgCreateDenom>): Promise<BroadcastTxResponse<MsgCreateDenomResponse>>;
-  mint(request: BroadcastTxRequest<MsgMint>): Promise<BroadcastTxResponse<MsgMintResponse>>;
-  burn(request: BroadcastTxRequest<MsgBurn>): Promise<BroadcastTxResponse<MsgBurnResponse>>;
-  changeAdmin(request: BroadcastTxRequest<MsgChangeAdmin>): Promise<BroadcastTxResponse<MsgChangeAdminResponse>>;
-  setDenomMetadata(request: BroadcastTxRequest<MsgSetDenomMetadata>): Promise<BroadcastTxResponse<MsgSetDenomMetadataResponse>>;
+  createDenom(request: BroadcastTxReq<MsgCreateDenom>): Promise<BroadcastTxRes<MsgCreateDenomResponse>>;
+  mint(request: BroadcastTxReq<MsgMint>): Promise<BroadcastTxRes<MsgMintResponse>>;
+  burn(request: BroadcastTxReq<MsgBurn>): Promise<BroadcastTxRes<MsgBurnResponse>>;
+  changeAdmin(request: BroadcastTxReq<MsgChangeAdmin>): Promise<BroadcastTxRes<MsgChangeAdminResponse>>;
+  setDenomMetadata(request: BroadcastTxReq<MsgSetDenomMetadata>): Promise<BroadcastTxRes<MsgSetDenomMetadataResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -17,7 +17,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* CreateDenom */
-  createDenom = async (request: BroadcastTxRequest<MsgCreateDenom>): Promise<BroadcastTxResponse<MsgCreateDenomResponse>> => {
+  createDenom = async (request: BroadcastTxReq<MsgCreateDenom>): Promise<BroadcastTxRes<MsgCreateDenomResponse>> => {
     const data = [{
       typeUrl: MsgCreateDenom.typeUrl,
       value: request.message
@@ -29,7 +29,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* Mint */
-  mint = async (request: BroadcastTxRequest<MsgMint>): Promise<BroadcastTxResponse<MsgMintResponse>> => {
+  mint = async (request: BroadcastTxReq<MsgMint>): Promise<BroadcastTxRes<MsgMintResponse>> => {
     const data = [{
       typeUrl: MsgMint.typeUrl,
       value: request.message
@@ -41,7 +41,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* Burn */
-  burn = async (request: BroadcastTxRequest<MsgBurn>): Promise<BroadcastTxResponse<MsgBurnResponse>> => {
+  burn = async (request: BroadcastTxReq<MsgBurn>): Promise<BroadcastTxRes<MsgBurnResponse>> => {
     const data = [{
       typeUrl: MsgBurn.typeUrl,
       value: request.message
@@ -53,7 +53,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* ChangeAdmin */
-  changeAdmin = async (request: BroadcastTxRequest<MsgChangeAdmin>): Promise<BroadcastTxResponse<MsgChangeAdminResponse>> => {
+  changeAdmin = async (request: BroadcastTxReq<MsgChangeAdmin>): Promise<BroadcastTxRes<MsgChangeAdminResponse>> => {
     const data = [{
       typeUrl: MsgChangeAdmin.typeUrl,
       value: request.message
@@ -65,7 +65,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* SetDenomMetadata */
-  setDenomMetadata = async (request: BroadcastTxRequest<MsgSetDenomMetadata>): Promise<BroadcastTxResponse<MsgSetDenomMetadataResponse>> => {
+  setDenomMetadata = async (request: BroadcastTxReq<MsgSetDenomMetadata>): Promise<BroadcastTxRes<MsgSetDenomMetadataResponse>> => {
     const data = [{
       typeUrl: MsgSetDenomMetadata.typeUrl,
       value: request.message

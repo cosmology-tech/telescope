@@ -1,5 +1,5 @@
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgSetWithdrawAddress, MsgSetWithdrawAddressSDKType, MsgSetWithdrawAddressResponse, MsgSetWithdrawAddressResponseSDKType, MsgWithdrawDelegatorReward, MsgWithdrawDelegatorRewardSDKType, MsgWithdrawDelegatorRewardResponse, MsgWithdrawDelegatorRewardResponseSDKType, MsgWithdrawValidatorCommission, MsgWithdrawValidatorCommissionSDKType, MsgWithdrawValidatorCommissionResponse, MsgWithdrawValidatorCommissionResponseSDKType, MsgFundCommunityPool, MsgFundCommunityPoolSDKType, MsgFundCommunityPoolResponse, MsgFundCommunityPoolResponseSDKType } from "./tx";
 /** Msg defines the distribution Msg service. */
@@ -8,22 +8,22 @@ export interface Msg {
    * SetWithdrawAddress defines a method to change the withdraw address
    * for a delegator (or validator self-delegation).
    */
-  setWithdrawAddress(request: BroadcastTxRequest<MsgSetWithdrawAddress>): Promise<BroadcastTxResponse<MsgSetWithdrawAddressResponse>>;
+  setWithdrawAddress(request: BroadcastTxReq<MsgSetWithdrawAddress>): Promise<BroadcastTxRes<MsgSetWithdrawAddressResponse>>;
   /**
    * WithdrawDelegatorReward defines a method to withdraw rewards of delegator
    * from a single validator.
    */
-  withdrawDelegatorReward(request: BroadcastTxRequest<MsgWithdrawDelegatorReward>): Promise<BroadcastTxResponse<MsgWithdrawDelegatorRewardResponse>>;
+  withdrawDelegatorReward(request: BroadcastTxReq<MsgWithdrawDelegatorReward>): Promise<BroadcastTxRes<MsgWithdrawDelegatorRewardResponse>>;
   /**
    * WithdrawValidatorCommission defines a method to withdraw the
    * full commission to the validator address.
    */
-  withdrawValidatorCommission(request: BroadcastTxRequest<MsgWithdrawValidatorCommission>): Promise<BroadcastTxResponse<MsgWithdrawValidatorCommissionResponse>>;
+  withdrawValidatorCommission(request: BroadcastTxReq<MsgWithdrawValidatorCommission>): Promise<BroadcastTxRes<MsgWithdrawValidatorCommissionResponse>>;
   /**
    * FundCommunityPool defines a method to allow an account to directly
    * fund the community pool.
    */
-  fundCommunityPool(request: BroadcastTxRequest<MsgFundCommunityPool>): Promise<BroadcastTxResponse<MsgFundCommunityPoolResponse>>;
+  fundCommunityPool(request: BroadcastTxReq<MsgFundCommunityPool>): Promise<BroadcastTxRes<MsgFundCommunityPoolResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -32,7 +32,7 @@ export class MsgClientImpl implements Msg {
   }
   /* SetWithdrawAddress defines a method to change the withdraw address
    for a delegator (or validator self-delegation). */
-  setWithdrawAddress = async (request: BroadcastTxRequest<MsgSetWithdrawAddress>): Promise<BroadcastTxResponse<MsgSetWithdrawAddressResponse>> => {
+  setWithdrawAddress = async (request: BroadcastTxReq<MsgSetWithdrawAddress>): Promise<BroadcastTxRes<MsgSetWithdrawAddressResponse>> => {
     const data = [{
       typeUrl: MsgSetWithdrawAddress.typeUrl,
       value: request.message
@@ -45,7 +45,7 @@ export class MsgClientImpl implements Msg {
   };
   /* WithdrawDelegatorReward defines a method to withdraw rewards of delegator
    from a single validator. */
-  withdrawDelegatorReward = async (request: BroadcastTxRequest<MsgWithdrawDelegatorReward>): Promise<BroadcastTxResponse<MsgWithdrawDelegatorRewardResponse>> => {
+  withdrawDelegatorReward = async (request: BroadcastTxReq<MsgWithdrawDelegatorReward>): Promise<BroadcastTxRes<MsgWithdrawDelegatorRewardResponse>> => {
     const data = [{
       typeUrl: MsgWithdrawDelegatorReward.typeUrl,
       value: request.message
@@ -58,7 +58,7 @@ export class MsgClientImpl implements Msg {
   };
   /* WithdrawValidatorCommission defines a method to withdraw the
    full commission to the validator address. */
-  withdrawValidatorCommission = async (request: BroadcastTxRequest<MsgWithdrawValidatorCommission>): Promise<BroadcastTxResponse<MsgWithdrawValidatorCommissionResponse>> => {
+  withdrawValidatorCommission = async (request: BroadcastTxReq<MsgWithdrawValidatorCommission>): Promise<BroadcastTxRes<MsgWithdrawValidatorCommissionResponse>> => {
     const data = [{
       typeUrl: MsgWithdrawValidatorCommission.typeUrl,
       value: request.message
@@ -71,7 +71,7 @@ export class MsgClientImpl implements Msg {
   };
   /* FundCommunityPool defines a method to allow an account to directly
    fund the community pool. */
-  fundCommunityPool = async (request: BroadcastTxRequest<MsgFundCommunityPool>): Promise<BroadcastTxResponse<MsgFundCommunityPoolResponse>> => {
+  fundCommunityPool = async (request: BroadcastTxReq<MsgFundCommunityPool>): Promise<BroadcastTxRes<MsgFundCommunityPoolResponse>> => {
     const data = [{
       typeUrl: MsgFundCommunityPool.typeUrl,
       value: request.message

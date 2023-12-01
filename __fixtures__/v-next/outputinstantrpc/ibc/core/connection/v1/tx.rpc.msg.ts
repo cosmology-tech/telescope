@@ -1,22 +1,22 @@
 import { Counterparty, CounterpartySDKType, Version, VersionSDKType } from "./connection";
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Height, HeightSDKType } from "../../client/v1/client";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../../types";
 import { BinaryReader } from "../../../../binary";
 import { MsgConnectionOpenInit, MsgConnectionOpenInitSDKType, MsgConnectionOpenInitResponse, MsgConnectionOpenInitResponseSDKType, MsgConnectionOpenTry, MsgConnectionOpenTrySDKType, MsgConnectionOpenTryResponse, MsgConnectionOpenTryResponseSDKType, MsgConnectionOpenAck, MsgConnectionOpenAckSDKType, MsgConnectionOpenAckResponse, MsgConnectionOpenAckResponseSDKType, MsgConnectionOpenConfirm, MsgConnectionOpenConfirmSDKType, MsgConnectionOpenConfirmResponse, MsgConnectionOpenConfirmResponseSDKType } from "./tx";
 /** Msg defines the ibc/connection Msg service. */
 export interface Msg {
   /** ConnectionOpenInit defines a rpc handler method for MsgConnectionOpenInit. */
-  connectionOpenInit(request: BroadcastTxRequest<MsgConnectionOpenInit>): Promise<BroadcastTxResponse<MsgConnectionOpenInitResponse>>;
+  connectionOpenInit(request: BroadcastTxReq<MsgConnectionOpenInit>): Promise<BroadcastTxRes<MsgConnectionOpenInitResponse>>;
   /** ConnectionOpenTry defines a rpc handler method for MsgConnectionOpenTry. */
-  connectionOpenTry(request: BroadcastTxRequest<MsgConnectionOpenTry>): Promise<BroadcastTxResponse<MsgConnectionOpenTryResponse>>;
+  connectionOpenTry(request: BroadcastTxReq<MsgConnectionOpenTry>): Promise<BroadcastTxRes<MsgConnectionOpenTryResponse>>;
   /** ConnectionOpenAck defines a rpc handler method for MsgConnectionOpenAck. */
-  connectionOpenAck(request: BroadcastTxRequest<MsgConnectionOpenAck>): Promise<BroadcastTxResponse<MsgConnectionOpenAckResponse>>;
+  connectionOpenAck(request: BroadcastTxReq<MsgConnectionOpenAck>): Promise<BroadcastTxRes<MsgConnectionOpenAckResponse>>;
   /**
    * ConnectionOpenConfirm defines a rpc handler method for
    * MsgConnectionOpenConfirm.
    */
-  connectionOpenConfirm(request: BroadcastTxRequest<MsgConnectionOpenConfirm>): Promise<BroadcastTxResponse<MsgConnectionOpenConfirmResponse>>;
+  connectionOpenConfirm(request: BroadcastTxReq<MsgConnectionOpenConfirm>): Promise<BroadcastTxRes<MsgConnectionOpenConfirmResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -24,7 +24,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* ConnectionOpenInit defines a rpc handler method for MsgConnectionOpenInit. */
-  connectionOpenInit = async (request: BroadcastTxRequest<MsgConnectionOpenInit>): Promise<BroadcastTxResponse<MsgConnectionOpenInitResponse>> => {
+  connectionOpenInit = async (request: BroadcastTxReq<MsgConnectionOpenInit>): Promise<BroadcastTxRes<MsgConnectionOpenInitResponse>> => {
     const data = [{
       typeUrl: MsgConnectionOpenInit.typeUrl,
       value: request.message
@@ -36,7 +36,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* ConnectionOpenTry defines a rpc handler method for MsgConnectionOpenTry. */
-  connectionOpenTry = async (request: BroadcastTxRequest<MsgConnectionOpenTry>): Promise<BroadcastTxResponse<MsgConnectionOpenTryResponse>> => {
+  connectionOpenTry = async (request: BroadcastTxReq<MsgConnectionOpenTry>): Promise<BroadcastTxRes<MsgConnectionOpenTryResponse>> => {
     const data = [{
       typeUrl: MsgConnectionOpenTry.typeUrl,
       value: request.message
@@ -48,7 +48,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* ConnectionOpenAck defines a rpc handler method for MsgConnectionOpenAck. */
-  connectionOpenAck = async (request: BroadcastTxRequest<MsgConnectionOpenAck>): Promise<BroadcastTxResponse<MsgConnectionOpenAckResponse>> => {
+  connectionOpenAck = async (request: BroadcastTxReq<MsgConnectionOpenAck>): Promise<BroadcastTxRes<MsgConnectionOpenAckResponse>> => {
     const data = [{
       typeUrl: MsgConnectionOpenAck.typeUrl,
       value: request.message
@@ -61,7 +61,7 @@ export class MsgClientImpl implements Msg {
   };
   /* ConnectionOpenConfirm defines a rpc handler method for
    MsgConnectionOpenConfirm. */
-  connectionOpenConfirm = async (request: BroadcastTxRequest<MsgConnectionOpenConfirm>): Promise<BroadcastTxResponse<MsgConnectionOpenConfirmResponse>> => {
+  connectionOpenConfirm = async (request: BroadcastTxReq<MsgConnectionOpenConfirm>): Promise<BroadcastTxRes<MsgConnectionOpenConfirmResponse>> => {
     const data = [{
       typeUrl: MsgConnectionOpenConfirm.typeUrl,
       value: request.message

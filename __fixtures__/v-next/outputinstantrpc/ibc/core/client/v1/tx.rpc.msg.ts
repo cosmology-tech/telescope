@@ -1,17 +1,17 @@
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../../types";
 import { BinaryReader } from "../../../../binary";
 import { MsgCreateClient, MsgCreateClientSDKType, MsgCreateClientResponse, MsgCreateClientResponseSDKType, MsgUpdateClient, MsgUpdateClientSDKType, MsgUpdateClientResponse, MsgUpdateClientResponseSDKType, MsgUpgradeClient, MsgUpgradeClientSDKType, MsgUpgradeClientResponse, MsgUpgradeClientResponseSDKType, MsgSubmitMisbehaviour, MsgSubmitMisbehaviourSDKType, MsgSubmitMisbehaviourResponse, MsgSubmitMisbehaviourResponseSDKType } from "./tx";
 /** Msg defines the ibc/client Msg service. */
 export interface Msg {
   /** CreateClient defines a rpc handler method for MsgCreateClient. */
-  createClient(request: BroadcastTxRequest<MsgCreateClient>): Promise<BroadcastTxResponse<MsgCreateClientResponse>>;
+  createClient(request: BroadcastTxReq<MsgCreateClient>): Promise<BroadcastTxRes<MsgCreateClientResponse>>;
   /** UpdateClient defines a rpc handler method for MsgUpdateClient. */
-  updateClient(request: BroadcastTxRequest<MsgUpdateClient>): Promise<BroadcastTxResponse<MsgUpdateClientResponse>>;
+  updateClient(request: BroadcastTxReq<MsgUpdateClient>): Promise<BroadcastTxRes<MsgUpdateClientResponse>>;
   /** UpgradeClient defines a rpc handler method for MsgUpgradeClient. */
-  upgradeClient(request: BroadcastTxRequest<MsgUpgradeClient>): Promise<BroadcastTxResponse<MsgUpgradeClientResponse>>;
+  upgradeClient(request: BroadcastTxReq<MsgUpgradeClient>): Promise<BroadcastTxRes<MsgUpgradeClientResponse>>;
   /** SubmitMisbehaviour defines a rpc handler method for MsgSubmitMisbehaviour. */
-  submitMisbehaviour(request: BroadcastTxRequest<MsgSubmitMisbehaviour>): Promise<BroadcastTxResponse<MsgSubmitMisbehaviourResponse>>;
+  submitMisbehaviour(request: BroadcastTxReq<MsgSubmitMisbehaviour>): Promise<BroadcastTxRes<MsgSubmitMisbehaviourResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -19,7 +19,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* CreateClient defines a rpc handler method for MsgCreateClient. */
-  createClient = async (request: BroadcastTxRequest<MsgCreateClient>): Promise<BroadcastTxResponse<MsgCreateClientResponse>> => {
+  createClient = async (request: BroadcastTxReq<MsgCreateClient>): Promise<BroadcastTxRes<MsgCreateClientResponse>> => {
     const data = [{
       typeUrl: MsgCreateClient.typeUrl,
       value: request.message
@@ -31,7 +31,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* UpdateClient defines a rpc handler method for MsgUpdateClient. */
-  updateClient = async (request: BroadcastTxRequest<MsgUpdateClient>): Promise<BroadcastTxResponse<MsgUpdateClientResponse>> => {
+  updateClient = async (request: BroadcastTxReq<MsgUpdateClient>): Promise<BroadcastTxRes<MsgUpdateClientResponse>> => {
     const data = [{
       typeUrl: MsgUpdateClient.typeUrl,
       value: request.message
@@ -43,7 +43,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* UpgradeClient defines a rpc handler method for MsgUpgradeClient. */
-  upgradeClient = async (request: BroadcastTxRequest<MsgUpgradeClient>): Promise<BroadcastTxResponse<MsgUpgradeClientResponse>> => {
+  upgradeClient = async (request: BroadcastTxReq<MsgUpgradeClient>): Promise<BroadcastTxRes<MsgUpgradeClientResponse>> => {
     const data = [{
       typeUrl: MsgUpgradeClient.typeUrl,
       value: request.message
@@ -55,7 +55,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* SubmitMisbehaviour defines a rpc handler method for MsgSubmitMisbehaviour. */
-  submitMisbehaviour = async (request: BroadcastTxRequest<MsgSubmitMisbehaviour>): Promise<BroadcastTxResponse<MsgSubmitMisbehaviourResponse>> => {
+  submitMisbehaviour = async (request: BroadcastTxReq<MsgSubmitMisbehaviour>): Promise<BroadcastTxRes<MsgSubmitMisbehaviourResponse>> => {
     const data = [{
       typeUrl: MsgSubmitMisbehaviour.typeUrl,
       value: request.message

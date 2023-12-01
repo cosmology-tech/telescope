@@ -1,9 +1,9 @@
 import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType } from "../balancerPool";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../../../types";
 import { BinaryReader } from "../../../../../binary";
 import { MsgCreateBalancerPool, MsgCreateBalancerPoolSDKType, MsgCreateBalancerPoolResponse, MsgCreateBalancerPoolResponseSDKType } from "./tx";
 export interface Msg {
-  createBalancerPool(request: BroadcastTxRequest<MsgCreateBalancerPool>): Promise<BroadcastTxResponse<MsgCreateBalancerPoolResponse>>;
+  createBalancerPool(request: BroadcastTxReq<MsgCreateBalancerPool>): Promise<BroadcastTxRes<MsgCreateBalancerPoolResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -11,7 +11,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* CreateBalancerPool */
-  createBalancerPool = async (request: BroadcastTxRequest<MsgCreateBalancerPool>): Promise<BroadcastTxResponse<MsgCreateBalancerPoolResponse>> => {
+  createBalancerPool = async (request: BroadcastTxReq<MsgCreateBalancerPool>): Promise<BroadcastTxRes<MsgCreateBalancerPoolResponse>> => {
     const data = [{
       typeUrl: MsgCreateBalancerPool.typeUrl,
       value: request.message

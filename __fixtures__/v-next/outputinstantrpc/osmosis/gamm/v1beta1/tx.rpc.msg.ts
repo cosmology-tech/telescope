@@ -1,16 +1,16 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgJoinPool, MsgJoinPoolSDKType, MsgJoinPoolResponse, MsgJoinPoolResponseSDKType, MsgExitPool, MsgExitPoolSDKType, MsgExitPoolResponse, MsgExitPoolResponseSDKType, MsgSwapExactAmountIn, MsgSwapExactAmountInSDKType, MsgSwapExactAmountInResponse, MsgSwapExactAmountInResponseSDKType, MsgSwapExactAmountOut, MsgSwapExactAmountOutSDKType, MsgSwapExactAmountOutResponse, MsgSwapExactAmountOutResponseSDKType, MsgJoinSwapExternAmountIn, MsgJoinSwapExternAmountInSDKType, MsgJoinSwapExternAmountInResponse, MsgJoinSwapExternAmountInResponseSDKType, MsgJoinSwapShareAmountOut, MsgJoinSwapShareAmountOutSDKType, MsgJoinSwapShareAmountOutResponse, MsgJoinSwapShareAmountOutResponseSDKType, MsgExitSwapExternAmountOut, MsgExitSwapExternAmountOutSDKType, MsgExitSwapExternAmountOutResponse, MsgExitSwapExternAmountOutResponseSDKType, MsgExitSwapShareAmountIn, MsgExitSwapShareAmountInSDKType, MsgExitSwapShareAmountInResponse, MsgExitSwapShareAmountInResponseSDKType } from "./tx";
 export interface Msg {
-  joinPool(request: BroadcastTxRequest<MsgJoinPool>): Promise<BroadcastTxResponse<MsgJoinPoolResponse>>;
-  exitPool(request: BroadcastTxRequest<MsgExitPool>): Promise<BroadcastTxResponse<MsgExitPoolResponse>>;
-  swapExactAmountIn(request: BroadcastTxRequest<MsgSwapExactAmountIn>): Promise<BroadcastTxResponse<MsgSwapExactAmountInResponse>>;
-  swapExactAmountOut(request: BroadcastTxRequest<MsgSwapExactAmountOut>): Promise<BroadcastTxResponse<MsgSwapExactAmountOutResponse>>;
-  joinSwapExternAmountIn(request: BroadcastTxRequest<MsgJoinSwapExternAmountIn>): Promise<BroadcastTxResponse<MsgJoinSwapExternAmountInResponse>>;
-  joinSwapShareAmountOut(request: BroadcastTxRequest<MsgJoinSwapShareAmountOut>): Promise<BroadcastTxResponse<MsgJoinSwapShareAmountOutResponse>>;
-  exitSwapExternAmountOut(request: BroadcastTxRequest<MsgExitSwapExternAmountOut>): Promise<BroadcastTxResponse<MsgExitSwapExternAmountOutResponse>>;
-  exitSwapShareAmountIn(request: BroadcastTxRequest<MsgExitSwapShareAmountIn>): Promise<BroadcastTxResponse<MsgExitSwapShareAmountInResponse>>;
+  joinPool(request: BroadcastTxReq<MsgJoinPool>): Promise<BroadcastTxRes<MsgJoinPoolResponse>>;
+  exitPool(request: BroadcastTxReq<MsgExitPool>): Promise<BroadcastTxRes<MsgExitPoolResponse>>;
+  swapExactAmountIn(request: BroadcastTxReq<MsgSwapExactAmountIn>): Promise<BroadcastTxRes<MsgSwapExactAmountInResponse>>;
+  swapExactAmountOut(request: BroadcastTxReq<MsgSwapExactAmountOut>): Promise<BroadcastTxRes<MsgSwapExactAmountOutResponse>>;
+  joinSwapExternAmountIn(request: BroadcastTxReq<MsgJoinSwapExternAmountIn>): Promise<BroadcastTxRes<MsgJoinSwapExternAmountInResponse>>;
+  joinSwapShareAmountOut(request: BroadcastTxReq<MsgJoinSwapShareAmountOut>): Promise<BroadcastTxRes<MsgJoinSwapShareAmountOutResponse>>;
+  exitSwapExternAmountOut(request: BroadcastTxReq<MsgExitSwapExternAmountOut>): Promise<BroadcastTxRes<MsgExitSwapExternAmountOutResponse>>;
+  exitSwapShareAmountIn(request: BroadcastTxReq<MsgExitSwapShareAmountIn>): Promise<BroadcastTxRes<MsgExitSwapShareAmountInResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -18,7 +18,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* JoinPool */
-  joinPool = async (request: BroadcastTxRequest<MsgJoinPool>): Promise<BroadcastTxResponse<MsgJoinPoolResponse>> => {
+  joinPool = async (request: BroadcastTxReq<MsgJoinPool>): Promise<BroadcastTxRes<MsgJoinPoolResponse>> => {
     const data = [{
       typeUrl: MsgJoinPool.typeUrl,
       value: request.message
@@ -30,7 +30,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* ExitPool */
-  exitPool = async (request: BroadcastTxRequest<MsgExitPool>): Promise<BroadcastTxResponse<MsgExitPoolResponse>> => {
+  exitPool = async (request: BroadcastTxReq<MsgExitPool>): Promise<BroadcastTxRes<MsgExitPoolResponse>> => {
     const data = [{
       typeUrl: MsgExitPool.typeUrl,
       value: request.message
@@ -42,7 +42,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* SwapExactAmountIn */
-  swapExactAmountIn = async (request: BroadcastTxRequest<MsgSwapExactAmountIn>): Promise<BroadcastTxResponse<MsgSwapExactAmountInResponse>> => {
+  swapExactAmountIn = async (request: BroadcastTxReq<MsgSwapExactAmountIn>): Promise<BroadcastTxRes<MsgSwapExactAmountInResponse>> => {
     const data = [{
       typeUrl: MsgSwapExactAmountIn.typeUrl,
       value: request.message
@@ -54,7 +54,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* SwapExactAmountOut */
-  swapExactAmountOut = async (request: BroadcastTxRequest<MsgSwapExactAmountOut>): Promise<BroadcastTxResponse<MsgSwapExactAmountOutResponse>> => {
+  swapExactAmountOut = async (request: BroadcastTxReq<MsgSwapExactAmountOut>): Promise<BroadcastTxRes<MsgSwapExactAmountOutResponse>> => {
     const data = [{
       typeUrl: MsgSwapExactAmountOut.typeUrl,
       value: request.message
@@ -66,7 +66,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* JoinSwapExternAmountIn */
-  joinSwapExternAmountIn = async (request: BroadcastTxRequest<MsgJoinSwapExternAmountIn>): Promise<BroadcastTxResponse<MsgJoinSwapExternAmountInResponse>> => {
+  joinSwapExternAmountIn = async (request: BroadcastTxReq<MsgJoinSwapExternAmountIn>): Promise<BroadcastTxRes<MsgJoinSwapExternAmountInResponse>> => {
     const data = [{
       typeUrl: MsgJoinSwapExternAmountIn.typeUrl,
       value: request.message
@@ -78,7 +78,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* JoinSwapShareAmountOut */
-  joinSwapShareAmountOut = async (request: BroadcastTxRequest<MsgJoinSwapShareAmountOut>): Promise<BroadcastTxResponse<MsgJoinSwapShareAmountOutResponse>> => {
+  joinSwapShareAmountOut = async (request: BroadcastTxReq<MsgJoinSwapShareAmountOut>): Promise<BroadcastTxRes<MsgJoinSwapShareAmountOutResponse>> => {
     const data = [{
       typeUrl: MsgJoinSwapShareAmountOut.typeUrl,
       value: request.message
@@ -90,7 +90,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* ExitSwapExternAmountOut */
-  exitSwapExternAmountOut = async (request: BroadcastTxRequest<MsgExitSwapExternAmountOut>): Promise<BroadcastTxResponse<MsgExitSwapExternAmountOutResponse>> => {
+  exitSwapExternAmountOut = async (request: BroadcastTxReq<MsgExitSwapExternAmountOut>): Promise<BroadcastTxRes<MsgExitSwapExternAmountOutResponse>> => {
     const data = [{
       typeUrl: MsgExitSwapExternAmountOut.typeUrl,
       value: request.message
@@ -102,7 +102,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* ExitSwapShareAmountIn */
-  exitSwapShareAmountIn = async (request: BroadcastTxRequest<MsgExitSwapShareAmountIn>): Promise<BroadcastTxResponse<MsgExitSwapShareAmountInResponse>> => {
+  exitSwapShareAmountIn = async (request: BroadcastTxReq<MsgExitSwapShareAmountIn>): Promise<BroadcastTxRes<MsgExitSwapShareAmountInResponse>> => {
     const data = [{
       typeUrl: MsgExitSwapShareAmountIn.typeUrl,
       value: request.message

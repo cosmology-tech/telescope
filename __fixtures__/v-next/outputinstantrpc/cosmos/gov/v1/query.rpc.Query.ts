@@ -76,6 +76,6 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryTallyResultResponse.decode(new BinaryReader(data)));
   };
 }
-export const createClientImpl = (rpc: Rpc) => {
+export const createClientImpl = (rpc: TxRpc) => {
   return new QueryClientImpl(rpc);
 };

@@ -113,14 +113,7 @@ export const getServiceImplement = (
     | string,
   methodName: string,
   serviceImplement?: {
-    service:
-      | "Msg"
-      | "Query"
-      | "Service"
-      | "ReflectionService"
-      | "ABCIApplication"
-      | string;
-    implementType: "Query" | "Tx" | string;
+    [key: 'Msg' | 'Query' | 'Service' | 'ReflectionService' | 'ABCIApplication' | string]: 'Query' | 'Tx' | string;
   }
 ) => {
   return serviceImplement

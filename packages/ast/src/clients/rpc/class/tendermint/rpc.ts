@@ -51,7 +51,7 @@ const rpcTxMethodDefinition = (
   leadingComments?: t.CommentBlock[],
 ) => {
   const requestType = t.tsTypeReference(
-    t.identifier("BroadcastTxRequest"),
+    t.identifier("BroadcastTxReq"),
     t.tsTypeParameterInstantiation(
       [
         t.tsTypeReference(t.identifier(svc.requestType))
@@ -59,7 +59,7 @@ const rpcTxMethodDefinition = (
     )
   );
   const responseType = t.tsTypeReference(
-    t.identifier("BroadcastTxResponse"),
+    t.identifier("BroadcastTxRes"),
     t.tsTypeParameterInstantiation(
       [
         t.tsTypeReference(t.identifier(svc.responseType))
@@ -327,7 +327,7 @@ const rpcTxClassMethod = (
 ) => {
 
   const requestType = t.tsTypeReference(
-    t.identifier("BroadcastTxRequest"),
+    t.identifier("BroadcastTxReq"),
     t.tsTypeParameterInstantiation(
       [
         t.tsTypeReference(t.identifier(svc.requestType))
@@ -335,7 +335,7 @@ const rpcTxClassMethod = (
     )
   );
   const responseType = t.tsTypeReference(
-    t.identifier("BroadcastTxResponse"),
+    t.identifier("BroadcastTxRes"),
     t.tsTypeParameterInstantiation(
       [
         t.tsTypeReference(t.identifier(svc.responseType))
@@ -527,7 +527,9 @@ export const createRpcClientInterface = (
     const keys = methodKeys && methodKeys.length ? methodKeys : Object.keys(service.methods ?? {});
     const methods = keys
         .map((key) => {
-            const implementType = getServiceImplement(service.name, key, serviceImplement);
+            const methodName = camelRpcMethods ? camel(key) : key;
+
+            const implementType = getServiceImplement(service.name, methodName, serviceImplement);
 
             const method = service.methods[key];
 
@@ -535,15 +537,14 @@ export const createRpcClientInterface = (
               return null;
             }
 
-            const methodName = camelRpcMethods ? camel(key) : key;
             const nameWithPkg = `${context.ref.proto.package}.${methodName}`;
             const methodAlias = nameMapping && nameMapping[nameWithPkg] ? nameMapping[nameWithPkg] : methodName;
             const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
             let trailingComments = [];
             switch (implementType) {
               case "Tx":
-                context.addUtil("BroadcastTxRequest");
-                context.addUtil("BroadcastTxResponse");
+                context.addUtil("BroadcastTxReq");
+                context.addUtil("BroadcastTxRes");
 
                 return rpcTxMethodDefinition(
                   methodAlias,
@@ -596,6 +597,7 @@ export const createRpcClientClass = (
     } else {
       context.addUtil('Rpc');
     }
+
     BinaryCoder.addUtil(context, 'reader');
 
     const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
@@ -607,14 +609,15 @@ export const createRpcClientClass = (
         });
     const methods = Object.keys(service.methods ?? {})
         .map(key => {
-            const implementType = getServiceImplement(service.name, key, serviceImplement);
+            const name = camelRpcMethods ? camel(key) : key;
+
+            const implementType = getServiceImplement(service.name, name, serviceImplement);
 
             const method = service.methods[key];
-            const name = camelRpcMethods ? camel(key) : key;
             switch (implementType) {
               case "Tx":
-                context.addUtil("BroadcastTxRequest");
-                context.addUtil("BroadcastTxResponse");
+                context.addUtil("BroadcastTxReq");
+                context.addUtil("BroadcastTxRes");
 
                 return rpcTxClassMethod(
                   context,

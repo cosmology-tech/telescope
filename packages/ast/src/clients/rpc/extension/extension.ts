@@ -156,6 +156,14 @@ export const createRpcClientImpl = (
   context: GenericParseContext,
   service: ProtoService
 ) => {
+  const useTelescopeGeneratedType = context.pluginValue('prototypes.typingsFormat.useTelescopeGeneratedType');
+
+  if(useTelescopeGeneratedType){
+    context.addUtil('TxRpc');
+  } else {
+    context.addUtil('Rpc');
+  }
+
   return t.exportNamedDeclaration(
     t.variableDeclaration('const', [
         t.variableDeclarator(
@@ -163,7 +171,7 @@ export const createRpcClientImpl = (
             t.arrowFunctionExpression(
               [
                 identifier('rpc',t.tsTypeAnnotation(
-                  t.tsTypeReference(t.identifier('Rpc'))
+                  t.tsTypeReference(t.identifier(useTelescopeGeneratedType ? 'TxRpc' : 'Rpc'))
               ))
               ],
               t.blockStatement([

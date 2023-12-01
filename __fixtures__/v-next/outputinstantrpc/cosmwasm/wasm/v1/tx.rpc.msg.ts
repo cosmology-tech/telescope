@@ -1,22 +1,22 @@
 import { AccessConfig, AccessConfigSDKType } from "./types";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgStoreCode, MsgStoreCodeSDKType, MsgStoreCodeResponse, MsgStoreCodeResponseSDKType, MsgInstantiateContract, MsgInstantiateContractSDKType, MsgInstantiateContractResponse, MsgInstantiateContractResponseSDKType, MsgExecuteContract, MsgExecuteContractSDKType, MsgExecuteContractResponse, MsgExecuteContractResponseSDKType, MsgMigrateContract, MsgMigrateContractSDKType, MsgMigrateContractResponse, MsgMigrateContractResponseSDKType, MsgUpdateAdmin, MsgUpdateAdminSDKType, MsgUpdateAdminResponse, MsgUpdateAdminResponseSDKType, MsgClearAdmin, MsgClearAdminSDKType, MsgClearAdminResponse, MsgClearAdminResponseSDKType } from "./tx";
 /** Msg defines the wasm Msg service. */
 export interface Msg {
   /** StoreCode to submit Wasm code to the system */
-  storeCode(request: BroadcastTxRequest<MsgStoreCode>): Promise<BroadcastTxResponse<MsgStoreCodeResponse>>;
+  storeCode(request: BroadcastTxReq<MsgStoreCode>): Promise<BroadcastTxRes<MsgStoreCodeResponse>>;
   /** Instantiate creates a new smart contract instance for the given code id. */
-  instantiateContract(request: BroadcastTxRequest<MsgInstantiateContract>): Promise<BroadcastTxResponse<MsgInstantiateContractResponse>>;
+  instantiateContract(request: BroadcastTxReq<MsgInstantiateContract>): Promise<BroadcastTxRes<MsgInstantiateContractResponse>>;
   /** Execute submits the given message data to a smart contract */
-  executeContract(request: BroadcastTxRequest<MsgExecuteContract>): Promise<BroadcastTxResponse<MsgExecuteContractResponse>>;
+  executeContract(request: BroadcastTxReq<MsgExecuteContract>): Promise<BroadcastTxRes<MsgExecuteContractResponse>>;
   /** Migrate runs a code upgrade/ downgrade for a smart contract */
-  migrateContract(request: BroadcastTxRequest<MsgMigrateContract>): Promise<BroadcastTxResponse<MsgMigrateContractResponse>>;
+  migrateContract(request: BroadcastTxReq<MsgMigrateContract>): Promise<BroadcastTxRes<MsgMigrateContractResponse>>;
   /** UpdateAdmin sets a new   admin for a smart contract */
-  updateAdmin(request: BroadcastTxRequest<MsgUpdateAdmin>): Promise<BroadcastTxResponse<MsgUpdateAdminResponse>>;
+  updateAdmin(request: BroadcastTxReq<MsgUpdateAdmin>): Promise<BroadcastTxRes<MsgUpdateAdminResponse>>;
   /** ClearAdmin removes any admin stored for a smart contract */
-  clearAdmin(request: BroadcastTxRequest<MsgClearAdmin>): Promise<BroadcastTxResponse<MsgClearAdminResponse>>;
+  clearAdmin(request: BroadcastTxReq<MsgClearAdmin>): Promise<BroadcastTxRes<MsgClearAdminResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -24,7 +24,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* StoreCode to submit Wasm code to the system */
-  storeCode = async (request: BroadcastTxRequest<MsgStoreCode>): Promise<BroadcastTxResponse<MsgStoreCodeResponse>> => {
+  storeCode = async (request: BroadcastTxReq<MsgStoreCode>): Promise<BroadcastTxRes<MsgStoreCodeResponse>> => {
     const data = [{
       typeUrl: MsgStoreCode.typeUrl,
       value: request.message
@@ -36,7 +36,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* Instantiate creates a new smart contract instance for the given code id. */
-  instantiateContract = async (request: BroadcastTxRequest<MsgInstantiateContract>): Promise<BroadcastTxResponse<MsgInstantiateContractResponse>> => {
+  instantiateContract = async (request: BroadcastTxReq<MsgInstantiateContract>): Promise<BroadcastTxRes<MsgInstantiateContractResponse>> => {
     const data = [{
       typeUrl: MsgInstantiateContract.typeUrl,
       value: request.message
@@ -48,7 +48,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* Execute submits the given message data to a smart contract */
-  executeContract = async (request: BroadcastTxRequest<MsgExecuteContract>): Promise<BroadcastTxResponse<MsgExecuteContractResponse>> => {
+  executeContract = async (request: BroadcastTxReq<MsgExecuteContract>): Promise<BroadcastTxRes<MsgExecuteContractResponse>> => {
     const data = [{
       typeUrl: MsgExecuteContract.typeUrl,
       value: request.message
@@ -60,7 +60,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* Migrate runs a code upgrade/ downgrade for a smart contract */
-  migrateContract = async (request: BroadcastTxRequest<MsgMigrateContract>): Promise<BroadcastTxResponse<MsgMigrateContractResponse>> => {
+  migrateContract = async (request: BroadcastTxReq<MsgMigrateContract>): Promise<BroadcastTxRes<MsgMigrateContractResponse>> => {
     const data = [{
       typeUrl: MsgMigrateContract.typeUrl,
       value: request.message
@@ -72,7 +72,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* UpdateAdmin sets a new   admin for a smart contract */
-  updateAdmin = async (request: BroadcastTxRequest<MsgUpdateAdmin>): Promise<BroadcastTxResponse<MsgUpdateAdminResponse>> => {
+  updateAdmin = async (request: BroadcastTxReq<MsgUpdateAdmin>): Promise<BroadcastTxRes<MsgUpdateAdminResponse>> => {
     const data = [{
       typeUrl: MsgUpdateAdmin.typeUrl,
       value: request.message
@@ -84,7 +84,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* ClearAdmin removes any admin stored for a smart contract */
-  clearAdmin = async (request: BroadcastTxRequest<MsgClearAdmin>): Promise<BroadcastTxResponse<MsgClearAdminResponse>> => {
+  clearAdmin = async (request: BroadcastTxReq<MsgClearAdmin>): Promise<BroadcastTxRes<MsgClearAdminResponse>> => {
     const data = [{
       typeUrl: MsgClearAdmin.typeUrl,
       value: request.message

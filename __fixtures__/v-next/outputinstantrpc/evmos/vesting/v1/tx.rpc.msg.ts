@@ -1,6 +1,6 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgCreateClawbackVestingAccount, MsgCreateClawbackVestingAccountSDKType, MsgCreateClawbackVestingAccountResponse, MsgCreateClawbackVestingAccountResponseSDKType, MsgClawback, MsgClawbackSDKType, MsgClawbackResponse, MsgClawbackResponseSDKType } from "./tx";
 /** Msg defines the vesting Msg service. */
@@ -9,9 +9,9 @@ export interface Msg {
    * CreateClawbackVestingAccount creats a vesting account that is subject to
    * clawback and the configuration of vesting and lockup schedules.
    */
-  createClawbackVestingAccount(request: BroadcastTxRequest<MsgCreateClawbackVestingAccount>): Promise<BroadcastTxResponse<MsgCreateClawbackVestingAccountResponse>>;
+  createClawbackVestingAccount(request: BroadcastTxReq<MsgCreateClawbackVestingAccount>): Promise<BroadcastTxRes<MsgCreateClawbackVestingAccountResponse>>;
   /** Clawback removes the unvested tokens from a ClawbackVestingAccount. */
-  clawback(request: BroadcastTxRequest<MsgClawback>): Promise<BroadcastTxResponse<MsgClawbackResponse>>;
+  clawback(request: BroadcastTxReq<MsgClawback>): Promise<BroadcastTxRes<MsgClawbackResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -20,7 +20,7 @@ export class MsgClientImpl implements Msg {
   }
   /* CreateClawbackVestingAccount creats a vesting account that is subject to
    clawback and the configuration of vesting and lockup schedules. */
-  createClawbackVestingAccount = async (request: BroadcastTxRequest<MsgCreateClawbackVestingAccount>): Promise<BroadcastTxResponse<MsgCreateClawbackVestingAccountResponse>> => {
+  createClawbackVestingAccount = async (request: BroadcastTxReq<MsgCreateClawbackVestingAccount>): Promise<BroadcastTxRes<MsgCreateClawbackVestingAccountResponse>> => {
     const data = [{
       typeUrl: MsgCreateClawbackVestingAccount.typeUrl,
       value: request.message
@@ -32,7 +32,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* Clawback removes the unvested tokens from a ClawbackVestingAccount. */
-  clawback = async (request: BroadcastTxRequest<MsgClawback>): Promise<BroadcastTxResponse<MsgClawbackResponse>> => {
+  clawback = async (request: BroadcastTxReq<MsgClawback>): Promise<BroadcastTxRes<MsgClawbackResponse>> => {
     const data = [{
       typeUrl: MsgClawback.typeUrl,
       value: request.message

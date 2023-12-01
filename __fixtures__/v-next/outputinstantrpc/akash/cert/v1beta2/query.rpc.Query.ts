@@ -25,7 +25,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryCertificatesResponse.decode(new BinaryReader(data)));
   };
 }
-export const createClientImpl = (rpc: Rpc) => {
+export const createClientImpl = (rpc: TxRpc) => {
   return new QueryClientImpl(rpc);
 };
 export interface UseCertificatesQuery<TData> extends ReactQueryParams<QueryCertificatesResponse, TData> {

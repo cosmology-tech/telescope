@@ -1,11 +1,11 @@
 import { PoolParams, PoolParamsSDKType } from "./stableswap_pool";
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../../types";
 import { BinaryReader } from "../../../../binary";
 import { MsgCreateStableswapPool, MsgCreateStableswapPoolSDKType, MsgCreateStableswapPoolResponse, MsgCreateStableswapPoolResponseSDKType, MsgStableSwapAdjustScalingFactors, MsgStableSwapAdjustScalingFactorsSDKType, MsgStableSwapAdjustScalingFactorsResponse, MsgStableSwapAdjustScalingFactorsResponseSDKType } from "./tx";
 export interface Msg {
-  createStableswapPool(request: BroadcastTxRequest<MsgCreateStableswapPool>): Promise<BroadcastTxResponse<MsgCreateStableswapPoolResponse>>;
-  stableSwapAdjustScalingFactors(request: BroadcastTxRequest<MsgStableSwapAdjustScalingFactors>): Promise<BroadcastTxResponse<MsgStableSwapAdjustScalingFactorsResponse>>;
+  createStableswapPool(request: BroadcastTxReq<MsgCreateStableswapPool>): Promise<BroadcastTxRes<MsgCreateStableswapPoolResponse>>;
+  stableSwapAdjustScalingFactors(request: BroadcastTxReq<MsgStableSwapAdjustScalingFactors>): Promise<BroadcastTxRes<MsgStableSwapAdjustScalingFactorsResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -13,7 +13,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* CreateStableswapPool */
-  createStableswapPool = async (request: BroadcastTxRequest<MsgCreateStableswapPool>): Promise<BroadcastTxResponse<MsgCreateStableswapPoolResponse>> => {
+  createStableswapPool = async (request: BroadcastTxReq<MsgCreateStableswapPool>): Promise<BroadcastTxRes<MsgCreateStableswapPoolResponse>> => {
     const data = [{
       typeUrl: MsgCreateStableswapPool.typeUrl,
       value: request.message
@@ -25,7 +25,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* StableSwapAdjustScalingFactors */
-  stableSwapAdjustScalingFactors = async (request: BroadcastTxRequest<MsgStableSwapAdjustScalingFactors>): Promise<BroadcastTxResponse<MsgStableSwapAdjustScalingFactorsResponse>> => {
+  stableSwapAdjustScalingFactors = async (request: BroadcastTxReq<MsgStableSwapAdjustScalingFactors>): Promise<BroadcastTxRes<MsgStableSwapAdjustScalingFactorsResponse>> => {
     const data = [{
       typeUrl: MsgStableSwapAdjustScalingFactors.typeUrl,
       value: request.message

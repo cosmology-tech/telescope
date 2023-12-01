@@ -65,6 +65,6 @@ export class ServiceClientImpl implements Service {
     return promise.then(data => GetValidatorSetByHeightResponse.decode(new BinaryReader(data)));
   };
 }
-export const createClientImpl = (rpc: Rpc) => {
+export const createClientImpl = (rpc: TxRpc) => {
   return new ServiceClientImpl(rpc);
 };

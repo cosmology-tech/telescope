@@ -1,12 +1,12 @@
 import { QueryCondition, QueryConditionSDKType } from "../lockup/lock";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../types";
 import { BinaryReader } from "../../binary";
 import { MsgCreateGauge, MsgCreateGaugeSDKType, MsgCreateGaugeResponse, MsgCreateGaugeResponseSDKType, MsgAddToGauge, MsgAddToGaugeSDKType, MsgAddToGaugeResponse, MsgAddToGaugeResponseSDKType } from "./tx";
 export interface Msg {
-  createGauge(request: BroadcastTxRequest<MsgCreateGauge>): Promise<BroadcastTxResponse<MsgCreateGaugeResponse>>;
-  addToGauge(request: BroadcastTxRequest<MsgAddToGauge>): Promise<BroadcastTxResponse<MsgAddToGaugeResponse>>;
+  createGauge(request: BroadcastTxReq<MsgCreateGauge>): Promise<BroadcastTxRes<MsgCreateGaugeResponse>>;
+  addToGauge(request: BroadcastTxReq<MsgAddToGauge>): Promise<BroadcastTxRes<MsgAddToGaugeResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -14,7 +14,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* CreateGauge */
-  createGauge = async (request: BroadcastTxRequest<MsgCreateGauge>): Promise<BroadcastTxResponse<MsgCreateGaugeResponse>> => {
+  createGauge = async (request: BroadcastTxReq<MsgCreateGauge>): Promise<BroadcastTxRes<MsgCreateGaugeResponse>> => {
     const data = [{
       typeUrl: MsgCreateGauge.typeUrl,
       value: request.message
@@ -26,7 +26,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* AddToGauge */
-  addToGauge = async (request: BroadcastTxRequest<MsgAddToGauge>): Promise<BroadcastTxResponse<MsgAddToGaugeResponse>> => {
+  addToGauge = async (request: BroadcastTxReq<MsgAddToGauge>): Promise<BroadcastTxRes<MsgAddToGaugeResponse>> => {
     const data = [{
       typeUrl: MsgAddToGauge.typeUrl,
       value: request.message

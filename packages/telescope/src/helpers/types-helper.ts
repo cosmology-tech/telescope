@@ -131,14 +131,14 @@ export interface TxRpc {
   ): Promise<DeliverTxResponse>;
 }
 
-export interface BroadcastTxRequest<T> {
+export interface BroadcastTxReq<T> {
   signerAddress: string;
-  message?: T;
+  message: T;
   fee: number | StdFee | "auto";
   memo: string;
 }
 
-export interface BroadcastTxResponse<T> {
+export interface BroadcastTxRes<T> {
   txResponse: DeliverTxResponse;
   response?: T;
 }

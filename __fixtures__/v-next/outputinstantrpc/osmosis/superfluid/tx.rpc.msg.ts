@@ -1,21 +1,21 @@
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../types";
 import { BinaryReader } from "../../binary";
 import { MsgSuperfluidDelegate, MsgSuperfluidDelegateSDKType, MsgSuperfluidDelegateResponse, MsgSuperfluidDelegateResponseSDKType, MsgSuperfluidUndelegate, MsgSuperfluidUndelegateSDKType, MsgSuperfluidUndelegateResponse, MsgSuperfluidUndelegateResponseSDKType, MsgSuperfluidUnbondLock, MsgSuperfluidUnbondLockSDKType, MsgSuperfluidUnbondLockResponse, MsgSuperfluidUnbondLockResponseSDKType, MsgLockAndSuperfluidDelegate, MsgLockAndSuperfluidDelegateSDKType, MsgLockAndSuperfluidDelegateResponse, MsgLockAndSuperfluidDelegateResponseSDKType, MsgUnPoolWhitelistedPool, MsgUnPoolWhitelistedPoolSDKType, MsgUnPoolWhitelistedPoolResponse, MsgUnPoolWhitelistedPoolResponseSDKType } from "./tx";
 /** Msg defines the Msg service. */
 export interface Msg {
   /** Execute superfluid delegation for a lockup */
-  superfluidDelegate(request: BroadcastTxRequest<MsgSuperfluidDelegate>): Promise<BroadcastTxResponse<MsgSuperfluidDelegateResponse>>;
+  superfluidDelegate(request: BroadcastTxReq<MsgSuperfluidDelegate>): Promise<BroadcastTxRes<MsgSuperfluidDelegateResponse>>;
   /** Execute superfluid undelegation for a lockup */
-  superfluidUndelegate(request: BroadcastTxRequest<MsgSuperfluidUndelegate>): Promise<BroadcastTxResponse<MsgSuperfluidUndelegateResponse>>;
+  superfluidUndelegate(request: BroadcastTxReq<MsgSuperfluidUndelegate>): Promise<BroadcastTxRes<MsgSuperfluidUndelegateResponse>>;
   /**
    * For a given lock that is being superfluidly undelegated,
    * also unbond the underlying lock.
    */
-  superfluidUnbondLock(request: BroadcastTxRequest<MsgSuperfluidUnbondLock>): Promise<BroadcastTxResponse<MsgSuperfluidUnbondLockResponse>>;
+  superfluidUnbondLock(request: BroadcastTxReq<MsgSuperfluidUnbondLock>): Promise<BroadcastTxRes<MsgSuperfluidUnbondLockResponse>>;
   /** Execute lockup lock and superfluid delegation in a single msg */
-  lockAndSuperfluidDelegate(request: BroadcastTxRequest<MsgLockAndSuperfluidDelegate>): Promise<BroadcastTxResponse<MsgLockAndSuperfluidDelegateResponse>>;
-  unPoolWhitelistedPool(request: BroadcastTxRequest<MsgUnPoolWhitelistedPool>): Promise<BroadcastTxResponse<MsgUnPoolWhitelistedPoolResponse>>;
+  lockAndSuperfluidDelegate(request: BroadcastTxReq<MsgLockAndSuperfluidDelegate>): Promise<BroadcastTxRes<MsgLockAndSuperfluidDelegateResponse>>;
+  unPoolWhitelistedPool(request: BroadcastTxReq<MsgUnPoolWhitelistedPool>): Promise<BroadcastTxRes<MsgUnPoolWhitelistedPoolResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -23,7 +23,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* Execute superfluid delegation for a lockup */
-  superfluidDelegate = async (request: BroadcastTxRequest<MsgSuperfluidDelegate>): Promise<BroadcastTxResponse<MsgSuperfluidDelegateResponse>> => {
+  superfluidDelegate = async (request: BroadcastTxReq<MsgSuperfluidDelegate>): Promise<BroadcastTxRes<MsgSuperfluidDelegateResponse>> => {
     const data = [{
       typeUrl: MsgSuperfluidDelegate.typeUrl,
       value: request.message
@@ -35,7 +35,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* Execute superfluid undelegation for a lockup */
-  superfluidUndelegate = async (request: BroadcastTxRequest<MsgSuperfluidUndelegate>): Promise<BroadcastTxResponse<MsgSuperfluidUndelegateResponse>> => {
+  superfluidUndelegate = async (request: BroadcastTxReq<MsgSuperfluidUndelegate>): Promise<BroadcastTxRes<MsgSuperfluidUndelegateResponse>> => {
     const data = [{
       typeUrl: MsgSuperfluidUndelegate.typeUrl,
       value: request.message
@@ -48,7 +48,7 @@ export class MsgClientImpl implements Msg {
   };
   /* For a given lock that is being superfluidly undelegated,
    also unbond the underlying lock. */
-  superfluidUnbondLock = async (request: BroadcastTxRequest<MsgSuperfluidUnbondLock>): Promise<BroadcastTxResponse<MsgSuperfluidUnbondLockResponse>> => {
+  superfluidUnbondLock = async (request: BroadcastTxReq<MsgSuperfluidUnbondLock>): Promise<BroadcastTxRes<MsgSuperfluidUnbondLockResponse>> => {
     const data = [{
       typeUrl: MsgSuperfluidUnbondLock.typeUrl,
       value: request.message
@@ -60,7 +60,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* Execute lockup lock and superfluid delegation in a single msg */
-  lockAndSuperfluidDelegate = async (request: BroadcastTxRequest<MsgLockAndSuperfluidDelegate>): Promise<BroadcastTxResponse<MsgLockAndSuperfluidDelegateResponse>> => {
+  lockAndSuperfluidDelegate = async (request: BroadcastTxReq<MsgLockAndSuperfluidDelegate>): Promise<BroadcastTxRes<MsgLockAndSuperfluidDelegateResponse>> => {
     const data = [{
       typeUrl: MsgLockAndSuperfluidDelegate.typeUrl,
       value: request.message
@@ -72,7 +72,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* UnPoolWhitelistedPool */
-  unPoolWhitelistedPool = async (request: BroadcastTxRequest<MsgUnPoolWhitelistedPool>): Promise<BroadcastTxResponse<MsgUnPoolWhitelistedPoolResponse>> => {
+  unPoolWhitelistedPool = async (request: BroadcastTxReq<MsgUnPoolWhitelistedPool>): Promise<BroadcastTxRes<MsgUnPoolWhitelistedPoolResponse>> => {
     const data = [{
       typeUrl: MsgUnPoolWhitelistedPool.typeUrl,
       value: request.message

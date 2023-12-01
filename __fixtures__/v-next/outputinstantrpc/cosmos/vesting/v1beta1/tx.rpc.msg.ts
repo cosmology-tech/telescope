@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Period, PeriodSDKType } from "./vesting";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgCreateVestingAccount, MsgCreateVestingAccountSDKType, MsgCreateVestingAccountResponse, MsgCreateVestingAccountResponseSDKType, MsgCreatePermanentLockedAccount, MsgCreatePermanentLockedAccountSDKType, MsgCreatePermanentLockedAccountResponse, MsgCreatePermanentLockedAccountResponseSDKType, MsgCreatePeriodicVestingAccount, MsgCreatePeriodicVestingAccountSDKType, MsgCreatePeriodicVestingAccountResponse, MsgCreatePeriodicVestingAccountResponseSDKType } from "./tx";
 /** Msg defines the bank Msg service. */
@@ -9,17 +9,17 @@ export interface Msg {
    * CreateVestingAccount defines a method that enables creating a vesting
    * account.
    */
-  createVestingAccount(request: BroadcastTxRequest<MsgCreateVestingAccount>): Promise<BroadcastTxResponse<MsgCreateVestingAccountResponse>>;
+  createVestingAccount(request: BroadcastTxReq<MsgCreateVestingAccount>): Promise<BroadcastTxRes<MsgCreateVestingAccountResponse>>;
   /**
    * CreatePermanentLockedAccount defines a method that enables creating a permanent
    * locked account.
    */
-  createPermanentLockedAccount(request: BroadcastTxRequest<MsgCreatePermanentLockedAccount>): Promise<BroadcastTxResponse<MsgCreatePermanentLockedAccountResponse>>;
+  createPermanentLockedAccount(request: BroadcastTxReq<MsgCreatePermanentLockedAccount>): Promise<BroadcastTxRes<MsgCreatePermanentLockedAccountResponse>>;
   /**
    * CreatePeriodicVestingAccount defines a method that enables creating a
    * periodic vesting account.
    */
-  createPeriodicVestingAccount(request: BroadcastTxRequest<MsgCreatePeriodicVestingAccount>): Promise<BroadcastTxResponse<MsgCreatePeriodicVestingAccountResponse>>;
+  createPeriodicVestingAccount(request: BroadcastTxReq<MsgCreatePeriodicVestingAccount>): Promise<BroadcastTxRes<MsgCreatePeriodicVestingAccountResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -28,7 +28,7 @@ export class MsgClientImpl implements Msg {
   }
   /* CreateVestingAccount defines a method that enables creating a vesting
    account. */
-  createVestingAccount = async (request: BroadcastTxRequest<MsgCreateVestingAccount>): Promise<BroadcastTxResponse<MsgCreateVestingAccountResponse>> => {
+  createVestingAccount = async (request: BroadcastTxReq<MsgCreateVestingAccount>): Promise<BroadcastTxRes<MsgCreateVestingAccountResponse>> => {
     const data = [{
       typeUrl: MsgCreateVestingAccount.typeUrl,
       value: request.message
@@ -41,7 +41,7 @@ export class MsgClientImpl implements Msg {
   };
   /* CreatePermanentLockedAccount defines a method that enables creating a permanent
    locked account. */
-  createPermanentLockedAccount = async (request: BroadcastTxRequest<MsgCreatePermanentLockedAccount>): Promise<BroadcastTxResponse<MsgCreatePermanentLockedAccountResponse>> => {
+  createPermanentLockedAccount = async (request: BroadcastTxReq<MsgCreatePermanentLockedAccount>): Promise<BroadcastTxRes<MsgCreatePermanentLockedAccountResponse>> => {
     const data = [{
       typeUrl: MsgCreatePermanentLockedAccount.typeUrl,
       value: request.message
@@ -54,7 +54,7 @@ export class MsgClientImpl implements Msg {
   };
   /* CreatePeriodicVestingAccount defines a method that enables creating a
    periodic vesting account. */
-  createPeriodicVestingAccount = async (request: BroadcastTxRequest<MsgCreatePeriodicVestingAccount>): Promise<BroadcastTxResponse<MsgCreatePeriodicVestingAccountResponse>> => {
+  createPeriodicVestingAccount = async (request: BroadcastTxReq<MsgCreatePeriodicVestingAccount>): Promise<BroadcastTxRes<MsgCreatePeriodicVestingAccountResponse>> => {
     const data = [{
       typeUrl: MsgCreatePeriodicVestingAccount.typeUrl,
       value: request.message

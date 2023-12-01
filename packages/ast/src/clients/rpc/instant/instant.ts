@@ -34,7 +34,15 @@ export const createInstantRpcClass = (
     };
   }
 ) => {
-  context.addUtil("Rpc");
+  const useTelescopeGeneratedType = context.pluginValue(
+    "prototypes.typingsFormat.useTelescopeGeneratedType"
+  );
+
+  if (useTelescopeGeneratedType) {
+    context.addUtil("TxRpc");
+  } else {
+    context.addUtil("Rpc");
+  }
 
   return t.exportNamedDeclaration(
     t.classDeclaration(
@@ -44,7 +52,11 @@ export const createInstantRpcClass = (
         classProperty(
           t.identifier("rpc"),
           null,
-          t.tsTypeAnnotation(t.tsTypeReference(t.identifier("Rpc"))),
+          t.tsTypeAnnotation(
+            t.tsTypeReference(
+              t.identifier(useTelescopeGeneratedType ? "TxRpc" : "Rpc")
+            )
+          ),
           null,
           false,
           false,
@@ -58,7 +70,11 @@ export const createInstantRpcClass = (
           [
             identifier(
               "rpc",
-              t.tsTypeAnnotation(t.tsTypeReference(t.identifier("Rpc")))
+              t.tsTypeAnnotation(
+                t.tsTypeReference(
+                  t.identifier(useTelescopeGeneratedType ? "TxRpc" : "Rpc")
+                )
+              )
             ),
           ],
           t.blockStatement([

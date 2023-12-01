@@ -1,15 +1,15 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgCreateProvider, MsgCreateProviderSDKType, MsgCreateProviderResponse, MsgCreateProviderResponseSDKType, MsgUpdateProvider, MsgUpdateProviderSDKType, MsgUpdateProviderResponse, MsgUpdateProviderResponseSDKType, MsgDeleteProvider, MsgDeleteProviderSDKType, MsgDeleteProviderResponse, MsgDeleteProviderResponseSDKType } from "./provider";
 /** Msg defines the provider Msg service */
 export interface Msg {
   /** CreateProvider defines a method that creates a provider given the proper inputs */
-  createProvider(request: BroadcastTxRequest<MsgCreateProvider>): Promise<BroadcastTxResponse<MsgCreateProviderResponse>>;
+  createProvider(request: BroadcastTxReq<MsgCreateProvider>): Promise<BroadcastTxRes<MsgCreateProviderResponse>>;
   /** UpdateProvider defines a method that updates a provider given the proper inputs */
-  updateProvider(request: BroadcastTxRequest<MsgUpdateProvider>): Promise<BroadcastTxResponse<MsgUpdateProviderResponse>>;
+  updateProvider(request: BroadcastTxReq<MsgUpdateProvider>): Promise<BroadcastTxRes<MsgUpdateProviderResponse>>;
   /** DeleteProvider defines a method that deletes a provider given the proper inputs */
-  deleteProvider(request: BroadcastTxRequest<MsgDeleteProvider>): Promise<BroadcastTxResponse<MsgDeleteProviderResponse>>;
+  deleteProvider(request: BroadcastTxReq<MsgDeleteProvider>): Promise<BroadcastTxRes<MsgDeleteProviderResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -17,7 +17,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* CreateProvider defines a method that creates a provider given the proper inputs */
-  createProvider = async (request: BroadcastTxRequest<MsgCreateProvider>): Promise<BroadcastTxResponse<MsgCreateProviderResponse>> => {
+  createProvider = async (request: BroadcastTxReq<MsgCreateProvider>): Promise<BroadcastTxRes<MsgCreateProviderResponse>> => {
     const data = [{
       typeUrl: MsgCreateProvider.typeUrl,
       value: request.message
@@ -29,7 +29,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* UpdateProvider defines a method that updates a provider given the proper inputs */
-  updateProvider = async (request: BroadcastTxRequest<MsgUpdateProvider>): Promise<BroadcastTxResponse<MsgUpdateProviderResponse>> => {
+  updateProvider = async (request: BroadcastTxReq<MsgUpdateProvider>): Promise<BroadcastTxRes<MsgUpdateProviderResponse>> => {
     const data = [{
       typeUrl: MsgUpdateProvider.typeUrl,
       value: request.message
@@ -41,7 +41,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* DeleteProvider defines a method that deletes a provider given the proper inputs */
-  deleteProvider = async (request: BroadcastTxRequest<MsgDeleteProvider>): Promise<BroadcastTxResponse<MsgDeleteProviderResponse>> => {
+  deleteProvider = async (request: BroadcastTxReq<MsgDeleteProvider>): Promise<BroadcastTxRes<MsgDeleteProviderResponse>> => {
     const data = [{
       typeUrl: MsgDeleteProvider.typeUrl,
       value: request.message

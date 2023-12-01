@@ -64,6 +64,6 @@ export class ReflectionServiceClientImpl implements ReflectionService {
     return promise.then(data => GetTxDescriptorResponse.decode(new BinaryReader(data)));
   };
 }
-export const createClientImpl = (rpc: Rpc) => {
+export const createClientImpl = (rpc: TxRpc) => {
   return new ReflectionServiceClientImpl(rpc);
 };

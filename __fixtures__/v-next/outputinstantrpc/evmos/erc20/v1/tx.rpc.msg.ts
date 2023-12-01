@@ -1,5 +1,5 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgConvertCoin, MsgConvertCoinSDKType, MsgConvertCoinResponse, MsgConvertCoinResponseSDKType, MsgConvertERC20, MsgConvertERC20SDKType, MsgConvertERC20Response, MsgConvertERC20ResponseSDKType } from "./tx";
 /** Msg defines the erc20 Msg service. */
@@ -8,12 +8,12 @@ export interface Msg {
    * ConvertCoin mints a ERC20 representation of the native Cosmos coin denom
    * that is registered on the token mapping.
    */
-  convertCoin(request: BroadcastTxRequest<MsgConvertCoin>): Promise<BroadcastTxResponse<MsgConvertCoinResponse>>;
+  convertCoin(request: BroadcastTxReq<MsgConvertCoin>): Promise<BroadcastTxRes<MsgConvertCoinResponse>>;
   /**
    * ConvertERC20 mints a native Cosmos coin representation of the ERC20 token
    * contract that is registered on the token mapping.
    */
-  convertERC20(request: BroadcastTxRequest<MsgConvertERC20>): Promise<BroadcastTxResponse<MsgConvertERC20Response>>;
+  convertERC20(request: BroadcastTxReq<MsgConvertERC20>): Promise<BroadcastTxRes<MsgConvertERC20Response>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -22,7 +22,7 @@ export class MsgClientImpl implements Msg {
   }
   /* ConvertCoin mints a ERC20 representation of the native Cosmos coin denom
    that is registered on the token mapping. */
-  convertCoin = async (request: BroadcastTxRequest<MsgConvertCoin>): Promise<BroadcastTxResponse<MsgConvertCoinResponse>> => {
+  convertCoin = async (request: BroadcastTxReq<MsgConvertCoin>): Promise<BroadcastTxRes<MsgConvertCoinResponse>> => {
     const data = [{
       typeUrl: MsgConvertCoin.typeUrl,
       value: request.message
@@ -35,7 +35,7 @@ export class MsgClientImpl implements Msg {
   };
   /* ConvertERC20 mints a native Cosmos coin representation of the ERC20 token
    contract that is registered on the token mapping. */
-  convertERC20 = async (request: BroadcastTxRequest<MsgConvertERC20>): Promise<BroadcastTxResponse<MsgConvertERC20Response>> => {
+  convertERC20 = async (request: BroadcastTxReq<MsgConvertERC20>): Promise<BroadcastTxRes<MsgConvertERC20Response>> => {
     const data = [{
       typeUrl: MsgConvertERC20.typeUrl,
       value: request.message

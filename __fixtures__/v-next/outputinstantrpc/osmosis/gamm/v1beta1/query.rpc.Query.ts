@@ -149,7 +149,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QuerySwapExactAmountOutResponse.decode(new BinaryReader(data)));
   };
 }
-export const createClientImpl = (rpc: Rpc) => {
+export const createClientImpl = (rpc: TxRpc) => {
   return new QueryClientImpl(rpc);
 };
 export interface UsePoolsQuery<TData> extends ReactQueryParams<QueryPoolsResponse, TData> {

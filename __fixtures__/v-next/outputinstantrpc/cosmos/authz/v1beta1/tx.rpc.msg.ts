@@ -1,6 +1,6 @@
 import { Grant, GrantSDKType } from "./authz";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgGrant, MsgGrantSDKType, MsgGrantResponse, MsgGrantResponseSDKType, MsgExec, MsgExecSDKType, MsgExecResponse, MsgExecResponseSDKType, MsgRevoke, MsgRevokeSDKType, MsgRevokeResponse, MsgRevokeResponseSDKType } from "./tx";
 /** Msg defines the authz Msg service. */
@@ -11,18 +11,18 @@ export interface Msg {
    * for the given (granter, grantee, Authorization) triple, then the grant
    * will be overwritten.
    */
-  grant(request: BroadcastTxRequest<MsgGrant>): Promise<BroadcastTxResponse<MsgGrantResponse>>;
+  grant(request: BroadcastTxReq<MsgGrant>): Promise<BroadcastTxRes<MsgGrantResponse>>;
   /**
    * Exec attempts to execute the provided messages using
    * authorizations granted to the grantee. Each message should have only
    * one signer corresponding to the granter of the authorization.
    */
-  exec(request: BroadcastTxRequest<MsgExec>): Promise<BroadcastTxResponse<MsgExecResponse>>;
+  exec(request: BroadcastTxReq<MsgExec>): Promise<BroadcastTxRes<MsgExecResponse>>;
   /**
    * Revoke revokes any authorization corresponding to the provided method name on the
    * granter's account that has been granted to the grantee.
    */
-  revoke(request: BroadcastTxRequest<MsgRevoke>): Promise<BroadcastTxResponse<MsgRevokeResponse>>;
+  revoke(request: BroadcastTxReq<MsgRevoke>): Promise<BroadcastTxRes<MsgRevokeResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -33,7 +33,7 @@ export class MsgClientImpl implements Msg {
    account with the provided expiration time. If there is already a grant
    for the given (granter, grantee, Authorization) triple, then the grant
    will be overwritten. */
-  grant = async (request: BroadcastTxRequest<MsgGrant>): Promise<BroadcastTxResponse<MsgGrantResponse>> => {
+  grant = async (request: BroadcastTxReq<MsgGrant>): Promise<BroadcastTxRes<MsgGrantResponse>> => {
     const data = [{
       typeUrl: MsgGrant.typeUrl,
       value: request.message
@@ -47,7 +47,7 @@ export class MsgClientImpl implements Msg {
   /* Exec attempts to execute the provided messages using
    authorizations granted to the grantee. Each message should have only
    one signer corresponding to the granter of the authorization. */
-  exec = async (request: BroadcastTxRequest<MsgExec>): Promise<BroadcastTxResponse<MsgExecResponse>> => {
+  exec = async (request: BroadcastTxReq<MsgExec>): Promise<BroadcastTxRes<MsgExecResponse>> => {
     const data = [{
       typeUrl: MsgExec.typeUrl,
       value: request.message
@@ -60,7 +60,7 @@ export class MsgClientImpl implements Msg {
   };
   /* Revoke revokes any authorization corresponding to the provided method name on the
    granter's account that has been granted to the grantee. */
-  revoke = async (request: BroadcastTxRequest<MsgRevoke>): Promise<BroadcastTxResponse<MsgRevokeResponse>> => {
+  revoke = async (request: BroadcastTxReq<MsgRevoke>): Promise<BroadcastTxRes<MsgRevokeResponse>> => {
     const data = [{
       typeUrl: MsgRevoke.typeUrl,
       value: request.message

@@ -1,33 +1,33 @@
 import { Channel, ChannelSDKType, Packet, PacketSDKType } from "./channel";
 import { Height, HeightSDKType } from "../../client/v1/client";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../../types";
 import { BinaryReader } from "../../../../binary";
 import { MsgChannelOpenInit, MsgChannelOpenInitSDKType, MsgChannelOpenInitResponse, MsgChannelOpenInitResponseSDKType, MsgChannelOpenTry, MsgChannelOpenTrySDKType, MsgChannelOpenTryResponse, MsgChannelOpenTryResponseSDKType, MsgChannelOpenAck, MsgChannelOpenAckSDKType, MsgChannelOpenAckResponse, MsgChannelOpenAckResponseSDKType, MsgChannelOpenConfirm, MsgChannelOpenConfirmSDKType, MsgChannelOpenConfirmResponse, MsgChannelOpenConfirmResponseSDKType, MsgChannelCloseInit, MsgChannelCloseInitSDKType, MsgChannelCloseInitResponse, MsgChannelCloseInitResponseSDKType, MsgChannelCloseConfirm, MsgChannelCloseConfirmSDKType, MsgChannelCloseConfirmResponse, MsgChannelCloseConfirmResponseSDKType, MsgRecvPacket, MsgRecvPacketSDKType, MsgRecvPacketResponse, MsgRecvPacketResponseSDKType, MsgTimeout, MsgTimeoutSDKType, MsgTimeoutResponse, MsgTimeoutResponseSDKType, MsgTimeoutOnClose, MsgTimeoutOnCloseSDKType, MsgTimeoutOnCloseResponse, MsgTimeoutOnCloseResponseSDKType, MsgAcknowledgement, MsgAcknowledgementSDKType, MsgAcknowledgementResponse, MsgAcknowledgementResponseSDKType } from "./tx";
 /** Msg defines the ibc/channel Msg service. */
 export interface Msg {
   /** ChannelOpenInit defines a rpc handler method for MsgChannelOpenInit. */
-  channelOpenInit(request: BroadcastTxRequest<MsgChannelOpenInit>): Promise<BroadcastTxResponse<MsgChannelOpenInitResponse>>;
+  channelOpenInit(request: BroadcastTxReq<MsgChannelOpenInit>): Promise<BroadcastTxRes<MsgChannelOpenInitResponse>>;
   /** ChannelOpenTry defines a rpc handler method for MsgChannelOpenTry. */
-  channelOpenTry(request: BroadcastTxRequest<MsgChannelOpenTry>): Promise<BroadcastTxResponse<MsgChannelOpenTryResponse>>;
+  channelOpenTry(request: BroadcastTxReq<MsgChannelOpenTry>): Promise<BroadcastTxRes<MsgChannelOpenTryResponse>>;
   /** ChannelOpenAck defines a rpc handler method for MsgChannelOpenAck. */
-  channelOpenAck(request: BroadcastTxRequest<MsgChannelOpenAck>): Promise<BroadcastTxResponse<MsgChannelOpenAckResponse>>;
+  channelOpenAck(request: BroadcastTxReq<MsgChannelOpenAck>): Promise<BroadcastTxRes<MsgChannelOpenAckResponse>>;
   /** ChannelOpenConfirm defines a rpc handler method for MsgChannelOpenConfirm. */
-  channelOpenConfirm(request: BroadcastTxRequest<MsgChannelOpenConfirm>): Promise<BroadcastTxResponse<MsgChannelOpenConfirmResponse>>;
+  channelOpenConfirm(request: BroadcastTxReq<MsgChannelOpenConfirm>): Promise<BroadcastTxRes<MsgChannelOpenConfirmResponse>>;
   /** ChannelCloseInit defines a rpc handler method for MsgChannelCloseInit. */
-  channelCloseInit(request: BroadcastTxRequest<MsgChannelCloseInit>): Promise<BroadcastTxResponse<MsgChannelCloseInitResponse>>;
+  channelCloseInit(request: BroadcastTxReq<MsgChannelCloseInit>): Promise<BroadcastTxRes<MsgChannelCloseInitResponse>>;
   /**
    * ChannelCloseConfirm defines a rpc handler method for
    * MsgChannelCloseConfirm.
    */
-  channelCloseConfirm(request: BroadcastTxRequest<MsgChannelCloseConfirm>): Promise<BroadcastTxResponse<MsgChannelCloseConfirmResponse>>;
+  channelCloseConfirm(request: BroadcastTxReq<MsgChannelCloseConfirm>): Promise<BroadcastTxRes<MsgChannelCloseConfirmResponse>>;
   /** RecvPacket defines a rpc handler method for MsgRecvPacket. */
-  recvPacket(request: BroadcastTxRequest<MsgRecvPacket>): Promise<BroadcastTxResponse<MsgRecvPacketResponse>>;
+  recvPacket(request: BroadcastTxReq<MsgRecvPacket>): Promise<BroadcastTxRes<MsgRecvPacketResponse>>;
   /** Timeout defines a rpc handler method for MsgTimeout. */
-  timeout(request: BroadcastTxRequest<MsgTimeout>): Promise<BroadcastTxResponse<MsgTimeoutResponse>>;
+  timeout(request: BroadcastTxReq<MsgTimeout>): Promise<BroadcastTxRes<MsgTimeoutResponse>>;
   /** TimeoutOnClose defines a rpc handler method for MsgTimeoutOnClose. */
-  timeoutOnClose(request: BroadcastTxRequest<MsgTimeoutOnClose>): Promise<BroadcastTxResponse<MsgTimeoutOnCloseResponse>>;
+  timeoutOnClose(request: BroadcastTxReq<MsgTimeoutOnClose>): Promise<BroadcastTxRes<MsgTimeoutOnCloseResponse>>;
   /** Acknowledgement defines a rpc handler method for MsgAcknowledgement. */
-  acknowledgement(request: BroadcastTxRequest<MsgAcknowledgement>): Promise<BroadcastTxResponse<MsgAcknowledgementResponse>>;
+  acknowledgement(request: BroadcastTxReq<MsgAcknowledgement>): Promise<BroadcastTxRes<MsgAcknowledgementResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -35,7 +35,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* ChannelOpenInit defines a rpc handler method for MsgChannelOpenInit. */
-  channelOpenInit = async (request: BroadcastTxRequest<MsgChannelOpenInit>): Promise<BroadcastTxResponse<MsgChannelOpenInitResponse>> => {
+  channelOpenInit = async (request: BroadcastTxReq<MsgChannelOpenInit>): Promise<BroadcastTxRes<MsgChannelOpenInitResponse>> => {
     const data = [{
       typeUrl: MsgChannelOpenInit.typeUrl,
       value: request.message
@@ -47,7 +47,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* ChannelOpenTry defines a rpc handler method for MsgChannelOpenTry. */
-  channelOpenTry = async (request: BroadcastTxRequest<MsgChannelOpenTry>): Promise<BroadcastTxResponse<MsgChannelOpenTryResponse>> => {
+  channelOpenTry = async (request: BroadcastTxReq<MsgChannelOpenTry>): Promise<BroadcastTxRes<MsgChannelOpenTryResponse>> => {
     const data = [{
       typeUrl: MsgChannelOpenTry.typeUrl,
       value: request.message
@@ -59,7 +59,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* ChannelOpenAck defines a rpc handler method for MsgChannelOpenAck. */
-  channelOpenAck = async (request: BroadcastTxRequest<MsgChannelOpenAck>): Promise<BroadcastTxResponse<MsgChannelOpenAckResponse>> => {
+  channelOpenAck = async (request: BroadcastTxReq<MsgChannelOpenAck>): Promise<BroadcastTxRes<MsgChannelOpenAckResponse>> => {
     const data = [{
       typeUrl: MsgChannelOpenAck.typeUrl,
       value: request.message
@@ -71,7 +71,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* ChannelOpenConfirm defines a rpc handler method for MsgChannelOpenConfirm. */
-  channelOpenConfirm = async (request: BroadcastTxRequest<MsgChannelOpenConfirm>): Promise<BroadcastTxResponse<MsgChannelOpenConfirmResponse>> => {
+  channelOpenConfirm = async (request: BroadcastTxReq<MsgChannelOpenConfirm>): Promise<BroadcastTxRes<MsgChannelOpenConfirmResponse>> => {
     const data = [{
       typeUrl: MsgChannelOpenConfirm.typeUrl,
       value: request.message
@@ -83,7 +83,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* ChannelCloseInit defines a rpc handler method for MsgChannelCloseInit. */
-  channelCloseInit = async (request: BroadcastTxRequest<MsgChannelCloseInit>): Promise<BroadcastTxResponse<MsgChannelCloseInitResponse>> => {
+  channelCloseInit = async (request: BroadcastTxReq<MsgChannelCloseInit>): Promise<BroadcastTxRes<MsgChannelCloseInitResponse>> => {
     const data = [{
       typeUrl: MsgChannelCloseInit.typeUrl,
       value: request.message
@@ -96,7 +96,7 @@ export class MsgClientImpl implements Msg {
   };
   /* ChannelCloseConfirm defines a rpc handler method for
    MsgChannelCloseConfirm. */
-  channelCloseConfirm = async (request: BroadcastTxRequest<MsgChannelCloseConfirm>): Promise<BroadcastTxResponse<MsgChannelCloseConfirmResponse>> => {
+  channelCloseConfirm = async (request: BroadcastTxReq<MsgChannelCloseConfirm>): Promise<BroadcastTxRes<MsgChannelCloseConfirmResponse>> => {
     const data = [{
       typeUrl: MsgChannelCloseConfirm.typeUrl,
       value: request.message
@@ -108,7 +108,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* RecvPacket defines a rpc handler method for MsgRecvPacket. */
-  recvPacket = async (request: BroadcastTxRequest<MsgRecvPacket>): Promise<BroadcastTxResponse<MsgRecvPacketResponse>> => {
+  recvPacket = async (request: BroadcastTxReq<MsgRecvPacket>): Promise<BroadcastTxRes<MsgRecvPacketResponse>> => {
     const data = [{
       typeUrl: MsgRecvPacket.typeUrl,
       value: request.message
@@ -120,7 +120,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* Timeout defines a rpc handler method for MsgTimeout. */
-  timeout = async (request: BroadcastTxRequest<MsgTimeout>): Promise<BroadcastTxResponse<MsgTimeoutResponse>> => {
+  timeout = async (request: BroadcastTxReq<MsgTimeout>): Promise<BroadcastTxRes<MsgTimeoutResponse>> => {
     const data = [{
       typeUrl: MsgTimeout.typeUrl,
       value: request.message
@@ -132,7 +132,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* TimeoutOnClose defines a rpc handler method for MsgTimeoutOnClose. */
-  timeoutOnClose = async (request: BroadcastTxRequest<MsgTimeoutOnClose>): Promise<BroadcastTxResponse<MsgTimeoutOnCloseResponse>> => {
+  timeoutOnClose = async (request: BroadcastTxReq<MsgTimeoutOnClose>): Promise<BroadcastTxRes<MsgTimeoutOnCloseResponse>> => {
     const data = [{
       typeUrl: MsgTimeoutOnClose.typeUrl,
       value: request.message
@@ -144,7 +144,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* Acknowledgement defines a rpc handler method for MsgAcknowledgement. */
-  acknowledgement = async (request: BroadcastTxRequest<MsgAcknowledgement>): Promise<BroadcastTxResponse<MsgAcknowledgementResponse>> => {
+  acknowledgement = async (request: BroadcastTxReq<MsgAcknowledgement>): Promise<BroadcastTxRes<MsgAcknowledgementResponse>> => {
     const data = [{
       typeUrl: MsgAcknowledgement.typeUrl,
       value: request.message

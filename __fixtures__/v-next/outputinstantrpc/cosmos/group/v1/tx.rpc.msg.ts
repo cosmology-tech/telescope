@@ -1,38 +1,38 @@
 import { Member, MemberSDKType, VoteOption, VoteOptionSDKType } from "./types";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgCreateGroup, MsgCreateGroupSDKType, MsgCreateGroupResponse, MsgCreateGroupResponseSDKType, MsgUpdateGroupMembers, MsgUpdateGroupMembersSDKType, MsgUpdateGroupMembersResponse, MsgUpdateGroupMembersResponseSDKType, MsgUpdateGroupAdmin, MsgUpdateGroupAdminSDKType, MsgUpdateGroupAdminResponse, MsgUpdateGroupAdminResponseSDKType, MsgUpdateGroupMetadata, MsgUpdateGroupMetadataSDKType, MsgUpdateGroupMetadataResponse, MsgUpdateGroupMetadataResponseSDKType, MsgCreateGroupPolicy, MsgCreateGroupPolicySDKType, MsgCreateGroupPolicyResponse, MsgCreateGroupPolicyResponseSDKType, MsgCreateGroupWithPolicy, MsgCreateGroupWithPolicySDKType, MsgCreateGroupWithPolicyResponse, MsgCreateGroupWithPolicyResponseSDKType, MsgUpdateGroupPolicyAdmin, MsgUpdateGroupPolicyAdminSDKType, MsgUpdateGroupPolicyAdminResponse, MsgUpdateGroupPolicyAdminResponseSDKType, MsgUpdateGroupPolicyDecisionPolicy, MsgUpdateGroupPolicyDecisionPolicySDKType, MsgUpdateGroupPolicyDecisionPolicyResponse, MsgUpdateGroupPolicyDecisionPolicyResponseSDKType, MsgUpdateGroupPolicyMetadata, MsgUpdateGroupPolicyMetadataSDKType, MsgUpdateGroupPolicyMetadataResponse, MsgUpdateGroupPolicyMetadataResponseSDKType, MsgSubmitProposal, MsgSubmitProposalSDKType, MsgSubmitProposalResponse, MsgSubmitProposalResponseSDKType, MsgWithdrawProposal, MsgWithdrawProposalSDKType, MsgWithdrawProposalResponse, MsgWithdrawProposalResponseSDKType, MsgVote, MsgVoteSDKType, MsgVoteResponse, MsgVoteResponseSDKType, MsgExec, MsgExecSDKType, MsgExecResponse, MsgExecResponseSDKType, MsgLeaveGroup, MsgLeaveGroupSDKType, MsgLeaveGroupResponse, MsgLeaveGroupResponseSDKType } from "./tx";
 /** Msg is the cosmos.group.v1 Msg service. */
 export interface Msg {
   /** CreateGroup creates a new group with an admin account address, a list of members and some optional metadata. */
-  createGroup(request: BroadcastTxRequest<MsgCreateGroup>): Promise<BroadcastTxResponse<MsgCreateGroupResponse>>;
+  createGroup(request: BroadcastTxReq<MsgCreateGroup>): Promise<BroadcastTxRes<MsgCreateGroupResponse>>;
   /** UpdateGroupMembers updates the group members with given group id and admin address. */
-  updateGroupMembers(request: BroadcastTxRequest<MsgUpdateGroupMembers>): Promise<BroadcastTxResponse<MsgUpdateGroupMembersResponse>>;
+  updateGroupMembers(request: BroadcastTxReq<MsgUpdateGroupMembers>): Promise<BroadcastTxRes<MsgUpdateGroupMembersResponse>>;
   /** UpdateGroupAdmin updates the group admin with given group id and previous admin address. */
-  updateGroupAdmin(request: BroadcastTxRequest<MsgUpdateGroupAdmin>): Promise<BroadcastTxResponse<MsgUpdateGroupAdminResponse>>;
+  updateGroupAdmin(request: BroadcastTxReq<MsgUpdateGroupAdmin>): Promise<BroadcastTxRes<MsgUpdateGroupAdminResponse>>;
   /** UpdateGroupMetadata updates the group metadata with given group id and admin address. */
-  updateGroupMetadata(request: BroadcastTxRequest<MsgUpdateGroupMetadata>): Promise<BroadcastTxResponse<MsgUpdateGroupMetadataResponse>>;
+  updateGroupMetadata(request: BroadcastTxReq<MsgUpdateGroupMetadata>): Promise<BroadcastTxRes<MsgUpdateGroupMetadataResponse>>;
   /** CreateGroupPolicy creates a new group policy using given DecisionPolicy. */
-  createGroupPolicy(request: BroadcastTxRequest<MsgCreateGroupPolicy>): Promise<BroadcastTxResponse<MsgCreateGroupPolicyResponse>>;
+  createGroupPolicy(request: BroadcastTxReq<MsgCreateGroupPolicy>): Promise<BroadcastTxRes<MsgCreateGroupPolicyResponse>>;
   /** CreateGroupWithPolicy creates a new group with policy. */
-  createGroupWithPolicy(request: BroadcastTxRequest<MsgCreateGroupWithPolicy>): Promise<BroadcastTxResponse<MsgCreateGroupWithPolicyResponse>>;
+  createGroupWithPolicy(request: BroadcastTxReq<MsgCreateGroupWithPolicy>): Promise<BroadcastTxRes<MsgCreateGroupWithPolicyResponse>>;
   /** UpdateGroupPolicyAdmin updates a group policy admin. */
-  updateGroupPolicyAdmin(request: BroadcastTxRequest<MsgUpdateGroupPolicyAdmin>): Promise<BroadcastTxResponse<MsgUpdateGroupPolicyAdminResponse>>;
+  updateGroupPolicyAdmin(request: BroadcastTxReq<MsgUpdateGroupPolicyAdmin>): Promise<BroadcastTxRes<MsgUpdateGroupPolicyAdminResponse>>;
   /** UpdateGroupPolicyDecisionPolicy allows a group policy's decision policy to be updated. */
-  updateGroupPolicyDecisionPolicy(request: BroadcastTxRequest<MsgUpdateGroupPolicyDecisionPolicy>): Promise<BroadcastTxResponse<MsgUpdateGroupPolicyDecisionPolicyResponse>>;
+  updateGroupPolicyDecisionPolicy(request: BroadcastTxReq<MsgUpdateGroupPolicyDecisionPolicy>): Promise<BroadcastTxRes<MsgUpdateGroupPolicyDecisionPolicyResponse>>;
   /** UpdateGroupPolicyMetadata updates a group policy metadata. */
-  updateGroupPolicyMetadata(request: BroadcastTxRequest<MsgUpdateGroupPolicyMetadata>): Promise<BroadcastTxResponse<MsgUpdateGroupPolicyMetadataResponse>>;
+  updateGroupPolicyMetadata(request: BroadcastTxReq<MsgUpdateGroupPolicyMetadata>): Promise<BroadcastTxRes<MsgUpdateGroupPolicyMetadataResponse>>;
   /** SubmitProposal submits a new proposal. */
-  submitProposal(request: BroadcastTxRequest<MsgSubmitProposal>): Promise<BroadcastTxResponse<MsgSubmitProposalResponse>>;
+  submitProposal(request: BroadcastTxReq<MsgSubmitProposal>): Promise<BroadcastTxRes<MsgSubmitProposalResponse>>;
   /** WithdrawProposal aborts a proposal. */
-  withdrawProposal(request: BroadcastTxRequest<MsgWithdrawProposal>): Promise<BroadcastTxResponse<MsgWithdrawProposalResponse>>;
+  withdrawProposal(request: BroadcastTxReq<MsgWithdrawProposal>): Promise<BroadcastTxRes<MsgWithdrawProposalResponse>>;
   /** Vote allows a voter to vote on a proposal. */
-  vote(request: BroadcastTxRequest<MsgVote>): Promise<BroadcastTxResponse<MsgVoteResponse>>;
+  vote(request: BroadcastTxReq<MsgVote>): Promise<BroadcastTxRes<MsgVoteResponse>>;
   /** Exec executes a proposal. */
-  exec(request: BroadcastTxRequest<MsgExec>): Promise<BroadcastTxResponse<MsgExecResponse>>;
+  exec(request: BroadcastTxReq<MsgExec>): Promise<BroadcastTxRes<MsgExecResponse>>;
   /** LeaveGroup allows a group member to leave the group. */
-  leaveGroup(request: BroadcastTxRequest<MsgLeaveGroup>): Promise<BroadcastTxResponse<MsgLeaveGroupResponse>>;
+  leaveGroup(request: BroadcastTxReq<MsgLeaveGroup>): Promise<BroadcastTxRes<MsgLeaveGroupResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -40,7 +40,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* CreateGroup creates a new group with an admin account address, a list of members and some optional metadata. */
-  createGroup = async (request: BroadcastTxRequest<MsgCreateGroup>): Promise<BroadcastTxResponse<MsgCreateGroupResponse>> => {
+  createGroup = async (request: BroadcastTxReq<MsgCreateGroup>): Promise<BroadcastTxRes<MsgCreateGroupResponse>> => {
     const data = [{
       typeUrl: MsgCreateGroup.typeUrl,
       value: request.message
@@ -52,7 +52,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* UpdateGroupMembers updates the group members with given group id and admin address. */
-  updateGroupMembers = async (request: BroadcastTxRequest<MsgUpdateGroupMembers>): Promise<BroadcastTxResponse<MsgUpdateGroupMembersResponse>> => {
+  updateGroupMembers = async (request: BroadcastTxReq<MsgUpdateGroupMembers>): Promise<BroadcastTxRes<MsgUpdateGroupMembersResponse>> => {
     const data = [{
       typeUrl: MsgUpdateGroupMembers.typeUrl,
       value: request.message
@@ -64,7 +64,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* UpdateGroupAdmin updates the group admin with given group id and previous admin address. */
-  updateGroupAdmin = async (request: BroadcastTxRequest<MsgUpdateGroupAdmin>): Promise<BroadcastTxResponse<MsgUpdateGroupAdminResponse>> => {
+  updateGroupAdmin = async (request: BroadcastTxReq<MsgUpdateGroupAdmin>): Promise<BroadcastTxRes<MsgUpdateGroupAdminResponse>> => {
     const data = [{
       typeUrl: MsgUpdateGroupAdmin.typeUrl,
       value: request.message
@@ -76,7 +76,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* UpdateGroupMetadata updates the group metadata with given group id and admin address. */
-  updateGroupMetadata = async (request: BroadcastTxRequest<MsgUpdateGroupMetadata>): Promise<BroadcastTxResponse<MsgUpdateGroupMetadataResponse>> => {
+  updateGroupMetadata = async (request: BroadcastTxReq<MsgUpdateGroupMetadata>): Promise<BroadcastTxRes<MsgUpdateGroupMetadataResponse>> => {
     const data = [{
       typeUrl: MsgUpdateGroupMetadata.typeUrl,
       value: request.message
@@ -88,7 +88,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* CreateGroupPolicy creates a new group policy using given DecisionPolicy. */
-  createGroupPolicy = async (request: BroadcastTxRequest<MsgCreateGroupPolicy>): Promise<BroadcastTxResponse<MsgCreateGroupPolicyResponse>> => {
+  createGroupPolicy = async (request: BroadcastTxReq<MsgCreateGroupPolicy>): Promise<BroadcastTxRes<MsgCreateGroupPolicyResponse>> => {
     const data = [{
       typeUrl: MsgCreateGroupPolicy.typeUrl,
       value: request.message
@@ -100,7 +100,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* CreateGroupWithPolicy creates a new group with policy. */
-  createGroupWithPolicy = async (request: BroadcastTxRequest<MsgCreateGroupWithPolicy>): Promise<BroadcastTxResponse<MsgCreateGroupWithPolicyResponse>> => {
+  createGroupWithPolicy = async (request: BroadcastTxReq<MsgCreateGroupWithPolicy>): Promise<BroadcastTxRes<MsgCreateGroupWithPolicyResponse>> => {
     const data = [{
       typeUrl: MsgCreateGroupWithPolicy.typeUrl,
       value: request.message
@@ -112,7 +112,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* UpdateGroupPolicyAdmin updates a group policy admin. */
-  updateGroupPolicyAdmin = async (request: BroadcastTxRequest<MsgUpdateGroupPolicyAdmin>): Promise<BroadcastTxResponse<MsgUpdateGroupPolicyAdminResponse>> => {
+  updateGroupPolicyAdmin = async (request: BroadcastTxReq<MsgUpdateGroupPolicyAdmin>): Promise<BroadcastTxRes<MsgUpdateGroupPolicyAdminResponse>> => {
     const data = [{
       typeUrl: MsgUpdateGroupPolicyAdmin.typeUrl,
       value: request.message
@@ -124,7 +124,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* UpdateGroupPolicyDecisionPolicy allows a group policy's decision policy to be updated. */
-  updateGroupPolicyDecisionPolicy = async (request: BroadcastTxRequest<MsgUpdateGroupPolicyDecisionPolicy>): Promise<BroadcastTxResponse<MsgUpdateGroupPolicyDecisionPolicyResponse>> => {
+  updateGroupPolicyDecisionPolicy = async (request: BroadcastTxReq<MsgUpdateGroupPolicyDecisionPolicy>): Promise<BroadcastTxRes<MsgUpdateGroupPolicyDecisionPolicyResponse>> => {
     const data = [{
       typeUrl: MsgUpdateGroupPolicyDecisionPolicy.typeUrl,
       value: request.message
@@ -136,7 +136,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* UpdateGroupPolicyMetadata updates a group policy metadata. */
-  updateGroupPolicyMetadata = async (request: BroadcastTxRequest<MsgUpdateGroupPolicyMetadata>): Promise<BroadcastTxResponse<MsgUpdateGroupPolicyMetadataResponse>> => {
+  updateGroupPolicyMetadata = async (request: BroadcastTxReq<MsgUpdateGroupPolicyMetadata>): Promise<BroadcastTxRes<MsgUpdateGroupPolicyMetadataResponse>> => {
     const data = [{
       typeUrl: MsgUpdateGroupPolicyMetadata.typeUrl,
       value: request.message
@@ -148,7 +148,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* SubmitProposal submits a new proposal. */
-  submitProposal = async (request: BroadcastTxRequest<MsgSubmitProposal>): Promise<BroadcastTxResponse<MsgSubmitProposalResponse>> => {
+  submitProposal = async (request: BroadcastTxReq<MsgSubmitProposal>): Promise<BroadcastTxRes<MsgSubmitProposalResponse>> => {
     const data = [{
       typeUrl: MsgSubmitProposal.typeUrl,
       value: request.message
@@ -160,7 +160,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* WithdrawProposal aborts a proposal. */
-  withdrawProposal = async (request: BroadcastTxRequest<MsgWithdrawProposal>): Promise<BroadcastTxResponse<MsgWithdrawProposalResponse>> => {
+  withdrawProposal = async (request: BroadcastTxReq<MsgWithdrawProposal>): Promise<BroadcastTxRes<MsgWithdrawProposalResponse>> => {
     const data = [{
       typeUrl: MsgWithdrawProposal.typeUrl,
       value: request.message
@@ -172,7 +172,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* Vote allows a voter to vote on a proposal. */
-  vote = async (request: BroadcastTxRequest<MsgVote>): Promise<BroadcastTxResponse<MsgVoteResponse>> => {
+  vote = async (request: BroadcastTxReq<MsgVote>): Promise<BroadcastTxRes<MsgVoteResponse>> => {
     const data = [{
       typeUrl: MsgVote.typeUrl,
       value: request.message
@@ -184,7 +184,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* Exec executes a proposal. */
-  exec = async (request: BroadcastTxRequest<MsgExec>): Promise<BroadcastTxResponse<MsgExecResponse>> => {
+  exec = async (request: BroadcastTxReq<MsgExec>): Promise<BroadcastTxRes<MsgExecResponse>> => {
     const data = [{
       typeUrl: MsgExec.typeUrl,
       value: request.message
@@ -196,7 +196,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* LeaveGroup allows a group member to leave the group. */
-  leaveGroup = async (request: BroadcastTxRequest<MsgLeaveGroup>): Promise<BroadcastTxResponse<MsgLeaveGroupResponse>> => {
+  leaveGroup = async (request: BroadcastTxReq<MsgLeaveGroup>): Promise<BroadcastTxRes<MsgLeaveGroupResponse>> => {
     const data = [{
       typeUrl: MsgLeaveGroup.typeUrl,
       value: request.message

@@ -1,5 +1,5 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgSubmitEvidence, MsgSubmitEvidenceSDKType, MsgSubmitEvidenceResponse, MsgSubmitEvidenceResponseSDKType } from "./tx";
 /** Msg defines the evidence Msg service. */
@@ -8,7 +8,7 @@ export interface Msg {
    * SubmitEvidence submits an arbitrary Evidence of misbehavior such as equivocation or
    * counterfactual signing.
    */
-  submitEvidence(request: BroadcastTxRequest<MsgSubmitEvidence>): Promise<BroadcastTxResponse<MsgSubmitEvidenceResponse>>;
+  submitEvidence(request: BroadcastTxReq<MsgSubmitEvidence>): Promise<BroadcastTxRes<MsgSubmitEvidenceResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -17,7 +17,7 @@ export class MsgClientImpl implements Msg {
   }
   /* SubmitEvidence submits an arbitrary Evidence of misbehavior such as equivocation or
    counterfactual signing. */
-  submitEvidence = async (request: BroadcastTxRequest<MsgSubmitEvidence>): Promise<BroadcastTxResponse<MsgSubmitEvidenceResponse>> => {
+  submitEvidence = async (request: BroadcastTxReq<MsgSubmitEvidence>): Promise<BroadcastTxRes<MsgSubmitEvidenceResponse>> => {
     const data = [{
       typeUrl: MsgSubmitEvidence.typeUrl,
       value: request.message

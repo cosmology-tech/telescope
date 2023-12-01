@@ -1,23 +1,23 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { VoteOption, VoteOptionSDKType, WeightedVoteOption, WeightedVoteOptionSDKType } from "./gov";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgSubmitProposal, MsgSubmitProposalSDKType, MsgSubmitProposalResponse, MsgSubmitProposalResponseSDKType, MsgVote, MsgVoteSDKType, MsgVoteResponse, MsgVoteResponseSDKType, MsgVoteWeighted, MsgVoteWeightedSDKType, MsgVoteWeightedResponse, MsgVoteWeightedResponseSDKType, MsgDeposit, MsgDepositSDKType, MsgDepositResponse, MsgDepositResponseSDKType } from "./tx";
 /** Msg defines the bank Msg service. */
 export interface Msg {
   /** SubmitProposal defines a method to create new proposal given a content. */
-  submitProposal(request: BroadcastTxRequest<MsgSubmitProposal>): Promise<BroadcastTxResponse<MsgSubmitProposalResponse>>;
+  submitProposal(request: BroadcastTxReq<MsgSubmitProposal>): Promise<BroadcastTxRes<MsgSubmitProposalResponse>>;
   /** Vote defines a method to add a vote on a specific proposal. */
-  vote(request: BroadcastTxRequest<MsgVote>): Promise<BroadcastTxResponse<MsgVoteResponse>>;
+  vote(request: BroadcastTxReq<MsgVote>): Promise<BroadcastTxRes<MsgVoteResponse>>;
   /**
    * VoteWeighted defines a method to add a weighted vote on a specific proposal.
    * 
    * Since: cosmos-sdk 0.43
    */
-  voteWeighted(request: BroadcastTxRequest<MsgVoteWeighted>): Promise<BroadcastTxResponse<MsgVoteWeightedResponse>>;
+  voteWeighted(request: BroadcastTxReq<MsgVoteWeighted>): Promise<BroadcastTxRes<MsgVoteWeightedResponse>>;
   /** Deposit defines a method to add deposit on a specific proposal. */
-  deposit(request: BroadcastTxRequest<MsgDeposit>): Promise<BroadcastTxResponse<MsgDepositResponse>>;
+  deposit(request: BroadcastTxReq<MsgDeposit>): Promise<BroadcastTxRes<MsgDepositResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -25,7 +25,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* SubmitProposal defines a method to create new proposal given a content. */
-  submitProposal = async (request: BroadcastTxRequest<MsgSubmitProposal>): Promise<BroadcastTxResponse<MsgSubmitProposalResponse>> => {
+  submitProposal = async (request: BroadcastTxReq<MsgSubmitProposal>): Promise<BroadcastTxRes<MsgSubmitProposalResponse>> => {
     const data = [{
       typeUrl: MsgSubmitProposal.typeUrl,
       value: request.message
@@ -37,7 +37,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* Vote defines a method to add a vote on a specific proposal. */
-  vote = async (request: BroadcastTxRequest<MsgVote>): Promise<BroadcastTxResponse<MsgVoteResponse>> => {
+  vote = async (request: BroadcastTxReq<MsgVote>): Promise<BroadcastTxRes<MsgVoteResponse>> => {
     const data = [{
       typeUrl: MsgVote.typeUrl,
       value: request.message
@@ -51,7 +51,7 @@ export class MsgClientImpl implements Msg {
   /* VoteWeighted defines a method to add a weighted vote on a specific proposal.
   
    Since: cosmos-sdk 0.43 */
-  voteWeighted = async (request: BroadcastTxRequest<MsgVoteWeighted>): Promise<BroadcastTxResponse<MsgVoteWeightedResponse>> => {
+  voteWeighted = async (request: BroadcastTxReq<MsgVoteWeighted>): Promise<BroadcastTxRes<MsgVoteWeightedResponse>> => {
     const data = [{
       typeUrl: MsgVoteWeighted.typeUrl,
       value: request.message
@@ -63,7 +63,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* Deposit defines a method to add deposit on a specific proposal. */
-  deposit = async (request: BroadcastTxRequest<MsgDeposit>): Promise<BroadcastTxResponse<MsgDepositResponse>> => {
+  deposit = async (request: BroadcastTxReq<MsgDeposit>): Promise<BroadcastTxRes<MsgDepositResponse>> => {
     const data = [{
       typeUrl: MsgDeposit.typeUrl,
       value: request.message

@@ -1,13 +1,13 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
-import { BroadcastTxRequest, BroadcastTxResponse, TxRpc } from "../../../types";
+import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgSignProviderAttributes, MsgSignProviderAttributesSDKType, MsgSignProviderAttributesResponse, MsgSignProviderAttributesResponseSDKType, MsgDeleteProviderAttributes, MsgDeleteProviderAttributesSDKType, MsgDeleteProviderAttributesResponse, MsgDeleteProviderAttributesResponseSDKType } from "./audit";
 /** Msg defines the provider Msg service */
 export interface Msg {
   /** SignProviderAttributes defines a method that signs provider attributes */
-  signProviderAttributes(request: BroadcastTxRequest<MsgSignProviderAttributes>): Promise<BroadcastTxResponse<MsgSignProviderAttributesResponse>>;
+  signProviderAttributes(request: BroadcastTxReq<MsgSignProviderAttributes>): Promise<BroadcastTxRes<MsgSignProviderAttributesResponse>>;
   /** DeleteProviderAttributes defines a method that deletes provider attributes */
-  deleteProviderAttributes(request: BroadcastTxRequest<MsgDeleteProviderAttributes>): Promise<BroadcastTxResponse<MsgDeleteProviderAttributesResponse>>;
+  deleteProviderAttributes(request: BroadcastTxReq<MsgDeleteProviderAttributes>): Promise<BroadcastTxRes<MsgDeleteProviderAttributesResponse>>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -15,7 +15,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* SignProviderAttributes defines a method that signs provider attributes */
-  signProviderAttributes = async (request: BroadcastTxRequest<MsgSignProviderAttributes>): Promise<BroadcastTxResponse<MsgSignProviderAttributesResponse>> => {
+  signProviderAttributes = async (request: BroadcastTxReq<MsgSignProviderAttributes>): Promise<BroadcastTxRes<MsgSignProviderAttributesResponse>> => {
     const data = [{
       typeUrl: MsgSignProviderAttributes.typeUrl,
       value: request.message
@@ -27,7 +27,7 @@ export class MsgClientImpl implements Msg {
     }));
   };
   /* DeleteProviderAttributes defines a method that deletes provider attributes */
-  deleteProviderAttributes = async (request: BroadcastTxRequest<MsgDeleteProviderAttributes>): Promise<BroadcastTxResponse<MsgDeleteProviderAttributesResponse>> => {
+  deleteProviderAttributes = async (request: BroadcastTxReq<MsgDeleteProviderAttributes>): Promise<BroadcastTxRes<MsgDeleteProviderAttributesResponse>> => {
     const data = [{
       typeUrl: MsgDeleteProviderAttributes.typeUrl,
       value: request.message
