@@ -28,9 +28,9 @@ export class CosmosAuthAccount {
     this.deposit = _CosmosGovV1beta1Queryrpc.createClientImpl(rpc).deposit;
     this.deposits = _CosmosGovV1beta1Queryrpc.createClientImpl(rpc).deposits;
     this.tallyResult = _CosmosGovV1beta1Queryrpc.createClientImpl(rpc).tallyResult;
-    this.submitProposal = _CosmosGovV1beta1Txrpc.createMsgClientImpl(rpc).submitProposal;
-    this.txVote = _CosmosGovV1beta1Txrpc.createMsgClientImpl(rpc).vote;
-    this.voteWeighted = _CosmosGovV1beta1Txrpc.createMsgClientImpl(rpc).voteWeighted;
-    this.txDeposit = _CosmosGovV1beta1Txrpc.createMsgClientImpl(rpc).deposit;
+    this.submitProposal = _CosmosGovV1beta1Txrpc.createClientImpl(rpc).submitProposal;
+    this.txVote = _CosmosGovV1beta1Txrpc.createClientImpl(rpc).vote;
+    this.voteWeighted = _CosmosGovV1beta1Txrpc.createClientImpl(rpc).voteWeighted;
+    this.txDeposit = _CosmosGovV1beta1Txrpc.createClientImpl(rpc).deposit;
   }
 }

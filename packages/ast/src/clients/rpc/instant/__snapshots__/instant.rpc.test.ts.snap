@@ -17,7 +17,7 @@ exports[`createInstantRpcClass 2`] = `
   init(rpc: Rpc) {
     this.rpc = rpc;
     this.authAccount = _CosmosAuthV1beta1Queryrpc.createClientImpl(rpc).account;
-    this.bankAccount = _CosmosBankV1beta1Msgrpc.createMsgClientImpl(rpc).account;
+    this.bankAccount = _CosmosBankV1beta1Msgrpc.createClientImpl(rpc).account;
   }
 }"
 `;

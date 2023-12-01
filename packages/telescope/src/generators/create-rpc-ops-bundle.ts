@@ -109,7 +109,7 @@ function createRpcOpsAst(
   };
 
   bundlerFiles.forEach((bundlerFile) => {
-    const isMsg = bundlerFile.localname.indexOf("rpc.msg") !== -1;
+    const isMsg = bundlerFile.isMsg;
     const currentNameMapping = isMsg ? txNameMapping : queryNameMapping;
 
     const path = `./${bundlerFile.localname.replace(/\.ts$/, "")}`;

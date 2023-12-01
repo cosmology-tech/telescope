@@ -53,7 +53,8 @@ export const plugin = (
           proto: c.ref.filename,
           package: c.ref.proto.package,
           localname,
-          filename
+          filename,
+          isMsg: true
         };
         switch (c.proto.pluginValue("rpcClients.type")) {
             case 'grpc-gateway':
@@ -120,7 +121,7 @@ export const plugin = (
 
                 const env = c.proto.pluginValue('env');
                 if(env === 'v-next'){
-                  asts.push(createRpcClientImpl(ctx.generic, svc, 'createMsgClientImpl'));
+                  asts.push(createRpcClientImpl(ctx.generic, svc));
                 }
         }
 

@@ -99,11 +99,7 @@ export const createInstantRpcClass = (
                     t.callExpression(
                       t.memberExpression(
                         t.identifier(mapping.importedVarName),
-                        t.identifier(
-                          mapping.isMsg
-                            ? "createMsgClientImpl"
-                            : "createClientImpl"
-                        )
+                        t.identifier("createClientImpl")
                       ),
                       [t.identifier("rpc")]
                     ),

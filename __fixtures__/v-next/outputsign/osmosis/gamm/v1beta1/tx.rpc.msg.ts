@@ -66,6 +66,6 @@ export class MsgClientImpl implements Msg {
     return promise.then(data => MsgExitSwapShareAmountInResponse.decode(new BinaryReader(data)));
   }
 }
-export const createMsgClientImpl = (rpc: TxRpc) => {
+export const createClientImpl = (rpc: TxRpc) => {
   return new MsgClientImpl(rpc);
 };

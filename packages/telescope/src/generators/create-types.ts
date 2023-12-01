@@ -107,6 +107,7 @@ export const plugin = (
             });
 
             if (proto.Msg) {
+                bundlerFile.isMsg = true;
                 context.body.push(createRpcClientInterface(context.generic, proto.Msg))
 
                 instantOps.forEach((item) => {
@@ -149,7 +150,7 @@ export const plugin = (
                 context.body.push(createRpcClientClass(context.generic, proto.Msg))
                 const env = context.proto.pluginValue('env');
                 if(env === 'v-next'){
-                  context.body.push(createRpcClientImpl(context.generic, proto.Msg, "createMsgClientImpl"));
+                  context.body.push(createRpcClientImpl(context.generic, proto.Msg));
                 }
             }
         }
