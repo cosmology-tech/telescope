@@ -30,6 +30,7 @@ export const createInstantRpcClass = (
     [key: string]: {
       methodName: string;
       importedVarName: string;
+      isMsg?: boolean;
       comment?: string;
     };
   }
@@ -59,14 +60,13 @@ export const createInstantRpcClass = (
           ),
           null,
           false,
-          false,
-          true
+          false
         ),
 
         // Constructor
         t.classMethod(
-          "constructor",
-          t.identifier("constructor"),
+          "method",
+          t.identifier("init"),
           [
             identifier(
               "rpc",
@@ -99,7 +99,11 @@ export const createInstantRpcClass = (
                     t.callExpression(
                       t.memberExpression(
                         t.identifier(mapping.importedVarName),
-                        t.identifier("createClientImpl")
+                        t.identifier(
+                          mapping.isMsg
+                            ? "createMsgClientImpl"
+                            : "createClientImpl"
+                        )
                       ),
                       [t.identifier("rpc")]
                     ),

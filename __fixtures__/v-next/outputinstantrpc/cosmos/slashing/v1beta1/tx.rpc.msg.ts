@@ -30,3 +30,6 @@ export class MsgClientImpl implements Msg {
     }));
   };
 }
+export const createMsgClientImpl = (rpc: TxRpc) => {
+  return new MsgClientImpl(rpc);
+};

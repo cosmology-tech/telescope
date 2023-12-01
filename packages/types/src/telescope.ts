@@ -200,7 +200,15 @@ interface TelescopeOpts {
               patterns?: string[];
             },
             nameMapping?:{
-              [key: string]: string;
+              All: {
+                [key: string]: string;
+              };
+              Query?: {
+                [key: string]: string;
+              };
+              Tx?: {
+                [key: string]: string;
+              };
             }
         }[];
     };

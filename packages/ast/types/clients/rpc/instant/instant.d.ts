@@ -8,6 +8,7 @@ export declare const createInstantRpcClass: (context: GenericParseContext, name:
     [key: string]: {
         methodName: string;
         importedVarName: string;
+        isMsg?: boolean;
         comment?: string;
     };
 }) => t.ExportNamedDeclaration;

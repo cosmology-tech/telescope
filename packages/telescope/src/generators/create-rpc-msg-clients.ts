@@ -1,6 +1,6 @@
 import { buildAllImports, getDepsFromQueries } from '../imports';
 import { Bundler } from '../bundler';
-import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayMsgClass, GetDesc, getMethodDesc, grpcWebRpcInterface, createGrpcWebMsgInterface, createGrpcWebMsgClass, getGrpcWebImpl } from '@cosmology/ast';
+import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayMsgClass, GetDesc, getMethodDesc, grpcWebRpcInterface, createGrpcWebMsgInterface, createGrpcWebMsgClass, getGrpcWebImpl, createRpcClientImpl } from '@cosmology/ast';
 import { getNestedProto } from '@cosmology/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
@@ -79,9 +79,10 @@ export const plugin = (
                 const instantOps = c.options.rpcClients?.instantOps ?? [];
 
                 instantOps.forEach((item) => {
-                  let nameMapping = item.nameMapping;
-
-                  nameMapping = swapKeyValue(nameMapping ?? {});
+                  let nameMapping = {
+                    ...swapKeyValue(item.nameMapping?.All ?? {}),
+                    ...swapKeyValue(item.nameMapping?.Tx ?? {})
+                  };
 
                   // get all query methods
                   const patterns = item.include?.patterns;
@@ -116,6 +117,11 @@ export const plugin = (
                 });
 
                 asts.push(createRpcClientClass(ctx.generic, proto.Msg))
+
+                const env = c.proto.pluginValue('env');
+                if(env === 'v-next'){
+                  asts.push(createRpcClientImpl(ctx.generic, svc, 'createMsgClientImpl'));
+                }
         }
 
         ////////

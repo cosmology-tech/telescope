@@ -57,9 +57,10 @@ export const plugin = (
                     context.body.push(createRpcClientInterface(context.generic, proto[svcKey]));
 
                     instantOps.forEach((item) => {
-                      let nameMapping = item.nameMapping;
-
-                      nameMapping = swapKeyValue(nameMapping ?? {});
+                      let nameMapping = {
+                        ...swapKeyValue(item.nameMapping?.All ?? {}),
+                        ...swapKeyValue(item.nameMapping?.Query ?? {})
+                      };
 
                       // get all query methods
                       const patterns = item.include?.patterns;
@@ -109,9 +110,10 @@ export const plugin = (
                 context.body.push(createRpcClientInterface(context.generic, proto.Msg))
 
                 instantOps.forEach((item) => {
-                  let nameMapping = item.nameMapping;
-
-                  nameMapping = swapKeyValue(nameMapping ?? {});
+                  let nameMapping = {
+                    ...swapKeyValue(item.nameMapping?.All ?? {}),
+                    ...swapKeyValue(item.nameMapping?.Tx ?? {})
+                  };
 
                   // get all query methods
                   const patterns = item.include?.patterns;
@@ -145,6 +147,10 @@ export const plugin = (
                 });
 
                 context.body.push(createRpcClientClass(context.generic, proto.Msg))
+                const env = context.proto.pluginValue('env');
+                if(env === 'v-next'){
+                  context.body.push(createRpcClientImpl(context.generic, proto.Msg, "createMsgClientImpl"));
+                }
             }
         }
 

@@ -164,9 +164,10 @@ export const plugin = (
                         const useCamelCase = c.options.rpcClients?.camelCase;
 
                         instantOps.forEach((item) => {
-                          let nameMapping = item.nameMapping;
-
-                          nameMapping = swapKeyValue(nameMapping ?? {});
+                          let nameMapping = {
+                            ...swapKeyValue(item.nameMapping?.All ?? {}),
+                            ...swapKeyValue(item.nameMapping?.Query ?? {})
+                          };
 
                           // get all query methods
                           const patterns = item.include?.patterns;

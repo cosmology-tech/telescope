@@ -19,6 +19,21 @@ export interface Msg {
   /** Deposit defines a method to add deposit on a specific proposal. */
   deposit(request: BroadcastTxReq<MsgDeposit>): Promise<BroadcastTxRes<MsgDepositResponse>>;
 }
+/** Msg defines the bank Msg service. */
+export interface CosmosAuthAccount {
+  /** SubmitProposal defines a method to create new proposal given a content. */
+  submitProposal(request: BroadcastTxReq<MsgSubmitProposal>): Promise<BroadcastTxRes<MsgSubmitProposalResponse>>;
+  /** Vote defines a method to add a vote on a specific proposal. */
+  txVote(request: BroadcastTxReq<MsgVote>): Promise<BroadcastTxRes<MsgVoteResponse>>;
+  /**
+   * VoteWeighted defines a method to add a weighted vote on a specific proposal.
+   * 
+   * Since: cosmos-sdk 0.43
+   */
+  voteWeighted(request: BroadcastTxReq<MsgVoteWeighted>): Promise<BroadcastTxRes<MsgVoteWeightedResponse>>;
+  /** Deposit defines a method to add deposit on a specific proposal. */
+  txDeposit(request: BroadcastTxReq<MsgDeposit>): Promise<BroadcastTxRes<MsgDepositResponse>>;
+}
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
   constructor(rpc: TxRpc) {
@@ -75,3 +90,6 @@ export class MsgClientImpl implements Msg {
     }));
   };
 }
+export const createMsgClientImpl = (rpc: TxRpc) => {
+  return new MsgClientImpl(rpc);
+};

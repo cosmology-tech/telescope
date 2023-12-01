@@ -33,3 +33,6 @@ export class MsgClientImpl implements Msg {
     return promise.then(data => MsgRevokeAllowanceResponse.decode(new BinaryReader(data)));
   }
 }
+export const createMsgClientImpl = (rpc: Rpc) => {
+  return new MsgClientImpl(rpc);
+};

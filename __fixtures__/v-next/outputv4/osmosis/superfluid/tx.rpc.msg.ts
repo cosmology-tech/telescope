@@ -53,3 +53,6 @@ export class MsgClientImpl implements Msg {
     return promise.then(data => MsgUnPoolWhitelistedPoolResponse.decode(new BinaryReader(data)));
   }
 }
+export const createMsgClientImpl = (rpc: Rpc) => {
+  return new MsgClientImpl(rpc);
+};

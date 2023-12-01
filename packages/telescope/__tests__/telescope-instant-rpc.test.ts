@@ -171,10 +171,16 @@ const options: TelescopeOptions = {
       {
         className: "CosmosAuthAccount",
         include: {
-          patterns: ["cosmos.auth.**.*account*", "cosmos.auth.**.*Account*"],
+          patterns: ["cosmos.auth.**.*account*", "cosmos.auth.**.*Account*", "cosmos.gov.v1beta1.**"],
         },
         nameMapping: {
-          authModuleAccounts: "cosmos.auth.v1beta1.moduleAccounts",
+          All: {
+            authModuleAccounts: "cosmos.auth.v1beta1.moduleAccounts",
+          },
+          Tx: {
+            txDeposit: "cosmos.gov.v1beta1.deposit",
+            txVote: "cosmos.gov.v1beta1.vote",
+          }
         },
       },
     ],

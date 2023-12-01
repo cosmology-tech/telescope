@@ -51,8 +51,6 @@ export const plugin = (builder: TelescopeBuilder) => {
       }
       let nameMapping = instantOpsConfig.nameMapping;
 
-      nameMapping = swapKeyValue(nameMapping ?? {});
-
       return ast.concat(
         createRpcOpsAst(
           context,
@@ -80,6 +78,8 @@ export const plugin = (builder: TelescopeBuilder) => {
   writeAstToFile(builder.outPath, builder.options, prog, filename);
 };
 
+// bundlerFiles.filter(file => file.localname.indexOf("rpc.msg") !== -1)
+
 function createRpcOpsAst(
   context: TelescopeParseContext,
   className: string,
@@ -97,7 +97,21 @@ function createRpcOpsAst(
   } = {};
   const camelRpcMethods = context.generic.pluginValue("rpcClients.camelCase");
 
+
+  let txNameMapping = {
+    ...swapKeyValue(nameMapping?.All ?? {}),
+    ...swapKeyValue(nameMapping?.Tx ?? {})
+  };
+
+  let queryNameMapping = {
+    ...swapKeyValue(nameMapping?.All ?? {}),
+    ...swapKeyValue(nameMapping?.Query ?? {})
+  };
+
   bundlerFiles.forEach((bundlerFile) => {
+    const isMsg = bundlerFile.localname.indexOf("rpc.msg") !== -1;
+    const currentNameMapping = isMsg ? txNameMapping : queryNameMapping;
+
     const path = `./${bundlerFile.localname.replace(/\.ts$/, "")}`;
     const importedVarName = variableSlug(path);
 
@@ -122,13 +136,14 @@ function createRpcOpsAst(
       const methodName = camelRpcMethods ? camel(method.name) : method.name;
       const nameWithPkg = `${bundlerFile.package}.${methodName}`;
       const methodAlias =
-        nameMapping && nameMapping[nameWithPkg]
-          ? nameMapping[nameWithPkg]
+        currentNameMapping && currentNameMapping[nameWithPkg]
+          ? currentNameMapping[nameWithPkg]
           : methodName;
 
       dotty.put(instantMapping, methodAlias, {
         methodName,
         importedVarName,
+        isMsg
       });
     });
   });
