@@ -24,7 +24,7 @@ import { getNestedProto, isRefIncluded } from '@cosmology/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
 import { ProtoRoot, ProtoService } from '@cosmology/types';
-import { getQueryMethodNames, swapKeyValue } from '@cosmology/utils';
+import { camel, getQueryMethodNames, swapKeyValue } from '@cosmology/utils';
 import { BundlerFile } from '../types';
 
 export const plugin = (
@@ -133,7 +133,7 @@ export const plugin = (
 
                             // get all query methods
                             const patterns = c.proto.pluginValue('reactQuery.instantExport.include.patterns');
-                            bundlerFile.instantExportedMethods = getQueryMethodNames(bundlerFile.package, Object.keys(proto[svcKey].methods ?? {}), patterns).map((key)=> proto[svcKey].methods[key]);
+                            bundlerFile.instantExportedMethods = getQueryMethodNames(bundlerFile.package, Object.keys(proto[svcKey].methods ?? {}), patterns,).map((key)=> proto[svcKey].methods[key]);
 
                             reactQueryBundlerFiles.push(bundlerFile);
                         }
@@ -161,6 +161,7 @@ export const plugin = (
                         asts.push(createRpcClientInterface(ctx.generic, svc));
 
                         const instantOps = c.options.rpcClients?.instantOps ?? [];
+                        const useCamelCase = c.options.rpcClients?.camelCase;
 
                         instantOps.forEach((item) => {
                           let nameMapping = item.nameMapping;
@@ -173,7 +174,7 @@ export const plugin = (
                             bundlerFile.package,
                             Object.keys(proto[svcKey].methods ?? {}),
                             patterns,
-                            (name: string)=>name
+                            useCamelCase ? camel : String
                           );
 
                           if(!methodKeys || !methodKeys.length){

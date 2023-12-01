@@ -12,6 +12,7 @@ export declare const getNested: (root: ProtoRoot, path: string[]) => any;
  * @returns customized hook name like 'useSth'
  */
 export declare const makeUseHookName: (name: string) => any;
+export declare const makeUseHookNameWithCamel: (name: string) => any;
 export declare const makeUsePkgHookName: (packageName: string, name: string) => any;
 export declare const makePkgMethodName: (packageName: string, name: string) => any;
 export declare const makeUseHookTypeName: (name: string) => string;

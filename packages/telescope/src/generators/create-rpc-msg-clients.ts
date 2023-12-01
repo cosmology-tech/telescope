@@ -4,7 +4,7 @@ import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayMsgCla
 import { getNestedProto } from '@cosmology/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
-import { getQueryMethodNames, swapKeyValue } from '@cosmology/utils';
+import { camel, getQueryMethodNames, swapKeyValue } from '@cosmology/utils';
 import { BundlerFile } from 'src/types';
 
 export const plugin = (
@@ -31,6 +31,8 @@ export const plugin = (
         if (inline) return;
 
         if (c.proto.isExcluded()) return;
+
+        const useCamelCase = c.proto.pluginValue("rpcClients.camelCase");
 
         const localname = bundler.getLocalFilename(c.ref, 'rpc.msg');
         const filename = bundler.getFilename(localname);
@@ -87,7 +89,7 @@ export const plugin = (
                     bundlerFile.package,
                     Object.keys(svc.methods ?? {}),
                     patterns,
-                    (name: string)=>name
+                    useCamelCase ? camel : String
                   );
 
                   if(!methodKeys || !methodKeys.length){

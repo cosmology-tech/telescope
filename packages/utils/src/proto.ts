@@ -34,6 +34,10 @@ export const makeUseHookName = (name: string) => {
   return camel("use_" + name);
 };
 
+export const makeUseHookNameWithCamel = (name: string) => {
+  return camel("use_" + camel(name));
+};
+
 export const makeUsePkgHookName = (packageName: string, name: string) => {
   return variableSlug(`use_${packageName.replace(/\./g, "_")}_${snake(name)}`);
 };
@@ -68,12 +72,12 @@ export const getQueryMethodNames = (
   patterns?: string[],
   makeMethodName?: Function
 ) => {
-  const make = makeMethodName ?? makeUseHookName;
+  const make = makeMethodName ?? makeUseHookNameWithCamel;
 
   return methodKeys
     .map((key) => {
 
-      const methodName = make(camel(key));
+      const methodName = make(key);
       const methodNameWithPkg = `${packagePath}.${methodName}`;
 
       const isMatching =

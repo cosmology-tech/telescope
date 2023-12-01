@@ -9,7 +9,7 @@ import { mkdirp } from 'mkdirp';
 import { getNestedProto, isRefExcluded } from '@cosmology/proto-parser';
 import { createRpcClientClass, createRpcClientImpl, createRpcClientInterface, createRpcQueryExtension } from '@cosmology/ast';
 import { BundlerFile } from 'src/types';
-import { getQueryMethodNames, swapKeyValue } from '@cosmology/utils';
+import { camel, getQueryMethodNames, swapKeyValue } from '@cosmology/utils';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -48,6 +48,7 @@ export const plugin = (
             const proto = getNestedProto(context.ref.traversed);
 
             const instantOps = context.options.rpcClients?.instantOps ?? [];
+            const useCamelCase = context.options.rpcClients?.camelCase;
 
             allowedRpcServices.forEach(svcKey => {
                 if (proto[svcKey]) {
@@ -66,7 +67,7 @@ export const plugin = (
                         bundlerFile.package,
                         Object.keys(proto[svcKey].methods ?? {}),
                         patterns,
-                        (name: string)=>name
+                        useCamelCase ? camel : String
                       );
 
                       if(!methodKeys || !methodKeys.length){
@@ -118,7 +119,7 @@ export const plugin = (
                     bundlerFile.package,
                     Object.keys(proto.Msg.methods ?? {}),
                     patterns,
-                    (name: string)=>name
+                    useCamelCase ? camel : String
                   );
 
                   if(!methodKeys || !methodKeys.length){
