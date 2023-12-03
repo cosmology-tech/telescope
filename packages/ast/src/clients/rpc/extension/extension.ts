@@ -5,6 +5,7 @@ import { ProtoService, ProtoServiceMethod } from '@cosmology/types';
 import { GenericParseContext } from '../../../encoding';
 import { camel } from '@cosmology/utils';
 import { getRpcClassName } from '../class/tendermint';
+import { rpcFuncArguments } from '../scoped';
 
 const rpcExtensionMethod = (
     context: GenericParseContext,
@@ -151,3 +152,41 @@ export const createRpcQueryExtension = (
     );
 };
 
+export const createRpcClientImpl = (
+  context: GenericParseContext,
+  service: ProtoService,
+  functionName = 'createClientImpl'
+) => {
+  const useTelescopeGeneratedType = context.pluginValue('prototypes.typingsFormat.useTelescopeGeneratedType');
+
+  if(useTelescopeGeneratedType){
+    context.addUtil('TxRpc');
+  } else {
+    context.addUtil('Rpc');
+  }
+
+  const className = getRpcClassName(service);
+
+  return t.exportNamedDeclaration(
+    t.variableDeclaration('const', [
+        t.variableDeclarator(
+            t.identifier(functionName),
+            t.arrowFunctionExpression(
+              [
+                identifier('rpc',t.tsTypeAnnotation(
+                  t.tsTypeReference(t.identifier(useTelescopeGeneratedType ? 'TxRpc' : 'Rpc'))
+              ))
+              ],
+              t.blockStatement([
+
+                t.returnStatement(t.newExpression(
+                  t.identifier(className),
+                  [
+                      t.identifier('rpc')
+                  ]
+                ))
+            ]))
+        )
+    ])
+  );
+}

@@ -3,7 +3,8 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { GroupID, GroupIDAmino, GroupIDSDKType, Group, GroupAmino, GroupSDKType } from "./group";
 import { Account, AccountAmino, AccountSDKType } from "../../escrow/v1beta1/types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { Exact, Rpc } from "../../../helpers";
+import { Exact } from "../../../helpers";
+import { TxRpc } from "../../../types";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
@@ -484,8 +485,8 @@ export interface Query {
   group(request: QueryGroupRequest): Promise<QueryGroupResponse>;
 }
 export class QueryClientImpl implements Query {
-  private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly rpc: TxRpc;
+  constructor(rpc: TxRpc) {
     this.rpc = rpc;
   }
   /* Deployments queries deployments */

@@ -73,28 +73,30 @@ export const rpcNewAwaitImport = (
 
 export const rpcNewTmAwaitImport = (
     path: string,
-    className: string
+    className: string,
+    clientName = 'client',
+    isNew = false
 ) => {
-    return t.callExpression(
-        t.memberExpression(
-            t.awaitExpression(
-                t.callExpression(
-                    t.import(),
-                    [
-                        t.stringLiteral(
-                            path
-                        )
-                    ]
-                )
-            ),
-            t.identifier(className),
-            false
-        ),
-        [
-            t.identifier('client')
-        ]
-    )
+    const calleeExpr = t.memberExpression(
+      t.awaitExpression(
+          t.callExpression(
+              t.import(),
+              [
+                  t.stringLiteral(
+                      path
+                  )
+              ]
+          )
+      ),
+      t.identifier(className),
+      false
+    );
 
+    const argsExpr = [
+      t.identifier(clientName)
+    ];
+
+    return isNew ? t.newExpression(calleeExpr, argsExpr) : t.callExpression(calleeExpr, argsExpr);
 }
 
 export const rpcRecursiveObjectProps = (
@@ -139,11 +141,13 @@ export const rpcNestedImportObject = (
 
 export const rpcTmNestedImportObject = (
     obj: object,
-    className: string
+    className: string,
+    clientName?: string,
+    isNew?: boolean
 ) => {
 
     if (typeof obj === 'string') {
-        return rpcNewTmAwaitImport(obj, className);
+        return rpcNewTmAwaitImport(obj, className, clientName, isNew);
     }
 
     const keys = Object.keys(obj);
@@ -151,7 +155,7 @@ export const rpcTmNestedImportObject = (
     return t.objectExpression(keys.map(name => {
         return t.objectProperty(
             t.identifier(name),
-            rpcTmNestedImportObject(obj[name], className)
+            rpcTmNestedImportObject(obj[name], className, clientName, isNew)
         )
     }))
 };
@@ -187,10 +191,85 @@ export const createScopedRpcTmFactory = (
     obj: object,
     identifier: string
 ) => {
+    const extensions = context.pluginValue('rpcClients.extensions');
+    let functionParams;
+    const returnStatement = t.returnStatement(
+      rpcTmNestedImportObject(
+          obj,
+          extensions ? 'createRpcQueryExtension' : 'createClientImpl',
+          extensions ? 'client' : 'rpc',
+      )
+    );
+    let functionStatements;
 
-    context.addUtil('Tendermint34Client');
-    context.addUtil('HttpEndpoint');
-    context.addUtil('QueryClient');
+    if(extensions){
+      context.addUtil('Tendermint34Client');
+      context.addUtil('HttpEndpoint');
+      context.addUtil('QueryClient');
+
+      functionParams = [
+        objectPattern(
+          [
+            t.objectProperty(
+              t.identifier("rpcEndpoint"),
+              t.identifier("rpcEndpoint"),
+              false,
+              true
+            ),
+          ],
+          t.tsTypeAnnotation(
+            t.tsTypeLiteral([
+              t.tsPropertySignature(
+                t.identifier("rpcEndpoint"),
+                t.tsTypeAnnotation(
+                  t.tsUnionType([
+                    t.tsStringKeyword(),
+                    t.tsTypeReference(t.identifier("HttpEndpoint")),
+                  ])
+                )
+              ),
+            ])
+          )
+        ),
+      ];
+
+      functionStatements = [
+
+        t.variableDeclaration('const', [
+            t.variableDeclarator(
+                t.identifier('tmClient'),
+                t.awaitExpression(
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('Tendermint34Client'),
+                            t.identifier('connect')
+                        ),
+                        [
+                            t.identifier('rpcEndpoint')
+                        ]
+                    )
+                )
+            )
+        ]),
+        /////
+        t.variableDeclaration('const', [
+            t.variableDeclarator(
+                t.identifier('client'),
+                t.newExpression(
+                    t.identifier('QueryClient'),
+                    [
+                        t.identifier('tmClient')
+                    ]
+                )
+            )
+        ]),
+
+        returnStatement
+      ]
+    } else {
+      functionParams = rpcFuncArguments();
+      functionStatements = [returnStatement]
+    }
 
     return t.exportNamedDeclaration(
         t.variableDeclaration(
@@ -200,69 +279,8 @@ export const createScopedRpcTmFactory = (
                     // createRPCQueryClient
                     t.identifier(identifier),
                     t.arrowFunctionExpression(
-                        [
-                            objectPattern([
-                                t.objectProperty(
-                                    t.identifier('rpcEndpoint'),
-                                    t.identifier('rpcEndpoint'),
-                                    false,
-                                    true
-                                )
-                            ], t.tsTypeAnnotation(
-                                t.tsTypeLiteral([
-                                    t.tsPropertySignature(
-                                        t.identifier('rpcEndpoint'),
-                                        t.tsTypeAnnotation(
-                                            t.tsUnionType([
-                                                t.tsStringKeyword(),
-                                                t.tsTypeReference(
-                                                    t.identifier('HttpEndpoint')
-                                                )
-                                            ])
-                                        )
-                                    )
-                                ])
-                            ))
-                        ],
-                        t.blockStatement([
-
-                            t.variableDeclaration('const', [
-                                t.variableDeclarator(
-                                    t.identifier('tmClient'),
-                                    t.awaitExpression(
-                                        t.callExpression(
-                                            t.memberExpression(
-                                                t.identifier('Tendermint34Client'),
-                                                t.identifier('connect')
-                                            ),
-                                            [
-                                                t.identifier('rpcEndpoint')
-                                            ]
-                                        )
-                                    )
-                                )
-                            ]),
-                            /////
-                            t.variableDeclaration('const', [
-                                t.variableDeclarator(
-                                    t.identifier('client'),
-                                    t.newExpression(
-                                        t.identifier('QueryClient'),
-                                        [
-                                            t.identifier('tmClient')
-                                        ]
-                                    )
-                                )
-                            ]),
-
-                            t.returnStatement(
-                                rpcTmNestedImportObject(
-                                    obj,
-                                    'createRpcQueryExtension'
-                                )
-                            )
-
-                        ]),
+                        functionParams,
+                        t.blockStatement(functionStatements),
                         true
                     )
                 )

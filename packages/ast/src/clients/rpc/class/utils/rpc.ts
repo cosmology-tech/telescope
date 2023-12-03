@@ -37,18 +37,23 @@ export const cleanType = (ResponseType: string) => {
 
     return ResponseType;
 }
-export const returnReponseType = (ResponseType: string) => {
+export const returnReponseType = (ResponseType: string | t.TSTypeReference) => {
+    let typeRef: t.TSTypeReference;
 
-    ResponseType = cleanType(ResponseType);
+    if(typeof ResponseType === "string"){
+      ResponseType = cleanType(ResponseType);
+
+      typeRef = t.tsTypeReference(t.identifier(ResponseType));
+    } else {
+      typeRef = ResponseType
+    }
 
     return t.tsTypeAnnotation(
         t.tsTypeReference(
             t.identifier('Promise'),
             t.tsTypeParameterInstantiation(
                 [
-                    t.tsTypeReference(
-                        t.identifier(ResponseType)
-                    )
+                  typeRef
                 ]
             )
         )
@@ -62,8 +67,8 @@ export const optionalBool = (
     if (!hasParams) {
         return true;
     } else if (hasParams && fieldNames.length === 1 && fieldNames.includes('pagination')) {
-        // if only argument "required" is pagination 
-        // also default to empty 
+        // if only argument "required" is pagination
+        // also default to empty
         return true;
     }
     return false

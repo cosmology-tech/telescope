@@ -32,7 +32,7 @@ export class GenericParseContext implements IParseContext {
     }
 
     pluginValue(name) {
-        return getPluginValue(name, this.ref.proto.package, this.options);
+        return getPluginValue(name, this.ref?.proto?.package, this.options);
     }
 
     isExcluded() {

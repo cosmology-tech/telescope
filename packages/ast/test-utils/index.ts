@@ -74,8 +74,8 @@ export const prepareContext = (store: ProtoStore, protoFile: string) => {
     };
 };
 
-export const getGenericParseContext = () => {
-    const context = new GenericParseContext(null, null, defaultTelescopeOptions);
+export const getGenericParseContext = (options?: TelescopeOptions) => {
+    const context = new GenericParseContext(null, null, options ?? defaultTelescopeOptions);
     return context;
 };
 
