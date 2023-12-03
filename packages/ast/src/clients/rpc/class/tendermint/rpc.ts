@@ -529,7 +529,12 @@ export const createRpcClientInterface = (
         .map((key) => {
             const methodName = camelRpcMethods ? camel(key) : key;
 
-            const implementType = getServiceImplement(service.name, methodName, serviceImplement);
+            const implementType = getServiceImplement(
+              service.name,
+              context.ref.proto.package,
+              methodName,
+              serviceImplement
+            );
 
             const method = service.methods[key];
 
@@ -611,7 +616,12 @@ export const createRpcClientClass = (
         .map(key => {
             const name = camelRpcMethods ? camel(key) : key;
 
-            const implementType = getServiceImplement(service.name, name, serviceImplement);
+            const implementType = getServiceImplement(
+              service.name,
+              context.ref.proto.package,
+              name,
+              serviceImplement
+            );
 
             const method = service.methods[key];
             switch (implementType) {

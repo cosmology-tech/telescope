@@ -1,3 +1,4 @@
+import minimatch from "minimatch";
 import {
   TelescopeOptions,
   TelescopeOption,
@@ -103,6 +104,10 @@ export const buildImports = (imports: ImportUsage[]) => {
   });
 };
 
+// https://github.com/isaacs/minimatch/blob/main/src/index.ts#L61
+// Optimized checking for the most common glob patterns.
+const globPattern = /\*+([^+@!?\*\[\(]*)/;
+
 export const getServiceImplement = (
   serviceName:
     | "Msg"
@@ -111,12 +116,46 @@ export const getServiceImplement = (
     | "ReflectionService"
     | "ABCIApplication"
     | string,
+  packagePath: string,
   methodName: string,
   serviceImplement?: {
-    [key: 'Msg' | 'Query' | 'Service' | 'ReflectionService' | 'ABCIApplication' | string]: 'Query' | 'Tx' | string;
+    [
+      key:
+        | "Msg"
+        | "Query"
+        | "Service"
+        | "ReflectionService"
+        | "ABCIApplication"
+        | string
+    ]: {
+      include?: {
+        patterns?: string[];
+      };
+      type: "Query" | "Tx" | string;
+    };
   }
 ) => {
-  return serviceImplement
-    ? serviceImplement[serviceName] ?? serviceImplement[methodName]
-    : undefined;
+  if (serviceImplement) {
+    const implement = serviceImplement[serviceName];
+    if (implement) {
+      const methodNameWithPkg = `${packagePath}.${methodName}`;
+
+      const isMatching =
+        !implement.include?.patterns?.length ||
+        implement.include.patterns.some((pattern) => {
+          if (!globPattern.test(pattern)) {
+            return methodNameWithPkg === pattern;
+          }
+          return minimatch(methodNameWithPkg, pattern);
+        });
+
+      if (isMatching) {
+        return implement.type;
+      } else {
+        return undefined;
+      }
+    }
+  }
+
+  return undefined;
 };

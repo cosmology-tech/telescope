@@ -335,6 +335,8 @@ See [LCD Clients](#lcd-clients) for more info.
 | `rpcClients.scoped`            | will generate factory of scoped RPC Clients                             | `undefined`                   |
 | `rpcClients.scopedIsExclusive` | will allow both scoped bundles and all RPC Clients                      | `true`                        |
 | `rpcClients.enabledServices`   | which services to enable                                                | [`Msg`,`Query`,`Service`]     |
+| `rpcClients.instantOps` |        will generate instant rpc operations in the file `service-ops.ts` under root folder, which contains customized classes having selected rpc methods    | `undefined`                        |
+| `rpcClients.serviceImplement` |     assign implement type of rpc methods, `Query` or `Tx`, by setting patterns under service types.       | `undefined`                        |
 
 See [RPC Clients](#rpc-clients) for more info.
 

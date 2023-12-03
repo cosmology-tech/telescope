@@ -26,6 +26,11 @@ export declare const buildImports: (imports: ImportUsage[]) => {
         value: string;
     };
 }[];
-export declare const getServiceImplement: (serviceName: "Msg" | "Query" | "Service" | "ReflectionService" | "ABCIApplication" | string, methodName: string, serviceImplement?: {
-    [key: string]: string;
+export declare const getServiceImplement: (serviceName: "Msg" | "Query" | "Service" | "ReflectionService" | "ABCIApplication" | string, packagePath: string, methodName: string, serviceImplement?: {
+    [key: string]: {
+        include?: {
+            patterns?: string[];
+        };
+        type: "Query" | "Tx" | string;
+    };
 }) => string;

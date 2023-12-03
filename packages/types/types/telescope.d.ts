@@ -142,7 +142,12 @@ interface TelescopeOpts {
         scopedIsExclusive?: boolean;
         bundle?: boolean;
         serviceImplement?: {
-            [key: 'Msg' | 'Query' | 'Service' | 'ReflectionService' | 'ABCIApplication' | string]: 'Query' | 'Tx' | string;
+            [key: "Msg" | "Query" | "Service" | "ReflectionService" | "ABCIApplication" | string]: {
+                include?: {
+                    patterns?: string[];
+                };
+                type: "Query" | "Tx" | string;
+            };
         };
         enabledServices?: ('Msg' | 'Query' | 'Service' | 'ReflectionService' | 'ABCIApplication' | string)[];
         scoped?: {

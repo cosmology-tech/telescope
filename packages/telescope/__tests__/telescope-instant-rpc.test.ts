@@ -75,7 +75,7 @@ const options: TelescopeOptions = {
       useExact: false,
       timestamp: "date",
       duration: "duration",
-      useTelescopeGeneratedType: true
+      useTelescopeGeneratedType: true,
     },
   },
 
@@ -152,7 +152,9 @@ const options: TelescopeOptions = {
       },
     ],
     serviceImplement: {
-      "Msg": "Tx"
+      Msg: {
+        type: "Tx",
+      },
     },
     enabledServices: [
       "Msg",
@@ -171,7 +173,11 @@ const options: TelescopeOptions = {
       {
         className: "CosmosAuthAccount",
         include: {
-          patterns: ["cosmos.auth.**.*account*", "cosmos.auth.**.*Account*", "cosmos.gov.v1beta1.**"],
+          patterns: [
+            "cosmos.auth.**.*account*",
+            "cosmos.auth.**.*Account*",
+            "cosmos.gov.v1beta1.**",
+          ],
         },
         nameMapping: {
           All: {
@@ -180,7 +186,7 @@ const options: TelescopeOptions = {
           Tx: {
             txDeposit: "cosmos.gov.v1beta1.deposit",
             txVote: "cosmos.gov.v1beta1.vote",
-          }
+          },
         },
       },
     ],
