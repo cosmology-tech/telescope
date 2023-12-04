@@ -43,7 +43,7 @@ export interface Msg {
   /** Send defines a method for sending coins from one account to another account. */
   send(request: MsgSend): Promise<MsgSendResponse>;
   /** MultiSend defines a method for sending coins from some accounts to other accounts. */
-  multiSend(request: BroadcastTxReq<MsgMultiSend>): Promise<BroadcastTxRes<MsgMultiSendResponse>>;
+  multiSend(request: BroadcastTxReq<MsgMultiSend>): Promise<DeliverTxResponse>;
 }"
 `;
 
@@ -60,16 +60,12 @@ exports[`RPC Msg Query mixed implement Client 2`] = `
     const promise = this.rpc.request("cosmos.bank.v1beta1.Msg", "Send", data);
     return promise.then(data => MsgSendResponse.decode(new BinaryReader(data)));
   }
-  multiSend(request: BroadcastTxReq<MsgMultiSend>): Promise<BroadcastTxRes<MsgMultiSendResponse>> {
+  multiSend(request: BroadcastTxReq<MsgMultiSend>): Promise<DeliverTxResponse> {
     const data = [{
       typeUrl: MsgMultiSend.typeUrl,
       value: request.message
     }];
-    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
-    return promise.then(data => ({
-      txResponse: data,
-      response: data && data.msgResponses?.length ? MsgMultiSendResponse.decode(data.msgResponses[0].value) : undefined
-    }));
+    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
   }
 }"
 `;
@@ -78,9 +74,9 @@ exports[`RPC Msg implement Client 1`] = `
 "/** Msg defines the bank Msg service. */
 export interface Msg {
   /** Send defines a method for sending coins from one account to another account. */
-  send(request: BroadcastTxReq<MsgSend>): Promise<BroadcastTxRes<MsgSendResponse>>;
+  send(request: BroadcastTxReq<MsgSend>): Promise<DeliverTxResponse>;
   /** MultiSend defines a method for sending coins from some accounts to other accounts. */
-  multiSend(request: BroadcastTxReq<MsgMultiSend>): Promise<BroadcastTxRes<MsgMultiSendResponse>>;
+  multiSend(request: BroadcastTxReq<MsgMultiSend>): Promise<DeliverTxResponse>;
 }"
 `;
 
@@ -92,27 +88,19 @@ exports[`RPC Msg implement Client 2`] = `
     this.send = this.send.bind(this);
     this.multiSend = this.multiSend.bind(this);
   }
-  send(request: BroadcastTxReq<MsgSend>): Promise<BroadcastTxRes<MsgSendResponse>> {
+  send(request: BroadcastTxReq<MsgSend>): Promise<DeliverTxResponse> {
     const data = [{
       typeUrl: MsgSend.typeUrl,
       value: request.message
     }];
-    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
-    return promise.then(data => ({
-      txResponse: data,
-      response: data && data.msgResponses?.length ? MsgSendResponse.decode(data.msgResponses[0].value) : undefined
-    }));
+    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
   }
-  multiSend(request: BroadcastTxReq<MsgMultiSend>): Promise<BroadcastTxRes<MsgMultiSendResponse>> {
+  multiSend(request: BroadcastTxReq<MsgMultiSend>): Promise<DeliverTxResponse> {
     const data = [{
       typeUrl: MsgMultiSend.typeUrl,
       value: request.message
     }];
-    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
-    return promise.then(data => ({
-      txResponse: data,
-      response: data && data.msgResponses?.length ? MsgMultiSendResponse.decode(data.msgResponses[0].value) : undefined
-    }));
+    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
   }
 }"
 `;

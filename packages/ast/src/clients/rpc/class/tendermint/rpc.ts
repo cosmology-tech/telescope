@@ -59,12 +59,7 @@ const rpcTxMethodDefinition = (
     )
   );
   const responseType = t.tsTypeReference(
-    t.identifier("BroadcastTxRes"),
-    t.tsTypeParameterInstantiation(
-      [
-        t.tsTypeReference(t.identifier(svc.responseType))
-      ]
-    )
+    t.identifier("DeliverTxResponse"),
   );
 
   const methodArgs: t.Identifier = identifier(
@@ -335,12 +330,7 @@ const rpcTxClassMethod = (
     )
   );
   const responseType = t.tsTypeReference(
-    t.identifier("BroadcastTxRes"),
-    t.tsTypeParameterInstantiation(
-      [
-        t.tsTypeReference(t.identifier(svc.responseType))
-      ]
-    )
+    t.identifier("DeliverTxResponse"),
   );
   const comment = svc.comment ?? svc.name;
 
@@ -372,71 +362,26 @@ const rpcTxClassMethod = (
     ]),
 
     // generate:
-    // const promise = this.rpc.signAndBroadcast!(
+    // return this.rpc.signAndBroadcast!(
     //   request.signerAddress,
     //   data,
     //   request.fee,
     //   request.memo
     // );
-    t.variableDeclaration('const', [
-      t.variableDeclarator(
-        t.identifier('promise'),
-        t.callExpression(
-          t.memberExpression(
-            t.memberExpression(
-              t.thisExpression(),
-              t.identifier('rpc')
-            ),
-            t.identifier('signAndBroadcast!')
-          ),
-          [
-            t.memberExpression(t.identifier('request'), t.identifier('signerAddress')),
-            t.identifier('data'),
-            t.memberExpression(t.identifier('request'), t.identifier('fee')),
-            t.memberExpression(t.identifier('request'), t.identifier('memo'))
-          ]
-        )
-      )
-    ]),
-
-    // generate:
-    // return promise.then((data) => ({
-    //   txResponse: data,
-    //   response:
-    //     data && data.msgResponses?.length
-    //       ? MsgCreateValidatorResponse.decode(data.msgResponses[0].value)
-    //       : undefined,
-    // }));
     t.returnStatement(
       t.callExpression(
-        t.memberExpression(t.identifier('promise'), t.identifier('then')),
+        t.memberExpression(
+          t.memberExpression(
+            t.thisExpression(),
+            t.identifier('rpc')
+          ),
+          t.identifier('signAndBroadcast!')
+        ),
         [
-          t.arrowFunctionExpression(
-            [t.identifier('data')],
-            t.objectExpression([
-              t.objectProperty(t.identifier('txResponse'), t.identifier('data')),
-              t.objectProperty(
-                t.identifier('response'),
-                t.conditionalExpression(
-                  t.logicalExpression(
-                    '&&',
-                    t.identifier('data'),
-                    t.optionalMemberExpression(
-                      t.memberExpression(t.identifier('data'), t.identifier('msgResponses')),
-                      t.identifier('length'),
-                      false,
-                      true
-                    )
-                  ),
-                  t.callExpression(
-                    t.memberExpression(t.identifier(svc.responseType), t.identifier('decode')),
-                    [t.memberExpression(t.memberExpression(t.memberExpression(t.identifier('data'), t.identifier('msgResponses')), t.numericLiteral(0), true), t.identifier('value'))]
-                  ),
-                  t.identifier('undefined')
-                )
-              )
-            ])
-          )
+          t.memberExpression(t.identifier('request'), t.identifier('signerAddress')),
+          t.identifier('data'),
+          t.memberExpression(t.identifier('request'), t.identifier('fee')),
+          t.memberExpression(t.identifier('request'), t.identifier('memo'))
         ]
       )
     )
@@ -549,7 +494,7 @@ export const createRpcClientInterface = (
             switch (implementType) {
               case "Tx":
                 context.addUtil("BroadcastTxReq");
-                context.addUtil("BroadcastTxRes");
+                context.addUtil("DeliverTxResponse");
 
                 return rpcTxMethodDefinition(
                   methodAlias,
@@ -627,7 +572,7 @@ export const createRpcClientClass = (
             switch (implementType) {
               case "Tx":
                 context.addUtil("BroadcastTxReq");
-                context.addUtil("BroadcastTxRes");
+                context.addUtil("DeliverTxResponse");
 
                 return rpcTxClassMethod(
                   context,

@@ -54,6 +54,7 @@ export const UTILS = {
   TxRpc: '__types__',
   BroadcastTxReq: '__types__',
   BroadcastTxRes: '__types__',
+  DeliverTxResponse: '__types__',
   grpc: '@improbable-eng/grpc-web',
   setPaginationParams: '__helpers__',
   SigningStargateClient: '@cosmjs/stargate',

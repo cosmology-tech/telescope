@@ -1,6 +1,6 @@
 import { Grant, GrantSDKType } from "./authz";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { BroadcastTxReq, BroadcastTxRes, TxRpc } from "../../../types";
+import { BroadcastTxReq, DeliverTxResponse, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgGrant, MsgGrantSDKType, MsgGrantResponse, MsgGrantResponseSDKType, MsgExec, MsgExecSDKType, MsgExecResponse, MsgExecResponseSDKType, MsgRevoke, MsgRevokeSDKType, MsgRevokeResponse, MsgRevokeResponseSDKType } from "./tx";
 /** Msg defines the authz Msg service. */
@@ -11,18 +11,18 @@ export interface Msg {
    * for the given (granter, grantee, Authorization) triple, then the grant
    * will be overwritten.
    */
-  grant(request: BroadcastTxReq<MsgGrant>): Promise<BroadcastTxRes<MsgGrantResponse>>;
+  grant(request: BroadcastTxReq<MsgGrant>): Promise<DeliverTxResponse>;
   /**
    * Exec attempts to execute the provided messages using
    * authorizations granted to the grantee. Each message should have only
    * one signer corresponding to the granter of the authorization.
    */
-  exec(request: BroadcastTxReq<MsgExec>): Promise<BroadcastTxRes<MsgExecResponse>>;
+  exec(request: BroadcastTxReq<MsgExec>): Promise<DeliverTxResponse>;
   /**
    * Revoke revokes any authorization corresponding to the provided method name on the
    * granter's account that has been granted to the grantee.
    */
-  revoke(request: BroadcastTxReq<MsgRevoke>): Promise<BroadcastTxRes<MsgRevokeResponse>>;
+  revoke(request: BroadcastTxReq<MsgRevoke>): Promise<DeliverTxResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -33,43 +33,31 @@ export class MsgClientImpl implements Msg {
    account with the provided expiration time. If there is already a grant
    for the given (granter, grantee, Authorization) triple, then the grant
    will be overwritten. */
-  grant = async (request: BroadcastTxReq<MsgGrant>): Promise<BroadcastTxRes<MsgGrantResponse>> => {
+  grant = async (request: BroadcastTxReq<MsgGrant>): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgGrant.typeUrl,
       value: request.message
     }];
-    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
-    return promise.then(data => ({
-      txResponse: data,
-      response: data && data.msgResponses?.length ? MsgGrantResponse.decode(data.msgResponses[0].value) : undefined
-    }));
+    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
   };
   /* Exec attempts to execute the provided messages using
    authorizations granted to the grantee. Each message should have only
    one signer corresponding to the granter of the authorization. */
-  exec = async (request: BroadcastTxReq<MsgExec>): Promise<BroadcastTxRes<MsgExecResponse>> => {
+  exec = async (request: BroadcastTxReq<MsgExec>): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgExec.typeUrl,
       value: request.message
     }];
-    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
-    return promise.then(data => ({
-      txResponse: data,
-      response: data && data.msgResponses?.length ? MsgExecResponse.decode(data.msgResponses[0].value) : undefined
-    }));
+    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
   };
   /* Revoke revokes any authorization corresponding to the provided method name on the
    granter's account that has been granted to the grantee. */
-  revoke = async (request: BroadcastTxReq<MsgRevoke>): Promise<BroadcastTxRes<MsgRevokeResponse>> => {
+  revoke = async (request: BroadcastTxReq<MsgRevoke>): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgRevoke.typeUrl,
       value: request.message
     }];
-    const promise = this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
-    return promise.then(data => ({
-      txResponse: data,
-      response: data && data.msgResponses?.length ? MsgRevokeResponse.decode(data.msgResponses[0].value) : undefined
-    }));
+    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
   };
 }
 export const createClientImpl = (rpc: TxRpc) => {

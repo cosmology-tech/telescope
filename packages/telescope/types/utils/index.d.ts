@@ -52,6 +52,7 @@ export declare const UTILS: {
     TxRpc: string;
     BroadcastTxReq: string;
     BroadcastTxRes: string;
+    DeliverTxResponse: string;
     grpc: string;
     setPaginationParams: string;
     SigningStargateClient: string;
