@@ -838,6 +838,95 @@ main().then(() => {
 })
 ```
 
+## Instant RPC methods
+
+Using instantOps option to expose instant RPC methods.
+
+For example, for this config:
+```
+    instantOps: [
+      {
+        className: "OsmosisClaim",
+        include: {
+          patterns: ["osmosis.**.*claim*"],
+        },
+      },
+      {
+        className: "CosmosAuthAccount",
+        include: {
+          patterns: [
+            "cosmos.auth.**.*account*",
+            "cosmos.auth.**.*Account*",
+            "cosmos.gov.v1beta1.**",
+          ],
+        },
+        nameMapping: {
+          // name mapping rule for both Msg and Query methods.
+          // moduleAccounts will be renamed to authModuleAccounts in generated class.
+          All: {
+            authModuleAccounts: "cosmos.auth.v1beta1.moduleAccounts",
+          },
+          // name mapping rule for Msg methods.
+          Tx: {
+            // deposit method under Msg will be renamed to txDeposit in generated class. While deposit method under Query will remain the same.
+            txDeposit: "cosmos.gov.v1beta1.deposit",
+            // Same for vote method.
+            txVote: "cosmos.gov.v1beta1.vote",
+          },
+        },
+      },
+    ],
+```
+
+There'll be an extra file generated in the root folder called service-ops.ts:
+```
+export interface OsmosisClaim extends _OsmosisClaimV1beta1Queryrpc.OsmosisClaim {}
+export class OsmosisClaim {
+  rpc: TxRpc;
+  init(rpc: TxRpc) {
+    this.rpc = rpc;
+    this.claimRecord = _OsmosisClaimV1beta1Queryrpc.createClientImpl(rpc).claimRecord;
+    this.claimableForAction = _OsmosisClaimV1beta1Queryrpc.createClientImpl(rpc).claimableForAction;
+  }
+}
+export interface CosmosAuthAccount extends _CosmosAuthV1beta1Queryrpc.CosmosAuthAccount, _CosmosGovV1beta1Queryrpc.CosmosAuthAccount, _CosmosGovV1beta1Txrpc.CosmosAuthAccount {}
+export class CosmosAuthAccount {
+  rpc: TxRpc;
+  init(rpc: TxRpc) {
+    this.rpc = rpc;
+    this.accounts = _CosmosAuthV1beta1Queryrpc.createClientImpl(rpc).accounts;
+    this.account = _CosmosAuthV1beta1Queryrpc.createClientImpl(rpc).account;
+
+    // moduleAccounts has been renamed to authModuleAccounts as the nameMapping in settings.
+    this.authModuleAccounts = _CosmosAuthV1beta1Queryrpc.createClientImpl(rpc).moduleAccounts;
+
+    this.proposal = _CosmosGovV1beta1Queryrpc.createClientImpl(rpc).proposal;
+    this.proposals = _CosmosGovV1beta1Queryrpc.createClientImpl(rpc).proposals;
+
+    // vote under Query remains the same.
+    this.vote = _CosmosGovV1beta1Queryrpc.createClientImpl(rpc).vote;
+
+    this.votes = _CosmosGovV1beta1Queryrpc.createClientImpl(rpc).votes;
+    this.params = _CosmosGovV1beta1Queryrpc.createClientImpl(rpc).params;
+
+    // deposit under Query remains the same.
+    this.deposit = _CosmosGovV1beta1Queryrpc.createClientImpl(rpc).deposit;
+
+    this.deposits = _CosmosGovV1beta1Queryrpc.createClientImpl(rpc).deposits;
+    this.tallyResult = _CosmosGovV1beta1Queryrpc.createClientImpl(rpc).tallyResult;
+    this.submitProposal = _CosmosGovV1beta1Txrpc.createClientImpl(rpc).submitProposal;
+
+    //same as txDeposite for vote here.
+    this.txVote = _CosmosGovV1beta1Txrpc.createClientImpl(rpc).vote;
+
+    this.voteWeighted = _CosmosGovV1beta1Txrpc.createClientImpl(rpc).voteWeighted;
+
+    // deposit method under Msg will be renamed to txDeposit in generated class. While deposit method under Query will remain the same.
+    this.txDeposit = _CosmosGovV1beta1Txrpc.createClientImpl(rpc).deposit;
+  }
+}
+```
+
 ## Manually registering types
 
 This example is with `osmosis` module in `osmojs`, but it is the same pattern for any module.
