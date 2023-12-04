@@ -82,6 +82,15 @@ export interface MsgData {
   data: Uint8Array;
 }
 
+export interface Attribute {
+  key: string;
+  value: string;
+}
+export interface Event {
+  type: string;
+  attributes: Attribute[];
+}
+
 /**
  * The response after successfully broadcasting a transaction.
  * Success or failure refer to the execution result.
@@ -134,8 +143,8 @@ export interface TxRpc {
 export interface BroadcastTxReq<T> {
   signerAddress: string;
   message: T;
-  fee: number | StdFee | "auto";
-  memo: string;
+  fee: number | StdFee | "auto" = "auto";
+  memo = "";
 }
 
 export interface BroadcastTxRes<T> {
