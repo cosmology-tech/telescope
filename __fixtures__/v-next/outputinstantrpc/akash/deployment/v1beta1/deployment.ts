@@ -4,7 +4,7 @@ import { GroupSpec, GroupSpecSDKType, GroupID, GroupIDSDKType } from "./group";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, Exact } from "../../../helpers";
-import { DeliverTxResponse, TxRpc } from "../../../types";
+import { DeliverTxResponse, StdFee, TxRpc } from "../../../types";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -1373,57 +1373,57 @@ export class MsgClientImpl implements Msg {
   createDeployment = async (signerAddress: string, message: MsgCreateDeployment, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgCreateDeployment.typeUrl,
-      value: request.message
+      value: message
     }];
-    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return this.rpc.signAndBroadcast!(signerAddress, data, fee, memo);
   };
   /* DepositDeployment deposits more funds into the deployment account */
   depositDeployment = async (signerAddress: string, message: MsgDepositDeployment, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgDepositDeployment.typeUrl,
-      value: request.message
+      value: message
     }];
-    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return this.rpc.signAndBroadcast!(signerAddress, data, fee, memo);
   };
   /* UpdateDeployment defines a method to update a deployment given proper inputs. */
   updateDeployment = async (signerAddress: string, message: MsgUpdateDeployment, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgUpdateDeployment.typeUrl,
-      value: request.message
+      value: message
     }];
-    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return this.rpc.signAndBroadcast!(signerAddress, data, fee, memo);
   };
   /* CloseDeployment defines a method to close a deployment given proper inputs. */
   closeDeployment = async (signerAddress: string, message: MsgCloseDeployment, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgCloseDeployment.typeUrl,
-      value: request.message
+      value: message
     }];
-    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return this.rpc.signAndBroadcast!(signerAddress, data, fee, memo);
   };
   /* CloseGroup defines a method to close a group of a deployment given proper inputs. */
   closeGroup = async (signerAddress: string, message: MsgCloseGroup, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgCloseGroup.typeUrl,
-      value: request.message
+      value: message
     }];
-    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return this.rpc.signAndBroadcast!(signerAddress, data, fee, memo);
   };
   /* PauseGroup defines a method to close a group of a deployment given proper inputs. */
   pauseGroup = async (signerAddress: string, message: MsgPauseGroup, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgPauseGroup.typeUrl,
-      value: request.message
+      value: message
     }];
-    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return this.rpc.signAndBroadcast!(signerAddress, data, fee, memo);
   };
   /* StartGroup defines a method to close a group of a deployment given proper inputs. */
   startGroup = async (signerAddress: string, message: MsgStartGroup, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgStartGroup.typeUrl,
-      value: request.message
+      value: message
     }];
-    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return this.rpc.signAndBroadcast!(signerAddress, data, fee, memo);
   };
 }
 export const createClientImpl = (rpc: TxRpc) => {

@@ -1,5 +1,5 @@
 import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType } from "../balancerPool";
-import { DeliverTxResponse, TxRpc } from "../../../../../types";
+import { DeliverTxResponse, StdFee, TxRpc } from "../../../../../types";
 import { BinaryReader } from "../../../../../binary";
 import { MsgCreateBalancerPool, MsgCreateBalancerPoolSDKType, MsgCreateBalancerPoolResponse, MsgCreateBalancerPoolResponseSDKType } from "./tx";
 export interface Msg {
@@ -14,9 +14,9 @@ export class MsgClientImpl implements Msg {
   createBalancerPool = async (signerAddress: string, message: MsgCreateBalancerPool, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgCreateBalancerPool.typeUrl,
-      value: request.message
+      value: message
     }];
-    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return this.rpc.signAndBroadcast!(signerAddress, data, fee, memo);
   };
 }
 export const createClientImpl = (rpc: TxRpc) => {

@@ -1,6 +1,6 @@
 import { Grant, GrantSDKType } from "./authz";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { DeliverTxResponse, TxRpc } from "../../../types";
+import { DeliverTxResponse, StdFee, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgGrant, MsgGrantSDKType, MsgGrantResponse, MsgGrantResponseSDKType, MsgExec, MsgExecSDKType, MsgExecResponse, MsgExecResponseSDKType, MsgRevoke, MsgRevokeSDKType, MsgRevokeResponse, MsgRevokeResponseSDKType } from "./tx";
 /** Msg defines the authz Msg service. */
@@ -36,9 +36,9 @@ export class MsgClientImpl implements Msg {
   grant = async (signerAddress: string, message: MsgGrant, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgGrant.typeUrl,
-      value: request.message
+      value: message
     }];
-    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return this.rpc.signAndBroadcast!(signerAddress, data, fee, memo);
   };
   /* Exec attempts to execute the provided messages using
    authorizations granted to the grantee. Each message should have only
@@ -46,18 +46,18 @@ export class MsgClientImpl implements Msg {
   exec = async (signerAddress: string, message: MsgExec, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgExec.typeUrl,
-      value: request.message
+      value: message
     }];
-    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return this.rpc.signAndBroadcast!(signerAddress, data, fee, memo);
   };
   /* Revoke revokes any authorization corresponding to the provided method name on the
    granter's account that has been granted to the grantee. */
   revoke = async (signerAddress: string, message: MsgRevoke, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgRevoke.typeUrl,
-      value: request.message
+      value: message
     }];
-    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return this.rpc.signAndBroadcast!(signerAddress, data, fee, memo);
   };
 }
 export const createClientImpl = (rpc: TxRpc) => {

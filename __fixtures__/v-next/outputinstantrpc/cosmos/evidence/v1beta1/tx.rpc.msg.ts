@@ -1,5 +1,5 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { DeliverTxResponse, TxRpc } from "../../../types";
+import { DeliverTxResponse, StdFee, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgSubmitEvidence, MsgSubmitEvidenceSDKType, MsgSubmitEvidenceResponse, MsgSubmitEvidenceResponseSDKType } from "./tx";
 /** Msg defines the evidence Msg service. */
@@ -20,9 +20,9 @@ export class MsgClientImpl implements Msg {
   submitEvidence = async (signerAddress: string, message: MsgSubmitEvidence, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgSubmitEvidence.typeUrl,
-      value: request.message
+      value: message
     }];
-    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return this.rpc.signAndBroadcast!(signerAddress, data, fee, memo);
   };
 }
 export const createClientImpl = (rpc: TxRpc) => {

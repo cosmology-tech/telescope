@@ -1,5 +1,5 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
-import { DeliverTxResponse, TxRpc } from "../../../types";
+import { DeliverTxResponse, StdFee, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgSignProviderAttributes, MsgSignProviderAttributesSDKType, MsgSignProviderAttributesResponse, MsgSignProviderAttributesResponseSDKType, MsgDeleteProviderAttributes, MsgDeleteProviderAttributesSDKType, MsgDeleteProviderAttributesResponse, MsgDeleteProviderAttributesResponseSDKType } from "./audit";
 /** Msg defines the provider Msg service */
@@ -18,17 +18,17 @@ export class MsgClientImpl implements Msg {
   signProviderAttributes = async (signerAddress: string, message: MsgSignProviderAttributes, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgSignProviderAttributes.typeUrl,
-      value: request.message
+      value: message
     }];
-    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return this.rpc.signAndBroadcast!(signerAddress, data, fee, memo);
   };
   /* DeleteProviderAttributes defines a method that deletes provider attributes */
   deleteProviderAttributes = async (signerAddress: string, message: MsgDeleteProviderAttributes, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgDeleteProviderAttributes.typeUrl,
-      value: request.message
+      value: message
     }];
-    return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
+    return this.rpc.signAndBroadcast!(signerAddress, data, fee, memo);
   };
 }
 export const createClientImpl = (rpc: TxRpc) => {
