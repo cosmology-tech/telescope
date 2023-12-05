@@ -1,12 +1,12 @@
 import { QueryCondition, QueryConditionSDKType } from "../lockup/lock";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
-import { BroadcastTxReq, DeliverTxResponse, TxRpc } from "../../types";
+import { DeliverTxResponse, TxRpc } from "../../types";
 import { BinaryReader } from "../../binary";
 import { MsgCreateGauge, MsgCreateGaugeSDKType, MsgCreateGaugeResponse, MsgCreateGaugeResponseSDKType, MsgAddToGauge, MsgAddToGaugeSDKType, MsgAddToGaugeResponse, MsgAddToGaugeResponseSDKType } from "./tx";
 export interface Msg {
-  createGauge(request: BroadcastTxReq<MsgCreateGauge>): Promise<DeliverTxResponse>;
-  addToGauge(request: BroadcastTxReq<MsgAddToGauge>): Promise<DeliverTxResponse>;
+  createGauge(signerAddress: string, message: MsgCreateGauge, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  addToGauge(signerAddress: string, message: MsgAddToGauge, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -14,7 +14,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* CreateGauge */
-  createGauge = async (request: BroadcastTxReq<MsgCreateGauge>): Promise<DeliverTxResponse> => {
+  createGauge = async (signerAddress: string, message: MsgCreateGauge, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgCreateGauge.typeUrl,
       value: request.message
@@ -22,7 +22,7 @@ export class MsgClientImpl implements Msg {
     return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
   };
   /* AddToGauge */
-  addToGauge = async (request: BroadcastTxReq<MsgAddToGauge>): Promise<DeliverTxResponse> => {
+  addToGauge = async (signerAddress: string, message: MsgAddToGauge, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgAddToGauge.typeUrl,
       value: request.message

@@ -113,7 +113,7 @@ export const plugin = (
                 instantOps.forEach((item) => {
                   let nameMapping = {
                     ...swapKeyValue(item.nameMapping?.All ?? {}),
-                    ...swapKeyValue(item.nameMapping?.Tx ?? {})
+                    ...swapKeyValue(item.nameMapping?.Msg ?? {})
                   };
 
                   // get all query methods

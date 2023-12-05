@@ -1,10 +1,10 @@
-import { BroadcastTxReq, DeliverTxResponse, TxRpc } from "../../../types";
+import { DeliverTxResponse, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgSend, MsgSendSDKType, MsgSendResponse, MsgSendResponseSDKType } from "./tx";
 /** Msg defines the nft Msg service. */
 export interface Msg {
   /** Send defines a method to send a nft from one account to another account. */
-  send(request: BroadcastTxReq<MsgSend>): Promise<DeliverTxResponse>;
+  send(signerAddress: string, message: MsgSend, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -12,7 +12,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* Send defines a method to send a nft from one account to another account. */
-  send = async (request: BroadcastTxReq<MsgSend>): Promise<DeliverTxResponse> => {
+  send = async (signerAddress: string, message: MsgSend, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgSend.typeUrl,
       value: request.message

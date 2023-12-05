@@ -171,7 +171,7 @@ interface TelescopeOpts {
                 Query?: {
                     [key: string]: string;
                 };
-                Tx?: {
+                Msg?: {
                     [key: string]: string;
                 };
             };

@@ -43,7 +43,7 @@ export interface Msg {
   /** Send defines a method for sending coins from one account to another account. */
   send(request: MsgSend): Promise<MsgSendResponse>;
   /** MultiSend defines a method for sending coins from some accounts to other accounts. */
-  multiSend(request: BroadcastTxReq<MsgMultiSend>): Promise<DeliverTxResponse>;
+  multiSend(signerAddress: string, message: MsgMultiSend, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
 }"
 `;
 
@@ -60,7 +60,7 @@ exports[`RPC Msg Query mixed implement Client 2`] = `
     const promise = this.rpc.request("cosmos.bank.v1beta1.Msg", "Send", data);
     return promise.then(data => MsgSendResponse.decode(new BinaryReader(data)));
   }
-  multiSend(request: BroadcastTxReq<MsgMultiSend>): Promise<DeliverTxResponse> {
+  multiSend(signerAddress: string, message: MsgMultiSend, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> {
     const data = [{
       typeUrl: MsgMultiSend.typeUrl,
       value: request.message
@@ -74,9 +74,9 @@ exports[`RPC Msg implement Client 1`] = `
 "/** Msg defines the bank Msg service. */
 export interface Msg {
   /** Send defines a method for sending coins from one account to another account. */
-  send(request: BroadcastTxReq<MsgSend>): Promise<DeliverTxResponse>;
+  send(signerAddress: string, message: MsgSend, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
   /** MultiSend defines a method for sending coins from some accounts to other accounts. */
-  multiSend(request: BroadcastTxReq<MsgMultiSend>): Promise<DeliverTxResponse>;
+  multiSend(signerAddress: string, message: MsgMultiSend, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
 }"
 `;
 
@@ -88,14 +88,14 @@ exports[`RPC Msg implement Client 2`] = `
     this.send = this.send.bind(this);
     this.multiSend = this.multiSend.bind(this);
   }
-  send(request: BroadcastTxReq<MsgSend>): Promise<DeliverTxResponse> {
+  send(signerAddress: string, message: MsgSend, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> {
     const data = [{
       typeUrl: MsgSend.typeUrl,
       value: request.message
     }];
     return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
   }
-  multiSend(request: BroadcastTxReq<MsgMultiSend>): Promise<DeliverTxResponse> {
+  multiSend(signerAddress: string, message: MsgMultiSend, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> {
     const data = [{
       typeUrl: MsgMultiSend.typeUrl,
       value: request.message

@@ -139,16 +139,4 @@ export interface TxRpc {
     memo: string
   ): Promise<DeliverTxResponse>;
 }
-
-export interface BroadcastTxReq<T> {
-  signerAddress: string;
-  message: T;
-  fee: number | StdFee | "auto" = "auto";
-  memo = "";
-}
-
-export interface BroadcastTxRes<T> {
-  txResponse: DeliverTxResponse;
-  response?: T;
-}
 `;

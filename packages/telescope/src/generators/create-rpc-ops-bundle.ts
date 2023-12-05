@@ -100,7 +100,7 @@ function createRpcOpsAst(
 
   let txNameMapping = {
     ...swapKeyValue(nameMapping?.All ?? {}),
-    ...swapKeyValue(nameMapping?.Tx ?? {})
+    ...swapKeyValue(nameMapping?.Msg ?? {})
   };
 
   let queryNameMapping = {

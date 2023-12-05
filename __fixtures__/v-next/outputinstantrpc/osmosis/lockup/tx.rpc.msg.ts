@@ -1,20 +1,20 @@
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockSDKType } from "./lock";
-import { BroadcastTxReq, DeliverTxResponse, TxRpc } from "../../types";
+import { DeliverTxResponse, TxRpc } from "../../types";
 import { BinaryReader } from "../../binary";
 import { MsgLockTokens, MsgLockTokensSDKType, MsgLockTokensResponse, MsgLockTokensResponseSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllSDKType, MsgBeginUnlockingAllResponse, MsgBeginUnlockingAllResponseSDKType, MsgBeginUnlocking, MsgBeginUnlockingSDKType, MsgBeginUnlockingResponse, MsgBeginUnlockingResponseSDKType, MsgExtendLockup, MsgExtendLockupSDKType, MsgExtendLockupResponse, MsgExtendLockupResponseSDKType, MsgForceUnlock, MsgForceUnlockSDKType, MsgForceUnlockResponse, MsgForceUnlockResponseSDKType } from "./tx";
 /** Msg defines the Msg service. */
 export interface Msg {
   /** LockTokens lock tokens */
-  lockTokens(request: BroadcastTxReq<MsgLockTokens>): Promise<DeliverTxResponse>;
+  lockTokens(signerAddress: string, message: MsgLockTokens, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
   /** BeginUnlockingAll begin unlocking all tokens */
-  beginUnlockingAll(request: BroadcastTxReq<MsgBeginUnlockingAll>): Promise<DeliverTxResponse>;
+  beginUnlockingAll(signerAddress: string, message: MsgBeginUnlockingAll, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
   /** MsgBeginUnlocking begins unlocking tokens by lock ID */
-  beginUnlocking(request: BroadcastTxReq<MsgBeginUnlocking>): Promise<DeliverTxResponse>;
+  beginUnlocking(signerAddress: string, message: MsgBeginUnlocking, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
   /** MsgEditLockup edits the existing lockups by lock ID */
-  extendLockup(request: BroadcastTxReq<MsgExtendLockup>): Promise<DeliverTxResponse>;
-  forceUnlock(request: BroadcastTxReq<MsgForceUnlock>): Promise<DeliverTxResponse>;
+  extendLockup(signerAddress: string, message: MsgExtendLockup, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  forceUnlock(signerAddress: string, message: MsgForceUnlock, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -22,7 +22,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* LockTokens lock tokens */
-  lockTokens = async (request: BroadcastTxReq<MsgLockTokens>): Promise<DeliverTxResponse> => {
+  lockTokens = async (signerAddress: string, message: MsgLockTokens, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgLockTokens.typeUrl,
       value: request.message
@@ -30,7 +30,7 @@ export class MsgClientImpl implements Msg {
     return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
   };
   /* BeginUnlockingAll begin unlocking all tokens */
-  beginUnlockingAll = async (request: BroadcastTxReq<MsgBeginUnlockingAll>): Promise<DeliverTxResponse> => {
+  beginUnlockingAll = async (signerAddress: string, message: MsgBeginUnlockingAll, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgBeginUnlockingAll.typeUrl,
       value: request.message
@@ -38,7 +38,7 @@ export class MsgClientImpl implements Msg {
     return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
   };
   /* MsgBeginUnlocking begins unlocking tokens by lock ID */
-  beginUnlocking = async (request: BroadcastTxReq<MsgBeginUnlocking>): Promise<DeliverTxResponse> => {
+  beginUnlocking = async (signerAddress: string, message: MsgBeginUnlocking, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgBeginUnlocking.typeUrl,
       value: request.message
@@ -46,7 +46,7 @@ export class MsgClientImpl implements Msg {
     return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
   };
   /* MsgEditLockup edits the existing lockups by lock ID */
-  extendLockup = async (request: BroadcastTxReq<MsgExtendLockup>): Promise<DeliverTxResponse> => {
+  extendLockup = async (signerAddress: string, message: MsgExtendLockup, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgExtendLockup.typeUrl,
       value: request.message
@@ -54,7 +54,7 @@ export class MsgClientImpl implements Msg {
     return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
   };
   /* ForceUnlock */
-  forceUnlock = async (request: BroadcastTxReq<MsgForceUnlock>): Promise<DeliverTxResponse> => {
+  forceUnlock = async (signerAddress: string, message: MsgForceUnlock, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgForceUnlock.typeUrl,
       value: request.message

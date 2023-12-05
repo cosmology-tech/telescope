@@ -183,7 +183,7 @@ const options: TelescopeOptions = {
           All: {
             authModuleAccounts: "cosmos.auth.v1beta1.moduleAccounts",
           },
-          Tx: {
+          Msg: {
             txDeposit: "cosmos.gov.v1beta1.deposit",
             txVote: "cosmos.gov.v1beta1.vote",
           },
