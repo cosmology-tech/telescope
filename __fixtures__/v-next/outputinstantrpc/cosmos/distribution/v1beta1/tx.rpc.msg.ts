@@ -1,5 +1,5 @@
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
-import { BroadcastTxReq, DeliverTxResponse, TxRpc } from "../../../types";
+import { DeliverTxResponse, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgSetWithdrawAddress, MsgSetWithdrawAddressSDKType, MsgSetWithdrawAddressResponse, MsgSetWithdrawAddressResponseSDKType, MsgWithdrawDelegatorReward, MsgWithdrawDelegatorRewardSDKType, MsgWithdrawDelegatorRewardResponse, MsgWithdrawDelegatorRewardResponseSDKType, MsgWithdrawValidatorCommission, MsgWithdrawValidatorCommissionSDKType, MsgWithdrawValidatorCommissionResponse, MsgWithdrawValidatorCommissionResponseSDKType, MsgFundCommunityPool, MsgFundCommunityPoolSDKType, MsgFundCommunityPoolResponse, MsgFundCommunityPoolResponseSDKType } from "./tx";
 /** Msg defines the distribution Msg service. */
@@ -8,22 +8,22 @@ export interface Msg {
    * SetWithdrawAddress defines a method to change the withdraw address
    * for a delegator (or validator self-delegation).
    */
-  setWithdrawAddress(request: BroadcastTxReq<MsgSetWithdrawAddress>): Promise<DeliverTxResponse>;
+  setWithdrawAddress(signerAddress: string, message: MsgSetWithdrawAddress, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
   /**
    * WithdrawDelegatorReward defines a method to withdraw rewards of delegator
    * from a single validator.
    */
-  withdrawDelegatorReward(request: BroadcastTxReq<MsgWithdrawDelegatorReward>): Promise<DeliverTxResponse>;
+  withdrawDelegatorReward(signerAddress: string, message: MsgWithdrawDelegatorReward, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
   /**
    * WithdrawValidatorCommission defines a method to withdraw the
    * full commission to the validator address.
    */
-  withdrawValidatorCommission(request: BroadcastTxReq<MsgWithdrawValidatorCommission>): Promise<DeliverTxResponse>;
+  withdrawValidatorCommission(signerAddress: string, message: MsgWithdrawValidatorCommission, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
   /**
    * FundCommunityPool defines a method to allow an account to directly
    * fund the community pool.
    */
-  fundCommunityPool(request: BroadcastTxReq<MsgFundCommunityPool>): Promise<DeliverTxResponse>;
+  fundCommunityPool(signerAddress: string, message: MsgFundCommunityPool, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -32,7 +32,7 @@ export class MsgClientImpl implements Msg {
   }
   /* SetWithdrawAddress defines a method to change the withdraw address
    for a delegator (or validator self-delegation). */
-  setWithdrawAddress = async (request: BroadcastTxReq<MsgSetWithdrawAddress>): Promise<DeliverTxResponse> => {
+  setWithdrawAddress = async (signerAddress: string, message: MsgSetWithdrawAddress, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgSetWithdrawAddress.typeUrl,
       value: request.message
@@ -41,7 +41,7 @@ export class MsgClientImpl implements Msg {
   };
   /* WithdrawDelegatorReward defines a method to withdraw rewards of delegator
    from a single validator. */
-  withdrawDelegatorReward = async (request: BroadcastTxReq<MsgWithdrawDelegatorReward>): Promise<DeliverTxResponse> => {
+  withdrawDelegatorReward = async (signerAddress: string, message: MsgWithdrawDelegatorReward, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgWithdrawDelegatorReward.typeUrl,
       value: request.message
@@ -50,7 +50,7 @@ export class MsgClientImpl implements Msg {
   };
   /* WithdrawValidatorCommission defines a method to withdraw the
    full commission to the validator address. */
-  withdrawValidatorCommission = async (request: BroadcastTxReq<MsgWithdrawValidatorCommission>): Promise<DeliverTxResponse> => {
+  withdrawValidatorCommission = async (signerAddress: string, message: MsgWithdrawValidatorCommission, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgWithdrawValidatorCommission.typeUrl,
       value: request.message
@@ -59,7 +59,7 @@ export class MsgClientImpl implements Msg {
   };
   /* FundCommunityPool defines a method to allow an account to directly
    fund the community pool. */
-  fundCommunityPool = async (request: BroadcastTxReq<MsgFundCommunityPool>): Promise<DeliverTxResponse> => {
+  fundCommunityPool = async (signerAddress: string, message: MsgFundCommunityPool, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgFundCommunityPool.typeUrl,
       value: request.message

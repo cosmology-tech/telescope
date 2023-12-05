@@ -50,31 +50,34 @@ const rpcTxMethodDefinition = (
   trailingComments?: t.CommentBlock[],
   leadingComments?: t.CommentBlock[],
 ) => {
-  const requestType = t.tsTypeReference(
-    t.identifier("BroadcastTxReq"),
-    t.tsTypeParameterInstantiation(
-      [
-        t.tsTypeReference(t.identifier(svc.requestType))
-      ]
-    )
-  );
+  const requestType = svc.requestType;
   const responseType = t.tsTypeReference(
     t.identifier("DeliverTxResponse"),
   );
 
-  const methodArgs: t.Identifier = identifier(
-      'request',
+  const methodArgs: t.Identifier[] = [
+    identifier("signerAddress", t.tsTypeAnnotation(t.tsStringKeyword())),
+    identifier(
+      "message",
+      t.tsTypeAnnotation(t.tsTypeReference(t.identifier(requestType)))
+    ),
+    identifier(
+      "fee",
       t.tsTypeAnnotation(
-        requestType
+        t.tsUnionType([
+          t.tsNumberKeyword(),
+          t.tsTypeReference(t.identifier("StdFee")),
+          t.tsLiteralType(t.stringLiteral("auto")),
+        ])
       )
-  );
+    ),
+    identifier("memo", t.tsTypeAnnotation(t.tsStringKeyword())),
+  ];
 
   return tsMethodSignature(
       t.identifier(name),
       null,
-      [
-          methodArgs
-      ],
+      methodArgs,
       returnReponseType(responseType),
       trailingComments,
       leadingComments
@@ -321,25 +324,36 @@ const rpcTxClassMethod = (
   packageImport: string
 ) => {
 
-  const requestType = t.tsTypeReference(
-    t.identifier("BroadcastTxReq"),
-    t.tsTypeParameterInstantiation(
-      [
-        t.tsTypeReference(t.identifier(svc.requestType))
-      ]
-    )
-  );
+  const requestType = svc.requestType;
   const responseType = t.tsTypeReference(
     t.identifier("DeliverTxResponse"),
   );
   const comment = svc.comment ?? svc.name;
 
-  let methodArgs: t.Identifier | t.AssignmentPattern = identifier(
-      'request',
-      t.tsTypeAnnotation(
-        requestType
-      )
-  );
+  const methodArgs: (t.Identifier | t.AssignmentPattern)[] = [
+    identifier("signerAddress", t.tsTypeAnnotation(t.tsStringKeyword())),
+    identifier(
+      "message",
+      t.tsTypeAnnotation(t.tsTypeReference(t.identifier(requestType)))
+    ),
+    t.assignmentPattern(
+      identifier(
+        "fee",
+        t.tsTypeAnnotation(
+          t.tsUnionType([
+            t.tsNumberKeyword(),
+            t.tsTypeReference(t.identifier("StdFee")),
+            t.tsLiteralType(t.stringLiteral("auto")),
+          ])
+        )
+      ),
+      t.stringLiteral("auto")
+    ),
+    t.assignmentPattern(
+      identifier("memo", t.tsTypeAnnotation(t.tsStringKeyword())),
+      t.stringLiteral("")
+    ),
+  ];
 
   const body = t.blockStatement([
     // generate:
@@ -391,7 +405,7 @@ const rpcTxClassMethod = (
       return classProperty(
           t.identifier(name),
           arrowFunctionExpression(
-              [methodArgs],
+              methodArgs,
               body,
               returnReponseType(responseType),
               true
@@ -409,9 +423,7 @@ const rpcTxClassMethod = (
   return classMethod(
       'method',
       t.identifier(name),
-      [
-          methodArgs
-      ],
+      methodArgs,
       body,
       returnReponseType(responseType)
   );
@@ -493,7 +505,6 @@ export const createRpcClientInterface = (
             let trailingComments = [];
             switch (implementType) {
               case "Tx":
-                context.addUtil("BroadcastTxReq");
                 context.addUtil("DeliverTxResponse");
 
                 return rpcTxMethodDefinition(
@@ -571,7 +582,6 @@ export const createRpcClientClass = (
             const method = service.methods[key];
             switch (implementType) {
               case "Tx":
-                context.addUtil("BroadcastTxReq");
                 context.addUtil("DeliverTxResponse");
 
                 return rpcTxClassMethod(

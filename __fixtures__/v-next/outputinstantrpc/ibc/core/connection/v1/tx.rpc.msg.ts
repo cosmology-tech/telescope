@@ -1,22 +1,22 @@
 import { Counterparty, CounterpartySDKType, Version, VersionSDKType } from "./connection";
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Height, HeightSDKType } from "../../client/v1/client";
-import { BroadcastTxReq, DeliverTxResponse, TxRpc } from "../../../../types";
+import { DeliverTxResponse, TxRpc } from "../../../../types";
 import { BinaryReader } from "../../../../binary";
 import { MsgConnectionOpenInit, MsgConnectionOpenInitSDKType, MsgConnectionOpenInitResponse, MsgConnectionOpenInitResponseSDKType, MsgConnectionOpenTry, MsgConnectionOpenTrySDKType, MsgConnectionOpenTryResponse, MsgConnectionOpenTryResponseSDKType, MsgConnectionOpenAck, MsgConnectionOpenAckSDKType, MsgConnectionOpenAckResponse, MsgConnectionOpenAckResponseSDKType, MsgConnectionOpenConfirm, MsgConnectionOpenConfirmSDKType, MsgConnectionOpenConfirmResponse, MsgConnectionOpenConfirmResponseSDKType } from "./tx";
 /** Msg defines the ibc/connection Msg service. */
 export interface Msg {
   /** ConnectionOpenInit defines a rpc handler method for MsgConnectionOpenInit. */
-  connectionOpenInit(request: BroadcastTxReq<MsgConnectionOpenInit>): Promise<DeliverTxResponse>;
+  connectionOpenInit(signerAddress: string, message: MsgConnectionOpenInit, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
   /** ConnectionOpenTry defines a rpc handler method for MsgConnectionOpenTry. */
-  connectionOpenTry(request: BroadcastTxReq<MsgConnectionOpenTry>): Promise<DeliverTxResponse>;
+  connectionOpenTry(signerAddress: string, message: MsgConnectionOpenTry, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
   /** ConnectionOpenAck defines a rpc handler method for MsgConnectionOpenAck. */
-  connectionOpenAck(request: BroadcastTxReq<MsgConnectionOpenAck>): Promise<DeliverTxResponse>;
+  connectionOpenAck(signerAddress: string, message: MsgConnectionOpenAck, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
   /**
    * ConnectionOpenConfirm defines a rpc handler method for
    * MsgConnectionOpenConfirm.
    */
-  connectionOpenConfirm(request: BroadcastTxReq<MsgConnectionOpenConfirm>): Promise<DeliverTxResponse>;
+  connectionOpenConfirm(signerAddress: string, message: MsgConnectionOpenConfirm, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -24,7 +24,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
   }
   /* ConnectionOpenInit defines a rpc handler method for MsgConnectionOpenInit. */
-  connectionOpenInit = async (request: BroadcastTxReq<MsgConnectionOpenInit>): Promise<DeliverTxResponse> => {
+  connectionOpenInit = async (signerAddress: string, message: MsgConnectionOpenInit, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgConnectionOpenInit.typeUrl,
       value: request.message
@@ -32,7 +32,7 @@ export class MsgClientImpl implements Msg {
     return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
   };
   /* ConnectionOpenTry defines a rpc handler method for MsgConnectionOpenTry. */
-  connectionOpenTry = async (request: BroadcastTxReq<MsgConnectionOpenTry>): Promise<DeliverTxResponse> => {
+  connectionOpenTry = async (signerAddress: string, message: MsgConnectionOpenTry, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgConnectionOpenTry.typeUrl,
       value: request.message
@@ -40,7 +40,7 @@ export class MsgClientImpl implements Msg {
     return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
   };
   /* ConnectionOpenAck defines a rpc handler method for MsgConnectionOpenAck. */
-  connectionOpenAck = async (request: BroadcastTxReq<MsgConnectionOpenAck>): Promise<DeliverTxResponse> => {
+  connectionOpenAck = async (signerAddress: string, message: MsgConnectionOpenAck, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgConnectionOpenAck.typeUrl,
       value: request.message
@@ -49,7 +49,7 @@ export class MsgClientImpl implements Msg {
   };
   /* ConnectionOpenConfirm defines a rpc handler method for
    MsgConnectionOpenConfirm. */
-  connectionOpenConfirm = async (request: BroadcastTxReq<MsgConnectionOpenConfirm>): Promise<DeliverTxResponse> => {
+  connectionOpenConfirm = async (signerAddress: string, message: MsgConnectionOpenConfirm, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgConnectionOpenConfirm.typeUrl,
       value: request.message

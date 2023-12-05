@@ -1,4 +1,4 @@
-import { BroadcastTxReq, DeliverTxResponse, TxRpc } from "../../../types";
+import { DeliverTxResponse, TxRpc } from "../../../types";
 import { BinaryReader } from "../../../binary";
 import { MsgRegisterDevFeeInfo, MsgRegisterDevFeeInfoSDKType, MsgRegisterDevFeeInfoResponse, MsgRegisterDevFeeInfoResponseSDKType, MsgCancelDevFeeInfo, MsgCancelDevFeeInfoSDKType, MsgCancelDevFeeInfoResponse, MsgCancelDevFeeInfoResponseSDKType, MsgUpdateDevFeeInfo, MsgUpdateDevFeeInfoSDKType, MsgUpdateDevFeeInfoResponse, MsgUpdateDevFeeInfoResponseSDKType } from "./tx";
 /** Msg defines the fees Msg service. */
@@ -7,14 +7,14 @@ export interface Msg {
    * RegisterDevFeeInfo is used by a deployer to register a new contract for
    * receiving transaction fees
    */
-  registerDevFeeInfo(request: BroadcastTxReq<MsgRegisterDevFeeInfo>): Promise<DeliverTxResponse>;
+  registerDevFeeInfo(signerAddress: string, message: MsgRegisterDevFeeInfo, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
   /**
    * CancelDevFeeInfo is used by a deployer to cancel a registered contract
    * and stop receiving transaction fees
    */
-  cancelDevFeeInfo(request: BroadcastTxReq<MsgCancelDevFeeInfo>): Promise<DeliverTxResponse>;
+  cancelDevFeeInfo(signerAddress: string, message: MsgCancelDevFeeInfo, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
   /** UpdateDevFeeInfo is used by a deployer to update the withdraw address */
-  updateDevFeeInfo(request: BroadcastTxReq<MsgUpdateDevFeeInfo>): Promise<DeliverTxResponse>;
+  updateDevFeeInfo(signerAddress: string, message: MsgUpdateDevFeeInfo, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
@@ -23,7 +23,7 @@ export class MsgClientImpl implements Msg {
   }
   /* RegisterDevFeeInfo is used by a deployer to register a new contract for
    receiving transaction fees */
-  registerDevFeeInfo = async (request: BroadcastTxReq<MsgRegisterDevFeeInfo>): Promise<DeliverTxResponse> => {
+  registerDevFeeInfo = async (signerAddress: string, message: MsgRegisterDevFeeInfo, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgRegisterDevFeeInfo.typeUrl,
       value: request.message
@@ -32,7 +32,7 @@ export class MsgClientImpl implements Msg {
   };
   /* CancelDevFeeInfo is used by a deployer to cancel a registered contract
    and stop receiving transaction fees */
-  cancelDevFeeInfo = async (request: BroadcastTxReq<MsgCancelDevFeeInfo>): Promise<DeliverTxResponse> => {
+  cancelDevFeeInfo = async (signerAddress: string, message: MsgCancelDevFeeInfo, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgCancelDevFeeInfo.typeUrl,
       value: request.message
@@ -40,7 +40,7 @@ export class MsgClientImpl implements Msg {
     return this.rpc.signAndBroadcast!(request.signerAddress, data, request.fee, request.memo);
   };
   /* UpdateDevFeeInfo is used by a deployer to update the withdraw address */
-  updateDevFeeInfo = async (request: BroadcastTxReq<MsgUpdateDevFeeInfo>): Promise<DeliverTxResponse> => {
+  updateDevFeeInfo = async (signerAddress: string, message: MsgUpdateDevFeeInfo, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> => {
     const data = [{
       typeUrl: MsgUpdateDevFeeInfo.typeUrl,
       value: request.message
