@@ -51,6 +51,7 @@ export const UTILS = {
   QueryClient: '@cosmjs/stargate',
   Registry: '@cosmjs/proto-signing',
   Rpc: '__helpers__',
+  StdFee: '__types__',
   TxRpc: '__types__',
   BroadcastTxReq: '__types__',
   BroadcastTxRes: '__types__',

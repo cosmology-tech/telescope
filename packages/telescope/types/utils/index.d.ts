@@ -49,6 +49,7 @@ export declare const UTILS: {
     QueryClient: string;
     Registry: string;
     Rpc: string;
+    StdFee: string;
     TxRpc: string;
     BroadcastTxReq: string;
     BroadcastTxRes: string;

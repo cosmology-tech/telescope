@@ -360,7 +360,7 @@ const rpcTxClassMethod = (
     // const data = [
     //   {
     //     typeUrl: MsgCreateValidator.typeUrl,
-    //     value: request.message,
+    //     value: message,
     //   },
     // ];
     t.variableDeclaration('const', [
@@ -369,7 +369,7 @@ const rpcTxClassMethod = (
         t.arrayExpression([
           t.objectExpression([
             t.objectProperty(t.identifier('typeUrl'), t.memberExpression(t.identifier(svc.requestType), t.identifier('typeUrl'))),
-            t.objectProperty(t.identifier('value'), t.memberExpression(t.identifier('request'), t.identifier('message')))
+            t.objectProperty(t.identifier('value'), t.identifier('message'))
           ])
         ])
       )
@@ -377,10 +377,10 @@ const rpcTxClassMethod = (
 
     // generate:
     // return this.rpc.signAndBroadcast!(
-    //   request.signerAddress,
+    //   signerAddress,
     //   data,
-    //   request.fee,
-    //   request.memo
+    //   fee,
+    //   memo
     // );
     t.returnStatement(
       t.callExpression(
@@ -392,10 +392,10 @@ const rpcTxClassMethod = (
           t.identifier('signAndBroadcast!')
         ),
         [
-          t.memberExpression(t.identifier('request'), t.identifier('signerAddress')),
+          t.identifier('signerAddress'),
           t.identifier('data'),
-          t.memberExpression(t.identifier('request'), t.identifier('fee')),
-          t.memberExpression(t.identifier('request'), t.identifier('memo'))
+          t.identifier('fee'),
+          t.identifier('memo')
         ]
       )
     )
@@ -506,6 +506,7 @@ export const createRpcClientInterface = (
             switch (implementType) {
               case "Tx":
                 context.addUtil("DeliverTxResponse");
+                context.addUtil("StdFee");
 
                 return rpcTxMethodDefinition(
                   methodAlias,
@@ -583,6 +584,7 @@ export const createRpcClientClass = (
             switch (implementType) {
               case "Tx":
                 context.addUtil("DeliverTxResponse");
+                context.addUtil("StdFee");
 
                 return rpcTxClassMethod(
                   context,
