@@ -26,6 +26,7 @@ import { plugin as createHelpers } from './generators/create-helpers';
 import { plugin as createCosmWasmBundle } from './generators/create-cosmwasm-bundle';
 import { plugin as createPiniaStore } from './generators/create-pinia-store'
 import { plugin as createPiniaStoreBundle } from './generators/create-pinia-store-bundle'
+import { plugin as createRpcOpsBundle } from './generators/create-rpc-ops-bundle'
 
 const sanitizeOptions = (options: TelescopeOptions): TelescopeOptions => {
   // If an element at the same key is present for both x and y, the value from y will appear in the result.
@@ -155,6 +156,7 @@ export class TelescopeBuilder {
       createBundle(this, bundler);
     });
 
+    createRpcOpsBundle(this);
     createReactQueryBundle(this);
     createMobxBundle(this);
     createAggregatedLCDClient(this);

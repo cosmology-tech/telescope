@@ -34,8 +34,16 @@ export const makeUseHookName = (name: string) => {
   return camel("use_" + name);
 };
 
+export const makeUseHookNameWithCamel = (name: string) => {
+  return camel("use_" + camel(name));
+};
+
 export const makeUsePkgHookName = (packageName: string, name: string) => {
   return variableSlug(`use_${packageName.replace(/\./g, "_")}_${snake(name)}`);
+};
+
+export const makePkgMethodName = (packageName: string, name: string) => {
+  return variableSlug(`pkg_${packageName.replace(/\./g, "_")}_${snake(name)}`);
 };
 
 export const makeUseHookTypeName = (name: string) => {
@@ -45,6 +53,7 @@ export const makeUseHookTypeName = (name: string) => {
 export const makeHookKeyName = (name: string) => {
   return camel(name + "Query");
 };
+
 
 // https://github.com/isaacs/minimatch/blob/main/src/index.ts#L61
 // Optimized checking for the most common glob patterns.
@@ -60,20 +69,24 @@ const globPattern = /\*+([^+@!?\*\[\(]*)/;
 export const getQueryMethodNames = (
   packagePath: string,
   methodKeys: string[],
-  patterns?: string[]
+  patterns?: string[],
+  makeMethodName?: Function
 ) => {
+  const make = makeMethodName ?? makeUseHookNameWithCamel;
+
   return methodKeys
     .map((key) => {
-      const useHookName = makeUseHookName(camel(key));
-      const hookNameWithPkg = `${packagePath}.${useHookName}`;
+
+      const methodName = make(key);
+      const methodNameWithPkg = `${packagePath}.${methodName}`;
 
       const isMatching =
         patterns &&
         patterns.some((pattern) => {
           if (!globPattern.test(pattern)) {
-            return hookNameWithPkg === pattern;
+            return methodNameWithPkg === pattern;
           }
-          return minimatch(hookNameWithPkg, pattern);
+          return minimatch(methodNameWithPkg, pattern);
         });
 
       if (isMatching) {

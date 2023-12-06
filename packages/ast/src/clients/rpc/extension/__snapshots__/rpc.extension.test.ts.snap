@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`createRpcClientImpl 1`] = `
+"export const createClientImpl = (rpc: Rpc) => {
+  return new QueryClientImpl(rpc);
+};"
+`;
+
 exports[`createRpcQueryExtension 1`] = `
 "export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);

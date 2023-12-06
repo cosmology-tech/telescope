@@ -12,7 +12,9 @@ export declare const getNested: (root: ProtoRoot, path: string[]) => any;
  * @returns customized hook name like 'useSth'
  */
 export declare const makeUseHookName: (name: string) => any;
+export declare const makeUseHookNameWithCamel: (name: string) => any;
 export declare const makeUsePkgHookName: (packageName: string, name: string) => any;
+export declare const makePkgMethodName: (packageName: string, name: string) => any;
 export declare const makeUseHookTypeName: (name: string) => string;
 export declare const makeHookKeyName: (name: string) => any;
 /**
@@ -22,7 +24,7 @@ export declare const makeHookKeyName: (name: string) => any;
  * @param patterns minimatch pattern like 'cosmos.auth.**'
  * @returns Array of query method names match the given pattern.
  */
-export declare const getQueryMethodNames: (packagePath: string, methodKeys: string[], patterns?: string[]) => string[];
+export declare const getQueryMethodNames: (packagePath: string, methodKeys: string[], patterns?: string[], makeMethodName?: Function) => string[];
 /**
  * test if a proto ref is included by the operation.
  * @param ref a ProtoRef with proto file info and package.

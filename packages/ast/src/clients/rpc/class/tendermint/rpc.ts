@@ -2,7 +2,7 @@ import * as t from '@babel/types';
 import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, commentBlock, identifier, tsMethodSignature } from '../../../../utils';
 import { ProtoService, ProtoServiceMethod } from '@cosmology/types';
 import { GenericParseContext } from '../../../../encoding';
-import { camel } from '@cosmology/utils';
+import { camel, getServiceImplement } from '@cosmology/utils';
 import { processRpcComment, returnReponseType, cleanType, optionalBool } from '../utils/rpc';
 import { BinaryCoder } from '../../../../utils/binary-coder-expression';
 
@@ -10,7 +10,7 @@ const rpcMethodDefinition = (
     name: string,
     svc: ProtoServiceMethod,
     trailingComments?: t.CommentBlock[],
-    leadingComments?: t.CommentBlock[]
+    leadingComments?: t.CommentBlock[],
 ) => {
 
     const requestType = svc.requestType;
@@ -42,6 +42,46 @@ const rpcMethodDefinition = (
         trailingComments,
         leadingComments
     );
+}
+
+const rpcTxMethodDefinition = (
+  name: string,
+  svc: ProtoServiceMethod,
+  trailingComments?: t.CommentBlock[],
+  leadingComments?: t.CommentBlock[],
+) => {
+  const requestType = svc.requestType;
+  const responseType = t.tsTypeReference(
+    t.identifier("DeliverTxResponse"),
+  );
+
+  const methodArgs: t.Identifier[] = [
+    identifier("signerAddress", t.tsTypeAnnotation(t.tsStringKeyword())),
+    identifier(
+      "message",
+      t.tsTypeAnnotation(t.tsTypeReference(t.identifier(requestType)))
+    ),
+    identifier(
+      "fee",
+      t.tsTypeAnnotation(
+        t.tsUnionType([
+          t.tsNumberKeyword(),
+          t.tsTypeReference(t.identifier("StdFee")),
+          t.tsLiteralType(t.stringLiteral("auto")),
+        ])
+      )
+    ),
+    identifier("memo", t.tsTypeAnnotation(t.tsStringKeyword())),
+  ];
+
+  return tsMethodSignature(
+      t.identifier(name),
+      null,
+      methodArgs,
+      returnReponseType(responseType),
+      trailingComments,
+      leadingComments
+  );
 }
 
 // this.Accounts = this.Accounts.bind(this);
@@ -276,10 +316,124 @@ const rpcClassMethod = (
     );
 };
 
+const rpcTxClassMethod = (
+  context: GenericParseContext,
+  name: string,
+  msg: string,
+  svc: ProtoServiceMethod,
+  packageImport: string
+) => {
+
+  const requestType = svc.requestType;
+  const responseType = t.tsTypeReference(
+    t.identifier("DeliverTxResponse"),
+  );
+  const comment = svc.comment ?? svc.name;
+
+  const methodArgs: (t.Identifier | t.AssignmentPattern)[] = [
+    identifier("signerAddress", t.tsTypeAnnotation(t.tsStringKeyword())),
+    identifier(
+      "message",
+      t.tsTypeAnnotation(t.tsTypeReference(t.identifier(requestType)))
+    ),
+    t.assignmentPattern(
+      identifier(
+        "fee",
+        t.tsTypeAnnotation(
+          t.tsUnionType([
+            t.tsNumberKeyword(),
+            t.tsTypeReference(t.identifier("StdFee")),
+            t.tsLiteralType(t.stringLiteral("auto")),
+          ])
+        )
+      ),
+      t.stringLiteral("auto")
+    ),
+    t.assignmentPattern(
+      identifier("memo", t.tsTypeAnnotation(t.tsStringKeyword())),
+      t.stringLiteral("")
+    ),
+  ];
+
+  const body = t.blockStatement([
+    // generate:
+    // const data = [
+    //   {
+    //     typeUrl: MsgCreateValidator.typeUrl,
+    //     value: message,
+    //   },
+    // ];
+    t.variableDeclaration('const', [
+      t.variableDeclarator(
+        t.identifier('data'),
+        t.arrayExpression([
+          t.objectExpression([
+            t.objectProperty(t.identifier('typeUrl'), t.memberExpression(t.identifier(svc.requestType), t.identifier('typeUrl'))),
+            t.objectProperty(t.identifier('value'), t.identifier('message'))
+          ])
+        ])
+      )
+    ]),
+
+    // generate:
+    // return this.rpc.signAndBroadcast!(
+    //   signerAddress,
+    //   data,
+    //   fee,
+    //   memo
+    // );
+    t.returnStatement(
+      t.callExpression(
+        t.memberExpression(
+          t.memberExpression(
+            t.thisExpression(),
+            t.identifier('rpc')
+          ),
+          t.identifier('signAndBroadcast!')
+        ),
+        [
+          t.identifier('signerAddress'),
+          t.identifier('data'),
+          t.identifier('fee'),
+          t.identifier('memo')
+        ]
+      )
+    )
+  ]);
+
+  if (context.pluginValue('classesUseArrowFunctions')) {
+      return classProperty(
+          t.identifier(name),
+          arrowFunctionExpression(
+              methodArgs,
+              body,
+              returnReponseType(responseType),
+              true
+          ),
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          makeComment(comment) as t.CommentLine[],
+      );
+  }
+
+  return classMethod(
+      'method',
+      t.identifier(name),
+      methodArgs,
+      body,
+      returnReponseType(responseType)
+  );
+};
+
 const rpcClassConstructor = (
     context: GenericParseContext,
     methods: string[]
 ) => {
+    const useTelescopeGeneratedType = context.pluginValue('prototypes.typingsFormat.useTelescopeGeneratedType');
 
     let bound = [];
     if (!context.pluginValue('classesUseArrowFunctions')) {
@@ -294,7 +448,7 @@ const rpcClassConstructor = (
                 'rpc',
                 t.tsTypeAnnotation(
                     t.tsTypeReference(
-                        t.identifier('Rpc')
+                        t.identifier(useTelescopeGeneratedType ? 'TxRpc' : 'Rpc')
                     )
                 )
             )
@@ -318,27 +472,62 @@ const rpcClassConstructor = (
 
 export const createRpcClientInterface = (
     context: GenericParseContext,
-    service: ProtoService
+    service: ProtoService,
+    name?: string,
+    methodKeys?: string[],
+    nameMapping?: {
+      [key: string]: string
+    }
 ) => {
+    const serviceImplement = context.pluginValue('rpcClients.serviceImplement');
     const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
-    const keys = Object.keys(service.methods ?? {});
+    const keys = methodKeys && methodKeys.length ? methodKeys : Object.keys(service.methods ?? {});
     const methods = keys
         .map((key) => {
+            const methodName = camelRpcMethods ? camel(key) : key;
+
+            const implementType = getServiceImplement(
+              service.name,
+              context.ref.proto.package,
+              methodName,
+              serviceImplement
+            );
+
             const method = service.methods[key];
-            const name = camelRpcMethods ? camel(key) : key;
+
+            if(!method){
+              return null;
+            }
+
+            const nameWithPkg = `${context.ref.proto.package}.${methodName}`;
+            const methodAlias = nameMapping && nameMapping[nameWithPkg] ? nameMapping[nameWithPkg] : methodName;
             const leadingComments = method.comment ? [commentBlock(processRpcComment(method))] : [];
             let trailingComments = [];
-            return rpcMethodDefinition(
-                name,
-                method,
-                trailingComments,
-                leadingComments
-            )
-        });
+            switch (implementType) {
+              case "Tx":
+                context.addUtil("DeliverTxResponse");
+                context.addUtil("StdFee");
+
+                return rpcTxMethodDefinition(
+                  methodAlias,
+                  method,
+                  trailingComments,
+                  leadingComments
+                );
+              case "Query":
+              default:
+                return rpcMethodDefinition(
+                  methodAlias,
+                  method,
+                  trailingComments,
+                  leadingComments
+                );
+            }
+        }).filter(Boolean);
 
     const obj = t.exportNamedDeclaration(
         t.tsInterfaceDeclaration(
-            t.identifier(service.name),
+            t.identifier(name ?? service.name),
             null,
             [],
             t.tsInterfaceBody(
@@ -362,8 +551,15 @@ export const createRpcClientClass = (
     context: GenericParseContext,
     service: ProtoService
 ) => {
+    const serviceImplement = context.pluginValue('rpcClients.serviceImplement');
+    const useTelescopeGeneratedType = context.pluginValue('prototypes.typingsFormat.useTelescopeGeneratedType');
 
-    context.addUtil('Rpc');
+    if(useTelescopeGeneratedType){
+      context.addUtil('TxRpc');
+    } else {
+      context.addUtil('Rpc');
+    }
+
     BinaryCoder.addUtil(context, 'reader');
 
     const camelRpcMethods = context.pluginValue('rpcClients.camelCase');
@@ -375,15 +571,38 @@ export const createRpcClientClass = (
         });
     const methods = Object.keys(service.methods ?? {})
         .map(key => {
-            const method = service.methods[key];
             const name = camelRpcMethods ? camel(key) : key;
-            return rpcClassMethod(
-                context,
-                name,
-                key,
-                method,
-                context.ref.proto.package + '.' + service.name
-            )
+
+            const implementType = getServiceImplement(
+              service.name,
+              context.ref.proto.package,
+              name,
+              serviceImplement
+            );
+
+            const method = service.methods[key];
+            switch (implementType) {
+              case "Tx":
+                context.addUtil("DeliverTxResponse");
+                context.addUtil("StdFee");
+
+                return rpcTxClassMethod(
+                  context,
+                  name,
+                  key,
+                  method,
+                  context.ref.proto.package + '.' + service.name
+                );
+              case "Query":
+              default:
+                return rpcClassMethod(
+                    context,
+                    name,
+                    key,
+                    method,
+                    context.ref.proto.package + '.' + service.name
+                )
+            }
         });
 
     return t.exportNamedDeclaration(
@@ -396,7 +615,7 @@ export const createRpcClientClass = (
                     null,
                     t.tsTypeAnnotation(
                         t.tsTypeReference(
-                            t.identifier('Rpc')
+                            t.identifier(useTelescopeGeneratedType ? 'TxRpc' : 'Rpc')
                         )
                     ),
                     null,

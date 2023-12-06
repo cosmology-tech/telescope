@@ -169,6 +169,22 @@ interface TelescopeOpts {
         camelCase?: boolean;
         scopedIsExclusive?: boolean;
         bundle?: boolean;
+        serviceImplement?: {
+          [
+            key:
+              | "Msg"
+              | "Query"
+              | "Service"
+              | "ReflectionService"
+              | "ABCIApplication"
+              | string
+          ]: {
+            include?: {
+              patterns?: string[];
+            };
+            type: "Query" | "Tx" | string;
+          };
+        };
         enabledServices?: (
             'Msg' |
             'Query' |
@@ -185,6 +201,23 @@ interface TelescopeOpts {
             addToBundle: boolean;
             methodNameQuery?: string;
             methodNameTx?: string;
+        }[];
+        instantOps?: {
+            className: string,
+            include: {
+              patterns?: string[];
+            },
+            nameMapping?:{
+              All: {
+                [key: string]: string;
+              };
+              Query?: {
+                [key: string]: string;
+              };
+              Msg?: {
+                [key: string]: string;
+              };
+            }
         }[];
     };
     reactQuery?: {
