@@ -10,6 +10,20 @@ import "google/protobuf/any.proto";
 option go_package                      = "github.com/cosmos/cosmos-sdk/x/authz";
 option (gogoproto.goproto_getters_all) = false;
 
+// VoteOption enumerates the valid vote options for a given governance proposal.
+enum VoteOption {
+  // VOTE_OPTION_UNSPECIFIED defines a no-op vote option.
+  VOTE_OPTION_UNSPECIFIED = 0;
+  // VOTE_OPTION_YES defines a yes vote option.
+  VOTE_OPTION_YES = 1;
+  // VOTE_OPTION_ABSTAIN defines an abstain vote option.
+  VOTE_OPTION_ABSTAIN = 2;
+  // VOTE_OPTION_NO defines a no vote option.
+  VOTE_OPTION_NO = 3;
+  // VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option.
+  VOTE_OPTION_NO_WITH_VETO = 4;
+}
+
 // GenericAuthorization gives the grantee unrestricted permissions to execute
 // the provided method on behalf of the granter's account.
 message GenericAuthorization {
@@ -27,6 +41,9 @@ message Grant {
   // doesn't have a time expiration (other conditions  in `authorization`
   // may apply to invalidate the grant)
   google.protobuf.Timestamp expiration = 2 [(gogoproto.stdtime) = true, (gogoproto.nullable) = true];
+  VoteOption opt = 3;
+  google.protobuf.Any single_msg             = 4[(gogoproto.nullable) = false];
+  repeated google.protobuf.Any messages             = 5;
 }
 
 // GrantAuthorization extends a grant with both the addresses of the grantee and granter.

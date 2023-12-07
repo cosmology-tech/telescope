@@ -141,7 +141,8 @@ export const createProtoTypeComparison = (args: {
         (acceptedType) => acceptedType.readAs
       );
 
-      acceptedTypeNames.push("Any");
+      const typeName = context.getTypeName(field);
+      acceptedTypeNames.push(typeName);
 
       return acceptedTypeNames.reduce<t.Expression>(
         (comparison, acceptedTypeName) => {

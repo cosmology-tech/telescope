@@ -6,6 +6,62 @@ import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
 import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "cosmos.authz.v1beta1";
+/** VoteOption enumerates the valid vote options for a given governance proposal. */
+export enum VoteOption {
+  /** VOTE_OPTION_UNSPECIFIED - VOTE_OPTION_UNSPECIFIED defines a no-op vote option. */
+  VOTE_OPTION_UNSPECIFIED = 0,
+  /** VOTE_OPTION_YES - VOTE_OPTION_YES defines a yes vote option. */
+  VOTE_OPTION_YES = 1,
+  /** VOTE_OPTION_ABSTAIN - VOTE_OPTION_ABSTAIN defines an abstain vote option. */
+  VOTE_OPTION_ABSTAIN = 2,
+  /** VOTE_OPTION_NO - VOTE_OPTION_NO defines a no vote option. */
+  VOTE_OPTION_NO = 3,
+  /** VOTE_OPTION_NO_WITH_VETO - VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option. */
+  VOTE_OPTION_NO_WITH_VETO = 4,
+  UNRECOGNIZED = -1,
+}
+export const VoteOptionSDKType = VoteOption;
+export const VoteOptionAmino = VoteOption;
+export function voteOptionFromJSON(object: any): VoteOption {
+  switch (object) {
+    case 0:
+    case "VOTE_OPTION_UNSPECIFIED":
+      return VoteOption.VOTE_OPTION_UNSPECIFIED;
+    case 1:
+    case "VOTE_OPTION_YES":
+      return VoteOption.VOTE_OPTION_YES;
+    case 2:
+    case "VOTE_OPTION_ABSTAIN":
+      return VoteOption.VOTE_OPTION_ABSTAIN;
+    case 3:
+    case "VOTE_OPTION_NO":
+      return VoteOption.VOTE_OPTION_NO;
+    case 4:
+    case "VOTE_OPTION_NO_WITH_VETO":
+      return VoteOption.VOTE_OPTION_NO_WITH_VETO;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return VoteOption.UNRECOGNIZED;
+  }
+}
+export function voteOptionToJSON(object: VoteOption): string {
+  switch (object) {
+    case VoteOption.VOTE_OPTION_UNSPECIFIED:
+      return "VOTE_OPTION_UNSPECIFIED";
+    case VoteOption.VOTE_OPTION_YES:
+      return "VOTE_OPTION_YES";
+    case VoteOption.VOTE_OPTION_ABSTAIN:
+      return "VOTE_OPTION_ABSTAIN";
+    case VoteOption.VOTE_OPTION_NO:
+      return "VOTE_OPTION_NO";
+    case VoteOption.VOTE_OPTION_NO_WITH_VETO:
+      return "VOTE_OPTION_NO_WITH_VETO";
+    case VoteOption.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
 /**
  * GenericAuthorization gives the grantee unrestricted permissions to execute
  * the provided method on behalf of the granter's account.
@@ -49,6 +105,9 @@ export interface Grant {
    * may apply to invalidate the grant)
    */
   expiration?: Date;
+  opt: VoteOption;
+  singleMsg: Any;
+  messages: Any[];
 }
 export interface GrantProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.Grant";
@@ -69,6 +128,9 @@ export interface GrantAmino {
    * may apply to invalidate the grant)
    */
   expiration?: string;
+  opt: VoteOption;
+  single_msg?: AnyAmino;
+  messages: AnyAmino[];
 }
 export interface GrantAminoMsg {
   type: "cosmos-sdk/Grant";
@@ -81,6 +143,9 @@ export interface GrantAminoMsg {
 export interface GrantSDKType {
   authorization: GenericAuthorizationSDKType | DepositDeploymentAuthorizationSDKType | SendAuthorizationSDKType | AnySDKType | undefined;
   expiration?: Date;
+  opt: VoteOption;
+  single_msg: AnySDKType;
+  messages: AnySDKType[];
 }
 /**
  * GrantAuthorization extends a grant with both the addresses of the grantee and granter.
@@ -250,19 +315,22 @@ GlobalDecoderRegistry.register(GenericAuthorization.typeUrl, GenericAuthorizatio
 function createBaseGrant(): Grant {
   return {
     authorization: Any.fromPartial({}),
-    expiration: undefined
+    expiration: undefined,
+    opt: 0,
+    singleMsg: Any.fromPartial({}),
+    messages: []
   };
 }
 export const Grant = {
   typeUrl: "/cosmos.authz.v1beta1.Grant",
   is(o: any): o is Grant {
-    return o && (o.$typeUrl === Grant.typeUrl || GenericAuthorization.is(o.authorization) || DepositDeploymentAuthorization.is(o.authorization) || SendAuthorization.is(o.authorization) || Any.is(o.authorization));
+    return o && (o.$typeUrl === Grant.typeUrl || (GenericAuthorization.is(o.authorization) || DepositDeploymentAuthorization.is(o.authorization) || SendAuthorization.is(o.authorization) || Any.is(o.authorization)) && o.opt && Any.is(o.singleMsg) && Array.isArray(o.messages) && (!o.messages.length || Any.is(o.messages[0])));
   },
   isSDK(o: any): o is GrantSDKType {
-    return o && (o.$typeUrl === Grant.typeUrl || GenericAuthorization.isSDK(o.authorization) || DepositDeploymentAuthorization.isSDK(o.authorization) || SendAuthorization.isSDK(o.authorization) || Any.isSDK(o.authorization));
+    return o && (o.$typeUrl === Grant.typeUrl || (GenericAuthorization.isSDK(o.authorization) || DepositDeploymentAuthorization.isSDK(o.authorization) || SendAuthorization.isSDK(o.authorization) || Any.isSDK(o.authorization)) && o.opt && Any.isSDK(o.single_msg) && Array.isArray(o.messages) && (!o.messages.length || Any.isSDK(o.messages[0])));
   },
   isAmino(o: any): o is GrantAmino {
-    return o && (o.$typeUrl === Grant.typeUrl || GenericAuthorization.isAmino(o.authorization) || DepositDeploymentAuthorization.isAmino(o.authorization) || SendAuthorization.isAmino(o.authorization) || Any.isAmino(o.authorization));
+    return o && (o.$typeUrl === Grant.typeUrl || (GenericAuthorization.isAmino(o.authorization) || DepositDeploymentAuthorization.isAmino(o.authorization) || SendAuthorization.isAmino(o.authorization) || Any.isAmino(o.authorization)) && o.opt && Any.isAmino(o.single_msg) && Array.isArray(o.messages) && (!o.messages.length || Any.isAmino(o.messages[0])));
   },
   encode(message: Grant, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.authorization !== undefined) {
@@ -270,6 +338,15 @@ export const Grant = {
     }
     if (message.expiration !== undefined) {
       Timestamp.encode(toTimestamp(message.expiration), writer.uint32(18).fork()).ldelim();
+    }
+    if (message.opt !== 0) {
+      writer.uint32(24).int32(message.opt);
+    }
+    if (message.singleMsg !== undefined) {
+      Any.encode(message.singleMsg, writer.uint32(34).fork()).ldelim();
+    }
+    for (const v of message.messages) {
+      Any.encode(v!, writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
@@ -286,6 +363,15 @@ export const Grant = {
         case 2:
           message.expiration = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
+        case 3:
+          message.opt = (reader.int32() as any);
+          break;
+        case 4:
+          message.singleMsg = Any.decode(reader, reader.uint32());
+          break;
+        case 5:
+          message.messages.push(Any.decode(reader, reader.uint32()));
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -297,12 +383,22 @@ export const Grant = {
     const obj = createBaseGrant();
     if (isSet(object.authorization)) obj.authorization = GlobalDecoderRegistry.fromJSON(object.authorization);
     if (isSet(object.expiration)) obj.expiration = new Date(object.expiration);
+    if (isSet(object.opt)) obj.opt = voteOptionFromJSON(object.opt);
+    if (isSet(object.singleMsg)) obj.singleMsg = Any.fromJSON(object.singleMsg);
+    if (Array.isArray(object?.messages)) obj.messages = object.messages.map((e: any) => Any.fromJSON(e));
     return obj;
   },
   toJSON(message: Grant): unknown {
     const obj: any = {};
     message.authorization !== undefined && (obj.authorization = message.authorization ? GlobalDecoderRegistry.toJSON(message.authorization) : undefined);
     message.expiration !== undefined && (obj.expiration = message.expiration.toISOString());
+    message.opt !== undefined && (obj.opt = voteOptionToJSON(message.opt));
+    message.singleMsg !== undefined && (obj.singleMsg = message.singleMsg ? Any.toJSON(message.singleMsg) : undefined);
+    if (message.messages) {
+      obj.messages = message.messages.map(e => e ? Any.toJSON(e) : undefined);
+    } else {
+      obj.messages = [];
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<Grant>): Grant {
@@ -311,36 +407,64 @@ export const Grant = {
       message.authorization = GlobalDecoderRegistry.fromPartial(object.authorization);
     }
     message.expiration = object.expiration ?? undefined;
+    message.opt = object.opt ?? 0;
+    if (object.singleMsg !== undefined && object.singleMsg !== null) {
+      message.singleMsg = Any.fromPartial(object.singleMsg);
+    }
+    message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
     return message;
   },
   fromSDK(object: GrantSDKType): Grant {
     return {
       authorization: object.authorization ? GlobalDecoderRegistry.fromSDK(object.authorization) : undefined,
-      expiration: object.expiration ?? undefined
+      expiration: object.expiration ?? undefined,
+      opt: isSet(object.opt) ? voteOptionFromJSON(object.opt) : -1,
+      singleMsg: object.single_msg ? Any.fromSDK(object.single_msg) : undefined,
+      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDK(e)) : []
     };
   },
   fromSDKJSON(object: any): GrantSDKType {
     return {
       authorization: isSet(object.authorization) ? GlobalDecoderRegistry.fromSDKJSON(object.authorization) : undefined,
-      expiration: isSet(object.expiration) ? new Date(object.expiration) : undefined
+      expiration: isSet(object.expiration) ? new Date(object.expiration) : undefined,
+      opt: isSet(object.opt) ? voteOptionFromJSON(object.opt) : -1,
+      single_msg: isSet(object.single_msg) ? Any.fromSDKJSON(object.single_msg) : undefined,
+      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromSDKJSON(e)) : []
     };
   },
   toSDK(message: Grant): GrantSDKType {
     const obj: any = {};
     message.authorization !== undefined && (obj.authorization = message.authorization ? GlobalDecoderRegistry.toSDK(message.authorization) : undefined);
     message.expiration !== undefined && (obj.expiration = message.expiration ?? undefined);
+    message.opt !== undefined && (obj.opt = voteOptionToJSON(message.opt));
+    message.singleMsg !== undefined && (obj.single_msg = message.singleMsg ? Any.toSDK(message.singleMsg) : undefined);
+    if (message.messages) {
+      obj.messages = message.messages.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.messages = [];
+    }
     return obj;
   },
   fromAmino(object: GrantAmino): Grant {
     return {
       authorization: object?.authorization ? GlobalDecoderRegistry.fromAmino(object.authorization) : undefined,
-      expiration: object?.expiration ? fromTimestamp(Timestamp.fromAmino(object.expiration)) : undefined
+      expiration: object?.expiration ? fromTimestamp(Timestamp.fromAmino(object.expiration)) : undefined,
+      opt: isSet(object.opt) ? voteOptionFromJSON(object.opt) : -1,
+      singleMsg: object?.single_msg ? Any.fromAmino(object.single_msg) : undefined,
+      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : []
     };
   },
   toAmino(message: Grant): GrantAmino {
     const obj: any = {};
     obj.authorization = message.authorization ? GlobalDecoderRegistry.toAmino(message.authorization) : undefined;
     obj.expiration = message.expiration ? Timestamp.toAmino(toTimestamp(message.expiration)) : undefined;
+    obj.opt = message.opt;
+    obj.single_msg = message.singleMsg ? Any.toAmino(message.singleMsg) : undefined;
+    if (message.messages) {
+      obj.messages = message.messages.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.messages = [];
+    }
     return obj;
   },
   fromAminoMsg(object: GrantAminoMsg): Grant {
