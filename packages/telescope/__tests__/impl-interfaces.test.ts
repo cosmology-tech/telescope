@@ -13,6 +13,9 @@ describe("implements interface works", () => {
         msg: "pass",
       },
       expiration: new Date(),
+      opt: 0,
+      singleMsg: Any.fromPartial({}),
+      messages: [Any.fromPartial({})],
     }).finish();
 
     const message = Grant.decode(data);
@@ -41,6 +44,9 @@ describe("implements interface works", () => {
         value: new Uint8Array([100, 101]),
       },
       expiration: new Date(),
+      opt: 0,
+      singleMsg: Any.fromPartial({}),
+      messages: [Any.fromPartial({})],
     }).finish();
 
     const message = Grant.decode(data);
@@ -58,6 +64,9 @@ describe("implements interface works", () => {
       Grant.encode({
         authorization: auth as unknown as Any,
         expiration: new Date(),
+        opt: 0,
+        singleMsg: Any.fromPartial({}),
+        messages: [Any.fromPartial({})],
       });
     }).toThrowError(
       `There's no decoder for the instance ${JSON.stringify(auth)}`
@@ -70,6 +79,9 @@ describe("implements interface works", () => {
         msg: "pass",
       },
       expiration: new Date("2020-01-01"),
+      opt: 0,
+      singleMsg: Any.fromPartial({}),
+      messages: [Any.fromPartial({})],
     }).finish();
 
     const message = Grant.decode(data);
@@ -86,6 +98,9 @@ describe("implements interface works", () => {
         value: new Uint8Array([100, 101]),
       },
       expiration: new Date("2020-01-01"),
+      opt: 0,
+      singleMsg: Any.fromPartial({}),
+      messages: [Any.fromPartial({})],
     }).finish();
 
     const message = Grant.decode(data);
@@ -225,6 +240,9 @@ describe("implements interface works", () => {
         ],
       },
       expiration: new Date("2020-01-01"),
+      opt: 0,
+      singleMsg: Any.fromPartial({}),
+      messages: [Any.fromPartial({})],
     }).finish();
 
     const message = Grant.decode(data);
@@ -245,6 +263,17 @@ describe("implements interface works", () => {
         ],
       },
       expiration: new Date("2020-01-01"),
+      opt: 0,
+      single_msg: {
+        type_url: "",
+        value: new Uint8Array(),
+      },
+      messages: [
+        {
+          type_url: "",
+          value: new Uint8Array(),
+        },
+      ],
     });
 
     const data = Grant.encode(message).finish();
@@ -274,6 +303,9 @@ describe("implements interface works", () => {
         ],
       },
       expiration: new Date("2020-01-01"),
+      opt: 0,
+      singleMsg: Any.fromPartial({}),
+      messages: [Any.fromPartial({})],
     }).finish();
 
     const message = Grant.decode(data);

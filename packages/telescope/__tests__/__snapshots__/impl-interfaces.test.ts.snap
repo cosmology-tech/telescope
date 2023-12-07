@@ -11,6 +11,17 @@ exports[`implements interface works toAmino for interface 1`] = `
     ],
   },
   "expiration": "2020-01-01T00:00:00Z",
+  "messages": [
+    {
+      "type": "",
+      "value": Uint8Array [],
+    },
+  ],
+  "opt": 0,
+  "single_msg": {
+    "type": "",
+    "value": Uint8Array [],
+  },
 }
 `;
 
@@ -21,6 +32,17 @@ exports[`implements interface works toJson for Any 1`] = `
     "value": "ZGU=",
   },
   "expiration": "2020-01-01T00:00:00.000Z",
+  "messages": [
+    {
+      "typeUrl": "",
+      "value": "",
+    },
+  ],
+  "opt": "VOTE_OPTION_UNSPECIFIED",
+  "singleMsg": {
+    "typeUrl": "",
+    "value": "",
+  },
 }
 `;
 
@@ -30,6 +52,17 @@ exports[`implements interface works toJson for extended interface 1`] = `
     "msg": "pass",
   },
   "expiration": "2020-01-01T00:00:00.000Z",
+  "messages": [
+    {
+      "typeUrl": "",
+      "value": "",
+    },
+  ],
+  "opt": "VOTE_OPTION_UNSPECIFIED",
+  "singleMsg": {
+    "typeUrl": "",
+    "value": "",
+  },
 }
 `;
 
@@ -44,5 +77,16 @@ exports[`implements interface works toSDK for interface 1`] = `
     ],
   },
   "expiration": 2020-01-01T00:00:00.000Z,
+  "messages": [
+    {
+      "type_url": "",
+      "value": Uint8Array [],
+    },
+  ],
+  "opt": "VOTE_OPTION_UNSPECIFIED",
+  "single_msg": {
+    "type_url": "",
+    "value": Uint8Array [],
+  },
 }
 `;

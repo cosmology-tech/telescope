@@ -179,10 +179,10 @@ export const getAcceptedInterfacesTypes = (
   context: ProtoParseContext,
   lookupInterface: string
 ) => {
-  return context.store._symbols.filter(
+  return lookupInterface ? context.store._symbols.filter(
     (s) =>
       s.implementsType === lookupInterface && s.ref === context.ref.filename
-  );
+  ) : [];
 };
 
 export const getSdkFieldName = (fieldName: string, field: ProtoField) => {
