@@ -416,7 +416,7 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
     obj.address = message.address;
     obj.sign_doc = message.signDoc ? SignDocDirectAux.toAmino(message.signDoc) : undefined;
     obj.mode = message.mode;
-    obj.sig = message.sig;
+    obj.sig = base64FromBytes(message.sig);
     return obj;
   },
   fromAminoMsg(object: AuxSignerDataAminoMsg): AuxSignerData {
@@ -876,7 +876,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
   toAmino(message: QueryRawContractStateRequest): QueryRawContractStateRequestAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.query_data = message.queryData;
+    obj.query_data = base64FromBytes(message.queryData);
     return obj;
   },
   fromAminoMsg(object: QueryRawContractStateRequestAminoMsg): QueryRawContractStateRequest {
@@ -2036,7 +2036,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
     obj.double_value = message.doubleValue;
     obj.string_value = message.stringValue;
-    obj.bytes_value = message.bytesValue;
+    message.bytesValue !== undefined && (obj.bytes_value = base64FromBytes(message.bytesValue));
     obj.duration_value = message.durationValue ? Duration.toAmino(message.durationValue) : undefined;
     obj.timestamp_value = message.timestampValue ? Timestamp.toAmino(toTimestamp(message.timestampValue)) : undefined;
     return obj;

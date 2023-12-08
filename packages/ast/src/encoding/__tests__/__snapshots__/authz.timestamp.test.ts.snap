@@ -120,7 +120,7 @@ exports[`cosmos/authz/v1beta1/authz date 3`] = `
   value: {
     authorization: {
       type_url: string;
-      value: Uint8Array;
+      value: string;
     };
     expiration: string;
   };
@@ -279,7 +279,7 @@ exports[`cosmos/authz/v1beta1/authz timestamp 3`] = `
   value: {
     authorization: {
       type_url: string;
-      value: Uint8Array;
+      value: string;
     };
     expiration: string;
   };
