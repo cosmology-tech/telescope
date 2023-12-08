@@ -232,7 +232,12 @@ export const fromAminoJSON = {
                         )
                     ]
                 ),
-                t.identifier('undefined')
+                args.isOptional
+                ? t.identifier("undefined")
+                : t.callExpression(
+                    t.memberExpression(t.identifier(name), t.identifier("fromPartial")),
+                    [t.objectExpression([])]
+                  )
             )
         );
     },
@@ -375,7 +380,22 @@ export const fromAminoJSON = {
                         )
                     ]
                 ),
-                t.identifier('undefined')
+                args.isOptional ?
+                  t.identifier('undefined') :
+                  t.callExpression(
+                    t.identifier('fromTimestamp'),
+                    [
+                        t.callExpression(
+                            t.memberExpression(
+                                t.identifier('Timestamp'),
+                                t.identifier('fromPartial')
+                            ),
+                            [
+                              t.objectExpression([])
+                            ]
+                        )
+                    ]
+                  )
             )
         );
     },

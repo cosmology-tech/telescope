@@ -613,7 +613,7 @@ export const QueryParamsResponse = {
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
@@ -1342,7 +1342,7 @@ export const QueryGetProtoRevStatisticsByRouteResponse = {
   },
   fromAmino(object: QueryGetProtoRevStatisticsByRouteResponseAmino): QueryGetProtoRevStatisticsByRouteResponse {
     return {
-      statistics: object?.statistics ? RouteStatistics.fromAmino(object.statistics) : undefined
+      statistics: object?.statistics ? RouteStatistics.fromAmino(object.statistics) : RouteStatistics.fromPartial({})
     };
   },
   toAmino(message: QueryGetProtoRevStatisticsByRouteResponse): QueryGetProtoRevStatisticsByRouteResponseAmino {
@@ -2186,7 +2186,7 @@ export const QueryGetProtoRevPoolWeightsResponse = {
   },
   fromAmino(object: QueryGetProtoRevPoolWeightsResponseAmino): QueryGetProtoRevPoolWeightsResponse {
     return {
-      poolWeights: object?.pool_weights ? PoolWeights.fromAmino(object.pool_weights) : undefined
+      poolWeights: object?.pool_weights ? PoolWeights.fromAmino(object.pool_weights) : PoolWeights.fromPartial({})
     };
   },
   toAmino(message: QueryGetProtoRevPoolWeightsResponse): QueryGetProtoRevPoolWeightsResponseAmino {

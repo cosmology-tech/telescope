@@ -221,7 +221,7 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({}),
       codes: Array.isArray(object?.codes) ? object.codes.map((e: any) => Code.fromAmino(e)) : [],
       contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => Contract.fromAmino(e)) : [],
       sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => Sequence.fromAmino(e)) : [],
@@ -434,7 +434,7 @@ export const Code = {
   fromAmino(object: CodeAmino): Code {
     return {
       codeId: BigInt(object.code_id),
-      codeInfo: object?.code_info ? CodeInfo.fromAmino(object.code_info) : undefined,
+      codeInfo: object?.code_info ? CodeInfo.fromAmino(object.code_info) : CodeInfo.fromPartial({}),
       codeBytes: object.code_bytes,
       pinned: object.pinned
     };
@@ -525,7 +525,7 @@ export const Contract = {
   fromAmino(object: ContractAmino): Contract {
     return {
       contractAddress: object.contract_address,
-      contractInfo: object?.contract_info ? ContractInfo.fromAmino(object.contract_info) : undefined,
+      contractInfo: object?.contract_info ? ContractInfo.fromAmino(object.contract_info) : ContractInfo.fromPartial({}),
       contractState: Array.isArray(object?.contract_state) ? object.contract_state.map((e: any) => Model.fromAmino(e)) : []
     };
   },

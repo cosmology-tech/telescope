@@ -181,7 +181,7 @@ export const GenesisState = {
     return {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromAmino(e)) : [],
       nextPoolNumber: BigInt(object.next_pool_number),
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: GenesisState): GenesisStateAmino {

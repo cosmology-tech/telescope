@@ -280,7 +280,7 @@ export const Incentive = {
       contract: object.contract,
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromAmino(e)) : [],
       epochs: object.epochs,
-      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : fromTimestamp(Timestamp.fromPartial({})),
       totalGas: BigInt(object.total_gas)
     };
   },

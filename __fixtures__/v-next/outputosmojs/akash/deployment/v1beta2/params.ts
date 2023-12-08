@@ -76,7 +76,7 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      deploymentMinDeposit: object?.deployment_min_deposit ? Coin.fromAmino(object.deployment_min_deposit) : undefined
+      deploymentMinDeposit: object?.deployment_min_deposit ? Coin.fromAmino(object.deployment_min_deposit) : Coin.fromPartial({})
     };
   },
   toAmino(message: Params): ParamsAmino {

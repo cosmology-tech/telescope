@@ -304,7 +304,7 @@ export const Deployment = {
   },
   fromAmino(object: DeploymentAmino): Deployment {
     return {
-      deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : undefined,
+      deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : DeploymentID.fromPartial({}),
       state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
       version: object.version,
       createdAt: BigInt(object.created_at)

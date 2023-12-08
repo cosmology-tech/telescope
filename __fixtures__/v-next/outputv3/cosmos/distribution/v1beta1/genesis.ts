@@ -548,7 +548,7 @@ export const ValidatorAccumulatedCommissionRecord = {
   fromAmino(object: ValidatorAccumulatedCommissionRecordAmino): ValidatorAccumulatedCommissionRecord {
     return {
       validatorAddress: object.validator_address,
-      accumulated: object?.accumulated ? ValidatorAccumulatedCommission.fromAmino(object.accumulated) : undefined
+      accumulated: object?.accumulated ? ValidatorAccumulatedCommission.fromAmino(object.accumulated) : ValidatorAccumulatedCommission.fromPartial({})
     };
   },
   toAmino(message: ValidatorAccumulatedCommissionRecord, useInterfaces: boolean = true): ValidatorAccumulatedCommissionRecordAmino {
@@ -658,7 +658,7 @@ export const ValidatorHistoricalRewardsRecord = {
     return {
       validatorAddress: object.validator_address,
       period: BigInt(object.period),
-      rewards: object?.rewards ? ValidatorHistoricalRewards.fromAmino(object.rewards) : undefined
+      rewards: object?.rewards ? ValidatorHistoricalRewards.fromAmino(object.rewards) : ValidatorHistoricalRewards.fromPartial({})
     };
   },
   toAmino(message: ValidatorHistoricalRewardsRecord, useInterfaces: boolean = true): ValidatorHistoricalRewardsRecordAmino {
@@ -754,7 +754,7 @@ export const ValidatorCurrentRewardsRecord = {
   fromAmino(object: ValidatorCurrentRewardsRecordAmino): ValidatorCurrentRewardsRecord {
     return {
       validatorAddress: object.validator_address,
-      rewards: object?.rewards ? ValidatorCurrentRewards.fromAmino(object.rewards) : undefined
+      rewards: object?.rewards ? ValidatorCurrentRewards.fromAmino(object.rewards) : ValidatorCurrentRewards.fromPartial({})
     };
   },
   toAmino(message: ValidatorCurrentRewardsRecord, useInterfaces: boolean = true): ValidatorCurrentRewardsRecordAmino {
@@ -862,7 +862,7 @@ export const DelegatorStartingInfoRecord = {
     return {
       delegatorAddress: object.delegator_address,
       validatorAddress: object.validator_address,
-      startingInfo: object?.starting_info ? DelegatorStartingInfo.fromAmino(object.starting_info) : undefined
+      startingInfo: object?.starting_info ? DelegatorStartingInfo.fromAmino(object.starting_info) : DelegatorStartingInfo.fromPartial({})
     };
   },
   toAmino(message: DelegatorStartingInfoRecord, useInterfaces: boolean = true): DelegatorStartingInfoRecordAmino {
@@ -988,7 +988,7 @@ export const ValidatorSlashEventRecord = {
       validatorAddress: object.validator_address,
       height: BigInt(object.height),
       period: BigInt(object.period),
-      validatorSlashEvent: object?.validator_slash_event ? ValidatorSlashEvent.fromAmino(object.validator_slash_event) : undefined
+      validatorSlashEvent: object?.validator_slash_event ? ValidatorSlashEvent.fromAmino(object.validator_slash_event) : ValidatorSlashEvent.fromPartial({})
     };
   },
   toAmino(message: ValidatorSlashEventRecord, useInterfaces: boolean = true): ValidatorSlashEventRecordAmino {
@@ -1238,8 +1238,8 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      feePool: object?.fee_pool ? FeePool.fromAmino(object.fee_pool) : undefined,
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({}),
+      feePool: object?.fee_pool ? FeePool.fromAmino(object.fee_pool) : FeePool.fromPartial({}),
       delegatorWithdrawInfos: Array.isArray(object?.delegator_withdraw_infos) ? object.delegator_withdraw_infos.map((e: any) => DelegatorWithdrawInfo.fromAmino(e)) : [],
       previousProposer: object.previous_proposer,
       outstandingRewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => ValidatorOutstandingRewardsRecord.fromAmino(e)) : [],

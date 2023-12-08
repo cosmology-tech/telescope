@@ -249,7 +249,7 @@ export const QueryParamsResponse = {
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
@@ -385,7 +385,7 @@ export const QueryDenomAuthorityMetadataResponse = {
   },
   fromAmino(object: QueryDenomAuthorityMetadataResponseAmino): QueryDenomAuthorityMetadataResponse {
     return {
-      authorityMetadata: object?.authority_metadata ? DenomAuthorityMetadata.fromAmino(object.authority_metadata) : undefined
+      authorityMetadata: object?.authority_metadata ? DenomAuthorityMetadata.fromAmino(object.authority_metadata) : DenomAuthorityMetadata.fromPartial({})
     };
   },
   toAmino(message: QueryDenomAuthorityMetadataResponse): QueryDenomAuthorityMetadataResponseAmino {

@@ -433,11 +433,11 @@ export const PeriodicAllowance = {
   },
   fromAmino(object: PeriodicAllowanceAmino): PeriodicAllowance {
     return {
-      basic: object?.basic ? BasicAllowance.fromAmino(object.basic) : undefined,
-      period: object?.period ? Duration.fromAmino(object.period) : undefined,
+      basic: object?.basic ? BasicAllowance.fromAmino(object.basic) : BasicAllowance.fromPartial({}),
+      period: object?.period ? Duration.fromAmino(object.period) : Duration.fromPartial({}),
       periodSpendLimit: Array.isArray(object?.period_spend_limit) ? object.period_spend_limit.map((e: any) => Coin.fromAmino(e)) : [],
       periodCanSpend: Array.isArray(object?.period_can_spend) ? object.period_can_spend.map((e: any) => Coin.fromAmino(e)) : [],
-      periodReset: object?.period_reset ? fromTimestamp(Timestamp.fromAmino(object.period_reset)) : undefined
+      periodReset: object?.period_reset ? fromTimestamp(Timestamp.fromAmino(object.period_reset)) : fromTimestamp(Timestamp.fromPartial({}))
     };
   },
   toAmino(message: PeriodicAllowance): PeriodicAllowanceAmino {

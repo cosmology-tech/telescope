@@ -209,9 +209,9 @@ export const GenesisState = {
       deposits: Array.isArray(object?.deposits) ? object.deposits.map((e: any) => Deposit.fromAmino(e)) : [],
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromAmino(e)) : [],
       proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromAmino(e)) : [],
-      depositParams: object?.deposit_params ? DepositParams.fromAmino(object.deposit_params) : undefined,
-      votingParams: object?.voting_params ? VotingParams.fromAmino(object.voting_params) : undefined,
-      tallyParams: object?.tally_params ? TallyParams.fromAmino(object.tally_params) : undefined
+      depositParams: object?.deposit_params ? DepositParams.fromAmino(object.deposit_params) : DepositParams.fromPartial({}),
+      votingParams: object?.voting_params ? VotingParams.fromAmino(object.voting_params) : VotingParams.fromPartial({}),
+      tallyParams: object?.tally_params ? TallyParams.fromAmino(object.tally_params) : TallyParams.fromPartial({})
     };
   },
   toAmino(message: GenesisState): GenesisStateAmino {

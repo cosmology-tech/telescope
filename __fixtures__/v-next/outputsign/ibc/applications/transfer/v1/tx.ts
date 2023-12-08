@@ -186,10 +186,10 @@ export const MsgTransfer = {
     return {
       sourcePort: object.source_port,
       sourceChannel: object.source_channel,
-      token: object?.token ? Coin.fromAmino(object.token) : undefined,
+      token: object?.token ? Coin.fromAmino(object.token) : Coin.fromPartial({}),
       sender: object.sender,
       receiver: object.receiver,
-      timeoutHeight: object?.timeout_height ? Height.fromAmino(object.timeout_height) : undefined,
+      timeoutHeight: object?.timeout_height ? Height.fromAmino(object.timeout_height) : Height.fromPartial({}),
       timeoutTimestamp: BigInt(object.timeout_timestamp)
     };
   },

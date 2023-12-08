@@ -81,7 +81,7 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: GenesisState): GenesisStateAmino {

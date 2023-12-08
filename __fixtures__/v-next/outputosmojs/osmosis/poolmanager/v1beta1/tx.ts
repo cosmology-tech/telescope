@@ -170,7 +170,7 @@ export const MsgSwapExactAmountIn = {
     return {
       sender: object.sender,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromAmino(e)) : [],
-      tokenIn: object?.token_in ? Coin.fromAmino(object.token_in) : undefined,
+      tokenIn: object?.token_in ? Coin.fromAmino(object.token_in) : Coin.fromPartial({}),
       tokenOutMinAmount: object.token_out_min_amount
     };
   },
@@ -412,7 +412,7 @@ export const MsgSwapExactAmountOut = {
       sender: object.sender,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromAmino(e)) : [],
       tokenInMaxAmount: object.token_in_max_amount,
-      tokenOut: object?.token_out ? Coin.fromAmino(object.token_out) : undefined
+      tokenOut: object?.token_out ? Coin.fromAmino(object.token_out) : Coin.fromPartial({})
     };
   },
   toAmino(message: MsgSwapExactAmountOut): MsgSwapExactAmountOutAmino {

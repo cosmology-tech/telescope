@@ -127,7 +127,7 @@ export const GenesisState = {
     return {
       orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromAmino(e)) : [],
       leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => Lease.fromAmino(e)) : [],
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {

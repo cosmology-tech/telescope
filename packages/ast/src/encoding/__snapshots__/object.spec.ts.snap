@@ -3230,9 +3230,9 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      clientGenesis: object?.client_genesis ? GenesisState1.fromAmino(object.client_genesis) : undefined,
-      connectionGenesis: object?.connection_genesis ? GenesisState2.fromAmino(object.connection_genesis) : undefined,
-      channelGenesis: object?.channel_genesis ? GenesisState3.fromAmino(object.channel_genesis) : undefined
+      clientGenesis: object?.client_genesis ? GenesisState1.fromAmino(object.client_genesis) : GenesisState1.fromPartial({}),
+      connectionGenesis: object?.connection_genesis ? GenesisState2.fromAmino(object.connection_genesis) : GenesisState2.fromPartial({}),
+      channelGenesis: object?.channel_genesis ? GenesisState3.fromAmino(object.channel_genesis) : GenesisState3.fromPartial({})
     };
   },
   toAmino(message: GenesisState): GenesisStateAmino {
@@ -3793,7 +3793,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
     return {
       sender: object.sender,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromAmino(e)) : [],
-      tokenIn: object?.token_in ? Coin.fromAmino(object.token_in) : undefined,
+      tokenIn: object?.token_in ? Coin.fromAmino(object.token_in) : Coin.fromPartial({}),
       tokenOutMinAmount: object.token_out_min_amount
     };
   },
@@ -3930,7 +3930,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
       sender: object.sender,
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromAmino(e)) : [],
       tokenInMaxAmount: object.token_in_max_amount,
-      tokenOut: object?.token_out ? Coin.fromAmino(object.token_out) : undefined
+      tokenOut: object?.token_out ? Coin.fromAmino(object.token_out) : Coin.fromPartial({})
     };
   },
   toAmino(message: MsgSwapExactAmountOut): MsgSwapExactAmountOutAmino {

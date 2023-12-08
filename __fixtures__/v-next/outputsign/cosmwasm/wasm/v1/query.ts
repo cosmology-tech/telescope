@@ -715,7 +715,7 @@ export const QueryContractInfoResponse = {
   fromAmino(object: QueryContractInfoResponseAmino): QueryContractInfoResponse {
     return {
       address: object.address,
-      contractInfo: object?.contract_info ? ContractInfo.fromAmino(object.contract_info) : undefined
+      contractInfo: object?.contract_info ? ContractInfo.fromAmino(object.contract_info) : ContractInfo.fromPartial({})
     };
   },
   toAmino(message: QueryContractInfoResponse): QueryContractInfoResponseAmino {

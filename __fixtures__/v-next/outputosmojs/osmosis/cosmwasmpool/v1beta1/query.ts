@@ -154,7 +154,7 @@ export const ParamsResponse = {
   },
   fromAmino(object: ParamsResponseAmino): ParamsResponse {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: ParamsResponse): ParamsResponseAmino {

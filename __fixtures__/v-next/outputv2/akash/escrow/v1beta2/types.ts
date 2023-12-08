@@ -478,14 +478,14 @@ export const Account = {
   },
   fromAmino(object: AccountAmino): Account {
     return {
-      id: object?.id ? AccountID.fromAmino(object.id) : undefined,
+      id: object?.id ? AccountID.fromAmino(object.id) : AccountID.fromPartial({}),
       owner: object.owner,
       state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
-      balance: object?.balance ? DecCoin.fromAmino(object.balance) : undefined,
-      transferred: object?.transferred ? DecCoin.fromAmino(object.transferred) : undefined,
+      balance: object?.balance ? DecCoin.fromAmino(object.balance) : DecCoin.fromPartial({}),
+      transferred: object?.transferred ? DecCoin.fromAmino(object.transferred) : DecCoin.fromPartial({}),
       settledAt: BigInt(object.settled_at),
       depositor: object.depositor,
-      funds: object?.funds ? DecCoin.fromAmino(object.funds) : undefined
+      funds: object?.funds ? DecCoin.fromAmino(object.funds) : DecCoin.fromPartial({})
     };
   },
   toAmino(message: Account): AccountAmino {
@@ -653,13 +653,13 @@ export const FractionalPayment = {
   },
   fromAmino(object: FractionalPaymentAmino): FractionalPayment {
     return {
-      accountId: object?.account_id ? AccountID.fromAmino(object.account_id) : undefined,
+      accountId: object?.account_id ? AccountID.fromAmino(object.account_id) : AccountID.fromPartial({}),
       paymentId: object.payment_id,
       owner: object.owner,
       state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : -1,
-      rate: object?.rate ? DecCoin.fromAmino(object.rate) : undefined,
-      balance: object?.balance ? DecCoin.fromAmino(object.balance) : undefined,
-      withdrawn: object?.withdrawn ? Coin.fromAmino(object.withdrawn) : undefined
+      rate: object?.rate ? DecCoin.fromAmino(object.rate) : DecCoin.fromPartial({}),
+      balance: object?.balance ? DecCoin.fromAmino(object.balance) : DecCoin.fromPartial({}),
+      withdrawn: object?.withdrawn ? Coin.fromAmino(object.withdrawn) : Coin.fromPartial({})
     };
   },
   toAmino(message: FractionalPayment): FractionalPaymentAmino {

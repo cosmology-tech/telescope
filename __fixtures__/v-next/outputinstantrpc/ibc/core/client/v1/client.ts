@@ -375,7 +375,7 @@ export const ConsensusStateWithHeight = {
   },
   fromAmino(object: ConsensusStateWithHeightAmino): ConsensusStateWithHeight {
     return {
-      height: object?.height ? Height.fromAmino(object.height) : undefined,
+      height: object?.height ? Height.fromAmino(object.height) : Height.fromPartial({}),
       consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined
     };
   },
@@ -770,7 +770,7 @@ export const UpgradeProposal = {
     return {
       title: object.title,
       description: object.description,
-      plan: object?.plan ? Plan.fromAmino(object.plan) : undefined,
+      plan: object?.plan ? Plan.fromAmino(object.plan) : Plan.fromPartial({}),
       upgradedClientState: object?.upgraded_client_state ? Any.fromAmino(object.upgraded_client_state) : undefined
     };
   },

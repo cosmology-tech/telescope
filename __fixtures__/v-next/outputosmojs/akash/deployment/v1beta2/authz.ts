@@ -86,7 +86,7 @@ export const DepositDeploymentAuthorization = {
   },
   fromAmino(object: DepositDeploymentAuthorizationAmino): DepositDeploymentAuthorization {
     return {
-      spendLimit: object?.spend_limit ? Coin.fromAmino(object.spend_limit) : undefined
+      spendLimit: object?.spend_limit ? Coin.fromAmino(object.spend_limit) : Coin.fromPartial({})
     };
   },
   toAmino(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationAmino {

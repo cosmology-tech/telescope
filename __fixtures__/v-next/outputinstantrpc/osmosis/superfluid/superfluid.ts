@@ -633,7 +633,7 @@ export const SuperfluidDelegationRecord = {
     return {
       delegatorAddress: object.delegator_address,
       validatorAddress: object.validator_address,
-      delegationAmount: object?.delegation_amount ? Coin.fromAmino(object.delegation_amount) : undefined,
+      delegationAmount: object?.delegation_amount ? Coin.fromAmino(object.delegation_amount) : Coin.fromPartial({}),
       equivalentStakedAmount: object?.equivalent_staked_amount ? Coin.fromAmino(object.equivalent_staked_amount) : undefined
     };
   },

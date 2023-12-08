@@ -541,7 +541,7 @@ export const Part = {
     return {
       index: object.index,
       bytes: object.bytes,
-      proof: object?.proof ? Proof.fromAmino(object.proof) : undefined
+      proof: object?.proof ? Proof.fromAmino(object.proof) : Proof.fromPartial({})
     };
   },
   toAmino(message: Part): PartAmino {
@@ -645,7 +645,7 @@ export const BlockID = {
   fromAmino(object: BlockIDAmino): BlockID {
     return {
       hash: object.hash,
-      partSetHeader: object?.part_set_header ? PartSetHeader.fromAmino(object.part_set_header) : undefined
+      partSetHeader: object?.part_set_header ? PartSetHeader.fromAmino(object.part_set_header) : PartSetHeader.fromPartial({})
     };
   },
   toAmino(message: BlockID): BlockIDAmino {
@@ -907,11 +907,11 @@ export const Header = {
   },
   fromAmino(object: HeaderAmino): Header {
     return {
-      version: object?.version ? Consensus.fromAmino(object.version) : undefined,
+      version: object?.version ? Consensus.fromAmino(object.version) : Consensus.fromPartial({}),
       chainId: object.chain_id,
       height: BigInt(object.height),
-      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
-      lastBlockId: object?.last_block_id ? BlockID.fromAmino(object.last_block_id) : undefined,
+      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : fromTimestamp(Timestamp.fromPartial({})),
+      lastBlockId: object?.last_block_id ? BlockID.fromAmino(object.last_block_id) : BlockID.fromPartial({}),
       lastCommitHash: object.last_commit_hash,
       dataHash: object.data_hash,
       validatorsHash: object.validators_hash,
@@ -1215,8 +1215,8 @@ export const Vote = {
       type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
       height: BigInt(object.height),
       round: object.round,
-      blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : undefined,
-      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined,
+      blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : BlockID.fromPartial({}),
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : fromTimestamp(Timestamp.fromPartial({})),
       validatorAddress: object.validator_address,
       validatorIndex: object.validator_index,
       signature: object.signature
@@ -1365,7 +1365,7 @@ export const Commit = {
     return {
       height: BigInt(object.height),
       round: object.round,
-      blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : undefined,
+      blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : BlockID.fromPartial({}),
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => CommitSig.fromAmino(e)) : []
     };
   },
@@ -1500,7 +1500,7 @@ export const CommitSig = {
     return {
       blockIdFlag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : -1,
       validatorAddress: object.validator_address,
-      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined,
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : fromTimestamp(Timestamp.fromPartial({})),
       signature: object.signature
     };
   },
@@ -1676,8 +1676,8 @@ export const Proposal = {
       height: BigInt(object.height),
       round: object.round,
       polRound: object.pol_round,
-      blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : undefined,
-      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined,
+      blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : BlockID.fromPartial({}),
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : fromTimestamp(Timestamp.fromPartial({})),
       signature: object.signature
     };
   },
@@ -2027,9 +2027,9 @@ export const BlockMeta = {
   },
   fromAmino(object: BlockMetaAmino): BlockMeta {
     return {
-      blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : undefined,
+      blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : BlockID.fromPartial({}),
       blockSize: BigInt(object.block_size),
-      header: object?.header ? Header.fromAmino(object.header) : undefined,
+      header: object?.header ? Header.fromAmino(object.header) : Header.fromPartial({}),
       numTxs: BigInt(object.num_txs)
     };
   },

@@ -235,7 +235,7 @@ export const GenesisState = {
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
       nextPoolId: BigInt(object.next_pool_id),
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({}),
       poolRoutes: Array.isArray(object?.pool_routes) ? object.pool_routes.map((e: any) => ModuleRoute.fromAmino(e)) : []
     };
   },

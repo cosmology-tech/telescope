@@ -232,7 +232,7 @@ export const ArithmeticTwapRequest = {
       poolId: BigInt(object.pool_id),
       baseAsset: object.base_asset,
       quoteAsset: object.quote_asset,
-      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : fromTimestamp(Timestamp.fromPartial({})),
       endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : undefined
     };
   },
@@ -454,7 +454,7 @@ export const ArithmeticTwapToNowRequest = {
       poolId: BigInt(object.pool_id),
       baseAsset: object.base_asset,
       quoteAsset: object.quote_asset,
-      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : fromTimestamp(Timestamp.fromPartial({}))
     };
   },
   toAmino(message: ArithmeticTwapToNowRequest): ArithmeticTwapToNowRequestAmino {
@@ -706,7 +706,7 @@ export const ParamsResponse = {
   },
   fromAmino(object: ParamsResponseAmino): ParamsResponse {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: ParamsResponse): ParamsResponseAmino {

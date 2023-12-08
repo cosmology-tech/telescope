@@ -1392,7 +1392,7 @@ export const QuerySupplyOfResponse = {
   },
   fromAmino(object: QuerySupplyOfResponseAmino): QuerySupplyOfResponse {
     return {
-      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
+      amount: object?.amount ? Coin.fromAmino(object.amount) : Coin.fromPartial({})
     };
   },
   toAmino(message: QuerySupplyOfResponse, useInterfaces: boolean = true): QuerySupplyOfResponseAmino {
@@ -1535,7 +1535,7 @@ export const QueryParamsResponse = {
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
@@ -1883,7 +1883,7 @@ export const QueryDenomMetadataResponse = {
   },
   fromAmino(object: QueryDenomMetadataResponseAmino): QueryDenomMetadataResponse {
     return {
-      metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : undefined
+      metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : Metadata.fromPartial({})
     };
   },
   toAmino(message: QueryDenomMetadataResponse, useInterfaces: boolean = true): QueryDenomMetadataResponseAmino {
@@ -2072,7 +2072,7 @@ export const DenomOwner = {
   fromAmino(object: DenomOwnerAmino): DenomOwner {
     return {
       address: object.address,
-      balance: object?.balance ? Coin.fromAmino(object.balance) : undefined
+      balance: object?.balance ? Coin.fromAmino(object.balance) : Coin.fromPartial({})
     };
   },
   toAmino(message: DenomOwner, useInterfaces: boolean = true): DenomOwnerAmino {

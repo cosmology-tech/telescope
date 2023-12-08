@@ -344,9 +344,9 @@ export const Order = {
   },
   fromAmino(object: OrderAmino): Order {
     return {
-      orderId: object?.order_id ? OrderID.fromAmino(object.order_id) : undefined,
+      orderId: object?.order_id ? OrderID.fromAmino(object.order_id) : OrderID.fromPartial({}),
       state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
-      spec: object?.spec ? GroupSpec.fromAmino(object.spec) : undefined,
+      spec: object?.spec ? GroupSpec.fromAmino(object.spec) : GroupSpec.fromPartial({}),
       createdAt: BigInt(object.created_at)
     };
   },

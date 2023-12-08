@@ -255,9 +255,9 @@ export const Gauge = {
     return {
       id: BigInt(object.id),
       isPerpetual: object.is_perpetual,
-      distributeTo: object?.distribute_to ? QueryCondition.fromAmino(object.distribute_to) : undefined,
+      distributeTo: object?.distribute_to ? QueryCondition.fromAmino(object.distribute_to) : QueryCondition.fromPartial({}),
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : [],
-      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : fromTimestamp(Timestamp.fromPartial({})),
       numEpochsPaidOver: BigInt(object.num_epochs_paid_over),
       filledEpochs: BigInt(object.filled_epochs),
       distributedCoins: Array.isArray(object?.distributed_coins) ? object.distributed_coins.map((e: any) => Coin.fromAmino(e)) : []

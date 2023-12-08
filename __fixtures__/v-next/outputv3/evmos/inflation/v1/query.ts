@@ -505,7 +505,7 @@ export const QueryEpochMintProvisionResponse = {
   },
   fromAmino(object: QueryEpochMintProvisionResponseAmino): QueryEpochMintProvisionResponse {
     return {
-      epochMintProvision: object?.epoch_mint_provision ? DecCoin.fromAmino(object.epoch_mint_provision) : undefined
+      epochMintProvision: object?.epoch_mint_provision ? DecCoin.fromAmino(object.epoch_mint_provision) : DecCoin.fromPartial({})
     };
   },
   toAmino(message: QueryEpochMintProvisionResponse, useInterfaces: boolean = true): QueryEpochMintProvisionResponseAmino {
@@ -787,7 +787,7 @@ export const QueryCirculatingSupplyResponse = {
   },
   fromAmino(object: QueryCirculatingSupplyResponseAmino): QueryCirculatingSupplyResponse {
     return {
-      circulatingSupply: object?.circulating_supply ? DecCoin.fromAmino(object.circulating_supply) : undefined
+      circulatingSupply: object?.circulating_supply ? DecCoin.fromAmino(object.circulating_supply) : DecCoin.fromPartial({})
     };
   },
   toAmino(message: QueryCirculatingSupplyResponse, useInterfaces: boolean = true): QueryCirculatingSupplyResponseAmino {
@@ -1067,7 +1067,7 @@ export const QueryParamsResponse = {
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {

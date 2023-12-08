@@ -41,7 +41,7 @@ exports[`Duraation: duration DepositParams 1`] = `
   fromAmino(object: DepositParamsAmino): DepositParams {
     return {
       minDeposit: Array.isArray(object?.min_deposit) ? object.min_deposit.map((e: any) => Coin.fromAmino(e)) : [],
-      maxDepositPeriod: object?.max_deposit_period ? Duration.fromAmino(object.max_deposit_period) : undefined
+      maxDepositPeriod: object?.max_deposit_period ? Duration.fromAmino(object.max_deposit_period) : Duration.fromPartial({})
     };
   },
   toAmino(message: DepositParams): DepositParamsAmino {
@@ -119,7 +119,7 @@ exports[`Duration: string DepositParams 1`] = `
   fromAmino(object: DepositParamsAmino): DepositParams {
     return {
       minDeposit: Array.isArray(object?.min_deposit) ? object.min_deposit.map((e: any) => Coin.fromAmino(e)) : [],
-      maxDepositPeriod: object?.max_deposit_period ? Duration.fromAmino(object.max_deposit_period) : undefined
+      maxDepositPeriod: object?.max_deposit_period ? Duration.fromAmino(object.max_deposit_period) : Duration.fromPartial({})
     };
   },
   toAmino(message: DepositParams): DepositParamsAmino {

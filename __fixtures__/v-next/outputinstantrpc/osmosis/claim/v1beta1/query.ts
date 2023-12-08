@@ -422,7 +422,7 @@ export const QueryParamsResponse = {
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
@@ -608,7 +608,7 @@ export const QueryClaimRecordResponse = {
   },
   fromAmino(object: QueryClaimRecordResponseAmino): QueryClaimRecordResponse {
     return {
-      claimRecord: object?.claim_record ? ClaimRecord.fromAmino(object.claim_record) : undefined
+      claimRecord: object?.claim_record ? ClaimRecord.fromAmino(object.claim_record) : ClaimRecord.fromPartial({})
     };
   },
   toAmino(message: QueryClaimRecordResponse): QueryClaimRecordResponseAmino {

@@ -389,8 +389,8 @@ export const PeriodLock = {
     return {
       ID: BigInt(object.ID),
       owner: object.owner,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : undefined,
+      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({}),
+      endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : fromTimestamp(Timestamp.fromPartial({})),
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
@@ -527,8 +527,8 @@ export const QueryCondition = {
     return {
       lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : -1,
       denom: object.denom,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
+      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({}),
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : fromTimestamp(Timestamp.fromPartial({}))
     };
   },
   toAmino(message: QueryCondition): QueryConditionAmino {
@@ -661,8 +661,8 @@ export const SyntheticLock = {
     return {
       underlyingLockId: BigInt(object.underlying_lock_id),
       synthDenom: object.synth_denom,
-      endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : undefined,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
+      endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : fromTimestamp(Timestamp.fromPartial({})),
+      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({})
     };
   },
   toAmino(message: SyntheticLock): SyntheticLockAmino {

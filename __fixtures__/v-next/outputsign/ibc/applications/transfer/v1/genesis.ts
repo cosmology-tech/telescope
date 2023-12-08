@@ -85,7 +85,7 @@ export const GenesisState = {
     return {
       portId: object.port_id,
       denomTraces: Array.isArray(object?.denom_traces) ? object.denom_traces.map((e: any) => DenomTrace.fromAmino(e)) : [],
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: GenesisState): GenesisStateAmino {

@@ -245,9 +245,9 @@ export const MsgCreateGauge = {
     return {
       isPerpetual: object.is_perpetual,
       owner: object.owner,
-      distributeTo: object?.distribute_to ? QueryCondition.fromAmino(object.distribute_to) : undefined,
+      distributeTo: object?.distribute_to ? QueryCondition.fromAmino(object.distribute_to) : QueryCondition.fromPartial({}),
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : [],
-      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : fromTimestamp(Timestamp.fromPartial({})),
       numEpochsPaidOver: BigInt(object.num_epochs_paid_over)
     };
   },

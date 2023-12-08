@@ -123,9 +123,9 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      airdropStartTime: object?.airdrop_start_time ? fromTimestamp(Timestamp.fromAmino(object.airdrop_start_time)) : undefined,
-      durationUntilDecay: object?.duration_until_decay ? Duration.fromAmino(object.duration_until_decay) : undefined,
-      durationOfDecay: object?.duration_of_decay ? Duration.fromAmino(object.duration_of_decay) : undefined,
+      airdropStartTime: object?.airdrop_start_time ? fromTimestamp(Timestamp.fromAmino(object.airdrop_start_time)) : fromTimestamp(Timestamp.fromPartial({})),
+      durationUntilDecay: object?.duration_until_decay ? Duration.fromAmino(object.duration_until_decay) : Duration.fromPartial({}),
+      durationOfDecay: object?.duration_of_decay ? Duration.fromAmino(object.duration_of_decay) : Duration.fromPartial({}),
       claimDenom: object.claim_denom
     };
   },

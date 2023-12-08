@@ -639,7 +639,7 @@ export const QueryClientStateResponse = {
     return {
       clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
       proof: object.proof,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryClientStateResponse, useInterfaces: boolean = true): QueryClientStateResponseAmino {
@@ -1063,7 +1063,7 @@ export const QueryConsensusStateResponse = {
     return {
       consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
       proof: object.proof,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryConsensusStateResponse, useInterfaces: boolean = true): QueryConsensusStateResponseAmino {

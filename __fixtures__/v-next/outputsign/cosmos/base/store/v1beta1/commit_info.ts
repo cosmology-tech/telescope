@@ -228,7 +228,7 @@ export const StoreInfo = {
   fromAmino(object: StoreInfoAmino): StoreInfo {
     return {
       name: object.name,
-      commitId: object?.commit_id ? CommitID.fromAmino(object.commit_id) : undefined
+      commitId: object?.commit_id ? CommitID.fromAmino(object.commit_id) : CommitID.fromPartial({})
     };
   },
   toAmino(message: StoreInfo): StoreInfoAmino {

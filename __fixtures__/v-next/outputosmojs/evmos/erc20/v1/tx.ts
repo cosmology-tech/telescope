@@ -156,7 +156,7 @@ export const MsgConvertCoin = {
   },
   fromAmino(object: MsgConvertCoinAmino): MsgConvertCoin {
     return {
-      coin: object?.coin ? Coin.fromAmino(object.coin) : undefined,
+      coin: object?.coin ? Coin.fromAmino(object.coin) : Coin.fromPartial({}),
       receiver: object.receiver,
       sender: object.sender
     };

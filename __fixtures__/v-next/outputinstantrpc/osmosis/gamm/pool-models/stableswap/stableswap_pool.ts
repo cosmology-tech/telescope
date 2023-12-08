@@ -360,9 +360,9 @@ export const Pool = {
     return {
       address: object.address,
       id: BigInt(object.id),
-      poolParams: object?.pool_params ? PoolParams.fromAmino(object.pool_params) : undefined,
+      poolParams: object?.pool_params ? PoolParams.fromAmino(object.pool_params) : PoolParams.fromPartial({}),
       futurePoolGovernor: object.future_pool_governor,
-      totalShares: object?.total_shares ? Coin.fromAmino(object.total_shares) : undefined,
+      totalShares: object?.total_shares ? Coin.fromAmino(object.total_shares) : Coin.fromPartial({}),
       poolLiquidity: Array.isArray(object?.pool_liquidity) ? object.pool_liquidity.map((e: any) => Coin.fromAmino(e)) : [],
       scalingFactors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => BigInt(e)) : [],
       scalingFactorController: object.scaling_factor_controller

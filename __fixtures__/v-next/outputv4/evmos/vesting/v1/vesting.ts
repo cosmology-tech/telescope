@@ -175,7 +175,7 @@ export const ClawbackVestingAccount = {
     return {
       baseVestingAccount: object?.base_vesting_account ? BaseVestingAccount.fromAmino(object.base_vesting_account) : undefined,
       funderAddress: object.funder_address,
-      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : fromTimestamp(Timestamp.fromPartial({})),
       lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromAmino(e)) : [],
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : []
     };

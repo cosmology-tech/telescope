@@ -477,12 +477,12 @@ export const ClientState = {
   fromAmino(object: ClientStateAmino): ClientState {
     return {
       chainId: object.chain_id,
-      trustLevel: object?.trust_level ? Fraction.fromAmino(object.trust_level) : undefined,
-      trustingPeriod: object?.trusting_period ? Duration.fromAmino(object.trusting_period) : undefined,
-      unbondingPeriod: object?.unbonding_period ? Duration.fromAmino(object.unbonding_period) : undefined,
-      maxClockDrift: object?.max_clock_drift ? Duration.fromAmino(object.max_clock_drift) : undefined,
-      frozenHeight: object?.frozen_height ? Height.fromAmino(object.frozen_height) : undefined,
-      latestHeight: object?.latest_height ? Height.fromAmino(object.latest_height) : undefined,
+      trustLevel: object?.trust_level ? Fraction.fromAmino(object.trust_level) : Fraction.fromPartial({}),
+      trustingPeriod: object?.trusting_period ? Duration.fromAmino(object.trusting_period) : Duration.fromPartial({}),
+      unbondingPeriod: object?.unbonding_period ? Duration.fromAmino(object.unbonding_period) : Duration.fromPartial({}),
+      maxClockDrift: object?.max_clock_drift ? Duration.fromAmino(object.max_clock_drift) : Duration.fromPartial({}),
+      frozenHeight: object?.frozen_height ? Height.fromAmino(object.frozen_height) : Height.fromPartial({}),
+      latestHeight: object?.latest_height ? Height.fromAmino(object.latest_height) : Height.fromPartial({}),
       proofSpecs: Array.isArray(object?.proof_specs) ? object.proof_specs.map((e: any) => ProofSpec.fromAmino(e)) : [],
       upgradePath: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => e) : [],
       allowUpdateAfterExpiry: object.allow_update_after_expiry,
@@ -609,8 +609,8 @@ export const ConsensusState = {
   },
   fromAmino(object: ConsensusStateAmino): ConsensusState {
     return {
-      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined,
-      root: object?.root ? MerkleRoot.fromAmino(object.root) : undefined,
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : fromTimestamp(Timestamp.fromPartial({})),
+      root: object?.root ? MerkleRoot.fromAmino(object.root) : MerkleRoot.fromPartial({}),
       nextValidatorsHash: object.next_validators_hash
     };
   },
@@ -849,7 +849,7 @@ export const Header = {
     return {
       signedHeader: object?.signed_header ? SignedHeader.fromAmino(object.signed_header) : undefined,
       validatorSet: object?.validator_set ? ValidatorSet.fromAmino(object.validator_set) : undefined,
-      trustedHeight: object?.trusted_height ? Height.fromAmino(object.trusted_height) : undefined,
+      trustedHeight: object?.trusted_height ? Height.fromAmino(object.trusted_height) : Height.fromPartial({}),
       trustedValidators: object?.trusted_validators ? ValidatorSet.fromAmino(object.trusted_validators) : undefined
     };
   },

@@ -426,7 +426,7 @@ export const MsgDelegateToValidatorSet = {
   fromAmino(object: MsgDelegateToValidatorSetAmino): MsgDelegateToValidatorSet {
     return {
       delegator: object.delegator,
-      coin: object?.coin ? Coin.fromAmino(object.coin) : undefined
+      coin: object?.coin ? Coin.fromAmino(object.coin) : Coin.fromPartial({})
     };
   },
   toAmino(message: MsgDelegateToValidatorSet): MsgDelegateToValidatorSetAmino {
@@ -605,7 +605,7 @@ export const MsgUndelegateFromValidatorSet = {
   fromAmino(object: MsgUndelegateFromValidatorSetAmino): MsgUndelegateFromValidatorSet {
     return {
       delegator: object.delegator,
-      coin: object?.coin ? Coin.fromAmino(object.coin) : undefined
+      coin: object?.coin ? Coin.fromAmino(object.coin) : Coin.fromPartial({})
     };
   },
   toAmino(message: MsgUndelegateFromValidatorSet): MsgUndelegateFromValidatorSetAmino {

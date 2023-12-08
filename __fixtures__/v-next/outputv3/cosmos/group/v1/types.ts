@@ -814,7 +814,7 @@ export const Member = {
       address: object.address,
       weight: object.weight,
       metadata: object.metadata,
-      addedAt: object?.added_at ? fromTimestamp(Timestamp.fromAmino(object.added_at)) : undefined
+      addedAt: object?.added_at ? fromTimestamp(Timestamp.fromAmino(object.added_at)) : fromTimestamp(Timestamp.fromPartial({}))
     };
   },
   toAmino(message: Member, useInterfaces: boolean = true): MemberAmino {
@@ -1195,8 +1195,8 @@ export const DecisionPolicyWindows = {
   },
   fromAmino(object: DecisionPolicyWindowsAmino): DecisionPolicyWindows {
     return {
-      votingPeriod: object?.voting_period ? Duration.fromAmino(object.voting_period) : undefined,
-      minExecutionPeriod: object?.min_execution_period ? Duration.fromAmino(object.min_execution_period) : undefined
+      votingPeriod: object?.voting_period ? Duration.fromAmino(object.voting_period) : Duration.fromPartial({}),
+      minExecutionPeriod: object?.min_execution_period ? Duration.fromAmino(object.min_execution_period) : Duration.fromPartial({})
     };
   },
   toAmino(message: DecisionPolicyWindows, useInterfaces: boolean = true): DecisionPolicyWindowsAmino {
@@ -1345,7 +1345,7 @@ export const GroupInfo = {
       metadata: object.metadata,
       version: BigInt(object.version),
       totalWeight: object.total_weight,
-      createdAt: object?.created_at ? fromTimestamp(Timestamp.fromAmino(object.created_at)) : undefined
+      createdAt: object?.created_at ? fromTimestamp(Timestamp.fromAmino(object.created_at)) : fromTimestamp(Timestamp.fromPartial({}))
     };
   },
   toAmino(message: GroupInfo, useInterfaces: boolean = true): GroupInfoAmino {
@@ -1610,7 +1610,7 @@ export const GroupPolicyInfo = {
       metadata: object.metadata,
       version: BigInt(object.version),
       decisionPolicy: object?.decision_policy ? DecisionPolicy_FromAmino(object.decision_policy) : undefined,
-      createdAt: object?.created_at ? fromTimestamp(Timestamp.fromAmino(object.created_at)) : undefined
+      createdAt: object?.created_at ? fromTimestamp(Timestamp.fromAmino(object.created_at)) : fromTimestamp(Timestamp.fromPartial({}))
     };
   },
   toAmino(message: GroupPolicyInfo, useInterfaces: boolean = true): GroupPolicyInfoAmino {
@@ -1867,13 +1867,13 @@ export const Proposal = {
       address: object.address,
       metadata: object.metadata,
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => e) : [],
-      submitTime: object?.submit_time ? fromTimestamp(Timestamp.fromAmino(object.submit_time)) : undefined,
+      submitTime: object?.submit_time ? fromTimestamp(Timestamp.fromAmino(object.submit_time)) : fromTimestamp(Timestamp.fromPartial({})),
       groupVersion: BigInt(object.group_version),
       groupPolicyVersion: BigInt(object.group_policy_version),
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
       result: isSet(object.result) ? proposalResultFromJSON(object.result) : -1,
-      finalTallyResult: object?.final_tally_result ? TallyResult.fromAmino(object.final_tally_result) : undefined,
-      votingPeriodEnd: object?.voting_period_end ? fromTimestamp(Timestamp.fromAmino(object.voting_period_end)) : undefined,
+      finalTallyResult: object?.final_tally_result ? TallyResult.fromAmino(object.final_tally_result) : TallyResult.fromPartial({}),
+      votingPeriodEnd: object?.voting_period_end ? fromTimestamp(Timestamp.fromAmino(object.voting_period_end)) : fromTimestamp(Timestamp.fromPartial({})),
       executorResult: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : -1,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : []
     };
@@ -2149,7 +2149,7 @@ export const Vote = {
       voter: object.voter,
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: object.metadata,
-      submitTime: object?.submit_time ? fromTimestamp(Timestamp.fromAmino(object.submit_time)) : undefined
+      submitTime: object?.submit_time ? fromTimestamp(Timestamp.fromAmino(object.submit_time)) : fromTimestamp(Timestamp.fromPartial({}))
     };
   },
   toAmino(message: Vote, useInterfaces: boolean = true): VoteAmino {

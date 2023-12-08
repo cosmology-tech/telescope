@@ -329,8 +329,8 @@ export const SmoothWeightChangeParams = {
   },
   fromAmino(object: SmoothWeightChangeParamsAmino): SmoothWeightChangeParams {
     return {
-      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : fromTimestamp(Timestamp.fromPartial({})),
+      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({}),
       initialPoolWeights: Array.isArray(object?.initial_pool_weights) ? object.initial_pool_weights.map((e: any) => PoolAsset.fromAmino(e)) : [],
       targetPoolWeights: Array.isArray(object?.target_pool_weights) ? object.target_pool_weights.map((e: any) => PoolAsset.fromAmino(e)) : []
     };
@@ -509,7 +509,7 @@ export const PoolAsset = {
   },
   fromAmino(object: PoolAssetAmino): PoolAsset {
     return {
-      token: object?.token ? Coin.fromAmino(object.token) : undefined,
+      token: object?.token ? Coin.fromAmino(object.token) : Coin.fromPartial({}),
       weight: object.weight
     };
   },
@@ -634,9 +634,9 @@ export const Pool = {
     return {
       address: object.address,
       id: BigInt(object.id),
-      poolParams: object?.pool_params ? PoolParams.fromAmino(object.pool_params) : undefined,
+      poolParams: object?.pool_params ? PoolParams.fromAmino(object.pool_params) : PoolParams.fromPartial({}),
       futurePoolGovernor: object.future_pool_governor,
-      totalShares: object?.total_shares ? Coin.fromAmino(object.total_shares) : undefined,
+      totalShares: object?.total_shares ? Coin.fromAmino(object.total_shares) : Coin.fromPartial({}),
       poolAssets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromAmino(e)) : [],
       totalWeight: object.total_weight
     };

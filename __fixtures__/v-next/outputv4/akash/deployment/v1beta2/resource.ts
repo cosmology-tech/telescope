@@ -111,9 +111,9 @@ export const Resource = {
   },
   fromAmino(object: ResourceAmino): Resource {
     return {
-      resources: object?.resources ? ResourceUnits.fromAmino(object.resources) : undefined,
+      resources: object?.resources ? ResourceUnits.fromAmino(object.resources) : ResourceUnits.fromPartial({}),
       count: object.count,
-      price: object?.price ? DecCoin.fromAmino(object.price) : undefined
+      price: object?.price ? DecCoin.fromAmino(object.price) : DecCoin.fromPartial({})
     };
   },
   toAmino(message: Resource): ResourceAmino {

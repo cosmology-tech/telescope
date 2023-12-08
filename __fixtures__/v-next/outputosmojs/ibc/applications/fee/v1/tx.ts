@@ -670,7 +670,7 @@ export const MsgPayPacketFee = {
   },
   fromAmino(object: MsgPayPacketFeeAmino): MsgPayPacketFee {
     return {
-      fee: object?.fee ? Fee.fromAmino(object.fee) : undefined,
+      fee: object?.fee ? Fee.fromAmino(object.fee) : Fee.fromPartial({}),
       sourcePortId: object.source_port_id,
       sourceChannelId: object.source_channel_id,
       signer: object.signer,
@@ -846,7 +846,7 @@ export const MsgPayPacketFeeAsync = {
   },
   fromAmino(object: MsgPayPacketFeeAsyncAmino): MsgPayPacketFeeAsync {
     return {
-      packetFee: object?.packet_fee ? PacketFee.fromAmino(object.packet_fee) : undefined
+      packetFee: object?.packet_fee ? PacketFee.fromAmino(object.packet_fee) : PacketFee.fromPartial({})
     };
   },
   toAmino(message: MsgPayPacketFeeAsync): MsgPayPacketFeeAsyncAmino {

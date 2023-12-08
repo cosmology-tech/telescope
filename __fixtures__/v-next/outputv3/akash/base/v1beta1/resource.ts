@@ -174,7 +174,7 @@ export const CPU = {
   },
   fromAmino(object: CPUAmino): CPU {
     return {
-      units: object?.units ? ResourceValue.fromAmino(object.units) : undefined,
+      units: object?.units ? ResourceValue.fromAmino(object.units) : ResourceValue.fromPartial({}),
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
     };
   },
@@ -280,7 +280,7 @@ export const Memory = {
   },
   fromAmino(object: MemoryAmino): Memory {
     return {
-      quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : undefined,
+      quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : ResourceValue.fromPartial({}),
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
     };
   },
@@ -386,7 +386,7 @@ export const Storage = {
   },
   fromAmino(object: StorageAmino): Storage {
     return {
-      quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : undefined,
+      quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : ResourceValue.fromPartial({}),
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
     };
   },

@@ -117,7 +117,7 @@ export const GenesisDeployment = {
   },
   fromAmino(object: GenesisDeploymentAmino): GenesisDeployment {
     return {
-      deployment: object?.deployment ? Deployment.fromAmino(object.deployment) : undefined,
+      deployment: object?.deployment ? Deployment.fromAmino(object.deployment) : Deployment.fromPartial({}),
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromAmino(e)) : []
     };
   },
@@ -239,7 +239,7 @@ export const GenesisState = {
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
       deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => GenesisDeployment.fromAmino(e)) : [],
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: GenesisState): GenesisStateAmino {

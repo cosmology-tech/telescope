@@ -487,7 +487,7 @@ export const PoolToGauge = {
     return {
       poolId: BigInt(object.pool_id),
       gaugeId: BigInt(object.gauge_id),
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
+      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({})
     };
   },
   toAmino(message: PoolToGauge): PoolToGaugeAmino {

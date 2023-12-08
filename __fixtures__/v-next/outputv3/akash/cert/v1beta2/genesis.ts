@@ -109,7 +109,7 @@ export const GenesisCertificate = {
   fromAmino(object: GenesisCertificateAmino): GenesisCertificate {
     return {
       owner: object.owner,
-      certificate: object?.certificate ? Certificate.fromAmino(object.certificate) : undefined
+      certificate: object?.certificate ? Certificate.fromAmino(object.certificate) : Certificate.fromPartial({})
     };
   },
   toAmino(message: GenesisCertificate, useInterfaces: boolean = true): GenesisCertificateAmino {

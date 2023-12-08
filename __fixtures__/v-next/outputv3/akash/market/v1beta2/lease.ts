@@ -466,9 +466,9 @@ export const Lease = {
   },
   fromAmino(object: LeaseAmino): Lease {
     return {
-      leaseId: object?.lease_id ? LeaseID.fromAmino(object.lease_id) : undefined,
+      leaseId: object?.lease_id ? LeaseID.fromAmino(object.lease_id) : LeaseID.fromPartial({}),
       state: isSet(object.state) ? lease_StateFromJSON(object.state) : -1,
-      price: object?.price ? DecCoin.fromAmino(object.price) : undefined,
+      price: object?.price ? DecCoin.fromAmino(object.price) : DecCoin.fromPartial({}),
       createdAt: BigInt(object.created_at),
       closedOn: BigInt(object.closed_on)
     };
@@ -704,7 +704,7 @@ export const MsgCreateLease = {
   },
   fromAmino(object: MsgCreateLeaseAmino): MsgCreateLease {
     return {
-      bidId: object?.bid_id ? BidID.fromAmino(object.bid_id) : undefined
+      bidId: object?.bid_id ? BidID.fromAmino(object.bid_id) : BidID.fromPartial({})
     };
   },
   toAmino(message: MsgCreateLease, useInterfaces: boolean = true): MsgCreateLeaseAmino {
@@ -845,7 +845,7 @@ export const MsgWithdrawLease = {
   },
   fromAmino(object: MsgWithdrawLeaseAmino): MsgWithdrawLease {
     return {
-      bidId: object?.bid_id ? LeaseID.fromAmino(object.bid_id) : undefined
+      bidId: object?.bid_id ? LeaseID.fromAmino(object.bid_id) : LeaseID.fromPartial({})
     };
   },
   toAmino(message: MsgWithdrawLease, useInterfaces: boolean = true): MsgWithdrawLeaseAmino {
@@ -986,7 +986,7 @@ export const MsgCloseLease = {
   },
   fromAmino(object: MsgCloseLeaseAmino): MsgCloseLease {
     return {
-      leaseId: object?.lease_id ? LeaseID.fromAmino(object.lease_id) : undefined
+      leaseId: object?.lease_id ? LeaseID.fromAmino(object.lease_id) : LeaseID.fromPartial({})
     };
   },
   toAmino(message: MsgCloseLease, useInterfaces: boolean = true): MsgCloseLeaseAmino {

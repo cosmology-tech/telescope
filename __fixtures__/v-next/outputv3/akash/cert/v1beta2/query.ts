@@ -131,7 +131,7 @@ export const CertificateResponse = {
   },
   fromAmino(object: CertificateResponseAmino): CertificateResponse {
     return {
-      certificate: object?.certificate ? Certificate.fromAmino(object.certificate) : undefined,
+      certificate: object?.certificate ? Certificate.fromAmino(object.certificate) : Certificate.fromPartial({}),
       serial: object.serial
     };
   },
@@ -227,7 +227,7 @@ export const QueryCertificatesRequest = {
   },
   fromAmino(object: QueryCertificatesRequestAmino): QueryCertificatesRequest {
     return {
-      filter: object?.filter ? CertificateFilter.fromAmino(object.filter) : undefined,
+      filter: object?.filter ? CertificateFilter.fromAmino(object.filter) : CertificateFilter.fromPartial({}),
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },

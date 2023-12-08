@@ -1081,7 +1081,7 @@ export const QueryValidatorResponse = {
   },
   fromAmino(object: QueryValidatorResponseAmino): QueryValidatorResponse {
     return {
-      validator: object?.validator ? Validator.fromAmino(object.validator) : undefined
+      validator: object?.validator ? Validator.fromAmino(object.validator) : Validator.fromPartial({})
     };
   },
   toAmino(message: QueryValidatorResponse, useInterfaces: boolean = true): QueryValidatorResponseAmino {
@@ -1833,7 +1833,7 @@ export const QueryUnbondingDelegationResponse = {
   },
   fromAmino(object: QueryUnbondingDelegationResponseAmino): QueryUnbondingDelegationResponse {
     return {
-      unbond: object?.unbond ? UnbondingDelegation.fromAmino(object.unbond) : undefined
+      unbond: object?.unbond ? UnbondingDelegation.fromAmino(object.unbond) : UnbondingDelegation.fromPartial({})
     };
   },
   toAmino(message: QueryUnbondingDelegationResponse, useInterfaces: boolean = true): QueryUnbondingDelegationResponseAmino {
@@ -2843,7 +2843,7 @@ export const QueryDelegatorValidatorResponse = {
   },
   fromAmino(object: QueryDelegatorValidatorResponseAmino): QueryDelegatorValidatorResponse {
     return {
-      validator: object?.validator ? Validator.fromAmino(object.validator) : undefined
+      validator: object?.validator ? Validator.fromAmino(object.validator) : Validator.fromPartial({})
     };
   },
   toAmino(message: QueryDelegatorValidatorResponse, useInterfaces: boolean = true): QueryDelegatorValidatorResponseAmino {
@@ -3148,7 +3148,7 @@ export const QueryPoolResponse = {
   },
   fromAmino(object: QueryPoolResponseAmino): QueryPoolResponse {
     return {
-      pool: object?.pool ? Pool.fromAmino(object.pool) : undefined
+      pool: object?.pool ? Pool.fromAmino(object.pool) : Pool.fromPartial({})
     };
   },
   toAmino(message: QueryPoolResponse, useInterfaces: boolean = true): QueryPoolResponseAmino {
@@ -3291,7 +3291,7 @@ export const QueryParamsResponse = {
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {

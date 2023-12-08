@@ -867,12 +867,12 @@ export const Proposal = {
       proposalId: BigInt(object.proposal_id),
       content: object?.content ? Any.fromAmino(object.content) : undefined,
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
-      finalTallyResult: object?.final_tally_result ? TallyResult.fromAmino(object.final_tally_result) : undefined,
-      submitTime: object?.submit_time ? fromTimestamp(Timestamp.fromAmino(object.submit_time)) : undefined,
-      depositEndTime: object?.deposit_end_time ? fromTimestamp(Timestamp.fromAmino(object.deposit_end_time)) : undefined,
+      finalTallyResult: object?.final_tally_result ? TallyResult.fromAmino(object.final_tally_result) : TallyResult.fromPartial({}),
+      submitTime: object?.submit_time ? fromTimestamp(Timestamp.fromAmino(object.submit_time)) : fromTimestamp(Timestamp.fromPartial({})),
+      depositEndTime: object?.deposit_end_time ? fromTimestamp(Timestamp.fromAmino(object.deposit_end_time)) : fromTimestamp(Timestamp.fromPartial({})),
       totalDeposit: Array.isArray(object?.total_deposit) ? object.total_deposit.map((e: any) => Coin.fromAmino(e)) : [],
-      votingStartTime: object?.voting_start_time ? fromTimestamp(Timestamp.fromAmino(object.voting_start_time)) : undefined,
-      votingEndTime: object?.voting_end_time ? fromTimestamp(Timestamp.fromAmino(object.voting_end_time)) : undefined
+      votingStartTime: object?.voting_start_time ? fromTimestamp(Timestamp.fromAmino(object.voting_start_time)) : fromTimestamp(Timestamp.fromPartial({})),
+      votingEndTime: object?.voting_end_time ? fromTimestamp(Timestamp.fromAmino(object.voting_end_time)) : fromTimestamp(Timestamp.fromPartial({}))
     };
   },
   toAmino(message: Proposal): ProposalAmino {
@@ -1284,7 +1284,7 @@ export const DepositParams = {
   fromAmino(object: DepositParamsAmino): DepositParams {
     return {
       minDeposit: Array.isArray(object?.min_deposit) ? object.min_deposit.map((e: any) => Coin.fromAmino(e)) : [],
-      maxDepositPeriod: object?.max_deposit_period ? Duration.fromAmino(object.max_deposit_period) : undefined
+      maxDepositPeriod: object?.max_deposit_period ? Duration.fromAmino(object.max_deposit_period) : Duration.fromPartial({})
     };
   },
   toAmino(message: DepositParams): DepositParamsAmino {
@@ -1381,7 +1381,7 @@ export const VotingParams = {
   },
   fromAmino(object: VotingParamsAmino): VotingParams {
     return {
-      votingPeriod: object?.voting_period ? Duration.fromAmino(object.voting_period) : undefined
+      votingPeriod: object?.voting_period ? Duration.fromAmino(object.voting_period) : Duration.fromPartial({})
     };
   },
   toAmino(message: VotingParams): VotingParamsAmino {

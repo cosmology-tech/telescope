@@ -470,7 +470,7 @@ export const ConnectionEnd = {
       clientId: object.client_id,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromAmino(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : -1,
-      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
+      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : Counterparty.fromPartial({}),
       delayPeriod: BigInt(object.delay_period)
     };
   },
@@ -643,7 +643,7 @@ export const IdentifiedConnection = {
       clientId: object.client_id,
       versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromAmino(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : -1,
-      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
+      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : Counterparty.fromPartial({}),
       delayPeriod: BigInt(object.delay_period)
     };
   },
@@ -769,7 +769,7 @@ export const Counterparty = {
     return {
       clientId: object.client_id,
       connectionId: object.connection_id,
-      prefix: object?.prefix ? MerklePrefix.fromAmino(object.prefix) : undefined
+      prefix: object?.prefix ? MerklePrefix.fromAmino(object.prefix) : MerklePrefix.fromPartial({})
     };
   },
   toAmino(message: Counterparty): CounterpartyAmino {

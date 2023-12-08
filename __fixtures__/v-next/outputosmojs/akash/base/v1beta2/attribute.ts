@@ -378,7 +378,7 @@ export const PlacementRequirements = {
   },
   fromAmino(object: PlacementRequirementsAmino): PlacementRequirements {
     return {
-      signedBy: object?.signed_by ? SignedBy.fromAmino(object.signed_by) : undefined,
+      signedBy: object?.signed_by ? SignedBy.fromAmino(object.signed_by) : SignedBy.fromPartial({}),
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
     };
   },

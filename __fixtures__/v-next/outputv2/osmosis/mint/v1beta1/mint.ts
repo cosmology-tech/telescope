@@ -706,7 +706,7 @@ export const Params = {
       epochIdentifier: object.epoch_identifier,
       reductionPeriodInEpochs: BigInt(object.reduction_period_in_epochs),
       reductionFactor: object.reduction_factor,
-      distributionProportions: object?.distribution_proportions ? DistributionProportions.fromAmino(object.distribution_proportions) : undefined,
+      distributionProportions: object?.distribution_proportions ? DistributionProportions.fromAmino(object.distribution_proportions) : DistributionProportions.fromPartial({}),
       weightedDeveloperRewardsReceivers: Array.isArray(object?.weighted_developer_rewards_receivers) ? object.weighted_developer_rewards_receivers.map((e: any) => WeightedAddress.fromAmino(e)) : [],
       mintingRewardsDistributionStartEpoch: BigInt(object.minting_rewards_distribution_start_epoch)
     };

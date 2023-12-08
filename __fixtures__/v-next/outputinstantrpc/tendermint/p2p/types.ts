@@ -361,14 +361,14 @@ export const NodeInfo = {
   },
   fromAmino(object: NodeInfoAmino): NodeInfo {
     return {
-      protocolVersion: object?.protocol_version ? ProtocolVersion.fromAmino(object.protocol_version) : undefined,
+      protocolVersion: object?.protocol_version ? ProtocolVersion.fromAmino(object.protocol_version) : ProtocolVersion.fromPartial({}),
       nodeId: object.node_id,
       listenAddr: object.listen_addr,
       network: object.network,
       version: object.version,
       channels: object.channels,
       moniker: object.moniker,
-      other: object?.other ? NodeInfoOther.fromAmino(object.other) : undefined
+      other: object?.other ? NodeInfoOther.fromAmino(object.other) : NodeInfoOther.fromPartial({})
     };
   },
   toAmino(message: NodeInfo): NodeInfoAmino {

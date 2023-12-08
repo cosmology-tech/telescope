@@ -343,7 +343,7 @@ export const QueryOrdersRequest = {
   },
   fromAmino(object: QueryOrdersRequestAmino): QueryOrdersRequest {
     return {
-      filters: object?.filters ? OrderFilters.fromAmino(object.filters) : undefined,
+      filters: object?.filters ? OrderFilters.fromAmino(object.filters) : OrderFilters.fromPartial({}),
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
@@ -537,7 +537,7 @@ export const QueryOrderRequest = {
   },
   fromAmino(object: QueryOrderRequestAmino): QueryOrderRequest {
     return {
-      id: object?.id ? OrderID.fromAmino(object.id) : undefined
+      id: object?.id ? OrderID.fromAmino(object.id) : OrderID.fromPartial({})
     };
   },
   toAmino(message: QueryOrderRequest): QueryOrderRequestAmino {
@@ -620,7 +620,7 @@ export const QueryOrderResponse = {
   },
   fromAmino(object: QueryOrderResponseAmino): QueryOrderResponse {
     return {
-      order: object?.order ? Order.fromAmino(object.order) : undefined
+      order: object?.order ? Order.fromAmino(object.order) : Order.fromPartial({})
     };
   },
   toAmino(message: QueryOrderResponse): QueryOrderResponseAmino {
@@ -717,7 +717,7 @@ export const QueryBidsRequest = {
   },
   fromAmino(object: QueryBidsRequestAmino): QueryBidsRequest {
     return {
-      filters: object?.filters ? BidFilters.fromAmino(object.filters) : undefined,
+      filters: object?.filters ? BidFilters.fromAmino(object.filters) : BidFilters.fromPartial({}),
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
@@ -911,7 +911,7 @@ export const QueryBidRequest = {
   },
   fromAmino(object: QueryBidRequestAmino): QueryBidRequest {
     return {
-      id: object?.id ? BidID.fromAmino(object.id) : undefined
+      id: object?.id ? BidID.fromAmino(object.id) : BidID.fromPartial({})
     };
   },
   toAmino(message: QueryBidRequest): QueryBidRequestAmino {
@@ -1008,8 +1008,8 @@ export const QueryBidResponse = {
   },
   fromAmino(object: QueryBidResponseAmino): QueryBidResponse {
     return {
-      bid: object?.bid ? Bid.fromAmino(object.bid) : undefined,
-      escrowAccount: object?.escrow_account ? Account.fromAmino(object.escrow_account) : undefined
+      bid: object?.bid ? Bid.fromAmino(object.bid) : Bid.fromPartial({}),
+      escrowAccount: object?.escrow_account ? Account.fromAmino(object.escrow_account) : Account.fromPartial({})
     };
   },
   toAmino(message: QueryBidResponse): QueryBidResponseAmino {
@@ -1107,7 +1107,7 @@ export const QueryLeasesRequest = {
   },
   fromAmino(object: QueryLeasesRequestAmino): QueryLeasesRequest {
     return {
-      filters: object?.filters ? LeaseFilters.fromAmino(object.filters) : undefined,
+      filters: object?.filters ? LeaseFilters.fromAmino(object.filters) : LeaseFilters.fromPartial({}),
       pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
     };
   },
@@ -1301,7 +1301,7 @@ export const QueryLeaseRequest = {
   },
   fromAmino(object: QueryLeaseRequestAmino): QueryLeaseRequest {
     return {
-      id: object?.id ? LeaseID.fromAmino(object.id) : undefined
+      id: object?.id ? LeaseID.fromAmino(object.id) : LeaseID.fromPartial({})
     };
   },
   toAmino(message: QueryLeaseRequest): QueryLeaseRequestAmino {
@@ -1398,8 +1398,8 @@ export const QueryLeaseResponse = {
   },
   fromAmino(object: QueryLeaseResponseAmino): QueryLeaseResponse {
     return {
-      lease: object?.lease ? Lease.fromAmino(object.lease) : undefined,
-      escrowPayment: object?.escrow_payment ? FractionalPayment.fromAmino(object.escrow_payment) : undefined
+      lease: object?.lease ? Lease.fromAmino(object.lease) : Lease.fromPartial({}),
+      escrowPayment: object?.escrow_payment ? FractionalPayment.fromAmino(object.escrow_payment) : FractionalPayment.fromPartial({})
     };
   },
   toAmino(message: QueryLeaseResponse): QueryLeaseResponseAmino {

@@ -408,7 +408,7 @@ export const RegisterCoinProposal = {
     return {
       title: object.title,
       description: object.description,
-      metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : undefined
+      metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : Metadata.fromPartial({})
     };
   },
   toAmino(message: RegisterCoinProposal, useInterfaces: boolean = true): RegisterCoinProposalAmino {

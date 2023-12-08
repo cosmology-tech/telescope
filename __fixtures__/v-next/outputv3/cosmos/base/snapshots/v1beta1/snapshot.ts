@@ -307,7 +307,7 @@ export const Snapshot = {
       format: object.format,
       chunks: object.chunks,
       hash: object.hash,
-      metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : undefined
+      metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : Metadata.fromPartial({})
     };
   },
   toAmino(message: Snapshot, useInterfaces: boolean = true): SnapshotAmino {

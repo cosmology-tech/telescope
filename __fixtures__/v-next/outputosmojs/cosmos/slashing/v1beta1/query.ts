@@ -234,7 +234,7 @@ export const QueryParamsResponse = {
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
@@ -418,7 +418,7 @@ export const QuerySigningInfoResponse = {
   },
   fromAmino(object: QuerySigningInfoResponseAmino): QuerySigningInfoResponse {
     return {
-      valSigningInfo: object?.val_signing_info ? ValidatorSigningInfo.fromAmino(object.val_signing_info) : undefined
+      valSigningInfo: object?.val_signing_info ? ValidatorSigningInfo.fromAmino(object.val_signing_info) : ValidatorSigningInfo.fromPartial({})
     };
   },
   toAmino(message: QuerySigningInfoResponse): QuerySigningInfoResponseAmino {

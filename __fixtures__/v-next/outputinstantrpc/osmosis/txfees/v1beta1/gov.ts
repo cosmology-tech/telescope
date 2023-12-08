@@ -122,7 +122,7 @@ export const UpdateFeeTokenProposal = {
     return {
       title: object.title,
       description: object.description,
-      feetoken: object?.feetoken ? FeeToken.fromAmino(object.feetoken) : undefined
+      feetoken: object?.feetoken ? FeeToken.fromAmino(object.feetoken) : FeeToken.fromPartial({})
     };
   },
   toAmino(message: UpdateFeeTokenProposal): UpdateFeeTokenProposalAmino {

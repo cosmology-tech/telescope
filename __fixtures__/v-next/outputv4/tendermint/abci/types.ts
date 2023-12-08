@@ -1756,7 +1756,7 @@ export const RequestInitChain = {
   },
   fromAmino(object: RequestInitChainAmino): RequestInitChain {
     return {
-      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
+      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : fromTimestamp(Timestamp.fromPartial({})),
       chainId: object.chain_id,
       consensusParams: object?.consensus_params ? ConsensusParams.fromAmino(object.consensus_params) : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromAmino(e)) : [],
@@ -2041,8 +2041,8 @@ export const RequestBeginBlock = {
   fromAmino(object: RequestBeginBlockAmino): RequestBeginBlock {
     return {
       hash: object.hash,
-      header: object?.header ? Header.fromAmino(object.header) : undefined,
-      lastCommitInfo: object?.last_commit_info ? LastCommitInfo.fromAmino(object.last_commit_info) : undefined,
+      header: object?.header ? Header.fromAmino(object.header) : Header.fromPartial({}),
+      lastCommitInfo: object?.last_commit_info ? LastCommitInfo.fromAmino(object.last_commit_info) : LastCommitInfo.fromPartial({}),
       byzantineValidators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Evidence.fromAmino(e)) : []
     };
   },
@@ -5880,7 +5880,7 @@ export const TxResult = {
       height: BigInt(object.height),
       index: object.index,
       tx: object.tx,
-      result: object?.result ? ResponseDeliverTx.fromAmino(object.result) : undefined
+      result: object?.result ? ResponseDeliverTx.fromAmino(object.result) : ResponseDeliverTx.fromPartial({})
     };
   },
   toAmino(message: TxResult): TxResultAmino {
@@ -6089,7 +6089,7 @@ export const ValidatorUpdate = {
   },
   fromAmino(object: ValidatorUpdateAmino): ValidatorUpdate {
     return {
-      pubKey: object?.pub_key ? PublicKey.fromAmino(object.pub_key) : undefined,
+      pubKey: object?.pub_key ? PublicKey.fromAmino(object.pub_key) : PublicKey.fromPartial({}),
       power: BigInt(object.power)
     };
   },
@@ -6192,7 +6192,7 @@ export const VoteInfo = {
   },
   fromAmino(object: VoteInfoAmino): VoteInfo {
     return {
-      validator: object?.validator ? Validator.fromAmino(object.validator) : undefined,
+      validator: object?.validator ? Validator.fromAmino(object.validator) : Validator.fromPartial({}),
       signedLastBlock: object.signed_last_block
     };
   },
@@ -6339,9 +6339,9 @@ export const Evidence = {
   fromAmino(object: EvidenceAmino): Evidence {
     return {
       type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : -1,
-      validator: object?.validator ? Validator.fromAmino(object.validator) : undefined,
+      validator: object?.validator ? Validator.fromAmino(object.validator) : Validator.fromPartial({}),
       height: BigInt(object.height),
-      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
+      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : fromTimestamp(Timestamp.fromPartial({})),
       totalVotingPower: BigInt(object.total_voting_power)
     };
   },

@@ -112,7 +112,7 @@ export const GenesisOwners = {
   fromAmino(object: GenesisOwnersAmino): GenesisOwners {
     return {
       index: BigInt(object.index),
-      indexOwners: object?.index_owners ? CapabilityOwners.fromAmino(object.index_owners) : undefined
+      indexOwners: object?.index_owners ? CapabilityOwners.fromAmino(object.index_owners) : CapabilityOwners.fromPartial({})
     };
   },
   toAmino(message: GenesisOwners): GenesisOwnersAmino {

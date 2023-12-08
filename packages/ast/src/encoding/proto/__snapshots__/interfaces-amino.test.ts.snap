@@ -307,13 +307,13 @@ exports[`MsgCreateValidator 1`] = `
   },
   fromAmino(object: MsgCreateValidatorAmino): MsgCreateValidator {
     return {
-      description: object?.description ? Description.fromAmino(object.description) : undefined,
-      commission: object?.commission ? CommissionRates.fromAmino(object.commission) : undefined,
+      description: object?.description ? Description.fromAmino(object.description) : Description.fromPartial({}),
+      commission: object?.commission ? CommissionRates.fromAmino(object.commission) : CommissionRates.fromPartial({}),
       minSelfDelegation: object.min_self_delegation,
       delegatorAddress: object.delegator_address,
       validatorAddress: object.validator_address,
       pubkey: object?.pubkey ? encodePubkey(object.pubkey) : undefined,
-      value: object?.value ? Coin.fromAmino(object.value) : undefined
+      value: object?.value ? Coin.fromAmino(object.value) : Coin.fromPartial({})
     };
   },
   toAmino(message: MsgCreateValidator): MsgCreateValidatorAmino {
@@ -706,10 +706,10 @@ exports[`MsgTransfer 1`] = `
     return {
       sourcePort: object.source_port,
       sourceChannel: object.source_channel,
-      token: object?.token ? Coin.fromAmino(object.token) : undefined,
+      token: object?.token ? Coin.fromAmino(object.token) : Coin.fromPartial({}),
       sender: object.sender,
       receiver: object.receiver,
-      timeoutHeight: object?.timeout_height ? Height.fromAmino(object.timeout_height) : undefined,
+      timeoutHeight: object?.timeout_height ? Height.fromAmino(object.timeout_height) : Height.fromPartial({}),
       timeoutTimestamp: BigInt(object.timeout_timestamp)
     };
   },

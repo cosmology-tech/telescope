@@ -348,8 +348,8 @@ export const MsgCreatePosition = {
       sender: object.sender,
       lowerTick: BigInt(object.lower_tick),
       upperTick: BigInt(object.upper_tick),
-      tokenDesired0: object?.token_desired0 ? Coin.fromAmino(object.token_desired0) : undefined,
-      tokenDesired1: object?.token_desired1 ? Coin.fromAmino(object.token_desired1) : undefined,
+      tokenDesired0: object?.token_desired0 ? Coin.fromAmino(object.token_desired0) : Coin.fromPartial({}),
+      tokenDesired1: object?.token_desired1 ? Coin.fromAmino(object.token_desired1) : Coin.fromPartial({}),
       tokenMinAmount0: object.token_min_amount0,
       tokenMinAmount1: object.token_min_amount1
     };
@@ -505,7 +505,7 @@ export const MsgCreatePositionResponse = {
       positionId: BigInt(object.position_id),
       amount0: object.amount0,
       amount1: object.amount1,
-      joinTime: object?.join_time ? fromTimestamp(Timestamp.fromAmino(object.join_time)) : undefined,
+      joinTime: object?.join_time ? fromTimestamp(Timestamp.fromAmino(object.join_time)) : fromTimestamp(Timestamp.fromPartial({})),
       liquidityCreated: object.liquidity_created
     };
   },
@@ -1378,8 +1378,8 @@ export const MsgCreateIncentive = {
       incentiveDenom: object.incentive_denom,
       incentiveAmount: object.incentive_amount,
       emissionRate: object.emission_rate,
-      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
-      minUptime: object?.min_uptime ? Duration.fromAmino(object.min_uptime) : undefined
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : fromTimestamp(Timestamp.fromPartial({})),
+      minUptime: object?.min_uptime ? Duration.fromAmino(object.min_uptime) : Duration.fromPartial({})
     };
   },
   toAmino(message: MsgCreateIncentive): MsgCreateIncentiveAmino {
@@ -1532,8 +1532,8 @@ export const MsgCreateIncentiveResponse = {
       incentiveDenom: object.incentive_denom,
       incentiveAmount: object.incentive_amount,
       emissionRate: object.emission_rate,
-      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
-      minUptime: object?.min_uptime ? Duration.fromAmino(object.min_uptime) : undefined
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : fromTimestamp(Timestamp.fromPartial({})),
+      minUptime: object?.min_uptime ? Duration.fromAmino(object.min_uptime) : Duration.fromPartial({})
     };
   },
   toAmino(message: MsgCreateIncentiveResponse): MsgCreateIncentiveResponseAmino {

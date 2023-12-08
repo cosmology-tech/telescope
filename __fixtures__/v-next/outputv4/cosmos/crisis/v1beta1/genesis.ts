@@ -82,7 +82,7 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      constantFee: object?.constant_fee ? Coin.fromAmino(object.constant_fee) : undefined
+      constantFee: object?.constant_fee ? Coin.fromAmino(object.constant_fee) : Coin.fromPartial({})
     };
   },
   toAmino(message: GenesisState): GenesisStateAmino {

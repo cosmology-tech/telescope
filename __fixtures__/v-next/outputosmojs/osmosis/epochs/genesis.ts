@@ -231,10 +231,10 @@ export const EpochInfo = {
   fromAmino(object: EpochInfoAmino): EpochInfo {
     return {
       identifier: object.identifier,
-      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : fromTimestamp(Timestamp.fromPartial({})),
+      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({}),
       currentEpoch: BigInt(object.current_epoch),
-      currentEpochStartTime: object?.current_epoch_start_time ? fromTimestamp(Timestamp.fromAmino(object.current_epoch_start_time)) : undefined,
+      currentEpochStartTime: object?.current_epoch_start_time ? fromTimestamp(Timestamp.fromAmino(object.current_epoch_start_time)) : fromTimestamp(Timestamp.fromPartial({})),
       epochCountingStarted: object.epoch_counting_started,
       currentEpochStartHeight: BigInt(object.current_epoch_start_height)
     };

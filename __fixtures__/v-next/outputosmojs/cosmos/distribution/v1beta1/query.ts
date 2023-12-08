@@ -475,7 +475,7 @@ export const QueryParamsResponse = {
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
@@ -659,7 +659,7 @@ export const QueryValidatorOutstandingRewardsResponse = {
   },
   fromAmino(object: QueryValidatorOutstandingRewardsResponseAmino): QueryValidatorOutstandingRewardsResponse {
     return {
-      rewards: object?.rewards ? ValidatorOutstandingRewards.fromAmino(object.rewards) : undefined
+      rewards: object?.rewards ? ValidatorOutstandingRewards.fromAmino(object.rewards) : ValidatorOutstandingRewards.fromPartial({})
     };
   },
   toAmino(message: QueryValidatorOutstandingRewardsResponse): QueryValidatorOutstandingRewardsResponseAmino {
@@ -843,7 +843,7 @@ export const QueryValidatorCommissionResponse = {
   },
   fromAmino(object: QueryValidatorCommissionResponseAmino): QueryValidatorCommissionResponse {
     return {
-      commission: object?.commission ? ValidatorAccumulatedCommission.fromAmino(object.commission) : undefined
+      commission: object?.commission ? ValidatorAccumulatedCommission.fromAmino(object.commission) : ValidatorAccumulatedCommission.fromPartial({})
     };
   },
   toAmino(message: QueryValidatorCommissionResponse): QueryValidatorCommissionResponseAmino {

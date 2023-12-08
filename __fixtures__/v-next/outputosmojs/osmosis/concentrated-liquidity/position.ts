@@ -193,7 +193,7 @@ export const Position = {
       poolId: BigInt(object.pool_id),
       lowerTick: BigInt(object.lower_tick),
       upperTick: BigInt(object.upper_tick),
-      joinTime: object?.join_time ? fromTimestamp(Timestamp.fromAmino(object.join_time)) : undefined,
+      joinTime: object?.join_time ? fromTimestamp(Timestamp.fromAmino(object.join_time)) : fromTimestamp(Timestamp.fromPartial({})),
       liquidity: object.liquidity
     };
   },
@@ -318,9 +318,9 @@ export const PositionWithUnderlyingAssetBreakdown = {
   },
   fromAmino(object: PositionWithUnderlyingAssetBreakdownAmino): PositionWithUnderlyingAssetBreakdown {
     return {
-      position: object?.position ? Position.fromAmino(object.position) : undefined,
-      asset0: object?.asset0 ? Coin.fromAmino(object.asset0) : undefined,
-      asset1: object?.asset1 ? Coin.fromAmino(object.asset1) : undefined
+      position: object?.position ? Position.fromAmino(object.position) : Position.fromPartial({}),
+      asset0: object?.asset0 ? Coin.fromAmino(object.asset0) : Coin.fromPartial({}),
+      asset1: object?.asset1 ? Coin.fromAmino(object.asset1) : Coin.fromPartial({})
     };
   },
   toAmino(message: PositionWithUnderlyingAssetBreakdown): PositionWithUnderlyingAssetBreakdownAmino {

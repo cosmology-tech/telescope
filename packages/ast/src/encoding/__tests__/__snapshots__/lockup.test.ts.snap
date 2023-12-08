@@ -92,7 +92,7 @@ exports[`osmosis/lockup/tx duration 2`] = `
   fromAmino(object: MsgLockTokensAmino): MsgLockTokens {
     return {
       owner: object.owner,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
+      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({}),
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
@@ -279,7 +279,7 @@ exports[`osmosis/lockup/tx string 2`] = `
   fromAmino(object: MsgLockTokensAmino): MsgLockTokens {
     return {
       owner: object.owner,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
+      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({}),
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },

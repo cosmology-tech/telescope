@@ -275,10 +275,10 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({}),
       tokenPairArbRoutes: Array.isArray(object?.token_pair_arb_routes) ? object.token_pair_arb_routes.map((e: any) => TokenPairArbRoutes.fromAmino(e)) : [],
       baseDenoms: Array.isArray(object?.base_denoms) ? object.base_denoms.map((e: any) => BaseDenom.fromAmino(e)) : [],
-      poolWeights: object?.pool_weights ? PoolWeights.fromAmino(object.pool_weights) : undefined,
+      poolWeights: object?.pool_weights ? PoolWeights.fromAmino(object.pool_weights) : PoolWeights.fromPartial({}),
       daysSinceModuleGenesis: BigInt(object.days_since_module_genesis),
       developerFees: Array.isArray(object?.developer_fees) ? object.developer_fees.map((e: any) => Coin.fromAmino(e)) : [],
       latestBlockHeight: BigInt(object.latest_block_height),

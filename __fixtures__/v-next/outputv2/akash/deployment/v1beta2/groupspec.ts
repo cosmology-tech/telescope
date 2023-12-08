@@ -121,7 +121,7 @@ export const GroupSpec = {
   fromAmino(object: GroupSpecAmino): GroupSpec {
     return {
       name: object.name,
-      requirements: object?.requirements ? PlacementRequirements.fromAmino(object.requirements) : undefined,
+      requirements: object?.requirements ? PlacementRequirements.fromAmino(object.requirements) : PlacementRequirements.fromPartial({}),
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromAmino(e)) : []
     };
   },

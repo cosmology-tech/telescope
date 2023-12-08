@@ -184,7 +184,7 @@ export const MsgSoftwareUpgrade = {
   fromAmino(object: MsgSoftwareUpgradeAmino): MsgSoftwareUpgrade {
     return {
       authority: object.authority,
-      plan: object?.plan ? Plan.fromAmino(object.plan) : undefined
+      plan: object?.plan ? Plan.fromAmino(object.plan) : Plan.fromPartial({})
     };
   },
   toAmino(message: MsgSoftwareUpgrade, useInterfaces: boolean = true): MsgSoftwareUpgradeAmino {

@@ -1311,7 +1311,7 @@ export const AccountLockedPastTimeRequest = {
   fromAmino(object: AccountLockedPastTimeRequestAmino): AccountLockedPastTimeRequest {
     return {
       owner: object.owner,
-      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : fromTimestamp(Timestamp.fromPartial({}))
     };
   },
   toAmino(message: AccountLockedPastTimeRequest): AccountLockedPastTimeRequestAmino {
@@ -1459,7 +1459,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
   fromAmino(object: AccountLockedPastTimeNotUnlockingOnlyRequestAmino): AccountLockedPastTimeNotUnlockingOnlyRequest {
     return {
       owner: object.owner,
-      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : fromTimestamp(Timestamp.fromPartial({}))
     };
   },
   toAmino(message: AccountLockedPastTimeNotUnlockingOnlyRequest): AccountLockedPastTimeNotUnlockingOnlyRequestAmino {
@@ -1607,7 +1607,7 @@ export const AccountUnlockedBeforeTimeRequest = {
   fromAmino(object: AccountUnlockedBeforeTimeRequestAmino): AccountUnlockedBeforeTimeRequest {
     return {
       owner: object.owner,
-      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : fromTimestamp(Timestamp.fromPartial({}))
     };
   },
   toAmino(message: AccountUnlockedBeforeTimeRequest): AccountUnlockedBeforeTimeRequestAmino {
@@ -1763,7 +1763,7 @@ export const AccountLockedPastTimeDenomRequest = {
   fromAmino(object: AccountLockedPastTimeDenomRequestAmino): AccountLockedPastTimeDenomRequest {
     return {
       owner: object.owner,
-      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined,
+      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : fromTimestamp(Timestamp.fromPartial({})),
       denom: object.denom
     };
   },
@@ -1915,7 +1915,7 @@ export const LockedDenomRequest = {
   fromAmino(object: LockedDenomRequestAmino): LockedDenomRequest {
     return {
       denom: object.denom,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
+      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({})
     };
   },
   toAmino(message: LockedDenomRequest): LockedDenomRequestAmino {
@@ -2339,7 +2339,7 @@ export const AccountLockedLongerDurationRequest = {
   fromAmino(object: AccountLockedLongerDurationRequestAmino): AccountLockedLongerDurationRequest {
     return {
       owner: object.owner,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
+      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({})
     };
   },
   toAmino(message: AccountLockedLongerDurationRequest): AccountLockedLongerDurationRequestAmino {
@@ -2489,7 +2489,7 @@ export const AccountLockedDurationRequest = {
   fromAmino(object: AccountLockedDurationRequestAmino): AccountLockedDurationRequest {
     return {
       owner: object.owner,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
+      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({})
     };
   },
   toAmino(message: AccountLockedDurationRequest): AccountLockedDurationRequestAmino {
@@ -2639,7 +2639,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
   fromAmino(object: AccountLockedLongerDurationNotUnlockingOnlyRequestAmino): AccountLockedLongerDurationNotUnlockingOnlyRequest {
     return {
       owner: object.owner,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
+      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({})
     };
   },
   toAmino(message: AccountLockedLongerDurationNotUnlockingOnlyRequest): AccountLockedLongerDurationNotUnlockingOnlyRequestAmino {
@@ -2797,7 +2797,7 @@ export const AccountLockedLongerDurationDenomRequest = {
   fromAmino(object: AccountLockedLongerDurationDenomRequestAmino): AccountLockedLongerDurationDenomRequest {
     return {
       owner: object.owner,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
+      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({}),
       denom: object.denom
     };
   },
@@ -2995,7 +2995,7 @@ export const QueryParamsResponse = {
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {

@@ -694,7 +694,7 @@ export const MsgRevokeCertificate = {
   },
   fromAmino(object: MsgRevokeCertificateAmino): MsgRevokeCertificate {
     return {
-      id: object?.id ? CertificateID.fromAmino(object.id) : undefined
+      id: object?.id ? CertificateID.fromAmino(object.id) : CertificateID.fromPartial({})
     };
   },
   toAmino(message: MsgRevokeCertificate, useInterfaces: boolean = true): MsgRevokeCertificateAmino {

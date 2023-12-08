@@ -1217,7 +1217,7 @@ export const QueryChannelResponse = {
     return {
       channel: object?.channel ? Channel.fromAmino(object.channel) : undefined,
       proof: object.proof,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryChannelResponse): QueryChannelResponseAmino {
@@ -1435,7 +1435,7 @@ export const QueryChannelsResponse = {
     return {
       channels: Array.isArray(object?.channels) ? object.channels.map((e: any) => IdentifiedChannel.fromAmino(e)) : [],
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined,
-      height: object?.height ? Height.fromAmino(object.height) : undefined
+      height: object?.height ? Height.fromAmino(object.height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryChannelsResponse): QueryChannelsResponseAmino {
@@ -1671,7 +1671,7 @@ export const QueryConnectionChannelsResponse = {
     return {
       channels: Array.isArray(object?.channels) ? object.channels.map((e: any) => IdentifiedChannel.fromAmino(e)) : [],
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined,
-      height: object?.height ? Height.fromAmino(object.height) : undefined
+      height: object?.height ? Height.fromAmino(object.height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryConnectionChannelsResponse): QueryConnectionChannelsResponseAmino {
@@ -1897,7 +1897,7 @@ export const QueryChannelClientStateResponse = {
     return {
       identifiedClientState: object?.identified_client_state ? IdentifiedClientState.fromAmino(object.identified_client_state) : undefined,
       proof: object.proof,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryChannelClientStateResponse): QueryChannelClientStateResponseAmino {
@@ -2164,7 +2164,7 @@ export const QueryChannelConsensusStateResponse = {
       consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
       clientId: object.client_id,
       proof: object.proof,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryChannelConsensusStateResponse): QueryChannelConsensusStateResponseAmino {
@@ -2401,7 +2401,7 @@ export const QueryPacketCommitmentResponse = {
     return {
       commitment: object.commitment,
       proof: object.proof,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryPacketCommitmentResponse): QueryPacketCommitmentResponseAmino {
@@ -2647,7 +2647,7 @@ export const QueryPacketCommitmentsResponse = {
     return {
       commitments: Array.isArray(object?.commitments) ? object.commitments.map((e: any) => PacketState.fromAmino(e)) : [],
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined,
-      height: object?.height ? Height.fromAmino(object.height) : undefined
+      height: object?.height ? Height.fromAmino(object.height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryPacketCommitmentsResponse): QueryPacketCommitmentsResponseAmino {
@@ -2887,7 +2887,7 @@ export const QueryPacketReceiptResponse = {
     return {
       received: object.received,
       proof: object.proof,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryPacketReceiptResponse): QueryPacketReceiptResponseAmino {
@@ -3123,7 +3123,7 @@ export const QueryPacketAcknowledgementResponse = {
     return {
       acknowledgement: object.acknowledgement,
       proof: object.proof,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryPacketAcknowledgementResponse): QueryPacketAcknowledgementResponseAmino {
@@ -3404,7 +3404,7 @@ export const QueryPacketAcknowledgementsResponse = {
     return {
       acknowledgements: Array.isArray(object?.acknowledgements) ? object.acknowledgements.map((e: any) => PacketState.fromAmino(e)) : [],
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined,
-      height: object?.height ? Height.fromAmino(object.height) : undefined
+      height: object?.height ? Height.fromAmino(object.height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryPacketAcknowledgementsResponse): QueryPacketAcknowledgementsResponseAmino {
@@ -3667,7 +3667,7 @@ export const QueryUnreceivedPacketsResponse = {
   fromAmino(object: QueryUnreceivedPacketsResponseAmino): QueryUnreceivedPacketsResponse {
     return {
       sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => BigInt(e)) : [],
-      height: object?.height ? Height.fromAmino(object.height) : undefined
+      height: object?.height ? Height.fromAmino(object.height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryUnreceivedPacketsResponse): QueryUnreceivedPacketsResponseAmino {
@@ -3929,7 +3929,7 @@ export const QueryUnreceivedAcksResponse = {
   fromAmino(object: QueryUnreceivedAcksResponseAmino): QueryUnreceivedAcksResponse {
     return {
       sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => BigInt(e)) : [],
-      height: object?.height ? Height.fromAmino(object.height) : undefined
+      height: object?.height ? Height.fromAmino(object.height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryUnreceivedAcksResponse): QueryUnreceivedAcksResponseAmino {
@@ -4154,7 +4154,7 @@ export const QueryNextSequenceReceiveResponse = {
     return {
       nextSequenceReceive: BigInt(object.next_sequence_receive),
       proof: object.proof,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryNextSequenceReceiveResponse): QueryNextSequenceReceiveResponseAmino {

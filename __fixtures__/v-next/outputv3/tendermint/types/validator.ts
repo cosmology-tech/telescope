@@ -281,7 +281,7 @@ export const Validator = {
   fromAmino(object: ValidatorAmino): Validator {
     return {
       address: object.address,
-      pubKey: object?.pub_key ? PublicKey.fromAmino(object.pub_key) : undefined,
+      pubKey: object?.pub_key ? PublicKey.fromAmino(object.pub_key) : PublicKey.fromPartial({}),
       votingPower: BigInt(object.voting_power),
       proposerPriority: BigInt(object.proposer_priority)
     };

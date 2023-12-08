@@ -428,7 +428,7 @@ export const Channel = {
     return {
       state: isSet(object.state) ? stateFromJSON(object.state) : -1,
       ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
-      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
+      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : Counterparty.fromPartial({}),
       connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
       version: object.version
     };
@@ -620,7 +620,7 @@ export const IdentifiedChannel = {
     return {
       state: isSet(object.state) ? stateFromJSON(object.state) : -1,
       ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
-      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
+      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : Counterparty.fromPartial({}),
       connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
       version: object.version,
       portId: object.port_id,
@@ -936,7 +936,7 @@ export const Packet = {
       destinationPort: object.destination_port,
       destinationChannel: object.destination_channel,
       data: object.data,
-      timeoutHeight: object?.timeout_height ? Height.fromAmino(object.timeout_height) : undefined,
+      timeoutHeight: object?.timeout_height ? Height.fromAmino(object.timeout_height) : Height.fromPartial({}),
       timeoutTimestamp: BigInt(object.timeout_timestamp)
     };
   },

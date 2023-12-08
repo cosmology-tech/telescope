@@ -287,7 +287,7 @@ export const MsgLockTokens = {
   fromAmino(object: MsgLockTokensAmino): MsgLockTokens {
     return {
       owner: object.owner,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
+      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({}),
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
@@ -854,7 +854,7 @@ export const MsgExtendLockup = {
     return {
       owner: object.owner,
       ID: BigInt(object.ID),
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
+      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({})
     };
   },
   toAmino(message: MsgExtendLockup, useInterfaces: boolean = true): MsgExtendLockupAmino {

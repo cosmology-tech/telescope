@@ -548,7 +548,7 @@ export const MsgChannelOpenInit = {
   fromAmino(object: MsgChannelOpenInitAmino): MsgChannelOpenInit {
     return {
       portId: object.port_id,
-      channel: object?.channel ? Channel.fromAmino(object.channel) : undefined,
+      channel: object?.channel ? Channel.fromAmino(object.channel) : Channel.fromPartial({}),
       signer: object.signer
     };
   },
@@ -770,10 +770,10 @@ export const MsgChannelOpenTry = {
     return {
       portId: object.port_id,
       previousChannelId: object.previous_channel_id,
-      channel: object?.channel ? Channel.fromAmino(object.channel) : undefined,
+      channel: object?.channel ? Channel.fromAmino(object.channel) : Channel.fromPartial({}),
       counterpartyVersion: object.counterparty_version,
       proofInit: object.proof_init,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({}),
       signer: object.signer
     };
   },
@@ -1000,7 +1000,7 @@ export const MsgChannelOpenAck = {
       counterpartyChannelId: object.counterparty_channel_id,
       counterpartyVersion: object.counterparty_version,
       proofTry: object.proof_try,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({}),
       signer: object.signer
     };
   },
@@ -1201,7 +1201,7 @@ export const MsgChannelOpenConfirm = {
       portId: object.port_id,
       channelId: object.channel_id,
       proofAck: object.proof_ack,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({}),
       signer: object.signer
     };
   },
@@ -1569,7 +1569,7 @@ export const MsgChannelCloseConfirm = {
       portId: object.port_id,
       channelId: object.channel_id,
       proofInit: object.proof_init,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({}),
       signer: object.signer
     };
   },
@@ -1755,9 +1755,9 @@ export const MsgRecvPacket = {
   },
   fromAmino(object: MsgRecvPacketAmino): MsgRecvPacket {
     return {
-      packet: object?.packet ? Packet.fromAmino(object.packet) : undefined,
+      packet: object?.packet ? Packet.fromAmino(object.packet) : Packet.fromPartial({}),
       proofCommitment: object.proof_commitment,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({}),
       signer: object.signer
     };
   },
@@ -1956,9 +1956,9 @@ export const MsgTimeout = {
   },
   fromAmino(object: MsgTimeoutAmino): MsgTimeout {
     return {
-      packet: object?.packet ? Packet.fromAmino(object.packet) : undefined,
+      packet: object?.packet ? Packet.fromAmino(object.packet) : Packet.fromPartial({}),
       proofUnreceived: object.proof_unreceived,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({}),
       nextSequenceRecv: BigInt(object.next_sequence_recv),
       signer: object.signer
     };
@@ -2171,10 +2171,10 @@ export const MsgTimeoutOnClose = {
   },
   fromAmino(object: MsgTimeoutOnCloseAmino): MsgTimeoutOnClose {
     return {
-      packet: object?.packet ? Packet.fromAmino(object.packet) : undefined,
+      packet: object?.packet ? Packet.fromAmino(object.packet) : Packet.fromPartial({}),
       proofUnreceived: object.proof_unreceived,
       proofClose: object.proof_close,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({}),
       nextSequenceRecv: BigInt(object.next_sequence_recv),
       signer: object.signer
     };
@@ -2374,10 +2374,10 @@ export const MsgAcknowledgement = {
   },
   fromAmino(object: MsgAcknowledgementAmino): MsgAcknowledgement {
     return {
-      packet: object?.packet ? Packet.fromAmino(object.packet) : undefined,
+      packet: object?.packet ? Packet.fromAmino(object.packet) : Packet.fromPartial({}),
       acknowledgement: object.acknowledgement,
       proofAcked: object.proof_acked,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({}),
       signer: object.signer
     };
   },

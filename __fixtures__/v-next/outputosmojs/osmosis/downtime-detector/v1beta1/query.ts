@@ -109,7 +109,7 @@ export const RecoveredSinceDowntimeOfLengthRequest = {
   fromAmino(object: RecoveredSinceDowntimeOfLengthRequestAmino): RecoveredSinceDowntimeOfLengthRequest {
     return {
       downtime: isSet(object.downtime) ? downtimeFromJSON(object.downtime) : -1,
-      recovery: object?.recovery ? Duration.fromAmino(object.recovery) : undefined
+      recovery: object?.recovery ? Duration.fromAmino(object.recovery) : Duration.fromPartial({})
     };
   },
   toAmino(message: RecoveredSinceDowntimeOfLengthRequest): RecoveredSinceDowntimeOfLengthRequestAmino {

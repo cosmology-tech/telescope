@@ -450,7 +450,7 @@ export const Grant = {
       authorization: object?.authorization ? GlobalDecoderRegistry.fromAmino(object.authorization) : undefined,
       expiration: object?.expiration ? fromTimestamp(Timestamp.fromAmino(object.expiration)) : undefined,
       opt: isSet(object.opt) ? voteOptionFromJSON(object.opt) : -1,
-      singleMsg: object?.single_msg ? Any.fromAmino(object.single_msg) : undefined,
+      singleMsg: object?.single_msg ? Any.fromAmino(object.single_msg) : Any.fromPartial({}),
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : []
     };
   },

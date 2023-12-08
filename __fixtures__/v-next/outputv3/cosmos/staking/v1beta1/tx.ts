@@ -378,13 +378,13 @@ export const MsgCreateValidator = {
   },
   fromAmino(object: MsgCreateValidatorAmino): MsgCreateValidator {
     return {
-      description: object?.description ? Description.fromAmino(object.description) : undefined,
-      commission: object?.commission ? CommissionRates.fromAmino(object.commission) : undefined,
+      description: object?.description ? Description.fromAmino(object.description) : Description.fromPartial({}),
+      commission: object?.commission ? CommissionRates.fromAmino(object.commission) : CommissionRates.fromPartial({}),
       minSelfDelegation: object.min_self_delegation,
       delegatorAddress: object.delegator_address,
       validatorAddress: object.validator_address,
       pubkey: object?.pubkey ? encodePubkey(object.pubkey) : undefined,
-      value: object?.value ? Coin.fromAmino(object.value) : undefined
+      value: object?.value ? Coin.fromAmino(object.value) : Coin.fromPartial({})
     };
   },
   toAmino(message: MsgCreateValidator, useInterfaces: boolean = true): MsgCreateValidatorAmino {
@@ -569,7 +569,7 @@ export const MsgEditValidator = {
   },
   fromAmino(object: MsgEditValidatorAmino): MsgEditValidator {
     return {
-      description: object?.description ? Description.fromAmino(object.description) : undefined,
+      description: object?.description ? Description.fromAmino(object.description) : Description.fromPartial({}),
       validatorAddress: object.validator_address,
       commissionRate: object.commission_rate,
       minSelfDelegation: object.min_self_delegation
@@ -744,7 +744,7 @@ export const MsgDelegate = {
     return {
       delegatorAddress: object.delegator_address,
       validatorAddress: object.validator_address,
-      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
+      amount: object?.amount ? Coin.fromAmino(object.amount) : Coin.fromPartial({})
     };
   },
   toAmino(message: MsgDelegate, useInterfaces: boolean = true): MsgDelegateAmino {
@@ -928,7 +928,7 @@ export const MsgBeginRedelegate = {
       delegatorAddress: object.delegator_address,
       validatorSrcAddress: object.validator_src_address,
       validatorDstAddress: object.validator_dst_address,
-      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
+      amount: object?.amount ? Coin.fromAmino(object.amount) : Coin.fromPartial({})
     };
   },
   toAmino(message: MsgBeginRedelegate, useInterfaces: boolean = true): MsgBeginRedelegateAmino {
@@ -1010,7 +1010,7 @@ export const MsgBeginRedelegateResponse = {
   },
   fromAmino(object: MsgBeginRedelegateResponseAmino): MsgBeginRedelegateResponse {
     return {
-      completionTime: object?.completion_time ? fromTimestamp(Timestamp.fromAmino(object.completion_time)) : undefined
+      completionTime: object?.completion_time ? fromTimestamp(Timestamp.fromAmino(object.completion_time)) : fromTimestamp(Timestamp.fromPartial({}))
     };
   },
   toAmino(message: MsgBeginRedelegateResponse, useInterfaces: boolean = true): MsgBeginRedelegateResponseAmino {
@@ -1117,7 +1117,7 @@ export const MsgUndelegate = {
     return {
       delegatorAddress: object.delegator_address,
       validatorAddress: object.validator_address,
-      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
+      amount: object?.amount ? Coin.fromAmino(object.amount) : Coin.fromPartial({})
     };
   },
   toAmino(message: MsgUndelegate, useInterfaces: boolean = true): MsgUndelegateAmino {
@@ -1198,7 +1198,7 @@ export const MsgUndelegateResponse = {
   },
   fromAmino(object: MsgUndelegateResponseAmino): MsgUndelegateResponse {
     return {
-      completionTime: object?.completion_time ? fromTimestamp(Timestamp.fromAmino(object.completion_time)) : undefined
+      completionTime: object?.completion_time ? fromTimestamp(Timestamp.fromAmino(object.completion_time)) : fromTimestamp(Timestamp.fromPartial({}))
     };
   },
   toAmino(message: MsgUndelegateResponse, useInterfaces: boolean = true): MsgUndelegateResponseAmino {

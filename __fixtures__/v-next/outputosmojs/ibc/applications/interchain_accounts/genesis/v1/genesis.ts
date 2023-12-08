@@ -170,8 +170,8 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      controllerGenesisState: object?.controller_genesis_state ? ControllerGenesisState.fromAmino(object.controller_genesis_state) : undefined,
-      hostGenesisState: object?.host_genesis_state ? HostGenesisState.fromAmino(object.host_genesis_state) : undefined
+      controllerGenesisState: object?.controller_genesis_state ? ControllerGenesisState.fromAmino(object.controller_genesis_state) : ControllerGenesisState.fromPartial({}),
+      hostGenesisState: object?.host_genesis_state ? HostGenesisState.fromAmino(object.host_genesis_state) : HostGenesisState.fromPartial({})
     };
   },
   toAmino(message: GenesisState): GenesisStateAmino {
@@ -330,7 +330,7 @@ export const ControllerGenesisState = {
       activeChannels: Array.isArray(object?.active_channels) ? object.active_channels.map((e: any) => ActiveChannel.fromAmino(e)) : [],
       interchainAccounts: Array.isArray(object?.interchain_accounts) ? object.interchain_accounts.map((e: any) => RegisteredInterchainAccount.fromAmino(e)) : [],
       ports: Array.isArray(object?.ports) ? object.ports.map((e: any) => e) : [],
-      params: object?.params ? Params1.fromAmino(object.params) : undefined
+      params: object?.params ? Params1.fromAmino(object.params) : Params1.fromPartial({})
     };
   },
   toAmino(message: ControllerGenesisState): ControllerGenesisStateAmino {
@@ -495,7 +495,7 @@ export const HostGenesisState = {
       activeChannels: Array.isArray(object?.active_channels) ? object.active_channels.map((e: any) => ActiveChannel.fromAmino(e)) : [],
       interchainAccounts: Array.isArray(object?.interchain_accounts) ? object.interchain_accounts.map((e: any) => RegisteredInterchainAccount.fromAmino(e)) : [],
       port: object.port,
-      params: object?.params ? Params2.fromAmino(object.params) : undefined
+      params: object?.params ? Params2.fromAmino(object.params) : Params2.fromPartial({})
     };
   },
   toAmino(message: HostGenesisState): HostGenesisStateAmino {

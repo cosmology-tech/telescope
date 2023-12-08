@@ -317,10 +317,10 @@ export const ConsensusParams = {
   },
   fromAmino(object: ConsensusParamsAmino): ConsensusParams {
     return {
-      block: object?.block ? BlockParams.fromAmino(object.block) : undefined,
-      evidence: object?.evidence ? EvidenceParams.fromAmino(object.evidence) : undefined,
-      validator: object?.validator ? ValidatorParams.fromAmino(object.validator) : undefined,
-      version: object?.version ? VersionParams.fromAmino(object.version) : undefined
+      block: object?.block ? BlockParams.fromAmino(object.block) : BlockParams.fromPartial({}),
+      evidence: object?.evidence ? EvidenceParams.fromAmino(object.evidence) : EvidenceParams.fromPartial({}),
+      validator: object?.validator ? ValidatorParams.fromAmino(object.validator) : ValidatorParams.fromPartial({}),
+      version: object?.version ? VersionParams.fromAmino(object.version) : VersionParams.fromPartial({})
     };
   },
   toAmino(message: ConsensusParams, useInterfaces: boolean = true): ConsensusParamsAmino {
@@ -544,7 +544,7 @@ export const EvidenceParams = {
   fromAmino(object: EvidenceParamsAmino): EvidenceParams {
     return {
       maxAgeNumBlocks: BigInt(object.max_age_num_blocks),
-      maxAgeDuration: object?.max_age_duration ? Duration.fromAmino(object.max_age_duration) : undefined,
+      maxAgeDuration: object?.max_age_duration ? Duration.fromAmino(object.max_age_duration) : Duration.fromPartial({}),
       maxBytes: BigInt(object.max_bytes)
     };
   },

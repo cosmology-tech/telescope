@@ -306,7 +306,7 @@ export const MsgConnectionOpenInit = {
   fromAmino(object: MsgConnectionOpenInitAmino): MsgConnectionOpenInit {
     return {
       clientId: object.client_id,
-      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
+      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : Counterparty.fromPartial({}),
       version: object?.version ? Version.fromAmino(object.version) : undefined,
       delayPeriod: BigInt(object.delay_period),
       signer: object.signer
@@ -631,14 +631,14 @@ export const MsgConnectionOpenTry = {
       clientId: object.client_id,
       previousConnectionId: object.previous_connection_id,
       clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
-      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : undefined,
+      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : Counterparty.fromPartial({}),
       delayPeriod: BigInt(object.delay_period),
       counterpartyVersions: Array.isArray(object?.counterparty_versions) ? object.counterparty_versions.map((e: any) => Version.fromAmino(e)) : [],
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({}),
       proofInit: object.proof_init,
       proofClient: object.proof_client,
       proofConsensus: object.proof_consensus,
-      consensusHeight: object?.consensus_height ? Height.fromAmino(object.consensus_height) : undefined,
+      consensusHeight: object?.consensus_height ? Height.fromAmino(object.consensus_height) : Height.fromPartial({}),
       signer: object.signer
     };
   },
@@ -939,11 +939,11 @@ export const MsgConnectionOpenAck = {
       counterpartyConnectionId: object.counterparty_connection_id,
       version: object?.version ? Version.fromAmino(object.version) : undefined,
       clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({}),
       proofTry: object.proof_try,
       proofClient: object.proof_client,
       proofConsensus: object.proof_consensus,
-      consensusHeight: object?.consensus_height ? Height.fromAmino(object.consensus_height) : undefined,
+      consensusHeight: object?.consensus_height ? Height.fromAmino(object.consensus_height) : Height.fromPartial({}),
       signer: object.signer
     };
   },
@@ -1158,7 +1158,7 @@ export const MsgConnectionOpenConfirm = {
     return {
       connectionId: object.connection_id,
       proofAck: object.proof_ack,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({}),
       signer: object.signer
     };
   },

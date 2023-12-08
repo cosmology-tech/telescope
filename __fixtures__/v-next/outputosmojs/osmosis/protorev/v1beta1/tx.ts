@@ -628,7 +628,7 @@ export const MsgSetPoolWeights = {
   fromAmino(object: MsgSetPoolWeightsAmino): MsgSetPoolWeights {
     return {
       admin: object.admin,
-      poolWeights: object?.pool_weights ? PoolWeights.fromAmino(object.pool_weights) : undefined
+      poolWeights: object?.pool_weights ? PoolWeights.fromAmino(object.pool_weights) : PoolWeights.fromPartial({})
     };
   },
   toAmino(message: MsgSetPoolWeights): MsgSetPoolWeightsAmino {

@@ -667,7 +667,7 @@ export const QueryIncentivizedPacketResponse = {
   },
   fromAmino(object: QueryIncentivizedPacketResponseAmino): QueryIncentivizedPacketResponse {
     return {
-      incentivizedPacket: object?.incentivized_packet ? IdentifiedPacketFees.fromAmino(object.incentivized_packet) : undefined
+      incentivizedPacket: object?.incentivized_packet ? IdentifiedPacketFees.fromAmino(object.incentivized_packet) : IdentifiedPacketFees.fromPartial({})
     };
   },
   toAmino(message: QueryIncentivizedPacketResponse): QueryIncentivizedPacketResponseAmino {

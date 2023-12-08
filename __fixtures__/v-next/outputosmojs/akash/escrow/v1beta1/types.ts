@@ -398,11 +398,11 @@ export const Account = {
   },
   fromAmino(object: AccountAmino): Account {
     return {
-      id: object?.id ? AccountID.fromAmino(object.id) : undefined,
+      id: object?.id ? AccountID.fromAmino(object.id) : AccountID.fromPartial({}),
       owner: object.owner,
       state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
-      balance: object?.balance ? Coin.fromAmino(object.balance) : undefined,
-      transferred: object?.transferred ? Coin.fromAmino(object.transferred) : undefined,
+      balance: object?.balance ? Coin.fromAmino(object.balance) : Coin.fromPartial({}),
+      transferred: object?.transferred ? Coin.fromAmino(object.transferred) : Coin.fromPartial({}),
       settledAt: BigInt(object.settled_at)
     };
   },
@@ -578,13 +578,13 @@ export const Payment = {
   },
   fromAmino(object: PaymentAmino): Payment {
     return {
-      accountId: object?.account_id ? AccountID.fromAmino(object.account_id) : undefined,
+      accountId: object?.account_id ? AccountID.fromAmino(object.account_id) : AccountID.fromPartial({}),
       paymentId: object.payment_id,
       owner: object.owner,
       state: isSet(object.state) ? payment_StateFromJSON(object.state) : -1,
-      rate: object?.rate ? Coin.fromAmino(object.rate) : undefined,
-      balance: object?.balance ? Coin.fromAmino(object.balance) : undefined,
-      withdrawn: object?.withdrawn ? Coin.fromAmino(object.withdrawn) : undefined
+      rate: object?.rate ? Coin.fromAmino(object.rate) : Coin.fromPartial({}),
+      balance: object?.balance ? Coin.fromAmino(object.balance) : Coin.fromPartial({}),
+      withdrawn: object?.withdrawn ? Coin.fromAmino(object.withdrawn) : Coin.fromPartial({})
     };
   },
   toAmino(message: Payment): PaymentAmino {

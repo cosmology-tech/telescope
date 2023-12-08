@@ -143,7 +143,7 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({}),
       factoryDenoms: Array.isArray(object?.factory_denoms) ? object.factory_denoms.map((e: any) => GenesisDenom.fromAmino(e)) : []
     };
   },
@@ -252,7 +252,7 @@ export const GenesisDenom = {
   fromAmino(object: GenesisDenomAmino): GenesisDenom {
     return {
       denom: object.denom,
-      authorityMetadata: object?.authority_metadata ? DenomAuthorityMetadata.fromAmino(object.authority_metadata) : undefined
+      authorityMetadata: object?.authority_metadata ? DenomAuthorityMetadata.fromAmino(object.authority_metadata) : DenomAuthorityMetadata.fromPartial({})
     };
   },
   toAmino(message: GenesisDenom): GenesisDenomAmino {

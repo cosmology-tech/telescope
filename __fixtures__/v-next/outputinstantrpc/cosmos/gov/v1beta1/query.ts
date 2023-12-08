@@ -411,7 +411,7 @@ export const QueryProposalResponse = {
   },
   fromAmino(object: QueryProposalResponseAmino): QueryProposalResponse {
     return {
-      proposal: object?.proposal ? Proposal.fromAmino(object.proposal) : undefined
+      proposal: object?.proposal ? Proposal.fromAmino(object.proposal) : Proposal.fromPartial({})
     };
   },
   toAmino(message: QueryProposalResponse): QueryProposalResponseAmino {
@@ -874,7 +874,7 @@ export const QueryVoteResponse = {
   },
   fromAmino(object: QueryVoteResponseAmino): QueryVoteResponse {
     return {
-      vote: object?.vote ? Vote.fromAmino(object.vote) : undefined
+      vote: object?.vote ? Vote.fromAmino(object.vote) : Vote.fromPartial({})
     };
   },
   toAmino(message: QueryVoteResponse): QueryVoteResponseAmino {
@@ -1322,9 +1322,9 @@ export const QueryParamsResponse = {
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
-      votingParams: object?.voting_params ? VotingParams.fromAmino(object.voting_params) : undefined,
-      depositParams: object?.deposit_params ? DepositParams.fromAmino(object.deposit_params) : undefined,
-      tallyParams: object?.tally_params ? TallyParams.fromAmino(object.tally_params) : undefined
+      votingParams: object?.voting_params ? VotingParams.fromAmino(object.voting_params) : VotingParams.fromPartial({}),
+      depositParams: object?.deposit_params ? DepositParams.fromAmino(object.deposit_params) : DepositParams.fromPartial({}),
+      tallyParams: object?.tally_params ? TallyParams.fromAmino(object.tally_params) : TallyParams.fromPartial({})
     };
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
@@ -1529,7 +1529,7 @@ export const QueryDepositResponse = {
   },
   fromAmino(object: QueryDepositResponseAmino): QueryDepositResponse {
     return {
-      deposit: object?.deposit ? Deposit.fromAmino(object.deposit) : undefined
+      deposit: object?.deposit ? Deposit.fromAmino(object.deposit) : Deposit.fromPartial({})
     };
   },
   toAmino(message: QueryDepositResponse): QueryDepositResponseAmino {
@@ -1949,7 +1949,7 @@ export const QueryTallyResultResponse = {
   },
   fromAmino(object: QueryTallyResultResponseAmino): QueryTallyResultResponse {
     return {
-      tally: object?.tally ? TallyResult.fromAmino(object.tally) : undefined
+      tally: object?.tally ? TallyResult.fromAmino(object.tally) : TallyResult.fromPartial({})
     };
   },
   toAmino(message: QueryTallyResultResponse): QueryTallyResultResponseAmino {

@@ -194,7 +194,7 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({}),
       period: BigInt(object.period),
       epochIdentifier: object.epoch_identifier,
       epochsPerPeriod: BigInt(object.epochs_per_period),
@@ -324,8 +324,8 @@ export const Params = {
   fromAmino(object: ParamsAmino): Params {
     return {
       mintDenom: object.mint_denom,
-      exponentialCalculation: object?.exponential_calculation ? ExponentialCalculation.fromAmino(object.exponential_calculation) : undefined,
-      inflationDistribution: object?.inflation_distribution ? InflationDistribution.fromAmino(object.inflation_distribution) : undefined,
+      exponentialCalculation: object?.exponential_calculation ? ExponentialCalculation.fromAmino(object.exponential_calculation) : ExponentialCalculation.fromPartial({}),
+      inflationDistribution: object?.inflation_distribution ? InflationDistribution.fromAmino(object.inflation_distribution) : InflationDistribution.fromPartial({}),
       enableInflation: object.enable_inflation
     };
   },

@@ -251,7 +251,7 @@ export const QueryParamsResponse = {
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
-      param: object?.param ? ParamChange.fromAmino(object.param) : undefined
+      param: object?.param ? ParamChange.fromAmino(object.param) : ParamChange.fromPartial({})
     };
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {

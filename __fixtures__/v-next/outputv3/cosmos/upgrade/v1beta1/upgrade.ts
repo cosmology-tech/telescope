@@ -314,7 +314,7 @@ export const Plan = {
   fromAmino(object: PlanAmino): Plan {
     return {
       name: object.name,
-      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
+      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : fromTimestamp(Timestamp.fromPartial({})),
       height: BigInt(object.height),
       info: object.info,
       upgradedClientState: object?.upgraded_client_state ? Any.fromAmino(object.upgraded_client_state) : undefined
@@ -428,7 +428,7 @@ export const SoftwareUpgradeProposal = {
     return {
       title: object.title,
       description: object.description,
-      plan: object?.plan ? Plan.fromAmino(object.plan) : undefined
+      plan: object?.plan ? Plan.fromAmino(object.plan) : Plan.fromPartial({})
     };
   },
   toAmino(message: SoftwareUpgradeProposal, useInterfaces: boolean = true): SoftwareUpgradeProposalAmino {

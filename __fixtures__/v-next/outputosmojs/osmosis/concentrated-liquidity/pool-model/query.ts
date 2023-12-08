@@ -564,7 +564,7 @@ export const QueryPositionByIdResponse = {
   },
   fromAmino(object: QueryPositionByIdResponseAmino): QueryPositionByIdResponse {
     return {
-      position: object?.position ? PositionWithUnderlyingAssetBreakdown.fromAmino(object.position) : undefined
+      position: object?.position ? PositionWithUnderlyingAssetBreakdown.fromAmino(object.position) : PositionWithUnderlyingAssetBreakdown.fromPartial({})
     };
   },
   toAmino(message: QueryPositionByIdResponse): QueryPositionByIdResponseAmino {
@@ -939,7 +939,7 @@ export const QueryParamsResponse = {
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {

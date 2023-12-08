@@ -72,7 +72,7 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      bidMinDeposit: object?.bid_min_deposit ? Coin.fromAmino(object.bid_min_deposit) : undefined,
+      bidMinDeposit: object?.bid_min_deposit ? Coin.fromAmino(object.bid_min_deposit) : Coin.fromPartial({}),
       orderMaxBids: object.order_max_bids
     };
   },

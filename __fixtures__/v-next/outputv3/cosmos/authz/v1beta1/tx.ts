@@ -236,7 +236,7 @@ export const MsgGrant = {
     return {
       granter: object.granter,
       grantee: object.grantee,
-      grant: object?.grant ? Grant.fromAmino(object.grant) : undefined
+      grant: object?.grant ? Grant.fromAmino(object.grant) : Grant.fromPartial({})
     };
   },
   toAmino(message: MsgGrant, useInterfaces: boolean = true): MsgGrantAmino {

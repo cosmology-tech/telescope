@@ -327,7 +327,7 @@ export const MsgCreateProvider = {
       owner: object.owner,
       hostUri: object.host_uri,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
-      info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
+      info: object?.info ? ProviderInfo.fromAmino(object.info) : ProviderInfo.fromPartial({})
     };
   },
   toAmino(message: MsgCreateProvider): MsgCreateProviderAmino {
@@ -551,7 +551,7 @@ export const MsgUpdateProvider = {
       owner: object.owner,
       hostUri: object.host_uri,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
-      info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
+      info: object?.info ? ProviderInfo.fromAmino(object.info) : ProviderInfo.fromPartial({})
     };
   },
   toAmino(message: MsgUpdateProvider): MsgUpdateProviderAmino {
@@ -940,7 +940,7 @@ export const Provider = {
       owner: object.owner,
       hostUri: object.host_uri,
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
-      info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
+      info: object?.info ? ProviderInfo.fromAmino(object.info) : ProviderInfo.fromPartial({})
     };
   },
   toAmino(message: Provider): ProviderAmino {

@@ -1344,7 +1344,7 @@ export const SimulationResponse = {
   },
   fromAmino(object: SimulationResponseAmino): SimulationResponse {
     return {
-      gasInfo: object?.gas_info ? GasInfo.fromAmino(object.gas_info) : undefined,
+      gasInfo: object?.gas_info ? GasInfo.fromAmino(object.gas_info) : GasInfo.fromPartial({}),
       result: object?.result ? Result.fromAmino(object.result) : undefined
     };
   },

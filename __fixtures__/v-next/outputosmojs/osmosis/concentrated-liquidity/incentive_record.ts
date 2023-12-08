@@ -191,8 +191,8 @@ export const IncentiveRecord = {
       poolId: BigInt(object.pool_id),
       incentiveDenom: object.incentive_denom,
       incentiveCreatorAddr: object.incentive_creator_addr,
-      incentiveRecordBody: object?.incentive_record_body ? IncentiveRecordBody.fromAmino(object.incentive_record_body) : undefined,
-      minUptime: object?.min_uptime ? Duration.fromAmino(object.min_uptime) : undefined
+      incentiveRecordBody: object?.incentive_record_body ? IncentiveRecordBody.fromAmino(object.incentive_record_body) : IncentiveRecordBody.fromPartial({}),
+      minUptime: object?.min_uptime ? Duration.fromAmino(object.min_uptime) : Duration.fromPartial({})
     };
   },
   toAmino(message: IncentiveRecord): IncentiveRecordAmino {
@@ -316,7 +316,7 @@ export const IncentiveRecordBody = {
     return {
       remainingAmount: object.remaining_amount,
       emissionRate: object.emission_rate,
-      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined
+      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : fromTimestamp(Timestamp.fromPartial({}))
     };
   },
   toAmino(message: IncentiveRecordBody): IncentiveRecordBodyAmino {

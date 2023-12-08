@@ -497,7 +497,7 @@ export const QueryDevFeeInfoResponse = {
   },
   fromAmino(object: QueryDevFeeInfoResponseAmino): QueryDevFeeInfoResponse {
     return {
-      fee: object?.fee ? DevFeeInfo.fromAmino(object.fee) : undefined
+      fee: object?.fee ? DevFeeInfo.fromAmino(object.fee) : DevFeeInfo.fromPartial({})
     };
   },
   toAmino(message: QueryDevFeeInfoResponse): QueryDevFeeInfoResponseAmino {
@@ -649,7 +649,7 @@ export const QueryParamsResponse = {
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {

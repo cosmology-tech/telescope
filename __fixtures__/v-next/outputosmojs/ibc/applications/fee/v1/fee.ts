@@ -320,7 +320,7 @@ export const PacketFee = {
   },
   fromAmino(object: PacketFeeAmino): PacketFee {
     return {
-      fee: object?.fee ? Fee.fromAmino(object.fee) : undefined,
+      fee: object?.fee ? Fee.fromAmino(object.fee) : Fee.fromPartial({}),
       refundAddress: object.refund_address,
       relayers: Array.isArray(object?.relayers) ? object.relayers.map((e: any) => e) : []
     };

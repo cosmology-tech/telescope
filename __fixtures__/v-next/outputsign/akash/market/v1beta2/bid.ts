@@ -308,10 +308,10 @@ export const MsgCreateBid = {
   },
   fromAmino(object: MsgCreateBidAmino): MsgCreateBid {
     return {
-      order: object?.order ? OrderID.fromAmino(object.order) : undefined,
+      order: object?.order ? OrderID.fromAmino(object.order) : OrderID.fromPartial({}),
       provider: object.provider,
-      price: object?.price ? DecCoin.fromAmino(object.price) : undefined,
-      deposit: object?.deposit ? Coin.fromAmino(object.deposit) : undefined
+      price: object?.price ? DecCoin.fromAmino(object.price) : DecCoin.fromPartial({}),
+      deposit: object?.deposit ? Coin.fromAmino(object.deposit) : Coin.fromPartial({})
     };
   },
   toAmino(message: MsgCreateBid): MsgCreateBidAmino {
@@ -426,7 +426,7 @@ export const MsgCloseBid = {
   },
   fromAmino(object: MsgCloseBidAmino): MsgCloseBid {
     return {
-      bidId: object?.bid_id ? BidID.fromAmino(object.bid_id) : undefined
+      bidId: object?.bid_id ? BidID.fromAmino(object.bid_id) : BidID.fromPartial({})
     };
   },
   toAmino(message: MsgCloseBid): MsgCloseBidAmino {
@@ -669,9 +669,9 @@ export const Bid = {
   },
   fromAmino(object: BidAmino): Bid {
     return {
-      bidId: object?.bid_id ? BidID.fromAmino(object.bid_id) : undefined,
+      bidId: object?.bid_id ? BidID.fromAmino(object.bid_id) : BidID.fromPartial({}),
       state: isSet(object.state) ? bid_StateFromJSON(object.state) : -1,
-      price: object?.price ? DecCoin.fromAmino(object.price) : undefined,
+      price: object?.price ? DecCoin.fromAmino(object.price) : DecCoin.fromPartial({}),
       createdAt: BigInt(object.created_at)
     };
   },

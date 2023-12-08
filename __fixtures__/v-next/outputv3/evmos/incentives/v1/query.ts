@@ -690,7 +690,7 @@ export const QueryIncentiveResponse = {
   },
   fromAmino(object: QueryIncentiveResponseAmino): QueryIncentiveResponse {
     return {
-      incentive: object?.incentive ? Incentive.fromAmino(object.incentive) : undefined
+      incentive: object?.incentive ? Incentive.fromAmino(object.incentive) : Incentive.fromPartial({})
     };
   },
   toAmino(message: QueryIncentiveResponse, useInterfaces: boolean = true): QueryIncentiveResponseAmino {
@@ -1406,7 +1406,7 @@ export const QueryAllocationMeterResponse = {
   },
   fromAmino(object: QueryAllocationMeterResponseAmino): QueryAllocationMeterResponse {
     return {
-      allocationMeter: object?.allocation_meter ? DecCoin.fromAmino(object.allocation_meter) : undefined
+      allocationMeter: object?.allocation_meter ? DecCoin.fromAmino(object.allocation_meter) : DecCoin.fromPartial({})
     };
   },
   toAmino(message: QueryAllocationMeterResponse, useInterfaces: boolean = true): QueryAllocationMeterResponseAmino {
@@ -1547,7 +1547,7 @@ export const QueryParamsResponse = {
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {

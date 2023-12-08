@@ -457,7 +457,7 @@ export const QueryTokenPairResponse = {
   },
   fromAmino(object: QueryTokenPairResponseAmino): QueryTokenPairResponse {
     return {
-      tokenPair: object?.token_pair ? TokenPair.fromAmino(object.token_pair) : undefined
+      tokenPair: object?.token_pair ? TokenPair.fromAmino(object.token_pair) : TokenPair.fromPartial({})
     };
   },
   toAmino(message: QueryTokenPairResponse): QueryTokenPairResponseAmino {
@@ -612,7 +612,7 @@ export const QueryParamsResponse = {
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {

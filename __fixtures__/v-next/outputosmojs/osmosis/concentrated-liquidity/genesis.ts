@@ -184,7 +184,7 @@ export const FullTick = {
     return {
       poolId: BigInt(object.pool_id),
       tickIndex: BigInt(object.tick_index),
-      info: object?.info ? TickInfo.fromAmino(object.info) : undefined
+      info: object?.info ? TickInfo.fromAmino(object.info) : TickInfo.fromPartial({})
     };
   },
   toAmino(message: FullTick): FullTickAmino {
@@ -356,7 +356,7 @@ export const PoolData = {
     return {
       pool: object?.pool ? Any.fromAmino(object.pool) : undefined,
       ticks: Array.isArray(object?.ticks) ? object.ticks.map((e: any) => FullTick.fromAmino(e)) : [],
-      feeAccumulator: object?.fee_accumulator ? AccumObject.fromAmino(object.fee_accumulator) : undefined,
+      feeAccumulator: object?.fee_accumulator ? AccumObject.fromAmino(object.fee_accumulator) : AccumObject.fromPartial({}),
       incentivesAccumulators: Array.isArray(object?.incentives_accumulators) ? object.incentives_accumulators.map((e: any) => AccumObject.fromAmino(e)) : [],
       incentiveRecords: Array.isArray(object?.incentive_records) ? object.incentive_records.map((e: any) => IncentiveRecord.fromAmino(e)) : []
     };
@@ -521,7 +521,7 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({}),
       poolData: Array.isArray(object?.pool_data) ? object.pool_data.map((e: any) => PoolData.fromAmino(e)) : [],
       positions: Array.isArray(object?.positions) ? object.positions.map((e: any) => Position.fromAmino(e)) : [],
       nextPositionId: BigInt(object.next_position_id)

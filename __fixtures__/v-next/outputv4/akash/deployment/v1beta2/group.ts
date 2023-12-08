@@ -183,9 +183,9 @@ export const Group = {
   },
   fromAmino(object: GroupAmino): Group {
     return {
-      groupId: object?.group_id ? GroupID.fromAmino(object.group_id) : undefined,
+      groupId: object?.group_id ? GroupID.fromAmino(object.group_id) : GroupID.fromPartial({}),
       state: isSet(object.state) ? group_StateFromJSON(object.state) : -1,
-      groupSpec: object?.group_spec ? GroupSpec.fromAmino(object.group_spec) : undefined,
+      groupSpec: object?.group_spec ? GroupSpec.fromAmino(object.group_spec) : GroupSpec.fromPartial({}),
       createdAt: BigInt(object.created_at)
     };
   },

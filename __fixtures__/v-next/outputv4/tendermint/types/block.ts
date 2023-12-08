@@ -128,9 +128,9 @@ export const Block = {
   },
   fromAmino(object: BlockAmino): Block {
     return {
-      header: object?.header ? Header.fromAmino(object.header) : undefined,
-      data: object?.data ? Data.fromAmino(object.data) : undefined,
-      evidence: object?.evidence ? EvidenceList.fromAmino(object.evidence) : undefined,
+      header: object?.header ? Header.fromAmino(object.header) : Header.fromPartial({}),
+      data: object?.data ? Data.fromAmino(object.data) : Data.fromPartial({}),
+      evidence: object?.evidence ? EvidenceList.fromAmino(object.evidence) : EvidenceList.fromPartial({}),
       lastCommit: object?.last_commit ? Commit.fromAmino(object.last_commit) : undefined
     };
   },

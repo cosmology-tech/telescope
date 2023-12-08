@@ -453,7 +453,7 @@ export const MsgMint = {
   fromAmino(object: MsgMintAmino): MsgMint {
     return {
       sender: object.sender,
-      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
+      amount: object?.amount ? Coin.fromAmino(object.amount) : Coin.fromPartial({})
     };
   },
   toAmino(message: MsgMint): MsgMintAmino {
@@ -632,7 +632,7 @@ export const MsgBurn = {
   fromAmino(object: MsgBurnAmino): MsgBurn {
     return {
       sender: object.sender,
-      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
+      amount: object?.amount ? Coin.fromAmino(object.amount) : Coin.fromPartial({})
     };
   },
   toAmino(message: MsgBurn): MsgBurnAmino {
@@ -1005,7 +1005,7 @@ export const MsgSetDenomMetadata = {
   fromAmino(object: MsgSetDenomMetadataAmino): MsgSetDenomMetadata {
     return {
       sender: object.sender,
-      metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : undefined
+      metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : Metadata.fromPartial({})
     };
   },
   toAmino(message: MsgSetDenomMetadata): MsgSetDenomMetadataAmino {

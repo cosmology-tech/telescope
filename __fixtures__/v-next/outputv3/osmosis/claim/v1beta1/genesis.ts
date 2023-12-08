@@ -126,8 +126,8 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      moduleAccountBalance: object?.module_account_balance ? Coin.fromAmino(object.module_account_balance) : undefined,
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      moduleAccountBalance: object?.module_account_balance ? Coin.fromAmino(object.module_account_balance) : Coin.fromPartial({}),
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({}),
       claimRecords: Array.isArray(object?.claim_records) ? object.claim_records.map((e: any) => ClaimRecord.fromAmino(e)) : []
     };
   },

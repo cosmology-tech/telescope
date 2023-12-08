@@ -501,7 +501,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   fromAmino(object: QueryGaugeIdsResponse_GaugeIdWithDurationAmino): QueryGaugeIdsResponse_GaugeIdWithDuration {
     return {
       gaugeId: BigInt(object.gauge_id),
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
+      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({}),
       gaugeIncentivePercentage: object.gauge_incentive_percentage
     };
   },
@@ -665,7 +665,7 @@ export const QueryDistrInfoResponse = {
   },
   fromAmino(object: QueryDistrInfoResponseAmino): QueryDistrInfoResponse {
     return {
-      distrInfo: object?.distr_info ? DistrInfo.fromAmino(object.distr_info) : undefined
+      distrInfo: object?.distr_info ? DistrInfo.fromAmino(object.distr_info) : DistrInfo.fromPartial({})
     };
   },
   toAmino(message: QueryDistrInfoResponse): QueryDistrInfoResponseAmino {
@@ -826,7 +826,7 @@ export const QueryParamsResponse = {
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
@@ -1187,7 +1187,7 @@ export const IncentivizedPool = {
   fromAmino(object: IncentivizedPoolAmino): IncentivizedPool {
     return {
       poolId: BigInt(object.pool_id),
-      lockableDuration: object?.lockable_duration ? Duration.fromAmino(object.lockable_duration) : undefined,
+      lockableDuration: object?.lockable_duration ? Duration.fromAmino(object.lockable_duration) : Duration.fromPartial({}),
       gaugeId: BigInt(object.gauge_id)
     };
   },

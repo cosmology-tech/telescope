@@ -549,7 +549,7 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      codeUploadAccess: object?.code_upload_access ? AccessConfig.fromAmino(object.code_upload_access) : undefined,
+      codeUploadAccess: object?.code_upload_access ? AccessConfig.fromAmino(object.code_upload_access) : AccessConfig.fromPartial({}),
       instantiateDefaultPermission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : -1,
       maxWasmCodeSize: BigInt(object.max_wasm_code_size)
     };
@@ -675,7 +675,7 @@ export const CodeInfo = {
     return {
       codeHash: object.code_hash,
       creator: object.creator,
-      instantiateConfig: object?.instantiate_config ? AccessConfig.fromAmino(object.instantiate_config) : undefined
+      instantiateConfig: object?.instantiate_config ? AccessConfig.fromAmino(object.instantiate_config) : AccessConfig.fromPartial({})
     };
   },
   toAmino(message: CodeInfo): CodeInfoAmino {

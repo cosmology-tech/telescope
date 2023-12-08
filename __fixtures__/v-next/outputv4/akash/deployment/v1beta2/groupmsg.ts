@@ -126,7 +126,7 @@ export const MsgCloseGroup = {
   },
   fromAmino(object: MsgCloseGroupAmino): MsgCloseGroup {
     return {
-      id: object?.id ? GroupID.fromAmino(object.id) : undefined
+      id: object?.id ? GroupID.fromAmino(object.id) : GroupID.fromPartial({})
     };
   },
   toAmino(message: MsgCloseGroup): MsgCloseGroupAmino {
@@ -293,7 +293,7 @@ export const MsgPauseGroup = {
   },
   fromAmino(object: MsgPauseGroupAmino): MsgPauseGroup {
     return {
-      id: object?.id ? GroupID.fromAmino(object.id) : undefined
+      id: object?.id ? GroupID.fromAmino(object.id) : GroupID.fromPartial({})
     };
   },
   toAmino(message: MsgPauseGroup): MsgPauseGroupAmino {
@@ -460,7 +460,7 @@ export const MsgStartGroup = {
   },
   fromAmino(object: MsgStartGroupAmino): MsgStartGroup {
     return {
-      id: object?.id ? GroupID.fromAmino(object.id) : undefined
+      id: object?.id ? GroupID.fromAmino(object.id) : GroupID.fromPartial({})
     };
   },
   toAmino(message: MsgStartGroup): MsgStartGroupAmino {

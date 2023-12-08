@@ -328,7 +328,7 @@ export const MsgCloseGroup = {
   },
   fromAmino(object: MsgCloseGroupAmino): MsgCloseGroup {
     return {
-      id: object?.id ? GroupID.fromAmino(object.id) : undefined
+      id: object?.id ? GroupID.fromAmino(object.id) : GroupID.fromPartial({})
     };
   },
   toAmino(message: MsgCloseGroup): MsgCloseGroupAmino {
@@ -475,7 +475,7 @@ export const MsgPauseGroup = {
   },
   fromAmino(object: MsgPauseGroupAmino): MsgPauseGroup {
     return {
-      id: object?.id ? GroupID.fromAmino(object.id) : undefined
+      id: object?.id ? GroupID.fromAmino(object.id) : GroupID.fromPartial({})
     };
   },
   toAmino(message: MsgPauseGroup): MsgPauseGroupAmino {
@@ -622,7 +622,7 @@ export const MsgStartGroup = {
   },
   fromAmino(object: MsgStartGroupAmino): MsgStartGroup {
     return {
-      id: object?.id ? GroupID.fromAmino(object.id) : undefined
+      id: object?.id ? GroupID.fromAmino(object.id) : GroupID.fromPartial({})
     };
   },
   toAmino(message: MsgStartGroup): MsgStartGroupAmino {
@@ -913,7 +913,7 @@ export const GroupSpec = {
   fromAmino(object: GroupSpecAmino): GroupSpec {
     return {
       name: object.name,
-      requirements: object?.requirements ? PlacementRequirements.fromAmino(object.requirements) : undefined,
+      requirements: object?.requirements ? PlacementRequirements.fromAmino(object.requirements) : PlacementRequirements.fromPartial({}),
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromAmino(e)) : []
     };
   },
@@ -1043,9 +1043,9 @@ export const Group = {
   },
   fromAmino(object: GroupAmino): Group {
     return {
-      groupId: object?.group_id ? GroupID.fromAmino(object.group_id) : undefined,
+      groupId: object?.group_id ? GroupID.fromAmino(object.group_id) : GroupID.fromPartial({}),
       state: isSet(object.state) ? group_StateFromJSON(object.state) : -1,
-      groupSpec: object?.group_spec ? GroupSpec.fromAmino(object.group_spec) : undefined,
+      groupSpec: object?.group_spec ? GroupSpec.fromAmino(object.group_spec) : GroupSpec.fromPartial({}),
       createdAt: BigInt(object.created_at)
     };
   },
@@ -1158,9 +1158,9 @@ export const Resource = {
   },
   fromAmino(object: ResourceAmino): Resource {
     return {
-      resources: object?.resources ? ResourceUnits.fromAmino(object.resources) : undefined,
+      resources: object?.resources ? ResourceUnits.fromAmino(object.resources) : ResourceUnits.fromPartial({}),
       count: object.count,
-      price: object?.price ? Coin.fromAmino(object.price) : undefined
+      price: object?.price ? Coin.fromAmino(object.price) : Coin.fromPartial({})
     };
   },
   toAmino(message: Resource): ResourceAmino {

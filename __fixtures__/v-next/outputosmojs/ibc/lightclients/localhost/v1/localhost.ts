@@ -100,7 +100,7 @@ export const ClientState = {
   fromAmino(object: ClientStateAmino): ClientState {
     return {
       chainId: object.chain_id,
-      height: object?.height ? Height.fromAmino(object.height) : undefined
+      height: object?.height ? Height.fromAmino(object.height) : Height.fromPartial({})
     };
   },
   toAmino(message: ClientState): ClientStateAmino {

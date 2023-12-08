@@ -398,7 +398,7 @@ export const MsgSendTx = {
     return {
       owner: object.owner,
       connectionId: object.connection_id,
-      packetData: object?.packet_data ? InterchainAccountPacketData.fromAmino(object.packet_data) : undefined,
+      packetData: object?.packet_data ? InterchainAccountPacketData.fromAmino(object.packet_data) : InterchainAccountPacketData.fromPartial({}),
       relativeTimeout: BigInt(object.relative_timeout)
     };
   },

@@ -393,7 +393,7 @@ export const QueryProviderResponse = {
   },
   fromAmino(object: QueryProviderResponseAmino): QueryProviderResponse {
     return {
-      provider: object?.provider ? Provider.fromAmino(object.provider) : undefined
+      provider: object?.provider ? Provider.fromAmino(object.provider) : Provider.fromPartial({})
     };
   },
   toAmino(message: QueryProviderResponse, useInterfaces: boolean = true): QueryProviderResponseAmino {

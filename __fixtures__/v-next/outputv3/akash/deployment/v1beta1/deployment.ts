@@ -340,10 +340,10 @@ export const MsgCreateDeployment = {
   },
   fromAmino(object: MsgCreateDeploymentAmino): MsgCreateDeployment {
     return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
+      id: object?.id ? DeploymentID.fromAmino(object.id) : DeploymentID.fromPartial({}),
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
       version: object.version,
-      deposit: object?.deposit ? Coin.fromAmino(object.deposit) : undefined
+      deposit: object?.deposit ? Coin.fromAmino(object.deposit) : Coin.fromPartial({})
     };
   },
   toAmino(message: MsgCreateDeployment, useInterfaces: boolean = true): MsgCreateDeploymentAmino {
@@ -505,8 +505,8 @@ export const MsgDepositDeployment = {
   },
   fromAmino(object: MsgDepositDeploymentAmino): MsgDepositDeployment {
     return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
-      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
+      id: object?.id ? DeploymentID.fromAmino(object.id) : DeploymentID.fromPartial({}),
+      amount: object?.amount ? Coin.fromAmino(object.amount) : Coin.fromPartial({})
     };
   },
   toAmino(message: MsgDepositDeployment, useInterfaces: boolean = true): MsgDepositDeploymentAmino {
@@ -680,7 +680,7 @@ export const MsgUpdateDeployment = {
   },
   fromAmino(object: MsgUpdateDeploymentAmino): MsgUpdateDeployment {
     return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
+      id: object?.id ? DeploymentID.fromAmino(object.id) : DeploymentID.fromPartial({}),
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
       version: object.version
     };
@@ -829,7 +829,7 @@ export const MsgCloseDeployment = {
   },
   fromAmino(object: MsgCloseDeploymentAmino): MsgCloseDeployment {
     return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined
+      id: object?.id ? DeploymentID.fromAmino(object.id) : DeploymentID.fromPartial({})
     };
   },
   toAmino(message: MsgCloseDeployment, useInterfaces: boolean = true): MsgCloseDeploymentAmino {
@@ -1102,7 +1102,7 @@ export const Deployment = {
   },
   fromAmino(object: DeploymentAmino): Deployment {
     return {
-      deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : undefined,
+      deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : DeploymentID.fromPartial({}),
       state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
       version: object.version,
       createdAt: BigInt(object.created_at)

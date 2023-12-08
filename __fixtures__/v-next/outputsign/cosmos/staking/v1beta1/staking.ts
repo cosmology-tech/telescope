@@ -873,7 +873,7 @@ export const HistoricalInfo = {
   },
   fromAmino(object: HistoricalInfoAmino): HistoricalInfo {
     return {
-      header: object?.header ? Header.fromAmino(object.header) : undefined,
+      header: object?.header ? Header.fromAmino(object.header) : Header.fromPartial({}),
       valset: Array.isArray(object?.valset) ? object.valset.map((e: any) => Validator.fromAmino(e)) : []
     };
   },
@@ -1043,8 +1043,8 @@ export const Commission = {
   },
   fromAmino(object: CommissionAmino): Commission {
     return {
-      commissionRates: object?.commission_rates ? CommissionRates.fromAmino(object.commission_rates) : undefined,
-      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined
+      commissionRates: object?.commission_rates ? CommissionRates.fromAmino(object.commission_rates) : CommissionRates.fromPartial({}),
+      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : fromTimestamp(Timestamp.fromPartial({}))
     };
   },
   toAmino(message: Commission): CommissionAmino {
@@ -1313,10 +1313,10 @@ export const Validator = {
       status: isSet(object.status) ? bondStatusFromJSON(object.status) : -1,
       tokens: object.tokens,
       delegatorShares: object.delegator_shares,
-      description: object?.description ? Description.fromAmino(object.description) : undefined,
+      description: object?.description ? Description.fromAmino(object.description) : Description.fromPartial({}),
       unbondingHeight: BigInt(object.unbonding_height),
-      unbondingTime: object?.unbonding_time ? fromTimestamp(Timestamp.fromAmino(object.unbonding_time)) : undefined,
-      commission: object?.commission ? Commission.fromAmino(object.commission) : undefined,
+      unbondingTime: object?.unbonding_time ? fromTimestamp(Timestamp.fromAmino(object.unbonding_time)) : fromTimestamp(Timestamp.fromPartial({})),
+      commission: object?.commission ? Commission.fromAmino(object.commission) : Commission.fromPartial({}),
       minSelfDelegation: object.min_self_delegation
     };
   },
@@ -1976,7 +1976,7 @@ export const UnbondingDelegationEntry = {
   fromAmino(object: UnbondingDelegationEntryAmino): UnbondingDelegationEntry {
     return {
       creationHeight: BigInt(object.creation_height),
-      completionTime: object?.completion_time ? fromTimestamp(Timestamp.fromAmino(object.completion_time)) : undefined,
+      completionTime: object?.completion_time ? fromTimestamp(Timestamp.fromAmino(object.completion_time)) : fromTimestamp(Timestamp.fromPartial({})),
       initialBalance: object.initial_balance,
       balance: object.balance
     };
@@ -2075,7 +2075,7 @@ export const RedelegationEntry = {
   fromAmino(object: RedelegationEntryAmino): RedelegationEntry {
     return {
       creationHeight: BigInt(object.creation_height),
-      completionTime: object?.completion_time ? fromTimestamp(Timestamp.fromAmino(object.completion_time)) : undefined,
+      completionTime: object?.completion_time ? fromTimestamp(Timestamp.fromAmino(object.completion_time)) : fromTimestamp(Timestamp.fromPartial({})),
       initialBalance: object.initial_balance,
       sharesDst: object.shares_dst
     };
@@ -2290,7 +2290,7 @@ export const Params = {
   },
   fromAmino(object: ParamsAmino): Params {
     return {
-      unbondingTime: object?.unbonding_time ? Duration.fromAmino(object.unbonding_time) : undefined,
+      unbondingTime: object?.unbonding_time ? Duration.fromAmino(object.unbonding_time) : Duration.fromPartial({}),
       maxValidators: object.max_validators,
       maxEntries: object.max_entries,
       historicalEntries: object.historical_entries,
@@ -2379,8 +2379,8 @@ export const DelegationResponse = {
   },
   fromAmino(object: DelegationResponseAmino): DelegationResponse {
     return {
-      delegation: object?.delegation ? Delegation.fromAmino(object.delegation) : undefined,
-      balance: object?.balance ? Coin.fromAmino(object.balance) : undefined
+      delegation: object?.delegation ? Delegation.fromAmino(object.delegation) : Delegation.fromPartial({}),
+      balance: object?.balance ? Coin.fromAmino(object.balance) : Coin.fromPartial({})
     };
   },
   toAmino(message: DelegationResponse): DelegationResponseAmino {
@@ -2458,7 +2458,7 @@ export const RedelegationEntryResponse = {
   },
   fromAmino(object: RedelegationEntryResponseAmino): RedelegationEntryResponse {
     return {
-      redelegationEntry: object?.redelegation_entry ? RedelegationEntry.fromAmino(object.redelegation_entry) : undefined,
+      redelegationEntry: object?.redelegation_entry ? RedelegationEntry.fromAmino(object.redelegation_entry) : RedelegationEntry.fromPartial({}),
       balance: object.balance
     };
   },
@@ -2537,7 +2537,7 @@ export const RedelegationResponse = {
   },
   fromAmino(object: RedelegationResponseAmino): RedelegationResponse {
     return {
-      redelegation: object?.redelegation ? Redelegation.fromAmino(object.redelegation) : undefined,
+      redelegation: object?.redelegation ? Redelegation.fromAmino(object.redelegation) : Redelegation.fromPartial({}),
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntryResponse.fromAmino(e)) : []
     };
   },

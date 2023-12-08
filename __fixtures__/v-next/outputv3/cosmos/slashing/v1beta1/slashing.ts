@@ -228,7 +228,7 @@ export const ValidatorSigningInfo = {
       address: object.address,
       startHeight: BigInt(object.start_height),
       indexOffset: BigInt(object.index_offset),
-      jailedUntil: object?.jailed_until ? fromTimestamp(Timestamp.fromAmino(object.jailed_until)) : undefined,
+      jailedUntil: object?.jailed_until ? fromTimestamp(Timestamp.fromAmino(object.jailed_until)) : fromTimestamp(Timestamp.fromPartial({})),
       tombstoned: object.tombstoned,
       missedBlocksCounter: BigInt(object.missed_blocks_counter)
     };
@@ -368,7 +368,7 @@ export const Params = {
     return {
       signedBlocksWindow: BigInt(object.signed_blocks_window),
       minSignedPerWindow: object.min_signed_per_window,
-      downtimeJailDuration: object?.downtime_jail_duration ? Duration.fromAmino(object.downtime_jail_duration) : undefined,
+      downtimeJailDuration: object?.downtime_jail_duration ? Duration.fromAmino(object.downtime_jail_duration) : Duration.fromPartial({}),
       slashFractionDoubleSign: object.slash_fraction_double_sign,
       slashFractionDowntime: object.slash_fraction_downtime
     };

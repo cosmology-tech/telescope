@@ -90,7 +90,7 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: GenesisState): GenesisStateAmino {
@@ -162,7 +162,7 @@ export const Params = {
   fromAmino(object: ParamsAmino): Params {
     return {
       enableRecovery: object.enable_recovery,
-      packetTimeoutDuration: object?.packet_timeout_duration ? Duration.fromAmino(object.packet_timeout_duration) : undefined
+      packetTimeoutDuration: object?.packet_timeout_duration ? Duration.fromAmino(object.packet_timeout_duration) : Duration.fromPartial({})
     };
   },
   toAmino(message: Params): ParamsAmino {

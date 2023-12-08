@@ -1120,7 +1120,7 @@ export const QueryValidatorResponse = {
   },
   fromAmino(object: QueryValidatorResponseAmino): QueryValidatorResponse {
     return {
-      validator: object?.validator ? Validator.fromAmino(object.validator) : undefined
+      validator: object?.validator ? Validator.fromAmino(object.validator) : Validator.fromPartial({})
     };
   },
   toAmino(message: QueryValidatorResponse): QueryValidatorResponseAmino {
@@ -1736,7 +1736,7 @@ export const QueryUnbondingDelegationResponse = {
   },
   fromAmino(object: QueryUnbondingDelegationResponseAmino): QueryUnbondingDelegationResponse {
     return {
-      unbond: object?.unbond ? UnbondingDelegation.fromAmino(object.unbond) : undefined
+      unbond: object?.unbond ? UnbondingDelegation.fromAmino(object.unbond) : UnbondingDelegation.fromPartial({})
     };
   },
   toAmino(message: QueryUnbondingDelegationResponse): QueryUnbondingDelegationResponseAmino {
@@ -2550,7 +2550,7 @@ export const QueryDelegatorValidatorResponse = {
   },
   fromAmino(object: QueryDelegatorValidatorResponseAmino): QueryDelegatorValidatorResponse {
     return {
-      validator: object?.validator ? Validator.fromAmino(object.validator) : undefined
+      validator: object?.validator ? Validator.fromAmino(object.validator) : Validator.fromPartial({})
     };
   },
   toAmino(message: QueryDelegatorValidatorResponse): QueryDelegatorValidatorResponseAmino {
@@ -2812,7 +2812,7 @@ export const QueryPoolResponse = {
   },
   fromAmino(object: QueryPoolResponseAmino): QueryPoolResponse {
     return {
-      pool: object?.pool ? Pool.fromAmino(object.pool) : undefined
+      pool: object?.pool ? Pool.fromAmino(object.pool) : Pool.fromPartial({})
     };
   },
   toAmino(message: QueryPoolResponse): QueryPoolResponseAmino {
@@ -2936,7 +2936,7 @@ export const QueryParamsResponse = {
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {

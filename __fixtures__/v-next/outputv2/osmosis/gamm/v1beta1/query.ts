@@ -2326,7 +2326,7 @@ export const QueryTotalSharesResponse = {
   },
   fromAmino(object: QueryTotalSharesResponseAmino): QueryTotalSharesResponse {
     return {
-      totalShares: object?.total_shares ? Coin.fromAmino(object.total_shares) : undefined
+      totalShares: object?.total_shares ? Coin.fromAmino(object.total_shares) : Coin.fromPartial({})
     };
   },
   toAmino(message: QueryTotalSharesResponse): QueryTotalSharesResponseAmino {

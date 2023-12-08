@@ -101,9 +101,9 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      clientGenesis: object?.client_genesis ? GenesisState1.fromAmino(object.client_genesis) : undefined,
-      connectionGenesis: object?.connection_genesis ? GenesisState2.fromAmino(object.connection_genesis) : undefined,
-      channelGenesis: object?.channel_genesis ? GenesisState3.fromAmino(object.channel_genesis) : undefined
+      clientGenesis: object?.client_genesis ? GenesisState1.fromAmino(object.client_genesis) : GenesisState1.fromPartial({}),
+      connectionGenesis: object?.connection_genesis ? GenesisState2.fromAmino(object.connection_genesis) : GenesisState2.fromPartial({}),
+      channelGenesis: object?.channel_genesis ? GenesisState3.fromAmino(object.channel_genesis) : GenesisState3.fromPartial({})
     };
   },
   toAmino(message: GenesisState): GenesisStateAmino {

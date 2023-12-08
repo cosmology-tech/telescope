@@ -99,8 +99,8 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      minter: object?.minter ? Minter.fromAmino(object.minter) : undefined,
-      params: object?.params ? Params.fromAmino(object.params) : undefined
+      minter: object?.minter ? Minter.fromAmino(object.minter) : Minter.fromPartial({}),
+      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
     };
   },
   toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {

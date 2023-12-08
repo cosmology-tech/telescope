@@ -553,7 +553,7 @@ export const QueryConnectionResponse = {
     return {
       connection: object?.connection ? ConnectionEnd.fromAmino(object.connection) : undefined,
       proof: object.proof,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryConnectionResponse): QueryConnectionResponseAmino {
@@ -771,7 +771,7 @@ export const QueryConnectionsResponse = {
     return {
       connections: Array.isArray(object?.connections) ? object.connections.map((e: any) => IdentifiedConnection.fromAmino(e)) : [],
       pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined,
-      height: object?.height ? Height.fromAmino(object.height) : undefined
+      height: object?.height ? Height.fromAmino(object.height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryConnectionsResponse): QueryConnectionsResponseAmino {
@@ -989,7 +989,7 @@ export const QueryClientConnectionsResponse = {
     return {
       connectionPaths: Array.isArray(object?.connection_paths) ? object.connection_paths.map((e: any) => e) : [],
       proof: object.proof,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryClientConnectionsResponse): QueryClientConnectionsResponseAmino {
@@ -1201,7 +1201,7 @@ export const QueryConnectionClientStateResponse = {
     return {
       identifiedClientState: object?.identified_client_state ? IdentifiedClientState.fromAmino(object.identified_client_state) : undefined,
       proof: object.proof,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryConnectionClientStateResponse): QueryConnectionClientStateResponseAmino {
@@ -1454,7 +1454,7 @@ export const QueryConnectionConsensusStateResponse = {
       consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
       clientId: object.client_id,
       proof: object.proof,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined
+      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryConnectionConsensusStateResponse): QueryConnectionConsensusStateResponseAmino {

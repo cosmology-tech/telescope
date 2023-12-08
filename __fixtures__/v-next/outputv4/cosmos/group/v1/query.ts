@@ -3161,7 +3161,7 @@ export const QueryTallyResultResponse = {
   },
   fromAmino(object: QueryTallyResultResponseAmino): QueryTallyResultResponse {
     return {
-      tally: object?.tally ? TallyResult.fromAmino(object.tally) : undefined
+      tally: object?.tally ? TallyResult.fromAmino(object.tally) : TallyResult.fromPartial({})
     };
   },
   toAmino(message: QueryTallyResultResponse): QueryTallyResultResponseAmino {
