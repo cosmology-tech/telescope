@@ -1084,13 +1084,13 @@ export const AcceptedMessagesFilter = {
   },
   fromAmino(object: AcceptedMessagesFilterAmino): AcceptedMessagesFilter {
     return {
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => e) : []
+      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => bytesFromBase64(e)) : []
     };
   },
   toAmino(message: AcceptedMessagesFilter): AcceptedMessagesFilterAmino {
     const obj: any = {};
     if (message.messages) {
-      obj.messages = message.messages.map(e => e);
+      obj.messages = message.messages.map(e => base64FromBytes(e));
     } else {
       obj.messages = [];
     }

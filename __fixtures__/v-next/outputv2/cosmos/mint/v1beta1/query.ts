@@ -70,7 +70,7 @@ export interface QueryInflationResponseProtoMsg {
  */
 export interface QueryInflationResponseAmino {
   /** inflation is the current minting inflation value. */
-  inflation: Uint8Array;
+  inflation: string;
 }
 export interface QueryInflationResponseAminoMsg {
   type: "cosmos-sdk/QueryInflationResponse";
@@ -124,7 +124,7 @@ export interface QueryAnnualProvisionsResponseProtoMsg {
  */
 export interface QueryAnnualProvisionsResponseAmino {
   /** annual_provisions is the current minting annual provisions value. */
-  annual_provisions: Uint8Array;
+  annual_provisions: string;
 }
 export interface QueryAnnualProvisionsResponseAminoMsg {
   type: "cosmos-sdk/QueryAnnualProvisionsResponse";
@@ -427,12 +427,12 @@ export const QueryInflationResponse = {
   },
   fromAmino(object: QueryInflationResponseAmino): QueryInflationResponse {
     return {
-      inflation: object.inflation
+      inflation: isSet(object.inflation) ? bytesFromBase64(object.inflation) : new Uint8Array()
     };
   },
   toAmino(message: QueryInflationResponse): QueryInflationResponseAmino {
     const obj: any = {};
-    obj.inflation = message.inflation;
+    obj.inflation = base64FromBytes(message.inflation);
     return obj;
   },
   fromAminoMsg(object: QueryInflationResponseAminoMsg): QueryInflationResponse {
@@ -586,12 +586,12 @@ export const QueryAnnualProvisionsResponse = {
   },
   fromAmino(object: QueryAnnualProvisionsResponseAmino): QueryAnnualProvisionsResponse {
     return {
-      annualProvisions: object.annual_provisions
+      annual_provisions: isSet(object.annual_provisions) ? bytesFromBase64(object.annual_provisions) : new Uint8Array()
     };
   },
   toAmino(message: QueryAnnualProvisionsResponse): QueryAnnualProvisionsResponseAmino {
     const obj: any = {};
-    obj.annual_provisions = message.annualProvisions;
+    obj.annual_provisions = base64FromBytes(message.annualProvisions);
     return obj;
   },
   fromAminoMsg(object: QueryAnnualProvisionsResponseAminoMsg): QueryAnnualProvisionsResponse {

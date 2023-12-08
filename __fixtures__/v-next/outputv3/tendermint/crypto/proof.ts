@@ -14,8 +14,8 @@ export interface ProofProtoMsg {
 export interface ProofAmino {
   total: string;
   index: string;
-  leaf_hash: Uint8Array;
-  aunts: Uint8Array[];
+  leaf_hash: string;
+  aunts: string[];
 }
 export interface ProofSDKType {
   total: bigint;
@@ -35,7 +35,7 @@ export interface ValueOpProtoMsg {
 }
 export interface ValueOpAmino {
   /** Encoded in ProofOp.Key. */
-  key: Uint8Array;
+  key: string;
   /** To encode in ProofOp.Data */
   proof?: ProofAmino;
 }
@@ -83,8 +83,8 @@ export interface ProofOpProtoMsg {
  */
 export interface ProofOpAmino {
   type: string;
-  key: Uint8Array;
-  data: Uint8Array;
+  key: string;
+  data: string;
 }
 /**
  * ProofOp defines an operation used for calculating Merkle root
@@ -219,17 +219,17 @@ export const Proof = {
     return {
       total: BigInt(object.total),
       index: BigInt(object.index),
-      leafHash: object.leaf_hash,
-      aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => e) : []
+      leaf_hash: isSet(object.leaf_hash) ? bytesFromBase64(object.leaf_hash) : new Uint8Array(),
+      aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => bytesFromBase64(e)) : []
     };
   },
   toAmino(message: Proof, useInterfaces: boolean = true): ProofAmino {
     const obj: any = {};
     obj.total = message.total ? message.total.toString() : undefined;
     obj.index = message.index ? message.index.toString() : undefined;
-    obj.leaf_hash = message.leafHash;
+    obj.leaf_hash = base64FromBytes(message.leafHash);
     if (message.aunts) {
-      obj.aunts = message.aunts.map(e => e);
+      obj.aunts = message.aunts.map(e => base64FromBytes(e));
     } else {
       obj.aunts = [];
     }
@@ -319,13 +319,13 @@ export const ValueOp = {
   },
   fromAmino(object: ValueOpAmino): ValueOp {
     return {
-      key: object.key,
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
       proof: object?.proof ? Proof.fromAmino(object.proof) : undefined
     };
   },
   toAmino(message: ValueOp, useInterfaces: boolean = true): ValueOpAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = base64FromBytes(message.key);
     obj.proof = message.proof ? Proof.toAmino(message.proof, useInterfaces) : undefined;
     return obj;
   },
@@ -530,15 +530,15 @@ export const ProofOp = {
   fromAmino(object: ProofOpAmino): ProofOp {
     return {
       type: object.type,
-      key: object.key,
-      data: object.data
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: ProofOp, useInterfaces: boolean = true): ProofOpAmino {
     const obj: any = {};
     obj.type = message.type;
-    obj.key = message.key;
-    obj.data = message.data;
+    obj.key = base64FromBytes(message.key);
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromProtoMsg(message: ProofOpProtoMsg, useInterfaces: boolean = true): ProofOp {

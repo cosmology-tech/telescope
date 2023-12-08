@@ -24,7 +24,7 @@ export declare const toAminoJSON: {
     anyType(args: ToAminoJSONMethod): t.ExpressionStatement;
     type(args: ToAminoJSONMethod): t.ExpressionStatement;
     enum(args: ToAminoJSONMethod): t.ExpressionStatement;
-    bytes(args: ToAminoJSONMethod): t.ExpressionStatement;
+    bytes(args: ToAminoJSONMethod): any;
     duration(args: ToAminoJSONMethod): t.ExpressionStatement;
     timestamp(args: ToAminoJSONMethod): t.ExpressionStatement;
     timestampDate(args: ToAminoJSONMethod): t.ExpressionStatement;
@@ -52,7 +52,7 @@ export declare const arrayTypes: {
     sint64(args: ToAminoJSONMethod): t.Expression;
     fixed64(args: ToAminoJSONMethod): t.Expression;
     sfixed64(args: ToAminoJSONMethod): t.Expression;
-    bytes(args: ToAminoJSONMethod): t.Identifier;
+    bytes(args: ToAminoJSONMethod): t.CallExpression;
     enum(args: ToAminoJSONMethod): t.CallExpression;
     anyType(args: ToAminoJSONMethod): t.ConditionalExpression;
     protoType(args: ToAminoJSONMethod): t.ConditionalExpression;

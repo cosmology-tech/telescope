@@ -156,14 +156,14 @@ export const InterchainAccountPacketData = {
   fromAmino(object: InterchainAccountPacketDataAmino): InterchainAccountPacketData {
     return {
       type: isSet(object.type) ? typeFromJSON(object.type) : -1,
-      data: object.data,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       memo: object.memo
     };
   },
   toAmino(message: InterchainAccountPacketData): InterchainAccountPacketDataAmino {
     const obj: any = {};
     obj.type = message.type;
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     obj.memo = message.memo;
     return obj;
   },

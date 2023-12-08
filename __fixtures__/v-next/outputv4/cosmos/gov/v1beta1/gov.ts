@@ -1513,16 +1513,16 @@ export const TallyParams = {
   },
   fromAmino(object: TallyParamsAmino): TallyParams {
     return {
-      quorum: object.quorum,
-      threshold: object.threshold,
-      vetoThreshold: object.veto_threshold
+      quorum: isSet(object.quorum) ? bytesFromBase64(object.quorum) : new Uint8Array(),
+      threshold: isSet(object.threshold) ? bytesFromBase64(object.threshold) : new Uint8Array(),
+      veto_threshold: isSet(object.veto_threshold) ? bytesFromBase64(object.veto_threshold) : new Uint8Array()
     };
   },
   toAmino(message: TallyParams): TallyParamsAmino {
     const obj: any = {};
-    obj.quorum = message.quorum;
-    obj.threshold = message.threshold;
-    obj.veto_threshold = message.vetoThreshold;
+    obj.quorum = base64FromBytes(message.quorum);
+    obj.threshold = base64FromBytes(message.threshold);
+    obj.veto_threshold = base64FromBytes(message.vetoThreshold);
     return obj;
   },
   fromAminoMsg(object: TallyParamsAminoMsg): TallyParams {

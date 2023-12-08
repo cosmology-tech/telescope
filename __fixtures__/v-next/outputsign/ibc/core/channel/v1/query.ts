@@ -3,7 +3,7 @@ import { Channel, ChannelAmino, ChannelSDKType, IdentifiedChannel, IdentifiedCha
 import { Height, HeightAmino, HeightSDKType, IdentifiedClientState, IdentifiedClientStateAmino, IdentifiedClientStateSDKType } from "../../client/v1/client";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial } from "../../../../helpers";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.channel.v1";
 /** QueryChannelRequest is the request type for the Query/Channel RPC method */
 export interface QueryChannelRequest {
@@ -58,7 +58,7 @@ export interface QueryChannelResponseAmino {
   /** channel associated with the request identifiers */
   channel?: ChannelAmino;
   /** merkle proof of existence */
-  proof: Uint8Array;
+  proof: string;
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
@@ -267,7 +267,7 @@ export interface QueryChannelClientStateResponseAmino {
   /** client state associated with the channel */
   identified_client_state?: IdentifiedClientStateAmino;
   /** merkle proof of existence */
-  proof: Uint8Array;
+  proof: string;
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
@@ -358,7 +358,7 @@ export interface QueryChannelConsensusStateResponseAmino {
   /** client ID associated with the consensus state */
   client_id: string;
   /** merkle proof of existence */
-  proof: Uint8Array;
+  proof: string;
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
@@ -441,9 +441,9 @@ export interface QueryPacketCommitmentResponseProtoMsg {
  */
 export interface QueryPacketCommitmentResponseAmino {
   /** packet associated with the request fields */
-  commitment: Uint8Array;
+  commitment: string;
   /** merkle proof of existence */
-  proof: Uint8Array;
+  proof: string;
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
@@ -608,7 +608,7 @@ export interface QueryPacketReceiptResponseAmino {
   /** success flag for if receipt exists */
   received: boolean;
   /** merkle proof of existence */
-  proof: Uint8Array;
+  proof: string;
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
@@ -691,9 +691,9 @@ export interface QueryPacketAcknowledgementResponseProtoMsg {
  */
 export interface QueryPacketAcknowledgementResponseAmino {
   /** packet associated with the request fields */
-  acknowledgement: Uint8Array;
+  acknowledgement: string;
   /** merkle proof of existence */
-  proof: Uint8Array;
+  proof: string;
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
@@ -1010,7 +1010,7 @@ export interface QueryNextSequenceReceiveResponseAmino {
   /** next sequence receive number */
   next_sequence_receive: string;
   /** merkle proof of existence */
-  proof: Uint8Array;
+  proof: string;
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
@@ -1162,14 +1162,14 @@ export const QueryChannelResponse = {
   fromAmino(object: QueryChannelResponseAmino): QueryChannelResponse {
     return {
       channel: object?.channel ? Channel.fromAmino(object.channel) : undefined,
-      proof: object.proof,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryChannelResponse): QueryChannelResponseAmino {
     const obj: any = {};
     obj.channel = message.channel ? Channel.toAmino(message.channel) : undefined;
-    obj.proof = message.proof;
+    obj.proof = base64FromBytes(message.proof);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -1668,14 +1668,14 @@ export const QueryChannelClientStateResponse = {
   fromAmino(object: QueryChannelClientStateResponseAmino): QueryChannelClientStateResponse {
     return {
       identifiedClientState: object?.identified_client_state ? IdentifiedClientState.fromAmino(object.identified_client_state) : undefined,
-      proof: object.proof,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryChannelClientStateResponse): QueryChannelClientStateResponseAmino {
     const obj: any = {};
     obj.identified_client_state = message.identifiedClientState ? IdentifiedClientState.toAmino(message.identifiedClientState) : undefined;
-    obj.proof = message.proof;
+    obj.proof = base64FromBytes(message.proof);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -1869,7 +1869,7 @@ export const QueryChannelConsensusStateResponse = {
     return {
       consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
       clientId: object.client_id,
-      proof: object.proof,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
@@ -1877,7 +1877,7 @@ export const QueryChannelConsensusStateResponse = {
     const obj: any = {};
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
     obj.client_id = message.clientId;
-    obj.proof = message.proof;
+    obj.proof = base64FromBytes(message.proof);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -2047,15 +2047,15 @@ export const QueryPacketCommitmentResponse = {
   },
   fromAmino(object: QueryPacketCommitmentResponseAmino): QueryPacketCommitmentResponse {
     return {
-      commitment: object.commitment,
-      proof: object.proof,
+      commitment: isSet(object.commitment) ? bytesFromBase64(object.commitment) : new Uint8Array(),
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryPacketCommitmentResponse): QueryPacketCommitmentResponseAmino {
     const obj: any = {};
-    obj.commitment = message.commitment;
-    obj.proof = message.proof;
+    obj.commitment = base64FromBytes(message.commitment);
+    obj.proof = base64FromBytes(message.proof);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -2410,14 +2410,14 @@ export const QueryPacketReceiptResponse = {
   fromAmino(object: QueryPacketReceiptResponseAmino): QueryPacketReceiptResponse {
     return {
       received: object.received,
-      proof: object.proof,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryPacketReceiptResponse): QueryPacketReceiptResponseAmino {
     const obj: any = {};
     obj.received = message.received;
-    obj.proof = message.proof;
+    obj.proof = base64FromBytes(message.proof);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -2587,15 +2587,15 @@ export const QueryPacketAcknowledgementResponse = {
   },
   fromAmino(object: QueryPacketAcknowledgementResponseAmino): QueryPacketAcknowledgementResponse {
     return {
-      acknowledgement: object.acknowledgement,
-      proof: object.proof,
+      acknowledgement: isSet(object.acknowledgement) ? bytesFromBase64(object.acknowledgement) : new Uint8Array(),
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryPacketAcknowledgementResponse): QueryPacketAcknowledgementResponseAmino {
     const obj: any = {};
-    obj.acknowledgement = message.acknowledgement;
-    obj.proof = message.proof;
+    obj.acknowledgement = base64FromBytes(message.acknowledgement);
+    obj.proof = base64FromBytes(message.proof);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -3347,14 +3347,14 @@ export const QueryNextSequenceReceiveResponse = {
   fromAmino(object: QueryNextSequenceReceiveResponseAmino): QueryNextSequenceReceiveResponse {
     return {
       nextSequenceReceive: BigInt(object.next_sequence_receive),
-      proof: object.proof,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryNextSequenceReceiveResponse): QueryNextSequenceReceiveResponseAmino {
     const obj: any = {};
     obj.next_sequence_receive = message.nextSequenceReceive ? message.nextSequenceReceive.toString() : undefined;
-    obj.proof = message.proof;
+    obj.proof = base64FromBytes(message.proof);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },

@@ -408,7 +408,7 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
       address: object.address,
       signDoc: object?.sign_doc ? SignDocDirectAux.fromAmino(object.sign_doc) : undefined,
       mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
-      sig: object.sig
+      sig: isSet(object.sig) ? bytesFromBase64(object.sig) : new Uint8Array()
     };
   },
   toAmino(message: AuxSignerData): AuxSignerDataAmino {
@@ -870,7 +870,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
   fromAmino(object: QueryRawContractStateRequestAmino): QueryRawContractStateRequest {
     return {
       address: object.address,
-      queryData: object.query_data
+      query_data: isSet(object.query_data) ? bytesFromBase64(object.query_data) : new Uint8Array()
     };
   },
   toAmino(message: QueryRawContractStateRequest): QueryRawContractStateRequestAmino {
@@ -2023,7 +2023,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
       uint64Value: object?.uint64_value ? BigInt(object.uint64_value) : undefined,
       doubleValue: object?.double_value,
       stringValue: object?.string_value,
-      bytesValue: object?.bytes_value,
+      bytes_value: isSet(object.bytes_value) ? bytesFromBase64(object.bytes_value) : undefined,
       durationValue: object?.duration_value ? Duration.fromAmino(object.duration_value) : undefined,
       timestampValue: object?.timestamp_value ? fromTimestamp(Timestamp.fromAmino(object.timestamp_value)) : undefined
     };

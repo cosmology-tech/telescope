@@ -174,7 +174,7 @@ export interface CodeInfoProtoMsg {
 /** CodeInfo is data for the uploaded contract WASM code */
 export interface CodeInfoAmino {
   /** CodeHash is the unique identifier created by wasmvm */
-  code_hash: Uint8Array;
+  code_hash: string;
   /** Creator address who initially stored the code */
   creator: string;
   /** InstantiateConfig access control to apply on contract creation, optional */
@@ -273,7 +273,7 @@ export interface ContractCodeHistoryEntryAmino {
   code_id: string;
   /** Updated Tx position when the operation was executed. */
   updated?: AbsoluteTxPositionAmino;
-  msg: Uint8Array;
+  msg: string;
 }
 /** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntrySDKType {
@@ -334,9 +334,9 @@ export interface ModelProtoMsg {
 /** Model is a struct that holds a KV pair */
 export interface ModelAmino {
   /** hex-encode key to read it better (this is often ascii) */
-  key: Uint8Array;
+  key: string;
   /** base64-encode raw value */
-  value: Uint8Array;
+  value: string;
 }
 /** Model is a struct that holds a KV pair */
 export interface ModelSDKType {
@@ -710,14 +710,14 @@ export const CodeInfo = {
   },
   fromAmino(object: CodeInfoAmino): CodeInfo {
     return {
-      codeHash: object.code_hash,
+      code_hash: isSet(object.code_hash) ? bytesFromBase64(object.code_hash) : new Uint8Array(),
       creator: object.creator,
       instantiateConfig: object?.instantiate_config ? AccessConfig.fromAmino(object.instantiate_config) : AccessConfig.fromPartial({})
     };
   },
   toAmino(message: CodeInfo, useInterfaces: boolean = true): CodeInfoAmino {
     const obj: any = {};
-    obj.code_hash = message.codeHash;
+    obj.code_hash = base64FromBytes(message.codeHash);
     obj.creator = message.creator;
     obj.instantiate_config = message.instantiateConfig ? AccessConfig.toAmino(message.instantiateConfig, useInterfaces) : undefined;
     return obj;
@@ -1196,14 +1196,14 @@ export const Model = {
   },
   fromAmino(object: ModelAmino): Model {
     return {
-      key: object.key,
-      value: object.value
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
     };
   },
   toAmino(message: Model, useInterfaces: boolean = true): ModelAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = base64FromBytes(message.key);
+    obj.value = base64FromBytes(message.value);
     return obj;
   },
   fromProtoMsg(message: ModelProtoMsg, useInterfaces: boolean = true): Model {

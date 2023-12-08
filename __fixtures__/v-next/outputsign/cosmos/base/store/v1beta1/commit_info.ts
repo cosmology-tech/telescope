@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial } from "../../../../helpers";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.store.v1beta1";
 /**
  * CommitInfo defines commit information used by the multi-store when committing
@@ -83,7 +83,7 @@ export interface CommitIDProtoMsg {
  */
 export interface CommitIDAmino {
   version: string;
-  hash: Uint8Array;
+  hash: string;
 }
 export interface CommitIDAminoMsg {
   type: "cosmos-sdk/CommitID";
@@ -307,13 +307,13 @@ export const CommitID = {
   fromAmino(object: CommitIDAmino): CommitID {
     return {
       version: BigInt(object.version),
-      hash: object.hash
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
     };
   },
   toAmino(message: CommitID): CommitIDAmino {
     const obj: any = {};
     obj.version = message.version ? message.version.toString() : undefined;
-    obj.hash = message.hash;
+    obj.hash = base64FromBytes(message.hash);
     return obj;
   },
   fromAminoMsg(object: CommitIDAminoMsg): CommitID {

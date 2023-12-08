@@ -38,7 +38,7 @@ export interface GenesisStateAmino {
    * last_total_power tracks the total amounts of bonded tokens recorded during
    * the previous end block.
    */
-  last_total_power: Uint8Array;
+  last_total_power: string;
   /**
    * last_validator_powers is a special index that provides a historical list
    * of the last-block's bonded validators.
@@ -281,7 +281,7 @@ export const GenesisState = {
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
       params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({}),
-      lastTotalPower: object.last_total_power,
+      last_total_power: isSet(object.last_total_power) ? bytesFromBase64(object.last_total_power) : new Uint8Array(),
       lastValidatorPowers: Array.isArray(object?.last_validator_powers) ? object.last_validator_powers.map((e: any) => LastValidatorPower.fromAmino(e)) : [],
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromAmino(e)) : [],
       delegations: Array.isArray(object?.delegations) ? object.delegations.map((e: any) => Delegation.fromAmino(e)) : [],
@@ -293,7 +293,7 @@ export const GenesisState = {
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    obj.last_total_power = message.lastTotalPower;
+    obj.last_total_power = base64FromBytes(message.lastTotalPower);
     if (message.lastValidatorPowers) {
       obj.last_validator_powers = message.lastValidatorPowers.map(e => e ? LastValidatorPower.toAmino(e) : undefined);
     } else {

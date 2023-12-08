@@ -63,7 +63,7 @@ export interface MsgCreateDeploymentProtoMsg {
 export interface MsgCreateDeploymentAmino {
   id?: DeploymentIDAmino | undefined;
   groups: GroupSpecAmino[];
-  version: Uint8Array;
+  version: string;
   deposit?: CoinAmino | undefined;
 }
 export interface MsgCreateDeploymentAminoMsg {
@@ -142,7 +142,7 @@ export interface MsgUpdateDeploymentProtoMsg {
 export interface MsgUpdateDeploymentAmino {
   id?: DeploymentIDAmino | undefined;
   groups: GroupSpecAmino[];
-  version: Uint8Array;
+  version: string;
 }
 export interface MsgUpdateDeploymentAminoMsg {
   type: "/akash.deployment.v1beta1.MsgUpdateDeployment";
@@ -240,7 +240,7 @@ export interface DeploymentProtoMsg {
 export interface DeploymentAmino {
   deployment_id?: DeploymentIDAmino | undefined;
   state: Deployment_State;
-  version: Uint8Array;
+  version: string;
   created_at: string;
 }
 export interface DeploymentAminoMsg {

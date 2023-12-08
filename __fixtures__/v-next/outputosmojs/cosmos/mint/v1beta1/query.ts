@@ -381,12 +381,12 @@ export const QueryInflationResponse = {
   },
   fromAmino(object: QueryInflationResponseAmino): QueryInflationResponse {
     return {
-      inflation: object.inflation
+      inflation: isSet(object.inflation) ? bytesFromBase64(object.inflation) : new Uint8Array()
     };
   },
   toAmino(message: QueryInflationResponse): QueryInflationResponseAmino {
     const obj: any = {};
-    obj.inflation = message.inflation;
+    obj.inflation = base64FromBytes(message.inflation);
     return obj;
   },
   fromAminoMsg(object: QueryInflationResponseAminoMsg): QueryInflationResponse {
@@ -545,12 +545,12 @@ export const QueryAnnualProvisionsResponse = {
   },
   fromAmino(object: QueryAnnualProvisionsResponseAmino): QueryAnnualProvisionsResponse {
     return {
-      annualProvisions: object.annual_provisions
+      annual_provisions: isSet(object.annual_provisions) ? bytesFromBase64(object.annual_provisions) : new Uint8Array()
     };
   },
   toAmino(message: QueryAnnualProvisionsResponse): QueryAnnualProvisionsResponseAmino {
     const obj: any = {};
-    obj.annual_provisions = message.annualProvisions;
+    obj.annual_provisions = base64FromBytes(message.annualProvisions);
     return obj;
   },
   fromAminoMsg(object: QueryAnnualProvisionsResponseAminoMsg): QueryAnnualProvisionsResponse {

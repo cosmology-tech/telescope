@@ -178,7 +178,7 @@ export interface QueryUpgradedConsensusStateResponseProtoMsg {
 /** @deprecated */
 export interface QueryUpgradedConsensusStateResponseAmino {
   /** Since: cosmos-sdk 0.43 */
-  upgraded_consensus_state: Uint8Array;
+  upgraded_consensus_state: string;
 }
 export interface QueryUpgradedConsensusStateResponseAminoMsg {
   type: "cosmos-sdk/QueryUpgradedConsensusStateResponse";
@@ -819,12 +819,12 @@ export const QueryUpgradedConsensusStateResponse = {
   },
   fromAmino(object: QueryUpgradedConsensusStateResponseAmino): QueryUpgradedConsensusStateResponse {
     return {
-      upgradedConsensusState: object.upgraded_consensus_state
+      upgraded_consensus_state: isSet(object.upgraded_consensus_state) ? bytesFromBase64(object.upgraded_consensus_state) : new Uint8Array()
     };
   },
   toAmino(message: QueryUpgradedConsensusStateResponse): QueryUpgradedConsensusStateResponseAmino {
     const obj: any = {};
-    obj.upgraded_consensus_state = message.upgradedConsensusState;
+    obj.upgraded_consensus_state = base64FromBytes(message.upgradedConsensusState);
     return obj;
   },
   fromAminoMsg(object: QueryUpgradedConsensusStateResponseAminoMsg): QueryUpgradedConsensusStateResponse {

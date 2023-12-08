@@ -61,7 +61,7 @@ export interface QueryClientStateResponseAmino {
   /** client state associated with the request identifier */
   client_state?: AnyAmino;
   /** merkle proof of existence */
-  proof: Uint8Array;
+  proof: string;
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
@@ -225,7 +225,7 @@ export interface QueryConsensusStateResponseAmino {
   /** consensus state associated with the client identifier at the given height */
   consensus_state?: AnyAmino;
   /** merkle proof of existence */
-  proof: Uint8Array;
+  proof: string;
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
@@ -711,14 +711,14 @@ export const QueryClientStateResponse = {
   fromAmino(object: QueryClientStateResponseAmino): QueryClientStateResponse {
     return {
       clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
-      proof: object.proof,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryClientStateResponse): QueryClientStateResponseAmino {
     const obj: any = {};
     obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
-    obj.proof = message.proof;
+    obj.proof = base64FromBytes(message.proof);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -1171,14 +1171,14 @@ export const QueryConsensusStateResponse = {
   fromAmino(object: QueryConsensusStateResponseAmino): QueryConsensusStateResponse {
     return {
       consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
-      proof: object.proof,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryConsensusStateResponse): QueryConsensusStateResponseAmino {
     const obj: any = {};
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
-    obj.proof = message.proof;
+    obj.proof = base64FromBytes(message.proof);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },

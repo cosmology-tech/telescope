@@ -92,12 +92,12 @@ export const PubKey = {
   },
   fromAmino(object: PubKeyAmino): PubKey {
     return {
-      key: object.key
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
     };
   },
   toAmino(message: PubKey): PubKeyAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = base64FromBytes(message.key);
     return obj;
   },
   fromAminoMsg(object: PubKeyAminoMsg): PubKey {
@@ -184,12 +184,12 @@ export const PrivKey = {
   },
   fromAmino(object: PrivKeyAmino): PrivKey {
     return {
-      secret: object.secret
+      secret: isSet(object.secret) ? bytesFromBase64(object.secret) : new Uint8Array()
     };
   },
   toAmino(message: PrivKey): PrivKeyAmino {
     const obj: any = {};
-    obj.secret = message.secret;
+    obj.secret = base64FromBytes(message.secret);
     return obj;
   },
   fromAminoMsg(object: PrivKeyAminoMsg): PrivKey {

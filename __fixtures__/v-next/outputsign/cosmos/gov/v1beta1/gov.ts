@@ -4,7 +4,7 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/pro
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { DeepPartial, isSet, toTimestamp, fromTimestamp } from "../../../helpers";
+import { DeepPartial, isSet, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.gov.v1beta1";
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
 export enum VoteOption {
@@ -458,14 +458,14 @@ export interface TallyParamsAmino {
    * Minimum percentage of total stake needed to vote for a result to be
    *  considered valid.
    */
-  quorum: Uint8Array;
+  quorum: string;
   /** Minimum proportion of Yes votes for proposal to pass. Default value: 0.5. */
-  threshold: Uint8Array;
+  threshold: string;
   /**
    * Minimum value of Veto votes to Total votes ratio for proposal to be
    *  vetoed. Default value: 1/3.
    */
-  veto_threshold: Uint8Array;
+  veto_threshold: string;
 }
 export interface TallyParamsAminoMsg {
   type: "cosmos-sdk/TallyParams";
@@ -1286,16 +1286,16 @@ export const TallyParams = {
   },
   fromAmino(object: TallyParamsAmino): TallyParams {
     return {
-      quorum: object.quorum,
-      threshold: object.threshold,
-      vetoThreshold: object.veto_threshold
+      quorum: isSet(object.quorum) ? bytesFromBase64(object.quorum) : new Uint8Array(),
+      threshold: isSet(object.threshold) ? bytesFromBase64(object.threshold) : new Uint8Array(),
+      veto_threshold: isSet(object.veto_threshold) ? bytesFromBase64(object.veto_threshold) : new Uint8Array()
     };
   },
   toAmino(message: TallyParams): TallyParamsAmino {
     const obj: any = {};
-    obj.quorum = message.quorum;
-    obj.threshold = message.threshold;
-    obj.veto_threshold = message.vetoThreshold;
+    obj.quorum = base64FromBytes(message.quorum);
+    obj.threshold = base64FromBytes(message.threshold);
+    obj.veto_threshold = base64FromBytes(message.vetoThreshold);
     return obj;
   },
   fromAminoMsg(object: TallyParamsAminoMsg): TallyParams {

@@ -328,15 +328,15 @@ export const Certificate = {
   fromAmino(object: CertificateAmino): Certificate {
     return {
       state: isSet(object.state) ? certificate_StateFromJSON(object.state) : -1,
-      cert: object.cert,
-      pubkey: object.pubkey
+      cert: isSet(object.cert) ? bytesFromBase64(object.cert) : new Uint8Array(),
+      pubkey: isSet(object.pubkey) ? bytesFromBase64(object.pubkey) : new Uint8Array()
     };
   },
   toAmino(message: Certificate): CertificateAmino {
     const obj: any = {};
     obj.state = message.state;
-    obj.cert = message.cert;
-    obj.pubkey = message.pubkey;
+    obj.cert = base64FromBytes(message.cert);
+    obj.pubkey = base64FromBytes(message.pubkey);
     return obj;
   },
   fromAminoMsg(object: CertificateAminoMsg): Certificate {
@@ -572,15 +572,15 @@ export const MsgCreateCertificate = {
   fromAmino(object: MsgCreateCertificateAmino): MsgCreateCertificate {
     return {
       owner: object.owner,
-      cert: object.cert,
-      pubkey: object.pubkey
+      cert: isSet(object.cert) ? bytesFromBase64(object.cert) : new Uint8Array(),
+      pubkey: isSet(object.pubkey) ? bytesFromBase64(object.pubkey) : new Uint8Array()
     };
   },
   toAmino(message: MsgCreateCertificate): MsgCreateCertificateAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.cert = message.cert;
-    obj.pubkey = message.pubkey;
+    obj.cert = base64FromBytes(message.cert);
+    obj.pubkey = base64FromBytes(message.pubkey);
     return obj;
   },
   fromAminoMsg(object: MsgCreateCertificateAminoMsg): MsgCreateCertificate {

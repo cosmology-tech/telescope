@@ -6,7 +6,7 @@ import { MerkleRoot, MerkleRootAmino, MerkleRootSDKType } from "../../../core/co
 import { SignedHeader, SignedHeaderAmino, SignedHeaderSDKType } from "../../../../tendermint/types/types";
 import { ValidatorSet, ValidatorSetAmino, ValidatorSetSDKType } from "../../../../tendermint/types/validator";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, toTimestamp, fromTimestamp } from "../../../../helpers";
+import { DeepPartial, toTimestamp, fromTimestamp, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.lightclients.tendermint.v1";
 /**
  * ClientState from Tendermint tracks the current validator set, latest height,
@@ -143,7 +143,7 @@ export interface ConsensusStateAmino {
   timestamp?: string;
   /** commitment root (i.e app hash) */
   root?: MerkleRootAmino;
-  next_validators_hash: Uint8Array;
+  next_validators_hash: string;
 }
 export interface ConsensusStateAminoMsg {
   type: "cosmos-sdk/ConsensusState";
@@ -534,14 +534,14 @@ export const ConsensusState = {
     return {
       timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : fromTimestamp(Timestamp.fromPartial({})),
       root: object?.root ? MerkleRoot.fromAmino(object.root) : MerkleRoot.fromPartial({}),
-      nextValidatorsHash: object.next_validators_hash
+      next_validators_hash: isSet(object.next_validators_hash) ? bytesFromBase64(object.next_validators_hash) : new Uint8Array()
     };
   },
   toAmino(message: ConsensusState): ConsensusStateAmino {
     const obj: any = {};
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     obj.root = message.root ? MerkleRoot.toAmino(message.root) : undefined;
-    obj.next_validators_hash = message.nextValidatorsHash;
+    obj.next_validators_hash = base64FromBytes(message.nextValidatorsHash);
     return obj;
   },
   fromAminoMsg(object: ConsensusStateAminoMsg): ConsensusState {

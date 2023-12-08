@@ -1,6 +1,6 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "tendermint.p2p";
 export interface ProtocolVersion {
   p2p: bigint;
@@ -45,7 +45,7 @@ export interface NodeInfoAmino {
   listen_addr: string;
   network: string;
   version: string;
-  channels: Uint8Array;
+  channels: string;
   moniker: string;
   other?: NodeInfoOtherAmino;
 }
@@ -321,7 +321,7 @@ export const NodeInfo = {
       listenAddr: object.listen_addr,
       network: object.network,
       version: object.version,
-      channels: object.channels,
+      channels: isSet(object.channels) ? bytesFromBase64(object.channels) : new Uint8Array(),
       moniker: object.moniker,
       other: object?.other ? NodeInfoOther.fromAmino(object.other) : NodeInfoOther.fromPartial({})
     };
@@ -333,7 +333,7 @@ export const NodeInfo = {
     obj.listen_addr = message.listenAddr;
     obj.network = message.network;
     obj.version = message.version;
-    obj.channels = message.channels;
+    obj.channels = base64FromBytes(message.channels);
     obj.moniker = message.moniker;
     obj.other = message.other ? NodeInfoOther.toAmino(message.other) : undefined;
     return obj;

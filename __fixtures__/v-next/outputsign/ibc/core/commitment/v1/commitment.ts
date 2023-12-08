@@ -1,6 +1,6 @@
 import { CommitmentProof, CommitmentProofAmino, CommitmentProofSDKType } from "../../../../confio/proofs";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial } from "../../../../helpers";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.commitment.v1";
 /**
  * MerkleRoot defines a merkle root hash.
@@ -18,7 +18,7 @@ export interface MerkleRootProtoMsg {
  * In the Cosmos SDK, the AppHash of a block header becomes the root.
  */
 export interface MerkleRootAmino {
-  hash: Uint8Array;
+  hash: string;
 }
 export interface MerkleRootAminoMsg {
   type: "cosmos-sdk/MerkleRoot";
@@ -49,7 +49,7 @@ export interface MerklePrefixProtoMsg {
  * append(Path.KeyPrefix, key...))
  */
 export interface MerklePrefixAmino {
-  key_prefix: Uint8Array;
+  key_prefix: string;
 }
 export interface MerklePrefixAminoMsg {
   type: "cosmos-sdk/MerklePrefix";
@@ -170,12 +170,12 @@ export const MerkleRoot = {
   },
   fromAmino(object: MerkleRootAmino): MerkleRoot {
     return {
-      hash: object.hash
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
     };
   },
   toAmino(message: MerkleRoot): MerkleRootAmino {
     const obj: any = {};
-    obj.hash = message.hash;
+    obj.hash = base64FromBytes(message.hash);
     return obj;
   },
   fromAminoMsg(object: MerkleRootAminoMsg): MerkleRoot {
@@ -237,12 +237,12 @@ export const MerklePrefix = {
   },
   fromAmino(object: MerklePrefixAmino): MerklePrefix {
     return {
-      keyPrefix: object.key_prefix
+      key_prefix: isSet(object.key_prefix) ? bytesFromBase64(object.key_prefix) : new Uint8Array()
     };
   },
   toAmino(message: MerklePrefix): MerklePrefixAmino {
     const obj: any = {};
-    obj.key_prefix = message.keyPrefix;
+    obj.key_prefix = base64FromBytes(message.keyPrefix);
     return obj;
   },
   fromAminoMsg(object: MerklePrefixAminoMsg): MerklePrefix {

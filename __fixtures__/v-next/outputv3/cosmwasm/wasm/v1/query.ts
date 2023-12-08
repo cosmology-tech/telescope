@@ -273,7 +273,7 @@ export interface QueryRawContractStateRequestProtoMsg {
 export interface QueryRawContractStateRequestAmino {
   /** address is the address of the contract */
   address: string;
-  query_data: Uint8Array;
+  query_data: string;
 }
 /**
  * QueryRawContractStateRequest is the request type for the
@@ -301,7 +301,7 @@ export interface QueryRawContractStateResponseProtoMsg {
  */
 export interface QueryRawContractStateResponseAmino {
   /** Data contains the raw store data */
-  data: Uint8Array;
+  data: string;
 }
 /**
  * QueryRawContractStateResponse is the response type for the
@@ -332,7 +332,7 @@ export interface QuerySmartContractStateRequestAmino {
   /** address is the address of the contract */
   address: string;
   /** QueryData contains the query data passed to the contract */
-  query_data: Uint8Array;
+  query_data: string;
 }
 /**
  * QuerySmartContractStateRequest is the request type for the
@@ -360,7 +360,7 @@ export interface QuerySmartContractStateResponseProtoMsg {
  */
 export interface QuerySmartContractStateResponseAmino {
   /** Data contains the json data returned from the smart contract */
-  data: Uint8Array;
+  data: string;
 }
 /**
  * QuerySmartContractStateResponse is the response type for the
@@ -401,7 +401,7 @@ export interface CodeInfoResponseProtoMsg {
 export interface CodeInfoResponseAmino {
   code_id: string;
   creator: string;
-  data_hash: Uint8Array;
+  data_hash: string;
 }
 /** CodeInfoResponse contains code meta data from CodeInfo */
 export interface CodeInfoResponseSDKType {
@@ -421,7 +421,7 @@ export interface QueryCodeResponseProtoMsg {
 /** QueryCodeResponse is the response type for the Query/Code RPC method */
 export interface QueryCodeResponseAmino {
   code_info?: CodeInfoResponseAmino;
-  data: Uint8Array;
+  data: string;
 }
 /** QueryCodeResponse is the response type for the Query/Code RPC method */
 export interface QueryCodeResponseSDKType {
@@ -1377,13 +1377,13 @@ export const QueryRawContractStateRequest = {
   fromAmino(object: QueryRawContractStateRequestAmino): QueryRawContractStateRequest {
     return {
       address: object.address,
-      queryData: object.query_data
+      query_data: isSet(object.query_data) ? bytesFromBase64(object.query_data) : new Uint8Array()
     };
   },
   toAmino(message: QueryRawContractStateRequest, useInterfaces: boolean = true): QueryRawContractStateRequestAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.query_data = message.queryData;
+    obj.query_data = base64FromBytes(message.queryData);
     return obj;
   },
   fromProtoMsg(message: QueryRawContractStateRequestProtoMsg, useInterfaces: boolean = true): QueryRawContractStateRequest {
@@ -1457,12 +1457,12 @@ export const QueryRawContractStateResponse = {
   },
   fromAmino(object: QueryRawContractStateResponseAmino): QueryRawContractStateResponse {
     return {
-      data: object.data
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: QueryRawContractStateResponse, useInterfaces: boolean = true): QueryRawContractStateResponseAmino {
     const obj: any = {};
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromProtoMsg(message: QueryRawContractStateResponseProtoMsg, useInterfaces: boolean = true): QueryRawContractStateResponse {
@@ -1817,14 +1817,14 @@ export const CodeInfoResponse = {
     return {
       codeId: BigInt(object.code_id),
       creator: object.creator,
-      dataHash: object.data_hash
+      data_hash: isSet(object.data_hash) ? bytesFromBase64(object.data_hash) : new Uint8Array()
     };
   },
   toAmino(message: CodeInfoResponse, useInterfaces: boolean = true): CodeInfoResponseAmino {
     const obj: any = {};
     obj.code_id = message.codeId ? message.codeId.toString() : undefined;
     obj.creator = message.creator;
-    obj.data_hash = message.dataHash;
+    obj.data_hash = base64FromBytes(message.dataHash);
     return obj;
   },
   fromProtoMsg(message: CodeInfoResponseProtoMsg, useInterfaces: boolean = true): CodeInfoResponse {
@@ -1913,13 +1913,13 @@ export const QueryCodeResponse = {
   fromAmino(object: QueryCodeResponseAmino): QueryCodeResponse {
     return {
       codeInfo: object?.code_info ? CodeInfoResponse.fromAmino(object.code_info) : undefined,
-      data: object.data
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: QueryCodeResponse, useInterfaces: boolean = true): QueryCodeResponseAmino {
     const obj: any = {};
     obj.code_info = message.codeInfo ? CodeInfoResponse.toAmino(message.codeInfo, useInterfaces) : undefined;
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromProtoMsg(message: QueryCodeResponseProtoMsg, useInterfaces: boolean = true): QueryCodeResponse {

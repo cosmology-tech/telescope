@@ -75,7 +75,7 @@ export interface CommitIDProtoMsg {
  */
 export interface CommitIDAmino {
   version: string;
-  hash: Uint8Array;
+  hash: string;
 }
 /**
  * CommitID defines the committment information when a specific store is
@@ -360,13 +360,13 @@ export const CommitID = {
   fromAmino(object: CommitIDAmino): CommitID {
     return {
       version: BigInt(object.version),
-      hash: object.hash
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
     };
   },
   toAmino(message: CommitID, useInterfaces: boolean = true): CommitIDAmino {
     const obj: any = {};
     obj.version = message.version ? message.version.toString() : undefined;
-    obj.hash = message.hash;
+    obj.hash = base64FromBytes(message.hash);
     return obj;
   },
   fromProtoMsg(message: CommitIDProtoMsg, useInterfaces: boolean = true): CommitID {

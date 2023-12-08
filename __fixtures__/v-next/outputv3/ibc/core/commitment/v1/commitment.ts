@@ -18,7 +18,7 @@ export interface MerkleRootProtoMsg {
  * In the Cosmos SDK, the AppHash of a block header becomes the root.
  */
 export interface MerkleRootAmino {
-  hash: Uint8Array;
+  hash: string;
 }
 /**
  * MerkleRoot defines a merkle root hash.
@@ -45,7 +45,7 @@ export interface MerklePrefixProtoMsg {
  * append(Path.KeyPrefix, key...))
  */
 export interface MerklePrefixAmino {
-  key_prefix: Uint8Array;
+  key_prefix: string;
 }
 /**
  * MerklePrefix is merkle path prefixed to the key.
@@ -175,12 +175,12 @@ export const MerkleRoot = {
   },
   fromAmino(object: MerkleRootAmino): MerkleRoot {
     return {
-      hash: object.hash
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
     };
   },
   toAmino(message: MerkleRoot, useInterfaces: boolean = true): MerkleRootAmino {
     const obj: any = {};
-    obj.hash = message.hash;
+    obj.hash = base64FromBytes(message.hash);
     return obj;
   },
   fromProtoMsg(message: MerkleRootProtoMsg, useInterfaces: boolean = true): MerkleRoot {
@@ -254,12 +254,12 @@ export const MerklePrefix = {
   },
   fromAmino(object: MerklePrefixAmino): MerklePrefix {
     return {
-      keyPrefix: object.key_prefix
+      key_prefix: isSet(object.key_prefix) ? bytesFromBase64(object.key_prefix) : new Uint8Array()
     };
   },
   toAmino(message: MerklePrefix, useInterfaces: boolean = true): MerklePrefixAmino {
     const obj: any = {};
-    obj.key_prefix = message.keyPrefix;
+    obj.key_prefix = base64FromBytes(message.keyPrefix);
     return obj;
   },
   fromProtoMsg(message: MerklePrefixProtoMsg, useInterfaces: boolean = true): MerklePrefix {

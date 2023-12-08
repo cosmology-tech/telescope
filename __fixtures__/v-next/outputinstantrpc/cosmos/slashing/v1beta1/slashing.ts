@@ -358,19 +358,19 @@ export const Params = {
   fromAmino(object: ParamsAmino): Params {
     return {
       signedBlocksWindow: BigInt(object.signed_blocks_window),
-      minSignedPerWindow: object.min_signed_per_window,
+      min_signed_per_window: isSet(object.min_signed_per_window) ? bytesFromBase64(object.min_signed_per_window) : new Uint8Array(),
       downtimeJailDuration: object?.downtime_jail_duration ? Duration.fromAmino(object.downtime_jail_duration) : Duration.fromPartial({}),
-      slashFractionDoubleSign: object.slash_fraction_double_sign,
-      slashFractionDowntime: object.slash_fraction_downtime
+      slash_fraction_double_sign: isSet(object.slash_fraction_double_sign) ? bytesFromBase64(object.slash_fraction_double_sign) : new Uint8Array(),
+      slash_fraction_downtime: isSet(object.slash_fraction_downtime) ? bytesFromBase64(object.slash_fraction_downtime) : new Uint8Array()
     };
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     obj.signed_blocks_window = message.signedBlocksWindow ? message.signedBlocksWindow.toString() : undefined;
-    obj.min_signed_per_window = message.minSignedPerWindow;
+    obj.min_signed_per_window = base64FromBytes(message.minSignedPerWindow);
     obj.downtime_jail_duration = message.downtimeJailDuration ? Duration.toAmino(message.downtimeJailDuration) : undefined;
-    obj.slash_fraction_double_sign = message.slashFractionDoubleSign;
-    obj.slash_fraction_downtime = message.slashFractionDowntime;
+    obj.slash_fraction_double_sign = base64FromBytes(message.slashFractionDoubleSign);
+    obj.slash_fraction_downtime = base64FromBytes(message.slashFractionDowntime);
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

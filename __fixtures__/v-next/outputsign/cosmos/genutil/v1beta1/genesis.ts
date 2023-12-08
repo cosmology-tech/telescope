@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.genutil.v1beta1";
 /** GenesisState defines the raw genesis transaction in JSON. */
 export interface GenesisState {
@@ -13,7 +13,7 @@ export interface GenesisStateProtoMsg {
 /** GenesisState defines the raw genesis transaction in JSON. */
 export interface GenesisStateAmino {
   /** gen_txs defines the genesis transactions. */
-  gen_txs: Uint8Array[];
+  gen_txs: string[];
 }
 export interface GenesisStateAminoMsg {
   type: "cosmos-sdk/GenesisState";
@@ -60,13 +60,13 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     return {
-      genTxs: Array.isArray(object?.gen_txs) ? object.gen_txs.map((e: any) => e) : []
+      genTxs: Array.isArray(object?.gen_txs) ? object.gen_txs.map((e: any) => bytesFromBase64(e)) : []
     };
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
     if (message.genTxs) {
-      obj.gen_txs = message.genTxs.map(e => e);
+      obj.gen_txs = message.genTxs.map(e => base64FromBytes(e));
     } else {
       obj.gen_txs = [];
     }

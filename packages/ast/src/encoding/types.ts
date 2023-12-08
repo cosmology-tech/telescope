@@ -380,11 +380,7 @@ export const getTSTypeFromGoogleType = (
 export const getTSTypeForAmino = (context: GenericParseContext, field: ProtoField) => {
     switch (field.type) {
         case 'bytes':
-            // bytes [WASMByteCode]
-            if (field.options?.['(gogoproto.customname)'] === 'WASMByteCode') {
-                return t.tsStringKeyword();
-            }
-            return t.tsTypeReference(t.identifier('Uint8Array'));
+            return t.tsStringKeyword();
         default:
             return getTSAminoType(context, field.type);
     };

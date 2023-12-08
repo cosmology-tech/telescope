@@ -23,7 +23,7 @@ export interface PubKeyProtoMsg {
  * then you must create a new proto message and follow ADR-28 for Address construction.
  */
 export interface PubKeyAmino {
-  key: Uint8Array;
+  key: string;
 }
 export interface PubKeyAminoMsg {
   type: "cosmos-sdk/PubKey";
@@ -55,7 +55,7 @@ export interface PrivKeyProtoMsg {
  * NOTE: ed25519 keys must not be used in SDK apps except in a tendermint validator context.
  */
 export interface PrivKeyAmino {
-  key: Uint8Array;
+  key: string;
 }
 export interface PrivKeyAminoMsg {
   type: "cosmos-sdk/PrivKey";
@@ -126,12 +126,12 @@ export const PubKey = {
   },
   fromAmino(object: PubKeyAmino): PubKey {
     return {
-      key: object.key
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
     };
   },
   toAmino(message: PubKey): PubKeyAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = base64FromBytes(message.key);
     return obj;
   },
   fromAminoMsg(object: PubKeyAminoMsg): PubKey {
@@ -214,12 +214,12 @@ export const PrivKey = {
   },
   fromAmino(object: PrivKeyAmino): PrivKey {
     return {
-      key: object.key
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
     };
   },
   toAmino(message: PrivKey): PrivKeyAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = base64FromBytes(message.key);
     return obj;
   },
   fromAminoMsg(object: PrivKeyAminoMsg): PrivKey {

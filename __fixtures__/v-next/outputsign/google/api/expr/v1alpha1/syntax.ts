@@ -2,7 +2,7 @@ import { NullValue, NullValueSDKType, nullValueFromJSON } from "../../../protobu
 import { Duration, DurationAmino, DurationSDKType } from "../../../protobuf/duration";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, toTimestamp, fromTimestamp, isSet, isObject } from "../../../../helpers";
+import { DeepPartial, toTimestamp, fromTimestamp, isSet, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
@@ -656,7 +656,7 @@ export interface ConstantAmino {
   /** string value. */
   string_value?: string;
   /** bytes value. */
-  bytes_value?: Uint8Array;
+  bytes_value?: string;
   /**
    * protobuf.Duration value.
    * 
@@ -1831,7 +1831,7 @@ export const Constant = {
       uint64Value: object?.uint64_value ? BigInt(object.uint64_value) : undefined,
       doubleValue: object?.double_value,
       stringValue: object?.string_value,
-      bytesValue: object?.bytes_value,
+      bytes_value: isSet(object.bytes_value) ? bytesFromBase64(object.bytes_value) : undefined,
       durationValue: object?.duration_value ? Duration.fromAmino(object.duration_value) : undefined,
       timestampValue: object?.timestamp_value ? fromTimestamp(Timestamp.fromAmino(object.timestamp_value)) : undefined
     };
@@ -1844,7 +1844,7 @@ export const Constant = {
     obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
     obj.double_value = message.doubleValue;
     obj.string_value = message.stringValue;
-    obj.bytes_value = message.bytesValue;
+    message.bytesValue !== undefined && (obj.bytes_value = base64FromBytes(message.bytesValue));
     obj.duration_value = message.durationValue ? Duration.toAmino(message.durationValue) : undefined;
     obj.timestamp_value = message.timestampValue ? Timestamp.toAmino(toTimestamp(message.timestampValue)) : undefined;
     return obj;

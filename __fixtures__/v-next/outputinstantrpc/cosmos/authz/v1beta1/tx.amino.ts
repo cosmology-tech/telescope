@@ -10,7 +10,7 @@ export interface MsgGrantAminoType extends AminoMsg {
     grant: {
       authorization: {
         type_url: string;
-        value: Uint8Array;
+        value: string;
       };
       expiration: string;
     };
@@ -22,7 +22,7 @@ export interface MsgExecAminoType extends AminoMsg {
     grantee: string;
     msgs: {
       type_url: string;
-      value: Uint8Array;
+      value: string;
     }[];
   };
 }

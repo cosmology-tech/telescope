@@ -52,7 +52,7 @@ export interface MsgCreateGroupPolicyAminoType extends AminoMsg {
     metadata: string;
     decision_policy: {
       type_url: string;
-      value: Uint8Array;
+      value: string;
     };
   };
 }
@@ -71,7 +71,7 @@ export interface MsgCreateGroupWithPolicyAminoType extends AminoMsg {
     group_policy_as_admin: boolean;
     decision_policy: {
       type_url: string;
-      value: Uint8Array;
+      value: string;
     };
   };
 }
@@ -90,7 +90,7 @@ export interface MsgUpdateGroupPolicyDecisionPolicyAminoType extends AminoMsg {
     address: string;
     decision_policy: {
       type_url: string;
-      value: Uint8Array;
+      value: string;
     };
   };
 }
@@ -110,7 +110,7 @@ export interface MsgSubmitProposalAminoType extends AminoMsg {
     metadata: string;
     messages: {
       type_url: string;
-      value: Uint8Array;
+      value: string;
     }[];
     exec: number;
   };

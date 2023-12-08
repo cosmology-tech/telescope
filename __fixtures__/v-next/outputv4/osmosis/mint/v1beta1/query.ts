@@ -358,12 +358,12 @@ export const QueryEpochProvisionsResponse = {
   },
   fromAmino(object: QueryEpochProvisionsResponseAmino): QueryEpochProvisionsResponse {
     return {
-      epochProvisions: object.epoch_provisions
+      epoch_provisions: isSet(object.epoch_provisions) ? bytesFromBase64(object.epoch_provisions) : new Uint8Array()
     };
   },
   toAmino(message: QueryEpochProvisionsResponse): QueryEpochProvisionsResponseAmino {
     const obj: any = {};
-    obj.epoch_provisions = message.epochProvisions;
+    obj.epoch_provisions = base64FromBytes(message.epochProvisions);
     return obj;
   },
   fromAminoMsg(object: QueryEpochProvisionsResponseAminoMsg): QueryEpochProvisionsResponse {

@@ -682,13 +682,13 @@ export const MsgInstantiateContractResponse = {
   fromAmino(object: MsgInstantiateContractResponseAmino): MsgInstantiateContractResponse {
     return {
       address: object.address,
-      data: object.data
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: MsgInstantiateContractResponse): MsgInstantiateContractResponseAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromAminoMsg(object: MsgInstantiateContractResponseAminoMsg): MsgInstantiateContractResponse {
@@ -924,12 +924,12 @@ export const MsgExecuteContractResponse = {
   },
   fromAmino(object: MsgExecuteContractResponseAmino): MsgExecuteContractResponse {
     return {
-      data: object.data
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: MsgExecuteContractResponse): MsgExecuteContractResponseAmino {
     const obj: any = {};
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromAminoMsg(object: MsgExecuteContractResponseAminoMsg): MsgExecuteContractResponse {
@@ -1153,12 +1153,12 @@ export const MsgMigrateContractResponse = {
   },
   fromAmino(object: MsgMigrateContractResponseAmino): MsgMigrateContractResponse {
     return {
-      data: object.data
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: MsgMigrateContractResponse): MsgMigrateContractResponseAmino {
     const obj: any = {};
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromAminoMsg(object: MsgMigrateContractResponseAminoMsg): MsgMigrateContractResponse {

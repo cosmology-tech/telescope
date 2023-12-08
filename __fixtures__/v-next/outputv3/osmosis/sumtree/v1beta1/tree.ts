@@ -23,7 +23,7 @@ export interface ChildProtoMsg {
   value: Uint8Array;
 }
 export interface ChildAmino {
-  index: Uint8Array;
+  index: string;
   accumulation: string;
 }
 export interface ChildSDKType {
@@ -204,13 +204,13 @@ export const Child = {
   },
   fromAmino(object: ChildAmino): Child {
     return {
-      index: object.index,
+      index: isSet(object.index) ? bytesFromBase64(object.index) : new Uint8Array(),
       accumulation: object.accumulation
     };
   },
   toAmino(message: Child, useInterfaces: boolean = true): ChildAmino {
     const obj: any = {};
-    obj.index = message.index;
+    obj.index = base64FromBytes(message.index);
     obj.accumulation = message.accumulation;
     return obj;
   },

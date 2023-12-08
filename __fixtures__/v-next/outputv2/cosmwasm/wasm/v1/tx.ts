@@ -100,7 +100,7 @@ export interface MsgInstantiateContractAmino {
   /** Label is optional metadata to be stored with a contract instance. */
   label: string;
   /** Msg json encoded message to be passed to the contract on instantiation */
-  msg: Uint8Array;
+  msg: string;
   /** Funds coins that are transferred to the contract on instantiation */
   funds: CoinAmino[];
 }
@@ -136,7 +136,7 @@ export interface MsgInstantiateContractResponseAmino {
   /** Address is the bech32 address of the new contract instance. */
   address: string;
   /** Data contains base64-encoded bytes to returned from the contract */
-  data: Uint8Array;
+  data: string;
 }
 export interface MsgInstantiateContractResponseAminoMsg {
   type: "wasm/MsgInstantiateContractResponse";
@@ -169,7 +169,7 @@ export interface MsgExecuteContractAmino {
   /** Contract is the address of the smart contract */
   contract: string;
   /** Msg json encoded message to be passed to the contract */
-  msg: Uint8Array;
+  msg: string;
   /** Funds coins that are transferred to the contract on execution */
   funds: CoinAmino[];
 }
@@ -196,7 +196,7 @@ export interface MsgExecuteContractResponseProtoMsg {
 /** MsgExecuteContractResponse returns execution result data. */
 export interface MsgExecuteContractResponseAmino {
   /** Data contains base64-encoded bytes to returned from the contract */
-  data: Uint8Array;
+  data: string;
 }
 export interface MsgExecuteContractResponseAminoMsg {
   type: "wasm/MsgExecuteContractResponse";
@@ -230,7 +230,7 @@ export interface MsgMigrateContractAmino {
   /** CodeID references the new WASM code */
   code_id: string;
   /** Msg json encoded message to be passed to the contract on migration */
-  msg: Uint8Array;
+  msg: string;
 }
 export interface MsgMigrateContractAminoMsg {
   type: "wasm/MsgMigrateContract";
@@ -261,7 +261,7 @@ export interface MsgMigrateContractResponseAmino {
    * Data contains same raw bytes returned as data from the wasm contract.
    * (May be empty)
    */
-  data: Uint8Array;
+  data: string;
 }
 export interface MsgMigrateContractResponseAminoMsg {
   type: "wasm/MsgMigrateContractResponse";
@@ -809,13 +809,13 @@ export const MsgInstantiateContractResponse = {
   fromAmino(object: MsgInstantiateContractResponseAmino): MsgInstantiateContractResponse {
     return {
       address: object.address,
-      data: object.data
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: MsgInstantiateContractResponse): MsgInstantiateContractResponseAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromAminoMsg(object: MsgInstantiateContractResponseAminoMsg): MsgInstantiateContractResponse {
@@ -1040,12 +1040,12 @@ export const MsgExecuteContractResponse = {
   },
   fromAmino(object: MsgExecuteContractResponseAmino): MsgExecuteContractResponse {
     return {
-      data: object.data
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: MsgExecuteContractResponse): MsgExecuteContractResponseAmino {
     const obj: any = {};
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromAminoMsg(object: MsgExecuteContractResponseAminoMsg): MsgExecuteContractResponse {
@@ -1260,12 +1260,12 @@ export const MsgMigrateContractResponse = {
   },
   fromAmino(object: MsgMigrateContractResponseAmino): MsgMigrateContractResponse {
     return {
-      data: object.data
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: MsgMigrateContractResponse): MsgMigrateContractResponseAmino {
     const obj: any = {};
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromAminoMsg(object: MsgMigrateContractResponseAminoMsg): MsgMigrateContractResponse {

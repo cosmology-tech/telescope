@@ -19,7 +19,7 @@ export interface PubKeyAmino {
    * Point on secp256r1 curve in a compressed representation as specified in section
    * 4.3.6 of ANSI X9.62: https://webstore.ansi.org/standards/ascx9/ansix9621998
    */
-  key: Uint8Array;
+  key: string;
 }
 /** PubKey defines a secp256r1 ECDSA public key. */
 export interface PubKeySDKType {
@@ -37,7 +37,7 @@ export interface PrivKeyProtoMsg {
 /** PrivKey defines a secp256r1 ECDSA private key. */
 export interface PrivKeyAmino {
   /** secret number serialized using big-endian encoding */
-  secret: Uint8Array;
+  secret: string;
 }
 /** PrivKey defines a secp256r1 ECDSA private key. */
 export interface PrivKeySDKType {
@@ -101,12 +101,12 @@ export const PubKey = {
   },
   fromAmino(object: PubKeyAmino): PubKey {
     return {
-      key: object.key
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
     };
   },
   toAmino(message: PubKey, useInterfaces: boolean = true): PubKeyAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = base64FromBytes(message.key);
     return obj;
   },
   fromProtoMsg(message: PubKeyProtoMsg, useInterfaces: boolean = true): PubKey {
@@ -180,12 +180,12 @@ export const PrivKey = {
   },
   fromAmino(object: PrivKeyAmino): PrivKey {
     return {
-      secret: object.secret
+      secret: isSet(object.secret) ? bytesFromBase64(object.secret) : new Uint8Array()
     };
   },
   toAmino(message: PrivKey, useInterfaces: boolean = true): PrivKeyAmino {
     const obj: any = {};
-    obj.secret = message.secret;
+    obj.secret = base64FromBytes(message.secret);
     return obj;
   },
   fromProtoMsg(message: PrivKeyProtoMsg, useInterfaces: boolean = true): PrivKey {

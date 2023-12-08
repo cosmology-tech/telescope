@@ -111,7 +111,7 @@ export interface HttpBodyAmino {
   /** The HTTP Content-Type header value specifying the content type of the body. */
   content_type: string;
   /** The HTTP request/response body as raw binary. */
-  data: Uint8Array;
+  data: string;
   /**
    * Application specific response metadata. Must be set in the first response
    * for streaming APIs.
@@ -258,14 +258,14 @@ export const HttpBody = {
   fromAmino(object: HttpBodyAmino): HttpBody {
     return {
       contentType: object.content_type,
-      data: object.data,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
     };
   },
   toAmino(message: HttpBody, useInterfaces: boolean = true): HttpBodyAmino {
     const obj: any = {};
     obj.content_type = message.contentType;
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     if (message.extensions) {
       obj.extensions = message.extensions.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
     } else {

@@ -28,4 +28,6 @@ message MsgInstantiateContract2 {
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];
+
+  repeated bytes a_list_of_bytes = 7;
 }

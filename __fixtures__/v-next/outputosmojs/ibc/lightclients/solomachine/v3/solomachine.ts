@@ -527,7 +527,7 @@ export const Header = {
   fromAmino(object: HeaderAmino): Header {
     return {
       timestamp: BigInt(object.timestamp),
-      signature: object.signature,
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
       newPublicKey: object?.new_public_key ? Any.fromAmino(object.new_public_key) : undefined,
       newDiversifier: object.new_diversifier
     };
@@ -535,7 +535,7 @@ export const Header = {
   toAmino(message: Header): HeaderAmino {
     const obj: any = {};
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
-    obj.signature = message.signature;
+    obj.signature = base64FromBytes(message.signature);
     obj.new_public_key = message.newPublicKey ? Any.toAmino(message.newPublicKey) : undefined;
     obj.new_diversifier = message.newDiversifier;
     return obj;
@@ -785,17 +785,17 @@ export const SignatureAndData = {
   },
   fromAmino(object: SignatureAndDataAmino): SignatureAndData {
     return {
-      signature: object.signature,
-      path: object.path,
-      data: object.data,
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
+      path: isSet(object.path) ? bytesFromBase64(object.path) : new Uint8Array(),
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       timestamp: BigInt(object.timestamp)
     };
   },
   toAmino(message: SignatureAndData): SignatureAndDataAmino {
     const obj: any = {};
-    obj.signature = message.signature;
-    obj.path = message.path;
-    obj.data = message.data;
+    obj.signature = base64FromBytes(message.signature);
+    obj.path = base64FromBytes(message.path);
+    obj.data = base64FromBytes(message.data);
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
   },
@@ -896,13 +896,13 @@ export const TimestampedSignatureData = {
   },
   fromAmino(object: TimestampedSignatureDataAmino): TimestampedSignatureData {
     return {
-      signatureData: object.signature_data,
+      signature_data: isSet(object.signature_data) ? bytesFromBase64(object.signature_data) : new Uint8Array(),
       timestamp: BigInt(object.timestamp)
     };
   },
   toAmino(message: TimestampedSignatureData): TimestampedSignatureDataAmino {
     const obj: any = {};
-    obj.signature_data = message.signatureData;
+    obj.signature_data = base64FromBytes(message.signatureData);
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
   },
@@ -1045,8 +1045,8 @@ export const SignBytes = {
       sequence: BigInt(object.sequence),
       timestamp: BigInt(object.timestamp),
       diversifier: object.diversifier,
-      path: object.path,
-      data: object.data
+      path: isSet(object.path) ? bytesFromBase64(object.path) : new Uint8Array(),
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: SignBytes): SignBytesAmino {
@@ -1054,8 +1054,8 @@ export const SignBytes = {
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     obj.diversifier = message.diversifier;
-    obj.path = message.path;
-    obj.data = message.data;
+    obj.path = base64FromBytes(message.path);
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromAminoMsg(object: SignBytesAminoMsg): SignBytes {

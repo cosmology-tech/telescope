@@ -43,7 +43,7 @@ export interface MsgIBCSendAmino {
    * Data is the payload to transfer. We must not make assumption what format or
    * content is in here.
    */
-  data: Uint8Array;
+  data: string;
 }
 /** MsgIBCSend */
 export interface MsgIBCSendSDKType {
@@ -169,7 +169,7 @@ export const MsgIBCSend = {
       channel: object.channel,
       timeoutHeight: BigInt(object.timeout_height),
       timeoutTimestamp: BigInt(object.timeout_timestamp),
-      data: object.data
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: MsgIBCSend, useInterfaces: boolean = true): MsgIBCSendAmino {
@@ -177,7 +177,7 @@ export const MsgIBCSend = {
     obj.channel = message.channel;
     obj.timeout_height = message.timeoutHeight ? message.timeoutHeight.toString() : undefined;
     obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromProtoMsg(message: MsgIBCSendProtoMsg, useInterfaces: boolean = true): MsgIBCSend {

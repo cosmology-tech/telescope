@@ -2,7 +2,7 @@ import * as t from '@babel/types';
 import { ProtoType } from '@cosmology/types';
 import { BILLION, TypeLong, identifier } from '../../../utils';
 import { ProtoParseContext } from '../../context';
-import { getFieldNames } from '../../types';
+import { getDefaultTSTypeFromProtoType, getFieldNames } from '../../types';
 import { getInterfaceToAminoName } from '../implements';
 import { ToAminoJSONMethod } from './index';
 
@@ -249,7 +249,41 @@ export const toAminoJSON = {
     },
 
     bytes(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
+        args.context.addUtil('base64FromBytes');
+        const { propName, origName } = getFieldNames(args.field);
+
+        let expr;
+        if (args.isOptional) {
+            expr = t.callExpression(
+              t.identifier('base64FromBytes'),
+              [
+                  t.memberExpression(
+                      t.identifier('message'),
+                      t.identifier(propName)
+                  )
+              ]
+            );
+
+            return notUndefinedSetValue(origName, propName, expr);
+        } else {
+            expr = t.expressionStatement(t.assignmentExpression(
+              '=',
+              t.memberExpression(
+                  t.identifier('obj'),
+                  t.identifier(origName)
+              ),
+              t.callExpression(
+                t.identifier('base64FromBytes'),
+                [
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    )
+                ]
+              ),
+            ))
+        }
+        return expr;
     },
 
     duration(args: ToAminoJSONMethod) {
@@ -643,7 +677,8 @@ export const arrayTypes = {
         return arrayTypes.long(args);
     },
     bytes(args: ToAminoJSONMethod) {
-        return arrayTypes.scalar();
+      args.context.addUtil('base64FromBytes');
+      return t.callExpression(t.identifier("base64FromBytes"), [t.identifier('e')]);
     },
     enum(args: ToAminoJSONMethod) {
         const enumFuncName = args.context.getToEnum(args.field);

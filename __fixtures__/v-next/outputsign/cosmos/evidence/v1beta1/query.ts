@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 /** QueryEvidenceRequest is the request type for the Query/Evidence RPC method. */
 export interface QueryEvidenceRequest {
@@ -15,7 +15,7 @@ export interface QueryEvidenceRequestProtoMsg {
 /** QueryEvidenceRequest is the request type for the Query/Evidence RPC method. */
 export interface QueryEvidenceRequestAmino {
   /** evidence_hash defines the hash of the requested evidence. */
-  evidence_hash: Uint8Array;
+  evidence_hash: string;
 }
 export interface QueryEvidenceRequestAminoMsg {
   type: "cosmos-sdk/QueryEvidenceRequest";
@@ -151,12 +151,12 @@ export const QueryEvidenceRequest = {
   },
   fromAmino(object: QueryEvidenceRequestAmino): QueryEvidenceRequest {
     return {
-      evidenceHash: object.evidence_hash
+      evidence_hash: isSet(object.evidence_hash) ? bytesFromBase64(object.evidence_hash) : new Uint8Array()
     };
   },
   toAmino(message: QueryEvidenceRequest): QueryEvidenceRequestAmino {
     const obj: any = {};
-    obj.evidence_hash = message.evidenceHash;
+    obj.evidence_hash = base64FromBytes(message.evidenceHash);
     return obj;
   },
   fromAminoMsg(object: QueryEvidenceRequestAminoMsg): QueryEvidenceRequest {

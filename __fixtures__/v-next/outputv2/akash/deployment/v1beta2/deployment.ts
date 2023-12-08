@@ -81,7 +81,7 @@ export interface DeploymentProtoMsg {
 export interface DeploymentAmino {
   deployment_id?: DeploymentIDAmino;
   state: Deployment_State;
-  version: Uint8Array;
+  version: string;
   created_at: string;
 }
 export interface DeploymentAminoMsg {
@@ -317,7 +317,7 @@ export const Deployment = {
     return {
       deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : DeploymentID.fromPartial({}),
       state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
-      version: object.version,
+      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
       createdAt: BigInt(object.created_at)
     };
   },
@@ -325,7 +325,7 @@ export const Deployment = {
     const obj: any = {};
     obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined;
     obj.state = message.state;
-    obj.version = message.version;
+    obj.version = base64FromBytes(message.version);
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   },

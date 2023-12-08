@@ -206,14 +206,14 @@ export const Pair = {
   },
   fromAmino(object: PairAmino): Pair {
     return {
-      key: object.key,
-      value: object.value
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
     };
   },
   toAmino(message: Pair): PairAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = base64FromBytes(message.key);
+    obj.value = base64FromBytes(message.value);
     return obj;
   },
   fromAminoMsg(object: PairAminoMsg): Pair {

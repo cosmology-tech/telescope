@@ -261,7 +261,7 @@ export interface BytesValueProtoMsg {
  */
 export interface BytesValueAmino {
   /** The bytes value. */
-  value: Uint8Array;
+  value: string;
 }
 /**
  * Wrapper message for `bytes`.
@@ -956,12 +956,12 @@ export const BytesValue = {
   },
   fromAmino(object: BytesValueAmino): BytesValue {
     return {
-      value: object.value
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
     };
   },
   toAmino(message: BytesValue, useInterfaces: boolean = true): BytesValueAmino {
     const obj: any = {};
-    obj.value = message.value;
+    obj.value = base64FromBytes(message.value);
     return obj;
   },
   fromProtoMsg(message: BytesValueProtoMsg, useInterfaces: boolean = true): BytesValue {

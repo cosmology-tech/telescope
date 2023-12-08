@@ -197,7 +197,7 @@ export interface BroadcastTxRequestProtoMsg {
  */
 export interface BroadcastTxRequestAmino {
   /** tx_bytes is the raw transaction. */
-  tx_bytes: Uint8Array;
+  tx_bytes: string;
   mode: BroadcastMode;
 }
 /**
@@ -273,7 +273,7 @@ export interface SimulateRequestAmino {
    * 
    * Since: cosmos-sdk 0.43
    */
-  tx_bytes: Uint8Array;
+  tx_bytes: string;
 }
 /**
  * SimulateRequest is the request type for the Service.Simulate
@@ -769,13 +769,13 @@ export const BroadcastTxRequest = {
   },
   fromAmino(object: BroadcastTxRequestAmino): BroadcastTxRequest {
     return {
-      txBytes: object.tx_bytes,
+      tx_bytes: isSet(object.tx_bytes) ? bytesFromBase64(object.tx_bytes) : new Uint8Array(),
       mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : -1
     };
   },
   toAmino(message: BroadcastTxRequest, useInterfaces: boolean = true): BroadcastTxRequestAmino {
     const obj: any = {};
-    obj.tx_bytes = message.txBytes;
+    obj.tx_bytes = base64FromBytes(message.txBytes);
     obj.mode = message.mode;
     return obj;
   },
@@ -946,13 +946,13 @@ export const SimulateRequest = {
   fromAmino(object: SimulateRequestAmino): SimulateRequest {
     return {
       tx: object?.tx ? Tx.fromAmino(object.tx) : undefined,
-      txBytes: object.tx_bytes
+      tx_bytes: isSet(object.tx_bytes) ? bytesFromBase64(object.tx_bytes) : new Uint8Array()
     };
   },
   toAmino(message: SimulateRequest, useInterfaces: boolean = true): SimulateRequestAmino {
     const obj: any = {};
     obj.tx = message.tx ? Tx.toAmino(message.tx, useInterfaces) : undefined;
-    obj.tx_bytes = message.txBytes;
+    obj.tx_bytes = base64FromBytes(message.txBytes);
     return obj;
   },
   fromProtoMsg(message: SimulateRequestProtoMsg, useInterfaces: boolean = true): SimulateRequest {

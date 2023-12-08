@@ -6,11 +6,11 @@ export interface MsgCreateClientAminoType extends AminoMsg {
   value: {
     client_state: {
       type_url: string;
-      value: Uint8Array;
+      value: string;
     };
     consensus_state: {
       type_url: string;
-      value: Uint8Array;
+      value: string;
     };
     signer: string;
   };
@@ -21,7 +21,7 @@ export interface MsgUpdateClientAminoType extends AminoMsg {
     client_id: string;
     header: {
       type_url: string;
-      value: Uint8Array;
+      value: string;
     };
     signer: string;
   };
@@ -32,14 +32,14 @@ export interface MsgUpgradeClientAminoType extends AminoMsg {
     client_id: string;
     client_state: {
       type_url: string;
-      value: Uint8Array;
+      value: string;
     };
     consensus_state: {
       type_url: string;
-      value: Uint8Array;
+      value: string;
     };
-    proof_upgrade_client: Uint8Array;
-    proof_upgrade_consensus_state: Uint8Array;
+    proof_upgrade_client: string;
+    proof_upgrade_consensus_state: string;
     signer: string;
   };
 }
@@ -49,7 +49,7 @@ export interface MsgSubmitMisbehaviourAminoType extends AminoMsg {
     client_id: string;
     misbehaviour: {
       type_url: string;
-      value: Uint8Array;
+      value: string;
     };
     signer: string;
   };

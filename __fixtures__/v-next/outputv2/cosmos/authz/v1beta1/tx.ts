@@ -48,7 +48,7 @@ export interface MsgExecResponseProtoMsg {
 }
 /** MsgExecResponse defines the Msg/MsgExecResponse response type. */
 export interface MsgExecResponseAmino {
-  results: Uint8Array[];
+  results: string[];
 }
 export interface MsgExecResponseAminoMsg {
   type: "cosmos-sdk/MsgExecResponse";
@@ -358,13 +358,13 @@ export const MsgExecResponse = {
   },
   fromAmino(object: MsgExecResponseAmino): MsgExecResponse {
     return {
-      results: Array.isArray(object?.results) ? object.results.map((e: any) => e) : []
+      results: Array.isArray(object?.results) ? object.results.map((e: any) => bytesFromBase64(e)) : []
     };
   },
   toAmino(message: MsgExecResponse): MsgExecResponseAmino {
     const obj: any = {};
     if (message.results) {
-      obj.results = message.results.map(e => e);
+      obj.results = message.results.map(e => base64FromBytes(e));
     } else {
       obj.results = [];
     }

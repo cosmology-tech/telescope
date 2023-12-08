@@ -23,7 +23,7 @@ export interface PubKeyProtoMsg {
  * This prefix is followed with the x-coordinate.
  */
 export interface PubKeyAmino {
-  key: Uint8Array;
+  key: string;
 }
 /**
  * PubKey defines a secp256k1 public key
@@ -45,7 +45,7 @@ export interface PrivKeyProtoMsg {
 }
 /** PrivKey defines a secp256k1 private key. */
 export interface PrivKeyAmino {
-  key: Uint8Array;
+  key: string;
 }
 /** PrivKey defines a secp256k1 private key. */
 export interface PrivKeySDKType {
@@ -109,12 +109,12 @@ export const PubKey = {
   },
   fromAmino(object: PubKeyAmino): PubKey {
     return {
-      key: object.key
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
     };
   },
   toAmino(message: PubKey, useInterfaces: boolean = true): PubKeyAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = base64FromBytes(message.key);
     return obj;
   },
   fromProtoMsg(message: PubKeyProtoMsg, useInterfaces: boolean = true): PubKey {
@@ -188,12 +188,12 @@ export const PrivKey = {
   },
   fromAmino(object: PrivKeyAmino): PrivKey {
     return {
-      key: object.key
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
     };
   },
   toAmino(message: PrivKey, useInterfaces: boolean = true): PrivKeyAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = base64FromBytes(message.key);
     return obj;
   },
   fromProtoMsg(message: PrivKeyProtoMsg, useInterfaces: boolean = true): PrivKey {

@@ -75,12 +75,12 @@ export const ResourceValue = {
   },
   fromAmino(object: ResourceValueAmino): ResourceValue {
     return {
-      val: object.val
+      val: isSet(object.val) ? bytesFromBase64(object.val) : new Uint8Array()
     };
   },
   toAmino(message: ResourceValue): ResourceValueAmino {
     const obj: any = {};
-    obj.val = message.val;
+    obj.val = base64FromBytes(message.val);
     return obj;
   },
   fromAminoMsg(object: ResourceValueAminoMsg): ResourceValue {

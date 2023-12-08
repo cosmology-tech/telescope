@@ -535,14 +535,14 @@ export const ConsensusState = {
     return {
       timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : fromTimestamp(Timestamp.fromPartial({})),
       root: object?.root ? MerkleRoot.fromAmino(object.root) : MerkleRoot.fromPartial({}),
-      nextValidatorsHash: object.next_validators_hash
+      next_validators_hash: isSet(object.next_validators_hash) ? bytesFromBase64(object.next_validators_hash) : new Uint8Array()
     };
   },
   toAmino(message: ConsensusState): ConsensusStateAmino {
     const obj: any = {};
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     obj.root = message.root ? MerkleRoot.toAmino(message.root) : undefined;
-    obj.next_validators_hash = message.nextValidatorsHash;
+    obj.next_validators_hash = base64FromBytes(message.nextValidatorsHash);
     return obj;
   },
   fromAminoMsg(object: ConsensusStateAminoMsg): ConsensusState {

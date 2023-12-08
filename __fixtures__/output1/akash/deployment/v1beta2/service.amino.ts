@@ -36,7 +36,7 @@ export interface MsgCreateDeploymentAminoType extends AminoMsg {
         resources: {
           cpu: {
             units: {
-              val: Uint8Array;
+              val: string;
             };
             attributes: {
               key: string;
@@ -45,7 +45,7 @@ export interface MsgCreateDeploymentAminoType extends AminoMsg {
           };
           memory: {
             quantity: {
-              val: Uint8Array;
+              val: string;
             };
             attributes: {
               key: string;
@@ -55,7 +55,7 @@ export interface MsgCreateDeploymentAminoType extends AminoMsg {
           storage: {
             name: string;
             quantity: {
-              val: Uint8Array;
+              val: string;
             };
             attributes: {
               key: string;
@@ -74,7 +74,7 @@ export interface MsgCreateDeploymentAminoType extends AminoMsg {
         };
       }[];
     }[];
-    version: Uint8Array;
+    version: string;
     deposit: {
       denom: string;
       amount: string;
@@ -103,7 +103,7 @@ export interface MsgUpdateDeploymentAminoType extends AminoMsg {
       owner: string;
       dseq: string;
     };
-    version: Uint8Array;
+    version: string;
   };
 }
 export interface MsgCloseDeploymentAminoType extends AminoMsg {

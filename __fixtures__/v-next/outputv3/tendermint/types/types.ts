@@ -109,7 +109,7 @@ export interface PartSetHeaderProtoMsg {
 /** PartsetHeader */
 export interface PartSetHeaderAmino {
   total: number;
-  hash: Uint8Array;
+  hash: string;
 }
 /** PartsetHeader */
 export interface PartSetHeaderSDKType {
@@ -127,7 +127,7 @@ export interface PartProtoMsg {
 }
 export interface PartAmino {
   index: number;
-  bytes: Uint8Array;
+  bytes: string;
   proof?: ProofAmino;
 }
 export interface PartSDKType {
@@ -146,7 +146,7 @@ export interface BlockIDProtoMsg {
 }
 /** BlockID */
 export interface BlockIDAmino {
-  hash: Uint8Array;
+  hash: string;
   part_set_header?: PartSetHeaderAmino;
 }
 /** BlockID */
@@ -194,21 +194,21 @@ export interface HeaderAmino {
   /** prev block info */
   last_block_id?: BlockIDAmino;
   /** hashes of block data */
-  last_commit_hash: Uint8Array;
-  data_hash: Uint8Array;
+  last_commit_hash: string;
+  data_hash: string;
   /** hashes from the app output from the prev block */
-  validators_hash: Uint8Array;
+  validators_hash: string;
   /** validators for the next block */
-  next_validators_hash: Uint8Array;
+  next_validators_hash: string;
   /** consensus params for current block */
-  consensus_hash: Uint8Array;
+  consensus_hash: string;
   /** state after txs from the previous block */
-  app_hash: Uint8Array;
-  last_results_hash: Uint8Array;
+  app_hash: string;
+  last_results_hash: string;
   /** consensus info */
-  evidence_hash: Uint8Array;
+  evidence_hash: string;
   /** original proposer of the block */
-  proposer_address: Uint8Array;
+  proposer_address: string;
 }
 /** Header defines the structure of a Tendermint block header. */
 export interface HeaderSDKType {
@@ -247,7 +247,7 @@ export interface DataAmino {
    * NOTE: not all txs here are valid.  We're just agreeing on the order first.
    * This means that block.AppHash does not include these txs.
    */
-  txs: Uint8Array[];
+  txs: string[];
 }
 /** Data contains the set of transactions included in the block */
 export interface DataSDKType {
@@ -283,9 +283,9 @@ export interface VoteAmino {
   /** zero if vote is nil. */
   block_id?: BlockIDAmino;
   timestamp?: string;
-  validator_address: Uint8Array;
+  validator_address: string;
   validator_index: number;
-  signature: Uint8Array;
+  signature: string;
 }
 /**
  * Vote represents a prevote, precommit, or commit vote from validators for
@@ -340,9 +340,9 @@ export interface CommitSigProtoMsg {
 /** CommitSig is a part of the Vote included in a Commit. */
 export interface CommitSigAmino {
   block_id_flag: BlockIDFlag;
-  validator_address: Uint8Array;
+  validator_address: string;
   timestamp?: string;
-  signature: Uint8Array;
+  signature: string;
 }
 /** CommitSig is a part of the Vote included in a Commit. */
 export interface CommitSigSDKType {
@@ -371,7 +371,7 @@ export interface ProposalAmino {
   pol_round: number;
   block_id?: BlockIDAmino;
   timestamp?: string;
-  signature: Uint8Array;
+  signature: string;
 }
 export interface ProposalSDKType {
   type: SignedMsgType;
@@ -448,8 +448,8 @@ export interface TxProofProtoMsg {
 }
 /** TxProof represents a Merkle proof of the presence of a transaction in the Merkle tree. */
 export interface TxProofAmino {
-  root_hash: Uint8Array;
-  data: Uint8Array;
+  root_hash: string;
+  data: string;
   proof?: ProofAmino;
 }
 /** TxProof represents a Merkle proof of the presence of a transaction in the Merkle tree. */
@@ -528,13 +528,13 @@ export const PartSetHeader = {
   fromAmino(object: PartSetHeaderAmino): PartSetHeader {
     return {
       total: object.total,
-      hash: object.hash
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
     };
   },
   toAmino(message: PartSetHeader, useInterfaces: boolean = true): PartSetHeaderAmino {
     const obj: any = {};
     obj.total = message.total;
-    obj.hash = message.hash;
+    obj.hash = base64FromBytes(message.hash);
     return obj;
   },
   fromProtoMsg(message: PartSetHeaderProtoMsg, useInterfaces: boolean = true): PartSetHeader {
@@ -634,14 +634,14 @@ export const Part = {
   fromAmino(object: PartAmino): Part {
     return {
       index: object.index,
-      bytes: object.bytes,
+      bytes: isSet(object.bytes) ? bytesFromBase64(object.bytes) : new Uint8Array(),
       proof: object?.proof ? Proof.fromAmino(object.proof) : Proof.fromPartial({})
     };
   },
   toAmino(message: Part, useInterfaces: boolean = true): PartAmino {
     const obj: any = {};
     obj.index = message.index;
-    obj.bytes = message.bytes;
+    obj.bytes = base64FromBytes(message.bytes);
     obj.proof = message.proof ? Proof.toAmino(message.proof, useInterfaces) : undefined;
     return obj;
   },
@@ -729,13 +729,13 @@ export const BlockID = {
   },
   fromAmino(object: BlockIDAmino): BlockID {
     return {
-      hash: object.hash,
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
       partSetHeader: object?.part_set_header ? PartSetHeader.fromAmino(object.part_set_header) : PartSetHeader.fromPartial({})
     };
   },
   toAmino(message: BlockID, useInterfaces: boolean = true): BlockIDAmino {
     const obj: any = {};
-    obj.hash = message.hash;
+    obj.hash = base64FromBytes(message.hash);
     obj.part_set_header = message.partSetHeader ? PartSetHeader.toAmino(message.partSetHeader, useInterfaces) : undefined;
     return obj;
   },
@@ -976,15 +976,15 @@ export const Header = {
       height: BigInt(object.height),
       time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : fromTimestamp(Timestamp.fromPartial({})),
       lastBlockId: object?.last_block_id ? BlockID.fromAmino(object.last_block_id) : BlockID.fromPartial({}),
-      lastCommitHash: object.last_commit_hash,
-      dataHash: object.data_hash,
-      validatorsHash: object.validators_hash,
-      nextValidatorsHash: object.next_validators_hash,
-      consensusHash: object.consensus_hash,
-      appHash: object.app_hash,
-      lastResultsHash: object.last_results_hash,
-      evidenceHash: object.evidence_hash,
-      proposerAddress: object.proposer_address
+      last_commit_hash: isSet(object.last_commit_hash) ? bytesFromBase64(object.last_commit_hash) : new Uint8Array(),
+      data_hash: isSet(object.data_hash) ? bytesFromBase64(object.data_hash) : new Uint8Array(),
+      validators_hash: isSet(object.validators_hash) ? bytesFromBase64(object.validators_hash) : new Uint8Array(),
+      next_validators_hash: isSet(object.next_validators_hash) ? bytesFromBase64(object.next_validators_hash) : new Uint8Array(),
+      consensus_hash: isSet(object.consensus_hash) ? bytesFromBase64(object.consensus_hash) : new Uint8Array(),
+      app_hash: isSet(object.app_hash) ? bytesFromBase64(object.app_hash) : new Uint8Array(),
+      last_results_hash: isSet(object.last_results_hash) ? bytesFromBase64(object.last_results_hash) : new Uint8Array(),
+      evidence_hash: isSet(object.evidence_hash) ? bytesFromBase64(object.evidence_hash) : new Uint8Array(),
+      proposer_address: isSet(object.proposer_address) ? bytesFromBase64(object.proposer_address) : new Uint8Array()
     };
   },
   toAmino(message: Header, useInterfaces: boolean = true): HeaderAmino {
@@ -994,15 +994,15 @@ export const Header = {
     obj.height = message.height ? message.height.toString() : undefined;
     obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
     obj.last_block_id = message.lastBlockId ? BlockID.toAmino(message.lastBlockId, useInterfaces) : undefined;
-    obj.last_commit_hash = message.lastCommitHash;
-    obj.data_hash = message.dataHash;
-    obj.validators_hash = message.validatorsHash;
-    obj.next_validators_hash = message.nextValidatorsHash;
-    obj.consensus_hash = message.consensusHash;
-    obj.app_hash = message.appHash;
-    obj.last_results_hash = message.lastResultsHash;
-    obj.evidence_hash = message.evidenceHash;
-    obj.proposer_address = message.proposerAddress;
+    obj.last_commit_hash = base64FromBytes(message.lastCommitHash);
+    obj.data_hash = base64FromBytes(message.dataHash);
+    obj.validators_hash = base64FromBytes(message.validatorsHash);
+    obj.next_validators_hash = base64FromBytes(message.nextValidatorsHash);
+    obj.consensus_hash = base64FromBytes(message.consensusHash);
+    obj.app_hash = base64FromBytes(message.appHash);
+    obj.last_results_hash = base64FromBytes(message.lastResultsHash);
+    obj.evidence_hash = base64FromBytes(message.evidenceHash);
+    obj.proposer_address = base64FromBytes(message.proposerAddress);
     return obj;
   },
   fromProtoMsg(message: HeaderProtoMsg, useInterfaces: boolean = true): Header {
@@ -1083,13 +1083,13 @@ export const Data = {
   },
   fromAmino(object: DataAmino): Data {
     return {
-      txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => e) : []
+      txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => bytesFromBase64(e)) : []
     };
   },
   toAmino(message: Data, useInterfaces: boolean = true): DataAmino {
     const obj: any = {};
     if (message.txs) {
-      obj.txs = message.txs.map(e => e);
+      obj.txs = message.txs.map(e => base64FromBytes(e));
     } else {
       obj.txs = [];
     }
@@ -1258,9 +1258,9 @@ export const Vote = {
       round: object.round,
       blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : BlockID.fromPartial({}),
       timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : fromTimestamp(Timestamp.fromPartial({})),
-      validatorAddress: object.validator_address,
+      validator_address: isSet(object.validator_address) ? bytesFromBase64(object.validator_address) : new Uint8Array(),
       validatorIndex: object.validator_index,
-      signature: object.signature
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
     };
   },
   toAmino(message: Vote, useInterfaces: boolean = true): VoteAmino {
@@ -1270,9 +1270,9 @@ export const Vote = {
     obj.round = message.round;
     obj.block_id = message.blockId ? BlockID.toAmino(message.blockId, useInterfaces) : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
-    obj.validator_address = message.validatorAddress;
+    obj.validator_address = base64FromBytes(message.validatorAddress);
     obj.validator_index = message.validatorIndex;
-    obj.signature = message.signature;
+    obj.signature = base64FromBytes(message.signature);
     return obj;
   },
   fromProtoMsg(message: VoteProtoMsg, useInterfaces: boolean = true): Vote {
@@ -1518,17 +1518,17 @@ export const CommitSig = {
   fromAmino(object: CommitSigAmino): CommitSig {
     return {
       blockIdFlag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : -1,
-      validatorAddress: object.validator_address,
+      validator_address: isSet(object.validator_address) ? bytesFromBase64(object.validator_address) : new Uint8Array(),
       timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : fromTimestamp(Timestamp.fromPartial({})),
-      signature: object.signature
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
     };
   },
   toAmino(message: CommitSig, useInterfaces: boolean = true): CommitSigAmino {
     const obj: any = {};
     obj.block_id_flag = message.blockIdFlag;
-    obj.validator_address = message.validatorAddress;
+    obj.validator_address = base64FromBytes(message.validatorAddress);
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
-    obj.signature = message.signature;
+    obj.signature = base64FromBytes(message.signature);
     return obj;
   },
   fromProtoMsg(message: CommitSigProtoMsg, useInterfaces: boolean = true): CommitSig {
@@ -1683,7 +1683,7 @@ export const Proposal = {
       polRound: object.pol_round,
       blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : BlockID.fromPartial({}),
       timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : fromTimestamp(Timestamp.fromPartial({})),
-      signature: object.signature
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
     };
   },
   toAmino(message: Proposal, useInterfaces: boolean = true): ProposalAmino {
@@ -1694,7 +1694,7 @@ export const Proposal = {
     obj.pol_round = message.polRound;
     obj.block_id = message.blockId ? BlockID.toAmino(message.blockId, useInterfaces) : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
-    obj.signature = message.signature;
+    obj.signature = base64FromBytes(message.signature);
     return obj;
   },
   fromProtoMsg(message: ProposalProtoMsg, useInterfaces: boolean = true): Proposal {
@@ -2113,15 +2113,15 @@ export const TxProof = {
   },
   fromAmino(object: TxProofAmino): TxProof {
     return {
-      rootHash: object.root_hash,
-      data: object.data,
+      root_hash: isSet(object.root_hash) ? bytesFromBase64(object.root_hash) : new Uint8Array(),
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       proof: object?.proof ? Proof.fromAmino(object.proof) : undefined
     };
   },
   toAmino(message: TxProof, useInterfaces: boolean = true): TxProofAmino {
     const obj: any = {};
-    obj.root_hash = message.rootHash;
-    obj.data = message.data;
+    obj.root_hash = base64FromBytes(message.rootHash);
+    obj.data = base64FromBytes(message.data);
     obj.proof = message.proof ? Proof.toAmino(message.proof, useInterfaces) : undefined;
     return obj;
   },

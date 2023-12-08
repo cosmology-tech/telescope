@@ -13,6 +13,7 @@ const needsImplementation = (name: string, field: ProtoField) => {
 export interface FromAminoJSONMethod {
     context: ProtoParseContext;
     field: ProtoField;
+    isOneOf: boolean;
     isOptional: boolean;
 }
 
@@ -30,6 +31,7 @@ export const fromAminoJSONMethodFields = (context: ProtoParseContext, name: stri
         const args: FromAminoJSONMethod = {
             context,
             field,
+            isOneOf,
             isOptional
         };
 

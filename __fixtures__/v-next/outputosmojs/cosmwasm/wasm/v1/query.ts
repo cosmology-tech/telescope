@@ -1321,13 +1321,13 @@ export const QueryRawContractStateRequest = {
   fromAmino(object: QueryRawContractStateRequestAmino): QueryRawContractStateRequest {
     return {
       address: object.address,
-      queryData: object.query_data
+      query_data: isSet(object.query_data) ? bytesFromBase64(object.query_data) : new Uint8Array()
     };
   },
   toAmino(message: QueryRawContractStateRequest): QueryRawContractStateRequestAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.query_data = message.queryData;
+    obj.query_data = base64FromBytes(message.queryData);
     return obj;
   },
   fromAminoMsg(object: QueryRawContractStateRequestAminoMsg): QueryRawContractStateRequest {
@@ -1414,12 +1414,12 @@ export const QueryRawContractStateResponse = {
   },
   fromAmino(object: QueryRawContractStateResponseAmino): QueryRawContractStateResponse {
     return {
-      data: object.data
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: QueryRawContractStateResponse): QueryRawContractStateResponseAmino {
     const obj: any = {};
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromAminoMsg(object: QueryRawContractStateResponseAminoMsg): QueryRawContractStateResponse {
@@ -1825,14 +1825,14 @@ export const CodeInfoResponse = {
     return {
       codeId: BigInt(object.code_id),
       creator: object.creator,
-      dataHash: object.data_hash
+      data_hash: isSet(object.data_hash) ? bytesFromBase64(object.data_hash) : new Uint8Array()
     };
   },
   toAmino(message: CodeInfoResponse): CodeInfoResponseAmino {
     const obj: any = {};
     obj.code_id = message.codeId ? message.codeId.toString() : undefined;
     obj.creator = message.creator;
-    obj.data_hash = message.dataHash;
+    obj.data_hash = base64FromBytes(message.dataHash);
     return obj;
   },
   fromAminoMsg(object: CodeInfoResponseAminoMsg): CodeInfoResponse {
@@ -1933,13 +1933,13 @@ export const QueryCodeResponse = {
   fromAmino(object: QueryCodeResponseAmino): QueryCodeResponse {
     return {
       codeInfo: object?.code_info ? CodeInfoResponse.fromAmino(object.code_info) : undefined,
-      data: object.data
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: QueryCodeResponse): QueryCodeResponseAmino {
     const obj: any = {};
     obj.code_info = message.codeInfo ? CodeInfoResponse.toAmino(message.codeInfo) : undefined;
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromAminoMsg(object: QueryCodeResponseAminoMsg): QueryCodeResponse {

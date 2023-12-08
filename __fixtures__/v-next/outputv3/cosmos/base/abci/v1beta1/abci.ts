@@ -264,7 +264,7 @@ export interface ResultAmino {
    * because it also contains the Msg response typeURL.
    */
   /** @deprecated */
-  data: Uint8Array;
+  data: string;
   /** Log contains the log information from message or handler execution. */
   log: string;
   /**
@@ -335,7 +335,7 @@ export interface MsgDataProtoMsg {
 /** @deprecated */
 export interface MsgDataAmino {
   msg_type: string;
-  data: Uint8Array;
+  data: string;
 }
 /**
  * MsgData defines the data returned in a Result object during message
@@ -1235,7 +1235,7 @@ export const Result = {
   },
   fromAmino(object: ResultAmino): Result {
     return {
-      data: object.data,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       log: object.log,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromAmino(e)) : [],
       msgResponses: Array.isArray(object?.msg_responses) ? object.msg_responses.map((e: any) => Any.fromAmino(e)) : []
@@ -1243,7 +1243,7 @@ export const Result = {
   },
   toAmino(message: Result, useInterfaces: boolean = true): ResultAmino {
     const obj: any = {};
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     obj.log = message.log;
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toAmino(e, useInterfaces) : undefined);
@@ -1438,13 +1438,13 @@ export const MsgData = {
   fromAmino(object: MsgDataAmino): MsgData {
     return {
       msgType: object.msg_type,
-      data: object.data
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: MsgData, useInterfaces: boolean = true): MsgDataAmino {
     const obj: any = {};
     obj.msg_type = message.msgType;
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromProtoMsg(message: MsgDataProtoMsg, useInterfaces: boolean = true): MsgData {

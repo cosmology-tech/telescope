@@ -21,7 +21,7 @@ export interface MsgCreateDeploymentProtoMsg {
 export interface MsgCreateDeploymentAmino {
   id?: DeploymentIDAmino;
   groups: GroupSpecAmino[];
-  version: Uint8Array;
+  version: string;
   deposit?: CoinAmino;
   /** Depositor pays for the deposit */
   depositor: string;
@@ -90,7 +90,7 @@ export interface MsgUpdateDeploymentProtoMsg {
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentAmino {
   id?: DeploymentIDAmino;
-  version: Uint8Array;
+  version: string;
 }
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
@@ -252,7 +252,7 @@ export const MsgCreateDeployment = {
     return {
       id: object?.id ? DeploymentID.fromAmino(object.id) : DeploymentID.fromPartial({}),
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
-      version: object.version,
+      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
       deposit: object?.deposit ? Coin.fromAmino(object.deposit) : Coin.fromPartial({}),
       depositor: object.depositor
     };
@@ -265,7 +265,7 @@ export const MsgCreateDeployment = {
     } else {
       obj.groups = [];
     }
-    obj.version = message.version;
+    obj.version = base64FromBytes(message.version);
     obj.deposit = message.deposit ? Coin.toAmino(message.deposit, useInterfaces) : undefined;
     obj.depositor = message.depositor;
     return obj;
@@ -587,13 +587,13 @@ export const MsgUpdateDeployment = {
   fromAmino(object: MsgUpdateDeploymentAmino): MsgUpdateDeployment {
     return {
       id: object?.id ? DeploymentID.fromAmino(object.id) : DeploymentID.fromPartial({}),
-      version: object.version
+      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array()
     };
   },
   toAmino(message: MsgUpdateDeployment, useInterfaces: boolean = true): MsgUpdateDeploymentAmino {
     const obj: any = {};
     obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : undefined;
-    obj.version = message.version;
+    obj.version = base64FromBytes(message.version);
     return obj;
   },
   fromProtoMsg(message: MsgUpdateDeploymentProtoMsg, useInterfaces: boolean = true): MsgUpdateDeployment {

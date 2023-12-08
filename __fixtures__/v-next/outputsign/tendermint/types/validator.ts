@@ -1,6 +1,6 @@
 import { PublicKey, PublicKeyAmino, PublicKeySDKType } from "../crypto/keys";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../helpers";
 export const protobufPackage = "tendermint.types";
 export interface ValidatorSet {
   validators: Validator[];
@@ -36,7 +36,7 @@ export interface ValidatorProtoMsg {
   value: Uint8Array;
 }
 export interface ValidatorAmino {
-  address: Uint8Array;
+  address: string;
   pub_key?: PublicKeyAmino;
   voting_power: string;
   proposer_priority: string;
@@ -227,7 +227,7 @@ export const Validator = {
   },
   fromAmino(object: ValidatorAmino): Validator {
     return {
-      address: object.address,
+      address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
       pubKey: object?.pub_key ? PublicKey.fromAmino(object.pub_key) : PublicKey.fromPartial({}),
       votingPower: BigInt(object.voting_power),
       proposerPriority: BigInt(object.proposer_priority)
@@ -235,7 +235,7 @@ export const Validator = {
   },
   toAmino(message: Validator): ValidatorAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = base64FromBytes(message.address);
     obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey) : undefined;
     obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
     obj.proposer_priority = message.proposerPriority ? message.proposerPriority.toString() : undefined;

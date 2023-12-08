@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.crypto.secp256r1";
 /** PubKey defines a secp256r1 ECDSA public key. */
 export interface PubKey {
@@ -19,7 +19,7 @@ export interface PubKeyAmino {
    * Point on secp256r1 curve in a compressed representation as specified in section
    * 4.3.6 of ANSI X9.62: https://webstore.ansi.org/standards/ascx9/ansix9621998
    */
-  key: Uint8Array;
+  key: string;
 }
 export interface PubKeyAminoMsg {
   type: "cosmos-sdk/PubKey";
@@ -41,7 +41,7 @@ export interface PrivKeyProtoMsg {
 /** PrivKey defines a secp256r1 ECDSA private key. */
 export interface PrivKeyAmino {
   /** secret number serialized using big-endian encoding */
-  secret: Uint8Array;
+  secret: string;
 }
 export interface PrivKeyAminoMsg {
   type: "cosmos-sdk/PrivKey";
@@ -88,12 +88,12 @@ export const PubKey = {
   },
   fromAmino(object: PubKeyAmino): PubKey {
     return {
-      key: object.key
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
     };
   },
   toAmino(message: PubKey): PubKeyAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = base64FromBytes(message.key);
     return obj;
   },
   fromAminoMsg(object: PubKeyAminoMsg): PubKey {
@@ -155,12 +155,12 @@ export const PrivKey = {
   },
   fromAmino(object: PrivKeyAmino): PrivKey {
     return {
-      secret: object.secret
+      secret: isSet(object.secret) ? bytesFromBase64(object.secret) : new Uint8Array()
     };
   },
   toAmino(message: PrivKey): PrivKeyAmino {
     const obj: any = {};
-    obj.secret = message.secret;
+    obj.secret = base64FromBytes(message.secret);
     return obj;
   },
   fromAminoMsg(object: PrivKeyAminoMsg): PrivKey {

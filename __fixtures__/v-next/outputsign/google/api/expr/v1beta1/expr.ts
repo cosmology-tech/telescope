@@ -1,7 +1,7 @@
 import { SourceInfo, SourceInfoAmino, SourceInfoSDKType } from "./source";
 import { NullValue, NullValueSDKType, nullValueFromJSON } from "../../../protobuf/struct";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isSet } from "../../../../helpers";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
@@ -642,7 +642,7 @@ export interface LiteralAmino {
   /** string value. */
   string_value?: string;
   /** bytes value. */
-  bytes_value?: Uint8Array;
+  bytes_value?: string;
 }
 export interface LiteralAminoMsg {
   type: "/google.api.expr.v1beta1.Literal";
@@ -1592,7 +1592,7 @@ export const Literal = {
       uint64Value: object?.uint64_value ? BigInt(object.uint64_value) : undefined,
       doubleValue: object?.double_value,
       stringValue: object?.string_value,
-      bytesValue: object?.bytes_value
+      bytes_value: isSet(object.bytes_value) ? bytesFromBase64(object.bytes_value) : undefined
     };
   },
   toAmino(message: Literal): LiteralAmino {
@@ -1603,7 +1603,7 @@ export const Literal = {
     obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
     obj.double_value = message.doubleValue;
     obj.string_value = message.stringValue;
-    obj.bytes_value = message.bytesValue;
+    message.bytesValue !== undefined && (obj.bytes_value = base64FromBytes(message.bytesValue));
     return obj;
   },
   fromAminoMsg(object: LiteralAminoMsg): Literal {

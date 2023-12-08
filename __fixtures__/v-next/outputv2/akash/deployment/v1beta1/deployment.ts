@@ -62,7 +62,7 @@ export interface MsgCreateDeploymentProtoMsg {
 export interface MsgCreateDeploymentAmino {
   id?: DeploymentIDAmino;
   groups: GroupSpecAmino[];
-  version: Uint8Array;
+  version: string;
   deposit?: CoinAmino;
 }
 export interface MsgCreateDeploymentAminoMsg {
@@ -141,7 +141,7 @@ export interface MsgUpdateDeploymentProtoMsg {
 export interface MsgUpdateDeploymentAmino {
   id?: DeploymentIDAmino;
   groups: GroupSpecAmino[];
-  version: Uint8Array;
+  version: string;
 }
 export interface MsgUpdateDeploymentAminoMsg {
   type: "/akash.deployment.v1beta1.MsgUpdateDeployment";
@@ -239,7 +239,7 @@ export interface DeploymentProtoMsg {
 export interface DeploymentAmino {
   deployment_id?: DeploymentIDAmino;
   state: Deployment_State;
-  version: Uint8Array;
+  version: string;
   created_at: string;
 }
 export interface DeploymentAminoMsg {
@@ -386,7 +386,7 @@ export const MsgCreateDeployment = {
     return {
       id: object?.id ? DeploymentID.fromAmino(object.id) : DeploymentID.fromPartial({}),
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
-      version: object.version,
+      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
       deposit: object?.deposit ? Coin.fromAmino(object.deposit) : Coin.fromPartial({})
     };
   },
@@ -398,7 +398,7 @@ export const MsgCreateDeployment = {
     } else {
       obj.groups = [];
     }
-    obj.version = message.version;
+    obj.version = base64FromBytes(message.version);
     obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined;
     return obj;
   },
@@ -738,7 +738,7 @@ export const MsgUpdateDeployment = {
     return {
       id: object?.id ? DeploymentID.fromAmino(object.id) : DeploymentID.fromPartial({}),
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
-      version: object.version
+      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array()
     };
   },
   toAmino(message: MsgUpdateDeployment): MsgUpdateDeploymentAmino {
@@ -749,7 +749,7 @@ export const MsgUpdateDeployment = {
     } else {
       obj.groups = [];
     }
-    obj.version = message.version;
+    obj.version = base64FromBytes(message.version);
     return obj;
   },
   fromAminoMsg(object: MsgUpdateDeploymentAminoMsg): MsgUpdateDeployment {
@@ -1175,7 +1175,7 @@ export const Deployment = {
     return {
       deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : DeploymentID.fromPartial({}),
       state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
-      version: object.version,
+      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
       createdAt: BigInt(object.created_at)
     };
   },
@@ -1183,7 +1183,7 @@ export const Deployment = {
     const obj: any = {};
     obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined;
     obj.state = message.state;
-    obj.version = message.version;
+    obj.version = base64FromBytes(message.version);
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   },

@@ -606,7 +606,7 @@ export interface LiteralAmino {
   /** string value. */
   string_value?: string;
   /** bytes value. */
-  bytes_value?: Uint8Array;
+  bytes_value?: string;
 }
 /**
  * Represents a primitive literal.
@@ -1869,7 +1869,7 @@ export const Literal = {
       uint64Value: object?.uint64_value ? BigInt(object.uint64_value) : undefined,
       doubleValue: object?.double_value,
       stringValue: object?.string_value,
-      bytesValue: object?.bytes_value
+      bytes_value: isSet(object.bytes_value) ? bytesFromBase64(object.bytes_value) : undefined
     };
   },
   toAmino(message: Literal, useInterfaces: boolean = true): LiteralAmino {
@@ -1880,7 +1880,7 @@ export const Literal = {
     obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
     obj.double_value = message.doubleValue;
     obj.string_value = message.stringValue;
-    obj.bytes_value = message.bytesValue;
+    message.bytesValue !== undefined && (obj.bytes_value = base64FromBytes(message.bytesValue));
     return obj;
   },
   fromProtoMsg(message: LiteralProtoMsg, useInterfaces: boolean = true): Literal {

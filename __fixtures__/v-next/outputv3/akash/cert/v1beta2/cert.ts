@@ -75,8 +75,8 @@ export interface CertificateProtoMsg {
 /** Certificate stores state, certificate and it's public key */
 export interface CertificateAmino {
   state: Certificate_State;
-  cert: Uint8Array;
-  pubkey: Uint8Array;
+  cert: string;
+  pubkey: string;
 }
 /** Certificate stores state, certificate and it's public key */
 export interface CertificateSDKType {
@@ -119,8 +119,8 @@ export interface MsgCreateCertificateProtoMsg {
 /** MsgCreateCertificate defines an SDK message for creating certificate */
 export interface MsgCreateCertificateAmino {
   owner: string;
-  cert: Uint8Array;
-  pubkey: Uint8Array;
+  cert: string;
+  pubkey: string;
 }
 /** MsgCreateCertificate defines an SDK message for creating certificate */
 export interface MsgCreateCertificateSDKType {
@@ -338,15 +338,15 @@ export const Certificate = {
   fromAmino(object: CertificateAmino): Certificate {
     return {
       state: isSet(object.state) ? certificate_StateFromJSON(object.state) : -1,
-      cert: object.cert,
-      pubkey: object.pubkey
+      cert: isSet(object.cert) ? bytesFromBase64(object.cert) : new Uint8Array(),
+      pubkey: isSet(object.pubkey) ? bytesFromBase64(object.pubkey) : new Uint8Array()
     };
   },
   toAmino(message: Certificate, useInterfaces: boolean = true): CertificateAmino {
     const obj: any = {};
     obj.state = message.state;
-    obj.cert = message.cert;
-    obj.pubkey = message.pubkey;
+    obj.cert = base64FromBytes(message.cert);
+    obj.pubkey = base64FromBytes(message.pubkey);
     return obj;
   },
   fromProtoMsg(message: CertificateProtoMsg, useInterfaces: boolean = true): Certificate {
@@ -550,15 +550,15 @@ export const MsgCreateCertificate = {
   fromAmino(object: MsgCreateCertificateAmino): MsgCreateCertificate {
     return {
       owner: object.owner,
-      cert: object.cert,
-      pubkey: object.pubkey
+      cert: isSet(object.cert) ? bytesFromBase64(object.cert) : new Uint8Array(),
+      pubkey: isSet(object.pubkey) ? bytesFromBase64(object.pubkey) : new Uint8Array()
     };
   },
   toAmino(message: MsgCreateCertificate, useInterfaces: boolean = true): MsgCreateCertificateAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.cert = message.cert;
-    obj.pubkey = message.pubkey;
+    obj.cert = base64FromBytes(message.cert);
+    obj.pubkey = base64FromBytes(message.pubkey);
     return obj;
   },
   fromProtoMsg(message: MsgCreateCertificateProtoMsg, useInterfaces: boolean = true): MsgCreateCertificate {

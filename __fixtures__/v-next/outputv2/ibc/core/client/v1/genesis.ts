@@ -67,9 +67,9 @@ export interface GenesisMetadataProtoMsg {
  */
 export interface GenesisMetadataAmino {
   /** store key of metadata without clientID-prefix */
-  key: Uint8Array;
+  key: string;
   /** metadata value */
-  value: Uint8Array;
+  value: string;
 }
 export interface GenesisMetadataAminoMsg {
   type: "cosmos-sdk/GenesisMetadata";
@@ -383,14 +383,14 @@ export const GenesisMetadata = {
   },
   fromAmino(object: GenesisMetadataAmino): GenesisMetadata {
     return {
-      key: object.key,
-      value: object.value
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
     };
   },
   toAmino(message: GenesisMetadata): GenesisMetadataAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = base64FromBytes(message.key);
+    obj.value = base64FromBytes(message.value);
     return obj;
   },
   fromAminoMsg(object: GenesisMetadataAminoMsg): GenesisMetadata {

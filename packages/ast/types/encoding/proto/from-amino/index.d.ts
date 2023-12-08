@@ -4,6 +4,7 @@ import { ProtoParseContext } from '../../context';
 export interface FromAminoJSONMethod {
     context: ProtoParseContext;
     field: ProtoField;
+    isOneOf: boolean;
     isOptional: boolean;
 }
 export declare const fromAminoJSONMethodFields: (context: ProtoParseContext, name: string, proto: ProtoType) => t.ObjectProperty[];

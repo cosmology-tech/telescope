@@ -15,7 +15,7 @@ export interface QueryEvidenceRequestProtoMsg {
 /** QueryEvidenceRequest is the request type for the Query/Evidence RPC method. */
 export interface QueryEvidenceRequestAmino {
   /** evidence_hash defines the hash of the requested evidence. */
-  evidence_hash: Uint8Array;
+  evidence_hash: string;
 }
 export interface QueryEvidenceRequestAminoMsg {
   type: "cosmos-sdk/QueryEvidenceRequest";
@@ -172,12 +172,12 @@ export const QueryEvidenceRequest = {
   },
   fromAmino(object: QueryEvidenceRequestAmino): QueryEvidenceRequest {
     return {
-      evidenceHash: object.evidence_hash
+      evidence_hash: isSet(object.evidence_hash) ? bytesFromBase64(object.evidence_hash) : new Uint8Array()
     };
   },
   toAmino(message: QueryEvidenceRequest): QueryEvidenceRequestAmino {
     const obj: any = {};
-    obj.evidence_hash = message.evidenceHash;
+    obj.evidence_hash = base64FromBytes(message.evidenceHash);
     return obj;
   },
   fromAminoMsg(object: QueryEvidenceRequestAminoMsg): QueryEvidenceRequest {

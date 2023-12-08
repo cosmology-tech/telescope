@@ -217,7 +217,7 @@ export const ModuleSchemaDescriptor = {
   fromAmino(object: ModuleSchemaDescriptorAmino): ModuleSchemaDescriptor {
     return {
       schemaFile: Array.isArray(object?.schema_file) ? object.schema_file.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromAmino(e)) : [],
-      prefix: object.prefix
+      prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array()
     };
   },
   toAmino(message: ModuleSchemaDescriptor): ModuleSchemaDescriptorAmino {
@@ -227,7 +227,7 @@ export const ModuleSchemaDescriptor = {
     } else {
       obj.schema_file = [];
     }
-    obj.prefix = message.prefix;
+    obj.prefix = base64FromBytes(message.prefix);
     return obj;
   },
   fromAminoMsg(object: ModuleSchemaDescriptorAminoMsg): ModuleSchemaDescriptor {

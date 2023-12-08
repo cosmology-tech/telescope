@@ -293,7 +293,7 @@ export interface BytesValueProtoMsg {
  */
 export interface BytesValueAmino {
   /** The bytes value. */
-  value: Uint8Array;
+  value: string;
 }
 export interface BytesValueAminoMsg {
   type: "/google.protobuf.BytesValue";
@@ -1016,12 +1016,12 @@ export const BytesValue = {
   },
   fromAmino(object: BytesValueAmino): BytesValue {
     return {
-      value: object.value
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
     };
   },
   toAmino(message: BytesValue): BytesValueAmino {
     const obj: any = {};
-    obj.value = message.value;
+    obj.value = base64FromBytes(message.value);
     return obj;
   },
   fromAminoMsg(object: BytesValueAminoMsg): BytesValue {

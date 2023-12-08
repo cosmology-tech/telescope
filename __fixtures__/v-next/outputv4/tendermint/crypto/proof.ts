@@ -196,17 +196,17 @@ export const Proof = {
     return {
       total: BigInt(object.total),
       index: BigInt(object.index),
-      leafHash: object.leaf_hash,
-      aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => e) : []
+      leaf_hash: isSet(object.leaf_hash) ? bytesFromBase64(object.leaf_hash) : new Uint8Array(),
+      aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => bytesFromBase64(e)) : []
     };
   },
   toAmino(message: Proof): ProofAmino {
     const obj: any = {};
     obj.total = message.total ? message.total.toString() : undefined;
     obj.index = message.index ? message.index.toString() : undefined;
-    obj.leaf_hash = message.leafHash;
+    obj.leaf_hash = base64FromBytes(message.leafHash);
     if (message.aunts) {
-      obj.aunts = message.aunts.map(e => e);
+      obj.aunts = message.aunts.map(e => base64FromBytes(e));
     } else {
       obj.aunts = [];
     }
@@ -305,13 +305,13 @@ export const ValueOp = {
   },
   fromAmino(object: ValueOpAmino): ValueOp {
     return {
-      key: object.key,
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
       proof: object?.proof ? Proof.fromAmino(object.proof) : undefined
     };
   },
   toAmino(message: ValueOp): ValueOpAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = base64FromBytes(message.key);
     obj.proof = message.proof ? Proof.toAmino(message.proof) : undefined;
     return obj;
   },
@@ -536,15 +536,15 @@ export const ProofOp = {
   fromAmino(object: ProofOpAmino): ProofOp {
     return {
       type: object.type,
-      key: object.key,
-      data: object.data
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: ProofOp): ProofOpAmino {
     const obj: any = {};
     obj.type = message.type;
-    obj.key = message.key;
-    obj.data = message.data;
+    obj.key = base64FromBytes(message.key);
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromAminoMsg(object: ProofOpAminoMsg): ProofOp {

@@ -22,6 +22,7 @@ export interface MsgInstantiateContract2 {
    */
   fixMsg: boolean;
   dontOmitemptyFixMsg: boolean;
+  aListOfBytes: Uint8Array[];
 }
 export interface MsgInstantiateContract2ProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.MsgInstantiateContract2";
@@ -39,13 +40,14 @@ export interface MsgInstantiateContract2Amino {
   /** Funds coins that are transferred to the contract on instantiation */
   funds: CoinAmino[];
   /** Salt is an arbitrary value provided by the sender. Size can be 1 to 64. */
-  salt: Uint8Array;
+  salt: string;
   /**
    * FixMsg include the msg value into the hash for the predictable address.
    * Default is false
    */
   fix_msg: boolean;
   dont_omitempty_fix_msg: boolean;
+  a_list_of_bytes: string[];
 }
 export interface MsgInstantiateContract2AminoMsg {
   type: "wasm/MsgInstantiateContract2";
@@ -62,6 +64,7 @@ export interface MsgInstantiateContract2SDKType {
   salt: Uint8Array;
   fix_msg: boolean;
   dont_omitempty_fix_msg: boolean;
+  a_list_of_bytes: Uint8Array[];
 }
 function createBaseMsgInstantiateContract2(): MsgInstantiateContract2 {
   return {
@@ -70,19 +73,20 @@ function createBaseMsgInstantiateContract2(): MsgInstantiateContract2 {
     funds: [],
     salt: new Uint8Array(),
     fixMsg: false,
-    dontOmitemptyFixMsg: false
+    dontOmitemptyFixMsg: false,
+    aListOfBytes: []
   };
 }
 export const MsgInstantiateContract2 = {
   typeUrl: "/cosmos.bank.v1beta1.MsgInstantiateContract2",
   is(o: any): o is MsgInstantiateContract2 {
-    return o && (o.$typeUrl === MsgInstantiateContract2.typeUrl || typeof o.codeId === "bigint" && typeof o.label === "string" && Array.isArray(o.funds) && (!o.funds.length || Coin.is(o.funds[0])) && (o.salt instanceof Uint8Array || typeof o.salt === "string") && typeof o.fixMsg === "boolean" && typeof o.dontOmitemptyFixMsg === "boolean");
+    return o && (o.$typeUrl === MsgInstantiateContract2.typeUrl || typeof o.codeId === "bigint" && typeof o.label === "string" && Array.isArray(o.funds) && (!o.funds.length || Coin.is(o.funds[0])) && (o.salt instanceof Uint8Array || typeof o.salt === "string") && typeof o.fixMsg === "boolean" && typeof o.dontOmitemptyFixMsg === "boolean" && Array.isArray(o.aListOfBytes) && (!o.aListOfBytes.length || o.aListOfBytes[0] instanceof Uint8Array || typeof o.aListOfBytes[0] === "string"));
   },
   isSDK(o: any): o is MsgInstantiateContract2SDKType {
-    return o && (o.$typeUrl === MsgInstantiateContract2.typeUrl || typeof o.code_id === "bigint" && typeof o.label === "string" && Array.isArray(o.funds) && (!o.funds.length || Coin.isSDK(o.funds[0])) && (o.salt instanceof Uint8Array || typeof o.salt === "string") && typeof o.fix_msg === "boolean" && typeof o.dont_omitempty_fix_msg === "boolean");
+    return o && (o.$typeUrl === MsgInstantiateContract2.typeUrl || typeof o.code_id === "bigint" && typeof o.label === "string" && Array.isArray(o.funds) && (!o.funds.length || Coin.isSDK(o.funds[0])) && (o.salt instanceof Uint8Array || typeof o.salt === "string") && typeof o.fix_msg === "boolean" && typeof o.dont_omitempty_fix_msg === "boolean" && Array.isArray(o.a_list_of_bytes) && (!o.a_list_of_bytes.length || o.a_list_of_bytes[0] instanceof Uint8Array || typeof o.a_list_of_bytes[0] === "string"));
   },
   isAmino(o: any): o is MsgInstantiateContract2Amino {
-    return o && (o.$typeUrl === MsgInstantiateContract2.typeUrl || typeof o.code_id === "bigint" && typeof o.label === "string" && Array.isArray(o.funds) && (!o.funds.length || Coin.isAmino(o.funds[0])) && (o.salt instanceof Uint8Array || typeof o.salt === "string") && typeof o.fix_msg === "boolean" && typeof o.dont_omitempty_fix_msg === "boolean");
+    return o && (o.$typeUrl === MsgInstantiateContract2.typeUrl || typeof o.code_id === "bigint" && typeof o.label === "string" && Array.isArray(o.funds) && (!o.funds.length || Coin.isAmino(o.funds[0])) && (o.salt instanceof Uint8Array || typeof o.salt === "string") && typeof o.fix_msg === "boolean" && typeof o.dont_omitempty_fix_msg === "boolean" && Array.isArray(o.a_list_of_bytes) && (!o.a_list_of_bytes.length || o.a_list_of_bytes[0] instanceof Uint8Array || typeof o.a_list_of_bytes[0] === "string"));
   },
   encode(message: MsgInstantiateContract2, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.codeId !== BigInt(0)) {
@@ -102,6 +106,9 @@ export const MsgInstantiateContract2 = {
     }
     if (message.dontOmitemptyFixMsg === true) {
       writer.uint32(48).bool(message.dontOmitemptyFixMsg);
+    }
+    for (const v of message.aListOfBytes) {
+      writer.uint32(58).bytes(v!);
     }
     return writer;
   },
@@ -130,6 +137,9 @@ export const MsgInstantiateContract2 = {
         case 6:
           message.dontOmitemptyFixMsg = reader.bool();
           break;
+        case 7:
+          message.aListOfBytes.push(reader.bytes());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -145,6 +155,7 @@ export const MsgInstantiateContract2 = {
     if (isSet(object.salt)) obj.salt = bytesFromBase64(object.salt);
     if (isSet(object.fixMsg)) obj.fixMsg = Boolean(object.fixMsg);
     if (isSet(object.dontOmitemptyFixMsg)) obj.dontOmitemptyFixMsg = Boolean(object.dontOmitemptyFixMsg);
+    if (Array.isArray(object?.aListOfBytes)) obj.aListOfBytes = object.aListOfBytes.map((e: any) => bytesFromBase64(e));
     return obj;
   },
   toJSON(message: MsgInstantiateContract2): unknown {
@@ -159,6 +170,11 @@ export const MsgInstantiateContract2 = {
     message.salt !== undefined && (obj.salt = base64FromBytes(message.salt !== undefined ? message.salt : new Uint8Array()));
     message.fixMsg !== undefined && (obj.fixMsg = message.fixMsg);
     message.dontOmitemptyFixMsg !== undefined && (obj.dontOmitemptyFixMsg = message.dontOmitemptyFixMsg);
+    if (message.aListOfBytes) {
+      obj.aListOfBytes = message.aListOfBytes.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
+    } else {
+      obj.aListOfBytes = [];
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<MsgInstantiateContract2>): MsgInstantiateContract2 {
@@ -171,6 +187,7 @@ export const MsgInstantiateContract2 = {
     message.salt = object.salt ?? new Uint8Array();
     message.fixMsg = object.fixMsg ?? false;
     message.dontOmitemptyFixMsg = object.dontOmitemptyFixMsg ?? false;
+    message.aListOfBytes = object.aListOfBytes?.map(e => e) || [];
     return message;
   },
   fromSDK(object: MsgInstantiateContract2SDKType): MsgInstantiateContract2 {
@@ -180,7 +197,8 @@ export const MsgInstantiateContract2 = {
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDK(e)) : [],
       salt: object?.salt,
       fixMsg: object?.fix_msg,
-      dontOmitemptyFixMsg: object?.dont_omitempty_fix_msg
+      dontOmitemptyFixMsg: object?.dont_omitempty_fix_msg,
+      aListOfBytes: Array.isArray(object?.a_list_of_bytes) ? object.a_list_of_bytes.map((e: any) => e) : []
     };
   },
   fromSDKJSON(object: any): MsgInstantiateContract2SDKType {
@@ -190,7 +208,8 @@ export const MsgInstantiateContract2 = {
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromSDKJSON(e)) : [],
       salt: isSet(object.salt) ? bytesFromBase64(object.salt) : new Uint8Array(),
       fix_msg: isSet(object.fix_msg) ? Boolean(object.fix_msg) : false,
-      dont_omitempty_fix_msg: isSet(object.dont_omitempty_fix_msg) ? Boolean(object.dont_omitempty_fix_msg) : false
+      dont_omitempty_fix_msg: isSet(object.dont_omitempty_fix_msg) ? Boolean(object.dont_omitempty_fix_msg) : false,
+      a_list_of_bytes: Array.isArray(object?.a_list_of_bytes) ? object.a_list_of_bytes.map((e: any) => bytesFromBase64(e)) : []
     };
   },
   toSDK(message: MsgInstantiateContract2): MsgInstantiateContract2SDKType {
@@ -205,6 +224,11 @@ export const MsgInstantiateContract2 = {
     obj.salt = message.salt;
     obj.fix_msg = message.fixMsg;
     obj.dont_omitempty_fix_msg = message.dontOmitemptyFixMsg;
+    if (message.aListOfBytes) {
+      obj.a_list_of_bytes = message.aListOfBytes.map(e => e);
+    } else {
+      obj.a_list_of_bytes = [];
+    }
     return obj;
   },
   fromAmino(object: MsgInstantiateContract2Amino): MsgInstantiateContract2 {
@@ -212,9 +236,10 @@ export const MsgInstantiateContract2 = {
       codeId: BigInt(object.code_id),
       label: object.label,
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromAmino(e)) : [],
-      salt: object.salt,
+      salt: isSet(object.salt) ? bytesFromBase64(object.salt) : new Uint8Array(),
       fixMsg: object.fix_msg,
-      dontOmitemptyFixMsg: object.dont_omitempty_fix_msg
+      dontOmitemptyFixMsg: object.dont_omitempty_fix_msg,
+      aListOfBytes: Array.isArray(object?.a_list_of_bytes) ? object.a_list_of_bytes.map((e: any) => bytesFromBase64(e)) : []
     };
   },
   toAmino(message: MsgInstantiateContract2): MsgInstantiateContract2Amino {
@@ -226,9 +251,14 @@ export const MsgInstantiateContract2 = {
     } else {
       obj.funds = [];
     }
-    obj.salt = message.salt;
+    obj.salt = base64FromBytes(message.salt);
     obj.fix_msg = message.fixMsg;
     obj.dont_omitempty_fix_msg = message.dontOmitemptyFixMsg;
+    if (message.aListOfBytes) {
+      obj.a_list_of_bytes = message.aListOfBytes.map(e => base64FromBytes(e));
+    } else {
+      obj.a_list_of_bytes = [];
+    }
     return obj;
   },
   fromAminoMsg(object: MsgInstantiateContract2AminoMsg): MsgInstantiateContract2 {

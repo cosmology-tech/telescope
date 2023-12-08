@@ -1728,7 +1728,7 @@ export interface UninterpretedOptionAmino {
   positive_int_value: string;
   negative_int_value: string;
   double_value: number;
-  string_value: Uint8Array;
+  string_value: string;
   aggregate_value: string;
 }
 export interface UninterpretedOptionAminoMsg {
@@ -5592,7 +5592,7 @@ export const UninterpretedOption = {
       positiveIntValue: BigInt(object.positive_int_value),
       negativeIntValue: BigInt(object.negative_int_value),
       doubleValue: object.double_value,
-      stringValue: object.string_value,
+      string_value: isSet(object.string_value) ? bytesFromBase64(object.string_value) : new Uint8Array(),
       aggregateValue: object.aggregate_value
     };
   },
@@ -5607,7 +5607,7 @@ export const UninterpretedOption = {
     obj.positive_int_value = message.positiveIntValue ? message.positiveIntValue.toString() : undefined;
     obj.negative_int_value = message.negativeIntValue ? message.negativeIntValue.toString() : undefined;
     obj.double_value = message.doubleValue;
-    obj.string_value = message.stringValue;
+    obj.string_value = base64FromBytes(message.stringValue);
     obj.aggregate_value = message.aggregateValue;
     return obj;
   },

@@ -599,13 +599,13 @@ export const SignatureDescriptor_Data_Single = {
   fromAmino(object: SignatureDescriptor_Data_SingleAmino): SignatureDescriptor_Data_Single {
     return {
       mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
-      signature: object.signature
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
     };
   },
   toAmino(message: SignatureDescriptor_Data_Single): SignatureDescriptor_Data_SingleAmino {
     const obj: any = {};
     obj.mode = message.mode;
-    obj.signature = message.signature;
+    obj.signature = base64FromBytes(message.signature);
     return obj;
   },
   fromAminoMsg(object: SignatureDescriptor_Data_SingleAminoMsg): SignatureDescriptor_Data_Single {

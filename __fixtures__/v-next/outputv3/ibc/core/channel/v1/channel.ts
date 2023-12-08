@@ -298,7 +298,7 @@ export interface PacketAmino {
   /** identifies the channel end on the receiving chain. */
   destination_channel: string;
   /** actual opaque bytes transferred directly to the application module */
-  data: Uint8Array;
+  data: string;
   /** block height after which the packet times out */
   timeout_height?: HeightAmino;
   /** block timestamp (in nanoseconds) after which the packet times out */
@@ -349,7 +349,7 @@ export interface PacketStateAmino {
   /** packet sequence. */
   sequence: string;
   /** embedded data that represents packet state. */
-  data: Uint8Array;
+  data: string;
 }
 /**
  * PacketState defines the generic type necessary to retrieve and store
@@ -390,7 +390,7 @@ export interface AcknowledgementProtoMsg {
  * https://github.com/cosmos/ibc/tree/master/spec/core/ics-004-channel-and-packet-semantics#acknowledgement-envelope
  */
 export interface AcknowledgementAmino {
-  result?: Uint8Array;
+  result?: string;
   error?: string;
 }
 /**
@@ -978,7 +978,7 @@ export const Packet = {
       sourceChannel: object.source_channel,
       destinationPort: object.destination_port,
       destinationChannel: object.destination_channel,
-      data: object.data,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       timeoutHeight: object?.timeout_height ? Height.fromAmino(object.timeout_height) : Height.fromPartial({}),
       timeoutTimestamp: BigInt(object.timeout_timestamp)
     };
@@ -990,7 +990,7 @@ export const Packet = {
     obj.source_channel = message.sourceChannel;
     obj.destination_port = message.destinationPort;
     obj.destination_channel = message.destinationChannel;
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight, useInterfaces) : {};
     obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
     return obj;
@@ -1107,7 +1107,7 @@ export const PacketState = {
       portId: object.port_id,
       channelId: object.channel_id,
       sequence: BigInt(object.sequence),
-      data: object.data
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: PacketState, useInterfaces: boolean = true): PacketStateAmino {
@@ -1115,7 +1115,7 @@ export const PacketState = {
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromProtoMsg(message: PacketStateProtoMsg, useInterfaces: boolean = true): PacketState {
@@ -1201,13 +1201,13 @@ export const Acknowledgement = {
   },
   fromAmino(object: AcknowledgementAmino): Acknowledgement {
     return {
-      result: object?.result,
+      result: isSet(object.result) ? bytesFromBase64(object.result) : undefined,
       error: object?.error
     };
   },
   toAmino(message: Acknowledgement, useInterfaces: boolean = true): AcknowledgementAmino {
     const obj: any = {};
-    obj.result = message.result;
+    message.result !== undefined && (obj.result = base64FromBytes(message.result));
     obj.error = message.error;
     return obj;
   },

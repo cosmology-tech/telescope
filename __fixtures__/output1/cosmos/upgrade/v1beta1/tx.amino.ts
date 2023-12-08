@@ -14,7 +14,7 @@ export interface MsgSoftwareUpgradeAminoType extends AminoMsg {
       info: string;
       upgraded_client_state: {
         type_url: string;
-        value: Uint8Array;
+        value: string;
       };
     };
   };

@@ -209,14 +209,14 @@ export const HttpBody = {
   fromAmino(object: HttpBodyAmino): HttpBody {
     return {
       contentType: object.content_type,
-      data: object.data,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
     };
   },
   toAmino(message: HttpBody): HttpBodyAmino {
     const obj: any = {};
     obj.content_type = message.contentType;
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     if (message.extensions) {
       obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
     } else {

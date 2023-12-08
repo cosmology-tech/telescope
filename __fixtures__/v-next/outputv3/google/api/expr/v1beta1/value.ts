@@ -59,7 +59,7 @@ export interface ValueAmino {
   /** UTF-8 string value. */
   string_value?: string;
   /** Byte string value. */
-  bytes_value?: Uint8Array;
+  bytes_value?: string;
   /** An enum value. */
   enum_value?: EnumValueAmino;
   /** The proto message backing an object value. */
@@ -434,7 +434,7 @@ export const Value = {
       uint64Value: object?.uint64_value ? BigInt(object.uint64_value) : undefined,
       doubleValue: object?.double_value,
       stringValue: object?.string_value,
-      bytesValue: object?.bytes_value,
+      bytes_value: isSet(object.bytes_value) ? bytesFromBase64(object.bytes_value) : undefined,
       enumValue: object?.enum_value ? EnumValue.fromAmino(object.enum_value) : undefined,
       objectValue: object?.object_value ? Any.fromAmino(object.object_value) : undefined,
       mapValue: object?.map_value ? MapValue.fromAmino(object.map_value) : undefined,
@@ -450,7 +450,7 @@ export const Value = {
     obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
     obj.double_value = message.doubleValue;
     obj.string_value = message.stringValue;
-    obj.bytes_value = message.bytesValue;
+    message.bytesValue !== undefined && (obj.bytes_value = base64FromBytes(message.bytesValue));
     obj.enum_value = message.enumValue ? EnumValue.toAmino(message.enumValue, useInterfaces) : undefined;
     obj.object_value = message.objectValue ? Any.toAmino(message.objectValue, useInterfaces) : undefined;
     obj.map_value = message.mapValue ? MapValue.toAmino(message.mapValue, useInterfaces) : undefined;

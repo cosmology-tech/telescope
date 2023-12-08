@@ -19,7 +19,7 @@ export interface MultiSignatureProtoMsg {
  * signed and with which modes.
  */
 export interface MultiSignatureAmino {
-  signatures: Uint8Array[];
+  signatures: string[];
 }
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
@@ -51,7 +51,7 @@ export interface CompactBitArrayProtoMsg {
  */
 export interface CompactBitArrayAmino {
   extra_bits_stored: number;
-  elems: Uint8Array;
+  elems: string;
 }
 /**
  * CompactBitArray is an implementation of a space efficient bit array.
@@ -129,13 +129,13 @@ export const MultiSignature = {
   },
   fromAmino(object: MultiSignatureAmino): MultiSignature {
     return {
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => bytesFromBase64(e)) : []
     };
   },
   toAmino(message: MultiSignature, useInterfaces: boolean = true): MultiSignatureAmino {
     const obj: any = {};
     if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e);
+      obj.signatures = message.signatures.map(e => base64FromBytes(e));
     } else {
       obj.signatures = [];
     }
@@ -225,13 +225,13 @@ export const CompactBitArray = {
   fromAmino(object: CompactBitArrayAmino): CompactBitArray {
     return {
       extraBitsStored: object.extra_bits_stored,
-      elems: object.elems
+      elems: isSet(object.elems) ? bytesFromBase64(object.elems) : new Uint8Array()
     };
   },
   toAmino(message: CompactBitArray, useInterfaces: boolean = true): CompactBitArrayAmino {
     const obj: any = {};
     obj.extra_bits_stored = message.extraBitsStored;
-    obj.elems = message.elems;
+    obj.elems = base64FromBytes(message.elems);
     return obj;
   },
   fromProtoMsg(message: CompactBitArrayProtoMsg, useInterfaces: boolean = true): CompactBitArray {

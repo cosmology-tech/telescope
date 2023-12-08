@@ -61,7 +61,7 @@ export interface PageRequestAmino {
    * querying the next page most efficiently. Only one of offset or key
    * should be set.
    */
-  key: Uint8Array;
+  key: string;
   /**
    * offset is a numeric offset that can be used when key is unavailable.
    * It is less efficient than using key. Only one of offset or key should
@@ -148,7 +148,7 @@ export interface PageResponseAmino {
    * query the next page most efficiently. It will be empty if
    * there are no more results.
    */
-  next_key: Uint8Array;
+  next_key: string;
   /**
    * total is total number of results available if PageRequest.count_total
    * was set, its value is undefined otherwise
@@ -282,7 +282,7 @@ export const PageRequest = {
   },
   fromAmino(object: PageRequestAmino): PageRequest {
     return {
-      key: object.key,
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
       offset: BigInt(object.offset),
       limit: BigInt(object.limit),
       countTotal: object.count_total,
@@ -291,7 +291,7 @@ export const PageRequest = {
   },
   toAmino(message: PageRequest): PageRequestAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = base64FromBytes(message.key);
     obj.offset = message.offset ? message.offset.toString() : undefined;
     obj.limit = message.limit ? message.limit.toString() : undefined;
     obj.count_total = message.countTotal;
@@ -392,13 +392,13 @@ export const PageResponse = {
   },
   fromAmino(object: PageResponseAmino): PageResponse {
     return {
-      nextKey: object.next_key,
+      next_key: isSet(object.next_key) ? bytesFromBase64(object.next_key) : new Uint8Array(),
       total: BigInt(object.total)
     };
   },
   toAmino(message: PageResponse): PageResponseAmino {
     const obj: any = {};
-    obj.next_key = message.nextKey;
+    obj.next_key = base64FromBytes(message.nextKey);
     obj.total = message.total ? message.total.toString() : undefined;
     return obj;
   },

@@ -194,7 +194,7 @@ export interface SignatureDescriptor_Data_SingleAmino {
   /** mode is the signing mode of the single signer */
   mode: SignMode;
   /** signature is the raw signature bytes */
-  signature: Uint8Array;
+  signature: string;
 }
 /** Single is the signature data for a single signer */
 export interface SignatureDescriptor_Data_SingleSDKType {
@@ -596,13 +596,13 @@ export const SignatureDescriptor_Data_Single = {
   fromAmino(object: SignatureDescriptor_Data_SingleAmino): SignatureDescriptor_Data_Single {
     return {
       mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
-      signature: object.signature
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
     };
   },
   toAmino(message: SignatureDescriptor_Data_Single, useInterfaces: boolean = true): SignatureDescriptor_Data_SingleAmino {
     const obj: any = {};
     obj.mode = message.mode;
-    obj.signature = message.signature;
+    obj.signature = base64FromBytes(message.signature);
     return obj;
   },
   fromProtoMsg(message: SignatureDescriptor_Data_SingleProtoMsg, useInterfaces: boolean = true): SignatureDescriptor_Data_Single {

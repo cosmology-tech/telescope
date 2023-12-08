@@ -219,7 +219,7 @@ export const PageRequest = {
   },
   fromAmino(object: PageRequestAmino): PageRequest {
     return {
-      key: object.key,
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
       offset: BigInt(object.offset),
       limit: BigInt(object.limit),
       countTotal: object.count_total,
@@ -228,7 +228,7 @@ export const PageRequest = {
   },
   toAmino(message: PageRequest): PageRequestAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = base64FromBytes(message.key);
     obj.offset = message.offset ? message.offset.toString() : undefined;
     obj.limit = message.limit ? message.limit.toString() : undefined;
     obj.count_total = message.countTotal;
@@ -334,13 +334,13 @@ export const PageResponse = {
   },
   fromAmino(object: PageResponseAmino): PageResponse {
     return {
-      nextKey: object.next_key,
+      next_key: isSet(object.next_key) ? bytesFromBase64(object.next_key) : new Uint8Array(),
       total: BigInt(object.total)
     };
   },
   toAmino(message: PageResponse): PageResponseAmino {
     const obj: any = {};
-    obj.next_key = message.nextKey;
+    obj.next_key = base64FromBytes(message.nextKey);
     obj.total = message.total ? message.total.toString() : undefined;
     return obj;
   },

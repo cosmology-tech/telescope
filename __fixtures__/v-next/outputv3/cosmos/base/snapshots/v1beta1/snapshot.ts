@@ -18,7 +18,7 @@ export interface SnapshotAmino {
   height: string;
   format: number;
   chunks: number;
-  hash: Uint8Array;
+  hash: string;
   metadata?: MetadataAmino;
 }
 /** Snapshot contains Tendermint state sync snapshot info. */
@@ -41,7 +41,7 @@ export interface MetadataProtoMsg {
 /** Metadata contains SDK-specific snapshot metadata. */
 export interface MetadataAmino {
   /** SHA-256 chunk hashes */
-  chunk_hashes: Uint8Array[];
+  chunk_hashes: string[];
 }
 /** Metadata contains SDK-specific snapshot metadata. */
 export interface MetadataSDKType {
@@ -109,8 +109,8 @@ export interface SnapshotIAVLItemProtoMsg {
 }
 /** SnapshotIAVLItem is an exported IAVL node. */
 export interface SnapshotIAVLItemAmino {
-  key: Uint8Array;
-  value: Uint8Array;
+  key: string;
+  value: string;
   /** version is block height */
   version: string;
   /** height is depth of the tree. */
@@ -152,7 +152,7 @@ export interface SnapshotExtensionPayloadProtoMsg {
 }
 /** SnapshotExtensionPayload contains payloads of an external snapshotter. */
 export interface SnapshotExtensionPayloadAmino {
-  payload: Uint8Array;
+  payload: string;
 }
 /** SnapshotExtensionPayload contains payloads of an external snapshotter. */
 export interface SnapshotExtensionPayloadSDKType {
@@ -169,8 +169,8 @@ export interface SnapshotKVItemProtoMsg {
 }
 /** SnapshotKVItem is an exported Key/Value Pair */
 export interface SnapshotKVItemAmino {
-  key: Uint8Array;
-  value: Uint8Array;
+  key: string;
+  value: string;
 }
 /** SnapshotKVItem is an exported Key/Value Pair */
 export interface SnapshotKVItemSDKType {
@@ -187,7 +187,7 @@ export interface SnapshotSchemaProtoMsg {
 }
 /** SnapshotSchema is an exported schema of smt store */
 export interface SnapshotSchemaAmino {
-  keys: Uint8Array[];
+  keys: string[];
 }
 /** SnapshotSchema is an exported schema of smt store */
 export interface SnapshotSchemaSDKType {
@@ -306,7 +306,7 @@ export const Snapshot = {
       height: BigInt(object.height),
       format: object.format,
       chunks: object.chunks,
-      hash: object.hash,
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
       metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : Metadata.fromPartial({})
     };
   },
@@ -315,7 +315,7 @@ export const Snapshot = {
     obj.height = message.height ? message.height.toString() : undefined;
     obj.format = message.format;
     obj.chunks = message.chunks;
-    obj.hash = message.hash;
+    obj.hash = base64FromBytes(message.hash);
     obj.metadata = message.metadata ? Metadata.toAmino(message.metadata, useInterfaces) : undefined;
     return obj;
   },
@@ -398,13 +398,13 @@ export const Metadata = {
   },
   fromAmino(object: MetadataAmino): Metadata {
     return {
-      chunkHashes: Array.isArray(object?.chunk_hashes) ? object.chunk_hashes.map((e: any) => e) : []
+      chunkHashes: Array.isArray(object?.chunk_hashes) ? object.chunk_hashes.map((e: any) => bytesFromBase64(e)) : []
     };
   },
   toAmino(message: Metadata, useInterfaces: boolean = true): MetadataAmino {
     const obj: any = {};
     if (message.chunkHashes) {
-      obj.chunk_hashes = message.chunkHashes.map(e => e);
+      obj.chunk_hashes = message.chunkHashes.map(e => base64FromBytes(e));
     } else {
       obj.chunk_hashes = [];
     }
@@ -759,16 +759,16 @@ export const SnapshotIAVLItem = {
   },
   fromAmino(object: SnapshotIAVLItemAmino): SnapshotIAVLItem {
     return {
-      key: object.key,
-      value: object.value,
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
       version: BigInt(object.version),
       height: object.height
     };
   },
   toAmino(message: SnapshotIAVLItem, useInterfaces: boolean = true): SnapshotIAVLItemAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = base64FromBytes(message.key);
+    obj.value = base64FromBytes(message.value);
     obj.version = message.version ? message.version.toString() : undefined;
     obj.height = message.height;
     return obj;
@@ -937,12 +937,12 @@ export const SnapshotExtensionPayload = {
   },
   fromAmino(object: SnapshotExtensionPayloadAmino): SnapshotExtensionPayload {
     return {
-      payload: object.payload
+      payload: isSet(object.payload) ? bytesFromBase64(object.payload) : new Uint8Array()
     };
   },
   toAmino(message: SnapshotExtensionPayload, useInterfaces: boolean = true): SnapshotExtensionPayloadAmino {
     const obj: any = {};
-    obj.payload = message.payload;
+    obj.payload = base64FromBytes(message.payload);
     return obj;
   },
   fromProtoMsg(message: SnapshotExtensionPayloadProtoMsg, useInterfaces: boolean = true): SnapshotExtensionPayload {
@@ -1028,14 +1028,14 @@ export const SnapshotKVItem = {
   },
   fromAmino(object: SnapshotKVItemAmino): SnapshotKVItem {
     return {
-      key: object.key,
-      value: object.value
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
     };
   },
   toAmino(message: SnapshotKVItem, useInterfaces: boolean = true): SnapshotKVItemAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = base64FromBytes(message.key);
+    obj.value = base64FromBytes(message.value);
     return obj;
   },
   fromProtoMsg(message: SnapshotKVItemProtoMsg, useInterfaces: boolean = true): SnapshotKVItem {
@@ -1117,13 +1117,13 @@ export const SnapshotSchema = {
   },
   fromAmino(object: SnapshotSchemaAmino): SnapshotSchema {
     return {
-      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
+      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => bytesFromBase64(e)) : []
     };
   },
   toAmino(message: SnapshotSchema, useInterfaces: boolean = true): SnapshotSchemaAmino {
     const obj: any = {};
     if (message.keys) {
-      obj.keys = message.keys.map(e => e);
+      obj.keys = message.keys.map(e => base64FromBytes(e));
     } else {
       obj.keys = [];
     }

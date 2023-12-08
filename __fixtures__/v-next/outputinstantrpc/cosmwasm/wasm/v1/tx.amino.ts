@@ -21,7 +21,7 @@ export interface MsgInstantiateContractAminoType extends AminoMsg {
     admin: string;
     code_id: string;
     label: string;
-    msg: Uint8Array;
+    msg: string;
     funds: {
       denom: string;
       amount: string;
@@ -33,7 +33,7 @@ export interface MsgExecuteContractAminoType extends AminoMsg {
   value: {
     sender: string;
     contract: string;
-    msg: Uint8Array;
+    msg: string;
     funds: {
       denom: string;
       amount: string;
@@ -46,7 +46,7 @@ export interface MsgMigrateContractAminoType extends AminoMsg {
     sender: string;
     contract: string;
     code_id: string;
-    msg: Uint8Array;
+    msg: string;
   };
 }
 export interface MsgUpdateAdminAminoType extends AminoMsg {

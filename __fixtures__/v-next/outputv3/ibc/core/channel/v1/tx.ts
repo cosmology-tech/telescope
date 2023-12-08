@@ -78,7 +78,7 @@ export interface MsgChannelOpenTryAmino {
   previous_channel_id: string;
   channel?: ChannelAmino;
   counterparty_version: string;
-  proof_init: Uint8Array;
+  proof_init: string;
   proof_height?: HeightAmino;
   signer: string;
 }
@@ -131,7 +131,7 @@ export interface MsgChannelOpenAckAmino {
   channel_id: string;
   counterparty_channel_id: string;
   counterparty_version: string;
-  proof_try: Uint8Array;
+  proof_try: string;
   proof_height?: HeightAmino;
   signer: string;
 }
@@ -180,7 +180,7 @@ export interface MsgChannelOpenConfirmProtoMsg {
 export interface MsgChannelOpenConfirmAmino {
   port_id: string;
   channel_id: string;
-  proof_ack: Uint8Array;
+  proof_ack: string;
   proof_height?: HeightAmino;
   signer: string;
 }
@@ -277,7 +277,7 @@ export interface MsgChannelCloseConfirmProtoMsg {
 export interface MsgChannelCloseConfirmAmino {
   port_id: string;
   channel_id: string;
-  proof_init: Uint8Array;
+  proof_init: string;
   proof_height?: HeightAmino;
   signer: string;
 }
@@ -325,7 +325,7 @@ export interface MsgRecvPacketProtoMsg {
 /** MsgRecvPacket receives incoming IBC packet */
 export interface MsgRecvPacketAmino {
   packet?: PacketAmino;
-  proof_commitment: Uint8Array;
+  proof_commitment: string;
   proof_height?: HeightAmino;
   signer: string;
 }
@@ -361,7 +361,7 @@ export interface MsgTimeoutProtoMsg {
 /** MsgTimeout receives timed-out packet */
 export interface MsgTimeoutAmino {
   packet?: PacketAmino;
-  proof_unreceived: Uint8Array;
+  proof_unreceived: string;
   proof_height?: HeightAmino;
   next_sequence_recv: string;
   signer: string;
@@ -400,8 +400,8 @@ export interface MsgTimeoutOnCloseProtoMsg {
 /** MsgTimeoutOnClose timed-out packet upon counterparty channel closure. */
 export interface MsgTimeoutOnCloseAmino {
   packet?: PacketAmino;
-  proof_unreceived: Uint8Array;
-  proof_close: Uint8Array;
+  proof_unreceived: string;
+  proof_close: string;
   proof_height?: HeightAmino;
   next_sequence_recv: string;
   signer: string;
@@ -440,8 +440,8 @@ export interface MsgAcknowledgementProtoMsg {
 /** MsgAcknowledgement receives incoming IBC acknowledgement */
 export interface MsgAcknowledgementAmino {
   packet?: PacketAmino;
-  acknowledgement: Uint8Array;
-  proof_acked: Uint8Array;
+  acknowledgement: string;
+  proof_acked: string;
   proof_height?: HeightAmino;
   signer: string;
 }
@@ -772,7 +772,7 @@ export const MsgChannelOpenTry = {
       previousChannelId: object.previous_channel_id,
       channel: object?.channel ? Channel.fromAmino(object.channel) : Channel.fromPartial({}),
       counterpartyVersion: object.counterparty_version,
-      proofInit: object.proof_init,
+      proof_init: isSet(object.proof_init) ? bytesFromBase64(object.proof_init) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({}),
       signer: object.signer
     };
@@ -783,7 +783,7 @@ export const MsgChannelOpenTry = {
     obj.previous_channel_id = message.previousChannelId;
     obj.channel = message.channel ? Channel.toAmino(message.channel, useInterfaces) : undefined;
     obj.counterparty_version = message.counterpartyVersion;
-    obj.proof_init = message.proofInit;
+    obj.proof_init = base64FromBytes(message.proofInit);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;
@@ -999,7 +999,7 @@ export const MsgChannelOpenAck = {
       channelId: object.channel_id,
       counterpartyChannelId: object.counterparty_channel_id,
       counterpartyVersion: object.counterparty_version,
-      proofTry: object.proof_try,
+      proof_try: isSet(object.proof_try) ? bytesFromBase64(object.proof_try) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({}),
       signer: object.signer
     };
@@ -1010,7 +1010,7 @@ export const MsgChannelOpenAck = {
     obj.channel_id = message.channelId;
     obj.counterparty_channel_id = message.counterpartyChannelId;
     obj.counterparty_version = message.counterpartyVersion;
-    obj.proof_try = message.proofTry;
+    obj.proof_try = base64FromBytes(message.proofTry);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;
@@ -1200,7 +1200,7 @@ export const MsgChannelOpenConfirm = {
     return {
       portId: object.port_id,
       channelId: object.channel_id,
-      proofAck: object.proof_ack,
+      proof_ack: isSet(object.proof_ack) ? bytesFromBase64(object.proof_ack) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({}),
       signer: object.signer
     };
@@ -1209,7 +1209,7 @@ export const MsgChannelOpenConfirm = {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
-    obj.proof_ack = message.proofAck;
+    obj.proof_ack = base64FromBytes(message.proofAck);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;
@@ -1568,7 +1568,7 @@ export const MsgChannelCloseConfirm = {
     return {
       portId: object.port_id,
       channelId: object.channel_id,
-      proofInit: object.proof_init,
+      proof_init: isSet(object.proof_init) ? bytesFromBase64(object.proof_init) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({}),
       signer: object.signer
     };
@@ -1577,7 +1577,7 @@ export const MsgChannelCloseConfirm = {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
-    obj.proof_init = message.proofInit;
+    obj.proof_init = base64FromBytes(message.proofInit);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;
@@ -1756,7 +1756,7 @@ export const MsgRecvPacket = {
   fromAmino(object: MsgRecvPacketAmino): MsgRecvPacket {
     return {
       packet: object?.packet ? Packet.fromAmino(object.packet) : Packet.fromPartial({}),
-      proofCommitment: object.proof_commitment,
+      proof_commitment: isSet(object.proof_commitment) ? bytesFromBase64(object.proof_commitment) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({}),
       signer: object.signer
     };
@@ -1764,7 +1764,7 @@ export const MsgRecvPacket = {
   toAmino(message: MsgRecvPacket, useInterfaces: boolean = true): MsgRecvPacketAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet, useInterfaces) : undefined;
-    obj.proof_commitment = message.proofCommitment;
+    obj.proof_commitment = base64FromBytes(message.proofCommitment);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;
@@ -1957,7 +1957,7 @@ export const MsgTimeout = {
   fromAmino(object: MsgTimeoutAmino): MsgTimeout {
     return {
       packet: object?.packet ? Packet.fromAmino(object.packet) : Packet.fromPartial({}),
-      proofUnreceived: object.proof_unreceived,
+      proof_unreceived: isSet(object.proof_unreceived) ? bytesFromBase64(object.proof_unreceived) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({}),
       nextSequenceRecv: BigInt(object.next_sequence_recv),
       signer: object.signer
@@ -1966,7 +1966,7 @@ export const MsgTimeout = {
   toAmino(message: MsgTimeout, useInterfaces: boolean = true): MsgTimeoutAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet, useInterfaces) : undefined;
-    obj.proof_unreceived = message.proofUnreceived;
+    obj.proof_unreceived = base64FromBytes(message.proofUnreceived);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.next_sequence_recv = message.nextSequenceRecv ? message.nextSequenceRecv.toString() : undefined;
     obj.signer = message.signer;
@@ -2172,8 +2172,8 @@ export const MsgTimeoutOnClose = {
   fromAmino(object: MsgTimeoutOnCloseAmino): MsgTimeoutOnClose {
     return {
       packet: object?.packet ? Packet.fromAmino(object.packet) : Packet.fromPartial({}),
-      proofUnreceived: object.proof_unreceived,
-      proofClose: object.proof_close,
+      proof_unreceived: isSet(object.proof_unreceived) ? bytesFromBase64(object.proof_unreceived) : new Uint8Array(),
+      proof_close: isSet(object.proof_close) ? bytesFromBase64(object.proof_close) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({}),
       nextSequenceRecv: BigInt(object.next_sequence_recv),
       signer: object.signer
@@ -2182,8 +2182,8 @@ export const MsgTimeoutOnClose = {
   toAmino(message: MsgTimeoutOnClose, useInterfaces: boolean = true): MsgTimeoutOnCloseAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet, useInterfaces) : undefined;
-    obj.proof_unreceived = message.proofUnreceived;
-    obj.proof_close = message.proofClose;
+    obj.proof_unreceived = base64FromBytes(message.proofUnreceived);
+    obj.proof_close = base64FromBytes(message.proofClose);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.next_sequence_recv = message.nextSequenceRecv ? message.nextSequenceRecv.toString() : undefined;
     obj.signer = message.signer;
@@ -2375,8 +2375,8 @@ export const MsgAcknowledgement = {
   fromAmino(object: MsgAcknowledgementAmino): MsgAcknowledgement {
     return {
       packet: object?.packet ? Packet.fromAmino(object.packet) : Packet.fromPartial({}),
-      acknowledgement: object.acknowledgement,
-      proofAcked: object.proof_acked,
+      acknowledgement: isSet(object.acknowledgement) ? bytesFromBase64(object.acknowledgement) : new Uint8Array(),
+      proof_acked: isSet(object.proof_acked) ? bytesFromBase64(object.proof_acked) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({}),
       signer: object.signer
     };
@@ -2384,8 +2384,8 @@ export const MsgAcknowledgement = {
   toAmino(message: MsgAcknowledgement, useInterfaces: boolean = true): MsgAcknowledgementAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet, useInterfaces) : undefined;
-    obj.acknowledgement = message.acknowledgement;
-    obj.proof_acked = message.proofAcked;
+    obj.acknowledgement = base64FromBytes(message.acknowledgement);
+    obj.proof_acked = base64FromBytes(message.proofAcked);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;

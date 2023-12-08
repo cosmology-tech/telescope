@@ -58,7 +58,7 @@ export interface QueryInflationResponseProtoMsg {
  */
 export interface QueryInflationResponseAmino {
   /** inflation is the current minting inflation value. */
-  inflation: Uint8Array;
+  inflation: string;
 }
 /**
  * QueryInflationResponse is the response type for the Query/Inflation RPC
@@ -104,7 +104,7 @@ export interface QueryAnnualProvisionsResponseProtoMsg {
  */
 export interface QueryAnnualProvisionsResponseAmino {
   /** annual_provisions is the current minting annual provisions value. */
-  annual_provisions: Uint8Array;
+  annual_provisions: string;
 }
 /**
  * QueryAnnualProvisionsResponse is the response type for the
@@ -376,12 +376,12 @@ export const QueryInflationResponse = {
   },
   fromAmino(object: QueryInflationResponseAmino): QueryInflationResponse {
     return {
-      inflation: object.inflation
+      inflation: isSet(object.inflation) ? bytesFromBase64(object.inflation) : new Uint8Array()
     };
   },
   toAmino(message: QueryInflationResponse, useInterfaces: boolean = true): QueryInflationResponseAmino {
     const obj: any = {};
-    obj.inflation = message.inflation;
+    obj.inflation = base64FromBytes(message.inflation);
     return obj;
   },
   fromProtoMsg(message: QueryInflationResponseProtoMsg, useInterfaces: boolean = true): QueryInflationResponse {
@@ -517,12 +517,12 @@ export const QueryAnnualProvisionsResponse = {
   },
   fromAmino(object: QueryAnnualProvisionsResponseAmino): QueryAnnualProvisionsResponse {
     return {
-      annualProvisions: object.annual_provisions
+      annual_provisions: isSet(object.annual_provisions) ? bytesFromBase64(object.annual_provisions) : new Uint8Array()
     };
   },
   toAmino(message: QueryAnnualProvisionsResponse, useInterfaces: boolean = true): QueryAnnualProvisionsResponseAmino {
     const obj: any = {};
-    obj.annual_provisions = message.annualProvisions;
+    obj.annual_provisions = base64FromBytes(message.annualProvisions);
     return obj;
   },
   fromProtoMsg(message: QueryAnnualProvisionsResponseProtoMsg, useInterfaces: boolean = true): QueryAnnualProvisionsResponse {

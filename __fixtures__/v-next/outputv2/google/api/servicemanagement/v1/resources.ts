@@ -468,7 +468,7 @@ export interface ConfigFileAmino {
   /** The file name of the configuration file (full or relative path). */
   file_path: string;
   /** The bytes that constitute the file. */
-  file_contents: Uint8Array;
+  file_contents: string;
   /** The type of configuration file this represents. */
   file_type: ConfigFile_FileType;
 }
@@ -1468,14 +1468,14 @@ export const ConfigFile = {
   fromAmino(object: ConfigFileAmino): ConfigFile {
     return {
       filePath: object.file_path,
-      fileContents: object.file_contents,
+      file_contents: isSet(object.file_contents) ? bytesFromBase64(object.file_contents) : new Uint8Array(),
       fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : -1
     };
   },
   toAmino(message: ConfigFile): ConfigFileAmino {
     const obj: any = {};
     obj.file_path = message.filePath;
-    obj.file_contents = message.fileContents;
+    obj.file_contents = base64FromBytes(message.fileContents);
     obj.file_type = message.fileType;
     return obj;
   },

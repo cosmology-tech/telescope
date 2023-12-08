@@ -133,9 +133,9 @@ export interface MsgUpgradeClientAmino {
    */
   consensus_state?: AnyAmino;
   /** proof that old chain committed to new client */
-  proof_upgrade_client: Uint8Array;
+  proof_upgrade_client: string;
   /** proof that old chain committed to new consensus state */
-  proof_upgrade_consensus_state: Uint8Array;
+  proof_upgrade_consensus_state: string;
   /** signer address */
   signer: string;
 }
@@ -686,8 +686,8 @@ export const MsgUpgradeClient = {
       clientId: object.client_id,
       clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
       consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
-      proofUpgradeClient: object.proof_upgrade_client,
-      proofUpgradeConsensusState: object.proof_upgrade_consensus_state,
+      proof_upgrade_client: isSet(object.proof_upgrade_client) ? bytesFromBase64(object.proof_upgrade_client) : new Uint8Array(),
+      proof_upgrade_consensus_state: isSet(object.proof_upgrade_consensus_state) ? bytesFromBase64(object.proof_upgrade_consensus_state) : new Uint8Array(),
       signer: object.signer
     };
   },
@@ -696,8 +696,8 @@ export const MsgUpgradeClient = {
     obj.client_id = message.clientId;
     obj.client_state = message.clientState ? Any.toAmino(message.clientState, useInterfaces) : undefined;
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState, useInterfaces) : undefined;
-    obj.proof_upgrade_client = message.proofUpgradeClient;
-    obj.proof_upgrade_consensus_state = message.proofUpgradeConsensusState;
+    obj.proof_upgrade_client = base64FromBytes(message.proofUpgradeClient);
+    obj.proof_upgrade_consensus_state = base64FromBytes(message.proofUpgradeConsensusState);
     obj.signer = message.signer;
     return obj;
   },

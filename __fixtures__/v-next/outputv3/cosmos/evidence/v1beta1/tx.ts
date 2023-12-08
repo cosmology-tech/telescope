@@ -45,7 +45,7 @@ export interface MsgSubmitEvidenceResponseProtoMsg {
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponseAmino {
   /** hash defines the hash of the evidence. */
-  hash: Uint8Array;
+  hash: string;
 }
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponseSDKType {
@@ -204,12 +204,12 @@ export const MsgSubmitEvidenceResponse = {
   },
   fromAmino(object: MsgSubmitEvidenceResponseAmino): MsgSubmitEvidenceResponse {
     return {
-      hash: object.hash
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
     };
   },
   toAmino(message: MsgSubmitEvidenceResponse, useInterfaces: boolean = true): MsgSubmitEvidenceResponseAmino {
     const obj: any = {};
-    obj.hash = message.hash;
+    obj.hash = base64FromBytes(message.hash);
     return obj;
   },
   fromProtoMsg(message: MsgSubmitEvidenceResponseProtoMsg, useInterfaces: boolean = true): MsgSubmitEvidenceResponse {

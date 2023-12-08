@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "osmosis.store.v1beta1";
 export interface Node {
   children: Child[];
@@ -27,7 +27,7 @@ export interface ChildProtoMsg {
   value: Uint8Array;
 }
 export interface ChildAmino {
-  index: Uint8Array;
+  index: string;
   accumulation: string;
 }
 export interface ChildAminoMsg {
@@ -171,13 +171,13 @@ export const Child = {
   },
   fromAmino(object: ChildAmino): Child {
     return {
-      index: object.index,
+      index: isSet(object.index) ? bytesFromBase64(object.index) : new Uint8Array(),
       accumulation: object.accumulation
     };
   },
   toAmino(message: Child): ChildAmino {
     const obj: any = {};
-    obj.index = message.index;
+    obj.index = base64FromBytes(message.index);
     obj.accumulation = message.accumulation;
     return obj;
   },

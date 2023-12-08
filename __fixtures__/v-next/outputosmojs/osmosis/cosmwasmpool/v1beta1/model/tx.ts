@@ -118,14 +118,14 @@ export const MsgCreateCosmWasmPool = {
   fromAmino(object: MsgCreateCosmWasmPoolAmino): MsgCreateCosmWasmPool {
     return {
       codeId: BigInt(object.code_id),
-      instantiateMsg: object.instantiate_msg,
+      instantiate_msg: isSet(object.instantiate_msg) ? bytesFromBase64(object.instantiate_msg) : new Uint8Array(),
       sender: object.sender
     };
   },
   toAmino(message: MsgCreateCosmWasmPool): MsgCreateCosmWasmPoolAmino {
     const obj: any = {};
     obj.code_id = message.codeId ? message.codeId.toString() : undefined;
-    obj.instantiate_msg = message.instantiateMsg;
+    obj.instantiate_msg = base64FromBytes(message.instantiateMsg);
     obj.sender = message.sender;
     return obj;
   },

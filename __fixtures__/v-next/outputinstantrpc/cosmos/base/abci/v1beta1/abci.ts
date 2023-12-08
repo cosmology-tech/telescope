@@ -1174,7 +1174,7 @@ export const Result = {
   },
   fromAmino(object: ResultAmino): Result {
     return {
-      data: object.data,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       log: object.log,
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromAmino(e)) : [],
       msgResponses: Array.isArray(object?.msg_responses) ? object.msg_responses.map((e: any) => Any.fromAmino(e)) : []
@@ -1182,7 +1182,7 @@ export const Result = {
   },
   toAmino(message: Result): ResultAmino {
     const obj: any = {};
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     obj.log = message.log;
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toAmino(e) : undefined);
@@ -1405,13 +1405,13 @@ export const MsgData = {
   fromAmino(object: MsgDataAmino): MsgData {
     return {
       msgType: object.msg_type,
-      data: object.data
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: MsgData): MsgDataAmino {
     const obj: any = {};
     obj.msg_type = message.msgType;
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromAminoMsg(object: MsgDataAminoMsg): MsgData {

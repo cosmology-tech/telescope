@@ -13,7 +13,7 @@ export interface MsgConnectionOpenInitAminoType extends AminoMsg {
       client_id: string;
       connection_id: string;
       prefix: {
-        key_prefix: Uint8Array;
+        key_prefix: string;
       };
     };
     version: {
@@ -31,13 +31,13 @@ export interface MsgConnectionOpenTryAminoType extends AminoMsg {
     previous_connection_id: string;
     client_state: {
       type_url: string;
-      value: Uint8Array;
+      value: string;
     };
     counterparty: {
       client_id: string;
       connection_id: string;
       prefix: {
-        key_prefix: Uint8Array;
+        key_prefix: string;
       };
     };
     delay_period: string;
@@ -46,9 +46,9 @@ export interface MsgConnectionOpenTryAminoType extends AminoMsg {
       features: string[];
     }[];
     proof_height: AminoHeight;
-    proof_init: Uint8Array;
-    proof_client: Uint8Array;
-    proof_consensus: Uint8Array;
+    proof_init: string;
+    proof_client: string;
+    proof_consensus: string;
     consensus_height: AminoHeight;
     signer: string;
   };
@@ -64,12 +64,12 @@ export interface MsgConnectionOpenAckAminoType extends AminoMsg {
     };
     client_state: {
       type_url: string;
-      value: Uint8Array;
+      value: string;
     };
     proof_height: AminoHeight;
-    proof_try: Uint8Array;
-    proof_client: Uint8Array;
-    proof_consensus: Uint8Array;
+    proof_try: string;
+    proof_client: string;
+    proof_consensus: string;
     consensus_height: AminoHeight;
     signer: string;
   };
@@ -78,7 +78,7 @@ export interface MsgConnectionOpenConfirmAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgConnectionOpenConfirm";
   value: {
     connection_id: string;
-    proof_ack: Uint8Array;
+    proof_ack: string;
     proof_height: AminoHeight;
     signer: string;
   };

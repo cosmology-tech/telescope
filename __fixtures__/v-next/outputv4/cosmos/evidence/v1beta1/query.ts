@@ -132,12 +132,12 @@ export const QueryEvidenceRequest = {
   },
   fromAmino(object: QueryEvidenceRequestAmino): QueryEvidenceRequest {
     return {
-      evidenceHash: object.evidence_hash
+      evidence_hash: isSet(object.evidence_hash) ? bytesFromBase64(object.evidence_hash) : new Uint8Array()
     };
   },
   toAmino(message: QueryEvidenceRequest): QueryEvidenceRequestAmino {
     const obj: any = {};
-    obj.evidence_hash = message.evidenceHash;
+    obj.evidence_hash = base64FromBytes(message.evidenceHash);
     return obj;
   },
   fromAminoMsg(object: QueryEvidenceRequestAminoMsg): QueryEvidenceRequest {

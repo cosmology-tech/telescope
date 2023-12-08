@@ -39,7 +39,7 @@ export interface TxAmino {
    * AuthInfo's signer_infos to allow connecting signature meta information like
    * public key and signing mode by position.
    */
-  signatures: Uint8Array[];
+  signatures: string[];
 }
 /** Tx is the standard type used for broadcasting transactions. */
 export interface TxSDKType {
@@ -88,18 +88,18 @@ export interface TxRawAmino {
    * body_bytes is a protobuf serialization of a TxBody that matches the
    * representation in SignDoc.
    */
-  body_bytes: Uint8Array;
+  body_bytes: string;
   /**
    * auth_info_bytes is a protobuf serialization of an AuthInfo that matches the
    * representation in SignDoc.
    */
-  auth_info_bytes: Uint8Array;
+  auth_info_bytes: string;
   /**
    * signatures is a list of signatures that matches the length and order of
    * AuthInfo's signer_infos to allow connecting signature meta information like
    * public key and signing mode by position.
    */
-  signatures: Uint8Array[];
+  signatures: string[];
 }
 /**
  * TxRaw is a variant of Tx that pins the signer's exact binary representation
@@ -144,12 +144,12 @@ export interface SignDocAmino {
    * body_bytes is protobuf serialization of a TxBody that matches the
    * representation in TxRaw.
    */
-  body_bytes: Uint8Array;
+  body_bytes: string;
   /**
    * auth_info_bytes is a protobuf serialization of an AuthInfo that matches the
    * representation in TxRaw.
    */
-  auth_info_bytes: Uint8Array;
+  auth_info_bytes: string;
   /**
    * chain_id is the unique identifier of the chain this transaction targets.
    * It prevents signed transactions from being used on another chain by an
@@ -211,7 +211,7 @@ export interface SignDocDirectAuxAmino {
    * body_bytes is protobuf serialization of a TxBody that matches the
    * representation in TxRaw.
    */
-  body_bytes: Uint8Array;
+  body_bytes: string;
   /** public_key is the public key of the signing account. */
   public_key?: AnyAmino;
   /**
@@ -690,7 +690,7 @@ export interface AuxSignerDataAmino {
   /** mode is the signing mode of the single signer */
   mode: SignMode;
   /** sig is the signature of the sign doc. */
-  sig: Uint8Array;
+  sig: string;
 }
 /**
  * AuxSignerData is the intermediary format that an auxiliary signer (e.g. a
@@ -802,7 +802,7 @@ export const Tx = {
     return {
       body: object?.body ? TxBody.fromAmino(object.body) : undefined,
       authInfo: object?.auth_info ? AuthInfo.fromAmino(object.auth_info) : undefined,
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => bytesFromBase64(e)) : []
     };
   },
   toAmino(message: Tx, useInterfaces: boolean = true): TxAmino {
@@ -810,7 +810,7 @@ export const Tx = {
     obj.body = message.body ? TxBody.toAmino(message.body, useInterfaces) : undefined;
     obj.auth_info = message.authInfo ? AuthInfo.toAmino(message.authInfo, useInterfaces) : undefined;
     if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e);
+      obj.signatures = message.signatures.map(e => base64FromBytes(e));
     } else {
       obj.signatures = [];
     }
@@ -919,17 +919,17 @@ export const TxRaw = {
   },
   fromAmino(object: TxRawAmino): TxRaw {
     return {
-      bodyBytes: object.body_bytes,
-      authInfoBytes: object.auth_info_bytes,
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
+      body_bytes: isSet(object.body_bytes) ? bytesFromBase64(object.body_bytes) : new Uint8Array(),
+      auth_info_bytes: isSet(object.auth_info_bytes) ? bytesFromBase64(object.auth_info_bytes) : new Uint8Array(),
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => bytesFromBase64(e)) : []
     };
   },
   toAmino(message: TxRaw, useInterfaces: boolean = true): TxRawAmino {
     const obj: any = {};
-    obj.body_bytes = message.bodyBytes;
-    obj.auth_info_bytes = message.authInfoBytes;
+    obj.body_bytes = base64FromBytes(message.bodyBytes);
+    obj.auth_info_bytes = base64FromBytes(message.authInfoBytes);
     if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e);
+      obj.signatures = message.signatures.map(e => base64FromBytes(e));
     } else {
       obj.signatures = [];
     }
@@ -1044,16 +1044,16 @@ export const SignDoc = {
   },
   fromAmino(object: SignDocAmino): SignDoc {
     return {
-      bodyBytes: object.body_bytes,
-      authInfoBytes: object.auth_info_bytes,
+      body_bytes: isSet(object.body_bytes) ? bytesFromBase64(object.body_bytes) : new Uint8Array(),
+      auth_info_bytes: isSet(object.auth_info_bytes) ? bytesFromBase64(object.auth_info_bytes) : new Uint8Array(),
       chainId: object.chain_id,
       accountNumber: BigInt(object.account_number)
     };
   },
   toAmino(message: SignDoc, useInterfaces: boolean = true): SignDocAmino {
     const obj: any = {};
-    obj.body_bytes = message.bodyBytes;
-    obj.auth_info_bytes = message.authInfoBytes;
+    obj.body_bytes = base64FromBytes(message.bodyBytes);
+    obj.auth_info_bytes = base64FromBytes(message.authInfoBytes);
     obj.chain_id = message.chainId;
     obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
     return obj;
@@ -1197,7 +1197,7 @@ export const SignDocDirectAux = {
   },
   fromAmino(object: SignDocDirectAuxAmino): SignDocDirectAux {
     return {
-      bodyBytes: object.body_bytes,
+      body_bytes: isSet(object.body_bytes) ? bytesFromBase64(object.body_bytes) : new Uint8Array(),
       publicKey: object?.public_key ? Any.fromAmino(object.public_key) : undefined,
       chainId: object.chain_id,
       accountNumber: BigInt(object.account_number),
@@ -1207,7 +1207,7 @@ export const SignDocDirectAux = {
   },
   toAmino(message: SignDocDirectAux, useInterfaces: boolean = true): SignDocDirectAuxAmino {
     const obj: any = {};
-    obj.body_bytes = message.bodyBytes;
+    obj.body_bytes = base64FromBytes(message.bodyBytes);
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey, useInterfaces) : undefined;
     obj.chain_id = message.chainId;
     obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
@@ -2259,7 +2259,7 @@ export const AuxSignerData = {
       address: object.address,
       signDoc: object?.sign_doc ? SignDocDirectAux.fromAmino(object.sign_doc) : undefined,
       mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
-      sig: object.sig
+      sig: isSet(object.sig) ? bytesFromBase64(object.sig) : new Uint8Array()
     };
   },
   toAmino(message: AuxSignerData, useInterfaces: boolean = true): AuxSignerDataAmino {
@@ -2267,7 +2267,7 @@ export const AuxSignerData = {
     obj.address = message.address;
     obj.sign_doc = message.signDoc ? SignDocDirectAux.toAmino(message.signDoc, useInterfaces) : undefined;
     obj.mode = message.mode;
-    obj.sig = message.sig;
+    obj.sig = base64FromBytes(message.sig);
     return obj;
   },
   fromProtoMsg(message: AuxSignerDataProtoMsg, useInterfaces: boolean = true): AuxSignerData {

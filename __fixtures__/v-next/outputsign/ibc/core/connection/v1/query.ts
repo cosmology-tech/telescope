@@ -3,7 +3,7 @@ import { ConnectionEnd, ConnectionEndAmino, ConnectionEndSDKType, IdentifiedConn
 import { Height, HeightAmino, HeightSDKType, IdentifiedClientState, IdentifiedClientStateAmino, IdentifiedClientStateSDKType } from "../../client/v1/client";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial } from "../../../../helpers";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.connection.v1";
 /**
  * QueryConnectionRequest is the request type for the Query/Connection RPC
@@ -62,7 +62,7 @@ export interface QueryConnectionResponseAmino {
   /** connection associated with the request identifier */
   connection?: ConnectionEndAmino;
   /** merkle proof of existence */
-  proof: Uint8Array;
+  proof: string;
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
@@ -205,7 +205,7 @@ export interface QueryClientConnectionsResponseAmino {
   /** slice of all the connection paths associated with a client. */
   connection_paths: string[];
   /** merkle proof of existence */
-  proof: Uint8Array;
+  proof: string;
   /** height at which the proof was generated */
   proof_height?: HeightAmino;
 }
@@ -277,7 +277,7 @@ export interface QueryConnectionClientStateResponseAmino {
   /** client state associated with the channel */
   identified_client_state?: IdentifiedClientStateAmino;
   /** merkle proof of existence */
-  proof: Uint8Array;
+  proof: string;
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
@@ -359,7 +359,7 @@ export interface QueryConnectionConsensusStateResponseAmino {
   /** client ID associated with the consensus state */
   client_id: string;
   /** merkle proof of existence */
-  proof: Uint8Array;
+  proof: string;
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
@@ -502,14 +502,14 @@ export const QueryConnectionResponse = {
   fromAmino(object: QueryConnectionResponseAmino): QueryConnectionResponse {
     return {
       connection: object?.connection ? ConnectionEnd.fromAmino(object.connection) : undefined,
-      proof: object.proof,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryConnectionResponse): QueryConnectionResponseAmino {
     const obj: any = {};
     obj.connection = message.connection ? ConnectionEnd.toAmino(message.connection) : undefined;
-    obj.proof = message.proof;
+    obj.proof = base64FromBytes(message.proof);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -822,7 +822,7 @@ export const QueryClientConnectionsResponse = {
   fromAmino(object: QueryClientConnectionsResponseAmino): QueryClientConnectionsResponse {
     return {
       connectionPaths: Array.isArray(object?.connection_paths) ? object.connection_paths.map((e: any) => e) : [],
-      proof: object.proof,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
@@ -833,7 +833,7 @@ export const QueryClientConnectionsResponse = {
     } else {
       obj.connection_paths = [];
     }
-    obj.proof = message.proof;
+    obj.proof = base64FromBytes(message.proof);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -984,14 +984,14 @@ export const QueryConnectionClientStateResponse = {
   fromAmino(object: QueryConnectionClientStateResponseAmino): QueryConnectionClientStateResponse {
     return {
       identifiedClientState: object?.identified_client_state ? IdentifiedClientState.fromAmino(object.identified_client_state) : undefined,
-      proof: object.proof,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
   toAmino(message: QueryConnectionClientStateResponse): QueryConnectionClientStateResponseAmino {
     const obj: any = {};
     obj.identified_client_state = message.identifiedClientState ? IdentifiedClientState.toAmino(message.identifiedClientState) : undefined;
-    obj.proof = message.proof;
+    obj.proof = base64FromBytes(message.proof);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -1175,7 +1175,7 @@ export const QueryConnectionConsensusStateResponse = {
     return {
       consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
       clientId: object.client_id,
-      proof: object.proof,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
       proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
     };
   },
@@ -1183,7 +1183,7 @@ export const QueryConnectionConsensusStateResponse = {
     const obj: any = {};
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
     obj.client_id = message.clientId;
-    obj.proof = message.proof;
+    obj.proof = base64FromBytes(message.proof);
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },

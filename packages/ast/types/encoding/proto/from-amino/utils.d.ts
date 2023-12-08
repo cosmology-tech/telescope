@@ -38,7 +38,7 @@ export declare const arrayTypes: {
     scalar(): t.Identifier;
     string(): t.Identifier;
     bool(): t.Identifier;
-    bytes(args: FromAminoJSONMethod): t.Identifier;
+    bytes(args: FromAminoJSONMethod): t.CallExpression;
     long(args: FromAminoJSONMethod): t.Expression;
     uint64(args: FromAminoJSONMethod): t.Expression;
     int64(args: FromAminoJSONMethod): t.Expression;

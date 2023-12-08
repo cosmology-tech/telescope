@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { FromAminoJSONMethod } from './index';
 import { BILLION, callExpression, identifier, TypeLong } from '../../../utils';
-import { getFieldNames } from '../../types';
+import { getDefaultTSTypeFromProtoType, getFieldNames } from '../../types';
 import { ProtoParseContext } from '../../context';
 import { ProtoType } from '@cosmology/types';
 import { getInterfaceFromAminoName } from '../implements';
@@ -330,7 +330,24 @@ export const fromAminoJSON = {
     },
 
     bytes(args: FromAminoJSONMethod) {
-        return fromAminoJSON.scalar(args);
+        const {
+          origName
+      } = getFieldNames(args.field);
+        args.context.addUtil('isSet');
+        args.context.addUtil('bytesFromBase64');
+
+        return t.objectProperty(
+          t.identifier(origName),
+          t.conditionalExpression(
+            t.callExpression(t.identifier('isSet'), [
+              t.memberExpression(t.identifier('object'), t.identifier(origName))
+            ]),
+            t.callExpression(t.identifier('bytesFromBase64'), [
+              t.memberExpression(t.identifier('object'), t.identifier(origName))
+            ]),
+            getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
+          )
+        );
     },
 
     duration(args: FromAminoJSONMethod) {
@@ -666,7 +683,8 @@ export const arrayTypes = {
     },
 
     bytes(args: FromAminoJSONMethod) {
-        return arrayTypes.scalar();
+        args.context.addUtil('bytesFromBase64');
+        return t.callExpression(t.identifier("bytesFromBase64"), [t.identifier('e')]);
     },
 
     long(args: FromAminoJSONMethod) {

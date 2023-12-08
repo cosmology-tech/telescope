@@ -204,7 +204,7 @@ export interface AddressBytesToStringRequestProtoMsg {
 }
 /** AddressBytesToStringRequest is the request type for AddressString rpc method */
 export interface AddressBytesToStringRequestAmino {
-  address_bytes: Uint8Array;
+  address_bytes: string;
 }
 /** AddressBytesToStringRequest is the request type for AddressString rpc method */
 export interface AddressBytesToStringRequestSDKType {
@@ -252,7 +252,7 @@ export interface AddressStringToBytesResponseProtoMsg {
 }
 /** AddressStringToBytesResponse is the response type for AddressBytes rpc method */
 export interface AddressStringToBytesResponseAmino {
-  address_bytes: Uint8Array;
+  address_bytes: string;
 }
 /** AddressStringToBytesResponse is the response type for AddressBytes rpc method */
 export interface AddressStringToBytesResponseSDKType {
@@ -1101,12 +1101,12 @@ export const AddressBytesToStringRequest = {
   },
   fromAmino(object: AddressBytesToStringRequestAmino): AddressBytesToStringRequest {
     return {
-      addressBytes: object.address_bytes
+      address_bytes: isSet(object.address_bytes) ? bytesFromBase64(object.address_bytes) : new Uint8Array()
     };
   },
   toAmino(message: AddressBytesToStringRequest, useInterfaces: boolean = true): AddressBytesToStringRequestAmino {
     const obj: any = {};
-    obj.address_bytes = message.addressBytes;
+    obj.address_bytes = base64FromBytes(message.addressBytes);
     return obj;
   },
   fromProtoMsg(message: AddressBytesToStringRequestProtoMsg, useInterfaces: boolean = true): AddressBytesToStringRequest {
@@ -1338,12 +1338,12 @@ export const AddressStringToBytesResponse = {
   },
   fromAmino(object: AddressStringToBytesResponseAmino): AddressStringToBytesResponse {
     return {
-      addressBytes: object.address_bytes
+      address_bytes: isSet(object.address_bytes) ? bytesFromBase64(object.address_bytes) : new Uint8Array()
     };
   },
   toAmino(message: AddressStringToBytesResponse, useInterfaces: boolean = true): AddressStringToBytesResponseAmino {
     const obj: any = {};
-    obj.address_bytes = message.addressBytes;
+    obj.address_bytes = base64FromBytes(message.addressBytes);
     return obj;
   },
   fromProtoMsg(message: AddressStringToBytesResponseProtoMsg, useInterfaces: boolean = true): AddressStringToBytesResponse {

@@ -1898,7 +1898,7 @@ export const Constant = {
       uint64Value: object?.uint64_value ? BigInt(object.uint64_value) : undefined,
       doubleValue: object?.double_value,
       stringValue: object?.string_value,
-      bytesValue: object?.bytes_value,
+      bytes_value: isSet(object.bytes_value) ? bytesFromBase64(object.bytes_value) : undefined,
       durationValue: object?.duration_value ? Duration.fromAmino(object.duration_value) : undefined,
       timestampValue: object?.timestamp_value ? fromTimestamp(Timestamp.fromAmino(object.timestamp_value)) : undefined
     };
@@ -1911,7 +1911,7 @@ export const Constant = {
     obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
     obj.double_value = message.doubleValue;
     obj.string_value = message.stringValue;
-    obj.bytes_value = message.bytesValue;
+    message.bytesValue !== undefined && (obj.bytes_value = base64FromBytes(message.bytesValue));
     obj.duration_value = message.durationValue ? Duration.toAmino(message.durationValue) : undefined;
     obj.timestamp_value = message.timestampValue ? Timestamp.toAmino(toTimestamp(message.timestampValue)) : undefined;
     return obj;

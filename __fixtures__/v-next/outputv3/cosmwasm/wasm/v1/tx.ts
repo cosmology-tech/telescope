@@ -92,7 +92,7 @@ export interface MsgInstantiateContractAmino {
   /** Label is optional metadata to be stored with a contract instance. */
   label: string;
   /** Msg json encoded message to be passed to the contract on instantiation */
-  msg: Uint8Array;
+  msg: string;
   /** Funds coins that are transferred to the contract on instantiation */
   funds: CoinAmino[];
 }
@@ -124,7 +124,7 @@ export interface MsgInstantiateContractResponseAmino {
   /** Address is the bech32 address of the new contract instance. */
   address: string;
   /** Data contains base64-encoded bytes to returned from the contract */
-  data: Uint8Array;
+  data: string;
 }
 /** MsgInstantiateContractResponse return instantiation result data */
 export interface MsgInstantiateContractResponseSDKType {
@@ -153,7 +153,7 @@ export interface MsgExecuteContractAmino {
   /** Contract is the address of the smart contract */
   contract: string;
   /** Msg json encoded message to be passed to the contract */
-  msg: Uint8Array;
+  msg: string;
   /** Funds coins that are transferred to the contract on execution */
   funds: CoinAmino[];
 }
@@ -176,7 +176,7 @@ export interface MsgExecuteContractResponseProtoMsg {
 /** MsgExecuteContractResponse returns execution result data. */
 export interface MsgExecuteContractResponseAmino {
   /** Data contains base64-encoded bytes to returned from the contract */
-  data: Uint8Array;
+  data: string;
 }
 /** MsgExecuteContractResponse returns execution result data. */
 export interface MsgExecuteContractResponseSDKType {
@@ -206,7 +206,7 @@ export interface MsgMigrateContractAmino {
   /** CodeID references the new WASM code */
   code_id: string;
   /** Msg json encoded message to be passed to the contract on migration */
-  msg: Uint8Array;
+  msg: string;
 }
 /** MsgMigrateContract runs a code upgrade/ downgrade for a smart contract */
 export interface MsgMigrateContractSDKType {
@@ -233,7 +233,7 @@ export interface MsgMigrateContractResponseAmino {
    * Data contains same raw bytes returned as data from the wasm contract.
    * (May be empty)
    */
-  data: Uint8Array;
+  data: string;
 }
 /** MsgMigrateContractResponse returns contract migration result data. */
 export interface MsgMigrateContractResponseSDKType {
@@ -734,13 +734,13 @@ export const MsgInstantiateContractResponse = {
   fromAmino(object: MsgInstantiateContractResponseAmino): MsgInstantiateContractResponse {
     return {
       address: object.address,
-      data: object.data
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: MsgInstantiateContractResponse, useInterfaces: boolean = true): MsgInstantiateContractResponseAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromProtoMsg(message: MsgInstantiateContractResponseProtoMsg, useInterfaces: boolean = true): MsgInstantiateContractResponse {
@@ -947,12 +947,12 @@ export const MsgExecuteContractResponse = {
   },
   fromAmino(object: MsgExecuteContractResponseAmino): MsgExecuteContractResponse {
     return {
-      data: object.data
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: MsgExecuteContractResponse, useInterfaces: boolean = true): MsgExecuteContractResponseAmino {
     const obj: any = {};
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromProtoMsg(message: MsgExecuteContractResponseProtoMsg, useInterfaces: boolean = true): MsgExecuteContractResponse {
@@ -1149,12 +1149,12 @@ export const MsgMigrateContractResponse = {
   },
   fromAmino(object: MsgMigrateContractResponseAmino): MsgMigrateContractResponse {
     return {
-      data: object.data
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
   toAmino(message: MsgMigrateContractResponse, useInterfaces: boolean = true): MsgMigrateContractResponseAmino {
     const obj: any = {};
-    obj.data = message.data;
+    obj.data = base64FromBytes(message.data);
     return obj;
   },
   fromProtoMsg(message: MsgMigrateContractResponseProtoMsg, useInterfaces: boolean = true): MsgMigrateContractResponse {

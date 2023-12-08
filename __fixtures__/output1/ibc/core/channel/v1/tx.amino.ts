@@ -36,7 +36,7 @@ export interface MsgChannelOpenTryAminoType extends AminoMsg {
       version: string;
     };
     counterparty_version: string;
-    proof_init: Uint8Array;
+    proof_init: string;
     proof_height: AminoHeight;
     signer: string;
   };
@@ -48,7 +48,7 @@ export interface MsgChannelOpenAckAminoType extends AminoMsg {
     channel_id: string;
     counterparty_channel_id: string;
     counterparty_version: string;
-    proof_try: Uint8Array;
+    proof_try: string;
     proof_height: AminoHeight;
     signer: string;
   };
@@ -58,7 +58,7 @@ export interface MsgChannelOpenConfirmAminoType extends AminoMsg {
   value: {
     port_id: string;
     channel_id: string;
-    proof_ack: Uint8Array;
+    proof_ack: string;
     proof_height: AminoHeight;
     signer: string;
   };
@@ -76,7 +76,7 @@ export interface MsgChannelCloseConfirmAminoType extends AminoMsg {
   value: {
     port_id: string;
     channel_id: string;
-    proof_init: Uint8Array;
+    proof_init: string;
     proof_height: AminoHeight;
     signer: string;
   };
@@ -90,11 +90,11 @@ export interface MsgRecvPacketAminoType extends AminoMsg {
       source_channel: string;
       destination_port: string;
       destination_channel: string;
-      data: Uint8Array;
+      data: string;
       timeout_height: AminoHeight;
       timeout_timestamp: string;
     };
-    proof_commitment: Uint8Array;
+    proof_commitment: string;
     proof_height: AminoHeight;
     signer: string;
   };
@@ -108,11 +108,11 @@ export interface MsgTimeoutAminoType extends AminoMsg {
       source_channel: string;
       destination_port: string;
       destination_channel: string;
-      data: Uint8Array;
+      data: string;
       timeout_height: AminoHeight;
       timeout_timestamp: string;
     };
-    proof_unreceived: Uint8Array;
+    proof_unreceived: string;
     proof_height: AminoHeight;
     next_sequence_recv: string;
     signer: string;
@@ -127,12 +127,12 @@ export interface MsgTimeoutOnCloseAminoType extends AminoMsg {
       source_channel: string;
       destination_port: string;
       destination_channel: string;
-      data: Uint8Array;
+      data: string;
       timeout_height: AminoHeight;
       timeout_timestamp: string;
     };
-    proof_unreceived: Uint8Array;
-    proof_close: Uint8Array;
+    proof_unreceived: string;
+    proof_close: string;
     proof_height: AminoHeight;
     next_sequence_recv: string;
     signer: string;
@@ -147,12 +147,12 @@ export interface MsgAcknowledgementAminoType extends AminoMsg {
       source_channel: string;
       destination_port: string;
       destination_channel: string;
-      data: Uint8Array;
+      data: string;
       timeout_height: AminoHeight;
       timeout_timestamp: string;
     };
-    acknowledgement: Uint8Array;
-    proof_acked: Uint8Array;
+    acknowledgement: string;
+    proof_acked: string;
     proof_height: AminoHeight;
     signer: string;
   };

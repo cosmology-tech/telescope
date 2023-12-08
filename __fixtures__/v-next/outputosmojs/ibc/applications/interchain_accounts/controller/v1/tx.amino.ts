@@ -16,7 +16,7 @@ export interface MsgSendTxAminoType extends AminoMsg {
     connection_id: string;
     packet_data: {
       type: number;
-      data: Uint8Array;
+      data: string;
       memo: string;
     };
     relative_timeout: string;

@@ -108,14 +108,14 @@ export const IncentivizedAcknowledgement = {
   },
   fromAmino(object: IncentivizedAcknowledgementAmino): IncentivizedAcknowledgement {
     return {
-      appAcknowledgement: object.app_acknowledgement,
+      app_acknowledgement: isSet(object.app_acknowledgement) ? bytesFromBase64(object.app_acknowledgement) : new Uint8Array(),
       forwardRelayerAddress: object.forward_relayer_address,
       underlyingAppSuccess: object.underlying_app_success
     };
   },
   toAmino(message: IncentivizedAcknowledgement): IncentivizedAcknowledgementAmino {
     const obj: any = {};
-    obj.app_acknowledgement = message.appAcknowledgement;
+    obj.app_acknowledgement = base64FromBytes(message.appAcknowledgement);
     obj.forward_relayer_address = message.forwardRelayerAddress;
     obj.underlying_app_success = message.underlyingAppSuccess;
     return obj;
