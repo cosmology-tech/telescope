@@ -24,7 +24,7 @@ export declare const createFieldExistingTest: (args: {
     context: ProtoParseContext;
     fieldName: t.Expression;
     field: ProtoField;
-}) => t.Expression;
+}) => t.CallExpression;
 export declare const createProtoTypeComparison: (args: {
     context: ProtoParseContext;
     methodName: string;
