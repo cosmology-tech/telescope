@@ -87,7 +87,9 @@ export const createFieldExistingTest = (args: {
 }) => {
   const { fieldName } = args;
 
-  return fieldName;
+  args.context.addUtil("isSet");
+
+  return t.callExpression(t.identifier("isSet"), [fieldName]);
 };
 
 export const createProtoTypeComparison = (args: {

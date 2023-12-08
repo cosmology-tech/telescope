@@ -324,13 +324,13 @@ function createBaseGrant(): Grant {
 export const Grant = {
   typeUrl: "/cosmos.authz.v1beta1.Grant",
   is(o: any): o is Grant {
-    return o && (o.$typeUrl === Grant.typeUrl || (GenericAuthorization.is(o.authorization) || DepositDeploymentAuthorization.is(o.authorization) || SendAuthorization.is(o.authorization) || Any.is(o.authorization)) && o.opt && Any.is(o.singleMsg) && Array.isArray(o.messages) && (!o.messages.length || Any.is(o.messages[0])));
+    return o && (o.$typeUrl === Grant.typeUrl || (GenericAuthorization.is(o.authorization) || DepositDeploymentAuthorization.is(o.authorization) || SendAuthorization.is(o.authorization) || Any.is(o.authorization)) && isSet(o.opt) && Any.is(o.singleMsg) && Array.isArray(o.messages) && (!o.messages.length || Any.is(o.messages[0])));
   },
   isSDK(o: any): o is GrantSDKType {
-    return o && (o.$typeUrl === Grant.typeUrl || (GenericAuthorization.isSDK(o.authorization) || DepositDeploymentAuthorization.isSDK(o.authorization) || SendAuthorization.isSDK(o.authorization) || Any.isSDK(o.authorization)) && o.opt && Any.isSDK(o.single_msg) && Array.isArray(o.messages) && (!o.messages.length || Any.isSDK(o.messages[0])));
+    return o && (o.$typeUrl === Grant.typeUrl || (GenericAuthorization.isSDK(o.authorization) || DepositDeploymentAuthorization.isSDK(o.authorization) || SendAuthorization.isSDK(o.authorization) || Any.isSDK(o.authorization)) && isSet(o.opt) && Any.isSDK(o.single_msg) && Array.isArray(o.messages) && (!o.messages.length || Any.isSDK(o.messages[0])));
   },
   isAmino(o: any): o is GrantAmino {
-    return o && (o.$typeUrl === Grant.typeUrl || (GenericAuthorization.isAmino(o.authorization) || DepositDeploymentAuthorization.isAmino(o.authorization) || SendAuthorization.isAmino(o.authorization) || Any.isAmino(o.authorization)) && o.opt && Any.isAmino(o.single_msg) && Array.isArray(o.messages) && (!o.messages.length || Any.isAmino(o.messages[0])));
+    return o && (o.$typeUrl === Grant.typeUrl || (GenericAuthorization.isAmino(o.authorization) || DepositDeploymentAuthorization.isAmino(o.authorization) || SendAuthorization.isAmino(o.authorization) || Any.isAmino(o.authorization)) && isSet(o.opt) && Any.isAmino(o.single_msg) && Array.isArray(o.messages) && (!o.messages.length || Any.isAmino(o.messages[0])));
   },
   encode(message: Grant, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.authorization !== undefined) {
