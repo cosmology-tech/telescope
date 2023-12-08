@@ -1,5 +1,6 @@
 import { TSBuilderInput } from '@cosmwasm/ts-codegen';
 import { AminoExceptions } from "./aminos";
+import { connectComet } from '@cosmjs/tendermint-rpc';
 export declare enum TelescopeLogLevel {
     None = 0,
     Info = 1,
@@ -176,6 +177,7 @@ interface TelescopeOpts {
                 };
             };
         }[];
+        useConnectComet?: boolean;
     };
     reactQuery?: {
         enabled: boolean;

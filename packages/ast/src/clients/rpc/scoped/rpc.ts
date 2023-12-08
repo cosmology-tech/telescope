@@ -191,7 +191,7 @@ export const createScopedRpcTmFactory = (
     obj: object,
     identifier: string
 ) => {
-    const newClientType = context.pluginValue('rpcClients.clientType');
+    const newClientType = context.pluginValue('rpcClients.useConnectComet');
     const extensions = context.pluginValue('rpcClients.extensions');
     let functionParams;
     const returnStatement = t.returnStatement(
