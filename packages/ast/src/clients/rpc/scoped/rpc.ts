@@ -201,14 +201,15 @@ export const createScopedRpcTmFactory = (
           extensions ? 'client' : 'rpc',
       )
     );
-    let functionStatements;
 
+    let functionStatements;
     let awaitClientCreation;
+    
     if (newClientType) {
         context.addUtil('connectComet');
         awaitClientCreation = t.callExpression(
             t.identifier('connectComet'),      
-            [˚
+            [
                 t.identifier('rpcEndpoint')
             ]
     )
