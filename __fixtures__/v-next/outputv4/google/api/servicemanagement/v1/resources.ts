@@ -947,7 +947,7 @@ export const OperationMetadata_Step = {
   toAmino(message: OperationMetadata_Step): OperationMetadata_StepAmino {
     const obj: any = {};
     obj.description = message.description;
-    obj.status = message.status;
+    obj.status = operationMetadata_StatusToJSON(message.status);
     return obj;
   },
   fromAminoMsg(object: OperationMetadata_StepAminoMsg): OperationMetadata_Step {
@@ -1068,7 +1068,7 @@ export const Diagnostic = {
   toAmino(message: Diagnostic): DiagnosticAmino {
     const obj: any = {};
     obj.location = message.location;
-    obj.kind = message.kind;
+    obj.kind = diagnostic_KindToJSON(message.kind);
     obj.message = message.message;
     return obj;
   },
@@ -1306,7 +1306,7 @@ export const ConfigFile = {
     const obj: any = {};
     obj.file_path = message.filePath;
     obj.file_contents = message.fileContents ? base64FromBytes(message.fileContents) : undefined;
-    obj.file_type = message.fileType;
+    obj.file_type = configFile_FileTypeToJSON(message.fileType);
     return obj;
   },
   fromAminoMsg(object: ConfigFileAminoMsg): ConfigFile {
@@ -1683,7 +1683,7 @@ export const Rollout = {
     obj.rollout_id = message.rolloutId;
     obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
     obj.created_by = message.createdBy;
-    obj.status = message.status;
+    obj.status = rollout_RolloutStatusToJSON(message.status);
     obj.traffic_percent_strategy = message.trafficPercentStrategy ? Rollout_TrafficPercentStrategy.toAmino(message.trafficPercentStrategy) : undefined;
     obj.delete_service_strategy = message.deleteServiceStrategy ? Rollout_DeleteServiceStrategy.toAmino(message.deleteServiceStrategy) : undefined;
     obj.service_name = message.serviceName;

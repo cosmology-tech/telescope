@@ -615,7 +615,7 @@ export const SignatureDescriptor_Data_Single = {
   },
   toAmino(message: SignatureDescriptor_Data_Single, useInterfaces: boolean = true): SignatureDescriptor_Data_SingleAmino {
     const obj: any = {};
-    obj.mode = message.mode;
+    obj.mode = signModeToJSON(message.mode);
     obj.signature = message.signature ? base64FromBytes(message.signature) : undefined;
     return obj;
   },

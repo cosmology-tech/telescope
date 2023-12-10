@@ -711,7 +711,7 @@ export const ResourceDescriptor = {
       obj.pattern = [];
     }
     obj.name_field = message.nameField;
-    obj.history = message.history;
+    obj.history = resourceDescriptor_HistoryToJSON(message.history);
     obj.plural = message.plural;
     obj.singular = message.singular;
     if (message.style) {

@@ -85,6 +85,7 @@ export const createAminoType = (
                 Object.keys(proto.fields).reduce((m, fieldName) => {
                     const isOneOf = oneOfs.includes(fieldName);
                     const field = proto.fields[fieldName];
+                    let isOptional = getFieldOptionalityForAmino(context, field, isOneOf);
 
                     const orig = field.options?.['(telescope:orig)'] ?? fieldName;
 
@@ -103,6 +104,7 @@ export const createAminoType = (
                     ) {
                         // type_url => type
                         fieldNameWithCase = 'type';
+                        isOptional = false;
                     }
 
                     let aminoField = getAminoField(context, field);
@@ -113,6 +115,7 @@ export const createAminoType = (
                         orig === 'value'
                     ) {
                         aminoField = t.tsAnyKeyword();
+                        isOptional = false;
                     }
 
                     const propSig = tsPropertySignature(
@@ -120,7 +123,7 @@ export const createAminoType = (
                         t.tsTypeAnnotation(
                             aminoField
                         ),
-                        getFieldOptionalityForAmino(context, field, isOneOf)
+                        isOptional
                     );
 
                     const comments = [];

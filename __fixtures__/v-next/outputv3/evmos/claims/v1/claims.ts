@@ -248,7 +248,7 @@ export const Claim = {
   },
   toAmino(message: Claim, useInterfaces: boolean = true): ClaimAmino {
     const obj: any = {};
-    obj.action = message.action;
+    obj.action = actionToJSON(message.action);
     obj.completed = message.completed;
     obj.claimable_amount = message.claimableAmount;
     return obj;

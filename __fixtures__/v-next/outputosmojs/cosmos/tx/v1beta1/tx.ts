@@ -1678,7 +1678,7 @@ export const ModeInfo_Single = {
   },
   toAmino(message: ModeInfo_Single): ModeInfo_SingleAmino {
     const obj: any = {};
-    obj.mode = message.mode;
+    obj.mode = signModeToJSON(message.mode);
     return obj;
   },
   fromAminoMsg(object: ModeInfo_SingleAminoMsg): ModeInfo_Single {
@@ -2219,7 +2219,7 @@ export const AuxSignerData = {
     const obj: any = {};
     obj.address = message.address;
     obj.sign_doc = message.signDoc ? SignDocDirectAux.toAmino(message.signDoc) : undefined;
-    obj.mode = message.mode;
+    obj.mode = signModeToJSON(message.mode);
     obj.sig = message.sig ? base64FromBytes(message.sig) : undefined;
     return obj;
   },

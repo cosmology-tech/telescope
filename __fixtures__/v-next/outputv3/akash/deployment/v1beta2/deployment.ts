@@ -321,7 +321,7 @@ export const Deployment = {
   toAmino(message: Deployment, useInterfaces: boolean = true): DeploymentAmino {
     const obj: any = {};
     obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId, useInterfaces) : undefined;
-    obj.state = message.state;
+    obj.state = deployment_StateToJSON(message.state);
     obj.version = message.version ? base64FromBytes(message.version) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;

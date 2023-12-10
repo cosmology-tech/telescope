@@ -815,7 +815,7 @@ export const Bid = {
   toAmino(message: Bid, useInterfaces: boolean = true): BidAmino {
     const obj: any = {};
     obj.bid_id = message.bidId ? BidID.toAmino(message.bidId, useInterfaces) : undefined;
-    obj.state = message.state;
+    obj.state = bid_StateToJSON(message.state);
     obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;

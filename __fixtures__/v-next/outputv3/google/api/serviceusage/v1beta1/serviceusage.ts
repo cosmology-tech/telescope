@@ -2113,7 +2113,7 @@ export const ListConsumerQuotaMetricsRequest = {
     obj.parent = message.parent;
     obj.page_size = message.pageSize;
     obj.page_token = message.pageToken;
-    obj.view = message.view;
+    obj.view = quotaViewToJSON(message.view);
     return obj;
   },
   fromProtoMsg(message: ListConsumerQuotaMetricsRequestProtoMsg, useInterfaces: boolean = true): ListConsumerQuotaMetricsRequest {
@@ -2315,7 +2315,7 @@ export const GetConsumerQuotaMetricRequest = {
   toAmino(message: GetConsumerQuotaMetricRequest, useInterfaces: boolean = true): GetConsumerQuotaMetricRequestAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.view = message.view;
+    obj.view = quotaViewToJSON(message.view);
     return obj;
   },
   fromProtoMsg(message: GetConsumerQuotaMetricRequestProtoMsg, useInterfaces: boolean = true): GetConsumerQuotaMetricRequest {
@@ -2411,7 +2411,7 @@ export const GetConsumerQuotaLimitRequest = {
   toAmino(message: GetConsumerQuotaLimitRequest, useInterfaces: boolean = true): GetConsumerQuotaLimitRequestAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.view = message.view;
+    obj.view = quotaViewToJSON(message.view);
     return obj;
   },
   fromProtoMsg(message: GetConsumerQuotaLimitRequestProtoMsg, useInterfaces: boolean = true): GetConsumerQuotaLimitRequest {
@@ -5039,7 +5039,7 @@ export const GetServiceIdentityResponse = {
   toAmino(message: GetServiceIdentityResponse, useInterfaces: boolean = true): GetServiceIdentityResponseAmino {
     const obj: any = {};
     obj.identity = message.identity ? ServiceIdentity.toAmino(message.identity, useInterfaces) : undefined;
-    obj.state = message.state;
+    obj.state = getServiceIdentityResponse_IdentityStateToJSON(message.state);
     return obj;
   },
   fromProtoMsg(message: GetServiceIdentityResponseProtoMsg, useInterfaces: boolean = true): GetServiceIdentityResponse {

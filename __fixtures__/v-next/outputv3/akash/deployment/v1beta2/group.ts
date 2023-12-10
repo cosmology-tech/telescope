@@ -200,7 +200,7 @@ export const Group = {
   toAmino(message: Group, useInterfaces: boolean = true): GroupAmino {
     const obj: any = {};
     obj.group_id = message.groupId ? GroupID.toAmino(message.groupId, useInterfaces) : undefined;
-    obj.state = message.state;
+    obj.state = group_StateToJSON(message.state);
     obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec, useInterfaces) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;

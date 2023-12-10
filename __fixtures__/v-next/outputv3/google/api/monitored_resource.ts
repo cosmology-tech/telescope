@@ -466,7 +466,7 @@ export const MonitoredResourceDescriptor = {
     } else {
       obj.labels = [];
     }
-    obj.launch_stage = message.launchStage;
+    obj.launch_stage = launchStageToJSON(message.launchStage);
     return obj;
   },
   fromProtoMsg(message: MonitoredResourceDescriptorProtoMsg, useInterfaces: boolean = true): MonitoredResourceDescriptor {

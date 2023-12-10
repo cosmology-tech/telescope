@@ -380,7 +380,12 @@ export const getTSTypeFromGoogleType = (
 export const getTSTypeForAmino = (context: GenericParseContext, field: ProtoField) => {
     switch (field.type) {
         case 'bytes':
+          if (field.options?.["(gogoproto.casttype)"] === "RawContractMessage") {
+            return t.tsAnyKeyword();
+          }
+          else{
             return t.tsStringKeyword();
+          }
         default:
             return getTSAminoType(context, field.type);
     };

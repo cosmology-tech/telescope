@@ -686,7 +686,7 @@ export const QueryClaimableForActionRequest = {
   toAmino(message: QueryClaimableForActionRequest, useInterfaces: boolean = true): QueryClaimableForActionRequestAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.action = message.action;
+    obj.action = actionToJSON(message.action);
     return obj;
   },
   fromProtoMsg(message: QueryClaimableForActionRequestProtoMsg, useInterfaces: boolean = true): QueryClaimableForActionRequest {

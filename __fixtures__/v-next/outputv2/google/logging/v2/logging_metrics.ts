@@ -968,7 +968,7 @@ export const LogMetric = {
     obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toAmino(message.bucketOptions) : undefined;
     obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
     obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
-    obj.version = message.version;
+    obj.version = logMetric_ApiVersionToJSON(message.version);
     return obj;
   },
   fromAminoMsg(object: LogMetricAminoMsg): LogMetric {

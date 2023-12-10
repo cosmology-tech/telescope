@@ -232,9 +232,9 @@ export interface AnyAmino {
    * Schemes other than `http`, `https` (or the empty scheme) might be
    * used with implementation specific semantics.
    */
-  type?: string;
+  type: string;
   /** Must be a valid serialized protocol buffer of the above specified type. */
-  value?: any;
+  value: any;
 }
 /**
  * `Any` contains an arbitrary serialized protocol buffer message along with a

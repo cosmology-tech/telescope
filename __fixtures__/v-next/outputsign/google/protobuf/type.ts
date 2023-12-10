@@ -609,7 +609,7 @@ export const Type = {
       obj.options = [];
     }
     obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined;
-    obj.syntax = message.syntax;
+    obj.syntax = syntaxToJSON(message.syntax);
     return obj;
   },
   fromAminoMsg(object: TypeAminoMsg): Type {
@@ -769,8 +769,8 @@ export const Field = {
   },
   toAmino(message: Field): FieldAmino {
     const obj: any = {};
-    obj.kind = message.kind;
-    obj.cardinality = message.cardinality;
+    obj.kind = field_KindToJSON(message.kind);
+    obj.cardinality = field_CardinalityToJSON(message.cardinality);
     obj.number = message.number;
     obj.name = message.name;
     obj.type_url = message.typeUrl;
@@ -899,7 +899,7 @@ export const Enum = {
       obj.options = [];
     }
     obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined;
-    obj.syntax = message.syntax;
+    obj.syntax = syntaxToJSON(message.syntax);
     return obj;
   },
   fromAminoMsg(object: EnumAminoMsg): Enum {

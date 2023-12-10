@@ -622,7 +622,7 @@ export const Operation = {
     } else {
       obj.log_entries = [];
     }
-    obj.importance = message.importance;
+    obj.importance = operation_ImportanceToJSON(message.importance);
     if (message.extensions) {
       obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
     } else {

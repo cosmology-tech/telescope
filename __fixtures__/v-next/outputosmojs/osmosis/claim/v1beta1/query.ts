@@ -726,7 +726,7 @@ export const QueryClaimableForActionRequest = {
   toAmino(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.action = message.action;
+    obj.action = actionToJSON(message.action);
     return obj;
   },
   fromAminoMsg(object: QueryClaimableForActionRequestAminoMsg): QueryClaimableForActionRequest {

@@ -7,7 +7,7 @@ export interface MsgSubmitEvidenceAminoType extends AminoMsg {
     submitter: string;
     evidence: {
       type_url: string;
-      value: string;
+      value: Uint8Array;
     };
   };
 }

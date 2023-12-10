@@ -25,6 +25,6 @@ export declare const getFieldAminoTypeReference: (context: ProtoParseContext, fi
 export declare const getTSType: (context: GenericParseContext, type: string) => t.TSBooleanKeyword | t.TSNumberKeyword | t.TSStringKeyword | t.TSTypeReference;
 export declare const getTSAminoType: (context: GenericParseContext, type: string) => t.TSBooleanKeyword | t.TSNumberKeyword | t.TSStringKeyword | t.TSTypeReference;
 export declare const getTSTypeFromGoogleType: (context: GenericParseContext, type: string, options?: TelescopeBaseTypes) => t.TSStringKeyword | t.TSTypeReference;
-export declare const getTSTypeForAmino: (context: GenericParseContext, field: ProtoField) => t.TSBooleanKeyword | t.TSNumberKeyword | t.TSStringKeyword | t.TSTypeReference;
+export declare const getTSTypeForAmino: (context: GenericParseContext, field: ProtoField) => t.TSAnyKeyword | t.TSBooleanKeyword | t.TSNumberKeyword | t.TSStringKeyword | t.TSTypeReference;
 export declare const getTSTypeForProto: (context: GenericParseContext, field: ProtoField) => t.TSBooleanKeyword | t.TSNumberKeyword | t.TSStringKeyword | t.TSTypeReference;
 export declare const getDefaultTSTypeFromProtoType: (context: ProtoParseContext, field: ProtoField, isOneOf: boolean) => t.Expression;

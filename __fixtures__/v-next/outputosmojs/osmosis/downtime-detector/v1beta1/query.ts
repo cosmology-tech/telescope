@@ -118,7 +118,7 @@ export const RecoveredSinceDowntimeOfLengthRequest = {
   },
   toAmino(message: RecoveredSinceDowntimeOfLengthRequest): RecoveredSinceDowntimeOfLengthRequestAmino {
     const obj: any = {};
-    obj.downtime = message.downtime;
+    obj.downtime = downtimeToJSON(message.downtime);
     obj.recovery = message.recovery ? Duration.toAmino(message.recovery) : undefined;
     return obj;
   },

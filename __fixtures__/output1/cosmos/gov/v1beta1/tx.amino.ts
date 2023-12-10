@@ -9,7 +9,7 @@ export interface MsgSubmitProposalAminoType extends AminoMsg {
   value: {
     content: {
       type_url: string;
-      value: string;
+      value: Uint8Array;
     };
     initial_deposit: {
       denom: string;

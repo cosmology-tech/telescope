@@ -8,7 +8,7 @@ export interface MsgStoreCodeAminoType extends AminoMsg {
   type: "wasm/MsgStoreCode";
   value: {
     sender: string;
-    wasm_byte_code: string;
+    wasm_byte_code: Uint8Array;
     instantiate_permission: {
       permission: number;
       address: string;
@@ -22,7 +22,7 @@ export interface MsgInstantiateContractAminoType extends AminoMsg {
     admin: string;
     code_id: string;
     label: string;
-    msg: string;
+    msg: Uint8Array;
     funds: {
       denom: string;
       amount: string;
@@ -34,7 +34,7 @@ export interface MsgExecuteContractAminoType extends AminoMsg {
   value: {
     sender: string;
     contract: string;
-    msg: string;
+    msg: Uint8Array;
     funds: {
       denom: string;
       amount: string;
@@ -47,7 +47,7 @@ export interface MsgMigrateContractAminoType extends AminoMsg {
     sender: string;
     contract: string;
     code_id: string;
-    msg: string;
+    msg: Uint8Array;
   };
 }
 export interface MsgUpdateAdminAminoType extends AminoMsg {

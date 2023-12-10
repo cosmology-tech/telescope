@@ -468,7 +468,7 @@ export const Grant = {
     const obj: any = {};
     obj.authorization = message.authorization ? GlobalDecoderRegistry.toAmino(message.authorization) : undefined;
     obj.expiration = message.expiration ? Timestamp.toAmino(toTimestamp(message.expiration)) : undefined;
-    obj.opt = message.opt;
+    obj.opt = voteOptionToJSON(message.opt);
     obj.single_msg = message.singleMsg ? Any.toAmino(message.singleMsg) : undefined;
     if (message.messages) {
       obj.messages = message.messages.map(e => e ? Any.toAmino(e) : undefined);

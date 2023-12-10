@@ -1828,7 +1828,7 @@ export const Literal = {
   },
   toAmino(message: Literal): LiteralAmino {
     const obj: any = {};
-    obj.null_value = message.nullValue;
+    obj.null_value = nullValueToJSON(message.nullValue);
     obj.bool_value = message.boolValue;
     obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
     obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;

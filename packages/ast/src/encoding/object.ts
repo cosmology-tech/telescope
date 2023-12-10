@@ -13,6 +13,7 @@ import { ProtoParseContext } from './context';
 import { createAminoTypeProperty, createTypeUrlProperty, fromProtoMsgMethod, fromSDKJSONMethod, toProtoMethod, toProtoMsgMethod } from './proto';
 import { isMethod } from './proto/is';
 import { getAminoFieldName, getSdkFieldName } from '../utils';
+import { getTypeUrl } from '@cosmology/utils';
 
 export const createObjectWithMethods = (
     context: ProtoParseContext,
@@ -60,8 +61,12 @@ export const createObjectWithMethods = (
 export const createRegisterObject = (
   context: ProtoParseContext,
   name: string,
+  proto: ProtoType,
 ) => {
   context.addUtil("GlobalDecoderRegistry");
+
+  const typeUrl = getTypeUrl(context.ref.proto, proto);
+  if (!typeUrl) return;
 
   return t.expressionStatement(
     t.callExpression(

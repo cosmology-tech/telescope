@@ -98,7 +98,7 @@
                           ),
                           []
                       ),
-                      dontOmitempty ? getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf) : t.identifier('undefined')
+                      dontOmitempty ? t.stringLiteral("0") : t.identifier('undefined')
                   )
               )
           );
@@ -239,10 +239,30 @@
       },
 
       enum(args: ToAminoJSONMethod) {
-          return toAminoJSON.scalar(args);
+        const { propName, origName } = getFieldNames(args.field);
+        const enumFuncName = args.context.getToEnum(args.field);
+        const expr = t.callExpression(
+            t.identifier(enumFuncName),
+            [
+              t.memberExpression(
+                t.identifier('message'),
+                t.identifier(propName)
+              )
+            ]
+        );
+
+        return t.expressionStatement(
+          t.assignmentExpression(
+              '=',
+              t.memberExpression(
+                  t.identifier('obj'),
+                  t.identifier(origName)
+              ),
+              expr
+          )
+        );
       },
 
-      //TODO::
       bytes(args: ToAminoJSONMethod) {
           args.context.addUtil('base64FromBytes');
           const { propName, origName } = getFieldNames(args.field);
@@ -385,7 +405,7 @@
 
           const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
 
-          let defaultValue: t.Expression = dontOmitempty ? t.stringLiteral("") : t.identifier('undefined');
+          let defaultValue: t.Expression = dontOmitempty ? t.objectExpression([]) : t.identifier('undefined');
 
           return t.expressionStatement(
               t.assignmentExpression(

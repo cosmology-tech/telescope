@@ -463,7 +463,7 @@ export const Lease = {
   toAmino(message: Lease): LeaseAmino {
     const obj: any = {};
     obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId) : undefined;
-    obj.state = message.state;
+    obj.state = lease_StateToJSON(message.state);
     obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     obj.closed_on = message.closedOn ? message.closedOn.toString() : undefined;

@@ -331,7 +331,7 @@ export const TokenPair = {
     obj.erc20_address = message.erc20Address;
     obj.denom = message.denom;
     obj.enabled = message.enabled;
-    obj.contract_owner = message.contractOwner;
+    obj.contract_owner = ownerToJSON(message.contractOwner);
     return obj;
   },
   fromAminoMsg(object: TokenPairAminoMsg): TokenPair {

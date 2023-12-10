@@ -1,5 +1,5 @@
 import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorSDKType } from "./label";
-import { LaunchStage, LaunchStageSDKType, launchStageFromJSON } from "./launch_stage";
+import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
 import { Struct, StructAmino, StructSDKType } from "../protobuf/struct";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { DeepPartial } from "../../helpers";
@@ -438,7 +438,7 @@ export const MonitoredResourceDescriptor = {
     } else {
       obj.labels = [];
     }
-    obj.launch_stage = message.launchStage;
+    obj.launch_stage = launchStageToJSON(message.launchStage);
     return obj;
   },
   fromAminoMsg(object: MonitoredResourceDescriptorAminoMsg): MonitoredResourceDescriptor {

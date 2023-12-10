@@ -3075,7 +3075,7 @@ export const LogBucket = {
     obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
     obj.retention_days = message.retentionDays;
     obj.locked = message.locked;
-    obj.lifecycle_state = message.lifecycleState;
+    obj.lifecycle_state = lifecycleStateToJSON(message.lifecycleState);
     if (message.restrictedFields) {
       obj.restricted_fields = message.restrictedFields.map(e => e);
     } else {
@@ -3488,7 +3488,7 @@ export const LogSink = {
     } else {
       obj.exclusions = [];
     }
-    obj.output_version_format = message.outputVersionFormat;
+    obj.output_version_format = logSink_VersionFormatToJSON(message.outputVersionFormat);
     obj.writer_identity = message.writerIdentity;
     obj.include_children = message.includeChildren;
     obj.bigquery_options = message.bigqueryOptions ? BigQueryOptions.toAmino(message.bigqueryOptions, useInterfaces) : undefined;
@@ -7195,7 +7195,7 @@ export const CopyLogEntriesMetadata = {
     const obj: any = {};
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
-    obj.state = message.state;
+    obj.state = operationStateToJSON(message.state);
     obj.cancellation_requested = message.cancellationRequested;
     obj.request = message.request ? CopyLogEntriesRequest.toAmino(message.request, useInterfaces) : undefined;
     obj.progress = message.progress;

@@ -443,8 +443,8 @@ export const Channel = {
   },
   toAmino(message: Channel): ChannelAmino {
     const obj: any = {};
-    obj.state = message.state;
-    obj.ordering = message.ordering;
+    obj.state = stateToJSON(message.state);
+    obj.ordering = orderToJSON(message.ordering);
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     if (message.connectionHops) {
       obj.connection_hops = message.connectionHops.map(e => e);
@@ -649,8 +649,8 @@ export const IdentifiedChannel = {
   },
   toAmino(message: IdentifiedChannel): IdentifiedChannelAmino {
     const obj: any = {};
-    obj.state = message.state;
-    obj.ordering = message.ordering;
+    obj.state = stateToJSON(message.state);
+    obj.ordering = orderToJSON(message.ordering);
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     if (message.connectionHops) {
       obj.connection_hops = message.connectionHops.map(e => e);

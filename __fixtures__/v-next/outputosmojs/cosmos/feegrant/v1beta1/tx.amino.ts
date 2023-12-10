@@ -8,7 +8,7 @@ export interface MsgGrantAllowanceAminoType extends AminoMsg {
     grantee: string;
     allowance: {
       type_url: string;
-      value: string;
+      value: Uint8Array;
     };
   };
 }

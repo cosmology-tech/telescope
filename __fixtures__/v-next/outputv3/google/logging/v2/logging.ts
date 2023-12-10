@@ -2576,7 +2576,7 @@ export const TailLogEntriesResponse_SuppressionInfo = {
   },
   toAmino(message: TailLogEntriesResponse_SuppressionInfo, useInterfaces: boolean = true): TailLogEntriesResponse_SuppressionInfoAmino {
     const obj: any = {};
-    obj.reason = message.reason;
+    obj.reason = tailLogEntriesResponse_SuppressionInfo_ReasonToJSON(message.reason);
     obj.suppressed_count = message.suppressedCount;
     return obj;
   },

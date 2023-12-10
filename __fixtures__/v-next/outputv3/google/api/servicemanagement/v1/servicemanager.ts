@@ -1408,7 +1408,7 @@ export const GetServiceConfigRequest = {
     const obj: any = {};
     obj.service_name = message.serviceName;
     obj.config_id = message.configId;
-    obj.view = message.view;
+    obj.view = getServiceConfigRequest_ConfigViewToJSON(message.view);
     return obj;
   },
   fromProtoMsg(message: GetServiceConfigRequestProtoMsg, useInterfaces: boolean = true): GetServiceConfigRequest {

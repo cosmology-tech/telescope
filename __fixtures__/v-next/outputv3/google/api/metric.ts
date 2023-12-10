@@ -841,13 +841,13 @@ export const MetricDescriptor = {
     } else {
       obj.labels = [];
     }
-    obj.metric_kind = message.metricKind;
-    obj.value_type = message.valueType;
+    obj.metric_kind = metricDescriptor_MetricKindToJSON(message.metricKind);
+    obj.value_type = metricDescriptor_ValueTypeToJSON(message.valueType);
     obj.unit = message.unit;
     obj.description = message.description;
     obj.display_name = message.displayName;
     obj.metadata = message.metadata ? MetricDescriptor_MetricDescriptorMetadata.toAmino(message.metadata, useInterfaces) : undefined;
-    obj.launch_stage = message.launchStage;
+    obj.launch_stage = launchStageToJSON(message.launchStage);
     if (message.monitoredResourceTypes) {
       obj.monitored_resource_types = message.monitoredResourceTypes.map(e => e);
     } else {
@@ -966,7 +966,7 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
   },
   toAmino(message: MetricDescriptor_MetricDescriptorMetadata, useInterfaces: boolean = true): MetricDescriptor_MetricDescriptorMetadataAmino {
     const obj: any = {};
-    obj.launch_stage = message.launchStage;
+    obj.launch_stage = launchStageToJSON(message.launchStage);
     obj.sample_period = message.samplePeriod ? Duration.toAmino(message.samplePeriod, useInterfaces) : undefined;
     obj.ingest_delay = message.ingestDelay ? Duration.toAmino(message.ingestDelay, useInterfaces) : undefined;
     return obj;

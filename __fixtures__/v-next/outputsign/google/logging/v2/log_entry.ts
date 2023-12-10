@@ -2,7 +2,7 @@ import { MonitoredResource, MonitoredResourceAmino, MonitoredResourceSDKType } f
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../protobuf/any";
 import { Struct, StructAmino, StructSDKType } from "../../protobuf/struct";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
-import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON } from "../type/log_severity";
+import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity";
 import { HttpRequest, HttpRequestAmino, HttpRequestSDKType } from "../type/http_request";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
@@ -867,7 +867,7 @@ export const LogEntry = {
     obj.json_payload = message.jsonPayload ? Struct.toAmino(message.jsonPayload) : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     obj.receive_timestamp = message.receiveTimestamp ? Timestamp.toAmino(toTimestamp(message.receiveTimestamp)) : undefined;
-    obj.severity = message.severity;
+    obj.severity = logSeverityToJSON(message.severity);
     obj.insert_id = message.insertId;
     obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined;
     obj.labels = {};

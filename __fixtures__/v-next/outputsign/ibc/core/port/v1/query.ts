@@ -1,4 +1,4 @@
-import { Order, OrderSDKType, Counterparty, CounterpartyAmino, CounterpartySDKType, orderFromJSON } from "../../channel/v1/channel";
+import { Order, OrderSDKType, Counterparty, CounterpartyAmino, CounterpartySDKType, orderFromJSON, orderToJSON } from "../../channel/v1/channel";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.core.port.v1";
@@ -163,7 +163,7 @@ export const QueryAppVersionRequest = {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.connection_id = message.connectionId;
-    obj.ordering = message.ordering;
+    obj.ordering = orderToJSON(message.ordering);
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     obj.proposed_version = message.proposedVersion;
     return obj;

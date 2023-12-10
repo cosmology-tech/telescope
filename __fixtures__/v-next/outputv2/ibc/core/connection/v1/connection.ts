@@ -490,7 +490,7 @@ export const ConnectionEnd = {
     } else {
       obj.versions = [];
     }
-    obj.state = message.state;
+    obj.state = stateToJSON(message.state);
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     obj.delay_period = message.delayPeriod ? message.delayPeriod.toString() : undefined;
     return obj;
@@ -674,7 +674,7 @@ export const IdentifiedConnection = {
     } else {
       obj.versions = [];
     }
-    obj.state = message.state;
+    obj.state = stateToJSON(message.state);
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     obj.delay_period = message.delayPeriod ? message.delayPeriod.toString() : undefined;
     return obj;

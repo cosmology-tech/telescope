@@ -293,7 +293,7 @@ export interface ContractCodeHistoryEntryAmino {
   code_id?: string;
   /** Updated Tx position when the operation was executed. */
   updated?: AbsoluteTxPositionAmino;
-  msg?: string;
+  msg?: any;
 }
 export interface ContractCodeHistoryEntryAminoMsg {
   type: "wasm/ContractCodeHistoryEntry";
@@ -440,7 +440,7 @@ export const AccessTypeParam = {
   },
   toAmino(message: AccessTypeParam): AccessTypeParamAmino {
     const obj: any = {};
-    obj.value = message.value;
+    obj.value = accessTypeToJSON(message.value);
     return obj;
   },
   fromAminoMsg(object: AccessTypeParamAminoMsg): AccessTypeParam {
@@ -545,7 +545,7 @@ export const AccessConfig = {
   },
   toAmino(message: AccessConfig): AccessConfigAmino {
     const obj: any = {};
-    obj.permission = message.permission;
+    obj.permission = accessTypeToJSON(message.permission);
     obj.address = message.address;
     return obj;
   },
@@ -671,7 +671,7 @@ export const Params = {
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     obj.code_upload_access = message.codeUploadAccess ? AccessConfig.toAmino(message.codeUploadAccess) : undefined;
-    obj.instantiate_default_permission = message.instantiateDefaultPermission;
+    obj.instantiate_default_permission = accessTypeToJSON(message.instantiateDefaultPermission);
     obj.max_wasm_code_size = message.maxWasmCodeSize ? message.maxWasmCodeSize.toString() : undefined;
     return obj;
   },
@@ -1127,7 +1127,7 @@ export const ContractCodeHistoryEntry = {
   },
   toAmino(message: ContractCodeHistoryEntry): ContractCodeHistoryEntryAmino {
     const obj: any = {};
-    obj.operation = message.operation;
+    obj.operation = contractCodeHistoryOperationTypeToJSON(message.operation);
     obj.code_id = message.codeId ? message.codeId.toString() : undefined;
     obj.updated = message.updated ? AbsoluteTxPosition.toAmino(message.updated) : undefined;
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;

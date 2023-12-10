@@ -2864,7 +2864,7 @@ export const MsgSubmitProposal = {
     } else {
       obj.messages = [];
     }
-    obj.exec = message.exec;
+    obj.exec = execToJSON(message.exec);
     return obj;
   },
   fromAminoMsg(object: MsgSubmitProposalAminoMsg): MsgSubmitProposal {
@@ -3290,9 +3290,9 @@ export const MsgVote = {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     obj.voter = message.voter;
-    obj.option = message.option;
+    obj.option = voteOptionToJSON(message.option);
     obj.metadata = message.metadata;
-    obj.exec = message.exec;
+    obj.exec = execToJSON(message.exec);
     return obj;
   },
   fromAminoMsg(object: MsgVoteAminoMsg): MsgVote {

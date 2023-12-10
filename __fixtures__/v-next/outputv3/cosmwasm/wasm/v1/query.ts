@@ -332,7 +332,7 @@ export interface QuerySmartContractStateRequestAmino {
   /** address is the address of the contract */
   address?: string;
   /** QueryData contains the query data passed to the contract */
-  query_data?: string;
+  query_data?: any;
 }
 /**
  * QuerySmartContractStateRequest is the request type for the
@@ -360,7 +360,7 @@ export interface QuerySmartContractStateResponseProtoMsg {
  */
 export interface QuerySmartContractStateResponseAmino {
   /** Data contains the json data returned from the smart contract */
-  data?: string;
+  data?: any;
 }
 /**
  * QuerySmartContractStateResponse is the response type for the

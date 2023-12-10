@@ -1285,10 +1285,10 @@ export const Type = {
   toAmino(message: Type): TypeAmino {
     const obj: any = {};
     obj.dyn = message.dyn ? Empty.toAmino(message.dyn) : undefined;
-    obj.null = message.null;
-    obj.primitive = message.primitive;
-    obj.wrapper = message.wrapper;
-    obj.well_known = message.wellKnown;
+    obj.null = nullValueToJSON(message.null);
+    obj.primitive = type_PrimitiveTypeToJSON(message.primitive);
+    obj.wrapper = type_PrimitiveTypeToJSON(message.wrapper);
+    obj.well_known = type_WellKnownTypeToJSON(message.wellKnown);
     obj.list_type = message.listType ? Type_ListType.toAmino(message.listType) : undefined;
     obj.map_type = message.mapType ? Type_MapType.toAmino(message.mapType) : undefined;
     obj.function = message.function ? Type_FunctionType.toAmino(message.function) : undefined;

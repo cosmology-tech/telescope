@@ -491,7 +491,7 @@ export const Api = {
     } else {
       obj.mixins = [];
     }
-    obj.syntax = message.syntax;
+    obj.syntax = syntaxToJSON(message.syntax);
     return obj;
   },
   fromAminoMsg(object: ApiAminoMsg): Api {
@@ -691,7 +691,7 @@ export const Method = {
     } else {
       obj.options = [];
     }
-    obj.syntax = message.syntax;
+    obj.syntax = syntaxToJSON(message.syntax);
     return obj;
   },
   fromAminoMsg(object: MethodAminoMsg): Method {

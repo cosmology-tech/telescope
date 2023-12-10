@@ -344,7 +344,7 @@ export const Certificate = {
   },
   toAmino(message: Certificate): CertificateAmino {
     const obj: any = {};
-    obj.state = message.state;
+    obj.state = certificate_StateToJSON(message.state);
     obj.cert = message.cert ? base64FromBytes(message.cert) : undefined;
     obj.pubkey = message.pubkey ? base64FromBytes(message.pubkey) : undefined;
     return obj;

@@ -876,7 +876,7 @@ export const QuotaOperation = {
     } else {
       obj.quota_metrics = [];
     }
-    obj.quota_mode = message.quotaMode;
+    obj.quota_mode = quotaOperation_QuotaModeToJSON(message.quotaMode);
     return obj;
   },
   fromProtoMsg(message: QuotaOperationProtoMsg, useInterfaces: boolean = true): QuotaOperation {
@@ -1151,7 +1151,7 @@ export const QuotaError = {
   },
   toAmino(message: QuotaError, useInterfaces: boolean = true): QuotaErrorAmino {
     const obj: any = {};
-    obj.code = message.code;
+    obj.code = quotaError_CodeToJSON(message.code);
     obj.subject = message.subject;
     obj.description = message.description;
     obj.status = message.status ? Status.toAmino(message.status, useInterfaces) : undefined;

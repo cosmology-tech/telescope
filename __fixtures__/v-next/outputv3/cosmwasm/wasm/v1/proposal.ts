@@ -86,7 +86,7 @@ export interface InstantiateContractProposalAmino {
   /** Label is optional metadata to be stored with a constract instance. */
   label?: string;
   /** Msg json encoded message to be passed to the contract on instantiation */
-  msg?: string;
+  msg?: any;
   /** Funds coins that are transferred to the contract on instantiation */
   funds?: CoinAmino[];
 }
@@ -132,7 +132,7 @@ export interface MigrateContractProposalAmino {
   /** CodeID references the new WASM codesudo */
   code_id?: string;
   /** Msg json encoded message to be passed to the contract on migration */
-  msg?: string;
+  msg?: any;
 }
 /** MigrateContractProposal gov proposal content type to migrate a contract. */
 export interface MigrateContractProposalSDKType {
@@ -166,7 +166,7 @@ export interface SudoContractProposalAmino {
   /** Contract is the address of the smart contract */
   contract?: string;
   /** Msg json encoded message to be passed to the contract as sudo */
-  msg?: string;
+  msg?: any;
 }
 /** SudoContractProposal gov proposal content type to call sudo on a contract. */
 export interface SudoContractProposalSDKType {
@@ -211,7 +211,7 @@ export interface ExecuteContractProposalAmino {
   /** Contract is the address of the smart contract */
   contract?: string;
   /** Msg json encoded message to be passed to the contract as execute */
-  msg?: string;
+  msg?: any;
   /** Funds coins that are transferred to the contract on instantiation */
   funds?: CoinAmino[];
 }

@@ -5,8 +5,8 @@ export interface MsgCreateCertificateAminoType extends AminoMsg {
   type: "akash/cert/v1beta2/testonly-create-certificate";
   value: {
     owner: string;
-    cert: string;
-    pubkey: string;
+    cert: Uint8Array;
+    pubkey: Uint8Array;
   };
 }
 export interface MsgRevokeCertificateAminoType extends AminoMsg {
