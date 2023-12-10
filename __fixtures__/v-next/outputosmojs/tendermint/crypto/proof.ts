@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
+import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "tendermint.crypto";
 export interface Proof {
   total: bigint;
@@ -189,12 +190,18 @@ export const Proof = {
     return obj;
   },
   fromAmino(object: ProofAmino): Proof {
-    return {
-      total: BigInt(object.total),
-      index: BigInt(object.index),
-      leaf_hash: isSet(object.leaf_hash) ? bytesFromBase64(object.leaf_hash) : new Uint8Array(),
-      aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => bytesFromBase64(e)) : []
-    };
+    const message = createBaseProof();
+    if (object.total !== undefined && object.total !== null) {
+      message.total = BigInt(object.total);
+    }
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index);
+    }
+    if (object.leaf_hash !== undefined && object.leaf_hash !== null) {
+      message.leafHash = fromBase64(object.leaf_hash);
+    }
+    message.aunts = object.aunts?.map(e => bytesFromBase64(e)) || [];
+    return message;
   },
   toAmino(message: Proof): ProofAmino {
     const obj: any = {};
@@ -298,10 +305,14 @@ export const ValueOp = {
     return obj;
   },
   fromAmino(object: ValueOpAmino): ValueOp {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      proof: object?.proof ? Proof.fromAmino(object.proof) : undefined
-    };
+    const message = createBaseValueOp();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = fromBase64(object.key);
+    }
+    if (object.proof !== undefined && object.proof !== null) {
+      message.proof = Proof.fromAmino(object.proof);
+    }
+    return message;
   },
   toAmino(message: ValueOp): ValueOpAmino {
     const obj: any = {};
@@ -412,11 +423,17 @@ export const DominoOp = {
     return obj;
   },
   fromAmino(object: DominoOpAmino): DominoOp {
-    return {
-      key: object.key,
-      input: object.input,
-      output: object.output
-    };
+    const message = createBaseDominoOp();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.input !== undefined && object.input !== null) {
+      message.input = object.input;
+    }
+    if (object.output !== undefined && object.output !== null) {
+      message.output = object.output;
+    }
+    return message;
   },
   toAmino(message: DominoOp): DominoOpAmino {
     const obj: any = {};
@@ -528,11 +545,17 @@ export const ProofOp = {
     return obj;
   },
   fromAmino(object: ProofOpAmino): ProofOp {
-    return {
-      type: object.type,
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
-    };
+    const message = createBaseProofOp();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    if (object.key !== undefined && object.key !== null) {
+      message.key = fromBase64(object.key);
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = fromBase64(object.data);
+    }
+    return message;
   },
   toAmino(message: ProofOp): ProofOpAmino {
     const obj: any = {};
@@ -626,9 +649,9 @@ export const ProofOps = {
     return obj;
   },
   fromAmino(object: ProofOpsAmino): ProofOps {
-    return {
-      ops: Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromAmino(e)) : []
-    };
+    const message = createBaseProofOps();
+    message.ops = object.ops?.map(e => ProofOp.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ProofOps): ProofOpsAmino {
     const obj: any = {};

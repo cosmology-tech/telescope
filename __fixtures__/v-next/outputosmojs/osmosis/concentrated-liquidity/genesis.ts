@@ -181,11 +181,17 @@ export const FullTick = {
     return obj;
   },
   fromAmino(object: FullTickAmino): FullTick {
-    return {
-      poolId: BigInt(object.pool_id),
-      tickIndex: BigInt(object.tick_index),
-      info: object?.info ? TickInfo.fromAmino(object.info) : TickInfo.fromPartial({})
-    };
+    const message = createBaseFullTick();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.tick_index !== undefined && object.tick_index !== null) {
+      message.tickIndex = BigInt(object.tick_index);
+    }
+    if (object.info !== undefined && object.info !== null) {
+      message.info = TickInfo.fromAmino(object.info);
+    }
+    return message;
   },
   toAmino(message: FullTick): FullTickAmino {
     const obj: any = {};
@@ -353,13 +359,17 @@ export const PoolData = {
     return obj;
   },
   fromAmino(object: PoolDataAmino): PoolData {
-    return {
-      pool: object?.pool ? Any.fromAmino(object.pool) : undefined,
-      ticks: Array.isArray(object?.ticks) ? object.ticks.map((e: any) => FullTick.fromAmino(e)) : [],
-      feeAccumulator: object?.fee_accumulator ? AccumObject.fromAmino(object.fee_accumulator) : AccumObject.fromPartial({}),
-      incentivesAccumulators: Array.isArray(object?.incentives_accumulators) ? object.incentives_accumulators.map((e: any) => AccumObject.fromAmino(e)) : [],
-      incentiveRecords: Array.isArray(object?.incentive_records) ? object.incentive_records.map((e: any) => IncentiveRecord.fromAmino(e)) : []
-    };
+    const message = createBasePoolData();
+    if (object.pool !== undefined && object.pool !== null) {
+      message.pool = Any.fromAmino(object.pool);
+    }
+    message.ticks = object.ticks?.map(e => FullTick.fromAmino(e)) || [];
+    if (object.fee_accumulator !== undefined && object.fee_accumulator !== null) {
+      message.feeAccumulator = AccumObject.fromAmino(object.fee_accumulator);
+    }
+    message.incentivesAccumulators = object.incentives_accumulators?.map(e => AccumObject.fromAmino(e)) || [];
+    message.incentiveRecords = object.incentive_records?.map(e => IncentiveRecord.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: PoolData): PoolDataAmino {
     const obj: any = {};
@@ -520,12 +530,16 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({}),
-      poolData: Array.isArray(object?.pool_data) ? object.pool_data.map((e: any) => PoolData.fromAmino(e)) : [],
-      positions: Array.isArray(object?.positions) ? object.positions.map((e: any) => Position.fromAmino(e)) : [],
-      nextPositionId: BigInt(object.next_position_id)
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.poolData = object.pool_data?.map(e => PoolData.fromAmino(e)) || [];
+    message.positions = object.positions?.map(e => Position.fromAmino(e)) || [];
+    if (object.next_position_id !== undefined && object.next_position_id !== null) {
+      message.nextPositionId = BigInt(object.next_position_id);
+    }
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -639,10 +653,14 @@ export const AccumObject = {
     return obj;
   },
   fromAmino(object: AccumObjectAmino): AccumObject {
-    return {
-      name: object.name,
-      accumContent: object?.accum_content ? AccumulatorContent.fromAmino(object.accum_content) : undefined
-    };
+    const message = createBaseAccumObject();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.accum_content !== undefined && object.accum_content !== null) {
+      message.accumContent = AccumulatorContent.fromAmino(object.accum_content);
+    }
+    return message;
   },
   toAmino(message: AccumObject): AccumObjectAmino {
     const obj: any = {};

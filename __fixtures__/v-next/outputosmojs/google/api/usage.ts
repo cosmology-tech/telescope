@@ -230,11 +230,13 @@ export const Usage = {
     return obj;
   },
   fromAmino(object: UsageAmino): Usage {
-    return {
-      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => e) : [],
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => UsageRule.fromAmino(e)) : [],
-      producerNotificationChannel: object.producer_notification_channel
-    };
+    const message = createBaseUsage();
+    message.requirements = object.requirements?.map(e => e) || [];
+    message.rules = object.rules?.map(e => UsageRule.fromAmino(e)) || [];
+    if (object.producer_notification_channel !== undefined && object.producer_notification_channel !== null) {
+      message.producerNotificationChannel = object.producer_notification_channel;
+    }
+    return message;
   },
   toAmino(message: Usage): UsageAmino {
     const obj: any = {};
@@ -354,11 +356,17 @@ export const UsageRule = {
     return obj;
   },
   fromAmino(object: UsageRuleAmino): UsageRule {
-    return {
-      selector: object.selector,
-      allowUnregisteredCalls: object.allow_unregistered_calls,
-      skipServiceControl: object.skip_service_control
-    };
+    const message = createBaseUsageRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    if (object.allow_unregistered_calls !== undefined && object.allow_unregistered_calls !== null) {
+      message.allowUnregisteredCalls = object.allow_unregistered_calls;
+    }
+    if (object.skip_service_control !== undefined && object.skip_service_control !== null) {
+      message.skipServiceControl = object.skip_service_control;
+    }
+    return message;
   },
   toAmino(message: UsageRule): UsageRuleAmino {
     const obj: any = {};

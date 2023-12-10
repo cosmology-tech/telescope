@@ -250,10 +250,14 @@ export const LogEntry_LabelsEntry = {
     return obj;
   },
   fromAmino(object: LogEntry_LabelsEntryAmino): LogEntry_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseLogEntry_LabelsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: LogEntry_LabelsEntry): LogEntry_LabelsEntryAmino {
     const obj: any = {};
@@ -523,25 +527,49 @@ export const LogEntry = {
     return obj;
   },
   fromAmino(object: LogEntryAmino): LogEntry {
-    return {
-      name: object.name,
-      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
-      httpRequest: object?.http_request ? HttpRequest.fromAmino(object.http_request) : undefined,
-      trace: object.trace,
-      insertId: object.insert_id,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseLogEntry();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = fromTimestamp(Timestamp.fromAmino(object.timestamp));
+    }
+    if (object.severity !== undefined && object.severity !== null) {
+      message.severity = logSeverityFromJSON(object.severity);
+    }
+    if (object.http_request !== undefined && object.http_request !== null) {
+      message.httpRequest = HttpRequest.fromAmino(object.http_request);
+    }
+    if (object.trace !== undefined && object.trace !== null) {
+      message.trace = object.trace;
+    }
+    if (object.insert_id !== undefined && object.insert_id !== null) {
+      message.insertId = object.insert_id;
+    }
+    message.labels = Object.entries(object.labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      protoPayload: object?.proto_payload ? Any.fromAmino(object.proto_payload) : undefined,
-      textPayload: object?.text_payload,
-      structPayload: object?.struct_payload ? Struct.fromAmino(object.struct_payload) : undefined,
-      operation: object?.operation ? LogEntryOperation.fromAmino(object.operation) : undefined,
-      sourceLocation: object?.source_location ? LogEntrySourceLocation.fromAmino(object.source_location) : undefined
-    };
+      }
+      return acc;
+    }, {});
+    if (object.proto_payload !== undefined && object.proto_payload !== null) {
+      message.protoPayload = Any.fromAmino(object.proto_payload);
+    }
+    if (object.text_payload !== undefined && object.text_payload !== null) {
+      message.textPayload = object.text_payload;
+    }
+    if (object.struct_payload !== undefined && object.struct_payload !== null) {
+      message.structPayload = Struct.fromAmino(object.struct_payload);
+    }
+    if (object.operation !== undefined && object.operation !== null) {
+      message.operation = LogEntryOperation.fromAmino(object.operation);
+    }
+    if (object.source_location !== undefined && object.source_location !== null) {
+      message.sourceLocation = LogEntrySourceLocation.fromAmino(object.source_location);
+    }
+    return message;
   },
   toAmino(message: LogEntry): LogEntryAmino {
     const obj: any = {};
@@ -680,12 +708,20 @@ export const LogEntryOperation = {
     return obj;
   },
   fromAmino(object: LogEntryOperationAmino): LogEntryOperation {
-    return {
-      id: object.id,
-      producer: object.producer,
-      first: object.first,
-      last: object.last
-    };
+    const message = createBaseLogEntryOperation();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.producer !== undefined && object.producer !== null) {
+      message.producer = object.producer;
+    }
+    if (object.first !== undefined && object.first !== null) {
+      message.first = object.first;
+    }
+    if (object.last !== undefined && object.last !== null) {
+      message.last = object.last;
+    }
+    return message;
   },
   toAmino(message: LogEntryOperation): LogEntryOperationAmino {
     const obj: any = {};
@@ -800,11 +836,17 @@ export const LogEntrySourceLocation = {
     return obj;
   },
   fromAmino(object: LogEntrySourceLocationAmino): LogEntrySourceLocation {
-    return {
-      file: object.file,
-      line: BigInt(object.line),
-      function: object.function
-    };
+    const message = createBaseLogEntrySourceLocation();
+    if (object.file !== undefined && object.file !== null) {
+      message.file = object.file;
+    }
+    if (object.line !== undefined && object.line !== null) {
+      message.line = BigInt(object.line);
+    }
+    if (object.function !== undefined && object.function !== null) {
+      message.function = object.function;
+    }
+    return message;
   },
   toAmino(message: LogEntrySourceLocation): LogEntrySourceLocationAmino {
     const obj: any = {};

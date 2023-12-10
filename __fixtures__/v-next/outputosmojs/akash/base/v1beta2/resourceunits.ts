@@ -143,12 +143,16 @@ export const ResourceUnits = {
     return obj;
   },
   fromAmino(object: ResourceUnitsAmino): ResourceUnits {
-    return {
-      cpu: object?.cpu ? CPU.fromAmino(object.cpu) : undefined,
-      memory: object?.memory ? Memory.fromAmino(object.memory) : undefined,
-      storage: Array.isArray(object?.storage) ? object.storage.map((e: any) => Storage.fromAmino(e)) : [],
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : []
-    };
+    const message = createBaseResourceUnits();
+    if (object.cpu !== undefined && object.cpu !== null) {
+      message.cpu = CPU.fromAmino(object.cpu);
+    }
+    if (object.memory !== undefined && object.memory !== null) {
+      message.memory = Memory.fromAmino(object.memory);
+    }
+    message.storage = object.storage?.map(e => Storage.fromAmino(e)) || [];
+    message.endpoints = object.endpoints?.map(e => Endpoint.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ResourceUnits): ResourceUnitsAmino {
     const obj: any = {};

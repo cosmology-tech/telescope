@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmos.base.query.v1beta1";
 /**
  * PageRequest is to be embedded in gRPC request messages for efficient
@@ -218,13 +219,23 @@ export const PageRequest = {
     return obj;
   },
   fromAmino(object: PageRequestAmino): PageRequest {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      offset: BigInt(object.offset),
-      limit: BigInt(object.limit),
-      countTotal: object.count_total,
-      reverse: object.reverse
-    };
+    const message = createBasePageRequest();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = fromBase64(object.key);
+    }
+    if (object.offset !== undefined && object.offset !== null) {
+      message.offset = BigInt(object.offset);
+    }
+    if (object.limit !== undefined && object.limit !== null) {
+      message.limit = BigInt(object.limit);
+    }
+    if (object.count_total !== undefined && object.count_total !== null) {
+      message.countTotal = object.count_total;
+    }
+    if (object.reverse !== undefined && object.reverse !== null) {
+      message.reverse = object.reverse;
+    }
+    return message;
   },
   toAmino(message: PageRequest): PageRequestAmino {
     const obj: any = {};
@@ -333,10 +344,14 @@ export const PageResponse = {
     return obj;
   },
   fromAmino(object: PageResponseAmino): PageResponse {
-    return {
-      next_key: isSet(object.next_key) ? bytesFromBase64(object.next_key) : new Uint8Array(),
-      total: BigInt(object.total)
-    };
+    const message = createBasePageResponse();
+    if (object.next_key !== undefined && object.next_key !== null) {
+      message.nextKey = fromBase64(object.next_key);
+    }
+    if (object.total !== undefined && object.total !== null) {
+      message.total = BigInt(object.total);
+    }
+    return message;
   },
   toAmino(message: PageResponse): PageResponseAmino {
     const obj: any = {};

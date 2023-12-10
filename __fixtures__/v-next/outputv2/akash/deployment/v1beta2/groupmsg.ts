@@ -162,9 +162,11 @@ export const MsgCloseGroup = {
     return obj;
   },
   fromAmino(object: MsgCloseGroupAmino): MsgCloseGroup {
-    return {
-      id: object?.id ? GroupID.fromAmino(object.id) : GroupID.fromPartial({})
-    };
+    const message = createBaseMsgCloseGroup();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: MsgCloseGroup): MsgCloseGroupAmino {
     const obj: any = {};
@@ -229,7 +231,8 @@ export const MsgCloseGroupResponse = {
     return obj;
   },
   fromAmino(_: MsgCloseGroupResponseAmino): MsgCloseGroupResponse {
-    return {};
+    const message = createBaseMsgCloseGroupResponse();
+    return message;
   },
   toAmino(_: MsgCloseGroupResponse): MsgCloseGroupResponseAmino {
     const obj: any = {};
@@ -309,9 +312,11 @@ export const MsgPauseGroup = {
     return obj;
   },
   fromAmino(object: MsgPauseGroupAmino): MsgPauseGroup {
-    return {
-      id: object?.id ? GroupID.fromAmino(object.id) : GroupID.fromPartial({})
-    };
+    const message = createBaseMsgPauseGroup();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: MsgPauseGroup): MsgPauseGroupAmino {
     const obj: any = {};
@@ -376,7 +381,8 @@ export const MsgPauseGroupResponse = {
     return obj;
   },
   fromAmino(_: MsgPauseGroupResponseAmino): MsgPauseGroupResponse {
-    return {};
+    const message = createBaseMsgPauseGroupResponse();
+    return message;
   },
   toAmino(_: MsgPauseGroupResponse): MsgPauseGroupResponseAmino {
     const obj: any = {};
@@ -456,9 +462,11 @@ export const MsgStartGroup = {
     return obj;
   },
   fromAmino(object: MsgStartGroupAmino): MsgStartGroup {
-    return {
-      id: object?.id ? GroupID.fromAmino(object.id) : GroupID.fromPartial({})
-    };
+    const message = createBaseMsgStartGroup();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: MsgStartGroup): MsgStartGroupAmino {
     const obj: any = {};
@@ -523,7 +531,8 @@ export const MsgStartGroupResponse = {
     return obj;
   },
   fromAmino(_: MsgStartGroupResponseAmino): MsgStartGroupResponse {
-    return {};
+    const message = createBaseMsgStartGroupResponse();
+    return message;
   },
   toAmino(_: MsgStartGroupResponse): MsgStartGroupResponseAmino {
     const obj: any = {};

@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmos.base.kv.v1beta1";
 /** Pairs defines a repeated slice of Pair objects. */
 export interface Pairs {
@@ -101,9 +102,9 @@ export const Pairs = {
     return obj;
   },
   fromAmino(object: PairsAmino): Pairs {
-    return {
-      pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => Pair.fromAmino(e)) : []
-    };
+    const message = createBasePairs();
+    message.pairs = object.pairs?.map(e => Pair.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Pairs, useInterfaces: boolean = true): PairsAmino {
     const obj: any = {};
@@ -196,10 +197,14 @@ export const Pair = {
     return obj;
   },
   fromAmino(object: PairAmino): Pair {
-    return {
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
-    };
+    const message = createBasePair();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = fromBase64(object.key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = fromBase64(object.value);
+    }
+    return message;
   },
   toAmino(message: Pair, useInterfaces: boolean = true): PairAmino {
     const obj: any = {};

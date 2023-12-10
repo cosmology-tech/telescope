@@ -1,6 +1,6 @@
 import { ProposalExecutorResult, ProposalExecutorResultSDKType, proposalExecutorResultFromJSON } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet } from "../../../helpers";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.group.v1";
 /** EventCreateGroup is an event emitted when a group is created. */
 export interface EventCreateGroup {
@@ -248,9 +248,11 @@ export const EventCreateGroup = {
     return message;
   },
   fromAmino(object: EventCreateGroupAmino): EventCreateGroup {
-    return {
-      groupId: BigInt(object.group_id)
-    };
+    const message = createBaseEventCreateGroup();
+    if (object.group_id !== undefined && object.group_id !== null) {
+      message.groupId = BigInt(object.group_id);
+    }
+    return message;
   },
   toAmino(message: EventCreateGroup): EventCreateGroupAmino {
     const obj: any = {};
@@ -317,9 +319,11 @@ export const EventUpdateGroup = {
     return message;
   },
   fromAmino(object: EventUpdateGroupAmino): EventUpdateGroup {
-    return {
-      groupId: BigInt(object.group_id)
-    };
+    const message = createBaseEventUpdateGroup();
+    if (object.group_id !== undefined && object.group_id !== null) {
+      message.groupId = BigInt(object.group_id);
+    }
+    return message;
   },
   toAmino(message: EventUpdateGroup): EventUpdateGroupAmino {
     const obj: any = {};
@@ -384,9 +388,11 @@ export const EventCreateGroupPolicy = {
     return message;
   },
   fromAmino(object: EventCreateGroupPolicyAmino): EventCreateGroupPolicy {
-    return {
-      address: object.address
-    };
+    const message = createBaseEventCreateGroupPolicy();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    return message;
   },
   toAmino(message: EventCreateGroupPolicy): EventCreateGroupPolicyAmino {
     const obj: any = {};
@@ -451,9 +457,11 @@ export const EventUpdateGroupPolicy = {
     return message;
   },
   fromAmino(object: EventUpdateGroupPolicyAmino): EventUpdateGroupPolicy {
-    return {
-      address: object.address
-    };
+    const message = createBaseEventUpdateGroupPolicy();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    return message;
   },
   toAmino(message: EventUpdateGroupPolicy): EventUpdateGroupPolicyAmino {
     const obj: any = {};
@@ -520,9 +528,11 @@ export const EventSubmitProposal = {
     return message;
   },
   fromAmino(object: EventSubmitProposalAmino): EventSubmitProposal {
-    return {
-      proposalId: BigInt(object.proposal_id)
-    };
+    const message = createBaseEventSubmitProposal();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    return message;
   },
   toAmino(message: EventSubmitProposal): EventSubmitProposalAmino {
     const obj: any = {};
@@ -589,9 +599,11 @@ export const EventWithdrawProposal = {
     return message;
   },
   fromAmino(object: EventWithdrawProposalAmino): EventWithdrawProposal {
-    return {
-      proposalId: BigInt(object.proposal_id)
-    };
+    const message = createBaseEventWithdrawProposal();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    return message;
   },
   toAmino(message: EventWithdrawProposal): EventWithdrawProposalAmino {
     const obj: any = {};
@@ -658,9 +670,11 @@ export const EventVote = {
     return message;
   },
   fromAmino(object: EventVoteAmino): EventVote {
-    return {
-      proposalId: BigInt(object.proposal_id)
-    };
+    const message = createBaseEventVote();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    return message;
   },
   toAmino(message: EventVote): EventVoteAmino {
     const obj: any = {};
@@ -735,10 +749,14 @@ export const EventExec = {
     return message;
   },
   fromAmino(object: EventExecAmino): EventExec {
-    return {
-      proposalId: BigInt(object.proposal_id),
-      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : -1
-    };
+    const message = createBaseEventExec();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    if (object.result !== undefined && object.result !== null) {
+      message.result = proposalExecutorResultFromJSON(object.result);
+    }
+    return message;
   },
   toAmino(message: EventExec): EventExecAmino {
     const obj: any = {};
@@ -814,10 +832,14 @@ export const EventLeaveGroup = {
     return message;
   },
   fromAmino(object: EventLeaveGroupAmino): EventLeaveGroup {
-    return {
-      groupId: BigInt(object.group_id),
-      address: object.address
-    };
+    const message = createBaseEventLeaveGroup();
+    if (object.group_id !== undefined && object.group_id !== null) {
+      message.groupId = BigInt(object.group_id);
+    }
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    return message;
   },
   toAmino(message: EventLeaveGroup): EventLeaveGroupAmino {
     const obj: any = {};

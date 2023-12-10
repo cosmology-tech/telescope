@@ -1,6 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, Exact, isSet } from "../../../helpers";
+import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta1";
 /** State stores state for an escrow account */
 export enum Account_State {
@@ -252,10 +252,14 @@ export const AccountID = {
     return message;
   },
   fromAmino(object: AccountIDAmino): AccountID {
-    return {
-      scope: object.scope,
-      xid: object.xid
-    };
+    const message = createBaseAccountID();
+    if (object.scope !== undefined && object.scope !== null) {
+      message.scope = object.scope;
+    }
+    if (object.xid !== undefined && object.xid !== null) {
+      message.xid = object.xid;
+    }
+    return message;
   },
   toAmino(message: AccountID): AccountIDAmino {
     const obj: any = {};
@@ -363,14 +367,26 @@ export const Account = {
     return message;
   },
   fromAmino(object: AccountAmino): Account {
-    return {
-      id: object?.id ? AccountID.fromAmino(object.id) : AccountID.fromPartial({}),
-      owner: object.owner,
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
-      balance: object?.balance ? Coin.fromAmino(object.balance) : Coin.fromPartial({}),
-      transferred: object?.transferred ? Coin.fromAmino(object.transferred) : Coin.fromPartial({}),
-      settledAt: BigInt(object.settled_at)
-    };
+    const message = createBaseAccount();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = AccountID.fromAmino(object.id);
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = account_StateFromJSON(object.state);
+    }
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = Coin.fromAmino(object.balance);
+    }
+    if (object.transferred !== undefined && object.transferred !== null) {
+      message.transferred = Coin.fromAmino(object.transferred);
+    }
+    if (object.settled_at !== undefined && object.settled_at !== null) {
+      message.settledAt = BigInt(object.settled_at);
+    }
+    return message;
   },
   toAmino(message: Account): AccountAmino {
     const obj: any = {};
@@ -490,15 +506,29 @@ export const Payment = {
     return message;
   },
   fromAmino(object: PaymentAmino): Payment {
-    return {
-      accountId: object?.account_id ? AccountID.fromAmino(object.account_id) : AccountID.fromPartial({}),
-      paymentId: object.payment_id,
-      owner: object.owner,
-      state: isSet(object.state) ? payment_StateFromJSON(object.state) : -1,
-      rate: object?.rate ? Coin.fromAmino(object.rate) : Coin.fromPartial({}),
-      balance: object?.balance ? Coin.fromAmino(object.balance) : Coin.fromPartial({}),
-      withdrawn: object?.withdrawn ? Coin.fromAmino(object.withdrawn) : Coin.fromPartial({})
-    };
+    const message = createBasePayment();
+    if (object.account_id !== undefined && object.account_id !== null) {
+      message.accountId = AccountID.fromAmino(object.account_id);
+    }
+    if (object.payment_id !== undefined && object.payment_id !== null) {
+      message.paymentId = object.payment_id;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = payment_StateFromJSON(object.state);
+    }
+    if (object.rate !== undefined && object.rate !== null) {
+      message.rate = Coin.fromAmino(object.rate);
+    }
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = Coin.fromAmino(object.balance);
+    }
+    if (object.withdrawn !== undefined && object.withdrawn !== null) {
+      message.withdrawn = Coin.fromAmino(object.withdrawn);
+    }
+    return message;
   },
   toAmino(message: Payment): PaymentAmino {
     const obj: any = {};

@@ -266,10 +266,10 @@ export const Logging = {
     return obj;
   },
   fromAmino(object: LoggingAmino): Logging {
-    return {
-      producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Logging_LoggingDestination.fromAmino(e)) : [],
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Logging_LoggingDestination.fromAmino(e)) : []
-    };
+    const message = createBaseLogging();
+    message.producerDestinations = object.producer_destinations?.map(e => Logging_LoggingDestination.fromAmino(e)) || [];
+    message.consumerDestinations = object.consumer_destinations?.map(e => Logging_LoggingDestination.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Logging, useInterfaces: boolean = true): LoggingAmino {
     const obj: any = {};
@@ -374,10 +374,12 @@ export const Logging_LoggingDestination = {
     return obj;
   },
   fromAmino(object: Logging_LoggingDestinationAmino): Logging_LoggingDestination {
-    return {
-      monitoredResource: object.monitored_resource,
-      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => e) : []
-    };
+    const message = createBaseLogging_LoggingDestination();
+    if (object.monitored_resource !== undefined && object.monitored_resource !== null) {
+      message.monitoredResource = object.monitored_resource;
+    }
+    message.logs = object.logs?.map(e => e) || [];
+    return message;
   },
   toAmino(message: Logging_LoggingDestination, useInterfaces: boolean = true): Logging_LoggingDestinationAmino {
     const obj: any = {};

@@ -224,19 +224,37 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
     return obj;
   },
   fromAmino(object: ClientStateAmino): ClientState {
-    return {
-      chainId: object.chain_id,
-      trustLevel: object?.trust_level ? Fraction.fromAmino(object.trust_level) : Fraction.fromPartial({}),
-      trustingPeriod: object?.trusting_period ? Duration.fromAmino(object.trusting_period) : Duration.fromPartial({}),
-      unbondingPeriod: object?.unbonding_period ? Duration.fromAmino(object.unbonding_period) : Duration.fromPartial({}),
-      maxClockDrift: object?.max_clock_drift ? Duration.fromAmino(object.max_clock_drift) : Duration.fromPartial({}),
-      frozenHeight: object?.frozen_height ? Height.fromAmino(object.frozen_height) : Height.fromPartial({}),
-      latestHeight: object?.latest_height ? Height.fromAmino(object.latest_height) : Height.fromPartial({}),
-      proofSpecs: Array.isArray(object?.proof_specs) ? object.proof_specs.map((e: any) => ProofSpec.fromAmino(e)) : [],
-      upgradePath: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => e) : [],
-      allowUpdateAfterExpiry: object.allow_update_after_expiry,
-      allowUpdateAfterMisbehaviour: object.allow_update_after_misbehaviour
-    };
+    const message = createBaseClientState();
+    if (object.chain_id !== undefined && object.chain_id !== null) {
+      message.chainId = object.chain_id;
+    }
+    if (object.trust_level !== undefined && object.trust_level !== null) {
+      message.trustLevel = Fraction.fromAmino(object.trust_level);
+    }
+    if (object.trusting_period !== undefined && object.trusting_period !== null) {
+      message.trustingPeriod = Duration.fromAmino(object.trusting_period);
+    }
+    if (object.unbonding_period !== undefined && object.unbonding_period !== null) {
+      message.unbondingPeriod = Duration.fromAmino(object.unbonding_period);
+    }
+    if (object.max_clock_drift !== undefined && object.max_clock_drift !== null) {
+      message.maxClockDrift = Duration.fromAmino(object.max_clock_drift);
+    }
+    if (object.frozen_height !== undefined && object.frozen_height !== null) {
+      message.frozenHeight = Height.fromAmino(object.frozen_height);
+    }
+    if (object.latest_height !== undefined && object.latest_height !== null) {
+      message.latestHeight = Height.fromAmino(object.latest_height);
+    }
+    message.proofSpecs = object.proof_specs?.map(e => ProofSpec.fromAmino(e)) || [];
+    message.upgradePath = object.upgrade_path?.map(e => e) || [];
+    if (object.allow_update_after_expiry !== undefined && object.allow_update_after_expiry !== null) {
+      message.allowUpdateAfterExpiry = object.allow_update_after_expiry;
+    }
+    if (object.allow_update_after_misbehaviour !== undefined && object.allow_update_after_misbehaviour !== null) {
+      message.allowUpdateAfterMisbehaviour = object.allow_update_after_misbehaviour;
+    }
+    return message;
   },
   toAmino(message: ClientState): ClientStateAmino {
     const obj: any = {};
@@ -683,19 +701,37 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
     return obj;
   },
   fromAmino(object: ClientStateAmino): ClientState {
-    return {
-      chainId: object.chain_id,
-      trustLevel: object?.trust_level ? Fraction.fromAmino(object.trust_level) : Fraction.fromPartial({}),
-      trustingPeriod: object?.trusting_period ? Duration.fromAmino(object.trusting_period) : Duration.fromPartial({}),
-      unbondingPeriod: object?.unbonding_period ? Duration.fromAmino(object.unbonding_period) : Duration.fromPartial({}),
-      maxClockDrift: object?.max_clock_drift ? Duration.fromAmino(object.max_clock_drift) : Duration.fromPartial({}),
-      frozenHeight: object?.frozen_height ? Height.fromAmino(object.frozen_height) : Height.fromPartial({}),
-      latestHeight: object?.latest_height ? Height.fromAmino(object.latest_height) : Height.fromPartial({}),
-      proofSpecs: Array.isArray(object?.proof_specs) ? object.proof_specs.map((e: any) => ProofSpec.fromAmino(e)) : [],
-      upgradePath: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => e) : [],
-      allowUpdateAfterExpiry: object.allow_update_after_expiry,
-      allowUpdateAfterMisbehaviour: object.allow_update_after_misbehaviour
-    };
+    const message = createBaseClientState();
+    if (object.chain_id !== undefined && object.chain_id !== null) {
+      message.chainId = object.chain_id;
+    }
+    if (object.trust_level !== undefined && object.trust_level !== null) {
+      message.trustLevel = Fraction.fromAmino(object.trust_level);
+    }
+    if (object.trusting_period !== undefined && object.trusting_period !== null) {
+      message.trustingPeriod = Duration.fromAmino(object.trusting_period);
+    }
+    if (object.unbonding_period !== undefined && object.unbonding_period !== null) {
+      message.unbondingPeriod = Duration.fromAmino(object.unbonding_period);
+    }
+    if (object.max_clock_drift !== undefined && object.max_clock_drift !== null) {
+      message.maxClockDrift = Duration.fromAmino(object.max_clock_drift);
+    }
+    if (object.frozen_height !== undefined && object.frozen_height !== null) {
+      message.frozenHeight = Height.fromAmino(object.frozen_height);
+    }
+    if (object.latest_height !== undefined && object.latest_height !== null) {
+      message.latestHeight = Height.fromAmino(object.latest_height);
+    }
+    message.proofSpecs = object.proof_specs?.map(e => ProofSpec.fromAmino(e)) || [];
+    message.upgradePath = object.upgrade_path?.map(e => e) || [];
+    if (object.allow_update_after_expiry !== undefined && object.allow_update_after_expiry !== null) {
+      message.allowUpdateAfterExpiry = object.allow_update_after_expiry;
+    }
+    if (object.allow_update_after_misbehaviour !== undefined && object.allow_update_after_misbehaviour !== null) {
+      message.allowUpdateAfterMisbehaviour = object.allow_update_after_misbehaviour;
+    }
+    return message;
   },
   toAmino(message: ClientState): ClientStateAmino {
     const obj: any = {};

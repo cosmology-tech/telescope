@@ -1,7 +1,8 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { toTimestamp, fromTimestamp, DeepPartial, base64FromBytes } from "../../../helpers";
+import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
@@ -191,14 +192,26 @@ export const ValidatorSigningInfo = {
     return message;
   },
   fromAmino(object: ValidatorSigningInfoAmino): ValidatorSigningInfo {
-    return {
-      address: object.address,
-      startHeight: BigInt(object.start_height),
-      indexOffset: BigInt(object.index_offset),
-      jailedUntil: object?.jailed_until ? fromTimestamp(Timestamp.fromAmino(object.jailed_until)) : fromTimestamp(Timestamp.fromPartial({})),
-      tombstoned: object.tombstoned,
-      missedBlocksCounter: BigInt(object.missed_blocks_counter)
-    };
+    const message = createBaseValidatorSigningInfo();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.start_height !== undefined && object.start_height !== null) {
+      message.startHeight = BigInt(object.start_height);
+    }
+    if (object.index_offset !== undefined && object.index_offset !== null) {
+      message.indexOffset = BigInt(object.index_offset);
+    }
+    if (object.jailed_until !== undefined && object.jailed_until !== null) {
+      message.jailedUntil = fromTimestamp(Timestamp.fromAmino(object.jailed_until));
+    }
+    if (object.tombstoned !== undefined && object.tombstoned !== null) {
+      message.tombstoned = object.tombstoned;
+    }
+    if (object.missed_blocks_counter !== undefined && object.missed_blocks_counter !== null) {
+      message.missedBlocksCounter = BigInt(object.missed_blocks_counter);
+    }
+    return message;
   },
   toAmino(message: ValidatorSigningInfo): ValidatorSigningInfoAmino {
     const obj: any = {};
@@ -304,13 +317,23 @@ export const Params = {
     return message;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      signedBlocksWindow: BigInt(object.signed_blocks_window),
-      min_signed_per_window: isSet(object.min_signed_per_window) ? bytesFromBase64(object.min_signed_per_window) : new Uint8Array(),
-      downtimeJailDuration: object?.downtime_jail_duration ? Duration.fromAmino(object.downtime_jail_duration) : Duration.fromPartial({}),
-      slash_fraction_double_sign: isSet(object.slash_fraction_double_sign) ? bytesFromBase64(object.slash_fraction_double_sign) : new Uint8Array(),
-      slash_fraction_downtime: isSet(object.slash_fraction_downtime) ? bytesFromBase64(object.slash_fraction_downtime) : new Uint8Array()
-    };
+    const message = createBaseParams();
+    if (object.signed_blocks_window !== undefined && object.signed_blocks_window !== null) {
+      message.signedBlocksWindow = BigInt(object.signed_blocks_window);
+    }
+    if (object.min_signed_per_window !== undefined && object.min_signed_per_window !== null) {
+      message.minSignedPerWindow = fromBase64(object.min_signed_per_window);
+    }
+    if (object.downtime_jail_duration !== undefined && object.downtime_jail_duration !== null) {
+      message.downtimeJailDuration = Duration.fromAmino(object.downtime_jail_duration);
+    }
+    if (object.slash_fraction_double_sign !== undefined && object.slash_fraction_double_sign !== null) {
+      message.slashFractionDoubleSign = fromBase64(object.slash_fraction_double_sign);
+    }
+    if (object.slash_fraction_downtime !== undefined && object.slash_fraction_downtime !== null) {
+      message.slashFractionDowntime = fromBase64(object.slash_fraction_downtime);
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

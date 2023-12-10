@@ -213,9 +213,9 @@ export const ProjectProperties = {
     return obj;
   },
   fromAmino(object: ProjectPropertiesAmino): ProjectProperties {
-    return {
-      properties: Array.isArray(object?.properties) ? object.properties.map((e: any) => Property.fromAmino(e)) : []
-    };
+    const message = createBaseProjectProperties();
+    message.properties = object.properties?.map(e => Property.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ProjectProperties): ProjectPropertiesAmino {
     const obj: any = {};
@@ -329,11 +329,17 @@ export const Property = {
     return obj;
   },
   fromAmino(object: PropertyAmino): Property {
-    return {
-      name: object.name,
-      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : -1,
-      description: object.description
-    };
+    const message = createBaseProperty();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.type !== undefined && object.type !== null) {
+      message.type = property_PropertyTypeFromJSON(object.type);
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: Property): PropertyAmino {
     const obj: any = {};

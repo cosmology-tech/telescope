@@ -2,6 +2,7 @@ import { MsgStoreCode, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantia
 import { Params, ParamsSDKType, CodeInfo, CodeInfoSDKType, ContractInfo, ContractInfoSDKType, Model, ModelSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisState {
@@ -241,13 +242,15 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({}),
-      codes: Array.isArray(object?.codes) ? object.codes.map((e: any) => Code.fromAmino(e)) : [],
-      contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => Contract.fromAmino(e)) : [],
-      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => Sequence.fromAmino(e)) : [],
-      genMsgs: Array.isArray(object?.gen_msgs) ? object.gen_msgs.map((e: any) => GenesisState_GenMsgs.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.codes = object.codes?.map(e => Code.fromAmino(e)) || [];
+    message.contracts = object.contracts?.map(e => Contract.fromAmino(e)) || [];
+    message.sequences = object.sequences?.map(e => Sequence.fromAmino(e)) || [];
+    message.genMsgs = object.gen_msgs?.map(e => GenesisState_GenMsgs.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -389,11 +392,17 @@ export const GenesisState_GenMsgs = {
     return obj;
   },
   fromAmino(object: GenesisState_GenMsgsAmino): GenesisState_GenMsgs {
-    return {
-      storeCode: object?.store_code ? MsgStoreCode.fromAmino(object.store_code) : undefined,
-      instantiateContract: object?.instantiate_contract ? MsgInstantiateContract.fromAmino(object.instantiate_contract) : undefined,
-      executeContract: object?.execute_contract ? MsgExecuteContract.fromAmino(object.execute_contract) : undefined
-    };
+    const message = createBaseGenesisState_GenMsgs();
+    if (object.store_code !== undefined && object.store_code !== null) {
+      message.storeCode = MsgStoreCode.fromAmino(object.store_code);
+    }
+    if (object.instantiate_contract !== undefined && object.instantiate_contract !== null) {
+      message.instantiateContract = MsgInstantiateContract.fromAmino(object.instantiate_contract);
+    }
+    if (object.execute_contract !== undefined && object.execute_contract !== null) {
+      message.executeContract = MsgExecuteContract.fromAmino(object.execute_contract);
+    }
+    return message;
   },
   toAmino(message: GenesisState_GenMsgs): GenesisState_GenMsgsAmino {
     const obj: any = {};
@@ -528,12 +537,20 @@ export const Code = {
     return obj;
   },
   fromAmino(object: CodeAmino): Code {
-    return {
-      codeId: BigInt(object.code_id),
-      codeInfo: object?.code_info ? CodeInfo.fromAmino(object.code_info) : CodeInfo.fromPartial({}),
-      code_bytes: isSet(object.code_bytes) ? bytesFromBase64(object.code_bytes) : new Uint8Array(),
-      pinned: object.pinned
-    };
+    const message = createBaseCode();
+    if (object.code_id !== undefined && object.code_id !== null) {
+      message.codeId = BigInt(object.code_id);
+    }
+    if (object.code_info !== undefined && object.code_info !== null) {
+      message.codeInfo = CodeInfo.fromAmino(object.code_info);
+    }
+    if (object.code_bytes !== undefined && object.code_bytes !== null) {
+      message.codeBytes = fromBase64(object.code_bytes);
+    }
+    if (object.pinned !== undefined && object.pinned !== null) {
+      message.pinned = object.pinned;
+    }
+    return message;
   },
   toAmino(message: Code): CodeAmino {
     const obj: any = {};
@@ -662,11 +679,15 @@ export const Contract = {
     return obj;
   },
   fromAmino(object: ContractAmino): Contract {
-    return {
-      contractAddress: object.contract_address,
-      contractInfo: object?.contract_info ? ContractInfo.fromAmino(object.contract_info) : ContractInfo.fromPartial({}),
-      contractState: Array.isArray(object?.contract_state) ? object.contract_state.map((e: any) => Model.fromAmino(e)) : []
-    };
+    const message = createBaseContract();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    if (object.contract_info !== undefined && object.contract_info !== null) {
+      message.contractInfo = ContractInfo.fromAmino(object.contract_info);
+    }
+    message.contractState = object.contract_state?.map(e => Model.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Contract): ContractAmino {
     const obj: any = {};
@@ -777,10 +798,14 @@ export const Sequence = {
     return obj;
   },
   fromAmino(object: SequenceAmino): Sequence {
-    return {
-      id_key: isSet(object.id_key) ? bytesFromBase64(object.id_key) : new Uint8Array(),
-      value: BigInt(object.value)
-    };
+    const message = createBaseSequence();
+    if (object.id_key !== undefined && object.id_key !== null) {
+      message.idKey = fromBase64(object.id_key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value);
+    }
+    return message;
   },
   toAmino(message: Sequence): SequenceAmino {
     const obj: any = {};

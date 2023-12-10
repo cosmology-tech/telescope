@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Exact } from "../../../helpers";
+import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "akash.base.v1beta1";
 /** Unit stores cpu, memory and storage metrics */
 export interface ResourceValue {
@@ -74,9 +75,11 @@ export const ResourceValue = {
     return obj;
   },
   fromAmino(object: ResourceValueAmino): ResourceValue {
-    return {
-      val: isSet(object.val) ? bytesFromBase64(object.val) : new Uint8Array()
-    };
+    const message = createBaseResourceValue();
+    if (object.val !== undefined && object.val !== null) {
+      message.val = fromBase64(object.val);
+    }
+    return message;
   },
   toAmino(message: ResourceValue): ResourceValueAmino {
     const obj: any = {};

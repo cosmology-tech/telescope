@@ -3,6 +3,7 @@ import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/proto
 import { Height, HeightAmino, HeightSDKType, IdentifiedClientState, IdentifiedClientStateAmino, IdentifiedClientStateSDKType, ConsensusStateWithHeight, ConsensusStateWithHeightAmino, ConsensusStateWithHeightSDKType, Params, ParamsAmino, ParamsSDKType } from "./client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "ibc.core.client.v1";
 /**
  * QueryClientStateRequest is the request type for the Query/ClientState RPC
@@ -529,9 +530,11 @@ export const QueryClientStateRequest = {
     return obj;
   },
   fromAmino(object: QueryClientStateRequestAmino): QueryClientStateRequest {
-    return {
-      clientId: object.client_id
-    };
+    const message = createBaseQueryClientStateRequest();
+    if (object.client_id !== undefined && object.client_id !== null) {
+      message.clientId = object.client_id;
+    }
+    return message;
   },
   toAmino(message: QueryClientStateRequest, useInterfaces: boolean = true): QueryClientStateRequestAmino {
     const obj: any = {};
@@ -636,11 +639,17 @@ export const QueryClientStateResponse = {
     return obj;
   },
   fromAmino(object: QueryClientStateResponseAmino): QueryClientStateResponse {
-    return {
-      clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
-      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
-    };
+    const message = createBaseQueryClientStateResponse();
+    if (object.client_state !== undefined && object.client_state !== null) {
+      message.clientState = Any.fromAmino(object.client_state);
+    }
+    if (object.proof !== undefined && object.proof !== null) {
+      message.proof = fromBase64(object.proof);
+    }
+    if (object.proof_height !== undefined && object.proof_height !== null) {
+      message.proofHeight = Height.fromAmino(object.proof_height);
+    }
+    return message;
   },
   toAmino(message: QueryClientStateResponse, useInterfaces: boolean = true): QueryClientStateResponseAmino {
     const obj: any = {};
@@ -721,9 +730,11 @@ export const QueryClientStatesRequest = {
     return obj;
   },
   fromAmino(object: QueryClientStatesRequestAmino): QueryClientStatesRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryClientStatesRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryClientStatesRequest, useInterfaces: boolean = true): QueryClientStatesRequestAmino {
     const obj: any = {};
@@ -822,10 +833,12 @@ export const QueryClientStatesResponse = {
     return obj;
   },
   fromAmino(object: QueryClientStatesResponseAmino): QueryClientStatesResponse {
-    return {
-      clientStates: Array.isArray(object?.client_states) ? object.client_states.map((e: any) => IdentifiedClientState.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryClientStatesResponse();
+    message.clientStates = object.client_states?.map(e => IdentifiedClientState.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryClientStatesResponse, useInterfaces: boolean = true): QueryClientStatesResponseAmino {
     const obj: any = {};
@@ -947,12 +960,20 @@ export const QueryConsensusStateRequest = {
     return obj;
   },
   fromAmino(object: QueryConsensusStateRequestAmino): QueryConsensusStateRequest {
-    return {
-      clientId: object.client_id,
-      revisionNumber: BigInt(object.revision_number),
-      revisionHeight: BigInt(object.revision_height),
-      latestHeight: object.latest_height
-    };
+    const message = createBaseQueryConsensusStateRequest();
+    if (object.client_id !== undefined && object.client_id !== null) {
+      message.clientId = object.client_id;
+    }
+    if (object.revision_number !== undefined && object.revision_number !== null) {
+      message.revisionNumber = BigInt(object.revision_number);
+    }
+    if (object.revision_height !== undefined && object.revision_height !== null) {
+      message.revisionHeight = BigInt(object.revision_height);
+    }
+    if (object.latest_height !== undefined && object.latest_height !== null) {
+      message.latestHeight = object.latest_height;
+    }
+    return message;
   },
   toAmino(message: QueryConsensusStateRequest, useInterfaces: boolean = true): QueryConsensusStateRequestAmino {
     const obj: any = {};
@@ -1060,11 +1081,17 @@ export const QueryConsensusStateResponse = {
     return obj;
   },
   fromAmino(object: QueryConsensusStateResponseAmino): QueryConsensusStateResponse {
-    return {
-      consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
-      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : Height.fromPartial({})
-    };
+    const message = createBaseQueryConsensusStateResponse();
+    if (object.consensus_state !== undefined && object.consensus_state !== null) {
+      message.consensusState = Any.fromAmino(object.consensus_state);
+    }
+    if (object.proof !== undefined && object.proof !== null) {
+      message.proof = fromBase64(object.proof);
+    }
+    if (object.proof_height !== undefined && object.proof_height !== null) {
+      message.proofHeight = Height.fromAmino(object.proof_height);
+    }
+    return message;
   },
   toAmino(message: QueryConsensusStateResponse, useInterfaces: boolean = true): QueryConsensusStateResponseAmino {
     const obj: any = {};
@@ -1157,10 +1184,14 @@ export const QueryConsensusStatesRequest = {
     return obj;
   },
   fromAmino(object: QueryConsensusStatesRequestAmino): QueryConsensusStatesRequest {
-    return {
-      clientId: object.client_id,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryConsensusStatesRequest();
+    if (object.client_id !== undefined && object.client_id !== null) {
+      message.clientId = object.client_id;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryConsensusStatesRequest, useInterfaces: boolean = true): QueryConsensusStatesRequestAmino {
     const obj: any = {};
@@ -1260,10 +1291,12 @@ export const QueryConsensusStatesResponse = {
     return obj;
   },
   fromAmino(object: QueryConsensusStatesResponseAmino): QueryConsensusStatesResponse {
-    return {
-      consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryConsensusStatesResponse();
+    message.consensusStates = object.consensus_states?.map(e => ConsensusStateWithHeight.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryConsensusStatesResponse, useInterfaces: boolean = true): QueryConsensusStatesResponseAmino {
     const obj: any = {};
@@ -1345,9 +1378,11 @@ export const QueryClientStatusRequest = {
     return obj;
   },
   fromAmino(object: QueryClientStatusRequestAmino): QueryClientStatusRequest {
-    return {
-      clientId: object.client_id
-    };
+    const message = createBaseQueryClientStatusRequest();
+    if (object.client_id !== undefined && object.client_id !== null) {
+      message.clientId = object.client_id;
+    }
+    return message;
   },
   toAmino(message: QueryClientStatusRequest, useInterfaces: boolean = true): QueryClientStatusRequestAmino {
     const obj: any = {};
@@ -1424,9 +1459,11 @@ export const QueryClientStatusResponse = {
     return obj;
   },
   fromAmino(object: QueryClientStatusResponseAmino): QueryClientStatusResponse {
-    return {
-      status: object.status
-    };
+    const message = createBaseQueryClientStatusResponse();
+    if (object.status !== undefined && object.status !== null) {
+      message.status = object.status;
+    }
+    return message;
   },
   toAmino(message: QueryClientStatusResponse, useInterfaces: boolean = true): QueryClientStatusResponseAmino {
     const obj: any = {};
@@ -1489,7 +1526,8 @@ export const QueryClientParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryClientParamsRequestAmino): QueryClientParamsRequest {
-    return {};
+    const message = createBaseQueryClientParamsRequest();
+    return message;
   },
   toAmino(_: QueryClientParamsRequest, useInterfaces: boolean = true): QueryClientParamsRequestAmino {
     const obj: any = {};
@@ -1567,9 +1605,11 @@ export const QueryClientParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryClientParamsResponseAmino): QueryClientParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryClientParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryClientParamsResponse, useInterfaces: boolean = true): QueryClientParamsResponseAmino {
     const obj: any = {};
@@ -1632,7 +1672,8 @@ export const QueryUpgradedClientStateRequest = {
     return obj;
   },
   fromAmino(_: QueryUpgradedClientStateRequestAmino): QueryUpgradedClientStateRequest {
-    return {};
+    const message = createBaseQueryUpgradedClientStateRequest();
+    return message;
   },
   toAmino(_: QueryUpgradedClientStateRequest, useInterfaces: boolean = true): QueryUpgradedClientStateRequestAmino {
     const obj: any = {};
@@ -1710,9 +1751,11 @@ export const QueryUpgradedClientStateResponse = {
     return obj;
   },
   fromAmino(object: QueryUpgradedClientStateResponseAmino): QueryUpgradedClientStateResponse {
-    return {
-      upgradedClientState: object?.upgraded_client_state ? Any.fromAmino(object.upgraded_client_state) : undefined
-    };
+    const message = createBaseQueryUpgradedClientStateResponse();
+    if (object.upgraded_client_state !== undefined && object.upgraded_client_state !== null) {
+      message.upgradedClientState = Any.fromAmino(object.upgraded_client_state);
+    }
+    return message;
   },
   toAmino(message: QueryUpgradedClientStateResponse, useInterfaces: boolean = true): QueryUpgradedClientStateResponseAmino {
     const obj: any = {};
@@ -1775,7 +1818,8 @@ export const QueryUpgradedConsensusStateRequest = {
     return obj;
   },
   fromAmino(_: QueryUpgradedConsensusStateRequestAmino): QueryUpgradedConsensusStateRequest {
-    return {};
+    const message = createBaseQueryUpgradedConsensusStateRequest();
+    return message;
   },
   toAmino(_: QueryUpgradedConsensusStateRequest, useInterfaces: boolean = true): QueryUpgradedConsensusStateRequestAmino {
     const obj: any = {};
@@ -1853,9 +1897,11 @@ export const QueryUpgradedConsensusStateResponse = {
     return obj;
   },
   fromAmino(object: QueryUpgradedConsensusStateResponseAmino): QueryUpgradedConsensusStateResponse {
-    return {
-      upgradedConsensusState: object?.upgraded_consensus_state ? Any.fromAmino(object.upgraded_consensus_state) : undefined
-    };
+    const message = createBaseQueryUpgradedConsensusStateResponse();
+    if (object.upgraded_consensus_state !== undefined && object.upgraded_consensus_state !== null) {
+      message.upgradedConsensusState = Any.fromAmino(object.upgraded_consensus_state);
+    }
+    return message;
   },
   toAmino(message: QueryUpgradedConsensusStateResponse, useInterfaces: boolean = true): QueryUpgradedConsensusStateResponseAmino {
     const obj: any = {};

@@ -230,12 +230,18 @@ export const Endpoint = {
     return obj;
   },
   fromAmino(object: EndpointAmino): Endpoint {
-    return {
-      name: object.name,
-      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => e) : [],
-      target: object.target,
-      allowCors: object.allow_cors
-    };
+    const message = createBaseEndpoint();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    message.aliases = object.aliases?.map(e => e) || [];
+    if (object.target !== undefined && object.target !== null) {
+      message.target = object.target;
+    }
+    if (object.allow_cors !== undefined && object.allow_cors !== null) {
+      message.allowCors = object.allow_cors;
+    }
+    return message;
   },
   toAmino(message: Endpoint, useInterfaces: boolean = true): EndpointAmino {
     const obj: any = {};

@@ -145,12 +145,16 @@ export const TickInfo = {
     return obj;
   },
   fromAmino(object: TickInfoAmino): TickInfo {
-    return {
-      liquidityGross: object.liquidity_gross,
-      liquidityNet: object.liquidity_net,
-      feeGrowthOutside: Array.isArray(object?.fee_growth_outside) ? object.fee_growth_outside.map((e: any) => DecCoin.fromAmino(e)) : [],
-      uptimeTrackers: Array.isArray(object?.uptime_trackers) ? object.uptime_trackers.map((e: any) => UptimeTracker.fromAmino(e)) : []
-    };
+    const message = createBaseTickInfo();
+    if (object.liquidity_gross !== undefined && object.liquidity_gross !== null) {
+      message.liquidityGross = object.liquidity_gross;
+    }
+    if (object.liquidity_net !== undefined && object.liquidity_net !== null) {
+      message.liquidityNet = object.liquidity_net;
+    }
+    message.feeGrowthOutside = object.fee_growth_outside?.map(e => DecCoin.fromAmino(e)) || [];
+    message.uptimeTrackers = object.uptime_trackers?.map(e => UptimeTracker.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: TickInfo): TickInfoAmino {
     const obj: any = {};
@@ -259,9 +263,9 @@ export const UptimeTracker = {
     return obj;
   },
   fromAmino(object: UptimeTrackerAmino): UptimeTracker {
-    return {
-      uptimeGrowthOutside: Array.isArray(object?.uptime_growth_outside) ? object.uptime_growth_outside.map((e: any) => DecCoin.fromAmino(e)) : []
-    };
+    const message = createBaseUptimeTracker();
+    message.uptimeGrowthOutside = object.uptime_growth_outside?.map(e => DecCoin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: UptimeTracker): UptimeTrackerAmino {
     const obj: any = {};

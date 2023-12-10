@@ -274,11 +274,17 @@ export const MsgSuperfluidDelegate = {
     return message;
   },
   fromAmino(object: MsgSuperfluidDelegateAmino): MsgSuperfluidDelegate {
-    return {
-      sender: object.sender,
-      lockId: BigInt(object.lock_id),
-      valAddr: object.val_addr
-    };
+    const message = createBaseMsgSuperfluidDelegate();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.lock_id !== undefined && object.lock_id !== null) {
+      message.lockId = BigInt(object.lock_id);
+    }
+    if (object.val_addr !== undefined && object.val_addr !== null) {
+      message.valAddr = object.val_addr;
+    }
+    return message;
   },
   toAmino(message: MsgSuperfluidDelegate): MsgSuperfluidDelegateAmino {
     const obj: any = {};
@@ -336,7 +342,8 @@ export const MsgSuperfluidDelegateResponse = {
     return message;
   },
   fromAmino(_: MsgSuperfluidDelegateResponseAmino): MsgSuperfluidDelegateResponse {
-    return {};
+    const message = createBaseMsgSuperfluidDelegateResponse();
+    return message;
   },
   toAmino(_: MsgSuperfluidDelegateResponse): MsgSuperfluidDelegateResponseAmino {
     const obj: any = {};
@@ -410,10 +417,14 @@ export const MsgSuperfluidUndelegate = {
     return message;
   },
   fromAmino(object: MsgSuperfluidUndelegateAmino): MsgSuperfluidUndelegate {
-    return {
-      sender: object.sender,
-      lockId: BigInt(object.lock_id)
-    };
+    const message = createBaseMsgSuperfluidUndelegate();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.lock_id !== undefined && object.lock_id !== null) {
+      message.lockId = BigInt(object.lock_id);
+    }
+    return message;
   },
   toAmino(message: MsgSuperfluidUndelegate): MsgSuperfluidUndelegateAmino {
     const obj: any = {};
@@ -470,7 +481,8 @@ export const MsgSuperfluidUndelegateResponse = {
     return message;
   },
   fromAmino(_: MsgSuperfluidUndelegateResponseAmino): MsgSuperfluidUndelegateResponse {
-    return {};
+    const message = createBaseMsgSuperfluidUndelegateResponse();
+    return message;
   },
   toAmino(_: MsgSuperfluidUndelegateResponse): MsgSuperfluidUndelegateResponseAmino {
     const obj: any = {};
@@ -544,10 +556,14 @@ export const MsgSuperfluidUnbondLock = {
     return message;
   },
   fromAmino(object: MsgSuperfluidUnbondLockAmino): MsgSuperfluidUnbondLock {
-    return {
-      sender: object.sender,
-      lockId: BigInt(object.lock_id)
-    };
+    const message = createBaseMsgSuperfluidUnbondLock();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.lock_id !== undefined && object.lock_id !== null) {
+      message.lockId = BigInt(object.lock_id);
+    }
+    return message;
   },
   toAmino(message: MsgSuperfluidUnbondLock): MsgSuperfluidUnbondLockAmino {
     const obj: any = {};
@@ -604,7 +620,8 @@ export const MsgSuperfluidUnbondLockResponse = {
     return message;
   },
   fromAmino(_: MsgSuperfluidUnbondLockResponseAmino): MsgSuperfluidUnbondLockResponse {
-    return {};
+    const message = createBaseMsgSuperfluidUnbondLockResponse();
+    return message;
   },
   toAmino(_: MsgSuperfluidUnbondLockResponse): MsgSuperfluidUnbondLockResponseAmino {
     const obj: any = {};
@@ -684,11 +701,15 @@ export const MsgLockAndSuperfluidDelegate = {
     return message;
   },
   fromAmino(object: MsgLockAndSuperfluidDelegateAmino): MsgLockAndSuperfluidDelegate {
-    return {
-      sender: object.sender,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : [],
-      valAddr: object.val_addr
-    };
+    const message = createBaseMsgLockAndSuperfluidDelegate();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    message.coins = object.coins?.map(e => Coin.fromAmino(e)) || [];
+    if (object.val_addr !== undefined && object.val_addr !== null) {
+      message.valAddr = object.val_addr;
+    }
+    return message;
   },
   toAmino(message: MsgLockAndSuperfluidDelegate): MsgLockAndSuperfluidDelegateAmino {
     const obj: any = {};
@@ -761,9 +782,11 @@ export const MsgLockAndSuperfluidDelegateResponse = {
     return message;
   },
   fromAmino(object: MsgLockAndSuperfluidDelegateResponseAmino): MsgLockAndSuperfluidDelegateResponse {
-    return {
-      ID: BigInt(object.ID)
-    };
+    const message = createBaseMsgLockAndSuperfluidDelegateResponse();
+    if (object.ID !== undefined && object.ID !== null) {
+      message.ID = BigInt(object.ID);
+    }
+    return message;
   },
   toAmino(message: MsgLockAndSuperfluidDelegateResponse): MsgLockAndSuperfluidDelegateResponseAmino {
     const obj: any = {};
@@ -838,10 +861,14 @@ export const MsgUnPoolWhitelistedPool = {
     return message;
   },
   fromAmino(object: MsgUnPoolWhitelistedPoolAmino): MsgUnPoolWhitelistedPool {
-    return {
-      sender: object.sender,
-      poolId: BigInt(object.pool_id)
-    };
+    const message = createBaseMsgUnPoolWhitelistedPool();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    return message;
   },
   toAmino(message: MsgUnPoolWhitelistedPool): MsgUnPoolWhitelistedPoolAmino {
     const obj: any = {};
@@ -916,9 +943,9 @@ export const MsgUnPoolWhitelistedPoolResponse = {
     return message;
   },
   fromAmino(object: MsgUnPoolWhitelistedPoolResponseAmino): MsgUnPoolWhitelistedPoolResponse {
-    return {
-      exitedLockIds: Array.isArray(object?.exited_lock_ids) ? object.exited_lock_ids.map((e: any) => BigInt(e)) : []
-    };
+    const message = createBaseMsgUnPoolWhitelistedPoolResponse();
+    message.exitedLockIds = object.exited_lock_ids?.map(e => BigInt(e)) || [];
+    return message;
   },
   toAmino(message: MsgUnPoolWhitelistedPoolResponse): MsgUnPoolWhitelistedPoolResponseAmino {
     const obj: any = {};

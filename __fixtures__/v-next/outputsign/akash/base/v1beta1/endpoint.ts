@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, Exact, isSet } from "../../../helpers";
+import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta1";
 /** This describes how the endpoint is implemented when the lease is deployed */
 export enum Endpoint_Kind {
@@ -92,9 +92,11 @@ export const Endpoint = {
     return message;
   },
   fromAmino(object: EndpointAmino): Endpoint {
-    return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1
-    };
+    const message = createBaseEndpoint();
+    if (object.kind !== undefined && object.kind !== null) {
+      message.kind = endpoint_KindFromJSON(object.kind);
+    }
+    return message;
   },
   toAmino(message: Endpoint): EndpointAmino {
     const obj: any = {};

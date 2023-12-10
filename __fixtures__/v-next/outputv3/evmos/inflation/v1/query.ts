@@ -286,7 +286,8 @@ export const QueryPeriodRequest = {
     return obj;
   },
   fromAmino(_: QueryPeriodRequestAmino): QueryPeriodRequest {
-    return {};
+    const message = createBaseQueryPeriodRequest();
+    return message;
   },
   toAmino(_: QueryPeriodRequest, useInterfaces: boolean = true): QueryPeriodRequestAmino {
     const obj: any = {};
@@ -363,9 +364,11 @@ export const QueryPeriodResponse = {
     return obj;
   },
   fromAmino(object: QueryPeriodResponseAmino): QueryPeriodResponse {
-    return {
-      period: BigInt(object.period)
-    };
+    const message = createBaseQueryPeriodResponse();
+    if (object.period !== undefined && object.period !== null) {
+      message.period = BigInt(object.period);
+    }
+    return message;
   },
   toAmino(message: QueryPeriodResponse, useInterfaces: boolean = true): QueryPeriodResponseAmino {
     const obj: any = {};
@@ -427,7 +430,8 @@ export const QueryEpochMintProvisionRequest = {
     return obj;
   },
   fromAmino(_: QueryEpochMintProvisionRequestAmino): QueryEpochMintProvisionRequest {
-    return {};
+    const message = createBaseQueryEpochMintProvisionRequest();
+    return message;
   },
   toAmino(_: QueryEpochMintProvisionRequest, useInterfaces: boolean = true): QueryEpochMintProvisionRequestAmino {
     const obj: any = {};
@@ -504,9 +508,11 @@ export const QueryEpochMintProvisionResponse = {
     return obj;
   },
   fromAmino(object: QueryEpochMintProvisionResponseAmino): QueryEpochMintProvisionResponse {
-    return {
-      epochMintProvision: object?.epoch_mint_provision ? DecCoin.fromAmino(object.epoch_mint_provision) : DecCoin.fromPartial({})
-    };
+    const message = createBaseQueryEpochMintProvisionResponse();
+    if (object.epoch_mint_provision !== undefined && object.epoch_mint_provision !== null) {
+      message.epochMintProvision = DecCoin.fromAmino(object.epoch_mint_provision);
+    }
+    return message;
   },
   toAmino(message: QueryEpochMintProvisionResponse, useInterfaces: boolean = true): QueryEpochMintProvisionResponseAmino {
     const obj: any = {};
@@ -568,7 +574,8 @@ export const QuerySkippedEpochsRequest = {
     return obj;
   },
   fromAmino(_: QuerySkippedEpochsRequestAmino): QuerySkippedEpochsRequest {
-    return {};
+    const message = createBaseQuerySkippedEpochsRequest();
+    return message;
   },
   toAmino(_: QuerySkippedEpochsRequest, useInterfaces: boolean = true): QuerySkippedEpochsRequestAmino {
     const obj: any = {};
@@ -645,9 +652,11 @@ export const QuerySkippedEpochsResponse = {
     return obj;
   },
   fromAmino(object: QuerySkippedEpochsResponseAmino): QuerySkippedEpochsResponse {
-    return {
-      skippedEpochs: BigInt(object.skipped_epochs)
-    };
+    const message = createBaseQuerySkippedEpochsResponse();
+    if (object.skipped_epochs !== undefined && object.skipped_epochs !== null) {
+      message.skippedEpochs = BigInt(object.skipped_epochs);
+    }
+    return message;
   },
   toAmino(message: QuerySkippedEpochsResponse, useInterfaces: boolean = true): QuerySkippedEpochsResponseAmino {
     const obj: any = {};
@@ -709,7 +718,8 @@ export const QueryCirculatingSupplyRequest = {
     return obj;
   },
   fromAmino(_: QueryCirculatingSupplyRequestAmino): QueryCirculatingSupplyRequest {
-    return {};
+    const message = createBaseQueryCirculatingSupplyRequest();
+    return message;
   },
   toAmino(_: QueryCirculatingSupplyRequest, useInterfaces: boolean = true): QueryCirculatingSupplyRequestAmino {
     const obj: any = {};
@@ -786,9 +796,11 @@ export const QueryCirculatingSupplyResponse = {
     return obj;
   },
   fromAmino(object: QueryCirculatingSupplyResponseAmino): QueryCirculatingSupplyResponse {
-    return {
-      circulatingSupply: object?.circulating_supply ? DecCoin.fromAmino(object.circulating_supply) : DecCoin.fromPartial({})
-    };
+    const message = createBaseQueryCirculatingSupplyResponse();
+    if (object.circulating_supply !== undefined && object.circulating_supply !== null) {
+      message.circulatingSupply = DecCoin.fromAmino(object.circulating_supply);
+    }
+    return message;
   },
   toAmino(message: QueryCirculatingSupplyResponse, useInterfaces: boolean = true): QueryCirculatingSupplyResponseAmino {
     const obj: any = {};
@@ -850,7 +862,8 @@ export const QueryInflationRateRequest = {
     return obj;
   },
   fromAmino(_: QueryInflationRateRequestAmino): QueryInflationRateRequest {
-    return {};
+    const message = createBaseQueryInflationRateRequest();
+    return message;
   },
   toAmino(_: QueryInflationRateRequest, useInterfaces: boolean = true): QueryInflationRateRequestAmino {
     const obj: any = {};
@@ -925,9 +938,11 @@ export const QueryInflationRateResponse = {
     return obj;
   },
   fromAmino(object: QueryInflationRateResponseAmino): QueryInflationRateResponse {
-    return {
-      inflationRate: object.inflation_rate
-    };
+    const message = createBaseQueryInflationRateResponse();
+    if (object.inflation_rate !== undefined && object.inflation_rate !== null) {
+      message.inflationRate = object.inflation_rate;
+    }
+    return message;
   },
   toAmino(message: QueryInflationRateResponse, useInterfaces: boolean = true): QueryInflationRateResponseAmino {
     const obj: any = {};
@@ -989,7 +1004,8 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
   toAmino(_: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
     const obj: any = {};
@@ -1066,9 +1082,11 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
     const obj: any = {};

@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isObject } from "../../../../helpers";
+import { DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
 export interface SourceInfo_PositionsEntry {
   key: number;
@@ -181,10 +181,14 @@ export const SourceInfo_PositionsEntry = {
     return message;
   },
   fromAmino(object: SourceInfo_PositionsEntryAmino): SourceInfo_PositionsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseSourceInfo_PositionsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: SourceInfo_PositionsEntry): SourceInfo_PositionsEntryAmino {
     const obj: any = {};
@@ -276,16 +280,20 @@ export const SourceInfo = {
     return message;
   },
   fromAmino(object: SourceInfoAmino): SourceInfo {
-    return {
-      location: object.location,
-      lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
-      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
-        [key: number]: number;
-      }>((acc, [key, value]) => {
+    const message = createBaseSourceInfo();
+    if (object.location !== undefined && object.location !== null) {
+      message.location = object.location;
+    }
+    message.lineOffsets = object.line_offsets?.map(e => e) || [];
+    message.positions = Object.entries(object.positions ?? {}).reduce<{
+      [key: number]: number;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[Number(key)] = Number(value);
-        return acc;
-      }, {}) : {}
-    };
+      }
+      return acc;
+    }, {});
+    return message;
   },
   toAmino(message: SourceInfo): SourceInfoAmino {
     const obj: any = {};
@@ -379,12 +387,20 @@ export const SourcePosition = {
     return message;
   },
   fromAmino(object: SourcePositionAmino): SourcePosition {
-    return {
-      location: object.location,
-      offset: object.offset,
-      line: object.line,
-      column: object.column
-    };
+    const message = createBaseSourcePosition();
+    if (object.location !== undefined && object.location !== null) {
+      message.location = object.location;
+    }
+    if (object.offset !== undefined && object.offset !== null) {
+      message.offset = object.offset;
+    }
+    if (object.line !== undefined && object.line !== null) {
+      message.line = object.line;
+    }
+    if (object.column !== undefined && object.column !== null) {
+      message.column = object.column;
+    }
+    return message;
   },
   toAmino(message: SourcePosition): SourcePositionAmino {
     const obj: any = {};

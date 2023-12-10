@@ -486,12 +486,20 @@ export const Params = {
     return message;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      communityTax: object.community_tax,
-      baseProposerReward: object.base_proposer_reward,
-      bonusProposerReward: object.bonus_proposer_reward,
-      withdrawAddrEnabled: object.withdraw_addr_enabled
-    };
+    const message = createBaseParams();
+    if (object.community_tax !== undefined && object.community_tax !== null) {
+      message.communityTax = object.community_tax;
+    }
+    if (object.base_proposer_reward !== undefined && object.base_proposer_reward !== null) {
+      message.baseProposerReward = object.base_proposer_reward;
+    }
+    if (object.bonus_proposer_reward !== undefined && object.bonus_proposer_reward !== null) {
+      message.bonusProposerReward = object.bonus_proposer_reward;
+    }
+    if (object.withdraw_addr_enabled !== undefined && object.withdraw_addr_enabled !== null) {
+      message.withdrawAddrEnabled = object.withdraw_addr_enabled;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
@@ -567,10 +575,12 @@ export const ValidatorHistoricalRewards = {
     return message;
   },
   fromAmino(object: ValidatorHistoricalRewardsAmino): ValidatorHistoricalRewards {
-    return {
-      cumulativeRewardRatio: Array.isArray(object?.cumulative_reward_ratio) ? object.cumulative_reward_ratio.map((e: any) => DecCoin.fromAmino(e)) : [],
-      referenceCount: object.reference_count
-    };
+    const message = createBaseValidatorHistoricalRewards();
+    message.cumulativeRewardRatio = object.cumulative_reward_ratio?.map(e => DecCoin.fromAmino(e)) || [];
+    if (object.reference_count !== undefined && object.reference_count !== null) {
+      message.referenceCount = object.reference_count;
+    }
+    return message;
   },
   toAmino(message: ValidatorHistoricalRewards): ValidatorHistoricalRewardsAmino {
     const obj: any = {};
@@ -650,10 +660,12 @@ export const ValidatorCurrentRewards = {
     return message;
   },
   fromAmino(object: ValidatorCurrentRewardsAmino): ValidatorCurrentRewards {
-    return {
-      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromAmino(e)) : [],
-      period: BigInt(object.period)
-    };
+    const message = createBaseValidatorCurrentRewards();
+    message.rewards = object.rewards?.map(e => DecCoin.fromAmino(e)) || [];
+    if (object.period !== undefined && object.period !== null) {
+      message.period = BigInt(object.period);
+    }
+    return message;
   },
   toAmino(message: ValidatorCurrentRewards): ValidatorCurrentRewardsAmino {
     const obj: any = {};
@@ -723,9 +735,9 @@ export const ValidatorAccumulatedCommission = {
     return message;
   },
   fromAmino(object: ValidatorAccumulatedCommissionAmino): ValidatorAccumulatedCommission {
-    return {
-      commission: Array.isArray(object?.commission) ? object.commission.map((e: any) => DecCoin.fromAmino(e)) : []
-    };
+    const message = createBaseValidatorAccumulatedCommission();
+    message.commission = object.commission?.map(e => DecCoin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ValidatorAccumulatedCommission): ValidatorAccumulatedCommissionAmino {
     const obj: any = {};
@@ -794,9 +806,9 @@ export const ValidatorOutstandingRewards = {
     return message;
   },
   fromAmino(object: ValidatorOutstandingRewardsAmino): ValidatorOutstandingRewards {
-    return {
-      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromAmino(e)) : []
-    };
+    const message = createBaseValidatorOutstandingRewards();
+    message.rewards = object.rewards?.map(e => DecCoin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ValidatorOutstandingRewards): ValidatorOutstandingRewardsAmino {
     const obj: any = {};
@@ -875,10 +887,14 @@ export const ValidatorSlashEvent = {
     return message;
   },
   fromAmino(object: ValidatorSlashEventAmino): ValidatorSlashEvent {
-    return {
-      validatorPeriod: BigInt(object.validator_period),
-      fraction: object.fraction
-    };
+    const message = createBaseValidatorSlashEvent();
+    if (object.validator_period !== undefined && object.validator_period !== null) {
+      message.validatorPeriod = BigInt(object.validator_period);
+    }
+    if (object.fraction !== undefined && object.fraction !== null) {
+      message.fraction = object.fraction;
+    }
+    return message;
   },
   toAmino(message: ValidatorSlashEvent): ValidatorSlashEventAmino {
     const obj: any = {};
@@ -944,9 +960,9 @@ export const ValidatorSlashEvents = {
     return message;
   },
   fromAmino(object: ValidatorSlashEventsAmino): ValidatorSlashEvents {
-    return {
-      validatorSlashEvents: Array.isArray(object?.validator_slash_events) ? object.validator_slash_events.map((e: any) => ValidatorSlashEvent.fromAmino(e)) : []
-    };
+    const message = createBaseValidatorSlashEvents();
+    message.validatorSlashEvents = object.validator_slash_events?.map(e => ValidatorSlashEvent.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ValidatorSlashEvents): ValidatorSlashEventsAmino {
     const obj: any = {};
@@ -1015,9 +1031,9 @@ export const FeePool = {
     return message;
   },
   fromAmino(object: FeePoolAmino): FeePool {
-    return {
-      communityPool: Array.isArray(object?.community_pool) ? object.community_pool.map((e: any) => DecCoin.fromAmino(e)) : []
-    };
+    const message = createBaseFeePool();
+    message.communityPool = object.community_pool?.map(e => DecCoin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: FeePool): FeePoolAmino {
     const obj: any = {};
@@ -1110,12 +1126,18 @@ export const CommunityPoolSpendProposal = {
     return message;
   },
   fromAmino(object: CommunityPoolSpendProposalAmino): CommunityPoolSpendProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      recipient: object.recipient,
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseCommunityPoolSpendProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.recipient !== undefined && object.recipient !== null) {
+      message.recipient = object.recipient;
+    }
+    message.amount = object.amount?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: CommunityPoolSpendProposal): CommunityPoolSpendProposalAmino {
     const obj: any = {};
@@ -1207,11 +1229,17 @@ export const DelegatorStartingInfo = {
     return message;
   },
   fromAmino(object: DelegatorStartingInfoAmino): DelegatorStartingInfo {
-    return {
-      previousPeriod: BigInt(object.previous_period),
-      stake: object.stake,
-      height: BigInt(object.height)
-    };
+    const message = createBaseDelegatorStartingInfo();
+    if (object.previous_period !== undefined && object.previous_period !== null) {
+      message.previousPeriod = BigInt(object.previous_period);
+    }
+    if (object.stake !== undefined && object.stake !== null) {
+      message.stake = object.stake;
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height);
+    }
+    return message;
   },
   toAmino(message: DelegatorStartingInfo): DelegatorStartingInfoAmino {
     const obj: any = {};
@@ -1286,10 +1314,12 @@ export const DelegationDelegatorReward = {
     return message;
   },
   fromAmino(object: DelegationDelegatorRewardAmino): DelegationDelegatorReward {
-    return {
-      validatorAddress: object.validator_address,
-      reward: Array.isArray(object?.reward) ? object.reward.map((e: any) => DecCoin.fromAmino(e)) : []
-    };
+    const message = createBaseDelegationDelegatorReward();
+    if (object.validator_address !== undefined && object.validator_address !== null) {
+      message.validatorAddress = object.validator_address;
+    }
+    message.reward = object.reward?.map(e => DecCoin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: DelegationDelegatorReward): DelegationDelegatorRewardAmino {
     const obj: any = {};
@@ -1391,13 +1421,23 @@ export const CommunityPoolSpendProposalWithDeposit = {
     return message;
   },
   fromAmino(object: CommunityPoolSpendProposalWithDepositAmino): CommunityPoolSpendProposalWithDeposit {
-    return {
-      title: object.title,
-      description: object.description,
-      recipient: object.recipient,
-      amount: object.amount,
-      deposit: object.deposit
-    };
+    const message = createBaseCommunityPoolSpendProposalWithDeposit();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.recipient !== undefined && object.recipient !== null) {
+      message.recipient = object.recipient;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    if (object.deposit !== undefined && object.deposit !== null) {
+      message.deposit = object.deposit;
+    }
+    return message;
   },
   toAmino(message: CommunityPoolSpendProposalWithDeposit): CommunityPoolSpendProposalWithDepositAmino {
     const obj: any = {};

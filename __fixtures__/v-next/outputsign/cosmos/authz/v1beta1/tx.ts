@@ -220,11 +220,17 @@ export const MsgGrant = {
     return message;
   },
   fromAmino(object: MsgGrantAmino): MsgGrant {
-    return {
-      granter: object.granter,
-      grantee: object.grantee,
-      grant: object?.grant ? Grant.fromAmino(object.grant) : Grant.fromPartial({})
-    };
+    const message = createBaseMsgGrant();
+    if (object.granter !== undefined && object.granter !== null) {
+      message.granter = object.granter;
+    }
+    if (object.grantee !== undefined && object.grantee !== null) {
+      message.grantee = object.grantee;
+    }
+    if (object.grant !== undefined && object.grant !== null) {
+      message.grant = Grant.fromAmino(object.grant);
+    }
+    return message;
   },
   toAmino(message: MsgGrant): MsgGrantAmino {
     const obj: any = {};
@@ -291,9 +297,9 @@ export const MsgExecResponse = {
     return message;
   },
   fromAmino(object: MsgExecResponseAmino): MsgExecResponse {
-    return {
-      results: Array.isArray(object?.results) ? object.results.map((e: any) => bytesFromBase64(e)) : []
-    };
+    const message = createBaseMsgExecResponse();
+    message.results = object.results?.map(e => bytesFromBase64(e)) || [];
+    return message;
   },
   toAmino(message: MsgExecResponse): MsgExecResponseAmino {
     const obj: any = {};
@@ -370,10 +376,12 @@ export const MsgExec = {
     return message;
   },
   fromAmino(object: MsgExecAmino): MsgExec {
-    return {
-      grantee: object.grantee,
-      msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseMsgExec();
+    if (object.grantee !== undefined && object.grantee !== null) {
+      message.grantee = object.grantee;
+    }
+    message.msgs = object.msgs?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgExec): MsgExecAmino {
     const obj: any = {};
@@ -434,7 +442,8 @@ export const MsgGrantResponse = {
     return message;
   },
   fromAmino(_: MsgGrantResponseAmino): MsgGrantResponse {
-    return {};
+    const message = createBaseMsgGrantResponse();
+    return message;
   },
   toAmino(_: MsgGrantResponse): MsgGrantResponseAmino {
     const obj: any = {};
@@ -514,11 +523,17 @@ export const MsgRevoke = {
     return message;
   },
   fromAmino(object: MsgRevokeAmino): MsgRevoke {
-    return {
-      granter: object.granter,
-      grantee: object.grantee,
-      msgTypeUrl: object.msg_type_url
-    };
+    const message = createBaseMsgRevoke();
+    if (object.granter !== undefined && object.granter !== null) {
+      message.granter = object.granter;
+    }
+    if (object.grantee !== undefined && object.grantee !== null) {
+      message.grantee = object.grantee;
+    }
+    if (object.msg_type_url !== undefined && object.msg_type_url !== null) {
+      message.msgTypeUrl = object.msg_type_url;
+    }
+    return message;
   },
   toAmino(message: MsgRevoke): MsgRevokeAmino {
     const obj: any = {};
@@ -576,7 +591,8 @@ export const MsgRevokeResponse = {
     return message;
   },
   fromAmino(_: MsgRevokeResponseAmino): MsgRevokeResponse {
-    return {};
+    const message = createBaseMsgRevokeResponse();
+    return message;
   },
   toAmino(_: MsgRevokeResponse): MsgRevokeResponseAmino {
     const obj: any = {};

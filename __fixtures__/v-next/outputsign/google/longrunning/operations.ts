@@ -435,13 +435,23 @@ export const Operation = {
     return message;
   },
   fromAmino(object: OperationAmino): Operation {
-    return {
-      name: object.name,
-      metadata: object?.metadata ? Any.fromAmino(object.metadata) : undefined,
-      done: object.done,
-      error: object?.error ? Status.fromAmino(object.error) : undefined,
-      response: object?.response ? Any.fromAmino(object.response) : undefined
-    };
+    const message = createBaseOperation();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = Any.fromAmino(object.metadata);
+    }
+    if (object.done !== undefined && object.done !== null) {
+      message.done = object.done;
+    }
+    if (object.error !== undefined && object.error !== null) {
+      message.error = Status.fromAmino(object.error);
+    }
+    if (object.response !== undefined && object.response !== null) {
+      message.response = Any.fromAmino(object.response);
+    }
+    return message;
   },
   toAmino(message: Operation): OperationAmino {
     const obj: any = {};
@@ -504,9 +514,11 @@ export const GetOperationRequest = {
     return message;
   },
   fromAmino(object: GetOperationRequestAmino): GetOperationRequest {
-    return {
-      name: object.name
-    };
+    const message = createBaseGetOperationRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: GetOperationRequest): GetOperationRequestAmino {
     const obj: any = {};
@@ -589,12 +601,20 @@ export const ListOperationsRequest = {
     return message;
   },
   fromAmino(object: ListOperationsRequestAmino): ListOperationsRequest {
-    return {
-      name: object.name,
-      filter: object.filter,
-      pageSize: object.page_size,
-      pageToken: object.page_token
-    };
+    const message = createBaseListOperationsRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.filter !== undefined && object.filter !== null) {
+      message.filter = object.filter;
+    }
+    if (object.page_size !== undefined && object.page_size !== null) {
+      message.pageSize = object.page_size;
+    }
+    if (object.page_token !== undefined && object.page_token !== null) {
+      message.pageToken = object.page_token;
+    }
+    return message;
   },
   toAmino(message: ListOperationsRequest): ListOperationsRequestAmino {
     const obj: any = {};
@@ -664,10 +684,12 @@ export const ListOperationsResponse = {
     return message;
   },
   fromAmino(object: ListOperationsResponseAmino): ListOperationsResponse {
-    return {
-      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
+    const message = createBaseListOperationsResponse();
+    message.operations = object.operations?.map(e => Operation.fromAmino(e)) || [];
+    if (object.next_page_token !== undefined && object.next_page_token !== null) {
+      message.nextPageToken = object.next_page_token;
+    }
+    return message;
   },
   toAmino(message: ListOperationsResponse): ListOperationsResponseAmino {
     const obj: any = {};
@@ -731,9 +753,11 @@ export const CancelOperationRequest = {
     return message;
   },
   fromAmino(object: CancelOperationRequestAmino): CancelOperationRequest {
-    return {
-      name: object.name
-    };
+    const message = createBaseCancelOperationRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: CancelOperationRequest): CancelOperationRequestAmino {
     const obj: any = {};
@@ -792,9 +816,11 @@ export const DeleteOperationRequest = {
     return message;
   },
   fromAmino(object: DeleteOperationRequestAmino): DeleteOperationRequest {
-    return {
-      name: object.name
-    };
+    const message = createBaseDeleteOperationRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: DeleteOperationRequest): DeleteOperationRequestAmino {
     const obj: any = {};
@@ -863,10 +889,14 @@ export const WaitOperationRequest = {
     return message;
   },
   fromAmino(object: WaitOperationRequestAmino): WaitOperationRequest {
-    return {
-      name: object.name,
-      timeout: object?.timeout ? Duration.fromAmino(object.timeout) : undefined
-    };
+    const message = createBaseWaitOperationRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.timeout !== undefined && object.timeout !== null) {
+      message.timeout = Duration.fromAmino(object.timeout);
+    }
+    return message;
   },
   toAmino(message: WaitOperationRequest): WaitOperationRequestAmino {
     const obj: any = {};
@@ -934,10 +964,14 @@ export const OperationInfo = {
     return message;
   },
   fromAmino(object: OperationInfoAmino): OperationInfo {
-    return {
-      responseType: object.response_type,
-      metadataType: object.metadata_type
-    };
+    const message = createBaseOperationInfo();
+    if (object.response_type !== undefined && object.response_type !== null) {
+      message.responseType = object.response_type;
+    }
+    if (object.metadata_type !== undefined && object.metadata_type !== null) {
+      message.metadataType = object.metadata_type;
+    }
+    return message;
   },
   toAmino(message: OperationInfo): OperationInfoAmino {
     const obj: any = {};

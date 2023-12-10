@@ -674,15 +674,25 @@ export const ResourceDescriptor = {
     return obj;
   },
   fromAmino(object: ResourceDescriptorAmino): ResourceDescriptor {
-    return {
-      type: object.type,
-      pattern: Array.isArray(object?.pattern) ? object.pattern.map((e: any) => e) : [],
-      nameField: object.name_field,
-      history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : -1,
-      plural: object.plural,
-      singular: object.singular,
-      style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
-    };
+    const message = createBaseResourceDescriptor();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    message.pattern = object.pattern?.map(e => e) || [];
+    if (object.name_field !== undefined && object.name_field !== null) {
+      message.nameField = object.name_field;
+    }
+    if (object.history !== undefined && object.history !== null) {
+      message.history = resourceDescriptor_HistoryFromJSON(object.history);
+    }
+    if (object.plural !== undefined && object.plural !== null) {
+      message.plural = object.plural;
+    }
+    if (object.singular !== undefined && object.singular !== null) {
+      message.singular = object.singular;
+    }
+    message.style = object.style?.map(e => resourceDescriptor_StyleFromJSON(e)) || [];
+    return message;
   },
   toAmino(message: ResourceDescriptor, useInterfaces: boolean = true): ResourceDescriptorAmino {
     const obj: any = {};
@@ -784,10 +794,14 @@ export const ResourceReference = {
     return obj;
   },
   fromAmino(object: ResourceReferenceAmino): ResourceReference {
-    return {
-      type: object.type,
-      childType: object.child_type
-    };
+    const message = createBaseResourceReference();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    if (object.child_type !== undefined && object.child_type !== null) {
+      message.childType = object.child_type;
+    }
+    return message;
   },
   toAmino(message: ResourceReference, useInterfaces: boolean = true): ResourceReferenceAmino {
     const obj: any = {};

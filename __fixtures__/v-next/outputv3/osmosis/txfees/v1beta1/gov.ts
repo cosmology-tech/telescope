@@ -128,11 +128,17 @@ export const UpdateFeeTokenProposal = {
     return obj;
   },
   fromAmino(object: UpdateFeeTokenProposalAmino): UpdateFeeTokenProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      feetoken: object?.feetoken ? FeeToken.fromAmino(object.feetoken) : FeeToken.fromPartial({})
-    };
+    const message = createBaseUpdateFeeTokenProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.feetoken !== undefined && object.feetoken !== null) {
+      message.feetoken = FeeToken.fromAmino(object.feetoken);
+    }
+    return message;
   },
   toAmino(message: UpdateFeeTokenProposal, useInterfaces: boolean = true): UpdateFeeTokenProposalAmino {
     const obj: any = {};

@@ -101,9 +101,9 @@ export const SendAuthorization = {
     return obj;
   },
   fromAmino(object: SendAuthorizationAmino): SendAuthorization {
-    return {
-      spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseSendAuthorization();
+    message.spendLimit = object.spend_limit?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: SendAuthorization, useInterfaces: boolean = true): SendAuthorizationAmino {
     const obj: any = {};

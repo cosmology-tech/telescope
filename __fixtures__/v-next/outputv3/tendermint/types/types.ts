@@ -4,6 +4,7 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protob
 import { ValidatorSet, ValidatorSetAmino, ValidatorSetSDKType } from "./validator";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
+import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "tendermint.types";
 /** BlockIdFlag indicates which BlcokID the signature is for */
 export enum BlockIDFlag {
@@ -526,10 +527,14 @@ export const PartSetHeader = {
     return obj;
   },
   fromAmino(object: PartSetHeaderAmino): PartSetHeader {
-    return {
-      total: object.total,
-      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
-    };
+    const message = createBasePartSetHeader();
+    if (object.total !== undefined && object.total !== null) {
+      message.total = object.total;
+    }
+    if (object.hash !== undefined && object.hash !== null) {
+      message.hash = fromBase64(object.hash);
+    }
+    return message;
   },
   toAmino(message: PartSetHeader, useInterfaces: boolean = true): PartSetHeaderAmino {
     const obj: any = {};
@@ -632,11 +637,17 @@ export const Part = {
     return obj;
   },
   fromAmino(object: PartAmino): Part {
-    return {
-      index: object.index,
-      bytes: isSet(object.bytes) ? bytesFromBase64(object.bytes) : new Uint8Array(),
-      proof: object?.proof ? Proof.fromAmino(object.proof) : Proof.fromPartial({})
-    };
+    const message = createBasePart();
+    if (object.index !== undefined && object.index !== null) {
+      message.index = object.index;
+    }
+    if (object.bytes !== undefined && object.bytes !== null) {
+      message.bytes = fromBase64(object.bytes);
+    }
+    if (object.proof !== undefined && object.proof !== null) {
+      message.proof = Proof.fromAmino(object.proof);
+    }
+    return message;
   },
   toAmino(message: Part, useInterfaces: boolean = true): PartAmino {
     const obj: any = {};
@@ -728,10 +739,14 @@ export const BlockID = {
     return obj;
   },
   fromAmino(object: BlockIDAmino): BlockID {
-    return {
-      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
-      partSetHeader: object?.part_set_header ? PartSetHeader.fromAmino(object.part_set_header) : PartSetHeader.fromPartial({})
-    };
+    const message = createBaseBlockID();
+    if (object.hash !== undefined && object.hash !== null) {
+      message.hash = fromBase64(object.hash);
+    }
+    if (object.part_set_header !== undefined && object.part_set_header !== null) {
+      message.partSetHeader = PartSetHeader.fromAmino(object.part_set_header);
+    }
+    return message;
   },
   toAmino(message: BlockID, useInterfaces: boolean = true): BlockIDAmino {
     const obj: any = {};
@@ -970,22 +985,50 @@ export const Header = {
     return obj;
   },
   fromAmino(object: HeaderAmino): Header {
-    return {
-      version: object?.version ? Consensus.fromAmino(object.version) : Consensus.fromPartial({}),
-      chainId: object.chain_id,
-      height: BigInt(object.height),
-      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : fromTimestamp(Timestamp.fromPartial({})),
-      lastBlockId: object?.last_block_id ? BlockID.fromAmino(object.last_block_id) : BlockID.fromPartial({}),
-      last_commit_hash: isSet(object.last_commit_hash) ? bytesFromBase64(object.last_commit_hash) : new Uint8Array(),
-      data_hash: isSet(object.data_hash) ? bytesFromBase64(object.data_hash) : new Uint8Array(),
-      validators_hash: isSet(object.validators_hash) ? bytesFromBase64(object.validators_hash) : new Uint8Array(),
-      next_validators_hash: isSet(object.next_validators_hash) ? bytesFromBase64(object.next_validators_hash) : new Uint8Array(),
-      consensus_hash: isSet(object.consensus_hash) ? bytesFromBase64(object.consensus_hash) : new Uint8Array(),
-      app_hash: isSet(object.app_hash) ? bytesFromBase64(object.app_hash) : new Uint8Array(),
-      last_results_hash: isSet(object.last_results_hash) ? bytesFromBase64(object.last_results_hash) : new Uint8Array(),
-      evidence_hash: isSet(object.evidence_hash) ? bytesFromBase64(object.evidence_hash) : new Uint8Array(),
-      proposer_address: isSet(object.proposer_address) ? bytesFromBase64(object.proposer_address) : new Uint8Array()
-    };
+    const message = createBaseHeader();
+    if (object.version !== undefined && object.version !== null) {
+      message.version = Consensus.fromAmino(object.version);
+    }
+    if (object.chain_id !== undefined && object.chain_id !== null) {
+      message.chainId = object.chain_id;
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height);
+    }
+    if (object.time !== undefined && object.time !== null) {
+      message.time = fromTimestamp(Timestamp.fromAmino(object.time));
+    }
+    if (object.last_block_id !== undefined && object.last_block_id !== null) {
+      message.lastBlockId = BlockID.fromAmino(object.last_block_id);
+    }
+    if (object.last_commit_hash !== undefined && object.last_commit_hash !== null) {
+      message.lastCommitHash = fromBase64(object.last_commit_hash);
+    }
+    if (object.data_hash !== undefined && object.data_hash !== null) {
+      message.dataHash = fromBase64(object.data_hash);
+    }
+    if (object.validators_hash !== undefined && object.validators_hash !== null) {
+      message.validatorsHash = fromBase64(object.validators_hash);
+    }
+    if (object.next_validators_hash !== undefined && object.next_validators_hash !== null) {
+      message.nextValidatorsHash = fromBase64(object.next_validators_hash);
+    }
+    if (object.consensus_hash !== undefined && object.consensus_hash !== null) {
+      message.consensusHash = fromBase64(object.consensus_hash);
+    }
+    if (object.app_hash !== undefined && object.app_hash !== null) {
+      message.appHash = fromBase64(object.app_hash);
+    }
+    if (object.last_results_hash !== undefined && object.last_results_hash !== null) {
+      message.lastResultsHash = fromBase64(object.last_results_hash);
+    }
+    if (object.evidence_hash !== undefined && object.evidence_hash !== null) {
+      message.evidenceHash = fromBase64(object.evidence_hash);
+    }
+    if (object.proposer_address !== undefined && object.proposer_address !== null) {
+      message.proposerAddress = fromBase64(object.proposer_address);
+    }
+    return message;
   },
   toAmino(message: Header, useInterfaces: boolean = true): HeaderAmino {
     const obj: any = {};
@@ -1082,9 +1125,9 @@ export const Data = {
     return obj;
   },
   fromAmino(object: DataAmino): Data {
-    return {
-      txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => bytesFromBase64(e)) : []
-    };
+    const message = createBaseData();
+    message.txs = object.txs?.map(e => bytesFromBase64(e)) || [];
+    return message;
   },
   toAmino(message: Data, useInterfaces: boolean = true): DataAmino {
     const obj: any = {};
@@ -1252,16 +1295,32 @@ export const Vote = {
     return obj;
   },
   fromAmino(object: VoteAmino): Vote {
-    return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
-      height: BigInt(object.height),
-      round: object.round,
-      blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : BlockID.fromPartial({}),
-      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : fromTimestamp(Timestamp.fromPartial({})),
-      validator_address: isSet(object.validator_address) ? bytesFromBase64(object.validator_address) : new Uint8Array(),
-      validatorIndex: object.validator_index,
-      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
-    };
+    const message = createBaseVote();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = signedMsgTypeFromJSON(object.type);
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height);
+    }
+    if (object.round !== undefined && object.round !== null) {
+      message.round = object.round;
+    }
+    if (object.block_id !== undefined && object.block_id !== null) {
+      message.blockId = BlockID.fromAmino(object.block_id);
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = fromTimestamp(Timestamp.fromAmino(object.timestamp));
+    }
+    if (object.validator_address !== undefined && object.validator_address !== null) {
+      message.validatorAddress = fromBase64(object.validator_address);
+    }
+    if (object.validator_index !== undefined && object.validator_index !== null) {
+      message.validatorIndex = object.validator_index;
+    }
+    if (object.signature !== undefined && object.signature !== null) {
+      message.signature = fromBase64(object.signature);
+    }
+    return message;
   },
   toAmino(message: Vote, useInterfaces: boolean = true): VoteAmino {
     const obj: any = {};
@@ -1392,12 +1451,18 @@ export const Commit = {
     return obj;
   },
   fromAmino(object: CommitAmino): Commit {
-    return {
-      height: BigInt(object.height),
-      round: object.round,
-      blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : BlockID.fromPartial({}),
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => CommitSig.fromAmino(e)) : []
-    };
+    const message = createBaseCommit();
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height);
+    }
+    if (object.round !== undefined && object.round !== null) {
+      message.round = object.round;
+    }
+    if (object.block_id !== undefined && object.block_id !== null) {
+      message.blockId = BlockID.fromAmino(object.block_id);
+    }
+    message.signatures = object.signatures?.map(e => CommitSig.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Commit, useInterfaces: boolean = true): CommitAmino {
     const obj: any = {};
@@ -1516,12 +1581,20 @@ export const CommitSig = {
     return obj;
   },
   fromAmino(object: CommitSigAmino): CommitSig {
-    return {
-      blockIdFlag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : -1,
-      validator_address: isSet(object.validator_address) ? bytesFromBase64(object.validator_address) : new Uint8Array(),
-      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : fromTimestamp(Timestamp.fromPartial({})),
-      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
-    };
+    const message = createBaseCommitSig();
+    if (object.block_id_flag !== undefined && object.block_id_flag !== null) {
+      message.blockIdFlag = blockIDFlagFromJSON(object.block_id_flag);
+    }
+    if (object.validator_address !== undefined && object.validator_address !== null) {
+      message.validatorAddress = fromBase64(object.validator_address);
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = fromTimestamp(Timestamp.fromAmino(object.timestamp));
+    }
+    if (object.signature !== undefined && object.signature !== null) {
+      message.signature = fromBase64(object.signature);
+    }
+    return message;
   },
   toAmino(message: CommitSig, useInterfaces: boolean = true): CommitSigAmino {
     const obj: any = {};
@@ -1676,15 +1749,29 @@ export const Proposal = {
     return obj;
   },
   fromAmino(object: ProposalAmino): Proposal {
-    return {
-      type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : -1,
-      height: BigInt(object.height),
-      round: object.round,
-      polRound: object.pol_round,
-      blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : BlockID.fromPartial({}),
-      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : fromTimestamp(Timestamp.fromPartial({})),
-      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
-    };
+    const message = createBaseProposal();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = signedMsgTypeFromJSON(object.type);
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height);
+    }
+    if (object.round !== undefined && object.round !== null) {
+      message.round = object.round;
+    }
+    if (object.pol_round !== undefined && object.pol_round !== null) {
+      message.polRound = object.pol_round;
+    }
+    if (object.block_id !== undefined && object.block_id !== null) {
+      message.blockId = BlockID.fromAmino(object.block_id);
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = fromTimestamp(Timestamp.fromAmino(object.timestamp));
+    }
+    if (object.signature !== undefined && object.signature !== null) {
+      message.signature = fromBase64(object.signature);
+    }
+    return message;
   },
   toAmino(message: Proposal, useInterfaces: boolean = true): ProposalAmino {
     const obj: any = {};
@@ -1782,10 +1869,14 @@ export const SignedHeader = {
     return obj;
   },
   fromAmino(object: SignedHeaderAmino): SignedHeader {
-    return {
-      header: object?.header ? Header.fromAmino(object.header) : undefined,
-      commit: object?.commit ? Commit.fromAmino(object.commit) : undefined
-    };
+    const message = createBaseSignedHeader();
+    if (object.header !== undefined && object.header !== null) {
+      message.header = Header.fromAmino(object.header);
+    }
+    if (object.commit !== undefined && object.commit !== null) {
+      message.commit = Commit.fromAmino(object.commit);
+    }
+    return message;
   },
   toAmino(message: SignedHeader, useInterfaces: boolean = true): SignedHeaderAmino {
     const obj: any = {};
@@ -1878,10 +1969,14 @@ export const LightBlock = {
     return obj;
   },
   fromAmino(object: LightBlockAmino): LightBlock {
-    return {
-      signedHeader: object?.signed_header ? SignedHeader.fromAmino(object.signed_header) : undefined,
-      validatorSet: object?.validator_set ? ValidatorSet.fromAmino(object.validator_set) : undefined
-    };
+    const message = createBaseLightBlock();
+    if (object.signed_header !== undefined && object.signed_header !== null) {
+      message.signedHeader = SignedHeader.fromAmino(object.signed_header);
+    }
+    if (object.validator_set !== undefined && object.validator_set !== null) {
+      message.validatorSet = ValidatorSet.fromAmino(object.validator_set);
+    }
+    return message;
   },
   toAmino(message: LightBlock, useInterfaces: boolean = true): LightBlockAmino {
     const obj: any = {};
@@ -2002,12 +2097,20 @@ export const BlockMeta = {
     return obj;
   },
   fromAmino(object: BlockMetaAmino): BlockMeta {
-    return {
-      blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : BlockID.fromPartial({}),
-      blockSize: BigInt(object.block_size),
-      header: object?.header ? Header.fromAmino(object.header) : Header.fromPartial({}),
-      numTxs: BigInt(object.num_txs)
-    };
+    const message = createBaseBlockMeta();
+    if (object.block_id !== undefined && object.block_id !== null) {
+      message.blockId = BlockID.fromAmino(object.block_id);
+    }
+    if (object.block_size !== undefined && object.block_size !== null) {
+      message.blockSize = BigInt(object.block_size);
+    }
+    if (object.header !== undefined && object.header !== null) {
+      message.header = Header.fromAmino(object.header);
+    }
+    if (object.num_txs !== undefined && object.num_txs !== null) {
+      message.numTxs = BigInt(object.num_txs);
+    }
+    return message;
   },
   toAmino(message: BlockMeta, useInterfaces: boolean = true): BlockMetaAmino {
     const obj: any = {};
@@ -2112,11 +2215,17 @@ export const TxProof = {
     return obj;
   },
   fromAmino(object: TxProofAmino): TxProof {
-    return {
-      root_hash: isSet(object.root_hash) ? bytesFromBase64(object.root_hash) : new Uint8Array(),
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      proof: object?.proof ? Proof.fromAmino(object.proof) : undefined
-    };
+    const message = createBaseTxProof();
+    if (object.root_hash !== undefined && object.root_hash !== null) {
+      message.rootHash = fromBase64(object.root_hash);
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = fromBase64(object.data);
+    }
+    if (object.proof !== undefined && object.proof !== null) {
+      message.proof = Proof.fromAmino(object.proof);
+    }
+    return message;
   },
   toAmino(message: TxProof, useInterfaces: boolean = true): TxProofAmino {
     const obj: any = {};

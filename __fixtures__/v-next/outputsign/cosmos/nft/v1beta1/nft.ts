@@ -182,15 +182,29 @@ export const Class = {
     return message;
   },
   fromAmino(object: ClassAmino): Class {
-    return {
-      id: object.id,
-      name: object.name,
-      symbol: object.symbol,
-      description: object.description,
-      uri: object.uri,
-      uriHash: object.uri_hash,
-      data: object?.data ? Any.fromAmino(object.data) : undefined
-    };
+    const message = createBaseClass();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.symbol !== undefined && object.symbol !== null) {
+      message.symbol = object.symbol;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.uri !== undefined && object.uri !== null) {
+      message.uri = object.uri;
+    }
+    if (object.uri_hash !== undefined && object.uri_hash !== null) {
+      message.uriHash = object.uri_hash;
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = Any.fromAmino(object.data);
+    }
+    return message;
   },
   toAmino(message: Class): ClassAmino {
     const obj: any = {};
@@ -295,13 +309,23 @@ export const NFT = {
     return message;
   },
   fromAmino(object: NFTAmino): NFT {
-    return {
-      classId: object.class_id,
-      id: object.id,
-      uri: object.uri,
-      uriHash: object.uri_hash,
-      data: object?.data ? Any.fromAmino(object.data) : undefined
-    };
+    const message = createBaseNFT();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.uri !== undefined && object.uri !== null) {
+      message.uri = object.uri;
+    }
+    if (object.uri_hash !== undefined && object.uri_hash !== null) {
+      message.uriHash = object.uri_hash;
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = Any.fromAmino(object.data);
+    }
+    return message;
   },
   toAmino(message: NFT): NFTAmino {
     const obj: any = {};

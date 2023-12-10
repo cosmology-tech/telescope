@@ -142,13 +142,23 @@ export const BIP44Params = {
     return obj;
   },
   fromAmino(object: BIP44ParamsAmino): BIP44Params {
-    return {
-      purpose: object.purpose,
-      coinType: object.coin_type,
-      account: object.account,
-      change: object.change,
-      addressIndex: object.address_index
-    };
+    const message = createBaseBIP44Params();
+    if (object.purpose !== undefined && object.purpose !== null) {
+      message.purpose = object.purpose;
+    }
+    if (object.coin_type !== undefined && object.coin_type !== null) {
+      message.coinType = object.coin_type;
+    }
+    if (object.account !== undefined && object.account !== null) {
+      message.account = object.account;
+    }
+    if (object.change !== undefined && object.change !== null) {
+      message.change = object.change;
+    }
+    if (object.address_index !== undefined && object.address_index !== null) {
+      message.addressIndex = object.address_index;
+    }
+    return message;
   },
   toAmino(message: BIP44Params): BIP44ParamsAmino {
     const obj: any = {};

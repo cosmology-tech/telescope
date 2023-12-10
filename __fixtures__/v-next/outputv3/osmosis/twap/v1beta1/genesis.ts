@@ -116,10 +116,14 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      pruneEpochIdentifier: object.prune_epoch_identifier,
-      recordHistoryKeepPeriod: object?.record_history_keep_period ? Duration.fromAmino(object.record_history_keep_period) : Duration.fromPartial({})
-    };
+    const message = createBaseParams();
+    if (object.prune_epoch_identifier !== undefined && object.prune_epoch_identifier !== null) {
+      message.pruneEpochIdentifier = object.prune_epoch_identifier;
+    }
+    if (object.record_history_keep_period !== undefined && object.record_history_keep_period !== null) {
+      message.recordHistoryKeepPeriod = Duration.fromAmino(object.record_history_keep_period);
+    }
+    return message;
   },
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
@@ -219,10 +223,12 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      twaps: Array.isArray(object?.twaps) ? object.twaps.map((e: any) => TwapRecord.fromAmino(e)) : [],
-      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
-    };
+    const message = createBaseGenesisState();
+    message.twaps = object.twaps?.map(e => TwapRecord.fromAmino(e)) || [];
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};

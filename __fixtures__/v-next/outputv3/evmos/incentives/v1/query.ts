@@ -425,9 +425,11 @@ export const QueryIncentivesRequest = {
     return obj;
   },
   fromAmino(object: QueryIncentivesRequestAmino): QueryIncentivesRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryIncentivesRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryIncentivesRequest, useInterfaces: boolean = true): QueryIncentivesRequestAmino {
     const obj: any = {};
@@ -525,10 +527,12 @@ export const QueryIncentivesResponse = {
     return obj;
   },
   fromAmino(object: QueryIncentivesResponseAmino): QueryIncentivesResponse {
-    return {
-      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryIncentivesResponse();
+    message.incentives = object.incentives?.map(e => Incentive.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryIncentivesResponse, useInterfaces: boolean = true): QueryIncentivesResponseAmino {
     const obj: any = {};
@@ -609,9 +613,11 @@ export const QueryIncentiveRequest = {
     return obj;
   },
   fromAmino(object: QueryIncentiveRequestAmino): QueryIncentiveRequest {
-    return {
-      contract: object.contract
-    };
+    const message = createBaseQueryIncentiveRequest();
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    return message;
   },
   toAmino(message: QueryIncentiveRequest, useInterfaces: boolean = true): QueryIncentiveRequestAmino {
     const obj: any = {};
@@ -689,9 +695,11 @@ export const QueryIncentiveResponse = {
     return obj;
   },
   fromAmino(object: QueryIncentiveResponseAmino): QueryIncentiveResponse {
-    return {
-      incentive: object?.incentive ? Incentive.fromAmino(object.incentive) : Incentive.fromPartial({})
-    };
+    const message = createBaseQueryIncentiveResponse();
+    if (object.incentive !== undefined && object.incentive !== null) {
+      message.incentive = Incentive.fromAmino(object.incentive);
+    }
+    return message;
   },
   toAmino(message: QueryIncentiveResponse, useInterfaces: boolean = true): QueryIncentiveResponseAmino {
     const obj: any = {};
@@ -781,10 +789,14 @@ export const QueryGasMetersRequest = {
     return obj;
   },
   fromAmino(object: QueryGasMetersRequestAmino): QueryGasMetersRequest {
-    return {
-      contract: object.contract,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryGasMetersRequest();
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryGasMetersRequest, useInterfaces: boolean = true): QueryGasMetersRequestAmino {
     const obj: any = {};
@@ -883,10 +895,12 @@ export const QueryGasMetersResponse = {
     return obj;
   },
   fromAmino(object: QueryGasMetersResponseAmino): QueryGasMetersResponse {
-    return {
-      gasMeters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryGasMetersResponse();
+    message.gasMeters = object.gas_meters?.map(e => GasMeter.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryGasMetersResponse, useInterfaces: boolean = true): QueryGasMetersResponseAmino {
     const obj: any = {};
@@ -979,10 +993,14 @@ export const QueryGasMeterRequest = {
     return obj;
   },
   fromAmino(object: QueryGasMeterRequestAmino): QueryGasMeterRequest {
-    return {
-      contract: object.contract,
-      participant: object.participant
-    };
+    const message = createBaseQueryGasMeterRequest();
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    if (object.participant !== undefined && object.participant !== null) {
+      message.participant = object.participant;
+    }
+    return message;
   },
   toAmino(message: QueryGasMeterRequest, useInterfaces: boolean = true): QueryGasMeterRequestAmino {
     const obj: any = {};
@@ -1061,9 +1079,11 @@ export const QueryGasMeterResponse = {
     return obj;
   },
   fromAmino(object: QueryGasMeterResponseAmino): QueryGasMeterResponse {
-    return {
-      gasMeter: BigInt(object.gas_meter)
-    };
+    const message = createBaseQueryGasMeterResponse();
+    if (object.gas_meter !== undefined && object.gas_meter !== null) {
+      message.gasMeter = BigInt(object.gas_meter);
+    }
+    return message;
   },
   toAmino(message: QueryGasMeterResponse, useInterfaces: boolean = true): QueryGasMeterResponseAmino {
     const obj: any = {};
@@ -1141,9 +1161,11 @@ export const QueryAllocationMetersRequest = {
     return obj;
   },
   fromAmino(object: QueryAllocationMetersRequestAmino): QueryAllocationMetersRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAllocationMetersRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAllocationMetersRequest, useInterfaces: boolean = true): QueryAllocationMetersRequestAmino {
     const obj: any = {};
@@ -1241,10 +1263,12 @@ export const QueryAllocationMetersResponse = {
     return obj;
   },
   fromAmino(object: QueryAllocationMetersResponseAmino): QueryAllocationMetersResponse {
-    return {
-      allocationMeters: Array.isArray(object?.allocation_meters) ? object.allocation_meters.map((e: any) => DecCoin.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAllocationMetersResponse();
+    message.allocationMeters = object.allocation_meters?.map(e => DecCoin.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAllocationMetersResponse, useInterfaces: boolean = true): QueryAllocationMetersResponseAmino {
     const obj: any = {};
@@ -1325,9 +1349,11 @@ export const QueryAllocationMeterRequest = {
     return obj;
   },
   fromAmino(object: QueryAllocationMeterRequestAmino): QueryAllocationMeterRequest {
-    return {
-      denom: object.denom
-    };
+    const message = createBaseQueryAllocationMeterRequest();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    return message;
   },
   toAmino(message: QueryAllocationMeterRequest, useInterfaces: boolean = true): QueryAllocationMeterRequestAmino {
     const obj: any = {};
@@ -1405,9 +1431,11 @@ export const QueryAllocationMeterResponse = {
     return obj;
   },
   fromAmino(object: QueryAllocationMeterResponseAmino): QueryAllocationMeterResponse {
-    return {
-      allocationMeter: object?.allocation_meter ? DecCoin.fromAmino(object.allocation_meter) : DecCoin.fromPartial({})
-    };
+    const message = createBaseQueryAllocationMeterResponse();
+    if (object.allocation_meter !== undefined && object.allocation_meter !== null) {
+      message.allocationMeter = DecCoin.fromAmino(object.allocation_meter);
+    }
+    return message;
   },
   toAmino(message: QueryAllocationMeterResponse, useInterfaces: boolean = true): QueryAllocationMeterResponseAmino {
     const obj: any = {};
@@ -1469,7 +1497,8 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
   toAmino(_: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
     const obj: any = {};
@@ -1546,9 +1575,11 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
     const obj: any = {};

@@ -156,11 +156,15 @@ export const Status = {
     return obj;
   },
   fromAmino(object: StatusAmino): Status {
-    return {
-      code: object.code,
-      message: object.message,
-      details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseStatus();
+    if (object.code !== undefined && object.code !== null) {
+      message.code = object.code;
+    }
+    if (object.message !== undefined && object.message !== null) {
+      message.message = object.message;
+    }
+    message.details = object.details?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Status, useInterfaces: boolean = true): StatusAmino {
     const obj: any = {};

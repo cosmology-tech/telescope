@@ -240,9 +240,9 @@ export const Visibility = {
     return obj;
   },
   fromAmino(object: VisibilityAmino): Visibility {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => VisibilityRule.fromAmino(e)) : []
-    };
+    const message = createBaseVisibility();
+    message.rules = object.rules?.map(e => VisibilityRule.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Visibility): VisibilityAmino {
     const obj: any = {};
@@ -337,10 +337,14 @@ export const VisibilityRule = {
     return obj;
   },
   fromAmino(object: VisibilityRuleAmino): VisibilityRule {
-    return {
-      selector: object.selector,
-      restriction: object.restriction
-    };
+    const message = createBaseVisibilityRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    if (object.restriction !== undefined && object.restriction !== null) {
+      message.restriction = object.restriction;
+    }
+    return message;
   },
   toAmino(message: VisibilityRule): VisibilityRuleAmino {
     const obj: any = {};

@@ -124,7 +124,8 @@ export const ListAllInterfacesRequest = {
     return message;
   },
   fromAmino(_: ListAllInterfacesRequestAmino): ListAllInterfacesRequest {
-    return {};
+    const message = createBaseListAllInterfacesRequest();
+    return message;
   },
   toAmino(_: ListAllInterfacesRequest): ListAllInterfacesRequestAmino {
     const obj: any = {};
@@ -188,9 +189,9 @@ export const ListAllInterfacesResponse = {
     return message;
   },
   fromAmino(object: ListAllInterfacesResponseAmino): ListAllInterfacesResponse {
-    return {
-      interfaceNames: Array.isArray(object?.interface_names) ? object.interface_names.map((e: any) => e) : []
-    };
+    const message = createBaseListAllInterfacesResponse();
+    message.interfaceNames = object.interface_names?.map(e => e) || [];
+    return message;
   },
   toAmino(message: ListAllInterfacesResponse): ListAllInterfacesResponseAmino {
     const obj: any = {};
@@ -259,9 +260,11 @@ export const ListImplementationsRequest = {
     return message;
   },
   fromAmino(object: ListImplementationsRequestAmino): ListImplementationsRequest {
-    return {
-      interfaceName: object.interface_name
-    };
+    const message = createBaseListImplementationsRequest();
+    if (object.interface_name !== undefined && object.interface_name !== null) {
+      message.interfaceName = object.interface_name;
+    }
+    return message;
   },
   toAmino(message: ListImplementationsRequest): ListImplementationsRequestAmino {
     const obj: any = {};
@@ -326,9 +329,9 @@ export const ListImplementationsResponse = {
     return message;
   },
   fromAmino(object: ListImplementationsResponseAmino): ListImplementationsResponse {
-    return {
-      implementationMessageNames: Array.isArray(object?.implementation_message_names) ? object.implementation_message_names.map((e: any) => e) : []
-    };
+    const message = createBaseListImplementationsResponse();
+    message.implementationMessageNames = object.implementation_message_names?.map(e => e) || [];
+    return message;
   },
   toAmino(message: ListImplementationsResponse): ListImplementationsResponseAmino {
     const obj: any = {};

@@ -264,10 +264,12 @@ export const MsgSetHotRoutes = {
     return obj;
   },
   fromAmino(object: MsgSetHotRoutesAmino): MsgSetHotRoutes {
-    return {
-      admin: object.admin,
-      hotRoutes: Array.isArray(object?.hot_routes) ? object.hot_routes.map((e: any) => TokenPairArbRoutes.fromAmino(e)) : []
-    };
+    const message = createBaseMsgSetHotRoutes();
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = object.admin;
+    }
+    message.hotRoutes = object.hot_routes?.map(e => TokenPairArbRoutes.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgSetHotRoutes): MsgSetHotRoutesAmino {
     const obj: any = {};
@@ -345,7 +347,8 @@ export const MsgSetHotRoutesResponse = {
     return obj;
   },
   fromAmino(_: MsgSetHotRoutesResponseAmino): MsgSetHotRoutesResponse {
-    return {};
+    const message = createBaseMsgSetHotRoutesResponse();
+    return message;
   },
   toAmino(_: MsgSetHotRoutesResponse): MsgSetHotRoutesResponseAmino {
     const obj: any = {};
@@ -447,10 +450,14 @@ export const MsgSetDeveloperAccount = {
     return obj;
   },
   fromAmino(object: MsgSetDeveloperAccountAmino): MsgSetDeveloperAccount {
-    return {
-      admin: object.admin,
-      developerAccount: object.developer_account
-    };
+    const message = createBaseMsgSetDeveloperAccount();
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = object.admin;
+    }
+    if (object.developer_account !== undefined && object.developer_account !== null) {
+      message.developerAccount = object.developer_account;
+    }
+    return message;
   },
   toAmino(message: MsgSetDeveloperAccount): MsgSetDeveloperAccountAmino {
     const obj: any = {};
@@ -524,7 +531,8 @@ export const MsgSetDeveloperAccountResponse = {
     return obj;
   },
   fromAmino(_: MsgSetDeveloperAccountResponseAmino): MsgSetDeveloperAccountResponse {
-    return {};
+    const message = createBaseMsgSetDeveloperAccountResponse();
+    return message;
   },
   toAmino(_: MsgSetDeveloperAccountResponse): MsgSetDeveloperAccountResponseAmino {
     const obj: any = {};
@@ -626,10 +634,14 @@ export const MsgSetPoolWeights = {
     return obj;
   },
   fromAmino(object: MsgSetPoolWeightsAmino): MsgSetPoolWeights {
-    return {
-      admin: object.admin,
-      poolWeights: object?.pool_weights ? PoolWeights.fromAmino(object.pool_weights) : PoolWeights.fromPartial({})
-    };
+    const message = createBaseMsgSetPoolWeights();
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = object.admin;
+    }
+    if (object.pool_weights !== undefined && object.pool_weights !== null) {
+      message.poolWeights = PoolWeights.fromAmino(object.pool_weights);
+    }
+    return message;
   },
   toAmino(message: MsgSetPoolWeights): MsgSetPoolWeightsAmino {
     const obj: any = {};
@@ -703,7 +715,8 @@ export const MsgSetPoolWeightsResponse = {
     return obj;
   },
   fromAmino(_: MsgSetPoolWeightsResponseAmino): MsgSetPoolWeightsResponse {
-    return {};
+    const message = createBaseMsgSetPoolWeightsResponse();
+    return message;
   },
   toAmino(_: MsgSetPoolWeightsResponse): MsgSetPoolWeightsResponseAmino {
     const obj: any = {};
@@ -805,10 +818,14 @@ export const MsgSetMaxPoolPointsPerTx = {
     return obj;
   },
   fromAmino(object: MsgSetMaxPoolPointsPerTxAmino): MsgSetMaxPoolPointsPerTx {
-    return {
-      admin: object.admin,
-      maxPoolPointsPerTx: BigInt(object.max_pool_points_per_tx)
-    };
+    const message = createBaseMsgSetMaxPoolPointsPerTx();
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = object.admin;
+    }
+    if (object.max_pool_points_per_tx !== undefined && object.max_pool_points_per_tx !== null) {
+      message.maxPoolPointsPerTx = BigInt(object.max_pool_points_per_tx);
+    }
+    return message;
   },
   toAmino(message: MsgSetMaxPoolPointsPerTx): MsgSetMaxPoolPointsPerTxAmino {
     const obj: any = {};
@@ -882,7 +899,8 @@ export const MsgSetMaxPoolPointsPerTxResponse = {
     return obj;
   },
   fromAmino(_: MsgSetMaxPoolPointsPerTxResponseAmino): MsgSetMaxPoolPointsPerTxResponse {
-    return {};
+    const message = createBaseMsgSetMaxPoolPointsPerTxResponse();
+    return message;
   },
   toAmino(_: MsgSetMaxPoolPointsPerTxResponse): MsgSetMaxPoolPointsPerTxResponseAmino {
     const obj: any = {};
@@ -984,10 +1002,14 @@ export const MsgSetMaxPoolPointsPerBlock = {
     return obj;
   },
   fromAmino(object: MsgSetMaxPoolPointsPerBlockAmino): MsgSetMaxPoolPointsPerBlock {
-    return {
-      admin: object.admin,
-      maxPoolPointsPerBlock: BigInt(object.max_pool_points_per_block)
-    };
+    const message = createBaseMsgSetMaxPoolPointsPerBlock();
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = object.admin;
+    }
+    if (object.max_pool_points_per_block !== undefined && object.max_pool_points_per_block !== null) {
+      message.maxPoolPointsPerBlock = BigInt(object.max_pool_points_per_block);
+    }
+    return message;
   },
   toAmino(message: MsgSetMaxPoolPointsPerBlock): MsgSetMaxPoolPointsPerBlockAmino {
     const obj: any = {};
@@ -1061,7 +1083,8 @@ export const MsgSetMaxPoolPointsPerBlockResponse = {
     return obj;
   },
   fromAmino(_: MsgSetMaxPoolPointsPerBlockResponseAmino): MsgSetMaxPoolPointsPerBlockResponse {
-    return {};
+    const message = createBaseMsgSetMaxPoolPointsPerBlockResponse();
+    return message;
   },
   toAmino(_: MsgSetMaxPoolPointsPerBlockResponse): MsgSetMaxPoolPointsPerBlockResponseAmino {
     const obj: any = {};
@@ -1171,10 +1194,12 @@ export const MsgSetBaseDenoms = {
     return obj;
   },
   fromAmino(object: MsgSetBaseDenomsAmino): MsgSetBaseDenoms {
-    return {
-      admin: object.admin,
-      baseDenoms: Array.isArray(object?.base_denoms) ? object.base_denoms.map((e: any) => BaseDenom.fromAmino(e)) : []
-    };
+    const message = createBaseMsgSetBaseDenoms();
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = object.admin;
+    }
+    message.baseDenoms = object.base_denoms?.map(e => BaseDenom.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgSetBaseDenoms): MsgSetBaseDenomsAmino {
     const obj: any = {};
@@ -1252,7 +1277,8 @@ export const MsgSetBaseDenomsResponse = {
     return obj;
   },
   fromAmino(_: MsgSetBaseDenomsResponseAmino): MsgSetBaseDenomsResponse {
-    return {};
+    const message = createBaseMsgSetBaseDenomsResponse();
+    return message;
   },
   toAmino(_: MsgSetBaseDenomsResponse): MsgSetBaseDenomsResponseAmino {
     const obj: any = {};

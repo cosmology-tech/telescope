@@ -216,9 +216,9 @@ export const Billing = {
     return message;
   },
   fromAmino(object: BillingAmino): Billing {
-    return {
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Billing_BillingDestination.fromAmino(e)) : []
-    };
+    const message = createBaseBilling();
+    message.consumerDestinations = object.consumer_destinations?.map(e => Billing_BillingDestination.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Billing): BillingAmino {
     const obj: any = {};
@@ -289,10 +289,12 @@ export const Billing_BillingDestination = {
     return message;
   },
   fromAmino(object: Billing_BillingDestinationAmino): Billing_BillingDestination {
-    return {
-      monitoredResource: object.monitored_resource,
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
-    };
+    const message = createBaseBilling_BillingDestination();
+    if (object.monitored_resource !== undefined && object.monitored_resource !== null) {
+      message.monitoredResource = object.monitored_resource;
+    }
+    message.metrics = object.metrics?.map(e => e) || [];
+    return message;
   },
   toAmino(message: Billing_BillingDestination): Billing_BillingDestinationAmino {
     const obj: any = {};

@@ -82,9 +82,11 @@ export const MsgUnjail = {
     return obj;
   },
   fromAmino(object: MsgUnjailAmino): MsgUnjail {
-    return {
-      validatorAddr: object.validator_addr
-    };
+    const message = createBaseMsgUnjail();
+    if (object.validator_addr !== undefined && object.validator_addr !== null) {
+      message.validatorAddr = object.validator_addr;
+    }
+    return message;
   },
   toAmino(message: MsgUnjail): MsgUnjailAmino {
     const obj: any = {};
@@ -158,7 +160,8 @@ export const MsgUnjailResponse = {
     return obj;
   },
   fromAmino(_: MsgUnjailResponseAmino): MsgUnjailResponse {
-    return {};
+    const message = createBaseMsgUnjailResponse();
+    return message;
   },
   toAmino(_: MsgUnjailResponse): MsgUnjailResponseAmino {
     const obj: any = {};

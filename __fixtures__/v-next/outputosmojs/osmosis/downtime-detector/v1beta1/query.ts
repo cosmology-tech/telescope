@@ -107,10 +107,14 @@ export const RecoveredSinceDowntimeOfLengthRequest = {
     return obj;
   },
   fromAmino(object: RecoveredSinceDowntimeOfLengthRequestAmino): RecoveredSinceDowntimeOfLengthRequest {
-    return {
-      downtime: isSet(object.downtime) ? downtimeFromJSON(object.downtime) : -1,
-      recovery: object?.recovery ? Duration.fromAmino(object.recovery) : Duration.fromPartial({})
-    };
+    const message = createBaseRecoveredSinceDowntimeOfLengthRequest();
+    if (object.downtime !== undefined && object.downtime !== null) {
+      message.downtime = downtimeFromJSON(object.downtime);
+    }
+    if (object.recovery !== undefined && object.recovery !== null) {
+      message.recovery = Duration.fromAmino(object.recovery);
+    }
+    return message;
   },
   toAmino(message: RecoveredSinceDowntimeOfLengthRequest): RecoveredSinceDowntimeOfLengthRequestAmino {
     const obj: any = {};
@@ -201,9 +205,11 @@ export const RecoveredSinceDowntimeOfLengthResponse = {
     return obj;
   },
   fromAmino(object: RecoveredSinceDowntimeOfLengthResponseAmino): RecoveredSinceDowntimeOfLengthResponse {
-    return {
-      succesfullyRecovered: object.succesfully_recovered
-    };
+    const message = createBaseRecoveredSinceDowntimeOfLengthResponse();
+    if (object.succesfully_recovered !== undefined && object.succesfully_recovered !== null) {
+      message.succesfullyRecovered = object.succesfully_recovered;
+    }
+    return message;
   },
   toAmino(message: RecoveredSinceDowntimeOfLengthResponse): RecoveredSinceDowntimeOfLengthResponseAmino {
     const obj: any = {};

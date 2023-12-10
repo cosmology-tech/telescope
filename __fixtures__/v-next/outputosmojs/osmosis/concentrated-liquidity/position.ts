@@ -187,15 +187,29 @@ export const Position = {
     return obj;
   },
   fromAmino(object: PositionAmino): Position {
-    return {
-      positionId: BigInt(object.position_id),
-      address: object.address,
-      poolId: BigInt(object.pool_id),
-      lowerTick: BigInt(object.lower_tick),
-      upperTick: BigInt(object.upper_tick),
-      joinTime: object?.join_time ? fromTimestamp(Timestamp.fromAmino(object.join_time)) : fromTimestamp(Timestamp.fromPartial({})),
-      liquidity: object.liquidity
-    };
+    const message = createBasePosition();
+    if (object.position_id !== undefined && object.position_id !== null) {
+      message.positionId = BigInt(object.position_id);
+    }
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.lower_tick !== undefined && object.lower_tick !== null) {
+      message.lowerTick = BigInt(object.lower_tick);
+    }
+    if (object.upper_tick !== undefined && object.upper_tick !== null) {
+      message.upperTick = BigInt(object.upper_tick);
+    }
+    if (object.join_time !== undefined && object.join_time !== null) {
+      message.joinTime = fromTimestamp(Timestamp.fromAmino(object.join_time));
+    }
+    if (object.liquidity !== undefined && object.liquidity !== null) {
+      message.liquidity = object.liquidity;
+    }
+    return message;
   },
   toAmino(message: Position): PositionAmino {
     const obj: any = {};
@@ -317,11 +331,17 @@ export const PositionWithUnderlyingAssetBreakdown = {
     return obj;
   },
   fromAmino(object: PositionWithUnderlyingAssetBreakdownAmino): PositionWithUnderlyingAssetBreakdown {
-    return {
-      position: object?.position ? Position.fromAmino(object.position) : Position.fromPartial({}),
-      asset0: object?.asset0 ? Coin.fromAmino(object.asset0) : Coin.fromPartial({}),
-      asset1: object?.asset1 ? Coin.fromAmino(object.asset1) : Coin.fromPartial({})
-    };
+    const message = createBasePositionWithUnderlyingAssetBreakdown();
+    if (object.position !== undefined && object.position !== null) {
+      message.position = Position.fromAmino(object.position);
+    }
+    if (object.asset0 !== undefined && object.asset0 !== null) {
+      message.asset0 = Coin.fromAmino(object.asset0);
+    }
+    if (object.asset1 !== undefined && object.asset1 !== null) {
+      message.asset1 = Coin.fromAmino(object.asset1);
+    }
+    return message;
   },
   toAmino(message: PositionWithUnderlyingAssetBreakdown): PositionWithUnderlyingAssetBreakdownAmino {
     const obj: any = {};

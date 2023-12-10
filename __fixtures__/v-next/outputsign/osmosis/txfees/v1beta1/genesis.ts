@@ -69,10 +69,12 @@ export const GenesisState = {
     return message;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      basedenom: object.basedenom,
-      feetokens: Array.isArray(object?.feetokens) ? object.feetokens.map((e: any) => FeeToken.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.basedenom !== undefined && object.basedenom !== null) {
+      message.basedenom = object.basedenom;
+    }
+    message.feetokens = object.feetokens?.map(e => FeeToken.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

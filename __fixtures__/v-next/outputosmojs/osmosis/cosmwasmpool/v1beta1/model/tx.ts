@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "osmosis.cosmwasmpool.v1beta1";
 /** ===================== MsgCreateCosmwasmPool */
 export interface MsgCreateCosmWasmPool {
@@ -116,11 +117,17 @@ export const MsgCreateCosmWasmPool = {
     return obj;
   },
   fromAmino(object: MsgCreateCosmWasmPoolAmino): MsgCreateCosmWasmPool {
-    return {
-      codeId: BigInt(object.code_id),
-      instantiate_msg: isSet(object.instantiate_msg) ? bytesFromBase64(object.instantiate_msg) : new Uint8Array(),
-      sender: object.sender
-    };
+    const message = createBaseMsgCreateCosmWasmPool();
+    if (object.code_id !== undefined && object.code_id !== null) {
+      message.codeId = BigInt(object.code_id);
+    }
+    if (object.instantiate_msg !== undefined && object.instantiate_msg !== null) {
+      message.instantiateMsg = fromBase64(object.instantiate_msg);
+    }
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    return message;
   },
   toAmino(message: MsgCreateCosmWasmPool): MsgCreateCosmWasmPoolAmino {
     const obj: any = {};
@@ -212,9 +219,11 @@ export const MsgCreateCosmWasmPoolResponse = {
     return obj;
   },
   fromAmino(object: MsgCreateCosmWasmPoolResponseAmino): MsgCreateCosmWasmPoolResponse {
-    return {
-      poolId: BigInt(object.pool_id)
-    };
+    const message = createBaseMsgCreateCosmWasmPoolResponse();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    return message;
   },
   toAmino(message: MsgCreateCosmWasmPoolResponse): MsgCreateCosmWasmPoolResponseAmino {
     const obj: any = {};

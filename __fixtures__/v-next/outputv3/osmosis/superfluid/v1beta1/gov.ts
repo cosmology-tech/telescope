@@ -194,11 +194,15 @@ export const SetSuperfluidAssetsProposal = {
     return obj;
   },
   fromAmino(object: SetSuperfluidAssetsProposalAmino): SetSuperfluidAssetsProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => SuperfluidAsset.fromAmino(e)) : []
-    };
+    const message = createBaseSetSuperfluidAssetsProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.assets = object.assets?.map(e => SuperfluidAsset.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: SetSuperfluidAssetsProposal, useInterfaces: boolean = true): SetSuperfluidAssetsProposalAmino {
     const obj: any = {};
@@ -314,11 +318,15 @@ export const RemoveSuperfluidAssetsProposal = {
     return obj;
   },
   fromAmino(object: RemoveSuperfluidAssetsProposalAmino): RemoveSuperfluidAssetsProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      superfluidAssetDenoms: Array.isArray(object?.superfluid_asset_denoms) ? object.superfluid_asset_denoms.map((e: any) => e) : []
-    };
+    const message = createBaseRemoveSuperfluidAssetsProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.superfluidAssetDenoms = object.superfluid_asset_denoms?.map(e => e) || [];
+    return message;
   },
   toAmino(message: RemoveSuperfluidAssetsProposal, useInterfaces: boolean = true): RemoveSuperfluidAssetsProposalAmino {
     const obj: any = {};
@@ -455,12 +463,18 @@ export const UpdateUnpoolWhiteListProposal = {
     return obj;
   },
   fromAmino(object: UpdateUnpoolWhiteListProposalAmino): UpdateUnpoolWhiteListProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => BigInt(e)) : [],
-      isOverwrite: object.is_overwrite
-    };
+    const message = createBaseUpdateUnpoolWhiteListProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.ids = object.ids?.map(e => BigInt(e)) || [];
+    if (object.is_overwrite !== undefined && object.is_overwrite !== null) {
+      message.isOverwrite = object.is_overwrite;
+    }
+    return message;
   },
   toAmino(message: UpdateUnpoolWhiteListProposal, useInterfaces: boolean = true): UpdateUnpoolWhiteListProposalAmino {
     const obj: any = {};

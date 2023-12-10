@@ -106,11 +106,17 @@ export const Resource = {
     return obj;
   },
   fromAmino(object: ResourceAmino): Resource {
-    return {
-      resources: object?.resources ? ResourceUnits.fromAmino(object.resources) : ResourceUnits.fromPartial({}),
-      count: object.count,
-      price: object?.price ? DecCoin.fromAmino(object.price) : DecCoin.fromPartial({})
-    };
+    const message = createBaseResource();
+    if (object.resources !== undefined && object.resources !== null) {
+      message.resources = ResourceUnits.fromAmino(object.resources);
+    }
+    if (object.count !== undefined && object.count !== null) {
+      message.count = object.count;
+    }
+    if (object.price !== undefined && object.price !== null) {
+      message.price = DecCoin.fromAmino(object.price);
+    }
+    return message;
   },
   toAmino(message: Resource): ResourceAmino {
     const obj: any = {};

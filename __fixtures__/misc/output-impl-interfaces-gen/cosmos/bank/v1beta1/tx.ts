@@ -1,6 +1,7 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
+import { fromBase64 } from "@cosmjs/encoding";
 import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /**
@@ -232,15 +233,25 @@ export const MsgInstantiateContract2 = {
     return obj;
   },
   fromAmino(object: MsgInstantiateContract2Amino): MsgInstantiateContract2 {
-    return {
-      codeId: BigInt(object.code_id),
-      label: object.label,
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromAmino(e)) : [],
-      salt: isSet(object.salt) ? bytesFromBase64(object.salt) : new Uint8Array(),
-      fixMsg: object.fix_msg,
-      dontOmitemptyFixMsg: object.dont_omitempty_fix_msg,
-      aListOfBytes: Array.isArray(object?.a_list_of_bytes) ? object.a_list_of_bytes.map((e: any) => bytesFromBase64(e)) : []
-    };
+    const message = createBaseMsgInstantiateContract2();
+    if (object.code_id !== undefined && object.code_id !== null) {
+      message.codeId = BigInt(object.code_id);
+    }
+    if (object.label !== undefined && object.label !== null) {
+      message.label = object.label;
+    }
+    message.funds = object.funds?.map(e => Coin.fromAmino(e)) || [];
+    if (object.salt !== undefined && object.salt !== null) {
+      message.salt = fromBase64(object.salt);
+    }
+    if (object.fix_msg !== undefined && object.fix_msg !== null) {
+      message.fixMsg = object.fix_msg;
+    }
+    if (object.dont_omitempty_fix_msg !== undefined && object.dont_omitempty_fix_msg !== null) {
+      message.dontOmitemptyFixMsg = object.dont_omitempty_fix_msg;
+    }
+    message.aListOfBytes = object.a_list_of_bytes?.map(e => bytesFromBase64(e)) || [];
+    return message;
   },
   toAmino(message: MsgInstantiateContract2): MsgInstantiateContract2Amino {
     const obj: any = {};

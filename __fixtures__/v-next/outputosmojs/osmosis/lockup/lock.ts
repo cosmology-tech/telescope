@@ -293,13 +293,21 @@ export const PeriodLock = {
     return obj;
   },
   fromAmino(object: PeriodLockAmino): PeriodLock {
-    return {
-      ID: BigInt(object.ID),
-      owner: object.owner,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({}),
-      endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : fromTimestamp(Timestamp.fromPartial({})),
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBasePeriodLock();
+    if (object.ID !== undefined && object.ID !== null) {
+      message.ID = BigInt(object.ID);
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromAmino(object.duration);
+    }
+    if (object.end_time !== undefined && object.end_time !== null) {
+      message.endTime = fromTimestamp(Timestamp.fromAmino(object.end_time));
+    }
+    message.coins = object.coins?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: PeriodLock): PeriodLockAmino {
     const obj: any = {};
@@ -436,12 +444,20 @@ export const QueryCondition = {
     return obj;
   },
   fromAmino(object: QueryConditionAmino): QueryCondition {
-    return {
-      lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : -1,
-      denom: object.denom,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({}),
-      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : fromTimestamp(Timestamp.fromPartial({}))
-    };
+    const message = createBaseQueryCondition();
+    if (object.lock_query_type !== undefined && object.lock_query_type !== null) {
+      message.lockQueryType = lockQueryTypeFromJSON(object.lock_query_type);
+    }
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromAmino(object.duration);
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = fromTimestamp(Timestamp.fromAmino(object.timestamp));
+    }
+    return message;
   },
   toAmino(message: QueryCondition): QueryConditionAmino {
     const obj: any = {};
@@ -573,12 +589,20 @@ export const SyntheticLock = {
     return obj;
   },
   fromAmino(object: SyntheticLockAmino): SyntheticLock {
-    return {
-      underlyingLockId: BigInt(object.underlying_lock_id),
-      synthDenom: object.synth_denom,
-      endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : fromTimestamp(Timestamp.fromPartial({})),
-      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({})
-    };
+    const message = createBaseSyntheticLock();
+    if (object.underlying_lock_id !== undefined && object.underlying_lock_id !== null) {
+      message.underlyingLockId = BigInt(object.underlying_lock_id);
+    }
+    if (object.synth_denom !== undefined && object.synth_denom !== null) {
+      message.synthDenom = object.synth_denom;
+    }
+    if (object.end_time !== undefined && object.end_time !== null) {
+      message.endTime = fromTimestamp(Timestamp.fromAmino(object.end_time));
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromAmino(object.duration);
+    }
+    return message;
   },
   toAmino(message: SyntheticLock): SyntheticLockAmino {
     const obj: any = {};

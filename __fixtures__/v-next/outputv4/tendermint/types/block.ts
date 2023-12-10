@@ -127,12 +127,20 @@ export const Block = {
     return obj;
   },
   fromAmino(object: BlockAmino): Block {
-    return {
-      header: object?.header ? Header.fromAmino(object.header) : Header.fromPartial({}),
-      data: object?.data ? Data.fromAmino(object.data) : Data.fromPartial({}),
-      evidence: object?.evidence ? EvidenceList.fromAmino(object.evidence) : EvidenceList.fromPartial({}),
-      lastCommit: object?.last_commit ? Commit.fromAmino(object.last_commit) : undefined
-    };
+    const message = createBaseBlock();
+    if (object.header !== undefined && object.header !== null) {
+      message.header = Header.fromAmino(object.header);
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = Data.fromAmino(object.data);
+    }
+    if (object.evidence !== undefined && object.evidence !== null) {
+      message.evidence = EvidenceList.fromAmino(object.evidence);
+    }
+    if (object.last_commit !== undefined && object.last_commit !== null) {
+      message.lastCommit = Commit.fromAmino(object.last_commit);
+    }
+    return message;
   },
   toAmino(message: Block): BlockAmino {
     const obj: any = {};

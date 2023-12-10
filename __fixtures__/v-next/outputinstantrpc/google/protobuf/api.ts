@@ -453,15 +453,23 @@ export const Api = {
     return obj;
   },
   fromAmino(object: ApiAmino): Api {
-    return {
-      name: object.name,
-      methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => Method.fromAmino(e)) : [],
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
-      version: object.version,
-      sourceContext: object?.source_context ? SourceContext.fromAmino(object.source_context) : undefined,
-      mixins: Array.isArray(object?.mixins) ? object.mixins.map((e: any) => Mixin.fromAmino(e)) : [],
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
-    };
+    const message = createBaseApi();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    message.methods = object.methods?.map(e => Method.fromAmino(e)) || [];
+    message.options = object.options?.map(e => Option.fromAmino(e)) || [];
+    if (object.version !== undefined && object.version !== null) {
+      message.version = object.version;
+    }
+    if (object.source_context !== undefined && object.source_context !== null) {
+      message.sourceContext = SourceContext.fromAmino(object.source_context);
+    }
+    message.mixins = object.mixins?.map(e => Mixin.fromAmino(e)) || [];
+    if (object.syntax !== undefined && object.syntax !== null) {
+      message.syntax = syntaxFromJSON(object.syntax);
+    }
+    return message;
   },
   toAmino(message: Api): ApiAmino {
     const obj: any = {};
@@ -649,15 +657,27 @@ export const Method = {
     return obj;
   },
   fromAmino(object: MethodAmino): Method {
-    return {
-      name: object.name,
-      requestTypeUrl: object.request_type_url,
-      requestStreaming: object.request_streaming,
-      responseTypeUrl: object.response_type_url,
-      responseStreaming: object.response_streaming,
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
-    };
+    const message = createBaseMethod();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.request_type_url !== undefined && object.request_type_url !== null) {
+      message.requestTypeUrl = object.request_type_url;
+    }
+    if (object.request_streaming !== undefined && object.request_streaming !== null) {
+      message.requestStreaming = object.request_streaming;
+    }
+    if (object.response_type_url !== undefined && object.response_type_url !== null) {
+      message.responseTypeUrl = object.response_type_url;
+    }
+    if (object.response_streaming !== undefined && object.response_streaming !== null) {
+      message.responseStreaming = object.response_streaming;
+    }
+    message.options = object.options?.map(e => Option.fromAmino(e)) || [];
+    if (object.syntax !== undefined && object.syntax !== null) {
+      message.syntax = syntaxFromJSON(object.syntax);
+    }
+    return message;
   },
   toAmino(message: Method): MethodAmino {
     const obj: any = {};
@@ -764,10 +784,14 @@ export const Mixin = {
     return obj;
   },
   fromAmino(object: MixinAmino): Mixin {
-    return {
-      name: object.name,
-      root: object.root
-    };
+    const message = createBaseMixin();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.root !== undefined && object.root !== null) {
+      message.root = object.root;
+    }
+    return message;
   },
   toAmino(message: Mixin): MixinAmino {
     const obj: any = {};

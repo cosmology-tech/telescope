@@ -163,12 +163,20 @@ export const EventSend = {
     return obj;
   },
   fromAmino(object: EventSendAmino): EventSend {
-    return {
-      classId: object.class_id,
-      id: object.id,
-      sender: object.sender,
-      receiver: object.receiver
-    };
+    const message = createBaseEventSend();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.receiver !== undefined && object.receiver !== null) {
+      message.receiver = object.receiver;
+    }
+    return message;
   },
   toAmino(message: EventSend, useInterfaces: boolean = true): EventSendAmino {
     const obj: any = {};
@@ -272,11 +280,17 @@ export const EventMint = {
     return obj;
   },
   fromAmino(object: EventMintAmino): EventMint {
-    return {
-      classId: object.class_id,
-      id: object.id,
-      owner: object.owner
-    };
+    const message = createBaseEventMint();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
   toAmino(message: EventMint, useInterfaces: boolean = true): EventMintAmino {
     const obj: any = {};
@@ -379,11 +393,17 @@ export const EventBurn = {
     return obj;
   },
   fromAmino(object: EventBurnAmino): EventBurn {
-    return {
-      classId: object.class_id,
-      id: object.id,
-      owner: object.owner
-    };
+    const message = createBaseEventBurn();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
   toAmino(message: EventBurn, useInterfaces: boolean = true): EventBurnAmino {
     const obj: any = {};

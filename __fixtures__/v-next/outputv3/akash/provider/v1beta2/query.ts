@@ -128,9 +128,11 @@ export const QueryProvidersRequest = {
     return obj;
   },
   fromAmino(object: QueryProvidersRequestAmino): QueryProvidersRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryProvidersRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryProvidersRequest, useInterfaces: boolean = true): QueryProvidersRequestAmino {
     const obj: any = {};
@@ -228,10 +230,12 @@ export const QueryProvidersResponse = {
     return obj;
   },
   fromAmino(object: QueryProvidersResponseAmino): QueryProvidersResponse {
-    return {
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryProvidersResponse();
+    message.providers = object.providers?.map(e => Provider.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryProvidersResponse, useInterfaces: boolean = true): QueryProvidersResponseAmino {
     const obj: any = {};
@@ -312,9 +316,11 @@ export const QueryProviderRequest = {
     return obj;
   },
   fromAmino(object: QueryProviderRequestAmino): QueryProviderRequest {
-    return {
-      owner: object.owner
-    };
+    const message = createBaseQueryProviderRequest();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
   toAmino(message: QueryProviderRequest, useInterfaces: boolean = true): QueryProviderRequestAmino {
     const obj: any = {};
@@ -392,9 +398,11 @@ export const QueryProviderResponse = {
     return obj;
   },
   fromAmino(object: QueryProviderResponseAmino): QueryProviderResponse {
-    return {
-      provider: object?.provider ? Provider.fromAmino(object.provider) : Provider.fromPartial({})
-    };
+    const message = createBaseQueryProviderResponse();
+    if (object.provider !== undefined && object.provider !== null) {
+      message.provider = Provider.fromAmino(object.provider);
+    }
+    return message;
   },
   toAmino(message: QueryProviderResponse, useInterfaces: boolean = true): QueryProviderResponseAmino {
     const obj: any = {};

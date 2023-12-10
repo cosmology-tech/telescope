@@ -110,10 +110,12 @@ export const GenesisState = {
     return message;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({}),
-      tokenPairs: Array.isArray(object?.token_pairs) ? object.token_pairs.map((e: any) => TokenPair.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.tokenPairs = object.token_pairs?.map(e => TokenPair.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -185,10 +187,14 @@ export const Params = {
     return message;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      enableErc20: object.enable_erc20,
-      enableEvmHook: object.enable_evm_hook
-    };
+    const message = createBaseParams();
+    if (object.enable_erc20 !== undefined && object.enable_erc20 !== null) {
+      message.enableErc20 = object.enable_erc20;
+    }
+    if (object.enable_evm_hook !== undefined && object.enable_evm_hook !== null) {
+      message.enableEvmHook = object.enable_evm_hook;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

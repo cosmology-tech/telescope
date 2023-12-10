@@ -229,11 +229,15 @@ export const Provider = {
     return message;
   },
   fromAmino(object: ProviderAmino): Provider {
-    return {
-      owner: object.owner,
-      auditor: object.auditor,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBaseProvider();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Provider): ProviderAmino {
     const obj: any = {};
@@ -314,11 +318,15 @@ export const AuditedAttributes = {
     return message;
   },
   fromAmino(object: AuditedAttributesAmino): AuditedAttributes {
-    return {
-      owner: object.owner,
-      auditor: object.auditor,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBaseAuditedAttributes();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: AuditedAttributes): AuditedAttributesAmino {
     const obj: any = {};
@@ -383,9 +391,9 @@ export const AttributesResponse = {
     return message;
   },
   fromAmino(object: AttributesResponseAmino): AttributesResponse {
-    return {
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromAmino(e)) : []
-    };
+    const message = createBaseAttributesResponse();
+    message.attributes = object.attributes?.map(e => AuditedAttributes.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: AttributesResponse): AttributesResponseAmino {
     const obj: any = {};
@@ -456,10 +464,10 @@ export const AttributesFilters = {
     return message;
   },
   fromAmino(object: AttributesFiltersAmino): AttributesFilters {
-    return {
-      auditors: Array.isArray(object?.auditors) ? object.auditors.map((e: any) => e) : [],
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => e) : []
-    };
+    const message = createBaseAttributesFilters();
+    message.auditors = object.auditors?.map(e => e) || [];
+    message.owners = object.owners?.map(e => e) || [];
+    return message;
   },
   toAmino(message: AttributesFilters): AttributesFiltersAmino {
     const obj: any = {};
@@ -543,11 +551,15 @@ export const MsgSignProviderAttributes = {
     return message;
   },
   fromAmino(object: MsgSignProviderAttributesAmino): MsgSignProviderAttributes {
-    return {
-      owner: object.owner,
-      auditor: object.auditor,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBaseMsgSignProviderAttributes();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgSignProviderAttributes): MsgSignProviderAttributesAmino {
     const obj: any = {};
@@ -603,7 +615,8 @@ export const MsgSignProviderAttributesResponse = {
     return message;
   },
   fromAmino(_: MsgSignProviderAttributesResponseAmino): MsgSignProviderAttributesResponse {
-    return {};
+    const message = createBaseMsgSignProviderAttributesResponse();
+    return message;
   },
   toAmino(_: MsgSignProviderAttributesResponse): MsgSignProviderAttributesResponseAmino {
     const obj: any = {};
@@ -677,11 +690,15 @@ export const MsgDeleteProviderAttributes = {
     return message;
   },
   fromAmino(object: MsgDeleteProviderAttributesAmino): MsgDeleteProviderAttributes {
-    return {
-      owner: object.owner,
-      auditor: object.auditor,
-      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
-    };
+    const message = createBaseMsgDeleteProviderAttributes();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    message.keys = object.keys?.map(e => e) || [];
+    return message;
   },
   toAmino(message: MsgDeleteProviderAttributes): MsgDeleteProviderAttributesAmino {
     const obj: any = {};
@@ -737,7 +754,8 @@ export const MsgDeleteProviderAttributesResponse = {
     return message;
   },
   fromAmino(_: MsgDeleteProviderAttributesResponseAmino): MsgDeleteProviderAttributesResponse {
-    return {};
+    const message = createBaseMsgDeleteProviderAttributesResponse();
+    return message;
   },
   toAmino(_: MsgDeleteProviderAttributesResponse): MsgDeleteProviderAttributesResponseAmino {
     const obj: any = {};

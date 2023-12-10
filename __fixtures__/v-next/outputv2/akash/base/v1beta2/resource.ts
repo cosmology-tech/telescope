@@ -153,10 +153,12 @@ export const CPU = {
     return obj;
   },
   fromAmino(object: CPUAmino): CPU {
-    return {
-      units: object?.units ? ResourceValue.fromAmino(object.units) : ResourceValue.fromPartial({}),
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBaseCPU();
+    if (object.units !== undefined && object.units !== null) {
+      message.units = ResourceValue.fromAmino(object.units);
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: CPU): CPUAmino {
     const obj: any = {};
@@ -262,10 +264,12 @@ export const Memory = {
     return obj;
   },
   fromAmino(object: MemoryAmino): Memory {
-    return {
-      quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : ResourceValue.fromPartial({}),
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBaseMemory();
+    if (object.quantity !== undefined && object.quantity !== null) {
+      message.quantity = ResourceValue.fromAmino(object.quantity);
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Memory): MemoryAmino {
     const obj: any = {};
@@ -383,11 +387,15 @@ export const Storage = {
     return obj;
   },
   fromAmino(object: StorageAmino): Storage {
-    return {
-      name: object.name,
-      quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : ResourceValue.fromPartial({}),
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBaseStorage();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.quantity !== undefined && object.quantity !== null) {
+      message.quantity = ResourceValue.fromAmino(object.quantity);
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Storage): StorageAmino {
     const obj: any = {};

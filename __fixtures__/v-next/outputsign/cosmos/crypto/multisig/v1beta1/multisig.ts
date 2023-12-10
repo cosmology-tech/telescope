@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, bytesFromBase64, base64FromBytes, isSet } from "../../../../helpers";
+import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmos.crypto.multisig.v1beta1";
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
@@ -107,9 +108,9 @@ export const MultiSignature = {
     return message;
   },
   fromAmino(object: MultiSignatureAmino): MultiSignature {
-    return {
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => bytesFromBase64(e)) : []
-    };
+    const message = createBaseMultiSignature();
+    message.signatures = object.signatures?.map(e => bytesFromBase64(e)) || [];
+    return message;
   },
   toAmino(message: MultiSignature): MultiSignatureAmino {
     const obj: any = {};
@@ -186,10 +187,14 @@ export const CompactBitArray = {
     return message;
   },
   fromAmino(object: CompactBitArrayAmino): CompactBitArray {
-    return {
-      extraBitsStored: object.extra_bits_stored,
-      elems: isSet(object.elems) ? bytesFromBase64(object.elems) : new Uint8Array()
-    };
+    const message = createBaseCompactBitArray();
+    if (object.extra_bits_stored !== undefined && object.extra_bits_stored !== null) {
+      message.extraBitsStored = object.extra_bits_stored;
+    }
+    if (object.elems !== undefined && object.elems !== null) {
+      message.elems = fromBase64(object.elems);
+    }
+    return message;
   },
   toAmino(message: CompactBitArray): CompactBitArrayAmino {
     const obj: any = {};

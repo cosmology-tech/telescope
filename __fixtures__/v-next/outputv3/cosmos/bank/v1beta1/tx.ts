@@ -153,11 +153,15 @@ export const MsgSend = {
     return obj;
   },
   fromAmino(object: MsgSendAmino): MsgSend {
-    return {
-      fromAddress: object.from_address,
-      toAddress: object.to_address,
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseMsgSend();
+    if (object.from_address !== undefined && object.from_address !== null) {
+      message.fromAddress = object.from_address;
+    }
+    if (object.to_address !== undefined && object.to_address !== null) {
+      message.toAddress = object.to_address;
+    }
+    message.amount = object.amount?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgSend, useInterfaces: boolean = true): MsgSendAmino {
     const obj: any = {};
@@ -226,7 +230,8 @@ export const MsgSendResponse = {
     return obj;
   },
   fromAmino(_: MsgSendResponseAmino): MsgSendResponse {
-    return {};
+    const message = createBaseMsgSendResponse();
+    return message;
   },
   toAmino(_: MsgSendResponse, useInterfaces: boolean = true): MsgSendResponseAmino {
     const obj: any = {};
@@ -330,10 +335,10 @@ export const MsgMultiSend = {
     return obj;
   },
   fromAmino(object: MsgMultiSendAmino): MsgMultiSend {
-    return {
-      inputs: Array.isArray(object?.inputs) ? object.inputs.map((e: any) => Input.fromAmino(e)) : [],
-      outputs: Array.isArray(object?.outputs) ? object.outputs.map((e: any) => Output.fromAmino(e)) : []
-    };
+    const message = createBaseMsgMultiSend();
+    message.inputs = object.inputs?.map(e => Input.fromAmino(e)) || [];
+    message.outputs = object.outputs?.map(e => Output.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgMultiSend, useInterfaces: boolean = true): MsgMultiSendAmino {
     const obj: any = {};
@@ -405,7 +410,8 @@ export const MsgMultiSendResponse = {
     return obj;
   },
   fromAmino(_: MsgMultiSendResponseAmino): MsgMultiSendResponse {
-    return {};
+    const message = createBaseMsgMultiSendResponse();
+    return message;
   },
   toAmino(_: MsgMultiSendResponse, useInterfaces: boolean = true): MsgMultiSendResponseAmino {
     const obj: any = {};

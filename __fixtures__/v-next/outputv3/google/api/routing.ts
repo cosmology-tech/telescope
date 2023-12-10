@@ -1310,9 +1310,9 @@ export const RoutingRule = {
     return obj;
   },
   fromAmino(object: RoutingRuleAmino): RoutingRule {
-    return {
-      routingParameters: Array.isArray(object?.routing_parameters) ? object.routing_parameters.map((e: any) => RoutingParameter.fromAmino(e)) : []
-    };
+    const message = createBaseRoutingRule();
+    message.routingParameters = object.routing_parameters?.map(e => RoutingParameter.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: RoutingRule, useInterfaces: boolean = true): RoutingRuleAmino {
     const obj: any = {};
@@ -1404,10 +1404,14 @@ export const RoutingParameter = {
     return obj;
   },
   fromAmino(object: RoutingParameterAmino): RoutingParameter {
-    return {
-      field: object.field,
-      pathTemplate: object.path_template
-    };
+    const message = createBaseRoutingParameter();
+    if (object.field !== undefined && object.field !== null) {
+      message.field = object.field;
+    }
+    if (object.path_template !== undefined && object.path_template !== null) {
+      message.pathTemplate = object.path_template;
+    }
+    return message;
   },
   toAmino(message: RoutingParameter, useInterfaces: boolean = true): RoutingParameterAmino {
     const obj: any = {};

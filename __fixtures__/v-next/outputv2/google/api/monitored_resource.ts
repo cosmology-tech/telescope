@@ -456,14 +456,24 @@ export const MonitoredResourceDescriptor = {
     return obj;
   },
   fromAmino(object: MonitoredResourceDescriptorAmino): MonitoredResourceDescriptor {
-    return {
-      name: object.name,
-      type: object.type,
-      displayName: object.display_name,
-      description: object.description,
-      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromAmino(e)) : [],
-      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1
-    };
+    const message = createBaseMonitoredResourceDescriptor();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    if (object.display_name !== undefined && object.display_name !== null) {
+      message.displayName = object.display_name;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.labels = object.labels?.map(e => LabelDescriptor.fromAmino(e)) || [];
+    if (object.launch_stage !== undefined && object.launch_stage !== null) {
+      message.launchStage = launchStageFromJSON(object.launch_stage);
+    }
+    return message;
   },
   toAmino(message: MonitoredResourceDescriptor): MonitoredResourceDescriptorAmino {
     const obj: any = {};
@@ -562,10 +572,14 @@ export const MonitoredResource_LabelsEntry = {
     return obj;
   },
   fromAmino(object: MonitoredResource_LabelsEntryAmino): MonitoredResource_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseMonitoredResource_LabelsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: MonitoredResource_LabelsEntry): MonitoredResource_LabelsEntryAmino {
     const obj: any = {};
@@ -684,15 +698,19 @@ export const MonitoredResource = {
     return obj;
   },
   fromAmino(object: MonitoredResourceAmino): MonitoredResource {
-    return {
-      type: object.type,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseMonitoredResource();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    message.labels = Object.entries(object.labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
+      }
+      return acc;
+    }, {});
+    return message;
   },
   toAmino(message: MonitoredResource): MonitoredResourceAmino {
     const obj: any = {};
@@ -788,10 +806,14 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
     return obj;
   },
   fromAmino(object: MonitoredResourceMetadata_UserLabelsEntryAmino): MonitoredResourceMetadata_UserLabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseMonitoredResourceMetadata_UserLabelsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: MonitoredResourceMetadata_UserLabelsEntry): MonitoredResourceMetadata_UserLabelsEntryAmino {
     const obj: any = {};
@@ -912,15 +934,19 @@ export const MonitoredResourceMetadata = {
     return obj;
   },
   fromAmino(object: MonitoredResourceMetadataAmino): MonitoredResourceMetadata {
-    return {
-      systemLabels: object?.system_labels ? Struct.fromAmino(object.system_labels) : undefined,
-      userLabels: isObject(object.user_labels) ? Object.entries(object.user_labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseMonitoredResourceMetadata();
+    if (object.system_labels !== undefined && object.system_labels !== null) {
+      message.systemLabels = Struct.fromAmino(object.system_labels);
+    }
+    message.userLabels = Object.entries(object.user_labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
+      }
+      return acc;
+    }, {});
+    return message;
   },
   toAmino(message: MonitoredResourceMetadata): MonitoredResourceMetadataAmino {
     const obj: any = {};

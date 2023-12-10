@@ -134,10 +134,10 @@ export const Explain = {
     return message;
   },
   fromAmino(object: ExplainAmino): Explain {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromAmino(e)) : [],
-      exprSteps: Array.isArray(object?.expr_steps) ? object.expr_steps.map((e: any) => Explain_ExprStep.fromAmino(e)) : []
-    };
+    const message = createBaseExplain();
+    message.values = object.values?.map(e => Value.fromAmino(e)) || [];
+    message.exprSteps = object.expr_steps?.map(e => Explain_ExprStep.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Explain): ExplainAmino {
     const obj: any = {};
@@ -215,10 +215,14 @@ export const Explain_ExprStep = {
     return message;
   },
   fromAmino(object: Explain_ExprStepAmino): Explain_ExprStep {
-    return {
-      id: BigInt(object.id),
-      valueIndex: object.value_index
-    };
+    const message = createBaseExplain_ExprStep();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id);
+    }
+    if (object.value_index !== undefined && object.value_index !== null) {
+      message.valueIndex = object.value_index;
+    }
+    return message;
   },
   toAmino(message: Explain_ExprStep): Explain_ExprStepAmino {
     const obj: any = {};

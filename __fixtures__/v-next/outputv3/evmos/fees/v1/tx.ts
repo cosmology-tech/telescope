@@ -265,12 +265,18 @@ export const MsgRegisterDevFeeInfo = {
     return obj;
   },
   fromAmino(object: MsgRegisterDevFeeInfoAmino): MsgRegisterDevFeeInfo {
-    return {
-      contractAddress: object.contract_address,
-      deployerAddress: object.deployer_address,
-      withdrawAddress: object.withdraw_address,
-      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e)) : []
-    };
+    const message = createBaseMsgRegisterDevFeeInfo();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    if (object.deployer_address !== undefined && object.deployer_address !== null) {
+      message.deployerAddress = object.deployer_address;
+    }
+    if (object.withdraw_address !== undefined && object.withdraw_address !== null) {
+      message.withdrawAddress = object.withdraw_address;
+    }
+    message.nonces = object.nonces?.map(e => BigInt(e)) || [];
+    return message;
   },
   toAmino(message: MsgRegisterDevFeeInfo, useInterfaces: boolean = true): MsgRegisterDevFeeInfoAmino {
     const obj: any = {};
@@ -339,7 +345,8 @@ export const MsgRegisterDevFeeInfoResponse = {
     return obj;
   },
   fromAmino(_: MsgRegisterDevFeeInfoResponseAmino): MsgRegisterDevFeeInfoResponse {
-    return {};
+    const message = createBaseMsgRegisterDevFeeInfoResponse();
+    return message;
   },
   toAmino(_: MsgRegisterDevFeeInfoResponse, useInterfaces: boolean = true): MsgRegisterDevFeeInfoResponseAmino {
     const obj: any = {};
@@ -426,10 +433,14 @@ export const MsgCancelDevFeeInfo = {
     return obj;
   },
   fromAmino(object: MsgCancelDevFeeInfoAmino): MsgCancelDevFeeInfo {
-    return {
-      contractAddress: object.contract_address,
-      deployerAddress: object.deployer_address
-    };
+    const message = createBaseMsgCancelDevFeeInfo();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    if (object.deployer_address !== undefined && object.deployer_address !== null) {
+      message.deployerAddress = object.deployer_address;
+    }
+    return message;
   },
   toAmino(message: MsgCancelDevFeeInfo, useInterfaces: boolean = true): MsgCancelDevFeeInfoAmino {
     const obj: any = {};
@@ -492,7 +503,8 @@ export const MsgCancelDevFeeInfoResponse = {
     return obj;
   },
   fromAmino(_: MsgCancelDevFeeInfoResponseAmino): MsgCancelDevFeeInfoResponse {
-    return {};
+    const message = createBaseMsgCancelDevFeeInfoResponse();
+    return message;
   },
   toAmino(_: MsgCancelDevFeeInfoResponse, useInterfaces: boolean = true): MsgCancelDevFeeInfoResponseAmino {
     const obj: any = {};
@@ -591,11 +603,17 @@ export const MsgUpdateDevFeeInfo = {
     return obj;
   },
   fromAmino(object: MsgUpdateDevFeeInfoAmino): MsgUpdateDevFeeInfo {
-    return {
-      contractAddress: object.contract_address,
-      deployerAddress: object.deployer_address,
-      withdrawAddress: object.withdraw_address
-    };
+    const message = createBaseMsgUpdateDevFeeInfo();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    if (object.deployer_address !== undefined && object.deployer_address !== null) {
+      message.deployerAddress = object.deployer_address;
+    }
+    if (object.withdraw_address !== undefined && object.withdraw_address !== null) {
+      message.withdrawAddress = object.withdraw_address;
+    }
+    return message;
   },
   toAmino(message: MsgUpdateDevFeeInfo, useInterfaces: boolean = true): MsgUpdateDevFeeInfoAmino {
     const obj: any = {};
@@ -659,7 +677,8 @@ export const MsgUpdateDevFeeInfoResponse = {
     return obj;
   },
   fromAmino(_: MsgUpdateDevFeeInfoResponseAmino): MsgUpdateDevFeeInfoResponse {
-    return {};
+    const message = createBaseMsgUpdateDevFeeInfoResponse();
+    return message;
   },
   toAmino(_: MsgUpdateDevFeeInfoResponse, useInterfaces: boolean = true): MsgUpdateDevFeeInfoResponseAmino {
     const obj: any = {};

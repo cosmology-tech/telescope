@@ -219,11 +219,13 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({}),
-      signingInfos: Array.isArray(object?.signing_infos) ? object.signing_infos.map((e: any) => SigningInfo.fromAmino(e)) : [],
-      missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => ValidatorMissedBlocks.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.signingInfos = object.signing_infos?.map(e => SigningInfo.fromAmino(e)) || [];
+    message.missedBlocks = object.missed_blocks?.map(e => ValidatorMissedBlocks.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
@@ -324,10 +326,14 @@ export const SigningInfo = {
     return obj;
   },
   fromAmino(object: SigningInfoAmino): SigningInfo {
-    return {
-      address: object.address,
-      validatorSigningInfo: object?.validator_signing_info ? ValidatorSigningInfo.fromAmino(object.validator_signing_info) : ValidatorSigningInfo.fromPartial({})
-    };
+    const message = createBaseSigningInfo();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.validator_signing_info !== undefined && object.validator_signing_info !== null) {
+      message.validatorSigningInfo = ValidatorSigningInfo.fromAmino(object.validator_signing_info);
+    }
+    return message;
   },
   toAmino(message: SigningInfo, useInterfaces: boolean = true): SigningInfoAmino {
     const obj: any = {};
@@ -425,10 +431,12 @@ export const ValidatorMissedBlocks = {
     return obj;
   },
   fromAmino(object: ValidatorMissedBlocksAmino): ValidatorMissedBlocks {
-    return {
-      address: object.address,
-      missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => MissedBlock.fromAmino(e)) : []
-    };
+    const message = createBaseValidatorMissedBlocks();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    message.missedBlocks = object.missed_blocks?.map(e => MissedBlock.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ValidatorMissedBlocks, useInterfaces: boolean = true): ValidatorMissedBlocksAmino {
     const obj: any = {};
@@ -524,10 +532,14 @@ export const MissedBlock = {
     return obj;
   },
   fromAmino(object: MissedBlockAmino): MissedBlock {
-    return {
-      index: BigInt(object.index),
-      missed: object.missed
-    };
+    const message = createBaseMissedBlock();
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index);
+    }
+    if (object.missed !== undefined && object.missed !== null) {
+      message.missed = object.missed;
+    }
+    return message;
   },
   toAmino(message: MissedBlock, useInterfaces: boolean = true): MissedBlockAmino {
     const obj: any = {};

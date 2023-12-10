@@ -107,7 +107,8 @@ export const QueryEpochsInfoRequest = {
     return obj;
   },
   fromAmino(_: QueryEpochsInfoRequestAmino): QueryEpochsInfoRequest {
-    return {};
+    const message = createBaseQueryEpochsInfoRequest();
+    return message;
   },
   toAmino(_: QueryEpochsInfoRequest): QueryEpochsInfoRequestAmino {
     const obj: any = {};
@@ -200,9 +201,9 @@ export const QueryEpochsInfoResponse = {
     return obj;
   },
   fromAmino(object: QueryEpochsInfoResponseAmino): QueryEpochsInfoResponse {
-    return {
-      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromAmino(e)) : []
-    };
+    const message = createBaseQueryEpochsInfoResponse();
+    message.epochs = object.epochs?.map(e => EpochInfo.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryEpochsInfoResponse): QueryEpochsInfoResponseAmino {
     const obj: any = {};
@@ -292,9 +293,11 @@ export const QueryCurrentEpochRequest = {
     return obj;
   },
   fromAmino(object: QueryCurrentEpochRequestAmino): QueryCurrentEpochRequest {
-    return {
-      identifier: object.identifier
-    };
+    const message = createBaseQueryCurrentEpochRequest();
+    if (object.identifier !== undefined && object.identifier !== null) {
+      message.identifier = object.identifier;
+    }
+    return message;
   },
   toAmino(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestAmino {
     const obj: any = {};
@@ -382,9 +385,11 @@ export const QueryCurrentEpochResponse = {
     return obj;
   },
   fromAmino(object: QueryCurrentEpochResponseAmino): QueryCurrentEpochResponse {
-    return {
-      currentEpoch: BigInt(object.current_epoch)
-    };
+    const message = createBaseQueryCurrentEpochResponse();
+    if (object.current_epoch !== undefined && object.current_epoch !== null) {
+      message.currentEpoch = BigInt(object.current_epoch);
+    }
+    return message;
   },
   toAmino(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseAmino {
     const obj: any = {};

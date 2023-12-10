@@ -1,7 +1,7 @@
 import { MetricValueSet, MetricValueSetAmino, MetricValueSetSDKType } from "./metric_value";
 import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isObject, isSet } from "../../../../helpers";
+import { DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Supported quota modes. */
 export enum QuotaOperation_QuotaMode {
@@ -550,11 +550,17 @@ export const AllocateQuotaRequest = {
     return message;
   },
   fromAmino(object: AllocateQuotaRequestAmino): AllocateQuotaRequest {
-    return {
-      serviceName: object.service_name,
-      allocateOperation: object?.allocate_operation ? QuotaOperation.fromAmino(object.allocate_operation) : undefined,
-      serviceConfigId: object.service_config_id
-    };
+    const message = createBaseAllocateQuotaRequest();
+    if (object.service_name !== undefined && object.service_name !== null) {
+      message.serviceName = object.service_name;
+    }
+    if (object.allocate_operation !== undefined && object.allocate_operation !== null) {
+      message.allocateOperation = QuotaOperation.fromAmino(object.allocate_operation);
+    }
+    if (object.service_config_id !== undefined && object.service_config_id !== null) {
+      message.serviceConfigId = object.service_config_id;
+    }
+    return message;
   },
   toAmino(message: AllocateQuotaRequest): AllocateQuotaRequestAmino {
     const obj: any = {};
@@ -622,10 +628,14 @@ export const QuotaOperation_LabelsEntry = {
     return message;
   },
   fromAmino(object: QuotaOperation_LabelsEntryAmino): QuotaOperation_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseQuotaOperation_LabelsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: QuotaOperation_LabelsEntry): QuotaOperation_LabelsEntryAmino {
     const obj: any = {};
@@ -732,19 +742,29 @@ export const QuotaOperation = {
     return message;
   },
   fromAmino(object: QuotaOperationAmino): QuotaOperation {
-    return {
-      operationId: object.operation_id,
-      methodName: object.method_name,
-      consumerId: object.consumer_id,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseQuotaOperation();
+    if (object.operation_id !== undefined && object.operation_id !== null) {
+      message.operationId = object.operation_id;
+    }
+    if (object.method_name !== undefined && object.method_name !== null) {
+      message.methodName = object.method_name;
+    }
+    if (object.consumer_id !== undefined && object.consumer_id !== null) {
+      message.consumerId = object.consumer_id;
+    }
+    message.labels = Object.entries(object.labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      quotaMetrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromAmino(e)) : [],
-      quotaMode: isSet(object.quota_mode) ? quotaOperation_QuotaModeFromJSON(object.quota_mode) : -1
-    };
+      }
+      return acc;
+    }, {});
+    message.quotaMetrics = object.quota_metrics?.map(e => MetricValueSet.fromAmino(e)) || [];
+    if (object.quota_mode !== undefined && object.quota_mode !== null) {
+      message.quotaMode = quotaOperation_QuotaModeFromJSON(object.quota_mode);
+    }
+    return message;
   },
   toAmino(message: QuotaOperation): QuotaOperationAmino {
     const obj: any = {};
@@ -841,12 +861,16 @@ export const AllocateQuotaResponse = {
     return message;
   },
   fromAmino(object: AllocateQuotaResponseAmino): AllocateQuotaResponse {
-    return {
-      operationId: object.operation_id,
-      allocateErrors: Array.isArray(object?.allocate_errors) ? object.allocate_errors.map((e: any) => QuotaError.fromAmino(e)) : [],
-      quotaMetrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromAmino(e)) : [],
-      serviceConfigId: object.service_config_id
-    };
+    const message = createBaseAllocateQuotaResponse();
+    if (object.operation_id !== undefined && object.operation_id !== null) {
+      message.operationId = object.operation_id;
+    }
+    message.allocateErrors = object.allocate_errors?.map(e => QuotaError.fromAmino(e)) || [];
+    message.quotaMetrics = object.quota_metrics?.map(e => MetricValueSet.fromAmino(e)) || [];
+    if (object.service_config_id !== undefined && object.service_config_id !== null) {
+      message.serviceConfigId = object.service_config_id;
+    }
+    return message;
   },
   toAmino(message: AllocateQuotaResponse): AllocateQuotaResponseAmino {
     const obj: any = {};
@@ -942,12 +966,20 @@ export const QuotaError = {
     return message;
   },
   fromAmino(object: QuotaErrorAmino): QuotaError {
-    return {
-      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : -1,
-      subject: object.subject,
-      description: object.description,
-      status: object?.status ? Status.fromAmino(object.status) : undefined
-    };
+    const message = createBaseQuotaError();
+    if (object.code !== undefined && object.code !== null) {
+      message.code = quotaError_CodeFromJSON(object.code);
+    }
+    if (object.subject !== undefined && object.subject !== null) {
+      message.subject = object.subject;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.status !== undefined && object.status !== null) {
+      message.status = Status.fromAmino(object.status);
+    }
+    return message;
   },
   toAmino(message: QuotaError): QuotaErrorAmino {
     const obj: any = {};

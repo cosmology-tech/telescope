@@ -104,12 +104,20 @@ export const Equivocation = {
     return message;
   },
   fromAmino(object: EquivocationAmino): Equivocation {
-    return {
-      height: BigInt(object.height),
-      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : fromTimestamp(Timestamp.fromPartial({})),
-      power: BigInt(object.power),
-      consensusAddress: object.consensus_address
-    };
+    const message = createBaseEquivocation();
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height);
+    }
+    if (object.time !== undefined && object.time !== null) {
+      message.time = fromTimestamp(Timestamp.fromAmino(object.time));
+    }
+    if (object.power !== undefined && object.power !== null) {
+      message.power = BigInt(object.power);
+    }
+    if (object.consensus_address !== undefined && object.consensus_address !== null) {
+      message.consensusAddress = object.consensus_address;
+    }
+    return message;
   },
   toAmino(message: Equivocation): EquivocationAmino {
     const obj: any = {};

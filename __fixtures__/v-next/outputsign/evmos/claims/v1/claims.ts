@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet } from "../../../helpers";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.claims.v1";
 /** Action defines the list of available actions to claim the airdrop tokens. */
 export enum Action {
@@ -218,11 +218,17 @@ export const Claim = {
     return message;
   },
   fromAmino(object: ClaimAmino): Claim {
-    return {
-      action: isSet(object.action) ? actionFromJSON(object.action) : -1,
-      completed: object.completed,
-      claimableAmount: object.claimable_amount
-    };
+    const message = createBaseClaim();
+    if (object.action !== undefined && object.action !== null) {
+      message.action = actionFromJSON(object.action);
+    }
+    if (object.completed !== undefined && object.completed !== null) {
+      message.completed = object.completed;
+    }
+    if (object.claimable_amount !== undefined && object.claimable_amount !== null) {
+      message.claimableAmount = object.claimable_amount;
+    }
+    return message;
   },
   toAmino(message: Claim): ClaimAmino {
     const obj: any = {};
@@ -308,11 +314,15 @@ export const ClaimsRecordAddress = {
     return message;
   },
   fromAmino(object: ClaimsRecordAddressAmino): ClaimsRecordAddress {
-    return {
-      address: object.address,
-      initialClaimableAmount: object.initial_claimable_amount,
-      actionsCompleted: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => e) : []
-    };
+    const message = createBaseClaimsRecordAddress();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.initial_claimable_amount !== undefined && object.initial_claimable_amount !== null) {
+      message.initialClaimableAmount = object.initial_claimable_amount;
+    }
+    message.actionsCompleted = object.actions_completed?.map(e => e) || [];
+    return message;
   },
   toAmino(message: ClaimsRecordAddress): ClaimsRecordAddressAmino {
     const obj: any = {};
@@ -394,10 +404,12 @@ export const ClaimsRecord = {
     return message;
   },
   fromAmino(object: ClaimsRecordAmino): ClaimsRecord {
-    return {
-      initialClaimableAmount: object.initial_claimable_amount,
-      actionsCompleted: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => e) : []
-    };
+    const message = createBaseClaimsRecord();
+    if (object.initial_claimable_amount !== undefined && object.initial_claimable_amount !== null) {
+      message.initialClaimableAmount = object.initial_claimable_amount;
+    }
+    message.actionsCompleted = object.actions_completed?.map(e => e) || [];
+    return message;
   },
   toAmino(message: ClaimsRecord): ClaimsRecordAmino {
     const obj: any = {};

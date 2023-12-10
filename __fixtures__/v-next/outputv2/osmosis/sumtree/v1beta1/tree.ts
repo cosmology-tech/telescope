@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "osmosis.store.v1beta1";
 export interface Node {
   children: Child[];
@@ -120,9 +121,9 @@ export const Node = {
     return obj;
   },
   fromAmino(object: NodeAmino): Node {
-    return {
-      children: Array.isArray(object?.children) ? object.children.map((e: any) => Child.fromAmino(e)) : []
-    };
+    const message = createBaseNode();
+    message.children = object.children?.map(e => Child.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Node): NodeAmino {
     const obj: any = {};
@@ -224,10 +225,14 @@ export const Child = {
     return obj;
   },
   fromAmino(object: ChildAmino): Child {
-    return {
-      index: isSet(object.index) ? bytesFromBase64(object.index) : new Uint8Array(),
-      accumulation: object.accumulation
-    };
+    const message = createBaseChild();
+    if (object.index !== undefined && object.index !== null) {
+      message.index = fromBase64(object.index);
+    }
+    if (object.accumulation !== undefined && object.accumulation !== null) {
+      message.accumulation = object.accumulation;
+    }
+    return message;
   },
   toAmino(message: Child): ChildAmino {
     const obj: any = {};
@@ -316,9 +321,11 @@ export const Leaf = {
     return obj;
   },
   fromAmino(object: LeafAmino): Leaf {
-    return {
-      leaf: object?.leaf ? Child.fromAmino(object.leaf) : undefined
-    };
+    const message = createBaseLeaf();
+    if (object.leaf !== undefined && object.leaf !== null) {
+      message.leaf = Child.fromAmino(object.leaf);
+    }
+    return message;
   },
   toAmino(message: Leaf): LeafAmino {
     const obj: any = {};

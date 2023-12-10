@@ -208,11 +208,17 @@ export const InflationDistribution = {
     return obj;
   },
   fromAmino(object: InflationDistributionAmino): InflationDistribution {
-    return {
-      stakingRewards: object.staking_rewards,
-      usageIncentives: object.usage_incentives,
-      communityPool: object.community_pool
-    };
+    const message = createBaseInflationDistribution();
+    if (object.staking_rewards !== undefined && object.staking_rewards !== null) {
+      message.stakingRewards = object.staking_rewards;
+    }
+    if (object.usage_incentives !== undefined && object.usage_incentives !== null) {
+      message.usageIncentives = object.usage_incentives;
+    }
+    if (object.community_pool !== undefined && object.community_pool !== null) {
+      message.communityPool = object.community_pool;
+    }
+    return message;
   },
   toAmino(message: InflationDistribution, useInterfaces: boolean = true): InflationDistributionAmino {
     const obj: any = {};
@@ -338,13 +344,23 @@ export const ExponentialCalculation = {
     return obj;
   },
   fromAmino(object: ExponentialCalculationAmino): ExponentialCalculation {
-    return {
-      a: object.a,
-      r: object.r,
-      c: object.c,
-      bondingTarget: object.bonding_target,
-      maxVariance: object.max_variance
-    };
+    const message = createBaseExponentialCalculation();
+    if (object.a !== undefined && object.a !== null) {
+      message.a = object.a;
+    }
+    if (object.r !== undefined && object.r !== null) {
+      message.r = object.r;
+    }
+    if (object.c !== undefined && object.c !== null) {
+      message.c = object.c;
+    }
+    if (object.bonding_target !== undefined && object.bonding_target !== null) {
+      message.bondingTarget = object.bonding_target;
+    }
+    if (object.max_variance !== undefined && object.max_variance !== null) {
+      message.maxVariance = object.max_variance;
+    }
+    return message;
   },
   toAmino(message: ExponentialCalculation, useInterfaces: boolean = true): ExponentialCalculationAmino {
     const obj: any = {};

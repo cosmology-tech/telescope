@@ -3,6 +3,7 @@ import { GroupSpec, GroupSpecSDKType } from "./groupspec";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Exact } from "../../../helpers";
+import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeployment {
@@ -221,13 +222,21 @@ export const MsgCreateDeployment = {
     return obj;
   },
   fromAmino(object: MsgCreateDeploymentAmino): MsgCreateDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : DeploymentID.fromPartial({}),
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
-      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array(),
-      deposit: object?.deposit ? Coin.fromAmino(object.deposit) : Coin.fromPartial({}),
-      depositor: object.depositor
-    };
+    const message = createBaseMsgCreateDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromAmino(object.id);
+    }
+    message.groups = object.groups?.map(e => GroupSpec.fromAmino(e)) || [];
+    if (object.version !== undefined && object.version !== null) {
+      message.version = fromBase64(object.version);
+    }
+    if (object.deposit !== undefined && object.deposit !== null) {
+      message.deposit = Coin.fromAmino(object.deposit);
+    }
+    if (object.depositor !== undefined && object.depositor !== null) {
+      message.depositor = object.depositor;
+    }
+    return message;
   },
   toAmino(message: MsgCreateDeployment): MsgCreateDeploymentAmino {
     const obj: any = {};
@@ -308,7 +317,8 @@ export const MsgCreateDeploymentResponse = {
     return obj;
   },
   fromAmino(_: MsgCreateDeploymentResponseAmino): MsgCreateDeploymentResponse {
-    return {};
+    const message = createBaseMsgCreateDeploymentResponse();
+    return message;
   },
   toAmino(_: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseAmino {
     const obj: any = {};
@@ -423,11 +433,17 @@ export const MsgDepositDeployment = {
     return obj;
   },
   fromAmino(object: MsgDepositDeploymentAmino): MsgDepositDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : DeploymentID.fromPartial({}),
-      amount: object?.amount ? Coin.fromAmino(object.amount) : Coin.fromPartial({}),
-      depositor: object.depositor
-    };
+    const message = createBaseMsgDepositDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromAmino(object.id);
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromAmino(object.amount);
+    }
+    if (object.depositor !== undefined && object.depositor !== null) {
+      message.depositor = object.depositor;
+    }
+    return message;
   },
   toAmino(message: MsgDepositDeployment): MsgDepositDeploymentAmino {
     const obj: any = {};
@@ -502,7 +518,8 @@ export const MsgDepositDeploymentResponse = {
     return obj;
   },
   fromAmino(_: MsgDepositDeploymentResponseAmino): MsgDepositDeploymentResponse {
-    return {};
+    const message = createBaseMsgDepositDeploymentResponse();
+    return message;
   },
   toAmino(_: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseAmino {
     const obj: any = {};
@@ -604,10 +621,14 @@ export const MsgUpdateDeployment = {
     return obj;
   },
   fromAmino(object: MsgUpdateDeploymentAmino): MsgUpdateDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : DeploymentID.fromPartial({}),
-      version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array()
-    };
+    const message = createBaseMsgUpdateDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromAmino(object.id);
+    }
+    if (object.version !== undefined && object.version !== null) {
+      message.version = fromBase64(object.version);
+    }
+    return message;
   },
   toAmino(message: MsgUpdateDeployment): MsgUpdateDeploymentAmino {
     const obj: any = {};
@@ -681,7 +702,8 @@ export const MsgUpdateDeploymentResponse = {
     return obj;
   },
   fromAmino(_: MsgUpdateDeploymentResponseAmino): MsgUpdateDeploymentResponse {
-    return {};
+    const message = createBaseMsgUpdateDeploymentResponse();
+    return message;
   },
   toAmino(_: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseAmino {
     const obj: any = {};
@@ -770,9 +792,11 @@ export const MsgCloseDeployment = {
     return obj;
   },
   fromAmino(object: MsgCloseDeploymentAmino): MsgCloseDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : DeploymentID.fromPartial({})
-    };
+    const message = createBaseMsgCloseDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: MsgCloseDeployment): MsgCloseDeploymentAmino {
     const obj: any = {};
@@ -845,7 +869,8 @@ export const MsgCloseDeploymentResponse = {
     return obj;
   },
   fromAmino(_: MsgCloseDeploymentResponseAmino): MsgCloseDeploymentResponse {
-    return {};
+    const message = createBaseMsgCloseDeploymentResponse();
+    return message;
   },
   toAmino(_: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseAmino {
     const obj: any = {};

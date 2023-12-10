@@ -140,12 +140,18 @@ export const MsgCreateBalancerPool = {
     return obj;
   },
   fromAmino(object: MsgCreateBalancerPoolAmino): MsgCreateBalancerPool {
-    return {
-      sender: object.sender,
-      poolParams: object?.pool_params ? PoolParams.fromAmino(object.pool_params) : undefined,
-      poolAssets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromAmino(e)) : [],
-      futurePoolGovernor: object.future_pool_governor
-    };
+    const message = createBaseMsgCreateBalancerPool();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.pool_params !== undefined && object.pool_params !== null) {
+      message.poolParams = PoolParams.fromAmino(object.pool_params);
+    }
+    message.poolAssets = object.pool_assets?.map(e => PoolAsset.fromAmino(e)) || [];
+    if (object.future_pool_governor !== undefined && object.future_pool_governor !== null) {
+      message.futurePoolGovernor = object.future_pool_governor;
+    }
+    return message;
   },
   toAmino(message: MsgCreateBalancerPool): MsgCreateBalancerPoolAmino {
     const obj: any = {};
@@ -242,9 +248,11 @@ export const MsgCreateBalancerPoolResponse = {
     return obj;
   },
   fromAmino(object: MsgCreateBalancerPoolResponseAmino): MsgCreateBalancerPoolResponse {
-    return {
-      poolId: BigInt(object.pool_id)
-    };
+    const message = createBaseMsgCreateBalancerPoolResponse();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    return message;
   },
   toAmino(message: MsgCreateBalancerPoolResponse): MsgCreateBalancerPoolResponseAmino {
     const obj: any = {};

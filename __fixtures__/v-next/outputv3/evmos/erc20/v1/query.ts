@@ -203,9 +203,11 @@ export const QueryTokenPairsRequest = {
     return obj;
   },
   fromAmino(object: QueryTokenPairsRequestAmino): QueryTokenPairsRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryTokenPairsRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryTokenPairsRequest, useInterfaces: boolean = true): QueryTokenPairsRequestAmino {
     const obj: any = {};
@@ -303,10 +305,12 @@ export const QueryTokenPairsResponse = {
     return obj;
   },
   fromAmino(object: QueryTokenPairsResponseAmino): QueryTokenPairsResponse {
-    return {
-      tokenPairs: Array.isArray(object?.token_pairs) ? object.token_pairs.map((e: any) => TokenPair.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryTokenPairsResponse();
+    message.tokenPairs = object.token_pairs?.map(e => TokenPair.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryTokenPairsResponse, useInterfaces: boolean = true): QueryTokenPairsResponseAmino {
     const obj: any = {};
@@ -387,9 +391,11 @@ export const QueryTokenPairRequest = {
     return obj;
   },
   fromAmino(object: QueryTokenPairRequestAmino): QueryTokenPairRequest {
-    return {
-      token: object.token
-    };
+    const message = createBaseQueryTokenPairRequest();
+    if (object.token !== undefined && object.token !== null) {
+      message.token = object.token;
+    }
+    return message;
   },
   toAmino(message: QueryTokenPairRequest, useInterfaces: boolean = true): QueryTokenPairRequestAmino {
     const obj: any = {};
@@ -467,9 +473,11 @@ export const QueryTokenPairResponse = {
     return obj;
   },
   fromAmino(object: QueryTokenPairResponseAmino): QueryTokenPairResponse {
-    return {
-      tokenPair: object?.token_pair ? TokenPair.fromAmino(object.token_pair) : TokenPair.fromPartial({})
-    };
+    const message = createBaseQueryTokenPairResponse();
+    if (object.token_pair !== undefined && object.token_pair !== null) {
+      message.tokenPair = TokenPair.fromAmino(object.token_pair);
+    }
+    return message;
   },
   toAmino(message: QueryTokenPairResponse, useInterfaces: boolean = true): QueryTokenPairResponseAmino {
     const obj: any = {};
@@ -531,7 +539,8 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
   toAmino(_: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
     const obj: any = {};
@@ -608,9 +617,11 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
     const obj: any = {};

@@ -2,7 +2,7 @@ import { LaunchStage, LaunchStageSDKType, launchStageFromJSON } from "./launch_s
 import { Duration, DurationAmino, DurationSDKType } from "../protobuf/duration";
 import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorSDKType } from "./label";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet, isObject } from "../../helpers";
+import { DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * The kind of measurement. It describes how the data is reported.
@@ -740,19 +740,37 @@ export const MetricDescriptor = {
     return message;
   },
   fromAmino(object: MetricDescriptorAmino): MetricDescriptor {
-    return {
-      name: object.name,
-      type: object.type,
-      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromAmino(e)) : [],
-      metricKind: isSet(object.metric_kind) ? metricDescriptor_MetricKindFromJSON(object.metric_kind) : -1,
-      valueType: isSet(object.value_type) ? metricDescriptor_ValueTypeFromJSON(object.value_type) : -1,
-      unit: object.unit,
-      description: object.description,
-      displayName: object.display_name,
-      metadata: object?.metadata ? MetricDescriptor_MetricDescriptorMetadata.fromAmino(object.metadata) : undefined,
-      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1,
-      monitoredResourceTypes: Array.isArray(object?.monitored_resource_types) ? object.monitored_resource_types.map((e: any) => e) : []
-    };
+    const message = createBaseMetricDescriptor();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    message.labels = object.labels?.map(e => LabelDescriptor.fromAmino(e)) || [];
+    if (object.metric_kind !== undefined && object.metric_kind !== null) {
+      message.metricKind = metricDescriptor_MetricKindFromJSON(object.metric_kind);
+    }
+    if (object.value_type !== undefined && object.value_type !== null) {
+      message.valueType = metricDescriptor_ValueTypeFromJSON(object.value_type);
+    }
+    if (object.unit !== undefined && object.unit !== null) {
+      message.unit = object.unit;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.display_name !== undefined && object.display_name !== null) {
+      message.displayName = object.display_name;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = MetricDescriptor_MetricDescriptorMetadata.fromAmino(object.metadata);
+    }
+    if (object.launch_stage !== undefined && object.launch_stage !== null) {
+      message.launchStage = launchStageFromJSON(object.launch_stage);
+    }
+    message.monitoredResourceTypes = object.monitored_resource_types?.map(e => e) || [];
+    return message;
   },
   toAmino(message: MetricDescriptor): MetricDescriptorAmino {
     const obj: any = {};
@@ -849,11 +867,17 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
     return message;
   },
   fromAmino(object: MetricDescriptor_MetricDescriptorMetadataAmino): MetricDescriptor_MetricDescriptorMetadata {
-    return {
-      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1,
-      samplePeriod: object?.sample_period ? Duration.fromAmino(object.sample_period) : undefined,
-      ingestDelay: object?.ingest_delay ? Duration.fromAmino(object.ingest_delay) : undefined
-    };
+    const message = createBaseMetricDescriptor_MetricDescriptorMetadata();
+    if (object.launch_stage !== undefined && object.launch_stage !== null) {
+      message.launchStage = launchStageFromJSON(object.launch_stage);
+    }
+    if (object.sample_period !== undefined && object.sample_period !== null) {
+      message.samplePeriod = Duration.fromAmino(object.sample_period);
+    }
+    if (object.ingest_delay !== undefined && object.ingest_delay !== null) {
+      message.ingestDelay = Duration.fromAmino(object.ingest_delay);
+    }
+    return message;
   },
   toAmino(message: MetricDescriptor_MetricDescriptorMetadata): MetricDescriptor_MetricDescriptorMetadataAmino {
     const obj: any = {};
@@ -921,10 +945,14 @@ export const Metric_LabelsEntry = {
     return message;
   },
   fromAmino(object: Metric_LabelsEntryAmino): Metric_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseMetric_LabelsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: Metric_LabelsEntry): Metric_LabelsEntryAmino {
     const obj: any = {};
@@ -999,15 +1027,19 @@ export const Metric = {
     return message;
   },
   fromAmino(object: MetricAmino): Metric {
-    return {
-      type: object.type,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseMetric();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    message.labels = Object.entries(object.labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
+      }
+      return acc;
+    }, {});
+    return message;
   },
   toAmino(message: Metric): MetricAmino {
     const obj: any = {};

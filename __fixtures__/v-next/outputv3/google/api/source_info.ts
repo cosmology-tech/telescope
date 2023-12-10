@@ -84,9 +84,9 @@ export const SourceInfo = {
     return obj;
   },
   fromAmino(object: SourceInfoAmino): SourceInfo {
-    return {
-      sourceFiles: Array.isArray(object?.source_files) ? object.source_files.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseSourceInfo();
+    message.sourceFiles = object.source_files?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: SourceInfo, useInterfaces: boolean = true): SourceInfoAmino {
     const obj: any = {};

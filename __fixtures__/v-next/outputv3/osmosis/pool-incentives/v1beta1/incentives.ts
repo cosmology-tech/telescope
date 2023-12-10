@@ -161,9 +161,11 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      mintedDenom: object.minted_denom
-    };
+    const message = createBaseParams();
+    if (object.minted_denom !== undefined && object.minted_denom !== null) {
+      message.mintedDenom = object.minted_denom;
+    }
+    return message;
   },
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
@@ -248,9 +250,9 @@ export const LockableDurationsInfo = {
     return obj;
   },
   fromAmino(object: LockableDurationsInfoAmino): LockableDurationsInfo {
-    return {
-      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : []
-    };
+    const message = createBaseLockableDurationsInfo();
+    message.lockableDurations = object.lockable_durations?.map(e => Duration.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: LockableDurationsInfo, useInterfaces: boolean = true): LockableDurationsInfoAmino {
     const obj: any = {};
@@ -351,10 +353,12 @@ export const DistrInfo = {
     return obj;
   },
   fromAmino(object: DistrInfoAmino): DistrInfo {
-    return {
-      totalWeight: object.total_weight,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
-    };
+    const message = createBaseDistrInfo();
+    if (object.total_weight !== undefined && object.total_weight !== null) {
+      message.totalWeight = object.total_weight;
+    }
+    message.records = object.records?.map(e => DistrRecord.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: DistrInfo, useInterfaces: boolean = true): DistrInfoAmino {
     const obj: any = {};
@@ -450,10 +454,14 @@ export const DistrRecord = {
     return obj;
   },
   fromAmino(object: DistrRecordAmino): DistrRecord {
-    return {
-      gaugeId: BigInt(object.gauge_id),
-      weight: object.weight
-    };
+    const message = createBaseDistrRecord();
+    if (object.gauge_id !== undefined && object.gauge_id !== null) {
+      message.gaugeId = BigInt(object.gauge_id);
+    }
+    if (object.weight !== undefined && object.weight !== null) {
+      message.weight = object.weight;
+    }
+    return message;
   },
   toAmino(message: DistrRecord, useInterfaces: boolean = true): DistrRecordAmino {
     const obj: any = {};
@@ -561,11 +569,17 @@ export const PoolToGauge = {
     return obj;
   },
   fromAmino(object: PoolToGaugeAmino): PoolToGauge {
-    return {
-      poolId: BigInt(object.pool_id),
-      gaugeId: BigInt(object.gauge_id),
-      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({})
-    };
+    const message = createBasePoolToGauge();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.gauge_id !== undefined && object.gauge_id !== null) {
+      message.gaugeId = BigInt(object.gauge_id);
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromAmino(object.duration);
+    }
+    return message;
   },
   toAmino(message: PoolToGauge, useInterfaces: boolean = true): PoolToGaugeAmino {
     const obj: any = {};
@@ -652,9 +666,9 @@ export const PoolToGauges = {
     return obj;
   },
   fromAmino(object: PoolToGaugesAmino): PoolToGauges {
-    return {
-      poolToGauge: Array.isArray(object?.pool_to_gauge) ? object.pool_to_gauge.map((e: any) => PoolToGauge.fromAmino(e)) : []
-    };
+    const message = createBasePoolToGauges();
+    message.poolToGauge = object.pool_to_gauge?.map(e => PoolToGauge.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: PoolToGauges, useInterfaces: boolean = true): PoolToGaugesAmino {
     const obj: any = {};

@@ -101,9 +101,11 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({})
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
@@ -193,10 +195,14 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      enableRecovery: object.enable_recovery,
-      packetTimeoutDuration: object?.packet_timeout_duration ? Duration.fromAmino(object.packet_timeout_duration) : Duration.fromPartial({})
-    };
+    const message = createBaseParams();
+    if (object.enable_recovery !== undefined && object.enable_recovery !== null) {
+      message.enableRecovery = object.enable_recovery;
+    }
+    if (object.packet_timeout_duration !== undefined && object.packet_timeout_duration !== null) {
+      message.packetTimeoutDuration = Duration.fromAmino(object.packet_timeout_duration);
+    }
+    return message;
   },
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};

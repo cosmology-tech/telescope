@@ -127,11 +127,17 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      minter: object?.minter ? Minter.fromAmino(object.minter) : Minter.fromPartial({}),
-      params: object?.params ? Params.fromAmino(object.params) : Params.fromPartial({}),
-      reductionStartedEpoch: BigInt(object.reduction_started_epoch)
-    };
+    const message = createBaseGenesisState();
+    if (object.minter !== undefined && object.minter !== null) {
+      message.minter = Minter.fromAmino(object.minter);
+    }
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    if (object.reduction_started_epoch !== undefined && object.reduction_started_epoch !== null) {
+      message.reductionStartedEpoch = BigInt(object.reduction_started_epoch);
+    }
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

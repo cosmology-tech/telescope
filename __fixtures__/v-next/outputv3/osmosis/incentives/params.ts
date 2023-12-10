@@ -82,9 +82,11 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      distrEpochIdentifier: object.distr_epoch_identifier
-    };
+    const message = createBaseParams();
+    if (object.distr_epoch_identifier !== undefined && object.distr_epoch_identifier !== null) {
+      message.distrEpochIdentifier = object.distr_epoch_identifier;
+    }
+    return message;
   },
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};

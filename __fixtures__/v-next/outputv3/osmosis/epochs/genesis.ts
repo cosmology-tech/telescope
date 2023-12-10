@@ -287,15 +287,29 @@ export const EpochInfo = {
     return obj;
   },
   fromAmino(object: EpochInfoAmino): EpochInfo {
-    return {
-      identifier: object.identifier,
-      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : fromTimestamp(Timestamp.fromPartial({})),
-      duration: object?.duration ? Duration.fromAmino(object.duration) : Duration.fromPartial({}),
-      currentEpoch: BigInt(object.current_epoch),
-      currentEpochStartTime: object?.current_epoch_start_time ? fromTimestamp(Timestamp.fromAmino(object.current_epoch_start_time)) : fromTimestamp(Timestamp.fromPartial({})),
-      epochCountingStarted: object.epoch_counting_started,
-      currentEpochStartHeight: BigInt(object.current_epoch_start_height)
-    };
+    const message = createBaseEpochInfo();
+    if (object.identifier !== undefined && object.identifier !== null) {
+      message.identifier = object.identifier;
+    }
+    if (object.start_time !== undefined && object.start_time !== null) {
+      message.startTime = fromTimestamp(Timestamp.fromAmino(object.start_time));
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromAmino(object.duration);
+    }
+    if (object.current_epoch !== undefined && object.current_epoch !== null) {
+      message.currentEpoch = BigInt(object.current_epoch);
+    }
+    if (object.current_epoch_start_time !== undefined && object.current_epoch_start_time !== null) {
+      message.currentEpochStartTime = fromTimestamp(Timestamp.fromAmino(object.current_epoch_start_time));
+    }
+    if (object.epoch_counting_started !== undefined && object.epoch_counting_started !== null) {
+      message.epochCountingStarted = object.epoch_counting_started;
+    }
+    if (object.current_epoch_start_height !== undefined && object.current_epoch_start_height !== null) {
+      message.currentEpochStartHeight = BigInt(object.current_epoch_start_height);
+    }
+    return message;
   },
   toAmino(message: EpochInfo, useInterfaces: boolean = true): EpochInfoAmino {
     const obj: any = {};
@@ -386,9 +400,9 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    message.epochs = object.epochs?.map(e => EpochInfo.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};

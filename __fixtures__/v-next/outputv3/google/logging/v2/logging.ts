@@ -947,9 +947,11 @@ export const DeleteLogRequest = {
     return obj;
   },
   fromAmino(object: DeleteLogRequestAmino): DeleteLogRequest {
-    return {
-      logName: object.log_name
-    };
+    const message = createBaseDeleteLogRequest();
+    if (object.log_name !== undefined && object.log_name !== null) {
+      message.logName = object.log_name;
+    }
+    return message;
   },
   toAmino(message: DeleteLogRequest, useInterfaces: boolean = true): DeleteLogRequestAmino {
     const obj: any = {};
@@ -1036,10 +1038,14 @@ export const WriteLogEntriesRequest_LabelsEntry = {
     return obj;
   },
   fromAmino(object: WriteLogEntriesRequest_LabelsEntryAmino): WriteLogEntriesRequest_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseWriteLogEntriesRequest_LabelsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: WriteLogEntriesRequest_LabelsEntry, useInterfaces: boolean = true): WriteLogEntriesRequest_LabelsEntryAmino {
     const obj: any = {};
@@ -1213,19 +1219,29 @@ export const WriteLogEntriesRequest = {
     return obj;
   },
   fromAmino(object: WriteLogEntriesRequestAmino): WriteLogEntriesRequest {
-    return {
-      logName: object.log_name,
-      resource: object?.resource ? MonitoredResource.fromAmino(object.resource) : undefined,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseWriteLogEntriesRequest();
+    if (object.log_name !== undefined && object.log_name !== null) {
+      message.logName = object.log_name;
+    }
+    if (object.resource !== undefined && object.resource !== null) {
+      message.resource = MonitoredResource.fromAmino(object.resource);
+    }
+    message.labels = Object.entries(object.labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromAmino(e)) : [],
-      partialSuccess: object.partial_success,
-      dryRun: object.dry_run
-    };
+      }
+      return acc;
+    }, {});
+    message.entries = object.entries?.map(e => LogEntry.fromAmino(e)) || [];
+    if (object.partial_success !== undefined && object.partial_success !== null) {
+      message.partialSuccess = object.partial_success;
+    }
+    if (object.dry_run !== undefined && object.dry_run !== null) {
+      message.dryRun = object.dry_run;
+    }
+    return message;
   },
   toAmino(message: WriteLogEntriesRequest, useInterfaces: boolean = true): WriteLogEntriesRequestAmino {
     const obj: any = {};
@@ -1301,7 +1317,8 @@ export const WriteLogEntriesResponse = {
     return obj;
   },
   fromAmino(_: WriteLogEntriesResponseAmino): WriteLogEntriesResponse {
-    return {};
+    const message = createBaseWriteLogEntriesResponse();
+    return message;
   },
   toAmino(_: WriteLogEntriesResponse, useInterfaces: boolean = true): WriteLogEntriesResponseAmino {
     const obj: any = {};
@@ -1389,10 +1406,14 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
     return obj;
   },
   fromAmino(object: WriteLogEntriesPartialErrors_LogEntryErrorsEntryAmino): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
-    return {
-      key: object.key,
-      value: object?.value ? Status.fromAmino(object.value) : undefined
-    };
+    const message = createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Status.fromAmino(object.value);
+    }
+    return message;
   },
   toAmino(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry, useInterfaces: boolean = true): WriteLogEntriesPartialErrors_LogEntryErrorsEntryAmino {
     const obj: any = {};
@@ -1496,14 +1517,16 @@ export const WriteLogEntriesPartialErrors = {
     return obj;
   },
   fromAmino(object: WriteLogEntriesPartialErrorsAmino): WriteLogEntriesPartialErrors {
-    return {
-      logEntryErrors: isObject(object.log_entry_errors) ? Object.entries(object.log_entry_errors).reduce<{
-        [key: number]: Status;
-      }>((acc, [key, value]) => {
+    const message = createBaseWriteLogEntriesPartialErrors();
+    message.logEntryErrors = Object.entries(object.log_entry_errors ?? {}).reduce<{
+      [key: number]: Status;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[Number(key)] = Status.fromAmino(value);
-        return acc;
-      }, {}) : {}
-    };
+      }
+      return acc;
+    }, {});
+    return message;
   },
   toAmino(message: WriteLogEntriesPartialErrors, useInterfaces: boolean = true): WriteLogEntriesPartialErrorsAmino {
     const obj: any = {};
@@ -1640,13 +1663,21 @@ export const ListLogEntriesRequest = {
     return obj;
   },
   fromAmino(object: ListLogEntriesRequestAmino): ListLogEntriesRequest {
-    return {
-      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
-      filter: object.filter,
-      orderBy: object.order_by,
-      pageSize: object.page_size,
-      pageToken: object.page_token
-    };
+    const message = createBaseListLogEntriesRequest();
+    message.resourceNames = object.resource_names?.map(e => e) || [];
+    if (object.filter !== undefined && object.filter !== null) {
+      message.filter = object.filter;
+    }
+    if (object.order_by !== undefined && object.order_by !== null) {
+      message.orderBy = object.order_by;
+    }
+    if (object.page_size !== undefined && object.page_size !== null) {
+      message.pageSize = object.page_size;
+    }
+    if (object.page_token !== undefined && object.page_token !== null) {
+      message.pageToken = object.page_token;
+    }
+    return message;
   },
   toAmino(message: ListLogEntriesRequest, useInterfaces: boolean = true): ListLogEntriesRequestAmino {
     const obj: any = {};
@@ -1750,10 +1781,12 @@ export const ListLogEntriesResponse = {
     return obj;
   },
   fromAmino(object: ListLogEntriesResponseAmino): ListLogEntriesResponse {
-    return {
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
+    const message = createBaseListLogEntriesResponse();
+    message.entries = object.entries?.map(e => LogEntry.fromAmino(e)) || [];
+    if (object.next_page_token !== undefined && object.next_page_token !== null) {
+      message.nextPageToken = object.next_page_token;
+    }
+    return message;
   },
   toAmino(message: ListLogEntriesResponse, useInterfaces: boolean = true): ListLogEntriesResponseAmino {
     const obj: any = {};
@@ -1846,10 +1879,14 @@ export const ListMonitoredResourceDescriptorsRequest = {
     return obj;
   },
   fromAmino(object: ListMonitoredResourceDescriptorsRequestAmino): ListMonitoredResourceDescriptorsRequest {
-    return {
-      pageSize: object.page_size,
-      pageToken: object.page_token
-    };
+    const message = createBaseListMonitoredResourceDescriptorsRequest();
+    if (object.page_size !== undefined && object.page_size !== null) {
+      message.pageSize = object.page_size;
+    }
+    if (object.page_token !== undefined && object.page_token !== null) {
+      message.pageToken = object.page_token;
+    }
+    return message;
   },
   toAmino(message: ListMonitoredResourceDescriptorsRequest, useInterfaces: boolean = true): ListMonitoredResourceDescriptorsRequestAmino {
     const obj: any = {};
@@ -1946,10 +1983,12 @@ export const ListMonitoredResourceDescriptorsResponse = {
     return obj;
   },
   fromAmino(object: ListMonitoredResourceDescriptorsResponseAmino): ListMonitoredResourceDescriptorsResponse {
-    return {
-      resourceDescriptors: Array.isArray(object?.resource_descriptors) ? object.resource_descriptors.map((e: any) => MonitoredResourceDescriptor.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
+    const message = createBaseListMonitoredResourceDescriptorsResponse();
+    message.resourceDescriptors = object.resource_descriptors?.map(e => MonitoredResourceDescriptor.fromAmino(e)) || [];
+    if (object.next_page_token !== undefined && object.next_page_token !== null) {
+      message.nextPageToken = object.next_page_token;
+    }
+    return message;
   },
   toAmino(message: ListMonitoredResourceDescriptorsResponse, useInterfaces: boolean = true): ListMonitoredResourceDescriptorsResponseAmino {
     const obj: any = {};
@@ -2074,12 +2113,18 @@ export const ListLogsRequest = {
     return obj;
   },
   fromAmino(object: ListLogsRequestAmino): ListLogsRequest {
-    return {
-      parent: object.parent,
-      pageSize: object.page_size,
-      pageToken: object.page_token,
-      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
-    };
+    const message = createBaseListLogsRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.page_size !== undefined && object.page_size !== null) {
+      message.pageSize = object.page_size;
+    }
+    if (object.page_token !== undefined && object.page_token !== null) {
+      message.pageToken = object.page_token;
+    }
+    message.resourceNames = object.resource_names?.map(e => e) || [];
+    return message;
   },
   toAmino(message: ListLogsRequest, useInterfaces: boolean = true): ListLogsRequestAmino {
     const obj: any = {};
@@ -2182,10 +2227,12 @@ export const ListLogsResponse = {
     return obj;
   },
   fromAmino(object: ListLogsResponseAmino): ListLogsResponse {
-    return {
-      logNames: Array.isArray(object?.log_names) ? object.log_names.map((e: any) => e) : [],
-      nextPageToken: object.next_page_token
-    };
+    const message = createBaseListLogsResponse();
+    message.logNames = object.log_names?.map(e => e) || [];
+    if (object.next_page_token !== undefined && object.next_page_token !== null) {
+      message.nextPageToken = object.next_page_token;
+    }
+    return message;
   },
   toAmino(message: ListLogsResponse, useInterfaces: boolean = true): ListLogsResponseAmino {
     const obj: any = {};
@@ -2300,11 +2347,15 @@ export const TailLogEntriesRequest = {
     return obj;
   },
   fromAmino(object: TailLogEntriesRequestAmino): TailLogEntriesRequest {
-    return {
-      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
-      filter: object.filter,
-      bufferWindow: object?.buffer_window ? Duration.fromAmino(object.buffer_window) : undefined
-    };
+    const message = createBaseTailLogEntriesRequest();
+    message.resourceNames = object.resource_names?.map(e => e) || [];
+    if (object.filter !== undefined && object.filter !== null) {
+      message.filter = object.filter;
+    }
+    if (object.buffer_window !== undefined && object.buffer_window !== null) {
+      message.bufferWindow = Duration.fromAmino(object.buffer_window);
+    }
+    return message;
   },
   toAmino(message: TailLogEntriesRequest, useInterfaces: boolean = true): TailLogEntriesRequestAmino {
     const obj: any = {};
@@ -2414,10 +2465,10 @@ export const TailLogEntriesResponse = {
     return obj;
   },
   fromAmino(object: TailLogEntriesResponseAmino): TailLogEntriesResponse {
-    return {
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => LogEntry.fromAmino(e)) : [],
-      suppressionInfo: Array.isArray(object?.suppression_info) ? object.suppression_info.map((e: any) => TailLogEntriesResponse_SuppressionInfo.fromAmino(e)) : []
-    };
+    const message = createBaseTailLogEntriesResponse();
+    message.entries = object.entries?.map(e => LogEntry.fromAmino(e)) || [];
+    message.suppressionInfo = object.suppression_info?.map(e => TailLogEntriesResponse_SuppressionInfo.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: TailLogEntriesResponse, useInterfaces: boolean = true): TailLogEntriesResponseAmino {
     const obj: any = {};
@@ -2514,10 +2565,14 @@ export const TailLogEntriesResponse_SuppressionInfo = {
     return obj;
   },
   fromAmino(object: TailLogEntriesResponse_SuppressionInfoAmino): TailLogEntriesResponse_SuppressionInfo {
-    return {
-      reason: isSet(object.reason) ? tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason) : -1,
-      suppressedCount: object.suppressed_count
-    };
+    const message = createBaseTailLogEntriesResponse_SuppressionInfo();
+    if (object.reason !== undefined && object.reason !== null) {
+      message.reason = tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason);
+    }
+    if (object.suppressed_count !== undefined && object.suppressed_count !== null) {
+      message.suppressedCount = object.suppressed_count;
+    }
+    return message;
   },
   toAmino(message: TailLogEntriesResponse_SuppressionInfo, useInterfaces: boolean = true): TailLogEntriesResponse_SuppressionInfoAmino {
     const obj: any = {};

@@ -196,11 +196,17 @@ export const MsgConvertCoin = {
     return obj;
   },
   fromAmino(object: MsgConvertCoinAmino): MsgConvertCoin {
-    return {
-      coin: object?.coin ? Coin.fromAmino(object.coin) : Coin.fromPartial({}),
-      receiver: object.receiver,
-      sender: object.sender
-    };
+    const message = createBaseMsgConvertCoin();
+    if (object.coin !== undefined && object.coin !== null) {
+      message.coin = Coin.fromAmino(object.coin);
+    }
+    if (object.receiver !== undefined && object.receiver !== null) {
+      message.receiver = object.receiver;
+    }
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    return message;
   },
   toAmino(message: MsgConvertCoin): MsgConvertCoinAmino {
     const obj: any = {};
@@ -267,7 +273,8 @@ export const MsgConvertCoinResponse = {
     return obj;
   },
   fromAmino(_: MsgConvertCoinResponseAmino): MsgConvertCoinResponse {
-    return {};
+    const message = createBaseMsgConvertCoinResponse();
+    return message;
   },
   toAmino(_: MsgConvertCoinResponse): MsgConvertCoinResponseAmino {
     const obj: any = {};
@@ -381,12 +388,20 @@ export const MsgConvertERC20 = {
     return obj;
   },
   fromAmino(object: MsgConvertERC20Amino): MsgConvertERC20 {
-    return {
-      contractAddress: object.contract_address,
-      amount: object.amount,
-      receiver: object.receiver,
-      sender: object.sender
-    };
+    const message = createBaseMsgConvertERC20();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    if (object.receiver !== undefined && object.receiver !== null) {
+      message.receiver = object.receiver;
+    }
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    return message;
   },
   toAmino(message: MsgConvertERC20): MsgConvertERC20Amino {
     const obj: any = {};
@@ -454,7 +469,8 @@ export const MsgConvertERC20Response = {
     return obj;
   },
   fromAmino(_: MsgConvertERC20ResponseAmino): MsgConvertERC20Response {
-    return {};
+    const message = createBaseMsgConvertERC20Response();
+    return message;
   },
   toAmino(_: MsgConvertERC20Response): MsgConvertERC20ResponseAmino {
     const obj: any = {};

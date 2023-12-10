@@ -1,44 +1,15 @@
 import * as t from "@babel/types";
 import { fromAminoMethod } from "./index";
 import { identifier, callExpression, TypeLong, BILLION } from "../../../utils";
-import { getFieldsTypeName } from "..";
+import { getFieldsTypeName, getInterfaceFromAminoName } from "..";
 import { getDefaultTSTypeFromProtoType, getFieldNames } from "../../types";
 import { ProtoType } from "@cosmology/types";
 import { ProtoParseContext } from "../../context";
 import { camel } from "@cosmology/utils";
 
-// message.sender = expr
-const setField = (args: fromAminoMethod, expr: t.Expression): t.Statement => {
-  const { propName } = getFieldNames(args.field);
-
-  return t.expressionStatement(
-    t.assignmentExpression(
-      "=",
-      t.memberExpression(t.identifier("message"), t.identifier(propName)),
-      expr
-    )
-  );
-};
-
-const setNullishCoalescing = (
-  args: fromAminoMethod,
-  value: t.Expression
-): t.Statement => {
-  const { origName } = getFieldNames(args.field);
-  return setField(
-    args,
-    t.logicalExpression(
-      "??",
-      t.memberExpression(t.identifier("object"), t.identifier(origName)),
-      value
-    )
-  );
-};
-
 const setNotUndefinedAndNotNull = (
-  value: t.Expression,
-  defaultValue: t.Expression,
-  args: fromAminoMethod
+  args: fromAminoMethod,
+  value?: t.Expression
 ): t.Statement => {
   const { propName, origName } = getFieldNames(args.field);
 
@@ -62,6 +33,8 @@ const setNotUndefinedAndNotNull = (
           "=",
           t.memberExpression(t.identifier("message"), t.identifier(propName)),
           value
+            ? value
+            : t.memberExpression(t.identifier("object"), t.identifier(origName))
         )
       ),
     ])
@@ -71,27 +44,18 @@ const setNotUndefinedAndNotNull = (
 export const fromAmino = {
   // message.sender = object.sender ?? "";
   string(args: fromAminoMethod) {
-    return setNullishCoalescing(
-      args,
-      getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
-    );
+    return setNotUndefinedAndNotNull(args);
   },
 
   // message.disableMacros = object.disableMacros ?? false;
   bool(args: fromAminoMethod) {
-    return setNullishCoalescing(
-      args,
-      getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
-    );
+    return setNotUndefinedAndNotNull(args);
   },
 
   // message.doubleValue = object.doubleValue ?? 0;
 
   number(args: fromAminoMethod) {
-    return setNullishCoalescing(
-      args,
-      getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
-    );
+    return setNotUndefinedAndNotNull(args);
   },
 
   int32(args: fromAminoMethod) {
@@ -116,21 +80,17 @@ export const fromAmino = {
     return fromAmino.number(args);
   },
 
-  // OLD: message.myInt64Value = object.myInt64Value !== undefined && object.myInt64Value !== null ? Long.fromValue(object.myInt64Value) : Long.ZERO;
-  // NEW: if( object.myInt64Value !== undefined && object.myInt64Value !== null ) { message.myInt64Value = Long.fromValue(object.myInt64Value) }
+  // if( object.myInt64Value !== undefined && object.myInt64Value !== null ) { message.myInt64Value = Long.fromValue(object.myInt64Value) }
   long(args: fromAminoMethod) {
     const { origName } = getFieldNames(args.field);
 
     TypeLong.addUtil(args.context);
 
-    return setNotUndefinedAndNotNull(
-      TypeLong.getFromValueWithArgs(
-        args.context,
-        t.memberExpression(t.identifier("object"), t.identifier(origName))
-      ),
-      getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf),
-      args
-    );
+    const callExpr = t.callExpression(TypeLong.getFromString(args.context), [
+      t.memberExpression(t.identifier("object"), t.identifier(origName)),
+    ]);
+
+    return setNotUndefinedAndNotNull(args, callExpr);
   },
 
   int64(args: fromAminoMethod) {
@@ -149,64 +109,89 @@ export const fromAmino = {
     return fromAmino.long(args);
   },
 
-  // message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.fromAmino(object.signDoc) : SignDocDirectAux.fromAmino({});
-  type(args: fromAminoMethod) {
+  protoType(args: fromAminoMethod) {
     const { origName } = getFieldNames(args.field);
-    let name = args.context.getTypeName(args.field);
-
-    if (
-      !args.context.options.aminoEncoding.useLegacyInlineEncoding &&
-      args.context.options.interfaces.enabled &&
-      args.context.options.interfaces?.useGlobalDecoderRegistry &&
-      args.field.type === "google.protobuf.Any" &&
-      args.field.options["(cosmos_proto.accepts_interface)"]
-    ) {
-      name = "GlobalDecoderRegistry";
-    }
+    const name = args.context.getTypeName(args.field);
 
     return setNotUndefinedAndNotNull(
+      args,
       t.callExpression(
         t.memberExpression(t.identifier(name), t.identifier("fromAmino")),
         [t.memberExpression(t.identifier("object"), t.identifier(origName))]
-      ),
-      t.identifier("undefined"),
-      args
+      )
     );
   },
 
-  // message.mode = object.mode ?? 0;
+  anyType(args: fromAminoMethod) {
+    const { origName } = getFieldNames(args.field);
+
+    const interfaceName =
+      args.field.options["(cosmos_proto.accepts_interface)"];
+    const interfaceFnName = getInterfaceFromAminoName(interfaceName);
+
+    let aminoFuncExpr: t.Expression = t.identifier(interfaceFnName);
+
+    const isGlobalRegistry =
+      args.context.options.interfaces?.useGlobalDecoderRegistry;
+
+    if (isGlobalRegistry) {
+      aminoFuncExpr = t.memberExpression(
+        t.identifier("GlobalDecoderRegistry"),
+        t.identifier("fromAmino")
+      );
+    }
+
+    return setNotUndefinedAndNotNull(
+      args,
+      t.callExpression(aminoFuncExpr, [
+        t.memberExpression(t.identifier("object"), t.identifier(origName)),
+      ])
+    );
+  },
+
+  type(args: fromAminoMethod) {
+    if (
+      !args.context.options.aminoEncoding.useLegacyInlineEncoding &&
+      args.context.options.interfaces.enabled &&
+      args.field.type === "google.protobuf.Any" &&
+      args.field.options["(cosmos_proto.accepts_interface)"]
+    ) {
+      return fromAmino.anyType(args);
+    }
+    return fromAmino.protoType(args);
+  },
+
   enum(args: fromAminoMethod) {
-    return setNullishCoalescing(
+    const { origName } = getFieldNames(args.field);
+
+    const fromAminoJSONFuncName = args.context.getFromEnum(args.field);
+
+    return setNotUndefinedAndNotNull(
       args,
-      getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
+      t.callExpression(t.identifier(fromAminoJSONFuncName), [
+        t.memberExpression(t.identifier("object"), t.identifier(origName)),
+      ])
     );
   },
 
-  // message.queryData = object.queryData ?? new Uint8Array()
   bytes(args: fromAminoMethod) {
-    return setNullishCoalescing(
-      args,
-      getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
-    );
+    // bytes [RawContractMessage]
+    if (args.field.options?.["(gogoproto.casttype)"] === "RawContractMessage") {
+      return fromAmino.rawBytes(args);
+    }
+    // bytes [WASMByteCode]
+    // TODO use a better option for this in proto source
+    // seems the default way of handling bytes type should be as the same as with option:
+    // field.options?.["(gogoproto.customname)"] === "WASMByteCode"
+    return fromAmino.wasmByteCode(args);
   },
-
-  // message.period = object.period ?? undefined;
 
   duration(args: fromAminoMethod) {
-    const durationFormat = args.context.pluginValue(
-      "prototypes.typingsFormat.duration"
-    );
-    switch (durationFormat) {
-      case "string":
-        return fromAmino.durationString(args);
-      case "duration":
-      default:
-        return fromAmino.type(args);
-    }
+    return fromAmino.type(args);
   },
 
   durationString(args: fromAminoMethod) {
-    return setNullishCoalescing(args, t.identifier("undefined"));
+    return setNotUndefinedAndNotNull(args, t.identifier("undefined"));
   },
 
   timestamp(args: fromAminoMethod) {
@@ -222,10 +207,22 @@ export const fromAmino = {
     }
   },
 
-  // message.periodReset = object.periodReset ?? undefined;
-
   timestampDate(args: fromAminoMethod) {
-    return setNullishCoalescing(args, t.identifier("undefined"));
+    const { origName } = getFieldNames(args.field);
+
+    args.context.addUtil("fromTimestamp");
+
+    const expr = t.callExpression(t.identifier("fromTimestamp"), [
+      t.callExpression(
+        t.memberExpression(
+          t.identifier("Timestamp"),
+          t.identifier("fromAmino")
+        ),
+        [t.memberExpression(t.identifier("object"), t.identifier(origName))]
+      ),
+    ]);
+
+    return setNotUndefinedAndNotNull(args, expr);
   },
 
   // message.referenceMap = Object.entries(object.referenceMap ?? {}).reduce<{
@@ -403,7 +400,10 @@ export const fromAmino = {
           "||",
           t.optionalCallExpression(
             t.optionalMemberExpression(
-              t.memberExpression(t.identifier("object"), t.identifier(origName)),
+              t.memberExpression(
+                t.identifier("object"),
+                t.identifier(origName)
+              ),
               t.identifier("map"),
               false,
               true
@@ -415,6 +415,45 @@ export const fromAmino = {
         )
       )
     );
+  },
+
+  pubkey(args: fromAminoMethod) {
+    args.context.addUtil("encodePubkey");
+
+    const { origName } = getFieldNames(args.field);
+
+    const callExpr = t.callExpression(t.identifier("encodePubkey"), [
+      t.memberExpression(t.identifier("object"), t.identifier(origName)),
+    ]);
+
+    return setNotUndefinedAndNotNull(args, callExpr);
+  },
+
+  rawBytes(args: fromAminoMethod) {
+    args.context.addUtil("toUtf8");
+
+    const { origName } = getFieldNames(args.field);
+
+    const expr = t.callExpression(t.identifier("toUtf8"), [
+      t.callExpression(
+        t.memberExpression(t.identifier("JSON"), t.identifier("stringify")),
+        [t.memberExpression(t.identifier("object"), t.identifier(origName))]
+      ),
+    ]);
+
+    return setNotUndefinedAndNotNull(args, expr);
+  },
+
+  wasmByteCode(args: fromAminoMethod) {
+    args.context.addUtil("fromBase64");
+
+    const { origName } = getFieldNames(args.field);
+
+    const expr = t.callExpression(t.identifier("fromBase64"), [
+      t.memberExpression(t.identifier("object"), t.identifier(origName)),
+    ]);
+
+    return setNotUndefinedAndNotNull(args, expr);
   },
 };
 
@@ -429,8 +468,25 @@ export const arrayTypes = {
   bool() {
     return arrayTypes.identity();
   },
-  bytes() {
-    return arrayTypes.identity();
+  rawBytes(args: fromAminoMethod) {
+    args.context.addUtil("toUtf8");
+
+    return t.callExpression(t.identifier("toUtf8"), [
+      t.callExpression(
+        t.memberExpression(t.identifier("JSON"), t.identifier("stringify")),
+        [t.identifier("e")]
+      ),
+    ]);
+  },
+  bytes(args: fromAminoMethod) {
+    if (args.field.options?.["(gogoproto.casttype)"] === "RawContractMessage") {
+      return arrayTypes.rawBytes(args);
+    }
+
+    args.context.addUtil("bytesFromBase64");
+    return t.callExpression(t.identifier("bytesFromBase64"), [
+      t.identifier("e"),
+    ]);
   },
   double() {
     return arrayTypes.identity();
@@ -453,15 +509,18 @@ export const arrayTypes = {
   sfixed32() {
     return arrayTypes.identity();
   },
-  enum() {
-    return arrayTypes.identity();
+  enum(args: fromAminoMethod) {
+    const fromAminoJSONFuncName = args.context.getFromEnum(args.field);
+    return t.callExpression(t.identifier(fromAminoJSONFuncName), [
+      t.identifier("e"),
+    ]);
   },
 
   // message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
   long(args: fromAminoMethod) {
     TypeLong.addUtil(args.context);
 
-    return TypeLong.getFromValueWithArgs(args.context, t.identifier("e"));
+    return TypeLong.getFromStringArray(args.context);
   },
   int64(args: fromAminoMethod) {
     return arrayTypes.long(args);
@@ -479,24 +538,42 @@ export const arrayTypes = {
     return arrayTypes.long(args);
   },
 
-  // message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromAmino(e)) || [];
-  type(args: fromAminoMethod) {
-    let name = args.context.getTypeName(args.field);
+  anyType(args: fromAminoMethod) {
+    const interfaceName =
+      args.field.options["(cosmos_proto.accepts_interface)"];
+    const interfaceFnName = getInterfaceFromAminoName(interfaceName);
 
-    if (
-      !args.context.options.aminoEncoding.useLegacyInlineEncoding &&
-      args.context.options.interfaces.enabled &&
-      args.context.options.interfaces?.useGlobalDecoderRegistry &&
-      args.field.type === "google.protobuf.Any" &&
-      args.field.options["(cosmos_proto.accepts_interface)"]
-    ) {
-      name = "GlobalDecoderRegistry";
+    let aminoFuncExpr: t.Expression = t.identifier(interfaceFnName);
+
+    const isGlobalRegistry =
+      args.context.options.interfaces?.useGlobalDecoderRegistry;
+
+    if (isGlobalRegistry) {
+      aminoFuncExpr = t.memberExpression(
+        t.identifier("GlobalDecoderRegistry"),
+        t.identifier("fromAmino")
+      );
     }
 
+    return t.callExpression(aminoFuncExpr, [t.identifier("e")]);
+  },
+  protoType(args: fromAminoMethod) {
+    const name = args.context.getTypeName(args.field);
     return t.callExpression(
       t.memberExpression(t.identifier(name), t.identifier("fromAmino")),
       [t.identifier("e")]
     );
+  },
+  type(args: fromAminoMethod) {
+    if (
+      !args.context.options.aminoEncoding.useLegacyInlineEncoding &&
+      args.context.options.interfaces.enabled &&
+      args.field.type === "google.protobuf.Any" &&
+      args.field.options["(cosmos_proto.accepts_interface)"]
+    ) {
+      return arrayTypes.anyType(args);
+    }
+    return arrayTypes.protoType(args);
   },
 };
 

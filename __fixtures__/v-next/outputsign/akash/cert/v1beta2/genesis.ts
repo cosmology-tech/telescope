@@ -91,10 +91,14 @@ export const GenesisCertificate = {
     return message;
   },
   fromAmino(object: GenesisCertificateAmino): GenesisCertificate {
-    return {
-      owner: object.owner,
-      certificate: object?.certificate ? Certificate.fromAmino(object.certificate) : Certificate.fromPartial({})
-    };
+    const message = createBaseGenesisCertificate();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.certificate !== undefined && object.certificate !== null) {
+      message.certificate = Certificate.fromAmino(object.certificate);
+    }
+    return message;
   },
   toAmino(message: GenesisCertificate): GenesisCertificateAmino {
     const obj: any = {};
@@ -154,9 +158,9 @@ export const GenesisState = {
     return message;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => GenesisCertificate.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    message.certificates = object.certificates?.map(e => GenesisCertificate.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

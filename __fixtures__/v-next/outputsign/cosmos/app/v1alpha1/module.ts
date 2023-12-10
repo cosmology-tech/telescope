@@ -259,11 +259,13 @@ export const ModuleDescriptor = {
     return message;
   },
   fromAmino(object: ModuleDescriptorAmino): ModuleDescriptor {
-    return {
-      goImport: object.go_import,
-      usePackage: Array.isArray(object?.use_package) ? object.use_package.map((e: any) => PackageReference.fromAmino(e)) : [],
-      canMigrateFrom: Array.isArray(object?.can_migrate_from) ? object.can_migrate_from.map((e: any) => MigrateFromInfo.fromAmino(e)) : []
-    };
+    const message = createBaseModuleDescriptor();
+    if (object.go_import !== undefined && object.go_import !== null) {
+      message.goImport = object.go_import;
+    }
+    message.usePackage = object.use_package?.map(e => PackageReference.fromAmino(e)) || [];
+    message.canMigrateFrom = object.can_migrate_from?.map(e => MigrateFromInfo.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ModuleDescriptor): ModuleDescriptorAmino {
     const obj: any = {};
@@ -346,10 +348,14 @@ export const PackageReference = {
     return message;
   },
   fromAmino(object: PackageReferenceAmino): PackageReference {
-    return {
-      name: object.name,
-      revision: object.revision
-    };
+    const message = createBasePackageReference();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.revision !== undefined && object.revision !== null) {
+      message.revision = object.revision;
+    }
+    return message;
   },
   toAmino(message: PackageReference): PackageReferenceAmino {
     const obj: any = {};
@@ -415,9 +421,11 @@ export const MigrateFromInfo = {
     return message;
   },
   fromAmino(object: MigrateFromInfoAmino): MigrateFromInfo {
-    return {
-      module: object.module
-    };
+    const message = createBaseMigrateFromInfo();
+    if (object.module !== undefined && object.module !== null) {
+      message.module = object.module;
+    }
+    return message;
   },
   toAmino(message: MigrateFromInfo): MigrateFromInfoAmino {
     const obj: any = {};

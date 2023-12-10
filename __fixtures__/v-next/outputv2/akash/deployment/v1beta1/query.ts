@@ -209,10 +209,14 @@ export const QueryDeploymentsRequest = {
     return obj;
   },
   fromAmino(object: QueryDeploymentsRequestAmino): QueryDeploymentsRequest {
-    return {
-      filters: object?.filters ? DeploymentFilters.fromAmino(object.filters) : DeploymentFilters.fromPartial({}),
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryDeploymentsRequest();
+    if (object.filters !== undefined && object.filters !== null) {
+      message.filters = DeploymentFilters.fromAmino(object.filters);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryDeploymentsRequest): QueryDeploymentsRequestAmino {
     const obj: any = {};
@@ -314,10 +318,12 @@ export const QueryDeploymentsResponse = {
     return obj;
   },
   fromAmino(object: QueryDeploymentsResponseAmino): QueryDeploymentsResponse {
-    return {
-      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => QueryDeploymentResponse.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryDeploymentsResponse();
+    message.deployments = object.deployments?.map(e => QueryDeploymentResponse.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryDeploymentsResponse): QueryDeploymentsResponseAmino {
     const obj: any = {};
@@ -403,9 +409,11 @@ export const QueryDeploymentRequest = {
     return obj;
   },
   fromAmino(object: QueryDeploymentRequestAmino): QueryDeploymentRequest {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : DeploymentID.fromPartial({})
-    };
+    const message = createBaseQueryDeploymentRequest();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: QueryDeploymentRequest): QueryDeploymentRequestAmino {
     const obj: any = {};
@@ -520,11 +528,15 @@ export const QueryDeploymentResponse = {
     return obj;
   },
   fromAmino(object: QueryDeploymentResponseAmino): QueryDeploymentResponse {
-    return {
-      deployment: object?.deployment ? Deployment.fromAmino(object.deployment) : Deployment.fromPartial({}),
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromAmino(e)) : [],
-      escrowAccount: object?.escrow_account ? Account.fromAmino(object.escrow_account) : Account.fromPartial({})
-    };
+    const message = createBaseQueryDeploymentResponse();
+    if (object.deployment !== undefined && object.deployment !== null) {
+      message.deployment = Deployment.fromAmino(object.deployment);
+    }
+    message.groups = object.groups?.map(e => Group.fromAmino(e)) || [];
+    if (object.escrow_account !== undefined && object.escrow_account !== null) {
+      message.escrowAccount = Account.fromAmino(object.escrow_account);
+    }
+    return message;
   },
   toAmino(message: QueryDeploymentResponse): QueryDeploymentResponseAmino {
     const obj: any = {};
@@ -611,9 +623,11 @@ export const QueryGroupRequest = {
     return obj;
   },
   fromAmino(object: QueryGroupRequestAmino): QueryGroupRequest {
-    return {
-      id: object?.id ? GroupID.fromAmino(object.id) : GroupID.fromPartial({})
-    };
+    const message = createBaseQueryGroupRequest();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: QueryGroupRequest): QueryGroupRequestAmino {
     const obj: any = {};
@@ -694,9 +708,11 @@ export const QueryGroupResponse = {
     return obj;
   },
   fromAmino(object: QueryGroupResponseAmino): QueryGroupResponse {
-    return {
-      group: object?.group ? Group.fromAmino(object.group) : Group.fromPartial({})
-    };
+    const message = createBaseQueryGroupResponse();
+    if (object.group !== undefined && object.group !== null) {
+      message.group = Group.fromAmino(object.group);
+    }
+    return message;
   },
   toAmino(message: QueryGroupResponse): QueryGroupResponseAmino {
     const obj: any = {};

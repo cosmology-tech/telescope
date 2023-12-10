@@ -1,6 +1,7 @@
 import { CommitmentProof, CommitmentProofSDKType } from "../../../../confio/proofs";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "ibc.core.commitment.v1";
 /**
  * MerkleRoot defines a merkle root hash.
@@ -145,9 +146,11 @@ export const MerkleRoot = {
     return obj;
   },
   fromAmino(object: MerkleRootAmino): MerkleRoot {
-    return {
-      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
-    };
+    const message = createBaseMerkleRoot();
+    if (object.hash !== undefined && object.hash !== null) {
+      message.hash = fromBase64(object.hash);
+    }
+    return message;
   },
   toAmino(message: MerkleRoot): MerkleRootAmino {
     const obj: any = {};
@@ -237,9 +240,11 @@ export const MerklePrefix = {
     return obj;
   },
   fromAmino(object: MerklePrefixAmino): MerklePrefix {
-    return {
-      key_prefix: isSet(object.key_prefix) ? bytesFromBase64(object.key_prefix) : new Uint8Array()
-    };
+    const message = createBaseMerklePrefix();
+    if (object.key_prefix !== undefined && object.key_prefix !== null) {
+      message.keyPrefix = fromBase64(object.key_prefix);
+    }
+    return message;
   },
   toAmino(message: MerklePrefix): MerklePrefixAmino {
     const obj: any = {};
@@ -337,9 +342,9 @@ export const MerklePath = {
     return obj;
   },
   fromAmino(object: MerklePathAmino): MerklePath {
-    return {
-      keyPath: Array.isArray(object?.key_path) ? object.key_path.map((e: any) => e) : []
-    };
+    const message = createBaseMerklePath();
+    message.keyPath = object.key_path?.map(e => e) || [];
+    return message;
   },
   toAmino(message: MerklePath): MerklePathAmino {
     const obj: any = {};
@@ -441,9 +446,9 @@ export const MerkleProof = {
     return obj;
   },
   fromAmino(object: MerkleProofAmino): MerkleProof {
-    return {
-      proofs: Array.isArray(object?.proofs) ? object.proofs.map((e: any) => CommitmentProof.fromAmino(e)) : []
-    };
+    const message = createBaseMerkleProof();
+    message.proofs = object.proofs?.map(e => CommitmentProof.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MerkleProof): MerkleProofAmino {
     const obj: any = {};

@@ -331,12 +331,20 @@ export const CheckError = {
     return obj;
   },
   fromAmino(object: CheckErrorAmino): CheckError {
-    return {
-      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : -1,
-      subject: object.subject,
-      detail: object.detail,
-      status: object?.status ? Status.fromAmino(object.status) : undefined
-    };
+    const message = createBaseCheckError();
+    if (object.code !== undefined && object.code !== null) {
+      message.code = checkError_CodeFromJSON(object.code);
+    }
+    if (object.subject !== undefined && object.subject !== null) {
+      message.subject = object.subject;
+    }
+    if (object.detail !== undefined && object.detail !== null) {
+      message.detail = object.detail;
+    }
+    if (object.status !== undefined && object.status !== null) {
+      message.status = Status.fromAmino(object.status);
+    }
+    return message;
   },
   toAmino(message: CheckError): CheckErrorAmino {
     const obj: any = {};

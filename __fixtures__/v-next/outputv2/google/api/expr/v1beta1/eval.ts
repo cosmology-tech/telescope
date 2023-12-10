@@ -369,10 +369,10 @@ export const EvalState = {
     return obj;
   },
   fromAmino(object: EvalStateAmino): EvalState {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => ExprValue.fromAmino(e)) : [],
-      results: Array.isArray(object?.results) ? object.results.map((e: any) => EvalState_Result.fromAmino(e)) : []
-    };
+    const message = createBaseEvalState();
+    message.values = object.values?.map(e => ExprValue.fromAmino(e)) || [];
+    message.results = object.results?.map(e => EvalState_Result.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: EvalState): EvalStateAmino {
     const obj: any = {};
@@ -474,10 +474,14 @@ export const EvalState_Result = {
     return obj;
   },
   fromAmino(object: EvalState_ResultAmino): EvalState_Result {
-    return {
-      expr: object?.expr ? IdRef.fromAmino(object.expr) : undefined,
-      value: object.value
-    };
+    const message = createBaseEvalState_Result();
+    if (object.expr !== undefined && object.expr !== null) {
+      message.expr = IdRef.fromAmino(object.expr);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: EvalState_Result): EvalState_ResultAmino {
     const obj: any = {};
@@ -587,11 +591,17 @@ export const ExprValue = {
     return obj;
   },
   fromAmino(object: ExprValueAmino): ExprValue {
-    return {
-      value: object?.value ? Value.fromAmino(object.value) : undefined,
-      error: object?.error ? ErrorSet.fromAmino(object.error) : undefined,
-      unknown: object?.unknown ? UnknownSet.fromAmino(object.unknown) : undefined
-    };
+    const message = createBaseExprValue();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Value.fromAmino(object.value);
+    }
+    if (object.error !== undefined && object.error !== null) {
+      message.error = ErrorSet.fromAmino(object.error);
+    }
+    if (object.unknown !== undefined && object.unknown !== null) {
+      message.unknown = UnknownSet.fromAmino(object.unknown);
+    }
+    return message;
   },
   toAmino(message: ExprValue): ExprValueAmino {
     const obj: any = {};
@@ -680,9 +690,9 @@ export const ErrorSet = {
     return obj;
   },
   fromAmino(object: ErrorSetAmino): ErrorSet {
-    return {
-      errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromAmino(e)) : []
-    };
+    const message = createBaseErrorSet();
+    message.errors = object.errors?.map(e => Status.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ErrorSet): ErrorSetAmino {
     const obj: any = {};
@@ -773,9 +783,9 @@ export const UnknownSet = {
     return obj;
   },
   fromAmino(object: UnknownSetAmino): UnknownSet {
-    return {
-      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => IdRef.fromAmino(e)) : []
-    };
+    const message = createBaseUnknownSet();
+    message.exprs = object.exprs?.map(e => IdRef.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: UnknownSet): UnknownSetAmino {
     const obj: any = {};
@@ -858,9 +868,11 @@ export const IdRef = {
     return obj;
   },
   fromAmino(object: IdRefAmino): IdRef {
-    return {
-      id: object.id
-    };
+    const message = createBaseIdRef();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    return message;
   },
   toAmino(message: IdRef): IdRefAmino {
     const obj: any = {};

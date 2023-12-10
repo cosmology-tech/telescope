@@ -223,27 +223,43 @@ exports[`misc/eval_request date 1`] = `
     return obj;
   },
   fromAmino(object: EvalRequestAmino): EvalRequest {
-    return {
-      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
-        [key: string]: ExprValue;
-      }>((acc, [key, value]) => {
+    const message = createBaseEvalRequest();
+    message.bindings = Object.entries(object.bindings ?? {}).reduce<{
+      [key: string]: ExprValue;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = ExprValue.fromAmino(value);
-        return acc;
-      }, {}) : {},
-      refs: isObject(object.refs) ? Object.entries(object.refs).reduce<{
-        [key: string]: IdRef;
-      }>((acc, [key, value]) => {
+      }
+      return acc;
+    }, {});
+    message.refs = Object.entries(object.refs ?? {}).reduce<{
+      [key: string]: IdRef;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = IdRef.fromAmino(value);
-        return acc;
-      }, {}) : {},
-      testNum: object.test_num,
-      testString: object.test_string,
-      testBool: object.test_bool,
-      instantiatePermission: object?.instantiate_permission ? AccessConfig.fromAmino(object.instantiate_permission) : undefined,
-      id: object?.id,
-      name: object?.name,
-      testArray: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => e) : []
-    };
+      }
+      return acc;
+    }, {});
+    if (object.test_num !== undefined && object.test_num !== null) {
+      message.testNum = object.test_num;
+    }
+    if (object.test_string !== undefined && object.test_string !== null) {
+      message.testString = object.test_string;
+    }
+    if (object.test_bool !== undefined && object.test_bool !== null) {
+      message.testBool = object.test_bool;
+    }
+    if (object.instantiate_permission !== undefined && object.instantiate_permission !== null) {
+      message.instantiatePermission = AccessConfig.fromAmino(object.instantiate_permission);
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    message.testArray = object.test_array?.map(e => e) || [];
+    return message;
   },
   toAmino(message: EvalRequest): EvalRequestAmino {
     const obj: any = {};
@@ -513,27 +529,43 @@ exports[`misc/eval_request timestamp 1`] = `
     return obj;
   },
   fromAmino(object: EvalRequestAmino): EvalRequest {
-    return {
-      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
-        [key: string]: ExprValue;
-      }>((acc, [key, value]) => {
+    const message = createBaseEvalRequest();
+    message.bindings = Object.entries(object.bindings ?? {}).reduce<{
+      [key: string]: ExprValue;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = ExprValue.fromAmino(value);
-        return acc;
-      }, {}) : {},
-      refs: isObject(object.refs) ? Object.entries(object.refs).reduce<{
-        [key: string]: IdRef;
-      }>((acc, [key, value]) => {
+      }
+      return acc;
+    }, {});
+    message.refs = Object.entries(object.refs ?? {}).reduce<{
+      [key: string]: IdRef;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = IdRef.fromAmino(value);
-        return acc;
-      }, {}) : {},
-      testNum: object.test_num,
-      testString: object.test_string,
-      testBool: object.test_bool,
-      instantiatePermission: object?.instantiate_permission ? AccessConfig.fromAmino(object.instantiate_permission) : undefined,
-      id: object?.id,
-      name: object?.name,
-      testArray: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => e) : []
-    };
+      }
+      return acc;
+    }, {});
+    if (object.test_num !== undefined && object.test_num !== null) {
+      message.testNum = object.test_num;
+    }
+    if (object.test_string !== undefined && object.test_string !== null) {
+      message.testString = object.test_string;
+    }
+    if (object.test_bool !== undefined && object.test_bool !== null) {
+      message.testBool = object.test_bool;
+    }
+    if (object.instantiate_permission !== undefined && object.instantiate_permission !== null) {
+      message.instantiatePermission = AccessConfig.fromAmino(object.instantiate_permission);
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    message.testArray = object.test_array?.map(e => e) || [];
+    return message;
   },
   toAmino(message: EvalRequest): EvalRequestAmino {
     const obj: any = {};

@@ -374,10 +374,14 @@ export const LogEntry_LabelsEntry = {
     return obj;
   },
   fromAmino(object: LogEntry_LabelsEntryAmino): LogEntry_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseLogEntry_LabelsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: LogEntry_LabelsEntry): LogEntry_LabelsEntryAmino {
     const obj: any = {};
@@ -716,30 +720,64 @@ export const LogEntry = {
     return obj;
   },
   fromAmino(object: LogEntryAmino): LogEntry {
-    return {
-      logName: object.log_name,
-      resource: object?.resource ? MonitoredResource.fromAmino(object.resource) : undefined,
-      protoPayload: object?.proto_payload ? Any.fromAmino(object.proto_payload) : undefined,
-      textPayload: object?.text_payload,
-      jsonPayload: object?.json_payload ? Struct.fromAmino(object.json_payload) : undefined,
-      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined,
-      receiveTimestamp: object?.receive_timestamp ? fromTimestamp(Timestamp.fromAmino(object.receive_timestamp)) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
-      insertId: object.insert_id,
-      httpRequest: object?.http_request ? HttpRequest.fromAmino(object.http_request) : undefined,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseLogEntry();
+    if (object.log_name !== undefined && object.log_name !== null) {
+      message.logName = object.log_name;
+    }
+    if (object.resource !== undefined && object.resource !== null) {
+      message.resource = MonitoredResource.fromAmino(object.resource);
+    }
+    if (object.proto_payload !== undefined && object.proto_payload !== null) {
+      message.protoPayload = Any.fromAmino(object.proto_payload);
+    }
+    if (object.text_payload !== undefined && object.text_payload !== null) {
+      message.textPayload = object.text_payload;
+    }
+    if (object.json_payload !== undefined && object.json_payload !== null) {
+      message.jsonPayload = Struct.fromAmino(object.json_payload);
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = fromTimestamp(Timestamp.fromAmino(object.timestamp));
+    }
+    if (object.receive_timestamp !== undefined && object.receive_timestamp !== null) {
+      message.receiveTimestamp = fromTimestamp(Timestamp.fromAmino(object.receive_timestamp));
+    }
+    if (object.severity !== undefined && object.severity !== null) {
+      message.severity = logSeverityFromJSON(object.severity);
+    }
+    if (object.insert_id !== undefined && object.insert_id !== null) {
+      message.insertId = object.insert_id;
+    }
+    if (object.http_request !== undefined && object.http_request !== null) {
+      message.httpRequest = HttpRequest.fromAmino(object.http_request);
+    }
+    message.labels = Object.entries(object.labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      operation: object?.operation ? LogEntryOperation.fromAmino(object.operation) : undefined,
-      trace: object.trace,
-      spanId: object.span_id,
-      traceSampled: object.trace_sampled,
-      sourceLocation: object?.source_location ? LogEntrySourceLocation.fromAmino(object.source_location) : undefined,
-      split: object?.split ? LogSplit.fromAmino(object.split) : undefined
-    };
+      }
+      return acc;
+    }, {});
+    if (object.operation !== undefined && object.operation !== null) {
+      message.operation = LogEntryOperation.fromAmino(object.operation);
+    }
+    if (object.trace !== undefined && object.trace !== null) {
+      message.trace = object.trace;
+    }
+    if (object.span_id !== undefined && object.span_id !== null) {
+      message.spanId = object.span_id;
+    }
+    if (object.trace_sampled !== undefined && object.trace_sampled !== null) {
+      message.traceSampled = object.trace_sampled;
+    }
+    if (object.source_location !== undefined && object.source_location !== null) {
+      message.sourceLocation = LogEntrySourceLocation.fromAmino(object.source_location);
+    }
+    if (object.split !== undefined && object.split !== null) {
+      message.split = LogSplit.fromAmino(object.split);
+    }
+    return message;
   },
   toAmino(message: LogEntry): LogEntryAmino {
     const obj: any = {};
@@ -883,12 +921,20 @@ export const LogEntryOperation = {
     return obj;
   },
   fromAmino(object: LogEntryOperationAmino): LogEntryOperation {
-    return {
-      id: object.id,
-      producer: object.producer,
-      first: object.first,
-      last: object.last
-    };
+    const message = createBaseLogEntryOperation();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.producer !== undefined && object.producer !== null) {
+      message.producer = object.producer;
+    }
+    if (object.first !== undefined && object.first !== null) {
+      message.first = object.first;
+    }
+    if (object.last !== undefined && object.last !== null) {
+      message.last = object.last;
+    }
+    return message;
   },
   toAmino(message: LogEntryOperation): LogEntryOperationAmino {
     const obj: any = {};
@@ -1003,11 +1049,17 @@ export const LogEntrySourceLocation = {
     return obj;
   },
   fromAmino(object: LogEntrySourceLocationAmino): LogEntrySourceLocation {
-    return {
-      file: object.file,
-      line: BigInt(object.line),
-      function: object.function
-    };
+    const message = createBaseLogEntrySourceLocation();
+    if (object.file !== undefined && object.file !== null) {
+      message.file = object.file;
+    }
+    if (object.line !== undefined && object.line !== null) {
+      message.line = BigInt(object.line);
+    }
+    if (object.function !== undefined && object.function !== null) {
+      message.function = object.function;
+    }
+    return message;
   },
   toAmino(message: LogEntrySourceLocation): LogEntrySourceLocationAmino {
     const obj: any = {};
@@ -1119,11 +1171,17 @@ export const LogSplit = {
     return obj;
   },
   fromAmino(object: LogSplitAmino): LogSplit {
-    return {
-      uid: object.uid,
-      index: object.index,
-      totalSplits: object.total_splits
-    };
+    const message = createBaseLogSplit();
+    if (object.uid !== undefined && object.uid !== null) {
+      message.uid = object.uid;
+    }
+    if (object.index !== undefined && object.index !== null) {
+      message.index = object.index;
+    }
+    if (object.total_splits !== undefined && object.total_splits !== null) {
+      message.totalSplits = object.total_splits;
+    }
+    return message;
   },
   toAmino(message: LogSplit): LogSplitAmino {
     const obj: any = {};

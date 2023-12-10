@@ -678,15 +678,25 @@ export const Distribution = {
     return obj;
   },
   fromAmino(object: DistributionAmino): Distribution {
-    return {
-      count: BigInt(object.count),
-      mean: object.mean,
-      sumOfSquaredDeviation: object.sum_of_squared_deviation,
-      range: object?.range ? Distribution_Range.fromAmino(object.range) : undefined,
-      bucketOptions: object?.bucket_options ? Distribution_BucketOptions.fromAmino(object.bucket_options) : undefined,
-      bucketCounts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => BigInt(e)) : [],
-      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromAmino(e)) : []
-    };
+    const message = createBaseDistribution();
+    if (object.count !== undefined && object.count !== null) {
+      message.count = BigInt(object.count);
+    }
+    if (object.mean !== undefined && object.mean !== null) {
+      message.mean = object.mean;
+    }
+    if (object.sum_of_squared_deviation !== undefined && object.sum_of_squared_deviation !== null) {
+      message.sumOfSquaredDeviation = object.sum_of_squared_deviation;
+    }
+    if (object.range !== undefined && object.range !== null) {
+      message.range = Distribution_Range.fromAmino(object.range);
+    }
+    if (object.bucket_options !== undefined && object.bucket_options !== null) {
+      message.bucketOptions = Distribution_BucketOptions.fromAmino(object.bucket_options);
+    }
+    message.bucketCounts = object.bucket_counts?.map(e => BigInt(e)) || [];
+    message.exemplars = object.exemplars?.map(e => Distribution_Exemplar.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Distribution, useInterfaces: boolean = true): DistributionAmino {
     const obj: any = {};
@@ -788,10 +798,14 @@ export const Distribution_Range = {
     return obj;
   },
   fromAmino(object: Distribution_RangeAmino): Distribution_Range {
-    return {
-      min: object.min,
-      max: object.max
-    };
+    const message = createBaseDistribution_Range();
+    if (object.min !== undefined && object.min !== null) {
+      message.min = object.min;
+    }
+    if (object.max !== undefined && object.max !== null) {
+      message.max = object.max;
+    }
+    return message;
   },
   toAmino(message: Distribution_Range, useInterfaces: boolean = true): Distribution_RangeAmino {
     const obj: any = {};
@@ -898,11 +912,17 @@ export const Distribution_BucketOptions = {
     return obj;
   },
   fromAmino(object: Distribution_BucketOptionsAmino): Distribution_BucketOptions {
-    return {
-      linearBuckets: object?.linear_buckets ? Distribution_BucketOptions_Linear.fromAmino(object.linear_buckets) : undefined,
-      exponentialBuckets: object?.exponential_buckets ? Distribution_BucketOptions_Exponential.fromAmino(object.exponential_buckets) : undefined,
-      explicitBuckets: object?.explicit_buckets ? Distribution_BucketOptions_Explicit.fromAmino(object.explicit_buckets) : undefined
-    };
+    const message = createBaseDistribution_BucketOptions();
+    if (object.linear_buckets !== undefined && object.linear_buckets !== null) {
+      message.linearBuckets = Distribution_BucketOptions_Linear.fromAmino(object.linear_buckets);
+    }
+    if (object.exponential_buckets !== undefined && object.exponential_buckets !== null) {
+      message.exponentialBuckets = Distribution_BucketOptions_Exponential.fromAmino(object.exponential_buckets);
+    }
+    if (object.explicit_buckets !== undefined && object.explicit_buckets !== null) {
+      message.explicitBuckets = Distribution_BucketOptions_Explicit.fromAmino(object.explicit_buckets);
+    }
+    return message;
   },
   toAmino(message: Distribution_BucketOptions, useInterfaces: boolean = true): Distribution_BucketOptionsAmino {
     const obj: any = {};
@@ -1004,11 +1024,17 @@ export const Distribution_BucketOptions_Linear = {
     return obj;
   },
   fromAmino(object: Distribution_BucketOptions_LinearAmino): Distribution_BucketOptions_Linear {
-    return {
-      numFiniteBuckets: object.num_finite_buckets,
-      width: object.width,
-      offset: object.offset
-    };
+    const message = createBaseDistribution_BucketOptions_Linear();
+    if (object.num_finite_buckets !== undefined && object.num_finite_buckets !== null) {
+      message.numFiniteBuckets = object.num_finite_buckets;
+    }
+    if (object.width !== undefined && object.width !== null) {
+      message.width = object.width;
+    }
+    if (object.offset !== undefined && object.offset !== null) {
+      message.offset = object.offset;
+    }
+    return message;
   },
   toAmino(message: Distribution_BucketOptions_Linear, useInterfaces: boolean = true): Distribution_BucketOptions_LinearAmino {
     const obj: any = {};
@@ -1110,11 +1136,17 @@ export const Distribution_BucketOptions_Exponential = {
     return obj;
   },
   fromAmino(object: Distribution_BucketOptions_ExponentialAmino): Distribution_BucketOptions_Exponential {
-    return {
-      numFiniteBuckets: object.num_finite_buckets,
-      growthFactor: object.growth_factor,
-      scale: object.scale
-    };
+    const message = createBaseDistribution_BucketOptions_Exponential();
+    if (object.num_finite_buckets !== undefined && object.num_finite_buckets !== null) {
+      message.numFiniteBuckets = object.num_finite_buckets;
+    }
+    if (object.growth_factor !== undefined && object.growth_factor !== null) {
+      message.growthFactor = object.growth_factor;
+    }
+    if (object.scale !== undefined && object.scale !== null) {
+      message.scale = object.scale;
+    }
+    return message;
   },
   toAmino(message: Distribution_BucketOptions_Exponential, useInterfaces: boolean = true): Distribution_BucketOptions_ExponentialAmino {
     const obj: any = {};
@@ -1209,9 +1241,9 @@ export const Distribution_BucketOptions_Explicit = {
     return obj;
   },
   fromAmino(object: Distribution_BucketOptions_ExplicitAmino): Distribution_BucketOptions_Explicit {
-    return {
-      bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => e) : []
-    };
+    const message = createBaseDistribution_BucketOptions_Explicit();
+    message.bounds = object.bounds?.map(e => e) || [];
+    return message;
   },
   toAmino(message: Distribution_BucketOptions_Explicit, useInterfaces: boolean = true): Distribution_BucketOptions_ExplicitAmino {
     const obj: any = {};
@@ -1323,11 +1355,15 @@ export const Distribution_Exemplar = {
     return obj;
   },
   fromAmino(object: Distribution_ExemplarAmino): Distribution_Exemplar {
-    return {
-      value: object.value,
-      timestamp: object?.timestamp ? fromTimestamp(Timestamp.fromAmino(object.timestamp)) : undefined,
-      attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseDistribution_Exemplar();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = fromTimestamp(Timestamp.fromAmino(object.timestamp));
+    }
+    message.attachments = object.attachments?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Distribution_Exemplar, useInterfaces: boolean = true): Distribution_ExemplarAmino {
     const obj: any = {};

@@ -113,9 +113,11 @@ export const QueryBalancesRequest = {
     return obj;
   },
   fromAmino(object: QueryBalancesRequestAmino): QueryBalancesRequest {
-    return {
-      address: object.address
-    };
+    const message = createBaseQueryBalancesRequest();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    return message;
   },
   toAmino(message: QueryBalancesRequest, useInterfaces: boolean = true): QueryBalancesRequestAmino {
     const obj: any = {};
@@ -239,11 +241,11 @@ export const QueryBalancesResponse = {
     return obj;
   },
   fromAmino(object: QueryBalancesResponseAmino): QueryBalancesResponse {
-    return {
-      locked: Array.isArray(object?.locked) ? object.locked.map((e: any) => Coin.fromAmino(e)) : [],
-      unvested: Array.isArray(object?.unvested) ? object.unvested.map((e: any) => Coin.fromAmino(e)) : [],
-      vested: Array.isArray(object?.vested) ? object.vested.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseQueryBalancesResponse();
+    message.locked = object.locked?.map(e => Coin.fromAmino(e)) || [];
+    message.unvested = object.unvested?.map(e => Coin.fromAmino(e)) || [];
+    message.vested = object.vested?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryBalancesResponse, useInterfaces: boolean = true): QueryBalancesResponseAmino {
     const obj: any = {};

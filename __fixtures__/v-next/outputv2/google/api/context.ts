@@ -277,9 +277,9 @@ export const Context = {
     return obj;
   },
   fromAmino(object: ContextAmino): Context {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => ContextRule.fromAmino(e)) : []
-    };
+    const message = createBaseContext();
+    message.rules = object.rules?.map(e => ContextRule.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Context): ContextAmino {
     const obj: any = {};
@@ -442,13 +442,15 @@ export const ContextRule = {
     return obj;
   },
   fromAmino(object: ContextRuleAmino): ContextRule {
-    return {
-      selector: object.selector,
-      requested: Array.isArray(object?.requested) ? object.requested.map((e: any) => e) : [],
-      provided: Array.isArray(object?.provided) ? object.provided.map((e: any) => e) : [],
-      allowedRequestExtensions: Array.isArray(object?.allowed_request_extensions) ? object.allowed_request_extensions.map((e: any) => e) : [],
-      allowedResponseExtensions: Array.isArray(object?.allowed_response_extensions) ? object.allowed_response_extensions.map((e: any) => e) : []
-    };
+    const message = createBaseContextRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    message.requested = object.requested?.map(e => e) || [];
+    message.provided = object.provided?.map(e => e) || [];
+    message.allowedRequestExtensions = object.allowed_request_extensions?.map(e => e) || [];
+    message.allowedResponseExtensions = object.allowed_response_extensions?.map(e => e) || [];
+    return message;
   },
   toAmino(message: ContextRule): ContextRuleAmino {
     const obj: any = {};

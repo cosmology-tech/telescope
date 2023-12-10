@@ -339,10 +339,10 @@ export const Monitoring = {
     return obj;
   },
   fromAmino(object: MonitoringAmino): Monitoring {
-    return {
-      producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromAmino(e)) : [],
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromAmino(e)) : []
-    };
+    const message = createBaseMonitoring();
+    message.producerDestinations = object.producer_destinations?.map(e => Monitoring_MonitoringDestination.fromAmino(e)) || [];
+    message.consumerDestinations = object.consumer_destinations?.map(e => Monitoring_MonitoringDestination.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Monitoring, useInterfaces: boolean = true): MonitoringAmino {
     const obj: any = {};
@@ -447,10 +447,12 @@ export const Monitoring_MonitoringDestination = {
     return obj;
   },
   fromAmino(object: Monitoring_MonitoringDestinationAmino): Monitoring_MonitoringDestination {
-    return {
-      monitoredResource: object.monitored_resource,
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
-    };
+    const message = createBaseMonitoring_MonitoringDestination();
+    if (object.monitored_resource !== undefined && object.monitored_resource !== null) {
+      message.monitoredResource = object.monitored_resource;
+    }
+    message.metrics = object.metrics?.map(e => e) || [];
+    return message;
   },
   toAmino(message: Monitoring_MonitoringDestination, useInterfaces: boolean = true): Monitoring_MonitoringDestinationAmino {
     const obj: any = {};

@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
+import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmos.orm.v1alpha1";
 /** StorageType */
 export enum StorageType {
@@ -215,10 +216,12 @@ export const ModuleSchemaDescriptor = {
     return obj;
   },
   fromAmino(object: ModuleSchemaDescriptorAmino): ModuleSchemaDescriptor {
-    return {
-      schemaFile: Array.isArray(object?.schema_file) ? object.schema_file.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromAmino(e)) : [],
-      prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array()
-    };
+    const message = createBaseModuleSchemaDescriptor();
+    message.schemaFile = object.schema_file?.map(e => ModuleSchemaDescriptor_FileEntry.fromAmino(e)) || [];
+    if (object.prefix !== undefined && object.prefix !== null) {
+      message.prefix = fromBase64(object.prefix);
+    }
+    return message;
   },
   toAmino(message: ModuleSchemaDescriptor): ModuleSchemaDescriptorAmino {
     const obj: any = {};
@@ -339,11 +342,17 @@ export const ModuleSchemaDescriptor_FileEntry = {
     return obj;
   },
   fromAmino(object: ModuleSchemaDescriptor_FileEntryAmino): ModuleSchemaDescriptor_FileEntry {
-    return {
-      id: object.id,
-      protoFileName: object.proto_file_name,
-      storageType: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : -1
-    };
+    const message = createBaseModuleSchemaDescriptor_FileEntry();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.proto_file_name !== undefined && object.proto_file_name !== null) {
+      message.protoFileName = object.proto_file_name;
+    }
+    if (object.storage_type !== undefined && object.storage_type !== null) {
+      message.storageType = storageTypeFromJSON(object.storage_type);
+    }
+    return message;
   },
   toAmino(message: ModuleSchemaDescriptor_FileEntry): ModuleSchemaDescriptor_FileEntryAmino {
     const obj: any = {};

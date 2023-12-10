@@ -149,10 +149,14 @@ export const Attribute = {
     return obj;
   },
   fromAmino(object: AttributeAmino): Attribute {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseAttribute();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: Attribute, useInterfaces: boolean = true): AttributeAmino {
     const obj: any = {};
@@ -257,10 +261,10 @@ export const SignedBy = {
     return obj;
   },
   fromAmino(object: SignedByAmino): SignedBy {
-    return {
-      allOf: Array.isArray(object?.all_of) ? object.all_of.map((e: any) => e) : [],
-      anyOf: Array.isArray(object?.any_of) ? object.any_of.map((e: any) => e) : []
-    };
+    const message = createBaseSignedBy();
+    message.allOf = object.all_of?.map(e => e) || [];
+    message.anyOf = object.any_of?.map(e => e) || [];
+    return message;
   },
   toAmino(message: SignedBy, useInterfaces: boolean = true): SignedByAmino {
     const obj: any = {};
@@ -367,10 +371,12 @@ export const PlacementRequirements = {
     return obj;
   },
   fromAmino(object: PlacementRequirementsAmino): PlacementRequirements {
-    return {
-      signedBy: object?.signed_by ? SignedBy.fromAmino(object.signed_by) : SignedBy.fromPartial({}),
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBasePlacementRequirements();
+    if (object.signed_by !== undefined && object.signed_by !== null) {
+      message.signedBy = SignedBy.fromAmino(object.signed_by);
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: PlacementRequirements, useInterfaces: boolean = true): PlacementRequirementsAmino {
     const obj: any = {};

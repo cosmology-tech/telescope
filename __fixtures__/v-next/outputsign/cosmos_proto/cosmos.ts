@@ -219,10 +219,14 @@ export const InterfaceDescriptor = {
     return message;
   },
   fromAmino(object: InterfaceDescriptorAmino): InterfaceDescriptor {
-    return {
-      name: object.name,
-      description: object.description
-    };
+    const message = createBaseInterfaceDescriptor();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: InterfaceDescriptor): InterfaceDescriptorAmino {
     const obj: any = {};
@@ -307,11 +311,15 @@ export const ScalarDescriptor = {
     return message;
   },
   fromAmino(object: ScalarDescriptorAmino): ScalarDescriptor {
-    return {
-      name: object.name,
-      description: object.description,
-      fieldType: Array.isArray(object?.field_type) ? object.field_type.map((e: any) => scalarTypeFromJSON(e)) : []
-    };
+    const message = createBaseScalarDescriptor();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.fieldType = object.field_type?.map(e => scalarTypeFromJSON(e)) || [];
+    return message;
   },
   toAmino(message: ScalarDescriptor): ScalarDescriptorAmino {
     const obj: any = {};

@@ -303,11 +303,15 @@ export const TableDescriptor = {
     return obj;
   },
   fromAmino(object: TableDescriptorAmino): TableDescriptor {
-    return {
-      primaryKey: object?.primary_key ? PrimaryKeyDescriptor.fromAmino(object.primary_key) : undefined,
-      index: Array.isArray(object?.index) ? object.index.map((e: any) => SecondaryIndexDescriptor.fromAmino(e)) : [],
-      id: object.id
-    };
+    const message = createBaseTableDescriptor();
+    if (object.primary_key !== undefined && object.primary_key !== null) {
+      message.primaryKey = PrimaryKeyDescriptor.fromAmino(object.primary_key);
+    }
+    message.index = object.index?.map(e => SecondaryIndexDescriptor.fromAmino(e)) || [];
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    return message;
   },
   toAmino(message: TableDescriptor, useInterfaces: boolean = true): TableDescriptorAmino {
     const obj: any = {};
@@ -402,10 +406,14 @@ export const PrimaryKeyDescriptor = {
     return obj;
   },
   fromAmino(object: PrimaryKeyDescriptorAmino): PrimaryKeyDescriptor {
-    return {
-      fields: object.fields,
-      autoIncrement: object.auto_increment
-    };
+    const message = createBasePrimaryKeyDescriptor();
+    if (object.fields !== undefined && object.fields !== null) {
+      message.fields = object.fields;
+    }
+    if (object.auto_increment !== undefined && object.auto_increment !== null) {
+      message.autoIncrement = object.auto_increment;
+    }
+    return message;
   },
   toAmino(message: PrimaryKeyDescriptor, useInterfaces: boolean = true): PrimaryKeyDescriptorAmino {
     const obj: any = {};
@@ -507,11 +515,17 @@ export const SecondaryIndexDescriptor = {
     return obj;
   },
   fromAmino(object: SecondaryIndexDescriptorAmino): SecondaryIndexDescriptor {
-    return {
-      fields: object.fields,
-      id: object.id,
-      unique: object.unique
-    };
+    const message = createBaseSecondaryIndexDescriptor();
+    if (object.fields !== undefined && object.fields !== null) {
+      message.fields = object.fields;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.unique !== undefined && object.unique !== null) {
+      message.unique = object.unique;
+    }
+    return message;
   },
   toAmino(message: SecondaryIndexDescriptor, useInterfaces: boolean = true): SecondaryIndexDescriptorAmino {
     const obj: any = {};
@@ -590,9 +604,11 @@ export const SingletonDescriptor = {
     return obj;
   },
   fromAmino(object: SingletonDescriptorAmino): SingletonDescriptor {
-    return {
-      id: object.id
-    };
+    const message = createBaseSingletonDescriptor();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    return message;
   },
   toAmino(message: SingletonDescriptor, useInterfaces: boolean = true): SingletonDescriptorAmino {
     const obj: any = {};

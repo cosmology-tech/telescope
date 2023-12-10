@@ -106,10 +106,14 @@ export const FeeToken = {
     return obj;
   },
   fromAmino(object: FeeTokenAmino): FeeToken {
-    return {
-      denom: object.denom,
-      poolID: BigInt(object.poolID)
-    };
+    const message = createBaseFeeToken();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.poolID !== undefined && object.poolID !== null) {
+      message.poolID = BigInt(object.poolID);
+    }
+    return message;
   },
   toAmino(message: FeeToken, useInterfaces: boolean = true): FeeTokenAmino {
     const obj: any = {};

@@ -1,6 +1,7 @@
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "ibc.applications.interchain_accounts.v1";
 /**
  * Type defines a classification of message issued from a controller chain to its associated interchain accounts
@@ -154,11 +155,17 @@ export const InterchainAccountPacketData = {
     return obj;
   },
   fromAmino(object: InterchainAccountPacketDataAmino): InterchainAccountPacketData {
-    return {
-      type: isSet(object.type) ? typeFromJSON(object.type) : -1,
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
-      memo: object.memo
-    };
+    const message = createBaseInterchainAccountPacketData();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = typeFromJSON(object.type);
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = fromBase64(object.data);
+    }
+    if (object.memo !== undefined && object.memo !== null) {
+      message.memo = object.memo;
+    }
+    return message;
   },
   toAmino(message: InterchainAccountPacketData): InterchainAccountPacketDataAmino {
     const obj: any = {};
@@ -258,9 +265,9 @@ export const CosmosTx = {
     return obj;
   },
   fromAmino(object: CosmosTxAmino): CosmosTx {
-    return {
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseCosmosTx();
+    message.messages = object.messages?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: CosmosTx): CosmosTxAmino {
     const obj: any = {};

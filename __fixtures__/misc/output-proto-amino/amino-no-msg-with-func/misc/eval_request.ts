@@ -181,10 +181,14 @@ export const EvalRequest_BindingsEntry = {
     return obj;
   },
   fromAmino(object: EvalRequest_BindingsEntryAmino): EvalRequest_BindingsEntry {
-    return {
-      key: object.key,
-      value: object?.value ? ExprValue.fromAmino(object.value) : undefined
-    };
+    const message = createBaseEvalRequest_BindingsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = ExprValue.fromAmino(object.value);
+    }
+    return message;
   },
   toAmino(message: EvalRequest_BindingsEntry): EvalRequest_BindingsEntryAmino {
     const obj: any = {};
@@ -274,10 +278,14 @@ export const EvalRequest_RefsEntry = {
     return obj;
   },
   fromAmino(object: EvalRequest_RefsEntryAmino): EvalRequest_RefsEntry {
-    return {
-      key: object.key,
-      value: object?.value ? IdRef.fromAmino(object.value) : undefined
-    };
+    const message = createBaseEvalRequest_RefsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = IdRef.fromAmino(object.value);
+    }
+    return message;
   },
   toAmino(message: EvalRequest_RefsEntry): EvalRequest_RefsEntryAmino {
     const obj: any = {};
@@ -543,27 +551,43 @@ export const EvalRequest = {
     return obj;
   },
   fromAmino(object: EvalRequestAmino): EvalRequest {
-    return {
-      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
-        [key: string]: ExprValue;
-      }>((acc, [key, value]) => {
+    const message = createBaseEvalRequest();
+    message.bindings = Object.entries(object.bindings ?? {}).reduce<{
+      [key: string]: ExprValue;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = ExprValue.fromAmino(value);
-        return acc;
-      }, {}) : {},
-      refs: isObject(object.refs) ? Object.entries(object.refs).reduce<{
-        [key: string]: IdRef;
-      }>((acc, [key, value]) => {
+      }
+      return acc;
+    }, {});
+    message.refs = Object.entries(object.refs ?? {}).reduce<{
+      [key: string]: IdRef;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = IdRef.fromAmino(value);
-        return acc;
-      }, {}) : {},
-      testNum: object.test_num,
-      testString: object.test_string,
-      testBool: object.test_bool,
-      instantiatePermission: object?.instantiate_permission ? AccessConfig.fromAmino(object.instantiate_permission) : undefined,
-      id: object?.id,
-      name: object?.name,
-      testArray: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => e) : []
-    };
+      }
+      return acc;
+    }, {});
+    if (object.test_num !== undefined && object.test_num !== null) {
+      message.testNum = object.test_num;
+    }
+    if (object.test_string !== undefined && object.test_string !== null) {
+      message.testString = object.test_string;
+    }
+    if (object.test_bool !== undefined && object.test_bool !== null) {
+      message.testBool = object.test_bool;
+    }
+    if (object.instantiate_permission !== undefined && object.instantiate_permission !== null) {
+      message.instantiatePermission = AccessConfig.fromAmino(object.instantiate_permission);
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    message.testArray = object.test_array?.map(e => e) || [];
+    return message;
   },
   toAmino(message: EvalRequest): EvalRequestAmino {
     const obj: any = {};
@@ -666,9 +690,11 @@ export const AccessConfig = {
     return obj;
   },
   fromAmino(object: AccessConfigAmino): AccessConfig {
-    return {
-      sender: object.sender
-    };
+    const message = createBaseAccessConfig();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    return message;
   },
   toAmino(message: AccessConfig): AccessConfigAmino {
     const obj: any = {};

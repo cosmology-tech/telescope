@@ -218,10 +218,14 @@ export const ProviderInfo = {
     return message;
   },
   fromAmino(object: ProviderInfoAmino): ProviderInfo {
-    return {
-      email: object.email,
-      website: object.website
-    };
+    const message = createBaseProviderInfo();
+    if (object.email !== undefined && object.email !== null) {
+      message.email = object.email;
+    }
+    if (object.website !== undefined && object.website !== null) {
+      message.website = object.website;
+    }
+    return message;
   },
   toAmino(message: ProviderInfo): ProviderInfoAmino {
     const obj: any = {};
@@ -307,12 +311,18 @@ export const MsgCreateProvider = {
     return message;
   },
   fromAmino(object: MsgCreateProviderAmino): MsgCreateProvider {
-    return {
-      owner: object.owner,
-      hostUri: object.host_uri,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
-      info: object?.info ? ProviderInfo.fromAmino(object.info) : ProviderInfo.fromPartial({})
-    };
+    const message = createBaseMsgCreateProvider();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.host_uri !== undefined && object.host_uri !== null) {
+      message.hostUri = object.host_uri;
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    if (object.info !== undefined && object.info !== null) {
+      message.info = ProviderInfo.fromAmino(object.info);
+    }
+    return message;
   },
   toAmino(message: MsgCreateProvider): MsgCreateProviderAmino {
     const obj: any = {};
@@ -369,7 +379,8 @@ export const MsgCreateProviderResponse = {
     return message;
   },
   fromAmino(_: MsgCreateProviderResponseAmino): MsgCreateProviderResponse {
-    return {};
+    const message = createBaseMsgCreateProviderResponse();
+    return message;
   },
   toAmino(_: MsgCreateProviderResponse): MsgCreateProviderResponseAmino {
     const obj: any = {};
@@ -453,12 +464,18 @@ export const MsgUpdateProvider = {
     return message;
   },
   fromAmino(object: MsgUpdateProviderAmino): MsgUpdateProvider {
-    return {
-      owner: object.owner,
-      hostUri: object.host_uri,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
-      info: object?.info ? ProviderInfo.fromAmino(object.info) : ProviderInfo.fromPartial({})
-    };
+    const message = createBaseMsgUpdateProvider();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.host_uri !== undefined && object.host_uri !== null) {
+      message.hostUri = object.host_uri;
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    if (object.info !== undefined && object.info !== null) {
+      message.info = ProviderInfo.fromAmino(object.info);
+    }
+    return message;
   },
   toAmino(message: MsgUpdateProvider): MsgUpdateProviderAmino {
     const obj: any = {};
@@ -515,7 +532,8 @@ export const MsgUpdateProviderResponse = {
     return message;
   },
   fromAmino(_: MsgUpdateProviderResponseAmino): MsgUpdateProviderResponse {
-    return {};
+    const message = createBaseMsgUpdateProviderResponse();
+    return message;
   },
   toAmino(_: MsgUpdateProviderResponse): MsgUpdateProviderResponseAmino {
     const obj: any = {};
@@ -573,9 +591,11 @@ export const MsgDeleteProvider = {
     return message;
   },
   fromAmino(object: MsgDeleteProviderAmino): MsgDeleteProvider {
-    return {
-      owner: object.owner
-    };
+    const message = createBaseMsgDeleteProvider();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
   toAmino(message: MsgDeleteProvider): MsgDeleteProviderAmino {
     const obj: any = {};
@@ -625,7 +645,8 @@ export const MsgDeleteProviderResponse = {
     return message;
   },
   fromAmino(_: MsgDeleteProviderResponseAmino): MsgDeleteProviderResponse {
-    return {};
+    const message = createBaseMsgDeleteProviderResponse();
+    return message;
   },
   toAmino(_: MsgDeleteProviderResponse): MsgDeleteProviderResponseAmino {
     const obj: any = {};
@@ -709,12 +730,18 @@ export const Provider = {
     return message;
   },
   fromAmino(object: ProviderAmino): Provider {
-    return {
-      owner: object.owner,
-      hostUri: object.host_uri,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
-      info: object?.info ? ProviderInfo.fromAmino(object.info) : ProviderInfo.fromPartial({})
-    };
+    const message = createBaseProvider();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.host_uri !== undefined && object.host_uri !== null) {
+      message.hostUri = object.host_uri;
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    if (object.info !== undefined && object.info !== null) {
+      message.info = ProviderInfo.fromAmino(object.info);
+    }
+    return message;
   },
   toAmino(message: Provider): ProviderAmino {
     const obj: any = {};

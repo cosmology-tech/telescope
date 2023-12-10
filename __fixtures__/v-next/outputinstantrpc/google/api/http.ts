@@ -744,10 +744,12 @@ export const Http = {
     return obj;
   },
   fromAmino(object: HttpAmino): Http {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => HttpRule.fromAmino(e)) : [],
-      fullyDecodeReservedExpansion: object.fully_decode_reserved_expansion
-    };
+    const message = createBaseHttp();
+    message.rules = object.rules?.map(e => HttpRule.fromAmino(e)) || [];
+    if (object.fully_decode_reserved_expansion !== undefined && object.fully_decode_reserved_expansion !== null) {
+      message.fullyDecodeReservedExpansion = object.fully_decode_reserved_expansion;
+    }
+    return message;
   },
   toAmino(message: Http): HttpAmino {
     const obj: any = {};
@@ -963,18 +965,36 @@ export const HttpRule = {
     return obj;
   },
   fromAmino(object: HttpRuleAmino): HttpRule {
-    return {
-      selector: object.selector,
-      get: object?.get,
-      put: object?.put,
-      post: object?.post,
-      delete: object?.delete,
-      patch: object?.patch,
-      custom: object?.custom ? CustomHttpPattern.fromAmino(object.custom) : undefined,
-      body: object.body,
-      responseBody: object.response_body,
-      additionalBindings: Array.isArray(object?.additional_bindings) ? object.additional_bindings.map((e: any) => HttpRule.fromAmino(e)) : []
-    };
+    const message = createBaseHttpRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    if (object.get !== undefined && object.get !== null) {
+      message.get = object.get;
+    }
+    if (object.put !== undefined && object.put !== null) {
+      message.put = object.put;
+    }
+    if (object.post !== undefined && object.post !== null) {
+      message.post = object.post;
+    }
+    if (object.delete !== undefined && object.delete !== null) {
+      message.delete = object.delete;
+    }
+    if (object.patch !== undefined && object.patch !== null) {
+      message.patch = object.patch;
+    }
+    if (object.custom !== undefined && object.custom !== null) {
+      message.custom = CustomHttpPattern.fromAmino(object.custom);
+    }
+    if (object.body !== undefined && object.body !== null) {
+      message.body = object.body;
+    }
+    if (object.response_body !== undefined && object.response_body !== null) {
+      message.responseBody = object.response_body;
+    }
+    message.additionalBindings = object.additional_bindings?.map(e => HttpRule.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: HttpRule): HttpRuleAmino {
     const obj: any = {};
@@ -1084,10 +1104,14 @@ export const CustomHttpPattern = {
     return obj;
   },
   fromAmino(object: CustomHttpPatternAmino): CustomHttpPattern {
-    return {
-      kind: object.kind,
-      path: object.path
-    };
+    const message = createBaseCustomHttpPattern();
+    if (object.kind !== undefined && object.kind !== null) {
+      message.kind = object.kind;
+    }
+    if (object.path !== undefined && object.path !== null) {
+      message.path = object.path;
+    }
+    return message;
   },
   toAmino(message: CustomHttpPattern): CustomHttpPatternAmino {
     const obj: any = {};

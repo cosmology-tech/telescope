@@ -1,6 +1,6 @@
 import { MerklePrefix, MerklePrefixAmino, MerklePrefixSDKType } from "../../commitment/v1/commitment";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isSet } from "../../../../helpers";
+import { DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.core.connection.v1";
 /**
  * State defines if a connection is in one of the following states:
@@ -421,13 +421,21 @@ export const ConnectionEnd = {
     return message;
   },
   fromAmino(object: ConnectionEndAmino): ConnectionEnd {
-    return {
-      clientId: object.client_id,
-      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromAmino(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
-      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : Counterparty.fromPartial({}),
-      delayPeriod: BigInt(object.delay_period)
-    };
+    const message = createBaseConnectionEnd();
+    if (object.client_id !== undefined && object.client_id !== null) {
+      message.clientId = object.client_id;
+    }
+    message.versions = object.versions?.map(e => Version.fromAmino(e)) || [];
+    if (object.state !== undefined && object.state !== null) {
+      message.state = stateFromJSON(object.state);
+    }
+    if (object.counterparty !== undefined && object.counterparty !== null) {
+      message.counterparty = Counterparty.fromAmino(object.counterparty);
+    }
+    if (object.delay_period !== undefined && object.delay_period !== null) {
+      message.delayPeriod = BigInt(object.delay_period);
+    }
+    return message;
   },
   toAmino(message: ConnectionEnd): ConnectionEndAmino {
     const obj: any = {};
@@ -544,14 +552,24 @@ export const IdentifiedConnection = {
     return message;
   },
   fromAmino(object: IdentifiedConnectionAmino): IdentifiedConnection {
-    return {
-      id: object.id,
-      clientId: object.client_id,
-      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromAmino(e)) : [],
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
-      counterparty: object?.counterparty ? Counterparty.fromAmino(object.counterparty) : Counterparty.fromPartial({}),
-      delayPeriod: BigInt(object.delay_period)
-    };
+    const message = createBaseIdentifiedConnection();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.client_id !== undefined && object.client_id !== null) {
+      message.clientId = object.client_id;
+    }
+    message.versions = object.versions?.map(e => Version.fromAmino(e)) || [];
+    if (object.state !== undefined && object.state !== null) {
+      message.state = stateFromJSON(object.state);
+    }
+    if (object.counterparty !== undefined && object.counterparty !== null) {
+      message.counterparty = Counterparty.fromAmino(object.counterparty);
+    }
+    if (object.delay_period !== undefined && object.delay_period !== null) {
+      message.delayPeriod = BigInt(object.delay_period);
+    }
+    return message;
   },
   toAmino(message: IdentifiedConnection): IdentifiedConnectionAmino {
     const obj: any = {};
@@ -643,11 +661,17 @@ export const Counterparty = {
     return message;
   },
   fromAmino(object: CounterpartyAmino): Counterparty {
-    return {
-      clientId: object.client_id,
-      connectionId: object.connection_id,
-      prefix: object?.prefix ? MerklePrefix.fromAmino(object.prefix) : MerklePrefix.fromPartial({})
-    };
+    const message = createBaseCounterparty();
+    if (object.client_id !== undefined && object.client_id !== null) {
+      message.clientId = object.client_id;
+    }
+    if (object.connection_id !== undefined && object.connection_id !== null) {
+      message.connectionId = object.connection_id;
+    }
+    if (object.prefix !== undefined && object.prefix !== null) {
+      message.prefix = MerklePrefix.fromAmino(object.prefix);
+    }
+    return message;
   },
   toAmino(message: Counterparty): CounterpartyAmino {
     const obj: any = {};
@@ -714,9 +738,9 @@ export const ClientPaths = {
     return message;
   },
   fromAmino(object: ClientPathsAmino): ClientPaths {
-    return {
-      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
-    };
+    const message = createBaseClientPaths();
+    message.paths = object.paths?.map(e => e) || [];
+    return message;
   },
   toAmino(message: ClientPaths): ClientPathsAmino {
     const obj: any = {};
@@ -793,10 +817,12 @@ export const ConnectionPaths = {
     return message;
   },
   fromAmino(object: ConnectionPathsAmino): ConnectionPaths {
-    return {
-      clientId: object.client_id,
-      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
-    };
+    const message = createBaseConnectionPaths();
+    if (object.client_id !== undefined && object.client_id !== null) {
+      message.clientId = object.client_id;
+    }
+    message.paths = object.paths?.map(e => e) || [];
+    return message;
   },
   toAmino(message: ConnectionPaths): ConnectionPathsAmino {
     const obj: any = {};
@@ -874,10 +900,12 @@ export const Version = {
     return message;
   },
   fromAmino(object: VersionAmino): Version {
-    return {
-      identifier: object.identifier,
-      features: Array.isArray(object?.features) ? object.features.map((e: any) => e) : []
-    };
+    const message = createBaseVersion();
+    if (object.identifier !== undefined && object.identifier !== null) {
+      message.identifier = object.identifier;
+    }
+    message.features = object.features?.map(e => e) || [];
+    return message;
   },
   toAmino(message: Version): VersionAmino {
     const obj: any = {};
@@ -949,9 +977,11 @@ export const Params = {
     return message;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      maxExpectedTimePerBlock: BigInt(object.max_expected_time_per_block)
-    };
+    const message = createBaseParams();
+    if (object.max_expected_time_per_block !== undefined && object.max_expected_time_per_block !== null) {
+      message.maxExpectedTimePerBlock = BigInt(object.max_expected_time_per_block);
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

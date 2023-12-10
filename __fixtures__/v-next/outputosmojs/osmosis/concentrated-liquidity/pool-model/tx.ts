@@ -162,14 +162,26 @@ export const MsgCreateConcentratedPool = {
     return obj;
   },
   fromAmino(object: MsgCreateConcentratedPoolAmino): MsgCreateConcentratedPool {
-    return {
-      sender: object.sender,
-      denom0: object.denom0,
-      denom1: object.denom1,
-      tickSpacing: BigInt(object.tick_spacing),
-      exponentAtPriceOne: object.exponent_at_price_one,
-      swapFee: object.swap_fee
-    };
+    const message = createBaseMsgCreateConcentratedPool();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.denom0 !== undefined && object.denom0 !== null) {
+      message.denom0 = object.denom0;
+    }
+    if (object.denom1 !== undefined && object.denom1 !== null) {
+      message.denom1 = object.denom1;
+    }
+    if (object.tick_spacing !== undefined && object.tick_spacing !== null) {
+      message.tickSpacing = BigInt(object.tick_spacing);
+    }
+    if (object.exponent_at_price_one !== undefined && object.exponent_at_price_one !== null) {
+      message.exponentAtPriceOne = object.exponent_at_price_one;
+    }
+    if (object.swap_fee !== undefined && object.swap_fee !== null) {
+      message.swapFee = object.swap_fee;
+    }
+    return message;
   },
   toAmino(message: MsgCreateConcentratedPool): MsgCreateConcentratedPoolAmino {
     const obj: any = {};
@@ -264,9 +276,11 @@ export const MsgCreateConcentratedPoolResponse = {
     return obj;
   },
   fromAmino(object: MsgCreateConcentratedPoolResponseAmino): MsgCreateConcentratedPoolResponse {
-    return {
-      poolId: BigInt(object.pool_id)
-    };
+    const message = createBaseMsgCreateConcentratedPoolResponse();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    return message;
   },
   toAmino(message: MsgCreateConcentratedPoolResponse): MsgCreateConcentratedPoolResponseAmino {
     const obj: any = {};

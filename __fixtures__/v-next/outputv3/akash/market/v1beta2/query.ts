@@ -294,10 +294,14 @@ export const QueryOrdersRequest = {
     return obj;
   },
   fromAmino(object: QueryOrdersRequestAmino): QueryOrdersRequest {
-    return {
-      filters: object?.filters ? OrderFilters.fromAmino(object.filters) : OrderFilters.fromPartial({}),
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryOrdersRequest();
+    if (object.filters !== undefined && object.filters !== null) {
+      message.filters = OrderFilters.fromAmino(object.filters);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryOrdersRequest, useInterfaces: boolean = true): QueryOrdersRequestAmino {
     const obj: any = {};
@@ -396,10 +400,12 @@ export const QueryOrdersResponse = {
     return obj;
   },
   fromAmino(object: QueryOrdersResponseAmino): QueryOrdersResponse {
-    return {
-      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryOrdersResponse();
+    message.orders = object.orders?.map(e => Order.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryOrdersResponse, useInterfaces: boolean = true): QueryOrdersResponseAmino {
     const obj: any = {};
@@ -482,9 +488,11 @@ export const QueryOrderRequest = {
     return obj;
   },
   fromAmino(object: QueryOrderRequestAmino): QueryOrderRequest {
-    return {
-      id: object?.id ? OrderID.fromAmino(object.id) : OrderID.fromPartial({})
-    };
+    const message = createBaseQueryOrderRequest();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = OrderID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: QueryOrderRequest, useInterfaces: boolean = true): QueryOrderRequestAmino {
     const obj: any = {};
@@ -562,9 +570,11 @@ export const QueryOrderResponse = {
     return obj;
   },
   fromAmino(object: QueryOrderResponseAmino): QueryOrderResponse {
-    return {
-      order: object?.order ? Order.fromAmino(object.order) : Order.fromPartial({})
-    };
+    const message = createBaseQueryOrderResponse();
+    if (object.order !== undefined && object.order !== null) {
+      message.order = Order.fromAmino(object.order);
+    }
+    return message;
   },
   toAmino(message: QueryOrderResponse, useInterfaces: boolean = true): QueryOrderResponseAmino {
     const obj: any = {};
@@ -656,10 +666,14 @@ export const QueryBidsRequest = {
     return obj;
   },
   fromAmino(object: QueryBidsRequestAmino): QueryBidsRequest {
-    return {
-      filters: object?.filters ? BidFilters.fromAmino(object.filters) : BidFilters.fromPartial({}),
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryBidsRequest();
+    if (object.filters !== undefined && object.filters !== null) {
+      message.filters = BidFilters.fromAmino(object.filters);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryBidsRequest, useInterfaces: boolean = true): QueryBidsRequestAmino {
     const obj: any = {};
@@ -758,10 +772,12 @@ export const QueryBidsResponse = {
     return obj;
   },
   fromAmino(object: QueryBidsResponseAmino): QueryBidsResponse {
-    return {
-      bids: Array.isArray(object?.bids) ? object.bids.map((e: any) => QueryBidResponse.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryBidsResponse();
+    message.bids = object.bids?.map(e => QueryBidResponse.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryBidsResponse, useInterfaces: boolean = true): QueryBidsResponseAmino {
     const obj: any = {};
@@ -844,9 +860,11 @@ export const QueryBidRequest = {
     return obj;
   },
   fromAmino(object: QueryBidRequestAmino): QueryBidRequest {
-    return {
-      id: object?.id ? BidID.fromAmino(object.id) : BidID.fromPartial({})
-    };
+    const message = createBaseQueryBidRequest();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BidID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: QueryBidRequest, useInterfaces: boolean = true): QueryBidRequestAmino {
     const obj: any = {};
@@ -938,10 +956,14 @@ export const QueryBidResponse = {
     return obj;
   },
   fromAmino(object: QueryBidResponseAmino): QueryBidResponse {
-    return {
-      bid: object?.bid ? Bid.fromAmino(object.bid) : Bid.fromPartial({}),
-      escrowAccount: object?.escrow_account ? Account.fromAmino(object.escrow_account) : Account.fromPartial({})
-    };
+    const message = createBaseQueryBidResponse();
+    if (object.bid !== undefined && object.bid !== null) {
+      message.bid = Bid.fromAmino(object.bid);
+    }
+    if (object.escrow_account !== undefined && object.escrow_account !== null) {
+      message.escrowAccount = Account.fromAmino(object.escrow_account);
+    }
+    return message;
   },
   toAmino(message: QueryBidResponse, useInterfaces: boolean = true): QueryBidResponseAmino {
     const obj: any = {};
@@ -1034,10 +1056,14 @@ export const QueryLeasesRequest = {
     return obj;
   },
   fromAmino(object: QueryLeasesRequestAmino): QueryLeasesRequest {
-    return {
-      filters: object?.filters ? LeaseFilters.fromAmino(object.filters) : LeaseFilters.fromPartial({}),
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryLeasesRequest();
+    if (object.filters !== undefined && object.filters !== null) {
+      message.filters = LeaseFilters.fromAmino(object.filters);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryLeasesRequest, useInterfaces: boolean = true): QueryLeasesRequestAmino {
     const obj: any = {};
@@ -1136,10 +1162,12 @@ export const QueryLeasesResponse = {
     return obj;
   },
   fromAmino(object: QueryLeasesResponseAmino): QueryLeasesResponse {
-    return {
-      leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => QueryLeaseResponse.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryLeasesResponse();
+    message.leases = object.leases?.map(e => QueryLeaseResponse.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryLeasesResponse, useInterfaces: boolean = true): QueryLeasesResponseAmino {
     const obj: any = {};
@@ -1222,9 +1250,11 @@ export const QueryLeaseRequest = {
     return obj;
   },
   fromAmino(object: QueryLeaseRequestAmino): QueryLeaseRequest {
-    return {
-      id: object?.id ? LeaseID.fromAmino(object.id) : LeaseID.fromPartial({})
-    };
+    const message = createBaseQueryLeaseRequest();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = LeaseID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: QueryLeaseRequest, useInterfaces: boolean = true): QueryLeaseRequestAmino {
     const obj: any = {};
@@ -1316,10 +1346,14 @@ export const QueryLeaseResponse = {
     return obj;
   },
   fromAmino(object: QueryLeaseResponseAmino): QueryLeaseResponse {
-    return {
-      lease: object?.lease ? Lease.fromAmino(object.lease) : Lease.fromPartial({}),
-      escrowPayment: object?.escrow_payment ? FractionalPayment.fromAmino(object.escrow_payment) : FractionalPayment.fromPartial({})
-    };
+    const message = createBaseQueryLeaseResponse();
+    if (object.lease !== undefined && object.lease !== null) {
+      message.lease = Lease.fromAmino(object.lease);
+    }
+    if (object.escrow_payment !== undefined && object.escrow_payment !== null) {
+      message.escrowPayment = FractionalPayment.fromAmino(object.escrow_payment);
+    }
+    return message;
   },
   toAmino(message: QueryLeaseResponse, useInterfaces: boolean = true): QueryLeaseResponseAmino {
     const obj: any = {};

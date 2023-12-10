@@ -276,13 +276,21 @@ export const Incentive = {
     return obj;
   },
   fromAmino(object: IncentiveAmino): Incentive {
-    return {
-      contract: object.contract,
-      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromAmino(e)) : [],
-      epochs: object.epochs,
-      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : fromTimestamp(Timestamp.fromPartial({})),
-      totalGas: BigInt(object.total_gas)
-    };
+    const message = createBaseIncentive();
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    message.allocations = object.allocations?.map(e => DecCoin.fromAmino(e)) || [];
+    if (object.epochs !== undefined && object.epochs !== null) {
+      message.epochs = object.epochs;
+    }
+    if (object.start_time !== undefined && object.start_time !== null) {
+      message.startTime = fromTimestamp(Timestamp.fromAmino(object.start_time));
+    }
+    if (object.total_gas !== undefined && object.total_gas !== null) {
+      message.totalGas = BigInt(object.total_gas);
+    }
+    return message;
   },
   toAmino(message: Incentive): IncentiveAmino {
     const obj: any = {};
@@ -395,11 +403,17 @@ export const GasMeter = {
     return obj;
   },
   fromAmino(object: GasMeterAmino): GasMeter {
-    return {
-      contract: object.contract,
-      participant: object.participant,
-      cumulativeGas: BigInt(object.cumulative_gas)
-    };
+    const message = createBaseGasMeter();
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    if (object.participant !== undefined && object.participant !== null) {
+      message.participant = object.participant;
+    }
+    if (object.cumulative_gas !== undefined && object.cumulative_gas !== null) {
+      message.cumulativeGas = BigInt(object.cumulative_gas);
+    }
+    return message;
   },
   toAmino(message: GasMeter): GasMeterAmino {
     const obj: any = {};
@@ -537,13 +551,21 @@ export const RegisterIncentiveProposal = {
     return obj;
   },
   fromAmino(object: RegisterIncentiveProposalAmino): RegisterIncentiveProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      contract: object.contract,
-      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromAmino(e)) : [],
-      epochs: object.epochs
-    };
+    const message = createBaseRegisterIncentiveProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    message.allocations = object.allocations?.map(e => DecCoin.fromAmino(e)) || [];
+    if (object.epochs !== undefined && object.epochs !== null) {
+      message.epochs = object.epochs;
+    }
+    return message;
   },
   toAmino(message: RegisterIncentiveProposal): RegisterIncentiveProposalAmino {
     const obj: any = {};
@@ -654,11 +676,17 @@ export const CancelIncentiveProposal = {
     return obj;
   },
   fromAmino(object: CancelIncentiveProposalAmino): CancelIncentiveProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      contract: object.contract
-    };
+    const message = createBaseCancelIncentiveProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    return message;
   },
   toAmino(message: CancelIncentiveProposal): CancelIncentiveProposalAmino {
     const obj: any = {};

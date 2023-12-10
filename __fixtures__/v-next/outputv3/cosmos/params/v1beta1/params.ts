@@ -143,11 +143,15 @@ export const ParameterChangeProposal = {
     return obj;
   },
   fromAmino(object: ParameterChangeProposalAmino): ParameterChangeProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      changes: Array.isArray(object?.changes) ? object.changes.map((e: any) => ParamChange.fromAmino(e)) : []
-    };
+    const message = createBaseParameterChangeProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.changes = object.changes?.map(e => ParamChange.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ParameterChangeProposal, useInterfaces: boolean = true): ParameterChangeProposalAmino {
     const obj: any = {};
@@ -254,11 +258,17 @@ export const ParamChange = {
     return obj;
   },
   fromAmino(object: ParamChangeAmino): ParamChange {
-    return {
-      subspace: object.subspace,
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseParamChange();
+    if (object.subspace !== undefined && object.subspace !== null) {
+      message.subspace = object.subspace;
+    }
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: ParamChange, useInterfaces: boolean = true): ParamChangeAmino {
     const obj: any = {};

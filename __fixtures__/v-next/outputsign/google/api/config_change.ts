@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
+import { DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Classifies set of possible modifications to an object in the service
@@ -268,13 +268,21 @@ export const ConfigChange = {
     return message;
   },
   fromAmino(object: ConfigChangeAmino): ConfigChange {
-    return {
-      element: object.element,
-      oldValue: object.old_value,
-      newValue: object.new_value,
-      changeType: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : -1,
-      advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromAmino(e)) : []
-    };
+    const message = createBaseConfigChange();
+    if (object.element !== undefined && object.element !== null) {
+      message.element = object.element;
+    }
+    if (object.old_value !== undefined && object.old_value !== null) {
+      message.oldValue = object.old_value;
+    }
+    if (object.new_value !== undefined && object.new_value !== null) {
+      message.newValue = object.new_value;
+    }
+    if (object.change_type !== undefined && object.change_type !== null) {
+      message.changeType = changeTypeFromJSON(object.change_type);
+    }
+    message.advices = object.advices?.map(e => Advice.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ConfigChange): ConfigChangeAmino {
     const obj: any = {};
@@ -341,9 +349,11 @@ export const Advice = {
     return message;
   },
   fromAmino(object: AdviceAmino): Advice {
-    return {
-      description: object.description
-    };
+    const message = createBaseAdvice();
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: Advice): AdviceAmino {
     const obj: any = {};

@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
+import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "tendermint.crypto";
 /** PublicKey defines the keys available for use with Tendermint Validators */
 export interface PublicKey {
@@ -92,10 +93,14 @@ export const PublicKey = {
     return obj;
   },
   fromAmino(object: PublicKeyAmino): PublicKey {
-    return {
-      ed25519: isSet(object.ed25519) ? bytesFromBase64(object.ed25519) : undefined,
-      secp256k1: isSet(object.secp256k1) ? bytesFromBase64(object.secp256k1) : undefined
-    };
+    const message = createBasePublicKey();
+    if (object.ed25519 !== undefined && object.ed25519 !== null) {
+      message.ed25519 = fromBase64(object.ed25519);
+    }
+    if (object.secp256k1 !== undefined && object.secp256k1 !== null) {
+      message.secp256k1 = fromBase64(object.secp256k1);
+    }
+    return message;
   },
   toAmino(message: PublicKey): PublicKeyAmino {
     const obj: any = {};

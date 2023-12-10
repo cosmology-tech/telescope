@@ -218,18 +218,38 @@ export const TwapRecord = {
     return message;
   },
   fromAmino(object: TwapRecordAmino): TwapRecord {
-    return {
-      poolId: BigInt(object.pool_id),
-      asset0Denom: object.asset0_denom,
-      asset1Denom: object.asset1_denom,
-      height: BigInt(object.height),
-      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : fromTimestamp(Timestamp.fromPartial({})),
-      p0LastSpotPrice: object.p0_last_spot_price,
-      p1LastSpotPrice: object.p1_last_spot_price,
-      p0ArithmeticTwapAccumulator: object.p0_arithmetic_twap_accumulator,
-      p1ArithmeticTwapAccumulator: object.p1_arithmetic_twap_accumulator,
-      lastErrorTime: object?.last_error_time ? fromTimestamp(Timestamp.fromAmino(object.last_error_time)) : fromTimestamp(Timestamp.fromPartial({}))
-    };
+    const message = createBaseTwapRecord();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.asset0_denom !== undefined && object.asset0_denom !== null) {
+      message.asset0Denom = object.asset0_denom;
+    }
+    if (object.asset1_denom !== undefined && object.asset1_denom !== null) {
+      message.asset1Denom = object.asset1_denom;
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height);
+    }
+    if (object.time !== undefined && object.time !== null) {
+      message.time = fromTimestamp(Timestamp.fromAmino(object.time));
+    }
+    if (object.p0_last_spot_price !== undefined && object.p0_last_spot_price !== null) {
+      message.p0LastSpotPrice = object.p0_last_spot_price;
+    }
+    if (object.p1_last_spot_price !== undefined && object.p1_last_spot_price !== null) {
+      message.p1LastSpotPrice = object.p1_last_spot_price;
+    }
+    if (object.p0_arithmetic_twap_accumulator !== undefined && object.p0_arithmetic_twap_accumulator !== null) {
+      message.p0ArithmeticTwapAccumulator = object.p0_arithmetic_twap_accumulator;
+    }
+    if (object.p1_arithmetic_twap_accumulator !== undefined && object.p1_arithmetic_twap_accumulator !== null) {
+      message.p1ArithmeticTwapAccumulator = object.p1_arithmetic_twap_accumulator;
+    }
+    if (object.last_error_time !== undefined && object.last_error_time !== null) {
+      message.lastErrorTime = fromTimestamp(Timestamp.fromAmino(object.last_error_time));
+    }
+    return message;
   },
   toAmino(message: TwapRecord): TwapRecordAmino {
     const obj: any = {};
