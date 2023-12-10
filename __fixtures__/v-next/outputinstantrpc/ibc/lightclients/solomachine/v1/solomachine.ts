@@ -3,7 +3,6 @@ import { ConnectionEnd, ConnectionEndSDKType } from "../../../core/connection/v1
 import { Channel, ChannelSDKType } from "../../../core/channel/v1/channel";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "ibc.lightclients.solomachine.v1";
 /**
  * DataType defines the type of solo machine proof being created. This is done
@@ -847,7 +846,7 @@ export const Header = {
       message.timestamp = BigInt(object.timestamp);
     }
     if (object.signature !== undefined && object.signature !== null) {
-      message.signature = fromBase64(object.signature);
+      message.signature = bytesFromBase64(object.signature);
     }
     if (object.new_public_key !== undefined && object.new_public_key !== null) {
       message.newPublicKey = Any.fromAmino(object.new_public_key);
@@ -861,7 +860,7 @@ export const Header = {
     const obj: any = {};
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
-    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature));
+    obj.signature = message.signature ? base64FromBytes(message.signature) : undefined;
     obj.new_public_key = message.newPublicKey ? Any.toAmino(message.newPublicKey) : undefined;
     obj.new_diversifier = message.newDiversifier;
     return obj;
@@ -1143,13 +1142,13 @@ export const SignatureAndData = {
   fromAmino(object: SignatureAndDataAmino): SignatureAndData {
     const message = createBaseSignatureAndData();
     if (object.signature !== undefined && object.signature !== null) {
-      message.signature = fromBase64(object.signature);
+      message.signature = bytesFromBase64(object.signature);
     }
     if (object.data_type !== undefined && object.data_type !== null) {
       message.dataType = dataTypeFromJSON(object.data_type);
     }
     if (object.data !== undefined && object.data !== null) {
-      message.data = fromBase64(object.data);
+      message.data = bytesFromBase64(object.data);
     }
     if (object.timestamp !== undefined && object.timestamp !== null) {
       message.timestamp = BigInt(object.timestamp);
@@ -1158,9 +1157,9 @@ export const SignatureAndData = {
   },
   toAmino(message: SignatureAndData): SignatureAndDataAmino {
     const obj: any = {};
-    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature));
+    obj.signature = message.signature ? base64FromBytes(message.signature) : undefined;
     obj.data_type = message.dataType;
-    message.data !== undefined && (obj.data = base64FromBytes(message.data));
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
   },
@@ -1264,7 +1263,7 @@ export const TimestampedSignatureData = {
   fromAmino(object: TimestampedSignatureDataAmino): TimestampedSignatureData {
     const message = createBaseTimestampedSignatureData();
     if (object.signature_data !== undefined && object.signature_data !== null) {
-      message.signatureData = fromBase64(object.signature_data);
+      message.signatureData = bytesFromBase64(object.signature_data);
     }
     if (object.timestamp !== undefined && object.timestamp !== null) {
       message.timestamp = BigInt(object.timestamp);
@@ -1273,7 +1272,7 @@ export const TimestampedSignatureData = {
   },
   toAmino(message: TimestampedSignatureData): TimestampedSignatureDataAmino {
     const obj: any = {};
-    message.signatureData !== undefined && (obj.signature_data = base64FromBytes(message.signatureData));
+    obj.signature_data = message.signatureData ? base64FromBytes(message.signatureData) : undefined;
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
   },
@@ -1430,7 +1429,7 @@ export const SignBytes = {
       message.dataType = dataTypeFromJSON(object.data_type);
     }
     if (object.data !== undefined && object.data !== null) {
-      message.data = fromBase64(object.data);
+      message.data = bytesFromBase64(object.data);
     }
     return message;
   },
@@ -1440,7 +1439,7 @@ export const SignBytes = {
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     obj.diversifier = message.diversifier;
     obj.data_type = message.dataType;
-    message.data !== undefined && (obj.data = base64FromBytes(message.data));
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
   fromAminoMsg(object: SignBytesAminoMsg): SignBytes {
@@ -1656,7 +1655,7 @@ export const ClientStateData = {
   fromAmino(object: ClientStateDataAmino): ClientStateData {
     const message = createBaseClientStateData();
     if (object.path !== undefined && object.path !== null) {
-      message.path = fromBase64(object.path);
+      message.path = bytesFromBase64(object.path);
     }
     if (object.client_state !== undefined && object.client_state !== null) {
       message.clientState = Any.fromAmino(object.client_state);
@@ -1665,7 +1664,7 @@ export const ClientStateData = {
   },
   toAmino(message: ClientStateData): ClientStateDataAmino {
     const obj: any = {};
-    message.path !== undefined && (obj.path = base64FromBytes(message.path));
+    obj.path = message.path ? base64FromBytes(message.path) : undefined;
     obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
     return obj;
   },
@@ -1769,7 +1768,7 @@ export const ConsensusStateData = {
   fromAmino(object: ConsensusStateDataAmino): ConsensusStateData {
     const message = createBaseConsensusStateData();
     if (object.path !== undefined && object.path !== null) {
-      message.path = fromBase64(object.path);
+      message.path = bytesFromBase64(object.path);
     }
     if (object.consensus_state !== undefined && object.consensus_state !== null) {
       message.consensusState = Any.fromAmino(object.consensus_state);
@@ -1778,7 +1777,7 @@ export const ConsensusStateData = {
   },
   toAmino(message: ConsensusStateData): ConsensusStateDataAmino {
     const obj: any = {};
-    message.path !== undefined && (obj.path = base64FromBytes(message.path));
+    obj.path = message.path ? base64FromBytes(message.path) : undefined;
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
     return obj;
   },
@@ -1882,7 +1881,7 @@ export const ConnectionStateData = {
   fromAmino(object: ConnectionStateDataAmino): ConnectionStateData {
     const message = createBaseConnectionStateData();
     if (object.path !== undefined && object.path !== null) {
-      message.path = fromBase64(object.path);
+      message.path = bytesFromBase64(object.path);
     }
     if (object.connection !== undefined && object.connection !== null) {
       message.connection = ConnectionEnd.fromAmino(object.connection);
@@ -1891,7 +1890,7 @@ export const ConnectionStateData = {
   },
   toAmino(message: ConnectionStateData): ConnectionStateDataAmino {
     const obj: any = {};
-    message.path !== undefined && (obj.path = base64FromBytes(message.path));
+    obj.path = message.path ? base64FromBytes(message.path) : undefined;
     obj.connection = message.connection ? ConnectionEnd.toAmino(message.connection) : undefined;
     return obj;
   },
@@ -1995,7 +1994,7 @@ export const ChannelStateData = {
   fromAmino(object: ChannelStateDataAmino): ChannelStateData {
     const message = createBaseChannelStateData();
     if (object.path !== undefined && object.path !== null) {
-      message.path = fromBase64(object.path);
+      message.path = bytesFromBase64(object.path);
     }
     if (object.channel !== undefined && object.channel !== null) {
       message.channel = Channel.fromAmino(object.channel);
@@ -2004,7 +2003,7 @@ export const ChannelStateData = {
   },
   toAmino(message: ChannelStateData): ChannelStateDataAmino {
     const obj: any = {};
-    message.path !== undefined && (obj.path = base64FromBytes(message.path));
+    obj.path = message.path ? base64FromBytes(message.path) : undefined;
     obj.channel = message.channel ? Channel.toAmino(message.channel) : undefined;
     return obj;
   },
@@ -2106,17 +2105,17 @@ export const PacketCommitmentData = {
   fromAmino(object: PacketCommitmentDataAmino): PacketCommitmentData {
     const message = createBasePacketCommitmentData();
     if (object.path !== undefined && object.path !== null) {
-      message.path = fromBase64(object.path);
+      message.path = bytesFromBase64(object.path);
     }
     if (object.commitment !== undefined && object.commitment !== null) {
-      message.commitment = fromBase64(object.commitment);
+      message.commitment = bytesFromBase64(object.commitment);
     }
     return message;
   },
   toAmino(message: PacketCommitmentData): PacketCommitmentDataAmino {
     const obj: any = {};
-    message.path !== undefined && (obj.path = base64FromBytes(message.path));
-    message.commitment !== undefined && (obj.commitment = base64FromBytes(message.commitment));
+    obj.path = message.path ? base64FromBytes(message.path) : undefined;
+    obj.commitment = message.commitment ? base64FromBytes(message.commitment) : undefined;
     return obj;
   },
   fromAminoMsg(object: PacketCommitmentDataAminoMsg): PacketCommitmentData {
@@ -2217,17 +2216,17 @@ export const PacketAcknowledgementData = {
   fromAmino(object: PacketAcknowledgementDataAmino): PacketAcknowledgementData {
     const message = createBasePacketAcknowledgementData();
     if (object.path !== undefined && object.path !== null) {
-      message.path = fromBase64(object.path);
+      message.path = bytesFromBase64(object.path);
     }
     if (object.acknowledgement !== undefined && object.acknowledgement !== null) {
-      message.acknowledgement = fromBase64(object.acknowledgement);
+      message.acknowledgement = bytesFromBase64(object.acknowledgement);
     }
     return message;
   },
   toAmino(message: PacketAcknowledgementData): PacketAcknowledgementDataAmino {
     const obj: any = {};
-    message.path !== undefined && (obj.path = base64FromBytes(message.path));
-    message.acknowledgement !== undefined && (obj.acknowledgement = base64FromBytes(message.acknowledgement));
+    obj.path = message.path ? base64FromBytes(message.path) : undefined;
+    obj.acknowledgement = message.acknowledgement ? base64FromBytes(message.acknowledgement) : undefined;
     return obj;
   },
   fromAminoMsg(object: PacketAcknowledgementDataAminoMsg): PacketAcknowledgementData {
@@ -2315,13 +2314,13 @@ export const PacketReceiptAbsenceData = {
   fromAmino(object: PacketReceiptAbsenceDataAmino): PacketReceiptAbsenceData {
     const message = createBasePacketReceiptAbsenceData();
     if (object.path !== undefined && object.path !== null) {
-      message.path = fromBase64(object.path);
+      message.path = bytesFromBase64(object.path);
     }
     return message;
   },
   toAmino(message: PacketReceiptAbsenceData): PacketReceiptAbsenceDataAmino {
     const obj: any = {};
-    message.path !== undefined && (obj.path = base64FromBytes(message.path));
+    obj.path = message.path ? base64FromBytes(message.path) : undefined;
     return obj;
   },
   fromAminoMsg(object: PacketReceiptAbsenceDataAminoMsg): PacketReceiptAbsenceData {
@@ -2424,7 +2423,7 @@ export const NextSequenceRecvData = {
   fromAmino(object: NextSequenceRecvDataAmino): NextSequenceRecvData {
     const message = createBaseNextSequenceRecvData();
     if (object.path !== undefined && object.path !== null) {
-      message.path = fromBase64(object.path);
+      message.path = bytesFromBase64(object.path);
     }
     if (object.next_seq_recv !== undefined && object.next_seq_recv !== null) {
       message.nextSeqRecv = BigInt(object.next_seq_recv);
@@ -2433,7 +2432,7 @@ export const NextSequenceRecvData = {
   },
   toAmino(message: NextSequenceRecvData): NextSequenceRecvDataAmino {
     const obj: any = {};
-    message.path !== undefined && (obj.path = base64FromBytes(message.path));
+    obj.path = message.path ? base64FromBytes(message.path) : undefined;
     obj.next_seq_recv = message.nextSeqRecv ? message.nextSeqRecv.toString() : undefined;
     return obj;
   },

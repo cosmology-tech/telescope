@@ -5,7 +5,6 @@ import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmos.gov.v1beta1";
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
 export enum VoteOption {
@@ -1547,21 +1546,21 @@ export const TallyParams = {
   fromAmino(object: TallyParamsAmino): TallyParams {
     const message = createBaseTallyParams();
     if (object.quorum !== undefined && object.quorum !== null) {
-      message.quorum = fromBase64(object.quorum);
+      message.quorum = bytesFromBase64(object.quorum);
     }
     if (object.threshold !== undefined && object.threshold !== null) {
-      message.threshold = fromBase64(object.threshold);
+      message.threshold = bytesFromBase64(object.threshold);
     }
     if (object.veto_threshold !== undefined && object.veto_threshold !== null) {
-      message.vetoThreshold = fromBase64(object.veto_threshold);
+      message.vetoThreshold = bytesFromBase64(object.veto_threshold);
     }
     return message;
   },
   toAmino(message: TallyParams): TallyParamsAmino {
     const obj: any = {};
-    message.quorum !== undefined && (obj.quorum = base64FromBytes(message.quorum));
-    message.threshold !== undefined && (obj.threshold = base64FromBytes(message.threshold));
-    message.vetoThreshold !== undefined && (obj.veto_threshold = base64FromBytes(message.vetoThreshold));
+    obj.quorum = message.quorum ? base64FromBytes(message.quorum) : undefined;
+    obj.threshold = message.threshold ? base64FromBytes(message.threshold) : undefined;
+    obj.veto_threshold = message.vetoThreshold ? base64FromBytes(message.vetoThreshold) : undefined;
     return obj;
   },
   fromAminoMsg(object: TallyParamsAminoMsg): TallyParams {

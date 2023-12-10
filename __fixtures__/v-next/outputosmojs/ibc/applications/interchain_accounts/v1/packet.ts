@@ -1,7 +1,6 @@
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "ibc.applications.interchain_accounts.v1";
 /**
  * Type defines a classification of message issued from a controller chain to its associated interchain accounts
@@ -160,7 +159,7 @@ export const InterchainAccountPacketData = {
       message.type = typeFromJSON(object.type);
     }
     if (object.data !== undefined && object.data !== null) {
-      message.data = fromBase64(object.data);
+      message.data = bytesFromBase64(object.data);
     }
     if (object.memo !== undefined && object.memo !== null) {
       message.memo = object.memo;
@@ -170,7 +169,7 @@ export const InterchainAccountPacketData = {
   toAmino(message: InterchainAccountPacketData): InterchainAccountPacketDataAmino {
     const obj: any = {};
     obj.type = message.type;
-    message.data !== undefined && (obj.data = base64FromBytes(message.data));
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     obj.memo = message.memo;
     return obj;
   },

@@ -2,7 +2,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { ContractInfo, ContractInfoSDKType, ContractCodeHistoryEntry, ContractCodeHistoryEntrySDKType, Model, ModelSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { fromBase64, toUtf8, fromUtf8 } from "@cosmjs/encoding";
+import { toUtf8, fromUtf8 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /**
  * QueryContractInfoRequest is the request type for the Query/ContractInfo RPC
@@ -1364,14 +1364,14 @@ export const QueryRawContractStateRequest = {
       message.address = object.address;
     }
     if (object.query_data !== undefined && object.query_data !== null) {
-      message.queryData = fromBase64(object.query_data);
+      message.queryData = bytesFromBase64(object.query_data);
     }
     return message;
   },
   toAmino(message: QueryRawContractStateRequest): QueryRawContractStateRequestAmino {
     const obj: any = {};
     obj.address = message.address;
-    message.queryData !== undefined && (obj.query_data = base64FromBytes(message.queryData));
+    obj.query_data = message.queryData ? base64FromBytes(message.queryData) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryRawContractStateRequestAminoMsg): QueryRawContractStateRequest {
@@ -1459,13 +1459,13 @@ export const QueryRawContractStateResponse = {
   fromAmino(object: QueryRawContractStateResponseAmino): QueryRawContractStateResponse {
     const message = createBaseQueryRawContractStateResponse();
     if (object.data !== undefined && object.data !== null) {
-      message.data = fromBase64(object.data);
+      message.data = bytesFromBase64(object.data);
     }
     return message;
   },
   toAmino(message: QueryRawContractStateResponse): QueryRawContractStateResponseAmino {
     const obj: any = {};
-    message.data !== undefined && (obj.data = base64FromBytes(message.data));
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryRawContractStateResponseAminoMsg): QueryRawContractStateResponse {
@@ -1888,7 +1888,7 @@ export const CodeInfoResponse = {
       message.creator = object.creator;
     }
     if (object.data_hash !== undefined && object.data_hash !== null) {
-      message.dataHash = fromBase64(object.data_hash);
+      message.dataHash = bytesFromBase64(object.data_hash);
     }
     return message;
   },
@@ -1896,7 +1896,7 @@ export const CodeInfoResponse = {
     const obj: any = {};
     obj.code_id = message.codeId ? message.codeId.toString() : undefined;
     obj.creator = message.creator;
-    message.dataHash !== undefined && (obj.data_hash = base64FromBytes(message.dataHash));
+    obj.data_hash = message.dataHash ? base64FromBytes(message.dataHash) : undefined;
     return obj;
   },
   fromAminoMsg(object: CodeInfoResponseAminoMsg): CodeInfoResponse {
@@ -2002,14 +2002,14 @@ export const QueryCodeResponse = {
       message.codeInfo = CodeInfoResponse.fromAmino(object.code_info);
     }
     if (object.data !== undefined && object.data !== null) {
-      message.data = fromBase64(object.data);
+      message.data = bytesFromBase64(object.data);
     }
     return message;
   },
   toAmino(message: QueryCodeResponse): QueryCodeResponseAmino {
     const obj: any = {};
     obj.code_info = message.codeInfo ? CodeInfoResponse.toAmino(message.codeInfo) : undefined;
-    message.data !== undefined && (obj.data = base64FromBytes(message.data));
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryCodeResponseAminoMsg): QueryCodeResponse {

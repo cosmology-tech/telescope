@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmos.crypto.secp256k1";
 /**
  * PubKey defines a secp256k1 public key
@@ -111,13 +110,13 @@ export const PubKey = {
   fromAmino(object: PubKeyAmino): PubKey {
     const message = createBasePubKey();
     if (object.key !== undefined && object.key !== null) {
-      message.key = fromBase64(object.key);
+      message.key = bytesFromBase64(object.key);
     }
     return message;
   },
   toAmino(message: PubKey, useInterfaces: boolean = true): PubKeyAmino {
     const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
     return obj;
   },
   fromProtoMsg(message: PubKeyProtoMsg, useInterfaces: boolean = true): PubKey {
@@ -192,13 +191,13 @@ export const PrivKey = {
   fromAmino(object: PrivKeyAmino): PrivKey {
     const message = createBasePrivKey();
     if (object.key !== undefined && object.key !== null) {
-      message.key = fromBase64(object.key);
+      message.key = bytesFromBase64(object.key);
     }
     return message;
   },
   toAmino(message: PrivKey, useInterfaces: boolean = true): PrivKeyAmino {
     const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
     return obj;
   },
   fromProtoMsg(message: PrivKeyProtoMsg, useInterfaces: boolean = true): PrivKey {

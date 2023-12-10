@@ -123,7 +123,7 @@ export const GenesisOwners = {
   toAmino(message: GenesisOwners): GenesisOwnersAmino {
     const obj: any = {};
     obj.index = message.index ? message.index.toString() : undefined;
-    obj.index_owners = message.indexOwners ? CapabilityOwners.toAmino(message.indexOwners) : undefined;
+    obj.index_owners = message.indexOwners ? CapabilityOwners.toAmino(message.indexOwners) : CapabilityOwners.fromPartial({});
     return obj;
   },
   fromAminoMsg(object: GenesisOwnersAminoMsg): GenesisOwners {

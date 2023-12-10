@@ -3,7 +3,6 @@ import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { Height, HeightAmino, HeightSDKType } from "../../client/v1/client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "ibc.core.connection.v1";
 /**
  * MsgConnectionOpenInit defines the msg sent by an account on Chain A to
@@ -770,13 +769,13 @@ export const MsgConnectionOpenTry = {
       message.proofHeight = Height.fromAmino(object.proof_height);
     }
     if (object.proof_init !== undefined && object.proof_init !== null) {
-      message.proofInit = fromBase64(object.proof_init);
+      message.proofInit = bytesFromBase64(object.proof_init);
     }
     if (object.proof_client !== undefined && object.proof_client !== null) {
-      message.proofClient = fromBase64(object.proof_client);
+      message.proofClient = bytesFromBase64(object.proof_client);
     }
     if (object.proof_consensus !== undefined && object.proof_consensus !== null) {
-      message.proofConsensus = fromBase64(object.proof_consensus);
+      message.proofConsensus = bytesFromBase64(object.proof_consensus);
     }
     if (object.consensus_height !== undefined && object.consensus_height !== null) {
       message.consensusHeight = Height.fromAmino(object.consensus_height);
@@ -799,9 +798,9 @@ export const MsgConnectionOpenTry = {
       obj.counterparty_versions = [];
     }
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
-    message.proofInit !== undefined && (obj.proof_init = base64FromBytes(message.proofInit));
-    message.proofClient !== undefined && (obj.proof_client = base64FromBytes(message.proofClient));
-    message.proofConsensus !== undefined && (obj.proof_consensus = base64FromBytes(message.proofConsensus));
+    obj.proof_init = message.proofInit ? base64FromBytes(message.proofInit) : undefined;
+    obj.proof_client = message.proofClient ? base64FromBytes(message.proofClient) : undefined;
+    obj.proof_consensus = message.proofConsensus ? base64FromBytes(message.proofConsensus) : undefined;
     obj.consensus_height = message.consensusHeight ? Height.toAmino(message.consensusHeight) : {};
     obj.signer = message.signer;
     return obj;
@@ -1090,13 +1089,13 @@ export const MsgConnectionOpenAck = {
       message.proofHeight = Height.fromAmino(object.proof_height);
     }
     if (object.proof_try !== undefined && object.proof_try !== null) {
-      message.proofTry = fromBase64(object.proof_try);
+      message.proofTry = bytesFromBase64(object.proof_try);
     }
     if (object.proof_client !== undefined && object.proof_client !== null) {
-      message.proofClient = fromBase64(object.proof_client);
+      message.proofClient = bytesFromBase64(object.proof_client);
     }
     if (object.proof_consensus !== undefined && object.proof_consensus !== null) {
-      message.proofConsensus = fromBase64(object.proof_consensus);
+      message.proofConsensus = bytesFromBase64(object.proof_consensus);
     }
     if (object.consensus_height !== undefined && object.consensus_height !== null) {
       message.consensusHeight = Height.fromAmino(object.consensus_height);
@@ -1113,9 +1112,9 @@ export const MsgConnectionOpenAck = {
     obj.version = message.version ? Version.toAmino(message.version) : undefined;
     obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
-    message.proofTry !== undefined && (obj.proof_try = base64FromBytes(message.proofTry));
-    message.proofClient !== undefined && (obj.proof_client = base64FromBytes(message.proofClient));
-    message.proofConsensus !== undefined && (obj.proof_consensus = base64FromBytes(message.proofConsensus));
+    obj.proof_try = message.proofTry ? base64FromBytes(message.proofTry) : undefined;
+    obj.proof_client = message.proofClient ? base64FromBytes(message.proofClient) : undefined;
+    obj.proof_consensus = message.proofConsensus ? base64FromBytes(message.proofConsensus) : undefined;
     obj.consensus_height = message.consensusHeight ? Height.toAmino(message.consensusHeight) : {};
     obj.signer = message.signer;
     return obj;
@@ -1314,7 +1313,7 @@ export const MsgConnectionOpenConfirm = {
       message.connectionId = object.connection_id;
     }
     if (object.proof_ack !== undefined && object.proof_ack !== null) {
-      message.proofAck = fromBase64(object.proof_ack);
+      message.proofAck = bytesFromBase64(object.proof_ack);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -1327,7 +1326,7 @@ export const MsgConnectionOpenConfirm = {
   toAmino(message: MsgConnectionOpenConfirm): MsgConnectionOpenConfirmAmino {
     const obj: any = {};
     obj.connection_id = message.connectionId;
-    message.proofAck !== undefined && (obj.proof_ack = base64FromBytes(message.proofAck));
+    obj.proof_ack = message.proofAck ? base64FromBytes(message.proofAck) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     obj.signer = message.signer;
     return obj;

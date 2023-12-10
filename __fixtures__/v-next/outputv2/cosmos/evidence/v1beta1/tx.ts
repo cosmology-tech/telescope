@@ -1,7 +1,6 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 /**
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
@@ -227,13 +226,13 @@ export const MsgSubmitEvidenceResponse = {
   fromAmino(object: MsgSubmitEvidenceResponseAmino): MsgSubmitEvidenceResponse {
     const message = createBaseMsgSubmitEvidenceResponse();
     if (object.hash !== undefined && object.hash !== null) {
-      message.hash = fromBase64(object.hash);
+      message.hash = bytesFromBase64(object.hash);
     }
     return message;
   },
   toAmino(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseAmino {
     const obj: any = {};
-    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash));
+    obj.hash = message.hash ? base64FromBytes(message.hash) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgSubmitEvidenceResponseAminoMsg): MsgSubmitEvidenceResponse {

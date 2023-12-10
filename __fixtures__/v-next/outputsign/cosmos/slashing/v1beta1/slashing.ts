@@ -1,8 +1,7 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, DeepPartial, base64FromBytes } from "../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
+import { toTimestamp, fromTimestamp, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
@@ -322,26 +321,26 @@ export const Params = {
       message.signedBlocksWindow = BigInt(object.signed_blocks_window);
     }
     if (object.min_signed_per_window !== undefined && object.min_signed_per_window !== null) {
-      message.minSignedPerWindow = fromBase64(object.min_signed_per_window);
+      message.minSignedPerWindow = bytesFromBase64(object.min_signed_per_window);
     }
     if (object.downtime_jail_duration !== undefined && object.downtime_jail_duration !== null) {
       message.downtimeJailDuration = Duration.fromAmino(object.downtime_jail_duration);
     }
     if (object.slash_fraction_double_sign !== undefined && object.slash_fraction_double_sign !== null) {
-      message.slashFractionDoubleSign = fromBase64(object.slash_fraction_double_sign);
+      message.slashFractionDoubleSign = bytesFromBase64(object.slash_fraction_double_sign);
     }
     if (object.slash_fraction_downtime !== undefined && object.slash_fraction_downtime !== null) {
-      message.slashFractionDowntime = fromBase64(object.slash_fraction_downtime);
+      message.slashFractionDowntime = bytesFromBase64(object.slash_fraction_downtime);
     }
     return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     obj.signed_blocks_window = message.signedBlocksWindow ? message.signedBlocksWindow.toString() : undefined;
-    message.minSignedPerWindow !== undefined && (obj.min_signed_per_window = base64FromBytes(message.minSignedPerWindow));
+    obj.min_signed_per_window = message.minSignedPerWindow ? base64FromBytes(message.minSignedPerWindow) : undefined;
     obj.downtime_jail_duration = message.downtimeJailDuration ? Duration.toAmino(message.downtimeJailDuration) : undefined;
-    message.slashFractionDoubleSign !== undefined && (obj.slash_fraction_double_sign = base64FromBytes(message.slashFractionDoubleSign));
-    message.slashFractionDowntime !== undefined && (obj.slash_fraction_downtime = base64FromBytes(message.slashFractionDowntime));
+    obj.slash_fraction_double_sign = message.slashFractionDoubleSign ? base64FromBytes(message.slashFractionDoubleSign) : undefined;
+    obj.slash_fraction_downtime = message.slashFractionDowntime ? base64FromBytes(message.slashFractionDowntime) : undefined;
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

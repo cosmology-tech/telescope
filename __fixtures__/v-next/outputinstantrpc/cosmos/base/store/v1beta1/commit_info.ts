@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmos.base.store.v1beta1";
 /**
  * CommitInfo defines commit information used by the multi-store when committing
@@ -379,14 +378,14 @@ export const CommitID = {
       message.version = BigInt(object.version);
     }
     if (object.hash !== undefined && object.hash !== null) {
-      message.hash = fromBase64(object.hash);
+      message.hash = bytesFromBase64(object.hash);
     }
     return message;
   },
   toAmino(message: CommitID): CommitIDAmino {
     const obj: any = {};
     obj.version = message.version ? message.version.toString() : undefined;
-    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash));
+    obj.hash = message.hash ? base64FromBytes(message.hash) : undefined;
     return obj;
   },
   fromAminoMsg(object: CommitIDAminoMsg): CommitID {

@@ -1,7 +1,6 @@
 import { Params, ParamsAmino, ParamsSDKType, Validator, ValidatorAmino, ValidatorSDKType, Delegation, DelegationAmino, DelegationSDKType, UnbondingDelegation, UnbondingDelegationAmino, UnbondingDelegationSDKType, Redelegation, RedelegationAmino, RedelegationSDKType } from "./staking";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmos.staking.v1beta1";
 /** GenesisState defines the staking module's genesis state. */
 export interface GenesisState {
@@ -285,7 +284,7 @@ export const GenesisState = {
       message.params = Params.fromAmino(object.params);
     }
     if (object.last_total_power !== undefined && object.last_total_power !== null) {
-      message.lastTotalPower = fromBase64(object.last_total_power);
+      message.lastTotalPower = bytesFromBase64(object.last_total_power);
     }
     message.lastValidatorPowers = object.last_validator_powers?.map(e => LastValidatorPower.fromAmino(e)) || [];
     message.validators = object.validators?.map(e => Validator.fromAmino(e)) || [];
@@ -300,7 +299,7 @@ export const GenesisState = {
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    message.lastTotalPower !== undefined && (obj.last_total_power = base64FromBytes(message.lastTotalPower));
+    obj.last_total_power = message.lastTotalPower ? base64FromBytes(message.lastTotalPower) : undefined;
     if (message.lastValidatorPowers) {
       obj.last_validator_powers = message.lastValidatorPowers.map(e => e ? LastValidatorPower.toAmino(e) : undefined);
     } else {

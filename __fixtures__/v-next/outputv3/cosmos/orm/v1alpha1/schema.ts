@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmos.orm.v1alpha1";
 /** StorageType */
 export enum StorageType {
@@ -244,7 +243,7 @@ export const ModuleSchemaDescriptor = {
     const message = createBaseModuleSchemaDescriptor();
     message.schemaFile = object.schema_file?.map(e => ModuleSchemaDescriptor_FileEntry.fromAmino(e)) || [];
     if (object.prefix !== undefined && object.prefix !== null) {
-      message.prefix = fromBase64(object.prefix);
+      message.prefix = bytesFromBase64(object.prefix);
     }
     return message;
   },
@@ -255,7 +254,7 @@ export const ModuleSchemaDescriptor = {
     } else {
       obj.schema_file = [];
     }
-    message.prefix !== undefined && (obj.prefix = base64FromBytes(message.prefix));
+    obj.prefix = message.prefix ? base64FromBytes(message.prefix) : undefined;
     return obj;
   },
   fromProtoMsg(message: ModuleSchemaDescriptorProtoMsg, useInterfaces: boolean = true): ModuleSchemaDescriptor {

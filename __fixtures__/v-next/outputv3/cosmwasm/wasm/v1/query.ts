@@ -2,7 +2,7 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { ContractInfo, ContractInfoAmino, ContractInfoSDKType, ContractCodeHistoryEntry, ContractCodeHistoryEntryAmino, ContractCodeHistoryEntrySDKType, Model, ModelAmino, ModelSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { fromBase64, toUtf8, fromUtf8 } from "@cosmjs/encoding";
+import { toUtf8, fromUtf8 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /**
  * QueryContractInfoRequest is the request type for the Query/ContractInfo RPC
@@ -1404,14 +1404,14 @@ export const QueryRawContractStateRequest = {
       message.address = object.address;
     }
     if (object.query_data !== undefined && object.query_data !== null) {
-      message.queryData = fromBase64(object.query_data);
+      message.queryData = bytesFromBase64(object.query_data);
     }
     return message;
   },
   toAmino(message: QueryRawContractStateRequest, useInterfaces: boolean = true): QueryRawContractStateRequestAmino {
     const obj: any = {};
     obj.address = message.address;
-    message.queryData !== undefined && (obj.query_data = base64FromBytes(message.queryData));
+    obj.query_data = message.queryData ? base64FromBytes(message.queryData) : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryRawContractStateRequestProtoMsg, useInterfaces: boolean = true): QueryRawContractStateRequest {
@@ -1486,13 +1486,13 @@ export const QueryRawContractStateResponse = {
   fromAmino(object: QueryRawContractStateResponseAmino): QueryRawContractStateResponse {
     const message = createBaseQueryRawContractStateResponse();
     if (object.data !== undefined && object.data !== null) {
-      message.data = fromBase64(object.data);
+      message.data = bytesFromBase64(object.data);
     }
     return message;
   },
   toAmino(message: QueryRawContractStateResponse, useInterfaces: boolean = true): QueryRawContractStateResponseAmino {
     const obj: any = {};
-    message.data !== undefined && (obj.data = base64FromBytes(message.data));
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryRawContractStateResponseProtoMsg, useInterfaces: boolean = true): QueryRawContractStateResponse {
@@ -1860,7 +1860,7 @@ export const CodeInfoResponse = {
       message.creator = object.creator;
     }
     if (object.data_hash !== undefined && object.data_hash !== null) {
-      message.dataHash = fromBase64(object.data_hash);
+      message.dataHash = bytesFromBase64(object.data_hash);
     }
     return message;
   },
@@ -1868,7 +1868,7 @@ export const CodeInfoResponse = {
     const obj: any = {};
     obj.code_id = message.codeId ? message.codeId.toString() : undefined;
     obj.creator = message.creator;
-    message.dataHash !== undefined && (obj.data_hash = base64FromBytes(message.dataHash));
+    obj.data_hash = message.dataHash ? base64FromBytes(message.dataHash) : undefined;
     return obj;
   },
   fromProtoMsg(message: CodeInfoResponseProtoMsg, useInterfaces: boolean = true): CodeInfoResponse {
@@ -1960,14 +1960,14 @@ export const QueryCodeResponse = {
       message.codeInfo = CodeInfoResponse.fromAmino(object.code_info);
     }
     if (object.data !== undefined && object.data !== null) {
-      message.data = fromBase64(object.data);
+      message.data = bytesFromBase64(object.data);
     }
     return message;
   },
   toAmino(message: QueryCodeResponse, useInterfaces: boolean = true): QueryCodeResponseAmino {
     const obj: any = {};
     obj.code_info = message.codeInfo ? CodeInfoResponse.toAmino(message.codeInfo, useInterfaces) : undefined;
-    message.data !== undefined && (obj.data = base64FromBytes(message.data));
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryCodeResponseProtoMsg, useInterfaces: boolean = true): QueryCodeResponse {

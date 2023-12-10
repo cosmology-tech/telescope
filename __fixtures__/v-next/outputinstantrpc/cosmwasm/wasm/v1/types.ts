@@ -1,7 +1,7 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { fromBase64, toUtf8, fromUtf8 } from "@cosmjs/encoding";
+import { toUtf8, fromUtf8 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** AccessType permission types */
 export enum AccessType {
@@ -686,7 +686,7 @@ export const CodeInfo = {
   fromAmino(object: CodeInfoAmino): CodeInfo {
     const message = createBaseCodeInfo();
     if (object.code_hash !== undefined && object.code_hash !== null) {
-      message.codeHash = fromBase64(object.code_hash);
+      message.codeHash = bytesFromBase64(object.code_hash);
     }
     if (object.creator !== undefined && object.creator !== null) {
       message.creator = object.creator;
@@ -698,7 +698,7 @@ export const CodeInfo = {
   },
   toAmino(message: CodeInfo): CodeInfoAmino {
     const obj: any = {};
-    message.codeHash !== undefined && (obj.code_hash = base64FromBytes(message.codeHash));
+    obj.code_hash = message.codeHash ? base64FromBytes(message.codeHash) : undefined;
     obj.creator = message.creator;
     obj.instantiate_config = message.instantiateConfig ? AccessConfig.toAmino(message.instantiateConfig) : undefined;
     return obj;
@@ -1267,17 +1267,17 @@ export const Model = {
   fromAmino(object: ModelAmino): Model {
     const message = createBaseModel();
     if (object.key !== undefined && object.key !== null) {
-      message.key = fromBase64(object.key);
+      message.key = bytesFromBase64(object.key);
     }
     if (object.value !== undefined && object.value !== null) {
-      message.value = fromBase64(object.value);
+      message.value = bytesFromBase64(object.value);
     }
     return message;
   },
   toAmino(message: Model): ModelAmino {
     const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value));
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
+    obj.value = message.value ? base64FromBytes(message.value) : undefined;
     return obj;
   },
   fromAminoMsg(object: ModelAminoMsg): Model {

@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmos.base.kv.v1beta1";
 /** Pairs defines a repeated slice of Pair objects. */
 export interface Pairs {
@@ -199,17 +198,17 @@ export const Pair = {
   fromAmino(object: PairAmino): Pair {
     const message = createBasePair();
     if (object.key !== undefined && object.key !== null) {
-      message.key = fromBase64(object.key);
+      message.key = bytesFromBase64(object.key);
     }
     if (object.value !== undefined && object.value !== null) {
-      message.value = fromBase64(object.value);
+      message.value = bytesFromBase64(object.value);
     }
     return message;
   },
   toAmino(message: Pair, useInterfaces: boolean = true): PairAmino {
     const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value));
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
+    obj.value = message.value ? base64FromBytes(message.value) : undefined;
     return obj;
   },
   fromProtoMsg(message: PairProtoMsg, useInterfaces: boolean = true): Pair {

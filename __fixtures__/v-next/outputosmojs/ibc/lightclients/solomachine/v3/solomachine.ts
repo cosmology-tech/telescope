@@ -1,7 +1,6 @@
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "ibc.lightclients.solomachine.v3";
 /**
  * ClientState defines a solo machine client that tracks the current consensus
@@ -543,7 +542,7 @@ export const Header = {
       message.timestamp = BigInt(object.timestamp);
     }
     if (object.signature !== undefined && object.signature !== null) {
-      message.signature = fromBase64(object.signature);
+      message.signature = bytesFromBase64(object.signature);
     }
     if (object.new_public_key !== undefined && object.new_public_key !== null) {
       message.newPublicKey = Any.fromAmino(object.new_public_key);
@@ -556,7 +555,7 @@ export const Header = {
   toAmino(message: Header): HeaderAmino {
     const obj: any = {};
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
-    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature));
+    obj.signature = message.signature ? base64FromBytes(message.signature) : undefined;
     obj.new_public_key = message.newPublicKey ? Any.toAmino(message.newPublicKey) : undefined;
     obj.new_diversifier = message.newDiversifier;
     return obj;
@@ -813,13 +812,13 @@ export const SignatureAndData = {
   fromAmino(object: SignatureAndDataAmino): SignatureAndData {
     const message = createBaseSignatureAndData();
     if (object.signature !== undefined && object.signature !== null) {
-      message.signature = fromBase64(object.signature);
+      message.signature = bytesFromBase64(object.signature);
     }
     if (object.path !== undefined && object.path !== null) {
-      message.path = fromBase64(object.path);
+      message.path = bytesFromBase64(object.path);
     }
     if (object.data !== undefined && object.data !== null) {
-      message.data = fromBase64(object.data);
+      message.data = bytesFromBase64(object.data);
     }
     if (object.timestamp !== undefined && object.timestamp !== null) {
       message.timestamp = BigInt(object.timestamp);
@@ -828,9 +827,9 @@ export const SignatureAndData = {
   },
   toAmino(message: SignatureAndData): SignatureAndDataAmino {
     const obj: any = {};
-    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature));
-    message.path !== undefined && (obj.path = base64FromBytes(message.path));
-    message.data !== undefined && (obj.data = base64FromBytes(message.data));
+    obj.signature = message.signature ? base64FromBytes(message.signature) : undefined;
+    obj.path = message.path ? base64FromBytes(message.path) : undefined;
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
   },
@@ -932,7 +931,7 @@ export const TimestampedSignatureData = {
   fromAmino(object: TimestampedSignatureDataAmino): TimestampedSignatureData {
     const message = createBaseTimestampedSignatureData();
     if (object.signature_data !== undefined && object.signature_data !== null) {
-      message.signatureData = fromBase64(object.signature_data);
+      message.signatureData = bytesFromBase64(object.signature_data);
     }
     if (object.timestamp !== undefined && object.timestamp !== null) {
       message.timestamp = BigInt(object.timestamp);
@@ -941,7 +940,7 @@ export const TimestampedSignatureData = {
   },
   toAmino(message: TimestampedSignatureData): TimestampedSignatureDataAmino {
     const obj: any = {};
-    message.signatureData !== undefined && (obj.signature_data = base64FromBytes(message.signatureData));
+    obj.signature_data = message.signatureData ? base64FromBytes(message.signatureData) : undefined;
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
   },
@@ -1091,10 +1090,10 @@ export const SignBytes = {
       message.diversifier = object.diversifier;
     }
     if (object.path !== undefined && object.path !== null) {
-      message.path = fromBase64(object.path);
+      message.path = bytesFromBase64(object.path);
     }
     if (object.data !== undefined && object.data !== null) {
-      message.data = fromBase64(object.data);
+      message.data = bytesFromBase64(object.data);
     }
     return message;
   },
@@ -1103,8 +1102,8 @@ export const SignBytes = {
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     obj.diversifier = message.diversifier;
-    message.path !== undefined && (obj.path = base64FromBytes(message.path));
-    message.data !== undefined && (obj.data = base64FromBytes(message.data));
+    obj.path = message.path ? base64FromBytes(message.path) : undefined;
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
   fromAminoMsg(object: SignBytesAminoMsg): SignBytes {

@@ -3,8 +3,7 @@ import { Channel, ChannelAmino, ChannelSDKType, IdentifiedChannel, IdentifiedCha
 import { Height, HeightAmino, HeightSDKType, IdentifiedClientState, IdentifiedClientStateAmino, IdentifiedClientStateSDKType } from "../../client/v1/client";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, base64FromBytes } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
+import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.channel.v1";
 /** QueryChannelRequest is the request type for the Query/Channel RPC method */
 export interface QueryChannelRequest {
@@ -1170,7 +1169,7 @@ export const QueryChannelResponse = {
       message.channel = Channel.fromAmino(object.channel);
     }
     if (object.proof !== undefined && object.proof !== null) {
-      message.proof = fromBase64(object.proof);
+      message.proof = bytesFromBase64(object.proof);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -1180,7 +1179,7 @@ export const QueryChannelResponse = {
   toAmino(message: QueryChannelResponse): QueryChannelResponseAmino {
     const obj: any = {};
     obj.channel = message.channel ? Channel.toAmino(message.channel) : undefined;
-    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
+    obj.proof = message.proof ? base64FromBytes(message.proof) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -1700,7 +1699,7 @@ export const QueryChannelClientStateResponse = {
       message.identifiedClientState = IdentifiedClientState.fromAmino(object.identified_client_state);
     }
     if (object.proof !== undefined && object.proof !== null) {
-      message.proof = fromBase64(object.proof);
+      message.proof = bytesFromBase64(object.proof);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -1710,7 +1709,7 @@ export const QueryChannelClientStateResponse = {
   toAmino(message: QueryChannelClientStateResponse): QueryChannelClientStateResponseAmino {
     const obj: any = {};
     obj.identified_client_state = message.identifiedClientState ? IdentifiedClientState.toAmino(message.identifiedClientState) : undefined;
-    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
+    obj.proof = message.proof ? base64FromBytes(message.proof) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -1917,7 +1916,7 @@ export const QueryChannelConsensusStateResponse = {
       message.clientId = object.client_id;
     }
     if (object.proof !== undefined && object.proof !== null) {
-      message.proof = fromBase64(object.proof);
+      message.proof = bytesFromBase64(object.proof);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -1928,7 +1927,7 @@ export const QueryChannelConsensusStateResponse = {
     const obj: any = {};
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
     obj.client_id = message.clientId;
-    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
+    obj.proof = message.proof ? base64FromBytes(message.proof) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -2105,10 +2104,10 @@ export const QueryPacketCommitmentResponse = {
   fromAmino(object: QueryPacketCommitmentResponseAmino): QueryPacketCommitmentResponse {
     const message = createBaseQueryPacketCommitmentResponse();
     if (object.commitment !== undefined && object.commitment !== null) {
-      message.commitment = fromBase64(object.commitment);
+      message.commitment = bytesFromBase64(object.commitment);
     }
     if (object.proof !== undefined && object.proof !== null) {
-      message.proof = fromBase64(object.proof);
+      message.proof = bytesFromBase64(object.proof);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -2117,8 +2116,8 @@ export const QueryPacketCommitmentResponse = {
   },
   toAmino(message: QueryPacketCommitmentResponse): QueryPacketCommitmentResponseAmino {
     const obj: any = {};
-    message.commitment !== undefined && (obj.commitment = base64FromBytes(message.commitment));
-    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
+    obj.commitment = message.commitment ? base64FromBytes(message.commitment) : undefined;
+    obj.proof = message.proof ? base64FromBytes(message.proof) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -2492,7 +2491,7 @@ export const QueryPacketReceiptResponse = {
       message.received = object.received;
     }
     if (object.proof !== undefined && object.proof !== null) {
-      message.proof = fromBase64(object.proof);
+      message.proof = bytesFromBase64(object.proof);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -2502,7 +2501,7 @@ export const QueryPacketReceiptResponse = {
   toAmino(message: QueryPacketReceiptResponse): QueryPacketReceiptResponseAmino {
     const obj: any = {};
     obj.received = message.received;
-    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
+    obj.proof = message.proof ? base64FromBytes(message.proof) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -2679,10 +2678,10 @@ export const QueryPacketAcknowledgementResponse = {
   fromAmino(object: QueryPacketAcknowledgementResponseAmino): QueryPacketAcknowledgementResponse {
     const message = createBaseQueryPacketAcknowledgementResponse();
     if (object.acknowledgement !== undefined && object.acknowledgement !== null) {
-      message.acknowledgement = fromBase64(object.acknowledgement);
+      message.acknowledgement = bytesFromBase64(object.acknowledgement);
     }
     if (object.proof !== undefined && object.proof !== null) {
-      message.proof = fromBase64(object.proof);
+      message.proof = bytesFromBase64(object.proof);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -2691,8 +2690,8 @@ export const QueryPacketAcknowledgementResponse = {
   },
   toAmino(message: QueryPacketAcknowledgementResponse): QueryPacketAcknowledgementResponseAmino {
     const obj: any = {};
-    message.acknowledgement !== undefined && (obj.acknowledgement = base64FromBytes(message.acknowledgement));
-    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
+    obj.acknowledgement = message.acknowledgement ? base64FromBytes(message.acknowledgement) : undefined;
+    obj.proof = message.proof ? base64FromBytes(message.proof) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -3473,7 +3472,7 @@ export const QueryNextSequenceReceiveResponse = {
       message.nextSequenceReceive = BigInt(object.next_sequence_receive);
     }
     if (object.proof !== undefined && object.proof !== null) {
-      message.proof = fromBase64(object.proof);
+      message.proof = bytesFromBase64(object.proof);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -3483,7 +3482,7 @@ export const QueryNextSequenceReceiveResponse = {
   toAmino(message: QueryNextSequenceReceiveResponse): QueryNextSequenceReceiveResponseAmino {
     const obj: any = {};
     obj.next_sequence_receive = message.nextSequenceReceive ? message.nextSequenceReceive.toString() : undefined;
-    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
+    obj.proof = message.proof ? base64FromBytes(message.proof) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },

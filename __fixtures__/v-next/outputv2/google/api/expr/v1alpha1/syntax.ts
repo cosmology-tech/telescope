@@ -3,7 +3,6 @@ import { Duration, DurationAmino, DurationSDKType } from "../../../protobuf/dura
 import { Timestamp } from "../../../protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
@@ -2249,7 +2248,7 @@ export const Constant = {
       message.stringValue = object.string_value;
     }
     if (object.bytes_value !== undefined && object.bytes_value !== null) {
-      message.bytesValue = fromBase64(object.bytes_value);
+      message.bytesValue = bytesFromBase64(object.bytes_value);
     }
     if (object.duration_value !== undefined && object.duration_value !== null) {
       message.durationValue = Duration.fromAmino(object.duration_value);
@@ -2267,7 +2266,7 @@ export const Constant = {
     obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
     obj.double_value = message.doubleValue;
     obj.string_value = message.stringValue;
-    message.bytesValue !== undefined && (obj.bytes_value = base64FromBytes(message.bytesValue));
+    obj.bytes_value = message.bytesValue ? base64FromBytes(message.bytesValue) : undefined;
     obj.duration_value = message.durationValue ? Duration.toAmino(message.durationValue) : undefined;
     obj.timestamp_value = message.timestampValue ? Timestamp.toAmino(toTimestamp(message.timestampValue)) : undefined;
     return obj;

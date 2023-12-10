@@ -4,7 +4,6 @@ import { GroupSpec, GroupSpecSDKType, GroupID, GroupIDSDKType } from "./group";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, Exact, Rpc } from "../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -301,7 +300,7 @@ export const MsgCreateDeployment = {
     }
     message.groups = object.groups?.map(e => GroupSpec.fromAmino(e)) || [];
     if (object.version !== undefined && object.version !== null) {
-      message.version = fromBase64(object.version);
+      message.version = bytesFromBase64(object.version);
     }
     if (object.deposit !== undefined && object.deposit !== null) {
       message.deposit = Coin.fromAmino(object.deposit);
@@ -316,7 +315,7 @@ export const MsgCreateDeployment = {
     } else {
       obj.groups = [];
     }
-    message.version !== undefined && (obj.version = base64FromBytes(message.version));
+    obj.version = message.version ? base64FromBytes(message.version) : undefined;
     obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined;
     return obj;
   },
@@ -700,7 +699,7 @@ export const MsgUpdateDeployment = {
     }
     message.groups = object.groups?.map(e => GroupSpec.fromAmino(e)) || [];
     if (object.version !== undefined && object.version !== null) {
-      message.version = fromBase64(object.version);
+      message.version = bytesFromBase64(object.version);
     }
     return message;
   },
@@ -712,7 +711,7 @@ export const MsgUpdateDeployment = {
     } else {
       obj.groups = [];
     }
-    message.version !== undefined && (obj.version = base64FromBytes(message.version));
+    obj.version = message.version ? base64FromBytes(message.version) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgUpdateDeploymentAminoMsg): MsgUpdateDeployment {
@@ -1196,7 +1195,7 @@ export const Deployment = {
       message.state = deployment_StateFromJSON(object.state);
     }
     if (object.version !== undefined && object.version !== null) {
-      message.version = fromBase64(object.version);
+      message.version = bytesFromBase64(object.version);
     }
     if (object.created_at !== undefined && object.created_at !== null) {
       message.createdAt = BigInt(object.created_at);
@@ -1207,7 +1206,7 @@ export const Deployment = {
     const obj: any = {};
     obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined;
     obj.state = message.state;
-    message.version !== undefined && (obj.version = base64FromBytes(message.version));
+    obj.version = message.version ? base64FromBytes(message.version) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   },

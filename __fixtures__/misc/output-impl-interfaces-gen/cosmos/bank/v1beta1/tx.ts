@@ -1,7 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /**
@@ -242,7 +241,7 @@ export const MsgInstantiateContract2 = {
     }
     message.funds = object.funds?.map(e => Coin.fromAmino(e)) || [];
     if (object.salt !== undefined && object.salt !== null) {
-      message.salt = fromBase64(object.salt);
+      message.salt = bytesFromBase64(object.salt);
     }
     if (object.fix_msg !== undefined && object.fix_msg !== null) {
       message.fixMsg = object.fix_msg;
@@ -262,9 +261,9 @@ export const MsgInstantiateContract2 = {
     } else {
       obj.funds = [];
     }
-    message.salt !== undefined && (obj.salt = base64FromBytes(message.salt));
+    obj.salt = message.salt ? base64FromBytes(message.salt) : undefined;
     obj.fix_msg = message.fixMsg;
-    obj.dont_omitempty_fix_msg = message.dontOmitemptyFixMsg;
+    obj.dont_omitempty_fix_msg = message.dontOmitemptyFixMsg ?? false;
     if (message.aListOfBytes) {
       obj.a_list_of_bytes = message.aListOfBytes.map(e => base64FromBytes(e));
     } else {

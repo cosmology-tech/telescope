@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "akash.cert.v1beta2";
 /** State is an enum which refers to state of deployment */
 export enum Certificate_State {
@@ -346,18 +345,18 @@ export const Certificate = {
       message.state = certificate_StateFromJSON(object.state);
     }
     if (object.cert !== undefined && object.cert !== null) {
-      message.cert = fromBase64(object.cert);
+      message.cert = bytesFromBase64(object.cert);
     }
     if (object.pubkey !== undefined && object.pubkey !== null) {
-      message.pubkey = fromBase64(object.pubkey);
+      message.pubkey = bytesFromBase64(object.pubkey);
     }
     return message;
   },
   toAmino(message: Certificate, useInterfaces: boolean = true): CertificateAmino {
     const obj: any = {};
     obj.state = message.state;
-    message.cert !== undefined && (obj.cert = base64FromBytes(message.cert));
-    message.pubkey !== undefined && (obj.pubkey = base64FromBytes(message.pubkey));
+    obj.cert = message.cert ? base64FromBytes(message.cert) : undefined;
+    obj.pubkey = message.pubkey ? base64FromBytes(message.pubkey) : undefined;
     return obj;
   },
   fromProtoMsg(message: CertificateProtoMsg, useInterfaces: boolean = true): Certificate {
@@ -570,18 +569,18 @@ export const MsgCreateCertificate = {
       message.owner = object.owner;
     }
     if (object.cert !== undefined && object.cert !== null) {
-      message.cert = fromBase64(object.cert);
+      message.cert = bytesFromBase64(object.cert);
     }
     if (object.pubkey !== undefined && object.pubkey !== null) {
-      message.pubkey = fromBase64(object.pubkey);
+      message.pubkey = bytesFromBase64(object.pubkey);
     }
     return message;
   },
   toAmino(message: MsgCreateCertificate, useInterfaces: boolean = true): MsgCreateCertificateAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    message.cert !== undefined && (obj.cert = base64FromBytes(message.cert));
-    message.pubkey !== undefined && (obj.pubkey = base64FromBytes(message.pubkey));
+    obj.cert = message.cert ? base64FromBytes(message.cert) : undefined;
+    obj.pubkey = message.pubkey ? base64FromBytes(message.pubkey) : undefined;
     return obj;
   },
   fromProtoMsg(message: MsgCreateCertificateProtoMsg, useInterfaces: boolean = true): MsgCreateCertificate {

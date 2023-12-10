@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "ibc.applications.fee.v1";
 /** IncentivizedAcknowledgement is the acknowledgement format to be used by applications wrapped in the fee middleware */
 export interface IncentivizedAcknowledgement {
@@ -110,7 +109,7 @@ export const IncentivizedAcknowledgement = {
   fromAmino(object: IncentivizedAcknowledgementAmino): IncentivizedAcknowledgement {
     const message = createBaseIncentivizedAcknowledgement();
     if (object.app_acknowledgement !== undefined && object.app_acknowledgement !== null) {
-      message.appAcknowledgement = fromBase64(object.app_acknowledgement);
+      message.appAcknowledgement = bytesFromBase64(object.app_acknowledgement);
     }
     if (object.forward_relayer_address !== undefined && object.forward_relayer_address !== null) {
       message.forwardRelayerAddress = object.forward_relayer_address;
@@ -122,7 +121,7 @@ export const IncentivizedAcknowledgement = {
   },
   toAmino(message: IncentivizedAcknowledgement): IncentivizedAcknowledgementAmino {
     const obj: any = {};
-    message.appAcknowledgement !== undefined && (obj.app_acknowledgement = base64FromBytes(message.appAcknowledgement));
+    obj.app_acknowledgement = message.appAcknowledgement ? base64FromBytes(message.appAcknowledgement) : undefined;
     obj.forward_relayer_address = message.forwardRelayerAddress;
     obj.underlying_app_success = message.underlyingAppSuccess;
     return obj;

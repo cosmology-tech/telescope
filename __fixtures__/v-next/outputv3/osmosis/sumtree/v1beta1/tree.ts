@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "osmosis.store.v1beta1";
 export interface Node {
   children: Child[];
@@ -206,7 +205,7 @@ export const Child = {
   fromAmino(object: ChildAmino): Child {
     const message = createBaseChild();
     if (object.index !== undefined && object.index !== null) {
-      message.index = fromBase64(object.index);
+      message.index = bytesFromBase64(object.index);
     }
     if (object.accumulation !== undefined && object.accumulation !== null) {
       message.accumulation = object.accumulation;
@@ -215,7 +214,7 @@ export const Child = {
   },
   toAmino(message: Child, useInterfaces: boolean = true): ChildAmino {
     const obj: any = {};
-    message.index !== undefined && (obj.index = base64FromBytes(message.index));
+    obj.index = message.index ? base64FromBytes(message.index) : undefined;
     obj.accumulation = message.accumulation;
     return obj;
   },

@@ -427,7 +427,7 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
       message.mode = signModeFromJSON(object.mode);
     }
     if (object.sig !== undefined && object.sig !== null) {
-      message.sig = fromBase64(object.sig);
+      message.sig = bytesFromBase64(object.sig);
     }
     return message;
   },
@@ -436,7 +436,7 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
     obj.address = message.address;
     obj.sign_doc = message.signDoc ? SignDocDirectAux.toAmino(message.signDoc) : undefined;
     obj.mode = message.mode;
-    message.sig !== undefined && (obj.sig = base64FromBytes(message.sig));
+    obj.sig = message.sig ? base64FromBytes(message.sig) : undefined;
     return obj;
   },
   fromAminoMsg(object: AuxSignerDataAminoMsg): AuxSignerData {
@@ -905,14 +905,14 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
       message.address = object.address;
     }
     if (object.query_data !== undefined && object.query_data !== null) {
-      message.queryData = fromBase64(object.query_data);
+      message.queryData = bytesFromBase64(object.query_data);
     }
     return message;
   },
   toAmino(message: QueryRawContractStateRequest): QueryRawContractStateRequestAmino {
     const obj: any = {};
     obj.address = message.address;
-    message.queryData !== undefined && (obj.query_data = base64FromBytes(message.queryData));
+    obj.query_data = message.queryData ? base64FromBytes(message.queryData) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryRawContractStateRequestAminoMsg): QueryRawContractStateRequest {
@@ -2134,7 +2134,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
       message.stringValue = object.string_value;
     }
     if (object.bytes_value !== undefined && object.bytes_value !== null) {
-      message.bytesValue = fromBase64(object.bytes_value);
+      message.bytesValue = bytesFromBase64(object.bytes_value);
     }
     if (object.duration_value !== undefined && object.duration_value !== null) {
       message.durationValue = Duration.fromAmino(object.duration_value);
@@ -2152,7 +2152,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
     obj.double_value = message.doubleValue;
     obj.string_value = message.stringValue;
-    message.bytesValue !== undefined && (obj.bytes_value = base64FromBytes(message.bytesValue));
+    obj.bytes_value = message.bytesValue ? base64FromBytes(message.bytesValue) : undefined;
     obj.duration_value = message.durationValue ? Duration.toAmino(message.durationValue) : undefined;
     obj.timestamp_value = message.timestampValue ? Timestamp.toAmino(toTimestamp(message.timestampValue)) : undefined;
     return obj;

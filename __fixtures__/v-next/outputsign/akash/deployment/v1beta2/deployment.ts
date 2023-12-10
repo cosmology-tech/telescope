@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, Exact, base64FromBytes } from "../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
+import { DeepPartial, Exact, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -271,7 +270,7 @@ export const Deployment = {
       message.state = deployment_StateFromJSON(object.state);
     }
     if (object.version !== undefined && object.version !== null) {
-      message.version = fromBase64(object.version);
+      message.version = bytesFromBase64(object.version);
     }
     if (object.created_at !== undefined && object.created_at !== null) {
       message.createdAt = BigInt(object.created_at);
@@ -282,7 +281,7 @@ export const Deployment = {
     const obj: any = {};
     obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined;
     obj.state = message.state;
-    message.version !== undefined && (obj.version = base64FromBytes(message.version));
+    obj.version = message.version ? base64FromBytes(message.version) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   },

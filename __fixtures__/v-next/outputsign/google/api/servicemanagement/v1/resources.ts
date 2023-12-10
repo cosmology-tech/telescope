@@ -1,8 +1,7 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
 import { ConfigChange, ConfigChangeAmino, ConfigChangeSDKType } from "../../config_change";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, toTimestamp, fromTimestamp, base64FromBytes } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
+import { DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "google.api.servicemanagement.v1";
 /** Code describes the status of the operation (or one of its steps). */
 export enum OperationMetadata_Status {
@@ -1308,7 +1307,7 @@ export const ConfigFile = {
       message.filePath = object.file_path;
     }
     if (object.file_contents !== undefined && object.file_contents !== null) {
-      message.fileContents = fromBase64(object.file_contents);
+      message.fileContents = bytesFromBase64(object.file_contents);
     }
     if (object.file_type !== undefined && object.file_type !== null) {
       message.fileType = configFile_FileTypeFromJSON(object.file_type);
@@ -1318,7 +1317,7 @@ export const ConfigFile = {
   toAmino(message: ConfigFile): ConfigFileAmino {
     const obj: any = {};
     obj.file_path = message.filePath;
-    message.fileContents !== undefined && (obj.file_contents = base64FromBytes(message.fileContents));
+    obj.file_contents = message.fileContents ? base64FromBytes(message.fileContents) : undefined;
     obj.file_type = message.fileType;
     return obj;
   },

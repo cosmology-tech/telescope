@@ -2,7 +2,6 @@ import { Channel, ChannelAmino, ChannelSDKType, Packet, PacketAmino, PacketSDKTy
 import { Height, HeightAmino, HeightSDKType } from "../../client/v1/client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "ibc.core.channel.v1";
 /**
  * MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It
@@ -789,7 +788,7 @@ export const MsgChannelOpenTry = {
       message.counterpartyVersion = object.counterparty_version;
     }
     if (object.proof_init !== undefined && object.proof_init !== null) {
-      message.proofInit = fromBase64(object.proof_init);
+      message.proofInit = bytesFromBase64(object.proof_init);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -805,7 +804,7 @@ export const MsgChannelOpenTry = {
     obj.previous_channel_id = message.previousChannelId;
     obj.channel = message.channel ? Channel.toAmino(message.channel, useInterfaces) : undefined;
     obj.counterparty_version = message.counterpartyVersion;
-    message.proofInit !== undefined && (obj.proof_init = base64FromBytes(message.proofInit));
+    obj.proof_init = message.proofInit ? base64FromBytes(message.proofInit) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;
@@ -1031,7 +1030,7 @@ export const MsgChannelOpenAck = {
       message.counterpartyVersion = object.counterparty_version;
     }
     if (object.proof_try !== undefined && object.proof_try !== null) {
-      message.proofTry = fromBase64(object.proof_try);
+      message.proofTry = bytesFromBase64(object.proof_try);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -1047,7 +1046,7 @@ export const MsgChannelOpenAck = {
     obj.channel_id = message.channelId;
     obj.counterparty_channel_id = message.counterpartyChannelId;
     obj.counterparty_version = message.counterpartyVersion;
-    message.proofTry !== undefined && (obj.proof_try = base64FromBytes(message.proofTry));
+    obj.proof_try = message.proofTry ? base64FromBytes(message.proofTry) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;
@@ -1243,7 +1242,7 @@ export const MsgChannelOpenConfirm = {
       message.channelId = object.channel_id;
     }
     if (object.proof_ack !== undefined && object.proof_ack !== null) {
-      message.proofAck = fromBase64(object.proof_ack);
+      message.proofAck = bytesFromBase64(object.proof_ack);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -1257,7 +1256,7 @@ export const MsgChannelOpenConfirm = {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
-    message.proofAck !== undefined && (obj.proof_ack = base64FromBytes(message.proofAck));
+    obj.proof_ack = message.proofAck ? base64FromBytes(message.proofAck) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;
@@ -1629,7 +1628,7 @@ export const MsgChannelCloseConfirm = {
       message.channelId = object.channel_id;
     }
     if (object.proof_init !== undefined && object.proof_init !== null) {
-      message.proofInit = fromBase64(object.proof_init);
+      message.proofInit = bytesFromBase64(object.proof_init);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -1643,7 +1642,7 @@ export const MsgChannelCloseConfirm = {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
-    message.proofInit !== undefined && (obj.proof_init = base64FromBytes(message.proofInit));
+    obj.proof_init = message.proofInit ? base64FromBytes(message.proofInit) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;
@@ -1826,7 +1825,7 @@ export const MsgRecvPacket = {
       message.packet = Packet.fromAmino(object.packet);
     }
     if (object.proof_commitment !== undefined && object.proof_commitment !== null) {
-      message.proofCommitment = fromBase64(object.proof_commitment);
+      message.proofCommitment = bytesFromBase64(object.proof_commitment);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -1839,7 +1838,7 @@ export const MsgRecvPacket = {
   toAmino(message: MsgRecvPacket, useInterfaces: boolean = true): MsgRecvPacketAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet, useInterfaces) : undefined;
-    message.proofCommitment !== undefined && (obj.proof_commitment = base64FromBytes(message.proofCommitment));
+    obj.proof_commitment = message.proofCommitment ? base64FromBytes(message.proofCommitment) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;
@@ -2036,7 +2035,7 @@ export const MsgTimeout = {
       message.packet = Packet.fromAmino(object.packet);
     }
     if (object.proof_unreceived !== undefined && object.proof_unreceived !== null) {
-      message.proofUnreceived = fromBase64(object.proof_unreceived);
+      message.proofUnreceived = bytesFromBase64(object.proof_unreceived);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -2052,7 +2051,7 @@ export const MsgTimeout = {
   toAmino(message: MsgTimeout, useInterfaces: boolean = true): MsgTimeoutAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet, useInterfaces) : undefined;
-    message.proofUnreceived !== undefined && (obj.proof_unreceived = base64FromBytes(message.proofUnreceived));
+    obj.proof_unreceived = message.proofUnreceived ? base64FromBytes(message.proofUnreceived) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.next_sequence_recv = message.nextSequenceRecv ? message.nextSequenceRecv.toString() : undefined;
     obj.signer = message.signer;
@@ -2262,10 +2261,10 @@ export const MsgTimeoutOnClose = {
       message.packet = Packet.fromAmino(object.packet);
     }
     if (object.proof_unreceived !== undefined && object.proof_unreceived !== null) {
-      message.proofUnreceived = fromBase64(object.proof_unreceived);
+      message.proofUnreceived = bytesFromBase64(object.proof_unreceived);
     }
     if (object.proof_close !== undefined && object.proof_close !== null) {
-      message.proofClose = fromBase64(object.proof_close);
+      message.proofClose = bytesFromBase64(object.proof_close);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -2281,8 +2280,8 @@ export const MsgTimeoutOnClose = {
   toAmino(message: MsgTimeoutOnClose, useInterfaces: boolean = true): MsgTimeoutOnCloseAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet, useInterfaces) : undefined;
-    message.proofUnreceived !== undefined && (obj.proof_unreceived = base64FromBytes(message.proofUnreceived));
-    message.proofClose !== undefined && (obj.proof_close = base64FromBytes(message.proofClose));
+    obj.proof_unreceived = message.proofUnreceived ? base64FromBytes(message.proofUnreceived) : undefined;
+    obj.proof_close = message.proofClose ? base64FromBytes(message.proofClose) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.next_sequence_recv = message.nextSequenceRecv ? message.nextSequenceRecv.toString() : undefined;
     obj.signer = message.signer;
@@ -2478,10 +2477,10 @@ export const MsgAcknowledgement = {
       message.packet = Packet.fromAmino(object.packet);
     }
     if (object.acknowledgement !== undefined && object.acknowledgement !== null) {
-      message.acknowledgement = fromBase64(object.acknowledgement);
+      message.acknowledgement = bytesFromBase64(object.acknowledgement);
     }
     if (object.proof_acked !== undefined && object.proof_acked !== null) {
-      message.proofAcked = fromBase64(object.proof_acked);
+      message.proofAcked = bytesFromBase64(object.proof_acked);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -2494,8 +2493,8 @@ export const MsgAcknowledgement = {
   toAmino(message: MsgAcknowledgement, useInterfaces: boolean = true): MsgAcknowledgementAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet, useInterfaces) : undefined;
-    message.acknowledgement !== undefined && (obj.acknowledgement = base64FromBytes(message.acknowledgement));
-    message.proofAcked !== undefined && (obj.proof_acked = base64FromBytes(message.proofAcked));
+    obj.acknowledgement = message.acknowledgement ? base64FromBytes(message.acknowledgement) : undefined;
+    obj.proof_acked = message.proofAcked ? base64FromBytes(message.proofAcked) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;

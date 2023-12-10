@@ -1,7 +1,6 @@
 import { IdentifiedClientState, IdentifiedClientStateSDKType, ClientConsensusStates, ClientConsensusStatesSDKType, Params, ParamsSDKType } from "./client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "ibc.core.client.v1";
 /** GenesisState defines the ibc client submodule's genesis state. */
 export interface GenesisState {
@@ -361,17 +360,17 @@ export const GenesisMetadata = {
   fromAmino(object: GenesisMetadataAmino): GenesisMetadata {
     const message = createBaseGenesisMetadata();
     if (object.key !== undefined && object.key !== null) {
-      message.key = fromBase64(object.key);
+      message.key = bytesFromBase64(object.key);
     }
     if (object.value !== undefined && object.value !== null) {
-      message.value = fromBase64(object.value);
+      message.value = bytesFromBase64(object.value);
     }
     return message;
   },
   toAmino(message: GenesisMetadata): GenesisMetadataAmino {
     const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value));
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
+    obj.value = message.value ? base64FromBytes(message.value) : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisMetadataAminoMsg): GenesisMetadata {

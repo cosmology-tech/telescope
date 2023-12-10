@@ -755,14 +755,14 @@ export const MsgInstantiateContractResponse = {
       message.address = object.address;
     }
     if (object.data !== undefined && object.data !== null) {
-      message.data = fromBase64(object.data);
+      message.data = bytesFromBase64(object.data);
     }
     return message;
   },
   toAmino(message: MsgInstantiateContractResponse, useInterfaces: boolean = true): MsgInstantiateContractResponseAmino {
     const obj: any = {};
     obj.address = message.address;
-    message.data !== undefined && (obj.data = base64FromBytes(message.data));
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
   fromProtoMsg(message: MsgInstantiateContractResponseProtoMsg, useInterfaces: boolean = true): MsgInstantiateContractResponse {
@@ -976,13 +976,13 @@ export const MsgExecuteContractResponse = {
   fromAmino(object: MsgExecuteContractResponseAmino): MsgExecuteContractResponse {
     const message = createBaseMsgExecuteContractResponse();
     if (object.data !== undefined && object.data !== null) {
-      message.data = fromBase64(object.data);
+      message.data = bytesFromBase64(object.data);
     }
     return message;
   },
   toAmino(message: MsgExecuteContractResponse, useInterfaces: boolean = true): MsgExecuteContractResponseAmino {
     const obj: any = {};
-    message.data !== undefined && (obj.data = base64FromBytes(message.data));
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
   fromProtoMsg(message: MsgExecuteContractResponseProtoMsg, useInterfaces: boolean = true): MsgExecuteContractResponse {
@@ -1188,13 +1188,13 @@ export const MsgMigrateContractResponse = {
   fromAmino(object: MsgMigrateContractResponseAmino): MsgMigrateContractResponse {
     const message = createBaseMsgMigrateContractResponse();
     if (object.data !== undefined && object.data !== null) {
-      message.data = fromBase64(object.data);
+      message.data = bytesFromBase64(object.data);
     }
     return message;
   },
   toAmino(message: MsgMigrateContractResponse, useInterfaces: boolean = true): MsgMigrateContractResponseAmino {
     const obj: any = {};
-    message.data !== undefined && (obj.data = base64FromBytes(message.data));
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
   fromProtoMsg(message: MsgMigrateContractResponseProtoMsg, useInterfaces: boolean = true): MsgMigrateContractResponse {

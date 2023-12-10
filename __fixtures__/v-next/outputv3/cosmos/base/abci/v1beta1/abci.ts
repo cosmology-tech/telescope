@@ -2,7 +2,6 @@ import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/proto
 import { Event, EventAmino, EventSDKType } from "../../../../tendermint/abci/types";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmos.base.abci.v1beta1";
 /**
  * TxResponse defines a structure containing relevant tx data and metadata. The
@@ -1273,7 +1272,7 @@ export const Result = {
   fromAmino(object: ResultAmino): Result {
     const message = createBaseResult();
     if (object.data !== undefined && object.data !== null) {
-      message.data = fromBase64(object.data);
+      message.data = bytesFromBase64(object.data);
     }
     if (object.log !== undefined && object.log !== null) {
       message.log = object.log;
@@ -1284,7 +1283,7 @@ export const Result = {
   },
   toAmino(message: Result, useInterfaces: boolean = true): ResultAmino {
     const obj: any = {};
-    message.data !== undefined && (obj.data = base64FromBytes(message.data));
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     obj.log = message.log;
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toAmino(e, useInterfaces) : undefined);
@@ -1486,14 +1485,14 @@ export const MsgData = {
       message.msgType = object.msg_type;
     }
     if (object.data !== undefined && object.data !== null) {
-      message.data = fromBase64(object.data);
+      message.data = bytesFromBase64(object.data);
     }
     return message;
   },
   toAmino(message: MsgData, useInterfaces: boolean = true): MsgDataAmino {
     const obj: any = {};
     obj.msg_type = message.msgType;
-    message.data !== undefined && (obj.data = base64FromBytes(message.data));
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
   fromProtoMsg(message: MsgDataProtoMsg, useInterfaces: boolean = true): MsgData {

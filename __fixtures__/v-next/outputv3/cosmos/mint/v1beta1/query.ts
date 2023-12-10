@@ -1,7 +1,6 @@
 import { Params, ParamsAmino, ParamsSDKType } from "./mint";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmos.mint.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
@@ -382,13 +381,13 @@ export const QueryInflationResponse = {
   fromAmino(object: QueryInflationResponseAmino): QueryInflationResponse {
     const message = createBaseQueryInflationResponse();
     if (object.inflation !== undefined && object.inflation !== null) {
-      message.inflation = fromBase64(object.inflation);
+      message.inflation = bytesFromBase64(object.inflation);
     }
     return message;
   },
   toAmino(message: QueryInflationResponse, useInterfaces: boolean = true): QueryInflationResponseAmino {
     const obj: any = {};
-    message.inflation !== undefined && (obj.inflation = base64FromBytes(message.inflation));
+    obj.inflation = message.inflation ? base64FromBytes(message.inflation) : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryInflationResponseProtoMsg, useInterfaces: boolean = true): QueryInflationResponse {
@@ -526,13 +525,13 @@ export const QueryAnnualProvisionsResponse = {
   fromAmino(object: QueryAnnualProvisionsResponseAmino): QueryAnnualProvisionsResponse {
     const message = createBaseQueryAnnualProvisionsResponse();
     if (object.annual_provisions !== undefined && object.annual_provisions !== null) {
-      message.annualProvisions = fromBase64(object.annual_provisions);
+      message.annualProvisions = bytesFromBase64(object.annual_provisions);
     }
     return message;
   },
   toAmino(message: QueryAnnualProvisionsResponse, useInterfaces: boolean = true): QueryAnnualProvisionsResponseAmino {
     const obj: any = {};
-    message.annualProvisions !== undefined && (obj.annual_provisions = base64FromBytes(message.annualProvisions));
+    obj.annual_provisions = message.annualProvisions ? base64FromBytes(message.annualProvisions) : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryAnnualProvisionsResponseProtoMsg, useInterfaces: boolean = true): QueryAnnualProvisionsResponse {

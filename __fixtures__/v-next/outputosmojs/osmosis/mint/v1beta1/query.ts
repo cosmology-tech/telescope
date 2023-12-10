@@ -1,7 +1,6 @@
 import { Params, ParamsSDKType } from "./mint";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "osmosis.mint.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
@@ -360,13 +359,13 @@ export const QueryEpochProvisionsResponse = {
   fromAmino(object: QueryEpochProvisionsResponseAmino): QueryEpochProvisionsResponse {
     const message = createBaseQueryEpochProvisionsResponse();
     if (object.epoch_provisions !== undefined && object.epoch_provisions !== null) {
-      message.epochProvisions = fromBase64(object.epoch_provisions);
+      message.epochProvisions = bytesFromBase64(object.epoch_provisions);
     }
     return message;
   },
   toAmino(message: QueryEpochProvisionsResponse): QueryEpochProvisionsResponseAmino {
     const obj: any = {};
-    message.epochProvisions !== undefined && (obj.epoch_provisions = base64FromBytes(message.epochProvisions));
+    obj.epoch_provisions = message.epochProvisions ? base64FromBytes(message.epochProvisions) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryEpochProvisionsResponseAminoMsg): QueryEpochProvisionsResponse {

@@ -1,7 +1,6 @@
 import { Height, HeightSDKType } from "../../client/v1/client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "ibc.core.channel.v1";
 /**
  * State defines if a channel is in one of the following states:
@@ -971,7 +970,7 @@ export const Packet = {
       message.destinationChannel = object.destination_channel;
     }
     if (object.data !== undefined && object.data !== null) {
-      message.data = fromBase64(object.data);
+      message.data = bytesFromBase64(object.data);
     }
     if (object.timeout_height !== undefined && object.timeout_height !== null) {
       message.timeoutHeight = Height.fromAmino(object.timeout_height);
@@ -988,7 +987,7 @@ export const Packet = {
     obj.source_channel = message.sourceChannel;
     obj.destination_port = message.destinationPort;
     obj.destination_channel = message.destinationChannel;
-    message.data !== undefined && (obj.data = base64FromBytes(message.data));
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : {};
     obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
     return obj;
@@ -1128,7 +1127,7 @@ export const PacketState = {
       message.sequence = BigInt(object.sequence);
     }
     if (object.data !== undefined && object.data !== null) {
-      message.data = fromBase64(object.data);
+      message.data = bytesFromBase64(object.data);
     }
     return message;
   },
@@ -1137,7 +1136,7 @@ export const PacketState = {
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
-    message.data !== undefined && (obj.data = base64FromBytes(message.data));
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
   fromAminoMsg(object: PacketStateAminoMsg): PacketState {
@@ -1238,7 +1237,7 @@ export const Acknowledgement = {
   fromAmino(object: AcknowledgementAmino): Acknowledgement {
     const message = createBaseAcknowledgement();
     if (object.result !== undefined && object.result !== null) {
-      message.result = fromBase64(object.result);
+      message.result = bytesFromBase64(object.result);
     }
     if (object.error !== undefined && object.error !== null) {
       message.error = object.error;
@@ -1247,7 +1246,7 @@ export const Acknowledgement = {
   },
   toAmino(message: Acknowledgement): AcknowledgementAmino {
     const obj: any = {};
-    message.result !== undefined && (obj.result = base64FromBytes(message.result));
+    obj.result = message.result ? base64FromBytes(message.result) : undefined;
     obj.error = message.error;
     return obj;
   },

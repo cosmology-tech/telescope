@@ -1,8 +1,7 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, base64FromBytes } from "../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
+import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 /** QueryEvidenceRequest is the request type for the Query/Evidence RPC method. */
 export interface QueryEvidenceRequest {
@@ -153,13 +152,13 @@ export const QueryEvidenceRequest = {
   fromAmino(object: QueryEvidenceRequestAmino): QueryEvidenceRequest {
     const message = createBaseQueryEvidenceRequest();
     if (object.evidence_hash !== undefined && object.evidence_hash !== null) {
-      message.evidenceHash = fromBase64(object.evidence_hash);
+      message.evidenceHash = bytesFromBase64(object.evidence_hash);
     }
     return message;
   },
   toAmino(message: QueryEvidenceRequest): QueryEvidenceRequestAmino {
     const obj: any = {};
-    message.evidenceHash !== undefined && (obj.evidence_hash = base64FromBytes(message.evidenceHash));
+    obj.evidence_hash = message.evidenceHash ? base64FromBytes(message.evidenceHash) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryEvidenceRequestAminoMsg): QueryEvidenceRequest {

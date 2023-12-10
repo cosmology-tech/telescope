@@ -181,9 +181,21 @@ export const fromAmino = {
     }
     // bytes [WASMByteCode]
     // TODO use a better option for this in proto source
-    // seems the default way of handling bytes type should be as the same as with option:
     // field.options?.["(gogoproto.customname)"] === "WASMByteCode"
-    return fromAmino.wasmByteCode(args);
+    if (args.field.options?.["(gogoproto.customname)"] === "WASMByteCode") {
+      return fromAmino.wasmByteCode(args);
+    }
+
+    //default
+    args.context.addUtil("bytesFromBase64");
+
+    const { origName } = getFieldNames(args.field);
+
+    const expr = t.callExpression(t.identifier("bytesFromBase64"), [
+      t.memberExpression(t.identifier("object"), t.identifier(origName)),
+    ]);
+
+    return setNotUndefinedAndNotNull(args, expr);
   },
 
   duration(args: fromAminoMethod) {
@@ -478,11 +490,25 @@ export const arrayTypes = {
       ),
     ]);
   },
+  wasmByteCode(args: fromAminoMethod) {
+    args.context.addUtil("fromBase64");
+
+    const { origName } = getFieldNames(args.field);
+
+    return t.callExpression(t.identifier("fromBase64"), [t.identifier("e")]);
+  },
   bytes(args: fromAminoMethod) {
     if (args.field.options?.["(gogoproto.casttype)"] === "RawContractMessage") {
       return arrayTypes.rawBytes(args);
     }
 
+    // bytes [WASMByteCode]
+    // field.options?.["(gogoproto.customname)"] === "WASMByteCode"
+    if (args.field.options?.["(gogoproto.customname)"] === "WASMByteCode") {
+      return arrayTypes.wasmByteCode(args);
+    }
+
+    // default
     args.context.addUtil("bytesFromBase64");
     return t.callExpression(t.identifier("bytesFromBase64"), [
       t.identifier("e"),

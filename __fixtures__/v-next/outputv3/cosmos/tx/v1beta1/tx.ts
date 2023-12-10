@@ -4,7 +4,6 @@ import { CompactBitArray, CompactBitArrayAmino, CompactBitArraySDKType } from ".
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmos.tx.v1beta1";
 /** Tx is the standard type used for broadcasting transactions. */
 export interface Tx {
@@ -925,18 +924,18 @@ export const TxRaw = {
   fromAmino(object: TxRawAmino): TxRaw {
     const message = createBaseTxRaw();
     if (object.body_bytes !== undefined && object.body_bytes !== null) {
-      message.bodyBytes = fromBase64(object.body_bytes);
+      message.bodyBytes = bytesFromBase64(object.body_bytes);
     }
     if (object.auth_info_bytes !== undefined && object.auth_info_bytes !== null) {
-      message.authInfoBytes = fromBase64(object.auth_info_bytes);
+      message.authInfoBytes = bytesFromBase64(object.auth_info_bytes);
     }
     message.signatures = object.signatures?.map(e => bytesFromBase64(e)) || [];
     return message;
   },
   toAmino(message: TxRaw, useInterfaces: boolean = true): TxRawAmino {
     const obj: any = {};
-    message.bodyBytes !== undefined && (obj.body_bytes = base64FromBytes(message.bodyBytes));
-    message.authInfoBytes !== undefined && (obj.auth_info_bytes = base64FromBytes(message.authInfoBytes));
+    obj.body_bytes = message.bodyBytes ? base64FromBytes(message.bodyBytes) : undefined;
+    obj.auth_info_bytes = message.authInfoBytes ? base64FromBytes(message.authInfoBytes) : undefined;
     if (message.signatures) {
       obj.signatures = message.signatures.map(e => base64FromBytes(e));
     } else {
@@ -1054,10 +1053,10 @@ export const SignDoc = {
   fromAmino(object: SignDocAmino): SignDoc {
     const message = createBaseSignDoc();
     if (object.body_bytes !== undefined && object.body_bytes !== null) {
-      message.bodyBytes = fromBase64(object.body_bytes);
+      message.bodyBytes = bytesFromBase64(object.body_bytes);
     }
     if (object.auth_info_bytes !== undefined && object.auth_info_bytes !== null) {
-      message.authInfoBytes = fromBase64(object.auth_info_bytes);
+      message.authInfoBytes = bytesFromBase64(object.auth_info_bytes);
     }
     if (object.chain_id !== undefined && object.chain_id !== null) {
       message.chainId = object.chain_id;
@@ -1069,8 +1068,8 @@ export const SignDoc = {
   },
   toAmino(message: SignDoc, useInterfaces: boolean = true): SignDocAmino {
     const obj: any = {};
-    message.bodyBytes !== undefined && (obj.body_bytes = base64FromBytes(message.bodyBytes));
-    message.authInfoBytes !== undefined && (obj.auth_info_bytes = base64FromBytes(message.authInfoBytes));
+    obj.body_bytes = message.bodyBytes ? base64FromBytes(message.bodyBytes) : undefined;
+    obj.auth_info_bytes = message.authInfoBytes ? base64FromBytes(message.authInfoBytes) : undefined;
     obj.chain_id = message.chainId;
     obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
     return obj;
@@ -1215,7 +1214,7 @@ export const SignDocDirectAux = {
   fromAmino(object: SignDocDirectAuxAmino): SignDocDirectAux {
     const message = createBaseSignDocDirectAux();
     if (object.body_bytes !== undefined && object.body_bytes !== null) {
-      message.bodyBytes = fromBase64(object.body_bytes);
+      message.bodyBytes = bytesFromBase64(object.body_bytes);
     }
     if (object.public_key !== undefined && object.public_key !== null) {
       message.publicKey = Any.fromAmino(object.public_key);
@@ -1236,7 +1235,7 @@ export const SignDocDirectAux = {
   },
   toAmino(message: SignDocDirectAux, useInterfaces: boolean = true): SignDocDirectAuxAmino {
     const obj: any = {};
-    message.bodyBytes !== undefined && (obj.body_bytes = base64FromBytes(message.bodyBytes));
+    obj.body_bytes = message.bodyBytes ? base64FromBytes(message.bodyBytes) : undefined;
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey, useInterfaces) : undefined;
     obj.chain_id = message.chainId;
     obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
@@ -2325,7 +2324,7 @@ export const AuxSignerData = {
       message.mode = signModeFromJSON(object.mode);
     }
     if (object.sig !== undefined && object.sig !== null) {
-      message.sig = fromBase64(object.sig);
+      message.sig = bytesFromBase64(object.sig);
     }
     return message;
   },
@@ -2334,7 +2333,7 @@ export const AuxSignerData = {
     obj.address = message.address;
     obj.sign_doc = message.signDoc ? SignDocDirectAux.toAmino(message.signDoc, useInterfaces) : undefined;
     obj.mode = message.mode;
-    message.sig !== undefined && (obj.sig = base64FromBytes(message.sig));
+    obj.sig = message.sig ? base64FromBytes(message.sig) : undefined;
     return obj;
   },
   fromProtoMsg(message: AuxSignerDataProtoMsg, useInterfaces: boolean = true): AuxSignerData {

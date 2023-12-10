@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "google.protobuf";
 /**
  * Wrapper message for `double`.
@@ -958,13 +957,13 @@ export const BytesValue = {
   fromAmino(object: BytesValueAmino): BytesValue {
     const message = createBaseBytesValue();
     if (object.value !== undefined && object.value !== null) {
-      message.value = fromBase64(object.value);
+      message.value = bytesFromBase64(object.value);
     }
     return message;
   },
   toAmino(message: BytesValue): BytesValueAmino {
     const obj: any = {};
-    message.value !== undefined && (obj.value = base64FromBytes(message.value));
+    obj.value = message.value ? base64FromBytes(message.value) : undefined;
     return obj;
   },
   fromAminoMsg(object: BytesValueAminoMsg): BytesValue {

@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, base64FromBytes, bytesFromBase64 } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
+import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.snapshots.v1beta1";
 /** Snapshot contains Tendermint state sync snapshot info. */
 export interface Snapshot {
@@ -313,7 +312,7 @@ export const Snapshot = {
       message.chunks = object.chunks;
     }
     if (object.hash !== undefined && object.hash !== null) {
-      message.hash = fromBase64(object.hash);
+      message.hash = bytesFromBase64(object.hash);
     }
     if (object.metadata !== undefined && object.metadata !== null) {
       message.metadata = Metadata.fromAmino(object.metadata);
@@ -325,7 +324,7 @@ export const Snapshot = {
     obj.height = message.height ? message.height.toString() : undefined;
     obj.format = message.format;
     obj.chunks = message.chunks;
-    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash));
+    obj.hash = message.hash ? base64FromBytes(message.hash) : undefined;
     obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined;
     return obj;
   },
@@ -696,10 +695,10 @@ export const SnapshotIAVLItem = {
   fromAmino(object: SnapshotIAVLItemAmino): SnapshotIAVLItem {
     const message = createBaseSnapshotIAVLItem();
     if (object.key !== undefined && object.key !== null) {
-      message.key = fromBase64(object.key);
+      message.key = bytesFromBase64(object.key);
     }
     if (object.value !== undefined && object.value !== null) {
-      message.value = fromBase64(object.value);
+      message.value = bytesFromBase64(object.value);
     }
     if (object.version !== undefined && object.version !== null) {
       message.version = BigInt(object.version);
@@ -711,8 +710,8 @@ export const SnapshotIAVLItem = {
   },
   toAmino(message: SnapshotIAVLItem): SnapshotIAVLItemAmino {
     const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value));
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
+    obj.value = message.value ? base64FromBytes(message.value) : undefined;
     obj.version = message.version ? message.version.toString() : undefined;
     obj.height = message.height;
     return obj;
@@ -858,13 +857,13 @@ export const SnapshotExtensionPayload = {
   fromAmino(object: SnapshotExtensionPayloadAmino): SnapshotExtensionPayload {
     const message = createBaseSnapshotExtensionPayload();
     if (object.payload !== undefined && object.payload !== null) {
-      message.payload = fromBase64(object.payload);
+      message.payload = bytesFromBase64(object.payload);
     }
     return message;
   },
   toAmino(message: SnapshotExtensionPayload): SnapshotExtensionPayloadAmino {
     const obj: any = {};
-    message.payload !== undefined && (obj.payload = base64FromBytes(message.payload));
+    obj.payload = message.payload ? base64FromBytes(message.payload) : undefined;
     return obj;
   },
   fromAminoMsg(object: SnapshotExtensionPayloadAminoMsg): SnapshotExtensionPayload {
@@ -935,17 +934,17 @@ export const SnapshotKVItem = {
   fromAmino(object: SnapshotKVItemAmino): SnapshotKVItem {
     const message = createBaseSnapshotKVItem();
     if (object.key !== undefined && object.key !== null) {
-      message.key = fromBase64(object.key);
+      message.key = bytesFromBase64(object.key);
     }
     if (object.value !== undefined && object.value !== null) {
-      message.value = fromBase64(object.value);
+      message.value = bytesFromBase64(object.value);
     }
     return message;
   },
   toAmino(message: SnapshotKVItem): SnapshotKVItemAmino {
     const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value));
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
+    obj.value = message.value ? base64FromBytes(message.value) : undefined;
     return obj;
   },
   fromAminoMsg(object: SnapshotKVItemAminoMsg): SnapshotKVItem {

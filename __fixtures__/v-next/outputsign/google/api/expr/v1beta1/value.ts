@@ -1,8 +1,7 @@
 import { NullValue, NullValueSDKType, nullValueFromJSON } from "../../../protobuf/struct";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, base64FromBytes } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
+import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
 /**
  * Represents a CEL value.
@@ -400,7 +399,7 @@ export const Value = {
       message.stringValue = object.string_value;
     }
     if (object.bytes_value !== undefined && object.bytes_value !== null) {
-      message.bytesValue = fromBase64(object.bytes_value);
+      message.bytesValue = bytesFromBase64(object.bytes_value);
     }
     if (object.enum_value !== undefined && object.enum_value !== null) {
       message.enumValue = EnumValue.fromAmino(object.enum_value);
@@ -427,7 +426,7 @@ export const Value = {
     obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
     obj.double_value = message.doubleValue;
     obj.string_value = message.stringValue;
-    message.bytesValue !== undefined && (obj.bytes_value = base64FromBytes(message.bytesValue));
+    obj.bytes_value = message.bytesValue ? base64FromBytes(message.bytesValue) : undefined;
     obj.enum_value = message.enumValue ? EnumValue.toAmino(message.enumValue) : undefined;
     obj.object_value = message.objectValue ? Any.toAmino(message.objectValue) : undefined;
     obj.map_value = message.mapValue ? MapValue.toAmino(message.mapValue) : undefined;

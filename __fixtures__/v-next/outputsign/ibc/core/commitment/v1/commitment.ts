@@ -1,7 +1,6 @@
 import { CommitmentProof, CommitmentProofAmino, CommitmentProofSDKType } from "../../../../confio/proofs";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, base64FromBytes } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
+import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.commitment.v1";
 /**
  * MerkleRoot defines a merkle root hash.
@@ -172,13 +171,13 @@ export const MerkleRoot = {
   fromAmino(object: MerkleRootAmino): MerkleRoot {
     const message = createBaseMerkleRoot();
     if (object.hash !== undefined && object.hash !== null) {
-      message.hash = fromBase64(object.hash);
+      message.hash = bytesFromBase64(object.hash);
     }
     return message;
   },
   toAmino(message: MerkleRoot): MerkleRootAmino {
     const obj: any = {};
-    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash));
+    obj.hash = message.hash ? base64FromBytes(message.hash) : undefined;
     return obj;
   },
   fromAminoMsg(object: MerkleRootAminoMsg): MerkleRoot {
@@ -241,13 +240,13 @@ export const MerklePrefix = {
   fromAmino(object: MerklePrefixAmino): MerklePrefix {
     const message = createBaseMerklePrefix();
     if (object.key_prefix !== undefined && object.key_prefix !== null) {
-      message.keyPrefix = fromBase64(object.key_prefix);
+      message.keyPrefix = bytesFromBase64(object.key_prefix);
     }
     return message;
   },
   toAmino(message: MerklePrefix): MerklePrefixAmino {
     const obj: any = {};
-    message.keyPrefix !== undefined && (obj.key_prefix = base64FromBytes(message.keyPrefix));
+    obj.key_prefix = message.keyPrefix ? base64FromBytes(message.keyPrefix) : undefined;
     return obj;
   },
   fromAminoMsg(object: MerklePrefixAminoMsg): MerklePrefix {

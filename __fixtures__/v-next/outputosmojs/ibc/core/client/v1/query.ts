@@ -3,7 +3,6 @@ import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Height, HeightSDKType, IdentifiedClientState, IdentifiedClientStateSDKType, ConsensusStateWithHeight, ConsensusStateWithHeightSDKType, Params, ParamsSDKType } from "./client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "ibc.core.client.v1";
 /**
  * QueryClientStateRequest is the request type for the Query/ClientState RPC
@@ -516,7 +515,7 @@ export const QueryClientStateResponse = {
       message.clientState = Any.fromAmino(object.client_state);
     }
     if (object.proof !== undefined && object.proof !== null) {
-      message.proof = fromBase64(object.proof);
+      message.proof = bytesFromBase64(object.proof);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -526,7 +525,7 @@ export const QueryClientStateResponse = {
   toAmino(message: QueryClientStateResponse): QueryClientStateResponseAmino {
     const obj: any = {};
     obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
-    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
+    obj.proof = message.proof ? base64FromBytes(message.proof) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -1004,7 +1003,7 @@ export const QueryConsensusStateResponse = {
       message.consensusState = Any.fromAmino(object.consensus_state);
     }
     if (object.proof !== undefined && object.proof !== null) {
-      message.proof = fromBase64(object.proof);
+      message.proof = bytesFromBase64(object.proof);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -1014,7 +1013,7 @@ export const QueryConsensusStateResponse = {
   toAmino(message: QueryConsensusStateResponse): QueryConsensusStateResponseAmino {
     const obj: any = {};
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
-    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
+    obj.proof = message.proof ? base64FromBytes(message.proof) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },

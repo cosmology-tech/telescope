@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "ics23";
 export enum HashOp {
   /** NO_HASH - NO_HASH is the default if no data passed. Note this is an illegal argument some places. */
@@ -807,10 +806,10 @@ export const ExistenceProof = {
   fromAmino(object: ExistenceProofAmino): ExistenceProof {
     const message = createBaseExistenceProof();
     if (object.key !== undefined && object.key !== null) {
-      message.key = fromBase64(object.key);
+      message.key = bytesFromBase64(object.key);
     }
     if (object.value !== undefined && object.value !== null) {
-      message.value = fromBase64(object.value);
+      message.value = bytesFromBase64(object.value);
     }
     if (object.leaf !== undefined && object.leaf !== null) {
       message.leaf = LeafOp.fromAmino(object.leaf);
@@ -820,8 +819,8 @@ export const ExistenceProof = {
   },
   toAmino(message: ExistenceProof, useInterfaces: boolean = true): ExistenceProofAmino {
     const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value));
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
+    obj.value = message.value ? base64FromBytes(message.value) : undefined;
     obj.leaf = message.leaf ? LeafOp.toAmino(message.leaf, useInterfaces) : undefined;
     if (message.path) {
       obj.path = message.path.map(e => e ? InnerOp.toAmino(e, useInterfaces) : undefined);
@@ -929,7 +928,7 @@ export const NonExistenceProof = {
   fromAmino(object: NonExistenceProofAmino): NonExistenceProof {
     const message = createBaseNonExistenceProof();
     if (object.key !== undefined && object.key !== null) {
-      message.key = fromBase64(object.key);
+      message.key = bytesFromBase64(object.key);
     }
     if (object.left !== undefined && object.left !== null) {
       message.left = ExistenceProof.fromAmino(object.left);
@@ -941,7 +940,7 @@ export const NonExistenceProof = {
   },
   toAmino(message: NonExistenceProof, useInterfaces: boolean = true): NonExistenceProofAmino {
     const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
     obj.left = message.left ? ExistenceProof.toAmino(message.left, useInterfaces) : undefined;
     obj.right = message.right ? ExistenceProof.toAmino(message.right, useInterfaces) : undefined;
     return obj;
@@ -1213,7 +1212,7 @@ export const LeafOp = {
       message.length = lengthOpFromJSON(object.length);
     }
     if (object.prefix !== undefined && object.prefix !== null) {
-      message.prefix = fromBase64(object.prefix);
+      message.prefix = bytesFromBase64(object.prefix);
     }
     return message;
   },
@@ -1223,7 +1222,7 @@ export const LeafOp = {
     obj.prehash_key = message.prehashKey;
     obj.prehash_value = message.prehashValue;
     obj.length = message.length;
-    message.prefix !== undefined && (obj.prefix = base64FromBytes(message.prefix));
+    obj.prefix = message.prefix ? base64FromBytes(message.prefix) : undefined;
     return obj;
   },
   fromProtoMsg(message: LeafOpProtoMsg, useInterfaces: boolean = true): LeafOp {
@@ -1324,18 +1323,18 @@ export const InnerOp = {
       message.hash = hashOpFromJSON(object.hash);
     }
     if (object.prefix !== undefined && object.prefix !== null) {
-      message.prefix = fromBase64(object.prefix);
+      message.prefix = bytesFromBase64(object.prefix);
     }
     if (object.suffix !== undefined && object.suffix !== null) {
-      message.suffix = fromBase64(object.suffix);
+      message.suffix = bytesFromBase64(object.suffix);
     }
     return message;
   },
   toAmino(message: InnerOp, useInterfaces: boolean = true): InnerOpAmino {
     const obj: any = {};
     obj.hash = message.hash;
-    message.prefix !== undefined && (obj.prefix = base64FromBytes(message.prefix));
-    message.suffix !== undefined && (obj.suffix = base64FromBytes(message.suffix));
+    obj.prefix = message.prefix ? base64FromBytes(message.prefix) : undefined;
+    obj.suffix = message.suffix ? base64FromBytes(message.suffix) : undefined;
     return obj;
   },
   fromProtoMsg(message: InnerOpProtoMsg, useInterfaces: boolean = true): InnerOp {
@@ -1628,7 +1627,7 @@ export const InnerSpec = {
       message.maxPrefixLength = object.max_prefix_length;
     }
     if (object.empty_child !== undefined && object.empty_child !== null) {
-      message.emptyChild = fromBase64(object.empty_child);
+      message.emptyChild = bytesFromBase64(object.empty_child);
     }
     if (object.hash !== undefined && object.hash !== null) {
       message.hash = hashOpFromJSON(object.hash);
@@ -1645,7 +1644,7 @@ export const InnerSpec = {
     obj.child_size = message.childSize;
     obj.min_prefix_length = message.minPrefixLength;
     obj.max_prefix_length = message.maxPrefixLength;
-    message.emptyChild !== undefined && (obj.empty_child = base64FromBytes(message.emptyChild));
+    obj.empty_child = message.emptyChild ? base64FromBytes(message.emptyChild) : undefined;
     obj.hash = message.hash;
     return obj;
   },
@@ -2181,10 +2180,10 @@ export const CompressedExistenceProof = {
   fromAmino(object: CompressedExistenceProofAmino): CompressedExistenceProof {
     const message = createBaseCompressedExistenceProof();
     if (object.key !== undefined && object.key !== null) {
-      message.key = fromBase64(object.key);
+      message.key = bytesFromBase64(object.key);
     }
     if (object.value !== undefined && object.value !== null) {
-      message.value = fromBase64(object.value);
+      message.value = bytesFromBase64(object.value);
     }
     if (object.leaf !== undefined && object.leaf !== null) {
       message.leaf = LeafOp.fromAmino(object.leaf);
@@ -2194,8 +2193,8 @@ export const CompressedExistenceProof = {
   },
   toAmino(message: CompressedExistenceProof, useInterfaces: boolean = true): CompressedExistenceProofAmino {
     const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value));
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
+    obj.value = message.value ? base64FromBytes(message.value) : undefined;
     obj.leaf = message.leaf ? LeafOp.toAmino(message.leaf, useInterfaces) : undefined;
     if (message.path) {
       obj.path = message.path.map(e => e);
@@ -2303,7 +2302,7 @@ export const CompressedNonExistenceProof = {
   fromAmino(object: CompressedNonExistenceProofAmino): CompressedNonExistenceProof {
     const message = createBaseCompressedNonExistenceProof();
     if (object.key !== undefined && object.key !== null) {
-      message.key = fromBase64(object.key);
+      message.key = bytesFromBase64(object.key);
     }
     if (object.left !== undefined && object.left !== null) {
       message.left = CompressedExistenceProof.fromAmino(object.left);
@@ -2315,7 +2314,7 @@ export const CompressedNonExistenceProof = {
   },
   toAmino(message: CompressedNonExistenceProof, useInterfaces: boolean = true): CompressedNonExistenceProofAmino {
     const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
     obj.left = message.left ? CompressedExistenceProof.toAmino(message.left, useInterfaces) : undefined;
     obj.right = message.right ? CompressedExistenceProof.toAmino(message.right, useInterfaces) : undefined;
     return obj;

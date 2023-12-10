@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, base64FromBytes } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
+import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.query.v1beta1";
 /**
  * PageRequest is to be embedded in gRPC request messages for efficient
@@ -247,7 +246,7 @@ export const PageRequest = {
   fromAmino(object: PageRequestAmino): PageRequest {
     const message = createBasePageRequest();
     if (object.key !== undefined && object.key !== null) {
-      message.key = fromBase64(object.key);
+      message.key = bytesFromBase64(object.key);
     }
     if (object.offset !== undefined && object.offset !== null) {
       message.offset = BigInt(object.offset);
@@ -265,7 +264,7 @@ export const PageRequest = {
   },
   toAmino(message: PageRequest): PageRequestAmino {
     const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
     obj.offset = message.offset ? message.offset.toString() : undefined;
     obj.limit = message.limit ? message.limit.toString() : undefined;
     obj.count_total = message.countTotal;
@@ -342,7 +341,7 @@ export const PageResponse = {
   fromAmino(object: PageResponseAmino): PageResponse {
     const message = createBasePageResponse();
     if (object.next_key !== undefined && object.next_key !== null) {
-      message.nextKey = fromBase64(object.next_key);
+      message.nextKey = bytesFromBase64(object.next_key);
     }
     if (object.total !== undefined && object.total !== null) {
       message.total = BigInt(object.total);
@@ -351,7 +350,7 @@ export const PageResponse = {
   },
   toAmino(message: PageResponse): PageResponseAmino {
     const obj: any = {};
-    message.nextKey !== undefined && (obj.next_key = base64FromBytes(message.nextKey));
+    obj.next_key = message.nextKey ? base64FromBytes(message.nextKey) : undefined;
     obj.total = message.total ? message.total.toString() : undefined;
     return obj;
   },

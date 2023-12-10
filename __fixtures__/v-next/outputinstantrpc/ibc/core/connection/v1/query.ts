@@ -4,7 +4,6 @@ import { Height, HeightSDKType, IdentifiedClientState, IdentifiedClientStateSDKT
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "ibc.core.connection.v1";
 /**
  * QueryConnectionRequest is the request type for the Query/Connection RPC
@@ -424,7 +423,7 @@ export const QueryConnectionResponse = {
       message.connection = ConnectionEnd.fromAmino(object.connection);
     }
     if (object.proof !== undefined && object.proof !== null) {
-      message.proof = fromBase64(object.proof);
+      message.proof = bytesFromBase64(object.proof);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -434,7 +433,7 @@ export const QueryConnectionResponse = {
   toAmino(message: QueryConnectionResponse): QueryConnectionResponseAmino {
     const obj: any = {};
     obj.connection = message.connection ? ConnectionEnd.toAmino(message.connection) : undefined;
-    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
+    obj.proof = message.proof ? base64FromBytes(message.proof) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -892,7 +891,7 @@ export const QueryClientConnectionsResponse = {
     const message = createBaseQueryClientConnectionsResponse();
     message.connectionPaths = object.connection_paths?.map(e => e) || [];
     if (object.proof !== undefined && object.proof !== null) {
-      message.proof = fromBase64(object.proof);
+      message.proof = bytesFromBase64(object.proof);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -906,7 +905,7 @@ export const QueryClientConnectionsResponse = {
     } else {
       obj.connection_paths = [];
     }
-    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
+    obj.proof = message.proof ? base64FromBytes(message.proof) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -1122,7 +1121,7 @@ export const QueryConnectionClientStateResponse = {
       message.identifiedClientState = IdentifiedClientState.fromAmino(object.identified_client_state);
     }
     if (object.proof !== undefined && object.proof !== null) {
-      message.proof = fromBase64(object.proof);
+      message.proof = bytesFromBase64(object.proof);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -1132,7 +1131,7 @@ export const QueryConnectionClientStateResponse = {
   toAmino(message: QueryConnectionClientStateResponse): QueryConnectionClientStateResponseAmino {
     const obj: any = {};
     obj.identified_client_state = message.identifiedClientState ? IdentifiedClientState.toAmino(message.identifiedClientState) : undefined;
-    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
+    obj.proof = message.proof ? base64FromBytes(message.proof) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -1402,7 +1401,7 @@ export const QueryConnectionConsensusStateResponse = {
       message.clientId = object.client_id;
     }
     if (object.proof !== undefined && object.proof !== null) {
-      message.proof = fromBase64(object.proof);
+      message.proof = bytesFromBase64(object.proof);
     }
     if (object.proof_height !== undefined && object.proof_height !== null) {
       message.proofHeight = Height.fromAmino(object.proof_height);
@@ -1413,7 +1412,7 @@ export const QueryConnectionConsensusStateResponse = {
     const obj: any = {};
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
     obj.client_id = message.clientId;
-    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
+    obj.proof = message.proof ? base64FromBytes(message.proof) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },

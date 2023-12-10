@@ -1,7 +1,6 @@
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "ibc.core.client.v1";
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClient {
@@ -701,10 +700,10 @@ export const MsgUpgradeClient = {
       message.consensusState = Any.fromAmino(object.consensus_state);
     }
     if (object.proof_upgrade_client !== undefined && object.proof_upgrade_client !== null) {
-      message.proofUpgradeClient = fromBase64(object.proof_upgrade_client);
+      message.proofUpgradeClient = bytesFromBase64(object.proof_upgrade_client);
     }
     if (object.proof_upgrade_consensus_state !== undefined && object.proof_upgrade_consensus_state !== null) {
-      message.proofUpgradeConsensusState = fromBase64(object.proof_upgrade_consensus_state);
+      message.proofUpgradeConsensusState = bytesFromBase64(object.proof_upgrade_consensus_state);
     }
     if (object.signer !== undefined && object.signer !== null) {
       message.signer = object.signer;
@@ -716,8 +715,8 @@ export const MsgUpgradeClient = {
     obj.client_id = message.clientId;
     obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
-    message.proofUpgradeClient !== undefined && (obj.proof_upgrade_client = base64FromBytes(message.proofUpgradeClient));
-    message.proofUpgradeConsensusState !== undefined && (obj.proof_upgrade_consensus_state = base64FromBytes(message.proofUpgradeConsensusState));
+    obj.proof_upgrade_client = message.proofUpgradeClient ? base64FromBytes(message.proofUpgradeClient) : undefined;
+    obj.proof_upgrade_consensus_state = message.proofUpgradeConsensusState ? base64FromBytes(message.proofUpgradeConsensusState) : undefined;
     obj.signer = message.signer;
     return obj;
   },

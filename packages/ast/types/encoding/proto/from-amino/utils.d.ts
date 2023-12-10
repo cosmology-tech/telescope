@@ -39,6 +39,7 @@ export declare const arrayTypes: {
     string(): t.Identifier;
     bool(): t.Identifier;
     rawBytes(args: fromAminoMethod): t.CallExpression;
+    wasmByteCode(args: fromAminoMethod): t.CallExpression;
     bytes(args: fromAminoMethod): t.CallExpression;
     double(): t.Identifier;
     float(): t.Identifier;

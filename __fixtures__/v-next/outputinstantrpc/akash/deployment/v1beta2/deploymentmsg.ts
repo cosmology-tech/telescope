@@ -3,7 +3,6 @@ import { GroupSpec, GroupSpecSDKType } from "./groupspec";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Exact } from "../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeployment {
@@ -232,7 +231,7 @@ export const MsgCreateDeployment = {
     }
     message.groups = object.groups?.map(e => GroupSpec.fromAmino(e)) || [];
     if (object.version !== undefined && object.version !== null) {
-      message.version = fromBase64(object.version);
+      message.version = bytesFromBase64(object.version);
     }
     if (object.deposit !== undefined && object.deposit !== null) {
       message.deposit = Coin.fromAmino(object.deposit);
@@ -250,7 +249,7 @@ export const MsgCreateDeployment = {
     } else {
       obj.groups = [];
     }
-    message.version !== undefined && (obj.version = base64FromBytes(message.version));
+    obj.version = message.version ? base64FromBytes(message.version) : undefined;
     obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined;
     obj.depositor = message.depositor;
     return obj;
@@ -638,14 +637,14 @@ export const MsgUpdateDeployment = {
       message.id = DeploymentID.fromAmino(object.id);
     }
     if (object.version !== undefined && object.version !== null) {
-      message.version = fromBase64(object.version);
+      message.version = bytesFromBase64(object.version);
     }
     return message;
   },
   toAmino(message: MsgUpdateDeployment): MsgUpdateDeploymentAmino {
     const obj: any = {};
     obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
-    message.version !== undefined && (obj.version = base64FromBytes(message.version));
+    obj.version = message.version ? base64FromBytes(message.version) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgUpdateDeploymentAminoMsg): MsgUpdateDeployment {

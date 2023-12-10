@@ -2,7 +2,6 @@ import { MsgStoreCode, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantia
 import { Params, ParamsSDKType, CodeInfo, CodeInfoSDKType, ContractInfo, ContractInfoSDKType, Model, ModelSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisState {
@@ -545,7 +544,7 @@ export const Code = {
       message.codeInfo = CodeInfo.fromAmino(object.code_info);
     }
     if (object.code_bytes !== undefined && object.code_bytes !== null) {
-      message.codeBytes = fromBase64(object.code_bytes);
+      message.codeBytes = bytesFromBase64(object.code_bytes);
     }
     if (object.pinned !== undefined && object.pinned !== null) {
       message.pinned = object.pinned;
@@ -556,7 +555,7 @@ export const Code = {
     const obj: any = {};
     obj.code_id = message.codeId ? message.codeId.toString() : undefined;
     obj.code_info = message.codeInfo ? CodeInfo.toAmino(message.codeInfo) : undefined;
-    message.codeBytes !== undefined && (obj.code_bytes = base64FromBytes(message.codeBytes));
+    obj.code_bytes = message.codeBytes ? base64FromBytes(message.codeBytes) : undefined;
     obj.pinned = message.pinned;
     return obj;
   },
@@ -800,7 +799,7 @@ export const Sequence = {
   fromAmino(object: SequenceAmino): Sequence {
     const message = createBaseSequence();
     if (object.id_key !== undefined && object.id_key !== null) {
-      message.idKey = fromBase64(object.id_key);
+      message.idKey = bytesFromBase64(object.id_key);
     }
     if (object.value !== undefined && object.value !== null) {
       message.value = BigInt(object.value);
@@ -809,7 +808,7 @@ export const Sequence = {
   },
   toAmino(message: Sequence): SequenceAmino {
     const obj: any = {};
-    message.idKey !== undefined && (obj.id_key = base64FromBytes(message.idKey));
+    obj.id_key = message.idKey ? base64FromBytes(message.idKey) : undefined;
     obj.value = message.value ? message.value.toString() : undefined;
     return obj;
   },

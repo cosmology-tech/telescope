@@ -1,7 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../helpers";
 import { GlobalDecoderRegistry } from "../../registry";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "google.protobuf";
 export enum FieldDescriptorProto_Type {
   /**
@@ -6171,7 +6170,7 @@ export const UninterpretedOption = {
       message.doubleValue = object.double_value;
     }
     if (object.string_value !== undefined && object.string_value !== null) {
-      message.stringValue = fromBase64(object.string_value);
+      message.stringValue = bytesFromBase64(object.string_value);
     }
     if (object.aggregate_value !== undefined && object.aggregate_value !== null) {
       message.aggregateValue = object.aggregate_value;
@@ -6189,7 +6188,7 @@ export const UninterpretedOption = {
     obj.positive_int_value = message.positiveIntValue ? message.positiveIntValue.toString() : undefined;
     obj.negative_int_value = message.negativeIntValue ? message.negativeIntValue.toString() : undefined;
     obj.double_value = message.doubleValue;
-    message.stringValue !== undefined && (obj.string_value = base64FromBytes(message.stringValue));
+    obj.string_value = message.stringValue ? base64FromBytes(message.stringValue) : undefined;
     obj.aggregate_value = message.aggregateValue;
     return obj;
   },

@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Exact } from "../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "akash.base.v1beta2";
 /** Unit stores cpu, memory and storage metrics */
 export interface ResourceValue {
@@ -77,13 +76,13 @@ export const ResourceValue = {
   fromAmino(object: ResourceValueAmino): ResourceValue {
     const message = createBaseResourceValue();
     if (object.val !== undefined && object.val !== null) {
-      message.val = fromBase64(object.val);
+      message.val = bytesFromBase64(object.val);
     }
     return message;
   },
   toAmino(message: ResourceValue): ResourceValueAmino {
     const obj: any = {};
-    message.val !== undefined && (obj.val = base64FromBytes(message.val));
+    obj.val = message.val ? base64FromBytes(message.val) : undefined;
     return obj;
   },
   fromAminoMsg(object: ResourceValueAminoMsg): ResourceValue {

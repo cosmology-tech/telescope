@@ -1,7 +1,6 @@
 import { Any, AnySDKType } from "../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "google.api";
 /**
  * Message that represents an arbitrary HTTP body. It should only be used for
@@ -213,7 +212,7 @@ export const HttpBody = {
       message.contentType = object.content_type;
     }
     if (object.data !== undefined && object.data !== null) {
-      message.data = fromBase64(object.data);
+      message.data = bytesFromBase64(object.data);
     }
     message.extensions = object.extensions?.map(e => Any.fromAmino(e)) || [];
     return message;
@@ -221,7 +220,7 @@ export const HttpBody = {
   toAmino(message: HttpBody): HttpBodyAmino {
     const obj: any = {};
     obj.content_type = message.contentType;
-    message.data !== undefined && (obj.data = base64FromBytes(message.data));
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     if (message.extensions) {
       obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
     } else {

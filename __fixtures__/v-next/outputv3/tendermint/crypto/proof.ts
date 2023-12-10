@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "tendermint.crypto";
 export interface Proof {
   total: bigint;
@@ -225,7 +224,7 @@ export const Proof = {
       message.index = BigInt(object.index);
     }
     if (object.leaf_hash !== undefined && object.leaf_hash !== null) {
-      message.leafHash = fromBase64(object.leaf_hash);
+      message.leafHash = bytesFromBase64(object.leaf_hash);
     }
     message.aunts = object.aunts?.map(e => bytesFromBase64(e)) || [];
     return message;
@@ -234,7 +233,7 @@ export const Proof = {
     const obj: any = {};
     obj.total = message.total ? message.total.toString() : undefined;
     obj.index = message.index ? message.index.toString() : undefined;
-    message.leafHash !== undefined && (obj.leaf_hash = base64FromBytes(message.leafHash));
+    obj.leaf_hash = message.leafHash ? base64FromBytes(message.leafHash) : undefined;
     if (message.aunts) {
       obj.aunts = message.aunts.map(e => base64FromBytes(e));
     } else {
@@ -327,7 +326,7 @@ export const ValueOp = {
   fromAmino(object: ValueOpAmino): ValueOp {
     const message = createBaseValueOp();
     if (object.key !== undefined && object.key !== null) {
-      message.key = fromBase64(object.key);
+      message.key = bytesFromBase64(object.key);
     }
     if (object.proof !== undefined && object.proof !== null) {
       message.proof = Proof.fromAmino(object.proof);
@@ -336,7 +335,7 @@ export const ValueOp = {
   },
   toAmino(message: ValueOp, useInterfaces: boolean = true): ValueOpAmino {
     const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
     obj.proof = message.proof ? Proof.toAmino(message.proof, useInterfaces) : undefined;
     return obj;
   },
@@ -550,18 +549,18 @@ export const ProofOp = {
       message.type = object.type;
     }
     if (object.key !== undefined && object.key !== null) {
-      message.key = fromBase64(object.key);
+      message.key = bytesFromBase64(object.key);
     }
     if (object.data !== undefined && object.data !== null) {
-      message.data = fromBase64(object.data);
+      message.data = bytesFromBase64(object.data);
     }
     return message;
   },
   toAmino(message: ProofOp, useInterfaces: boolean = true): ProofOpAmino {
     const obj: any = {};
     obj.type = message.type;
-    message.key !== undefined && (obj.key = base64FromBytes(message.key));
-    message.data !== undefined && (obj.data = base64FromBytes(message.data));
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
   fromProtoMsg(message: ProofOpProtoMsg, useInterfaces: boolean = true): ProofOp {

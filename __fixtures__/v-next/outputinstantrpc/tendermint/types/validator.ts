@@ -1,7 +1,6 @@
 import { PublicKey, PublicKeySDKType } from "../crypto/keys";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "tendermint.types";
 export interface ValidatorSet {
   validators: Validator[];
@@ -289,7 +288,7 @@ export const Validator = {
   fromAmino(object: ValidatorAmino): Validator {
     const message = createBaseValidator();
     if (object.address !== undefined && object.address !== null) {
-      message.address = fromBase64(object.address);
+      message.address = bytesFromBase64(object.address);
     }
     if (object.pub_key !== undefined && object.pub_key !== null) {
       message.pubKey = PublicKey.fromAmino(object.pub_key);
@@ -304,7 +303,7 @@ export const Validator = {
   },
   toAmino(message: Validator): ValidatorAmino {
     const obj: any = {};
-    message.address !== undefined && (obj.address = base64FromBytes(message.address));
+    obj.address = message.address ? base64FromBytes(message.address) : undefined;
     obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey) : undefined;
     obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
     obj.proposer_priority = message.proposerPriority ? message.proposerPriority.toString() : undefined;

@@ -3,7 +3,6 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Params, ParamsSDKType } from "./auth";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { fromBase64 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmos.auth.v1beta1";
 /**
  * QueryAccountsRequest is the request type for the Query/Accounts RPC method.
@@ -1162,13 +1161,13 @@ export const AddressBytesToStringRequest = {
   fromAmino(object: AddressBytesToStringRequestAmino): AddressBytesToStringRequest {
     const message = createBaseAddressBytesToStringRequest();
     if (object.address_bytes !== undefined && object.address_bytes !== null) {
-      message.addressBytes = fromBase64(object.address_bytes);
+      message.addressBytes = bytesFromBase64(object.address_bytes);
     }
     return message;
   },
   toAmino(message: AddressBytesToStringRequest): AddressBytesToStringRequestAmino {
     const obj: any = {};
-    message.addressBytes !== undefined && (obj.address_bytes = base64FromBytes(message.addressBytes));
+    obj.address_bytes = message.addressBytes ? base64FromBytes(message.addressBytes) : undefined;
     return obj;
   },
   fromAminoMsg(object: AddressBytesToStringRequestAminoMsg): AddressBytesToStringRequest {
@@ -1444,13 +1443,13 @@ export const AddressStringToBytesResponse = {
   fromAmino(object: AddressStringToBytesResponseAmino): AddressStringToBytesResponse {
     const message = createBaseAddressStringToBytesResponse();
     if (object.address_bytes !== undefined && object.address_bytes !== null) {
-      message.addressBytes = fromBase64(object.address_bytes);
+      message.addressBytes = bytesFromBase64(object.address_bytes);
     }
     return message;
   },
   toAmino(message: AddressStringToBytesResponse): AddressStringToBytesResponseAmino {
     const obj: any = {};
-    message.addressBytes !== undefined && (obj.address_bytes = base64FromBytes(message.addressBytes));
+    obj.address_bytes = message.addressBytes ? base64FromBytes(message.addressBytes) : undefined;
     return obj;
   },
   fromAminoMsg(object: AddressStringToBytesResponseAminoMsg): AddressStringToBytesResponse {
