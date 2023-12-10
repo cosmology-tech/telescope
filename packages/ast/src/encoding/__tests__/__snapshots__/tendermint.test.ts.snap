@@ -332,14 +332,14 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 3`] = `
         prehash_key: number;
         prehash_value: number;
         length: number;
-        prefix: string;
+        prefix: Uint8Array;
       };
       inner_spec: {
         child_order: number[];
         child_size: number;
         min_prefix_length: number;
         max_prefix_length: number;
-        empty_child: string;
+        empty_child: Uint8Array;
         hash: number;
       };
       max_depth: number;
@@ -800,14 +800,14 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 3`] = `
         prehash_key: number;
         prehash_value: number;
         length: number;
-        prefix: string;
+        prefix: Uint8Array;
       };
       inner_spec: {
         child_order: number[];
         child_size: number;
         min_prefix_length: number;
         max_prefix_length: number;
-        empty_child: string;
+        empty_child: Uint8Array;
         hash: number;
       };
       max_depth: number;
