@@ -12,9 +12,9 @@ export interface MsgSuperfluidDelegateProtoMsg {
   value: Uint8Array;
 }
 export interface MsgSuperfluidDelegateAmino {
-  sender: string;
-  lock_id: string;
-  val_addr: string;
+  sender?: string;
+  lock_id?: string;
+  val_addr?: string;
 }
 export interface MsgSuperfluidDelegateAminoMsg {
   type: "osmosis/superfluid-delegate";
@@ -45,8 +45,8 @@ export interface MsgSuperfluidUndelegateProtoMsg {
   value: Uint8Array;
 }
 export interface MsgSuperfluidUndelegateAmino {
-  sender: string;
-  lock_id: string;
+  sender?: string;
+  lock_id?: string;
 }
 export interface MsgSuperfluidUndelegateAminoMsg {
   type: "osmosis/superfluid-undelegate";
@@ -76,8 +76,8 @@ export interface MsgSuperfluidUnbondLockProtoMsg {
   value: Uint8Array;
 }
 export interface MsgSuperfluidUnbondLockAmino {
-  sender: string;
-  lock_id: string;
+  sender?: string;
+  lock_id?: string;
 }
 export interface MsgSuperfluidUnbondLockAminoMsg {
   type: "osmosis/superfluid-unbond-lock";
@@ -118,9 +118,9 @@ export interface MsgLockAndSuperfluidDelegateProtoMsg {
  * specified validator addr.
  */
 export interface MsgLockAndSuperfluidDelegateAmino {
-  sender: string;
-  coins: CoinAmino[];
-  val_addr: string;
+  sender?: string;
+  coins?: CoinAmino[];
+  val_addr?: string;
 }
 export interface MsgLockAndSuperfluidDelegateAminoMsg {
   type: "osmosis/lock-and-superfluid-delegate";
@@ -144,7 +144,7 @@ export interface MsgLockAndSuperfluidDelegateResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgLockAndSuperfluidDelegateResponseAmino {
-  ID: string;
+  ID?: string;
 }
 export interface MsgLockAndSuperfluidDelegateResponseAminoMsg {
   type: "osmosis/lock-and-superfluid-delegate-response";
@@ -182,8 +182,8 @@ export interface MsgUnPoolWhitelistedPoolProtoMsg {
  * until unbond completion.
  */
 export interface MsgUnPoolWhitelistedPoolAmino {
-  sender: string;
-  pool_id: string;
+  sender?: string;
+  pool_id?: string;
 }
 export interface MsgUnPoolWhitelistedPoolAminoMsg {
   type: "osmosis/unpool-whitelisted-pool";
@@ -211,7 +211,7 @@ export interface MsgUnPoolWhitelistedPoolResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgUnPoolWhitelistedPoolResponseAmino {
-  exited_lock_ids: string[];
+  exited_lock_ids?: string[];
 }
 export interface MsgUnPoolWhitelistedPoolResponseAminoMsg {
   type: "osmosis/un-pool-whitelisted-pool-response";

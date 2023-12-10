@@ -21,10 +21,10 @@ export interface MsgJoinPoolProtoMsg {
  * This is really MsgJoinPoolNoSwap
  */
 export interface MsgJoinPoolAmino {
-  sender: string;
-  pool_id: string;
-  share_out_amount: string;
-  token_in_maxs: CoinAmino[];
+  sender?: string;
+  pool_id?: string;
+  share_out_amount?: string;
+  token_in_maxs?: CoinAmino[];
 }
 /**
  * ===================== MsgJoinPool
@@ -45,8 +45,8 @@ export interface MsgJoinPoolResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgJoinPoolResponseAmino {
-  share_out_amount: string;
-  token_in: CoinAmino[];
+  share_out_amount?: string;
+  token_in?: CoinAmino[];
 }
 export interface MsgJoinPoolResponseSDKType {
   share_out_amount: string;
@@ -65,10 +65,10 @@ export interface MsgExitPoolProtoMsg {
 }
 /** ===================== MsgExitPool */
 export interface MsgExitPoolAmino {
-  sender: string;
-  pool_id: string;
-  share_in_amount: string;
-  token_out_mins: CoinAmino[];
+  sender?: string;
+  pool_id?: string;
+  share_in_amount?: string;
+  token_out_mins?: CoinAmino[];
 }
 /** ===================== MsgExitPool */
 export interface MsgExitPoolSDKType {
@@ -85,7 +85,7 @@ export interface MsgExitPoolResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgExitPoolResponseAmino {
-  token_out: CoinAmino[];
+  token_out?: CoinAmino[];
 }
 export interface MsgExitPoolResponseSDKType {
   token_out: CoinSDKType[];
@@ -101,8 +101,8 @@ export interface SwapAmountInRouteProtoMsg {
 }
 /** ===================== MsgSwapExactAmountIn */
 export interface SwapAmountInRouteAmino {
-  pool_id: string;
-  token_out_denom: string;
+  pool_id?: string;
+  token_out_denom?: string;
 }
 /** ===================== MsgSwapExactAmountIn */
 export interface SwapAmountInRouteSDKType {
@@ -120,10 +120,10 @@ export interface MsgSwapExactAmountInProtoMsg {
   value: Uint8Array;
 }
 export interface MsgSwapExactAmountInAmino {
-  sender: string;
-  routes: SwapAmountInRouteAmino[];
+  sender?: string;
+  routes?: SwapAmountInRouteAmino[];
   token_in?: CoinAmino;
-  token_out_min_amount: string;
+  token_out_min_amount?: string;
 }
 export interface MsgSwapExactAmountInSDKType {
   sender: string;
@@ -139,7 +139,7 @@ export interface MsgSwapExactAmountInResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgSwapExactAmountInResponseAmino {
-  token_out_amount: string;
+  token_out_amount?: string;
 }
 export interface MsgSwapExactAmountInResponseSDKType {
   token_out_amount: string;
@@ -155,8 +155,8 @@ export interface SwapAmountOutRouteProtoMsg {
 }
 /** ===================== MsgSwapExactAmountOut */
 export interface SwapAmountOutRouteAmino {
-  pool_id: string;
-  token_in_denom: string;
+  pool_id?: string;
+  token_in_denom?: string;
 }
 /** ===================== MsgSwapExactAmountOut */
 export interface SwapAmountOutRouteSDKType {
@@ -174,9 +174,9 @@ export interface MsgSwapExactAmountOutProtoMsg {
   value: Uint8Array;
 }
 export interface MsgSwapExactAmountOutAmino {
-  sender: string;
-  routes: SwapAmountOutRouteAmino[];
-  token_in_max_amount: string;
+  sender?: string;
+  routes?: SwapAmountOutRouteAmino[];
+  token_in_max_amount?: string;
   token_out?: CoinAmino;
 }
 export interface MsgSwapExactAmountOutSDKType {
@@ -193,7 +193,7 @@ export interface MsgSwapExactAmountOutResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgSwapExactAmountOutResponseAmino {
-  token_in_amount: string;
+  token_in_amount?: string;
 }
 export interface MsgSwapExactAmountOutResponseSDKType {
   token_in_amount: string;
@@ -217,10 +217,10 @@ export interface MsgJoinSwapExternAmountInProtoMsg {
  * TODO: Rename to MsgJoinSwapExactAmountIn
  */
 export interface MsgJoinSwapExternAmountInAmino {
-  sender: string;
-  pool_id: string;
+  sender?: string;
+  pool_id?: string;
   token_in?: CoinAmino;
-  share_out_min_amount: string;
+  share_out_min_amount?: string;
 }
 /**
  * ===================== MsgJoinSwapExternAmountIn
@@ -240,7 +240,7 @@ export interface MsgJoinSwapExternAmountInResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgJoinSwapExternAmountInResponseAmino {
-  share_out_amount: string;
+  share_out_amount?: string;
 }
 export interface MsgJoinSwapExternAmountInResponseSDKType {
   share_out_amount: string;
@@ -259,11 +259,11 @@ export interface MsgJoinSwapShareAmountOutProtoMsg {
 }
 /** ===================== MsgJoinSwapShareAmountOut */
 export interface MsgJoinSwapShareAmountOutAmino {
-  sender: string;
-  pool_id: string;
-  token_in_denom: string;
-  share_out_amount: string;
-  token_in_max_amount: string;
+  sender?: string;
+  pool_id?: string;
+  token_in_denom?: string;
+  share_out_amount?: string;
+  token_in_max_amount?: string;
 }
 /** ===================== MsgJoinSwapShareAmountOut */
 export interface MsgJoinSwapShareAmountOutSDKType {
@@ -281,7 +281,7 @@ export interface MsgJoinSwapShareAmountOutResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgJoinSwapShareAmountOutResponseAmino {
-  token_in_amount: string;
+  token_in_amount?: string;
 }
 export interface MsgJoinSwapShareAmountOutResponseSDKType {
   token_in_amount: string;
@@ -300,11 +300,11 @@ export interface MsgExitSwapShareAmountInProtoMsg {
 }
 /** ===================== MsgExitSwapShareAmountIn */
 export interface MsgExitSwapShareAmountInAmino {
-  sender: string;
-  pool_id: string;
-  token_out_denom: string;
-  share_in_amount: string;
-  token_out_min_amount: string;
+  sender?: string;
+  pool_id?: string;
+  token_out_denom?: string;
+  share_in_amount?: string;
+  token_out_min_amount?: string;
 }
 /** ===================== MsgExitSwapShareAmountIn */
 export interface MsgExitSwapShareAmountInSDKType {
@@ -322,7 +322,7 @@ export interface MsgExitSwapShareAmountInResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgExitSwapShareAmountInResponseAmino {
-  token_out_amount: string;
+  token_out_amount?: string;
 }
 export interface MsgExitSwapShareAmountInResponseSDKType {
   token_out_amount: string;
@@ -340,10 +340,10 @@ export interface MsgExitSwapExternAmountOutProtoMsg {
 }
 /** ===================== MsgExitSwapExternAmountOut */
 export interface MsgExitSwapExternAmountOutAmino {
-  sender: string;
-  pool_id: string;
+  sender?: string;
+  pool_id?: string;
   token_out?: CoinAmino;
-  share_in_max_amount: string;
+  share_in_max_amount?: string;
 }
 /** ===================== MsgExitSwapExternAmountOut */
 export interface MsgExitSwapExternAmountOutSDKType {
@@ -360,7 +360,7 @@ export interface MsgExitSwapExternAmountOutResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgExitSwapExternAmountOutResponseAmino {
-  share_in_amount: string;
+  share_in_amount?: string;
 }
 export interface MsgExitSwapExternAmountOutResponseSDKType {
   share_in_amount: string;

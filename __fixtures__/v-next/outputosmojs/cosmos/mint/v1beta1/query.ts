@@ -386,7 +386,7 @@ export const QueryInflationResponse = {
   },
   toAmino(message: QueryInflationResponse): QueryInflationResponseAmino {
     const obj: any = {};
-    obj.inflation = base64FromBytes(message.inflation);
+    message.inflation !== undefined && (obj.inflation = base64FromBytes(message.inflation));
     return obj;
   },
   fromAminoMsg(object: QueryInflationResponseAminoMsg): QueryInflationResponse {
@@ -550,7 +550,7 @@ export const QueryAnnualProvisionsResponse = {
   },
   toAmino(message: QueryAnnualProvisionsResponse): QueryAnnualProvisionsResponseAmino {
     const obj: any = {};
-    obj.annual_provisions = base64FromBytes(message.annualProvisions);
+    message.annualProvisions !== undefined && (obj.annual_provisions = base64FromBytes(message.annualProvisions));
     return obj;
   },
   fromAminoMsg(object: QueryAnnualProvisionsResponseAminoMsg): QueryAnnualProvisionsResponse {

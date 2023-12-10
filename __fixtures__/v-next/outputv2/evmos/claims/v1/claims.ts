@@ -79,11 +79,11 @@ export interface ClaimProtoMsg {
  */
 export interface ClaimAmino {
   /** action enum */
-  action: Action;
+  action?: Action;
   /** true if the action has been completed */
-  completed: boolean;
+  completed?: boolean;
   /** claimable token amount for the action. Zero if completed */
-  claimable_amount: string;
+  claimable_amount?: string;
 }
 export interface ClaimAminoMsg {
   type: "/evmos.claims.v1.Claim";
@@ -114,11 +114,11 @@ export interface ClaimsRecordAddressProtoMsg {
 /** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
 export interface ClaimsRecordAddressAmino {
   /** bech32 or hex address of claim user */
-  address: string;
+  address?: string;
   /** total initial claimable amount for the user */
-  initial_claimable_amount: string;
+  initial_claimable_amount?: string;
   /** slice of the available actions completed */
-  actions_completed: boolean[];
+  actions_completed?: boolean[];
 }
 export interface ClaimsRecordAddressAminoMsg {
   type: "/evmos.claims.v1.ClaimsRecordAddress";
@@ -150,9 +150,9 @@ export interface ClaimsRecordProtoMsg {
  */
 export interface ClaimsRecordAmino {
   /** total initial claimable amount for the user */
-  initial_claimable_amount: string;
+  initial_claimable_amount?: string;
   /** slice of the available actions completed */
-  actions_completed: boolean[];
+  actions_completed?: boolean[];
 }
 export interface ClaimsRecordAminoMsg {
   type: "/evmos.claims.v1.ClaimsRecord";

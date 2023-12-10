@@ -12,9 +12,9 @@ export interface ProtocolVersionProtoMsg {
   value: Uint8Array;
 }
 export interface ProtocolVersionAmino {
-  p2p: string;
-  block: string;
-  app: string;
+  p2p?: string;
+  block?: string;
+  app?: string;
 }
 export interface ProtocolVersionAminoMsg {
   type: "/tendermint.p2p.ProtocolVersion";
@@ -41,12 +41,12 @@ export interface NodeInfoProtoMsg {
 }
 export interface NodeInfoAmino {
   protocol_version?: ProtocolVersionAmino;
-  node_id: string;
-  listen_addr: string;
-  network: string;
-  version: string;
-  channels: string;
-  moniker: string;
+  node_id?: string;
+  listen_addr?: string;
+  network?: string;
+  version?: string;
+  channels?: string;
+  moniker?: string;
   other?: NodeInfoOtherAmino;
 }
 export interface NodeInfoAminoMsg {
@@ -72,8 +72,8 @@ export interface NodeInfoOtherProtoMsg {
   value: Uint8Array;
 }
 export interface NodeInfoOtherAmino {
-  tx_index: string;
-  rpc_address: string;
+  tx_index?: string;
+  rpc_address?: string;
 }
 export interface NodeInfoOtherAminoMsg {
   type: "/tendermint.p2p.NodeInfoOther";
@@ -93,8 +93,8 @@ export interface PeerInfoProtoMsg {
   value: Uint8Array;
 }
 export interface PeerInfoAmino {
-  id: string;
-  address_info: PeerAddressInfoAmino[];
+  id?: string;
+  address_info?: PeerAddressInfoAmino[];
   last_connected?: string;
 }
 export interface PeerInfoAminoMsg {
@@ -117,10 +117,10 @@ export interface PeerAddressInfoProtoMsg {
   value: Uint8Array;
 }
 export interface PeerAddressInfoAmino {
-  address: string;
+  address?: string;
   last_dial_success?: string;
   last_dial_failure?: string;
-  dial_failures: number;
+  dial_failures?: number;
 }
 export interface PeerAddressInfoAminoMsg {
   type: "/tendermint.p2p.PeerAddressInfo";
@@ -333,7 +333,7 @@ export const NodeInfo = {
     obj.listen_addr = message.listenAddr;
     obj.network = message.network;
     obj.version = message.version;
-    obj.channels = base64FromBytes(message.channels);
+    message.channels !== undefined && (obj.channels = base64FromBytes(message.channels));
     obj.moniker = message.moniker;
     obj.other = message.other ? NodeInfoOther.toAmino(message.other) : undefined;
     return obj;

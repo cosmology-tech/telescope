@@ -14,7 +14,7 @@ export interface ParamsProtoMsg {
 }
 /** Params holds parameters for the twap module */
 export interface ParamsAmino {
-  prune_epoch_identifier: string;
+  prune_epoch_identifier?: string;
   record_history_keep_period?: DurationAmino;
 }
 export interface ParamsAminoMsg {
@@ -40,7 +40,7 @@ export interface GenesisStateProtoMsg {
 /** GenesisState defines the twap module's genesis state. */
 export interface GenesisStateAmino {
   /** twaps is the collection of all twap records. */
-  twaps: TwapRecordAmino[];
+  twaps?: TwapRecordAmino[];
   /** params is the container of twap parameters. */
   params?: ParamsAmino;
 }

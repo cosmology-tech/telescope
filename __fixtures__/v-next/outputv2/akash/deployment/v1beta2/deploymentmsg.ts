@@ -20,11 +20,11 @@ export interface MsgCreateDeploymentProtoMsg {
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentAmino {
   id?: DeploymentIDAmino;
-  groups: GroupSpecAmino[];
-  version: string;
+  groups?: GroupSpecAmino[];
+  version?: string;
   deposit?: CoinAmino;
   /** Depositor pays for the deposit */
-  depositor: string;
+  depositor?: string;
 }
 export interface MsgCreateDeploymentAminoMsg {
   type: "/akash.deployment.v1beta2.MsgCreateDeployment";
@@ -68,7 +68,7 @@ export interface MsgDepositDeploymentAmino {
   id?: DeploymentIDAmino;
   amount?: CoinAmino;
   /** Depositor pays for the deposit */
-  depositor: string;
+  depositor?: string;
 }
 export interface MsgDepositDeploymentAminoMsg {
   type: "/akash.deployment.v1beta2.MsgDepositDeployment";
@@ -106,7 +106,7 @@ export interface MsgUpdateDeploymentProtoMsg {
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentAmino {
   id?: DeploymentIDAmino;
-  version: string;
+  version?: string;
 }
 export interface MsgUpdateDeploymentAminoMsg {
   type: "/akash.deployment.v1beta2.MsgUpdateDeployment";
@@ -297,7 +297,7 @@ export const MsgCreateDeployment = {
     } else {
       obj.groups = [];
     }
-    obj.version = base64FromBytes(message.version);
+    message.version !== undefined && (obj.version = base64FromBytes(message.version));
     obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined;
     obj.depositor = message.depositor;
     return obj;
@@ -637,7 +637,7 @@ export const MsgUpdateDeployment = {
   toAmino(message: MsgUpdateDeployment): MsgUpdateDeploymentAmino {
     const obj: any = {};
     obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
-    obj.version = base64FromBytes(message.version);
+    message.version !== undefined && (obj.version = base64FromBytes(message.version));
     return obj;
   },
   fromAminoMsg(object: MsgUpdateDeploymentAminoMsg): MsgUpdateDeployment {

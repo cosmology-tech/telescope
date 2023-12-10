@@ -103,7 +103,7 @@ export interface CheckRequestAmino {
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
    */
-  service_name: string;
+  service_name?: string;
   /** The operation to be checked. */
   operation?: OperationAmino;
   /**
@@ -113,7 +113,7 @@ export interface CheckRequestAmino {
    * If unspecified or no matching version can be found, the
    * latest one will be used.
    */
-  service_config_id: string;
+  service_config_id?: string;
 }
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
@@ -155,7 +155,7 @@ export interface CheckResponseAmino {
    * [CheckRequest][google.api.servicecontrol.v1.CheckRequest]. Used for logging
    * and diagnostics purposes.
    */
-  operation_id: string;
+  operation_id?: string;
   /**
    * Indicate the decision of the check.
    * 
@@ -163,11 +163,11 @@ export interface CheckResponseAmino {
    * Otherwise the service should use the list of errors to determine the
    * appropriate action.
    */
-  check_errors: CheckErrorAmino[];
+  check_errors?: CheckErrorAmino[];
   /** The actual config id used to process the request. */
-  service_config_id: string;
+  service_config_id?: string;
   /** The current service rollout id used to process the request. */
-  service_rollout_id: string;
+  service_rollout_id?: string;
   /** Feedback data returned from the server during processing a Check request. */
   check_info?: CheckResponse_CheckInfoAmino;
 }
@@ -201,7 +201,7 @@ export interface CheckResponse_CheckInfoAmino {
    * The client doesn't need to send them for following requests to improve
    * performance and allow better aggregation.
    */
-  unused_arguments: string[];
+  unused_arguments?: string[];
   /** Consumer info of this check. */
   consumer_info?: CheckResponse_ConsumerInfoAmino;
 }
@@ -245,18 +245,18 @@ export interface CheckResponse_ConsumerInfoAmino {
    * NOTE: This field is deprecated after we support flexible consumer
    * id. New code should not depend on this field anymore.
    */
-  project_number: string;
+  project_number?: string;
   /**
    * The type of the consumer which should have been defined in
    * [Google Resource Manager](https://cloud.google.com/resource-manager/).
    */
-  type: CheckResponse_ConsumerInfo_ConsumerType;
+  type?: CheckResponse_ConsumerInfo_ConsumerType;
   /**
    * The consumer identity number, can be Google cloud project number, folder
    * number or organization number e.g. 1234567890. A value of 0 indicates no
    * consumer number is found.
    */
-  consumer_number: string;
+  consumer_number?: string;
 }
 /** `ConsumerInfo` provides information about the consumer. */
 export interface CheckResponse_ConsumerInfoSDKType {
@@ -312,7 +312,7 @@ export interface ReportRequestAmino {
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
    */
-  service_name: string;
+  service_name?: string;
   /**
    * Operations to be reported.
    * 
@@ -326,7 +326,7 @@ export interface ReportRequestAmino {
    * [ReportResponse.report_errors][google.api.servicecontrol.v1.ReportResponse.report_errors]
    * for partial failure behavior.
    */
-  operations: OperationAmino[];
+  operations?: OperationAmino[];
   /**
    * Specifies which version of service config should be used to process the
    * request.
@@ -334,7 +334,7 @@ export interface ReportRequestAmino {
    * If unspecified or no matching version can be found, the
    * latest one will be used.
    */
-  service_config_id: string;
+  service_config_id?: string;
 }
 /** Request message for the Report method. */
 export interface ReportRequestSDKType {
@@ -388,11 +388,11 @@ export interface ReportResponseAmino {
    *    When this happens, it's impossible to know which of the
    *    'Operations' in the request succeeded or failed.
    */
-  report_errors: ReportResponse_ReportErrorAmino[];
+  report_errors?: ReportResponse_ReportErrorAmino[];
   /** The actual config id used to process the request. */
-  service_config_id: string;
+  service_config_id?: string;
   /** The current service rollout id used to process the request. */
-  service_rollout_id: string;
+  service_rollout_id?: string;
 }
 /** Response message for the Report method. */
 export interface ReportResponseSDKType {
@@ -431,7 +431,7 @@ export interface ReportResponse_ReportErrorAmino {
    * [Operation.operation_id][google.api.servicecontrol.v1.Operation.operation_id]
    * value from the request.
    */
-  operation_id: string;
+  operation_id?: string;
   /**
    * Details of the error when processing the
    * [Operation][google.api.servicecontrol.v1.Operation].

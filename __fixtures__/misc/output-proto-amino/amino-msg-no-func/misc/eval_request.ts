@@ -11,7 +11,7 @@ export interface EvalRequest_BindingsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface EvalRequest_BindingsEntryAmino {
-  key: string;
+  key?: string;
   value?: ExprValueAmino;
 }
 export interface EvalRequest_BindingsEntryAminoMsg {
@@ -31,7 +31,7 @@ export interface EvalRequest_RefsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface EvalRequest_RefsEntryAmino {
-  key: string;
+  key?: string;
   value?: IdRefAmino;
 }
 export interface EvalRequest_RefsEntryAminoMsg {
@@ -77,14 +77,14 @@ export interface EvalRequestAmino {
   refs?: {
     [key: string]: IdRefAmino;
   };
-  test_num: number;
-  test_string: string;
-  test_bool: boolean;
+  test_num?: number;
+  test_string?: string;
+  test_bool?: boolean;
   instantiate_permission?: AccessConfigAmino;
   /** [(gogoproto.nullable) = false] wouldn't work in this case */
   id?: string;
   name?: string;
-  test_array: string[];
+  test_array?: string[];
 }
 export interface EvalRequestAminoMsg {
   type: "/misc.EvalRequest";
@@ -113,7 +113,7 @@ export interface AccessConfigProtoMsg {
   value: Uint8Array;
 }
 export interface AccessConfigAmino {
-  sender: string;
+  sender?: string;
 }
 export interface AccessConfigAminoMsg {
   type: "/misc.AccessConfig";

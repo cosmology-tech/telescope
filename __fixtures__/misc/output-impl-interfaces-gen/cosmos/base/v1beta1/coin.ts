@@ -23,8 +23,8 @@ export interface CoinProtoMsg {
  * signatures required by gogoproto.
  */
 export interface CoinAmino {
-  denom: string;
-  amount: string;
+  denom?: string;
+  amount?: string;
 }
 export interface CoinAminoMsg {
   type: "cosmos-sdk/Coin";
@@ -61,8 +61,8 @@ export interface DecCoinProtoMsg {
  * signatures required by gogoproto.
  */
 export interface DecCoinAmino {
-  denom: string;
-  amount: string;
+  denom?: string;
+  amount?: string;
 }
 export interface DecCoinAminoMsg {
   type: "cosmos-sdk/DecCoin";
@@ -88,7 +88,7 @@ export interface IntProtoProtoMsg {
 }
 /** IntProto defines a Protobuf wrapper around an Int object. */
 export interface IntProtoAmino {
-  int: string;
+  int?: string;
 }
 export interface IntProtoAminoMsg {
   type: "cosmos-sdk/IntProto";
@@ -108,7 +108,7 @@ export interface DecProtoProtoMsg {
 }
 /** DecProto defines a Protobuf wrapper around a Dec object. */
 export interface DecProtoAmino {
-  dec: string;
+  dec?: string;
 }
 export interface DecProtoAminoMsg {
   type: "cosmos-sdk/DecProto";

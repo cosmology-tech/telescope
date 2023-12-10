@@ -70,23 +70,23 @@ export interface DistributionProtoMsg {
  */
 export interface DistributionAmino {
   /** The total number of samples in the distribution. Must be >= 0. */
-  count: string;
+  count?: string;
   /**
    * The arithmetic mean of the samples in the distribution. If `count` is
    * zero then this field must be zero.
    */
-  mean: number;
+  mean?: number;
   /** The minimum of the population of values. Ignored if `count` is zero. */
-  minimum: number;
+  minimum?: number;
   /** The maximum of the population of values. Ignored if `count` is zero. */
-  maximum: number;
+  maximum?: number;
   /**
    * The sum of squared deviations from the mean:
    *   Sum[i=1..count]((x_i - mean)^2)
    * where each x_i is a sample values. If `count` is zero then this field
    * must be zero, otherwise validation of the request fails.
    */
-  sum_of_squared_deviation: number;
+  sum_of_squared_deviation?: number;
   /**
    * The number of samples in each histogram bucket. `bucket_counts` are
    * optional. If present, they must sum to the `count` value.
@@ -100,7 +100,7 @@ export interface DistributionAmino {
    * 
    * Any suffix of trailing zeros may be omitted.
    */
-  bucket_counts: string[];
+  bucket_counts?: string[];
   /** Buckets with constant width. */
   linear_buckets?: Distribution_LinearBucketsAmino;
   /** Buckets with exponentially growing width. */
@@ -108,7 +108,7 @@ export interface DistributionAmino {
   /** Buckets with arbitrary user-provided width. */
   explicit_buckets?: Distribution_ExplicitBucketsAmino;
   /** Example points. Must be in increasing order of `value` field. */
-  exemplars: Distribution_ExemplarAmino[];
+  exemplars?: Distribution_ExemplarAmino[];
 }
 export interface DistributionAminoMsg {
   type: "/google.api.servicecontrol.v1.Distribution";
@@ -169,20 +169,20 @@ export interface Distribution_LinearBucketsAmino {
    * the total number of buckets is `num_finite_buckets` + 2.
    * See comments on `bucket_options` for details.
    */
-  num_finite_buckets: number;
+  num_finite_buckets?: number;
   /**
    * The i'th linear bucket covers the interval
    *   [offset + (i-1) * width, offset + i * width)
    * where i ranges from 1 to num_finite_buckets, inclusive.
    * Must be strictly positive.
    */
-  width: number;
+  width?: number;
   /**
    * The i'th linear bucket covers the interval
    *   [offset + (i-1) * width, offset + i * width)
    * where i ranges from 1 to num_finite_buckets, inclusive.
    */
-  offset: number;
+  offset?: number;
 }
 export interface Distribution_LinearBucketsAminoMsg {
   type: "/google.api.servicecontrol.v1.LinearBuckets";
@@ -228,21 +228,21 @@ export interface Distribution_ExponentialBucketsAmino {
    * the total number of buckets is `num_finite_buckets` + 2.
    * See comments on `bucket_options` for details.
    */
-  num_finite_buckets: number;
+  num_finite_buckets?: number;
   /**
    * The i'th exponential bucket covers the interval
    *   [scale * growth_factor^(i-1), scale * growth_factor^i)
    * where i ranges from 1 to num_finite_buckets inclusive.
    * Must be larger than 1.0.
    */
-  growth_factor: number;
+  growth_factor?: number;
   /**
    * The i'th exponential bucket covers the interval
    *   [scale * growth_factor^(i-1), scale * growth_factor^i)
    * where i ranges from 1 to num_finite_buckets inclusive.
    * Must be > 0.
    */
-  scale: number;
+  scale?: number;
 }
 export interface Distribution_ExponentialBucketsAminoMsg {
   type: "/google.api.servicecontrol.v1.ExponentialBuckets";
@@ -298,7 +298,7 @@ export interface Distribution_ExplicitBucketsAmino {
    *  0 < i < bound_size()            bound[i-1]     bound[i]
    *  i == bound_size() (overflow)    bound[i-1]     +inf
    */
-  bounds: number[];
+  bounds?: number[];
 }
 export interface Distribution_ExplicitBucketsAminoMsg {
   type: "/google.api.servicecontrol.v1.ExplicitBuckets";

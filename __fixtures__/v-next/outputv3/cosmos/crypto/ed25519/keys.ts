@@ -23,7 +23,7 @@ export interface PubKeyProtoMsg {
  * then you must create a new proto message and follow ADR-28 for Address construction.
  */
 export interface PubKeyAmino {
-  key: string;
+  key?: string;
 }
 /**
  * PubKey is an ed25519 public key for handling Tendermint keys in SDK.
@@ -51,7 +51,7 @@ export interface PrivKeyProtoMsg {
  * NOTE: ed25519 keys must not be used in SDK apps except in a tendermint validator context.
  */
 export interface PrivKeyAmino {
-  key: string;
+  key?: string;
 }
 /**
  * Deprecated: PrivKey defines a ed25519 private key.
@@ -123,7 +123,7 @@ export const PubKey = {
   },
   toAmino(message: PubKey, useInterfaces: boolean = true): PubKeyAmino {
     const obj: any = {};
-    obj.key = base64FromBytes(message.key);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
     return obj;
   },
   fromProtoMsg(message: PubKeyProtoMsg, useInterfaces: boolean = true): PubKey {
@@ -202,7 +202,7 @@ export const PrivKey = {
   },
   toAmino(message: PrivKey, useInterfaces: boolean = true): PrivKeyAmino {
     const obj: any = {};
-    obj.key = base64FromBytes(message.key);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
     return obj;
   },
   fromProtoMsg(message: PrivKeyProtoMsg, useInterfaces: boolean = true): PrivKey {

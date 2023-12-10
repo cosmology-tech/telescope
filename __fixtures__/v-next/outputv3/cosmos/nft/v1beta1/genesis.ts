@@ -15,8 +15,8 @@ export interface GenesisStateProtoMsg {
 /** GenesisState defines the nft module's genesis state. */
 export interface GenesisStateAmino {
   /** class defines the class of the nft type. */
-  classes: ClassAmino[];
-  entries: EntryAmino[];
+  classes?: ClassAmino[];
+  entries?: EntryAmino[];
 }
 /** GenesisState defines the nft module's genesis state. */
 export interface GenesisStateSDKType {
@@ -37,9 +37,9 @@ export interface EntryProtoMsg {
 /** Entry Defines all nft owned by a person */
 export interface EntryAmino {
   /** owner is the owner address of the following nft */
-  owner: string;
+  owner?: string;
   /** nfts is a group of nfts of the same owner */
-  nfts: NFTAmino[];
+  nfts?: NFTAmino[];
 }
 /** Entry Defines all nft owned by a person */
 export interface EntrySDKType {

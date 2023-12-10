@@ -95,7 +95,7 @@ export interface DeleteLogRequestAmino {
    * For more information about log names, see
    * [LogEntry][google.logging.v2.LogEntry].
    */
-  log_name: string;
+  log_name?: string;
 }
 /** The parameters to DeleteLog. */
 export interface DeleteLogRequestSDKType {
@@ -110,8 +110,8 @@ export interface WriteLogEntriesRequest_LabelsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface WriteLogEntriesRequest_LabelsEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface WriteLogEntriesRequest_LabelsEntrySDKType {
   key: string;
@@ -226,7 +226,7 @@ export interface WriteLogEntriesRequestAmino {
    * entries, whether the resource is specified in `logName` or in an
    * individual log entry.
    */
-  log_name: string;
+  log_name?: string;
   /**
    * Optional. A default monitored resource object that is assigned to all log
    * entries in `entries` that do not specify a value for `resource`. Example:
@@ -244,7 +244,7 @@ export interface WriteLogEntriesRequestAmino {
    * as a label in this parameter, then the log entry's label is not changed.
    * See [LogEntry][google.logging.v2.LogEntry].
    */
-  labels: {
+  labels?: {
     [key: string]: string;
   };
   /**
@@ -273,7 +273,7 @@ export interface WriteLogEntriesRequestAmino {
    * `entries.write`, you should try to include several log entries in this
    * list, rather than calling this method for each individual log entry.
    */
-  entries: LogEntryAmino[];
+  entries?: LogEntryAmino[];
   /**
    * Optional. Whether valid entries should be written even if some other
    * entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any
@@ -281,13 +281,13 @@ export interface WriteLogEntriesRequestAmino {
    * with one of the failed entries and the response includes error details
    * keyed by the entries' zero-based index in the `entries.write` method.
    */
-  partial_success: boolean;
+  partial_success?: boolean;
   /**
    * Optional. If true, the request should expect normal response, but the
    * entries won't be persisted nor exported. Useful for checking whether the
    * logging API endpoints are working properly before sending valuable data.
    */
-  dry_run: boolean;
+  dry_run?: boolean;
 }
 /** The parameters to WriteLogEntries. */
 export interface WriteLogEntriesRequestSDKType {
@@ -319,7 +319,7 @@ export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntryAmino {
-  key: number;
+  key?: number;
   value?: StatusAmino;
 }
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType {
@@ -443,7 +443,7 @@ export interface ListLogEntriesRequestAmino {
    * 
    * Projects listed in the `project_ids` field are added to this list.
    */
-  resource_names: string[];
+  resource_names?: string[];
   /**
    * Optional. A filter that chooses which log entries to return.  See [Advanced
    * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).
@@ -453,7 +453,7 @@ export interface ListLogEntriesRequestAmino {
    * cause the filter to return no results. The maximum length of the filter is
    * 20000 characters.
    */
-  filter: string;
+  filter?: string;
   /**
    * Optional. How the results should be sorted.  Presently, the only permitted
    * values are `"timestamp asc"` (default) and `"timestamp desc"`. The first
@@ -462,21 +462,21 @@ export interface ListLogEntriesRequestAmino {
    * in order of decreasing timestamps (newest first).  Entries with equal
    * timestamps are returned in order of their `insert_id` values.
    */
-  order_by: string;
+  order_by?: string;
   /**
    * Optional. The maximum number of results to return from this request. Default is 50.
    * If the value is negative or exceeds 1000, the request is rejected. The
    * presence of `next_page_token` in the response indicates that more results
    * might be available.
    */
-  page_size: number;
+  page_size?: number;
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method.  `page_token` must be the value of
    * `next_page_token` from the previous response.  The values of other method
    * parameters should be identical to those in the previous call.
    */
-  page_token: string;
+  page_token?: string;
 }
 /** The parameters to `ListLogEntries`. */
 export interface ListLogEntriesRequestSDKType {
@@ -519,7 +519,7 @@ export interface ListLogEntriesResponseAmino {
    * returned, indicating that more entries may exist.  See `nextPageToken` for
    * more information.
    */
-  entries: LogEntryAmino[];
+  entries?: LogEntryAmino[];
   /**
    * If there might be more results than those appearing in this response, then
    * `nextPageToken` is included.  To get the next set of results, call this
@@ -532,7 +532,7 @@ export interface ListLogEntriesResponseAmino {
    * speeding up the search by changing your filter to specify a single log name
    * or resource type, or to narrow the time range of the search.
    */
-  next_page_token: string;
+  next_page_token?: string;
 }
 /** Result returned from `ListLogEntries`. */
 export interface ListLogEntriesResponseSDKType {
@@ -566,14 +566,14 @@ export interface ListMonitoredResourceDescriptorsRequestAmino {
    * Non-positive values are ignored.  The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  page_size: number;
+  page_size?: number;
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method.  `pageToken` must be the value of
    * `nextPageToken` from the previous response.  The values of other method
    * parameters should be identical to those in the previous call.
    */
-  page_token: string;
+  page_token?: string;
 }
 /** The parameters to ListMonitoredResourceDescriptors */
 export interface ListMonitoredResourceDescriptorsRequestSDKType {
@@ -598,13 +598,13 @@ export interface ListMonitoredResourceDescriptorsResponseProtoMsg {
 /** Result returned from ListMonitoredResourceDescriptors. */
 export interface ListMonitoredResourceDescriptorsResponseAmino {
   /** A list of resource descriptors. */
-  resource_descriptors: MonitoredResourceDescriptorAmino[];
+  resource_descriptors?: MonitoredResourceDescriptorAmino[];
   /**
    * If there might be more results than those appearing in this response, then
    * `nextPageToken` is included.  To get the next set of results, call this
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-  next_page_token: string;
+  next_page_token?: string;
 }
 /** Result returned from ListMonitoredResourceDescriptors. */
 export interface ListMonitoredResourceDescriptorsResponseSDKType {
@@ -666,20 +666,20 @@ export interface ListLogsRequestAmino {
    * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
    * *  `folders/[FOLDER_ID]`
    */
-  parent: string;
+  parent?: string;
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored.  The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  page_size: number;
+  page_size?: number;
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method.  `pageToken` must be the value of
    * `nextPageToken` from the previous response.  The values of other method
    * parameters should be identical to those in the previous call.
    */
-  page_token: string;
+  page_token?: string;
   /**
    * Optional. The resource name that owns the logs:
    * 
@@ -695,7 +695,7 @@ export interface ListLogsRequestAmino {
    * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
    * *  `folders/[FOLDER_ID]`
    */
-  resource_names: string[];
+  resource_names?: string[];
 }
 /** The parameters to ListLogs. */
 export interface ListLogsRequestSDKType {
@@ -730,13 +730,13 @@ export interface ListLogsResponseAmino {
    * `"projects/my-project/logs/syslog"` or
    * `"organizations/123/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
    */
-  log_names: string[];
+  log_names?: string[];
   /**
    * If there might be more results than those appearing in this response, then
    * `nextPageToken` is included.  To get the next set of results, call this
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-  next_page_token: string;
+  next_page_token?: string;
 }
 /** Result returned from ListLogs. */
 export interface ListLogsResponseSDKType {
@@ -800,7 +800,7 @@ export interface TailLogEntriesRequestAmino {
    *  * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    *  * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
    */
-  resource_names: string[];
+  resource_names?: string[];
   /**
    * Optional. A filter that chooses which log entries to return.  See [Advanced
    * Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
@@ -810,7 +810,7 @@ export interface TailLogEntriesRequestAmino {
    * the filter to return no results. The maximum length of the filter is 20000
    * characters.
    */
-  filter: string;
+  filter?: string;
   /**
    * Optional. The amount of time to buffer log entries at the server before
    * being returned to prevent out of order results due to late arriving log
@@ -853,7 +853,7 @@ export interface TailLogEntriesResponseAmino {
    * increasing values of `LogEntry.timestamp`. Ordering is not guaranteed
    * between separate responses.
    */
-  entries: LogEntryAmino[];
+  entries?: LogEntryAmino[];
   /**
    * If entries that otherwise would have been included in the session were not
    * sent back to the client, counts of relevant entries omitted from the
@@ -861,7 +861,7 @@ export interface TailLogEntriesResponseAmino {
    * one of each reason per response. The counts represent the number of
    * suppressed entries since the last streamed response.
    */
-  suppression_info: TailLogEntriesResponse_SuppressionInfoAmino[];
+  suppression_info?: TailLogEntriesResponse_SuppressionInfoAmino[];
 }
 /** Result returned from `TailLogEntries`. */
 export interface TailLogEntriesResponseSDKType {
@@ -882,9 +882,9 @@ export interface TailLogEntriesResponse_SuppressionInfoProtoMsg {
 /** Information about entries that were omitted from the session. */
 export interface TailLogEntriesResponse_SuppressionInfoAmino {
   /** The reason that entries were omitted from the session. */
-  reason: TailLogEntriesResponse_SuppressionInfo_Reason;
+  reason?: TailLogEntriesResponse_SuppressionInfo_Reason;
   /** A lower bound on the count of entries omitted due to `reason`. */
-  suppressed_count: number;
+  suppressed_count?: number;
 }
 /** Information about entries that were omitted from the session. */
 export interface TailLogEntriesResponse_SuppressionInfoSDKType {

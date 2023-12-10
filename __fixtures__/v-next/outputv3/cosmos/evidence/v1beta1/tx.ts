@@ -22,7 +22,7 @@ export type MsgSubmitEvidenceEncoded = Omit<MsgSubmitEvidence, "evidence"> & {
  * Evidence of misbehavior such as equivocation or counterfactual signing.
  */
 export interface MsgSubmitEvidenceAmino {
-  submitter: string;
+  submitter?: string;
   evidence?: AnyAmino;
 }
 /**
@@ -45,7 +45,7 @@ export interface MsgSubmitEvidenceResponseProtoMsg {
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponseAmino {
   /** hash defines the hash of the evidence. */
-  hash: string;
+  hash?: string;
 }
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponseSDKType {
@@ -209,7 +209,7 @@ export const MsgSubmitEvidenceResponse = {
   },
   toAmino(message: MsgSubmitEvidenceResponse, useInterfaces: boolean = true): MsgSubmitEvidenceResponseAmino {
     const obj: any = {};
-    obj.hash = base64FromBytes(message.hash);
+    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash));
     return obj;
   },
   fromProtoMsg(message: MsgSubmitEvidenceResponseProtoMsg, useInterfaces: boolean = true): MsgSubmitEvidenceResponse {

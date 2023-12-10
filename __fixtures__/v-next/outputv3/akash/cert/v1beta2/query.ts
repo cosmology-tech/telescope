@@ -15,7 +15,7 @@ export interface CertificateResponseProtoMsg {
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponseAmino {
   certificate?: CertificateAmino;
-  serial: string;
+  serial?: string;
 }
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponseSDKType {
@@ -52,7 +52,7 @@ export interface QueryCertificatesResponseProtoMsg {
 }
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
 export interface QueryCertificatesResponseAmino {
-  certificates: CertificateResponseAmino[];
+  certificates?: CertificateResponseAmino[];
   pagination?: PageResponseAmino;
 }
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */

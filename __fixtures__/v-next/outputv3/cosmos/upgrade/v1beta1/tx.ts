@@ -24,7 +24,7 @@ export interface MsgSoftwareUpgradeProtoMsg {
  */
 export interface MsgSoftwareUpgradeAmino {
   /** authority is the address of the governance account. */
-  authority: string;
+  authority?: string;
   /** plan is the upgrade plan. */
   plan?: PlanAmino;
 }
@@ -79,7 +79,7 @@ export interface MsgCancelUpgradeProtoMsg {
  */
 export interface MsgCancelUpgradeAmino {
   /** authority is the address of the governance account. */
-  authority: string;
+  authority?: string;
 }
 /**
  * MsgCancelUpgrade is the Msg/CancelUpgrade request type.

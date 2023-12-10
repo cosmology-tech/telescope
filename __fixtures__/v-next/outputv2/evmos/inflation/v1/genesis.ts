@@ -24,13 +24,13 @@ export interface GenesisStateAmino {
   /** params defines all the paramaters of the module. */
   params?: ParamsAmino;
   /** amount of past periods, based on the epochs per period param */
-  period: string;
+  period?: string;
   /** inflation epoch identifier */
-  epoch_identifier: string;
+  epoch_identifier?: string;
   /** number of epochs after which inflation is recalculated */
-  epochs_per_period: string;
+  epochs_per_period?: string;
   /** number of epochs that have passed while inflation is disabled */
-  skipped_epochs: string;
+  skipped_epochs?: string;
 }
 export interface GenesisStateAminoMsg {
   type: "/evmos.inflation.v1.GenesisState";
@@ -62,13 +62,13 @@ export interface ParamsProtoMsg {
 /** Params holds parameters for the inflation module. */
 export interface ParamsAmino {
   /** type of coin to mint */
-  mint_denom: string;
+  mint_denom?: string;
   /** variables to calculate exponential inflation */
   exponential_calculation?: ExponentialCalculationAmino;
   /** inflation distribution of the minted denom */
   inflation_distribution?: InflationDistributionAmino;
   /** parameter to enable inflation and halt increasing the skipped_epochs */
-  enable_inflation: boolean;
+  enable_inflation?: boolean;
 }
 export interface ParamsAminoMsg {
   type: "/evmos.inflation.v1.Params";

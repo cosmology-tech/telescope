@@ -151,7 +151,7 @@ export const MerkleRoot = {
   },
   toAmino(message: MerkleRoot): MerkleRootAmino {
     const obj: any = {};
-    obj.hash = base64FromBytes(message.hash);
+    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash));
     return obj;
   },
   fromAminoMsg(object: MerkleRootAminoMsg): MerkleRoot {
@@ -243,7 +243,7 @@ export const MerklePrefix = {
   },
   toAmino(message: MerklePrefix): MerklePrefixAmino {
     const obj: any = {};
-    obj.key_prefix = base64FromBytes(message.keyPrefix);
+    message.keyPrefix !== undefined && (obj.key_prefix = base64FromBytes(message.keyPrefix));
     return obj;
   },
   fromAminoMsg(object: MerklePrefixAminoMsg): MerklePrefix {

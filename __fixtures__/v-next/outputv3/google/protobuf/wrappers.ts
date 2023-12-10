@@ -21,7 +21,7 @@ export interface DoubleValueProtoMsg {
  */
 export interface DoubleValueAmino {
   /** The double value. */
-  value: number;
+  value?: number;
 }
 /**
  * Wrapper message for `double`.
@@ -51,7 +51,7 @@ export interface FloatValueProtoMsg {
  */
 export interface FloatValueAmino {
   /** The float value. */
-  value: number;
+  value?: number;
 }
 /**
  * Wrapper message for `float`.
@@ -81,7 +81,7 @@ export interface Int64ValueProtoMsg {
  */
 export interface Int64ValueAmino {
   /** The int64 value. */
-  value: string;
+  value?: string;
 }
 /**
  * Wrapper message for `int64`.
@@ -111,7 +111,7 @@ export interface UInt64ValueProtoMsg {
  */
 export interface UInt64ValueAmino {
   /** The uint64 value. */
-  value: string;
+  value?: string;
 }
 /**
  * Wrapper message for `uint64`.
@@ -141,7 +141,7 @@ export interface Int32ValueProtoMsg {
  */
 export interface Int32ValueAmino {
   /** The int32 value. */
-  value: number;
+  value?: number;
 }
 /**
  * Wrapper message for `int32`.
@@ -171,7 +171,7 @@ export interface UInt32ValueProtoMsg {
  */
 export interface UInt32ValueAmino {
   /** The uint32 value. */
-  value: number;
+  value?: number;
 }
 /**
  * Wrapper message for `uint32`.
@@ -201,7 +201,7 @@ export interface BoolValueProtoMsg {
  */
 export interface BoolValueAmino {
   /** The bool value. */
-  value: boolean;
+  value?: boolean;
 }
 /**
  * Wrapper message for `bool`.
@@ -231,7 +231,7 @@ export interface StringValueProtoMsg {
  */
 export interface StringValueAmino {
   /** The string value. */
-  value: string;
+  value?: string;
 }
 /**
  * Wrapper message for `string`.
@@ -261,7 +261,7 @@ export interface BytesValueProtoMsg {
  */
 export interface BytesValueAmino {
   /** The bytes value. */
-  value: string;
+  value?: string;
 }
 /**
  * Wrapper message for `bytes`.
@@ -961,7 +961,7 @@ export const BytesValue = {
   },
   toAmino(message: BytesValue, useInterfaces: boolean = true): BytesValueAmino {
     const obj: any = {};
-    obj.value = base64FromBytes(message.value);
+    message.value !== undefined && (obj.value = base64FromBytes(message.value));
     return obj;
   },
   fromProtoMsg(message: BytesValueProtoMsg, useInterfaces: boolean = true): BytesValue {

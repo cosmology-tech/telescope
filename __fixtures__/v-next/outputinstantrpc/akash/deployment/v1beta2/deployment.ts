@@ -314,7 +314,7 @@ export const Deployment = {
     const obj: any = {};
     obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined;
     obj.state = message.state;
-    obj.version = base64FromBytes(message.version);
+    message.version !== undefined && (obj.version = base64FromBytes(message.version));
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   },

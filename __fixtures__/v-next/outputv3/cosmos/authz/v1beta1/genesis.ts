@@ -12,7 +12,7 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the authz module's genesis state. */
 export interface GenesisStateAmino {
-  authorization: GrantAuthorizationAmino[];
+  authorization?: GrantAuthorizationAmino[];
 }
 /** GenesisState defines the authz module's genesis state. */
 export interface GenesisStateSDKType {

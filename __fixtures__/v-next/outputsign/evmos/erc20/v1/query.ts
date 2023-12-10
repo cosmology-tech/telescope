@@ -53,7 +53,7 @@ export interface QueryTokenPairsResponseProtoMsg {
  * method.
  */
 export interface QueryTokenPairsResponseAmino {
-  token_pairs: TokenPairAmino[];
+  token_pairs?: TokenPairAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
@@ -87,7 +87,7 @@ export interface QueryTokenPairRequestAmino {
    * token identifier can be either the hex contract address of the ERC20 or the
    * Cosmos base denomination
    */
-  token: string;
+  token?: string;
 }
 export interface QueryTokenPairRequestAminoMsg {
   type: "/evmos.erc20.v1.QueryTokenPairRequest";

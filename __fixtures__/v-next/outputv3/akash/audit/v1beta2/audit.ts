@@ -14,9 +14,9 @@ export interface ProviderProtoMsg {
 }
 /** Provider stores owner auditor and attributes details */
 export interface ProviderAmino {
-  owner: string;
-  auditor: string;
-  attributes: AttributeAmino[];
+  owner?: string;
+  auditor?: string;
+  attributes?: AttributeAmino[];
 }
 /** Provider stores owner auditor and attributes details */
 export interface ProviderSDKType {
@@ -36,9 +36,9 @@ export interface AuditedAttributesProtoMsg {
 }
 /** Attributes */
 export interface AuditedAttributesAmino {
-  owner: string;
-  auditor: string;
-  attributes: AttributeAmino[];
+  owner?: string;
+  auditor?: string;
+  attributes?: AttributeAmino[];
 }
 /** Attributes */
 export interface AuditedAttributesSDKType {
@@ -56,7 +56,7 @@ export interface AttributesResponseProtoMsg {
 }
 /** AttributesResponse represents details of deployment along with group details */
 export interface AttributesResponseAmino {
-  attributes: AuditedAttributesAmino[];
+  attributes?: AuditedAttributesAmino[];
 }
 /** AttributesResponse represents details of deployment along with group details */
 export interface AttributesResponseSDKType {
@@ -73,8 +73,8 @@ export interface AttributesFiltersProtoMsg {
 }
 /** AttributesFilters defines filters used to filter deployments */
 export interface AttributesFiltersAmino {
-  auditors: string[];
-  owners: string[];
+  auditors?: string[];
+  owners?: string[];
 }
 /** AttributesFilters defines filters used to filter deployments */
 export interface AttributesFiltersSDKType {
@@ -93,9 +93,9 @@ export interface MsgSignProviderAttributesProtoMsg {
 }
 /** MsgSignProviderAttributes defines an SDK message for signing a provider attributes */
 export interface MsgSignProviderAttributesAmino {
-  owner: string;
-  auditor: string;
-  attributes: AttributeAmino[];
+  owner?: string;
+  auditor?: string;
+  attributes?: AttributeAmino[];
 }
 /** MsgSignProviderAttributes defines an SDK message for signing a provider attributes */
 export interface MsgSignProviderAttributesSDKType {
@@ -125,9 +125,9 @@ export interface MsgDeleteProviderAttributesProtoMsg {
 }
 /** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
 export interface MsgDeleteProviderAttributesAmino {
-  owner: string;
-  auditor: string;
-  keys: string[];
+  owner?: string;
+  auditor?: string;
+  keys?: string[];
 }
 /** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
 export interface MsgDeleteProviderAttributesSDKType {

@@ -315,7 +315,7 @@ export interface MetricDescriptorProtoMsg {
  */
 export interface MetricDescriptorAmino {
   /** The resource name of the metric descriptor. */
-  name: string;
+  name?: string;
   /**
    * The metric type, including its DNS name prefix. The type is not
    * URL-encoded. All user-defined metric types have the DNS name
@@ -326,7 +326,7 @@ export interface MetricDescriptorAmino {
    *     "external.googleapis.com/prometheus/up"
    *     "appengine.googleapis.com/http/server/response_latencies"
    */
-  type: string;
+  type?: string;
   /**
    * The set of labels that can be used to describe a specific
    * instance of this metric type. For example, the
@@ -335,17 +335,17 @@ export interface MetricDescriptorAmino {
    * you can look at latencies for successful responses or just
    * for responses that failed.
    */
-  labels: LabelDescriptorAmino[];
+  labels?: LabelDescriptorAmino[];
   /**
    * Whether the metric records instantaneous values, changes to a value, etc.
    * Some combinations of `metric_kind` and `value_type` might not be supported.
    */
-  metric_kind: MetricDescriptor_MetricKind;
+  metric_kind?: MetricDescriptor_MetricKind;
   /**
    * Whether the measurement is an integer, a floating-point number, etc.
    * Some combinations of `metric_kind` and `value_type` might not be supported.
    */
-  value_type: MetricDescriptor_ValueType;
+  value_type?: MetricDescriptor_ValueType;
   /**
    * The units in which the metric value is reported. It is only applicable
    * if the `value_type` is `INT64`, `DOUBLE`, or `DISTRIBUTION`. The `unit`
@@ -450,20 +450,20 @@ export interface MetricDescriptorAmino {
    *    0..1, that will be multiplied by 100 and displayed as a percentage
    *    (so a metric value `0.03` means "3 percent").
    */
-  unit: string;
+  unit?: string;
   /** A detailed description of the metric, which can be used in documentation. */
-  description: string;
+  description?: string;
   /**
    * A concise name for the metric, which can be displayed in user interfaces.
    * Use sentence case without an ending period, for example "Request count".
    * This field is optional but it is recommended to be set for any metrics
    * associated with user-visible concepts, such as Quota.
    */
-  display_name: string;
+  display_name?: string;
   /** Optional. Metadata which can be used to guide usage of the metric. */
   metadata?: MetricDescriptor_MetricDescriptorMetadataAmino;
   /** Optional. The launch stage of the metric definition. */
-  launch_stage: LaunchStage;
+  launch_stage?: LaunchStage;
   /**
    * Read-only. If present, then a [time
    * series][google.monitoring.v3.TimeSeries], which is identified partially by
@@ -471,7 +471,7 @@ export interface MetricDescriptorAmino {
    * with this metric type can only be associated with one of the monitored
    * resource types listed here.
    */
-  monitored_resource_types: string[];
+  monitored_resource_types?: string[];
 }
 /**
  * Defines a metric type and its schema. Once a metric descriptor is created,
@@ -518,7 +518,7 @@ export interface MetricDescriptor_MetricDescriptorMetadataProtoMsg {
 export interface MetricDescriptor_MetricDescriptorMetadataAmino {
   /** Deprecated. Must use the [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage] instead. */
   /** @deprecated */
-  launch_stage: LaunchStage;
+  launch_stage?: LaunchStage;
   /**
    * The sampling period of metric data points. For metrics which are written
    * periodically, consecutive data points are stored at this time interval,
@@ -549,8 +549,8 @@ export interface Metric_LabelsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface Metric_LabelsEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface Metric_LabelsEntrySDKType {
   key: string;
@@ -587,12 +587,12 @@ export interface MetricAmino {
    * An existing metric type, see [google.api.MetricDescriptor][google.api.MetricDescriptor].
    * For example, `custom.googleapis.com/invoice/paid/amount`.
    */
-  type: string;
+  type?: string;
   /**
    * The set of label values that uniquely identify this metric. All
    * labels listed in the `MetricDescriptor` must be assigned values.
    */
-  labels: {
+  labels?: {
     [key: string]: string;
   };
 }

@@ -156,7 +156,7 @@ export const MsgIBCSend = {
     obj.channel = message.channel;
     obj.timeout_height = message.timeoutHeight ? message.timeoutHeight.toString() : undefined;
     obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     return obj;
   },
   fromAminoMsg(object: MsgIBCSendAminoMsg): MsgIBCSend {

@@ -25,7 +25,7 @@ export interface RecordProtoMsg {
 /** Record is used for representing a key in the keyring. */
 export interface RecordAmino {
   /** name represents a name of Record */
-  name: string;
+  name?: string;
   /** pub_key represents a public key in any format */
   pub_key?: AnyAmino;
   /** local stores the public information about a locally stored key */
@@ -68,7 +68,7 @@ export interface Record_LocalProtoMsg {
  */
 export interface Record_LocalAmino {
   priv_key?: AnyAmino;
-  priv_key_type: string;
+  priv_key_type?: string;
 }
 export interface Record_LocalAminoMsg {
   type: "cosmos-sdk/Local";

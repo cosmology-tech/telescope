@@ -13,9 +13,9 @@ export interface ParameterChangeProposalProtoMsg {
 }
 /** ParameterChangeProposal defines a proposal to change one or more parameters. */
 export interface ParameterChangeProposalAmino {
-  title: string;
-  description: string;
-  changes: ParamChangeAmino[];
+  title?: string;
+  description?: string;
+  changes?: ParamChangeAmino[];
 }
 /** ParameterChangeProposal defines a proposal to change one or more parameters. */
 export interface ParameterChangeProposalSDKType {
@@ -41,9 +41,9 @@ export interface ParamChangeProtoMsg {
  * ParameterChangeProposal.
  */
 export interface ParamChangeAmino {
-  subspace: string;
-  key: string;
-  value: string;
+  subspace?: string;
+  key?: string;
+  value?: string;
 }
 /**
  * ParamChange defines an individual parameter change, for use in

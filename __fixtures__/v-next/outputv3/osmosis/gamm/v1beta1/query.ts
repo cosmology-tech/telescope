@@ -21,7 +21,7 @@ export interface QueryPoolRequestProtoMsg {
 }
 /** =============================== Pool */
 export interface QueryPoolRequestAmino {
-  pool_id: string;
+  pool_id?: string;
 }
 /** =============================== Pool */
 export interface QueryPoolRequestSDKType {
@@ -74,7 +74,7 @@ export type QueryPoolsResponseEncoded = Omit<QueryPoolsResponse, "pools"> & {
   pools: (Pool1ProtoMsg | Pool2ProtoMsg | AnyProtoMsg)[];
 };
 export interface QueryPoolsResponseAmino {
-  pools: AnyAmino[];
+  pools?: AnyAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
@@ -100,7 +100,7 @@ export interface QueryNumPoolsResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryNumPoolsResponseAmino {
-  num_pools: string;
+  num_pools?: string;
 }
 export interface QueryNumPoolsResponseSDKType {
   num_pools: bigint;
@@ -115,7 +115,7 @@ export interface QueryPoolTypeRequestProtoMsg {
 }
 /** =============================== PoolType */
 export interface QueryPoolTypeRequestAmino {
-  pool_id: string;
+  pool_id?: string;
 }
 /** =============================== PoolType */
 export interface QueryPoolTypeRequestSDKType {
@@ -129,7 +129,7 @@ export interface QueryPoolTypeResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryPoolTypeResponseAmino {
-  pool_type: string;
+  pool_type?: string;
 }
 export interface QueryPoolTypeResponseSDKType {
   pool_type: string;
@@ -145,8 +145,8 @@ export interface QueryCalcJoinPoolSharesRequestProtoMsg {
 }
 /** =============================== CalcJoinPoolShares */
 export interface QueryCalcJoinPoolSharesRequestAmino {
-  pool_id: string;
-  tokens_in: CoinAmino[];
+  pool_id?: string;
+  tokens_in?: CoinAmino[];
 }
 /** =============================== CalcJoinPoolShares */
 export interface QueryCalcJoinPoolSharesRequestSDKType {
@@ -162,8 +162,8 @@ export interface QueryCalcJoinPoolSharesResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryCalcJoinPoolSharesResponseAmino {
-  share_out_amount: string;
-  tokens_out: CoinAmino[];
+  share_out_amount?: string;
+  tokens_out?: CoinAmino[];
 }
 export interface QueryCalcJoinPoolSharesResponseSDKType {
   share_out_amount: string;
@@ -180,8 +180,8 @@ export interface QueryCalcExitPoolCoinsFromSharesRequestProtoMsg {
 }
 /** =============================== CalcExitPoolCoinsFromShares */
 export interface QueryCalcExitPoolCoinsFromSharesRequestAmino {
-  pool_id: string;
-  share_in_amount: string;
+  pool_id?: string;
+  share_in_amount?: string;
 }
 /** =============================== CalcExitPoolCoinsFromShares */
 export interface QueryCalcExitPoolCoinsFromSharesRequestSDKType {
@@ -196,7 +196,7 @@ export interface QueryCalcExitPoolCoinsFromSharesResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryCalcExitPoolCoinsFromSharesResponseAmino {
-  tokens_out: CoinAmino[];
+  tokens_out?: CoinAmino[];
 }
 export interface QueryCalcExitPoolCoinsFromSharesResponseSDKType {
   tokens_out: CoinSDKType[];
@@ -211,7 +211,7 @@ export interface QueryPoolParamsRequestProtoMsg {
 }
 /** =============================== PoolParams */
 export interface QueryPoolParamsRequestAmino {
-  pool_id: string;
+  pool_id?: string;
 }
 /** =============================== PoolParams */
 export interface QueryPoolParamsRequestSDKType {
@@ -240,7 +240,7 @@ export interface QueryTotalPoolLiquidityRequestProtoMsg {
 }
 /** =============================== PoolLiquidity */
 export interface QueryTotalPoolLiquidityRequestAmino {
-  pool_id: string;
+  pool_id?: string;
 }
 /** =============================== PoolLiquidity */
 export interface QueryTotalPoolLiquidityRequestSDKType {
@@ -254,7 +254,7 @@ export interface QueryTotalPoolLiquidityResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryTotalPoolLiquidityResponseAmino {
-  liquidity: CoinAmino[];
+  liquidity?: CoinAmino[];
 }
 export interface QueryTotalPoolLiquidityResponseSDKType {
   liquidity: CoinSDKType[];
@@ -269,7 +269,7 @@ export interface QueryTotalSharesRequestProtoMsg {
 }
 /** =============================== TotalShares */
 export interface QueryTotalSharesRequestAmino {
-  pool_id: string;
+  pool_id?: string;
 }
 /** =============================== TotalShares */
 export interface QueryTotalSharesRequestSDKType {
@@ -299,8 +299,8 @@ export interface QueryCalcJoinPoolNoSwapSharesRequestProtoMsg {
 }
 /** =============================== CalcJoinPoolNoSwapShares */
 export interface QueryCalcJoinPoolNoSwapSharesRequestAmino {
-  pool_id: string;
-  tokens_in: CoinAmino[];
+  pool_id?: string;
+  tokens_in?: CoinAmino[];
 }
 /** =============================== CalcJoinPoolNoSwapShares */
 export interface QueryCalcJoinPoolNoSwapSharesRequestSDKType {
@@ -316,8 +316,8 @@ export interface QueryCalcJoinPoolNoSwapSharesResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryCalcJoinPoolNoSwapSharesResponseAmino {
-  tokens_out: CoinAmino[];
-  shares_out: string;
+  tokens_out?: CoinAmino[];
+  shares_out?: string;
 }
 export interface QueryCalcJoinPoolNoSwapSharesResponseSDKType {
   tokens_out: CoinSDKType[];
@@ -343,9 +343,9 @@ export interface QuerySpotPriceRequestProtoMsg {
  */
 /** @deprecated */
 export interface QuerySpotPriceRequestAmino {
-  pool_id: string;
-  base_asset_denom: string;
-  quote_asset_denom: string;
+  pool_id?: string;
+  base_asset_denom?: string;
+  quote_asset_denom?: string;
 }
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
@@ -367,8 +367,8 @@ export interface QueryPoolsWithFilterRequestProtoMsg {
   value: Uint8Array;
 }
 export interface QueryPoolsWithFilterRequestAmino {
-  min_liquidity: CoinAmino[];
-  pool_type: string;
+  min_liquidity?: CoinAmino[];
+  pool_type?: string;
   pagination?: PageRequestAmino;
 }
 export interface QueryPoolsWithFilterRequestSDKType {
@@ -389,7 +389,7 @@ export type QueryPoolsWithFilterResponseEncoded = Omit<QueryPoolsWithFilterRespo
   pools: (Pool1ProtoMsg | Pool2ProtoMsg | AnyProtoMsg)[];
 };
 export interface QueryPoolsWithFilterResponseAmino {
-  pools: AnyAmino[];
+  pools?: AnyAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
@@ -417,7 +417,7 @@ export interface QuerySpotPriceResponseProtoMsg {
 /** @deprecated */
 export interface QuerySpotPriceResponseAmino {
   /** String of the Dec. Ex) 10.203uatom */
-  spot_price: string;
+  spot_price?: string;
 }
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
@@ -442,10 +442,10 @@ export interface QuerySwapExactAmountInRequestProtoMsg {
 /** =============================== EstimateSwapExactAmountIn */
 export interface QuerySwapExactAmountInRequestAmino {
   /** TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE */
-  sender: string;
-  pool_id: string;
-  token_in: string;
-  routes: SwapAmountInRouteAmino[];
+  sender?: string;
+  pool_id?: string;
+  token_in?: string;
+  routes?: SwapAmountInRouteAmino[];
 }
 /** =============================== EstimateSwapExactAmountIn */
 export interface QuerySwapExactAmountInRequestSDKType {
@@ -462,7 +462,7 @@ export interface QuerySwapExactAmountInResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QuerySwapExactAmountInResponseAmino {
-  token_out_amount: string;
+  token_out_amount?: string;
 }
 export interface QuerySwapExactAmountInResponseSDKType {
   token_out_amount: string;
@@ -482,10 +482,10 @@ export interface QuerySwapExactAmountOutRequestProtoMsg {
 /** =============================== EstimateSwapExactAmountOut */
 export interface QuerySwapExactAmountOutRequestAmino {
   /** TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE */
-  sender: string;
-  pool_id: string;
-  routes: SwapAmountOutRouteAmino[];
-  token_out: string;
+  sender?: string;
+  pool_id?: string;
+  routes?: SwapAmountOutRouteAmino[];
+  token_out?: string;
 }
 /** =============================== EstimateSwapExactAmountOut */
 export interface QuerySwapExactAmountOutRequestSDKType {
@@ -502,7 +502,7 @@ export interface QuerySwapExactAmountOutResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QuerySwapExactAmountOutResponseAmino {
-  token_in_amount: string;
+  token_in_amount?: string;
 }
 export interface QuerySwapExactAmountOutResponseSDKType {
   token_in_amount: string;
@@ -522,7 +522,7 @@ export interface QueryTotalLiquidityResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryTotalLiquidityResponseAmino {
-  liquidity: CoinAmino[];
+  liquidity?: CoinAmino[];
 }
 export interface QueryTotalLiquidityResponseSDKType {
   liquidity: CoinSDKType[];

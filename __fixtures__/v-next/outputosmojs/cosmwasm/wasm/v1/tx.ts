@@ -688,7 +688,7 @@ export const MsgInstantiateContractResponse = {
   toAmino(message: MsgInstantiateContractResponse): MsgInstantiateContractResponseAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     return obj;
   },
   fromAminoMsg(object: MsgInstantiateContractResponseAminoMsg): MsgInstantiateContractResponse {
@@ -929,7 +929,7 @@ export const MsgExecuteContractResponse = {
   },
   toAmino(message: MsgExecuteContractResponse): MsgExecuteContractResponseAmino {
     const obj: any = {};
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     return obj;
   },
   fromAminoMsg(object: MsgExecuteContractResponseAminoMsg): MsgExecuteContractResponse {
@@ -1158,7 +1158,7 @@ export const MsgMigrateContractResponse = {
   },
   toAmino(message: MsgMigrateContractResponse): MsgMigrateContractResponseAmino {
     const obj: any = {};
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     return obj;
   },
   fromAminoMsg(object: MsgMigrateContractResponseAminoMsg): MsgMigrateContractResponse {

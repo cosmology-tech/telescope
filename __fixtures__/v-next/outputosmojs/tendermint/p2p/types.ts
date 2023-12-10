@@ -368,7 +368,7 @@ export const NodeInfo = {
     obj.listen_addr = message.listenAddr;
     obj.network = message.network;
     obj.version = message.version;
-    obj.channels = base64FromBytes(message.channels);
+    message.channels !== undefined && (obj.channels = base64FromBytes(message.channels));
     obj.moniker = message.moniker;
     obj.other = message.other ? NodeInfoOther.toAmino(message.other) : undefined;
     return obj;

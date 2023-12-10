@@ -16,8 +16,8 @@ export interface LogEntry_LabelsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface LogEntry_LabelsEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface LogEntry_LabelsEntrySDKType {
   key: string;
@@ -202,7 +202,7 @@ export interface LogEntryAmino {
    * slash and filtering for a log name with a leading slash will never return
    * any results.
    */
-  log_name: string;
+  log_name?: string;
   /**
    * Required. The monitored resource that produced this log entry.
    * 
@@ -246,7 +246,7 @@ export interface LogEntryAmino {
   /** Output only. The time the log entry was received by Logging. */
   receive_timestamp?: string;
   /** Optional. The severity of the log entry. The default value is `LogSeverity.DEFAULT`. */
-  severity: LogSeverity;
+  severity?: LogSeverity;
   /**
    * Optional. A unique identifier for the log entry. If you provide a value, then
    * Logging considers other log entries in the same project, with the same
@@ -260,7 +260,7 @@ export interface LogEntryAmino {
    * In queries, the `insert_id` is also used to order log entries that have
    * the same `log_name` and `timestamp` values.
    */
-  insert_id: string;
+  insert_id?: string;
   /**
    * Optional. Information about the HTTP request associated with this log entry, if
    * applicable.
@@ -282,7 +282,7 @@ export interface LogEntryAmino {
    * written. The truncation is indicated by an ellipsis at the
    * end of the character string.
    */
-  labels: {
+  labels?: {
     [key: string]: string;
   };
   /**
@@ -296,7 +296,7 @@ export interface LogEntryAmino {
    * `//tracing.googleapis.com`. Example:
    * `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
    */
-  trace: string;
+  trace?: string;
   /**
    * Optional. The span ID within the trace associated with the log entry.
    * 
@@ -304,7 +304,7 @@ export interface LogEntryAmino {
    * 16-character hexadecimal encoding of an 8-byte array, such as
    * `000000000000004a`.
    */
-  span_id: string;
+  span_id?: string;
   /**
    * Optional. The sampling decision of the trace associated with the log entry.
    * 
@@ -314,7 +314,7 @@ export interface LogEntryAmino {
    * unknown at the time. A non-sampled `trace` value is still useful as a
    * request correlation identifier. The default is False.
    */
-  trace_sampled: boolean;
+  trace_sampled?: boolean;
   /** Optional. Source code location information associated with the log entry, if any. */
   source_location?: LogEntrySourceLocationAmino;
   /**
@@ -379,17 +379,17 @@ export interface LogEntryOperationAmino {
    * Optional. An arbitrary operation identifier. Log entries with the same
    * identifier are assumed to be part of the same operation.
    */
-  id: string;
+  id?: string;
   /**
    * Optional. An arbitrary producer identifier. The combination of `id` and
    * `producer` must be globally unique. Examples for `producer`:
    * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
    */
-  producer: string;
+  producer?: string;
   /** Optional. Set this to True if this is the first log entry in the operation. */
-  first: boolean;
+  first?: boolean;
   /** Optional. Set this to True if this is the last log entry in the operation. */
-  last: boolean;
+  last?: boolean;
 }
 /**
  * Additional information about a potentially long-running operation with which
@@ -439,12 +439,12 @@ export interface LogEntrySourceLocationAmino {
    * Optional. Source file name. Depending on the runtime environment, this
    * might be a simple name or a fully-qualified name.
    */
-  file: string;
+  file?: string;
   /**
    * Optional. Line within the source file. 1-based; 0 indicates no line number
    * available.
    */
-  line: string;
+  line?: string;
   /**
    * Optional. Human-readable name of the function or method being invoked, with
    * optional context such as the class or package name. This information may be
@@ -453,7 +453,7 @@ export interface LogEntrySourceLocationAmino {
    * `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
    * (Python).
    */
-  function: string;
+  function?: string;
 }
 /**
  * Additional information about the source code location that produced the log
@@ -500,15 +500,15 @@ export interface LogSplitAmino {
    * entries. All log entries with the same |LogSplit.uid| are assumed to be
    * part of the same sequence of split log entries.
    */
-  uid: string;
+  uid?: string;
   /**
    * The index of this LogEntry in the sequence of split log entries. Log
    * entries are given |index| values 0, 1, ..., n-1 for a sequence of n log
    * entries.
    */
-  index: number;
+  index?: number;
   /** The total number of log entries that the original LogEntry was split into. */
-  total_splits: number;
+  total_splits?: number;
 }
 /**
  * Additional information used to correlate multiple log entries. Used when a

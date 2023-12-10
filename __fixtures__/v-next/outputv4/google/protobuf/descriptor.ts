@@ -4995,7 +4995,7 @@ export const UninterpretedOption = {
     obj.positive_int_value = message.positiveIntValue ? message.positiveIntValue.toString() : undefined;
     obj.negative_int_value = message.negativeIntValue ? message.negativeIntValue.toString() : undefined;
     obj.double_value = message.doubleValue;
-    obj.string_value = base64FromBytes(message.stringValue);
+    message.stringValue !== undefined && (obj.string_value = base64FromBytes(message.stringValue));
     obj.aggregate_value = message.aggregateValue;
     return obj;
   },

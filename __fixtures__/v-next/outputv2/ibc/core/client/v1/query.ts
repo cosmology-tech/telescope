@@ -22,7 +22,7 @@ export interface QueryClientStateRequestProtoMsg {
  */
 export interface QueryClientStateRequestAmino {
   /** client state unique identifier */
-  client_id: string;
+  client_id?: string;
 }
 export interface QueryClientStateRequestAminoMsg {
   type: "cosmos-sdk/QueryClientStateRequest";
@@ -61,7 +61,7 @@ export interface QueryClientStateResponseAmino {
   /** client state associated with the request identifier */
   client_state?: AnyAmino;
   /** merkle proof of existence */
-  proof: string;
+  proof?: string;
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
@@ -130,7 +130,7 @@ export interface QueryClientStatesResponseProtoMsg {
  */
 export interface QueryClientStatesResponseAmino {
   /** list of stored ClientStates of the chain. */
-  client_states: IdentifiedClientStateAmino[];
+  client_states?: IdentifiedClientStateAmino[];
   /** pagination response */
   pagination?: PageResponseAmino;
 }
@@ -175,16 +175,16 @@ export interface QueryConsensusStateRequestProtoMsg {
  */
 export interface QueryConsensusStateRequestAmino {
   /** client identifier */
-  client_id: string;
+  client_id?: string;
   /** consensus state revision number */
-  revision_number: string;
+  revision_number?: string;
   /** consensus state revision height */
-  revision_height: string;
+  revision_height?: string;
   /**
    * latest_height overrrides the height field and queries the latest stored
    * ConsensusState
    */
-  latest_height: boolean;
+  latest_height?: boolean;
 }
 export interface QueryConsensusStateRequestAminoMsg {
   type: "cosmos-sdk/QueryConsensusStateRequest";
@@ -225,7 +225,7 @@ export interface QueryConsensusStateResponseAmino {
   /** consensus state associated with the client identifier at the given height */
   consensus_state?: AnyAmino;
   /** merkle proof of existence */
-  proof: string;
+  proof?: string;
   /** height at which the proof was retrieved */
   proof_height?: HeightAmino;
 }
@@ -262,7 +262,7 @@ export interface QueryConsensusStatesRequestProtoMsg {
  */
 export interface QueryConsensusStatesRequestAmino {
   /** client identifier */
-  client_id: string;
+  client_id?: string;
   /** pagination request */
   pagination?: PageRequestAmino;
 }
@@ -298,7 +298,7 @@ export interface QueryConsensusStatesResponseProtoMsg {
  */
 export interface QueryConsensusStatesResponseAmino {
   /** consensus states associated with the identifier */
-  consensus_states: ConsensusStateWithHeightAmino[];
+  consensus_states?: ConsensusStateWithHeightAmino[];
   /** pagination response */
   pagination?: PageResponseAmino;
 }
@@ -332,7 +332,7 @@ export interface QueryClientStatusRequestProtoMsg {
  */
 export interface QueryClientStatusRequestAmino {
   /** client unique identifier */
-  client_id: string;
+  client_id?: string;
 }
 export interface QueryClientStatusRequestAminoMsg {
   type: "cosmos-sdk/QueryClientStatusRequest";
@@ -361,7 +361,7 @@ export interface QueryClientStatusResponseProtoMsg {
  * method. It returns the current status of the IBC client.
  */
 export interface QueryClientStatusResponseAmino {
-  status: string;
+  status?: string;
 }
 export interface QueryClientStatusResponseAminoMsg {
   type: "cosmos-sdk/QueryClientStatusResponse";
@@ -718,7 +718,7 @@ export const QueryClientStateResponse = {
   toAmino(message: QueryClientStateResponse): QueryClientStateResponseAmino {
     const obj: any = {};
     obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
-    obj.proof = base64FromBytes(message.proof);
+    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -1178,7 +1178,7 @@ export const QueryConsensusStateResponse = {
   toAmino(message: QueryConsensusStateResponse): QueryConsensusStateResponseAmino {
     const obj: any = {};
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
-    obj.proof = base64FromBytes(message.proof);
+    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },

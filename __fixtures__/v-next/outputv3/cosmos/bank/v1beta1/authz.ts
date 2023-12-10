@@ -23,7 +23,7 @@ export interface SendAuthorizationProtoMsg {
  * Since: cosmos-sdk 0.43
  */
 export interface SendAuthorizationAmino {
-  spend_limit: CoinAmino[];
+  spend_limit?: CoinAmino[];
 }
 /**
  * SendAuthorization allows the grantee to spend up to spend_limit coins from

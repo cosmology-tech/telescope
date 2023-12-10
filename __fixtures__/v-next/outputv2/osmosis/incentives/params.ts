@@ -19,7 +19,7 @@ export interface ParamsAmino {
    * distr_epoch_identifier is what epoch type distribution will be triggered by
    * (day, week, etc.)
    */
-  distr_epoch_identifier: string;
+  distr_epoch_identifier?: string;
 }
 export interface ParamsAminoMsg {
   type: "osmosis/incentives/params";

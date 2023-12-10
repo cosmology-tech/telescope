@@ -137,7 +137,7 @@ export const QueryEvidenceRequest = {
   },
   toAmino(message: QueryEvidenceRequest): QueryEvidenceRequestAmino {
     const obj: any = {};
-    obj.evidence_hash = base64FromBytes(message.evidenceHash);
+    message.evidenceHash !== undefined && (obj.evidence_hash = base64FromBytes(message.evidenceHash));
     return obj;
   },
   fromAminoMsg(object: QueryEvidenceRequestAminoMsg): QueryEvidenceRequest {

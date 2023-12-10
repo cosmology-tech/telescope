@@ -19,14 +19,14 @@ export interface VersionProtoMsg {
 }
 /** The version number of protocol compiler. */
 export interface VersionAmino {
-  major: number;
-  minor: number;
-  patch: number;
+  major?: number;
+  minor?: number;
+  patch?: number;
   /**
    * A suffix for alpha, beta or rc release, e.g., "alpha-1", "rc2". It should
    * be empty for mainline stable releases.
    */
-  suffix: string;
+  suffix?: string;
 }
 export interface VersionAminoMsg {
   type: "/google.protobuf.compiler.Version";
@@ -80,9 +80,9 @@ export interface CodeGeneratorRequestAmino {
    * code generator should generate code only for these files.  Each file's
    * descriptor will be included in proto_file, below.
    */
-  file_to_generate: string[];
+  file_to_generate?: string[];
   /** The generator parameter passed on the command-line. */
-  parameter: string;
+  parameter?: string;
   /**
    * FileDescriptorProtos for all files in files_to_generate and everything
    * they import.  The files will appear in topological order, so each file
@@ -99,7 +99,7 @@ export interface CodeGeneratorRequestAmino {
    * Type names of fields and extensions in the FileDescriptorProto are always
    * fully qualified.
    */
-  proto_file: FileDescriptorProtoAmino[];
+  proto_file?: FileDescriptorProtoAmino[];
   /** The version number of protocol compiler. */
   compiler_version?: VersionAmino;
 }
@@ -145,8 +145,8 @@ export interface CodeGeneratorResponseAmino {
    * unparseable -- should be reported by writing a message to stderr and
    * exiting with a non-zero status code.
    */
-  error: string;
-  file: CodeGeneratorResponse_FileAmino[];
+  error?: string;
+  file?: CodeGeneratorResponse_FileAmino[];
 }
 export interface CodeGeneratorResponseAminoMsg {
   type: "/google.protobuf.compiler.CodeGeneratorResponse";
@@ -235,7 +235,7 @@ export interface CodeGeneratorResponse_FileAmino {
    * this writing protoc does not optimize for this -- it will read the entire
    * CodeGeneratorResponse before writing files to disk.
    */
-  name: string;
+  name?: string;
   /**
    * If non-empty, indicates that the named file should already exist, and the
    * content here is to be inserted into that file at a defined insertion
@@ -275,9 +275,9 @@ export interface CodeGeneratorResponse_FileAmino {
    * 
    * If |insertion_point| is present, |name| must also be present.
    */
-  insertion_point: string;
+  insertion_point?: string;
   /** The file contents. */
-  content: string;
+  content?: string;
 }
 export interface CodeGeneratorResponse_FileAminoMsg {
   type: "/google.protobuf.compiler.File";

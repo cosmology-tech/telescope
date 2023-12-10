@@ -14,9 +14,9 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the lockup module's genesis state. */
 export interface GenesisStateAmino {
-  last_lock_id: string;
-  locks: PeriodLockAmino[];
-  synthetic_locks: SyntheticLockAmino[];
+  last_lock_id?: string;
+  locks?: PeriodLockAmino[];
+  synthetic_locks?: SyntheticLockAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "osmosis/lockup/genesis-state";

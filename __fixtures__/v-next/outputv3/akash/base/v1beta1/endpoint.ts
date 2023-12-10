@@ -46,7 +46,7 @@ export interface EndpointProtoMsg {
 }
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointAmino {
-  kind: Endpoint_Kind;
+  kind?: Endpoint_Kind;
 }
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointSDKType {

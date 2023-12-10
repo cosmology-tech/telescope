@@ -21,7 +21,7 @@ export interface QueryDenomTraceRequestProtoMsg {
  */
 export interface QueryDenomTraceRequestAmino {
   /** hash (in hex format) of the denomination trace information. */
-  hash: string;
+  hash?: string;
 }
 /**
  * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC
@@ -104,7 +104,7 @@ export interface QueryDenomTracesResponseProtoMsg {
  */
 export interface QueryDenomTracesResponseAmino {
   /** denom_traces returns all denominations trace information. */
-  denom_traces: DenomTraceAmino[];
+  denom_traces?: DenomTraceAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }

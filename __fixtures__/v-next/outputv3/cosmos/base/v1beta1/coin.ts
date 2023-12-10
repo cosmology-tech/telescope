@@ -22,8 +22,8 @@ export interface CoinProtoMsg {
  * signatures required by gogoproto.
  */
 export interface CoinAmino {
-  denom: string;
-  amount: string;
+  denom?: string;
+  amount?: string;
 }
 /**
  * Coin defines a token with a denomination and an amount.
@@ -56,8 +56,8 @@ export interface DecCoinProtoMsg {
  * signatures required by gogoproto.
  */
 export interface DecCoinAmino {
-  denom: string;
-  amount: string;
+  denom?: string;
+  amount?: string;
 }
 /**
  * DecCoin defines a token with a denomination and a decimal amount.
@@ -79,7 +79,7 @@ export interface IntProtoProtoMsg {
 }
 /** IntProto defines a Protobuf wrapper around an Int object. */
 export interface IntProtoAmino {
-  int: string;
+  int?: string;
 }
 /** IntProto defines a Protobuf wrapper around an Int object. */
 export interface IntProtoSDKType {
@@ -95,7 +95,7 @@ export interface DecProtoProtoMsg {
 }
 /** DecProto defines a Protobuf wrapper around a Dec object. */
 export interface DecProtoAmino {
-  dec: string;
+  dec?: string;
 }
 /** DecProto defines a Protobuf wrapper around a Dec object. */
 export interface DecProtoSDKType {

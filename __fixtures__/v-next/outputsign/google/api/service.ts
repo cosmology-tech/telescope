@@ -178,18 +178,18 @@ export interface ServiceAmino {
    * typically goes through DNS verification to make sure the owner
    * of the service also owns the DNS name.
    */
-  name: string;
+  name?: string;
   /** The product title for this service. */
-  title: string;
+  title?: string;
   /** The Google project that owns this service. */
-  producer_project_id: string;
+  producer_project_id?: string;
   /**
    * A unique ID for a specific instance of this message, typically assigned
    * by the client for tracking purpose. Must be no longer than 63 characters
    * and only lower case letters, digits, '.', '_' and '-' are allowed. If
    * empty, the server may choose to generate one instead.
    */
-  id: string;
+  id?: string;
   /**
    * A list of API interfaces exported by this service. Only the `name` field
    * of the [google.protobuf.Api][google.protobuf.Api] needs to be provided by the configuration
@@ -197,7 +197,7 @@ export interface ServiceAmino {
    * normalization process. It is an error to specify an API interface here
    * which cannot be resolved against the associated IDL files.
    */
-  apis: ApiAmino[];
+  apis?: ApiAmino[];
   /**
    * A list of all proto message types included in this API service.
    * Types referenced directly or indirectly by the `apis` are
@@ -208,7 +208,7 @@ export interface ServiceAmino {
    *     types:
    *     - name: google.protobuf.Int32
    */
-  types: TypeAmino[];
+  types?: TypeAmino[];
   /**
    * A list of all enum types included in this API service.  Enums
    * referenced directly or indirectly by the `apis` are automatically
@@ -218,7 +218,7 @@ export interface ServiceAmino {
    *     enums:
    *     - name: google.someapi.v1.SomeEnum
    */
-  enums: EnumAmino[];
+  enums?: EnumAmino[];
   /** Additional API documentation. */
   documentation?: DocumentationAmino;
   /** API backend configuration. */
@@ -238,18 +238,18 @@ export interface ServiceAmino {
    * with the same name as the service is automatically generated to service all
    * defined APIs.
    */
-  endpoints: EndpointAmino[];
+  endpoints?: EndpointAmino[];
   /** Configuration for the service control plane. */
   control?: ControlAmino;
   /** Defines the logs used by this service. */
-  logs: LogDescriptorAmino[];
+  logs?: LogDescriptorAmino[];
   /** Defines the metrics used by this service. */
-  metrics: MetricDescriptorAmino[];
+  metrics?: MetricDescriptorAmino[];
   /**
    * Defines the monitored resources used by this service. This is required
    * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
    */
-  monitored_resources: MonitoredResourceDescriptorAmino[];
+  monitored_resources?: MonitoredResourceDescriptorAmino[];
   /** Billing configuration. */
   billing?: BillingAmino;
   /** Logging configuration. */

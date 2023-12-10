@@ -14,7 +14,7 @@ export interface QueryProvidersResponseProtoMsg {
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponseAmino {
-  providers: ProviderAmino[];
+  providers?: ProviderAmino[];
   pagination?: PageResponseAmino;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
@@ -33,8 +33,8 @@ export interface QueryProviderRequestProtoMsg {
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequestAmino {
-  auditor: string;
-  owner: string;
+  auditor?: string;
+  owner?: string;
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequestSDKType {
@@ -68,7 +68,7 @@ export interface QueryProviderAttributesRequestProtoMsg {
 }
 /** QueryProviderAttributesRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderAttributesRequestAmino {
-  owner: string;
+  owner?: string;
   pagination?: PageRequestAmino;
 }
 /** QueryProviderAttributesRequest is request type for the Query/Provider RPC method */
@@ -87,8 +87,8 @@ export interface QueryProviderAuditorRequestProtoMsg {
 }
 /** QueryProviderAuditorRequest is request type for the Query/Providers RPC method */
 export interface QueryProviderAuditorRequestAmino {
-  auditor: string;
-  owner: string;
+  auditor?: string;
+  owner?: string;
 }
 /** QueryProviderAuditorRequest is request type for the Query/Providers RPC method */
 export interface QueryProviderAuditorRequestSDKType {
@@ -106,7 +106,7 @@ export interface QueryAuditorAttributesRequestProtoMsg {
 }
 /** QueryAuditorAttributesRequest is request type for the Query/Providers RPC method */
 export interface QueryAuditorAttributesRequestAmino {
-  auditor: string;
+  auditor?: string;
   pagination?: PageRequestAmino;
 }
 /** QueryAuditorAttributesRequest is request type for the Query/Providers RPC method */

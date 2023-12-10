@@ -71,7 +71,7 @@ export interface EpochInfoProtoMsg {
  */
 export interface EpochInfoAmino {
   /** identifier is a unique reference to this particular timer. */
-  identifier: string;
+  identifier?: string;
   /**
    * start_time is the time at which the timer first ever ticks.
    * If start_time is in the future, the epoch will not begin until the start
@@ -91,7 +91,7 @@ export interface EpochInfoAmino {
    * The first tick (current_epoch=1) is defined as
    * the first block whose blocktime is greater than the EpochInfo start_time.
    */
-  current_epoch: string;
+  current_epoch?: string;
   /**
    * current_epoch_start_time describes the start time of the current timer
    * interval. The interval is (current_epoch_start_time,
@@ -116,12 +116,12 @@ export interface EpochInfoAmino {
    * epoch_counting_started is a boolean, that indicates whether this
    * epoch timer has began yet.
    */
-  epoch_counting_started: boolean;
+  epoch_counting_started?: boolean;
   /**
    * current_epoch_start_height is the block height at which the current epoch
    * started. (The block height at which the timer last ticked)
    */
-  current_epoch_start_height: string;
+  current_epoch_start_height?: string;
 }
 export interface EpochInfoAminoMsg {
   type: "osmosis/epochs/epoch-info";
@@ -150,7 +150,7 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the epochs module's genesis state. */
 export interface GenesisStateAmino {
-  epochs: EpochInfoAmino[];
+  epochs?: EpochInfoAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "osmosis/epochs/genesis-state";

@@ -12,8 +12,8 @@ export interface AttributeProtoMsg {
 }
 /** Attribute represents key value pair */
 export interface AttributeAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface AttributeAminoMsg {
   type: "/akash.base.v1beta1.Attribute";
@@ -48,9 +48,9 @@ export interface SignedByProtoMsg {
  */
 export interface SignedByAmino {
   /** all_of all keys in this list must have signed attributes */
-  all_of: string[];
+  all_of?: string[];
   /** any_of at least of of the keys from the list must have signed attributes */
-  any_of: string[];
+  any_of?: string[];
 }
 export interface SignedByAminoMsg {
   type: "/akash.base.v1beta1.SignedBy";
@@ -82,7 +82,7 @@ export interface PlacementRequirementsAmino {
   /** SignedBy list of keys that tenants expect to have signatures from */
   signed_by?: SignedByAmino;
   /** Attribute list of attributes tenant expects from the provider */
-  attributes: AttributeAmino[];
+  attributes?: AttributeAmino[];
 }
 export interface PlacementRequirementsAminoMsg {
   type: "/akash.base.v1beta1.PlacementRequirements";

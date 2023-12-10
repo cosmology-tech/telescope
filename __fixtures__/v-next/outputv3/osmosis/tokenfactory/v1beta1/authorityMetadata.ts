@@ -21,7 +21,7 @@ export interface DenomAuthorityMetadataProtoMsg {
  */
 export interface DenomAuthorityMetadataAmino {
   /** Can be empty for no admin, or a valid osmosis address */
-  admin: string;
+  admin?: string;
 }
 /**
  * DenomAuthorityMetadata specifies metadata for addresses that have specific

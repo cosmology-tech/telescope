@@ -36,7 +36,7 @@ export interface QueryDeploymentsResponseProtoMsg {
 }
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponseAmino {
-  deployments: QueryDeploymentResponseAmino[];
+  deployments?: QueryDeploymentResponseAmino[];
   pagination?: PageResponseAmino;
 }
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
@@ -73,7 +73,7 @@ export interface QueryDeploymentResponseProtoMsg {
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponseAmino {
   deployment?: DeploymentAmino;
-  groups: GroupAmino[];
+  groups?: GroupAmino[];
   escrow_account?: AccountAmino;
 }
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */

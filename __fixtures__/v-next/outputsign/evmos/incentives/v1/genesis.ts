@@ -21,9 +21,9 @@ export interface GenesisStateAmino {
   /** module parameters */
   params?: ParamsAmino;
   /** active incentives */
-  incentives: IncentiveAmino[];
+  incentives?: IncentiveAmino[];
   /** active Gasmeters */
-  gas_meters: GasMeterAmino[];
+  gas_meters?: GasMeterAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "/evmos.incentives.v1.GenesisState";
@@ -53,13 +53,13 @@ export interface ParamsProtoMsg {
 /** Params defines the incentives module params */
 export interface ParamsAmino {
   /** parameter to enable incentives */
-  enable_incentives: boolean;
+  enable_incentives?: boolean;
   /** maximum percentage an incentive can allocate per denomination */
-  allocation_limit: string;
+  allocation_limit?: string;
   /** identifier for the epochs module hooks */
-  incentives_epoch_identifier: string;
+  incentives_epoch_identifier?: string;
   /** scaling factor for capping rewards */
-  reward_scaler: string;
+  reward_scaler?: string;
 }
 export interface ParamsAminoMsg {
   type: "/evmos.incentives.v1.Params";

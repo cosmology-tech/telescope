@@ -74,7 +74,7 @@ export interface QueryAppliedPlanRequestProtoMsg {
  */
 export interface QueryAppliedPlanRequestAmino {
   /** name is the name of the applied plan to query for. */
-  name: string;
+  name?: string;
 }
 export interface QueryAppliedPlanRequestAminoMsg {
   type: "cosmos-sdk/QueryAppliedPlanRequest";
@@ -105,7 +105,7 @@ export interface QueryAppliedPlanResponseProtoMsg {
  */
 export interface QueryAppliedPlanResponseAmino {
   /** height is the block height at which the plan was applied. */
-  height: string;
+  height?: string;
 }
 export interface QueryAppliedPlanResponseAminoMsg {
   type: "cosmos-sdk/QueryAppliedPlanResponse";
@@ -144,7 +144,7 @@ export interface QueryUpgradedConsensusStateRequestAmino {
    * last height of the current chain must be sent in request
    * as this is the height under which next consensus state is stored
    */
-  last_height: string;
+  last_height?: string;
 }
 export interface QueryUpgradedConsensusStateRequestAminoMsg {
   type: "cosmos-sdk/QueryUpgradedConsensusStateRequest";
@@ -178,7 +178,7 @@ export interface QueryUpgradedConsensusStateResponseProtoMsg {
 /** @deprecated */
 export interface QueryUpgradedConsensusStateResponseAmino {
   /** Since: cosmos-sdk 0.43 */
-  upgraded_consensus_state: string;
+  upgraded_consensus_state?: string;
 }
 export interface QueryUpgradedConsensusStateResponseAminoMsg {
   type: "cosmos-sdk/QueryUpgradedConsensusStateResponse";
@@ -222,7 +222,7 @@ export interface QueryModuleVersionsRequestAmino {
    * consensus version from state. Leaving this empty will
    * fetch the full list of module versions from state
    */
-  module_name: string;
+  module_name?: string;
 }
 export interface QueryModuleVersionsRequestAminoMsg {
   type: "cosmos-sdk/QueryModuleVersionsRequest";
@@ -259,7 +259,7 @@ export interface QueryModuleVersionsResponseProtoMsg {
  */
 export interface QueryModuleVersionsResponseAmino {
   /** module_versions is a list of module names with their consensus versions. */
-  module_versions: ModuleVersionAmino[];
+  module_versions?: ModuleVersionAmino[];
 }
 export interface QueryModuleVersionsResponseAminoMsg {
   type: "cosmos-sdk/QueryModuleVersionsResponse";
@@ -318,7 +318,7 @@ export interface QueryAuthorityResponseProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface QueryAuthorityResponseAmino {
-  address: string;
+  address?: string;
 }
 export interface QueryAuthorityResponseAminoMsg {
   type: "cosmos-sdk/QueryAuthorityResponse";
@@ -824,7 +824,7 @@ export const QueryUpgradedConsensusStateResponse = {
   },
   toAmino(message: QueryUpgradedConsensusStateResponse): QueryUpgradedConsensusStateResponseAmino {
     const obj: any = {};
-    obj.upgraded_consensus_state = base64FromBytes(message.upgradedConsensusState);
+    message.upgradedConsensusState !== undefined && (obj.upgraded_consensus_state = base64FromBytes(message.upgradedConsensusState));
     return obj;
   },
   fromAminoMsg(object: QueryUpgradedConsensusStateResponseAminoMsg): QueryUpgradedConsensusStateResponse {

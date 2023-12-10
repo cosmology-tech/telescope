@@ -15,9 +15,9 @@ export interface MsgSendProtoMsg {
 }
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSendAmino {
-  from_address: string;
-  to_address: string;
-  amount: CoinAmino[];
+  from_address?: string;
+  to_address?: string;
+  amount?: CoinAmino[];
 }
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSendSDKType {
@@ -46,8 +46,8 @@ export interface MsgMultiSendProtoMsg {
 }
 /** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
 export interface MsgMultiSendAmino {
-  inputs: InputAmino[];
-  outputs: OutputAmino[];
+  inputs?: InputAmino[];
+  outputs?: OutputAmino[];
 }
 /** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
 export interface MsgMultiSendSDKType {

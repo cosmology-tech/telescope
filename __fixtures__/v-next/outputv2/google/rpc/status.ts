@@ -41,18 +41,18 @@ export interface StatusProtoMsg {
  */
 export interface StatusAmino {
   /** The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code]. */
-  code: number;
+  code?: number;
   /**
    * A developer-facing error message, which should be in English. Any
    * user-facing error message should be localized and sent in the
    * [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
    */
-  message: string;
+  message?: string;
   /**
    * A list of messages that carry the error details.  There is a common set of
    * message types for APIs to use.
    */
-  details: AnyAmino[];
+  details?: AnyAmino[];
 }
 export interface StatusAminoMsg {
   type: "/google.rpc.Status";

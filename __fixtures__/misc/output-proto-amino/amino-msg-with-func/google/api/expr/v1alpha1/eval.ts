@@ -11,7 +11,7 @@ export interface ExprValueProtoMsg {
 }
 export interface ExprValueAmino {
   /** The ids of the expressions with unknown values. */
-  exprs: IdRefAmino[];
+  exprs?: IdRefAmino[];
 }
 export interface ExprValueAminoMsg {
   type: "/google.api.expr.v1alpha1.ExprValue";
@@ -30,7 +30,7 @@ export interface IdRefProtoMsg {
 }
 export interface IdRefAmino {
   /** The expression id. */
-  id: number;
+  id?: number;
 }
 export interface IdRefAminoMsg {
   type: "/google.api.expr.v1alpha1.IdRef";

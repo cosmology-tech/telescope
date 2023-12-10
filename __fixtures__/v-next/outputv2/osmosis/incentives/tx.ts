@@ -44,23 +44,23 @@ export interface MsgCreateGaugeAmino {
    * at a single time and only distribute their tokens again once the gauge is
    * refilled
    */
-  is_perpetual: boolean;
+  is_perpetual?: boolean;
   /** owner is the address of gauge creator */
-  owner: string;
+  owner?: string;
   /**
    * distribute_to show which lock the gauge should distribute to by time
    * duration or by timestamp
    */
   distribute_to?: QueryConditionAmino;
   /** coins are coin(s) to be distributed by the gauge */
-  coins: CoinAmino[];
+  coins?: CoinAmino[];
   /** start_time is the distribution start time */
   start_time?: string;
   /**
    * num_epochs_paid_over is the number of epochs distribution will be completed
    * over
    */
-  num_epochs_paid_over: string;
+  num_epochs_paid_over?: string;
 }
 export interface MsgCreateGaugeAminoMsg {
   type: "osmosis/incentives/create-gauge";
@@ -102,11 +102,11 @@ export interface MsgAddToGaugeProtoMsg {
 /** MsgAddToGauge adds coins to a previously created gauge */
 export interface MsgAddToGaugeAmino {
   /** owner is the gauge owner's address */
-  owner: string;
+  owner?: string;
   /** gauge_id is the ID of gauge that rewards are getting added to */
-  gauge_id: string;
+  gauge_id?: string;
   /** rewards are the coin(s) to add to gauge */
-  rewards: CoinAmino[];
+  rewards?: CoinAmino[];
 }
 export interface MsgAddToGaugeAminoMsg {
   type: "osmosis/incentives/add-to-gauge";

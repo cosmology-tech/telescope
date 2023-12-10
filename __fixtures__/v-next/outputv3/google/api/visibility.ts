@@ -67,7 +67,7 @@ export interface VisibilityAmino {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: VisibilityRuleAmino[];
+  rules?: VisibilityRuleAmino[];
 }
 /**
  * `Visibility` defines restrictions for the visibility of service
@@ -140,7 +140,7 @@ export interface VisibilityRuleAmino {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /**
    * A comma-separated list of visibility labels that apply to the `selector`.
    * Any of the listed labels can be used to grant the visibility.
@@ -158,7 +158,7 @@ export interface VisibilityRuleAmino {
    * Removing INTERNAL from this restriction will break clients that rely on
    * this method and only had access to it through INTERNAL.
    */
-  restriction: string;
+  restriction?: string;
 }
 /**
  * A visibility rule provides visibility configuration for an individual API

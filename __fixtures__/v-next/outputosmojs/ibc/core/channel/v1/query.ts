@@ -831,7 +831,7 @@ export const QueryChannelResponse = {
   toAmino(message: QueryChannelResponse): QueryChannelResponseAmino {
     const obj: any = {};
     obj.channel = message.channel ? Channel.toAmino(message.channel) : undefined;
-    obj.proof = base64FromBytes(message.proof);
+    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -1527,7 +1527,7 @@ export const QueryChannelClientStateResponse = {
   toAmino(message: QueryChannelClientStateResponse): QueryChannelClientStateResponseAmino {
     const obj: any = {};
     obj.identified_client_state = message.identifiedClientState ? IdentifiedClientState.toAmino(message.identifiedClientState) : undefined;
-    obj.proof = base64FromBytes(message.proof);
+    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -1801,7 +1801,7 @@ export const QueryChannelConsensusStateResponse = {
     const obj: any = {};
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
     obj.client_id = message.clientId;
-    obj.proof = base64FromBytes(message.proof);
+    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -2044,8 +2044,8 @@ export const QueryPacketCommitmentResponse = {
   },
   toAmino(message: QueryPacketCommitmentResponse): QueryPacketCommitmentResponseAmino {
     const obj: any = {};
-    obj.commitment = base64FromBytes(message.commitment);
-    obj.proof = base64FromBytes(message.proof);
+    message.commitment !== undefined && (obj.commitment = base64FromBytes(message.commitment));
+    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -2545,7 +2545,7 @@ export const QueryPacketReceiptResponse = {
   toAmino(message: QueryPacketReceiptResponse): QueryPacketReceiptResponseAmino {
     const obj: any = {};
     obj.received = message.received;
-    obj.proof = base64FromBytes(message.proof);
+    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -2788,8 +2788,8 @@ export const QueryPacketAcknowledgementResponse = {
   },
   toAmino(message: QueryPacketAcknowledgementResponse): QueryPacketAcknowledgementResponseAmino {
     const obj: any = {};
-    obj.acknowledgement = base64FromBytes(message.acknowledgement);
-    obj.proof = base64FromBytes(message.proof);
+    message.acknowledgement !== undefined && (obj.acknowledgement = base64FromBytes(message.acknowledgement));
+    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -3852,7 +3852,7 @@ export const QueryNextSequenceReceiveResponse = {
   toAmino(message: QueryNextSequenceReceiveResponse): QueryNextSequenceReceiveResponseAmino {
     const obj: any = {};
     obj.next_sequence_receive = message.nextSequenceReceive ? message.nextSequenceReceive.toString() : undefined;
-    obj.proof = base64FromBytes(message.proof);
+    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },

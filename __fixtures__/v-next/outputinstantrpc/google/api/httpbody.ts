@@ -216,7 +216,7 @@ export const HttpBody = {
   toAmino(message: HttpBody): HttpBodyAmino {
     const obj: any = {};
     obj.content_type = message.contentType;
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     if (message.extensions) {
       obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
     } else {

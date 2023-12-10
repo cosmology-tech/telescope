@@ -64,10 +64,10 @@ export interface OrderIDProtoMsg {
 }
 /** OrderID stores owner and all other seq numbers */
 export interface OrderIDAmino {
-  owner: string;
-  dseq: string;
-  gseq: number;
-  oseq: number;
+  owner?: string;
+  dseq?: string;
+  gseq?: number;
+  oseq?: number;
 }
 export interface OrderIDAminoMsg {
   type: "/akash.market.v1beta2.OrderID";
@@ -94,9 +94,9 @@ export interface OrderProtoMsg {
 /** Order stores orderID, state of order and other details */
 export interface OrderAmino {
   order_id?: OrderIDAmino;
-  state: Order_State;
+  state?: Order_State;
   spec?: GroupSpecAmino;
-  created_at: string;
+  created_at?: string;
 }
 export interface OrderAminoMsg {
   type: "/akash.market.v1beta2.Order";
@@ -123,11 +123,11 @@ export interface OrderFiltersProtoMsg {
 }
 /** OrderFilters defines flags for order list filter */
 export interface OrderFiltersAmino {
-  owner: string;
-  dseq: string;
-  gseq: number;
-  oseq: number;
-  state: string;
+  owner?: string;
+  dseq?: string;
+  gseq?: number;
+  oseq?: number;
+  state?: string;
 }
 export interface OrderFiltersAminoMsg {
   type: "/akash.market.v1beta2.OrderFilters";

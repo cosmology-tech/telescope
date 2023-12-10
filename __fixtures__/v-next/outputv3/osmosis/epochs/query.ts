@@ -17,7 +17,7 @@ export interface QueryEpochsInfoResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryEpochsInfoResponseAmino {
-  epochs: EpochInfoAmino[];
+  epochs?: EpochInfoAmino[];
 }
 export interface QueryEpochsInfoResponseSDKType {
   epochs: EpochInfoSDKType[];
@@ -30,7 +30,7 @@ export interface QueryCurrentEpochRequestProtoMsg {
   value: Uint8Array;
 }
 export interface QueryCurrentEpochRequestAmino {
-  identifier: string;
+  identifier?: string;
 }
 export interface QueryCurrentEpochRequestSDKType {
   identifier: string;
@@ -43,7 +43,7 @@ export interface QueryCurrentEpochResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryCurrentEpochResponseAmino {
-  current_epoch: string;
+  current_epoch?: string;
 }
 export interface QueryCurrentEpochResponseSDKType {
   current_epoch: bigint;

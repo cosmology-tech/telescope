@@ -19,7 +19,7 @@ export interface PubKeyAmino {
    * Point on secp256r1 curve in a compressed representation as specified in section
    * 4.3.6 of ANSI X9.62: https://webstore.ansi.org/standards/ascx9/ansix9621998
    */
-  key: string;
+  key?: string;
 }
 export interface PubKeyAminoMsg {
   type: "cosmos-sdk/PubKey";
@@ -41,7 +41,7 @@ export interface PrivKeyProtoMsg {
 /** PrivKey defines a secp256r1 ECDSA private key. */
 export interface PrivKeyAmino {
   /** secret number serialized using big-endian encoding */
-  secret: string;
+  secret?: string;
 }
 export interface PrivKeyAminoMsg {
   type: "cosmos-sdk/PrivKey";
@@ -93,7 +93,7 @@ export const PubKey = {
   },
   toAmino(message: PubKey): PubKeyAmino {
     const obj: any = {};
-    obj.key = base64FromBytes(message.key);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
     return obj;
   },
   fromAminoMsg(object: PubKeyAminoMsg): PubKey {
@@ -160,7 +160,7 @@ export const PrivKey = {
   },
   toAmino(message: PrivKey): PrivKeyAmino {
     const obj: any = {};
-    obj.secret = base64FromBytes(message.secret);
+    message.secret !== undefined && (obj.secret = base64FromBytes(message.secret));
     return obj;
   },
   fromAminoMsg(object: PrivKeyAminoMsg): PrivKey {

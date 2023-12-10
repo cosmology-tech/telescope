@@ -38,21 +38,21 @@ export interface GenesisStateAmino {
    * last_total_power tracks the total amounts of bonded tokens recorded during
    * the previous end block.
    */
-  last_total_power: string;
+  last_total_power?: string;
   /**
    * last_validator_powers is a special index that provides a historical list
    * of the last-block's bonded validators.
    */
-  last_validator_powers: LastValidatorPowerAmino[];
+  last_validator_powers?: LastValidatorPowerAmino[];
   /** delegations defines the validator set at genesis. */
-  validators: ValidatorAmino[];
+  validators?: ValidatorAmino[];
   /** delegations defines the delegations active at genesis. */
-  delegations: DelegationAmino[];
+  delegations?: DelegationAmino[];
   /** unbonding_delegations defines the unbonding delegations active at genesis. */
-  unbonding_delegations: UnbondingDelegationAmino[];
+  unbonding_delegations?: UnbondingDelegationAmino[];
   /** redelegations defines the redelegations active at genesis. */
-  redelegations: RedelegationAmino[];
-  exported: boolean;
+  redelegations?: RedelegationAmino[];
+  exported?: boolean;
 }
 /** GenesisState defines the staking module's genesis state. */
 export interface GenesisStateSDKType {
@@ -79,9 +79,9 @@ export interface LastValidatorPowerProtoMsg {
 /** LastValidatorPower required for validator set update logic. */
 export interface LastValidatorPowerAmino {
   /** address is the address of the validator. */
-  address: string;
+  address?: string;
   /** power defines the power of the validator. */
-  power: string;
+  power?: string;
 }
 /** LastValidatorPower required for validator set update logic. */
 export interface LastValidatorPowerSDKType {
@@ -285,7 +285,7 @@ export const GenesisState = {
   toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
-    obj.last_total_power = base64FromBytes(message.lastTotalPower);
+    message.lastTotalPower !== undefined && (obj.last_total_power = base64FromBytes(message.lastTotalPower));
     if (message.lastValidatorPowers) {
       obj.last_validator_powers = message.lastValidatorPowers.map(e => e ? LastValidatorPower.toAmino(e, useInterfaces) : undefined);
     } else {

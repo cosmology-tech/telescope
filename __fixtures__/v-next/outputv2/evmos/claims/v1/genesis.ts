@@ -20,7 +20,7 @@ export interface GenesisStateAmino {
   /** params defines all the parameters of the module. */
   params?: ParamsAmino;
   /** list of claim records with the corresponding airdrop recipient */
-  claims_records: ClaimsRecordAddressAmino[];
+  claims_records?: ClaimsRecordAddressAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "/evmos.claims.v1.GenesisState";
@@ -58,7 +58,7 @@ export interface ParamsProtoMsg {
 /** Params defines the claims module's parameters. */
 export interface ParamsAmino {
   /** enable claiming process */
-  enable_claims: boolean;
+  enable_claims?: boolean;
   /** timestamp of the airdrop start */
   airdrop_start_time?: string;
   /** duration until decay of claimable tokens begin */
@@ -66,14 +66,14 @@ export interface ParamsAmino {
   /** duration of the token claim decay period */
   duration_of_decay?: DurationAmino;
   /** denom of claimable coin */
-  claims_denom: string;
+  claims_denom?: string;
   /**
    * list of authorized channel identifiers that can perform address
    * attestations via IBC.
    */
-  authorized_channels: string[];
+  authorized_channels?: string[];
   /** list of channel identifiers from EVM compatible chains */
-  evm_channels: string[];
+  evm_channels?: string[];
 }
 export interface ParamsAminoMsg {
   type: "/evmos.claims.v1.Params";

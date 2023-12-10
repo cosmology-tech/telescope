@@ -313,7 +313,7 @@ export const MsgCreateDeployment = {
     } else {
       obj.groups = [];
     }
-    obj.version = base64FromBytes(message.version);
+    message.version !== undefined && (obj.version = base64FromBytes(message.version));
     obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined;
     return obj;
   },
@@ -707,7 +707,7 @@ export const MsgUpdateDeployment = {
     } else {
       obj.groups = [];
     }
-    obj.version = base64FromBytes(message.version);
+    message.version !== undefined && (obj.version = base64FromBytes(message.version));
     return obj;
   },
   fromAminoMsg(object: MsgUpdateDeploymentAminoMsg): MsgUpdateDeployment {
@@ -1196,7 +1196,7 @@ export const Deployment = {
     const obj: any = {};
     obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined;
     obj.state = message.state;
-    obj.version = base64FromBytes(message.version);
+    message.version !== undefined && (obj.version = base64FromBytes(message.version));
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   },

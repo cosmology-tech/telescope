@@ -143,18 +143,18 @@ export interface ChannelProtoMsg {
  */
 export interface ChannelAmino {
   /** current state of the channel end */
-  state: State;
+  state?: State;
   /** whether the channel is ordered or unordered */
-  ordering: Order;
+  ordering?: Order;
   /** counterparty channel end */
   counterparty?: CounterpartyAmino;
   /**
    * list of connection identifiers, in order, along which packets sent on
    * this channel will travel
    */
-  connection_hops: string[];
+  connection_hops?: string[];
   /** opaque channel version, which is agreed upon during the handshake */
-  version: string;
+  version?: string;
 }
 export interface ChannelAminoMsg {
   type: "cosmos-sdk/Channel";
@@ -205,22 +205,22 @@ export interface IdentifiedChannelProtoMsg {
  */
 export interface IdentifiedChannelAmino {
   /** current state of the channel end */
-  state: State;
+  state?: State;
   /** whether the channel is ordered or unordered */
-  ordering: Order;
+  ordering?: Order;
   /** counterparty channel end */
   counterparty?: CounterpartyAmino;
   /**
    * list of connection identifiers, in order, along which packets sent on
    * this channel will travel
    */
-  connection_hops: string[];
+  connection_hops?: string[];
   /** opaque channel version, which is agreed upon during the handshake */
-  version: string;
+  version?: string;
   /** port identifier */
-  port_id: string;
+  port_id?: string;
   /** channel identifier */
-  channel_id: string;
+  channel_id?: string;
 }
 export interface IdentifiedChannelAminoMsg {
   type: "cosmos-sdk/IdentifiedChannel";
@@ -253,9 +253,9 @@ export interface CounterpartyProtoMsg {
 /** Counterparty defines a channel end counterparty */
 export interface CounterpartyAmino {
   /** port on the counterparty chain which owns the other end of the channel. */
-  port_id: string;
+  port_id?: string;
   /** channel end on the counterparty chain */
-  channel_id: string;
+  channel_id?: string;
 }
 export interface CounterpartyAminoMsg {
   type: "cosmos-sdk/Counterparty";
@@ -300,21 +300,21 @@ export interface PacketAmino {
    * with an earlier sequence number must be sent and received before a Packet
    * with a later sequence number.
    */
-  sequence: string;
+  sequence?: string;
   /** identifies the port on the sending chain. */
-  source_port: string;
+  source_port?: string;
   /** identifies the channel end on the sending chain. */
-  source_channel: string;
+  source_channel?: string;
   /** identifies the port on the receiving chain. */
-  destination_port: string;
+  destination_port?: string;
   /** identifies the channel end on the receiving chain. */
-  destination_channel: string;
+  destination_channel?: string;
   /** actual opaque bytes transferred directly to the application module */
-  data: string;
+  data?: string;
   /** block height after which the packet times out */
   timeout_height?: HeightAmino;
   /** block timestamp (in nanoseconds) after which the packet times out */
-  timeout_timestamp: string;
+  timeout_timestamp?: string;
 }
 export interface PacketAminoMsg {
   type: "cosmos-sdk/Packet";
@@ -359,13 +359,13 @@ export interface PacketStateProtoMsg {
  */
 export interface PacketStateAmino {
   /** channel port identifier. */
-  port_id: string;
+  port_id?: string;
   /** channel unique identifier. */
-  channel_id: string;
+  channel_id?: string;
   /** packet sequence. */
-  sequence: string;
+  sequence?: string;
   /** embedded data that represents packet state. */
-  data: string;
+  data?: string;
 }
 export interface PacketStateAminoMsg {
   type: "cosmos-sdk/PacketState";
@@ -869,7 +869,7 @@ export const Packet = {
     obj.source_channel = message.sourceChannel;
     obj.destination_port = message.destinationPort;
     obj.destination_channel = message.destinationChannel;
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : {};
     obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
     return obj;
@@ -970,7 +970,7 @@ export const PacketState = {
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     return obj;
   },
   fromAminoMsg(object: PacketStateAminoMsg): PacketState {

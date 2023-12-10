@@ -24,8 +24,8 @@ export interface PoolParamsProtoMsg {
  * The pool's token holders are specified in future_pool_governor.
  */
 export interface PoolParamsAmino {
-  swap_fee: string;
-  exit_fee: string;
+  swap_fee?: string;
+  exit_fee?: string;
 }
 export interface PoolParamsAminoMsg {
   type: "osmosis/gamm/pool-params";
@@ -73,8 +73,8 @@ export interface PoolProtoMsg {
 }
 /** Pool is the stableswap Pool struct */
 export interface PoolAmino {
-  address: string;
-  id: string;
+  address?: string;
+  id?: string;
   pool_params?: PoolParamsAmino;
   /**
    * This string specifies who will govern the pool in the future.
@@ -86,15 +86,15 @@ export interface PoolAmino {
    * a time specified as 0w,1w,2w, etc. which specifies how long the token
    * would need to be locked up to count in governance. 0w means no lockup.
    */
-  future_pool_governor: string;
+  future_pool_governor?: string;
   /** sum of all LP shares */
   total_shares?: CoinAmino;
   /** assets in the pool */
-  pool_liquidity: CoinAmino[];
+  pool_liquidity?: CoinAmino[];
   /** for calculation amognst assets with different precisions */
-  scaling_factors: string[];
+  scaling_factors?: string[];
   /** scaling_factor_controller is the address can adjust pool scaling factors */
-  scaling_factor_controller: string;
+  scaling_factor_controller?: string;
 }
 export interface PoolAminoMsg {
   type: "osmosis/gamm/pool";

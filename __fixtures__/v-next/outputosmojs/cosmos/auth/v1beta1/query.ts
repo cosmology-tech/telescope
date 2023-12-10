@@ -1150,7 +1150,7 @@ export const AddressBytesToStringRequest = {
   },
   toAmino(message: AddressBytesToStringRequest): AddressBytesToStringRequestAmino {
     const obj: any = {};
-    obj.address_bytes = base64FromBytes(message.addressBytes);
+    message.addressBytes !== undefined && (obj.address_bytes = base64FromBytes(message.addressBytes));
     return obj;
   },
   fromAminoMsg(object: AddressBytesToStringRequestAminoMsg): AddressBytesToStringRequest {
@@ -1426,7 +1426,7 @@ export const AddressStringToBytesResponse = {
   },
   toAmino(message: AddressStringToBytesResponse): AddressStringToBytesResponseAmino {
     const obj: any = {};
-    obj.address_bytes = base64FromBytes(message.addressBytes);
+    message.addressBytes !== undefined && (obj.address_bytes = base64FromBytes(message.addressBytes));
     return obj;
   },
   fromAminoMsg(object: AddressStringToBytesResponseAminoMsg): AddressStringToBytesResponse {

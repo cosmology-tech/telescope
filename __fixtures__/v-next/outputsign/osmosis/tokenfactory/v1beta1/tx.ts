@@ -35,9 +35,9 @@ export interface MsgCreateDenomProtoMsg {
  * denom does not indicate the current admin.
  */
 export interface MsgCreateDenomAmino {
-  sender: string;
+  sender?: string;
   /** subdenom can be up to 44 "alphanumeric" characters long. */
-  subdenom: string;
+  subdenom?: string;
 }
 export interface MsgCreateDenomAminoMsg {
   type: "osmosis/tokenfactory/create-denom";
@@ -74,7 +74,7 @@ export interface MsgCreateDenomResponseProtoMsg {
  * It returns the full string of the newly created denom
  */
 export interface MsgCreateDenomResponseAmino {
-  new_token_denom: string;
+  new_token_denom?: string;
 }
 export interface MsgCreateDenomResponseAminoMsg {
   type: "osmosis/tokenfactory/create-denom-response";
@@ -104,7 +104,7 @@ export interface MsgMintProtoMsg {
  * more of a token.  For now, we only support minting to the sender account
  */
 export interface MsgMintAmino {
-  sender: string;
+  sender?: string;
   amount?: CoinAmino;
 }
 export interface MsgMintAminoMsg {
@@ -147,7 +147,7 @@ export interface MsgBurnProtoMsg {
  * a token.  For now, we only support burning from the sender account.
  */
 export interface MsgBurnAmino {
-  sender: string;
+  sender?: string;
   amount?: CoinAmino;
 }
 export interface MsgBurnAminoMsg {
@@ -191,9 +191,9 @@ export interface MsgChangeAdminProtoMsg {
  * adminship of a denom to a new account
  */
 export interface MsgChangeAdminAmino {
-  sender: string;
-  denom: string;
-  new_admin: string;
+  sender?: string;
+  denom?: string;
+  new_admin?: string;
 }
 export interface MsgChangeAdminAminoMsg {
   type: "osmosis/tokenfactory/change-admin";
@@ -248,7 +248,7 @@ export interface MsgSetDenomMetadataProtoMsg {
  * the denom's bank metadata
  */
 export interface MsgSetDenomMetadataAmino {
-  sender: string;
+  sender?: string;
   metadata?: MetadataAmino;
 }
 export interface MsgSetDenomMetadataAminoMsg {

@@ -58,7 +58,7 @@ export interface QueryInflationResponseProtoMsg {
  */
 export interface QueryInflationResponseAmino {
   /** inflation is the current minting inflation value. */
-  inflation: string;
+  inflation?: string;
 }
 /**
  * QueryInflationResponse is the response type for the Query/Inflation RPC
@@ -104,7 +104,7 @@ export interface QueryAnnualProvisionsResponseProtoMsg {
  */
 export interface QueryAnnualProvisionsResponseAmino {
   /** annual_provisions is the current minting annual provisions value. */
-  annual_provisions: string;
+  annual_provisions?: string;
 }
 /**
  * QueryAnnualProvisionsResponse is the response type for the
@@ -381,7 +381,7 @@ export const QueryInflationResponse = {
   },
   toAmino(message: QueryInflationResponse, useInterfaces: boolean = true): QueryInflationResponseAmino {
     const obj: any = {};
-    obj.inflation = base64FromBytes(message.inflation);
+    message.inflation !== undefined && (obj.inflation = base64FromBytes(message.inflation));
     return obj;
   },
   fromProtoMsg(message: QueryInflationResponseProtoMsg, useInterfaces: boolean = true): QueryInflationResponse {
@@ -522,7 +522,7 @@ export const QueryAnnualProvisionsResponse = {
   },
   toAmino(message: QueryAnnualProvisionsResponse, useInterfaces: boolean = true): QueryAnnualProvisionsResponseAmino {
     const obj: any = {};
-    obj.annual_provisions = base64FromBytes(message.annualProvisions);
+    message.annualProvisions !== undefined && (obj.annual_provisions = base64FromBytes(message.annualProvisions));
     return obj;
   },
   fromProtoMsg(message: QueryAnnualProvisionsResponseProtoMsg, useInterfaces: boolean = true): QueryAnnualProvisionsResponse {

@@ -12,7 +12,7 @@ export interface QueryGaugeIdsRequestProtoMsg {
   value: Uint8Array;
 }
 export interface QueryGaugeIdsRequestAmino {
-  pool_id: string;
+  pool_id?: string;
 }
 export interface QueryGaugeIdsRequestAminoMsg {
   type: "osmosis/poolincentives/query-gauge-ids-request";
@@ -29,7 +29,7 @@ export interface QueryGaugeIdsResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryGaugeIdsResponseAmino {
-  gauge_ids_with_duration: QueryGaugeIdsResponse_GaugeIdWithDurationAmino[];
+  gauge_ids_with_duration?: QueryGaugeIdsResponse_GaugeIdWithDurationAmino[];
 }
 export interface QueryGaugeIdsResponseAminoMsg {
   type: "osmosis/poolincentives/query-gauge-ids-response";
@@ -48,9 +48,9 @@ export interface QueryGaugeIdsResponse_GaugeIdWithDurationProtoMsg {
   value: Uint8Array;
 }
 export interface QueryGaugeIdsResponse_GaugeIdWithDurationAmino {
-  gauge_id: string;
+  gauge_id?: string;
   duration?: DurationAmino;
-  gauge_incentive_percentage: string;
+  gauge_incentive_percentage?: string;
 }
 export interface QueryGaugeIdsResponse_GaugeIdWithDurationAminoMsg {
   type: "osmosis/poolincentives/gauge-id-with-duration";
@@ -136,7 +136,7 @@ export interface QueryLockableDurationsResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryLockableDurationsResponseAmino {
-  lockable_durations: DurationAmino[];
+  lockable_durations?: DurationAmino[];
 }
 export interface QueryLockableDurationsResponseAminoMsg {
   type: "osmosis/poolincentives/query-lockable-durations-response";
@@ -166,9 +166,9 @@ export interface IncentivizedPoolProtoMsg {
   value: Uint8Array;
 }
 export interface IncentivizedPoolAmino {
-  pool_id: string;
+  pool_id?: string;
   lockable_duration?: DurationAmino;
-  gauge_id: string;
+  gauge_id?: string;
 }
 export interface IncentivizedPoolAminoMsg {
   type: "osmosis/poolincentives/incentivized-pool";
@@ -187,7 +187,7 @@ export interface QueryIncentivizedPoolsResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryIncentivizedPoolsResponseAmino {
-  incentivized_pools: IncentivizedPoolAmino[];
+  incentivized_pools?: IncentivizedPoolAmino[];
 }
 export interface QueryIncentivizedPoolsResponseAminoMsg {
   type: "osmosis/poolincentives/query-incentivized-pools-response";
@@ -215,7 +215,7 @@ export interface QueryExternalIncentiveGaugesResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryExternalIncentiveGaugesResponseAmino {
-  data: GaugeAmino[];
+  data?: GaugeAmino[];
 }
 export interface QueryExternalIncentiveGaugesResponseAminoMsg {
   type: "osmosis/poolincentives/query-external-incentive-gauges-response";

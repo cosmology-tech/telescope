@@ -174,9 +174,9 @@ export interface GroupIDProtoMsg {
 }
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDAmino {
-  owner: string;
-  dseq: string;
-  gseq: number;
+  owner?: string;
+  dseq?: string;
+  gseq?: number;
 }
 export interface GroupIDAminoMsg {
   type: "/akash.deployment.v1beta1.GroupID";
@@ -200,9 +200,9 @@ export interface GroupSpecProtoMsg {
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecAmino {
-  name: string;
+  name?: string;
   requirements?: PlacementRequirementsAmino;
-  resources: ResourceAmino[];
+  resources?: ResourceAmino[];
 }
 export interface GroupSpecAminoMsg {
   type: "/akash.deployment.v1beta1.GroupSpec";
@@ -228,9 +228,9 @@ export interface GroupProtoMsg {
 /** Group stores group id, state and specifications of group */
 export interface GroupAmino {
   group_id?: GroupIDAmino;
-  state: Group_State;
+  state?: Group_State;
   group_spec?: GroupSpecAmino;
-  created_at: string;
+  created_at?: string;
 }
 export interface GroupAminoMsg {
   type: "/akash.deployment.v1beta1.Group";
@@ -256,7 +256,7 @@ export interface ResourceProtoMsg {
 /** Resource stores unit, total count and price of resource */
 export interface ResourceAmino {
   resources?: ResourceUnitsAmino;
-  count: number;
+  count?: number;
   price?: CoinAmino;
 }
 export interface ResourceAminoMsg {

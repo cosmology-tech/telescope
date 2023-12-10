@@ -30,7 +30,7 @@ export interface QueryPeriodResponseProtoMsg {
 /** QueryPeriodResponse is the response type for the Query/Period RPC method. */
 export interface QueryPeriodResponseAmino {
   /** period is the current minting per epoch provision value. */
-  period: string;
+  period?: string;
 }
 export interface QueryPeriodResponseAminoMsg {
   type: "/evmos.inflation.v1.QueryPeriodResponse";
@@ -135,7 +135,7 @@ export interface QuerySkippedEpochsResponseProtoMsg {
  */
 export interface QuerySkippedEpochsResponseAmino {
   /** number of epochs that the inflation module has been disabled. */
-  skipped_epochs: string;
+  skipped_epochs?: string;
 }
 export interface QuerySkippedEpochsResponseAminoMsg {
   type: "/evmos.inflation.v1.QuerySkippedEpochsResponse";
@@ -243,7 +243,7 @@ export interface QueryInflationRateResponseProtoMsg {
  */
 export interface QueryInflationRateResponseAmino {
   /** rate by which the total supply increases within one period */
-  inflation_rate: string;
+  inflation_rate?: string;
 }
 export interface QueryInflationRateResponseAminoMsg {
   type: "/evmos.inflation.v1.QueryInflationRateResponse";

@@ -21,10 +21,10 @@ export interface EquivocationProtoMsg {
  * signing misbehavior.
  */
 export interface EquivocationAmino {
-  height: string;
+  height?: string;
   time?: string;
-  power: string;
-  consensus_address: string;
+  power?: string;
+  consensus_address?: string;
 }
 export interface EquivocationAminoMsg {
   type: "cosmos-sdk/Equivocation";

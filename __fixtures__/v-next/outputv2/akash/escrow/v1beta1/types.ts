@@ -111,8 +111,8 @@ export interface AccountIDProtoMsg {
 }
 /** AccountID is the account identifier */
 export interface AccountIDAmino {
-  scope: string;
-  xid: string;
+  scope?: string;
+  xid?: string;
 }
 export interface AccountIDAminoMsg {
   type: "/akash.escrow.v1beta1.AccountID";
@@ -147,15 +147,15 @@ export interface AccountAmino {
   /** unique identifier for this escrow account */
   id?: AccountIDAmino;
   /** bech32 encoded account address of the owner of this escrow account */
-  owner: string;
+  owner?: string;
   /** current state of this escrow account */
-  state: Account_State;
+  state?: Account_State;
   /** unspent coins received from the owner's wallet */
   balance?: CoinAmino;
   /** total coins spent by this account */
   transferred?: CoinAmino;
   /** block height at which this account was last settled */
-  settled_at: string;
+  settled_at?: string;
 }
 export interface AccountAminoMsg {
   type: "/akash.escrow.v1beta1.Account";
@@ -187,9 +187,9 @@ export interface PaymentProtoMsg {
 /** Payment stores state for a payment */
 export interface PaymentAmino {
   account_id?: AccountIDAmino;
-  payment_id: string;
-  owner: string;
-  state: Payment_State;
+  payment_id?: string;
+  owner?: string;
+  state?: Payment_State;
   rate?: CoinAmino;
   balance?: CoinAmino;
   withdrawn?: CoinAmino;

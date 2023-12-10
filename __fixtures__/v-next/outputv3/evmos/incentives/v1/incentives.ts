@@ -29,15 +29,15 @@ export interface IncentiveProtoMsg {
  */
 export interface IncentiveAmino {
   /** contract address */
-  contract: string;
+  contract?: string;
   /** denoms and percentage of rewards to be allocated */
-  allocations: DecCoinAmino[];
+  allocations?: DecCoinAmino[];
   /** number of remaining epochs */
-  epochs: number;
+  epochs?: number;
   /** distribution start time */
   start_time?: string;
   /** cumulative gas spent by all gasmeters of the incentive during the epoch */
-  total_gas: string;
+  total_gas?: string;
 }
 /**
  * Incentive defines an instance that organizes distribution conditions for a
@@ -66,11 +66,11 @@ export interface GasMeterProtoMsg {
 /** GasMeter tracks the cumulative gas spent per participant in one epoch */
 export interface GasMeterAmino {
   /** hex address of the incentivized contract */
-  contract: string;
+  contract?: string;
   /** participant address that interacts with the incentive */
-  participant: string;
+  participant?: string;
   /** cumulative gas spent during the epoch */
-  cumulative_gas: string;
+  cumulative_gas?: string;
 }
 /** GasMeter tracks the cumulative gas spent per participant in one epoch */
 export interface GasMeterSDKType {
@@ -99,15 +99,15 @@ export interface RegisterIncentiveProposalProtoMsg {
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
 export interface RegisterIncentiveProposalAmino {
   /** title of the proposal */
-  title: string;
+  title?: string;
   /** proposal description */
-  description: string;
+  description?: string;
   /** contract address */
-  contract: string;
+  contract?: string;
   /** denoms and percentage of rewards to be allocated */
-  allocations: DecCoinAmino[];
+  allocations?: DecCoinAmino[];
   /** number of remaining epochs */
-  epochs: number;
+  epochs?: number;
 }
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
 export interface RegisterIncentiveProposalSDKType {
@@ -134,11 +134,11 @@ export interface CancelIncentiveProposalProtoMsg {
 /** CancelIncentiveProposal is a gov Content type to cancel an incentive */
 export interface CancelIncentiveProposalAmino {
   /** title of the proposal */
-  title: string;
+  title?: string;
   /** proposal description */
-  description: string;
+  description?: string;
   /** contract address */
-  contract: string;
+  contract?: string;
 }
 /** CancelIncentiveProposal is a gov Content type to cancel an incentive */
 export interface CancelIncentiveProposalSDKType {

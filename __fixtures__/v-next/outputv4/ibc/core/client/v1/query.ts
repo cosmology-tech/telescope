@@ -521,7 +521,7 @@ export const QueryClientStateResponse = {
   toAmino(message: QueryClientStateResponse): QueryClientStateResponseAmino {
     const obj: any = {};
     obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
-    obj.proof = base64FromBytes(message.proof);
+    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },
@@ -1003,7 +1003,7 @@ export const QueryConsensusStateResponse = {
   toAmino(message: QueryConsensusStateResponse): QueryConsensusStateResponseAmino {
     const obj: any = {};
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
-    obj.proof = base64FromBytes(message.proof);
+    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;
   },

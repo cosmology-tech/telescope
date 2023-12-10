@@ -211,7 +211,7 @@ export const MsgSubmitEvidenceResponse = {
   },
   toAmino(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseAmino {
     const obj: any = {};
-    obj.hash = base64FromBytes(message.hash);
+    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash));
     return obj;
   },
   fromAminoMsg(object: MsgSubmitEvidenceResponseAminoMsg): MsgSubmitEvidenceResponse {

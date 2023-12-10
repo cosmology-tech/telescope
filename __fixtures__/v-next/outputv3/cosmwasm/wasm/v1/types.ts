@@ -111,7 +111,7 @@ export interface AccessTypeParamProtoMsg {
 }
 /** AccessTypeParam */
 export interface AccessTypeParamAmino {
-  value: AccessType;
+  value?: AccessType;
 }
 /** AccessTypeParam */
 export interface AccessTypeParamSDKType {
@@ -128,8 +128,8 @@ export interface AccessConfigProtoMsg {
 }
 /** AccessConfig access control type. */
 export interface AccessConfigAmino {
-  permission: AccessType;
-  address: string;
+  permission?: AccessType;
+  address?: string;
 }
 /** AccessConfig access control type. */
 export interface AccessConfigSDKType {
@@ -149,8 +149,8 @@ export interface ParamsProtoMsg {
 /** Params defines the set of wasm parameters. */
 export interface ParamsAmino {
   code_upload_access?: AccessConfigAmino;
-  instantiate_default_permission: AccessType;
-  max_wasm_code_size: string;
+  instantiate_default_permission?: AccessType;
+  max_wasm_code_size?: string;
 }
 /** Params defines the set of wasm parameters. */
 export interface ParamsSDKType {
@@ -174,9 +174,9 @@ export interface CodeInfoProtoMsg {
 /** CodeInfo is data for the uploaded contract WASM code */
 export interface CodeInfoAmino {
   /** CodeHash is the unique identifier created by wasmvm */
-  code_hash: string;
+  code_hash?: string;
   /** Creator address who initially stored the code */
-  creator: string;
+  creator?: string;
   /** InstantiateConfig access control to apply on contract creation, optional */
   instantiate_config?: AccessConfigAmino;
 }
@@ -223,20 +223,20 @@ export type ContractInfoEncoded = Omit<ContractInfo, "extension"> & {
 /** ContractInfo stores a WASM contract instance */
 export interface ContractInfoAmino {
   /** CodeID is the reference to the stored Wasm code */
-  code_id: string;
+  code_id?: string;
   /** Creator address who initially instantiated the contract */
-  creator: string;
+  creator?: string;
   /** Admin is an optional address that can execute migrations */
-  admin: string;
+  admin?: string;
   /** Label is optional metadata to be stored with a contract instance. */
-  label: string;
+  label?: string;
   /**
    * Created Tx position when the contract was instantiated.
    * This data should kept internal and not be exposed via query results. Just
    * use for sorting
    */
   created?: AbsoluteTxPositionAmino;
-  ibc_port_id: string;
+  ibc_port_id?: string;
   /**
    * Extension is an extension point to store custom metadata within the
    * persistence model.
@@ -268,12 +268,12 @@ export interface ContractCodeHistoryEntryProtoMsg {
 }
 /** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntryAmino {
-  operation: ContractCodeHistoryOperationType;
+  operation?: ContractCodeHistoryOperationType;
   /** CodeID is the reference to the stored WASM code */
-  code_id: string;
+  code_id?: string;
   /** Updated Tx position when the operation was executed. */
   updated?: AbsoluteTxPositionAmino;
-  msg: string;
+  msg?: string;
 }
 /** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntrySDKType {
@@ -305,12 +305,12 @@ export interface AbsoluteTxPositionProtoMsg {
  */
 export interface AbsoluteTxPositionAmino {
   /** BlockHeight is the block the contract was created at */
-  block_height: string;
+  block_height?: string;
   /**
    * TxIndex is a monotonic counter within the block (actual transaction index,
    * or gas consumed)
    */
-  tx_index: string;
+  tx_index?: string;
 }
 /**
  * AbsoluteTxPosition is a unique transaction position that allows for global
@@ -334,9 +334,9 @@ export interface ModelProtoMsg {
 /** Model is a struct that holds a KV pair */
 export interface ModelAmino {
   /** hex-encode key to read it better (this is often ascii) */
-  key: string;
+  key?: string;
   /** base64-encode raw value */
-  value: string;
+  value?: string;
 }
 /** Model is a struct that holds a KV pair */
 export interface ModelSDKType {
@@ -717,7 +717,7 @@ export const CodeInfo = {
   },
   toAmino(message: CodeInfo, useInterfaces: boolean = true): CodeInfoAmino {
     const obj: any = {};
-    obj.code_hash = base64FromBytes(message.codeHash);
+    message.codeHash !== undefined && (obj.code_hash = base64FromBytes(message.codeHash));
     obj.creator = message.creator;
     obj.instantiate_config = message.instantiateConfig ? AccessConfig.toAmino(message.instantiateConfig, useInterfaces) : undefined;
     return obj;
@@ -1202,8 +1202,8 @@ export const Model = {
   },
   toAmino(message: Model, useInterfaces: boolean = true): ModelAmino {
     const obj: any = {};
-    obj.key = base64FromBytes(message.key);
-    obj.value = base64FromBytes(message.value);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value));
     return obj;
   },
   fromProtoMsg(message: ModelProtoMsg, useInterfaces: boolean = true): Model {

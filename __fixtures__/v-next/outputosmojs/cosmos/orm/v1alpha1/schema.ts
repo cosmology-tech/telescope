@@ -227,7 +227,7 @@ export const ModuleSchemaDescriptor = {
     } else {
       obj.schema_file = [];
     }
-    obj.prefix = base64FromBytes(message.prefix);
+    message.prefix !== undefined && (obj.prefix = base64FromBytes(message.prefix));
     return obj;
   },
   fromAminoMsg(object: ModuleSchemaDescriptorAminoMsg): ModuleSchemaDescriptor {

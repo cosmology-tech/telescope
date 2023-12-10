@@ -150,9 +150,9 @@ export interface GroupIDProtoMsg {
 }
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDAmino {
-  owner: string;
-  dseq: string;
-  gseq: number;
+  owner?: string;
+  dseq?: string;
+  gseq?: number;
 }
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDSDKType {
@@ -172,9 +172,9 @@ export interface GroupSpecProtoMsg {
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecAmino {
-  name: string;
+  name?: string;
   requirements?: PlacementRequirementsAmino;
-  resources: ResourceAmino[];
+  resources?: ResourceAmino[];
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
@@ -196,9 +196,9 @@ export interface GroupProtoMsg {
 /** Group stores group id, state and specifications of group */
 export interface GroupAmino {
   group_id?: GroupIDAmino;
-  state: Group_State;
+  state?: Group_State;
   group_spec?: GroupSpecAmino;
-  created_at: string;
+  created_at?: string;
 }
 /** Group stores group id, state and specifications of group */
 export interface GroupSDKType {
@@ -220,7 +220,7 @@ export interface ResourceProtoMsg {
 /** Resource stores unit, total count and price of resource */
 export interface ResourceAmino {
   resources?: ResourceUnitsAmino;
-  count: number;
+  count?: number;
   price?: CoinAmino;
 }
 /** Resource stores unit, total count and price of resource */

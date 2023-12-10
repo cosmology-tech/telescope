@@ -61,9 +61,9 @@ export interface AuthenticationAmino {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: AuthenticationRuleAmino[];
+  rules?: AuthenticationRuleAmino[];
   /** Defines a set of authentication providers that a service supports. */
-  providers: AuthProviderAmino[];
+  providers?: AuthProviderAmino[];
 }
 export interface AuthenticationAminoMsg {
   type: "/google.api.Authentication";
@@ -142,16 +142,16 @@ export interface AuthenticationRuleAmino {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /** The requirements for OAuth credentials. */
   oauth?: OAuthRequirementsAmino;
   /**
    * If true, the service accepts API keys without any other credential.
    * This flag only applies to HTTP and gRPC requests.
    */
-  allow_without_credential: boolean;
+  allow_without_credential?: boolean;
   /** Requirements for additional authentication providers. */
-  requirements: AuthRequirementAmino[];
+  requirements?: AuthRequirementAmino[];
 }
 export interface AuthenticationRuleAminoMsg {
   type: "/google.api.AuthenticationRule";
@@ -212,7 +212,7 @@ export interface JwtLocationAmino {
    * For example, for "Authorization: Bearer {JWT}",
    * value_prefix="Bearer " with a space at the end.
    */
-  value_prefix: string;
+  value_prefix?: string;
 }
 export interface JwtLocationAminoMsg {
   type: "/google.api.JwtLocation";
@@ -323,7 +323,7 @@ export interface AuthProviderAmino {
    * 
    * Example: "bookstore_auth".
    */
-  id: string;
+  id?: string;
   /**
    * Identifies the principal that issued the JWT. See
    * https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.1
@@ -332,7 +332,7 @@ export interface AuthProviderAmino {
    * Example: https://securetoken.google.com
    * Example: 1234567-compute@developer.gserviceaccount.com
    */
-  issuer: string;
+  issuer?: string;
   /**
    * URL of the provider's public key set to validate signature of the JWT. See
    * [OpenID
@@ -347,7 +347,7 @@ export interface AuthProviderAmino {
    * 
    * Example: https://www.googleapis.com/oauth2/v1/certs
    */
-  jwks_uri: string;
+  jwks_uri?: string;
   /**
    * The list of JWT
    * [audiences](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.3).
@@ -367,12 +367,12 @@ export interface AuthProviderAmino {
    *     audiences: bookstore_android.apps.googleusercontent.com,
    *                bookstore_web.apps.googleusercontent.com
    */
-  audiences: string;
+  audiences?: string;
   /**
    * Redirect URL if JWT token is required but not present or is expired.
    * Implement authorizationUrl of securityDefinitions in OpenAPI spec.
    */
-  authorization_url: string;
+  authorization_url?: string;
   /**
    * Defines the locations to extract the JWT.
    * 
@@ -392,7 +392,7 @@ export interface AuthProviderAmino {
    *    - header: x-goog-iap-jwt-assertion
    *    - query: access_token
    */
-  jwt_locations: JwtLocationAmino[];
+  jwt_locations?: JwtLocationAmino[];
 }
 export interface AuthProviderAminoMsg {
   type: "/google.api.AuthProvider";
@@ -477,7 +477,7 @@ export interface OAuthRequirementsAmino {
    *      canonical_scopes: https://www.googleapis.com/auth/calendar,
    *                        https://www.googleapis.com/auth/calendar.read
    */
-  canonical_scopes: string;
+  canonical_scopes?: string;
 }
 export interface OAuthRequirementsAminoMsg {
   type: "/google.api.OAuthRequirements";
@@ -557,7 +557,7 @@ export interface AuthRequirementAmino {
    * 
    *     provider_id: bookstore_auth
    */
-  provider_id: string;
+  provider_id?: string;
   /**
    * NOTE: This will be deprecated soon, once AuthProvider.audiences is
    * implemented and accepted in all the runtime components.
@@ -576,7 +576,7 @@ export interface AuthRequirementAmino {
    *     audiences: bookstore_android.apps.googleusercontent.com,
    *                bookstore_web.apps.googleusercontent.com
    */
-  audiences: string;
+  audiences?: string;
 }
 export interface AuthRequirementAminoMsg {
   type: "/google.api.AuthRequirement";

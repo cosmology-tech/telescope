@@ -13,7 +13,7 @@ export interface GenesisCertificateProtoMsg {
 }
 /** GenesisCertificate defines certificate entry at genesis */
 export interface GenesisCertificateAmino {
-  owner: string;
+  owner?: string;
   certificate?: CertificateAmino;
 }
 /** GenesisCertificate defines certificate entry at genesis */
@@ -31,7 +31,7 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the basic genesis state used by cert module */
 export interface GenesisStateAmino {
-  certificates: GenesisCertificateAmino[];
+  certificates?: GenesisCertificateAmino[];
 }
 /** GenesisState defines the basic genesis state used by cert module */
 export interface GenesisStateSDKType {

@@ -21,8 +21,8 @@ export interface MsgGrantProtoMsg {
  * on behalf of the granter with the provided expiration time.
  */
 export interface MsgGrantAmino {
-  granter: string;
-  grantee: string;
+  granter?: string;
+  grantee?: string;
   grant?: GrantAmino;
 }
 /**
@@ -44,7 +44,7 @@ export interface MsgExecResponseProtoMsg {
 }
 /** MsgExecResponse defines the Msg/MsgExecResponse response type. */
 export interface MsgExecResponseAmino {
-  results: string[];
+  results?: string[];
 }
 /** MsgExecResponse defines the Msg/MsgExecResponse response type. */
 export interface MsgExecResponseSDKType {
@@ -82,13 +82,13 @@ export type MsgExecEncoded = Omit<MsgExec, "msgs"> & {
  * one signer corresponding to the granter of the authorization.
  */
 export interface MsgExecAmino {
-  grantee: string;
+  grantee?: string;
   /**
    * Authorization Msg requests to execute. Each msg must implement Authorization interface
    * The x/authz will try to find a grant matching (msg.signers[0], grantee, MsgTypeURL(msg))
    * triple and validate it.
    */
-  msgs: AnyAmino[];
+  msgs?: AnyAmino[];
 }
 /**
  * MsgExec attempts to execute the provided messages using
@@ -127,9 +127,9 @@ export interface MsgRevokeProtoMsg {
  * granter's account with that has been granted to the grantee.
  */
 export interface MsgRevokeAmino {
-  granter: string;
-  grantee: string;
-  msg_type_url: string;
+  granter?: string;
+  grantee?: string;
+  msg_type_url?: string;
 }
 /**
  * MsgRevoke revokes any authorization with the provided sdk.Msg type on the

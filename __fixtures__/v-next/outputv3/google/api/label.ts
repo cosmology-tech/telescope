@@ -59,11 +59,11 @@ export interface LabelDescriptorProtoMsg {
 /** A description of a label. */
 export interface LabelDescriptorAmino {
   /** The label key. */
-  key: string;
+  key?: string;
   /** The type of data that can be assigned to the label. */
-  value_type: LabelDescriptor_ValueType;
+  value_type?: LabelDescriptor_ValueType;
   /** A human-readable description for the label. */
-  description: string;
+  description?: string;
 }
 /** A description of a label. */
 export interface LabelDescriptorSDKType {

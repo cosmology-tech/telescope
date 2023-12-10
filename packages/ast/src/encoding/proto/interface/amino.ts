@@ -4,7 +4,7 @@ import { identifier, tsPropertySignature, makeCommentBlock } from '../../../util
 import { ProtoParseContext } from '../../context';
 
 import {
-    getFieldOptionality,
+    getFieldOptionalityForAmino,
     getOneOfs
 } from '../types';
 
@@ -92,7 +92,7 @@ export const createAminoType = (
                     // let fieldNameWithCase = options.useOriginalCase ? orig : fieldName;
                     let fieldNameWithCase = orig;
 
-                    // should we actually just edit/add comments 
+                    // should we actually just edit/add comments
                     // to make this more "native" for any google.protobuf.Any?
                     // let's see...
                     if (
@@ -120,7 +120,7 @@ export const createAminoType = (
                         t.tsTypeAnnotation(
                             aminoField
                         ),
-                        getFieldOptionality(context, field, isOneOf)
+                        getFieldOptionalityForAmino(context, field, isOneOf)
                     );
 
                     const comments = [];

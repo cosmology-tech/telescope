@@ -9,7 +9,7 @@ export interface NodeProtoMsg {
   value: Uint8Array;
 }
 export interface NodeAmino {
-  children: ChildAmino[];
+  children?: ChildAmino[];
 }
 export interface NodeAminoMsg {
   type: "osmosis/store/node";
@@ -27,8 +27,8 @@ export interface ChildProtoMsg {
   value: Uint8Array;
 }
 export interface ChildAmino {
-  index: string;
-  accumulation: string;
+  index?: string;
+  accumulation?: string;
 }
 export interface ChildAminoMsg {
   type: "osmosis/store/child";
@@ -231,7 +231,7 @@ export const Child = {
   },
   toAmino(message: Child): ChildAmino {
     const obj: any = {};
-    obj.index = base64FromBytes(message.index);
+    message.index !== undefined && (obj.index = base64FromBytes(message.index));
     obj.accumulation = message.accumulation;
     return obj;
   },

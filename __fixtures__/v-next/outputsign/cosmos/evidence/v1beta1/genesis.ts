@@ -14,7 +14,7 @@ export interface GenesisStateProtoMsg {
 /** GenesisState defines the evidence module's genesis state. */
 export interface GenesisStateAmino {
   /** evidence defines all the evidence at genesis. */
-  evidence: AnyAmino[];
+  evidence?: AnyAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "cosmos-sdk/GenesisState";

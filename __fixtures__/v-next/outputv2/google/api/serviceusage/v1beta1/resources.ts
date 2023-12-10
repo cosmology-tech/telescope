@@ -199,14 +199,14 @@ export interface ServiceAmino {
    * A valid name would be:
    * - `projects/123/services/serviceusage.googleapis.com`
    */
-  name: string;
+  name?: string;
   /**
    * The resource name of the consumer.
    * 
    * A valid name would be:
    * - `projects/123`
    */
-  parent: string;
+  parent?: string;
   /**
    * The service configuration of the available service.
    * Some fields may be filtered out of the configuration in responses to
@@ -215,7 +215,7 @@ export interface ServiceAmino {
    */
   config?: ServiceConfigAmino;
   /** Whether or not the service has been enabled for use by the consumer. */
-  state: State;
+  state?: State;
 }
 export interface ServiceAminoMsg {
   type: "/google.api.serviceusage.v1beta1.Service";
@@ -283,14 +283,14 @@ export interface ServiceConfigAmino {
    * An example DNS address would be:
    * `calendar.googleapis.com`.
    */
-  name: string;
+  name?: string;
   /** The product title for this service. */
-  title: string;
+  title?: string;
   /**
    * A list of API interfaces exported by this service. Contains only the names,
    * versions, and method names of the interfaces.
    */
-  apis: ApiAmino[];
+  apis?: ApiAmino[];
   /**
    * Additional API documentation. Contains only the summary and the
    * documentation URL.
@@ -306,12 +306,12 @@ export interface ServiceConfigAmino {
    * Configuration for network endpoints. Contains only the names and aliases
    * of the endpoints.
    */
-  endpoints: EndpointAmino[];
+  endpoints?: EndpointAmino[];
   /**
    * Defines the monitored resources used by this service. This is required
    * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
    */
-  monitored_resources: MonitoredResourceDescriptorAmino[];
+  monitored_resources?: MonitoredResourceDescriptorAmino[];
   /**
    * Monitoring configuration.
    * This should not include the 'producer_destinations' field.
@@ -353,7 +353,7 @@ export interface OperationMetadataAmino {
    * The full name of the resources that this operation is directly
    * associated with.
    */
-  resource_names: string[];
+  resource_names?: string[];
 }
 export interface OperationMetadataAminoMsg {
   type: "/google.api.serviceusage.v1beta1.OperationMetadata";
@@ -421,23 +421,23 @@ export interface ConsumerQuotaMetricAmino {
    * The resource name is intended to be opaque and should not be parsed for
    * its component strings, since its representation could change in the future.
    */
-  name: string;
+  name?: string;
   /**
    * The name of the metric.
    * 
    * An example name would be:
    * `compute.googleapis.com/cpus`
    */
-  metric: string;
+  metric?: string;
   /**
    * The display name of the metric.
    * 
    * An example name would be:
    * `CPUs`
    */
-  display_name: string;
+  display_name?: string;
   /** The consumer quota for each quota limit defined on the metric. */
-  consumer_quota_limits: ConsumerQuotaLimitAmino[];
+  consumer_quota_limits?: ConsumerQuotaLimitAmino[];
   /**
    * The quota limits targeting the descendant containers of the
    * consumer in request.
@@ -449,9 +449,9 @@ export interface ConsumerQuotaMetricAmino {
    * The `quota_buckets` field of each descendant consumer quota limit will not
    * be populated.
    */
-  descendant_consumer_quota_limits: ConsumerQuotaLimitAmino[];
+  descendant_consumer_quota_limits?: ConsumerQuotaLimitAmino[];
   /** The units in which the metric value is reported. */
-  unit: string;
+  unit?: string;
 }
 export interface ConsumerQuotaMetricAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ConsumerQuotaMetric";
@@ -520,14 +520,14 @@ export interface ConsumerQuotaLimitAmino {
    * The resource name is intended to be opaque and should not be parsed for
    * its component strings, since its representation could change in the future.
    */
-  name: string;
+  name?: string;
   /**
    * The name of the parent metric of this limit.
    * 
    * An example name would be:
    * `compute.googleapis.com/cpus`
    */
-  metric: string;
+  metric?: string;
   /**
    * The limit unit.
    * 
@@ -536,17 +536,17 @@ export interface ConsumerQuotaLimitAmino {
    * Note that `{project}` and `{region}` are not placeholders in this example;
    * the literal characters `{` and `}` occur in the string.
    */
-  unit: string;
+  unit?: string;
   /** Whether this limit is precise or imprecise. */
-  is_precise: boolean;
+  is_precise?: boolean;
   /** Whether admin overrides are allowed on this limit */
-  allows_admin_overrides: boolean;
+  allows_admin_overrides?: boolean;
   /**
    * Summary of the enforced quota buckets, organized by quota dimension,
    * ordered from least specific to most specific (for example, the global
    * default bucket, with no quota dimensions, will always appear first).
    */
-  quota_buckets: QuotaBucketAmino[];
+  quota_buckets?: QuotaBucketAmino[];
 }
 export interface ConsumerQuotaLimitAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ConsumerQuotaLimit";
@@ -570,8 +570,8 @@ export interface QuotaBucket_DimensionsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface QuotaBucket_DimensionsEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface QuotaBucket_DimensionsEntryAminoMsg {
   type: string;
@@ -626,12 +626,12 @@ export interface QuotaBucketAmino {
    * The effective limit of this quota bucket. Equal to default_limit if there
    * are no overrides.
    */
-  effective_limit: string;
+  effective_limit?: string;
   /**
    * The default limit of this quota bucket, as specified by the service
    * configuration.
    */
-  default_limit: string;
+  default_limit?: string;
   /** Producer override on this quota bucket. */
   producer_override?: QuotaOverrideAmino;
   /** Consumer override on this quota bucket. */
@@ -651,7 +651,7 @@ export interface QuotaBucketAmino {
    * specified effective limit is only effective in that region, and the
    * specified overrides apply only in that region.
    */
-  dimensions: {
+  dimensions?: {
     [key: string]: string;
   };
 }
@@ -679,8 +679,8 @@ export interface QuotaOverride_DimensionsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface QuotaOverride_DimensionsEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface QuotaOverride_DimensionsEntryAminoMsg {
   type: string;
@@ -776,12 +776,12 @@ export interface QuotaOverrideAmino {
    * The resource name is intended to be opaque and should not be parsed for
    * its component strings, since its representation could change in the future.
    */
-  name: string;
+  name?: string;
   /**
    * The overriding quota limit value.
    * Can be any nonnegative integer, or -1 (unlimited quota).
    */
-  override_value: string;
+  override_value?: string;
   /**
    * If this map is nonempty, then this override applies only to specific values
    * for dimensions defined in the limit unit.
@@ -806,7 +806,7 @@ export interface QuotaOverrideAmino {
    *     all valid keys other than `region` or `zone` must also appear in the
    *     map.
    */
-  dimensions: {
+  dimensions?: {
     [key: string]: string;
   };
   /**
@@ -815,7 +815,7 @@ export interface QuotaOverrideAmino {
    * An example name would be:
    * `compute.googleapis.com/cpus`
    */
-  metric: string;
+  metric?: string;
   /**
    * The limit unit of the limit to which this override applies.
    * 
@@ -824,13 +824,13 @@ export interface QuotaOverrideAmino {
    * Note that `{project}` and `{region}` are not placeholders in this example;
    * the literal characters `{` and `}` occur in the string.
    */
-  unit: string;
+  unit?: string;
   /**
    * The resource name of the ancestor that requested the override. For example:
    * `organizations/12345` or `folders/67890`.
    * Used by admin overrides only.
    */
-  admin_override_ancestor: string;
+  admin_override_ancestor?: string;
 }
 export interface QuotaOverrideAminoMsg {
   type: "/google.api.serviceusage.v1beta1.QuotaOverride";
@@ -869,7 +869,7 @@ export interface OverrideInlineSourceAmino {
    * which metric and which limit the override should be applied to.
    * The 'name' field of the override does not need to be set; it is ignored.
    */
-  overrides: QuotaOverrideAmino[];
+  overrides?: QuotaOverrideAmino[];
 }
 export interface OverrideInlineSourceAminoMsg {
   type: "/google.api.serviceusage.v1beta1.OverrideInlineSource";
@@ -888,8 +888,8 @@ export interface AdminQuotaPolicy_DimensionsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface AdminQuotaPolicy_DimensionsEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface AdminQuotaPolicy_DimensionsEntryAminoMsg {
   type: string;
@@ -966,12 +966,12 @@ export interface AdminQuotaPolicyAmino {
    * Example names would be:
    * `organizations/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminQuotaPolicies/4a3f2c1d`
    */
-  name: string;
+  name?: string;
   /**
    * The quota policy value.
    * Can be any nonnegative integer, or -1 (unlimited quota).
    */
-  policy_value: string;
+  policy_value?: string;
   /**
    * If this map is nonempty, then this policy applies only to specific values
    * for dimensions defined in the limit unit.
@@ -986,7 +986,7 @@ export interface AdminQuotaPolicyAmino {
    * *   If `zone` appears as a key, its value must be a valid Cloud zone.
    * *   Keys other than `region` or `zone` are not valid.
    */
-  dimensions: {
+  dimensions?: {
     [key: string]: string;
   };
   /**
@@ -995,7 +995,7 @@ export interface AdminQuotaPolicyAmino {
    * An example name would be:
    * `compute.googleapis.com/cpus`
    */
-  metric: string;
+  metric?: string;
   /**
    * The limit unit of the limit to which this policy applies.
    * 
@@ -1004,12 +1004,12 @@ export interface AdminQuotaPolicyAmino {
    * Note that `{project}` and `{region}` are not placeholders in this example;
    * the literal characters `{` and `}` occur in the string.
    */
-  unit: string;
+  unit?: string;
   /**
    * The cloud resource container at which the quota policy is created. The
    * format is `{container_type}/{container_number}`
    */
-  container: string;
+  container?: string;
 }
 export interface AdminQuotaPolicyAminoMsg {
   type: "/google.api.serviceusage.v1beta1.AdminQuotaPolicy";
@@ -1055,12 +1055,12 @@ export interface ServiceIdentityAmino {
    * The email address of the service account that a service producer would use
    * to access consumer resources.
    */
-  email: string;
+  email?: string;
   /**
    * The unique and stable id of the service account.
    * https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts#ServiceAccount
    */
-  unique_id: string;
+  unique_id?: string;
 }
 export interface ServiceIdentityAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ServiceIdentity";

@@ -949,7 +949,7 @@ export const BytesValue = {
   },
   toAmino(message: BytesValue): BytesValueAmino {
     const obj: any = {};
-    obj.value = base64FromBytes(message.value);
+    message.value !== undefined && (obj.value = base64FromBytes(message.value));
     return obj;
   },
   fromAminoMsg(object: BytesValueAminoMsg): BytesValue {

@@ -30,14 +30,14 @@ export interface EvalStateProtoMsg {
  */
 export interface EvalStateAmino {
   /** The unique values referenced in this message. */
-  values: ExprValueAmino[];
+  values?: ExprValueAmino[];
   /**
    * An ordered list of results.
    * 
    * Tracks the flow of evaluation through the expression.
    * May be sparse.
    */
-  results: EvalState_ResultAmino[];
+  results?: EvalState_ResultAmino[];
 }
 /**
  * The state of an evaluation.
@@ -62,9 +62,9 @@ export interface EvalState_ResultProtoMsg {
 /** A single evalution result. */
 export interface EvalState_ResultAmino {
   /** The id of the expression this result if for. */
-  expr: string;
+  expr?: string;
   /** The index in `values` of the resulting value. */
-  value: string;
+  value?: string;
 }
 /** A single evalution result. */
 export interface EvalState_ResultSDKType {
@@ -203,7 +203,7 @@ export interface ErrorSetProtoMsg {
  */
 export interface ErrorSetAmino {
   /** The errors in the set. */
-  errors: StatusAmino[];
+  errors?: StatusAmino[];
 }
 /**
  * A set of errors.
@@ -233,7 +233,7 @@ export interface UnknownSetProtoMsg {
  */
 export interface UnknownSetAmino {
   /** The ids of the expressions with unknown values. */
-  exprs: string[];
+  exprs?: string[];
 }
 /**
  * A set of expressions for which the value is unknown.

@@ -270,7 +270,7 @@ export const Snapshot = {
     obj.height = message.height ? message.height.toString() : undefined;
     obj.format = message.format;
     obj.chunks = message.chunks;
-    obj.hash = base64FromBytes(message.hash);
+    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash));
     obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined;
     return obj;
   },
@@ -782,8 +782,8 @@ export const SnapshotIAVLItem = {
   },
   toAmino(message: SnapshotIAVLItem): SnapshotIAVLItemAmino {
     const obj: any = {};
-    obj.key = base64FromBytes(message.key);
-    obj.value = base64FromBytes(message.value);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value));
     obj.version = message.version ? message.version.toString() : undefined;
     obj.height = message.height;
     return obj;
@@ -984,7 +984,7 @@ export const SnapshotExtensionPayload = {
   },
   toAmino(message: SnapshotExtensionPayload): SnapshotExtensionPayloadAmino {
     const obj: any = {};
-    obj.payload = base64FromBytes(message.payload);
+    message.payload !== undefined && (obj.payload = base64FromBytes(message.payload));
     return obj;
   },
   fromAminoMsg(object: SnapshotExtensionPayloadAminoMsg): SnapshotExtensionPayload {
@@ -1090,8 +1090,8 @@ export const SnapshotKVItem = {
   },
   toAmino(message: SnapshotKVItem): SnapshotKVItemAmino {
     const obj: any = {};
-    obj.key = base64FromBytes(message.key);
-    obj.value = base64FromBytes(message.value);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value));
     return obj;
   },
   fromAminoMsg(object: SnapshotKVItemAminoMsg): SnapshotKVItem {

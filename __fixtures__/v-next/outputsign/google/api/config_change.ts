@@ -125,24 +125,24 @@ export interface ConfigChangeAmino {
    * - quota.metric_rules[selector=="google"].metric_costs[key=="reads"].value
    * - logging.producer_destinations[0]
    */
-  element: string;
+  element?: string;
   /**
    * Value of the changed object in the old Service configuration,
    * in JSON format. This field will not be populated if ChangeType == ADDED.
    */
-  old_value: string;
+  old_value?: string;
   /**
    * Value of the changed object in the new Service configuration,
    * in JSON format. This field will not be populated if ChangeType == REMOVED.
    */
-  new_value: string;
+  new_value?: string;
   /** The type for this change, either ADDED, REMOVED, or MODIFIED. */
-  change_type: ChangeType;
+  change_type?: ChangeType;
   /**
    * Collection of advice provided for this change, useful for determining the
    * possible impact of this change.
    */
-  advices: AdviceAmino[];
+  advices?: AdviceAmino[];
 }
 export interface ConfigChangeAminoMsg {
   type: "/google.api.ConfigChange";
@@ -187,7 +187,7 @@ export interface AdviceAmino {
    * Useful description for why this advice was applied and what actions should
    * be taken to mitigate any implied risks.
    */
-  description: string;
+  description?: string;
 }
 export interface AdviceAminoMsg {
   type: "/google.api.Advice";

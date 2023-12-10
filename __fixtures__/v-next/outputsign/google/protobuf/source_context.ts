@@ -25,7 +25,7 @@ export interface SourceContextAmino {
    * The path-qualified name of the .proto file that contained the associated
    * protobuf element.  For example: `"google/protobuf/source_context.proto"`.
    */
-  file_name: string;
+  file_name?: string;
 }
 export interface SourceContextAminoMsg {
   type: "/google.protobuf.SourceContext";

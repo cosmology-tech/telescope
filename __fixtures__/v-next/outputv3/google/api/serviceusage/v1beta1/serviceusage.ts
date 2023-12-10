@@ -77,7 +77,7 @@ export interface EnableServiceRequestAmino {
    * `projects/123/services/serviceusage.googleapis.com`
    * where `123` is the project number (not project ID).
    */
-  name: string;
+  name?: string;
 }
 /** Request message for the `EnableService` method. */
 export interface EnableServiceRequestSDKType {
@@ -111,7 +111,7 @@ export interface DisableServiceRequestAmino {
    * `projects/123/services/serviceusage.googleapis.com`
    * where `123` is the project number (not project ID).
    */
-  name: string;
+  name?: string;
 }
 /** Request message for the `DisableService` method. */
 export interface DisableServiceRequestSDKType {
@@ -141,7 +141,7 @@ export interface GetServiceRequestAmino {
    * `projects/123/services/serviceusage.googleapis.com`
    * where `123` is the project number (not project ID).
    */
-  name: string;
+  name?: string;
 }
 /** Request message for the `GetService` method. */
 export interface GetServiceRequestSDKType {
@@ -187,23 +187,23 @@ export interface ListServicesRequestAmino {
    * `projects/123`
    * where `123` is the project number (not project ID).
    */
-  parent: string;
+  parent?: string;
   /**
    * Requested size of the next page of data.
    * Requested page size cannot exceed 200.
    *  If not set, the default page size is 50.
    */
-  page_size: number;
+  page_size?: number;
   /**
    * Token identifying which result to start with, which is returned by a
    * previous list call.
    */
-  page_token: string;
+  page_token?: string;
   /**
    * Only list services that conform to the given filter.
    * The allowed filter strings are `state:ENABLED` and `state:DISABLED`.
    */
-  filter: string;
+  filter?: string;
 }
 /** Request message for the `ListServices` method. */
 export interface ListServicesRequestSDKType {
@@ -229,12 +229,12 @@ export interface ListServicesResponseProtoMsg {
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponseAmino {
   /** The available services for the requested project. */
-  services: ServiceAmino[];
+  services?: ServiceAmino[];
   /**
    * Token that can be passed to `ListServices` to resume a paginated
    * query.
    */
-  next_page_token: string;
+  next_page_token?: string;
 }
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponseSDKType {
@@ -286,7 +286,7 @@ export interface BatchEnableServicesRequestAmino {
    * 
    * The `BatchEnableServices` method currently only supports projects.
    */
-  parent: string;
+  parent?: string;
   /**
    * The identifiers of the services to enable on the project.
    * 
@@ -303,7 +303,7 @@ export interface BatchEnableServicesRequestAmino {
    * than 20 services are specified, the request will fail, and no state changes
    * will occur.
    */
-  service_ids: string[];
+  service_ids?: string[];
 }
 /** Request message for the `BatchEnableServices` method. */
 export interface BatchEnableServicesRequestSDKType {
@@ -345,16 +345,16 @@ export interface ListConsumerQuotaMetricsRequestAmino {
    * `folders/345/services/serviceconsumermanagement.googleapis.com`
    * `organizations/456/services/serviceconsumermanagement.googleapis.com`
    */
-  parent: string;
+  parent?: string;
   /** Requested size of the next page of data. */
-  page_size: number;
+  page_size?: number;
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
    */
-  page_token: string;
+  page_token?: string;
   /** Specifies the level of detail for quota information in the response. */
-  view: QuotaView;
+  view?: QuotaView;
 }
 /** Request message for ListConsumerQuotaMetrics */
 export interface ListConsumerQuotaMetricsRequestSDKType {
@@ -380,12 +380,12 @@ export interface ListConsumerQuotaMetricsResponseProtoMsg {
 /** Response message for ListConsumerQuotaMetrics */
 export interface ListConsumerQuotaMetricsResponseAmino {
   /** Quota settings for the consumer, organized by quota metric. */
-  metrics: ConsumerQuotaMetricAmino[];
+  metrics?: ConsumerQuotaMetricAmino[];
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
    */
-  next_page_token: string;
+  next_page_token?: string;
 }
 /** Response message for ListConsumerQuotaMetrics */
 export interface ListConsumerQuotaMetricsResponseSDKType {
@@ -416,9 +416,9 @@ export interface GetConsumerQuotaMetricRequestAmino {
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com/quotas/metrics/serviceusage.googleapis.com%2Fmutate_requests`
    */
-  name: string;
+  name?: string;
   /** Specifies the level of detail for quota information in the response. */
-  view: QuotaView;
+  view?: QuotaView;
 }
 /** Request message for GetConsumerQuotaMetric */
 export interface GetConsumerQuotaMetricRequestSDKType {
@@ -449,9 +449,9 @@ export interface GetConsumerQuotaLimitRequestAmino {
    * Use the quota limit resource name returned by previous
    * ListConsumerQuotaMetrics and GetConsumerQuotaMetric API calls.
    */
-  name: string;
+  name?: string;
   /** Specifies the level of detail for quota information in the response. */
-  view: QuotaView;
+  view?: QuotaView;
 }
 /** Request message for GetConsumerQuotaLimit */
 export interface GetConsumerQuotaLimitRequestSDKType {
@@ -497,7 +497,7 @@ export interface CreateAdminOverrideRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
    */
-  parent: string;
+  parent?: string;
   /** The admin override to create. */
   override?: QuotaOverrideAmino;
   /**
@@ -505,14 +505,14 @@ export interface CreateAdminOverrideRequestAmino {
    * Setting the force parameter to 'true' ignores all quota safety checks that
    * would fail the request. QuotaSafetyCheck lists all such validations.
    */
-  force: boolean;
+  force?: boolean;
   /**
    * The list of quota safety checks to ignore before the override mutation.
    * Unlike 'force' field that ignores all the quota safety checks, the
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheck[];
+  force_only?: QuotaSafetyCheck[];
 }
 /** Request message for CreateAdminOverride. */
 export interface CreateAdminOverrideRequestSDKType {
@@ -566,7 +566,7 @@ export interface UpdateAdminOverrideRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
    */
-  name: string;
+  name?: string;
   /**
    * The new override.
    * Only the override_value is updated; all other fields are ignored.
@@ -577,7 +577,7 @@ export interface UpdateAdminOverrideRequestAmino {
    * Setting the force parameter to 'true' ignores all quota safety checks that
    * would fail the request. QuotaSafetyCheck lists all such validations.
    */
-  force: boolean;
+  force?: boolean;
   /**
    * Update only the specified fields of the override.
    * If unset, all fields will be updated.
@@ -589,7 +589,7 @@ export interface UpdateAdminOverrideRequestAmino {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheck[];
+  force_only?: QuotaSafetyCheck[];
 }
 /** Request message for UpdateAdminOverride. */
 export interface UpdateAdminOverrideRequestSDKType {
@@ -634,20 +634,20 @@ export interface DeleteAdminOverrideRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
    */
-  name: string;
+  name?: string;
   /**
    * Whether to force the deletion of the quota override.
    * Setting the force parameter to 'true' ignores all quota safety checks that
    * would fail the request. QuotaSafetyCheck lists all such validations.
    */
-  force: boolean;
+  force?: boolean;
   /**
    * The list of quota safety checks to ignore before the override mutation.
    * Unlike 'force' field that ignores all the quota safety checks, the
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheck[];
+  force_only?: QuotaSafetyCheck[];
 }
 /** Request message for DeleteAdminOverride. */
 export interface DeleteAdminOverrideRequestSDKType {
@@ -686,14 +686,14 @@ export interface ListAdminOverridesRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
    */
-  parent: string;
+  parent?: string;
   /** Requested size of the next page of data. */
-  page_size: number;
+  page_size?: number;
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
    */
-  page_token: string;
+  page_token?: string;
 }
 /** Request message for ListAdminOverrides */
 export interface ListAdminOverridesRequestSDKType {
@@ -718,12 +718,12 @@ export interface ListAdminOverridesResponseProtoMsg {
 /** Response message for ListAdminOverrides. */
 export interface ListAdminOverridesResponseAmino {
   /** Admin overrides on this limit. */
-  overrides: QuotaOverrideAmino[];
+  overrides?: QuotaOverrideAmino[];
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
    */
-  next_page_token: string;
+  next_page_token?: string;
 }
 /** Response message for ListAdminOverrides. */
 export interface ListAdminOverridesResponseSDKType {
@@ -742,7 +742,7 @@ export interface BatchCreateAdminOverridesResponseProtoMsg {
 /** Response message for BatchCreateAdminOverrides */
 export interface BatchCreateAdminOverridesResponseAmino {
   /** The overrides that were created. */
-  overrides: QuotaOverrideAmino[];
+  overrides?: QuotaOverrideAmino[];
 }
 /** Response message for BatchCreateAdminOverrides */
 export interface BatchCreateAdminOverridesResponseSDKType {
@@ -785,7 +785,7 @@ export interface ImportAdminOverridesRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com`
    */
-  parent: string;
+  parent?: string;
   /** The import data is specified in the request message itself */
   inline_source?: OverrideInlineSourceAmino;
   /**
@@ -793,14 +793,14 @@ export interface ImportAdminOverridesRequestAmino {
    * Setting the force parameter to 'true' ignores all quota safety checks that
    * would fail the request. QuotaSafetyCheck lists all such validations.
    */
-  force: boolean;
+  force?: boolean;
   /**
    * The list of quota safety checks to ignore before the override mutation.
    * Unlike 'force' field that ignores all the quota safety checks, the
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheck[];
+  force_only?: QuotaSafetyCheck[];
 }
 /** Request message for ImportAdminOverrides */
 export interface ImportAdminOverridesRequestSDKType {
@@ -821,7 +821,7 @@ export interface ImportAdminOverridesResponseProtoMsg {
 /** Response message for ImportAdminOverrides */
 export interface ImportAdminOverridesResponseAmino {
   /** The overrides that were created from the imported data. */
-  overrides: QuotaOverrideAmino[];
+  overrides?: QuotaOverrideAmino[];
 }
 /** Response message for ImportAdminOverrides */
 export interface ImportAdminOverridesResponseSDKType {
@@ -888,7 +888,7 @@ export interface CreateConsumerOverrideRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
    */
-  parent: string;
+  parent?: string;
   /** The override to create. */
   override?: QuotaOverrideAmino;
   /**
@@ -896,14 +896,14 @@ export interface CreateConsumerOverrideRequestAmino {
    * Setting the force parameter to 'true' ignores all quota safety checks that
    * would fail the request. QuotaSafetyCheck lists all such validations.
    */
-  force: boolean;
+  force?: boolean;
   /**
    * The list of quota safety checks to ignore before the override mutation.
    * Unlike 'force' field that ignores all the quota safety checks, the
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheck[];
+  force_only?: QuotaSafetyCheck[];
 }
 /** Request message for CreateConsumerOverride. */
 export interface CreateConsumerOverrideRequestSDKType {
@@ -957,7 +957,7 @@ export interface UpdateConsumerOverrideRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
    */
-  name: string;
+  name?: string;
   /**
    * The new override.
    * Only the override_value is updated; all other fields are ignored.
@@ -968,7 +968,7 @@ export interface UpdateConsumerOverrideRequestAmino {
    * Setting the force parameter to 'true' ignores all quota safety checks that
    * would fail the request. QuotaSafetyCheck lists all such validations.
    */
-  force: boolean;
+  force?: boolean;
   /**
    * Update only the specified fields of the override.
    * If unset, all fields will be updated.
@@ -980,7 +980,7 @@ export interface UpdateConsumerOverrideRequestAmino {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheck[];
+  force_only?: QuotaSafetyCheck[];
 }
 /** Request message for UpdateConsumerOverride. */
 export interface UpdateConsumerOverrideRequestSDKType {
@@ -1025,20 +1025,20 @@ export interface DeleteConsumerOverrideRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
    */
-  name: string;
+  name?: string;
   /**
    * Whether to force the deletion of the quota override.
    * Setting the force parameter to 'true' ignores all quota safety checks that
    * would fail the request. QuotaSafetyCheck lists all such validations.
    */
-  force: boolean;
+  force?: boolean;
   /**
    * The list of quota safety checks to ignore before the override mutation.
    * Unlike 'force' field that ignores all the quota safety checks, the
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheck[];
+  force_only?: QuotaSafetyCheck[];
 }
 /** Request message for DeleteConsumerOverride. */
 export interface DeleteConsumerOverrideRequestSDKType {
@@ -1077,14 +1077,14 @@ export interface ListConsumerOverridesRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
    */
-  parent: string;
+  parent?: string;
   /** Requested size of the next page of data. */
-  page_size: number;
+  page_size?: number;
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
    */
-  page_token: string;
+  page_token?: string;
 }
 /** Request message for ListConsumerOverrides */
 export interface ListConsumerOverridesRequestSDKType {
@@ -1109,12 +1109,12 @@ export interface ListConsumerOverridesResponseProtoMsg {
 /** Response message for ListConsumerOverrides. */
 export interface ListConsumerOverridesResponseAmino {
   /** Consumer overrides on this limit. */
-  overrides: QuotaOverrideAmino[];
+  overrides?: QuotaOverrideAmino[];
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
    */
-  next_page_token: string;
+  next_page_token?: string;
 }
 /** Response message for ListConsumerOverrides. */
 export interface ListConsumerOverridesResponseSDKType {
@@ -1133,7 +1133,7 @@ export interface BatchCreateConsumerOverridesResponseProtoMsg {
 /** Response message for BatchCreateConsumerOverrides */
 export interface BatchCreateConsumerOverridesResponseAmino {
   /** The overrides that were created. */
-  overrides: QuotaOverrideAmino[];
+  overrides?: QuotaOverrideAmino[];
 }
 /** Response message for BatchCreateConsumerOverrides */
 export interface BatchCreateConsumerOverridesResponseSDKType {
@@ -1176,7 +1176,7 @@ export interface ImportConsumerOverridesRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com`
    */
-  parent: string;
+  parent?: string;
   /** The import data is specified in the request message itself */
   inline_source?: OverrideInlineSourceAmino;
   /**
@@ -1184,14 +1184,14 @@ export interface ImportConsumerOverridesRequestAmino {
    * Setting the force parameter to 'true' ignores all quota safety checks that
    * would fail the request. QuotaSafetyCheck lists all such validations.
    */
-  force: boolean;
+  force?: boolean;
   /**
    * The list of quota safety checks to ignore before the override mutation.
    * Unlike 'force' field that ignores all the quota safety checks, the
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheck[];
+  force_only?: QuotaSafetyCheck[];
 }
 /** Request message for ImportConsumerOverrides */
 export interface ImportConsumerOverridesRequestSDKType {
@@ -1212,7 +1212,7 @@ export interface ImportConsumerOverridesResponseProtoMsg {
 /** Response message for ImportConsumerOverrides */
 export interface ImportConsumerOverridesResponseAmino {
   /** The overrides that were created from the imported data. */
-  overrides: QuotaOverrideAmino[];
+  overrides?: QuotaOverrideAmino[];
 }
 /** Response message for ImportConsumerOverrides */
 export interface ImportConsumerOverridesResponseSDKType {
@@ -1252,7 +1252,7 @@ export interface ImportAdminQuotaPoliciesResponseProtoMsg {
 /** Response message for ImportAdminQuotaPolicies */
 export interface ImportAdminQuotaPoliciesResponseAmino {
   /** The policies that were created from the imported data. */
-  policies: AdminQuotaPolicyAmino[];
+  policies?: AdminQuotaPolicyAmino[];
 }
 /** Response message for ImportAdminQuotaPolicies */
 export interface ImportAdminQuotaPoliciesResponseSDKType {
@@ -1374,7 +1374,7 @@ export interface GenerateServiceIdentityRequestAmino {
    * `projects/123/services/example.googleapis.com` where `123` is the
    * project number.
    */
-  parent: string;
+  parent?: string;
 }
 /** Request message for generating service identity. */
 export interface GenerateServiceIdentityRequestSDKType {
@@ -1404,7 +1404,7 @@ export interface GetServiceIdentityResponseAmino {
    */
   identity?: ServiceIdentityAmino;
   /** Service identity state. */
-  state: GetServiceIdentityResponse_IdentityState;
+  state?: GetServiceIdentityResponse_IdentityState;
 }
 /** Response message for getting service identity. */
 export interface GetServiceIdentityResponseSDKType {

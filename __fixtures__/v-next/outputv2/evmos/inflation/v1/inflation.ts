@@ -46,17 +46,17 @@ export interface InflationDistributionAmino {
    * staking_rewards defines the proportion of the minted minted_denom that is
    * to be allocated as staking rewards
    */
-  staking_rewards: string;
+  staking_rewards?: string;
   /**
    * usage_incentives defines the proportion of the minted minted_denom that is
    * to be allocated to the incentives module address
    */
-  usage_incentives: string;
+  usage_incentives?: string;
   /**
    * community_pool defines the proportion of the minted minted_denom that is to
    * be allocated to the community pool
    */
-  community_pool: string;
+  community_pool?: string;
 }
 export interface InflationDistributionAminoMsg {
   type: "/evmos.inflation.v1.InflationDistribution";
@@ -108,15 +108,15 @@ export interface ExponentialCalculationProtoMsg {
  */
 export interface ExponentialCalculationAmino {
   /** initial value */
-  a: string;
+  a?: string;
   /** reduction factor */
-  r: string;
+  r?: string;
   /** long term inflation */
-  c: string;
+  c?: string;
   /** bonding target */
-  bonding_target: string;
+  bonding_target?: string;
   /** max variance */
-  max_variance: string;
+  max_variance?: string;
 }
 export interface ExponentialCalculationAminoMsg {
   type: "/evmos.inflation.v1.ExponentialCalculation";

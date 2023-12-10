@@ -100,12 +100,12 @@ export interface DistributionAmino {
    * must equal the sum of the values in `bucket_counts` if a histogram is
    * provided.
    */
-  count: string;
+  count?: string;
   /**
    * The arithmetic mean of the values in the population. If `count` is zero
    * then this field must be zero.
    */
-  mean: number;
+  mean?: number;
   /**
    * The sum of squared deviations from the mean of the values in the
    * population. For values x_i this is:
@@ -117,7 +117,7 @@ export interface DistributionAmino {
    * 
    * If `count` is zero then this field must be zero.
    */
-  sum_of_squared_deviation: number;
+  sum_of_squared_deviation?: number;
   /**
    * If specified, contains the range of the population values. The field
    * must not be present if the `count` is zero.
@@ -145,9 +145,9 @@ export interface DistributionAmino {
    * counts for the finite buckets (number 1 through N-2). The N'th value in
    * `bucket_counts` is the count for the overflow bucket (number N-1).
    */
-  bucket_counts: string[];
+  bucket_counts?: string[];
   /** Must be in increasing order of `value` field. */
-  exemplars: Distribution_ExemplarAmino[];
+  exemplars?: Distribution_ExemplarAmino[];
 }
 /**
  * `Distribution` contains summary statistics for a population of values. It
@@ -188,9 +188,9 @@ export interface Distribution_RangeProtoMsg {
 /** The range of the population values. */
 export interface Distribution_RangeAmino {
   /** The minimum of the population values. */
-  min: number;
+  min?: number;
   /** The maximum of the population values. */
-  max: number;
+  max?: number;
 }
 /** The range of the population values. */
 export interface Distribution_RangeSDKType {
@@ -309,11 +309,11 @@ export interface Distribution_BucketOptions_LinearProtoMsg {
  */
 export interface Distribution_BucketOptions_LinearAmino {
   /** Must be greater than 0. */
-  num_finite_buckets: number;
+  num_finite_buckets?: number;
   /** Must be greater than 0. */
-  width: number;
+  width?: number;
   /** Lower bound of the first bucket. */
-  offset: number;
+  offset?: number;
 }
 /**
  * Specifies a linear sequence of buckets that all have the same width
@@ -367,11 +367,11 @@ export interface Distribution_BucketOptions_ExponentialProtoMsg {
  */
 export interface Distribution_BucketOptions_ExponentialAmino {
   /** Must be greater than 0. */
-  num_finite_buckets: number;
+  num_finite_buckets?: number;
   /** Must be greater than 1. */
-  growth_factor: number;
+  growth_factor?: number;
   /** Must be greater than 0. */
-  scale: number;
+  scale?: number;
 }
 /**
  * Specifies an exponential sequence of buckets that have a width that is
@@ -425,7 +425,7 @@ export interface Distribution_BucketOptions_ExplicitProtoMsg {
  */
 export interface Distribution_BucketOptions_ExplicitAmino {
   /** The values must be monotonically increasing. */
-  bounds: number[];
+  bounds?: number[];
 }
 /**
  * Specifies a set of buckets with arbitrary widths.
@@ -489,7 +489,7 @@ export interface Distribution_ExemplarAmino {
    * Value of the exemplar point. This value determines to which bucket the
    * exemplar belongs.
    */
-  value: number;
+  value?: number;
   /** The observation (sampling) time of the above value. */
   timestamp?: string;
   /**
@@ -505,7 +505,7 @@ export interface Distribution_ExemplarAmino {
    * There may be only a single attachment of any given message type in a
    * single exemplar, and this is enforced by the system.
    */
-  attachments: AnyAmino[];
+  attachments?: AnyAmino[];
 }
 /**
  * Exemplars are example points that may be used to annotate aggregated

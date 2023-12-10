@@ -413,7 +413,7 @@ export interface FieldMaskProtoMsg {
  */
 export interface FieldMaskAmino {
   /** The set of field mask paths. */
-  paths: string[];
+  paths?: string[];
 }
 export interface FieldMaskAminoMsg {
   type: "/google.protobuf.FieldMask";

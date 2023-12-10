@@ -11,7 +11,7 @@ export interface MsgUnjailProtoMsg {
 }
 /** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjailAmino {
-  validator_addr: string;
+  validator_addr?: string;
 }
 export interface MsgUnjailAminoMsg {
   type: "cosmos-sdk/MsgUnjail";

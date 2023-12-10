@@ -13,8 +13,8 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisStateAmino {
-  accounts: AccountAmino[];
-  payments: PaymentAmino[];
+  accounts?: AccountAmino[];
+  payments?: PaymentAmino[];
 }
 /** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisStateSDKType {

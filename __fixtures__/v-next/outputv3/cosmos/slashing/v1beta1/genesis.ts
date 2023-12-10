@@ -29,12 +29,12 @@ export interface GenesisStateAmino {
    * signing_infos represents a map between validator addresses and their
    * signing infos.
    */
-  signing_infos: SigningInfoAmino[];
+  signing_infos?: SigningInfoAmino[];
   /**
    * missed_blocks represents a map between validator addresses and their
    * missed blocks.
    */
-  missed_blocks: ValidatorMissedBlocksAmino[];
+  missed_blocks?: ValidatorMissedBlocksAmino[];
 }
 /** GenesisState defines the slashing module's genesis state. */
 export interface GenesisStateSDKType {
@@ -56,7 +56,7 @@ export interface SigningInfoProtoMsg {
 /** SigningInfo stores validator signing info of corresponding address. */
 export interface SigningInfoAmino {
   /** address is the validator address. */
-  address: string;
+  address?: string;
   /** validator_signing_info represents the signing info of this validator. */
   validator_signing_info?: ValidatorSigningInfoAmino;
 }
@@ -85,9 +85,9 @@ export interface ValidatorMissedBlocksProtoMsg {
  */
 export interface ValidatorMissedBlocksAmino {
   /** address is the validator address. */
-  address: string;
+  address?: string;
   /** missed_blocks is an array of missed blocks by the validator. */
-  missed_blocks: MissedBlockAmino[];
+  missed_blocks?: MissedBlockAmino[];
 }
 /**
  * ValidatorMissedBlocks contains array of missed blocks of corresponding
@@ -111,9 +111,9 @@ export interface MissedBlockProtoMsg {
 /** MissedBlock contains height and missed status as boolean. */
 export interface MissedBlockAmino {
   /** index is the height at which the block was missed. */
-  index: string;
+  index?: string;
   /** missed is the missed status. */
-  missed: boolean;
+  missed?: boolean;
 }
 /** MissedBlock contains height and missed status as boolean. */
 export interface MissedBlockSDKType {

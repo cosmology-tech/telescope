@@ -282,9 +282,9 @@ export interface ManagedServiceAmino {
    * The name of the service. See the [overview](/service-management/overview)
    * for naming requirements.
    */
-  service_name: string;
+  service_name?: string;
   /** ID of the project that produces and owns this service. */
-  producer_project_id: string;
+  producer_project_id?: string;
 }
 export interface ManagedServiceAminoMsg {
   type: "/google.api.servicemanagement.v1.ManagedService";
@@ -322,11 +322,11 @@ export interface OperationMetadataAmino {
    * The full name of the resources that this operation is directly
    * associated with.
    */
-  resource_names: string[];
+  resource_names?: string[];
   /** Detailed status information for each step. The order is undetermined. */
-  steps: OperationMetadata_StepAmino[];
+  steps?: OperationMetadata_StepAmino[];
   /** Percentage of completion of this operation, ranging from 0 to 100. */
-  progress_percentage: number;
+  progress_percentage?: number;
   /** The start time of the operation. */
   start_time?: string;
 }
@@ -355,9 +355,9 @@ export interface OperationMetadata_StepProtoMsg {
 /** Represents the status of one operation step. */
 export interface OperationMetadata_StepAmino {
   /** The short description of the step. */
-  description: string;
+  description?: string;
   /** The status code. */
-  status: OperationMetadata_Status;
+  status?: OperationMetadata_Status;
 }
 export interface OperationMetadata_StepAminoMsg {
   type: "/google.api.servicemanagement.v1.Step";
@@ -384,11 +384,11 @@ export interface DiagnosticProtoMsg {
 /** Represents a diagnostic message (error or warning) */
 export interface DiagnosticAmino {
   /** File name and line number of the error or warning. */
-  location: string;
+  location?: string;
   /** The kind of diagnostic information provided. */
-  kind: Diagnostic_Kind;
+  kind?: Diagnostic_Kind;
   /** Message describing the error or warning. */
-  message: string;
+  message?: string;
 }
 export interface DiagnosticAminoMsg {
   type: "/google.api.servicemanagement.v1.Diagnostic";
@@ -431,12 +431,12 @@ export interface ConfigSourceAmino {
    * by the client for tracking purpose. If empty, the server may choose to
    * generate one instead.
    */
-  id: string;
+  id?: string;
   /**
    * Set of source configuration files that are used to generate a service
    * configuration (`google.api.Service`).
    */
-  files: ConfigFileAmino[];
+  files?: ConfigFileAmino[];
 }
 export interface ConfigSourceAminoMsg {
   type: "/google.api.servicemanagement.v1.ConfigSource";
@@ -466,11 +466,11 @@ export interface ConfigFileProtoMsg {
 /** Generic specification of a source configuration file */
 export interface ConfigFileAmino {
   /** The file name of the configuration file (full or relative path). */
-  file_path: string;
+  file_path?: string;
   /** The bytes that constitute the file. */
-  file_contents: string;
+  file_contents?: string;
   /** The type of configuration file this represents. */
-  file_type: ConfigFile_FileType;
+  file_type?: ConfigFile_FileType;
 }
 export interface ConfigFileAminoMsg {
   type: "/google.api.servicemanagement.v1.ConfigFile";
@@ -500,7 +500,7 @@ export interface ConfigRefAmino {
    * Resource name of a service config. It must have the following
    * format: "services/{service name}/configs/{config id}".
    */
-  name: string;
+  name?: string;
 }
 export interface ConfigRefAminoMsg {
   type: "/google.api.servicemanagement.v1.ConfigRef";
@@ -544,7 +544,7 @@ export interface ChangeReportAmino {
    * A ConfigChange identifier is a dot separated path to the configuration.
    * Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
    */
-  config_changes: ConfigChangeAmino[];
+  config_changes?: ConfigChangeAmino[];
 }
 export interface ChangeReportAminoMsg {
   type: "/google.api.servicemanagement.v1.ChangeReport";
@@ -619,17 +619,17 @@ export interface RolloutAmino {
    * positive number that is reset every day for each service.
    * An example of the generated rollout_id is '2016-02-16r1'
    */
-  rollout_id: string;
+  rollout_id?: string;
   /** Creation time of the rollout. Readonly. */
   create_time?: string;
   /** The user who created the Rollout. Readonly. */
-  created_by: string;
+  created_by?: string;
   /**
    * The status of this rollout. Readonly. In case of a failed rollout,
    * the system will automatically rollback to the current Rollout
    * version. Readonly.
    */
-  status: Rollout_RolloutStatus;
+  status?: Rollout_RolloutStatus;
   /**
    * Google Service Control selects service configurations based on
    * traffic percentage.
@@ -641,7 +641,7 @@ export interface RolloutAmino {
    */
   delete_service_strategy?: Rollout_DeleteServiceStrategyAmino;
   /** The name of the service associated with this Rollout. */
-  service_name: string;
+  service_name?: string;
 }
 export interface RolloutAminoMsg {
   type: "/google.api.servicemanagement.v1.Rollout";
@@ -670,8 +670,8 @@ export interface Rollout_TrafficPercentStrategy_PercentagesEntryProtoMsg {
   value: Uint8Array;
 }
 export interface Rollout_TrafficPercentStrategy_PercentagesEntryAmino {
-  key: string;
-  value: number;
+  key?: string;
+  value?: number;
 }
 export interface Rollout_TrafficPercentStrategy_PercentagesEntryAminoMsg {
   type: string;
@@ -765,7 +765,7 @@ export interface Rollout_TrafficPercentStrategyAmino {
    * Key is the service configuration ID, Value is the traffic percentage
    * which must be greater than 0.0 and the sum must equal to 100.0.
    */
-  percentages: {
+  percentages?: {
     [key: string]: number;
   };
 }
@@ -1291,7 +1291,7 @@ export const ConfigFile = {
   toAmino(message: ConfigFile): ConfigFileAmino {
     const obj: any = {};
     obj.file_path = message.filePath;
-    obj.file_contents = base64FromBytes(message.fileContents);
+    message.fileContents !== undefined && (obj.file_contents = base64FromBytes(message.fileContents));
     obj.file_type = message.fileType;
     return obj;
   },

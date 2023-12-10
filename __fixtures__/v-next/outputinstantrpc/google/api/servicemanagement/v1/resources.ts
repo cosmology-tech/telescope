@@ -1279,7 +1279,7 @@ export const ConfigFile = {
   toAmino(message: ConfigFile): ConfigFileAmino {
     const obj: any = {};
     obj.file_path = message.filePath;
-    obj.file_contents = base64FromBytes(message.fileContents);
+    message.fileContents !== undefined && (obj.file_contents = base64FromBytes(message.fileContents));
     obj.file_type = message.fileType;
     return obj;
   },

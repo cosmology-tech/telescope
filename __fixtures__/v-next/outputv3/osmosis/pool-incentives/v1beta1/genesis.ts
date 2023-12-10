@@ -19,7 +19,7 @@ export interface GenesisStateProtoMsg {
 export interface GenesisStateAmino {
   /** params defines all the paramaters of the module. */
   params?: ParamsAmino;
-  lockable_durations: DurationAmino[];
+  lockable_durations?: DurationAmino[];
   distr_info?: DistrInfoAmino;
   pool_to_gauges?: PoolToGaugesAmino;
 }

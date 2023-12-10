@@ -295,7 +295,7 @@ export interface ResourceDescriptorAmino {
    * should use PascalCase (UpperCamelCase). The maximum number of
    * characters allowed for the `resource_type_kind` is 100.
    */
-  type: string;
+  type?: string;
   /**
    * Optional. The relative resource name pattern associated with this resource
    * type. The DNS prefix of the full resource name shouldn't be specified here.
@@ -317,12 +317,12 @@ export interface ResourceDescriptorAmino {
    * the same component name (e.g. "project") refers to IDs of the same
    * type of resource.
    */
-  pattern: string[];
+  pattern?: string[];
   /**
    * Optional. The field on the resource that designates the resource name
    * field. If omitted, this is assumed to be "name".
    */
-  name_field: string;
+  name_field?: string;
   /**
    * Optional. The historical or future-looking state of the resource pattern.
    * 
@@ -340,7 +340,7 @@ export interface ResourceDescriptorAmino {
    *       };
    *     }
    */
-  history: ResourceDescriptor_History;
+  history?: ResourceDescriptor_History;
   /**
    * The plural name used in the resource name and permission names, such as
    * 'projects' for the resource name of 'projects/{project}' and the permission
@@ -351,19 +351,19 @@ export interface ResourceDescriptorAmino {
    * Note: The plural form is required even for singleton resources. See
    * https://aip.dev/156
    */
-  plural: string;
+  plural?: string;
   /**
    * The same concept of the `singular` field in k8s CRD spec
    * https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/
    * Such as "project" for the `resourcemanager.googleapis.com/Project` type.
    */
-  singular: string;
+  singular?: string;
   /**
    * Style flag(s) for this resource.
    * These indicate that a resource is expected to conform to a given
    * style. See the specific style flags for additional information.
    */
-  style: ResourceDescriptor_Style[];
+  style?: ResourceDescriptor_Style[];
 }
 export interface ResourceDescriptorAminoMsg {
   type: "/google.api.ResourceDescriptor";
@@ -501,7 +501,7 @@ export interface ResourceReferenceAmino {
    *       }];
    *     }
    */
-  type: string;
+  type?: string;
   /**
    * The resource type of a child collection that the annotated field
    * references. This is useful for annotating the `parent` field that
@@ -515,7 +515,7 @@ export interface ResourceReferenceAmino {
    *       };
    *     }
    */
-  child_type: string;
+  child_type?: string;
 }
 export interface ResourceReferenceAminoMsg {
   type: "/google.api.ResourceReference";

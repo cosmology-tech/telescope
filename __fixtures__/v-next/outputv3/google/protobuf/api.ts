@@ -76,11 +76,11 @@ export interface ApiAmino {
    * The fully qualified name of this interface, including package name
    * followed by the interface's simple name.
    */
-  name: string;
+  name?: string;
   /** The methods of this interface, in unspecified order. */
-  methods: MethodAmino[];
+  methods?: MethodAmino[];
   /** Any metadata attached to the interface. */
-  options: OptionAmino[];
+  options?: OptionAmino[];
   /**
    * A version string for this interface. If specified, must have the form
    * `major-version.minor-version`, as in `1.10`. If the minor version is
@@ -102,16 +102,16 @@ export interface ApiAmino {
    * be omitted. Zero major versions must only be used for
    * experimental, non-GA interfaces.
    */
-  version: string;
+  version?: string;
   /**
    * Source context for the protocol buffer service represented by this
    * message.
    */
   source_context?: SourceContextAmino;
   /** Included interfaces. See [Mixin][]. */
-  mixins: MixinAmino[];
+  mixins?: MixinAmino[];
   /** The source syntax of the service. */
-  syntax: Syntax;
+  syntax?: Syntax;
 }
 /**
  * Api is a light-weight descriptor for an API Interface.
@@ -157,19 +157,19 @@ export interface MethodProtoMsg {
 /** Method represents a method of an API interface. */
 export interface MethodAmino {
   /** The simple name of this method. */
-  name: string;
+  name?: string;
   /** A URL of the input message type. */
-  request_type_url: string;
+  request_type_url?: string;
   /** If true, the request is streamed. */
-  request_streaming: boolean;
+  request_streaming?: boolean;
   /** The URL of the output message type. */
-  response_type_url: string;
+  response_type_url?: string;
   /** If true, the response is streamed. */
-  response_streaming: boolean;
+  response_streaming?: boolean;
   /** Any metadata attached to the method. */
-  options: OptionAmino[];
+  options?: OptionAmino[];
   /** The source syntax of this method. */
-  syntax: Syntax;
+  syntax?: Syntax;
 }
 /** Method represents a method of an API interface. */
 export interface MethodSDKType {
@@ -356,12 +356,12 @@ export interface MixinProtoMsg {
  */
 export interface MixinAmino {
   /** The fully qualified name of the interface which is included. */
-  name: string;
+  name?: string;
   /**
    * If non-empty specifies a path under which inherited HTTP paths
    * are rooted.
    */
-  root: string;
+  root?: string;
 }
 /**
  * Declares an API Interface to be included in this interface. The including

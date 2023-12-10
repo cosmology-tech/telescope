@@ -677,8 +677,8 @@ export const TxRaw = {
   },
   toAmino(message: TxRaw): TxRawAmino {
     const obj: any = {};
-    obj.body_bytes = base64FromBytes(message.bodyBytes);
-    obj.auth_info_bytes = base64FromBytes(message.authInfoBytes);
+    message.bodyBytes !== undefined && (obj.body_bytes = base64FromBytes(message.bodyBytes));
+    message.authInfoBytes !== undefined && (obj.auth_info_bytes = base64FromBytes(message.authInfoBytes));
     if (message.signatures) {
       obj.signatures = message.signatures.map(e => base64FromBytes(e));
     } else {
@@ -817,8 +817,8 @@ export const SignDoc = {
   },
   toAmino(message: SignDoc): SignDocAmino {
     const obj: any = {};
-    obj.body_bytes = base64FromBytes(message.bodyBytes);
-    obj.auth_info_bytes = base64FromBytes(message.authInfoBytes);
+    message.bodyBytes !== undefined && (obj.body_bytes = base64FromBytes(message.bodyBytes));
+    message.authInfoBytes !== undefined && (obj.auth_info_bytes = base64FromBytes(message.authInfoBytes));
     obj.chain_id = message.chainId;
     obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
     return obj;
@@ -982,7 +982,7 @@ export const SignDocDirectAux = {
   },
   toAmino(message: SignDocDirectAux): SignDocDirectAuxAmino {
     const obj: any = {};
-    obj.body_bytes = base64FromBytes(message.bodyBytes);
+    message.bodyBytes !== undefined && (obj.body_bytes = base64FromBytes(message.bodyBytes));
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined;
     obj.chain_id = message.chainId;
     obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
@@ -2154,7 +2154,7 @@ export const AuxSignerData = {
     obj.address = message.address;
     obj.sign_doc = message.signDoc ? SignDocDirectAux.toAmino(message.signDoc) : undefined;
     obj.mode = message.mode;
-    obj.sig = base64FromBytes(message.sig);
+    message.sig !== undefined && (obj.sig = base64FromBytes(message.sig));
     return obj;
   },
   fromAminoMsg(object: AuxSignerDataAminoMsg): AuxSignerData {

@@ -22,7 +22,7 @@ export interface ParamsAmino {
    * itself, but rather manages the distribution of coins that matches the
    * defined minted_denom.
    */
-  minted_denom: string;
+  minted_denom?: string;
 }
 export interface ParamsSDKType {
   minted_denom: string;
@@ -35,7 +35,7 @@ export interface LockableDurationsInfoProtoMsg {
   value: Uint8Array;
 }
 export interface LockableDurationsInfoAmino {
-  lockable_durations: DurationAmino[];
+  lockable_durations?: DurationAmino[];
 }
 export interface LockableDurationsInfoSDKType {
   lockable_durations: DurationSDKType[];
@@ -49,8 +49,8 @@ export interface DistrInfoProtoMsg {
   value: Uint8Array;
 }
 export interface DistrInfoAmino {
-  total_weight: string;
-  records: DistrRecordAmino[];
+  total_weight?: string;
+  records?: DistrRecordAmino[];
 }
 export interface DistrInfoSDKType {
   total_weight: string;
@@ -65,8 +65,8 @@ export interface DistrRecordProtoMsg {
   value: Uint8Array;
 }
 export interface DistrRecordAmino {
-  gauge_id: string;
-  weight: string;
+  gauge_id?: string;
+  weight?: string;
 }
 export interface DistrRecordSDKType {
   gauge_id: bigint;
@@ -82,8 +82,8 @@ export interface PoolToGaugeProtoMsg {
   value: Uint8Array;
 }
 export interface PoolToGaugeAmino {
-  pool_id: string;
-  gauge_id: string;
+  pool_id?: string;
+  gauge_id?: string;
   duration?: DurationAmino;
 }
 export interface PoolToGaugeSDKType {
@@ -99,7 +99,7 @@ export interface PoolToGaugesProtoMsg {
   value: Uint8Array;
 }
 export interface PoolToGaugesAmino {
-  pool_to_gauge: PoolToGaugeAmino[];
+  pool_to_gauge?: PoolToGaugeAmino[];
 }
 export interface PoolToGaugesSDKType {
   pool_to_gauge: PoolToGaugeSDKType[];

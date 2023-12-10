@@ -62,8 +62,8 @@ export interface MsgCreateDeploymentProtoMsg {
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentAmino {
   id?: DeploymentIDAmino | undefined;
-  groups: GroupSpecAmino[];
-  version: string;
+  groups?: GroupSpecAmino[];
+  version?: string;
   deposit?: CoinAmino | undefined;
 }
 export interface MsgCreateDeploymentAminoMsg {
@@ -141,8 +141,8 @@ export interface MsgUpdateDeploymentProtoMsg {
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentAmino {
   id?: DeploymentIDAmino | undefined;
-  groups: GroupSpecAmino[];
-  version: string;
+  groups?: GroupSpecAmino[];
+  version?: string;
 }
 export interface MsgUpdateDeploymentAminoMsg {
   type: "/akash.deployment.v1beta1.MsgUpdateDeployment";
@@ -213,8 +213,8 @@ export interface DeploymentIDProtoMsg {
 }
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDAmino {
-  owner: string;
-  dseq: string;
+  owner?: string;
+  dseq?: string;
 }
 export interface DeploymentIDAminoMsg {
   type: "/akash.deployment.v1beta1.DeploymentID";
@@ -239,9 +239,9 @@ export interface DeploymentProtoMsg {
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentAmino {
   deployment_id?: DeploymentIDAmino | undefined;
-  state: Deployment_State;
-  version: string;
-  created_at: string;
+  state?: Deployment_State;
+  version?: string;
+  created_at?: string;
 }
 export interface DeploymentAminoMsg {
   type: "/akash.deployment.v1beta1.Deployment";
@@ -266,9 +266,9 @@ export interface DeploymentFiltersProtoMsg {
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersAmino {
-  owner: string;
-  dseq: string;
-  state: string;
+  owner?: string;
+  dseq?: string;
+  state?: string;
 }
 export interface DeploymentFiltersAminoMsg {
   type: "/akash.deployment.v1beta1.DeploymentFilters";

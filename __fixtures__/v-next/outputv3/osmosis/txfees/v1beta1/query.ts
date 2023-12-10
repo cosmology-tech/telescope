@@ -18,7 +18,7 @@ export interface QueryFeeTokensResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryFeeTokensResponseAmino {
-  fee_tokens: FeeTokenAmino[];
+  fee_tokens?: FeeTokenAmino[];
 }
 export interface QueryFeeTokensResponseSDKType {
   fee_tokens: FeeTokenSDKType[];
@@ -39,7 +39,7 @@ export interface QueryDenomSpotPriceRequestProtoMsg {
  * price for the specified tx fee denom
  */
 export interface QueryDenomSpotPriceRequestAmino {
-  denom: string;
+  denom?: string;
 }
 /**
  * QueryDenomSpotPriceRequest defines grpc request structure for querying spot
@@ -65,8 +65,8 @@ export interface QueryDenomSpotPriceResponseProtoMsg {
  * price for the specified tx fee denom
  */
 export interface QueryDenomSpotPriceResponseAmino {
-  poolID: string;
-  spot_price: string;
+  poolID?: string;
+  spot_price?: string;
 }
 /**
  * QueryDenomSpotPriceRequest defines grpc response structure for querying spot
@@ -84,7 +84,7 @@ export interface QueryDenomPoolIdRequestProtoMsg {
   value: Uint8Array;
 }
 export interface QueryDenomPoolIdRequestAmino {
-  denom: string;
+  denom?: string;
 }
 export interface QueryDenomPoolIdRequestSDKType {
   denom: string;
@@ -97,7 +97,7 @@ export interface QueryDenomPoolIdResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryDenomPoolIdResponseAmino {
-  poolID: string;
+  poolID?: string;
 }
 export interface QueryDenomPoolIdResponseSDKType {
   poolID: bigint;
@@ -117,7 +117,7 @@ export interface QueryBaseDenomResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryBaseDenomResponseAmino {
-  base_denom: string;
+  base_denom?: string;
 }
 export interface QueryBaseDenomResponseSDKType {
   base_denom: string;

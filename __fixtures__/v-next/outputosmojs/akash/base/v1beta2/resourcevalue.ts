@@ -80,7 +80,7 @@ export const ResourceValue = {
   },
   toAmino(message: ResourceValue): ResourceValueAmino {
     const obj: any = {};
-    obj.val = base64FromBytes(message.val);
+    message.val !== undefined && (obj.val = base64FromBytes(message.val));
     return obj;
   },
   fromAminoMsg(object: ResourceValueAminoMsg): ResourceValue {

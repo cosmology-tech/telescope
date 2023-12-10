@@ -113,7 +113,7 @@ export interface AttributeContextAmino {
   /** Represents an API operation that is involved to a network activity. */
   api?: AttributeContext_ApiAmino;
   /** Supports extensions for advanced use cases, such as logs and metrics. */
-  extensions: AnyAmino[];
+  extensions?: AnyAmino[];
 }
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
@@ -153,8 +153,8 @@ export interface AttributeContext_Peer_LabelsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface AttributeContext_Peer_LabelsEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface AttributeContext_Peer_LabelsEntrySDKType {
   key: string;
@@ -200,11 +200,11 @@ export interface AttributeContext_PeerProtoMsg {
  */
 export interface AttributeContext_PeerAmino {
   /** The IP address of the peer. */
-  ip: string;
+  ip?: string;
   /** The network port of the peer. */
-  port: string;
+  port?: string;
   /** The labels associated with the peer. */
-  labels: {
+  labels?: {
     [key: string]: string;
   };
   /**
@@ -212,13 +212,13 @@ export interface AttributeContext_PeerAmino {
    * relative to the peer instead of the request. For example, the
    * idenity associated with a load balancer that forwared the request.
    */
-  principal: string;
+  principal?: string;
   /**
    * The CLDR country/region code associated with the above IP address.
    * If the IP address is private, the `region_code` should reflect the
    * physical location where this peer is running.
    */
-  region_code: string;
+  region_code?: string;
 }
 /**
  * This message defines attributes for a node that handles a network request.
@@ -279,23 +279,23 @@ export interface AttributeContext_ApiAmino {
    * such as "pubsub.googleapis.com". The naming syntax depends on the
    * API management system being used for handling the request.
    */
-  service: string;
+  service?: string;
   /**
    * The API operation name. For gRPC requests, it is the fully qualified API
    * method name, such as "google.pubsub.v1.Publisher.Publish". For OpenAPI
    * requests, it is the `operationId`, such as "getPet".
    */
-  operation: string;
+  operation?: string;
   /**
    * The API protocol used for sending the request, such as "http", "https",
    * "grpc", or "internal".
    */
-  protocol: string;
+  protocol?: string;
   /**
    * The API version associated with the API operation above, such as "v1" or
    * "v1alpha1".
    */
-  version: string;
+  version?: string;
 }
 /**
  * This message defines attributes associated with API operations, such as
@@ -392,7 +392,7 @@ export interface AttributeContext_AuthAmino {
    * Google accounts, the principal format is:
    * "https://accounts.google.com/{id}"
    */
-  principal: string;
+  principal?: string;
   /**
    * The intended audience(s) for this authentication information. Reflects
    * the audience (`aud`) claim within a JWT. The audience
@@ -409,14 +409,14 @@ export interface AttributeContext_AuthAmino {
    * Consult the documentation for the credential issuer to determine the
    * information provided.
    */
-  audiences: string[];
+  audiences?: string[];
   /**
    * The authorized presenter of the credential. Reflects the optional
    * Authorized Presenter (`azp`) claim within a JWT or the
    * OAuth client id. For example, a Google Cloud Platform client id looks
    * as follows: "123456789012.apps.googleusercontent.com".
    */
-  presenter: string;
+  presenter?: string;
   /**
    * Structured claims presented with the credential. JWTs include
    * `{key: value}` pairs for standard and private claims. The following
@@ -444,7 +444,7 @@ export interface AttributeContext_AuthAmino {
    * Example:
    * "//accesscontextmanager.googleapis.com/accessPolicies/MY_POLICY_ID/accessLevels/MY_LEVEL"
    */
-  access_levels: string[];
+  access_levels?: string[];
 }
 /**
  * This message defines request authentication attributes. Terminology is
@@ -467,8 +467,8 @@ export interface AttributeContext_Request_HeadersEntryProtoMsg {
   value: Uint8Array;
 }
 export interface AttributeContext_Request_HeadersEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface AttributeContext_Request_HeadersEntrySDKType {
   key: string;
@@ -547,47 +547,47 @@ export interface AttributeContext_RequestAmino {
    * systems. The ID should have low probability of collision
    * within a single day for a specific service.
    */
-  id: string;
+  id?: string;
   /** The HTTP request method, such as `GET`, `POST`. */
-  method: string;
+  method?: string;
   /**
    * The HTTP request headers. If multiple headers share the same key, they
    * must be merged according to the HTTP spec. All header keys must be
    * lowercased, because HTTP header keys are case-insensitive.
    */
-  headers: {
+  headers?: {
     [key: string]: string;
   };
   /** The HTTP URL path. */
-  path: string;
+  path?: string;
   /** The HTTP request `Host` header value. */
-  host: string;
+  host?: string;
   /** The HTTP URL scheme, such as `http` and `https`. */
-  scheme: string;
+  scheme?: string;
   /**
    * The HTTP URL query in the format of `name1=value1&name2=value2`, as it
    * appears in the first line of the HTTP request. No decoding is performed.
    */
-  query: string;
+  query?: string;
   /**
    * The timestamp when the `destination` service receives the last byte of
    * the request.
    */
   time?: string;
   /** The HTTP request size in bytes. If unknown, it must be -1. */
-  size: string;
+  size?: string;
   /**
    * The network protocol used with the request, such as "http/1.1",
    * "spdy/3", "h2", "h2c", "webrtc", "tcp", "udp", "quic". See
    * https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
    * for details.
    */
-  protocol: string;
+  protocol?: string;
   /**
    * A special parameter for request reason. It is used by security systems
    * to associate auditing information with a request.
    */
-  reason: string;
+  reason?: string;
   /**
    * The request authentication. May be absent for unauthenticated requests.
    * Derived from the HTTP request `Authorization` header or equivalent.
@@ -624,8 +624,8 @@ export interface AttributeContext_Response_HeadersEntryProtoMsg {
   value: Uint8Array;
 }
 export interface AttributeContext_Response_HeadersEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface AttributeContext_Response_HeadersEntrySDKType {
   key: string;
@@ -671,15 +671,15 @@ export interface AttributeContext_ResponseProtoMsg {
  */
 export interface AttributeContext_ResponseAmino {
   /** The HTTP response status code, such as `200` and `404`. */
-  code: string;
+  code?: string;
   /** The HTTP response size in bytes. If unknown, it must be -1. */
-  size: string;
+  size?: string;
   /**
    * The HTTP response headers. If multiple headers share the same key, they
    * must be merged according to HTTP spec. All header keys must be
    * lowercased, because HTTP header keys are case-insensitive.
    */
-  headers: {
+  headers?: {
     [key: string]: string;
   };
   /**
@@ -717,8 +717,8 @@ export interface AttributeContext_Resource_LabelsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface AttributeContext_Resource_LabelsEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface AttributeContext_Resource_LabelsEntrySDKType {
   key: string;
@@ -733,8 +733,8 @@ export interface AttributeContext_Resource_AnnotationsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface AttributeContext_Resource_AnnotationsEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface AttributeContext_Resource_AnnotationsEntrySDKType {
   key: string;
@@ -850,7 +850,7 @@ export interface AttributeContext_ResourceAmino {
    * `pubsub.googleapis.com`. The service may be different from the DNS
    * hostname that actually serves the request.
    */
-  service: string;
+  service?: string;
   /**
    * The stable identifier (name) of a resource on the `service`. A resource
    * can be logically identified as "//{resource.service}/{resource.name}".
@@ -865,19 +865,19 @@ export interface AttributeContext_ResourceAmino {
    * 
    * See https://cloud.google.com/apis/design/resource_names for details.
    */
-  name: string;
+  name?: string;
   /**
    * The type of the resource. The syntax is platform-specific because
    * different platforms define their resources differently.
    * 
    * For Google APIs, the type format must be "{service}/{kind}".
    */
-  type: string;
+  type?: string;
   /**
    * The labels or tags on the resource, such as AWS resource tags and
    * Kubernetes resource labels.
    */
-  labels: {
+  labels?: {
     [key: string]: string;
   };
   /**
@@ -887,7 +887,7 @@ export interface AttributeContext_ResourceAmino {
    * and must not be changed. UID is used to uniquely identify resources
    * with resource name reuses. This should be a UUID4.
    */
-  uid: string;
+  uid?: string;
   /**
    * Annotations is an unstructured key-value map stored with a resource that
    * may be set by external tools to store and retrieve arbitrary metadata.
@@ -895,11 +895,11 @@ export interface AttributeContext_ResourceAmino {
    * 
    * More info: https://kubernetes.io/docs/user-guide/annotations
    */
-  annotations: {
+  annotations?: {
     [key: string]: string;
   };
   /** Mutable. The display name set by clients. Must be <= 63 characters. */
-  display_name: string;
+  display_name?: string;
   /**
    * Output only. The timestamp when the resource was created. This may
    * be either the time creation was initiated or when it was completed.
@@ -921,7 +921,7 @@ export interface AttributeContext_ResourceAmino {
    * generation of a resource. It can be used to confirm that the client
    * and server agree on the ordering of a resource being written.
    */
-  etag: string;
+  etag?: string;
   /**
    * Immutable. The location of the resource. The location encoding is
    * specific to the service provider, and new encoding may be introduced
@@ -932,7 +932,7 @@ export interface AttributeContext_ResourceAmino {
    * semantics of `location` is identical to the
    * `cloud.googleapis.com/location` label used by some Google Cloud APIs.
    */
-  location: string;
+  location?: string;
 }
 /**
  * This message defines core attributes for a resource. A resource is an

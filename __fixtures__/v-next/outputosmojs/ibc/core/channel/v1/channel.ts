@@ -937,7 +937,7 @@ export const Packet = {
     obj.source_channel = message.sourceChannel;
     obj.destination_port = message.destinationPort;
     obj.destination_channel = message.destinationChannel;
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : {};
     obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
     return obj;
@@ -1076,7 +1076,7 @@ export const PacketState = {
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     return obj;
   },
   fromAminoMsg(object: PacketStateAminoMsg): PacketState {

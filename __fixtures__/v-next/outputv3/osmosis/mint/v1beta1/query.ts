@@ -67,7 +67,7 @@ export interface QueryEpochProvisionsResponseProtoMsg {
  */
 export interface QueryEpochProvisionsResponseAmino {
   /** epoch_provisions is the current minting per epoch provisions value. */
-  epoch_provisions: string;
+  epoch_provisions?: string;
 }
 /**
  * QueryEpochProvisionsResponse is the response type for the
@@ -344,7 +344,7 @@ export const QueryEpochProvisionsResponse = {
   },
   toAmino(message: QueryEpochProvisionsResponse, useInterfaces: boolean = true): QueryEpochProvisionsResponseAmino {
     const obj: any = {};
-    obj.epoch_provisions = base64FromBytes(message.epochProvisions);
+    message.epochProvisions !== undefined && (obj.epoch_provisions = base64FromBytes(message.epochProvisions));
     return obj;
   },
   fromProtoMsg(message: QueryEpochProvisionsResponseProtoMsg, useInterfaces: boolean = true): QueryEpochProvisionsResponse {

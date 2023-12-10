@@ -11,7 +11,7 @@ export interface ExprValueProtoMsg {
 }
 export interface ExprValueAmino {
   /** The ids of the expressions with unknown values. */
-  exprs: IdRefAmino[];
+  exprs?: IdRefAmino[];
 }
 export interface ExprValueSDKType {
   exprs: IdRefSDKType[];
@@ -26,7 +26,7 @@ export interface IdRefProtoMsg {
 }
 export interface IdRefAmino {
   /** The expression id. */
-  id: number;
+  id?: number;
 }
 export interface IdRefSDKType {
   id: number;

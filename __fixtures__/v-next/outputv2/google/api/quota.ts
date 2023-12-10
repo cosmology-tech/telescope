@@ -118,12 +118,12 @@ export interface QuotaProtoMsg {
  */
 export interface QuotaAmino {
   /** List of `QuotaLimit` definitions for the service. */
-  limits: QuotaLimitAmino[];
+  limits?: QuotaLimitAmino[];
   /**
    * List of `MetricRule` definitions, each one mapping a selected method to one
    * or more metrics.
    */
-  metric_rules: MetricRuleAmino[];
+  metric_rules?: MetricRuleAmino[];
 }
 export interface QuotaAminoMsg {
   type: "/google.api.Quota";
@@ -193,8 +193,8 @@ export interface MetricRule_MetricCostsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface MetricRule_MetricCostsEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface MetricRule_MetricCostsEntryAminoMsg {
   type: string;
@@ -241,7 +241,7 @@ export interface MetricRuleAmino {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /**
    * Metrics to update when the selected methods are called, and the associated
    * cost applied to each metric.
@@ -250,7 +250,7 @@ export interface MetricRuleAmino {
    * increased for the metric against which the quota limits are defined.
    * The value must not be negative.
    */
-  metric_costs: {
+  metric_costs?: {
     [key: string]: string;
   };
 }
@@ -277,8 +277,8 @@ export interface QuotaLimit_ValuesEntryProtoMsg {
   value: Uint8Array;
 }
 export interface QuotaLimit_ValuesEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface QuotaLimit_ValuesEntryAminoMsg {
   type: string;
@@ -403,13 +403,13 @@ export interface QuotaLimitAmino {
    * 
    * The maximum length of the limit name is 64 characters.
    */
-  name: string;
+  name?: string;
   /**
    * Optional. User-visible, extended description for this quota limit.
    * Should be used only when more context is needed to understand this limit
    * than provided by the limit's display name (see: `display_name`).
    */
-  description: string;
+  description?: string;
   /**
    * Default number of tokens that can be consumed during the specified
    * duration. This is the number of tokens assigned when a client
@@ -422,7 +422,7 @@ export interface QuotaLimitAmino {
    * 
    * Used by group-based quotas only.
    */
-  default_limit: string;
+  default_limit?: string;
   /**
    * Maximum number of tokens that can be consumed during the specified
    * duration. Client application developers can override the default limit up
@@ -434,7 +434,7 @@ export interface QuotaLimitAmino {
    * 
    * Used by group-based quotas only.
    */
-  max_limit: string;
+  max_limit?: string;
   /**
    * Free tier value displayed in the Developers Console for this limit.
    * The free tier is the number of tokens that will be subtracted from the
@@ -445,19 +445,19 @@ export interface QuotaLimitAmino {
    * 
    * Used by group-based quotas only.
    */
-  free_tier: string;
+  free_tier?: string;
   /**
    * Duration of this limit in textual notation. Must be "100s" or "1d".
    * 
    * Used by group-based quotas only.
    */
-  duration: string;
+  duration?: string;
   /**
    * The name of the metric this quota limit applies to. The quota limits with
    * the same metric will be checked together during runtime. The metric must be
    * defined within the service config.
    */
-  metric: string;
+  metric?: string;
   /**
    * Specify the unit of the quota limit. It uses the same syntax as
    * [Metric.unit][]. The supported unit kinds are determined by the quota
@@ -469,13 +469,13 @@ export interface QuotaLimitAmino {
    * Note: the order of unit components is insignificant.
    * The "1" at the beginning is required to follow the metric unit syntax.
    */
-  unit: string;
+  unit?: string;
   /**
    * Tiered limit values. You must specify this as a key:value pair, with an
    * integer value that is the maximum number of requests allowed for the
    * specified unit. Currently only STANDARD is supported.
    */
-  values: {
+  values?: {
     [key: string]: string;
   };
   /**
@@ -484,7 +484,7 @@ export interface QuotaLimitAmino {
    * the quota configuration. This field can be used to override the default
    * display name generated from the configuration.
    */
-  display_name: string;
+  display_name?: string;
 }
 export interface QuotaLimitAminoMsg {
   type: "/google.api.QuotaLimit";

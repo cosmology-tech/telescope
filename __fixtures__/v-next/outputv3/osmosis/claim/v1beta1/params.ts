@@ -21,7 +21,7 @@ export interface ParamsAmino {
   duration_until_decay?: DurationAmino;
   duration_of_decay?: DurationAmino;
   /** denom of claimable asset */
-  claim_denom: string;
+  claim_denom?: string;
 }
 /** Params defines the claim module's parameters. */
 export interface ParamsSDKType {

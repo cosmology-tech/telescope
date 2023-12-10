@@ -89,7 +89,7 @@ export interface BillingAmino {
    * a different monitored resource type. A metric can be used in at most
    * one consumer destination.
    */
-  consumer_destinations: Billing_BillingDestinationAmino[];
+  consumer_destinations?: Billing_BillingDestinationAmino[];
 }
 /**
  * Billing related configuration of the service.
@@ -157,12 +157,12 @@ export interface Billing_BillingDestinationAmino {
    * The monitored resource type. The type must be defined in
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
-  monitored_resource: string;
+  monitored_resource?: string;
   /**
    * Names of the metrics to report to this billing destination.
    * Each name must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
-  metrics: string[];
+  metrics?: string[];
 }
 /**
  * Configuration of a specific billing destination (Currently only support

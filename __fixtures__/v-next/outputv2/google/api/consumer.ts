@@ -103,7 +103,7 @@ export interface ProjectPropertiesProtoMsg {
  */
 export interface ProjectPropertiesAmino {
   /** List of per consumer project-specific properties. */
-  properties: PropertyAmino[];
+  properties?: PropertyAmino[];
 }
 export interface ProjectPropertiesAminoMsg {
   type: "/google.api.ProjectProperties";
@@ -168,11 +168,11 @@ export interface PropertyProtoMsg {
  */
 export interface PropertyAmino {
   /** The name of the property (a.k.a key). */
-  name: string;
+  name?: string;
   /** The type of this property. */
-  type: Property_PropertyType;
+  type?: Property_PropertyType;
   /** The description of the property */
-  description: string;
+  description?: string;
 }
 export interface PropertyAminoMsg {
   type: "/google.api.Property";

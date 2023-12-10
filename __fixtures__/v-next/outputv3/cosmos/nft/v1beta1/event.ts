@@ -14,10 +14,10 @@ export interface EventSendProtoMsg {
 }
 /** EventSend is emitted on Msg/Send */
 export interface EventSendAmino {
-  class_id: string;
-  id: string;
-  sender: string;
-  receiver: string;
+  class_id?: string;
+  id?: string;
+  sender?: string;
+  receiver?: string;
 }
 /** EventSend is emitted on Msg/Send */
 export interface EventSendSDKType {
@@ -38,9 +38,9 @@ export interface EventMintProtoMsg {
 }
 /** EventMint is emitted on Mint */
 export interface EventMintAmino {
-  class_id: string;
-  id: string;
-  owner: string;
+  class_id?: string;
+  id?: string;
+  owner?: string;
 }
 /** EventMint is emitted on Mint */
 export interface EventMintSDKType {
@@ -60,9 +60,9 @@ export interface EventBurnProtoMsg {
 }
 /** EventBurn is emitted on Burn */
 export interface EventBurnAmino {
-  class_id: string;
-  id: string;
-  owner: string;
+  class_id?: string;
+  id?: string;
+  owner?: string;
 }
 /** EventBurn is emitted on Burn */
 export interface EventBurnSDKType {

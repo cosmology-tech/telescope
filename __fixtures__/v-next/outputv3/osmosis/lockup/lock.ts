@@ -90,12 +90,12 @@ export interface PeriodLockAmino {
    * The ID of the lock is decided upon lock creation, incrementing by 1 for
    * every lock.
    */
-  ID: string;
+  ID?: string;
   /**
    * Owner is the account address of the lock owner.
    * Only the owner can modify the state of the lock.
    */
-  owner: string;
+  owner?: string;
   /**
    * Duration is the time needed for a lock to mature after unlocking has
    * started.
@@ -108,7 +108,7 @@ export interface PeriodLockAmino {
    */
   end_time?: string;
   /** Coins are the tokens locked within the lock, kept in the module account. */
-  coins: CoinAmino[];
+  coins?: CoinAmino[];
 }
 /**
  * PeriodLock is a single lock unit by period defined by the x/lockup module.
@@ -158,9 +158,9 @@ export interface QueryConditionProtoMsg {
  */
 export interface QueryConditionAmino {
   /** LockQueryType is a type of lock query, ByLockDuration | ByLockTime */
-  lock_query_type: LockQueryType;
+  lock_query_type?: LockQueryType;
   /** Denom represents the token denomination we are looking to lock up */
-  denom: string;
+  denom?: string;
   /**
    * Duration is used to query locks with longer duration than the specified
    * duration. Duration field must not be nil when the lock query type is
@@ -228,12 +228,12 @@ export interface SyntheticLockAmino {
    * Underlying Lock ID is the underlying native lock's id for this synthetic
    * lockup. A synthetic lock MUST have an underlying lock.
    */
-  underlying_lock_id: string;
+  underlying_lock_id?: string;
   /**
    * SynthDenom is the synthetic denom that is a combination of
    * gamm share + bonding status + validator address.
    */
-  synth_denom: string;
+  synth_denom?: string;
   /**
    * used for unbonding synthetic lockups, for active synthetic lockups, this
    * value is set to uninitialized value

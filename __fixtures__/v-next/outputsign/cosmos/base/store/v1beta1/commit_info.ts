@@ -18,8 +18,8 @@ export interface CommitInfoProtoMsg {
  * a version/height.
  */
 export interface CommitInfoAmino {
-  version: string;
-  store_infos: StoreInfoAmino[];
+  version?: string;
+  store_infos?: StoreInfoAmino[];
 }
 export interface CommitInfoAminoMsg {
   type: "cosmos-sdk/CommitInfo";
@@ -50,7 +50,7 @@ export interface StoreInfoProtoMsg {
  * between a store name and the commit ID.
  */
 export interface StoreInfoAmino {
-  name: string;
+  name?: string;
   commit_id?: CommitIDAmino;
 }
 export interface StoreInfoAminoMsg {
@@ -82,8 +82,8 @@ export interface CommitIDProtoMsg {
  * committed.
  */
 export interface CommitIDAmino {
-  version: string;
-  hash: string;
+  version?: string;
+  hash?: string;
 }
 export interface CommitIDAminoMsg {
   type: "cosmos-sdk/CommitID";
@@ -313,7 +313,7 @@ export const CommitID = {
   toAmino(message: CommitID): CommitIDAmino {
     const obj: any = {};
     obj.version = message.version ? message.version.toString() : undefined;
-    obj.hash = base64FromBytes(message.hash);
+    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash));
     return obj;
   },
   fromAminoMsg(object: CommitIDAminoMsg): CommitID {

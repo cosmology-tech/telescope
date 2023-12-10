@@ -14,8 +14,8 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the ibc-transfer genesis state */
 export interface GenesisStateAmino {
-  port_id: string;
-  denom_traces: DenomTraceAmino[];
+  port_id?: string;
+  denom_traces?: DenomTraceAmino[];
   params?: ParamsAmino;
 }
 export interface GenesisStateAminoMsg {

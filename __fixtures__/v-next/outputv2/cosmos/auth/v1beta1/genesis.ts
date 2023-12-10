@@ -19,7 +19,7 @@ export interface GenesisStateAmino {
   /** params defines all the paramaters of the module. */
   params?: ParamsAmino;
   /** accounts are the accounts present at genesis. */
-  accounts: AnyAmino[];
+  accounts?: AnyAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "cosmos-sdk/GenesisState";

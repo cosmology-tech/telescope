@@ -15,10 +15,10 @@ export interface MsgCreateBalancerPoolProtoMsg {
 }
 /** ===================== MsgCreatePool */
 export interface MsgCreateBalancerPoolAmino {
-  sender: string;
+  sender?: string;
   pool_params?: PoolParamsAmino;
-  pool_assets: PoolAssetAmino[];
-  future_pool_governor: string;
+  pool_assets?: PoolAssetAmino[];
+  future_pool_governor?: string;
 }
 /** ===================== MsgCreatePool */
 export interface MsgCreateBalancerPoolSDKType {
@@ -37,7 +37,7 @@ export interface MsgCreateBalancerPoolResponseProtoMsg {
 }
 /** Returns the poolID */
 export interface MsgCreateBalancerPoolResponseAmino {
-  pool_id: string;
+  pool_id?: string;
 }
 /** Returns the poolID */
 export interface MsgCreateBalancerPoolResponseSDKType {

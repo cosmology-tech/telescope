@@ -125,7 +125,7 @@ export const MsgCreateCosmWasmPool = {
   toAmino(message: MsgCreateCosmWasmPool): MsgCreateCosmWasmPoolAmino {
     const obj: any = {};
     obj.code_id = message.codeId ? message.codeId.toString() : undefined;
-    obj.instantiate_msg = base64FromBytes(message.instantiateMsg);
+    message.instantiateMsg !== undefined && (obj.instantiate_msg = base64FromBytes(message.instantiateMsg));
     obj.sender = message.sender;
     return obj;
   },

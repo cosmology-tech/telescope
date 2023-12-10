@@ -39,7 +39,7 @@ export interface TxAmino {
    * AuthInfo's signer_infos to allow connecting signature meta information like
    * public key and signing mode by position.
    */
-  signatures: string[];
+  signatures?: string[];
 }
 export interface TxAminoMsg {
   type: "cosmos-sdk/Tx";
@@ -92,18 +92,18 @@ export interface TxRawAmino {
    * body_bytes is a protobuf serialization of a TxBody that matches the
    * representation in SignDoc.
    */
-  body_bytes: string;
+  body_bytes?: string;
   /**
    * auth_info_bytes is a protobuf serialization of an AuthInfo that matches the
    * representation in SignDoc.
    */
-  auth_info_bytes: string;
+  auth_info_bytes?: string;
   /**
    * signatures is a list of signatures that matches the length and order of
    * AuthInfo's signer_infos to allow connecting signature meta information like
    * public key and signing mode by position.
    */
-  signatures: string[];
+  signatures?: string[];
 }
 export interface TxRawAminoMsg {
   type: "cosmos-sdk/TxRaw";
@@ -152,20 +152,20 @@ export interface SignDocAmino {
    * body_bytes is protobuf serialization of a TxBody that matches the
    * representation in TxRaw.
    */
-  body_bytes: string;
+  body_bytes?: string;
   /**
    * auth_info_bytes is a protobuf serialization of an AuthInfo that matches the
    * representation in TxRaw.
    */
-  auth_info_bytes: string;
+  auth_info_bytes?: string;
   /**
    * chain_id is the unique identifier of the chain this transaction targets.
    * It prevents signed transactions from being used on another chain by an
    * attacker
    */
-  chain_id: string;
+  chain_id?: string;
   /** account_number is the account number of the account in state */
-  account_number: string;
+  account_number?: string;
 }
 export interface SignDocAminoMsg {
   type: "cosmos-sdk/SignDoc";
@@ -223,7 +223,7 @@ export interface SignDocDirectAuxAmino {
    * body_bytes is protobuf serialization of a TxBody that matches the
    * representation in TxRaw.
    */
-  body_bytes: string;
+  body_bytes?: string;
   /** public_key is the public key of the signing account. */
   public_key?: AnyAmino;
   /**
@@ -231,11 +231,11 @@ export interface SignDocDirectAuxAmino {
    * It prevents signed transactions from being used on another chain by an
    * attacker.
    */
-  chain_id: string;
+  chain_id?: string;
   /** account_number is the account number of the account in state. */
-  account_number: string;
+  account_number?: string;
   /** sequence is the sequence number of the signing account. */
-  sequence: string;
+  sequence?: string;
   /**
    * Tip is the optional tip used for meta-transactions. It should be left
    * empty if the signer is not the tipper for this transaction.
@@ -311,30 +311,30 @@ export interface TxBodyAmino {
    * is referred to as the primary signer and pays the fee for the whole
    * transaction.
    */
-  messages: AnyAmino[];
+  messages?: AnyAmino[];
   /**
    * memo is any arbitrary note/comment to be added to the transaction.
    * WARNING: in clients, any publicly exposed text should not be called memo,
    * but should be called `note` instead (see https://github.com/cosmos/cosmos-sdk/issues/9122).
    */
-  memo: string;
+  memo?: string;
   /**
    * timeout is the block height after which this transaction will not
    * be processed by the chain
    */
-  timeout_height: string;
+  timeout_height?: string;
   /**
    * extension_options are arbitrary options that can be added by chains
    * when the default options are not sufficient. If any of these are present
    * and can't be handled, the transaction will be rejected
    */
-  extension_options: AnyAmino[];
+  extension_options?: AnyAmino[];
   /**
    * extension_options are arbitrary options that can be added by chains
    * when the default options are not sufficient. If any of these are present
    * and can't be handled, they will be ignored
    */
-  non_critical_extension_options: AnyAmino[];
+  non_critical_extension_options?: AnyAmino[];
 }
 export interface TxBodyAminoMsg {
   type: "cosmos-sdk/TxBody";
@@ -389,7 +389,7 @@ export interface AuthInfoAmino {
    * messages. The first element is the primary signer and the one which pays
    * the fee.
    */
-  signer_infos: SignerInfoAmino[];
+  signer_infos?: SignerInfoAmino[];
   /**
    * Fee is the fee and gas limit for the transaction. The first signer is the
    * primary signer and the one which pays the fee. The fee can be calculated
@@ -465,7 +465,7 @@ export interface SignerInfoAmino {
    * number of committed transactions signed by a given address. It is used to
    * prevent replay attacks.
    */
-  sequence: string;
+  sequence?: string;
 }
 export interface SignerInfoAminoMsg {
   type: "cosmos-sdk/SignerInfo";
@@ -527,7 +527,7 @@ export interface ModeInfo_SingleProtoMsg {
  */
 export interface ModeInfo_SingleAmino {
   /** mode is the signing mode of the single signer */
-  mode: SignMode;
+  mode?: SignMode;
 }
 export interface ModeInfo_SingleAminoMsg {
   type: "cosmos-sdk/Single";
@@ -563,7 +563,7 @@ export interface ModeInfo_MultiAmino {
    * mode_infos is the corresponding modes of the signers of the multisig
    * which could include nested multisig public keys
    */
-  mode_infos: ModeInfoAmino[];
+  mode_infos?: ModeInfoAmino[];
 }
 export interface ModeInfo_MultiAminoMsg {
   type: "cosmos-sdk/Multi";
@@ -611,24 +611,24 @@ export interface FeeProtoMsg {
  */
 export interface FeeAmino {
   /** amount is the amount of coins to be paid as a fee */
-  amount: CoinAmino[];
+  amount?: CoinAmino[];
   /**
    * gas_limit is the maximum gas that can be used in transaction processing
    * before an out of gas error occurs
    */
-  gas_limit: string;
+  gas_limit?: string;
   /**
    * if unset, the first signer is responsible for paying the fees. If set, the specified account must pay the fees.
    * the payer must be a tx signer (and thus have signed this field in AuthInfo).
    * setting this field does *not* change the ordering of required signers for the transaction.
    */
-  payer: string;
+  payer?: string;
   /**
    * if set, the fee payer (either the first signer or the value of the payer field) requests that a fee grant be used
    * to pay fees instead of the fee payer's own balance. If an appropriate fee grant does not exist or the chain does
    * not support fee grants, this will fail
    */
-  granter: string;
+  granter?: string;
 }
 export interface FeeAminoMsg {
   type: "cosmos-sdk/Fee";
@@ -667,9 +667,9 @@ export interface TipProtoMsg {
  */
 export interface TipAmino {
   /** amount is the amount of the tip */
-  amount: CoinAmino[];
+  amount?: CoinAmino[];
   /** tipper is the address of the account paying for the tip */
-  tipper: string;
+  tipper?: string;
 }
 export interface TipAminoMsg {
   type: "cosmos-sdk/Tip";
@@ -728,7 +728,7 @@ export interface AuxSignerDataAmino {
    * AuxSignerData across different chains, the bech32 prefix of the target
    * chain (where the final transaction is broadcasted) should be used.
    */
-  address: string;
+  address?: string;
   /**
    * sign_doc is the SIGN_MOD_DIRECT_AUX sign doc that the auxiliary signer
    * signs. Note: we use the same sign doc even if we're signing with
@@ -736,9 +736,9 @@ export interface AuxSignerDataAmino {
    */
   sign_doc?: SignDocDirectAuxAmino;
   /** mode is the signing mode of the single signer */
-  mode: SignMode;
+  mode?: SignMode;
   /** sig is the signature of the sign doc. */
-  sig: string;
+  sig?: string;
 }
 export interface AuxSignerDataAminoMsg {
   type: "cosmos-sdk/AuxSignerData";
@@ -987,8 +987,8 @@ export const TxRaw = {
   },
   toAmino(message: TxRaw): TxRawAmino {
     const obj: any = {};
-    obj.body_bytes = base64FromBytes(message.bodyBytes);
-    obj.auth_info_bytes = base64FromBytes(message.authInfoBytes);
+    message.bodyBytes !== undefined && (obj.body_bytes = base64FromBytes(message.bodyBytes));
+    message.authInfoBytes !== undefined && (obj.auth_info_bytes = base64FromBytes(message.authInfoBytes));
     if (message.signatures) {
       obj.signatures = message.signatures.map(e => base64FromBytes(e));
     } else {
@@ -1122,8 +1122,8 @@ export const SignDoc = {
   },
   toAmino(message: SignDoc): SignDocAmino {
     const obj: any = {};
-    obj.body_bytes = base64FromBytes(message.bodyBytes);
-    obj.auth_info_bytes = base64FromBytes(message.authInfoBytes);
+    message.bodyBytes !== undefined && (obj.body_bytes = base64FromBytes(message.bodyBytes));
+    message.authInfoBytes !== undefined && (obj.auth_info_bytes = base64FromBytes(message.authInfoBytes));
     obj.chain_id = message.chainId;
     obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
     return obj;
@@ -1286,7 +1286,7 @@ export const SignDocDirectAux = {
   },
   toAmino(message: SignDocDirectAux): SignDocDirectAuxAmino {
     const obj: any = {};
-    obj.body_bytes = base64FromBytes(message.bodyBytes);
+    message.bodyBytes !== undefined && (obj.body_bytes = base64FromBytes(message.bodyBytes));
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined;
     obj.chain_id = message.chainId;
     obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
@@ -2427,7 +2427,7 @@ export const AuxSignerData = {
     obj.address = message.address;
     obj.sign_doc = message.signDoc ? SignDocDirectAux.toAmino(message.signDoc) : undefined;
     obj.mode = message.mode;
-    obj.sig = base64FromBytes(message.sig);
+    message.sig !== undefined && (obj.sig = base64FromBytes(message.sig));
     return obj;
   },
   fromAminoMsg(object: AuxSignerDataAminoMsg): AuxSignerData {

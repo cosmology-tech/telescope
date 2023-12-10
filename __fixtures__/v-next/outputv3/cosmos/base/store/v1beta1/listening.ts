@@ -29,11 +29,11 @@ export interface StoreKVPairProtoMsg {
  */
 export interface StoreKVPairAmino {
   /** the store key for the KVStore this pair originates from */
-  store_key: string;
+  store_key?: string;
   /** true indicates a delete operation, false indicates a set operation */
-  delete: boolean;
-  key: string;
-  value: string;
+  delete?: boolean;
+  key?: string;
+  value?: string;
 }
 /**
  * StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)
@@ -152,8 +152,8 @@ export const StoreKVPair = {
     const obj: any = {};
     obj.store_key = message.storeKey;
     obj.delete = message.delete;
-    obj.key = base64FromBytes(message.key);
-    obj.value = base64FromBytes(message.value);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value));
     return obj;
   },
   fromProtoMsg(message: StoreKVPairProtoMsg, useInterfaces: boolean = true): StoreKVPair {

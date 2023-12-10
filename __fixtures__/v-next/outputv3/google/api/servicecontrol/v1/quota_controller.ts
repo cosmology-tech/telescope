@@ -203,7 +203,7 @@ export interface AllocateQuotaRequestAmino {
    * 
    * See [google.api.Service][google.api.Service] for the definition of a service name.
    */
-  service_name: string;
+  service_name?: string;
   /** Operation that describes the quota allocation. */
   allocate_operation?: QuotaOperationAmino;
   /**
@@ -211,7 +211,7 @@ export interface AllocateQuotaRequestAmino {
    * the request. If unspecified or no matching version can be found, the latest
    * one will be used.
    */
-  service_config_id: string;
+  service_config_id?: string;
 }
 /** Request message for the AllocateQuota method. */
 export interface AllocateQuotaRequestSDKType {
@@ -228,8 +228,8 @@ export interface QuotaOperation_LabelsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface QuotaOperation_LabelsEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface QuotaOperation_LabelsEntrySDKType {
   key: string;
@@ -311,7 +311,7 @@ export interface QuotaOperationAmino {
    * recommended token for services that intend to operate at a high QPS is
    * Unix time in nanos + UUID
    */
-  operation_id: string;
+  operation_id?: string;
   /**
    * Fully qualified name of the API method for which this quota operation is
    * requested. This name is used for matching quota rules or metric rules and
@@ -325,7 +325,7 @@ export interface QuotaOperationAmino {
    * Example of an RPC method name:
    *     google.example.library.v1.LibraryService.CreateShelf
    */
-  method_name: string;
+  method_name?: string;
   /**
    * Identity of the consumer for whom this quota operation is being performed.
    * 
@@ -334,9 +334,9 @@ export interface QuotaOperationAmino {
    *   project_number:<project_number>,
    *   api_key:<api_key>.
    */
-  consumer_id: string;
+  consumer_id?: string;
   /** Labels describing the operation. */
-  labels: {
+  labels?: {
     [key: string]: string;
   };
   /**
@@ -353,9 +353,9 @@ export interface QuotaOperationAmino {
    * 
    * This field is mutually exclusive with method_name.
    */
-  quota_metrics: MetricValueSetAmino[];
+  quota_metrics?: MetricValueSetAmino[];
   /** Quota mode for this operation. */
-  quota_mode: QuotaOperation_QuotaMode;
+  quota_mode?: QuotaOperation_QuotaMode;
 }
 /** Represents information regarding a quota operation. */
 export interface QuotaOperationSDKType {
@@ -403,9 +403,9 @@ export interface AllocateQuotaResponseAmino {
    * The same operation_id value used in the AllocateQuotaRequest. Used for
    * logging and diagnostics purposes.
    */
-  operation_id: string;
+  operation_id?: string;
   /** Indicates the decision of the allocate. */
-  allocate_errors: QuotaErrorAmino[];
+  allocate_errors?: QuotaErrorAmino[];
   /**
    * Quota metrics to indicate the result of allocation. Depending on the
    * request, one or more of the following metrics will be included:
@@ -418,9 +418,9 @@ export interface AllocateQuotaResponseAmino {
    * boolean metric :
    *   "serviceruntime.googleapis.com/quota/exceeded"
    */
-  quota_metrics: MetricValueSetAmino[];
+  quota_metrics?: MetricValueSetAmino[];
   /** ID of the actual config used to process the request. */
-  service_config_id: string;
+  service_config_id?: string;
 }
 /** Response message for the AllocateQuota method. */
 export interface AllocateQuotaResponseSDKType {
@@ -454,15 +454,15 @@ export interface QuotaErrorProtoMsg {
 /** Represents error information for [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation]. */
 export interface QuotaErrorAmino {
   /** Error code. */
-  code: QuotaError_Code;
+  code?: QuotaError_Code;
   /**
    * Subject to whom this error applies. See the specific enum for more details
    * on this field. For example, "clientip:<ip address of client>" or
    * "project:<Google developer project id>".
    */
-  subject: string;
+  subject?: string;
   /** Free-form text that provides details on the cause of the error. */
-  description: string;
+  description?: string;
   /**
    * Contains additional information about the quota error.
    * If available, `status.code` will be non zero.

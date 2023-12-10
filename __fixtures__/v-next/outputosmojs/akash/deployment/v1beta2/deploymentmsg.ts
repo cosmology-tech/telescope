@@ -237,7 +237,7 @@ export const MsgCreateDeployment = {
     } else {
       obj.groups = [];
     }
-    obj.version = base64FromBytes(message.version);
+    message.version !== undefined && (obj.version = base64FromBytes(message.version));
     obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined;
     obj.depositor = message.depositor;
     return obj;
@@ -612,7 +612,7 @@ export const MsgUpdateDeployment = {
   toAmino(message: MsgUpdateDeployment): MsgUpdateDeploymentAmino {
     const obj: any = {};
     obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
-    obj.version = base64FromBytes(message.version);
+    message.version !== undefined && (obj.version = base64FromBytes(message.version));
     return obj;
   },
   fromAminoMsg(object: MsgUpdateDeploymentAminoMsg): MsgUpdateDeployment {

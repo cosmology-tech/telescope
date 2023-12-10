@@ -15,10 +15,10 @@ export interface SnapshotProtoMsg {
 }
 /** Snapshot contains Tendermint state sync snapshot info. */
 export interface SnapshotAmino {
-  height: string;
-  format: number;
-  chunks: number;
-  hash: string;
+  height?: string;
+  format?: number;
+  chunks?: number;
+  hash?: string;
   metadata?: MetadataAmino;
 }
 /** Snapshot contains Tendermint state sync snapshot info. */
@@ -41,7 +41,7 @@ export interface MetadataProtoMsg {
 /** Metadata contains SDK-specific snapshot metadata. */
 export interface MetadataAmino {
   /** SHA-256 chunk hashes */
-  chunk_hashes: string[];
+  chunk_hashes?: string[];
 }
 /** Metadata contains SDK-specific snapshot metadata. */
 export interface MetadataSDKType {
@@ -88,7 +88,7 @@ export interface SnapshotStoreItemProtoMsg {
 }
 /** SnapshotStoreItem contains metadata about a snapshotted store. */
 export interface SnapshotStoreItemAmino {
-  name: string;
+  name?: string;
 }
 /** SnapshotStoreItem contains metadata about a snapshotted store. */
 export interface SnapshotStoreItemSDKType {
@@ -109,12 +109,12 @@ export interface SnapshotIAVLItemProtoMsg {
 }
 /** SnapshotIAVLItem is an exported IAVL node. */
 export interface SnapshotIAVLItemAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
   /** version is block height */
-  version: string;
+  version?: string;
   /** height is depth of the tree. */
-  height: number;
+  height?: number;
 }
 /** SnapshotIAVLItem is an exported IAVL node. */
 export interface SnapshotIAVLItemSDKType {
@@ -134,8 +134,8 @@ export interface SnapshotExtensionMetaProtoMsg {
 }
 /** SnapshotExtensionMeta contains metadata about an external snapshotter. */
 export interface SnapshotExtensionMetaAmino {
-  name: string;
-  format: number;
+  name?: string;
+  format?: number;
 }
 /** SnapshotExtensionMeta contains metadata about an external snapshotter. */
 export interface SnapshotExtensionMetaSDKType {
@@ -152,7 +152,7 @@ export interface SnapshotExtensionPayloadProtoMsg {
 }
 /** SnapshotExtensionPayload contains payloads of an external snapshotter. */
 export interface SnapshotExtensionPayloadAmino {
-  payload: string;
+  payload?: string;
 }
 /** SnapshotExtensionPayload contains payloads of an external snapshotter. */
 export interface SnapshotExtensionPayloadSDKType {
@@ -169,8 +169,8 @@ export interface SnapshotKVItemProtoMsg {
 }
 /** SnapshotKVItem is an exported Key/Value Pair */
 export interface SnapshotKVItemAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 /** SnapshotKVItem is an exported Key/Value Pair */
 export interface SnapshotKVItemSDKType {
@@ -187,7 +187,7 @@ export interface SnapshotSchemaProtoMsg {
 }
 /** SnapshotSchema is an exported schema of smt store */
 export interface SnapshotSchemaAmino {
-  keys: string[];
+  keys?: string[];
 }
 /** SnapshotSchema is an exported schema of smt store */
 export interface SnapshotSchemaSDKType {
@@ -315,7 +315,7 @@ export const Snapshot = {
     obj.height = message.height ? message.height.toString() : undefined;
     obj.format = message.format;
     obj.chunks = message.chunks;
-    obj.hash = base64FromBytes(message.hash);
+    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash));
     obj.metadata = message.metadata ? Metadata.toAmino(message.metadata, useInterfaces) : undefined;
     return obj;
   },
@@ -767,8 +767,8 @@ export const SnapshotIAVLItem = {
   },
   toAmino(message: SnapshotIAVLItem, useInterfaces: boolean = true): SnapshotIAVLItemAmino {
     const obj: any = {};
-    obj.key = base64FromBytes(message.key);
-    obj.value = base64FromBytes(message.value);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value));
     obj.version = message.version ? message.version.toString() : undefined;
     obj.height = message.height;
     return obj;
@@ -942,7 +942,7 @@ export const SnapshotExtensionPayload = {
   },
   toAmino(message: SnapshotExtensionPayload, useInterfaces: boolean = true): SnapshotExtensionPayloadAmino {
     const obj: any = {};
-    obj.payload = base64FromBytes(message.payload);
+    message.payload !== undefined && (obj.payload = base64FromBytes(message.payload));
     return obj;
   },
   fromProtoMsg(message: SnapshotExtensionPayloadProtoMsg, useInterfaces: boolean = true): SnapshotExtensionPayload {
@@ -1034,8 +1034,8 @@ export const SnapshotKVItem = {
   },
   toAmino(message: SnapshotKVItem, useInterfaces: boolean = true): SnapshotKVItemAmino {
     const obj: any = {};
-    obj.key = base64FromBytes(message.key);
-    obj.value = base64FromBytes(message.value);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value));
     return obj;
   },
   fromProtoMsg(message: SnapshotKVItemProtoMsg, useInterfaces: boolean = true): SnapshotKVItem {

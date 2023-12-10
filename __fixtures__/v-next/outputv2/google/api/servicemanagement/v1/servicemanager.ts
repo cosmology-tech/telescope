@@ -74,17 +74,17 @@ export interface ListServicesRequestProtoMsg {
 /** Request message for `ListServices` method. */
 export interface ListServicesRequestAmino {
   /** Include services produced by the specified project. */
-  producer_project_id: string;
+  producer_project_id?: string;
   /**
    * The max number of items to include in the response list. Page size is 50
    * if not specified. Maximum value is 100.
    */
-  page_size: number;
+  page_size?: number;
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
    */
-  page_token: string;
+  page_token?: string;
   /**
    * Include services consumed by the specified consumer.
    * 
@@ -93,7 +93,7 @@ export interface ListServicesRequestAmino {
    * - project:<project_id>
    */
   /** @deprecated */
-  consumer_id: string;
+  consumer_id?: string;
 }
 export interface ListServicesRequestAminoMsg {
   type: "/google.api.servicemanagement.v1.ListServicesRequest";
@@ -121,9 +121,9 @@ export interface ListServicesResponseProtoMsg {
 /** Response message for `ListServices` method. */
 export interface ListServicesResponseAmino {
   /** The returned services will only have the name field set. */
-  services: ManagedServiceAmino[];
+  services?: ManagedServiceAmino[];
   /** Token that can be passed to `ListServices` to resume a paginated query. */
-  next_page_token: string;
+  next_page_token?: string;
 }
 export interface ListServicesResponseAminoMsg {
   type: "/google.api.servicemanagement.v1.ListServicesResponse";
@@ -152,7 +152,7 @@ export interface GetServiceRequestAmino {
    * Required. The name of the service.  See the `ServiceManager` overview for naming
    * requirements.  For example: `example.googleapis.com`.
    */
-  service_name: string;
+  service_name?: string;
 }
 export interface GetServiceRequestAminoMsg {
   type: "/google.api.servicemanagement.v1.GetServiceRequest";
@@ -202,7 +202,7 @@ export interface DeleteServiceRequestAmino {
    * Required. The name of the service.  See the [overview](/service-management/overview)
    * for naming requirements.  For example: `example.googleapis.com`.
    */
-  service_name: string;
+  service_name?: string;
 }
 export interface DeleteServiceRequestAminoMsg {
   type: "/google.api.servicemanagement.v1.DeleteServiceRequest";
@@ -230,7 +230,7 @@ export interface UndeleteServiceRequestAmino {
    * Required. The name of the service. See the [overview](/service-management/overview)
    * for naming requirements. For example: `example.googleapis.com`.
    */
-  service_name: string;
+  service_name?: string;
 }
 export interface UndeleteServiceRequestAminoMsg {
   type: "/google.api.servicemanagement.v1.UndeleteServiceRequest";
@@ -292,19 +292,19 @@ export interface GetServiceConfigRequestAmino {
    * Required. The name of the service.  See the [overview](/service-management/overview)
    * for naming requirements.  For example: `example.googleapis.com`.
    */
-  service_name: string;
+  service_name?: string;
   /**
    * Required. The id of the service configuration resource.
    * 
    * This field must be specified for the server to return all fields, including
    * `SourceInfo`.
    */
-  config_id: string;
+  config_id?: string;
   /**
    * Specifies which parts of the Service Config should be returned in the
    * response.
    */
-  view: GetServiceConfigRequest_ConfigView;
+  view?: GetServiceConfigRequest_ConfigView;
 }
 export interface GetServiceConfigRequestAminoMsg {
   type: "/google.api.servicemanagement.v1.GetServiceConfigRequest";
@@ -341,14 +341,14 @@ export interface ListServiceConfigsRequestAmino {
    * Required. The name of the service.  See the [overview](/service-management/overview)
    * for naming requirements.  For example: `example.googleapis.com`.
    */
-  service_name: string;
+  service_name?: string;
   /** The token of the page to retrieve. */
-  page_token: string;
+  page_token?: string;
   /**
    * The max number of items to include in the response list. Page size is 50
    * if not specified. Maximum value is 100.
    */
-  page_size: number;
+  page_size?: number;
 }
 export interface ListServiceConfigsRequestAminoMsg {
   type: "/google.api.servicemanagement.v1.ListServiceConfigsRequest";
@@ -374,9 +374,9 @@ export interface ListServiceConfigsResponseProtoMsg {
 /** Response message for ListServiceConfigs method. */
 export interface ListServiceConfigsResponseAmino {
   /** The list of service configuration resources. */
-  service_configs: ServiceAmino[];
+  service_configs?: ServiceAmino[];
   /** The token of the next page of results. */
-  next_page_token: string;
+  next_page_token?: string;
 }
 export interface ListServiceConfigsResponseAminoMsg {
   type: "/google.api.servicemanagement.v1.ListServiceConfigsResponse";
@@ -407,7 +407,7 @@ export interface CreateServiceConfigRequestAmino {
    * Required. The name of the service.  See the [overview](/service-management/overview)
    * for naming requirements.  For example: `example.googleapis.com`.
    */
-  service_name: string;
+  service_name?: string;
   /** Required. The service configuration resource. */
   service_config?: ServiceAmino;
 }
@@ -446,7 +446,7 @@ export interface SubmitConfigSourceRequestAmino {
    * Required. The name of the service.  See the [overview](/service-management/overview)
    * for naming requirements.  For example: `example.googleapis.com`.
    */
-  service_name: string;
+  service_name?: string;
   /** Required. The source configuration for the service. */
   config_source?: ConfigSourceAmino;
   /**
@@ -454,7 +454,7 @@ export interface SubmitConfigSourceRequestAmino {
    * `google.api.Service` configuration based on the `ConfigSource` provided,
    * but the generated config and the sources will NOT be persisted.
    */
-  validate_only: boolean;
+  validate_only?: boolean;
 }
 export interface SubmitConfigSourceRequestAminoMsg {
   type: "/google.api.servicemanagement.v1.SubmitConfigSourceRequest";
@@ -508,7 +508,7 @@ export interface CreateServiceRolloutRequestAmino {
    * Required. The name of the service.  See the [overview](/service-management/overview)
    * for naming requirements.  For example: `example.googleapis.com`.
    */
-  service_name: string;
+  service_name?: string;
   /** Required. The rollout resource. The `service_name` field is output only. */
   rollout?: RolloutAmino;
 }
@@ -557,14 +557,14 @@ export interface ListServiceRolloutsRequestAmino {
    * Required. The name of the service.  See the [overview](/service-management/overview)
    * for naming requirements.  For example: `example.googleapis.com`.
    */
-  service_name: string;
+  service_name?: string;
   /** The token of the page to retrieve. */
-  page_token: string;
+  page_token?: string;
   /**
    * The max number of items to include in the response list. Page size is 50
    * if not specified. Maximum value is 100.
    */
-  page_size: number;
+  page_size?: number;
   /**
    * Required. Use `filter` to return subset of rollouts.
    * The following filters are supported:
@@ -575,7 +575,7 @@ export interface ListServiceRolloutsRequestAmino {
    *      [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
    *      or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
    */
-  filter: string;
+  filter?: string;
 }
 export interface ListServiceRolloutsRequestAminoMsg {
   type: "/google.api.servicemanagement.v1.ListServiceRolloutsRequest";
@@ -602,9 +602,9 @@ export interface ListServiceRolloutsResponseProtoMsg {
 /** Response message for ListServiceRollouts method. */
 export interface ListServiceRolloutsResponseAmino {
   /** The list of rollout resources. */
-  rollouts: RolloutAmino[];
+  rollouts?: RolloutAmino[];
   /** The token of the next page of results. */
-  next_page_token: string;
+  next_page_token?: string;
 }
 export interface ListServiceRolloutsResponseAminoMsg {
   type: "/google.api.servicemanagement.v1.ListServiceRolloutsResponse";
@@ -635,9 +635,9 @@ export interface GetServiceRolloutRequestAmino {
    * Required. The name of the service.  See the [overview](/service-management/overview)
    * for naming requirements.  For example: `example.googleapis.com`.
    */
-  service_name: string;
+  service_name?: string;
   /** Required. The id of the rollout resource. */
-  rollout_id: string;
+  rollout_id?: string;
 }
 export interface GetServiceRolloutRequestAminoMsg {
   type: "/google.api.servicemanagement.v1.GetServiceRolloutRequest";
@@ -724,20 +724,20 @@ export interface GenerateConfigReportResponseProtoMsg {
 /** Response message for GenerateConfigReport method. */
 export interface GenerateConfigReportResponseAmino {
   /** Name of the service this report belongs to. */
-  service_name: string;
+  service_name?: string;
   /** ID of the service configuration this report belongs to. */
-  id: string;
+  id?: string;
   /**
    * list of ChangeReport, each corresponding to comparison between two
    * service configurations.
    */
-  change_reports: ChangeReportAmino[];
+  change_reports?: ChangeReportAmino[];
   /**
    * Errors / Linter warnings associated with the service definition this
    * report
    * belongs to.
    */
-  diagnostics: DiagnosticAmino[];
+  diagnostics?: DiagnosticAmino[];
 }
 export interface GenerateConfigReportResponseAminoMsg {
   type: "/google.api.servicemanagement.v1.GenerateConfigReportResponse";

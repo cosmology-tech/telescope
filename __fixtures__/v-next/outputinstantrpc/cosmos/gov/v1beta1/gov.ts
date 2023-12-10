@@ -1520,9 +1520,9 @@ export const TallyParams = {
   },
   toAmino(message: TallyParams): TallyParamsAmino {
     const obj: any = {};
-    obj.quorum = base64FromBytes(message.quorum);
-    obj.threshold = base64FromBytes(message.threshold);
-    obj.veto_threshold = base64FromBytes(message.vetoThreshold);
+    message.quorum !== undefined && (obj.quorum = base64FromBytes(message.quorum));
+    message.threshold !== undefined && (obj.threshold = base64FromBytes(message.threshold));
+    message.vetoThreshold !== undefined && (obj.veto_threshold = base64FromBytes(message.vetoThreshold));
     return obj;
   },
   fromAminoMsg(object: TallyParamsAminoMsg): TallyParams {

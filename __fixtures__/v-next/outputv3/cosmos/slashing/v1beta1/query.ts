@@ -47,7 +47,7 @@ export interface QuerySigningInfoRequestProtoMsg {
  */
 export interface QuerySigningInfoRequestAmino {
   /** cons_address is the address to query signing info of */
-  cons_address: string;
+  cons_address?: string;
 }
 /**
  * QuerySigningInfoRequest is the request type for the Query/SigningInfo RPC
@@ -127,7 +127,7 @@ export interface QuerySigningInfosResponseProtoMsg {
  */
 export interface QuerySigningInfosResponseAmino {
   /** info is the signing info of all validators */
-  info: ValidatorSigningInfoAmino[];
+  info?: ValidatorSigningInfoAmino[];
   pagination?: PageResponseAmino;
 }
 /**

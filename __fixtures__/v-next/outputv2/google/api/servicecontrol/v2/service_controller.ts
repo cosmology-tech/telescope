@@ -41,19 +41,19 @@ export interface CheckRequestAmino {
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
    */
-  service_name: string;
+  service_name?: string;
   /**
    * Specifies the version of the service configuration that should be used to
    * process the request. Must not be empty. Set this field to 'latest' to
    * specify using the latest configuration.
    */
-  service_config_id: string;
+  service_config_id?: string;
   /** Describes attributes about the operation being executed by the service. */
   attributes?: AttributeContextAmino;
   /** Describes the resources and the policies applied to each resource. */
-  resources: ResourceInfoAmino[];
+  resources?: ResourceInfoAmino[];
   /** Optional. Contains a comma-separated list of flags. */
-  flags: string;
+  flags?: string;
 }
 export interface CheckRequestAminoMsg {
   type: "/google.api.servicecontrol.v2.CheckRequest";
@@ -103,14 +103,14 @@ export interface ResourceInfoProtoMsg {
 /** Describes a resource referenced in the request. */
 export interface ResourceInfoAmino {
   /** The name of the resource referenced in the request. */
-  name: string;
+  name?: string;
   /** The resource type in the format of "{service}/{kind}". */
-  type: string;
+  type?: string;
   /**
    * The resource permission needed for this request.
    * The format must be "{service}/{plural}.{verb}".
    */
-  permission: string;
+  permission?: string;
   /**
    * Optional. The identifier of the container of this resource. For Google
    * Cloud APIs, the resource container must be one of the following formats:
@@ -121,13 +121,13 @@ export interface ResourceInfoAmino {
    * Policy check), this field takes precedence on the container extracted from
    * name when presents.
    */
-  container: string;
+  container?: string;
   /**
    * Optional. The location of the resource. The value must be a valid zone,
    * region or multiregion. For example: "europe-west4" or
    * "northamerica-northeast1-a"
    */
-  location: string;
+  location?: string;
 }
 export interface ResourceInfoAminoMsg {
   type: "/google.api.servicecontrol.v2.ResourceInfo";
@@ -150,8 +150,8 @@ export interface CheckResponse_HeadersEntryProtoMsg {
   value: Uint8Array;
 }
 export interface CheckResponse_HeadersEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface CheckResponse_HeadersEntryAminoMsg {
   type: string;
@@ -187,7 +187,7 @@ export interface CheckResponseAmino {
    */
   status?: StatusAmino;
   /** Returns a set of request contexts generated from the `CheckRequest`. */
-  headers: {
+  headers?: {
     [key: string]: string;
   };
 }
@@ -240,19 +240,19 @@ export interface ReportRequestAmino {
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
    */
-  service_name: string;
+  service_name?: string;
   /**
    * Specifies the version of the service configuration that should be used to
    * process the request. Must not be empty. Set this field to 'latest' to
    * specify using the latest configuration.
    */
-  service_config_id: string;
+  service_config_id?: string;
   /**
    * Describes the list of operations to be reported. Each operation is
    * represented as an AttributeContext, and contains all attributes around an
    * API access.
    */
-  operations: AttributeContextAmino[];
+  operations?: AttributeContextAmino[];
 }
 export interface ReportRequestAminoMsg {
   type: "/google.api.servicecontrol.v2.ReportRequest";

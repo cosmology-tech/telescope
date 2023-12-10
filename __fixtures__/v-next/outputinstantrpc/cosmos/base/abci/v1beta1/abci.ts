@@ -1182,7 +1182,7 @@ export const Result = {
   },
   toAmino(message: Result): ResultAmino {
     const obj: any = {};
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     obj.log = message.log;
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toAmino(e) : undefined);
@@ -1411,7 +1411,7 @@ export const MsgData = {
   toAmino(message: MsgData): MsgDataAmino {
     const obj: any = {};
     obj.msg_type = message.msgType;
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     return obj;
   },
   fromAminoMsg(object: MsgDataAminoMsg): MsgData {

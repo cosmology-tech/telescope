@@ -59,28 +59,28 @@ export interface TxResponseProtoMsg {
  */
 export interface TxResponseAmino {
   /** The block height */
-  height: string;
+  height?: string;
   /** The transaction hash. */
-  txhash: string;
+  txhash?: string;
   /** Namespace for the Code */
-  codespace: string;
+  codespace?: string;
   /** Response code. */
-  code: number;
+  code?: number;
   /** Result bytes, if any. */
-  data: string;
+  data?: string;
   /**
    * The output of the application's logger (raw string). May be
    * non-deterministic.
    */
-  raw_log: string;
+  raw_log?: string;
   /** The output of the application's logger (typed). May be non-deterministic. */
-  logs: ABCIMessageLogAmino[];
+  logs?: ABCIMessageLogAmino[];
   /** Additional information. May be non-deterministic. */
-  info: string;
+  info?: string;
   /** Amount of gas requested for transaction. */
-  gas_wanted: string;
+  gas_wanted?: string;
   /** Amount of gas consumed by transaction. */
-  gas_used: string;
+  gas_used?: string;
   /** The request transaction bytes. */
   tx?: AnyAmino;
   /**
@@ -88,7 +88,7 @@ export interface TxResponseAmino {
    * the timestamps of the valid votes in the block.LastCommit. For height == 1,
    * it's genesis time.
    */
-  timestamp: string;
+  timestamp?: string;
   /**
    * Events defines all the events emitted by processing a transaction. Note,
    * these events include those emitted by processing all the messages and those
@@ -97,7 +97,7 @@ export interface TxResponseAmino {
    * 
    * Since: cosmos-sdk 0.42.11, 0.44.5, 0.45
    */
-  events: EventAmino[];
+  events?: EventAmino[];
 }
 export interface TxResponseAminoMsg {
   type: "cosmos-sdk/TxResponse";
@@ -138,13 +138,13 @@ export interface ABCIMessageLogProtoMsg {
 }
 /** ABCIMessageLog defines a structure containing an indexed tx ABCI message log. */
 export interface ABCIMessageLogAmino {
-  msg_index: number;
-  log: string;
+  msg_index?: number;
+  log?: string;
   /**
    * Events contains a slice of Event objects that were emitted during some
    * execution.
    */
-  events: StringEventAmino[];
+  events?: StringEventAmino[];
 }
 export interface ABCIMessageLogAminoMsg {
   type: "cosmos-sdk/ABCIMessageLog";
@@ -173,8 +173,8 @@ export interface StringEventProtoMsg {
  * contain key/value pairs that are strings instead of raw bytes.
  */
 export interface StringEventAmino {
-  type: string;
-  attributes: AttributeAmino[];
+  type?: string;
+  attributes?: AttributeAmino[];
 }
 export interface StringEventAminoMsg {
   type: "cosmos-sdk/StringEvent";
@@ -205,8 +205,8 @@ export interface AttributeProtoMsg {
  * strings instead of raw bytes.
  */
 export interface AttributeAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface AttributeAminoMsg {
   type: "cosmos-sdk/Attribute";
@@ -234,9 +234,9 @@ export interface GasInfoProtoMsg {
 /** GasInfo defines tx execution gas context. */
 export interface GasInfoAmino {
   /** GasWanted is the maximum units of work we allow this tx to perform. */
-  gas_wanted: string;
+  gas_wanted?: string;
   /** GasUsed is the amount of gas actually consumed. */
-  gas_used: string;
+  gas_used?: string;
 }
 export interface GasInfoAminoMsg {
   type: "cosmos-sdk/GasInfo";
@@ -284,20 +284,20 @@ export interface ResultAmino {
    * because it also contains the Msg response typeURL.
    */
   /** @deprecated */
-  data: string;
+  data?: string;
   /** Log contains the log information from message or handler execution. */
-  log: string;
+  log?: string;
   /**
    * Events contains a slice of Event objects that were emitted during message
    * or handler execution.
    */
-  events: EventAmino[];
+  events?: EventAmino[];
   /**
    * msg_responses contains the Msg handler responses type packed in Anys.
    * 
    * Since: cosmos-sdk 0.46
    */
-  msg_responses: AnyAmino[];
+  msg_responses?: AnyAmino[];
 }
 export interface ResultAminoMsg {
   type: "cosmos-sdk/Result";
@@ -362,8 +362,8 @@ export interface MsgDataProtoMsg {
  */
 /** @deprecated */
 export interface MsgDataAmino {
-  msg_type: string;
-  data: string;
+  msg_type?: string;
+  data?: string;
 }
 export interface MsgDataAminoMsg {
   type: "cosmos-sdk/MsgData";
@@ -404,13 +404,13 @@ export interface TxMsgDataProtoMsg {
 export interface TxMsgDataAmino {
   /** data field is deprecated and not populated. */
   /** @deprecated */
-  data: MsgDataAmino[];
+  data?: MsgDataAmino[];
   /**
    * msg_responses contains the Msg handler responses packed into Anys.
    * 
    * Since: cosmos-sdk 0.46
    */
-  msg_responses: AnyAmino[];
+  msg_responses?: AnyAmino[];
 }
 export interface TxMsgDataAminoMsg {
   type: "cosmos-sdk/TxMsgData";
@@ -447,17 +447,17 @@ export interface SearchTxsResultProtoMsg {
 /** SearchTxsResult defines a structure for querying txs pageable */
 export interface SearchTxsResultAmino {
   /** Count of all txs */
-  total_count: string;
+  total_count?: string;
   /** Count of txs in current page */
-  count: string;
+  count?: string;
   /** Index of current page, start from 1 */
-  page_number: string;
+  page_number?: string;
   /** Count of total pages */
-  page_total: string;
+  page_total?: string;
   /** Max count txs per page */
-  limit: string;
+  limit?: string;
   /** List of txs in current page */
-  txs: TxResponseAmino[];
+  txs?: TxResponseAmino[];
 }
 export interface SearchTxsResultAminoMsg {
   type: "cosmos-sdk/SearchTxsResult";
@@ -1328,7 +1328,7 @@ export const Result = {
   },
   toAmino(message: Result): ResultAmino {
     const obj: any = {};
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     obj.log = message.log;
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toAmino(e) : undefined);
@@ -1547,7 +1547,7 @@ export const MsgData = {
   toAmino(message: MsgData): MsgDataAmino {
     const obj: any = {};
     obj.msg_type = message.msgType;
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     return obj;
   },
   fromAminoMsg(object: MsgDataAminoMsg): MsgData {

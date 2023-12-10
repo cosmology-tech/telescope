@@ -25,9 +25,9 @@ export interface MsgDelegate {
 exports[`MsgSend amino interface 1`] = `
 "/** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSendAmino {
-  from_address: string;
-  to_address: string;
-  amount: CoinAmino[];
+  from_address?: string;
+  to_address?: string;
+  amount?: CoinAmino[];
 }"
 `;
 

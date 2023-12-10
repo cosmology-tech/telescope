@@ -127,10 +127,10 @@ export interface GetTxsEventRequestProtoMsg {
  */
 export interface GetTxsEventRequestAmino {
   /** events is the list of transaction event type. */
-  events: string[];
+  events?: string[];
   /** pagination defines a pagination for the request. */
   pagination?: PageRequestAmino;
-  order_by: OrderBy;
+  order_by?: OrderBy;
 }
 /**
  * GetTxsEventRequest is the request type for the Service.TxsByEvents
@@ -163,9 +163,9 @@ export interface GetTxsEventResponseProtoMsg {
  */
 export interface GetTxsEventResponseAmino {
   /** txs is the list of queried transactions. */
-  txs: TxAmino[];
+  txs?: TxAmino[];
   /** tx_responses is the list of queried TxResponses. */
-  tx_responses: TxResponseAmino[];
+  tx_responses?: TxResponseAmino[];
   /** pagination defines a pagination for the response. */
   pagination?: PageResponseAmino;
 }
@@ -197,8 +197,8 @@ export interface BroadcastTxRequestProtoMsg {
  */
 export interface BroadcastTxRequestAmino {
   /** tx_bytes is the raw transaction. */
-  tx_bytes: string;
-  mode: BroadcastMode;
+  tx_bytes?: string;
+  mode?: BroadcastMode;
 }
 /**
  * BroadcastTxRequest is the request type for the Service.BroadcastTxRequest
@@ -273,7 +273,7 @@ export interface SimulateRequestAmino {
    * 
    * Since: cosmos-sdk 0.43
    */
-  tx_bytes: string;
+  tx_bytes?: string;
 }
 /**
  * SimulateRequest is the request type for the Service.Simulate
@@ -334,7 +334,7 @@ export interface GetTxRequestProtoMsg {
  */
 export interface GetTxRequestAmino {
   /** hash is the tx hash to query, encoded as a hex string. */
-  hash: string;
+  hash?: string;
 }
 /**
  * GetTxRequest is the request type for the Service.GetTx
@@ -390,7 +390,7 @@ export interface GetBlockWithTxsRequestProtoMsg {
  */
 export interface GetBlockWithTxsRequestAmino {
   /** height is the height of the block to query. */
-  height: string;
+  height?: string;
   /** pagination defines a pagination for the request. */
   pagination?: PageRequestAmino;
 }
@@ -428,7 +428,7 @@ export interface GetBlockWithTxsResponseProtoMsg {
  */
 export interface GetBlockWithTxsResponseAmino {
   /** txs are the transactions in the block. */
-  txs: TxAmino[];
+  txs?: TxAmino[];
   block_id?: BlockIDAmino;
   block?: BlockAmino;
   /** pagination defines a pagination for the response. */
@@ -775,7 +775,7 @@ export const BroadcastTxRequest = {
   },
   toAmino(message: BroadcastTxRequest, useInterfaces: boolean = true): BroadcastTxRequestAmino {
     const obj: any = {};
-    obj.tx_bytes = base64FromBytes(message.txBytes);
+    message.txBytes !== undefined && (obj.tx_bytes = base64FromBytes(message.txBytes));
     obj.mode = message.mode;
     return obj;
   },
@@ -952,7 +952,7 @@ export const SimulateRequest = {
   toAmino(message: SimulateRequest, useInterfaces: boolean = true): SimulateRequestAmino {
     const obj: any = {};
     obj.tx = message.tx ? Tx.toAmino(message.tx, useInterfaces) : undefined;
-    obj.tx_bytes = base64FromBytes(message.txBytes);
+    message.txBytes !== undefined && (obj.tx_bytes = base64FromBytes(message.txBytes));
     return obj;
   },
   fromProtoMsg(message: SimulateRequestProtoMsg, useInterfaces: boolean = true): SimulateRequest {

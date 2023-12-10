@@ -43,7 +43,7 @@ export interface Struct_FieldsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface Struct_FieldsEntryAmino {
-  key: string;
+  key?: string;
   value?: ValueAmino;
 }
 export interface Struct_FieldsEntrySDKType {
@@ -185,7 +185,7 @@ export interface ListValueProtoMsg {
  */
 export interface ListValueAmino {
   /** Repeated field of dynamically typed values. */
-  values: ValueAmino[];
+  values?: ValueAmino[];
 }
 /**
  * `ListValue` is a wrapper around a repeated field of values.

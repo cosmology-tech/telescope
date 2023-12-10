@@ -26,14 +26,14 @@ export interface GenesisStateAmino {
   /** params defines all the paramaters of the module. */
   params?: ParamsAmino;
   /** balances is an array containing the balances of all the accounts. */
-  balances: BalanceAmino[];
+  balances?: BalanceAmino[];
   /**
    * supply represents the total supply. If it is left empty, then supply will be calculated based on the provided
    * balances. Otherwise, it will be used to validate that the sum of the balances equals this amount.
    */
-  supply: CoinAmino[];
+  supply?: CoinAmino[];
   /** denom_metadata defines the metadata of the differents coins. */
-  denom_metadata: MetadataAmino[];
+  denom_metadata?: MetadataAmino[];
 }
 /** GenesisState defines the bank module's genesis state. */
 export interface GenesisStateSDKType {
@@ -62,9 +62,9 @@ export interface BalanceProtoMsg {
  */
 export interface BalanceAmino {
   /** address is the address of the balance holder. */
-  address: string;
+  address?: string;
   /** coins defines the different coins this balance holds. */
-  coins: CoinAmino[];
+  coins?: CoinAmino[];
 }
 /**
  * Balance defines an account address and balance pair used in the bank module's

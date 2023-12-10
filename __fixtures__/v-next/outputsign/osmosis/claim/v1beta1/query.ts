@@ -30,7 +30,7 @@ export interface QueryModuleAccountBalanceResponseProtoMsg {
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceResponseAmino {
   /** params defines the parameters of the module. */
-  moduleAccountBalance: CoinAmino[];
+  moduleAccountBalance?: CoinAmino[];
 }
 export interface QueryModuleAccountBalanceResponseAminoMsg {
   type: "osmosis/claim/query-module-account-balance-response";
@@ -84,7 +84,7 @@ export interface QueryClaimRecordRequestProtoMsg {
   value: Uint8Array;
 }
 export interface QueryClaimRecordRequestAmino {
-  address: string;
+  address?: string;
 }
 export interface QueryClaimRecordRequestAminoMsg {
   type: "osmosis/claim/query-claim-record-request";
@@ -119,8 +119,8 @@ export interface QueryClaimableForActionRequestProtoMsg {
   value: Uint8Array;
 }
 export interface QueryClaimableForActionRequestAmino {
-  address: string;
-  action: Action;
+  address?: string;
+  action?: Action;
 }
 export interface QueryClaimableForActionRequestAminoMsg {
   type: "osmosis/claim/query-claimable-for-action-request";
@@ -138,7 +138,7 @@ export interface QueryClaimableForActionResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryClaimableForActionResponseAmino {
-  coins: CoinAmino[];
+  coins?: CoinAmino[];
 }
 export interface QueryClaimableForActionResponseAminoMsg {
   type: "osmosis/claim/query-claimable-for-action-response";
@@ -155,7 +155,7 @@ export interface QueryTotalClaimableRequestProtoMsg {
   value: Uint8Array;
 }
 export interface QueryTotalClaimableRequestAmino {
-  address: string;
+  address?: string;
 }
 export interface QueryTotalClaimableRequestAminoMsg {
   type: "osmosis/claim/query-total-claimable-request";
@@ -172,7 +172,7 @@ export interface QueryTotalClaimableResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryTotalClaimableResponseAmino {
-  coins: CoinAmino[];
+  coins?: CoinAmino[];
 }
 export interface QueryTotalClaimableResponseAminoMsg {
   type: "osmosis/claim/query-total-claimable-response";

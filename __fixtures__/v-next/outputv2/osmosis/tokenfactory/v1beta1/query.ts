@@ -55,7 +55,7 @@ export interface QueryDenomAuthorityMetadataRequestProtoMsg {
  * DenomAuthorityMetadata gRPC query.
  */
 export interface QueryDenomAuthorityMetadataRequestAmino {
-  denom: string;
+  denom?: string;
 }
 export interface QueryDenomAuthorityMetadataRequestAminoMsg {
   type: "osmosis/tokenfactory/query-denom-authority-metadata-request";
@@ -113,7 +113,7 @@ export interface QueryDenomsFromCreatorRequestProtoMsg {
  * DenomsFromCreator gRPC query.
  */
 export interface QueryDenomsFromCreatorRequestAmino {
-  creator: string;
+  creator?: string;
 }
 export interface QueryDenomsFromCreatorRequestAminoMsg {
   type: "osmosis/tokenfactory/query-denoms-from-creator-request";
@@ -142,7 +142,7 @@ export interface QueryDenomsFromCreatorResponseProtoMsg {
  * DenomsFromCreator gRPC query.
  */
 export interface QueryDenomsFromCreatorResponseAmino {
-  denoms: string[];
+  denoms?: string[];
 }
 export interface QueryDenomsFromCreatorResponseAminoMsg {
   type: "osmosis/tokenfactory/query-denoms-from-creator-response";

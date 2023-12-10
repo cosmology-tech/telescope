@@ -30,14 +30,14 @@ export interface EvalStateProtoMsg {
  */
 export interface EvalStateAmino {
   /** The unique values referenced in this message. */
-  values: ExprValueAmino[];
+  values?: ExprValueAmino[];
   /**
    * An ordered list of results.
    * 
    * Tracks the flow of evaluation through the expression.
    * May be sparse.
    */
-  results: EvalState_ResultAmino[];
+  results?: EvalState_ResultAmino[];
 }
 export interface EvalStateAminoMsg {
   type: "/google.api.expr.v1alpha1.EvalState";
@@ -66,9 +66,9 @@ export interface EvalState_ResultProtoMsg {
 /** A single evalution result. */
 export interface EvalState_ResultAmino {
   /** The id of the expression this result if for. */
-  expr: string;
+  expr?: string;
   /** The index in `values` of the resulting value. */
-  value: string;
+  value?: string;
 }
 export interface EvalState_ResultAminoMsg {
   type: "/google.api.expr.v1alpha1.Result";
@@ -215,7 +215,7 @@ export interface ErrorSetProtoMsg {
  */
 export interface ErrorSetAmino {
   /** The errors in the set. */
-  errors: StatusAmino[];
+  errors?: StatusAmino[];
 }
 export interface ErrorSetAminoMsg {
   type: "/google.api.expr.v1alpha1.ErrorSet";
@@ -249,7 +249,7 @@ export interface UnknownSetProtoMsg {
  */
 export interface UnknownSetAmino {
   /** The ids of the expressions with unknown values. */
-  exprs: string[];
+  exprs?: string[];
 }
 export interface UnknownSetAminoMsg {
   type: "/google.api.expr.v1alpha1.UnknownSet";

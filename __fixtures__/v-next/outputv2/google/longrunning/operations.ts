@@ -56,7 +56,7 @@ export interface OperationAmino {
    * originally returns it. If you use the default HTTP mapping, the
    * `name` should be a resource name ending with `operations/{unique_id}`.
    */
-  name: string;
+  name?: string;
   /**
    * Service-specific metadata associated with the operation.  It typically
    * contains progress information and common metadata such as create time.
@@ -69,7 +69,7 @@ export interface OperationAmino {
    * If `true`, the operation is completed, and either `error` or `response` is
    * available.
    */
-  done: boolean;
+  done?: boolean;
   /** The error result of the operation in case of failure or cancellation. */
   error?: StatusAmino;
   /**
@@ -111,7 +111,7 @@ export interface GetOperationRequestProtoMsg {
 /** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
 export interface GetOperationRequestAmino {
   /** The name of the operation resource. */
-  name: string;
+  name?: string;
 }
 export interface GetOperationRequestAminoMsg {
   type: "/google.longrunning.GetOperationRequest";
@@ -139,13 +139,13 @@ export interface ListOperationsRequestProtoMsg {
 /** The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsRequestAmino {
   /** The name of the operation's parent resource. */
-  name: string;
+  name?: string;
   /** The standard list filter. */
-  filter: string;
+  filter?: string;
   /** The standard list page size. */
-  page_size: number;
+  page_size?: number;
   /** The standard list page token. */
-  page_token: string;
+  page_token?: string;
 }
 export interface ListOperationsRequestAminoMsg {
   type: "/google.longrunning.ListOperationsRequest";
@@ -172,9 +172,9 @@ export interface ListOperationsResponseProtoMsg {
 /** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsResponseAmino {
   /** A list of operations that matches the specified filter in the request. */
-  operations: OperationAmino[];
+  operations?: OperationAmino[];
   /** The standard List next-page token. */
-  next_page_token: string;
+  next_page_token?: string;
 }
 export interface ListOperationsResponseAminoMsg {
   type: "/google.longrunning.ListOperationsResponse";
@@ -197,7 +197,7 @@ export interface CancelOperationRequestProtoMsg {
 /** The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]. */
 export interface CancelOperationRequestAmino {
   /** The name of the operation resource to be cancelled. */
-  name: string;
+  name?: string;
 }
 export interface CancelOperationRequestAminoMsg {
   type: "/google.longrunning.CancelOperationRequest";
@@ -219,7 +219,7 @@ export interface DeleteOperationRequestProtoMsg {
 /** The request message for [Operations.DeleteOperation][google.longrunning.Operations.DeleteOperation]. */
 export interface DeleteOperationRequestAmino {
   /** The name of the operation resource to be deleted. */
-  name: string;
+  name?: string;
 }
 export interface DeleteOperationRequestAminoMsg {
   type: "/google.longrunning.DeleteOperationRequest";
@@ -247,7 +247,7 @@ export interface WaitOperationRequestProtoMsg {
 /** The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]. */
 export interface WaitOperationRequestAmino {
   /** The name of the operation resource to wait on. */
-  name: string;
+  name?: string;
   /**
    * The maximum duration to wait before timing out. If left blank, the wait
    * will be at most the time permitted by the underlying HTTP/RPC protocol.
@@ -328,7 +328,7 @@ export interface OperationInfoAmino {
    * 
    * Note: Altering this value constitutes a breaking change.
    */
-  response_type: string;
+  response_type?: string;
   /**
    * Required. The message name of the metadata type for this long-running
    * operation.
@@ -338,7 +338,7 @@ export interface OperationInfoAmino {
    * 
    * Note: Altering this value constitutes a breaking change.
    */
-  metadata_type: string;
+  metadata_type?: string;
 }
 export interface OperationInfoAminoMsg {
   type: "/google.longrunning.OperationInfo";

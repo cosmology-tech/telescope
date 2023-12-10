@@ -73,9 +73,9 @@ export interface GroupProtoMsg {
 /** Group stores group id, state and specifications of group */
 export interface GroupAmino {
   group_id?: GroupIDAmino;
-  state: Group_State;
+  state?: Group_State;
   group_spec?: GroupSpecAmino;
-  created_at: string;
+  created_at?: string;
 }
 export interface GroupAminoMsg {
   type: "/akash.deployment.v1beta2.Group";

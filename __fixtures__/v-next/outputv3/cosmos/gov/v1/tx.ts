@@ -33,11 +33,11 @@ export type MsgSubmitProposalEncoded = Omit<MsgSubmitProposal, "messages"> & {
  * proposal Content.
  */
 export interface MsgSubmitProposalAmino {
-  messages: AnyAmino[];
-  initial_deposit: CoinAmino[];
-  proposer: string;
+  messages?: AnyAmino[];
+  initial_deposit?: CoinAmino[];
+  proposer?: string;
   /** metadata is any arbitrary metadata attached to the proposal. */
-  metadata: string;
+  metadata?: string;
 }
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
@@ -59,7 +59,7 @@ export interface MsgSubmitProposalResponseProtoMsg {
 }
 /** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
 export interface MsgSubmitProposalResponseAmino {
-  proposal_id: string;
+  proposal_id?: string;
 }
 /** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
 export interface MsgSubmitProposalResponseSDKType {
@@ -90,7 +90,7 @@ export interface MsgExecLegacyContentAmino {
   /** content is the proposal's content. */
   content?: AnyAmino;
   /** authority must be the gov module address. */
-  authority: string;
+  authority?: string;
 }
 /**
  * MsgExecLegacyContent is used to wrap the legacy content field into a message.
@@ -123,10 +123,10 @@ export interface MsgVoteProtoMsg {
 }
 /** MsgVote defines a message to cast a vote. */
 export interface MsgVoteAmino {
-  proposal_id: string;
-  voter: string;
-  option: VoteOption;
-  metadata: string;
+  proposal_id?: string;
+  voter?: string;
+  option?: VoteOption;
+  metadata?: string;
 }
 /** MsgVote defines a message to cast a vote. */
 export interface MsgVoteSDKType {
@@ -158,10 +158,10 @@ export interface MsgVoteWeightedProtoMsg {
 }
 /** MsgVoteWeighted defines a message to cast a vote. */
 export interface MsgVoteWeightedAmino {
-  proposal_id: string;
-  voter: string;
-  options: WeightedVoteOptionAmino[];
-  metadata: string;
+  proposal_id?: string;
+  voter?: string;
+  options?: WeightedVoteOptionAmino[];
+  metadata?: string;
 }
 /** MsgVoteWeighted defines a message to cast a vote. */
 export interface MsgVoteWeightedSDKType {
@@ -192,9 +192,9 @@ export interface MsgDepositProtoMsg {
 }
 /** MsgDeposit defines a message to submit a deposit to an existing proposal. */
 export interface MsgDepositAmino {
-  proposal_id: string;
-  depositor: string;
-  amount: CoinAmino[];
+  proposal_id?: string;
+  depositor?: string;
+  amount?: CoinAmino[];
 }
 /** MsgDeposit defines a message to submit a deposit to an existing proposal. */
 export interface MsgDepositSDKType {

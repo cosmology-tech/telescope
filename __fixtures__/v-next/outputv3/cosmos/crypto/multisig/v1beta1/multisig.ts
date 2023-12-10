@@ -19,7 +19,7 @@ export interface MultiSignatureProtoMsg {
  * signed and with which modes.
  */
 export interface MultiSignatureAmino {
-  signatures: string[];
+  signatures?: string[];
 }
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
@@ -50,8 +50,8 @@ export interface CompactBitArrayProtoMsg {
  * This is not thread safe, and is not intended for concurrent usage.
  */
 export interface CompactBitArrayAmino {
-  extra_bits_stored: number;
-  elems: string;
+  extra_bits_stored?: number;
+  elems?: string;
 }
 /**
  * CompactBitArray is an implementation of a space efficient bit array.
@@ -231,7 +231,7 @@ export const CompactBitArray = {
   toAmino(message: CompactBitArray, useInterfaces: boolean = true): CompactBitArrayAmino {
     const obj: any = {};
     obj.extra_bits_stored = message.extraBitsStored;
-    obj.elems = base64FromBytes(message.elems);
+    message.elems !== undefined && (obj.elems = base64FromBytes(message.elems));
     return obj;
   },
   fromProtoMsg(message: CompactBitArrayProtoMsg, useInterfaces: boolean = true): CompactBitArray {

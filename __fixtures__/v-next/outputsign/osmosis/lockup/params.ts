@@ -9,7 +9,7 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 export interface ParamsAmino {
-  force_unlock_allowed_addresses: string[];
+  force_unlock_allowed_addresses?: string[];
 }
 export interface ParamsAminoMsg {
   type: "osmosis/lockup/params";

@@ -61,9 +61,9 @@ export interface AuthenticationAmino {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: AuthenticationRuleAmino[];
+  rules?: AuthenticationRuleAmino[];
   /** Defines a set of authentication providers that a service supports. */
-  providers: AuthProviderAmino[];
+  providers?: AuthProviderAmino[];
 }
 /**
  * `Authentication` defines the authentication configuration for API methods
@@ -138,16 +138,16 @@ export interface AuthenticationRuleAmino {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /** The requirements for OAuth credentials. */
   oauth?: OAuthRequirementsAmino;
   /**
    * If true, the service accepts API keys without any other credential.
    * This flag only applies to HTTP and gRPC requests.
    */
-  allow_without_credential: boolean;
+  allow_without_credential?: boolean;
   /** Requirements for additional authentication providers. */
-  requirements: AuthRequirementAmino[];
+  requirements?: AuthRequirementAmino[];
 }
 /**
  * Authentication rules for the service.
@@ -204,7 +204,7 @@ export interface JwtLocationAmino {
    * For example, for "Authorization: Bearer {JWT}",
    * value_prefix="Bearer " with a space at the end.
    */
-  value_prefix: string;
+  value_prefix?: string;
 }
 /** Specifies a location to extract JWT from an API request. */
 export interface JwtLocationSDKType {
@@ -311,7 +311,7 @@ export interface AuthProviderAmino {
    * 
    * Example: "bookstore_auth".
    */
-  id: string;
+  id?: string;
   /**
    * Identifies the principal that issued the JWT. See
    * https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.1
@@ -320,7 +320,7 @@ export interface AuthProviderAmino {
    * Example: https://securetoken.google.com
    * Example: 1234567-compute@developer.gserviceaccount.com
    */
-  issuer: string;
+  issuer?: string;
   /**
    * URL of the provider's public key set to validate signature of the JWT. See
    * [OpenID
@@ -335,7 +335,7 @@ export interface AuthProviderAmino {
    * 
    * Example: https://www.googleapis.com/oauth2/v1/certs
    */
-  jwks_uri: string;
+  jwks_uri?: string;
   /**
    * The list of JWT
    * [audiences](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.3).
@@ -355,12 +355,12 @@ export interface AuthProviderAmino {
    *     audiences: bookstore_android.apps.googleusercontent.com,
    *                bookstore_web.apps.googleusercontent.com
    */
-  audiences: string;
+  audiences?: string;
   /**
    * Redirect URL if JWT token is required but not present or is expired.
    * Implement authorizationUrl of securityDefinitions in OpenAPI spec.
    */
-  authorization_url: string;
+  authorization_url?: string;
   /**
    * Defines the locations to extract the JWT.
    * 
@@ -380,7 +380,7 @@ export interface AuthProviderAmino {
    *    - header: x-goog-iap-jwt-assertion
    *    - query: access_token
    */
-  jwt_locations: JwtLocationAmino[];
+  jwt_locations?: JwtLocationAmino[];
 }
 /**
  * Configuration for an authentication provider, including support for
@@ -461,7 +461,7 @@ export interface OAuthRequirementsAmino {
    *      canonical_scopes: https://www.googleapis.com/auth/calendar,
    *                        https://www.googleapis.com/auth/calendar.read
    */
-  canonical_scopes: string;
+  canonical_scopes?: string;
 }
 /**
  * OAuth scopes are a way to define data and permissions on data. For example,
@@ -537,7 +537,7 @@ export interface AuthRequirementAmino {
    * 
    *     provider_id: bookstore_auth
    */
-  provider_id: string;
+  provider_id?: string;
   /**
    * NOTE: This will be deprecated soon, once AuthProvider.audiences is
    * implemented and accepted in all the runtime components.
@@ -556,7 +556,7 @@ export interface AuthRequirementAmino {
    *     audiences: bookstore_android.apps.googleusercontent.com,
    *                bookstore_web.apps.googleusercontent.com
    */
-  audiences: string;
+  audiences?: string;
 }
 /**
  * User-defined authentication requirements, including support for

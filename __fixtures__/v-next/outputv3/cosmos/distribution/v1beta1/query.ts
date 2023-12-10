@@ -50,7 +50,7 @@ export interface QueryValidatorOutstandingRewardsRequestProtoMsg {
  */
 export interface QueryValidatorOutstandingRewardsRequestAmino {
   /** validator_address defines the validator address to query for. */
-  validator_address: string;
+  validator_address?: string;
 }
 /**
  * QueryValidatorOutstandingRewardsRequest is the request type for the
@@ -102,7 +102,7 @@ export interface QueryValidatorCommissionRequestProtoMsg {
  */
 export interface QueryValidatorCommissionRequestAmino {
   /** validator_address defines the validator address to query for. */
-  validator_address: string;
+  validator_address?: string;
 }
 /**
  * QueryValidatorCommissionRequest is the request type for the
@@ -162,11 +162,11 @@ export interface QueryValidatorSlashesRequestProtoMsg {
  */
 export interface QueryValidatorSlashesRequestAmino {
   /** validator_address defines the validator address to query for. */
-  validator_address: string;
+  validator_address?: string;
   /** starting_height defines the optional starting height to query the slashes. */
-  starting_height: string;
+  starting_height?: string;
   /** starting_height defines the optional ending height to query the slashes. */
-  ending_height: string;
+  ending_height?: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
@@ -200,7 +200,7 @@ export interface QueryValidatorSlashesResponseProtoMsg {
  */
 export interface QueryValidatorSlashesResponseAmino {
   /** slashes defines the slashes the validator received. */
-  slashes: ValidatorSlashEventAmino[];
+  slashes?: ValidatorSlashEventAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
@@ -232,9 +232,9 @@ export interface QueryDelegationRewardsRequestProtoMsg {
  */
 export interface QueryDelegationRewardsRequestAmino {
   /** delegator_address defines the delegator address to query for. */
-  delegator_address: string;
+  delegator_address?: string;
   /** validator_address defines the validator address to query for. */
-  validator_address: string;
+  validator_address?: string;
 }
 /**
  * QueryDelegationRewardsRequest is the request type for the
@@ -262,7 +262,7 @@ export interface QueryDelegationRewardsResponseProtoMsg {
  */
 export interface QueryDelegationRewardsResponseAmino {
   /** rewards defines the rewards accrued by a delegation. */
-  rewards: DecCoinAmino[];
+  rewards?: DecCoinAmino[];
 }
 /**
  * QueryDelegationRewardsResponse is the response type for the
@@ -289,7 +289,7 @@ export interface QueryDelegationTotalRewardsRequestProtoMsg {
  */
 export interface QueryDelegationTotalRewardsRequestAmino {
   /** delegator_address defines the delegator address to query for. */
-  delegator_address: string;
+  delegator_address?: string;
 }
 /**
  * QueryDelegationTotalRewardsRequest is the request type for the
@@ -318,9 +318,9 @@ export interface QueryDelegationTotalRewardsResponseProtoMsg {
  */
 export interface QueryDelegationTotalRewardsResponseAmino {
   /** rewards defines all the rewards accrued by a delegator. */
-  rewards: DelegationDelegatorRewardAmino[];
+  rewards?: DelegationDelegatorRewardAmino[];
   /** total defines the sum of all the rewards. */
-  total: DecCoinAmino[];
+  total?: DecCoinAmino[];
 }
 /**
  * QueryDelegationTotalRewardsResponse is the response type for the
@@ -348,7 +348,7 @@ export interface QueryDelegatorValidatorsRequestProtoMsg {
  */
 export interface QueryDelegatorValidatorsRequestAmino {
   /** delegator_address defines the delegator address to query for. */
-  delegator_address: string;
+  delegator_address?: string;
 }
 /**
  * QueryDelegatorValidatorsRequest is the request type for the
@@ -375,7 +375,7 @@ export interface QueryDelegatorValidatorsResponseProtoMsg {
  */
 export interface QueryDelegatorValidatorsResponseAmino {
   /** validators defines the validators a delegator is delegating for. */
-  validators: string[];
+  validators?: string[];
 }
 /**
  * QueryDelegatorValidatorsResponse is the response type for the
@@ -402,7 +402,7 @@ export interface QueryDelegatorWithdrawAddressRequestProtoMsg {
  */
 export interface QueryDelegatorWithdrawAddressRequestAmino {
   /** delegator_address defines the delegator address to query for. */
-  delegator_address: string;
+  delegator_address?: string;
 }
 /**
  * QueryDelegatorWithdrawAddressRequest is the request type for the
@@ -429,7 +429,7 @@ export interface QueryDelegatorWithdrawAddressResponseProtoMsg {
  */
 export interface QueryDelegatorWithdrawAddressResponseAmino {
   /** withdraw_address defines the delegator address to query for. */
-  withdraw_address: string;
+  withdraw_address?: string;
 }
 /**
  * QueryDelegatorWithdrawAddressResponse is the response type for the
@@ -475,7 +475,7 @@ export interface QueryCommunityPoolResponseProtoMsg {
  */
 export interface QueryCommunityPoolResponseAmino {
   /** pool defines community pool's coins. */
-  pool: DecCoinAmino[];
+  pool?: DecCoinAmino[];
 }
 /**
  * QueryCommunityPoolResponse is the response type for the Query/CommunityPool

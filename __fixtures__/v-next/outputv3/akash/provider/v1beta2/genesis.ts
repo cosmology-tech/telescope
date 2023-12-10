@@ -12,7 +12,7 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the basic genesis state used by provider module */
 export interface GenesisStateAmino {
-  providers: ProviderAmino[];
+  providers?: ProviderAmino[];
 }
 /** GenesisState defines the basic genesis state used by provider module */
 export interface GenesisStateSDKType {

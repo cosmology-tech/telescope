@@ -34,7 +34,7 @@ export interface QueryProvidersResponseProtoMsg {
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponseAmino {
-  providers: ProviderAmino[];
+  providers?: ProviderAmino[];
   pagination?: PageResponseAmino;
 }
 export interface QueryProvidersResponseAminoMsg {
@@ -56,7 +56,7 @@ export interface QueryProviderRequestProtoMsg {
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequestAmino {
-  owner: string;
+  owner?: string;
 }
 export interface QueryProviderRequestAminoMsg {
   type: "/akash.provider.v1beta2.QueryProviderRequest";

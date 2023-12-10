@@ -22,8 +22,8 @@ export interface FeeTokenProtoMsg {
  * The pool ID must have osmo as one of its assets.
  */
 export interface FeeTokenAmino {
-  denom: string;
-  poolID: string;
+  denom?: string;
+  poolID?: string;
 }
 export interface FeeTokenAminoMsg {
   type: "osmosis/txfees/fee-token";

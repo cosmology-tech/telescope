@@ -29,7 +29,7 @@ export interface QueryEpochsInfoResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryEpochsInfoResponseAmino {
-  epochs: EpochInfoAmino[];
+  epochs?: EpochInfoAmino[];
   pagination?: PageResponseAmino;
 }
 export interface QueryEpochsInfoResponseAminoMsg {
@@ -48,7 +48,7 @@ export interface QueryCurrentEpochRequestProtoMsg {
   value: Uint8Array;
 }
 export interface QueryCurrentEpochRequestAmino {
-  identifier: string;
+  identifier?: string;
 }
 export interface QueryCurrentEpochRequestAminoMsg {
   type: "/evmos.epochs.v1.QueryCurrentEpochRequest";
@@ -65,7 +65,7 @@ export interface QueryCurrentEpochResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryCurrentEpochResponseAmino {
-  current_epoch: string;
+  current_epoch?: string;
 }
 export interface QueryCurrentEpochResponseAminoMsg {
   type: "/evmos.epochs.v1.QueryCurrentEpochResponse";

@@ -22,7 +22,7 @@ export interface ClientStateProtoMsg {
  */
 export interface ClientStateAmino {
   /** self chain ID */
-  chain_id: string;
+  chain_id?: string;
   /** self latest block height */
   height?: HeightAmino;
 }

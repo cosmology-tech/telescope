@@ -100,7 +100,7 @@ export interface SignatureDescriptorsProtoMsg {
 /** SignatureDescriptors wraps multiple SignatureDescriptor's. */
 export interface SignatureDescriptorsAmino {
   /** signatures are the signature descriptors */
-  signatures: SignatureDescriptorAmino[];
+  signatures?: SignatureDescriptorAmino[];
 }
 export interface SignatureDescriptorsAminoMsg {
   type: "cosmos-sdk/SignatureDescriptors";
@@ -146,7 +146,7 @@ export interface SignatureDescriptorAmino {
    * number of committed transactions signed by a given address. It is used to prevent
    * replay attacks.
    */
-  sequence: string;
+  sequence?: string;
 }
 export interface SignatureDescriptorAminoMsg {
   type: "cosmos-sdk/SignatureDescriptor";
@@ -204,9 +204,9 @@ export interface SignatureDescriptor_Data_SingleProtoMsg {
 /** Single is the signature data for a single signer */
 export interface SignatureDescriptor_Data_SingleAmino {
   /** mode is the signing mode of the single signer */
-  mode: SignMode;
+  mode?: SignMode;
   /** signature is the raw signature bytes */
-  signature: string;
+  signature?: string;
 }
 export interface SignatureDescriptor_Data_SingleAminoMsg {
   type: "cosmos-sdk/Single";
@@ -233,7 +233,7 @@ export interface SignatureDescriptor_Data_MultiAmino {
   /** bitarray specifies which keys within the multisig are signing */
   bitarray?: CompactBitArrayAmino;
   /** signatures is the signatures of the multi-signature */
-  signatures: SignatureDescriptor_DataAmino[];
+  signatures?: SignatureDescriptor_DataAmino[];
 }
 export interface SignatureDescriptor_Data_MultiAminoMsg {
   type: "cosmos-sdk/Multi";
@@ -541,7 +541,7 @@ export const SignatureDescriptor_Data_Single = {
   toAmino(message: SignatureDescriptor_Data_Single): SignatureDescriptor_Data_SingleAmino {
     const obj: any = {};
     obj.mode = message.mode;
-    obj.signature = base64FromBytes(message.signature);
+    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature));
     return obj;
   },
   fromAminoMsg(object: SignatureDescriptor_Data_SingleAminoMsg): SignatureDescriptor_Data_Single {

@@ -15,9 +15,9 @@ export interface GroupSpecProtoMsg {
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecAmino {
-  name: string;
+  name?: string;
   requirements?: PlacementRequirementsAmino;
-  resources: ResourceAmino[];
+  resources?: ResourceAmino[];
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {

@@ -109,9 +109,9 @@ export interface EnumValueProtoMsg {
 /** An enum value. */
 export interface EnumValueAmino {
   /** The fully qualified name of the enum type. */
-  type: string;
+  type?: string;
   /** The value of the enum. */
-  value: number;
+  value?: number;
 }
 export interface EnumValueAminoMsg {
   type: "/google.api.expr.v1beta1.EnumValue";
@@ -144,7 +144,7 @@ export interface ListValueProtoMsg {
  */
 export interface ListValueAmino {
   /** The ordered values in the list. */
-  values: ValueAmino[];
+  values?: ValueAmino[];
 }
 export interface ListValueAminoMsg {
   type: "/google.api.expr.v1beta1.ListValue";
@@ -191,7 +191,7 @@ export interface MapValueAmino {
    * CEL has fewer restrictions on keys, so a protobuf map represenation
    * cannot be used.
    */
-  entries: MapValue_EntryAmino[];
+  entries?: MapValue_EntryAmino[];
 }
 export interface MapValueAminoMsg {
   type: "/google.api.expr.v1beta1.MapValue";

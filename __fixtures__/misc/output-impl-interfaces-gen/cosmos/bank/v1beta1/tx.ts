@@ -34,20 +34,20 @@ export interface MsgInstantiateContract2ProtoMsg {
  */
 export interface MsgInstantiateContract2Amino {
   /** CodeID is the reference to the stored WASM code */
-  code_id: string;
+  code_id?: string;
   /** Label is optional metadata to be stored with a contract instance. */
-  label: string;
+  label?: string;
   /** Funds coins that are transferred to the contract on instantiation */
   funds: CoinAmino[];
   /** Salt is an arbitrary value provided by the sender. Size can be 1 to 64. */
-  salt: string;
+  salt?: string;
   /**
    * FixMsg include the msg value into the hash for the predictable address.
    * Default is false
    */
-  fix_msg: boolean;
+  fix_msg?: boolean;
   dont_omitempty_fix_msg: boolean;
-  a_list_of_bytes: string[];
+  a_list_of_bytes?: string[];
 }
 export interface MsgInstantiateContract2AminoMsg {
   type: "wasm/MsgInstantiateContract2";
@@ -251,7 +251,7 @@ export const MsgInstantiateContract2 = {
     } else {
       obj.funds = [];
     }
-    obj.salt = base64FromBytes(message.salt);
+    message.salt !== undefined && (obj.salt = base64FromBytes(message.salt));
     obj.fix_msg = message.fixMsg;
     obj.dont_omitempty_fix_msg = message.dontOmitemptyFixMsg;
     if (message.aListOfBytes) {

@@ -20,15 +20,15 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the ibc channel submodule's genesis state. */
 export interface GenesisStateAmino {
-  channels: IdentifiedChannelAmino[];
-  acknowledgements: PacketStateAmino[];
-  commitments: PacketStateAmino[];
-  receipts: PacketStateAmino[];
-  send_sequences: PacketSequenceAmino[];
-  recv_sequences: PacketSequenceAmino[];
-  ack_sequences: PacketSequenceAmino[];
+  channels?: IdentifiedChannelAmino[];
+  acknowledgements?: PacketStateAmino[];
+  commitments?: PacketStateAmino[];
+  receipts?: PacketStateAmino[];
+  send_sequences?: PacketSequenceAmino[];
+  recv_sequences?: PacketSequenceAmino[];
+  ack_sequences?: PacketSequenceAmino[];
   /** the sequence for the next generated channel identifier */
-  next_channel_sequence: string;
+  next_channel_sequence?: string;
 }
 /** GenesisState defines the ibc channel submodule's genesis state. */
 export interface GenesisStateSDKType {
@@ -59,9 +59,9 @@ export interface PacketSequenceProtoMsg {
  * next send and receive sequences.
  */
 export interface PacketSequenceAmino {
-  port_id: string;
-  channel_id: string;
-  sequence: string;
+  port_id?: string;
+  channel_id?: string;
+  sequence?: string;
 }
 /**
  * PacketSequence defines the genesis type necessary to retrieve and store

@@ -224,7 +224,7 @@ export const PageRequest = {
   },
   toAmino(message: PageRequest): PageRequestAmino {
     const obj: any = {};
-    obj.key = base64FromBytes(message.key);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
     obj.offset = message.offset ? message.offset.toString() : undefined;
     obj.limit = message.limit ? message.limit.toString() : undefined;
     obj.count_total = message.countTotal;
@@ -334,7 +334,7 @@ export const PageResponse = {
   },
   toAmino(message: PageResponse): PageResponseAmino {
     const obj: any = {};
-    obj.next_key = base64FromBytes(message.nextKey);
+    message.nextKey !== undefined && (obj.next_key = base64FromBytes(message.nextKey));
     obj.total = message.total ? message.total.toString() : undefined;
     return obj;
   },

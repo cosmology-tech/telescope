@@ -21,9 +21,9 @@ export interface SetSuperfluidAssetsProposalProtoMsg {
  * assets
  */
 export interface SetSuperfluidAssetsProposalAmino {
-  title: string;
-  description: string;
-  assets: SuperfluidAssetAmino[];
+  title?: string;
+  description?: string;
+  assets?: SuperfluidAssetAmino[];
 }
 /**
  * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid
@@ -54,9 +54,9 @@ export interface RemoveSuperfluidAssetsProposalProtoMsg {
  * assets by denom
  */
 export interface RemoveSuperfluidAssetsProposalAmino {
-  title: string;
-  description: string;
-  superfluid_asset_denoms: string[];
+  title?: string;
+  description?: string;
+  superfluid_asset_denoms?: string[];
 }
 /**
  * RemoveSuperfluidAssetsProposal is a gov Content type to remove the superfluid
@@ -88,10 +88,10 @@ export interface UpdateUnpoolWhiteListProposalProtoMsg {
  * allowed list of pool ids.
  */
 export interface UpdateUnpoolWhiteListProposalAmino {
-  title: string;
-  description: string;
-  ids: string[];
-  is_overwrite: boolean;
+  title?: string;
+  description?: string;
+  ids?: string[];
+  is_overwrite?: boolean;
 }
 /**
  * UpdateUnpoolWhiteListProposal is a gov Content type to update the

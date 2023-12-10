@@ -12,7 +12,7 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState contains a set of fee allowances, persisted from the store */
 export interface GenesisStateAmino {
-  allowances: GrantAmino[];
+  allowances?: GrantAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "cosmos-sdk/GenesisState";

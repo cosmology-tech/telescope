@@ -27,7 +27,7 @@ export interface ControlAmino {
    * The service control environment to use. If empty, no control plane
    * feature (like quota and billing) will be enabled.
    */
-  environment: string;
+  environment?: string;
 }
 export interface ControlAminoMsg {
   type: "/google.api.Control";

@@ -23,16 +23,16 @@ export interface GenesisStateProtoMsg {
 /** GenesisState defines the ibc client submodule's genesis state. */
 export interface GenesisStateAmino {
   /** client states with their corresponding identifiers */
-  clients: IdentifiedClientStateAmino[];
+  clients?: IdentifiedClientStateAmino[];
   /** consensus states from each client */
-  clients_consensus: ClientConsensusStatesAmino[];
+  clients_consensus?: ClientConsensusStatesAmino[];
   /** metadata from each client */
-  clients_metadata: IdentifiedGenesisMetadataAmino[];
+  clients_metadata?: IdentifiedGenesisMetadataAmino[];
   params?: ParamsAmino;
   /** create localhost on initialization */
-  create_localhost: boolean;
+  create_localhost?: boolean;
   /** the sequence for the next generated client identifier */
-  next_client_sequence: string;
+  next_client_sequence?: string;
 }
 /** GenesisState defines the ibc client submodule's genesis state. */
 export interface GenesisStateSDKType {
@@ -63,9 +63,9 @@ export interface GenesisMetadataProtoMsg {
  */
 export interface GenesisMetadataAmino {
   /** store key of metadata without clientID-prefix */
-  key: string;
+  key?: string;
   /** metadata value */
-  value: string;
+  value?: string;
 }
 /**
  * GenesisMetadata defines the genesis type for metadata that clients may return
@@ -92,8 +92,8 @@ export interface IdentifiedGenesisMetadataProtoMsg {
  * client id.
  */
 export interface IdentifiedGenesisMetadataAmino {
-  client_id: string;
-  client_metadata: GenesisMetadataAmino[];
+  client_id?: string;
+  client_metadata?: GenesisMetadataAmino[];
 }
 /**
  * IdentifiedGenesisMetadata has the client metadata with the corresponding
@@ -368,8 +368,8 @@ export const GenesisMetadata = {
   },
   toAmino(message: GenesisMetadata, useInterfaces: boolean = true): GenesisMetadataAmino {
     const obj: any = {};
-    obj.key = base64FromBytes(message.key);
-    obj.value = base64FromBytes(message.value);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value));
     return obj;
   },
   fromProtoMsg(message: GenesisMetadataProtoMsg, useInterfaces: boolean = true): GenesisMetadata {

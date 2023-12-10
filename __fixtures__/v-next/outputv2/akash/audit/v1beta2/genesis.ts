@@ -12,7 +12,7 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the basic genesis state used by audit module */
 export interface GenesisStateAmino {
-  attributes: AuditedAttributesAmino[];
+  attributes?: AuditedAttributesAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "/akash.audit.v1beta2.GenesisState";

@@ -21,8 +21,8 @@ export interface LegacyAminoPubKeyProtoMsg {
  * it uses legacy amino address rules.
  */
 export interface LegacyAminoPubKeyAmino {
-  threshold: number;
-  public_keys: AnyAmino[];
+  threshold?: number;
+  public_keys?: AnyAmino[];
 }
 /**
  * LegacyAminoPubKey specifies a public key type

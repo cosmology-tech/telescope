@@ -263,17 +263,17 @@ export interface TypeProtoMsg {
 /** A protocol buffer message type. */
 export interface TypeAmino {
   /** The fully qualified message name. */
-  name: string;
+  name?: string;
   /** The list of fields. */
-  fields: FieldAmino[];
+  fields?: FieldAmino[];
   /** The list of types appearing in `oneof` definitions in this type. */
-  oneofs: string[];
+  oneofs?: string[];
   /** The protocol buffer options. */
-  options: OptionAmino[];
+  options?: OptionAmino[];
   /** The source context. */
   source_context?: SourceContextAmino;
   /** The source syntax. */
-  syntax: Syntax;
+  syntax?: Syntax;
 }
 export interface TypeAminoMsg {
   type: "/google.protobuf.Type";
@@ -324,31 +324,31 @@ export interface FieldProtoMsg {
 /** A single field of a message type. */
 export interface FieldAmino {
   /** The field type. */
-  kind: Field_Kind;
+  kind?: Field_Kind;
   /** The field cardinality. */
-  cardinality: Field_Cardinality;
+  cardinality?: Field_Cardinality;
   /** The field number. */
-  number: number;
+  number?: number;
   /** The field name. */
-  name: string;
+  name?: string;
   /**
    * The field type URL, without the scheme, for message or enumeration
    * types. Example: `"type.googleapis.com/google.protobuf.Timestamp"`.
    */
-  type_url: string;
+  type_url?: string;
   /**
    * The index of the field type in `Type.oneofs`, for message or enumeration
    * types. The first type has index 1; zero means the type is not in the list.
    */
-  oneof_index: number;
+  oneof_index?: number;
   /** Whether to use alternative packed wire representation. */
-  packed: boolean;
+  packed?: boolean;
   /** The protocol buffer options. */
-  options: OptionAmino[];
+  options?: OptionAmino[];
   /** The field JSON name. */
-  json_name: string;
+  json_name?: string;
   /** The string value of the default value of this field. Proto2 syntax only. */
-  default_value: string;
+  default_value?: string;
 }
 export interface FieldAminoMsg {
   type: "/google.protobuf.Field";
@@ -387,15 +387,15 @@ export interface EnumProtoMsg {
 /** Enum type definition. */
 export interface EnumAmino {
   /** Enum type name. */
-  name: string;
+  name?: string;
   /** Enum value definitions. */
-  enumvalue: EnumValueAmino[];
+  enumvalue?: EnumValueAmino[];
   /** Protocol buffer options. */
-  options: OptionAmino[];
+  options?: OptionAmino[];
   /** The source context. */
   source_context?: SourceContextAmino;
   /** The source syntax. */
-  syntax: Syntax;
+  syntax?: Syntax;
 }
 export interface EnumAminoMsg {
   type: "/google.protobuf.Enum";
@@ -425,11 +425,11 @@ export interface EnumValueProtoMsg {
 /** Enum value definition. */
 export interface EnumValueAmino {
   /** Enum value name. */
-  name: string;
+  name?: string;
   /** Enum value number. */
-  number: number;
+  number?: number;
   /** Protocol buffer options. */
-  options: OptionAmino[];
+  options?: OptionAmino[];
 }
 export interface EnumValueAminoMsg {
   type: "/google.protobuf.EnumValue";
@@ -476,7 +476,7 @@ export interface OptionAmino {
    * For custom options, it should be the fully-qualified name. For example,
    * `"google.api.http"`.
    */
-  name: string;
+  name?: string;
   /**
    * The option's value packed in an Any message. If the value is a primitive,
    * the corresponding wrapper type defined in google/protobuf/wrappers.proto

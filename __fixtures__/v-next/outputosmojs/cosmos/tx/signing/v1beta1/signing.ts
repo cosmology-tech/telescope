@@ -595,7 +595,7 @@ export const SignatureDescriptor_Data_Single = {
   toAmino(message: SignatureDescriptor_Data_Single): SignatureDescriptor_Data_SingleAmino {
     const obj: any = {};
     obj.mode = message.mode;
-    obj.signature = base64FromBytes(message.signature);
+    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature));
     return obj;
   },
   fromAminoMsg(object: SignatureDescriptor_Data_SingleAminoMsg): SignatureDescriptor_Data_Single {

@@ -363,7 +363,7 @@ export const QueryEpochProvisionsResponse = {
   },
   toAmino(message: QueryEpochProvisionsResponse): QueryEpochProvisionsResponseAmino {
     const obj: any = {};
-    obj.epoch_provisions = base64FromBytes(message.epochProvisions);
+    message.epochProvisions !== undefined && (obj.epoch_provisions = base64FromBytes(message.epochProvisions));
     return obj;
   },
   fromAminoMsg(object: QueryEpochProvisionsResponseAminoMsg): QueryEpochProvisionsResponse {

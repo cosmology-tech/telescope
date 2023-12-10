@@ -23,11 +23,11 @@ export interface MsgCreateVestingAccountProtoMsg {
  * account.
  */
 export interface MsgCreateVestingAccountAmino {
-  from_address: string;
-  to_address: string;
-  amount: CoinAmino[];
-  end_time: string;
-  delayed: boolean;
+  from_address?: string;
+  to_address?: string;
+  amount?: CoinAmino[];
+  end_time?: string;
+  delayed?: boolean;
 }
 /**
  * MsgCreateVestingAccount defines a message that enables creating a vesting
@@ -68,9 +68,9 @@ export interface MsgCreatePermanentLockedAccountProtoMsg {
  * locked account.
  */
 export interface MsgCreatePermanentLockedAccountAmino {
-  from_address: string;
-  to_address: string;
-  amount: CoinAmino[];
+  from_address?: string;
+  to_address?: string;
+  amount?: CoinAmino[];
 }
 /**
  * MsgCreatePermanentLockedAccount defines a message that enables creating a permanent
@@ -110,10 +110,10 @@ export interface MsgCreatePeriodicVestingAccountProtoMsg {
  * account.
  */
 export interface MsgCreatePeriodicVestingAccountAmino {
-  from_address: string;
-  to_address: string;
-  start_time: string;
-  vesting_periods: PeriodAmino[];
+  from_address?: string;
+  to_address?: string;
+  start_time?: string;
+  vesting_periods?: PeriodAmino[];
 }
 /**
  * MsgCreateVestingAccount defines a message that enables creating a vesting

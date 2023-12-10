@@ -40,7 +40,7 @@ export interface ExplainAmino {
    * The field value_index is an index in the values list.
    * Separating values from steps is needed to remove redundant values.
    */
-  values: ValueAmino[];
+  values?: ValueAmino[];
   /**
    * List of steps.
    * 
@@ -48,7 +48,7 @@ export interface ExplainAmino {
    * instances. The order of such ExprStep instances matches the order of
    * elements returned by Comprehension.iter_range.
    */
-  expr_steps: Explain_ExprStepAmino[];
+  expr_steps?: Explain_ExprStepAmino[];
 }
 /**
  * Values of intermediate expressions produced when evaluating expression.
@@ -73,9 +73,9 @@ export interface Explain_ExprStepProtoMsg {
 /** ID and value index of one step. */
 export interface Explain_ExprStepAmino {
   /** ID of corresponding Expr node. */
-  id: string;
+  id?: string;
   /** Index of the value in the values list. */
-  value_index: number;
+  value_index?: number;
 }
 /** ID and value index of one step. */
 export interface Explain_ExprStepSDKType {

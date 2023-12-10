@@ -416,7 +416,7 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
     obj.address = message.address;
     obj.sign_doc = message.signDoc ? SignDocDirectAux.toAmino(message.signDoc) : undefined;
     obj.mode = message.mode;
-    obj.sig = base64FromBytes(message.sig);
+    message.sig !== undefined && (obj.sig = base64FromBytes(message.sig));
     return obj;
   },
   fromAminoMsg(object: AuxSignerDataAminoMsg): AuxSignerData {
@@ -876,7 +876,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
   toAmino(message: QueryRawContractStateRequest): QueryRawContractStateRequestAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.query_data = base64FromBytes(message.queryData);
+    message.queryData !== undefined && (obj.query_data = base64FromBytes(message.queryData));
     return obj;
   },
   fromAminoMsg(object: QueryRawContractStateRequestAminoMsg): QueryRawContractStateRequest {

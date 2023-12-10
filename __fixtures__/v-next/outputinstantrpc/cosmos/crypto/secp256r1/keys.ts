@@ -97,7 +97,7 @@ export const PubKey = {
   },
   toAmino(message: PubKey): PubKeyAmino {
     const obj: any = {};
-    obj.key = base64FromBytes(message.key);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
     return obj;
   },
   fromAminoMsg(object: PubKeyAminoMsg): PubKey {
@@ -189,7 +189,7 @@ export const PrivKey = {
   },
   toAmino(message: PrivKey): PrivKeyAmino {
     const obj: any = {};
-    obj.secret = base64FromBytes(message.secret);
+    message.secret !== undefined && (obj.secret = base64FromBytes(message.secret));
     return obj;
   },
   fromAminoMsg(object: PrivKeyAminoMsg): PrivKey {

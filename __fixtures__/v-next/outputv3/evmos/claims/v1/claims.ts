@@ -79,11 +79,11 @@ export interface ClaimProtoMsg {
  */
 export interface ClaimAmino {
   /** action enum */
-  action: Action;
+  action?: Action;
   /** true if the action has been completed */
-  completed: boolean;
+  completed?: boolean;
   /** claimable token amount for the action. Zero if completed */
-  claimable_amount: string;
+  claimable_amount?: string;
 }
 /**
  * Claim defines the action, completed flag and the remaining claimable amount
@@ -110,11 +110,11 @@ export interface ClaimsRecordAddressProtoMsg {
 /** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
 export interface ClaimsRecordAddressAmino {
   /** bech32 or hex address of claim user */
-  address: string;
+  address?: string;
   /** total initial claimable amount for the user */
-  initial_claimable_amount: string;
+  initial_claimable_amount?: string;
   /** slice of the available actions completed */
-  actions_completed: boolean[];
+  actions_completed?: boolean[];
 }
 /** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
 export interface ClaimsRecordAddressSDKType {
@@ -142,9 +142,9 @@ export interface ClaimsRecordProtoMsg {
  */
 export interface ClaimsRecordAmino {
   /** total initial claimable amount for the user */
-  initial_claimable_amount: string;
+  initial_claimable_amount?: string;
   /** slice of the available actions completed */
-  actions_completed: boolean[];
+  actions_completed?: boolean[];
 }
 /**
  * ClaimsRecord defines the initial claimable airdrop amount and the list of

@@ -50,13 +50,13 @@ export interface UsageAmino {
    * "serviceusage.googleapis.com/tos/universal". Additional ToS can be
    * included based on the business needs.
    */
-  requirements: string[];
+  requirements?: string[];
   /**
    * A list of usage rules that apply to individual API methods.
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: UsageRuleAmino[];
+  rules?: UsageRuleAmino[];
   /**
    * The full resource name of a channel used for sending notifications to the
    * service producer.
@@ -67,7 +67,7 @@ export interface UsageAmino {
    * of a Cloud Pub/Sub topic that uses the Cloud Pub/Sub topic name format
    * documented in https://cloud.google.com/pubsub/docs/overview.
    */
-  producer_notification_channel: string;
+  producer_notification_channel?: string;
 }
 /** Configuration controlling usage of a service. */
 export interface UsageSDKType {
@@ -161,19 +161,19 @@ export interface UsageRuleAmino {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /**
    * If true, the selected method allows unregistered calls, e.g. calls
    * that don't identify any user or application.
    */
-  allow_unregistered_calls: boolean;
+  allow_unregistered_calls?: boolean;
   /**
    * If true, the selected method should skip service control and the control
    * plane features, such as quota and billing, will not be available.
    * This flag is used by Google Cloud Endpoints to bypass checks for internal
    * methods, such as service health check methods.
    */
-  skip_service_control: boolean;
+  skip_service_control?: boolean;
 }
 /**
  * Usage configuration rules for the service.

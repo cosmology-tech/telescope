@@ -15,8 +15,8 @@ export interface LogEntry_LabelsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface LogEntry_LabelsEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface LogEntry_LabelsEntryAminoMsg {
   type: string;
@@ -101,7 +101,7 @@ export interface LogEntryAmino {
    * Required. The log to which this log entry belongs. Examples: `"syslog"`,
    * `"book_log"`.
    */
-  name: string;
+  name?: string;
   /**
    * The time the event described by the log entry occurred. If
    * omitted, defaults to operation start time.
@@ -111,7 +111,7 @@ export interface LogEntryAmino {
    * The severity of the log entry. The default value is
    * `LogSeverity.DEFAULT`.
    */
-  severity: LogSeverity;
+  severity?: LogSeverity;
   /**
    * Optional. Information about the HTTP request associated with this
    * log entry, if applicable.
@@ -123,17 +123,17 @@ export interface LogEntryAmino {
    * relative to `//tracing.googleapis.com`. Example:
    * `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
    */
-  trace: string;
+  trace?: string;
   /**
    * A unique ID for the log entry used for deduplication. If omitted,
    * the implementation will generate one based on operation_id.
    */
-  insert_id: string;
+  insert_id?: string;
   /**
    * A set of user-defined (key, value) data that provides additional
    * information about the log entry.
    */
-  labels: {
+  labels?: {
     [key: string]: string;
   };
   /**
@@ -215,17 +215,17 @@ export interface LogEntryOperationAmino {
    * Optional. An arbitrary operation identifier. Log entries with the
    * same identifier are assumed to be part of the same operation.
    */
-  id: string;
+  id?: string;
   /**
    * Optional. An arbitrary producer identifier. The combination of
    * `id` and `producer` must be globally unique.  Examples for `producer`:
    * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
    */
-  producer: string;
+  producer?: string;
   /** Optional. Set this to True if this is the first log entry in the operation. */
-  first: boolean;
+  first?: boolean;
   /** Optional. Set this to True if this is the last log entry in the operation. */
-  last: boolean;
+  last?: boolean;
 }
 export interface LogEntryOperationAminoMsg {
   type: "/google.api.servicecontrol.v1.LogEntryOperation";
@@ -279,12 +279,12 @@ export interface LogEntrySourceLocationAmino {
    * Optional. Source file name. Depending on the runtime environment, this
    * might be a simple name or a fully-qualified name.
    */
-  file: string;
+  file?: string;
   /**
    * Optional. Line within the source file. 1-based; 0 indicates no line number
    * available.
    */
-  line: string;
+  line?: string;
   /**
    * Optional. Human-readable name of the function or method being invoked, with
    * optional context such as the class or package name. This information may be
@@ -293,7 +293,7 @@ export interface LogEntrySourceLocationAmino {
    * `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
    * (Python).
    */
-  function: string;
+  function?: string;
 }
 export interface LogEntrySourceLocationAminoMsg {
   type: "/google.api.servicecontrol.v1.LogEntrySourceLocation";

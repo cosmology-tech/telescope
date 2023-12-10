@@ -66,7 +66,7 @@ export interface QueryAppliedPlanRequestProtoMsg {
  */
 export interface QueryAppliedPlanRequestAmino {
   /** name is the name of the applied plan to query for. */
-  name: string;
+  name?: string;
 }
 /**
  * QueryCurrentPlanRequest is the request type for the Query/AppliedPlan RPC
@@ -93,7 +93,7 @@ export interface QueryAppliedPlanResponseProtoMsg {
  */
 export interface QueryAppliedPlanResponseAmino {
   /** height is the block height at which the plan was applied. */
-  height: string;
+  height?: string;
 }
 /**
  * QueryAppliedPlanResponse is the response type for the Query/AppliedPlan RPC
@@ -128,7 +128,7 @@ export interface QueryUpgradedConsensusStateRequestAmino {
    * last height of the current chain must be sent in request
    * as this is the height under which next consensus state is stored
    */
-  last_height: string;
+  last_height?: string;
 }
 /**
  * QueryUpgradedConsensusStateRequest is the request type for the Query/UpgradedConsensusState
@@ -158,7 +158,7 @@ export interface QueryUpgradedConsensusStateResponseProtoMsg {
 /** @deprecated */
 export interface QueryUpgradedConsensusStateResponseAmino {
   /** Since: cosmos-sdk 0.43 */
-  upgraded_consensus_state: string;
+  upgraded_consensus_state?: string;
 }
 /**
  * QueryUpgradedConsensusStateResponse is the response type for the Query/UpgradedConsensusState
@@ -198,7 +198,7 @@ export interface QueryModuleVersionsRequestAmino {
    * consensus version from state. Leaving this empty will
    * fetch the full list of module versions from state
    */
-  module_name: string;
+  module_name?: string;
 }
 /**
  * QueryModuleVersionsRequest is the request type for the Query/ModuleVersions
@@ -231,7 +231,7 @@ export interface QueryModuleVersionsResponseProtoMsg {
  */
 export interface QueryModuleVersionsResponseAmino {
   /** module_versions is a list of module names with their consensus versions. */
-  module_versions: ModuleVersionAmino[];
+  module_versions?: ModuleVersionAmino[];
 }
 /**
  * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions
@@ -282,7 +282,7 @@ export interface QueryAuthorityResponseProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface QueryAuthorityResponseAmino {
-  address: string;
+  address?: string;
 }
 /**
  * QueryAuthorityResponse is the response type for Query/Authority
@@ -739,7 +739,7 @@ export const QueryUpgradedConsensusStateResponse = {
   },
   toAmino(message: QueryUpgradedConsensusStateResponse, useInterfaces: boolean = true): QueryUpgradedConsensusStateResponseAmino {
     const obj: any = {};
-    obj.upgraded_consensus_state = base64FromBytes(message.upgradedConsensusState);
+    message.upgradedConsensusState !== undefined && (obj.upgraded_consensus_state = base64FromBytes(message.upgradedConsensusState));
     return obj;
   },
   fromProtoMsg(message: QueryUpgradedConsensusStateResponseProtoMsg, useInterfaces: boolean = true): QueryUpgradedConsensusStateResponse {

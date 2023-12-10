@@ -47,7 +47,7 @@ export interface QueryDenomAuthorityMetadataRequestProtoMsg {
  * DenomAuthorityMetadata gRPC query.
  */
 export interface QueryDenomAuthorityMetadataRequestAmino {
-  denom: string;
+  denom?: string;
 }
 /**
  * QueryDenomAuthorityMetadataRequest defines the request structure for the
@@ -97,7 +97,7 @@ export interface QueryDenomsFromCreatorRequestProtoMsg {
  * DenomsFromCreator gRPC query.
  */
 export interface QueryDenomsFromCreatorRequestAmino {
-  creator: string;
+  creator?: string;
 }
 /**
  * QueryDenomsFromCreatorRequest defines the request structure for the
@@ -122,7 +122,7 @@ export interface QueryDenomsFromCreatorResponseProtoMsg {
  * DenomsFromCreator gRPC query.
  */
 export interface QueryDenomsFromCreatorResponseAmino {
-  denoms: string[];
+  denoms?: string[];
 }
 /**
  * QueryDenomsFromCreatorRequest defines the response structure for the

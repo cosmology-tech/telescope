@@ -65,14 +65,14 @@ export interface ClaimRecordProtoMsg {
 /** A Claim Records is the metadata of claim data per address */
 export interface ClaimRecordAmino {
   /** address of claim user */
-  address: string;
+  address?: string;
   /** total initial claimable amount for the user */
-  initial_claimable_amount: CoinAmino[];
+  initial_claimable_amount?: CoinAmino[];
   /**
    * true if action is completed
    * index of bool in array refers to action enum #
    */
-  action_completed: boolean[];
+  action_completed?: boolean[];
 }
 /** A Claim Records is the metadata of claim data per address */
 export interface ClaimRecordSDKType {

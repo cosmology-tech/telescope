@@ -68,13 +68,13 @@ export interface TokenPairProtoMsg {
  */
 export interface TokenPairAmino {
   /** address of ERC20 contract token */
-  erc20_address: string;
+  erc20_address?: string;
   /** cosmos base denomination to be mapped to */
-  denom: string;
+  denom?: string;
   /** shows token mapping enable status */
-  enabled: boolean;
+  enabled?: boolean;
   /** ERC20 owner address ENUM (0 invalid, 1 ModuleAccount, 2 external address) */
-  contract_owner: Owner;
+  contract_owner?: Owner;
 }
 export interface TokenPairAminoMsg {
   type: "/evmos.erc20.v1.TokenPair";
@@ -112,9 +112,9 @@ export interface RegisterCoinProposalProtoMsg {
  */
 export interface RegisterCoinProposalAmino {
   /** title of the proposal */
-  title: string;
+  title?: string;
   /** proposal description */
-  description: string;
+  description?: string;
   /** metadata of the native Cosmos coin */
   metadata?: MetadataAmino;
 }
@@ -153,11 +153,11 @@ export interface RegisterERC20ProposalProtoMsg {
  */
 export interface RegisterERC20ProposalAmino {
   /** title of the proposal */
-  title: string;
+  title?: string;
   /** proposal description */
-  description: string;
+  description?: string;
   /** contract address of ERC20 token */
-  erc20address: string;
+  erc20address?: string;
 }
 export interface RegisterERC20ProposalAminoMsg {
   type: "/evmos.erc20.v1.RegisterERC20Proposal";
@@ -197,14 +197,14 @@ export interface ToggleTokenConversionProposalProtoMsg {
  */
 export interface ToggleTokenConversionProposalAmino {
   /** title of the proposal */
-  title: string;
+  title?: string;
   /** proposal description */
-  description: string;
+  description?: string;
   /**
    * token identifier can be either the hex contract address of the ERC20 or the
    * Cosmos base denomination
    */
-  token: string;
+  token?: string;
 }
 export interface ToggleTokenConversionProposalAminoMsg {
   type: "/evmos.erc20.v1.ToggleTokenConversionProposal";

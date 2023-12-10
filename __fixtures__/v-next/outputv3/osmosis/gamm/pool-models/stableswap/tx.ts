@@ -18,12 +18,12 @@ export interface MsgCreateStableswapPoolProtoMsg {
 }
 /** ===================== MsgCreatePool */
 export interface MsgCreateStableswapPoolAmino {
-  sender: string;
+  sender?: string;
   pool_params?: PoolParamsAmino;
-  initial_pool_liquidity: CoinAmino[];
-  scaling_factors: string[];
-  future_pool_governor: string;
-  scaling_factor_controller: string;
+  initial_pool_liquidity?: CoinAmino[];
+  scaling_factors?: string[];
+  future_pool_governor?: string;
+  scaling_factor_controller?: string;
 }
 /** ===================== MsgCreatePool */
 export interface MsgCreateStableswapPoolSDKType {
@@ -44,7 +44,7 @@ export interface MsgCreateStableswapPoolResponseProtoMsg {
 }
 /** Returns a poolID with custom poolName. */
 export interface MsgCreateStableswapPoolResponseAmino {
-  pool_id: string;
+  pool_id?: string;
 }
 /** Returns a poolID with custom poolName. */
 export interface MsgCreateStableswapPoolResponseSDKType {
@@ -68,9 +68,9 @@ export interface MsgStableSwapAdjustScalingFactorsProtoMsg {
  * succeed. Adjusts stableswap scaling factors.
  */
 export interface MsgStableSwapAdjustScalingFactorsAmino {
-  sender: string;
-  pool_id: string;
-  scaling_factors: string[];
+  sender?: string;
+  pool_id?: string;
+  scaling_factors?: string[];
 }
 /**
  * Sender must be the pool's scaling_factor_governor in order for the tx to

@@ -142,7 +142,7 @@ export interface MonitoringAmino {
    * resource type. A monitored resource and metric pair may only be used once
    * in the Monitoring configuration.
    */
-  producer_destinations: Monitoring_MonitoringDestinationAmino[];
+  producer_destinations?: Monitoring_MonitoringDestinationAmino[];
   /**
    * Monitoring configurations for sending metrics to the consumer project.
    * There can be multiple consumer destinations. A monitored resource type may
@@ -151,7 +151,7 @@ export interface MonitoringAmino {
    * resource type. A monitored resource and metric pair may only be used once
    * in the Monitoring configuration.
    */
-  consumer_destinations: Monitoring_MonitoringDestinationAmino[];
+  consumer_destinations?: Monitoring_MonitoringDestinationAmino[];
 }
 /**
  * Monitoring configuration of the service.
@@ -240,12 +240,12 @@ export interface Monitoring_MonitoringDestinationAmino {
    * The monitored resource type. The type must be defined in
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
-  monitored_resource: string;
+  monitored_resource?: string;
   /**
    * Types of the metrics to report to this monitoring destination.
    * Each type must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
-  metrics: string[];
+  metrics?: string[];
 }
 /**
  * Configuration of a specific monitoring destination (the producer project

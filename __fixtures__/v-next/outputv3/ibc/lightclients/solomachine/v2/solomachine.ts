@@ -124,15 +124,15 @@ export interface ClientStateProtoMsg {
  */
 export interface ClientStateAmino {
   /** latest sequence of the client state */
-  sequence: string;
+  sequence?: string;
   /** frozen sequence of the solo machine */
-  is_frozen: boolean;
+  is_frozen?: boolean;
   consensus_state?: ConsensusStateAmino;
   /**
    * when set to true, will allow governance to update a solo machine client.
    * The client will be unfrozen if it is frozen.
    */
-  allow_update_after_proposal: boolean;
+  allow_update_after_proposal?: boolean;
 }
 /**
  * ClientState defines a solo machine client that tracks the current consensus
@@ -177,8 +177,8 @@ export interface ConsensusStateAmino {
    * machine clients (potentially on different chains) without being considered
    * misbehaviour.
    */
-  diversifier: string;
-  timestamp: string;
+  diversifier?: string;
+  timestamp?: string;
 }
 /**
  * ConsensusState defines a solo machine consensus state. The sequence of a
@@ -206,11 +206,11 @@ export interface HeaderProtoMsg {
 /** Header defines a solo machine consensus header */
 export interface HeaderAmino {
   /** sequence to update solo machine public key at */
-  sequence: string;
-  timestamp: string;
-  signature: string;
+  sequence?: string;
+  timestamp?: string;
+  signature?: string;
   new_public_key?: AnyAmino;
-  new_diversifier: string;
+  new_diversifier?: string;
 }
 /** Header defines a solo machine consensus header */
 export interface HeaderSDKType {
@@ -239,8 +239,8 @@ export interface MisbehaviourProtoMsg {
  * of a sequence and two signatures over different messages at that sequence.
  */
 export interface MisbehaviourAmino {
-  client_id: string;
-  sequence: string;
+  client_id?: string;
+  sequence?: string;
   signature_one?: SignatureAndDataAmino;
   signature_two?: SignatureAndDataAmino;
 }
@@ -273,10 +273,10 @@ export interface SignatureAndDataProtoMsg {
  * signature.
  */
 export interface SignatureAndDataAmino {
-  signature: string;
-  data_type: DataType;
-  data: string;
-  timestamp: string;
+  signature?: string;
+  data_type?: DataType;
+  data?: string;
+  timestamp?: string;
 }
 /**
  * SignatureAndData contains a signature and the data signed over to create that
@@ -305,8 +305,8 @@ export interface TimestampedSignatureDataProtoMsg {
  * signature.
  */
 export interface TimestampedSignatureDataAmino {
-  signature_data: string;
-  timestamp: string;
+  signature_data?: string;
+  timestamp?: string;
 }
 /**
  * TimestampedSignatureData contains the signature data and the timestamp of the
@@ -332,13 +332,13 @@ export interface SignBytesProtoMsg {
 }
 /** SignBytes defines the signed bytes used for signature verification. */
 export interface SignBytesAmino {
-  sequence: string;
-  timestamp: string;
-  diversifier: string;
+  sequence?: string;
+  timestamp?: string;
+  diversifier?: string;
   /** type of the data used */
-  data_type: DataType;
+  data_type?: DataType;
   /** marshaled data */
-  data: string;
+  data?: string;
 }
 /** SignBytes defines the signed bytes used for signature verification. */
 export interface SignBytesSDKType {
@@ -364,7 +364,7 @@ export interface HeaderDataAmino {
   /** header public key */
   new_pub_key?: AnyAmino;
   /** header diversifier */
-  new_diversifier: string;
+  new_diversifier?: string;
 }
 /** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderDataSDKType {
@@ -382,7 +382,7 @@ export interface ClientStateDataProtoMsg {
 }
 /** ClientStateData returns the SignBytes data for client state verification. */
 export interface ClientStateDataAmino {
-  path: string;
+  path?: string;
   client_state?: AnyAmino;
 }
 /** ClientStateData returns the SignBytes data for client state verification. */
@@ -407,7 +407,7 @@ export interface ConsensusStateDataProtoMsg {
  * verification.
  */
 export interface ConsensusStateDataAmino {
-  path: string;
+  path?: string;
   consensus_state?: AnyAmino;
 }
 /**
@@ -435,7 +435,7 @@ export interface ConnectionStateDataProtoMsg {
  * verification.
  */
 export interface ConnectionStateDataAmino {
-  path: string;
+  path?: string;
   connection?: ConnectionEndAmino;
 }
 /**
@@ -463,7 +463,7 @@ export interface ChannelStateDataProtoMsg {
  * verification.
  */
 export interface ChannelStateDataAmino {
-  path: string;
+  path?: string;
   channel?: ChannelAmino;
 }
 /**
@@ -491,8 +491,8 @@ export interface PacketCommitmentDataProtoMsg {
  * verification.
  */
 export interface PacketCommitmentDataAmino {
-  path: string;
-  commitment: string;
+  path?: string;
+  commitment?: string;
 }
 /**
  * PacketCommitmentData returns the SignBytes data for packet commitment
@@ -519,8 +519,8 @@ export interface PacketAcknowledgementDataProtoMsg {
  * verification.
  */
 export interface PacketAcknowledgementDataAmino {
-  path: string;
-  acknowledgement: string;
+  path?: string;
+  acknowledgement?: string;
 }
 /**
  * PacketAcknowledgementData returns the SignBytes data for acknowledgement
@@ -546,7 +546,7 @@ export interface PacketReceiptAbsenceDataProtoMsg {
  * packet receipt absence verification.
  */
 export interface PacketReceiptAbsenceDataAmino {
-  path: string;
+  path?: string;
 }
 /**
  * PacketReceiptAbsenceData returns the SignBytes data for
@@ -572,8 +572,8 @@ export interface NextSequenceRecvDataProtoMsg {
  * sequence to be received.
  */
 export interface NextSequenceRecvDataAmino {
-  path: string;
-  next_seq_recv: string;
+  path?: string;
+  next_seq_recv?: string;
 }
 /**
  * NextSequenceRecvData returns the SignBytes data for verification of the next
@@ -942,7 +942,7 @@ export const Header = {
     const obj: any = {};
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
-    obj.signature = base64FromBytes(message.signature);
+    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature));
     obj.new_public_key = message.newPublicKey ? Any.toAmino(message.newPublicKey, useInterfaces) : undefined;
     obj.new_diversifier = message.newDiversifier;
     return obj;
@@ -1191,9 +1191,9 @@ export const SignatureAndData = {
   },
   toAmino(message: SignatureAndData, useInterfaces: boolean = true): SignatureAndDataAmino {
     const obj: any = {};
-    obj.signature = base64FromBytes(message.signature);
+    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature));
     obj.data_type = message.dataType;
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
   },
@@ -1288,7 +1288,7 @@ export const TimestampedSignatureData = {
   },
   toAmino(message: TimestampedSignatureData, useInterfaces: boolean = true): TimestampedSignatureDataAmino {
     const obj: any = {};
-    obj.signature_data = base64FromBytes(message.signatureData);
+    message.signatureData !== undefined && (obj.signature_data = base64FromBytes(message.signatureData));
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
   },
@@ -1428,7 +1428,7 @@ export const SignBytes = {
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     obj.diversifier = message.diversifier;
     obj.data_type = message.dataType;
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     return obj;
   },
   fromProtoMsg(message: SignBytesProtoMsg, useInterfaces: boolean = true): SignBytes {
@@ -1617,7 +1617,7 @@ export const ClientStateData = {
   },
   toAmino(message: ClientStateData, useInterfaces: boolean = true): ClientStateDataAmino {
     const obj: any = {};
-    obj.path = base64FromBytes(message.path);
+    message.path !== undefined && (obj.path = base64FromBytes(message.path));
     obj.client_state = message.clientState ? Any.toAmino(message.clientState, useInterfaces) : undefined;
     return obj;
   },
@@ -1712,7 +1712,7 @@ export const ConsensusStateData = {
   },
   toAmino(message: ConsensusStateData, useInterfaces: boolean = true): ConsensusStateDataAmino {
     const obj: any = {};
-    obj.path = base64FromBytes(message.path);
+    message.path !== undefined && (obj.path = base64FromBytes(message.path));
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState, useInterfaces) : undefined;
     return obj;
   },
@@ -1807,7 +1807,7 @@ export const ConnectionStateData = {
   },
   toAmino(message: ConnectionStateData, useInterfaces: boolean = true): ConnectionStateDataAmino {
     const obj: any = {};
-    obj.path = base64FromBytes(message.path);
+    message.path !== undefined && (obj.path = base64FromBytes(message.path));
     obj.connection = message.connection ? ConnectionEnd.toAmino(message.connection, useInterfaces) : undefined;
     return obj;
   },
@@ -1902,7 +1902,7 @@ export const ChannelStateData = {
   },
   toAmino(message: ChannelStateData, useInterfaces: boolean = true): ChannelStateDataAmino {
     const obj: any = {};
-    obj.path = base64FromBytes(message.path);
+    message.path !== undefined && (obj.path = base64FromBytes(message.path));
     obj.channel = message.channel ? Channel.toAmino(message.channel, useInterfaces) : undefined;
     return obj;
   },
@@ -1995,8 +1995,8 @@ export const PacketCommitmentData = {
   },
   toAmino(message: PacketCommitmentData, useInterfaces: boolean = true): PacketCommitmentDataAmino {
     const obj: any = {};
-    obj.path = base64FromBytes(message.path);
-    obj.commitment = base64FromBytes(message.commitment);
+    message.path !== undefined && (obj.path = base64FromBytes(message.path));
+    message.commitment !== undefined && (obj.commitment = base64FromBytes(message.commitment));
     return obj;
   },
   fromProtoMsg(message: PacketCommitmentDataProtoMsg, useInterfaces: boolean = true): PacketCommitmentData {
@@ -2088,8 +2088,8 @@ export const PacketAcknowledgementData = {
   },
   toAmino(message: PacketAcknowledgementData, useInterfaces: boolean = true): PacketAcknowledgementDataAmino {
     const obj: any = {};
-    obj.path = base64FromBytes(message.path);
-    obj.acknowledgement = base64FromBytes(message.acknowledgement);
+    message.path !== undefined && (obj.path = base64FromBytes(message.path));
+    message.acknowledgement !== undefined && (obj.acknowledgement = base64FromBytes(message.acknowledgement));
     return obj;
   },
   fromProtoMsg(message: PacketAcknowledgementDataProtoMsg, useInterfaces: boolean = true): PacketAcknowledgementData {
@@ -2168,7 +2168,7 @@ export const PacketReceiptAbsenceData = {
   },
   toAmino(message: PacketReceiptAbsenceData, useInterfaces: boolean = true): PacketReceiptAbsenceDataAmino {
     const obj: any = {};
-    obj.path = base64FromBytes(message.path);
+    message.path !== undefined && (obj.path = base64FromBytes(message.path));
     return obj;
   },
   fromProtoMsg(message: PacketReceiptAbsenceDataProtoMsg, useInterfaces: boolean = true): PacketReceiptAbsenceData {
@@ -2262,7 +2262,7 @@ export const NextSequenceRecvData = {
   },
   toAmino(message: NextSequenceRecvData, useInterfaces: boolean = true): NextSequenceRecvDataAmino {
     const obj: any = {};
-    obj.path = base64FromBytes(message.path);
+    message.path !== undefined && (obj.path = base64FromBytes(message.path));
     obj.next_seq_recv = message.nextSeqRecv ? message.nextSeqRecv.toString() : undefined;
     return obj;
   },

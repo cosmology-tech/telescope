@@ -28,7 +28,7 @@ export interface GenesisStateAmino {
    * reduction_started_epoch is the first epoch in which the reduction of mint
    * begins.
    */
-  reduction_started_epoch: string;
+  reduction_started_epoch?: string;
 }
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisStateSDKType {

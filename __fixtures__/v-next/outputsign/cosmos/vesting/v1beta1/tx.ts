@@ -23,11 +23,11 @@ export interface MsgCreateVestingAccountProtoMsg {
  * account.
  */
 export interface MsgCreateVestingAccountAmino {
-  from_address: string;
-  to_address: string;
-  amount: CoinAmino[];
-  end_time: string;
-  delayed: boolean;
+  from_address?: string;
+  to_address?: string;
+  amount?: CoinAmino[];
+  end_time?: string;
+  delayed?: boolean;
 }
 export interface MsgCreateVestingAccountAminoMsg {
   type: "cosmos-sdk/MsgCreateVestingAccount";
@@ -76,9 +76,9 @@ export interface MsgCreatePermanentLockedAccountProtoMsg {
  * locked account.
  */
 export interface MsgCreatePermanentLockedAccountAmino {
-  from_address: string;
-  to_address: string;
-  amount: CoinAmino[];
+  from_address?: string;
+  to_address?: string;
+  amount?: CoinAmino[];
 }
 export interface MsgCreatePermanentLockedAccountAminoMsg {
   type: "cosmos-sdk/MsgCreatePermanentLockedAccount";
@@ -126,10 +126,10 @@ export interface MsgCreatePeriodicVestingAccountProtoMsg {
  * account.
  */
 export interface MsgCreatePeriodicVestingAccountAmino {
-  from_address: string;
-  to_address: string;
-  start_time: string;
-  vesting_periods: PeriodAmino[];
+  from_address?: string;
+  to_address?: string;
+  start_time?: string;
+  vesting_periods?: PeriodAmino[];
 }
 export interface MsgCreatePeriodicVestingAccountAminoMsg {
   type: "cosmos-sdk/MsgCreatePeriodicVestingAccount";

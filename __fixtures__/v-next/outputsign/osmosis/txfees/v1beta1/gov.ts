@@ -26,8 +26,8 @@ export interface UpdateFeeTokenProposalProtoMsg {
  * it will remove the denom from the whitelisted set.
  */
 export interface UpdateFeeTokenProposalAmino {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   feetoken?: FeeTokenAmino;
 }
 export interface UpdateFeeTokenProposalAminoMsg {

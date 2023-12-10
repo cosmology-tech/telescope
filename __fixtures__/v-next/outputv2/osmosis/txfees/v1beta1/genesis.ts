@@ -13,8 +13,8 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the txfees module's genesis state. */
 export interface GenesisStateAmino {
-  basedenom: string;
-  feetokens: FeeTokenAmino[];
+  basedenom?: string;
+  feetokens?: FeeTokenAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "osmosis/txfees/genesis-state";

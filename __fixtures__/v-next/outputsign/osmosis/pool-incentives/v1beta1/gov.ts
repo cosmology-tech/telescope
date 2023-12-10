@@ -30,9 +30,9 @@ export interface ReplacePoolIncentivesProposalProtoMsg {
  * configuration. Note that gaugeId=0 represents the community pool.
  */
 export interface ReplacePoolIncentivesProposalAmino {
-  title: string;
-  description: string;
-  records: DistrRecordAmino[];
+  title?: string;
+  description?: string;
+  records?: DistrRecordAmino[];
 }
 export interface ReplacePoolIncentivesProposalAminoMsg {
   type: "osmosis/poolincentives/replace-pool-incentives-proposal";
@@ -80,9 +80,9 @@ export interface UpdatePoolIncentivesProposalProtoMsg {
  * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
  */
 export interface UpdatePoolIncentivesProposalAmino {
-  title: string;
-  description: string;
-  records: DistrRecordAmino[];
+  title?: string;
+  description?: string;
+  records?: DistrRecordAmino[];
 }
 export interface UpdatePoolIncentivesProposalAminoMsg {
   type: "osmosis/poolincentives/update-pool-incentives-proposal";

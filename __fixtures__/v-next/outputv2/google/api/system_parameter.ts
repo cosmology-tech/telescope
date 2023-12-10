@@ -87,7 +87,7 @@ export interface SystemParametersAmino {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: SystemParameterRuleAmino[];
+  rules?: SystemParameterRuleAmino[];
 }
 export interface SystemParametersAminoMsg {
   type: "/google.api.SystemParameters";
@@ -140,7 +140,7 @@ export interface SystemParameterRuleAmino {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /**
    * Define parameters. Multiple names may be defined for a parameter.
    * For a given method call, only one of them should be used. If multiple
@@ -148,7 +148,7 @@ export interface SystemParameterRuleAmino {
    * If none of the specified names are present the behavior is
    * parameter-dependent.
    */
-  parameters: SystemParameterAmino[];
+  parameters?: SystemParameterAmino[];
 }
 export interface SystemParameterRuleAminoMsg {
   type: "/google.api.SystemParameterRule";
@@ -192,17 +192,17 @@ export interface SystemParameterProtoMsg {
  */
 export interface SystemParameterAmino {
   /** Define the name of the parameter, such as "api_key" . It is case sensitive. */
-  name: string;
+  name?: string;
   /**
    * Define the HTTP header name to use for the parameter. It is case
    * insensitive.
    */
-  http_header: string;
+  http_header?: string;
   /**
    * Define the URL query parameter name to use for the parameter. It is case
    * sensitive.
    */
-  url_query_parameter: string;
+  url_query_parameter?: string;
 }
 export interface SystemParameterAminoMsg {
   type: "/google.api.SystemParameter";

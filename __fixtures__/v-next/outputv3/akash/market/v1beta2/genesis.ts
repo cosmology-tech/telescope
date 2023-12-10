@@ -16,8 +16,8 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the basic genesis state used by market module */
 export interface GenesisStateAmino {
-  orders: OrderAmino[];
-  leases: LeaseAmino[];
+  orders?: OrderAmino[];
+  leases?: LeaseAmino[];
   params?: ParamsAmino;
 }
 /** GenesisState defines the basic genesis state used by market module */

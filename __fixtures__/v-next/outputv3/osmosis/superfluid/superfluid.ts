@@ -54,12 +54,12 @@ export interface SuperfluidAssetProtoMsg {
 }
 /** SuperfluidAsset stores the pair of superfluid asset type and denom pair */
 export interface SuperfluidAssetAmino {
-  denom: string;
+  denom?: string;
   /**
    * AssetType indicates whether the superfluid asset is a native token or an lp
    * share
    */
-  asset_type: SuperfluidAssetType;
+  asset_type?: SuperfluidAssetType;
 }
 /** SuperfluidAsset stores the pair of superfluid asset type and denom pair */
 export interface SuperfluidAssetSDKType {
@@ -89,10 +89,10 @@ export interface SuperfluidIntermediaryAccountProtoMsg {
  */
 export interface SuperfluidIntermediaryAccountAmino {
   /** Denom indicates the denom of the superfluid asset. */
-  denom: string;
-  val_addr: string;
+  denom?: string;
+  val_addr?: string;
   /** perpetual gauge for rewards distribution */
-  gauge_id: string;
+  gauge_id?: string;
 }
 /**
  * SuperfluidIntermediaryAccount takes the role of intermediary between LP token
@@ -133,10 +133,10 @@ export interface OsmoEquivalentMultiplierRecordProtoMsg {
  * change.
  */
 export interface OsmoEquivalentMultiplierRecordAmino {
-  epoch_number: string;
+  epoch_number?: string;
   /** superfluid asset denom, can be LP token or native token */
-  denom: string;
-  multiplier: string;
+  denom?: string;
+  multiplier?: string;
 }
 /**
  * The Osmo-Equivalent-Multiplier Record for epoch N refers to the osmo worth we
@@ -171,8 +171,8 @@ export interface SuperfluidDelegationRecordProtoMsg {
  * delegations of an account in the state machine in a user friendly form.
  */
 export interface SuperfluidDelegationRecordAmino {
-  delegator_address: string;
-  validator_address: string;
+  delegator_address?: string;
+  validator_address?: string;
   delegation_amount?: CoinAmino;
   equivalent_staked_amount?: CoinAmino;
 }
@@ -205,8 +205,8 @@ export interface LockIdIntermediaryAccountConnectionProtoMsg {
  * via lp shares.
  */
 export interface LockIdIntermediaryAccountConnectionAmino {
-  lock_id: string;
-  intermediary_account: string;
+  lock_id?: string;
+  intermediary_account?: string;
 }
 /**
  * LockIdIntermediaryAccountConnection is a struct used to indicate the
@@ -225,7 +225,7 @@ export interface UnpoolWhitelistedPoolsProtoMsg {
   value: Uint8Array;
 }
 export interface UnpoolWhitelistedPoolsAmino {
-  ids: string[];
+  ids?: string[];
 }
 export interface UnpoolWhitelistedPoolsSDKType {
   ids: bigint[];

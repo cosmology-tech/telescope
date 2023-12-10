@@ -22,15 +22,15 @@ export interface QueryAppVersionRequestProtoMsg {
 /** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
 export interface QueryAppVersionRequestAmino {
   /** port unique identifier */
-  port_id: string;
+  port_id?: string;
   /** connection unique identifier */
-  connection_id: string;
+  connection_id?: string;
   /** whether the channel is ordered or unordered */
-  ordering: Order;
+  ordering?: Order;
   /** counterparty channel end */
   counterparty?: CounterpartyAmino;
   /** proposed version */
-  proposed_version: string;
+  proposed_version?: string;
 }
 /** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
 export interface QueryAppVersionRequestSDKType {
@@ -54,9 +54,9 @@ export interface QueryAppVersionResponseProtoMsg {
 /** QueryAppVersionResponse is the response type for the Query/AppVersion RPC method. */
 export interface QueryAppVersionResponseAmino {
   /** port id associated with the request identifiers */
-  port_id: string;
+  port_id?: string;
   /** supported app version */
-  version: string;
+  version?: string;
 }
 /** QueryAppVersionResponse is the response type for the Query/AppVersion RPC method. */
 export interface QueryAppVersionResponseSDKType {

@@ -834,7 +834,7 @@ export const Header = {
     const obj: any = {};
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
-    obj.signature = base64FromBytes(message.signature);
+    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature));
     obj.new_public_key = message.newPublicKey ? Any.toAmino(message.newPublicKey) : undefined;
     obj.new_diversifier = message.newDiversifier;
     return obj;
@@ -1115,9 +1115,9 @@ export const SignatureAndData = {
   },
   toAmino(message: SignatureAndData): SignatureAndDataAmino {
     const obj: any = {};
-    obj.signature = base64FromBytes(message.signature);
+    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature));
     obj.data_type = message.dataType;
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
   },
@@ -1226,7 +1226,7 @@ export const TimestampedSignatureData = {
   },
   toAmino(message: TimestampedSignatureData): TimestampedSignatureDataAmino {
     const obj: any = {};
-    obj.signature_data = base64FromBytes(message.signatureData);
+    message.signatureData !== undefined && (obj.signature_data = base64FromBytes(message.signatureData));
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
   },
@@ -1383,7 +1383,7 @@ export const SignBytes = {
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     obj.diversifier = message.diversifier;
     obj.data_type = message.dataType;
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     return obj;
   },
   fromAminoMsg(object: SignBytesAminoMsg): SignBytes {
@@ -1600,7 +1600,7 @@ export const ClientStateData = {
   },
   toAmino(message: ClientStateData): ClientStateDataAmino {
     const obj: any = {};
-    obj.path = base64FromBytes(message.path);
+    message.path !== undefined && (obj.path = base64FromBytes(message.path));
     obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
     return obj;
   },
@@ -1709,7 +1709,7 @@ export const ConsensusStateData = {
   },
   toAmino(message: ConsensusStateData): ConsensusStateDataAmino {
     const obj: any = {};
-    obj.path = base64FromBytes(message.path);
+    message.path !== undefined && (obj.path = base64FromBytes(message.path));
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
     return obj;
   },
@@ -1818,7 +1818,7 @@ export const ConnectionStateData = {
   },
   toAmino(message: ConnectionStateData): ConnectionStateDataAmino {
     const obj: any = {};
-    obj.path = base64FromBytes(message.path);
+    message.path !== undefined && (obj.path = base64FromBytes(message.path));
     obj.connection = message.connection ? ConnectionEnd.toAmino(message.connection) : undefined;
     return obj;
   },
@@ -1927,7 +1927,7 @@ export const ChannelStateData = {
   },
   toAmino(message: ChannelStateData): ChannelStateDataAmino {
     const obj: any = {};
-    obj.path = base64FromBytes(message.path);
+    message.path !== undefined && (obj.path = base64FromBytes(message.path));
     obj.channel = message.channel ? Channel.toAmino(message.channel) : undefined;
     return obj;
   },
@@ -2034,8 +2034,8 @@ export const PacketCommitmentData = {
   },
   toAmino(message: PacketCommitmentData): PacketCommitmentDataAmino {
     const obj: any = {};
-    obj.path = base64FromBytes(message.path);
-    obj.commitment = base64FromBytes(message.commitment);
+    message.path !== undefined && (obj.path = base64FromBytes(message.path));
+    message.commitment !== undefined && (obj.commitment = base64FromBytes(message.commitment));
     return obj;
   },
   fromAminoMsg(object: PacketCommitmentDataAminoMsg): PacketCommitmentData {
@@ -2141,8 +2141,8 @@ export const PacketAcknowledgementData = {
   },
   toAmino(message: PacketAcknowledgementData): PacketAcknowledgementDataAmino {
     const obj: any = {};
-    obj.path = base64FromBytes(message.path);
-    obj.acknowledgement = base64FromBytes(message.acknowledgement);
+    message.path !== undefined && (obj.path = base64FromBytes(message.path));
+    message.acknowledgement !== undefined && (obj.acknowledgement = base64FromBytes(message.acknowledgement));
     return obj;
   },
   fromAminoMsg(object: PacketAcknowledgementDataAminoMsg): PacketAcknowledgementData {
@@ -2234,7 +2234,7 @@ export const PacketReceiptAbsenceData = {
   },
   toAmino(message: PacketReceiptAbsenceData): PacketReceiptAbsenceDataAmino {
     const obj: any = {};
-    obj.path = base64FromBytes(message.path);
+    message.path !== undefined && (obj.path = base64FromBytes(message.path));
     return obj;
   },
   fromAminoMsg(object: PacketReceiptAbsenceDataAminoMsg): PacketReceiptAbsenceData {
@@ -2342,7 +2342,7 @@ export const NextSequenceRecvData = {
   },
   toAmino(message: NextSequenceRecvData): NextSequenceRecvDataAmino {
     const obj: any = {};
-    obj.path = base64FromBytes(message.path);
+    message.path !== undefined && (obj.path = base64FromBytes(message.path));
     obj.next_seq_recv = message.nextSeqRecv ? message.nextSeqRecv.toString() : undefined;
     return obj;
   },

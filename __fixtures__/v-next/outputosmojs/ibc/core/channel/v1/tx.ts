@@ -684,7 +684,7 @@ export const MsgChannelOpenTry = {
     obj.previous_channel_id = message.previousChannelId;
     obj.channel = message.channel ? Channel.toAmino(message.channel) : undefined;
     obj.counterparty_version = message.counterpartyVersion;
-    obj.proof_init = base64FromBytes(message.proofInit);
+    message.proofInit !== undefined && (obj.proof_init = base64FromBytes(message.proofInit));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     obj.signer = message.signer;
     return obj;
@@ -938,7 +938,7 @@ export const MsgChannelOpenAck = {
     obj.channel_id = message.channelId;
     obj.counterparty_channel_id = message.counterpartyChannelId;
     obj.counterparty_version = message.counterpartyVersion;
-    obj.proof_try = base64FromBytes(message.proofTry);
+    message.proofTry !== undefined && (obj.proof_try = base64FromBytes(message.proofTry));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     obj.signer = message.signer;
     return obj;
@@ -1162,7 +1162,7 @@ export const MsgChannelOpenConfirm = {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
-    obj.proof_ack = base64FromBytes(message.proofAck);
+    message.proofAck !== undefined && (obj.proof_ack = base64FromBytes(message.proofAck));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     obj.signer = message.signer;
     return obj;
@@ -1580,7 +1580,7 @@ export const MsgChannelCloseConfirm = {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
-    obj.proof_init = base64FromBytes(message.proofInit);
+    message.proofInit !== undefined && (obj.proof_init = base64FromBytes(message.proofInit));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     obj.signer = message.signer;
     return obj;
@@ -1789,7 +1789,7 @@ export const MsgRecvPacket = {
   toAmino(message: MsgRecvPacket): MsgRecvPacketAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet) : undefined;
-    obj.proof_commitment = base64FromBytes(message.proofCommitment);
+    message.proofCommitment !== undefined && (obj.proof_commitment = base64FromBytes(message.proofCommitment));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     obj.signer = message.signer;
     return obj;
@@ -2012,7 +2012,7 @@ export const MsgTimeout = {
   toAmino(message: MsgTimeout): MsgTimeoutAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet) : undefined;
-    obj.proof_unreceived = base64FromBytes(message.proofUnreceived);
+    message.proofUnreceived !== undefined && (obj.proof_unreceived = base64FromBytes(message.proofUnreceived));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     obj.next_sequence_recv = message.nextSequenceRecv ? message.nextSequenceRecv.toString() : undefined;
     obj.signer = message.signer;
@@ -2250,8 +2250,8 @@ export const MsgTimeoutOnClose = {
   toAmino(message: MsgTimeoutOnClose): MsgTimeoutOnCloseAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet) : undefined;
-    obj.proof_unreceived = base64FromBytes(message.proofUnreceived);
-    obj.proof_close = base64FromBytes(message.proofClose);
+    message.proofUnreceived !== undefined && (obj.proof_unreceived = base64FromBytes(message.proofUnreceived));
+    message.proofClose !== undefined && (obj.proof_close = base64FromBytes(message.proofClose));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     obj.next_sequence_recv = message.nextSequenceRecv ? message.nextSequenceRecv.toString() : undefined;
     obj.signer = message.signer;
@@ -2475,8 +2475,8 @@ export const MsgAcknowledgement = {
   toAmino(message: MsgAcknowledgement): MsgAcknowledgementAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet) : undefined;
-    obj.acknowledgement = base64FromBytes(message.acknowledgement);
-    obj.proof_acked = base64FromBytes(message.proofAcked);
+    message.acknowledgement !== undefined && (obj.acknowledgement = base64FromBytes(message.acknowledgement));
+    message.proofAcked !== undefined && (obj.proof_acked = base64FromBytes(message.proofAcked));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     obj.signer = message.signer;
     return obj;

@@ -14,7 +14,7 @@ export interface SourceInfoProtoMsg {
 /** Source information used to create a Service Config */
 export interface SourceInfoAmino {
   /** All files used during config generation. */
-  source_files: AnyAmino[];
+  source_files?: AnyAmino[];
 }
 export interface SourceInfoAminoMsg {
   type: "/google.api.SourceInfo";

@@ -16,7 +16,7 @@ export interface ResourceProtoMsg {
 /** Resource stores unit, total count and price of resource */
 export interface ResourceAmino {
   resources?: ResourceUnitsAmino;
-  count: number;
+  count?: number;
   price?: DecCoinAmino;
 }
 export interface ResourceAminoMsg {

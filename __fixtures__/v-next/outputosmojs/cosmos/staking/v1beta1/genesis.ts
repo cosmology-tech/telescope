@@ -263,7 +263,7 @@ export const GenesisState = {
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    obj.last_total_power = base64FromBytes(message.lastTotalPower);
+    message.lastTotalPower !== undefined && (obj.last_total_power = base64FromBytes(message.lastTotalPower));
     if (message.lastValidatorPowers) {
       obj.last_validator_powers = message.lastValidatorPowers.map(e => e ? LastValidatorPower.toAmino(e) : undefined);
     } else {

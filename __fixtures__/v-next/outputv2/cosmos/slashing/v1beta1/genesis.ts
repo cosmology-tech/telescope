@@ -29,12 +29,12 @@ export interface GenesisStateAmino {
    * signing_infos represents a map between validator addresses and their
    * signing infos.
    */
-  signing_infos: SigningInfoAmino[];
+  signing_infos?: SigningInfoAmino[];
   /**
    * missed_blocks represents a map between validator addresses and their
    * missed blocks.
    */
-  missed_blocks: ValidatorMissedBlocksAmino[];
+  missed_blocks?: ValidatorMissedBlocksAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "cosmos-sdk/GenesisState";
@@ -60,7 +60,7 @@ export interface SigningInfoProtoMsg {
 /** SigningInfo stores validator signing info of corresponding address. */
 export interface SigningInfoAmino {
   /** address is the validator address. */
-  address: string;
+  address?: string;
   /** validator_signing_info represents the signing info of this validator. */
   validator_signing_info?: ValidatorSigningInfoAmino;
 }
@@ -93,9 +93,9 @@ export interface ValidatorMissedBlocksProtoMsg {
  */
 export interface ValidatorMissedBlocksAmino {
   /** address is the validator address. */
-  address: string;
+  address?: string;
   /** missed_blocks is an array of missed blocks by the validator. */
-  missed_blocks: MissedBlockAmino[];
+  missed_blocks?: MissedBlockAmino[];
 }
 export interface ValidatorMissedBlocksAminoMsg {
   type: "cosmos-sdk/ValidatorMissedBlocks";
@@ -123,9 +123,9 @@ export interface MissedBlockProtoMsg {
 /** MissedBlock contains height and missed status as boolean. */
 export interface MissedBlockAmino {
   /** index is the height at which the block was missed. */
-  index: string;
+  index?: string;
   /** missed is the missed status. */
-  missed: boolean;
+  missed?: boolean;
 }
 export interface MissedBlockAminoMsg {
   type: "cosmos-sdk/MissedBlock";

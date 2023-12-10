@@ -21,10 +21,10 @@ export interface EquivocationProtoMsg {
  * signing misbehavior.
  */
 export interface EquivocationAmino {
-  height: string;
+  height?: string;
   time?: string;
-  power: string;
-  consensus_address: string;
+  power?: string;
+  consensus_address?: string;
 }
 /**
  * Equivocation implements the Evidence interface and defines evidence of double

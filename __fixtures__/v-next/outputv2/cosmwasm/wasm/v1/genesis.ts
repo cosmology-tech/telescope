@@ -18,10 +18,10 @@ export interface GenesisStateProtoMsg {
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisStateAmino {
   params?: ParamsAmino;
-  codes: CodeAmino[];
-  contracts: ContractAmino[];
-  sequences: SequenceAmino[];
-  gen_msgs: GenesisState_GenMsgsAmino[];
+  codes?: CodeAmino[];
+  contracts?: ContractAmino[];
+  sequences?: SequenceAmino[];
+  gen_msgs?: GenesisState_GenMsgsAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "wasm/GenesisState";
@@ -84,11 +84,11 @@ export interface CodeProtoMsg {
 }
 /** Code struct encompasses CodeInfo and CodeBytes */
 export interface CodeAmino {
-  code_id: string;
+  code_id?: string;
   code_info?: CodeInfoAmino;
-  code_bytes: string;
+  code_bytes?: string;
   /** Pinned to wasmvm cache */
-  pinned: boolean;
+  pinned?: boolean;
 }
 export interface CodeAminoMsg {
   type: "wasm/Code";
@@ -113,9 +113,9 @@ export interface ContractProtoMsg {
 }
 /** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
 export interface ContractAmino {
-  contract_address: string;
+  contract_address?: string;
   contract_info?: ContractInfoAmino;
-  contract_state: ModelAmino[];
+  contract_state?: ModelAmino[];
 }
 export interface ContractAminoMsg {
   type: "wasm/Contract";
@@ -138,8 +138,8 @@ export interface SequenceProtoMsg {
 }
 /** Sequence key and value of an id generation counter */
 export interface SequenceAmino {
-  id_key: string;
-  value: string;
+  id_key?: string;
+  value?: string;
 }
 export interface SequenceAminoMsg {
   type: "wasm/Sequence";
@@ -574,7 +574,7 @@ export const Code = {
     const obj: any = {};
     obj.code_id = message.codeId ? message.codeId.toString() : undefined;
     obj.code_info = message.codeInfo ? CodeInfo.toAmino(message.codeInfo) : undefined;
-    obj.code_bytes = base64FromBytes(message.codeBytes);
+    message.codeBytes !== undefined && (obj.code_bytes = base64FromBytes(message.codeBytes));
     obj.pinned = message.pinned;
     return obj;
   },
@@ -808,7 +808,7 @@ export const Sequence = {
   },
   toAmino(message: Sequence): SequenceAmino {
     const obj: any = {};
-    obj.id_key = base64FromBytes(message.idKey);
+    message.idKey !== undefined && (obj.id_key = base64FromBytes(message.idKey));
     obj.value = message.value ? message.value.toString() : undefined;
     return obj;
   },

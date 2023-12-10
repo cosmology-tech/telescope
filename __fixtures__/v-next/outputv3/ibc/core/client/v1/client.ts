@@ -23,7 +23,7 @@ export interface IdentifiedClientStateProtoMsg {
  */
 export interface IdentifiedClientStateAmino {
   /** client identifier */
-  client_id: string;
+  client_id?: string;
   /** client state */
   client_state?: AnyAmino;
 }
@@ -87,9 +87,9 @@ export interface ClientConsensusStatesProtoMsg {
  */
 export interface ClientConsensusStatesAmino {
   /** client identifier */
-  client_id: string;
+  client_id?: string;
   /** consensus states and their heights associated with the client */
-  consensus_states: ConsensusStateWithHeightAmino[];
+  consensus_states?: ConsensusStateWithHeightAmino[];
 }
 /**
  * ClientConsensusStates defines all the stored consensus states for a given
@@ -131,16 +131,16 @@ export interface ClientUpdateProposalProtoMsg {
  */
 export interface ClientUpdateProposalAmino {
   /** the title of the update proposal */
-  title: string;
+  title?: string;
   /** the description of the proposal */
-  description: string;
+  description?: string;
   /** the client identifier for the client to be updated if the proposal passes */
-  subject_client_id: string;
+  subject_client_id?: string;
   /**
    * the substitute client identifier for the client standing in for the subject
    * client
    */
-  substitute_client_id: string;
+  substitute_client_id?: string;
 }
 /**
  * ClientUpdateProposal is a governance proposal. If it passes, the substitute
@@ -183,8 +183,8 @@ export interface UpgradeProposalProtoMsg {
  * upgrade.
  */
 export interface UpgradeProposalAmino {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   plan?: PlanAmino;
   /**
    * An UpgradedClientState must be provided to perform an IBC breaking upgrade.
@@ -243,9 +243,9 @@ export interface HeightProtoMsg {
  */
 export interface HeightAmino {
   /** the revision that the client is currently on */
-  revision_number: string;
+  revision_number?: string;
   /** the height within the given revision */
-  revision_height: string;
+  revision_height?: string;
 }
 /**
  * Height is a monotonically increasing data type
@@ -275,7 +275,7 @@ export interface ParamsProtoMsg {
 /** Params defines the set of IBC light client parameters. */
 export interface ParamsAmino {
   /** allowed_clients defines the list of allowed client state types. */
-  allowed_clients: string[];
+  allowed_clients?: string[];
 }
 /** Params defines the set of IBC light client parameters. */
 export interface ParamsSDKType {

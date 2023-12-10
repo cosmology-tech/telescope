@@ -677,8 +677,8 @@ export const MsgUpgradeClient = {
     obj.client_id = message.clientId;
     obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
-    obj.proof_upgrade_client = base64FromBytes(message.proofUpgradeClient);
-    obj.proof_upgrade_consensus_state = base64FromBytes(message.proofUpgradeConsensusState);
+    message.proofUpgradeClient !== undefined && (obj.proof_upgrade_client = base64FromBytes(message.proofUpgradeClient));
+    message.proofUpgradeConsensusState !== undefined && (obj.proof_upgrade_consensus_state = base64FromBytes(message.proofUpgradeConsensusState));
     obj.signer = message.signer;
     return obj;
   },

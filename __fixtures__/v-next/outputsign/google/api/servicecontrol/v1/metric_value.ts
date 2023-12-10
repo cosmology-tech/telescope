@@ -12,8 +12,8 @@ export interface MetricValue_LabelsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface MetricValue_LabelsEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface MetricValue_LabelsEntryAminoMsg {
   type: string;
@@ -71,7 +71,7 @@ export interface MetricValueAmino {
    * the overriding relationship.
    * Note that this map must not contain monitored resource labels.
    */
-  labels: {
+  labels?: {
     [key: string]: string;
   };
   /**
@@ -138,9 +138,9 @@ export interface MetricValueSetProtoMsg {
  */
 export interface MetricValueSetAmino {
   /** The metric name defined in the service configuration. */
-  metric_name: string;
+  metric_name?: string;
   /** The values in this metric. */
-  metric_values: MetricValueAmino[];
+  metric_values?: MetricValueAmino[];
 }
 export interface MetricValueSetAminoMsg {
   type: "/google.api.servicecontrol.v1.MetricValueSet";

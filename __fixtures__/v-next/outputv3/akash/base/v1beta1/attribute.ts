@@ -12,8 +12,8 @@ export interface AttributeProtoMsg {
 }
 /** Attribute represents key value pair */
 export interface AttributeAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 /** Attribute represents key value pair */
 export interface AttributeSDKType {
@@ -44,9 +44,9 @@ export interface SignedByProtoMsg {
  */
 export interface SignedByAmino {
   /** all_of all keys in this list must have signed attributes */
-  all_of: string[];
+  all_of?: string[];
   /** any_of at least of of the keys from the list must have signed attributes */
-  any_of: string[];
+  any_of?: string[];
 }
 /**
  * SignedBy represents validation accounts that tenant expects signatures for provider attributes
@@ -74,7 +74,7 @@ export interface PlacementRequirementsAmino {
   /** SignedBy list of keys that tenants expect to have signatures from */
   signed_by?: SignedByAmino;
   /** Attribute list of attributes tenant expects from the provider */
-  attributes: AttributeAmino[];
+  attributes?: AttributeAmino[];
 }
 /** PlacementRequirements */
 export interface PlacementRequirementsSDKType {

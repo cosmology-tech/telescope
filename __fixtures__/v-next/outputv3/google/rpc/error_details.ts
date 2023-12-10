@@ -76,9 +76,9 @@ export interface DebugInfoProtoMsg {
 /** Describes additional debugging info. */
 export interface DebugInfoAmino {
   /** The stack trace entries indicating where the error occurred. */
-  stack_entries: string[];
+  stack_entries?: string[];
   /** Additional debugging information provided by the server. */
-  detail: string;
+  detail?: string;
 }
 /** Describes additional debugging info. */
 export interface DebugInfoSDKType {
@@ -121,7 +121,7 @@ export interface QuotaFailureProtoMsg {
  */
 export interface QuotaFailureAmino {
   /** Describes all quota violations. */
-  violations: QuotaFailure_ViolationAmino[];
+  violations?: QuotaFailure_ViolationAmino[];
 }
 /**
  * Describes how a quota check failed.
@@ -175,7 +175,7 @@ export interface QuotaFailure_ViolationAmino {
    * For example, "clientip:<ip address of client>" or "project:<Google
    * developer project id>".
    */
-  subject: string;
+  subject?: string;
   /**
    * A description of how the quota check failed. Clients can use this
    * description to find more about the quota configuration in the service's
@@ -185,7 +185,7 @@ export interface QuotaFailure_ViolationAmino {
    * For example: "Service disabled" or "Daily Limit for read operations
    * exceeded".
    */
-  description: string;
+  description?: string;
 }
 /**
  * A message type used to describe a single quota violation.  For example, a
@@ -204,8 +204,8 @@ export interface ErrorInfo_MetadataEntryProtoMsg {
   value: Uint8Array;
 }
 export interface ErrorInfo_MetadataEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface ErrorInfo_MetadataEntrySDKType {
   key: string;
@@ -305,7 +305,7 @@ export interface ErrorInfoAmino {
    * domain of errors. This should be at most 63 characters and match
    * /[A-Z0-9_]+/.
    */
-  reason: string;
+  reason?: string;
   /**
    * The logical grouping to which the "reason" belongs. The error domain
    * is typically the registered service name of the tool or product that
@@ -314,7 +314,7 @@ export interface ErrorInfoAmino {
    * globally unique value that identifies the infrastructure. For Google API
    * infrastructure, the error domain is "googleapis.com".
    */
-  domain: string;
+  domain?: string;
   /**
    * Additional structured details about this error.
    * 
@@ -325,7 +325,7 @@ export interface ErrorInfoAmino {
    * {"instanceLimitPerRequest": "100"}, if the client exceeds the number of
    * instances that can be created in a single (batch) request.
    */
-  metadata: {
+  metadata?: {
     [key: string]: string;
   };
 }
@@ -386,7 +386,7 @@ export interface PreconditionFailureProtoMsg {
  */
 export interface PreconditionFailureAmino {
   /** Describes all precondition violations. */
-  violations: PreconditionFailure_ViolationAmino[];
+  violations?: PreconditionFailure_ViolationAmino[];
 }
 /**
  * Describes what preconditions have failed.
@@ -431,20 +431,20 @@ export interface PreconditionFailure_ViolationAmino {
    * enum type to define the supported precondition violation subjects. For
    * example, "TOS" for "Terms of Service violation".
    */
-  type: string;
+  type?: string;
   /**
    * The subject, relative to the type, that failed.
    * For example, "google.com/cloud" relative to the "TOS" type would indicate
    * which terms of service is being referenced.
    */
-  subject: string;
+  subject?: string;
   /**
    * A description of how the precondition failed. Developers can use this
    * description to understand how to fix the failure.
    * 
    * For example: "Terms of service not accepted".
    */
-  description: string;
+  description?: string;
 }
 /** A message type used to describe a single precondition failure. */
 export interface PreconditionFailure_ViolationSDKType {
@@ -470,7 +470,7 @@ export interface BadRequestProtoMsg {
  */
 export interface BadRequestAmino {
   /** Describes all violations in a client request. */
-  field_violations: BadRequest_FieldViolationAmino[];
+  field_violations?: BadRequest_FieldViolationAmino[];
 }
 /**
  * Describes violations in a client request. This error type focuses on the
@@ -501,9 +501,9 @@ export interface BadRequest_FieldViolationAmino {
    * sequence of dot-separated identifiers that identify a protocol buffer
    * field. E.g., "field_violations.field" would identify this field.
    */
-  field: string;
+  field?: string;
   /** A description of why the request element is bad. */
-  description: string;
+  description?: string;
 }
 /** A message type used to describe a single bad request field. */
 export interface BadRequest_FieldViolationSDKType {
@@ -539,12 +539,12 @@ export interface RequestInfoAmino {
    * An opaque string that should only be interpreted by the service generating
    * it. For example, it can be used to identify requests in the service's logs.
    */
-  request_id: string;
+  request_id?: string;
   /**
    * Any data that was used to serve this request. For example, an encrypted
    * stack trace that can be sent back to the service provider for debugging.
    */
-  serving_data: string;
+  serving_data?: string;
 }
 /**
  * Contains metadata about the request that clients can attach when filing a bug
@@ -592,25 +592,25 @@ export interface ResourceInfoAmino {
    * "cloud storage bucket", "file", "Google calendar"; or the type URL
    * of the resource: e.g. "type.googleapis.com/google.pubsub.v1.Topic".
    */
-  resource_type: string;
+  resource_type?: string;
   /**
    * The name of the resource being accessed.  For example, a shared calendar
    * name: "example.com_4fghdhgsrgh@group.calendar.google.com", if the current
    * error is [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
    */
-  resource_name: string;
+  resource_name?: string;
   /**
    * The owner of the resource (optional).
    * For example, "user:<owner email>" or "project:<Google developer project
    * id>".
    */
-  owner: string;
+  owner?: string;
   /**
    * Describes what error is encountered when accessing this resource.
    * For example, updating a cloud project may require the `writer` permission
    * on the developer console project.
    */
-  description: string;
+  description?: string;
 }
 /** Describes the resource that is being accessed. */
 export interface ResourceInfoSDKType {
@@ -643,7 +643,7 @@ export interface HelpProtoMsg {
  */
 export interface HelpAmino {
   /** URL(s) pointing to additional information on handling the current error. */
-  links: Help_LinkAmino[];
+  links?: Help_LinkAmino[];
 }
 /**
  * Provides links to documentation or for performing an out of band action.
@@ -669,9 +669,9 @@ export interface Help_LinkProtoMsg {
 /** Describes a URL link. */
 export interface Help_LinkAmino {
   /** Describes what the link offers. */
-  description: string;
+  description?: string;
   /** The URL of the link. */
-  url: string;
+  url?: string;
 }
 /** Describes a URL link. */
 export interface Help_LinkSDKType {
@@ -706,9 +706,9 @@ export interface LocalizedMessageAmino {
    * http://www.rfc-editor.org/rfc/bcp/bcp47.txt.
    * Examples are: "en-US", "fr-CH", "es-MX"
    */
-  locale: string;
+  locale?: string;
   /** The localized error message in the above locale. */
-  message: string;
+  message?: string;
 }
 /**
  * Provides a localized error message that is safe to return to the user

@@ -22,7 +22,7 @@ export interface QueryFeeTokensResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryFeeTokensResponseAmino {
-  fee_tokens: FeeTokenAmino[];
+  fee_tokens?: FeeTokenAmino[];
 }
 export interface QueryFeeTokensResponseAminoMsg {
   type: "osmosis/txfees/query-fee-tokens-response";
@@ -47,7 +47,7 @@ export interface QueryDenomSpotPriceRequestProtoMsg {
  * price for the specified tx fee denom
  */
 export interface QueryDenomSpotPriceRequestAmino {
-  denom: string;
+  denom?: string;
 }
 export interface QueryDenomSpotPriceRequestAminoMsg {
   type: "osmosis/txfees/query-denom-spot-price-request";
@@ -77,8 +77,8 @@ export interface QueryDenomSpotPriceResponseProtoMsg {
  * price for the specified tx fee denom
  */
 export interface QueryDenomSpotPriceResponseAmino {
-  poolID: string;
-  spot_price: string;
+  poolID?: string;
+  spot_price?: string;
 }
 export interface QueryDenomSpotPriceResponseAminoMsg {
   type: "osmosis/txfees/query-denom-spot-price-response";
@@ -100,7 +100,7 @@ export interface QueryDenomPoolIdRequestProtoMsg {
   value: Uint8Array;
 }
 export interface QueryDenomPoolIdRequestAmino {
-  denom: string;
+  denom?: string;
 }
 export interface QueryDenomPoolIdRequestAminoMsg {
   type: "osmosis/txfees/query-denom-pool-id-request";
@@ -117,7 +117,7 @@ export interface QueryDenomPoolIdResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryDenomPoolIdResponseAmino {
-  poolID: string;
+  poolID?: string;
 }
 export interface QueryDenomPoolIdResponseAminoMsg {
   type: "osmosis/txfees/query-denom-pool-id-response";
@@ -145,7 +145,7 @@ export interface QueryBaseDenomResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryBaseDenomResponseAmino {
-  base_denom: string;
+  base_denom?: string;
 }
 export interface QueryBaseDenomResponseAminoMsg {
   type: "osmosis/txfees/query-base-denom-response";

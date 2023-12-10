@@ -12,10 +12,10 @@ export interface ProofProtoMsg {
   value: Uint8Array;
 }
 export interface ProofAmino {
-  total: string;
-  index: string;
-  leaf_hash: string;
-  aunts: string[];
+  total?: string;
+  index?: string;
+  leaf_hash?: string;
+  aunts?: string[];
 }
 export interface ProofAminoMsg {
   type: "/tendermint.crypto.Proof";
@@ -39,7 +39,7 @@ export interface ValueOpProtoMsg {
 }
 export interface ValueOpAmino {
   /** Encoded in ProofOp.Key. */
-  key: string;
+  key?: string;
   /** To encode in ProofOp.Data */
   proof?: ProofAmino;
 }
@@ -61,9 +61,9 @@ export interface DominoOpProtoMsg {
   value: Uint8Array;
 }
 export interface DominoOpAmino {
-  key: string;
-  input: string;
-  output: string;
+  key?: string;
+  input?: string;
+  output?: string;
 }
 export interface DominoOpAminoMsg {
   type: "/tendermint.crypto.DominoOp";
@@ -94,9 +94,9 @@ export interface ProofOpProtoMsg {
  * for example neighbouring node hash
  */
 export interface ProofOpAmino {
-  type: string;
-  key: string;
-  data: string;
+  type?: string;
+  key?: string;
+  data?: string;
 }
 export interface ProofOpAminoMsg {
   type: "/tendermint.crypto.ProofOp";
@@ -122,7 +122,7 @@ export interface ProofOpsProtoMsg {
 }
 /** ProofOps is Merkle proof defined by the list of ProofOps */
 export interface ProofOpsAmino {
-  ops: ProofOpAmino[];
+  ops?: ProofOpAmino[];
 }
 export interface ProofOpsAminoMsg {
   type: "/tendermint.crypto.ProofOps";
@@ -207,7 +207,7 @@ export const Proof = {
     const obj: any = {};
     obj.total = message.total ? message.total.toString() : undefined;
     obj.index = message.index ? message.index.toString() : undefined;
-    obj.leaf_hash = base64FromBytes(message.leafHash);
+    message.leafHash !== undefined && (obj.leaf_hash = base64FromBytes(message.leafHash));
     if (message.aunts) {
       obj.aunts = message.aunts.map(e => base64FromBytes(e));
     } else {
@@ -284,7 +284,7 @@ export const ValueOp = {
   },
   toAmino(message: ValueOp): ValueOpAmino {
     const obj: any = {};
-    obj.key = base64FromBytes(message.key);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
     obj.proof = message.proof ? Proof.toAmino(message.proof) : undefined;
     return obj;
   },
@@ -446,8 +446,8 @@ export const ProofOp = {
   toAmino(message: ProofOp): ProofOpAmino {
     const obj: any = {};
     obj.type = message.type;
-    obj.key = base64FromBytes(message.key);
-    obj.data = base64FromBytes(message.data);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     return obj;
   },
   fromAminoMsg(object: ProofOpAminoMsg): ProofOp {

@@ -23,7 +23,7 @@ export interface ParsedExprAmino {
   /** The source info derived from input that generated the parsed `expr`. */
   source_info?: SourceInfoAmino;
   /** The syntax version of the source, e.g. `cel1`. */
-  syntax_version: string;
+  syntax_version?: string;
 }
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExprSDKType {
@@ -97,7 +97,7 @@ export interface ExprAmino {
    * given expression tree. This is used to associate type information and other
    * attributes to a node in the parse tree.
    */
-  id: number;
+  id?: number;
   /** A literal expression. */
   literal_expr?: LiteralAmino;
   /** An identifier expression. */
@@ -162,7 +162,7 @@ export interface Expr_IdentAmino {
    * 
    * Qualified names are represented by the [Expr.Select][google.api.expr.v1beta1.Expr.Select] expression.
    */
-  name: string;
+  name?: string;
 }
 /** An identifier expression. e.g. `request`. */
 export interface Expr_IdentSDKType {
@@ -210,13 +210,13 @@ export interface Expr_SelectAmino {
    * For example, in the select expression `request.auth`, the `auth` portion
    * of the expression would be the `field`.
    */
-  field: string;
+  field?: string;
   /**
    * Whether the select is to be interpreted as a field presence test.
    * 
    * This results from the macro `has(request.auth)`.
    */
-  test_only: boolean;
+  test_only?: boolean;
 }
 /** A field selection expression. e.g. `request.auth`. */
 export interface Expr_SelectSDKType {
@@ -256,9 +256,9 @@ export interface Expr_CallAmino {
    */
   target?: ExprAmino;
   /** Required. The name of the function or method being called. */
-  function: string;
+  function?: string;
   /** The arguments. */
-  args: ExprAmino[];
+  args?: ExprAmino[];
 }
 /**
  * A call expression, including calls to predefined functions and operators.
@@ -292,7 +292,7 @@ export interface Expr_CreateListProtoMsg {
  */
 export interface Expr_CreateListAmino {
   /** The elements part of the list. */
-  elements: ExprAmino[];
+  elements?: ExprAmino[];
 }
 /**
  * A list creation expression.
@@ -335,9 +335,9 @@ export interface Expr_CreateStructAmino {
    * The type name of the message to be created, empty when creating map
    * literals.
    */
-  type: string;
+  type?: string;
   /** The entries in the creation expression. */
-  entries: Expr_CreateStruct_EntryAmino[];
+  entries?: Expr_CreateStruct_EntryAmino[];
 }
 /**
  * A map or message creation expression.
@@ -376,7 +376,7 @@ export interface Expr_CreateStruct_EntryAmino {
    * in a given expression tree. This is used to associate type
    * information and other attributes to the node.
    */
-  id: number;
+  id?: number;
   /** The field key for a message creator statement. */
   field_key?: string;
   /** The key expression for a map creation statement. */
@@ -482,11 +482,11 @@ export interface Expr_ComprehensionProtoMsg {
  */
 export interface Expr_ComprehensionAmino {
   /** The name of the iteration variable. */
-  iter_var: string;
+  iter_var?: string;
   /** The range over which var iterates. */
   iter_range?: ExprAmino;
   /** The name of the variable used for accumulation of the result. */
-  accu_var: string;
+  accu_var?: string;
   /** The initial value of the accumulator. */
   accu_init?: ExprAmino;
   /**

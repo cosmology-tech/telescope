@@ -26,14 +26,14 @@ export interface DevFeeInfoProtoMsg {
  */
 export interface DevFeeInfoAmino {
   /** hex address of registered contract */
-  contract_address: string;
+  contract_address?: string;
   /** bech32 address of contract deployer */
-  deployer_address: string;
+  deployer_address?: string;
   /**
    * bech32 address of account receiving the transaction fees
    * it defaults to deployer_address
    */
-  withdraw_address: string;
+  withdraw_address?: string;
 }
 /**
  * DevFeeInfo defines an instance that organizes fee distribution conditions

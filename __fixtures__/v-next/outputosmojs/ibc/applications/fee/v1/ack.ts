@@ -115,7 +115,7 @@ export const IncentivizedAcknowledgement = {
   },
   toAmino(message: IncentivizedAcknowledgement): IncentivizedAcknowledgementAmino {
     const obj: any = {};
-    obj.app_acknowledgement = base64FromBytes(message.appAcknowledgement);
+    message.appAcknowledgement !== undefined && (obj.app_acknowledgement = base64FromBytes(message.appAcknowledgement));
     obj.forward_relayer_address = message.forwardRelayerAddress;
     obj.underlying_app_success = message.underlyingAppSuccess;
     return obj;

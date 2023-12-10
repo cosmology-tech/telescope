@@ -12,9 +12,9 @@ export interface MsgSuperfluidDelegateProtoMsg {
   value: Uint8Array;
 }
 export interface MsgSuperfluidDelegateAmino {
-  sender: string;
-  lock_id: string;
-  val_addr: string;
+  sender?: string;
+  lock_id?: string;
+  val_addr?: string;
 }
 export interface MsgSuperfluidDelegateSDKType {
   sender: string;
@@ -37,8 +37,8 @@ export interface MsgSuperfluidUndelegateProtoMsg {
   value: Uint8Array;
 }
 export interface MsgSuperfluidUndelegateAmino {
-  sender: string;
-  lock_id: string;
+  sender?: string;
+  lock_id?: string;
 }
 export interface MsgSuperfluidUndelegateSDKType {
   sender: string;
@@ -60,8 +60,8 @@ export interface MsgSuperfluidUnbondLockProtoMsg {
   value: Uint8Array;
 }
 export interface MsgSuperfluidUnbondLockAmino {
-  sender: string;
-  lock_id: string;
+  sender?: string;
+  lock_id?: string;
 }
 export interface MsgSuperfluidUnbondLockSDKType {
   sender: string;
@@ -94,9 +94,9 @@ export interface MsgLockAndSuperfluidDelegateProtoMsg {
  * specified validator addr.
  */
 export interface MsgLockAndSuperfluidDelegateAmino {
-  sender: string;
-  coins: CoinAmino[];
-  val_addr: string;
+  sender?: string;
+  coins?: CoinAmino[];
+  val_addr?: string;
 }
 /**
  * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
@@ -116,7 +116,7 @@ export interface MsgLockAndSuperfluidDelegateResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgLockAndSuperfluidDelegateResponseAmino {
-  ID: string;
+  ID?: string;
 }
 export interface MsgLockAndSuperfluidDelegateResponseSDKType {
   ID: bigint;
@@ -150,8 +150,8 @@ export interface MsgUnPoolWhitelistedPoolProtoMsg {
  * until unbond completion.
  */
 export interface MsgUnPoolWhitelistedPoolAmino {
-  sender: string;
-  pool_id: string;
+  sender?: string;
+  pool_id?: string;
 }
 /**
  * MsgUnPoolWhitelistedPool Unpools every lock the sender has, that is
@@ -175,7 +175,7 @@ export interface MsgUnPoolWhitelistedPoolResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgUnPoolWhitelistedPoolResponseAmino {
-  exited_lock_ids: string[];
+  exited_lock_ids?: string[];
 }
 export interface MsgUnPoolWhitelistedPoolResponseSDKType {
   exited_lock_ids: bigint[];

@@ -56,8 +56,8 @@ export interface Operation_LabelsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface Operation_LabelsEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface Operation_LabelsEntrySDKType {
   key: string;
@@ -162,9 +162,9 @@ export interface OperationAmino {
    * and an idempotent id is desirable for deduplication purpose, UUID version 5
    * is recommended. See RFC 4122 for details.
    */
-  operation_id: string;
+  operation_id?: string;
   /** Fully qualified name of the operation. Reserved for future use. */
-  operation_name: string;
+  operation_name?: string;
   /**
    * Identity of the consumer who is using the service.
    * This field should be filled in for the operations initiated by a
@@ -179,7 +179,7 @@ export interface OperationAmino {
    *     - organizations/ORGANIZATION_NUMBER,
    *     - api`_`key:API_KEY.
    */
-  consumer_id: string;
+  consumer_id?: string;
   /** Required. Start time of the operation. */
   start_time?: string;
   /**
@@ -208,7 +208,7 @@ export interface OperationAmino {
    *        where the API is served, such as App Engine, Compute Engine, or
    *        Kubernetes Engine.
    */
-  labels: {
+  labels?: {
     [key: string]: string;
   };
   /**
@@ -223,13 +223,13 @@ export interface OperationAmino {
    * instances, the entire request is rejected with
    * an invalid argument error.
    */
-  metric_value_sets: MetricValueSetAmino[];
+  metric_value_sets?: MetricValueSetAmino[];
   /** Represents information to be logged. */
-  log_entries: LogEntryAmino[];
+  log_entries?: LogEntryAmino[];
   /** DO NOT USE. This is an experimental field. */
-  importance: Operation_Importance;
+  importance?: Operation_Importance;
   /** Unimplemented. */
-  extensions: AnyAmino[];
+  extensions?: AnyAmino[];
 }
 /** Represents information regarding an operation. */
 export interface OperationSDKType {

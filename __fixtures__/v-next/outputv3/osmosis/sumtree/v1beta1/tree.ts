@@ -9,7 +9,7 @@ export interface NodeProtoMsg {
   value: Uint8Array;
 }
 export interface NodeAmino {
-  children: ChildAmino[];
+  children?: ChildAmino[];
 }
 export interface NodeSDKType {
   children: ChildSDKType[];
@@ -23,8 +23,8 @@ export interface ChildProtoMsg {
   value: Uint8Array;
 }
 export interface ChildAmino {
-  index: string;
-  accumulation: string;
+  index?: string;
+  accumulation?: string;
 }
 export interface ChildSDKType {
   index: Uint8Array;
@@ -210,7 +210,7 @@ export const Child = {
   },
   toAmino(message: Child, useInterfaces: boolean = true): ChildAmino {
     const obj: any = {};
-    obj.index = base64FromBytes(message.index);
+    message.index !== undefined && (obj.index = base64FromBytes(message.index));
     obj.accumulation = message.accumulation;
     return obj;
   },

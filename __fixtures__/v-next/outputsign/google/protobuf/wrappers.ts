@@ -21,7 +21,7 @@ export interface DoubleValueProtoMsg {
  */
 export interface DoubleValueAmino {
   /** The double value. */
-  value: number;
+  value?: number;
 }
 export interface DoubleValueAminoMsg {
   type: "/google.protobuf.DoubleValue";
@@ -55,7 +55,7 @@ export interface FloatValueProtoMsg {
  */
 export interface FloatValueAmino {
   /** The float value. */
-  value: number;
+  value?: number;
 }
 export interface FloatValueAminoMsg {
   type: "/google.protobuf.FloatValue";
@@ -89,7 +89,7 @@ export interface Int64ValueProtoMsg {
  */
 export interface Int64ValueAmino {
   /** The int64 value. */
-  value: string;
+  value?: string;
 }
 export interface Int64ValueAminoMsg {
   type: "/google.protobuf.Int64Value";
@@ -123,7 +123,7 @@ export interface UInt64ValueProtoMsg {
  */
 export interface UInt64ValueAmino {
   /** The uint64 value. */
-  value: string;
+  value?: string;
 }
 export interface UInt64ValueAminoMsg {
   type: "/google.protobuf.UInt64Value";
@@ -157,7 +157,7 @@ export interface Int32ValueProtoMsg {
  */
 export interface Int32ValueAmino {
   /** The int32 value. */
-  value: number;
+  value?: number;
 }
 export interface Int32ValueAminoMsg {
   type: "/google.protobuf.Int32Value";
@@ -191,7 +191,7 @@ export interface UInt32ValueProtoMsg {
  */
 export interface UInt32ValueAmino {
   /** The uint32 value. */
-  value: number;
+  value?: number;
 }
 export interface UInt32ValueAminoMsg {
   type: "/google.protobuf.UInt32Value";
@@ -225,7 +225,7 @@ export interface BoolValueProtoMsg {
  */
 export interface BoolValueAmino {
   /** The bool value. */
-  value: boolean;
+  value?: boolean;
 }
 export interface BoolValueAminoMsg {
   type: "/google.protobuf.BoolValue";
@@ -259,7 +259,7 @@ export interface StringValueProtoMsg {
  */
 export interface StringValueAmino {
   /** The string value. */
-  value: string;
+  value?: string;
 }
 export interface StringValueAminoMsg {
   type: "/google.protobuf.StringValue";
@@ -293,7 +293,7 @@ export interface BytesValueProtoMsg {
  */
 export interface BytesValueAmino {
   /** The bytes value. */
-  value: string;
+  value?: string;
 }
 export interface BytesValueAminoMsg {
   type: "/google.protobuf.BytesValue";
@@ -841,7 +841,7 @@ export const BytesValue = {
   },
   toAmino(message: BytesValue): BytesValueAmino {
     const obj: any = {};
-    obj.value = base64FromBytes(message.value);
+    message.value !== undefined && (obj.value = base64FromBytes(message.value));
     return obj;
   },
   fromAminoMsg(object: BytesValueAminoMsg): BytesValue {

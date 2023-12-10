@@ -114,7 +114,7 @@ export interface BackendAmino {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: BackendRuleAmino[];
+  rules?: BackendRuleAmino[];
 }
 /** `Backend` defines the backend configuration for a service. */
 export interface BackendSDKType {
@@ -216,7 +216,7 @@ export interface BackendRuleAmino {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /**
    * The address of the API backend.
    * 
@@ -239,23 +239,23 @@ export interface BackendRuleAmino {
    * For HTTP backends, use [protocol][google.api.BackendRule.protocol]
    * to specify the protocol version.
    */
-  address: string;
+  address?: string;
   /**
    * The number of seconds to wait for a response from a request. The default
    * varies based on the request protocol and deployment environment.
    */
-  deadline: number;
+  deadline?: number;
   /**
    * Minimum deadline in seconds needed for this method. Calls having deadline
    * value lower than this will be rejected.
    */
-  min_deadline: number;
+  min_deadline?: number;
   /**
    * The number of seconds to wait for the completion of a long running
    * operation. The default is no deadline.
    */
-  operation_deadline: number;
-  path_translation: BackendRule_PathTranslation;
+  operation_deadline?: number;
+  path_translation?: BackendRule_PathTranslation;
   /**
    * The JWT audience is used when generating a JWT ID token for the backend.
    * This ID token will be added in the HTTP "authorization" header, and sent
@@ -292,7 +292,7 @@ export interface BackendRuleAmino {
    * https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
    * for more details on the supported values.
    */
-  protocol: string;
+  protocol?: string;
 }
 /** A backend rule provides configuration for an individual API element. */
 export interface BackendRuleSDKType {

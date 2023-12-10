@@ -263,7 +263,7 @@ export interface RequestEchoProtoMsg {
   value: Uint8Array;
 }
 export interface RequestEchoAmino {
-  message: string;
+  message?: string;
 }
 export interface RequestEchoSDKType {
   message: string;
@@ -285,9 +285,9 @@ export interface RequestInfoProtoMsg {
   value: Uint8Array;
 }
 export interface RequestInfoAmino {
-  version: string;
-  block_version: string;
-  p2p_version: string;
+  version?: string;
+  block_version?: string;
+  p2p_version?: string;
 }
 export interface RequestInfoSDKType {
   version: string;
@@ -305,8 +305,8 @@ export interface RequestSetOptionProtoMsg {
 }
 /** nondeterministic */
 export interface RequestSetOptionAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 /** nondeterministic */
 export interface RequestSetOptionSDKType {
@@ -327,11 +327,11 @@ export interface RequestInitChainProtoMsg {
 }
 export interface RequestInitChainAmino {
   time?: string;
-  chain_id: string;
+  chain_id?: string;
   consensus_params?: ConsensusParamsAmino;
-  validators: ValidatorUpdateAmino[];
-  app_state_bytes: string;
-  initial_height: string;
+  validators?: ValidatorUpdateAmino[];
+  app_state_bytes?: string;
+  initial_height?: string;
 }
 export interface RequestInitChainSDKType {
   time: Date;
@@ -352,10 +352,10 @@ export interface RequestQueryProtoMsg {
   value: Uint8Array;
 }
 export interface RequestQueryAmino {
-  data: string;
-  path: string;
-  height: string;
-  prove: boolean;
+  data?: string;
+  path?: string;
+  height?: string;
+  prove?: boolean;
 }
 export interface RequestQuerySDKType {
   data: Uint8Array;
@@ -374,10 +374,10 @@ export interface RequestBeginBlockProtoMsg {
   value: Uint8Array;
 }
 export interface RequestBeginBlockAmino {
-  hash: string;
+  hash?: string;
   header?: HeaderAmino;
   last_commit_info?: LastCommitInfoAmino;
-  byzantine_validators: EvidenceAmino[];
+  byzantine_validators?: EvidenceAmino[];
 }
 export interface RequestBeginBlockSDKType {
   hash: Uint8Array;
@@ -394,8 +394,8 @@ export interface RequestCheckTxProtoMsg {
   value: Uint8Array;
 }
 export interface RequestCheckTxAmino {
-  tx: string;
-  type: CheckTxType;
+  tx?: string;
+  type?: CheckTxType;
 }
 export interface RequestCheckTxSDKType {
   tx: Uint8Array;
@@ -409,7 +409,7 @@ export interface RequestDeliverTxProtoMsg {
   value: Uint8Array;
 }
 export interface RequestDeliverTxAmino {
-  tx: string;
+  tx?: string;
 }
 export interface RequestDeliverTxSDKType {
   tx: Uint8Array;
@@ -422,7 +422,7 @@ export interface RequestEndBlockProtoMsg {
   value: Uint8Array;
 }
 export interface RequestEndBlockAmino {
-  height: string;
+  height?: string;
 }
 export interface RequestEndBlockSDKType {
   height: bigint;
@@ -460,7 +460,7 @@ export interface RequestOfferSnapshotAmino {
   /** snapshot offered by peers */
   snapshot?: SnapshotAmino;
   /** light client-verified app hash for snapshot height */
-  app_hash: string;
+  app_hash?: string;
 }
 /** offers a snapshot to the application */
 export interface RequestOfferSnapshotSDKType {
@@ -479,9 +479,9 @@ export interface RequestLoadSnapshotChunkProtoMsg {
 }
 /** loads a snapshot chunk */
 export interface RequestLoadSnapshotChunkAmino {
-  height: string;
-  format: number;
-  chunk: number;
+  height?: string;
+  format?: number;
+  chunk?: number;
 }
 /** loads a snapshot chunk */
 export interface RequestLoadSnapshotChunkSDKType {
@@ -501,9 +501,9 @@ export interface RequestApplySnapshotChunkProtoMsg {
 }
 /** Applies a snapshot chunk */
 export interface RequestApplySnapshotChunkAmino {
-  index: number;
-  chunk: string;
-  sender: string;
+  index?: number;
+  chunk?: string;
+  sender?: string;
 }
 /** Applies a snapshot chunk */
 export interface RequestApplySnapshotChunkSDKType {
@@ -579,7 +579,7 @@ export interface ResponseExceptionProtoMsg {
 }
 /** nondeterministic */
 export interface ResponseExceptionAmino {
-  error: string;
+  error?: string;
 }
 /** nondeterministic */
 export interface ResponseExceptionSDKType {
@@ -593,7 +593,7 @@ export interface ResponseEchoProtoMsg {
   value: Uint8Array;
 }
 export interface ResponseEchoAmino {
-  message: string;
+  message?: string;
 }
 export interface ResponseEchoSDKType {
   message: string;
@@ -617,11 +617,11 @@ export interface ResponseInfoProtoMsg {
   value: Uint8Array;
 }
 export interface ResponseInfoAmino {
-  data: string;
-  version: string;
-  app_version: string;
-  last_block_height: string;
-  last_block_app_hash: string;
+  data?: string;
+  version?: string;
+  app_version?: string;
+  last_block_height?: string;
+  last_block_app_hash?: string;
 }
 export interface ResponseInfoSDKType {
   data: string;
@@ -643,10 +643,10 @@ export interface ResponseSetOptionProtoMsg {
 }
 /** nondeterministic */
 export interface ResponseSetOptionAmino {
-  code: number;
+  code?: number;
   /** bytes data = 2; */
-  log: string;
-  info: string;
+  log?: string;
+  info?: string;
 }
 /** nondeterministic */
 export interface ResponseSetOptionSDKType {
@@ -665,8 +665,8 @@ export interface ResponseInitChainProtoMsg {
 }
 export interface ResponseInitChainAmino {
   consensus_params?: ConsensusParamsAmino;
-  validators: ValidatorUpdateAmino[];
-  app_hash: string;
+  validators?: ValidatorUpdateAmino[];
+  app_hash?: string;
 }
 export interface ResponseInitChainSDKType {
   consensus_params?: ConsensusParamsSDKType;
@@ -691,17 +691,17 @@ export interface ResponseQueryProtoMsg {
   value: Uint8Array;
 }
 export interface ResponseQueryAmino {
-  code: number;
+  code?: number;
   /** bytes data = 2; // use "value" instead. */
-  log: string;
+  log?: string;
   /** nondeterministic */
-  info: string;
-  index: string;
-  key: string;
-  value: string;
+  info?: string;
+  index?: string;
+  key?: string;
+  value?: string;
   proof_ops?: ProofOpsAmino;
-  height: string;
-  codespace: string;
+  height?: string;
+  codespace?: string;
 }
 export interface ResponseQuerySDKType {
   code: number;
@@ -722,7 +722,7 @@ export interface ResponseBeginBlockProtoMsg {
   value: Uint8Array;
 }
 export interface ResponseBeginBlockAmino {
-  events: EventAmino[];
+  events?: EventAmino[];
 }
 export interface ResponseBeginBlockSDKType {
   events: EventSDKType[];
@@ -744,16 +744,16 @@ export interface ResponseCheckTxProtoMsg {
   value: Uint8Array;
 }
 export interface ResponseCheckTxAmino {
-  code: number;
-  data: string;
+  code?: number;
+  data?: string;
   /** nondeterministic */
-  log: string;
+  log?: string;
   /** nondeterministic */
-  info: string;
-  gas_wanted: string;
-  gas_used: string;
-  events: EventAmino[];
-  codespace: string;
+  info?: string;
+  gas_wanted?: string;
+  gas_used?: string;
+  events?: EventAmino[];
+  codespace?: string;
 }
 export interface ResponseCheckTxSDKType {
   code: number;
@@ -782,16 +782,16 @@ export interface ResponseDeliverTxProtoMsg {
   value: Uint8Array;
 }
 export interface ResponseDeliverTxAmino {
-  code: number;
-  data: string;
+  code?: number;
+  data?: string;
   /** nondeterministic */
-  log: string;
+  log?: string;
   /** nondeterministic */
-  info: string;
-  gas_wanted: string;
-  gas_used: string;
-  events: EventAmino[];
-  codespace: string;
+  info?: string;
+  gas_wanted?: string;
+  gas_used?: string;
+  events?: EventAmino[];
+  codespace?: string;
 }
 export interface ResponseDeliverTxSDKType {
   code: number;
@@ -813,9 +813,9 @@ export interface ResponseEndBlockProtoMsg {
   value: Uint8Array;
 }
 export interface ResponseEndBlockAmino {
-  validator_updates: ValidatorUpdateAmino[];
+  validator_updates?: ValidatorUpdateAmino[];
   consensus_param_updates?: ConsensusParamsAmino;
-  events: EventAmino[];
+  events?: EventAmino[];
 }
 export interface ResponseEndBlockSDKType {
   validator_updates: ValidatorUpdateSDKType[];
@@ -833,8 +833,8 @@ export interface ResponseCommitProtoMsg {
 }
 export interface ResponseCommitAmino {
   /** reserve 1 */
-  data: string;
-  retain_height: string;
+  data?: string;
+  retain_height?: string;
 }
 export interface ResponseCommitSDKType {
   data: Uint8Array;
@@ -848,7 +848,7 @@ export interface ResponseListSnapshotsProtoMsg {
   value: Uint8Array;
 }
 export interface ResponseListSnapshotsAmino {
-  snapshots: SnapshotAmino[];
+  snapshots?: SnapshotAmino[];
 }
 export interface ResponseListSnapshotsSDKType {
   snapshots: SnapshotSDKType[];
@@ -861,7 +861,7 @@ export interface ResponseOfferSnapshotProtoMsg {
   value: Uint8Array;
 }
 export interface ResponseOfferSnapshotAmino {
-  result: ResponseOfferSnapshot_Result;
+  result?: ResponseOfferSnapshot_Result;
 }
 export interface ResponseOfferSnapshotSDKType {
   result: ResponseOfferSnapshot_Result;
@@ -874,7 +874,7 @@ export interface ResponseLoadSnapshotChunkProtoMsg {
   value: Uint8Array;
 }
 export interface ResponseLoadSnapshotChunkAmino {
-  chunk: string;
+  chunk?: string;
 }
 export interface ResponseLoadSnapshotChunkSDKType {
   chunk: Uint8Array;
@@ -891,11 +891,11 @@ export interface ResponseApplySnapshotChunkProtoMsg {
   value: Uint8Array;
 }
 export interface ResponseApplySnapshotChunkAmino {
-  result: ResponseApplySnapshotChunk_Result;
+  result?: ResponseApplySnapshotChunk_Result;
   /** Chunks to refetch and reapply */
-  refetch_chunks: number[];
+  refetch_chunks?: number[];
   /** Chunk senders to reject and ban */
-  reject_senders: string[];
+  reject_senders?: string[];
 }
 export interface ResponseApplySnapshotChunkSDKType {
   result: ResponseApplySnapshotChunk_Result;
@@ -950,9 +950,9 @@ export interface BlockParamsProtoMsg {
 /** BlockParams contains limits on the block size. */
 export interface BlockParamsAmino {
   /** Note: must be greater than 0 */
-  max_bytes: string;
+  max_bytes?: string;
   /** Note: must be greater or equal to -1 */
-  max_gas: string;
+  max_gas?: string;
 }
 /** BlockParams contains limits on the block size. */
 export interface BlockParamsSDKType {
@@ -968,8 +968,8 @@ export interface LastCommitInfoProtoMsg {
   value: Uint8Array;
 }
 export interface LastCommitInfoAmino {
-  round: number;
-  votes: VoteInfoAmino[];
+  round?: number;
+  votes?: VoteInfoAmino[];
 }
 export interface LastCommitInfoSDKType {
   round: number;
@@ -994,8 +994,8 @@ export interface EventProtoMsg {
  * Later, transactions may be queried using these events.
  */
 export interface EventAmino {
-  type: string;
-  attributes: EventAttributeAmino[];
+  type?: string;
+  attributes?: EventAttributeAmino[];
 }
 /**
  * Event allows application developers to attach additional information to
@@ -1019,10 +1019,10 @@ export interface EventAttributeProtoMsg {
 }
 /** EventAttribute is a single key-value pair, associated with an event. */
 export interface EventAttributeAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
   /** nondeterministic */
-  index: boolean;
+  index?: boolean;
 }
 /** EventAttribute is a single key-value pair, associated with an event. */
 export interface EventAttributeSDKType {
@@ -1051,9 +1051,9 @@ export interface TxResultProtoMsg {
  * One usage is indexing transaction results.
  */
 export interface TxResultAmino {
-  height: string;
-  index: number;
-  tx: string;
+  height?: string;
+  index?: number;
+  tx?: string;
   result?: ResponseDeliverTxAmino;
 }
 /**
@@ -1087,9 +1087,9 @@ export interface ValidatorAmino {
    * The first 20 bytes of SHA256(public key)
    * PubKey pub_key = 2 [(gogoproto.nullable)=false];
    */
-  address: string;
+  address?: string;
   /** The voting power */
-  power: string;
+  power?: string;
 }
 /** Validator */
 export interface ValidatorSDKType {
@@ -1108,7 +1108,7 @@ export interface ValidatorUpdateProtoMsg {
 /** ValidatorUpdate */
 export interface ValidatorUpdateAmino {
   pub_key?: PublicKeyAmino;
-  power: string;
+  power?: string;
 }
 /** ValidatorUpdate */
 export interface ValidatorUpdateSDKType {
@@ -1127,7 +1127,7 @@ export interface VoteInfoProtoMsg {
 /** VoteInfo */
 export interface VoteInfoAmino {
   validator?: ValidatorAmino;
-  signed_last_block: boolean;
+  signed_last_block?: boolean;
 }
 /** VoteInfo */
 export interface VoteInfoSDKType {
@@ -1154,11 +1154,11 @@ export interface EvidenceProtoMsg {
   value: Uint8Array;
 }
 export interface EvidenceAmino {
-  type: EvidenceType;
+  type?: EvidenceType;
   /** The offending validator */
   validator?: ValidatorAmino;
   /** The height when the offense occurred */
-  height: string;
+  height?: string;
   /** The corresponding time where the offense occurred */
   time?: string;
   /**
@@ -1166,7 +1166,7 @@ export interface EvidenceAmino {
    * not store historical validators.
    * https://github.com/tendermint/tendermint/issues/4581
    */
-  total_voting_power: string;
+  total_voting_power?: string;
 }
 export interface EvidenceSDKType {
   type: EvidenceType;
@@ -1193,15 +1193,15 @@ export interface SnapshotProtoMsg {
 }
 export interface SnapshotAmino {
   /** The height at which the snapshot was taken */
-  height: string;
+  height?: string;
   /** The application-specific snapshot format */
-  format: number;
+  format?: number;
   /** Number of chunks in the snapshot */
-  chunks: number;
+  chunks?: number;
   /** Arbitrary snapshot hash, equal only if identical */
-  hash: string;
+  hash?: string;
   /** Arbitrary application metadata */
-  metadata: string;
+  metadata?: string;
 }
 export interface SnapshotSDKType {
   height: bigint;
@@ -2002,7 +2002,7 @@ export const RequestInitChain = {
     } else {
       obj.validators = [];
     }
-    obj.app_state_bytes = base64FromBytes(message.appStateBytes);
+    message.appStateBytes !== undefined && (obj.app_state_bytes = base64FromBytes(message.appStateBytes));
     obj.initial_height = message.initialHeight ? message.initialHeight.toString() : undefined;
     return obj;
   },
@@ -2122,7 +2122,7 @@ export const RequestQuery = {
   },
   toAmino(message: RequestQuery, useInterfaces: boolean = true): RequestQueryAmino {
     const obj: any = {};
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     obj.path = message.path;
     obj.height = message.height ? message.height.toString() : undefined;
     obj.prove = message.prove;
@@ -2254,7 +2254,7 @@ export const RequestBeginBlock = {
   },
   toAmino(message: RequestBeginBlock, useInterfaces: boolean = true): RequestBeginBlockAmino {
     const obj: any = {};
-    obj.hash = base64FromBytes(message.hash);
+    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash));
     obj.header = message.header ? Header.toAmino(message.header, useInterfaces) : undefined;
     obj.last_commit_info = message.lastCommitInfo ? LastCommitInfo.toAmino(message.lastCommitInfo, useInterfaces) : undefined;
     if (message.byzantineValidators) {
@@ -2352,7 +2352,7 @@ export const RequestCheckTx = {
   },
   toAmino(message: RequestCheckTx, useInterfaces: boolean = true): RequestCheckTxAmino {
     const obj: any = {};
-    obj.tx = base64FromBytes(message.tx);
+    message.tx !== undefined && (obj.tx = base64FromBytes(message.tx));
     obj.type = message.type;
     return obj;
   },
@@ -2431,7 +2431,7 @@ export const RequestDeliverTx = {
   },
   toAmino(message: RequestDeliverTx, useInterfaces: boolean = true): RequestDeliverTxAmino {
     const obj: any = {};
-    obj.tx = base64FromBytes(message.tx);
+    message.tx !== undefined && (obj.tx = base64FromBytes(message.tx));
     return obj;
   },
   fromProtoMsg(message: RequestDeliverTxProtoMsg, useInterfaces: boolean = true): RequestDeliverTx {
@@ -2727,7 +2727,7 @@ export const RequestOfferSnapshot = {
   toAmino(message: RequestOfferSnapshot, useInterfaces: boolean = true): RequestOfferSnapshotAmino {
     const obj: any = {};
     obj.snapshot = message.snapshot ? Snapshot.toAmino(message.snapshot, useInterfaces) : undefined;
-    obj.app_hash = base64FromBytes(message.appHash);
+    message.appHash !== undefined && (obj.app_hash = base64FromBytes(message.appHash));
     return obj;
   },
   fromProtoMsg(message: RequestOfferSnapshotProtoMsg, useInterfaces: boolean = true): RequestOfferSnapshot {
@@ -2940,7 +2940,7 @@ export const RequestApplySnapshotChunk = {
   toAmino(message: RequestApplySnapshotChunk, useInterfaces: boolean = true): RequestApplySnapshotChunkAmino {
     const obj: any = {};
     obj.index = message.index;
-    obj.chunk = base64FromBytes(message.chunk);
+    message.chunk !== undefined && (obj.chunk = base64FromBytes(message.chunk));
     obj.sender = message.sender;
     return obj;
   },
@@ -3616,7 +3616,7 @@ export const ResponseInfo = {
     obj.version = message.version;
     obj.app_version = message.appVersion ? message.appVersion.toString() : undefined;
     obj.last_block_height = message.lastBlockHeight ? message.lastBlockHeight.toString() : undefined;
-    obj.last_block_app_hash = base64FromBytes(message.lastBlockAppHash);
+    message.lastBlockAppHash !== undefined && (obj.last_block_app_hash = base64FromBytes(message.lastBlockAppHash));
     return obj;
   },
   fromProtoMsg(message: ResponseInfoProtoMsg, useInterfaces: boolean = true): ResponseInfo {
@@ -3842,7 +3842,7 @@ export const ResponseInitChain = {
     } else {
       obj.validators = [];
     }
-    obj.app_hash = base64FromBytes(message.appHash);
+    message.appHash !== undefined && (obj.app_hash = base64FromBytes(message.appHash));
     return obj;
   },
   fromProtoMsg(message: ResponseInitChainProtoMsg, useInterfaces: boolean = true): ResponseInitChain {
@@ -4034,8 +4034,8 @@ export const ResponseQuery = {
     obj.log = message.log;
     obj.info = message.info;
     obj.index = message.index ? message.index.toString() : undefined;
-    obj.key = base64FromBytes(message.key);
-    obj.value = base64FromBytes(message.value);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value));
     obj.proof_ops = message.proofOps ? ProofOps.toAmino(message.proofOps, useInterfaces) : undefined;
     obj.height = message.height ? message.height.toString() : undefined;
     obj.codespace = message.codespace;
@@ -4310,7 +4310,7 @@ export const ResponseCheckTx = {
   toAmino(message: ResponseCheckTx, useInterfaces: boolean = true): ResponseCheckTxAmino {
     const obj: any = {};
     obj.code = message.code;
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     obj.log = message.log;
     obj.info = message.info;
     obj.gas_wanted = message.gasWanted ? message.gasWanted.toString() : undefined;
@@ -4502,7 +4502,7 @@ export const ResponseDeliverTx = {
   toAmino(message: ResponseDeliverTx, useInterfaces: boolean = true): ResponseDeliverTxAmino {
     const obj: any = {};
     obj.code = message.code;
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     obj.log = message.log;
     obj.info = message.info;
     obj.gas_wanted = message.gasWanted ? message.gasWanted.toString() : undefined;
@@ -4737,7 +4737,7 @@ export const ResponseCommit = {
   },
   toAmino(message: ResponseCommit, useInterfaces: boolean = true): ResponseCommitAmino {
     const obj: any = {};
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     obj.retain_height = message.retainHeight ? message.retainHeight.toString() : undefined;
     return obj;
   },
@@ -4984,7 +4984,7 @@ export const ResponseLoadSnapshotChunk = {
   },
   toAmino(message: ResponseLoadSnapshotChunk, useInterfaces: boolean = true): ResponseLoadSnapshotChunkAmino {
     const obj: any = {};
-    obj.chunk = base64FromBytes(message.chunk);
+    message.chunk !== undefined && (obj.chunk = base64FromBytes(message.chunk));
     return obj;
   },
   fromProtoMsg(message: ResponseLoadSnapshotChunkProtoMsg, useInterfaces: boolean = true): ResponseLoadSnapshotChunk {
@@ -5659,8 +5659,8 @@ export const EventAttribute = {
   },
   toAmino(message: EventAttribute, useInterfaces: boolean = true): EventAttributeAmino {
     const obj: any = {};
-    obj.key = base64FromBytes(message.key);
-    obj.value = base64FromBytes(message.value);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value));
     obj.index = message.index;
     return obj;
   },
@@ -5784,7 +5784,7 @@ export const TxResult = {
     const obj: any = {};
     obj.height = message.height ? message.height.toString() : undefined;
     obj.index = message.index;
-    obj.tx = base64FromBytes(message.tx);
+    message.tx !== undefined && (obj.tx = base64FromBytes(message.tx));
     obj.result = message.result ? ResponseDeliverTx.toAmino(message.result, useInterfaces) : undefined;
     return obj;
   },
@@ -5878,7 +5878,7 @@ export const Validator = {
   },
   toAmino(message: Validator, useInterfaces: boolean = true): ValidatorAmino {
     const obj: any = {};
-    obj.address = base64FromBytes(message.address);
+    message.address !== undefined && (obj.address = base64FromBytes(message.address));
     obj.power = message.power ? message.power.toString() : undefined;
     return obj;
   },
@@ -6344,8 +6344,8 @@ export const Snapshot = {
     obj.height = message.height ? message.height.toString() : undefined;
     obj.format = message.format;
     obj.chunks = message.chunks;
-    obj.hash = base64FromBytes(message.hash);
-    obj.metadata = base64FromBytes(message.metadata);
+    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash));
+    message.metadata !== undefined && (obj.metadata = base64FromBytes(message.metadata));
     return obj;
   },
   fromProtoMsg(message: SnapshotProtoMsg, useInterfaces: boolean = true): Snapshot {

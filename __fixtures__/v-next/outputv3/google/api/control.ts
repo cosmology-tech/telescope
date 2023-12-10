@@ -27,7 +27,7 @@ export interface ControlAmino {
    * The service control environment to use. If empty, no control plane
    * feature (like quota and billing) will be enabled.
    */
-  environment: string;
+  environment?: string;
 }
 /**
  * Selects and configures the service controller used by the service.  The

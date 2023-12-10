@@ -27,9 +27,9 @@ export interface DenomTraceAmino {
    * path defines the chain of port/channel identifiers used for tracing the
    * source of the fungible token.
    */
-  path: string;
+  path?: string;
   /** base denomination of the relayed fungible token. */
-  base_denom: string;
+  base_denom?: string;
 }
 /**
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
@@ -72,12 +72,12 @@ export interface ParamsAmino {
    * send_enabled enables or disables all cross-chain token transfers from this
    * chain.
    */
-  send_enabled: boolean;
+  send_enabled?: boolean;
   /**
    * receive_enabled enables or disables all cross-chain token transfers to this
    * chain.
    */
-  receive_enabled: boolean;
+  receive_enabled?: boolean;
 }
 /**
  * Params defines the set of IBC transfer parameters.

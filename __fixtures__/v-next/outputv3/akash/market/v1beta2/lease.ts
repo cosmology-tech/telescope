@@ -66,11 +66,11 @@ export interface LeaseIDProtoMsg {
 }
 /** LeaseID stores bid details of lease */
 export interface LeaseIDAmino {
-  owner: string;
-  dseq: string;
-  gseq: number;
-  oseq: number;
-  provider: string;
+  owner?: string;
+  dseq?: string;
+  gseq?: number;
+  oseq?: number;
+  provider?: string;
 }
 /** LeaseID stores bid details of lease */
 export interface LeaseIDSDKType {
@@ -95,10 +95,10 @@ export interface LeaseProtoMsg {
 /** Lease stores LeaseID, state of lease and price */
 export interface LeaseAmino {
   lease_id?: LeaseIDAmino;
-  state: Lease_State;
+  state?: Lease_State;
   price?: DecCoinAmino;
-  created_at: string;
-  closed_on: string;
+  created_at?: string;
+  closed_on?: string;
 }
 /** Lease stores LeaseID, state of lease and price */
 export interface LeaseSDKType {
@@ -123,12 +123,12 @@ export interface LeaseFiltersProtoMsg {
 }
 /** LeaseFilters defines flags for lease list filter */
 export interface LeaseFiltersAmino {
-  owner: string;
-  dseq: string;
-  gseq: number;
-  oseq: number;
-  provider: string;
-  state: string;
+  owner?: string;
+  dseq?: string;
+  gseq?: number;
+  oseq?: number;
+  provider?: string;
+  state?: string;
 }
 /** LeaseFilters defines flags for lease list filter */
 export interface LeaseFiltersSDKType {

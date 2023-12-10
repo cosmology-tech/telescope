@@ -367,10 +367,10 @@ export const Params = {
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     obj.signed_blocks_window = message.signedBlocksWindow ? message.signedBlocksWindow.toString() : undefined;
-    obj.min_signed_per_window = base64FromBytes(message.minSignedPerWindow);
+    message.minSignedPerWindow !== undefined && (obj.min_signed_per_window = base64FromBytes(message.minSignedPerWindow));
     obj.downtime_jail_duration = message.downtimeJailDuration ? Duration.toAmino(message.downtimeJailDuration) : undefined;
-    obj.slash_fraction_double_sign = base64FromBytes(message.slashFractionDoubleSign);
-    obj.slash_fraction_downtime = base64FromBytes(message.slashFractionDowntime);
+    message.slashFractionDoubleSign !== undefined && (obj.slash_fraction_double_sign = base64FromBytes(message.slashFractionDoubleSign));
+    message.slashFractionDowntime !== undefined && (obj.slash_fraction_downtime = base64FromBytes(message.slashFractionDowntime));
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

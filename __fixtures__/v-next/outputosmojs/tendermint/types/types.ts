@@ -430,7 +430,7 @@ export const PartSetHeader = {
   toAmino(message: PartSetHeader): PartSetHeaderAmino {
     const obj: any = {};
     obj.total = message.total;
-    obj.hash = base64FromBytes(message.hash);
+    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash));
     return obj;
   },
   fromAminoMsg(object: PartSetHeaderAminoMsg): PartSetHeader {
@@ -545,7 +545,7 @@ export const Part = {
   toAmino(message: Part): PartAmino {
     const obj: any = {};
     obj.index = message.index;
-    obj.bytes = base64FromBytes(message.bytes);
+    message.bytes !== undefined && (obj.bytes = base64FromBytes(message.bytes));
     obj.proof = message.proof ? Proof.toAmino(message.proof) : undefined;
     return obj;
   },
@@ -646,7 +646,7 @@ export const BlockID = {
   },
   toAmino(message: BlockID): BlockIDAmino {
     const obj: any = {};
-    obj.hash = base64FromBytes(message.hash);
+    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash));
     obj.part_set_header = message.partSetHeader ? PartSetHeader.toAmino(message.partSetHeader) : undefined;
     return obj;
   },
@@ -920,15 +920,15 @@ export const Header = {
     obj.height = message.height ? message.height.toString() : undefined;
     obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
     obj.last_block_id = message.lastBlockId ? BlockID.toAmino(message.lastBlockId) : undefined;
-    obj.last_commit_hash = base64FromBytes(message.lastCommitHash);
-    obj.data_hash = base64FromBytes(message.dataHash);
-    obj.validators_hash = base64FromBytes(message.validatorsHash);
-    obj.next_validators_hash = base64FromBytes(message.nextValidatorsHash);
-    obj.consensus_hash = base64FromBytes(message.consensusHash);
-    obj.app_hash = base64FromBytes(message.appHash);
-    obj.last_results_hash = base64FromBytes(message.lastResultsHash);
-    obj.evidence_hash = base64FromBytes(message.evidenceHash);
-    obj.proposer_address = base64FromBytes(message.proposerAddress);
+    message.lastCommitHash !== undefined && (obj.last_commit_hash = base64FromBytes(message.lastCommitHash));
+    message.dataHash !== undefined && (obj.data_hash = base64FromBytes(message.dataHash));
+    message.validatorsHash !== undefined && (obj.validators_hash = base64FromBytes(message.validatorsHash));
+    message.nextValidatorsHash !== undefined && (obj.next_validators_hash = base64FromBytes(message.nextValidatorsHash));
+    message.consensusHash !== undefined && (obj.consensus_hash = base64FromBytes(message.consensusHash));
+    message.appHash !== undefined && (obj.app_hash = base64FromBytes(message.appHash));
+    message.lastResultsHash !== undefined && (obj.last_results_hash = base64FromBytes(message.lastResultsHash));
+    message.evidenceHash !== undefined && (obj.evidence_hash = base64FromBytes(message.evidenceHash));
+    message.proposerAddress !== undefined && (obj.proposer_address = base64FromBytes(message.proposerAddress));
     return obj;
   },
   fromAminoMsg(object: HeaderAminoMsg): Header {
@@ -1215,9 +1215,9 @@ export const Vote = {
     obj.round = message.round;
     obj.block_id = message.blockId ? BlockID.toAmino(message.blockId) : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
-    obj.validator_address = base64FromBytes(message.validatorAddress);
+    message.validatorAddress !== undefined && (obj.validator_address = base64FromBytes(message.validatorAddress));
     obj.validator_index = message.validatorIndex;
-    obj.signature = base64FromBytes(message.signature);
+    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature));
     return obj;
   },
   fromAminoMsg(object: VoteAminoMsg): Vote {
@@ -1489,9 +1489,9 @@ export const CommitSig = {
   toAmino(message: CommitSig): CommitSigAmino {
     const obj: any = {};
     obj.block_id_flag = message.blockIdFlag;
-    obj.validator_address = base64FromBytes(message.validatorAddress);
+    message.validatorAddress !== undefined && (obj.validator_address = base64FromBytes(message.validatorAddress));
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
-    obj.signature = base64FromBytes(message.signature);
+    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature));
     return obj;
   },
   fromAminoMsg(object: CommitSigAminoMsg): CommitSig {
@@ -1667,7 +1667,7 @@ export const Proposal = {
     obj.pol_round = message.polRound;
     obj.block_id = message.blockId ? BlockID.toAmino(message.blockId) : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
-    obj.signature = base64FromBytes(message.signature);
+    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature));
     return obj;
   },
   fromAminoMsg(object: ProposalAminoMsg): Proposal {
@@ -2114,8 +2114,8 @@ export const TxProof = {
   },
   toAmino(message: TxProof): TxProofAmino {
     const obj: any = {};
-    obj.root_hash = base64FromBytes(message.rootHash);
-    obj.data = base64FromBytes(message.data);
+    message.rootHash !== undefined && (obj.root_hash = base64FromBytes(message.rootHash));
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     obj.proof = message.proof ? Proof.toAmino(message.proof) : undefined;
     return obj;
   },

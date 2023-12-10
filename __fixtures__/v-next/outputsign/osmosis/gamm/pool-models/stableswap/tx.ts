@@ -18,12 +18,12 @@ export interface MsgCreateStableswapPoolProtoMsg {
 }
 /** ===================== MsgCreatePool */
 export interface MsgCreateStableswapPoolAmino {
-  sender: string;
+  sender?: string;
   pool_params?: PoolParamsAmino;
-  initial_pool_liquidity: CoinAmino[];
-  scaling_factors: string[];
-  future_pool_governor: string;
-  scaling_factor_controller: string;
+  initial_pool_liquidity?: CoinAmino[];
+  scaling_factors?: string[];
+  future_pool_governor?: string;
+  scaling_factor_controller?: string;
 }
 export interface MsgCreateStableswapPoolAminoMsg {
   type: "osmosis/gamm/create-stableswap-pool";
@@ -48,7 +48,7 @@ export interface MsgCreateStableswapPoolResponseProtoMsg {
 }
 /** Returns a poolID with custom poolName. */
 export interface MsgCreateStableswapPoolResponseAmino {
-  pool_id: string;
+  pool_id?: string;
 }
 export interface MsgCreateStableswapPoolResponseAminoMsg {
   type: "osmosis/gamm/create-stableswap-pool-response";
@@ -76,9 +76,9 @@ export interface MsgStableSwapAdjustScalingFactorsProtoMsg {
  * succeed. Adjusts stableswap scaling factors.
  */
 export interface MsgStableSwapAdjustScalingFactorsAmino {
-  sender: string;
-  pool_id: string;
-  scaling_factors: string[];
+  sender?: string;
+  pool_id?: string;
+  scaling_factors?: string[];
 }
 export interface MsgStableSwapAdjustScalingFactorsAminoMsg {
   type: "osmosis/gamm/stable-swap-adjust-scaling-factors";

@@ -34,18 +34,18 @@ export interface GenesisStateAmino {
    * superfluid_assets defines the registered superfluid assets that have been
    * registered via governance.
    */
-  superfluid_assets: SuperfluidAssetAmino[];
+  superfluid_assets?: SuperfluidAssetAmino[];
   /**
    * osmo_equivalent_multipliers is the records of osmo equivalent amount of
    * each superfluid registered pool, updated every epoch.
    */
-  osmo_equivalent_multipliers: OsmoEquivalentMultiplierRecordAmino[];
+  osmo_equivalent_multipliers?: OsmoEquivalentMultiplierRecordAmino[];
   /**
    * intermediary_accounts is a secondary account for superfluid staking that
    * plays an intermediary role between validators and the delegators.
    */
-  intermediary_accounts: SuperfluidIntermediaryAccountAmino[];
-  intemediary_account_connections: LockIdIntermediaryAccountConnectionAmino[];
+  intermediary_accounts?: SuperfluidIntermediaryAccountAmino[];
+  intemediary_account_connections?: LockIdIntermediaryAccountConnectionAmino[];
 }
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {

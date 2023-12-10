@@ -20,8 +20,8 @@ export interface AppProtoMsg {
  * updated in ResponseEndBlock.
  */
 export interface AppAmino {
-  protocol: string;
-  software: string;
+  protocol?: string;
+  software?: string;
 }
 /**
  * App includes the protocol and software version for the application.
@@ -51,8 +51,8 @@ export interface ConsensusProtoMsg {
  * state transition machine.
  */
 export interface ConsensusAmino {
-  block: string;
-  app: string;
+  block?: string;
+  app?: string;
 }
 /**
  * Consensus captures the consensus rules for processing a block in the blockchain,

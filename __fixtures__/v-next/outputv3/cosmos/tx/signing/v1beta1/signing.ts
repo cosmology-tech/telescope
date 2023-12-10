@@ -100,7 +100,7 @@ export interface SignatureDescriptorsProtoMsg {
 /** SignatureDescriptors wraps multiple SignatureDescriptor's. */
 export interface SignatureDescriptorsAmino {
   /** signatures are the signature descriptors */
-  signatures: SignatureDescriptorAmino[];
+  signatures?: SignatureDescriptorAmino[];
 }
 /** SignatureDescriptors wraps multiple SignatureDescriptor's. */
 export interface SignatureDescriptorsSDKType {
@@ -142,7 +142,7 @@ export interface SignatureDescriptorAmino {
    * number of committed transactions signed by a given address. It is used to prevent
    * replay attacks.
    */
-  sequence: string;
+  sequence?: string;
 }
 /**
  * SignatureDescriptor is a convenience type which represents the full data for
@@ -192,9 +192,9 @@ export interface SignatureDescriptor_Data_SingleProtoMsg {
 /** Single is the signature data for a single signer */
 export interface SignatureDescriptor_Data_SingleAmino {
   /** mode is the signing mode of the single signer */
-  mode: SignMode;
+  mode?: SignMode;
   /** signature is the raw signature bytes */
-  signature: string;
+  signature?: string;
 }
 /** Single is the signature data for a single signer */
 export interface SignatureDescriptor_Data_SingleSDKType {
@@ -217,7 +217,7 @@ export interface SignatureDescriptor_Data_MultiAmino {
   /** bitarray specifies which keys within the multisig are signing */
   bitarray?: CompactBitArrayAmino;
   /** signatures is the signatures of the multi-signature */
-  signatures: SignatureDescriptor_DataAmino[];
+  signatures?: SignatureDescriptor_DataAmino[];
 }
 /** Multi is the signature data for a multisig public key */
 export interface SignatureDescriptor_Data_MultiSDKType {
@@ -602,7 +602,7 @@ export const SignatureDescriptor_Data_Single = {
   toAmino(message: SignatureDescriptor_Data_Single, useInterfaces: boolean = true): SignatureDescriptor_Data_SingleAmino {
     const obj: any = {};
     obj.mode = message.mode;
-    obj.signature = base64FromBytes(message.signature);
+    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature));
     return obj;
   },
   fromProtoMsg(message: SignatureDescriptor_Data_SingleProtoMsg, useInterfaces: boolean = true): SignatureDescriptor_Data_Single {

@@ -17,13 +17,13 @@ export interface EpochInfoProtoMsg {
   value: Uint8Array;
 }
 export interface EpochInfoAmino {
-  identifier: string;
+  identifier?: string;
   start_time?: string;
   duration?: DurationAmino;
-  current_epoch: string;
+  current_epoch?: string;
   current_epoch_start_time?: string;
-  epoch_counting_started: boolean;
-  current_epoch_start_height: string;
+  epoch_counting_started?: boolean;
+  current_epoch_start_height?: string;
 }
 export interface EpochInfoAminoMsg {
   type: "/evmos.epochs.v1.EpochInfo";
@@ -48,7 +48,7 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the epochs module's genesis state. */
 export interface GenesisStateAmino {
-  epochs: EpochInfoAmino[];
+  epochs?: EpochInfoAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "/evmos.epochs.v1.GenesisState";

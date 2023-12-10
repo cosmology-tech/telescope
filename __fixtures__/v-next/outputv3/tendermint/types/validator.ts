@@ -12,9 +12,9 @@ export interface ValidatorSetProtoMsg {
   value: Uint8Array;
 }
 export interface ValidatorSetAmino {
-  validators: ValidatorAmino[];
+  validators?: ValidatorAmino[];
   proposer?: ValidatorAmino;
-  total_voting_power: string;
+  total_voting_power?: string;
 }
 export interface ValidatorSetSDKType {
   validators: ValidatorSDKType[];
@@ -32,10 +32,10 @@ export interface ValidatorProtoMsg {
   value: Uint8Array;
 }
 export interface ValidatorAmino {
-  address: string;
+  address?: string;
   pub_key?: PublicKeyAmino;
-  voting_power: string;
-  proposer_priority: string;
+  voting_power?: string;
+  proposer_priority?: string;
 }
 export interface ValidatorSDKType {
   address: Uint8Array;
@@ -53,7 +53,7 @@ export interface SimpleValidatorProtoMsg {
 }
 export interface SimpleValidatorAmino {
   pub_key?: PublicKeyAmino;
-  voting_power: string;
+  voting_power?: string;
 }
 export interface SimpleValidatorSDKType {
   pub_key?: PublicKeySDKType;
@@ -288,7 +288,7 @@ export const Validator = {
   },
   toAmino(message: Validator, useInterfaces: boolean = true): ValidatorAmino {
     const obj: any = {};
-    obj.address = base64FromBytes(message.address);
+    message.address !== undefined && (obj.address = base64FromBytes(message.address));
     obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey, useInterfaces) : undefined;
     obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
     obj.proposer_priority = message.proposerPriority ? message.proposerPriority.toString() : undefined;

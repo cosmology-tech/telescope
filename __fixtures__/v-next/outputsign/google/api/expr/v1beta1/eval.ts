@@ -30,14 +30,14 @@ export interface EvalStateProtoMsg {
  */
 export interface EvalStateAmino {
   /** The unique values referenced in this message. */
-  values: ExprValueAmino[];
+  values?: ExprValueAmino[];
   /**
    * An ordered list of results.
    * 
    * Tracks the flow of evaluation through the expression.
    * May be sparse.
    */
-  results: EvalState_ResultAmino[];
+  results?: EvalState_ResultAmino[];
 }
 export interface EvalStateAminoMsg {
   type: "/google.api.expr.v1beta1.EvalState";
@@ -68,7 +68,7 @@ export interface EvalState_ResultAmino {
   /** The expression this result is for. */
   expr?: IdRefAmino;
   /** The index in `values` of the resulting value. */
-  value: number;
+  value?: number;
 }
 export interface EvalState_ResultAminoMsg {
   type: "/google.api.expr.v1beta1.Result";
@@ -215,7 +215,7 @@ export interface ErrorSetProtoMsg {
  */
 export interface ErrorSetAmino {
   /** The errors in the set. */
-  errors: StatusAmino[];
+  errors?: StatusAmino[];
 }
 export interface ErrorSetAminoMsg {
   type: "/google.api.expr.v1beta1.ErrorSet";
@@ -249,7 +249,7 @@ export interface UnknownSetProtoMsg {
  */
 export interface UnknownSetAmino {
   /** The ids of the expressions with unknown values. */
-  exprs: IdRefAmino[];
+  exprs?: IdRefAmino[];
 }
 export interface UnknownSetAminoMsg {
   type: "/google.api.expr.v1beta1.UnknownSet";
@@ -275,7 +275,7 @@ export interface IdRefProtoMsg {
 /** A reference to an expression id. */
 export interface IdRefAmino {
   /** The expression id. */
-  id: number;
+  id?: number;
 }
 export interface IdRefAminoMsg {
   type: "/google.api.expr.v1beta1.IdRef";

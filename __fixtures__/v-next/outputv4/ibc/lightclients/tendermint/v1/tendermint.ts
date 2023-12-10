@@ -556,7 +556,7 @@ export const ConsensusState = {
     const obj: any = {};
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     obj.root = message.root ? MerkleRoot.toAmino(message.root) : undefined;
-    obj.next_validators_hash = base64FromBytes(message.nextValidatorsHash);
+    message.nextValidatorsHash !== undefined && (obj.next_validators_hash = base64FromBytes(message.nextValidatorsHash));
     return obj;
   },
   fromAminoMsg(object: ConsensusStateAminoMsg): ConsensusState {

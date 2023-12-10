@@ -11,7 +11,7 @@ export interface ParamsProtoMsg {
 }
 /** Params defines the parameters for the ibc-rate-limit module. */
 export interface ParamsAmino {
-  contract_address: string;
+  contract_address?: string;
 }
 /** Params defines the parameters for the ibc-rate-limit module. */
 export interface ParamsSDKType {

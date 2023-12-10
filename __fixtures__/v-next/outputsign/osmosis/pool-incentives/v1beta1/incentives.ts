@@ -22,7 +22,7 @@ export interface ParamsAmino {
    * itself, but rather manages the distribution of coins that matches the
    * defined minted_denom.
    */
-  minted_denom: string;
+  minted_denom?: string;
 }
 export interface ParamsAminoMsg {
   type: "osmosis/poolincentives/params";
@@ -39,7 +39,7 @@ export interface LockableDurationsInfoProtoMsg {
   value: Uint8Array;
 }
 export interface LockableDurationsInfoAmino {
-  lockable_durations: DurationAmino[];
+  lockable_durations?: DurationAmino[];
 }
 export interface LockableDurationsInfoAminoMsg {
   type: "osmosis/poolincentives/lockable-durations-info";
@@ -57,8 +57,8 @@ export interface DistrInfoProtoMsg {
   value: Uint8Array;
 }
 export interface DistrInfoAmino {
-  total_weight: string;
-  records: DistrRecordAmino[];
+  total_weight?: string;
+  records?: DistrRecordAmino[];
 }
 export interface DistrInfoAminoMsg {
   type: "osmosis/poolincentives/distr-info";
@@ -77,8 +77,8 @@ export interface DistrRecordProtoMsg {
   value: Uint8Array;
 }
 export interface DistrRecordAmino {
-  gauge_id: string;
-  weight: string;
+  gauge_id?: string;
+  weight?: string;
 }
 export interface DistrRecordAminoMsg {
   type: "osmosis/poolincentives/distr-record";
@@ -98,8 +98,8 @@ export interface PoolToGaugeProtoMsg {
   value: Uint8Array;
 }
 export interface PoolToGaugeAmino {
-  pool_id: string;
-  gauge_id: string;
+  pool_id?: string;
+  gauge_id?: string;
   duration?: DurationAmino;
 }
 export interface PoolToGaugeAminoMsg {
@@ -119,7 +119,7 @@ export interface PoolToGaugesProtoMsg {
   value: Uint8Array;
 }
 export interface PoolToGaugesAmino {
-  pool_to_gauge: PoolToGaugeAmino[];
+  pool_to_gauge?: PoolToGaugeAmino[];
 }
 export interface PoolToGaugesAminoMsg {
   type: "osmosis/poolincentives/pool-to-gauges";

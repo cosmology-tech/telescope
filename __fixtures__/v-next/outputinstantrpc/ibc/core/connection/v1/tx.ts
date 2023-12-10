@@ -672,9 +672,9 @@ export const MsgConnectionOpenTry = {
       obj.counterparty_versions = [];
     }
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
-    obj.proof_init = base64FromBytes(message.proofInit);
-    obj.proof_client = base64FromBytes(message.proofClient);
-    obj.proof_consensus = base64FromBytes(message.proofConsensus);
+    message.proofInit !== undefined && (obj.proof_init = base64FromBytes(message.proofInit));
+    message.proofClient !== undefined && (obj.proof_client = base64FromBytes(message.proofClient));
+    message.proofConsensus !== undefined && (obj.proof_consensus = base64FromBytes(message.proofConsensus));
     obj.consensus_height = message.consensusHeight ? Height.toAmino(message.consensusHeight) : {};
     obj.signer = message.signer;
     return obj;
@@ -980,9 +980,9 @@ export const MsgConnectionOpenAck = {
     obj.version = message.version ? Version.toAmino(message.version) : undefined;
     obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
-    obj.proof_try = base64FromBytes(message.proofTry);
-    obj.proof_client = base64FromBytes(message.proofClient);
-    obj.proof_consensus = base64FromBytes(message.proofConsensus);
+    message.proofTry !== undefined && (obj.proof_try = base64FromBytes(message.proofTry));
+    message.proofClient !== undefined && (obj.proof_client = base64FromBytes(message.proofClient));
+    message.proofConsensus !== undefined && (obj.proof_consensus = base64FromBytes(message.proofConsensus));
     obj.consensus_height = message.consensusHeight ? Height.toAmino(message.consensusHeight) : {};
     obj.signer = message.signer;
     return obj;
@@ -1194,7 +1194,7 @@ export const MsgConnectionOpenConfirm = {
   toAmino(message: MsgConnectionOpenConfirm): MsgConnectionOpenConfirmAmino {
     const obj: any = {};
     obj.connection_id = message.connectionId;
-    obj.proof_ack = base64FromBytes(message.proofAck);
+    message.proofAck !== undefined && (obj.proof_ack = base64FromBytes(message.proofAck));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     obj.signer = message.signer;
     return obj;

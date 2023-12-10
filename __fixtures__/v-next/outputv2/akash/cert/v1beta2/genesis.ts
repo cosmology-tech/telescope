@@ -13,7 +13,7 @@ export interface GenesisCertificateProtoMsg {
 }
 /** GenesisCertificate defines certificate entry at genesis */
 export interface GenesisCertificateAmino {
-  owner: string;
+  owner?: string;
   certificate?: CertificateAmino;
 }
 export interface GenesisCertificateAminoMsg {
@@ -35,7 +35,7 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the basic genesis state used by cert module */
 export interface GenesisStateAmino {
-  certificates: GenesisCertificateAmino[];
+  certificates?: GenesisCertificateAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "/akash.cert.v1beta2.GenesisState";

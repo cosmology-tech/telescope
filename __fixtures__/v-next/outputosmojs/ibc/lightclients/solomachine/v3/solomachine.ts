@@ -535,7 +535,7 @@ export const Header = {
   toAmino(message: Header): HeaderAmino {
     const obj: any = {};
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
-    obj.signature = base64FromBytes(message.signature);
+    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature));
     obj.new_public_key = message.newPublicKey ? Any.toAmino(message.newPublicKey) : undefined;
     obj.new_diversifier = message.newDiversifier;
     return obj;
@@ -793,9 +793,9 @@ export const SignatureAndData = {
   },
   toAmino(message: SignatureAndData): SignatureAndDataAmino {
     const obj: any = {};
-    obj.signature = base64FromBytes(message.signature);
-    obj.path = base64FromBytes(message.path);
-    obj.data = base64FromBytes(message.data);
+    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature));
+    message.path !== undefined && (obj.path = base64FromBytes(message.path));
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
   },
@@ -902,7 +902,7 @@ export const TimestampedSignatureData = {
   },
   toAmino(message: TimestampedSignatureData): TimestampedSignatureDataAmino {
     const obj: any = {};
-    obj.signature_data = base64FromBytes(message.signatureData);
+    message.signatureData !== undefined && (obj.signature_data = base64FromBytes(message.signatureData));
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
   },
@@ -1054,8 +1054,8 @@ export const SignBytes = {
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     obj.diversifier = message.diversifier;
-    obj.path = base64FromBytes(message.path);
-    obj.data = base64FromBytes(message.data);
+    message.path !== undefined && (obj.path = base64FromBytes(message.path));
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     return obj;
   },
   fromAminoMsg(object: SignBytesAminoMsg): SignBytes {

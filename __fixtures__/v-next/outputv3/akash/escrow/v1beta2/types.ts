@@ -111,8 +111,8 @@ export interface AccountIDProtoMsg {
 }
 /** AccountID is the account identifier */
 export interface AccountIDAmino {
-  scope: string;
-  xid: string;
+  scope?: string;
+  xid?: string;
 }
 /** AccountID is the account identifier */
 export interface AccountIDSDKType {
@@ -154,21 +154,21 @@ export interface AccountAmino {
   /** unique identifier for this escrow account */
   id?: AccountIDAmino;
   /** bech32 encoded account address of the owner of this escrow account */
-  owner: string;
+  owner?: string;
   /** current state of this escrow account */
-  state: Account_State;
+  state?: Account_State;
   /** unspent coins received from the owner's wallet */
   balance?: DecCoinAmino;
   /** total coins spent by this account */
   transferred?: DecCoinAmino;
   /** block height at which this account was last settled */
-  settled_at: string;
+  settled_at?: string;
   /**
    * bech32 encoded account address of the depositor.
    * If depositor is same as the owner, then any incoming coins are added to the Balance.
    * If depositor isn't same as the owner, then any incoming coins are added to the Funds.
    */
-  depositor: string;
+  depositor?: string;
   /**
    * Funds are unspent coins received from the (non-Owner) Depositor's wallet.
    * If there are any funds, they should be spent before spending the Balance.
@@ -203,9 +203,9 @@ export interface FractionalPaymentProtoMsg {
 /** Payment stores state for a payment */
 export interface FractionalPaymentAmino {
   account_id?: AccountIDAmino;
-  payment_id: string;
-  owner: string;
-  state: FractionalPayment_State;
+  payment_id?: string;
+  owner?: string;
+  state?: FractionalPayment_State;
   rate?: DecCoinAmino;
   balance?: DecCoinAmino;
   withdrawn?: CoinAmino;

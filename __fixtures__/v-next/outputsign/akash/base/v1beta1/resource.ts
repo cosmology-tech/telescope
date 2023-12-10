@@ -16,7 +16,7 @@ export interface CPUProtoMsg {
 /** CPU stores resource units and cpu config attributes */
 export interface CPUAmino {
   units?: ResourceValueAmino;
-  attributes: AttributeAmino[];
+  attributes?: AttributeAmino[];
 }
 export interface CPUAminoMsg {
   type: "/akash.base.v1beta1.CPU";
@@ -39,7 +39,7 @@ export interface MemoryProtoMsg {
 /** Memory stores resource quantity and memory attributes */
 export interface MemoryAmino {
   quantity?: ResourceValueAmino;
-  attributes: AttributeAmino[];
+  attributes?: AttributeAmino[];
 }
 export interface MemoryAminoMsg {
   type: "/akash.base.v1beta1.Memory";
@@ -62,7 +62,7 @@ export interface StorageProtoMsg {
 /** Storage stores resource quantity and storage attributes */
 export interface StorageAmino {
   quantity?: ResourceValueAmino;
-  attributes: AttributeAmino[];
+  attributes?: AttributeAmino[];
 }
 export interface StorageAminoMsg {
   type: "/akash.base.v1beta1.Storage";
@@ -95,7 +95,7 @@ export interface ResourceUnitsAmino {
   cpu?: CPUAmino;
   memory?: MemoryAmino;
   storage?: StorageAmino;
-  endpoints: EndpointAmino[];
+  endpoints?: EndpointAmino[];
 }
 export interface ResourceUnitsAminoMsg {
   type: "/akash.base.v1beta1.ResourceUnits";

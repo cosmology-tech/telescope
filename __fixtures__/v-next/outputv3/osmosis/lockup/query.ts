@@ -21,7 +21,7 @@ export interface ModuleBalanceResponseProtoMsg {
   value: Uint8Array;
 }
 export interface ModuleBalanceResponseAmino {
-  coins: CoinAmino[];
+  coins?: CoinAmino[];
 }
 export interface ModuleBalanceResponseSDKType {
   coins: CoinSDKType[];
@@ -41,7 +41,7 @@ export interface ModuleLockedAmountResponseProtoMsg {
   value: Uint8Array;
 }
 export interface ModuleLockedAmountResponseAmino {
-  coins: CoinAmino[];
+  coins?: CoinAmino[];
 }
 export interface ModuleLockedAmountResponseSDKType {
   coins: CoinSDKType[];
@@ -54,7 +54,7 @@ export interface AccountUnlockableCoinsRequestProtoMsg {
   value: Uint8Array;
 }
 export interface AccountUnlockableCoinsRequestAmino {
-  owner: string;
+  owner?: string;
 }
 export interface AccountUnlockableCoinsRequestSDKType {
   owner: string;
@@ -67,7 +67,7 @@ export interface AccountUnlockableCoinsResponseProtoMsg {
   value: Uint8Array;
 }
 export interface AccountUnlockableCoinsResponseAmino {
-  coins: CoinAmino[];
+  coins?: CoinAmino[];
 }
 export interface AccountUnlockableCoinsResponseSDKType {
   coins: CoinSDKType[];
@@ -80,7 +80,7 @@ export interface AccountUnlockingCoinsRequestProtoMsg {
   value: Uint8Array;
 }
 export interface AccountUnlockingCoinsRequestAmino {
-  owner: string;
+  owner?: string;
 }
 export interface AccountUnlockingCoinsRequestSDKType {
   owner: string;
@@ -93,7 +93,7 @@ export interface AccountUnlockingCoinsResponseProtoMsg {
   value: Uint8Array;
 }
 export interface AccountUnlockingCoinsResponseAmino {
-  coins: CoinAmino[];
+  coins?: CoinAmino[];
 }
 export interface AccountUnlockingCoinsResponseSDKType {
   coins: CoinSDKType[];
@@ -106,7 +106,7 @@ export interface AccountLockedCoinsRequestProtoMsg {
   value: Uint8Array;
 }
 export interface AccountLockedCoinsRequestAmino {
-  owner: string;
+  owner?: string;
 }
 export interface AccountLockedCoinsRequestSDKType {
   owner: string;
@@ -119,7 +119,7 @@ export interface AccountLockedCoinsResponseProtoMsg {
   value: Uint8Array;
 }
 export interface AccountLockedCoinsResponseAmino {
-  coins: CoinAmino[];
+  coins?: CoinAmino[];
 }
 export interface AccountLockedCoinsResponseSDKType {
   coins: CoinSDKType[];
@@ -133,7 +133,7 @@ export interface AccountLockedPastTimeRequestProtoMsg {
   value: Uint8Array;
 }
 export interface AccountLockedPastTimeRequestAmino {
-  owner: string;
+  owner?: string;
   timestamp?: string;
 }
 export interface AccountLockedPastTimeRequestSDKType {
@@ -148,7 +148,7 @@ export interface AccountLockedPastTimeResponseProtoMsg {
   value: Uint8Array;
 }
 export interface AccountLockedPastTimeResponseAmino {
-  locks: PeriodLockAmino[];
+  locks?: PeriodLockAmino[];
 }
 export interface AccountLockedPastTimeResponseSDKType {
   locks: PeriodLockSDKType[];
@@ -162,7 +162,7 @@ export interface AccountLockedPastTimeNotUnlockingOnlyRequestProtoMsg {
   value: Uint8Array;
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyRequestAmino {
-  owner: string;
+  owner?: string;
   timestamp?: string;
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyRequestSDKType {
@@ -177,7 +177,7 @@ export interface AccountLockedPastTimeNotUnlockingOnlyResponseProtoMsg {
   value: Uint8Array;
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyResponseAmino {
-  locks: PeriodLockAmino[];
+  locks?: PeriodLockAmino[];
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyResponseSDKType {
   locks: PeriodLockSDKType[];
@@ -191,7 +191,7 @@ export interface AccountUnlockedBeforeTimeRequestProtoMsg {
   value: Uint8Array;
 }
 export interface AccountUnlockedBeforeTimeRequestAmino {
-  owner: string;
+  owner?: string;
   timestamp?: string;
 }
 export interface AccountUnlockedBeforeTimeRequestSDKType {
@@ -206,7 +206,7 @@ export interface AccountUnlockedBeforeTimeResponseProtoMsg {
   value: Uint8Array;
 }
 export interface AccountUnlockedBeforeTimeResponseAmino {
-  locks: PeriodLockAmino[];
+  locks?: PeriodLockAmino[];
 }
 export interface AccountUnlockedBeforeTimeResponseSDKType {
   locks: PeriodLockSDKType[];
@@ -221,9 +221,9 @@ export interface AccountLockedPastTimeDenomRequestProtoMsg {
   value: Uint8Array;
 }
 export interface AccountLockedPastTimeDenomRequestAmino {
-  owner: string;
+  owner?: string;
   timestamp?: string;
-  denom: string;
+  denom?: string;
 }
 export interface AccountLockedPastTimeDenomRequestSDKType {
   owner: string;
@@ -238,7 +238,7 @@ export interface AccountLockedPastTimeDenomResponseProtoMsg {
   value: Uint8Array;
 }
 export interface AccountLockedPastTimeDenomResponseAmino {
-  locks: PeriodLockAmino[];
+  locks?: PeriodLockAmino[];
 }
 export interface AccountLockedPastTimeDenomResponseSDKType {
   locks: PeriodLockSDKType[];
@@ -252,7 +252,7 @@ export interface LockedDenomRequestProtoMsg {
   value: Uint8Array;
 }
 export interface LockedDenomRequestAmino {
-  denom: string;
+  denom?: string;
   duration?: DurationAmino;
 }
 export interface LockedDenomRequestSDKType {
@@ -267,7 +267,7 @@ export interface LockedDenomResponseProtoMsg {
   value: Uint8Array;
 }
 export interface LockedDenomResponseAmino {
-  amount: string;
+  amount?: string;
 }
 export interface LockedDenomResponseSDKType {
   amount: string;
@@ -280,7 +280,7 @@ export interface LockedRequestProtoMsg {
   value: Uint8Array;
 }
 export interface LockedRequestAmino {
-  lock_id: string;
+  lock_id?: string;
 }
 export interface LockedRequestSDKType {
   lock_id: bigint;
@@ -306,7 +306,7 @@ export interface SyntheticLockupsByLockupIDRequestProtoMsg {
   value: Uint8Array;
 }
 export interface SyntheticLockupsByLockupIDRequestAmino {
-  lock_id: string;
+  lock_id?: string;
 }
 export interface SyntheticLockupsByLockupIDRequestSDKType {
   lock_id: bigint;
@@ -319,7 +319,7 @@ export interface SyntheticLockupsByLockupIDResponseProtoMsg {
   value: Uint8Array;
 }
 export interface SyntheticLockupsByLockupIDResponseAmino {
-  synthetic_locks: SyntheticLockAmino[];
+  synthetic_locks?: SyntheticLockAmino[];
 }
 export interface SyntheticLockupsByLockupIDResponseSDKType {
   synthetic_locks: SyntheticLockSDKType[];
@@ -333,7 +333,7 @@ export interface AccountLockedLongerDurationRequestProtoMsg {
   value: Uint8Array;
 }
 export interface AccountLockedLongerDurationRequestAmino {
-  owner: string;
+  owner?: string;
   duration?: DurationAmino;
 }
 export interface AccountLockedLongerDurationRequestSDKType {
@@ -348,7 +348,7 @@ export interface AccountLockedLongerDurationResponseProtoMsg {
   value: Uint8Array;
 }
 export interface AccountLockedLongerDurationResponseAmino {
-  locks: PeriodLockAmino[];
+  locks?: PeriodLockAmino[];
 }
 export interface AccountLockedLongerDurationResponseSDKType {
   locks: PeriodLockSDKType[];
@@ -362,7 +362,7 @@ export interface AccountLockedDurationRequestProtoMsg {
   value: Uint8Array;
 }
 export interface AccountLockedDurationRequestAmino {
-  owner: string;
+  owner?: string;
   duration?: DurationAmino;
 }
 export interface AccountLockedDurationRequestSDKType {
@@ -377,7 +377,7 @@ export interface AccountLockedDurationResponseProtoMsg {
   value: Uint8Array;
 }
 export interface AccountLockedDurationResponseAmino {
-  locks: PeriodLockAmino[];
+  locks?: PeriodLockAmino[];
 }
 export interface AccountLockedDurationResponseSDKType {
   locks: PeriodLockSDKType[];
@@ -391,7 +391,7 @@ export interface AccountLockedLongerDurationNotUnlockingOnlyRequestProtoMsg {
   value: Uint8Array;
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyRequestAmino {
-  owner: string;
+  owner?: string;
   duration?: DurationAmino;
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType {
@@ -406,7 +406,7 @@ export interface AccountLockedLongerDurationNotUnlockingOnlyResponseProtoMsg {
   value: Uint8Array;
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyResponseAmino {
-  locks: PeriodLockAmino[];
+  locks?: PeriodLockAmino[];
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType {
   locks: PeriodLockSDKType[];
@@ -421,9 +421,9 @@ export interface AccountLockedLongerDurationDenomRequestProtoMsg {
   value: Uint8Array;
 }
 export interface AccountLockedLongerDurationDenomRequestAmino {
-  owner: string;
+  owner?: string;
   duration?: DurationAmino;
-  denom: string;
+  denom?: string;
 }
 export interface AccountLockedLongerDurationDenomRequestSDKType {
   owner: string;
@@ -438,7 +438,7 @@ export interface AccountLockedLongerDurationDenomResponseProtoMsg {
   value: Uint8Array;
 }
 export interface AccountLockedLongerDurationDenomResponseAmino {
-  locks: PeriodLockAmino[];
+  locks?: PeriodLockAmino[];
 }
 export interface AccountLockedLongerDurationDenomResponseSDKType {
   locks: PeriodLockSDKType[];

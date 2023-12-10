@@ -22,8 +22,8 @@ export interface FeeTokenProtoMsg {
  * The pool ID must have osmo as one of its assets.
  */
 export interface FeeTokenAmino {
-  denom: string;
-  poolID: string;
+  denom?: string;
+  poolID?: string;
 }
 /**
  * FeeToken is a struct that specifies a coin denom, and pool ID pair.

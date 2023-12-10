@@ -73,7 +73,7 @@ export interface MsgCreateBidProtoMsg {
 /** MsgCreateBid defines an SDK message for creating Bid */
 export interface MsgCreateBidAmino {
   order?: OrderIDAmino;
-  provider: string;
+  provider?: string;
   price?: DecCoinAmino;
   deposit?: CoinAmino;
 }
@@ -140,11 +140,11 @@ export interface BidIDProtoMsg {
  * A successful bid becomes a Lease(ID).
  */
 export interface BidIDAmino {
-  owner: string;
-  dseq: string;
-  gseq: number;
-  oseq: number;
-  provider: string;
+  owner?: string;
+  dseq?: string;
+  gseq?: number;
+  oseq?: number;
+  provider?: string;
 }
 /**
  * BidID stores owner and all other seq numbers
@@ -171,9 +171,9 @@ export interface BidProtoMsg {
 /** Bid stores BidID, state of bid and price */
 export interface BidAmino {
   bid_id?: BidIDAmino;
-  state: Bid_State;
+  state?: Bid_State;
   price?: DecCoinAmino;
-  created_at: string;
+  created_at?: string;
 }
 /** Bid stores BidID, state of bid and price */
 export interface BidSDKType {
@@ -197,12 +197,12 @@ export interface BidFiltersProtoMsg {
 }
 /** BidFilters defines flags for bid list filter */
 export interface BidFiltersAmino {
-  owner: string;
-  dseq: string;
-  gseq: number;
-  oseq: number;
-  provider: string;
-  state: string;
+  owner?: string;
+  dseq?: string;
+  gseq?: number;
+  oseq?: number;
+  provider?: string;
+  state?: string;
 }
 /** BidFilters defines flags for bid list filter */
 export interface BidFiltersSDKType {

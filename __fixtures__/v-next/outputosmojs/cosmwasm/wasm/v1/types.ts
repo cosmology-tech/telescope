@@ -674,7 +674,7 @@ export const CodeInfo = {
   },
   toAmino(message: CodeInfo): CodeInfoAmino {
     const obj: any = {};
-    obj.code_hash = base64FromBytes(message.codeHash);
+    message.codeHash !== undefined && (obj.code_hash = base64FromBytes(message.codeHash));
     obj.creator = message.creator;
     obj.instantiate_config = message.instantiateConfig ? AccessConfig.toAmino(message.instantiateConfig) : undefined;
     return obj;
@@ -1208,8 +1208,8 @@ export const Model = {
   },
   toAmino(message: Model): ModelAmino {
     const obj: any = {};
-    obj.key = base64FromBytes(message.key);
-    obj.value = base64FromBytes(message.value);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value));
     return obj;
   },
   fromAminoMsg(object: ModelAminoMsg): Model {

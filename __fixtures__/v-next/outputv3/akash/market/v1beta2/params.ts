@@ -14,7 +14,7 @@ export interface ParamsProtoMsg {
 /** Params is the params for the x/market module */
 export interface ParamsAmino {
   bid_min_deposit?: CoinAmino;
-  order_max_bids: number;
+  order_max_bids?: number;
 }
 /** Params is the params for the x/market module */
 export interface ParamsSDKType {

@@ -150,7 +150,7 @@ export interface CheckedExpr_ReferenceMapEntryProtoMsg {
   value: Uint8Array;
 }
 export interface CheckedExpr_ReferenceMapEntryAmino {
-  key: string;
+  key?: string;
   value?: ReferenceAmino;
 }
 export interface CheckedExpr_ReferenceMapEntrySDKType {
@@ -166,7 +166,7 @@ export interface CheckedExpr_TypeMapEntryProtoMsg {
   value: Uint8Array;
 }
 export interface CheckedExpr_TypeMapEntryAmino {
-  key: string;
+  key?: string;
   value?: TypeAmino;
 }
 export interface CheckedExpr_TypeMapEntrySDKType {
@@ -276,7 +276,7 @@ export interface CheckedExprAmino {
    * analysis. In some cases, this will save the runtime the work of applying
    * the same or similar transformations prior to evaluation.
    */
-  expr_version: string;
+  expr_version?: string;
   /**
    * The checked expression. Semantically equivalent to the parsed `expr`, but
    * may have structural differences.
@@ -474,7 +474,7 @@ export interface Type_FunctionTypeAmino {
   /** Result type of the function. */
   result_type?: TypeAmino;
   /** Argument types of the function. */
-  arg_types: TypeAmino[];
+  arg_types?: TypeAmino[];
 }
 /** Function type with result and arg types. */
 export interface Type_FunctionTypeSDKType {
@@ -495,9 +495,9 @@ export interface Type_AbstractTypeProtoMsg {
 /** Application defined abstract type. */
 export interface Type_AbstractTypeAmino {
   /** The fully qualified name of this abstract type. */
-  name: string;
+  name?: string;
   /** Parameter types for this abstract type. */
-  parameter_types: TypeAmino[];
+  parameter_types?: TypeAmino[];
 }
 /** Application defined abstract type. */
 export interface Type_AbstractTypeSDKType {
@@ -548,7 +548,7 @@ export interface DeclAmino {
    * have a name depending on whether the overload is function declaration or a
    * function definition containing a result [Expr][google.api.expr.v1alpha1.Expr].
    */
-  name: string;
+  name?: string;
   /** Identifier declaration. */
   ident?: Decl_IdentDeclAmino;
   /** Function declaration. */
@@ -605,7 +605,7 @@ export interface Decl_IdentDeclAmino {
    */
   value?: ConstantAmino;
   /** Documentation string for the identifier. */
-  doc: string;
+  doc?: string;
 }
 /**
  * Identifier declaration which specifies its type and optional `Expr` value.
@@ -644,7 +644,7 @@ export interface Decl_FunctionDeclProtoMsg {
  */
 export interface Decl_FunctionDeclAmino {
   /** Required. List of function overloads, must contain at least one overload. */
-  overloads: Decl_FunctionDecl_OverloadAmino[];
+  overloads?: Decl_FunctionDecl_OverloadAmino[];
 }
 /**
  * Function declaration specifies one or more overloads which indicate the
@@ -737,7 +737,7 @@ export interface Decl_FunctionDecl_OverloadAmino {
    * This will be used by a [Reference][google.api.expr.v1alpha1.Reference] to indicate the `overload_id` that
    * was resolved for the function `name`.
    */
-  overload_id: string;
+  overload_id?: string;
   /**
    * List of function parameter [Type][google.api.expr.v1alpha1.Type] values.
    * 
@@ -750,14 +750,14 @@ export interface Decl_FunctionDecl_OverloadAmino {
    * When the `result_type` of a function is a generic type param, the
    * type param name also appears as the `type` of on at least one params.
    */
-  params: TypeAmino[];
+  params?: TypeAmino[];
   /**
    * The type param names associated with the function declaration.
    * 
    * For example, `function ex<K,V>(K key, map<K, V> map) : V` would yield
    * the type params of `K, V`.
    */
-  type_params: string[];
+  type_params?: string[];
   /**
    * Required. The result type of the function. For example, the operator
    * `string.isEmpty()` would have `result_type` of `kind: BOOL`.
@@ -770,9 +770,9 @@ export interface Decl_FunctionDecl_OverloadAmino {
    * For methods, the first parameter declaration, `params[0]` is the
    * expected type of the target receiver.
    */
-  is_instance_function: boolean;
+  is_instance_function?: boolean;
   /** Documentation string for the overload. */
-  doc: string;
+  doc?: string;
 }
 /**
  * An overload indicates a function's parameter types and return type, and
@@ -822,7 +822,7 @@ export interface ReferenceProtoMsg {
 /** Describes a resolved reference to a declaration. */
 export interface ReferenceAmino {
   /** The fully qualified name of the declaration. */
-  name: string;
+  name?: string;
   /**
    * For references to functions, this is a list of `Overload.overload_id`
    * values which match according to typing rules.
@@ -833,7 +833,7 @@ export interface ReferenceAmino {
    * 
    * Empty if this is not a reference to a [Decl.FunctionDecl][google.api.expr.v1alpha1.Decl.FunctionDecl].
    */
-  overload_id: string[];
+  overload_id?: string[];
   /**
    * For references to constants, this may contain the value of the
    * constant if known at compile time.

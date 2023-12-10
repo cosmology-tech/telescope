@@ -54,7 +54,7 @@ export interface QueryIncentivesResponseProtoMsg {
  * method.
  */
 export interface QueryIncentivesResponseAmino {
-  incentives: IncentiveAmino[];
+  incentives?: IncentiveAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
@@ -82,7 +82,7 @@ export interface QueryIncentiveRequestProtoMsg {
 /** QueryIncentiveRequest is the request type for the Query/Incentive RPC method. */
 export interface QueryIncentiveRequestAmino {
   /** contract identifier is the hex contract address of a contract */
-  contract: string;
+  contract?: string;
 }
 export interface QueryIncentiveRequestAminoMsg {
   type: "/evmos.incentives.v1.QueryIncentiveRequest";
@@ -141,7 +141,7 @@ export interface QueryGasMetersRequestProtoMsg {
  */
 export interface QueryGasMetersRequestAmino {
   /** contract is the hex contract address of a incentivized smart contract */
-  contract: string;
+  contract?: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
@@ -175,7 +175,7 @@ export interface QueryGasMetersResponseProtoMsg {
  * method.
  */
 export interface QueryGasMetersResponseAmino {
-  gas_meters: GasMeterAmino[];
+  gas_meters?: GasMeterAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
@@ -205,9 +205,9 @@ export interface QueryGasMeterRequestProtoMsg {
 /** QueryGasMeterRequest is the request type for the Query/Incentive RPC method. */
 export interface QueryGasMeterRequestAmino {
   /** contract identifier is the hex contract address of a contract */
-  contract: string;
+  contract?: string;
   /** participant identifier is the hex address of a user */
-  participant: string;
+  participant?: string;
 }
 export interface QueryGasMeterRequestAminoMsg {
   type: "/evmos.incentives.v1.QueryGasMeterRequest";
@@ -242,7 +242,7 @@ export interface QueryGasMeterResponseAmino {
    * QueryGasMeterResponse is the response type for the Query/Incentive RPC
    * method.
    */
-  gas_meter: string;
+  gas_meter?: string;
 }
 export interface QueryGasMeterResponseAminoMsg {
   type: "/evmos.incentives.v1.QueryGasMeterResponse";
@@ -304,7 +304,7 @@ export interface QueryAllocationMetersResponseProtoMsg {
  * Query/AllocationMeters RPC method.
  */
 export interface QueryAllocationMetersResponseAmino {
-  allocation_meters: DecCoinAmino[];
+  allocation_meters?: DecCoinAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
@@ -338,7 +338,7 @@ export interface QueryAllocationMeterRequestProtoMsg {
  */
 export interface QueryAllocationMeterRequestAmino {
   /** denom is the coin denom to query an allocation meter for. */
-  denom: string;
+  denom?: string;
 }
 export interface QueryAllocationMeterRequestAminoMsg {
   type: "/evmos.incentives.v1.QueryAllocationMeterRequest";

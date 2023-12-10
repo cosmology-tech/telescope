@@ -28,7 +28,7 @@ export interface MsgCreateClientAmino {
    */
   consensus_state?: AnyAmino;
   /** signer address */
-  signer: string;
+  signer?: string;
 }
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClientSDKType {
@@ -68,11 +68,11 @@ export interface MsgUpdateClientProtoMsg {
  */
 export interface MsgUpdateClientAmino {
   /** client unique identifier */
-  client_id: string;
+  client_id?: string;
   /** header to update the light client */
   header?: AnyAmino;
   /** signer address */
-  signer: string;
+  signer?: string;
 }
 /**
  * MsgUpdateClient defines an sdk.Msg to update a IBC client state using
@@ -124,7 +124,7 @@ export interface MsgUpgradeClientProtoMsg {
  */
 export interface MsgUpgradeClientAmino {
   /** client unique identifier */
-  client_id: string;
+  client_id?: string;
   /** upgraded client state */
   client_state?: AnyAmino;
   /**
@@ -133,11 +133,11 @@ export interface MsgUpgradeClientAmino {
    */
   consensus_state?: AnyAmino;
   /** proof that old chain committed to new client */
-  proof_upgrade_client: string;
+  proof_upgrade_client?: string;
   /** proof that old chain committed to new consensus state */
-  proof_upgrade_consensus_state: string;
+  proof_upgrade_consensus_state?: string;
   /** signer address */
-  signer: string;
+  signer?: string;
 }
 /**
  * MsgUpgradeClient defines an sdk.Msg to upgrade an IBC client to a new client
@@ -183,11 +183,11 @@ export interface MsgSubmitMisbehaviourProtoMsg {
  */
 export interface MsgSubmitMisbehaviourAmino {
   /** client unique identifier */
-  client_id: string;
+  client_id?: string;
   /** misbehaviour used for freezing the light client */
   misbehaviour?: AnyAmino;
   /** signer address */
-  signer: string;
+  signer?: string;
 }
 /**
  * MsgSubmitMisbehaviour defines an sdk.Msg type that submits Evidence for
@@ -696,8 +696,8 @@ export const MsgUpgradeClient = {
     obj.client_id = message.clientId;
     obj.client_state = message.clientState ? Any.toAmino(message.clientState, useInterfaces) : undefined;
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState, useInterfaces) : undefined;
-    obj.proof_upgrade_client = base64FromBytes(message.proofUpgradeClient);
-    obj.proof_upgrade_consensus_state = base64FromBytes(message.proofUpgradeConsensusState);
+    message.proofUpgradeClient !== undefined && (obj.proof_upgrade_client = base64FromBytes(message.proofUpgradeClient));
+    message.proofUpgradeConsensusState !== undefined && (obj.proof_upgrade_consensus_state = base64FromBytes(message.proofUpgradeConsensusState));
     obj.signer = message.signer;
     return obj;
   },

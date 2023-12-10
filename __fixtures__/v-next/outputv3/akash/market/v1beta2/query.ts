@@ -36,7 +36,7 @@ export interface QueryOrdersResponseProtoMsg {
 }
 /** QueryOrdersResponse is response type for the Query/Orders RPC method */
 export interface QueryOrdersResponseAmino {
-  orders: OrderAmino[];
+  orders?: OrderAmino[];
   pagination?: PageResponseAmino;
 }
 /** QueryOrdersResponse is response type for the Query/Orders RPC method */
@@ -106,7 +106,7 @@ export interface QueryBidsResponseProtoMsg {
 }
 /** QueryBidsResponse is response type for the Query/Bids RPC method */
 export interface QueryBidsResponseAmino {
-  bids: QueryBidResponseAmino[];
+  bids?: QueryBidResponseAmino[];
   pagination?: PageResponseAmino;
 }
 /** QueryBidsResponse is response type for the Query/Bids RPC method */
@@ -179,7 +179,7 @@ export interface QueryLeasesResponseProtoMsg {
 }
 /** QueryLeasesResponse is response type for the Query/Leases RPC method */
 export interface QueryLeasesResponseAmino {
-  leases: QueryLeaseResponseAmino[];
+  leases?: QueryLeaseResponseAmino[];
   pagination?: PageResponseAmino;
 }
 /** QueryLeasesResponse is response type for the Query/Leases RPC method */

@@ -1774,7 +1774,7 @@ export const RequestInitChain = {
     } else {
       obj.validators = [];
     }
-    obj.app_state_bytes = base64FromBytes(message.appStateBytes);
+    message.appStateBytes !== undefined && (obj.app_state_bytes = base64FromBytes(message.appStateBytes));
     obj.initial_height = message.initialHeight ? message.initialHeight.toString() : undefined;
     return obj;
   },
@@ -1905,7 +1905,7 @@ export const RequestQuery = {
   },
   toAmino(message: RequestQuery): RequestQueryAmino {
     const obj: any = {};
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     obj.path = message.path;
     obj.height = message.height ? message.height.toString() : undefined;
     obj.prove = message.prove;
@@ -2048,7 +2048,7 @@ export const RequestBeginBlock = {
   },
   toAmino(message: RequestBeginBlock): RequestBeginBlockAmino {
     const obj: any = {};
-    obj.hash = base64FromBytes(message.hash);
+    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash));
     obj.header = message.header ? Header.toAmino(message.header) : undefined;
     obj.last_commit_info = message.lastCommitInfo ? LastCommitInfo.toAmino(message.lastCommitInfo) : undefined;
     if (message.byzantineValidators) {
@@ -2155,7 +2155,7 @@ export const RequestCheckTx = {
   },
   toAmino(message: RequestCheckTx): RequestCheckTxAmino {
     const obj: any = {};
-    obj.tx = base64FromBytes(message.tx);
+    message.tx !== undefined && (obj.tx = base64FromBytes(message.tx));
     obj.type = message.type;
     return obj;
   },
@@ -2242,7 +2242,7 @@ export const RequestDeliverTx = {
   },
   toAmino(message: RequestDeliverTx): RequestDeliverTxAmino {
     const obj: any = {};
-    obj.tx = base64FromBytes(message.tx);
+    message.tx !== undefined && (obj.tx = base64FromBytes(message.tx));
     return obj;
   },
   fromAminoMsg(object: RequestDeliverTxAminoMsg): RequestDeliverTx {
@@ -2567,7 +2567,7 @@ export const RequestOfferSnapshot = {
   toAmino(message: RequestOfferSnapshot): RequestOfferSnapshotAmino {
     const obj: any = {};
     obj.snapshot = message.snapshot ? Snapshot.toAmino(message.snapshot) : undefined;
-    obj.app_hash = base64FromBytes(message.appHash);
+    message.appHash !== undefined && (obj.app_hash = base64FromBytes(message.appHash));
     return obj;
   },
   fromAminoMsg(object: RequestOfferSnapshotAminoMsg): RequestOfferSnapshot {
@@ -2800,7 +2800,7 @@ export const RequestApplySnapshotChunk = {
   toAmino(message: RequestApplySnapshotChunk): RequestApplySnapshotChunkAmino {
     const obj: any = {};
     obj.index = message.index;
-    obj.chunk = base64FromBytes(message.chunk);
+    message.chunk !== undefined && (obj.chunk = base64FromBytes(message.chunk));
     obj.sender = message.sender;
     return obj;
   },
@@ -3533,7 +3533,7 @@ export const ResponseInfo = {
     obj.version = message.version;
     obj.app_version = message.appVersion ? message.appVersion.toString() : undefined;
     obj.last_block_height = message.lastBlockHeight ? message.lastBlockHeight.toString() : undefined;
-    obj.last_block_app_hash = base64FromBytes(message.lastBlockAppHash);
+    message.lastBlockAppHash !== undefined && (obj.last_block_app_hash = base64FromBytes(message.lastBlockAppHash));
     return obj;
   },
   fromAminoMsg(object: ResponseInfoAminoMsg): ResponseInfo {
@@ -3779,7 +3779,7 @@ export const ResponseInitChain = {
     } else {
       obj.validators = [];
     }
-    obj.app_hash = base64FromBytes(message.appHash);
+    message.appHash !== undefined && (obj.app_hash = base64FromBytes(message.appHash));
     return obj;
   },
   fromAminoMsg(object: ResponseInitChainAminoMsg): ResponseInitChain {
@@ -3987,8 +3987,8 @@ export const ResponseQuery = {
     obj.log = message.log;
     obj.info = message.info;
     obj.index = message.index ? message.index.toString() : undefined;
-    obj.key = base64FromBytes(message.key);
-    obj.value = base64FromBytes(message.value);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value));
     obj.proof_ops = message.proofOps ? ProofOps.toAmino(message.proofOps) : undefined;
     obj.height = message.height ? message.height.toString() : undefined;
     obj.codespace = message.codespace;
@@ -4286,7 +4286,7 @@ export const ResponseCheckTx = {
   toAmino(message: ResponseCheckTx): ResponseCheckTxAmino {
     const obj: any = {};
     obj.code = message.code;
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     obj.log = message.log;
     obj.info = message.info;
     obj.gas_wanted = message.gasWanted ? message.gasWanted.toString() : undefined;
@@ -4493,7 +4493,7 @@ export const ResponseDeliverTx = {
   toAmino(message: ResponseDeliverTx): ResponseDeliverTxAmino {
     const obj: any = {};
     obj.code = message.code;
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     obj.log = message.log;
     obj.info = message.info;
     obj.gas_wanted = message.gasWanted ? message.gasWanted.toString() : undefined;
@@ -4747,7 +4747,7 @@ export const ResponseCommit = {
   },
   toAmino(message: ResponseCommit): ResponseCommitAmino {
     const obj: any = {};
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     obj.retain_height = message.retainHeight ? message.retainHeight.toString() : undefined;
     return obj;
   },
@@ -5018,7 +5018,7 @@ export const ResponseLoadSnapshotChunk = {
   },
   toAmino(message: ResponseLoadSnapshotChunk): ResponseLoadSnapshotChunkAmino {
     const obj: any = {};
-    obj.chunk = base64FromBytes(message.chunk);
+    message.chunk !== undefined && (obj.chunk = base64FromBytes(message.chunk));
     return obj;
   },
   fromAminoMsg(object: ResponseLoadSnapshotChunkAminoMsg): ResponseLoadSnapshotChunk {
@@ -5751,8 +5751,8 @@ export const EventAttribute = {
   },
   toAmino(message: EventAttribute): EventAttributeAmino {
     const obj: any = {};
-    obj.key = base64FromBytes(message.key);
-    obj.value = base64FromBytes(message.value);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value));
     obj.index = message.index;
     return obj;
   },
@@ -5887,7 +5887,7 @@ export const TxResult = {
     const obj: any = {};
     obj.height = message.height ? message.height.toString() : undefined;
     obj.index = message.index;
-    obj.tx = base64FromBytes(message.tx);
+    message.tx !== undefined && (obj.tx = base64FromBytes(message.tx));
     obj.result = message.result ? ResponseDeliverTx.toAmino(message.result) : undefined;
     return obj;
   },
@@ -5990,7 +5990,7 @@ export const Validator = {
   },
   toAmino(message: Validator): ValidatorAmino {
     const obj: any = {};
-    obj.address = base64FromBytes(message.address);
+    message.address !== undefined && (obj.address = base64FromBytes(message.address));
     obj.power = message.power ? message.power.toString() : undefined;
     return obj;
   },
@@ -6498,8 +6498,8 @@ export const Snapshot = {
     obj.height = message.height ? message.height.toString() : undefined;
     obj.format = message.format;
     obj.chunks = message.chunks;
-    obj.hash = base64FromBytes(message.hash);
-    obj.metadata = base64FromBytes(message.metadata);
+    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash));
+    message.metadata !== undefined && (obj.metadata = base64FromBytes(message.metadata));
     return obj;
   },
   fromAminoMsg(object: SnapshotAminoMsg): Snapshot {

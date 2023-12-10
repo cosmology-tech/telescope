@@ -54,8 +54,8 @@ export interface EndpointProtoMsg {
 }
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointAmino {
-  kind: Endpoint_Kind;
-  sequence_number: number;
+  kind?: Endpoint_Kind;
+  sequence_number?: number;
 }
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointSDKType {

@@ -14,9 +14,9 @@ export interface MsgLockTokensProtoMsg {
   value: Uint8Array;
 }
 export interface MsgLockTokensAmino {
-  owner: string;
+  owner?: string;
   duration?: DurationAmino;
-  coins: CoinAmino[];
+  coins?: CoinAmino[];
 }
 export interface MsgLockTokensAminoMsg {
   type: "osmosis/lockup/lock-tokens";
@@ -35,7 +35,7 @@ export interface MsgLockTokensResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgLockTokensResponseAmino {
-  ID: string;
+  ID?: string;
 }
 export interface MsgLockTokensResponseAminoMsg {
   type: "osmosis/lockup/lock-tokens-response";
@@ -52,7 +52,7 @@ export interface MsgBeginUnlockingAllProtoMsg {
   value: Uint8Array;
 }
 export interface MsgBeginUnlockingAllAmino {
-  owner: string;
+  owner?: string;
 }
 export interface MsgBeginUnlockingAllAminoMsg {
   type: "osmosis/lockup/begin-unlock-tokens";
@@ -69,7 +69,7 @@ export interface MsgBeginUnlockingAllResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgBeginUnlockingAllResponseAmino {
-  unlocks: PeriodLockAmino[];
+  unlocks?: PeriodLockAmino[];
 }
 export interface MsgBeginUnlockingAllResponseAminoMsg {
   type: "osmosis/lockup/begin-unlocking-all-response";
@@ -89,10 +89,10 @@ export interface MsgBeginUnlockingProtoMsg {
   value: Uint8Array;
 }
 export interface MsgBeginUnlockingAmino {
-  owner: string;
-  ID: string;
+  owner?: string;
+  ID?: string;
   /** Amount of unlocking coins. Unlock all if not set. */
-  coins: CoinAmino[];
+  coins?: CoinAmino[];
 }
 export interface MsgBeginUnlockingAminoMsg {
   type: "osmosis/lockup/begin-unlock-period-lock";
@@ -111,7 +111,7 @@ export interface MsgBeginUnlockingResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgBeginUnlockingResponseAmino {
-  success: boolean;
+  success?: boolean;
 }
 export interface MsgBeginUnlockingResponseAminoMsg {
   type: "osmosis/lockup/begin-unlocking-response";
@@ -142,8 +142,8 @@ export interface MsgExtendLockupProtoMsg {
  * The new duration is longer than the original.
  */
 export interface MsgExtendLockupAmino {
-  owner: string;
-  ID: string;
+  owner?: string;
+  ID?: string;
   /**
    * duration to be set. fails if lower than the current duration, or is
    * unlocking
@@ -171,7 +171,7 @@ export interface MsgExtendLockupResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgExtendLockupResponseAmino {
-  success: boolean;
+  success?: boolean;
 }
 export interface MsgExtendLockupResponseAminoMsg {
   type: "osmosis/lockup/extend-lockup-response";
@@ -199,10 +199,10 @@ export interface MsgForceUnlockProtoMsg {
  * addresses registered via governance.
  */
 export interface MsgForceUnlockAmino {
-  owner: string;
-  ID: string;
+  owner?: string;
+  ID?: string;
   /** Amount of unlocking coins. Unlock all if not set. */
-  coins: CoinAmino[];
+  coins?: CoinAmino[];
 }
 export interface MsgForceUnlockAminoMsg {
   type: "osmosis/lockup/force-unlock";
@@ -225,7 +225,7 @@ export interface MsgForceUnlockResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgForceUnlockResponseAmino {
-  success: boolean;
+  success?: boolean;
 }
 export interface MsgForceUnlockResponseAminoMsg {
   type: "osmosis/lockup/force-unlock-response";

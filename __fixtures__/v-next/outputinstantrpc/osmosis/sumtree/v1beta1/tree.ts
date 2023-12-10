@@ -218,7 +218,7 @@ export const Child = {
   },
   toAmino(message: Child): ChildAmino {
     const obj: any = {};
-    obj.index = base64FromBytes(message.index);
+    message.index !== undefined && (obj.index = base64FromBytes(message.index));
     obj.accumulation = message.accumulation;
     return obj;
   },

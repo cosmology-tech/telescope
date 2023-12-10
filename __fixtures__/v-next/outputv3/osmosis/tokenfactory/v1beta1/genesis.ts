@@ -17,7 +17,7 @@ export interface GenesisStateProtoMsg {
 export interface GenesisStateAmino {
   /** params defines the paramaters of the module. */
   params?: ParamsAmino;
-  factory_denoms: GenesisDenomAmino[];
+  factory_denoms?: GenesisDenomAmino[];
 }
 /** GenesisState defines the tokenfactory module's genesis state. */
 export interface GenesisStateSDKType {
@@ -43,7 +43,7 @@ export interface GenesisDenomProtoMsg {
  * denom's admin.
  */
 export interface GenesisDenomAmino {
-  denom: string;
+  denom?: string;
   authority_metadata?: DenomAuthorityMetadataAmino;
 }
 /**

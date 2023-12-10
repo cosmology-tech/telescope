@@ -20,11 +20,11 @@ export interface MsgCreateDeploymentProtoMsg {
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentAmino {
   id?: DeploymentIDAmino;
-  groups: GroupSpecAmino[];
-  version: string;
+  groups?: GroupSpecAmino[];
+  version?: string;
   deposit?: CoinAmino;
   /** Depositor pays for the deposit */
-  depositor: string;
+  depositor?: string;
 }
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentSDKType {
@@ -60,7 +60,7 @@ export interface MsgDepositDeploymentAmino {
   id?: DeploymentIDAmino;
   amount?: CoinAmino;
   /** Depositor pays for the deposit */
-  depositor: string;
+  depositor?: string;
 }
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeploymentSDKType {
@@ -90,7 +90,7 @@ export interface MsgUpdateDeploymentProtoMsg {
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentAmino {
   id?: DeploymentIDAmino;
-  version: string;
+  version?: string;
 }
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
@@ -265,7 +265,7 @@ export const MsgCreateDeployment = {
     } else {
       obj.groups = [];
     }
-    obj.version = base64FromBytes(message.version);
+    message.version !== undefined && (obj.version = base64FromBytes(message.version));
     obj.deposit = message.deposit ? Coin.toAmino(message.deposit, useInterfaces) : undefined;
     obj.depositor = message.depositor;
     return obj;
@@ -593,7 +593,7 @@ export const MsgUpdateDeployment = {
   toAmino(message: MsgUpdateDeployment, useInterfaces: boolean = true): MsgUpdateDeploymentAmino {
     const obj: any = {};
     obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : undefined;
-    obj.version = base64FromBytes(message.version);
+    message.version !== undefined && (obj.version = base64FromBytes(message.version));
     return obj;
   },
   fromProtoMsg(message: MsgUpdateDeploymentProtoMsg, useInterfaces: boolean = true): MsgUpdateDeployment {

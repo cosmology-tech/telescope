@@ -54,12 +54,12 @@ export interface SuperfluidAssetProtoMsg {
 }
 /** SuperfluidAsset stores the pair of superfluid asset type and denom pair */
 export interface SuperfluidAssetAmino {
-  denom: string;
+  denom?: string;
   /**
    * AssetType indicates whether the superfluid asset is a native token or an lp
    * share
    */
-  asset_type: SuperfluidAssetType;
+  asset_type?: SuperfluidAssetType;
 }
 export interface SuperfluidAssetAminoMsg {
   type: "osmosis/superfluid-asset";
@@ -93,10 +93,10 @@ export interface SuperfluidIntermediaryAccountProtoMsg {
  */
 export interface SuperfluidIntermediaryAccountAmino {
   /** Denom indicates the denom of the superfluid asset. */
-  denom: string;
-  val_addr: string;
+  denom?: string;
+  val_addr?: string;
   /** perpetual gauge for rewards distribution */
-  gauge_id: string;
+  gauge_id?: string;
 }
 export interface SuperfluidIntermediaryAccountAminoMsg {
   type: "osmosis/superfluid-intermediary-account";
@@ -141,10 +141,10 @@ export interface OsmoEquivalentMultiplierRecordProtoMsg {
  * change.
  */
 export interface OsmoEquivalentMultiplierRecordAmino {
-  epoch_number: string;
+  epoch_number?: string;
   /** superfluid asset denom, can be LP token or native token */
-  denom: string;
-  multiplier: string;
+  denom?: string;
+  multiplier?: string;
 }
 export interface OsmoEquivalentMultiplierRecordAminoMsg {
   type: "osmosis/osmo-equivalent-multiplier-record";
@@ -183,8 +183,8 @@ export interface SuperfluidDelegationRecordProtoMsg {
  * delegations of an account in the state machine in a user friendly form.
  */
 export interface SuperfluidDelegationRecordAmino {
-  delegator_address: string;
-  validator_address: string;
+  delegator_address?: string;
+  validator_address?: string;
   delegation_amount?: CoinAmino;
   equivalent_staked_amount?: CoinAmino;
 }
@@ -221,8 +221,8 @@ export interface LockIdIntermediaryAccountConnectionProtoMsg {
  * via lp shares.
  */
 export interface LockIdIntermediaryAccountConnectionAmino {
-  lock_id: string;
-  intermediary_account: string;
+  lock_id?: string;
+  intermediary_account?: string;
 }
 export interface LockIdIntermediaryAccountConnectionAminoMsg {
   type: "osmosis/lock-id-intermediary-account-connection";
@@ -245,7 +245,7 @@ export interface UnpoolWhitelistedPoolsProtoMsg {
   value: Uint8Array;
 }
 export interface UnpoolWhitelistedPoolsAmino {
-  ids: string[];
+  ids?: string[];
 }
 export interface UnpoolWhitelistedPoolsAminoMsg {
   type: "osmosis/unpool-whitelisted-pools";

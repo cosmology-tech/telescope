@@ -21,9 +21,9 @@ export interface MsgChannelOpenInitProtoMsg {
  * is called by a relayer on Chain A.
  */
 export interface MsgChannelOpenInitAmino {
-  port_id: string;
+  port_id?: string;
   channel?: ChannelAmino;
-  signer: string;
+  signer?: string;
 }
 /**
  * MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It
@@ -70,17 +70,17 @@ export interface MsgChannelOpenTryProtoMsg {
  * on Chain B.
  */
 export interface MsgChannelOpenTryAmino {
-  port_id: string;
+  port_id?: string;
   /**
    * in the case of crossing hello's, when both chains call OpenInit, we need
    * the channel identifier of the previous channel in state INIT
    */
-  previous_channel_id: string;
+  previous_channel_id?: string;
   channel?: ChannelAmino;
-  counterparty_version: string;
-  proof_init: string;
+  counterparty_version?: string;
+  proof_init?: string;
   proof_height?: HeightAmino;
-  signer: string;
+  signer?: string;
 }
 /**
  * MsgChannelOpenInit defines a msg sent by a Relayer to try to open a channel
@@ -127,13 +127,13 @@ export interface MsgChannelOpenAckProtoMsg {
  * the change of channel state to TRYOPEN on Chain B.
  */
 export interface MsgChannelOpenAckAmino {
-  port_id: string;
-  channel_id: string;
-  counterparty_channel_id: string;
-  counterparty_version: string;
-  proof_try: string;
+  port_id?: string;
+  channel_id?: string;
+  counterparty_channel_id?: string;
+  counterparty_version?: string;
+  proof_try?: string;
   proof_height?: HeightAmino;
-  signer: string;
+  signer?: string;
 }
 /**
  * MsgChannelOpenAck defines a msg sent by a Relayer to Chain A to acknowledge
@@ -178,11 +178,11 @@ export interface MsgChannelOpenConfirmProtoMsg {
  * acknowledge the change of channel state to OPEN on Chain A.
  */
 export interface MsgChannelOpenConfirmAmino {
-  port_id: string;
-  channel_id: string;
-  proof_ack: string;
+  port_id?: string;
+  channel_id?: string;
+  proof_ack?: string;
   proof_height?: HeightAmino;
-  signer: string;
+  signer?: string;
 }
 /**
  * MsgChannelOpenConfirm defines a msg sent by a Relayer to Chain B to
@@ -232,9 +232,9 @@ export interface MsgChannelCloseInitProtoMsg {
  * to close a channel with Chain B.
  */
 export interface MsgChannelCloseInitAmino {
-  port_id: string;
-  channel_id: string;
-  signer: string;
+  port_id?: string;
+  channel_id?: string;
+  signer?: string;
 }
 /**
  * MsgChannelCloseInit defines a msg sent by a Relayer to Chain A
@@ -275,11 +275,11 @@ export interface MsgChannelCloseConfirmProtoMsg {
  * to acknowledge the change of channel state to CLOSED on Chain A.
  */
 export interface MsgChannelCloseConfirmAmino {
-  port_id: string;
-  channel_id: string;
-  proof_init: string;
+  port_id?: string;
+  channel_id?: string;
+  proof_init?: string;
   proof_height?: HeightAmino;
-  signer: string;
+  signer?: string;
 }
 /**
  * MsgChannelCloseConfirm defines a msg sent by a Relayer to Chain B
@@ -325,9 +325,9 @@ export interface MsgRecvPacketProtoMsg {
 /** MsgRecvPacket receives incoming IBC packet */
 export interface MsgRecvPacketAmino {
   packet?: PacketAmino;
-  proof_commitment: string;
+  proof_commitment?: string;
   proof_height?: HeightAmino;
-  signer: string;
+  signer?: string;
 }
 /** MsgRecvPacket receives incoming IBC packet */
 export interface MsgRecvPacketSDKType {
@@ -361,10 +361,10 @@ export interface MsgTimeoutProtoMsg {
 /** MsgTimeout receives timed-out packet */
 export interface MsgTimeoutAmino {
   packet?: PacketAmino;
-  proof_unreceived: string;
+  proof_unreceived?: string;
   proof_height?: HeightAmino;
-  next_sequence_recv: string;
-  signer: string;
+  next_sequence_recv?: string;
+  signer?: string;
 }
 /** MsgTimeout receives timed-out packet */
 export interface MsgTimeoutSDKType {
@@ -400,11 +400,11 @@ export interface MsgTimeoutOnCloseProtoMsg {
 /** MsgTimeoutOnClose timed-out packet upon counterparty channel closure. */
 export interface MsgTimeoutOnCloseAmino {
   packet?: PacketAmino;
-  proof_unreceived: string;
-  proof_close: string;
+  proof_unreceived?: string;
+  proof_close?: string;
   proof_height?: HeightAmino;
-  next_sequence_recv: string;
-  signer: string;
+  next_sequence_recv?: string;
+  signer?: string;
 }
 /** MsgTimeoutOnClose timed-out packet upon counterparty channel closure. */
 export interface MsgTimeoutOnCloseSDKType {
@@ -440,10 +440,10 @@ export interface MsgAcknowledgementProtoMsg {
 /** MsgAcknowledgement receives incoming IBC acknowledgement */
 export interface MsgAcknowledgementAmino {
   packet?: PacketAmino;
-  acknowledgement: string;
-  proof_acked: string;
+  acknowledgement?: string;
+  proof_acked?: string;
   proof_height?: HeightAmino;
-  signer: string;
+  signer?: string;
 }
 /** MsgAcknowledgement receives incoming IBC acknowledgement */
 export interface MsgAcknowledgementSDKType {
@@ -783,7 +783,7 @@ export const MsgChannelOpenTry = {
     obj.previous_channel_id = message.previousChannelId;
     obj.channel = message.channel ? Channel.toAmino(message.channel, useInterfaces) : undefined;
     obj.counterparty_version = message.counterpartyVersion;
-    obj.proof_init = base64FromBytes(message.proofInit);
+    message.proofInit !== undefined && (obj.proof_init = base64FromBytes(message.proofInit));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;
@@ -1010,7 +1010,7 @@ export const MsgChannelOpenAck = {
     obj.channel_id = message.channelId;
     obj.counterparty_channel_id = message.counterpartyChannelId;
     obj.counterparty_version = message.counterpartyVersion;
-    obj.proof_try = base64FromBytes(message.proofTry);
+    message.proofTry !== undefined && (obj.proof_try = base64FromBytes(message.proofTry));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;
@@ -1209,7 +1209,7 @@ export const MsgChannelOpenConfirm = {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
-    obj.proof_ack = base64FromBytes(message.proofAck);
+    message.proofAck !== undefined && (obj.proof_ack = base64FromBytes(message.proofAck));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;
@@ -1577,7 +1577,7 @@ export const MsgChannelCloseConfirm = {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
-    obj.proof_init = base64FromBytes(message.proofInit);
+    message.proofInit !== undefined && (obj.proof_init = base64FromBytes(message.proofInit));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;
@@ -1764,7 +1764,7 @@ export const MsgRecvPacket = {
   toAmino(message: MsgRecvPacket, useInterfaces: boolean = true): MsgRecvPacketAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet, useInterfaces) : undefined;
-    obj.proof_commitment = base64FromBytes(message.proofCommitment);
+    message.proofCommitment !== undefined && (obj.proof_commitment = base64FromBytes(message.proofCommitment));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;
@@ -1966,7 +1966,7 @@ export const MsgTimeout = {
   toAmino(message: MsgTimeout, useInterfaces: boolean = true): MsgTimeoutAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet, useInterfaces) : undefined;
-    obj.proof_unreceived = base64FromBytes(message.proofUnreceived);
+    message.proofUnreceived !== undefined && (obj.proof_unreceived = base64FromBytes(message.proofUnreceived));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.next_sequence_recv = message.nextSequenceRecv ? message.nextSequenceRecv.toString() : undefined;
     obj.signer = message.signer;
@@ -2182,8 +2182,8 @@ export const MsgTimeoutOnClose = {
   toAmino(message: MsgTimeoutOnClose, useInterfaces: boolean = true): MsgTimeoutOnCloseAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet, useInterfaces) : undefined;
-    obj.proof_unreceived = base64FromBytes(message.proofUnreceived);
-    obj.proof_close = base64FromBytes(message.proofClose);
+    message.proofUnreceived !== undefined && (obj.proof_unreceived = base64FromBytes(message.proofUnreceived));
+    message.proofClose !== undefined && (obj.proof_close = base64FromBytes(message.proofClose));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.next_sequence_recv = message.nextSequenceRecv ? message.nextSequenceRecv.toString() : undefined;
     obj.signer = message.signer;
@@ -2384,8 +2384,8 @@ export const MsgAcknowledgement = {
   toAmino(message: MsgAcknowledgement, useInterfaces: boolean = true): MsgAcknowledgementAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet, useInterfaces) : undefined;
-    obj.acknowledgement = base64FromBytes(message.acknowledgement);
-    obj.proof_acked = base64FromBytes(message.proofAcked);
+    message.acknowledgement !== undefined && (obj.acknowledgement = base64FromBytes(message.acknowledgement));
+    message.proofAcked !== undefined && (obj.proof_acked = base64FromBytes(message.proofAcked));
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     obj.signer = message.signer;
     return obj;

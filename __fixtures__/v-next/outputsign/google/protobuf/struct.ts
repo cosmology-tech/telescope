@@ -43,7 +43,7 @@ export interface Struct_FieldsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface Struct_FieldsEntryAmino {
-  key: string;
+  key?: string;
   value?: ValueAmino;
 }
 export interface Struct_FieldsEntryAminoMsg {
@@ -197,7 +197,7 @@ export interface ListValueProtoMsg {
  */
 export interface ListValueAmino {
   /** Repeated field of dynamically typed values. */
-  values: ValueAmino[];
+  values?: ValueAmino[];
 }
 export interface ListValueAminoMsg {
   type: "/google.protobuf.ListValue";

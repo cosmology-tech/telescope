@@ -11,7 +11,7 @@ export interface PairsProtoMsg {
 }
 /** Pairs defines a repeated slice of Pair objects. */
 export interface PairsAmino {
-  pairs: PairAmino[];
+  pairs?: PairAmino[];
 }
 export interface PairsAminoMsg {
   type: "cosmos-sdk/Pairs";
@@ -32,8 +32,8 @@ export interface PairProtoMsg {
 }
 /** Pair defines a key/value bytes tuple. */
 export interface PairAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface PairAminoMsg {
   type: "cosmos-sdk/Pair";
@@ -220,8 +220,8 @@ export const Pair = {
   },
   toAmino(message: Pair): PairAmino {
     const obj: any = {};
-    obj.key = base64FromBytes(message.key);
-    obj.value = base64FromBytes(message.value);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value));
     return obj;
   },
   fromAminoMsg(object: PairAminoMsg): Pair {

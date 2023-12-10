@@ -226,7 +226,7 @@ export interface CheckErrorProtoMsg {
  */
 export interface CheckErrorAmino {
   /** The error code. */
-  code: CheckError_Code;
+  code?: CheckError_Code;
   /**
    * Subject to whom this error applies. See the specific code enum for more
    * details on this field. For example:
@@ -235,9 +235,9 @@ export interface CheckErrorAmino {
    * - "folder:<folder-id>"
    * - "organization:<organization-id>"
    */
-  subject: string;
+  subject?: string;
   /** Free-form text providing details on the error cause of the error. */
-  detail: string;
+  detail?: string;
   /**
    * Contains public information about the check error. If available,
    * `status.code` will be non zero and client can propagate it out as public

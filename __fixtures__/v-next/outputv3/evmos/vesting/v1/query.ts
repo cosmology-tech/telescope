@@ -14,7 +14,7 @@ export interface QueryBalancesRequestProtoMsg {
 /** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
 export interface QueryBalancesRequestAmino {
   /** address of the clawback vesting account */
-  address: string;
+  address?: string;
 }
 /** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
 export interface QueryBalancesRequestSDKType {
@@ -42,11 +42,11 @@ export interface QueryBalancesResponseProtoMsg {
  */
 export interface QueryBalancesResponseAmino {
   /** current amount of locked tokens */
-  locked: CoinAmino[];
+  locked?: CoinAmino[];
   /** current amount of unvested tokens */
-  unvested: CoinAmino[];
+  unvested?: CoinAmino[];
   /** current amount of vested tokens */
-  vested: CoinAmino[];
+  vested?: CoinAmino[];
 }
 /**
  * QueryBalancesResponse is the response type for the Query/Balances RPC

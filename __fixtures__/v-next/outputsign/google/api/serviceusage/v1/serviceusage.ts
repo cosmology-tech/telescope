@@ -87,7 +87,7 @@ export interface EnableServiceRequestAmino {
    * `projects/123/services/serviceusage.googleapis.com` where `123` is the
    * project number.
    */
-  name: string;
+  name?: string;
 }
 export interface EnableServiceRequestAminoMsg {
   type: "/google.api.serviceusage.v1.EnableServiceRequest";
@@ -169,7 +169,7 @@ export interface DisableServiceRequestAmino {
    * `projects/123/services/serviceusage.googleapis.com` where `123` is the
    * project number.
    */
-  name: string;
+  name?: string;
   /**
    * Indicates if services that are enabled and which depend on this service
    * should also be disabled. If not set, an error will be generated if any
@@ -177,9 +177,9 @@ export interface DisableServiceRequestAmino {
    * service, and any enabled services that depend on it, will be disabled
    * together.
    */
-  disable_dependent_services: boolean;
+  disable_dependent_services?: boolean;
   /** Defines the behavior for checking service usage when disabling a service. */
-  check_if_service_has_usage: DisableServiceRequest_CheckIfServiceHasUsage;
+  check_if_service_has_usage?: DisableServiceRequest_CheckIfServiceHasUsage;
 }
 export interface DisableServiceRequestAminoMsg {
   type: "/google.api.serviceusage.v1.DisableServiceRequest";
@@ -249,7 +249,7 @@ export interface GetServiceRequestAmino {
    * `projects/123/services/serviceusage.googleapis.com` where `123` is the
    * project number.
    */
-  name: string;
+  name?: string;
 }
 export interface GetServiceRequestAminoMsg {
   type: "/google.api.serviceusage.v1.GetServiceRequest";
@@ -297,23 +297,23 @@ export interface ListServicesRequestAmino {
    * An example name would be:
    * `projects/123` where `123` is the project number.
    */
-  parent: string;
+  parent?: string;
   /**
    * Requested size of the next page of data.
    * Requested page size cannot exceed 200.
    * If not set, the default page size is 50.
    */
-  page_size: number;
+  page_size?: number;
   /**
    * Token identifying which result to start with, which is returned by a
    * previous list call.
    */
-  page_token: string;
+  page_token?: string;
   /**
    * Only list services that conform to the given filter.
    * The allowed filter strings are `state:ENABLED` and `state:DISABLED`.
    */
-  filter: string;
+  filter?: string;
 }
 export interface ListServicesRequestAminoMsg {
   type: "/google.api.serviceusage.v1.ListServicesRequest";
@@ -343,12 +343,12 @@ export interface ListServicesResponseProtoMsg {
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponseAmino {
   /** The available services for the requested project. */
-  services: ServiceAmino[];
+  services?: ServiceAmino[];
   /**
    * Token that can be passed to `ListServices` to resume a paginated
    * query.
    */
-  next_page_token: string;
+  next_page_token?: string;
 }
 export interface ListServicesResponseAminoMsg {
   type: "/google.api.serviceusage.v1.ListServicesResponse";
@@ -399,7 +399,7 @@ export interface BatchEnableServicesRequestAmino {
    * 
    * The `BatchEnableServices` method currently only supports projects.
    */
-  parent: string;
+  parent?: string;
   /**
    * The identifiers of the services to enable on the project.
    * 
@@ -413,7 +413,7 @@ export interface BatchEnableServicesRequestAmino {
    * than 20 services are specified, the request will fail, and no state changes
    * will occur.
    */
-  service_ids: string[];
+  service_ids?: string[];
 }
 export interface BatchEnableServicesRequestAminoMsg {
   type: "/google.api.serviceusage.v1.BatchEnableServicesRequest";
@@ -449,12 +449,12 @@ export interface BatchEnableServicesResponseProtoMsg {
  */
 export interface BatchEnableServicesResponseAmino {
   /** The new state of the services after enabling. */
-  services: ServiceAmino[];
+  services?: ServiceAmino[];
   /**
    * If allow_partial_success is true, and one or more services could not be
    * enabled, this field contains the details about each failure.
    */
-  failures: BatchEnableServicesResponse_EnableFailureAmino[];
+  failures?: BatchEnableServicesResponse_EnableFailureAmino[];
 }
 export interface BatchEnableServicesResponseAminoMsg {
   type: "/google.api.serviceusage.v1.BatchEnableServicesResponse";
@@ -483,9 +483,9 @@ export interface BatchEnableServicesResponse_EnableFailureProtoMsg {
 /** Provides error messages for the failing services. */
 export interface BatchEnableServicesResponse_EnableFailureAmino {
   /** The service id of a service that could not be enabled. */
-  service_id: string;
+  service_id?: string;
   /** An error message describing why the service could not be enabled. */
-  error_message: string;
+  error_message?: string;
 }
 export interface BatchEnableServicesResponse_EnableFailureAminoMsg {
   type: "/google.api.serviceusage.v1.EnableFailure";
@@ -529,7 +529,7 @@ export interface BatchGetServicesRequestAmino {
    * the project number. The `BatchGetServices` method currently only supports
    * projects.
    */
-  parent: string;
+  parent?: string;
   /**
    * Names of the services to retrieve.
    * 
@@ -538,7 +538,7 @@ export interface BatchGetServicesRequestAmino {
    * project number.
    * A single request can get a maximum of 30 services at a time.
    */
-  names: string[];
+  names?: string[];
 }
 export interface BatchGetServicesRequestAminoMsg {
   type: "/google.api.serviceusage.v1.BatchGetServicesRequest";
@@ -561,7 +561,7 @@ export interface BatchGetServicesResponseProtoMsg {
 /** Response message for the `BatchGetServices` method. */
 export interface BatchGetServicesResponseAmino {
   /** The requested Service states. */
-  services: ServiceAmino[];
+  services?: ServiceAmino[];
 }
 export interface BatchGetServicesResponseAminoMsg {
   type: "/google.api.serviceusage.v1.BatchGetServicesResponse";

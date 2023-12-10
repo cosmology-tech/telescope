@@ -15,7 +15,7 @@ export interface CPUProtoMsg {
 /** CPU stores resource units and cpu config attributes */
 export interface CPUAmino {
   units?: ResourceValueAmino;
-  attributes: AttributeAmino[];
+  attributes?: AttributeAmino[];
 }
 /** CPU stores resource units and cpu config attributes */
 export interface CPUSDKType {
@@ -34,7 +34,7 @@ export interface MemoryProtoMsg {
 /** Memory stores resource quantity and memory attributes */
 export interface MemoryAmino {
   quantity?: ResourceValueAmino;
-  attributes: AttributeAmino[];
+  attributes?: AttributeAmino[];
 }
 /** Memory stores resource quantity and memory attributes */
 export interface MemorySDKType {
@@ -53,9 +53,9 @@ export interface StorageProtoMsg {
 }
 /** Storage stores resource quantity and storage attributes */
 export interface StorageAmino {
-  name: string;
+  name?: string;
   quantity?: ResourceValueAmino;
-  attributes: AttributeAmino[];
+  attributes?: AttributeAmino[];
 }
 /** Storage stores resource quantity and storage attributes */
 export interface StorageSDKType {

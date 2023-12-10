@@ -11,7 +11,7 @@ export interface PairsProtoMsg {
 }
 /** Pairs defines a repeated slice of Pair objects. */
 export interface PairsAmino {
-  pairs: PairAmino[];
+  pairs?: PairAmino[];
 }
 /** Pairs defines a repeated slice of Pair objects. */
 export interface PairsSDKType {
@@ -28,8 +28,8 @@ export interface PairProtoMsg {
 }
 /** Pair defines a key/value bytes tuple. */
 export interface PairAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 /** Pair defines a key/value bytes tuple. */
 export interface PairSDKType {
@@ -203,8 +203,8 @@ export const Pair = {
   },
   toAmino(message: Pair, useInterfaces: boolean = true): PairAmino {
     const obj: any = {};
-    obj.key = base64FromBytes(message.key);
-    obj.value = base64FromBytes(message.value);
+    message.key !== undefined && (obj.key = base64FromBytes(message.key));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value));
     return obj;
   },
   fromProtoMsg(message: PairProtoMsg, useInterfaces: boolean = true): Pair {

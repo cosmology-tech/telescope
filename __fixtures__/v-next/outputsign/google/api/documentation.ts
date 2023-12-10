@@ -164,24 +164,24 @@ export interface DocumentationAmino {
    * A short summary of what the service does. Can only be provided by
    * plain text.
    */
-  summary: string;
+  summary?: string;
   /** The top level pages for the documentation set. */
-  pages: PageAmino[];
+  pages?: PageAmino[];
   /**
    * A list of documentation rules that apply to individual API elements.
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: DocumentationRuleAmino[];
+  rules?: DocumentationRuleAmino[];
   /** The URL to the root of documentation. */
-  documentation_root_url: string;
+  documentation_root_url?: string;
   /**
    * Specifies the service root url if the default one (the service name
    * from the yaml file) is not suitable. This can be seen in any fully
    * specified service urls as well as sections that show a base that other
    * urls are relative to.
    */
-  service_root_url: string;
+  service_root_url?: string;
   /**
    * Declares a single overview page. For example:
    * <pre><code>documentation:
@@ -197,7 +197,7 @@ export interface DocumentationAmino {
    * </code></pre>
    * Note: you cannot specify both `overview` field and `pages` field.
    */
-  overview: string;
+  overview?: string;
 }
 export interface DocumentationAminoMsg {
   type: "/google.api.Documentation";
@@ -301,14 +301,14 @@ export interface DocumentationRuleAmino {
    * wildcard will match one or more components. To specify a default for all
    * applicable elements, the whole pattern "*" is used.
    */
-  selector: string;
+  selector?: string;
   /** Description of the selected API(s). */
-  description: string;
+  description?: string;
   /**
    * Deprecation description of the selected element(s). It can be provided if
    * an element is marked as `deprecated`.
    */
-  deprecation_description: string;
+  deprecation_description?: string;
 }
 export interface DocumentationRuleAminoMsg {
   type: "/google.api.DocumentationRule";
@@ -378,17 +378,17 @@ export interface PageAmino {
    * You can reference `Java` page using Markdown reference link syntax:
    * `[Java][Tutorial.Java]`.
    */
-  name: string;
+  name?: string;
   /**
    * The Markdown content of the page. You can use <code>&#40;== include {path}
    * ==&#41;</code> to include content from a Markdown file.
    */
-  content: string;
+  content?: string;
   /**
    * Subpages of this page. The order of subpages specified here will be
    * honored in the generated docset.
    */
-  subpages: PageAmino[];
+  subpages?: PageAmino[];
 }
 export interface PageAminoMsg {
   type: "/google.api.Page";

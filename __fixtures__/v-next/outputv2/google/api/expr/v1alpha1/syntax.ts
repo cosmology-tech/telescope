@@ -97,7 +97,7 @@ export interface ExprAmino {
    * given expression tree. This is used to associate type information and other
    * attributes to a node in the parse tree.
    */
-  id: string;
+  id?: string;
   /** A literal expression. */
   const_expr?: ConstantAmino;
   /** An identifier expression. */
@@ -166,7 +166,7 @@ export interface Expr_IdentAmino {
    * 
    * Qualified names are represented by the [Expr.Select][google.api.expr.v1alpha1.Expr.Select] expression.
    */
-  name: string;
+  name?: string;
 }
 export interface Expr_IdentAminoMsg {
   type: "/google.api.expr.v1alpha1.Ident";
@@ -218,13 +218,13 @@ export interface Expr_SelectAmino {
    * For example, in the select expression `request.auth`, the `auth` portion
    * of the expression would be the `field`.
    */
-  field: string;
+  field?: string;
   /**
    * Whether the select is to be interpreted as a field presence test.
    * 
    * This results from the macro `has(request.auth)`.
    */
-  test_only: boolean;
+  test_only?: boolean;
 }
 export interface Expr_SelectAminoMsg {
   type: "/google.api.expr.v1alpha1.Select";
@@ -268,9 +268,9 @@ export interface Expr_CallAmino {
    */
   target?: ExprAmino;
   /** Required. The name of the function or method being called. */
-  function: string;
+  function?: string;
   /** The arguments. */
-  args: ExprAmino[];
+  args?: ExprAmino[];
 }
 export interface Expr_CallAminoMsg {
   type: "/google.api.expr.v1alpha1.Call";
@@ -308,7 +308,7 @@ export interface Expr_CreateListProtoMsg {
  */
 export interface Expr_CreateListAmino {
   /** The elements part of the list. */
-  elements: ExprAmino[];
+  elements?: ExprAmino[];
 }
 export interface Expr_CreateListAminoMsg {
   type: "/google.api.expr.v1alpha1.CreateList";
@@ -355,9 +355,9 @@ export interface Expr_CreateStructAmino {
    * The type name of the message to be created, empty when creating map
    * literals.
    */
-  message_name: string;
+  message_name?: string;
   /** The entries in the creation expression. */
-  entries: Expr_CreateStruct_EntryAmino[];
+  entries?: Expr_CreateStruct_EntryAmino[];
 }
 export interface Expr_CreateStructAminoMsg {
   type: "/google.api.expr.v1alpha1.CreateStruct";
@@ -400,7 +400,7 @@ export interface Expr_CreateStruct_EntryAmino {
    * in a given expression tree. This is used to associate type
    * information and other attributes to the node.
    */
-  id: string;
+  id?: string;
   /** The field key for a message creator statement. */
   field_key?: string;
   /** The key expression for a map creation statement. */
@@ -510,11 +510,11 @@ export interface Expr_ComprehensionProtoMsg {
  */
 export interface Expr_ComprehensionAmino {
   /** The name of the iteration variable. */
-  iter_var: string;
+  iter_var?: string;
   /** The range over which var iterates. */
   iter_range?: ExprAmino;
   /** The name of the variable used for accumulation of the result. */
-  accu_var: string;
+  accu_var?: string;
   /** The initial value of the accumulator. */
   accu_init?: ExprAmino;
   /**
@@ -713,8 +713,8 @@ export interface SourceInfo_PositionsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface SourceInfo_PositionsEntryAmino {
-  key: string;
-  value: number;
+  key?: string;
+  value?: number;
 }
 export interface SourceInfo_PositionsEntryAminoMsg {
   type: string;
@@ -733,7 +733,7 @@ export interface SourceInfo_MacroCallsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface SourceInfo_MacroCallsEntryAmino {
-  key: string;
+  key?: string;
   value?: ExprAmino;
 }
 export interface SourceInfo_MacroCallsEntryAminoMsg {
@@ -793,7 +793,7 @@ export interface SourceInfoProtoMsg {
 /** Source information collected at parse time. */
 export interface SourceInfoAmino {
   /** The syntax version of the source, e.g. `cel1`. */
-  syntax_version: string;
+  syntax_version?: string;
   /**
    * The location name. All position information attached to an expression is
    * relative to this location.
@@ -801,7 +801,7 @@ export interface SourceInfoAmino {
    * The location could be a file, UI element, or similar. For example,
    * `acme/app/AnvilPolicy.cel`.
    */
-  location: string;
+  location?: string;
   /**
    * Monotonically increasing list of code point offsets where newlines
    * `\n` appear.
@@ -810,12 +810,12 @@ export interface SourceInfoAmino {
    * `id` the `line_offsets[i] < id_positions[id] < line_offsets[i+1]`. The
    * column may be derivd from `id_positions[id] - line_offsets[i]`.
    */
-  line_offsets: number[];
+  line_offsets?: number[];
   /**
    * A map from the parse node id (e.g. `Expr.id`) to the code point offset
    * within the source.
    */
-  positions: {
+  positions?: {
     [key: string]: number;
   };
   /**
@@ -872,19 +872,19 @@ export interface SourcePositionProtoMsg {
 /** A specific position in source. */
 export interface SourcePositionAmino {
   /** The soucre location name (e.g. file name). */
-  location: string;
+  location?: string;
   /** The UTF-8 code unit offset. */
-  offset: number;
+  offset?: number;
   /**
    * The 1-based index of the starting line in the source text
    * where the issue occurs, or 0 if unknown.
    */
-  line: number;
+  line?: number;
   /**
    * The 0-based index of the starting position within the line of source text
    * where the issue occurs.  Only meaningful if line is nonzero.
    */
-  column: number;
+  column?: number;
 }
 export interface SourcePositionAminoMsg {
   type: "/google.api.expr.v1alpha1.SourcePosition";

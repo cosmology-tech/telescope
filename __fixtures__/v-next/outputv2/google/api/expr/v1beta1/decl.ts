@@ -22,11 +22,11 @@ export interface DeclProtoMsg {
 /** A declaration. */
 export interface DeclAmino {
   /** The id of the declaration. */
-  id: number;
+  id?: number;
   /** The name of the declaration. */
-  name: string;
+  name?: string;
   /** The documentation string for the declaration. */
-  doc: string;
+  doc?: string;
   /** An identifier declaration. */
   ident?: IdentDeclAmino;
   /** A function declaration. */
@@ -73,14 +73,14 @@ export interface DeclTypeProtoMsg {
  */
 export interface DeclTypeAmino {
   /** The expression id of the declared type, if applicable. */
-  id: number;
+  id?: number;
   /** The type name, e.g. 'int', 'my.type.Type' or 'T' */
-  type: string;
+  type?: string;
   /**
    * An ordered list of type parameters, e.g. `<string, int>`.
    * Only applies to a subset of types, e.g. `map`, `list`.
    */
-  type_params: DeclTypeAmino[];
+  type_params?: DeclTypeAmino[];
 }
 export interface DeclTypeAminoMsg {
   type: "/google.api.expr.v1beta1.DeclType";
@@ -140,11 +140,11 @@ export interface FunctionDeclProtoMsg {
 /** A function declaration. */
 export interface FunctionDeclAmino {
   /** The function arguments. */
-  args: IdentDeclAmino[];
+  args?: IdentDeclAmino[];
   /** Optional declared return type. */
   return_type?: DeclTypeAmino;
   /** If the first argument of the function is the receiver. */
-  receiver_function: boolean;
+  receiver_function?: boolean;
 }
 export interface FunctionDeclAminoMsg {
   type: "/google.api.expr.v1beta1.FunctionDecl";

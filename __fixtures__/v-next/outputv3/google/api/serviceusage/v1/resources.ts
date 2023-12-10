@@ -96,14 +96,14 @@ export interface ServiceAmino {
    * A valid name would be:
    * - projects/123/services/serviceusage.googleapis.com
    */
-  name: string;
+  name?: string;
   /**
    * The resource name of the consumer.
    * 
    * A valid name would be:
    * - projects/123
    */
-  parent: string;
+  parent?: string;
   /**
    * The service configuration of the available service.
    * Some fields may be filtered out of the configuration in responses to
@@ -112,7 +112,7 @@ export interface ServiceAmino {
    */
   config?: ServiceConfigAmino;
   /** Whether or not the service has been enabled for use by the consumer. */
-  state: State;
+  state?: State;
 }
 /** A service that is available for use by the consumer. */
 export interface ServiceSDKType {
@@ -176,14 +176,14 @@ export interface ServiceConfigAmino {
    * An example DNS address would be:
    * `calendar.googleapis.com`.
    */
-  name: string;
+  name?: string;
   /** The product title for this service. */
-  title: string;
+  title?: string;
   /**
    * A list of API interfaces exported by this service. Contains only the names,
    * versions, and method names of the interfaces.
    */
-  apis: ApiAmino[];
+  apis?: ApiAmino[];
   /**
    * Additional API documentation. Contains only the summary and the
    * documentation URL.
@@ -199,12 +199,12 @@ export interface ServiceConfigAmino {
    * Configuration for network endpoints. Contains only the names and aliases
    * of the endpoints.
    */
-  endpoints: EndpointAmino[];
+  endpoints?: EndpointAmino[];
   /**
    * Defines the monitored resources used by this service. This is required
    * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
    */
-  monitored_resources: MonitoredResourceDescriptorAmino[];
+  monitored_resources?: MonitoredResourceDescriptorAmino[];
   /**
    * Monitoring configuration.
    * This should not include the 'producer_destinations' field.
@@ -242,7 +242,7 @@ export interface OperationMetadataAmino {
    * The full name of the resources that this operation is directly
    * associated with.
    */
-  resource_names: string[];
+  resource_names?: string[];
 }
 /** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadataSDKType {

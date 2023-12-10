@@ -55,7 +55,7 @@ export interface QuerySigningInfoRequestProtoMsg {
  */
 export interface QuerySigningInfoRequestAmino {
   /** cons_address is the address to query signing info of */
-  cons_address: string;
+  cons_address?: string;
 }
 export interface QuerySigningInfoRequestAminoMsg {
   type: "cosmos-sdk/QuerySigningInfoRequest";
@@ -147,7 +147,7 @@ export interface QuerySigningInfosResponseProtoMsg {
  */
 export interface QuerySigningInfosResponseAmino {
   /** info is the signing info of all validators */
-  info: ValidatorSigningInfoAmino[];
+  info?: ValidatorSigningInfoAmino[];
   pagination?: PageResponseAmino;
 }
 export interface QuerySigningInfosResponseAminoMsg {

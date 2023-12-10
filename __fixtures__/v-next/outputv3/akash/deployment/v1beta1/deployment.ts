@@ -61,8 +61,8 @@ export interface MsgCreateDeploymentProtoMsg {
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentAmino {
   id?: DeploymentIDAmino;
-  groups: GroupSpecAmino[];
-  version: string;
+  groups?: GroupSpecAmino[];
+  version?: string;
   deposit?: CoinAmino;
 }
 /** MsgCreateDeployment defines an SDK message for creating deployment */
@@ -124,8 +124,8 @@ export interface MsgUpdateDeploymentProtoMsg {
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentAmino {
   id?: DeploymentIDAmino;
-  groups: GroupSpecAmino[];
-  version: string;
+  groups?: GroupSpecAmino[];
+  version?: string;
 }
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
@@ -180,8 +180,8 @@ export interface DeploymentIDProtoMsg {
 }
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDAmino {
-  owner: string;
-  dseq: string;
+  owner?: string;
+  dseq?: string;
 }
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDSDKType {
@@ -202,9 +202,9 @@ export interface DeploymentProtoMsg {
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentAmino {
   deployment_id?: DeploymentIDAmino;
-  state: Deployment_State;
-  version: string;
-  created_at: string;
+  state?: Deployment_State;
+  version?: string;
+  created_at?: string;
 }
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
@@ -225,9 +225,9 @@ export interface DeploymentFiltersProtoMsg {
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersAmino {
-  owner: string;
-  dseq: string;
-  state: string;
+  owner?: string;
+  dseq?: string;
+  state?: string;
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersSDKType {
@@ -354,7 +354,7 @@ export const MsgCreateDeployment = {
     } else {
       obj.groups = [];
     }
-    obj.version = base64FromBytes(message.version);
+    message.version !== undefined && (obj.version = base64FromBytes(message.version));
     obj.deposit = message.deposit ? Coin.toAmino(message.deposit, useInterfaces) : undefined;
     return obj;
   },
@@ -693,7 +693,7 @@ export const MsgUpdateDeployment = {
     } else {
       obj.groups = [];
     }
-    obj.version = base64FromBytes(message.version);
+    message.version !== undefined && (obj.version = base64FromBytes(message.version));
     return obj;
   },
   fromProtoMsg(message: MsgUpdateDeploymentProtoMsg, useInterfaces: boolean = true): MsgUpdateDeployment {
@@ -1112,7 +1112,7 @@ export const Deployment = {
     const obj: any = {};
     obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId, useInterfaces) : undefined;
     obj.state = message.state;
-    obj.version = base64FromBytes(message.version);
+    message.version !== undefined && (obj.version = base64FromBytes(message.version));
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   },

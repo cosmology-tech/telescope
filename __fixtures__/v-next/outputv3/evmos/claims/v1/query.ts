@@ -42,7 +42,7 @@ export interface QueryTotalUnclaimedResponseProtoMsg {
  */
 export interface QueryTotalUnclaimedResponseAmino {
   /** coins defines the unclaimed coins */
-  coins: CoinAmino[];
+  coins?: CoinAmino[];
 }
 /**
  * QueryTotalUnclaimedResponse is the response type for the Query/TotalUnclaimed
@@ -126,7 +126,7 @@ export interface QueryClaimsRecordsResponseProtoMsg {
  */
 export interface QueryClaimsRecordsResponseAmino {
   /** claims defines all claims records */
-  claims: ClaimsRecordAddressAmino[];
+  claims?: ClaimsRecordAddressAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
@@ -156,7 +156,7 @@ export interface QueryClaimsRecordRequestProtoMsg {
  */
 export interface QueryClaimsRecordRequestAmino {
   /** address defines the user to query claims record for */
-  address: string;
+  address?: string;
 }
 /**
  * QueryClaimsRecordRequest is the request type for the Query/ClaimsRecord RPC
@@ -185,9 +185,9 @@ export interface QueryClaimsRecordResponseProtoMsg {
  */
 export interface QueryClaimsRecordResponseAmino {
   /** total initial claimable amount for the user */
-  initial_claimable_amount: string;
+  initial_claimable_amount?: string;
   /** the claims of the user */
-  claims: ClaimAmino[];
+  claims?: ClaimAmino[];
 }
 /**
  * QueryClaimsRecordResponse is the response type for the Query/ClaimsRecord RPC

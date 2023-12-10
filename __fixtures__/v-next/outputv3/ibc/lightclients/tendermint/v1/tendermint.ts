@@ -60,7 +60,7 @@ export interface ClientStateProtoMsg {
  * and a possible frozen height.
  */
 export interface ClientStateAmino {
-  chain_id: string;
+  chain_id?: string;
   trust_level?: FractionAmino;
   /**
    * duration of the period since the LastestTimestamp during which the
@@ -76,7 +76,7 @@ export interface ClientStateAmino {
   /** Latest height the client was updated to */
   latest_height?: HeightAmino;
   /** Proof specifications used in verifying counterparty state */
-  proof_specs: ProofSpecAmino[];
+  proof_specs?: ProofSpecAmino[];
   /**
    * Path at which next upgraded client will be committed.
    * Each element corresponds to the key for a single CommitmentProof in the
@@ -86,17 +86,17 @@ export interface ClientStateAmino {
    * the default upgrade module, upgrade_path should be []string{"upgrade",
    * "upgradedIBCState"}`
    */
-  upgrade_path: string[];
+  upgrade_path?: string[];
   /**
    * This flag, when set to true, will allow governance to recover a client
    * which has expired
    */
-  allow_update_after_expiry: boolean;
+  allow_update_after_expiry?: boolean;
   /**
    * This flag, when set to true, will allow governance to unfreeze a client
    * whose chain has experienced a misbehaviour event
    */
-  allow_update_after_misbehaviour: boolean;
+  allow_update_after_misbehaviour?: boolean;
 }
 /**
  * ClientState from Tendermint tracks the current validator set, latest height,
@@ -139,7 +139,7 @@ export interface ConsensusStateAmino {
   timestamp?: string;
   /** commitment root (i.e app hash) */
   root?: MerkleRootAmino;
-  next_validators_hash: string;
+  next_validators_hash?: string;
 }
 /** ConsensusState defines the consensus state from Tendermint. */
 export interface ConsensusStateSDKType {
@@ -165,7 +165,7 @@ export interface MisbehaviourProtoMsg {
  * that implements Misbehaviour interface expected by ICS-02
  */
 export interface MisbehaviourAmino {
-  client_id: string;
+  client_id?: string;
   header_1?: HeaderAmino;
   header_2?: HeaderAmino;
 }
@@ -259,8 +259,8 @@ export interface FractionProtoMsg {
  * supports positive values.
  */
 export interface FractionAmino {
-  numerator: string;
-  denominator: string;
+  numerator?: string;
+  denominator?: string;
 }
 /**
  * Fraction defines the protobuf message type for tmmath.Fraction that only
@@ -618,7 +618,7 @@ export const ConsensusState = {
     const obj: any = {};
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     obj.root = message.root ? MerkleRoot.toAmino(message.root, useInterfaces) : undefined;
-    obj.next_validators_hash = base64FromBytes(message.nextValidatorsHash);
+    message.nextValidatorsHash !== undefined && (obj.next_validators_hash = base64FromBytes(message.nextValidatorsHash));
     return obj;
   },
   fromProtoMsg(message: ConsensusStateProtoMsg, useInterfaces: boolean = true): ConsensusState {

@@ -46,7 +46,7 @@ export interface EndpointProtoMsg {
 }
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointAmino {
-  kind: Endpoint_Kind;
+  kind?: Endpoint_Kind;
 }
 export interface EndpointAminoMsg {
   type: "/akash.base.v1beta1.Endpoint";

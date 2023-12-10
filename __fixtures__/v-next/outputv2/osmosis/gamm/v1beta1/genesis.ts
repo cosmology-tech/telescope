@@ -19,7 +19,7 @@ export interface ParamsProtoMsg {
 }
 /** Params holds parameters for the incentives module */
 export interface ParamsAmino {
-  pool_creation_fee: CoinAmino[];
+  pool_creation_fee?: CoinAmino[];
 }
 export interface ParamsAminoMsg {
   type: "osmosis/gamm/params";
@@ -45,9 +45,9 @@ export type GenesisStateEncoded = Omit<GenesisState, "pools"> & {
 };
 /** GenesisState defines the gamm module's genesis state. */
 export interface GenesisStateAmino {
-  pools: AnyAmino[];
+  pools?: AnyAmino[];
   /** will be renamed to next_pool_id in an upcoming version */
-  next_pool_number: string;
+  next_pool_number?: string;
   params?: ParamsAmino;
 }
 export interface GenesisStateAminoMsg {

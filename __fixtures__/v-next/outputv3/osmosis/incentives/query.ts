@@ -22,7 +22,7 @@ export interface ModuleToDistributeCoinsResponseProtoMsg {
 }
 export interface ModuleToDistributeCoinsResponseAmino {
   /** Coins that have yet to be distributed */
-  coins: CoinAmino[];
+  coins?: CoinAmino[];
 }
 export interface ModuleToDistributeCoinsResponseSDKType {
   coins: CoinSDKType[];
@@ -37,7 +37,7 @@ export interface GaugeByIDRequestProtoMsg {
 }
 export interface GaugeByIDRequestAmino {
   /** Gague ID being queried */
-  id: string;
+  id?: string;
 }
 export interface GaugeByIDRequestSDKType {
   id: bigint;
@@ -84,7 +84,7 @@ export interface GaugesResponseProtoMsg {
 }
 export interface GaugesResponseAmino {
   /** Upcoming and active gauges */
-  data: GaugeAmino[];
+  data?: GaugeAmino[];
   /** Pagination defines pagination for the response */
   pagination?: PageResponseAmino;
 }
@@ -119,7 +119,7 @@ export interface ActiveGaugesResponseProtoMsg {
 }
 export interface ActiveGaugesResponseAmino {
   /** Active gagues only */
-  data: GaugeAmino[];
+  data?: GaugeAmino[];
   /** Pagination defines pagination for the response */
   pagination?: PageResponseAmino;
 }
@@ -139,7 +139,7 @@ export interface ActiveGaugesPerDenomRequestProtoMsg {
 }
 export interface ActiveGaugesPerDenomRequestAmino {
   /** Desired denom when querying active gagues */
-  denom: string;
+  denom?: string;
   /** Pagination defines pagination for the request */
   pagination?: PageRequestAmino;
 }
@@ -159,7 +159,7 @@ export interface ActiveGaugesPerDenomResponseProtoMsg {
 }
 export interface ActiveGaugesPerDenomResponseAmino {
   /** Active gagues that match denom in query */
-  data: GaugeAmino[];
+  data?: GaugeAmino[];
   /** Pagination defines pagination for the response */
   pagination?: PageResponseAmino;
 }
@@ -194,7 +194,7 @@ export interface UpcomingGaugesResponseProtoMsg {
 }
 export interface UpcomingGaugesResponseAmino {
   /** Gauges whose distribution is upcoming */
-  data: GaugeAmino[];
+  data?: GaugeAmino[];
   /** Pagination defines pagination for the response */
   pagination?: PageResponseAmino;
 }
@@ -214,7 +214,7 @@ export interface UpcomingGaugesPerDenomRequestProtoMsg {
 }
 export interface UpcomingGaugesPerDenomRequestAmino {
   /** Filter for upcoming gagues that match specific denom */
-  denom: string;
+  denom?: string;
   /** Pagination defines pagination for the request */
   pagination?: PageRequestAmino;
 }
@@ -234,7 +234,7 @@ export interface UpcomingGaugesPerDenomResponseProtoMsg {
 }
 export interface UpcomingGaugesPerDenomResponseAmino {
   /** Upcoming gagues that match denom in query */
-  upcoming_gauges: GaugeAmino[];
+  upcoming_gauges?: GaugeAmino[];
   /** Pagination defines pagination for the response */
   pagination?: PageResponseAmino;
 }
@@ -259,14 +259,14 @@ export interface RewardsEstRequestProtoMsg {
 }
 export interface RewardsEstRequestAmino {
   /** Address that is being queried for future estimated rewards */
-  owner: string;
+  owner?: string;
   /** Lock IDs included in future reward estimation */
-  lock_ids: string[];
+  lock_ids?: string[];
   /**
    * Upper time limit of reward estimation
    * Lower limit is current epoch
    */
-  end_epoch: string;
+  end_epoch?: string;
 }
 export interface RewardsEstRequestSDKType {
   owner: string;
@@ -289,7 +289,7 @@ export interface RewardsEstResponseAmino {
    * Estimated coin rewards that will be recieved at provided address
    * from specified locks between current time and end epoch
    */
-  coins: CoinAmino[];
+  coins?: CoinAmino[];
 }
 export interface RewardsEstResponseSDKType {
   coins: CoinSDKType[];
@@ -311,7 +311,7 @@ export interface QueryLockableDurationsResponseProtoMsg {
 }
 export interface QueryLockableDurationsResponseAmino {
   /** Time durations that users can lock coins for in order to recieve rewards */
-  lockable_durations: DurationAmino[];
+  lockable_durations?: DurationAmino[];
 }
 export interface QueryLockableDurationsResponseSDKType {
   lockable_durations: DurationSDKType[];

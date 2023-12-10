@@ -18,7 +18,7 @@ export interface MerkleRootProtoMsg {
  * In the Cosmos SDK, the AppHash of a block header becomes the root.
  */
 export interface MerkleRootAmino {
-  hash: string;
+  hash?: string;
 }
 export interface MerkleRootAminoMsg {
   type: "cosmos-sdk/MerkleRoot";
@@ -49,7 +49,7 @@ export interface MerklePrefixProtoMsg {
  * append(Path.KeyPrefix, key...))
  */
 export interface MerklePrefixAmino {
-  key_prefix: string;
+  key_prefix?: string;
 }
 export interface MerklePrefixAminoMsg {
   type: "cosmos-sdk/MerklePrefix";
@@ -81,7 +81,7 @@ export interface MerklePathProtoMsg {
  * MerklePath is represented from root-to-leaf
  */
 export interface MerklePathAmino {
-  key_path: string[];
+  key_path?: string[];
 }
 export interface MerklePathAminoMsg {
   type: "cosmos-sdk/MerklePath";
@@ -117,7 +117,7 @@ export interface MerkleProofProtoMsg {
  * MerkleProofs are ordered from leaf-to-root
  */
 export interface MerkleProofAmino {
-  proofs: CommitmentProofAmino[];
+  proofs?: CommitmentProofAmino[];
 }
 export interface MerkleProofAminoMsg {
   type: "cosmos-sdk/MerkleProof";
@@ -175,7 +175,7 @@ export const MerkleRoot = {
   },
   toAmino(message: MerkleRoot): MerkleRootAmino {
     const obj: any = {};
-    obj.hash = base64FromBytes(message.hash);
+    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash));
     return obj;
   },
   fromAminoMsg(object: MerkleRootAminoMsg): MerkleRoot {
@@ -242,7 +242,7 @@ export const MerklePrefix = {
   },
   toAmino(message: MerklePrefix): MerklePrefixAmino {
     const obj: any = {};
-    obj.key_prefix = base64FromBytes(message.keyPrefix);
+    message.keyPrefix !== undefined && (obj.key_prefix = base64FromBytes(message.keyPrefix));
     return obj;
   },
   fromAminoMsg(object: MerklePrefixAminoMsg): MerklePrefix {

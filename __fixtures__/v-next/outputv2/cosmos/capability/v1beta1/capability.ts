@@ -17,7 +17,7 @@ export interface CapabilityProtoMsg {
  * provided to a Capability must be globally unique.
  */
 export interface CapabilityAmino {
-  index: string;
+  index?: string;
 }
 export interface CapabilityAminoMsg {
   type: "cosmos-sdk/Capability";
@@ -47,8 +47,8 @@ export interface OwnerProtoMsg {
  * capability and the module name.
  */
 export interface OwnerAmino {
-  module: string;
-  name: string;
+  module?: string;
+  name?: string;
 }
 export interface OwnerAminoMsg {
   type: "cosmos-sdk/Owner";
@@ -78,7 +78,7 @@ export interface CapabilityOwnersProtoMsg {
  * owners must be unique.
  */
 export interface CapabilityOwnersAmino {
-  owners: OwnerAmino[];
+  owners?: OwnerAmino[];
 }
 export interface CapabilityOwnersAminoMsg {
   type: "cosmos-sdk/CapabilityOwners";

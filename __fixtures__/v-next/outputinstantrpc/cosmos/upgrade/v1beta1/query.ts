@@ -718,7 +718,7 @@ export const QueryUpgradedConsensusStateResponse = {
   },
   toAmino(message: QueryUpgradedConsensusStateResponse): QueryUpgradedConsensusStateResponseAmino {
     const obj: any = {};
-    obj.upgraded_consensus_state = base64FromBytes(message.upgradedConsensusState);
+    message.upgradedConsensusState !== undefined && (obj.upgraded_consensus_state = base64FromBytes(message.upgradedConsensusState));
     return obj;
   },
   fromAminoMsg(object: QueryUpgradedConsensusStateResponseAminoMsg): QueryUpgradedConsensusStateResponse {

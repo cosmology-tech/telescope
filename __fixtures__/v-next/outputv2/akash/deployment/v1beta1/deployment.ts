@@ -61,8 +61,8 @@ export interface MsgCreateDeploymentProtoMsg {
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentAmino {
   id?: DeploymentIDAmino;
-  groups: GroupSpecAmino[];
-  version: string;
+  groups?: GroupSpecAmino[];
+  version?: string;
   deposit?: CoinAmino;
 }
 export interface MsgCreateDeploymentAminoMsg {
@@ -140,8 +140,8 @@ export interface MsgUpdateDeploymentProtoMsg {
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentAmino {
   id?: DeploymentIDAmino;
-  groups: GroupSpecAmino[];
-  version: string;
+  groups?: GroupSpecAmino[];
+  version?: string;
 }
 export interface MsgUpdateDeploymentAminoMsg {
   type: "/akash.deployment.v1beta1.MsgUpdateDeployment";
@@ -212,8 +212,8 @@ export interface DeploymentIDProtoMsg {
 }
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDAmino {
-  owner: string;
-  dseq: string;
+  owner?: string;
+  dseq?: string;
 }
 export interface DeploymentIDAminoMsg {
   type: "/akash.deployment.v1beta1.DeploymentID";
@@ -238,9 +238,9 @@ export interface DeploymentProtoMsg {
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentAmino {
   deployment_id?: DeploymentIDAmino;
-  state: Deployment_State;
-  version: string;
-  created_at: string;
+  state?: Deployment_State;
+  version?: string;
+  created_at?: string;
 }
 export interface DeploymentAminoMsg {
   type: "/akash.deployment.v1beta1.Deployment";
@@ -265,9 +265,9 @@ export interface DeploymentFiltersProtoMsg {
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersAmino {
-  owner: string;
-  dseq: string;
-  state: string;
+  owner?: string;
+  dseq?: string;
+  state?: string;
 }
 export interface DeploymentFiltersAminoMsg {
   type: "/akash.deployment.v1beta1.DeploymentFilters";
@@ -398,7 +398,7 @@ export const MsgCreateDeployment = {
     } else {
       obj.groups = [];
     }
-    obj.version = base64FromBytes(message.version);
+    message.version !== undefined && (obj.version = base64FromBytes(message.version));
     obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined;
     return obj;
   },
@@ -749,7 +749,7 @@ export const MsgUpdateDeployment = {
     } else {
       obj.groups = [];
     }
-    obj.version = base64FromBytes(message.version);
+    message.version !== undefined && (obj.version = base64FromBytes(message.version));
     return obj;
   },
   fromAminoMsg(object: MsgUpdateDeploymentAminoMsg): MsgUpdateDeployment {
@@ -1183,7 +1183,7 @@ export const Deployment = {
     const obj: any = {};
     obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined;
     obj.state = message.state;
-    obj.version = base64FromBytes(message.version);
+    message.version !== undefined && (obj.version = base64FromBytes(message.version));
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   },

@@ -17,10 +17,10 @@ export interface QueryAccountsRequestProtoMsg {
 }
 /** QueryAccountRequest is request type for the Query/Account RPC method */
 export interface QueryAccountsRequestAmino {
-  scope: string;
-  xid: string;
-  owner: string;
-  state: string;
+  scope?: string;
+  xid?: string;
+  owner?: string;
+  state?: string;
   pagination?: PageRequestAmino;
 }
 /** QueryAccountRequest is request type for the Query/Account RPC method */
@@ -42,7 +42,7 @@ export interface QueryAccountsResponseProtoMsg {
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryAccountsResponseAmino {
-  accounts: AccountAmino[];
+  accounts?: AccountAmino[];
   pagination?: PageResponseAmino;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
@@ -65,11 +65,11 @@ export interface QueryPaymentsRequestProtoMsg {
 }
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
 export interface QueryPaymentsRequestAmino {
-  scope: string;
-  xid: string;
-  id: string;
-  owner: string;
-  state: string;
+  scope?: string;
+  xid?: string;
+  id?: string;
+  owner?: string;
+  state?: string;
   pagination?: PageRequestAmino;
 }
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
@@ -92,7 +92,7 @@ export interface QueryPaymentsResponseProtoMsg {
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryPaymentsResponseAmino {
-  payments: PaymentAmino[];
+  payments?: PaymentAmino[];
   pagination?: PageResponseAmino;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */

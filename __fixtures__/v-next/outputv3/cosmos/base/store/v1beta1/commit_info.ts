@@ -18,8 +18,8 @@ export interface CommitInfoProtoMsg {
  * a version/height.
  */
 export interface CommitInfoAmino {
-  version: string;
-  store_infos: StoreInfoAmino[];
+  version?: string;
+  store_infos?: StoreInfoAmino[];
 }
 /**
  * CommitInfo defines commit information used by the multi-store when committing
@@ -46,7 +46,7 @@ export interface StoreInfoProtoMsg {
  * between a store name and the commit ID.
  */
 export interface StoreInfoAmino {
-  name: string;
+  name?: string;
   commit_id?: CommitIDAmino;
 }
 /**
@@ -74,8 +74,8 @@ export interface CommitIDProtoMsg {
  * committed.
  */
 export interface CommitIDAmino {
-  version: string;
-  hash: string;
+  version?: string;
+  hash?: string;
 }
 /**
  * CommitID defines the committment information when a specific store is
@@ -366,7 +366,7 @@ export const CommitID = {
   toAmino(message: CommitID, useInterfaces: boolean = true): CommitIDAmino {
     const obj: any = {};
     obj.version = message.version ? message.version.toString() : undefined;
-    obj.hash = base64FromBytes(message.hash);
+    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash));
     return obj;
   },
   fromProtoMsg(message: CommitIDProtoMsg, useInterfaces: boolean = true): CommitID {

@@ -231,7 +231,7 @@ export const CompactBitArray = {
   toAmino(message: CompactBitArray): CompactBitArrayAmino {
     const obj: any = {};
     obj.extra_bits_stored = message.extraBitsStored;
-    obj.elems = base64FromBytes(message.elems);
+    message.elems !== undefined && (obj.elems = base64FromBytes(message.elems));
     return obj;
   },
   fromAminoMsg(object: CompactBitArrayAminoMsg): CompactBitArray {

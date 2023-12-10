@@ -178,6 +178,20 @@ export const getFieldOptionality = (
     return true;
 };
 
+export const getFieldOptionalityForAmino = (
+  context: ProtoParseContext | AminoParseContext,
+  field: ProtoField,
+  isOneOf: boolean
+) => {
+  if (isOneOf) {
+    return true;
+  }
+
+  const dontOmitempty = !!field?.options?.['(amino.dont_omitempty)'];
+
+  return !dontOmitempty;
+};
+
 export const isScalarField = (
     field: ProtoField
 ) => {

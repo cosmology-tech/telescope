@@ -54,8 +54,8 @@ export interface CertificateIDProtoMsg {
 }
 /** CertificateID stores owner and sequence number */
 export interface CertificateIDAmino {
-  owner: string;
-  serial: string;
+  owner?: string;
+  serial?: string;
 }
 export interface CertificateIDAminoMsg {
   type: "/akash.cert.v1beta2.CertificateID";
@@ -78,9 +78,9 @@ export interface CertificateProtoMsg {
 }
 /** Certificate stores state, certificate and it's public key */
 export interface CertificateAmino {
-  state: Certificate_State;
-  cert: string;
-  pubkey: string;
+  state?: Certificate_State;
+  cert?: string;
+  pubkey?: string;
 }
 export interface CertificateAminoMsg {
   type: "/akash.cert.v1beta2.Certificate";
@@ -104,9 +104,9 @@ export interface CertificateFilterProtoMsg {
 }
 /** CertificateFilter defines filters used to filter certificates */
 export interface CertificateFilterAmino {
-  owner: string;
-  serial: string;
-  state: string;
+  owner?: string;
+  serial?: string;
+  state?: string;
 }
 export interface CertificateFilterAminoMsg {
   type: "/akash.cert.v1beta2.CertificateFilter";
@@ -130,9 +130,9 @@ export interface MsgCreateCertificateProtoMsg {
 }
 /** MsgCreateCertificate defines an SDK message for creating certificate */
 export interface MsgCreateCertificateAmino {
-  owner: string;
-  cert: string;
-  pubkey: string;
+  owner?: string;
+  cert?: string;
+  pubkey?: string;
 }
 export interface MsgCreateCertificateAminoMsg {
   type: "/akash.cert.v1beta2.MsgCreateCertificate";
@@ -324,8 +324,8 @@ export const Certificate = {
   toAmino(message: Certificate): CertificateAmino {
     const obj: any = {};
     obj.state = message.state;
-    obj.cert = base64FromBytes(message.cert);
-    obj.pubkey = base64FromBytes(message.pubkey);
+    message.cert !== undefined && (obj.cert = base64FromBytes(message.cert));
+    message.pubkey !== undefined && (obj.pubkey = base64FromBytes(message.pubkey));
     return obj;
   },
   fromAminoMsg(object: CertificateAminoMsg): Certificate {
@@ -486,8 +486,8 @@ export const MsgCreateCertificate = {
   toAmino(message: MsgCreateCertificate): MsgCreateCertificateAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.cert = base64FromBytes(message.cert);
-    obj.pubkey = base64FromBytes(message.pubkey);
+    message.cert !== undefined && (obj.cert = base64FromBytes(message.cert));
+    message.pubkey !== undefined && (obj.pubkey = base64FromBytes(message.pubkey));
     return obj;
   },
   fromAminoMsg(object: MsgCreateCertificateAminoMsg): MsgCreateCertificate {

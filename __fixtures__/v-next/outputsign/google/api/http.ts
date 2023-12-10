@@ -38,7 +38,7 @@ export interface HttpAmino {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: HttpRuleAmino[];
+  rules?: HttpRuleAmino[];
   /**
    * When set to true, URL path parameters will be fully URI-decoded except in
    * cases of single segment matches in reserved expansion, where "%2F" will be
@@ -47,7 +47,7 @@ export interface HttpAmino {
    * The default behavior is to not decode RFC 6570 reserved characters in multi
    * segment matches.
    */
-  fully_decode_reserved_expansion: boolean;
+  fully_decode_reserved_expansion?: boolean;
 }
 export interface HttpAminoMsg {
   type: "/google.api.Http";
@@ -666,7 +666,7 @@ export interface HttpRuleAmino {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /**
    * Maps to HTTP GET. Used for listing and getting information about
    * resources.
@@ -695,7 +695,7 @@ export interface HttpRuleAmino {
    * NOTE: the referred field must be present at the top-level of the request
    * message type.
    */
-  body: string;
+  body?: string;
   /**
    * Optional. The name of the response field whose value is mapped to the HTTP
    * response body. When omitted, the entire response message will be used
@@ -704,13 +704,13 @@ export interface HttpRuleAmino {
    * NOTE: The referred field must be present at the top-level of the response
    * message type.
    */
-  response_body: string;
+  response_body?: string;
   /**
    * Additional HTTP bindings for the selector. Nested bindings must
    * not contain an `additional_bindings` field themselves (that is,
    * the nesting may only be one level deep).
    */
-  additional_bindings: HttpRuleAmino[];
+  additional_bindings?: HttpRuleAmino[];
 }
 export interface HttpRuleAminoMsg {
   type: "/google.api.HttpRule";
@@ -1013,9 +1013,9 @@ export interface CustomHttpPatternProtoMsg {
 /** A custom pattern is used for defining custom HTTP verb. */
 export interface CustomHttpPatternAmino {
   /** The name of this custom HTTP verb. */
-  kind: string;
+  kind?: string;
   /** The path matched by this custom verb. */
-  path: string;
+  path?: string;
 }
 export interface CustomHttpPatternAminoMsg {
   type: "/google.api.CustomHttpPattern";

@@ -335,8 +335,8 @@ export const Certificate = {
   toAmino(message: Certificate): CertificateAmino {
     const obj: any = {};
     obj.state = message.state;
-    obj.cert = base64FromBytes(message.cert);
-    obj.pubkey = base64FromBytes(message.pubkey);
+    message.cert !== undefined && (obj.cert = base64FromBytes(message.cert));
+    message.pubkey !== undefined && (obj.pubkey = base64FromBytes(message.pubkey));
     return obj;
   },
   fromAminoMsg(object: CertificateAminoMsg): Certificate {
@@ -579,8 +579,8 @@ export const MsgCreateCertificate = {
   toAmino(message: MsgCreateCertificate): MsgCreateCertificateAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.cert = base64FromBytes(message.cert);
-    obj.pubkey = base64FromBytes(message.pubkey);
+    message.cert !== undefined && (obj.cert = base64FromBytes(message.cert));
+    message.pubkey !== undefined && (obj.pubkey = base64FromBytes(message.pubkey));
     return obj;
   },
   fromAminoMsg(object: MsgCreateCertificateAminoMsg): MsgCreateCertificate {

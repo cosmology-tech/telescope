@@ -163,7 +163,7 @@ export const InterchainAccountPacketData = {
   toAmino(message: InterchainAccountPacketData): InterchainAccountPacketDataAmino {
     const obj: any = {};
     obj.type = message.type;
-    obj.data = base64FromBytes(message.data);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data));
     obj.memo = message.memo;
     return obj;
   },

@@ -16,9 +16,9 @@ export interface ArithmeticTwapRequestProtoMsg {
   value: Uint8Array;
 }
 export interface ArithmeticTwapRequestAmino {
-  pool_id: string;
-  base_asset: string;
-  quote_asset: string;
+  pool_id?: string;
+  base_asset?: string;
+  quote_asset?: string;
   start_time?: string;
   end_time?: string;
 }
@@ -41,7 +41,7 @@ export interface ArithmeticTwapResponseProtoMsg {
   value: Uint8Array;
 }
 export interface ArithmeticTwapResponseAmino {
-  arithmetic_twap: string;
+  arithmetic_twap?: string;
 }
 export interface ArithmeticTwapResponseAminoMsg {
   type: "osmosis/twap/arithmetic-twap-response";
@@ -61,9 +61,9 @@ export interface ArithmeticTwapToNowRequestProtoMsg {
   value: Uint8Array;
 }
 export interface ArithmeticTwapToNowRequestAmino {
-  pool_id: string;
-  base_asset: string;
-  quote_asset: string;
+  pool_id?: string;
+  base_asset?: string;
+  quote_asset?: string;
   start_time?: string;
 }
 export interface ArithmeticTwapToNowRequestAminoMsg {
@@ -84,7 +84,7 @@ export interface ArithmeticTwapToNowResponseProtoMsg {
   value: Uint8Array;
 }
 export interface ArithmeticTwapToNowResponseAmino {
-  arithmetic_twap: string;
+  arithmetic_twap?: string;
 }
 export interface ArithmeticTwapToNowResponseAminoMsg {
   type: "osmosis/twap/arithmetic-twap-to-now-response";

@@ -34,7 +34,7 @@ export interface ParamsProtoMsg {
 /** Params holds parameters for the recovery module */
 export interface ParamsAmino {
   /** enable recovery IBC middleware */
-  enable_recovery: boolean;
+  enable_recovery?: boolean;
   /** duration added to timeout timestamp for balances recovered via IBC packets */
   packet_timeout_duration?: DurationAmino;
 }

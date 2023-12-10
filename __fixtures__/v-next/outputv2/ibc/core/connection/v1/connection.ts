@@ -94,14 +94,14 @@ export interface ConnectionEndProtoMsg {
  */
 export interface ConnectionEndAmino {
   /** client associated with this connection. */
-  client_id: string;
+  client_id?: string;
   /**
    * IBC version which can be utilised to determine encodings or protocols for
    * channels or packets utilising this connection.
    */
-  versions: VersionAmino[];
+  versions?: VersionAmino[];
   /** current state of the connection end. */
-  state: State;
+  state?: State;
   /** counterparty chain associated with this connection. */
   counterparty?: CounterpartyAmino;
   /**
@@ -109,7 +109,7 @@ export interface ConnectionEndAmino {
    * packet-verification NOTE: delay period logic is only implemented by some
    * clients.
    */
-  delay_period: string;
+  delay_period?: string;
 }
 export interface ConnectionEndAminoMsg {
   type: "cosmos-sdk/ConnectionEnd";
@@ -159,20 +159,20 @@ export interface IdentifiedConnectionProtoMsg {
  */
 export interface IdentifiedConnectionAmino {
   /** connection identifier. */
-  id: string;
+  id?: string;
   /** client associated with this connection. */
-  client_id: string;
+  client_id?: string;
   /**
    * IBC version which can be utilised to determine encodings or protocols for
    * channels or packets utilising this connection
    */
-  versions: VersionAmino[];
+  versions?: VersionAmino[];
   /** current state of the connection end. */
-  state: State;
+  state?: State;
   /** counterparty chain associated with this connection. */
   counterparty?: CounterpartyAmino;
   /** delay period associated with this connection. */
-  delay_period: string;
+  delay_period?: string;
 }
 export interface IdentifiedConnectionAminoMsg {
   type: "cosmos-sdk/IdentifiedConnection";
@@ -215,12 +215,12 @@ export interface CounterpartyAmino {
    * identifies the client on the counterparty chain associated with a given
    * connection.
    */
-  client_id: string;
+  client_id?: string;
   /**
    * identifies the connection end on the counterparty chain associated with a
    * given connection.
    */
-  connection_id: string;
+  connection_id?: string;
   /** commitment merkle prefix of the counterparty chain. */
   prefix?: MerklePrefixAmino;
 }
@@ -246,7 +246,7 @@ export interface ClientPathsProtoMsg {
 /** ClientPaths define all the connection paths for a client state. */
 export interface ClientPathsAmino {
   /** list of connection paths */
-  paths: string[];
+  paths?: string[];
 }
 export interface ClientPathsAminoMsg {
   type: "cosmos-sdk/ClientPaths";
@@ -270,9 +270,9 @@ export interface ConnectionPathsProtoMsg {
 /** ConnectionPaths define all the connection paths for a given client state. */
 export interface ConnectionPathsAmino {
   /** client state unique identifier */
-  client_id: string;
+  client_id?: string;
   /** list of connection paths */
-  paths: string[];
+  paths?: string[];
 }
 export interface ConnectionPathsAminoMsg {
   type: "cosmos-sdk/ConnectionPaths";
@@ -303,9 +303,9 @@ export interface VersionProtoMsg {
  */
 export interface VersionAmino {
   /** unique version identifier */
-  identifier: string;
+  identifier?: string;
   /** list of features compatible with the specified identifier */
-  features: string[];
+  features?: string[];
 }
 export interface VersionAminoMsg {
   type: "cosmos-sdk/Version";
@@ -339,7 +339,7 @@ export interface ParamsAmino {
    * largest amount of time that the chain might reasonably take to produce the next block under normal operating
    * conditions. A safe choice is 3-5x the expected time per block.
    */
-  max_expected_time_per_block: string;
+  max_expected_time_per_block?: string;
 }
 export interface ParamsAminoMsg {
   type: "cosmos-sdk/Params";

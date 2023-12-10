@@ -76,14 +76,14 @@ export interface SmoothWeightChangeParamsAmino {
    * future type refactorings should just have a type with the denom & weight
    * here.
    */
-  initial_pool_weights: PoolAssetAmino[];
+  initial_pool_weights?: PoolAssetAmino[];
   /**
    * The target pool weights. The pool weights will change linearly with respect
    * to time between start_time, and start_time + duration. The amount
    * PoolAsset.token.amount field is ignored if present, future type
    * refactorings should just have a type with the denom & weight here.
    */
-  target_pool_weights: PoolAssetAmino[];
+  target_pool_weights?: PoolAssetAmino[];
 }
 /**
  * Parameters for changing the weights in a balancer pool smoothly from
@@ -126,8 +126,8 @@ export interface PoolParamsProtoMsg {
  * The pool's token holders are specified in future_pool_governor.
  */
 export interface PoolParamsAmino {
-  swap_fee: string;
-  exit_fee: string;
+  swap_fee?: string;
+  exit_fee?: string;
   smooth_weight_change_params?: SmoothWeightChangeParamsAmino;
 }
 /**
@@ -173,7 +173,7 @@ export interface PoolAssetAmino {
    */
   token?: CoinAmino;
   /** Weight that is not normalized. This weight must be less than 2^50 */
-  weight: string;
+  weight?: string;
 }
 /**
  * Pool asset is an internal struct that combines the amount of the
@@ -217,8 +217,8 @@ export interface PoolProtoMsg {
   value: Uint8Array;
 }
 export interface PoolAmino {
-  address: string;
-  id: string;
+  address?: string;
+  id?: string;
   pool_params?: PoolParamsAmino;
   /**
    * This string specifies who will govern the pool in the future.
@@ -231,16 +231,16 @@ export interface PoolAmino {
    * would need to be locked up to count in governance. 0w means no lockup.
    * TODO: Further improve these docs
    */
-  future_pool_governor: string;
+  future_pool_governor?: string;
   /** sum of all LP tokens sent out */
   total_shares?: CoinAmino;
   /**
    * These are assumed to be sorted by denomiation.
    * They contain the pool asset and the information about the weight
    */
-  pool_assets: PoolAssetAmino[];
+  pool_assets?: PoolAssetAmino[];
   /** sum of all non-normalized pool weights */
-  total_weight: string;
+  total_weight?: string;
 }
 export interface PoolSDKType {
   $typeUrl?: "/osmosis.gamm.v1beta1.Pool";

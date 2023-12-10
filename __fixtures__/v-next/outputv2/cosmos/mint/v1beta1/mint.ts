@@ -16,9 +16,9 @@ export interface MinterProtoMsg {
 /** Minter represents the minting state. */
 export interface MinterAmino {
   /** current annual inflation rate */
-  inflation: string;
+  inflation?: string;
   /** current annual expected provisions */
-  annual_provisions: string;
+  annual_provisions?: string;
 }
 export interface MinterAminoMsg {
   type: "cosmos-sdk/Minter";
@@ -51,17 +51,17 @@ export interface ParamsProtoMsg {
 /** Params holds parameters for the mint module. */
 export interface ParamsAmino {
   /** type of coin to mint */
-  mint_denom: string;
+  mint_denom?: string;
   /** maximum annual change in inflation rate */
-  inflation_rate_change: string;
+  inflation_rate_change?: string;
   /** maximum inflation rate */
-  inflation_max: string;
+  inflation_max?: string;
   /** minimum inflation rate */
-  inflation_min: string;
+  inflation_min?: string;
   /** goal of percent bonded atoms */
-  goal_bonded: string;
+  goal_bonded?: string;
   /** expected blocks per year */
-  blocks_per_year: string;
+  blocks_per_year?: string;
 }
 export interface ParamsAminoMsg {
   type: "cosmos-sdk/Params";

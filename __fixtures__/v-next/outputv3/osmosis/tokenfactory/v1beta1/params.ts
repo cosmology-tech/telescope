@@ -12,7 +12,7 @@ export interface ParamsProtoMsg {
 }
 /** Params defines the parameters for the tokenfactory module. */
 export interface ParamsAmino {
-  denom_creation_fee: CoinAmino[];
+  denom_creation_fee?: CoinAmino[];
 }
 /** Params defines the parameters for the tokenfactory module. */
 export interface ParamsSDKType {

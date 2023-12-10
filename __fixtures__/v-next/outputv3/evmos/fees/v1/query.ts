@@ -49,7 +49,7 @@ export interface QueryDevFeeInfosResponseProtoMsg {
  * RPC method.
  */
 export interface QueryDevFeeInfosResponseAmino {
-  fees: DevFeeInfoAmino[];
+  fees?: DevFeeInfoAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
@@ -79,7 +79,7 @@ export interface QueryDevFeeInfoRequestProtoMsg {
  */
 export interface QueryDevFeeInfoRequestAmino {
   /** contract identifier is the hex contract address of a contract */
-  contract_address: string;
+  contract_address?: string;
 }
 /**
  * QueryDevFeeInfoRequest is the request type for the Query/DevFeeInfo RPC
@@ -168,7 +168,7 @@ export interface QueryDevFeeInfosPerDeployerRequestProtoMsg {
  */
 export interface QueryDevFeeInfosPerDeployerRequestAmino {
   /** deployer bech32 address */
-  deployer_address: string;
+  deployer_address?: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
@@ -198,7 +198,7 @@ export interface QueryDevFeeInfosPerDeployerResponseProtoMsg {
  * Query/DevFeeInfosPerDeployer RPC method.
  */
 export interface QueryDevFeeInfosPerDeployerResponseAmino {
-  fees: DevFeeInfoAmino[];
+  fees?: DevFeeInfoAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }

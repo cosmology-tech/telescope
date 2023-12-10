@@ -99,7 +99,7 @@ export interface StakeAuthorizationAmino {
   /** deny_list specifies list of validator addresses to whom grantee can not delegate tokens. */
   deny_list?: StakeAuthorization_ValidatorsAmino;
   /** authorization_type defines one of AuthorizationType. */
-  authorization_type: AuthorizationType;
+  authorization_type?: AuthorizationType;
 }
 export interface StakeAuthorizationAminoMsg {
   type: "cosmos-sdk/StakeAuthorization";
@@ -126,7 +126,7 @@ export interface StakeAuthorization_ValidatorsProtoMsg {
 }
 /** Validators defines list of validator addresses. */
 export interface StakeAuthorization_ValidatorsAmino {
-  address: string[];
+  address?: string[];
 }
 export interface StakeAuthorization_ValidatorsAminoMsg {
   type: "cosmos-sdk/Validators";

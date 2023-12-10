@@ -17,7 +17,7 @@ export interface CapabilityProtoMsg {
  * provided to a Capability must be globally unique.
  */
 export interface CapabilityAmino {
-  index: string;
+  index?: string;
 }
 /**
  * Capability defines an implementation of an object capability. The index
@@ -43,8 +43,8 @@ export interface OwnerProtoMsg {
  * capability and the module name.
  */
 export interface OwnerAmino {
-  module: string;
-  name: string;
+  module?: string;
+  name?: string;
 }
 /**
  * Owner defines a single capability owner. An owner is defined by the name of
@@ -70,7 +70,7 @@ export interface CapabilityOwnersProtoMsg {
  * owners must be unique.
  */
 export interface CapabilityOwnersAmino {
-  owners: OwnerAmino[];
+  owners?: OwnerAmino[];
 }
 /**
  * CapabilityOwners defines a set of owners of a single Capability. The set of

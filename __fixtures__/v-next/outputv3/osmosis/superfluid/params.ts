@@ -24,7 +24,7 @@ export interface ParamsAmino {
    * to counter-balance the staked amount on chain's exposure to various asset
    * volatilities, and have base staking be 'resistant' to volatility.
    */
-  minimum_risk_factor: string;
+  minimum_risk_factor?: string;
 }
 /** Params holds parameters for the superfluid module */
 export interface ParamsSDKType {
