@@ -2,7 +2,7 @@ import { base64FromBytes } from "../../../__fixtures__/misc/output-impl-interfac
 import {
   GenericAuthorization,
   Grant,
-  GrantAmino,
+  GrantAminoMsg,
 } from "../../../__fixtures__/misc/output-impl-interfaces-gen/cosmos/authz/v1beta1/authz";
 import { Any } from "../../../__fixtures__/misc/output-impl-interfaces-gen/google/protobuf/any";
 import { SendAuthorization } from "../../../__fixtures__/misc/output-impl-interfaces-gen/cosmos/bank/v1beta1/authz";
@@ -294,27 +294,59 @@ describe("implements interface works", () => {
   });
 
   it("toAmino for interface", () => {
-    // const data = Grant.encode({
-    //   authorization: {
-    //     spendLimit: [
-    //       {
-    //         denom: "d",
-    //         amount: "1",
-    //       },
-    //     ],
-    //   },
-    //   expiration: new Date("2020-01-01"),
-    //   opt: 0,
-    //   singleMsg: Any.fromPartial({}),
-    //   messages: [Any.fromPartial({})],
-    // }).finish();
+    const data = Grant.encode({
+      authorization: {
+        spendLimit: [
+          {
+            denom: "d",
+            amount: "1",
+          },
+        ],
+      },
+      expiration: new Date("2020-01-01"),
+      opt: 0,
+      singleMsg: Any.fromPartial({}),
+      messages: [Any.fromPartial({})],
+    }).finish();
 
-    // const message = Grant.decode(data);
+    const message = Grant.decode(data);
 
-    // const amino = Grant.toAmino(message);
+    const amino = Grant.toAminoMsg(message);
 
-    // expect(amino).toMatchSnapshot();
+    expect(amino).toMatchSnapshot();
   });
 
-  it("fromAmino for interface", () => {});
+  it("fromAmino for interface", () => {
+    const amino: GrantAminoMsg = {
+      "type": "cosmos-sdk/Grant",
+      "value": {
+        "authorization": {
+          "type": "cosmos-sdk/SendAuthorization",
+          "value": {
+            "spend_limit": [
+              {
+                "amount": "1",
+                "denom": "d",
+              },
+            ],
+          },
+        },
+        "expiration": "2020-01-01T00:00:00Z",
+        "messages": [
+          {
+            "type": "",
+            "value": {},
+          },
+        ],
+        "single_msg": {
+          "type": "",
+          "value": {},
+        },
+      },
+    };
+
+    const data = Grant.fromAminoMsg(amino);
+
+    expect(data).toMatchSnapshot();
+  });
 });
