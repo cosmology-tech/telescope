@@ -22,7 +22,7 @@ export type MsgSubmitEvidenceEncoded = Omit<MsgSubmitEvidence, "evidence"> & {
  * Evidence of misbehavior such as equivocation or counterfactual signing.
  */
 export interface MsgSubmitEvidenceAmino {
-  submitter: string;
+  submitter?: string;
   evidence?: AnyAmino;
 }
 export interface MsgSubmitEvidenceAminoMsg {
@@ -49,7 +49,7 @@ export interface MsgSubmitEvidenceResponseProtoMsg {
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponseAmino {
   /** hash defines the hash of the evidence. */
-  hash: Uint8Array;
+  hash?: string;
 }
 export interface MsgSubmitEvidenceResponseAminoMsg {
   type: "cosmos-sdk/MsgSubmitEvidenceResponse";
@@ -130,10 +130,14 @@ export const MsgSubmitEvidence = {
     return obj;
   },
   fromAmino(object: MsgSubmitEvidenceAmino): MsgSubmitEvidence {
-    return {
-      submitter: object.submitter,
-      evidence: object?.evidence ? Evidence_FromAmino(object.evidence) : undefined
-    };
+    const message = createBaseMsgSubmitEvidence();
+    if (object.submitter !== undefined && object.submitter !== null) {
+      message.submitter = object.submitter;
+    }
+    if (object.evidence !== undefined && object.evidence !== null) {
+      message.evidence = Evidence_FromAmino(object.evidence);
+    }
+    return message;
   },
   toAmino(message: MsgSubmitEvidence): MsgSubmitEvidenceAmino {
     const obj: any = {};
@@ -220,13 +224,15 @@ export const MsgSubmitEvidenceResponse = {
     return obj;
   },
   fromAmino(object: MsgSubmitEvidenceResponseAmino): MsgSubmitEvidenceResponse {
-    return {
-      hash: object.hash
-    };
+    const message = createBaseMsgSubmitEvidenceResponse();
+    if (object.hash !== undefined && object.hash !== null) {
+      message.hash = bytesFromBase64(object.hash);
+    }
+    return message;
   },
   toAmino(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseAmino {
     const obj: any = {};
-    obj.hash = message.hash;
+    obj.hash = message.hash ? base64FromBytes(message.hash) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgSubmitEvidenceResponseAminoMsg): MsgSubmitEvidenceResponse {

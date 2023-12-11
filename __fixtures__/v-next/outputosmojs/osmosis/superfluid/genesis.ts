@@ -180,13 +180,15 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      superfluidAssets: Array.isArray(object?.superfluid_assets) ? object.superfluid_assets.map((e: any) => SuperfluidAsset.fromAmino(e)) : [],
-      osmoEquivalentMultipliers: Array.isArray(object?.osmo_equivalent_multipliers) ? object.osmo_equivalent_multipliers.map((e: any) => OsmoEquivalentMultiplierRecord.fromAmino(e)) : [],
-      intermediaryAccounts: Array.isArray(object?.intermediary_accounts) ? object.intermediary_accounts.map((e: any) => SuperfluidIntermediaryAccount.fromAmino(e)) : [],
-      intemediaryAccountConnections: Array.isArray(object?.intemediary_account_connections) ? object.intemediary_account_connections.map((e: any) => LockIdIntermediaryAccountConnection.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.superfluidAssets = object.superfluid_assets?.map(e => SuperfluidAsset.fromAmino(e)) || [];
+    message.osmoEquivalentMultipliers = object.osmo_equivalent_multipliers?.map(e => OsmoEquivalentMultiplierRecord.fromAmino(e)) || [];
+    message.intermediaryAccounts = object.intermediary_accounts?.map(e => SuperfluidIntermediaryAccount.fromAmino(e)) || [];
+    message.intemediaryAccountConnections = object.intemediary_account_connections?.map(e => LockIdIntermediaryAccountConnection.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

@@ -192,9 +192,11 @@ export const Minter = {
     return obj;
   },
   fromAmino(object: MinterAmino): Minter {
-    return {
-      epochProvisions: object.epoch_provisions
-    };
+    const message = createBaseMinter();
+    if (object.epoch_provisions !== undefined && object.epoch_provisions !== null) {
+      message.epochProvisions = object.epoch_provisions;
+    }
+    return message;
   },
   toAmino(message: Minter): MinterAmino {
     const obj: any = {};
@@ -297,10 +299,14 @@ export const WeightedAddress = {
     return obj;
   },
   fromAmino(object: WeightedAddressAmino): WeightedAddress {
-    return {
-      address: object.address,
-      weight: object.weight
-    };
+    const message = createBaseWeightedAddress();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.weight !== undefined && object.weight !== null) {
+      message.weight = object.weight;
+    }
+    return message;
   },
   toAmino(message: WeightedAddress): WeightedAddressAmino {
     const obj: any = {};
@@ -430,12 +436,20 @@ export const DistributionProportions = {
     return obj;
   },
   fromAmino(object: DistributionProportionsAmino): DistributionProportions {
-    return {
-      staking: object.staking,
-      poolIncentives: object.pool_incentives,
-      developerRewards: object.developer_rewards,
-      communityPool: object.community_pool
-    };
+    const message = createBaseDistributionProportions();
+    if (object.staking !== undefined && object.staking !== null) {
+      message.staking = object.staking;
+    }
+    if (object.pool_incentives !== undefined && object.pool_incentives !== null) {
+      message.poolIncentives = object.pool_incentives;
+    }
+    if (object.developer_rewards !== undefined && object.developer_rewards !== null) {
+      message.developerRewards = object.developer_rewards;
+    }
+    if (object.community_pool !== undefined && object.community_pool !== null) {
+      message.communityPool = object.community_pool;
+    }
+    return message;
   },
   toAmino(message: DistributionProportions): DistributionProportionsAmino {
     const obj: any = {};
@@ -627,16 +641,30 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      mintDenom: object.mint_denom,
-      genesisEpochProvisions: object.genesis_epoch_provisions,
-      epochIdentifier: object.epoch_identifier,
-      reductionPeriodInEpochs: BigInt(object.reduction_period_in_epochs),
-      reductionFactor: object.reduction_factor,
-      distributionProportions: object?.distribution_proportions ? DistributionProportions.fromAmino(object.distribution_proportions) : undefined,
-      weightedDeveloperRewardsReceivers: Array.isArray(object?.weighted_developer_rewards_receivers) ? object.weighted_developer_rewards_receivers.map((e: any) => WeightedAddress.fromAmino(e)) : [],
-      mintingRewardsDistributionStartEpoch: BigInt(object.minting_rewards_distribution_start_epoch)
-    };
+    const message = createBaseParams();
+    if (object.mint_denom !== undefined && object.mint_denom !== null) {
+      message.mintDenom = object.mint_denom;
+    }
+    if (object.genesis_epoch_provisions !== undefined && object.genesis_epoch_provisions !== null) {
+      message.genesisEpochProvisions = object.genesis_epoch_provisions;
+    }
+    if (object.epoch_identifier !== undefined && object.epoch_identifier !== null) {
+      message.epochIdentifier = object.epoch_identifier;
+    }
+    if (object.reduction_period_in_epochs !== undefined && object.reduction_period_in_epochs !== null) {
+      message.reductionPeriodInEpochs = BigInt(object.reduction_period_in_epochs);
+    }
+    if (object.reduction_factor !== undefined && object.reduction_factor !== null) {
+      message.reductionFactor = object.reduction_factor;
+    }
+    if (object.distribution_proportions !== undefined && object.distribution_proportions !== null) {
+      message.distributionProportions = DistributionProportions.fromAmino(object.distribution_proportions);
+    }
+    message.weightedDeveloperRewardsReceivers = object.weighted_developer_rewards_receivers?.map(e => WeightedAddress.fromAmino(e)) || [];
+    if (object.minting_rewards_distribution_start_epoch !== undefined && object.minting_rewards_distribution_start_epoch !== null) {
+      message.mintingRewardsDistributionStartEpoch = BigInt(object.minting_rewards_distribution_start_epoch);
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

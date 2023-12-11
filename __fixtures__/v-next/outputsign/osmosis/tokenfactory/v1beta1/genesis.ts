@@ -17,7 +17,7 @@ export interface GenesisStateProtoMsg {
 export interface GenesisStateAmino {
   /** params defines the paramaters of the module. */
   params?: ParamsAmino;
-  factory_denoms: GenesisDenomAmino[];
+  factory_denoms?: GenesisDenomAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "osmosis/tokenfactory/genesis-state";
@@ -47,7 +47,7 @@ export interface GenesisDenomProtoMsg {
  * denom's admin.
  */
 export interface GenesisDenomAmino {
-  denom: string;
+  denom?: string;
   authority_metadata?: DenomAuthorityMetadataAmino;
 }
 export interface GenesisDenomAminoMsg {
@@ -109,10 +109,12 @@ export const GenesisState = {
     return message;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      factoryDenoms: Array.isArray(object?.factory_denoms) ? object.factory_denoms.map((e: any) => GenesisDenom.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.factoryDenoms = object.factory_denoms?.map(e => GenesisDenom.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -192,10 +194,14 @@ export const GenesisDenom = {
     return message;
   },
   fromAmino(object: GenesisDenomAmino): GenesisDenom {
-    return {
-      denom: object.denom,
-      authorityMetadata: object?.authority_metadata ? DenomAuthorityMetadata.fromAmino(object.authority_metadata) : undefined
-    };
+    const message = createBaseGenesisDenom();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.authority_metadata !== undefined && object.authority_metadata !== null) {
+      message.authorityMetadata = DenomAuthorityMetadata.fromAmino(object.authority_metadata);
+    }
+    return message;
   },
   toAmino(message: GenesisDenom): GenesisDenomAmino {
     const obj: any = {};

@@ -76,14 +76,14 @@ export interface SmoothWeightChangeParamsAmino {
    * future type refactorings should just have a type with the denom & weight
    * here.
    */
-  initial_pool_weights: PoolAssetAmino[];
+  initial_pool_weights?: PoolAssetAmino[];
   /**
    * The target pool weights. The pool weights will change linearly with respect
    * to time between start_time, and start_time + duration. The amount
    * PoolAsset.token.amount field is ignored if present, future type
    * refactorings should just have a type with the denom & weight here.
    */
-  target_pool_weights: PoolAssetAmino[];
+  target_pool_weights?: PoolAssetAmino[];
 }
 /**
  * Parameters for changing the weights in a balancer pool smoothly from
@@ -126,8 +126,8 @@ export interface PoolParamsProtoMsg {
  * The pool's token holders are specified in future_pool_governor.
  */
 export interface PoolParamsAmino {
-  swap_fee: string;
-  exit_fee: string;
+  swap_fee?: string;
+  exit_fee?: string;
   smooth_weight_change_params?: SmoothWeightChangeParamsAmino;
 }
 /**
@@ -173,7 +173,7 @@ export interface PoolAssetAmino {
    */
   token?: CoinAmino;
   /** Weight that is not normalized. This weight must be less than 2^50 */
-  weight: string;
+  weight?: string;
 }
 /**
  * Pool asset is an internal struct that combines the amount of the
@@ -217,8 +217,8 @@ export interface PoolProtoMsg {
   value: Uint8Array;
 }
 export interface PoolAmino {
-  address: string;
-  id: string;
+  address?: string;
+  id?: string;
   pool_params?: PoolParamsAmino;
   /**
    * This string specifies who will govern the pool in the future.
@@ -231,16 +231,16 @@ export interface PoolAmino {
    * would need to be locked up to count in governance. 0w means no lockup.
    * TODO: Further improve these docs
    */
-  future_pool_governor: string;
+  future_pool_governor?: string;
   /** sum of all LP tokens sent out */
   total_shares?: CoinAmino;
   /**
    * These are assumed to be sorted by denomiation.
    * They contain the pool asset and the information about the weight
    */
-  pool_assets: PoolAssetAmino[];
+  pool_assets?: PoolAssetAmino[];
   /** sum of all non-normalized pool weights */
-  total_weight: string;
+  total_weight?: string;
 }
 export interface PoolSDKType {
   $typeUrl?: "/osmosis.gamm.v1beta1.Pool";
@@ -363,12 +363,16 @@ export const SmoothWeightChangeParams = {
     return obj;
   },
   fromAmino(object: SmoothWeightChangeParamsAmino): SmoothWeightChangeParams {
-    return {
-      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      initialPoolWeights: Array.isArray(object?.initial_pool_weights) ? object.initial_pool_weights.map((e: any) => PoolAsset.fromAmino(e)) : [],
-      targetPoolWeights: Array.isArray(object?.target_pool_weights) ? object.target_pool_weights.map((e: any) => PoolAsset.fromAmino(e)) : []
-    };
+    const message = createBaseSmoothWeightChangeParams();
+    if (object.start_time !== undefined && object.start_time !== null) {
+      message.startTime = fromTimestamp(Timestamp.fromAmino(object.start_time));
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromAmino(object.duration);
+    }
+    message.initialPoolWeights = object.initial_pool_weights?.map(e => PoolAsset.fromAmino(e)) || [];
+    message.targetPoolWeights = object.target_pool_weights?.map(e => PoolAsset.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: SmoothWeightChangeParams, useInterfaces: boolean = true): SmoothWeightChangeParamsAmino {
     const obj: any = {};
@@ -482,11 +486,17 @@ export const PoolParams = {
     return obj;
   },
   fromAmino(object: PoolParamsAmino): PoolParams {
-    return {
-      swapFee: object.swap_fee,
-      exitFee: object.exit_fee,
-      smoothWeightChangeParams: object?.smooth_weight_change_params ? SmoothWeightChangeParams.fromAmino(object.smooth_weight_change_params) : undefined
-    };
+    const message = createBasePoolParams();
+    if (object.swap_fee !== undefined && object.swap_fee !== null) {
+      message.swapFee = object.swap_fee;
+    }
+    if (object.exit_fee !== undefined && object.exit_fee !== null) {
+      message.exitFee = object.exit_fee;
+    }
+    if (object.smooth_weight_change_params !== undefined && object.smooth_weight_change_params !== null) {
+      message.smoothWeightChangeParams = SmoothWeightChangeParams.fromAmino(object.smooth_weight_change_params);
+    }
+    return message;
   },
   toAmino(message: PoolParams, useInterfaces: boolean = true): PoolParamsAmino {
     const obj: any = {};
@@ -579,10 +589,14 @@ export const PoolAsset = {
     return obj;
   },
   fromAmino(object: PoolAssetAmino): PoolAsset {
-    return {
-      token: object?.token ? Coin.fromAmino(object.token) : undefined,
-      weight: object.weight
-    };
+    const message = createBasePoolAsset();
+    if (object.token !== undefined && object.token !== null) {
+      message.token = Coin.fromAmino(object.token);
+    }
+    if (object.weight !== undefined && object.weight !== null) {
+      message.weight = object.weight;
+    }
+    return message;
   },
   toAmino(message: PoolAsset, useInterfaces: boolean = true): PoolAssetAmino {
     const obj: any = {};
@@ -747,15 +761,27 @@ export const Pool = {
     return obj;
   },
   fromAmino(object: PoolAmino): Pool {
-    return {
-      address: object.address,
-      id: BigInt(object.id),
-      poolParams: object?.pool_params ? PoolParams.fromAmino(object.pool_params) : undefined,
-      futurePoolGovernor: object.future_pool_governor,
-      totalShares: object?.total_shares ? Coin.fromAmino(object.total_shares) : undefined,
-      poolAssets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromAmino(e)) : [],
-      totalWeight: object.total_weight
-    };
+    const message = createBasePool();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id);
+    }
+    if (object.pool_params !== undefined && object.pool_params !== null) {
+      message.poolParams = PoolParams.fromAmino(object.pool_params);
+    }
+    if (object.future_pool_governor !== undefined && object.future_pool_governor !== null) {
+      message.futurePoolGovernor = object.future_pool_governor;
+    }
+    if (object.total_shares !== undefined && object.total_shares !== null) {
+      message.totalShares = Coin.fromAmino(object.total_shares);
+    }
+    message.poolAssets = object.pool_assets?.map(e => PoolAsset.fromAmino(e)) || [];
+    if (object.total_weight !== undefined && object.total_weight !== null) {
+      message.totalWeight = object.total_weight;
+    }
+    return message;
   },
   toAmino(message: Pool, useInterfaces: boolean = true): PoolAmino {
     const obj: any = {};

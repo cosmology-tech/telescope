@@ -38,7 +38,7 @@ export interface HttpAmino {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: HttpRuleAmino[];
+  rules?: HttpRuleAmino[];
   /**
    * When set to true, URL path parameters will be fully URI-decoded except in
    * cases of single segment matches in reserved expansion, where "%2F" will be
@@ -47,7 +47,7 @@ export interface HttpAmino {
    * The default behavior is to not decode RFC 6570 reserved characters in multi
    * segment matches.
    */
-  fully_decode_reserved_expansion: boolean;
+  fully_decode_reserved_expansion?: boolean;
 }
 /**
  * Defines the HTTP configuration for an API service. It contains a list of
@@ -662,7 +662,7 @@ export interface HttpRuleAmino {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /**
    * Maps to HTTP GET. Used for listing and getting information about
    * resources.
@@ -691,7 +691,7 @@ export interface HttpRuleAmino {
    * NOTE: the referred field must be present at the top-level of the request
    * message type.
    */
-  body: string;
+  body?: string;
   /**
    * Optional. The name of the response field whose value is mapped to the HTTP
    * response body. When omitted, the entire response message will be used
@@ -700,13 +700,13 @@ export interface HttpRuleAmino {
    * NOTE: The referred field must be present at the top-level of the response
    * message type.
    */
-  response_body: string;
+  response_body?: string;
   /**
    * Additional HTTP bindings for the selector. Nested bindings must
    * not contain an `additional_bindings` field themselves (that is,
    * the nesting may only be one level deep).
    */
-  additional_bindings: HttpRuleAmino[];
+  additional_bindings?: HttpRuleAmino[];
 }
 /**
  * # gRPC Transcoding
@@ -1005,9 +1005,9 @@ export interface CustomHttpPatternProtoMsg {
 /** A custom pattern is used for defining custom HTTP verb. */
 export interface CustomHttpPatternAmino {
   /** The name of this custom HTTP verb. */
-  kind: string;
+  kind?: string;
   /** The path matched by this custom verb. */
-  path: string;
+  path?: string;
 }
 /** A custom pattern is used for defining custom HTTP verb. */
 export interface CustomHttpPatternSDKType {
@@ -1090,10 +1090,12 @@ export const Http = {
     return obj;
   },
   fromAmino(object: HttpAmino): Http {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => HttpRule.fromAmino(e)) : [],
-      fullyDecodeReservedExpansion: object.fully_decode_reserved_expansion
-    };
+    const message = createBaseHttp();
+    message.rules = object.rules?.map(e => HttpRule.fromAmino(e)) || [];
+    if (object.fully_decode_reserved_expansion !== undefined && object.fully_decode_reserved_expansion !== null) {
+      message.fullyDecodeReservedExpansion = object.fully_decode_reserved_expansion;
+    }
+    return message;
   },
   toAmino(message: Http, useInterfaces: boolean = true): HttpAmino {
     const obj: any = {};
@@ -1292,18 +1294,36 @@ export const HttpRule = {
     return obj;
   },
   fromAmino(object: HttpRuleAmino): HttpRule {
-    return {
-      selector: object.selector,
-      get: object?.get,
-      put: object?.put,
-      post: object?.post,
-      delete: object?.delete,
-      patch: object?.patch,
-      custom: object?.custom ? CustomHttpPattern.fromAmino(object.custom) : undefined,
-      body: object.body,
-      responseBody: object.response_body,
-      additionalBindings: Array.isArray(object?.additional_bindings) ? object.additional_bindings.map((e: any) => HttpRule.fromAmino(e)) : []
-    };
+    const message = createBaseHttpRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    if (object.get !== undefined && object.get !== null) {
+      message.get = object.get;
+    }
+    if (object.put !== undefined && object.put !== null) {
+      message.put = object.put;
+    }
+    if (object.post !== undefined && object.post !== null) {
+      message.post = object.post;
+    }
+    if (object.delete !== undefined && object.delete !== null) {
+      message.delete = object.delete;
+    }
+    if (object.patch !== undefined && object.patch !== null) {
+      message.patch = object.patch;
+    }
+    if (object.custom !== undefined && object.custom !== null) {
+      message.custom = CustomHttpPattern.fromAmino(object.custom);
+    }
+    if (object.body !== undefined && object.body !== null) {
+      message.body = object.body;
+    }
+    if (object.response_body !== undefined && object.response_body !== null) {
+      message.responseBody = object.response_body;
+    }
+    message.additionalBindings = object.additional_bindings?.map(e => HttpRule.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: HttpRule, useInterfaces: boolean = true): HttpRuleAmino {
     const obj: any = {};
@@ -1404,10 +1424,14 @@ export const CustomHttpPattern = {
     return obj;
   },
   fromAmino(object: CustomHttpPatternAmino): CustomHttpPattern {
-    return {
-      kind: object.kind,
-      path: object.path
-    };
+    const message = createBaseCustomHttpPattern();
+    if (object.kind !== undefined && object.kind !== null) {
+      message.kind = object.kind;
+    }
+    if (object.path !== undefined && object.path !== null) {
+      message.path = object.path;
+    }
+    return message;
   },
   toAmino(message: CustomHttpPattern, useInterfaces: boolean = true): CustomHttpPatternAmino {
     const obj: any = {};

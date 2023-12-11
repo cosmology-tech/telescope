@@ -27,7 +27,7 @@ export interface ControlAmino {
    * The service control environment to use. If empty, no control plane
    * feature (like quota and billing) will be enabled.
    */
-  environment: string;
+  environment?: string;
 }
 export interface ControlAminoMsg {
   type: "/google.api.Control";
@@ -77,9 +77,11 @@ export const Control = {
     return message;
   },
   fromAmino(object: ControlAmino): Control {
-    return {
-      environment: object.environment
-    };
+    const message = createBaseControl();
+    if (object.environment !== undefined && object.environment !== null) {
+      message.environment = object.environment;
+    }
+    return message;
   },
   toAmino(message: Control): ControlAmino {
     const obj: any = {};

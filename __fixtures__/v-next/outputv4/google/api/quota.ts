@@ -391,10 +391,10 @@ export const Quota = {
     return obj;
   },
   fromAmino(object: QuotaAmino): Quota {
-    return {
-      limits: Array.isArray(object?.limits) ? object.limits.map((e: any) => QuotaLimit.fromAmino(e)) : [],
-      metricRules: Array.isArray(object?.metric_rules) ? object.metric_rules.map((e: any) => MetricRule.fromAmino(e)) : []
-    };
+    const message = createBaseQuota();
+    message.limits = object.limits?.map(e => QuotaLimit.fromAmino(e)) || [];
+    message.metricRules = object.metric_rules?.map(e => MetricRule.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Quota): QuotaAmino {
     const obj: any = {};
@@ -501,10 +501,14 @@ export const MetricRule_MetricCostsEntry = {
     return obj;
   },
   fromAmino(object: MetricRule_MetricCostsEntryAmino): MetricRule_MetricCostsEntry {
-    return {
-      key: object.key,
-      value: BigInt(object.value)
-    };
+    const message = createBaseMetricRule_MetricCostsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value);
+    }
+    return message;
   },
   toAmino(message: MetricRule_MetricCostsEntry): MetricRule_MetricCostsEntryAmino {
     const obj: any = {};
@@ -634,15 +638,19 @@ export const MetricRule = {
     return obj;
   },
   fromAmino(object: MetricRuleAmino): MetricRule {
-    return {
-      selector: object.selector,
-      metricCosts: isObject(object.metric_costs) ? Object.entries(object.metric_costs).reduce<{
-        [key: string]: bigint;
-      }>((acc, [key, value]) => {
-        acc[key] = BigInt((value as bigint | string).toString());
-        return acc;
-      }, {}) : {}
-    };
+    const message = createBaseMetricRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    message.metricCosts = Object.entries(object.metric_costs ?? {}).reduce<{
+      [key: string]: bigint;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = BigInt(value.toString());
+      }
+      return acc;
+    }, {});
+    return message;
   },
   toAmino(message: MetricRule): MetricRuleAmino {
     const obj: any = {};
@@ -746,10 +754,14 @@ export const QuotaLimit_ValuesEntry = {
     return obj;
   },
   fromAmino(object: QuotaLimit_ValuesEntryAmino): QuotaLimit_ValuesEntry {
-    return {
-      key: object.key,
-      value: BigInt(object.value)
-    };
+    const message = createBaseQuotaLimit_ValuesEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value);
+    }
+    return message;
   },
   toAmino(message: QuotaLimit_ValuesEntry): QuotaLimit_ValuesEntryAmino {
     const obj: any = {};
@@ -989,23 +1001,43 @@ export const QuotaLimit = {
     return obj;
   },
   fromAmino(object: QuotaLimitAmino): QuotaLimit {
-    return {
-      name: object.name,
-      description: object.description,
-      defaultLimit: BigInt(object.default_limit),
-      maxLimit: BigInt(object.max_limit),
-      freeTier: BigInt(object.free_tier),
-      duration: object.duration,
-      metric: object.metric,
-      unit: object.unit,
-      values: isObject(object.values) ? Object.entries(object.values).reduce<{
-        [key: string]: bigint;
-      }>((acc, [key, value]) => {
-        acc[key] = BigInt((value as bigint | string).toString());
-        return acc;
-      }, {}) : {},
-      displayName: object.display_name
-    };
+    const message = createBaseQuotaLimit();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.default_limit !== undefined && object.default_limit !== null) {
+      message.defaultLimit = BigInt(object.default_limit);
+    }
+    if (object.max_limit !== undefined && object.max_limit !== null) {
+      message.maxLimit = BigInt(object.max_limit);
+    }
+    if (object.free_tier !== undefined && object.free_tier !== null) {
+      message.freeTier = BigInt(object.free_tier);
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = object.duration;
+    }
+    if (object.metric !== undefined && object.metric !== null) {
+      message.metric = object.metric;
+    }
+    if (object.unit !== undefined && object.unit !== null) {
+      message.unit = object.unit;
+    }
+    message.values = Object.entries(object.values ?? {}).reduce<{
+      [key: string]: bigint;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = BigInt(value.toString());
+      }
+      return acc;
+    }, {});
+    if (object.display_name !== undefined && object.display_name !== null) {
+      message.displayName = object.display_name;
+    }
+    return message;
   },
   toAmino(message: QuotaLimit): QuotaLimitAmino {
     const obj: any = {};

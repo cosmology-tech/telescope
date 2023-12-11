@@ -21,9 +21,9 @@ export interface GenesisStateAmino {
   /** module parameters */
   params?: ParamsAmino;
   /** active incentives */
-  incentives: IncentiveAmino[];
+  incentives?: IncentiveAmino[];
   /** active Gasmeters */
-  gas_meters: GasMeterAmino[];
+  gas_meters?: GasMeterAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "/evmos.incentives.v1.GenesisState";
@@ -53,13 +53,13 @@ export interface ParamsProtoMsg {
 /** Params defines the incentives module params */
 export interface ParamsAmino {
   /** parameter to enable incentives */
-  enable_incentives: boolean;
+  enable_incentives?: boolean;
   /** maximum percentage an incentive can allocate per denomination */
-  allocation_limit: string;
+  allocation_limit?: string;
   /** identifier for the epochs module hooks */
-  incentives_epoch_identifier: string;
+  incentives_epoch_identifier?: string;
   /** scaling factor for capping rewards */
-  reward_scaler: string;
+  reward_scaler?: string;
 }
 export interface ParamsAminoMsg {
   type: "/evmos.incentives.v1.Params";
@@ -170,11 +170,13 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromAmino(e)) : [],
-      gasMeters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.incentives = object.incentives?.map(e => Incentive.fromAmino(e)) || [];
+    message.gasMeters = object.gas_meters?.map(e => GasMeter.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -299,12 +301,20 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      enableIncentives: object.enable_incentives,
-      allocationLimit: object.allocation_limit,
-      incentivesEpochIdentifier: object.incentives_epoch_identifier,
-      rewardScaler: object.reward_scaler
-    };
+    const message = createBaseParams();
+    if (object.enable_incentives !== undefined && object.enable_incentives !== null) {
+      message.enableIncentives = object.enable_incentives;
+    }
+    if (object.allocation_limit !== undefined && object.allocation_limit !== null) {
+      message.allocationLimit = object.allocation_limit;
+    }
+    if (object.incentives_epoch_identifier !== undefined && object.incentives_epoch_identifier !== null) {
+      message.incentivesEpochIdentifier = object.incentives_epoch_identifier;
+    }
+    if (object.reward_scaler !== undefined && object.reward_scaler !== null) {
+      message.rewardScaler = object.reward_scaler;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

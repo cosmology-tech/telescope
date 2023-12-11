@@ -12,7 +12,7 @@ export interface QueryGaugeIdsRequestProtoMsg {
   value: Uint8Array;
 }
 export interface QueryGaugeIdsRequestAmino {
-  pool_id: string;
+  pool_id?: string;
 }
 export interface QueryGaugeIdsRequestAminoMsg {
   type: "osmosis/poolincentives/query-gauge-ids-request";
@@ -29,7 +29,7 @@ export interface QueryGaugeIdsResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryGaugeIdsResponseAmino {
-  gauge_ids_with_duration: QueryGaugeIdsResponse_GaugeIdWithDurationAmino[];
+  gauge_ids_with_duration?: QueryGaugeIdsResponse_GaugeIdWithDurationAmino[];
 }
 export interface QueryGaugeIdsResponseAminoMsg {
   type: "osmosis/poolincentives/query-gauge-ids-response";
@@ -48,9 +48,9 @@ export interface QueryGaugeIdsResponse_GaugeIdWithDurationProtoMsg {
   value: Uint8Array;
 }
 export interface QueryGaugeIdsResponse_GaugeIdWithDurationAmino {
-  gauge_id: string;
+  gauge_id?: string;
   duration?: DurationAmino;
-  gauge_incentive_percentage: string;
+  gauge_incentive_percentage?: string;
 }
 export interface QueryGaugeIdsResponse_GaugeIdWithDurationAminoMsg {
   type: "osmosis/poolincentives/gauge-id-with-duration";
@@ -136,7 +136,7 @@ export interface QueryLockableDurationsResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryLockableDurationsResponseAmino {
-  lockable_durations: DurationAmino[];
+  lockable_durations?: DurationAmino[];
 }
 export interface QueryLockableDurationsResponseAminoMsg {
   type: "osmosis/poolincentives/query-lockable-durations-response";
@@ -166,9 +166,9 @@ export interface IncentivizedPoolProtoMsg {
   value: Uint8Array;
 }
 export interface IncentivizedPoolAmino {
-  pool_id: string;
+  pool_id?: string;
   lockable_duration?: DurationAmino;
-  gauge_id: string;
+  gauge_id?: string;
 }
 export interface IncentivizedPoolAminoMsg {
   type: "osmosis/poolincentives/incentivized-pool";
@@ -187,7 +187,7 @@ export interface QueryIncentivizedPoolsResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryIncentivizedPoolsResponseAmino {
-  incentivized_pools: IncentivizedPoolAmino[];
+  incentivized_pools?: IncentivizedPoolAmino[];
 }
 export interface QueryIncentivizedPoolsResponseAminoMsg {
   type: "osmosis/poolincentives/query-incentivized-pools-response";
@@ -215,7 +215,7 @@ export interface QueryExternalIncentiveGaugesResponseProtoMsg {
   value: Uint8Array;
 }
 export interface QueryExternalIncentiveGaugesResponseAmino {
-  data: GaugeAmino[];
+  data?: GaugeAmino[];
 }
 export interface QueryExternalIncentiveGaugesResponseAminoMsg {
   type: "osmosis/poolincentives/query-external-incentive-gauges-response";
@@ -262,9 +262,11 @@ export const QueryGaugeIdsRequest = {
     return message;
   },
   fromAmino(object: QueryGaugeIdsRequestAmino): QueryGaugeIdsRequest {
-    return {
-      poolId: BigInt(object.pool_id)
-    };
+    const message = createBaseQueryGaugeIdsRequest();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    return message;
   },
   toAmino(message: QueryGaugeIdsRequest): QueryGaugeIdsRequestAmino {
     const obj: any = {};
@@ -329,9 +331,9 @@ export const QueryGaugeIdsResponse = {
     return message;
   },
   fromAmino(object: QueryGaugeIdsResponseAmino): QueryGaugeIdsResponse {
-    return {
-      gaugeIdsWithDuration: Array.isArray(object?.gauge_ids_with_duration) ? object.gauge_ids_with_duration.map((e: any) => QueryGaugeIdsResponse_GaugeIdWithDuration.fromAmino(e)) : []
-    };
+    const message = createBaseQueryGaugeIdsResponse();
+    message.gaugeIdsWithDuration = object.gauge_ids_with_duration?.map(e => QueryGaugeIdsResponse_GaugeIdWithDuration.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryGaugeIdsResponse): QueryGaugeIdsResponseAmino {
     const obj: any = {};
@@ -420,11 +422,17 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
     return message;
   },
   fromAmino(object: QueryGaugeIdsResponse_GaugeIdWithDurationAmino): QueryGaugeIdsResponse_GaugeIdWithDuration {
-    return {
-      gaugeId: BigInt(object.gauge_id),
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      gaugeIncentivePercentage: object.gauge_incentive_percentage
-    };
+    const message = createBaseQueryGaugeIdsResponse_GaugeIdWithDuration();
+    if (object.gauge_id !== undefined && object.gauge_id !== null) {
+      message.gaugeId = BigInt(object.gauge_id);
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromAmino(object.duration);
+    }
+    if (object.gauge_incentive_percentage !== undefined && object.gauge_incentive_percentage !== null) {
+      message.gaugeIncentivePercentage = object.gauge_incentive_percentage;
+    }
+    return message;
   },
   toAmino(message: QueryGaugeIdsResponse_GaugeIdWithDuration): QueryGaugeIdsResponse_GaugeIdWithDurationAmino {
     const obj: any = {};
@@ -482,7 +490,8 @@ export const QueryDistrInfoRequest = {
     return message;
   },
   fromAmino(_: QueryDistrInfoRequestAmino): QueryDistrInfoRequest {
-    return {};
+    const message = createBaseQueryDistrInfoRequest();
+    return message;
   },
   toAmino(_: QueryDistrInfoRequest): QueryDistrInfoRequestAmino {
     const obj: any = {};
@@ -548,9 +557,11 @@ export const QueryDistrInfoResponse = {
     return message;
   },
   fromAmino(object: QueryDistrInfoResponseAmino): QueryDistrInfoResponse {
-    return {
-      distrInfo: object?.distr_info ? DistrInfo.fromAmino(object.distr_info) : undefined
-    };
+    const message = createBaseQueryDistrInfoResponse();
+    if (object.distr_info !== undefined && object.distr_info !== null) {
+      message.distrInfo = DistrInfo.fromAmino(object.distr_info);
+    }
+    return message;
   },
   toAmino(message: QueryDistrInfoResponse): QueryDistrInfoResponseAmino {
     const obj: any = {};
@@ -606,7 +617,8 @@ export const QueryParamsRequest = {
     return message;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
@@ -672,9 +684,11 @@ export const QueryParamsResponse = {
     return message;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};
@@ -730,7 +744,8 @@ export const QueryLockableDurationsRequest = {
     return message;
   },
   fromAmino(_: QueryLockableDurationsRequestAmino): QueryLockableDurationsRequest {
-    return {};
+    const message = createBaseQueryLockableDurationsRequest();
+    return message;
   },
   toAmino(_: QueryLockableDurationsRequest): QueryLockableDurationsRequestAmino {
     const obj: any = {};
@@ -794,9 +809,9 @@ export const QueryLockableDurationsResponse = {
     return message;
   },
   fromAmino(object: QueryLockableDurationsResponseAmino): QueryLockableDurationsResponse {
-    return {
-      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : []
-    };
+    const message = createBaseQueryLockableDurationsResponse();
+    message.lockableDurations = object.lockable_durations?.map(e => Duration.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryLockableDurationsResponse): QueryLockableDurationsResponseAmino {
     const obj: any = {};
@@ -856,7 +871,8 @@ export const QueryIncentivizedPoolsRequest = {
     return message;
   },
   fromAmino(_: QueryIncentivizedPoolsRequestAmino): QueryIncentivizedPoolsRequest {
-    return {};
+    const message = createBaseQueryIncentivizedPoolsRequest();
+    return message;
   },
   toAmino(_: QueryIncentivizedPoolsRequest): QueryIncentivizedPoolsRequestAmino {
     const obj: any = {};
@@ -942,11 +958,17 @@ export const IncentivizedPool = {
     return message;
   },
   fromAmino(object: IncentivizedPoolAmino): IncentivizedPool {
-    return {
-      poolId: BigInt(object.pool_id),
-      lockableDuration: object?.lockable_duration ? Duration.fromAmino(object.lockable_duration) : undefined,
-      gaugeId: BigInt(object.gauge_id)
-    };
+    const message = createBaseIncentivizedPool();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.lockable_duration !== undefined && object.lockable_duration !== null) {
+      message.lockableDuration = Duration.fromAmino(object.lockable_duration);
+    }
+    if (object.gauge_id !== undefined && object.gauge_id !== null) {
+      message.gaugeId = BigInt(object.gauge_id);
+    }
+    return message;
   },
   toAmino(message: IncentivizedPool): IncentivizedPoolAmino {
     const obj: any = {};
@@ -1013,9 +1035,9 @@ export const QueryIncentivizedPoolsResponse = {
     return message;
   },
   fromAmino(object: QueryIncentivizedPoolsResponseAmino): QueryIncentivizedPoolsResponse {
-    return {
-      incentivizedPools: Array.isArray(object?.incentivized_pools) ? object.incentivized_pools.map((e: any) => IncentivizedPool.fromAmino(e)) : []
-    };
+    const message = createBaseQueryIncentivizedPoolsResponse();
+    message.incentivizedPools = object.incentivized_pools?.map(e => IncentivizedPool.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryIncentivizedPoolsResponse): QueryIncentivizedPoolsResponseAmino {
     const obj: any = {};
@@ -1075,7 +1097,8 @@ export const QueryExternalIncentiveGaugesRequest = {
     return message;
   },
   fromAmino(_: QueryExternalIncentiveGaugesRequestAmino): QueryExternalIncentiveGaugesRequest {
-    return {};
+    const message = createBaseQueryExternalIncentiveGaugesRequest();
+    return message;
   },
   toAmino(_: QueryExternalIncentiveGaugesRequest): QueryExternalIncentiveGaugesRequestAmino {
     const obj: any = {};
@@ -1139,9 +1162,9 @@ export const QueryExternalIncentiveGaugesResponse = {
     return message;
   },
   fromAmino(object: QueryExternalIncentiveGaugesResponseAmino): QueryExternalIncentiveGaugesResponse {
-    return {
-      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromAmino(e)) : []
-    };
+    const message = createBaseQueryExternalIncentiveGaugesResponse();
+    message.data = object.data?.map(e => Gauge.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryExternalIncentiveGaugesResponse): QueryExternalIncentiveGaugesResponseAmino {
     const obj: any = {};

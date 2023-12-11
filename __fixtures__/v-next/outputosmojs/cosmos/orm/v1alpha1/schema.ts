@@ -215,10 +215,12 @@ export const ModuleSchemaDescriptor = {
     return obj;
   },
   fromAmino(object: ModuleSchemaDescriptorAmino): ModuleSchemaDescriptor {
-    return {
-      schemaFile: Array.isArray(object?.schema_file) ? object.schema_file.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromAmino(e)) : [],
-      prefix: object.prefix
-    };
+    const message = createBaseModuleSchemaDescriptor();
+    message.schemaFile = object.schema_file?.map(e => ModuleSchemaDescriptor_FileEntry.fromAmino(e)) || [];
+    if (object.prefix !== undefined && object.prefix !== null) {
+      message.prefix = bytesFromBase64(object.prefix);
+    }
+    return message;
   },
   toAmino(message: ModuleSchemaDescriptor): ModuleSchemaDescriptorAmino {
     const obj: any = {};
@@ -227,7 +229,7 @@ export const ModuleSchemaDescriptor = {
     } else {
       obj.schema_file = [];
     }
-    obj.prefix = message.prefix;
+    obj.prefix = message.prefix ? base64FromBytes(message.prefix) : undefined;
     return obj;
   },
   fromAminoMsg(object: ModuleSchemaDescriptorAminoMsg): ModuleSchemaDescriptor {
@@ -339,17 +341,23 @@ export const ModuleSchemaDescriptor_FileEntry = {
     return obj;
   },
   fromAmino(object: ModuleSchemaDescriptor_FileEntryAmino): ModuleSchemaDescriptor_FileEntry {
-    return {
-      id: object.id,
-      protoFileName: object.proto_file_name,
-      storageType: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : -1
-    };
+    const message = createBaseModuleSchemaDescriptor_FileEntry();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.proto_file_name !== undefined && object.proto_file_name !== null) {
+      message.protoFileName = object.proto_file_name;
+    }
+    if (object.storage_type !== undefined && object.storage_type !== null) {
+      message.storageType = storageTypeFromJSON(object.storage_type);
+    }
+    return message;
   },
   toAmino(message: ModuleSchemaDescriptor_FileEntry): ModuleSchemaDescriptor_FileEntryAmino {
     const obj: any = {};
     obj.id = message.id;
     obj.proto_file_name = message.protoFileName;
-    obj.storage_type = message.storageType;
+    obj.storage_type = storageTypeToJSON(message.storageType);
     return obj;
   },
   fromAminoMsg(object: ModuleSchemaDescriptor_FileEntryAminoMsg): ModuleSchemaDescriptor_FileEntry {

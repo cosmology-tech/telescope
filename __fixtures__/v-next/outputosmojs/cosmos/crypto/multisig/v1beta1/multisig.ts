@@ -114,14 +114,14 @@ export const MultiSignature = {
     return obj;
   },
   fromAmino(object: MultiSignatureAmino): MultiSignature {
-    return {
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
-    };
+    const message = createBaseMultiSignature();
+    message.signatures = object.signatures?.map(e => bytesFromBase64(e)) || [];
+    return message;
   },
   toAmino(message: MultiSignature): MultiSignatureAmino {
     const obj: any = {};
     if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e);
+      obj.signatures = message.signatures.map(e => base64FromBytes(e));
     } else {
       obj.signatures = [];
     }
@@ -223,15 +223,19 @@ export const CompactBitArray = {
     return obj;
   },
   fromAmino(object: CompactBitArrayAmino): CompactBitArray {
-    return {
-      extraBitsStored: object.extra_bits_stored,
-      elems: object.elems
-    };
+    const message = createBaseCompactBitArray();
+    if (object.extra_bits_stored !== undefined && object.extra_bits_stored !== null) {
+      message.extraBitsStored = object.extra_bits_stored;
+    }
+    if (object.elems !== undefined && object.elems !== null) {
+      message.elems = bytesFromBase64(object.elems);
+    }
+    return message;
   },
   toAmino(message: CompactBitArray): CompactBitArrayAmino {
     const obj: any = {};
     obj.extra_bits_stored = message.extraBitsStored;
-    obj.elems = message.elems;
+    obj.elems = message.elems ? base64FromBytes(message.elems) : undefined;
     return obj;
   },
   fromAminoMsg(object: CompactBitArrayAminoMsg): CompactBitArray {

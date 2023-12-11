@@ -16,9 +16,9 @@ export interface MinterProtoMsg {
 /** Minter represents the minting state. */
 export interface MinterAmino {
   /** current annual inflation rate */
-  inflation: string;
+  inflation?: string;
   /** current annual expected provisions */
-  annual_provisions: string;
+  annual_provisions?: string;
 }
 /** Minter represents the minting state. */
 export interface MinterSDKType {
@@ -47,17 +47,17 @@ export interface ParamsProtoMsg {
 /** Params holds parameters for the mint module. */
 export interface ParamsAmino {
   /** type of coin to mint */
-  mint_denom: string;
+  mint_denom?: string;
   /** maximum annual change in inflation rate */
-  inflation_rate_change: string;
+  inflation_rate_change?: string;
   /** maximum inflation rate */
-  inflation_max: string;
+  inflation_max?: string;
   /** minimum inflation rate */
-  inflation_min: string;
+  inflation_min?: string;
   /** goal of percent bonded atoms */
-  goal_bonded: string;
+  goal_bonded?: string;
   /** expected blocks per year */
-  blocks_per_year: string;
+  blocks_per_year?: string;
 }
 /** Params holds parameters for the mint module. */
 export interface ParamsSDKType {
@@ -137,10 +137,14 @@ export const Minter = {
     return obj;
   },
   fromAmino(object: MinterAmino): Minter {
-    return {
-      inflation: object.inflation,
-      annualProvisions: object.annual_provisions
-    };
+    const message = createBaseMinter();
+    if (object.inflation !== undefined && object.inflation !== null) {
+      message.inflation = object.inflation;
+    }
+    if (object.annual_provisions !== undefined && object.annual_provisions !== null) {
+      message.annualProvisions = object.annual_provisions;
+    }
+    return message;
   },
   toAmino(message: Minter, useInterfaces: boolean = true): MinterAmino {
     const obj: any = {};
@@ -280,14 +284,26 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      mintDenom: object.mint_denom,
-      inflationRateChange: object.inflation_rate_change,
-      inflationMax: object.inflation_max,
-      inflationMin: object.inflation_min,
-      goalBonded: object.goal_bonded,
-      blocksPerYear: BigInt(object.blocks_per_year)
-    };
+    const message = createBaseParams();
+    if (object.mint_denom !== undefined && object.mint_denom !== null) {
+      message.mintDenom = object.mint_denom;
+    }
+    if (object.inflation_rate_change !== undefined && object.inflation_rate_change !== null) {
+      message.inflationRateChange = object.inflation_rate_change;
+    }
+    if (object.inflation_max !== undefined && object.inflation_max !== null) {
+      message.inflationMax = object.inflation_max;
+    }
+    if (object.inflation_min !== undefined && object.inflation_min !== null) {
+      message.inflationMin = object.inflation_min;
+    }
+    if (object.goal_bonded !== undefined && object.goal_bonded !== null) {
+      message.goalBonded = object.goal_bonded;
+    }
+    if (object.blocks_per_year !== undefined && object.blocks_per_year !== null) {
+      message.blocksPerYear = BigInt(object.blocks_per_year);
+    }
+    return message;
   },
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};

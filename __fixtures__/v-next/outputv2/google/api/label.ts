@@ -59,11 +59,11 @@ export interface LabelDescriptorProtoMsg {
 /** A description of a label. */
 export interface LabelDescriptorAmino {
   /** The label key. */
-  key: string;
+  key?: string;
   /** The type of data that can be assigned to the label. */
-  value_type: LabelDescriptor_ValueType;
+  value_type?: LabelDescriptor_ValueType;
   /** A human-readable description for the label. */
-  description: string;
+  description?: string;
 }
 export interface LabelDescriptorAminoMsg {
   type: "/google.api.LabelDescriptor";
@@ -155,16 +155,22 @@ export const LabelDescriptor = {
     return obj;
   },
   fromAmino(object: LabelDescriptorAmino): LabelDescriptor {
-    return {
-      key: object.key,
-      valueType: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : -1,
-      description: object.description
-    };
+    const message = createBaseLabelDescriptor();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value_type !== undefined && object.value_type !== null) {
+      message.valueType = labelDescriptor_ValueTypeFromJSON(object.value_type);
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: LabelDescriptor): LabelDescriptorAmino {
     const obj: any = {};
     obj.key = message.key;
-    obj.value_type = message.valueType;
+    obj.value_type = labelDescriptor_ValueTypeToJSON(message.valueType);
     obj.description = message.description;
     return obj;
   },

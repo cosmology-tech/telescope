@@ -96,14 +96,14 @@ export interface ServiceAmino {
    * A valid name would be:
    * - projects/123/services/serviceusage.googleapis.com
    */
-  name: string;
+  name?: string;
   /**
    * The resource name of the consumer.
    * 
    * A valid name would be:
    * - projects/123
    */
-  parent: string;
+  parent?: string;
   /**
    * The service configuration of the available service.
    * Some fields may be filtered out of the configuration in responses to
@@ -112,7 +112,7 @@ export interface ServiceAmino {
    */
   config?: ServiceConfigAmino;
   /** Whether or not the service has been enabled for use by the consumer. */
-  state: State;
+  state?: State;
 }
 export interface ServiceAminoMsg {
   type: "/google.api.serviceusage.v1.Service";
@@ -180,14 +180,14 @@ export interface ServiceConfigAmino {
    * An example DNS address would be:
    * `calendar.googleapis.com`.
    */
-  name: string;
+  name?: string;
   /** The product title for this service. */
-  title: string;
+  title?: string;
   /**
    * A list of API interfaces exported by this service. Contains only the names,
    * versions, and method names of the interfaces.
    */
-  apis: ApiAmino[];
+  apis?: ApiAmino[];
   /**
    * Additional API documentation. Contains only the summary and the
    * documentation URL.
@@ -203,12 +203,12 @@ export interface ServiceConfigAmino {
    * Configuration for network endpoints. Contains only the names and aliases
    * of the endpoints.
    */
-  endpoints: EndpointAmino[];
+  endpoints?: EndpointAmino[];
   /**
    * Defines the monitored resources used by this service. This is required
    * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
    */
-  monitored_resources: MonitoredResourceDescriptorAmino[];
+  monitored_resources?: MonitoredResourceDescriptorAmino[];
   /**
    * Monitoring configuration.
    * This should not include the 'producer_destinations' field.
@@ -250,7 +250,7 @@ export interface OperationMetadataAmino {
    * The full name of the resources that this operation is directly
    * associated with.
    */
-  resource_names: string[];
+  resource_names?: string[];
 }
 export interface OperationMetadataAminoMsg {
   type: "/google.api.serviceusage.v1.OperationMetadata";
@@ -354,19 +354,27 @@ export const Service = {
     return obj;
   },
   fromAmino(object: ServiceAmino): Service {
-    return {
-      name: object.name,
-      parent: object.parent,
-      config: object?.config ? ServiceConfig.fromAmino(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1
-    };
+    const message = createBaseService();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.config !== undefined && object.config !== null) {
+      message.config = ServiceConfig.fromAmino(object.config);
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = stateFromJSON(object.state);
+    }
+    return message;
   },
   toAmino(message: Service): ServiceAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.parent = message.parent;
     obj.config = message.config ? ServiceConfig.toAmino(message.config) : undefined;
-    obj.state = message.state;
+    obj.state = stateToJSON(message.state);
     return obj;
   },
   fromAminoMsg(object: ServiceAminoMsg): Service {
@@ -583,18 +591,32 @@ export const ServiceConfig = {
     return obj;
   },
   fromAmino(object: ServiceConfigAmino): ServiceConfig {
-    return {
-      name: object.name,
-      title: object.title,
-      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromAmino(e)) : [],
-      documentation: object?.documentation ? Documentation.fromAmino(object.documentation) : undefined,
-      quota: object?.quota ? Quota.fromAmino(object.quota) : undefined,
-      authentication: object?.authentication ? Authentication.fromAmino(object.authentication) : undefined,
-      usage: object?.usage ? Usage.fromAmino(object.usage) : undefined,
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : [],
-      monitoredResources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromAmino(e)) : [],
-      monitoring: object?.monitoring ? Monitoring.fromAmino(object.monitoring) : undefined
-    };
+    const message = createBaseServiceConfig();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    message.apis = object.apis?.map(e => Api.fromAmino(e)) || [];
+    if (object.documentation !== undefined && object.documentation !== null) {
+      message.documentation = Documentation.fromAmino(object.documentation);
+    }
+    if (object.quota !== undefined && object.quota !== null) {
+      message.quota = Quota.fromAmino(object.quota);
+    }
+    if (object.authentication !== undefined && object.authentication !== null) {
+      message.authentication = Authentication.fromAmino(object.authentication);
+    }
+    if (object.usage !== undefined && object.usage !== null) {
+      message.usage = Usage.fromAmino(object.usage);
+    }
+    message.endpoints = object.endpoints?.map(e => Endpoint.fromAmino(e)) || [];
+    message.monitoredResources = object.monitored_resources?.map(e => MonitoredResourceDescriptor.fromAmino(e)) || [];
+    if (object.monitoring !== undefined && object.monitoring !== null) {
+      message.monitoring = Monitoring.fromAmino(object.monitoring);
+    }
+    return message;
   },
   toAmino(message: ServiceConfig): ServiceConfigAmino {
     const obj: any = {};
@@ -702,9 +724,9 @@ export const OperationMetadata = {
     return obj;
   },
   fromAmino(object: OperationMetadataAmino): OperationMetadata {
-    return {
-      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : []
-    };
+    const message = createBaseOperationMetadata();
+    message.resourceNames = object.resource_names?.map(e => e) || [];
+    return message;
   },
   toAmino(message: OperationMetadata): OperationMetadataAmino {
     const obj: any = {};

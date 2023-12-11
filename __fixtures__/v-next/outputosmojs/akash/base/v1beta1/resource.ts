@@ -152,10 +152,12 @@ export const CPU = {
     return obj;
   },
   fromAmino(object: CPUAmino): CPU {
-    return {
-      units: object?.units ? ResourceValue.fromAmino(object.units) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBaseCPU();
+    if (object.units !== undefined && object.units !== null) {
+      message.units = ResourceValue.fromAmino(object.units);
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: CPU): CPUAmino {
     const obj: any = {};
@@ -271,10 +273,12 @@ export const Memory = {
     return obj;
   },
   fromAmino(object: MemoryAmino): Memory {
-    return {
-      quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBaseMemory();
+    if (object.quantity !== undefined && object.quantity !== null) {
+      message.quantity = ResourceValue.fromAmino(object.quantity);
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Memory): MemoryAmino {
     const obj: any = {};
@@ -390,10 +394,12 @@ export const Storage = {
     return obj;
   },
   fromAmino(object: StorageAmino): Storage {
-    return {
-      quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBaseStorage();
+    if (object.quantity !== undefined && object.quantity !== null) {
+      message.quantity = ResourceValue.fromAmino(object.quantity);
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Storage): StorageAmino {
     const obj: any = {};
@@ -535,12 +541,18 @@ export const ResourceUnits = {
     return obj;
   },
   fromAmino(object: ResourceUnitsAmino): ResourceUnits {
-    return {
-      cpu: object?.cpu ? CPU.fromAmino(object.cpu) : undefined,
-      memory: object?.memory ? Memory.fromAmino(object.memory) : undefined,
-      storage: object?.storage ? Storage.fromAmino(object.storage) : undefined,
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : []
-    };
+    const message = createBaseResourceUnits();
+    if (object.cpu !== undefined && object.cpu !== null) {
+      message.cpu = CPU.fromAmino(object.cpu);
+    }
+    if (object.memory !== undefined && object.memory !== null) {
+      message.memory = Memory.fromAmino(object.memory);
+    }
+    if (object.storage !== undefined && object.storage !== null) {
+      message.storage = Storage.fromAmino(object.storage);
+    }
+    message.endpoints = object.endpoints?.map(e => Endpoint.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ResourceUnits): ResourceUnitsAmino {
     const obj: any = {};

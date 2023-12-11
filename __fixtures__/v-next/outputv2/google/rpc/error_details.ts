@@ -80,9 +80,9 @@ export interface DebugInfoProtoMsg {
 /** Describes additional debugging info. */
 export interface DebugInfoAmino {
   /** The stack trace entries indicating where the error occurred. */
-  stack_entries: string[];
+  stack_entries?: string[];
   /** Additional debugging information provided by the server. */
-  detail: string;
+  detail?: string;
 }
 export interface DebugInfoAminoMsg {
   type: "/google.rpc.DebugInfo";
@@ -129,7 +129,7 @@ export interface QuotaFailureProtoMsg {
  */
 export interface QuotaFailureAmino {
   /** Describes all quota violations. */
-  violations: QuotaFailure_ViolationAmino[];
+  violations?: QuotaFailure_ViolationAmino[];
 }
 export interface QuotaFailureAminoMsg {
   type: "/google.rpc.QuotaFailure";
@@ -187,7 +187,7 @@ export interface QuotaFailure_ViolationAmino {
    * For example, "clientip:<ip address of client>" or "project:<Google
    * developer project id>".
    */
-  subject: string;
+  subject?: string;
   /**
    * A description of how the quota check failed. Clients can use this
    * description to find more about the quota configuration in the service's
@@ -197,7 +197,7 @@ export interface QuotaFailure_ViolationAmino {
    * For example: "Service disabled" or "Daily Limit for read operations
    * exceeded".
    */
-  description: string;
+  description?: string;
 }
 export interface QuotaFailure_ViolationAminoMsg {
   type: "/google.rpc.Violation";
@@ -220,8 +220,8 @@ export interface ErrorInfo_MetadataEntryProtoMsg {
   value: Uint8Array;
 }
 export interface ErrorInfo_MetadataEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface ErrorInfo_MetadataEntryAminoMsg {
   type: string;
@@ -325,7 +325,7 @@ export interface ErrorInfoAmino {
    * domain of errors. This should be at most 63 characters and match
    * /[A-Z0-9_]+/.
    */
-  reason: string;
+  reason?: string;
   /**
    * The logical grouping to which the "reason" belongs. The error domain
    * is typically the registered service name of the tool or product that
@@ -334,7 +334,7 @@ export interface ErrorInfoAmino {
    * globally unique value that identifies the infrastructure. For Google API
    * infrastructure, the error domain is "googleapis.com".
    */
-  domain: string;
+  domain?: string;
   /**
    * Additional structured details about this error.
    * 
@@ -345,7 +345,7 @@ export interface ErrorInfoAmino {
    * {"instanceLimitPerRequest": "100"}, if the client exceeds the number of
    * instances that can be created in a single (batch) request.
    */
-  metadata: {
+  metadata?: {
     [key: string]: string;
   };
 }
@@ -410,7 +410,7 @@ export interface PreconditionFailureProtoMsg {
  */
 export interface PreconditionFailureAmino {
   /** Describes all precondition violations. */
-  violations: PreconditionFailure_ViolationAmino[];
+  violations?: PreconditionFailure_ViolationAmino[];
 }
 export interface PreconditionFailureAminoMsg {
   type: "/google.rpc.PreconditionFailure";
@@ -459,20 +459,20 @@ export interface PreconditionFailure_ViolationAmino {
    * enum type to define the supported precondition violation subjects. For
    * example, "TOS" for "Terms of Service violation".
    */
-  type: string;
+  type?: string;
   /**
    * The subject, relative to the type, that failed.
    * For example, "google.com/cloud" relative to the "TOS" type would indicate
    * which terms of service is being referenced.
    */
-  subject: string;
+  subject?: string;
   /**
    * A description of how the precondition failed. Developers can use this
    * description to understand how to fix the failure.
    * 
    * For example: "Terms of service not accepted".
    */
-  description: string;
+  description?: string;
 }
 export interface PreconditionFailure_ViolationAminoMsg {
   type: "/google.rpc.Violation";
@@ -502,7 +502,7 @@ export interface BadRequestProtoMsg {
  */
 export interface BadRequestAmino {
   /** Describes all violations in a client request. */
-  field_violations: BadRequest_FieldViolationAmino[];
+  field_violations?: BadRequest_FieldViolationAmino[];
 }
 export interface BadRequestAminoMsg {
   type: "/google.rpc.BadRequest";
@@ -537,9 +537,9 @@ export interface BadRequest_FieldViolationAmino {
    * sequence of dot-separated identifiers that identify a protocol buffer
    * field. E.g., "field_violations.field" would identify this field.
    */
-  field: string;
+  field?: string;
   /** A description of why the request element is bad. */
-  description: string;
+  description?: string;
 }
 export interface BadRequest_FieldViolationAminoMsg {
   type: "/google.rpc.FieldViolation";
@@ -579,12 +579,12 @@ export interface RequestInfoAmino {
    * An opaque string that should only be interpreted by the service generating
    * it. For example, it can be used to identify requests in the service's logs.
    */
-  request_id: string;
+  request_id?: string;
   /**
    * Any data that was used to serve this request. For example, an encrypted
    * stack trace that can be sent back to the service provider for debugging.
    */
-  serving_data: string;
+  serving_data?: string;
 }
 export interface RequestInfoAminoMsg {
   type: "/google.rpc.RequestInfo";
@@ -636,25 +636,25 @@ export interface ResourceInfoAmino {
    * "cloud storage bucket", "file", "Google calendar"; or the type URL
    * of the resource: e.g. "type.googleapis.com/google.pubsub.v1.Topic".
    */
-  resource_type: string;
+  resource_type?: string;
   /**
    * The name of the resource being accessed.  For example, a shared calendar
    * name: "example.com_4fghdhgsrgh@group.calendar.google.com", if the current
    * error is [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
    */
-  resource_name: string;
+  resource_name?: string;
   /**
    * The owner of the resource (optional).
    * For example, "user:<owner email>" or "project:<Google developer project
    * id>".
    */
-  owner: string;
+  owner?: string;
   /**
    * Describes what error is encountered when accessing this resource.
    * For example, updating a cloud project may require the `writer` permission
    * on the developer console project.
    */
-  description: string;
+  description?: string;
 }
 export interface ResourceInfoAminoMsg {
   type: "/google.rpc.ResourceInfo";
@@ -691,7 +691,7 @@ export interface HelpProtoMsg {
  */
 export interface HelpAmino {
   /** URL(s) pointing to additional information on handling the current error. */
-  links: Help_LinkAmino[];
+  links?: Help_LinkAmino[];
 }
 export interface HelpAminoMsg {
   type: "/google.rpc.Help";
@@ -721,9 +721,9 @@ export interface Help_LinkProtoMsg {
 /** Describes a URL link. */
 export interface Help_LinkAmino {
   /** Describes what the link offers. */
-  description: string;
+  description?: string;
   /** The URL of the link. */
-  url: string;
+  url?: string;
 }
 export interface Help_LinkAminoMsg {
   type: "/google.rpc.Link";
@@ -762,9 +762,9 @@ export interface LocalizedMessageAmino {
    * http://www.rfc-editor.org/rfc/bcp/bcp47.txt.
    * Examples are: "en-US", "fr-CH", "es-MX"
    */
-  locale: string;
+  locale?: string;
   /** The localized error message in the above locale. */
-  message: string;
+  message?: string;
 }
 export interface LocalizedMessageAminoMsg {
   type: "/google.rpc.LocalizedMessage";
@@ -836,9 +836,11 @@ export const RetryInfo = {
     return obj;
   },
   fromAmino(object: RetryInfoAmino): RetryInfo {
-    return {
-      retryDelay: object?.retry_delay ? Duration.fromAmino(object.retry_delay) : undefined
-    };
+    const message = createBaseRetryInfo();
+    if (object.retry_delay !== undefined && object.retry_delay !== null) {
+      message.retryDelay = Duration.fromAmino(object.retry_delay);
+    }
+    return message;
   },
   toAmino(message: RetryInfo): RetryInfoAmino {
     const obj: any = {};
@@ -937,10 +939,12 @@ export const DebugInfo = {
     return obj;
   },
   fromAmino(object: DebugInfoAmino): DebugInfo {
-    return {
-      stackEntries: Array.isArray(object?.stack_entries) ? object.stack_entries.map((e: any) => e) : [],
-      detail: object.detail
-    };
+    const message = createBaseDebugInfo();
+    message.stackEntries = object.stack_entries?.map(e => e) || [];
+    if (object.detail !== undefined && object.detail !== null) {
+      message.detail = object.detail;
+    }
+    return message;
   },
   toAmino(message: DebugInfo): DebugInfoAmino {
     const obj: any = {};
@@ -1032,9 +1036,9 @@ export const QuotaFailure = {
     return obj;
   },
   fromAmino(object: QuotaFailureAmino): QuotaFailure {
-    return {
-      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => QuotaFailure_Violation.fromAmino(e)) : []
-    };
+    const message = createBaseQuotaFailure();
+    message.violations = object.violations?.map(e => QuotaFailure_Violation.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QuotaFailure): QuotaFailureAmino {
     const obj: any = {};
@@ -1129,10 +1133,14 @@ export const QuotaFailure_Violation = {
     return obj;
   },
   fromAmino(object: QuotaFailure_ViolationAmino): QuotaFailure_Violation {
-    return {
-      subject: object.subject,
-      description: object.description
-    };
+    const message = createBaseQuotaFailure_Violation();
+    if (object.subject !== undefined && object.subject !== null) {
+      message.subject = object.subject;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: QuotaFailure_Violation): QuotaFailure_ViolationAmino {
     const obj: any = {};
@@ -1223,10 +1231,14 @@ export const ErrorInfo_MetadataEntry = {
     return obj;
   },
   fromAmino(object: ErrorInfo_MetadataEntryAmino): ErrorInfo_MetadataEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseErrorInfo_MetadataEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: ErrorInfo_MetadataEntry): ErrorInfo_MetadataEntryAmino {
     const obj: any = {};
@@ -1357,16 +1369,22 @@ export const ErrorInfo = {
     return obj;
   },
   fromAmino(object: ErrorInfoAmino): ErrorInfo {
-    return {
-      reason: object.reason,
-      domain: object.domain,
-      metadata: isObject(object.metadata) ? Object.entries(object.metadata).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseErrorInfo();
+    if (object.reason !== undefined && object.reason !== null) {
+      message.reason = object.reason;
+    }
+    if (object.domain !== undefined && object.domain !== null) {
+      message.domain = object.domain;
+    }
+    message.metadata = Object.entries(object.metadata ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
+      }
+      return acc;
+    }, {});
+    return message;
   },
   toAmino(message: ErrorInfo): ErrorInfoAmino {
     const obj: any = {};
@@ -1460,9 +1478,9 @@ export const PreconditionFailure = {
     return obj;
   },
   fromAmino(object: PreconditionFailureAmino): PreconditionFailure {
-    return {
-      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromAmino(e)) : []
-    };
+    const message = createBasePreconditionFailure();
+    message.violations = object.violations?.map(e => PreconditionFailure_Violation.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: PreconditionFailure): PreconditionFailureAmino {
     const obj: any = {};
@@ -1569,11 +1587,17 @@ export const PreconditionFailure_Violation = {
     return obj;
   },
   fromAmino(object: PreconditionFailure_ViolationAmino): PreconditionFailure_Violation {
-    return {
-      type: object.type,
-      subject: object.subject,
-      description: object.description
-    };
+    const message = createBasePreconditionFailure_Violation();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    if (object.subject !== undefined && object.subject !== null) {
+      message.subject = object.subject;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: PreconditionFailure_Violation): PreconditionFailure_ViolationAmino {
     const obj: any = {};
@@ -1662,9 +1686,9 @@ export const BadRequest = {
     return obj;
   },
   fromAmino(object: BadRequestAmino): BadRequest {
-    return {
-      fieldViolations: Array.isArray(object?.field_violations) ? object.field_violations.map((e: any) => BadRequest_FieldViolation.fromAmino(e)) : []
-    };
+    const message = createBaseBadRequest();
+    message.fieldViolations = object.field_violations?.map(e => BadRequest_FieldViolation.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: BadRequest): BadRequestAmino {
     const obj: any = {};
@@ -1759,10 +1783,14 @@ export const BadRequest_FieldViolation = {
     return obj;
   },
   fromAmino(object: BadRequest_FieldViolationAmino): BadRequest_FieldViolation {
-    return {
-      field: object.field,
-      description: object.description
-    };
+    const message = createBaseBadRequest_FieldViolation();
+    if (object.field !== undefined && object.field !== null) {
+      message.field = object.field;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: BadRequest_FieldViolation): BadRequest_FieldViolationAmino {
     const obj: any = {};
@@ -1854,10 +1882,14 @@ export const RequestInfo = {
     return obj;
   },
   fromAmino(object: RequestInfoAmino): RequestInfo {
-    return {
-      requestId: object.request_id,
-      servingData: object.serving_data
-    };
+    const message = createBaseRequestInfo();
+    if (object.request_id !== undefined && object.request_id !== null) {
+      message.requestId = object.request_id;
+    }
+    if (object.serving_data !== undefined && object.serving_data !== null) {
+      message.servingData = object.serving_data;
+    }
+    return message;
   },
   toAmino(message: RequestInfo): RequestInfoAmino {
     const obj: any = {};
@@ -1973,12 +2005,20 @@ export const ResourceInfo = {
     return obj;
   },
   fromAmino(object: ResourceInfoAmino): ResourceInfo {
-    return {
-      resourceType: object.resource_type,
-      resourceName: object.resource_name,
-      owner: object.owner,
-      description: object.description
-    };
+    const message = createBaseResourceInfo();
+    if (object.resource_type !== undefined && object.resource_type !== null) {
+      message.resourceType = object.resource_type;
+    }
+    if (object.resource_name !== undefined && object.resource_name !== null) {
+      message.resourceName = object.resource_name;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: ResourceInfo): ResourceInfoAmino {
     const obj: any = {};
@@ -2068,9 +2108,9 @@ export const Help = {
     return obj;
   },
   fromAmino(object: HelpAmino): Help {
-    return {
-      links: Array.isArray(object?.links) ? object.links.map((e: any) => Help_Link.fromAmino(e)) : []
-    };
+    const message = createBaseHelp();
+    message.links = object.links?.map(e => Help_Link.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Help): HelpAmino {
     const obj: any = {};
@@ -2165,10 +2205,14 @@ export const Help_Link = {
     return obj;
   },
   fromAmino(object: Help_LinkAmino): Help_Link {
-    return {
-      description: object.description,
-      url: object.url
-    };
+    const message = createBaseHelp_Link();
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.url !== undefined && object.url !== null) {
+      message.url = object.url;
+    }
+    return message;
   },
   toAmino(message: Help_Link): Help_LinkAmino {
     const obj: any = {};
@@ -2260,10 +2304,14 @@ export const LocalizedMessage = {
     return obj;
   },
   fromAmino(object: LocalizedMessageAmino): LocalizedMessage {
-    return {
-      locale: object.locale,
-      message: object.message
-    };
+    const message = createBaseLocalizedMessage();
+    if (object.locale !== undefined && object.locale !== null) {
+      message.locale = object.locale;
+    }
+    if (object.message !== undefined && object.message !== null) {
+      message.message = object.message;
+    }
+    return message;
   },
   toAmino(message: LocalizedMessage): LocalizedMessageAmino {
     const obj: any = {};

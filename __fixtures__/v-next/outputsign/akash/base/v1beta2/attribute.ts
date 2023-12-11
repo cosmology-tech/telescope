@@ -12,8 +12,8 @@ export interface AttributeProtoMsg {
 }
 /** Attribute represents key value pair */
 export interface AttributeAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface AttributeAminoMsg {
   type: "/akash.base.v1beta2.Attribute";
@@ -48,9 +48,9 @@ export interface SignedByProtoMsg {
  */
 export interface SignedByAmino {
   /** all_of all keys in this list must have signed attributes */
-  all_of: string[];
+  all_of?: string[];
   /** any_of at least of of the keys from the list must have signed attributes */
-  any_of: string[];
+  any_of?: string[];
 }
 export interface SignedByAminoMsg {
   type: "/akash.base.v1beta2.SignedBy";
@@ -82,7 +82,7 @@ export interface PlacementRequirementsAmino {
   /** SignedBy list of keys that tenants expect to have signatures from */
   signed_by?: SignedByAmino;
   /** Attribute list of attributes tenant expects from the provider */
-  attributes: AttributeAmino[];
+  attributes?: AttributeAmino[];
 }
 export interface PlacementRequirementsAminoMsg {
   type: "/akash.base.v1beta2.PlacementRequirements";
@@ -137,10 +137,14 @@ export const Attribute = {
     return message;
   },
   fromAmino(object: AttributeAmino): Attribute {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseAttribute();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: Attribute): AttributeAmino {
     const obj: any = {};
@@ -208,10 +212,10 @@ export const SignedBy = {
     return message;
   },
   fromAmino(object: SignedByAmino): SignedBy {
-    return {
-      allOf: Array.isArray(object?.all_of) ? object.all_of.map((e: any) => e) : [],
-      anyOf: Array.isArray(object?.any_of) ? object.any_of.map((e: any) => e) : []
-    };
+    const message = createBaseSignedBy();
+    message.allOf = object.all_of?.map(e => e) || [];
+    message.anyOf = object.any_of?.map(e => e) || [];
+    return message;
   },
   toAmino(message: SignedBy): SignedByAmino {
     const obj: any = {};
@@ -289,10 +293,12 @@ export const PlacementRequirements = {
     return message;
   },
   fromAmino(object: PlacementRequirementsAmino): PlacementRequirements {
-    return {
-      signedBy: object?.signed_by ? SignedBy.fromAmino(object.signed_by) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBasePlacementRequirements();
+    if (object.signed_by !== undefined && object.signed_by !== null) {
+      message.signedBy = SignedBy.fromAmino(object.signed_by);
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: PlacementRequirements): PlacementRequirementsAmino {
     const obj: any = {};

@@ -56,7 +56,7 @@ export interface OperationAmino {
    * originally returns it. If you use the default HTTP mapping, the
    * `name` should be a resource name ending with `operations/{unique_id}`.
    */
-  name: string;
+  name?: string;
   /**
    * Service-specific metadata associated with the operation.  It typically
    * contains progress information and common metadata such as create time.
@@ -69,7 +69,7 @@ export interface OperationAmino {
    * If `true`, the operation is completed, and either `error` or `response` is
    * available.
    */
-  done: boolean;
+  done?: boolean;
   /** The error result of the operation in case of failure or cancellation. */
   error?: StatusAmino;
   /**
@@ -111,7 +111,7 @@ export interface GetOperationRequestProtoMsg {
 /** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
 export interface GetOperationRequestAmino {
   /** The name of the operation resource. */
-  name: string;
+  name?: string;
 }
 export interface GetOperationRequestAminoMsg {
   type: "/google.longrunning.GetOperationRequest";
@@ -139,13 +139,13 @@ export interface ListOperationsRequestProtoMsg {
 /** The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsRequestAmino {
   /** The name of the operation's parent resource. */
-  name: string;
+  name?: string;
   /** The standard list filter. */
-  filter: string;
+  filter?: string;
   /** The standard list page size. */
-  page_size: number;
+  page_size?: number;
   /** The standard list page token. */
-  page_token: string;
+  page_token?: string;
 }
 export interface ListOperationsRequestAminoMsg {
   type: "/google.longrunning.ListOperationsRequest";
@@ -172,9 +172,9 @@ export interface ListOperationsResponseProtoMsg {
 /** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsResponseAmino {
   /** A list of operations that matches the specified filter in the request. */
-  operations: OperationAmino[];
+  operations?: OperationAmino[];
   /** The standard List next-page token. */
-  next_page_token: string;
+  next_page_token?: string;
 }
 export interface ListOperationsResponseAminoMsg {
   type: "/google.longrunning.ListOperationsResponse";
@@ -197,7 +197,7 @@ export interface CancelOperationRequestProtoMsg {
 /** The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]. */
 export interface CancelOperationRequestAmino {
   /** The name of the operation resource to be cancelled. */
-  name: string;
+  name?: string;
 }
 export interface CancelOperationRequestAminoMsg {
   type: "/google.longrunning.CancelOperationRequest";
@@ -219,7 +219,7 @@ export interface DeleteOperationRequestProtoMsg {
 /** The request message for [Operations.DeleteOperation][google.longrunning.Operations.DeleteOperation]. */
 export interface DeleteOperationRequestAmino {
   /** The name of the operation resource to be deleted. */
-  name: string;
+  name?: string;
 }
 export interface DeleteOperationRequestAminoMsg {
   type: "/google.longrunning.DeleteOperationRequest";
@@ -247,7 +247,7 @@ export interface WaitOperationRequestProtoMsg {
 /** The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]. */
 export interface WaitOperationRequestAmino {
   /** The name of the operation resource to wait on. */
-  name: string;
+  name?: string;
   /**
    * The maximum duration to wait before timing out. If left blank, the wait
    * will be at most the time permitted by the underlying HTTP/RPC protocol.
@@ -328,7 +328,7 @@ export interface OperationInfoAmino {
    * 
    * Note: Altering this value constitutes a breaking change.
    */
-  response_type: string;
+  response_type?: string;
   /**
    * Required. The message name of the metadata type for this long-running
    * operation.
@@ -338,7 +338,7 @@ export interface OperationInfoAmino {
    * 
    * Note: Altering this value constitutes a breaking change.
    */
-  metadata_type: string;
+  metadata_type?: string;
 }
 export interface OperationInfoAminoMsg {
   type: "/google.longrunning.OperationInfo";
@@ -471,13 +471,23 @@ export const Operation = {
     return obj;
   },
   fromAmino(object: OperationAmino): Operation {
-    return {
-      name: object.name,
-      metadata: object?.metadata ? Any.fromAmino(object.metadata) : undefined,
-      done: object.done,
-      error: object?.error ? Status.fromAmino(object.error) : undefined,
-      response: object?.response ? Any.fromAmino(object.response) : undefined
-    };
+    const message = createBaseOperation();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = Any.fromAmino(object.metadata);
+    }
+    if (object.done !== undefined && object.done !== null) {
+      message.done = object.done;
+    }
+    if (object.error !== undefined && object.error !== null) {
+      message.error = Status.fromAmino(object.error);
+    }
+    if (object.response !== undefined && object.response !== null) {
+      message.response = Any.fromAmino(object.response);
+    }
+    return message;
   },
   toAmino(message: Operation): OperationAmino {
     const obj: any = {};
@@ -560,9 +570,11 @@ export const GetOperationRequest = {
     return obj;
   },
   fromAmino(object: GetOperationRequestAmino): GetOperationRequest {
-    return {
-      name: object.name
-    };
+    const message = createBaseGetOperationRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: GetOperationRequest): GetOperationRequestAmino {
     const obj: any = {};
@@ -677,12 +689,20 @@ export const ListOperationsRequest = {
     return obj;
   },
   fromAmino(object: ListOperationsRequestAmino): ListOperationsRequest {
-    return {
-      name: object.name,
-      filter: object.filter,
-      pageSize: object.page_size,
-      pageToken: object.page_token
-    };
+    const message = createBaseListOperationsRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.filter !== undefined && object.filter !== null) {
+      message.filter = object.filter;
+    }
+    if (object.page_size !== undefined && object.page_size !== null) {
+      message.pageSize = object.page_size;
+    }
+    if (object.page_token !== undefined && object.page_token !== null) {
+      message.pageToken = object.page_token;
+    }
+    return message;
   },
   toAmino(message: ListOperationsRequest): ListOperationsRequestAmino {
     const obj: any = {};
@@ -784,10 +804,12 @@ export const ListOperationsResponse = {
     return obj;
   },
   fromAmino(object: ListOperationsResponseAmino): ListOperationsResponse {
-    return {
-      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
+    const message = createBaseListOperationsResponse();
+    message.operations = object.operations?.map(e => Operation.fromAmino(e)) || [];
+    if (object.next_page_token !== undefined && object.next_page_token !== null) {
+      message.nextPageToken = object.next_page_token;
+    }
+    return message;
   },
   toAmino(message: ListOperationsResponse): ListOperationsResponseAmino {
     const obj: any = {};
@@ -871,9 +893,11 @@ export const CancelOperationRequest = {
     return obj;
   },
   fromAmino(object: CancelOperationRequestAmino): CancelOperationRequest {
-    return {
-      name: object.name
-    };
+    const message = createBaseCancelOperationRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: CancelOperationRequest): CancelOperationRequestAmino {
     const obj: any = {};
@@ -952,9 +976,11 @@ export const DeleteOperationRequest = {
     return obj;
   },
   fromAmino(object: DeleteOperationRequestAmino): DeleteOperationRequest {
-    return {
-      name: object.name
-    };
+    const message = createBaseDeleteOperationRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: DeleteOperationRequest): DeleteOperationRequestAmino {
     const obj: any = {};
@@ -1047,10 +1073,14 @@ export const WaitOperationRequest = {
     return obj;
   },
   fromAmino(object: WaitOperationRequestAmino): WaitOperationRequest {
-    return {
-      name: object.name,
-      timeout: object?.timeout ? Duration.fromAmino(object.timeout) : undefined
-    };
+    const message = createBaseWaitOperationRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.timeout !== undefined && object.timeout !== null) {
+      message.timeout = Duration.fromAmino(object.timeout);
+    }
+    return message;
   },
   toAmino(message: WaitOperationRequest): WaitOperationRequestAmino {
     const obj: any = {};
@@ -1142,10 +1172,14 @@ export const OperationInfo = {
     return obj;
   },
   fromAmino(object: OperationInfoAmino): OperationInfo {
-    return {
-      responseType: object.response_type,
-      metadataType: object.metadata_type
-    };
+    const message = createBaseOperationInfo();
+    if (object.response_type !== undefined && object.response_type !== null) {
+      message.responseType = object.response_type;
+    }
+    if (object.metadata_type !== undefined && object.metadata_type !== null) {
+      message.metadataType = object.metadata_type;
+    }
+    return message;
   },
   toAmino(message: OperationInfo): OperationInfoAmino {
     const obj: any = {};

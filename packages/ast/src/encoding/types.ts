@@ -312,7 +312,7 @@ export const getTSType = (context: GenericParseContext, type: string) => {
     };
 };
 
-export const getTSAminoType = (context: GenericParseContext, type: string) => {
+export const getTSAminoType = (context: GenericParseContext, type: string, options?: any) => {
     switch (type) {
         case 'string':
             return t.tsStringKeyword();
@@ -331,6 +331,10 @@ export const getTSAminoType = (context: GenericParseContext, type: string) => {
         case 'sfixed64':
             return t.tsStringKeyword();
         case 'bytes':
+            // (gogoproto.customname) = "WASMByteCode",
+            if (options?.["(gogoproto.customname)"] === "WASMByteCode") {
+              return t.tsStringKeyword();
+            }
             return t.tsTypeReference(t.identifier('Uint8Array'));
         case 'bool':
             return t.tsBooleanKeyword();
@@ -380,11 +384,12 @@ export const getTSTypeFromGoogleType = (
 export const getTSTypeForAmino = (context: GenericParseContext, field: ProtoField) => {
     switch (field.type) {
         case 'bytes':
-            // bytes [WASMByteCode]
-            if (field.options?.['(gogoproto.customname)'] === 'WASMByteCode') {
-                return t.tsStringKeyword();
-            }
-            return t.tsTypeReference(t.identifier('Uint8Array'));
+          if (field.options?.["(gogoproto.casttype)"] === "RawContractMessage") {
+            return t.tsAnyKeyword();
+          }
+          else{
+            return t.tsStringKeyword();
+          }
         default:
             return getTSAminoType(context, field.type);
     };

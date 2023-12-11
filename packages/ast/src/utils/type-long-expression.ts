@@ -1,62 +1,65 @@
-import * as t from '@babel/types';
-import { GenericParseContext } from '../encoding';
+import * as t from "@babel/types";
+import { GenericParseContext } from "../encoding";
 
 export const TypeLong = {
   propTypes: {
-    bigint: 'bigint',
-    long: 'Long'
+    bigint: "bigint",
+    long: "Long",
   },
   propIdentifiers: {
-    bigint: t.identifier('bigint'),
-    long: t.identifier('Long')
+    bigint: t.identifier("bigint"),
+    long: t.identifier("Long"),
   },
 
   types: {
-    bigint: 'BigInt',
-    long: 'Long'
+    bigint: "BigInt",
+    long: "Long",
   },
 
   identifiers: {
-    bigint: t.identifier('BigInt'),
-    long: t.identifier('Long')
+    bigint: t.identifier("BigInt"),
+    long: t.identifier("Long"),
   },
 
   fromStringArray: {
-    bigint: t.callExpression(t.identifier('BigInt'), [t.identifier('e')]),
-    long: t.identifier('e')
+    bigint: t.callExpression(t.identifier("BigInt"), [t.identifier("e")]),
+    long: t.callExpression(
+      t.memberExpression(t.identifier("Long"), t.identifier("fromString")),
+      [t.identifier("e")]
+    ),
   },
 
   toStringArray: {
     bigint: t.callExpression(
-      t.memberExpression(t.identifier('e'), t.identifier('toString')),
+      t.memberExpression(t.identifier("e"), t.identifier("toString")),
       []
     ),
-    long: t.identifier('e')
+    long: t.identifier("e"),
   },
 
   uzeroExpressions: {
-    bigint: t.callExpression(t.identifier('BigInt'), [t.numericLiteral(0)]),
-    long: t.memberExpression(t.identifier('Long'), t.identifier('UZERO'))
+    bigint: t.callExpression(t.identifier("BigInt"), [t.numericLiteral(0)]),
+    long: t.memberExpression(t.identifier("Long"), t.identifier("UZERO")),
   },
 
   zeroExpressions: {
-    bigint: t.callExpression(t.identifier('BigInt'), [t.numericLiteral(0)]),
-    long: t.memberExpression(t.identifier('Long'), t.identifier('ZERO'))
+    bigint: t.callExpression(t.identifier("BigInt"), [t.numericLiteral(0)]),
+    long: t.memberExpression(t.identifier("Long"), t.identifier("ZERO")),
   },
 
   fromValueExpressions: {
-    bigint: t.identifier('BigInt'),
-    long: t.memberExpression(t.identifier('Long'), t.identifier('fromValue'))
+    bigint: t.identifier("BigInt"),
+    long: t.memberExpression(t.identifier("Long"), t.identifier("fromValue")),
   },
 
   fromNumberExpressions: {
-    bigint: t.identifier('BigInt'),
-    long: t.memberExpression(t.identifier('Long'), t.identifier('fromNumber'))
+    bigint: t.identifier("BigInt"),
+    long: t.memberExpression(t.identifier("Long"), t.identifier("fromNumber")),
   },
 
   fromStringExpressions: {
-    bigint: t.identifier('BigInt'),
-    long: t.memberExpression(t.identifier('Long'), t.identifier('fromString'))
+    bigint: t.identifier("BigInt"),
+    long: t.memberExpression(t.identifier("Long"), t.identifier("fromString")),
   },
 
   addUtil: (ctx?: GenericParseContext) => {
@@ -64,11 +67,11 @@ export const TypeLong = {
       return;
     }
 
-    const longLib = ctx.pluginValue('prototypes.typingsFormat.num64');
+    const longLib = ctx.pluginValue("prototypes.typingsFormat.num64");
 
     switch (longLib) {
-      case 'long':
-        ctx.addUtil('Long');
+      case "long":
+        ctx.addUtil("Long");
         break;
     }
   },
@@ -113,20 +116,20 @@ export const TypeLong = {
     ctx: GenericParseContext,
     arg: t.Expression
   ): t.Expression => {
-    const longLib = ctx.pluginValue('prototypes.typingsFormat.num64');
+    const longLib = ctx.pluginValue("prototypes.typingsFormat.num64");
     const args = [];
 
     switch (longLib) {
-      case 'bigint':
+      case "bigint":
         args.push(
           t.callExpression(
-            t.memberExpression(arg, t.identifier('toString')),
+            t.memberExpression(arg, t.identifier("toString")),
             []
           )
         );
         break;
 
-      case 'long':
+      case "long":
         args.push(arg);
       default:
     }
@@ -143,33 +146,33 @@ export const TypeLong = {
   },
 
   getNode: (ctx: GenericParseContext, mappings) => {
-    const longLib = ctx.pluginValue('prototypes.typingsFormat.num64');
+    const longLib = ctx.pluginValue("prototypes.typingsFormat.num64");
 
-    return mappings[longLib] ?? mappings['long'];
+    return mappings[longLib] ?? mappings["long"];
   },
 
   getLongNotZero: (prop: string, ctx: GenericParseContext): t.Expression => {
-    const longLib = ctx.pluginValue('prototypes.typingsFormat.num64');
+    const longLib = ctx.pluginValue("prototypes.typingsFormat.num64");
 
     switch (longLib) {
-      case 'bigint':
+      case "bigint":
         return t.binaryExpression(
-          '!==',
-          t.memberExpression(t.identifier('message'), t.identifier(prop)),
-          t.callExpression(t.identifier('BigInt'), [t.numericLiteral(0)])
+          "!==",
+          t.memberExpression(t.identifier("message"), t.identifier(prop)),
+          t.callExpression(t.identifier("BigInt"), [t.numericLiteral(0)])
         );
-      case 'long':
+      case "long":
       default:
         return t.unaryExpression(
-          '!',
+          "!",
           t.callExpression(
             t.memberExpression(
-              t.memberExpression(t.identifier('message'), t.identifier(prop)),
-              t.identifier('isZero')
+              t.memberExpression(t.identifier("message"), t.identifier(prop)),
+              t.identifier("isZero")
             ),
             []
           )
         );
     }
-  }
+  },
 };

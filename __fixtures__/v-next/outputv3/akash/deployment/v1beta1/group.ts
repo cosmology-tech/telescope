@@ -150,9 +150,9 @@ export interface GroupIDProtoMsg {
 }
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDAmino {
-  owner: string;
-  dseq: string;
-  gseq: number;
+  owner?: string;
+  dseq?: string;
+  gseq?: number;
 }
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDSDKType {
@@ -172,9 +172,9 @@ export interface GroupSpecProtoMsg {
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecAmino {
-  name: string;
+  name?: string;
   requirements?: PlacementRequirementsAmino;
-  resources: ResourceAmino[];
+  resources?: ResourceAmino[];
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
@@ -196,9 +196,9 @@ export interface GroupProtoMsg {
 /** Group stores group id, state and specifications of group */
 export interface GroupAmino {
   group_id?: GroupIDAmino;
-  state: Group_State;
+  state?: Group_State;
   group_spec?: GroupSpecAmino;
-  created_at: string;
+  created_at?: string;
 }
 /** Group stores group id, state and specifications of group */
 export interface GroupSDKType {
@@ -220,7 +220,7 @@ export interface ResourceProtoMsg {
 /** Resource stores unit, total count and price of resource */
 export interface ResourceAmino {
   resources?: ResourceUnitsAmino;
-  count: number;
+  count?: number;
   price?: CoinAmino;
 }
 /** Resource stores unit, total count and price of resource */
@@ -287,9 +287,11 @@ export const MsgCloseGroup = {
     return obj;
   },
   fromAmino(object: MsgCloseGroupAmino): MsgCloseGroup {
-    return {
-      id: object?.id ? GroupID.fromAmino(object.id) : undefined
-    };
+    const message = createBaseMsgCloseGroup();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: MsgCloseGroup, useInterfaces: boolean = true): MsgCloseGroupAmino {
     const obj: any = {};
@@ -351,7 +353,8 @@ export const MsgCloseGroupResponse = {
     return obj;
   },
   fromAmino(_: MsgCloseGroupResponseAmino): MsgCloseGroupResponse {
-    return {};
+    const message = createBaseMsgCloseGroupResponse();
+    return message;
   },
   toAmino(_: MsgCloseGroupResponse, useInterfaces: boolean = true): MsgCloseGroupResponseAmino {
     const obj: any = {};
@@ -428,9 +431,11 @@ export const MsgPauseGroup = {
     return obj;
   },
   fromAmino(object: MsgPauseGroupAmino): MsgPauseGroup {
-    return {
-      id: object?.id ? GroupID.fromAmino(object.id) : undefined
-    };
+    const message = createBaseMsgPauseGroup();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: MsgPauseGroup, useInterfaces: boolean = true): MsgPauseGroupAmino {
     const obj: any = {};
@@ -492,7 +497,8 @@ export const MsgPauseGroupResponse = {
     return obj;
   },
   fromAmino(_: MsgPauseGroupResponseAmino): MsgPauseGroupResponse {
-    return {};
+    const message = createBaseMsgPauseGroupResponse();
+    return message;
   },
   toAmino(_: MsgPauseGroupResponse, useInterfaces: boolean = true): MsgPauseGroupResponseAmino {
     const obj: any = {};
@@ -569,9 +575,11 @@ export const MsgStartGroup = {
     return obj;
   },
   fromAmino(object: MsgStartGroupAmino): MsgStartGroup {
-    return {
-      id: object?.id ? GroupID.fromAmino(object.id) : undefined
-    };
+    const message = createBaseMsgStartGroup();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: MsgStartGroup, useInterfaces: boolean = true): MsgStartGroupAmino {
     const obj: any = {};
@@ -633,7 +641,8 @@ export const MsgStartGroupResponse = {
     return obj;
   },
   fromAmino(_: MsgStartGroupResponseAmino): MsgStartGroupResponse {
-    return {};
+    const message = createBaseMsgStartGroupResponse();
+    return message;
   },
   toAmino(_: MsgStartGroupResponse, useInterfaces: boolean = true): MsgStartGroupResponseAmino {
     const obj: any = {};
@@ -734,11 +743,17 @@ export const GroupID = {
     return obj;
   },
   fromAmino(object: GroupIDAmino): GroupID {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      gseq: object.gseq
-    };
+    const message = createBaseGroupID();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq);
+    }
+    if (object.gseq !== undefined && object.gseq !== null) {
+      message.gseq = object.gseq;
+    }
+    return message;
   },
   toAmino(message: GroupID, useInterfaces: boolean = true): GroupIDAmino {
     const obj: any = {};
@@ -850,11 +865,15 @@ export const GroupSpec = {
     return obj;
   },
   fromAmino(object: GroupSpecAmino): GroupSpec {
-    return {
-      name: object.name,
-      requirements: object?.requirements ? PlacementRequirements.fromAmino(object.requirements) : undefined,
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromAmino(e)) : []
-    };
+    const message = createBaseGroupSpec();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.requirements !== undefined && object.requirements !== null) {
+      message.requirements = PlacementRequirements.fromAmino(object.requirements);
+    }
+    message.resources = object.resources?.map(e => Resource.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GroupSpec, useInterfaces: boolean = true): GroupSpecAmino {
     const obj: any = {};
@@ -978,17 +997,25 @@ export const Group = {
     return obj;
   },
   fromAmino(object: GroupAmino): Group {
-    return {
-      groupId: object?.group_id ? GroupID.fromAmino(object.group_id) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : -1,
-      groupSpec: object?.group_spec ? GroupSpec.fromAmino(object.group_spec) : undefined,
-      createdAt: BigInt(object.created_at)
-    };
+    const message = createBaseGroup();
+    if (object.group_id !== undefined && object.group_id !== null) {
+      message.groupId = GroupID.fromAmino(object.group_id);
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = group_StateFromJSON(object.state);
+    }
+    if (object.group_spec !== undefined && object.group_spec !== null) {
+      message.groupSpec = GroupSpec.fromAmino(object.group_spec);
+    }
+    if (object.created_at !== undefined && object.created_at !== null) {
+      message.createdAt = BigInt(object.created_at);
+    }
+    return message;
   },
   toAmino(message: Group, useInterfaces: boolean = true): GroupAmino {
     const obj: any = {};
     obj.group_id = message.groupId ? GroupID.toAmino(message.groupId, useInterfaces) : undefined;
-    obj.state = message.state;
+    obj.state = group_StateToJSON(message.state);
     obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec, useInterfaces) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
@@ -1090,11 +1117,17 @@ export const Resource = {
     return obj;
   },
   fromAmino(object: ResourceAmino): Resource {
-    return {
-      resources: object?.resources ? ResourceUnits.fromAmino(object.resources) : undefined,
-      count: object.count,
-      price: object?.price ? Coin.fromAmino(object.price) : undefined
-    };
+    const message = createBaseResource();
+    if (object.resources !== undefined && object.resources !== null) {
+      message.resources = ResourceUnits.fromAmino(object.resources);
+    }
+    if (object.count !== undefined && object.count !== null) {
+      message.count = object.count;
+    }
+    if (object.price !== undefined && object.price !== null) {
+      message.price = Coin.fromAmino(object.price);
+    }
+    return message;
   },
   toAmino(message: Resource, useInterfaces: boolean = true): ResourceAmino {
     const obj: any = {};

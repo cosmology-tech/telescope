@@ -19,14 +19,14 @@ export interface VersionProtoMsg {
 }
 /** The version number of protocol compiler. */
 export interface VersionAmino {
-  major: number;
-  minor: number;
-  patch: number;
+  major?: number;
+  minor?: number;
+  patch?: number;
   /**
    * A suffix for alpha, beta or rc release, e.g., "alpha-1", "rc2". It should
    * be empty for mainline stable releases.
    */
-  suffix: string;
+  suffix?: string;
 }
 /** The version number of protocol compiler. */
 export interface VersionSDKType {
@@ -76,9 +76,9 @@ export interface CodeGeneratorRequestAmino {
    * code generator should generate code only for these files.  Each file's
    * descriptor will be included in proto_file, below.
    */
-  file_to_generate: string[];
+  file_to_generate?: string[];
   /** The generator parameter passed on the command-line. */
-  parameter: string;
+  parameter?: string;
   /**
    * FileDescriptorProtos for all files in files_to_generate and everything
    * they import.  The files will appear in topological order, so each file
@@ -95,7 +95,7 @@ export interface CodeGeneratorRequestAmino {
    * Type names of fields and extensions in the FileDescriptorProto are always
    * fully qualified.
    */
-  proto_file: FileDescriptorProtoAmino[];
+  proto_file?: FileDescriptorProtoAmino[];
   /** The version number of protocol compiler. */
   compiler_version?: VersionAmino;
 }
@@ -137,8 +137,8 @@ export interface CodeGeneratorResponseAmino {
    * unparseable -- should be reported by writing a message to stderr and
    * exiting with a non-zero status code.
    */
-  error: string;
-  file: CodeGeneratorResponse_FileAmino[];
+  error?: string;
+  file?: CodeGeneratorResponse_FileAmino[];
 }
 /** The plugin writes an encoded CodeGeneratorResponse to stdout. */
 export interface CodeGeneratorResponseSDKType {
@@ -223,7 +223,7 @@ export interface CodeGeneratorResponse_FileAmino {
    * this writing protoc does not optimize for this -- it will read the entire
    * CodeGeneratorResponse before writing files to disk.
    */
-  name: string;
+  name?: string;
   /**
    * If non-empty, indicates that the named file should already exist, and the
    * content here is to be inserted into that file at a defined insertion
@@ -263,9 +263,9 @@ export interface CodeGeneratorResponse_FileAmino {
    * 
    * If |insertion_point| is present, |name| must also be present.
    */
-  insertion_point: string;
+  insertion_point?: string;
   /** The file contents. */
-  content: string;
+  content?: string;
 }
 /** Represents a single generated file. */
 export interface CodeGeneratorResponse_FileSDKType {
@@ -365,12 +365,20 @@ export const Version = {
     return obj;
   },
   fromAmino(object: VersionAmino): Version {
-    return {
-      major: object.major,
-      minor: object.minor,
-      patch: object.patch,
-      suffix: object.suffix
-    };
+    const message = createBaseVersion();
+    if (object.major !== undefined && object.major !== null) {
+      message.major = object.major;
+    }
+    if (object.minor !== undefined && object.minor !== null) {
+      message.minor = object.minor;
+    }
+    if (object.patch !== undefined && object.patch !== null) {
+      message.patch = object.patch;
+    }
+    if (object.suffix !== undefined && object.suffix !== null) {
+      message.suffix = object.suffix;
+    }
+    return message;
   },
   toAmino(message: Version, useInterfaces: boolean = true): VersionAmino {
     const obj: any = {};
@@ -503,12 +511,16 @@ export const CodeGeneratorRequest = {
     return obj;
   },
   fromAmino(object: CodeGeneratorRequestAmino): CodeGeneratorRequest {
-    return {
-      fileToGenerate: Array.isArray(object?.file_to_generate) ? object.file_to_generate.map((e: any) => e) : [],
-      parameter: object.parameter,
-      protoFile: Array.isArray(object?.proto_file) ? object.proto_file.map((e: any) => FileDescriptorProto.fromAmino(e)) : [],
-      compilerVersion: object?.compiler_version ? Version.fromAmino(object.compiler_version) : undefined
-    };
+    const message = createBaseCodeGeneratorRequest();
+    message.fileToGenerate = object.file_to_generate?.map(e => e) || [];
+    if (object.parameter !== undefined && object.parameter !== null) {
+      message.parameter = object.parameter;
+    }
+    message.protoFile = object.proto_file?.map(e => FileDescriptorProto.fromAmino(e)) || [];
+    if (object.compiler_version !== undefined && object.compiler_version !== null) {
+      message.compilerVersion = Version.fromAmino(object.compiler_version);
+    }
+    return message;
   },
   toAmino(message: CodeGeneratorRequest, useInterfaces: boolean = true): CodeGeneratorRequestAmino {
     const obj: any = {};
@@ -615,10 +627,12 @@ export const CodeGeneratorResponse = {
     return obj;
   },
   fromAmino(object: CodeGeneratorResponseAmino): CodeGeneratorResponse {
-    return {
-      error: object.error,
-      file: Array.isArray(object?.file) ? object.file.map((e: any) => CodeGeneratorResponse_File.fromAmino(e)) : []
-    };
+    const message = createBaseCodeGeneratorResponse();
+    if (object.error !== undefined && object.error !== null) {
+      message.error = object.error;
+    }
+    message.file = object.file?.map(e => CodeGeneratorResponse_File.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: CodeGeneratorResponse, useInterfaces: boolean = true): CodeGeneratorResponseAmino {
     const obj: any = {};
@@ -723,11 +737,17 @@ export const CodeGeneratorResponse_File = {
     return obj;
   },
   fromAmino(object: CodeGeneratorResponse_FileAmino): CodeGeneratorResponse_File {
-    return {
-      name: object.name,
-      insertionPoint: object.insertion_point,
-      content: object.content
-    };
+    const message = createBaseCodeGeneratorResponse_File();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.insertion_point !== undefined && object.insertion_point !== null) {
+      message.insertionPoint = object.insertion_point;
+    }
+    if (object.content !== undefined && object.content !== null) {
+      message.content = object.content;
+    }
+    return message;
   },
   toAmino(message: CodeGeneratorResponse_File, useInterfaces: boolean = true): CodeGeneratorResponse_FileAmino {
     const obj: any = {};

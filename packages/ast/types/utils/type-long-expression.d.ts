@@ -1,5 +1,5 @@
-import * as t from '@babel/types';
-import { GenericParseContext } from '../encoding';
+import * as t from "@babel/types";
+import { GenericParseContext } from "../encoding";
 export declare const TypeLong: {
     propTypes: {
         bigint: string;
@@ -19,7 +19,7 @@ export declare const TypeLong: {
     };
     fromStringArray: {
         bigint: t.CallExpression;
-        long: t.Identifier;
+        long: t.CallExpression;
     };
     toStringArray: {
         bigint: t.CallExpression;

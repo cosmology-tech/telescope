@@ -164,14 +164,26 @@ export const Metadata = {
     return obj;
   },
   fromAmino(object: MetadataAmino): Metadata {
-    return {
-      version: object.version,
-      controllerConnectionId: object.controller_connection_id,
-      hostConnectionId: object.host_connection_id,
-      address: object.address,
-      encoding: object.encoding,
-      txType: object.tx_type
-    };
+    const message = createBaseMetadata();
+    if (object.version !== undefined && object.version !== null) {
+      message.version = object.version;
+    }
+    if (object.controller_connection_id !== undefined && object.controller_connection_id !== null) {
+      message.controllerConnectionId = object.controller_connection_id;
+    }
+    if (object.host_connection_id !== undefined && object.host_connection_id !== null) {
+      message.hostConnectionId = object.host_connection_id;
+    }
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.encoding !== undefined && object.encoding !== null) {
+      message.encoding = object.encoding;
+    }
+    if (object.tx_type !== undefined && object.tx_type !== null) {
+      message.txType = object.tx_type;
+    }
+    return message;
   },
   toAmino(message: Metadata): MetadataAmino {
     const obj: any = {};

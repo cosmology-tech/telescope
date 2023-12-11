@@ -2,7 +2,7 @@ import { Operation, OperationAmino, OperationSDKType } from "./operation";
 import { CheckError, CheckErrorAmino, CheckErrorSDKType } from "./check_error";
 import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isSet } from "../../../../helpers";
+import { DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /**
  * The type of the consumer as defined in
@@ -103,7 +103,7 @@ export interface CheckRequestAmino {
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
    */
-  service_name: string;
+  service_name?: string;
   /** The operation to be checked. */
   operation?: OperationAmino;
   /**
@@ -113,7 +113,7 @@ export interface CheckRequestAmino {
    * If unspecified or no matching version can be found, the
    * latest one will be used.
    */
-  service_config_id: string;
+  service_config_id?: string;
 }
 export interface CheckRequestAminoMsg {
   type: "/google.api.servicecontrol.v1.CheckRequest";
@@ -159,7 +159,7 @@ export interface CheckResponseAmino {
    * [CheckRequest][google.api.servicecontrol.v1.CheckRequest]. Used for logging
    * and diagnostics purposes.
    */
-  operation_id: string;
+  operation_id?: string;
   /**
    * Indicate the decision of the check.
    * 
@@ -167,11 +167,11 @@ export interface CheckResponseAmino {
    * Otherwise the service should use the list of errors to determine the
    * appropriate action.
    */
-  check_errors: CheckErrorAmino[];
+  check_errors?: CheckErrorAmino[];
   /** The actual config id used to process the request. */
-  service_config_id: string;
+  service_config_id?: string;
   /** The current service rollout id used to process the request. */
-  service_rollout_id: string;
+  service_rollout_id?: string;
   /** Feedback data returned from the server during processing a Check request. */
   check_info?: CheckResponse_CheckInfoAmino;
 }
@@ -209,7 +209,7 @@ export interface CheckResponse_CheckInfoAmino {
    * The client doesn't need to send them for following requests to improve
    * performance and allow better aggregation.
    */
-  unused_arguments: string[];
+  unused_arguments?: string[];
   /** Consumer info of this check. */
   consumer_info?: CheckResponse_ConsumerInfoAmino;
 }
@@ -257,18 +257,18 @@ export interface CheckResponse_ConsumerInfoAmino {
    * NOTE: This field is deprecated after we support flexible consumer
    * id. New code should not depend on this field anymore.
    */
-  project_number: string;
+  project_number?: string;
   /**
    * The type of the consumer which should have been defined in
    * [Google Resource Manager](https://cloud.google.com/resource-manager/).
    */
-  type: CheckResponse_ConsumerInfo_ConsumerType;
+  type?: CheckResponse_ConsumerInfo_ConsumerType;
   /**
    * The consumer identity number, can be Google cloud project number, folder
    * number or organization number e.g. 1234567890. A value of 0 indicates no
    * consumer number is found.
    */
-  consumer_number: string;
+  consumer_number?: string;
 }
 export interface CheckResponse_ConsumerInfoAminoMsg {
   type: "/google.api.servicecontrol.v1.ConsumerInfo";
@@ -328,7 +328,7 @@ export interface ReportRequestAmino {
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
    */
-  service_name: string;
+  service_name?: string;
   /**
    * Operations to be reported.
    * 
@@ -342,7 +342,7 @@ export interface ReportRequestAmino {
    * [ReportResponse.report_errors][google.api.servicecontrol.v1.ReportResponse.report_errors]
    * for partial failure behavior.
    */
-  operations: OperationAmino[];
+  operations?: OperationAmino[];
   /**
    * Specifies which version of service config should be used to process the
    * request.
@@ -350,7 +350,7 @@ export interface ReportRequestAmino {
    * If unspecified or no matching version can be found, the
    * latest one will be used.
    */
-  service_config_id: string;
+  service_config_id?: string;
 }
 export interface ReportRequestAminoMsg {
   type: "/google.api.servicecontrol.v1.ReportRequest";
@@ -408,11 +408,11 @@ export interface ReportResponseAmino {
    *    When this happens, it's impossible to know which of the
    *    'Operations' in the request succeeded or failed.
    */
-  report_errors: ReportResponse_ReportErrorAmino[];
+  report_errors?: ReportResponse_ReportErrorAmino[];
   /** The actual config id used to process the request. */
-  service_config_id: string;
+  service_config_id?: string;
   /** The current service rollout id used to process the request. */
-  service_rollout_id: string;
+  service_rollout_id?: string;
 }
 export interface ReportResponseAminoMsg {
   type: "/google.api.servicecontrol.v1.ReportResponse";
@@ -455,7 +455,7 @@ export interface ReportResponse_ReportErrorAmino {
    * [Operation.operation_id][google.api.servicecontrol.v1.Operation.operation_id]
    * value from the request.
    */
-  operation_id: string;
+  operation_id?: string;
   /**
    * Details of the error when processing the
    * [Operation][google.api.servicecontrol.v1.Operation].
@@ -528,11 +528,17 @@ export const CheckRequest = {
     return message;
   },
   fromAmino(object: CheckRequestAmino): CheckRequest {
-    return {
-      serviceName: object.service_name,
-      operation: object?.operation ? Operation.fromAmino(object.operation) : undefined,
-      serviceConfigId: object.service_config_id
-    };
+    const message = createBaseCheckRequest();
+    if (object.service_name !== undefined && object.service_name !== null) {
+      message.serviceName = object.service_name;
+    }
+    if (object.operation !== undefined && object.operation !== null) {
+      message.operation = Operation.fromAmino(object.operation);
+    }
+    if (object.service_config_id !== undefined && object.service_config_id !== null) {
+      message.serviceConfigId = object.service_config_id;
+    }
+    return message;
   },
   toAmino(message: CheckRequest): CheckRequestAmino {
     const obj: any = {};
@@ -627,13 +633,21 @@ export const CheckResponse = {
     return message;
   },
   fromAmino(object: CheckResponseAmino): CheckResponse {
-    return {
-      operationId: object.operation_id,
-      checkErrors: Array.isArray(object?.check_errors) ? object.check_errors.map((e: any) => CheckError.fromAmino(e)) : [],
-      serviceConfigId: object.service_config_id,
-      serviceRolloutId: object.service_rollout_id,
-      checkInfo: object?.check_info ? CheckResponse_CheckInfo.fromAmino(object.check_info) : undefined
-    };
+    const message = createBaseCheckResponse();
+    if (object.operation_id !== undefined && object.operation_id !== null) {
+      message.operationId = object.operation_id;
+    }
+    message.checkErrors = object.check_errors?.map(e => CheckError.fromAmino(e)) || [];
+    if (object.service_config_id !== undefined && object.service_config_id !== null) {
+      message.serviceConfigId = object.service_config_id;
+    }
+    if (object.service_rollout_id !== undefined && object.service_rollout_id !== null) {
+      message.serviceRolloutId = object.service_rollout_id;
+    }
+    if (object.check_info !== undefined && object.check_info !== null) {
+      message.checkInfo = CheckResponse_CheckInfo.fromAmino(object.check_info);
+    }
+    return message;
   },
   toAmino(message: CheckResponse): CheckResponseAmino {
     const obj: any = {};
@@ -710,10 +724,12 @@ export const CheckResponse_CheckInfo = {
     return message;
   },
   fromAmino(object: CheckResponse_CheckInfoAmino): CheckResponse_CheckInfo {
-    return {
-      unusedArguments: Array.isArray(object?.unused_arguments) ? object.unused_arguments.map((e: any) => e) : [],
-      consumerInfo: object?.consumer_info ? CheckResponse_ConsumerInfo.fromAmino(object.consumer_info) : undefined
-    };
+    const message = createBaseCheckResponse_CheckInfo();
+    message.unusedArguments = object.unused_arguments?.map(e => e) || [];
+    if (object.consumer_info !== undefined && object.consumer_info !== null) {
+      message.consumerInfo = CheckResponse_ConsumerInfo.fromAmino(object.consumer_info);
+    }
+    return message;
   },
   toAmino(message: CheckResponse_CheckInfo): CheckResponse_CheckInfoAmino {
     const obj: any = {};
@@ -797,16 +813,22 @@ export const CheckResponse_ConsumerInfo = {
     return message;
   },
   fromAmino(object: CheckResponse_ConsumerInfoAmino): CheckResponse_ConsumerInfo {
-    return {
-      projectNumber: BigInt(object.project_number),
-      type: isSet(object.type) ? checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type) : -1,
-      consumerNumber: BigInt(object.consumer_number)
-    };
+    const message = createBaseCheckResponse_ConsumerInfo();
+    if (object.project_number !== undefined && object.project_number !== null) {
+      message.projectNumber = BigInt(object.project_number);
+    }
+    if (object.type !== undefined && object.type !== null) {
+      message.type = checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type);
+    }
+    if (object.consumer_number !== undefined && object.consumer_number !== null) {
+      message.consumerNumber = BigInt(object.consumer_number);
+    }
+    return message;
   },
   toAmino(message: CheckResponse_ConsumerInfo): CheckResponse_ConsumerInfoAmino {
     const obj: any = {};
     obj.project_number = message.projectNumber ? message.projectNumber.toString() : undefined;
-    obj.type = message.type;
+    obj.type = checkResponse_ConsumerInfo_ConsumerTypeToJSON(message.type);
     obj.consumer_number = message.consumerNumber ? message.consumerNumber.toString() : undefined;
     return obj;
   },
@@ -878,11 +900,15 @@ export const ReportRequest = {
     return message;
   },
   fromAmino(object: ReportRequestAmino): ReportRequest {
-    return {
-      serviceName: object.service_name,
-      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromAmino(e)) : [],
-      serviceConfigId: object.service_config_id
-    };
+    const message = createBaseReportRequest();
+    if (object.service_name !== undefined && object.service_name !== null) {
+      message.serviceName = object.service_name;
+    }
+    message.operations = object.operations?.map(e => Operation.fromAmino(e)) || [];
+    if (object.service_config_id !== undefined && object.service_config_id !== null) {
+      message.serviceConfigId = object.service_config_id;
+    }
+    return message;
   },
   toAmino(message: ReportRequest): ReportRequestAmino {
     const obj: any = {};
@@ -963,11 +989,15 @@ export const ReportResponse = {
     return message;
   },
   fromAmino(object: ReportResponseAmino): ReportResponse {
-    return {
-      reportErrors: Array.isArray(object?.report_errors) ? object.report_errors.map((e: any) => ReportResponse_ReportError.fromAmino(e)) : [],
-      serviceConfigId: object.service_config_id,
-      serviceRolloutId: object.service_rollout_id
-    };
+    const message = createBaseReportResponse();
+    message.reportErrors = object.report_errors?.map(e => ReportResponse_ReportError.fromAmino(e)) || [];
+    if (object.service_config_id !== undefined && object.service_config_id !== null) {
+      message.serviceConfigId = object.service_config_id;
+    }
+    if (object.service_rollout_id !== undefined && object.service_rollout_id !== null) {
+      message.serviceRolloutId = object.service_rollout_id;
+    }
+    return message;
   },
   toAmino(message: ReportResponse): ReportResponseAmino {
     const obj: any = {};
@@ -1042,10 +1072,14 @@ export const ReportResponse_ReportError = {
     return message;
   },
   fromAmino(object: ReportResponse_ReportErrorAmino): ReportResponse_ReportError {
-    return {
-      operationId: object.operation_id,
-      status: object?.status ? Status.fromAmino(object.status) : undefined
-    };
+    const message = createBaseReportResponse_ReportError();
+    if (object.operation_id !== undefined && object.operation_id !== null) {
+      message.operationId = object.operation_id;
+    }
+    if (object.status !== undefined && object.status !== null) {
+      message.status = Status.fromAmino(object.status);
+    }
+    return message;
   },
   toAmino(message: ReportResponse_ReportError): ReportResponse_ReportErrorAmino {
     const obj: any = {};

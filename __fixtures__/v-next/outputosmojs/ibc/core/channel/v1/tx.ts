@@ -422,11 +422,17 @@ export const MsgChannelOpenInit = {
     return obj;
   },
   fromAmino(object: MsgChannelOpenInitAmino): MsgChannelOpenInit {
-    return {
-      portId: object.port_id,
-      channel: object?.channel ? Channel.fromAmino(object.channel) : undefined,
-      signer: object.signer
-    };
+    const message = createBaseMsgChannelOpenInit();
+    if (object.port_id !== undefined && object.port_id !== null) {
+      message.portId = object.port_id;
+    }
+    if (object.channel !== undefined && object.channel !== null) {
+      message.channel = Channel.fromAmino(object.channel);
+    }
+    if (object.signer !== undefined && object.signer !== null) {
+      message.signer = object.signer;
+    }
+    return message;
   },
   toAmino(message: MsgChannelOpenInit): MsgChannelOpenInitAmino {
     const obj: any = {};
@@ -501,7 +507,8 @@ export const MsgChannelOpenInitResponse = {
     return obj;
   },
   fromAmino(_: MsgChannelOpenInitResponseAmino): MsgChannelOpenInitResponse {
-    return {};
+    const message = createBaseMsgChannelOpenInitResponse();
+    return message;
   },
   toAmino(_: MsgChannelOpenInitResponse): MsgChannelOpenInitResponseAmino {
     const obj: any = {};
@@ -668,15 +675,29 @@ export const MsgChannelOpenTry = {
     return obj;
   },
   fromAmino(object: MsgChannelOpenTryAmino): MsgChannelOpenTry {
-    return {
-      portId: object.port_id,
-      previousChannelId: object.previous_channel_id,
-      channel: object?.channel ? Channel.fromAmino(object.channel) : undefined,
-      counterpartyVersion: object.counterparty_version,
-      proofInit: object.proof_init,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
-      signer: object.signer
-    };
+    const message = createBaseMsgChannelOpenTry();
+    if (object.port_id !== undefined && object.port_id !== null) {
+      message.portId = object.port_id;
+    }
+    if (object.previous_channel_id !== undefined && object.previous_channel_id !== null) {
+      message.previousChannelId = object.previous_channel_id;
+    }
+    if (object.channel !== undefined && object.channel !== null) {
+      message.channel = Channel.fromAmino(object.channel);
+    }
+    if (object.counterparty_version !== undefined && object.counterparty_version !== null) {
+      message.counterpartyVersion = object.counterparty_version;
+    }
+    if (object.proof_init !== undefined && object.proof_init !== null) {
+      message.proofInit = bytesFromBase64(object.proof_init);
+    }
+    if (object.proof_height !== undefined && object.proof_height !== null) {
+      message.proofHeight = Height.fromAmino(object.proof_height);
+    }
+    if (object.signer !== undefined && object.signer !== null) {
+      message.signer = object.signer;
+    }
+    return message;
   },
   toAmino(message: MsgChannelOpenTry): MsgChannelOpenTryAmino {
     const obj: any = {};
@@ -684,7 +705,7 @@ export const MsgChannelOpenTry = {
     obj.previous_channel_id = message.previousChannelId;
     obj.channel = message.channel ? Channel.toAmino(message.channel) : undefined;
     obj.counterparty_version = message.counterpartyVersion;
-    obj.proof_init = message.proofInit;
+    obj.proof_init = message.proofInit ? base64FromBytes(message.proofInit) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     obj.signer = message.signer;
     return obj;
@@ -755,7 +776,8 @@ export const MsgChannelOpenTryResponse = {
     return obj;
   },
   fromAmino(_: MsgChannelOpenTryResponseAmino): MsgChannelOpenTryResponse {
-    return {};
+    const message = createBaseMsgChannelOpenTryResponse();
+    return message;
   },
   toAmino(_: MsgChannelOpenTryResponse): MsgChannelOpenTryResponseAmino {
     const obj: any = {};
@@ -922,15 +944,29 @@ export const MsgChannelOpenAck = {
     return obj;
   },
   fromAmino(object: MsgChannelOpenAckAmino): MsgChannelOpenAck {
-    return {
-      portId: object.port_id,
-      channelId: object.channel_id,
-      counterpartyChannelId: object.counterparty_channel_id,
-      counterpartyVersion: object.counterparty_version,
-      proofTry: object.proof_try,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
-      signer: object.signer
-    };
+    const message = createBaseMsgChannelOpenAck();
+    if (object.port_id !== undefined && object.port_id !== null) {
+      message.portId = object.port_id;
+    }
+    if (object.channel_id !== undefined && object.channel_id !== null) {
+      message.channelId = object.channel_id;
+    }
+    if (object.counterparty_channel_id !== undefined && object.counterparty_channel_id !== null) {
+      message.counterpartyChannelId = object.counterparty_channel_id;
+    }
+    if (object.counterparty_version !== undefined && object.counterparty_version !== null) {
+      message.counterpartyVersion = object.counterparty_version;
+    }
+    if (object.proof_try !== undefined && object.proof_try !== null) {
+      message.proofTry = bytesFromBase64(object.proof_try);
+    }
+    if (object.proof_height !== undefined && object.proof_height !== null) {
+      message.proofHeight = Height.fromAmino(object.proof_height);
+    }
+    if (object.signer !== undefined && object.signer !== null) {
+      message.signer = object.signer;
+    }
+    return message;
   },
   toAmino(message: MsgChannelOpenAck): MsgChannelOpenAckAmino {
     const obj: any = {};
@@ -938,7 +974,7 @@ export const MsgChannelOpenAck = {
     obj.channel_id = message.channelId;
     obj.counterparty_channel_id = message.counterpartyChannelId;
     obj.counterparty_version = message.counterpartyVersion;
-    obj.proof_try = message.proofTry;
+    obj.proof_try = message.proofTry ? base64FromBytes(message.proofTry) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     obj.signer = message.signer;
     return obj;
@@ -1009,7 +1045,8 @@ export const MsgChannelOpenAckResponse = {
     return obj;
   },
   fromAmino(_: MsgChannelOpenAckResponseAmino): MsgChannelOpenAckResponse {
-    return {};
+    const message = createBaseMsgChannelOpenAckResponse();
+    return message;
   },
   toAmino(_: MsgChannelOpenAckResponse): MsgChannelOpenAckResponseAmino {
     const obj: any = {};
@@ -1150,19 +1187,29 @@ export const MsgChannelOpenConfirm = {
     return obj;
   },
   fromAmino(object: MsgChannelOpenConfirmAmino): MsgChannelOpenConfirm {
-    return {
-      portId: object.port_id,
-      channelId: object.channel_id,
-      proofAck: object.proof_ack,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
-      signer: object.signer
-    };
+    const message = createBaseMsgChannelOpenConfirm();
+    if (object.port_id !== undefined && object.port_id !== null) {
+      message.portId = object.port_id;
+    }
+    if (object.channel_id !== undefined && object.channel_id !== null) {
+      message.channelId = object.channel_id;
+    }
+    if (object.proof_ack !== undefined && object.proof_ack !== null) {
+      message.proofAck = bytesFromBase64(object.proof_ack);
+    }
+    if (object.proof_height !== undefined && object.proof_height !== null) {
+      message.proofHeight = Height.fromAmino(object.proof_height);
+    }
+    if (object.signer !== undefined && object.signer !== null) {
+      message.signer = object.signer;
+    }
+    return message;
   },
   toAmino(message: MsgChannelOpenConfirm): MsgChannelOpenConfirmAmino {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
-    obj.proof_ack = message.proofAck;
+    obj.proof_ack = message.proofAck ? base64FromBytes(message.proofAck) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     obj.signer = message.signer;
     return obj;
@@ -1233,7 +1280,8 @@ export const MsgChannelOpenConfirmResponse = {
     return obj;
   },
   fromAmino(_: MsgChannelOpenConfirmResponseAmino): MsgChannelOpenConfirmResponse {
-    return {};
+    const message = createBaseMsgChannelOpenConfirmResponse();
+    return message;
   },
   toAmino(_: MsgChannelOpenConfirmResponse): MsgChannelOpenConfirmResponseAmino {
     const obj: any = {};
@@ -1348,11 +1396,17 @@ export const MsgChannelCloseInit = {
     return obj;
   },
   fromAmino(object: MsgChannelCloseInitAmino): MsgChannelCloseInit {
-    return {
-      portId: object.port_id,
-      channelId: object.channel_id,
-      signer: object.signer
-    };
+    const message = createBaseMsgChannelCloseInit();
+    if (object.port_id !== undefined && object.port_id !== null) {
+      message.portId = object.port_id;
+    }
+    if (object.channel_id !== undefined && object.channel_id !== null) {
+      message.channelId = object.channel_id;
+    }
+    if (object.signer !== undefined && object.signer !== null) {
+      message.signer = object.signer;
+    }
+    return message;
   },
   toAmino(message: MsgChannelCloseInit): MsgChannelCloseInitAmino {
     const obj: any = {};
@@ -1427,7 +1481,8 @@ export const MsgChannelCloseInitResponse = {
     return obj;
   },
   fromAmino(_: MsgChannelCloseInitResponseAmino): MsgChannelCloseInitResponse {
-    return {};
+    const message = createBaseMsgChannelCloseInitResponse();
+    return message;
   },
   toAmino(_: MsgChannelCloseInitResponse): MsgChannelCloseInitResponseAmino {
     const obj: any = {};
@@ -1568,19 +1623,29 @@ export const MsgChannelCloseConfirm = {
     return obj;
   },
   fromAmino(object: MsgChannelCloseConfirmAmino): MsgChannelCloseConfirm {
-    return {
-      portId: object.port_id,
-      channelId: object.channel_id,
-      proofInit: object.proof_init,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
-      signer: object.signer
-    };
+    const message = createBaseMsgChannelCloseConfirm();
+    if (object.port_id !== undefined && object.port_id !== null) {
+      message.portId = object.port_id;
+    }
+    if (object.channel_id !== undefined && object.channel_id !== null) {
+      message.channelId = object.channel_id;
+    }
+    if (object.proof_init !== undefined && object.proof_init !== null) {
+      message.proofInit = bytesFromBase64(object.proof_init);
+    }
+    if (object.proof_height !== undefined && object.proof_height !== null) {
+      message.proofHeight = Height.fromAmino(object.proof_height);
+    }
+    if (object.signer !== undefined && object.signer !== null) {
+      message.signer = object.signer;
+    }
+    return message;
   },
   toAmino(message: MsgChannelCloseConfirm): MsgChannelCloseConfirmAmino {
     const obj: any = {};
     obj.port_id = message.portId;
     obj.channel_id = message.channelId;
-    obj.proof_init = message.proofInit;
+    obj.proof_init = message.proofInit ? base64FromBytes(message.proofInit) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     obj.signer = message.signer;
     return obj;
@@ -1651,7 +1716,8 @@ export const MsgChannelCloseConfirmResponse = {
     return obj;
   },
   fromAmino(_: MsgChannelCloseConfirmResponseAmino): MsgChannelCloseConfirmResponse {
-    return {};
+    const message = createBaseMsgChannelCloseConfirmResponse();
+    return message;
   },
   toAmino(_: MsgChannelCloseConfirmResponse): MsgChannelCloseConfirmResponseAmino {
     const obj: any = {};
@@ -1779,17 +1845,25 @@ export const MsgRecvPacket = {
     return obj;
   },
   fromAmino(object: MsgRecvPacketAmino): MsgRecvPacket {
-    return {
-      packet: object?.packet ? Packet.fromAmino(object.packet) : undefined,
-      proofCommitment: object.proof_commitment,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
-      signer: object.signer
-    };
+    const message = createBaseMsgRecvPacket();
+    if (object.packet !== undefined && object.packet !== null) {
+      message.packet = Packet.fromAmino(object.packet);
+    }
+    if (object.proof_commitment !== undefined && object.proof_commitment !== null) {
+      message.proofCommitment = bytesFromBase64(object.proof_commitment);
+    }
+    if (object.proof_height !== undefined && object.proof_height !== null) {
+      message.proofHeight = Height.fromAmino(object.proof_height);
+    }
+    if (object.signer !== undefined && object.signer !== null) {
+      message.signer = object.signer;
+    }
+    return message;
   },
   toAmino(message: MsgRecvPacket): MsgRecvPacketAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet) : undefined;
-    obj.proof_commitment = message.proofCommitment;
+    obj.proof_commitment = message.proofCommitment ? base64FromBytes(message.proofCommitment) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     obj.signer = message.signer;
     return obj;
@@ -1860,7 +1934,8 @@ export const MsgRecvPacketResponse = {
     return obj;
   },
   fromAmino(_: MsgRecvPacketResponseAmino): MsgRecvPacketResponse {
-    return {};
+    const message = createBaseMsgRecvPacketResponse();
+    return message;
   },
   toAmino(_: MsgRecvPacketResponse): MsgRecvPacketResponseAmino {
     const obj: any = {};
@@ -2001,18 +2076,28 @@ export const MsgTimeout = {
     return obj;
   },
   fromAmino(object: MsgTimeoutAmino): MsgTimeout {
-    return {
-      packet: object?.packet ? Packet.fromAmino(object.packet) : undefined,
-      proofUnreceived: object.proof_unreceived,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
-      nextSequenceRecv: BigInt(object.next_sequence_recv),
-      signer: object.signer
-    };
+    const message = createBaseMsgTimeout();
+    if (object.packet !== undefined && object.packet !== null) {
+      message.packet = Packet.fromAmino(object.packet);
+    }
+    if (object.proof_unreceived !== undefined && object.proof_unreceived !== null) {
+      message.proofUnreceived = bytesFromBase64(object.proof_unreceived);
+    }
+    if (object.proof_height !== undefined && object.proof_height !== null) {
+      message.proofHeight = Height.fromAmino(object.proof_height);
+    }
+    if (object.next_sequence_recv !== undefined && object.next_sequence_recv !== null) {
+      message.nextSequenceRecv = BigInt(object.next_sequence_recv);
+    }
+    if (object.signer !== undefined && object.signer !== null) {
+      message.signer = object.signer;
+    }
+    return message;
   },
   toAmino(message: MsgTimeout): MsgTimeoutAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet) : undefined;
-    obj.proof_unreceived = message.proofUnreceived;
+    obj.proof_unreceived = message.proofUnreceived ? base64FromBytes(message.proofUnreceived) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     obj.next_sequence_recv = message.nextSequenceRecv ? message.nextSequenceRecv.toString() : undefined;
     obj.signer = message.signer;
@@ -2084,7 +2169,8 @@ export const MsgTimeoutResponse = {
     return obj;
   },
   fromAmino(_: MsgTimeoutResponseAmino): MsgTimeoutResponse {
-    return {};
+    const message = createBaseMsgTimeoutResponse();
+    return message;
   },
   toAmino(_: MsgTimeoutResponse): MsgTimeoutResponseAmino {
     const obj: any = {};
@@ -2238,20 +2324,32 @@ export const MsgTimeoutOnClose = {
     return obj;
   },
   fromAmino(object: MsgTimeoutOnCloseAmino): MsgTimeoutOnClose {
-    return {
-      packet: object?.packet ? Packet.fromAmino(object.packet) : undefined,
-      proofUnreceived: object.proof_unreceived,
-      proofClose: object.proof_close,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
-      nextSequenceRecv: BigInt(object.next_sequence_recv),
-      signer: object.signer
-    };
+    const message = createBaseMsgTimeoutOnClose();
+    if (object.packet !== undefined && object.packet !== null) {
+      message.packet = Packet.fromAmino(object.packet);
+    }
+    if (object.proof_unreceived !== undefined && object.proof_unreceived !== null) {
+      message.proofUnreceived = bytesFromBase64(object.proof_unreceived);
+    }
+    if (object.proof_close !== undefined && object.proof_close !== null) {
+      message.proofClose = bytesFromBase64(object.proof_close);
+    }
+    if (object.proof_height !== undefined && object.proof_height !== null) {
+      message.proofHeight = Height.fromAmino(object.proof_height);
+    }
+    if (object.next_sequence_recv !== undefined && object.next_sequence_recv !== null) {
+      message.nextSequenceRecv = BigInt(object.next_sequence_recv);
+    }
+    if (object.signer !== undefined && object.signer !== null) {
+      message.signer = object.signer;
+    }
+    return message;
   },
   toAmino(message: MsgTimeoutOnClose): MsgTimeoutOnCloseAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet) : undefined;
-    obj.proof_unreceived = message.proofUnreceived;
-    obj.proof_close = message.proofClose;
+    obj.proof_unreceived = message.proofUnreceived ? base64FromBytes(message.proofUnreceived) : undefined;
+    obj.proof_close = message.proofClose ? base64FromBytes(message.proofClose) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     obj.next_sequence_recv = message.nextSequenceRecv ? message.nextSequenceRecv.toString() : undefined;
     obj.signer = message.signer;
@@ -2323,7 +2421,8 @@ export const MsgTimeoutOnCloseResponse = {
     return obj;
   },
   fromAmino(_: MsgTimeoutOnCloseResponseAmino): MsgTimeoutOnCloseResponse {
-    return {};
+    const message = createBaseMsgTimeoutOnCloseResponse();
+    return message;
   },
   toAmino(_: MsgTimeoutOnCloseResponse): MsgTimeoutOnCloseResponseAmino {
     const obj: any = {};
@@ -2464,19 +2563,29 @@ export const MsgAcknowledgement = {
     return obj;
   },
   fromAmino(object: MsgAcknowledgementAmino): MsgAcknowledgement {
-    return {
-      packet: object?.packet ? Packet.fromAmino(object.packet) : undefined,
-      acknowledgement: object.acknowledgement,
-      proofAcked: object.proof_acked,
-      proofHeight: object?.proof_height ? Height.fromAmino(object.proof_height) : undefined,
-      signer: object.signer
-    };
+    const message = createBaseMsgAcknowledgement();
+    if (object.packet !== undefined && object.packet !== null) {
+      message.packet = Packet.fromAmino(object.packet);
+    }
+    if (object.acknowledgement !== undefined && object.acknowledgement !== null) {
+      message.acknowledgement = bytesFromBase64(object.acknowledgement);
+    }
+    if (object.proof_acked !== undefined && object.proof_acked !== null) {
+      message.proofAcked = bytesFromBase64(object.proof_acked);
+    }
+    if (object.proof_height !== undefined && object.proof_height !== null) {
+      message.proofHeight = Height.fromAmino(object.proof_height);
+    }
+    if (object.signer !== undefined && object.signer !== null) {
+      message.signer = object.signer;
+    }
+    return message;
   },
   toAmino(message: MsgAcknowledgement): MsgAcknowledgementAmino {
     const obj: any = {};
     obj.packet = message.packet ? Packet.toAmino(message.packet) : undefined;
-    obj.acknowledgement = message.acknowledgement;
-    obj.proof_acked = message.proofAcked;
+    obj.acknowledgement = message.acknowledgement ? base64FromBytes(message.acknowledgement) : undefined;
+    obj.proof_acked = message.proofAcked ? base64FromBytes(message.proofAcked) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     obj.signer = message.signer;
     return obj;
@@ -2547,7 +2656,8 @@ export const MsgAcknowledgementResponse = {
     return obj;
   },
   fromAmino(_: MsgAcknowledgementResponseAmino): MsgAcknowledgementResponse {
-    return {};
+    const message = createBaseMsgAcknowledgementResponse();
+    return message;
   },
   toAmino(_: MsgAcknowledgementResponse): MsgAcknowledgementResponseAmino {
     const obj: any = {};

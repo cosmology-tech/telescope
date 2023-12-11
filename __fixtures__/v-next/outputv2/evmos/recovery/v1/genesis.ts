@@ -38,7 +38,7 @@ export interface ParamsProtoMsg {
 /** Params holds parameters for the recovery module */
 export interface ParamsAmino {
   /** enable recovery IBC middleware */
-  enable_recovery: boolean;
+  enable_recovery?: boolean;
   /** duration added to timeout timestamp for balances recovered via IBC packets */
   packet_timeout_duration?: DurationAmino;
 }
@@ -109,9 +109,11 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -204,10 +206,14 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      enableRecovery: object.enable_recovery,
-      packetTimeoutDuration: object?.packet_timeout_duration ? Duration.fromAmino(object.packet_timeout_duration) : undefined
-    };
+    const message = createBaseParams();
+    if (object.enable_recovery !== undefined && object.enable_recovery !== null) {
+      message.enableRecovery = object.enable_recovery;
+    }
+    if (object.packet_timeout_duration !== undefined && object.packet_timeout_duration !== null) {
+      message.packetTimeoutDuration = Duration.fromAmino(object.packet_timeout_duration);
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

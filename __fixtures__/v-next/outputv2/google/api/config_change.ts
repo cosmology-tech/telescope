@@ -125,24 +125,24 @@ export interface ConfigChangeAmino {
    * - quota.metric_rules[selector=="google"].metric_costs[key=="reads"].value
    * - logging.producer_destinations[0]
    */
-  element: string;
+  element?: string;
   /**
    * Value of the changed object in the old Service configuration,
    * in JSON format. This field will not be populated if ChangeType == ADDED.
    */
-  old_value: string;
+  old_value?: string;
   /**
    * Value of the changed object in the new Service configuration,
    * in JSON format. This field will not be populated if ChangeType == REMOVED.
    */
-  new_value: string;
+  new_value?: string;
   /** The type for this change, either ADDED, REMOVED, or MODIFIED. */
-  change_type: ChangeType;
+  change_type?: ChangeType;
   /**
    * Collection of advice provided for this change, useful for determining the
    * possible impact of this change.
    */
-  advices: AdviceAmino[];
+  advices?: AdviceAmino[];
 }
 export interface ConfigChangeAminoMsg {
   type: "/google.api.ConfigChange";
@@ -187,7 +187,7 @@ export interface AdviceAmino {
    * Useful description for why this advice was applied and what actions should
    * be taken to mitigate any implied risks.
    */
-  description: string;
+  description?: string;
 }
 export interface AdviceAminoMsg {
   type: "/google.api.Advice";
@@ -312,20 +312,28 @@ export const ConfigChange = {
     return obj;
   },
   fromAmino(object: ConfigChangeAmino): ConfigChange {
-    return {
-      element: object.element,
-      oldValue: object.old_value,
-      newValue: object.new_value,
-      changeType: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : -1,
-      advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromAmino(e)) : []
-    };
+    const message = createBaseConfigChange();
+    if (object.element !== undefined && object.element !== null) {
+      message.element = object.element;
+    }
+    if (object.old_value !== undefined && object.old_value !== null) {
+      message.oldValue = object.old_value;
+    }
+    if (object.new_value !== undefined && object.new_value !== null) {
+      message.newValue = object.new_value;
+    }
+    if (object.change_type !== undefined && object.change_type !== null) {
+      message.changeType = changeTypeFromJSON(object.change_type);
+    }
+    message.advices = object.advices?.map(e => Advice.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ConfigChange): ConfigChangeAmino {
     const obj: any = {};
     obj.element = message.element;
     obj.old_value = message.oldValue;
     obj.new_value = message.newValue;
-    obj.change_type = message.changeType;
+    obj.change_type = changeTypeToJSON(message.changeType);
     if (message.advices) {
       obj.advices = message.advices.map(e => e ? Advice.toAmino(e) : undefined);
     } else {
@@ -405,9 +413,11 @@ export const Advice = {
     return obj;
   },
   fromAmino(object: AdviceAmino): Advice {
-    return {
-      description: object.description
-    };
+    const message = createBaseAdvice();
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: Advice): AdviceAmino {
     const obj: any = {};

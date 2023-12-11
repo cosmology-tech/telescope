@@ -14,7 +14,7 @@ export interface SourceInfoProtoMsg {
 /** Source information used to create a Service Config */
 export interface SourceInfoAmino {
   /** All files used during config generation. */
-  source_files: AnyAmino[];
+  source_files?: AnyAmino[];
 }
 /** Source information used to create a Service Config */
 export interface SourceInfoSDKType {
@@ -84,9 +84,9 @@ export const SourceInfo = {
     return obj;
   },
   fromAmino(object: SourceInfoAmino): SourceInfo {
-    return {
-      sourceFiles: Array.isArray(object?.source_files) ? object.source_files.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseSourceInfo();
+    message.sourceFiles = object.source_files?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: SourceInfo, useInterfaces: boolean = true): SourceInfoAmino {
     const obj: any = {};

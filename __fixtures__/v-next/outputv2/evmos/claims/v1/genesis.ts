@@ -20,7 +20,7 @@ export interface GenesisStateAmino {
   /** params defines all the parameters of the module. */
   params?: ParamsAmino;
   /** list of claim records with the corresponding airdrop recipient */
-  claims_records: ClaimsRecordAddressAmino[];
+  claims_records?: ClaimsRecordAddressAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "/evmos.claims.v1.GenesisState";
@@ -58,7 +58,7 @@ export interface ParamsProtoMsg {
 /** Params defines the claims module's parameters. */
 export interface ParamsAmino {
   /** enable claiming process */
-  enable_claims: boolean;
+  enable_claims?: boolean;
   /** timestamp of the airdrop start */
   airdrop_start_time?: string;
   /** duration until decay of claimable tokens begin */
@@ -66,14 +66,14 @@ export interface ParamsAmino {
   /** duration of the token claim decay period */
   duration_of_decay?: DurationAmino;
   /** denom of claimable coin */
-  claims_denom: string;
+  claims_denom?: string;
   /**
    * list of authorized channel identifiers that can perform address
    * attestations via IBC.
    */
-  authorized_channels: string[];
+  authorized_channels?: string[];
   /** list of channel identifiers from EVM compatible chains */
-  evm_channels: string[];
+  evm_channels?: string[];
 }
 export interface ParamsAminoMsg {
   type: "/evmos.claims.v1.Params";
@@ -167,10 +167,12 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      claimsRecords: Array.isArray(object?.claims_records) ? object.claims_records.map((e: any) => ClaimsRecordAddress.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.claimsRecords = object.claims_records?.map(e => ClaimsRecordAddress.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -346,15 +348,25 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      enableClaims: object.enable_claims,
-      airdropStartTime: object?.airdrop_start_time ? fromTimestamp(Timestamp.fromAmino(object.airdrop_start_time)) : undefined,
-      durationUntilDecay: object?.duration_until_decay ? Duration.fromAmino(object.duration_until_decay) : undefined,
-      durationOfDecay: object?.duration_of_decay ? Duration.fromAmino(object.duration_of_decay) : undefined,
-      claimsDenom: object.claims_denom,
-      authorizedChannels: Array.isArray(object?.authorized_channels) ? object.authorized_channels.map((e: any) => e) : [],
-      evmChannels: Array.isArray(object?.evm_channels) ? object.evm_channels.map((e: any) => e) : []
-    };
+    const message = createBaseParams();
+    if (object.enable_claims !== undefined && object.enable_claims !== null) {
+      message.enableClaims = object.enable_claims;
+    }
+    if (object.airdrop_start_time !== undefined && object.airdrop_start_time !== null) {
+      message.airdropStartTime = fromTimestamp(Timestamp.fromAmino(object.airdrop_start_time));
+    }
+    if (object.duration_until_decay !== undefined && object.duration_until_decay !== null) {
+      message.durationUntilDecay = Duration.fromAmino(object.duration_until_decay);
+    }
+    if (object.duration_of_decay !== undefined && object.duration_of_decay !== null) {
+      message.durationOfDecay = Duration.fromAmino(object.duration_of_decay);
+    }
+    if (object.claims_denom !== undefined && object.claims_denom !== null) {
+      message.claimsDenom = object.claims_denom;
+    }
+    message.authorizedChannels = object.authorized_channels?.map(e => e) || [];
+    message.evmChannels = object.evm_channels?.map(e => e) || [];
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

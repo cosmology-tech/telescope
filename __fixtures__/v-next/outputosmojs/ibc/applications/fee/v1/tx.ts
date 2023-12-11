@@ -230,12 +230,20 @@ export const MsgRegisterPayee = {
     return obj;
   },
   fromAmino(object: MsgRegisterPayeeAmino): MsgRegisterPayee {
-    return {
-      portId: object.port_id,
-      channelId: object.channel_id,
-      relayer: object.relayer,
-      payee: object.payee
-    };
+    const message = createBaseMsgRegisterPayee();
+    if (object.port_id !== undefined && object.port_id !== null) {
+      message.portId = object.port_id;
+    }
+    if (object.channel_id !== undefined && object.channel_id !== null) {
+      message.channelId = object.channel_id;
+    }
+    if (object.relayer !== undefined && object.relayer !== null) {
+      message.relayer = object.relayer;
+    }
+    if (object.payee !== undefined && object.payee !== null) {
+      message.payee = object.payee;
+    }
+    return message;
   },
   toAmino(message: MsgRegisterPayee): MsgRegisterPayeeAmino {
     const obj: any = {};
@@ -311,7 +319,8 @@ export const MsgRegisterPayeeResponse = {
     return obj;
   },
   fromAmino(_: MsgRegisterPayeeResponseAmino): MsgRegisterPayeeResponse {
-    return {};
+    const message = createBaseMsgRegisterPayeeResponse();
+    return message;
   },
   toAmino(_: MsgRegisterPayeeResponse): MsgRegisterPayeeResponseAmino {
     const obj: any = {};
@@ -439,12 +448,20 @@ export const MsgRegisterCounterpartyPayee = {
     return obj;
   },
   fromAmino(object: MsgRegisterCounterpartyPayeeAmino): MsgRegisterCounterpartyPayee {
-    return {
-      portId: object.port_id,
-      channelId: object.channel_id,
-      relayer: object.relayer,
-      counterpartyPayee: object.counterparty_payee
-    };
+    const message = createBaseMsgRegisterCounterpartyPayee();
+    if (object.port_id !== undefined && object.port_id !== null) {
+      message.portId = object.port_id;
+    }
+    if (object.channel_id !== undefined && object.channel_id !== null) {
+      message.channelId = object.channel_id;
+    }
+    if (object.relayer !== undefined && object.relayer !== null) {
+      message.relayer = object.relayer;
+    }
+    if (object.counterparty_payee !== undefined && object.counterparty_payee !== null) {
+      message.counterpartyPayee = object.counterparty_payee;
+    }
+    return message;
   },
   toAmino(message: MsgRegisterCounterpartyPayee): MsgRegisterCounterpartyPayeeAmino {
     const obj: any = {};
@@ -520,7 +537,8 @@ export const MsgRegisterCounterpartyPayeeResponse = {
     return obj;
   },
   fromAmino(_: MsgRegisterCounterpartyPayeeResponseAmino): MsgRegisterCounterpartyPayeeResponse {
-    return {};
+    const message = createBaseMsgRegisterCounterpartyPayeeResponse();
+    return message;
   },
   toAmino(_: MsgRegisterCounterpartyPayeeResponse): MsgRegisterCounterpartyPayeeResponseAmino {
     const obj: any = {};
@@ -669,13 +687,21 @@ export const MsgPayPacketFee = {
     return obj;
   },
   fromAmino(object: MsgPayPacketFeeAmino): MsgPayPacketFee {
-    return {
-      fee: object?.fee ? Fee.fromAmino(object.fee) : undefined,
-      sourcePortId: object.source_port_id,
-      sourceChannelId: object.source_channel_id,
-      signer: object.signer,
-      relayers: Array.isArray(object?.relayers) ? object.relayers.map((e: any) => e) : []
-    };
+    const message = createBaseMsgPayPacketFee();
+    if (object.fee !== undefined && object.fee !== null) {
+      message.fee = Fee.fromAmino(object.fee);
+    }
+    if (object.source_port_id !== undefined && object.source_port_id !== null) {
+      message.sourcePortId = object.source_port_id;
+    }
+    if (object.source_channel_id !== undefined && object.source_channel_id !== null) {
+      message.sourceChannelId = object.source_channel_id;
+    }
+    if (object.signer !== undefined && object.signer !== null) {
+      message.signer = object.signer;
+    }
+    message.relayers = object.relayers?.map(e => e) || [];
+    return message;
   },
   toAmino(message: MsgPayPacketFee): MsgPayPacketFeeAmino {
     const obj: any = {};
@@ -756,7 +782,8 @@ export const MsgPayPacketFeeResponse = {
     return obj;
   },
   fromAmino(_: MsgPayPacketFeeResponseAmino): MsgPayPacketFeeResponse {
-    return {};
+    const message = createBaseMsgPayPacketFeeResponse();
+    return message;
   },
   toAmino(_: MsgPayPacketFeeResponse): MsgPayPacketFeeResponseAmino {
     const obj: any = {};
@@ -845,9 +872,11 @@ export const MsgPayPacketFeeAsync = {
     return obj;
   },
   fromAmino(object: MsgPayPacketFeeAsyncAmino): MsgPayPacketFeeAsync {
-    return {
-      packetFee: object?.packet_fee ? PacketFee.fromAmino(object.packet_fee) : undefined
-    };
+    const message = createBaseMsgPayPacketFeeAsync();
+    if (object.packet_fee !== undefined && object.packet_fee !== null) {
+      message.packetFee = PacketFee.fromAmino(object.packet_fee);
+    }
+    return message;
   },
   toAmino(message: MsgPayPacketFeeAsync): MsgPayPacketFeeAsyncAmino {
     const obj: any = {};
@@ -920,7 +949,8 @@ export const MsgPayPacketFeeAsyncResponse = {
     return obj;
   },
   fromAmino(_: MsgPayPacketFeeAsyncResponseAmino): MsgPayPacketFeeAsyncResponse {
-    return {};
+    const message = createBaseMsgPayPacketFeeAsyncResponse();
+    return message;
   },
   toAmino(_: MsgPayPacketFeeAsyncResponse): MsgPayPacketFeeAsyncResponseAmino {
     const obj: any = {};

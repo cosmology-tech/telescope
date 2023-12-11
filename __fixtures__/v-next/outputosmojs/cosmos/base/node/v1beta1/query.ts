@@ -65,7 +65,8 @@ export const ConfigRequest = {
     return obj;
   },
   fromAmino(_: ConfigRequestAmino): ConfigRequest {
-    return {};
+    const message = createBaseConfigRequest();
+    return message;
   },
   toAmino(_: ConfigRequest): ConfigRequestAmino {
     const obj: any = {};
@@ -154,9 +155,11 @@ export const ConfigResponse = {
     return obj;
   },
   fromAmino(object: ConfigResponseAmino): ConfigResponse {
-    return {
-      minimumGasPrice: object.minimum_gas_price
-    };
+    const message = createBaseConfigResponse();
+    if (object.minimum_gas_price !== undefined && object.minimum_gas_price !== null) {
+      message.minimumGasPrice = object.minimum_gas_price;
+    }
+    return message;
   },
   toAmino(message: ConfigResponse): ConfigResponseAmino {
     const obj: any = {};

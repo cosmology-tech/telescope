@@ -34,18 +34,18 @@ export interface GenesisStateAmino {
    * superfluid_assets defines the registered superfluid assets that have been
    * registered via governance.
    */
-  superfluid_assets: SuperfluidAssetAmino[];
+  superfluid_assets?: SuperfluidAssetAmino[];
   /**
    * osmo_equivalent_multipliers is the records of osmo equivalent amount of
    * each superfluid registered pool, updated every epoch.
    */
-  osmo_equivalent_multipliers: OsmoEquivalentMultiplierRecordAmino[];
+  osmo_equivalent_multipliers?: OsmoEquivalentMultiplierRecordAmino[];
   /**
    * intermediary_accounts is a secondary account for superfluid staking that
    * plays an intermediary role between validators and the delegators.
    */
-  intermediary_accounts: SuperfluidIntermediaryAccountAmino[];
-  intemediary_account_connections: LockIdIntermediaryAccountConnectionAmino[];
+  intermediary_accounts?: SuperfluidIntermediaryAccountAmino[];
+  intemediary_account_connections?: LockIdIntermediaryAccountConnectionAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "osmosis/genesis-state";
@@ -198,13 +198,15 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      superfluidAssets: Array.isArray(object?.superfluid_assets) ? object.superfluid_assets.map((e: any) => SuperfluidAsset.fromAmino(e)) : [],
-      osmoEquivalentMultipliers: Array.isArray(object?.osmo_equivalent_multipliers) ? object.osmo_equivalent_multipliers.map((e: any) => OsmoEquivalentMultiplierRecord.fromAmino(e)) : [],
-      intermediaryAccounts: Array.isArray(object?.intermediary_accounts) ? object.intermediary_accounts.map((e: any) => SuperfluidIntermediaryAccount.fromAmino(e)) : [],
-      intemediaryAccountConnections: Array.isArray(object?.intemediary_account_connections) ? object.intemediary_account_connections.map((e: any) => LockIdIntermediaryAccountConnection.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.superfluidAssets = object.superfluid_assets?.map(e => SuperfluidAsset.fromAmino(e)) || [];
+    message.osmoEquivalentMultipliers = object.osmo_equivalent_multipliers?.map(e => OsmoEquivalentMultiplierRecord.fromAmino(e)) || [];
+    message.intermediaryAccounts = object.intermediary_accounts?.map(e => SuperfluidIntermediaryAccount.fromAmino(e)) || [];
+    message.intemediaryAccountConnections = object.intemediary_account_connections?.map(e => LockIdIntermediaryAccountConnection.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

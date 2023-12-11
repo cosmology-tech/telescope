@@ -100,11 +100,17 @@ export const GenesisState = {
     return message;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      clientGenesis: object?.client_genesis ? GenesisState1.fromAmino(object.client_genesis) : undefined,
-      connectionGenesis: object?.connection_genesis ? GenesisState2.fromAmino(object.connection_genesis) : undefined,
-      channelGenesis: object?.channel_genesis ? GenesisState3.fromAmino(object.channel_genesis) : undefined
-    };
+    const message = createBaseGenesisState();
+    if (object.client_genesis !== undefined && object.client_genesis !== null) {
+      message.clientGenesis = GenesisState1.fromAmino(object.client_genesis);
+    }
+    if (object.connection_genesis !== undefined && object.connection_genesis !== null) {
+      message.connectionGenesis = GenesisState2.fromAmino(object.connection_genesis);
+    }
+    if (object.channel_genesis !== undefined && object.channel_genesis !== null) {
+      message.channelGenesis = GenesisState3.fromAmino(object.channel_genesis);
+    }
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

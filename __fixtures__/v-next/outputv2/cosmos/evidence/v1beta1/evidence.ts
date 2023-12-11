@@ -21,10 +21,10 @@ export interface EquivocationProtoMsg {
  * signing misbehavior.
  */
 export interface EquivocationAmino {
-  height: string;
+  height?: string;
   time?: string;
-  power: string;
-  consensus_address: string;
+  power?: string;
+  consensus_address?: string;
 }
 export interface EquivocationAminoMsg {
   type: "cosmos-sdk/Equivocation";
@@ -137,12 +137,20 @@ export const Equivocation = {
     return obj;
   },
   fromAmino(object: EquivocationAmino): Equivocation {
-    return {
-      height: BigInt(object.height),
-      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
-      power: BigInt(object.power),
-      consensusAddress: object.consensus_address
-    };
+    const message = createBaseEquivocation();
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height);
+    }
+    if (object.time !== undefined && object.time !== null) {
+      message.time = fromTimestamp(Timestamp.fromAmino(object.time));
+    }
+    if (object.power !== undefined && object.power !== null) {
+      message.power = BigInt(object.power);
+    }
+    if (object.consensus_address !== undefined && object.consensus_address !== null) {
+      message.consensusAddress = object.consensus_address;
+    }
+    return message;
   },
   toAmino(message: Equivocation): EquivocationAmino {
     const obj: any = {};

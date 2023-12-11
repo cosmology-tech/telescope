@@ -19,13 +19,13 @@ export interface MsgSendProtoMsg {
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSendAmino {
   /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
-  class_id: string;
+  class_id?: string;
   /** id defines the unique identification of nft */
-  id: string;
+  id?: string;
   /** sender is the address of the owner of nft */
-  sender: string;
+  sender?: string;
   /** receiver is the receiver address of nft */
-  receiver: string;
+  receiver?: string;
 }
 export interface MsgSendAminoMsg {
   type: "cosmos-sdk/MsgNFTSend";
@@ -112,12 +112,20 @@ export const MsgSend = {
     return message;
   },
   fromAmino(object: MsgSendAmino): MsgSend {
-    return {
-      classId: object.class_id,
-      id: object.id,
-      sender: object.sender,
-      receiver: object.receiver
-    };
+    const message = createBaseMsgSend();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.receiver !== undefined && object.receiver !== null) {
+      message.receiver = object.receiver;
+    }
+    return message;
   },
   toAmino(message: MsgSend): MsgSendAmino {
     const obj: any = {};
@@ -176,7 +184,8 @@ export const MsgSendResponse = {
     return message;
   },
   fromAmino(_: MsgSendResponseAmino): MsgSendResponse {
-    return {};
+    const message = createBaseMsgSendResponse();
+    return message;
   },
   toAmino(_: MsgSendResponse): MsgSendResponseAmino {
     const obj: any = {};

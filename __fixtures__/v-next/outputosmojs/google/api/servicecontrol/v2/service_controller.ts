@@ -285,13 +285,21 @@ export const CheckRequest = {
     return obj;
   },
   fromAmino(object: CheckRequestAmino): CheckRequest {
-    return {
-      serviceName: object.service_name,
-      serviceConfigId: object.service_config_id,
-      attributes: object?.attributes ? AttributeContext.fromAmino(object.attributes) : undefined,
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceInfo.fromAmino(e)) : [],
-      flags: object.flags
-    };
+    const message = createBaseCheckRequest();
+    if (object.service_name !== undefined && object.service_name !== null) {
+      message.serviceName = object.service_name;
+    }
+    if (object.service_config_id !== undefined && object.service_config_id !== null) {
+      message.serviceConfigId = object.service_config_id;
+    }
+    if (object.attributes !== undefined && object.attributes !== null) {
+      message.attributes = AttributeContext.fromAmino(object.attributes);
+    }
+    message.resources = object.resources?.map(e => ResourceInfo.fromAmino(e)) || [];
+    if (object.flags !== undefined && object.flags !== null) {
+      message.flags = object.flags;
+    }
+    return message;
   },
   toAmino(message: CheckRequest): CheckRequestAmino {
     const obj: any = {};
@@ -435,13 +443,23 @@ export const ResourceInfo = {
     return obj;
   },
   fromAmino(object: ResourceInfoAmino): ResourceInfo {
-    return {
-      name: object.name,
-      type: object.type,
-      permission: object.permission,
-      container: object.container,
-      location: object.location
-    };
+    const message = createBaseResourceInfo();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    if (object.permission !== undefined && object.permission !== null) {
+      message.permission = object.permission;
+    }
+    if (object.container !== undefined && object.container !== null) {
+      message.container = object.container;
+    }
+    if (object.location !== undefined && object.location !== null) {
+      message.location = object.location;
+    }
+    return message;
   },
   toAmino(message: ResourceInfo): ResourceInfoAmino {
     const obj: any = {};
@@ -541,10 +559,14 @@ export const CheckResponse_HeadersEntry = {
     return obj;
   },
   fromAmino(object: CheckResponse_HeadersEntryAmino): CheckResponse_HeadersEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseCheckResponse_HeadersEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: CheckResponse_HeadersEntry): CheckResponse_HeadersEntryAmino {
     const obj: any = {};
@@ -674,15 +696,19 @@ export const CheckResponse = {
     return obj;
   },
   fromAmino(object: CheckResponseAmino): CheckResponse {
-    return {
-      status: object?.status ? Status.fromAmino(object.status) : undefined,
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseCheckResponse();
+    if (object.status !== undefined && object.status !== null) {
+      message.status = Status.fromAmino(object.status);
+    }
+    message.headers = Object.entries(object.headers ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
+      }
+      return acc;
+    }, {});
+    return message;
   },
   toAmino(message: CheckResponse): CheckResponseAmino {
     const obj: any = {};
@@ -806,11 +832,15 @@ export const ReportRequest = {
     return obj;
   },
   fromAmino(object: ReportRequestAmino): ReportRequest {
-    return {
-      serviceName: object.service_name,
-      serviceConfigId: object.service_config_id,
-      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => AttributeContext.fromAmino(e)) : []
-    };
+    const message = createBaseReportRequest();
+    if (object.service_name !== undefined && object.service_name !== null) {
+      message.serviceName = object.service_name;
+    }
+    if (object.service_config_id !== undefined && object.service_config_id !== null) {
+      message.serviceConfigId = object.service_config_id;
+    }
+    message.operations = object.operations?.map(e => AttributeContext.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ReportRequest): ReportRequestAmino {
     const obj: any = {};
@@ -883,7 +913,8 @@ export const ReportResponse = {
     return obj;
   },
   fromAmino(_: ReportResponseAmino): ReportResponse {
-    return {};
+    const message = createBaseReportResponse();
+    return message;
   },
   toAmino(_: ReportResponse): ReportResponseAmino {
     const obj: any = {};

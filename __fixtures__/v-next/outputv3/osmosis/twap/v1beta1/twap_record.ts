@@ -54,13 +54,13 @@ export interface TwapRecordProtoMsg {
  * now.
  */
 export interface TwapRecordAmino {
-  pool_id: string;
+  pool_id?: string;
   /** Lexicographically smaller denom of the pair */
-  asset0_denom: string;
+  asset0_denom?: string;
   /** Lexicographically larger denom of the pair */
-  asset1_denom: string;
+  asset1_denom?: string;
   /** height this record corresponds to, for debugging purposes */
-  height: string;
+  height?: string;
   /**
    * This field should only exist until we have a global registry in the state
    * machine, mapping prior block heights within {TIME RANGE} to times.
@@ -70,10 +70,10 @@ export interface TwapRecordAmino {
    * We store the last spot prices in the struct, so that we can interpolate
    * accumulator values for times between when accumulator records are stored.
    */
-  p0_last_spot_price: string;
-  p1_last_spot_price: string;
-  p0_arithmetic_twap_accumulator: string;
-  p1_arithmetic_twap_accumulator: string;
+  p0_last_spot_price?: string;
+  p1_last_spot_price?: string;
+  p0_arithmetic_twap_accumulator?: string;
+  p1_arithmetic_twap_accumulator?: string;
   /**
    * This field contains the time in which the last spot price error occured.
    * It is used to alert the caller if they are getting a potentially erroneous
@@ -271,18 +271,38 @@ export const TwapRecord = {
     return obj;
   },
   fromAmino(object: TwapRecordAmino): TwapRecord {
-    return {
-      poolId: BigInt(object.pool_id),
-      asset0Denom: object.asset0_denom,
-      asset1Denom: object.asset1_denom,
-      height: BigInt(object.height),
-      time: object?.time ? fromTimestamp(Timestamp.fromAmino(object.time)) : undefined,
-      p0LastSpotPrice: object.p0_last_spot_price,
-      p1LastSpotPrice: object.p1_last_spot_price,
-      p0ArithmeticTwapAccumulator: object.p0_arithmetic_twap_accumulator,
-      p1ArithmeticTwapAccumulator: object.p1_arithmetic_twap_accumulator,
-      lastErrorTime: object?.last_error_time ? fromTimestamp(Timestamp.fromAmino(object.last_error_time)) : undefined
-    };
+    const message = createBaseTwapRecord();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.asset0_denom !== undefined && object.asset0_denom !== null) {
+      message.asset0Denom = object.asset0_denom;
+    }
+    if (object.asset1_denom !== undefined && object.asset1_denom !== null) {
+      message.asset1Denom = object.asset1_denom;
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height);
+    }
+    if (object.time !== undefined && object.time !== null) {
+      message.time = fromTimestamp(Timestamp.fromAmino(object.time));
+    }
+    if (object.p0_last_spot_price !== undefined && object.p0_last_spot_price !== null) {
+      message.p0LastSpotPrice = object.p0_last_spot_price;
+    }
+    if (object.p1_last_spot_price !== undefined && object.p1_last_spot_price !== null) {
+      message.p1LastSpotPrice = object.p1_last_spot_price;
+    }
+    if (object.p0_arithmetic_twap_accumulator !== undefined && object.p0_arithmetic_twap_accumulator !== null) {
+      message.p0ArithmeticTwapAccumulator = object.p0_arithmetic_twap_accumulator;
+    }
+    if (object.p1_arithmetic_twap_accumulator !== undefined && object.p1_arithmetic_twap_accumulator !== null) {
+      message.p1ArithmeticTwapAccumulator = object.p1_arithmetic_twap_accumulator;
+    }
+    if (object.last_error_time !== undefined && object.last_error_time !== null) {
+      message.lastErrorTime = fromTimestamp(Timestamp.fromAmino(object.last_error_time));
+    }
+    return message;
   },
   toAmino(message: TwapRecord, useInterfaces: boolean = true): TwapRecordAmino {
     const obj: any = {};

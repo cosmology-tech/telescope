@@ -81,7 +81,8 @@ export const QueryConfigRequest = {
     return obj;
   },
   fromAmino(_: QueryConfigRequestAmino): QueryConfigRequest {
-    return {};
+    const message = createBaseQueryConfigRequest();
+    return message;
   },
   toAmino(_: QueryConfigRequest): QueryConfigRequestAmino {
     const obj: any = {};
@@ -168,9 +169,11 @@ export const QueryConfigResponse = {
     return obj;
   },
   fromAmino(object: QueryConfigResponseAmino): QueryConfigResponse {
-    return {
-      config: object?.config ? Config.fromAmino(object.config) : undefined
-    };
+    const message = createBaseQueryConfigResponse();
+    if (object.config !== undefined && object.config !== null) {
+      message.config = Config.fromAmino(object.config);
+    }
+    return message;
   },
   toAmino(message: QueryConfigResponse): QueryConfigResponseAmino {
     const obj: any = {};

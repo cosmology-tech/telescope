@@ -40,7 +40,7 @@ export interface ExplainAmino {
    * The field value_index is an index in the values list.
    * Separating values from steps is needed to remove redundant values.
    */
-  values: ValueAmino[];
+  values?: ValueAmino[];
   /**
    * List of steps.
    * 
@@ -48,7 +48,7 @@ export interface ExplainAmino {
    * instances. The order of such ExprStep instances matches the order of
    * elements returned by Comprehension.iter_range.
    */
-  expr_steps: Explain_ExprStepAmino[];
+  expr_steps?: Explain_ExprStepAmino[];
 }
 /**
  * Values of intermediate expressions produced when evaluating expression.
@@ -73,9 +73,9 @@ export interface Explain_ExprStepProtoMsg {
 /** ID and value index of one step. */
 export interface Explain_ExprStepAmino {
   /** ID of corresponding Expr node. */
-  id: string;
+  id?: string;
   /** Index of the value in the values list. */
-  value_index: number;
+  value_index?: number;
 }
 /** ID and value index of one step. */
 export interface Explain_ExprStepSDKType {
@@ -166,10 +166,10 @@ export const Explain = {
     return obj;
   },
   fromAmino(object: ExplainAmino): Explain {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromAmino(e)) : [],
-      exprSteps: Array.isArray(object?.expr_steps) ? object.expr_steps.map((e: any) => Explain_ExprStep.fromAmino(e)) : []
-    };
+    const message = createBaseExplain();
+    message.values = object.values?.map(e => Value.fromAmino(e)) || [];
+    message.exprSteps = object.expr_steps?.map(e => Explain_ExprStep.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Explain, useInterfaces: boolean = true): ExplainAmino {
     const obj: any = {};
@@ -268,10 +268,14 @@ export const Explain_ExprStep = {
     return obj;
   },
   fromAmino(object: Explain_ExprStepAmino): Explain_ExprStep {
-    return {
-      id: BigInt(object.id),
-      valueIndex: object.value_index
-    };
+    const message = createBaseExplain_ExprStep();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id);
+    }
+    if (object.value_index !== undefined && object.value_index !== null) {
+      message.valueIndex = object.value_index;
+    }
+    return message;
   },
   toAmino(message: Explain_ExprStep, useInterfaces: boolean = true): Explain_ExprStepAmino {
     const obj: any = {};

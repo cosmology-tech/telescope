@@ -140,7 +140,8 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
@@ -229,9 +230,11 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};
@@ -321,9 +324,11 @@ export const QueryDenomAuthorityMetadataRequest = {
     return obj;
   },
   fromAmino(object: QueryDenomAuthorityMetadataRequestAmino): QueryDenomAuthorityMetadataRequest {
-    return {
-      denom: object.denom
-    };
+    const message = createBaseQueryDenomAuthorityMetadataRequest();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    return message;
   },
   toAmino(message: QueryDenomAuthorityMetadataRequest): QueryDenomAuthorityMetadataRequestAmino {
     const obj: any = {};
@@ -413,9 +418,11 @@ export const QueryDenomAuthorityMetadataResponse = {
     return obj;
   },
   fromAmino(object: QueryDenomAuthorityMetadataResponseAmino): QueryDenomAuthorityMetadataResponse {
-    return {
-      authorityMetadata: object?.authority_metadata ? DenomAuthorityMetadata.fromAmino(object.authority_metadata) : undefined
-    };
+    const message = createBaseQueryDenomAuthorityMetadataResponse();
+    if (object.authority_metadata !== undefined && object.authority_metadata !== null) {
+      message.authorityMetadata = DenomAuthorityMetadata.fromAmino(object.authority_metadata);
+    }
+    return message;
   },
   toAmino(message: QueryDenomAuthorityMetadataResponse): QueryDenomAuthorityMetadataResponseAmino {
     const obj: any = {};
@@ -505,9 +512,11 @@ export const QueryDenomsFromCreatorRequest = {
     return obj;
   },
   fromAmino(object: QueryDenomsFromCreatorRequestAmino): QueryDenomsFromCreatorRequest {
-    return {
-      creator: object.creator
-    };
+    const message = createBaseQueryDenomsFromCreatorRequest();
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    }
+    return message;
   },
   toAmino(message: QueryDenomsFromCreatorRequest): QueryDenomsFromCreatorRequestAmino {
     const obj: any = {};
@@ -605,9 +614,9 @@ export const QueryDenomsFromCreatorResponse = {
     return obj;
   },
   fromAmino(object: QueryDenomsFromCreatorResponseAmino): QueryDenomsFromCreatorResponse {
-    return {
-      denoms: Array.isArray(object?.denoms) ? object.denoms.map((e: any) => e) : []
-    };
+    const message = createBaseQueryDenomsFromCreatorResponse();
+    message.denoms = object.denoms?.map(e => e) || [];
+    return message;
   },
   toAmino(message: QueryDenomsFromCreatorResponse): QueryDenomsFromCreatorResponseAmino {
     const obj: any = {};

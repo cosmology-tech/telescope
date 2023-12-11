@@ -9,7 +9,7 @@ export interface NodeProtoMsg {
   value: Uint8Array;
 }
 export interface NodeAmino {
-  children: ChildAmino[];
+  children?: ChildAmino[];
 }
 export interface NodeAminoMsg {
   type: "osmosis/store/node";
@@ -27,8 +27,8 @@ export interface ChildProtoMsg {
   value: Uint8Array;
 }
 export interface ChildAmino {
-  index: Uint8Array;
-  accumulation: string;
+  index?: string;
+  accumulation?: string;
 }
 export interface ChildAminoMsg {
   type: "osmosis/store/child";
@@ -120,9 +120,9 @@ export const Node = {
     return obj;
   },
   fromAmino(object: NodeAmino): Node {
-    return {
-      children: Array.isArray(object?.children) ? object.children.map((e: any) => Child.fromAmino(e)) : []
-    };
+    const message = createBaseNode();
+    message.children = object.children?.map(e => Child.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Node): NodeAmino {
     const obj: any = {};
@@ -224,14 +224,18 @@ export const Child = {
     return obj;
   },
   fromAmino(object: ChildAmino): Child {
-    return {
-      index: object.index,
-      accumulation: object.accumulation
-    };
+    const message = createBaseChild();
+    if (object.index !== undefined && object.index !== null) {
+      message.index = bytesFromBase64(object.index);
+    }
+    if (object.accumulation !== undefined && object.accumulation !== null) {
+      message.accumulation = object.accumulation;
+    }
+    return message;
   },
   toAmino(message: Child): ChildAmino {
     const obj: any = {};
-    obj.index = message.index;
+    obj.index = message.index ? base64FromBytes(message.index) : undefined;
     obj.accumulation = message.accumulation;
     return obj;
   },
@@ -316,9 +320,11 @@ export const Leaf = {
     return obj;
   },
   fromAmino(object: LeafAmino): Leaf {
-    return {
-      leaf: object?.leaf ? Child.fromAmino(object.leaf) : undefined
-    };
+    const message = createBaseLeaf();
+    if (object.leaf !== undefined && object.leaf !== null) {
+      message.leaf = Child.fromAmino(object.leaf);
+    }
+    return message;
   },
   toAmino(message: Leaf): LeafAmino {
     const obj: any = {};

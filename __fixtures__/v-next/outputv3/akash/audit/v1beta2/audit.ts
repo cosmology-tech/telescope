@@ -14,9 +14,9 @@ export interface ProviderProtoMsg {
 }
 /** Provider stores owner auditor and attributes details */
 export interface ProviderAmino {
-  owner: string;
-  auditor: string;
-  attributes: AttributeAmino[];
+  owner?: string;
+  auditor?: string;
+  attributes?: AttributeAmino[];
 }
 /** Provider stores owner auditor and attributes details */
 export interface ProviderSDKType {
@@ -36,9 +36,9 @@ export interface AuditedAttributesProtoMsg {
 }
 /** Attributes */
 export interface AuditedAttributesAmino {
-  owner: string;
-  auditor: string;
-  attributes: AttributeAmino[];
+  owner?: string;
+  auditor?: string;
+  attributes?: AttributeAmino[];
 }
 /** Attributes */
 export interface AuditedAttributesSDKType {
@@ -56,7 +56,7 @@ export interface AttributesResponseProtoMsg {
 }
 /** AttributesResponse represents details of deployment along with group details */
 export interface AttributesResponseAmino {
-  attributes: AuditedAttributesAmino[];
+  attributes?: AuditedAttributesAmino[];
 }
 /** AttributesResponse represents details of deployment along with group details */
 export interface AttributesResponseSDKType {
@@ -73,8 +73,8 @@ export interface AttributesFiltersProtoMsg {
 }
 /** AttributesFilters defines filters used to filter deployments */
 export interface AttributesFiltersAmino {
-  auditors: string[];
-  owners: string[];
+  auditors?: string[];
+  owners?: string[];
 }
 /** AttributesFilters defines filters used to filter deployments */
 export interface AttributesFiltersSDKType {
@@ -93,9 +93,9 @@ export interface MsgSignProviderAttributesProtoMsg {
 }
 /** MsgSignProviderAttributes defines an SDK message for signing a provider attributes */
 export interface MsgSignProviderAttributesAmino {
-  owner: string;
-  auditor: string;
-  attributes: AttributeAmino[];
+  owner?: string;
+  auditor?: string;
+  attributes?: AttributeAmino[];
 }
 /** MsgSignProviderAttributes defines an SDK message for signing a provider attributes */
 export interface MsgSignProviderAttributesSDKType {
@@ -125,9 +125,9 @@ export interface MsgDeleteProviderAttributesProtoMsg {
 }
 /** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
 export interface MsgDeleteProviderAttributesAmino {
-  owner: string;
-  auditor: string;
-  keys: string[];
+  owner?: string;
+  auditor?: string;
+  keys?: string[];
 }
 /** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
 export interface MsgDeleteProviderAttributesSDKType {
@@ -233,11 +233,15 @@ export const Provider = {
     return obj;
   },
   fromAmino(object: ProviderAmino): Provider {
-    return {
-      owner: object.owner,
-      auditor: object.auditor,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBaseProvider();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Provider, useInterfaces: boolean = true): ProviderAmino {
     const obj: any = {};
@@ -351,11 +355,15 @@ export const AuditedAttributes = {
     return obj;
   },
   fromAmino(object: AuditedAttributesAmino): AuditedAttributes {
-    return {
-      owner: object.owner,
-      auditor: object.auditor,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBaseAuditedAttributes();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: AuditedAttributes, useInterfaces: boolean = true): AuditedAttributesAmino {
     const obj: any = {};
@@ -445,9 +453,9 @@ export const AttributesResponse = {
     return obj;
   },
   fromAmino(object: AttributesResponseAmino): AttributesResponse {
-    return {
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromAmino(e)) : []
-    };
+    const message = createBaseAttributesResponse();
+    message.attributes = object.attributes?.map(e => AuditedAttributes.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: AttributesResponse, useInterfaces: boolean = true): AttributesResponseAmino {
     const obj: any = {};
@@ -555,10 +563,10 @@ export const AttributesFilters = {
     return obj;
   },
   fromAmino(object: AttributesFiltersAmino): AttributesFilters {
-    return {
-      auditors: Array.isArray(object?.auditors) ? object.auditors.map((e: any) => e) : [],
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => e) : []
-    };
+    const message = createBaseAttributesFilters();
+    message.auditors = object.auditors?.map(e => e) || [];
+    message.owners = object.owners?.map(e => e) || [];
+    return message;
   },
   toAmino(message: AttributesFilters, useInterfaces: boolean = true): AttributesFiltersAmino {
     const obj: any = {};
@@ -675,11 +683,15 @@ export const MsgSignProviderAttributes = {
     return obj;
   },
   fromAmino(object: MsgSignProviderAttributesAmino): MsgSignProviderAttributes {
-    return {
-      owner: object.owner,
-      auditor: object.auditor,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBaseMsgSignProviderAttributes();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgSignProviderAttributes, useInterfaces: boolean = true): MsgSignProviderAttributesAmino {
     const obj: any = {};
@@ -747,7 +759,8 @@ export const MsgSignProviderAttributesResponse = {
     return obj;
   },
   fromAmino(_: MsgSignProviderAttributesResponseAmino): MsgSignProviderAttributesResponse {
-    return {};
+    const message = createBaseMsgSignProviderAttributesResponse();
+    return message;
   },
   toAmino(_: MsgSignProviderAttributesResponse, useInterfaces: boolean = true): MsgSignProviderAttributesResponseAmino {
     const obj: any = {};
@@ -854,11 +867,15 @@ export const MsgDeleteProviderAttributes = {
     return obj;
   },
   fromAmino(object: MsgDeleteProviderAttributesAmino): MsgDeleteProviderAttributes {
-    return {
-      owner: object.owner,
-      auditor: object.auditor,
-      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
-    };
+    const message = createBaseMsgDeleteProviderAttributes();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    message.keys = object.keys?.map(e => e) || [];
+    return message;
   },
   toAmino(message: MsgDeleteProviderAttributes, useInterfaces: boolean = true): MsgDeleteProviderAttributesAmino {
     const obj: any = {};
@@ -926,7 +943,8 @@ export const MsgDeleteProviderAttributesResponse = {
     return obj;
   },
   fromAmino(_: MsgDeleteProviderAttributesResponseAmino): MsgDeleteProviderAttributesResponse {
-    return {};
+    const message = createBaseMsgDeleteProviderAttributesResponse();
+    return message;
   },
   toAmino(_: MsgDeleteProviderAttributesResponse, useInterfaces: boolean = true): MsgDeleteProviderAttributesResponseAmino {
     const obj: any = {};

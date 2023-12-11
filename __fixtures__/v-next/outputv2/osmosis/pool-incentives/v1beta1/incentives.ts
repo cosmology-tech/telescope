@@ -22,7 +22,7 @@ export interface ParamsAmino {
    * itself, but rather manages the distribution of coins that matches the
    * defined minted_denom.
    */
-  minted_denom: string;
+  minted_denom?: string;
 }
 export interface ParamsAminoMsg {
   type: "osmosis/poolincentives/params";
@@ -39,7 +39,7 @@ export interface LockableDurationsInfoProtoMsg {
   value: Uint8Array;
 }
 export interface LockableDurationsInfoAmino {
-  lockable_durations: DurationAmino[];
+  lockable_durations?: DurationAmino[];
 }
 export interface LockableDurationsInfoAminoMsg {
   type: "osmosis/poolincentives/lockable-durations-info";
@@ -57,8 +57,8 @@ export interface DistrInfoProtoMsg {
   value: Uint8Array;
 }
 export interface DistrInfoAmino {
-  total_weight: string;
-  records: DistrRecordAmino[];
+  total_weight?: string;
+  records?: DistrRecordAmino[];
 }
 export interface DistrInfoAminoMsg {
   type: "osmosis/poolincentives/distr-info";
@@ -77,8 +77,8 @@ export interface DistrRecordProtoMsg {
   value: Uint8Array;
 }
 export interface DistrRecordAmino {
-  gauge_id: string;
-  weight: string;
+  gauge_id?: string;
+  weight?: string;
 }
 export interface DistrRecordAminoMsg {
   type: "osmosis/poolincentives/distr-record";
@@ -98,8 +98,8 @@ export interface PoolToGaugeProtoMsg {
   value: Uint8Array;
 }
 export interface PoolToGaugeAmino {
-  pool_id: string;
-  gauge_id: string;
+  pool_id?: string;
+  gauge_id?: string;
   duration?: DurationAmino;
 }
 export interface PoolToGaugeAminoMsg {
@@ -119,7 +119,7 @@ export interface PoolToGaugesProtoMsg {
   value: Uint8Array;
 }
 export interface PoolToGaugesAmino {
-  pool_to_gauge: PoolToGaugeAmino[];
+  pool_to_gauge?: PoolToGaugeAmino[];
 }
 export interface PoolToGaugesAminoMsg {
   type: "osmosis/poolincentives/pool-to-gauges";
@@ -185,9 +185,11 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      mintedDenom: object.minted_denom
-    };
+    const message = createBaseParams();
+    if (object.minted_denom !== undefined && object.minted_denom !== null) {
+      message.mintedDenom = object.minted_denom;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
@@ -281,9 +283,9 @@ export const LockableDurationsInfo = {
     return obj;
   },
   fromAmino(object: LockableDurationsInfoAmino): LockableDurationsInfo {
-    return {
-      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : []
-    };
+    const message = createBaseLockableDurationsInfo();
+    message.lockableDurations = object.lockable_durations?.map(e => Duration.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: LockableDurationsInfo): LockableDurationsInfoAmino {
     const obj: any = {};
@@ -393,10 +395,12 @@ export const DistrInfo = {
     return obj;
   },
   fromAmino(object: DistrInfoAmino): DistrInfo {
-    return {
-      totalWeight: object.total_weight,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
-    };
+    const message = createBaseDistrInfo();
+    if (object.total_weight !== undefined && object.total_weight !== null) {
+      message.totalWeight = object.total_weight;
+    }
+    message.records = object.records?.map(e => DistrRecord.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: DistrInfo): DistrInfoAmino {
     const obj: any = {};
@@ -501,10 +505,14 @@ export const DistrRecord = {
     return obj;
   },
   fromAmino(object: DistrRecordAmino): DistrRecord {
-    return {
-      gaugeId: BigInt(object.gauge_id),
-      weight: object.weight
-    };
+    const message = createBaseDistrRecord();
+    if (object.gauge_id !== undefined && object.gauge_id !== null) {
+      message.gaugeId = BigInt(object.gauge_id);
+    }
+    if (object.weight !== undefined && object.weight !== null) {
+      message.weight = object.weight;
+    }
+    return message;
   },
   toAmino(message: DistrRecord): DistrRecordAmino {
     const obj: any = {};
@@ -621,11 +629,17 @@ export const PoolToGauge = {
     return obj;
   },
   fromAmino(object: PoolToGaugeAmino): PoolToGauge {
-    return {
-      poolId: BigInt(object.pool_id),
-      gaugeId: BigInt(object.gauge_id),
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
-    };
+    const message = createBasePoolToGauge();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.gauge_id !== undefined && object.gauge_id !== null) {
+      message.gaugeId = BigInt(object.gauge_id);
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromAmino(object.duration);
+    }
+    return message;
   },
   toAmino(message: PoolToGauge): PoolToGaugeAmino {
     const obj: any = {};
@@ -721,9 +735,9 @@ export const PoolToGauges = {
     return obj;
   },
   fromAmino(object: PoolToGaugesAmino): PoolToGauges {
-    return {
-      poolToGauge: Array.isArray(object?.pool_to_gauge) ? object.pool_to_gauge.map((e: any) => PoolToGauge.fromAmino(e)) : []
-    };
+    const message = createBasePoolToGauges();
+    message.poolToGauge = object.pool_to_gauge?.map(e => PoolToGauge.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: PoolToGauges): PoolToGaugesAmino {
     const obj: any = {};

@@ -85,6 +85,7 @@ export declare const getKeyTypeEntryName: (typeName: string, prop: string) => st
 export declare const getBaseCreateTypeFuncName: (name: any) => string;
 export declare const getOneOfs: (type: ProtoType) => string[];
 export declare const getFieldOptionality: (context: ProtoParseContext | AminoParseContext, field: ProtoField, isOneOf: boolean) => boolean;
+export declare const getFieldOptionalityForAmino: (context: ProtoParseContext | AminoParseContext, field: ProtoField, isOneOf: boolean) => boolean;
 export declare const isScalarField: (field: ProtoField) => boolean;
 export declare const isArrayField: (field: ProtoField) => boolean;
 export declare const isEnumField: (field: ProtoField) => boolean;

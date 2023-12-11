@@ -34,7 +34,7 @@ export interface QueryProvidersResponseProtoMsg {
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponseAmino {
-  providers: ProviderAmino[];
+  providers?: ProviderAmino[];
   pagination?: PageResponseAmino;
 }
 export interface QueryProvidersResponseAminoMsg {
@@ -56,7 +56,7 @@ export interface QueryProviderRequestProtoMsg {
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequestAmino {
-  owner: string;
+  owner?: string;
 }
 export interface QueryProviderRequestAminoMsg {
   type: "/akash.provider.v1beta2.QueryProviderRequest";
@@ -124,9 +124,11 @@ export const QueryProvidersRequest = {
     return message;
   },
   fromAmino(object: QueryProvidersRequestAmino): QueryProvidersRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryProvidersRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryProvidersRequest): QueryProvidersRequestAmino {
     const obj: any = {};
@@ -195,10 +197,12 @@ export const QueryProvidersResponse = {
     return message;
   },
   fromAmino(object: QueryProvidersResponseAmino): QueryProvidersResponse {
-    return {
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryProvidersResponse();
+    message.providers = object.providers?.map(e => Provider.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryProvidersResponse): QueryProvidersResponseAmino {
     const obj: any = {};
@@ -262,9 +266,11 @@ export const QueryProviderRequest = {
     return message;
   },
   fromAmino(object: QueryProviderRequestAmino): QueryProviderRequest {
-    return {
-      owner: object.owner
-    };
+    const message = createBaseQueryProviderRequest();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
   toAmino(message: QueryProviderRequest): QueryProviderRequestAmino {
     const obj: any = {};
@@ -325,9 +331,11 @@ export const QueryProviderResponse = {
     return message;
   },
   fromAmino(object: QueryProviderResponseAmino): QueryProviderResponse {
-    return {
-      provider: object?.provider ? Provider.fromAmino(object.provider) : undefined
-    };
+    const message = createBaseQueryProviderResponse();
+    if (object.provider !== undefined && object.provider !== null) {
+      message.provider = Provider.fromAmino(object.provider);
+    }
+    return message;
   },
   toAmino(message: QueryProviderResponse): QueryProviderResponseAmino {
     const obj: any = {};

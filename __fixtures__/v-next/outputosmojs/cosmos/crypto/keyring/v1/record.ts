@@ -205,14 +205,26 @@ export const Record = {
     return obj;
   },
   fromAmino(object: RecordAmino): Record {
-    return {
-      name: object.name,
-      pubKey: object?.pub_key ? Any.fromAmino(object.pub_key) : undefined,
-      local: object?.local ? Record_Local.fromAmino(object.local) : undefined,
-      ledger: object?.ledger ? Record_Ledger.fromAmino(object.ledger) : undefined,
-      multi: object?.multi ? Record_Multi.fromAmino(object.multi) : undefined,
-      offline: object?.offline ? Record_Offline.fromAmino(object.offline) : undefined
-    };
+    const message = createBaseRecord();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.pub_key !== undefined && object.pub_key !== null) {
+      message.pubKey = Any.fromAmino(object.pub_key);
+    }
+    if (object.local !== undefined && object.local !== null) {
+      message.local = Record_Local.fromAmino(object.local);
+    }
+    if (object.ledger !== undefined && object.ledger !== null) {
+      message.ledger = Record_Ledger.fromAmino(object.ledger);
+    }
+    if (object.multi !== undefined && object.multi !== null) {
+      message.multi = Record_Multi.fromAmino(object.multi);
+    }
+    if (object.offline !== undefined && object.offline !== null) {
+      message.offline = Record_Offline.fromAmino(object.offline);
+    }
+    return message;
   },
   toAmino(message: Record): RecordAmino {
     const obj: any = {};
@@ -320,10 +332,14 @@ export const Record_Local = {
     return obj;
   },
   fromAmino(object: Record_LocalAmino): Record_Local {
-    return {
-      privKey: object?.priv_key ? Any.fromAmino(object.priv_key) : undefined,
-      privKeyType: object.priv_key_type
-    };
+    const message = createBaseRecord_Local();
+    if (object.priv_key !== undefined && object.priv_key !== null) {
+      message.privKey = Any.fromAmino(object.priv_key);
+    }
+    if (object.priv_key_type !== undefined && object.priv_key_type !== null) {
+      message.privKeyType = object.priv_key_type;
+    }
+    return message;
   },
   toAmino(message: Record_Local): Record_LocalAmino {
     const obj: any = {};
@@ -414,9 +430,11 @@ export const Record_Ledger = {
     return obj;
   },
   fromAmino(object: Record_LedgerAmino): Record_Ledger {
-    return {
-      path: object?.path ? BIP44Params.fromAmino(object.path) : undefined
-    };
+    const message = createBaseRecord_Ledger();
+    if (object.path !== undefined && object.path !== null) {
+      message.path = BIP44Params.fromAmino(object.path);
+    }
+    return message;
   },
   toAmino(message: Record_Ledger): Record_LedgerAmino {
     const obj: any = {};
@@ -489,7 +507,8 @@ export const Record_Multi = {
     return obj;
   },
   fromAmino(_: Record_MultiAmino): Record_Multi {
-    return {};
+    const message = createBaseRecord_Multi();
+    return message;
   },
   toAmino(_: Record_Multi): Record_MultiAmino {
     const obj: any = {};
@@ -561,7 +580,8 @@ export const Record_Offline = {
     return obj;
   },
   fromAmino(_: Record_OfflineAmino): Record_Offline {
-    return {};
+    const message = createBaseRecord_Offline();
+    return message;
   },
   toAmino(_: Record_Offline): Record_OfflineAmino {
     const obj: any = {};

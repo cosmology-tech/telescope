@@ -201,15 +201,29 @@ export const MsgTransfer = {
     return obj;
   },
   fromAmino(object: MsgTransferAmino): MsgTransfer {
-    return {
-      sourcePort: object.source_port,
-      sourceChannel: object.source_channel,
-      token: object?.token ? Coin.fromAmino(object.token) : undefined,
-      sender: object.sender,
-      receiver: object.receiver,
-      timeoutHeight: object?.timeout_height ? Height.fromAmino(object.timeout_height) : undefined,
-      timeoutTimestamp: BigInt(object.timeout_timestamp)
-    };
+    const message = createBaseMsgTransfer();
+    if (object.source_port !== undefined && object.source_port !== null) {
+      message.sourcePort = object.source_port;
+    }
+    if (object.source_channel !== undefined && object.source_channel !== null) {
+      message.sourceChannel = object.source_channel;
+    }
+    if (object.token !== undefined && object.token !== null) {
+      message.token = Coin.fromAmino(object.token);
+    }
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.receiver !== undefined && object.receiver !== null) {
+      message.receiver = object.receiver;
+    }
+    if (object.timeout_height !== undefined && object.timeout_height !== null) {
+      message.timeoutHeight = Height.fromAmino(object.timeout_height);
+    }
+    if (object.timeout_timestamp !== undefined && object.timeout_timestamp !== null) {
+      message.timeoutTimestamp = BigInt(object.timeout_timestamp);
+    }
+    return message;
   },
   toAmino(message: MsgTransfer): MsgTransferAmino {
     const obj: any = {};
@@ -289,7 +303,8 @@ export const MsgTransferResponse = {
     return obj;
   },
   fromAmino(_: MsgTransferResponseAmino): MsgTransferResponse {
-    return {};
+    const message = createBaseMsgTransferResponse();
+    return message;
   },
   toAmino(_: MsgTransferResponse): MsgTransferResponseAmino {
     const obj: any = {};

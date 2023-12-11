@@ -88,9 +88,11 @@ export const UserValidatorPreferencesRequest = {
     return obj;
   },
   fromAmino(object: UserValidatorPreferencesRequestAmino): UserValidatorPreferencesRequest {
-    return {
-      address: object.address
-    };
+    const message = createBaseUserValidatorPreferencesRequest();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    return message;
   },
   toAmino(message: UserValidatorPreferencesRequest): UserValidatorPreferencesRequestAmino {
     const obj: any = {};
@@ -188,9 +190,9 @@ export const UserValidatorPreferencesResponse = {
     return obj;
   },
   fromAmino(object: UserValidatorPreferencesResponseAmino): UserValidatorPreferencesResponse {
-    return {
-      preferences: Array.isArray(object?.preferences) ? object.preferences.map((e: any) => ValidatorPreference.fromAmino(e)) : []
-    };
+    const message = createBaseUserValidatorPreferencesResponse();
+    message.preferences = object.preferences?.map(e => ValidatorPreference.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: UserValidatorPreferencesResponse): UserValidatorPreferencesResponseAmino {
     const obj: any = {};

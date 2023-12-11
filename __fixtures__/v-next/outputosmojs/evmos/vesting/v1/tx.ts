@@ -233,14 +233,22 @@ export const MsgCreateClawbackVestingAccount = {
     return obj;
   },
   fromAmino(object: MsgCreateClawbackVestingAccountAmino): MsgCreateClawbackVestingAccount {
-    return {
-      fromAddress: object.from_address,
-      toAddress: object.to_address,
-      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
-      lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromAmino(e)) : [],
-      vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : [],
-      merge: object.merge
-    };
+    const message = createBaseMsgCreateClawbackVestingAccount();
+    if (object.from_address !== undefined && object.from_address !== null) {
+      message.fromAddress = object.from_address;
+    }
+    if (object.to_address !== undefined && object.to_address !== null) {
+      message.toAddress = object.to_address;
+    }
+    if (object.start_time !== undefined && object.start_time !== null) {
+      message.startTime = fromTimestamp(Timestamp.fromAmino(object.start_time));
+    }
+    message.lockupPeriods = object.lockup_periods?.map(e => Period.fromAmino(e)) || [];
+    message.vestingPeriods = object.vesting_periods?.map(e => Period.fromAmino(e)) || [];
+    if (object.merge !== undefined && object.merge !== null) {
+      message.merge = object.merge;
+    }
+    return message;
   },
   toAmino(message: MsgCreateClawbackVestingAccount): MsgCreateClawbackVestingAccountAmino {
     const obj: any = {};
@@ -320,7 +328,8 @@ export const MsgCreateClawbackVestingAccountResponse = {
     return obj;
   },
   fromAmino(_: MsgCreateClawbackVestingAccountResponseAmino): MsgCreateClawbackVestingAccountResponse {
-    return {};
+    const message = createBaseMsgCreateClawbackVestingAccountResponse();
+    return message;
   },
   toAmino(_: MsgCreateClawbackVestingAccountResponse): MsgCreateClawbackVestingAccountResponseAmino {
     const obj: any = {};
@@ -429,11 +438,17 @@ export const MsgClawback = {
     return obj;
   },
   fromAmino(object: MsgClawbackAmino): MsgClawback {
-    return {
-      funderAddress: object.funder_address,
-      accountAddress: object.account_address,
-      destAddress: object.dest_address
-    };
+    const message = createBaseMsgClawback();
+    if (object.funder_address !== undefined && object.funder_address !== null) {
+      message.funderAddress = object.funder_address;
+    }
+    if (object.account_address !== undefined && object.account_address !== null) {
+      message.accountAddress = object.account_address;
+    }
+    if (object.dest_address !== undefined && object.dest_address !== null) {
+      message.destAddress = object.dest_address;
+    }
+    return message;
   },
   toAmino(message: MsgClawback): MsgClawbackAmino {
     const obj: any = {};
@@ -502,7 +517,8 @@ export const MsgClawbackResponse = {
     return obj;
   },
   fromAmino(_: MsgClawbackResponseAmino): MsgClawbackResponse {
-    return {};
+    const message = createBaseMsgClawbackResponse();
+    return message;
   },
   toAmino(_: MsgClawbackResponse): MsgClawbackResponseAmino {
     const obj: any = {};

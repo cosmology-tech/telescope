@@ -35,9 +35,9 @@ export interface MsgCreateDenomProtoMsg {
  * denom does not indicate the current admin.
  */
 export interface MsgCreateDenomAmino {
-  sender: string;
+  sender?: string;
   /** subdenom can be up to 44 "alphanumeric" characters long. */
-  subdenom: string;
+  subdenom?: string;
 }
 export interface MsgCreateDenomAminoMsg {
   type: "osmosis/tokenfactory/create-denom";
@@ -74,7 +74,7 @@ export interface MsgCreateDenomResponseProtoMsg {
  * It returns the full string of the newly created denom
  */
 export interface MsgCreateDenomResponseAmino {
-  new_token_denom: string;
+  new_token_denom?: string;
 }
 export interface MsgCreateDenomResponseAminoMsg {
   type: "osmosis/tokenfactory/create-denom-response";
@@ -104,7 +104,7 @@ export interface MsgMintProtoMsg {
  * more of a token.  For now, we only support minting to the sender account
  */
 export interface MsgMintAmino {
-  sender: string;
+  sender?: string;
   amount?: CoinAmino;
 }
 export interface MsgMintAminoMsg {
@@ -147,7 +147,7 @@ export interface MsgBurnProtoMsg {
  * a token.  For now, we only support burning from the sender account.
  */
 export interface MsgBurnAmino {
-  sender: string;
+  sender?: string;
   amount?: CoinAmino;
 }
 export interface MsgBurnAminoMsg {
@@ -191,9 +191,9 @@ export interface MsgChangeAdminProtoMsg {
  * adminship of a denom to a new account
  */
 export interface MsgChangeAdminAmino {
-  sender: string;
-  denom: string;
-  new_admin: string;
+  sender?: string;
+  denom?: string;
+  new_admin?: string;
 }
 export interface MsgChangeAdminAminoMsg {
   type: "osmosis/tokenfactory/change-admin";
@@ -248,7 +248,7 @@ export interface MsgSetDenomMetadataProtoMsg {
  * the denom's bank metadata
  */
 export interface MsgSetDenomMetadataAmino {
-  sender: string;
+  sender?: string;
   metadata?: MetadataAmino;
 }
 export interface MsgSetDenomMetadataAminoMsg {
@@ -330,10 +330,14 @@ export const MsgCreateDenom = {
     return message;
   },
   fromAmino(object: MsgCreateDenomAmino): MsgCreateDenom {
-    return {
-      sender: object.sender,
-      subdenom: object.subdenom
-    };
+    const message = createBaseMsgCreateDenom();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.subdenom !== undefined && object.subdenom !== null) {
+      message.subdenom = object.subdenom;
+    }
+    return message;
   },
   toAmino(message: MsgCreateDenom): MsgCreateDenomAmino {
     const obj: any = {};
@@ -399,9 +403,11 @@ export const MsgCreateDenomResponse = {
     return message;
   },
   fromAmino(object: MsgCreateDenomResponseAmino): MsgCreateDenomResponse {
-    return {
-      newTokenDenom: object.new_token_denom
-    };
+    const message = createBaseMsgCreateDenomResponse();
+    if (object.new_token_denom !== undefined && object.new_token_denom !== null) {
+      message.newTokenDenom = object.new_token_denom;
+    }
+    return message;
   },
   toAmino(message: MsgCreateDenomResponse): MsgCreateDenomResponseAmino {
     const obj: any = {};
@@ -476,10 +482,14 @@ export const MsgMint = {
     return message;
   },
   fromAmino(object: MsgMintAmino): MsgMint {
-    return {
-      sender: object.sender,
-      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
-    };
+    const message = createBaseMsgMint();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromAmino(object.amount);
+    }
+    return message;
   },
   toAmino(message: MsgMint): MsgMintAmino {
     const obj: any = {};
@@ -536,7 +546,8 @@ export const MsgMintResponse = {
     return message;
   },
   fromAmino(_: MsgMintResponseAmino): MsgMintResponse {
-    return {};
+    const message = createBaseMsgMintResponse();
+    return message;
   },
   toAmino(_: MsgMintResponse): MsgMintResponseAmino {
     const obj: any = {};
@@ -610,10 +621,14 @@ export const MsgBurn = {
     return message;
   },
   fromAmino(object: MsgBurnAmino): MsgBurn {
-    return {
-      sender: object.sender,
-      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
-    };
+    const message = createBaseMsgBurn();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromAmino(object.amount);
+    }
+    return message;
   },
   toAmino(message: MsgBurn): MsgBurnAmino {
     const obj: any = {};
@@ -670,7 +685,8 @@ export const MsgBurnResponse = {
     return message;
   },
   fromAmino(_: MsgBurnResponseAmino): MsgBurnResponse {
-    return {};
+    const message = createBaseMsgBurnResponse();
+    return message;
   },
   toAmino(_: MsgBurnResponse): MsgBurnResponseAmino {
     const obj: any = {};
@@ -750,11 +766,17 @@ export const MsgChangeAdmin = {
     return message;
   },
   fromAmino(object: MsgChangeAdminAmino): MsgChangeAdmin {
-    return {
-      sender: object.sender,
-      denom: object.denom,
-      newAdmin: object.new_admin
-    };
+    const message = createBaseMsgChangeAdmin();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.new_admin !== undefined && object.new_admin !== null) {
+      message.newAdmin = object.new_admin;
+    }
+    return message;
   },
   toAmino(message: MsgChangeAdmin): MsgChangeAdminAmino {
     const obj: any = {};
@@ -812,7 +834,8 @@ export const MsgChangeAdminResponse = {
     return message;
   },
   fromAmino(_: MsgChangeAdminResponseAmino): MsgChangeAdminResponse {
-    return {};
+    const message = createBaseMsgChangeAdminResponse();
+    return message;
   },
   toAmino(_: MsgChangeAdminResponse): MsgChangeAdminResponseAmino {
     const obj: any = {};
@@ -886,10 +909,14 @@ export const MsgSetDenomMetadata = {
     return message;
   },
   fromAmino(object: MsgSetDenomMetadataAmino): MsgSetDenomMetadata {
-    return {
-      sender: object.sender,
-      metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : undefined
-    };
+    const message = createBaseMsgSetDenomMetadata();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = Metadata.fromAmino(object.metadata);
+    }
+    return message;
   },
   toAmino(message: MsgSetDenomMetadata): MsgSetDenomMetadataAmino {
     const obj: any = {};
@@ -946,7 +973,8 @@ export const MsgSetDenomMetadataResponse = {
     return message;
   },
   fromAmino(_: MsgSetDenomMetadataResponseAmino): MsgSetDenomMetadataResponse {
-    return {};
+    const message = createBaseMsgSetDenomMetadataResponse();
+    return message;
   },
   toAmino(_: MsgSetDenomMetadataResponse): MsgSetDenomMetadataResponseAmino {
     const obj: any = {};

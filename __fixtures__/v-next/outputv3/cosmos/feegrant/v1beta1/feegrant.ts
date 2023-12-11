@@ -34,7 +34,7 @@ export interface BasicAllowanceAmino {
    * by this allowance and will be updated as tokens are spent. If it is
    * empty, there is no spend limit and any amount of coins can be spent.
    */
-  spend_limit: CoinAmino[];
+  spend_limit?: CoinAmino[];
   /** expiration specifies an optional time when this allowance expires */
   expiration?: string;
 }
@@ -94,9 +94,9 @@ export interface PeriodicAllowanceAmino {
    * period_spend_limit specifies the maximum number of coins that can be spent
    * in the period
    */
-  period_spend_limit: CoinAmino[];
+  period_spend_limit?: CoinAmino[];
   /** period_can_spend is the number of coins left to be spent before the period_reset time */
-  period_can_spend: CoinAmino[];
+  period_can_spend?: CoinAmino[];
   /**
    * period_reset is the time at which this period resets and a new one begins,
    * it is calculated from the start time of the first transaction after the
@@ -136,7 +136,7 @@ export interface AllowedMsgAllowanceAmino {
   /** allowance can be any of basic and periodic fee allowance. */
   allowance?: AnyAmino;
   /** allowed_messages are the messages for which the grantee has the access. */
-  allowed_messages: string[];
+  allowed_messages?: string[];
 }
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowanceSDKType {
@@ -163,9 +163,9 @@ export type GrantEncoded = Omit<Grant, "allowance"> & {
 /** Grant is stored in the KVStore to record a grant with full context */
 export interface GrantAmino {
   /** granter is the address of the user granting an allowance of their funds. */
-  granter: string;
+  granter?: string;
   /** grantee is the address of the user being granted an allowance of another user's funds. */
-  grantee: string;
+  grantee?: string;
   /** allowance can be any of basic, periodic, allowed fee allowance. */
   allowance?: AnyAmino;
 }
@@ -253,10 +253,12 @@ export const BasicAllowance = {
     return obj;
   },
   fromAmino(object: BasicAllowanceAmino): BasicAllowance {
-    return {
-      spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromAmino(e)) : [],
-      expiration: object?.expiration ? fromTimestamp(Timestamp.fromAmino(object.expiration)) : undefined
-    };
+    const message = createBaseBasicAllowance();
+    message.spendLimit = object.spend_limit?.map(e => Coin.fromAmino(e)) || [];
+    if (object.expiration !== undefined && object.expiration !== null) {
+      message.expiration = fromTimestamp(Timestamp.fromAmino(object.expiration));
+    }
+    return message;
   },
   toAmino(message: BasicAllowance, useInterfaces: boolean = true): BasicAllowanceAmino {
     const obj: any = {};
@@ -407,13 +409,19 @@ export const PeriodicAllowance = {
     return obj;
   },
   fromAmino(object: PeriodicAllowanceAmino): PeriodicAllowance {
-    return {
-      basic: object?.basic ? BasicAllowance.fromAmino(object.basic) : undefined,
-      period: object?.period ? Duration.fromAmino(object.period) : undefined,
-      periodSpendLimit: Array.isArray(object?.period_spend_limit) ? object.period_spend_limit.map((e: any) => Coin.fromAmino(e)) : [],
-      periodCanSpend: Array.isArray(object?.period_can_spend) ? object.period_can_spend.map((e: any) => Coin.fromAmino(e)) : [],
-      periodReset: object?.period_reset ? fromTimestamp(Timestamp.fromAmino(object.period_reset)) : undefined
-    };
+    const message = createBasePeriodicAllowance();
+    if (object.basic !== undefined && object.basic !== null) {
+      message.basic = BasicAllowance.fromAmino(object.basic);
+    }
+    if (object.period !== undefined && object.period !== null) {
+      message.period = Duration.fromAmino(object.period);
+    }
+    message.periodSpendLimit = object.period_spend_limit?.map(e => Coin.fromAmino(e)) || [];
+    message.periodCanSpend = object.period_can_spend?.map(e => Coin.fromAmino(e)) || [];
+    if (object.period_reset !== undefined && object.period_reset !== null) {
+      message.periodReset = fromTimestamp(Timestamp.fromAmino(object.period_reset));
+    }
+    return message;
   },
   toAmino(message: PeriodicAllowance, useInterfaces: boolean = true): PeriodicAllowanceAmino {
     const obj: any = {};
@@ -525,10 +533,12 @@ export const AllowedMsgAllowance = {
     return obj;
   },
   fromAmino(object: AllowedMsgAllowanceAmino): AllowedMsgAllowance {
-    return {
-      allowance: object?.allowance ? FeeAllowanceI_FromAmino(object.allowance) : undefined,
-      allowedMessages: Array.isArray(object?.allowed_messages) ? object.allowed_messages.map((e: any) => e) : []
-    };
+    const message = createBaseAllowedMsgAllowance();
+    if (object.allowance !== undefined && object.allowance !== null) {
+      message.allowance = FeeAllowanceI_FromAmino(object.allowance);
+    }
+    message.allowedMessages = object.allowed_messages?.map(e => e) || [];
+    return message;
   },
   toAmino(message: AllowedMsgAllowance, useInterfaces: boolean = true): AllowedMsgAllowanceAmino {
     const obj: any = {};
@@ -636,11 +646,17 @@ export const Grant = {
     return obj;
   },
   fromAmino(object: GrantAmino): Grant {
-    return {
-      granter: object.granter,
-      grantee: object.grantee,
-      allowance: object?.allowance ? FeeAllowanceI_FromAmino(object.allowance) : undefined
-    };
+    const message = createBaseGrant();
+    if (object.granter !== undefined && object.granter !== null) {
+      message.granter = object.granter;
+    }
+    if (object.grantee !== undefined && object.grantee !== null) {
+      message.grantee = object.grantee;
+    }
+    if (object.allowance !== undefined && object.allowance !== null) {
+      message.allowance = FeeAllowanceI_FromAmino(object.allowance);
+    }
+    return message;
   },
   toAmino(message: Grant, useInterfaces: boolean = true): GrantAmino {
     const obj: any = {};

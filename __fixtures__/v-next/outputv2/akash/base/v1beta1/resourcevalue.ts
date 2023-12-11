@@ -11,7 +11,7 @@ export interface ResourceValueProtoMsg {
 }
 /** Unit stores cpu, memory and storage metrics */
 export interface ResourceValueAmino {
-  val: Uint8Array;
+  val?: string;
 }
 export interface ResourceValueAminoMsg {
   type: "/akash.base.v1beta1.ResourceValue";
@@ -77,13 +77,15 @@ export const ResourceValue = {
     return obj;
   },
   fromAmino(object: ResourceValueAmino): ResourceValue {
-    return {
-      val: object.val
-    };
+    const message = createBaseResourceValue();
+    if (object.val !== undefined && object.val !== null) {
+      message.val = bytesFromBase64(object.val);
+    }
+    return message;
   },
   toAmino(message: ResourceValue): ResourceValueAmino {
     const obj: any = {};
-    obj.val = message.val;
+    obj.val = message.val ? base64FromBytes(message.val) : undefined;
     return obj;
   },
   fromAminoMsg(object: ResourceValueAminoMsg): ResourceValue {

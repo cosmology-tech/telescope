@@ -23,11 +23,11 @@ export interface MsgCreateVestingAccountProtoMsg {
  * account.
  */
 export interface MsgCreateVestingAccountAmino {
-  from_address: string;
-  to_address: string;
-  amount: CoinAmino[];
-  end_time: string;
-  delayed: boolean;
+  from_address?: string;
+  to_address?: string;
+  amount?: CoinAmino[];
+  end_time?: string;
+  delayed?: boolean;
 }
 /**
  * MsgCreateVestingAccount defines a message that enables creating a vesting
@@ -68,9 +68,9 @@ export interface MsgCreatePermanentLockedAccountProtoMsg {
  * locked account.
  */
 export interface MsgCreatePermanentLockedAccountAmino {
-  from_address: string;
-  to_address: string;
-  amount: CoinAmino[];
+  from_address?: string;
+  to_address?: string;
+  amount?: CoinAmino[];
 }
 /**
  * MsgCreatePermanentLockedAccount defines a message that enables creating a permanent
@@ -110,10 +110,10 @@ export interface MsgCreatePeriodicVestingAccountProtoMsg {
  * account.
  */
 export interface MsgCreatePeriodicVestingAccountAmino {
-  from_address: string;
-  to_address: string;
-  start_time: string;
-  vesting_periods: PeriodAmino[];
+  from_address?: string;
+  to_address?: string;
+  start_time?: string;
+  vesting_periods?: PeriodAmino[];
 }
 /**
  * MsgCreateVestingAccount defines a message that enables creating a vesting
@@ -259,13 +259,21 @@ export const MsgCreateVestingAccount = {
     return obj;
   },
   fromAmino(object: MsgCreateVestingAccountAmino): MsgCreateVestingAccount {
-    return {
-      fromAddress: object.from_address,
-      toAddress: object.to_address,
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : [],
-      endTime: BigInt(object.end_time),
-      delayed: object.delayed
-    };
+    const message = createBaseMsgCreateVestingAccount();
+    if (object.from_address !== undefined && object.from_address !== null) {
+      message.fromAddress = object.from_address;
+    }
+    if (object.to_address !== undefined && object.to_address !== null) {
+      message.toAddress = object.to_address;
+    }
+    message.amount = object.amount?.map(e => Coin.fromAmino(e)) || [];
+    if (object.end_time !== undefined && object.end_time !== null) {
+      message.endTime = BigInt(object.end_time);
+    }
+    if (object.delayed !== undefined && object.delayed !== null) {
+      message.delayed = object.delayed;
+    }
+    return message;
   },
   toAmino(message: MsgCreateVestingAccount, useInterfaces: boolean = true): MsgCreateVestingAccountAmino {
     const obj: any = {};
@@ -336,7 +344,8 @@ export const MsgCreateVestingAccountResponse = {
     return obj;
   },
   fromAmino(_: MsgCreateVestingAccountResponseAmino): MsgCreateVestingAccountResponse {
-    return {};
+    const message = createBaseMsgCreateVestingAccountResponse();
+    return message;
   },
   toAmino(_: MsgCreateVestingAccountResponse, useInterfaces: boolean = true): MsgCreateVestingAccountResponseAmino {
     const obj: any = {};
@@ -444,11 +453,15 @@ export const MsgCreatePermanentLockedAccount = {
     return obj;
   },
   fromAmino(object: MsgCreatePermanentLockedAccountAmino): MsgCreatePermanentLockedAccount {
-    return {
-      fromAddress: object.from_address,
-      toAddress: object.to_address,
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseMsgCreatePermanentLockedAccount();
+    if (object.from_address !== undefined && object.from_address !== null) {
+      message.fromAddress = object.from_address;
+    }
+    if (object.to_address !== undefined && object.to_address !== null) {
+      message.toAddress = object.to_address;
+    }
+    message.amount = object.amount?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgCreatePermanentLockedAccount, useInterfaces: boolean = true): MsgCreatePermanentLockedAccountAmino {
     const obj: any = {};
@@ -517,7 +530,8 @@ export const MsgCreatePermanentLockedAccountResponse = {
     return obj;
   },
   fromAmino(_: MsgCreatePermanentLockedAccountResponseAmino): MsgCreatePermanentLockedAccountResponse {
-    return {};
+    const message = createBaseMsgCreatePermanentLockedAccountResponse();
+    return message;
   },
   toAmino(_: MsgCreatePermanentLockedAccountResponse, useInterfaces: boolean = true): MsgCreatePermanentLockedAccountResponseAmino {
     const obj: any = {};
@@ -639,12 +653,18 @@ export const MsgCreatePeriodicVestingAccount = {
     return obj;
   },
   fromAmino(object: MsgCreatePeriodicVestingAccountAmino): MsgCreatePeriodicVestingAccount {
-    return {
-      fromAddress: object.from_address,
-      toAddress: object.to_address,
-      startTime: BigInt(object.start_time),
-      vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : []
-    };
+    const message = createBaseMsgCreatePeriodicVestingAccount();
+    if (object.from_address !== undefined && object.from_address !== null) {
+      message.fromAddress = object.from_address;
+    }
+    if (object.to_address !== undefined && object.to_address !== null) {
+      message.toAddress = object.to_address;
+    }
+    if (object.start_time !== undefined && object.start_time !== null) {
+      message.startTime = BigInt(object.start_time);
+    }
+    message.vestingPeriods = object.vesting_periods?.map(e => Period.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgCreatePeriodicVestingAccount, useInterfaces: boolean = true): MsgCreatePeriodicVestingAccountAmino {
     const obj: any = {};
@@ -714,7 +734,8 @@ export const MsgCreatePeriodicVestingAccountResponse = {
     return obj;
   },
   fromAmino(_: MsgCreatePeriodicVestingAccountResponseAmino): MsgCreatePeriodicVestingAccountResponse {
-    return {};
+    const message = createBaseMsgCreatePeriodicVestingAccountResponse();
+    return message;
   },
   toAmino(_: MsgCreatePeriodicVestingAccountResponse, useInterfaces: boolean = true): MsgCreatePeriodicVestingAccountResponseAmino {
     const obj: any = {};

@@ -130,10 +130,14 @@ export const ValidatorPreference = {
     return obj;
   },
   fromAmino(object: ValidatorPreferenceAmino): ValidatorPreference {
-    return {
-      valOperAddress: object.val_oper_address,
-      weight: object.weight
-    };
+    const message = createBaseValidatorPreference();
+    if (object.val_oper_address !== undefined && object.val_oper_address !== null) {
+      message.valOperAddress = object.val_oper_address;
+    }
+    if (object.weight !== undefined && object.weight !== null) {
+      message.weight = object.weight;
+    }
+    return message;
   },
   toAmino(message: ValidatorPreference): ValidatorPreferenceAmino {
     const obj: any = {};
@@ -232,9 +236,9 @@ export const ValidatorSetPreferences = {
     return obj;
   },
   fromAmino(object: ValidatorSetPreferencesAmino): ValidatorSetPreferences {
-    return {
-      preferences: Array.isArray(object?.preferences) ? object.preferences.map((e: any) => ValidatorPreference.fromAmino(e)) : []
-    };
+    const message = createBaseValidatorSetPreferences();
+    message.preferences = object.preferences?.map(e => ValidatorPreference.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ValidatorSetPreferences): ValidatorSetPreferencesAmino {
     const obj: any = {};

@@ -207,13 +207,23 @@ export const Decl = {
     return obj;
   },
   fromAmino(object: DeclAmino): Decl {
-    return {
-      id: object.id,
-      name: object.name,
-      doc: object.doc,
-      ident: object?.ident ? IdentDecl.fromAmino(object.ident) : undefined,
-      function: object?.function ? FunctionDecl.fromAmino(object.function) : undefined
-    };
+    const message = createBaseDecl();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.doc !== undefined && object.doc !== null) {
+      message.doc = object.doc;
+    }
+    if (object.ident !== undefined && object.ident !== null) {
+      message.ident = IdentDecl.fromAmino(object.ident);
+    }
+    if (object.function !== undefined && object.function !== null) {
+      message.function = FunctionDecl.fromAmino(object.function);
+    }
+    return message;
   },
   toAmino(message: Decl): DeclAmino {
     const obj: any = {};
@@ -335,11 +345,15 @@ export const DeclType = {
     return obj;
   },
   fromAmino(object: DeclTypeAmino): DeclType {
-    return {
-      id: object.id,
-      type: object.type,
-      typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => DeclType.fromAmino(e)) : []
-    };
+    const message = createBaseDeclType();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    message.typeParams = object.type_params?.map(e => DeclType.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: DeclType): DeclTypeAmino {
     const obj: any = {};
@@ -442,10 +456,14 @@ export const IdentDecl = {
     return obj;
   },
   fromAmino(object: IdentDeclAmino): IdentDecl {
-    return {
-      type: object?.type ? DeclType.fromAmino(object.type) : undefined,
-      value: object?.value ? Expr.fromAmino(object.value) : undefined
-    };
+    const message = createBaseIdentDecl();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = DeclType.fromAmino(object.type);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Expr.fromAmino(object.value);
+    }
+    return message;
   },
   toAmino(message: IdentDecl): IdentDeclAmino {
     const obj: any = {};
@@ -564,11 +582,15 @@ export const FunctionDecl = {
     return obj;
   },
   fromAmino(object: FunctionDeclAmino): FunctionDecl {
-    return {
-      args: Array.isArray(object?.args) ? object.args.map((e: any) => IdentDecl.fromAmino(e)) : [],
-      returnType: object?.return_type ? DeclType.fromAmino(object.return_type) : undefined,
-      receiverFunction: object.receiver_function
-    };
+    const message = createBaseFunctionDecl();
+    message.args = object.args?.map(e => IdentDecl.fromAmino(e)) || [];
+    if (object.return_type !== undefined && object.return_type !== null) {
+      message.returnType = DeclType.fromAmino(object.return_type);
+    }
+    if (object.receiver_function !== undefined && object.receiver_function !== null) {
+      message.receiverFunction = object.receiver_function;
+    }
+    return message;
   },
   toAmino(message: FunctionDecl): FunctionDeclAmino {
     const obj: any = {};

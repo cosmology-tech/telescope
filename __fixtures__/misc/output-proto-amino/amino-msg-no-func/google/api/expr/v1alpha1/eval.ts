@@ -11,7 +11,7 @@ export interface ExprValueProtoMsg {
 }
 export interface ExprValueAmino {
   /** The ids of the expressions with unknown values. */
-  exprs: IdRefAmino[];
+  exprs?: IdRefAmino[];
 }
 export interface ExprValueAminoMsg {
   type: "/google.api.expr.v1alpha1.ExprValue";
@@ -30,7 +30,7 @@ export interface IdRefProtoMsg {
 }
 export interface IdRefAmino {
   /** The expression id. */
-  id: number;
+  id?: number;
 }
 export interface IdRefAminoMsg {
   type: "/google.api.expr.v1alpha1.IdRef";
@@ -108,9 +108,9 @@ export const ExprValue = {
     return obj;
   },
   fromAmino(object: ExprValueAmino): ExprValue {
-    return {
-      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => IdRef.fromAmino(e)) : []
-    };
+    const message = createBaseExprValue();
+    message.exprs = object.exprs?.map(e => IdRef.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ExprValue): ExprValueAmino {
     const obj: any = {};
@@ -198,9 +198,11 @@ export const IdRef = {
     return obj;
   },
   fromAmino(object: IdRefAmino): IdRef {
-    return {
-      id: object.id
-    };
+    const message = createBaseIdRef();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    return message;
   },
   toAmino(message: IdRef): IdRefAmino {
     const obj: any = {};

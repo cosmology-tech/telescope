@@ -192,14 +192,26 @@ export const ValidatorSigningInfo = {
     return obj;
   },
   fromAmino(object: ValidatorSigningInfoAmino): ValidatorSigningInfo {
-    return {
-      address: object.address,
-      startHeight: BigInt(object.start_height),
-      indexOffset: BigInt(object.index_offset),
-      jailedUntil: object?.jailed_until ? fromTimestamp(Timestamp.fromAmino(object.jailed_until)) : undefined,
-      tombstoned: object.tombstoned,
-      missedBlocksCounter: BigInt(object.missed_blocks_counter)
-    };
+    const message = createBaseValidatorSigningInfo();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.start_height !== undefined && object.start_height !== null) {
+      message.startHeight = BigInt(object.start_height);
+    }
+    if (object.index_offset !== undefined && object.index_offset !== null) {
+      message.indexOffset = BigInt(object.index_offset);
+    }
+    if (object.jailed_until !== undefined && object.jailed_until !== null) {
+      message.jailedUntil = fromTimestamp(Timestamp.fromAmino(object.jailed_until));
+    }
+    if (object.tombstoned !== undefined && object.tombstoned !== null) {
+      message.tombstoned = object.tombstoned;
+    }
+    if (object.missed_blocks_counter !== undefined && object.missed_blocks_counter !== null) {
+      message.missedBlocksCounter = BigInt(object.missed_blocks_counter);
+    }
+    return message;
   },
   toAmino(message: ValidatorSigningInfo): ValidatorSigningInfoAmino {
     const obj: any = {};
@@ -346,21 +358,31 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      signedBlocksWindow: BigInt(object.signed_blocks_window),
-      minSignedPerWindow: object.min_signed_per_window,
-      downtimeJailDuration: object?.downtime_jail_duration ? Duration.fromAmino(object.downtime_jail_duration) : undefined,
-      slashFractionDoubleSign: object.slash_fraction_double_sign,
-      slashFractionDowntime: object.slash_fraction_downtime
-    };
+    const message = createBaseParams();
+    if (object.signed_blocks_window !== undefined && object.signed_blocks_window !== null) {
+      message.signedBlocksWindow = BigInt(object.signed_blocks_window);
+    }
+    if (object.min_signed_per_window !== undefined && object.min_signed_per_window !== null) {
+      message.minSignedPerWindow = bytesFromBase64(object.min_signed_per_window);
+    }
+    if (object.downtime_jail_duration !== undefined && object.downtime_jail_duration !== null) {
+      message.downtimeJailDuration = Duration.fromAmino(object.downtime_jail_duration);
+    }
+    if (object.slash_fraction_double_sign !== undefined && object.slash_fraction_double_sign !== null) {
+      message.slashFractionDoubleSign = bytesFromBase64(object.slash_fraction_double_sign);
+    }
+    if (object.slash_fraction_downtime !== undefined && object.slash_fraction_downtime !== null) {
+      message.slashFractionDowntime = bytesFromBase64(object.slash_fraction_downtime);
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     obj.signed_blocks_window = message.signedBlocksWindow ? message.signedBlocksWindow.toString() : undefined;
-    obj.min_signed_per_window = message.minSignedPerWindow;
+    obj.min_signed_per_window = message.minSignedPerWindow ? base64FromBytes(message.minSignedPerWindow) : undefined;
     obj.downtime_jail_duration = message.downtimeJailDuration ? Duration.toAmino(message.downtimeJailDuration) : undefined;
-    obj.slash_fraction_double_sign = message.slashFractionDoubleSign;
-    obj.slash_fraction_downtime = message.slashFractionDowntime;
+    obj.slash_fraction_double_sign = message.slashFractionDoubleSign ? base64FromBytes(message.slashFractionDoubleSign) : undefined;
+    obj.slash_fraction_downtime = message.slashFractionDowntime ? base64FromBytes(message.slashFractionDowntime) : undefined;
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

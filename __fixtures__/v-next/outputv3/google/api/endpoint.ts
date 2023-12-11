@@ -75,7 +75,7 @@ export interface EndpointProtoMsg {
  */
 export interface EndpointAmino {
   /** The canonical name of this endpoint. */
-  name: string;
+  name?: string;
   /**
    * Unimplemented. Dot not use.
    * 
@@ -86,7 +86,7 @@ export interface EndpointAmino {
    * Additional names that this endpoint will be hosted on.
    */
   /** @deprecated */
-  aliases: string[];
+  aliases?: string[];
   /**
    * The specification of an Internet routable address of API frontend that will
    * handle requests to this [API
@@ -94,7 +94,7 @@ export interface EndpointAmino {
    * either a valid IPv4 address or a fully-qualified domain name. For example,
    * "8.8.8.8" or "myservice.appspot.com".
    */
-  target: string;
+  target?: string;
   /**
    * Allowing
    * [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing), aka
@@ -103,7 +103,7 @@ export interface EndpointAmino {
    * the browser to determine whether the subsequent cross-origin request is
    * allowed to proceed.
    */
-  allow_cors: boolean;
+  allow_cors?: boolean;
 }
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of
@@ -230,12 +230,18 @@ export const Endpoint = {
     return obj;
   },
   fromAmino(object: EndpointAmino): Endpoint {
-    return {
-      name: object.name,
-      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => e) : [],
-      target: object.target,
-      allowCors: object.allow_cors
-    };
+    const message = createBaseEndpoint();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    message.aliases = object.aliases?.map(e => e) || [];
+    if (object.target !== undefined && object.target !== null) {
+      message.target = object.target;
+    }
+    if (object.allow_cors !== undefined && object.allow_cors !== null) {
+      message.allowCors = object.allow_cors;
+    }
+    return message;
   },
   toAmino(message: Endpoint, useInterfaces: boolean = true): EndpointAmino {
     const obj: any = {};

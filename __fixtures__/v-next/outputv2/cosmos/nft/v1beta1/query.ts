@@ -14,8 +14,8 @@ export interface QueryBalanceRequestProtoMsg {
 }
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method */
 export interface QueryBalanceRequestAmino {
-  class_id: string;
-  owner: string;
+  class_id?: string;
+  owner?: string;
 }
 export interface QueryBalanceRequestAminoMsg {
   type: "cosmos-sdk/QueryBalanceRequest";
@@ -36,7 +36,7 @@ export interface QueryBalanceResponseProtoMsg {
 }
 /** QueryBalanceResponse is the response type for the Query/Balance RPC method */
 export interface QueryBalanceResponseAmino {
-  amount: string;
+  amount?: string;
 }
 export interface QueryBalanceResponseAminoMsg {
   type: "cosmos-sdk/QueryBalanceResponse";
@@ -57,8 +57,8 @@ export interface QueryOwnerRequestProtoMsg {
 }
 /** QueryOwnerRequest is the request type for the Query/Owner RPC method */
 export interface QueryOwnerRequestAmino {
-  class_id: string;
-  id: string;
+  class_id?: string;
+  id?: string;
 }
 export interface QueryOwnerRequestAminoMsg {
   type: "cosmos-sdk/QueryOwnerRequest";
@@ -79,7 +79,7 @@ export interface QueryOwnerResponseProtoMsg {
 }
 /** QueryOwnerResponse is the response type for the Query/Owner RPC method */
 export interface QueryOwnerResponseAmino {
-  owner: string;
+  owner?: string;
 }
 export interface QueryOwnerResponseAminoMsg {
   type: "cosmos-sdk/QueryOwnerResponse";
@@ -99,7 +99,7 @@ export interface QuerySupplyRequestProtoMsg {
 }
 /** QuerySupplyRequest is the request type for the Query/Supply RPC method */
 export interface QuerySupplyRequestAmino {
-  class_id: string;
+  class_id?: string;
 }
 export interface QuerySupplyRequestAminoMsg {
   type: "cosmos-sdk/QuerySupplyRequest";
@@ -119,7 +119,7 @@ export interface QuerySupplyResponseProtoMsg {
 }
 /** QuerySupplyResponse is the response type for the Query/Supply RPC method */
 export interface QuerySupplyResponseAmino {
-  amount: string;
+  amount?: string;
 }
 export interface QuerySupplyResponseAminoMsg {
   type: "cosmos-sdk/QuerySupplyResponse";
@@ -141,8 +141,8 @@ export interface QueryNFTsRequestProtoMsg {
 }
 /** QueryNFTstRequest is the request type for the Query/NFTs RPC method */
 export interface QueryNFTsRequestAmino {
-  class_id: string;
-  owner: string;
+  class_id?: string;
+  owner?: string;
   pagination?: PageRequestAmino;
 }
 export interface QueryNFTsRequestAminoMsg {
@@ -166,7 +166,7 @@ export interface QueryNFTsResponseProtoMsg {
 }
 /** QueryNFTsResponse is the response type for the Query/NFTs RPC methods */
 export interface QueryNFTsResponseAmino {
-  nfts: NFTAmino[];
+  nfts?: NFTAmino[];
   pagination?: PageResponseAmino;
 }
 export interface QueryNFTsResponseAminoMsg {
@@ -189,8 +189,8 @@ export interface QueryNFTRequestProtoMsg {
 }
 /** QueryNFTRequest is the request type for the Query/NFT RPC method */
 export interface QueryNFTRequestAmino {
-  class_id: string;
-  id: string;
+  class_id?: string;
+  id?: string;
 }
 export interface QueryNFTRequestAminoMsg {
   type: "cosmos-sdk/QueryNFTRequest";
@@ -231,7 +231,7 @@ export interface QueryClassRequestProtoMsg {
 }
 /** QueryClassRequest is the request type for the Query/Class RPC method */
 export interface QueryClassRequestAmino {
-  class_id: string;
+  class_id?: string;
 }
 export interface QueryClassRequestAminoMsg {
   type: "cosmos-sdk/QueryClassRequest";
@@ -294,7 +294,7 @@ export interface QueryClassesResponseProtoMsg {
 }
 /** QueryClassesResponse is the response type for the Query/Classes RPC method */
 export interface QueryClassesResponseAmino {
-  classes: ClassAmino[];
+  classes?: ClassAmino[];
   pagination?: PageResponseAmino;
 }
 export interface QueryClassesResponseAminoMsg {
@@ -375,10 +375,14 @@ export const QueryBalanceRequest = {
     return obj;
   },
   fromAmino(object: QueryBalanceRequestAmino): QueryBalanceRequest {
-    return {
-      classId: object.class_id,
-      owner: object.owner
-    };
+    const message = createBaseQueryBalanceRequest();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
   toAmino(message: QueryBalanceRequest): QueryBalanceRequestAmino {
     const obj: any = {};
@@ -467,9 +471,11 @@ export const QueryBalanceResponse = {
     return obj;
   },
   fromAmino(object: QueryBalanceResponseAmino): QueryBalanceResponse {
-    return {
-      amount: BigInt(object.amount)
-    };
+    const message = createBaseQueryBalanceResponse();
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = BigInt(object.amount);
+    }
+    return message;
   },
   toAmino(message: QueryBalanceResponse): QueryBalanceResponseAmino {
     const obj: any = {};
@@ -567,10 +573,14 @@ export const QueryOwnerRequest = {
     return obj;
   },
   fromAmino(object: QueryOwnerRequestAmino): QueryOwnerRequest {
-    return {
-      classId: object.class_id,
-      id: object.id
-    };
+    const message = createBaseQueryOwnerRequest();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    return message;
   },
   toAmino(message: QueryOwnerRequest): QueryOwnerRequestAmino {
     const obj: any = {};
@@ -657,9 +667,11 @@ export const QueryOwnerResponse = {
     return obj;
   },
   fromAmino(object: QueryOwnerResponseAmino): QueryOwnerResponse {
-    return {
-      owner: object.owner
-    };
+    const message = createBaseQueryOwnerResponse();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
   toAmino(message: QueryOwnerResponse): QueryOwnerResponseAmino {
     const obj: any = {};
@@ -745,9 +757,11 @@ export const QuerySupplyRequest = {
     return obj;
   },
   fromAmino(object: QuerySupplyRequestAmino): QuerySupplyRequest {
-    return {
-      classId: object.class_id
-    };
+    const message = createBaseQuerySupplyRequest();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    return message;
   },
   toAmino(message: QuerySupplyRequest): QuerySupplyRequestAmino {
     const obj: any = {};
@@ -835,9 +849,11 @@ export const QuerySupplyResponse = {
     return obj;
   },
   fromAmino(object: QuerySupplyResponseAmino): QuerySupplyResponse {
-    return {
-      amount: BigInt(object.amount)
-    };
+    const message = createBaseQuerySupplyResponse();
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = BigInt(object.amount);
+    }
+    return message;
   },
   toAmino(message: QuerySupplyResponse): QuerySupplyResponseAmino {
     const obj: any = {};
@@ -949,11 +965,17 @@ export const QueryNFTsRequest = {
     return obj;
   },
   fromAmino(object: QueryNFTsRequestAmino): QueryNFTsRequest {
-    return {
-      classId: object.class_id,
-      owner: object.owner,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryNFTsRequest();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryNFTsRequest): QueryNFTsRequestAmino {
     const obj: any = {};
@@ -1063,10 +1085,12 @@ export const QueryNFTsResponse = {
     return obj;
   },
   fromAmino(object: QueryNFTsResponseAmino): QueryNFTsResponse {
-    return {
-      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryNFTsResponse();
+    message.nfts = object.nfts?.map(e => NFT.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryNFTsResponse): QueryNFTsResponseAmino {
     const obj: any = {};
@@ -1169,10 +1193,14 @@ export const QueryNFTRequest = {
     return obj;
   },
   fromAmino(object: QueryNFTRequestAmino): QueryNFTRequest {
-    return {
-      classId: object.class_id,
-      id: object.id
-    };
+    const message = createBaseQueryNFTRequest();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    return message;
   },
   toAmino(message: QueryNFTRequest): QueryNFTRequestAmino {
     const obj: any = {};
@@ -1261,9 +1289,11 @@ export const QueryNFTResponse = {
     return obj;
   },
   fromAmino(object: QueryNFTResponseAmino): QueryNFTResponse {
-    return {
-      nft: object?.nft ? NFT.fromAmino(object.nft) : undefined
-    };
+    const message = createBaseQueryNFTResponse();
+    if (object.nft !== undefined && object.nft !== null) {
+      message.nft = NFT.fromAmino(object.nft);
+    }
+    return message;
   },
   toAmino(message: QueryNFTResponse): QueryNFTResponseAmino {
     const obj: any = {};
@@ -1349,9 +1379,11 @@ export const QueryClassRequest = {
     return obj;
   },
   fromAmino(object: QueryClassRequestAmino): QueryClassRequest {
-    return {
-      classId: object.class_id
-    };
+    const message = createBaseQueryClassRequest();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    return message;
   },
   toAmino(message: QueryClassRequest): QueryClassRequestAmino {
     const obj: any = {};
@@ -1439,9 +1471,11 @@ export const QueryClassResponse = {
     return obj;
   },
   fromAmino(object: QueryClassResponseAmino): QueryClassResponse {
-    return {
-      class: object?.class ? Class.fromAmino(object.class) : undefined
-    };
+    const message = createBaseQueryClassResponse();
+    if (object.class !== undefined && object.class !== null) {
+      message.class = Class.fromAmino(object.class);
+    }
+    return message;
   },
   toAmino(message: QueryClassResponse): QueryClassResponseAmino {
     const obj: any = {};
@@ -1529,9 +1563,11 @@ export const QueryClassesRequest = {
     return obj;
   },
   fromAmino(object: QueryClassesRequestAmino): QueryClassesRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryClassesRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryClassesRequest): QueryClassesRequestAmino {
     const obj: any = {};
@@ -1639,10 +1675,12 @@ export const QueryClassesResponse = {
     return obj;
   },
   fromAmino(object: QueryClassesResponseAmino): QueryClassesResponse {
-    return {
-      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryClassesResponse();
+    message.classes = object.classes?.map(e => Class.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryClassesResponse): QueryClassesResponseAmino {
     const obj: any = {};

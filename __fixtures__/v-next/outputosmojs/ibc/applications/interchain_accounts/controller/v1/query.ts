@@ -123,10 +123,14 @@ export const QueryInterchainAccountRequest = {
     return obj;
   },
   fromAmino(object: QueryInterchainAccountRequestAmino): QueryInterchainAccountRequest {
-    return {
-      owner: object.owner,
-      connectionId: object.connection_id
-    };
+    const message = createBaseQueryInterchainAccountRequest();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.connection_id !== undefined && object.connection_id !== null) {
+      message.connectionId = object.connection_id;
+    }
+    return message;
   },
   toAmino(message: QueryInterchainAccountRequest): QueryInterchainAccountRequestAmino {
     const obj: any = {};
@@ -217,9 +221,11 @@ export const QueryInterchainAccountResponse = {
     return obj;
   },
   fromAmino(object: QueryInterchainAccountResponseAmino): QueryInterchainAccountResponse {
-    return {
-      address: object.address
-    };
+    const message = createBaseQueryInterchainAccountResponse();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    return message;
   },
   toAmino(message: QueryInterchainAccountResponse): QueryInterchainAccountResponseAmino {
     const obj: any = {};
@@ -292,7 +298,8 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
@@ -381,9 +388,11 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};

@@ -1,6 +1,6 @@
 import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isSet } from "../../../../helpers";
+import { DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Error codes for Check responses. */
 export enum CheckError_Code {
@@ -226,7 +226,7 @@ export interface CheckErrorProtoMsg {
  */
 export interface CheckErrorAmino {
   /** The error code. */
-  code: CheckError_Code;
+  code?: CheckError_Code;
   /**
    * Subject to whom this error applies. See the specific code enum for more
    * details on this field. For example:
@@ -235,9 +235,9 @@ export interface CheckErrorAmino {
    * - "folder:<folder-id>"
    * - "organization:<organization-id>"
    */
-  subject: string;
+  subject?: string;
   /** Free-form text providing details on the error cause of the error. */
-  detail: string;
+  detail?: string;
   /**
    * Contains public information about the check error. If available,
    * `status.code` will be non zero and client can propagate it out as public
@@ -321,16 +321,24 @@ export const CheckError = {
     return message;
   },
   fromAmino(object: CheckErrorAmino): CheckError {
-    return {
-      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : -1,
-      subject: object.subject,
-      detail: object.detail,
-      status: object?.status ? Status.fromAmino(object.status) : undefined
-    };
+    const message = createBaseCheckError();
+    if (object.code !== undefined && object.code !== null) {
+      message.code = checkError_CodeFromJSON(object.code);
+    }
+    if (object.subject !== undefined && object.subject !== null) {
+      message.subject = object.subject;
+    }
+    if (object.detail !== undefined && object.detail !== null) {
+      message.detail = object.detail;
+    }
+    if (object.status !== undefined && object.status !== null) {
+      message.status = Status.fromAmino(object.status);
+    }
+    return message;
   },
   toAmino(message: CheckError): CheckErrorAmino {
     const obj: any = {};
-    obj.code = message.code;
+    obj.code = checkError_CodeToJSON(message.code);
     obj.subject = message.subject;
     obj.detail = message.detail;
     obj.status = message.status ? Status.toAmino(message.status) : undefined;

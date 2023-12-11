@@ -87,7 +87,7 @@ export interface SystemParametersAmino {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: SystemParameterRuleAmino[];
+  rules?: SystemParameterRuleAmino[];
 }
 export interface SystemParametersAminoMsg {
   type: "/google.api.SystemParameters";
@@ -140,7 +140,7 @@ export interface SystemParameterRuleAmino {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /**
    * Define parameters. Multiple names may be defined for a parameter.
    * For a given method call, only one of them should be used. If multiple
@@ -148,7 +148,7 @@ export interface SystemParameterRuleAmino {
    * If none of the specified names are present the behavior is
    * parameter-dependent.
    */
-  parameters: SystemParameterAmino[];
+  parameters?: SystemParameterAmino[];
 }
 export interface SystemParameterRuleAminoMsg {
   type: "/google.api.SystemParameterRule";
@@ -192,17 +192,17 @@ export interface SystemParameterProtoMsg {
  */
 export interface SystemParameterAmino {
   /** Define the name of the parameter, such as "api_key" . It is case sensitive. */
-  name: string;
+  name?: string;
   /**
    * Define the HTTP header name to use for the parameter. It is case
    * insensitive.
    */
-  http_header: string;
+  http_header?: string;
   /**
    * Define the URL query parameter name to use for the parameter. It is case
    * sensitive.
    */
-  url_query_parameter: string;
+  url_query_parameter?: string;
 }
 export interface SystemParameterAminoMsg {
   type: "/google.api.SystemParameter";
@@ -254,9 +254,9 @@ export const SystemParameters = {
     return message;
   },
   fromAmino(object: SystemParametersAmino): SystemParameters {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => SystemParameterRule.fromAmino(e)) : []
-    };
+    const message = createBaseSystemParameters();
+    message.rules = object.rules?.map(e => SystemParameterRule.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: SystemParameters): SystemParametersAmino {
     const obj: any = {};
@@ -327,10 +327,12 @@ export const SystemParameterRule = {
     return message;
   },
   fromAmino(object: SystemParameterRuleAmino): SystemParameterRule {
-    return {
-      selector: object.selector,
-      parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromAmino(e)) : []
-    };
+    const message = createBaseSystemParameterRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    message.parameters = object.parameters?.map(e => SystemParameter.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: SystemParameterRule): SystemParameterRuleAmino {
     const obj: any = {};
@@ -410,11 +412,17 @@ export const SystemParameter = {
     return message;
   },
   fromAmino(object: SystemParameterAmino): SystemParameter {
-    return {
-      name: object.name,
-      httpHeader: object.http_header,
-      urlQueryParameter: object.url_query_parameter
-    };
+    const message = createBaseSystemParameter();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.http_header !== undefined && object.http_header !== null) {
+      message.httpHeader = object.http_header;
+    }
+    if (object.url_query_parameter !== undefined && object.url_query_parameter !== null) {
+      message.urlQueryParameter = object.url_query_parameter;
+    }
+    return message;
   },
   toAmino(message: SystemParameter): SystemParameterAmino {
     const obj: any = {};

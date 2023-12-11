@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.crypto.secp256k1";
 /**
  * PubKey defines a secp256k1 public key
@@ -23,7 +23,7 @@ export interface PubKeyProtoMsg {
  * This prefix is followed with the x-coordinate.
  */
 export interface PubKeyAmino {
-  key: Uint8Array;
+  key?: string;
 }
 export interface PubKeyAminoMsg {
   type: "cosmos-sdk/PubKey";
@@ -49,7 +49,7 @@ export interface PrivKeyProtoMsg {
 }
 /** PrivKey defines a secp256k1 private key. */
 export interface PrivKeyAmino {
-  key: Uint8Array;
+  key?: string;
 }
 export interface PrivKeyAminoMsg {
   type: "cosmos-sdk/PrivKey";
@@ -95,13 +95,15 @@ export const PubKey = {
     return message;
   },
   fromAmino(object: PubKeyAmino): PubKey {
-    return {
-      key: object.key
-    };
+    const message = createBasePubKey();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = bytesFromBase64(object.key);
+    }
+    return message;
   },
   toAmino(message: PubKey): PubKeyAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
     return obj;
   },
   fromAminoMsg(object: PubKeyAminoMsg): PubKey {
@@ -162,13 +164,15 @@ export const PrivKey = {
     return message;
   },
   fromAmino(object: PrivKeyAmino): PrivKey {
-    return {
-      key: object.key
-    };
+    const message = createBasePrivKey();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = bytesFromBase64(object.key);
+    }
+    return message;
   },
   toAmino(message: PrivKey): PrivKeyAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
     return obj;
   },
   fromAminoMsg(object: PrivKeyAminoMsg): PrivKey {

@@ -18,10 +18,10 @@ export interface QueryGrantsRequestProtoMsg {
 }
 /** QueryGrantsRequest is the request type for the Query/Grants RPC method. */
 export interface QueryGrantsRequestAmino {
-  granter: string;
-  grantee: string;
+  granter?: string;
+  grantee?: string;
   /** Optional, msg_type_url, when set, will query only grants matching given msg type. */
-  msg_type_url: string;
+  msg_type_url?: string;
   /** pagination defines an pagination for the request. */
   pagination?: PageRequestAmino;
 }
@@ -50,7 +50,7 @@ export interface QueryGrantsResponseProtoMsg {
 /** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
 export interface QueryGrantsResponseAmino {
   /** authorizations is a list of grants granted for grantee by granter. */
-  grants: GrantAmino[];
+  grants?: GrantAmino[];
   /** pagination defines an pagination for the response. */
   pagination?: PageResponseAmino;
 }
@@ -75,7 +75,7 @@ export interface QueryGranterGrantsRequestProtoMsg {
 }
 /** QueryGranterGrantsRequest is the request type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsRequestAmino {
-  granter: string;
+  granter?: string;
   /** pagination defines an pagination for the request. */
   pagination?: PageRequestAmino;
 }
@@ -102,7 +102,7 @@ export interface QueryGranterGrantsResponseProtoMsg {
 /** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsResponseAmino {
   /** grants is a list of grants granted by the granter. */
-  grants: GrantAuthorizationAmino[];
+  grants?: GrantAuthorizationAmino[];
   /** pagination defines an pagination for the response. */
   pagination?: PageResponseAmino;
 }
@@ -127,7 +127,7 @@ export interface QueryGranteeGrantsRequestProtoMsg {
 }
 /** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
 export interface QueryGranteeGrantsRequestAmino {
-  grantee: string;
+  grantee?: string;
   /** pagination defines an pagination for the request. */
   pagination?: PageRequestAmino;
 }
@@ -154,7 +154,7 @@ export interface QueryGranteeGrantsResponseProtoMsg {
 /** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */
 export interface QueryGranteeGrantsResponseAmino {
   /** grants is a list of grants granted to the grantee. */
-  grants: GrantAuthorizationAmino[];
+  grants?: GrantAuthorizationAmino[];
   /** pagination defines an pagination for the response. */
   pagination?: PageResponseAmino;
 }
@@ -262,12 +262,20 @@ export const QueryGrantsRequest = {
     return obj;
   },
   fromAmino(object: QueryGrantsRequestAmino): QueryGrantsRequest {
-    return {
-      granter: object.granter,
-      grantee: object.grantee,
-      msgTypeUrl: object.msg_type_url,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryGrantsRequest();
+    if (object.granter !== undefined && object.granter !== null) {
+      message.granter = object.granter;
+    }
+    if (object.grantee !== undefined && object.grantee !== null) {
+      message.grantee = object.grantee;
+    }
+    if (object.msg_type_url !== undefined && object.msg_type_url !== null) {
+      message.msgTypeUrl = object.msg_type_url;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryGrantsRequest): QueryGrantsRequestAmino {
     const obj: any = {};
@@ -378,10 +386,12 @@ export const QueryGrantsResponse = {
     return obj;
   },
   fromAmino(object: QueryGrantsResponseAmino): QueryGrantsResponse {
-    return {
-      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => Grant.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryGrantsResponse();
+    message.grants = object.grants?.map(e => Grant.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryGrantsResponse): QueryGrantsResponseAmino {
     const obj: any = {};
@@ -486,10 +496,14 @@ export const QueryGranterGrantsRequest = {
     return obj;
   },
   fromAmino(object: QueryGranterGrantsRequestAmino): QueryGranterGrantsRequest {
-    return {
-      granter: object.granter,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryGranterGrantsRequest();
+    if (object.granter !== undefined && object.granter !== null) {
+      message.granter = object.granter;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryGranterGrantsRequest): QueryGranterGrantsRequestAmino {
     const obj: any = {};
@@ -598,10 +612,12 @@ export const QueryGranterGrantsResponse = {
     return obj;
   },
   fromAmino(object: QueryGranterGrantsResponseAmino): QueryGranterGrantsResponse {
-    return {
-      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryGranterGrantsResponse();
+    message.grants = object.grants?.map(e => GrantAuthorization.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryGranterGrantsResponse): QueryGranterGrantsResponseAmino {
     const obj: any = {};
@@ -706,10 +722,14 @@ export const QueryGranteeGrantsRequest = {
     return obj;
   },
   fromAmino(object: QueryGranteeGrantsRequestAmino): QueryGranteeGrantsRequest {
-    return {
-      grantee: object.grantee,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryGranteeGrantsRequest();
+    if (object.grantee !== undefined && object.grantee !== null) {
+      message.grantee = object.grantee;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryGranteeGrantsRequest): QueryGranteeGrantsRequestAmino {
     const obj: any = {};
@@ -818,10 +838,12 @@ export const QueryGranteeGrantsResponse = {
     return obj;
   },
   fromAmino(object: QueryGranteeGrantsResponseAmino): QueryGranteeGrantsResponse {
-    return {
-      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryGranteeGrantsResponse();
+    message.grants = object.grants?.map(e => GrantAuthorization.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryGranteeGrantsResponse): QueryGranteeGrantsResponseAmino {
     const obj: any = {};

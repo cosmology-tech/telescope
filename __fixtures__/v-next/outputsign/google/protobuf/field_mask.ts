@@ -413,7 +413,7 @@ export interface FieldMaskProtoMsg {
  */
 export interface FieldMaskAmino {
   /** The set of field mask paths. */
-  paths: string[];
+  paths?: string[];
 }
 export interface FieldMaskAminoMsg {
   type: "/google.protobuf.FieldMask";
@@ -659,9 +659,9 @@ export const FieldMask = {
     return message;
   },
   fromAmino(object: FieldMaskAmino): FieldMask {
-    return {
-      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
-    };
+    const message = createBaseFieldMask();
+    message.paths = object.paths?.map(e => e) || [];
+    return message;
   },
   toAmino(message: FieldMask): FieldMaskAmino {
     const obj: any = {};

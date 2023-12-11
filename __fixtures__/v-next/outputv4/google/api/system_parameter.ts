@@ -193,9 +193,9 @@ export const SystemParameters = {
     return obj;
   },
   fromAmino(object: SystemParametersAmino): SystemParameters {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => SystemParameterRule.fromAmino(e)) : []
-    };
+    const message = createBaseSystemParameters();
+    message.rules = object.rules?.map(e => SystemParameterRule.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: SystemParameters): SystemParametersAmino {
     const obj: any = {};
@@ -304,10 +304,12 @@ export const SystemParameterRule = {
     return obj;
   },
   fromAmino(object: SystemParameterRuleAmino): SystemParameterRule {
-    return {
-      selector: object.selector,
-      parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromAmino(e)) : []
-    };
+    const message = createBaseSystemParameterRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    message.parameters = object.parameters?.map(e => SystemParameter.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: SystemParameterRule): SystemParameterRuleAmino {
     const obj: any = {};
@@ -422,11 +424,17 @@ export const SystemParameter = {
     return obj;
   },
   fromAmino(object: SystemParameterAmino): SystemParameter {
-    return {
-      name: object.name,
-      httpHeader: object.http_header,
-      urlQueryParameter: object.url_query_parameter
-    };
+    const message = createBaseSystemParameter();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.http_header !== undefined && object.http_header !== null) {
+      message.httpHeader = object.http_header;
+    }
+    if (object.url_query_parameter !== undefined && object.url_query_parameter !== null) {
+      message.urlQueryParameter = object.url_query_parameter;
+    }
+    return message;
   },
   toAmino(message: SystemParameter): SystemParameterAmino {
     const obj: any = {};

@@ -159,14 +159,18 @@ export const ModuleRoute = {
     return obj;
   },
   fromAmino(object: ModuleRouteAmino): ModuleRoute {
-    return {
-      poolType: isSet(object.pool_type) ? poolTypeFromJSON(object.pool_type) : -1,
-      poolId: object?.pool_id ? BigInt(object.pool_id) : undefined
-    };
+    const message = createBaseModuleRoute();
+    if (object.pool_type !== undefined && object.pool_type !== null) {
+      message.poolType = poolTypeFromJSON(object.pool_type);
+    }
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    return message;
   },
   toAmino(message: ModuleRoute): ModuleRouteAmino {
     const obj: any = {};
-    obj.pool_type = message.poolType;
+    obj.pool_type = poolTypeToJSON(message.poolType);
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     return obj;
   },
