@@ -294,33 +294,6 @@ describe("implements interface works", () => {
   });
 
   it("toAmino for interface", () => {
-    // Amino
-    const amino: GrantAmino = {
-      authorization: {
-        type: "",
-        value: {
-          spendLimit: [
-            {
-              denom: "d",
-              amount: "1",
-            },
-          ],
-        },
-      },
-      expiration: "2020-01-01",
-      opt: 0,
-      single_msg: {
-        type: "",
-        value: "",
-      },
-      messages: [
-        {
-          type: "",
-          value: "",
-        },
-      ],
-    };
-
     // const data = Grant.encode({
     //   authorization: {
     //     spendLimit: [

@@ -137,7 +137,7 @@ export const fromAmino = {
     if (isGlobalRegistry) {
       aminoFuncExpr = t.memberExpression(
         t.identifier("GlobalDecoderRegistry"),
-        t.identifier("fromAmino")
+        t.identifier("fromAminoMsg")
       );
     }
 
@@ -577,7 +577,7 @@ export const arrayTypes = {
     if (isGlobalRegistry) {
       aminoFuncExpr = t.memberExpression(
         t.identifier("GlobalDecoderRegistry"),
-        t.identifier("fromAmino")
+        t.identifier("fromAminoMsg")
       );
     }
 

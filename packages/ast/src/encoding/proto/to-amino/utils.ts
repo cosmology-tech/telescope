@@ -169,9 +169,14 @@
           const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
           const interfaceFnName = getInterfaceToAminoName(interfaceName)
 
+          args.context.getTypeName(args.field);
+
           const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
 
-          let defaultValue: t.Expression = dontOmitempty ? getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf) : t.identifier('undefined');
+          let defaultValue: t.Expression = dontOmitempty ? t.objectExpression([
+            t.objectProperty(t.identifier("type"), t.stringLiteral("")),
+            t.objectProperty(t.identifier("value"), t.objectExpression([])),
+          ]) : t.identifier('undefined');
 
           let aminoFuncExpr: t.Expression = t.callExpression(
             t.identifier(interfaceFnName),
@@ -195,7 +200,7 @@
 
           if(isGlobalRegistry) {
             aminoFuncExpr = t.callExpression(
-              t.memberExpression(t.identifier('GlobalDecoderRegistry'), t.identifier('toAmino')),
+              t.memberExpression(t.identifier('GlobalDecoderRegistry'), t.identifier('toAminoMsg')),
               [
                 t.memberExpression(
                   t.identifier('message'),
@@ -772,7 +777,7 @@ export const arrayTypes = {
 
         if(isGlobalRegistry) {
           aminoFuncExpr = t.callExpression(
-            t.memberExpression(t.identifier('GlobalDecoderRegistry'), t.identifier('toAmino')),
+            t.memberExpression(t.identifier('GlobalDecoderRegistry'), t.identifier('toAminoMsg')),
             [
               t.identifier('e')
             ]

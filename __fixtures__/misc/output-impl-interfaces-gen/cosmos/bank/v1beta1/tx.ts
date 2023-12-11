@@ -79,6 +79,7 @@ function createBaseMsgInstantiateContract2(): MsgInstantiateContract2 {
 }
 export const MsgInstantiateContract2 = {
   typeUrl: "/cosmos.bank.v1beta1.MsgInstantiateContract2",
+  aminoType: "wasm/MsgInstantiateContract2",
   is(o: any): o is MsgInstantiateContract2 {
     return o && (o.$typeUrl === MsgInstantiateContract2.typeUrl || typeof o.codeId === "bigint" && typeof o.label === "string" && Array.isArray(o.funds) && (!o.funds.length || Coin.is(o.funds[0])) && (o.salt instanceof Uint8Array || typeof o.salt === "string") && typeof o.fixMsg === "boolean" && typeof o.dontOmitemptyFixMsg === "boolean" && Array.isArray(o.aListOfBytes) && (!o.aListOfBytes.length || o.aListOfBytes[0] instanceof Uint8Array || typeof o.aListOfBytes[0] === "string"));
   },
@@ -294,3 +295,4 @@ export const MsgInstantiateContract2 = {
   }
 };
 GlobalDecoderRegistry.register(MsgInstantiateContract2.typeUrl, MsgInstantiateContract2);
+GlobalDecoderRegistry.registerAminoProtoMapping(MsgInstantiateContract2.aminoType, MsgInstantiateContract2.typeUrl);
