@@ -294,54 +294,78 @@ describe("implements interface works", () => {
   });
 
   it("toAmino for interface", () => {
-    // Amino
+    const data = Grant.encode({
+      authorization: {
+        spendLimit: [
+          {
+            denom: "d",
+            amount: "1",
+          },
+        ],
+      },
+      expiration: new Date("2020-01-01"),
+      opt: 0,
+      singleMsg: Any.fromPartial({}),
+      messages: [Any.fromPartial({})],
+    }).finish();
+
+    const message = Grant.decode(data);
+
+    const amino = Grant.toAmino(message);
+
+    expect(amino).toMatchSnapshot();
+  });
+
+  it("fromAmino for interface", () => {
     const amino: GrantAmino = {
       authorization: {
-        type: "",
+        type: "cosmos-sdk/SendAuthorization",
         value: {
+          spend_limit: [
+            {
+              amount: "1",
+              denom: "d",
+            },
+          ],
+        },
+      },
+      expiration: "2020-01-01T00:00:00Z",
+      messages: [
+        {
+          type: "",
+          value: {},
+        },
+      ],
+      single_msg: {
+        type: "",
+        value: {},
+      },
+    };
+
+    const data = Grant.fromAmino(amino);
+
+    expect(data).toMatchSnapshot();
+  });
+
+  it("toAmino for interface with Any", () => {
+    const amino = Grant.toAmino({
+      authorization: {
+        typeUrl: "/cosmos.bank.v1beta1.SendAuthorization",
+        value: SendAuthorization.encode({
           spendLimit: [
             {
               denom: "d",
               amount: "1",
             },
           ],
-        },
+        }).finish(),
       },
-      expiration: "2020-01-01",
+      expiration: new Date("2020-01-01"),
       opt: 0,
-      single_msg: {
-        type: "",
-        value: "",
-      },
-      messages: [
-        {
-          type: "",
-          value: "",
-        },
-      ],
-    };
+      singleMsg: Any.fromPartial({}),
+      messages: [Any.fromPartial({})],
+    });
 
-    // const data = Grant.encode({
-    //   authorization: {
-    //     spendLimit: [
-    //       {
-    //         denom: "d",
-    //         amount: "1",
-    //       },
-    //     ],
-    //   },
-    //   expiration: new Date("2020-01-01"),
-    //   opt: 0,
-    //   singleMsg: Any.fromPartial({}),
-    //   messages: [Any.fromPartial({})],
-    // }).finish();
-
-    // const message = Grant.decode(data);
-
-    // const amino = Grant.toAmino(message);
-
-    // expect(amino).toMatchSnapshot();
+    expect(amino).toMatchSnapshot();
   });
-
-  it("fromAmino for interface", () => {});
 });

@@ -2017,10 +2017,10 @@ export const AminoEncodingTest = {
       message.dOProto = AccessConfig.fromAmino(object.d_o_proto);
     }
     if (object.auth !== undefined && object.auth !== null) {
-      message.auth = GlobalDecoderRegistry.fromAmino(object.auth);
+      message.auth = GlobalDecoderRegistry.fromAminoMsg(object.auth);
     }
     if (object.d_o_auth !== undefined && object.d_o_auth !== null) {
-      message.dOAuth = GlobalDecoderRegistry.fromAmino(object.d_o_auth);
+      message.dOAuth = GlobalDecoderRegistry.fromAminoMsg(object.d_o_auth);
     }
     if (object.salt !== undefined && object.salt !== null) {
       message.salt = bytesFromBase64(object.salt);
@@ -2080,8 +2080,8 @@ export const AminoEncodingTest = {
     message.dOPeriods = object.d_o_periods?.map(e => Duration.fromAmino(e)) || [];
     message.protos = object.protos?.map(e => AccessConfig.fromAmino(e)) || [];
     message.dOProtos = object.d_o_protos?.map(e => AccessConfig.fromAmino(e)) || [];
-    message.auths = object.auths?.map(e => GlobalDecoderRegistry.fromAmino(e)) || [];
-    message.dOAuths = object.d_o_auths?.map(e => GlobalDecoderRegistry.fromAmino(e)) || [];
+    message.auths = object.auths?.map(e => GlobalDecoderRegistry.fromAminoMsg(e)) || [];
+    message.dOAuths = object.d_o_auths?.map(e => GlobalDecoderRegistry.fromAminoMsg(e)) || [];
     return message;
   },
   toAmino(message: AminoEncodingTest): AminoEncodingTestAmino {
@@ -2096,8 +2096,11 @@ export const AminoEncodingTest = {
     obj.d_o_big = message.dOBig ? message.dOBig.toString() : "0";
     obj.proto = message.proto ? AccessConfig.toAmino(message.proto) : undefined;
     obj.d_o_proto = message.dOProto ? AccessConfig.toAmino(message.dOProto) : AccessConfig.fromPartial({});
-    obj.auth = message.auth ? GlobalDecoderRegistry.toAmino(message.auth) : undefined;
-    obj.d_o_auth = message.dOAuth ? GlobalDecoderRegistry.toAmino(message.dOAuth) : Any.fromPartial({});
+    obj.auth = message.auth ? GlobalDecoderRegistry.toAminoMsg(message.auth) : undefined;
+    obj.d_o_auth = message.dOAuth ? GlobalDecoderRegistry.toAminoMsg(message.dOAuth) : {
+      type: "",
+      value: {}
+    };
     obj.salt = message.salt ? base64FromBytes(message.salt) : undefined;
     obj.d_o_salt = message.dOSalt ? base64FromBytes(message.dOSalt) : "";
     obj.raw = message.raw ? JSON.parse(fromUtf8(message.raw)) : undefined;
@@ -2193,12 +2196,12 @@ export const AminoEncodingTest = {
       obj.d_o_protos = [];
     }
     if (message.auths) {
-      obj.auths = message.auths.map(e => e ? GlobalDecoderRegistry.toAmino(e) : undefined);
+      obj.auths = message.auths.map(e => e ? GlobalDecoderRegistry.toAminoMsg(e) : undefined);
     } else {
       obj.auths = [];
     }
     if (message.dOAuths) {
-      obj.d_o_auths = message.dOAuths.map(e => e ? GlobalDecoderRegistry.toAmino(e) : undefined);
+      obj.d_o_auths = message.dOAuths.map(e => e ? GlobalDecoderRegistry.toAminoMsg(e) : undefined);
     } else {
       obj.d_o_auths = [];
     }

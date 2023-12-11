@@ -13,7 +13,7 @@ import { ProtoParseContext } from './context';
 import { createAminoTypeProperty, createTypeUrlProperty, fromProtoMsgMethod, fromSDKJSONMethod, toProtoMethod, toProtoMsgMethod } from './proto';
 import { isMethod } from './proto/is';
 import { getAminoFieldName, getSdkFieldName } from '../utils';
-import { getTypeUrl } from '@cosmology/utils';
+import { getAminoTypeName, getTypeUrl } from '@cosmology/utils';
 
 export const createObjectWithMethods = (
     context: ProtoParseContext,
@@ -23,7 +23,7 @@ export const createObjectWithMethods = (
 
     const methodsAndProps = [
         ( context.pluginValue('prototypes.addTypeUrlToObjects') || context.pluginValue('interfaces.enabled') && context.pluginValue('interfaces.useGlobalDecoderRegistry') ) && createTypeUrlProperty(context, proto),
-        context.pluginValue('prototypes.addAminoTypeToObjects') && createAminoTypeProperty(context, proto),
+        ( context.pluginValue('prototypes.addAminoTypeToObjects') || context.pluginValue('interfaces.enabled') && context.pluginValue('interfaces.useGlobalDecoderRegistry') ) && createAminoTypeProperty(context, proto),
         context.pluginValue('interfaces.enabled') && context.pluginValue('interfaces.useGlobalDecoderRegistry') && isMethod({context, name, proto}),
         context.pluginValue('interfaces.enabled') && context.pluginValue('interfaces.useGlobalDecoderRegistry') && context.pluginValue('useSDKTypes') && isMethod({context, name, proto, methodName: "isSDK", getFieldName: getSdkFieldName}),
         context.pluginValue('interfaces.enabled') && context.pluginValue('interfaces.useGlobalDecoderRegistry') && context.pluginValue('aminoEncoding.enabled') && !context.pluginValue('aminoEncoding.useLegacyInlineEncoding') && isMethod({context, name, proto, methodName: "isAmino", getFieldName: getAminoFieldName}),
@@ -77,6 +77,30 @@ export const createRegisterObject = (
       [
         t.memberExpression(t.identifier(name), t.identifier("typeUrl")),
         t.identifier(name),
+      ]
+    )
+  );
+};
+
+export const createRegisterAminoProtoMapping = (
+  context: ProtoParseContext,
+  name: string,
+  proto: ProtoType,
+) => {
+  context.addUtil("GlobalDecoderRegistry");
+
+  const str = getAminoTypeName(context, context.ref.proto, proto);
+  if (!str || str.startsWith('/')) return;
+
+  return t.expressionStatement(
+    t.callExpression(
+      t.memberExpression(
+        t.identifier("GlobalDecoderRegistry"),
+        t.identifier("registerAminoProtoMapping")
+      ),
+      [
+        t.memberExpression(t.identifier(name), t.identifier("aminoType")),
+        t.memberExpression(t.identifier(name), t.identifier("typeUrl")),
       ]
     )
   );

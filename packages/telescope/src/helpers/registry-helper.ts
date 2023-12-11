@@ -1,11 +1,20 @@
 export const registryHelper = `import { BinaryReader } from "./binary";
-import { Any } from "./google/protobuf/any";
+import { Any, AnyAmino } from "./google/protobuf/any";
 import { IProtoType, TelescopeGeneratedCodec } from "./types";
 
 export class GlobalDecoderRegistry {
   static registry: {
     [key: string]: TelescopeGeneratedCodec<any, any, any>;
   } = {};
+
+  static aminoProtoMapping: {
+    [key: string]: string;
+  } = {};
+
+  static registerAminoProtoMapping(aminoType: string, typeUrl) {
+    GlobalDecoderRegistry.aminoProtoMapping[aminoType] = typeUrl;
+  }
+
   static register<T, SDK, Amino>(
     key: string,
     decoder: TelescopeGeneratedCodec<T, SDK, Amino>
@@ -26,7 +35,9 @@ export class GlobalDecoderRegistry {
     const protoType = obj as IProtoType;
 
     if (protoType.$typeUrl) {
-      return this.getDecoder<T, SDK, Amino>(protoType.$typeUrl);
+      return GlobalDecoderRegistry.getDecoder<T, SDK, Amino>(
+        protoType.$typeUrl
+      );
     }
 
     for (const key in GlobalDecoderRegistry.registry) {
@@ -54,6 +65,21 @@ export class GlobalDecoderRegistry {
 
     return null;
   }
+  static getDecoderByAminoType<T, SDK, Amino>(
+    type: string
+  ): TelescopeGeneratedCodec<T, SDK, Amino> | null {
+    if (type === undefined || type === null) {
+      return null;
+    }
+
+    const typeUrl = GlobalDecoderRegistry.aminoProtoMapping[type];
+
+    if (!typeUrl) {
+      return null;
+    }
+
+    return GlobalDecoderRegistry.getDecoder<T, SDK, Amino>(typeUrl);
+  }
   static wrapAny(obj: unknown): Any {
     const decoder = getDecoderByInstance(obj);
 
@@ -62,11 +88,17 @@ export class GlobalDecoderRegistry {
       value: decoder.encode(obj).finish(),
     };
   }
-  static unwrapAny<T, SDK, Amino>(input: BinaryReader | Uint8Array) {
-    const reader =
-      input instanceof BinaryReader ? input : new BinaryReader(input);
+  static unwrapAny<T, SDK, Amino>(input: BinaryReader | Uint8Array | Any) {
+    let data;
 
-    const data = Any.decode(reader, reader.uint32());
+    if (Any.is(input)) {
+      data = input;
+    } else {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+
+      data = Any.decode(reader, reader.uint32());
+    }
 
     const decoder = GlobalDecoderRegistry.getDecoder<T, SDK, Amino>(
       data.typeUrl
@@ -106,9 +138,54 @@ export class GlobalDecoderRegistry {
     const decoder = getDecoderByInstance<T, unknown, Amino>(object);
     return decoder.fromAmino!(object);
   }
+  static fromAminoMsg<T = unknown, Amino = unknown>(object: AnyAmino): T {
+    const decoder = GlobalDecoderRegistry.getDecoderByAminoType<
+      T,
+      unknown,
+      Amino
+    >(object.type);
+
+    if (!decoder) {
+      throw new Error(\`There's no decoder for the amino type \${object.type}\`);
+    }
+
+    return decoder.fromAminoMsg!(object);
+  }
   static toAmino<T = unknown, Amino = unknown>(object: T): Amino {
-    const decoder = getDecoderByInstance<T, unknown, Amino>(object);
-    return decoder.toAmino!(object);
+    let data: any;
+    let decoder;
+    if (Any.is(object)) {
+      data = GlobalDecoderRegistry.unwrapAny(object);
+
+      decoder = GlobalDecoderRegistry.getDecoder(object.typeUrl);
+
+      if (!decoder) {
+        decoder = Any;
+      }
+    } else {
+      data = object;
+      decoder = getDecoderByInstance<T, unknown, Amino>(object);
+    }
+
+    return decoder.toAmino!(data);
+  }
+  static toAminoMsg<T = unknown, Amino = unknown>(object: T): AnyAmino {
+    let data: any;
+    let decoder;
+    if (Any.is(object)) {
+      data = GlobalDecoderRegistry.unwrapAny(object);
+
+      decoder = GlobalDecoderRegistry.getDecoder(object.typeUrl);
+
+      if (!decoder) {
+        decoder = Any;
+      }
+    } else {
+      data = object;
+      decoder = getDecoderByInstance<T, unknown, Amino>(object);
+    }
+
+    return decoder.toAminoMsg!(data);
   }
 }
 

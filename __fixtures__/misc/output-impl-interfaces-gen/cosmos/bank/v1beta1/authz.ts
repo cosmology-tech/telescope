@@ -45,6 +45,7 @@ function createBaseSendAuthorization(): SendAuthorization {
 }
 export const SendAuthorization = {
   typeUrl: "/cosmos.bank.v1beta1.SendAuthorization",
+  aminoType: "cosmos-sdk/SendAuthorization",
   is(o: any): o is SendAuthorization {
     return o && (o.$typeUrl === SendAuthorization.typeUrl || Array.isArray(o.spendLimit) && (!o.spendLimit.length || Coin.is(o.spendLimit[0])));
   },
@@ -152,3 +153,4 @@ export const SendAuthorization = {
   }
 };
 GlobalDecoderRegistry.register(SendAuthorization.typeUrl, SendAuthorization);
+GlobalDecoderRegistry.registerAminoProtoMapping(SendAuthorization.aminoType, SendAuthorization.typeUrl);
