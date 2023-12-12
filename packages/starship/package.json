@@ -97,10 +97,10 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@cosmjs/amino": "^0.31.2",
-    "@cosmjs/proto-signing": "^0.31.2",
-    "@cosmjs/stargate": "^0.31.2",
-    "@cosmjs/tendermint-rpc": "^0.31.2",
+    "@cosmjs/amino": "^0.32.0",
+    "@cosmjs/proto-signing": "^0.32.0",
+    "@cosmjs/stargate": "^0.32.0",
+    "@cosmjs/tendermint-rpc": "^0.32.0",
     "@cosmology/core": "1.23.0",
     "@cosmology/lcd": "^0.13.3",
     "@keplr-wallet/unit": "0.11.56",
