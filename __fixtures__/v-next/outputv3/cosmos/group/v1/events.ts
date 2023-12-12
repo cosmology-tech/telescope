@@ -14,7 +14,7 @@ export interface EventCreateGroupProtoMsg {
 /** EventCreateGroup is an event emitted when a group is created. */
 export interface EventCreateGroupAmino {
   /** group_id is the unique ID of the group. */
-  group_id: string;
+  group_id?: string;
 }
 /** EventCreateGroup is an event emitted when a group is created. */
 export interface EventCreateGroupSDKType {
@@ -32,7 +32,7 @@ export interface EventUpdateGroupProtoMsg {
 /** EventUpdateGroup is an event emitted when a group is updated. */
 export interface EventUpdateGroupAmino {
   /** group_id is the unique ID of the group. */
-  group_id: string;
+  group_id?: string;
 }
 /** EventUpdateGroup is an event emitted when a group is updated. */
 export interface EventUpdateGroupSDKType {
@@ -50,7 +50,7 @@ export interface EventCreateGroupPolicyProtoMsg {
 /** EventCreateGroupPolicy is an event emitted when a group policy is created. */
 export interface EventCreateGroupPolicyAmino {
   /** address is the account address of the group policy. */
-  address: string;
+  address?: string;
 }
 /** EventCreateGroupPolicy is an event emitted when a group policy is created. */
 export interface EventCreateGroupPolicySDKType {
@@ -68,7 +68,7 @@ export interface EventUpdateGroupPolicyProtoMsg {
 /** EventUpdateGroupPolicy is an event emitted when a group policy is updated. */
 export interface EventUpdateGroupPolicyAmino {
   /** address is the account address of the group policy. */
-  address: string;
+  address?: string;
 }
 /** EventUpdateGroupPolicy is an event emitted when a group policy is updated. */
 export interface EventUpdateGroupPolicySDKType {
@@ -86,7 +86,7 @@ export interface EventSubmitProposalProtoMsg {
 /** EventSubmitProposal is an event emitted when a proposal is created. */
 export interface EventSubmitProposalAmino {
   /** proposal_id is the unique ID of the proposal. */
-  proposal_id: string;
+  proposal_id?: string;
 }
 /** EventSubmitProposal is an event emitted when a proposal is created. */
 export interface EventSubmitProposalSDKType {
@@ -104,7 +104,7 @@ export interface EventWithdrawProposalProtoMsg {
 /** EventWithdrawProposal is an event emitted when a proposal is withdrawn. */
 export interface EventWithdrawProposalAmino {
   /** proposal_id is the unique ID of the proposal. */
-  proposal_id: string;
+  proposal_id?: string;
 }
 /** EventWithdrawProposal is an event emitted when a proposal is withdrawn. */
 export interface EventWithdrawProposalSDKType {
@@ -122,7 +122,7 @@ export interface EventVoteProtoMsg {
 /** EventVote is an event emitted when a voter votes on a proposal. */
 export interface EventVoteAmino {
   /** proposal_id is the unique ID of the proposal. */
-  proposal_id: string;
+  proposal_id?: string;
 }
 /** EventVote is an event emitted when a voter votes on a proposal. */
 export interface EventVoteSDKType {
@@ -142,9 +142,9 @@ export interface EventExecProtoMsg {
 /** EventExec is an event emitted when a proposal is executed. */
 export interface EventExecAmino {
   /** proposal_id is the unique ID of the proposal. */
-  proposal_id: string;
+  proposal_id?: string;
   /** result is the proposal execution result. */
-  result: ProposalExecutorResult;
+  result?: ProposalExecutorResult;
 }
 /** EventExec is an event emitted when a proposal is executed. */
 export interface EventExecSDKType {
@@ -165,9 +165,9 @@ export interface EventLeaveGroupProtoMsg {
 /** EventLeaveGroup is an event emitted when group member leaves the group. */
 export interface EventLeaveGroupAmino {
   /** group_id is the unique ID of the group. */
-  group_id: string;
+  group_id?: string;
   /** address is the account address of the group member. */
-  address: string;
+  address?: string;
 }
 /** EventLeaveGroup is an event emitted when group member leaves the group. */
 export interface EventLeaveGroupSDKType {
@@ -233,9 +233,11 @@ export const EventCreateGroup = {
     return obj;
   },
   fromAmino(object: EventCreateGroupAmino): EventCreateGroup {
-    return {
-      groupId: BigInt(object.group_id)
-    };
+    const message = createBaseEventCreateGroup();
+    if (object.group_id !== undefined && object.group_id !== null) {
+      message.groupId = BigInt(object.group_id);
+    }
+    return message;
   },
   toAmino(message: EventCreateGroup, useInterfaces: boolean = true): EventCreateGroupAmino {
     const obj: any = {};
@@ -314,9 +316,11 @@ export const EventUpdateGroup = {
     return obj;
   },
   fromAmino(object: EventUpdateGroupAmino): EventUpdateGroup {
-    return {
-      groupId: BigInt(object.group_id)
-    };
+    const message = createBaseEventUpdateGroup();
+    if (object.group_id !== undefined && object.group_id !== null) {
+      message.groupId = BigInt(object.group_id);
+    }
+    return message;
   },
   toAmino(message: EventUpdateGroup, useInterfaces: boolean = true): EventUpdateGroupAmino {
     const obj: any = {};
@@ -393,9 +397,11 @@ export const EventCreateGroupPolicy = {
     return obj;
   },
   fromAmino(object: EventCreateGroupPolicyAmino): EventCreateGroupPolicy {
-    return {
-      address: object.address
-    };
+    const message = createBaseEventCreateGroupPolicy();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    return message;
   },
   toAmino(message: EventCreateGroupPolicy, useInterfaces: boolean = true): EventCreateGroupPolicyAmino {
     const obj: any = {};
@@ -472,9 +478,11 @@ export const EventUpdateGroupPolicy = {
     return obj;
   },
   fromAmino(object: EventUpdateGroupPolicyAmino): EventUpdateGroupPolicy {
-    return {
-      address: object.address
-    };
+    const message = createBaseEventUpdateGroupPolicy();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    return message;
   },
   toAmino(message: EventUpdateGroupPolicy, useInterfaces: boolean = true): EventUpdateGroupPolicyAmino {
     const obj: any = {};
@@ -553,9 +561,11 @@ export const EventSubmitProposal = {
     return obj;
   },
   fromAmino(object: EventSubmitProposalAmino): EventSubmitProposal {
-    return {
-      proposalId: BigInt(object.proposal_id)
-    };
+    const message = createBaseEventSubmitProposal();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    return message;
   },
   toAmino(message: EventSubmitProposal, useInterfaces: boolean = true): EventSubmitProposalAmino {
     const obj: any = {};
@@ -634,9 +644,11 @@ export const EventWithdrawProposal = {
     return obj;
   },
   fromAmino(object: EventWithdrawProposalAmino): EventWithdrawProposal {
-    return {
-      proposalId: BigInt(object.proposal_id)
-    };
+    const message = createBaseEventWithdrawProposal();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    return message;
   },
   toAmino(message: EventWithdrawProposal, useInterfaces: boolean = true): EventWithdrawProposalAmino {
     const obj: any = {};
@@ -715,9 +727,11 @@ export const EventVote = {
     return obj;
   },
   fromAmino(object: EventVoteAmino): EventVote {
-    return {
-      proposalId: BigInt(object.proposal_id)
-    };
+    const message = createBaseEventVote();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    return message;
   },
   toAmino(message: EventVote, useInterfaces: boolean = true): EventVoteAmino {
     const obj: any = {};
@@ -808,15 +822,19 @@ export const EventExec = {
     return obj;
   },
   fromAmino(object: EventExecAmino): EventExec {
-    return {
-      proposalId: BigInt(object.proposal_id),
-      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : -1
-    };
+    const message = createBaseEventExec();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    if (object.result !== undefined && object.result !== null) {
+      message.result = proposalExecutorResultFromJSON(object.result);
+    }
+    return message;
   },
   toAmino(message: EventExec, useInterfaces: boolean = true): EventExecAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.result = message.result;
+    obj.result = proposalExecutorResultToJSON(message.result);
     return obj;
   },
   fromProtoMsg(message: EventExecProtoMsg, useInterfaces: boolean = true): EventExec {
@@ -903,10 +921,14 @@ export const EventLeaveGroup = {
     return obj;
   },
   fromAmino(object: EventLeaveGroupAmino): EventLeaveGroup {
-    return {
-      groupId: BigInt(object.group_id),
-      address: object.address
-    };
+    const message = createBaseEventLeaveGroup();
+    if (object.group_id !== undefined && object.group_id !== null) {
+      message.groupId = BigInt(object.group_id);
+    }
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    return message;
   },
   toAmino(message: EventLeaveGroup, useInterfaces: boolean = true): EventLeaveGroupAmino {
     const obj: any = {};

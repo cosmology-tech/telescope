@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet } from "../../../helpers";
+import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.claims.v1";
 /** Action defines the list of available actions to claim the airdrop tokens. */
 export enum Action {
@@ -79,11 +79,11 @@ export interface ClaimProtoMsg {
  */
 export interface ClaimAmino {
   /** action enum */
-  action: Action;
+  action?: Action;
   /** true if the action has been completed */
-  completed: boolean;
+  completed?: boolean;
   /** claimable token amount for the action. Zero if completed */
-  claimable_amount: string;
+  claimable_amount?: string;
 }
 export interface ClaimAminoMsg {
   type: "/evmos.claims.v1.Claim";
@@ -114,11 +114,11 @@ export interface ClaimsRecordAddressProtoMsg {
 /** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
 export interface ClaimsRecordAddressAmino {
   /** bech32 or hex address of claim user */
-  address: string;
+  address?: string;
   /** total initial claimable amount for the user */
-  initial_claimable_amount: string;
+  initial_claimable_amount?: string;
   /** slice of the available actions completed */
-  actions_completed: boolean[];
+  actions_completed?: boolean[];
 }
 export interface ClaimsRecordAddressAminoMsg {
   type: "/evmos.claims.v1.ClaimsRecordAddress";
@@ -150,9 +150,9 @@ export interface ClaimsRecordProtoMsg {
  */
 export interface ClaimsRecordAmino {
   /** total initial claimable amount for the user */
-  initial_claimable_amount: string;
+  initial_claimable_amount?: string;
   /** slice of the available actions completed */
-  actions_completed: boolean[];
+  actions_completed?: boolean[];
 }
 export interface ClaimsRecordAminoMsg {
   type: "/evmos.claims.v1.ClaimsRecord";
@@ -218,15 +218,21 @@ export const Claim = {
     return message;
   },
   fromAmino(object: ClaimAmino): Claim {
-    return {
-      action: isSet(object.action) ? actionFromJSON(object.action) : -1,
-      completed: object.completed,
-      claimableAmount: object.claimable_amount
-    };
+    const message = createBaseClaim();
+    if (object.action !== undefined && object.action !== null) {
+      message.action = actionFromJSON(object.action);
+    }
+    if (object.completed !== undefined && object.completed !== null) {
+      message.completed = object.completed;
+    }
+    if (object.claimable_amount !== undefined && object.claimable_amount !== null) {
+      message.claimableAmount = object.claimable_amount;
+    }
+    return message;
   },
   toAmino(message: Claim): ClaimAmino {
     const obj: any = {};
-    obj.action = message.action;
+    obj.action = actionToJSON(message.action);
     obj.completed = message.completed;
     obj.claimable_amount = message.claimableAmount;
     return obj;
@@ -308,11 +314,15 @@ export const ClaimsRecordAddress = {
     return message;
   },
   fromAmino(object: ClaimsRecordAddressAmino): ClaimsRecordAddress {
-    return {
-      address: object.address,
-      initialClaimableAmount: object.initial_claimable_amount,
-      actionsCompleted: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => e) : []
-    };
+    const message = createBaseClaimsRecordAddress();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.initial_claimable_amount !== undefined && object.initial_claimable_amount !== null) {
+      message.initialClaimableAmount = object.initial_claimable_amount;
+    }
+    message.actionsCompleted = object.actions_completed?.map(e => e) || [];
+    return message;
   },
   toAmino(message: ClaimsRecordAddress): ClaimsRecordAddressAmino {
     const obj: any = {};
@@ -394,10 +404,12 @@ export const ClaimsRecord = {
     return message;
   },
   fromAmino(object: ClaimsRecordAmino): ClaimsRecord {
-    return {
-      initialClaimableAmount: object.initial_claimable_amount,
-      actionsCompleted: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => e) : []
-    };
+    const message = createBaseClaimsRecord();
+    if (object.initial_claimable_amount !== undefined && object.initial_claimable_amount !== null) {
+      message.initialClaimableAmount = object.initial_claimable_amount;
+    }
+    message.actionsCompleted = object.actions_completed?.map(e => e) || [];
+    return message;
   },
   toAmino(message: ClaimsRecord): ClaimsRecordAmino {
     const obj: any = {};

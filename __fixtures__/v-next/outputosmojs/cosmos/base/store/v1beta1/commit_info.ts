@@ -143,10 +143,12 @@ export const CommitInfo = {
     return obj;
   },
   fromAmino(object: CommitInfoAmino): CommitInfo {
-    return {
-      version: BigInt(object.version),
-      storeInfos: Array.isArray(object?.store_infos) ? object.store_infos.map((e: any) => StoreInfo.fromAmino(e)) : []
-    };
+    const message = createBaseCommitInfo();
+    if (object.version !== undefined && object.version !== null) {
+      message.version = BigInt(object.version);
+    }
+    message.storeInfos = object.store_infos?.map(e => StoreInfo.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: CommitInfo): CommitInfoAmino {
     const obj: any = {};
@@ -254,10 +256,14 @@ export const StoreInfo = {
     return obj;
   },
   fromAmino(object: StoreInfoAmino): StoreInfo {
-    return {
-      name: object.name,
-      commitId: object?.commit_id ? CommitID.fromAmino(object.commit_id) : undefined
-    };
+    const message = createBaseStoreInfo();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.commit_id !== undefined && object.commit_id !== null) {
+      message.commitId = CommitID.fromAmino(object.commit_id);
+    }
+    return message;
   },
   toAmino(message: StoreInfo): StoreInfoAmino {
     const obj: any = {};
@@ -361,15 +367,19 @@ export const CommitID = {
     return obj;
   },
   fromAmino(object: CommitIDAmino): CommitID {
-    return {
-      version: BigInt(object.version),
-      hash: object.hash
-    };
+    const message = createBaseCommitID();
+    if (object.version !== undefined && object.version !== null) {
+      message.version = BigInt(object.version);
+    }
+    if (object.hash !== undefined && object.hash !== null) {
+      message.hash = bytesFromBase64(object.hash);
+    }
+    return message;
   },
   toAmino(message: CommitID): CommitIDAmino {
     const obj: any = {};
     obj.version = message.version ? message.version.toString() : undefined;
-    obj.hash = message.hash;
+    obj.hash = message.hash ? base64FromBytes(message.hash) : undefined;
     return obj;
   },
   fromAminoMsg(object: CommitIDAminoMsg): CommitID {

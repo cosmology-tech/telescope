@@ -116,16 +116,22 @@ export const MsgCreateCosmWasmPool = {
     return obj;
   },
   fromAmino(object: MsgCreateCosmWasmPoolAmino): MsgCreateCosmWasmPool {
-    return {
-      codeId: BigInt(object.code_id),
-      instantiateMsg: object.instantiate_msg,
-      sender: object.sender
-    };
+    const message = createBaseMsgCreateCosmWasmPool();
+    if (object.code_id !== undefined && object.code_id !== null) {
+      message.codeId = BigInt(object.code_id);
+    }
+    if (object.instantiate_msg !== undefined && object.instantiate_msg !== null) {
+      message.instantiateMsg = bytesFromBase64(object.instantiate_msg);
+    }
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    return message;
   },
   toAmino(message: MsgCreateCosmWasmPool): MsgCreateCosmWasmPoolAmino {
     const obj: any = {};
     obj.code_id = message.codeId ? message.codeId.toString() : undefined;
-    obj.instantiate_msg = message.instantiateMsg;
+    obj.instantiate_msg = message.instantiateMsg ? base64FromBytes(message.instantiateMsg) : undefined;
     obj.sender = message.sender;
     return obj;
   },
@@ -212,9 +218,11 @@ export const MsgCreateCosmWasmPoolResponse = {
     return obj;
   },
   fromAmino(object: MsgCreateCosmWasmPoolResponseAmino): MsgCreateCosmWasmPoolResponse {
-    return {
-      poolId: BigInt(object.pool_id)
-    };
+    const message = createBaseMsgCreateCosmWasmPoolResponse();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    return message;
   },
   toAmino(message: MsgCreateCosmWasmPoolResponse): MsgCreateCosmWasmPoolResponseAmino {
     const obj: any = {};

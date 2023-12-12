@@ -27,9 +27,9 @@ export interface DenomTraceAmino {
    * path defines the chain of port/channel identifiers used for tracing the
    * source of the fungible token.
    */
-  path: string;
+  path?: string;
   /** base denomination of the relayed fungible token. */
-  base_denom: string;
+  base_denom?: string;
 }
 /**
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
@@ -72,12 +72,12 @@ export interface ParamsAmino {
    * send_enabled enables or disables all cross-chain token transfers from this
    * chain.
    */
-  send_enabled: boolean;
+  send_enabled?: boolean;
   /**
    * receive_enabled enables or disables all cross-chain token transfers to this
    * chain.
    */
-  receive_enabled: boolean;
+  receive_enabled?: boolean;
 }
 /**
  * Params defines the set of IBC transfer parameters.
@@ -158,10 +158,14 @@ export const DenomTrace = {
     return obj;
   },
   fromAmino(object: DenomTraceAmino): DenomTrace {
-    return {
-      path: object.path,
-      baseDenom: object.base_denom
-    };
+    const message = createBaseDenomTrace();
+    if (object.path !== undefined && object.path !== null) {
+      message.path = object.path;
+    }
+    if (object.base_denom !== undefined && object.base_denom !== null) {
+      message.baseDenom = object.base_denom;
+    }
+    return message;
   },
   toAmino(message: DenomTrace, useInterfaces: boolean = true): DenomTraceAmino {
     const obj: any = {};
@@ -251,10 +255,14 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      sendEnabled: object.send_enabled,
-      receiveEnabled: object.receive_enabled
-    };
+    const message = createBaseParams();
+    if (object.send_enabled !== undefined && object.send_enabled !== null) {
+      message.sendEnabled = object.send_enabled;
+    }
+    if (object.receive_enabled !== undefined && object.receive_enabled !== null) {
+      message.receiveEnabled = object.receive_enabled;
+    }
+    return message;
   },
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};

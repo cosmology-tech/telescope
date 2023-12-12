@@ -13,8 +13,8 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisStateAmino {
-  accounts: AccountAmino[];
-  payments: FractionalPaymentAmino[];
+  accounts?: AccountAmino[];
+  payments?: FractionalPaymentAmino[];
 }
 /** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisStateSDKType {
@@ -105,10 +105,10 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromAmino(e)) : [],
-      payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => FractionalPayment.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    message.accounts = object.accounts?.map(e => Account.fromAmino(e)) || [];
+    message.payments = object.payments?.map(e => FractionalPayment.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};

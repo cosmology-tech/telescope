@@ -56,8 +56,8 @@ export interface Operation_LabelsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface Operation_LabelsEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface Operation_LabelsEntryAminoMsg {
   type: string;
@@ -166,9 +166,9 @@ export interface OperationAmino {
    * and an idempotent id is desirable for deduplication purpose, UUID version 5
    * is recommended. See RFC 4122 for details.
    */
-  operation_id: string;
+  operation_id?: string;
   /** Fully qualified name of the operation. Reserved for future use. */
-  operation_name: string;
+  operation_name?: string;
   /**
    * Identity of the consumer who is using the service.
    * This field should be filled in for the operations initiated by a
@@ -183,7 +183,7 @@ export interface OperationAmino {
    *     - organizations/ORGANIZATION_NUMBER,
    *     - api`_`key:API_KEY.
    */
-  consumer_id: string;
+  consumer_id?: string;
   /** Required. Start time of the operation. */
   start_time?: string;
   /**
@@ -212,7 +212,7 @@ export interface OperationAmino {
    *        where the API is served, such as App Engine, Compute Engine, or
    *        Kubernetes Engine.
    */
-  labels: {
+  labels?: {
     [key: string]: string;
   };
   /**
@@ -227,13 +227,13 @@ export interface OperationAmino {
    * instances, the entire request is rejected with
    * an invalid argument error.
    */
-  metric_value_sets: MetricValueSetAmino[];
+  metric_value_sets?: MetricValueSetAmino[];
   /** Represents information to be logged. */
-  log_entries: LogEntryAmino[];
+  log_entries?: LogEntryAmino[];
   /** DO NOT USE. This is an experimental field. */
-  importance: Operation_Importance;
+  importance?: Operation_Importance;
   /** Unimplemented. */
-  extensions: AnyAmino[];
+  extensions?: AnyAmino[];
 }
 export interface OperationAminoMsg {
   type: "/google.api.servicecontrol.v1.Operation";
@@ -321,10 +321,14 @@ export const Operation_LabelsEntry = {
     return obj;
   },
   fromAmino(object: Operation_LabelsEntryAmino): Operation_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseOperation_LabelsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: Operation_LabelsEntry): Operation_LabelsEntryAmino {
     const obj: any = {};
@@ -563,23 +567,37 @@ export const Operation = {
     return obj;
   },
   fromAmino(object: OperationAmino): Operation {
-    return {
-      operationId: object.operation_id,
-      operationName: object.operation_name,
-      consumerId: object.consumer_id,
-      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
-      endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : undefined,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseOperation();
+    if (object.operation_id !== undefined && object.operation_id !== null) {
+      message.operationId = object.operation_id;
+    }
+    if (object.operation_name !== undefined && object.operation_name !== null) {
+      message.operationName = object.operation_name;
+    }
+    if (object.consumer_id !== undefined && object.consumer_id !== null) {
+      message.consumerId = object.consumer_id;
+    }
+    if (object.start_time !== undefined && object.start_time !== null) {
+      message.startTime = fromTimestamp(Timestamp.fromAmino(object.start_time));
+    }
+    if (object.end_time !== undefined && object.end_time !== null) {
+      message.endTime = fromTimestamp(Timestamp.fromAmino(object.end_time));
+    }
+    message.labels = Object.entries(object.labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      metricValueSets: Array.isArray(object?.metric_value_sets) ? object.metric_value_sets.map((e: any) => MetricValueSet.fromAmino(e)) : [],
-      logEntries: Array.isArray(object?.log_entries) ? object.log_entries.map((e: any) => LogEntry.fromAmino(e)) : [],
-      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : -1,
-      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
-    };
+      }
+      return acc;
+    }, {});
+    message.metricValueSets = object.metric_value_sets?.map(e => MetricValueSet.fromAmino(e)) || [];
+    message.logEntries = object.log_entries?.map(e => LogEntry.fromAmino(e)) || [];
+    if (object.importance !== undefined && object.importance !== null) {
+      message.importance = operation_ImportanceFromJSON(object.importance);
+    }
+    message.extensions = object.extensions?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Operation): OperationAmino {
     const obj: any = {};
@@ -604,7 +622,7 @@ export const Operation = {
     } else {
       obj.log_entries = [];
     }
-    obj.importance = message.importance;
+    obj.importance = operation_ImportanceToJSON(message.importance);
     if (message.extensions) {
       obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
     } else {

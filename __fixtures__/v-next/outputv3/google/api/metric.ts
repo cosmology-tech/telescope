@@ -315,7 +315,7 @@ export interface MetricDescriptorProtoMsg {
  */
 export interface MetricDescriptorAmino {
   /** The resource name of the metric descriptor. */
-  name: string;
+  name?: string;
   /**
    * The metric type, including its DNS name prefix. The type is not
    * URL-encoded. All user-defined metric types have the DNS name
@@ -326,7 +326,7 @@ export interface MetricDescriptorAmino {
    *     "external.googleapis.com/prometheus/up"
    *     "appengine.googleapis.com/http/server/response_latencies"
    */
-  type: string;
+  type?: string;
   /**
    * The set of labels that can be used to describe a specific
    * instance of this metric type. For example, the
@@ -335,17 +335,17 @@ export interface MetricDescriptorAmino {
    * you can look at latencies for successful responses or just
    * for responses that failed.
    */
-  labels: LabelDescriptorAmino[];
+  labels?: LabelDescriptorAmino[];
   /**
    * Whether the metric records instantaneous values, changes to a value, etc.
    * Some combinations of `metric_kind` and `value_type` might not be supported.
    */
-  metric_kind: MetricDescriptor_MetricKind;
+  metric_kind?: MetricDescriptor_MetricKind;
   /**
    * Whether the measurement is an integer, a floating-point number, etc.
    * Some combinations of `metric_kind` and `value_type` might not be supported.
    */
-  value_type: MetricDescriptor_ValueType;
+  value_type?: MetricDescriptor_ValueType;
   /**
    * The units in which the metric value is reported. It is only applicable
    * if the `value_type` is `INT64`, `DOUBLE`, or `DISTRIBUTION`. The `unit`
@@ -450,20 +450,20 @@ export interface MetricDescriptorAmino {
    *    0..1, that will be multiplied by 100 and displayed as a percentage
    *    (so a metric value `0.03` means "3 percent").
    */
-  unit: string;
+  unit?: string;
   /** A detailed description of the metric, which can be used in documentation. */
-  description: string;
+  description?: string;
   /**
    * A concise name for the metric, which can be displayed in user interfaces.
    * Use sentence case without an ending period, for example "Request count".
    * This field is optional but it is recommended to be set for any metrics
    * associated with user-visible concepts, such as Quota.
    */
-  display_name: string;
+  display_name?: string;
   /** Optional. Metadata which can be used to guide usage of the metric. */
   metadata?: MetricDescriptor_MetricDescriptorMetadataAmino;
   /** Optional. The launch stage of the metric definition. */
-  launch_stage: LaunchStage;
+  launch_stage?: LaunchStage;
   /**
    * Read-only. If present, then a [time
    * series][google.monitoring.v3.TimeSeries], which is identified partially by
@@ -471,7 +471,7 @@ export interface MetricDescriptorAmino {
    * with this metric type can only be associated with one of the monitored
    * resource types listed here.
    */
-  monitored_resource_types: string[];
+  monitored_resource_types?: string[];
 }
 /**
  * Defines a metric type and its schema. Once a metric descriptor is created,
@@ -518,7 +518,7 @@ export interface MetricDescriptor_MetricDescriptorMetadataProtoMsg {
 export interface MetricDescriptor_MetricDescriptorMetadataAmino {
   /** Deprecated. Must use the [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage] instead. */
   /** @deprecated */
-  launch_stage: LaunchStage;
+  launch_stage?: LaunchStage;
   /**
    * The sampling period of metric data points. For metrics which are written
    * periodically, consecutive data points are stored at this time interval,
@@ -549,8 +549,8 @@ export interface Metric_LabelsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface Metric_LabelsEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface Metric_LabelsEntrySDKType {
   key: string;
@@ -587,12 +587,12 @@ export interface MetricAmino {
    * An existing metric type, see [google.api.MetricDescriptor][google.api.MetricDescriptor].
    * For example, `custom.googleapis.com/invoice/paid/amount`.
    */
-  type: string;
+  type?: string;
   /**
    * The set of label values that uniquely identify this metric. All
    * labels listed in the `MetricDescriptor` must be assigned values.
    */
-  labels: {
+  labels?: {
     [key: string]: string;
   };
 }
@@ -800,19 +800,37 @@ export const MetricDescriptor = {
     return obj;
   },
   fromAmino(object: MetricDescriptorAmino): MetricDescriptor {
-    return {
-      name: object.name,
-      type: object.type,
-      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromAmino(e)) : [],
-      metricKind: isSet(object.metric_kind) ? metricDescriptor_MetricKindFromJSON(object.metric_kind) : -1,
-      valueType: isSet(object.value_type) ? metricDescriptor_ValueTypeFromJSON(object.value_type) : -1,
-      unit: object.unit,
-      description: object.description,
-      displayName: object.display_name,
-      metadata: object?.metadata ? MetricDescriptor_MetricDescriptorMetadata.fromAmino(object.metadata) : undefined,
-      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1,
-      monitoredResourceTypes: Array.isArray(object?.monitored_resource_types) ? object.monitored_resource_types.map((e: any) => e) : []
-    };
+    const message = createBaseMetricDescriptor();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    message.labels = object.labels?.map(e => LabelDescriptor.fromAmino(e)) || [];
+    if (object.metric_kind !== undefined && object.metric_kind !== null) {
+      message.metricKind = metricDescriptor_MetricKindFromJSON(object.metric_kind);
+    }
+    if (object.value_type !== undefined && object.value_type !== null) {
+      message.valueType = metricDescriptor_ValueTypeFromJSON(object.value_type);
+    }
+    if (object.unit !== undefined && object.unit !== null) {
+      message.unit = object.unit;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.display_name !== undefined && object.display_name !== null) {
+      message.displayName = object.display_name;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = MetricDescriptor_MetricDescriptorMetadata.fromAmino(object.metadata);
+    }
+    if (object.launch_stage !== undefined && object.launch_stage !== null) {
+      message.launchStage = launchStageFromJSON(object.launch_stage);
+    }
+    message.monitoredResourceTypes = object.monitored_resource_types?.map(e => e) || [];
+    return message;
   },
   toAmino(message: MetricDescriptor, useInterfaces: boolean = true): MetricDescriptorAmino {
     const obj: any = {};
@@ -823,13 +841,13 @@ export const MetricDescriptor = {
     } else {
       obj.labels = [];
     }
-    obj.metric_kind = message.metricKind;
-    obj.value_type = message.valueType;
+    obj.metric_kind = metricDescriptor_MetricKindToJSON(message.metricKind);
+    obj.value_type = metricDescriptor_ValueTypeToJSON(message.valueType);
     obj.unit = message.unit;
     obj.description = message.description;
     obj.display_name = message.displayName;
     obj.metadata = message.metadata ? MetricDescriptor_MetricDescriptorMetadata.toAmino(message.metadata, useInterfaces) : undefined;
-    obj.launch_stage = message.launchStage;
+    obj.launch_stage = launchStageToJSON(message.launchStage);
     if (message.monitoredResourceTypes) {
       obj.monitored_resource_types = message.monitoredResourceTypes.map(e => e);
     } else {
@@ -934,15 +952,21 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
     return obj;
   },
   fromAmino(object: MetricDescriptor_MetricDescriptorMetadataAmino): MetricDescriptor_MetricDescriptorMetadata {
-    return {
-      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1,
-      samplePeriod: object?.sample_period ? Duration.fromAmino(object.sample_period) : undefined,
-      ingestDelay: object?.ingest_delay ? Duration.fromAmino(object.ingest_delay) : undefined
-    };
+    const message = createBaseMetricDescriptor_MetricDescriptorMetadata();
+    if (object.launch_stage !== undefined && object.launch_stage !== null) {
+      message.launchStage = launchStageFromJSON(object.launch_stage);
+    }
+    if (object.sample_period !== undefined && object.sample_period !== null) {
+      message.samplePeriod = Duration.fromAmino(object.sample_period);
+    }
+    if (object.ingest_delay !== undefined && object.ingest_delay !== null) {
+      message.ingestDelay = Duration.fromAmino(object.ingest_delay);
+    }
+    return message;
   },
   toAmino(message: MetricDescriptor_MetricDescriptorMetadata, useInterfaces: boolean = true): MetricDescriptor_MetricDescriptorMetadataAmino {
     const obj: any = {};
-    obj.launch_stage = message.launchStage;
+    obj.launch_stage = launchStageToJSON(message.launchStage);
     obj.sample_period = message.samplePeriod ? Duration.toAmino(message.samplePeriod, useInterfaces) : undefined;
     obj.ingest_delay = message.ingestDelay ? Duration.toAmino(message.ingestDelay, useInterfaces) : undefined;
     return obj;
@@ -1027,10 +1051,14 @@ export const Metric_LabelsEntry = {
     return obj;
   },
   fromAmino(object: Metric_LabelsEntryAmino): Metric_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseMetric_LabelsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: Metric_LabelsEntry, useInterfaces: boolean = true): Metric_LabelsEntryAmino {
     const obj: any = {};
@@ -1146,15 +1174,19 @@ export const Metric = {
     return obj;
   },
   fromAmino(object: MetricAmino): Metric {
-    return {
-      type: object.type,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseMetric();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    message.labels = Object.entries(object.labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
+      }
+      return acc;
+    }, {});
+    return message;
   },
   toAmino(message: Metric, useInterfaces: boolean = true): MetricAmino {
     const obj: any = {};

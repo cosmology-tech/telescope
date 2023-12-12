@@ -64,10 +64,10 @@ export interface OrderIDProtoMsg {
 }
 /** OrderID stores owner and all other seq numbers */
 export interface OrderIDAmino {
-  owner: string;
-  dseq: string;
-  gseq: number;
-  oseq: number;
+  owner?: string;
+  dseq?: string;
+  gseq?: number;
+  oseq?: number;
 }
 export interface OrderIDAminoMsg {
   type: "/akash.market.v1beta2.OrderID";
@@ -94,9 +94,9 @@ export interface OrderProtoMsg {
 /** Order stores orderID, state of order and other details */
 export interface OrderAmino {
   order_id?: OrderIDAmino;
-  state: Order_State;
+  state?: Order_State;
   spec?: GroupSpecAmino;
-  created_at: string;
+  created_at?: string;
 }
 export interface OrderAminoMsg {
   type: "/akash.market.v1beta2.Order";
@@ -123,11 +123,11 @@ export interface OrderFiltersProtoMsg {
 }
 /** OrderFilters defines flags for order list filter */
 export interface OrderFiltersAmino {
-  owner: string;
-  dseq: string;
-  gseq: number;
-  oseq: number;
-  state: string;
+  owner?: string;
+  dseq?: string;
+  gseq?: number;
+  oseq?: number;
+  state?: string;
 }
 export interface OrderFiltersAminoMsg {
   type: "/akash.market.v1beta2.OrderFilters";
@@ -235,12 +235,20 @@ export const OrderID = {
     return obj;
   },
   fromAmino(object: OrderIDAmino): OrderID {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      gseq: object.gseq,
-      oseq: object.oseq
-    };
+    const message = createBaseOrderID();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq);
+    }
+    if (object.gseq !== undefined && object.gseq !== null) {
+      message.gseq = object.gseq;
+    }
+    if (object.oseq !== undefined && object.oseq !== null) {
+      message.oseq = object.oseq;
+    }
+    return message;
   },
   toAmino(message: OrderID): OrderIDAmino {
     const obj: any = {};
@@ -364,17 +372,25 @@ export const Order = {
     return obj;
   },
   fromAmino(object: OrderAmino): Order {
-    return {
-      orderId: object?.order_id ? OrderID.fromAmino(object.order_id) : undefined,
-      state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
-      spec: object?.spec ? GroupSpec.fromAmino(object.spec) : undefined,
-      createdAt: BigInt(object.created_at)
-    };
+    const message = createBaseOrder();
+    if (object.order_id !== undefined && object.order_id !== null) {
+      message.orderId = OrderID.fromAmino(object.order_id);
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = order_StateFromJSON(object.state);
+    }
+    if (object.spec !== undefined && object.spec !== null) {
+      message.spec = GroupSpec.fromAmino(object.spec);
+    }
+    if (object.created_at !== undefined && object.created_at !== null) {
+      message.createdAt = BigInt(object.created_at);
+    }
+    return message;
   },
   toAmino(message: Order): OrderAmino {
     const obj: any = {};
     obj.order_id = message.orderId ? OrderID.toAmino(message.orderId) : undefined;
-    obj.state = message.state;
+    obj.state = order_StateToJSON(message.state);
     obj.spec = message.spec ? GroupSpec.toAmino(message.spec) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
@@ -501,13 +517,23 @@ export const OrderFilters = {
     return obj;
   },
   fromAmino(object: OrderFiltersAmino): OrderFilters {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      gseq: object.gseq,
-      oseq: object.oseq,
-      state: object.state
-    };
+    const message = createBaseOrderFilters();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq);
+    }
+    if (object.gseq !== undefined && object.gseq !== null) {
+      message.gseq = object.gseq;
+    }
+    if (object.oseq !== undefined && object.oseq !== null) {
+      message.oseq = object.oseq;
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = object.state;
+    }
+    return message;
   },
   toAmino(message: OrderFilters): OrderFiltersAmino {
     const obj: any = {};

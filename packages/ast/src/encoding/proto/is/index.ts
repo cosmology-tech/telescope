@@ -13,6 +13,7 @@ import {
 } from "../types";
 import { SymbolNames } from "../../types";
 import { type } from "case";
+import { getTypeUrl } from "@cosmology/utils";
 
 const INPUT_PARAM = "o";
 
@@ -398,6 +399,9 @@ export const isMethod = (args: {
 
   const methodName = args.methodName ?? "is";
   const typeName = getTypeName(name, methodName);
+
+  const typeUrl = getTypeUrl(context.ref.proto, proto);
+  if (!typeUrl) return;
 
   const returnType = t.tsTypeAnnotation(
     t.tsTypePredicate(

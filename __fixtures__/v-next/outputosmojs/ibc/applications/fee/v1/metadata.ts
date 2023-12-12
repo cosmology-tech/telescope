@@ -97,10 +97,14 @@ export const Metadata = {
     return obj;
   },
   fromAmino(object: MetadataAmino): Metadata {
-    return {
-      feeVersion: object.fee_version,
-      appVersion: object.app_version
-    };
+    const message = createBaseMetadata();
+    if (object.fee_version !== undefined && object.fee_version !== null) {
+      message.feeVersion = object.fee_version;
+    }
+    if (object.app_version !== undefined && object.app_version !== null) {
+      message.appVersion = object.app_version;
+    }
+    return message;
   },
   toAmino(message: Metadata): MetadataAmino {
     const obj: any = {};

@@ -123,10 +123,10 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromAmino(e)) : [],
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Entry.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    message.classes = object.classes?.map(e => Class.fromAmino(e)) || [];
+    message.entries = object.entries?.map(e => Entry.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -246,10 +246,12 @@ export const Entry = {
     return obj;
   },
   fromAmino(object: EntryAmino): Entry {
-    return {
-      owner: object.owner,
-      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromAmino(e)) : []
-    };
+    const message = createBaseEntry();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    message.nfts = object.nfts?.map(e => NFT.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Entry): EntryAmino {
     const obj: any = {};

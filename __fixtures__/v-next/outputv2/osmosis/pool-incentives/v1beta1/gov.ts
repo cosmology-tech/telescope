@@ -31,9 +31,9 @@ export interface ReplacePoolIncentivesProposalProtoMsg {
  * configuration. Note that gaugeId=0 represents the community pool.
  */
 export interface ReplacePoolIncentivesProposalAmino {
-  title: string;
-  description: string;
-  records: DistrRecordAmino[];
+  title?: string;
+  description?: string;
+  records?: DistrRecordAmino[];
 }
 export interface ReplacePoolIncentivesProposalAminoMsg {
   type: "osmosis/poolincentives/replace-pool-incentives-proposal";
@@ -83,9 +83,9 @@ export interface UpdatePoolIncentivesProposalProtoMsg {
  * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
  */
 export interface UpdatePoolIncentivesProposalAmino {
-  title: string;
-  description: string;
-  records: DistrRecordAmino[];
+  title?: string;
+  description?: string;
+  records?: DistrRecordAmino[];
 }
 export interface UpdatePoolIncentivesProposalAminoMsg {
   type: "osmosis/poolincentives/update-pool-incentives-proposal";
@@ -196,11 +196,15 @@ export const ReplacePoolIncentivesProposal = {
     return obj;
   },
   fromAmino(object: ReplacePoolIncentivesProposalAmino): ReplacePoolIncentivesProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
-    };
+    const message = createBaseReplacePoolIncentivesProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.records = object.records?.map(e => DistrRecord.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalAmino {
     const obj: any = {};
@@ -325,11 +329,15 @@ export const UpdatePoolIncentivesProposal = {
     return obj;
   },
   fromAmino(object: UpdatePoolIncentivesProposalAmino): UpdatePoolIncentivesProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
-    };
+    const message = createBaseUpdatePoolIncentivesProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.records = object.records?.map(e => DistrRecord.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalAmino {
     const obj: any = {};

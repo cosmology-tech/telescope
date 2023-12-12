@@ -46,7 +46,7 @@ export interface EndpointProtoMsg {
 }
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointAmino {
-  kind: Endpoint_Kind;
+  kind?: Endpoint_Kind;
 }
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointSDKType {
@@ -108,13 +108,15 @@ export const Endpoint = {
     return obj;
   },
   fromAmino(object: EndpointAmino): Endpoint {
-    return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1
-    };
+    const message = createBaseEndpoint();
+    if (object.kind !== undefined && object.kind !== null) {
+      message.kind = endpoint_KindFromJSON(object.kind);
+    }
+    return message;
   },
   toAmino(message: Endpoint, useInterfaces: boolean = true): EndpointAmino {
     const obj: any = {};
-    obj.kind = message.kind;
+    obj.kind = endpoint_KindToJSON(message.kind);
     return obj;
   },
   fromProtoMsg(message: EndpointProtoMsg, useInterfaces: boolean = true): Endpoint {

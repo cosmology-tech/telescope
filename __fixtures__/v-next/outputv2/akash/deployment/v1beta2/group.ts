@@ -73,9 +73,9 @@ export interface GroupProtoMsg {
 /** Group stores group id, state and specifications of group */
 export interface GroupAmino {
   group_id?: GroupIDAmino;
-  state: Group_State;
+  state?: Group_State;
   group_spec?: GroupSpecAmino;
-  created_at: string;
+  created_at?: string;
 }
 export interface GroupAminoMsg {
   type: "/akash.deployment.v1beta2.Group";
@@ -186,17 +186,25 @@ export const Group = {
     return obj;
   },
   fromAmino(object: GroupAmino): Group {
-    return {
-      groupId: object?.group_id ? GroupID.fromAmino(object.group_id) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : -1,
-      groupSpec: object?.group_spec ? GroupSpec.fromAmino(object.group_spec) : undefined,
-      createdAt: BigInt(object.created_at)
-    };
+    const message = createBaseGroup();
+    if (object.group_id !== undefined && object.group_id !== null) {
+      message.groupId = GroupID.fromAmino(object.group_id);
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = group_StateFromJSON(object.state);
+    }
+    if (object.group_spec !== undefined && object.group_spec !== null) {
+      message.groupSpec = GroupSpec.fromAmino(object.group_spec);
+    }
+    if (object.created_at !== undefined && object.created_at !== null) {
+      message.createdAt = BigInt(object.created_at);
+    }
+    return message;
   },
   toAmino(message: Group): GroupAmino {
     const obj: any = {};
     obj.group_id = message.groupId ? GroupID.toAmino(message.groupId) : undefined;
-    obj.state = message.state;
+    obj.state = group_StateToJSON(message.state);
     obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;

@@ -15,7 +15,7 @@ export interface QueryEvidenceRequestProtoMsg {
 /** QueryEvidenceRequest is the request type for the Query/Evidence RPC method. */
 export interface QueryEvidenceRequestAmino {
   /** evidence_hash defines the hash of the requested evidence. */
-  evidence_hash: Uint8Array;
+  evidence_hash?: string;
 }
 export interface QueryEvidenceRequestAminoMsg {
   type: "cosmos-sdk/QueryEvidenceRequest";
@@ -98,7 +98,7 @@ export interface QueryAllEvidenceResponseProtoMsg {
  */
 export interface QueryAllEvidenceResponseAmino {
   /** evidence returns all evidences. */
-  evidence: AnyAmino[];
+  evidence?: AnyAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
@@ -171,13 +171,15 @@ export const QueryEvidenceRequest = {
     return obj;
   },
   fromAmino(object: QueryEvidenceRequestAmino): QueryEvidenceRequest {
-    return {
-      evidenceHash: object.evidence_hash
-    };
+    const message = createBaseQueryEvidenceRequest();
+    if (object.evidence_hash !== undefined && object.evidence_hash !== null) {
+      message.evidenceHash = bytesFromBase64(object.evidence_hash);
+    }
+    return message;
   },
   toAmino(message: QueryEvidenceRequest): QueryEvidenceRequestAmino {
     const obj: any = {};
-    obj.evidence_hash = message.evidenceHash;
+    obj.evidence_hash = message.evidenceHash ? base64FromBytes(message.evidenceHash) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryEvidenceRequestAminoMsg): QueryEvidenceRequest {
@@ -261,9 +263,11 @@ export const QueryEvidenceResponse = {
     return obj;
   },
   fromAmino(object: QueryEvidenceResponseAmino): QueryEvidenceResponse {
-    return {
-      evidence: object?.evidence ? Any.fromAmino(object.evidence) : undefined
-    };
+    const message = createBaseQueryEvidenceResponse();
+    if (object.evidence !== undefined && object.evidence !== null) {
+      message.evidence = Any.fromAmino(object.evidence);
+    }
+    return message;
   },
   toAmino(message: QueryEvidenceResponse): QueryEvidenceResponseAmino {
     const obj: any = {};
@@ -351,9 +355,11 @@ export const QueryAllEvidenceRequest = {
     return obj;
   },
   fromAmino(object: QueryAllEvidenceRequestAmino): QueryAllEvidenceRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAllEvidenceRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAllEvidenceRequest): QueryAllEvidenceRequestAmino {
     const obj: any = {};
@@ -461,10 +467,12 @@ export const QueryAllEvidenceResponse = {
     return obj;
   },
   fromAmino(object: QueryAllEvidenceResponseAmino): QueryAllEvidenceResponse {
-    return {
-      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Any.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAllEvidenceResponse();
+    message.evidence = object.evidence?.map(e => Any.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAllEvidenceResponse): QueryAllEvidenceResponseAmino {
     const obj: any = {};

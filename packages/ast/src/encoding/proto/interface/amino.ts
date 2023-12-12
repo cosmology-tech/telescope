@@ -4,7 +4,7 @@ import { identifier, tsPropertySignature, makeCommentBlock } from '../../../util
 import { ProtoParseContext } from '../../context';
 
 import {
-    getFieldOptionality,
+    getFieldOptionalityForAmino,
     getOneOfs
 } from '../types';
 
@@ -85,6 +85,7 @@ export const createAminoType = (
                 Object.keys(proto.fields).reduce((m, fieldName) => {
                     const isOneOf = oneOfs.includes(fieldName);
                     const field = proto.fields[fieldName];
+                    let isOptional = getFieldOptionalityForAmino(context, field, isOneOf);
 
                     const orig = field.options?.['(telescope:orig)'] ?? fieldName;
 
@@ -92,7 +93,7 @@ export const createAminoType = (
                     // let fieldNameWithCase = options.useOriginalCase ? orig : fieldName;
                     let fieldNameWithCase = orig;
 
-                    // should we actually just edit/add comments 
+                    // should we actually just edit/add comments
                     // to make this more "native" for any google.protobuf.Any?
                     // let's see...
                     if (
@@ -103,6 +104,7 @@ export const createAminoType = (
                     ) {
                         // type_url => type
                         fieldNameWithCase = 'type';
+                        isOptional = false;
                     }
 
                     let aminoField = getAminoField(context, field);
@@ -113,6 +115,7 @@ export const createAminoType = (
                         orig === 'value'
                     ) {
                         aminoField = t.tsAnyKeyword();
+                        isOptional = false;
                     }
 
                     const propSig = tsPropertySignature(
@@ -120,7 +123,7 @@ export const createAminoType = (
                         t.tsTypeAnnotation(
                             aminoField
                         ),
-                        getFieldOptionality(context, field, isOneOf)
+                        isOptional
                     );
 
                     const comments = [];

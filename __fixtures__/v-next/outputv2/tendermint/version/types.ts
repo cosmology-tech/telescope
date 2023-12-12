@@ -20,8 +20,8 @@ export interface AppProtoMsg {
  * updated in ResponseEndBlock.
  */
 export interface AppAmino {
-  protocol: string;
-  software: string;
+  protocol?: string;
+  software?: string;
 }
 export interface AppAminoMsg {
   type: "/tendermint.version.App";
@@ -55,8 +55,8 @@ export interface ConsensusProtoMsg {
  * state transition machine.
  */
 export interface ConsensusAmino {
-  block: string;
-  app: string;
+  block?: string;
+  app?: string;
 }
 export interface ConsensusAminoMsg {
   type: "/tendermint.version.Consensus";
@@ -141,10 +141,14 @@ export const App = {
     return obj;
   },
   fromAmino(object: AppAmino): App {
-    return {
-      protocol: BigInt(object.protocol),
-      software: object.software
-    };
+    const message = createBaseApp();
+    if (object.protocol !== undefined && object.protocol !== null) {
+      message.protocol = BigInt(object.protocol);
+    }
+    if (object.software !== undefined && object.software !== null) {
+      message.software = object.software;
+    }
+    return message;
   },
   toAmino(message: App): AppAmino {
     const obj: any = {};
@@ -240,10 +244,14 @@ export const Consensus = {
     return obj;
   },
   fromAmino(object: ConsensusAmino): Consensus {
-    return {
-      block: BigInt(object.block),
-      app: BigInt(object.app)
-    };
+    const message = createBaseConsensus();
+    if (object.block !== undefined && object.block !== null) {
+      message.block = BigInt(object.block);
+    }
+    if (object.app !== undefined && object.app !== null) {
+      message.app = BigInt(object.app);
+    }
+    return message;
   },
   toAmino(message: Consensus): ConsensusAmino {
     const obj: any = {};

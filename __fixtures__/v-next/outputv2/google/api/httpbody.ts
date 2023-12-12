@@ -109,14 +109,14 @@ export interface HttpBodyProtoMsg {
  */
 export interface HttpBodyAmino {
   /** The HTTP Content-Type header value specifying the content type of the body. */
-  content_type: string;
+  content_type?: string;
   /** The HTTP request/response body as raw binary. */
-  data: Uint8Array;
+  data?: string;
   /**
    * Application specific response metadata. Must be set in the first response
    * for streaming APIs.
    */
-  extensions: AnyAmino[];
+  extensions?: AnyAmino[];
 }
 export interface HttpBodyAminoMsg {
   type: "/google.api.HttpBody";
@@ -260,16 +260,20 @@ export const HttpBody = {
     return obj;
   },
   fromAmino(object: HttpBodyAmino): HttpBody {
-    return {
-      contentType: object.content_type,
-      data: object.data,
-      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseHttpBody();
+    if (object.content_type !== undefined && object.content_type !== null) {
+      message.contentType = object.content_type;
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = bytesFromBase64(object.data);
+    }
+    message.extensions = object.extensions?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: HttpBody): HttpBodyAmino {
     const obj: any = {};
     obj.content_type = message.contentType;
-    obj.data = message.data;
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     if (message.extensions) {
       obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
     } else {

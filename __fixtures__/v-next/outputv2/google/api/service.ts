@@ -178,18 +178,18 @@ export interface ServiceAmino {
    * typically goes through DNS verification to make sure the owner
    * of the service also owns the DNS name.
    */
-  name: string;
+  name?: string;
   /** The product title for this service. */
-  title: string;
+  title?: string;
   /** The Google project that owns this service. */
-  producer_project_id: string;
+  producer_project_id?: string;
   /**
    * A unique ID for a specific instance of this message, typically assigned
    * by the client for tracking purpose. Must be no longer than 63 characters
    * and only lower case letters, digits, '.', '_' and '-' are allowed. If
    * empty, the server may choose to generate one instead.
    */
-  id: string;
+  id?: string;
   /**
    * A list of API interfaces exported by this service. Only the `name` field
    * of the [google.protobuf.Api][google.protobuf.Api] needs to be provided by the configuration
@@ -197,7 +197,7 @@ export interface ServiceAmino {
    * normalization process. It is an error to specify an API interface here
    * which cannot be resolved against the associated IDL files.
    */
-  apis: ApiAmino[];
+  apis?: ApiAmino[];
   /**
    * A list of all proto message types included in this API service.
    * Types referenced directly or indirectly by the `apis` are
@@ -208,7 +208,7 @@ export interface ServiceAmino {
    *     types:
    *     - name: google.protobuf.Int32
    */
-  types: TypeAmino[];
+  types?: TypeAmino[];
   /**
    * A list of all enum types included in this API service.  Enums
    * referenced directly or indirectly by the `apis` are automatically
@@ -218,7 +218,7 @@ export interface ServiceAmino {
    *     enums:
    *     - name: google.someapi.v1.SomeEnum
    */
-  enums: EnumAmino[];
+  enums?: EnumAmino[];
   /** Additional API documentation. */
   documentation?: DocumentationAmino;
   /** API backend configuration. */
@@ -238,18 +238,18 @@ export interface ServiceAmino {
    * with the same name as the service is automatically generated to service all
    * defined APIs.
    */
-  endpoints: EndpointAmino[];
+  endpoints?: EndpointAmino[];
   /** Configuration for the service control plane. */
   control?: ControlAmino;
   /** Defines the logs used by this service. */
-  logs: LogDescriptorAmino[];
+  logs?: LogDescriptorAmino[];
   /** Defines the metrics used by this service. */
-  metrics: MetricDescriptorAmino[];
+  metrics?: MetricDescriptorAmino[];
   /**
    * Defines the monitored resources used by this service. This is required
    * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
    */
-  monitored_resources: MonitoredResourceDescriptorAmino[];
+  monitored_resources?: MonitoredResourceDescriptorAmino[];
   /** Billing configuration. */
   billing?: BillingAmino;
   /** Logging configuration. */
@@ -753,33 +753,69 @@ export const Service = {
     return obj;
   },
   fromAmino(object: ServiceAmino): Service {
-    return {
-      name: object.name,
-      title: object.title,
-      producerProjectId: object.producer_project_id,
-      id: object.id,
-      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromAmino(e)) : [],
-      types: Array.isArray(object?.types) ? object.types.map((e: any) => Type.fromAmino(e)) : [],
-      enums: Array.isArray(object?.enums) ? object.enums.map((e: any) => Enum.fromAmino(e)) : [],
-      documentation: object?.documentation ? Documentation.fromAmino(object.documentation) : undefined,
-      backend: object?.backend ? Backend.fromAmino(object.backend) : undefined,
-      http: object?.http ? Http.fromAmino(object.http) : undefined,
-      quota: object?.quota ? Quota.fromAmino(object.quota) : undefined,
-      authentication: object?.authentication ? Authentication.fromAmino(object.authentication) : undefined,
-      context: object?.context ? Context.fromAmino(object.context) : undefined,
-      usage: object?.usage ? Usage.fromAmino(object.usage) : undefined,
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : [],
-      control: object?.control ? Control.fromAmino(object.control) : undefined,
-      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => LogDescriptor.fromAmino(e)) : [],
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => MetricDescriptor.fromAmino(e)) : [],
-      monitoredResources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromAmino(e)) : [],
-      billing: object?.billing ? Billing.fromAmino(object.billing) : undefined,
-      logging: object?.logging ? Logging.fromAmino(object.logging) : undefined,
-      monitoring: object?.monitoring ? Monitoring.fromAmino(object.monitoring) : undefined,
-      systemParameters: object?.system_parameters ? SystemParameters.fromAmino(object.system_parameters) : undefined,
-      sourceInfo: object?.source_info ? SourceInfo.fromAmino(object.source_info) : undefined,
-      configVersion: object?.config_version ? UInt32Value.fromAmino(object.config_version) : undefined
-    };
+    const message = createBaseService();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.producer_project_id !== undefined && object.producer_project_id !== null) {
+      message.producerProjectId = object.producer_project_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    message.apis = object.apis?.map(e => Api.fromAmino(e)) || [];
+    message.types = object.types?.map(e => Type.fromAmino(e)) || [];
+    message.enums = object.enums?.map(e => Enum.fromAmino(e)) || [];
+    if (object.documentation !== undefined && object.documentation !== null) {
+      message.documentation = Documentation.fromAmino(object.documentation);
+    }
+    if (object.backend !== undefined && object.backend !== null) {
+      message.backend = Backend.fromAmino(object.backend);
+    }
+    if (object.http !== undefined && object.http !== null) {
+      message.http = Http.fromAmino(object.http);
+    }
+    if (object.quota !== undefined && object.quota !== null) {
+      message.quota = Quota.fromAmino(object.quota);
+    }
+    if (object.authentication !== undefined && object.authentication !== null) {
+      message.authentication = Authentication.fromAmino(object.authentication);
+    }
+    if (object.context !== undefined && object.context !== null) {
+      message.context = Context.fromAmino(object.context);
+    }
+    if (object.usage !== undefined && object.usage !== null) {
+      message.usage = Usage.fromAmino(object.usage);
+    }
+    message.endpoints = object.endpoints?.map(e => Endpoint.fromAmino(e)) || [];
+    if (object.control !== undefined && object.control !== null) {
+      message.control = Control.fromAmino(object.control);
+    }
+    message.logs = object.logs?.map(e => LogDescriptor.fromAmino(e)) || [];
+    message.metrics = object.metrics?.map(e => MetricDescriptor.fromAmino(e)) || [];
+    message.monitoredResources = object.monitored_resources?.map(e => MonitoredResourceDescriptor.fromAmino(e)) || [];
+    if (object.billing !== undefined && object.billing !== null) {
+      message.billing = Billing.fromAmino(object.billing);
+    }
+    if (object.logging !== undefined && object.logging !== null) {
+      message.logging = Logging.fromAmino(object.logging);
+    }
+    if (object.monitoring !== undefined && object.monitoring !== null) {
+      message.monitoring = Monitoring.fromAmino(object.monitoring);
+    }
+    if (object.system_parameters !== undefined && object.system_parameters !== null) {
+      message.systemParameters = SystemParameters.fromAmino(object.system_parameters);
+    }
+    if (object.source_info !== undefined && object.source_info !== null) {
+      message.sourceInfo = SourceInfo.fromAmino(object.source_info);
+    }
+    if (object.config_version !== undefined && object.config_version !== null) {
+      message.configVersion = UInt32Value.fromAmino(object.config_version);
+    }
+    return message;
   },
   toAmino(message: Service): ServiceAmino {
     const obj: any = {};

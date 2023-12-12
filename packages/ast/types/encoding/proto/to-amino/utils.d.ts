@@ -52,7 +52,9 @@ export declare const arrayTypes: {
     sint64(args: ToAminoJSONMethod): t.Expression;
     fixed64(args: ToAminoJSONMethod): t.Expression;
     sfixed64(args: ToAminoJSONMethod): t.Expression;
-    bytes(args: ToAminoJSONMethod): t.Identifier;
+    rawBytes(args: ToAminoJSONMethod): t.CallExpression;
+    wasmByteCode(args: ToAminoJSONMethod): t.CallExpression;
+    bytes(args: ToAminoJSONMethod): t.CallExpression;
     enum(args: ToAminoJSONMethod): t.CallExpression;
     anyType(args: ToAminoJSONMethod): t.ConditionalExpression;
     protoType(args: ToAminoJSONMethod): t.ConditionalExpression;

@@ -539,18 +539,22 @@ export const Tx = {
     return obj;
   },
   fromAmino(object: TxAmino): Tx {
-    return {
-      body: object?.body ? TxBody.fromAmino(object.body) : undefined,
-      authInfo: object?.auth_info ? AuthInfo.fromAmino(object.auth_info) : undefined,
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
-    };
+    const message = createBaseTx();
+    if (object.body !== undefined && object.body !== null) {
+      message.body = TxBody.fromAmino(object.body);
+    }
+    if (object.auth_info !== undefined && object.auth_info !== null) {
+      message.authInfo = AuthInfo.fromAmino(object.auth_info);
+    }
+    message.signatures = object.signatures?.map(e => bytesFromBase64(e)) || [];
+    return message;
   },
   toAmino(message: Tx): TxAmino {
     const obj: any = {};
     obj.body = message.body ? TxBody.toAmino(message.body) : undefined;
     obj.auth_info = message.authInfo ? AuthInfo.toAmino(message.authInfo) : undefined;
     if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e);
+      obj.signatures = message.signatures.map(e => base64FromBytes(e));
     } else {
       obj.signatures = [];
     }
@@ -673,18 +677,22 @@ export const TxRaw = {
     return obj;
   },
   fromAmino(object: TxRawAmino): TxRaw {
-    return {
-      bodyBytes: object.body_bytes,
-      authInfoBytes: object.auth_info_bytes,
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
-    };
+    const message = createBaseTxRaw();
+    if (object.body_bytes !== undefined && object.body_bytes !== null) {
+      message.bodyBytes = bytesFromBase64(object.body_bytes);
+    }
+    if (object.auth_info_bytes !== undefined && object.auth_info_bytes !== null) {
+      message.authInfoBytes = bytesFromBase64(object.auth_info_bytes);
+    }
+    message.signatures = object.signatures?.map(e => bytesFromBase64(e)) || [];
+    return message;
   },
   toAmino(message: TxRaw): TxRawAmino {
     const obj: any = {};
-    obj.body_bytes = message.bodyBytes;
-    obj.auth_info_bytes = message.authInfoBytes;
+    obj.body_bytes = message.bodyBytes ? base64FromBytes(message.bodyBytes) : undefined;
+    obj.auth_info_bytes = message.authInfoBytes ? base64FromBytes(message.authInfoBytes) : undefined;
     if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e);
+      obj.signatures = message.signatures.map(e => base64FromBytes(e));
     } else {
       obj.signatures = [];
     }
@@ -814,17 +822,25 @@ export const SignDoc = {
     return obj;
   },
   fromAmino(object: SignDocAmino): SignDoc {
-    return {
-      bodyBytes: object.body_bytes,
-      authInfoBytes: object.auth_info_bytes,
-      chainId: object.chain_id,
-      accountNumber: BigInt(object.account_number)
-    };
+    const message = createBaseSignDoc();
+    if (object.body_bytes !== undefined && object.body_bytes !== null) {
+      message.bodyBytes = bytesFromBase64(object.body_bytes);
+    }
+    if (object.auth_info_bytes !== undefined && object.auth_info_bytes !== null) {
+      message.authInfoBytes = bytesFromBase64(object.auth_info_bytes);
+    }
+    if (object.chain_id !== undefined && object.chain_id !== null) {
+      message.chainId = object.chain_id;
+    }
+    if (object.account_number !== undefined && object.account_number !== null) {
+      message.accountNumber = BigInt(object.account_number);
+    }
+    return message;
   },
   toAmino(message: SignDoc): SignDocAmino {
     const obj: any = {};
-    obj.body_bytes = message.bodyBytes;
-    obj.auth_info_bytes = message.authInfoBytes;
+    obj.body_bytes = message.bodyBytes ? base64FromBytes(message.bodyBytes) : undefined;
+    obj.auth_info_bytes = message.authInfoBytes ? base64FromBytes(message.authInfoBytes) : undefined;
     obj.chain_id = message.chainId;
     obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
     return obj;
@@ -985,18 +1001,30 @@ export const SignDocDirectAux = {
     return obj;
   },
   fromAmino(object: SignDocDirectAuxAmino): SignDocDirectAux {
-    return {
-      bodyBytes: object.body_bytes,
-      publicKey: object?.public_key ? Any.fromAmino(object.public_key) : undefined,
-      chainId: object.chain_id,
-      accountNumber: BigInt(object.account_number),
-      sequence: BigInt(object.sequence),
-      tip: object?.tip ? Tip.fromAmino(object.tip) : undefined
-    };
+    const message = createBaseSignDocDirectAux();
+    if (object.body_bytes !== undefined && object.body_bytes !== null) {
+      message.bodyBytes = bytesFromBase64(object.body_bytes);
+    }
+    if (object.public_key !== undefined && object.public_key !== null) {
+      message.publicKey = Any.fromAmino(object.public_key);
+    }
+    if (object.chain_id !== undefined && object.chain_id !== null) {
+      message.chainId = object.chain_id;
+    }
+    if (object.account_number !== undefined && object.account_number !== null) {
+      message.accountNumber = BigInt(object.account_number);
+    }
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = BigInt(object.sequence);
+    }
+    if (object.tip !== undefined && object.tip !== null) {
+      message.tip = Tip.fromAmino(object.tip);
+    }
+    return message;
   },
   toAmino(message: SignDocDirectAux): SignDocDirectAuxAmino {
     const obj: any = {};
-    obj.body_bytes = message.bodyBytes;
+    obj.body_bytes = message.bodyBytes ? base64FromBytes(message.bodyBytes) : undefined;
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined;
     obj.chain_id = message.chainId;
     obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
@@ -1165,13 +1193,17 @@ export const TxBody = {
     return obj;
   },
   fromAmino(object: TxBodyAmino): TxBody {
-    return {
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : [],
-      memo: object.memo,
-      timeoutHeight: BigInt(object.timeout_height),
-      extensionOptions: Array.isArray(object?.extension_options) ? object.extension_options.map((e: any) => Any.fromAmino(e)) : [],
-      nonCriticalExtensionOptions: Array.isArray(object?.non_critical_extension_options) ? object.non_critical_extension_options.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseTxBody();
+    message.messages = object.messages?.map(e => Any.fromAmino(e)) || [];
+    if (object.memo !== undefined && object.memo !== null) {
+      message.memo = object.memo;
+    }
+    if (object.timeout_height !== undefined && object.timeout_height !== null) {
+      message.timeoutHeight = BigInt(object.timeout_height);
+    }
+    message.extensionOptions = object.extension_options?.map(e => Any.fromAmino(e)) || [];
+    message.nonCriticalExtensionOptions = object.non_critical_extension_options?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: TxBody): TxBodyAmino {
     const obj: any = {};
@@ -1315,11 +1347,15 @@ export const AuthInfo = {
     return obj;
   },
   fromAmino(object: AuthInfoAmino): AuthInfo {
-    return {
-      signerInfos: Array.isArray(object?.signer_infos) ? object.signer_infos.map((e: any) => SignerInfo.fromAmino(e)) : [],
-      fee: object?.fee ? Fee.fromAmino(object.fee) : undefined,
-      tip: object?.tip ? Tip.fromAmino(object.tip) : undefined
-    };
+    const message = createBaseAuthInfo();
+    message.signerInfos = object.signer_infos?.map(e => SignerInfo.fromAmino(e)) || [];
+    if (object.fee !== undefined && object.fee !== null) {
+      message.fee = Fee.fromAmino(object.fee);
+    }
+    if (object.tip !== undefined && object.tip !== null) {
+      message.tip = Tip.fromAmino(object.tip);
+    }
+    return message;
   },
   toAmino(message: AuthInfo): AuthInfoAmino {
     const obj: any = {};
@@ -1447,11 +1483,17 @@ export const SignerInfo = {
     return obj;
   },
   fromAmino(object: SignerInfoAmino): SignerInfo {
-    return {
-      publicKey: object?.public_key ? Any.fromAmino(object.public_key) : undefined,
-      modeInfo: object?.mode_info ? ModeInfo.fromAmino(object.mode_info) : undefined,
-      sequence: BigInt(object.sequence)
-    };
+    const message = createBaseSignerInfo();
+    if (object.public_key !== undefined && object.public_key !== null) {
+      message.publicKey = Any.fromAmino(object.public_key);
+    }
+    if (object.mode_info !== undefined && object.mode_info !== null) {
+      message.modeInfo = ModeInfo.fromAmino(object.mode_info);
+    }
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = BigInt(object.sequence);
+    }
+    return message;
   },
   toAmino(message: SignerInfo): SignerInfoAmino {
     const obj: any = {};
@@ -1560,10 +1602,14 @@ export const ModeInfo = {
     return obj;
   },
   fromAmino(object: ModeInfoAmino): ModeInfo {
-    return {
-      single: object?.single ? ModeInfo_Single.fromAmino(object.single) : undefined,
-      multi: object?.multi ? ModeInfo_Multi.fromAmino(object.multi) : undefined
-    };
+    const message = createBaseModeInfo();
+    if (object.single !== undefined && object.single !== null) {
+      message.single = ModeInfo_Single.fromAmino(object.single);
+    }
+    if (object.multi !== undefined && object.multi !== null) {
+      message.multi = ModeInfo_Multi.fromAmino(object.multi);
+    }
+    return message;
   },
   toAmino(message: ModeInfo): ModeInfoAmino {
     const obj: any = {};
@@ -1654,13 +1700,15 @@ export const ModeInfo_Single = {
     return obj;
   },
   fromAmino(object: ModeInfo_SingleAmino): ModeInfo_Single {
-    return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1
-    };
+    const message = createBaseModeInfo_Single();
+    if (object.mode !== undefined && object.mode !== null) {
+      message.mode = signModeFromJSON(object.mode);
+    }
+    return message;
   },
   toAmino(message: ModeInfo_Single): ModeInfo_SingleAmino {
     const obj: any = {};
-    obj.mode = message.mode;
+    obj.mode = signModeToJSON(message.mode);
     return obj;
   },
   fromAminoMsg(object: ModeInfo_SingleAminoMsg): ModeInfo_Single {
@@ -1769,10 +1817,12 @@ export const ModeInfo_Multi = {
     return obj;
   },
   fromAmino(object: ModeInfo_MultiAmino): ModeInfo_Multi {
-    return {
-      bitarray: object?.bitarray ? CompactBitArray.fromAmino(object.bitarray) : undefined,
-      modeInfos: Array.isArray(object?.mode_infos) ? object.mode_infos.map((e: any) => ModeInfo.fromAmino(e)) : []
-    };
+    const message = createBaseModeInfo_Multi();
+    if (object.bitarray !== undefined && object.bitarray !== null) {
+      message.bitarray = CompactBitArray.fromAmino(object.bitarray);
+    }
+    message.modeInfos = object.mode_infos?.map(e => ModeInfo.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ModeInfo_Multi): ModeInfo_MultiAmino {
     const obj: any = {};
@@ -1916,12 +1966,18 @@ export const Fee = {
     return obj;
   },
   fromAmino(object: FeeAmino): Fee {
-    return {
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : [],
-      gasLimit: BigInt(object.gas_limit),
-      payer: object.payer,
-      granter: object.granter
-    };
+    const message = createBaseFee();
+    message.amount = object.amount?.map(e => Coin.fromAmino(e)) || [];
+    if (object.gas_limit !== undefined && object.gas_limit !== null) {
+      message.gasLimit = BigInt(object.gas_limit);
+    }
+    if (object.payer !== undefined && object.payer !== null) {
+      message.payer = object.payer;
+    }
+    if (object.granter !== undefined && object.granter !== null) {
+      message.granter = object.granter;
+    }
+    return message;
   },
   toAmino(message: Fee): FeeAmino {
     const obj: any = {};
@@ -2039,10 +2095,12 @@ export const Tip = {
     return obj;
   },
   fromAmino(object: TipAmino): Tip {
-    return {
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : [],
-      tipper: object.tipper
-    };
+    const message = createBaseTip();
+    message.amount = object.amount?.map(e => Coin.fromAmino(e)) || [];
+    if (object.tipper !== undefined && object.tipper !== null) {
+      message.tipper = object.tipper;
+    }
+    return message;
   },
   toAmino(message: Tip): TipAmino {
     const obj: any = {};
@@ -2178,19 +2236,27 @@ export const AuxSignerData = {
     return obj;
   },
   fromAmino(object: AuxSignerDataAmino): AuxSignerData {
-    return {
-      address: object.address,
-      signDoc: object?.sign_doc ? SignDocDirectAux.fromAmino(object.sign_doc) : undefined,
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
-      sig: object.sig
-    };
+    const message = createBaseAuxSignerData();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.sign_doc !== undefined && object.sign_doc !== null) {
+      message.signDoc = SignDocDirectAux.fromAmino(object.sign_doc);
+    }
+    if (object.mode !== undefined && object.mode !== null) {
+      message.mode = signModeFromJSON(object.mode);
+    }
+    if (object.sig !== undefined && object.sig !== null) {
+      message.sig = bytesFromBase64(object.sig);
+    }
+    return message;
   },
   toAmino(message: AuxSignerData): AuxSignerDataAmino {
     const obj: any = {};
     obj.address = message.address;
     obj.sign_doc = message.signDoc ? SignDocDirectAux.toAmino(message.signDoc) : undefined;
-    obj.mode = message.mode;
-    obj.sig = message.sig;
+    obj.mode = signModeToJSON(message.mode);
+    obj.sig = message.sig ? base64FromBytes(message.sig) : undefined;
     return obj;
   },
   fromAminoMsg(object: AuxSignerDataAminoMsg): AuxSignerData {

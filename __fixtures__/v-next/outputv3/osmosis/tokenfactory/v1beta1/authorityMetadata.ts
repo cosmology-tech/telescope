@@ -21,7 +21,7 @@ export interface DenomAuthorityMetadataProtoMsg {
  */
 export interface DenomAuthorityMetadataAmino {
   /** Can be empty for no admin, or a valid osmosis address */
-  admin: string;
+  admin?: string;
 }
 /**
  * DenomAuthorityMetadata specifies metadata for addresses that have specific
@@ -88,9 +88,11 @@ export const DenomAuthorityMetadata = {
     return obj;
   },
   fromAmino(object: DenomAuthorityMetadataAmino): DenomAuthorityMetadata {
-    return {
-      admin: object.admin
-    };
+    const message = createBaseDenomAuthorityMetadata();
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = object.admin;
+    }
+    return message;
   },
   toAmino(message: DenomAuthorityMetadata, useInterfaces: boolean = true): DenomAuthorityMetadataAmino {
     const obj: any = {};

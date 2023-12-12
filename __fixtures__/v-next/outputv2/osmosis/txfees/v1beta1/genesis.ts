@@ -13,8 +13,8 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the txfees module's genesis state. */
 export interface GenesisStateAmino {
-  basedenom: string;
-  feetokens: FeeTokenAmino[];
+  basedenom?: string;
+  feetokens?: FeeTokenAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "osmosis/txfees/genesis-state";
@@ -102,10 +102,12 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      basedenom: object.basedenom,
-      feetokens: Array.isArray(object?.feetokens) ? object.feetokens.map((e: any) => FeeToken.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.basedenom !== undefined && object.basedenom !== null) {
+      message.basedenom = object.basedenom;
+    }
+    message.feetokens = object.feetokens?.map(e => FeeToken.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

@@ -11,7 +11,7 @@ export interface ResourceValueProtoMsg {
 }
 /** Unit stores cpu, memory and storage metrics */
 export interface ResourceValueAmino {
-  val: Uint8Array;
+  val?: string;
 }
 /** Unit stores cpu, memory and storage metrics */
 export interface ResourceValueSDKType {
@@ -73,13 +73,15 @@ export const ResourceValue = {
     return obj;
   },
   fromAmino(object: ResourceValueAmino): ResourceValue {
-    return {
-      val: object.val
-    };
+    const message = createBaseResourceValue();
+    if (object.val !== undefined && object.val !== null) {
+      message.val = bytesFromBase64(object.val);
+    }
+    return message;
   },
   toAmino(message: ResourceValue, useInterfaces: boolean = true): ResourceValueAmino {
     const obj: any = {};
-    obj.val = message.val;
+    obj.val = message.val ? base64FromBytes(message.val) : undefined;
     return obj;
   },
   fromProtoMsg(message: ResourceValueProtoMsg, useInterfaces: boolean = true): ResourceValue {

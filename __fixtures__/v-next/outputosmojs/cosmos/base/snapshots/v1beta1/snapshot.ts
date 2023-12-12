@@ -253,20 +253,30 @@ export const Snapshot = {
     return obj;
   },
   fromAmino(object: SnapshotAmino): Snapshot {
-    return {
-      height: BigInt(object.height),
-      format: object.format,
-      chunks: object.chunks,
-      hash: object.hash,
-      metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : undefined
-    };
+    const message = createBaseSnapshot();
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height);
+    }
+    if (object.format !== undefined && object.format !== null) {
+      message.format = object.format;
+    }
+    if (object.chunks !== undefined && object.chunks !== null) {
+      message.chunks = object.chunks;
+    }
+    if (object.hash !== undefined && object.hash !== null) {
+      message.hash = bytesFromBase64(object.hash);
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = Metadata.fromAmino(object.metadata);
+    }
+    return message;
   },
   toAmino(message: Snapshot): SnapshotAmino {
     const obj: any = {};
     obj.height = message.height ? message.height.toString() : undefined;
     obj.format = message.format;
     obj.chunks = message.chunks;
-    obj.hash = message.hash;
+    obj.hash = message.hash ? base64FromBytes(message.hash) : undefined;
     obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined;
     return obj;
   },
@@ -361,14 +371,14 @@ export const Metadata = {
     return obj;
   },
   fromAmino(object: MetadataAmino): Metadata {
-    return {
-      chunkHashes: Array.isArray(object?.chunk_hashes) ? object.chunk_hashes.map((e: any) => e) : []
-    };
+    const message = createBaseMetadata();
+    message.chunkHashes = object.chunk_hashes?.map(e => bytesFromBase64(e)) || [];
+    return message;
   },
   toAmino(message: Metadata): MetadataAmino {
     const obj: any = {};
     if (message.chunkHashes) {
-      obj.chunk_hashes = message.chunkHashes.map(e => e);
+      obj.chunk_hashes = message.chunkHashes.map(e => base64FromBytes(e));
     } else {
       obj.chunk_hashes = [];
     }
@@ -522,14 +532,26 @@ export const SnapshotItem = {
     return obj;
   },
   fromAmino(object: SnapshotItemAmino): SnapshotItem {
-    return {
-      store: object?.store ? SnapshotStoreItem.fromAmino(object.store) : undefined,
-      iavl: object?.iavl ? SnapshotIAVLItem.fromAmino(object.iavl) : undefined,
-      extension: object?.extension ? SnapshotExtensionMeta.fromAmino(object.extension) : undefined,
-      extensionPayload: object?.extension_payload ? SnapshotExtensionPayload.fromAmino(object.extension_payload) : undefined,
-      kv: object?.kv ? SnapshotKVItem.fromAmino(object.kv) : undefined,
-      schema: object?.schema ? SnapshotSchema.fromAmino(object.schema) : undefined
-    };
+    const message = createBaseSnapshotItem();
+    if (object.store !== undefined && object.store !== null) {
+      message.store = SnapshotStoreItem.fromAmino(object.store);
+    }
+    if (object.iavl !== undefined && object.iavl !== null) {
+      message.iavl = SnapshotIAVLItem.fromAmino(object.iavl);
+    }
+    if (object.extension !== undefined && object.extension !== null) {
+      message.extension = SnapshotExtensionMeta.fromAmino(object.extension);
+    }
+    if (object.extension_payload !== undefined && object.extension_payload !== null) {
+      message.extensionPayload = SnapshotExtensionPayload.fromAmino(object.extension_payload);
+    }
+    if (object.kv !== undefined && object.kv !== null) {
+      message.kv = SnapshotKVItem.fromAmino(object.kv);
+    }
+    if (object.schema !== undefined && object.schema !== null) {
+      message.schema = SnapshotSchema.fromAmino(object.schema);
+    }
+    return message;
   },
   toAmino(message: SnapshotItem): SnapshotItemAmino {
     const obj: any = {};
@@ -624,9 +646,11 @@ export const SnapshotStoreItem = {
     return obj;
   },
   fromAmino(object: SnapshotStoreItemAmino): SnapshotStoreItem {
-    return {
-      name: object.name
-    };
+    const message = createBaseSnapshotStoreItem();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: SnapshotStoreItem): SnapshotStoreItemAmino {
     const obj: any = {};
@@ -755,17 +779,25 @@ export const SnapshotIAVLItem = {
     return obj;
   },
   fromAmino(object: SnapshotIAVLItemAmino): SnapshotIAVLItem {
-    return {
-      key: object.key,
-      value: object.value,
-      version: BigInt(object.version),
-      height: object.height
-    };
+    const message = createBaseSnapshotIAVLItem();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = bytesFromBase64(object.key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = bytesFromBase64(object.value);
+    }
+    if (object.version !== undefined && object.version !== null) {
+      message.version = BigInt(object.version);
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = object.height;
+    }
+    return message;
   },
   toAmino(message: SnapshotIAVLItem): SnapshotIAVLItemAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
+    obj.value = message.value ? base64FromBytes(message.value) : undefined;
     obj.version = message.version ? message.version.toString() : undefined;
     obj.height = message.height;
     return obj;
@@ -866,10 +898,14 @@ export const SnapshotExtensionMeta = {
     return obj;
   },
   fromAmino(object: SnapshotExtensionMetaAmino): SnapshotExtensionMeta {
-    return {
-      name: object.name,
-      format: object.format
-    };
+    const message = createBaseSnapshotExtensionMeta();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.format !== undefined && object.format !== null) {
+      message.format = object.format;
+    }
+    return message;
   },
   toAmino(message: SnapshotExtensionMeta): SnapshotExtensionMetaAmino {
     const obj: any = {};
@@ -960,13 +996,15 @@ export const SnapshotExtensionPayload = {
     return obj;
   },
   fromAmino(object: SnapshotExtensionPayloadAmino): SnapshotExtensionPayload {
-    return {
-      payload: object.payload
-    };
+    const message = createBaseSnapshotExtensionPayload();
+    if (object.payload !== undefined && object.payload !== null) {
+      message.payload = bytesFromBase64(object.payload);
+    }
+    return message;
   },
   toAmino(message: SnapshotExtensionPayload): SnapshotExtensionPayloadAmino {
     const obj: any = {};
-    obj.payload = message.payload;
+    obj.payload = message.payload ? base64FromBytes(message.payload) : undefined;
     return obj;
   },
   fromAminoMsg(object: SnapshotExtensionPayloadAminoMsg): SnapshotExtensionPayload {
@@ -1065,15 +1103,19 @@ export const SnapshotKVItem = {
     return obj;
   },
   fromAmino(object: SnapshotKVItemAmino): SnapshotKVItem {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseSnapshotKVItem();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = bytesFromBase64(object.key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = bytesFromBase64(object.value);
+    }
+    return message;
   },
   toAmino(message: SnapshotKVItem): SnapshotKVItemAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
+    obj.value = message.value ? base64FromBytes(message.value) : undefined;
     return obj;
   },
   fromAminoMsg(object: SnapshotKVItemAminoMsg): SnapshotKVItem {
@@ -1167,14 +1209,14 @@ export const SnapshotSchema = {
     return obj;
   },
   fromAmino(object: SnapshotSchemaAmino): SnapshotSchema {
-    return {
-      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
-    };
+    const message = createBaseSnapshotSchema();
+    message.keys = object.keys?.map(e => bytesFromBase64(e)) || [];
+    return message;
   },
   toAmino(message: SnapshotSchema): SnapshotSchemaAmino {
     const obj: any = {};
     if (message.keys) {
-      obj.keys = message.keys.map(e => e);
+      obj.keys = message.keys.map(e => base64FromBytes(e));
     } else {
       obj.keys = [];
     }

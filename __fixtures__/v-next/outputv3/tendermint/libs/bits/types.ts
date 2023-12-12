@@ -10,8 +10,8 @@ export interface BitArrayProtoMsg {
   value: Uint8Array;
 }
 export interface BitArrayAmino {
-  bits: string;
-  elems: string[];
+  bits?: string;
+  elems?: string[];
 }
 export interface BitArraySDKType {
   bits: bigint;
@@ -104,10 +104,12 @@ export const BitArray = {
     return obj;
   },
   fromAmino(object: BitArrayAmino): BitArray {
-    return {
-      bits: BigInt(object.bits),
-      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => BigInt(e)) : []
-    };
+    const message = createBaseBitArray();
+    if (object.bits !== undefined && object.bits !== null) {
+      message.bits = BigInt(object.bits);
+    }
+    message.elems = object.elems?.map(e => BigInt(e)) || [];
+    return message;
   },
   toAmino(message: BitArray, useInterfaces: boolean = true): BitArrayAmino {
     const obj: any = {};

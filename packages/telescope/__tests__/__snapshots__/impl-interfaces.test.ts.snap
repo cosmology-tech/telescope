@@ -1,14 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`implements interface works toAmino for interface 1`] = `
+exports[`implements interface works fromAmino for interface 1`] = `
 {
   "authorization": {
-    "spend_limit": [
+    "spendLimit": [
       {
         "amount": "1",
         "denom": "d",
       },
     ],
+  },
+  "expiration": 2020-01-01T00:00:00.000Z,
+  "messages": [
+    {
+      "typeUrl": "",
+      "value": {},
+    },
+  ],
+  "opt": 0,
+  "singleMsg": {
+    "typeUrl": "",
+    "value": {},
+  },
+}
+`;
+
+exports[`implements interface works toAmino for interface 1`] = `
+{
+  "authorization": {
+    "type": "cosmos-sdk/SendAuthorization",
+    "value": {
+      "spend_limit": [
+        {
+          "amount": "1",
+          "denom": "d",
+        },
+      ],
+    },
   },
   "expiration": "2020-01-01T00:00:00Z",
   "messages": [
@@ -17,7 +45,35 @@ exports[`implements interface works toAmino for interface 1`] = `
       "value": Uint8Array [],
     },
   ],
-  "opt": 0,
+  "opt": "VOTE_OPTION_UNSPECIFIED",
+  "single_msg": {
+    "type": "",
+    "value": Uint8Array [],
+  },
+}
+`;
+
+exports[`implements interface works toAmino for interface with Any 1`] = `
+{
+  "authorization": {
+    "type": "cosmos-sdk/SendAuthorization",
+    "value": {
+      "spend_limit": [
+        {
+          "amount": "1",
+          "denom": "d",
+        },
+      ],
+    },
+  },
+  "expiration": "2020-01-01T00:00:00Z",
+  "messages": [
+    {
+      "type": "",
+      "value": Uint8Array [],
+    },
+  ],
+  "opt": "VOTE_OPTION_UNSPECIFIED",
   "single_msg": {
     "type": "",
     "value": Uint8Array [],

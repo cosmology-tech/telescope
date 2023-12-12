@@ -167,10 +167,12 @@ export const QueryProvidersResponse = {
     return obj;
   },
   fromAmino(object: QueryProvidersResponseAmino): QueryProvidersResponse {
-    return {
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryProvidersResponse();
+    message.providers = object.providers?.map(e => Provider.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryProvidersResponse): QueryProvidersResponseAmino {
     const obj: any = {};
@@ -278,10 +280,14 @@ export const QueryProviderRequest = {
     return obj;
   },
   fromAmino(object: QueryProviderRequestAmino): QueryProviderRequest {
-    return {
-      auditor: object.auditor,
-      owner: object.owner
-    };
+    const message = createBaseQueryProviderRequest();
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
   toAmino(message: QueryProviderRequest): QueryProviderRequestAmino {
     const obj: any = {};
@@ -372,9 +378,11 @@ export const QueryAllProvidersAttributesRequest = {
     return obj;
   },
   fromAmino(object: QueryAllProvidersAttributesRequestAmino): QueryAllProvidersAttributesRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAllProvidersAttributesRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAllProvidersAttributesRequest): QueryAllProvidersAttributesRequestAmino {
     const obj: any = {};
@@ -477,10 +485,14 @@ export const QueryProviderAttributesRequest = {
     return obj;
   },
   fromAmino(object: QueryProviderAttributesRequestAmino): QueryProviderAttributesRequest {
-    return {
-      owner: object.owner,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryProviderAttributesRequest();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryProviderAttributesRequest): QueryProviderAttributesRequestAmino {
     const obj: any = {};
@@ -584,10 +596,14 @@ export const QueryProviderAuditorRequest = {
     return obj;
   },
   fromAmino(object: QueryProviderAuditorRequestAmino): QueryProviderAuditorRequest {
-    return {
-      auditor: object.auditor,
-      owner: object.owner
-    };
+    const message = createBaseQueryProviderAuditorRequest();
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
   toAmino(message: QueryProviderAuditorRequest): QueryProviderAuditorRequestAmino {
     const obj: any = {};
@@ -691,10 +707,14 @@ export const QueryAuditorAttributesRequest = {
     return obj;
   },
   fromAmino(object: QueryAuditorAttributesRequestAmino): QueryAuditorAttributesRequest {
-    return {
-      auditor: object.auditor,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAuditorAttributesRequest();
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAuditorAttributesRequest): QueryAuditorAttributesRequestAmino {
     const obj: any = {};

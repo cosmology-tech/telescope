@@ -90,14 +90,14 @@ export interface LoggingAmino {
    * different monitored resource type. A log can be used in at most
    * one producer destination.
    */
-  producer_destinations: Logging_LoggingDestinationAmino[];
+  producer_destinations?: Logging_LoggingDestinationAmino[];
   /**
    * Logging configurations for sending logs to the consumer project.
    * There can be multiple consumer destinations, each one must have a
    * different monitored resource type. A log can be used in at most
    * one consumer destination.
    */
-  consumer_destinations: Logging_LoggingDestinationAmino[];
+  consumer_destinations?: Logging_LoggingDestinationAmino[];
 }
 export interface LoggingAminoMsg {
   type: "/google.api.Logging";
@@ -169,14 +169,14 @@ export interface Logging_LoggingDestinationAmino {
    * The monitored resource type. The type must be defined in the
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
-  monitored_resource: string;
+  monitored_resource?: string;
   /**
    * Names of the logs to be sent to this destination. Each name must
    * be defined in the [Service.logs][google.api.Service.logs] section. If the log name is
    * not a domain scoped name, it will be automatically prefixed with
    * the service name followed by "/".
    */
-  logs: string[];
+  logs?: string[];
 }
 export interface Logging_LoggingDestinationAminoMsg {
   type: "/google.api.LoggingDestination";
@@ -274,10 +274,10 @@ export const Logging = {
     return obj;
   },
   fromAmino(object: LoggingAmino): Logging {
-    return {
-      producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Logging_LoggingDestination.fromAmino(e)) : [],
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Logging_LoggingDestination.fromAmino(e)) : []
-    };
+    const message = createBaseLogging();
+    message.producerDestinations = object.producer_destinations?.map(e => Logging_LoggingDestination.fromAmino(e)) || [];
+    message.consumerDestinations = object.consumer_destinations?.map(e => Logging_LoggingDestination.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Logging): LoggingAmino {
     const obj: any = {};
@@ -385,10 +385,12 @@ export const Logging_LoggingDestination = {
     return obj;
   },
   fromAmino(object: Logging_LoggingDestinationAmino): Logging_LoggingDestination {
-    return {
-      monitoredResource: object.monitored_resource,
-      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => e) : []
-    };
+    const message = createBaseLogging_LoggingDestination();
+    if (object.monitored_resource !== undefined && object.monitored_resource !== null) {
+      message.monitoredResource = object.monitored_resource;
+    }
+    message.logs = object.logs?.map(e => e) || [];
+    return message;
   },
   toAmino(message: Logging_LoggingDestination): Logging_LoggingDestinationAmino {
     const obj: any = {};

@@ -523,7 +523,8 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
@@ -612,9 +613,11 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};
@@ -687,7 +690,8 @@ export const QueryGetProtoRevNumberOfTradesRequest = {
     return obj;
   },
   fromAmino(_: QueryGetProtoRevNumberOfTradesRequestAmino): QueryGetProtoRevNumberOfTradesRequest {
-    return {};
+    const message = createBaseQueryGetProtoRevNumberOfTradesRequest();
+    return message;
   },
   toAmino(_: QueryGetProtoRevNumberOfTradesRequest): QueryGetProtoRevNumberOfTradesRequestAmino {
     const obj: any = {};
@@ -776,9 +780,11 @@ export const QueryGetProtoRevNumberOfTradesResponse = {
     return obj;
   },
   fromAmino(object: QueryGetProtoRevNumberOfTradesResponseAmino): QueryGetProtoRevNumberOfTradesResponse {
-    return {
-      numberOfTrades: object.number_of_trades
-    };
+    const message = createBaseQueryGetProtoRevNumberOfTradesResponse();
+    if (object.number_of_trades !== undefined && object.number_of_trades !== null) {
+      message.numberOfTrades = object.number_of_trades;
+    }
+    return message;
   },
   toAmino(message: QueryGetProtoRevNumberOfTradesResponse): QueryGetProtoRevNumberOfTradesResponseAmino {
     const obj: any = {};
@@ -868,9 +874,11 @@ export const QueryGetProtoRevProfitsByDenomRequest = {
     return obj;
   },
   fromAmino(object: QueryGetProtoRevProfitsByDenomRequestAmino): QueryGetProtoRevProfitsByDenomRequest {
-    return {
-      denom: object.denom
-    };
+    const message = createBaseQueryGetProtoRevProfitsByDenomRequest();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    return message;
   },
   toAmino(message: QueryGetProtoRevProfitsByDenomRequest): QueryGetProtoRevProfitsByDenomRequestAmino {
     const obj: any = {};
@@ -960,9 +968,11 @@ export const QueryGetProtoRevProfitsByDenomResponse = {
     return obj;
   },
   fromAmino(object: QueryGetProtoRevProfitsByDenomResponseAmino): QueryGetProtoRevProfitsByDenomResponse {
-    return {
-      profit: object?.profit ? Coin.fromAmino(object.profit) : undefined
-    };
+    const message = createBaseQueryGetProtoRevProfitsByDenomResponse();
+    if (object.profit !== undefined && object.profit !== null) {
+      message.profit = Coin.fromAmino(object.profit);
+    }
+    return message;
   },
   toAmino(message: QueryGetProtoRevProfitsByDenomResponse): QueryGetProtoRevProfitsByDenomResponseAmino {
     const obj: any = {};
@@ -1035,7 +1045,8 @@ export const QueryGetProtoRevAllProfitsRequest = {
     return obj;
   },
   fromAmino(_: QueryGetProtoRevAllProfitsRequestAmino): QueryGetProtoRevAllProfitsRequest {
-    return {};
+    const message = createBaseQueryGetProtoRevAllProfitsRequest();
+    return message;
   },
   toAmino(_: QueryGetProtoRevAllProfitsRequest): QueryGetProtoRevAllProfitsRequestAmino {
     const obj: any = {};
@@ -1132,9 +1143,9 @@ export const QueryGetProtoRevAllProfitsResponse = {
     return obj;
   },
   fromAmino(object: QueryGetProtoRevAllProfitsResponseAmino): QueryGetProtoRevAllProfitsResponse {
-    return {
-      profits: Array.isArray(object?.profits) ? object.profits.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseQueryGetProtoRevAllProfitsResponse();
+    message.profits = object.profits?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryGetProtoRevAllProfitsResponse): QueryGetProtoRevAllProfitsResponseAmino {
     const obj: any = {};
@@ -1245,9 +1256,9 @@ export const QueryGetProtoRevStatisticsByRouteRequest = {
     return obj;
   },
   fromAmino(object: QueryGetProtoRevStatisticsByRouteRequestAmino): QueryGetProtoRevStatisticsByRouteRequest {
-    return {
-      route: Array.isArray(object?.route) ? object.route.map((e: any) => BigInt(e)) : []
-    };
+    const message = createBaseQueryGetProtoRevStatisticsByRouteRequest();
+    message.route = object.route?.map(e => BigInt(e)) || [];
+    return message;
   },
   toAmino(message: QueryGetProtoRevStatisticsByRouteRequest): QueryGetProtoRevStatisticsByRouteRequestAmino {
     const obj: any = {};
@@ -1341,9 +1352,11 @@ export const QueryGetProtoRevStatisticsByRouteResponse = {
     return obj;
   },
   fromAmino(object: QueryGetProtoRevStatisticsByRouteResponseAmino): QueryGetProtoRevStatisticsByRouteResponse {
-    return {
-      statistics: object?.statistics ? RouteStatistics.fromAmino(object.statistics) : undefined
-    };
+    const message = createBaseQueryGetProtoRevStatisticsByRouteResponse();
+    if (object.statistics !== undefined && object.statistics !== null) {
+      message.statistics = RouteStatistics.fromAmino(object.statistics);
+    }
+    return message;
   },
   toAmino(message: QueryGetProtoRevStatisticsByRouteResponse): QueryGetProtoRevStatisticsByRouteResponseAmino {
     const obj: any = {};
@@ -1416,7 +1429,8 @@ export const QueryGetProtoRevAllRouteStatisticsRequest = {
     return obj;
   },
   fromAmino(_: QueryGetProtoRevAllRouteStatisticsRequestAmino): QueryGetProtoRevAllRouteStatisticsRequest {
-    return {};
+    const message = createBaseQueryGetProtoRevAllRouteStatisticsRequest();
+    return message;
   },
   toAmino(_: QueryGetProtoRevAllRouteStatisticsRequest): QueryGetProtoRevAllRouteStatisticsRequestAmino {
     const obj: any = {};
@@ -1513,9 +1527,9 @@ export const QueryGetProtoRevAllRouteStatisticsResponse = {
     return obj;
   },
   fromAmino(object: QueryGetProtoRevAllRouteStatisticsResponseAmino): QueryGetProtoRevAllRouteStatisticsResponse {
-    return {
-      statistics: Array.isArray(object?.statistics) ? object.statistics.map((e: any) => RouteStatistics.fromAmino(e)) : []
-    };
+    const message = createBaseQueryGetProtoRevAllRouteStatisticsResponse();
+    message.statistics = object.statistics?.map(e => RouteStatistics.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryGetProtoRevAllRouteStatisticsResponse): QueryGetProtoRevAllRouteStatisticsResponseAmino {
     const obj: any = {};
@@ -1592,7 +1606,8 @@ export const QueryGetProtoRevTokenPairArbRoutesRequest = {
     return obj;
   },
   fromAmino(_: QueryGetProtoRevTokenPairArbRoutesRequestAmino): QueryGetProtoRevTokenPairArbRoutesRequest {
-    return {};
+    const message = createBaseQueryGetProtoRevTokenPairArbRoutesRequest();
+    return message;
   },
   toAmino(_: QueryGetProtoRevTokenPairArbRoutesRequest): QueryGetProtoRevTokenPairArbRoutesRequestAmino {
     const obj: any = {};
@@ -1689,9 +1704,9 @@ export const QueryGetProtoRevTokenPairArbRoutesResponse = {
     return obj;
   },
   fromAmino(object: QueryGetProtoRevTokenPairArbRoutesResponseAmino): QueryGetProtoRevTokenPairArbRoutesResponse {
-    return {
-      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => TokenPairArbRoutes.fromAmino(e)) : []
-    };
+    const message = createBaseQueryGetProtoRevTokenPairArbRoutesResponse();
+    message.routes = object.routes?.map(e => TokenPairArbRoutes.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryGetProtoRevTokenPairArbRoutesResponse): QueryGetProtoRevTokenPairArbRoutesResponseAmino {
     const obj: any = {};
@@ -1768,7 +1783,8 @@ export const QueryGetProtoRevAdminAccountRequest = {
     return obj;
   },
   fromAmino(_: QueryGetProtoRevAdminAccountRequestAmino): QueryGetProtoRevAdminAccountRequest {
-    return {};
+    const message = createBaseQueryGetProtoRevAdminAccountRequest();
+    return message;
   },
   toAmino(_: QueryGetProtoRevAdminAccountRequest): QueryGetProtoRevAdminAccountRequestAmino {
     const obj: any = {};
@@ -1857,9 +1873,11 @@ export const QueryGetProtoRevAdminAccountResponse = {
     return obj;
   },
   fromAmino(object: QueryGetProtoRevAdminAccountResponseAmino): QueryGetProtoRevAdminAccountResponse {
-    return {
-      adminAccount: object.admin_account
-    };
+    const message = createBaseQueryGetProtoRevAdminAccountResponse();
+    if (object.admin_account !== undefined && object.admin_account !== null) {
+      message.adminAccount = object.admin_account;
+    }
+    return message;
   },
   toAmino(message: QueryGetProtoRevAdminAccountResponse): QueryGetProtoRevAdminAccountResponseAmino {
     const obj: any = {};
@@ -1932,7 +1950,8 @@ export const QueryGetProtoRevDeveloperAccountRequest = {
     return obj;
   },
   fromAmino(_: QueryGetProtoRevDeveloperAccountRequestAmino): QueryGetProtoRevDeveloperAccountRequest {
-    return {};
+    const message = createBaseQueryGetProtoRevDeveloperAccountRequest();
+    return message;
   },
   toAmino(_: QueryGetProtoRevDeveloperAccountRequest): QueryGetProtoRevDeveloperAccountRequestAmino {
     const obj: any = {};
@@ -2021,9 +2040,11 @@ export const QueryGetProtoRevDeveloperAccountResponse = {
     return obj;
   },
   fromAmino(object: QueryGetProtoRevDeveloperAccountResponseAmino): QueryGetProtoRevDeveloperAccountResponse {
-    return {
-      developerAccount: object.developer_account
-    };
+    const message = createBaseQueryGetProtoRevDeveloperAccountResponse();
+    if (object.developer_account !== undefined && object.developer_account !== null) {
+      message.developerAccount = object.developer_account;
+    }
+    return message;
   },
   toAmino(message: QueryGetProtoRevDeveloperAccountResponse): QueryGetProtoRevDeveloperAccountResponseAmino {
     const obj: any = {};
@@ -2096,7 +2117,8 @@ export const QueryGetProtoRevPoolWeightsRequest = {
     return obj;
   },
   fromAmino(_: QueryGetProtoRevPoolWeightsRequestAmino): QueryGetProtoRevPoolWeightsRequest {
-    return {};
+    const message = createBaseQueryGetProtoRevPoolWeightsRequest();
+    return message;
   },
   toAmino(_: QueryGetProtoRevPoolWeightsRequest): QueryGetProtoRevPoolWeightsRequestAmino {
     const obj: any = {};
@@ -2185,9 +2207,11 @@ export const QueryGetProtoRevPoolWeightsResponse = {
     return obj;
   },
   fromAmino(object: QueryGetProtoRevPoolWeightsResponseAmino): QueryGetProtoRevPoolWeightsResponse {
-    return {
-      poolWeights: object?.pool_weights ? PoolWeights.fromAmino(object.pool_weights) : undefined
-    };
+    const message = createBaseQueryGetProtoRevPoolWeightsResponse();
+    if (object.pool_weights !== undefined && object.pool_weights !== null) {
+      message.poolWeights = PoolWeights.fromAmino(object.pool_weights);
+    }
+    return message;
   },
   toAmino(message: QueryGetProtoRevPoolWeightsResponse): QueryGetProtoRevPoolWeightsResponseAmino {
     const obj: any = {};
@@ -2260,7 +2284,8 @@ export const QueryGetProtoRevMaxPoolPointsPerBlockRequest = {
     return obj;
   },
   fromAmino(_: QueryGetProtoRevMaxPoolPointsPerBlockRequestAmino): QueryGetProtoRevMaxPoolPointsPerBlockRequest {
-    return {};
+    const message = createBaseQueryGetProtoRevMaxPoolPointsPerBlockRequest();
+    return message;
   },
   toAmino(_: QueryGetProtoRevMaxPoolPointsPerBlockRequest): QueryGetProtoRevMaxPoolPointsPerBlockRequestAmino {
     const obj: any = {};
@@ -2349,9 +2374,11 @@ export const QueryGetProtoRevMaxPoolPointsPerBlockResponse = {
     return obj;
   },
   fromAmino(object: QueryGetProtoRevMaxPoolPointsPerBlockResponseAmino): QueryGetProtoRevMaxPoolPointsPerBlockResponse {
-    return {
-      maxPoolPointsPerBlock: BigInt(object.max_pool_points_per_block)
-    };
+    const message = createBaseQueryGetProtoRevMaxPoolPointsPerBlockResponse();
+    if (object.max_pool_points_per_block !== undefined && object.max_pool_points_per_block !== null) {
+      message.maxPoolPointsPerBlock = BigInt(object.max_pool_points_per_block);
+    }
+    return message;
   },
   toAmino(message: QueryGetProtoRevMaxPoolPointsPerBlockResponse): QueryGetProtoRevMaxPoolPointsPerBlockResponseAmino {
     const obj: any = {};
@@ -2424,7 +2451,8 @@ export const QueryGetProtoRevMaxPoolPointsPerTxRequest = {
     return obj;
   },
   fromAmino(_: QueryGetProtoRevMaxPoolPointsPerTxRequestAmino): QueryGetProtoRevMaxPoolPointsPerTxRequest {
-    return {};
+    const message = createBaseQueryGetProtoRevMaxPoolPointsPerTxRequest();
+    return message;
   },
   toAmino(_: QueryGetProtoRevMaxPoolPointsPerTxRequest): QueryGetProtoRevMaxPoolPointsPerTxRequestAmino {
     const obj: any = {};
@@ -2513,9 +2541,11 @@ export const QueryGetProtoRevMaxPoolPointsPerTxResponse = {
     return obj;
   },
   fromAmino(object: QueryGetProtoRevMaxPoolPointsPerTxResponseAmino): QueryGetProtoRevMaxPoolPointsPerTxResponse {
-    return {
-      maxPoolPointsPerTx: BigInt(object.max_pool_points_per_tx)
-    };
+    const message = createBaseQueryGetProtoRevMaxPoolPointsPerTxResponse();
+    if (object.max_pool_points_per_tx !== undefined && object.max_pool_points_per_tx !== null) {
+      message.maxPoolPointsPerTx = BigInt(object.max_pool_points_per_tx);
+    }
+    return message;
   },
   toAmino(message: QueryGetProtoRevMaxPoolPointsPerTxResponse): QueryGetProtoRevMaxPoolPointsPerTxResponseAmino {
     const obj: any = {};
@@ -2588,7 +2618,8 @@ export const QueryGetProtoRevBaseDenomsRequest = {
     return obj;
   },
   fromAmino(_: QueryGetProtoRevBaseDenomsRequestAmino): QueryGetProtoRevBaseDenomsRequest {
-    return {};
+    const message = createBaseQueryGetProtoRevBaseDenomsRequest();
+    return message;
   },
   toAmino(_: QueryGetProtoRevBaseDenomsRequest): QueryGetProtoRevBaseDenomsRequestAmino {
     const obj: any = {};
@@ -2685,9 +2716,9 @@ export const QueryGetProtoRevBaseDenomsResponse = {
     return obj;
   },
   fromAmino(object: QueryGetProtoRevBaseDenomsResponseAmino): QueryGetProtoRevBaseDenomsResponse {
-    return {
-      baseDenoms: Array.isArray(object?.base_denoms) ? object.base_denoms.map((e: any) => BaseDenom.fromAmino(e)) : []
-    };
+    const message = createBaseQueryGetProtoRevBaseDenomsResponse();
+    message.baseDenoms = object.base_denoms?.map(e => BaseDenom.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryGetProtoRevBaseDenomsResponse): QueryGetProtoRevBaseDenomsResponseAmino {
     const obj: any = {};
@@ -2764,7 +2795,8 @@ export const QueryGetProtoRevEnabledRequest = {
     return obj;
   },
   fromAmino(_: QueryGetProtoRevEnabledRequestAmino): QueryGetProtoRevEnabledRequest {
-    return {};
+    const message = createBaseQueryGetProtoRevEnabledRequest();
+    return message;
   },
   toAmino(_: QueryGetProtoRevEnabledRequest): QueryGetProtoRevEnabledRequestAmino {
     const obj: any = {};
@@ -2853,9 +2885,11 @@ export const QueryGetProtoRevEnabledResponse = {
     return obj;
   },
   fromAmino(object: QueryGetProtoRevEnabledResponseAmino): QueryGetProtoRevEnabledResponse {
-    return {
-      enabled: object.enabled
-    };
+    const message = createBaseQueryGetProtoRevEnabledResponse();
+    if (object.enabled !== undefined && object.enabled !== null) {
+      message.enabled = object.enabled;
+    }
+    return message;
   },
   toAmino(message: QueryGetProtoRevEnabledResponse): QueryGetProtoRevEnabledResponseAmino {
     const obj: any = {};

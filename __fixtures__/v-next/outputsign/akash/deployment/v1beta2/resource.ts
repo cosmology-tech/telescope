@@ -16,7 +16,7 @@ export interface ResourceProtoMsg {
 /** Resource stores unit, total count and price of resource */
 export interface ResourceAmino {
   resources?: ResourceUnitsAmino;
-  count: number;
+  count?: number;
   price?: DecCoinAmino;
 }
 export interface ResourceAminoMsg {
@@ -85,11 +85,17 @@ export const Resource = {
     return message;
   },
   fromAmino(object: ResourceAmino): Resource {
-    return {
-      resources: object?.resources ? ResourceUnits.fromAmino(object.resources) : undefined,
-      count: object.count,
-      price: object?.price ? DecCoin.fromAmino(object.price) : undefined
-    };
+    const message = createBaseResource();
+    if (object.resources !== undefined && object.resources !== null) {
+      message.resources = ResourceUnits.fromAmino(object.resources);
+    }
+    if (object.count !== undefined && object.count !== null) {
+      message.count = object.count;
+    }
+    if (object.price !== undefined && object.price !== null) {
+      message.price = DecCoin.fromAmino(object.price);
+    }
+    return message;
   },
   toAmino(message: Resource): ResourceAmino {
     const obj: any = {};

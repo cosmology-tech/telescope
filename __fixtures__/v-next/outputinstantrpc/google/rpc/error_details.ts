@@ -528,9 +528,11 @@ export const RetryInfo = {
     return obj;
   },
   fromAmino(object: RetryInfoAmino): RetryInfo {
-    return {
-      retryDelay: object?.retry_delay ? Duration.fromAmino(object.retry_delay) : undefined
-    };
+    const message = createBaseRetryInfo();
+    if (object.retry_delay !== undefined && object.retry_delay !== null) {
+      message.retryDelay = Duration.fromAmino(object.retry_delay);
+    }
+    return message;
   },
   toAmino(message: RetryInfo): RetryInfoAmino {
     const obj: any = {};
@@ -635,10 +637,12 @@ export const DebugInfo = {
     return obj;
   },
   fromAmino(object: DebugInfoAmino): DebugInfo {
-    return {
-      stackEntries: Array.isArray(object?.stack_entries) ? object.stack_entries.map((e: any) => e) : [],
-      detail: object.detail
-    };
+    const message = createBaseDebugInfo();
+    message.stackEntries = object.stack_entries?.map(e => e) || [];
+    if (object.detail !== undefined && object.detail !== null) {
+      message.detail = object.detail;
+    }
+    return message;
   },
   toAmino(message: DebugInfo): DebugInfoAmino {
     const obj: any = {};
@@ -735,9 +739,9 @@ export const QuotaFailure = {
     return obj;
   },
   fromAmino(object: QuotaFailureAmino): QuotaFailure {
-    return {
-      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => QuotaFailure_Violation.fromAmino(e)) : []
-    };
+    const message = createBaseQuotaFailure();
+    message.violations = object.violations?.map(e => QuotaFailure_Violation.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QuotaFailure): QuotaFailureAmino {
     const obj: any = {};
@@ -838,10 +842,14 @@ export const QuotaFailure_Violation = {
     return obj;
   },
   fromAmino(object: QuotaFailure_ViolationAmino): QuotaFailure_Violation {
-    return {
-      subject: object.subject,
-      description: object.description
-    };
+    const message = createBaseQuotaFailure_Violation();
+    if (object.subject !== undefined && object.subject !== null) {
+      message.subject = object.subject;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: QuotaFailure_Violation): QuotaFailure_ViolationAmino {
     const obj: any = {};
@@ -938,10 +946,14 @@ export const ErrorInfo_MetadataEntry = {
     return obj;
   },
   fromAmino(object: ErrorInfo_MetadataEntryAmino): ErrorInfo_MetadataEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseErrorInfo_MetadataEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: ErrorInfo_MetadataEntry): ErrorInfo_MetadataEntryAmino {
     const obj: any = {};
@@ -1084,16 +1096,22 @@ export const ErrorInfo = {
     return obj;
   },
   fromAmino(object: ErrorInfoAmino): ErrorInfo {
-    return {
-      reason: object.reason,
-      domain: object.domain,
-      metadata: isObject(object.metadata) ? Object.entries(object.metadata).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseErrorInfo();
+    if (object.reason !== undefined && object.reason !== null) {
+      message.reason = object.reason;
+    }
+    if (object.domain !== undefined && object.domain !== null) {
+      message.domain = object.domain;
+    }
+    message.metadata = Object.entries(object.metadata ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
+      }
+      return acc;
+    }, {});
+    return message;
   },
   toAmino(message: ErrorInfo): ErrorInfoAmino {
     const obj: any = {};
@@ -1192,9 +1210,9 @@ export const PreconditionFailure = {
     return obj;
   },
   fromAmino(object: PreconditionFailureAmino): PreconditionFailure {
-    return {
-      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromAmino(e)) : []
-    };
+    const message = createBasePreconditionFailure();
+    message.violations = object.violations?.map(e => PreconditionFailure_Violation.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: PreconditionFailure): PreconditionFailureAmino {
     const obj: any = {};
@@ -1308,11 +1326,17 @@ export const PreconditionFailure_Violation = {
     return obj;
   },
   fromAmino(object: PreconditionFailure_ViolationAmino): PreconditionFailure_Violation {
-    return {
-      type: object.type,
-      subject: object.subject,
-      description: object.description
-    };
+    const message = createBasePreconditionFailure_Violation();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    if (object.subject !== undefined && object.subject !== null) {
+      message.subject = object.subject;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: PreconditionFailure_Violation): PreconditionFailure_ViolationAmino {
     const obj: any = {};
@@ -1406,9 +1430,9 @@ export const BadRequest = {
     return obj;
   },
   fromAmino(object: BadRequestAmino): BadRequest {
-    return {
-      fieldViolations: Array.isArray(object?.field_violations) ? object.field_violations.map((e: any) => BadRequest_FieldViolation.fromAmino(e)) : []
-    };
+    const message = createBaseBadRequest();
+    message.fieldViolations = object.field_violations?.map(e => BadRequest_FieldViolation.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: BadRequest): BadRequestAmino {
     const obj: any = {};
@@ -1509,10 +1533,14 @@ export const BadRequest_FieldViolation = {
     return obj;
   },
   fromAmino(object: BadRequest_FieldViolationAmino): BadRequest_FieldViolation {
-    return {
-      field: object.field,
-      description: object.description
-    };
+    const message = createBaseBadRequest_FieldViolation();
+    if (object.field !== undefined && object.field !== null) {
+      message.field = object.field;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: BadRequest_FieldViolation): BadRequest_FieldViolationAmino {
     const obj: any = {};
@@ -1610,10 +1638,14 @@ export const RequestInfo = {
     return obj;
   },
   fromAmino(object: RequestInfoAmino): RequestInfo {
-    return {
-      requestId: object.request_id,
-      servingData: object.serving_data
-    };
+    const message = createBaseRequestInfo();
+    if (object.request_id !== undefined && object.request_id !== null) {
+      message.requestId = object.request_id;
+    }
+    if (object.serving_data !== undefined && object.serving_data !== null) {
+      message.servingData = object.serving_data;
+    }
+    return message;
   },
   toAmino(message: RequestInfo): RequestInfoAmino {
     const obj: any = {};
@@ -1737,12 +1769,20 @@ export const ResourceInfo = {
     return obj;
   },
   fromAmino(object: ResourceInfoAmino): ResourceInfo {
-    return {
-      resourceType: object.resource_type,
-      resourceName: object.resource_name,
-      owner: object.owner,
-      description: object.description
-    };
+    const message = createBaseResourceInfo();
+    if (object.resource_type !== undefined && object.resource_type !== null) {
+      message.resourceType = object.resource_type;
+    }
+    if (object.resource_name !== undefined && object.resource_name !== null) {
+      message.resourceName = object.resource_name;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: ResourceInfo): ResourceInfoAmino {
     const obj: any = {};
@@ -1837,9 +1877,9 @@ export const Help = {
     return obj;
   },
   fromAmino(object: HelpAmino): Help {
-    return {
-      links: Array.isArray(object?.links) ? object.links.map((e: any) => Help_Link.fromAmino(e)) : []
-    };
+    const message = createBaseHelp();
+    message.links = object.links?.map(e => Help_Link.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Help): HelpAmino {
     const obj: any = {};
@@ -1940,10 +1980,14 @@ export const Help_Link = {
     return obj;
   },
   fromAmino(object: Help_LinkAmino): Help_Link {
-    return {
-      description: object.description,
-      url: object.url
-    };
+    const message = createBaseHelp_Link();
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.url !== undefined && object.url !== null) {
+      message.url = object.url;
+    }
+    return message;
   },
   toAmino(message: Help_Link): Help_LinkAmino {
     const obj: any = {};
@@ -2041,10 +2085,14 @@ export const LocalizedMessage = {
     return obj;
   },
   fromAmino(object: LocalizedMessageAmino): LocalizedMessage {
-    return {
-      locale: object.locale,
-      message: object.message
-    };
+    const message = createBaseLocalizedMessage();
+    if (object.locale !== undefined && object.locale !== null) {
+      message.locale = object.locale;
+    }
+    if (object.message !== undefined && object.message !== null) {
+      message.message = object.message;
+    }
+    return message;
   },
   toAmino(message: LocalizedMessage): LocalizedMessageAmino {
     const obj: any = {};

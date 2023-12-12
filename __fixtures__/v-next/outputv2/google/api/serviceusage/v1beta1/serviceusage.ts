@@ -77,7 +77,7 @@ export interface EnableServiceRequestAmino {
    * `projects/123/services/serviceusage.googleapis.com`
    * where `123` is the project number (not project ID).
    */
-  name: string;
+  name?: string;
 }
 export interface EnableServiceRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.EnableServiceRequest";
@@ -115,7 +115,7 @@ export interface DisableServiceRequestAmino {
    * `projects/123/services/serviceusage.googleapis.com`
    * where `123` is the project number (not project ID).
    */
-  name: string;
+  name?: string;
 }
 export interface DisableServiceRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.DisableServiceRequest";
@@ -149,7 +149,7 @@ export interface GetServiceRequestAmino {
    * `projects/123/services/serviceusage.googleapis.com`
    * where `123` is the project number (not project ID).
    */
-  name: string;
+  name?: string;
 }
 export interface GetServiceRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.GetServiceRequest";
@@ -199,23 +199,23 @@ export interface ListServicesRequestAmino {
    * `projects/123`
    * where `123` is the project number (not project ID).
    */
-  parent: string;
+  parent?: string;
   /**
    * Requested size of the next page of data.
    * Requested page size cannot exceed 200.
    *  If not set, the default page size is 50.
    */
-  page_size: number;
+  page_size?: number;
   /**
    * Token identifying which result to start with, which is returned by a
    * previous list call.
    */
-  page_token: string;
+  page_token?: string;
   /**
    * Only list services that conform to the given filter.
    * The allowed filter strings are `state:ENABLED` and `state:DISABLED`.
    */
-  filter: string;
+  filter?: string;
 }
 export interface ListServicesRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ListServicesRequest";
@@ -245,12 +245,12 @@ export interface ListServicesResponseProtoMsg {
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponseAmino {
   /** The available services for the requested project. */
-  services: ServiceAmino[];
+  services?: ServiceAmino[];
   /**
    * Token that can be passed to `ListServices` to resume a paginated
    * query.
    */
-  next_page_token: string;
+  next_page_token?: string;
 }
 export interface ListServicesResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ListServicesResponse";
@@ -306,7 +306,7 @@ export interface BatchEnableServicesRequestAmino {
    * 
    * The `BatchEnableServices` method currently only supports projects.
    */
-  parent: string;
+  parent?: string;
   /**
    * The identifiers of the services to enable on the project.
    * 
@@ -323,7 +323,7 @@ export interface BatchEnableServicesRequestAmino {
    * than 20 services are specified, the request will fail, and no state changes
    * will occur.
    */
-  service_ids: string[];
+  service_ids?: string[];
 }
 export interface BatchEnableServicesRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.BatchEnableServicesRequest";
@@ -369,16 +369,16 @@ export interface ListConsumerQuotaMetricsRequestAmino {
    * `folders/345/services/serviceconsumermanagement.googleapis.com`
    * `organizations/456/services/serviceconsumermanagement.googleapis.com`
    */
-  parent: string;
+  parent?: string;
   /** Requested size of the next page of data. */
-  page_size: number;
+  page_size?: number;
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
    */
-  page_token: string;
+  page_token?: string;
   /** Specifies the level of detail for quota information in the response. */
-  view: QuotaView;
+  view?: QuotaView;
 }
 export interface ListConsumerQuotaMetricsRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest";
@@ -408,12 +408,12 @@ export interface ListConsumerQuotaMetricsResponseProtoMsg {
 /** Response message for ListConsumerQuotaMetrics */
 export interface ListConsumerQuotaMetricsResponseAmino {
   /** Quota settings for the consumer, organized by quota metric. */
-  metrics: ConsumerQuotaMetricAmino[];
+  metrics?: ConsumerQuotaMetricAmino[];
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
    */
-  next_page_token: string;
+  next_page_token?: string;
 }
 export interface ListConsumerQuotaMetricsResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsResponse";
@@ -448,9 +448,9 @@ export interface GetConsumerQuotaMetricRequestAmino {
    * An example name would be:
    * `projects/123/services/serviceusage.googleapis.com/quotas/metrics/serviceusage.googleapis.com%2Fmutate_requests`
    */
-  name: string;
+  name?: string;
   /** Specifies the level of detail for quota information in the response. */
-  view: QuotaView;
+  view?: QuotaView;
 }
 export interface GetConsumerQuotaMetricRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest";
@@ -485,9 +485,9 @@ export interface GetConsumerQuotaLimitRequestAmino {
    * Use the quota limit resource name returned by previous
    * ListConsumerQuotaMetrics and GetConsumerQuotaMetric API calls.
    */
-  name: string;
+  name?: string;
   /** Specifies the level of detail for quota information in the response. */
-  view: QuotaView;
+  view?: QuotaView;
 }
 export interface GetConsumerQuotaLimitRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest";
@@ -537,7 +537,7 @@ export interface CreateAdminOverrideRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
    */
-  parent: string;
+  parent?: string;
   /** The admin override to create. */
   override?: QuotaOverrideAmino;
   /**
@@ -545,14 +545,14 @@ export interface CreateAdminOverrideRequestAmino {
    * Setting the force parameter to 'true' ignores all quota safety checks that
    * would fail the request. QuotaSafetyCheck lists all such validations.
    */
-  force: boolean;
+  force?: boolean;
   /**
    * The list of quota safety checks to ignore before the override mutation.
    * Unlike 'force' field that ignores all the quota safety checks, the
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheck[];
+  force_only?: QuotaSafetyCheck[];
 }
 export interface CreateAdminOverrideRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.CreateAdminOverrideRequest";
@@ -610,7 +610,7 @@ export interface UpdateAdminOverrideRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
    */
-  name: string;
+  name?: string;
   /**
    * The new override.
    * Only the override_value is updated; all other fields are ignored.
@@ -621,7 +621,7 @@ export interface UpdateAdminOverrideRequestAmino {
    * Setting the force parameter to 'true' ignores all quota safety checks that
    * would fail the request. QuotaSafetyCheck lists all such validations.
    */
-  force: boolean;
+  force?: boolean;
   /**
    * Update only the specified fields of the override.
    * If unset, all fields will be updated.
@@ -633,7 +633,7 @@ export interface UpdateAdminOverrideRequestAmino {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheck[];
+  force_only?: QuotaSafetyCheck[];
 }
 export interface UpdateAdminOverrideRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest";
@@ -682,20 +682,20 @@ export interface DeleteAdminOverrideRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
    */
-  name: string;
+  name?: string;
   /**
    * Whether to force the deletion of the quota override.
    * Setting the force parameter to 'true' ignores all quota safety checks that
    * would fail the request. QuotaSafetyCheck lists all such validations.
    */
-  force: boolean;
+  force?: boolean;
   /**
    * The list of quota safety checks to ignore before the override mutation.
    * Unlike 'force' field that ignores all the quota safety checks, the
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheck[];
+  force_only?: QuotaSafetyCheck[];
 }
 export interface DeleteAdminOverrideRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest";
@@ -738,14 +738,14 @@ export interface ListAdminOverridesRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
    */
-  parent: string;
+  parent?: string;
   /** Requested size of the next page of data. */
-  page_size: number;
+  page_size?: number;
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
    */
-  page_token: string;
+  page_token?: string;
 }
 export interface ListAdminOverridesRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ListAdminOverridesRequest";
@@ -774,12 +774,12 @@ export interface ListAdminOverridesResponseProtoMsg {
 /** Response message for ListAdminOverrides. */
 export interface ListAdminOverridesResponseAmino {
   /** Admin overrides on this limit. */
-  overrides: QuotaOverrideAmino[];
+  overrides?: QuotaOverrideAmino[];
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
    */
-  next_page_token: string;
+  next_page_token?: string;
 }
 export interface ListAdminOverridesResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ListAdminOverridesResponse";
@@ -802,7 +802,7 @@ export interface BatchCreateAdminOverridesResponseProtoMsg {
 /** Response message for BatchCreateAdminOverrides */
 export interface BatchCreateAdminOverridesResponseAmino {
   /** The overrides that were created. */
-  overrides: QuotaOverrideAmino[];
+  overrides?: QuotaOverrideAmino[];
 }
 export interface BatchCreateAdminOverridesResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.BatchCreateAdminOverridesResponse";
@@ -849,7 +849,7 @@ export interface ImportAdminOverridesRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com`
    */
-  parent: string;
+  parent?: string;
   /** The import data is specified in the request message itself */
   inline_source?: OverrideInlineSourceAmino;
   /**
@@ -857,14 +857,14 @@ export interface ImportAdminOverridesRequestAmino {
    * Setting the force parameter to 'true' ignores all quota safety checks that
    * would fail the request. QuotaSafetyCheck lists all such validations.
    */
-  force: boolean;
+  force?: boolean;
   /**
    * The list of quota safety checks to ignore before the override mutation.
    * Unlike 'force' field that ignores all the quota safety checks, the
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheck[];
+  force_only?: QuotaSafetyCheck[];
 }
 export interface ImportAdminOverridesRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ImportAdminOverridesRequest";
@@ -889,7 +889,7 @@ export interface ImportAdminOverridesResponseProtoMsg {
 /** Response message for ImportAdminOverrides */
 export interface ImportAdminOverridesResponseAmino {
   /** The overrides that were created from the imported data. */
-  overrides: QuotaOverrideAmino[];
+  overrides?: QuotaOverrideAmino[];
 }
 export interface ImportAdminOverridesResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ImportAdminOverridesResponse";
@@ -964,7 +964,7 @@ export interface CreateConsumerOverrideRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
    */
-  parent: string;
+  parent?: string;
   /** The override to create. */
   override?: QuotaOverrideAmino;
   /**
@@ -972,14 +972,14 @@ export interface CreateConsumerOverrideRequestAmino {
    * Setting the force parameter to 'true' ignores all quota safety checks that
    * would fail the request. QuotaSafetyCheck lists all such validations.
    */
-  force: boolean;
+  force?: boolean;
   /**
    * The list of quota safety checks to ignore before the override mutation.
    * Unlike 'force' field that ignores all the quota safety checks, the
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheck[];
+  force_only?: QuotaSafetyCheck[];
 }
 export interface CreateConsumerOverrideRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest";
@@ -1037,7 +1037,7 @@ export interface UpdateConsumerOverrideRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
    */
-  name: string;
+  name?: string;
   /**
    * The new override.
    * Only the override_value is updated; all other fields are ignored.
@@ -1048,7 +1048,7 @@ export interface UpdateConsumerOverrideRequestAmino {
    * Setting the force parameter to 'true' ignores all quota safety checks that
    * would fail the request. QuotaSafetyCheck lists all such validations.
    */
-  force: boolean;
+  force?: boolean;
   /**
    * Update only the specified fields of the override.
    * If unset, all fields will be updated.
@@ -1060,7 +1060,7 @@ export interface UpdateConsumerOverrideRequestAmino {
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheck[];
+  force_only?: QuotaSafetyCheck[];
 }
 export interface UpdateConsumerOverrideRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest";
@@ -1109,20 +1109,20 @@ export interface DeleteConsumerOverrideRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
    */
-  name: string;
+  name?: string;
   /**
    * Whether to force the deletion of the quota override.
    * Setting the force parameter to 'true' ignores all quota safety checks that
    * would fail the request. QuotaSafetyCheck lists all such validations.
    */
-  force: boolean;
+  force?: boolean;
   /**
    * The list of quota safety checks to ignore before the override mutation.
    * Unlike 'force' field that ignores all the quota safety checks, the
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheck[];
+  force_only?: QuotaSafetyCheck[];
 }
 export interface DeleteConsumerOverrideRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest";
@@ -1165,14 +1165,14 @@ export interface ListConsumerOverridesRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
    */
-  parent: string;
+  parent?: string;
   /** Requested size of the next page of data. */
-  page_size: number;
+  page_size?: number;
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
    */
-  page_token: string;
+  page_token?: string;
 }
 export interface ListConsumerOverridesRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ListConsumerOverridesRequest";
@@ -1201,12 +1201,12 @@ export interface ListConsumerOverridesResponseProtoMsg {
 /** Response message for ListConsumerOverrides. */
 export interface ListConsumerOverridesResponseAmino {
   /** Consumer overrides on this limit. */
-  overrides: QuotaOverrideAmino[];
+  overrides?: QuotaOverrideAmino[];
   /**
    * Token identifying which result to start with; returned by a previous list
    * call.
    */
-  next_page_token: string;
+  next_page_token?: string;
 }
 export interface ListConsumerOverridesResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ListConsumerOverridesResponse";
@@ -1229,7 +1229,7 @@ export interface BatchCreateConsumerOverridesResponseProtoMsg {
 /** Response message for BatchCreateConsumerOverrides */
 export interface BatchCreateConsumerOverridesResponseAmino {
   /** The overrides that were created. */
-  overrides: QuotaOverrideAmino[];
+  overrides?: QuotaOverrideAmino[];
 }
 export interface BatchCreateConsumerOverridesResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.BatchCreateConsumerOverridesResponse";
@@ -1276,7 +1276,7 @@ export interface ImportConsumerOverridesRequestAmino {
    * An example name would be:
    * `projects/123/services/compute.googleapis.com`
    */
-  parent: string;
+  parent?: string;
   /** The import data is specified in the request message itself */
   inline_source?: OverrideInlineSourceAmino;
   /**
@@ -1284,14 +1284,14 @@ export interface ImportConsumerOverridesRequestAmino {
    * Setting the force parameter to 'true' ignores all quota safety checks that
    * would fail the request. QuotaSafetyCheck lists all such validations.
    */
-  force: boolean;
+  force?: boolean;
   /**
    * The list of quota safety checks to ignore before the override mutation.
    * Unlike 'force' field that ignores all the quota safety checks, the
    * 'force_only' field ignores only the specified checks; other checks are
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
-  force_only: QuotaSafetyCheck[];
+  force_only?: QuotaSafetyCheck[];
 }
 export interface ImportConsumerOverridesRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest";
@@ -1316,7 +1316,7 @@ export interface ImportConsumerOverridesResponseProtoMsg {
 /** Response message for ImportConsumerOverrides */
 export interface ImportConsumerOverridesResponseAmino {
   /** The overrides that were created from the imported data. */
-  overrides: QuotaOverrideAmino[];
+  overrides?: QuotaOverrideAmino[];
 }
 export interface ImportConsumerOverridesResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesResponse";
@@ -1364,7 +1364,7 @@ export interface ImportAdminQuotaPoliciesResponseProtoMsg {
 /** Response message for ImportAdminQuotaPolicies */
 export interface ImportAdminQuotaPoliciesResponseAmino {
   /** The policies that were created from the imported data. */
-  policies: AdminQuotaPolicyAmino[];
+  policies?: AdminQuotaPolicyAmino[];
 }
 export interface ImportAdminQuotaPoliciesResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesResponse";
@@ -1506,7 +1506,7 @@ export interface GenerateServiceIdentityRequestAmino {
    * `projects/123/services/example.googleapis.com` where `123` is the
    * project number.
    */
-  parent: string;
+  parent?: string;
 }
 export interface GenerateServiceIdentityRequestAminoMsg {
   type: "/google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest";
@@ -1540,7 +1540,7 @@ export interface GetServiceIdentityResponseAmino {
    */
   identity?: ServiceIdentityAmino;
   /** Service identity state. */
-  state: GetServiceIdentityResponse_IdentityState;
+  state?: GetServiceIdentityResponse_IdentityState;
 }
 export interface GetServiceIdentityResponseAminoMsg {
   type: "/google.api.serviceusage.v1beta1.GetServiceIdentityResponse";
@@ -1621,9 +1621,11 @@ export const EnableServiceRequest = {
     return obj;
   },
   fromAmino(object: EnableServiceRequestAmino): EnableServiceRequest {
-    return {
-      name: object.name
-    };
+    const message = createBaseEnableServiceRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: EnableServiceRequest): EnableServiceRequestAmino {
     const obj: any = {};
@@ -1702,9 +1704,11 @@ export const DisableServiceRequest = {
     return obj;
   },
   fromAmino(object: DisableServiceRequestAmino): DisableServiceRequest {
-    return {
-      name: object.name
-    };
+    const message = createBaseDisableServiceRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: DisableServiceRequest): DisableServiceRequestAmino {
     const obj: any = {};
@@ -1783,9 +1787,11 @@ export const GetServiceRequest = {
     return obj;
   },
   fromAmino(object: GetServiceRequestAmino): GetServiceRequest {
-    return {
-      name: object.name
-    };
+    const message = createBaseGetServiceRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: GetServiceRequest): GetServiceRequestAmino {
     const obj: any = {};
@@ -1900,12 +1906,20 @@ export const ListServicesRequest = {
     return obj;
   },
   fromAmino(object: ListServicesRequestAmino): ListServicesRequest {
-    return {
-      parent: object.parent,
-      pageSize: object.page_size,
-      pageToken: object.page_token,
-      filter: object.filter
-    };
+    const message = createBaseListServicesRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.page_size !== undefined && object.page_size !== null) {
+      message.pageSize = object.page_size;
+    }
+    if (object.page_token !== undefined && object.page_token !== null) {
+      message.pageToken = object.page_token;
+    }
+    if (object.filter !== undefined && object.filter !== null) {
+      message.filter = object.filter;
+    }
+    return message;
   },
   toAmino(message: ListServicesRequest): ListServicesRequestAmino {
     const obj: any = {};
@@ -2007,10 +2021,12 @@ export const ListServicesResponse = {
     return obj;
   },
   fromAmino(object: ListServicesResponseAmino): ListServicesResponse {
-    return {
-      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
+    const message = createBaseListServicesResponse();
+    message.services = object.services?.map(e => Service.fromAmino(e)) || [];
+    if (object.next_page_token !== undefined && object.next_page_token !== null) {
+      message.nextPageToken = object.next_page_token;
+    }
+    return message;
   },
   toAmino(message: ListServicesResponse): ListServicesResponseAmino {
     const obj: any = {};
@@ -2114,10 +2130,12 @@ export const BatchEnableServicesRequest = {
     return obj;
   },
   fromAmino(object: BatchEnableServicesRequestAmino): BatchEnableServicesRequest {
-    return {
-      parent: object.parent,
-      serviceIds: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => e) : []
-    };
+    const message = createBaseBatchEnableServicesRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    message.serviceIds = object.service_ids?.map(e => e) || [];
+    return message;
   },
   toAmino(message: BatchEnableServicesRequest): BatchEnableServicesRequestAmino {
     const obj: any = {};
@@ -2237,19 +2255,27 @@ export const ListConsumerQuotaMetricsRequest = {
     return obj;
   },
   fromAmino(object: ListConsumerQuotaMetricsRequestAmino): ListConsumerQuotaMetricsRequest {
-    return {
-      parent: object.parent,
-      pageSize: object.page_size,
-      pageToken: object.page_token,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
-    };
+    const message = createBaseListConsumerQuotaMetricsRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.page_size !== undefined && object.page_size !== null) {
+      message.pageSize = object.page_size;
+    }
+    if (object.page_token !== undefined && object.page_token !== null) {
+      message.pageToken = object.page_token;
+    }
+    if (object.view !== undefined && object.view !== null) {
+      message.view = quotaViewFromJSON(object.view);
+    }
+    return message;
   },
   toAmino(message: ListConsumerQuotaMetricsRequest): ListConsumerQuotaMetricsRequestAmino {
     const obj: any = {};
     obj.parent = message.parent;
     obj.page_size = message.pageSize;
     obj.page_token = message.pageToken;
-    obj.view = message.view;
+    obj.view = quotaViewToJSON(message.view);
     return obj;
   },
   fromAminoMsg(object: ListConsumerQuotaMetricsRequestAminoMsg): ListConsumerQuotaMetricsRequest {
@@ -2344,10 +2370,12 @@ export const ListConsumerQuotaMetricsResponse = {
     return obj;
   },
   fromAmino(object: ListConsumerQuotaMetricsResponseAmino): ListConsumerQuotaMetricsResponse {
-    return {
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => ConsumerQuotaMetric.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
+    const message = createBaseListConsumerQuotaMetricsResponse();
+    message.metrics = object.metrics?.map(e => ConsumerQuotaMetric.fromAmino(e)) || [];
+    if (object.next_page_token !== undefined && object.next_page_token !== null) {
+      message.nextPageToken = object.next_page_token;
+    }
+    return message;
   },
   toAmino(message: ListConsumerQuotaMetricsResponse): ListConsumerQuotaMetricsResponseAmino {
     const obj: any = {};
@@ -2443,15 +2471,19 @@ export const GetConsumerQuotaMetricRequest = {
     return obj;
   },
   fromAmino(object: GetConsumerQuotaMetricRequestAmino): GetConsumerQuotaMetricRequest {
-    return {
-      name: object.name,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
-    };
+    const message = createBaseGetConsumerQuotaMetricRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.view !== undefined && object.view !== null) {
+      message.view = quotaViewFromJSON(object.view);
+    }
+    return message;
   },
   toAmino(message: GetConsumerQuotaMetricRequest): GetConsumerQuotaMetricRequestAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.view = message.view;
+    obj.view = quotaViewToJSON(message.view);
     return obj;
   },
   fromAminoMsg(object: GetConsumerQuotaMetricRequestAminoMsg): GetConsumerQuotaMetricRequest {
@@ -2538,15 +2570,19 @@ export const GetConsumerQuotaLimitRequest = {
     return obj;
   },
   fromAmino(object: GetConsumerQuotaLimitRequestAmino): GetConsumerQuotaLimitRequest {
-    return {
-      name: object.name,
-      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
-    };
+    const message = createBaseGetConsumerQuotaLimitRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.view !== undefined && object.view !== null) {
+      message.view = quotaViewFromJSON(object.view);
+    }
+    return message;
   },
   toAmino(message: GetConsumerQuotaLimitRequest): GetConsumerQuotaLimitRequestAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.view = message.view;
+    obj.view = quotaViewToJSON(message.view);
     return obj;
   },
   fromAminoMsg(object: GetConsumerQuotaLimitRequestAminoMsg): GetConsumerQuotaLimitRequest {
@@ -2676,12 +2712,18 @@ export const CreateAdminOverrideRequest = {
     return obj;
   },
   fromAmino(object: CreateAdminOverrideRequestAmino): CreateAdminOverrideRequest {
-    return {
-      parent: object.parent,
-      override: object?.override ? QuotaOverride.fromAmino(object.override) : undefined,
-      force: object.force,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
+    const message = createBaseCreateAdminOverrideRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.override !== undefined && object.override !== null) {
+      message.override = QuotaOverride.fromAmino(object.override);
+    }
+    if (object.force !== undefined && object.force !== null) {
+      message.force = object.force;
+    }
+    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    return message;
   },
   toAmino(message: CreateAdminOverrideRequest): CreateAdminOverrideRequestAmino {
     const obj: any = {};
@@ -2836,13 +2878,21 @@ export const UpdateAdminOverrideRequest = {
     return obj;
   },
   fromAmino(object: UpdateAdminOverrideRequestAmino): UpdateAdminOverrideRequest {
-    return {
-      name: object.name,
-      override: object?.override ? QuotaOverride.fromAmino(object.override) : undefined,
-      force: object.force,
-      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
+    const message = createBaseUpdateAdminOverrideRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.override !== undefined && object.override !== null) {
+      message.override = QuotaOverride.fromAmino(object.override);
+    }
+    if (object.force !== undefined && object.force !== null) {
+      message.force = object.force;
+    }
+    if (object.update_mask !== undefined && object.update_mask !== null) {
+      message.updateMask = FieldMask.fromAmino(object.update_mask);
+    }
+    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    return message;
   },
   toAmino(message: UpdateAdminOverrideRequest): UpdateAdminOverrideRequestAmino {
     const obj: any = {};
@@ -2970,11 +3020,15 @@ export const DeleteAdminOverrideRequest = {
     return obj;
   },
   fromAmino(object: DeleteAdminOverrideRequestAmino): DeleteAdminOverrideRequest {
-    return {
-      name: object.name,
-      force: object.force,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
+    const message = createBaseDeleteAdminOverrideRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.force !== undefined && object.force !== null) {
+      message.force = object.force;
+    }
+    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    return message;
   },
   toAmino(message: DeleteAdminOverrideRequest): DeleteAdminOverrideRequestAmino {
     const obj: any = {};
@@ -3083,11 +3137,17 @@ export const ListAdminOverridesRequest = {
     return obj;
   },
   fromAmino(object: ListAdminOverridesRequestAmino): ListAdminOverridesRequest {
-    return {
-      parent: object.parent,
-      pageSize: object.page_size,
-      pageToken: object.page_token
-    };
+    const message = createBaseListAdminOverridesRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.page_size !== undefined && object.page_size !== null) {
+      message.pageSize = object.page_size;
+    }
+    if (object.page_token !== undefined && object.page_token !== null) {
+      message.pageToken = object.page_token;
+    }
+    return message;
   },
   toAmino(message: ListAdminOverridesRequest): ListAdminOverridesRequestAmino {
     const obj: any = {};
@@ -3188,10 +3248,12 @@ export const ListAdminOverridesResponse = {
     return obj;
   },
   fromAmino(object: ListAdminOverridesResponseAmino): ListAdminOverridesResponse {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
+    const message = createBaseListAdminOverridesResponse();
+    message.overrides = object.overrides?.map(e => QuotaOverride.fromAmino(e)) || [];
+    if (object.next_page_token !== undefined && object.next_page_token !== null) {
+      message.nextPageToken = object.next_page_token;
+    }
+    return message;
   },
   toAmino(message: ListAdminOverridesResponse): ListAdminOverridesResponseAmino {
     const obj: any = {};
@@ -3283,9 +3345,9 @@ export const BatchCreateAdminOverridesResponse = {
     return obj;
   },
   fromAmino(object: BatchCreateAdminOverridesResponseAmino): BatchCreateAdminOverridesResponse {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
-    };
+    const message = createBaseBatchCreateAdminOverridesResponse();
+    message.overrides = object.overrides?.map(e => QuotaOverride.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: BatchCreateAdminOverridesResponse): BatchCreateAdminOverridesResponseAmino {
     const obj: any = {};
@@ -3423,12 +3485,18 @@ export const ImportAdminOverridesRequest = {
     return obj;
   },
   fromAmino(object: ImportAdminOverridesRequestAmino): ImportAdminOverridesRequest {
-    return {
-      parent: object.parent,
-      inlineSource: object?.inline_source ? OverrideInlineSource.fromAmino(object.inline_source) : undefined,
-      force: object.force,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
+    const message = createBaseImportAdminOverridesRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.inline_source !== undefined && object.inline_source !== null) {
+      message.inlineSource = OverrideInlineSource.fromAmino(object.inline_source);
+    }
+    if (object.force !== undefined && object.force !== null) {
+      message.force = object.force;
+    }
+    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    return message;
   },
   toAmino(message: ImportAdminOverridesRequest): ImportAdminOverridesRequestAmino {
     const obj: any = {};
@@ -3522,9 +3590,9 @@ export const ImportAdminOverridesResponse = {
     return obj;
   },
   fromAmino(object: ImportAdminOverridesResponseAmino): ImportAdminOverridesResponse {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
-    };
+    const message = createBaseImportAdminOverridesResponse();
+    message.overrides = object.overrides?.map(e => QuotaOverride.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ImportAdminOverridesResponse): ImportAdminOverridesResponseAmino {
     const obj: any = {};
@@ -3593,7 +3661,8 @@ export const ImportAdminOverridesMetadata = {
     return obj;
   },
   fromAmino(_: ImportAdminOverridesMetadataAmino): ImportAdminOverridesMetadata {
-    return {};
+    const message = createBaseImportAdminOverridesMetadata();
+    return message;
   },
   toAmino(_: ImportAdminOverridesMetadata): ImportAdminOverridesMetadataAmino {
     const obj: any = {};
@@ -3726,12 +3795,18 @@ export const CreateConsumerOverrideRequest = {
     return obj;
   },
   fromAmino(object: CreateConsumerOverrideRequestAmino): CreateConsumerOverrideRequest {
-    return {
-      parent: object.parent,
-      override: object?.override ? QuotaOverride.fromAmino(object.override) : undefined,
-      force: object.force,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
+    const message = createBaseCreateConsumerOverrideRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.override !== undefined && object.override !== null) {
+      message.override = QuotaOverride.fromAmino(object.override);
+    }
+    if (object.force !== undefined && object.force !== null) {
+      message.force = object.force;
+    }
+    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    return message;
   },
   toAmino(message: CreateConsumerOverrideRequest): CreateConsumerOverrideRequestAmino {
     const obj: any = {};
@@ -3886,13 +3961,21 @@ export const UpdateConsumerOverrideRequest = {
     return obj;
   },
   fromAmino(object: UpdateConsumerOverrideRequestAmino): UpdateConsumerOverrideRequest {
-    return {
-      name: object.name,
-      override: object?.override ? QuotaOverride.fromAmino(object.override) : undefined,
-      force: object.force,
-      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
+    const message = createBaseUpdateConsumerOverrideRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.override !== undefined && object.override !== null) {
+      message.override = QuotaOverride.fromAmino(object.override);
+    }
+    if (object.force !== undefined && object.force !== null) {
+      message.force = object.force;
+    }
+    if (object.update_mask !== undefined && object.update_mask !== null) {
+      message.updateMask = FieldMask.fromAmino(object.update_mask);
+    }
+    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    return message;
   },
   toAmino(message: UpdateConsumerOverrideRequest): UpdateConsumerOverrideRequestAmino {
     const obj: any = {};
@@ -4020,11 +4103,15 @@ export const DeleteConsumerOverrideRequest = {
     return obj;
   },
   fromAmino(object: DeleteConsumerOverrideRequestAmino): DeleteConsumerOverrideRequest {
-    return {
-      name: object.name,
-      force: object.force,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
+    const message = createBaseDeleteConsumerOverrideRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.force !== undefined && object.force !== null) {
+      message.force = object.force;
+    }
+    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    return message;
   },
   toAmino(message: DeleteConsumerOverrideRequest): DeleteConsumerOverrideRequestAmino {
     const obj: any = {};
@@ -4133,11 +4220,17 @@ export const ListConsumerOverridesRequest = {
     return obj;
   },
   fromAmino(object: ListConsumerOverridesRequestAmino): ListConsumerOverridesRequest {
-    return {
-      parent: object.parent,
-      pageSize: object.page_size,
-      pageToken: object.page_token
-    };
+    const message = createBaseListConsumerOverridesRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.page_size !== undefined && object.page_size !== null) {
+      message.pageSize = object.page_size;
+    }
+    if (object.page_token !== undefined && object.page_token !== null) {
+      message.pageToken = object.page_token;
+    }
+    return message;
   },
   toAmino(message: ListConsumerOverridesRequest): ListConsumerOverridesRequestAmino {
     const obj: any = {};
@@ -4238,10 +4331,12 @@ export const ListConsumerOverridesResponse = {
     return obj;
   },
   fromAmino(object: ListConsumerOverridesResponseAmino): ListConsumerOverridesResponse {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
+    const message = createBaseListConsumerOverridesResponse();
+    message.overrides = object.overrides?.map(e => QuotaOverride.fromAmino(e)) || [];
+    if (object.next_page_token !== undefined && object.next_page_token !== null) {
+      message.nextPageToken = object.next_page_token;
+    }
+    return message;
   },
   toAmino(message: ListConsumerOverridesResponse): ListConsumerOverridesResponseAmino {
     const obj: any = {};
@@ -4333,9 +4428,9 @@ export const BatchCreateConsumerOverridesResponse = {
     return obj;
   },
   fromAmino(object: BatchCreateConsumerOverridesResponseAmino): BatchCreateConsumerOverridesResponse {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
-    };
+    const message = createBaseBatchCreateConsumerOverridesResponse();
+    message.overrides = object.overrides?.map(e => QuotaOverride.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: BatchCreateConsumerOverridesResponse): BatchCreateConsumerOverridesResponseAmino {
     const obj: any = {};
@@ -4473,12 +4568,18 @@ export const ImportConsumerOverridesRequest = {
     return obj;
   },
   fromAmino(object: ImportConsumerOverridesRequestAmino): ImportConsumerOverridesRequest {
-    return {
-      parent: object.parent,
-      inlineSource: object?.inline_source ? OverrideInlineSource.fromAmino(object.inline_source) : undefined,
-      force: object.force,
-      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
-    };
+    const message = createBaseImportConsumerOverridesRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.inline_source !== undefined && object.inline_source !== null) {
+      message.inlineSource = OverrideInlineSource.fromAmino(object.inline_source);
+    }
+    if (object.force !== undefined && object.force !== null) {
+      message.force = object.force;
+    }
+    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    return message;
   },
   toAmino(message: ImportConsumerOverridesRequest): ImportConsumerOverridesRequestAmino {
     const obj: any = {};
@@ -4572,9 +4673,9 @@ export const ImportConsumerOverridesResponse = {
     return obj;
   },
   fromAmino(object: ImportConsumerOverridesResponseAmino): ImportConsumerOverridesResponse {
-    return {
-      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromAmino(e)) : []
-    };
+    const message = createBaseImportConsumerOverridesResponse();
+    message.overrides = object.overrides?.map(e => QuotaOverride.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ImportConsumerOverridesResponse): ImportConsumerOverridesResponseAmino {
     const obj: any = {};
@@ -4643,7 +4744,8 @@ export const ImportConsumerOverridesMetadata = {
     return obj;
   },
   fromAmino(_: ImportConsumerOverridesMetadataAmino): ImportConsumerOverridesMetadata {
-    return {};
+    const message = createBaseImportConsumerOverridesMetadata();
+    return message;
   },
   toAmino(_: ImportConsumerOverridesMetadata): ImportConsumerOverridesMetadataAmino {
     const obj: any = {};
@@ -4729,9 +4831,9 @@ export const ImportAdminQuotaPoliciesResponse = {
     return obj;
   },
   fromAmino(object: ImportAdminQuotaPoliciesResponseAmino): ImportAdminQuotaPoliciesResponse {
-    return {
-      policies: Array.isArray(object?.policies) ? object.policies.map((e: any) => AdminQuotaPolicy.fromAmino(e)) : []
-    };
+    const message = createBaseImportAdminQuotaPoliciesResponse();
+    message.policies = object.policies?.map(e => AdminQuotaPolicy.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ImportAdminQuotaPoliciesResponse): ImportAdminQuotaPoliciesResponseAmino {
     const obj: any = {};
@@ -4800,7 +4902,8 @@ export const ImportAdminQuotaPoliciesMetadata = {
     return obj;
   },
   fromAmino(_: ImportAdminQuotaPoliciesMetadataAmino): ImportAdminQuotaPoliciesMetadata {
-    return {};
+    const message = createBaseImportAdminQuotaPoliciesMetadata();
+    return message;
   },
   toAmino(_: ImportAdminQuotaPoliciesMetadata): ImportAdminQuotaPoliciesMetadataAmino {
     const obj: any = {};
@@ -4864,7 +4967,8 @@ export const CreateAdminQuotaPolicyMetadata = {
     return obj;
   },
   fromAmino(_: CreateAdminQuotaPolicyMetadataAmino): CreateAdminQuotaPolicyMetadata {
-    return {};
+    const message = createBaseCreateAdminQuotaPolicyMetadata();
+    return message;
   },
   toAmino(_: CreateAdminQuotaPolicyMetadata): CreateAdminQuotaPolicyMetadataAmino {
     const obj: any = {};
@@ -4928,7 +5032,8 @@ export const UpdateAdminQuotaPolicyMetadata = {
     return obj;
   },
   fromAmino(_: UpdateAdminQuotaPolicyMetadataAmino): UpdateAdminQuotaPolicyMetadata {
-    return {};
+    const message = createBaseUpdateAdminQuotaPolicyMetadata();
+    return message;
   },
   toAmino(_: UpdateAdminQuotaPolicyMetadata): UpdateAdminQuotaPolicyMetadataAmino {
     const obj: any = {};
@@ -4992,7 +5097,8 @@ export const DeleteAdminQuotaPolicyMetadata = {
     return obj;
   },
   fromAmino(_: DeleteAdminQuotaPolicyMetadataAmino): DeleteAdminQuotaPolicyMetadata {
-    return {};
+    const message = createBaseDeleteAdminQuotaPolicyMetadata();
+    return message;
   },
   toAmino(_: DeleteAdminQuotaPolicyMetadata): DeleteAdminQuotaPolicyMetadataAmino {
     const obj: any = {};
@@ -5070,9 +5176,11 @@ export const GenerateServiceIdentityRequest = {
     return obj;
   },
   fromAmino(object: GenerateServiceIdentityRequestAmino): GenerateServiceIdentityRequest {
-    return {
-      parent: object.parent
-    };
+    const message = createBaseGenerateServiceIdentityRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    return message;
   },
   toAmino(message: GenerateServiceIdentityRequest): GenerateServiceIdentityRequestAmino {
     const obj: any = {};
@@ -5165,15 +5273,19 @@ export const GetServiceIdentityResponse = {
     return obj;
   },
   fromAmino(object: GetServiceIdentityResponseAmino): GetServiceIdentityResponse {
-    return {
-      identity: object?.identity ? ServiceIdentity.fromAmino(object.identity) : undefined,
-      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : -1
-    };
+    const message = createBaseGetServiceIdentityResponse();
+    if (object.identity !== undefined && object.identity !== null) {
+      message.identity = ServiceIdentity.fromAmino(object.identity);
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = getServiceIdentityResponse_IdentityStateFromJSON(object.state);
+    }
+    return message;
   },
   toAmino(message: GetServiceIdentityResponse): GetServiceIdentityResponseAmino {
     const obj: any = {};
     obj.identity = message.identity ? ServiceIdentity.toAmino(message.identity) : undefined;
-    obj.state = message.state;
+    obj.state = getServiceIdentityResponse_IdentityStateToJSON(message.state);
     return obj;
   },
   fromAminoMsg(object: GetServiceIdentityResponseAminoMsg): GetServiceIdentityResponse {
@@ -5234,7 +5346,8 @@ export const GetServiceIdentityMetadata = {
     return obj;
   },
   fromAmino(_: GetServiceIdentityMetadataAmino): GetServiceIdentityMetadata {
-    return {};
+    const message = createBaseGetServiceIdentityMetadata();
+    return message;
   },
   toAmino(_: GetServiceIdentityMetadata): GetServiceIdentityMetadataAmino {
     const obj: any = {};

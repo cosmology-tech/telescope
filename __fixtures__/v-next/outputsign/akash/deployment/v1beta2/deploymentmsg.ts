@@ -2,7 +2,7 @@ import { DeploymentID, DeploymentIDAmino, DeploymentIDSDKType } from "./deployme
 import { GroupSpec, GroupSpecAmino, GroupSpecSDKType } from "./groupspec";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, Exact } from "../../../helpers";
+import { DeepPartial, Exact, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeployment {
@@ -20,11 +20,11 @@ export interface MsgCreateDeploymentProtoMsg {
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentAmino {
   id?: DeploymentIDAmino;
-  groups: GroupSpecAmino[];
-  version: Uint8Array;
+  groups?: GroupSpecAmino[];
+  version?: string;
   deposit?: CoinAmino;
   /** Depositor pays for the deposit */
-  depositor: string;
+  depositor?: string;
 }
 export interface MsgCreateDeploymentAminoMsg {
   type: "/akash.deployment.v1beta2.MsgCreateDeployment";
@@ -68,7 +68,7 @@ export interface MsgDepositDeploymentAmino {
   id?: DeploymentIDAmino;
   amount?: CoinAmino;
   /** Depositor pays for the deposit */
-  depositor: string;
+  depositor?: string;
 }
 export interface MsgDepositDeploymentAminoMsg {
   type: "/akash.deployment.v1beta2.MsgDepositDeployment";
@@ -106,7 +106,7 @@ export interface MsgUpdateDeploymentProtoMsg {
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentAmino {
   id?: DeploymentIDAmino;
-  version: Uint8Array;
+  version?: string;
 }
 export interface MsgUpdateDeploymentAminoMsg {
   type: "/akash.deployment.v1beta2.MsgUpdateDeployment";
@@ -237,13 +237,21 @@ export const MsgCreateDeployment = {
     return message;
   },
   fromAmino(object: MsgCreateDeploymentAmino): MsgCreateDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
-      version: object.version,
-      deposit: object?.deposit ? Coin.fromAmino(object.deposit) : undefined,
-      depositor: object.depositor
-    };
+    const message = createBaseMsgCreateDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromAmino(object.id);
+    }
+    message.groups = object.groups?.map(e => GroupSpec.fromAmino(e)) || [];
+    if (object.version !== undefined && object.version !== null) {
+      message.version = bytesFromBase64(object.version);
+    }
+    if (object.deposit !== undefined && object.deposit !== null) {
+      message.deposit = Coin.fromAmino(object.deposit);
+    }
+    if (object.depositor !== undefined && object.depositor !== null) {
+      message.depositor = object.depositor;
+    }
+    return message;
   },
   toAmino(message: MsgCreateDeployment): MsgCreateDeploymentAmino {
     const obj: any = {};
@@ -253,7 +261,7 @@ export const MsgCreateDeployment = {
     } else {
       obj.groups = [];
     }
-    obj.version = message.version;
+    obj.version = message.version ? base64FromBytes(message.version) : undefined;
     obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined;
     obj.depositor = message.depositor;
     return obj;
@@ -301,7 +309,8 @@ export const MsgCreateDeploymentResponse = {
     return message;
   },
   fromAmino(_: MsgCreateDeploymentResponseAmino): MsgCreateDeploymentResponse {
-    return {};
+    const message = createBaseMsgCreateDeploymentResponse();
+    return message;
   },
   toAmino(_: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseAmino {
     const obj: any = {};
@@ -379,11 +388,17 @@ export const MsgDepositDeployment = {
     return message;
   },
   fromAmino(object: MsgDepositDeploymentAmino): MsgDepositDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
-      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined,
-      depositor: object.depositor
-    };
+    const message = createBaseMsgDepositDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromAmino(object.id);
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromAmino(object.amount);
+    }
+    if (object.depositor !== undefined && object.depositor !== null) {
+      message.depositor = object.depositor;
+    }
+    return message;
   },
   toAmino(message: MsgDepositDeployment): MsgDepositDeploymentAmino {
     const obj: any = {};
@@ -435,7 +450,8 @@ export const MsgDepositDeploymentResponse = {
     return message;
   },
   fromAmino(_: MsgDepositDeploymentResponseAmino): MsgDepositDeploymentResponse {
-    return {};
+    const message = createBaseMsgDepositDeploymentResponse();
+    return message;
   },
   toAmino(_: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseAmino {
     const obj: any = {};
@@ -503,15 +519,19 @@ export const MsgUpdateDeployment = {
     return message;
   },
   fromAmino(object: MsgUpdateDeploymentAmino): MsgUpdateDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
-      version: object.version
-    };
+    const message = createBaseMsgUpdateDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromAmino(object.id);
+    }
+    if (object.version !== undefined && object.version !== null) {
+      message.version = bytesFromBase64(object.version);
+    }
+    return message;
   },
   toAmino(message: MsgUpdateDeployment): MsgUpdateDeploymentAmino {
     const obj: any = {};
     obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
-    obj.version = message.version;
+    obj.version = message.version ? base64FromBytes(message.version) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgUpdateDeploymentAminoMsg): MsgUpdateDeployment {
@@ -557,7 +577,8 @@ export const MsgUpdateDeploymentResponse = {
     return message;
   },
   fromAmino(_: MsgUpdateDeploymentResponseAmino): MsgUpdateDeploymentResponse {
-    return {};
+    const message = createBaseMsgUpdateDeploymentResponse();
+    return message;
   },
   toAmino(_: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseAmino {
     const obj: any = {};
@@ -617,9 +638,11 @@ export const MsgCloseDeployment = {
     return message;
   },
   fromAmino(object: MsgCloseDeploymentAmino): MsgCloseDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined
-    };
+    const message = createBaseMsgCloseDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: MsgCloseDeployment): MsgCloseDeploymentAmino {
     const obj: any = {};
@@ -669,7 +692,8 @@ export const MsgCloseDeploymentResponse = {
     return message;
   },
   fromAmino(_: MsgCloseDeploymentResponseAmino): MsgCloseDeploymentResponse {
-    return {};
+    const message = createBaseMsgCloseDeploymentResponse();
+    return message;
   },
   toAmino(_: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseAmino {
     const obj: any = {};

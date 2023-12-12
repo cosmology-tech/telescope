@@ -656,33 +656,69 @@ export const Service = {
     return obj;
   },
   fromAmino(object: ServiceAmino): Service {
-    return {
-      name: object.name,
-      title: object.title,
-      producerProjectId: object.producer_project_id,
-      id: object.id,
-      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromAmino(e)) : [],
-      types: Array.isArray(object?.types) ? object.types.map((e: any) => Type.fromAmino(e)) : [],
-      enums: Array.isArray(object?.enums) ? object.enums.map((e: any) => Enum.fromAmino(e)) : [],
-      documentation: object?.documentation ? Documentation.fromAmino(object.documentation) : undefined,
-      backend: object?.backend ? Backend.fromAmino(object.backend) : undefined,
-      http: object?.http ? Http.fromAmino(object.http) : undefined,
-      quota: object?.quota ? Quota.fromAmino(object.quota) : undefined,
-      authentication: object?.authentication ? Authentication.fromAmino(object.authentication) : undefined,
-      context: object?.context ? Context.fromAmino(object.context) : undefined,
-      usage: object?.usage ? Usage.fromAmino(object.usage) : undefined,
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : [],
-      control: object?.control ? Control.fromAmino(object.control) : undefined,
-      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => LogDescriptor.fromAmino(e)) : [],
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => MetricDescriptor.fromAmino(e)) : [],
-      monitoredResources: Array.isArray(object?.monitored_resources) ? object.monitored_resources.map((e: any) => MonitoredResourceDescriptor.fromAmino(e)) : [],
-      billing: object?.billing ? Billing.fromAmino(object.billing) : undefined,
-      logging: object?.logging ? Logging.fromAmino(object.logging) : undefined,
-      monitoring: object?.monitoring ? Monitoring.fromAmino(object.monitoring) : undefined,
-      systemParameters: object?.system_parameters ? SystemParameters.fromAmino(object.system_parameters) : undefined,
-      sourceInfo: object?.source_info ? SourceInfo.fromAmino(object.source_info) : undefined,
-      configVersion: object?.config_version ? UInt32Value.fromAmino(object.config_version) : undefined
-    };
+    const message = createBaseService();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.producer_project_id !== undefined && object.producer_project_id !== null) {
+      message.producerProjectId = object.producer_project_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    message.apis = object.apis?.map(e => Api.fromAmino(e)) || [];
+    message.types = object.types?.map(e => Type.fromAmino(e)) || [];
+    message.enums = object.enums?.map(e => Enum.fromAmino(e)) || [];
+    if (object.documentation !== undefined && object.documentation !== null) {
+      message.documentation = Documentation.fromAmino(object.documentation);
+    }
+    if (object.backend !== undefined && object.backend !== null) {
+      message.backend = Backend.fromAmino(object.backend);
+    }
+    if (object.http !== undefined && object.http !== null) {
+      message.http = Http.fromAmino(object.http);
+    }
+    if (object.quota !== undefined && object.quota !== null) {
+      message.quota = Quota.fromAmino(object.quota);
+    }
+    if (object.authentication !== undefined && object.authentication !== null) {
+      message.authentication = Authentication.fromAmino(object.authentication);
+    }
+    if (object.context !== undefined && object.context !== null) {
+      message.context = Context.fromAmino(object.context);
+    }
+    if (object.usage !== undefined && object.usage !== null) {
+      message.usage = Usage.fromAmino(object.usage);
+    }
+    message.endpoints = object.endpoints?.map(e => Endpoint.fromAmino(e)) || [];
+    if (object.control !== undefined && object.control !== null) {
+      message.control = Control.fromAmino(object.control);
+    }
+    message.logs = object.logs?.map(e => LogDescriptor.fromAmino(e)) || [];
+    message.metrics = object.metrics?.map(e => MetricDescriptor.fromAmino(e)) || [];
+    message.monitoredResources = object.monitored_resources?.map(e => MonitoredResourceDescriptor.fromAmino(e)) || [];
+    if (object.billing !== undefined && object.billing !== null) {
+      message.billing = Billing.fromAmino(object.billing);
+    }
+    if (object.logging !== undefined && object.logging !== null) {
+      message.logging = Logging.fromAmino(object.logging);
+    }
+    if (object.monitoring !== undefined && object.monitoring !== null) {
+      message.monitoring = Monitoring.fromAmino(object.monitoring);
+    }
+    if (object.system_parameters !== undefined && object.system_parameters !== null) {
+      message.systemParameters = SystemParameters.fromAmino(object.system_parameters);
+    }
+    if (object.source_info !== undefined && object.source_info !== null) {
+      message.sourceInfo = SourceInfo.fromAmino(object.source_info);
+    }
+    if (object.config_version !== undefined && object.config_version !== null) {
+      message.configVersion = UInt32Value.fromAmino(object.config_version);
+    }
+    return message;
   },
   toAmino(message: Service): ServiceAmino {
     const obj: any = {};

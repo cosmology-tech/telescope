@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { getFieldOptionality, getOneOfs } from '..';
+import { getFieldOptionalityForAmino, getOneOfs } from '..';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { ProtoField, ProtoType } from '@cosmology/types';
@@ -15,6 +15,7 @@ const needsImplementation = (name: string, field: ProtoField) => {
 export interface ToAminoJSONMethod {
     context: ProtoParseContext;
     field: ProtoField;
+    isOneOf: boolean;
     isOptional: boolean;
 }
 
@@ -27,11 +28,12 @@ export const toAminoJSONMethodFields = (context: ProtoParseContext, name: string
         };
 
         const isOneOf = oneOfs.includes(fieldName);
-        const isOptional = getFieldOptionality(context, field, isOneOf);
+        const isOptional = getFieldOptionalityForAmino(context, field, isOneOf);
 
         const args: ToAminoJSONMethod = {
             context,
             field,
+            isOneOf,
             isOptional
         };
 

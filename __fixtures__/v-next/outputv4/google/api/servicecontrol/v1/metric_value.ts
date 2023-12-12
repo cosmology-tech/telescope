@@ -165,10 +165,14 @@ export const MetricValue_LabelsEntry = {
     return obj;
   },
   fromAmino(object: MetricValue_LabelsEntryAmino): MetricValue_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseMetricValue_LabelsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: MetricValue_LabelsEntry): MetricValue_LabelsEntryAmino {
     const obj: any = {};
@@ -382,21 +386,37 @@ export const MetricValue = {
     return obj;
   },
   fromAmino(object: MetricValueAmino): MetricValue {
-    return {
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseMetricValue();
+    message.labels = Object.entries(object.labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
-      endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : undefined,
-      boolValue: object?.bool_value,
-      int64Value: object?.int64_value ? BigInt(object.int64_value) : undefined,
-      doubleValue: object?.double_value,
-      stringValue: object?.string_value,
-      distributionValue: object?.distribution_value ? Distribution.fromAmino(object.distribution_value) : undefined
-    };
+      }
+      return acc;
+    }, {});
+    if (object.start_time !== undefined && object.start_time !== null) {
+      message.startTime = fromTimestamp(Timestamp.fromAmino(object.start_time));
+    }
+    if (object.end_time !== undefined && object.end_time !== null) {
+      message.endTime = fromTimestamp(Timestamp.fromAmino(object.end_time));
+    }
+    if (object.bool_value !== undefined && object.bool_value !== null) {
+      message.boolValue = object.bool_value;
+    }
+    if (object.int64_value !== undefined && object.int64_value !== null) {
+      message.int64Value = BigInt(object.int64_value);
+    }
+    if (object.double_value !== undefined && object.double_value !== null) {
+      message.doubleValue = object.double_value;
+    }
+    if (object.string_value !== undefined && object.string_value !== null) {
+      message.stringValue = object.string_value;
+    }
+    if (object.distribution_value !== undefined && object.distribution_value !== null) {
+      message.distributionValue = Distribution.fromAmino(object.distribution_value);
+    }
+    return message;
   },
   toAmino(message: MetricValue): MetricValueAmino {
     const obj: any = {};
@@ -513,10 +533,12 @@ export const MetricValueSet = {
     return obj;
   },
   fromAmino(object: MetricValueSetAmino): MetricValueSet {
-    return {
-      metricName: object.metric_name,
-      metricValues: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromAmino(e)) : []
-    };
+    const message = createBaseMetricValueSet();
+    if (object.metric_name !== undefined && object.metric_name !== null) {
+      message.metricName = object.metric_name;
+    }
+    message.metricValues = object.metric_values?.map(e => MetricValue.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MetricValueSet): MetricValueSetAmino {
     const obj: any = {};

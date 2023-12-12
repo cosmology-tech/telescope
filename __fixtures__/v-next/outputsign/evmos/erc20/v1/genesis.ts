@@ -18,7 +18,7 @@ export interface GenesisStateAmino {
   /** module parameters */
   params?: ParamsAmino;
   /** registered token pairs */
-  token_pairs: TokenPairAmino[];
+  token_pairs?: TokenPairAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "/evmos.erc20.v1.GenesisState";
@@ -47,13 +47,13 @@ export interface ParamsProtoMsg {
 /** Params defines the erc20 module params */
 export interface ParamsAmino {
   /** parameter to enable the conversion of Cosmos coins <--> ERC20 tokens. */
-  enable_erc20: boolean;
+  enable_erc20?: boolean;
   /**
    * parameter to enable the EVM hook that converts an ERC20 token to a Cosmos
    * Coin by transferring the Tokens through a MsgEthereumTx to the
    * ModuleAddress Ethereum address.
    */
-  enable_evm_hook: boolean;
+  enable_evm_hook?: boolean;
 }
 export interface ParamsAminoMsg {
   type: "/evmos.erc20.v1.Params";
@@ -110,10 +110,12 @@ export const GenesisState = {
     return message;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      tokenPairs: Array.isArray(object?.token_pairs) ? object.token_pairs.map((e: any) => TokenPair.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.tokenPairs = object.token_pairs?.map(e => TokenPair.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -185,10 +187,14 @@ export const Params = {
     return message;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      enableErc20: object.enable_erc20,
-      enableEvmHook: object.enable_evm_hook
-    };
+    const message = createBaseParams();
+    if (object.enable_erc20 !== undefined && object.enable_erc20 !== null) {
+      message.enableErc20 = object.enable_erc20;
+    }
+    if (object.enable_evm_hook !== undefined && object.enable_evm_hook !== null) {
+      message.enableEvmHook = object.enable_evm_hook;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

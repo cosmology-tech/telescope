@@ -30,7 +30,7 @@ export interface ConfigProtoMsg {
  */
 export interface ConfigAmino {
   /** modules are the module configurations for the app. */
-  modules: ModuleConfigAmino[];
+  modules?: ModuleConfigAmino[];
 }
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
@@ -83,7 +83,7 @@ export interface ModuleConfigAmino {
    * that the v1 module had. Note: modules should provide info on which versions
    * they can migrate from in the ModuleDescriptor.can_migration_from field.
    */
-  name: string;
+  name?: string;
   /**
    * config is the config object for the module. Module config messages should
    * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
@@ -160,9 +160,9 @@ export const Config = {
     return obj;
   },
   fromAmino(object: ConfigAmino): Config {
-    return {
-      modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => ModuleConfig.fromAmino(e)) : []
-    };
+    const message = createBaseConfig();
+    message.modules = object.modules?.map(e => ModuleConfig.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Config, useInterfaces: boolean = true): ConfigAmino {
     const obj: any = {};
@@ -257,10 +257,14 @@ export const ModuleConfig = {
     return obj;
   },
   fromAmino(object: ModuleConfigAmino): ModuleConfig {
-    return {
-      name: object.name,
-      config: object?.config ? Any.fromAmino(object.config) : undefined
-    };
+    const message = createBaseModuleConfig();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.config !== undefined && object.config !== null) {
+      message.config = Any.fromAmino(object.config);
+    }
+    return message;
   },
   toAmino(message: ModuleConfig, useInterfaces: boolean = true): ModuleConfigAmino {
     const obj: any = {};

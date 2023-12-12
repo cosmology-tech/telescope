@@ -413,7 +413,7 @@ export interface FieldMaskProtoMsg {
  */
 export interface FieldMaskAmino {
   /** The set of field mask paths. */
-  paths: string[];
+  paths?: string[];
 }
 /**
  * `FieldMask` represents a set of symbolic field paths, for example:
@@ -683,9 +683,9 @@ export const FieldMask = {
     return obj;
   },
   fromAmino(object: FieldMaskAmino): FieldMask {
-    return {
-      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
-    };
+    const message = createBaseFieldMask();
+    message.paths = object.paths?.map(e => e) || [];
+    return message;
   },
   toAmino(message: FieldMask, useInterfaces: boolean = true): FieldMaskAmino {
     const obj: any = {};

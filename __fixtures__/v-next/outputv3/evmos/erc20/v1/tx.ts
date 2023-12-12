@@ -26,9 +26,9 @@ export interface MsgConvertCoinAmino {
    */
   coin?: CoinAmino;
   /** recipient hex address to receive ERC20 token */
-  receiver: string;
+  receiver?: string;
   /** cosmos bech32 address from the owner of the given Cosmos coins */
-  sender: string;
+  sender?: string;
 }
 /** MsgConvertCoin defines a Msg to convert a native Cosmos coin to a ERC20 token */
 export interface MsgConvertCoinSDKType {
@@ -70,13 +70,13 @@ export interface MsgConvertERC20ProtoMsg {
  */
 export interface MsgConvertERC20Amino {
   /** ERC20 token contract address registered in a token pair */
-  contract_address: string;
+  contract_address?: string;
   /** amount of ERC20 tokens to convert */
-  amount: string;
+  amount?: string;
   /** bech32 address to receive native Cosmos coins */
-  receiver: string;
+  receiver?: string;
   /** sender hex address from the owner of the given ERC20 tokens */
-  sender: string;
+  sender?: string;
 }
 /**
  * MsgConvertERC20 defines a Msg to convert a ERC20 token to a native Cosmos
@@ -180,11 +180,17 @@ export const MsgConvertCoin = {
     return obj;
   },
   fromAmino(object: MsgConvertCoinAmino): MsgConvertCoin {
-    return {
-      coin: object?.coin ? Coin.fromAmino(object.coin) : undefined,
-      receiver: object.receiver,
-      sender: object.sender
-    };
+    const message = createBaseMsgConvertCoin();
+    if (object.coin !== undefined && object.coin !== null) {
+      message.coin = Coin.fromAmino(object.coin);
+    }
+    if (object.receiver !== undefined && object.receiver !== null) {
+      message.receiver = object.receiver;
+    }
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    return message;
   },
   toAmino(message: MsgConvertCoin, useInterfaces: boolean = true): MsgConvertCoinAmino {
     const obj: any = {};
@@ -248,7 +254,8 @@ export const MsgConvertCoinResponse = {
     return obj;
   },
   fromAmino(_: MsgConvertCoinResponseAmino): MsgConvertCoinResponse {
-    return {};
+    const message = createBaseMsgConvertCoinResponse();
+    return message;
   },
   toAmino(_: MsgConvertCoinResponse, useInterfaces: boolean = true): MsgConvertCoinResponseAmino {
     const obj: any = {};
@@ -359,12 +366,20 @@ export const MsgConvertERC20 = {
     return obj;
   },
   fromAmino(object: MsgConvertERC20Amino): MsgConvertERC20 {
-    return {
-      contractAddress: object.contract_address,
-      amount: object.amount,
-      receiver: object.receiver,
-      sender: object.sender
-    };
+    const message = createBaseMsgConvertERC20();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    if (object.receiver !== undefined && object.receiver !== null) {
+      message.receiver = object.receiver;
+    }
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    return message;
   },
   toAmino(message: MsgConvertERC20, useInterfaces: boolean = true): MsgConvertERC20Amino {
     const obj: any = {};
@@ -429,7 +444,8 @@ export const MsgConvertERC20Response = {
     return obj;
   },
   fromAmino(_: MsgConvertERC20ResponseAmino): MsgConvertERC20Response {
-    return {};
+    const message = createBaseMsgConvertERC20Response();
+    return message;
   },
   toAmino(_: MsgConvertERC20Response, useInterfaces: boolean = true): MsgConvertERC20ResponseAmino {
     const obj: any = {};

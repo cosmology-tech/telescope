@@ -361,10 +361,14 @@ export const QueryIncentivizedPacketsRequest = {
     return obj;
   },
   fromAmino(object: QueryIncentivizedPacketsRequestAmino): QueryIncentivizedPacketsRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined,
-      queryHeight: BigInt(object.query_height)
-    };
+    const message = createBaseQueryIncentivizedPacketsRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    if (object.query_height !== undefined && object.query_height !== null) {
+      message.queryHeight = BigInt(object.query_height);
+    }
+    return message;
   },
   toAmino(message: QueryIncentivizedPacketsRequest): QueryIncentivizedPacketsRequestAmino {
     const obj: any = {};
@@ -476,10 +480,12 @@ export const QueryIncentivizedPacketsResponse = {
     return obj;
   },
   fromAmino(object: QueryIncentivizedPacketsResponseAmino): QueryIncentivizedPacketsResponse {
-    return {
-      incentivizedPackets: Array.isArray(object?.incentivized_packets) ? object.incentivized_packets.map((e: any) => IdentifiedPacketFees.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryIncentivizedPacketsResponse();
+    message.incentivizedPackets = object.incentivized_packets?.map(e => IdentifiedPacketFees.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryIncentivizedPacketsResponse): QueryIncentivizedPacketsResponseAmino {
     const obj: any = {};
@@ -574,9 +580,11 @@ export const QueryIncentivizedPacketRequest = {
     return obj;
   },
   fromAmino(object: QueryIncentivizedPacketRequestAmino): QueryIncentivizedPacketRequest {
-    return {
-      queryHeight: BigInt(object.query_height)
-    };
+    const message = createBaseQueryIncentivizedPacketRequest();
+    if (object.query_height !== undefined && object.query_height !== null) {
+      message.queryHeight = BigInt(object.query_height);
+    }
+    return message;
   },
   toAmino(message: QueryIncentivizedPacketRequest): QueryIncentivizedPacketRequestAmino {
     const obj: any = {};
@@ -666,9 +674,11 @@ export const QueryIncentivizedPacketResponse = {
     return obj;
   },
   fromAmino(object: QueryIncentivizedPacketResponseAmino): QueryIncentivizedPacketResponse {
-    return {
-      incentivizedPacket: object?.incentivized_packet ? IdentifiedPacketFees.fromAmino(object.incentivized_packet) : undefined
-    };
+    const message = createBaseQueryIncentivizedPacketResponse();
+    if (object.incentivized_packet !== undefined && object.incentivized_packet !== null) {
+      message.incentivizedPacket = IdentifiedPacketFees.fromAmino(object.incentivized_packet);
+    }
+    return message;
   },
   toAmino(message: QueryIncentivizedPacketResponse): QueryIncentivizedPacketResponseAmino {
     const obj: any = {};
@@ -797,12 +807,20 @@ export const QueryIncentivizedPacketsForChannelRequest = {
     return obj;
   },
   fromAmino(object: QueryIncentivizedPacketsForChannelRequestAmino): QueryIncentivizedPacketsForChannelRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined,
-      portId: object.port_id,
-      channelId: object.channel_id,
-      queryHeight: BigInt(object.query_height)
-    };
+    const message = createBaseQueryIncentivizedPacketsForChannelRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    if (object.port_id !== undefined && object.port_id !== null) {
+      message.portId = object.port_id;
+    }
+    if (object.channel_id !== undefined && object.channel_id !== null) {
+      message.channelId = object.channel_id;
+    }
+    if (object.query_height !== undefined && object.query_height !== null) {
+      message.queryHeight = BigInt(object.query_height);
+    }
+    return message;
   },
   toAmino(message: QueryIncentivizedPacketsForChannelRequest): QueryIncentivizedPacketsForChannelRequestAmino {
     const obj: any = {};
@@ -916,10 +934,12 @@ export const QueryIncentivizedPacketsForChannelResponse = {
     return obj;
   },
   fromAmino(object: QueryIncentivizedPacketsForChannelResponseAmino): QueryIncentivizedPacketsForChannelResponse {
-    return {
-      incentivizedPackets: Array.isArray(object?.incentivized_packets) ? object.incentivized_packets.map((e: any) => IdentifiedPacketFees.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryIncentivizedPacketsForChannelResponse();
+    message.incentivizedPackets = object.incentivized_packets?.map(e => IdentifiedPacketFees.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryIncentivizedPacketsForChannelResponse): QueryIncentivizedPacketsForChannelResponseAmino {
     const obj: any = {};
@@ -997,7 +1017,8 @@ export const QueryTotalRecvFeesRequest = {
     return obj;
   },
   fromAmino(_: QueryTotalRecvFeesRequestAmino): QueryTotalRecvFeesRequest {
-    return {};
+    const message = createBaseQueryTotalRecvFeesRequest();
+    return message;
   },
   toAmino(_: QueryTotalRecvFeesRequest): QueryTotalRecvFeesRequestAmino {
     const obj: any = {};
@@ -1094,9 +1115,9 @@ export const QueryTotalRecvFeesResponse = {
     return obj;
   },
   fromAmino(object: QueryTotalRecvFeesResponseAmino): QueryTotalRecvFeesResponse {
-    return {
-      recvFees: Array.isArray(object?.recv_fees) ? object.recv_fees.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseQueryTotalRecvFeesResponse();
+    message.recvFees = object.recv_fees?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryTotalRecvFeesResponse): QueryTotalRecvFeesResponseAmino {
     const obj: any = {};
@@ -1173,7 +1194,8 @@ export const QueryTotalAckFeesRequest = {
     return obj;
   },
   fromAmino(_: QueryTotalAckFeesRequestAmino): QueryTotalAckFeesRequest {
-    return {};
+    const message = createBaseQueryTotalAckFeesRequest();
+    return message;
   },
   toAmino(_: QueryTotalAckFeesRequest): QueryTotalAckFeesRequestAmino {
     const obj: any = {};
@@ -1270,9 +1292,9 @@ export const QueryTotalAckFeesResponse = {
     return obj;
   },
   fromAmino(object: QueryTotalAckFeesResponseAmino): QueryTotalAckFeesResponse {
-    return {
-      ackFees: Array.isArray(object?.ack_fees) ? object.ack_fees.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseQueryTotalAckFeesResponse();
+    message.ackFees = object.ack_fees?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryTotalAckFeesResponse): QueryTotalAckFeesResponseAmino {
     const obj: any = {};
@@ -1349,7 +1371,8 @@ export const QueryTotalTimeoutFeesRequest = {
     return obj;
   },
   fromAmino(_: QueryTotalTimeoutFeesRequestAmino): QueryTotalTimeoutFeesRequest {
-    return {};
+    const message = createBaseQueryTotalTimeoutFeesRequest();
+    return message;
   },
   toAmino(_: QueryTotalTimeoutFeesRequest): QueryTotalTimeoutFeesRequestAmino {
     const obj: any = {};
@@ -1446,9 +1469,9 @@ export const QueryTotalTimeoutFeesResponse = {
     return obj;
   },
   fromAmino(object: QueryTotalTimeoutFeesResponseAmino): QueryTotalTimeoutFeesResponse {
-    return {
-      timeoutFees: Array.isArray(object?.timeout_fees) ? object.timeout_fees.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseQueryTotalTimeoutFeesResponse();
+    message.timeoutFees = object.timeout_fees?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryTotalTimeoutFeesResponse): QueryTotalTimeoutFeesResponseAmino {
     const obj: any = {};
@@ -1555,10 +1578,14 @@ export const QueryPayeeRequest = {
     return obj;
   },
   fromAmino(object: QueryPayeeRequestAmino): QueryPayeeRequest {
-    return {
-      channelId: object.channel_id,
-      relayer: object.relayer
-    };
+    const message = createBaseQueryPayeeRequest();
+    if (object.channel_id !== undefined && object.channel_id !== null) {
+      message.channelId = object.channel_id;
+    }
+    if (object.relayer !== undefined && object.relayer !== null) {
+      message.relayer = object.relayer;
+    }
+    return message;
   },
   toAmino(message: QueryPayeeRequest): QueryPayeeRequestAmino {
     const obj: any = {};
@@ -1649,9 +1676,11 @@ export const QueryPayeeResponse = {
     return obj;
   },
   fromAmino(object: QueryPayeeResponseAmino): QueryPayeeResponse {
-    return {
-      payeeAddress: object.payee_address
-    };
+    const message = createBaseQueryPayeeResponse();
+    if (object.payee_address !== undefined && object.payee_address !== null) {
+      message.payeeAddress = object.payee_address;
+    }
+    return message;
   },
   toAmino(message: QueryPayeeResponse): QueryPayeeResponseAmino {
     const obj: any = {};
@@ -1754,10 +1783,14 @@ export const QueryCounterpartyPayeeRequest = {
     return obj;
   },
   fromAmino(object: QueryCounterpartyPayeeRequestAmino): QueryCounterpartyPayeeRequest {
-    return {
-      channelId: object.channel_id,
-      relayer: object.relayer
-    };
+    const message = createBaseQueryCounterpartyPayeeRequest();
+    if (object.channel_id !== undefined && object.channel_id !== null) {
+      message.channelId = object.channel_id;
+    }
+    if (object.relayer !== undefined && object.relayer !== null) {
+      message.relayer = object.relayer;
+    }
+    return message;
   },
   toAmino(message: QueryCounterpartyPayeeRequest): QueryCounterpartyPayeeRequestAmino {
     const obj: any = {};
@@ -1848,9 +1881,11 @@ export const QueryCounterpartyPayeeResponse = {
     return obj;
   },
   fromAmino(object: QueryCounterpartyPayeeResponseAmino): QueryCounterpartyPayeeResponse {
-    return {
-      counterpartyPayee: object.counterparty_payee
-    };
+    const message = createBaseQueryCounterpartyPayeeResponse();
+    if (object.counterparty_payee !== undefined && object.counterparty_payee !== null) {
+      message.counterpartyPayee = object.counterparty_payee;
+    }
+    return message;
   },
   toAmino(message: QueryCounterpartyPayeeResponse): QueryCounterpartyPayeeResponseAmino {
     const obj: any = {};
@@ -1953,10 +1988,14 @@ export const QueryFeeEnabledChannelsRequest = {
     return obj;
   },
   fromAmino(object: QueryFeeEnabledChannelsRequestAmino): QueryFeeEnabledChannelsRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined,
-      queryHeight: BigInt(object.query_height)
-    };
+    const message = createBaseQueryFeeEnabledChannelsRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    if (object.query_height !== undefined && object.query_height !== null) {
+      message.queryHeight = BigInt(object.query_height);
+    }
+    return message;
   },
   toAmino(message: QueryFeeEnabledChannelsRequest): QueryFeeEnabledChannelsRequestAmino {
     const obj: any = {};
@@ -2068,10 +2107,12 @@ export const QueryFeeEnabledChannelsResponse = {
     return obj;
   },
   fromAmino(object: QueryFeeEnabledChannelsResponseAmino): QueryFeeEnabledChannelsResponse {
-    return {
-      feeEnabledChannels: Array.isArray(object?.fee_enabled_channels) ? object.fee_enabled_channels.map((e: any) => FeeEnabledChannel.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryFeeEnabledChannelsResponse();
+    message.feeEnabledChannels = object.fee_enabled_channels?.map(e => FeeEnabledChannel.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryFeeEnabledChannelsResponse): QueryFeeEnabledChannelsResponseAmino {
     const obj: any = {};
@@ -2179,10 +2220,14 @@ export const QueryFeeEnabledChannelRequest = {
     return obj;
   },
   fromAmino(object: QueryFeeEnabledChannelRequestAmino): QueryFeeEnabledChannelRequest {
-    return {
-      portId: object.port_id,
-      channelId: object.channel_id
-    };
+    const message = createBaseQueryFeeEnabledChannelRequest();
+    if (object.port_id !== undefined && object.port_id !== null) {
+      message.portId = object.port_id;
+    }
+    if (object.channel_id !== undefined && object.channel_id !== null) {
+      message.channelId = object.channel_id;
+    }
+    return message;
   },
   toAmino(message: QueryFeeEnabledChannelRequest): QueryFeeEnabledChannelRequestAmino {
     const obj: any = {};
@@ -2273,9 +2318,11 @@ export const QueryFeeEnabledChannelResponse = {
     return obj;
   },
   fromAmino(object: QueryFeeEnabledChannelResponseAmino): QueryFeeEnabledChannelResponse {
-    return {
-      feeEnabled: object.fee_enabled
-    };
+    const message = createBaseQueryFeeEnabledChannelResponse();
+    if (object.fee_enabled !== undefined && object.fee_enabled !== null) {
+      message.feeEnabled = object.fee_enabled;
+    }
+    return message;
   },
   toAmino(message: QueryFeeEnabledChannelResponse): QueryFeeEnabledChannelResponseAmino {
     const obj: any = {};

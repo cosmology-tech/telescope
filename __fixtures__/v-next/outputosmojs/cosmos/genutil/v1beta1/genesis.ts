@@ -83,14 +83,14 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      genTxs: Array.isArray(object?.gen_txs) ? object.gen_txs.map((e: any) => e) : []
-    };
+    const message = createBaseGenesisState();
+    message.genTxs = object.gen_txs?.map(e => bytesFromBase64(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
     if (message.genTxs) {
-      obj.gen_txs = message.genTxs.map(e => e);
+      obj.gen_txs = message.genTxs.map(e => base64FromBytes(e));
     } else {
       obj.gen_txs = [];
     }

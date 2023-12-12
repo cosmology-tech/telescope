@@ -21,7 +21,7 @@ export interface DoubleValueProtoMsg {
  */
 export interface DoubleValueAmino {
   /** The double value. */
-  value: number;
+  value?: number;
 }
 /**
  * Wrapper message for `double`.
@@ -51,7 +51,7 @@ export interface FloatValueProtoMsg {
  */
 export interface FloatValueAmino {
   /** The float value. */
-  value: number;
+  value?: number;
 }
 /**
  * Wrapper message for `float`.
@@ -81,7 +81,7 @@ export interface Int64ValueProtoMsg {
  */
 export interface Int64ValueAmino {
   /** The int64 value. */
-  value: string;
+  value?: string;
 }
 /**
  * Wrapper message for `int64`.
@@ -111,7 +111,7 @@ export interface UInt64ValueProtoMsg {
  */
 export interface UInt64ValueAmino {
   /** The uint64 value. */
-  value: string;
+  value?: string;
 }
 /**
  * Wrapper message for `uint64`.
@@ -141,7 +141,7 @@ export interface Int32ValueProtoMsg {
  */
 export interface Int32ValueAmino {
   /** The int32 value. */
-  value: number;
+  value?: number;
 }
 /**
  * Wrapper message for `int32`.
@@ -171,7 +171,7 @@ export interface UInt32ValueProtoMsg {
  */
 export interface UInt32ValueAmino {
   /** The uint32 value. */
-  value: number;
+  value?: number;
 }
 /**
  * Wrapper message for `uint32`.
@@ -201,7 +201,7 @@ export interface BoolValueProtoMsg {
  */
 export interface BoolValueAmino {
   /** The bool value. */
-  value: boolean;
+  value?: boolean;
 }
 /**
  * Wrapper message for `bool`.
@@ -231,7 +231,7 @@ export interface StringValueProtoMsg {
  */
 export interface StringValueAmino {
   /** The string value. */
-  value: string;
+  value?: string;
 }
 /**
  * Wrapper message for `string`.
@@ -261,7 +261,7 @@ export interface BytesValueProtoMsg {
  */
 export interface BytesValueAmino {
   /** The bytes value. */
-  value: Uint8Array;
+  value?: string;
 }
 /**
  * Wrapper message for `bytes`.
@@ -327,9 +327,11 @@ export const DoubleValue = {
     return obj;
   },
   fromAmino(object: DoubleValueAmino): DoubleValue {
-    return {
-      value: object.value
-    };
+    const message = createBaseDoubleValue();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: DoubleValue, useInterfaces: boolean = true): DoubleValueAmino {
     const obj: any = {};
@@ -405,9 +407,11 @@ export const FloatValue = {
     return obj;
   },
   fromAmino(object: FloatValueAmino): FloatValue {
-    return {
-      value: object.value
-    };
+    const message = createBaseFloatValue();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: FloatValue, useInterfaces: boolean = true): FloatValueAmino {
     const obj: any = {};
@@ -485,9 +489,11 @@ export const Int64Value = {
     return obj;
   },
   fromAmino(object: Int64ValueAmino): Int64Value {
-    return {
-      value: BigInt(object.value)
-    };
+    const message = createBaseInt64Value();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value);
+    }
+    return message;
   },
   toAmino(message: Int64Value, useInterfaces: boolean = true): Int64ValueAmino {
     const obj: any = {};
@@ -565,9 +571,11 @@ export const UInt64Value = {
     return obj;
   },
   fromAmino(object: UInt64ValueAmino): UInt64Value {
-    return {
-      value: BigInt(object.value)
-    };
+    const message = createBaseUInt64Value();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value);
+    }
+    return message;
   },
   toAmino(message: UInt64Value, useInterfaces: boolean = true): UInt64ValueAmino {
     const obj: any = {};
@@ -643,9 +651,11 @@ export const Int32Value = {
     return obj;
   },
   fromAmino(object: Int32ValueAmino): Int32Value {
-    return {
-      value: object.value
-    };
+    const message = createBaseInt32Value();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: Int32Value, useInterfaces: boolean = true): Int32ValueAmino {
     const obj: any = {};
@@ -721,9 +731,11 @@ export const UInt32Value = {
     return obj;
   },
   fromAmino(object: UInt32ValueAmino): UInt32Value {
-    return {
-      value: object.value
-    };
+    const message = createBaseUInt32Value();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: UInt32Value, useInterfaces: boolean = true): UInt32ValueAmino {
     const obj: any = {};
@@ -799,9 +811,11 @@ export const BoolValue = {
     return obj;
   },
   fromAmino(object: BoolValueAmino): BoolValue {
-    return {
-      value: object.value
-    };
+    const message = createBaseBoolValue();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: BoolValue, useInterfaces: boolean = true): BoolValueAmino {
     const obj: any = {};
@@ -877,9 +891,11 @@ export const StringValue = {
     return obj;
   },
   fromAmino(object: StringValueAmino): StringValue {
-    return {
-      value: object.value
-    };
+    const message = createBaseStringValue();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: StringValue, useInterfaces: boolean = true): StringValueAmino {
     const obj: any = {};
@@ -955,13 +971,15 @@ export const BytesValue = {
     return obj;
   },
   fromAmino(object: BytesValueAmino): BytesValue {
-    return {
-      value: object.value
-    };
+    const message = createBaseBytesValue();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = bytesFromBase64(object.value);
+    }
+    return message;
   },
   toAmino(message: BytesValue, useInterfaces: boolean = true): BytesValueAmino {
     const obj: any = {};
-    obj.value = message.value;
+    obj.value = message.value ? base64FromBytes(message.value) : undefined;
     return obj;
   },
   fromProtoMsg(message: BytesValueProtoMsg, useInterfaces: boolean = true): BytesValue {

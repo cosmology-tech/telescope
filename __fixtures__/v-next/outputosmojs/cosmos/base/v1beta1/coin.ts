@@ -147,10 +147,14 @@ export const Coin = {
     return obj;
   },
   fromAmino(object: CoinAmino): Coin {
-    return {
-      denom: object.denom,
-      amount: object.amount
-    };
+    const message = createBaseCoin();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    return message;
   },
   toAmino(message: Coin): CoinAmino {
     const obj: any = {};
@@ -254,10 +258,14 @@ export const DecCoin = {
     return obj;
   },
   fromAmino(object: DecCoinAmino): DecCoin {
-    return {
-      denom: object.denom,
-      amount: object.amount
-    };
+    const message = createBaseDecCoin();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    return message;
   },
   toAmino(message: DecCoin): DecCoinAmino {
     const obj: any = {};
@@ -348,9 +356,11 @@ export const IntProto = {
     return obj;
   },
   fromAmino(object: IntProtoAmino): IntProto {
-    return {
-      int: object.int
-    };
+    const message = createBaseIntProto();
+    if (object.int !== undefined && object.int !== null) {
+      message.int = object.int;
+    }
+    return message;
   },
   toAmino(message: IntProto): IntProtoAmino {
     const obj: any = {};
@@ -440,9 +450,11 @@ export const DecProto = {
     return obj;
   },
   fromAmino(object: DecProtoAmino): DecProto {
-    return {
-      dec: object.dec
-    };
+    const message = createBaseDecProto();
+    if (object.dec !== undefined && object.dec !== null) {
+      message.dec = object.dec;
+    }
+    return message;
   },
   toAmino(message: DecProto): DecProtoAmino {
     const obj: any = {};

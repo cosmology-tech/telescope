@@ -252,9 +252,9 @@ export interface LogBucketAmino {
    * 
    * After a bucket has been created, the location cannot be changed.
    */
-  name: string;
+  name?: string;
   /** Describes this bucket. */
-  description: string;
+  description?: string;
   /**
    * Output only. The creation timestamp of the bucket. This is not set for any of the
    * default buckets.
@@ -268,16 +268,16 @@ export interface LogBucketAmino {
    * this value is set to zero at bucket creation time, the default time of 30
    * days will be used.
    */
-  retention_days: number;
+  retention_days?: number;
   /**
    * Whether the bucket is locked.
    * 
    * The retention period on a locked bucket cannot be changed. Locked buckets
    * may only be deleted if they are empty.
    */
-  locked: boolean;
+  locked?: boolean;
   /** Output only. The bucket lifecycle state. */
-  lifecycle_state: LifecycleState;
+  lifecycle_state?: LifecycleState;
   /**
    * Log entry field paths that are denied access in this bucket.
    * 
@@ -287,7 +287,7 @@ export interface LogBucketAmino {
    * Restricting a repeated field will restrict all values. Adding a parent will
    * block all child fields. (e.g. `foo.bar` will block `foo.bar.baz`)
    */
-  restricted_fields: string[];
+  restricted_fields?: string[];
   /**
    * The CMEK settings of the log bucket. If present, new log entries written to
    * this log bucket are encrypted using the CMEK key provided in this
@@ -360,9 +360,9 @@ export interface LogViewAmino {
    * 
    *   `projects/my-project/locations/global/buckets/my-bucket/views/my-view`
    */
-  name: string;
+  name?: string;
   /** Describes this view. */
-  description: string;
+  description?: string;
   /** Output only. The creation timestamp of the view. */
   create_time?: string;
   /** Output only. The last update timestamp of the view. */
@@ -383,7 +383,7 @@ export interface LogViewAmino {
    *   SOURCE("projects/myproject") AND resource.type = "gce_instance"
    *                                AND LOG_ID("stdout")
    */
-  filter: string;
+  filter?: string;
 }
 export interface LogViewAminoMsg {
   type: "/google.logging.v2.LogView";
@@ -535,7 +535,7 @@ export interface LogSinkAmino {
    * lower-case alphanumeric characters, underscores, hyphens, and periods.
    * First character has to be alphanumeric.
    */
-  name: string;
+  name?: string;
   /**
    * Required. The export destination:
    * 
@@ -549,7 +549,7 @@ export interface LogSinkAmino {
    * [Exporting Logs with
    * Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
    */
-  destination: string;
+  destination?: string;
   /**
    * Optional. An [advanced logs
    * filter](https://cloud.google.com/logging/docs/view/advanced-queries). The
@@ -560,28 +560,28 @@ export interface LogSinkAmino {
    * 
    *   `logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity>=ERROR`
    */
-  filter: string;
+  filter?: string;
   /**
    * Optional. A description of this sink.
    * 
    * The maximum length of the description is 8000 characters.
    */
-  description: string;
+  description?: string;
   /**
    * Optional. If set to true, then this sink is disabled and it does not export any log
    * entries.
    */
-  disabled: boolean;
+  disabled?: boolean;
   /**
    * Optional. Log entries that match any of these exclusion filters will not be exported.
    * 
    * If a log entry is matched by both `filter` and one of `exclusion_filters`
    * it will not be exported.
    */
-  exclusions: LogExclusionAmino[];
+  exclusions?: LogExclusionAmino[];
   /** Deprecated. This field is unused. */
   /** @deprecated */
-  output_version_format: LogSink_VersionFormat;
+  output_version_format?: LogSink_VersionFormat;
   /**
    * Output only. An IAM identity&mdash;a service account or group&mdash;under which Cloud
    * Logging writes the exported log entries to the sink's destination. This
@@ -601,7 +601,7 @@ export interface LogSinkAmino {
    * the sink do not have a writer_identity and no additional permissions are
    * required.
    */
-  writer_identity: string;
+  writer_identity?: string;
   /**
    * Optional. This field applies only to sinks owned by organizations and folders. If the
    * field is false, the default, only the logs owned by the sink's parent
@@ -621,7 +621,7 @@ export interface LogSinkAmino {
    *   logName:("projects/test-project1/" OR "projects/test-project2/") AND
    *   resource.type=gce_instance
    */
-  include_children: boolean;
+  include_children?: boolean;
   /** Optional. Options that affect sinks exporting data to BigQuery. */
   bigquery_options?: BigQueryOptionsAmino;
   /**
@@ -703,7 +703,7 @@ export interface BigQueryOptionsAmino {
    * has to be used instead. In both cases, tables are sharded based on UTC
    * timezone.
    */
-  use_partitioned_tables: boolean;
+  use_partitioned_tables?: boolean;
   /**
    * Output only. True if new timestamp column based partitioning is in use, false if legacy
    * ingestion-time partitioning is in use.
@@ -713,7 +713,7 @@ export interface BigQueryOptionsAmino {
    * meaning and will be false. Legacy sinks using partitioned tables will have
    * this field set to false.
    */
-  uses_timestamp_column_partitioning: boolean;
+  uses_timestamp_column_partitioning?: boolean;
 }
 export interface BigQueryOptionsAminoMsg {
   type: "/google.logging.v2.BigQueryOptions";
@@ -771,20 +771,20 @@ export interface ListBucketsRequestAmino {
    * supplying the character `-` in place of [LOCATION_ID] will return all
    * buckets.
    */
-  parent: string;
+  parent?: string;
   /**
    * Optional. If present, then retrieve the next batch of results from the preceding call
    * to this method. `pageToken` must be the value of `nextPageToken` from the
    * previous response. The values of other method parameters should be
    * identical to those in the previous call.
    */
-  page_token: string;
+  page_token?: string;
   /**
    * Optional. The maximum number of results to return from this request. Non-positive
    * values are ignored. The presence of `nextPageToken` in the response
    * indicates that more results might be available.
    */
-  page_size: number;
+  page_size?: number;
 }
 export interface ListBucketsRequestAminoMsg {
   type: "/google.logging.v2.ListBucketsRequest";
@@ -814,13 +814,13 @@ export interface ListBucketsResponseProtoMsg {
 /** The response from ListBuckets. */
 export interface ListBucketsResponseAmino {
   /** A list of buckets. */
-  buckets: LogBucketAmino[];
+  buckets?: LogBucketAmino[];
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-  next_page_token: string;
+  next_page_token?: string;
 }
 export interface ListBucketsResponseAminoMsg {
   type: "/google.logging.v2.ListBucketsResponse";
@@ -871,13 +871,13 @@ export interface CreateBucketRequestAmino {
    * 
    *   `"projects/my-project/locations/global"`
    */
-  parent: string;
+  parent?: string;
   /**
    * Required. A client-assigned identifier such as `"my-bucket"`. Identifiers are limited
    * to 100 characters and can include only letters, digits, underscores,
    * hyphens, and periods.
    */
-  bucket_id: string;
+  bucket_id?: string;
   /**
    * Required. The new bucket. The region specified in the new bucket must be compliant
    * with any Location Restriction Org Policy. The name field in the bucket is
@@ -942,7 +942,7 @@ export interface UpdateBucketRequestAmino {
    * 
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
-  name: string;
+  name?: string;
   /** Required. The updated bucket. */
   bucket?: LogBucketAmino;
   /**
@@ -1001,7 +1001,7 @@ export interface GetBucketRequestAmino {
    * 
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
-  name: string;
+  name?: string;
 }
 export interface GetBucketRequestAminoMsg {
   type: "/google.logging.v2.GetBucketRequest";
@@ -1045,7 +1045,7 @@ export interface DeleteBucketRequestAmino {
    * 
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
-  name: string;
+  name?: string;
 }
 export interface DeleteBucketRequestAminoMsg {
   type: "/google.logging.v2.DeleteBucketRequest";
@@ -1089,7 +1089,7 @@ export interface UndeleteBucketRequestAmino {
    * 
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
-  name: string;
+  name?: string;
 }
 export interface UndeleteBucketRequestAminoMsg {
   type: "/google.logging.v2.UndeleteBucketRequest";
@@ -1133,21 +1133,21 @@ export interface ListViewsRequestAmino {
    * 
    *     "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
    */
-  parent: string;
+  parent?: string;
   /**
    * Optional. If present, then retrieve the next batch of results from the preceding call
    * to this method. `pageToken` must be the value of `nextPageToken` from the
    * previous response. The values of other method parameters should be
    * identical to those in the previous call.
    */
-  page_token: string;
+  page_token?: string;
   /**
    * Optional. The maximum number of results to return from this request.
    * 
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  page_size: number;
+  page_size?: number;
 }
 export interface ListViewsRequestAminoMsg {
   type: "/google.logging.v2.ListViewsRequest";
@@ -1177,13 +1177,13 @@ export interface ListViewsResponseProtoMsg {
 /** The response from ListViews. */
 export interface ListViewsResponseAmino {
   /** A list of views. */
-  views: LogViewAmino[];
+  views?: LogViewAmino[];
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-  next_page_token: string;
+  next_page_token?: string;
 }
 export interface ListViewsResponseAminoMsg {
   type: "/google.logging.v2.ListViewsResponse";
@@ -1226,9 +1226,9 @@ export interface CreateViewRequestAmino {
    * 
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
-  parent: string;
+  parent?: string;
   /** Required. The id to use for this view. */
-  view_id: string;
+  view_id?: string;
   /** Required. The new view. */
   view?: LogViewAmino;
 }
@@ -1283,7 +1283,7 @@ export interface UpdateViewRequestAmino {
    * 
    *   `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
    */
-  name: string;
+  name?: string;
   /** Required. The updated view. */
   view?: LogViewAmino;
   /**
@@ -1336,7 +1336,7 @@ export interface GetViewRequestAmino {
    * 
    *   `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
    */
-  name: string;
+  name?: string;
 }
 export interface GetViewRequestAminoMsg {
   type: "/google.logging.v2.GetViewRequest";
@@ -1374,7 +1374,7 @@ export interface DeleteViewRequestAmino {
    * 
    *    `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
    */
-  name: string;
+  name?: string;
 }
 export interface DeleteViewRequestAminoMsg {
   type: "/google.logging.v2.DeleteViewRequest";
@@ -1423,20 +1423,20 @@ export interface ListSinksRequestAmino {
    *     "billingAccounts/[BILLING_ACCOUNT_ID]"
    *     "folders/[FOLDER_ID]"
    */
-  parent: string;
+  parent?: string;
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method. `pageToken` must be the value of
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-  page_token: string;
+  page_token?: string;
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  page_size: number;
+  page_size?: number;
 }
 export interface ListSinksRequestAminoMsg {
   type: "/google.logging.v2.ListSinksRequest";
@@ -1466,13 +1466,13 @@ export interface ListSinksResponseProtoMsg {
 /** Result returned from `ListSinks`. */
 export interface ListSinksResponseAmino {
   /** A list of sinks. */
-  sinks: LogSinkAmino[];
+  sinks?: LogSinkAmino[];
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-  next_page_token: string;
+  next_page_token?: string;
 }
 export interface ListSinksResponseAminoMsg {
   type: "/google.logging.v2.ListSinksResponse";
@@ -1517,7 +1517,7 @@ export interface GetSinkRequestAmino {
    * 
    *   `"projects/my-project/sinks/my-sink"`
    */
-  sink_name: string;
+  sink_name?: string;
 }
 export interface GetSinkRequestAminoMsg {
   type: "/google.logging.v2.GetSinkRequest";
@@ -1582,7 +1582,7 @@ export interface CreateSinkRequestAmino {
    *   `"projects/my-project"`
    *   `"organizations/123456789"`
    */
-  parent: string;
+  parent?: string;
   /**
    * Required. The new sink, whose `name` parameter is a sink identifier that
    * is not already in use.
@@ -1601,7 +1601,7 @@ export interface CreateSinkRequestAmino {
    * be a unique service account used only for exports from the new sink. For
    * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
    */
-  unique_writer_identity: boolean;
+  unique_writer_identity?: boolean;
 }
 export interface CreateSinkRequestAminoMsg {
   type: "/google.logging.v2.CreateSinkRequest";
@@ -1687,7 +1687,7 @@ export interface UpdateSinkRequestAmino {
    * 
    *   `"projects/my-project/sinks/my-sink"`
    */
-  sink_name: string;
+  sink_name?: string;
   /**
    * Required. The updated sink, whose name is the same identifier that appears as part
    * of `sink_name`.
@@ -1706,7 +1706,7 @@ export interface UpdateSinkRequestAmino {
    * +   It is an error if the old value is true and the new value is
    *     set to false or defaulted to false.
    */
-  unique_writer_identity: boolean;
+  unique_writer_identity?: boolean;
   /**
    * Optional. Field mask that specifies the fields in `sink` that need
    * an update. A sink field will be overwritten if, and only if, it is
@@ -1774,7 +1774,7 @@ export interface DeleteSinkRequestAmino {
    * 
    *   `"projects/my-project/sinks/my-sink"`
    */
-  sink_name: string;
+  sink_name?: string;
 }
 export interface DeleteSinkRequestAminoMsg {
   type: "/google.logging.v2.DeleteSinkRequest";
@@ -1852,9 +1852,9 @@ export interface LogExclusionAmino {
    * digits, underscores, hyphens, and periods. First character has to be
    * alphanumeric.
    */
-  name: string;
+  name?: string;
   /** Optional. A description of this exclusion. */
-  description: string;
+  description?: string;
   /**
    * Required. An [advanced logs
    * filter](https://cloud.google.com/logging/docs/view/advanced-queries) that
@@ -1867,14 +1867,14 @@ export interface LogExclusionAmino {
    * 
    *   `resource.type=gcs_bucket severity<ERROR sample(insertId, 0.99)`
    */
-  filter: string;
+  filter?: string;
   /**
    * Optional. If set to True, then this exclusion is disabled and it does not
    * exclude any log entries. You can [update an
    * exclusion][google.logging.v2.ConfigServiceV2.UpdateExclusion] to change the
    * value of this field.
    */
-  disabled: boolean;
+  disabled?: boolean;
   /**
    * Output only. The creation timestamp of the exclusion.
    * 
@@ -1946,20 +1946,20 @@ export interface ListExclusionsRequestAmino {
    *     "billingAccounts/[BILLING_ACCOUNT_ID]"
    *     "folders/[FOLDER_ID]"
    */
-  parent: string;
+  parent?: string;
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method. `pageToken` must be the value of
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-  page_token: string;
+  page_token?: string;
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  page_size: number;
+  page_size?: number;
 }
 export interface ListExclusionsRequestAminoMsg {
   type: "/google.logging.v2.ListExclusionsRequest";
@@ -1989,13 +1989,13 @@ export interface ListExclusionsResponseProtoMsg {
 /** Result returned from `ListExclusions`. */
 export interface ListExclusionsResponseAmino {
   /** A list of exclusions. */
-  exclusions: LogExclusionAmino[];
+  exclusions?: LogExclusionAmino[];
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call the same
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-  next_page_token: string;
+  next_page_token?: string;
 }
 export interface ListExclusionsResponseAminoMsg {
   type: "/google.logging.v2.ListExclusionsResponse";
@@ -2040,7 +2040,7 @@ export interface GetExclusionRequestAmino {
    * 
    *   `"projects/my-project/exclusions/my-exclusion"`
    */
-  name: string;
+  name?: string;
 }
 export interface GetExclusionRequestAminoMsg {
   type: "/google.logging.v2.GetExclusionRequest";
@@ -2091,7 +2091,7 @@ export interface CreateExclusionRequestAmino {
    *   `"projects/my-logging-project"`
    *   `"organizations/123456789"`
    */
-  parent: string;
+  parent?: string;
   /**
    * Required. The new exclusion, whose `name` parameter is an exclusion name
    * that is not already used in the parent resource.
@@ -2156,7 +2156,7 @@ export interface UpdateExclusionRequestAmino {
    * 
    *   `"projects/my-project/exclusions/my-exclusion"`
    */
-  name: string;
+  name?: string;
   /**
    * Required. New values for the existing exclusion. Only the fields specified in
    * `update_mask` are relevant.
@@ -2217,7 +2217,7 @@ export interface DeleteExclusionRequestAmino {
    * 
    *   `"projects/my-project/exclusions/my-exclusion"`
    */
-  name: string;
+  name?: string;
 }
 export interface DeleteExclusionRequestAminoMsg {
   type: "/google.logging.v2.DeleteExclusionRequest";
@@ -2285,7 +2285,7 @@ export interface GetCmekSettingsRequestAmino {
    * organization, it applies to all projects and folders in the Google Cloud
    * organization.
    */
-  name: string;
+  name?: string;
 }
 export interface GetCmekSettingsRequestAminoMsg {
   type: "/google.logging.v2.GetCmekSettingsRequest";
@@ -2376,7 +2376,7 @@ export interface UpdateCmekSettingsRequestAmino {
    * Cloud organizations. Once configured, it applies to all projects and
    * folders in the Google Cloud organization.
    */
-  name: string;
+  name?: string;
   /**
    * Required. The CMEK settings to update.
    * 
@@ -2493,7 +2493,7 @@ export interface CmekSettingsProtoMsg {
  */
 export interface CmekSettingsAmino {
   /** Output only. The resource name of the CMEK settings. */
-  name: string;
+  name?: string;
   /**
    * The resource name for the configured Cloud KMS key.
    * 
@@ -2524,7 +2524,7 @@ export interface CmekSettingsAmino {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  kms_key_name: string;
+  kms_key_name?: string;
   /**
    * Output only. The service account that will be used by the Log Router to access your
    * Cloud KMS key.
@@ -2539,7 +2539,7 @@ export interface CmekSettingsAmino {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  service_account_id: string;
+  service_account_id?: string;
 }
 export interface CmekSettingsAminoMsg {
   type: "/google.logging.v2.CmekSettings";
@@ -2620,7 +2620,7 @@ export interface GetSettingsRequestAmino {
    * configured for organizations. Once configured for an organization, it
    * applies to all projects and folders in the Google Cloud organization.
    */
-  name: string;
+  name?: string;
 }
 export interface GetSettingsRequestAminoMsg {
   type: "/google.logging.v2.GetSettingsRequest";
@@ -2705,7 +2705,7 @@ export interface UpdateSettingsRequestAmino {
    * Google Cloud organizations. Once configured, it applies to all projects and
    * folders in the Google Cloud organization.
    */
-  name: string;
+  name?: string;
   /**
    * Required. The settings to update.
    * 
@@ -2818,7 +2818,7 @@ export interface SettingsProtoMsg {
  */
 export interface SettingsAmino {
   /** Output only. The resource name of the settings. */
-  name: string;
+  name?: string;
   /**
    * Optional. The resource name for the configured Cloud KMS key.
    * 
@@ -2848,7 +2848,7 @@ export interface SettingsAmino {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  kms_key_name: string;
+  kms_key_name?: string;
   /**
    * Output only. The service account that will be used by the Log Router to access your
    * Cloud KMS key.
@@ -2863,20 +2863,20 @@ export interface SettingsAmino {
    * Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
    * for more information.
    */
-  kms_service_account_id: string;
+  kms_service_account_id?: string;
   /**
    * Optional. The Cloud region that will be used for _Default and _Required log buckets
    * for newly created projects and folders. For example `europe-west1`.
    * This setting does not affect the location of custom log buckets.
    */
-  storage_location: string;
+  storage_location?: string;
   /**
    * Optional. If set to true, the _Default sink in newly created projects and folders
    * will created in a disabled state. This can be used to automatically disable
    * log ingestion if there is already an aggregated sink configured in the
    * hierarchy. The _Default sink can be re-enabled manually if needed.
    */
-  disable_default_sink: boolean;
+  disable_default_sink?: boolean;
 }
 export interface SettingsAminoMsg {
   type: "/google.logging.v2.Settings";
@@ -2924,14 +2924,14 @@ export interface CopyLogEntriesRequestAmino {
    * 
    *   `"projects/my-project/locations/global/buckets/my-source-bucket"`
    */
-  name: string;
+  name?: string;
   /**
    * Optional. A filter specifying which log entries to copy. The filter must be no more
    * than 20k characters. An empty filter matches all log entries.
    */
-  filter: string;
+  filter?: string;
   /** Required. Destination to which to copy log entries. */
-  destination: string;
+  destination?: string;
 }
 export interface CopyLogEntriesRequestAminoMsg {
   type: "/google.logging.v2.CopyLogEntriesRequest";
@@ -2979,13 +2979,13 @@ export interface CopyLogEntriesMetadataAmino {
   /** The end time of an operation. */
   end_time?: string;
   /** State of an operation. */
-  state: OperationState;
+  state?: OperationState;
   /** Identifies whether the user has requested cancellation of the operation. */
-  cancellation_requested: boolean;
+  cancellation_requested?: boolean;
   /** CopyLogEntries RPC request. */
   request?: CopyLogEntriesRequestAmino;
   /** Estimated progress of the operation (0 - 100%). */
-  progress: number;
+  progress?: number;
   /**
    * The IAM identity of a service account that must be granted access to the
    * destination.
@@ -2995,7 +2995,7 @@ export interface CopyLogEntriesMetadataAmino {
    * 
    * For example: `"serviceAccount:foo@bar.com"`
    */
-  writer_identity: string;
+  writer_identity?: string;
 }
 export interface CopyLogEntriesMetadataAminoMsg {
   type: "/google.logging.v2.CopyLogEntriesMetadata";
@@ -3023,7 +3023,7 @@ export interface CopyLogEntriesResponseProtoMsg {
 /** Response type for CopyLogEntries long running operations. */
 export interface CopyLogEntriesResponseAmino {
   /** Number of log entries copied. */
-  log_entries_copied_count: string;
+  log_entries_copied_count?: string;
 }
 export interface CopyLogEntriesResponseAminoMsg {
   type: "/google.logging.v2.CopyLogEntriesResponse";
@@ -3195,17 +3195,33 @@ export const LogBucket = {
     return obj;
   },
   fromAmino(object: LogBucketAmino): LogBucket {
-    return {
-      name: object.name,
-      description: object.description,
-      createTime: object?.create_time ? fromTimestamp(Timestamp.fromAmino(object.create_time)) : undefined,
-      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined,
-      retentionDays: object.retention_days,
-      locked: object.locked,
-      lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : -1,
-      restrictedFields: Array.isArray(object?.restricted_fields) ? object.restricted_fields.map((e: any) => e) : [],
-      cmekSettings: object?.cmek_settings ? CmekSettings.fromAmino(object.cmek_settings) : undefined
-    };
+    const message = createBaseLogBucket();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.create_time !== undefined && object.create_time !== null) {
+      message.createTime = fromTimestamp(Timestamp.fromAmino(object.create_time));
+    }
+    if (object.update_time !== undefined && object.update_time !== null) {
+      message.updateTime = fromTimestamp(Timestamp.fromAmino(object.update_time));
+    }
+    if (object.retention_days !== undefined && object.retention_days !== null) {
+      message.retentionDays = object.retention_days;
+    }
+    if (object.locked !== undefined && object.locked !== null) {
+      message.locked = object.locked;
+    }
+    if (object.lifecycle_state !== undefined && object.lifecycle_state !== null) {
+      message.lifecycleState = lifecycleStateFromJSON(object.lifecycle_state);
+    }
+    message.restrictedFields = object.restricted_fields?.map(e => e) || [];
+    if (object.cmek_settings !== undefined && object.cmek_settings !== null) {
+      message.cmekSettings = CmekSettings.fromAmino(object.cmek_settings);
+    }
+    return message;
   },
   toAmino(message: LogBucket): LogBucketAmino {
     const obj: any = {};
@@ -3215,7 +3231,7 @@ export const LogBucket = {
     obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
     obj.retention_days = message.retentionDays;
     obj.locked = message.locked;
-    obj.lifecycle_state = message.lifecycleState;
+    obj.lifecycle_state = lifecycleStateToJSON(message.lifecycleState);
     if (message.restrictedFields) {
       obj.restricted_fields = message.restrictedFields.map(e => e);
     } else {
@@ -3344,13 +3360,23 @@ export const LogView = {
     return obj;
   },
   fromAmino(object: LogViewAmino): LogView {
-    return {
-      name: object.name,
-      description: object.description,
-      createTime: object?.create_time ? fromTimestamp(Timestamp.fromAmino(object.create_time)) : undefined,
-      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined,
-      filter: object.filter
-    };
+    const message = createBaseLogView();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.create_time !== undefined && object.create_time !== null) {
+      message.createTime = fromTimestamp(Timestamp.fromAmino(object.create_time));
+    }
+    if (object.update_time !== undefined && object.update_time !== null) {
+      message.updateTime = fromTimestamp(Timestamp.fromAmino(object.update_time));
+    }
+    if (object.filter !== undefined && object.filter !== null) {
+      message.filter = object.filter;
+    }
+    return message;
   },
   toAmino(message: LogView): LogViewAmino {
     const obj: any = {};
@@ -3575,20 +3601,42 @@ export const LogSink = {
     return obj;
   },
   fromAmino(object: LogSinkAmino): LogSink {
-    return {
-      name: object.name,
-      destination: object.destination,
-      filter: object.filter,
-      description: object.description,
-      disabled: object.disabled,
-      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromAmino(e)) : [],
-      outputVersionFormat: isSet(object.output_version_format) ? logSink_VersionFormatFromJSON(object.output_version_format) : -1,
-      writerIdentity: object.writer_identity,
-      includeChildren: object.include_children,
-      bigqueryOptions: object?.bigquery_options ? BigQueryOptions.fromAmino(object.bigquery_options) : undefined,
-      createTime: object?.create_time ? fromTimestamp(Timestamp.fromAmino(object.create_time)) : undefined,
-      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined
-    };
+    const message = createBaseLogSink();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.destination !== undefined && object.destination !== null) {
+      message.destination = object.destination;
+    }
+    if (object.filter !== undefined && object.filter !== null) {
+      message.filter = object.filter;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.disabled !== undefined && object.disabled !== null) {
+      message.disabled = object.disabled;
+    }
+    message.exclusions = object.exclusions?.map(e => LogExclusion.fromAmino(e)) || [];
+    if (object.output_version_format !== undefined && object.output_version_format !== null) {
+      message.outputVersionFormat = logSink_VersionFormatFromJSON(object.output_version_format);
+    }
+    if (object.writer_identity !== undefined && object.writer_identity !== null) {
+      message.writerIdentity = object.writer_identity;
+    }
+    if (object.include_children !== undefined && object.include_children !== null) {
+      message.includeChildren = object.include_children;
+    }
+    if (object.bigquery_options !== undefined && object.bigquery_options !== null) {
+      message.bigqueryOptions = BigQueryOptions.fromAmino(object.bigquery_options);
+    }
+    if (object.create_time !== undefined && object.create_time !== null) {
+      message.createTime = fromTimestamp(Timestamp.fromAmino(object.create_time));
+    }
+    if (object.update_time !== undefined && object.update_time !== null) {
+      message.updateTime = fromTimestamp(Timestamp.fromAmino(object.update_time));
+    }
+    return message;
   },
   toAmino(message: LogSink): LogSinkAmino {
     const obj: any = {};
@@ -3602,7 +3650,7 @@ export const LogSink = {
     } else {
       obj.exclusions = [];
     }
-    obj.output_version_format = message.outputVersionFormat;
+    obj.output_version_format = logSink_VersionFormatToJSON(message.outputVersionFormat);
     obj.writer_identity = message.writerIdentity;
     obj.include_children = message.includeChildren;
     obj.bigquery_options = message.bigqueryOptions ? BigQueryOptions.toAmino(message.bigqueryOptions) : undefined;
@@ -3694,10 +3742,14 @@ export const BigQueryOptions = {
     return obj;
   },
   fromAmino(object: BigQueryOptionsAmino): BigQueryOptions {
-    return {
-      usePartitionedTables: object.use_partitioned_tables,
-      usesTimestampColumnPartitioning: object.uses_timestamp_column_partitioning
-    };
+    const message = createBaseBigQueryOptions();
+    if (object.use_partitioned_tables !== undefined && object.use_partitioned_tables !== null) {
+      message.usePartitionedTables = object.use_partitioned_tables;
+    }
+    if (object.uses_timestamp_column_partitioning !== undefined && object.uses_timestamp_column_partitioning !== null) {
+      message.usesTimestampColumnPartitioning = object.uses_timestamp_column_partitioning;
+    }
+    return message;
   },
   toAmino(message: BigQueryOptions): BigQueryOptionsAmino {
     const obj: any = {};
@@ -3801,11 +3853,17 @@ export const ListBucketsRequest = {
     return obj;
   },
   fromAmino(object: ListBucketsRequestAmino): ListBucketsRequest {
-    return {
-      parent: object.parent,
-      pageToken: object.page_token,
-      pageSize: object.page_size
-    };
+    const message = createBaseListBucketsRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.page_token !== undefined && object.page_token !== null) {
+      message.pageToken = object.page_token;
+    }
+    if (object.page_size !== undefined && object.page_size !== null) {
+      message.pageSize = object.page_size;
+    }
+    return message;
   },
   toAmino(message: ListBucketsRequest): ListBucketsRequestAmino {
     const obj: any = {};
@@ -3906,10 +3964,12 @@ export const ListBucketsResponse = {
     return obj;
   },
   fromAmino(object: ListBucketsResponseAmino): ListBucketsResponse {
-    return {
-      buckets: Array.isArray(object?.buckets) ? object.buckets.map((e: any) => LogBucket.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
+    const message = createBaseListBucketsResponse();
+    message.buckets = object.buckets?.map(e => LogBucket.fromAmino(e)) || [];
+    if (object.next_page_token !== undefined && object.next_page_token !== null) {
+      message.nextPageToken = object.next_page_token;
+    }
+    return message;
   },
   toAmino(message: ListBucketsResponse): ListBucketsResponseAmino {
     const obj: any = {};
@@ -4019,11 +4079,17 @@ export const CreateBucketRequest = {
     return obj;
   },
   fromAmino(object: CreateBucketRequestAmino): CreateBucketRequest {
-    return {
-      parent: object.parent,
-      bucketId: object.bucket_id,
-      bucket: object?.bucket ? LogBucket.fromAmino(object.bucket) : undefined
-    };
+    const message = createBaseCreateBucketRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.bucket_id !== undefined && object.bucket_id !== null) {
+      message.bucketId = object.bucket_id;
+    }
+    if (object.bucket !== undefined && object.bucket !== null) {
+      message.bucket = LogBucket.fromAmino(object.bucket);
+    }
+    return message;
   },
   toAmino(message: CreateBucketRequest): CreateBucketRequestAmino {
     const obj: any = {};
@@ -4132,11 +4198,17 @@ export const UpdateBucketRequest = {
     return obj;
   },
   fromAmino(object: UpdateBucketRequestAmino): UpdateBucketRequest {
-    return {
-      name: object.name,
-      bucket: object?.bucket ? LogBucket.fromAmino(object.bucket) : undefined,
-      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
-    };
+    const message = createBaseUpdateBucketRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.bucket !== undefined && object.bucket !== null) {
+      message.bucket = LogBucket.fromAmino(object.bucket);
+    }
+    if (object.update_mask !== undefined && object.update_mask !== null) {
+      message.updateMask = FieldMask.fromAmino(object.update_mask);
+    }
+    return message;
   },
   toAmino(message: UpdateBucketRequest): UpdateBucketRequestAmino {
     const obj: any = {};
@@ -4217,9 +4289,11 @@ export const GetBucketRequest = {
     return obj;
   },
   fromAmino(object: GetBucketRequestAmino): GetBucketRequest {
-    return {
-      name: object.name
-    };
+    const message = createBaseGetBucketRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: GetBucketRequest): GetBucketRequestAmino {
     const obj: any = {};
@@ -4298,9 +4372,11 @@ export const DeleteBucketRequest = {
     return obj;
   },
   fromAmino(object: DeleteBucketRequestAmino): DeleteBucketRequest {
-    return {
-      name: object.name
-    };
+    const message = createBaseDeleteBucketRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: DeleteBucketRequest): DeleteBucketRequestAmino {
     const obj: any = {};
@@ -4379,9 +4455,11 @@ export const UndeleteBucketRequest = {
     return obj;
   },
   fromAmino(object: UndeleteBucketRequestAmino): UndeleteBucketRequest {
-    return {
-      name: object.name
-    };
+    const message = createBaseUndeleteBucketRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: UndeleteBucketRequest): UndeleteBucketRequestAmino {
     const obj: any = {};
@@ -4484,11 +4562,17 @@ export const ListViewsRequest = {
     return obj;
   },
   fromAmino(object: ListViewsRequestAmino): ListViewsRequest {
-    return {
-      parent: object.parent,
-      pageToken: object.page_token,
-      pageSize: object.page_size
-    };
+    const message = createBaseListViewsRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.page_token !== undefined && object.page_token !== null) {
+      message.pageToken = object.page_token;
+    }
+    if (object.page_size !== undefined && object.page_size !== null) {
+      message.pageSize = object.page_size;
+    }
+    return message;
   },
   toAmino(message: ListViewsRequest): ListViewsRequestAmino {
     const obj: any = {};
@@ -4589,10 +4673,12 @@ export const ListViewsResponse = {
     return obj;
   },
   fromAmino(object: ListViewsResponseAmino): ListViewsResponse {
-    return {
-      views: Array.isArray(object?.views) ? object.views.map((e: any) => LogView.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
+    const message = createBaseListViewsResponse();
+    message.views = object.views?.map(e => LogView.fromAmino(e)) || [];
+    if (object.next_page_token !== undefined && object.next_page_token !== null) {
+      message.nextPageToken = object.next_page_token;
+    }
+    return message;
   },
   toAmino(message: ListViewsResponse): ListViewsResponseAmino {
     const obj: any = {};
@@ -4702,11 +4788,17 @@ export const CreateViewRequest = {
     return obj;
   },
   fromAmino(object: CreateViewRequestAmino): CreateViewRequest {
-    return {
-      parent: object.parent,
-      viewId: object.view_id,
-      view: object?.view ? LogView.fromAmino(object.view) : undefined
-    };
+    const message = createBaseCreateViewRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.view_id !== undefined && object.view_id !== null) {
+      message.viewId = object.view_id;
+    }
+    if (object.view !== undefined && object.view !== null) {
+      message.view = LogView.fromAmino(object.view);
+    }
+    return message;
   },
   toAmino(message: CreateViewRequest): CreateViewRequestAmino {
     const obj: any = {};
@@ -4815,11 +4907,17 @@ export const UpdateViewRequest = {
     return obj;
   },
   fromAmino(object: UpdateViewRequestAmino): UpdateViewRequest {
-    return {
-      name: object.name,
-      view: object?.view ? LogView.fromAmino(object.view) : undefined,
-      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
-    };
+    const message = createBaseUpdateViewRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.view !== undefined && object.view !== null) {
+      message.view = LogView.fromAmino(object.view);
+    }
+    if (object.update_mask !== undefined && object.update_mask !== null) {
+      message.updateMask = FieldMask.fromAmino(object.update_mask);
+    }
+    return message;
   },
   toAmino(message: UpdateViewRequest): UpdateViewRequestAmino {
     const obj: any = {};
@@ -4900,9 +4998,11 @@ export const GetViewRequest = {
     return obj;
   },
   fromAmino(object: GetViewRequestAmino): GetViewRequest {
-    return {
-      name: object.name
-    };
+    const message = createBaseGetViewRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: GetViewRequest): GetViewRequestAmino {
     const obj: any = {};
@@ -4981,9 +5081,11 @@ export const DeleteViewRequest = {
     return obj;
   },
   fromAmino(object: DeleteViewRequestAmino): DeleteViewRequest {
-    return {
-      name: object.name
-    };
+    const message = createBaseDeleteViewRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: DeleteViewRequest): DeleteViewRequestAmino {
     const obj: any = {};
@@ -5086,11 +5188,17 @@ export const ListSinksRequest = {
     return obj;
   },
   fromAmino(object: ListSinksRequestAmino): ListSinksRequest {
-    return {
-      parent: object.parent,
-      pageToken: object.page_token,
-      pageSize: object.page_size
-    };
+    const message = createBaseListSinksRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.page_token !== undefined && object.page_token !== null) {
+      message.pageToken = object.page_token;
+    }
+    if (object.page_size !== undefined && object.page_size !== null) {
+      message.pageSize = object.page_size;
+    }
+    return message;
   },
   toAmino(message: ListSinksRequest): ListSinksRequestAmino {
     const obj: any = {};
@@ -5191,10 +5299,12 @@ export const ListSinksResponse = {
     return obj;
   },
   fromAmino(object: ListSinksResponseAmino): ListSinksResponse {
-    return {
-      sinks: Array.isArray(object?.sinks) ? object.sinks.map((e: any) => LogSink.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
+    const message = createBaseListSinksResponse();
+    message.sinks = object.sinks?.map(e => LogSink.fromAmino(e)) || [];
+    if (object.next_page_token !== undefined && object.next_page_token !== null) {
+      message.nextPageToken = object.next_page_token;
+    }
+    return message;
   },
   toAmino(message: ListSinksResponse): ListSinksResponseAmino {
     const obj: any = {};
@@ -5278,9 +5388,11 @@ export const GetSinkRequest = {
     return obj;
   },
   fromAmino(object: GetSinkRequestAmino): GetSinkRequest {
-    return {
-      sinkName: object.sink_name
-    };
+    const message = createBaseGetSinkRequest();
+    if (object.sink_name !== undefined && object.sink_name !== null) {
+      message.sinkName = object.sink_name;
+    }
+    return message;
   },
   toAmino(message: GetSinkRequest): GetSinkRequestAmino {
     const obj: any = {};
@@ -5385,11 +5497,17 @@ export const CreateSinkRequest = {
     return obj;
   },
   fromAmino(object: CreateSinkRequestAmino): CreateSinkRequest {
-    return {
-      parent: object.parent,
-      sink: object?.sink ? LogSink.fromAmino(object.sink) : undefined,
-      uniqueWriterIdentity: object.unique_writer_identity
-    };
+    const message = createBaseCreateSinkRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.sink !== undefined && object.sink !== null) {
+      message.sink = LogSink.fromAmino(object.sink);
+    }
+    if (object.unique_writer_identity !== undefined && object.unique_writer_identity !== null) {
+      message.uniqueWriterIdentity = object.unique_writer_identity;
+    }
+    return message;
   },
   toAmino(message: CreateSinkRequest): CreateSinkRequestAmino {
     const obj: any = {};
@@ -5510,12 +5628,20 @@ export const UpdateSinkRequest = {
     return obj;
   },
   fromAmino(object: UpdateSinkRequestAmino): UpdateSinkRequest {
-    return {
-      sinkName: object.sink_name,
-      sink: object?.sink ? LogSink.fromAmino(object.sink) : undefined,
-      uniqueWriterIdentity: object.unique_writer_identity,
-      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
-    };
+    const message = createBaseUpdateSinkRequest();
+    if (object.sink_name !== undefined && object.sink_name !== null) {
+      message.sinkName = object.sink_name;
+    }
+    if (object.sink !== undefined && object.sink !== null) {
+      message.sink = LogSink.fromAmino(object.sink);
+    }
+    if (object.unique_writer_identity !== undefined && object.unique_writer_identity !== null) {
+      message.uniqueWriterIdentity = object.unique_writer_identity;
+    }
+    if (object.update_mask !== undefined && object.update_mask !== null) {
+      message.updateMask = FieldMask.fromAmino(object.update_mask);
+    }
+    return message;
   },
   toAmino(message: UpdateSinkRequest): UpdateSinkRequestAmino {
     const obj: any = {};
@@ -5597,9 +5723,11 @@ export const DeleteSinkRequest = {
     return obj;
   },
   fromAmino(object: DeleteSinkRequestAmino): DeleteSinkRequest {
-    return {
-      sinkName: object.sink_name
-    };
+    const message = createBaseDeleteSinkRequest();
+    if (object.sink_name !== undefined && object.sink_name !== null) {
+      message.sinkName = object.sink_name;
+    }
+    return message;
   },
   toAmino(message: DeleteSinkRequest): DeleteSinkRequestAmino {
     const obj: any = {};
@@ -5738,14 +5866,26 @@ export const LogExclusion = {
     return obj;
   },
   fromAmino(object: LogExclusionAmino): LogExclusion {
-    return {
-      name: object.name,
-      description: object.description,
-      filter: object.filter,
-      disabled: object.disabled,
-      createTime: object?.create_time ? fromTimestamp(Timestamp.fromAmino(object.create_time)) : undefined,
-      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined
-    };
+    const message = createBaseLogExclusion();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.filter !== undefined && object.filter !== null) {
+      message.filter = object.filter;
+    }
+    if (object.disabled !== undefined && object.disabled !== null) {
+      message.disabled = object.disabled;
+    }
+    if (object.create_time !== undefined && object.create_time !== null) {
+      message.createTime = fromTimestamp(Timestamp.fromAmino(object.create_time));
+    }
+    if (object.update_time !== undefined && object.update_time !== null) {
+      message.updateTime = fromTimestamp(Timestamp.fromAmino(object.update_time));
+    }
+    return message;
   },
   toAmino(message: LogExclusion): LogExclusionAmino {
     const obj: any = {};
@@ -5853,11 +5993,17 @@ export const ListExclusionsRequest = {
     return obj;
   },
   fromAmino(object: ListExclusionsRequestAmino): ListExclusionsRequest {
-    return {
-      parent: object.parent,
-      pageToken: object.page_token,
-      pageSize: object.page_size
-    };
+    const message = createBaseListExclusionsRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.page_token !== undefined && object.page_token !== null) {
+      message.pageToken = object.page_token;
+    }
+    if (object.page_size !== undefined && object.page_size !== null) {
+      message.pageSize = object.page_size;
+    }
+    return message;
   },
   toAmino(message: ListExclusionsRequest): ListExclusionsRequestAmino {
     const obj: any = {};
@@ -5958,10 +6104,12 @@ export const ListExclusionsResponse = {
     return obj;
   },
   fromAmino(object: ListExclusionsResponseAmino): ListExclusionsResponse {
-    return {
-      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
+    const message = createBaseListExclusionsResponse();
+    message.exclusions = object.exclusions?.map(e => LogExclusion.fromAmino(e)) || [];
+    if (object.next_page_token !== undefined && object.next_page_token !== null) {
+      message.nextPageToken = object.next_page_token;
+    }
+    return message;
   },
   toAmino(message: ListExclusionsResponse): ListExclusionsResponseAmino {
     const obj: any = {};
@@ -6045,9 +6193,11 @@ export const GetExclusionRequest = {
     return obj;
   },
   fromAmino(object: GetExclusionRequestAmino): GetExclusionRequest {
-    return {
-      name: object.name
-    };
+    const message = createBaseGetExclusionRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: GetExclusionRequest): GetExclusionRequestAmino {
     const obj: any = {};
@@ -6140,10 +6290,14 @@ export const CreateExclusionRequest = {
     return obj;
   },
   fromAmino(object: CreateExclusionRequestAmino): CreateExclusionRequest {
-    return {
-      parent: object.parent,
-      exclusion: object?.exclusion ? LogExclusion.fromAmino(object.exclusion) : undefined
-    };
+    const message = createBaseCreateExclusionRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.exclusion !== undefined && object.exclusion !== null) {
+      message.exclusion = LogExclusion.fromAmino(object.exclusion);
+    }
+    return message;
   },
   toAmino(message: CreateExclusionRequest): CreateExclusionRequestAmino {
     const obj: any = {};
@@ -6251,11 +6405,17 @@ export const UpdateExclusionRequest = {
     return obj;
   },
   fromAmino(object: UpdateExclusionRequestAmino): UpdateExclusionRequest {
-    return {
-      name: object.name,
-      exclusion: object?.exclusion ? LogExclusion.fromAmino(object.exclusion) : undefined,
-      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
-    };
+    const message = createBaseUpdateExclusionRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.exclusion !== undefined && object.exclusion !== null) {
+      message.exclusion = LogExclusion.fromAmino(object.exclusion);
+    }
+    if (object.update_mask !== undefined && object.update_mask !== null) {
+      message.updateMask = FieldMask.fromAmino(object.update_mask);
+    }
+    return message;
   },
   toAmino(message: UpdateExclusionRequest): UpdateExclusionRequestAmino {
     const obj: any = {};
@@ -6336,9 +6496,11 @@ export const DeleteExclusionRequest = {
     return obj;
   },
   fromAmino(object: DeleteExclusionRequestAmino): DeleteExclusionRequest {
-    return {
-      name: object.name
-    };
+    const message = createBaseDeleteExclusionRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: DeleteExclusionRequest): DeleteExclusionRequestAmino {
     const obj: any = {};
@@ -6417,9 +6579,11 @@ export const GetCmekSettingsRequest = {
     return obj;
   },
   fromAmino(object: GetCmekSettingsRequestAmino): GetCmekSettingsRequest {
-    return {
-      name: object.name
-    };
+    const message = createBaseGetCmekSettingsRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: GetCmekSettingsRequest): GetCmekSettingsRequestAmino {
     const obj: any = {};
@@ -6526,11 +6690,17 @@ export const UpdateCmekSettingsRequest = {
     return obj;
   },
   fromAmino(object: UpdateCmekSettingsRequestAmino): UpdateCmekSettingsRequest {
-    return {
-      name: object.name,
-      cmekSettings: object?.cmek_settings ? CmekSettings.fromAmino(object.cmek_settings) : undefined,
-      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
-    };
+    const message = createBaseUpdateCmekSettingsRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.cmek_settings !== undefined && object.cmek_settings !== null) {
+      message.cmekSettings = CmekSettings.fromAmino(object.cmek_settings);
+    }
+    if (object.update_mask !== undefined && object.update_mask !== null) {
+      message.updateMask = FieldMask.fromAmino(object.update_mask);
+    }
+    return message;
   },
   toAmino(message: UpdateCmekSettingsRequest): UpdateCmekSettingsRequestAmino {
     const obj: any = {};
@@ -6635,11 +6805,17 @@ export const CmekSettings = {
     return obj;
   },
   fromAmino(object: CmekSettingsAmino): CmekSettings {
-    return {
-      name: object.name,
-      kmsKeyName: object.kms_key_name,
-      serviceAccountId: object.service_account_id
-    };
+    const message = createBaseCmekSettings();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.kms_key_name !== undefined && object.kms_key_name !== null) {
+      message.kmsKeyName = object.kms_key_name;
+    }
+    if (object.service_account_id !== undefined && object.service_account_id !== null) {
+      message.serviceAccountId = object.service_account_id;
+    }
+    return message;
   },
   toAmino(message: CmekSettings): CmekSettingsAmino {
     const obj: any = {};
@@ -6720,9 +6896,11 @@ export const GetSettingsRequest = {
     return obj;
   },
   fromAmino(object: GetSettingsRequestAmino): GetSettingsRequest {
-    return {
-      name: object.name
-    };
+    const message = createBaseGetSettingsRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: GetSettingsRequest): GetSettingsRequestAmino {
     const obj: any = {};
@@ -6829,11 +7007,17 @@ export const UpdateSettingsRequest = {
     return obj;
   },
   fromAmino(object: UpdateSettingsRequestAmino): UpdateSettingsRequest {
-    return {
-      name: object.name,
-      settings: object?.settings ? Settings.fromAmino(object.settings) : undefined,
-      updateMask: object?.update_mask ? FieldMask.fromAmino(object.update_mask) : undefined
-    };
+    const message = createBaseUpdateSettingsRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.settings !== undefined && object.settings !== null) {
+      message.settings = Settings.fromAmino(object.settings);
+    }
+    if (object.update_mask !== undefined && object.update_mask !== null) {
+      message.updateMask = FieldMask.fromAmino(object.update_mask);
+    }
+    return message;
   },
   toAmino(message: UpdateSettingsRequest): UpdateSettingsRequestAmino {
     const obj: any = {};
@@ -6962,13 +7146,23 @@ export const Settings = {
     return obj;
   },
   fromAmino(object: SettingsAmino): Settings {
-    return {
-      name: object.name,
-      kmsKeyName: object.kms_key_name,
-      kmsServiceAccountId: object.kms_service_account_id,
-      storageLocation: object.storage_location,
-      disableDefaultSink: object.disable_default_sink
-    };
+    const message = createBaseSettings();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.kms_key_name !== undefined && object.kms_key_name !== null) {
+      message.kmsKeyName = object.kms_key_name;
+    }
+    if (object.kms_service_account_id !== undefined && object.kms_service_account_id !== null) {
+      message.kmsServiceAccountId = object.kms_service_account_id;
+    }
+    if (object.storage_location !== undefined && object.storage_location !== null) {
+      message.storageLocation = object.storage_location;
+    }
+    if (object.disable_default_sink !== undefined && object.disable_default_sink !== null) {
+      message.disableDefaultSink = object.disable_default_sink;
+    }
+    return message;
   },
   toAmino(message: Settings): SettingsAmino {
     const obj: any = {};
@@ -7075,11 +7269,17 @@ export const CopyLogEntriesRequest = {
     return obj;
   },
   fromAmino(object: CopyLogEntriesRequestAmino): CopyLogEntriesRequest {
-    return {
-      name: object.name,
-      filter: object.filter,
-      destination: object.destination
-    };
+    const message = createBaseCopyLogEntriesRequest();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.filter !== undefined && object.filter !== null) {
+      message.filter = object.filter;
+    }
+    if (object.destination !== undefined && object.destination !== null) {
+      message.destination = object.destination;
+    }
+    return message;
   },
   toAmino(message: CopyLogEntriesRequest): CopyLogEntriesRequestAmino {
     const obj: any = {};
@@ -7234,21 +7434,35 @@ export const CopyLogEntriesMetadata = {
     return obj;
   },
   fromAmino(object: CopyLogEntriesMetadataAmino): CopyLogEntriesMetadata {
-    return {
-      startTime: object?.start_time ? fromTimestamp(Timestamp.fromAmino(object.start_time)) : undefined,
-      endTime: object?.end_time ? fromTimestamp(Timestamp.fromAmino(object.end_time)) : undefined,
-      state: isSet(object.state) ? operationStateFromJSON(object.state) : -1,
-      cancellationRequested: object.cancellation_requested,
-      request: object?.request ? CopyLogEntriesRequest.fromAmino(object.request) : undefined,
-      progress: object.progress,
-      writerIdentity: object.writer_identity
-    };
+    const message = createBaseCopyLogEntriesMetadata();
+    if (object.start_time !== undefined && object.start_time !== null) {
+      message.startTime = fromTimestamp(Timestamp.fromAmino(object.start_time));
+    }
+    if (object.end_time !== undefined && object.end_time !== null) {
+      message.endTime = fromTimestamp(Timestamp.fromAmino(object.end_time));
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = operationStateFromJSON(object.state);
+    }
+    if (object.cancellation_requested !== undefined && object.cancellation_requested !== null) {
+      message.cancellationRequested = object.cancellation_requested;
+    }
+    if (object.request !== undefined && object.request !== null) {
+      message.request = CopyLogEntriesRequest.fromAmino(object.request);
+    }
+    if (object.progress !== undefined && object.progress !== null) {
+      message.progress = object.progress;
+    }
+    if (object.writer_identity !== undefined && object.writer_identity !== null) {
+      message.writerIdentity = object.writer_identity;
+    }
+    return message;
   },
   toAmino(message: CopyLogEntriesMetadata): CopyLogEntriesMetadataAmino {
     const obj: any = {};
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
-    obj.state = message.state;
+    obj.state = operationStateToJSON(message.state);
     obj.cancellation_requested = message.cancellationRequested;
     obj.request = message.request ? CopyLogEntriesRequest.toAmino(message.request) : undefined;
     obj.progress = message.progress;
@@ -7329,9 +7543,11 @@ export const CopyLogEntriesResponse = {
     return obj;
   },
   fromAmino(object: CopyLogEntriesResponseAmino): CopyLogEntriesResponse {
-    return {
-      logEntriesCopiedCount: BigInt(object.log_entries_copied_count)
-    };
+    const message = createBaseCopyLogEntriesResponse();
+    if (object.log_entries_copied_count !== undefined && object.log_entries_copied_count !== null) {
+      message.logEntriesCopiedCount = BigInt(object.log_entries_copied_count);
+    }
+    return message;
   },
   toAmino(message: CopyLogEntriesResponse): CopyLogEntriesResponseAmino {
     const obj: any = {};

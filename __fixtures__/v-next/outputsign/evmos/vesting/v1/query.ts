@@ -14,7 +14,7 @@ export interface QueryBalancesRequestProtoMsg {
 /** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
 export interface QueryBalancesRequestAmino {
   /** address of the clawback vesting account */
-  address: string;
+  address?: string;
 }
 export interface QueryBalancesRequestAminoMsg {
   type: "/evmos.vesting.v1.QueryBalancesRequest";
@@ -46,11 +46,11 @@ export interface QueryBalancesResponseProtoMsg {
  */
 export interface QueryBalancesResponseAmino {
   /** current amount of locked tokens */
-  locked: CoinAmino[];
+  locked?: CoinAmino[];
   /** current amount of unvested tokens */
-  unvested: CoinAmino[];
+  unvested?: CoinAmino[];
   /** current amount of vested tokens */
-  vested: CoinAmino[];
+  vested?: CoinAmino[];
 }
 export interface QueryBalancesResponseAminoMsg {
   type: "/evmos.vesting.v1.QueryBalancesResponse";
@@ -101,9 +101,11 @@ export const QueryBalancesRequest = {
     return message;
   },
   fromAmino(object: QueryBalancesRequestAmino): QueryBalancesRequest {
-    return {
-      address: object.address
-    };
+    const message = createBaseQueryBalancesRequest();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    return message;
   },
   toAmino(message: QueryBalancesRequest): QueryBalancesRequestAmino {
     const obj: any = {};
@@ -178,11 +180,11 @@ export const QueryBalancesResponse = {
     return message;
   },
   fromAmino(object: QueryBalancesResponseAmino): QueryBalancesResponse {
-    return {
-      locked: Array.isArray(object?.locked) ? object.locked.map((e: any) => Coin.fromAmino(e)) : [],
-      unvested: Array.isArray(object?.unvested) ? object.unvested.map((e: any) => Coin.fromAmino(e)) : [],
-      vested: Array.isArray(object?.vested) ? object.vested.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseQueryBalancesResponse();
+    message.locked = object.locked?.map(e => Coin.fromAmino(e)) || [];
+    message.unvested = object.unvested?.map(e => Coin.fromAmino(e)) || [];
+    message.vested = object.vested?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryBalancesResponse): QueryBalancesResponseAmino {
     const obj: any = {};

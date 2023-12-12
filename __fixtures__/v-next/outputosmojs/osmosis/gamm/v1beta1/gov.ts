@@ -133,10 +133,14 @@ export const ReplaceMigrationRecordsProposal = {
     return obj;
   },
   fromAmino(object: ReplaceMigrationRecordsProposalAmino): ReplaceMigrationRecordsProposal {
-    return {
-      title: object.title,
-      description: object.description
-    };
+    const message = createBaseReplaceMigrationRecordsProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: ReplaceMigrationRecordsProposal): ReplaceMigrationRecordsProposalAmino {
     const obj: any = {};
@@ -240,10 +244,14 @@ export const UpdateMigrationRecordsProposal = {
     return obj;
   },
   fromAmino(object: UpdateMigrationRecordsProposalAmino): UpdateMigrationRecordsProposal {
-    return {
-      title: object.title,
-      description: object.description
-    };
+    const message = createBaseUpdateMigrationRecordsProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: UpdateMigrationRecordsProposal): UpdateMigrationRecordsProposalAmino {
     const obj: any = {};

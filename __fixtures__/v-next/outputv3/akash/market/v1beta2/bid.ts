@@ -73,7 +73,7 @@ export interface MsgCreateBidProtoMsg {
 /** MsgCreateBid defines an SDK message for creating Bid */
 export interface MsgCreateBidAmino {
   order?: OrderIDAmino;
-  provider: string;
+  provider?: string;
   price?: DecCoinAmino;
   deposit?: CoinAmino;
 }
@@ -140,11 +140,11 @@ export interface BidIDProtoMsg {
  * A successful bid becomes a Lease(ID).
  */
 export interface BidIDAmino {
-  owner: string;
-  dseq: string;
-  gseq: number;
-  oseq: number;
-  provider: string;
+  owner?: string;
+  dseq?: string;
+  gseq?: number;
+  oseq?: number;
+  provider?: string;
 }
 /**
  * BidID stores owner and all other seq numbers
@@ -171,9 +171,9 @@ export interface BidProtoMsg {
 /** Bid stores BidID, state of bid and price */
 export interface BidAmino {
   bid_id?: BidIDAmino;
-  state: Bid_State;
+  state?: Bid_State;
   price?: DecCoinAmino;
-  created_at: string;
+  created_at?: string;
 }
 /** Bid stores BidID, state of bid and price */
 export interface BidSDKType {
@@ -197,12 +197,12 @@ export interface BidFiltersProtoMsg {
 }
 /** BidFilters defines flags for bid list filter */
 export interface BidFiltersAmino {
-  owner: string;
-  dseq: string;
-  gseq: number;
-  oseq: number;
-  provider: string;
-  state: string;
+  owner?: string;
+  dseq?: string;
+  gseq?: number;
+  oseq?: number;
+  provider?: string;
+  state?: string;
 }
 /** BidFilters defines flags for bid list filter */
 export interface BidFiltersSDKType {
@@ -311,12 +311,20 @@ export const MsgCreateBid = {
     return obj;
   },
   fromAmino(object: MsgCreateBidAmino): MsgCreateBid {
-    return {
-      order: object?.order ? OrderID.fromAmino(object.order) : undefined,
-      provider: object.provider,
-      price: object?.price ? DecCoin.fromAmino(object.price) : undefined,
-      deposit: object?.deposit ? Coin.fromAmino(object.deposit) : undefined
-    };
+    const message = createBaseMsgCreateBid();
+    if (object.order !== undefined && object.order !== null) {
+      message.order = OrderID.fromAmino(object.order);
+    }
+    if (object.provider !== undefined && object.provider !== null) {
+      message.provider = object.provider;
+    }
+    if (object.price !== undefined && object.price !== null) {
+      message.price = DecCoin.fromAmino(object.price);
+    }
+    if (object.deposit !== undefined && object.deposit !== null) {
+      message.deposit = Coin.fromAmino(object.deposit);
+    }
+    return message;
   },
   toAmino(message: MsgCreateBid, useInterfaces: boolean = true): MsgCreateBidAmino {
     const obj: any = {};
@@ -381,7 +389,8 @@ export const MsgCreateBidResponse = {
     return obj;
   },
   fromAmino(_: MsgCreateBidResponseAmino): MsgCreateBidResponse {
-    return {};
+    const message = createBaseMsgCreateBidResponse();
+    return message;
   },
   toAmino(_: MsgCreateBidResponse, useInterfaces: boolean = true): MsgCreateBidResponseAmino {
     const obj: any = {};
@@ -458,9 +467,11 @@ export const MsgCloseBid = {
     return obj;
   },
   fromAmino(object: MsgCloseBidAmino): MsgCloseBid {
-    return {
-      bidId: object?.bid_id ? BidID.fromAmino(object.bid_id) : undefined
-    };
+    const message = createBaseMsgCloseBid();
+    if (object.bid_id !== undefined && object.bid_id !== null) {
+      message.bidId = BidID.fromAmino(object.bid_id);
+    }
+    return message;
   },
   toAmino(message: MsgCloseBid, useInterfaces: boolean = true): MsgCloseBidAmino {
     const obj: any = {};
@@ -522,7 +533,8 @@ export const MsgCloseBidResponse = {
     return obj;
   },
   fromAmino(_: MsgCloseBidResponseAmino): MsgCloseBidResponse {
-    return {};
+    const message = createBaseMsgCloseBidResponse();
+    return message;
   },
   toAmino(_: MsgCloseBidResponse, useInterfaces: boolean = true): MsgCloseBidResponseAmino {
     const obj: any = {};
@@ -647,13 +659,23 @@ export const BidID = {
     return obj;
   },
   fromAmino(object: BidIDAmino): BidID {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      gseq: object.gseq,
-      oseq: object.oseq,
-      provider: object.provider
-    };
+    const message = createBaseBidID();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq);
+    }
+    if (object.gseq !== undefined && object.gseq !== null) {
+      message.gseq = object.gseq;
+    }
+    if (object.oseq !== undefined && object.oseq !== null) {
+      message.oseq = object.oseq;
+    }
+    if (object.provider !== undefined && object.provider !== null) {
+      message.provider = object.provider;
+    }
+    return message;
   },
   toAmino(message: BidID, useInterfaces: boolean = true): BidIDAmino {
     const obj: any = {};
@@ -775,17 +797,25 @@ export const Bid = {
     return obj;
   },
   fromAmino(object: BidAmino): Bid {
-    return {
-      bidId: object?.bid_id ? BidID.fromAmino(object.bid_id) : undefined,
-      state: isSet(object.state) ? bid_StateFromJSON(object.state) : -1,
-      price: object?.price ? DecCoin.fromAmino(object.price) : undefined,
-      createdAt: BigInt(object.created_at)
-    };
+    const message = createBaseBid();
+    if (object.bid_id !== undefined && object.bid_id !== null) {
+      message.bidId = BidID.fromAmino(object.bid_id);
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = bid_StateFromJSON(object.state);
+    }
+    if (object.price !== undefined && object.price !== null) {
+      message.price = DecCoin.fromAmino(object.price);
+    }
+    if (object.created_at !== undefined && object.created_at !== null) {
+      message.createdAt = BigInt(object.created_at);
+    }
+    return message;
   },
   toAmino(message: Bid, useInterfaces: boolean = true): BidAmino {
     const obj: any = {};
     obj.bid_id = message.bidId ? BidID.toAmino(message.bidId, useInterfaces) : undefined;
-    obj.state = message.state;
+    obj.state = bid_StateToJSON(message.state);
     obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
@@ -921,14 +951,26 @@ export const BidFilters = {
     return obj;
   },
   fromAmino(object: BidFiltersAmino): BidFilters {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      gseq: object.gseq,
-      oseq: object.oseq,
-      provider: object.provider,
-      state: object.state
-    };
+    const message = createBaseBidFilters();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq);
+    }
+    if (object.gseq !== undefined && object.gseq !== null) {
+      message.gseq = object.gseq;
+    }
+    if (object.oseq !== undefined && object.oseq !== null) {
+      message.oseq = object.oseq;
+    }
+    if (object.provider !== undefined && object.provider !== null) {
+      message.provider = object.provider;
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = object.state;
+    }
+    return message;
   },
   toAmino(message: BidFilters, useInterfaces: boolean = true): BidFiltersAmino {
     const obj: any = {};

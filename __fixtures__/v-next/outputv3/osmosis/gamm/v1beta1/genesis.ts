@@ -19,7 +19,7 @@ export interface ParamsProtoMsg {
 }
 /** Params holds parameters for the incentives module */
 export interface ParamsAmino {
-  pool_creation_fee: CoinAmino[];
+  pool_creation_fee?: CoinAmino[];
 }
 /** Params holds parameters for the incentives module */
 export interface ParamsSDKType {
@@ -41,9 +41,9 @@ export type GenesisStateEncoded = Omit<GenesisState, "pools"> & {
 };
 /** GenesisState defines the gamm module's genesis state. */
 export interface GenesisStateAmino {
-  pools: AnyAmino[];
+  pools?: AnyAmino[];
   /** will be renamed to next_pool_id in an upcoming version */
-  next_pool_number: string;
+  next_pool_number?: string;
   params?: ParamsAmino;
 }
 /** GenesisState defines the gamm module's genesis state. */
@@ -117,9 +117,9 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      poolCreationFee: Array.isArray(object?.pool_creation_fee) ? object.pool_creation_fee.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseParams();
+    message.poolCreationFee = object.pool_creation_fee?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
@@ -236,11 +236,15 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => PoolI_FromAmino(e)) : [],
-      nextPoolNumber: BigInt(object.next_pool_number),
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseGenesisState();
+    message.pools = object.pools?.map(e => PoolI_FromAmino(e)) || [];
+    if (object.next_pool_number !== undefined && object.next_pool_number !== null) {
+      message.nextPoolNumber = BigInt(object.next_pool_number);
+    }
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};

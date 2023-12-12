@@ -2,7 +2,7 @@ import { MetricDescriptor, MetricDescriptorAmino, MetricDescriptorSDKType } from
 import { Distribution_BucketOptions } from "../../api/distribution";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, toTimestamp, fromTimestamp, isObject, isSet } from "../../../helpers";
+import { DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 /** Logging API version. */
 export enum LogMetric_ApiVersion {
@@ -48,8 +48,8 @@ export interface LogMetric_LabelExtractorsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface LogMetric_LabelExtractorsEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface LogMetric_LabelExtractorsEntryAminoMsg {
   type: string;
@@ -224,12 +224,12 @@ export interface LogMetricAmino {
    * `"projects/my-project/metrics/nginx%2Frequests"`, this field's value is
    * `"nginx/requests"`.
    */
-  name: string;
+  name?: string;
   /**
    * Optional. A description of this metric, which is used in documentation.
    * The maximum length of the description is 8000 characters.
    */
-  description: string;
+  description?: string;
   /**
    * Required. An [advanced logs
    * filter](https://cloud.google.com/logging/docs/view/advanced_filters) which
@@ -239,12 +239,12 @@ export interface LogMetricAmino {
    * 
    * The maximum length of the filter is 20000 characters.
    */
-  filter: string;
+  filter?: string;
   /**
    * Optional. If set to True, then this metric is disabled and it does not
    * generate any points.
    */
-  disabled: boolean;
+  disabled?: boolean;
   /**
    * Optional. The metric descriptor associated with the logs-based metric.
    * If unspecified, it uses a default metric descriptor with a DELTA metric
@@ -290,7 +290,7 @@ export interface LogMetricAmino {
    * 
    * Example: `REGEXP_EXTRACT(jsonPayload.request, ".*quantity=(\d+).*")`
    */
-  value_extractor: string;
+  value_extractor?: string;
   /**
    * Optional. A map from a label key string to an extractor expression which is
    * used to extract data from a log entry field and assign as the label value.
@@ -307,7 +307,7 @@ export interface LogMetricAmino {
    * Note that there are upper bounds on the maximum number of labels and the
    * number of active time series that are allowed in a project.
    */
-  label_extractors: {
+  label_extractors?: {
     [key: string]: string;
   };
   /**
@@ -333,7 +333,7 @@ export interface LogMetricAmino {
    * The v2 format is used by default and cannot be changed.
    */
   /** @deprecated */
-  version: LogMetric_ApiVersion;
+  version?: LogMetric_ApiVersion;
 }
 export interface LogMetricAminoMsg {
   type: "/google.logging.v2.LogMetric";
@@ -397,20 +397,20 @@ export interface ListLogMetricsRequestAmino {
    * 
    *     "projects/[PROJECT_ID]"
    */
-  parent: string;
+  parent?: string;
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method. `pageToken` must be the value of
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-  page_token: string;
+  page_token?: string;
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  page_size: number;
+  page_size?: number;
 }
 export interface ListLogMetricsRequestAminoMsg {
   type: "/google.logging.v2.ListLogMetricsRequest";
@@ -440,13 +440,13 @@ export interface ListLogMetricsResponseProtoMsg {
 /** Result returned from ListLogMetrics. */
 export interface ListLogMetricsResponseAmino {
   /** A list of logs-based metrics. */
-  metrics: LogMetricAmino[];
+  metrics?: LogMetricAmino[];
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call this
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-  next_page_token: string;
+  next_page_token?: string;
 }
 export interface ListLogMetricsResponseAminoMsg {
   type: "/google.logging.v2.ListLogMetricsResponse";
@@ -477,7 +477,7 @@ export interface GetLogMetricRequestAmino {
    * 
    *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
-  metric_name: string;
+  metric_name?: string;
 }
 export interface GetLogMetricRequestAminoMsg {
   type: "/google.logging.v2.GetLogMetricRequest";
@@ -516,7 +516,7 @@ export interface CreateLogMetricRequestAmino {
    * 
    * The new metric must be provided in the request.
    */
-  parent: string;
+  parent?: string;
   /**
    * Required. The new logs-based metric, which must not have an identifier that
    * already exists.
@@ -562,7 +562,7 @@ export interface UpdateLogMetricRequestAmino {
    * `name` field must be the same as `[METRIC_ID]` If the metric
    * does not exist in `[PROJECT_ID]`, then a new metric is created.
    */
-  metric_name: string;
+  metric_name?: string;
   /** Required. The updated metric. */
   metric?: LogMetricAmino;
 }
@@ -595,7 +595,7 @@ export interface DeleteLogMetricRequestAmino {
    * 
    *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
-  metric_name: string;
+  metric_name?: string;
 }
 export interface DeleteLogMetricRequestAminoMsg {
   type: "/google.logging.v2.DeleteLogMetricRequest";
@@ -648,10 +648,14 @@ export const LogMetric_LabelExtractorsEntry = {
     return message;
   },
   fromAmino(object: LogMetric_LabelExtractorsEntryAmino): LogMetric_LabelExtractorsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseLogMetric_LabelExtractorsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: LogMetric_LabelExtractorsEntry): LogMetric_LabelExtractorsEntryAmino {
     const obj: any = {};
@@ -802,24 +806,46 @@ export const LogMetric = {
     return message;
   },
   fromAmino(object: LogMetricAmino): LogMetric {
-    return {
-      name: object.name,
-      description: object.description,
-      filter: object.filter,
-      disabled: object.disabled,
-      metricDescriptor: object?.metric_descriptor ? MetricDescriptor.fromAmino(object.metric_descriptor) : undefined,
-      valueExtractor: object.value_extractor,
-      labelExtractors: isObject(object.label_extractors) ? Object.entries(object.label_extractors).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseLogMetric();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.filter !== undefined && object.filter !== null) {
+      message.filter = object.filter;
+    }
+    if (object.disabled !== undefined && object.disabled !== null) {
+      message.disabled = object.disabled;
+    }
+    if (object.metric_descriptor !== undefined && object.metric_descriptor !== null) {
+      message.metricDescriptor = MetricDescriptor.fromAmino(object.metric_descriptor);
+    }
+    if (object.value_extractor !== undefined && object.value_extractor !== null) {
+      message.valueExtractor = object.value_extractor;
+    }
+    message.labelExtractors = Object.entries(object.label_extractors ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      bucketOptions: object?.bucket_options ? Distribution_BucketOptions.fromAmino(object.bucket_options) : undefined,
-      createTime: object?.create_time ? fromTimestamp(Timestamp.fromAmino(object.create_time)) : undefined,
-      updateTime: object?.update_time ? fromTimestamp(Timestamp.fromAmino(object.update_time)) : undefined,
-      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
-    };
+      }
+      return acc;
+    }, {});
+    if (object.bucket_options !== undefined && object.bucket_options !== null) {
+      message.bucketOptions = Distribution_BucketOptions.fromAmino(object.bucket_options);
+    }
+    if (object.create_time !== undefined && object.create_time !== null) {
+      message.createTime = fromTimestamp(Timestamp.fromAmino(object.create_time));
+    }
+    if (object.update_time !== undefined && object.update_time !== null) {
+      message.updateTime = fromTimestamp(Timestamp.fromAmino(object.update_time));
+    }
+    if (object.version !== undefined && object.version !== null) {
+      message.version = logMetric_ApiVersionFromJSON(object.version);
+    }
+    return message;
   },
   toAmino(message: LogMetric): LogMetricAmino {
     const obj: any = {};
@@ -838,7 +864,7 @@ export const LogMetric = {
     obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toAmino(message.bucketOptions) : undefined;
     obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
     obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
-    obj.version = message.version;
+    obj.version = logMetric_ApiVersionToJSON(message.version);
     return obj;
   },
   fromAminoMsg(object: LogMetricAminoMsg): LogMetric {
@@ -909,11 +935,17 @@ export const ListLogMetricsRequest = {
     return message;
   },
   fromAmino(object: ListLogMetricsRequestAmino): ListLogMetricsRequest {
-    return {
-      parent: object.parent,
-      pageToken: object.page_token,
-      pageSize: object.page_size
-    };
+    const message = createBaseListLogMetricsRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.page_token !== undefined && object.page_token !== null) {
+      message.pageToken = object.page_token;
+    }
+    if (object.page_size !== undefined && object.page_size !== null) {
+      message.pageSize = object.page_size;
+    }
+    return message;
   },
   toAmino(message: ListLogMetricsRequest): ListLogMetricsRequestAmino {
     const obj: any = {};
@@ -982,10 +1014,12 @@ export const ListLogMetricsResponse = {
     return message;
   },
   fromAmino(object: ListLogMetricsResponseAmino): ListLogMetricsResponse {
-    return {
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => LogMetric.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
+    const message = createBaseListLogMetricsResponse();
+    message.metrics = object.metrics?.map(e => LogMetric.fromAmino(e)) || [];
+    if (object.next_page_token !== undefined && object.next_page_token !== null) {
+      message.nextPageToken = object.next_page_token;
+    }
+    return message;
   },
   toAmino(message: ListLogMetricsResponse): ListLogMetricsResponseAmino {
     const obj: any = {};
@@ -1049,9 +1083,11 @@ export const GetLogMetricRequest = {
     return message;
   },
   fromAmino(object: GetLogMetricRequestAmino): GetLogMetricRequest {
-    return {
-      metricName: object.metric_name
-    };
+    const message = createBaseGetLogMetricRequest();
+    if (object.metric_name !== undefined && object.metric_name !== null) {
+      message.metricName = object.metric_name;
+    }
+    return message;
   },
   toAmino(message: GetLogMetricRequest): GetLogMetricRequestAmino {
     const obj: any = {};
@@ -1120,10 +1156,14 @@ export const CreateLogMetricRequest = {
     return message;
   },
   fromAmino(object: CreateLogMetricRequestAmino): CreateLogMetricRequest {
-    return {
-      parent: object.parent,
-      metric: object?.metric ? LogMetric.fromAmino(object.metric) : undefined
-    };
+    const message = createBaseCreateLogMetricRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.metric !== undefined && object.metric !== null) {
+      message.metric = LogMetric.fromAmino(object.metric);
+    }
+    return message;
   },
   toAmino(message: CreateLogMetricRequest): CreateLogMetricRequestAmino {
     const obj: any = {};
@@ -1193,10 +1233,14 @@ export const UpdateLogMetricRequest = {
     return message;
   },
   fromAmino(object: UpdateLogMetricRequestAmino): UpdateLogMetricRequest {
-    return {
-      metricName: object.metric_name,
-      metric: object?.metric ? LogMetric.fromAmino(object.metric) : undefined
-    };
+    const message = createBaseUpdateLogMetricRequest();
+    if (object.metric_name !== undefined && object.metric_name !== null) {
+      message.metricName = object.metric_name;
+    }
+    if (object.metric !== undefined && object.metric !== null) {
+      message.metric = LogMetric.fromAmino(object.metric);
+    }
+    return message;
   },
   toAmino(message: UpdateLogMetricRequest): UpdateLogMetricRequestAmino {
     const obj: any = {};
@@ -1256,9 +1300,11 @@ export const DeleteLogMetricRequest = {
     return message;
   },
   fromAmino(object: DeleteLogMetricRequestAmino): DeleteLogMetricRequest {
-    return {
-      metricName: object.metric_name
-    };
+    const message = createBaseDeleteLogMetricRequest();
+    if (object.metric_name !== undefined && object.metric_name !== null) {
+      message.metricName = object.metric_name;
+    }
+    return message;
   },
   toAmino(message: DeleteLogMetricRequest): DeleteLogMetricRequestAmino {
     const obj: any = {};

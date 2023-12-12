@@ -1,217 +1,292 @@
-import * as t from '@babel/types';
-import { ProtoType } from '@cosmology/types';
-import { BILLION, TypeLong, identifier } from '../../../utils';
-import { ProtoParseContext } from '../../context';
-import { getFieldNames } from '../../types';
-import { getInterfaceToAminoName } from '../implements';
-import { ToAminoJSONMethod } from './index';
+  import * as t from '@babel/types';
+  import { ProtoType } from '@cosmology/types';
+  import { BILLION, TypeLong, identifier } from '../../../utils';
+  import { ProtoParseContext } from '../../context';
+  import { getDefaultTSTypeFromProtoType, getFieldNames } from '../../types';
+  import { getInterfaceToAminoName } from '../implements';
+  import { ToAminoJSONMethod } from './index';
 
-const notUndefinedSetValue = (sdkName: string, msgName: string, expr: t.Expression) => {
+  const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
+    const { propName, origName } = getFieldNames(args.field);
+
+    const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
+
+    valExpr = t.memberExpression(t.identifier("message"), t.identifier(propName));
+
+    if (dontOmitempty) {
+      valExpr = t.logicalExpression(
+        "??",
+        valExpr,
+        getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
+      );
+    }
+
     return t.expressionStatement(
-        t.logicalExpression(
-            '&&',
-            t.binaryExpression(
-                '!==',
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(msgName)
-                ),
-                t.identifier('undefined')
-            ),
-            t.assignmentExpression(
-                '=',
-                t.memberExpression(
-                    t.identifier('obj'),
-                    t.identifier(sdkName)
-                ),
-                expr
-            )
-        )
+      t.assignmentExpression(
+        "=",
+        t.memberExpression(t.identifier("obj"), t.identifier(origName)),
+        valExpr
+      )
     );
-}
+  };
 
-export const toAminoJSON = {
+  export const toAminoJSON = {
 
-    scalar(args: ToAminoJSONMethod) {
-        const { propName, origName } = getFieldNames(args.field);
+      scalar(args: ToAminoJSONMethod) {
+        return setValue(args)
+      },
 
-        return t.expressionStatement(
-            t.assignmentExpression(
-                '=',
-                t.memberExpression(
-                    t.identifier('obj'),
-                    t.identifier(origName)
-                ),
-                t.memberExpression(
-                    t.identifier('message'),
-                    t.identifier(propName)
-                )
-            )
-        );
-    },
+      string(args: ToAminoJSONMethod) {
+          return toAminoJSON.scalar(args);
+      },
+      double(args: ToAminoJSONMethod) {
+          return toAminoJSON.scalar(args);
+      },
+      float(args: ToAminoJSONMethod) {
+          return toAminoJSON.scalar(args);
+      },
+      bool(args: ToAminoJSONMethod) {
+          return toAminoJSON.scalar(args);
+      },
 
-    string(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
-    },
-    double(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
-    },
-    float(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
-    },
-    bool(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
-    },
+      number(args: ToAminoJSONMethod) {
+          return toAminoJSON.scalar(args);
+      },
 
-    number(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
-    },
+      int32(args: ToAminoJSONMethod) {
+          return toAminoJSON.scalar(args);
+      },
 
-    int32(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
-    },
+      uint32(args: ToAminoJSONMethod) {
+          return toAminoJSON.scalar(args);
+      },
 
-    uint32(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
-    },
+      sint32(args: ToAminoJSONMethod) {
+          return toAminoJSON.scalar(args);
+      },
+      fixed32(args: ToAminoJSONMethod) {
+          return toAminoJSON.scalar(args);
+      },
+      sfixed32(args: ToAminoJSONMethod) {
+          return toAminoJSON.scalar(args);
+      },
 
-    sint32(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
-    },
-    fixed32(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
-    },
-    sfixed32(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
-    },
+      long(args: ToAminoJSONMethod) {
+          const { propName, origName } = getFieldNames(args.field);
 
-    long(args: ToAminoJSONMethod) {
-        const { propName, origName } = getFieldNames(args.field);
+          const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
 
-        return t.expressionStatement(
-            t.assignmentExpression(
-                '=',
-                t.memberExpression(
-                    t.identifier('obj'),
-                    t.identifier(origName)
-                ),
-                t.conditionalExpression(
-                    t.memberExpression(
-                        t.identifier('message'),
-                        t.identifier(propName)
-                    ),
-                    t.callExpression(
-                        t.memberExpression(
-                            t.memberExpression(
-                                t.identifier('message'),
-                                t.identifier(propName)
-                            ),
-                            t.identifier('toString')
-                        ),
-                        []
-                    ),
-                    t.identifier('undefined')
-                )
-            )
-        );
-
-    },
-    int64(args: ToAminoJSONMethod) {
-        return toAminoJSON.long(args);
-    },
-    uint64(args: ToAminoJSONMethod) {
-        return toAminoJSON.long(args);
-    },
-    sint64(args: ToAminoJSONMethod) {
-        return toAminoJSON.long(args);
-    },
-    fixed64(args: ToAminoJSONMethod) {
-        return toAminoJSON.long(args);
-    },
-    sfixed64(args: ToAminoJSONMethod) {
-        return toAminoJSON.long(args);
-    },
-
-    protoType(args: ToAminoJSONMethod) {
-        const { propName, origName } = getFieldNames(args.field);
-        const name = args.context.getTypeName(args.field);
-
-        let defaultValue: t.ObjectExpression | t.Identifier = t.identifier('undefined');
-        if (args.field.type === 'ibc.core.client.v1.Height') {
-            defaultValue = t.objectExpression([])
-        }
-
-        return t.expressionStatement(
-            t.assignmentExpression(
-                '=',
-                t.memberExpression(
-                    t.identifier('obj'),
-                    t.identifier(origName)
-                ),
-                t.conditionalExpression(
-                    t.memberExpression(
-                        t.identifier('message'),
-                        t.identifier(propName)
-                    ),
-                    t.callExpression(
-                        t.memberExpression(
-                            t.identifier(name),
-                            t.identifier('toAmino')
-                        ),
-                        [
-                            t.memberExpression(
-                                t.identifier('message'),
-                                t.identifier(propName)
-                            ),
-                            ...(args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? [
-                                t.identifier('useInterfaces')
-                            ] : []),
-                        ]
-                    ),
-                    defaultValue
-                )
-            )
-        );
-    },
-
-    anyType(args: ToAminoJSONMethod) {
-        const { propName, origName } = getFieldNames(args.field);
-        const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
-        const interfaceFnName = getInterfaceToAminoName(interfaceName)
-
-        let aminoFuncExpr: t.Expression = t.callExpression(
-          t.identifier(interfaceFnName),
-          [
-              t.tsAsExpression(
+          return t.expressionStatement(
+              t.assignmentExpression(
+                  '=',
                   t.memberExpression(
-                      t.identifier('message'),
-                      t.identifier(propName)
+                      t.identifier('obj'),
+                      t.identifier(origName)
                   ),
-                  t.tsTypeReference(
-                      t.identifier('Any')
+                  t.conditionalExpression(
+                      t.memberExpression(
+                          t.identifier('message'),
+                          t.identifier(propName)
+                      ),
+                      t.callExpression(
+                          t.memberExpression(
+                              t.memberExpression(
+                                  t.identifier('message'),
+                                  t.identifier(propName)
+                              ),
+                              t.identifier('toString')
+                          ),
+                          []
+                      ),
+                      dontOmitempty ? t.stringLiteral("0") : t.identifier('undefined')
                   )
-              ),
-              ...(args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? [
-                  t.identifier('useInterfaces')
-              ] : []),
-          ]
-        );
+              )
+          );
 
-        const isGlobalRegistry = args.context.options.interfaces?.useGlobalDecoderRegistry;
+      },
+      int64(args: ToAminoJSONMethod) {
+          return toAminoJSON.long(args);
+      },
+      uint64(args: ToAminoJSONMethod) {
+          return toAminoJSON.long(args);
+      },
+      sint64(args: ToAminoJSONMethod) {
+          return toAminoJSON.long(args);
+      },
+      fixed64(args: ToAminoJSONMethod) {
+          return toAminoJSON.long(args);
+      },
+      sfixed64(args: ToAminoJSONMethod) {
+          return toAminoJSON.long(args);
+      },
 
-        if(isGlobalRegistry) {
-          aminoFuncExpr = t.callExpression(
-            t.memberExpression(t.identifier('GlobalDecoderRegistry'), t.identifier('toAmino')),
+      protoType(args: ToAminoJSONMethod) {
+          const { propName, origName } = getFieldNames(args.field);
+          const name = args.context.getTypeName(args.field);
+
+          const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
+
+          let defaultValue: t.Expression = dontOmitempty ? getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf) : t.identifier('undefined');
+          if (args.field.type === 'ibc.core.client.v1.Height') {
+              defaultValue = t.objectExpression([])
+          }
+
+          return t.expressionStatement(
+              t.assignmentExpression(
+                  '=',
+                  t.memberExpression(
+                      t.identifier('obj'),
+                      t.identifier(origName)
+                  ),
+                  t.conditionalExpression(
+                      t.memberExpression(
+                          t.identifier('message'),
+                          t.identifier(propName)
+                      ),
+                      t.callExpression(
+                          t.memberExpression(
+                              t.identifier(name),
+                              t.identifier('toAmino')
+                          ),
+                          [
+                              t.memberExpression(
+                                  t.identifier('message'),
+                                  t.identifier(propName)
+                              ),
+                              ...(args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? [
+                                  t.identifier('useInterfaces')
+                              ] : []),
+                          ]
+                      ),
+                      defaultValue
+                  )
+              )
+          );
+      },
+
+      anyType(args: ToAminoJSONMethod) {
+          const { propName, origName } = getFieldNames(args.field);
+          const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
+          const interfaceFnName = getInterfaceToAminoName(interfaceName)
+
+          args.context.getTypeName(args.field);
+
+          const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
+
+          let defaultValue: t.Expression = dontOmitempty ? t.objectExpression([
+            t.objectProperty(t.identifier("type"), t.stringLiteral("")),
+            t.objectProperty(t.identifier("value"), t.objectExpression([])),
+          ]) : t.identifier('undefined');
+
+          let aminoFuncExpr: t.Expression = t.callExpression(
+            t.identifier(interfaceFnName),
+            [
+                t.tsAsExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    ),
+                    t.tsTypeReference(
+                        t.identifier('Any')
+                    )
+                ),
+                ...(args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? [
+                    t.identifier('useInterfaces')
+                ] : []),
+            ]
+          );
+
+          const isGlobalRegistry = args.context.options.interfaces?.useGlobalDecoderRegistry;
+
+          if(isGlobalRegistry) {
+            aminoFuncExpr = t.callExpression(
+              t.memberExpression(t.identifier('GlobalDecoderRegistry'), t.identifier('toAminoMsg')),
+              [
+                t.memberExpression(
+                  t.identifier('message'),
+                  t.identifier(propName)
+                )
+              ]
+            )
+          }
+
+          return t.expressionStatement(
+              t.assignmentExpression(
+                  '=',
+                  t.memberExpression(
+                      t.identifier('obj'),
+                      t.identifier(origName)
+                  ),
+                  t.conditionalExpression(
+                      t.memberExpression(
+                          t.identifier('message'),
+                          t.identifier(propName)
+                      ),
+                      aminoFuncExpr,
+                      defaultValue
+                  )
+              )
+          );
+      },
+
+      type(args: ToAminoJSONMethod) {
+          if (
+              !args.context.options.aminoEncoding.useLegacyInlineEncoding &&
+              args.context.options.interfaces.enabled &&
+              args.field.type === 'google.protobuf.Any' &&
+              args.field.options['(cosmos_proto.accepts_interface)']
+
+          ) {
+              return toAminoJSON.anyType(args);
+          }
+
+          return toAminoJSON.protoType(args);
+      },
+
+      enum(args: ToAminoJSONMethod) {
+        const { propName, origName } = getFieldNames(args.field);
+        const enumFuncName = args.context.getToEnum(args.field);
+        const expr = t.callExpression(
+            t.identifier(enumFuncName),
             [
               t.memberExpression(
                 t.identifier('message'),
                 t.identifier(propName)
               )
             ]
+        );
+
+        return t.expressionStatement(
+          t.assignmentExpression(
+              '=',
+              t.memberExpression(
+                  t.identifier('obj'),
+                  t.identifier(origName)
+              ),
+              expr
           )
-        }
+        );
+      },
 
-        return t.expressionStatement(
+      bytes(args: ToAminoJSONMethod) {
+          args.context.addUtil('base64FromBytes');
+          const { propName, origName } = getFieldNames(args.field);
+
+          const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
+
+          let defaultValue: t.Expression = dontOmitempty ? t.stringLiteral("") : t.identifier('undefined');
+
+          const expr = t.callExpression(
+            t.identifier('base64FromBytes'),
+            [
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(propName)
+                )
+            ]
+          );
+
+          return t.expressionStatement(
             t.assignmentExpression(
                 '=',
                 t.memberExpression(
@@ -223,197 +298,190 @@ export const toAminoJSON = {
                         t.identifier('message'),
                         t.identifier(propName)
                     ),
-                    aminoFuncExpr,
-                    t.identifier('undefined')
+                    expr,
+                    defaultValue
                 )
             )
-        );
-    },
+          );
+      },
 
-    type(args: ToAminoJSONMethod) {
-        if (
-            !args.context.options.aminoEncoding.useLegacyInlineEncoding &&
-            args.context.options.interfaces.enabled &&
-            args.field.type === 'google.protobuf.Any' &&
-            args.field.options['(cosmos_proto.accepts_interface)']
+      duration(args: ToAminoJSONMethod) {
+          return toAminoJSON.type(args);
+      },
 
-        ) {
-            return toAminoJSON.anyType(args);
-        }
+      timestamp(args: ToAminoJSONMethod) {
+          const timestampFormat = args.context.pluginValue(
+              'prototypes.typingsFormat.timestamp'
+          );
+          switch (timestampFormat) {
+              case 'timestamp':
+                  return toAminoJSON.type(args);
+              case 'date':
+              default:
+                  return toAminoJSON.timestampDate(args);
+          }
+      },
 
-        return toAminoJSON.protoType(args);
-    },
+      timestampDate(args: ToAminoJSONMethod) {
+          const { propName, origName } = getFieldNames(args.field);
+          args.context.addUtil('toTimestamp');
 
-    enum(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
-    },
+          const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
 
-    bytes(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
-    },
+          let defaultValue: t.Expression = dontOmitempty ? getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf) : t.identifier('undefined');
 
-    duration(args: ToAminoJSONMethod) {
-        return toAminoJSON.type(args);
-    },
-
-    timestamp(args: ToAminoJSONMethod) {
-        const timestampFormat = args.context.pluginValue(
-            'prototypes.typingsFormat.timestamp'
-        );
-        switch (timestampFormat) {
-            case 'timestamp':
-                return toAminoJSON.type(args);
-            case 'date':
-            default:
-                return toAminoJSON.timestampDate(args);
-        }
-    },
-
-    timestampDate(args: ToAminoJSONMethod) {
-        const { propName, origName } = getFieldNames(args.field);
-        args.context.addUtil('toTimestamp');
-
-        return t.expressionStatement(
-            t.assignmentExpression(
-                '=',
-                t.memberExpression(
-                    t.identifier('obj'),
-                    t.identifier(origName)
-                ),
-                t.conditionalExpression(
-                    t.memberExpression(
-                        t.identifier('message'),
-                        t.identifier(propName)
-                    ),
-                    t.callExpression(
-                        t.memberExpression(
-                            t.identifier('Timestamp'),
-                            t.identifier('toAmino')
-                        ),
-                        [
-                            t.callExpression(
-                                t.identifier('toTimestamp'),
-                                [
-                                    t.memberExpression(
-                                        t.identifier('message'),
-                                        t.identifier(propName)
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                    t.identifier('undefined')
-                )
-            )
-        );
-    },
-
-    pubkey(args: ToAminoJSONMethod) {
-        args.context.addUtil('decodePubkey');
-
-        const { propName, origName } = getFieldNames(args.field);
-
-        return t.expressionStatement(
-            t.assignmentExpression(
-                '=',
-                t.memberExpression(
-                    t.identifier('obj'),
-                    t.identifier(origName)
-                ),
-                t.conditionalExpression(
-                    t.memberExpression(
-                        t.identifier('message'),
-                        t.identifier(propName)
-                    ),
-                    //
-                    t.callExpression(
-                      t.identifier('decodePubkey'),
-                      [
+          return t.expressionStatement(
+              t.assignmentExpression(
+                  '=',
+                  t.memberExpression(
+                      t.identifier('obj'),
+                      t.identifier(origName)
+                  ),
+                  t.conditionalExpression(
+                      t.memberExpression(
+                          t.identifier('message'),
+                          t.identifier(propName)
+                      ),
+                      t.callExpression(
                           t.memberExpression(
-                              t.identifier('message'),
-                              t.identifier(propName)
+                              t.identifier('Timestamp'),
+                              t.identifier('toAmino')
                           ),
-                      ]
-                    ),
-                    //
-                    t.identifier('undefined')
-                )
-            )
-        );
-    },
+                          [
+                              t.callExpression(
+                                  t.identifier('toTimestamp'),
+                                  [
+                                      t.memberExpression(
+                                          t.identifier('message'),
+                                          t.identifier(propName)
+                                      )
+                                  ]
+                              )
+                          ]
+                      ),
+                      defaultValue
+                  )
+              )
+          );
+      },
 
-    rawBytes(args: ToAminoJSONMethod) {
-        args.context.addUtil('fromUtf8');
+      pubkey(args: ToAminoJSONMethod) {
+          args.context.addUtil('decodePubkey');
 
-        const { propName, origName } = getFieldNames(args.field);
+          const { propName, origName } = getFieldNames(args.field);
 
-        return t.expressionStatement(
-            t.assignmentExpression(
-                '=',
-                t.memberExpression(
-                    t.identifier('obj'),
-                    t.identifier(origName)
-                ),
-                t.conditionalExpression(
-                    t.memberExpression(
-                        t.identifier('message'),
-                        t.identifier(propName)
-                    ),
-                    //
-                    t.callExpression(
-                        t.memberExpression(
-                            t.identifier('JSON'),
-                            t.identifier('parse')
-                        ),
-                        [
-                            t.callExpression(
-                                t.identifier('fromUtf8'),
-                                [
-                                    t.memberExpression(
-                                        t.identifier('message'),
-                                        t.identifier(propName)
-                                    ),
-                                ]
-                            )
-                        ]
-                    ),
-                    //
-                    t.identifier('undefined')
-                )
-            )
-        );
-    },
+          const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
 
-    wasmByteCode(args: ToAminoJSONMethod) {
-        args.context.addUtil('toBase64');
+          let defaultValue: t.Expression = dontOmitempty ? getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf) : t.identifier('undefined');
 
-
-        const { propName, origName } = getFieldNames(args.field);
-
-        return t.expressionStatement(
-            t.assignmentExpression(
-                '=',
-                t.memberExpression(
-                    t.identifier('obj'),
-                    t.identifier(origName)
-                ),
-                t.conditionalExpression(
-                    t.memberExpression(
-                        t.identifier('message'),
-                        t.identifier(propName)
-                    ),
-                    //
-                    t.callExpression(
-                        t.identifier('toBase64'),
+          return t.expressionStatement(
+              t.assignmentExpression(
+                  '=',
+                  t.memberExpression(
+                      t.identifier('obj'),
+                      t.identifier(origName)
+                  ),
+                  t.conditionalExpression(
+                      t.memberExpression(
+                          t.identifier('message'),
+                          t.identifier(propName)
+                      ),
+                      //
+                      t.callExpression(
+                        t.identifier('decodePubkey'),
                         [
                             t.memberExpression(
                                 t.identifier('message'),
                                 t.identifier(propName)
                             ),
                         ]
-                    ),
-                    //
-                    t.identifier('undefined')
+                      ),
+                      //
+                      defaultValue
+                  )
+              )
+          );
+      },
+
+      rawBytes(args: ToAminoJSONMethod) {
+          args.context.addUtil('fromUtf8');
+
+          const { propName, origName } = getFieldNames(args.field);
+
+          const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
+
+          let defaultValue: t.Expression = dontOmitempty ? t.objectExpression([]) : t.identifier('undefined');
+
+          return t.expressionStatement(
+              t.assignmentExpression(
+                  '=',
+                  t.memberExpression(
+                      t.identifier('obj'),
+                      t.identifier(origName)
+                  ),
+                  t.conditionalExpression(
+                      t.memberExpression(
+                          t.identifier('message'),
+                          t.identifier(propName)
+                      ),
+                      //
+                      t.callExpression(
+                          t.memberExpression(
+                              t.identifier('JSON'),
+                              t.identifier('parse')
+                          ),
+                          [
+                              t.callExpression(
+                                  t.identifier('fromUtf8'),
+                                  [
+                                      t.memberExpression(
+                                          t.identifier('message'),
+                                          t.identifier(propName)
+                                      ),
+                                  ]
+                              )
+                          ]
+                      ),
+                      //
+                      defaultValue
+                  )
+              )
+          );
+      },
+
+      wasmByteCode(args: ToAminoJSONMethod) {
+          args.context.addUtil('toBase64');
+
+          const { propName, origName } = getFieldNames(args.field);
+
+          const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
+
+          let defaultValue: t.Expression = dontOmitempty ? t.stringLiteral("") : t.identifier('undefined');
+
+          return t.expressionStatement(
+              t.assignmentExpression(
+                  '=',
+                  t.memberExpression(
+                      t.identifier('obj'),
+                      t.identifier(origName)
+                  ),
+                  t.conditionalExpression(
+                      t.memberExpression(
+                          t.identifier('message'),
+                          t.identifier(propName)
+                      ),
+                      //
+                      t.callExpression(
+                          t.identifier('toBase64'),
+                          [
+                              t.memberExpression(
+                                  t.identifier('message'),
+                                  t.identifier(propName)
+                              ),
+                          ]
+                      ),
+            //
+                  defaultValue
                 )
             )
         );
@@ -430,7 +498,7 @@ export const toAminoJSON = {
         let toAminoJSON = null;
         switch (valueType) {
             case 'string':
-                toAminoJSON = t.identifier('v')
+                          toAminoJSON = t.identifier('v')
                 break;
             case 'uint32':
             case 'int32':
@@ -642,8 +710,39 @@ export const arrayTypes = {
     sfixed64(args: ToAminoJSONMethod) {
         return arrayTypes.long(args);
     },
+    rawBytes(args: ToAminoJSONMethod) {
+      args.context.addUtil("fromUtf8");
+
+      return t.callExpression(
+        t.memberExpression(t.identifier("JSON"), t.identifier("parse")),
+        [
+          t.callExpression(t.identifier("fromUtf8"), [t.identifier("e")]),
+        ]
+      );
+    },
+
+    wasmByteCode(args: ToAminoJSONMethod) {
+      args.context.addUtil("toBase64");
+
+      return t.callExpression(t.identifier("toBase64"), [
+        t.identifier("e")
+      ]);
+    },
     bytes(args: ToAminoJSONMethod) {
-        return arrayTypes.scalar();
+      // bytes [RawContractMessage]
+      if (args.field.options?.["(gogoproto.casttype)"] === "RawContractMessage") {
+        return arrayTypes.rawBytes(args);
+      }
+      // bytes [WASMByteCode]
+      if (args.field.options?.["(gogoproto.customname)"] === "WASMByteCode") {
+        return arrayTypes.wasmByteCode(args);
+      }
+
+      //default
+      args.context.addUtil("base64FromBytes");
+      return t.callExpression(t.identifier("base64FromBytes"), [
+        t.identifier("e"),
+      ]);
     },
     enum(args: ToAminoJSONMethod) {
         const enumFuncName = args.context.getToEnum(args.field);
@@ -678,7 +777,7 @@ export const arrayTypes = {
 
         if(isGlobalRegistry) {
           aminoFuncExpr = t.callExpression(
-            t.memberExpression(t.identifier('GlobalDecoderRegistry'), t.identifier('toAmino')),
+            t.memberExpression(t.identifier('GlobalDecoderRegistry'), t.identifier('toAminoMsg')),
             [
               t.identifier('e')
             ]

@@ -111,8 +111,8 @@ export interface AccountIDProtoMsg {
 }
 /** AccountID is the account identifier */
 export interface AccountIDAmino {
-  scope: string;
-  xid: string;
+  scope?: string;
+  xid?: string;
 }
 /** AccountID is the account identifier */
 export interface AccountIDSDKType {
@@ -154,21 +154,21 @@ export interface AccountAmino {
   /** unique identifier for this escrow account */
   id?: AccountIDAmino;
   /** bech32 encoded account address of the owner of this escrow account */
-  owner: string;
+  owner?: string;
   /** current state of this escrow account */
-  state: Account_State;
+  state?: Account_State;
   /** unspent coins received from the owner's wallet */
   balance?: DecCoinAmino;
   /** total coins spent by this account */
   transferred?: DecCoinAmino;
   /** block height at which this account was last settled */
-  settled_at: string;
+  settled_at?: string;
   /**
    * bech32 encoded account address of the depositor.
    * If depositor is same as the owner, then any incoming coins are added to the Balance.
    * If depositor isn't same as the owner, then any incoming coins are added to the Funds.
    */
-  depositor: string;
+  depositor?: string;
   /**
    * Funds are unspent coins received from the (non-Owner) Depositor's wallet.
    * If there are any funds, they should be spent before spending the Balance.
@@ -203,9 +203,9 @@ export interface FractionalPaymentProtoMsg {
 /** Payment stores state for a payment */
 export interface FractionalPaymentAmino {
   account_id?: AccountIDAmino;
-  payment_id: string;
-  owner: string;
-  state: FractionalPayment_State;
+  payment_id?: string;
+  owner?: string;
+  state?: FractionalPayment_State;
   rate?: DecCoinAmino;
   balance?: DecCoinAmino;
   withdrawn?: CoinAmino;
@@ -288,10 +288,14 @@ export const AccountID = {
     return obj;
   },
   fromAmino(object: AccountIDAmino): AccountID {
-    return {
-      scope: object.scope,
-      xid: object.xid
-    };
+    const message = createBaseAccountID();
+    if (object.scope !== undefined && object.scope !== null) {
+      message.scope = object.scope;
+    }
+    if (object.xid !== undefined && object.xid !== null) {
+      message.xid = object.xid;
+    }
+    return message;
   },
   toAmino(message: AccountID, useInterfaces: boolean = true): AccountIDAmino {
     const obj: any = {};
@@ -462,22 +466,38 @@ export const Account = {
     return obj;
   },
   fromAmino(object: AccountAmino): Account {
-    return {
-      id: object?.id ? AccountID.fromAmino(object.id) : undefined,
-      owner: object.owner,
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
-      balance: object?.balance ? DecCoin.fromAmino(object.balance) : undefined,
-      transferred: object?.transferred ? DecCoin.fromAmino(object.transferred) : undefined,
-      settledAt: BigInt(object.settled_at),
-      depositor: object.depositor,
-      funds: object?.funds ? DecCoin.fromAmino(object.funds) : undefined
-    };
+    const message = createBaseAccount();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = AccountID.fromAmino(object.id);
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = account_StateFromJSON(object.state);
+    }
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = DecCoin.fromAmino(object.balance);
+    }
+    if (object.transferred !== undefined && object.transferred !== null) {
+      message.transferred = DecCoin.fromAmino(object.transferred);
+    }
+    if (object.settled_at !== undefined && object.settled_at !== null) {
+      message.settledAt = BigInt(object.settled_at);
+    }
+    if (object.depositor !== undefined && object.depositor !== null) {
+      message.depositor = object.depositor;
+    }
+    if (object.funds !== undefined && object.funds !== null) {
+      message.funds = DecCoin.fromAmino(object.funds);
+    }
+    return message;
   },
   toAmino(message: Account, useInterfaces: boolean = true): AccountAmino {
     const obj: any = {};
     obj.id = message.id ? AccountID.toAmino(message.id, useInterfaces) : undefined;
     obj.owner = message.owner;
-    obj.state = message.state;
+    obj.state = account_StateToJSON(message.state);
     obj.balance = message.balance ? DecCoin.toAmino(message.balance, useInterfaces) : undefined;
     obj.transferred = message.transferred ? DecCoin.toAmino(message.transferred, useInterfaces) : undefined;
     obj.settled_at = message.settledAt ? message.settledAt.toString() : undefined;
@@ -634,22 +654,36 @@ export const FractionalPayment = {
     return obj;
   },
   fromAmino(object: FractionalPaymentAmino): FractionalPayment {
-    return {
-      accountId: object?.account_id ? AccountID.fromAmino(object.account_id) : undefined,
-      paymentId: object.payment_id,
-      owner: object.owner,
-      state: isSet(object.state) ? fractionalPayment_StateFromJSON(object.state) : -1,
-      rate: object?.rate ? DecCoin.fromAmino(object.rate) : undefined,
-      balance: object?.balance ? DecCoin.fromAmino(object.balance) : undefined,
-      withdrawn: object?.withdrawn ? Coin.fromAmino(object.withdrawn) : undefined
-    };
+    const message = createBaseFractionalPayment();
+    if (object.account_id !== undefined && object.account_id !== null) {
+      message.accountId = AccountID.fromAmino(object.account_id);
+    }
+    if (object.payment_id !== undefined && object.payment_id !== null) {
+      message.paymentId = object.payment_id;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = fractionalPayment_StateFromJSON(object.state);
+    }
+    if (object.rate !== undefined && object.rate !== null) {
+      message.rate = DecCoin.fromAmino(object.rate);
+    }
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = DecCoin.fromAmino(object.balance);
+    }
+    if (object.withdrawn !== undefined && object.withdrawn !== null) {
+      message.withdrawn = Coin.fromAmino(object.withdrawn);
+    }
+    return message;
   },
   toAmino(message: FractionalPayment, useInterfaces: boolean = true): FractionalPaymentAmino {
     const obj: any = {};
     obj.account_id = message.accountId ? AccountID.toAmino(message.accountId, useInterfaces) : undefined;
     obj.payment_id = message.paymentId;
     obj.owner = message.owner;
-    obj.state = message.state;
+    obj.state = fractionalPayment_StateToJSON(message.state);
     obj.rate = message.rate ? DecCoin.toAmino(message.rate, useInterfaces) : undefined;
     obj.balance = message.balance ? DecCoin.toAmino(message.balance, useInterfaces) : undefined;
     obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn, useInterfaces) : undefined;

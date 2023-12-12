@@ -103,7 +103,7 @@ export interface ProjectPropertiesProtoMsg {
  */
 export interface ProjectPropertiesAmino {
   /** List of per consumer project-specific properties. */
-  properties: PropertyAmino[];
+  properties?: PropertyAmino[];
 }
 export interface ProjectPropertiesAminoMsg {
   type: "/google.api.ProjectProperties";
@@ -168,11 +168,11 @@ export interface PropertyProtoMsg {
  */
 export interface PropertyAmino {
   /** The name of the property (a.k.a key). */
-  name: string;
+  name?: string;
   /** The type of this property. */
-  type: Property_PropertyType;
+  type?: Property_PropertyType;
   /** The description of the property */
-  description: string;
+  description?: string;
 }
 export interface PropertyAminoMsg {
   type: "/google.api.Property";
@@ -259,9 +259,9 @@ export const ProjectProperties = {
     return obj;
   },
   fromAmino(object: ProjectPropertiesAmino): ProjectProperties {
-    return {
-      properties: Array.isArray(object?.properties) ? object.properties.map((e: any) => Property.fromAmino(e)) : []
-    };
+    const message = createBaseProjectProperties();
+    message.properties = object.properties?.map(e => Property.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ProjectProperties): ProjectPropertiesAmino {
     const obj: any = {};
@@ -368,16 +368,22 @@ export const Property = {
     return obj;
   },
   fromAmino(object: PropertyAmino): Property {
-    return {
-      name: object.name,
-      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : -1,
-      description: object.description
-    };
+    const message = createBaseProperty();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.type !== undefined && object.type !== null) {
+      message.type = property_PropertyTypeFromJSON(object.type);
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: Property): PropertyAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.type = message.type;
+    obj.type = property_PropertyTypeToJSON(message.type);
     obj.description = message.description;
     return obj;
   },

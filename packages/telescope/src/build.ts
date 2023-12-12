@@ -28,6 +28,7 @@ import {
     createInterfaceDecoder,
     createInterfaceFromAmino,
     createInterfaceToAmino,
+    createRegisterAminoProtoMapping,
 } from '@cosmology/ast';
 import { ServiceMutation, ServiceQuery } from '@cosmology/types';
 
@@ -58,7 +59,16 @@ export const buildBaseTypeScriptClass = (
         context.body.push(createObjectWithMethods(context.proto, name, obj));
 
         if(context.options.interfaces?.enabled && context.options.interfaces?.useGlobalDecoderRegistry){
-          context.body.push(createRegisterObject(context.proto, name));
+          const registerObj = createRegisterObject(context.proto, name, obj);
+          if(registerObj){
+            context.body.push(registerObj);
+
+            //createRegisterAminoProtoMapping
+            const registerAminoObj = createRegisterAminoProtoMapping(context.proto, name, obj);
+            if(registerAminoObj){
+              context.body.push(registerAminoObj);
+            }
+          }
         }
     }
 };

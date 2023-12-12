@@ -348,23 +348,53 @@ export const HttpRequest = {
     return obj;
   },
   fromAmino(object: HttpRequestAmino): HttpRequest {
-    return {
-      requestMethod: object.request_method,
-      requestUrl: object.request_url,
-      requestSize: BigInt(object.request_size),
-      status: object.status,
-      responseSize: BigInt(object.response_size),
-      userAgent: object.user_agent,
-      remoteIp: object.remote_ip,
-      serverIp: object.server_ip,
-      referer: object.referer,
-      latency: object?.latency ? Duration.fromAmino(object.latency) : undefined,
-      cacheLookup: object.cache_lookup,
-      cacheHit: object.cache_hit,
-      cacheValidatedWithOriginServer: object.cache_validated_with_origin_server,
-      cacheFillBytes: BigInt(object.cache_fill_bytes),
-      protocol: object.protocol
-    };
+    const message = createBaseHttpRequest();
+    if (object.request_method !== undefined && object.request_method !== null) {
+      message.requestMethod = object.request_method;
+    }
+    if (object.request_url !== undefined && object.request_url !== null) {
+      message.requestUrl = object.request_url;
+    }
+    if (object.request_size !== undefined && object.request_size !== null) {
+      message.requestSize = BigInt(object.request_size);
+    }
+    if (object.status !== undefined && object.status !== null) {
+      message.status = object.status;
+    }
+    if (object.response_size !== undefined && object.response_size !== null) {
+      message.responseSize = BigInt(object.response_size);
+    }
+    if (object.user_agent !== undefined && object.user_agent !== null) {
+      message.userAgent = object.user_agent;
+    }
+    if (object.remote_ip !== undefined && object.remote_ip !== null) {
+      message.remoteIp = object.remote_ip;
+    }
+    if (object.server_ip !== undefined && object.server_ip !== null) {
+      message.serverIp = object.server_ip;
+    }
+    if (object.referer !== undefined && object.referer !== null) {
+      message.referer = object.referer;
+    }
+    if (object.latency !== undefined && object.latency !== null) {
+      message.latency = Duration.fromAmino(object.latency);
+    }
+    if (object.cache_lookup !== undefined && object.cache_lookup !== null) {
+      message.cacheLookup = object.cache_lookup;
+    }
+    if (object.cache_hit !== undefined && object.cache_hit !== null) {
+      message.cacheHit = object.cache_hit;
+    }
+    if (object.cache_validated_with_origin_server !== undefined && object.cache_validated_with_origin_server !== null) {
+      message.cacheValidatedWithOriginServer = object.cache_validated_with_origin_server;
+    }
+    if (object.cache_fill_bytes !== undefined && object.cache_fill_bytes !== null) {
+      message.cacheFillBytes = BigInt(object.cache_fill_bytes);
+    }
+    if (object.protocol !== undefined && object.protocol !== null) {
+      message.protocol = object.protocol;
+    }
+    return message;
   },
   toAmino(message: HttpRequest): HttpRequestAmino {
     const obj: any = {};

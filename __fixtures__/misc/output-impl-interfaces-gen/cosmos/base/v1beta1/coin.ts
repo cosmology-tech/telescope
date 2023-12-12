@@ -23,8 +23,8 @@ export interface CoinProtoMsg {
  * signatures required by gogoproto.
  */
 export interface CoinAmino {
-  denom: string;
-  amount: string;
+  denom?: string;
+  amount?: string;
 }
 export interface CoinAminoMsg {
   type: "cosmos-sdk/Coin";
@@ -61,8 +61,8 @@ export interface DecCoinProtoMsg {
  * signatures required by gogoproto.
  */
 export interface DecCoinAmino {
-  denom: string;
-  amount: string;
+  denom?: string;
+  amount?: string;
 }
 export interface DecCoinAminoMsg {
   type: "cosmos-sdk/DecCoin";
@@ -88,7 +88,7 @@ export interface IntProtoProtoMsg {
 }
 /** IntProto defines a Protobuf wrapper around an Int object. */
 export interface IntProtoAmino {
-  int: string;
+  int?: string;
 }
 export interface IntProtoAminoMsg {
   type: "cosmos-sdk/IntProto";
@@ -108,7 +108,7 @@ export interface DecProtoProtoMsg {
 }
 /** DecProto defines a Protobuf wrapper around a Dec object. */
 export interface DecProtoAmino {
-  dec: string;
+  dec?: string;
 }
 export interface DecProtoAminoMsg {
   type: "cosmos-sdk/DecProto";
@@ -126,6 +126,7 @@ function createBaseCoin(): Coin {
 }
 export const Coin = {
   typeUrl: "/cosmos.base.v1beta1.Coin",
+  aminoType: "cosmos-sdk/Coin",
   is(o: any): o is Coin {
     return o && (o.$typeUrl === Coin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
   },
@@ -201,10 +202,14 @@ export const Coin = {
     return obj;
   },
   fromAmino(object: CoinAmino): Coin {
-    return {
-      denom: object.denom,
-      amount: object.amount
-    };
+    const message = createBaseCoin();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    return message;
   },
   toAmino(message: Coin): CoinAmino {
     const obj: any = {};
@@ -235,6 +240,7 @@ export const Coin = {
   }
 };
 GlobalDecoderRegistry.register(Coin.typeUrl, Coin);
+GlobalDecoderRegistry.registerAminoProtoMapping(Coin.aminoType, Coin.typeUrl);
 function createBaseDecCoin(): DecCoin {
   return {
     denom: "",
@@ -243,6 +249,7 @@ function createBaseDecCoin(): DecCoin {
 }
 export const DecCoin = {
   typeUrl: "/cosmos.base.v1beta1.DecCoin",
+  aminoType: "cosmos-sdk/DecCoin",
   is(o: any): o is DecCoin {
     return o && (o.$typeUrl === DecCoin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
   },
@@ -318,10 +325,14 @@ export const DecCoin = {
     return obj;
   },
   fromAmino(object: DecCoinAmino): DecCoin {
-    return {
-      denom: object.denom,
-      amount: object.amount
-    };
+    const message = createBaseDecCoin();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    return message;
   },
   toAmino(message: DecCoin): DecCoinAmino {
     const obj: any = {};
@@ -352,6 +363,7 @@ export const DecCoin = {
   }
 };
 GlobalDecoderRegistry.register(DecCoin.typeUrl, DecCoin);
+GlobalDecoderRegistry.registerAminoProtoMapping(DecCoin.aminoType, DecCoin.typeUrl);
 function createBaseIntProto(): IntProto {
   return {
     int: ""
@@ -359,6 +371,7 @@ function createBaseIntProto(): IntProto {
 }
 export const IntProto = {
   typeUrl: "/cosmos.base.v1beta1.IntProto",
+  aminoType: "cosmos-sdk/IntProto",
   is(o: any): o is IntProto {
     return o && (o.$typeUrl === IntProto.typeUrl || typeof o.int === "string");
   },
@@ -422,9 +435,11 @@ export const IntProto = {
     return obj;
   },
   fromAmino(object: IntProtoAmino): IntProto {
-    return {
-      int: object.int
-    };
+    const message = createBaseIntProto();
+    if (object.int !== undefined && object.int !== null) {
+      message.int = object.int;
+    }
+    return message;
   },
   toAmino(message: IntProto): IntProtoAmino {
     const obj: any = {};
@@ -454,6 +469,7 @@ export const IntProto = {
   }
 };
 GlobalDecoderRegistry.register(IntProto.typeUrl, IntProto);
+GlobalDecoderRegistry.registerAminoProtoMapping(IntProto.aminoType, IntProto.typeUrl);
 function createBaseDecProto(): DecProto {
   return {
     dec: ""
@@ -461,6 +477,7 @@ function createBaseDecProto(): DecProto {
 }
 export const DecProto = {
   typeUrl: "/cosmos.base.v1beta1.DecProto",
+  aminoType: "cosmos-sdk/DecProto",
   is(o: any): o is DecProto {
     return o && (o.$typeUrl === DecProto.typeUrl || typeof o.dec === "string");
   },
@@ -524,9 +541,11 @@ export const DecProto = {
     return obj;
   },
   fromAmino(object: DecProtoAmino): DecProto {
-    return {
-      dec: object.dec
-    };
+    const message = createBaseDecProto();
+    if (object.dec !== undefined && object.dec !== null) {
+      message.dec = object.dec;
+    }
+    return message;
   },
   toAmino(message: DecProto): DecProtoAmino {
     const obj: any = {};
@@ -556,3 +575,4 @@ export const DecProto = {
   }
 };
 GlobalDecoderRegistry.register(DecProto.typeUrl, DecProto);
+GlobalDecoderRegistry.registerAminoProtoMapping(DecProto.aminoType, DecProto.typeUrl);

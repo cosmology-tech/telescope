@@ -19,7 +19,7 @@ export interface ParamsAmino {
    * distr_epoch_identifier is what epoch type distribution will be triggered by
    * (day, week, etc.)
    */
-  distr_epoch_identifier: string;
+  distr_epoch_identifier?: string;
 }
 export interface ParamsAminoMsg {
   type: "osmosis/incentives/params";
@@ -65,9 +65,11 @@ export const Params = {
     return message;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      distrEpochIdentifier: object.distr_epoch_identifier
-    };
+    const message = createBaseParams();
+    if (object.distr_epoch_identifier !== undefined && object.distr_epoch_identifier !== null) {
+      message.distrEpochIdentifier = object.distr_epoch_identifier;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

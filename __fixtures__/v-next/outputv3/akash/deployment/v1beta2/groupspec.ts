@@ -15,9 +15,9 @@ export interface GroupSpecProtoMsg {
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecAmino {
-  name: string;
+  name?: string;
   requirements?: PlacementRequirementsAmino;
-  resources: ResourceAmino[];
+  resources?: ResourceAmino[];
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
@@ -115,11 +115,15 @@ export const GroupSpec = {
     return obj;
   },
   fromAmino(object: GroupSpecAmino): GroupSpec {
-    return {
-      name: object.name,
-      requirements: object?.requirements ? PlacementRequirements.fromAmino(object.requirements) : undefined,
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromAmino(e)) : []
-    };
+    const message = createBaseGroupSpec();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.requirements !== undefined && object.requirements !== null) {
+      message.requirements = PlacementRequirements.fromAmino(object.requirements);
+    }
+    message.resources = object.resources?.map(e => Resource.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GroupSpec, useInterfaces: boolean = true): GroupSpecAmino {
     const obj: any = {};

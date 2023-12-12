@@ -13,8 +13,8 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisStateAmino {
-  accounts: AccountAmino[];
-  payments: FractionalPaymentAmino[];
+  accounts?: AccountAmino[];
+  payments?: FractionalPaymentAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "/akash.escrow.v1beta2.GenesisState";
@@ -69,10 +69,10 @@ export const GenesisState = {
     return message;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromAmino(e)) : [],
-      payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => FractionalPayment.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    message.accounts = object.accounts?.map(e => Account.fromAmino(e)) || [];
+    message.payments = object.payments?.map(e => FractionalPayment.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

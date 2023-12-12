@@ -15,8 +15,8 @@ export interface GenesisStateProtoMsg {
 /** GenesisState defines the nft module's genesis state. */
 export interface GenesisStateAmino {
   /** class defines the class of the nft type. */
-  classes: ClassAmino[];
-  entries: EntryAmino[];
+  classes?: ClassAmino[];
+  entries?: EntryAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "cosmos-sdk/GenesisState";
@@ -41,9 +41,9 @@ export interface EntryProtoMsg {
 /** Entry Defines all nft owned by a person */
 export interface EntryAmino {
   /** owner is the owner address of the following nft */
-  owner: string;
+  owner?: string;
   /** nfts is a group of nfts of the same owner */
-  nfts: NFTAmino[];
+  nfts?: NFTAmino[];
 }
 export interface EntryAminoMsg {
   type: "cosmos-sdk/Entry";
@@ -98,10 +98,10 @@ export const GenesisState = {
     return message;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromAmino(e)) : [],
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Entry.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    message.classes = object.classes?.map(e => Class.fromAmino(e)) || [];
+    message.entries = object.entries?.map(e => Entry.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -183,10 +183,12 @@ export const Entry = {
     return message;
   },
   fromAmino(object: EntryAmino): Entry {
-    return {
-      owner: object.owner,
-      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromAmino(e)) : []
-    };
+    const message = createBaseEntry();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    message.nfts = object.nfts?.map(e => NFT.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Entry): EntryAmino {
     const obj: any = {};

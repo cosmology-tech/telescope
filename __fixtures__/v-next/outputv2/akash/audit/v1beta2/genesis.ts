@@ -12,7 +12,7 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the basic genesis state used by audit module */
 export interface GenesisStateAmino {
-  attributes: AuditedAttributesAmino[];
+  attributes?: AuditedAttributesAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "/akash.audit.v1beta2.GenesisState";
@@ -86,9 +86,9 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    message.attributes = object.attributes?.map(e => AuditedAttributes.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

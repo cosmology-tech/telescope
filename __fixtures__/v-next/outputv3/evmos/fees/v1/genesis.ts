@@ -19,7 +19,7 @@ export interface GenesisStateAmino {
   /** module parameters */
   params?: ParamsAmino;
   /** active registered contracts */
-  dev_fee_infos: DevFeeInfoAmino[];
+  dev_fee_infos?: DevFeeInfoAmino[];
 }
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
@@ -55,24 +55,24 @@ export interface ParamsProtoMsg {
 /** Params defines the fees module params */
 export interface ParamsAmino {
   /** parameter to enable fees */
-  enable_fees: boolean;
+  enable_fees?: boolean;
   /**
    * developer_shares defines the proportion of the transaction fees to be
    * distributed to the registered contract owner
    */
-  developer_shares: string;
+  developer_shares?: string;
   /**
    * developer_shares defines the proportion of the transaction fees to be
    * distributed to validators
    */
-  validator_shares: string;
+  validator_shares?: string;
   /**
    * addr_derivation_cost_create defines the cost of address derivation for
    * verifying the contract deployer at fee registration
    */
-  addr_derivation_cost_create: string;
+  addr_derivation_cost_create?: string;
   /** min_gas_price defines the minimum gas price value for cosmos and eth transactions */
-  min_gas_price: string;
+  min_gas_price?: string;
 }
 /** Params defines the fees module params */
 export interface ParamsSDKType {
@@ -160,10 +160,12 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      devFeeInfos: Array.isArray(object?.dev_fee_infos) ? object.dev_fee_infos.map((e: any) => DevFeeInfo.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.devFeeInfos = object.dev_fee_infos?.map(e => DevFeeInfo.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
@@ -294,13 +296,23 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      enableFees: object.enable_fees,
-      developerShares: object.developer_shares,
-      validatorShares: object.validator_shares,
-      addrDerivationCostCreate: BigInt(object.addr_derivation_cost_create),
-      minGasPrice: object.min_gas_price
-    };
+    const message = createBaseParams();
+    if (object.enable_fees !== undefined && object.enable_fees !== null) {
+      message.enableFees = object.enable_fees;
+    }
+    if (object.developer_shares !== undefined && object.developer_shares !== null) {
+      message.developerShares = object.developer_shares;
+    }
+    if (object.validator_shares !== undefined && object.validator_shares !== null) {
+      message.validatorShares = object.validator_shares;
+    }
+    if (object.addr_derivation_cost_create !== undefined && object.addr_derivation_cost_create !== null) {
+      message.addrDerivationCostCreate = BigInt(object.addr_derivation_cost_create);
+    }
+    if (object.min_gas_price !== undefined && object.min_gas_price !== null) {
+      message.minGasPrice = object.min_gas_price;
+    }
+    return message;
   },
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};

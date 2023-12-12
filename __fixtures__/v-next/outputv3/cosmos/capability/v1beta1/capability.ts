@@ -17,7 +17,7 @@ export interface CapabilityProtoMsg {
  * provided to a Capability must be globally unique.
  */
 export interface CapabilityAmino {
-  index: string;
+  index?: string;
 }
 /**
  * Capability defines an implementation of an object capability. The index
@@ -43,8 +43,8 @@ export interface OwnerProtoMsg {
  * capability and the module name.
  */
 export interface OwnerAmino {
-  module: string;
-  name: string;
+  module?: string;
+  name?: string;
 }
 /**
  * Owner defines a single capability owner. An owner is defined by the name of
@@ -70,7 +70,7 @@ export interface CapabilityOwnersProtoMsg {
  * owners must be unique.
  */
 export interface CapabilityOwnersAmino {
-  owners: OwnerAmino[];
+  owners?: OwnerAmino[];
 }
 /**
  * CapabilityOwners defines a set of owners of a single Capability. The set of
@@ -138,9 +138,11 @@ export const Capability = {
     return obj;
   },
   fromAmino(object: CapabilityAmino): Capability {
-    return {
-      index: BigInt(object.index)
-    };
+    const message = createBaseCapability();
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index);
+    }
+    return message;
   },
   toAmino(message: Capability, useInterfaces: boolean = true): CapabilityAmino {
     const obj: any = {};
@@ -229,10 +231,14 @@ export const Owner = {
     return obj;
   },
   fromAmino(object: OwnerAmino): Owner {
-    return {
-      module: object.module,
-      name: object.name
-    };
+    const message = createBaseOwner();
+    if (object.module !== undefined && object.module !== null) {
+      message.module = object.module;
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: Owner, useInterfaces: boolean = true): OwnerAmino {
     const obj: any = {};
@@ -318,9 +324,9 @@ export const CapabilityOwners = {
     return obj;
   },
   fromAmino(object: CapabilityOwnersAmino): CapabilityOwners {
-    return {
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromAmino(e)) : []
-    };
+    const message = createBaseCapabilityOwners();
+    message.owners = object.owners?.map(e => Owner.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: CapabilityOwners, useInterfaces: boolean = true): CapabilityOwnersAmino {
     const obj: any = {};

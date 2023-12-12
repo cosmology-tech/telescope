@@ -36,17 +36,17 @@ export interface GenesisStateAmino {
   /** params are all the parameters of the module */
   params?: ParamsAmino;
   /** gauges are all gauges that should exist at genesis */
-  gauges: GaugeAmino[];
+  gauges?: GaugeAmino[];
   /**
    * lockable_durations are all lockup durations that gauges can be locked for
    * in order to recieve incentives
    */
-  lockable_durations: DurationAmino[];
+  lockable_durations?: DurationAmino[];
   /**
    * last_gauge_id is what the gauge number will increment from when creating
    * the next gauge after genesis
    */
-  last_gauge_id: string;
+  last_gauge_id?: string;
 }
 export interface GenesisStateAminoMsg {
   type: "osmosis/incentives/genesis-state";
@@ -126,12 +126,16 @@ export const GenesisState = {
     return message;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      gauges: Array.isArray(object?.gauges) ? object.gauges.map((e: any) => Gauge.fromAmino(e)) : [],
-      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : [],
-      lastGaugeId: BigInt(object.last_gauge_id)
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.gauges = object.gauges?.map(e => Gauge.fromAmino(e)) || [];
+    message.lockableDurations = object.lockable_durations?.map(e => Duration.fromAmino(e)) || [];
+    if (object.last_gauge_id !== undefined && object.last_gauge_id !== null) {
+      message.lastGaugeId = BigInt(object.last_gauge_id);
+    }
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

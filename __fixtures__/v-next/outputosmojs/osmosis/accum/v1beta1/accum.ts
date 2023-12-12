@@ -119,10 +119,12 @@ export const AccumulatorContent = {
     return obj;
   },
   fromAmino(object: AccumulatorContentAmino): AccumulatorContent {
-    return {
-      accumValue: Array.isArray(object?.accum_value) ? object.accum_value.map((e: any) => DecCoin.fromAmino(e)) : [],
-      totalShares: object.total_shares
-    };
+    const message = createBaseAccumulatorContent();
+    message.accumValue = object.accum_value?.map(e => DecCoin.fromAmino(e)) || [];
+    if (object.total_shares !== undefined && object.total_shares !== null) {
+      message.totalShares = object.total_shares;
+    }
+    return message;
   },
   toAmino(message: AccumulatorContent): AccumulatorContentAmino {
     const obj: any = {};
@@ -200,7 +202,8 @@ export const Options = {
     return obj;
   },
   fromAmino(_: OptionsAmino): Options {
-    return {};
+    const message = createBaseOptions();
+    return message;
   },
   toAmino(_: Options): OptionsAmino {
     const obj: any = {};
@@ -344,12 +347,16 @@ export const Record = {
     return obj;
   },
   fromAmino(object: RecordAmino): Record {
-    return {
-      numShares: object.num_shares,
-      initAccumValue: Array.isArray(object?.init_accum_value) ? object.init_accum_value.map((e: any) => DecCoin.fromAmino(e)) : [],
-      unclaimedRewards: Array.isArray(object?.unclaimed_rewards) ? object.unclaimed_rewards.map((e: any) => DecCoin.fromAmino(e)) : [],
-      options: object?.options ? Options.fromAmino(object.options) : undefined
-    };
+    const message = createBaseRecord();
+    if (object.num_shares !== undefined && object.num_shares !== null) {
+      message.numShares = object.num_shares;
+    }
+    message.initAccumValue = object.init_accum_value?.map(e => DecCoin.fromAmino(e)) || [];
+    message.unclaimedRewards = object.unclaimed_rewards?.map(e => DecCoin.fromAmino(e)) || [];
+    if (object.options !== undefined && object.options !== null) {
+      message.options = Options.fromAmino(object.options);
+    }
+    return message;
   },
   toAmino(message: Record): RecordAmino {
     const obj: any = {};

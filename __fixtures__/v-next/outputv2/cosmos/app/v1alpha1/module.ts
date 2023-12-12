@@ -42,14 +42,14 @@ export interface ModuleDescriptorAmino {
    * to users where to location the module implementation. go_import takes
    * precedence over go_package when both are defined.
    */
-  go_import: string;
+  go_import?: string;
   /**
    * use_package refers to a protobuf package that this module
    * uses and exposes to the world. In an app, only one module should "use"
    * or own a single protobuf package. It is assumed that the module uses
    * all of the .proto files in a single package.
    */
-  use_package: PackageReferenceAmino[];
+  use_package?: PackageReferenceAmino[];
   /**
    * can_migrate_from defines which module versions this module can migrate
    * state from. The framework will check that one module version is able to
@@ -59,7 +59,7 @@ export interface ModuleDescriptorAmino {
    * declares it can migrate from v1, the framework knows how to migrate
    * from v1 to v3, assuming all 3 module versions are registered at runtime.
    */
-  can_migrate_from: MigrateFromInfoAmino[];
+  can_migrate_from?: MigrateFromInfoAmino[];
 }
 export interface ModuleDescriptorAminoMsg {
   type: "cosmos-sdk/ModuleDescriptor";
@@ -121,7 +121,7 @@ export interface PackageReferenceProtoMsg {
 /** PackageReference is a reference to a protobuf package used by a module. */
 export interface PackageReferenceAmino {
   /** name is the fully-qualified name of the package. */
-  name: string;
+  name?: string;
   /**
    * revision is the optional revision of the package that is being used.
    * Protobuf packages used in Cosmos should generally have a major version
@@ -159,7 +159,7 @@ export interface PackageReferenceAmino {
    *   are important good client UX
    * * protobuf files are changed in backwards and forwards compatible ways
    */
-  revision: number;
+  revision?: number;
 }
 export interface PackageReferenceAminoMsg {
   type: "cosmos-sdk/PackageReference";
@@ -194,7 +194,7 @@ export interface MigrateFromInfoAmino {
    * module is the fully-qualified protobuf name of the module config object
    * for the previous module version, ex: "cosmos.group.module.v1.Module".
    */
-  module: string;
+  module?: string;
 }
 export interface MigrateFromInfoAminoMsg {
   type: "cosmos-sdk/MigrateFromInfo";
@@ -304,11 +304,13 @@ export const ModuleDescriptor = {
     return obj;
   },
   fromAmino(object: ModuleDescriptorAmino): ModuleDescriptor {
-    return {
-      goImport: object.go_import,
-      usePackage: Array.isArray(object?.use_package) ? object.use_package.map((e: any) => PackageReference.fromAmino(e)) : [],
-      canMigrateFrom: Array.isArray(object?.can_migrate_from) ? object.can_migrate_from.map((e: any) => MigrateFromInfo.fromAmino(e)) : []
-    };
+    const message = createBaseModuleDescriptor();
+    if (object.go_import !== undefined && object.go_import !== null) {
+      message.goImport = object.go_import;
+    }
+    message.usePackage = object.use_package?.map(e => PackageReference.fromAmino(e)) || [];
+    message.canMigrateFrom = object.can_migrate_from?.map(e => MigrateFromInfo.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ModuleDescriptor): ModuleDescriptorAmino {
     const obj: any = {};
@@ -416,10 +418,14 @@ export const PackageReference = {
     return obj;
   },
   fromAmino(object: PackageReferenceAmino): PackageReference {
-    return {
-      name: object.name,
-      revision: object.revision
-    };
+    const message = createBasePackageReference();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.revision !== undefined && object.revision !== null) {
+      message.revision = object.revision;
+    }
+    return message;
   },
   toAmino(message: PackageReference): PackageReferenceAmino {
     const obj: any = {};
@@ -506,9 +512,11 @@ export const MigrateFromInfo = {
     return obj;
   },
   fromAmino(object: MigrateFromInfoAmino): MigrateFromInfo {
-    return {
-      module: object.module
-    };
+    const message = createBaseMigrateFromInfo();
+    if (object.module !== undefined && object.module !== null) {
+      message.module = object.module;
+    }
+    return message;
   },
   toAmino(message: MigrateFromInfo): MigrateFromInfoAmino {
     const obj: any = {};

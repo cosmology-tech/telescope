@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, Exact, isSet } from "../../../helpers";
+import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
 /** This describes how the endpoint is implemented when the lease is deployed */
 export enum Endpoint_Kind {
@@ -54,8 +54,8 @@ export interface EndpointProtoMsg {
 }
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointAmino {
-  kind: Endpoint_Kind;
-  sequence_number: number;
+  kind?: Endpoint_Kind;
+  sequence_number?: number;
 }
 export interface EndpointAminoMsg {
   type: "/akash.base.v1beta2.Endpoint";
@@ -110,14 +110,18 @@ export const Endpoint = {
     return message;
   },
   fromAmino(object: EndpointAmino): Endpoint {
-    return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1,
-      sequenceNumber: object.sequence_number
-    };
+    const message = createBaseEndpoint();
+    if (object.kind !== undefined && object.kind !== null) {
+      message.kind = endpoint_KindFromJSON(object.kind);
+    }
+    if (object.sequence_number !== undefined && object.sequence_number !== null) {
+      message.sequenceNumber = object.sequence_number;
+    }
+    return message;
   },
   toAmino(message: Endpoint): EndpointAmino {
     const obj: any = {};
-    obj.kind = message.kind;
+    obj.kind = endpoint_KindToJSON(message.kind);
     obj.sequence_number = message.sequenceNumber;
     return obj;
   },

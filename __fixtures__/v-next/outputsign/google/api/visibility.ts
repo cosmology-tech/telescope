@@ -67,7 +67,7 @@ export interface VisibilityAmino {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: VisibilityRuleAmino[];
+  rules?: VisibilityRuleAmino[];
 }
 export interface VisibilityAminoMsg {
   type: "/google.api.Visibility";
@@ -144,7 +144,7 @@ export interface VisibilityRuleAmino {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /**
    * A comma-separated list of visibility labels that apply to the `selector`.
    * Any of the listed labels can be used to grant the visibility.
@@ -162,7 +162,7 @@ export interface VisibilityRuleAmino {
    * Removing INTERNAL from this restriction will break clients that rely on
    * this method and only had access to it through INTERNAL.
    */
-  restriction: string;
+  restriction?: string;
 }
 export interface VisibilityRuleAminoMsg {
   type: "/google.api.VisibilityRule";
@@ -212,9 +212,9 @@ export const Visibility = {
     return message;
   },
   fromAmino(object: VisibilityAmino): Visibility {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => VisibilityRule.fromAmino(e)) : []
-    };
+    const message = createBaseVisibility();
+    message.rules = object.rules?.map(e => VisibilityRule.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Visibility): VisibilityAmino {
     const obj: any = {};
@@ -285,10 +285,14 @@ export const VisibilityRule = {
     return message;
   },
   fromAmino(object: VisibilityRuleAmino): VisibilityRule {
-    return {
-      selector: object.selector,
-      restriction: object.restriction
-    };
+    const message = createBaseVisibilityRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    if (object.restriction !== undefined && object.restriction !== null) {
+      message.restriction = object.restriction;
+    }
+    return message;
   },
   toAmino(message: VisibilityRule): VisibilityRuleAmino {
     const obj: any = {};

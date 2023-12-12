@@ -23,7 +23,7 @@ export interface SendAuthorizationProtoMsg {
  * Since: cosmos-sdk 0.43
  */
 export interface SendAuthorizationAmino {
-  spend_limit: CoinAmino[];
+  spend_limit?: CoinAmino[];
 }
 export interface SendAuthorizationAminoMsg {
   type: "cosmos-sdk/SendAuthorization";
@@ -45,6 +45,7 @@ function createBaseSendAuthorization(): SendAuthorization {
 }
 export const SendAuthorization = {
   typeUrl: "/cosmos.bank.v1beta1.SendAuthorization",
+  aminoType: "cosmos-sdk/SendAuthorization",
   is(o: any): o is SendAuthorization {
     return o && (o.$typeUrl === SendAuthorization.typeUrl || Array.isArray(o.spendLimit) && (!o.spendLimit.length || Coin.is(o.spendLimit[0])));
   },
@@ -116,9 +117,9 @@ export const SendAuthorization = {
     return obj;
   },
   fromAmino(object: SendAuthorizationAmino): SendAuthorization {
-    return {
-      spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseSendAuthorization();
+    message.spendLimit = object.spend_limit?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: SendAuthorization): SendAuthorizationAmino {
     const obj: any = {};
@@ -152,3 +153,4 @@ export const SendAuthorization = {
   }
 };
 GlobalDecoderRegistry.register(SendAuthorization.typeUrl, SendAuthorization);
+GlobalDecoderRegistry.registerAminoProtoMapping(SendAuthorization.aminoType, SendAuthorization.typeUrl);

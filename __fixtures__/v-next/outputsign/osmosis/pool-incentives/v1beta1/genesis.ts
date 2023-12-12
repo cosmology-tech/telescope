@@ -19,7 +19,7 @@ export interface GenesisStateProtoMsg {
 export interface GenesisStateAmino {
   /** params defines all the paramaters of the module. */
   params?: ParamsAmino;
-  lockable_durations: DurationAmino[];
+  lockable_durations?: DurationAmino[];
   distr_info?: DistrInfoAmino;
   pool_to_gauges?: PoolToGaugesAmino;
 }
@@ -100,12 +100,18 @@ export const GenesisState = {
     return message;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : [],
-      distrInfo: object?.distr_info ? DistrInfo.fromAmino(object.distr_info) : undefined,
-      poolToGauges: object?.pool_to_gauges ? PoolToGauges.fromAmino(object.pool_to_gauges) : undefined
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.lockableDurations = object.lockable_durations?.map(e => Duration.fromAmino(e)) || [];
+    if (object.distr_info !== undefined && object.distr_info !== null) {
+      message.distrInfo = DistrInfo.fromAmino(object.distr_info);
+    }
+    if (object.pool_to_gauges !== undefined && object.pool_to_gauges !== null) {
+      message.poolToGauges = PoolToGauges.fromAmino(object.pool_to_gauges);
+    }
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
