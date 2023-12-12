@@ -191,6 +191,7 @@ export const createScopedRpcTmFactory = (
     obj: object,
     identifier: string
 ) => {
+    const newClientType = context.pluginValue('rpcClients.useConnectComet');
     const extensions = context.pluginValue('rpcClients.extensions');
     let functionParams;
     const returnStatement = t.returnStatement(
@@ -200,10 +201,34 @@ export const createScopedRpcTmFactory = (
           extensions ? 'client' : 'rpc',
       )
     );
+
     let functionStatements;
+    let awaitClientCreation;
+    // TODO: remove tendermint34client and options if not needed
+    if (newClientType) {
+        // use connectComet for dynamic client
+        context.addUtil('connectComet');
+        awaitClientCreation = t.callExpression(
+            t.identifier('connectComet'),      
+            [
+                t.identifier('rpcEndpoint')
+            ]
+    )
+    } else {
+        // use tendermint34 client
+        context.addUtil('Tendermint34Client');
+        awaitClientCreation = t.callExpression(
+            t.memberExpression(
+                t.identifier('Tendermint34Client'),
+                t.identifier('connect')
+            ),
+            [
+                t.identifier('rpcEndpoint')
+            ]
+        )
+    }
 
     if(extensions){
-      context.addUtil('Tendermint34Client');
       context.addUtil('HttpEndpoint');
       context.addUtil('QueryClient');
 
@@ -239,15 +264,7 @@ export const createScopedRpcTmFactory = (
             t.variableDeclarator(
                 t.identifier('tmClient'),
                 t.awaitExpression(
-                    t.callExpression(
-                        t.memberExpression(
-                            t.identifier('Tendermint34Client'),
-                            t.identifier('connect')
-                        ),
-                        [
-                            t.identifier('rpcEndpoint')
-                        ]
-                    )
+                    awaitClientCreation
                 )
             )
         ]),

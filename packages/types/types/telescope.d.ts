@@ -176,6 +176,7 @@ interface TelescopeOpts {
                 };
             };
         }[];
+        useConnectComet?: boolean;
     };
     reactQuery?: {
         enabled: boolean;
