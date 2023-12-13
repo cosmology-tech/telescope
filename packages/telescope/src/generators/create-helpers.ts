@@ -3,7 +3,7 @@ import { mkdirp } from 'mkdirp';
 import { TelescopeBuilder } from '../builder';
 import pkg from '../../package.json';
 import { writeContentToFile } from '../utils/files';
-import { external, internal, getReactQueryHelper, mobx, grpcGateway, grpcWeb, pinia, internalForBigInt, varint, utf8, binary, types, registryHelper } from '../helpers';
+import { external, externalComet, internal, getReactQueryHelper, mobx, grpcGateway, grpcWeb, pinia, internalForBigInt, varint, utf8, binary, types, registryHelper } from '../helpers';
 
 const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;
 const header = `/**
@@ -32,7 +32,7 @@ export const plugin = (
   if (builder.options.includeExternalHelpers || builder.options.reactQuery?.enabled) {
     // also react-query needs these...
     builder.files.push('extern.ts');
-    write(builder, 'extern.ts', external);
+    write(builder, 'extern.ts', builder.options.rpcClients?.useConnectComet ? externalComet : external);
   }
 
   if (builder.options.reactQuery?.enabled) {

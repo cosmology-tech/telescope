@@ -127,6 +127,7 @@ const options: TelescopeOptions = {
   rpcClients: {
     enabled: true,
     camelCase: true,
+    extensions: true,
     scopedIsExclusive: false,
     scoped: [
       {
@@ -156,7 +157,8 @@ const options: TelescopeOptions = {
       'Service',
       'ReflectionService',
       'ABCIApplication'
-    ]
+    ],
+    useConnectComet: true
   },
 
   reactQuery: {

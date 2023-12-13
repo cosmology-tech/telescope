@@ -24,22 +24,24 @@ exports[`createScopedRpcFactory 1`] = `
 
 exports[`createScopedRpcFactoryWithComet 1`] = `
 "export const createRpcFactorizzleWithComet = async ({
-  rpc
+  rpcEndpoint
 }: {
-  rpc: Rpc;
+  rpcEndpoint: string | HttpEndpoint;
 }) => {
+  const tmClient = await connectComet(rpcEndpoint);
+  const client = new QueryClient(tmClient);
   return {
     cosmos: {
       bank: {
-        v1beta1: (await import("./proto/cosmos/bank/v1beta1/query.lcd")).createClientImpl(rpc)
+        v1beta1: (await import("./proto/cosmos/bank/v1beta1/query.lcd")).createRpcQueryExtension(client)
       },
       gov: {
-        v1beta1: (await import("./proto/cosmos/bank/v1beta1/query.lcd")).createClientImpl(rpc)
+        v1beta1: (await import("./proto/cosmos/bank/v1beta1/query.lcd")).createRpcQueryExtension(client)
       }
     },
     osmosis: {
       gamm: {
-        v1beta1: (await import("./proto/cosmos/bank/v1beta1/query.lcd")).createClientImpl(rpc)
+        v1beta1: (await import("./proto/cosmos/bank/v1beta1/query.lcd")).createRpcQueryExtension(client)
       }
     }
   };
