@@ -1,5 +1,5 @@
-export const external = `import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from '@cosmjs/stargate'
-import { Tendermint34Client, HttpEndpoint } from "@cosmjs/tendermint-rpc";
+export const externalComet = `import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from '@cosmjs/stargate'
+import { connectComet, HttpEndpoint } from "@cosmjs/tendermint-rpc";
 
 const _rpcClients: Record<string, ProtobufRpcClient> = {};
 
@@ -18,9 +18,9 @@ export const getRpcClient = async (rpcEndpoint: string | HttpEndpoint) => {
     if (_rpcClients.hasOwnProperty(key)) {
         return _rpcClients[key];
     }
-    const tmClient = await Tendermint34Client.connect(rpcEndpoint);
+    const cometClient = await connectComet(rpcEndpoint);
     //@ts-ignore
-    const client = new QueryClient(tmClient);
+    const client = new QueryClient(cometClient);
     const rpc = createProtobufRpcClient(client);
     _rpcClients[key] = rpc;
     return rpc;

@@ -76,6 +76,7 @@ it('createScopedRpcFactoryWithoutTm', async () => {
 
   it('createScopedRpcFactoryWithComet', async () => {
     const context = getGenericParseContext();
+    context.options!.rpcClients!.extensions = true;
     context.options!.rpcClients!.useConnectComet = true;
     expectCode(createScopedRpcTmFactory(context, {
         cosmos: {

@@ -13,7 +13,7 @@ export const getRpcEndpointKey = (rpcEndpoint: string | HttpEndpoint) => {
     if (typeof rpcEndpoint === 'string') {
         return rpcEndpoint;
     } else if (!!rpcEndpoint) {
-        //@ts-ignore 
+        //@ts-ignore
         return rpcEndpoint.url;
     }
 }
