@@ -183,6 +183,12 @@ export const getFieldOptionalityForAmino = (
   field: ProtoField,
   isOneOf: boolean
 ) => {
+  const useProtoOptionality = context.pluginValue('aminoEncoding.useProtoOptionality');
+
+  if(useProtoOptionality){
+    return getFieldOptionalityForDefaults(context, field, isOneOf);
+  }
+
   if (isOneOf) {
     return true;
   }

@@ -371,4 +371,35 @@ describe("misc", () => {
 
     await telescope.build();
   });
+
+  it("generates with amino interface and proto optionality", async () => {
+    const testFolder = "/output-proto-amino/amino-interface-proto-optionality";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        interfaces: {
+          enabled: true,
+          useGlobalDecoderRegistry: true,
+          useUnionTypes: true,
+        },
+        prototypes: {
+          methods: {
+            toAmino: true,
+            fromAmino: true,
+            toProto: true,
+            fromProto: true,
+          },
+        },
+        aminoEncoding: {
+          enabled: true,
+          useProtoOptionality: true,
+          useLegacyInlineEncoding: false,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
 });

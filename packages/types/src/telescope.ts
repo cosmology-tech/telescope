@@ -136,6 +136,7 @@ interface TelescopeOpts {
 
     aminoEncoding?: {
         enabled: boolean;
+        useProtoOptionality?: boolean;
         disableMsgTypes?: boolean;
         casingFn?: Function;
         exceptions?: AminoExceptions;
