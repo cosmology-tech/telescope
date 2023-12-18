@@ -210,3 +210,5 @@ function getDecoderByInstance<T = unknown, SDK = unknown, Amino = unknown>(
 
   return decoder;
 }
+
+GlobalDecoderRegistry.register(Any.typeUrl, Any);

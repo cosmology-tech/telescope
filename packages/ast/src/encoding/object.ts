@@ -63,6 +63,10 @@ export const createRegisterObject = (
   name: string,
   proto: ProtoType,
 ) => {
+  if (name === 'Any') {
+    return;
+  }
+
   context.addUtil("GlobalDecoderRegistry");
 
   const typeUrl = getTypeUrl(context.ref.proto, proto);
