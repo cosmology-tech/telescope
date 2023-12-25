@@ -117,6 +117,12 @@ telescope({
 
     prototypes: {
       enabled: true,
+      addTypeUrlToObjects: true,
+      addTypeUrlToDecoders: true,
+      addAminoTypeToObjects: true,
+      excluded: {
+        packages: ['google.api.**', 'google.logging.**', 'google.protobuf.**']
+      },
       parser: {
         keepCase: false
       },
@@ -128,7 +134,6 @@ telescope({
         fromPartial: true,
         toSDK: true,
         fromSDK: true,
-        fromSDKJSON: true,
         toAmino: true,
         fromAmino: true,
         toProto: true,
