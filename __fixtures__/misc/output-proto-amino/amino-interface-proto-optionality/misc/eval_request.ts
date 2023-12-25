@@ -1764,8 +1764,8 @@ export const AminoEncodingTest = {
     message.dOPeriods = object.dOPeriods?.map(e => Duration.fromPartial(e)) || [];
     message.protos = object.protos?.map(e => AccessConfig.fromPartial(e)) || [];
     message.dOProtos = object.dOProtos?.map(e => AccessConfig.fromPartial(e)) || [];
-    message.auths = object.auths?.map(e => GlobalDecoderRegistry.fromPartial(e)) || [];
-    message.dOAuths = object.dOAuths?.map(e => GlobalDecoderRegistry.fromPartial(e)) || [];
+    message.auths = object.auths?.map(e => (Any.fromPartial(e) as any)) || [];
+    message.dOAuths = object.dOAuths?.map(e => (Any.fromPartial(e) as any)) || [];
     return message;
   },
   fromSDK(object: AminoEncodingTestSDKType): AminoEncodingTest {
