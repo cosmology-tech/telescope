@@ -61,3 +61,8 @@ message GrantQueueItem {
   // msg_type_urls contains the list of TypeURL of a sdk.Msg.
   repeated string msg_type_urls = 1;
 }
+
+// test Any array
+message Grants {
+  repeated google.protobuf.Any authorization = 1 [(gogoproto.nullable) = false, (cosmos_proto.accepts_interface) = "Authorization"];
+}

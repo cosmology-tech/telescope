@@ -46,5 +46,5 @@ export declare const arrayTypes: {
     sint64(args: FromPartialMethod): t.Expression;
     fixed64(args: FromPartialMethod): t.Expression;
     sfixed64(args: FromPartialMethod): t.Expression;
-    type(args: FromPartialMethod): t.CallExpression;
+    type(args: FromPartialMethod): t.CallExpression | t.TSAsExpression;
 };

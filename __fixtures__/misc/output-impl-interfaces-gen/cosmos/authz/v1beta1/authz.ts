@@ -210,6 +210,29 @@ export interface GrantQueueItemAminoMsg {
 export interface GrantQueueItemSDKType {
   msg_type_urls: string[];
 }
+/** test Any array */
+export interface Grants {
+  authorization: (GenericAuthorization | DepositDeploymentAuthorization | SendAuthorization | Any)[] | Any[];
+}
+export interface GrantsProtoMsg {
+  typeUrl: "/cosmos.authz.v1beta1.Grants";
+  value: Uint8Array;
+}
+export type GrantsEncoded = Omit<Grants, "authorization"> & {
+  authorization: (GenericAuthorizationProtoMsg | DepositDeploymentAuthorizationProtoMsg | SendAuthorizationProtoMsg | AnyProtoMsg)[];
+};
+/** test Any array */
+export interface GrantsAmino {
+  authorization?: AnyAmino[];
+}
+export interface GrantsAminoMsg {
+  type: "cosmos-sdk/Grants";
+  value: GrantsAmino;
+}
+/** test Any array */
+export interface GrantsSDKType {
+  authorization: (GenericAuthorizationSDKType | DepositDeploymentAuthorizationSDKType | SendAuthorizationSDKType | AnySDKType)[];
+}
 function createBaseGenericAuthorization(): GenericAuthorization {
   return {
     msg: ""
@@ -779,3 +802,119 @@ export const GrantQueueItem = {
 };
 GlobalDecoderRegistry.register(GrantQueueItem.typeUrl, GrantQueueItem);
 GlobalDecoderRegistry.registerAminoProtoMapping(GrantQueueItem.aminoType, GrantQueueItem.typeUrl);
+function createBaseGrants(): Grants {
+  return {
+    authorization: []
+  };
+}
+export const Grants = {
+  typeUrl: "/cosmos.authz.v1beta1.Grants",
+  aminoType: "cosmos-sdk/Grants",
+  is(o: any): o is Grants {
+    return o && (o.$typeUrl === Grants.typeUrl || Array.isArray(o.authorization) && (!o.authorization.length || GenericAuthorization.is(o.authorization[0]) || DepositDeploymentAuthorization.is(o.authorization[0]) || SendAuthorization.is(o.authorization[0]) || Any.is(o.authorization[0])));
+  },
+  isSDK(o: any): o is GrantsSDKType {
+    return o && (o.$typeUrl === Grants.typeUrl || Array.isArray(o.authorization) && (!o.authorization.length || GenericAuthorization.isSDK(o.authorization[0]) || DepositDeploymentAuthorization.isSDK(o.authorization[0]) || SendAuthorization.isSDK(o.authorization[0]) || Any.isSDK(o.authorization[0])));
+  },
+  isAmino(o: any): o is GrantsAmino {
+    return o && (o.$typeUrl === Grants.typeUrl || Array.isArray(o.authorization) && (!o.authorization.length || GenericAuthorization.isAmino(o.authorization[0]) || DepositDeploymentAuthorization.isAmino(o.authorization[0]) || SendAuthorization.isAmino(o.authorization[0]) || Any.isAmino(o.authorization[0])));
+  },
+  encode(message: Grants, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    for (const v of message.authorization) {
+      Any.encode(GlobalDecoderRegistry.wrapAny(v!), writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): Grants {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGrants();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.authorization.push(GlobalDecoderRegistry.unwrapAny(reader));
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): Grants {
+    const obj = createBaseGrants();
+    if (Array.isArray(object?.authorization)) obj.authorization = object.authorization.map((e: any) => GlobalDecoderRegistry.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: Grants): unknown {
+    const obj: any = {};
+    if (message.authorization) {
+      obj.authorization = message.authorization.map(e => e ? GlobalDecoderRegistry.toJSON(e) : undefined);
+    } else {
+      obj.authorization = [];
+    }
+    return obj;
+  },
+  fromPartial(object: DeepPartial<Grants>): Grants {
+    const message = createBaseGrants();
+    message.authorization = object.authorization?.map(e => (Any.fromPartial(e) as any)) || [];
+    return message;
+  },
+  fromSDK(object: GrantsSDKType): Grants {
+    return {
+      authorization: Array.isArray(object?.authorization) ? object.authorization.map((e: any) => GlobalDecoderRegistry.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): GrantsSDKType {
+    return {
+      authorization: Array.isArray(object?.authorization) ? object.authorization.map((e: any) => GlobalDecoderRegistry.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: Grants): GrantsSDKType {
+    const obj: any = {};
+    if (message.authorization) {
+      obj.authorization = message.authorization.map(e => e ? GlobalDecoderRegistry.toSDK(e) : undefined);
+    } else {
+      obj.authorization = [];
+    }
+    return obj;
+  },
+  fromAmino(object: GrantsAmino): Grants {
+    const message = createBaseGrants();
+    message.authorization = object.authorization?.map(e => GlobalDecoderRegistry.fromAminoMsg(e)) || [];
+    return message;
+  },
+  toAmino(message: Grants): GrantsAmino {
+    const obj: any = {};
+    if (message.authorization) {
+      obj.authorization = message.authorization.map(e => e ? GlobalDecoderRegistry.toAminoMsg(e) : undefined);
+    } else {
+      obj.authorization = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GrantsAminoMsg): Grants {
+    return Grants.fromAmino(object.value);
+  },
+  toAminoMsg(message: Grants): GrantsAminoMsg {
+    return {
+      type: "cosmos-sdk/Grants",
+      value: Grants.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: GrantsProtoMsg): Grants {
+    return Grants.decode(message.value);
+  },
+  toProto(message: Grants): Uint8Array {
+    return Grants.encode(message).finish();
+  },
+  toProtoMsg(message: Grants): GrantsProtoMsg {
+    return {
+      typeUrl: "/cosmos.authz.v1beta1.Grants",
+      value: Grants.encode(message).finish()
+    };
+  }
+};
+GlobalDecoderRegistry.register(Grants.typeUrl, Grants);
+GlobalDecoderRegistry.registerAminoProtoMapping(Grants.aminoType, Grants.typeUrl);
