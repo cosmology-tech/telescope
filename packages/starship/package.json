@@ -20,7 +20,7 @@
     "prepare": "npm run build",
     "lint": "eslint .",
     "format": "eslint . --fix",
-    "clean": "rimraf ./types && rimraf ./src/codegen",
+    "clean": "rimraf ./types && rimraf ./src/codegen && rimraf ./src/codegen1",
     "e2e": "npm run e2e:test",
     "e2e:deps": "make setup",
     "e2e:kind": "make setup-kind",
