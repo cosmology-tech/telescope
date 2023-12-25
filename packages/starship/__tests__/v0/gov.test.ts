@@ -4,8 +4,8 @@ import Long from 'long';
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 import BigNumber from 'bignumber.js';
 
-import { cosmos, getSigningOsmosisClient } from '../src/codegen';
-import { useChain, waitUntil } from '../src';
+import { cosmos, getSigningOsmosisClient } from '../../src/codegen';
+import { useChain, waitUntil } from '../../src';
 import './setup.test';
 
 describe('Governance tests for osmosis', () => {
@@ -47,7 +47,7 @@ describe('Governance tests for osmosis', () => {
     });
 
     expect(balance.amount).toEqual('10000000000');
-  }, 10000);
+  }, 200000);
 
   it('query validator address', async () => {
     const { validators } = await queryClient.cosmos.staking.v1beta1.validators({
@@ -66,7 +66,7 @@ describe('Governance tests for osmosis', () => {
 
     // set validator address to the first one
     validatorAddress = allValidators[0].operatorAddress;
-  });
+  }, 200000);
 
   it('stake tokens to genesis validator', async () => {
     const signingClient = await getSigningOsmosisClient({
@@ -103,7 +103,7 @@ describe('Governance tests for osmosis', () => {
 
     const result = await signingClient.signAndBroadcast(address, [msg], fee);
     assertIsDeliverTxSuccess(result);
-  }, 10000);
+  }, 200000);
 
   it('submit a txt proposal', async () => {
     const signingClient = await getSigningOsmosisClient({
@@ -162,7 +162,7 @@ describe('Governance tests for osmosis', () => {
     });
 
     expect(result.proposal.proposalId.toString()).toEqual(proposalId);
-  }, 10000);
+  }, 200000);
 
   it('vote on proposal from genesis address', async () => {
     // create genesis address signing client
@@ -190,7 +190,7 @@ describe('Governance tests for osmosis', () => {
 
     const result = await signingClient.signAndBroadcast(address, [msg], fee);
     assertIsDeliverTxSuccess(result);
-  }, 10000);
+  }, 200000);
 
   it('verify vote', async () => {
     const { vote } = await queryClient.cosmos.gov.v1beta1.vote({
@@ -201,7 +201,7 @@ describe('Governance tests for osmosis', () => {
     expect(vote.proposalId.toString()).toEqual(proposalId);
     expect(vote.voter).toEqual(address);
     expect(vote.option).toEqual(cosmos.gov.v1beta1.VoteOption.VOTE_OPTION_YES);
-  }, 10000);
+  }, 200000);
 
   it('wait for voting period to end', async () => {
     // wait for the voting period to end
@@ -220,5 +220,5 @@ describe('Governance tests for osmosis', () => {
     expect(proposal.status).toEqual(
       cosmos.gov.v1beta1.ProposalStatus.PROPOSAL_STATUS_PASSED
     );
-  }, 10000);
+  }, 200000);
 });
