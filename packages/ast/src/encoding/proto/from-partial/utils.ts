@@ -597,6 +597,16 @@ export const arrayTypes = {
     type(args: FromPartialMethod) {
         let name = args.context.getTypeName(args.field);
 
+        const callExpr = t.callExpression(
+          t.memberExpression(
+              t.identifier(name),
+              t.identifier('fromPartial')
+          ),
+          [
+              t.identifier('e')
+          ]
+        );
+
         if (
           !args.context.options.aminoEncoding.useLegacyInlineEncoding &&
           args.context.options.interfaces.enabled &&
@@ -605,16 +615,13 @@ export const arrayTypes = {
           args.field.options['(cosmos_proto.accepts_interface)']
         ) {
           name = 'GlobalDecoderRegistry';
+
+          return t.tsAsExpression(
+            callExpr,
+            t.tsAnyKeyword()
+          )
         }
 
-        return t.callExpression(
-            t.memberExpression(
-                t.identifier(name),
-                t.identifier('fromPartial')
-            ),
-            [
-                t.identifier('e')
-            ]
-        );
+        return callExpr;
     }
 }
