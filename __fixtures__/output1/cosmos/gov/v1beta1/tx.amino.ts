@@ -2,7 +2,7 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { VoteOption, VoteOptionSDKType, WeightedVoteOption, WeightedVoteOptionSDKType, voteOptionFromJSON } from "./gov";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "../../../helpers";
+import { omitDefault, Long, padDecimal } from "../../../helpers";
 import { MsgSubmitProposal, MsgSubmitProposalSDKType, MsgVote, MsgVoteSDKType, MsgVoteWeighted, MsgVoteWeightedSDKType, MsgDeposit, MsgDepositSDKType } from "./tx";
 export interface MsgSubmitProposalAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgSubmitProposal";
@@ -58,14 +58,14 @@ export const AminoConverter = {
     }: MsgSubmitProposal): MsgSubmitProposalAminoType["value"] => {
       return {
         content: {
-          type_url: content.typeUrl,
+          type_url: omitDefault(content.typeUrl),
           value: content.value
         },
         initial_deposit: initialDeposit.map(el0 => ({
-          denom: el0.denom,
-          amount: el0.amount
+          denom: omitDefault(el0.denom),
+          amount: omitDefault(el0.amount)
         })),
-        proposer
+        proposer: omitDefault(proposer)
       };
     },
     fromAmino: ({
@@ -95,8 +95,8 @@ export const AminoConverter = {
     }: MsgVote): MsgVoteAminoType["value"] => {
       return {
         proposal_id: proposalId.toString(),
-        voter,
-        option
+        voter: omitDefault(voter),
+        option: option
       };
     },
     fromAmino: ({
@@ -120,10 +120,10 @@ export const AminoConverter = {
     }: MsgVoteWeighted): MsgVoteWeightedAminoType["value"] => {
       return {
         proposal_id: proposalId.toString(),
-        voter,
+        voter: omitDefault(voter),
         options: options.map(el0 => ({
           option: el0.option,
-          weight: el0.weight
+          weight: padDecimal(el0.weight)
         }))
       };
     },
@@ -151,10 +151,10 @@ export const AminoConverter = {
     }: MsgDeposit): MsgDepositAminoType["value"] => {
       return {
         proposal_id: proposalId.toString(),
-        depositor,
+        depositor: omitDefault(depositor),
         amount: amount.map(el0 => ({
-          denom: el0.denom,
-          amount: el0.amount
+          denom: omitDefault(el0.denom),
+          amount: omitDefault(el0.amount)
         }))
       };
     },

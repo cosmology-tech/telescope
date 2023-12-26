@@ -2,7 +2,7 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { VoteOption, VoteOptionSDKType, WeightedVoteOption, WeightedVoteOptionSDKType, voteOptionFromJSON } from "./gov";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "../../../helpers";
+import { omitDefault, Long } from "../../../helpers";
 import { MsgSubmitProposal, MsgSubmitProposalSDKType, MsgExecLegacyContent, MsgExecLegacyContentSDKType, MsgVote, MsgVoteSDKType, MsgVoteWeighted, MsgVoteWeightedSDKType, MsgDeposit, MsgDepositSDKType } from "./tx";
 export interface MsgSubmitProposalAminoType extends AminoMsg {
   type: "cosmos-sdk/v1/MsgSubmitProposal";
@@ -72,15 +72,15 @@ export const AminoConverter = {
     }: MsgSubmitProposal): MsgSubmitProposalAminoType["value"] => {
       return {
         messages: messages.map(el0 => ({
-          type_url: el0.typeUrl,
+          type_url: omitDefault(el0.typeUrl),
           value: el0.value
         })),
         initial_deposit: initialDeposit.map(el0 => ({
-          denom: el0.denom,
-          amount: el0.amount
+          denom: omitDefault(el0.denom),
+          amount: omitDefault(el0.amount)
         })),
-        proposer,
-        metadata
+        proposer: omitDefault(proposer),
+        metadata: omitDefault(metadata)
       };
     },
     fromAmino: ({
@@ -111,10 +111,10 @@ export const AminoConverter = {
     }: MsgExecLegacyContent): MsgExecLegacyContentAminoType["value"] => {
       return {
         content: {
-          type_url: content.typeUrl,
+          type_url: omitDefault(content.typeUrl),
           value: content.value
         },
-        authority
+        authority: omitDefault(authority)
       };
     },
     fromAmino: ({
@@ -140,9 +140,9 @@ export const AminoConverter = {
     }: MsgVote): MsgVoteAminoType["value"] => {
       return {
         proposal_id: proposalId.toString(),
-        voter,
-        option,
-        metadata
+        voter: omitDefault(voter),
+        option: option,
+        metadata: omitDefault(metadata)
       };
     },
     fromAmino: ({
@@ -169,12 +169,12 @@ export const AminoConverter = {
     }: MsgVoteWeighted): MsgVoteWeightedAminoType["value"] => {
       return {
         proposal_id: proposalId.toString(),
-        voter,
+        voter: omitDefault(voter),
         options: options.map(el0 => ({
           option: el0.option,
-          weight: el0.weight
+          weight: omitDefault(el0.weight)
         })),
-        metadata
+        metadata: omitDefault(metadata)
       };
     },
     fromAmino: ({
@@ -203,10 +203,10 @@ export const AminoConverter = {
     }: MsgDeposit): MsgDepositAminoType["value"] => {
       return {
         proposal_id: proposalId.toString(),
-        depositor,
+        depositor: omitDefault(depositor),
         amount: amount.map(el0 => ({
-          denom: el0.denom,
-          amount: el0.amount
+          denom: omitDefault(el0.denom),
+          amount: omitDefault(el0.amount)
         }))
       };
     },

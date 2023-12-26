@@ -1,6 +1,7 @@
 //@ts-nocheck
 import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType, SmoothWeightChangeParams, SmoothWeightChangeParamsSDKType } from "../balancerPool";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault, padDecimal } from "../../../../../helpers";
 import { Timestamp, TimestampSDKType } from "../../../../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../../../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../../../../cosmos/base/v1beta1/coin";
@@ -57,10 +58,10 @@ export const AminoConverter = {
       futurePoolGovernor
     }: MsgCreateBalancerPool): MsgCreateBalancerPoolAminoType["value"] => {
       return {
-        sender,
+        sender: omitDefault(sender),
         pool_params: {
-          swap_fee: poolParams.swapFee,
-          exit_fee: poolParams.exitFee,
+          swap_fee: padDecimal(poolParams.swapFee),
+          exit_fee: padDecimal(poolParams.exitFee),
           smooth_weight_change_params: {
             start_time: poolParams.smoothWeightChangeParams.startTime,
             duration: (poolParams.smoothWeightChangeParams.duration * 1_000_000_000).toString(),
@@ -69,14 +70,14 @@ export const AminoConverter = {
                 denom: el0.token.denom,
                 amount: el0.token.amount
               },
-              weight: el0.weight
+              weight: omitDefault(el0.weight)
             })),
             target_pool_weights: poolParams.smoothWeightChangeParams.targetPoolWeights.map(el0 => ({
               token: {
                 denom: el0.token.denom,
                 amount: el0.token.amount
               },
-              weight: el0.weight
+              weight: omitDefault(el0.weight)
             }))
           }
         },
@@ -85,9 +86,9 @@ export const AminoConverter = {
             denom: el0.token.denom,
             amount: el0.token.amount
           },
-          weight: el0.weight
+          weight: omitDefault(el0.weight)
         })),
-        future_pool_governor: futurePoolGovernor
+        future_pool_governor: omitDefault(futurePoolGovernor)
       };
     },
     fromAmino: ({

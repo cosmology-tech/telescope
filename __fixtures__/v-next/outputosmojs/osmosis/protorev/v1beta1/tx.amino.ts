@@ -1,6 +1,7 @@
 //@ts-nocheck
 import { TokenPairArbRoutes, TokenPairArbRoutesSDKType, PoolWeights, PoolWeightsSDKType, BaseDenom, BaseDenomSDKType, Route, RouteSDKType, Trade, TradeSDKType } from "./protorev";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault } from "../../../helpers";
 import { MsgSetHotRoutes, MsgSetHotRoutesSDKType, MsgSetDeveloperAccount, MsgSetDeveloperAccountSDKType, MsgSetMaxPoolPointsPerTx, MsgSetMaxPoolPointsPerTxSDKType, MsgSetMaxPoolPointsPerBlock, MsgSetMaxPoolPointsPerBlockSDKType, MsgSetPoolWeights, MsgSetPoolWeightsSDKType, MsgSetBaseDenoms, MsgSetBaseDenomsSDKType } from "./tx";
 export interface MsgSetHotRoutesAminoType extends AminoMsg {
   type: "osmosis/MsgSetHotRoutes";
@@ -70,18 +71,18 @@ export const AminoConverter = {
       hotRoutes
     }: MsgSetHotRoutes): MsgSetHotRoutesAminoType["value"] => {
       return {
-        admin,
+        admin: omitDefault(admin),
         hot_routes: hotRoutes.map(el0 => ({
           arb_routes: el0.arbRoutes.map(el1 => ({
             trades: el1.trades.map(el2 => ({
               pool: el2.pool.toString(),
-              token_in: el2.tokenIn,
-              token_out: el2.tokenOut
+              token_in: omitDefault(el2.tokenIn),
+              token_out: omitDefault(el2.tokenOut)
             })),
-            step_size: el1.stepSize
+            step_size: omitDefault(el1.stepSize)
           })),
-          token_in: el0.tokenIn,
-          token_out: el0.tokenOut
+          token_in: omitDefault(el0.tokenIn),
+          token_out: omitDefault(el0.tokenOut)
         }))
       };
     },
@@ -113,8 +114,8 @@ export const AminoConverter = {
       developerAccount
     }: MsgSetDeveloperAccount): MsgSetDeveloperAccountAminoType["value"] => {
       return {
-        admin,
-        developer_account: developerAccount
+        admin: omitDefault(admin),
+        developer_account: omitDefault(developerAccount)
       };
     },
     fromAmino: ({
@@ -134,7 +135,7 @@ export const AminoConverter = {
       maxPoolPointsPerTx
     }: MsgSetMaxPoolPointsPerTx): MsgSetMaxPoolPointsPerTxAminoType["value"] => {
       return {
-        admin,
+        admin: omitDefault(admin),
         max_pool_points_per_tx: maxPoolPointsPerTx.toString()
       };
     },
@@ -155,7 +156,7 @@ export const AminoConverter = {
       maxPoolPointsPerBlock
     }: MsgSetMaxPoolPointsPerBlock): MsgSetMaxPoolPointsPerBlockAminoType["value"] => {
       return {
-        admin,
+        admin: omitDefault(admin),
         max_pool_points_per_block: maxPoolPointsPerBlock.toString()
       };
     },
@@ -176,7 +177,7 @@ export const AminoConverter = {
       poolWeights
     }: MsgSetPoolWeights): MsgSetPoolWeightsAminoType["value"] => {
       return {
-        admin,
+        admin: omitDefault(admin),
         pool_weights: {
           stable_weight: poolWeights.stableWeight.toString(),
           balancer_weight: poolWeights.balancerWeight.toString(),
@@ -205,10 +206,10 @@ export const AminoConverter = {
       baseDenoms
     }: MsgSetBaseDenoms): MsgSetBaseDenomsAminoType["value"] => {
       return {
-        admin,
+        admin: omitDefault(admin),
         base_denoms: baseDenoms.map(el0 => ({
-          denom: el0.denom,
-          step_size: el0.stepSize
+          denom: omitDefault(el0.denom),
+          step_size: omitDefault(el0.stepSize)
         }))
       };
     },

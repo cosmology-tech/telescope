@@ -3,7 +3,8 @@ import { ToAminoParseField } from './index';
 export declare const toAmino: {
     defaultType(args: ToAminoParseField): t.ObjectProperty;
     long(args: ToAminoParseField): t.ObjectProperty;
-    string(args: ToAminoParseField): t.ObjectProperty;
+    string(args: ToAminoParseField, omitEmpty?: boolean): t.ObjectProperty;
+    omitDefaultMemberExpressionOrIdentifier(args: ToAminoParseField, names: any): t.CallExpression;
     rawBytes(args: ToAminoParseField): t.ObjectProperty;
     wasmByteCode(args: ToAminoParseField): t.ObjectProperty;
     duration(args: ToAminoParseField): t.ObjectProperty;

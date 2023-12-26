@@ -8,6 +8,7 @@
 
 import * as _m0 from "protobufjs/minimal";
 import Long from 'long';
+import { Dec } from "@keplr-wallet/unit";
 
 // @ts-ignore
 if (_m0.util.Long !== Long) {
@@ -67,7 +68,7 @@ export function omitDefault<T extends string | number | Long>(input: T): T | und
     }
 
     if (Long.isLong(input)) {
-        return input.isZero() ? undefined : input;
+        return (input as Long).isZero() ? undefined : input;
     }
 
     throw new Error(`Got unsupported type ${typeof input}`);
@@ -142,7 +143,7 @@ export const setPaginationParams = (options: Params, pagination?: PageRequest) =
     }
     if (typeof pagination?.key !== "undefined") {
         // String to Uint8Array
-        // let uint8arr = new Uint8Array(Buffer.from(data,'base64')); 
+        // let uint8arr = new Uint8Array(Buffer.from(data,'base64'));
 
         // Uint8Array to String
         options.params['pagination.key'] = Buffer.from(pagination.key).toString('base64');
@@ -152,7 +153,7 @@ export const setPaginationParams = (options: Params, pagination?: PageRequest) =
     }
     if (typeof pagination?.offset !== "undefined") {
       options.params["pagination.offset"] = pagination.offset.toString()
-    }    
+    }
     if (typeof pagination?.reverse !== "undefined") {
         options.params['pagination.reverse'] = pagination.reverse;
     }
@@ -228,7 +229,7 @@ const timestampFromJSON = (object: any): Timestamp => {
     nanos: isSet(object.nanos) ? Number(object.nanos) : 0,
   };
 }
-  
+
 export function fromJsonTimestamp(o: any): Timestamp {
   if (o instanceof Date) {
     return toTimestamp(o);
@@ -238,7 +239,11 @@ export function fromJsonTimestamp(o: any): Timestamp {
     return timestampFromJSON(o);
   }
 }
-  
+
 function numberToLong(number: number) {
     return Long.fromNumber(number);
+}
+
+export function padDecimal(decStr: string): string{
+  return decStr ? new Dec(decStr).toString() : decStr;
 }

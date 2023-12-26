@@ -2,6 +2,7 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Metadata, MetadataSDKType, DenomUnit, DenomUnitSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault } from "../../../helpers";
 import { MsgCreateDenom, MsgCreateDenomSDKType, MsgMint, MsgMintSDKType, MsgBurn, MsgBurnSDKType, MsgChangeAdmin, MsgChangeAdminSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataSDKType } from "./tx";
 export interface MsgCreateDenomAminoType extends AminoMsg {
   type: "osmosis/tokenfactory/create-denom";
@@ -66,8 +67,8 @@ export const AminoConverter = {
       subdenom
     }: MsgCreateDenom): MsgCreateDenomAminoType["value"] => {
       return {
-        sender,
-        subdenom
+        sender: omitDefault(sender),
+        subdenom: omitDefault(subdenom)
       };
     },
     fromAmino: ({
@@ -87,7 +88,7 @@ export const AminoConverter = {
       amount
     }: MsgMint): MsgMintAminoType["value"] => {
       return {
-        sender,
+        sender: omitDefault(sender),
         amount: {
           denom: amount.denom,
           amount: amount.amount
@@ -114,7 +115,7 @@ export const AminoConverter = {
       amount
     }: MsgBurn): MsgBurnAminoType["value"] => {
       return {
-        sender,
+        sender: omitDefault(sender),
         amount: {
           denom: amount.denom,
           amount: amount.amount
@@ -142,9 +143,9 @@ export const AminoConverter = {
       newAdmin
     }: MsgChangeAdmin): MsgChangeAdminAminoType["value"] => {
       return {
-        sender,
-        denom,
-        new_admin: newAdmin
+        sender: omitDefault(sender),
+        denom: omitDefault(denom),
+        new_admin: omitDefault(newAdmin)
       };
     },
     fromAmino: ({
@@ -166,20 +167,20 @@ export const AminoConverter = {
       metadata
     }: MsgSetDenomMetadata): MsgSetDenomMetadataAminoType["value"] => {
       return {
-        sender,
+        sender: omitDefault(sender),
         metadata: {
-          description: metadata.description,
+          description: omitDefault(metadata.description),
           denom_units: metadata.denomUnits.map(el0 => ({
-            denom: el0.denom,
+            denom: omitDefault(el0.denom),
             exponent: el0.exponent,
             aliases: el0.aliases
           })),
-          base: metadata.base,
-          display: metadata.display,
-          name: metadata.name,
-          symbol: metadata.symbol,
-          uri: metadata.uri,
-          uri_hash: metadata.uriHash
+          base: omitDefault(metadata.base),
+          display: omitDefault(metadata.display),
+          name: omitDefault(metadata.name),
+          symbol: omitDefault(metadata.symbol),
+          uri: omitDefault(metadata.uri),
+          uri_hash: omitDefault(metadata.uriHash)
         }
       };
     },

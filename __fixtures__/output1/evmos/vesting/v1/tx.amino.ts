@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "../../../helpers";
+import { omitDefault, Long } from "../../../helpers";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { MsgCreateClawbackVestingAccount, MsgCreateClawbackVestingAccountSDKType, MsgClawback, MsgClawbackSDKType } from "./tx";
 export interface MsgCreateClawbackVestingAccountAminoType extends AminoMsg {
@@ -50,24 +50,24 @@ export const AminoConverter = {
       merge
     }: MsgCreateClawbackVestingAccount): MsgCreateClawbackVestingAccountAminoType["value"] => {
       return {
-        from_address: fromAddress,
-        to_address: toAddress,
+        from_address: omitDefault(fromAddress),
+        to_address: omitDefault(toAddress),
         start_time: startTime,
         lockup_periods: lockupPeriods.map(el0 => ({
           length: el0.length.toString(),
           amount: el0.amount.map(el1 => ({
-            denom: el1.denom,
-            amount: el1.amount
+            denom: omitDefault(el1.denom),
+            amount: omitDefault(el1.amount)
           }))
         })),
         vesting_periods: vestingPeriods.map(el0 => ({
           length: el0.length.toString(),
           amount: el0.amount.map(el1 => ({
-            denom: el1.denom,
-            amount: el1.amount
+            denom: omitDefault(el1.denom),
+            amount: omitDefault(el1.amount)
           }))
         })),
-        merge
+        merge: merge
       };
     },
     fromAmino: ({
@@ -108,9 +108,9 @@ export const AminoConverter = {
       destAddress
     }: MsgClawback): MsgClawbackAminoType["value"] => {
       return {
-        funder_address: funderAddress,
-        account_address: accountAddress,
-        dest_address: destAddress
+        funder_address: omitDefault(funderAddress),
+        account_address: omitDefault(accountAddress),
+        dest_address: omitDefault(destAddress)
       };
     },
     fromAmino: ({

@@ -3,6 +3,7 @@ import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault, padDecimal } from "../../helpers";
 import { MsgCreatePosition, MsgCreatePositionSDKType, MsgWithdrawPosition, MsgWithdrawPositionSDKType, MsgCollectFees, MsgCollectFeesSDKType, MsgCollectIncentives, MsgCollectIncentivesSDKType, MsgFungifyChargedPositions, MsgFungifyChargedPositionsSDKType } from "./tx";
 export interface MsgCreatePositionAminoType extends AminoMsg {
   type: "osmosis/concentratedliquidity/create-position";
@@ -67,7 +68,7 @@ export const AminoConverter = {
     }: MsgCreatePosition): MsgCreatePositionAminoType["value"] => {
       return {
         pool_id: poolId.toString(),
-        sender,
+        sender: omitDefault(sender),
         lower_tick: lowerTick.toString(),
         upper_tick: upperTick.toString(),
         token_desired0: {
@@ -78,8 +79,8 @@ export const AminoConverter = {
           denom: tokenDesired1.denom,
           amount: tokenDesired1.amount
         },
-        token_min_amount0: tokenMinAmount0,
-        token_min_amount1: tokenMinAmount1
+        token_min_amount0: omitDefault(tokenMinAmount0),
+        token_min_amount1: omitDefault(tokenMinAmount1)
       };
     },
     fromAmino: ({
@@ -119,8 +120,8 @@ export const AminoConverter = {
     }: MsgWithdrawPosition): MsgWithdrawPositionAminoType["value"] => {
       return {
         position_id: positionId.toString(),
-        sender,
-        liquidity_amount: liquidityAmount
+        sender: omitDefault(sender),
+        liquidity_amount: padDecimal(liquidityAmount)
       };
     },
     fromAmino: ({
@@ -143,7 +144,7 @@ export const AminoConverter = {
     }: MsgCollectFees): MsgCollectFeesAminoType["value"] => {
       return {
         position_ids: positionIds.map(el0 => el0.toString()),
-        sender
+        sender: omitDefault(sender)
       };
     },
     fromAmino: ({
@@ -164,7 +165,7 @@ export const AminoConverter = {
     }: MsgCollectIncentives): MsgCollectIncentivesAminoType["value"] => {
       return {
         position_ids: positionIds.map(el0 => el0.toString()),
-        sender
+        sender: omitDefault(sender)
       };
     },
     fromAmino: ({
@@ -185,7 +186,7 @@ export const AminoConverter = {
     }: MsgFungifyChargedPositions): MsgFungifyChargedPositionsAminoType["value"] => {
       return {
         position_ids: positionIds.map(el0 => el0.toString()),
-        sender
+        sender: omitDefault(sender)
       };
     },
     fromAmino: ({

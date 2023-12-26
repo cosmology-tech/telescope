@@ -2,6 +2,7 @@
 import { ValidatorPreference, ValidatorPreferenceSDKType } from "./state";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault, padDecimal } from "../../../helpers";
 import { MsgSetValidatorSetPreference, MsgSetValidatorSetPreferenceSDKType, MsgDelegateToValidatorSet, MsgDelegateToValidatorSetSDKType, MsgUndelegateFromValidatorSet, MsgUndelegateFromValidatorSetSDKType, MsgRedelegateValidatorSet, MsgRedelegateValidatorSetSDKType, MsgWithdrawDelegationRewards, MsgWithdrawDelegationRewardsSDKType, MsgDelegateBondedTokens, MsgDelegateBondedTokensSDKType } from "./tx";
 export interface MsgSetValidatorSetPreferenceAminoType extends AminoMsg {
   type: "osmosis/valset-pref/MsgSetValidatorSetPreference";
@@ -64,10 +65,10 @@ export const AminoConverter = {
       preferences
     }: MsgSetValidatorSetPreference): MsgSetValidatorSetPreferenceAminoType["value"] => {
       return {
-        delegator,
+        delegator: omitDefault(delegator),
         preferences: preferences.map(el0 => ({
-          val_oper_address: el0.valOperAddress,
-          weight: el0.weight
+          val_oper_address: omitDefault(el0.valOperAddress),
+          weight: padDecimal(el0.weight)
         }))
       };
     },
@@ -91,7 +92,7 @@ export const AminoConverter = {
       coin
     }: MsgDelegateToValidatorSet): MsgDelegateToValidatorSetAminoType["value"] => {
       return {
-        delegator,
+        delegator: omitDefault(delegator),
         coin: {
           denom: coin.denom,
           amount: coin.amount
@@ -118,7 +119,7 @@ export const AminoConverter = {
       coin
     }: MsgUndelegateFromValidatorSet): MsgUndelegateFromValidatorSetAminoType["value"] => {
       return {
-        delegator,
+        delegator: omitDefault(delegator),
         coin: {
           denom: coin.denom,
           amount: coin.amount
@@ -145,10 +146,10 @@ export const AminoConverter = {
       preferences
     }: MsgRedelegateValidatorSet): MsgRedelegateValidatorSetAminoType["value"] => {
       return {
-        delegator,
+        delegator: omitDefault(delegator),
         preferences: preferences.map(el0 => ({
-          val_oper_address: el0.valOperAddress,
-          weight: el0.weight
+          val_oper_address: omitDefault(el0.valOperAddress),
+          weight: padDecimal(el0.weight)
         }))
       };
     },
@@ -171,7 +172,7 @@ export const AminoConverter = {
       delegator
     }: MsgWithdrawDelegationRewards): MsgWithdrawDelegationRewardsAminoType["value"] => {
       return {
-        delegator
+        delegator: omitDefault(delegator)
       };
     },
     fromAmino: ({
@@ -189,7 +190,7 @@ export const AminoConverter = {
       lockID
     }: MsgDelegateBondedTokens): MsgDelegateBondedTokensAminoType["value"] => {
       return {
-        delegator,
+        delegator: omitDefault(delegator),
         lockID: lockID.toString()
       };
     },

@@ -1,5 +1,6 @@
 import { InterchainAccountPacketData, InterchainAccountPacketDataSDKType, typeFromJSON } from "../../v1/packet";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault } from "../../../../../helpers";
 import { MsgRegisterInterchainAccount, MsgRegisterInterchainAccountSDKType, MsgSendTx, MsgSendTxSDKType } from "./tx";
 export interface MsgRegisterInterchainAccountAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgRegisterInterchainAccount";
@@ -31,9 +32,9 @@ export const AminoConverter = {
       version
     }: MsgRegisterInterchainAccount): MsgRegisterInterchainAccountAminoType["value"] => {
       return {
-        owner,
-        connection_id: connectionId,
-        version
+        owner: omitDefault(owner),
+        connection_id: omitDefault(connectionId),
+        version: omitDefault(version)
       };
     },
     fromAmino: ({
@@ -57,12 +58,12 @@ export const AminoConverter = {
       relativeTimeout
     }: MsgSendTx): MsgSendTxAminoType["value"] => {
       return {
-        owner,
-        connection_id: connectionId,
+        owner: omitDefault(owner),
+        connection_id: omitDefault(connectionId),
         packet_data: {
           type: packetData.type,
           data: packetData.data,
-          memo: packetData.memo
+          memo: omitDefault(packetData.memo)
         },
         relative_timeout: relativeTimeout.toString()
       };

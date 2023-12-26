@@ -3,6 +3,7 @@ import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockSDKType } from "./lock";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault } from "../../helpers";
 import { MsgLockTokens, MsgLockTokensSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllSDKType, MsgBeginUnlocking, MsgBeginUnlockingSDKType, MsgExtendLockup, MsgExtendLockupSDKType, MsgForceUnlock, MsgForceUnlockSDKType } from "./tx";
 export interface MsgLockTokensAminoType extends AminoMsg {
   type: "osmosis/lockup/lock-tokens";
@@ -66,11 +67,11 @@ export const AminoConverter = {
       coins
     }: MsgLockTokens): MsgLockTokensAminoType["value"] => {
       return {
-        owner,
+        owner: omitDefault(owner),
         duration: (duration * 1_000_000_000).toString(),
         coins: coins.map(el0 => ({
-          denom: el0.denom,
-          amount: el0.amount
+          denom: omitDefault(el0.denom),
+          amount: omitDefault(el0.amount)
         }))
       };
     },
@@ -98,7 +99,7 @@ export const AminoConverter = {
       owner
     }: MsgBeginUnlockingAll): MsgBeginUnlockingAllAminoType["value"] => {
       return {
-        owner
+        owner: omitDefault(owner)
       };
     },
     fromAmino: ({
@@ -117,11 +118,11 @@ export const AminoConverter = {
       coins
     }: MsgBeginUnlocking): MsgBeginUnlockingAminoType["value"] => {
       return {
-        owner,
+        owner: omitDefault(owner),
         ID: ID.toString(),
         coins: coins.map(el0 => ({
-          denom: el0.denom,
-          amount: el0.amount
+          denom: omitDefault(el0.denom),
+          amount: omitDefault(el0.amount)
         }))
       };
     },
@@ -148,7 +149,7 @@ export const AminoConverter = {
       duration
     }: MsgExtendLockup): MsgExtendLockupAminoType["value"] => {
       return {
-        owner,
+        owner: omitDefault(owner),
         ID: ID.toString(),
         duration: (duration * 1_000_000_000).toString()
       };
@@ -176,11 +177,11 @@ export const AminoConverter = {
       coins
     }: MsgForceUnlock): MsgForceUnlockAminoType["value"] => {
       return {
-        owner,
+        owner: omitDefault(owner),
         ID: ID.toString(),
         coins: coins.map(el0 => ({
-          denom: el0.denom,
-          amount: el0.amount
+          denom: omitDefault(el0.denom),
+          amount: omitDefault(el0.amount)
         }))
       };
     },

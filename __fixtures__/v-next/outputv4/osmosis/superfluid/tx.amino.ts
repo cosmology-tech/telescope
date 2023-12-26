@@ -1,6 +1,7 @@
 //@ts-nocheck
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault } from "../../helpers";
 import { MsgSuperfluidDelegate, MsgSuperfluidDelegateSDKType, MsgSuperfluidUndelegate, MsgSuperfluidUndelegateSDKType, MsgSuperfluidUnbondLock, MsgSuperfluidUnbondLockSDKType, MsgLockAndSuperfluidDelegate, MsgLockAndSuperfluidDelegateSDKType, MsgUnPoolWhitelistedPool, MsgUnPoolWhitelistedPoolSDKType } from "./tx";
 export interface MsgSuperfluidDelegateAminoType extends AminoMsg {
   type: "osmosis/superfluid-delegate";
@@ -51,9 +52,9 @@ export const AminoConverter = {
       valAddr
     }: MsgSuperfluidDelegate): MsgSuperfluidDelegateAminoType["value"] => {
       return {
-        sender,
+        sender: omitDefault(sender),
         lock_id: lockId.toString(),
-        val_addr: valAddr
+        val_addr: omitDefault(valAddr)
       };
     },
     fromAmino: ({
@@ -75,7 +76,7 @@ export const AminoConverter = {
       lockId
     }: MsgSuperfluidUndelegate): MsgSuperfluidUndelegateAminoType["value"] => {
       return {
-        sender,
+        sender: omitDefault(sender),
         lock_id: lockId.toString()
       };
     },
@@ -96,7 +97,7 @@ export const AminoConverter = {
       lockId
     }: MsgSuperfluidUnbondLock): MsgSuperfluidUnbondLockAminoType["value"] => {
       return {
-        sender,
+        sender: omitDefault(sender),
         lock_id: lockId.toString()
       };
     },
@@ -118,12 +119,12 @@ export const AminoConverter = {
       valAddr
     }: MsgLockAndSuperfluidDelegate): MsgLockAndSuperfluidDelegateAminoType["value"] => {
       return {
-        sender,
+        sender: omitDefault(sender),
         coins: coins.map(el0 => ({
-          denom: el0.denom,
-          amount: el0.amount
+          denom: omitDefault(el0.denom),
+          amount: omitDefault(el0.amount)
         })),
-        val_addr: valAddr
+        val_addr: omitDefault(valAddr)
       };
     },
     fromAmino: ({
@@ -148,7 +149,7 @@ export const AminoConverter = {
       poolId
     }: MsgUnPoolWhitelistedPool): MsgUnPoolWhitelistedPoolAminoType["value"] => {
       return {
-        sender,
+        sender: omitDefault(sender),
         pool_id: poolId.toString()
       };
     },

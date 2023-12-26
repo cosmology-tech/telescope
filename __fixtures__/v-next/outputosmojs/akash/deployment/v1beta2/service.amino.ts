@@ -4,6 +4,7 @@ import { GroupSpec, GroupSpecSDKType } from "./groupspec";
 import { Coin, CoinSDKType, DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { GroupID, GroupIDSDKType } from "./groupid";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault } from "../../../helpers";
 import { PlacementRequirements, PlacementRequirementsSDKType, SignedBy, SignedBySDKType, Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
 import { Resource, ResourceSDKType } from "./resource";
 import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
@@ -156,19 +157,19 @@ export const AminoConverter = {
     }: MsgCreateDeployment): MsgCreateDeploymentAminoType["value"] => {
       return {
         id: {
-          owner: id.owner,
+          owner: omitDefault(id.owner),
           dseq: id.dseq.toString()
         },
         groups: groups.map(el0 => ({
-          name: el0.name,
+          name: omitDefault(el0.name),
           requirements: {
             signed_by: {
               all_of: el0.requirements.signedBy.allOf,
               any_of: el0.requirements.signedBy.anyOf
             },
             attributes: el0.requirements.attributes.map(el1 => ({
-              key: el1.key,
-              value: el1.value
+              key: omitDefault(el1.key),
+              value: omitDefault(el1.value)
             }))
           },
           resources: el0.resources.map(el1 => ({
@@ -178,8 +179,8 @@ export const AminoConverter = {
                   val: el1.resources.cpu.units.val
                 },
                 attributes: el1.resources.cpu.attributes.map(el2 => ({
-                  key: el2.key,
-                  value: el2.value
+                  key: omitDefault(el2.key),
+                  value: omitDefault(el2.value)
                 }))
               },
               memory: {
@@ -187,18 +188,18 @@ export const AminoConverter = {
                   val: el1.resources.memory.quantity.val
                 },
                 attributes: el1.resources.memory.attributes.map(el2 => ({
-                  key: el2.key,
-                  value: el2.value
+                  key: omitDefault(el2.key),
+                  value: omitDefault(el2.value)
                 }))
               },
               storage: el1.resources.storage.map(el2 => ({
-                name: el2.name,
+                name: omitDefault(el2.name),
                 quantity: {
                   val: el2.quantity.val
                 },
                 attributes: el2.attributes.map(el3 => ({
-                  key: el3.key,
-                  value: el3.value
+                  key: omitDefault(el3.key),
+                  value: omitDefault(el3.value)
                 }))
               })),
               endpoints: el1.resources.endpoints.map(el2 => ({
@@ -208,17 +209,17 @@ export const AminoConverter = {
             },
             count: el1.count,
             price: {
-              denom: el1.price.denom,
-              amount: el1.price.amount
+              denom: omitDefault(el1.price.denom),
+              amount: omitDefault(el1.price.amount)
             }
           }))
         })),
-        version,
+        version: version,
         deposit: {
           denom: deposit.denom,
           amount: deposit.amount
         },
-        depositor
+        depositor: omitDefault(depositor)
       };
     },
     fromAmino: ({
@@ -305,14 +306,14 @@ export const AminoConverter = {
     }: MsgDepositDeployment): MsgDepositDeploymentAminoType["value"] => {
       return {
         id: {
-          owner: id.owner,
+          owner: omitDefault(id.owner),
           dseq: id.dseq.toString()
         },
         amount: {
           denom: amount.denom,
           amount: amount.amount
         },
-        depositor
+        depositor: omitDefault(depositor)
       };
     },
     fromAmino: ({
@@ -341,10 +342,10 @@ export const AminoConverter = {
     }: MsgUpdateDeployment): MsgUpdateDeploymentAminoType["value"] => {
       return {
         id: {
-          owner: id.owner,
+          owner: omitDefault(id.owner),
           dseq: id.dseq.toString()
         },
-        version
+        version: version
       };
     },
     fromAmino: ({
@@ -367,7 +368,7 @@ export const AminoConverter = {
     }: MsgCloseDeployment): MsgCloseDeploymentAminoType["value"] => {
       return {
         id: {
-          owner: id.owner,
+          owner: omitDefault(id.owner),
           dseq: id.dseq.toString()
         }
       };
@@ -390,7 +391,7 @@ export const AminoConverter = {
     }: MsgCloseGroup): MsgCloseGroupAminoType["value"] => {
       return {
         id: {
-          owner: id.owner,
+          owner: omitDefault(id.owner),
           dseq: id.dseq.toString(),
           gseq: id.gseq
         }
@@ -415,7 +416,7 @@ export const AminoConverter = {
     }: MsgPauseGroup): MsgPauseGroupAminoType["value"] => {
       return {
         id: {
-          owner: id.owner,
+          owner: omitDefault(id.owner),
           dseq: id.dseq.toString(),
           gseq: id.gseq
         }
@@ -440,7 +441,7 @@ export const AminoConverter = {
     }: MsgStartGroup): MsgStartGroupAminoType["value"] => {
       return {
         id: {
-          owner: id.owner,
+          owner: omitDefault(id.owner),
           dseq: id.dseq.toString(),
           gseq: id.gseq
         }

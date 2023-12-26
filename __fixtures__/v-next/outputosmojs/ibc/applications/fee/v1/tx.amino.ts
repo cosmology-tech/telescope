@@ -1,5 +1,6 @@
 import { Fee, FeeSDKType, PacketFee, PacketFeeSDKType } from "./fee";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault } from "../../../../helpers";
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { MsgRegisterPayee, MsgRegisterPayeeSDKType, MsgRegisterCounterpartyPayee, MsgRegisterCounterpartyPayeeSDKType, MsgPayPacketFee, MsgPayPacketFeeSDKType, MsgPayPacketFeeAsync, MsgPayPacketFeeAsyncSDKType } from "./tx";
 export interface MsgRegisterPayeeAminoType extends AminoMsg {
@@ -76,10 +77,10 @@ export const AminoConverter = {
       payee
     }: MsgRegisterPayee): MsgRegisterPayeeAminoType["value"] => {
       return {
-        port_id: portId,
-        channel_id: channelId,
-        relayer,
-        payee
+        port_id: omitDefault(portId),
+        channel_id: omitDefault(channelId),
+        relayer: omitDefault(relayer),
+        payee: omitDefault(payee)
       };
     },
     fromAmino: ({
@@ -105,10 +106,10 @@ export const AminoConverter = {
       counterpartyPayee
     }: MsgRegisterCounterpartyPayee): MsgRegisterCounterpartyPayeeAminoType["value"] => {
       return {
-        port_id: portId,
-        channel_id: channelId,
-        relayer,
-        counterparty_payee: counterpartyPayee
+        port_id: omitDefault(portId),
+        channel_id: omitDefault(channelId),
+        relayer: omitDefault(relayer),
+        counterparty_payee: omitDefault(counterpartyPayee)
       };
     },
     fromAmino: ({
@@ -137,22 +138,22 @@ export const AminoConverter = {
       return {
         fee: {
           recv_fee: fee.recvFee.map(el0 => ({
-            denom: el0.denom,
-            amount: el0.amount
+            denom: omitDefault(el0.denom),
+            amount: omitDefault(el0.amount)
           })),
           ack_fee: fee.ackFee.map(el0 => ({
-            denom: el0.denom,
-            amount: el0.amount
+            denom: omitDefault(el0.denom),
+            amount: omitDefault(el0.amount)
           })),
           timeout_fee: fee.timeoutFee.map(el0 => ({
-            denom: el0.denom,
-            amount: el0.amount
+            denom: omitDefault(el0.denom),
+            amount: omitDefault(el0.amount)
           }))
         },
-        source_port_id: sourcePortId,
-        source_channel_id: sourceChannelId,
-        signer,
-        relayers
+        source_port_id: omitDefault(sourcePortId),
+        source_channel_id: omitDefault(sourceChannelId),
+        signer: omitDefault(signer),
+        relayers: relayers
       };
     },
     fromAmino: ({
@@ -193,19 +194,19 @@ export const AminoConverter = {
         packet_fee: {
           fee: {
             recv_fee: packetFee.fee.recvFee.map(el0 => ({
-              denom: el0.denom,
-              amount: el0.amount
+              denom: omitDefault(el0.denom),
+              amount: omitDefault(el0.amount)
             })),
             ack_fee: packetFee.fee.ackFee.map(el0 => ({
-              denom: el0.denom,
-              amount: el0.amount
+              denom: omitDefault(el0.denom),
+              amount: omitDefault(el0.amount)
             })),
             timeout_fee: packetFee.fee.timeoutFee.map(el0 => ({
-              denom: el0.denom,
-              amount: el0.amount
+              denom: omitDefault(el0.denom),
+              amount: omitDefault(el0.amount)
             }))
           },
-          refund_address: packetFee.refundAddress,
+          refund_address: omitDefault(packetFee.refundAddress),
           relayers: packetFee.relayers
         }
       };

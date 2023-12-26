@@ -2,6 +2,7 @@
 import { PoolParams, PoolParamsSDKType } from "./stableswap_pool";
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault, padDecimal } from "../../../../helpers";
 import { MsgCreateStableswapPool, MsgCreateStableswapPoolSDKType, MsgStableSwapAdjustScalingFactors, MsgStableSwapAdjustScalingFactorsSDKType } from "./tx";
 export interface MsgCreateStableswapPoolAminoType extends AminoMsg {
   type: "osmosis/gamm/create-stableswap-pool";
@@ -40,18 +41,18 @@ export const AminoConverter = {
       scalingFactorController
     }: MsgCreateStableswapPool): MsgCreateStableswapPoolAminoType["value"] => {
       return {
-        sender,
+        sender: omitDefault(sender),
         pool_params: {
-          swap_fee: poolParams.swapFee,
-          exit_fee: poolParams.exitFee
+          swap_fee: padDecimal(poolParams.swapFee),
+          exit_fee: padDecimal(poolParams.exitFee)
         },
         initial_pool_liquidity: initialPoolLiquidity.map(el0 => ({
-          denom: el0.denom,
-          amount: el0.amount
+          denom: omitDefault(el0.denom),
+          amount: omitDefault(el0.amount)
         })),
         scaling_factors: scalingFactors.map(el0 => el0.toString()),
-        future_pool_governor: futurePoolGovernor,
-        scaling_factor_controller: scalingFactorController
+        future_pool_governor: omitDefault(futurePoolGovernor),
+        scaling_factor_controller: omitDefault(scalingFactorController)
       };
     },
     fromAmino: ({
@@ -86,7 +87,7 @@ export const AminoConverter = {
       scalingFactors
     }: MsgStableSwapAdjustScalingFactors): MsgStableSwapAdjustScalingFactorsAminoType["value"] => {
       return {
-        sender,
+        sender: omitDefault(sender),
         pool_id: poolId.toString(),
         scaling_factors: scalingFactors.map(el0 => el0.toString())
       };

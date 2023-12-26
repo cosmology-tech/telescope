@@ -1,15 +1,15 @@
 import * as t from '@babel/types';
-import { BILLION, memberExpressionOrIdentifier, shorthandProperty, TypeLong } from "../../../utils";
+import { BILLION, memberExpressionOrIdentifier, TypeLong } from "../../../utils";
 import { protoFieldsToArray } from '../utils';
 import { ToAminoParseField, toAminoParseField } from './index'
-import { getOneOfs, getFieldOptionality } from '../../proto';
+import { getFieldOptionality, getOneOfs } from '../../proto';
 import { ProtoField } from '@cosmology/types';
 
 export const toAmino = {
     defaultType(args: ToAminoParseField) {
-        if (args.field.name === args.context.aminoCaseField(args.field) && args.scope.length === 1) {
-            return shorthandProperty(args.field.name);
-        }
+        // if (args.field.name === args.context.aminoCaseField(args.field) && args.scope.length === 1) {
+        //     return shorthandProperty(args.field.name);
+        // }
         return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), memberExpressionOrIdentifier(args.scope))
     },
 
@@ -21,11 +21,42 @@ export const toAmino = {
         )
     },
 
-    string(args: ToAminoParseField) {
-        if (args.field.name === args.context.aminoCaseField(args.field) && args.scope.length === 1) {
-            return shorthandProperty(args.field.name);
+    string(args: ToAminoParseField, omitEmpty?: boolean)
+    {
+        const isCosmosSDKDec =
+            (args.field.options?.['(gogoproto.customtype)'] ==
+                'github.com/cosmos/cosmos-sdk/types.Dec') ||
+            (args.field.options?.['(gogoproto.customtype)'] ==
+                'cosmossdk.io/math.LegacyDec');
+
+        if (isCosmosSDKDec) {
+            args.context.addUtil('padDecimal');
+            return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)),
+                t.callExpression(
+                    t.identifier('padDecimal'),
+                    [
+                        memberExpressionOrIdentifier(args.scope)
+                    ]
+                )
+            )
         }
-        return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), memberExpressionOrIdentifier(args.scope))
+
+        let valueExpr = omitEmpty ?
+            this.omitDefaultMemberExpressionOrIdentifier(args, args.scope) :
+            memberExpressionOrIdentifier(args.scope);
+
+        return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), valueExpr)
+    },
+
+    omitDefaultMemberExpressionOrIdentifier(args: ToAminoParseField, names)
+    {
+        args.context.addUtil('omitDefault');
+        return t.callExpression(
+            t.identifier('omitDefault'),
+            [
+                memberExpressionOrIdentifier(names)
+            ]
+        );
     },
 
     rawBytes(args: ToAminoParseField) {

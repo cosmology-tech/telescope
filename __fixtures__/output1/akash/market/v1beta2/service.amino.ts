@@ -4,7 +4,7 @@ import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base
 import { BidID, BidIDSDKType, MsgCreateBid, MsgCreateBidSDKType, MsgCloseBid, MsgCloseBidSDKType } from "./bid";
 import { LeaseID, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseSDKType, MsgCreateLease, MsgCreateLeaseSDKType, MsgCloseLease, MsgCloseLeaseSDKType } from "./lease";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "../../../helpers";
+import { omitDefault, Long } from "../../../helpers";
 export interface MsgCreateBidAminoType extends AminoMsg {
   type: "akash/market/v1beta2/testonly-create-bid";
   value: {
@@ -84,15 +84,15 @@ export const AminoConverter = {
     }: MsgCreateBid): MsgCreateBidAminoType["value"] => {
       return {
         order: {
-          owner: order.owner,
+          owner: omitDefault(order.owner),
           dseq: order.dseq.toString(),
           gseq: order.gseq,
           oseq: order.oseq
         },
-        provider,
+        provider: omitDefault(provider),
         price: {
-          denom: price.denom,
-          amount: price.amount
+          denom: omitDefault(price.denom),
+          amount: omitDefault(price.amount)
         },
         deposit: {
           denom: deposit.denom,
@@ -132,11 +132,11 @@ export const AminoConverter = {
     }: MsgCloseBid): MsgCloseBidAminoType["value"] => {
       return {
         bid_id: {
-          owner: bidId.owner,
+          owner: omitDefault(bidId.owner),
           dseq: bidId.dseq.toString(),
           gseq: bidId.gseq,
           oseq: bidId.oseq,
-          provider: bidId.provider
+          provider: omitDefault(bidId.provider)
         }
       };
     },
@@ -161,11 +161,11 @@ export const AminoConverter = {
     }: MsgWithdrawLease): MsgWithdrawLeaseAminoType["value"] => {
       return {
         bid_id: {
-          owner: bidId.owner,
+          owner: omitDefault(bidId.owner),
           dseq: bidId.dseq.toString(),
           gseq: bidId.gseq,
           oseq: bidId.oseq,
-          provider: bidId.provider
+          provider: omitDefault(bidId.provider)
         }
       };
     },
@@ -190,11 +190,11 @@ export const AminoConverter = {
     }: MsgCreateLease): MsgCreateLeaseAminoType["value"] => {
       return {
         bid_id: {
-          owner: bidId.owner,
+          owner: omitDefault(bidId.owner),
           dseq: bidId.dseq.toString(),
           gseq: bidId.gseq,
           oseq: bidId.oseq,
-          provider: bidId.provider
+          provider: omitDefault(bidId.provider)
         }
       };
     },
@@ -219,11 +219,11 @@ export const AminoConverter = {
     }: MsgCloseLease): MsgCloseLeaseAminoType["value"] => {
       return {
         lease_id: {
-          owner: leaseId.owner,
+          owner: omitDefault(leaseId.owner),
           dseq: leaseId.dseq.toString(),
           gseq: leaseId.gseq,
           oseq: leaseId.oseq,
-          provider: leaseId.provider
+          provider: omitDefault(leaseId.provider)
         }
       };
     },

@@ -135,7 +135,7 @@ export const toAminoParseField = ({
     // scalar types...
     switch (field.type) {
         case 'string':
-            return toAmino.string(args);
+            return toAmino.string(args, true);
         case 'int64':
         case 'sint64':
         case 'uint64':
