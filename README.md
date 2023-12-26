@@ -346,6 +346,7 @@ See [RPC Clients](#rpc-clients) for more info.
 | option                                       | description                                                     | defaults |
 | -------------------------------------------- | --------------------------------------------------------------  | ---------|
 | `stargateClients.includeCosmosDefaultTypes`  | if true, will include the cosmjs defaults with stargate clients | `true` (except cosmos package) |
+| `stargateClients.addGetTxRpc`  | if true, will add getSigningTxRpc to clients in namespaces | false |
 
 ### State Management
 
