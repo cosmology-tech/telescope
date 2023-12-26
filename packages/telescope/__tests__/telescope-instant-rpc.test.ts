@@ -86,6 +86,7 @@ const options: TelescopeOptions = {
   stargateClients: {
     enabled: true,
     includeCosmosDefaultTypes: true,
+    addGetTxRpc: true,
   },
 
   aggregatedLCD: {

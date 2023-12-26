@@ -55,6 +55,8 @@ export declare const UTILS: {
     BroadcastTxReq: string;
     BroadcastTxRes: string;
     DeliverTxResponse: string;
+    EncodeObject: string;
+    SigningClientParams: string;
     grpc: string;
     setPaginationParams: string;
     SigningStargateClient: string;
