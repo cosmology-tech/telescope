@@ -29,7 +29,7 @@ export const plugin = (
   write(builder, 'helpers.ts', builder.options.prototypes.typingsFormat.num64 === 'bigint' ? internalForBigInt : internal);
 
   // should be exported
-  if (builder.options.includeExternalHelpers || builder.options.reactQuery?.enabled) {
+  if (builder.options.stargateClients.addGetTxRpc || builder.options.includeExternalHelpers || builder.options.reactQuery?.enabled) {
     // also react-query needs these...
     builder.files.push('extern.ts');
     write(builder, 'extern.ts', builder.options.rpcClients?.useConnectComet ? externalComet : external);

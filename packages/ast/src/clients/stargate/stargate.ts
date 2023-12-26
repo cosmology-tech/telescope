@@ -530,6 +530,7 @@ export const createGetTxRpc = (
                   )
                 )
               ),
+              t.returnStatement(t.identifier("txRpc")),
             ],
             []
           ),

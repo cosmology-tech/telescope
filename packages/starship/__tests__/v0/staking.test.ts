@@ -3,8 +3,8 @@ import { assertIsDeliverTxSuccess } from '@cosmjs/stargate';
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 import BigNumber from 'bignumber.js';
 
-import { cosmos, getSigningOsmosisClient } from '../src/codegen';
-import { useChain } from '../src';
+import { cosmos, getSigningOsmosisClient } from '../../src/codegen';
+import { useChain } from '../../src';
 import './setup.test';
 
 describe('Staking tokens testing', () => {
@@ -48,7 +48,7 @@ describe('Staking tokens testing', () => {
     });
 
     expect(balance.amount).toEqual('10000000000');
-  }, 10000);
+  }, 200000);
 
   it('query validator address', async () => {
     const { validators } = await queryClient.cosmos.staking.v1beta1.validators({
@@ -67,7 +67,7 @@ describe('Staking tokens testing', () => {
 
     // set validator address to the first one
     validatorAddress = allValidators[0].operatorAddress;
-  });
+  }, 200000);
 
   it('stake tokens to genesis validator', async () => {
     const signingClient = await getSigningOsmosisClient({
@@ -104,7 +104,7 @@ describe('Staking tokens testing', () => {
 
     const result = await signingClient.signAndBroadcast(address, [msg], fee);
     assertIsDeliverTxSuccess(result);
-  });
+  }, 200000);
 
   it('query delegation', async () => {
     const { delegationResponse } =
@@ -121,5 +121,5 @@ describe('Staking tokens testing', () => {
     );
     expect(delegationResponse.balance.amount).toEqual(delegationAmount);
     expect(delegationResponse.balance.denom).toEqual(denom);
-  });
+  }, 200000);
 });

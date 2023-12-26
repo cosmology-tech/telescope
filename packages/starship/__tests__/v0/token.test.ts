@@ -2,8 +2,8 @@ import { generateMnemonic } from '@confio/relayer/build/lib/helpers';
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 import { assertIsDeliverTxSuccess } from '@cosmjs/stargate';
 
-import { ibc, getSigningOsmosisClient } from '../src/codegen';
-import { useChain } from '../src';
+import { ibc, getSigningOsmosisClient } from '../../src/codegen';
+import { useChain } from '../../src';
 import './setup.test';
 
 describe('Token transfers', () => {
@@ -27,7 +27,7 @@ describe('Token transfers', () => {
     address = (await wallet.getAccounts())[0].address;
 
     await creditFromFaucet(address);
-  });
+  }, 200000);
 
   it('send osmosis token to address', async () => {
     // Initialize wallet
@@ -70,7 +70,7 @@ describe('Token transfers', () => {
 
     expect(balance.amount).toEqual(token.amount);
     expect(balance.denom).toEqual(denom);
-  }, 10000);
+  }, 200000);
 
   it('send ibc osmo tokens to address on cosmos chain', async () => {
     const signingClient = await getSigningOsmosisClient({
@@ -157,6 +157,6 @@ describe('Token transfers', () => {
     const trace = await queryClient.ibc.applications.transfer.v1.denomTrace({
       hash: ibcBalance!.denom.replace('ibc/', '')
     });
-    expect(trace.denomTrace.baseDenom).toEqual(denom);
-  }, 10000);
+    expect(trace?.denomTrace?.baseDenom).toEqual(denom);
+  }, 200000);
 });
