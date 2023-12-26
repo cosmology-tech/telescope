@@ -3,7 +3,8 @@ import {
     createStargateClient,
     createStargateClientOptions,
     createStargateClientAminoRegistry,
-    createStargateClientProtoRegistry
+    createStargateClientProtoRegistry,
+    createGetTxRpc
 } from './stargate';
 import { ProtoRef } from '@cosmology/types';
 
@@ -112,6 +113,11 @@ it('createStargateClient w/o defaults', async () => {
         name: 'getSigningOsmosisClient',
         options: 'getSigningOsmosisClientOptions',
     }));
+    expectCode(createGetTxRpc(
+      context,
+      "getOsmosisTxRpcClient",
+      "getSigningOsmosisClient"
+    ));
     expectCode(createStargateClientOptions({
         context,
         name: 'getSigningOsmosisClientOptions',

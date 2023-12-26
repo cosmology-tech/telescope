@@ -57,6 +57,8 @@ export const UTILS = {
   BroadcastTxReq: '__types__',
   BroadcastTxRes: '__types__',
   DeliverTxResponse: '__types__',
+  EncodeObject: '__types__',
+  SigningClientParams: '__types__',
   grpc: '@improbable-eng/grpc-web',
   setPaginationParams: '__helpers__',
   SigningStargateClient: '@cosmjs/stargate',

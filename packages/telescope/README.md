@@ -346,6 +346,7 @@ See [RPC Clients](#rpc-clients) for more info.
 | option                                       | description                                                     | defaults |
 | -------------------------------------------- | --------------------------------------------------------------  | ---------|
 | `stargateClients.includeCosmosDefaultTypes`  | if true, will include the cosmjs defaults with stargate clients | `true` (except cosmos package) |
+| `stargateClients.addGetTxRpc`  | if true, will add getSigningTxRpc to clients in namespaces | false |
 
 ### State Management
 
@@ -1072,5 +1073,4 @@ Thanks to these engineers, teams and projects for inspiring Telescope:
 AS DESCRIBED IN THE TELESCOPE LICENSES, THE SOFTWARE IS PROVIDED “AS IS”, AT YOUR OWN RISK, AND WITHOUT WARRANTIES OF ANY KIND.
 
 No developer or entity involved in creating Telescope will be liable for any claims or damages whatsoever associated with your use, inability to use, or your interaction with other users of the Telescope code or Telescope CLI, including any direct, indirect, incidental, special, exemplary, punitive or consequential damages, or loss of profits, cryptocurrencies, tokens, or anything else of value.
-
 

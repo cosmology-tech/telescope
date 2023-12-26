@@ -7,7 +7,8 @@ import {
     createStargateClient,
     createStargateClientOptions,
     createStargateClientProtoRegistry,
-    createStargateClientAminoRegistry
+    createStargateClientAminoRegistry,
+    createGetTxRpc
 } from '@cosmology/ast';
 import { ProtoRef } from '@cosmology/types';
 import { camel, pascal } from 'case';
@@ -60,6 +61,7 @@ export const plugin = (
     });
 
     const name = 'getSigning' + pascal(bundler.bundle.base + 'Client');
+    const txRpcName = 'getSigning' + pascal(bundler.bundle.base + 'TxRpc');
     const prefix = camel(bundler.bundle.base);
     const aminos = createStargateClientAminoRegistry({
         context: ctx,
@@ -83,18 +85,24 @@ export const plugin = (
         options: name + 'Options',
     });
 
+    let getTxRpc;
+
+    if(ctx.pluginValue("stargateClients.addGetTxRpc")){
+      getTxRpc = createGetTxRpc(ctx, txRpcName, name);
+    }
+
     const imports = buildAllImportsFromGenericContext(ctx, clientFile);
 
-    const cProg = [
-        ...imports,
-        ...registryImports,
-        ...converterImports,
+    let cProg = [...imports, ...registryImports, ...converterImports]
+      .concat(aminos)
+      .concat(protos)
+      .concat(clientOptions)
+      .concat(clientBody);
 
-    ]
-        .concat(aminos)
-        .concat(protos)
-        .concat(clientOptions)
-        .concat(clientBody);
+    if (getTxRpc) {
+      cProg = cProg.concat(getTxRpc);
+    }
+
 
     const clientOutFile = join(builder.outPath, clientFile);
     bundler.writeAst(cProg, clientOutFile);
