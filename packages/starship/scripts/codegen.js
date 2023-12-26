@@ -165,7 +165,8 @@ telescope({
 
     stargateClients: {
       enabled: true,
-      includeCosmosDefaultTypes: true
+      includeCosmosDefaultTypes: true,
+      addGetTxRpc: true
     },
 
     aggregatedLCD: {

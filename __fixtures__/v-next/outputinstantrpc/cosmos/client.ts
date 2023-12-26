@@ -90,4 +90,5 @@ export const getSigningCosmosTxRpc = async ({
   txRpc.signAndBroadcast = (signerAddress: string, messages: EncodeObject[], fee: number | StdFee | "auto", memo?: string) => {
     return (signingClient.signAndBroadcast(signerAddress, messages, fee, memo) as Promise<DeliverTxResponse>);
   };
+  return txRpc;
 };
