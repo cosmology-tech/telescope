@@ -108,6 +108,7 @@ interface TelescopeOpts {
     stargateClients?: {
         enabled: boolean;
         includeCosmosDefaultTypes?: boolean;
+        addGetTxRpc?: boolean;
     };
     aminoEncoding?: {
         enabled: boolean;

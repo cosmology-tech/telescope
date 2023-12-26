@@ -145,3 +145,8 @@ export interface TxRpc {
     memo: string
   ): Promise<DeliverTxResponse>;
 }
+
+export interface SigningClientParams {
+  rpcEndpoint: string | HttpEndpoint;
+  signer: OfflineSigner;
+}
