@@ -94,11 +94,6 @@ describe("Token transfers", () => {
   }, 200000);
 
   it("send ibc osmo tokens to address on cosmos chain", async () => {
-    const signingClient = await getSigningOsmosisClient({
-      rpcEndpoint: getRpcEndpoint(),
-      signer: wallet,
-    });
-
     const txRpc = await getSigningOsmosisTxRpc({
       rpcEndpoint: getRpcEndpoint(),
       signer: wallet,
@@ -136,8 +131,10 @@ describe("Token transfers", () => {
       ibcInfo.channels[0].chain_1;
 
     // Transfer osmosis tokens via IBC to cosmos chain
-    const currentTime = Math.floor(Date.now() / 1000);
-    const timeoutTime = currentTime + 300; // 5 minutes
+
+    // count timeoutStamp in nanosecond(1sec == 1000000000nano)
+    const currentTime = Math.floor(Date.now()) * 1000000;
+    const timeoutTime = currentTime + 300 * 1000000000; // 5 minutes
 
     const fee = {
       amount: [
