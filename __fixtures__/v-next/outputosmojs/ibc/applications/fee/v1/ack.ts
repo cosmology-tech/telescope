@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.fee.v1";
 /** IncentivizedAcknowledgement is the acknowledgement format to be used by applications wrapped in the fee middleware */
 export interface IncentivizedAcknowledgement {
@@ -112,8 +112,8 @@ export const IncentivizedAcknowledgement = {
   toAmino(message: IncentivizedAcknowledgement): IncentivizedAcknowledgementAmino {
     const obj: any = {};
     obj.app_acknowledgement = message.appAcknowledgement;
-    obj.forward_relayer_address = message.forwardRelayerAddress;
-    obj.underlying_app_success = message.underlyingAppSuccess;
+    obj.forward_relayer_address = omitDefault(message.forwardRelayerAddress);
+    obj.underlying_app_success = omitDefault(message.underlyingAppSuccess);
     return obj;
   },
   fromAminoMsg(object: IncentivizedAcknowledgementAminoMsg): IncentivizedAcknowledgement {

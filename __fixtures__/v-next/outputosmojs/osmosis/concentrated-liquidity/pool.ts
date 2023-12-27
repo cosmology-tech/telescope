@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { Decimal } from "@cosmjs/math";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault, padDecimal } from "../../helpers";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 export interface Pool {
   /** pool's address holding all liquidity tokens. */
@@ -259,22 +259,22 @@ export const Pool = {
       tickSpacing: BigInt(object.tick_spacing),
       exponentAtPriceOne: object.exponent_at_price_one,
       swapFee: object.swap_fee,
-      lastLiquidityUpdate: object.last_liquidity_update
+      lastLiquidityUpdate: object?.last_liquidity_update ? Timestamp.fromAmino(object.last_liquidity_update) : undefined
     };
   },
   toAmino(message: Pool): PoolAmino {
     const obj: any = {};
-    obj.address = message.address;
-    obj.incentives_address = message.incentivesAddress;
-    obj.id = message.id ? message.id.toString() : undefined;
-    obj.current_tick_liquidity = message.currentTickLiquidity;
-    obj.token0 = message.token0;
-    obj.token1 = message.token1;
-    obj.current_sqrt_price = message.currentSqrtPrice;
-    obj.current_tick = message.currentTick;
-    obj.tick_spacing = message.tickSpacing ? message.tickSpacing.toString() : undefined;
-    obj.exponent_at_price_one = message.exponentAtPriceOne;
-    obj.swap_fee = message.swapFee;
+    obj.address = omitDefault(message.address);
+    obj.incentives_address = omitDefault(message.incentivesAddress);
+    obj.id = omitDefault(message.id);
+    obj.current_tick_liquidity = padDecimal(message.currentTickLiquidity);
+    obj.token0 = omitDefault(message.token0);
+    obj.token1 = omitDefault(message.token1);
+    obj.current_sqrt_price = padDecimal(message.currentSqrtPrice);
+    obj.current_tick = omitDefault(message.currentTick);
+    obj.tick_spacing = omitDefault(message.tickSpacing);
+    obj.exponent_at_price_one = omitDefault(message.exponentAtPriceOne);
+    obj.swap_fee = padDecimal(message.swapFee);
     obj.last_liquidity_update = message.lastLiquidityUpdate;
     return obj;
   },

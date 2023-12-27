@@ -6,18 +6,26 @@ import { getFieldOptionality, getOneOfs } from '../../proto';
 import { ProtoField } from '@cosmology/types';
 
 export const toAmino = {
-    defaultType(args: ToAminoParseField) {
+    defaultType(args: ToAminoParseField, omitEmpty?: boolean) {
         // if (args.field.name === args.context.aminoCaseField(args.field) && args.scope.length === 1) {
         //     return shorthandProperty(args.field.name);
         // }
-        return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), memberExpressionOrIdentifier(args.scope))
+        let valueExpr = omitEmpty ?
+            this.omitDefaultMemberExpressionOrIdentifier(args, args.scope) :
+            memberExpressionOrIdentifier(args.scope);
+
+        return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), valueExpr)
     },
 
-    long(args: ToAminoParseField) {
+    long(args: ToAminoParseField, omitEmpty?: boolean) {
+        let valueExpr = omitEmpty ?
+            this.omitDefaultMemberExpressionOrIdentifier(args, args.scope) :
+            memberExpressionOrIdentifier(args.scope);
+
         return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)),
-            t.callExpression(
-                t.memberExpression(memberExpressionOrIdentifier(args.scope), t.identifier('toString')),
-                [])
+            t.optionalCallExpression(
+                t.optionalMemberExpression(valueExpr, t.identifier('toString'), false, true),
+                [], true)
         )
     },
 

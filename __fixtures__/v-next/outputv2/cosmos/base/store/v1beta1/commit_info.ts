@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.store.v1beta1";
 /**
  * CommitInfo defines commit information used by the multi-store when committing
@@ -183,7 +183,7 @@ export const CommitInfo = {
   },
   toAmino(message: CommitInfo): CommitInfoAmino {
     const obj: any = {};
-    obj.version = message.version ? message.version.toString() : undefined;
+    obj.version = omitDefault(message.version);
     if (message.storeInfos) {
       obj.store_infos = message.storeInfos.map(e => e ? StoreInfo.toAmino(e) : undefined);
     } else {
@@ -291,7 +291,7 @@ export const StoreInfo = {
   },
   toAmino(message: StoreInfo): StoreInfoAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     obj.commit_id = message.commitId ? CommitID.toAmino(message.commitId) : undefined;
     return obj;
   },
@@ -395,7 +395,7 @@ export const CommitID = {
   },
   toAmino(message: CommitID): CommitIDAmino {
     const obj: any = {};
-    obj.version = message.version ? message.version.toString() : undefined;
+    obj.version = omitDefault(message.version);
     obj.hash = message.hash;
     return obj;
   },

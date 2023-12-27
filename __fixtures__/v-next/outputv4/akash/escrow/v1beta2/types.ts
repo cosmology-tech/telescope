@@ -452,7 +452,7 @@ export const Account = {
     obj.state = message.state;
     obj.balance = message.balance ? DecCoin.toAmino(message.balance) : undefined;
     obj.transferred = message.transferred ? DecCoin.toAmino(message.transferred) : undefined;
-    obj.settled_at = message.settledAt ? message.settledAt.toString() : undefined;
+    obj.settled_at = message.settledAt;
     obj.depositor = message.depositor;
     obj.funds = message.funds ? DecCoin.toAmino(message.funds) : undefined;
     return obj;

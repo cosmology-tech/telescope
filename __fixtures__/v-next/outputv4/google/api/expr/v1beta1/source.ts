@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
 export interface SourceInfo_PositionsEntry {
   key: number;
@@ -147,8 +147,8 @@ export const SourceInfo_PositionsEntry = {
   },
   toAmino(message: SourceInfo_PositionsEntry): SourceInfo_PositionsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: SourceInfo_PositionsEntryAminoMsg): SourceInfo_PositionsEntry {
@@ -316,7 +316,7 @@ export const SourceInfo = {
   },
   toAmino(message: SourceInfo): SourceInfoAmino {
     const obj: any = {};
-    obj.location = message.location;
+    obj.location = omitDefault(message.location);
     if (message.lineOffsets) {
       obj.line_offsets = message.lineOffsets.map(e => e);
     } else {
@@ -455,10 +455,10 @@ export const SourcePosition = {
   },
   toAmino(message: SourcePosition): SourcePositionAmino {
     const obj: any = {};
-    obj.location = message.location;
-    obj.offset = message.offset;
-    obj.line = message.line;
-    obj.column = message.column;
+    obj.location = omitDefault(message.location);
+    obj.offset = omitDefault(message.offset);
+    obj.line = omitDefault(message.line);
+    obj.column = omitDefault(message.column);
     return obj;
   },
   fromAminoMsg(object: SourcePositionAminoMsg): SourcePosition {

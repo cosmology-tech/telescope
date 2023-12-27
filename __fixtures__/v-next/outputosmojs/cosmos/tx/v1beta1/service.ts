@@ -4,7 +4,7 @@ import { TxResponse, TxResponseSDKType, GasInfo, GasInfoSDKType, Result, ResultS
 import { BlockID, BlockIDSDKType } from "../../../tendermint/types/types";
 import { Block, BlockSDKType } from "../../../tendermint/types/block";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.tx.v1beta1";
 /** OrderBy defines the sorting order */
 export enum OrderBy {
@@ -404,7 +404,7 @@ export const GetTxsEventRequest = {
       obj.events = [];
     }
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    obj.order_by = message.orderBy;
+    obj.order_by = omitDefault(message.orderBy);
     return obj;
   },
   fromAminoMsg(object: GetTxsEventRequestAminoMsg): GetTxsEventRequest {
@@ -657,7 +657,7 @@ export const BroadcastTxRequest = {
   toAmino(message: BroadcastTxRequest): BroadcastTxRequestAmino {
     const obj: any = {};
     obj.tx_bytes = message.txBytes;
-    obj.mode = message.mode;
+    obj.mode = omitDefault(message.mode);
     return obj;
   },
   fromAminoMsg(object: BroadcastTxRequestAminoMsg): BroadcastTxRequest {
@@ -1055,7 +1055,7 @@ export const GetTxRequest = {
   },
   toAmino(message: GetTxRequest): GetTxRequestAmino {
     const obj: any = {};
-    obj.hash = message.hash;
+    obj.hash = omitDefault(message.hash);
     return obj;
   },
   fromAminoMsg(object: GetTxRequestAminoMsg): GetTxRequest {
@@ -1268,7 +1268,7 @@ export const GetBlockWithTxsRequest = {
   },
   toAmino(message: GetBlockWithTxsRequest): GetBlockWithTxsRequestAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.height = omitDefault(message.height);
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },

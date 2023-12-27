@@ -1,6 +1,6 @@
 import { IdentifiedClientState, IdentifiedClientStateAmino, IdentifiedClientStateSDKType, ClientConsensusStates, ClientConsensusStatesAmino, ClientConsensusStatesSDKType, Params, ParamsAmino, ParamsSDKType } from "./client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.client.v1";
 /** GenesisState defines the ibc client submodule's genesis state. */
 export interface GenesisState {
@@ -287,8 +287,8 @@ export const GenesisState = {
       obj.clients_metadata = [];
     }
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    obj.create_localhost = message.createLocalhost;
-    obj.next_client_sequence = message.nextClientSequence ? message.nextClientSequence.toString() : undefined;
+    obj.create_localhost = omitDefault(message.createLocalhost);
+    obj.next_client_sequence = omitDefault(message.nextClientSequence);
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
@@ -499,7 +499,7 @@ export const IdentifiedGenesisMetadata = {
   },
   toAmino(message: IdentifiedGenesisMetadata): IdentifiedGenesisMetadataAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
+    obj.client_id = omitDefault(message.clientId);
     if (message.clientMetadata) {
       obj.client_metadata = message.clientMetadata.map(e => e ? GenesisMetadata.toAmino(e) : undefined);
     } else {

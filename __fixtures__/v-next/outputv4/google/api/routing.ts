@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
+import { DeepPartial, isSet, omitDefault } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Specifies the routing information that should be sent along with the request
@@ -983,8 +983,8 @@ export const RoutingParameter = {
   },
   toAmino(message: RoutingParameter): RoutingParameterAmino {
     const obj: any = {};
-    obj.field = message.field;
-    obj.path_template = message.pathTemplate;
+    obj.field = omitDefault(message.field);
+    obj.path_template = omitDefault(message.pathTemplate);
     return obj;
   },
   fromAminoMsg(object: RoutingParameterAminoMsg): RoutingParameter {

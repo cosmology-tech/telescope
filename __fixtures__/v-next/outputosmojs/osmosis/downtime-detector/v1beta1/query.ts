@@ -1,7 +1,7 @@
 import { Downtime, DowntimeSDKType, downtimeFromJSON, downtimeToJSON } from "./downtime_duration";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.downtimedetector.v1beta1";
 /**
  * Query for has it been at least $RECOVERY_DURATION units of time,
@@ -106,7 +106,7 @@ export const RecoveredSinceDowntimeOfLengthRequest = {
   },
   toAmino(message: RecoveredSinceDowntimeOfLengthRequest): RecoveredSinceDowntimeOfLengthRequestAmino {
     const obj: any = {};
-    obj.downtime = message.downtime;
+    obj.downtime = omitDefault(message.downtime);
     obj.recovery = message.recovery ? Duration.toAmino(message.recovery) : undefined;
     return obj;
   },
@@ -199,7 +199,7 @@ export const RecoveredSinceDowntimeOfLengthResponse = {
   },
   toAmino(message: RecoveredSinceDowntimeOfLengthResponse): RecoveredSinceDowntimeOfLengthResponseAmino {
     const obj: any = {};
-    obj.succesfully_recovered = message.succesfullyRecovered;
+    obj.succesfully_recovered = omitDefault(message.succesfullyRecovered);
     return obj;
   },
   fromAminoMsg(object: RecoveredSinceDowntimeOfLengthResponseAminoMsg): RecoveredSinceDowntimeOfLengthResponse {

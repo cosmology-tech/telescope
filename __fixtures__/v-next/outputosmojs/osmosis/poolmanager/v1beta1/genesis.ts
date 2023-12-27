@@ -1,7 +1,7 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { ModuleRoute, ModuleRouteSDKType } from "./module_route";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet } from "../../../helpers";
+import { DeepPartial, isSet, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.poolmanager.v1beta1";
 /** Params holds parameters for the poolmanager module */
 export interface Params {
@@ -233,7 +233,7 @@ export const GenesisState = {
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
-    obj.next_pool_id = message.nextPoolId ? message.nextPoolId.toString() : undefined;
+    obj.next_pool_id = omitDefault(message.nextPoolId);
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     if (message.poolRoutes) {
       obj.pool_routes = message.poolRoutes.map(e => e ? ModuleRoute.toAmino(e) : undefined);

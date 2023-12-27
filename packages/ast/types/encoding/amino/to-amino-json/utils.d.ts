@@ -1,8 +1,8 @@
 import * as t from '@babel/types';
 import { ToAminoParseField } from './index';
 export declare const toAmino: {
-    defaultType(args: ToAminoParseField): t.ObjectProperty;
-    long(args: ToAminoParseField): t.ObjectProperty;
+    defaultType(args: ToAminoParseField, omitEmpty?: boolean): t.ObjectProperty;
+    long(args: ToAminoParseField, omitEmpty?: boolean): t.ObjectProperty;
     string(args: ToAminoParseField, omitEmpty?: boolean): t.ObjectProperty;
     omitDefaultMemberExpressionOrIdentifier(args: ToAminoParseField, names: any): t.CallExpression;
     rawBytes(args: ToAminoParseField): t.ObjectProperty;

@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "tendermint.crypto";
 export interface Proof {
   total: bigint;
@@ -178,8 +178,8 @@ export const Proof = {
   },
   toAmino(message: Proof): ProofAmino {
     const obj: any = {};
-    obj.total = message.total ? message.total.toString() : undefined;
-    obj.index = message.index ? message.index.toString() : undefined;
+    obj.total = omitDefault(message.total);
+    obj.index = omitDefault(message.index);
     obj.leaf_hash = message.leafHash;
     if (message.aunts) {
       obj.aunts = message.aunts.map(e => e);
@@ -400,9 +400,9 @@ export const DominoOp = {
   },
   toAmino(message: DominoOp): DominoOpAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.input = message.input;
-    obj.output = message.output;
+    obj.key = omitDefault(message.key);
+    obj.input = omitDefault(message.input);
+    obj.output = omitDefault(message.output);
     return obj;
   },
   fromAminoMsg(object: DominoOpAminoMsg): DominoOp {
@@ -516,7 +516,7 @@ export const ProofOp = {
   },
   toAmino(message: ProofOp): ProofOpAmino {
     const obj: any = {};
-    obj.type = message.type;
+    obj.type = omitDefault(message.type);
     obj.key = message.key;
     obj.data = message.data;
     return obj;

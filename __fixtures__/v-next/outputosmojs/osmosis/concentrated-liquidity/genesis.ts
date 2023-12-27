@@ -5,7 +5,7 @@ import { Params, ParamsSDKType } from "./params";
 import { Position, PositionSDKType } from "./position";
 import { AccumulatorContent, AccumulatorContentSDKType } from "../accum/v1beta1/accum";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /**
  * FullTick contains tick index and pool id along with other tick model
@@ -173,8 +173,8 @@ export const FullTick = {
   },
   toAmino(message: FullTick): FullTickAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.tick_index = message.tickIndex ? message.tickIndex.toString() : undefined;
+    obj.pool_id = omitDefault(message.poolId);
+    obj.tick_index = omitDefault(message.tickIndex);
     obj.info = message.info ? TickInfo.toAmino(message.info) : undefined;
     return obj;
   },
@@ -524,7 +524,7 @@ export const GenesisState = {
     } else {
       obj.positions = [];
     }
-    obj.next_position_id = message.nextPositionId ? message.nextPositionId.toString() : undefined;
+    obj.next_position_id = omitDefault(message.nextPositionId);
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
@@ -630,7 +630,7 @@ export const AccumObject = {
   },
   toAmino(message: AccumObject): AccumObjectAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     obj.accum_content = message.accumContent ? AccumulatorContent.toAmino(message.accumContent) : undefined;
     return obj;
   },

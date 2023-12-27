@@ -1,7 +1,7 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { DeepPartial, isSet, omitDefault, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /**
  * ContractExecutionAuthorization defines authorization for wasm execute.
@@ -460,7 +460,7 @@ export const ContractGrant = {
   },
   toAmino(message: ContractGrant): ContractGrantAmino {
     const obj: any = {};
-    obj.contract = message.contract;
+    obj.contract = omitDefault(message.contract);
     obj.limit = message.limit ? Any.toAmino(message.limit) : undefined;
     obj.filter = message.filter ? Any.toAmino(message.filter) : undefined;
     return obj;
@@ -554,7 +554,7 @@ export const MaxCallsLimit = {
   },
   toAmino(message: MaxCallsLimit): MaxCallsLimitAmino {
     const obj: any = {};
-    obj.remaining = message.remaining ? message.remaining.toString() : undefined;
+    obj.remaining = omitDefault(message.remaining);
     return obj;
   },
   fromAminoMsg(object: MaxCallsLimitAminoMsg): MaxCallsLimit {
@@ -772,7 +772,7 @@ export const CombinedLimit = {
   },
   toAmino(message: CombinedLimit): CombinedLimitAmino {
     const obj: any = {};
-    obj.calls_remaining = message.callsRemaining ? message.callsRemaining.toString() : undefined;
+    obj.calls_remaining = omitDefault(message.callsRemaining);
     if (message.amounts) {
       obj.amounts = message.amounts.map(e => e ? Coin.toAmino(e) : undefined);
     } else {

@@ -1,6 +1,6 @@
 import { Duration, DurationSDKType } from "../../protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "google.logging.type";
 /**
  * A common proto for logging HTTP requests. Only contains semantics
@@ -366,21 +366,21 @@ export const HttpRequest = {
   },
   toAmino(message: HttpRequest): HttpRequestAmino {
     const obj: any = {};
-    obj.request_method = message.requestMethod;
-    obj.request_url = message.requestUrl;
-    obj.request_size = message.requestSize ? message.requestSize.toString() : undefined;
-    obj.status = message.status;
-    obj.response_size = message.responseSize ? message.responseSize.toString() : undefined;
-    obj.user_agent = message.userAgent;
-    obj.remote_ip = message.remoteIp;
-    obj.server_ip = message.serverIp;
-    obj.referer = message.referer;
+    obj.request_method = omitDefault(message.requestMethod);
+    obj.request_url = omitDefault(message.requestUrl);
+    obj.request_size = omitDefault(message.requestSize);
+    obj.status = omitDefault(message.status);
+    obj.response_size = omitDefault(message.responseSize);
+    obj.user_agent = omitDefault(message.userAgent);
+    obj.remote_ip = omitDefault(message.remoteIp);
+    obj.server_ip = omitDefault(message.serverIp);
+    obj.referer = omitDefault(message.referer);
     obj.latency = message.latency ? Duration.toAmino(message.latency) : undefined;
-    obj.cache_lookup = message.cacheLookup;
-    obj.cache_hit = message.cacheHit;
-    obj.cache_validated_with_origin_server = message.cacheValidatedWithOriginServer;
-    obj.cache_fill_bytes = message.cacheFillBytes ? message.cacheFillBytes.toString() : undefined;
-    obj.protocol = message.protocol;
+    obj.cache_lookup = omitDefault(message.cacheLookup);
+    obj.cache_hit = omitDefault(message.cacheHit);
+    obj.cache_validated_with_origin_server = omitDefault(message.cacheValidatedWithOriginServer);
+    obj.cache_fill_bytes = omitDefault(message.cacheFillBytes);
+    obj.protocol = omitDefault(message.protocol);
     return obj;
   },
   fromAminoMsg(object: HttpRequestAminoMsg): HttpRequest {

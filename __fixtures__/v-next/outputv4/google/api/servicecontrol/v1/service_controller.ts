@@ -2,7 +2,7 @@ import { Operation, OperationSDKType } from "./operation";
 import { CheckError, CheckErrorSDKType } from "./check_error";
 import { Status, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /**
  * The type of the consumer as defined in
@@ -361,9 +361,9 @@ export const CheckRequest = {
   },
   toAmino(message: CheckRequest): CheckRequestAmino {
     const obj: any = {};
-    obj.service_name = message.serviceName;
+    obj.service_name = omitDefault(message.serviceName);
     obj.operation = message.operation ? Operation.toAmino(message.operation) : undefined;
-    obj.service_config_id = message.serviceConfigId;
+    obj.service_config_id = omitDefault(message.serviceConfigId);
     return obj;
   },
   fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
@@ -515,14 +515,14 @@ export const CheckResponse = {
   },
   toAmino(message: CheckResponse): CheckResponseAmino {
     const obj: any = {};
-    obj.operation_id = message.operationId;
+    obj.operation_id = omitDefault(message.operationId);
     if (message.checkErrors) {
       obj.check_errors = message.checkErrors.map(e => e ? CheckError.toAmino(e) : undefined);
     } else {
       obj.check_errors = [];
     }
-    obj.service_config_id = message.serviceConfigId;
-    obj.service_rollout_id = message.serviceRolloutId;
+    obj.service_config_id = omitDefault(message.serviceConfigId);
+    obj.service_rollout_id = omitDefault(message.serviceRolloutId);
     obj.check_info = message.checkInfo ? CheckResponse_CheckInfo.toAmino(message.checkInfo) : undefined;
     return obj;
   },
@@ -756,9 +756,9 @@ export const CheckResponse_ConsumerInfo = {
   },
   toAmino(message: CheckResponse_ConsumerInfo): CheckResponse_ConsumerInfoAmino {
     const obj: any = {};
-    obj.project_number = message.projectNumber ? message.projectNumber.toString() : undefined;
-    obj.type = message.type;
-    obj.consumer_number = message.consumerNumber ? message.consumerNumber.toString() : undefined;
+    obj.project_number = omitDefault(message.projectNumber);
+    obj.type = omitDefault(message.type);
+    obj.consumer_number = omitDefault(message.consumerNumber);
     return obj;
   },
   fromAminoMsg(object: CheckResponse_ConsumerInfoAminoMsg): CheckResponse_ConsumerInfo {
@@ -880,13 +880,13 @@ export const ReportRequest = {
   },
   toAmino(message: ReportRequest): ReportRequestAmino {
     const obj: any = {};
-    obj.service_name = message.serviceName;
+    obj.service_name = omitDefault(message.serviceName);
     if (message.operations) {
       obj.operations = message.operations.map(e => e ? Operation.toAmino(e) : undefined);
     } else {
       obj.operations = [];
     }
-    obj.service_config_id = message.serviceConfigId;
+    obj.service_config_id = omitDefault(message.serviceConfigId);
     return obj;
   },
   fromAminoMsg(object: ReportRequestAminoMsg): ReportRequest {
@@ -1013,8 +1013,8 @@ export const ReportResponse = {
     } else {
       obj.report_errors = [];
     }
-    obj.service_config_id = message.serviceConfigId;
-    obj.service_rollout_id = message.serviceRolloutId;
+    obj.service_config_id = omitDefault(message.serviceConfigId);
+    obj.service_rollout_id = omitDefault(message.serviceRolloutId);
     return obj;
   },
   fromAminoMsg(object: ReportResponseAminoMsg): ReportResponse {
@@ -1116,7 +1116,7 @@ export const ReportResponse_ReportError = {
   },
   toAmino(message: ReportResponse_ReportError): ReportResponse_ReportErrorAmino {
     const obj: any = {};
-    obj.operation_id = message.operationId;
+    obj.operation_id = omitDefault(message.operationId);
     obj.status = message.status ? Status.toAmino(message.status) : undefined;
     return obj;
   },

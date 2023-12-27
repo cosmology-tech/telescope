@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, omitDefault } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -199,7 +199,7 @@ export const DeploymentID = {
   toAmino(message: DeploymentID): DeploymentIDAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.dseq = message.dseq;
     return obj;
   },
   fromAminoMsg(object: DeploymentIDAminoMsg): DeploymentID {
@@ -326,7 +326,7 @@ export const Deployment = {
     obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined;
     obj.state = message.state;
     obj.version = message.version;
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    obj.created_at = omitDefault(message.createdAt);
     return obj;
   },
   fromAminoMsg(object: DeploymentAminoMsg): Deployment {
@@ -436,7 +436,7 @@ export const DeploymentFilters = {
   toAmino(message: DeploymentFilters): DeploymentFiltersAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.dseq = message.dseq;
     obj.state = message.state;
     return obj;
   },

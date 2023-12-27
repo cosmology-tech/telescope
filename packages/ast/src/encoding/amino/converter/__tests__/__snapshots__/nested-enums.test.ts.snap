@@ -9,9 +9,9 @@ exports[`cosmology/example/msg AminoConverter 1`] = `
       awesome
     }: MsgDoFunThing): MsgDoFunThingAminoType["value"] => {
       return {
-        address,
+        address: omitDefault(address),
         awesome: {
-          address: awesome.address,
+          address: omitDefault(awesome.address),
           myYolo0: awesome.myYolo0
         }
       };

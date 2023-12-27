@@ -3,7 +3,7 @@ import { Incentive, IncentiveSDKType, GasMeter, GasMeterSDKType } from "./incent
 import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "evmos.incentives.v1";
 /**
  * QueryIncentivesRequest is the request type for the Query/Incentives RPC
@@ -470,7 +470,7 @@ export const QueryIncentiveRequest = {
   },
   toAmino(message: QueryIncentiveRequest): QueryIncentiveRequestAmino {
     const obj: any = {};
-    obj.contract = message.contract;
+    obj.contract = omitDefault(message.contract);
     return obj;
   },
   fromAminoMsg(object: QueryIncentiveRequestAminoMsg): QueryIncentiveRequest {
@@ -656,7 +656,7 @@ export const QueryGasMetersRequest = {
   },
   toAmino(message: QueryGasMetersRequest): QueryGasMetersRequestAmino {
     const obj: any = {};
-    obj.contract = message.contract;
+    obj.contract = omitDefault(message.contract);
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -870,8 +870,8 @@ export const QueryGasMeterRequest = {
   },
   toAmino(message: QueryGasMeterRequest): QueryGasMeterRequestAmino {
     const obj: any = {};
-    obj.contract = message.contract;
-    obj.participant = message.participant;
+    obj.contract = omitDefault(message.contract);
+    obj.participant = omitDefault(message.participant);
     return obj;
   },
   fromAminoMsg(object: QueryGasMeterRequestAminoMsg): QueryGasMeterRequest {
@@ -957,7 +957,7 @@ export const QueryGasMeterResponse = {
   },
   toAmino(message: QueryGasMeterResponse): QueryGasMeterResponseAmino {
     const obj: any = {};
-    obj.gas_meter = message.gasMeter ? message.gasMeter.toString() : undefined;
+    obj.gas_meter = omitDefault(message.gasMeter);
     return obj;
   },
   fromAminoMsg(object: QueryGasMeterResponseAminoMsg): QueryGasMeterResponse {
@@ -1242,7 +1242,7 @@ export const QueryAllocationMeterRequest = {
   },
   toAmino(message: QueryAllocationMeterRequest): QueryAllocationMeterRequestAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = omitDefault(message.denom);
     return obj;
   },
   fromAminoMsg(object: QueryAllocationMeterRequestAminoMsg): QueryAllocationMeterRequest {

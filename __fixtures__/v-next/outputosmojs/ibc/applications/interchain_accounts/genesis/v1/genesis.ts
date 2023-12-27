@@ -3,7 +3,7 @@ import { ParamsSDKType as Params1SDKType } from "../../controller/v1/controller"
 import { Params as Params2 } from "../../host/v1/host";
 import { ParamsSDKType as Params2SDKType } from "../../host/v1/host";
 import { BinaryReader, BinaryWriter } from "../../../../../binary";
-import { isSet, DeepPartial } from "../../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../../helpers";
 export const protobufPackage = "ibc.applications.interchain_accounts.genesis.v1";
 /** GenesisState defines the interchain accounts genesis state */
 export interface GenesisState {
@@ -490,7 +490,7 @@ export const HostGenesisState = {
     } else {
       obj.interchain_accounts = [];
     }
-    obj.port = message.port;
+    obj.port = omitDefault(message.port);
     obj.params = message.params ? Params2.toAmino(message.params) : undefined;
     return obj;
   },
@@ -625,10 +625,10 @@ export const ActiveChannel = {
   },
   toAmino(message: ActiveChannel): ActiveChannelAmino {
     const obj: any = {};
-    obj.connection_id = message.connectionId;
-    obj.port_id = message.portId;
-    obj.channel_id = message.channelId;
-    obj.is_middleware_enabled = message.isMiddlewareEnabled;
+    obj.connection_id = omitDefault(message.connectionId);
+    obj.port_id = omitDefault(message.portId);
+    obj.channel_id = omitDefault(message.channelId);
+    obj.is_middleware_enabled = omitDefault(message.isMiddlewareEnabled);
     return obj;
   },
   fromAminoMsg(object: ActiveChannelAminoMsg): ActiveChannel {
@@ -748,9 +748,9 @@ export const RegisteredInterchainAccount = {
   },
   toAmino(message: RegisteredInterchainAccount): RegisteredInterchainAccountAmino {
     const obj: any = {};
-    obj.connection_id = message.connectionId;
-    obj.port_id = message.portId;
-    obj.account_address = message.accountAddress;
+    obj.connection_id = omitDefault(message.connectionId);
+    obj.port_id = omitDefault(message.portId);
+    obj.account_address = omitDefault(message.accountAddress);
     return obj;
   },
   fromAminoMsg(object: RegisteredInterchainAccountAminoMsg): RegisteredInterchainAccount {

@@ -1,7 +1,7 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet } from "../../../helpers";
+import { DeepPartial, isSet, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /** Params holds parameters for the incentives module */
 export interface Params {
@@ -236,7 +236,7 @@ export const GenesisState = {
     } else {
       obj.pools = [];
     }
-    obj.next_pool_number = message.nextPoolNumber ? message.nextPoolNumber.toString() : undefined;
+    obj.next_pool_number = omitDefault(message.nextPoolNumber);
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   },

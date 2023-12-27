@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.crisis.v1beta1";
 /** MsgVerifyInvariant represents a message to verify a particular invariance. */
 export interface MsgVerifyInvariant {
@@ -112,9 +112,9 @@ export const MsgVerifyInvariant = {
   },
   toAmino(message: MsgVerifyInvariant): MsgVerifyInvariantAmino {
     const obj: any = {};
-    obj.sender = message.sender;
-    obj.invariant_module_name = message.invariantModuleName;
-    obj.invariant_route = message.invariantRoute;
+    obj.sender = omitDefault(message.sender);
+    obj.invariant_module_name = omitDefault(message.invariantModuleName);
+    obj.invariant_route = omitDefault(message.invariantRoute);
     return obj;
   },
   fromAminoMsg(object: MsgVerifyInvariantAminoMsg): MsgVerifyInvariant {

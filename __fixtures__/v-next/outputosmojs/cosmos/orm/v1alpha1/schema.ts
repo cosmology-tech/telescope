@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.orm.v1alpha1";
 /** StorageType */
 export enum StorageType {
@@ -339,9 +339,9 @@ export const ModuleSchemaDescriptor_FileEntry = {
   },
   toAmino(message: ModuleSchemaDescriptor_FileEntry): ModuleSchemaDescriptor_FileEntryAmino {
     const obj: any = {};
-    obj.id = message.id;
-    obj.proto_file_name = message.protoFileName;
-    obj.storage_type = message.storageType;
+    obj.id = omitDefault(message.id);
+    obj.proto_file_name = omitDefault(message.protoFileName);
+    obj.storage_type = omitDefault(message.storageType);
     return obj;
   },
   fromAminoMsg(object: ModuleSchemaDescriptor_FileEntryAminoMsg): ModuleSchemaDescriptor_FileEntry {

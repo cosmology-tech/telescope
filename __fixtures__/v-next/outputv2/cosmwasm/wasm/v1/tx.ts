@@ -1,7 +1,7 @@
 import { AccessConfig, AccessConfigAmino, AccessConfigSDKType } from "./types";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../helpers";
 import { fromBase64, toBase64, toUtf8, fromUtf8 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** MsgStoreCode submit Wasm code to the system */
@@ -449,7 +449,7 @@ export const MsgStoreCode = {
   },
   toAmino(message: MsgStoreCode): MsgStoreCodeAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = omitDefault(message.sender);
     obj.wasm_byte_code = message.wasmByteCode ? toBase64(message.wasmByteCode) : undefined;
     obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission) : undefined;
     return obj;
@@ -541,7 +541,7 @@ export const MsgStoreCodeResponse = {
   },
   toAmino(message: MsgStoreCodeResponse): MsgStoreCodeResponseAmino {
     const obj: any = {};
-    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.code_id = omitDefault(message.codeId);
     return obj;
   },
   fromAminoMsg(object: MsgStoreCodeResponseAminoMsg): MsgStoreCodeResponse {
@@ -704,10 +704,10 @@ export const MsgInstantiateContract = {
   },
   toAmino(message: MsgInstantiateContract): MsgInstantiateContractAmino {
     const obj: any = {};
-    obj.sender = message.sender;
-    obj.admin = message.admin;
-    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
-    obj.label = message.label;
+    obj.sender = omitDefault(message.sender);
+    obj.admin = omitDefault(message.admin);
+    obj.code_id = omitDefault(message.codeId);
+    obj.label = omitDefault(message.label);
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     if (message.funds) {
       obj.funds = message.funds.map(e => e ? Coin.toAmino(e) : undefined);
@@ -814,7 +814,7 @@ export const MsgInstantiateContractResponse = {
   },
   toAmino(message: MsgInstantiateContractResponse): MsgInstantiateContractResponseAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = omitDefault(message.address);
     obj.data = message.data;
     return obj;
   },
@@ -950,8 +950,8 @@ export const MsgExecuteContract = {
   },
   toAmino(message: MsgExecuteContract): MsgExecuteContractAmino {
     const obj: any = {};
-    obj.sender = message.sender;
-    obj.contract = message.contract;
+    obj.sender = omitDefault(message.sender);
+    obj.contract = omitDefault(message.contract);
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     if (message.funds) {
       obj.funds = message.funds.map(e => e ? Coin.toAmino(e) : undefined);
@@ -1174,9 +1174,9 @@ export const MsgMigrateContract = {
   },
   toAmino(message: MsgMigrateContract): MsgMigrateContractAmino {
     const obj: any = {};
-    obj.sender = message.sender;
-    obj.contract = message.contract;
-    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.sender = omitDefault(message.sender);
+    obj.contract = omitDefault(message.contract);
+    obj.code_id = omitDefault(message.codeId);
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     return obj;
   },
@@ -1379,9 +1379,9 @@ export const MsgUpdateAdmin = {
   },
   toAmino(message: MsgUpdateAdmin): MsgUpdateAdminAmino {
     const obj: any = {};
-    obj.sender = message.sender;
-    obj.new_admin = message.newAdmin;
-    obj.contract = message.contract;
+    obj.sender = omitDefault(message.sender);
+    obj.new_admin = omitDefault(message.newAdmin);
+    obj.contract = omitDefault(message.contract);
     return obj;
   },
   fromAminoMsg(object: MsgUpdateAdminAminoMsg): MsgUpdateAdmin {
@@ -1553,8 +1553,8 @@ export const MsgClearAdmin = {
   },
   toAmino(message: MsgClearAdmin): MsgClearAdminAmino {
     const obj: any = {};
-    obj.sender = message.sender;
-    obj.contract = message.contract;
+    obj.sender = omitDefault(message.sender);
+    obj.contract = omitDefault(message.contract);
     return obj;
   },
   fromAminoMsg(object: MsgClearAdminAminoMsg): MsgClearAdmin {

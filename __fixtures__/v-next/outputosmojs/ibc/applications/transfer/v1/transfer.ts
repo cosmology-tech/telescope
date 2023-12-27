@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /**
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
@@ -131,8 +131,8 @@ export const DenomTrace = {
   },
   toAmino(message: DenomTrace): DenomTraceAmino {
     const obj: any = {};
-    obj.path = message.path;
-    obj.base_denom = message.baseDenom;
+    obj.path = omitDefault(message.path);
+    obj.base_denom = omitDefault(message.baseDenom);
     return obj;
   },
   fromAminoMsg(object: DenomTraceAminoMsg): DenomTrace {
@@ -238,8 +238,8 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.send_enabled = message.sendEnabled;
-    obj.receive_enabled = message.receiveEnabled;
+    obj.send_enabled = omitDefault(message.sendEnabled);
+    obj.receive_enabled = omitDefault(message.receiveEnabled);
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

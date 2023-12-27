@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isSet } from "../../../../helpers";
+import { DeepPartial, isSet, omitDefault } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.reflection.v1beta1";
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesRequest {}
@@ -287,7 +287,7 @@ export const ListImplementationsRequest = {
   },
   toAmino(message: ListImplementationsRequest): ListImplementationsRequestAmino {
     const obj: any = {};
-    obj.interface_name = message.interfaceName;
+    obj.interface_name = omitDefault(message.interfaceName);
     return obj;
   },
   fromAminoMsg(object: ListImplementationsRequestAminoMsg): ListImplementationsRequest {

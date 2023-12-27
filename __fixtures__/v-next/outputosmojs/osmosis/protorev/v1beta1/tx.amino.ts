@@ -75,7 +75,7 @@ export const AminoConverter = {
         hot_routes: hotRoutes.map(el0 => ({
           arb_routes: el0.arbRoutes.map(el1 => ({
             trades: el1.trades.map(el2 => ({
-              pool: el2.pool.toString(),
+              pool: omitDefault(el2.pool)?.toString?.(),
               token_in: omitDefault(el2.tokenIn),
               token_out: omitDefault(el2.tokenOut)
             })),
@@ -136,7 +136,7 @@ export const AminoConverter = {
     }: MsgSetMaxPoolPointsPerTx): MsgSetMaxPoolPointsPerTxAminoType["value"] => {
       return {
         admin: omitDefault(admin),
-        max_pool_points_per_tx: maxPoolPointsPerTx.toString()
+        max_pool_points_per_tx: omitDefault(maxPoolPointsPerTx)?.toString?.()
       };
     },
     fromAmino: ({
@@ -157,7 +157,7 @@ export const AminoConverter = {
     }: MsgSetMaxPoolPointsPerBlock): MsgSetMaxPoolPointsPerBlockAminoType["value"] => {
       return {
         admin: omitDefault(admin),
-        max_pool_points_per_block: maxPoolPointsPerBlock.toString()
+        max_pool_points_per_block: omitDefault(maxPoolPointsPerBlock)?.toString?.()
       };
     },
     fromAmino: ({
@@ -179,9 +179,9 @@ export const AminoConverter = {
       return {
         admin: omitDefault(admin),
         pool_weights: {
-          stable_weight: poolWeights.stableWeight.toString(),
-          balancer_weight: poolWeights.balancerWeight.toString(),
-          concentrated_weight: poolWeights.concentratedWeight.toString()
+          stable_weight: omitDefault(poolWeights.stableWeight)?.toString?.(),
+          balancer_weight: omitDefault(poolWeights.balancerWeight)?.toString?.(),
+          concentrated_weight: omitDefault(poolWeights.concentratedWeight)?.toString?.()
         }
       };
     },

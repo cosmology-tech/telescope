@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.params.v1beta1";
 /** ParameterChangeProposal defines a proposal to change one or more parameters. */
 export interface ParameterChangeProposal {
@@ -159,8 +159,8 @@ export const ParameterChangeProposal = {
   },
   toAmino(message: ParameterChangeProposal): ParameterChangeProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
+    obj.title = omitDefault(message.title);
+    obj.description = omitDefault(message.description);
     if (message.changes) {
       obj.changes = message.changes.map(e => e ? ParamChange.toAmino(e) : undefined);
     } else {
@@ -279,9 +279,9 @@ export const ParamChange = {
   },
   toAmino(message: ParamChange): ParamChangeAmino {
     const obj: any = {};
-    obj.subspace = message.subspace;
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.subspace = omitDefault(message.subspace);
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: ParamChangeAminoMsg): ParamChange {

@@ -1,6 +1,6 @@
 import { Order, OrderSDKType, Counterparty, CounterpartyAmino, CounterpartySDKType, orderFromJSON, orderToJSON } from "../../channel/v1/channel";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "ibc.core.port.v1";
 /** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
 export interface QueryAppVersionRequest {
@@ -188,11 +188,11 @@ export const QueryAppVersionRequest = {
   },
   toAmino(message: QueryAppVersionRequest): QueryAppVersionRequestAmino {
     const obj: any = {};
-    obj.port_id = message.portId;
-    obj.connection_id = message.connectionId;
-    obj.ordering = message.ordering;
+    obj.port_id = omitDefault(message.portId);
+    obj.connection_id = omitDefault(message.connectionId);
+    obj.ordering = omitDefault(message.ordering);
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
-    obj.proposed_version = message.proposedVersion;
+    obj.proposed_version = omitDefault(message.proposedVersion);
     return obj;
   },
   fromAminoMsg(object: QueryAppVersionRequestAminoMsg): QueryAppVersionRequest {
@@ -293,8 +293,8 @@ export const QueryAppVersionResponse = {
   },
   toAmino(message: QueryAppVersionResponse): QueryAppVersionResponseAmino {
     const obj: any = {};
-    obj.port_id = message.portId;
-    obj.version = message.version;
+    obj.port_id = omitDefault(message.portId);
+    obj.version = omitDefault(message.version);
     return obj;
   },
   fromAminoMsg(object: QueryAppVersionResponseAminoMsg): QueryAppVersionResponse {

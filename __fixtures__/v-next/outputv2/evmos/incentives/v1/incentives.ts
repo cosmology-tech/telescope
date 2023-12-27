@@ -1,7 +1,7 @@
 import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "evmos.incentives.v1";
 /**
  * Incentive defines an instance that organizes distribution conditions for a
@@ -280,21 +280,21 @@ export const Incentive = {
       contract: object.contract,
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromAmino(e)) : [],
       epochs: object.epochs,
-      startTime: object.start_time,
+      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
       totalGas: BigInt(object.total_gas)
     };
   },
   toAmino(message: Incentive): IncentiveAmino {
     const obj: any = {};
-    obj.contract = message.contract;
+    obj.contract = omitDefault(message.contract);
     if (message.allocations) {
       obj.allocations = message.allocations.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
       obj.allocations = [];
     }
-    obj.epochs = message.epochs;
+    obj.epochs = omitDefault(message.epochs);
     obj.start_time = message.startTime;
-    obj.total_gas = message.totalGas ? message.totalGas.toString() : undefined;
+    obj.total_gas = omitDefault(message.totalGas);
     return obj;
   },
   fromAminoMsg(object: IncentiveAminoMsg): Incentive {
@@ -403,9 +403,9 @@ export const GasMeter = {
   },
   toAmino(message: GasMeter): GasMeterAmino {
     const obj: any = {};
-    obj.contract = message.contract;
-    obj.participant = message.participant;
-    obj.cumulative_gas = message.cumulativeGas ? message.cumulativeGas.toString() : undefined;
+    obj.contract = omitDefault(message.contract);
+    obj.participant = omitDefault(message.participant);
+    obj.cumulative_gas = omitDefault(message.cumulativeGas);
     return obj;
   },
   fromAminoMsg(object: GasMeterAminoMsg): GasMeter {
@@ -547,15 +547,15 @@ export const RegisterIncentiveProposal = {
   },
   toAmino(message: RegisterIncentiveProposal): RegisterIncentiveProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.contract = message.contract;
+    obj.title = omitDefault(message.title);
+    obj.description = omitDefault(message.description);
+    obj.contract = omitDefault(message.contract);
     if (message.allocations) {
       obj.allocations = message.allocations.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
       obj.allocations = [];
     }
-    obj.epochs = message.epochs;
+    obj.epochs = omitDefault(message.epochs);
     return obj;
   },
   fromAminoMsg(object: RegisterIncentiveProposalAminoMsg): RegisterIncentiveProposal {
@@ -662,9 +662,9 @@ export const CancelIncentiveProposal = {
   },
   toAmino(message: CancelIncentiveProposal): CancelIncentiveProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.contract = message.contract;
+    obj.title = omitDefault(message.title);
+    obj.description = omitDefault(message.description);
+    obj.contract = omitDefault(message.contract);
     return obj;
   },
   fromAminoMsg(object: CancelIncentiveProposalAminoMsg): CancelIncentiveProposal {

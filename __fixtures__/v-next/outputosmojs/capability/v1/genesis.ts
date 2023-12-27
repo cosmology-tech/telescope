@@ -1,6 +1,6 @@
 import { CapabilityOwners, CapabilityOwnersSDKType } from "./capability";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "capability.v1";
 /** GenesisOwners defines the capability owners with their corresponding index. */
 export interface GenesisOwners {
@@ -110,7 +110,7 @@ export const GenesisOwners = {
   },
   toAmino(message: GenesisOwners): GenesisOwnersAmino {
     const obj: any = {};
-    obj.index = message.index ? message.index.toString() : undefined;
+    obj.index = omitDefault(message.index);
     obj.index_owners = message.indexOwners ? CapabilityOwners.toAmino(message.indexOwners) : undefined;
     return obj;
   },
@@ -219,7 +219,7 @@ export const GenesisState = {
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
-    obj.index = message.index ? message.index.toString() : undefined;
+    obj.index = omitDefault(message.index);
     if (message.owners) {
       obj.owners = message.owners.map(e => e ? GenesisOwners.toAmino(e) : undefined);
     } else {

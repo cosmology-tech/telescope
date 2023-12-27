@@ -4,7 +4,7 @@ import { HttpRequest, HttpRequestAmino, HttpRequestSDKType } from "./http_reques
 import { Any, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import { Struct, StructAmino, StructSDKType } from "../../../protobuf/struct";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface LogEntry_LabelsEntry {
   key: string;
@@ -382,8 +382,8 @@ export const LogEntry_LabelsEntry = {
   },
   toAmino(message: LogEntry_LabelsEntry): LogEntry_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: LogEntry_LabelsEntryAminoMsg): LogEntry_LabelsEntry {
@@ -629,7 +629,7 @@ export const LogEntry = {
   fromAmino(object: LogEntryAmino): LogEntry {
     return {
       name: object.name,
-      timestamp: object.timestamp,
+      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       httpRequest: object?.http_request ? HttpRequest.fromAmino(object.http_request) : undefined,
       trace: object.trace,
@@ -649,12 +649,12 @@ export const LogEntry = {
   },
   toAmino(message: LogEntry): LogEntryAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     obj.timestamp = message.timestamp;
-    obj.severity = message.severity;
+    obj.severity = omitDefault(message.severity);
     obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined;
-    obj.trace = message.trace;
-    obj.insert_id = message.insertId;
+    obj.trace = omitDefault(message.trace);
+    obj.insert_id = omitDefault(message.insertId);
     obj.labels = {};
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {
@@ -662,7 +662,7 @@ export const LogEntry = {
       });
     }
     obj.proto_payload = message.protoPayload ? Any.toAmino(message.protoPayload) : undefined;
-    obj.text_payload = message.textPayload;
+    obj.text_payload = omitDefault(message.textPayload);
     obj.struct_payload = message.structPayload ? Struct.toAmino(message.structPayload) : undefined;
     obj.operation = message.operation ? LogEntryOperation.toAmino(message.operation) : undefined;
     obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toAmino(message.sourceLocation) : undefined;
@@ -785,10 +785,10 @@ export const LogEntryOperation = {
   },
   toAmino(message: LogEntryOperation): LogEntryOperationAmino {
     const obj: any = {};
-    obj.id = message.id;
-    obj.producer = message.producer;
-    obj.first = message.first;
-    obj.last = message.last;
+    obj.id = omitDefault(message.id);
+    obj.producer = omitDefault(message.producer);
+    obj.first = omitDefault(message.first);
+    obj.last = omitDefault(message.last);
     return obj;
   },
   fromAminoMsg(object: LogEntryOperationAminoMsg): LogEntryOperation {
@@ -897,9 +897,9 @@ export const LogEntrySourceLocation = {
   },
   toAmino(message: LogEntrySourceLocation): LogEntrySourceLocationAmino {
     const obj: any = {};
-    obj.file = message.file;
-    obj.line = message.line ? message.line.toString() : undefined;
-    obj.function = message.function;
+    obj.file = omitDefault(message.file);
+    obj.line = omitDefault(message.line);
+    obj.function = omitDefault(message.function);
     return obj;
   },
   fromAminoMsg(object: LogEntrySourceLocationAminoMsg): LogEntrySourceLocation {

@@ -1,6 +1,6 @@
 import { MerklePrefix, MerklePrefixAmino, MerklePrefixSDKType } from "../../commitment/v1/commitment";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "ibc.core.connection.v1";
 /**
  * State defines if a connection is in one of the following states:
@@ -476,15 +476,15 @@ export const ConnectionEnd = {
   },
   toAmino(message: ConnectionEnd): ConnectionEndAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
+    obj.client_id = omitDefault(message.clientId);
     if (message.versions) {
       obj.versions = message.versions.map(e => e ? Version.toAmino(e) : undefined);
     } else {
       obj.versions = [];
     }
-    obj.state = message.state;
+    obj.state = omitDefault(message.state);
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
-    obj.delay_period = message.delayPeriod ? message.delayPeriod.toString() : undefined;
+    obj.delay_period = omitDefault(message.delayPeriod);
     return obj;
   },
   fromAminoMsg(object: ConnectionEndAminoMsg): ConnectionEnd {
@@ -649,16 +649,16 @@ export const IdentifiedConnection = {
   },
   toAmino(message: IdentifiedConnection): IdentifiedConnectionAmino {
     const obj: any = {};
-    obj.id = message.id;
-    obj.client_id = message.clientId;
+    obj.id = omitDefault(message.id);
+    obj.client_id = omitDefault(message.clientId);
     if (message.versions) {
       obj.versions = message.versions.map(e => e ? Version.toAmino(e) : undefined);
     } else {
       obj.versions = [];
     }
-    obj.state = message.state;
+    obj.state = omitDefault(message.state);
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
-    obj.delay_period = message.delayPeriod ? message.delayPeriod.toString() : undefined;
+    obj.delay_period = omitDefault(message.delayPeriod);
     return obj;
   },
   fromAminoMsg(object: IdentifiedConnectionAminoMsg): IdentifiedConnection {
@@ -774,8 +774,8 @@ export const Counterparty = {
   },
   toAmino(message: Counterparty): CounterpartyAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
-    obj.connection_id = message.connectionId;
+    obj.client_id = omitDefault(message.clientId);
+    obj.connection_id = omitDefault(message.connectionId);
     obj.prefix = message.prefix ? MerklePrefix.toAmino(message.prefix) : undefined;
     return obj;
   },
@@ -985,7 +985,7 @@ export const ConnectionPaths = {
   },
   toAmino(message: ConnectionPaths): ConnectionPathsAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
+    obj.client_id = omitDefault(message.clientId);
     if (message.paths) {
       obj.paths = message.paths.map(e => e);
     } else {
@@ -1099,7 +1099,7 @@ export const Version = {
   },
   toAmino(message: Version): VersionAmino {
     const obj: any = {};
-    obj.identifier = message.identifier;
+    obj.identifier = omitDefault(message.identifier);
     if (message.features) {
       obj.features = message.features.map(e => e);
     } else {
@@ -1194,7 +1194,7 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.max_expected_time_per_block = message.maxExpectedTimePerBlock ? message.maxExpectedTimePerBlock.toString() : undefined;
+    obj.max_expected_time_per_block = omitDefault(message.maxExpectedTimePerBlock);
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

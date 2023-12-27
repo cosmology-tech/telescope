@@ -1,6 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, padDecimal, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.mint.v1beta1";
 /** Minter represents the minting state. */
 export interface Minter {
@@ -288,7 +288,7 @@ export const Minter = {
   },
   toAmino(message: Minter): MinterAmino {
     const obj: any = {};
-    obj.epoch_provisions = message.epochProvisions;
+    obj.epoch_provisions = padDecimal(message.epochProvisions);
     return obj;
   },
   fromAminoMsg(object: MinterAminoMsg): Minter {
@@ -389,8 +389,8 @@ export const WeightedAddress = {
   },
   toAmino(message: WeightedAddress): WeightedAddressAmino {
     const obj: any = {};
-    obj.address = message.address;
-    obj.weight = message.weight;
+    obj.address = omitDefault(message.address);
+    obj.weight = padDecimal(message.weight);
     return obj;
   },
   fromAminoMsg(object: WeightedAddressAminoMsg): WeightedAddress {
@@ -517,10 +517,10 @@ export const DistributionProportions = {
   },
   toAmino(message: DistributionProportions): DistributionProportionsAmino {
     const obj: any = {};
-    obj.staking = message.staking;
-    obj.pool_incentives = message.poolIncentives;
-    obj.developer_rewards = message.developerRewards;
-    obj.community_pool = message.communityPool;
+    obj.staking = padDecimal(message.staking);
+    obj.pool_incentives = padDecimal(message.poolIncentives);
+    obj.developer_rewards = padDecimal(message.developerRewards);
+    obj.community_pool = padDecimal(message.communityPool);
     return obj;
   },
   fromAminoMsg(object: DistributionProportionsAminoMsg): DistributionProportions {
@@ -713,18 +713,18 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.mint_denom = message.mintDenom;
-    obj.genesis_epoch_provisions = message.genesisEpochProvisions;
-    obj.epoch_identifier = message.epochIdentifier;
-    obj.reduction_period_in_epochs = message.reductionPeriodInEpochs ? message.reductionPeriodInEpochs.toString() : undefined;
-    obj.reduction_factor = message.reductionFactor;
+    obj.mint_denom = omitDefault(message.mintDenom);
+    obj.genesis_epoch_provisions = padDecimal(message.genesisEpochProvisions);
+    obj.epoch_identifier = omitDefault(message.epochIdentifier);
+    obj.reduction_period_in_epochs = omitDefault(message.reductionPeriodInEpochs);
+    obj.reduction_factor = padDecimal(message.reductionFactor);
     obj.distribution_proportions = message.distributionProportions ? DistributionProportions.toAmino(message.distributionProportions) : undefined;
     if (message.weightedDeveloperRewardsReceivers) {
       obj.weighted_developer_rewards_receivers = message.weightedDeveloperRewardsReceivers.map(e => e ? WeightedAddress.toAmino(e) : undefined);
     } else {
       obj.weighted_developer_rewards_receivers = [];
     }
-    obj.minting_rewards_distribution_start_epoch = message.mintingRewardsDistributionStartEpoch ? message.mintingRewardsDistributionStartEpoch.toString() : undefined;
+    obj.minting_rewards_distribution_start_epoch = omitDefault(message.mintingRewardsDistributionStartEpoch);
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

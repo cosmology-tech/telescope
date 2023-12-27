@@ -2,7 +2,7 @@ import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 /**
  * LockQueryType defines the type of the lock query that can
@@ -289,14 +289,14 @@ export const PeriodLock = {
       ID: BigInt(object.ID),
       owner: object.owner,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      endTime: object.end_time,
+      endTime: object?.end_time ? Timestamp.fromAmino(object.end_time) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
     };
   },
   toAmino(message: PeriodLock): PeriodLockAmino {
     const obj: any = {};
-    obj.ID = message.ID ? message.ID.toString() : undefined;
-    obj.owner = message.owner;
+    obj.ID = omitDefault(message.ID);
+    obj.owner = omitDefault(message.owner);
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     obj.end_time = message.endTime;
     if (message.coins) {
@@ -434,13 +434,13 @@ export const QueryCondition = {
       lockQueryType: isSet(object.lock_query_type) ? lockQueryTypeFromJSON(object.lock_query_type) : -1,
       denom: object.denom,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      timestamp: object.timestamp
+      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined
     };
   },
   toAmino(message: QueryCondition): QueryConditionAmino {
     const obj: any = {};
-    obj.lock_query_type = message.lockQueryType;
-    obj.denom = message.denom;
+    obj.lock_query_type = omitDefault(message.lockQueryType);
+    obj.denom = omitDefault(message.denom);
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     obj.timestamp = message.timestamp;
     return obj;
@@ -574,14 +574,14 @@ export const SyntheticLock = {
     return {
       underlyingLockId: BigInt(object.underlying_lock_id),
       synthDenom: object.synth_denom,
-      endTime: object.end_time,
+      endTime: object?.end_time ? Timestamp.fromAmino(object.end_time) : undefined,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
     };
   },
   toAmino(message: SyntheticLock): SyntheticLockAmino {
     const obj: any = {};
-    obj.underlying_lock_id = message.underlyingLockId ? message.underlyingLockId.toString() : undefined;
-    obj.synth_denom = message.synthDenom;
+    obj.underlying_lock_id = omitDefault(message.underlyingLockId);
+    obj.synth_denom = omitDefault(message.synthDenom);
     obj.end_time = message.endTime;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;

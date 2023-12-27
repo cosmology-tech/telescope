@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * `Documentation` provides the information for describing a service.
@@ -546,7 +546,7 @@ export const Documentation = {
   },
   toAmino(message: Documentation): DocumentationAmino {
     const obj: any = {};
-    obj.summary = message.summary;
+    obj.summary = omitDefault(message.summary);
     if (message.pages) {
       obj.pages = message.pages.map(e => e ? Page.toAmino(e) : undefined);
     } else {
@@ -557,9 +557,9 @@ export const Documentation = {
     } else {
       obj.rules = [];
     }
-    obj.documentation_root_url = message.documentationRootUrl;
-    obj.service_root_url = message.serviceRootUrl;
-    obj.overview = message.overview;
+    obj.documentation_root_url = omitDefault(message.documentationRootUrl);
+    obj.service_root_url = omitDefault(message.serviceRootUrl);
+    obj.overview = omitDefault(message.overview);
     return obj;
   },
   fromAminoMsg(object: DocumentationAminoMsg): Documentation {
@@ -666,9 +666,9 @@ export const DocumentationRule = {
   },
   toAmino(message: DocumentationRule): DocumentationRuleAmino {
     const obj: any = {};
-    obj.selector = message.selector;
-    obj.description = message.description;
-    obj.deprecation_description = message.deprecationDescription;
+    obj.selector = omitDefault(message.selector);
+    obj.description = omitDefault(message.description);
+    obj.deprecation_description = omitDefault(message.deprecationDescription);
     return obj;
   },
   fromAminoMsg(object: DocumentationRuleAminoMsg): DocumentationRule {
@@ -783,8 +783,8 @@ export const Page = {
   },
   toAmino(message: Page): PageAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.content = message.content;
+    obj.name = omitDefault(message.name);
+    obj.content = omitDefault(message.content);
     if (message.subpages) {
       obj.subpages = message.subpages.map(e => e ? Page.toAmino(e) : undefined);
     } else {

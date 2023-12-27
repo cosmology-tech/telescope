@@ -3,7 +3,7 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./genesis";
 import { ClaimsRecordAddress, ClaimsRecordAddressSDKType, Claim, ClaimSDKType } from "./claims";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet } from "../../../helpers";
+import { DeepPartial, isSet, omitDefault } from "../../../helpers";
 export const protobufPackage = "evmos.claims.v1";
 /**
  * QueryTotalUnclaimedRequest is the request type for the Query/TotalUnclaimed
@@ -691,7 +691,7 @@ export const QueryClaimsRecordRequest = {
   },
   toAmino(message: QueryClaimsRecordRequest): QueryClaimsRecordRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = omitDefault(message.address);
     return obj;
   },
   fromAminoMsg(object: QueryClaimsRecordRequestAminoMsg): QueryClaimsRecordRequest {
@@ -799,7 +799,7 @@ export const QueryClaimsRecordResponse = {
   },
   toAmino(message: QueryClaimsRecordResponse): QueryClaimsRecordResponseAmino {
     const obj: any = {};
-    obj.initial_claimable_amount = message.initialClaimableAmount;
+    obj.initial_claimable_amount = omitDefault(message.initialClaimableAmount);
     if (message.claims) {
       obj.claims = message.claims.map(e => e ? Claim.toAmino(e) : undefined);
     } else {

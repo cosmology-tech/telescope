@@ -2,7 +2,7 @@ import { Duration, DurationAmino, DurationSDKType } from "../protobuf/duration";
 import { Any, AnyAmino, AnySDKType } from "../protobuf/any";
 import { Status, StatusAmino, StatusSDKType } from "../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "google.longrunning";
 /**
  * This resource represents a long-running operation that is the result of a
@@ -481,9 +481,9 @@ export const Operation = {
   },
   toAmino(message: Operation): OperationAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     obj.metadata = message.metadata ? Any.toAmino(message.metadata) : undefined;
-    obj.done = message.done;
+    obj.done = omitDefault(message.done);
     obj.error = message.error ? Status.toAmino(message.error) : undefined;
     obj.response = message.response ? Any.toAmino(message.response) : undefined;
     return obj;
@@ -566,7 +566,7 @@ export const GetOperationRequest = {
   },
   toAmino(message: GetOperationRequest): GetOperationRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     return obj;
   },
   fromAminoMsg(object: GetOperationRequestAminoMsg): GetOperationRequest {
@@ -686,10 +686,10 @@ export const ListOperationsRequest = {
   },
   toAmino(message: ListOperationsRequest): ListOperationsRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.filter = message.filter;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
+    obj.name = omitDefault(message.name);
+    obj.filter = omitDefault(message.filter);
+    obj.page_size = omitDefault(message.pageSize);
+    obj.page_token = omitDefault(message.pageToken);
     return obj;
   },
   fromAminoMsg(object: ListOperationsRequestAminoMsg): ListOperationsRequest {
@@ -796,7 +796,7 @@ export const ListOperationsResponse = {
     } else {
       obj.operations = [];
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = omitDefault(message.nextPageToken);
     return obj;
   },
   fromAminoMsg(object: ListOperationsResponseAminoMsg): ListOperationsResponse {
@@ -877,7 +877,7 @@ export const CancelOperationRequest = {
   },
   toAmino(message: CancelOperationRequest): CancelOperationRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     return obj;
   },
   fromAminoMsg(object: CancelOperationRequestAminoMsg): CancelOperationRequest {
@@ -958,7 +958,7 @@ export const DeleteOperationRequest = {
   },
   toAmino(message: DeleteOperationRequest): DeleteOperationRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     return obj;
   },
   fromAminoMsg(object: DeleteOperationRequestAminoMsg): DeleteOperationRequest {
@@ -1054,7 +1054,7 @@ export const WaitOperationRequest = {
   },
   toAmino(message: WaitOperationRequest): WaitOperationRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     obj.timeout = message.timeout ? Duration.toAmino(message.timeout) : undefined;
     return obj;
   },
@@ -1149,8 +1149,8 @@ export const OperationInfo = {
   },
   toAmino(message: OperationInfo): OperationInfoAmino {
     const obj: any = {};
-    obj.response_type = message.responseType;
-    obj.metadata_type = message.metadataType;
+    obj.response_type = omitDefault(message.responseType);
+    obj.metadata_type = omitDefault(message.metadataType);
     return obj;
   },
   fromAminoMsg(object: OperationInfoAminoMsg): OperationInfo {

@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
+import { DeepPartial, isSet, omitDefault } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * `Context` defines which contexts an API requests.
@@ -452,7 +452,7 @@ export const ContextRule = {
   },
   toAmino(message: ContextRule): ContextRuleAmino {
     const obj: any = {};
-    obj.selector = message.selector;
+    obj.selector = omitDefault(message.selector);
     if (message.requested) {
       obj.requested = message.requested.map(e => e);
     } else {

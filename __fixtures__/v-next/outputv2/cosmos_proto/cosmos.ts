@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../binary";
-import { isSet, DeepPartial } from "../helpers";
+import { isSet, DeepPartial, omitDefault } from "../helpers";
 export const protobufPackage = "cosmos_proto";
 export enum ScalarType {
   SCALAR_TYPE_UNSPECIFIED = 0,
@@ -250,8 +250,8 @@ export const InterfaceDescriptor = {
   },
   toAmino(message: InterfaceDescriptor): InterfaceDescriptorAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
+    obj.name = omitDefault(message.name);
+    obj.description = omitDefault(message.description);
     return obj;
   },
   fromAminoMsg(object: InterfaceDescriptorAminoMsg): InterfaceDescriptor {
@@ -375,8 +375,8 @@ export const ScalarDescriptor = {
   },
   toAmino(message: ScalarDescriptor): ScalarDescriptorAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
+    obj.name = omitDefault(message.name);
+    obj.description = omitDefault(message.description);
     if (message.fieldType) {
       obj.field_type = message.fieldType.map(e => scalarTypeToJSON(e));
     } else {

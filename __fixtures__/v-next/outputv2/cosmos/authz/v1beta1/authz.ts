@@ -9,7 +9,7 @@ import { DepositDeploymentAuthorizationSDKType as DepositDeploymentAuthorization
 import { SendAuthorization, SendAuthorizationProtoMsg, SendAuthorizationSDKType } from "../../bank/v1beta1/authz";
 import { StakeAuthorization, StakeAuthorizationProtoMsg, StakeAuthorizationSDKType } from "../../staking/v1beta1/authz";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault, toTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "cosmos.authz.v1beta1";
 /**
  * GenericAuthorization gives the grantee unrestricted permissions to execute
@@ -216,7 +216,7 @@ export const GenericAuthorization = {
   },
   toAmino(message: GenericAuthorization): GenericAuthorizationAmino {
     const obj: any = {};
-    obj.msg = message.msg;
+    obj.msg = omitDefault(message.msg);
     return obj;
   },
   fromAminoMsg(object: GenericAuthorizationAminoMsg): GenericAuthorization {
@@ -314,7 +314,7 @@ export const Grant = {
   fromAmino(object: GrantAmino): Grant {
     return {
       authorization: object?.authorization ? Authorization_FromAmino(object.authorization) : undefined,
-      expiration: object?.expiration
+      expiration: object?.expiration ? Timestamp.fromAmino(object.expiration) : undefined
     };
   },
   toAmino(message: Grant): GrantAmino {
@@ -444,13 +444,13 @@ export const GrantAuthorization = {
       granter: object.granter,
       grantee: object.grantee,
       authorization: object?.authorization ? Authorization_FromAmino(object.authorization) : undefined,
-      expiration: object.expiration
+      expiration: object?.expiration ? Timestamp.fromAmino(object.expiration) : undefined
     };
   },
   toAmino(message: GrantAuthorization): GrantAuthorizationAmino {
     const obj: any = {};
-    obj.granter = message.granter;
-    obj.grantee = message.grantee;
+    obj.granter = omitDefault(message.granter);
+    obj.grantee = omitDefault(message.grantee);
     obj.authorization = message.authorization ? Authorization_ToAmino((message.authorization as Any)) : undefined;
     obj.expiration = message.expiration;
     return obj;

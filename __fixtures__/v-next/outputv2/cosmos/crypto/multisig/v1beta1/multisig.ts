@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { bytesFromBase64, base64FromBytes, DeepPartial, isSet } from "../../../../helpers";
+import { bytesFromBase64, base64FromBytes, DeepPartial, isSet, omitDefault } from "../../../../helpers";
 export const protobufPackage = "cosmos.crypto.multisig.v1beta1";
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
@@ -247,7 +247,7 @@ export const CompactBitArray = {
   },
   toAmino(message: CompactBitArray): CompactBitArrayAmino {
     const obj: any = {};
-    obj.extra_bits_stored = message.extraBitsStored;
+    obj.extra_bits_stored = omitDefault(message.extraBitsStored);
     obj.elems = message.elems;
     return obj;
   },

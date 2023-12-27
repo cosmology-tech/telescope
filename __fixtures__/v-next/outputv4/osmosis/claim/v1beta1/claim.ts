@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
 export enum Action {
   ActionAddLiquidity = 0,
@@ -183,7 +183,7 @@ export const ClaimRecord = {
   },
   toAmino(message: ClaimRecord): ClaimRecordAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = omitDefault(message.address);
     if (message.initialClaimableAmount) {
       obj.initial_claimable_amount = message.initialClaimableAmount.map(e => e ? Coin.toAmino(e) : undefined);
     } else {

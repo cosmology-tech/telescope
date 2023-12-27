@@ -82,9 +82,9 @@ exports[`cosmos/staking/v1beta1 Delegation 1`] = `
   },
   toAmino(message: Delegation): DelegationAmino {
     const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
-    obj.shares = message.shares;
+    obj.delegator_address = omitDefault(message.delegatorAddress);
+    obj.validator_address = omitDefault(message.validatorAddress);
+    obj.shares = padDecimal(message.shares);
     return obj;
   },
   fromAminoMsg(object: DelegationAminoMsg): Delegation {
@@ -195,7 +195,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
     const obj: any = {};
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined;
     obj.data = message.data ? SignatureDescriptor_Data.toAmino(message.data) : undefined;
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.sequence = omitDefault(message.sequence);
     return obj;
   },
   fromAminoMsg(object: SignatureDescriptorAminoMsg): SignatureDescriptor {
@@ -413,9 +413,9 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
   },
   toAmino(message: AuxSignerData): AuxSignerDataAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = omitDefault(message.address);
     obj.sign_doc = message.signDoc ? SignDocDirectAux.toAmino(message.signDoc) : undefined;
-    obj.mode = message.mode;
+    obj.mode = omitDefault(message.mode);
     obj.sig = message.sig;
     return obj;
   },
@@ -640,8 +640,8 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
   },
   toAmino(message: PinCodesProposal): PinCodesProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
+    obj.title = omitDefault(message.title);
+    obj.description = omitDefault(message.description);
     if (message.codeIds) {
       obj.code_ids = message.codeIds.map(e => e.toString());
     } else {
@@ -772,8 +772,8 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
   },
   toAmino(message: UnpinCodesProposal): UnpinCodesProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
+    obj.title = omitDefault(message.title);
+    obj.description = omitDefault(message.description);
     if (message.codeIds) {
       obj.code_ids = message.codeIds.map(e => e.toString());
     } else {
@@ -875,7 +875,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
   },
   toAmino(message: QueryRawContractStateRequest): QueryRawContractStateRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = omitDefault(message.address);
     obj.query_data = message.queryData;
     return obj;
   },
@@ -1014,9 +1014,9 @@ exports[`evmos/fees/v1/tx 1`] = `
   },
   toAmino(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoAmino {
     const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    obj.deployer_address = message.deployerAddress;
-    obj.withdraw_address = message.withdrawAddress;
+    obj.contract_address = omitDefault(message.contractAddress);
+    obj.deployer_address = omitDefault(message.deployerAddress);
+    obj.withdraw_address = omitDefault(message.withdrawAddress);
     if (message.nonces) {
       obj.nonces = message.nonces.map(e => e.toString());
     } else {
@@ -1136,10 +1136,10 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
   },
   toAmino(message: ParseRequest): ParseRequestAmino {
     const obj: any = {};
-    obj.cel_source = message.celSource;
-    obj.syntax_version = message.syntaxVersion;
-    obj.source_location = message.sourceLocation;
-    obj.disable_macros = message.disableMacros;
+    obj.cel_source = omitDefault(message.celSource);
+    obj.syntax_version = omitDefault(message.syntaxVersion);
+    obj.source_location = omitDefault(message.sourceLocation);
+    obj.disable_macros = omitDefault(message.disableMacros);
     return obj;
   },
   fromAminoMsg(object: ParseRequestAminoMsg): ParseRequest {
@@ -1294,7 +1294,7 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
   },
   toAmino(message: Decl_FunctionDecl_Overload): Decl_FunctionDecl_OverloadAmino {
     const obj: any = {};
-    obj.overload_id = message.overloadId;
+    obj.overload_id = omitDefault(message.overloadId);
     if (message.params) {
       obj.params = message.params.map(e => e ? Type.toAmino(e) : undefined);
     } else {
@@ -1306,8 +1306,8 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
       obj.type_params = [];
     }
     obj.result_type = message.resultType ? Type.toAmino(message.resultType) : undefined;
-    obj.is_instance_function = message.isInstanceFunction;
-    obj.doc = message.doc;
+    obj.is_instance_function = omitDefault(message.isInstanceFunction);
+    obj.doc = omitDefault(message.doc);
     return obj;
   },
   fromAminoMsg(object: Decl_FunctionDecl_OverloadAminoMsg): Decl_FunctionDecl_Overload {
@@ -1531,15 +1531,15 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
   toAmino(message: Type): TypeAmino {
     const obj: any = {};
     obj.dyn = message.dyn ? Empty.toAmino(message.dyn) : undefined;
-    obj.null = message.null;
-    obj.primitive = message.primitive;
-    obj.wrapper = message.wrapper;
-    obj.well_known = message.wellKnown;
+    obj.null = omitDefault(message.null);
+    obj.primitive = omitDefault(message.primitive);
+    obj.wrapper = omitDefault(message.wrapper);
+    obj.well_known = omitDefault(message.wellKnown);
     obj.list_type = message.listType ? Type_ListType.toAmino(message.listType) : undefined;
     obj.map_type = message.mapType ? Type_MapType.toAmino(message.mapType) : undefined;
     obj.function = message.function ? Type_FunctionType.toAmino(message.function) : undefined;
-    obj.message_type = message.messageType;
-    obj.type_param = message.typeParam;
+    obj.message_type = omitDefault(message.messageType);
+    obj.type_param = omitDefault(message.typeParam);
     obj.type = message.type ? Type.toAmino(message.type) : undefined;
     obj.error = message.error ? Empty.toAmino(message.error) : undefined;
     obj.abstract_type = message.abstractType ? Type_AbstractType.toAmino(message.abstractType) : undefined;
@@ -1850,7 +1850,7 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
       });
     }
     obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined;
-    obj.expr_version = message.exprVersion;
+    obj.expr_version = omitDefault(message.exprVersion);
     obj.expr = message.expr ? Expr.toAmino(message.expr) : undefined;
     return obj;
   },
@@ -2021,17 +2021,17 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
       stringValue: object?.string_value,
       bytesValue: object?.bytes_value,
       durationValue: object?.duration_value ? Duration.fromAmino(object.duration_value) : undefined,
-      timestampValue: object?.timestamp_value
+      timestampValue: object?.timestamp_value ? Timestamp.fromAmino(object.timestamp_value) : undefined
     };
   },
   toAmino(message: Constant): ConstantAmino {
     const obj: any = {};
-    obj.null_value = message.nullValue;
-    obj.bool_value = message.boolValue;
-    obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
-    obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
-    obj.double_value = message.doubleValue;
-    obj.string_value = message.stringValue;
+    obj.null_value = omitDefault(message.nullValue);
+    obj.bool_value = omitDefault(message.boolValue);
+    obj.int64_value = omitDefault(message.int64Value);
+    obj.uint64_value = omitDefault(message.uint64Value);
+    obj.double_value = omitDefault(message.doubleValue);
+    obj.string_value = omitDefault(message.stringValue);
     obj.bytes_value = message.bytesValue;
     obj.duration_value = message.durationValue ? Duration.toAmino(message.durationValue) : undefined;
     obj.timestamp_value = message.timestampValue;
@@ -2379,7 +2379,7 @@ exports[`google/api/expr/v1beta1/source 1`] = `
   },
   toAmino(message: SourceInfo): SourceInfoAmino {
     const obj: any = {};
-    obj.location = message.location;
+    obj.location = omitDefault(message.location);
     if (message.lineOffsets) {
       obj.line_offsets = message.lineOffsets.map(e => e);
     } else {
@@ -2519,7 +2519,7 @@ exports[`google/api/quota keyType 1`] = `
   },
   toAmino(message: MetricRule): MetricRuleAmino {
     const obj: any = {};
-    obj.selector = message.selector;
+    obj.selector = omitDefault(message.selector);
     obj.metric_costs = {};
     if (message.metricCosts) {
       Object.entries(message.metricCosts).forEach(([k, v]) => {
@@ -2756,7 +2756,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
   fromAmino(object: LogEntryAmino): LogEntry {
     return {
       name: object.name,
-      timestamp: object.timestamp,
+      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
       severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
       httpRequest: object?.http_request ? HttpRequest.fromAmino(object.http_request) : undefined,
       trace: object.trace,
@@ -2776,12 +2776,12 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
   },
   toAmino(message: LogEntry): LogEntryAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     obj.timestamp = message.timestamp;
-    obj.severity = message.severity;
+    obj.severity = omitDefault(message.severity);
     obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined;
-    obj.trace = message.trace;
-    obj.insert_id = message.insertId;
+    obj.trace = omitDefault(message.trace);
+    obj.insert_id = omitDefault(message.insertId);
     obj.labels = {};
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {
@@ -2789,7 +2789,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
       });
     }
     obj.proto_payload = message.protoPayload ? Any.toAmino(message.protoPayload) : undefined;
-    obj.text_payload = message.textPayload;
+    obj.text_payload = omitDefault(message.textPayload);
     obj.struct_payload = message.structPayload ? Struct.toAmino(message.structPayload) : undefined;
     obj.operation = message.operation ? LogEntryOperation.toAmino(message.operation) : undefined;
     obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toAmino(message.sourceLocation) : undefined;
@@ -3024,11 +3024,11 @@ exports[`ibc/core/port/v1/query 1`] = `
   },
   toAmino(message: QueryAppVersionRequest): QueryAppVersionRequestAmino {
     const obj: any = {};
-    obj.port_id = message.portId;
-    obj.connection_id = message.connectionId;
-    obj.ordering = message.ordering;
+    obj.port_id = omitDefault(message.portId);
+    obj.connection_id = omitDefault(message.connectionId);
+    obj.ordering = omitDefault(message.ordering);
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
-    obj.proposed_version = message.proposedVersion;
+    obj.proposed_version = omitDefault(message.proposedVersion);
     return obj;
   },
   fromAminoMsg(object: QueryAppVersionRequestAminoMsg): QueryAppVersionRequest {
@@ -3659,9 +3659,9 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
   },
   toAmino(message: MsgJoinPool): MsgJoinPoolAmino {
     const obj: any = {};
-    obj.sender = message.sender;
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.share_out_amount = message.shareOutAmount;
+    obj.sender = omitDefault(message.sender);
+    obj.pool_id = omitDefault(message.poolId);
+    obj.share_out_amount = omitDefault(message.shareOutAmount);
     if (message.tokenInMaxs) {
       obj.token_in_maxs = message.tokenInMaxs.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
@@ -3795,14 +3795,14 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
   },
   toAmino(message: MsgSwapExactAmountIn): MsgSwapExactAmountInAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = omitDefault(message.sender);
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountInRoute.toAmino(e) : undefined);
     } else {
       obj.routes = [];
     }
     obj.token_in = message.tokenIn ? Coin.toAmino(message.tokenIn) : undefined;
-    obj.token_out_min_amount = message.tokenOutMinAmount;
+    obj.token_out_min_amount = omitDefault(message.tokenOutMinAmount);
     return obj;
   },
   fromAminoMsg(object: MsgSwapExactAmountInAminoMsg): MsgSwapExactAmountIn {
@@ -3931,13 +3931,13 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
   },
   toAmino(message: MsgSwapExactAmountOut): MsgSwapExactAmountOutAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = omitDefault(message.sender);
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toAmino(e) : undefined);
     } else {
       obj.routes = [];
     }
-    obj.token_in_max_amount = message.tokenInMaxAmount;
+    obj.token_in_max_amount = omitDefault(message.tokenInMaxAmount);
     obj.token_out = message.tokenOut ? Coin.toAmino(message.tokenOut) : undefined;
     return obj;
   },

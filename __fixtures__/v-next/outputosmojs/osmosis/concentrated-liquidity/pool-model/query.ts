@@ -4,7 +4,7 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Params, ParamsSDKType } from "../params";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault, padDecimal } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /** =============================== UserPositions */
@@ -216,8 +216,8 @@ export const QueryUserPositionsRequest = {
   },
   toAmino(message: QueryUserPositionsRequest): QueryUserPositionsRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.address = omitDefault(message.address);
+    obj.pool_id = omitDefault(message.poolId);
     return obj;
   },
   fromAminoMsg(object: QueryUserPositionsRequestAminoMsg): QueryUserPositionsRequest {
@@ -413,7 +413,7 @@ export const QueryPositionByIdRequest = {
   },
   toAmino(message: QueryPositionByIdRequest): QueryPositionByIdRequestAmino {
     const obj: any = {};
-    obj.position_id = message.positionId ? message.positionId.toString() : undefined;
+    obj.position_id = omitDefault(message.positionId);
     return obj;
   },
   fromAminoMsg(object: QueryPositionByIdRequestAminoMsg): QueryPositionByIdRequest {
@@ -986,8 +986,8 @@ export const TickLiquidityNet = {
   },
   toAmino(message: TickLiquidityNet): TickLiquidityNetAmino {
     const obj: any = {};
-    obj.liquidity_net = message.liquidityNet;
-    obj.tick_index = message.tickIndex;
+    obj.liquidity_net = padDecimal(message.liquidityNet);
+    obj.tick_index = omitDefault(message.tickIndex);
     return obj;
   },
   fromAminoMsg(object: TickLiquidityNetAminoMsg): TickLiquidityNet {
@@ -1107,9 +1107,9 @@ export const LiquidityDepthWithRange = {
   },
   toAmino(message: LiquidityDepthWithRange): LiquidityDepthWithRangeAmino {
     const obj: any = {};
-    obj.liquidity_amount = message.liquidityAmount;
-    obj.lower_tick = message.lowerTick;
-    obj.upper_tick = message.upperTick;
+    obj.liquidity_amount = padDecimal(message.liquidityAmount);
+    obj.lower_tick = omitDefault(message.lowerTick);
+    obj.upper_tick = omitDefault(message.upperTick);
     return obj;
   },
   fromAminoMsg(object: LiquidityDepthWithRangeAminoMsg): LiquidityDepthWithRange {
@@ -1243,10 +1243,10 @@ export const QueryLiquidityNetInDirectionRequest = {
   },
   toAmino(message: QueryLiquidityNetInDirectionRequest): QueryLiquidityNetInDirectionRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.token_in = message.tokenIn;
-    obj.start_tick = message.startTick;
-    obj.bound_tick = message.boundTick;
+    obj.pool_id = omitDefault(message.poolId);
+    obj.token_in = omitDefault(message.tokenIn);
+    obj.start_tick = omitDefault(message.startTick);
+    obj.bound_tick = omitDefault(message.boundTick);
     return obj;
   },
   fromAminoMsg(object: QueryLiquidityNetInDirectionRequestAminoMsg): QueryLiquidityNetInDirectionRequest {
@@ -1379,8 +1379,8 @@ export const QueryLiquidityNetInDirectionResponse = {
     } else {
       obj.liquidity_depths = [];
     }
-    obj.current_tick = message.currentTick ? message.currentTick.toString() : undefined;
-    obj.current_liquidity = message.currentLiquidity;
+    obj.current_tick = omitDefault(message.currentTick);
+    obj.current_liquidity = padDecimal(message.currentLiquidity);
     return obj;
   },
   fromAminoMsg(object: QueryLiquidityNetInDirectionResponseAminoMsg): QueryLiquidityNetInDirectionResponse {
@@ -1472,7 +1472,7 @@ export const QueryTotalLiquidityForRangeRequest = {
   },
   toAmino(message: QueryTotalLiquidityForRangeRequest): QueryTotalLiquidityForRangeRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.pool_id = omitDefault(message.poolId);
     return obj;
   },
   fromAminoMsg(object: QueryTotalLiquidityForRangeRequestAminoMsg): QueryTotalLiquidityForRangeRequest {
@@ -1668,7 +1668,7 @@ export const QueryClaimableFeesRequest = {
   },
   toAmino(message: QueryClaimableFeesRequest): QueryClaimableFeesRequestAmino {
     const obj: any = {};
-    obj.position_id = message.positionId ? message.positionId.toString() : undefined;
+    obj.position_id = omitDefault(message.positionId);
     return obj;
   },
   fromAminoMsg(object: QueryClaimableFeesRequestAminoMsg): QueryClaimableFeesRequest {

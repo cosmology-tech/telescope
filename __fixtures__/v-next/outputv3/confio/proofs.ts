@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../helpers";
 export const protobufPackage = "ics23";
 export enum HashOp {
   /** NO_HASH - NO_HASH is the default if no data passed. Note this is an illegal argument some places. */
@@ -1249,10 +1249,10 @@ export const LeafOp = {
   },
   toAmino(message: LeafOp): LeafOpAmino {
     const obj: any = {};
-    obj.hash = message.hash;
-    obj.prehash_key = message.prehashKey;
-    obj.prehash_value = message.prehashValue;
-    obj.length = message.length;
+    obj.hash = omitDefault(message.hash);
+    obj.prehash_key = omitDefault(message.prehashKey);
+    obj.prehash_value = omitDefault(message.prehashValue);
+    obj.length = omitDefault(message.length);
     obj.prefix = message.prefix;
     return obj;
   },
@@ -1360,7 +1360,7 @@ export const InnerOp = {
   },
   toAmino(message: InnerOp): InnerOpAmino {
     const obj: any = {};
-    obj.hash = message.hash;
+    obj.hash = omitDefault(message.hash);
     obj.prefix = message.prefix;
     obj.suffix = message.suffix;
     return obj;
@@ -1488,8 +1488,8 @@ export const ProofSpec = {
     const obj: any = {};
     obj.leaf_spec = message.leafSpec ? LeafOp.toAmino(message.leafSpec) : undefined;
     obj.inner_spec = message.innerSpec ? InnerSpec.toAmino(message.innerSpec) : undefined;
-    obj.max_depth = message.maxDepth;
-    obj.min_depth = message.minDepth;
+    obj.max_depth = omitDefault(message.maxDepth);
+    obj.min_depth = omitDefault(message.minDepth);
     return obj;
   },
   fromAminoMsg(object: ProofSpecAminoMsg): ProofSpec {
@@ -1657,11 +1657,11 @@ export const InnerSpec = {
     } else {
       obj.child_order = [];
     }
-    obj.child_size = message.childSize;
-    obj.min_prefix_length = message.minPrefixLength;
-    obj.max_prefix_length = message.maxPrefixLength;
+    obj.child_size = omitDefault(message.childSize);
+    obj.min_prefix_length = omitDefault(message.minPrefixLength);
+    obj.max_prefix_length = omitDefault(message.maxPrefixLength);
     obj.empty_child = message.emptyChild;
-    obj.hash = message.hash;
+    obj.hash = omitDefault(message.hash);
     return obj;
   },
   fromAminoMsg(object: InnerSpecAminoMsg): InnerSpec {

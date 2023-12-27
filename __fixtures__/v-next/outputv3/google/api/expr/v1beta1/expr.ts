@@ -1,7 +1,7 @@
 import { SourceInfo, SourceInfoAmino, SourceInfoSDKType } from "./source";
 import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
@@ -764,7 +764,7 @@ export const ParsedExpr = {
     const obj: any = {};
     obj.expr = message.expr ? Expr.toAmino(message.expr) : undefined;
     obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined;
-    obj.syntax_version = message.syntaxVersion;
+    obj.syntax_version = omitDefault(message.syntaxVersion);
     return obj;
   },
   fromAminoMsg(object: ParsedExprAminoMsg): ParsedExpr {
@@ -950,7 +950,7 @@ export const Expr = {
   },
   toAmino(message: Expr): ExprAmino {
     const obj: any = {};
-    obj.id = message.id;
+    obj.id = omitDefault(message.id);
     obj.literal_expr = message.literalExpr ? Literal.toAmino(message.literalExpr) : undefined;
     obj.ident_expr = message.identExpr ? Expr_Ident.toAmino(message.identExpr) : undefined;
     obj.select_expr = message.selectExpr ? Expr_Select.toAmino(message.selectExpr) : undefined;
@@ -1038,7 +1038,7 @@ export const Expr_Ident = {
   },
   toAmino(message: Expr_Ident): Expr_IdentAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     return obj;
   },
   fromAminoMsg(object: Expr_IdentAminoMsg): Expr_Ident {
@@ -1148,8 +1148,8 @@ export const Expr_Select = {
   toAmino(message: Expr_Select): Expr_SelectAmino {
     const obj: any = {};
     obj.operand = message.operand ? Expr.toAmino(message.operand) : undefined;
-    obj.field = message.field;
-    obj.test_only = message.testOnly;
+    obj.field = omitDefault(message.field);
+    obj.test_only = omitDefault(message.testOnly);
     return obj;
   },
   fromAminoMsg(object: Expr_SelectAminoMsg): Expr_Select {
@@ -1267,7 +1267,7 @@ export const Expr_Call = {
   toAmino(message: Expr_Call): Expr_CallAmino {
     const obj: any = {};
     obj.target = message.target ? Expr.toAmino(message.target) : undefined;
-    obj.function = message.function;
+    obj.function = omitDefault(message.function);
     if (message.args) {
       obj.args = message.args.map(e => e ? Expr.toAmino(e) : undefined);
     } else {
@@ -1467,7 +1467,7 @@ export const Expr_CreateStruct = {
   },
   toAmino(message: Expr_CreateStruct): Expr_CreateStructAmino {
     const obj: any = {};
-    obj.type = message.type;
+    obj.type = omitDefault(message.type);
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? Expr_CreateStruct_Entry.toAmino(e) : undefined);
     } else {
@@ -1596,8 +1596,8 @@ export const Expr_CreateStruct_Entry = {
   },
   toAmino(message: Expr_CreateStruct_Entry): Expr_CreateStruct_EntryAmino {
     const obj: any = {};
-    obj.id = message.id;
-    obj.field_key = message.fieldKey;
+    obj.id = omitDefault(message.id);
+    obj.field_key = omitDefault(message.fieldKey);
     obj.map_key = message.mapKey ? Expr.toAmino(message.mapKey) : undefined;
     obj.value = message.value ? Expr.toAmino(message.value) : undefined;
     return obj;
@@ -1768,9 +1768,9 @@ export const Expr_Comprehension = {
   },
   toAmino(message: Expr_Comprehension): Expr_ComprehensionAmino {
     const obj: any = {};
-    obj.iter_var = message.iterVar;
+    obj.iter_var = omitDefault(message.iterVar);
     obj.iter_range = message.iterRange ? Expr.toAmino(message.iterRange) : undefined;
-    obj.accu_var = message.accuVar;
+    obj.accu_var = omitDefault(message.accuVar);
     obj.accu_init = message.accuInit ? Expr.toAmino(message.accuInit) : undefined;
     obj.loop_condition = message.loopCondition ? Expr.toAmino(message.loopCondition) : undefined;
     obj.loop_step = message.loopStep ? Expr.toAmino(message.loopStep) : undefined;
@@ -1937,12 +1937,12 @@ export const Literal = {
   },
   toAmino(message: Literal): LiteralAmino {
     const obj: any = {};
-    obj.null_value = message.nullValue;
-    obj.bool_value = message.boolValue;
-    obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
-    obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
-    obj.double_value = message.doubleValue;
-    obj.string_value = message.stringValue;
+    obj.null_value = omitDefault(message.nullValue);
+    obj.bool_value = omitDefault(message.boolValue);
+    obj.int64_value = omitDefault(message.int64Value);
+    obj.uint64_value = omitDefault(message.uint64Value);
+    obj.double_value = omitDefault(message.doubleValue);
+    obj.string_value = omitDefault(message.stringValue);
     obj.bytes_value = message.bytesValue;
     return obj;
   },

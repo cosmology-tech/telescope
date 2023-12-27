@@ -1,6 +1,6 @@
 import { PeriodLock, PeriodLockAmino, PeriodLockSDKType, SyntheticLock, SyntheticLockAmino, SyntheticLockSDKType } from "./lock";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 /** GenesisState defines the lockup module's genesis state. */
 export interface GenesisState {
@@ -135,7 +135,7 @@ export const GenesisState = {
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
-    obj.last_lock_id = message.lastLockId ? message.lastLockId.toString() : undefined;
+    obj.last_lock_id = omitDefault(message.lastLockId);
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {

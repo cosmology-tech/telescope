@@ -1,6 +1,6 @@
 import { SuperfluidAsset, SuperfluidAssetAmino, SuperfluidAssetSDKType } from "../superfluid";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.superfluid.v1beta1";
 /**
  * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid
@@ -214,8 +214,8 @@ export const SetSuperfluidAssetsProposal = {
   },
   toAmino(message: SetSuperfluidAssetsProposal): SetSuperfluidAssetsProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
+    obj.title = omitDefault(message.title);
+    obj.description = omitDefault(message.description);
     if (message.assets) {
       obj.assets = message.assets.map(e => e ? SuperfluidAsset.toAmino(e) : undefined);
     } else {
@@ -343,8 +343,8 @@ export const RemoveSuperfluidAssetsProposal = {
   },
   toAmino(message: RemoveSuperfluidAssetsProposal): RemoveSuperfluidAssetsProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
+    obj.title = omitDefault(message.title);
+    obj.description = omitDefault(message.description);
     if (message.superfluidAssetDenoms) {
       obj.superfluid_asset_denoms = message.superfluidAssetDenoms.map(e => e);
     } else {
@@ -494,14 +494,14 @@ export const UpdateUnpoolWhiteListProposal = {
   },
   toAmino(message: UpdateUnpoolWhiteListProposal): UpdateUnpoolWhiteListProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
+    obj.title = omitDefault(message.title);
+    obj.description = omitDefault(message.description);
     if (message.ids) {
       obj.ids = message.ids.map(e => e.toString());
     } else {
       obj.ids = [];
     }
-    obj.is_overwrite = message.isOverwrite;
+    obj.is_overwrite = omitDefault(message.isOverwrite);
     return obj;
   },
   fromAminoMsg(object: UpdateUnpoolWhiteListProposalAminoMsg): UpdateUnpoolWhiteListProposal {

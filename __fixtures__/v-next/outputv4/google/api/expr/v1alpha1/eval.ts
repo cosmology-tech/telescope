@@ -1,7 +1,7 @@
 import { Value, ValueSDKType } from "./value";
 import { Status, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isSet } from "../../../../helpers";
+import { DeepPartial, isSet, omitDefault } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
  * The state of an evaluation.
@@ -341,8 +341,8 @@ export const EvalState_Result = {
   },
   toAmino(message: EvalState_Result): EvalState_ResultAmino {
     const obj: any = {};
-    obj.expr = message.expr ? message.expr.toString() : undefined;
-    obj.value = message.value ? message.value.toString() : undefined;
+    obj.expr = omitDefault(message.expr);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: EvalState_ResultAminoMsg): EvalState_Result {

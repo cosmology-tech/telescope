@@ -1,6 +1,6 @@
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 export interface Params {
   /**
@@ -191,7 +191,7 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.minted_denom = message.mintedDenom;
+    obj.minted_denom = omitDefault(message.mintedDenom);
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {
@@ -400,7 +400,7 @@ export const DistrInfo = {
   },
   toAmino(message: DistrInfo): DistrInfoAmino {
     const obj: any = {};
-    obj.total_weight = message.totalWeight;
+    obj.total_weight = omitDefault(message.totalWeight);
     if (message.records) {
       obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
     } else {
@@ -508,8 +508,8 @@ export const DistrRecord = {
   },
   toAmino(message: DistrRecord): DistrRecordAmino {
     const obj: any = {};
-    obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
-    obj.weight = message.weight;
+    obj.gauge_id = omitDefault(message.gaugeId);
+    obj.weight = omitDefault(message.weight);
     return obj;
   },
   fromAminoMsg(object: DistrRecordAminoMsg): DistrRecord {
@@ -629,8 +629,8 @@ export const PoolToGauge = {
   },
   toAmino(message: PoolToGauge): PoolToGaugeAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
+    obj.pool_id = omitDefault(message.poolId);
+    obj.gauge_id = omitDefault(message.gaugeId);
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;
   },

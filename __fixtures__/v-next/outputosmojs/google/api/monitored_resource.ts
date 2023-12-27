@@ -2,7 +2,7 @@ import { LabelDescriptor, LabelDescriptorSDKType } from "./label";
 import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
 import { Struct, StructSDKType } from "../protobuf/struct";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, isObject } from "../../helpers";
+import { isSet, DeepPartial, omitDefault, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
@@ -324,16 +324,16 @@ export const MonitoredResourceDescriptor = {
   },
   toAmino(message: MonitoredResourceDescriptor): MonitoredResourceDescriptorAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.type = message.type;
-    obj.display_name = message.displayName;
-    obj.description = message.description;
+    obj.name = omitDefault(message.name);
+    obj.type = omitDefault(message.type);
+    obj.display_name = omitDefault(message.displayName);
+    obj.description = omitDefault(message.description);
     if (message.labels) {
       obj.labels = message.labels.map(e => e ? LabelDescriptor.toAmino(e) : undefined);
     } else {
       obj.labels = [];
     }
-    obj.launch_stage = message.launchStage;
+    obj.launch_stage = omitDefault(message.launchStage);
     return obj;
   },
   fromAminoMsg(object: MonitoredResourceDescriptorAminoMsg): MonitoredResourceDescriptor {
@@ -432,8 +432,8 @@ export const MonitoredResource_LabelsEntry = {
   },
   toAmino(message: MonitoredResource_LabelsEntry): MonitoredResource_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: MonitoredResource_LabelsEntryAminoMsg): MonitoredResource_LabelsEntry {
@@ -570,7 +570,7 @@ export const MonitoredResource = {
   },
   toAmino(message: MonitoredResource): MonitoredResourceAmino {
     const obj: any = {};
-    obj.type = message.type;
+    obj.type = omitDefault(message.type);
     obj.labels = {};
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {
@@ -675,8 +675,8 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
   },
   toAmino(message: MonitoredResourceMetadata_UserLabelsEntry): MonitoredResourceMetadata_UserLabelsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: MonitoredResourceMetadata_UserLabelsEntryAminoMsg): MonitoredResourceMetadata_UserLabelsEntry {

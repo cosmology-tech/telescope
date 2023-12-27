@@ -1,6 +1,6 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 /**
  * Equivocation implements the Evidence interface and defines evidence of double
@@ -128,17 +128,17 @@ export const Equivocation = {
   fromAmino(object: EquivocationAmino): Equivocation {
     return {
       height: BigInt(object.height),
-      time: object.time,
+      time: object?.time ? Timestamp.fromAmino(object.time) : undefined,
       power: BigInt(object.power),
       consensusAddress: object.consensus_address
     };
   },
   toAmino(message: Equivocation): EquivocationAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.height = omitDefault(message.height);
     obj.time = message.time;
-    obj.power = message.power ? message.power.toString() : undefined;
-    obj.consensus_address = message.consensusAddress;
+    obj.power = omitDefault(message.power);
+    obj.consensus_address = omitDefault(message.consensusAddress);
     return obj;
   },
   fromAminoMsg(object: EquivocationAminoMsg): Equivocation {

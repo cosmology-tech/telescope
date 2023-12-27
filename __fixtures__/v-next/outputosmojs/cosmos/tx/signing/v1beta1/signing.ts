@@ -1,7 +1,7 @@
 import { CompactBitArray, CompactBitArraySDKType } from "../../../crypto/multisig/v1beta1/multisig";
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { DeepPartial, isSet, omitDefault, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "cosmos.tx.signing.v1beta1";
 /**
  * SignMode represents a signing mode with its own security guarantees.
@@ -361,7 +361,7 @@ export const SignatureDescriptor = {
     const obj: any = {};
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined;
     obj.data = message.data ? SignatureDescriptor_Data.toAmino(message.data) : undefined;
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.sequence = omitDefault(message.sequence);
     return obj;
   },
   fromAminoMsg(object: SignatureDescriptorAminoMsg): SignatureDescriptor {
@@ -574,7 +574,7 @@ export const SignatureDescriptor_Data_Single = {
   },
   toAmino(message: SignatureDescriptor_Data_Single): SignatureDescriptor_Data_SingleAmino {
     const obj: any = {};
-    obj.mode = message.mode;
+    obj.mode = omitDefault(message.mode);
     obj.signature = message.signature;
     return obj;
   },

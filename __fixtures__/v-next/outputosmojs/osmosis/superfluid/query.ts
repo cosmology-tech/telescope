@@ -5,7 +5,7 @@ import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { SyntheticLock, SyntheticLockSDKType } from "../lockup/lock";
 import { DelegationResponse, DelegationResponseSDKType } from "../../cosmos/staking/v1beta1/staking";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
+import { DeepPartial, isSet, omitDefault } from "../../helpers";
 export const protobufPackage = "osmosis.superfluid";
 export interface QueryParamsRequest {}
 export interface QueryParamsRequestSDKType {}
@@ -451,7 +451,7 @@ export const AssetTypeRequest = {
   },
   toAmino(message: AssetTypeRequest): AssetTypeRequestAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = omitDefault(message.denom);
     return obj;
   },
   fromAminoMsg(object: AssetTypeRequestAminoMsg): AssetTypeRequest {
@@ -543,7 +543,7 @@ export const AssetTypeResponse = {
   },
   toAmino(message: AssetTypeResponse): AssetTypeResponseAmino {
     const obj: any = {};
-    obj.asset_type = message.assetType;
+    obj.asset_type = omitDefault(message.assetType);
     return obj;
   },
   fromAminoMsg(object: AssetTypeResponseAminoMsg): AssetTypeResponse {
@@ -811,7 +811,7 @@ export const AssetMultiplierRequest = {
   },
   toAmino(message: AssetMultiplierRequest): AssetMultiplierRequestAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = omitDefault(message.denom);
     return obj;
   },
   fromAminoMsg(object: AssetMultiplierRequestAminoMsg): AssetMultiplierRequest {
@@ -1037,10 +1037,10 @@ export const SuperfluidIntermediaryAccountInfo = {
   },
   toAmino(message: SuperfluidIntermediaryAccountInfo): SuperfluidIntermediaryAccountInfoAmino {
     const obj: any = {};
-    obj.denom = message.denom;
-    obj.val_addr = message.valAddr;
-    obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
-    obj.address = message.address;
+    obj.denom = omitDefault(message.denom);
+    obj.val_addr = omitDefault(message.valAddr);
+    obj.gauge_id = omitDefault(message.gaugeId);
+    obj.address = omitDefault(message.address);
     return obj;
   },
   fromAminoMsg(object: SuperfluidIntermediaryAccountInfoAminoMsg): SuperfluidIntermediaryAccountInfo {
@@ -1343,7 +1343,7 @@ export const ConnectedIntermediaryAccountRequest = {
   },
   toAmino(message: ConnectedIntermediaryAccountRequest): ConnectedIntermediaryAccountRequestAmino {
     const obj: any = {};
-    obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
+    obj.lock_id = omitDefault(message.lockId);
     return obj;
   },
   fromAminoMsg(object: ConnectedIntermediaryAccountRequestAminoMsg): ConnectedIntermediaryAccountRequest {
@@ -1527,7 +1527,7 @@ export const QueryTotalDelegationByValidatorForDenomRequest = {
   },
   toAmino(message: QueryTotalDelegationByValidatorForDenomRequest): QueryTotalDelegationByValidatorForDenomRequestAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = omitDefault(message.denom);
     return obj;
   },
   fromAminoMsg(object: QueryTotalDelegationByValidatorForDenomRequestAminoMsg): QueryTotalDelegationByValidatorForDenomRequest {
@@ -1751,9 +1751,9 @@ export const Delegations = {
   },
   toAmino(message: Delegations): DelegationsAmino {
     const obj: any = {};
-    obj.val_addr = message.valAddr;
-    obj.amount_sfsd = message.amountSfsd;
-    obj.osmo_equivalent = message.osmoEquivalent;
+    obj.val_addr = omitDefault(message.valAddr);
+    obj.amount_sfsd = omitDefault(message.amountSfsd);
+    obj.osmo_equivalent = omitDefault(message.osmoEquivalent);
     return obj;
   },
   fromAminoMsg(object: DelegationsAminoMsg): Delegations {
@@ -1917,7 +1917,7 @@ export const TotalSuperfluidDelegationsResponse = {
   },
   toAmino(message: TotalSuperfluidDelegationsResponse): TotalSuperfluidDelegationsResponseAmino {
     const obj: any = {};
-    obj.total_delegations = message.totalDelegations;
+    obj.total_delegations = omitDefault(message.totalDelegations);
     return obj;
   },
   fromAminoMsg(object: TotalSuperfluidDelegationsResponseAminoMsg): TotalSuperfluidDelegationsResponse {
@@ -2037,9 +2037,9 @@ export const SuperfluidDelegationAmountRequest = {
   },
   toAmino(message: SuperfluidDelegationAmountRequest): SuperfluidDelegationAmountRequestAmino {
     const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
-    obj.denom = message.denom;
+    obj.delegator_address = omitDefault(message.delegatorAddress);
+    obj.validator_address = omitDefault(message.validatorAddress);
+    obj.denom = omitDefault(message.denom);
     return obj;
   },
   fromAminoMsg(object: SuperfluidDelegationAmountRequestAminoMsg): SuperfluidDelegationAmountRequest {
@@ -2235,7 +2235,7 @@ export const SuperfluidDelegationsByDelegatorRequest = {
   },
   toAmino(message: SuperfluidDelegationsByDelegatorRequest): SuperfluidDelegationsByDelegatorRequestAmino {
     const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
+    obj.delegator_address = omitDefault(message.delegatorAddress);
     return obj;
   },
   fromAminoMsg(object: SuperfluidDelegationsByDelegatorRequestAminoMsg): SuperfluidDelegationsByDelegatorRequest {
@@ -2487,8 +2487,8 @@ export const SuperfluidUndelegationsByDelegatorRequest = {
   },
   toAmino(message: SuperfluidUndelegationsByDelegatorRequest): SuperfluidUndelegationsByDelegatorRequestAmino {
     const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.denom = message.denom;
+    obj.delegator_address = omitDefault(message.delegatorAddress);
+    obj.denom = omitDefault(message.denom);
     return obj;
   },
   fromAminoMsg(object: SuperfluidUndelegationsByDelegatorRequestAminoMsg): SuperfluidUndelegationsByDelegatorRequest {
@@ -2752,8 +2752,8 @@ export const SuperfluidDelegationsByValidatorDenomRequest = {
   },
   toAmino(message: SuperfluidDelegationsByValidatorDenomRequest): SuperfluidDelegationsByValidatorDenomRequestAmino {
     const obj: any = {};
-    obj.validator_address = message.validatorAddress;
-    obj.denom = message.denom;
+    obj.validator_address = omitDefault(message.validatorAddress);
+    obj.denom = omitDefault(message.denom);
     return obj;
   },
   fromAminoMsg(object: SuperfluidDelegationsByValidatorDenomRequestAminoMsg): SuperfluidDelegationsByValidatorDenomRequest {
@@ -2963,8 +2963,8 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomRequest = {
   },
   toAmino(message: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): EstimateSuperfluidDelegatedAmountByValidatorDenomRequestAmino {
     const obj: any = {};
-    obj.validator_address = message.validatorAddress;
-    obj.denom = message.denom;
+    obj.validator_address = omitDefault(message.validatorAddress);
+    obj.denom = omitDefault(message.denom);
     return obj;
   },
   fromAminoMsg(object: EstimateSuperfluidDelegatedAmountByValidatorDenomRequestAminoMsg): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
@@ -3160,7 +3160,7 @@ export const QueryTotalDelegationByDelegatorRequest = {
   },
   toAmino(message: QueryTotalDelegationByDelegatorRequest): QueryTotalDelegationByDelegatorRequestAmino {
     const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
+    obj.delegator_address = omitDefault(message.delegatorAddress);
     return obj;
   },
   fromAminoMsg(object: QueryTotalDelegationByDelegatorRequestAminoMsg): QueryTotalDelegationByDelegatorRequest {

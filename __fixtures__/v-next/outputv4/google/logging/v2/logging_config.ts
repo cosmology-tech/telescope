@@ -1,7 +1,7 @@
 import { FieldMask, FieldMaskSDKType } from "../../protobuf/field_mask";
 import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 /** Deprecated. This is unused. */
 export enum LogSink_VersionFormat {
@@ -1763,8 +1763,8 @@ export const LogBucket = {
     return {
       name: object.name,
       description: object.description,
-      createTime: object.create_time,
-      updateTime: object.update_time,
+      createTime: object?.create_time ? Timestamp.fromAmino(object.create_time) : undefined,
+      updateTime: object?.update_time ? Timestamp.fromAmino(object.update_time) : undefined,
       retentionDays: object.retention_days,
       locked: object.locked,
       lifecycleState: isSet(object.lifecycle_state) ? lifecycleStateFromJSON(object.lifecycle_state) : -1,
@@ -1774,13 +1774,13 @@ export const LogBucket = {
   },
   toAmino(message: LogBucket): LogBucketAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
+    obj.name = omitDefault(message.name);
+    obj.description = omitDefault(message.description);
     obj.create_time = message.createTime;
     obj.update_time = message.updateTime;
-    obj.retention_days = message.retentionDays;
-    obj.locked = message.locked;
-    obj.lifecycle_state = message.lifecycleState;
+    obj.retention_days = omitDefault(message.retentionDays);
+    obj.locked = omitDefault(message.locked);
+    obj.lifecycle_state = omitDefault(message.lifecycleState);
     if (message.restrictedFields) {
       obj.restricted_fields = message.restrictedFields.map(e => e);
     } else {
@@ -1921,18 +1921,18 @@ export const LogView = {
     return {
       name: object.name,
       description: object.description,
-      createTime: object.create_time,
-      updateTime: object.update_time,
+      createTime: object?.create_time ? Timestamp.fromAmino(object.create_time) : undefined,
+      updateTime: object?.update_time ? Timestamp.fromAmino(object.update_time) : undefined,
       filter: object.filter
     };
   },
   toAmino(message: LogView): LogViewAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
+    obj.name = omitDefault(message.name);
+    obj.description = omitDefault(message.description);
     obj.create_time = message.createTime;
     obj.update_time = message.updateTime;
-    obj.filter = message.filter;
+    obj.filter = omitDefault(message.filter);
     return obj;
   },
   fromAminoMsg(object: LogViewAminoMsg): LogView {
@@ -2176,25 +2176,25 @@ export const LogSink = {
       writerIdentity: object.writer_identity,
       includeChildren: object.include_children,
       bigqueryOptions: object?.bigquery_options ? BigQueryOptions.fromAmino(object.bigquery_options) : undefined,
-      createTime: object.create_time,
-      updateTime: object.update_time
+      createTime: object?.create_time ? Timestamp.fromAmino(object.create_time) : undefined,
+      updateTime: object?.update_time ? Timestamp.fromAmino(object.update_time) : undefined
     };
   },
   toAmino(message: LogSink): LogSinkAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.destination = message.destination;
-    obj.filter = message.filter;
-    obj.description = message.description;
-    obj.disabled = message.disabled;
+    obj.name = omitDefault(message.name);
+    obj.destination = omitDefault(message.destination);
+    obj.filter = omitDefault(message.filter);
+    obj.description = omitDefault(message.description);
+    obj.disabled = omitDefault(message.disabled);
     if (message.exclusions) {
       obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toAmino(e) : undefined);
     } else {
       obj.exclusions = [];
     }
-    obj.output_version_format = message.outputVersionFormat;
-    obj.writer_identity = message.writerIdentity;
-    obj.include_children = message.includeChildren;
+    obj.output_version_format = omitDefault(message.outputVersionFormat);
+    obj.writer_identity = omitDefault(message.writerIdentity);
+    obj.include_children = omitDefault(message.includeChildren);
     obj.bigquery_options = message.bigqueryOptions ? BigQueryOptions.toAmino(message.bigqueryOptions) : undefined;
     obj.create_time = message.createTime;
     obj.update_time = message.updateTime;
@@ -2297,8 +2297,8 @@ export const BigQueryOptions = {
   },
   toAmino(message: BigQueryOptions): BigQueryOptionsAmino {
     const obj: any = {};
-    obj.use_partitioned_tables = message.usePartitionedTables;
-    obj.uses_timestamp_column_partitioning = message.usesTimestampColumnPartitioning;
+    obj.use_partitioned_tables = omitDefault(message.usePartitionedTables);
+    obj.uses_timestamp_column_partitioning = omitDefault(message.usesTimestampColumnPartitioning);
     return obj;
   },
   fromAminoMsg(object: BigQueryOptionsAminoMsg): BigQueryOptions {
@@ -2412,9 +2412,9 @@ export const ListBucketsRequest = {
   },
   toAmino(message: ListBucketsRequest): ListBucketsRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
+    obj.parent = omitDefault(message.parent);
+    obj.page_token = omitDefault(message.pageToken);
+    obj.page_size = omitDefault(message.pageSize);
     return obj;
   },
   fromAminoMsg(object: ListBucketsRequestAminoMsg): ListBucketsRequest {
@@ -2527,7 +2527,7 @@ export const ListBucketsResponse = {
     } else {
       obj.buckets = [];
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = omitDefault(message.nextPageToken);
     return obj;
   },
   fromAminoMsg(object: ListBucketsResponseAminoMsg): ListBucketsResponse {
@@ -2643,8 +2643,8 @@ export const CreateBucketRequest = {
   },
   toAmino(message: CreateBucketRequest): CreateBucketRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.bucket_id = message.bucketId;
+    obj.parent = omitDefault(message.parent);
+    obj.bucket_id = omitDefault(message.bucketId);
     obj.bucket = message.bucket ? LogBucket.toAmino(message.bucket) : undefined;
     return obj;
   },
@@ -2763,7 +2763,7 @@ export const UpdateBucketRequest = {
   },
   toAmino(message: UpdateBucketRequest): UpdateBucketRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     obj.bucket = message.bucket ? LogBucket.toAmino(message.bucket) : undefined;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     return obj;
@@ -2851,7 +2851,7 @@ export const GetBucketRequest = {
   },
   toAmino(message: GetBucketRequest): GetBucketRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     return obj;
   },
   fromAminoMsg(object: GetBucketRequestAminoMsg): GetBucketRequest {
@@ -2937,7 +2937,7 @@ export const DeleteBucketRequest = {
   },
   toAmino(message: DeleteBucketRequest): DeleteBucketRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     return obj;
   },
   fromAminoMsg(object: DeleteBucketRequestAminoMsg): DeleteBucketRequest {
@@ -3023,7 +3023,7 @@ export const UndeleteBucketRequest = {
   },
   toAmino(message: UndeleteBucketRequest): UndeleteBucketRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     return obj;
   },
   fromAminoMsg(object: UndeleteBucketRequestAminoMsg): UndeleteBucketRequest {
@@ -3137,9 +3137,9 @@ export const ListViewsRequest = {
   },
   toAmino(message: ListViewsRequest): ListViewsRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
+    obj.parent = omitDefault(message.parent);
+    obj.page_token = omitDefault(message.pageToken);
+    obj.page_size = omitDefault(message.pageSize);
     return obj;
   },
   fromAminoMsg(object: ListViewsRequestAminoMsg): ListViewsRequest {
@@ -3252,7 +3252,7 @@ export const ListViewsResponse = {
     } else {
       obj.views = [];
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = omitDefault(message.nextPageToken);
     return obj;
   },
   fromAminoMsg(object: ListViewsResponseAminoMsg): ListViewsResponse {
@@ -3368,8 +3368,8 @@ export const CreateViewRequest = {
   },
   toAmino(message: CreateViewRequest): CreateViewRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.view_id = message.viewId;
+    obj.parent = omitDefault(message.parent);
+    obj.view_id = omitDefault(message.viewId);
     obj.view = message.view ? LogView.toAmino(message.view) : undefined;
     return obj;
   },
@@ -3488,7 +3488,7 @@ export const UpdateViewRequest = {
   },
   toAmino(message: UpdateViewRequest): UpdateViewRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     obj.view = message.view ? LogView.toAmino(message.view) : undefined;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     return obj;
@@ -3576,7 +3576,7 @@ export const GetViewRequest = {
   },
   toAmino(message: GetViewRequest): GetViewRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     return obj;
   },
   fromAminoMsg(object: GetViewRequestAminoMsg): GetViewRequest {
@@ -3662,7 +3662,7 @@ export const DeleteViewRequest = {
   },
   toAmino(message: DeleteViewRequest): DeleteViewRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     return obj;
   },
   fromAminoMsg(object: DeleteViewRequestAminoMsg): DeleteViewRequest {
@@ -3776,9 +3776,9 @@ export const ListSinksRequest = {
   },
   toAmino(message: ListSinksRequest): ListSinksRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
+    obj.parent = omitDefault(message.parent);
+    obj.page_token = omitDefault(message.pageToken);
+    obj.page_size = omitDefault(message.pageSize);
     return obj;
   },
   fromAminoMsg(object: ListSinksRequestAminoMsg): ListSinksRequest {
@@ -3891,7 +3891,7 @@ export const ListSinksResponse = {
     } else {
       obj.sinks = [];
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = omitDefault(message.nextPageToken);
     return obj;
   },
   fromAminoMsg(object: ListSinksResponseAminoMsg): ListSinksResponse {
@@ -3977,7 +3977,7 @@ export const GetSinkRequest = {
   },
   toAmino(message: GetSinkRequest): GetSinkRequestAmino {
     const obj: any = {};
-    obj.sink_name = message.sinkName;
+    obj.sink_name = omitDefault(message.sinkName);
     return obj;
   },
   fromAminoMsg(object: GetSinkRequestAminoMsg): GetSinkRequest {
@@ -4093,9 +4093,9 @@ export const CreateSinkRequest = {
   },
   toAmino(message: CreateSinkRequest): CreateSinkRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = omitDefault(message.parent);
     obj.sink = message.sink ? LogSink.toAmino(message.sink) : undefined;
-    obj.unique_writer_identity = message.uniqueWriterIdentity;
+    obj.unique_writer_identity = omitDefault(message.uniqueWriterIdentity);
     return obj;
   },
   fromAminoMsg(object: CreateSinkRequestAminoMsg): CreateSinkRequest {
@@ -4227,9 +4227,9 @@ export const UpdateSinkRequest = {
   },
   toAmino(message: UpdateSinkRequest): UpdateSinkRequestAmino {
     const obj: any = {};
-    obj.sink_name = message.sinkName;
+    obj.sink_name = omitDefault(message.sinkName);
     obj.sink = message.sink ? LogSink.toAmino(message.sink) : undefined;
-    obj.unique_writer_identity = message.uniqueWriterIdentity;
+    obj.unique_writer_identity = omitDefault(message.uniqueWriterIdentity);
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     return obj;
   },
@@ -4316,7 +4316,7 @@ export const DeleteSinkRequest = {
   },
   toAmino(message: DeleteSinkRequest): DeleteSinkRequestAmino {
     const obj: any = {};
-    obj.sink_name = message.sinkName;
+    obj.sink_name = omitDefault(message.sinkName);
     return obj;
   },
   fromAminoMsg(object: DeleteSinkRequestAminoMsg): DeleteSinkRequest {
@@ -4466,16 +4466,16 @@ export const LogExclusion = {
       description: object.description,
       filter: object.filter,
       disabled: object.disabled,
-      createTime: object.create_time,
-      updateTime: object.update_time
+      createTime: object?.create_time ? Timestamp.fromAmino(object.create_time) : undefined,
+      updateTime: object?.update_time ? Timestamp.fromAmino(object.update_time) : undefined
     };
   },
   toAmino(message: LogExclusion): LogExclusionAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
-    obj.filter = message.filter;
-    obj.disabled = message.disabled;
+    obj.name = omitDefault(message.name);
+    obj.description = omitDefault(message.description);
+    obj.filter = omitDefault(message.filter);
+    obj.disabled = omitDefault(message.disabled);
     obj.create_time = message.createTime;
     obj.update_time = message.updateTime;
     return obj;
@@ -4591,9 +4591,9 @@ export const ListExclusionsRequest = {
   },
   toAmino(message: ListExclusionsRequest): ListExclusionsRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
+    obj.parent = omitDefault(message.parent);
+    obj.page_token = omitDefault(message.pageToken);
+    obj.page_size = omitDefault(message.pageSize);
     return obj;
   },
   fromAminoMsg(object: ListExclusionsRequestAminoMsg): ListExclusionsRequest {
@@ -4706,7 +4706,7 @@ export const ListExclusionsResponse = {
     } else {
       obj.exclusions = [];
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = omitDefault(message.nextPageToken);
     return obj;
   },
   fromAminoMsg(object: ListExclusionsResponseAminoMsg): ListExclusionsResponse {
@@ -4792,7 +4792,7 @@ export const GetExclusionRequest = {
   },
   toAmino(message: GetExclusionRequest): GetExclusionRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     return obj;
   },
   fromAminoMsg(object: GetExclusionRequestAminoMsg): GetExclusionRequest {
@@ -4894,7 +4894,7 @@ export const CreateExclusionRequest = {
   },
   toAmino(message: CreateExclusionRequest): CreateExclusionRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = omitDefault(message.parent);
     obj.exclusion = message.exclusion ? LogExclusion.toAmino(message.exclusion) : undefined;
     return obj;
   },
@@ -5013,7 +5013,7 @@ export const UpdateExclusionRequest = {
   },
   toAmino(message: UpdateExclusionRequest): UpdateExclusionRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     obj.exclusion = message.exclusion ? LogExclusion.toAmino(message.exclusion) : undefined;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     return obj;
@@ -5101,7 +5101,7 @@ export const DeleteExclusionRequest = {
   },
   toAmino(message: DeleteExclusionRequest): DeleteExclusionRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     return obj;
   },
   fromAminoMsg(object: DeleteExclusionRequestAminoMsg): DeleteExclusionRequest {
@@ -5187,7 +5187,7 @@ export const GetCmekSettingsRequest = {
   },
   toAmino(message: GetCmekSettingsRequest): GetCmekSettingsRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     return obj;
   },
   fromAminoMsg(object: GetCmekSettingsRequestAminoMsg): GetCmekSettingsRequest {
@@ -5305,7 +5305,7 @@ export const UpdateCmekSettingsRequest = {
   },
   toAmino(message: UpdateCmekSettingsRequest): UpdateCmekSettingsRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     obj.cmek_settings = message.cmekSettings ? CmekSettings.toAmino(message.cmekSettings) : undefined;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     return obj;
@@ -5421,9 +5421,9 @@ export const CmekSettings = {
   },
   toAmino(message: CmekSettings): CmekSettingsAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.kms_key_name = message.kmsKeyName;
-    obj.service_account_id = message.serviceAccountId;
+    obj.name = omitDefault(message.name);
+    obj.kms_key_name = omitDefault(message.kmsKeyName);
+    obj.service_account_id = omitDefault(message.serviceAccountId);
     return obj;
   },
   fromAminoMsg(object: CmekSettingsAminoMsg): CmekSettings {
@@ -5509,7 +5509,7 @@ export const GetSettingsRequest = {
   },
   toAmino(message: GetSettingsRequest): GetSettingsRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     return obj;
   },
   fromAminoMsg(object: GetSettingsRequestAminoMsg): GetSettingsRequest {
@@ -5627,7 +5627,7 @@ export const UpdateSettingsRequest = {
   },
   toAmino(message: UpdateSettingsRequest): UpdateSettingsRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     obj.settings = message.settings ? Settings.toAmino(message.settings) : undefined;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     return obj;
@@ -5771,11 +5771,11 @@ export const Settings = {
   },
   toAmino(message: Settings): SettingsAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.kms_key_name = message.kmsKeyName;
-    obj.kms_service_account_id = message.kmsServiceAccountId;
-    obj.storage_location = message.storageLocation;
-    obj.disable_default_sink = message.disableDefaultSink;
+    obj.name = omitDefault(message.name);
+    obj.kms_key_name = omitDefault(message.kmsKeyName);
+    obj.kms_service_account_id = omitDefault(message.kmsServiceAccountId);
+    obj.storage_location = omitDefault(message.storageLocation);
+    obj.disable_default_sink = omitDefault(message.disableDefaultSink);
     return obj;
   },
   fromAminoMsg(object: SettingsAminoMsg): Settings {
@@ -5889,9 +5889,9 @@ export const CopyLogEntriesRequest = {
   },
   toAmino(message: CopyLogEntriesRequest): CopyLogEntriesRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.filter = message.filter;
-    obj.destination = message.destination;
+    obj.name = omitDefault(message.name);
+    obj.filter = omitDefault(message.filter);
+    obj.destination = omitDefault(message.destination);
     return obj;
   },
   fromAminoMsg(object: CopyLogEntriesRequestAminoMsg): CopyLogEntriesRequest {
@@ -6052,8 +6052,8 @@ export const CopyLogEntriesMetadata = {
   },
   fromAmino(object: CopyLogEntriesMetadataAmino): CopyLogEntriesMetadata {
     return {
-      startTime: object.start_time,
-      endTime: object.end_time,
+      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      endTime: object?.end_time ? Timestamp.fromAmino(object.end_time) : undefined,
       state: isSet(object.state) ? operationStateFromJSON(object.state) : -1,
       cancellationRequested: object.cancellation_requested,
       request: object?.request ? CopyLogEntriesRequest.fromAmino(object.request) : undefined,
@@ -6065,11 +6065,11 @@ export const CopyLogEntriesMetadata = {
     const obj: any = {};
     obj.start_time = message.startTime;
     obj.end_time = message.endTime;
-    obj.state = message.state;
-    obj.cancellation_requested = message.cancellationRequested;
+    obj.state = omitDefault(message.state);
+    obj.cancellation_requested = omitDefault(message.cancellationRequested);
     obj.request = message.request ? CopyLogEntriesRequest.toAmino(message.request) : undefined;
-    obj.progress = message.progress;
-    obj.writer_identity = message.writerIdentity;
+    obj.progress = omitDefault(message.progress);
+    obj.writer_identity = omitDefault(message.writerIdentity);
     return obj;
   },
   fromAminoMsg(object: CopyLogEntriesMetadataAminoMsg): CopyLogEntriesMetadata {
@@ -6157,7 +6157,7 @@ export const CopyLogEntriesResponse = {
   },
   toAmino(message: CopyLogEntriesResponse): CopyLogEntriesResponseAmino {
     const obj: any = {};
-    obj.log_entries_copied_count = message.logEntriesCopiedCount ? message.logEntriesCopiedCount.toString() : undefined;
+    obj.log_entries_copied_count = omitDefault(message.logEntriesCopiedCount);
     return obj;
   },
   fromAminoMsg(object: CopyLogEntriesResponseAminoMsg): CopyLogEntriesResponse {

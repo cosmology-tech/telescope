@@ -1,6 +1,6 @@
 import { DevFeeInfo, DevFeeInfoSDKType } from "./fees";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault, padDecimal } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "evmos.fees.v1";
 /** GenesisState defines the module's genesis state. */
@@ -281,11 +281,11 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.enable_fees = message.enableFees;
-    obj.developer_shares = message.developerShares;
-    obj.validator_shares = message.validatorShares;
-    obj.addr_derivation_cost_create = message.addrDerivationCostCreate ? message.addrDerivationCostCreate.toString() : undefined;
-    obj.min_gas_price = message.minGasPrice;
+    obj.enable_fees = omitDefault(message.enableFees);
+    obj.developer_shares = padDecimal(message.developerShares);
+    obj.validator_shares = padDecimal(message.validatorShares);
+    obj.addr_derivation_cost_create = omitDefault(message.addrDerivationCostCreate);
+    obj.min_gas_price = padDecimal(message.minGasPrice);
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

@@ -1,6 +1,6 @@
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.interchain_accounts.v1";
 /**
  * Type defines a classification of message issued from a controller chain to its associated interchain accounts
@@ -154,9 +154,9 @@ export const InterchainAccountPacketData = {
   },
   toAmino(message: InterchainAccountPacketData): InterchainAccountPacketDataAmino {
     const obj: any = {};
-    obj.type = message.type;
+    obj.type = omitDefault(message.type);
     obj.data = message.data;
-    obj.memo = message.memo;
+    obj.memo = omitDefault(message.memo);
     return obj;
   },
   fromAminoMsg(object: InterchainAccountPacketDataAminoMsg): InterchainAccountPacketData {

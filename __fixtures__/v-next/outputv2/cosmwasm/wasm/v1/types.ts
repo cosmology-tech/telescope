@@ -1,6 +1,6 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } from "../../../helpers";
 import { toUtf8, fromUtf8 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** AccessType permission types */
@@ -438,7 +438,7 @@ export const AccessTypeParam = {
   },
   toAmino(message: AccessTypeParam): AccessTypeParamAmino {
     const obj: any = {};
-    obj.value = message.value;
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: AccessTypeParamAminoMsg): AccessTypeParam {
@@ -539,8 +539,8 @@ export const AccessConfig = {
   },
   toAmino(message: AccessConfig): AccessConfigAmino {
     const obj: any = {};
-    obj.permission = message.permission;
-    obj.address = message.address;
+    obj.permission = omitDefault(message.permission);
+    obj.address = omitDefault(message.address);
     return obj;
   },
   fromAminoMsg(object: AccessConfigAminoMsg): AccessConfig {
@@ -659,8 +659,8 @@ export const Params = {
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     obj.code_upload_access = message.codeUploadAccess ? AccessConfig.toAmino(message.codeUploadAccess) : undefined;
-    obj.instantiate_default_permission = message.instantiateDefaultPermission;
-    obj.max_wasm_code_size = message.maxWasmCodeSize ? message.maxWasmCodeSize.toString() : undefined;
+    obj.instantiate_default_permission = omitDefault(message.instantiateDefaultPermission);
+    obj.max_wasm_code_size = omitDefault(message.maxWasmCodeSize);
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {
@@ -777,7 +777,7 @@ export const CodeInfo = {
   toAmino(message: CodeInfo): CodeInfoAmino {
     const obj: any = {};
     obj.code_hash = message.codeHash;
-    obj.creator = message.creator;
+    obj.creator = omitDefault(message.creator);
     obj.instantiate_config = message.instantiateConfig ? AccessConfig.toAmino(message.instantiateConfig) : undefined;
     return obj;
   },
@@ -950,12 +950,12 @@ export const ContractInfo = {
   },
   toAmino(message: ContractInfo): ContractInfoAmino {
     const obj: any = {};
-    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
-    obj.creator = message.creator;
-    obj.admin = message.admin;
-    obj.label = message.label;
+    obj.code_id = omitDefault(message.codeId);
+    obj.creator = omitDefault(message.creator);
+    obj.admin = omitDefault(message.admin);
+    obj.label = omitDefault(message.label);
     obj.created = message.created ? AbsoluteTxPosition.toAmino(message.created) : undefined;
-    obj.ibc_port_id = message.ibcPortId;
+    obj.ibc_port_id = omitDefault(message.ibcPortId);
     obj.extension = message.extension ? ContractInfoExtension_ToAmino((message.extension as Any)) : undefined;
     return obj;
   },
@@ -1087,8 +1087,8 @@ export const ContractCodeHistoryEntry = {
   },
   toAmino(message: ContractCodeHistoryEntry): ContractCodeHistoryEntryAmino {
     const obj: any = {};
-    obj.operation = message.operation;
-    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.operation = omitDefault(message.operation);
+    obj.code_id = omitDefault(message.codeId);
     obj.updated = message.updated ? AbsoluteTxPosition.toAmino(message.updated) : undefined;
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     return obj;
@@ -1195,8 +1195,8 @@ export const AbsoluteTxPosition = {
   },
   toAmino(message: AbsoluteTxPosition): AbsoluteTxPositionAmino {
     const obj: any = {};
-    obj.block_height = message.blockHeight ? message.blockHeight.toString() : undefined;
-    obj.tx_index = message.txIndex ? message.txIndex.toString() : undefined;
+    obj.block_height = omitDefault(message.blockHeight);
+    obj.tx_index = omitDefault(message.txIndex);
     return obj;
   },
   fromAminoMsg(object: AbsoluteTxPositionAminoMsg): AbsoluteTxPosition {

@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
+import { DeepPartial, isSet, omitDefault } from "../../helpers";
 export const protobufPackage = "google.api";
 /** Supported data type of the property values */
 export enum Property_PropertyType {
@@ -376,9 +376,9 @@ export const Property = {
   },
   toAmino(message: Property): PropertyAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.type = message.type;
-    obj.description = message.description;
+    obj.name = omitDefault(message.name);
+    obj.type = omitDefault(message.type);
+    obj.description = omitDefault(message.description);
     return obj;
   },
   fromAminoMsg(object: PropertyAminoMsg): Property {

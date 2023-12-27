@@ -1,6 +1,6 @@
 import { GroupInfo, GroupInfoSDKType, GroupMember, GroupMemberSDKType, GroupPolicyInfo, GroupPolicyInfoSDKType, Proposal, ProposalSDKType, Vote, VoteSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.group.v1";
 /** GenesisState defines the group module's genesis state. */
 export interface GenesisState {
@@ -246,7 +246,7 @@ export const GenesisState = {
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
-    obj.group_seq = message.groupSeq ? message.groupSeq.toString() : undefined;
+    obj.group_seq = omitDefault(message.groupSeq);
     if (message.groups) {
       obj.groups = message.groups.map(e => e ? GroupInfo.toAmino(e) : undefined);
     } else {
@@ -257,13 +257,13 @@ export const GenesisState = {
     } else {
       obj.group_members = [];
     }
-    obj.group_policy_seq = message.groupPolicySeq ? message.groupPolicySeq.toString() : undefined;
+    obj.group_policy_seq = omitDefault(message.groupPolicySeq);
     if (message.groupPolicies) {
       obj.group_policies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toAmino(e) : undefined);
     } else {
       obj.group_policies = [];
     }
-    obj.proposal_seq = message.proposalSeq ? message.proposalSeq.toString() : undefined;
+    obj.proposal_seq = omitDefault(message.proposalSeq);
     if (message.proposals) {
       obj.proposals = message.proposals.map(e => e ? Proposal.toAmino(e) : undefined);
     } else {

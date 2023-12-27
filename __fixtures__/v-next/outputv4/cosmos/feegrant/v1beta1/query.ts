@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Grant, GrantSDKType } from "./feegrant";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
 /** QueryAllowanceRequest is the request type for the Query/Allowance RPC method. */
 export interface QueryAllowanceRequest {
@@ -151,8 +151,8 @@ export const QueryAllowanceRequest = {
   },
   toAmino(message: QueryAllowanceRequest): QueryAllowanceRequestAmino {
     const obj: any = {};
-    obj.granter = message.granter;
-    obj.grantee = message.grantee;
+    obj.granter = omitDefault(message.granter);
+    obj.grantee = omitDefault(message.grantee);
     return obj;
   },
   fromAminoMsg(object: QueryAllowanceRequestAminoMsg): QueryAllowanceRequest {
@@ -354,7 +354,7 @@ export const QueryAllowancesRequest = {
   },
   toAmino(message: QueryAllowancesRequest): QueryAllowancesRequestAmino {
     const obj: any = {};
-    obj.grantee = message.grantee;
+    obj.grantee = omitDefault(message.grantee);
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -584,7 +584,7 @@ export const QueryAllowancesByGranterRequest = {
   },
   toAmino(message: QueryAllowancesByGranterRequest): QueryAllowancesByGranterRequestAmino {
     const obj: any = {};
-    obj.granter = message.granter;
+    obj.granter = omitDefault(message.granter);
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },

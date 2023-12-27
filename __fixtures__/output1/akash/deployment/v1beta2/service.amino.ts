@@ -157,11 +157,11 @@ export const AminoConverter = {
     }: MsgCreateDeployment): MsgCreateDeploymentAminoType["value"] => {
       return {
         id: {
-          owner: omitDefault(id.owner),
-          dseq: id.dseq.toString()
+          owner: id.owner,
+          dseq: id.dseq?.toString?.()
         },
         groups: groups.map(el0 => ({
-          name: omitDefault(el0.name),
+          name: el0.name,
           requirements: {
             signed_by: {
               all_of: el0.requirements.signedBy.allOf,
@@ -193,7 +193,7 @@ export const AminoConverter = {
                 }))
               },
               storage: el1.resources.storage.map(el2 => ({
-                name: omitDefault(el2.name),
+                name: el2.name,
                 quantity: {
                   val: el2.quantity.val
                 },
@@ -219,7 +219,7 @@ export const AminoConverter = {
           denom: deposit.denom,
           amount: Long.fromValue(deposit.amount).toString()
         },
-        depositor: omitDefault(depositor)
+        depositor: depositor
       };
     },
     fromAmino: ({
@@ -306,14 +306,14 @@ export const AminoConverter = {
     }: MsgDepositDeployment): MsgDepositDeploymentAminoType["value"] => {
       return {
         id: {
-          owner: omitDefault(id.owner),
-          dseq: id.dseq.toString()
+          owner: id.owner,
+          dseq: id.dseq?.toString?.()
         },
         amount: {
           denom: amount.denom,
           amount: Long.fromValue(amount.amount).toString()
         },
-        depositor: omitDefault(depositor)
+        depositor: depositor
       };
     },
     fromAmino: ({
@@ -342,8 +342,8 @@ export const AminoConverter = {
     }: MsgUpdateDeployment): MsgUpdateDeploymentAminoType["value"] => {
       return {
         id: {
-          owner: omitDefault(id.owner),
-          dseq: id.dseq.toString()
+          owner: id.owner,
+          dseq: id.dseq?.toString?.()
         },
         version: version
       };
@@ -368,8 +368,8 @@ export const AminoConverter = {
     }: MsgCloseDeployment): MsgCloseDeploymentAminoType["value"] => {
       return {
         id: {
-          owner: omitDefault(id.owner),
-          dseq: id.dseq.toString()
+          owner: id.owner,
+          dseq: id.dseq?.toString?.()
         }
       };
     },
@@ -391,8 +391,8 @@ export const AminoConverter = {
     }: MsgCloseGroup): MsgCloseGroupAminoType["value"] => {
       return {
         id: {
-          owner: omitDefault(id.owner),
-          dseq: id.dseq.toString(),
+          owner: id.owner,
+          dseq: id.dseq?.toString?.(),
           gseq: id.gseq
         }
       };
@@ -416,8 +416,8 @@ export const AminoConverter = {
     }: MsgPauseGroup): MsgPauseGroupAminoType["value"] => {
       return {
         id: {
-          owner: omitDefault(id.owner),
-          dseq: id.dseq.toString(),
+          owner: id.owner,
+          dseq: id.dseq?.toString?.(),
           gseq: id.gseq
         }
       };
@@ -441,8 +441,8 @@ export const AminoConverter = {
     }: MsgStartGroup): MsgStartGroupAminoType["value"] => {
       return {
         id: {
-          owner: omitDefault(id.owner),
-          dseq: id.dseq.toString(),
+          owner: id.owner,
+          dseq: id.dseq?.toString?.(),
           gseq: id.gseq
         }
       };

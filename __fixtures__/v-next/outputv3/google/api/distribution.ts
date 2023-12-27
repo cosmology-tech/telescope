@@ -1,7 +1,7 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../protobuf/timestamp";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
+import { isSet, DeepPartial, omitDefault, toTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * `Distribution` contains summary statistics for a population of values. It
@@ -718,9 +718,9 @@ export const Distribution = {
   },
   toAmino(message: Distribution): DistributionAmino {
     const obj: any = {};
-    obj.count = message.count ? message.count.toString() : undefined;
-    obj.mean = message.mean;
-    obj.sum_of_squared_deviation = message.sumOfSquaredDeviation;
+    obj.count = omitDefault(message.count);
+    obj.mean = omitDefault(message.mean);
+    obj.sum_of_squared_deviation = omitDefault(message.sumOfSquaredDeviation);
     obj.range = message.range ? Distribution_Range.toAmino(message.range) : undefined;
     obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toAmino(message.bucketOptions) : undefined;
     if (message.bucketCounts) {
@@ -826,8 +826,8 @@ export const Distribution_Range = {
   },
   toAmino(message: Distribution_Range): Distribution_RangeAmino {
     const obj: any = {};
-    obj.min = message.min;
-    obj.max = message.max;
+    obj.min = omitDefault(message.min);
+    obj.max = omitDefault(message.max);
     return obj;
   },
   fromAminoMsg(object: Distribution_RangeAminoMsg): Distribution_Range {
@@ -1049,9 +1049,9 @@ export const Distribution_BucketOptions_Linear = {
   },
   toAmino(message: Distribution_BucketOptions_Linear): Distribution_BucketOptions_LinearAmino {
     const obj: any = {};
-    obj.num_finite_buckets = message.numFiniteBuckets;
-    obj.width = message.width;
-    obj.offset = message.offset;
+    obj.num_finite_buckets = omitDefault(message.numFiniteBuckets);
+    obj.width = omitDefault(message.width);
+    obj.offset = omitDefault(message.offset);
     return obj;
   },
   fromAminoMsg(object: Distribution_BucketOptions_LinearAminoMsg): Distribution_BucketOptions_Linear {
@@ -1158,9 +1158,9 @@ export const Distribution_BucketOptions_Exponential = {
   },
   toAmino(message: Distribution_BucketOptions_Exponential): Distribution_BucketOptions_ExponentialAmino {
     const obj: any = {};
-    obj.num_finite_buckets = message.numFiniteBuckets;
-    obj.growth_factor = message.growthFactor;
-    obj.scale = message.scale;
+    obj.num_finite_buckets = omitDefault(message.numFiniteBuckets);
+    obj.growth_factor = omitDefault(message.growthFactor);
+    obj.scale = omitDefault(message.scale);
     return obj;
   },
   fromAminoMsg(object: Distribution_BucketOptions_ExponentialAminoMsg): Distribution_BucketOptions_Exponential {
@@ -1371,13 +1371,13 @@ export const Distribution_Exemplar = {
   fromAmino(object: Distribution_ExemplarAmino): Distribution_Exemplar {
     return {
       value: object.value,
-      timestamp: object.timestamp,
+      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
       attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromAmino(e)) : []
     };
   },
   toAmino(message: Distribution_Exemplar): Distribution_ExemplarAmino {
     const obj: any = {};
-    obj.value = message.value;
+    obj.value = omitDefault(message.value);
     obj.timestamp = message.timestamp;
     if (message.attachments) {
       obj.attachments = message.attachments.map(e => e ? Any.toAmino(e) : undefined);

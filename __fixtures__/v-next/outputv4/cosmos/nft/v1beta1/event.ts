@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** EventSend is emitted on Msg/Send */
 export interface EventSend {
@@ -148,10 +148,10 @@ export const EventSend = {
   },
   toAmino(message: EventSend): EventSendAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.id = message.id;
-    obj.sender = message.sender;
-    obj.receiver = message.receiver;
+    obj.class_id = omitDefault(message.classId);
+    obj.id = omitDefault(message.id);
+    obj.sender = omitDefault(message.sender);
+    obj.receiver = omitDefault(message.receiver);
     return obj;
   },
   fromAminoMsg(object: EventSendAminoMsg): EventSend {
@@ -271,9 +271,9 @@ export const EventMint = {
   },
   toAmino(message: EventMint): EventMintAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.id = message.id;
-    obj.owner = message.owner;
+    obj.class_id = omitDefault(message.classId);
+    obj.id = omitDefault(message.id);
+    obj.owner = omitDefault(message.owner);
     return obj;
   },
   fromAminoMsg(object: EventMintAminoMsg): EventMint {
@@ -393,9 +393,9 @@ export const EventBurn = {
   },
   toAmino(message: EventBurn): EventBurnAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.id = message.id;
-    obj.owner = message.owner;
+    obj.class_id = omitDefault(message.classId);
+    obj.id = omitDefault(message.id);
+    obj.owner = omitDefault(message.owner);
     return obj;
   },
   fromAminoMsg(object: EventBurnAminoMsg): EventBurn {

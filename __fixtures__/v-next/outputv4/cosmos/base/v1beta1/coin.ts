@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.base.v1beta1";
 /**
  * Coin defines a token with a denomination and an amount.
@@ -138,8 +138,8 @@ export const Coin = {
   },
   toAmino(message: Coin): CoinAmino {
     const obj: any = {};
-    obj.denom = message.denom;
-    obj.amount = message.amount;
+    obj.denom = omitDefault(message.denom);
+    obj.amount = omitDefault(message.amount);
     return obj;
   },
   fromAminoMsg(object: CoinAminoMsg): Coin {
@@ -245,8 +245,8 @@ export const DecCoin = {
   },
   toAmino(message: DecCoin): DecCoinAmino {
     const obj: any = {};
-    obj.denom = message.denom;
-    obj.amount = message.amount;
+    obj.denom = omitDefault(message.denom);
+    obj.amount = omitDefault(message.amount);
     return obj;
   },
   fromAminoMsg(object: DecCoinAminoMsg): DecCoin {
@@ -338,7 +338,7 @@ export const IntProto = {
   },
   toAmino(message: IntProto): IntProtoAmino {
     const obj: any = {};
-    obj.int = message.int;
+    obj.int = omitDefault(message.int);
     return obj;
   },
   fromAminoMsg(object: IntProtoAminoMsg): IntProto {
@@ -430,7 +430,7 @@ export const DecProto = {
   },
   toAmino(message: DecProto): DecProtoAmino {
     const obj: any = {};
-    obj.dec = message.dec;
+    obj.dec = omitDefault(message.dec);
     return obj;
   },
   fromAminoMsg(object: DecProtoAminoMsg): DecProto {

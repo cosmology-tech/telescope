@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.orm.v1";
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptor {
@@ -333,7 +333,7 @@ export const TableDescriptor = {
     } else {
       obj.index = [];
     }
-    obj.id = message.id;
+    obj.id = omitDefault(message.id);
     return obj;
   },
   fromAminoMsg(object: TableDescriptorAminoMsg): TableDescriptor {
@@ -434,8 +434,8 @@ export const PrimaryKeyDescriptor = {
   },
   toAmino(message: PrimaryKeyDescriptor): PrimaryKeyDescriptorAmino {
     const obj: any = {};
-    obj.fields = message.fields;
-    obj.auto_increment = message.autoIncrement;
+    obj.fields = omitDefault(message.fields);
+    obj.auto_increment = omitDefault(message.autoIncrement);
     return obj;
   },
   fromAminoMsg(object: PrimaryKeyDescriptorAminoMsg): PrimaryKeyDescriptor {
@@ -549,9 +549,9 @@ export const SecondaryIndexDescriptor = {
   },
   toAmino(message: SecondaryIndexDescriptor): SecondaryIndexDescriptorAmino {
     const obj: any = {};
-    obj.fields = message.fields;
-    obj.id = message.id;
-    obj.unique = message.unique;
+    obj.fields = omitDefault(message.fields);
+    obj.id = omitDefault(message.id);
+    obj.unique = omitDefault(message.unique);
     return obj;
   },
   fromAminoMsg(object: SecondaryIndexDescriptorAminoMsg): SecondaryIndexDescriptor {
@@ -639,7 +639,7 @@ export const SingletonDescriptor = {
   },
   toAmino(message: SingletonDescriptor): SingletonDescriptorAmino {
     const obj: any = {};
-    obj.id = message.id;
+    obj.id = omitDefault(message.id);
     return obj;
   },
   fromAminoMsg(object: SingletonDescriptorAminoMsg): SingletonDescriptor {

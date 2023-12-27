@@ -1,6 +1,6 @@
 import { ParamChange, ParamChangeAmino, ParamChangeSDKType } from "./params";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.params.v1beta1";
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
@@ -211,8 +211,8 @@ export const QueryParamsRequest = {
   },
   toAmino(message: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
-    obj.subspace = message.subspace;
-    obj.key = message.key;
+    obj.subspace = omitDefault(message.subspace);
+    obj.key = omitDefault(message.key);
     return obj;
   },
   fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
@@ -582,7 +582,7 @@ export const Subspace = {
   },
   toAmino(message: Subspace): SubspaceAmino {
     const obj: any = {};
-    obj.subspace = message.subspace;
+    obj.subspace = omitDefault(message.subspace);
     if (message.keys) {
       obj.keys = message.keys.map(e => e);
     } else {

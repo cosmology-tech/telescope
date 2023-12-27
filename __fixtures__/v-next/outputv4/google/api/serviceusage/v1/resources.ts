@@ -7,7 +7,7 @@ import { Endpoint, EndpointSDKType } from "../../endpoint";
 import { MonitoredResourceDescriptor, MonitoredResourceDescriptorSDKType } from "../../monitored_resource";
 import { Monitoring, MonitoringSDKType } from "../../monitoring";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "google.api.serviceusage.v1";
 /** Whether or not a service has been enabled for use by a consumer. */
 export enum State {
@@ -269,10 +269,10 @@ export const Service = {
   },
   toAmino(message: Service): ServiceAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.parent = message.parent;
+    obj.name = omitDefault(message.name);
+    obj.parent = omitDefault(message.parent);
     obj.config = message.config ? ServiceConfig.toAmino(message.config) : undefined;
-    obj.state = message.state;
+    obj.state = omitDefault(message.state);
     return obj;
   },
   fromAminoMsg(object: ServiceAminoMsg): Service {
@@ -518,8 +518,8 @@ export const ServiceConfig = {
   },
   toAmino(message: ServiceConfig): ServiceConfigAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.title = message.title;
+    obj.name = omitDefault(message.name);
+    obj.title = omitDefault(message.title);
     if (message.apis) {
       obj.apis = message.apis.map(e => e ? Api.toAmino(e) : undefined);
     } else {

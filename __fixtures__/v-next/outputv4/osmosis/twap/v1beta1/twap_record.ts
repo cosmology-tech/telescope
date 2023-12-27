@@ -1,6 +1,6 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault, padDecimal } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.twap.v1beta1";
 /**
@@ -248,25 +248,25 @@ export const TwapRecord = {
       asset0Denom: object.asset0_denom,
       asset1Denom: object.asset1_denom,
       height: BigInt(object.height),
-      time: object.time,
+      time: object?.time ? Timestamp.fromAmino(object.time) : undefined,
       p0LastSpotPrice: object.p0_last_spot_price,
       p1LastSpotPrice: object.p1_last_spot_price,
       p0ArithmeticTwapAccumulator: object.p0_arithmetic_twap_accumulator,
       p1ArithmeticTwapAccumulator: object.p1_arithmetic_twap_accumulator,
-      lastErrorTime: object.last_error_time
+      lastErrorTime: object?.last_error_time ? Timestamp.fromAmino(object.last_error_time) : undefined
     };
   },
   toAmino(message: TwapRecord): TwapRecordAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.asset0_denom = message.asset0Denom;
-    obj.asset1_denom = message.asset1Denom;
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.pool_id = omitDefault(message.poolId);
+    obj.asset0_denom = omitDefault(message.asset0Denom);
+    obj.asset1_denom = omitDefault(message.asset1Denom);
+    obj.height = message.height;
     obj.time = message.time;
-    obj.p0_last_spot_price = message.p0LastSpotPrice;
-    obj.p1_last_spot_price = message.p1LastSpotPrice;
-    obj.p0_arithmetic_twap_accumulator = message.p0ArithmeticTwapAccumulator;
-    obj.p1_arithmetic_twap_accumulator = message.p1ArithmeticTwapAccumulator;
+    obj.p0_last_spot_price = padDecimal(message.p0LastSpotPrice);
+    obj.p1_last_spot_price = padDecimal(message.p1LastSpotPrice);
+    obj.p0_arithmetic_twap_accumulator = padDecimal(message.p0ArithmeticTwapAccumulator);
+    obj.p1_arithmetic_twap_accumulator = padDecimal(message.p1ArithmeticTwapAccumulator);
     obj.last_error_time = message.lastErrorTime;
     return obj;
   },

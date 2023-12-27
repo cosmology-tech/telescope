@@ -31,8 +31,8 @@ export const AminoConverter = {
       attributes
     }: MsgSignProviderAttributes): MsgSignProviderAttributesAminoType["value"] => {
       return {
-        owner: omitDefault(owner),
-        auditor: omitDefault(auditor),
+        owner: owner,
+        auditor: auditor,
         attributes: attributes.map(el0 => ({
           key: omitDefault(el0.key),
           value: omitDefault(el0.value)
@@ -62,8 +62,8 @@ export const AminoConverter = {
       keys
     }: MsgDeleteProviderAttributes): MsgDeleteProviderAttributesAminoType["value"] => {
       return {
-        owner: omitDefault(owner),
-        auditor: omitDefault(auditor),
+        owner: owner,
+        auditor: auditor,
         keys: keys
       };
     },

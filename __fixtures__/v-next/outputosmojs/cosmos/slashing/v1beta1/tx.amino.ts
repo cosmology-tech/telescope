@@ -1,5 +1,4 @@
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault } from "../../../helpers";
 import { MsgUnjail, MsgUnjailSDKType } from "./tx";
 export interface MsgUnjailAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgUnjail";
@@ -14,7 +13,7 @@ export const AminoConverter = {
       validatorAddr
     }: MsgUnjail): MsgUnjailAminoType["value"] => {
       return {
-        validator_addr: omitDefault(validatorAddr)
+        validator_addr: validatorAddr
       };
     },
     fromAmino: ({

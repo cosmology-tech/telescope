@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.app.v1alpha1";
 /** ModuleDescriptor describes an app module. */
 export interface ModuleDescriptor {
@@ -312,7 +312,7 @@ export const ModuleDescriptor = {
   },
   toAmino(message: ModuleDescriptor): ModuleDescriptorAmino {
     const obj: any = {};
-    obj.go_import = message.goImport;
+    obj.go_import = omitDefault(message.goImport);
     if (message.usePackage) {
       obj.use_package = message.usePackage.map(e => e ? PackageReference.toAmino(e) : undefined);
     } else {
@@ -423,8 +423,8 @@ export const PackageReference = {
   },
   toAmino(message: PackageReference): PackageReferenceAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.revision = message.revision;
+    obj.name = omitDefault(message.name);
+    obj.revision = omitDefault(message.revision);
     return obj;
   },
   fromAminoMsg(object: PackageReferenceAminoMsg): PackageReference {
@@ -512,7 +512,7 @@ export const MigrateFromInfo = {
   },
   toAmino(message: MigrateFromInfo): MigrateFromInfoAmino {
     const obj: any = {};
-    obj.module = message.module;
+    obj.module = omitDefault(message.module);
     return obj;
   },
   fromAminoMsg(object: MigrateFromInfoAminoMsg): MigrateFromInfo {

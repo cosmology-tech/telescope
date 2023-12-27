@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "evmos.claims.v1";
 /** Action defines the list of available actions to claim the airdrop tokens. */
 export enum Action {
@@ -205,9 +205,9 @@ export const Claim = {
   },
   toAmino(message: Claim): ClaimAmino {
     const obj: any = {};
-    obj.action = message.action;
-    obj.completed = message.completed;
-    obj.claimable_amount = message.claimableAmount;
+    obj.action = omitDefault(message.action);
+    obj.completed = omitDefault(message.completed);
+    obj.claimable_amount = omitDefault(message.claimableAmount);
     return obj;
   },
   fromAminoMsg(object: ClaimAminoMsg): Claim {
@@ -338,8 +338,8 @@ export const ClaimsRecordAddress = {
   },
   toAmino(message: ClaimsRecordAddress): ClaimsRecordAddressAmino {
     const obj: any = {};
-    obj.address = message.address;
-    obj.initial_claimable_amount = message.initialClaimableAmount;
+    obj.address = omitDefault(message.address);
+    obj.initial_claimable_amount = omitDefault(message.initialClaimableAmount);
     if (message.actionsCompleted) {
       obj.actions_completed = message.actionsCompleted.map(e => e);
     } else {
@@ -461,7 +461,7 @@ export const ClaimsRecord = {
   },
   toAmino(message: ClaimsRecord): ClaimsRecordAmino {
     const obj: any = {};
-    obj.initial_claimable_amount = message.initialClaimableAmount;
+    obj.initial_claimable_amount = omitDefault(message.initialClaimableAmount);
     if (message.actionsCompleted) {
       obj.actions_completed = message.actionsCompleted.map(e => e);
     } else {

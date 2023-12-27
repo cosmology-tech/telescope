@@ -1,7 +1,7 @@
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Event, EventSDKType } from "../../../../tendermint/abci/types";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.abci.v1beta1";
 /**
  * TxResponse defines a structure containing relevant tx data and metadata. The
@@ -501,22 +501,22 @@ export const TxResponse = {
   },
   toAmino(message: TxResponse): TxResponseAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.txhash = message.txhash;
-    obj.codespace = message.codespace;
-    obj.code = message.code;
-    obj.data = message.data;
-    obj.raw_log = message.rawLog;
+    obj.height = omitDefault(message.height);
+    obj.txhash = omitDefault(message.txhash);
+    obj.codespace = omitDefault(message.codespace);
+    obj.code = omitDefault(message.code);
+    obj.data = omitDefault(message.data);
+    obj.raw_log = omitDefault(message.rawLog);
     if (message.logs) {
       obj.logs = message.logs.map(e => e ? ABCIMessageLog.toAmino(e) : undefined);
     } else {
       obj.logs = [];
     }
-    obj.info = message.info;
-    obj.gas_wanted = message.gasWanted ? message.gasWanted.toString() : undefined;
-    obj.gas_used = message.gasUsed ? message.gasUsed.toString() : undefined;
+    obj.info = omitDefault(message.info);
+    obj.gas_wanted = omitDefault(message.gasWanted);
+    obj.gas_used = omitDefault(message.gasUsed);
     obj.tx = message.tx ? Any.toAmino(message.tx) : undefined;
-    obj.timestamp = message.timestamp;
+    obj.timestamp = omitDefault(message.timestamp);
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toAmino(e) : undefined);
     } else {
@@ -650,7 +650,7 @@ export const ABCIMessageLog = {
   toAmino(message: ABCIMessageLog): ABCIMessageLogAmino {
     const obj: any = {};
     obj.msg_index = message.msgIndex;
-    obj.log = message.log;
+    obj.log = omitDefault(message.log);
     if (message.events) {
       obj.events = message.events.map(e => e ? StringEvent.toAmino(e) : undefined);
     } else {
@@ -769,7 +769,7 @@ export const StringEvent = {
   },
   toAmino(message: StringEvent): StringEventAmino {
     const obj: any = {};
-    obj.type = message.type;
+    obj.type = omitDefault(message.type);
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {
@@ -880,8 +880,8 @@ export const Attribute = {
   },
   toAmino(message: Attribute): AttributeAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: AttributeAminoMsg): Attribute {
@@ -991,8 +991,8 @@ export const GasInfo = {
   },
   toAmino(message: GasInfo): GasInfoAmino {
     const obj: any = {};
-    obj.gas_wanted = message.gasWanted ? message.gasWanted.toString() : undefined;
-    obj.gas_used = message.gasUsed ? message.gasUsed.toString() : undefined;
+    obj.gas_wanted = omitDefault(message.gasWanted);
+    obj.gas_used = omitDefault(message.gasUsed);
     return obj;
   },
   fromAminoMsg(object: GasInfoAminoMsg): GasInfo {
@@ -1143,7 +1143,7 @@ export const Result = {
   toAmino(message: Result): ResultAmino {
     const obj: any = {};
     obj.data = message.data;
-    obj.log = message.log;
+    obj.log = omitDefault(message.log);
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toAmino(e) : undefined);
     } else {
@@ -1370,7 +1370,7 @@ export const MsgData = {
   },
   toAmino(message: MsgData): MsgDataAmino {
     const obj: any = {};
-    obj.msg_type = message.msgType;
+    obj.msg_type = omitDefault(message.msgType);
     obj.data = message.data;
     return obj;
   },
@@ -1682,11 +1682,11 @@ export const SearchTxsResult = {
   },
   toAmino(message: SearchTxsResult): SearchTxsResultAmino {
     const obj: any = {};
-    obj.total_count = message.totalCount ? message.totalCount.toString() : undefined;
-    obj.count = message.count ? message.count.toString() : undefined;
-    obj.page_number = message.pageNumber ? message.pageNumber.toString() : undefined;
-    obj.page_total = message.pageTotal ? message.pageTotal.toString() : undefined;
-    obj.limit = message.limit ? message.limit.toString() : undefined;
+    obj.total_count = omitDefault(message.totalCount);
+    obj.count = omitDefault(message.count);
+    obj.page_number = omitDefault(message.pageNumber);
+    obj.page_total = omitDefault(message.pageTotal);
+    obj.limit = omitDefault(message.limit);
     if (message.txs) {
       obj.txs = message.txs.map(e => e ? TxResponse.toAmino(e) : undefined);
     } else {

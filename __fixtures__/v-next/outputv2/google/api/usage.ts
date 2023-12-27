@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "google.api";
 /** Configuration controlling usage of a service. */
 export interface Usage {
@@ -329,7 +329,7 @@ export const Usage = {
     } else {
       obj.rules = [];
     }
-    obj.producer_notification_channel = message.producerNotificationChannel;
+    obj.producer_notification_channel = omitDefault(message.producerNotificationChannel);
     return obj;
   },
   fromAminoMsg(object: UsageAminoMsg): Usage {
@@ -436,9 +436,9 @@ export const UsageRule = {
   },
   toAmino(message: UsageRule): UsageRuleAmino {
     const obj: any = {};
-    obj.selector = message.selector;
-    obj.allow_unregistered_calls = message.allowUnregisteredCalls;
-    obj.skip_service_control = message.skipServiceControl;
+    obj.selector = omitDefault(message.selector);
+    obj.allow_unregistered_calls = omitDefault(message.allowUnregisteredCalls);
+    obj.skip_service_control = omitDefault(message.skipServiceControl);
     return obj;
   },
   fromAminoMsg(object: UsageRuleAminoMsg): UsageRule {

@@ -3,7 +3,7 @@ import { LogEntry, LogEntrySDKType } from "./log_entry";
 import { Duration, DurationSDKType } from "../../protobuf/duration";
 import { Status, StatusSDKType } from "../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, isObject } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault, isObject } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 /** An indicator of why entries were omitted. */
 export enum TailLogEntriesResponse_SuppressionInfo_Reason {
@@ -550,7 +550,7 @@ export const DeleteLogRequest = {
   },
   toAmino(message: DeleteLogRequest): DeleteLogRequestAmino {
     const obj: any = {};
-    obj.log_name = message.logName;
+    obj.log_name = omitDefault(message.logName);
     return obj;
   },
   fromAminoMsg(object: DeleteLogRequestAminoMsg): DeleteLogRequest {
@@ -649,8 +649,8 @@ export const WriteLogEntriesRequest_LabelsEntry = {
   },
   toAmino(message: WriteLogEntriesRequest_LabelsEntry): WriteLogEntriesRequest_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: WriteLogEntriesRequest_LabelsEntryAminoMsg): WriteLogEntriesRequest_LabelsEntry {
@@ -853,7 +853,7 @@ export const WriteLogEntriesRequest = {
   },
   toAmino(message: WriteLogEntriesRequest): WriteLogEntriesRequestAmino {
     const obj: any = {};
-    obj.log_name = message.logName;
+    obj.log_name = omitDefault(message.logName);
     obj.resource = message.resource ? MonitoredResource.toAmino(message.resource) : undefined;
     obj.labels = {};
     if (message.labels) {
@@ -866,8 +866,8 @@ export const WriteLogEntriesRequest = {
     } else {
       obj.entries = [];
     }
-    obj.partial_success = message.partialSuccess;
-    obj.dry_run = message.dryRun;
+    obj.partial_success = omitDefault(message.partialSuccess);
+    obj.dry_run = omitDefault(message.dryRun);
     return obj;
   },
   fromAminoMsg(object: WriteLogEntriesRequestAminoMsg): WriteLogEntriesRequest {
@@ -1035,7 +1035,7 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
   },
   toAmino(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry): WriteLogEntriesPartialErrors_LogEntryErrorsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = omitDefault(message.key);
     obj.value = message.value ? Status.toAmino(message.value) : undefined;
     return obj;
   },
@@ -1319,10 +1319,10 @@ export const ListLogEntriesRequest = {
     } else {
       obj.resource_names = [];
     }
-    obj.filter = message.filter;
-    obj.order_by = message.orderBy;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
+    obj.filter = omitDefault(message.filter);
+    obj.order_by = omitDefault(message.orderBy);
+    obj.page_size = omitDefault(message.pageSize);
+    obj.page_token = omitDefault(message.pageToken);
     return obj;
   },
   fromAminoMsg(object: ListLogEntriesRequestAminoMsg): ListLogEntriesRequest {
@@ -1435,7 +1435,7 @@ export const ListLogEntriesResponse = {
     } else {
       obj.entries = [];
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = omitDefault(message.nextPageToken);
     return obj;
   },
   fromAminoMsg(object: ListLogEntriesResponseAminoMsg): ListLogEntriesResponse {
@@ -1535,8 +1535,8 @@ export const ListMonitoredResourceDescriptorsRequest = {
   },
   toAmino(message: ListMonitoredResourceDescriptorsRequest): ListMonitoredResourceDescriptorsRequestAmino {
     const obj: any = {};
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
+    obj.page_size = omitDefault(message.pageSize);
+    obj.page_token = omitDefault(message.pageToken);
     return obj;
   },
   fromAminoMsg(object: ListMonitoredResourceDescriptorsRequestAminoMsg): ListMonitoredResourceDescriptorsRequest {
@@ -1649,7 +1649,7 @@ export const ListMonitoredResourceDescriptorsResponse = {
     } else {
       obj.resource_descriptors = [];
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = omitDefault(message.nextPageToken);
     return obj;
   },
   fromAminoMsg(object: ListMonitoredResourceDescriptorsResponseAminoMsg): ListMonitoredResourceDescriptorsResponse {
@@ -1785,9 +1785,9 @@ export const ListLogsRequest = {
   },
   toAmino(message: ListLogsRequest): ListLogsRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
+    obj.parent = omitDefault(message.parent);
+    obj.page_size = omitDefault(message.pageSize);
+    obj.page_token = omitDefault(message.pageToken);
     if (message.resourceNames) {
       obj.resource_names = message.resourceNames.map(e => e);
     } else {
@@ -1905,7 +1905,7 @@ export const ListLogsResponse = {
     } else {
       obj.log_names = [];
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = omitDefault(message.nextPageToken);
     return obj;
   },
   fromAminoMsg(object: ListLogsResponseAminoMsg): ListLogsResponse {
@@ -2034,7 +2034,7 @@ export const TailLogEntriesRequest = {
     } else {
       obj.resource_names = [];
     }
-    obj.filter = message.filter;
+    obj.filter = omitDefault(message.filter);
     obj.buffer_window = message.bufferWindow ? Duration.toAmino(message.bufferWindow) : undefined;
     return obj;
   },
@@ -2260,8 +2260,8 @@ export const TailLogEntriesResponse_SuppressionInfo = {
   },
   toAmino(message: TailLogEntriesResponse_SuppressionInfo): TailLogEntriesResponse_SuppressionInfoAmino {
     const obj: any = {};
-    obj.reason = message.reason;
-    obj.suppressed_count = message.suppressedCount;
+    obj.reason = omitDefault(message.reason);
+    obj.suppressed_count = omitDefault(message.suppressedCount);
     return obj;
   },
   fromAminoMsg(object: TailLogEntriesResponse_SuppressionInfoAminoMsg): TailLogEntriesResponse_SuppressionInfo {

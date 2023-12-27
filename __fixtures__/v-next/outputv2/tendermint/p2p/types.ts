@@ -1,6 +1,6 @@
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp } from "../../helpers";
+import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "tendermint.p2p";
 export interface ProtocolVersion {
   p2p: bigint;
@@ -226,9 +226,9 @@ export const ProtocolVersion = {
   },
   toAmino(message: ProtocolVersion): ProtocolVersionAmino {
     const obj: any = {};
-    obj.p2p = message.p2p ? message.p2p.toString() : undefined;
-    obj.block = message.block ? message.block.toString() : undefined;
-    obj.app = message.app ? message.app.toString() : undefined;
+    obj.p2p = omitDefault(message.p2p);
+    obj.block = omitDefault(message.block);
+    obj.app = omitDefault(message.app);
     return obj;
   },
   fromAminoMsg(object: ProtocolVersionAminoMsg): ProtocolVersion {
@@ -405,12 +405,12 @@ export const NodeInfo = {
   toAmino(message: NodeInfo): NodeInfoAmino {
     const obj: any = {};
     obj.protocol_version = message.protocolVersion ? ProtocolVersion.toAmino(message.protocolVersion) : undefined;
-    obj.node_id = message.nodeId;
-    obj.listen_addr = message.listenAddr;
-    obj.network = message.network;
-    obj.version = message.version;
+    obj.node_id = omitDefault(message.nodeId);
+    obj.listen_addr = omitDefault(message.listenAddr);
+    obj.network = omitDefault(message.network);
+    obj.version = omitDefault(message.version);
     obj.channels = message.channels;
-    obj.moniker = message.moniker;
+    obj.moniker = omitDefault(message.moniker);
     obj.other = message.other ? NodeInfoOther.toAmino(message.other) : undefined;
     return obj;
   },
@@ -505,8 +505,8 @@ export const NodeInfoOther = {
   },
   toAmino(message: NodeInfoOther): NodeInfoOtherAmino {
     const obj: any = {};
-    obj.tx_index = message.txIndex;
-    obj.rpc_address = message.rpcAddress;
+    obj.tx_index = omitDefault(message.txIndex);
+    obj.rpc_address = omitDefault(message.rpcAddress);
     return obj;
   },
   fromAminoMsg(object: NodeInfoOtherAminoMsg): NodeInfoOther {
@@ -616,12 +616,12 @@ export const PeerInfo = {
     return {
       id: object.id,
       addressInfo: Array.isArray(object?.address_info) ? object.address_info.map((e: any) => PeerAddressInfo.fromAmino(e)) : [],
-      lastConnected: object.last_connected
+      lastConnected: object?.last_connected ? Timestamp.fromAmino(object.last_connected) : undefined
     };
   },
   toAmino(message: PeerInfo): PeerInfoAmino {
     const obj: any = {};
-    obj.id = message.id;
+    obj.id = omitDefault(message.id);
     if (message.addressInfo) {
       obj.address_info = message.addressInfo.map(e => e ? PeerAddressInfo.toAmino(e) : undefined);
     } else {
@@ -740,17 +740,17 @@ export const PeerAddressInfo = {
   fromAmino(object: PeerAddressInfoAmino): PeerAddressInfo {
     return {
       address: object.address,
-      lastDialSuccess: object.last_dial_success,
-      lastDialFailure: object.last_dial_failure,
+      lastDialSuccess: object?.last_dial_success ? Timestamp.fromAmino(object.last_dial_success) : undefined,
+      lastDialFailure: object?.last_dial_failure ? Timestamp.fromAmino(object.last_dial_failure) : undefined,
       dialFailures: object.dial_failures
     };
   },
   toAmino(message: PeerAddressInfo): PeerAddressInfoAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = omitDefault(message.address);
     obj.last_dial_success = message.lastDialSuccess;
     obj.last_dial_failure = message.lastDialFailure;
-    obj.dial_failures = message.dialFailures;
+    obj.dial_failures = omitDefault(message.dialFailures);
     return obj;
   },
   fromAminoMsg(object: PeerAddressInfoAminoMsg): PeerAddressInfo {

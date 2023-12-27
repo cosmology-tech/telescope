@@ -1,6 +1,6 @@
 import { Height, HeightSDKType } from "../../client/v1/client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.channel.v1";
 /**
  * State defines if a channel is in one of the following states:
@@ -409,15 +409,15 @@ export const Channel = {
   },
   toAmino(message: Channel): ChannelAmino {
     const obj: any = {};
-    obj.state = message.state;
-    obj.ordering = message.ordering;
+    obj.state = omitDefault(message.state);
+    obj.ordering = omitDefault(message.ordering);
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     if (message.connectionHops) {
       obj.connection_hops = message.connectionHops.map(e => e);
     } else {
       obj.connection_hops = [];
     }
-    obj.version = message.version;
+    obj.version = omitDefault(message.version);
     return obj;
   },
   fromAminoMsg(object: ChannelAminoMsg): Channel {
@@ -601,17 +601,17 @@ export const IdentifiedChannel = {
   },
   toAmino(message: IdentifiedChannel): IdentifiedChannelAmino {
     const obj: any = {};
-    obj.state = message.state;
-    obj.ordering = message.ordering;
+    obj.state = omitDefault(message.state);
+    obj.ordering = omitDefault(message.ordering);
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     if (message.connectionHops) {
       obj.connection_hops = message.connectionHops.map(e => e);
     } else {
       obj.connection_hops = [];
     }
-    obj.version = message.version;
-    obj.port_id = message.portId;
-    obj.channel_id = message.channelId;
+    obj.version = omitDefault(message.version);
+    obj.port_id = omitDefault(message.portId);
+    obj.channel_id = omitDefault(message.channelId);
     return obj;
   },
   fromAminoMsg(object: IdentifiedChannelAminoMsg): IdentifiedChannel {
@@ -717,8 +717,8 @@ export const Counterparty = {
   },
   toAmino(message: Counterparty): CounterpartyAmino {
     const obj: any = {};
-    obj.port_id = message.portId;
-    obj.channel_id = message.channelId;
+    obj.port_id = omitDefault(message.portId);
+    obj.channel_id = omitDefault(message.channelId);
     return obj;
   },
   fromAminoMsg(object: CounterpartyAminoMsg): Counterparty {
@@ -908,14 +908,14 @@ export const Packet = {
   },
   toAmino(message: Packet): PacketAmino {
     const obj: any = {};
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
-    obj.source_port = message.sourcePort;
-    obj.source_channel = message.sourceChannel;
-    obj.destination_port = message.destinationPort;
-    obj.destination_channel = message.destinationChannel;
+    obj.sequence = omitDefault(message.sequence);
+    obj.source_port = omitDefault(message.sourcePort);
+    obj.source_channel = omitDefault(message.sourceChannel);
+    obj.destination_port = omitDefault(message.destinationPort);
+    obj.destination_channel = omitDefault(message.destinationChannel);
     obj.data = message.data;
     obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : {};
-    obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
+    obj.timeout_timestamp = omitDefault(message.timeoutTimestamp);
     return obj;
   },
   fromAminoMsg(object: PacketAminoMsg): Packet {
@@ -1049,9 +1049,9 @@ export const PacketState = {
   },
   toAmino(message: PacketState): PacketStateAmino {
     const obj: any = {};
-    obj.port_id = message.portId;
-    obj.channel_id = message.channelId;
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.port_id = omitDefault(message.portId);
+    obj.channel_id = omitDefault(message.channelId);
+    obj.sequence = omitDefault(message.sequence);
     obj.data = message.data;
     return obj;
   },
@@ -1159,7 +1159,7 @@ export const Acknowledgement = {
   toAmino(message: Acknowledgement): AcknowledgementAmino {
     const obj: any = {};
     obj.result = message.result;
-    obj.error = message.error;
+    obj.error = omitDefault(message.error);
     return obj;
   },
   fromAminoMsg(object: AcknowledgementAminoMsg): Acknowledgement {

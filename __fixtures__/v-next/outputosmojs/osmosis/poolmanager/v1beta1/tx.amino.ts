@@ -46,7 +46,7 @@ export const AminoConverter = {
       return {
         sender: omitDefault(sender),
         routes: routes.map(el0 => ({
-          pool_id: el0.poolId.toString(),
+          pool_id: omitDefault(el0.poolId)?.toString?.(),
           token_out_denom: omitDefault(el0.tokenOutDenom)
         })),
         token_in: {
@@ -87,7 +87,7 @@ export const AminoConverter = {
       return {
         sender: omitDefault(sender),
         routes: routes.map(el0 => ({
-          pool_id: el0.poolId.toString(),
+          pool_id: omitDefault(el0.poolId)?.toString?.(),
           token_in_denom: omitDefault(el0.tokenInDenom)
         })),
         token_in_max_amount: omitDefault(tokenInMaxAmount),

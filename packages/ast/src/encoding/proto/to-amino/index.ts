@@ -120,38 +120,42 @@ export const toAminoJSONMethodFields = (context: ProtoParseContext, name: string
         }
 
 
+
+        let jsonTag = field.options?.['(gogoproto.jsontag)'] ?? field.options?.['(cosmos_proto.json_tag)'];
+        const omitEmpty = jsonTag == null || jsonTag === "" || jsonTag.includes("omitempty");
+
         // default types
         switch (field.type) {
             case 'string':
-                return [...m, toAminoJSON.string(args)];
+                return [...m, toAminoJSON.string(args, omitEmpty)];
             case 'double':
-                return [...m, toAminoJSON.double(args)];
+                return [...m, toAminoJSON.double(args, omitEmpty)];
             case 'float':
-                return [...m, toAminoJSON.float(args)];
+                return [...m, toAminoJSON.float(args, omitEmpty)];
             case 'bytes':
                 return [...m, toAminoJSON.bytes(args)];
             case 'bool':
-                return [...m, toAminoJSON.bool(args)];
+                return [...m, toAminoJSON.bool(args, omitEmpty)];
             case 'int32':
-                return [...m, toAminoJSON.int32(args)];
+                return [...m, toAminoJSON.int32(args, omitEmpty)];
             case 'sint32':
-                return [...m, toAminoJSON.sint32(args)];
+                return [...m, toAminoJSON.sint32(args, omitEmpty)];
             case 'uint32':
-                return [...m, toAminoJSON.uint32(args)];
+                return [...m, toAminoJSON.uint32(args, omitEmpty)];
             case 'fixed32':
-                return [...m, toAminoJSON.fixed32(args)];
+                return [...m, toAminoJSON.fixed32(args, omitEmpty)];
             case 'sfixed32':
-                return [...m, toAminoJSON.sfixed32(args)];
+                return [...m, toAminoJSON.sfixed32(args, omitEmpty)];
             case 'int64':
-                return [...m, toAminoJSON.int64(args)];
+                return [...m, toAminoJSON.int64(args, omitEmpty)];
             case 'sint64':
-                return [...m, toAminoJSON.sint64(args)];
+                return [...m, toAminoJSON.sint64(args, omitEmpty)];
             case 'uint64':
-                return [...m, toAminoJSON.uint64(args)];
+                return [...m, toAminoJSON.uint64(args, omitEmpty)];
             case 'fixed64':
-                return [...m, toAminoJSON.fixed64(args)];
+                return [...m, toAminoJSON.fixed64(args, omitEmpty)];
             case 'sfixed64':
-                return [...m, toAminoJSON.sfixed64(args)];
+                return [...m, toAminoJSON.sfixed64(args, omitEmpty)];
             case 'google.protobuf.Duration':
             case 'Duration':
                 return [...m, toAminoJSON.duration(args)];
@@ -161,7 +165,7 @@ export const toAminoJSONMethodFields = (context: ProtoParseContext, name: string
             default:
                 switch (field.parsedType.type) {
                     case 'Enum':
-                        return [...m, toAminoJSON.enum(args)];
+                        return [...m, toAminoJSON.enum(args, omitEmpty)];
                     case 'Type':
                         return [...m, toAminoJSON.type(args)];
                 }

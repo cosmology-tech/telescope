@@ -1,7 +1,7 @@
 import { MetricValueSet, MetricValueSetSDKType } from "./metric_value";
 import { Status, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Supported quota modes. */
 export enum QuotaOperation_QuotaMode {
@@ -427,9 +427,9 @@ export const AllocateQuotaRequest = {
   },
   toAmino(message: AllocateQuotaRequest): AllocateQuotaRequestAmino {
     const obj: any = {};
-    obj.service_name = message.serviceName;
+    obj.service_name = omitDefault(message.serviceName);
     obj.allocate_operation = message.allocateOperation ? QuotaOperation.toAmino(message.allocateOperation) : undefined;
-    obj.service_config_id = message.serviceConfigId;
+    obj.service_config_id = omitDefault(message.serviceConfigId);
     return obj;
   },
   fromAminoMsg(object: AllocateQuotaRequestAminoMsg): AllocateQuotaRequest {
@@ -528,8 +528,8 @@ export const QuotaOperation_LabelsEntry = {
   },
   toAmino(message: QuotaOperation_LabelsEntry): QuotaOperation_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: QuotaOperation_LabelsEntryAminoMsg): QuotaOperation_LabelsEntry {
@@ -730,9 +730,9 @@ export const QuotaOperation = {
   },
   toAmino(message: QuotaOperation): QuotaOperationAmino {
     const obj: any = {};
-    obj.operation_id = message.operationId;
-    obj.method_name = message.methodName;
-    obj.consumer_id = message.consumerId;
+    obj.operation_id = omitDefault(message.operationId);
+    obj.method_name = omitDefault(message.methodName);
+    obj.consumer_id = omitDefault(message.consumerId);
     obj.labels = {};
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {
@@ -744,7 +744,7 @@ export const QuotaOperation = {
     } else {
       obj.quota_metrics = [];
     }
-    obj.quota_mode = message.quotaMode;
+    obj.quota_mode = omitDefault(message.quotaMode);
     return obj;
   },
   fromAminoMsg(object: QuotaOperationAminoMsg): QuotaOperation {
@@ -888,7 +888,7 @@ export const AllocateQuotaResponse = {
   },
   toAmino(message: AllocateQuotaResponse): AllocateQuotaResponseAmino {
     const obj: any = {};
-    obj.operation_id = message.operationId;
+    obj.operation_id = omitDefault(message.operationId);
     if (message.allocateErrors) {
       obj.allocate_errors = message.allocateErrors.map(e => e ? QuotaError.toAmino(e) : undefined);
     } else {
@@ -899,7 +899,7 @@ export const AllocateQuotaResponse = {
     } else {
       obj.quota_metrics = [];
     }
-    obj.service_config_id = message.serviceConfigId;
+    obj.service_config_id = omitDefault(message.serviceConfigId);
     return obj;
   },
   fromAminoMsg(object: AllocateQuotaResponseAminoMsg): AllocateQuotaResponse {
@@ -1029,9 +1029,9 @@ export const QuotaError = {
   },
   toAmino(message: QuotaError): QuotaErrorAmino {
     const obj: any = {};
-    obj.code = message.code;
-    obj.subject = message.subject;
-    obj.description = message.description;
+    obj.code = omitDefault(message.code);
+    obj.subject = omitDefault(message.subject);
+    obj.description = omitDefault(message.description);
     obj.status = message.status ? Status.toAmino(message.status) : undefined;
     return obj;
   },

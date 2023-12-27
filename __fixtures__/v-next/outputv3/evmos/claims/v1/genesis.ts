@@ -2,7 +2,7 @@ import { ClaimsRecordAddress, ClaimsRecordAddressAmino, ClaimsRecordAddressSDKTy
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, omitDefault } from "../../../helpers";
 export const protobufPackage = "evmos.claims.v1";
 /** GenesisState define the claims module's genesis state. */
 export interface GenesisState {
@@ -348,7 +348,7 @@ export const Params = {
   fromAmino(object: ParamsAmino): Params {
     return {
       enableClaims: object.enable_claims,
-      airdropStartTime: object.airdrop_start_time,
+      airdropStartTime: object?.airdrop_start_time ? Timestamp.fromAmino(object.airdrop_start_time) : undefined,
       durationUntilDecay: object?.duration_until_decay ? Duration.fromAmino(object.duration_until_decay) : undefined,
       durationOfDecay: object?.duration_of_decay ? Duration.fromAmino(object.duration_of_decay) : undefined,
       claimsDenom: object.claims_denom,
@@ -358,11 +358,11 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.enable_claims = message.enableClaims;
+    obj.enable_claims = omitDefault(message.enableClaims);
     obj.airdrop_start_time = message.airdropStartTime;
     obj.duration_until_decay = message.durationUntilDecay ? Duration.toAmino(message.durationUntilDecay) : undefined;
     obj.duration_of_decay = message.durationOfDecay ? Duration.toAmino(message.durationOfDecay) : undefined;
-    obj.claims_denom = message.claimsDenom;
+    obj.claims_denom = omitDefault(message.claimsDenom);
     if (message.authorizedChannels) {
       obj.authorized_channels = message.authorizedChannels.map(e => e);
     } else {

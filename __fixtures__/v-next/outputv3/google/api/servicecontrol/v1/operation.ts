@@ -3,7 +3,7 @@ import { MetricValueSet, MetricValueSetAmino, MetricValueSetSDKType } from "./me
 import { LogEntry, LogEntryAmino, LogEntrySDKType } from "./log_entry";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Defines the importance of the data contained in the operation. */
 export enum Operation_Importance {
@@ -328,8 +328,8 @@ export const Operation_LabelsEntry = {
   },
   toAmino(message: Operation_LabelsEntry): Operation_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: Operation_LabelsEntryAminoMsg): Operation_LabelsEntry {
@@ -567,8 +567,8 @@ export const Operation = {
       operationId: object.operation_id,
       operationName: object.operation_name,
       consumerId: object.consumer_id,
-      startTime: object.start_time,
-      endTime: object.end_time,
+      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      endTime: object?.end_time ? Timestamp.fromAmino(object.end_time) : undefined,
       labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
         [key: string]: string;
       }>((acc, [key, value]) => {
@@ -583,9 +583,9 @@ export const Operation = {
   },
   toAmino(message: Operation): OperationAmino {
     const obj: any = {};
-    obj.operation_id = message.operationId;
-    obj.operation_name = message.operationName;
-    obj.consumer_id = message.consumerId;
+    obj.operation_id = omitDefault(message.operationId);
+    obj.operation_name = omitDefault(message.operationName);
+    obj.consumer_id = omitDefault(message.consumerId);
     obj.start_time = message.startTime;
     obj.end_time = message.endTime;
     obj.labels = {};
@@ -604,7 +604,7 @@ export const Operation = {
     } else {
       obj.log_entries = [];
     }
-    obj.importance = message.importance;
+    obj.importance = omitDefault(message.importance);
     if (message.extensions) {
       obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
     } else {

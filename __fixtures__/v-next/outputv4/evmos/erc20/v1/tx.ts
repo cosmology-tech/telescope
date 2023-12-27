@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
 /** MsgConvertCoin defines a Msg to convert a native Cosmos coin to a ERC20 token */
 export interface MsgConvertCoin {
@@ -150,8 +150,8 @@ export const MsgConvertCoin = {
   toAmino(message: MsgConvertCoin): MsgConvertCoinAmino {
     const obj: any = {};
     obj.coin = message.coin ? Coin.toAmino(message.coin) : undefined;
-    obj.receiver = message.receiver;
-    obj.sender = message.sender;
+    obj.receiver = omitDefault(message.receiver);
+    obj.sender = omitDefault(message.sender);
     return obj;
   },
   fromAminoMsg(object: MsgConvertCoinAminoMsg): MsgConvertCoin {
@@ -346,10 +346,10 @@ export const MsgConvertERC20 = {
   },
   toAmino(message: MsgConvertERC20): MsgConvertERC20Amino {
     const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    obj.amount = message.amount;
-    obj.receiver = message.receiver;
-    obj.sender = message.sender;
+    obj.contract_address = omitDefault(message.contractAddress);
+    obj.amount = omitDefault(message.amount);
+    obj.receiver = omitDefault(message.receiver);
+    obj.sender = omitDefault(message.sender);
     return obj;
   },
   fromAminoMsg(object: MsgConvertERC20AminoMsg): MsgConvertERC20 {

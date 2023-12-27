@@ -84,12 +84,12 @@ export const AminoConverter = {
     }: MsgCreateBid): MsgCreateBidAminoType["value"] => {
       return {
         order: {
-          owner: omitDefault(order.owner),
-          dseq: order.dseq.toString(),
+          owner: order.owner,
+          dseq: order.dseq?.toString?.(),
           gseq: order.gseq,
           oseq: order.oseq
         },
-        provider: omitDefault(provider),
+        provider: provider,
         price: {
           denom: omitDefault(price.denom),
           amount: omitDefault(price.amount)
@@ -132,11 +132,11 @@ export const AminoConverter = {
     }: MsgCloseBid): MsgCloseBidAminoType["value"] => {
       return {
         bid_id: {
-          owner: omitDefault(bidId.owner),
-          dseq: bidId.dseq.toString(),
+          owner: bidId.owner,
+          dseq: bidId.dseq?.toString?.(),
           gseq: bidId.gseq,
           oseq: bidId.oseq,
-          provider: omitDefault(bidId.provider)
+          provider: bidId.provider
         }
       };
     },
@@ -161,11 +161,11 @@ export const AminoConverter = {
     }: MsgWithdrawLease): MsgWithdrawLeaseAminoType["value"] => {
       return {
         bid_id: {
-          owner: omitDefault(bidId.owner),
-          dseq: bidId.dseq.toString(),
+          owner: bidId.owner,
+          dseq: bidId.dseq?.toString?.(),
           gseq: bidId.gseq,
           oseq: bidId.oseq,
-          provider: omitDefault(bidId.provider)
+          provider: bidId.provider
         }
       };
     },
@@ -190,11 +190,11 @@ export const AminoConverter = {
     }: MsgCreateLease): MsgCreateLeaseAminoType["value"] => {
       return {
         bid_id: {
-          owner: omitDefault(bidId.owner),
-          dseq: bidId.dseq.toString(),
+          owner: bidId.owner,
+          dseq: bidId.dseq?.toString?.(),
           gseq: bidId.gseq,
           oseq: bidId.oseq,
-          provider: omitDefault(bidId.provider)
+          provider: bidId.provider
         }
       };
     },
@@ -219,11 +219,11 @@ export const AminoConverter = {
     }: MsgCloseLease): MsgCloseLeaseAminoType["value"] => {
       return {
         lease_id: {
-          owner: omitDefault(leaseId.owner),
-          dseq: leaseId.dseq.toString(),
+          owner: leaseId.owner,
+          dseq: leaseId.dseq?.toString?.(),
           gseq: leaseId.gseq,
           oseq: leaseId.oseq,
-          provider: omitDefault(leaseId.provider)
+          provider: leaseId.provider
         }
       };
     },

@@ -1,6 +1,6 @@
 import { ValidatorPreference, ValidatorPreferenceSDKType } from "./state";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.valsetpref.v1beta1";
 /** Request type for UserValidatorPreferences. */
 export interface UserValidatorPreferencesRequest {
@@ -86,7 +86,7 @@ export const UserValidatorPreferencesRequest = {
   },
   toAmino(message: UserValidatorPreferencesRequest): UserValidatorPreferencesRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = omitDefault(message.address);
     return obj;
   },
   fromAminoMsg(object: UserValidatorPreferencesRequestAminoMsg): UserValidatorPreferencesRequest {

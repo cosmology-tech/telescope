@@ -1,6 +1,6 @@
 import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorSDKType } from "./label";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * A description of a log type. Example in YAML format:
@@ -205,14 +205,14 @@ export const LogDescriptor = {
   },
   toAmino(message: LogDescriptor): LogDescriptorAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     if (message.labels) {
       obj.labels = message.labels.map(e => e ? LabelDescriptor.toAmino(e) : undefined);
     } else {
       obj.labels = [];
     }
-    obj.description = message.description;
-    obj.display_name = message.displayName;
+    obj.description = omitDefault(message.description);
+    obj.display_name = omitDefault(message.displayName);
     return obj;
   },
   fromAminoMsg(object: LogDescriptorAminoMsg): LogDescriptor {

@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "google.api";
 /** Value types that can be used as label values. */
 export enum LabelDescriptor_ValueType {
@@ -152,9 +152,9 @@ export const LabelDescriptor = {
   },
   toAmino(message: LabelDescriptor): LabelDescriptorAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value_type = message.valueType;
-    obj.description = message.description;
+    obj.key = omitDefault(message.key);
+    obj.value_type = omitDefault(message.valueType);
+    obj.description = omitDefault(message.description);
     return obj;
   },
   fromAminoMsg(object: LabelDescriptorAminoMsg): LabelDescriptor {

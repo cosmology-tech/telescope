@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, isObject } from "../../helpers";
+import { isSet, DeepPartial, omitDefault, isObject } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * `NullValue` is a singleton enumeration to represent the null value for the
@@ -287,7 +287,7 @@ export const Struct_FieldsEntry = {
   },
   toAmino(message: Struct_FieldsEntry): Struct_FieldsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = omitDefault(message.key);
     obj.value = message.value ? Value.toAmino(message.value) : undefined;
     return obj;
   },
@@ -556,10 +556,10 @@ export const Value = {
   },
   toAmino(message: Value): ValueAmino {
     const obj: any = {};
-    obj.null_value = message.nullValue;
-    obj.number_value = message.numberValue;
-    obj.string_value = message.stringValue;
-    obj.bool_value = message.boolValue;
+    obj.null_value = omitDefault(message.nullValue);
+    obj.number_value = omitDefault(message.numberValue);
+    obj.string_value = omitDefault(message.stringValue);
+    obj.bool_value = omitDefault(message.boolValue);
     obj.struct_value = message.structValue ? Struct.toAmino(message.structValue) : undefined;
     obj.list_value = message.listValue ? ListValue.toAmino(message.listValue) : undefined;
     return obj;

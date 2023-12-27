@@ -2,7 +2,7 @@ import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { DistrInfo, DistrInfoSDKType, Params, ParamsSDKType } from "./incentives";
 import { Gauge, GaugeSDKType } from "../../incentives/gauge";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 export interface QueryGaugeIdsRequest {
   poolId: bigint;
@@ -145,7 +145,7 @@ export const QueryGaugeIdsRequest = {
   },
   toAmino(message: QueryGaugeIdsRequest): QueryGaugeIdsRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.pool_id = omitDefault(message.poolId);
     return obj;
   },
   fromAminoMsg(object: QueryGaugeIdsRequestAminoMsg): QueryGaugeIdsRequest {
@@ -373,9 +373,9 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   },
   toAmino(message: QueryGaugeIdsResponse_GaugeIdWithDuration): QueryGaugeIdsResponse_GaugeIdWithDurationAmino {
     const obj: any = {};
-    obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
+    obj.gauge_id = omitDefault(message.gaugeId);
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
-    obj.gauge_incentive_percentage = message.gaugeIncentivePercentage;
+    obj.gauge_incentive_percentage = omitDefault(message.gaugeIncentivePercentage);
     return obj;
   },
   fromAminoMsg(object: QueryGaugeIdsResponse_GaugeIdWithDurationAminoMsg): QueryGaugeIdsResponse_GaugeIdWithDuration {
@@ -1085,9 +1085,9 @@ export const IncentivizedPool = {
   },
   toAmino(message: IncentivizedPool): IncentivizedPoolAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.pool_id = omitDefault(message.poolId);
     obj.lockable_duration = message.lockableDuration ? Duration.toAmino(message.lockableDuration) : undefined;
-    obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
+    obj.gauge_id = omitDefault(message.gaugeId);
     return obj;
   },
   fromAminoMsg(object: IncentivizedPoolAminoMsg): IncentivizedPool {

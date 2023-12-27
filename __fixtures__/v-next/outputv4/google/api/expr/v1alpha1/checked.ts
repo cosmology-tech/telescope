@@ -2,7 +2,7 @@ import { SourceInfo, SourceInfoSDKType, Expr, ExprSDKType, Constant, ConstantSDK
 import { Empty, EmptySDKType } from "../../../protobuf/empty";
 import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /** CEL primitive types. */
 export enum Type_PrimitiveType {
@@ -607,7 +607,7 @@ export const CheckedExpr_ReferenceMapEntry = {
   },
   toAmino(message: CheckedExpr_ReferenceMapEntry): CheckedExpr_ReferenceMapEntryAmino {
     const obj: any = {};
-    obj.key = message.key ? message.key.toString() : undefined;
+    obj.key = omitDefault(message.key);
     obj.value = message.value ? Reference.toAmino(message.value) : undefined;
     return obj;
   },
@@ -705,7 +705,7 @@ export const CheckedExpr_TypeMapEntry = {
   },
   toAmino(message: CheckedExpr_TypeMapEntry): CheckedExpr_TypeMapEntryAmino {
     const obj: any = {};
-    obj.key = message.key ? message.key.toString() : undefined;
+    obj.key = omitDefault(message.key);
     obj.value = message.value ? Type.toAmino(message.value) : undefined;
     return obj;
   },
@@ -945,7 +945,7 @@ export const CheckedExpr = {
       });
     }
     obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined;
-    obj.expr_version = message.exprVersion;
+    obj.expr_version = omitDefault(message.exprVersion);
     obj.expr = message.expr ? Expr.toAmino(message.expr) : undefined;
     return obj;
   },
@@ -1215,15 +1215,15 @@ export const Type = {
   toAmino(message: Type): TypeAmino {
     const obj: any = {};
     obj.dyn = message.dyn ? Empty.toAmino(message.dyn) : undefined;
-    obj.null = message.null;
-    obj.primitive = message.primitive;
-    obj.wrapper = message.wrapper;
-    obj.well_known = message.wellKnown;
+    obj.null = omitDefault(message.null);
+    obj.primitive = omitDefault(message.primitive);
+    obj.wrapper = omitDefault(message.wrapper);
+    obj.well_known = omitDefault(message.wellKnown);
     obj.list_type = message.listType ? Type_ListType.toAmino(message.listType) : undefined;
     obj.map_type = message.mapType ? Type_MapType.toAmino(message.mapType) : undefined;
     obj.function = message.function ? Type_FunctionType.toAmino(message.function) : undefined;
-    obj.message_type = message.messageType;
-    obj.type_param = message.typeParam;
+    obj.message_type = omitDefault(message.messageType);
+    obj.type_param = omitDefault(message.typeParam);
     obj.type = message.type ? Type.toAmino(message.type) : undefined;
     obj.error = message.error ? Empty.toAmino(message.error) : undefined;
     obj.abstract_type = message.abstractType ? Type_AbstractType.toAmino(message.abstractType) : undefined;
@@ -1642,7 +1642,7 @@ export const Type_AbstractType = {
   },
   toAmino(message: Type_AbstractType): Type_AbstractTypeAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     if (message.parameterTypes) {
       obj.parameter_types = message.parameterTypes.map(e => e ? Type.toAmino(e) : undefined);
     } else {
@@ -1765,7 +1765,7 @@ export const Decl = {
   },
   toAmino(message: Decl): DeclAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     obj.ident = message.ident ? Decl_IdentDecl.toAmino(message.ident) : undefined;
     obj.function = message.function ? Decl_FunctionDecl.toAmino(message.function) : undefined;
     return obj;
@@ -1887,7 +1887,7 @@ export const Decl_IdentDecl = {
     const obj: any = {};
     obj.type = message.type ? Type.toAmino(message.type) : undefined;
     obj.value = message.value ? Constant.toAmino(message.value) : undefined;
-    obj.doc = message.doc;
+    obj.doc = omitDefault(message.doc);
     return obj;
   },
   fromAminoMsg(object: Decl_IdentDeclAminoMsg): Decl_IdentDecl {
@@ -2159,7 +2159,7 @@ export const Decl_FunctionDecl_Overload = {
   },
   toAmino(message: Decl_FunctionDecl_Overload): Decl_FunctionDecl_OverloadAmino {
     const obj: any = {};
-    obj.overload_id = message.overloadId;
+    obj.overload_id = omitDefault(message.overloadId);
     if (message.params) {
       obj.params = message.params.map(e => e ? Type.toAmino(e) : undefined);
     } else {
@@ -2171,8 +2171,8 @@ export const Decl_FunctionDecl_Overload = {
       obj.type_params = [];
     }
     obj.result_type = message.resultType ? Type.toAmino(message.resultType) : undefined;
-    obj.is_instance_function = message.isInstanceFunction;
-    obj.doc = message.doc;
+    obj.is_instance_function = omitDefault(message.isInstanceFunction);
+    obj.doc = omitDefault(message.doc);
     return obj;
   },
   fromAminoMsg(object: Decl_FunctionDecl_OverloadAminoMsg): Decl_FunctionDecl_Overload {
@@ -2296,7 +2296,7 @@ export const Reference = {
   },
   toAmino(message: Reference): ReferenceAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     if (message.overloadId) {
       obj.overload_id = message.overloadId.map(e => e);
     } else {

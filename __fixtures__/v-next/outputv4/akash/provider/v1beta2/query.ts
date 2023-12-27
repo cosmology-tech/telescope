@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Provider, ProviderSDKType } from "./provider";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { isSet, DeepPartial, Exact, omitDefault } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta2";
 /** QueryProvidersRequest is request type for the Query/Providers RPC method */
 export interface QueryProvidersRequest {
@@ -319,7 +319,7 @@ export const QueryProviderRequest = {
   },
   toAmino(message: QueryProviderRequest): QueryProviderRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = omitDefault(message.owner);
     return obj;
   },
   fromAminoMsg(object: QueryProviderRequestAminoMsg): QueryProviderRequest {

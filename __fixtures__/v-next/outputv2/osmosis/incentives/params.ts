@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
 /** Params holds parameters for the incentives module */
 export interface Params {
@@ -92,7 +92,7 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.distr_epoch_identifier = message.distrEpochIdentifier;
+    obj.distr_epoch_identifier = omitDefault(message.distrEpochIdentifier);
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

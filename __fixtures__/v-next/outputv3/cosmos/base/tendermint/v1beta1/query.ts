@@ -4,7 +4,7 @@ import { BlockID, BlockIDAmino, BlockIDSDKType } from "../../../../tendermint/ty
 import { Block, BlockAmino, BlockSDKType } from "../../../../tendermint/types/block";
 import { NodeInfo, NodeInfoAmino, NodeInfoSDKType } from "../../../../tendermint/p2p/types";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.tendermint.v1beta1";
 /** GetValidatorSetByHeightRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightRequest {
@@ -444,7 +444,7 @@ export const GetValidatorSetByHeightRequest = {
   },
   toAmino(message: GetValidatorSetByHeightRequest): GetValidatorSetByHeightRequestAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.height = omitDefault(message.height);
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -571,7 +571,7 @@ export const GetValidatorSetByHeightResponse = {
   },
   toAmino(message: GetValidatorSetByHeightResponse): GetValidatorSetByHeightResponseAmino {
     const obj: any = {};
-    obj.block_height = message.blockHeight ? message.blockHeight.toString() : undefined;
+    obj.block_height = omitDefault(message.blockHeight);
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
     } else {
@@ -793,7 +793,7 @@ export const GetLatestValidatorSetResponse = {
   },
   toAmino(message: GetLatestValidatorSetResponse): GetLatestValidatorSetResponseAmino {
     const obj: any = {};
-    obj.block_height = message.blockHeight ? message.blockHeight.toString() : undefined;
+    obj.block_height = omitDefault(message.blockHeight);
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
     } else {
@@ -932,10 +932,10 @@ export const Validator = {
   },
   toAmino(message: Validator): ValidatorAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = omitDefault(message.address);
     obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey) : undefined;
-    obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
-    obj.proposer_priority = message.proposerPriority ? message.proposerPriority.toString() : undefined;
+    obj.voting_power = omitDefault(message.votingPower);
+    obj.proposer_priority = omitDefault(message.proposerPriority);
     return obj;
   },
   fromAminoMsg(object: ValidatorAminoMsg): Validator {
@@ -1025,7 +1025,7 @@ export const GetBlockByHeightRequest = {
   },
   toAmino(message: GetBlockByHeightRequest): GetBlockByHeightRequestAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.height = omitDefault(message.height);
     return obj;
   },
   fromAminoMsg(object: GetBlockByHeightRequestAminoMsg): GetBlockByHeightRequest {
@@ -1467,7 +1467,7 @@ export const GetSyncingResponse = {
   },
   toAmino(message: GetSyncingResponse): GetSyncingResponseAmino {
     const obj: any = {};
-    obj.syncing = message.syncing;
+    obj.syncing = omitDefault(message.syncing);
     return obj;
   },
   fromAminoMsg(object: GetSyncingResponseAminoMsg): GetSyncingResponse {
@@ -1831,18 +1831,18 @@ export const VersionInfo = {
   },
   toAmino(message: VersionInfo): VersionInfoAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.app_name = message.appName;
-    obj.version = message.version;
-    obj.git_commit = message.gitCommit;
-    obj.build_tags = message.buildTags;
-    obj.go_version = message.goVersion;
+    obj.name = omitDefault(message.name);
+    obj.app_name = omitDefault(message.appName);
+    obj.version = omitDefault(message.version);
+    obj.git_commit = omitDefault(message.gitCommit);
+    obj.build_tags = omitDefault(message.buildTags);
+    obj.go_version = omitDefault(message.goVersion);
     if (message.buildDeps) {
       obj.build_deps = message.buildDeps.map(e => e ? Module.toAmino(e) : undefined);
     } else {
       obj.build_deps = [];
     }
-    obj.cosmos_sdk_version = message.cosmosSdkVersion;
+    obj.cosmos_sdk_version = omitDefault(message.cosmosSdkVersion);
     return obj;
   },
   fromAminoMsg(object: VersionInfoAminoMsg): VersionInfo {
@@ -1956,9 +1956,9 @@ export const Module = {
   },
   toAmino(message: Module): ModuleAmino {
     const obj: any = {};
-    obj.path = message.path;
-    obj.version = message.version;
-    obj.sum = message.sum;
+    obj.path = omitDefault(message.path);
+    obj.version = omitDefault(message.version);
+    obj.sum = omitDefault(message.sum);
     return obj;
   },
   fromAminoMsg(object: ModuleAminoMsg): Module {

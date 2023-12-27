@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
+import { DeepPartial, isSet, omitDefault } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * `Authentication` defines the authentication configuration for API methods
@@ -821,9 +821,9 @@ export const AuthenticationRule = {
   },
   toAmino(message: AuthenticationRule): AuthenticationRuleAmino {
     const obj: any = {};
-    obj.selector = message.selector;
+    obj.selector = omitDefault(message.selector);
     obj.oauth = message.oauth ? OAuthRequirements.toAmino(message.oauth) : undefined;
-    obj.allow_without_credential = message.allowWithoutCredential;
+    obj.allow_without_credential = omitDefault(message.allowWithoutCredential);
     if (message.requirements) {
       obj.requirements = message.requirements.map(e => e ? AuthRequirement.toAmino(e) : undefined);
     } else {
@@ -935,9 +935,9 @@ export const JwtLocation = {
   },
   toAmino(message: JwtLocation): JwtLocationAmino {
     const obj: any = {};
-    obj.header = message.header;
-    obj.query = message.query;
-    obj.value_prefix = message.valuePrefix;
+    obj.header = omitDefault(message.header);
+    obj.query = omitDefault(message.query);
+    obj.value_prefix = omitDefault(message.valuePrefix);
     return obj;
   },
   fromAminoMsg(object: JwtLocationAminoMsg): JwtLocation {
@@ -1091,11 +1091,11 @@ export const AuthProvider = {
   },
   toAmino(message: AuthProvider): AuthProviderAmino {
     const obj: any = {};
-    obj.id = message.id;
-    obj.issuer = message.issuer;
-    obj.jwks_uri = message.jwksUri;
-    obj.audiences = message.audiences;
-    obj.authorization_url = message.authorizationUrl;
+    obj.id = omitDefault(message.id);
+    obj.issuer = omitDefault(message.issuer);
+    obj.jwks_uri = omitDefault(message.jwksUri);
+    obj.audiences = omitDefault(message.audiences);
+    obj.authorization_url = omitDefault(message.authorizationUrl);
     if (message.jwtLocations) {
       obj.jwt_locations = message.jwtLocations.map(e => e ? JwtLocation.toAmino(e) : undefined);
     } else {
@@ -1181,7 +1181,7 @@ export const OAuthRequirements = {
   },
   toAmino(message: OAuthRequirements): OAuthRequirementsAmino {
     const obj: any = {};
-    obj.canonical_scopes = message.canonicalScopes;
+    obj.canonical_scopes = omitDefault(message.canonicalScopes);
     return obj;
   },
   fromAminoMsg(object: OAuthRequirementsAminoMsg): OAuthRequirements {
@@ -1275,8 +1275,8 @@ export const AuthRequirement = {
   },
   toAmino(message: AuthRequirement): AuthRequirementAmino {
     const obj: any = {};
-    obj.provider_id = message.providerId;
-    obj.audiences = message.audiences;
+    obj.provider_id = omitDefault(message.providerId);
+    obj.audiences = omitDefault(message.audiences);
     return obj;
   },
   fromAminoMsg(object: AuthRequirementAminoMsg): AuthRequirement {

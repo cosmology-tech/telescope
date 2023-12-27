@@ -1,6 +1,6 @@
 import { Expr, ExprAmino, ExprSDKType } from "./expr";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
 /** A declaration. */
 export interface Decl {
@@ -274,9 +274,9 @@ export const Decl = {
   },
   toAmino(message: Decl): DeclAmino {
     const obj: any = {};
-    obj.id = message.id;
-    obj.name = message.name;
-    obj.doc = message.doc;
+    obj.id = omitDefault(message.id);
+    obj.name = omitDefault(message.name);
+    obj.doc = omitDefault(message.doc);
     obj.ident = message.ident ? IdentDecl.toAmino(message.ident) : undefined;
     obj.function = message.function ? FunctionDecl.toAmino(message.function) : undefined;
     return obj;
@@ -393,8 +393,8 @@ export const DeclType = {
   },
   toAmino(message: DeclType): DeclTypeAmino {
     const obj: any = {};
-    obj.id = message.id;
-    obj.type = message.type;
+    obj.id = omitDefault(message.id);
+    obj.type = omitDefault(message.type);
     if (message.typeParams) {
       obj.type_params = message.typeParams.map(e => e ? DeclType.toAmino(e) : undefined);
     } else {
@@ -621,7 +621,7 @@ export const FunctionDecl = {
       obj.args = [];
     }
     obj.return_type = message.returnType ? DeclType.toAmino(message.returnType) : undefined;
-    obj.receiver_function = message.receiverFunction;
+    obj.receiver_function = omitDefault(message.receiverFunction);
     return obj;
   },
   fromAminoMsg(object: FunctionDeclAminoMsg): FunctionDecl {

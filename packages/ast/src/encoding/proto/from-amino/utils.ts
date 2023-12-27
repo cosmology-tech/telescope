@@ -327,7 +327,7 @@ export const fromAminoJSON = {
     },
 
     timestamp(args: FromAminoJSONMethod) {
-        return fromAminoJSON.scalar(args);
+        return fromAminoJSON.type(args);
     },
 
     //  labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{

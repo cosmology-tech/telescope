@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.poolmanager.v1beta1";
 /** PoolType is an enumeration of all supported pool types. */
 export enum PoolType {
@@ -160,8 +160,8 @@ export const ModuleRoute = {
   },
   toAmino(message: ModuleRoute): ModuleRouteAmino {
     const obj: any = {};
-    obj.pool_type = message.poolType;
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.pool_type = omitDefault(message.poolType);
+    obj.pool_id = omitDefault(message.poolId);
     return obj;
   },
   fromAminoMsg(object: ModuleRouteAminoMsg): ModuleRoute {

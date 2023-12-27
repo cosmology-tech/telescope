@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.snapshots.v1beta1";
 /** Snapshot contains Tendermint state sync snapshot info. */
 export interface Snapshot {
@@ -348,9 +348,9 @@ export const Snapshot = {
   },
   toAmino(message: Snapshot): SnapshotAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.format = message.format;
-    obj.chunks = message.chunks;
+    obj.height = omitDefault(message.height);
+    obj.format = omitDefault(message.format);
+    obj.chunks = omitDefault(message.chunks);
     obj.hash = message.hash;
     obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined;
     return obj;
@@ -710,7 +710,7 @@ export const SnapshotStoreItem = {
   },
   toAmino(message: SnapshotStoreItem): SnapshotStoreItemAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     return obj;
   },
   fromAminoMsg(object: SnapshotStoreItemAminoMsg): SnapshotStoreItem {
@@ -841,8 +841,8 @@ export const SnapshotIAVLItem = {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
-    obj.version = message.version ? message.version.toString() : undefined;
-    obj.height = message.height;
+    obj.version = omitDefault(message.version);
+    obj.height = omitDefault(message.height);
     return obj;
   },
   fromAminoMsg(object: SnapshotIAVLItemAminoMsg): SnapshotIAVLItem {
@@ -943,8 +943,8 @@ export const SnapshotExtensionMeta = {
   },
   toAmino(message: SnapshotExtensionMeta): SnapshotExtensionMetaAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.format = message.format;
+    obj.name = omitDefault(message.name);
+    obj.format = omitDefault(message.format);
     return obj;
   },
   fromAminoMsg(object: SnapshotExtensionMetaAminoMsg): SnapshotExtensionMeta {

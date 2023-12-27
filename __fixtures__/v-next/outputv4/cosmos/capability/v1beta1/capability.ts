@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.capability.v1beta1";
 /**
  * Capability defines an implementation of an object capability. The index
@@ -114,7 +114,7 @@ export const Capability = {
   },
   toAmino(message: Capability): CapabilityAmino {
     const obj: any = {};
-    obj.index = message.index ? message.index.toString() : undefined;
+    obj.index = omitDefault(message.index);
     return obj;
   },
   fromAminoMsg(object: CapabilityAminoMsg): Capability {
@@ -220,8 +220,8 @@ export const Owner = {
   },
   toAmino(message: Owner): OwnerAmino {
     const obj: any = {};
-    obj.module = message.module;
-    obj.name = message.name;
+    obj.module = omitDefault(message.module);
+    obj.name = omitDefault(message.name);
     return obj;
   },
   fromAminoMsg(object: OwnerAminoMsg): Owner {

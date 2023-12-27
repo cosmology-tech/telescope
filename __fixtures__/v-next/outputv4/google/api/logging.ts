@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
+import { DeepPartial, isSet, omitDefault } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Logging configuration of the service.
@@ -323,7 +323,7 @@ export const Logging_LoggingDestination = {
   },
   toAmino(message: Logging_LoggingDestination): Logging_LoggingDestinationAmino {
     const obj: any = {};
-    obj.monitored_resource = message.monitoredResource;
+    obj.monitored_resource = omitDefault(message.monitoredResource);
     if (message.logs) {
       obj.logs = message.logs.map(e => e);
     } else {

@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
+import { DeepPartial, isSet, omitDefault } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Billing related configuration of the service.
@@ -292,7 +292,7 @@ export const Billing_BillingDestination = {
   },
   toAmino(message: Billing_BillingDestination): Billing_BillingDestinationAmino {
     const obj: any = {};
-    obj.monitored_resource = message.monitoredResource;
+    obj.monitored_resource = omitDefault(message.monitoredResource);
     if (message.metrics) {
       obj.metrics = message.metrics.map(e => e);
     } else {

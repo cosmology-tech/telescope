@@ -1,6 +1,6 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet } from "../../../helpers";
+import { DeepPartial, isSet, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.app.v1alpha1";
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
@@ -281,7 +281,7 @@ export const ModuleConfig = {
   },
   toAmino(message: ModuleConfig): ModuleConfigAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     obj.config = message.config ? Any.toAmino(message.config) : undefined;
     return obj;
   },

@@ -2,7 +2,7 @@ import { PlacementRequirements, PlacementRequirementsSDKType } from "../../base/
 import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta1/resource";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, Exact } from "../../../helpers";
+import { isSet, Exact, omitDefault } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** State is an enum which refers to state of group */
 export enum Group_State {
@@ -733,7 +733,7 @@ export const GroupID = {
   toAmino(message: GroupID): GroupIDAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.dseq = message.dseq;
     obj.gseq = message.gseq;
     return obj;
   },
@@ -1005,7 +1005,7 @@ export const Group = {
     obj.group_id = message.groupId ? GroupID.toAmino(message.groupId) : undefined;
     obj.state = message.state;
     obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec) : undefined;
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    obj.created_at = omitDefault(message.createdAt);
     return obj;
   },
   fromAminoMsg(object: GroupAminoMsg): Group {

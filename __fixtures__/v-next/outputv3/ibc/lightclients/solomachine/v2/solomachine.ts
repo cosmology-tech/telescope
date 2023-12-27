@@ -2,7 +2,7 @@ import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/proto
 import { ConnectionEnd, ConnectionEndAmino, ConnectionEndSDKType } from "../../../core/connection/v1/connection";
 import { Channel, ChannelAmino, ChannelSDKType } from "../../../core/channel/v1/channel";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.lightclients.solomachine.v2";
 /**
  * DataType defines the type of solo machine proof being created. This is done
@@ -753,10 +753,10 @@ export const ClientState = {
   },
   toAmino(message: ClientState): ClientStateAmino {
     const obj: any = {};
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
-    obj.is_frozen = message.isFrozen;
+    obj.sequence = omitDefault(message.sequence);
+    obj.is_frozen = omitDefault(message.isFrozen);
     obj.consensus_state = message.consensusState ? ConsensusState.toAmino(message.consensusState) : undefined;
-    obj.allow_update_after_proposal = message.allowUpdateAfterProposal;
+    obj.allow_update_after_proposal = omitDefault(message.allowUpdateAfterProposal);
     return obj;
   },
   fromAminoMsg(object: ClientStateAminoMsg): ClientState {
@@ -875,8 +875,8 @@ export const ConsensusState = {
   toAmino(message: ConsensusState): ConsensusStateAmino {
     const obj: any = {};
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined;
-    obj.diversifier = message.diversifier;
-    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
+    obj.diversifier = omitDefault(message.diversifier);
+    obj.timestamp = omitDefault(message.timestamp);
     return obj;
   },
   fromAminoMsg(object: ConsensusStateAminoMsg): ConsensusState {
@@ -1022,11 +1022,11 @@ export const Header = {
   },
   toAmino(message: Header): HeaderAmino {
     const obj: any = {};
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
-    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
+    obj.sequence = omitDefault(message.sequence);
+    obj.timestamp = omitDefault(message.timestamp);
     obj.signature = message.signature;
     obj.new_public_key = message.newPublicKey ? Any.toAmino(message.newPublicKey) : undefined;
-    obj.new_diversifier = message.newDiversifier;
+    obj.new_diversifier = omitDefault(message.newDiversifier);
     return obj;
   },
   fromAminoMsg(object: HeaderAminoMsg): Header {
@@ -1159,8 +1159,8 @@ export const Misbehaviour = {
   },
   toAmino(message: Misbehaviour): MisbehaviourAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.client_id = omitDefault(message.clientId);
+    obj.sequence = omitDefault(message.sequence);
     obj.signature_one = message.signatureOne ? SignatureAndData.toAmino(message.signatureOne) : undefined;
     obj.signature_two = message.signatureTwo ? SignatureAndData.toAmino(message.signatureTwo) : undefined;
     return obj;
@@ -1292,9 +1292,9 @@ export const SignatureAndData = {
   toAmino(message: SignatureAndData): SignatureAndDataAmino {
     const obj: any = {};
     obj.signature = message.signature;
-    obj.data_type = message.dataType;
+    obj.data_type = omitDefault(message.dataType);
     obj.data = message.data;
-    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
+    obj.timestamp = omitDefault(message.timestamp);
     return obj;
   },
   fromAminoMsg(object: SignatureAndDataAminoMsg): SignatureAndData {
@@ -1398,7 +1398,7 @@ export const TimestampedSignatureData = {
   toAmino(message: TimestampedSignatureData): TimestampedSignatureDataAmino {
     const obj: any = {};
     obj.signature_data = message.signatureData;
-    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
+    obj.timestamp = omitDefault(message.timestamp);
     return obj;
   },
   fromAminoMsg(object: TimestampedSignatureDataAminoMsg): TimestampedSignatureData {
@@ -1542,10 +1542,10 @@ export const SignBytes = {
   },
   toAmino(message: SignBytes): SignBytesAmino {
     const obj: any = {};
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
-    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
-    obj.diversifier = message.diversifier;
-    obj.data_type = message.dataType;
+    obj.sequence = omitDefault(message.sequence);
+    obj.timestamp = omitDefault(message.timestamp);
+    obj.diversifier = omitDefault(message.diversifier);
+    obj.data_type = omitDefault(message.dataType);
     obj.data = message.data;
     return obj;
   },
@@ -1650,7 +1650,7 @@ export const HeaderData = {
   toAmino(message: HeaderData): HeaderDataAmino {
     const obj: any = {};
     obj.new_pub_key = message.newPubKey ? Any.toAmino(message.newPubKey) : undefined;
-    obj.new_diversifier = message.newDiversifier;
+    obj.new_diversifier = omitDefault(message.newDiversifier);
     return obj;
   },
   fromAminoMsg(object: HeaderDataAminoMsg): HeaderData {
@@ -2462,7 +2462,7 @@ export const NextSequenceRecvData = {
   toAmino(message: NextSequenceRecvData): NextSequenceRecvDataAmino {
     const obj: any = {};
     obj.path = message.path;
-    obj.next_seq_recv = message.nextSeqRecv ? message.nextSeqRecv.toString() : undefined;
+    obj.next_seq_recv = omitDefault(message.nextSeqRecv);
     return obj;
   },
   fromAminoMsg(object: NextSequenceRecvDataAminoMsg): NextSequenceRecvData {

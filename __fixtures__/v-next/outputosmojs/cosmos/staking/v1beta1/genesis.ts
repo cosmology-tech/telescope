@@ -1,6 +1,6 @@
 import { Params, ParamsSDKType, Validator, ValidatorSDKType, Delegation, DelegationSDKType, UnbondingDelegation, UnbondingDelegationSDKType, Redelegation, RedelegationSDKType } from "./staking";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.staking.v1beta1";
 /** GenesisState defines the staking module's genesis state. */
 export interface GenesisState {
@@ -281,7 +281,7 @@ export const GenesisState = {
     } else {
       obj.redelegations = [];
     }
-    obj.exported = message.exported;
+    obj.exported = omitDefault(message.exported);
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
@@ -387,8 +387,8 @@ export const LastValidatorPower = {
   },
   toAmino(message: LastValidatorPower): LastValidatorPowerAmino {
     const obj: any = {};
-    obj.address = message.address;
-    obj.power = message.power ? message.power.toString() : undefined;
+    obj.address = omitDefault(message.address);
+    obj.power = omitDefault(message.power);
     return obj;
   },
   fromAminoMsg(object: LastValidatorPowerAminoMsg): LastValidatorPower {

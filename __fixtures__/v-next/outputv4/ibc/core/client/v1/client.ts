@@ -1,7 +1,7 @@
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Plan, PlanSDKType } from "../../../../cosmos/upgrade/v1beta1/upgrade";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "ibc.core.client.v1";
 /**
  * IdentifiedClientState defines a client state with an additional client
@@ -242,7 +242,7 @@ export const IdentifiedClientState = {
   },
   toAmino(message: IdentifiedClientState): IdentifiedClientStateAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
+    obj.client_id = omitDefault(message.clientId);
     obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
     return obj;
   },
@@ -468,7 +468,7 @@ export const ClientConsensusStates = {
   },
   toAmino(message: ClientConsensusStates): ClientConsensusStatesAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
+    obj.client_id = omitDefault(message.clientId);
     if (message.consensusStates) {
       obj.consensus_states = message.consensusStates.map(e => e ? ConsensusStateWithHeight.toAmino(e) : undefined);
     } else {
@@ -607,10 +607,10 @@ export const ClientUpdateProposal = {
   },
   toAmino(message: ClientUpdateProposal): ClientUpdateProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.subject_client_id = message.subjectClientId;
-    obj.substitute_client_id = message.substituteClientId;
+    obj.title = omitDefault(message.title);
+    obj.description = omitDefault(message.description);
+    obj.subject_client_id = omitDefault(message.subjectClientId);
+    obj.substitute_client_id = omitDefault(message.substituteClientId);
     return obj;
   },
   fromAminoMsg(object: ClientUpdateProposalAminoMsg): ClientUpdateProposal {
@@ -748,8 +748,8 @@ export const UpgradeProposal = {
   },
   toAmino(message: UpgradeProposal): UpgradeProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
+    obj.title = omitDefault(message.title);
+    obj.description = omitDefault(message.description);
     obj.plan = message.plan ? Plan.toAmino(message.plan) : undefined;
     obj.upgraded_client_state = message.upgradedClientState ? Any.toAmino(message.upgradedClientState) : undefined;
     return obj;
@@ -861,8 +861,8 @@ export const Height = {
   },
   toAmino(message: Height): HeightAmino {
     const obj: any = {};
-    obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
-    obj.revision_height = message.revisionHeight ? message.revisionHeight.toString() : undefined;
+    obj.revision_number = omitDefault(message.revisionNumber);
+    obj.revision_height = omitDefault(message.revisionHeight);
     return obj;
   },
   fromAminoMsg(object: HeightAminoMsg): Height {

@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault, padDecimal } from "../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /**
@@ -185,19 +185,19 @@ export const Position = {
       poolId: BigInt(object.pool_id),
       lowerTick: BigInt(object.lower_tick),
       upperTick: BigInt(object.upper_tick),
-      joinTime: object.join_time,
+      joinTime: object?.join_time ? Timestamp.fromAmino(object.join_time) : undefined,
       liquidity: object.liquidity
     };
   },
   toAmino(message: Position): PositionAmino {
     const obj: any = {};
-    obj.position_id = message.positionId ? message.positionId.toString() : undefined;
-    obj.address = message.address;
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.lower_tick = message.lowerTick ? message.lowerTick.toString() : undefined;
-    obj.upper_tick = message.upperTick ? message.upperTick.toString() : undefined;
+    obj.position_id = omitDefault(message.positionId);
+    obj.address = omitDefault(message.address);
+    obj.pool_id = omitDefault(message.poolId);
+    obj.lower_tick = omitDefault(message.lowerTick);
+    obj.upper_tick = omitDefault(message.upperTick);
     obj.join_time = message.joinTime;
-    obj.liquidity = message.liquidity;
+    obj.liquidity = padDecimal(message.liquidity);
     return obj;
   },
   fromAminoMsg(object: PositionAminoMsg): Position {

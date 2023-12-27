@@ -1,6 +1,6 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "google.rpc";
 /**
  * The `Status` type defines a logical error model that is suitable for
@@ -168,8 +168,8 @@ export const Status = {
   },
   toAmino(message: Status): StatusAmino {
     const obj: any = {};
-    obj.code = message.code;
-    obj.message = message.message;
+    obj.code = omitDefault(message.code);
+    obj.message = omitDefault(message.message);
     if (message.details) {
       obj.details = message.details.map(e => e ? Any.toAmino(e) : undefined);
     } else {

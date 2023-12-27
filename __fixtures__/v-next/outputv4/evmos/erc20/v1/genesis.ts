@@ -1,6 +1,6 @@
 import { TokenPair, TokenPairSDKType } from "./erc20";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
@@ -226,8 +226,8 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.enable_erc20 = message.enableErc20;
-    obj.enable_evm_hook = message.enableEvmHook;
+    obj.enable_erc20 = omitDefault(message.enableErc20);
+    obj.enable_evm_hook = omitDefault(message.enableEvmHook);
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

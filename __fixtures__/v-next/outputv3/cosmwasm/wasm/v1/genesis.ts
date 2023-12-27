@@ -1,7 +1,7 @@
 import { MsgStoreCode, MsgStoreCodeAmino, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantiateContractAmino, MsgInstantiateContractSDKType, MsgExecuteContract, MsgExecuteContractAmino, MsgExecuteContractSDKType } from "./tx";
 import { Params, ParamsAmino, ParamsSDKType, CodeInfo, CodeInfoAmino, CodeInfoSDKType, ContractInfo, ContractInfoAmino, ContractInfoSDKType, Model, ModelAmino, ModelSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisState {
@@ -572,10 +572,10 @@ export const Code = {
   },
   toAmino(message: Code): CodeAmino {
     const obj: any = {};
-    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.code_id = omitDefault(message.codeId);
     obj.code_info = message.codeInfo ? CodeInfo.toAmino(message.codeInfo) : undefined;
     obj.code_bytes = message.codeBytes;
-    obj.pinned = message.pinned;
+    obj.pinned = omitDefault(message.pinned);
     return obj;
   },
   fromAminoMsg(object: CodeAminoMsg): Code {
@@ -699,7 +699,7 @@ export const Contract = {
   },
   toAmino(message: Contract): ContractAmino {
     const obj: any = {};
-    obj.contract_address = message.contractAddress;
+    obj.contract_address = omitDefault(message.contractAddress);
     obj.contract_info = message.contractInfo ? ContractInfo.toAmino(message.contractInfo) : undefined;
     if (message.contractState) {
       obj.contract_state = message.contractState.map(e => e ? Model.toAmino(e) : undefined);
@@ -809,7 +809,7 @@ export const Sequence = {
   toAmino(message: Sequence): SequenceAmino {
     const obj: any = {};
     obj.id_key = message.idKey;
-    obj.value = message.value ? message.value.toString() : undefined;
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: SequenceAminoMsg): Sequence {

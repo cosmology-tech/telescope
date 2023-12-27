@@ -1,6 +1,6 @@
 import { FeeToken, FeeTokenAmino, FeeTokenSDKType } from "./feetoken";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet } from "../../../helpers";
+import { DeepPartial, isSet, omitDefault, padDecimal } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 export interface QueryFeeTokensRequest {}
@@ -388,7 +388,7 @@ export const QueryDenomSpotPriceRequest = {
   },
   toAmino(message: QueryDenomSpotPriceRequest): QueryDenomSpotPriceRequestAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = omitDefault(message.denom);
     return obj;
   },
   fromAminoMsg(object: QueryDenomSpotPriceRequestAminoMsg): QueryDenomSpotPriceRequest {
@@ -491,8 +491,8 @@ export const QueryDenomSpotPriceResponse = {
   },
   toAmino(message: QueryDenomSpotPriceResponse): QueryDenomSpotPriceResponseAmino {
     const obj: any = {};
-    obj.poolID = message.poolID ? message.poolID.toString() : undefined;
-    obj.spot_price = message.spotPrice;
+    obj.poolID = omitDefault(message.poolID);
+    obj.spot_price = padDecimal(message.spotPrice);
     return obj;
   },
   fromAminoMsg(object: QueryDenomSpotPriceResponseAminoMsg): QueryDenomSpotPriceResponse {
@@ -580,7 +580,7 @@ export const QueryDenomPoolIdRequest = {
   },
   toAmino(message: QueryDenomPoolIdRequest): QueryDenomPoolIdRequestAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = omitDefault(message.denom);
     return obj;
   },
   fromAminoMsg(object: QueryDenomPoolIdRequestAminoMsg): QueryDenomPoolIdRequest {
@@ -670,7 +670,7 @@ export const QueryDenomPoolIdResponse = {
   },
   toAmino(message: QueryDenomPoolIdResponse): QueryDenomPoolIdResponseAmino {
     const obj: any = {};
-    obj.poolID = message.poolID ? message.poolID.toString() : undefined;
+    obj.poolID = omitDefault(message.poolID);
     return obj;
   },
   fromAminoMsg(object: QueryDenomPoolIdResponseAminoMsg): QueryDenomPoolIdResponse {
@@ -829,7 +829,7 @@ export const QueryBaseDenomResponse = {
   },
   toAmino(message: QueryBaseDenomResponse): QueryBaseDenomResponseAmino {
     const obj: any = {};
-    obj.base_denom = message.baseDenom;
+    obj.base_denom = omitDefault(message.baseDenom);
     return obj;
   },
   fromAminoMsg(object: QueryBaseDenomResponseAminoMsg): QueryBaseDenomResponse {

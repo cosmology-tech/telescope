@@ -2,7 +2,7 @@ import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.group.v1";
 /** VoteOption enumerates the valid vote options for a given proposal. */
 export enum VoteOption {
@@ -858,14 +858,14 @@ export const Member = {
       address: object.address,
       weight: object.weight,
       metadata: object.metadata,
-      addedAt: object.added_at
+      addedAt: object?.added_at ? Timestamp.fromAmino(object.added_at) : undefined
     };
   },
   toAmino(message: Member): MemberAmino {
     const obj: any = {};
-    obj.address = message.address;
-    obj.weight = message.weight;
-    obj.metadata = message.metadata;
+    obj.address = omitDefault(message.address);
+    obj.weight = omitDefault(message.weight);
+    obj.metadata = omitDefault(message.metadata);
     obj.added_at = message.addedAt;
     return obj;
   },
@@ -1070,7 +1070,7 @@ export const ThresholdDecisionPolicy = {
   },
   toAmino(message: ThresholdDecisionPolicy): ThresholdDecisionPolicyAmino {
     const obj: any = {};
-    obj.threshold = message.threshold;
+    obj.threshold = omitDefault(message.threshold);
     obj.windows = message.windows ? DecisionPolicyWindows.toAmino(message.windows) : undefined;
     return obj;
   },
@@ -1175,7 +1175,7 @@ export const PercentageDecisionPolicy = {
   },
   toAmino(message: PercentageDecisionPolicy): PercentageDecisionPolicyAmino {
     const obj: any = {};
-    obj.percentage = message.percentage;
+    obj.percentage = omitDefault(message.percentage);
     obj.windows = message.windows ? DecisionPolicyWindows.toAmino(message.windows) : undefined;
     return obj;
   },
@@ -1434,16 +1434,16 @@ export const GroupInfo = {
       metadata: object.metadata,
       version: BigInt(object.version),
       totalWeight: object.total_weight,
-      createdAt: object.created_at
+      createdAt: object?.created_at ? Timestamp.fromAmino(object.created_at) : undefined
     };
   },
   toAmino(message: GroupInfo): GroupInfoAmino {
     const obj: any = {};
-    obj.id = message.id ? message.id.toString() : undefined;
-    obj.admin = message.admin;
-    obj.metadata = message.metadata;
-    obj.version = message.version ? message.version.toString() : undefined;
-    obj.total_weight = message.totalWeight;
+    obj.id = omitDefault(message.id);
+    obj.admin = omitDefault(message.admin);
+    obj.metadata = omitDefault(message.metadata);
+    obj.version = omitDefault(message.version);
+    obj.total_weight = omitDefault(message.totalWeight);
     obj.created_at = message.createdAt;
     return obj;
   },
@@ -1549,7 +1549,7 @@ export const GroupMember = {
   },
   toAmino(message: GroupMember): GroupMemberAmino {
     const obj: any = {};
-    obj.group_id = message.groupId ? message.groupId.toString() : undefined;
+    obj.group_id = omitDefault(message.groupId);
     obj.member = message.member ? Member.toAmino(message.member) : undefined;
     return obj;
   },
@@ -1717,16 +1717,16 @@ export const GroupPolicyInfo = {
       metadata: object.metadata,
       version: BigInt(object.version),
       decisionPolicy: object?.decision_policy ? DecisionPolicy_FromAmino(object.decision_policy) : undefined,
-      createdAt: object.created_at
+      createdAt: object?.created_at ? Timestamp.fromAmino(object.created_at) : undefined
     };
   },
   toAmino(message: GroupPolicyInfo): GroupPolicyInfoAmino {
     const obj: any = {};
-    obj.address = message.address;
-    obj.group_id = message.groupId ? message.groupId.toString() : undefined;
-    obj.admin = message.admin;
-    obj.metadata = message.metadata;
-    obj.version = message.version ? message.version.toString() : undefined;
+    obj.address = omitDefault(message.address);
+    obj.group_id = omitDefault(message.groupId);
+    obj.admin = omitDefault(message.admin);
+    obj.metadata = omitDefault(message.metadata);
+    obj.version = omitDefault(message.version);
     obj.decision_policy = message.decisionPolicy ? DecisionPolicy_ToAmino((message.decisionPolicy as Any)) : undefined;
     obj.created_at = message.createdAt;
     return obj;
@@ -1983,35 +1983,35 @@ export const Proposal = {
       address: object.address,
       metadata: object.metadata,
       proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => e) : [],
-      submitTime: object.submit_time,
+      submitTime: object?.submit_time ? Timestamp.fromAmino(object.submit_time) : undefined,
       groupVersion: BigInt(object.group_version),
       groupPolicyVersion: BigInt(object.group_policy_version),
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
       result: isSet(object.result) ? proposalResultFromJSON(object.result) : -1,
       finalTallyResult: object?.final_tally_result ? TallyResult.fromAmino(object.final_tally_result) : undefined,
-      votingPeriodEnd: object.voting_period_end,
+      votingPeriodEnd: object?.voting_period_end ? Timestamp.fromAmino(object.voting_period_end) : undefined,
       executorResult: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : -1,
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : []
     };
   },
   toAmino(message: Proposal): ProposalAmino {
     const obj: any = {};
-    obj.id = message.id ? message.id.toString() : undefined;
-    obj.address = message.address;
-    obj.metadata = message.metadata;
+    obj.id = omitDefault(message.id);
+    obj.address = omitDefault(message.address);
+    obj.metadata = omitDefault(message.metadata);
     if (message.proposers) {
       obj.proposers = message.proposers.map(e => e);
     } else {
       obj.proposers = [];
     }
     obj.submit_time = message.submitTime;
-    obj.group_version = message.groupVersion ? message.groupVersion.toString() : undefined;
-    obj.group_policy_version = message.groupPolicyVersion ? message.groupPolicyVersion.toString() : undefined;
-    obj.status = message.status;
-    obj.result = message.result;
+    obj.group_version = omitDefault(message.groupVersion);
+    obj.group_policy_version = omitDefault(message.groupPolicyVersion);
+    obj.status = omitDefault(message.status);
+    obj.result = omitDefault(message.result);
     obj.final_tally_result = message.finalTallyResult ? TallyResult.toAmino(message.finalTallyResult) : undefined;
     obj.voting_period_end = message.votingPeriodEnd;
-    obj.executor_result = message.executorResult;
+    obj.executor_result = omitDefault(message.executorResult);
     if (message.messages) {
       obj.messages = message.messages.map(e => e ? Any.toAmino(e) : undefined);
     } else {
@@ -2143,10 +2143,10 @@ export const TallyResult = {
   },
   toAmino(message: TallyResult): TallyResultAmino {
     const obj: any = {};
-    obj.yes_count = message.yesCount;
-    obj.abstain_count = message.abstainCount;
-    obj.no_count = message.noCount;
-    obj.no_with_veto_count = message.noWithVetoCount;
+    obj.yes_count = omitDefault(message.yesCount);
+    obj.abstain_count = omitDefault(message.abstainCount);
+    obj.no_count = omitDefault(message.noCount);
+    obj.no_with_veto_count = omitDefault(message.noWithVetoCount);
     return obj;
   },
   fromAminoMsg(object: TallyResultAminoMsg): TallyResult {
@@ -2283,15 +2283,15 @@ export const Vote = {
       voter: object.voter,
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
       metadata: object.metadata,
-      submitTime: object.submit_time
+      submitTime: object?.submit_time ? Timestamp.fromAmino(object.submit_time) : undefined
     };
   },
   toAmino(message: Vote): VoteAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.voter = message.voter;
-    obj.option = message.option;
-    obj.metadata = message.metadata;
+    obj.proposal_id = omitDefault(message.proposalId);
+    obj.voter = omitDefault(message.voter);
+    obj.option = omitDefault(message.option);
+    obj.metadata = omitDefault(message.metadata);
     obj.submit_time = message.submitTime;
     return obj;
   },

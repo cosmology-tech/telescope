@@ -54,20 +54,20 @@ export const AminoConverter = {
         to_address: omitDefault(toAddress),
         start_time: startTime,
         lockup_periods: lockupPeriods.map(el0 => ({
-          length: el0.length.toString(),
+          length: omitDefault(el0.length)?.toString?.(),
           amount: el0.amount.map(el1 => ({
             denom: omitDefault(el1.denom),
             amount: omitDefault(el1.amount)
           }))
         })),
         vesting_periods: vestingPeriods.map(el0 => ({
-          length: el0.length.toString(),
+          length: omitDefault(el0.length)?.toString?.(),
           amount: el0.amount.map(el1 => ({
             denom: omitDefault(el1.denom),
             amount: omitDefault(el1.amount)
           }))
         })),
-        merge: merge
+        merge: omitDefault(merge)
       };
     },
     fromAmino: ({

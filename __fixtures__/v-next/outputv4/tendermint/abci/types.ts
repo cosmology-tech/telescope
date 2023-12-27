@@ -4,7 +4,7 @@ import { ProofOps, ProofOpsSDKType } from "../crypto/proof";
 import { EvidenceParams, EvidenceParamsSDKType, ValidatorParams, ValidatorParamsSDKType, VersionParams, VersionParamsSDKType } from "../types/params";
 import { PublicKey, PublicKeySDKType } from "../crypto/keys";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { isSet, DeepPartial, omitDefault, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../helpers";
 export const protobufPackage = "tendermint.abci";
 export enum CheckTxType {
   NEW = 0,
@@ -1134,7 +1134,7 @@ export const RequestEcho = {
   },
   toAmino(message: RequestEcho): RequestEchoAmino {
     const obj: any = {};
-    obj.message = message.message;
+    obj.message = omitDefault(message.message);
     return obj;
   },
   fromAminoMsg(object: RequestEchoAminoMsg): RequestEcho {
@@ -1319,9 +1319,9 @@ export const RequestInfo = {
   },
   toAmino(message: RequestInfo): RequestInfoAmino {
     const obj: any = {};
-    obj.version = message.version;
-    obj.block_version = message.blockVersion ? message.blockVersion.toString() : undefined;
-    obj.p2p_version = message.p2pVersion ? message.p2pVersion.toString() : undefined;
+    obj.version = omitDefault(message.version);
+    obj.block_version = omitDefault(message.blockVersion);
+    obj.p2p_version = omitDefault(message.p2pVersion);
     return obj;
   },
   fromAminoMsg(object: RequestInfoAminoMsg): RequestInfo {
@@ -1421,8 +1421,8 @@ export const RequestSetOption = {
   },
   toAmino(message: RequestSetOption): RequestSetOptionAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: RequestSetOptionAminoMsg): RequestSetOption {
@@ -1580,7 +1580,7 @@ export const RequestInitChain = {
   },
   fromAmino(object: RequestInitChainAmino): RequestInitChain {
     return {
-      time: object.time,
+      time: object?.time ? Timestamp.fromAmino(object.time) : undefined,
       chainId: object.chain_id,
       consensusParams: object?.consensus_params ? ConsensusParams.fromAmino(object.consensus_params) : undefined,
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromAmino(e)) : [],
@@ -1591,7 +1591,7 @@ export const RequestInitChain = {
   toAmino(message: RequestInitChain): RequestInitChainAmino {
     const obj: any = {};
     obj.time = message.time;
-    obj.chain_id = message.chainId;
+    obj.chain_id = omitDefault(message.chainId);
     obj.consensus_params = message.consensusParams ? ConsensusParams.toAmino(message.consensusParams) : undefined;
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? ValidatorUpdate.toAmino(e) : undefined);
@@ -1599,7 +1599,7 @@ export const RequestInitChain = {
       obj.validators = [];
     }
     obj.app_state_bytes = message.appStateBytes;
-    obj.initial_height = message.initialHeight ? message.initialHeight.toString() : undefined;
+    obj.initial_height = omitDefault(message.initialHeight);
     return obj;
   },
   fromAminoMsg(object: RequestInitChainAminoMsg): RequestInitChain {
@@ -1730,9 +1730,9 @@ export const RequestQuery = {
   toAmino(message: RequestQuery): RequestQueryAmino {
     const obj: any = {};
     obj.data = message.data;
-    obj.path = message.path;
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.prove = message.prove;
+    obj.path = omitDefault(message.path);
+    obj.height = omitDefault(message.height);
+    obj.prove = omitDefault(message.prove);
     return obj;
   },
   fromAminoMsg(object: RequestQueryAminoMsg): RequestQuery {
@@ -1980,7 +1980,7 @@ export const RequestCheckTx = {
   toAmino(message: RequestCheckTx): RequestCheckTxAmino {
     const obj: any = {};
     obj.tx = message.tx;
-    obj.type = message.type;
+    obj.type = omitDefault(message.type);
     return obj;
   },
   fromAminoMsg(object: RequestCheckTxAminoMsg): RequestCheckTx {
@@ -2154,7 +2154,7 @@ export const RequestEndBlock = {
   },
   toAmino(message: RequestEndBlock): RequestEndBlockAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.height = omitDefault(message.height);
     return obj;
   },
   fromAminoMsg(object: RequestEndBlockAminoMsg): RequestEndBlock {
@@ -2507,9 +2507,9 @@ export const RequestLoadSnapshotChunk = {
   },
   toAmino(message: RequestLoadSnapshotChunk): RequestLoadSnapshotChunkAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.format = message.format;
-    obj.chunk = message.chunk;
+    obj.height = omitDefault(message.height);
+    obj.format = omitDefault(message.format);
+    obj.chunk = omitDefault(message.chunk);
     return obj;
   },
   fromAminoMsg(object: RequestLoadSnapshotChunkAminoMsg): RequestLoadSnapshotChunk {
@@ -2623,9 +2623,9 @@ export const RequestApplySnapshotChunk = {
   },
   toAmino(message: RequestApplySnapshotChunk): RequestApplySnapshotChunkAmino {
     const obj: any = {};
-    obj.index = message.index;
+    obj.index = omitDefault(message.index);
     obj.chunk = message.chunk;
-    obj.sender = message.sender;
+    obj.sender = omitDefault(message.sender);
     return obj;
   },
   fromAminoMsg(object: RequestApplySnapshotChunkAminoMsg): RequestApplySnapshotChunk {
@@ -3054,7 +3054,7 @@ export const ResponseException = {
   },
   toAmino(message: ResponseException): ResponseExceptionAmino {
     const obj: any = {};
-    obj.error = message.error;
+    obj.error = omitDefault(message.error);
     return obj;
   },
   fromAminoMsg(object: ResponseExceptionAminoMsg): ResponseException {
@@ -3140,7 +3140,7 @@ export const ResponseEcho = {
   },
   toAmino(message: ResponseEcho): ResponseEchoAmino {
     const obj: any = {};
-    obj.message = message.message;
+    obj.message = omitDefault(message.message);
     return obj;
   },
   fromAminoMsg(object: ResponseEchoAminoMsg): ResponseEcho {
@@ -3353,10 +3353,10 @@ export const ResponseInfo = {
   },
   toAmino(message: ResponseInfo): ResponseInfoAmino {
     const obj: any = {};
-    obj.data = message.data;
-    obj.version = message.version;
-    obj.app_version = message.appVersion ? message.appVersion.toString() : undefined;
-    obj.last_block_height = message.lastBlockHeight ? message.lastBlockHeight.toString() : undefined;
+    obj.data = omitDefault(message.data);
+    obj.version = omitDefault(message.version);
+    obj.app_version = omitDefault(message.appVersion);
+    obj.last_block_height = omitDefault(message.lastBlockHeight);
     obj.last_block_app_hash = message.lastBlockAppHash;
     return obj;
   },
@@ -3471,9 +3471,9 @@ export const ResponseSetOption = {
   },
   toAmino(message: ResponseSetOption): ResponseSetOptionAmino {
     const obj: any = {};
-    obj.code = message.code;
-    obj.log = message.log;
-    obj.info = message.info;
+    obj.code = omitDefault(message.code);
+    obj.log = omitDefault(message.log);
+    obj.info = omitDefault(message.info);
     return obj;
   },
   fromAminoMsg(object: ResponseSetOptionAminoMsg): ResponseSetOption {
@@ -3807,15 +3807,15 @@ export const ResponseQuery = {
   },
   toAmino(message: ResponseQuery): ResponseQueryAmino {
     const obj: any = {};
-    obj.code = message.code;
-    obj.log = message.log;
-    obj.info = message.info;
-    obj.index = message.index ? message.index.toString() : undefined;
+    obj.code = omitDefault(message.code);
+    obj.log = omitDefault(message.log);
+    obj.info = omitDefault(message.info);
+    obj.index = omitDefault(message.index);
     obj.key = message.key;
     obj.value = message.value;
     obj.proof_ops = message.proofOps ? ProofOps.toAmino(message.proofOps) : undefined;
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.codespace = message.codespace;
+    obj.height = omitDefault(message.height);
+    obj.codespace = omitDefault(message.codespace);
     return obj;
   },
   fromAminoMsg(object: ResponseQueryAminoMsg): ResponseQuery {
@@ -4109,18 +4109,18 @@ export const ResponseCheckTx = {
   },
   toAmino(message: ResponseCheckTx): ResponseCheckTxAmino {
     const obj: any = {};
-    obj.code = message.code;
+    obj.code = omitDefault(message.code);
     obj.data = message.data;
-    obj.log = message.log;
-    obj.info = message.info;
-    obj.gas_wanted = message.gasWanted ? message.gasWanted.toString() : undefined;
-    obj.gas_used = message.gasUsed ? message.gasUsed.toString() : undefined;
+    obj.log = omitDefault(message.log);
+    obj.info = omitDefault(message.info);
+    obj.gas_wanted = omitDefault(message.gasWanted);
+    obj.gas_used = omitDefault(message.gasUsed);
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toAmino(e) : undefined);
     } else {
       obj.events = [];
     }
-    obj.codespace = message.codespace;
+    obj.codespace = omitDefault(message.codespace);
     return obj;
   },
   fromAminoMsg(object: ResponseCheckTxAminoMsg): ResponseCheckTx {
@@ -4316,18 +4316,18 @@ export const ResponseDeliverTx = {
   },
   toAmino(message: ResponseDeliverTx): ResponseDeliverTxAmino {
     const obj: any = {};
-    obj.code = message.code;
+    obj.code = omitDefault(message.code);
     obj.data = message.data;
-    obj.log = message.log;
-    obj.info = message.info;
-    obj.gas_wanted = message.gasWanted ? message.gasWanted.toString() : undefined;
-    obj.gas_used = message.gasUsed ? message.gasUsed.toString() : undefined;
+    obj.log = omitDefault(message.log);
+    obj.info = omitDefault(message.info);
+    obj.gas_wanted = omitDefault(message.gasWanted);
+    obj.gas_used = omitDefault(message.gasUsed);
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toAmino(e) : undefined);
     } else {
       obj.events = [];
     }
-    obj.codespace = message.codespace;
+    obj.codespace = omitDefault(message.codespace);
     return obj;
   },
   fromAminoMsg(object: ResponseDeliverTxAminoMsg): ResponseDeliverTx {
@@ -4572,7 +4572,7 @@ export const ResponseCommit = {
   toAmino(message: ResponseCommit): ResponseCommitAmino {
     const obj: any = {};
     obj.data = message.data;
-    obj.retain_height = message.retainHeight ? message.retainHeight.toString() : undefined;
+    obj.retain_height = omitDefault(message.retainHeight);
     return obj;
   },
   fromAminoMsg(object: ResponseCommitAminoMsg): ResponseCommit {
@@ -4756,7 +4756,7 @@ export const ResponseOfferSnapshot = {
   },
   toAmino(message: ResponseOfferSnapshot): ResponseOfferSnapshotAmino {
     const obj: any = {};
-    obj.result = message.result;
+    obj.result = omitDefault(message.result);
     return obj;
   },
   fromAminoMsg(object: ResponseOfferSnapshotAminoMsg): ResponseOfferSnapshot {
@@ -4981,7 +4981,7 @@ export const ResponseApplySnapshotChunk = {
   },
   toAmino(message: ResponseApplySnapshotChunk): ResponseApplySnapshotChunkAmino {
     const obj: any = {};
-    obj.result = message.result;
+    obj.result = omitDefault(message.result);
     if (message.refetchChunks) {
       obj.refetch_chunks = message.refetchChunks.map(e => e);
     } else {
@@ -5234,8 +5234,8 @@ export const BlockParams = {
   },
   toAmino(message: BlockParams): BlockParamsAmino {
     const obj: any = {};
-    obj.max_bytes = message.maxBytes ? message.maxBytes.toString() : undefined;
-    obj.max_gas = message.maxGas ? message.maxGas.toString() : undefined;
+    obj.max_bytes = omitDefault(message.maxBytes);
+    obj.max_gas = omitDefault(message.maxGas);
     return obj;
   },
   fromAminoMsg(object: BlockParamsAminoMsg): BlockParams {
@@ -5343,7 +5343,7 @@ export const LastCommitInfo = {
   },
   toAmino(message: LastCommitInfo): LastCommitInfoAmino {
     const obj: any = {};
-    obj.round = message.round;
+    obj.round = omitDefault(message.round);
     if (message.votes) {
       obj.votes = message.votes.map(e => e ? VoteInfo.toAmino(e) : undefined);
     } else {
@@ -5456,7 +5456,7 @@ export const Event = {
   },
   toAmino(message: Event): EventAmino {
     const obj: any = {};
-    obj.type = message.type;
+    obj.type = omitDefault(message.type);
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? EventAttribute.toAmino(e) : undefined);
     } else {
@@ -5577,7 +5577,7 @@ export const EventAttribute = {
     const obj: any = {};
     obj.key = message.key;
     obj.value = message.value;
-    obj.index = message.index;
+    obj.index = omitDefault(message.index);
     return obj;
   },
   fromAminoMsg(object: EventAttributeAminoMsg): EventAttribute {
@@ -5709,8 +5709,8 @@ export const TxResult = {
   },
   toAmino(message: TxResult): TxResultAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.index = message.index;
+    obj.height = omitDefault(message.height);
+    obj.index = omitDefault(message.index);
     obj.tx = message.tx;
     obj.result = message.result ? ResponseDeliverTx.toAmino(message.result) : undefined;
     return obj;
@@ -5815,7 +5815,7 @@ export const Validator = {
   toAmino(message: Validator): ValidatorAmino {
     const obj: any = {};
     obj.address = message.address;
-    obj.power = message.power ? message.power.toString() : undefined;
+    obj.power = omitDefault(message.power);
     return obj;
   },
   fromAminoMsg(object: ValidatorAminoMsg): Validator {
@@ -5920,7 +5920,7 @@ export const ValidatorUpdate = {
   toAmino(message: ValidatorUpdate): ValidatorUpdateAmino {
     const obj: any = {};
     obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey) : undefined;
-    obj.power = message.power ? message.power.toString() : undefined;
+    obj.power = omitDefault(message.power);
     return obj;
   },
   fromAminoMsg(object: ValidatorUpdateAminoMsg): ValidatorUpdate {
@@ -6023,7 +6023,7 @@ export const VoteInfo = {
   toAmino(message: VoteInfo): VoteInfoAmino {
     const obj: any = {};
     obj.validator = message.validator ? Validator.toAmino(message.validator) : undefined;
-    obj.signed_last_block = message.signedLastBlock;
+    obj.signed_last_block = omitDefault(message.signedLastBlock);
     return obj;
   },
   fromAminoMsg(object: VoteInfoAminoMsg): VoteInfo {
@@ -6165,17 +6165,17 @@ export const Evidence = {
       type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : -1,
       validator: object?.validator ? Validator.fromAmino(object.validator) : undefined,
       height: BigInt(object.height),
-      time: object.time,
+      time: object?.time ? Timestamp.fromAmino(object.time) : undefined,
       totalVotingPower: BigInt(object.total_voting_power)
     };
   },
   toAmino(message: Evidence): EvidenceAmino {
     const obj: any = {};
-    obj.type = message.type;
+    obj.type = omitDefault(message.type);
     obj.validator = message.validator ? Validator.toAmino(message.validator) : undefined;
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.height = omitDefault(message.height);
     obj.time = message.time;
-    obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
+    obj.total_voting_power = omitDefault(message.totalVotingPower);
     return obj;
   },
   fromAminoMsg(object: EvidenceAminoMsg): Evidence {
@@ -6319,9 +6319,9 @@ export const Snapshot = {
   },
   toAmino(message: Snapshot): SnapshotAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.format = message.format;
-    obj.chunks = message.chunks;
+    obj.height = omitDefault(message.height);
+    obj.format = omitDefault(message.format);
+    obj.chunks = omitDefault(message.chunks);
     obj.hash = message.hash;
     obj.metadata = message.metadata;
     return obj;

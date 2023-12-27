@@ -240,7 +240,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
   },
   toAmino(message: ClientState): ClientStateAmino {
     const obj: any = {};
-    obj.chain_id = message.chainId;
+    obj.chain_id = omitDefault(message.chainId);
     obj.trust_level = message.trustLevel ? Fraction.toAmino(message.trustLevel) : undefined;
     obj.trusting_period = message.trustingPeriod ? Duration.toAmino(message.trustingPeriod) : undefined;
     obj.unbonding_period = message.unbondingPeriod ? Duration.toAmino(message.unbondingPeriod) : undefined;
@@ -257,8 +257,8 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
     } else {
       obj.upgrade_path = [];
     }
-    obj.allow_update_after_expiry = message.allowUpdateAfterExpiry;
-    obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour;
+    obj.allow_update_after_expiry = omitDefault(message.allowUpdateAfterExpiry);
+    obj.allow_update_after_misbehaviour = omitDefault(message.allowUpdateAfterMisbehaviour);
     return obj;
   },
   fromAminoMsg(object: ClientStateAminoMsg): ClientState {
@@ -352,10 +352,10 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 4`] = `
       allowUpdateAfterMisbehaviour
     }: ClientState): ClientStateAminoType["value"] => {
       return {
-        chain_id: chainId,
+        chain_id: omitDefault(chainId),
         trust_level: {
-          numerator: trustLevel.numerator.toString(),
-          denominator: trustLevel.denominator.toString()
+          numerator: omitDefault(trustLevel.numerator)?.toString?.(),
+          denominator: omitDefault(trustLevel.denominator)?.toString?.()
         },
         trusting_period: (trustingPeriod * 1_000_000_000).toString(),
         unbonding_period: (unbondingPeriod * 1_000_000_000).toString(),
@@ -378,18 +378,18 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 4`] = `
           },
           inner_spec: {
             child_order: el0.innerSpec.childOrder,
-            child_size: el0.innerSpec.childSize,
-            min_prefix_length: el0.innerSpec.minPrefixLength,
-            max_prefix_length: el0.innerSpec.maxPrefixLength,
+            child_size: omitDefault(el0.innerSpec.childSize),
+            min_prefix_length: omitDefault(el0.innerSpec.minPrefixLength),
+            max_prefix_length: omitDefault(el0.innerSpec.maxPrefixLength),
             empty_child: el0.innerSpec.emptyChild,
             hash: el0.innerSpec.hash
           },
-          max_depth: el0.maxDepth,
-          min_depth: el0.minDepth
+          max_depth: omitDefault(el0.maxDepth),
+          min_depth: omitDefault(el0.minDepth)
         })),
         upgrade_path: upgradePath,
-        allow_update_after_expiry: allowUpdateAfterExpiry,
-        allow_update_after_misbehaviour: allowUpdateAfterMisbehaviour
+        allow_update_after_expiry: omitDefault(allowUpdateAfterExpiry),
+        allow_update_after_misbehaviour: omitDefault(allowUpdateAfterMisbehaviour)
       };
     },
     fromAmino: ({
@@ -699,7 +699,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
   },
   toAmino(message: ClientState): ClientStateAmino {
     const obj: any = {};
-    obj.chain_id = message.chainId;
+    obj.chain_id = omitDefault(message.chainId);
     obj.trust_level = message.trustLevel ? Fraction.toAmino(message.trustLevel) : undefined;
     obj.trusting_period = message.trustingPeriod ? Duration.toAmino(message.trustingPeriod) : undefined;
     obj.unbonding_period = message.unbondingPeriod ? Duration.toAmino(message.unbondingPeriod) : undefined;
@@ -716,8 +716,8 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
     } else {
       obj.upgrade_path = [];
     }
-    obj.allow_update_after_expiry = message.allowUpdateAfterExpiry;
-    obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour;
+    obj.allow_update_after_expiry = omitDefault(message.allowUpdateAfterExpiry);
+    obj.allow_update_after_misbehaviour = omitDefault(message.allowUpdateAfterMisbehaviour);
     return obj;
   },
   fromAminoMsg(object: ClientStateAminoMsg): ClientState {
@@ -802,10 +802,10 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 4`] = `
       allowUpdateAfterMisbehaviour
     }: ClientState): ClientStateAminoType["value"] => {
       return {
-        chain_id: chainId,
+        chain_id: omitDefault(chainId),
         trust_level: {
-          numerator: trustLevel.numerator.toString(),
-          denominator: trustLevel.denominator.toString()
+          numerator: omitDefault(trustLevel.numerator)?.toString?.(),
+          denominator: omitDefault(trustLevel.denominator)?.toString?.()
         },
         trusting_period: (trustingPeriod * 1_000_000_000).toString(),
         unbonding_period: (unbondingPeriod * 1_000_000_000).toString(),
@@ -828,18 +828,18 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 4`] = `
           },
           inner_spec: {
             child_order: el0.innerSpec.childOrder,
-            child_size: el0.innerSpec.childSize,
-            min_prefix_length: el0.innerSpec.minPrefixLength,
-            max_prefix_length: el0.innerSpec.maxPrefixLength,
+            child_size: omitDefault(el0.innerSpec.childSize),
+            min_prefix_length: omitDefault(el0.innerSpec.minPrefixLength),
+            max_prefix_length: omitDefault(el0.innerSpec.maxPrefixLength),
             empty_child: el0.innerSpec.emptyChild,
             hash: el0.innerSpec.hash
           },
-          max_depth: el0.maxDepth,
-          min_depth: el0.minDepth
+          max_depth: omitDefault(el0.maxDepth),
+          min_depth: omitDefault(el0.minDepth)
         })),
         upgrade_path: upgradePath,
-        allow_update_after_expiry: allowUpdateAfterExpiry,
-        allow_update_after_misbehaviour: allowUpdateAfterMisbehaviour
+        allow_update_after_expiry: omitDefault(allowUpdateAfterExpiry),
+        allow_update_after_misbehaviour: omitDefault(allowUpdateAfterMisbehaviour)
       };
     },
     fromAmino: ({

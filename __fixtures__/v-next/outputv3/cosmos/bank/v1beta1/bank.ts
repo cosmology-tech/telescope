@@ -1,6 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /** Params defines the parameters for the bank module. */
 export interface Params {
@@ -388,7 +388,7 @@ export const Params = {
     } else {
       obj.send_enabled = [];
     }
-    obj.default_send_enabled = message.defaultSendEnabled;
+    obj.default_send_enabled = omitDefault(message.defaultSendEnabled);
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {
@@ -489,8 +489,8 @@ export const SendEnabled = {
   },
   toAmino(message: SendEnabled): SendEnabledAmino {
     const obj: any = {};
-    obj.denom = message.denom;
-    obj.enabled = message.enabled;
+    obj.denom = omitDefault(message.denom);
+    obj.enabled = omitDefault(message.enabled);
     return obj;
   },
   fromAminoMsg(object: SendEnabledAminoMsg): SendEnabled {
@@ -599,7 +599,7 @@ export const Input = {
   },
   toAmino(message: Input): InputAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = omitDefault(message.address);
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
@@ -713,7 +713,7 @@ export const Output = {
   },
   toAmino(message: Output): OutputAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = omitDefault(message.address);
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
@@ -941,8 +941,8 @@ export const DenomUnit = {
   },
   toAmino(message: DenomUnit): DenomUnitAmino {
     const obj: any = {};
-    obj.denom = message.denom;
-    obj.exponent = message.exponent;
+    obj.denom = omitDefault(message.denom);
+    obj.exponent = omitDefault(message.exponent);
     if (message.aliases) {
       obj.aliases = message.aliases.map(e => e);
     } else {
@@ -1134,18 +1134,18 @@ export const Metadata = {
   },
   toAmino(message: Metadata): MetadataAmino {
     const obj: any = {};
-    obj.description = message.description;
+    obj.description = omitDefault(message.description);
     if (message.denomUnits) {
       obj.denom_units = message.denomUnits.map(e => e ? DenomUnit.toAmino(e) : undefined);
     } else {
       obj.denom_units = [];
     }
-    obj.base = message.base;
-    obj.display = message.display;
-    obj.name = message.name;
-    obj.symbol = message.symbol;
-    obj.uri = message.uri;
-    obj.uri_hash = message.uriHash;
+    obj.base = omitDefault(message.base);
+    obj.display = omitDefault(message.display);
+    obj.name = omitDefault(message.name);
+    obj.symbol = omitDefault(message.symbol);
+    obj.uri = omitDefault(message.uri);
+    obj.uri_hash = omitDefault(message.uriHash);
     return obj;
   },
   fromAminoMsg(object: MetadataAminoMsg): Metadata {

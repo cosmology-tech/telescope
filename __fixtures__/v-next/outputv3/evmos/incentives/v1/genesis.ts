@@ -1,6 +1,6 @@
 import { Incentive, IncentiveAmino, IncentiveSDKType, GasMeter, GasMeterAmino, GasMeterSDKType } from "./incentives";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault, padDecimal } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "evmos.incentives.v1";
 /** GenesisState defines the module's genesis state. */
@@ -308,10 +308,10 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.enable_incentives = message.enableIncentives;
-    obj.allocation_limit = message.allocationLimit;
-    obj.incentives_epoch_identifier = message.incentivesEpochIdentifier;
-    obj.reward_scaler = message.rewardScaler;
+    obj.enable_incentives = omitDefault(message.enableIncentives);
+    obj.allocation_limit = padDecimal(message.allocationLimit);
+    obj.incentives_epoch_identifier = omitDefault(message.incentivesEpochIdentifier);
+    obj.reward_scaler = padDecimal(message.rewardScaler);
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

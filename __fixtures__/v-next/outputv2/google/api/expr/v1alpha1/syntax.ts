@@ -2,7 +2,7 @@ import { NullValue, nullValueFromJSON, nullValueToJSON } from "../../../protobuf
 import { Duration, DurationAmino, DurationSDKType } from "../../../protobuf/duration";
 import { Timestamp } from "../../../protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
@@ -1165,7 +1165,7 @@ export const Expr = {
   },
   toAmino(message: Expr): ExprAmino {
     const obj: any = {};
-    obj.id = message.id ? message.id.toString() : undefined;
+    obj.id = omitDefault(message.id);
     obj.const_expr = message.constExpr ? Constant.toAmino(message.constExpr) : undefined;
     obj.ident_expr = message.identExpr ? Expr_Ident.toAmino(message.identExpr) : undefined;
     obj.select_expr = message.selectExpr ? Expr_Select.toAmino(message.selectExpr) : undefined;
@@ -1253,7 +1253,7 @@ export const Expr_Ident = {
   },
   toAmino(message: Expr_Ident): Expr_IdentAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     return obj;
   },
   fromAminoMsg(object: Expr_IdentAminoMsg): Expr_Ident {
@@ -1363,8 +1363,8 @@ export const Expr_Select = {
   toAmino(message: Expr_Select): Expr_SelectAmino {
     const obj: any = {};
     obj.operand = message.operand ? Expr.toAmino(message.operand) : undefined;
-    obj.field = message.field;
-    obj.test_only = message.testOnly;
+    obj.field = omitDefault(message.field);
+    obj.test_only = omitDefault(message.testOnly);
     return obj;
   },
   fromAminoMsg(object: Expr_SelectAminoMsg): Expr_Select {
@@ -1482,7 +1482,7 @@ export const Expr_Call = {
   toAmino(message: Expr_Call): Expr_CallAmino {
     const obj: any = {};
     obj.target = message.target ? Expr.toAmino(message.target) : undefined;
-    obj.function = message.function;
+    obj.function = omitDefault(message.function);
     if (message.args) {
       obj.args = message.args.map(e => e ? Expr.toAmino(e) : undefined);
     } else {
@@ -1682,7 +1682,7 @@ export const Expr_CreateStruct = {
   },
   toAmino(message: Expr_CreateStruct): Expr_CreateStructAmino {
     const obj: any = {};
-    obj.message_name = message.messageName;
+    obj.message_name = omitDefault(message.messageName);
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? Expr_CreateStruct_Entry.toAmino(e) : undefined);
     } else {
@@ -1813,8 +1813,8 @@ export const Expr_CreateStruct_Entry = {
   },
   toAmino(message: Expr_CreateStruct_Entry): Expr_CreateStruct_EntryAmino {
     const obj: any = {};
-    obj.id = message.id ? message.id.toString() : undefined;
-    obj.field_key = message.fieldKey;
+    obj.id = omitDefault(message.id);
+    obj.field_key = omitDefault(message.fieldKey);
     obj.map_key = message.mapKey ? Expr.toAmino(message.mapKey) : undefined;
     obj.value = message.value ? Expr.toAmino(message.value) : undefined;
     return obj;
@@ -1985,9 +1985,9 @@ export const Expr_Comprehension = {
   },
   toAmino(message: Expr_Comprehension): Expr_ComprehensionAmino {
     const obj: any = {};
-    obj.iter_var = message.iterVar;
+    obj.iter_var = omitDefault(message.iterVar);
     obj.iter_range = message.iterRange ? Expr.toAmino(message.iterRange) : undefined;
-    obj.accu_var = message.accuVar;
+    obj.accu_var = omitDefault(message.accuVar);
     obj.accu_init = message.accuInit ? Expr.toAmino(message.accuInit) : undefined;
     obj.loop_condition = message.loopCondition ? Expr.toAmino(message.loopCondition) : undefined;
     obj.loop_step = message.loopStep ? Expr.toAmino(message.loopStep) : undefined;
@@ -2177,17 +2177,17 @@ export const Constant = {
       stringValue: object?.string_value,
       bytesValue: object?.bytes_value,
       durationValue: object?.duration_value ? Duration.fromAmino(object.duration_value) : undefined,
-      timestampValue: object?.timestamp_value
+      timestampValue: object?.timestamp_value ? Timestamp.fromAmino(object.timestamp_value) : undefined
     };
   },
   toAmino(message: Constant): ConstantAmino {
     const obj: any = {};
-    obj.null_value = message.nullValue;
-    obj.bool_value = message.boolValue;
-    obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
-    obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
-    obj.double_value = message.doubleValue;
-    obj.string_value = message.stringValue;
+    obj.null_value = omitDefault(message.nullValue);
+    obj.bool_value = omitDefault(message.boolValue);
+    obj.int64_value = omitDefault(message.int64Value);
+    obj.uint64_value = omitDefault(message.uint64Value);
+    obj.double_value = omitDefault(message.doubleValue);
+    obj.string_value = omitDefault(message.stringValue);
     obj.bytes_value = message.bytesValue;
     obj.duration_value = message.durationValue ? Duration.toAmino(message.durationValue) : undefined;
     obj.timestamp_value = message.timestampValue;
@@ -2285,8 +2285,8 @@ export const SourceInfo_PositionsEntry = {
   },
   toAmino(message: SourceInfo_PositionsEntry): SourceInfo_PositionsEntryAmino {
     const obj: any = {};
-    obj.key = message.key ? message.key.toString() : undefined;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: SourceInfo_PositionsEntryAminoMsg): SourceInfo_PositionsEntry {
@@ -2377,7 +2377,7 @@ export const SourceInfo_MacroCallsEntry = {
   },
   toAmino(message: SourceInfo_MacroCallsEntry): SourceInfo_MacroCallsEntryAmino {
     const obj: any = {};
-    obj.key = message.key ? message.key.toString() : undefined;
+    obj.key = omitDefault(message.key);
     obj.value = message.value ? Expr.toAmino(message.value) : undefined;
     return obj;
   },
@@ -2598,8 +2598,8 @@ export const SourceInfo = {
   },
   toAmino(message: SourceInfo): SourceInfoAmino {
     const obj: any = {};
-    obj.syntax_version = message.syntaxVersion;
-    obj.location = message.location;
+    obj.syntax_version = omitDefault(message.syntaxVersion);
+    obj.location = omitDefault(message.location);
     if (message.lineOffsets) {
       obj.line_offsets = message.lineOffsets.map(e => e);
     } else {
@@ -2736,10 +2736,10 @@ export const SourcePosition = {
   },
   toAmino(message: SourcePosition): SourcePositionAmino {
     const obj: any = {};
-    obj.location = message.location;
-    obj.offset = message.offset;
-    obj.line = message.line;
-    obj.column = message.column;
+    obj.location = omitDefault(message.location);
+    obj.offset = omitDefault(message.offset);
+    obj.line = omitDefault(message.line);
+    obj.column = omitDefault(message.column);
     return obj;
   },
   fromAminoMsg(object: SourcePositionAminoMsg): SourcePosition {

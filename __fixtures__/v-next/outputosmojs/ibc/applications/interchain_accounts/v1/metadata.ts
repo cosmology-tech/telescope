@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.interchain_accounts.v1";
 /**
  * Metadata defines a set of protocol specific data encoded into the ICS27 channel version bytestring
@@ -171,12 +171,12 @@ export const Metadata = {
   },
   toAmino(message: Metadata): MetadataAmino {
     const obj: any = {};
-    obj.version = message.version;
-    obj.controller_connection_id = message.controllerConnectionId;
-    obj.host_connection_id = message.hostConnectionId;
-    obj.address = message.address;
-    obj.encoding = message.encoding;
-    obj.tx_type = message.txType;
+    obj.version = omitDefault(message.version);
+    obj.controller_connection_id = omitDefault(message.controllerConnectionId);
+    obj.host_connection_id = omitDefault(message.hostConnectionId);
+    obj.address = omitDefault(message.address);
+    obj.encoding = omitDefault(message.encoding);
+    obj.tx_type = omitDefault(message.txType);
     return obj;
   },
   fromAminoMsg(object: MetadataAminoMsg): Metadata {

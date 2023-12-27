@@ -3,7 +3,7 @@ import { SignMode, signModeFromJSON, signModeToJSON } from "../signing/v1beta1/s
 import { CompactBitArray, CompactBitArrayAmino, CompactBitArraySDKType } from "../../crypto/multisig/v1beta1/multisig";
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.tx.v1beta1";
 /** Tx is the standard type used for broadcasting transactions. */
 export interface Tx {
@@ -1124,8 +1124,8 @@ export const SignDoc = {
     const obj: any = {};
     obj.body_bytes = message.bodyBytes;
     obj.auth_info_bytes = message.authInfoBytes;
-    obj.chain_id = message.chainId;
-    obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
+    obj.chain_id = omitDefault(message.chainId);
+    obj.account_number = omitDefault(message.accountNumber);
     return obj;
   },
   fromAminoMsg(object: SignDocAminoMsg): SignDoc {
@@ -1288,9 +1288,9 @@ export const SignDocDirectAux = {
     const obj: any = {};
     obj.body_bytes = message.bodyBytes;
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined;
-    obj.chain_id = message.chainId;
-    obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.chain_id = omitDefault(message.chainId);
+    obj.account_number = omitDefault(message.accountNumber);
+    obj.sequence = omitDefault(message.sequence);
     obj.tip = message.tip ? Tip.toAmino(message.tip) : undefined;
     return obj;
   },
@@ -1462,8 +1462,8 @@ export const TxBody = {
     } else {
       obj.messages = [];
     }
-    obj.memo = message.memo;
-    obj.timeout_height = message.timeoutHeight ? message.timeoutHeight.toString() : undefined;
+    obj.memo = omitDefault(message.memo);
+    obj.timeout_height = omitDefault(message.timeoutHeight);
     if (message.extensionOptions) {
       obj.extension_options = message.extensionOptions.map(e => e ? Any.toAmino(e) : undefined);
     } else {
@@ -1727,7 +1727,7 @@ export const SignerInfo = {
     const obj: any = {};
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined;
     obj.mode_info = message.modeInfo ? ModeInfo.toAmino(message.modeInfo) : undefined;
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.sequence = omitDefault(message.sequence);
     return obj;
   },
   fromAminoMsg(object: SignerInfoAminoMsg): SignerInfo {
@@ -1921,7 +1921,7 @@ export const ModeInfo_Single = {
   },
   toAmino(message: ModeInfo_Single): ModeInfo_SingleAmino {
     const obj: any = {};
-    obj.mode = message.mode;
+    obj.mode = omitDefault(message.mode);
     return obj;
   },
   fromAminoMsg(object: ModeInfo_SingleAminoMsg): ModeInfo_Single {
@@ -2179,9 +2179,9 @@ export const Fee = {
     } else {
       obj.amount = [];
     }
-    obj.gas_limit = message.gasLimit ? message.gasLimit.toString() : undefined;
-    obj.payer = message.payer;
-    obj.granter = message.granter;
+    obj.gas_limit = omitDefault(message.gasLimit);
+    obj.payer = omitDefault(message.payer);
+    obj.granter = omitDefault(message.granter);
     return obj;
   },
   fromAminoMsg(object: FeeAminoMsg): Fee {
@@ -2295,7 +2295,7 @@ export const Tip = {
     } else {
       obj.amount = [];
     }
-    obj.tipper = message.tipper;
+    obj.tipper = omitDefault(message.tipper);
     return obj;
   },
   fromAminoMsg(object: TipAminoMsg): Tip {
@@ -2424,9 +2424,9 @@ export const AuxSignerData = {
   },
   toAmino(message: AuxSignerData): AuxSignerDataAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = omitDefault(message.address);
     obj.sign_doc = message.signDoc ? SignDocDirectAux.toAmino(message.signDoc) : undefined;
-    obj.mode = message.mode;
+    obj.mode = omitDefault(message.mode);
     obj.sig = message.sig;
     return obj;
   },

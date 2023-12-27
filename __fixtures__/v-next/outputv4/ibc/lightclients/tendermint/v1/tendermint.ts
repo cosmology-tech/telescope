@@ -6,7 +6,7 @@ import { MerkleRoot, MerkleRootSDKType } from "../../../core/commitment/v1/commi
 import { SignedHeader, SignedHeaderSDKType } from "../../../../tendermint/types/types";
 import { ValidatorSet, ValidatorSetSDKType } from "../../../../tendermint/types/validator";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.lightclients.tendermint.v1";
 /**
  * ClientState from Tendermint tracks the current validator set, latest height,
@@ -394,7 +394,7 @@ export const ClientState = {
   },
   toAmino(message: ClientState): ClientStateAmino {
     const obj: any = {};
-    obj.chain_id = message.chainId;
+    obj.chain_id = omitDefault(message.chainId);
     obj.trust_level = message.trustLevel ? Fraction.toAmino(message.trustLevel) : undefined;
     obj.trusting_period = message.trustingPeriod ? Duration.toAmino(message.trustingPeriod) : undefined;
     obj.unbonding_period = message.unbondingPeriod ? Duration.toAmino(message.unbondingPeriod) : undefined;
@@ -411,8 +411,8 @@ export const ClientState = {
     } else {
       obj.upgrade_path = [];
     }
-    obj.allow_update_after_expiry = message.allowUpdateAfterExpiry;
-    obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour;
+    obj.allow_update_after_expiry = omitDefault(message.allowUpdateAfterExpiry);
+    obj.allow_update_after_misbehaviour = omitDefault(message.allowUpdateAfterMisbehaviour);
     return obj;
   },
   fromAminoMsg(object: ClientStateAminoMsg): ClientState {
@@ -527,7 +527,7 @@ export const ConsensusState = {
   },
   fromAmino(object: ConsensusStateAmino): ConsensusState {
     return {
-      timestamp: object.timestamp,
+      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
       root: object?.root ? MerkleRoot.fromAmino(object.root) : undefined,
       nextValidatorsHash: object.next_validators_hash
     };
@@ -660,7 +660,7 @@ export const Misbehaviour = {
   },
   toAmino(message: Misbehaviour): MisbehaviourAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
+    obj.client_id = omitDefault(message.clientId);
     obj.header_1 = message.header1 ? Header.toAmino(message.header1) : undefined;
     obj.header_2 = message.header2 ? Header.toAmino(message.header2) : undefined;
     return obj;
@@ -917,8 +917,8 @@ export const Fraction = {
   },
   toAmino(message: Fraction): FractionAmino {
     const obj: any = {};
-    obj.numerator = message.numerator ? message.numerator.toString() : undefined;
-    obj.denominator = message.denominator ? message.denominator.toString() : undefined;
+    obj.numerator = omitDefault(message.numerator);
+    obj.denominator = omitDefault(message.denominator);
     return obj;
   },
   fromAminoMsg(object: FractionAminoMsg): Fraction {

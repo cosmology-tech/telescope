@@ -1,7 +1,7 @@
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "evmos.epochs.v1";
 export interface EpochInfo {
   identifier: string;
@@ -194,23 +194,23 @@ export const EpochInfo = {
   fromAmino(object: EpochInfoAmino): EpochInfo {
     return {
       identifier: object.identifier,
-      startTime: object.start_time,
+      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
       duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
       currentEpoch: BigInt(object.current_epoch),
-      currentEpochStartTime: object.current_epoch_start_time,
+      currentEpochStartTime: object?.current_epoch_start_time ? Timestamp.fromAmino(object.current_epoch_start_time) : undefined,
       epochCountingStarted: object.epoch_counting_started,
       currentEpochStartHeight: BigInt(object.current_epoch_start_height)
     };
   },
   toAmino(message: EpochInfo): EpochInfoAmino {
     const obj: any = {};
-    obj.identifier = message.identifier;
+    obj.identifier = omitDefault(message.identifier);
     obj.start_time = message.startTime;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
-    obj.current_epoch = message.currentEpoch ? message.currentEpoch.toString() : undefined;
+    obj.current_epoch = omitDefault(message.currentEpoch);
     obj.current_epoch_start_time = message.currentEpochStartTime;
-    obj.epoch_counting_started = message.epochCountingStarted;
-    obj.current_epoch_start_height = message.currentEpochStartHeight ? message.currentEpochStartHeight.toString() : undefined;
+    obj.epoch_counting_started = omitDefault(message.epochCountingStarted);
+    obj.current_epoch_start_height = omitDefault(message.currentEpochStartHeight);
     return obj;
   },
   fromAminoMsg(object: EpochInfoAminoMsg): EpochInfo {

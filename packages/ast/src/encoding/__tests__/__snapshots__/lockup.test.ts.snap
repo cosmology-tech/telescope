@@ -98,7 +98,7 @@ exports[`osmosis/lockup/tx duration 2`] = `
   },
   toAmino(message: MsgLockTokens): MsgLockTokensAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = omitDefault(message.owner);
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
@@ -158,11 +158,11 @@ exports[`osmosis/lockup/tx duration 4`] = `
       coins
     }: MsgLockTokens): MsgLockTokensAminoType["value"] => {
       return {
-        owner,
+        owner: omitDefault(owner),
         duration: (duration * 1_000_000_000).toString(),
         coins: coins.map(el0 => ({
-          denom: el0.denom,
-          amount: el0.amount
+          denom: omitDefault(el0.denom),
+          amount: omitDefault(el0.amount)
         }))
       };
     },
@@ -285,7 +285,7 @@ exports[`osmosis/lockup/tx string 2`] = `
   },
   toAmino(message: MsgLockTokens): MsgLockTokensAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = omitDefault(message.owner);
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
@@ -342,11 +342,11 @@ exports[`osmosis/lockup/tx string 4`] = `
       coins
     }: MsgLockTokens): MsgLockTokensAminoType["value"] => {
       return {
-        owner,
+        owner: omitDefault(owner),
         duration: (duration * 1_000_000_000).toString(),
         coins: coins.map(el0 => ({
-          denom: el0.denom,
-          amount: el0.amount
+          denom: omitDefault(el0.denom),
+          amount: omitDefault(el0.amount)
         }))
       };
     },

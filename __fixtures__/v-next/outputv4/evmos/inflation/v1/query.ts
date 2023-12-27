@@ -1,7 +1,7 @@
 import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet } from "../../../helpers";
+import { DeepPartial, isSet, omitDefault, padDecimal } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "evmos.inflation.v1";
 /** QueryPeriodRequest is the request type for the Query/Period RPC method. */
@@ -266,7 +266,7 @@ export const QueryPeriodResponse = {
   },
   toAmino(message: QueryPeriodResponse): QueryPeriodResponseAmino {
     const obj: any = {};
-    obj.period = message.period ? message.period.toString() : undefined;
+    obj.period = omitDefault(message.period);
     return obj;
   },
   fromAminoMsg(object: QueryPeriodResponseAminoMsg): QueryPeriodResponse {
@@ -576,7 +576,7 @@ export const QuerySkippedEpochsResponse = {
   },
   toAmino(message: QuerySkippedEpochsResponse): QuerySkippedEpochsResponseAmino {
     const obj: any = {};
-    obj.skipped_epochs = message.skippedEpochs ? message.skippedEpochs.toString() : undefined;
+    obj.skipped_epochs = omitDefault(message.skippedEpochs);
     return obj;
   },
   fromAminoMsg(object: QuerySkippedEpochsResponseAminoMsg): QuerySkippedEpochsResponse {
@@ -884,7 +884,7 @@ export const QueryInflationRateResponse = {
   },
   toAmino(message: QueryInflationRateResponse): QueryInflationRateResponseAmino {
     const obj: any = {};
-    obj.inflation_rate = message.inflationRate;
+    obj.inflation_rate = padDecimal(message.inflationRate);
     return obj;
   },
   fromAminoMsg(object: QueryInflationRateResponseAminoMsg): QueryInflationRateResponse {

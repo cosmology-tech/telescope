@@ -41,7 +41,7 @@ export const AminoConverter = {
         plan: {
           name: omitDefault(plan.name),
           time: plan.time,
-          height: plan.height.toString(),
+          height: omitDefault(plan.height)?.toString?.(),
           info: omitDefault(plan.info),
           upgraded_client_state: {
             type_url: omitDefault(plan.upgradedClientState.typeUrl),

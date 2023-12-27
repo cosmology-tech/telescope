@@ -3,7 +3,7 @@ import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../protobuf/duration";
 import { Any, AnySDKType } from "../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, isObject, toTimestamp, fromTimestamp } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault, isObject, toTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "google.rpc.context";
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
@@ -812,8 +812,8 @@ export const AttributeContext_Peer_LabelsEntry = {
   },
   toAmino(message: AttributeContext_Peer_LabelsEntry): AttributeContext_Peer_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: AttributeContext_Peer_LabelsEntryAminoMsg): AttributeContext_Peer_LabelsEntry {
@@ -992,16 +992,16 @@ export const AttributeContext_Peer = {
   },
   toAmino(message: AttributeContext_Peer): AttributeContext_PeerAmino {
     const obj: any = {};
-    obj.ip = message.ip;
-    obj.port = message.port ? message.port.toString() : undefined;
+    obj.ip = omitDefault(message.ip);
+    obj.port = omitDefault(message.port);
     obj.labels = {};
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {
         obj.labels[k] = v;
       });
     }
-    obj.principal = message.principal;
-    obj.region_code = message.regionCode;
+    obj.principal = omitDefault(message.principal);
+    obj.region_code = omitDefault(message.regionCode);
     return obj;
   },
   fromAminoMsg(object: AttributeContext_PeerAminoMsg): AttributeContext_Peer {
@@ -1129,10 +1129,10 @@ export const AttributeContext_Api = {
   },
   toAmino(message: AttributeContext_Api): AttributeContext_ApiAmino {
     const obj: any = {};
-    obj.service = message.service;
-    obj.operation = message.operation;
-    obj.protocol = message.protocol;
-    obj.version = message.version;
+    obj.service = omitDefault(message.service);
+    obj.operation = omitDefault(message.operation);
+    obj.protocol = omitDefault(message.protocol);
+    obj.version = omitDefault(message.version);
     return obj;
   },
   fromAminoMsg(object: AttributeContext_ApiAminoMsg): AttributeContext_Api {
@@ -1290,13 +1290,13 @@ export const AttributeContext_Auth = {
   },
   toAmino(message: AttributeContext_Auth): AttributeContext_AuthAmino {
     const obj: any = {};
-    obj.principal = message.principal;
+    obj.principal = omitDefault(message.principal);
     if (message.audiences) {
       obj.audiences = message.audiences.map(e => e);
     } else {
       obj.audiences = [];
     }
-    obj.presenter = message.presenter;
+    obj.presenter = omitDefault(message.presenter);
     obj.claims = message.claims ? Struct.toAmino(message.claims) : undefined;
     if (message.accessLevels) {
       obj.access_levels = message.accessLevels.map(e => e);
@@ -1401,8 +1401,8 @@ export const AttributeContext_Request_HeadersEntry = {
   },
   toAmino(message: AttributeContext_Request_HeadersEntry): AttributeContext_Request_HeadersEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: AttributeContext_Request_HeadersEntryAminoMsg): AttributeContext_Request_HeadersEntry {
@@ -1670,7 +1670,7 @@ export const AttributeContext_Request = {
       host: object.host,
       scheme: object.scheme,
       query: object.query,
-      time: object.time,
+      time: object?.time ? Timestamp.fromAmino(object.time) : undefined,
       size: BigInt(object.size),
       protocol: object.protocol,
       reason: object.reason,
@@ -1679,22 +1679,22 @@ export const AttributeContext_Request = {
   },
   toAmino(message: AttributeContext_Request): AttributeContext_RequestAmino {
     const obj: any = {};
-    obj.id = message.id;
-    obj.method = message.method;
+    obj.id = omitDefault(message.id);
+    obj.method = omitDefault(message.method);
     obj.headers = {};
     if (message.headers) {
       Object.entries(message.headers).forEach(([k, v]) => {
         obj.headers[k] = v;
       });
     }
-    obj.path = message.path;
-    obj.host = message.host;
-    obj.scheme = message.scheme;
-    obj.query = message.query;
+    obj.path = omitDefault(message.path);
+    obj.host = omitDefault(message.host);
+    obj.scheme = omitDefault(message.scheme);
+    obj.query = omitDefault(message.query);
     obj.time = message.time;
-    obj.size = message.size ? message.size.toString() : undefined;
-    obj.protocol = message.protocol;
-    obj.reason = message.reason;
+    obj.size = omitDefault(message.size);
+    obj.protocol = omitDefault(message.protocol);
+    obj.reason = omitDefault(message.reason);
     obj.auth = message.auth ? AttributeContext_Auth.toAmino(message.auth) : undefined;
     return obj;
   },
@@ -1794,8 +1794,8 @@ export const AttributeContext_Response_HeadersEntry = {
   },
   toAmino(message: AttributeContext_Response_HeadersEntry): AttributeContext_Response_HeadersEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: AttributeContext_Response_HeadersEntryAminoMsg): AttributeContext_Response_HeadersEntry {
@@ -1968,14 +1968,14 @@ export const AttributeContext_Response = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      time: object.time,
+      time: object?.time ? Timestamp.fromAmino(object.time) : undefined,
       backendLatency: object?.backend_latency ? Duration.fromAmino(object.backend_latency) : undefined
     };
   },
   toAmino(message: AttributeContext_Response): AttributeContext_ResponseAmino {
     const obj: any = {};
-    obj.code = message.code ? message.code.toString() : undefined;
-    obj.size = message.size ? message.size.toString() : undefined;
+    obj.code = omitDefault(message.code);
+    obj.size = omitDefault(message.size);
     obj.headers = {};
     if (message.headers) {
       Object.entries(message.headers).forEach(([k, v]) => {
@@ -2082,8 +2082,8 @@ export const AttributeContext_Resource_LabelsEntry = {
   },
   toAmino(message: AttributeContext_Resource_LabelsEntry): AttributeContext_Resource_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: AttributeContext_Resource_LabelsEntryAminoMsg): AttributeContext_Resource_LabelsEntry {
@@ -2176,8 +2176,8 @@ export const AttributeContext_Resource_AnnotationsEntry = {
   },
   toAmino(message: AttributeContext_Resource_AnnotationsEntry): AttributeContext_Resource_AnnotationsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: AttributeContext_Resource_AnnotationsEntryAminoMsg): AttributeContext_Resource_AnnotationsEntry {
@@ -2488,37 +2488,37 @@ export const AttributeContext_Resource = {
         return acc;
       }, {}) : {},
       displayName: object.display_name,
-      createTime: object.create_time,
-      updateTime: object.update_time,
-      deleteTime: object.delete_time,
+      createTime: object?.create_time ? Timestamp.fromAmino(object.create_time) : undefined,
+      updateTime: object?.update_time ? Timestamp.fromAmino(object.update_time) : undefined,
+      deleteTime: object?.delete_time ? Timestamp.fromAmino(object.delete_time) : undefined,
       etag: object.etag,
       location: object.location
     };
   },
   toAmino(message: AttributeContext_Resource): AttributeContext_ResourceAmino {
     const obj: any = {};
-    obj.service = message.service;
-    obj.name = message.name;
-    obj.type = message.type;
+    obj.service = omitDefault(message.service);
+    obj.name = omitDefault(message.name);
+    obj.type = omitDefault(message.type);
     obj.labels = {};
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {
         obj.labels[k] = v;
       });
     }
-    obj.uid = message.uid;
+    obj.uid = omitDefault(message.uid);
     obj.annotations = {};
     if (message.annotations) {
       Object.entries(message.annotations).forEach(([k, v]) => {
         obj.annotations[k] = v;
       });
     }
-    obj.display_name = message.displayName;
+    obj.display_name = omitDefault(message.displayName);
     obj.create_time = message.createTime;
     obj.update_time = message.updateTime;
     obj.delete_time = message.deleteTime;
-    obj.etag = message.etag;
-    obj.location = message.location;
+    obj.etag = omitDefault(message.etag);
+    obj.location = omitDefault(message.location);
     return obj;
   },
   fromAminoMsg(object: AttributeContext_ResourceAminoMsg): AttributeContext_Resource {

@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Account, AccountAmino, AccountSDKType, Payment, PaymentAmino, PaymentSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta1";
 /** QueryAccountRequest is request type for the Query/Account RPC method */
 export interface QueryAccountsRequest {
@@ -232,10 +232,10 @@ export const QueryAccountsRequest = {
   },
   toAmino(message: QueryAccountsRequest): QueryAccountsRequestAmino {
     const obj: any = {};
-    obj.scope = message.scope;
-    obj.xid = message.xid;
-    obj.owner = message.owner;
-    obj.state = message.state;
+    obj.scope = omitDefault(message.scope);
+    obj.xid = omitDefault(message.xid);
+    obj.owner = omitDefault(message.owner);
+    obj.state = omitDefault(message.state);
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -493,11 +493,11 @@ export const QueryPaymentsRequest = {
   },
   toAmino(message: QueryPaymentsRequest): QueryPaymentsRequestAmino {
     const obj: any = {};
-    obj.scope = message.scope;
-    obj.xid = message.xid;
-    obj.id = message.id;
-    obj.owner = message.owner;
-    obj.state = message.state;
+    obj.scope = omitDefault(message.scope);
+    obj.xid = omitDefault(message.xid);
+    obj.id = omitDefault(message.id);
+    obj.owner = omitDefault(message.owner);
+    obj.state = omitDefault(message.state);
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },

@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
+import { DeepPartial, isSet, omitDefault } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Path Translation specifies how to combine the backend address with the
@@ -573,15 +573,15 @@ export const BackendRule = {
   },
   toAmino(message: BackendRule): BackendRuleAmino {
     const obj: any = {};
-    obj.selector = message.selector;
-    obj.address = message.address;
-    obj.deadline = message.deadline;
-    obj.min_deadline = message.minDeadline;
-    obj.operation_deadline = message.operationDeadline;
-    obj.path_translation = message.pathTranslation;
-    obj.jwt_audience = message.jwtAudience;
-    obj.disable_auth = message.disableAuth;
-    obj.protocol = message.protocol;
+    obj.selector = omitDefault(message.selector);
+    obj.address = omitDefault(message.address);
+    obj.deadline = omitDefault(message.deadline);
+    obj.min_deadline = omitDefault(message.minDeadline);
+    obj.operation_deadline = omitDefault(message.operationDeadline);
+    obj.path_translation = omitDefault(message.pathTranslation);
+    obj.jwt_audience = omitDefault(message.jwtAudience);
+    obj.disable_auth = omitDefault(message.disableAuth);
+    obj.protocol = omitDefault(message.protocol);
     return obj;
   },
   fromAminoMsg(object: BackendRuleAminoMsg): BackendRule {

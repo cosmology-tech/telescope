@@ -1,7 +1,7 @@
 import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BidID, BidIDAmino, BidIDSDKType } from "./bid";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of lease */
 export enum Lease_State {
@@ -370,7 +370,7 @@ export const LeaseID = {
   toAmino(message: LeaseID): LeaseIDAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.dseq = message.dseq;
     obj.gseq = message.gseq;
     obj.oseq = message.oseq;
     obj.provider = message.provider;
@@ -517,8 +517,8 @@ export const Lease = {
     obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId) : undefined;
     obj.state = message.state;
     obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
-    obj.closed_on = message.closedOn ? message.closedOn.toString() : undefined;
+    obj.created_at = omitDefault(message.createdAt);
+    obj.closed_on = omitDefault(message.closedOn);
     return obj;
   },
   fromAminoMsg(object: LeaseAminoMsg): Lease {
@@ -667,7 +667,7 @@ export const LeaseFilters = {
   toAmino(message: LeaseFilters): LeaseFiltersAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.dseq = message.dseq;
     obj.gseq = message.gseq;
     obj.oseq = message.oseq;
     obj.provider = message.provider;

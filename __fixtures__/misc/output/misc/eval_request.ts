@@ -1,6 +1,6 @@
 import { ExprValue, ExprValueAmino, ExprValueSDKType, IdRef, IdRefAmino, IdRefSDKType } from "../google/api/expr/v1alpha1/eval";
 import { BinaryReader, BinaryWriter } from "../binary";
-import { isSet, DeepPartial, isObject } from "../helpers";
+import { isSet, DeepPartial, omitDefault, isObject } from "../helpers";
 export const protobufPackage = "misc";
 export interface EvalRequest_BindingsEntry {
   key: string;
@@ -162,7 +162,7 @@ export const EvalRequest_BindingsEntry = {
   },
   toAmino(message: EvalRequest_BindingsEntry): EvalRequest_BindingsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = omitDefault(message.key);
     obj.value = message.value ? ExprValue.toAmino(message.value) : undefined;
     return obj;
   },
@@ -256,7 +256,7 @@ export const EvalRequest_RefsEntry = {
   },
   toAmino(message: EvalRequest_RefsEntry): EvalRequest_RefsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = omitDefault(message.key);
     obj.value = message.value ? IdRef.toAmino(message.value) : undefined;
     return obj;
   },

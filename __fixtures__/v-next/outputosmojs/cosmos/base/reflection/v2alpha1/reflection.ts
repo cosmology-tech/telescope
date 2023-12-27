@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.reflection.v2alpha1";
 /** AppDescriptor describes a cosmos-sdk based application */
 export interface AppDescriptor {
@@ -564,7 +564,7 @@ export const TxDescriptor = {
   },
   toAmino(message: TxDescriptor): TxDescriptorAmino {
     const obj: any = {};
-    obj.fullname = message.fullname;
+    obj.fullname = omitDefault(message.fullname);
     if (message.msgs) {
       obj.msgs = message.msgs.map(e => e ? MsgDescriptor.toAmino(e) : undefined);
     } else {
@@ -793,9 +793,9 @@ export const SigningModeDescriptor = {
   },
   toAmino(message: SigningModeDescriptor): SigningModeDescriptorAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.number = message.number;
-    obj.authn_info_provider_method_fullname = message.authnInfoProviderMethodFullname;
+    obj.name = omitDefault(message.name);
+    obj.number = omitDefault(message.number);
+    obj.authn_info_provider_method_fullname = omitDefault(message.authnInfoProviderMethodFullname);
     return obj;
   },
   fromAminoMsg(object: SigningModeDescriptorAminoMsg): SigningModeDescriptor {
@@ -887,7 +887,7 @@ export const ChainDescriptor = {
   },
   toAmino(message: ChainDescriptor): ChainDescriptorAmino {
     const obj: any = {};
-    obj.id = message.id;
+    obj.id = omitDefault(message.id);
     return obj;
   },
   fromAminoMsg(object: ChainDescriptorAminoMsg): ChainDescriptor {
@@ -1127,7 +1127,7 @@ export const InterfaceDescriptor = {
   },
   toAmino(message: InterfaceDescriptor): InterfaceDescriptorAmino {
     const obj: any = {};
-    obj.fullname = message.fullname;
+    obj.fullname = omitDefault(message.fullname);
     if (message.interfaceAcceptingMessages) {
       obj.interface_accepting_messages = message.interfaceAcceptingMessages.map(e => e ? InterfaceAcceptingMessageDescriptor.toAmino(e) : undefined);
     } else {
@@ -1243,8 +1243,8 @@ export const InterfaceImplementerDescriptor = {
   },
   toAmino(message: InterfaceImplementerDescriptor): InterfaceImplementerDescriptorAmino {
     const obj: any = {};
-    obj.fullname = message.fullname;
-    obj.type_url = message.typeUrl;
+    obj.fullname = omitDefault(message.fullname);
+    obj.type_url = omitDefault(message.typeUrl);
     return obj;
   },
   fromAminoMsg(object: InterfaceImplementerDescriptorAminoMsg): InterfaceImplementerDescriptor {
@@ -1358,7 +1358,7 @@ export const InterfaceAcceptingMessageDescriptor = {
   },
   toAmino(message: InterfaceAcceptingMessageDescriptor): InterfaceAcceptingMessageDescriptorAmino {
     const obj: any = {};
-    obj.fullname = message.fullname;
+    obj.fullname = omitDefault(message.fullname);
     if (message.fieldDescriptorNames) {
       obj.field_descriptor_names = message.fieldDescriptorNames.map(e => e);
     } else {
@@ -1455,7 +1455,7 @@ export const ConfigurationDescriptor = {
   },
   toAmino(message: ConfigurationDescriptor): ConfigurationDescriptorAmino {
     const obj: any = {};
-    obj.bech32_account_address_prefix = message.bech32AccountAddressPrefix;
+    obj.bech32_account_address_prefix = omitDefault(message.bech32AccountAddressPrefix);
     return obj;
   },
   fromAminoMsg(object: ConfigurationDescriptorAminoMsg): ConfigurationDescriptor {
@@ -1547,7 +1547,7 @@ export const MsgDescriptor = {
   },
   toAmino(message: MsgDescriptor): MsgDescriptorAmino {
     const obj: any = {};
-    obj.msg_type_url = message.msgTypeUrl;
+    obj.msg_type_url = omitDefault(message.msgTypeUrl);
     return obj;
   },
   fromAminoMsg(object: MsgDescriptorAminoMsg): MsgDescriptor {
@@ -2763,8 +2763,8 @@ export const QueryServiceDescriptor = {
   },
   toAmino(message: QueryServiceDescriptor): QueryServiceDescriptorAmino {
     const obj: any = {};
-    obj.fullname = message.fullname;
-    obj.is_module = message.isModule;
+    obj.fullname = omitDefault(message.fullname);
+    obj.is_module = omitDefault(message.isModule);
     if (message.methods) {
       obj.methods = message.methods.map(e => e ? QueryMethodDescriptor.toAmino(e) : undefined);
     } else {
@@ -2875,8 +2875,8 @@ export const QueryMethodDescriptor = {
   },
   toAmino(message: QueryMethodDescriptor): QueryMethodDescriptorAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.full_query_path = message.fullQueryPath;
+    obj.name = omitDefault(message.name);
+    obj.full_query_path = omitDefault(message.fullQueryPath);
     return obj;
   },
   fromAminoMsg(object: QueryMethodDescriptorAminoMsg): QueryMethodDescriptor {

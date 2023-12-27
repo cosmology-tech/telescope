@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "evmos.vesting.v1";
 /** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
 export interface MsgCreateClawbackVestingAccount {
@@ -220,7 +220,7 @@ export const MsgCreateClawbackVestingAccount = {
     return {
       fromAddress: object.from_address,
       toAddress: object.to_address,
-      startTime: object.start_time,
+      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
       lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromAmino(e)) : [],
       vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : [],
       merge: object.merge
@@ -228,8 +228,8 @@ export const MsgCreateClawbackVestingAccount = {
   },
   toAmino(message: MsgCreateClawbackVestingAccount): MsgCreateClawbackVestingAccountAmino {
     const obj: any = {};
-    obj.from_address = message.fromAddress;
-    obj.to_address = message.toAddress;
+    obj.from_address = omitDefault(message.fromAddress);
+    obj.to_address = omitDefault(message.toAddress);
     obj.start_time = message.startTime;
     if (message.lockupPeriods) {
       obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e) : undefined);
@@ -241,7 +241,7 @@ export const MsgCreateClawbackVestingAccount = {
     } else {
       obj.vesting_periods = [];
     }
-    obj.merge = message.merge;
+    obj.merge = omitDefault(message.merge);
     return obj;
   },
   fromAminoMsg(object: MsgCreateClawbackVestingAccountAminoMsg): MsgCreateClawbackVestingAccount {
@@ -422,9 +422,9 @@ export const MsgClawback = {
   },
   toAmino(message: MsgClawback): MsgClawbackAmino {
     const obj: any = {};
-    obj.funder_address = message.funderAddress;
-    obj.account_address = message.accountAddress;
-    obj.dest_address = message.destAddress;
+    obj.funder_address = omitDefault(message.funderAddress);
+    obj.account_address = omitDefault(message.accountAddress);
+    obj.dest_address = omitDefault(message.destAddress);
     return obj;
   },
   fromAminoMsg(object: MsgClawbackAminoMsg): MsgClawback {

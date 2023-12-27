@@ -1,6 +1,6 @@
 import { FileDescriptorProto, FileDescriptorProtoSDKType } from "../descriptor";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "google.protobuf.compiler";
 /** The version number of protocol compiler. */
 export interface Version {
@@ -251,10 +251,10 @@ export const Version = {
   },
   toAmino(message: Version): VersionAmino {
     const obj: any = {};
-    obj.major = message.major;
-    obj.minor = message.minor;
-    obj.patch = message.patch;
-    obj.suffix = message.suffix;
+    obj.major = omitDefault(message.major);
+    obj.minor = omitDefault(message.minor);
+    obj.patch = omitDefault(message.patch);
+    obj.suffix = omitDefault(message.suffix);
     return obj;
   },
   fromAminoMsg(object: VersionAminoMsg): Version {
@@ -405,7 +405,7 @@ export const CodeGeneratorRequest = {
     } else {
       obj.file_to_generate = [];
     }
-    obj.parameter = message.parameter;
+    obj.parameter = omitDefault(message.parameter);
     if (message.protoFile) {
       obj.proto_file = message.protoFile.map(e => e ? FileDescriptorProto.toAmino(e) : undefined);
     } else {
@@ -519,7 +519,7 @@ export const CodeGeneratorResponse = {
   },
   toAmino(message: CodeGeneratorResponse): CodeGeneratorResponseAmino {
     const obj: any = {};
-    obj.error = message.error;
+    obj.error = omitDefault(message.error);
     if (message.file) {
       obj.file = message.file.map(e => e ? CodeGeneratorResponse_File.toAmino(e) : undefined);
     } else {
@@ -638,9 +638,9 @@ export const CodeGeneratorResponse_File = {
   },
   toAmino(message: CodeGeneratorResponse_File): CodeGeneratorResponse_FileAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.insertion_point = message.insertionPoint;
-    obj.content = message.content;
+    obj.name = omitDefault(message.name);
+    obj.insertion_point = omitDefault(message.insertionPoint);
+    obj.content = omitDefault(message.content);
     return obj;
   },
   fromAminoMsg(object: CodeGeneratorResponse_FileAminoMsg): CodeGeneratorResponse_File {

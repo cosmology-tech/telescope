@@ -111,7 +111,7 @@ export const GroupID = {
   toAmino(message: GroupID): GroupIDAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.dseq = message.dseq;
     obj.gseq = message.gseq;
     return obj;
   },

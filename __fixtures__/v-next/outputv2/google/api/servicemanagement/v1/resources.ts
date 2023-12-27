@@ -1,7 +1,7 @@
 import { Timestamp } from "../../../protobuf/timestamp";
 import { ConfigChange, ConfigChangeAmino, ConfigChangeSDKType } from "../../config_change";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicemanagement.v1";
 /** Code describes the status of the operation (or one of its steps). */
 export enum OperationMetadata_Status {
@@ -908,8 +908,8 @@ export const ManagedService = {
   },
   toAmino(message: ManagedService): ManagedServiceAmino {
     const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.producer_project_id = message.producerProjectId;
+    obj.service_name = omitDefault(message.serviceName);
+    obj.producer_project_id = omitDefault(message.producerProjectId);
     return obj;
   },
   fromAminoMsg(object: ManagedServiceAminoMsg): ManagedService {
@@ -1040,7 +1040,7 @@ export const OperationMetadata = {
       resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
       steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromAmino(e)) : [],
       progressPercentage: object.progress_percentage,
-      startTime: object.start_time
+      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined
     };
   },
   toAmino(message: OperationMetadata): OperationMetadataAmino {
@@ -1055,7 +1055,7 @@ export const OperationMetadata = {
     } else {
       obj.steps = [];
     }
-    obj.progress_percentage = message.progressPercentage;
+    obj.progress_percentage = omitDefault(message.progressPercentage);
     obj.start_time = message.startTime;
     return obj;
   },
@@ -1150,8 +1150,8 @@ export const OperationMetadata_Step = {
   },
   toAmino(message: OperationMetadata_Step): OperationMetadata_StepAmino {
     const obj: any = {};
-    obj.description = message.description;
-    obj.status = message.status;
+    obj.description = omitDefault(message.description);
+    obj.status = omitDefault(message.status);
     return obj;
   },
   fromAminoMsg(object: OperationMetadata_StepAminoMsg): OperationMetadata_Step {
@@ -1258,9 +1258,9 @@ export const Diagnostic = {
   },
   toAmino(message: Diagnostic): DiagnosticAmino {
     const obj: any = {};
-    obj.location = message.location;
-    obj.kind = message.kind;
-    obj.message = message.message;
+    obj.location = omitDefault(message.location);
+    obj.kind = omitDefault(message.kind);
+    obj.message = omitDefault(message.message);
     return obj;
   },
   fromAminoMsg(object: DiagnosticAminoMsg): Diagnostic {
@@ -1362,7 +1362,7 @@ export const ConfigSource = {
   },
   toAmino(message: ConfigSource): ConfigSourceAmino {
     const obj: any = {};
-    obj.id = message.id;
+    obj.id = omitDefault(message.id);
     if (message.files) {
       obj.files = message.files.map(e => e ? ConfigFile.toAmino(e) : undefined);
     } else {
@@ -1474,9 +1474,9 @@ export const ConfigFile = {
   },
   toAmino(message: ConfigFile): ConfigFileAmino {
     const obj: any = {};
-    obj.file_path = message.filePath;
+    obj.file_path = omitDefault(message.filePath);
     obj.file_contents = message.fileContents;
-    obj.file_type = message.fileType;
+    obj.file_type = omitDefault(message.fileType);
     return obj;
   },
   fromAminoMsg(object: ConfigFileAminoMsg): ConfigFile {
@@ -1557,7 +1557,7 @@ export const ConfigRef = {
   },
   toAmino(message: ConfigRef): ConfigRefAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     return obj;
   },
   fromAminoMsg(object: ConfigRefAminoMsg): ConfigRef {
@@ -1803,7 +1803,7 @@ export const Rollout = {
   fromAmino(object: RolloutAmino): Rollout {
     return {
       rolloutId: object.rollout_id,
-      createTime: object.create_time,
+      createTime: object?.create_time ? Timestamp.fromAmino(object.create_time) : undefined,
       createdBy: object.created_by,
       status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : -1,
       trafficPercentStrategy: object?.traffic_percent_strategy ? Rollout_TrafficPercentStrategy.fromAmino(object.traffic_percent_strategy) : undefined,
@@ -1813,13 +1813,13 @@ export const Rollout = {
   },
   toAmino(message: Rollout): RolloutAmino {
     const obj: any = {};
-    obj.rollout_id = message.rolloutId;
+    obj.rollout_id = omitDefault(message.rolloutId);
     obj.create_time = message.createTime;
-    obj.created_by = message.createdBy;
-    obj.status = message.status;
+    obj.created_by = omitDefault(message.createdBy);
+    obj.status = omitDefault(message.status);
     obj.traffic_percent_strategy = message.trafficPercentStrategy ? Rollout_TrafficPercentStrategy.toAmino(message.trafficPercentStrategy) : undefined;
     obj.delete_service_strategy = message.deleteServiceStrategy ? Rollout_DeleteServiceStrategy.toAmino(message.deleteServiceStrategy) : undefined;
-    obj.service_name = message.serviceName;
+    obj.service_name = omitDefault(message.serviceName);
     return obj;
   },
   fromAminoMsg(object: RolloutAminoMsg): Rollout {
@@ -1912,8 +1912,8 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
   },
   toAmino(message: Rollout_TrafficPercentStrategy_PercentagesEntry): Rollout_TrafficPercentStrategy_PercentagesEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: Rollout_TrafficPercentStrategy_PercentagesEntryAminoMsg): Rollout_TrafficPercentStrategy_PercentagesEntry {

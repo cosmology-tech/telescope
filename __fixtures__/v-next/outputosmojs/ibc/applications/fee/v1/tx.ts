@@ -1,6 +1,6 @@
 import { Fee, FeeSDKType, PacketFee, PacketFeeSDKType } from "./fee";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.fee.v1";
 /** MsgRegisterPayee defines the request type for the RegisterPayee rpc */
 export interface MsgRegisterPayee {
@@ -207,10 +207,10 @@ export const MsgRegisterPayee = {
   },
   toAmino(message: MsgRegisterPayee): MsgRegisterPayeeAmino {
     const obj: any = {};
-    obj.port_id = message.portId;
-    obj.channel_id = message.channelId;
-    obj.relayer = message.relayer;
-    obj.payee = message.payee;
+    obj.port_id = omitDefault(message.portId);
+    obj.channel_id = omitDefault(message.channelId);
+    obj.relayer = omitDefault(message.relayer);
+    obj.payee = omitDefault(message.payee);
     return obj;
   },
   fromAminoMsg(object: MsgRegisterPayeeAminoMsg): MsgRegisterPayee {
@@ -416,10 +416,10 @@ export const MsgRegisterCounterpartyPayee = {
   },
   toAmino(message: MsgRegisterCounterpartyPayee): MsgRegisterCounterpartyPayeeAmino {
     const obj: any = {};
-    obj.port_id = message.portId;
-    obj.channel_id = message.channelId;
-    obj.relayer = message.relayer;
-    obj.counterparty_payee = message.counterpartyPayee;
+    obj.port_id = omitDefault(message.portId);
+    obj.channel_id = omitDefault(message.channelId);
+    obj.relayer = omitDefault(message.relayer);
+    obj.counterparty_payee = omitDefault(message.counterpartyPayee);
     return obj;
   },
   fromAminoMsg(object: MsgRegisterCounterpartyPayeeAminoMsg): MsgRegisterCounterpartyPayee {
@@ -648,9 +648,9 @@ export const MsgPayPacketFee = {
   toAmino(message: MsgPayPacketFee): MsgPayPacketFeeAmino {
     const obj: any = {};
     obj.fee = message.fee ? Fee.toAmino(message.fee) : undefined;
-    obj.source_port_id = message.sourcePortId;
-    obj.source_channel_id = message.sourceChannelId;
-    obj.signer = message.signer;
+    obj.source_port_id = omitDefault(message.sourcePortId);
+    obj.source_channel_id = omitDefault(message.sourceChannelId);
+    obj.signer = omitDefault(message.signer);
     if (message.relayers) {
       obj.relayers = message.relayers.map(e => e);
     } else {

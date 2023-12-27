@@ -1,7 +1,7 @@
 import { BaseAccount, BaseAccountSDKType } from "../../auth/v1beta1/auth";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.vesting.v1beta1";
 /**
  * BaseVestingAccount implements the VestingAccount interface. It contains all
@@ -268,7 +268,7 @@ export const BaseVestingAccount = {
     } else {
       obj.delegated_vesting = [];
     }
-    obj.end_time = message.endTime ? message.endTime.toString() : undefined;
+    obj.end_time = omitDefault(message.endTime);
     return obj;
   },
   fromAminoMsg(object: BaseVestingAccountAminoMsg): BaseVestingAccount {
@@ -375,7 +375,7 @@ export const ContinuousVestingAccount = {
   toAmino(message: ContinuousVestingAccount): ContinuousVestingAccountAmino {
     const obj: any = {};
     obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount) : undefined;
-    obj.start_time = message.startTime ? message.startTime.toString() : undefined;
+    obj.start_time = omitDefault(message.startTime);
     return obj;
   },
   fromAminoMsg(object: ContinuousVestingAccountAminoMsg): ContinuousVestingAccount {
@@ -581,7 +581,7 @@ export const Period = {
   },
   toAmino(message: Period): PeriodAmino {
     const obj: any = {};
-    obj.length = message.length ? message.length.toString() : undefined;
+    obj.length = omitDefault(message.length);
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
@@ -715,7 +715,7 @@ export const PeriodicVestingAccount = {
   toAmino(message: PeriodicVestingAccount): PeriodicVestingAccountAmino {
     const obj: any = {};
     obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount) : undefined;
-    obj.start_time = message.startTime ? message.startTime.toString() : undefined;
+    obj.start_time = omitDefault(message.startTime);
     if (message.vestingPeriods) {
       obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e) : undefined);
     } else {

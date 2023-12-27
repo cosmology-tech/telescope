@@ -2,7 +2,7 @@ import { Params, ParamsSDKType } from "./params";
 import { TokenPairArbRoutes, TokenPairArbRoutesSDKType, BaseDenom, BaseDenomSDKType, PoolWeights, PoolWeightsSDKType } from "./protorev";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.protorev.v1beta1";
 /** GenesisState defines the protorev module's genesis state. */
 export interface GenesisState {
@@ -298,17 +298,17 @@ export const GenesisState = {
       obj.base_denoms = [];
     }
     obj.pool_weights = message.poolWeights ? PoolWeights.toAmino(message.poolWeights) : undefined;
-    obj.days_since_module_genesis = message.daysSinceModuleGenesis ? message.daysSinceModuleGenesis.toString() : undefined;
+    obj.days_since_module_genesis = omitDefault(message.daysSinceModuleGenesis);
     if (message.developerFees) {
       obj.developer_fees = message.developerFees.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.developer_fees = [];
     }
-    obj.latest_block_height = message.latestBlockHeight ? message.latestBlockHeight.toString() : undefined;
-    obj.developer_address = message.developerAddress;
-    obj.max_pool_points_per_block = message.maxPoolPointsPerBlock ? message.maxPoolPointsPerBlock.toString() : undefined;
-    obj.max_pool_points_per_tx = message.maxPoolPointsPerTx ? message.maxPoolPointsPerTx.toString() : undefined;
-    obj.point_count_for_block = message.pointCountForBlock ? message.pointCountForBlock.toString() : undefined;
+    obj.latest_block_height = omitDefault(message.latestBlockHeight);
+    obj.developer_address = omitDefault(message.developerAddress);
+    obj.max_pool_points_per_block = omitDefault(message.maxPoolPointsPerBlock);
+    obj.max_pool_points_per_tx = omitDefault(message.maxPoolPointsPerTx);
+    obj.point_count_for_block = omitDefault(message.pointCountForBlock);
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {

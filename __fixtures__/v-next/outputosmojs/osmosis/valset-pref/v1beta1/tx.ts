@@ -1,7 +1,7 @@
 import { ValidatorPreference, ValidatorPreferenceSDKType } from "./state";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.valsetpref.v1beta1";
 /** MsgCreateValidatorSetPreference is a list that holds validator-set. */
 export interface MsgSetValidatorSetPreference {
@@ -200,7 +200,7 @@ export const MsgSetValidatorSetPreference = {
   },
   toAmino(message: MsgSetValidatorSetPreference): MsgSetValidatorSetPreferenceAmino {
     const obj: any = {};
-    obj.delegator = message.delegator;
+    obj.delegator = omitDefault(message.delegator);
     if (message.preferences) {
       obj.preferences = message.preferences.map(e => e ? ValidatorPreference.toAmino(e) : undefined);
     } else {
@@ -383,7 +383,7 @@ export const MsgDelegateToValidatorSet = {
   },
   toAmino(message: MsgDelegateToValidatorSet): MsgDelegateToValidatorSetAmino {
     const obj: any = {};
-    obj.delegator = message.delegator;
+    obj.delegator = omitDefault(message.delegator);
     obj.coin = message.coin ? Coin.toAmino(message.coin) : undefined;
     return obj;
   },
@@ -562,7 +562,7 @@ export const MsgUndelegateFromValidatorSet = {
   },
   toAmino(message: MsgUndelegateFromValidatorSet): MsgUndelegateFromValidatorSetAmino {
     const obj: any = {};
-    obj.delegator = message.delegator;
+    obj.delegator = omitDefault(message.delegator);
     obj.coin = message.coin ? Coin.toAmino(message.coin) : undefined;
     return obj;
   },
@@ -749,7 +749,7 @@ export const MsgRedelegateValidatorSet = {
   },
   toAmino(message: MsgRedelegateValidatorSet): MsgRedelegateValidatorSetAmino {
     const obj: any = {};
-    obj.delegator = message.delegator;
+    obj.delegator = omitDefault(message.delegator);
     if (message.preferences) {
       obj.preferences = message.preferences.map(e => e ? ValidatorPreference.toAmino(e) : undefined);
     } else {
@@ -918,7 +918,7 @@ export const MsgWithdrawDelegationRewards = {
   },
   toAmino(message: MsgWithdrawDelegationRewards): MsgWithdrawDelegationRewardsAmino {
     const obj: any = {};
-    obj.delegator = message.delegator;
+    obj.delegator = omitDefault(message.delegator);
     return obj;
   },
   fromAminoMsg(object: MsgWithdrawDelegationRewardsAminoMsg): MsgWithdrawDelegationRewards {
@@ -1096,8 +1096,8 @@ export const MsgDelegateBondedTokens = {
   },
   toAmino(message: MsgDelegateBondedTokens): MsgDelegateBondedTokensAmino {
     const obj: any = {};
-    obj.delegator = message.delegator;
-    obj.lockID = message.lockID ? message.lockID.toString() : undefined;
+    obj.delegator = omitDefault(message.delegator);
+    obj.lockID = omitDefault(message.lockID);
     return obj;
   },
   fromAminoMsg(object: MsgDelegateBondedTokensAminoMsg): MsgDelegateBondedTokens {

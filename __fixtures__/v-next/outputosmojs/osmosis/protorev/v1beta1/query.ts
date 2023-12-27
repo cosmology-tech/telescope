@@ -2,7 +2,7 @@ import { Params, ParamsSDKType } from "./params";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { RouteStatistics, RouteStatisticsSDKType, TokenPairArbRoutes, TokenPairArbRoutesSDKType, PoolWeights, PoolWeightsSDKType, BaseDenom, BaseDenomSDKType } from "./protorev";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet } from "../../../helpers";
+import { DeepPartial, isSet, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.protorev.v1beta1";
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
@@ -670,7 +670,7 @@ export const QueryGetProtoRevNumberOfTradesResponse = {
   },
   toAmino(message: QueryGetProtoRevNumberOfTradesResponse): QueryGetProtoRevNumberOfTradesResponseAmino {
     const obj: any = {};
-    obj.number_of_trades = message.numberOfTrades;
+    obj.number_of_trades = omitDefault(message.numberOfTrades);
     return obj;
   },
   fromAminoMsg(object: QueryGetProtoRevNumberOfTradesResponseAminoMsg): QueryGetProtoRevNumberOfTradesResponse {
@@ -762,7 +762,7 @@ export const QueryGetProtoRevProfitsByDenomRequest = {
   },
   toAmino(message: QueryGetProtoRevProfitsByDenomRequest): QueryGetProtoRevProfitsByDenomRequestAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = omitDefault(message.denom);
     return obj;
   },
   fromAminoMsg(object: QueryGetProtoRevProfitsByDenomRequestAminoMsg): QueryGetProtoRevProfitsByDenomRequest {
@@ -1751,7 +1751,7 @@ export const QueryGetProtoRevAdminAccountResponse = {
   },
   toAmino(message: QueryGetProtoRevAdminAccountResponse): QueryGetProtoRevAdminAccountResponseAmino {
     const obj: any = {};
-    obj.admin_account = message.adminAccount;
+    obj.admin_account = omitDefault(message.adminAccount);
     return obj;
   },
   fromAminoMsg(object: QueryGetProtoRevAdminAccountResponseAminoMsg): QueryGetProtoRevAdminAccountResponse {
@@ -1915,7 +1915,7 @@ export const QueryGetProtoRevDeveloperAccountResponse = {
   },
   toAmino(message: QueryGetProtoRevDeveloperAccountResponse): QueryGetProtoRevDeveloperAccountResponseAmino {
     const obj: any = {};
-    obj.developer_account = message.developerAccount;
+    obj.developer_account = omitDefault(message.developerAccount);
     return obj;
   },
   fromAminoMsg(object: QueryGetProtoRevDeveloperAccountResponseAminoMsg): QueryGetProtoRevDeveloperAccountResponse {
@@ -2243,7 +2243,7 @@ export const QueryGetProtoRevMaxPoolPointsPerBlockResponse = {
   },
   toAmino(message: QueryGetProtoRevMaxPoolPointsPerBlockResponse): QueryGetProtoRevMaxPoolPointsPerBlockResponseAmino {
     const obj: any = {};
-    obj.max_pool_points_per_block = message.maxPoolPointsPerBlock ? message.maxPoolPointsPerBlock.toString() : undefined;
+    obj.max_pool_points_per_block = omitDefault(message.maxPoolPointsPerBlock);
     return obj;
   },
   fromAminoMsg(object: QueryGetProtoRevMaxPoolPointsPerBlockResponseAminoMsg): QueryGetProtoRevMaxPoolPointsPerBlockResponse {
@@ -2407,7 +2407,7 @@ export const QueryGetProtoRevMaxPoolPointsPerTxResponse = {
   },
   toAmino(message: QueryGetProtoRevMaxPoolPointsPerTxResponse): QueryGetProtoRevMaxPoolPointsPerTxResponseAmino {
     const obj: any = {};
-    obj.max_pool_points_per_tx = message.maxPoolPointsPerTx ? message.maxPoolPointsPerTx.toString() : undefined;
+    obj.max_pool_points_per_tx = omitDefault(message.maxPoolPointsPerTx);
     return obj;
   },
   fromAminoMsg(object: QueryGetProtoRevMaxPoolPointsPerTxResponseAminoMsg): QueryGetProtoRevMaxPoolPointsPerTxResponse {
@@ -2747,7 +2747,7 @@ export const QueryGetProtoRevEnabledResponse = {
   },
   toAmino(message: QueryGetProtoRevEnabledResponse): QueryGetProtoRevEnabledResponseAmino {
     const obj: any = {};
-    obj.enabled = message.enabled;
+    obj.enabled = omitDefault(message.enabled);
     return obj;
   },
   fromAminoMsg(object: QueryGetProtoRevEnabledResponseAminoMsg): QueryGetProtoRevEnabledResponse {

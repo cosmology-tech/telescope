@@ -2,7 +2,7 @@ import { Counterparty, CounterpartyAmino, CounterpartySDKType, Version, VersionA
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { Height, HeightAmino, HeightSDKType } from "../../client/v1/client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.connection.v1";
 /**
  * MsgConnectionOpenInit defines the msg sent by an account on Chain A to
@@ -430,11 +430,11 @@ export const MsgConnectionOpenInit = {
   },
   toAmino(message: MsgConnectionOpenInit): MsgConnectionOpenInitAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
+    obj.client_id = omitDefault(message.clientId);
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     obj.version = message.version ? Version.toAmino(message.version) : undefined;
-    obj.delay_period = message.delayPeriod ? message.delayPeriod.toString() : undefined;
-    obj.signer = message.signer;
+    obj.delay_period = omitDefault(message.delayPeriod);
+    obj.signer = omitDefault(message.signer);
     return obj;
   },
   fromAminoMsg(object: MsgConnectionOpenInitAminoMsg): MsgConnectionOpenInit {
@@ -754,11 +754,11 @@ export const MsgConnectionOpenTry = {
   },
   toAmino(message: MsgConnectionOpenTry): MsgConnectionOpenTryAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
-    obj.previous_connection_id = message.previousConnectionId;
+    obj.client_id = omitDefault(message.clientId);
+    obj.previous_connection_id = omitDefault(message.previousConnectionId);
     obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
-    obj.delay_period = message.delayPeriod ? message.delayPeriod.toString() : undefined;
+    obj.delay_period = omitDefault(message.delayPeriod);
     if (message.counterpartyVersions) {
       obj.counterparty_versions = message.counterpartyVersions.map(e => e ? Version.toAmino(e) : undefined);
     } else {
@@ -769,7 +769,7 @@ export const MsgConnectionOpenTry = {
     obj.proof_client = message.proofClient;
     obj.proof_consensus = message.proofConsensus;
     obj.consensus_height = message.consensusHeight ? Height.toAmino(message.consensusHeight) : {};
-    obj.signer = message.signer;
+    obj.signer = omitDefault(message.signer);
     return obj;
   },
   fromAminoMsg(object: MsgConnectionOpenTryAminoMsg): MsgConnectionOpenTry {
@@ -1053,8 +1053,8 @@ export const MsgConnectionOpenAck = {
   },
   toAmino(message: MsgConnectionOpenAck): MsgConnectionOpenAckAmino {
     const obj: any = {};
-    obj.connection_id = message.connectionId;
-    obj.counterparty_connection_id = message.counterpartyConnectionId;
+    obj.connection_id = omitDefault(message.connectionId);
+    obj.counterparty_connection_id = omitDefault(message.counterpartyConnectionId);
     obj.version = message.version ? Version.toAmino(message.version) : undefined;
     obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
@@ -1062,7 +1062,7 @@ export const MsgConnectionOpenAck = {
     obj.proof_client = message.proofClient;
     obj.proof_consensus = message.proofConsensus;
     obj.consensus_height = message.consensusHeight ? Height.toAmino(message.consensusHeight) : {};
-    obj.signer = message.signer;
+    obj.signer = omitDefault(message.signer);
     return obj;
   },
   fromAminoMsg(object: MsgConnectionOpenAckAminoMsg): MsgConnectionOpenAck {
@@ -1262,10 +1262,10 @@ export const MsgConnectionOpenConfirm = {
   },
   toAmino(message: MsgConnectionOpenConfirm): MsgConnectionOpenConfirmAmino {
     const obj: any = {};
-    obj.connection_id = message.connectionId;
+    obj.connection_id = omitDefault(message.connectionId);
     obj.proof_ack = message.proofAck;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
-    obj.signer = message.signer;
+    obj.signer = omitDefault(message.signer);
     return obj;
   },
   fromAminoMsg(object: MsgConnectionOpenConfirmAminoMsg): MsgConnectionOpenConfirm {

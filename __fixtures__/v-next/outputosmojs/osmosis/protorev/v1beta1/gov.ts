@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.protorev.v1beta1";
 /**
  * SetProtoRevEnabledProposal is a gov Content type to update whether the
@@ -134,9 +134,9 @@ export const SetProtoRevEnabledProposal = {
   },
   toAmino(message: SetProtoRevEnabledProposal): SetProtoRevEnabledProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.enabled = message.enabled;
+    obj.title = omitDefault(message.title);
+    obj.description = omitDefault(message.description);
+    obj.enabled = omitDefault(message.enabled);
     return obj;
   },
   fromAminoMsg(object: SetProtoRevEnabledProposalAminoMsg): SetProtoRevEnabledProposal {
@@ -256,9 +256,9 @@ export const SetProtoRevAdminAccountProposal = {
   },
   toAmino(message: SetProtoRevAdminAccountProposal): SetProtoRevAdminAccountProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.account = message.account;
+    obj.title = omitDefault(message.title);
+    obj.description = omitDefault(message.description);
+    obj.account = omitDefault(message.account);
     return obj;
   },
   fromAminoMsg(object: SetProtoRevAdminAccountProposalAminoMsg): SetProtoRevAdminAccountProposal {

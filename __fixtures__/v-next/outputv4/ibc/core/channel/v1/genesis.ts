@@ -1,6 +1,6 @@
 import { IdentifiedChannel, IdentifiedChannelSDKType, PacketState, PacketStateSDKType } from "./channel";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "ibc.core.channel.v1";
 /** GenesisState defines the ibc channel submodule's genesis state. */
 export interface GenesisState {
@@ -301,7 +301,7 @@ export const GenesisState = {
     } else {
       obj.ack_sequences = [];
     }
-    obj.next_channel_sequence = message.nextChannelSequence ? message.nextChannelSequence.toString() : undefined;
+    obj.next_channel_sequence = omitDefault(message.nextChannelSequence);
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
@@ -423,9 +423,9 @@ export const PacketSequence = {
   },
   toAmino(message: PacketSequence): PacketSequenceAmino {
     const obj: any = {};
-    obj.port_id = message.portId;
-    obj.channel_id = message.channelId;
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.port_id = omitDefault(message.portId);
+    obj.channel_id = omitDefault(message.channelId);
+    obj.sequence = omitDefault(message.sequence);
     return obj;
   },
   fromAminoMsg(object: PacketSequenceAminoMsg): PacketSequence {

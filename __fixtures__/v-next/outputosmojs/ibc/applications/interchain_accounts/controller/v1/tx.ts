@@ -1,6 +1,6 @@
 import { InterchainAccountPacketData, InterchainAccountPacketDataSDKType } from "../../v1/packet";
 import { BinaryReader, BinaryWriter } from "../../../../../binary";
-import { isSet, DeepPartial } from "../../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../../helpers";
 export const protobufPackage = "ibc.applications.interchain_accounts.controller.v1";
 /** MsgRegisterInterchainAccount defines the payload for Msg/RegisterAccount */
 export interface MsgRegisterInterchainAccount {
@@ -145,9 +145,9 @@ export const MsgRegisterInterchainAccount = {
   },
   toAmino(message: MsgRegisterInterchainAccount): MsgRegisterInterchainAccountAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.connection_id = message.connectionId;
-    obj.version = message.version;
+    obj.owner = omitDefault(message.owner);
+    obj.connection_id = omitDefault(message.connectionId);
+    obj.version = omitDefault(message.version);
     return obj;
   },
   fromAminoMsg(object: MsgRegisterInterchainAccountAminoMsg): MsgRegisterInterchainAccount {
@@ -253,8 +253,8 @@ export const MsgRegisterInterchainAccountResponse = {
   },
   toAmino(message: MsgRegisterInterchainAccountResponse): MsgRegisterInterchainAccountResponseAmino {
     const obj: any = {};
-    obj.channel_id = message.channelId;
-    obj.port_id = message.portId;
+    obj.channel_id = omitDefault(message.channelId);
+    obj.port_id = omitDefault(message.portId);
     return obj;
   },
   fromAminoMsg(object: MsgRegisterInterchainAccountResponseAminoMsg): MsgRegisterInterchainAccountResponse {
@@ -388,10 +388,10 @@ export const MsgSendTx = {
   },
   toAmino(message: MsgSendTx): MsgSendTxAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.connection_id = message.connectionId;
+    obj.owner = omitDefault(message.owner);
+    obj.connection_id = omitDefault(message.connectionId);
     obj.packet_data = message.packetData ? InterchainAccountPacketData.toAmino(message.packetData) : undefined;
-    obj.relative_timeout = message.relativeTimeout ? message.relativeTimeout.toString() : undefined;
+    obj.relative_timeout = omitDefault(message.relativeTimeout);
     return obj;
   },
   fromAminoMsg(object: MsgSendTxAminoMsg): MsgSendTx {
@@ -483,7 +483,7 @@ export const MsgSendTxResponse = {
   },
   toAmino(message: MsgSendTxResponse): MsgSendTxResponseAmino {
     const obj: any = {};
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.sequence = omitDefault(message.sequence);
     return obj;
   },
   fromAminoMsg(object: MsgSendTxResponseAminoMsg): MsgSendTxResponse {

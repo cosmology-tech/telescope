@@ -49,15 +49,15 @@ export const AminoConverter = {
       info
     }: MsgCreateProvider): MsgCreateProviderAminoType["value"] => {
       return {
-        owner: omitDefault(owner),
-        host_uri: omitDefault(hostUri),
+        owner: owner,
+        host_uri: hostUri,
         attributes: attributes.map(el0 => ({
           key: omitDefault(el0.key),
           value: omitDefault(el0.value)
         })),
         info: {
-          email: omitDefault(info.email),
-          website: omitDefault(info.website)
+          email: info.email,
+          website: info.website
         }
       };
     },
@@ -90,15 +90,15 @@ export const AminoConverter = {
       info
     }: MsgUpdateProvider): MsgUpdateProviderAminoType["value"] => {
       return {
-        owner: omitDefault(owner),
-        host_uri: omitDefault(hostUri),
+        owner: owner,
+        host_uri: hostUri,
         attributes: attributes.map(el0 => ({
           key: omitDefault(el0.key),
           value: omitDefault(el0.value)
         })),
         info: {
-          email: omitDefault(info.email),
-          website: omitDefault(info.website)
+          email: info.email,
+          website: info.website
         }
       };
     },
@@ -128,7 +128,7 @@ export const AminoConverter = {
       owner
     }: MsgDeleteProvider): MsgDeleteProviderAminoType["value"] => {
       return {
-        owner: omitDefault(owner)
+        owner: owner
       };
     },
     fromAmino: ({

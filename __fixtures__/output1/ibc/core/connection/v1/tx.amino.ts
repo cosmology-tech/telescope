@@ -106,7 +106,7 @@ export const AminoConverter = {
           identifier: omitDefault(version.identifier),
           features: version.features
         },
-        delay_period: delayPeriod.toString(),
+        delay_period: omitDefault(delayPeriod)?.toString?.(),
         signer: omitDefault(signer)
       };
     },
@@ -165,7 +165,7 @@ export const AminoConverter = {
             key_prefix: counterparty.prefix.keyPrefix
           }
         },
-        delay_period: delayPeriod.toString(),
+        delay_period: omitDefault(delayPeriod)?.toString?.(),
         counterparty_versions: counterpartyVersions.map(el0 => ({
           identifier: omitDefault(el0.identifier),
           features: el0.features

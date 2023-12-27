@@ -1,7 +1,7 @@
 import { OrderID, OrderIDSDKType } from "./order";
 import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { isSet, DeepPartial, Exact, omitDefault } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of bid */
 export enum Bid_State {
@@ -651,7 +651,7 @@ export const BidID = {
   toAmino(message: BidID): BidIDAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.dseq = message.dseq;
     obj.gseq = message.gseq;
     obj.oseq = message.oseq;
     obj.provider = message.provider;
@@ -797,7 +797,7 @@ export const Bid = {
     obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : undefined;
     obj.state = message.state;
     obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    obj.created_at = omitDefault(message.createdAt);
     return obj;
   },
   fromAminoMsg(object: BidAminoMsg): Bid {
@@ -962,7 +962,7 @@ export const BidFilters = {
   toAmino(message: BidFilters): BidFiltersAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.dseq = message.dseq;
     obj.gseq = message.gseq;
     obj.oseq = message.oseq;
     obj.provider = message.provider;

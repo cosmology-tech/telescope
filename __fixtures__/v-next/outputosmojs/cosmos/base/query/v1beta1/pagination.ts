@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.query.v1beta1";
 /**
  * PageRequest is to be embedded in gRPC request messages for efficient
@@ -217,10 +217,10 @@ export const PageRequest = {
   toAmino(message: PageRequest): PageRequestAmino {
     const obj: any = {};
     obj.key = message.key;
-    obj.offset = message.offset ? message.offset.toString() : undefined;
-    obj.limit = message.limit ? message.limit.toString() : undefined;
-    obj.count_total = message.countTotal;
-    obj.reverse = message.reverse;
+    obj.offset = omitDefault(message.offset);
+    obj.limit = omitDefault(message.limit);
+    obj.count_total = omitDefault(message.countTotal);
+    obj.reverse = omitDefault(message.reverse);
     return obj;
   },
   fromAminoMsg(object: PageRequestAminoMsg): PageRequest {
@@ -327,7 +327,7 @@ export const PageResponse = {
   toAmino(message: PageResponse): PageResponseAmino {
     const obj: any = {};
     obj.next_key = message.nextKey;
-    obj.total = message.total ? message.total.toString() : undefined;
+    obj.total = omitDefault(message.total);
     return obj;
   },
   fromAminoMsg(object: PageResponseAminoMsg): PageResponse {

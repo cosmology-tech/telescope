@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
 import { Distribution, DistributionSDKType } from "./distribution";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface MetricValue_LabelsEntry {
   key: string;
@@ -160,8 +160,8 @@ export const MetricValue_LabelsEntry = {
   },
   toAmino(message: MetricValue_LabelsEntry): MetricValue_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: MetricValue_LabelsEntryAminoMsg): MetricValue_LabelsEntry {
@@ -371,8 +371,8 @@ export const MetricValue = {
         acc[key] = String(value);
         return acc;
       }, {}) : {},
-      startTime: object.start_time,
-      endTime: object.end_time,
+      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
+      endTime: object?.end_time ? Timestamp.fromAmino(object.end_time) : undefined,
       boolValue: object?.bool_value,
       int64Value: object?.int64_value ? BigInt(object.int64_value) : undefined,
       doubleValue: object?.double_value,
@@ -390,10 +390,10 @@ export const MetricValue = {
     }
     obj.start_time = message.startTime;
     obj.end_time = message.endTime;
-    obj.bool_value = message.boolValue;
-    obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
-    obj.double_value = message.doubleValue;
-    obj.string_value = message.stringValue;
+    obj.bool_value = omitDefault(message.boolValue);
+    obj.int64_value = omitDefault(message.int64Value);
+    obj.double_value = omitDefault(message.doubleValue);
+    obj.string_value = omitDefault(message.stringValue);
     obj.distribution_value = message.distributionValue ? Distribution.toAmino(message.distributionValue) : undefined;
     return obj;
   },
@@ -502,7 +502,7 @@ export const MetricValueSet = {
   },
   toAmino(message: MetricValueSet): MetricValueSetAmino {
     const obj: any = {};
-    obj.metric_name = message.metricName;
+    obj.metric_name = omitDefault(message.metricName);
     if (message.metricValues) {
       obj.metric_values = message.metricValues.map(e => e ? MetricValue.toAmino(e) : undefined);
     } else {

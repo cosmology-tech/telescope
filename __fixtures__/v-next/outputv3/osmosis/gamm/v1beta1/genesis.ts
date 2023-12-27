@@ -7,7 +7,7 @@ import { Pool as Pool2 } from "../pool-models/stableswap/stableswap_pool";
 import { PoolProtoMsg as Pool2ProtoMsg } from "../pool-models/stableswap/stableswap_pool";
 import { PoolSDKType as Pool2SDKType } from "../pool-models/stableswap/stableswap_pool";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet } from "../../../helpers";
+import { DeepPartial, isSet, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /** Params holds parameters for the incentives module */
 export interface Params {
@@ -266,7 +266,7 @@ export const GenesisState = {
     } else {
       obj.pools = [];
     }
-    obj.next_pool_number = message.nextPoolNumber ? message.nextPoolNumber.toString() : undefined;
+    obj.next_pool_number = omitDefault(message.nextPoolNumber);
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   },

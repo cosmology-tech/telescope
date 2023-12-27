@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.store.v1beta1";
 /**
  * StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)
@@ -138,8 +138,8 @@ export const StoreKVPair = {
   },
   toAmino(message: StoreKVPair): StoreKVPairAmino {
     const obj: any = {};
-    obj.store_key = message.storeKey;
-    obj.delete = message.delete;
+    obj.store_key = omitDefault(message.storeKey);
+    obj.delete = omitDefault(message.delete);
     obj.key = message.key;
     obj.value = message.value;
     return obj;

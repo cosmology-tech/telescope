@@ -43,7 +43,7 @@ export const AminoConverter = {
           revision_height: omitDefault(timeoutHeight.revisionHeight)?.toString(),
           revision_number: omitDefault(timeoutHeight.revisionNumber)?.toString()
         } : {},
-        timeout_timestamp: timeoutTimestamp.toString()
+        timeout_timestamp: omitDefault(timeoutTimestamp)?.toString?.()
       };
     },
     fromAmino: ({

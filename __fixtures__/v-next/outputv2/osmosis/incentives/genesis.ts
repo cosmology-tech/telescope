@@ -2,7 +2,7 @@ import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import { Gauge, GaugeAmino, GaugeSDKType } from "./gauge";
 import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
 /**
  * GenesisState defines the incentives module's various parameters when first
@@ -195,7 +195,7 @@ export const GenesisState = {
     } else {
       obj.lockable_durations = [];
     }
-    obj.last_gauge_id = message.lastGaugeId ? message.lastGaugeId.toString() : undefined;
+    obj.last_gauge_id = omitDefault(message.lastGaugeId);
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {

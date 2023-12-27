@@ -2,7 +2,7 @@ import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockSDKType } from "./lock";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 export interface MsgLockTokens {
   owner: string;
@@ -207,7 +207,7 @@ export const MsgLockTokens = {
   },
   toAmino(message: MsgLockTokens): MsgLockTokensAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = omitDefault(message.owner);
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
@@ -307,7 +307,7 @@ export const MsgLockTokensResponse = {
   },
   toAmino(message: MsgLockTokensResponse): MsgLockTokensResponseAmino {
     const obj: any = {};
-    obj.ID = message.ID ? message.ID.toString() : undefined;
+    obj.ID = omitDefault(message.ID);
     return obj;
   },
   fromAminoMsg(object: MsgLockTokensResponseAminoMsg): MsgLockTokensResponse {
@@ -399,7 +399,7 @@ export const MsgBeginUnlockingAll = {
   },
   toAmino(message: MsgBeginUnlockingAll): MsgBeginUnlockingAllAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = omitDefault(message.owner);
     return obj;
   },
   fromAminoMsg(object: MsgBeginUnlockingAllAminoMsg): MsgBeginUnlockingAll {
@@ -633,8 +633,8 @@ export const MsgBeginUnlocking = {
   },
   toAmino(message: MsgBeginUnlocking): MsgBeginUnlockingAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.ID = message.ID ? message.ID.toString() : undefined;
+    obj.owner = omitDefault(message.owner);
+    obj.ID = omitDefault(message.ID);
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
@@ -731,7 +731,7 @@ export const MsgBeginUnlockingResponse = {
   },
   toAmino(message: MsgBeginUnlockingResponse): MsgBeginUnlockingResponseAmino {
     const obj: any = {};
-    obj.success = message.success;
+    obj.success = omitDefault(message.success);
     return obj;
   },
   fromAminoMsg(object: MsgBeginUnlockingResponseAminoMsg): MsgBeginUnlockingResponse {
@@ -855,8 +855,8 @@ export const MsgExtendLockup = {
   },
   toAmino(message: MsgExtendLockup): MsgExtendLockupAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.ID = message.ID ? message.ID.toString() : undefined;
+    obj.owner = omitDefault(message.owner);
+    obj.ID = omitDefault(message.ID);
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;
   },
@@ -949,7 +949,7 @@ export const MsgExtendLockupResponse = {
   },
   toAmino(message: MsgExtendLockupResponse): MsgExtendLockupResponseAmino {
     const obj: any = {};
-    obj.success = message.success;
+    obj.success = omitDefault(message.success);
     return obj;
   },
   fromAminoMsg(object: MsgExtendLockupResponseAminoMsg): MsgExtendLockupResponse {
@@ -1079,8 +1079,8 @@ export const MsgForceUnlock = {
   },
   toAmino(message: MsgForceUnlock): MsgForceUnlockAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.ID = message.ID ? message.ID.toString() : undefined;
+    obj.owner = omitDefault(message.owner);
+    obj.ID = omitDefault(message.ID);
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
@@ -1177,7 +1177,7 @@ export const MsgForceUnlockResponse = {
   },
   toAmino(message: MsgForceUnlockResponse): MsgForceUnlockResponseAmino {
     const obj: any = {};
-    obj.success = message.success;
+    obj.success = omitDefault(message.success);
     return obj;
   },
   fromAminoMsg(object: MsgForceUnlockResponseAminoMsg): MsgForceUnlockResponse {

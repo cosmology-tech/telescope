@@ -1,7 +1,7 @@
 import { PoolParams, PoolParamsSDKType } from "./stableswap_pool";
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
 /** ===================== MsgCreatePool */
 export interface MsgCreateStableswapPool {
@@ -211,7 +211,7 @@ export const MsgCreateStableswapPool = {
   },
   toAmino(message: MsgCreateStableswapPool): MsgCreateStableswapPoolAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = omitDefault(message.sender);
     obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined;
     if (message.initialPoolLiquidity) {
       obj.initial_pool_liquidity = message.initialPoolLiquidity.map(e => e ? Coin.toAmino(e) : undefined);
@@ -223,8 +223,8 @@ export const MsgCreateStableswapPool = {
     } else {
       obj.scaling_factors = [];
     }
-    obj.future_pool_governor = message.futurePoolGovernor;
-    obj.scaling_factor_controller = message.scalingFactorController;
+    obj.future_pool_governor = omitDefault(message.futurePoolGovernor);
+    obj.scaling_factor_controller = omitDefault(message.scalingFactorController);
     return obj;
   },
   fromAminoMsg(object: MsgCreateStableswapPoolAminoMsg): MsgCreateStableswapPool {
@@ -316,7 +316,7 @@ export const MsgCreateStableswapPoolResponse = {
   },
   toAmino(message: MsgCreateStableswapPoolResponse): MsgCreateStableswapPoolResponseAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.pool_id = omitDefault(message.poolId);
     return obj;
   },
   fromAminoMsg(object: MsgCreateStableswapPoolResponseAminoMsg): MsgCreateStableswapPoolResponse {
@@ -453,8 +453,8 @@ export const MsgStableSwapAdjustScalingFactors = {
   },
   toAmino(message: MsgStableSwapAdjustScalingFactors): MsgStableSwapAdjustScalingFactorsAmino {
     const obj: any = {};
-    obj.sender = message.sender;
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.sender = omitDefault(message.sender);
+    obj.pool_id = omitDefault(message.poolId);
     if (message.scalingFactors) {
       obj.scaling_factors = message.scalingFactors.map(e => e.toString());
     } else {

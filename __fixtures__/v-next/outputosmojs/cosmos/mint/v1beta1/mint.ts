@@ -1,6 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, padDecimal, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.mint.v1beta1";
 /** Minter represents the minting state. */
 export interface Minter {
@@ -119,8 +119,8 @@ export const Minter = {
   },
   toAmino(message: Minter): MinterAmino {
     const obj: any = {};
-    obj.inflation = message.inflation;
-    obj.annual_provisions = message.annualProvisions;
+    obj.inflation = padDecimal(message.inflation);
+    obj.annual_provisions = padDecimal(message.annualProvisions);
     return obj;
   },
   fromAminoMsg(object: MinterAminoMsg): Minter {
@@ -282,12 +282,12 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.mint_denom = message.mintDenom;
-    obj.inflation_rate_change = message.inflationRateChange;
-    obj.inflation_max = message.inflationMax;
-    obj.inflation_min = message.inflationMin;
-    obj.goal_bonded = message.goalBonded;
-    obj.blocks_per_year = message.blocksPerYear ? message.blocksPerYear.toString() : undefined;
+    obj.mint_denom = omitDefault(message.mintDenom);
+    obj.inflation_rate_change = padDecimal(message.inflationRateChange);
+    obj.inflation_max = padDecimal(message.inflationMax);
+    obj.inflation_min = padDecimal(message.inflationMin);
+    obj.goal_bonded = padDecimal(message.goalBonded);
+    obj.blocks_per_year = omitDefault(message.blocksPerYear);
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

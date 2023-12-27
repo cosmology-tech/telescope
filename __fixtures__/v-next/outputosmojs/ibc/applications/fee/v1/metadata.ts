@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.fee.v1";
 /**
  * Metadata defines the ICS29 channel specific metadata encoded into the channel version bytestring
@@ -100,8 +100,8 @@ export const Metadata = {
   },
   toAmino(message: Metadata): MetadataAmino {
     const obj: any = {};
-    obj.fee_version = message.feeVersion;
-    obj.app_version = message.appVersion;
+    obj.fee_version = omitDefault(message.feeVersion);
+    obj.app_version = omitDefault(message.appVersion);
     return obj;
   },
   fromAminoMsg(object: MetadataAminoMsg): Metadata {

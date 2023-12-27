@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { GroupInfo, GroupInfoSDKType, GroupPolicyInfo, GroupPolicyInfoSDKType, GroupMember, GroupMemberSDKType, Proposal, ProposalSDKType, Vote, VoteSDKType, TallyResult, TallyResultSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.group.v1";
 /** QueryGroupInfoRequest is the Query/GroupInfo request type. */
 export interface QueryGroupInfoRequest {
@@ -355,7 +355,7 @@ export const QueryGroupInfoRequest = {
   },
   toAmino(message: QueryGroupInfoRequest): QueryGroupInfoRequestAmino {
     const obj: any = {};
-    obj.group_id = message.groupId ? message.groupId.toString() : undefined;
+    obj.group_id = omitDefault(message.groupId);
     return obj;
   },
   fromAminoMsg(object: QueryGroupInfoRequestAminoMsg): QueryGroupInfoRequest {
@@ -539,7 +539,7 @@ export const QueryGroupPolicyInfoRequest = {
   },
   toAmino(message: QueryGroupPolicyInfoRequest): QueryGroupPolicyInfoRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = omitDefault(message.address);
     return obj;
   },
   fromAminoMsg(object: QueryGroupPolicyInfoRequestAminoMsg): QueryGroupPolicyInfoRequest {
@@ -737,7 +737,7 @@ export const QueryGroupMembersRequest = {
   },
   toAmino(message: QueryGroupMembersRequest): QueryGroupMembersRequestAmino {
     const obj: any = {};
-    obj.group_id = message.groupId ? message.groupId.toString() : undefined;
+    obj.group_id = omitDefault(message.groupId);
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -963,7 +963,7 @@ export const QueryGroupsByAdminRequest = {
   },
   toAmino(message: QueryGroupsByAdminRequest): QueryGroupsByAdminRequestAmino {
     const obj: any = {};
-    obj.admin = message.admin;
+    obj.admin = omitDefault(message.admin);
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -1189,7 +1189,7 @@ export const QueryGroupPoliciesByGroupRequest = {
   },
   toAmino(message: QueryGroupPoliciesByGroupRequest): QueryGroupPoliciesByGroupRequestAmino {
     const obj: any = {};
-    obj.group_id = message.groupId ? message.groupId.toString() : undefined;
+    obj.group_id = omitDefault(message.groupId);
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -1415,7 +1415,7 @@ export const QueryGroupPoliciesByAdminRequest = {
   },
   toAmino(message: QueryGroupPoliciesByAdminRequest): QueryGroupPoliciesByAdminRequestAmino {
     const obj: any = {};
-    obj.admin = message.admin;
+    obj.admin = omitDefault(message.admin);
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -1627,7 +1627,7 @@ export const QueryProposalRequest = {
   },
   toAmino(message: QueryProposalRequest): QueryProposalRequestAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.proposal_id = omitDefault(message.proposalId);
     return obj;
   },
   fromAminoMsg(object: QueryProposalRequestAminoMsg): QueryProposalRequest {
@@ -1825,7 +1825,7 @@ export const QueryProposalsByGroupPolicyRequest = {
   },
   toAmino(message: QueryProposalsByGroupPolicyRequest): QueryProposalsByGroupPolicyRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = omitDefault(message.address);
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -2051,8 +2051,8 @@ export const QueryVoteByProposalVoterRequest = {
   },
   toAmino(message: QueryVoteByProposalVoterRequest): QueryVoteByProposalVoterRequestAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.voter = message.voter;
+    obj.proposal_id = omitDefault(message.proposalId);
+    obj.voter = omitDefault(message.voter);
     return obj;
   },
   fromAminoMsg(object: QueryVoteByProposalVoterRequestAminoMsg): QueryVoteByProposalVoterRequest {
@@ -2250,7 +2250,7 @@ export const QueryVotesByProposalRequest = {
   },
   toAmino(message: QueryVotesByProposalRequest): QueryVotesByProposalRequestAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.proposal_id = omitDefault(message.proposalId);
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -2476,7 +2476,7 @@ export const QueryVotesByVoterRequest = {
   },
   toAmino(message: QueryVotesByVoterRequest): QueryVotesByVoterRequestAmino {
     const obj: any = {};
-    obj.voter = message.voter;
+    obj.voter = omitDefault(message.voter);
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -2702,7 +2702,7 @@ export const QueryGroupsByMemberRequest = {
   },
   toAmino(message: QueryGroupsByMemberRequest): QueryGroupsByMemberRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = omitDefault(message.address);
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -2914,7 +2914,7 @@ export const QueryTallyResultRequest = {
   },
   toAmino(message: QueryTallyResultRequest): QueryTallyResultRequestAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.proposal_id = omitDefault(message.proposalId);
     return obj;
   },
   fromAminoMsg(object: QueryTallyResultRequestAminoMsg): QueryTallyResultRequest {

@@ -59,8 +59,8 @@ export const AminoConverter = {
           denom: omitDefault(el0.denom),
           amount: omitDefault(el0.amount)
         })),
-        end_time: endTime.toString(),
-        delayed: delayed
+        end_time: omitDefault(endTime)?.toString?.(),
+        delayed: omitDefault(delayed)
       };
     },
     fromAmino: ({
@@ -124,9 +124,9 @@ export const AminoConverter = {
       return {
         from_address: omitDefault(fromAddress),
         to_address: omitDefault(toAddress),
-        start_time: startTime.toString(),
+        start_time: omitDefault(startTime)?.toString?.(),
         vesting_periods: vestingPeriods.map(el0 => ({
-          length: el0.length.toString(),
+          length: omitDefault(el0.length)?.toString?.(),
           amount: el0.amount.map(el1 => ({
             denom: omitDefault(el1.denom),
             amount: omitDefault(el1.amount)

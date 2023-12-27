@@ -1,7 +1,7 @@
 import { Grant, GrantSDKType } from "./authz";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.authz.v1beta1";
 /**
  * MsgGrant is a request type for Grant method. It declares authorization to the grantee
@@ -173,8 +173,8 @@ export const MsgGrant = {
   },
   toAmino(message: MsgGrant): MsgGrantAmino {
     const obj: any = {};
-    obj.granter = message.granter;
-    obj.grantee = message.grantee;
+    obj.granter = omitDefault(message.granter);
+    obj.grantee = omitDefault(message.grantee);
     obj.grant = message.grant ? Grant.toAmino(message.grant) : undefined;
     return obj;
   },
@@ -393,7 +393,7 @@ export const MsgExec = {
   },
   toAmino(message: MsgExec): MsgExecAmino {
     const obj: any = {};
-    obj.grantee = message.grantee;
+    obj.grantee = omitDefault(message.grantee);
     if (message.msgs) {
       obj.msgs = message.msgs.map(e => e ? Any.toAmino(e) : undefined);
     } else {
@@ -590,9 +590,9 @@ export const MsgRevoke = {
   },
   toAmino(message: MsgRevoke): MsgRevokeAmino {
     const obj: any = {};
-    obj.granter = message.granter;
-    obj.grantee = message.grantee;
-    obj.msg_type_url = message.msgTypeUrl;
+    obj.granter = omitDefault(message.granter);
+    obj.grantee = omitDefault(message.grantee);
+    obj.msg_type_url = omitDefault(message.msgTypeUrl);
     return obj;
   },
   fromAminoMsg(object: MsgRevokeAminoMsg): MsgRevoke {

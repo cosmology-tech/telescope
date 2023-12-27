@@ -3,7 +3,7 @@ import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Gauge, GaugeSDKType } from "./gauge";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
+import { DeepPartial, isSet, omitDefault } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
 export interface ModuleToDistributeCoinsRequest {}
 export interface ModuleToDistributeCoinsRequestSDKType {}
@@ -400,7 +400,7 @@ export const GaugeByIDRequest = {
   },
   toAmino(message: GaugeByIDRequest): GaugeByIDRequestAmino {
     const obj: any = {};
-    obj.id = message.id ? message.id.toString() : undefined;
+    obj.id = omitDefault(message.id);
     return obj;
   },
   fromAminoMsg(object: GaugeByIDRequestAminoMsg): GaugeByIDRequest {
@@ -1032,7 +1032,7 @@ export const ActiveGaugesPerDenomRequest = {
   },
   toAmino(message: ActiveGaugesPerDenomRequest): ActiveGaugesPerDenomRequestAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = omitDefault(message.denom);
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -1477,7 +1477,7 @@ export const UpcomingGaugesPerDenomRequest = {
   },
   toAmino(message: UpcomingGaugesPerDenomRequest): UpcomingGaugesPerDenomRequestAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = omitDefault(message.denom);
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -1738,13 +1738,13 @@ export const RewardsEstRequest = {
   },
   toAmino(message: RewardsEstRequest): RewardsEstRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = omitDefault(message.owner);
     if (message.lockIds) {
       obj.lock_ids = message.lockIds.map(e => e.toString());
     } else {
       obj.lock_ids = [];
     }
-    obj.end_epoch = message.endEpoch ? message.endEpoch.toString() : undefined;
+    obj.end_epoch = omitDefault(message.endEpoch);
     return obj;
   },
   fromAminoMsg(object: RewardsEstRequestAminoMsg): RewardsEstRequest {

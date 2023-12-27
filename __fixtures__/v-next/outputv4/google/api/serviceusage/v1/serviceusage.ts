@@ -1,6 +1,6 @@
 import { Service, ServiceSDKType } from "./resources";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "google.api.serviceusage.v1";
 /**
  * Enum to determine if service usage should be checked when disabling a
@@ -364,7 +364,7 @@ export const EnableServiceRequest = {
   },
   toAmino(message: EnableServiceRequest): EnableServiceRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     return obj;
   },
   fromAminoMsg(object: EnableServiceRequestAminoMsg): EnableServiceRequest {
@@ -566,9 +566,9 @@ export const DisableServiceRequest = {
   },
   toAmino(message: DisableServiceRequest): DisableServiceRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.disable_dependent_services = message.disableDependentServices;
-    obj.check_if_service_has_usage = message.checkIfServiceHasUsage;
+    obj.name = omitDefault(message.name);
+    obj.disable_dependent_services = omitDefault(message.disableDependentServices);
+    obj.check_if_service_has_usage = omitDefault(message.checkIfServiceHasUsage);
     return obj;
   },
   fromAminoMsg(object: DisableServiceRequestAminoMsg): DisableServiceRequest {
@@ -742,7 +742,7 @@ export const GetServiceRequest = {
   },
   toAmino(message: GetServiceRequest): GetServiceRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     return obj;
   },
   fromAminoMsg(object: GetServiceRequestAminoMsg): GetServiceRequest {
@@ -870,10 +870,10 @@ export const ListServicesRequest = {
   },
   toAmino(message: ListServicesRequest): ListServicesRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
-    obj.filter = message.filter;
+    obj.parent = omitDefault(message.parent);
+    obj.page_size = omitDefault(message.pageSize);
+    obj.page_token = omitDefault(message.pageToken);
+    obj.filter = omitDefault(message.filter);
     return obj;
   },
   fromAminoMsg(object: ListServicesRequestAminoMsg): ListServicesRequest {
@@ -986,7 +986,7 @@ export const ListServicesResponse = {
     } else {
       obj.services = [];
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = omitDefault(message.nextPageToken);
     return obj;
   },
   fromAminoMsg(object: ListServicesResponseAminoMsg): ListServicesResponse {
@@ -1094,7 +1094,7 @@ export const BatchEnableServicesRequest = {
   },
   toAmino(message: BatchEnableServicesRequest): BatchEnableServicesRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = omitDefault(message.parent);
     if (message.serviceIds) {
       obj.service_ids = message.serviceIds.map(e => e);
     } else {
@@ -1324,8 +1324,8 @@ export const BatchEnableServicesResponse_EnableFailure = {
   },
   toAmino(message: BatchEnableServicesResponse_EnableFailure): BatchEnableServicesResponse_EnableFailureAmino {
     const obj: any = {};
-    obj.service_id = message.serviceId;
-    obj.error_message = message.errorMessage;
+    obj.service_id = omitDefault(message.serviceId);
+    obj.error_message = omitDefault(message.errorMessage);
     return obj;
   },
   fromAminoMsg(object: BatchEnableServicesResponse_EnableFailureAminoMsg): BatchEnableServicesResponse_EnableFailure {
@@ -1433,7 +1433,7 @@ export const BatchGetServicesRequest = {
   },
   toAmino(message: BatchGetServicesRequest): BatchGetServicesRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = omitDefault(message.parent);
     if (message.names) {
       obj.names = message.names.map(e => e);
     } else {

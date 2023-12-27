@@ -3,7 +3,7 @@ import { Decl, DeclAmino, DeclSDKType, CheckedExpr, CheckedExprAmino, CheckedExp
 import { ExprValue, ExprValueAmino, ExprValueSDKType } from "../../v1alpha1/eval";
 import { Status, StatusAmino, StatusSDKType } from "../../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../../binary";
-import { isSet, DeepPartial, isObject } from "../../../../../helpers";
+import { isSet, DeepPartial, omitDefault, isObject } from "../../../../../helpers";
 export const protobufPackage = "google.api.expr.conformance.v1alpha1";
 /** Severities of issues. */
 export enum IssueDetails_Severity {
@@ -458,10 +458,10 @@ export const ParseRequest = {
   },
   toAmino(message: ParseRequest): ParseRequestAmino {
     const obj: any = {};
-    obj.cel_source = message.celSource;
-    obj.syntax_version = message.syntaxVersion;
-    obj.source_location = message.sourceLocation;
-    obj.disable_macros = message.disableMacros;
+    obj.cel_source = omitDefault(message.celSource);
+    obj.syntax_version = omitDefault(message.syntaxVersion);
+    obj.source_location = omitDefault(message.sourceLocation);
+    obj.disable_macros = omitDefault(message.disableMacros);
     return obj;
   },
   fromAminoMsg(object: ParseRequestAminoMsg): ParseRequest {
@@ -706,8 +706,8 @@ export const CheckRequest = {
     } else {
       obj.type_env = [];
     }
-    obj.container = message.container;
-    obj.no_std_env = message.noStdEnv;
+    obj.container = omitDefault(message.container);
+    obj.no_std_env = omitDefault(message.noStdEnv);
     return obj;
   },
   fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
@@ -911,7 +911,7 @@ export const EvalRequest_BindingsEntry = {
   },
   toAmino(message: EvalRequest_BindingsEntry): EvalRequest_BindingsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = omitDefault(message.key);
     obj.value = message.value ? ExprValue.toAmino(message.value) : undefined;
     return obj;
   },
@@ -1076,7 +1076,7 @@ export const EvalRequest = {
         obj.bindings[k] = ExprValue.toAmino(v);
       });
     }
-    obj.container = message.container;
+    obj.container = omitDefault(message.container);
     return obj;
   },
   fromAminoMsg(object: EvalRequestAminoMsg): EvalRequest {
@@ -1296,9 +1296,9 @@ export const IssueDetails = {
   },
   toAmino(message: IssueDetails): IssueDetailsAmino {
     const obj: any = {};
-    obj.severity = message.severity;
+    obj.severity = omitDefault(message.severity);
     obj.position = message.position ? SourcePosition.toAmino(message.position) : undefined;
-    obj.id = message.id ? message.id.toString() : undefined;
+    obj.id = omitDefault(message.id);
     return obj;
   },
   fromAminoMsg(object: IssueDetailsAminoMsg): IssueDetails {

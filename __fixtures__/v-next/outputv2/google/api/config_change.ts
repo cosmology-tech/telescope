@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Classifies set of possible modifications to an object in the service
@@ -322,10 +322,10 @@ export const ConfigChange = {
   },
   toAmino(message: ConfigChange): ConfigChangeAmino {
     const obj: any = {};
-    obj.element = message.element;
-    obj.old_value = message.oldValue;
-    obj.new_value = message.newValue;
-    obj.change_type = message.changeType;
+    obj.element = omitDefault(message.element);
+    obj.old_value = omitDefault(message.oldValue);
+    obj.new_value = omitDefault(message.newValue);
+    obj.change_type = omitDefault(message.changeType);
     if (message.advices) {
       obj.advices = message.advices.map(e => e ? Advice.toAmino(e) : undefined);
     } else {
@@ -411,7 +411,7 @@ export const Advice = {
   },
   toAmino(message: Advice): AdviceAmino {
     const obj: any = {};
-    obj.description = message.description;
+    obj.description = omitDefault(message.description);
     return obj;
   },
   fromAminoMsg(object: AdviceAminoMsg): Advice {

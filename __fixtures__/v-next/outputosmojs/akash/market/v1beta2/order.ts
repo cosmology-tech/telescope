@@ -1,6 +1,6 @@
 import { GroupSpec, GroupSpecSDKType } from "../../deployment/v1beta2/groupspec";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { isSet, DeepPartial, Exact, omitDefault } from "../../../helpers";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of order */
 export enum Order_State {
@@ -204,7 +204,7 @@ export const OrderID = {
   toAmino(message: OrderID): OrderIDAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.dseq = message.dseq;
     obj.gseq = message.gseq;
     obj.oseq = message.oseq;
     return obj;
@@ -343,7 +343,7 @@ export const Order = {
     obj.order_id = message.orderId ? OrderID.toAmino(message.orderId) : undefined;
     obj.state = message.state;
     obj.spec = message.spec ? GroupSpec.toAmino(message.spec) : undefined;
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    obj.created_at = omitDefault(message.createdAt);
     return obj;
   },
   fromAminoMsg(object: OrderAminoMsg): Order {
@@ -492,7 +492,7 @@ export const OrderFilters = {
   toAmino(message: OrderFilters): OrderFiltersAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.dseq = message.dseq;
     obj.gseq = message.gseq;
     obj.oseq = message.oseq;
     obj.state = message.state;

@@ -1,6 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "osmosis.superfluid";
 export interface MsgSuperfluidDelegate {
   sender: string;
@@ -311,9 +311,9 @@ export const MsgSuperfluidDelegate = {
   },
   toAmino(message: MsgSuperfluidDelegate): MsgSuperfluidDelegateAmino {
     const obj: any = {};
-    obj.sender = message.sender;
-    obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
-    obj.val_addr = message.valAddr;
+    obj.sender = omitDefault(message.sender);
+    obj.lock_id = omitDefault(message.lockId);
+    obj.val_addr = omitDefault(message.valAddr);
     return obj;
   },
   fromAminoMsg(object: MsgSuperfluidDelegateAminoMsg): MsgSuperfluidDelegate {
@@ -487,8 +487,8 @@ export const MsgSuperfluidUndelegate = {
   },
   toAmino(message: MsgSuperfluidUndelegate): MsgSuperfluidUndelegateAmino {
     const obj: any = {};
-    obj.sender = message.sender;
-    obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
+    obj.sender = omitDefault(message.sender);
+    obj.lock_id = omitDefault(message.lockId);
     return obj;
   },
   fromAminoMsg(object: MsgSuperfluidUndelegateAminoMsg): MsgSuperfluidUndelegate {
@@ -662,8 +662,8 @@ export const MsgSuperfluidUnbondLock = {
   },
   toAmino(message: MsgSuperfluidUnbondLock): MsgSuperfluidUnbondLockAmino {
     const obj: any = {};
-    obj.sender = message.sender;
-    obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
+    obj.sender = omitDefault(message.sender);
+    obj.lock_id = omitDefault(message.lockId);
     return obj;
   },
   fromAminoMsg(object: MsgSuperfluidUnbondLockAminoMsg): MsgSuperfluidUnbondLock {
@@ -856,13 +856,13 @@ export const MsgLockAndSuperfluidDelegate = {
   },
   toAmino(message: MsgLockAndSuperfluidDelegate): MsgLockAndSuperfluidDelegateAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = omitDefault(message.sender);
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.coins = [];
     }
-    obj.val_addr = message.valAddr;
+    obj.val_addr = omitDefault(message.valAddr);
     return obj;
   },
   fromAminoMsg(object: MsgLockAndSuperfluidDelegateAminoMsg): MsgLockAndSuperfluidDelegate {
@@ -952,7 +952,7 @@ export const MsgLockAndSuperfluidDelegateResponse = {
   },
   toAmino(message: MsgLockAndSuperfluidDelegateResponse): MsgLockAndSuperfluidDelegateResponseAmino {
     const obj: any = {};
-    obj.ID = message.ID ? message.ID.toString() : undefined;
+    obj.ID = omitDefault(message.ID);
     return obj;
   },
   fromAminoMsg(object: MsgLockAndSuperfluidDelegateResponseAminoMsg): MsgLockAndSuperfluidDelegateResponse {
@@ -1055,8 +1055,8 @@ export const MsgUnPoolWhitelistedPool = {
   },
   toAmino(message: MsgUnPoolWhitelistedPool): MsgUnPoolWhitelistedPoolAmino {
     const obj: any = {};
-    obj.sender = message.sender;
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.sender = omitDefault(message.sender);
+    obj.pool_id = omitDefault(message.poolId);
     return obj;
   },
   fromAminoMsg(object: MsgUnPoolWhitelistedPoolAminoMsg): MsgUnPoolWhitelistedPool {

@@ -81,7 +81,7 @@ exports[`cosmos/authz/v1beta1/authz date 2`] = `
   fromAmino(object: GrantAmino): Grant {
     return {
       authorization: object?.authorization ? Any.fromAmino(object.authorization) : undefined,
-      expiration: object?.expiration
+      expiration: object?.expiration ? Timestamp.fromAmino(object.expiration) : undefined
     };
   },
   toAmino(message: Grant): GrantAmino {
@@ -140,10 +140,10 @@ exports[`cosmos/authz/v1beta1/authz date 4`] = `
     }: Grant): GrantAminoType["value"] => {
       return {
         authorization: {
-          type_url: authorization.typeUrl,
+          type_url: omitDefault(authorization.typeUrl),
           value: authorization.value
         },
-        expiration
+        expiration: expiration
       };
     },
     fromAmino: ({
@@ -243,7 +243,7 @@ exports[`cosmos/authz/v1beta1/authz timestamp 2`] = `
   fromAmino(object: GrantAmino): Grant {
     return {
       authorization: object?.authorization ? Any.fromAmino(object.authorization) : undefined,
-      expiration: object?.expiration
+      expiration: object?.expiration ? Timestamp.fromAmino(object.expiration) : undefined
     };
   },
   toAmino(message: Grant): GrantAmino {
@@ -302,10 +302,10 @@ exports[`cosmos/authz/v1beta1/authz timestamp 4`] = `
     }: Grant): GrantAminoType["value"] => {
       return {
         authorization: {
-          type_url: authorization.typeUrl,
+          type_url: omitDefault(authorization.typeUrl),
           value: authorization.value
         },
-        expiration
+        expiration: expiration
       };
     },
     fromAmino: ({

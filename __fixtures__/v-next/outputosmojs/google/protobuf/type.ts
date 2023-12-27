@@ -1,7 +1,7 @@
 import { SourceContext, SourceContextSDKType } from "./source_context";
 import { Any, AnySDKType } from "./any";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /** Basic field types. */
 export enum Field_Kind {
@@ -529,7 +529,7 @@ export const Type = {
   },
   toAmino(message: Type): TypeAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     if (message.fields) {
       obj.fields = message.fields.map(e => e ? Field.toAmino(e) : undefined);
     } else {
@@ -546,7 +546,7 @@ export const Type = {
       obj.options = [];
     }
     obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined;
-    obj.syntax = message.syntax;
+    obj.syntax = omitDefault(message.syntax);
     return obj;
   },
   fromAminoMsg(object: TypeAminoMsg): Type {
@@ -766,20 +766,20 @@ export const Field = {
   },
   toAmino(message: Field): FieldAmino {
     const obj: any = {};
-    obj.kind = message.kind;
-    obj.cardinality = message.cardinality;
-    obj.number = message.number;
-    obj.name = message.name;
-    obj.type_url = message.typeUrl;
-    obj.oneof_index = message.oneofIndex;
-    obj.packed = message.packed;
+    obj.kind = omitDefault(message.kind);
+    obj.cardinality = omitDefault(message.cardinality);
+    obj.number = omitDefault(message.number);
+    obj.name = omitDefault(message.name);
+    obj.type_url = omitDefault(message.typeUrl);
+    obj.oneof_index = omitDefault(message.oneofIndex);
+    obj.packed = omitDefault(message.packed);
     if (message.options) {
       obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
     } else {
       obj.options = [];
     }
-    obj.json_name = message.jsonName;
-    obj.default_value = message.defaultValue;
+    obj.json_name = omitDefault(message.jsonName);
+    obj.default_value = omitDefault(message.defaultValue);
     return obj;
   },
   fromAminoMsg(object: FieldAminoMsg): Field {
@@ -937,7 +937,7 @@ export const Enum = {
   },
   toAmino(message: Enum): EnumAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     if (message.enumvalue) {
       obj.enumvalue = message.enumvalue.map(e => e ? EnumValue.toAmino(e) : undefined);
     } else {
@@ -949,7 +949,7 @@ export const Enum = {
       obj.options = [];
     }
     obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined;
-    obj.syntax = message.syntax;
+    obj.syntax = omitDefault(message.syntax);
     return obj;
   },
   fromAminoMsg(object: EnumAminoMsg): Enum {
@@ -1071,8 +1071,8 @@ export const EnumValue = {
   },
   toAmino(message: EnumValue): EnumValueAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.number = message.number;
+    obj.name = omitDefault(message.name);
+    obj.number = omitDefault(message.number);
     if (message.options) {
       obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
     } else {
@@ -1177,7 +1177,7 @@ export const Option = {
   },
   toAmino(message: Option): OptionAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = omitDefault(message.name);
     obj.value = message.value ? Any.toAmino(message.value) : undefined;
     return obj;
   },

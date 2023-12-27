@@ -401,7 +401,7 @@ export const Account = {
     obj.state = message.state;
     obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined;
     obj.transferred = message.transferred ? Coin.toAmino(message.transferred) : undefined;
-    obj.settled_at = message.settledAt ? message.settledAt.toString() : undefined;
+    obj.settled_at = message.settledAt;
     return obj;
   },
   fromAminoMsg(object: AccountAminoMsg): Account {

@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** MsgIBCSend */
 export interface MsgIBCSend {
@@ -182,9 +182,9 @@ export const MsgIBCSend = {
   },
   toAmino(message: MsgIBCSend): MsgIBCSendAmino {
     const obj: any = {};
-    obj.channel = message.channel;
-    obj.timeout_height = message.timeoutHeight ? message.timeoutHeight.toString() : undefined;
-    obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
+    obj.channel = omitDefault(message.channel);
+    obj.timeout_height = omitDefault(message.timeoutHeight);
+    obj.timeout_timestamp = omitDefault(message.timeoutTimestamp);
     obj.data = message.data;
     return obj;
   },
@@ -273,7 +273,7 @@ export const MsgIBCCloseChannel = {
   },
   toAmino(message: MsgIBCCloseChannel): MsgIBCCloseChannelAmino {
     const obj: any = {};
-    obj.channel = message.channel;
+    obj.channel = omitDefault(message.channel);
     return obj;
   },
   fromAminoMsg(object: MsgIBCCloseChannelAminoMsg): MsgIBCCloseChannel {

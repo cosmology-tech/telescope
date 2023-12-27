@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet, isObject } from "../../helpers";
+import { DeepPartial, isSet, omitDefault, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
@@ -488,8 +488,8 @@ export const MetricRule_MetricCostsEntry = {
   },
   toAmino(message: MetricRule_MetricCostsEntry): MetricRule_MetricCostsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value ? message.value.toString() : undefined;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: MetricRule_MetricCostsEntryAminoMsg): MetricRule_MetricCostsEntry {
@@ -626,7 +626,7 @@ export const MetricRule = {
   },
   toAmino(message: MetricRule): MetricRuleAmino {
     const obj: any = {};
-    obj.selector = message.selector;
+    obj.selector = omitDefault(message.selector);
     obj.metric_costs = {};
     if (message.metricCosts) {
       Object.entries(message.metricCosts).forEach(([k, v]) => {
@@ -733,8 +733,8 @@ export const QuotaLimit_ValuesEntry = {
   },
   toAmino(message: QuotaLimit_ValuesEntry): QuotaLimit_ValuesEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value ? message.value.toString() : undefined;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: QuotaLimit_ValuesEntryAminoMsg): QuotaLimit_ValuesEntry {
@@ -989,21 +989,21 @@ export const QuotaLimit = {
   },
   toAmino(message: QuotaLimit): QuotaLimitAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
-    obj.default_limit = message.defaultLimit ? message.defaultLimit.toString() : undefined;
-    obj.max_limit = message.maxLimit ? message.maxLimit.toString() : undefined;
-    obj.free_tier = message.freeTier ? message.freeTier.toString() : undefined;
-    obj.duration = message.duration;
-    obj.metric = message.metric;
-    obj.unit = message.unit;
+    obj.name = omitDefault(message.name);
+    obj.description = omitDefault(message.description);
+    obj.default_limit = omitDefault(message.defaultLimit);
+    obj.max_limit = omitDefault(message.maxLimit);
+    obj.free_tier = omitDefault(message.freeTier);
+    obj.duration = omitDefault(message.duration);
+    obj.metric = omitDefault(message.metric);
+    obj.unit = omitDefault(message.unit);
     obj.values = {};
     if (message.values) {
       Object.entries(message.values).forEach(([k, v]) => {
         obj.values[k] = v.toString();
       });
     }
-    obj.display_name = message.displayName;
+    obj.display_name = omitDefault(message.displayName);
     return obj;
   },
   fromAminoMsg(object: QuotaLimitAminoMsg): QuotaLimit {

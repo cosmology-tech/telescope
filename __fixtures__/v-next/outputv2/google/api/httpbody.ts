@@ -1,6 +1,6 @@
 import { Any, AnyAmino, AnySDKType } from "../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Message that represents an arbitrary HTTP body. It should only be used for
@@ -268,7 +268,7 @@ export const HttpBody = {
   },
   toAmino(message: HttpBody): HttpBodyAmino {
     const obj: any = {};
-    obj.content_type = message.contentType;
+    obj.content_type = omitDefault(message.contentType);
     obj.data = message.data;
     if (message.extensions) {
       obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);

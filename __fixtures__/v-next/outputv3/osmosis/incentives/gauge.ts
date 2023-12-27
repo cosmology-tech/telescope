@@ -3,7 +3,7 @@ import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
 /**
  * Gauge is an object that stores and distributes yields to recipients who
@@ -299,7 +299,7 @@ export const Gauge = {
       isPerpetual: object.is_perpetual,
       distributeTo: object?.distribute_to ? QueryCondition.fromAmino(object.distribute_to) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : [],
-      startTime: object.start_time,
+      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
       numEpochsPaidOver: BigInt(object.num_epochs_paid_over),
       filledEpochs: BigInt(object.filled_epochs),
       distributedCoins: Array.isArray(object?.distributed_coins) ? object.distributed_coins.map((e: any) => Coin.fromAmino(e)) : []
@@ -307,8 +307,8 @@ export const Gauge = {
   },
   toAmino(message: Gauge): GaugeAmino {
     const obj: any = {};
-    obj.id = message.id ? message.id.toString() : undefined;
-    obj.is_perpetual = message.isPerpetual;
+    obj.id = omitDefault(message.id);
+    obj.is_perpetual = omitDefault(message.isPerpetual);
     obj.distribute_to = message.distributeTo ? QueryCondition.toAmino(message.distributeTo) : undefined;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
@@ -316,8 +316,8 @@ export const Gauge = {
       obj.coins = [];
     }
     obj.start_time = message.startTime;
-    obj.num_epochs_paid_over = message.numEpochsPaidOver ? message.numEpochsPaidOver.toString() : undefined;
-    obj.filled_epochs = message.filledEpochs ? message.filledEpochs.toString() : undefined;
+    obj.num_epochs_paid_over = omitDefault(message.numEpochsPaidOver);
+    obj.filled_epochs = omitDefault(message.filledEpochs);
     if (message.distributedCoins) {
       obj.distributed_coins = message.distributedCoins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {

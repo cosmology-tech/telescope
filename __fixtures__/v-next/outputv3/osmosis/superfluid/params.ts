@@ -1,6 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, padDecimal } from "../../helpers";
 export const protobufPackage = "osmosis.superfluid";
 /** Params holds parameters for the superfluid module */
 export interface Params {
@@ -97,7 +97,7 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.minimum_risk_factor = message.minimumRiskFactor;
+    obj.minimum_risk_factor = padDecimal(message.minimumRiskFactor);
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

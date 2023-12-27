@@ -172,7 +172,7 @@ export const AminoConverter = {
           description: omitDefault(metadata.description),
           denom_units: metadata.denomUnits.map(el0 => ({
             denom: omitDefault(el0.denom),
-            exponent: el0.exponent,
+            exponent: omitDefault(el0.exponent),
             aliases: el0.aliases
           })),
           base: omitDefault(metadata.base),

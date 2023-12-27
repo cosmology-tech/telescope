@@ -2,7 +2,7 @@ import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON
 import { Duration, DurationAmino, DurationSDKType } from "../protobuf/duration";
 import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorSDKType } from "./label";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, isObject } from "../../helpers";
+import { isSet, DeepPartial, omitDefault, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * The kind of measurement. It describes how the data is reported.
@@ -832,20 +832,20 @@ export const MetricDescriptor = {
   },
   toAmino(message: MetricDescriptor): MetricDescriptorAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.type = message.type;
+    obj.name = omitDefault(message.name);
+    obj.type = omitDefault(message.type);
     if (message.labels) {
       obj.labels = message.labels.map(e => e ? LabelDescriptor.toAmino(e) : undefined);
     } else {
       obj.labels = [];
     }
-    obj.metric_kind = message.metricKind;
-    obj.value_type = message.valueType;
-    obj.unit = message.unit;
-    obj.description = message.description;
-    obj.display_name = message.displayName;
+    obj.metric_kind = omitDefault(message.metricKind);
+    obj.value_type = omitDefault(message.valueType);
+    obj.unit = omitDefault(message.unit);
+    obj.description = omitDefault(message.description);
+    obj.display_name = omitDefault(message.displayName);
     obj.metadata = message.metadata ? MetricDescriptor_MetricDescriptorMetadata.toAmino(message.metadata) : undefined;
-    obj.launch_stage = message.launchStage;
+    obj.launch_stage = omitDefault(message.launchStage);
     if (message.monitoredResourceTypes) {
       obj.monitored_resource_types = message.monitoredResourceTypes.map(e => e);
     } else {
@@ -961,7 +961,7 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
   },
   toAmino(message: MetricDescriptor_MetricDescriptorMetadata): MetricDescriptor_MetricDescriptorMetadataAmino {
     const obj: any = {};
-    obj.launch_stage = message.launchStage;
+    obj.launch_stage = omitDefault(message.launchStage);
     obj.sample_period = message.samplePeriod ? Duration.toAmino(message.samplePeriod) : undefined;
     obj.ingest_delay = message.ingestDelay ? Duration.toAmino(message.ingestDelay) : undefined;
     return obj;
@@ -1056,8 +1056,8 @@ export const Metric_LabelsEntry = {
   },
   toAmino(message: Metric_LabelsEntry): Metric_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: Metric_LabelsEntryAminoMsg): Metric_LabelsEntry {
@@ -1183,7 +1183,7 @@ export const Metric = {
   },
   toAmino(message: Metric): MetricAmino {
     const obj: any = {};
-    obj.type = message.type;
+    obj.type = omitDefault(message.type);
     obj.labels = {};
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {

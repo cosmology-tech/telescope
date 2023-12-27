@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * A description of the historical or future-looking state of the
@@ -512,16 +512,16 @@ export const ResourceDescriptor = {
   },
   toAmino(message: ResourceDescriptor): ResourceDescriptorAmino {
     const obj: any = {};
-    obj.type = message.type;
+    obj.type = omitDefault(message.type);
     if (message.pattern) {
       obj.pattern = message.pattern.map(e => e);
     } else {
       obj.pattern = [];
     }
-    obj.name_field = message.nameField;
-    obj.history = message.history;
-    obj.plural = message.plural;
-    obj.singular = message.singular;
+    obj.name_field = omitDefault(message.nameField);
+    obj.history = omitDefault(message.history);
+    obj.plural = omitDefault(message.plural);
+    obj.singular = omitDefault(message.singular);
     if (message.style) {
       obj.style = message.style.map(e => resourceDescriptor_StyleToJSON(e));
     } else {
@@ -626,8 +626,8 @@ export const ResourceReference = {
   },
   toAmino(message: ResourceReference): ResourceReferenceAmino {
     const obj: any = {};
-    obj.type = message.type;
-    obj.child_type = message.childType;
+    obj.type = omitDefault(message.type);
+    obj.child_type = omitDefault(message.childType);
     return obj;
   },
   fromAminoMsg(object: ResourceReferenceAminoMsg): ResourceReference {

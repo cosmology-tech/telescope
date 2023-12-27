@@ -1,6 +1,6 @@
 import { TokenPairArbRoutes, TokenPairArbRoutesSDKType, PoolWeights, PoolWeightsSDKType, BaseDenom, BaseDenomSDKType } from "./protorev";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.protorev.v1beta1";
 /** MsgSetHotRoutes defines the Msg/SetHotRoutes request type. */
 export interface MsgSetHotRoutes {
@@ -223,7 +223,7 @@ export const MsgSetHotRoutes = {
   },
   toAmino(message: MsgSetHotRoutes): MsgSetHotRoutesAmino {
     const obj: any = {};
-    obj.admin = message.admin;
+    obj.admin = omitDefault(message.admin);
     if (message.hotRoutes) {
       obj.hot_routes = message.hotRoutes.map(e => e ? TokenPairArbRoutes.toAmino(e) : undefined);
     } else {
@@ -406,8 +406,8 @@ export const MsgSetDeveloperAccount = {
   },
   toAmino(message: MsgSetDeveloperAccount): MsgSetDeveloperAccountAmino {
     const obj: any = {};
-    obj.admin = message.admin;
-    obj.developer_account = message.developerAccount;
+    obj.admin = omitDefault(message.admin);
+    obj.developer_account = omitDefault(message.developerAccount);
     return obj;
   },
   fromAminoMsg(object: MsgSetDeveloperAccountAminoMsg): MsgSetDeveloperAccount {
@@ -585,7 +585,7 @@ export const MsgSetPoolWeights = {
   },
   toAmino(message: MsgSetPoolWeights): MsgSetPoolWeightsAmino {
     const obj: any = {};
-    obj.admin = message.admin;
+    obj.admin = omitDefault(message.admin);
     obj.pool_weights = message.poolWeights ? PoolWeights.toAmino(message.poolWeights) : undefined;
     return obj;
   },
@@ -764,8 +764,8 @@ export const MsgSetMaxPoolPointsPerTx = {
   },
   toAmino(message: MsgSetMaxPoolPointsPerTx): MsgSetMaxPoolPointsPerTxAmino {
     const obj: any = {};
-    obj.admin = message.admin;
-    obj.max_pool_points_per_tx = message.maxPoolPointsPerTx ? message.maxPoolPointsPerTx.toString() : undefined;
+    obj.admin = omitDefault(message.admin);
+    obj.max_pool_points_per_tx = omitDefault(message.maxPoolPointsPerTx);
     return obj;
   },
   fromAminoMsg(object: MsgSetMaxPoolPointsPerTxAminoMsg): MsgSetMaxPoolPointsPerTx {
@@ -943,8 +943,8 @@ export const MsgSetMaxPoolPointsPerBlock = {
   },
   toAmino(message: MsgSetMaxPoolPointsPerBlock): MsgSetMaxPoolPointsPerBlockAmino {
     const obj: any = {};
-    obj.admin = message.admin;
-    obj.max_pool_points_per_block = message.maxPoolPointsPerBlock ? message.maxPoolPointsPerBlock.toString() : undefined;
+    obj.admin = omitDefault(message.admin);
+    obj.max_pool_points_per_block = omitDefault(message.maxPoolPointsPerBlock);
     return obj;
   },
   fromAminoMsg(object: MsgSetMaxPoolPointsPerBlockAminoMsg): MsgSetMaxPoolPointsPerBlock {
@@ -1130,7 +1130,7 @@ export const MsgSetBaseDenoms = {
   },
   toAmino(message: MsgSetBaseDenoms): MsgSetBaseDenomsAmino {
     const obj: any = {};
-    obj.admin = message.admin;
+    obj.admin = omitDefault(message.admin);
     if (message.baseDenoms) {
       obj.base_denoms = message.baseDenoms.map(e => e ? BaseDenom.toAmino(e) : undefined);
     } else {

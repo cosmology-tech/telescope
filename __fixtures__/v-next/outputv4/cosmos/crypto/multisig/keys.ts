@@ -1,6 +1,6 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "cosmos.crypto.multisig";
 /**
  * LegacyAminoPubKey specifies a public key type
@@ -109,7 +109,7 @@ export const LegacyAminoPubKey = {
   },
   toAmino(message: LegacyAminoPubKey): LegacyAminoPubKeyAmino {
     const obj: any = {};
-    obj.threshold = message.threshold;
+    obj.threshold = omitDefault(message.threshold);
     if (message.publicKeys) {
       obj.public_keys = message.publicKeys.map(e => e ? Any.toAmino(e) : undefined);
     } else {

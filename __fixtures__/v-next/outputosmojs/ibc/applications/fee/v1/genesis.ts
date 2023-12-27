@@ -1,6 +1,6 @@
 import { IdentifiedPacketFees, IdentifiedPacketFeesSDKType } from "./fee";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isSet } from "../../../../helpers";
+import { DeepPartial, isSet, omitDefault } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.fee.v1";
 /** GenesisState defines the ICS29 fee middleware genesis state */
 export interface GenesisState {
@@ -373,8 +373,8 @@ export const FeeEnabledChannel = {
   },
   toAmino(message: FeeEnabledChannel): FeeEnabledChannelAmino {
     const obj: any = {};
-    obj.port_id = message.portId;
-    obj.channel_id = message.channelId;
+    obj.port_id = omitDefault(message.portId);
+    obj.channel_id = omitDefault(message.channelId);
     return obj;
   },
   fromAminoMsg(object: FeeEnabledChannelAminoMsg): FeeEnabledChannel {
@@ -494,9 +494,9 @@ export const RegisteredPayee = {
   },
   toAmino(message: RegisteredPayee): RegisteredPayeeAmino {
     const obj: any = {};
-    obj.channel_id = message.channelId;
-    obj.relayer = message.relayer;
-    obj.payee = message.payee;
+    obj.channel_id = omitDefault(message.channelId);
+    obj.relayer = omitDefault(message.relayer);
+    obj.payee = omitDefault(message.payee);
     return obj;
   },
   fromAminoMsg(object: RegisteredPayeeAminoMsg): RegisteredPayee {
@@ -616,9 +616,9 @@ export const RegisteredCounterpartyPayee = {
   },
   toAmino(message: RegisteredCounterpartyPayee): RegisteredCounterpartyPayeeAmino {
     const obj: any = {};
-    obj.channel_id = message.channelId;
-    obj.relayer = message.relayer;
-    obj.counterparty_payee = message.counterpartyPayee;
+    obj.channel_id = omitDefault(message.channelId);
+    obj.relayer = omitDefault(message.relayer);
+    obj.counterparty_payee = omitDefault(message.counterpartyPayee);
     return obj;
   },
   fromAminoMsg(object: RegisteredCounterpartyPayeeAminoMsg): RegisteredCounterpartyPayee {
@@ -710,7 +710,7 @@ export const ForwardRelayerAddress = {
   },
   toAmino(message: ForwardRelayerAddress): ForwardRelayerAddressAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = omitDefault(message.address);
     return obj;
   },
   fromAminoMsg(object: ForwardRelayerAddressAminoMsg): ForwardRelayerAddress {

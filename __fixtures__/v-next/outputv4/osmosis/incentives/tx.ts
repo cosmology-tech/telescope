@@ -2,7 +2,7 @@ import { QueryCondition, QueryConditionSDKType } from "../lockup/lock";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
 /** MsgCreateGauge creates a gague to distribute rewards to users */
 export interface MsgCreateGauge {
@@ -202,14 +202,14 @@ export const MsgCreateGauge = {
       owner: object.owner,
       distributeTo: object?.distribute_to ? QueryCondition.fromAmino(object.distribute_to) : undefined,
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : [],
-      startTime: object.start_time,
+      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
       numEpochsPaidOver: BigInt(object.num_epochs_paid_over)
     };
   },
   toAmino(message: MsgCreateGauge): MsgCreateGaugeAmino {
     const obj: any = {};
-    obj.is_perpetual = message.isPerpetual;
-    obj.owner = message.owner;
+    obj.is_perpetual = omitDefault(message.isPerpetual);
+    obj.owner = omitDefault(message.owner);
     obj.distribute_to = message.distributeTo ? QueryCondition.toAmino(message.distributeTo) : undefined;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
@@ -217,7 +217,7 @@ export const MsgCreateGauge = {
       obj.coins = [];
     }
     obj.start_time = message.startTime;
-    obj.num_epochs_paid_over = message.numEpochsPaidOver ? message.numEpochsPaidOver.toString() : undefined;
+    obj.num_epochs_paid_over = omitDefault(message.numEpochsPaidOver);
     return obj;
   },
   fromAminoMsg(object: MsgCreateGaugeAminoMsg): MsgCreateGauge {
@@ -420,8 +420,8 @@ export const MsgAddToGauge = {
   },
   toAmino(message: MsgAddToGauge): MsgAddToGaugeAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
+    obj.owner = omitDefault(message.owner);
+    obj.gauge_id = omitDefault(message.gaugeId);
     if (message.rewards) {
       obj.rewards = message.rewards.map(e => e ? Coin.toAmino(e) : undefined);
     } else {

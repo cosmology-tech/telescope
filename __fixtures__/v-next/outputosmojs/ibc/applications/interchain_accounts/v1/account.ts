@@ -1,6 +1,6 @@
 import { BaseAccount, BaseAccountSDKType } from "../../../../cosmos/auth/v1beta1/auth";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.interchain_accounts.v1";
 /** An InterchainAccount is defined as a BaseAccount & the address of the account owner on the controller chain */
 export interface InterchainAccount {
@@ -94,7 +94,7 @@ export const InterchainAccount = {
   toAmino(message: InterchainAccount): InterchainAccountAmino {
     const obj: any = {};
     obj.base_account = message.baseAccount ? BaseAccount.toAmino(message.baseAccount) : undefined;
-    obj.account_owner = message.accountOwner;
+    obj.account_owner = omitDefault(message.accountOwner);
     return obj;
   },
   fromAminoMsg(object: InterchainAccountAminoMsg): InterchainAccount {

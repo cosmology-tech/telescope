@@ -1,6 +1,6 @@
 import { FeeToken, FeeTokenSDKType } from "./feetoken";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /** GenesisState defines the txfees module's genesis state. */
 export interface GenesisState {
@@ -101,7 +101,7 @@ export const GenesisState = {
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
-    obj.basedenom = message.basedenom;
+    obj.basedenom = omitDefault(message.basedenom);
     if (message.feetokens) {
       obj.feetokens = message.feetokens.map(e => e ? FeeToken.toAmino(e) : undefined);
     } else {

@@ -1,6 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault, padDecimal } from "../../../helpers";
 export const protobufPackage = "osmosis.valsetpref.v1beta1";
 /**
  * ValidatorPreference defines the message structure for
@@ -129,8 +129,8 @@ export const ValidatorPreference = {
   },
   toAmino(message: ValidatorPreference): ValidatorPreferenceAmino {
     const obj: any = {};
-    obj.val_oper_address = message.valOperAddress;
-    obj.weight = message.weight;
+    obj.val_oper_address = omitDefault(message.valOperAddress);
+    obj.weight = padDecimal(message.weight);
     return obj;
   },
   fromAminoMsg(object: ValidatorPreferenceAminoMsg): ValidatorPreference {

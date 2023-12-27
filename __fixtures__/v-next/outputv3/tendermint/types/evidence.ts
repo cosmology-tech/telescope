@@ -2,7 +2,7 @@ import { Vote, VoteAmino, VoteSDKType, LightBlock, LightBlockAmino, LightBlockSD
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Validator, ValidatorAmino, ValidatorSDKType } from "./validator";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, omitDefault } from "../../helpers";
 export const protobufPackage = "tendermint.types";
 export interface Evidence {
   duplicateVoteEvidence?: DuplicateVoteEvidence;
@@ -321,15 +321,15 @@ export const DuplicateVoteEvidence = {
       voteB: object?.vote_b ? Vote.fromAmino(object.vote_b) : undefined,
       totalVotingPower: BigInt(object.total_voting_power),
       validatorPower: BigInt(object.validator_power),
-      timestamp: object.timestamp
+      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined
     };
   },
   toAmino(message: DuplicateVoteEvidence): DuplicateVoteEvidenceAmino {
     const obj: any = {};
     obj.vote_a = message.voteA ? Vote.toAmino(message.voteA) : undefined;
     obj.vote_b = message.voteB ? Vote.toAmino(message.voteB) : undefined;
-    obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
-    obj.validator_power = message.validatorPower ? message.validatorPower.toString() : undefined;
+    obj.total_voting_power = omitDefault(message.totalVotingPower);
+    obj.validator_power = omitDefault(message.validatorPower);
     obj.timestamp = message.timestamp;
     return obj;
   },
@@ -472,19 +472,19 @@ export const LightClientAttackEvidence = {
       commonHeight: BigInt(object.common_height),
       byzantineValidators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Validator.fromAmino(e)) : [],
       totalVotingPower: BigInt(object.total_voting_power),
-      timestamp: object.timestamp
+      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined
     };
   },
   toAmino(message: LightClientAttackEvidence): LightClientAttackEvidenceAmino {
     const obj: any = {};
     obj.conflicting_block = message.conflictingBlock ? LightBlock.toAmino(message.conflictingBlock) : undefined;
-    obj.common_height = message.commonHeight ? message.commonHeight.toString() : undefined;
+    obj.common_height = omitDefault(message.commonHeight);
     if (message.byzantineValidators) {
       obj.byzantine_validators = message.byzantineValidators.map(e => e ? Validator.toAmino(e) : undefined);
     } else {
       obj.byzantine_validators = [];
     }
-    obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
+    obj.total_voting_power = omitDefault(message.totalVotingPower);
     obj.timestamp = message.timestamp;
     return obj;
   },

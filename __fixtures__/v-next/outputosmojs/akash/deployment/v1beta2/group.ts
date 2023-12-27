@@ -1,7 +1,7 @@
 import { GroupID, GroupIDSDKType } from "./groupid";
 import { GroupSpec, GroupSpecSDKType } from "./groupspec";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { isSet, DeepPartial, Exact, omitDefault } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** State is an enum which refers to state of group */
 export enum Group_State {
@@ -184,7 +184,7 @@ export const Group = {
     obj.group_id = message.groupId ? GroupID.toAmino(message.groupId) : undefined;
     obj.state = message.state;
     obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec) : undefined;
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    obj.created_at = omitDefault(message.createdAt);
     return obj;
   },
   fromAminoMsg(object: GroupAminoMsg): Group {

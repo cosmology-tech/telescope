@@ -65,7 +65,7 @@ export const AminoConverter = {
           data: packetData.data,
           memo: omitDefault(packetData.memo)
         },
-        relative_timeout: relativeTimeout.toString()
+        relative_timeout: omitDefault(relativeTimeout)?.toString?.()
       };
     },
     fromAmino: ({

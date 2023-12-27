@@ -1,6 +1,6 @@
 import { Distribution_Exemplar } from "../../distribution";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /**
  * Distribution represents a frequency distribution of double-valued sample
@@ -376,11 +376,11 @@ export const Distribution = {
   },
   toAmino(message: Distribution): DistributionAmino {
     const obj: any = {};
-    obj.count = message.count ? message.count.toString() : undefined;
-    obj.mean = message.mean;
-    obj.minimum = message.minimum;
-    obj.maximum = message.maximum;
-    obj.sum_of_squared_deviation = message.sumOfSquaredDeviation;
+    obj.count = omitDefault(message.count);
+    obj.mean = omitDefault(message.mean);
+    obj.minimum = omitDefault(message.minimum);
+    obj.maximum = omitDefault(message.maximum);
+    obj.sum_of_squared_deviation = omitDefault(message.sumOfSquaredDeviation);
     if (message.bucketCounts) {
       obj.bucket_counts = message.bucketCounts.map(e => e.toString());
     } else {
@@ -507,9 +507,9 @@ export const Distribution_LinearBuckets = {
   },
   toAmino(message: Distribution_LinearBuckets): Distribution_LinearBucketsAmino {
     const obj: any = {};
-    obj.num_finite_buckets = message.numFiniteBuckets;
-    obj.width = message.width;
-    obj.offset = message.offset;
+    obj.num_finite_buckets = omitDefault(message.numFiniteBuckets);
+    obj.width = omitDefault(message.width);
+    obj.offset = omitDefault(message.offset);
     return obj;
   },
   fromAminoMsg(object: Distribution_LinearBucketsAminoMsg): Distribution_LinearBuckets {
@@ -623,9 +623,9 @@ export const Distribution_ExponentialBuckets = {
   },
   toAmino(message: Distribution_ExponentialBuckets): Distribution_ExponentialBucketsAmino {
     const obj: any = {};
-    obj.num_finite_buckets = message.numFiniteBuckets;
-    obj.growth_factor = message.growthFactor;
-    obj.scale = message.scale;
+    obj.num_finite_buckets = omitDefault(message.numFiniteBuckets);
+    obj.growth_factor = omitDefault(message.growthFactor);
+    obj.scale = omitDefault(message.scale);
     return obj;
   },
   fromAminoMsg(object: Distribution_ExponentialBucketsAminoMsg): Distribution_ExponentialBuckets {

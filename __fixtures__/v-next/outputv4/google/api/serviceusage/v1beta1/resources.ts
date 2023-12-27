@@ -7,7 +7,7 @@ import { Endpoint, EndpointSDKType } from "../../endpoint";
 import { MonitoredResourceDescriptor, MonitoredResourceDescriptorSDKType } from "../../monitored_resource";
 import { Monitoring, MonitoringSDKType } from "../../monitoring";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.serviceusage.v1beta1";
 /** Whether or not a service has been enabled for use by a consumer. */
 export enum State {
@@ -723,10 +723,10 @@ export const Service = {
   },
   toAmino(message: Service): ServiceAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.parent = message.parent;
+    obj.name = omitDefault(message.name);
+    obj.parent = omitDefault(message.parent);
     obj.config = message.config ? ServiceConfig.toAmino(message.config) : undefined;
-    obj.state = message.state;
+    obj.state = omitDefault(message.state);
     return obj;
   },
   fromAminoMsg(object: ServiceAminoMsg): Service {
@@ -972,8 +972,8 @@ export const ServiceConfig = {
   },
   toAmino(message: ServiceConfig): ServiceConfigAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.title = message.title;
+    obj.name = omitDefault(message.name);
+    obj.title = omitDefault(message.title);
     if (message.apis) {
       obj.apis = message.apis.map(e => e ? Api.toAmino(e) : undefined);
     } else {
@@ -1263,9 +1263,9 @@ export const ConsumerQuotaMetric = {
   },
   toAmino(message: ConsumerQuotaMetric): ConsumerQuotaMetricAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.metric = message.metric;
-    obj.display_name = message.displayName;
+    obj.name = omitDefault(message.name);
+    obj.metric = omitDefault(message.metric);
+    obj.display_name = omitDefault(message.displayName);
     if (message.consumerQuotaLimits) {
       obj.consumer_quota_limits = message.consumerQuotaLimits.map(e => e ? ConsumerQuotaLimit.toAmino(e) : undefined);
     } else {
@@ -1276,7 +1276,7 @@ export const ConsumerQuotaMetric = {
     } else {
       obj.descendant_consumer_quota_limits = [];
     }
-    obj.unit = message.unit;
+    obj.unit = omitDefault(message.unit);
     return obj;
   },
   fromAminoMsg(object: ConsumerQuotaMetricAminoMsg): ConsumerQuotaMetric {
@@ -1440,11 +1440,11 @@ export const ConsumerQuotaLimit = {
   },
   toAmino(message: ConsumerQuotaLimit): ConsumerQuotaLimitAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.metric = message.metric;
-    obj.unit = message.unit;
-    obj.is_precise = message.isPrecise;
-    obj.allows_admin_overrides = message.allowsAdminOverrides;
+    obj.name = omitDefault(message.name);
+    obj.metric = omitDefault(message.metric);
+    obj.unit = omitDefault(message.unit);
+    obj.is_precise = omitDefault(message.isPrecise);
+    obj.allows_admin_overrides = omitDefault(message.allowsAdminOverrides);
     if (message.quotaBuckets) {
       obj.quota_buckets = message.quotaBuckets.map(e => e ? QuotaBucket.toAmino(e) : undefined);
     } else {
@@ -1548,8 +1548,8 @@ export const QuotaBucket_DimensionsEntry = {
   },
   toAmino(message: QuotaBucket_DimensionsEntry): QuotaBucket_DimensionsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: QuotaBucket_DimensionsEntryAminoMsg): QuotaBucket_DimensionsEntry {
@@ -1752,8 +1752,8 @@ export const QuotaBucket = {
   },
   toAmino(message: QuotaBucket): QuotaBucketAmino {
     const obj: any = {};
-    obj.effective_limit = message.effectiveLimit ? message.effectiveLimit.toString() : undefined;
-    obj.default_limit = message.defaultLimit ? message.defaultLimit.toString() : undefined;
+    obj.effective_limit = omitDefault(message.effectiveLimit);
+    obj.default_limit = omitDefault(message.defaultLimit);
     obj.producer_override = message.producerOverride ? QuotaOverride.toAmino(message.producerOverride) : undefined;
     obj.consumer_override = message.consumerOverride ? QuotaOverride.toAmino(message.consumerOverride) : undefined;
     obj.admin_override = message.adminOverride ? QuotaOverride.toAmino(message.adminOverride) : undefined;
@@ -1861,8 +1861,8 @@ export const QuotaOverride_DimensionsEntry = {
   },
   toAmino(message: QuotaOverride_DimensionsEntry): QuotaOverride_DimensionsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: QuotaOverride_DimensionsEntryAminoMsg): QuotaOverride_DimensionsEntry {
@@ -2057,17 +2057,17 @@ export const QuotaOverride = {
   },
   toAmino(message: QuotaOverride): QuotaOverrideAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.override_value = message.overrideValue ? message.overrideValue.toString() : undefined;
+    obj.name = omitDefault(message.name);
+    obj.override_value = omitDefault(message.overrideValue);
     obj.dimensions = {};
     if (message.dimensions) {
       Object.entries(message.dimensions).forEach(([k, v]) => {
         obj.dimensions[k] = v;
       });
     }
-    obj.metric = message.metric;
-    obj.unit = message.unit;
-    obj.admin_override_ancestor = message.adminOverrideAncestor;
+    obj.metric = omitDefault(message.metric);
+    obj.unit = omitDefault(message.unit);
+    obj.admin_override_ancestor = omitDefault(message.adminOverrideAncestor);
     return obj;
   },
   fromAminoMsg(object: QuotaOverrideAminoMsg): QuotaOverride {
@@ -2264,8 +2264,8 @@ export const AdminQuotaPolicy_DimensionsEntry = {
   },
   toAmino(message: AdminQuotaPolicy_DimensionsEntry): AdminQuotaPolicy_DimensionsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: AdminQuotaPolicy_DimensionsEntryAminoMsg): AdminQuotaPolicy_DimensionsEntry {
@@ -2460,17 +2460,17 @@ export const AdminQuotaPolicy = {
   },
   toAmino(message: AdminQuotaPolicy): AdminQuotaPolicyAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.policy_value = message.policyValue ? message.policyValue.toString() : undefined;
+    obj.name = omitDefault(message.name);
+    obj.policy_value = omitDefault(message.policyValue);
     obj.dimensions = {};
     if (message.dimensions) {
       Object.entries(message.dimensions).forEach(([k, v]) => {
         obj.dimensions[k] = v;
       });
     }
-    obj.metric = message.metric;
-    obj.unit = message.unit;
-    obj.container = message.container;
+    obj.metric = omitDefault(message.metric);
+    obj.unit = omitDefault(message.unit);
+    obj.container = omitDefault(message.container);
     return obj;
   },
   fromAminoMsg(object: AdminQuotaPolicyAminoMsg): AdminQuotaPolicy {
@@ -2570,8 +2570,8 @@ export const ServiceIdentity = {
   },
   toAmino(message: ServiceIdentity): ServiceIdentityAmino {
     const obj: any = {};
-    obj.email = message.email;
-    obj.unique_id = message.uniqueId;
+    obj.email = omitDefault(message.email);
+    obj.unique_id = omitDefault(message.uniqueId);
     return obj;
   },
   fromAminoMsg(object: ServiceIdentityAminoMsg): ServiceIdentity {

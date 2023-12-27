@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
+import { DeepPartial, isSet, omitDefault } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * ### System parameter configuration
@@ -394,7 +394,7 @@ export const SystemParameterRule = {
   },
   toAmino(message: SystemParameterRule): SystemParameterRuleAmino {
     const obj: any = {};
-    obj.selector = message.selector;
+    obj.selector = omitDefault(message.selector);
     if (message.parameters) {
       obj.parameters = message.parameters.map(e => e ? SystemParameter.toAmino(e) : undefined);
     } else {
@@ -506,9 +506,9 @@ export const SystemParameter = {
   },
   toAmino(message: SystemParameter): SystemParameterAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.http_header = message.httpHeader;
-    obj.url_query_parameter = message.urlQueryParameter;
+    obj.name = omitDefault(message.name);
+    obj.http_header = omitDefault(message.httpHeader);
+    obj.url_query_parameter = omitDefault(message.urlQueryParameter);
     return obj;
   },
   fromAminoMsg(object: SystemParameterAminoMsg): SystemParameter {

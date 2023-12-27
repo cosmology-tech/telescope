@@ -1,7 +1,7 @@
 import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { Any, AnySDKType } from "../../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
  * Represents a CEL value.
@@ -360,18 +360,18 @@ export const Value = {
   },
   toAmino(message: Value): ValueAmino {
     const obj: any = {};
-    obj.null_value = message.nullValue;
-    obj.bool_value = message.boolValue;
-    obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
-    obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
-    obj.double_value = message.doubleValue;
-    obj.string_value = message.stringValue;
+    obj.null_value = omitDefault(message.nullValue);
+    obj.bool_value = omitDefault(message.boolValue);
+    obj.int64_value = omitDefault(message.int64Value);
+    obj.uint64_value = omitDefault(message.uint64Value);
+    obj.double_value = omitDefault(message.doubleValue);
+    obj.string_value = omitDefault(message.stringValue);
     obj.bytes_value = message.bytesValue;
     obj.enum_value = message.enumValue ? EnumValue.toAmino(message.enumValue) : undefined;
     obj.object_value = message.objectValue ? Any.toAmino(message.objectValue) : undefined;
     obj.map_value = message.mapValue ? MapValue.toAmino(message.mapValue) : undefined;
     obj.list_value = message.listValue ? ListValue.toAmino(message.listValue) : undefined;
-    obj.type_value = message.typeValue;
+    obj.type_value = omitDefault(message.typeValue);
     return obj;
   },
   fromAminoMsg(object: ValueAminoMsg): Value {
@@ -471,8 +471,8 @@ export const EnumValue = {
   },
   toAmino(message: EnumValue): EnumValueAmino {
     const obj: any = {};
-    obj.type = message.type;
-    obj.value = message.value;
+    obj.type = omitDefault(message.type);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: EnumValueAminoMsg): EnumValue {

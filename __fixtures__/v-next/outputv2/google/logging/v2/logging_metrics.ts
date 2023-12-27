@@ -2,7 +2,7 @@ import { MetricDescriptor, MetricDescriptorAmino, MetricDescriptorSDKType } from
 import { Distribution_BucketOptions } from "../../api/distribution";
 import { Timestamp } from "../../protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault, toTimestamp, fromTimestamp, isObject } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 /** Logging API version. */
 export enum LogMetric_ApiVersion {
@@ -679,8 +679,8 @@ export const LogMetric_LabelExtractorsEntry = {
   },
   toAmino(message: LogMetric_LabelExtractorsEntry): LogMetric_LabelExtractorsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = omitDefault(message.key);
+    obj.value = omitDefault(message.value);
     return obj;
   },
   fromAminoMsg(object: LogMetric_LabelExtractorsEntryAminoMsg): LogMetric_LabelExtractorsEntry {
@@ -920,19 +920,19 @@ export const LogMetric = {
         return acc;
       }, {}) : {},
       bucketOptions: object?.bucket_options ? Distribution_BucketOptions.fromAmino(object.bucket_options) : undefined,
-      createTime: object.create_time,
-      updateTime: object.update_time,
+      createTime: object?.create_time ? Timestamp.fromAmino(object.create_time) : undefined,
+      updateTime: object?.update_time ? Timestamp.fromAmino(object.update_time) : undefined,
       version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
     };
   },
   toAmino(message: LogMetric): LogMetricAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
-    obj.filter = message.filter;
-    obj.disabled = message.disabled;
+    obj.name = omitDefault(message.name);
+    obj.description = omitDefault(message.description);
+    obj.filter = omitDefault(message.filter);
+    obj.disabled = omitDefault(message.disabled);
     obj.metric_descriptor = message.metricDescriptor ? MetricDescriptor.toAmino(message.metricDescriptor) : undefined;
-    obj.value_extractor = message.valueExtractor;
+    obj.value_extractor = omitDefault(message.valueExtractor);
     obj.label_extractors = {};
     if (message.labelExtractors) {
       Object.entries(message.labelExtractors).forEach(([k, v]) => {
@@ -942,7 +942,7 @@ export const LogMetric = {
     obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toAmino(message.bucketOptions) : undefined;
     obj.create_time = message.createTime;
     obj.update_time = message.updateTime;
-    obj.version = message.version;
+    obj.version = omitDefault(message.version);
     return obj;
   },
   fromAminoMsg(object: LogMetricAminoMsg): LogMetric {
@@ -1049,9 +1049,9 @@ export const ListLogMetricsRequest = {
   },
   toAmino(message: ListLogMetricsRequest): ListLogMetricsRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
+    obj.parent = omitDefault(message.parent);
+    obj.page_token = omitDefault(message.pageToken);
+    obj.page_size = omitDefault(message.pageSize);
     return obj;
   },
   fromAminoMsg(object: ListLogMetricsRequestAminoMsg): ListLogMetricsRequest {
@@ -1158,7 +1158,7 @@ export const ListLogMetricsResponse = {
     } else {
       obj.metrics = [];
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = omitDefault(message.nextPageToken);
     return obj;
   },
   fromAminoMsg(object: ListLogMetricsResponseAminoMsg): ListLogMetricsResponse {
@@ -1239,7 +1239,7 @@ export const GetLogMetricRequest = {
   },
   toAmino(message: GetLogMetricRequest): GetLogMetricRequestAmino {
     const obj: any = {};
-    obj.metric_name = message.metricName;
+    obj.metric_name = omitDefault(message.metricName);
     return obj;
   },
   fromAminoMsg(object: GetLogMetricRequestAminoMsg): GetLogMetricRequest {
@@ -1335,7 +1335,7 @@ export const CreateLogMetricRequest = {
   },
   toAmino(message: CreateLogMetricRequest): CreateLogMetricRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = omitDefault(message.parent);
     obj.metric = message.metric ? LogMetric.toAmino(message.metric) : undefined;
     return obj;
   },
@@ -1432,7 +1432,7 @@ export const UpdateLogMetricRequest = {
   },
   toAmino(message: UpdateLogMetricRequest): UpdateLogMetricRequestAmino {
     const obj: any = {};
-    obj.metric_name = message.metricName;
+    obj.metric_name = omitDefault(message.metricName);
     obj.metric = message.metric ? LogMetric.toAmino(message.metric) : undefined;
     return obj;
   },
@@ -1514,7 +1514,7 @@ export const DeleteLogMetricRequest = {
   },
   toAmino(message: DeleteLogMetricRequest): DeleteLogMetricRequestAmino {
     const obj: any = {};
-    obj.metric_name = message.metricName;
+    obj.metric_name = omitDefault(message.metricName);
     return obj;
   },
   fromAminoMsg(object: DeleteLogMetricRequestAminoMsg): DeleteLogMetricRequest {

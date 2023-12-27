@@ -3,7 +3,7 @@ import { Consensus, ConsensusAmino, ConsensusSDKType } from "../version/types";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { ValidatorSet, ValidatorSetAmino, ValidatorSetSDKType } from "./validator";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault, toTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "tendermint.types";
 /** BlockIdFlag indicates which BlcokID the signature is for */
 export enum BlockIDFlag {
@@ -585,7 +585,7 @@ export const PartSetHeader = {
   },
   toAmino(message: PartSetHeader): PartSetHeaderAmino {
     const obj: any = {};
-    obj.total = message.total;
+    obj.total = omitDefault(message.total);
     obj.hash = message.hash;
     return obj;
   },
@@ -695,7 +695,7 @@ export const Part = {
   },
   toAmino(message: Part): PartAmino {
     const obj: any = {};
-    obj.index = message.index;
+    obj.index = omitDefault(message.index);
     obj.bytes = message.bytes;
     obj.proof = message.proof ? Proof.toAmino(message.proof) : undefined;
     return obj;
@@ -1035,7 +1035,7 @@ export const Header = {
       version: object?.version ? Consensus.fromAmino(object.version) : undefined,
       chainId: object.chain_id,
       height: BigInt(object.height),
-      time: object.time,
+      time: object?.time ? Timestamp.fromAmino(object.time) : undefined,
       lastBlockId: object?.last_block_id ? BlockID.fromAmino(object.last_block_id) : undefined,
       lastCommitHash: object.last_commit_hash,
       dataHash: object.data_hash,
@@ -1051,8 +1051,8 @@ export const Header = {
   toAmino(message: Header): HeaderAmino {
     const obj: any = {};
     obj.version = message.version ? Consensus.toAmino(message.version) : undefined;
-    obj.chain_id = message.chainId;
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.chain_id = omitDefault(message.chainId);
+    obj.height = omitDefault(message.height);
     obj.time = message.time;
     obj.last_block_id = message.lastBlockId ? BlockID.toAmino(message.lastBlockId) : undefined;
     obj.last_commit_hash = message.lastCommitHash;
@@ -1324,7 +1324,7 @@ export const Vote = {
       height: BigInt(object.height),
       round: object.round,
       blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : undefined,
-      timestamp: object.timestamp,
+      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
       validatorAddress: object.validator_address,
       validatorIndex: object.validator_index,
       signature: object.signature
@@ -1332,13 +1332,13 @@ export const Vote = {
   },
   toAmino(message: Vote): VoteAmino {
     const obj: any = {};
-    obj.type = message.type;
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.round = message.round;
+    obj.type = omitDefault(message.type);
+    obj.height = omitDefault(message.height);
+    obj.round = omitDefault(message.round);
     obj.block_id = message.blockId ? BlockID.toAmino(message.blockId) : undefined;
     obj.timestamp = message.timestamp;
     obj.validator_address = message.validatorAddress;
-    obj.validator_index = message.validatorIndex;
+    obj.validator_index = omitDefault(message.validatorIndex);
     obj.signature = message.signature;
     return obj;
   },
@@ -1471,8 +1471,8 @@ export const Commit = {
   },
   toAmino(message: Commit): CommitAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.round = message.round;
+    obj.height = omitDefault(message.height);
+    obj.round = omitDefault(message.round);
     obj.block_id = message.blockId ? BlockID.toAmino(message.blockId) : undefined;
     if (message.signatures) {
       obj.signatures = message.signatures.map(e => e ? CommitSig.toAmino(e) : undefined);
@@ -1592,13 +1592,13 @@ export const CommitSig = {
     return {
       blockIdFlag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : -1,
       validatorAddress: object.validator_address,
-      timestamp: object.timestamp,
+      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
       signature: object.signature
     };
   },
   toAmino(message: CommitSig): CommitSigAmino {
     const obj: any = {};
-    obj.block_id_flag = message.blockIdFlag;
+    obj.block_id_flag = omitDefault(message.blockIdFlag);
     obj.validator_address = message.validatorAddress;
     obj.timestamp = message.timestamp;
     obj.signature = message.signature;
@@ -1758,16 +1758,16 @@ export const Proposal = {
       round: object.round,
       polRound: object.pol_round,
       blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : undefined,
-      timestamp: object.timestamp,
+      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
       signature: object.signature
     };
   },
   toAmino(message: Proposal): ProposalAmino {
     const obj: any = {};
-    obj.type = message.type;
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.round = message.round;
-    obj.pol_round = message.polRound;
+    obj.type = omitDefault(message.type);
+    obj.height = omitDefault(message.height);
+    obj.round = omitDefault(message.round);
+    obj.pol_round = omitDefault(message.polRound);
     obj.block_id = message.blockId ? BlockID.toAmino(message.blockId) : undefined;
     obj.timestamp = message.timestamp;
     obj.signature = message.signature;
@@ -2097,9 +2097,9 @@ export const BlockMeta = {
   toAmino(message: BlockMeta): BlockMetaAmino {
     const obj: any = {};
     obj.block_id = message.blockId ? BlockID.toAmino(message.blockId) : undefined;
-    obj.block_size = message.blockSize ? message.blockSize.toString() : undefined;
+    obj.block_size = omitDefault(message.blockSize);
     obj.header = message.header ? Header.toAmino(message.header) : undefined;
-    obj.num_txs = message.numTxs ? message.numTxs.toString() : undefined;
+    obj.num_txs = omitDefault(message.numTxs);
     return obj;
   },
   fromAminoMsg(object: BlockMetaAminoMsg): BlockMeta {

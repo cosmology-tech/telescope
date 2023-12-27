@@ -1,6 +1,5 @@
 /* eslint-disable */
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault } from "../../../helpers";
 import { CertificateID, CertificateIDSDKType, MsgCreateCertificate, MsgCreateCertificateSDKType, MsgRevokeCertificate, MsgRevokeCertificateSDKType } from "./cert";
 export interface MsgCreateCertificateAminoType extends AminoMsg {
   type: "akash/cert/v1beta2/testonly-create-certificate";
@@ -28,7 +27,7 @@ export const AminoConverter = {
       pubkey
     }: MsgCreateCertificate): MsgCreateCertificateAminoType["value"] => {
       return {
-        owner: omitDefault(owner),
+        owner: owner,
         cert: cert,
         pubkey: pubkey
       };
@@ -52,8 +51,8 @@ export const AminoConverter = {
     }: MsgRevokeCertificate): MsgRevokeCertificateAminoType["value"] => {
       return {
         id: {
-          owner: omitDefault(id.owner),
-          serial: omitDefault(id.serial)
+          owner: id.owner,
+          serial: id.serial
         }
       };
     },

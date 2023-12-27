@@ -1,6 +1,6 @@
 import { Metadata, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
 /** Owner enumerates the ownership of a ERC20 contract. */
 export enum Owner {
@@ -242,10 +242,10 @@ export const TokenPair = {
   },
   toAmino(message: TokenPair): TokenPairAmino {
     const obj: any = {};
-    obj.erc20_address = message.erc20Address;
-    obj.denom = message.denom;
-    obj.enabled = message.enabled;
-    obj.contract_owner = message.contractOwner;
+    obj.erc20_address = omitDefault(message.erc20Address);
+    obj.denom = omitDefault(message.denom);
+    obj.enabled = omitDefault(message.enabled);
+    obj.contract_owner = omitDefault(message.contractOwner);
     return obj;
   },
   fromAminoMsg(object: TokenPairAminoMsg): TokenPair {
@@ -359,8 +359,8 @@ export const RegisterCoinProposal = {
   },
   toAmino(message: RegisterCoinProposal): RegisterCoinProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
+    obj.title = omitDefault(message.title);
+    obj.description = omitDefault(message.description);
     obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined;
     return obj;
   },
@@ -475,9 +475,9 @@ export const RegisterERC20Proposal = {
   },
   toAmino(message: RegisterERC20Proposal): RegisterERC20ProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.erc20address = message.erc20address;
+    obj.title = omitDefault(message.title);
+    obj.description = omitDefault(message.description);
+    obj.erc20address = omitDefault(message.erc20address);
     return obj;
   },
   fromAminoMsg(object: RegisterERC20ProposalAminoMsg): RegisterERC20Proposal {
@@ -591,9 +591,9 @@ export const ToggleTokenConversionProposal = {
   },
   toAmino(message: ToggleTokenConversionProposal): ToggleTokenConversionProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.token = message.token;
+    obj.title = omitDefault(message.title);
+    obj.description = omitDefault(message.description);
+    obj.token = omitDefault(message.token);
     return obj;
   },
   fromAminoMsg(object: ToggleTokenConversionProposalAminoMsg): ToggleTokenConversionProposal {

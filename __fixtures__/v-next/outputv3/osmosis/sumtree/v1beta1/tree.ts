@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.store.v1beta1";
 export interface Node {
   children: Child[];
@@ -232,7 +232,7 @@ export const Child = {
   toAmino(message: Child): ChildAmino {
     const obj: any = {};
     obj.index = message.index;
-    obj.accumulation = message.accumulation;
+    obj.accumulation = omitDefault(message.accumulation);
     return obj;
   },
   fromAminoMsg(object: ChildAminoMsg): Child {

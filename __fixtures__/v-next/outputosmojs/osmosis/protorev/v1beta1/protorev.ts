@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.protorev.v1beta1";
 /** TokenPairArbRoutes tracks all of the hot routes for a given pair of tokens */
 export interface TokenPairArbRoutes {
@@ -232,8 +232,8 @@ export const TokenPairArbRoutes = {
     } else {
       obj.arb_routes = [];
     }
-    obj.token_in = message.tokenIn;
-    obj.token_out = message.tokenOut;
+    obj.token_in = omitDefault(message.tokenIn);
+    obj.token_out = omitDefault(message.tokenOut);
     return obj;
   },
   fromAminoMsg(object: TokenPairArbRoutesAminoMsg): TokenPairArbRoutes {
@@ -352,7 +352,7 @@ export const Route = {
     } else {
       obj.trades = [];
     }
-    obj.step_size = message.stepSize;
+    obj.step_size = omitDefault(message.stepSize);
     return obj;
   },
   fromAminoMsg(object: RouteAminoMsg): Route {
@@ -472,9 +472,9 @@ export const Trade = {
   },
   toAmino(message: Trade): TradeAmino {
     const obj: any = {};
-    obj.pool = message.pool ? message.pool.toString() : undefined;
-    obj.token_in = message.tokenIn;
-    obj.token_out = message.tokenOut;
+    obj.pool = omitDefault(message.pool);
+    obj.token_in = omitDefault(message.tokenIn);
+    obj.token_out = omitDefault(message.tokenOut);
     return obj;
   },
   fromAminoMsg(object: TradeAminoMsg): Trade {
@@ -624,7 +624,7 @@ export const RouteStatistics = {
     } else {
       obj.profits = [];
     }
-    obj.number_of_trades = message.numberOfTrades;
+    obj.number_of_trades = omitDefault(message.numberOfTrades);
     if (message.route) {
       obj.route = message.route.map(e => e.toString());
     } else {
@@ -749,9 +749,9 @@ export const PoolWeights = {
   },
   toAmino(message: PoolWeights): PoolWeightsAmino {
     const obj: any = {};
-    obj.stable_weight = message.stableWeight ? message.stableWeight.toString() : undefined;
-    obj.balancer_weight = message.balancerWeight ? message.balancerWeight.toString() : undefined;
-    obj.concentrated_weight = message.concentratedWeight ? message.concentratedWeight.toString() : undefined;
+    obj.stable_weight = omitDefault(message.stableWeight);
+    obj.balancer_weight = omitDefault(message.balancerWeight);
+    obj.concentrated_weight = omitDefault(message.concentratedWeight);
     return obj;
   },
   fromAminoMsg(object: PoolWeightsAminoMsg): PoolWeights {
@@ -857,8 +857,8 @@ export const BaseDenom = {
   },
   toAmino(message: BaseDenom): BaseDenomAmino {
     const obj: any = {};
-    obj.denom = message.denom;
-    obj.step_size = message.stepSize;
+    obj.denom = omitDefault(message.denom);
+    obj.step_size = omitDefault(message.stepSize);
     return obj;
   },
   fromAminoMsg(object: BaseDenomAminoMsg): BaseDenom {

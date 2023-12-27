@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
@@ -194,19 +194,19 @@ export const ValidatorSigningInfo = {
       address: object.address,
       startHeight: BigInt(object.start_height),
       indexOffset: BigInt(object.index_offset),
-      jailedUntil: object.jailed_until,
+      jailedUntil: object?.jailed_until ? Timestamp.fromAmino(object.jailed_until) : undefined,
       tombstoned: object.tombstoned,
       missedBlocksCounter: BigInt(object.missed_blocks_counter)
     };
   },
   toAmino(message: ValidatorSigningInfo): ValidatorSigningInfoAmino {
     const obj: any = {};
-    obj.address = message.address;
-    obj.start_height = message.startHeight ? message.startHeight.toString() : undefined;
-    obj.index_offset = message.indexOffset ? message.indexOffset.toString() : undefined;
+    obj.address = omitDefault(message.address);
+    obj.start_height = omitDefault(message.startHeight);
+    obj.index_offset = omitDefault(message.indexOffset);
     obj.jailed_until = message.jailedUntil;
-    obj.tombstoned = message.tombstoned;
-    obj.missed_blocks_counter = message.missedBlocksCounter ? message.missedBlocksCounter.toString() : undefined;
+    obj.tombstoned = omitDefault(message.tombstoned);
+    obj.missed_blocks_counter = omitDefault(message.missedBlocksCounter);
     return obj;
   },
   fromAminoMsg(object: ValidatorSigningInfoAminoMsg): ValidatorSigningInfo {
@@ -358,7 +358,7 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.signed_blocks_window = message.signedBlocksWindow ? message.signedBlocksWindow.toString() : undefined;
+    obj.signed_blocks_window = omitDefault(message.signedBlocksWindow);
     obj.min_signed_per_window = message.minSignedPerWindow;
     obj.downtime_jail_duration = message.downtimeJailDuration ? Duration.toAmino(message.downtimeJailDuration) : undefined;
     obj.slash_fraction_double_sign = message.slashFractionDoubleSign;

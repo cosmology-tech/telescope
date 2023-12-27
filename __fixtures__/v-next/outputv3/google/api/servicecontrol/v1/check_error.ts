@@ -1,6 +1,6 @@
 import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Error codes for Check responses. */
 export enum CheckError_Code {
@@ -362,9 +362,9 @@ export const CheckError = {
   },
   toAmino(message: CheckError): CheckErrorAmino {
     const obj: any = {};
-    obj.code = message.code;
-    obj.subject = message.subject;
-    obj.detail = message.detail;
+    obj.code = omitDefault(message.code);
+    obj.subject = omitDefault(message.subject);
+    obj.detail = omitDefault(message.detail);
     obj.status = message.status ? Status.toAmino(message.status) : undefined;
     return obj;
   },

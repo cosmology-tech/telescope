@@ -1,6 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, omitDefault, padDecimal } from "../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.superfluid";
 /**
@@ -330,8 +330,8 @@ export const SuperfluidAsset = {
   },
   toAmino(message: SuperfluidAsset): SuperfluidAssetAmino {
     const obj: any = {};
-    obj.denom = message.denom;
-    obj.asset_type = message.assetType;
+    obj.denom = omitDefault(message.denom);
+    obj.asset_type = omitDefault(message.assetType);
     return obj;
   },
   fromAminoMsg(object: SuperfluidAssetAminoMsg): SuperfluidAsset {
@@ -447,9 +447,9 @@ export const SuperfluidIntermediaryAccount = {
   },
   toAmino(message: SuperfluidIntermediaryAccount): SuperfluidIntermediaryAccountAmino {
     const obj: any = {};
-    obj.denom = message.denom;
-    obj.val_addr = message.valAddr;
-    obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
+    obj.denom = omitDefault(message.denom);
+    obj.val_addr = omitDefault(message.valAddr);
+    obj.gauge_id = omitDefault(message.gaugeId);
     return obj;
   },
   fromAminoMsg(object: SuperfluidIntermediaryAccountAminoMsg): SuperfluidIntermediaryAccount {
@@ -565,9 +565,9 @@ export const OsmoEquivalentMultiplierRecord = {
   },
   toAmino(message: OsmoEquivalentMultiplierRecord): OsmoEquivalentMultiplierRecordAmino {
     const obj: any = {};
-    obj.epoch_number = message.epochNumber ? message.epochNumber.toString() : undefined;
-    obj.denom = message.denom;
-    obj.multiplier = message.multiplier;
+    obj.epoch_number = omitDefault(message.epochNumber);
+    obj.denom = omitDefault(message.denom);
+    obj.multiplier = padDecimal(message.multiplier);
     return obj;
   },
   fromAminoMsg(object: OsmoEquivalentMultiplierRecordAminoMsg): OsmoEquivalentMultiplierRecord {
@@ -698,8 +698,8 @@ export const SuperfluidDelegationRecord = {
   },
   toAmino(message: SuperfluidDelegationRecord): SuperfluidDelegationRecordAmino {
     const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
+    obj.delegator_address = omitDefault(message.delegatorAddress);
+    obj.validator_address = omitDefault(message.validatorAddress);
     obj.delegation_amount = message.delegationAmount ? Coin.toAmino(message.delegationAmount) : undefined;
     obj.equivalent_staked_amount = message.equivalentStakedAmount ? Coin.toAmino(message.equivalentStakedAmount) : undefined;
     return obj;
@@ -804,8 +804,8 @@ export const LockIdIntermediaryAccountConnection = {
   },
   toAmino(message: LockIdIntermediaryAccountConnection): LockIdIntermediaryAccountConnectionAmino {
     const obj: any = {};
-    obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
-    obj.intermediary_account = message.intermediaryAccount;
+    obj.lock_id = omitDefault(message.lockId);
+    obj.intermediary_account = omitDefault(message.intermediaryAccount);
     return obj;
   },
   fromAminoMsg(object: LockIdIntermediaryAccountConnectionAminoMsg): LockIdIntermediaryAccountConnection {
